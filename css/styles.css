@@ -1194,3 +1194,136 @@ select:focus-visible {
 .scripture-link:hover::after {
     opacity: 0.7;
 }
+
+/* ============================================
+   DISCORD DISCUSSION SECTION
+   Embedded Discord widget for chapter discussions
+   ============================================ */
+
+.discord-discussion {
+    padding: var(--space-xl) var(--space-md);
+    background: var(--brown-deep);
+}
+
+.discord-discussion-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.discord-discussion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.discord-discussion-header h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--gold-primary);
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.discord-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #5865F2;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.discord-badge svg {
+    width: 18px;
+    height: 18px;
+}
+
+.discord-embed-wrapper {
+    background: rgba(45, 32, 22, 0.78);
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+}
+
+.discord-embed-wrapper iframe {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.discord-fallback {
+    padding: var(--space-xl);
+    text-align: center;
+}
+
+.discord-fallback p {
+    margin-bottom: var(--space-md);
+    opacity: 0.85;
+    line-height: 1.7;
+}
+
+.discord-fallback .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.discord-fallback .btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.discord-join-cta {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(196, 148, 58, 0.15);
+    text-align: center;
+}
+
+.discord-join-cta p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: var(--space-sm);
+}
+
+.discord-join-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #5865F2;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.discord-join-link:hover {
+    color: #7289DA;
+}
+
+.discord-join-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Discord embed responsive sizing */
+@media (max-width: 768px) {
+    .discord-discussion {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .discord-discussion-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .discord-embed-wrapper iframe {
+        min-height: 400px;
+    }
+}
