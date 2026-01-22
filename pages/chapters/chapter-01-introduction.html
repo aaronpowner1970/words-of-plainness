@@ -1,0 +1,3110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chapter 1: Introduction - Words of Plainness by Brother Aaron Powner">
+    <title>Chapter 1: Introduction | Words of Plainness</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23C4943A'/></svg>">
+    <link rel="stylesheet" href="../../css/styles.css?v=3">
+    <style>
+        /* Base layout - ensure proper centering */
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        main > section,
+        main > article,
+        main > div {
+            width: 100%;
+        }
+        
+        /* Chapter-specific styles */
+        .chapter-header {
+            padding: calc(80px + var(--space-xl)) var(--space-xl) var(--space-lg);
+            background: 
+                linear-gradient(to bottom, rgba(26, 21, 16, 0.55) 0%, rgba(61, 43, 31, 0.6) 100%),
+                url('../../assets/images/library-empty.png') center center / cover no-repeat;
+            text-align: center;
+        }
+        
+        .chapter-number {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .chapter-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--cream-soft);
+            margin-bottom: 1rem;
+        }
+        
+        .chapter-scripture {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--cream);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .chapter-scripture cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-style: normal;
+            font-size: 0.95rem;
+            color: var(--gold-primary);
+        }
+        
+        /* Audio Player Bar - Sticky */
+        .audio-player-bar {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            max-width: 900px;
+            z-index: 1000;
+            background: var(--brown-rich);
+            border: 2px solid var(--gold-primary);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Add bottom padding when player is visible to prevent content being hidden */
+        body.player-active {
+            padding-bottom: 80px;
+        }
+        
+        .audio-player-bar.hidden {
+            display: none;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .player-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+        
+        .player-btn:hover {
+            background: var(--gold-light);
+            transform: scale(1.05);
+        }
+        
+        .player-btn.small {
+            width: 32px;
+            height: 32px;
+            font-size: 0.9rem;
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid rgba(232, 220, 196, 0.3);
+        }
+        
+        .player-btn.small:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .progress-container {
+            flex: 1;
+            min-width: 150px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(232, 220, 196, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gold-primary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .progress-bar:hover .progress-fill {
+            background: var(--gold-light);
+        }
+        
+        .time-display {
+            font-size: 0.85rem;
+            color: var(--cream);
+            opacity: 0.8;
+            min-width: 90px;
+            text-align: center;
+        }
+        
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .speed-btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid rgba(232, 220, 196, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .speed-btn:hover, .speed-btn.active {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .autoscroll-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--cream);
+            cursor: pointer;
+        }
+        
+        .autoscroll-toggle input {
+            accent-color: var(--gold-primary);
+        }
+        
+        /* Primary Actions */
+        .primary-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            padding: var(--space-lg) var(--space-md);
+            background: var(--brown-rich);
+            border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .action-btn-primary {
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+        }
+        
+        .action-btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(196, 148, 58, 0.3);
+        }
+        
+        .action-btn-secondary {
+            background: transparent;
+            color: var(--cream);
+            border: 2px solid var(--cream);
+        }
+        
+        .action-btn-secondary:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+            background: rgba(196, 148, 58, 0.1);
+        }
+        
+        .action-icon {
+            font-size: 1.1rem;
+        }
+        
+        /* Quick Navigation Bar */
+        .chapter-quick-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem var(--space-md);
+            background: var(--brown-deep);
+            border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .reading-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+        
+        .reading-time {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .section-count {
+            padding-left: 1rem;
+            border-left: 1px solid rgba(232, 220, 196, 0.3);
+        }
+        
+        .quick-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .quick-links-label {
+            font-size: 0.8rem;
+            color: var(--cream);
+            opacity: 0.6;
+            margin-right: 0.25rem;
+        }
+        
+        .quick-links a {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+            color: var(--gold-primary);
+            background: rgba(196, 148, 58, 0.1);
+            border: 1px solid rgba(196, 148, 58, 0.25);
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .quick-links a:hover {
+            background: rgba(196, 148, 58, 0.2);
+            border-color: var(--gold-primary);
+        }
+        
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(26, 21, 16, 0.9);
+            z-index: 1001;
+        }
+        
+        .reading-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+            width: 0%;
+            transition: width 0.15s ease-out;
+            box-shadow: 0 0 8px rgba(196, 148, 58, 0.5);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+        }
+        
+        /* Table of Contents Sidebar */
+        .toc-toggle {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--brown-rich);
+            border: 1px solid rgba(196, 148, 58, 0.3);
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            padding: 0.75rem 0.5rem;
+            cursor: pointer;
+            z-index: 100;
+            color: var(--gold-primary);
+            font-size: 0.75rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-toggle:hover {
+            background: var(--brown-deep);
+            padding-right: 0.75rem;
+        }
+        
+        .toc-sidebar {
+            position: fixed;
+            left: -320px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: var(--brown-rich);
+            border-right: 1px solid rgba(196, 148, 58, 0.3);
+            z-index: 200;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            padding: 80px 0 2rem 0;
+        }
+        
+        .toc-sidebar.open {
+            left: 0;
+        }
+        
+        .toc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.25rem 1rem 1.25rem;
+            border-bottom: 1px solid rgba(196, 148, 58, 0.2);
+            margin-bottom: 1rem;
+        }
+        
+        .toc-header h3 {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--gold-primary);
+            margin: 0;
+        }
+        
+        .toc-close {
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        .toc-close:hover {
+            opacity: 1;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-list li {
+            margin: 0;
+        }
+        
+        .toc-list a {
+            display: block;
+            padding: 0.6rem 1.25rem;
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-list a:hover {
+            background: rgba(196, 148, 58, 0.1);
+            border-left-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .toc-list a.active {
+            background: rgba(196, 148, 58, 0.15);
+            border-left-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .toc-list .toc-subheading {
+            padding-left: 2rem;
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+        
+        .toc-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Reader Toolbar (Font Size, Bookmark, Share) */
+        .reader-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(45, 32, 22, 0.95);
+            border-radius: 30px;
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(196, 148, 58, 0.2);
+        }
+        
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .toolbar-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(196, 148, 58, 0.3);
+        }
+        
+        .toolbar-btn {
+            background: none;
+            border: none;
+            color: var(--cream);
+            cursor: pointer;
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .toolbar-btn:hover {
+            background: rgba(196, 148, 58, 0.2);
+            color: var(--gold-primary);
+        }
+        
+        .toolbar-btn.active {
+            background: rgba(196, 148, 58, 0.25);
+            color: var(--gold-primary);
+        }
+        
+        /* Font Size Controls */
+        .font-btn {
+            font-weight: 600;
+            min-width: 32px;
+            text-align: center;
+        }
+        
+        .font-btn.small { font-size: 0.8rem; }
+        .font-btn.medium { font-size: 1rem; }
+        .font-btn.large { font-size: 1.2rem; }
+        
+        /* Bookmark Button */
+        .bookmark-btn.bookmarked {
+            color: var(--gold-primary);
+        }
+        
+        .bookmark-btn .bookmark-icon {
+            font-size: 1.1rem;
+        }
+        
+        /* Share Dropdown */
+        .share-container {
+            position: relative;
+        }
+        
+        .share-dropdown {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brown-rich);
+            border: 1px solid rgba(196, 148, 58, 0.3);
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            min-width: 160px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .share-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .share-dropdown a,
+        .share-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.85rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+            text-align: left;
+        }
+        
+        .share-dropdown a:hover,
+        .share-dropdown button:hover {
+            background: rgba(196, 148, 58, 0.15);
+        }
+        
+        .share-dropdown .share-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .copy-success {
+            color: var(--gold-primary);
+            font-size: 0.8rem;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        
+        /* Bookmark Resume Banner */
+        .bookmark-banner {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brown-rich);
+            border: 1px solid var(--gold-primary);
+            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 150;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .bookmark-banner.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .bookmark-banner p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--cream);
+        }
+        
+        .bookmark-banner button {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .bookmark-banner .resume-btn {
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+        }
+        
+        .bookmark-banner .dismiss-btn {
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid rgba(232, 220, 196, 0.3);
+        }
+        
+        /* Chapter Content - Reading Area */
+        .chapter-reading {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-md);
+            background: var(--brown-deep);
+        }
+        
+        .chapter-reading h2 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--gold-primary);
+            margin: var(--space-xl) 0 var(--space-md) 0;
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(196, 148, 58, 0.2);
+        }
+        
+        .chapter-reading h2:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        
+        .chapter-reading h3 {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--cream);
+            margin: var(--space-lg) 0 var(--space-sm) 0;
+        }
+        
+        .chapter-reading p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: var(--space-md);
+            color: var(--cream);
+        }
+        
+        /* Sentence spans for highlighting */
+        .sentence {
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 3px;
+            padding: 0 2px;
+            margin: 0 -2px;
+            cursor: pointer;
+        }
+        
+        .sentence:hover {
+            background-color: rgba(196, 148, 58, 0.15);
+        }
+        
+        .sentence.active {
+            background-color: rgba(196, 148, 58, 0.35);
+            color: var(--cream-soft);
+        }
+        
+        .sentence.active:hover {
+            background-color: rgba(196, 148, 58, 0.45);
+        }
+        
+        .sentence.read {
+            opacity: 0.7;
+        }
+        
+        /* Study Resources Section */
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-xs);
+            border-bottom: 1px solid rgba(196, 148, 58, 0.3);
+        }
+        
+        .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .resource-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: rgba(45, 32, 22, 0.78);
+            border: 1px solid rgba(196, 148, 58, 0.15);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            border-color: var(--gold-primary);
+            background: rgba(45, 32, 22, 0.95);
+            transform: translateX(4px);
+        }
+        
+        .resource-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(196, 148, 58, 0.15);
+            border-radius: 4px;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        
+        .resource-info {
+            flex: 1;
+        }
+        
+        .resource-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 0.2rem;
+        }
+        
+        .resource-desc {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+            margin: 0;
+        }
+        
+        .resource-arrow {
+            color: var(--gold-primary);
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+        
+        .resource-card:hover .resource-arrow {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+        
+        .resource-card.music {
+            background: linear-gradient(135deg, rgba(107, 61, 61, 0.3) 0%, rgba(45, 32, 22, 0.78) 100%);
+        }
+        
+        .resource-card.music .resource-icon {
+            background: rgba(196, 148, 58, 0.25);
+        }
+        
+        /* Content Sections */
+        .chapter-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-md);
+        }
+        
+        /* Reflection Section */
+        .reflection-section {
+            background: var(--brown-rich);
+            padding: var(--space-xl) var(--space-md);
+        }
+        
+        .reflection-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .reflection-card {
+            background: linear-gradient(135deg, var(--brown-deep) 0%, rgba(45, 32, 22, 0.9) 100%);
+            border: 1px solid rgba(196, 148, 58, 0.25);
+            border-radius: 12px;
+            padding: var(--space-lg);
+        }
+        
+        .reflection-intro {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .reflection-intro h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--gold-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .reflection-intro p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin: 0;
+        }
+        
+        .reflection-step {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .reflection-step:last-of-type {
+            margin-bottom: var(--space-md);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .step-title {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--cream);
+        }
+        
+        .step-prompt {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--cream);
+            opacity: 0.85;
+            margin-bottom: 0.75rem;
+            padding-left: calc(28px + var(--space-sm));
+        }
+        
+        .step-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: var(--space-sm);
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(196, 148, 58, 0.2);
+            border-radius: 4px;
+            color: var(--cream);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+        }
+        
+        .step-textarea:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+        }
+        
+        .step-textarea::placeholder {
+            color: var(--cream);
+            opacity: 0.5;
+        }
+        
+        .reflection-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            padding-top: var(--space-sm);
+            flex-wrap: wrap;
+        }
+        
+        .reflection-note {
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: var(--space-md);
+        }
+        
+        /* Discussion Section */
+        .discussion-section {
+            padding: var(--space-xl) var(--space-md);
+            background: var(--brown-deep);
+        }
+        
+        .discussion-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .discussion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+        
+        .discussion-count {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+        
+        .discussion-placeholder {
+            background: rgba(45, 32, 22, 0.78);
+            border: 1px solid rgba(196, 148, 58, 0.15);
+            border-radius: 8px;
+            padding: var(--space-xl);
+            text-align: center;
+        }
+        
+        .discussion-placeholder p {
+            opacity: 0.8;
+            margin-bottom: var(--space-md);
+        }
+        
+        /* Chapter Navigation */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg) var(--space-md);
+            background: var(--brown-rich);
+            border-top: 1px solid rgba(196, 148, 58, 0.15);
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+        
+        .chapter-nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-primary);
+        }
+        
+        .nav-link-label {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            display: block;
+        }
+        
+        .nav-link-title {
+            font-family: var(--font-serif);
+        }
+        
+        .nav-prev {
+            text-align: left;
+        }
+        
+        .nav-next {
+            text-align: right;
+        }
+        
+        .nav-all {
+            color: var(--gold-primary);
+        }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .chapter-header {
+                padding: calc(70px + var(--space-lg)) var(--space-md) var(--space-md);
+            }
+            
+            .chapter-quick-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.75rem var(--space-md);
+            }
+            
+            .reading-info {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .quick-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .quick-links-label {
+                display: none;
+            }
+            
+            .quick-links a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .back-to-top {
+                bottom: 5rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .toc-toggle {
+                top: auto;
+                bottom: 1rem;
+                left: 1rem;
+                transform: none;
+                writing-mode: horizontal-tb;
+                border-radius: 8px;
+                border: 1px solid rgba(196, 148, 58, 0.3);
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+            
+            .toc-sidebar {
+                width: 85%;
+                max-width: 300px;
+            }
+            
+            .reader-toolbar {
+                bottom: 1rem;
+                padding: 0.4rem 0.75rem;
+                gap: 0.5rem;
+                max-width: calc(100% - 6rem);
+            }
+            
+            .toolbar-btn {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .bookmark-banner {
+                top: 70px;
+                left: 1rem;
+                right: 1rem;
+                transform: none;
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+            
+            .audio-player-bar {
+                bottom: 0.5rem;
+                padding: 0.5rem;
+                gap: 0.5rem;
+                border-radius: 8px;
+            }
+            
+            .progress-container {
+                order: 10;
+                width: 100%;
+                min-width: 100%;
+            }
+            
+            .speed-control {
+                display: none;
+            }
+            
+            .primary-actions {
+                padding: var(--space-md);
+            }
+            
+            .action-btn {
+                padding: 0.8rem 1.4rem;
+                font-size: 0.95rem;
+                flex: 1;
+                justify-content: center;
+                min-width: 140px;
+            }
+            
+            .chapter-reading {
+                padding: var(--space-lg) var(--space-md);
+            }
+            
+            .chapter-reading p {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            
+            .resource-card {
+                padding: var(--space-sm) var(--space-md);
+            }
+            
+            .resource-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .resource-title {
+                font-size: 1rem;
+            }
+            
+            .step-prompt {
+                padding-left: 0;
+                margin-top: 0.5rem;
+            }
+            
+            .chapter-nav-container {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .nav-prev, .nav-next {
+                text-align: center;
+            }
+        }
+        
+        /* Resource Modal Overlay */
+        .resource-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .resource-modal-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../../assets/images/library-hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .resource-modal-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 21, 16, 0.88);
+        }
+        
+        .resource-modal-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-lg);
+        }
+        
+        .resource-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid rgba(196, 148, 58, 0.3);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .resource-modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--gold-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .resource-modal-title .modal-icon {
+            font-size: 1.75rem;
+        }
+        
+        .resource-modal-close {
+            background: rgba(196, 148, 58, 0.2);
+            border: 1px solid rgba(196, 148, 58, 0.4);
+            color: var(--cream);
+            font-size: 1rem;
+            padding: 0.6rem 1.25rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .resource-modal-close:hover {
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+            border-color: var(--gold-primary);
+        }
+        
+        .resource-modal-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+        
+        /* Audio Player in Modal */
+        .modal-audio-container {
+            background: rgba(45, 32, 22, 0.95);
+            border: 1px solid rgba(196, 148, 58, 0.3);
+            border-radius: 12px;
+            padding: var(--space-xl);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-audio-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-md);
+        }
+        
+        .modal-audio-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-audio-subtitle {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .modal-audio-player {
+            width: 100%;
+            height: 50px;
+            border-radius: 8px;
+            margin-bottom: var(--space-md);
+        }
+        
+        .modal-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            background: transparent;
+            border: 1px solid rgba(196, 148, 58, 0.4);
+            color: var(--gold-primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .modal-download-btn:hover {
+            background: rgba(196, 148, 58, 0.2);
+            border-color: var(--gold-primary);
+        }
+        
+        /* Image in Modal */
+        .modal-image-container {
+            max-width: 90%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-image-actions {
+            margin-top: var(--space-md);
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Mobile Modal */
+        @media (max-width: 768px) {
+            .resource-modal-content {
+                padding: var(--space-md);
+            }
+            
+            .resource-modal-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .resource-modal-title {
+                font-size: 1.2rem;
+            }
+            
+            .resource-modal-close {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .modal-audio-container {
+                padding: var(--space-lg);
+                margin: 0 var(--space-sm);
+            }
+            
+            .modal-audio-icon {
+                font-size: 3rem;
+            }
+            
+            .modal-image {
+                max-height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="../../index.html" class="logo">
+                <span class="logo-title">WORDS OF PLAINNESS</span>
+                <span class="logo-subtitle">A Christ-Centered Ministry</span>
+            </a>
+            
+            <nav class="nav-desktop">
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../writings.html" class="active">Writings</a></li>
+                    <li><a href="../discipleship.html">Discipleship</a></li>
+                    <li><a href="../connect.html">Connect</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <a href="../new-here.html" class="btn-new-here">New Here?</a>
+            </nav>
+            
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <span class="logo-title">WORDS OF PLAINNESS</span>
+                <span class="logo-subtitle">A Christ-Centered Ministry</span>
+            </div>
+            <button class="mobile-menu-close" aria-label="Close menu">×</button>
+        </div>
+        <a href="../new-here.html" class="mobile-menu-new-here">✦ New Here? Start Here</a>
+        <ul class="mobile-nav-list">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../writings.html">Writings</a></li>
+            <li><a href="../discipleship.html">Discipleship</a></li>
+            <li><a href="../connect.html">Connect</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../channels.html">Other Channels</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Table of Contents Toggle -->
+    <button class="toc-toggle" id="tocToggle" aria-label="Open table of contents">
+        Contents
+    </button>
+    
+    <!-- Table of Contents Overlay -->
+    <div class="toc-overlay" id="tocOverlay"></div>
+    
+    <!-- Table of Contents Sidebar -->
+    <aside class="toc-sidebar" id="tocSidebar">
+        <div class="toc-header">
+            <h3>Chapter Contents</h3>
+            <button class="toc-close" id="tocClose" aria-label="Close table of contents">×</button>
+        </div>
+        <ul class="toc-list">
+            <li><a href="#section-human-condition">The Human Condition</a></li>
+            <li><a href="#section-origin">Origin of Our Writings</a></li>
+            <li><a href="#section-timeliness">Timeliness of Our Words</a></li>
+            <li><a href="#section-authoritative">Learning from Authoritative Sources</a></li>
+            <li><a href="#section-credentials">Our Credentials as Latter-day Saints</a></li>
+            <li><a href="#section-conversion">Our Conversion and Upbringing</a></li>
+            <li><a href="#section-priesthood">Priesthood and Service</a></li>
+            <li><a href="#section-lives">Our Lives as Latter-day Saints</a></li>
+            <li><a href="#section-christ-centered">Christ-Centered Faith</a></li>
+            <li><a href="#section-witness">Our Witness of the Savior</a></li>
+            <li><a href="#section-kinship">Kinship with All Believers</a></li>
+            <li><a href="#section-organization">Organization of Our Writings</a></li>
+            <li class="toc-subheading"><a href="#section-part1">Part 1: Our Faith</a></li>
+            <li class="toc-subheading"><a href="#section-part2">Part 2: Our Promises</a></li>
+            <li class="toc-subheading"><a href="#section-part3">Part 3: Our Practices</a></li>
+            <li class="toc-subheading"><a href="#section-part4">Part 4: Our Theology</a></li>
+            <li class="toc-subheading"><a href="#section-part5">Part 5: Our Witness of Christ</a></li>
+            <li><a href="#section-plea">Our Plea to You</a></li>
+        </ul>
+    </aside>
+    
+    <!-- Bookmark Resume Banner -->
+    <div class="bookmark-banner" id="bookmarkBanner">
+        <p>📖 You left off at: <strong id="bookmarkLocation"></strong></p>
+        <div class="banner-buttons">
+            <button class="resume-btn" onclick="resumeFromBookmark()">Resume Reading</button>
+            <button class="dismiss-btn" onclick="dismissBookmark()">Dismiss</button>
+        </div>
+    </div>
+    
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress">
+        <div class="reading-progress-fill" id="readingProgress"></div>
+    </div>
+    
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Chapter Header -->
+        <section class="chapter-header">
+            <p class="chapter-number">Chapter 1</p>
+            <h1 class="chapter-title">Introduction</h1>
+            <blockquote class="chapter-scripture">
+                "For my soul delighteth in plainness; for after this manner doth 
+                the Lord God work among the children of men."
+                <cite>— 2 Nephi 31:3</cite>
+            </blockquote>
+        </section>
+        
+        <!-- Primary Actions -->
+        <div class="primary-actions">
+            <button class="action-btn action-btn-primary" id="listenBtn" onclick="toggleAudioPlayer()">
+                <span class="action-icon">🎧</span>
+                <span id="listenBtnText">Listen to Chapter</span>
+            </button>
+            <a href="../../assets/pdf/WoP_Ch01_Introduction.pdf" class="action-btn action-btn-secondary" download>
+                <span class="action-icon">📄</span>
+                Download PDF
+            </a>
+        </div>
+        
+        <!-- Quick Navigation & Reading Info -->
+        <div class="chapter-quick-nav">
+            <div class="reading-info">
+                <span class="reading-time">📖 ~15 min read</span>
+                <span class="section-count">16 sections</span>
+            </div>
+            <nav class="quick-links" aria-label="Jump to section">
+                <span class="quick-links-label">Jump to:</span>
+                <a href="#chapterContent">Read Chapter</a>
+                <a href="#study-resources">Study Resources</a>
+                <a href="#reflection">Reflection</a>
+                <a href="#discussion">Discussion</a>
+            </nav>
+        </div>
+        
+        <!-- Audio Player Bar (Hidden by default, shown when Listen is clicked) -->
+        <div class="audio-player-bar hidden" id="audioPlayerBar">
+            <div class="player-controls">
+                <button class="player-btn" id="playPauseBtn" onclick="togglePlayPause()" aria-label="Play/Pause">
+                    ▶
+                </button>
+                <button class="player-btn small" onclick="skipBack()" aria-label="Back 10 seconds">
+                    ⏪
+                </button>
+                <button class="player-btn small" onclick="skipForward()" aria-label="Forward 10 seconds">
+                    ⏩
+                </button>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar" onclick="seekAudio(event)">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+            </div>
+            
+            <div class="speed-control">
+                <button class="speed-btn" onclick="setSpeed(0.75)">0.75x</button>
+                <button class="speed-btn active" onclick="setSpeed(1)">1x</button>
+                <button class="speed-btn" onclick="setSpeed(1.25)">1.25x</button>
+                <button class="speed-btn" onclick="setSpeed(1.5)">1.5x</button>
+            </div>
+            
+            <label class="autoscroll-toggle">
+                <input type="checkbox" id="autoscrollToggle" checked>
+                Auto-scroll
+            </label>
+        </div>
+        
+        <!-- Chapter Reading Content -->
+        <article class="chapter-reading" id="chapterContent">
+            
+            <h2 id="section-human-condition">The Human Condition</h2>
+            
+            <p>
+                <span class="sentence" data-index="0">We are all so very human.</span>
+                <span class="sentence" data-index="1">Our wandering feet carry us along many curious and often frightening paths.</span>
+                <span class="sentence" data-index="2">Our untamed hearts pull or push us in unexpected directions.</span>
+                <span class="sentence" data-index="3">Our wide eyes marvel at the fleeting scenes of beauty and filth which unfold around us.</span>
+                <span class="sentence" data-index="4">Our grasping hands shape the environments and cultures we touch.</span>
+                <span class="sentence" data-index="5">Our unceasing voices speak much, yet too often say little.</span>
+                <span class="sentence" data-index="6">Our twitching ears are filled with the discordant noises of life.</span>
+                <span class="sentence" data-index="7">Our restless minds wrestle with the meaning of it all, desperate to forget the bitter and remember the sweet.</span>
+                <span class="sentence" data-index="8">Yet humanity occasionally manages to find itself, to gentle itself—to see, free, quiet, harmonize, and understand itself.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="9">The writers of this book are brothers.</span>
+                <span class="sentence" data-index="10">We use the word writers because we feel that we are not the authors of any particular words of greatness.</span>
+                <span class="sentence" data-index="11">Instead, we are hunters and gatherers of knowledge.</span>
+                <span class="sentence" data-index="12">We till and seed the soils of our souls hoping to harvest wisdom.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="13">We are native citizens of the world, yet we perceive the foreign nature of mankind's walk upon the Earth.</span>
+                <span class="sentence" data-index="14">Though our journey is not complete, my brother and I have found ourselves both on the side of right and clearly in the wrong often enough to have gained an abiding appreciation for the many profound lessons that can be gleaned from the human experience.</span>
+            </p>
+            
+            <h2 id="section-origin">Origin of Our Writings</h2>
+            
+            <p>
+                <span class="sentence" data-index="15">As a young man I, Aaron, chose to serve a mission to the people of Argentina for The Church of Jesus Christ of Latter-day Saints.</span>
+                <span class="sentence" data-index="16">In my idealism, I hoped to bring light and goodness to people who had been less fortunate.</span>
+                <span class="sentence" data-index="17">I like to believe that I left something of value behind for the people I came to love, but I returned deeply transformed by my experiences.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="18">The new thoughts I learned to think and the tender feelings I came to cherish during my mission planted in my heart a seed of passion for sharing things of worth with others.</span>
+                <span class="sentence" data-index="19">I returned to a world that is far more complex and fast-paced than my mission experience had been, and I found it somehow the lesser for it.</span>
+                <span class="sentence" data-index="20">In spite of this, that latent kernel of desire swelled in my heart and grew.</span>
+                <span class="sentence" data-index="21">I began searching for ideas, experiences, and things of great worth.</span>
+                <span class="sentence" data-index="22">I wrote of them.</span>
+                <span class="sentence" data-index="23">I did not know to whom I was writing.</span>
+                <span class="sentence" data-index="24">I had not considered my audience.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="25">After some time, I suspected that I might be crafting letters to my unborn children.</span>
+                <span class="sentence" data-index="26">I came to believe that my collection of writings could become a simple legacy that I might leave behind at my journey's end.</span>
+                <span class="sentence" data-index="27">I became convinced that stories of my life, my tempering experiences, and meaningful traditions, along with my humble understandings, precious beliefs, and faith-filled encouragement are the only meaningful inheritance I can bequeath to my posterity.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="28">When my adventures with family and children began, my yearning to gather and then write of these things became a driving need.</span>
+                <span class="sentence" data-index="29">In my late thirties, I felt a strong urge to better organize my hard-learned lessons and happy discoveries in the form of a book or collection of letters.</span>
+                <span class="sentence" data-index="30">I am not finished learning, but I felt my experience and understanding was sufficient to truly begin sharing.</span>
+                <span class="sentence" data-index="31">Spending a few hours each night, as I could spare, I finished my first rough draft in a little more than six months.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="32">I shared my collected works with my older brother, Jim.</span>
+                <span class="sentence" data-index="33">He has long been more than an example of manhood to me; he is a trusted friend.</span>
+                <span class="sentence" data-index="34">His comments, questions, suggestions, and assistance became such an important part of editing my letters that I realized they are as much the result of his life experiences as they are of my own.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="35">Our long studies and preparations seemed to take on a life of their own.</span>
+                <span class="sentence" data-index="36">We quickly adopted the belief that such beautiful ideas and experiences must be shared in words of plainness.</span>
+                <span class="sentence" data-index="37">This philosophy became the title of our work.</span>
+                <span class="sentence" data-index="38">We understand that the publication of such personal things may open us to criticism and unforeseen consequences.</span>
+                <span class="sentence" data-index="39">We have long considered and earnestly prayed about our decision to act in accordance with our desires.</span>
+                <span class="sentence" data-index="40">We offer our Words of Plainness to you with hope, for they are the treasured things of our souls.</span>
+            </p>
+            
+            <h2 id="section-timeliness">Timeliness of Our Words</h2>
+            
+            <p>
+                <span class="sentence" data-index="41">The topics of our writings seem appropriate for the times in which we find ourselves.</span>
+                <span class="sentence" data-index="42">The Church of Jesus Christ of Latter-day Saints and its members have become the subject of a surprising amount of media coverage, both favorable and not.</span>
+                <span class="sentence" data-index="43">Debate over the Church's history, beliefs, and practices appears in popular tabloids, newspapers, books, television programs, online forums, and even in widely public political arenas.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="44">An enormous volume of misinformation and malicious propaganda exists about the restored gospel of Jesus Christ and members of the Church.</span>
+                <span class="sentence" data-index="45">During our long years as public school teachers, we struggled to convince students of the vital importance of using authoritative sources of information when doing research and in the formation of lasting opinions.</span>
+                <span class="sentence" data-index="46">Gossip columns, hate blogs, and literature critical of the Church are tantalizing reads, but they seldom offer much in the way of actual credibility.</span>
+                <span class="sentence" data-index="47">Tracing the citations and sources of such information, one finds little more than hearsay and quotations either taken out of context or hastily borrowed from other unverifiable sources.</span>
+                <span class="sentence" data-index="48">Though false information might be presented energetically and even well-received by many, it remains fundamentally untrue.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="49">Throughout history, it has been consistently true that the odd combination of ignorance and confidence eventually leads to suffering, oppression, bigotry, and hatred.</span>
+                <span class="sentence" data-index="50">We believe that it is essential to the character of each human being to search for truth, meaning, and lasting happiness—and that we must do so while upholding the virtues of honesty, compassion, and tolerance.</span>
+                <span class="sentence" data-index="51">Surely these are the noblest of emerging characteristics possessed by enlightened individuals and found within civilized cultures.</span>
+            </p>
+            
+            <h2 id="section-authoritative">Learning from Authoritative Sources</h2>
+            
+            <p>
+                <span class="sentence" data-index="52">With regards to faith and religion, it seems like common sense that if you want to know what a Baptist believes you should ask a Baptist.</span>
+                <span class="sentence" data-index="53">If you want to know what a Methodist believes you should ask a Methodist.</span>
+                <span class="sentence" data-index="54">This is also true for Roman Catholics, Buddhists, Hindus, Muslims, and so on.</span>
+                <span class="sentence" data-index="55">It is equally true that not all Baptists believe the same body of doctrines or behave the same way.</span>
+                <span class="sentence" data-index="56">Likewise are the Methodists, Catholics, Buddhists, Hindus, Muslims, and so forth.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="57">On a related note, the term "Mormon," though once commonly used as a shorthand, is technically inaccurate and increasingly discouraged when referring to The Church of Jesus Christ of Latter-day Saints, its doctrine, history, or its members.</span>
+                <span class="sentence" data-index="58">This is because it obscures the Church's Christ-centered identity and reduces a complex faith to a nickname derived from the Book of Mormon rather than from Jesus Christ, whom Latter-day Saints worship as the Son of God.</span>
+                <span class="sentence" data-index="59">The name "Mormon" originated as an external label and later became culturally widespread, but it does not appear in the Church's formal name and can unintentionally imply that members follow a figure named Mormon rather than Christ.</span>
+                <span class="sentence" data-index="60">In recent years, Church leaders have emphasized using the full name of the Church or the term "Latter-day Saints" to reflect theological accuracy, historical continuity, and respect for religious self-identification.</span>
+                <span class="sentence" data-index="61">Using precise language not only honors the beliefs of its members but also avoids reinforcing misunderstandings about their faith, practices, and relationship to broader Christianity.</span>
+            </p>
+            
+            <h2 id="section-credentials">Our Credentials as Latter-day Saints</h2>
+            
+            <p>
+                <span class="sentence" data-index="62">My brother and I have spent our lives within the culture and practices of the faith of The Church of Jesus Christ of Latter-day Saints.</span>
+                <span class="sentence" data-index="63">We vehemently oppose any who are audacious enough to pretend to know more about our own personal views than we do.</span>
+                <span class="sentence" data-index="64">We claim the right to be the supreme mortal authorities over what we personally believe, how this makes us feel, and how we interpret the effects of living as Latter-day Saints within our own life experiences.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="65">We are active members of The Church of Jesus Christ of Latter-day Saints, yet we feel the need to offer some few credentials which establish our general worthiness to represent regular, ordinary, everyday members of our Church and that we live a reasonably common Latter-day Saint lifestyle.</span>
+            </p>
+            
+            <h2 id="section-conversion">Our Conversion and Upbringing</h2>
+            
+            <p>
+                <span class="sentence" data-index="66">We were born to Lutheran parents.</span>
+                <span class="sentence" data-index="67">Our mother investigated and eventually chose to convert to The Church of Jesus Christ of Latter-day Saints.</span>
+                <span class="sentence" data-index="68">Many friends and relatives questioned or even opposed her decision.</span>
+                <span class="sentence" data-index="69">She was baptized while she was pregnant with Aaron, the younger of the two writer brothers.</span>
+                <span class="sentence" data-index="70">James also later converted.</span>
+                <span class="sentence" data-index="71">Our childhoods were strongly enmeshed in the culture and society of Church members.</span>
+                <span class="sentence" data-index="72">We actively and regularly attended worship services and participated in the Church's Primary and youth programs.</span>
+            </p>
+            
+            <h2 id="section-priesthood">Priesthood and Service</h2>
+            
+            <p>
+                <span class="sentence" data-index="73">We were both formally ordained to the "Lesser" Priesthood in our adolescence.</span>
+                <span class="sentence" data-index="74">We were successively set apart in the offices of Deacon, Teacher, and Priest.</span>
+                <span class="sentence" data-index="75">We feel that we faithfully officiated in these offices by preparing and passing the emblems of the Lord's Supper, collecting fast offerings for the poor, home teaching our fellow members, baptizing those who came into the Church, and assisting in assorted temporal responsibilities.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="76">As young adults we were both ordained to the "Higher" Priesthood.</span>
+                <span class="sentence" data-index="77">We were both set apart as Elders and performed as such.</span>
+                <span class="sentence" data-index="78">We were both called and set apart to full-time proselyting missionary service.</span>
+                <span class="sentence" data-index="79">We both received our temple endowments, whereby we made sacred covenants (promises) with God in His holy temple.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="80">We have been married to our wives in the temple and sealed to them for time and all eternity.</span>
+                <span class="sentence" data-index="81">We have raised (and are raising) children who have been sealed to us for eternity in the temple.</span>
+                <span class="sentence" data-index="82">We have been called and set apart in many positions of service throughout our lives in the Church.</span>
+                <span class="sentence" data-index="83">Currently, James is serving as a High Priest in his ward.</span>
+                <span class="sentence" data-index="84">Aaron is serving as an Elder in his ward.</span>
+                <span class="sentence" data-index="85">We anticipate, God willing, a lifetime of service to our fellow members and to all God's children.</span>
+            </p>
+            
+            <h2 id="section-lives">Our Lives as Latter-day Saints</h2>
+            
+            <p>
+                <span class="sentence" data-index="86">We pay our tithes and offerings.</span>
+                <span class="sentence" data-index="87">We worship in our ward congregations every Sunday.</span>
+                <span class="sentence" data-index="88">We attend and officiate in temple worship.</span>
+                <span class="sentence" data-index="89">We fast and we pray.</span>
+                <span class="sentence" data-index="90">We read and study the Scriptures.</span>
+                <span class="sentence" data-index="91">We are not perfect, but we continually repent and seek to align our lives with God's will.</span>
+                <span class="sentence" data-index="92">We strive to cultivate the fruits of the Spirit: patience, kindness, love, charity, peace, joy, meekness, etc.</span>
+                <span class="sentence" data-index="93">We seek to obtain the gifts of the Spirit described in 1 Corinthians 12: wisdom, faith, healing, miracles, prophecy, discerning of spirits, speaking in tongues, and interpretation of tongues.</span>
+                <span class="sentence" data-index="94">We study with open hearts and minds.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="95">We seek to be of service to our fellowman.</span>
+                <span class="sentence" data-index="96">We seek to be forgiving, slow to anger, and to avoid unrighteous behaviors.</span>
+                <span class="sentence" data-index="97">We seek to be good neighbors.</span>
+                <span class="sentence" data-index="98">We seek to be good friends and good examples, even if no one is watching.</span>
+                <span class="sentence" data-index="99">We seek to be humble and teachable.</span>
+                <span class="sentence" data-index="100">We seek to be genuine disciples of Jesus Christ.</span>
+                <span class="sentence" data-index="101">We bear public witness that Jesus Christ lives, that He loves us, that He has made it possible for us to be forgiven of our sins, and that all are invited to come unto Him and be sanctified of their sins and made righteous if they will but have faith in Him, repent, be baptized, and follow Him to the end of their mortal journey.</span>
+            </p>
+            
+            <h2 id="section-christ-centered">Christ-Centered Faith</h2>
+            
+            <p>
+                <span class="sentence" data-index="102">Our witness of Jesus Christ is the most important aspect of Words of Plainness.</span>
+                <span class="sentence" data-index="103">Many who are unfamiliar with the teachings of The Church of Jesus Christ of Latter-day Saints question or even deny our status as a Christian faith.</span>
+                <span class="sentence" data-index="104">We do not question or deny anyone else's status as Christians.</span>
+                <span class="sentence" data-index="105">Regardless of the opinions of critics, members of our Church are Christians.</span>
+                <span class="sentence" data-index="106">We are of the same Spirit as other Christians, though of a different understanding.</span>
+                <span class="sentence" data-index="107">We believe the words of the Apostle Paul: "No man can say that Jesus is the Lord, but by the Holy Ghost." (1 Corinthians 12:3)</span>
+                <span class="sentence" data-index="108">Again, in the truest sense of the word "Christian," theological and doctrinal differences between religious denominations need not determine whether a person is a sincere disciple of Christ.</span>
+                <span class="sentence" data-index="109">Words of Plainness is an attempt to explain what it means to be a sincere follower of Christ to faithful members of The Church of Jesus Christ of Latter-day Saints.</span>
+            </p>
+            
+            <h2 id="section-witness">Our Witness of the Savior</h2>
+            
+            <p>
+                <span class="sentence" data-index="110">Latter-day Saint Christians proclaim with deep gratitude and open enthusiasm that Jesus Christ is the Lord and Master of all creation.</span>
+                <span class="sentence" data-index="111">We seek to take His name upon us.</span>
+                <span class="sentence" data-index="112">We believe and testify that He is the divine Son of God, our Savior and Redeemer.</span>
+                <span class="sentence" data-index="113">While theologians debate the nature of Christ's divinity, we believe that Jesus of Nazareth was the long-awaited Messiah of whom ancient Prophets had written.</span>
+                <span class="sentence" data-index="114">We accept Him as our personal Savior.</span>
+                <span class="sentence" data-index="115">We study His life and teachings, laboring to make ourselves His disciples through faith in Him, repentance, baptism, and seeking after the peaceable gifts of the Spirit of God.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="116">Those Latter-day Saints who remain faithful dedicate their lives to the service of God and our fellowman.</span>
+                <span class="sentence" data-index="117">Though we are imperfect and subject to the same temptations and foolishness as are all members of humankind, Latter-day Saint Christians labor to sanctify our lives—to become holy through the grace of Christ through continued repentance and devotion to the gospel of Jesus Christ.</span>
+                <span class="sentence" data-index="118">We invite others to do the same out of genuine concern and love for all God's children.</span>
+                <span class="sentence" data-index="119">We hope to truly be worthy of the title "Saints" in these latter days.</span>
+            </p>
+            
+            <h2 id="section-kinship">Kinship with All Believers</h2>
+            
+            <p>
+                <span class="sentence" data-index="120">We as Latter-day Saints happily recognize the light and goodness found in all people who search for truth, meaning, and lasting happiness.</span>
+                <span class="sentence" data-index="121">We feel a close kinship with all those who believe in Jesus Christ.</span>
+                <span class="sentence" data-index="122">We do not discourage their faith.</span>
+                <span class="sentence" data-index="123">Faithful Latter-day Saints who understand the core teachings of the restored gospel do not condemn others; rather, we humbly believe that Jesus Christ is the Savior of us all.</span>
+                <span class="sentence" data-index="124">If you cannot agree with the doctrines of The Church of Jesus Christ of Latter-day Saints, we plead with you at least to believe in Christ.</span>
+                <span class="sentence" data-index="125">If we all heed the Savior's call, "Come follow me," we will undoubtedly find ourselves together in His kingdom at last.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="126">However, if any of us dare to persecute one another over differences in doctrine and silly rumors—as though we were truly wise in any way—we will undoubtedly find ourselves both unworthy and uncomfortable upon leaving this life to stand in judgment before God.</span>
+                <span class="sentence" data-index="127">Jesus said that those who are angry with a brother without cause are in danger of judgment. (Matthew 5:22; Proverbs 3:30; Psalms 109:3)</span>
+                <span class="sentence" data-index="128">He also taught, "He that is not against us is for us." (Luke 9:50)</span>
+                <span class="sentence" data-index="129">Further, Jesus "came not to condemn the world." (John 3:17)</span>
+                <span class="sentence" data-index="130">Do we, then, have any right to condemn one another?</span>
+                <span class="sentence" data-index="131">Are any of us better or wiser than He?</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="132">When Latter-day Saints invite others to investigate the Church, we do not attempt to take away what light and faith they have.</span>
+                <span class="sentence" data-index="133">Rather, we invite all to come and see what the Lord has done in our lives in the hope that we can add to the light others already possess.</span>
+                <span class="sentence" data-index="134">A vital point to make is that those who think that Latter-day Saints believe only members of our Church will reach heaven misunderstand our doctrine of God's expansive mercy and multiple degrees of glory.</span>
+            </p>
+            
+            <h2 id="section-organization">Organization of Our Writings</h2>
+            
+            <p>
+                <span class="sentence" data-index="135">This book explains what it means to be a sincere Christian disciple from the perspective of faithful Latter-day Saints.</span>
+                <span class="sentence" data-index="136">Our writings are divided into five parts.</span>
+                <span class="sentence" data-index="137">Each section builds upon the previous, representing increasing depth of sincere discipleship and understanding.</span>
+            </p>
+            
+            <h3 id="section-part1">Part 1: Our Faith</h3>
+            
+            <p>
+                <span class="sentence" data-index="138">The intent of these first chapters is to lay a foundation upon which all readers can build a common understanding of simple and sincere Christianity, no matter what specific beliefs to which one subscribes.</span>
+                <span class="sentence" data-index="139">We begin by describing that deep longing for truth, meaning, and lasting happiness which is common to all humanity.</span>
+                <span class="sentence" data-index="140">We then explain our views of academic knowledge and spiritual knowledge, both of which are essential to the search for God.</span>
+                <span class="sentence" data-index="141">We continue by explaining the Latter-day Saint understanding of and approaches to prayer, faith in Jesus Christ, repentance, and discipleship.</span>
+                <span class="sentence" data-index="142">We conclude this section by seeking to clearly explain the core concepts of living prophets, gospel dispensations, and the restoration of Christ's Church in the latter days in our day.</span>
+            </p>
+            
+            <h3 id="section-part2">Part 2: Our Promises</h3>
+            
+            <p>
+                <span class="sentence" data-index="143">It is not enough to merely discover the truth.</span>
+                <span class="sentence" data-index="144">We must be willing to embrace it to benefit therefrom.</span>
+                <span class="sentence" data-index="145">In these chapters we demonstrate that God has asked His people to make sacred promises (covenants) in every gospel dispensation.</span>
+                <span class="sentence" data-index="146">We then endeavor to clearly explain the sacred covenants Latter-day Saints make as we embrace faith in Jesus Christ.</span>
+                <span class="sentence" data-index="147">These include covenants made in local congregations and in the holy temples of the Lord.</span>
+            </p>
+            
+            <h3 id="section-part3">Part 3: Our Practices</h3>
+            
+            <p>
+                <span class="sentence" data-index="148">Yet again, it is not enough to merely promise to abide by truth and commit to faith in Jesus Christ.</span>
+                <span class="sentence" data-index="149">We must exercise our faith in keeping our promises to God and His Son Jesus Christ.</span>
+                <span class="sentence" data-index="150">In this part of our book we describe the day-to-day practices of faithful Latter-day Saints—the ways in which we sincerely strive to live our faith.</span>
+            </p>
+            
+            <h3 id="section-part4">Part 4: Our Theology</h3>
+            
+            <p>
+                <span class="sentence" data-index="151">As we search for truth, meaning, and lasting happiness we eventually awake to the realization that God lives and still participates in the lives of all His children.</span>
+                <span class="sentence" data-index="152">Further, as we exercise faith in the gospel of salvation we come to know the character and divinity of Jesus Christ, and we discover the nature of our relationship with Him.</span>
+                <span class="sentence" data-index="153">As we mature spiritually we begin to sense our individual worth and eternal potential.</span>
+                <span class="sentence" data-index="154">As matters of theology all of these things have been described by Prophets and Apostles throughout the ages, but each of us must discover these things as part of his or her personal salvation.</span>
+            </p>
+            
+            <h3 id="section-part5">Part 5: Our Witness of Christ</h3>
+            
+            <p>
+                <span class="sentence" data-index="155">Finally, we provide an overview of God's Plan of Salvation.</span>
+                <span class="sentence" data-index="156">We then conclude our writings with our personal witnesses of Christ and offer our assurances that these things are true.</span>
+            </p>
+            
+            <h2 id="section-plea">Our Plea to You</h2>
+            
+            <p>
+                <span class="sentence" data-index="157">Our work has been to gather plain and precious truths that God has revealed concerning His personal nature and His will for mankind.</span>
+                <span class="sentence" data-index="158">We generally write in our own words and according to our own understanding, but we cite the sources of truth.</span>
+                <span class="sentence" data-index="159">We draw from the inspired teachings of prophets and apostles of God, both ancient and modern.</span>
+                <span class="sentence" data-index="160">We quote holy scripture—the Bible, the Book of Mormon, the Doctrine and Covenants, and the Pearl of Great Price—which contain the word of God.</span>
+                <span class="sentence" data-index="161">We encourage you to study the references from which we have drawn in performing this labor of love.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="162">We plead with you not to be offended by the fact that we may hold some ideas different from your own.</span>
+                <span class="sentence" data-index="163">More importantly, we implore you not to rebel against the idea that there is a higher authority than mankind, or against the idea that we all ought to obey commandments of God.</span>
+                <span class="sentence" data-index="164">We encourage you not to reject the idea that mankind needs to be saved.</span>
+                <span class="sentence" data-index="165">At the very least, we need to be saved from sources of unhappiness: ignorance of life's purpose, the consequences of wandering from wisdom's path, and our estrangement from our Creator.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="166">My brother and I take great joy and comfort in what small light and knowledge God has given to us.</span>
+                <span class="sentence" data-index="167">We feel as if we have awakened from a deep sleep, made new and somehow more whole by our acquaintance with God and His Son.</span>
+                <span class="sentence" data-index="168">We openly confess our own imperfections and limitations.</span>
+                <span class="sentence" data-index="169">We do not seek to set ourselves up as a source of light for the world.</span>
+                <span class="sentence" data-index="170">Rather, we seek to remind all humanity that God is the light by which all may see in the dark.</span>
+            </p>
+            
+            <p>
+                <span class="sentence" data-index="171">What you get out of reading our Words of Plainness depends entirely upon what you are looking for as you study them.</span>
+                <span class="sentence" data-index="172">We hope that you find in our writings encouragement and inspiration to believe in God and in His Son Jesus Christ.</span>
+                <span class="sentence" data-index="173">Our prayer is that you will be blessed by the Spirit and grace of God as you consider our words, in the name of Jesus Christ.</span>
+                <span class="sentence" data-index="174">Amen.</span>
+            </p>
+            
+        </article>
+        
+        <!-- Study Resources -->
+        <section class="chapter-content" style="background: var(--brown-rich);" id="study-resources">
+            <h2 class="section-title">Study Resources</h2>
+            
+            <div class="resource-list">
+                <!-- Audio Overview -->
+                <a href="#" class="resource-card" 
+                   data-modal="audio"
+                   data-src="../../assets/audio/WoP_Ch01_Introduction_Overview_Podcast.mp3"
+                   data-title="Audio Overview"
+                   data-subtitle="A conversation exploring the key themes of this chapter"
+                   data-icon="🎧">
+                    <div class="resource-icon">🎧</div>
+                    <div class="resource-info">
+                        <h3 class="resource-title">Audio Overview</h3>
+                        <p class="resource-desc">A conversation exploring the key themes of this chapter</p>
+                    </div>
+                    <span class="resource-arrow">→</span>
+                </a>
+                
+                <!-- Music -->
+                <a href="#" class="resource-card music"
+                   data-modal="audio"
+                   data-src="../../assets/audio/01_1_Introduction_to_Plainness_-_Sacred_Americana_Testimony.mp3"
+                   data-title="Introduction to Plainness"
+                   data-subtitle="Sacred Americana testimony by Brother Aaron"
+                   data-icon="♫">
+                    <div class="resource-icon">♫</div>
+                    <div class="resource-info">
+                        <h3 class="resource-title">Testimonial Music: "Introduction to Plainness"</h3>
+                        <p class="resource-desc">Sacred Americana testimony by Brother Aaron</p>
+                    </div>
+                    <span class="resource-arrow">→</span>
+                </a>
+                
+                <!-- Infographic -->
+                <a href="#" class="resource-card"
+                   data-modal="image"
+                   data-src="../../assets/images/WoP_Ch01_Introduction_Infographic.png"
+                   data-title="Infographic Summary"
+                   data-subtitle="Visual overview of key concepts and the book's structure"
+                   data-icon="📊">
+                    <div class="resource-icon">📊</div>
+                    <div class="resource-info">
+                        <h3 class="resource-title">Infographic Summary</h3>
+                        <p class="resource-desc">Visual overview of key concepts and the book's structure</p>
+                    </div>
+                    <span class="resource-arrow">→</span>
+                </a>
+                
+                <!-- Slides -->
+                <a href="chapter-01-slides.html" class="resource-card">
+                    <div class="resource-icon">📽</div>
+                    <div class="resource-info">
+                        <h3 class="resource-title">Slides for Group Study</h3>
+                        <p class="resource-desc">9-slide presentation for class or study group discussion</p>
+                    </div>
+                    <span class="resource-arrow">→</span>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Engage: Reflection Prompt -->
+        <section class="reflection-section" id="reflection">
+            <div class="reflection-container">
+                <h2 class="section-title">Engage</h2>
+                
+                <div class="reflection-card">
+                    <div class="reflection-intro">
+                        <h3>Personal Reflection</h3>
+                        <p>Take a few moments to ponder and record your thoughts on this chapter's themes.</p>
+                    </div>
+                    
+                    <div class="reflection-step">
+                        <div class="step-header">
+                            <span class="step-number">1</span>
+                            <h4 class="step-title">Assess: Where Am I Now?</h4>
+                        </div>
+                        <p class="step-prompt">What am I currently searching for in my life? How does my search for truth, meaning, and lasting happiness compare to what the authors describe?</p>
+                        <textarea class="step-textarea" placeholder="Reflect on your current search for truth and meaning..."></textarea>
+                    </div>
+                    
+                    <div class="reflection-step">
+                        <div class="step-header">
+                            <span class="step-number">2</span>
+                            <h4 class="step-title">Align: Seeking Grace</h4>
+                        </div>
+                        <p class="step-prompt">What feelings arose as I read about the authors' witness of Christ? What deeper understanding am I seeking about my relationship with God?</p>
+                        <textarea class="step-textarea" placeholder="What deeper understanding are you seeking?"></textarea>
+                    </div>
+                    
+                    <div class="reflection-step">
+                        <div class="step-header">
+                            <span class="step-number">3</span>
+                            <h4 class="step-title">Act: My Commitment</h4>
+                        </div>
+                        <p class="step-prompt">What specific action will I take this week to search for truth with an open heart and mind?</p>
+                        <textarea class="step-textarea" placeholder="One specific action I will take..."></textarea>
+                    </div>
+                    
+                    <div class="reflection-actions">
+                        <button class="btn btn-primary" onclick="saveReflection()">Save My Reflection</button>
+                        <button class="btn btn-secondary" onclick="clearReflection()">Clear</button>
+                    </div>
+                    
+                    <p class="reflection-note">Your reflections are saved locally in your browser and are not shared.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Engage: Discussion -->
+        <section class="discussion-section" id="discussion">
+            <div class="discussion-container">
+                <div class="discussion-header">
+                    <h2 class="section-title" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">Join the Discussion</h2>
+                    <span class="discussion-count">0 comments</span>
+                </div>
+                
+                <div class="discussion-placeholder">
+                    <p>Share your insights and questions about this chapter with fellow seekers and saints.</p>
+                    <a href="#" class="btn btn-outline-gold">View Discussion</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Chapter Navigation -->
+        <nav class="chapter-nav">
+            <div class="chapter-nav-container">
+                <span class="nav-link nav-prev" style="opacity: 0.4; cursor: default;">
+                    <span>←</span>
+                    <div>
+                        <span class="nav-link-label">Previous</span>
+                        <span class="nav-link-title">—</span>
+                    </div>
+                </span>
+                
+                <a href="../writings.html" class="nav-link nav-all">
+                    All Chapters
+                </a>
+                
+                <a href="chapter-02-the-human-search.html" class="nav-link nav-next">
+                    <div>
+                        <span class="nav-link-label">Next</span>
+                        <span class="nav-link-title">Chapter 2: The Human Search</span>
+                    </div>
+                    <span>→</span>
+                </a>
+            </div>
+        </nav>
+    </main>
+    
+    <!-- Reader Toolbar -->
+    <div class="reader-toolbar" id="readerToolbar">
+        <!-- Font Size Controls -->
+        <div class="toolbar-group">
+            <button class="toolbar-btn font-btn small" onclick="setFontSize('small')" aria-label="Small text">A</button>
+            <button class="toolbar-btn font-btn medium active" onclick="setFontSize('medium')" aria-label="Medium text">A</button>
+            <button class="toolbar-btn font-btn large" onclick="setFontSize('large')" aria-label="Large text">A</button>
+        </div>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- Bookmark Button -->
+        <button class="toolbar-btn bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" aria-label="Bookmark this location">
+            <span class="bookmark-icon">🔖</span>
+            <span class="bookmark-text">Bookmark</span>
+        </button>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- Share Button -->
+        <div class="share-container">
+            <button class="toolbar-btn share-btn" onclick="toggleShareDropdown()" aria-label="Share this chapter">
+                <span>↗</span>
+                <span>Share</span>
+            </button>
+            <div class="share-dropdown" id="shareDropdown">
+                <button onclick="copyLink()">
+                    <span class="share-icon">🔗</span>
+                    <span>Copy Link</span>
+                </button>
+                <a href="#" id="shareFacebook" target="_blank" rel="noopener">
+                    <span class="share-icon">f</span>
+                    <span>Facebook</span>
+                </a>
+                <a href="#" id="shareTwitter" target="_blank" rel="noopener">
+                    <span class="share-icon">𝕏</span>
+                    <span>X (Twitter)</span>
+                </a>
+                <a href="#" id="shareEmail">
+                    <span class="share-icon">✉</span>
+                    <span>Email</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    
+    <!-- Resource Modal Overlay -->
+    <div class="resource-modal" id="resourceModal">
+        <div class="resource-modal-bg"></div>
+        <div class="resource-modal-content">
+            <header class="resource-modal-header">
+                <h2 class="resource-modal-title">
+                    <span class="modal-icon" id="modalIcon">🎧</span>
+                    <span id="modalTitle">Resource Title</span>
+                </h2>
+                <button class="resource-modal-close" onclick="closeResourceModal()">
+                    ← Back to Chapter
+                </button>
+            </header>
+            <div class="resource-modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-lantern"></div>
+        <p class="footer-tagline">Where Seekers and Saints Find Common Ground</p>
+        <p class="footer-name">Brother Aaron Powner</p>
+        <div class="footer-links">
+            <a href="../about.html#ai-disclosure">AI Disclosure</a>
+            <a href="../connect.html#contact">Contact</a>
+            <a href="../about.html#faq">FAQ</a>
+        </div>
+        <p class="footer-copyright">© 2026 Words of Plainness Ministry. All rights reserved.</p>
+    </footer>
+    
+    <!-- Hidden audio element -->
+    <audio id="chapterAudio" preload="metadata">
+        <source src="../../assets/audio/chapter-01-narration.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        // =====================================================
+        // AUDIO PLAYER WITH TEXT SYNCHRONIZATION
+        // =====================================================
+        
+        const audio = document.getElementById('chapterAudio');
+        const playerBar = document.getElementById('audioPlayerBar');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const listenBtn = document.getElementById('listenBtn');
+        const listenBtnText = document.getElementById('listenBtnText');
+        const autoscrollToggle = document.getElementById('autoscrollToggle');
+        
+        let isPlaying = false;
+        let currentSentenceIndex = -1;
+        let audioNeedsRecovery = false;
+        let lastKnownTime = 0;
+        
+        // =====================================================
+        // AUDIO RECOVERY SYSTEM
+        // Handles tab switching and audio interruptions
+        // =====================================================
+        
+        function recoverAudio(targetTime, shouldPlay = false) {
+            return new Promise((resolve, reject) => {
+                console.log('Attempting audio recovery...');
+                
+                // Store the target time
+                const seekTime = targetTime || lastKnownTime || 0;
+                
+                // Remove existing event listeners to avoid duplicates
+                const onCanPlay = () => {
+                    audio.removeEventListener('canplay', onCanPlay);
+                    audio.removeEventListener('error', onError);
+                    
+                    try {
+                        audio.currentTime = seekTime;
+                        audioNeedsRecovery = false;
+                        console.log('Audio recovered, seeking to:', seekTime);
+                        
+                        if (shouldPlay) {
+                            audio.play().then(resolve).catch(reject);
+                        } else {
+                            resolve();
+                        }
+                    } catch (e) {
+                        reject(e);
+                    }
+                };
+                
+                const onError = (e) => {
+                    audio.removeEventListener('canplay', onCanPlay);
+                    audio.removeEventListener('error', onError);
+                    console.error('Audio recovery failed:', e);
+                    reject(e);
+                };
+                
+                audio.addEventListener('canplay', onCanPlay, { once: true });
+                audio.addEventListener('error', onError, { once: true });
+                
+                // Reload the audio
+                audio.load();
+                
+                // Timeout after 5 seconds
+                setTimeout(() => {
+                    audio.removeEventListener('canplay', onCanPlay);
+                    audio.removeEventListener('error', onError);
+                    reject(new Error('Audio recovery timeout'));
+                }, 5000);
+            });
+        }
+        
+        // Track audio errors
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+            audioNeedsRecovery = true;
+        });
+        
+        // Track current time for recovery
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.currentTime) && audio.currentTime > 0) {
+                lastKnownTime = audio.currentTime;
+            }
+        });
+        
+        // Handle tab visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                // User returned to tab - check if audio needs recovery
+                if (audio.error || audio.networkState === 3) {
+                    console.log('Tab returned - audio may need recovery');
+                    audioNeedsRecovery = true;
+                }
+            } else {
+                // Tab hidden - remember current state
+                if (!isNaN(audio.currentTime)) {
+                    lastKnownTime = audio.currentTime;
+                }
+            }
+        });
+        
+        // =====================================================
+        // TIMESTAMP DATA
+        // This will be populated with ElevenLabs timestamp data
+        // Format: array of { index, start, end } for each sentence
+        // =====================================================
+        
+        // Sentence timestamps generated from Whisper transcription
+        // Sentence timestamps generated from Whisper transcription
+        // Sentence timestamps generated from Whisper transcription
+        // Sentence timestamps - hybrid position + word matching alignment
+        // Sentence timestamps - anchor-based interpolation for accurate sync
+                const sentenceTimestamps = [
+            { index: 0, start: 0.0, end: 2.03 },
+            { index: 1, start: 2.73, end: 7.41 },
+            { index: 2, start: 8.1, end: 11.89 },
+            { index: 3, start: 12.7, end: 17.65 },
+            { index: 4, start: 18.76, end: 22.87 },
+            { index: 5, start: 23.57, end: 27.66 },
+            { index: 6, start: 28.26, end: 31.7 },
+            { index: 7, start: 32.81, end: 39.21 },
+            { index: 8, start: 40.02, end: 50.49 },
+            { index: 9, start: 51.3, end: 53.25 },
+            { index: 10, start: 54.07, end: 60.16 },
+            { index: 11, start: 60.77, end: 63.88 },
+            { index: 12, start: 64.39, end: 68.77 },
+            { index: 13, start: 69.58, end: 75.2 },
+            { index: 14, start: 75.89, end: 91.5 },
+            { index: 15, start: 92.61, end: 99.89 },
+            { index: 16, start: 100.4, end: 106.05 },
+            { index: 17, start: 106.56, end: 114.17 },
+            { index: 18, start: 114.98, end: 124.64 },
+            { index: 19, start: 125.46, end: 133.39 },
+            { index: 20, start: 134.34, end: 139.72 },
+            { index: 21, start: 140.54, end: 145.07 },
+            { index: 22, start: 145.67, end: 146.52 },
+            { index: 23, start: 147.21, end: 149.12 },
+            { index: 24, start: 149.36, end: 151.39 },
+            { index: 25, start: 152.21, end: 157.05 },
+            { index: 26, start: 157.22, end: 163.68 },
+            { index: 27, start: 164.0, end: 179.74 },
+            { index: 28, start: 180.02, end: 187.25 },
+            { index: 29, start: 187.94, end: 197.04 },
+            { index: 30, start: 197.86, end: 204.26 },
+            { index: 31, start: 205.08, end: 212.04 },
+            { index: 32, start: 212.86, end: 215.7 },
+            { index: 33, start: 216.21, end: 220.91 },
+            { index: 34, start: 221.52, end: 234.61 },
+            { index: 35, start: 235.31, end: 239.81 },
+            { index: 36, start: 240.51, end: 247.07 },
+            { index: 37, start: 247.77, end: 250.48 },
+            { index: 38, start: 251.18, end: 258.97 },
+            { index: 39, start: 260.08, end: 265.63 },
+            { index: 40, start: 266.33, end: 272.48 },
+            { index: 41, start: 273.18, end: 277.87 },
+            { index: 42, start: 278.57, end: 287.97 },
+            { index: 43, start: 288.67, end: 302.23 },
+            { index: 44, start: 303.04, end: 311.6 },
+            { index: 45, start: 312.55, end: 325.13 },
+            { index: 46, start: 325.83, end: 335.48 },
+            { index: 47, start: 336.18, end: 347.58 },
+            { index: 48, start: 348.39, end: 356.27 },
+            { index: 49, start: 357.23, end: 368.38 },
+            { index: 50, start: 369.33, end: 381.52 },
+            { index: 51, start: 382.48, end: 389.87 },
+            { index: 52, start: 390.82, end: 398.02 },
+            { index: 53, start: 398.72, end: 402.13 },
+            { index: 54, start: 402.83, end: 407.98 },
+            { index: 55, start: 408.59, end: 414.42 },
+            { index: 56, start: 415.11, end: 419.98 },
+            { index: 57, start: 420.79, end: 436.18 },
+            { index: 58, start: 436.88, end: 450.11 },
+            { index: 59, start: 450.8, end: 465.96 },
+            { index: 60, start: 466.66, end: 480.34 },
+            { index: 61, start: 481.45, end: 492.85 },
+            { index: 62, start: 493.81, end: 500.44 },
+            { index: 63, start: 501.13, end: 507.49 },
+            { index: 64, start: 508.19, end: 520.95 },
+            { index: 65, start: 521.55, end: 537.16 },
+            { index: 66, start: 537.54, end: 539.76 },
+            { index: 67, start: 540.36, end: 546.29 },
+            { index: 68, start: 547.11, end: 550.77 },
+            { index: 69, start: 551.47, end: 556.44 },
+            { index: 70, start: 557.04, end: 559.07 },
+            { index: 71, start: 559.67, end: 564.65 },
+            { index: 72, start: 565.46, end: 572.31 },
+            { index: 73, start: 573.01, end: 577.72 },
+            { index: 74, start: 578.33, end: 582.79 },
+            { index: 75, start: 583.61, end: 600.78 },
+            { index: 76, start: 601.38, end: 604.82 },
+            { index: 77, start: 605.33, end: 608.66 },
+            { index: 78, start: 609.36, end: 613.69 },
+            { index: 79, start: 614.5, end: 621.43 },
+            { index: 80, start: 622.55, end: 627.87 },
+            { index: 81, start: 627.97, end: 633.59 },
+            { index: 82, start: 634.19, end: 639.12 },
+            { index: 83, start: 639.73, end: 643.21 },
+            { index: 84, start: 643.81, end: 646.39 },
+            { index: 85, start: 646.99, end: 652.67 },
+            { index: 86, start: 653.27, end: 655.39 },
+            { index: 87, start: 655.99, end: 658.91 },
+            { index: 88, start: 659.51, end: 661.96 },
+            { index: 89, start: 662.28, end: 663.83 },
+            { index: 90, start: 664.27, end: 666.21 },
+            { index: 91, start: 666.81, end: 672.48 },
+            { index: 92, start: 673.29, end: 681.05 },
+            { index: 93, start: 681.86, end: 695.57 },
+            { index: 94, start: 696.27, end: 698.54 },
+            { index: 95, start: 699.15, end: 701.53 },
+            { index: 96, start: 702.34, end: 707.3 },
+            { index: 97, start: 708.41, end: 710.21 },
+            { index: 98, start: 711.33, end: 715.66 },
+            { index: 99, start: 716.35, end: 718.33 },
+            { index: 100, start: 718.77, end: 721.59 },
+            { index: 101, start: 722.4, end: 742.7 },
+            { index: 102, start: 743.51, end: 747.58 },
+            { index: 103, start: 748.19, end: 756.58 },
+            { index: 104, start: 757.28, end: 760.95 },
+            { index: 105, start: 761.64, end: 766.18 },
+            { index: 106, start: 767.0, end: 771.71 },
+            { index: 107, start: 772.52, end: 781.86 },
+            { index: 108, start: 782.67, end: 794.56 },
+            { index: 109, start: 795.37, end: 804.83 },
+            { index: 110, start: 805.64, end: 814.41 },
+            { index: 111, start: 815.22, end: 817.5 },
+            { index: 112, start: 818.1, end: 823.7 },
+            { index: 113, start: 824.51, end: 833.85 },
+            { index: 114, start: 834.66, end: 836.92 },
+            { index: 115, start: 837.62, end: 848.73 },
+            { index: 116, start: 849.43, end: 855.45 },
+            { index: 117, start: 856.26, end: 874.6 },
+            { index: 118, start: 875.9, end: 881.82 },
+            { index: 119, start: 882.93, end: 886.9 },
+            { index: 120, start: 887.51, end: 896.25 },
+            { index: 121, start: 896.95, end: 901.19 },
+            { index: 122, start: 901.8, end: 903.52 },
+            { index: 123, start: 904.21, end: 916.5 },
+            { index: 124, start: 917.19, end: 925.18 },
+            { index: 125, start: 926.48, end: 933.41 },
+            { index: 126, start: 933.74, end: 949.68 },
+            { index: 127, start: 950.38, end: 960.57 },
+            { index: 128, start: 961.08, end: 966.11 },
+            { index: 129, start: 966.49, end: 970.97 },
+            { index: 130, start: 971.3, end: 973.71 },
+            { index: 131, start: 974.15, end: 976.62 },
+            { index: 132, start: 977.23, end: 983.78 },
+            { index: 133, start: 984.38, end: 992.25 },
+            { index: 134, start: 992.86, end: 1004.78 },
+            { index: 135, start: 1005.59, end: 1011.71 },
+            { index: 136, start: 1012.52, end: 1015.09 },
+            { index: 137, start: 1015.53, end: 1022.17 },
+            { index: 138, start: 1022.87, end: 1035.55 },
+            { index: 139, start: 1036.5, end: 1043.14 },
+            { index: 140, start: 1043.95, end: 1050.54 },
+            { index: 141, start: 1051.24, end: 1061.28 },
+            { index: 142, start: 1061.89, end: 1073.35 },
+            { index: 143, start: 1073.95, end: 1076.38 },
+            { index: 144, start: 1077.49, end: 1080.84 },
+            { index: 145, start: 1081.53, end: 1090.02 },
+            { index: 146, start: 1090.83, end: 1097.69 },
+            { index: 147, start: 1098.39, end: 1103.52 },
+            { index: 148, start: 1104.22, end: 1111.69 },
+            { index: 149, start: 1112.3, end: 1118.43 },
+            { index: 150, start: 1119.12, end: 1128.18 },
+            { index: 151, start: 1128.88, end: 1140.03 },
+            { index: 152, start: 1140.85, end: 1151.02 },
+            { index: 153, start: 1151.83, end: 1157.3 },
+            { index: 154, start: 1158.11, end: 1169.62 },
+            { index: 155, start: 1170.43, end: 1174.22 },
+            { index: 156, start: 1174.92, end: 1181.6 },
+            { index: 157, start: 1182.71, end: 1190.88 },
+            { index: 158, start: 1191.7, end: 1198.15 },
+            { index: 159, start: 1198.97, end: 1204.25 },
+            { index: 160, start: 1205.06, end: 1214.2 },
+            { index: 161, start: 1215.01, end: 1220.14 },
+            { index: 162, start: 1220.75, end: 1226.66 },
+            { index: 163, start: 1227.35, end: 1238.05 },
+            { index: 164, start: 1238.86, end: 1243.01 },
+            { index: 165, start: 1244.13, end: 1256.13 },
+            { index: 166, start: 1257.25, end: 1262.8 },
+            { index: 167, start: 1263.61, end: 1271.34 },
+            { index: 168, start: 1271.44, end: 1275.04 },
+            { index: 169, start: 1275.74, end: 1279.28 },
+            { index: 170, start: 1280.09, end: 1285.42 },
+            { index: 171, start: 1286.54, end: 1292.49 },
+            { index: 172, start: 1292.93, end: 1299.88 },
+            { index: 173, start: 1300.32, end: 1307.14 },
+            { index: 174, start: 1307.18, end: 1307.85 },
+        ];
+        
+        // =====================================================
+        // PLAYER CONTROLS
+        // =====================================================
+        
+        function toggleAudioPlayer() {
+            if (playerBar.classList.contains('hidden')) {
+                playerBar.classList.remove('hidden');
+                document.body.classList.add('player-active');
+                listenBtnText.textContent = 'Hide Player';
+            } else {
+                playerBar.classList.add('hidden');
+                document.body.classList.remove('player-active');
+                listenBtnText.textContent = 'Listen to Chapter';
+                if (isPlaying) {
+                    togglePlayPause();
+                }
+            }
+        }
+        
+        function togglePlayPause() {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.textContent = '▶';
+                isPlaying = false;
+            } else {
+                // Check if audio needs recovery first
+                if (audioNeedsRecovery || audio.error || audio.readyState === 0) {
+                    playPauseBtn.textContent = '⏳';
+                    recoverAudio(lastKnownTime, true)
+                        .then(() => {
+                            playPauseBtn.textContent = '❚❚';
+                            isPlaying = true;
+                        })
+                        .catch(e => {
+                            console.error('Playback failed after recovery attempt:', e);
+                            playPauseBtn.textContent = '▶';
+                            alert('Could not play audio. Please refresh the page and try again.');
+                        });
+                } else {
+                    audio.play()
+                        .then(() => {
+                            playPauseBtn.textContent = '❚❚';
+                            isPlaying = true;
+                        })
+                        .catch(e => {
+                            console.log('Audio playback failed, attempting recovery:', e);
+                            audioNeedsRecovery = true;
+                            // Try recovery
+                            playPauseBtn.textContent = '⏳';
+                            recoverAudio(lastKnownTime, true)
+                                .then(() => {
+                                    playPauseBtn.textContent = '❚❚';
+                                    isPlaying = true;
+                                })
+                                .catch(err => {
+                                    playPauseBtn.textContent = '▶';
+                                    alert('Could not play audio. Please refresh the page and try again.');
+                                });
+                        });
+                }
+            }
+        }
+        
+        function skipBack() {
+            audio.currentTime = Math.max(0, audio.currentTime - 10);
+        }
+        
+        function skipForward() {
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+        }
+        
+        function setSpeed(speed) {
+            audio.playbackRate = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === speed + 'x') {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        function seekAudio(event) {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        }
+        
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // =====================================================
+        // TEXT HIGHLIGHTING & AUTOSCROLL
+        // =====================================================
+        
+        function highlightSentence(index) {
+            // Remove previous highlights
+            document.querySelectorAll('.sentence.active').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('read');
+            });
+            
+            // Add highlight to current sentence
+            const currentSentence = document.querySelector(`.sentence[data-index="${index}"]`);
+            if (currentSentence) {
+                currentSentence.classList.add('active');
+                currentSentence.classList.remove('read');
+                
+                // Autoscroll if enabled - always keep sentence centered
+                if (autoscrollToggle.checked) {
+                    currentSentence.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        }
+        
+        function findCurrentSentence(currentTime) {
+            for (let i = 0; i < sentenceTimestamps.length; i++) {
+                const ts = sentenceTimestamps[i];
+                if (currentTime >= ts.start && currentTime < ts.end) {
+                    return ts.index;
+                }
+            }
+            return -1;
+        }
+        
+        // =====================================================
+        // AUDIO EVENT LISTENERS
+        // =====================================================
+        
+        audio.addEventListener('timeupdate', () => {
+            // Update progress bar
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = percent + '%';
+            
+            // Update time display
+            timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+            
+            // Update sentence highlighting (only if timestamps exist)
+            if (sentenceTimestamps.length > 0) {
+                const sentenceIndex = findCurrentSentence(audio.currentTime);
+                if (sentenceIndex !== currentSentenceIndex && sentenceIndex !== -1) {
+                    currentSentenceIndex = sentenceIndex;
+                    highlightSentence(sentenceIndex);
+                }
+            }
+        });
+        
+        audio.addEventListener('ended', () => {
+            playPauseBtn.textContent = '▶';
+            isPlaying = false;
+            progressFill.style.width = '0%';
+            currentSentenceIndex = -1;
+            
+            // Clear all highlights
+            document.querySelectorAll('.sentence').forEach(el => {
+                el.classList.remove('active', 'read');
+            });
+        });
+        
+        audio.addEventListener('loadedmetadata', () => {
+            timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
+        });
+        
+        // =====================================================
+        // CLICK-TO-SEEK: Click any sentence to jump to that point
+        // =====================================================
+        
+        document.querySelectorAll('.sentence').forEach(sentence => {
+            sentence.style.cursor = 'pointer';
+            
+            sentence.addEventListener('click', (e) => {
+                const index = parseInt(sentence.dataset.index);
+                const timestamp = sentenceTimestamps.find(ts => ts.index === index);
+                
+                if (timestamp) {
+                    // Show player if hidden
+                    if (playerBar.classList.contains('hidden')) {
+                        playerBar.classList.remove('hidden');
+                        document.body.classList.add('player-active');
+                        listenBtnText.textContent = 'Hide Player';
+                    }
+                    
+                    // Highlight this sentence immediately
+                    currentSentenceIndex = index;
+                    highlightSentence(index);
+                    
+                    // Pause if playing
+                    if (isPlaying) {
+                        audio.pause();
+                        playPauseBtn.textContent = '▶';
+                        isPlaying = false;
+                    }
+                    
+                    // Function to seek and update UI
+                    const seekToTimestamp = () => {
+                        try {
+                            audio.currentTime = timestamp.start;
+                            lastKnownTime = timestamp.start;
+                            const percent = (audio.currentTime / audio.duration) * 100;
+                            progressFill.style.width = percent + '%';
+                            timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+                        } catch (err) {
+                            console.log('Seek error:', err);
+                        }
+                    };
+                    
+                    // Check if audio needs recovery (error state or not loaded)
+                    if (audioNeedsRecovery || audio.error || audio.readyState === 0) {
+                        console.log('Audio needs recovery before seeking');
+                        recoverAudio(timestamp.start, false)
+                            .then(() => {
+                                seekToTimestamp();
+                            })
+                            .catch(err => {
+                                console.error('Recovery failed:', err);
+                                // Try one more time with a fresh load
+                                audio.load();
+                                audio.addEventListener('canplay', () => {
+                                    seekToTimestamp();
+                                }, { once: true });
+                            });
+                    } else if (audio.readyState >= 1) {
+                        // Audio is ready, seek directly
+                        seekToTimestamp();
+                    } else {
+                        // Wait for audio to be ready
+                        audio.addEventListener('loadedmetadata', seekToTimestamp, { once: true });
+                        audio.load();
+                    }
+                }
+            });
+        });
+        
+        // =====================================================
+        // TABLE OF CONTENTS SIDEBAR
+        // =====================================================
+        
+        const tocToggle = document.getElementById('tocToggle');
+        const tocSidebar = document.getElementById('tocSidebar');
+        const tocOverlay = document.getElementById('tocOverlay');
+        const tocClose = document.getElementById('tocClose');
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        
+        function openToc() {
+            tocSidebar.classList.add('open');
+            tocOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeToc() {
+            tocSidebar.classList.remove('open');
+            tocOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        
+        tocToggle.addEventListener('click', openToc);
+        tocClose.addEventListener('click', closeToc);
+        tocOverlay.addEventListener('click', closeToc);
+        
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeToc();
+                const targetId = link.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    setTimeout(() => {
+                        const headerOffset = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    }, 300);
+                }
+            });
+        });
+        
+        // Highlight active TOC item while scrolling
+        function updateActiveTocItem() {
+            const sections = document.querySelectorAll('[id^="section-"]');
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.pageYOffset >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveTocItem);
+        
+        // =====================================================
+        // FONT SIZE CONTROLS
+        // =====================================================
+        
+        const fontSizes = {
+            small: { body: '1rem', lineHeight: '1.75' },
+            medium: { body: '1.1rem', lineHeight: '1.9' },
+            large: { body: '1.25rem', lineHeight: '2' }
+        };
+        
+        function setFontSize(size) {
+            const chapterReading = document.querySelector('.chapter-reading');
+            const paragraphs = chapterReading.querySelectorAll('p');
+            
+            paragraphs.forEach(p => {
+                p.style.fontSize = fontSizes[size].body;
+                p.style.lineHeight = fontSizes[size].lineHeight;
+            });
+            
+            // Update active button
+            document.querySelectorAll('.font-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.font-btn.${size}`).classList.add('active');
+            
+            // Save preference
+            localStorage.setItem('wop-font-size', size);
+        }
+        
+        // Load saved font size
+        const savedFontSize = localStorage.getItem('wop-font-size');
+        if (savedFontSize) {
+            setFontSize(savedFontSize);
+        }
+        
+        // =====================================================
+        // BOOKMARK FEATURE
+        // =====================================================
+        
+        const bookmarkBtn = document.getElementById('bookmarkBtn');
+        const bookmarkBanner = document.getElementById('bookmarkBanner');
+        const bookmarkLocation = document.getElementById('bookmarkLocation');
+        let currentBookmark = null;
+        
+        function getCurrentSection() {
+            const sections = document.querySelectorAll('[id^="section-"]');
+            let currentSection = null;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 200) {
+                    currentSection = {
+                        id: section.getAttribute('id'),
+                        title: section.textContent.trim()
+                    };
+                }
+            });
+            
+            return currentSection;
+        }
+        
+        function toggleBookmark() {
+            const section = getCurrentSection();
+            if (!section) return;
+            
+            const bookmarkData = {
+                chapterId: 'chapter-01-introduction',
+                sectionId: section.id,
+                sectionTitle: section.title,
+                scrollPosition: window.pageYOffset,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('wop-bookmark', JSON.stringify(bookmarkData));
+            
+            bookmarkBtn.classList.add('bookmarked');
+            bookmarkBtn.querySelector('.bookmark-text').textContent = 'Bookmarked!';
+            
+            setTimeout(() => {
+                bookmarkBtn.querySelector('.bookmark-text').textContent = 'Bookmark';
+            }, 2000);
+        }
+        
+        function checkForBookmark() {
+            const saved = localStorage.getItem('wop-bookmark');
+            if (saved) {
+                const bookmark = JSON.parse(saved);
+                if (bookmark.chapterId === 'chapter-01-introduction') {
+                    currentBookmark = bookmark;
+                    bookmarkLocation.textContent = bookmark.sectionTitle;
+                    bookmarkBanner.classList.add('show');
+                    bookmarkBtn.classList.add('bookmarked');
+                }
+            }
+        }
+        
+        function resumeFromBookmark() {
+            if (currentBookmark) {
+                window.scrollTo({ top: currentBookmark.scrollPosition, behavior: 'smooth' });
+                bookmarkBanner.classList.remove('show');
+            }
+        }
+        
+        function dismissBookmark() {
+            bookmarkBanner.classList.remove('show');
+        }
+        
+        // Check for bookmark on page load
+        setTimeout(checkForBookmark, 500);
+        
+        // =====================================================
+        // SHARE FUNCTIONALITY
+        // =====================================================
+        
+        const shareDropdown = document.getElementById('shareDropdown');
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent('Chapter 1: Introduction - Words of Plainness');
+        
+        // Set share links
+        document.getElementById('shareFacebook').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+        document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+        document.getElementById('shareEmail').href = `mailto:?subject=${pageTitle}&body=I thought you might enjoy this: ${decodeURIComponent(pageUrl)}`;
+        
+        function toggleShareDropdown() {
+            shareDropdown.classList.toggle('open');
+        }
+        
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const dropdown = document.getElementById('shareDropdown');
+                const originalContent = dropdown.innerHTML;
+                dropdown.innerHTML = '<p class="copy-success">✓ Link copied!</p>';
+                setTimeout(() => {
+                    dropdown.innerHTML = originalContent;
+                    // Re-attach event listeners
+                    dropdown.querySelector('button').addEventListener('click', copyLink);
+                }, 1500);
+            });
+        }
+        
+        // Close share dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.share-container')) {
+                shareDropdown.classList.remove('open');
+            }
+        });
+        
+        // =====================================================
+        // READING PROGRESS & BACK TO TOP
+        // =====================================================
+        
+        const readingProgress = document.getElementById('readingProgress');
+        const backToTop = document.getElementById('backToTop');
+        const chapterContent = document.getElementById('chapterContent');
+        
+        window.addEventListener('scroll', () => {
+            // Calculate reading progress based on chapter content
+            const contentTop = chapterContent.offsetTop;
+            const contentHeight = chapterContent.offsetHeight;
+            const windowHeight = window.innerHeight;
+            const scrollY = window.scrollY;
+            
+            // Progress through the chapter content
+            const progress = Math.min(100, Math.max(0, 
+                ((scrollY - contentTop + windowHeight * 0.5) / contentHeight) * 100
+            ));
+            readingProgress.style.width = progress + '%';
+            
+            // Show/hide back to top button
+            if (scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Smooth scroll for quick nav links
+        document.querySelectorAll('.quick-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const headerOffset = 120; // Account for sticky header
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // =====================================================
+        // RESOURCE MODAL
+        // =====================================================
+        
+        const resourceModal = document.getElementById('resourceModal');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        let currentAudio = null;
+        
+        // Set up resource card click handlers
+        document.querySelectorAll('.resource-card[data-modal]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const modalType = card.dataset.modal;
+                const src = card.dataset.src;
+                const title = card.dataset.title;
+                const subtitle = card.dataset.subtitle;
+                const icon = card.dataset.icon;
+                
+                openResourceModal(modalType, src, title, subtitle, icon);
+            });
+        });
+        
+        function openResourceModal(type, src, title, subtitle, icon) {
+            modalIcon.textContent = icon;
+            modalTitle.textContent = title;
+            
+            // Clear previous content
+            modalBody.innerHTML = '';
+            
+            if (type === 'audio') {
+                modalBody.innerHTML = `
+                    <div class="modal-audio-container">
+                        <div class="modal-audio-icon">${icon}</div>
+                        <h3 class="modal-audio-title">${title}</h3>
+                        <p class="modal-audio-subtitle">${subtitle}</p>
+                        <audio class="modal-audio-player" controls autoplay id="modalAudioPlayer">
+                            <source src="${src}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <a href="${src}" class="modal-download-btn" download>
+                            ⬇ Download Audio
+                        </a>
+                    </div>
+                `;
+                currentAudio = document.getElementById('modalAudioPlayer');
+            } else if (type === 'image') {
+                modalBody.innerHTML = `
+                    <div class="modal-image-container">
+                        <img src="${src}" alt="${title}" class="modal-image">
+                        <div class="modal-image-actions">
+                            <a href="${src}" class="modal-download-btn" download>
+                                ⬇ Download Image
+                            </a>
+                            <a href="${src}" class="modal-download-btn" target="_blank">
+                                ⛶ Open Full Size
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Show modal
+            resourceModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeResourceModal() {
+            // Stop any playing audio
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+            
+            resourceModal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        
+        // Close modal on background click
+        resourceModal.addEventListener('click', (e) => {
+            if (e.target === resourceModal || e.target.classList.contains('resource-modal-bg')) {
+                closeResourceModal();
+            }
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && resourceModal.classList.contains('open')) {
+                closeResourceModal();
+            }
+        });
+        
+        // =====================================================
+        // REFLECTION STORAGE
+        // =====================================================
+        
+        const chapterId = 'chapter-01-introduction';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const saved = localStorage.getItem(`wop-reflection-${chapterId}`);
+            if (saved) {
+                const data = JSON.parse(saved);
+                const textareas = document.querySelectorAll('.step-textarea');
+                textareas[0].value = data.assess || '';
+                textareas[1].value = data.align || '';
+                textareas[2].value = data.act || '';
+            }
+        });
+        
+        function saveReflection() {
+            const textareas = document.querySelectorAll('.step-textarea');
+            const data = {
+                assess: textareas[0].value,
+                align: textareas[1].value,
+                act: textareas[2].value,
+                savedAt: new Date().toISOString()
+            };
+            localStorage.setItem(`wop-reflection-${chapterId}`, JSON.stringify(data));
+            alert('Your reflection has been saved locally.');
+        }
+        
+        function clearReflection() {
+            if (confirm('Are you sure you want to clear your reflection?')) {
+                const textareas = document.querySelectorAll('.step-textarea');
+                textareas.forEach(ta => ta.value = '');
+                localStorage.removeItem(`wop-reflection-${chapterId}`);
+            }
+        }
+        
+    </script>
+    
+    <!-- Scripture Hyperlink Generator -->
+    <script src="../../js/scripture-linker.js"></script>
+    <script>
+        // Initialize scripture linker on chapter content only
+        // (runs after DOM is ready due to script placement)
+        if (typeof ScriptureLinker !== 'undefined') {
+            ScriptureLinker.init('.chapter-content');
+        }
+    </script>
+</body>
+</html>

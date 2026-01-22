@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Words of Plainness - Brand Quick Reference</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+            color: #333;
+        }
+        
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .page {
+                box-shadow: none;
+                padding: 20px;
+                max-width: 100%;
+            }
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #C4943A;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 32px;
+            color: #1A1510;
+            margin-bottom: 5px;
+            letter-spacing: 0.05em;
+        }
+        
+        .header .tagline {
+            font-size: 14px;
+            color: #C4943A;
+            font-style: italic;
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-top: 15px;
+        }
+        
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 700px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 16px;
+            color: #C4943A;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Color Swatches */
+        .color-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .color-swatch {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .swatch {
+            height: 60px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .swatch-large {
+            height: 80px;
+        }
+        
+        .color-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .color-hex {
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            color: #666;
+        }
+        
+        /* Typography Samples */
+        .type-sample {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #1A1510;
+            border-radius: 6px;
+        }
+        
+        .type-sample-light {
+            background: #f9f7f4;
+            border: 1px solid #eee;
+        }
+        
+        .type-headline {
+            font-family: 'Crimson Pro', serif;
+            font-size: 24px;
+            color: #F5F0E6;
+            margin-bottom: 5px;
+        }
+        
+        .type-subhead {
+            font-family: 'Crimson Pro', serif;
+            font-size: 18px;
+            color: #C4943A;
+            margin-bottom: 5px;
+        }
+        
+        .type-body {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 14px;
+            color: #E8DCC4;
+            line-height: 1.6;
+        }
+        
+        .type-scripture {
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            font-size: 16px;
+            color: #E8DCC4;
+            opacity: 0.9;
+        }
+        
+        .type-cite {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            color: #C4943A;
+            margin-top: 5px;
+        }
+        
+        .type-label {
+            font-size: 11px;
+            color: #999;
+            margin-top: 8px;
+        }
+        
+        /* Font Info */
+        .font-info {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .font-card {
+            flex: 1;
+            padding: 15px;
+            background: #f9f7f4;
+            border-radius: 6px;
+            border-left: 3px solid #C4943A;
+        }
+        
+        .font-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .font-name.serif {
+            font-family: 'Crimson Pro', serif;
+        }
+        
+        .font-name.sans {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+        
+        .font-use {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        /* Buttons */
+        .button-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-sample {
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: default;
+        }
+        
+        .btn-primary {
+            background: #C4943A;
+            color: #1A1510;
+            border: none;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #E8DCC4;
+            border: 2px solid #E8DCC4;
+        }
+        
+        .btn-secondary-dark {
+            background: #2D2016;
+            color: #E8DCC4;
+            border: 2px solid #E8DCC4;
+        }
+        
+        .btn-outline-gold {
+            background: transparent;
+            color: #C4943A;
+            border: 2px solid #C4943A;
+        }
+        
+        /* Quick Reference Box */
+        .quick-ref {
+            background: #1A1510;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .quick-ref-title {
+            font-family: 'Crimson Pro', serif;
+            color: #C4943A;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .hex-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        
+        .hex-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hex-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .hex-text {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #E8DCC4;
+        }
+        
+        .hex-label {
+            font-size: 11px;
+            color: #999;
+            margin-left: auto;
+        }
+        
+        /* Icons */
+        .icon-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .icon-sample {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .icon-char {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .icon-label {
+            font-size: 10px;
+            color: #666;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+        }
+        
+        /* Full Width Section */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        /* Brand Voice */
+        .voice-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .voice-do, .voice-dont {
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .voice-do {
+            background: rgba(196, 148, 58, 0.1);
+            border-left: 3px solid #C4943A;
+        }
+        
+        .voice-dont {
+            background: rgba(107, 61, 61, 0.1);
+            border-left: 3px solid #6B3D3D;
+        }
+        
+        .voice-label {
+            font-weight: 600;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 5px;
+        }
+        
+        .voice-do .voice-label { color: #C4943A; }
+        .voice-dont .voice-label { color: #6B3D3D; }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <h1>WORDS OF PLAINNESS</h1>
+            <p class="tagline">A Christ-Centered Ministry</p>
+            <p class="subtitle">Brand Quick Reference Card</p>
+        </header>
+        
+        <div class="grid">
+            <!-- Primary Colors -->
+            <div class="section">
+                <h2 class="section-title">Primary Colors</h2>
+                <div class="color-row">
+                    <div class="color-swatch">
+                        <div class="swatch swatch-large" style="background: #C4943A;"></div>
+                        <div class="color-name">Gold Primary</div>
+                        <div class="color-hex">#C4943A</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch swatch-large" style="background: #D4A84A;"></div>
+                        <div class="color-name">Gold Light</div>
+                        <div class="color-hex">#D4A84A</div>
+                    </div>
+                </div>
+                <div class="color-row">
+                    <div class="color-swatch">
+                        <div class="swatch" style="background: #E8DCC4;"></div>
+                        <div class="color-name">Cream</div>
+                        <div class="color-hex">#E8DCC4</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch" style="background: #F5F0E6;"></div>
+                        <div class="color-name">Cream Soft</div>
+                        <div class="color-hex">#F5F0E6</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Background Colors -->
+            <div class="section">
+                <h2 class="section-title">Background Colors</h2>
+                <div class="color-row">
+                    <div class="color-swatch">
+                        <div class="swatch swatch-large" style="background: #1A1510;"></div>
+                        <div class="color-name">Deep Brown</div>
+                        <div class="color-hex">#1A1510</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch swatch-large" style="background: #2D2016;"></div>
+                        <div class="color-name">Rich Brown</div>
+                        <div class="color-hex">#2D2016</div>
+                    </div>
+                </div>
+                <div class="color-row">
+                    <div class="color-swatch">
+                        <div class="swatch" style="background: #3D2B1F;"></div>
+                        <div class="color-name">Warm Brown</div>
+                        <div class="color-hex">#3D2B1F</div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="swatch" style="background: #6B3D3D;"></div>
+                        <div class="color-name">Burgundy</div>
+                        <div class="color-hex">#6B3D3D</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Typography -->
+            <div class="section">
+                <h2 class="section-title">Typography</h2>
+                <div class="font-info">
+                    <div class="font-card">
+                        <div class="font-name serif">Crimson Pro</div>
+                        <div class="font-use">Headlines, titles, scripture quotes</div>
+                    </div>
+                    <div class="font-card">
+                        <div class="font-name sans">Source Sans Pro</div>
+                        <div class="font-use">Body text, UI elements</div>
+                    </div>
+                </div>
+                <div class="type-sample">
+                    <div class="type-headline">Headline in Crimson Pro</div>
+                    <div class="type-subhead">Section Title in Gold</div>
+                    <div class="type-body">Body text in Source Sans Pro with cream color for readability on dark backgrounds.</div>
+                    <div class="type-label">On Dark Background (#1A1510)</div>
+                </div>
+            </div>
+            
+            <!-- Scripture Style -->
+            <div class="section">
+                <h2 class="section-title">Scripture Style</h2>
+                <div class="type-sample">
+                    <div class="type-scripture">"For my soul delighteth in plainness; for after this manner doth the Lord God work among the children of men."</div>
+                    <div class="type-cite">— 2 Nephi 31:3</div>
+                    <div class="type-label">Italic Crimson Pro + Gold Citation</div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <div class="icon-row">
+                        <div class="icon-sample">
+                            <div class="icon-char">🎧</div>
+                            <div class="icon-label">Audio</div>
+                        </div>
+                        <div class="icon-sample">
+                            <div class="icon-char">📄</div>
+                            <div class="icon-label">Document</div>
+                        </div>
+                        <div class="icon-sample">
+                            <div class="icon-char">♫</div>
+                            <div class="icon-label">Music</div>
+                        </div>
+                        <div class="icon-sample">
+                            <div class="icon-char">📊</div>
+                            <div class="icon-label">Infographic</div>
+                        </div>
+                        <div class="icon-sample">
+                            <div class="icon-char">📽</div>
+                            <div class="icon-label">Slides</div>
+                        </div>
+                        <div class="icon-sample">
+                            <div class="icon-char">🔖</div>
+                            <div class="icon-label">Bookmark</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="section">
+                <h2 class="section-title">Buttons & UI</h2>
+                <div class="button-row">
+                    <span class="btn-sample btn-primary">Primary Action</span>
+                    <span class="btn-sample btn-outline-gold">Outline Gold</span>
+                </div>
+                <div class="button-row" style="background: #2D2016; padding: 15px; border-radius: 6px;">
+                    <span class="btn-sample btn-primary">Primary</span>
+                    <span class="btn-sample btn-secondary">Secondary</span>
+                </div>
+                <div style="margin-top: 15px; font-size: 12px; color: #666;">
+                    <strong>Border Radius:</strong> 4-6px (buttons), 8-12px (cards), 20-30px (pills)
+                </div>
+            </div>
+            
+            <!-- Brand Voice -->
+            <div class="section">
+                <h2 class="section-title">Brand Voice</h2>
+                <div class="voice-grid">
+                    <div class="voice-do">
+                        <div class="voice-label">✓ Do</div>
+                        Warm & inviting<br>
+                        Scholarly but accessible<br>
+                        Confident yet humble<br>
+                        Christ-centered
+                    </div>
+                    <div class="voice-dont">
+                        <div class="voice-label">✗ Don't</div>
+                        Cold or institutional<br>
+                        Academic jargon<br>
+                        Defensive or argumentative<br>
+                        Denomination-focused
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Reference -->
+            <div class="section full-width">
+                <div class="quick-ref">
+                    <h3 class="quick-ref-title">Copy & Paste Hex Codes</h3>
+                    <div class="hex-list">
+                        <div class="hex-item">
+                            <span class="hex-dot" style="background: #C4943A;"></span>
+                            <span class="hex-text">#C4943A</span>
+                            <span class="hex-label">Gold Primary</span>
+                        </div>
+                        <div class="hex-item">
+                            <span class="hex-dot" style="background: #D4A84A;"></span>
+                            <span class="hex-text">#D4A84A</span>
+                            <span class="hex-label">Gold Light</span>
+                        </div>
+                        <div class="hex-item">
+                            <span class="hex-dot" style="background: #E8DCC4;"></span>
+                            <span class="hex-text">#E8DCC4</span>
+                            <span class="hex-label">Cream</span>
+                        </div>
+                        <div class="hex-item">
+                            <span class="hex-dot" style="background: #F5F0E6;"></span>
+                            <span class="hex-text">#F5F0E6</span>
+                            <span class="hex-label">Cream Soft</span>
+                        </div>
+                        <div class="hex-item">
+                            <span class="hex-dot" style="background: #1A1510;"></span>
+                            <span class="hex-text">#1A1510</span>
+                            <span class="hex-label">Deep Brown</span>
+                        </div>
+                        <div class="hex-item">
+                            <span class="hex-dot" style="background: #2D2016;"></span>
+                            <span class="hex-text">#2D2016</span>
+                            <span class="hex-label">Rich Brown</span>
+                        </div>
+                        <div class="hex-item">
+                            <span class="hex-dot" style="background: #3D2B1F;"></span>
+                            <span class="hex-text">#3D2B1F</span>
+                            <span class="hex-label">Warm Brown</span>
+                        </div>
+                        <div class="hex-item">
+                            <span class="hex-dot" style="background: #6B3D3D;"></span>
+                            <span class="hex-text">#6B3D3D</span>
+                            <span class="hex-label">Burgundy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            Words of Plainness Ministry • Brother Aaron Powner • brotheraaron.org<br>
+            <em>"Where Seekers and Saints Find Common Ground"</em>
+        </footer>
+    </div>
+</body>
+</html>
