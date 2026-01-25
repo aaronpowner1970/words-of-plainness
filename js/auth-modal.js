@@ -57,8 +57,8 @@ const AuthModal = (function() {
                     <div class="auth-panel active" id="loginPanel">
                         <form id="loginForm" novalidate>
                             <div class="auth-form-group">
-                                <label for="loginUsername">Username</label>
-                                <input type="text" id="loginUsername" name="username" placeholder="Your username" required>
+                                <label for="loginUsername">Username or Email</label>
+                                <input type="text" id="loginUsername" name="username" placeholder="Enter username or email" required>
                                 <div class="auth-form-error" id="loginUsernameError"></div>
                             </div>
                             <div class="auth-form-group">
@@ -292,8 +292,11 @@ const AuthModal = (function() {
         try {
             await WoPAPI.login({ username, password });
             showSuccessMessage('Welcome back! Signing you in...');
+            // Explicitly update UI after successful login
+            updateAuthUI();
             setTimeout(() => {
                 close();
+                updateAuthUI(); // Update again after modal closes
                 window.dispatchEvent(new CustomEvent('wop:auth:ready'));
             }, 1000);
         } catch (error) {
@@ -363,8 +366,11 @@ const AuthModal = (function() {
         try {
             await WoPAPI.register({ username, display_name, email, password, password_confirm });
             showSuccessMessage('Account created! Welcome to Words of Plainness.');
+            // Explicitly update UI after successful registration
+            updateAuthUI();
             setTimeout(() => {
                 close();
+                updateAuthUI(); // Update again after modal closes
                 window.dispatchEvent(new CustomEvent('wop:auth:ready'));
             }, 1500);
         } catch (error) {
@@ -388,7 +394,10 @@ const AuthModal = (function() {
         if (userMenu) userMenu.classList.remove('open');
 
         await WoPAPI.logout();
+        // Explicitly update UI after logout
         updateAuthUI();
+        // Force page elements to update
+        setTimeout(updateAuthUI, 100);
     }
 
     // =====================================================
@@ -454,16 +463,22 @@ const AuthModal = (function() {
         const isLoggedIn = WoPAPI.isAuthenticated();
         const user = WoPAPI.getStoredUser();
 
+        console.log('[AuthModal] updateAuthUI called, isLoggedIn:', isLoggedIn, 'user:', user);
+
         // Desktop nav
         const authButtonsLoggedOut = document.querySelector('.nav-auth-buttons');
         const userMenu = document.querySelector('.user-menu');
 
+        console.log('[AuthModal] Found elements - authButtons:', !!authButtonsLoggedOut, 'userMenu:', !!userMenu);
+
         if (authButtonsLoggedOut) {
             authButtonsLoggedOut.style.display = isLoggedIn ? 'none' : 'flex';
+            console.log('[AuthModal] Set authButtons display to:', authButtonsLoggedOut.style.display);
         }
 
         if (userMenu) {
             userMenu.classList.toggle('visible', isLoggedIn);
+            console.log('[AuthModal] Set userMenu visible class:', userMenu.classList.contains('visible'));
 
             if (isLoggedIn && user) {
                 const avatar = userMenu.querySelector('.user-avatar');
