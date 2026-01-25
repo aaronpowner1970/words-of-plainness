@@ -74,6 +74,12 @@ const AuthModal = (function() {
                     <div class="auth-panel" id="registerPanel">
                         <form id="registerForm" novalidate>
                             <div class="auth-form-group">
+                                <label for="registerUsername">Username</label>
+                                <input type="text" id="registerUsername" name="username" placeholder="Choose a username" required minlength="3">
+                                <div class="auth-form-helper">Letters, numbers, and underscores only</div>
+                                <div class="auth-form-error" id="registerUsernameError"></div>
+                            </div>
+                            <div class="auth-form-group">
                                 <label for="registerDisplayName">Display Name</label>
                                 <input type="text" id="registerDisplayName" name="display_name" placeholder="How should we call you?" required>
                                 <div class="auth-form-helper">This will be shown with your public reflections</div>
@@ -309,6 +315,7 @@ const AuthModal = (function() {
         const form = e.target;
         const btn = form.querySelector('.auth-submit-btn');
 
+        const username = form.username.value.trim();
         const display_name = form.display_name.value.trim();
         const email = form.email.value.trim();
         const password = form.password.value;
@@ -317,6 +324,13 @@ const AuthModal = (function() {
 
         // Validation
         let valid = true;
+        if (!username) {
+            showFieldError('registerUsername', 'Username is required');
+            valid = false;
+        } else if (username.length < 3) {
+            showFieldError('registerUsername', 'Username must be at least 3 characters');
+            valid = false;
+        }
         if (!display_name) {
             showFieldError('registerDisplayName', 'Display name is required');
             valid = false;
@@ -347,7 +361,7 @@ const AuthModal = (function() {
         btn.disabled = true;
 
         try {
-            await WoPAPI.register({ display_name, email, password, password_confirm });
+            await WoPAPI.register({ username, display_name, email, password, password_confirm });
             showSuccessMessage('Account created! Welcome to Words of Plainness.');
             setTimeout(() => {
                 close();
@@ -358,6 +372,7 @@ const AuthModal = (function() {
 
             // Show field-specific errors
             if (error.errors) {
+                if (error.errors.username) showFieldError('registerUsername', error.errors.username);
                 if (error.errors.display_name) showFieldError('registerDisplayName', error.errors.display_name);
                 if (error.errors.email) showFieldError('registerEmail', error.errors.email);
                 if (error.errors.password) showFieldError('registerPassword', error.errors.password);
