@@ -57,9 +57,9 @@ const AuthModal = (function() {
                     <div class="auth-panel active" id="loginPanel">
                         <form id="loginForm" novalidate>
                             <div class="auth-form-group">
-                                <label for="loginEmail">Email</label>
-                                <input type="email" id="loginEmail" name="email" placeholder="your@email.com" required>
-                                <div class="auth-form-error" id="loginEmailError"></div>
+                                <label for="loginUsername">Username</label>
+                                <input type="text" id="loginUsername" name="username" placeholder="Your username" required>
+                                <div class="auth-form-error" id="loginUsernameError"></div>
                             </div>
                             <div class="auth-form-group">
                                 <label for="loginPassword">Password</label>
@@ -270,13 +270,13 @@ const AuthModal = (function() {
         const form = e.target;
         const btn = form.querySelector('.auth-submit-btn');
 
-        const email = form.email.value.trim();
+        const username = form.username.value.trim();
         const password = form.password.value;
 
         // Validation
         let valid = true;
-        if (!email) {
-            showFieldError('loginEmail', 'Email is required');
+        if (!username) {
+            showFieldError('loginUsername', 'Username is required');
             valid = false;
         }
         if (!password) {
@@ -290,18 +290,18 @@ const AuthModal = (function() {
         btn.disabled = true;
 
         try {
-            await WoPAPI.login({ email, password });
+            await WoPAPI.login({ username, password });
             showSuccessMessage('Welcome back! Signing you in...');
             setTimeout(() => {
                 close();
                 window.dispatchEvent(new CustomEvent('wop:auth:ready'));
             }, 1000);
         } catch (error) {
-            showGlobalError(error.message || 'Invalid email or password');
+            showGlobalError(error.message || 'Invalid username or password');
 
             // Show field-specific errors if available
             if (error.errors) {
-                if (error.errors.email) showFieldError('loginEmail', error.errors.email);
+                if (error.errors.username) showFieldError('loginUsername', error.errors.username);
                 if (error.errors.password) showFieldError('loginPassword', error.errors.password);
             }
         } finally {
