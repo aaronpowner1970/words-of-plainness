@@ -9,7 +9,8 @@ const WoPAPI = (function() {
 
     // Configuration
     const API_BASE = 'https://apowner.pythonanywhere.com/api/v1';
-    const TOKEN_KEY = 'wop_auth_token';
+    const ACCESS_TOKEN_KEY = 'wop_access_token';
+    const REFRESH_TOKEN_KEY = 'wop_refresh_token';
     const USER_KEY = 'wop_user_data';
 
     // =====================================================
@@ -17,14 +18,24 @@ const WoPAPI = (function() {
     // =====================================================
 
     function getToken() {
-        return localStorage.getItem(TOKEN_KEY);
+        return localStorage.getItem(ACCESS_TOKEN_KEY);
     }
 
-    function setToken(token) {
-        if (token) {
-            localStorage.setItem(TOKEN_KEY, token);
+    function getRefreshToken() {
+        return localStorage.getItem(REFRESH_TOKEN_KEY);
+    }
+
+    function setTokens(access, refresh) {
+        console.log('[WoPAPI] setTokens called with access:', !!access, 'refresh:', !!refresh);
+        if (access) {
+            localStorage.setItem(ACCESS_TOKEN_KEY, access);
         } else {
-            localStorage.removeItem(TOKEN_KEY);
+            localStorage.removeItem(ACCESS_TOKEN_KEY);
+        }
+        if (refresh) {
+            localStorage.setItem(REFRESH_TOKEN_KEY, refresh);
+        } else {
+            localStorage.removeItem(REFRESH_TOKEN_KEY);
         }
     }
 
@@ -59,7 +70,7 @@ const WoPAPI = (function() {
         };
 
         if (token) {
-            headers['Authorization'] = `Token ${token}`;
+            headers['Authorization'] = `Bearer ${token}`;
         }
 
         const config = {
@@ -124,7 +135,7 @@ const WoPAPI = (function() {
     }
 
     function clearAuth() {
-        setToken(null);
+        setTokens(null, null);
         setStoredUser(null);
     }
 
@@ -137,39 +148,50 @@ const WoPAPI = (function() {
      * POST /accounts/register/
      */
     async function register(data) {
+        console.log('[WoPAPI] register called with:', data);
         const result = await request('/accounts/register/', {
             method: 'POST',
             body: data
         });
 
-        if (result.token) {
-            setToken(result.token);
+        console.log('[WoPAPI] register response:', result);
+
+        // API returns { access, refresh, user }
+        if (result.access) {
+            setTokens(result.access, result.refresh);
         }
         if (result.user) {
             setStoredUser(result.user);
         }
 
+        console.log('[WoPAPI] After register - isAuthenticated:', isAuthenticated());
         window.dispatchEvent(new CustomEvent('wop:auth:login', { detail: result.user }));
         return result;
     }
 
     /**
-     * Login with email and password
+     * Login with username and password
      * POST /accounts/login/
+     * API returns: { access, refresh, user }
      */
     async function login(data) {
+        console.log('[WoPAPI] login called with:', data);
         const result = await request('/accounts/login/', {
             method: 'POST',
             body: data
         });
 
-        if (result.token) {
-            setToken(result.token);
+        console.log('[WoPAPI] login response:', result);
+
+        // API returns { access, refresh, user }
+        if (result.access) {
+            setTokens(result.access, result.refresh);
         }
         if (result.user) {
             setStoredUser(result.user);
         }
 
+        console.log('[WoPAPI] After login - isAuthenticated:', isAuthenticated());
         window.dispatchEvent(new CustomEvent('wop:auth:login', { detail: result.user }));
         return result;
     }
