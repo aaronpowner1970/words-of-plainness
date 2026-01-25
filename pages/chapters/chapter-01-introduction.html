@@ -9,8 +9,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23C4943A'/></svg>">
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../../assets/favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="../../assets/favicons/favicon-48x48.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="../../assets/favicons/site.webmanifest">
+    <meta name="theme-color" content="#C4943A">
     <link rel="stylesheet" href="../../css/styles.css?v=3">
+    <link rel="stylesheet" href="../../css/auth-modal.css">
     <style>
         /* Base layout - ensure proper centering */
         html, body {
@@ -1437,8 +1445,11 @@
     <header class="header">
         <div class="header-inner">
             <a href="../../index.html" class="logo">
-                <span class="logo-title">WORDS OF PLAINNESS</span>
-                <span class="logo-subtitle">A Christ-Centered Ministry</span>
+                <img src="../../assets/favicons/lantern-icon-64.png" alt="" class="header-lantern" width="54" height="54">
+                <span class="logo-text">
+                    <span class="logo-title">WORDS OF PLAINNESS</span>
+                    <span class="logo-subtitle">A Christ-Centered Ministry</span>
+                </span>
             </a>
             
             <nav class="nav-desktop">
@@ -1450,6 +1461,30 @@
                     <li><a href="../about.html">About</a></li>
                 </ul>
                 <a href="../new-here.html" class="btn-new-here">New Here?</a>
+
+                <!-- Auth Buttons (shown when logged out) -->
+                <div class="nav-auth-buttons">
+                    <button class="btn-sign-in">Sign In</button>
+                    <button class="btn-join-free">Join Free</button>
+                </div>
+
+                <!-- User Menu (shown when logged in) -->
+                <div class="user-menu">
+                    <button class="user-menu-toggle">
+                        <span class="user-avatar">?</span>
+                        <span class="user-display-name">User</span>
+                        <span class="user-menu-arrow">&#9660;</span>
+                    </button>
+                    <div class="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <p class="user-dropdown-name">User</p>
+                            <p class="user-dropdown-email">user@email.com</p>
+                        </div>
+                        <button class="user-dropdown-item" data-action="logout">
+                            Sign Out
+                        </button>
+                    </div>
+                </div>
             </nav>
             
             <button class="nav-toggle" aria-label="Toggle navigation menu">
@@ -1464,8 +1499,11 @@
     <nav class="mobile-menu" aria-label="Mobile navigation">
         <div class="mobile-menu-header">
             <div class="logo">
-                <span class="logo-title">WORDS OF PLAINNESS</span>
-                <span class="logo-subtitle">A Christ-Centered Ministry</span>
+                <img src="../../assets/favicons/lantern-icon-64.png" alt="" class="header-lantern" width="54" height="54">
+                <span class="logo-text">
+                    <span class="logo-title">WORDS OF PLAINNESS</span>
+                    <span class="logo-subtitle">A Christ-Centered Ministry</span>
+                </span>
             </div>
             <button class="mobile-menu-close" aria-label="Close menu">×</button>
         </div>
@@ -1478,6 +1516,24 @@
             <li><a href="../about.html">About</a></li>
             <li><a href="../channels.html">Other Channels</a></li>
         </ul>
+
+        <!-- Mobile Auth Buttons (shown when logged out) -->
+        <div class="mobile-auth-buttons">
+            <button class="btn-sign-in">Sign In</button>
+            <button class="btn-join-free">Join Free</button>
+        </div>
+
+        <!-- Mobile User Info (shown when logged in) -->
+        <div class="mobile-user-info">
+            <div class="mobile-user-header">
+                <span class="user-avatar">?</span>
+                <div class="mobile-user-details">
+                    <span class="name">User</span>
+                    <span class="email">user@email.com</span>
+                </div>
+            </div>
+            <button class="mobile-logout-btn" data-action="logout">Sign Out</button>
+        </div>
     </nav>
     
     <!-- Table of Contents Toggle -->
@@ -2000,13 +2056,13 @@
         <section class="reflection-section" id="reflection">
             <div class="reflection-container">
                 <h2 class="section-title">Engage</h2>
-                
+
                 <div class="reflection-card">
                     <div class="reflection-intro">
                         <h3>Personal Reflection</h3>
                         <p>Take a few moments to ponder and record your thoughts on this chapter's themes.</p>
                     </div>
-                    
+
                     <div class="reflection-step">
                         <div class="step-header">
                             <span class="step-number">1</span>
@@ -2015,7 +2071,7 @@
                         <p class="step-prompt">What am I currently searching for in my life? How does my search for truth, meaning, and lasting happiness compare to what the authors describe?</p>
                         <textarea class="step-textarea" placeholder="Reflect on your current search for truth and meaning..."></textarea>
                     </div>
-                    
+
                     <div class="reflection-step">
                         <div class="step-header">
                             <span class="step-number">2</span>
@@ -2024,7 +2080,7 @@
                         <p class="step-prompt">What feelings arose as I read about the authors' witness of Christ? What deeper understanding am I seeking about my relationship with God?</p>
                         <textarea class="step-textarea" placeholder="What deeper understanding are you seeking?"></textarea>
                     </div>
-                    
+
                     <div class="reflection-step">
                         <div class="step-header">
                             <span class="step-number">3</span>
@@ -2033,13 +2089,30 @@
                         <p class="step-prompt">What specific action will I take this week to search for truth with an open heart and mind?</p>
                         <textarea class="step-textarea" placeholder="One specific action I will take..."></textarea>
                     </div>
-                    
-                    <div class="reflection-actions">
-                        <button class="btn btn-primary" onclick="saveReflection()">Save My Reflection</button>
-                        <button class="btn btn-secondary" onclick="clearReflection()">Clear</button>
+
+                    <!-- Public sharing option (visible when logged in) -->
+                    <div id="reflectionPublicOption">
+                        <input type="checkbox" id="reflectionPublic" name="is_public">
+                        <label for="reflectionPublic">Share publicly with the community</label>
                     </div>
-                    
+
+                    <div class="reflection-actions">
+                        <button class="btn btn-primary" onclick="ReflectionsManager.saveReflection()">Save My Reflection</button>
+                        <span id="saveStatus" class="save-status"></span>
+                        <button class="btn btn-secondary" onclick="ReflectionsManager.clearReflection()">Clear</button>
+                    </div>
+
                     <p class="reflection-note">Your reflections are saved locally in your browser and are not shared.</p>
+
+                    <!-- Community Reflections Section -->
+                    <div class="community-reflections-section" id="communitySection">
+                        <div class="community-reflections-header">
+                            <h4>Community Reflections</h4>
+                        </div>
+                        <div id="communityReflections">
+                            <!-- Populated by ReflectionsManager -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2160,7 +2233,7 @@
     
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-lantern"></div>
+        <img src="../../assets/favicons/lantern-icon-64.png" alt="Lantern" class="footer-lantern" width="64" height="64">
         <p class="footer-tagline">Where Seekers and Saints Find Common Ground</p>
         <p class="footer-name">Brother Aaron Powner</p>
         <div class="footer-links">
@@ -3064,42 +3137,27 @@
         });
         
         // =====================================================
-        // REFLECTION STORAGE
+        // REFLECTION STORAGE (Now handled by ReflectionsManager)
         // =====================================================
-        
+
         const chapterId = 'chapter-01-introduction';
-        
+
+        // Initialize ReflectionsManager when API modules are loaded
         document.addEventListener('DOMContentLoaded', function() {
-            const saved = localStorage.getItem(`wop-reflection-${chapterId}`);
-            if (saved) {
-                const data = JSON.parse(saved);
-                const textareas = document.querySelectorAll('.step-textarea');
-                textareas[0].value = data.assess || '';
-                textareas[1].value = data.align || '';
-                textareas[2].value = data.act || '';
-            }
+            // ReflectionsManager will be initialized after the API scripts load
         });
-        
-        function saveReflection() {
-            const textareas = document.querySelectorAll('.step-textarea');
-            const data = {
-                assess: textareas[0].value,
-                align: textareas[1].value,
-                act: textareas[2].value,
-                savedAt: new Date().toISOString()
-            };
-            localStorage.setItem(`wop-reflection-${chapterId}`, JSON.stringify(data));
-            alert('Your reflection has been saved locally.');
-        }
-        
-        function clearReflection() {
-            if (confirm('Are you sure you want to clear your reflection?')) {
-                const textareas = document.querySelectorAll('.step-textarea');
-                textareas.forEach(ta => ta.value = '');
-                localStorage.removeItem(`wop-reflection-${chapterId}`);
-            }
-        }
-        
+
+    </script>
+
+    <!-- API Integration Modules -->
+    <script src="../../js/api.js"></script>
+    <script src="../../js/auth-modal.js"></script>
+    <script src="../../js/reflections-integration.js"></script>
+    <script>
+        // Initialize ReflectionsManager for this chapter
+        document.addEventListener('DOMContentLoaded', function() {
+            ReflectionsManager.init('chapter-01-introduction');
+        });
     </script>
     
     <!-- Scripture Hyperlink Generator -->
