@@ -1,0 +1,101 @@
+{# Modals for Study Resources #}
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop" id="modalBackdrop"></div>
+
+<!-- Audio Overview Modal -->
+<div class="modal" id="overviewModal" role="dialog" aria-labelledby="overviewTitle" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="overviewTitle">Chapter Overview</h3>
+            <button class="modal-close" data-modal-close aria-label="Close modal">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-description">A 5-minute audio summary of this chapter's key themes and insights.</p>
+            <audio controls class="modal-audio" id="overviewAudio">
+                <source src="/assets/audio/{{ audio.overview }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+</div>
+
+<!-- Musical Testimony Modal -->
+<div class="modal" id="testimonyModal" role="dialog" aria-labelledby="testimonyTitle" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="testimonyTitle">Musical Testimony</h3>
+            <button class="modal-close" data-modal-close aria-label="Close modal">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-description">An original song inspired by the themes of this chapter.</p>
+            <audio controls class="modal-audio" id="testimonyAudio">
+                <source src="/assets/audio/{{ audio.testimony }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+</div>
+
+<!-- Infographic Modal -->
+<div class="modal modal-large" id="infographicModal" role="dialog" aria-labelledby="infographicTitle" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="infographicTitle">Visual Summary</h3>
+            <button class="modal-close" data-modal-close aria-label="Close modal">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <img src="/assets/images/{{ infographic }}" alt="Chapter {{ chapter }} visual summary" class="modal-image">
+        </div>
+    </div>
+</div>
+
+<!-- Slides Carousel Modal -->
+<div class="modal modal-large" id="slidesModal" role="dialog" aria-labelledby="slidesTitle" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="slidesTitle">Study Slides</h3>
+            <button class="modal-close" data-modal-close aria-label="Close modal">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="slides-carousel" id="slidesCarousel">
+                <button class="slide-nav prev" id="slidePrev" aria-label="Previous slide">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div class="slide-container">
+                    <img id="currentSlide" src="" alt="Study slide" class="slide-image">
+                </div>
+                <button class="slide-nav next" id="slideNext" aria-label="Next slide">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <div class="slide-counter">
+                <span id="slideCurrentNum">1</span> / <span id="slideTotalNum">{{ slides.count or 10 }}</span>
+            </div>
+        </div>
+    </div>
+</div>

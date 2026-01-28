@@ -1,0 +1,102 @@
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+{% endblock %}
+
+{% block content %}
+<!-- Reading Progress Bar -->
+<div class="reading-progress" id="readingProgress"></div>
+
+<!-- Floating Action Bar (v3.0) -->
+{% include "components/floating-action-bar.njk" %}
+
+<!-- Resume Prompt -->
+{% include "components/resume-prompt.njk" %}
+
+<!-- Mobile TOC Panel -->
+{% include "components/toc-mobile.njk" %}
+
+<!-- Chapter Hero Section -->
+<section class="chapter-hero">
+    <p class="chapter-number">Chapter {{ chapter }}</p>
+    <h1 class="chapter-title">{{ title }}</h1>
+    <blockquote class="chapter-scripture">
+        "{{ scripture.text }}"
+        <cite>— <a href="https://www.churchofjesuschrist.org/study/scriptures/{{ scripture.url }}" target="_blank" rel="noopener">{{ scripture.reference }}</a></cite>
+    </blockquote>
+    <p class="chapter-meta">{{ readingTime | readingTime }}</p>
+</section>
+
+<!-- Main Layout: TOC Sidebar + Content -->
+<div class="chapter-layout">
+    <!-- Desktop TOC Sidebar -->
+    {% include "components/toc-sidebar.njk" %}
+    
+    <!-- Chapter Content -->
+    <article class="chapter-content" id="chapterContent">
+        {{ content | safe }}
+    </article>
+</div>
+
+<!-- Study Resources Section -->
+{% include "components/study-resources.njk" %}
+
+<!-- Reflection Section -->
+{% include "components/reflection-section.njk" %}
+
+<!-- Discord Community Section -->
+{% include "components/discord-section.njk" %}
+
+<!-- Chapter Navigation (Prev/Next) -->
+{% include "components/chapter-nav.njk" %}
+
+<!-- Audio Player (hidden until activated) -->
+{% include "components/audio-player.njk" %}
+
+<!-- Bottom Toolbar -->
+{% include "components/bottom-toolbar.njk" %}
+
+<!-- Back to Top Button -->
+{% include "components/back-to-top.njk" %}
+
+<!-- Mobile FAB (Lantern Icon) -->
+{% include "components/fab-lantern.njk" %}
+
+<!-- Modals (Overview, Testimony, Infographic, Slides) -->
+{% include "components/modals.njk" %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/chapter.js"></script>
+<script src="/js/audio-sync.js"></script>
+<script src="/js/reflections.js"></script>
+<script>
+    // Chapter-specific configuration
+    // Timestamps are loaded from src/_data/timestamps/{{ chapterId }}.json
+    {% set chapterTimestamps = timestamps[chapterId] or {} %}
+    
+    const CHAPTER_CONFIG = {
+        id: '{{ chapterId }}',
+        number: {{ chapter }},
+        title: '{{ title }}',
+        audioFile: '/assets/audio/{{ audio.narration }}',
+        overviewFile: '/assets/audio/{{ audio.overview }}',
+        testimonyFile: '/assets/audio/{{ audio.testimony }}',
+        pdfFile: '/assets/pdf/{{ pdf }}',
+        infographicFile: '/assets/images/{{ infographic }}',
+        slidesPath: '/assets/slides/{{ slides.path }}/',
+        totalSlides: {{ slides.count or 10 }},
+        discordChannelId: '{{ discordChannelId }}',
+        timestamps: {{ chapterTimestamps | json | safe }}
+    };
+    
+    // Initialize chapter functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof ChapterManager !== 'undefined') {
+            ChapterManager.init(CHAPTER_CONFIG);
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,124 @@
+/**
+ * WORDS OF PLAINNESS - Chapter Styles
+ * ====================================
+ * 
+ * This stylesheet will contain all chapter-specific styles extracted
+ * from the existing Chapter 1 HTML during Phase 2: Component Extraction.
+ * 
+ * The existing embedded <style> block in chapter-01-introduction.html
+ * will be extracted and organized here.
+ * 
+ * Sections to include:
+ * - Reading progress bar
+ * - Floating action bar (v3.0)
+ * - Chapter hero section
+ * - Chapter content layout
+ * - Table of contents (desktop + mobile)
+ * - Audio player
+ * - Study resources grid
+ * - Reflection section
+ * - Discord section
+ * - Chapter navigation
+ * - Bottom toolbar
+ * - Back to top button
+ * - Mobile FAB
+ * - Modals
+ * - Resume prompt
+ * - Sentence highlighting for audio sync
+ * - Responsive breakpoints
+ */
+
+/* =========================================
+   PLACEHOLDER - Phase 2 extraction pending
+   ========================================= */
+
+/* Reading Progress Bar */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--gold-primary, #C4943A);
+    z-index: 1000;
+    transition: width 0.1s ease;
+}
+
+/* Chapter Hero */
+.chapter-hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--cream, #E8DCC4);
+}
+
+.chapter-number {
+    font-family: 'Source Sans Pro', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold-primary, #C4943A);
+    margin-bottom: 0.5rem;
+}
+
+.chapter-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: 2.5rem;
+    color: var(--deep-brown, #3D2B1F);
+    margin-bottom: 1.5rem;
+}
+
+.chapter-scripture {
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+    color: var(--rich-brown, #2A1D14);
+}
+
+/* Chapter Layout */
+.chapter-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .chapter-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .toc-sidebar {
+        display: none;
+    }
+}
+
+/* Chapter Content */
+.chapter-content {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--rich-brown, #2A1D14);
+}
+
+/* Sentence highlighting for audio sync */
+.sentence {
+    transition: background-color 0.3s ease;
+}
+
+.sentence.highlighted {
+    background-color: rgba(196, 148, 58, 0.2);
+}
+
+.sentence.clickable {
+    cursor: pointer;
+}
+
+.sentence.clickable:hover {
+    background-color: rgba(196, 148, 58, 0.1);
+}
+
+/* 
+ * Additional styles will be extracted from the existing
+ * chapter-01-introduction.html during Phase 2.
+ */

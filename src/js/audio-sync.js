@@ -1,0 +1,132 @@
+/**
+ * WORDS OF PLAINNESS - Audio Synchronization
+ * ==========================================
+ * 
+ * Handles sentence-level highlighting synchronized with audio playback.
+ * Uses timestamps data provided by the chapter template.
+ */
+
+const AudioSync = {
+    timestamps: {},
+    audioPlayer: null,
+    sentences: [],
+    currentSentence: -1,
+    autoScrollEnabled: true,
+    
+    /**
+     * Initialize audio sync
+     * @param {Object} timestamps - Sentence index to time mapping
+     * @param {HTMLAudioElement} audioPlayer - Audio element
+     */
+    init(timestamps, audioPlayer) {
+        this.timestamps = timestamps || {};
+        this.audioPlayer = audioPlayer;
+        this.sentences = document.querySelectorAll('.sentence[data-index]');
+        
+        if (!this.audioPlayer || Object.keys(this.timestamps).length === 0) {
+            console.log('AudioSync: No timestamps or audio player');
+            return;
+        }
+        
+        this.setupEventListeners();
+        this.makeClickable();
+        
+        console.log(`AudioSync initialized with ${this.sentences.length} sentences`);
+    },
+    
+    setupEventListeners() {
+        this.audioPlayer.addEventListener('timeupdate', () => this.onTimeUpdate());
+        this.audioPlayer.addEventListener('ended', () => this.clearHighlight());
+        this.audioPlayer.addEventListener('pause', () => this.onPause());
+    },
+    
+    makeClickable() {
+        this.sentences.forEach(sentence => {
+            sentence.classList.add('clickable');
+            sentence.addEventListener('click', () => this.onSentenceClick(sentence));
+        });
+    },
+    
+    onTimeUpdate() {
+        const currentTime = this.audioPlayer.currentTime;
+        const sentenceIndex = this.getSentenceAtTime(currentTime);
+        
+        if (sentenceIndex !== this.currentSentence) {
+            this.highlightSentence(sentenceIndex);
+            this.currentSentence = sentenceIndex;
+        }
+    },
+    
+    getSentenceAtTime(time) {
+        let lastSentence = -1;
+        
+        // Find the sentence whose timestamp is <= current time
+        for (const [index, timestamp] of Object.entries(this.timestamps)) {
+            if (timestamp <= time) {
+                lastSentence = parseInt(index);
+            } else {
+                break;
+            }
+        }
+        
+        return lastSentence;
+    },
+    
+    highlightSentence(index) {
+        // Remove previous highlight
+        this.clearHighlight();
+        
+        // Add new highlight
+        const sentence = document.querySelector(`.sentence[data-index="${index}"]`);
+        if (sentence) {
+            sentence.classList.add('highlighted');
+            
+            if (this.autoScrollEnabled) {
+                this.scrollToSentence(sentence);
+            }
+        }
+    },
+    
+    clearHighlight() {
+        this.sentences.forEach(s => s.classList.remove('highlighted'));
+    },
+    
+    scrollToSentence(sentence) {
+        const rect = sentence.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        
+        // Only scroll if sentence is not in the middle third of viewport
+        if (rect.top < viewportHeight * 0.3 || rect.bottom > viewportHeight * 0.7) {
+            sentence.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+    },
+    
+    onSentenceClick(sentence) {
+        const index = parseInt(sentence.dataset.index);
+        const timestamp = this.timestamps[index];
+        
+        if (timestamp !== undefined && this.audioPlayer) {
+            this.audioPlayer.currentTime = timestamp;
+            
+            // Start playing if paused
+            if (this.audioPlayer.paused) {
+                this.audioPlayer.play();
+            }
+        }
+    },
+    
+    onPause() {
+        // Optionally keep highlight visible when paused
+    },
+    
+    toggleAutoScroll() {
+        this.autoScrollEnabled = !this.autoScrollEnabled;
+        return this.autoScrollEnabled;
+    }
+};
+
+// Export
+window.AudioSync = AudioSync;

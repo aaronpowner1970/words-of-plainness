@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description | default(site.description) }}">
+    <title>{{ title }}{% if title %} | {% endif %}{{ site.name }}</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicons/favicon-48x48.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/favicons/site.webmanifest">
+    <meta name="theme-color" content="#C4943A">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css?v={{ site.version }}">
+    <link rel="stylesheet" href="/css/auth-modal.css">
+    {% block styles %}{% endblock %}
+</head>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    {% include "partials/header.njk" %}
+    {% include "partials/mobile-menu.njk" %}
+    
+    <main id="main-content">
+        {% block content %}
+        {{ content | safe }}
+        {% endblock %}
+    </main>
+    
+    {% include "partials/footer.njk" %}
+    
+    <!-- Core Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth-modal.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
