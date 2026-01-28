@@ -2997,18 +2997,26 @@
         
         // Highlight current sentence
         function highlightSentence(index) {
-            document.querySelectorAll('.sentence').forEach((el, i) => {
-                const elIndex = parseInt(el.dataset.index);
+            // Remove previous highlights
+            document.querySelectorAll('.sentence.active').forEach(el => {
                 el.classList.remove('active');
-                if (elIndex < index) {
-                    el.classList.add('read');
-                } else if (elIndex === index) {
-                    el.classList.add('active');
-                    if (autoscrollEnabled) {
-                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                }
+                el.classList.add('read');
             });
+
+            // Add highlight to current sentence
+            const currentSentence = document.querySelector(`.sentence[data-index="${index}"]`);
+            if (currentSentence) {
+                currentSentence.classList.add('active');
+                currentSentence.classList.remove('read');
+
+                // Autoscroll if enabled
+                if (autoscrollToggle && autoscrollToggle.checked) {
+                    currentSentence.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
         }
         
         // Update progress and sync sentences
