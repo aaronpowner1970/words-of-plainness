@@ -3018,24 +3018,35 @@
                 }
             }
         }
-        
+
+        function findCurrentSentence(currentTime) {
+            for (let i = 0; i < sentenceTimestamps.length; i++) {
+                const ts = sentenceTimestamps[i];
+                if (currentTime >= ts.start && currentTime < ts.end) {
+                    return ts.index;
+                }
+            }
+            return -1;
+        }
+
         // Update progress and sync sentences
         audio.addEventListener('timeupdate', () => {
+            // Update progress bar (only if duration is available)
             if (audio.duration) {
                 const percent = (audio.currentTime / audio.duration) * 100;
                 progressFill.style.width = percent + '%';
                 timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-                lastKnownTime = audio.currentTime;
-                
-                // Find current sentence
-                for (let i = sentenceTimestamps.length - 1; i >= 0; i--) {
-                    if (audio.currentTime >= sentenceTimestamps[i].start) {
-                        if (currentSentenceIndex !== sentenceTimestamps[i].index) {
-                            currentSentenceIndex = sentenceTimestamps[i].index;
-                            highlightSentence(currentSentenceIndex);
-                        }
-                        break;
-                    }
+            }
+
+            // Track time for recovery
+            lastKnownTime = audio.currentTime;
+
+            // Update sentence highlighting (runs even before duration is known)
+            if (sentenceTimestamps.length > 0) {
+                const sentenceIndex = findCurrentSentence(audio.currentTime);
+                if (sentenceIndex !== currentSentenceIndex && sentenceIndex !== -1) {
+                    currentSentenceIndex = sentenceIndex;
+                    highlightSentence(sentenceIndex);
                 }
             }
         });
