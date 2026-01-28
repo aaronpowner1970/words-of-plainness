@@ -3334,12 +3334,35 @@
         // =====================================================
         // REFLECTIONS MANAGER INIT
         // =====================================================
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof ReflectionsManager !== 'undefined') {
-                ReflectionsManager.init('chapter-2');
-            }
+
+        const chapterId = 'chapter-02-our-search';
+
+        // Initialize ReflectionsManager when API modules are loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // ReflectionsManager will be initialized after the API scripts load
         });
+
+    </script>
+
+    <!-- API Integration Modules -->
+    <script src="../../js/api.js"></script>
+    <script src="../../js/auth-modal.js"></script>
+    <script src="../../js/reflections-integration.js"></script>
+    <script>
+        // Initialize ReflectionsManager for this chapter
+        document.addEventListener('DOMContentLoaded', function() {
+            ReflectionsManager.init('chapter-02-our-search');
+        });
+    </script>
+
+    <!-- Scripture Hyperlink Generator -->
+    <script src="../../js/scripture-linker.js"></script>
+    <script>
+        // Initialize scripture linker on chapter content only
+        // (runs after DOM is ready due to script placement)
+        if (typeof ScriptureLinker !== 'undefined') {
+            ScriptureLinker.init('.chapter-content');
+        }
     </script>
 </body>
 </html>
