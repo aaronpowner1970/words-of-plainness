@@ -2193,7 +2193,7 @@
                 <!-- Audio Overview -->
                 <a href="#" class="resource-card" 
                    data-modal="audio"
-                   data-src="../../assets/audio/WoP_Ch02_Our_Search_Overview_Podcast.mp3"
+                   data-src="../../assets/audio/WoP_CH02_Our_Search_Overview_Podcast.mp3"
                    data-title="Audio Overview"
                    data-subtitle="A conversation exploring the key themes of this chapter"
                    data-icon="🎧">
@@ -3253,51 +3253,83 @@
         // =====================================================
         // RESOURCE MODAL
         // =====================================================
-        
+
         const resourceModal = document.getElementById('resourceModal');
         const modalIcon = document.getElementById('modalIcon');
         const modalTitle = document.getElementById('modalTitle');
-        const modalSubtitle = document.getElementById('modalSubtitle');
         const modalBody = document.getElementById('modalBody');
-        
-        document.querySelectorAll('[data-modal]').forEach(card => {
+        let currentAudio = null;
+
+        // Set up resource card click handlers
+        document.querySelectorAll('.resource-card[data-modal]').forEach(card => {
             card.addEventListener('click', (e) => {
                 e.preventDefault();
-                
                 const modalType = card.dataset.modal;
                 const src = card.dataset.src;
                 const title = card.dataset.title;
                 const subtitle = card.dataset.subtitle;
                 const icon = card.dataset.icon;
-                
-                modalIcon.textContent = icon;
-                modalTitle.textContent = title;
-                modalSubtitle.textContent = subtitle;
-                
-                if (modalType === 'audio') {
-                    modalBody.innerHTML = `
-                        <audio controls autoplay style="width: 100%;">
-                            <source src="${src}" type="audio/mpeg">
-                        </audio>
-                    `;
-                } else if (modalType === 'image') {
-                    modalBody.innerHTML = `
-                        <img src="${src}" alt="${title}" style="max-width: 100%; height: auto;">
-                    `;
-                }
-                
-                resourceModal.classList.add('open');
-                document.body.style.overflow = 'hidden';
+
+                openResourceModal(modalType, src, title, subtitle, icon);
             });
         });
-        
+
+        function openResourceModal(type, src, title, subtitle, icon) {
+            modalIcon.textContent = icon;
+            modalTitle.textContent = title;
+
+            // Clear previous content
+            modalBody.innerHTML = '';
+
+            if (type === 'audio') {
+                modalBody.innerHTML = `
+                    <div class="modal-audio-container">
+                        <div class="modal-audio-icon">${icon}</div>
+                        <h3 class="modal-audio-title">${title}</h3>
+                        <p class="modal-audio-subtitle">${subtitle}</p>
+                        <audio class="modal-audio-player" controls autoplay id="modalAudioPlayer">
+                            <source src="${src}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <a href="${src}" class="modal-download-btn" download>
+                            ⬇ Download Audio
+                        </a>
+                    </div>
+                `;
+                currentAudio = document.getElementById('modalAudioPlayer');
+            } else if (type === 'image') {
+                modalBody.innerHTML = `
+                    <div class="modal-image-container">
+                        <img src="${src}" alt="${title}" class="modal-image">
+                        <div class="modal-image-actions">
+                            <a href="${src}" class="modal-download-btn" download>
+                                ⬇ Download Image
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resourceModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
         function closeResourceModal() {
             resourceModal.classList.remove('open');
             document.body.style.overflow = '';
-            const audio = modalBody.querySelector('audio');
-            if (audio) audio.pause();
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
             modalBody.innerHTML = '';
         }
+
+        // Close modal on background click
+        resourceModal.addEventListener('click', (e) => {
+            if (e.target === resourceModal || e.target.classList.contains('resource-modal-bg')) {
+                closeResourceModal();
+            }
+        });
         
         // =====================================================
         // REFLECTIONS MANAGER INIT
