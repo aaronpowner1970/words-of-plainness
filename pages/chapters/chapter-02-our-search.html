@@ -2994,8 +2994,19 @@
             const percent = (event.clientX - rect.left) / rect.width;
             audio.currentTime = percent * audio.duration;
         }
-        
-        // Highlight current sentence
+
+        // Format time as M:SS
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // =====================================================
+        // TEXT HIGHLIGHTING & AUTOSCROLL
+        // =====================================================
+
         function highlightSentence(index) {
             // Remove previous highlights
             document.querySelectorAll('.sentence.active').forEach(el => {
