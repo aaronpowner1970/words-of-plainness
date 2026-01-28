@@ -18,6 +18,26 @@
     <link rel="stylesheet" href="../../css/styles.css?v=3">
     <link rel="stylesheet" href="../../css/auth-modal.css">
     <style>
+        /* Base layout - ensure proper centering */
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        main > section,
+        main > article,
+        main > div,
+        main > header {
+            width: 100%;
+        }
+
         /* Slides Page Specific Styles */
         .slides-header {
             padding: calc(80px + var(--space-xl)) var(--space-xl) var(--space-lg);
