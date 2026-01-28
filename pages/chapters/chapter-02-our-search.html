@@ -1022,58 +1022,47 @@
         /* Chapter Navigation */
         .chapter-nav {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: var(--space-lg) var(--space-md);
             background: var(--brown-rich);
             border-top: 1px solid rgba(196, 148, 58, 0.15);
-            flex-wrap: wrap;
-            gap: var(--space-md);
+            gap: var(--space-xl);
         }
-        
-        .chapter-nav-container {
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .nav-link {
+
+        .chapter-nav .nav-link {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             color: var(--cream);
             text-decoration: none;
             font-size: 0.95rem;
+            padding: 0.5rem 1rem;
             transition: color 0.2s ease;
         }
-        
-        .nav-link:hover {
+
+        .chapter-nav .nav-link:hover {
             color: var(--gold-primary);
         }
-        
-        .nav-link-label {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            display: block;
+
+        .chapter-nav .nav-link.disabled {
+            opacity: 0.3;
+            cursor: default;
+            pointer-events: none;
         }
-        
-        .nav-link-title {
-            font-family: var(--font-serif);
+
+        .chapter-nav .nav-arrow {
+            font-size: 1.1rem;
         }
-        
-        .nav-prev {
-            text-align: left;
-        }
-        
-        .nav-next {
-            text-align: right;
-        }
-        
-        .nav-all {
+
+        .chapter-nav .nav-contents {
             color: var(--gold-primary);
+            border: 1px solid rgba(196, 148, 58, 0.3);
+            border-radius: var(--radius-sm);
+        }
+
+        .chapter-nav .nav-contents:hover {
+            background: rgba(196, 148, 58, 0.1);
         }
         
         /* Mobile Adjustments */
@@ -1211,13 +1200,13 @@
                 margin-top: 0.5rem;
             }
             
-            .chapter-nav-container {
-                flex-direction: column;
+            .chapter-nav {
                 gap: var(--space-md);
             }
-            
-            .nav-prev, .nav-next {
-                text-align: center;
+
+            .chapter-nav .nav-link {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
             }
         }
         
@@ -2333,28 +2322,19 @@
         </section>
         
         <!-- Chapter Navigation -->
-        <nav class="chapter-nav">
-            <div class="chapter-nav-container">
-                <a href="chapter-01-introduction.html" class="nav-link nav-prev">
-                    <span>←</span>
-                    <div>
-                        <span class="nav-link-label">Previous</span>
-                        <span class="nav-link-title">Chapter 1: Introduction</span>
-                    </div>
-                </a>
-                
-                <a href="../writings.html" class="nav-link nav-all">
-                    All Chapters
-                </a>
-                
-                <span class="nav-link nav-next" style="opacity: 0.4; cursor: default;">
-                    <div>
-                        <span class="nav-link-label">Next</span>
-                        <span class="nav-link-title">Coming Soon</span>
-                    </div>
-                    <span>→</span>
-                </span>
-            </div>
+        <!-- Chapter Navigation -->
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+            <a href="chapter-01-introduction.html" class="nav-link nav-prev">
+                <span class="nav-arrow">←</span>
+                <span class="nav-label">Previous</span>
+            </a>
+            <a href="../writings.html" class="nav-link nav-contents">
+                <span class="nav-label">Contents</span>
+            </a>
+            <span class="nav-link disabled">
+                <span class="nav-label">Next</span>
+                <span class="nav-arrow">→</span>
+            </span>
         </nav>
     </main>
     
