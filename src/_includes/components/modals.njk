@@ -17,7 +17,7 @@
         </div>
         <div class="modal-body">
             <p class="modal-description">A 5-minute audio summary of this chapter's key themes and insights.</p>
-            <audio controls class="modal-audio" id="overviewAudio">
+            <audio controls preload="metadata" class="modal-audio" id="overviewAudio">
                 <source src="/assets/audio/{{ audio.overview }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
@@ -39,7 +39,7 @@
         </div>
         <div class="modal-body">
             <p class="modal-description">An original song inspired by the themes of this chapter.</p>
-            <audio controls class="modal-audio" id="testimonyAudio">
+            <audio controls preload="metadata" class="modal-audio" id="testimonyAudio">
                 <source src="/assets/audio/{{ audio.testimony }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
