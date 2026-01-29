@@ -32,6 +32,7 @@ const ChapterManager = {
         console.log('ChapterManager initializing...', config);
         
         this.initAudioPlayer();
+        this.initAudioSync();
         this.initReadingProgress();
         this.initFontControls();
         this.initBookmark();
@@ -46,6 +47,14 @@ const ChapterManager = {
         console.log('ChapterManager initialized for:', config.title);
     },
     
+    // Audio Sync (sentence highlighting + click-to-seek)
+    initAudioSync() {
+        if (typeof AudioSync !== 'undefined' && this.config.timestamps) {
+            const audio = document.getElementById('chapterAudio');
+            AudioSync.init(this.config.timestamps, audio);
+        }
+    },
+
     // Audio Player
     initAudioPlayer() {
         this.audioPlayer = document.getElementById('chapterAudio');

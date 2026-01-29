@@ -19,10 +19,18 @@ const AudioSync = {
      * @param {HTMLAudioElement} audioPlayer - Audio element
      */
     init(timestamps, audioPlayer) {
-        this.timestamps = timestamps || {};
+        // Normalize timestamps: convert array of {index, start, end} to lookup map
+        if (Array.isArray(timestamps)) {
+            this.timestamps = {};
+            timestamps.forEach(t => {
+                this.timestamps[t.index] = { start: t.start, end: t.end };
+            });
+        } else {
+            this.timestamps = timestamps || {};
+        }
         this.audioPlayer = audioPlayer;
         this.sentences = document.querySelectorAll('.sentence[data-index]');
-        
+
         if (!this.audioPlayer || Object.keys(this.timestamps).length === 0) {
             console.log('AudioSync: No timestamps or audio player');
             return;
@@ -59,16 +67,17 @@ const AudioSync = {
     
     getSentenceAtTime(time) {
         let lastSentence = -1;
-        
-        // Find the sentence whose timestamp is <= current time
-        for (const [index, timestamp] of Object.entries(this.timestamps)) {
-            if (timestamp <= time) {
+
+        // Find the sentence whose start time is <= current time
+        for (const [index, ts] of Object.entries(this.timestamps)) {
+            const start = (typeof ts === 'object') ? ts.start : ts;
+            if (start <= time) {
                 lastSentence = parseInt(index);
             } else {
                 break;
             }
         }
-        
+
         return lastSentence;
     },
     
@@ -106,10 +115,11 @@ const AudioSync = {
     
     onSentenceClick(sentence) {
         const index = parseInt(sentence.dataset.index);
-        const timestamp = this.timestamps[index];
-        
-        if (timestamp !== undefined && this.audioPlayer) {
-            this.audioPlayer.currentTime = timestamp;
+        const ts = this.timestamps[index];
+        const time = (typeof ts === 'object') ? ts.start : ts;
+
+        if (time !== undefined && this.audioPlayer) {
+            this.audioPlayer.currentTime = time;
             
             // Start playing if paused
             if (this.audioPlayer.paused) {
