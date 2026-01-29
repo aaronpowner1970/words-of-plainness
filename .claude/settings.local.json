@@ -27,7 +27,11 @@
       "Bash(curl:*)",
       "Bash(powershell -Command \"\\(Select-String -Path ''_site/chapters/01-introduction/index.html'' -Pattern ''data-index'' -AllMatches | ForEach-Object { $_Matches.Count } | Measure-Object -Sum\\).Sum\")",
       "Bash(powershell -Command \"Select-String -Path ''_site/chapters/01-introduction/index.html'' -Pattern ''data-index=\"\"174\"\"''\")",
-      "Bash(powershell -Command \"Select-String -Path ''_site/chapters/01-introduction/index.html'' -Pattern ''data-index=\"\"0\"\"''\")"
+      "Bash(powershell -Command \"Select-String -Path ''_site/chapters/01-introduction/index.html'' -Pattern ''data-index=\"\"0\"\"''\")",
+      "Bash(Select-String -Path \"C:\\\\Users\\\\aaron\\\\Documents\\\\words-of-plainness\\\\src\\\\chapters\\\\02-our-search.md\" -Pattern \"{% sentence \\\\d+\" -AllMatches)",
+      "Bash(ForEach-Object { $_Matches.Count })",
+      "Bash(Measure-Object -Sum)",
+      "Bash(Select-Object -ExpandProperty Sum)"
     ]
   }
 }

@@ -1,0 +1,140 @@
+---
+layout: layouts/page.njk
+title: Writings
+pageTitle: My Writings
+pageSubtitle: "Scripture-Based Reflections"
+permalink: /writings/
+---
+
+<!-- Search Section -->
+<section class="content-section" id="search">
+    <div class="content-wrapper">
+        <h2>Search the Writings</h2>
+        <p>
+            Explore the Words of Plainness chapters and social media archive.
+            Search by topic, scripture reference, or keyword.
+        </p>
+
+        <div class="form-group" style="margin-top: 1.5rem;">
+            <input
+                type="search"
+                class="search-input"
+                placeholder="Search writings... (e.g., 'faith', 'John 3:16', 'covenant')"
+                aria-label="Search writings"
+            >
+        </div>
+        <div class="search-results" style="display: none;"></div>
+
+        <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">
+            <em>Full search functionality will be available when connected to the database.</em>
+        </p>
+    </div>
+</section>
+
+<!-- Words of Plainness Chapters -->
+<section class="content-section alt" id="chapters">
+    <div class="content-wrapper">
+        <h2>Words of Plainness Chapters</h2>
+        <p>
+            The heart of this ministry&mdash;extended reflections on scripture and discipleship,
+            written for both seekers exploring faith and saints deepening their walk with Christ.
+        </p>
+
+        <div class="feature-grid" style="margin-top: 1.5rem;">
+            {%- for chapter in collections.chapters -%}
+            <a href="{{ chapter.url }}" class="feature-card" style="text-decoration: none; border-left: 3px solid var(--gold-primary);">
+                <h3 style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="color: var(--gold-primary);">Chapter {{ chapter.data.chapter }}</span>
+                </h3>
+                <p style="font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem;">{{ chapter.data.title }}</p>
+                {% if chapter.data.scripture.text %}
+                <p style="font-size: 0.85rem; opacity: 0.7;">
+                    "{{ chapter.data.scripture.text | truncate(80) }}"
+                </p>
+                {% endif %}
+            </a>
+            {%- endfor -%}
+
+            <!-- Chapter 3 - Coming Soon -->
+            <div class="feature-card" style="opacity: 0.6;">
+                <h3><span style="color: var(--cream);">Chapter 3</span></h3>
+                <p style="font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem;">Faith and Works</p>
+                <p style="font-size: 0.85rem; opacity: 0.7;">Coming Soon</p>
+            </div>
+
+            <!-- Chapter 4 - Coming Soon -->
+            <div class="feature-card" style="opacity: 0.6;">
+                <h3><span style="color: var(--cream);">Chapter 4</span></h3>
+                <p style="font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem;">Covenant Living</p>
+                <p style="font-size: 0.85rem; opacity: 0.7;">Coming Soon</p>
+            </div>
+        </div>
+
+        <p style="margin-top: 2rem;">
+            <a href="/connect/#newsletter" class="btn btn-outline-gold">
+                Subscribe to be notified when new chapters are published
+            </a>
+        </p>
+    </div>
+</section>
+
+<!-- Social Media Archive -->
+<section class="content-section" id="archive">
+    <div class="content-wrapper">
+        <h2>Social Media Archive</h2>
+        <p>
+            Shorter reflections, scripture insights, and thoughts shared across social platforms&mdash;
+            collected here for easy reference and deeper exploration.
+        </p>
+
+        <div class="feature-card" style="margin-top: 1.5rem;">
+            <h3>Archive In Development</h3>
+            <p>
+                The social media archive is being compiled and will be searchable alongside
+                the main chapters. Check back soon, or subscribe to the newsletter for updates.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Study Tools -->
+<section class="content-section alt" id="tools">
+    <div class="content-wrapper">
+        <h2>Study Tools</h2>
+        <p>
+            Interactive features to help you engage more deeply with the writings.
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Scripture Cross-References</h3>
+                <p>
+                    Click any scripture reference to see the full passage and related verses
+                    across multiple translations.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Topic Index</h3>
+                <p>
+                    Browse writings by theme: faith, repentance, grace, covenant, prophecy,
+                    and more.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Personal Notes</h3>
+                <p>
+                    Save your own reflections and insights as you study. (Requires free account)
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Reading Plans</h3>
+                <p>
+                    Structured paths through the writings for new visitors or focused study.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

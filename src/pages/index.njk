@@ -1,18 +1,115 @@
 ---
-layout: layouts/page.njk
-title: Welcome
-pageTitle: Words of Plainness
-pageSubtitle: "{{ site.tagline }}"
+layout: layouts/base.njk
+title: ""
+description: "Words of Plainness - A Christ-Centered Ministry where seekers and saints find common ground. Join Brother Aaron Powner in exploring faith across traditions."
 permalink: /
 ---
 
-<div style="text-align: center; max-width: 600px; margin: 0 auto; padding: 2rem 1rem;">
-    <p style="font-size: 1.2rem; line-height: 1.8; font-family: 'Crimson Pro', serif;">
-        {{ site.description }}
-    </p>
-    <p style="margin-top: 2rem;">
-        <a href="/writings/" style="color: var(--gold-primary, #C4943A); text-decoration: none; font-weight: 600;">
-            Begin Reading &rarr;
-        </a>
-    </p>
-</div>
+<!-- Hero Section -->
+<section class="hero">
+    <!-- Background Video/Image -->
+    <div class="hero-background">
+        <!-- Video for desktop - plays automatically on load -->
+        <video
+            class="hero-video"
+            autoplay
+            muted
+            playsinline
+            poster="/assets/images/library.png"
+        >
+            <!-- WebM first (smaller file, preferred by modern browsers) -->
+            <source src="/assets/video/welcome.webm" type="video/webm">
+            <!-- MP4 fallback for older browsers -->
+            <source src="/assets/video/welcome.mp4" type="video/mp4">
+        </video>
+
+        <!-- Fallback image (shown on mobile and if video fails) -->
+        <img
+            src="/assets/images/library.png"
+            alt="Warm library setting with Brother Aaron reading"
+            class="hero-image"
+        >
+    </div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+        <p class="hero-tagline">Where Seekers and Saints Find Common Ground</p>
+        <h1 class="hero-title">WORDS OF PLAINNESS</h1>
+        <p class="hero-subtitle">A Christ-Centered Ministry</p>
+        <p class="hero-text">
+            Come in. Pull up a chair. There's room at the table. Whether you're exploring
+            faith for the first time or seeking deeper fellowship with believers across
+            traditions, you're welcome here.
+        </p>
+        <div class="hero-cta">
+            <a href="/new-here/" class="btn btn-primary">Begin Exploring</a>
+            <a href="/about/" class="btn btn-secondary">Meet Brother Aaron</a>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <span>Explore</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<!-- Menu Cards Section -->
+<section class="menu-section" id="explore">
+    <p class="menu-section-title">Explore the Ministry</p>
+
+    <div class="menu-grid">
+        <!-- Writings Card -->
+        <div class="menu-card">
+            <h3>My Writings</h3>
+            <ul>
+                <li><a href="/writings/#chapters">Words of Plainness Chapters</a></li>
+                <li><a href="/writings/#archive">Social Media Archive</a></li>
+                <li><a href="/writings/#search">Search &amp; Study Tools</a></li>
+            </ul>
+        </div>
+
+        <!-- Discipleship Card -->
+        <div class="menu-card">
+            <h3>Discipleship Apps</h3>
+            <ul>
+                <li><a href="/discipleship/#commandments">Keep My Commandments</a></li>
+                <li><a href="/discipleship/#teachings">Christ's Teachings</a></li>
+                <li><a href="/discipleship/#scripture">Scripture Links</a></li>
+            </ul>
+        </div>
+
+        <!-- Connect Card -->
+        <div class="menu-card">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="/connect/#chat">Chat Threads</a></li>
+                <li><a href="/connect/#blog">Blog &amp; Updates</a></li>
+                <li><a href="/connect/#newsletter">Newsletter</a></li>
+                <li><a href="/connect/#prayer">Prayer Requests</a></li>
+                <li><a href="/connect/#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Music Card -->
+        <div class="menu-card">
+            <h3>Music</h3>
+            <ul>
+                <li><a href="/music/">Sacred Americana Testimonies</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Section -->
+<section class="featured-section">
+    <div class="featured-card">
+        <p class="featured-label">Featured Discipleship App</p>
+        <h3>Keep My Commandments</h3>
+        <p>
+            A daily discipleship tool to help you walk with Christ through
+            intentional covenant keeping.
+        </p>
+        <a href="https://commandments.brotheraaron.org/" target="_blank" rel="noopener" class="btn btn-outline-gold">Try It Now</a>
+    </div>
+</section>
