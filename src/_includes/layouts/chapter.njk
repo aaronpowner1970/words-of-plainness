@@ -86,7 +86,7 @@
         testimonyFile: '/assets/audio/{{ audio.testimony }}',
         pdfFile: '/assets/pdf/{{ pdf }}',
         infographicFile: '/assets/images/{{ infographic }}',
-        slidesPath: '/assets/slides/{{ slides.path }}/',
+        slidesPath: '/assets/slides/{{ slides.path }}',
         totalSlides: {{ slides.count or 10 }},
         discordChannelId: '{{ discordChannelId }}',
         timestamps: {{ chapterTimestamps | json | safe }}

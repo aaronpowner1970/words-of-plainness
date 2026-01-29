@@ -381,8 +381,17 @@ const ChapterManager = {
     
     updateSlideImage() {
         const slideNum = String(this.currentSlide).padStart(2, '0');
-        const path = `${this.config.slidesPath}slide-${slideNum}.png`;
-        
+        // Support two naming conventions:
+        // 1. Subdirectory: /assets/slides/chapter-02/slide-01.png (slidesPath ends with /)
+        // 2. Flat prefix:  /assets/slides/WoP_Ch01_01.png (slidesPath ends without /)
+        const slidesPath = this.config.slidesPath;
+        let path;
+        if (slidesPath.endsWith('/')) {
+            path = `${slidesPath}slide-${slideNum}.png`;
+        } else {
+            path = `${slidesPath}_${slideNum}.png`;
+        }
+
         document.getElementById('currentSlide').src = path;
         document.getElementById('slideCurrentNum').textContent = this.currentSlide;
     },

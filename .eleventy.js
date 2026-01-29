@@ -46,6 +46,12 @@ module.exports = function(eleventyConfig) {
     // JSON stringify without pretty printing (for inline use)
     eleventyConfig.addFilter("json", obj => JSON.stringify(obj));
     
+    // Current year/date for templates
+    eleventyConfig.addFilter("now", (value, format) => {
+        if (format === "YYYY") return new Date().getFullYear();
+        return new Date().toISOString();
+    });
+
     // Format reading time
     eleventyConfig.addFilter("readingTime", minutes => {
         if (minutes < 1) return "< 1 min read";
