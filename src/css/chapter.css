@@ -81,6 +81,20 @@ main > div {
     color: var(--gold-primary);
 }
 
+/* Scripture Links (auto-linked references) */
+.scripture-link {
+    color: var(--gold-primary, #C4943A);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
+    transition: color 0.15s, text-decoration-color 0.15s;
+}
+
+.scripture-link:hover {
+    color: #d4a84a;
+    text-decoration-style: solid;
+}
+
 /* Audio Player Bar - Sticky */
 .audio-player-bar {
     position: fixed;

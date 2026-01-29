@@ -45,6 +45,7 @@ const ChapterManager = {
         this.initMobileFAB();
         this.initResumePrompt();
         this.initReflections();
+        this.linkScriptures();
 
         console.log('ChapterManager initialized for:', config.title);
     },
@@ -594,6 +595,106 @@ const ChapterManager = {
         if (typeof Reflections !== 'undefined' && this.config.id) {
             Reflections.init(this.config.id);
         }
+    },
+
+    // Scripture auto-linking
+    linkScriptures() {
+        const bookMappings = {
+            '1 nephi': 'bofm/1-ne', '2 nephi': 'bofm/2-ne', '3 nephi': 'bofm/3-ne', '4 nephi': 'bofm/4-ne',
+            'jacob': 'bofm/jacob', 'enos': 'bofm/enos', 'jarom': 'bofm/jarom', 'omni': 'bofm/omni',
+            'words of mormon': 'bofm/w-of-m', 'mosiah': 'bofm/mosiah', 'alma': 'bofm/alma',
+            'helaman': 'bofm/hel', 'mormon': 'bofm/morm', 'ether': 'bofm/ether', 'moroni': 'bofm/moro',
+            'd&c': 'dc-testament/dc', 'doctrine and covenants': 'dc-testament/dc',
+            'moses': 'pgp/moses', 'abraham': 'pgp/abr',
+            'joseph smith—matthew': 'pgp/js-m', 'joseph smith—history': 'pgp/js-h',
+            'articles of faith': 'pgp/a-of-f',
+            'genesis': 'ot/gen', 'exodus': 'ot/ex', 'leviticus': 'ot/lev', 'numbers': 'ot/num',
+            'deuteronomy': 'ot/deut', 'joshua': 'ot/josh', 'judges': 'ot/judg', 'ruth': 'ot/ruth',
+            '1 samuel': 'ot/1-sam', '2 samuel': 'ot/2-sam', '1 kings': 'ot/1-kgs', '2 kings': 'ot/2-kgs',
+            '1 chronicles': 'ot/1-chr', '2 chronicles': 'ot/2-chr',
+            'ezra': 'ot/ezra', 'nehemiah': 'ot/neh', 'esther': 'ot/esth',
+            'job': 'ot/job', 'psalms': 'ot/ps', 'psalm': 'ot/ps',
+            'proverbs': 'ot/prov', 'ecclesiastes': 'ot/eccl', 'song of solomon': 'ot/song',
+            'isaiah': 'ot/isa', 'jeremiah': 'ot/jer', 'lamentations': 'ot/lam',
+            'ezekiel': 'ot/ezek', 'daniel': 'ot/dan', 'hosea': 'ot/hosea', 'joel': 'ot/joel',
+            'amos': 'ot/amos', 'obadiah': 'ot/obad', 'jonah': 'ot/jonah', 'micah': 'ot/micah',
+            'nahum': 'ot/nahum', 'habakkuk': 'ot/hab', 'zephaniah': 'ot/zeph',
+            'haggai': 'ot/hag', 'zechariah': 'ot/zech', 'malachi': 'ot/mal',
+            'matthew': 'nt/matt', 'mark': 'nt/mark', 'luke': 'nt/luke', 'john': 'nt/john',
+            'acts': 'nt/acts', 'romans': 'nt/rom',
+            '1 corinthians': 'nt/1-cor', '2 corinthians': 'nt/2-cor',
+            'galatians': 'nt/gal', 'ephesians': 'nt/eph', 'philippians': 'nt/philip',
+            'colossians': 'nt/col', '1 thessalonians': 'nt/1-thes', '2 thessalonians': 'nt/2-thes',
+            '1 timothy': 'nt/1-tim', '2 timothy': 'nt/2-tim', 'titus': 'nt/titus',
+            'philemon': 'nt/philem', 'hebrews': 'nt/heb', 'james': 'nt/james',
+            '1 peter': 'nt/1-pet', '2 peter': 'nt/2-pet',
+            '1 john': 'nt/1-jn', '2 john': 'nt/2-jn', '3 john': 'nt/3-jn',
+            'jude': 'nt/jude', 'revelation': 'nt/rev'
+        };
+
+        const bookNames = Object.keys(bookMappings).sort((a, b) => b.length - a.length);
+        const bookPattern = bookNames.map(b => b.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+        const regex = new RegExp('(?<!<a[^>]*>)\\b(' + bookPattern + ')\\s+(\\d+):(\\d+)(?:[-–](\\d+))?\\b', 'gi');
+
+        const baseUrl = 'https://www.churchofjesuschrist.org/study/scriptures';
+
+        const content = document.querySelector('.chapter-body') || document.querySelector('.chapter-content');
+        if (!content) return;
+
+        const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT, null);
+        const textNodes = [];
+        let node;
+        while ((node = walker.nextNode())) {
+            if (node.parentElement && node.parentElement.closest('a, script, style, .scripture-link')) continue;
+            if (regex.test(node.textContent)) {
+                textNodes.push(node);
+            }
+            regex.lastIndex = 0;
+        }
+
+        textNodes.forEach(textNode => {
+            const frag = document.createDocumentFragment();
+            let lastIndex = 0;
+            let match;
+            regex.lastIndex = 0;
+
+            while ((match = regex.exec(textNode.textContent)) !== null) {
+                if (match.index > lastIndex) {
+                    frag.appendChild(document.createTextNode(textNode.textContent.slice(lastIndex, match.index)));
+                }
+
+                const bookKey = match[1].toLowerCase().trim();
+                const chapter = match[2];
+                const verseStart = match[3];
+                const verseEnd = match[4];
+                const bookPath = bookMappings[bookKey];
+
+                if (bookPath) {
+                    const verseParam = verseEnd
+                        ? `p${verseStart}-p${verseEnd}`
+                        : `p${verseStart}`;
+                    const url = `${baseUrl}/${bookPath}/${chapter}?lang=eng&id=${verseParam}#${verseParam}`;
+
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.className = 'scripture-link';
+                    link.target = '_blank';
+                    link.rel = 'noopener';
+                    link.textContent = match[0];
+                    frag.appendChild(link);
+                } else {
+                    frag.appendChild(document.createTextNode(match[0]));
+                }
+
+                lastIndex = match.index + match[0].length;
+            }
+
+            if (lastIndex < textNode.textContent.length) {
+                frag.appendChild(document.createTextNode(textNode.textContent.slice(lastIndex)));
+            }
+
+            textNode.parentNode.replaceChild(frag, textNode);
+        });
     }
 };
 
