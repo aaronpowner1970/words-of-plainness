@@ -79,22 +79,24 @@
         </div>
         <div class="modal-body">
             <div class="slides-carousel" id="slidesCarousel">
-                <button class="slide-nav prev" id="slidePrev" aria-label="Previous slide">
-                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
                 <div class="slide-container">
                     <img id="currentSlide" src="" alt="Study slide" class="slide-image">
                 </div>
-                <button class="slide-nav next" id="slideNext" aria-label="Next slide">
-                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
-            </div>
-            <div class="slide-counter">
-                <span id="slideCurrentNum">1</span> / <span id="slideTotalNum">{{ slides.count or 10 }}</span>
+                <div class="slide-nav">
+                    <button id="slidePrev" aria-label="Previous slide">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="slide-counter">
+                        <span id="slideCurrentNum">1</span> / <span id="slideTotalNum">{{ slides.count or 10 }}</span>
+                    </span>
+                    <button id="slideNext" aria-label="Next slide">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

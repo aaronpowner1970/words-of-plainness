@@ -155,13 +155,13 @@ const ChapterManager = {
     
     // Reading Progress
     initReadingProgress() {
-        const progressBar = document.getElementById('readingProgress');
-        
+        const progressFill = document.getElementById('readingProgressFill');
+
         window.addEventListener('scroll', () => {
             const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
             const progress = (window.scrollY / scrollHeight) * 100;
-            if (progressBar) {
-                progressBar.style.width = progress + '%';
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
             }
         });
     },
