@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description | default(site.description) }}">
+    <title>{{ title }}{% if title %} | {% endif %}{{ site.name }}</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicons/favicon-48x48.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/favicons/site.webmanifest">
+    <meta name="theme-color" content="#C4943A">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css?v={{ site.version }}">
+    <link rel="stylesheet" href="/css/auth-modal.css">
+    {% block styles %}{% endblock %}
+</head>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    {% include "partials/header.njk" %}
+    {% include "partials/mobile-menu.njk" %}
+    
+    <main id="main-content">
+        {% block content %}
+        {{ content | safe }}
+        {% endblock %}
+    </main>
+    
+    {% include "partials/footer.njk" %}
+
+    <!-- Auth Modal -->
+    <div id="authModal" role="dialog" aria-labelledby="authTitle" aria-modal="true">
+        <div class="auth-modal-content">
+            <div class="auth-modal-header">
+                <h2 id="authTitle">Sign In</h2>
+                <button class="auth-close" data-auth-close aria-label="Close">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="auth-error hidden" id="authError"></div>
+            <form class="auth-form" id="authForm">
+                <div class="auth-field hidden" id="authNameField">
+                    <label for="authName">Display Name</label>
+                    <input type="text" id="authName" name="name" placeholder="How should we address you?">
+                </div>
+                <div class="auth-field">
+                    <label for="authEmail">Email Address</label>
+                    <input type="email" id="authEmail" name="email" required placeholder="your@email.com">
+                </div>
+                <div class="auth-field">
+                    <label for="authPassword">Password</label>
+                    <input type="password" id="authPassword" name="password" required placeholder="Your password">
+                </div>
+                <button type="submit" class="auth-submit" id="authSubmit">Sign In</button>
+            </form>
+            <p class="auth-switch" id="authSwitchText">
+                Don't have an account? <a href="#" id="switchToSignup">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="/js/main.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth-modal.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

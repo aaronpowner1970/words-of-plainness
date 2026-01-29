@@ -1,0 +1,3348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chapter 2: Our Search - Words of Plainness by Brother Aaron Powner">
+    <title>Chapter 2: Our Search | Words of Plainness</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="64x64" href="../../assets/favicons/lantern-icon-64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicons/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="../../assets/favicons/site.webmanifest">
+    <meta name="theme-color" content="#C4943A">
+    <link rel="stylesheet" href="../../css/styles.css?v=3">
+    <link rel="stylesheet" href="../../css/auth-modal.css">
+    <style>
+        /* Base layout - ensure proper centering */
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        main > section,
+        main > article,
+        main > div {
+            width: 100%;
+        }
+        
+        /* Chapter-specific styles */
+        .chapter-header {
+            padding: calc(80px + var(--space-xl)) var(--space-xl) var(--space-lg);
+            background: 
+                linear-gradient(to bottom, rgba(26, 21, 16, 0.55) 0%, rgba(61, 43, 31, 0.6) 100%),
+                url('../../assets/images/library-empty.png') center center / cover no-repeat;
+            text-align: center;
+        }
+        
+        .chapter-number {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .chapter-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--cream-soft);
+            margin-bottom: 1rem;
+        }
+        
+        .chapter-scripture {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--cream);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .chapter-scripture cite {
+            display: block;
+            margin-top: 0.5rem;
+            font-style: normal;
+            font-size: 0.95rem;
+            color: var(--gold-primary);
+        }
+        
+        /* Audio Player Bar - Sticky */
+        .audio-player-bar {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 2rem);
+            max-width: 900px;
+            z-index: 1000;
+            background: var(--brown-rich);
+            border: 2px solid var(--gold-primary);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Add bottom padding when player is visible to prevent content being hidden */
+        body.player-active {
+            padding-bottom: 80px;
+        }
+        
+        .audio-player-bar.hidden {
+            display: none;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .player-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+        
+        .player-btn:hover {
+            background: var(--gold-light);
+            transform: scale(1.05);
+        }
+        
+        .player-btn.small {
+            width: 32px;
+            height: 32px;
+            font-size: 0.9rem;
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid rgba(232, 220, 196, 0.3);
+        }
+        
+        .player-btn.small:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .progress-container {
+            flex: 1;
+            min-width: 150px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(232, 220, 196, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--gold-primary);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .progress-bar:hover .progress-fill {
+            background: var(--gold-light);
+        }
+        
+        .time-display {
+            font-size: 0.85rem;
+            color: var(--cream);
+            opacity: 0.8;
+            min-width: 90px;
+            text-align: center;
+        }
+        
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .speed-btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid rgba(232, 220, 196, 0.2);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .speed-btn:hover, .speed-btn.active {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .autoscroll-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--cream);
+            cursor: pointer;
+        }
+        
+        .autoscroll-toggle input {
+            accent-color: var(--gold-primary);
+        }
+        
+        /* Primary Actions */
+        .primary-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            padding: var(--space-lg) var(--space-md);
+            background: var(--brown-rich);
+            border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .action-btn-primary {
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+        }
+        
+        .action-btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(196, 148, 58, 0.3);
+        }
+        
+        .action-btn-secondary {
+            background: transparent;
+            color: var(--cream);
+            border: 2px solid var(--cream);
+        }
+        
+        .action-btn-secondary:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+            background: rgba(196, 148, 58, 0.1);
+        }
+        
+        .action-icon {
+            font-size: 1.1rem;
+        }
+        
+        /* Quick Navigation Bar */
+        .chapter-quick-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem var(--space-md);
+            background: var(--brown-deep);
+            border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .reading-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+        
+        .reading-time {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .section-count {
+            padding-left: 1rem;
+            border-left: 1px solid rgba(232, 220, 196, 0.3);
+        }
+        
+        .quick-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .quick-links-label {
+            font-size: 0.8rem;
+            color: var(--cream);
+            opacity: 0.6;
+            margin-right: 0.25rem;
+        }
+        
+        .quick-links a {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+            color: var(--gold-primary);
+            background: rgba(196, 148, 58, 0.1);
+            border: 1px solid rgba(196, 148, 58, 0.25);
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .quick-links a:hover {
+            background: rgba(196, 148, 58, 0.2);
+            border-color: var(--gold-primary);
+        }
+        
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(26, 21, 16, 0.9);
+            z-index: 1001;
+        }
+        
+        .reading-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+            width: 0%;
+            transition: width 0.15s ease-out;
+            box-shadow: 0 0 8px rgba(196, 148, 58, 0.5);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+        }
+        
+        /* Table of Contents Sidebar */
+        .toc-toggle {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--brown-rich);
+            border: 1px solid rgba(196, 148, 58, 0.3);
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            padding: 0.75rem 0.5rem;
+            cursor: pointer;
+            z-index: 100;
+            color: var(--gold-primary);
+            font-size: 0.75rem;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-toggle:hover {
+            background: var(--brown-deep);
+            padding-right: 0.75rem;
+        }
+        
+        .toc-sidebar {
+            position: fixed;
+            left: -320px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: var(--brown-rich);
+            border-right: 1px solid rgba(196, 148, 58, 0.3);
+            z-index: 200;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            padding: 80px 0 2rem 0;
+        }
+        
+        .toc-sidebar.open {
+            left: 0;
+        }
+        
+        .toc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.25rem 1rem 1.25rem;
+            border-bottom: 1px solid rgba(196, 148, 58, 0.2);
+            margin-bottom: 1rem;
+        }
+        
+        .toc-header h3 {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--gold-primary);
+            margin: 0;
+        }
+        
+        .toc-close {
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        .toc-close:hover {
+            opacity: 1;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-list li {
+            margin: 0;
+        }
+        
+        .toc-list a {
+            display: block;
+            padding: 0.6rem 1.25rem;
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .toc-list a:hover {
+            background: rgba(196, 148, 58, 0.1);
+            border-left-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .toc-list a.active {
+            background: rgba(196, 148, 58, 0.15);
+            border-left-color: var(--gold-primary);
+            color: var(--gold-primary);
+        }
+        
+        .toc-list .toc-subheading {
+            padding-left: 2rem;
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+        
+        .toc-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Reader Toolbar (Font Size, Bookmark, Share) */
+        .reader-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(45, 32, 22, 0.95);
+            border-radius: 30px;
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(196, 148, 58, 0.2);
+        }
+        
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .toolbar-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(196, 148, 58, 0.3);
+        }
+        
+        .toolbar-btn {
+            background: none;
+            border: none;
+            color: var(--cream);
+            cursor: pointer;
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .toolbar-btn:hover {
+            background: rgba(196, 148, 58, 0.2);
+            color: var(--gold-primary);
+        }
+        
+        .toolbar-btn.active {
+            background: rgba(196, 148, 58, 0.25);
+            color: var(--gold-primary);
+        }
+        
+        /* Font Size Controls */
+        .font-btn {
+            font-weight: 600;
+            min-width: 32px;
+            text-align: center;
+        }
+        
+        .font-btn.small { font-size: 0.8rem; }
+        .font-btn.medium { font-size: 1rem; }
+        .font-btn.large { font-size: 1.2rem; }
+        
+        /* Bookmark Button */
+        .bookmark-btn.bookmarked {
+            color: var(--gold-primary);
+        }
+        
+        .bookmark-btn .bookmark-icon {
+            font-size: 1.1rem;
+        }
+        
+        /* Share Dropdown */
+        .share-container {
+            position: relative;
+        }
+        
+        .share-dropdown {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brown-rich);
+            border: 1px solid rgba(196, 148, 58, 0.3);
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            min-width: 160px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .share-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .share-dropdown a,
+        .share-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.85rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+            text-align: left;
+        }
+        
+        .share-dropdown a:hover,
+        .share-dropdown button:hover {
+            background: rgba(196, 148, 58, 0.15);
+        }
+        
+        .share-dropdown .share-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .copy-success {
+            color: var(--gold-primary);
+            font-size: 0.8rem;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        
+        /* Bookmark Resume Banner */
+        .bookmark-banner {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brown-rich);
+            border: 1px solid var(--gold-primary);
+            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 150;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .bookmark-banner.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .bookmark-banner p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--cream);
+        }
+        
+        .bookmark-banner button {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .bookmark-banner .resume-btn {
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+        }
+        
+        .bookmark-banner .dismiss-btn {
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid rgba(232, 220, 196, 0.3);
+        }
+        
+        /* Chapter Content - Reading Area */
+        .chapter-reading {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-md);
+            background: var(--brown-deep);
+        }
+        
+        .chapter-reading h2 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--gold-primary);
+            margin: var(--space-xl) 0 var(--space-md) 0;
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(196, 148, 58, 0.2);
+        }
+        
+        .chapter-reading h2:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        
+        .chapter-reading h3 {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--cream);
+            margin: var(--space-lg) 0 var(--space-sm) 0;
+        }
+        
+        .chapter-reading p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: var(--space-md);
+            color: var(--cream);
+        }
+        
+        /* Sentence spans for highlighting */
+        .sentence {
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 3px;
+            padding: 0 2px;
+            margin: 0 -2px;
+            cursor: pointer;
+        }
+        
+        .sentence:hover {
+            background-color: rgba(196, 148, 58, 0.15);
+        }
+        
+        .sentence.active {
+            background-color: rgba(196, 148, 58, 0.35);
+            color: var(--cream-soft);
+        }
+        
+        .sentence.active:hover {
+            background-color: rgba(196, 148, 58, 0.45);
+        }
+        
+        .sentence.read {
+            opacity: 0.7;
+        }
+        
+        /* Study Resources Section */
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-xs);
+            border-bottom: 1px solid rgba(196, 148, 58, 0.3);
+        }
+        
+        .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .resource-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: rgba(45, 32, 22, 0.78);
+            border: 1px solid rgba(196, 148, 58, 0.15);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            border-color: var(--gold-primary);
+            background: rgba(45, 32, 22, 0.95);
+            transform: translateX(4px);
+        }
+        
+        .resource-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(196, 148, 58, 0.15);
+            border-radius: 4px;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        
+        .resource-info {
+            flex: 1;
+        }
+        
+        .resource-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 0.2rem;
+        }
+        
+        .resource-desc {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+            margin: 0;
+        }
+        
+        .resource-arrow {
+            color: var(--gold-primary);
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+        
+        .resource-card:hover .resource-arrow {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+        
+        .resource-card.music {
+            background: linear-gradient(135deg, rgba(107, 61, 61, 0.3) 0%, rgba(45, 32, 22, 0.78) 100%);
+        }
+        
+        .resource-card.music .resource-icon {
+            background: rgba(196, 148, 58, 0.25);
+        }
+        
+        /* Content Sections */
+        .chapter-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-md);
+        }
+        
+        /* Reflection Section */
+        .reflection-section {
+            background: var(--brown-rich);
+            padding: var(--space-xl) var(--space-md);
+        }
+        
+        .reflection-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .reflection-card {
+            background: linear-gradient(135deg, var(--brown-deep) 0%, rgba(45, 32, 22, 0.9) 100%);
+            border: 1px solid rgba(196, 148, 58, 0.25);
+            border-radius: 12px;
+            padding: var(--space-lg);
+        }
+        
+        .reflection-intro {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .reflection-intro h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--gold-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .reflection-intro p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin: 0;
+        }
+        
+        .reflection-step {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .reflection-step:last-of-type {
+            margin-bottom: var(--space-md);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .step-title {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--cream);
+        }
+        
+        .step-prompt {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--cream);
+            opacity: 0.85;
+            margin-bottom: 0.75rem;
+            padding-left: calc(28px + var(--space-sm));
+        }
+        
+        .step-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: var(--space-sm);
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(196, 148, 58, 0.2);
+            border-radius: 4px;
+            color: var(--cream);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+        }
+        
+        .step-textarea:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+        }
+        
+        .step-textarea::placeholder {
+            color: var(--cream);
+            opacity: 0.5;
+        }
+        
+        .reflection-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            padding-top: var(--space-sm);
+            flex-wrap: wrap;
+        }
+        
+        .reflection-note {
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: var(--space-md);
+        }
+        
+        /* Discussion Section */
+        .discussion-section {
+            padding: var(--space-xl) var(--space-md);
+            background: var(--brown-deep);
+        }
+        
+        .discussion-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .discussion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+        
+        .discussion-count {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+        }
+        
+        .discussion-placeholder {
+            background: rgba(45, 32, 22, 0.78);
+            border: 1px solid rgba(196, 148, 58, 0.15);
+            border-radius: 8px;
+            padding: var(--space-xl);
+            text-align: center;
+        }
+        
+        .discussion-placeholder p {
+            opacity: 0.8;
+            margin-bottom: var(--space-md);
+        }
+        
+        /* Chapter Navigation */
+        .chapter-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-lg) var(--space-md);
+            background: var(--brown-rich);
+            border-top: 1px solid rgba(196, 148, 58, 0.15);
+            gap: var(--space-xl);
+        }
+
+        .chapter-nav .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            transition: color 0.2s ease;
+        }
+
+        .chapter-nav .nav-link:hover {
+            color: var(--gold-primary);
+        }
+
+        .chapter-nav .nav-link.disabled {
+            opacity: 0.3;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .chapter-nav .nav-arrow {
+            font-size: 1.1rem;
+        }
+
+        .chapter-nav .nav-contents {
+            color: var(--gold-primary);
+            border: 1px solid rgba(196, 148, 58, 0.3);
+            border-radius: var(--radius-sm);
+        }
+
+        .chapter-nav .nav-contents:hover {
+            background: rgba(196, 148, 58, 0.1);
+        }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .chapter-header {
+                padding: calc(70px + var(--space-lg)) var(--space-md) var(--space-md);
+            }
+            
+            .chapter-quick-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.75rem var(--space-md);
+            }
+            
+            .reading-info {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .quick-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .quick-links-label {
+                display: none;
+            }
+            
+            .quick-links a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .back-to-top {
+                bottom: 5rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .toc-toggle {
+                top: auto;
+                bottom: 1rem;
+                left: 1rem;
+                transform: none;
+                writing-mode: horizontal-tb;
+                border-radius: 8px;
+                border: 1px solid rgba(196, 148, 58, 0.3);
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+            
+            .toc-sidebar {
+                width: 85%;
+                max-width: 300px;
+            }
+            
+            .reader-toolbar {
+                bottom: 1rem;
+                padding: 0.4rem 0.75rem;
+                gap: 0.5rem;
+                max-width: calc(100% - 6rem);
+            }
+            
+            .toolbar-btn {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .bookmark-banner {
+                top: 70px;
+                left: 1rem;
+                right: 1rem;
+                transform: none;
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+            
+            .audio-player-bar {
+                bottom: 0.5rem;
+                padding: 0.5rem;
+                gap: 0.5rem;
+                border-radius: 8px;
+            }
+            
+            .progress-container {
+                order: 10;
+                width: 100%;
+                min-width: 100%;
+            }
+            
+            .speed-control {
+                display: none;
+            }
+            
+            .primary-actions {
+                padding: var(--space-md);
+            }
+            
+            .action-btn {
+                padding: 0.8rem 1.4rem;
+                font-size: 0.95rem;
+                flex: 1;
+                justify-content: center;
+                min-width: 140px;
+            }
+            
+            .chapter-reading {
+                padding: var(--space-lg) var(--space-md);
+            }
+            
+            .chapter-reading p {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
+            
+            .resource-card {
+                padding: var(--space-sm) var(--space-md);
+            }
+            
+            .resource-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .resource-title {
+                font-size: 1rem;
+            }
+            
+            .step-prompt {
+                padding-left: 0;
+                margin-top: 0.5rem;
+            }
+            
+            .chapter-nav {
+                gap: var(--space-md);
+            }
+
+            .chapter-nav .nav-link {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Resource Modal Overlay */
+        .resource-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .resource-modal-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../../assets/images/library-hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .resource-modal-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 21, 16, 0.88);
+        }
+        
+        .resource-modal-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-lg);
+        }
+        
+        .resource-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid rgba(196, 148, 58, 0.3);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .resource-modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--gold-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .resource-modal-title .modal-icon {
+            font-size: 1.75rem;
+        }
+        
+        .resource-modal-close {
+            background: rgba(196, 148, 58, 0.2);
+            border: 1px solid rgba(196, 148, 58, 0.4);
+            color: var(--cream);
+            font-size: 1rem;
+            padding: 0.6rem 1.25rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
+        .resource-modal-close:hover {
+            background: var(--gold-primary);
+            color: var(--brown-deep);
+            border-color: var(--gold-primary);
+        }
+        
+        .resource-modal-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+        
+        /* Audio Player in Modal */
+        .modal-audio-container {
+            background: rgba(45, 32, 22, 0.95);
+            border: 1px solid rgba(196, 148, 58, 0.3);
+            border-radius: 12px;
+            padding: var(--space-xl);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-audio-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-md);
+        }
+        
+        .modal-audio-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-audio-subtitle {
+            font-size: 0.9rem;
+            color: var(--cream);
+            opacity: 0.7;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .modal-audio-player {
+            width: 100%;
+            height: 50px;
+            border-radius: 8px;
+            margin-bottom: var(--space-md);
+        }
+        
+        .modal-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            background: transparent;
+            border: 1px solid rgba(196, 148, 58, 0.4);
+            color: var(--gold-primary);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        
+        .modal-download-btn:hover {
+            background: rgba(196, 148, 58, 0.2);
+            border-color: var(--gold-primary);
+        }
+        
+        /* Image in Modal */
+        .modal-image-container {
+            max-width: 90%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-image-actions {
+            margin-top: var(--space-md);
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Mobile Modal */
+        @media (max-width: 768px) {
+            .resource-modal-content {
+                padding: var(--space-md);
+            }
+            
+            .resource-modal-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .resource-modal-title {
+                font-size: 1.2rem;
+            }
+            
+            .resource-modal-close {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .modal-audio-container {
+                padding: var(--space-lg);
+                margin: 0 var(--space-sm);
+            }
+            
+            .modal-audio-icon {
+                font-size: 3rem;
+            }
+            
+            .modal-image {
+                max-height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="../../index.html" class="logo">
+                <img src="../../assets/favicons/lantern-icon-64.png" alt="" class="header-lantern" width="54" height="54">
+                <span class="logo-text">
+                    <span class="logo-title">WORDS OF PLAINNESS</span>
+                    <span class="logo-subtitle">A Christ-Centered Ministry</span>
+                </span>
+            </a>
+
+            <nav class="nav-desktop">
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../writings.html" class="active">Writings</a></li>
+                    <li><a href="../discipleship.html">Discipleship</a></li>
+                    <li><a href="../connect.html">Connect</a></li>
+                    <li><a href="../about.html">About</a></li>
+                </ul>
+                <a href="../new-here.html" class="btn-new-here">New Here?</a>
+
+                <!-- Auth Buttons (shown when logged out) -->
+                <div class="nav-auth-buttons">
+                    <button class="btn-sign-in">Sign In</button>
+                    <button class="btn-join-free">Join Free</button>
+                </div>
+
+                <!-- User Menu (shown when logged in) -->
+                <div class="user-menu">
+                    <button class="user-menu-toggle">
+                        <span class="user-avatar">?</span>
+                        <span class="user-display-name">User</span>
+                        <span class="user-menu-arrow">&#9660;</span>
+                    </button>
+                    <div class="user-dropdown">
+                        <div class="user-dropdown-header">
+                            <p class="user-dropdown-name">User</p>
+                            <p class="user-dropdown-email">user@email.com</p>
+                        </div>
+                        <button class="user-dropdown-item" data-action="logout">
+                            Sign Out
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <button class="nav-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu" aria-label="Mobile navigation">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="../../assets/favicons/lantern-icon-64.png" alt="" class="header-lantern" width="54" height="54">
+                <span class="logo-text">
+                    <span class="logo-title">WORDS OF PLAINNESS</span>
+                    <span class="logo-subtitle">A Christ-Centered Ministry</span>
+                </span>
+            </div>
+            <button class="mobile-menu-close" aria-label="Close menu">×</button>
+        </div>
+        <a href="../new-here.html" class="mobile-menu-new-here">✦ New Here? Start Here</a>
+        <ul class="mobile-nav-list">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../writings.html">Writings</a></li>
+            <li><a href="../discipleship.html">Discipleship</a></li>
+            <li><a href="../connect.html">Connect</a></li>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../channels.html">Other Channels</a></li>
+        </ul>
+
+        <!-- Mobile Auth Buttons (shown when logged out) -->
+        <div class="mobile-auth-buttons">
+            <button class="btn-sign-in">Sign In</button>
+            <button class="btn-join-free">Join Free</button>
+        </div>
+
+        <!-- Mobile User Info (shown when logged in) -->
+        <div class="mobile-user-info">
+            <div class="mobile-user-header">
+                <span class="user-avatar">?</span>
+                <div class="mobile-user-details">
+                    <span class="name">User</span>
+                    <span class="email">user@email.com</span>
+                </div>
+            </div>
+            <button class="mobile-logout-btn" data-action="logout">Sign Out</button>
+        </div>
+    </nav>
+
+    <!-- Table of Contents Toggle -->
+    <button class="toc-toggle" id="tocToggle" aria-label="Open table of contents">
+        Contents
+    </button>
+
+    <!-- Table of Contents Overlay -->
+    <div class="toc-overlay" id="tocOverlay"></div>
+
+    <!-- Table of Contents Sidebar -->
+    <aside class="toc-sidebar" id="tocSidebar">
+        <div class="toc-header">
+            <h3>Chapter Contents</h3>
+            <button class="toc-close" id="tocClose" aria-label="Close table of contents">×</button>
+        </div>
+        <ul class="toc-list">
+                <li><a href="#section-note-to-the-reader">Note to the Reader</a></li>
+                <li><a href="#section-thesis-1-the-hunger-within">Thesis 1: The Hunger Within</a></li>
+                <li><a href="#section-earlier-1" class="toc-subheading">From My Earlier Writings</a></li>
+                <li><a href="#section-later-1" class="toc-subheading">Twenty-Plus Years Later</a></li>
+                <li><a href="#section-thesis-2-questions-that-demand-answers">Thesis 2: Questions That Demand Answers</a></li>
+                <li><a href="#section-earlier-2" class="toc-subheading">From My Earlier Writings</a></li>
+                <li><a href="#section-later-2" class="toc-subheading">Twenty-Plus Years Later</a></li>
+                <li><a href="#section-thesis-3-how-we-cope">Thesis 3: How We Cope</a></li>
+                <li><a href="#section-earlier-3" class="toc-subheading">From My Earlier Writings</a></li>
+                <li><a href="#section-later-3" class="toc-subheading">Twenty-Plus Years Later</a></li>
+                <li><a href="#section-thesis-4-the-path-forward">Thesis 4: The Path Forward</a></li>
+                <li><a href="#section-earlier-4" class="toc-subheading">From My Earlier Writings</a></li>
+                <li><a href="#section-later-4" class="toc-subheading">Twenty-Plus Years Later</a></li>
+                <li><a href="#section-the-gift-of-holy-dissatisfaction">The Gift of Holy Dissatisfaction</a></li>
+                <li><a href="#section-the-safety-net-of-grace">The Safety Net of Grace</a></li>
+                <li><a href="#section-god-loves-broken-things">God Loves Broken Things</a></li>
+                <li><a href="#section-the-invitation">The Invitation</a></li>
+                <li><a href="#section-to-my-fellow-searchers">To My Fellow Searchers</a></li>
+                <li><a href="#section-a-promise-i-hope-to-fulfill">A Promise I Hope to Fulfill</a></li>
+            <li><a href="#study-resources">Study Resources</a></li>
+            <li><a href="#reflection">Engage: Reflection</a></li>
+            <li><a href="#discussion">Discussion</a></li>
+        </ul>
+    </aside>
+
+    <!-- Bookmark Resume Banner -->
+    <div class="bookmark-banner" id="bookmarkBanner">
+        <p>📖 You left off at: <strong id="bookmarkLocation"></strong></p>
+        <div class="banner-buttons">
+            <button class="resume-btn" onclick="resumeFromBookmark()">Resume Reading</button>
+            <button class="dismiss-btn" onclick="dismissBookmark()">Dismiss</button>
+        </div>
+    </div>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress">
+        <div class="reading-progress-fill" id="readingProgress"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Chapter Header -->
+        <header class="chapter-header">
+            <p class="chapter-number">Chapter 2</p>
+            <h1 class="chapter-title">Our Search</h1>
+            <blockquote class="chapter-scripture">
+                "Blessed are they which do hunger and thirst after righteousness: for they shall be filled."
+                <cite>— Matthew 5:6</cite>
+            </blockquote>
+        </header>
+        
+        <!-- Primary Actions -->
+        <div class="primary-actions">
+            <button class="action-btn action-btn-primary" id="listenBtn" onclick="toggleAudioPlayer()">
+                <span class="action-icon">🎧</span>
+                <span id="listenBtnText">Listen to Chapter</span>
+            </button>
+            <a href="../../assets/pdf/WoP_Ch02_Our_Search.pdf" class="action-btn action-btn-secondary" download>
+                <span class="action-icon">📄</span>
+                Download PDF
+            </a>
+        </div>
+
+        <!-- Quick Navigation & Reading Info -->
+        <div class="chapter-quick-nav">
+            <div class="reading-info">
+                <span class="reading-time">📖 ~27 min read</span>
+                <span class="section-count">12 sections</span>
+            </div>
+            <nav class="quick-links" aria-label="Jump to section">
+                <span class="quick-links-label">Jump to:</span>
+                <a href="#chapterContent">Read Chapter</a>
+                <a href="#study-resources">Study Resources</a>
+                <a href="#reflection">Reflection</a>
+                <a href="#discussion">Discussion</a>
+            </nav>
+        </div>
+
+        <!-- Audio Player Bar (Hidden by default, shown when Listen is clicked) -->
+        <div class="audio-player-bar hidden" id="audioPlayerBar">
+            <div class="player-controls">
+                <button class="player-btn" id="playPauseBtn" onclick="togglePlayPause()" aria-label="Play/Pause">
+                    ▶
+                </button>
+                <button class="player-btn small" onclick="skipBack()" aria-label="Back 10 seconds">
+                    ⏪
+                </button>
+                <button class="player-btn small" onclick="skipForward()" aria-label="Forward 10 seconds">
+                    ⏩
+                </button>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar" onclick="seekAudio(event)">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+            </div>
+
+            <div class="speed-control">
+                <button class="speed-btn" onclick="setSpeed(0.75)">0.75x</button>
+                <button class="speed-btn active" onclick="setSpeed(1)">1x</button>
+                <button class="speed-btn" onclick="setSpeed(1.25)">1.25x</button>
+                <button class="speed-btn" onclick="setSpeed(1.5)">1.5x</button>
+            </div>
+
+            <label class="autoscroll-toggle">
+                <input type="checkbox" id="autoscrollToggle" checked>
+                Auto-scroll
+            </label>
+        </div>
+
+        <!-- Chapter Reading Content -->
+        <article class="chapter-reading" id="chapterContent">
+                <h2 id="section-note-to-the-reader" class="sentence" data-index="0">Note to the Reader</h2>
+
+                <p>
+                    <span class="sentence" data-index="1">This chapter will feel unconventional compared to other chapters within our Words of Plainness writings.</span>
+                    <span class="sentence" data-index="2">What follows is not a chapter that has "arrived at" conclusions.</span>
+                    <span class="sentence" data-index="3">It is a demonstration of the nature of "Our Search" in action, focused on the personal growth of Aaron, the primary writer.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="4">I, Aaron, first wrote about the most important life questions we all seek to answer—the subject of chapter two—more than two decades ago, when I was in my early thirties.</span>
+                    <span class="sentence" data-index="5">I was just beginning my teaching career and my children were very young.</span>
+                    <span class="sentence" data-index="6">My brother, in his forties, had traveled somewhat further down a similar career path, but we lived on opposite ends of the country.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="7">In those days of writing alone, I had already been ministering the gospel of Jesus Christ for more than fifteen years.</span>
+                    <span class="sentence" data-index="8">I had genuine conviction then, and much of what I wrote still rings true.</span>
+                    <span class="sentence" data-index="9">But the "refiner's fire" described in Malachi has shaped and molded my understanding and sensibilities.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="10">More than two decades of maturing ministry, interfaith dialogue, teaching high school sciences, and the unique crucible of ordinary living and raising a family within evolving communities have all done their work on my soul.</span>
+                    <span class="sentence" data-index="11">Some of my earlier certainties have been tempered.</span>
+                    <span class="sentence" data-index="12">Others have deepened in unexpected ways.</span>
+                    <span class="sentence" data-index="13">Now, in my fifth decade of life, I recognize a significant softening of my ego, making room for a compassion—empathy even—that feels less like a choice and more like a reflex.</span>
+                    <span class="sentence" data-index="14">This character trait has finally settled into my bones, becoming a visceral recognition that my own spiritual growth is bearing the "fruits of the Spirit.".</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="15">Rather than erase my earlier voice or pretend that I have arrived at final answers at this stage of my life, we have chosen to present both: the questions as I framed them then, and the spiritual wrestling I continue with now.</span>
+                    <span class="sentence" data-index="16">You will encounter my younger voice—from my thirties—in regular text, and my current voice—now in my fifties—following each section.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="17">I do this because "Our Search" is the point of this chapter.</span>
+                    <span class="sentence" data-index="18">Some refer to this "Search" as their spiritual "Journey" or "Path." It is not easy or comfortable to grow spiritually.</span>
+                    <span class="sentence" data-index="19">This is illustrated beautifully from the life story of the prophet Enos in the Book of Mormon, who wrote, "I will tell you of the wrestle which I had before God," for "my soul hungered.".</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="20">If these Words of Plainness presented only firm conclusions as final declarations of truth, they would betray their subject.</span>
+                    <span class="sentence" data-index="21">The hunger we share—for meaning, for truth, for something substantial enough to stake our lives on—is not a problem to solve in a single go.</span>
+                    <span class="sentence" data-index="22">This personal searching and striving is not a "One and Done" experience.</span>
+                    <span class="sentence" data-index="23">It is a necessary, ongoing tension to live within.</span>
+                    <span class="sentence" data-index="24">The traditions that sustain people do not offer final answers but livable frameworks.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="25">Your spiritual journey is your own.</span>
+                    <span class="sentence" data-index="26">I will not hijack it.</span>
+                    <span class="sentence" data-index="27">My hope is only that seeing one person's search across time—with its clarifications, revisions, and enduring convictions—might give you permission, and a sense of companionship, to pursue your own search.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="28">We are fellow searchers.</span>
+                    <span class="sentence" data-index="29">Let us begin.</span>
+                </p>
+
+                <h2 id="section-thesis-1-the-hunger-within" class="sentence" data-index="30">Thesis 1: The Hunger Within</h2>
+
+                <h3 id="section-earlier-1" class="sentence" data-index="31">From My Earlier Writings</h3>
+
+                <p>
+                    <span class="sentence" data-index="32">Central to the human experience is a profound hunger for greater understanding, a nobler purpose, and enduring satisfaction with life.</span>
+                    <span class="sentence" data-index="33">Tragically, the noise and worries of daily living often deafen us to this yearning.</span>
+                    <span class="sentence" data-index="34">Yet as we experience life, many of us eventually awake to the realization that selfish pursuits and common pleasures are ultimately unsatisfying.</span>
+                    <span class="sentence" data-index="35">We deeply need more than these can offer.</span>
+                    <span class="sentence" data-index="36">To the searching and discontented soul there seems to be a famine of truly meaningful experiences in the world, a drought of something substantial to satisfy the driving thirst of the human heart.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="37">We all occasionally feel that something is not quite right with life, even when things are going well—as if something is missing.</span>
+                    <span class="sentence" data-index="38">This can become a mournful itch that we do not know how to scratch.</span>
+                    <span class="sentence" data-index="39">Have you ever felt like there is more goodness and nobility inside you than is apparent?</span>
+                    <span class="sentence" data-index="40">Have you ever felt longings, like homesickness, without any explanation?</span>
+                    <span class="sentence" data-index="41">These longings are a normal and healthy part of the human experience.</span>
+                    <span class="sentence" data-index="42">There are times in our lives when we become especially thoughtful, and we think about the nature of our existence.</span>
+                    <span class="sentence" data-index="43">There are as many reasons to contemplate life as there are people.</span>
+                    <span class="sentence" data-index="44">Many devote much energy and time to the search for truth and meaning.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="45">The most basic reason to improve our understanding is for simple survival.</span>
+                    <span class="sentence" data-index="46">Many of us feel driven to learn and explore by curiosity or even boredom.</span>
+                    <span class="sentence" data-index="47">Some seek to lessen pain resulting from a traumatic experience or loss, while others fear death.</span>
+                    <span class="sentence" data-index="48">Many of us seek for something more authentic, some meaningful and lasting cause for which to hope or to work.</span>
+                    <span class="sentence" data-index="49">Others may feel empty or lost in life; whatever the reason may be, the desire connected with these thoughtful moments is to gain more perspective on life.</span>
+                    <span class="sentence" data-index="50">We need to define our place in the world, as we all eventually hunger and thirst to live each day with greater purpose and satisfaction.</span>
+                </p>
+
+                <h3 id="section-later-1" class="sentence" data-index="51">Twenty-Plus Years Later</h3>
+
+                <p>
+                    <span class="sentence" data-index="52">Reading these words now, I am struck by what I got right and what I had not yet learned to see.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="53">The hunger is real.</span>
+                    <span class="sentence" data-index="54">I would not soften that claim.</span>
+                    <span class="sentence" data-index="55">After decades of teaching, ministering, and living alongside people from vastly different backgrounds—atheists and believers, scientists and mystics, the wounded and the thriving—I have found this hunger to be universal.</span>
+                    <span class="sentence" data-index="56">That we exist is something we can agree upon.</span>
+                    <span class="sentence" data-index="57">Why we exist is the subject of much debate and passion.</span>
+                    <span class="sentence" data-index="58">What we do with existence defines our character and sense of identity.</span>
+                    <span class="sentence" data-index="59">These three facts form common ground for every searching soul.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="60">What I would add now is this: the hunger itself is not a sign that something is wrong with us.</span>
+                    <span class="sentence" data-index="61">It is evidence that we are awakening spiritually.</span>
+                    <span class="sentence" data-index="62">Those who feel no such hunger may have numbed themselves to it, or they may have found worldview frameworks that satisfy them, at least for a season.</span>
+                    <span class="sentence" data-index="63">Both possibilities deserve respectful tolerance.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="64">I have also come to appreciate a truth my younger self was circling but had not quite grasped: the living traditions that sustain people tend to offer not final answers but an imperfect, incomplete collection of coping skills for survival.</span>
+                    <span class="sentence" data-index="65">This spiritual hunger does not disappear when we find faith or a portion of truth.</span>
+                    <span class="sentence" data-index="66">It transforms.</span>
+                    <span class="sentence" data-index="67">It becomes anticipation rather than anguish.</span>
+                    <span class="sentence" data-index="68">I feel a pleasant sense of "something more" approaching, a developmental shift I cannot fully name but will welcome when I recognize its arrival.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="69">If you recognize this hunger in yourself, know that it is neither weakness nor failure.</span>
+                </p>
+
+                <h2 id="section-thesis-2-questions-that-demand-answers">Thesis 2: Questions That Demand Answers</h2>
+
+                <p>
+                    <span class="sentence" data-index="70">It is the evidence of your "aliveness."</span>
+                </p>
+
+                <h3 id="section-earlier-2" class="sentence" data-index="71">From My Earlier Writings</h3>
+
+                <p>
+                    <span class="sentence" data-index="72">As we search for understanding, we naturally wonder about life's purpose and question the wisdom we've inherited.</span>
+                    <span class="sentence" data-index="73">Many traditions teach that we are born to die, yet we must die to truly live.</span>
+                    <span class="sentence" data-index="74">Mortals live only for a time and then die.</span>
+                    <span class="sentence" data-index="75">Mortality is the limited span of this life, while immortality is eternal life.</span>
+                    <span class="sentence" data-index="76">As seeds of God, we seem to barely have time to take root and blossom in the gardens of mortality.</span>
+                    <span class="sentence" data-index="77">It also seems that we might only mature to bear the fruits of immortality long after our mortal journey ends.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="78">There are many more immediate concerns than our fear of death and hopes for immortality.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="79">Consider these fundamental questions: Who am I?</span>
+                    <span class="sentence" data-index="80">Why am I?</span>
+                    <span class="sentence" data-index="81">What can I become?</span>
+                    <span class="sentence" data-index="82">What is happiness, and how do we find it in this life?</span>
+                    <span class="sentence" data-index="83">Do good and evil really exist as objective realities?</span>
+                    <span class="sentence" data-index="84">What is the true nature of our existence, and what are we becoming?</span>
+                    <span class="sentence" data-index="85">Is there an authority greater than human conscience and desire?</span>
+                    <span class="sentence" data-index="86">In what or in whom can we place our trust?</span>
+                    <span class="sentence" data-index="87">How can we distinguish truth from error?</span>
+                </p>
+
+                <h3 id="section-later-2" class="sentence" data-index="88">Twenty-Plus Years Later</h3>
+
+                <p>
+                    <span class="sentence" data-index="89">These questions still matter.</span>
+                    <span class="sentence" data-index="90">But in recent years, I have found a simpler way to organize them—one that emerged, unexpectedly, through dialogue with an artificial intelligence and refinement in numerous interfaith chats on virtual reality social platforms.</span>
+                    <span class="sentence" data-index="91">When I asked "What questions feel most essential for people to answer so that they can feel like things are okay?" The volume of responses clarified what I had been perceiving for decades.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="92">First, identity and worth: Who am I, and do I matter?</span>
+                    <span class="sentence" data-index="93">We need assurance that our existence has significance—that we are not merely interchangeable or accidental.</span>
+                    <span class="sentence" data-index="94">Second, meaning and purpose: What am I here for?</span>
+                    <span class="sentence" data-index="95">Most people need to feel their days add up to something—that their effort and suffering are not arbitrary.</span>
+                    <span class="sentence" data-index="96">Third, connection and belonging: Am I known, and do I belong somewhere?</span>
+                    <span class="sentence" data-index="97">Loneliness is not just uncomfortable; it is existentially destabilizing.</span>
+                    <span class="sentence" data-index="98">Fourth, goodness and moral orientation: What is right, and can I live it?</span>
+                    <span class="sentence" data-index="99">Moral confusion creates deep anxiety and spiritual unrest.</span>
+                    <span class="sentence" data-index="100">Fifth, suffering and coherence: Why do bad things happen, and can I bear them?</span>
+                    <span class="sentence" data-index="101">We can endure remarkable hardship if it fits into a coherent story.</span>
+                    <span class="sentence" data-index="102">And sixth, death and continuity: What happens when I die, and does anything last?</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="103">What strikes me is that these are not puzzles to solve only once—they are divinely created existential tensions to live within.</span>
+                    <span class="sentence" data-index="104">I no longer expect to arrive at answers that silence the questions.</span>
+                    <span class="sentence" data-index="105">Instead, I have learned to dwell within them, letting the questions themselves become companions on the journey.</span>
+                    <span class="sentence" data-index="106">Perhaps this is what spiritual maturity looks like: not the accumulation of certainties, but the capacity to hold uncertainty without despair.</span>
+                </p>
+
+                <h2 id="section-thesis-3-how-we-cope" class="sentence" data-index="107">Thesis 3: How We Cope</h2>
+
+                <h3 id="section-earlier-3" class="sentence" data-index="108">From My Earlier Writings</h3>
+
+                <p>
+                    <span class="sentence" data-index="109">To satisfy our hunger for truth, meaning, and lasting happiness, we must pursue them directly and honestly.</span>
+                    <span class="sentence" data-index="110">Unfortunately, many of us cope with such hunger by substituting temporary distractions in its place.</span>
+                    <span class="sentence" data-index="111">We have observed several such coping mechanisms in ourselves and in others, including pride, despair, rebellion, submission, and self-justification.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="112"><strong>Pride.</strong></span>
+                    <span class="sentence" data-index="113">Competition is a natural part of the human experience.</span>
+                    <span class="sentence" data-index="114">It can be very healthy when combined with wisdom and civility.</span>
+                    <span class="sentence" data-index="115">However, when competition is adopted as the meaning of life, all there is to one's existence is the survival of ego and the pursuit of power, position, and fame.</span>
+                    <span class="sentence" data-index="116">Such competition is a vain attempt to create meaning where none can exist for long.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="117"><strong>Despair.</strong></span>
+                    <span class="sentence" data-index="118">A sorrowful way to deal with life is to actively refuse to cope.</span>
+                    <span class="sentence" data-index="119">Some have been overwhelmed by the search for truth to such a degree that they feel confused, frustrated, or even scared—losing hope in ever understanding life.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="120"><strong>Rebellion.</strong></span>
+                    <span class="sentence" data-index="121">Some cope by resisting authority or authoritative ideas.</span>
+                    <span class="sentence" data-index="122">While it is healthy to consider ideas independently, many categorically reject traditional wisdom.</span>
+                    <span class="sentence" data-index="123">Rebellion often arises as a response to traumatic or confusing experiences and becomes a defense mechanism rooted in mistrust.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="124"><strong>Submission.</strong></span>
+                    <span class="sentence" data-index="125">There is wisdom in carefully evaluating long-held traditions.</span>
+                    <span class="sentence" data-index="126">However, we refer here to those who embrace authority without question or careful thought.</span>
+                    <span class="sentence" data-index="127">Some distrust their own judgment, preferring to be told what to believe.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="128"><strong>Self-Justification.</strong></span>
+                    <span class="sentence" data-index="129">We often go to great lengths to excuse our thoughts, feelings, and actions.</span>
+                    <span class="sentence" data-index="130">Many seek self-justification by embracing philosophical systems that validate their choices.</span>
+                </p>
+
+                <h3 id="section-later-3" class="sentence" data-index="131">Twenty-Plus Years Later</h3>
+
+                <p>
+                    <span class="sentence" data-index="132">This section troubled me significantly when I reread it in my fifties.</span>
+                    <span class="sentence" data-index="133">Not because I think the categories are wrong.</span>
+                    <span class="sentence" data-index="134">Pride, despair, rebellion, submission, and self-justification do describe real patterns I see in myself and others.</span>
+                    <span class="sentence" data-index="135">What troubles me is the tone of certainty from my early decades.</span>
+                    <span class="sentence" data-index="136">My younger voice named these distractions as "false substitutes for truth," which implies judgment.</span>
+                    <span class="sentence" data-index="137">It suggests that people who cope this way are making a choice to avoid truth when they could simply choose otherwise.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="138">What I have learned in the last twenty years of teaching, ministry, and simply paying attention is this: most people are doing the best they know how.</span>
+                    <span class="sentence" data-index="139">They live with a mixture of strengths and weaknesses, shaped by their unique backstories and formative experiences.</span>
+                    <span class="sentence" data-index="140">Each person possesses a unique blend of incomplete coping skills, uncertain resources, and shifting social structures.</span>
+                    <span class="sentence" data-index="141">Each of us is also possessed of attitudes and worldviews that might or might not be adaptive to the needs of life.</span>
+                    <span class="sentence" data-index="142">No one is completely evil.</span>
+                    <span class="sentence" data-index="143">No one is completely good.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="144">The person who retreats into pride may have learned early that vulnerability invites harm.</span>
+                    <span class="sentence" data-index="145">The person who sinks into despair may have been genuinely overwhelmed by losses no one should have to bear alone.</span>
+                    <span class="sentence" data-index="146">The rebel may have been burned by authorities who violated sacred trust.</span>
+                    <span class="sentence" data-index="147">The one who submits may have never been given permission to think their own thoughts.</span>
+                    <span class="sentence" data-index="148">The self-justifier may be carrying shame so heavy that facing it directly would break them.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="149">These are not failures of will.</span>
+                    <span class="sentence" data-index="150">They are survival strategies, bookmarks of safety in our story of healing and progress.</span>
+                    <span class="sentence" data-index="151">They deserve compassion, not condemnation.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="152">This does not mean we should remain in patterns that harm ourselves or others.</span>
+                    <span class="sentence" data-index="153">Growth is possible.</span>
+                    <span class="sentence" data-index="154">I have witnessed it literally thousands of times in my students, and experienced it myself.</span>
+                    <span class="sentence" data-index="155">But growth rarely comes through being told we are doing it wrong.</span>
+                    <span class="sentence" data-index="156">It comes through being met with understanding, being offered better tools, and being invited into communities that hold space for both our wounds and our healing growth.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="157">If you recognize yourself in any of these patterns, please hear me: you are not broken.</span>
+                    <span class="sentence" data-index="158">You are surviving.</span>
+                    <span class="sentence" data-index="159">And surviving is the first step toward thriving.</span>
+                </p>
+
+                <h2 id="section-thesis-4-the-path-forward" class="sentence" data-index="160">Thesis 4: The Path Forward</h2>
+
+                <h3 id="section-earlier-4" class="sentence" data-index="161">From My Earlier Writings</h3>
+
+                <p>
+                    <span class="sentence" data-index="162">All of these coping mechanisms can become artificial substitutes for the genuine discovery of truth, wisdom, and happiness.</span>
+                    <span class="sentence" data-index="163">We must pause to evaluate ourselves periodically.</span>
+                    <span class="sentence" data-index="164">Embracing extremes of pride, despair, rebellion, and submission can cripple the soul.</span>
+                    <span class="sentence" data-index="165">Wisdom lies in avoiding extremes and finding the balanced middle path.</span>
+                    <span class="sentence" data-index="166">For example, humility is in the balance between pride and despair.</span>
+                    <span class="sentence" data-index="167">Another example would be independent judgment, which lies in the balance between rebellion and blind submission.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="168">We invite you to embrace the search with honest humility.</span>
+                    <span class="sentence" data-index="169">Even when we grasp important truths, vast understanding still awaits discovery.</span>
+                    <span class="sentence" data-index="170">We assure you that truth is knowable, and enduring happiness can be found in this life.</span>
+                    <span class="sentence" data-index="171">Renew your search with courage and hope, remembering the promise: "Ask, and it shall be given you; seek, and ye shall find." "Our search" is worth any sacrifice.</span>
+                    <span class="sentence" data-index="172">These things we testify in the name of Jesus Christ, Amen.</span>
+                </p>
+
+                <h3 id="section-later-4" class="sentence" data-index="173">Twenty-Plus Years Later</h3>
+
+                <p>
+                    <span class="sentence" data-index="174">The balance my younger self described is real: humility between pride and despair, independent judgment between rebellion and submission.</span>
+                    <span class="sentence" data-index="175">This principle has guided my life and I still teach it.</span>
+                    <span class="sentence" data-index="176">My thousands of students will recognize—and probably roll their eyes with a smile at—the numerous repetitions of my personal catchphrase: "Truth, health, and wisdom are usually somewhere in the middle of extremes." My teaching style was to require the application of this principle in the science classroom and laboratory as I helped young minds understand natural principles, like: dynamic equilibrium in physical science, homeostasis in biology, and sustainability in environmental science.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="177">What I would now add to this chapter is that finding balance in spiritual development is not a destination but a practice.</span>
+                    <span class="sentence" data-index="178">For example, we do not arrive at humility and then possess it forever.</span>
+                    <span class="sentence" data-index="179">We practice humility, daily, in the face of our recurring temptations toward either pride or despair.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="180">The opposition in all things—whether viewed as wisdom in science or spirituality—is the tension between what we are and what we might become.</span>
+                    <span class="sentence" data-index="181">This dynamic tension is woven into the structure of existence itself.</span>
+                    <span class="sentence" data-index="182">It is not an obstacle to development but the very means of growth.</span>
+                    <span class="sentence" data-index="183">I now see mortality as a learning experience for our spirits.</span>
+                    <span class="sentence" data-index="184">And the Creator—the Master Teacher—wrote these conditions of opposition as the curriculum of our mortal education.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="185">I still believe what I wrote decades ago: truth is knowable.</span>
+                    <span class="sentence" data-index="186">Enduring happiness can be found.</span>
+                    <span class="sentence" data-index="187">Ask, and it shall be given.</span>
+                    <span class="sentence" data-index="188">Seek, and you shall find.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="189">But I have also learned that asking and seeking look different than I once imagined.</span>
+                    <span class="sentence" data-index="190">They are less like solving a puzzle and more like cultivating a relationship.</span>
+                    <span class="sentence" data-index="191">They require patience, humility, and the willingness to be surprised—even by the source of the answers.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="192">Another personal milestone has been settling into a humble confidence in God—one that doesn't depend on having final answers to life's important questions.</span>
+                    <span class="sentence" data-index="193">I have become less concerned about formalized creeds and official doctrines, though they are still a source of puzzling fascination to me.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="194">With or without perfect understanding of "correct" theology, I have accepted Jesus Christ as my divine and living Savior.</span>
+                    <span class="sentence" data-index="195">Whether or not others approve, I will follow Him.</span>
+                    <span class="sentence" data-index="196">I feel His peace.</span>
+                    <span class="sentence" data-index="197">I perceive God's power and Spirit operating in my life.</span>
+                    <span class="sentence" data-index="198">Whether I am accepted by particular traditions or philosophies has no bearing on my view of their adherents as fellow children of God, for I see them as brothers and sisters, fellow searchers.</span>
+                </p>
+
+                <h2 id="section-the-gift-of-holy-dissatisfaction" class="sentence" data-index="199">The Gift of Holy Dissatisfaction</h2>
+
+                <p>
+                    <span class="sentence" data-index="200">There is something I did not understand when I first wrote about the hunger within us.</span>
+                    <span class="sentence" data-index="201">I described it accurately—the restless longing, the sense that something is missing even when things are going well, the itch we cannot scratch.</span>
+                    <span class="sentence" data-index="202">But I did not yet see it for what it truly is.</span>
+                    <span class="sentence" data-index="203">It is a divine gift and an essential component of a plan based on divine wisdom that is beyond our own.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="204">Consider: God created us with moral agency—the capacity to choose.</span>
+                    <span class="sentence" data-index="205">He placed us in mortal conditions of opposition in all things—light and dark, pleasure and pain, growth and decay.</span>
+                    <span class="sentence" data-index="206">These are well-established principles of both the gospel and science.</span>
+                    <span class="sentence" data-index="207">But there is a companion gift to agency that I had not fully appreciated: The Creator also made us unable to remain satisfied for long with any level of accomplishment or personal development.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="208">This is not a curse.</span>
+                    <span class="sentence" data-index="209">This is not evidence that we are broken or ungrateful or missing the point.</span>
+                    <span class="sentence" data-index="210">It is the deliberate design of a wise God who is the literal parent of our spirits—the divine pedagogy of a divine teacher.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="211">"Blessed are they which do hunger and thirst after righteousness: for they shall be filled." Why would a loving Creator build restlessness into our souls? Because creation is not yet finished.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="212">We are still being created—shaped, refined, and polished.</span>
+                    <span class="sentence" data-index="213">The process that began before mortality does not conclude in mortality.</span>
+                    <span class="sentence" data-index="214">We will continue to develop eternally.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="215">If we could reach a point of complete satisfaction—a state where we felt no pull toward growth, no hunger for more light and truth—we would stop becoming what we are meant to become.</span>
+                    <span class="sentence" data-index="216">The restlessness is not a flaw.</span>
+                    <span class="sentence" data-index="217">It is the engine of eternal progression.</span>
+                </p>
+
+                <h2 id="section-the-safety-net-of-grace" class="sentence" data-index="218">The Safety Net of Grace</h2>
+
+                <p>
+                    <span class="sentence" data-index="219">But here is where the good news of Jesus Christ becomes essential.</span>
+                    <span class="sentence" data-index="220">If we are perpetually stretched toward growth, perpetually placed in conditions of opposition, perpetually invited to exercise agency in a world designed to challenge us, then we will inevitably make mistakes and eventually be held accountable.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="221">This is not pessimism.</span>
+                    <span class="sentence" data-index="222">It is the nature of an educational environment where the curriculum requires risk, choice, and the possibility of failure.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="223">The good news is that we can recover from mistakes.</span>
+                    <span class="sentence" data-index="224">Through the grace of Christ's atonement, we can recover and grow.</span>
+                    <span class="sentence" data-index="225">He has promised never to give up on us.</span>
+                    <span class="sentence" data-index="226">The prophet Malachi described Him as one who would "sit as a refiner and purifier of silver." The Lord patiently, attentively, watches us over the refining fire until the impurities are drawn out and His own image can be seen reflected in us.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="227">This divine transformation—named in various traditions as sanctification, theosis, purification, insight, discipleship, consecration, holy anointing, and more—happens through the power of the Holy Ghost, the Spirit of Truth.</span>
+                    <span class="sentence" data-index="228">It is not instantaneous.</span>
+                    <span class="sentence" data-index="229">It is not comfortable.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="230">And it is not completed in this life; it continues beyond the veil of death.</span>
+                    <span class="sentence" data-index="231">The resurrection is not the end of development; it is the next phase.</span>
+                </p>
+
+                <h2 id="section-god-loves-broken-things" class="sentence" data-index="232">God Loves Broken Things</h2>
+
+                <p>
+                    <span class="sentence" data-index="233">I admire a musical testimony by Kenneth Cope.</span>
+                    <span class="sentence" data-index="234">He captured something essential in his song "Broken." He writes that broken clouds give rain, broken soil grows grain, broken bread feeds us for one more day.</span>
+                    <span class="sentence" data-index="235">Broken storms yield light.</span>
+                    <span class="sentence" data-index="236">The break of day heals night.</span>
+                    <span class="sentence" data-index="237">Broken pride turns blindness into sight.</span>
+                    <span class="sentence" data-index="238">The refrain is simple and profound: God loves broken things.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="239">The lyrics help me as I attempt to explain my own awakening to this principle.</span>
+                    <span class="sentence" data-index="240">For years I had thought of brokenness as the problem and Christ as the solution—as if the goal were to be fixed and then remain unbroken.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="241">But the pattern of creation itself suggests otherwise.</span>
+                    <span class="sentence" data-index="242">Seeds must break open to grow.</span>
+                    <span class="sentence" data-index="243">Bread must be broken to nourish.</span>
+                    <span class="sentence" data-index="244">Hearts must be broken to become capable of deeper love.</span>
+                    <span class="sentence" data-index="245">The most holy of sacrifices we can give to God is a "broken spirit: a broken and a contrite heart" (Psalm 51:17, 3 Nephi 9:20).</span>
+                    <span class="sentence" data-index="246">This, He can work with.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="247">The hunger we feel, the dissatisfaction with any resting place, the holy restlessness that drives us forward—this is the breaking that makes growth possible.</span>
+                    <span class="sentence" data-index="248">Christ does not stand at the end of the process, waiting to congratulate us when we finally get it right.</span>
+                    <span class="sentence" data-index="249">He walks with us through every breaking—every reformation—every new becoming.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="250">"He will sit as a refiner." Not standing apart.</span>
+                    <span class="sentence" data-index="251">Sitting.</span>
+                    <span class="sentence" data-index="252">Attentive.</span>
+                    <span class="sentence" data-index="253">Present.</span>
+                    <span class="sentence" data-index="254">Patient.</span>
+                    <span class="sentence" data-index="255">Participating.</span>
+                    <span class="sentence" data-index="256">Masterful.</span>
+                    <span class="sentence" data-index="257">Watching until the work is done—and the work is never done, because we are eternal beings with infinite potential.</span>
+                </p>
+
+                <h2 id="section-the-invitation" class="sentence" data-index="258">The Invitation</h2>
+
+                <p>
+                    <span class="sentence" data-index="259">So when you feel the hunger return after accomplishing something meaningful and find yourself quickly restless for more, do not interpret this as failure.</span>
+                    <span class="sentence" data-index="260">Do not assume you missed something or chose the wrong path.</span>
+                    <span class="sentence" data-index="261">This restlessness is a gift.</span>
+                    <span class="sentence" data-index="262">It is the voice of your eternal nature refusing to settle for less than what you are capable of becoming.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="263">And when you stumble, when you make mistakes in this mortal educational environment—as all of us do—know that the Refiner sits beside his holy fire, watching, waiting, ready to continue the work whenever you willingly return to Him.</span>
+                    <span class="sentence" data-index="264">He has promised not to give up on us.</span>
+                    <span class="sentence" data-index="265">The process of sanctification does not conclude in this mortal life.</span>
+                    <span class="sentence" data-index="266">There is eternity.</span>
+                    <span class="sentence" data-index="267">There is grace.</span>
+                    <span class="sentence" data-index="268">There is always another invitation to move forward.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="269">Creation is not finished.</span>
+                    <span class="sentence" data-index="270">Neither are you.</span>
+                    <span class="sentence" data-index="271">Neither am I.</span>
+                    <span class="sentence" data-index="272">And that, I have come to believe, is very good news.</span>
+                </p>
+
+                <h2 id="section-to-my-fellow-searchers" class="sentence" data-index="273">To My Fellow Searchers</h2>
+
+                <p>
+                    <span class="sentence" data-index="274">I do not know where you are in your search.</span>
+                    <span class="sentence" data-index="275">Perhaps you are just beginning—overwhelmed by questions that seem to have no answers.</span>
+                    <span class="sentence" data-index="276">Perhaps you are deep in the middle—having found some things but still hungry for more.</span>
+                    <span class="sentence" data-index="277">Perhaps you have wandered for years and are tired—or even angry.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="278">Wherever you are, know this: the search itself is meaningful.</span>
+                    <span class="sentence" data-index="279">The hunger you feel is evidence of your aliveness.</span>
+                    <span class="sentence" data-index="280">The questions that haunt you are invitations, not accusations.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="281">I have not arrived at my final destination.</span>
+                    <span class="sentence" data-index="282">Neither, I suspect, have you.</span>
+                    <span class="sentence" data-index="283">But we are on our way, together.</span>
+                    <span class="sentence" data-index="284">And perhaps that is enough.</span>
+                </p>
+
+                <p>
+                    <span class="sentence" data-index="285">Here is what I am still discovering: That compassion for others begins with compassion for myself.</span>
+                    <span class="sentence" data-index="286">That conviction and humility can coexist.</span>
+                    <span class="sentence" data-index="287">That the Creator's wisdom can be read in the Creation if we have eyes to see.</span>
+                    <span class="sentence" data-index="288">That unexpected conversation partners—even virtual or artificial ones—can illuminate what we have long sensed but not yet named. What are you discovering? Our search continues along the straight and narrow path.</span>
+                    <span class="sentence" data-index="289">May we find one another along the way is my prayer these days.</span>
+                </p>
+
+                <h2 id="section-a-promise-i-hope-to-fulfill" class="sentence" data-index="290">A Promise I Hope to Fulfill</h2>
+
+                <p>
+                    <span class="sentence" data-index="291">If I am blessed to remain in this mortal educational environment for another twenty years, I am confident that I will need to revise this chapter again to reflect yet another cycle of spiritual wrestlings and personal growth.</span>
+                    <span class="sentence" data-index="292">I testify of my confidence in the divinity of the process—confidence in "Our Search," in the name of Jesus Christ.</span>
+                    <span class="sentence" data-index="293">Amen.</span>
+                </p>
+        </article>
+
+        <!-- Study Resources -->
+        <section class="chapter-content" style="background: var(--brown-rich);" id="study-resources">
+            <h2 class="section-title">Study Resources</h2>
+            
+            <div class="resource-list">
+                <!-- Audio Overview -->
+                <a href="#" class="resource-card" 
+                   data-modal="audio"
+                   data-src="../../assets/audio/WoP_CH02_Our_Search_Overview_Podcast.mp3"
+                   data-title="Audio Overview"
+                   data-subtitle="A conversation exploring the key themes of this chapter"
+                   data-icon="🎧">
+                    <div class="resource-icon">🎧</div>
+                    <div class="resource-info">
+                        <h3 class="resource-title">Audio Overview</h3>
+                        <p class="resource-desc">A conversation exploring the key themes of this chapter</p>
+                    </div>
+                    <span class="resource-arrow">→</span>
+                </a>
+                
+                <!-- Music -->
+                <a href="#" class="resource-card music"
+                   data-modal="audio"
+                   data-src="../../assets/audio/02_1_Our_Search_-_Sacred_Americana_Testimony.mp3"
+                   data-title="Our Search"
+                   data-subtitle="Sacred Americana testimony by Brother Aaron"
+                   data-icon="♫">
+                    <div class="resource-icon">♫</div>
+                    <div class="resource-info">
+                        <h3 class="resource-title">Testimonial Music: "Our Search"</h3>
+                        <p class="resource-desc">Sacred Americana testimony by Brother Aaron</p>
+                    </div>
+                    <span class="resource-arrow">→</span>
+                </a>
+                
+                <!-- Infographic -->
+                <a href="#" class="resource-card"
+                   data-modal="image"
+                   data-src="../../assets/images/WoP_Ch02_Our_Search_Infographic.png"
+                   data-title="Infographic Summary"
+                   data-subtitle="Visual overview of the hunger within, questions, coping, and path forward"
+                   data-icon="📊">
+                    <div class="resource-icon">📊</div>
+                    <div class="resource-info">
+                        <h3 class="resource-title">Infographic Summary</h3>
+                        <p class="resource-desc">Visual overview of the hunger within, questions, coping, and path forward</p>
+                    </div>
+                    <span class="resource-arrow">→</span>
+                </a>
+                
+                <!-- Slides -->
+                <a href="chapter-02-slides.html" class="resource-card">
+                    <div class="resource-icon">📽</div>
+                    <div class="resource-info">
+                        <h3 class="resource-title">Slides for Group Study</h3>
+                        <p class="resource-desc">16-slide presentation for class or study group discussion</p>
+                    </div>
+                    <span class="resource-arrow">→</span>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Engage: Reflection Prompt -->
+        <section class="reflection-section" id="reflection">
+            <div class="reflection-container">
+                <h2 class="section-title">Engage</h2>
+
+                <div class="reflection-card">
+                    <div class="reflection-intro">
+                        <h3>Personal Reflection</h3>
+                        <p>Take a few moments to ponder and record your thoughts on this chapter's themes.</p>
+                    </div>
+
+                    <div class="reflection-step">
+                        <div class="step-header">
+                            <span class="step-number">1</span>
+                            <h4 class="step-title">Assess: Where Am I Now?</h4>
+                        </div>
+                        <p class="step-prompt">What spiritual hunger do I recognize in myself? Which of the coping mechanisms (pride, despair, rebellion, submission, self-justification) have I relied on, and what survival need might they have served?</p>
+                        <textarea class="step-textarea" placeholder="Reflect on your spiritual hunger and coping patterns..."></textarea>
+                    </div>
+
+                    <div class="reflection-step">
+                        <div class="step-header">
+                            <span class="step-number">2</span>
+                            <h4 class="step-title">Align: Seeking Grace</h4>
+                        </div>
+                        <p class="step-prompt">How does the idea of "holy dissatisfaction" as a divine gift change how I view my restlessness? What would it mean to see mortality as a "learning experience" with opposition as the curriculum?</p>
+                        <textarea class="step-textarea" placeholder="Consider how divine design shapes your search..."></textarea>
+                    </div>
+
+                    <div class="reflection-step">
+                        <div class="step-header">
+                            <span class="step-number">3</span>
+                            <h4 class="step-title">Act: My Commitment</h4>
+                        </div>
+                        <p class="step-prompt">What one thing can I do this week to approach my search with "honest humility"—embracing the tension rather than seeking premature resolution?</p>
+                        <textarea class="step-textarea" placeholder="One specific action I will take..."></textarea>
+                    </div>
+
+                    <!-- Public sharing option (visible when logged in) -->
+                    <div id="reflectionPublicOption">
+                        <input type="checkbox" id="reflectionPublic" name="is_public">
+                        <label for="reflectionPublic">Share publicly with the community</label>
+                    </div>
+
+                    <div class="reflection-actions">
+                        <button class="btn btn-primary" onclick="ReflectionsManager.saveReflection()">Save My Reflection</button>
+                        <span id="saveStatus" class="save-status"></span>
+                        <button class="btn btn-secondary" onclick="ReflectionsManager.clearReflection()">Clear</button>
+                    </div>
+
+                    <p class="reflection-note">Your reflections are saved locally in your browser and are not shared.</p>
+
+                    <!-- Community Reflections Section -->
+                    <div class="community-reflections-section" id="communitySection">
+                        <div class="community-reflections-header">
+                            <h4>Community Reflections</h4>
+                        </div>
+                        <div id="communityReflections">
+                            <!-- Populated by ReflectionsManager -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Engage: Discord Discussion -->
+        <section class="discord-discussion" id="discussion">
+            <div class="discord-discussion-card">
+                <div class="discord-discussion-header">
+                    <h2>Join the Discussion</h2>
+                    <span class="discord-badge">
+                        <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.36-.698.772-1.362 1.225-1.993a.076.076 0 0 0-.041-.107 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.125-.093.246-.198.373-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772-1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                        Discord
+                    </span>
+                </div>
+                <p class="discord-discussion-text">
+                    Share your insights and questions about this chapter with fellow seekers and saints in our Discord community.
+                </p>
+                <a href="https://discord.com/channels/1255720493629628466/1463835723995152457" class="discord-btn" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.36-.698.772-1.362 1.225-1.993a.076.076 0 0 0-.041-.107 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.125-.093.246-.198.373-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    Join #ch02-our-search
+                </a>
+            </div>
+        </section>
+        
+        <!-- Chapter Navigation -->
+        <!-- Chapter Navigation -->
+        <nav class="chapter-nav" aria-label="Chapter navigation">
+            <a href="chapter-01-introduction.html" class="nav-link nav-prev">
+                <span class="nav-arrow">←</span>
+                <span class="nav-label">Previous</span>
+            </a>
+            <a href="../writings.html" class="nav-link nav-contents">
+                <span class="nav-label">Contents</span>
+            </a>
+            <span class="nav-link disabled">
+                <span class="nav-label">Next</span>
+                <span class="nav-arrow">→</span>
+            </span>
+        </nav>
+    </main>
+    
+    <!-- Reader Toolbar -->
+    <div class="reader-toolbar" id="readerToolbar">
+        <!-- Font Size Controls -->
+        <div class="toolbar-group">
+            <button class="toolbar-btn font-btn small" onclick="setFontSize('small')" aria-label="Small text">A</button>
+            <button class="toolbar-btn font-btn medium active" onclick="setFontSize('medium')" aria-label="Medium text">A</button>
+            <button class="toolbar-btn font-btn large" onclick="setFontSize('large')" aria-label="Large text">A</button>
+        </div>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- Bookmark Button -->
+        <button class="toolbar-btn bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" aria-label="Bookmark this location">
+            <span class="bookmark-icon">🔖</span>
+            <span class="bookmark-text">Bookmark</span>
+        </button>
+        
+        <div class="toolbar-divider"></div>
+        
+        <!-- Share Button -->
+        <div class="share-container">
+            <button class="toolbar-btn share-btn" onclick="toggleShareDropdown()" aria-label="Share this chapter">
+                <span>↗</span>
+                <span>Share</span>
+            </button>
+            <div class="share-dropdown" id="shareDropdown">
+                <button onclick="copyLink()">
+                    <span class="share-icon">🔗</span>
+                    <span>Copy Link</span>
+                </button>
+                <a href="#" id="shareFacebook" target="_blank" rel="noopener">
+                    <span class="share-icon">f</span>
+                    <span>Facebook</span>
+                </a>
+                <a href="#" id="shareTwitter" target="_blank" rel="noopener">
+                    <span class="share-icon">𝕏</span>
+                    <span>X (Twitter)</span>
+                </a>
+                <a href="#" id="shareEmail">
+                    <span class="share-icon">✉</span>
+                    <span>Email</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+    <!-- Resource Modal Overlay -->
+    <div class="resource-modal" id="resourceModal">
+        <div class="resource-modal-bg"></div>
+        <div class="resource-modal-content">
+            <header class="resource-modal-header">
+                <h2 class="resource-modal-title">
+                    <span class="modal-icon" id="modalIcon">🎧</span>
+                    <span id="modalTitle">Resource Title</span>
+                </h2>
+                <button class="resource-modal-close" onclick="closeResourceModal()">
+                    ← Back to Chapter
+                </button>
+            </header>
+            <div class="resource-modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <img src="../../assets/favicons/lantern-icon-64.png" alt="Lantern" class="footer-lantern" width="64" height="64">
+        <p class="footer-tagline">Where Seekers and Saints Find Common Ground</p>
+        <p class="footer-name">Brother Aaron Powner</p>
+        <div class="footer-links">
+            <a href="../about.html#ai-disclosure">AI Disclosure</a>
+            <a href="../connect.html#contact">Contact</a>
+            <a href="../about.html#faq">FAQ</a>
+        </div>
+        <p class="footer-copyright">© 2026 Words of Plainness Ministry. All rights reserved.</p>
+    </footer>
+
+    <!-- Hidden audio element -->
+    <audio id="chapterAudio" preload="metadata">
+        <source src="../../assets/audio/WoP_Ch02_Our_Search_Narration.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        // =====================================================
+        // SENTENCE TIMESTAMPS FOR AUDIO SYNC
+        // =====================================================
+        
+        const sentenceTimestamps = [
+            { index: 0, start: 0.0, end: 1.12 },
+            { index: 1, start: 1.32, end: 6.54 },
+            { index: 2, start: 7.28, end: 11.16 },
+            { index: 3, start: 11.78, end: 19.88 },
+            { index: 4, start: 21.02, end: 31.2 },
+            { index: 5, start: 31.62, end: 35.6 },
+            { index: 6, start: 36.2, end: 44.24 },
+            { index: 7, start: 45.08, end: 52.16 },
+            { index: 8, start: 52.66, end: 57.72 },
+            { index: 9, start: 58.4, end: 64.32 },
+            { index: 10, start: 64.62, end: 79.18 },
+            { index: 11, start: 79.8, end: 82.92 },
+            { index: 12, start: 83.06, end: 85.64 },
+            { index: 13, start: 86.42, end: 99.64 },
+            { index: 14, start: 100.52, end: 110.44 },
+            { index: 15, start: 110.56, end: 124.4 },
+            { index: 16, start: 124.98, end: 133.8 },
+            { index: 17, start: 134.0, end: 137.54 },
+            { index: 18, start: 138.0, end: 145.7 },
+            { index: 19, start: 146.16, end: 157.22 },
+            { index: 20, start: 157.22, end: 165.04 },
+            { index: 21, start: 165.68, end: 174.66 },
+            { index: 22, start: 175.34, end: 180.4 },
+            { index: 23, start: 180.72, end: 184.24 },
+            { index: 24, start: 184.73, end: 190.26 },
+            { index: 25, start: 190.74, end: 192.42 },
+            { index: 26, start: 192.64, end: 194.12 },
+            { index: 27, start: 194.62, end: 207.8 },
+            { index: 28, start: 208.32, end: 209.98 },
+            { index: 29, start: 210.38, end: 211.38 },
+            { index: 30, start: 212.18, end: 214.82 },
+            { index: 31, start: 215.12, end: 216.48 },
+            { index: 32, start: 216.78, end: 224.98 },
+            { index: 33, start: 225.72, end: 230.42 },
+            { index: 34, start: 231.04, end: 240.12 },
+            { index: 35, start: 240.12, end: 243.04 },
+            { index: 36, start: 243.76, end: 254.4 },
+            { index: 37, start: 254.56, end: 261.9 },
+            { index: 38, start: 262.38, end: 265.9 },
+            { index: 39, start: 266.46, end: 270.72 },
+            { index: 40, start: 271.4, end: 275.64 },
+            { index: 41, start: 276.36, end: 280.2 },
+            { index: 42, start: 280.82, end: 286.44 },
+            { index: 43, start: 287.04, end: 290.5 },
+            { index: 44, start: 290.5, end: 294.74 },
+            { index: 45, start: 295.02, end: 299.04 },
+            { index: 46, start: 300.16, end: 304.7 },
+            { index: 47, start: 305.14, end: 310.9 },
+            { index: 48, start: 311.88, end: 318.32 },
+            { index: 49, start: 318.96, end: 328.36 },
+            { index: 50, start: 328.62, end: 336.2 },
+            { index: 51, start: 337.76, end: 338.92 },
+            { index: 52, start: 339.2, end: 344.48 },
+            { index: 53, start: 344.6, end: 345.86 },
+            { index: 54, start: 345.86, end: 347.88 },
+            { index: 55, start: 348.38, end: 361.76 },
+            { index: 56, start: 362.42, end: 364.86 },
+            { index: 57, start: 365.38, end: 369.12 },
+            { index: 58, start: 369.58, end: 373.54 },
+            { index: 59, start: 373.54, end: 377.72 },
+            { index: 60, start: 378.0, end: 383.18 },
+            { index: 61, start: 383.56, end: 386.08 },
+            { index: 62, start: 386.84, end: 395.48 },
+            { index: 63, start: 396.18, end: 399.1 },
+            { index: 64, start: 399.22, end: 415.08 },
+            { index: 65, start: 415.92, end: 420.84 },
+            { index: 66, start: 421.44, end: 422.5 },
+            { index: 67, start: 423.04, end: 426.18 },
+            { index: 68, start: 426.84, end: 436.56 },
+            { index: 69, start: 436.74, end: 441.88 },
+            { index: 70, start: 442.48, end: 445.28 },
+            { index: 71, start: 450.3, end: 451.8 },
+            { index: 72, start: 452.06, end: 458.18 },
+            { index: 73, start: 458.82, end: 463.82 },
+            { index: 74, start: 464.76, end: 467.58 },
+            { index: 75, start: 468.28, end: 473.36 },
+            { index: 76, start: 474.02, end: 479.68 },
+            { index: 77, start: 480.4, end: 486.54 },
+            { index: 78, start: 486.54, end: 491.72 },
+            { index: 79, start: 492.24, end: 495.8 },
+            { index: 80, start: 496.28, end: 497.2 },
+            { index: 81, start: 497.64, end: 498.8 },
+            { index: 82, start: 499.44, end: 502.6 },
+            { index: 83, start: 503.2, end: 506.76 },
+            { index: 84, start: 507.52, end: 511.62 },
+            { index: 85, start: 512.28, end: 515.56 },
+            { index: 86, start: 515.56, end: 519.06 },
+            { index: 87, start: 519.66, end: 522.28 },
+            { index: 88, start: 523.76, end: 524.84 },
+            { index: 89, start: 524.84, end: 526.62 },
+            { index: 90, start: 526.66, end: 541.42 },
+            { index: 91, start: 541.92, end: 553.5 },
+            { index: 92, start: 553.9, end: 558.1 },
+            { index: 93, start: 558.7, end: 564.64 },
+            { index: 94, start: 564.94, end: 568.46 },
+            { index: 95, start: 569.16, end: 574.98 },
+            { index: 96, start: 575.54, end: 579.98 },
+            { index: 97, start: 580.58, end: 584.78 },
+            { index: 98, start: 584.8, end: 590.48 },
+            { index: 99, start: 591.0, end: 594.66 },
+            { index: 100, start: 594.78, end: 600.32 },
+            { index: 101, start: 601.0, end: 605.1 },
+            { index: 102, start: 605.34, end: 611.48 },
+            { index: 103, start: 611.66, end: 619.3 },
+            { index: 104, start: 620.0, end: 623.82 },
+            { index: 105, start: 624.36, end: 630.94 },
+            { index: 106, start: 631.62, end: 640.42 },
+            { index: 107, start: 641.64, end: 643.92 },
+            { index: 108, start: 644.06, end: 645.64 },
+            { index: 109, start: 645.88, end: 652.68 },
+            { index: 110, start: 652.68, end: 659.22 },
+            { index: 111, start: 659.68, end: 670.16 },
+            { index: 112, start: 670.16, end: 671.16 },
+            { index: 113, start: 672.16, end: 675.56 },
+            { index: 114, start: 676.1, end: 679.8 },
+            { index: 115, start: 679.8, end: 691.58 },
+            { index: 116, start: 692.58, end: 697.56 },
+            { index: 117, start: 698.64, end: 699.24 },
+            { index: 118, start: 699.54, end: 703.38 },
+            { index: 119, start: 703.38, end: 714.24 },
+            { index: 120, start: 715.12, end: 715.8 },
+            { index: 121, start: 716.08, end: 719.5 },
+            { index: 122, start: 719.94, end: 725.6 },
+            { index: 123, start: 725.6, end: 734.38 },
+            { index: 124, start: 775.72, end: 776.14 },
+            { index: 125, start: 776.14, end: 777.34 },
+            { index: 126, start: 777.34, end: 779.44 },
+            { index: 127, start: 779.44, end: 781.24 },
+            { index: 128, start: 776.54, end: 777.52 },
+            { index: 129, start: 777.52, end: 779.47 },
+            { index: 130, start: 779.47, end: 781.12 },
+            { index: 131, start: 781.12, end: 782.12 },
+            { index: 132, start: 782.12, end: 783.92 },
+            { index: 133, start: 783.92, end: 785.12 },
+            { index: 134, start: 785.12, end: 787.52 },
+            { index: 135, start: 780.46, end: 784.34 },
+            { index: 136, start: 784.72, end: 790.82 },
+            { index: 137, start: 791.28, end: 797.64 },
+            { index: 138, start: 797.9, end: 806.68 },
+            { index: 139, start: 807.16, end: 813.94 },
+            { index: 140, start: 815.14, end: 823.18 },
+            { index: 141, start: 824.16, end: 830.82 },
+            { index: 142, start: 831.68, end: 833.34 },
+            { index: 143, start: 833.88, end: 835.7 },
+            { index: 144, start: 835.7, end: 840.86 },
+            { index: 145, start: 841.66, end: 847.4 },
+            { index: 146, start: 848.22, end: 852.14 },
+            { index: 147, start: 853.06, end: 857.3 },
+            { index: 148, start: 858.18, end: 863.86 },
+            { index: 149, start: 863.86, end: 865.74 },
+            { index: 150, start: 866.28, end: 871.52 },
+            { index: 151, start: 872.38, end: 875.14 },
+            { index: 152, start: 875.3, end: 879.24 },
+            { index: 153, start: 879.72, end: 881.02 },
+            { index: 154, start: 881.54, end: 886.48 },
+            { index: 155, start: 887.36, end: 890.56 },
+            { index: 156, start: 890.56, end: 901.5 },
+            { index: 157, start: 901.72, end: 907.04 },
+            { index: 158, start: 907.58, end: 908.64 },
+            { index: 159, start: 909.26, end: 912.38 },
+            { index: 160, start: 913.62, end: 915.72 },
+            { index: 161, start: 915.72, end: 917.36 },
+            { index: 162, start: 917.74, end: 925.02 },
+            { index: 163, start: 925.68, end: 928.52 },
+            { index: 164, start: 929.22, end: 934.8 },
+            { index: 165, start: 935.42, end: 939.68 },
+            { index: 166, start: 940.22, end: 944.16 },
+            { index: 167, start: 944.8, end: 950.82 },
+            { index: 168, start: 951.0, end: 954.32 },
+            { index: 169, start: 955.08, end: 959.88 },
+            { index: 170, start: 960.72, end: 965.96 },
+            { index: 171, start: 966.84, end: 979.1 },
+            { index: 172, start: 980.06, end: 984.26 },
+            { index: 173, start: 985.78, end: 987.28 },
+            { index: 174, start: 987.4, end: 996.96 },
+            { index: 175, start: 997.5, end: 1000.82 },
+            { index: 176, start: 1000.82, end: 1033.26 },
+            { index: 177, start: 1033.42, end: 1040.62 },
+            { index: 178, start: 1041.46, end: 1045.74 },
+            { index: 179, start: 1046.46, end: 1053.66 },
+            { index: 180, start: 1054.36, end: 1063.36 },
+            { index: 181, start: 1064.02, end: 1067.92 },
+            { index: 182, start: 1068.48, end: 1072.42 },
+            { index: 183, start: 1073.08, end: 1076.56 },
+            { index: 184, start: 1076.94, end: 1083.76 },
+            { index: 185, start: 1084.04, end: 1088.48 },
+            { index: 186, start: 1088.96, end: 1090.9 },
+            { index: 187, start: 1091.68, end: 1093.46 },
+            { index: 188, start: 1094.22, end: 1095.86 },
+            { index: 189, start: 1096.62, end: 1101.16 },
+            { index: 190, start: 1102.0, end: 1106.12 },
+            { index: 191, start: 1106.86, end: 1113.04 },
+            { index: 192, start: 1113.2, end: 1121.76 },
+            { index: 193, start: 1122.2, end: 1129.4 },
+            { index: 194, start: 1129.46, end: 1137.22 },
+            { index: 195, start: 1137.88, end: 1140.84 },
+            { index: 196, start: 1141.16, end: 1142.76 },
+            { index: 197, start: 1143.34, end: 1147.04 },
+            { index: 198, start: 1148.1, end: 1160.36 },
+            { index: 199, start: 1161.28, end: 1164.02 },
+            { index: 200, start: 1164.02, end: 1168.06 },
+            { index: 201, start: 1168.44, end: 1177.28 },
+            { index: 202, start: 1177.9, end: 1180.48 },
+            { index: 203, start: 1180.64, end: 1187.06 },
+            { index: 204, start: 1187.26, end: 1191.94 },
+            { index: 205, start: 1192.4, end: 1200.68 },
+            { index: 206, start: 1201.06, end: 1204.6 },
+            { index: 207, start: 1205.02, end: 1216.64 },
+            { index: 208, start: 1216.82, end: 1218.02 },
+            { index: 209, start: 1218.54, end: 1223.08 },
+            { index: 210, start: 1223.08, end: 1232.44 },
+            { index: 211, start: 1232.64, end: 1245.44 },
+            { index: 212, start: 1245.56, end: 1249.46 },
+            { index: 213, start: 1249.46, end: 1254.5 },
+            { index: 214, start: 1255.0, end: 1257.56 },
+            { index: 215, start: 1257.94, end: 1268.82 },
+            { index: 216, start: 1269.02, end: 1270.6 },
+            { index: 217, start: 1271.04, end: 1273.14 },
+            { index: 218, start: 1274.3, end: 1276.12 },
+            { index: 219, start: 1276.12, end: 1279.76 },
+            { index: 220, start: 1280.26, end: 1295.16 },
+            { index: 221, start: 1295.6, end: 1296.96 },
+            { index: 222, start: 1297.24, end: 1304.68 },
+            { index: 223, start: 1304.68, end: 1307.8 },
+            { index: 224, start: 1308.52, end: 1312.24 },
+            { index: 225, start: 1312.94, end: 1315.28 },
+            { index: 226, start: 1316.08, end: 1333.02 },
+            { index: 227, start: 1333.02, end: 1350.9 },
+            { index: 228, start: 1351.42, end: 1353.26 },
+            { index: 229, start: 1353.88, end: 1355.08 },
+            { index: 230, start: 1355.66, end: 1360.98 },
+            { index: 231, start: 1361.78, end: 1366.42 },
+            { index: 232, start: 1367.72, end: 1369.62 },
+            { index: 233, start: 1369.92, end: 1372.56 },
+            { index: 234, start: 1373.1, end: 1383.4 },
+            { index: 235, start: 1384.22, end: 1385.8 },
+            { index: 236, start: 1386.14, end: 1387.82 },
+            { index: 237, start: 1388.22, end: 1390.96 },
+            { index: 238, start: 1390.98, end: 1396.48 },
+            { index: 239, start: 1396.66, end: 1400.98 },
+            { index: 240, start: 1401.84, end: 1409.98 },
+            { index: 241, start: 1410.48, end: 1413.72 },
+            { index: 242, start: 1414.4, end: 1416.42 },
+            { index: 243, start: 1416.88, end: 1419.36 },
+            { index: 244, start: 1419.36, end: 1423.44 },
+            { index: 245, start: 1424.1, end: 1435.92 },
+            { index: 246, start: 1436.44, end: 1437.96 },
+            { index: 247, start: 1438.16, end: 1447.34 },
+            { index: 248, start: 1447.34, end: 1453.22 },
+            { index: 249, start: 1453.66, end: 1458.74 },
+            { index: 250, start: 1459.5, end: 1463.1 },
+            { index: 251, start: 1463.54, end: 1463.82 },
+            { index: 252, start: 1464.32, end: 1464.82 },
+            { index: 253, start: 1465.4, end: 1465.72 },
+            { index: 254, start: 1466.44, end: 1466.78 },
+            { index: 255, start: 1467.4, end: 1467.9 },
+            { index: 256, start: 1468.62, end: 1469.32 },
+            { index: 257, start: 1469.74, end: 1476.38 },
+            { index: 258, start: 1477.34, end: 1478.5 },
+            { index: 259, start: 1478.82, end: 1486.98 },
+            { index: 260, start: 1487.32, end: 1490.5 },
+            { index: 261, start: 1490.98, end: 1492.8 },
+            { index: 262, start: 1493.16, end: 1498.76 },
+            { index: 263, start: 1498.9, end: 1514.3 },
+            { index: 264, start: 1515.14, end: 1517.46 },
+            { index: 265, start: 1518.28, end: 1521.9 },
+            { index: 266, start: 1522.38, end: 1523.32 },
+            { index: 267, start: 1523.94, end: 1524.86 },
+            { index: 268, start: 1525.52, end: 1529.24 },
+            { index: 269, start: 1529.46, end: 1531.1 },
+            { index: 270, start: 1531.76, end: 1532.86 },
+            { index: 271, start: 1532.86, end: 1534.18 },
+            { index: 272, start: 1534.8, end: 1538.6 },
+            { index: 273, start: 1539.78, end: 1541.42 },
+            { index: 274, start: 1542.22, end: 1544.28 },
+            { index: 275, start: 1544.94, end: 1549.72 },
+            { index: 276, start: 1550.42, end: 1555.46 },
+            { index: 277, start: 1556.06, end: 1560.46 },
+            { index: 278, start: 1560.7, end: 1564.56 },
+            { index: 279, start: 1565.08, end: 1568.04 },
+            { index: 280, start: 1568.64, end: 1572.44 },
+            { index: 281, start: 1572.8, end: 1575.0 },
+            { index: 282, start: 1575.56, end: 1577.74 },
+            { index: 283, start: 1578.2, end: 1580.28 },
+            { index: 284, start: 1581.0, end: 1583.18 },
+            { index: 285, start: 1583.32, end: 1590.04 },
+            { index: 286, start: 1590.04, end: 1593.54 },
+            { index: 287, start: 1594.34, end: 1599.26 },
+            { index: 288, start: 1599.78, end: 1613.98 },
+            { index: 289, start: 1614.38, end: 1617.88 },
+            { index: 290, start: 1618.6, end: 1621.22 },
+            { index: 291, start: 1621.22, end: 1626.92 },
+            { index: 292, start: 1634.84, end: 1643.22 },
+            { index: 293, start: 1643.78, end: 1644.06 },
+        ];
+        
+        // =====================================================
+        // AUDIO PLAYER WITH TEXT SYNCHRONIZATION
+        // =====================================================
+
+        const audio = document.getElementById('chapterAudio');
+        const playerBar = document.getElementById('audioPlayerBar');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressFill = document.getElementById('progressFill');
+        const progressBar = document.getElementById('progressBar');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const listenBtn = document.getElementById('listenBtn');
+        const listenBtnText = document.getElementById('listenBtnText');
+        const autoscrollToggle = document.getElementById('autoscrollToggle');
+
+        let isPlaying = false;
+        let currentSentenceIndex = -1;
+        let audioNeedsRecovery = false;
+        let lastKnownTime = 0;
+
+        // =====================================================
+        // AUDIO RECOVERY SYSTEM
+        // Handles tab switching and audio interruptions
+        // =====================================================
+
+        function recoverAudio(targetTime, shouldPlay = false) {
+            return new Promise((resolve, reject) => {
+                console.log('Attempting audio recovery...');
+
+                // Store the target time
+                const seekTime = targetTime || lastKnownTime || 0;
+
+                // Remove existing event listeners to avoid duplicates
+                const onCanPlay = () => {
+                    audio.removeEventListener('canplay', onCanPlay);
+                    audio.removeEventListener('error', onError);
+
+                    try {
+                        audio.currentTime = seekTime;
+                        audioNeedsRecovery = false;
+                        console.log('Audio recovered, seeking to:', seekTime);
+
+                        if (shouldPlay) {
+                            audio.play().then(resolve).catch(reject);
+                        } else {
+                            resolve();
+                        }
+                    } catch (e) {
+                        reject(e);
+                    }
+                };
+
+                const onError = (e) => {
+                    audio.removeEventListener('canplay', onCanPlay);
+                    audio.removeEventListener('error', onError);
+                    console.error('Audio recovery failed:', e);
+                    reject(e);
+                };
+
+                audio.addEventListener('canplay', onCanPlay, { once: true });
+                audio.addEventListener('error', onError, { once: true });
+
+                // Reload the audio
+                audio.load();
+
+                // Timeout after 5 seconds
+                setTimeout(() => {
+                    audio.removeEventListener('canplay', onCanPlay);
+                    audio.removeEventListener('error', onError);
+                    reject(new Error('Audio recovery timeout'));
+                }, 5000);
+            });
+        }
+
+        // Track audio errors
+        audio.addEventListener('error', (e) => {
+            console.error('Audio error:', e);
+            audioNeedsRecovery = true;
+        });
+
+        // Track current time for recovery
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.currentTime) && audio.currentTime > 0) {
+                lastKnownTime = audio.currentTime;
+            }
+        });
+
+        // Handle tab visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                // User returned to tab - check if audio needs recovery
+                if (audio.error || audio.networkState === 3) {
+                    console.log('Tab returned - audio may need recovery');
+                    audioNeedsRecovery = true;
+                }
+            } else {
+                // Tab hidden - remember current state
+                if (!isNaN(audio.currentTime)) {
+                    lastKnownTime = audio.currentTime;
+                }
+            }
+        });
+
+        // Toggle audio player visibility
+        function toggleAudioPlayer() {
+            if (playerBar.classList.contains('hidden')) {
+                playerBar.classList.remove('hidden');
+                document.body.classList.add('player-active');
+                listenBtnText.textContent = 'Hide Player';
+            } else {
+                playerBar.classList.add('hidden');
+                document.body.classList.remove('player-active');
+                listenBtnText.textContent = 'Listen to Chapter';
+                if (isPlaying) {
+                    audio.pause();
+                    playPauseBtn.textContent = '▶';
+                    isPlaying = false;
+                }
+            }
+        }
+
+        // Play/Pause toggle
+        async function togglePlayPause() {
+            if (audioNeedsRecovery || audio.error) {
+                try {
+                    await recoverAudio(lastKnownTime, true);
+                    isPlaying = true;
+                    playPauseBtn.textContent = '⏸';
+                } catch (err) {
+                    console.error('Recovery failed:', err);
+                }
+                return;
+            }
+
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.textContent = '▶';
+                isPlaying = false;
+            } else {
+                try {
+                    await audio.play();
+                    playPauseBtn.textContent = '⏸';
+                    isPlaying = true;
+                } catch (err) {
+                    console.error('Play failed:', err);
+                    audioNeedsRecovery = true;
+                }
+            }
+        }
+
+        // Skip controls
+        function skipBack() {
+            audio.currentTime = Math.max(0, audio.currentTime - 10);
+        }
+
+        function skipForward() {
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+        }
+
+        // Speed control
+        function setSpeed(rate) {
+            audio.playbackRate = rate;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(rate.toString())) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Seek audio on progress bar click
+        function seekAudio(event) {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        }
+
+        // Format time as M:SS
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // =====================================================
+        // TEXT HIGHLIGHTING & AUTOSCROLL
+        // =====================================================
+
+        function highlightSentence(index) {
+            // Remove previous highlights
+            document.querySelectorAll('.sentence.active').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('read');
+            });
+
+            // Add highlight to current sentence
+            const currentSentence = document.querySelector(`.sentence[data-index="${index}"]`);
+            if (currentSentence) {
+                currentSentence.classList.add('active');
+                currentSentence.classList.remove('read');
+
+                // Autoscroll if enabled
+                if (autoscrollToggle && autoscrollToggle.checked) {
+                    currentSentence.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        }
+
+        function findCurrentSentence(currentTime) {
+            for (let i = 0; i < sentenceTimestamps.length; i++) {
+                const ts = sentenceTimestamps[i];
+                if (currentTime >= ts.start && currentTime < ts.end) {
+                    return ts.index;
+                }
+            }
+            return -1;
+        }
+
+        // Update progress and sync sentences
+        audio.addEventListener('timeupdate', () => {
+            // Update progress bar (only if duration is available)
+            if (audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = percent + '%';
+                timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+            }
+
+            // Track time for recovery
+            lastKnownTime = audio.currentTime;
+
+            // Update sentence highlighting (runs even before duration is known)
+            if (sentenceTimestamps.length > 0) {
+                const sentenceIndex = findCurrentSentence(audio.currentTime);
+                if (sentenceIndex !== currentSentenceIndex && sentenceIndex !== -1) {
+                    currentSentenceIndex = sentenceIndex;
+                    highlightSentence(sentenceIndex);
+                }
+            }
+        });
+        
+        // Audio ended
+        audio.addEventListener('ended', () => {
+            playPauseBtn.textContent = '▶';
+            isPlaying = false;
+            progressFill.style.width = '0%';
+            currentSentenceIndex = -1;
+            document.querySelectorAll('.sentence').forEach(el => {
+                el.classList.remove('active', 'read');
+            });
+        });
+        
+        audio.addEventListener('loadedmetadata', () => {
+            timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
+        });
+        
+        // Click-to-seek on sentences
+        document.querySelectorAll('.sentence').forEach(sentence => {
+            sentence.style.cursor = 'pointer';
+            
+            sentence.addEventListener('click', (e) => {
+                const index = parseInt(sentence.dataset.index);
+                const timestamp = sentenceTimestamps.find(ts => ts.index === index);
+                
+                if (timestamp) {
+                    if (playerBar.classList.contains('hidden')) {
+                        playerBar.classList.remove('hidden');
+                        document.body.classList.add('player-active');
+                        listenBtnText.textContent = 'Hide Player';
+                    }
+                    
+                    currentSentenceIndex = index;
+                    highlightSentence(index);
+                    
+                    if (isPlaying) {
+                        audio.pause();
+                        playPauseBtn.textContent = '▶';
+                        isPlaying = false;
+                    }
+                    
+                    const seekToTimestamp = () => {
+                        try {
+                            audio.currentTime = timestamp.start;
+                            lastKnownTime = timestamp.start;
+                            const percent = (audio.currentTime / audio.duration) * 100;
+                            progressFill.style.width = percent + '%';
+                            timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+                        } catch (err) {
+                            console.log('Seek error:', err);
+                        }
+                    };
+                    
+                    if (audioNeedsRecovery || audio.error || audio.readyState === 0) {
+                        recoverAudio(timestamp.start, false)
+                            .then(seekToTimestamp)
+                            .catch(err => {
+                                console.error('Recovery failed:', err);
+                                audio.load();
+                                audio.addEventListener('canplay', seekToTimestamp, { once: true });
+                            });
+                    } else if (audio.readyState >= 1) {
+                        seekToTimestamp();
+                    } else {
+                        audio.addEventListener('loadedmetadata', seekToTimestamp, { once: true });
+                        audio.load();
+                    }
+                }
+            });
+        });
+        
+        // =====================================================
+        // TABLE OF CONTENTS SIDEBAR
+        // =====================================================
+        
+        const tocToggle = document.getElementById('tocToggle');
+        const tocSidebar = document.getElementById('tocSidebar');
+        const tocOverlay = document.getElementById('tocOverlay');
+        const tocClose = document.getElementById('tocClose');
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        
+        function openToc() {
+            tocSidebar.classList.add('open');
+            tocOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeToc() {
+            tocSidebar.classList.remove('open');
+            tocOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        
+        tocToggle.addEventListener('click', openToc);
+        tocClose.addEventListener('click', closeToc);
+        tocOverlay.addEventListener('click', closeToc);
+        
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeToc();
+                const targetId = link.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    setTimeout(() => {
+                        const headerOffset = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    }, 300);
+                }
+            });
+        });
+        
+        function updateActiveTocItem() {
+            const sections = document.querySelectorAll('[id^="section-"]');
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.pageYOffset >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveTocItem);
+        
+        // =====================================================
+        // FONT SIZE CONTROLS
+        // =====================================================
+        
+        function setFontSize(size) {
+            const article = document.querySelector('.chapter-reading');
+            article.classList.remove('font-small', 'font-medium', 'font-large');
+            article.classList.add(`font-${size}`);
+            
+            document.querySelectorAll('.font-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.font-btn.${size}`).classList.add('active');
+            
+            localStorage.setItem('wop-font-size', size);
+        }
+        
+        // Load saved font size
+        const savedFontSize = localStorage.getItem('wop-font-size');
+        if (savedFontSize) {
+            setFontSize(savedFontSize);
+        }
+        
+        // =====================================================
+        // BOOKMARK FUNCTIONALITY
+        // =====================================================
+        
+        const CHAPTER_KEY = 'wop-ch2-bookmark';
+        const bookmarkBtn = document.getElementById('bookmarkBtn');
+        const bookmarkBanner = document.getElementById('bookmarkBanner');
+        
+        function toggleBookmark() {
+            const scrollPos = window.pageYOffset;
+            const existing = localStorage.getItem(CHAPTER_KEY);
+            
+            if (existing) {
+                localStorage.removeItem(CHAPTER_KEY);
+                bookmarkBtn.classList.remove('bookmarked');
+                bookmarkBtn.querySelector('.bookmark-text').textContent = 'Bookmark';
+            } else {
+                localStorage.setItem(CHAPTER_KEY, scrollPos);
+                bookmarkBtn.classList.add('bookmarked');
+                bookmarkBtn.querySelector('.bookmark-text').textContent = 'Bookmarked';
+            }
+        }
+        
+        function checkBookmark() {
+            const bookmark = localStorage.getItem(CHAPTER_KEY);
+            if (bookmark) {
+                bookmarkBtn.classList.add('bookmarked');
+                bookmarkBtn.querySelector('.bookmark-text').textContent = 'Bookmarked';
+                if (parseInt(bookmark) > 300) {
+                    bookmarkBanner.classList.add('show');
+                }
+            }
+        }
+        
+        function resumeFromBookmark() {
+            const bookmark = localStorage.getItem(CHAPTER_KEY);
+            if (bookmark) {
+                window.scrollTo({ top: parseInt(bookmark), behavior: 'smooth' });
+            }
+            bookmarkBanner.classList.remove('show');
+        }
+        
+        function dismissBookmark() {
+            bookmarkBanner.classList.remove('show');
+        }
+
+        checkBookmark();
+
+        // =====================================================
+        // SHARE FUNCTIONALITY
+        // =====================================================
+
+        const shareDropdown = document.getElementById('shareDropdown');
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent(document.title);
+
+        document.getElementById('shareFacebook').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+        document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+        document.getElementById('shareEmail').href = `mailto:?subject=${pageTitle}&body=${pageUrl}`;
+        
+        function toggleShareDropdown() {
+            shareDropdown.classList.toggle('open');
+        }
+        
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const btn = shareDropdown.querySelector('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span class="share-icon">✓</span><span>Copied!</span>';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    shareDropdown.classList.remove('open');
+                }, 1500);
+            });
+        }
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.share-container')) {
+                shareDropdown.classList.remove('open');
+            }
+        });
+        
+        // =====================================================
+        // READING PROGRESS & BACK TO TOP
+        // =====================================================
+
+        const readingProgressBar = document.getElementById('readingProgress');
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            readingProgressBar.style.width = scrollPercent + '%';
+            
+            if (scrollTop > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // =====================================================
+        // RESOURCE MODAL
+        // =====================================================
+
+        const resourceModal = document.getElementById('resourceModal');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        let currentAudio = null;
+
+        // Set up resource card click handlers
+        document.querySelectorAll('.resource-card[data-modal]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const modalType = card.dataset.modal;
+                const src = card.dataset.src;
+                const title = card.dataset.title;
+                const subtitle = card.dataset.subtitle;
+                const icon = card.dataset.icon;
+
+                openResourceModal(modalType, src, title, subtitle, icon);
+            });
+        });
+
+        function openResourceModal(type, src, title, subtitle, icon) {
+            modalIcon.textContent = icon;
+            modalTitle.textContent = title;
+
+            // Clear previous content
+            modalBody.innerHTML = '';
+
+            if (type === 'audio') {
+                modalBody.innerHTML = `
+                    <div class="modal-audio-container">
+                        <div class="modal-audio-icon">${icon}</div>
+                        <h3 class="modal-audio-title">${title}</h3>
+                        <p class="modal-audio-subtitle">${subtitle}</p>
+                        <audio class="modal-audio-player" controls autoplay id="modalAudioPlayer">
+                            <source src="${src}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <a href="${src}" class="modal-download-btn" download>
+                            ⬇ Download Audio
+                        </a>
+                    </div>
+                `;
+                currentAudio = document.getElementById('modalAudioPlayer');
+            } else if (type === 'image') {
+                modalBody.innerHTML = `
+                    <div class="modal-image-container">
+                        <img src="${src}" alt="${title}" class="modal-image">
+                        <div class="modal-image-actions">
+                            <a href="${src}" class="modal-download-btn" download>
+                                ⬇ Download Image
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resourceModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeResourceModal() {
+            resourceModal.classList.remove('open');
+            document.body.style.overflow = '';
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+            modalBody.innerHTML = '';
+        }
+
+        // Close modal on background click
+        resourceModal.addEventListener('click', (e) => {
+            if (e.target === resourceModal || e.target.classList.contains('resource-modal-bg')) {
+                closeResourceModal();
+            }
+        });
+        
+        // =====================================================
+        // REFLECTIONS MANAGER INIT
+        // =====================================================
+
+        const chapterId = 'chapter-02-our-search';
+
+        // Initialize ReflectionsManager when API modules are loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // ReflectionsManager will be initialized after the API scripts load
+        });
+
+    </script>
+
+    <!-- API Integration Modules -->
+    <script src="../../js/api.js"></script>
+    <script src="../../js/auth-modal.js"></script>
+    <script src="../../js/reflections-integration.js"></script>
+    <script>
+        // Initialize ReflectionsManager for this chapter
+        document.addEventListener('DOMContentLoaded', function() {
+            ReflectionsManager.init('chapter-02-our-search');
+        });
+    </script>
+
+    <!-- Scripture Hyperlink Generator -->
+    <script src="../../js/scripture-linker.js"></script>
+    <script>
+        // Initialize scripture linker on chapter content only
+        // (runs after DOM is ready due to script placement)
+        if (typeof ScriptureLinker !== 'undefined') {
+            ScriptureLinker.init('.chapter-content');
+        }
+    </script>
+</body>
+</html>

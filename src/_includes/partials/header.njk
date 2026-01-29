@@ -1,0 +1,56 @@
+<!-- Header Partial -->
+<!-- This will be populated from the current site header -->
+
+<header class="header">
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <img src="/assets/favicons/lantern-icon-64.png" alt="" class="header-lantern" width="54" height="54">
+            <span class="logo-text">
+                <span class="logo-title">WORDS OF PLAINNESS</span>
+                <span class="logo-subtitle">{{ site.tagline }}</span>
+            </span>
+        </a>
+        
+        <nav class="nav-desktop">
+            <ul class="nav-links">
+                <li><a href="/"{% if page.url == "/" %} class="active"{% endif %}>Home</a></li>
+                <li><a href="/writings/"{% if "/writings" in page.url %} class="active"{% endif %}>Writings</a></li>
+                <li><a href="/music/"{% if "/music" in page.url %} class="active"{% endif %}>Music</a></li>
+                <li><a href="/discipleship/"{% if "/discipleship" in page.url %} class="active"{% endif %}>Discipleship</a></li>
+                <li><a href="/connect/"{% if "/connect" in page.url %} class="active"{% endif %}>Connect</a></li>
+                <li><a href="/about/"{% if "/about" in page.url %} class="active"{% endif %}>About</a></li>
+            </ul>
+            <a href="/new-here/" class="btn-new-here">New Here?</a>
+
+            <!-- Auth Buttons (shown when logged out) -->
+            <div class="nav-auth-buttons" id="navAuthButtons">
+                <button class="btn-sign-in" id="signInBtn">Sign In</button>
+                <button class="btn-join-free" id="joinFreeBtn">Join Free</button>
+            </div>
+
+            <!-- User Menu (shown when logged in, hidden by default) -->
+            <div class="user-menu hidden" id="userMenu">
+                <button class="user-menu-toggle" id="userMenuToggle">
+                    <span class="user-avatar" id="userAvatar"></span>
+                    <span class="user-display-name" id="userName"></span>
+                    <span class="user-menu-arrow">&#9660;</span>
+                </button>
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="user-dropdown-header">
+                        <p class="user-dropdown-name" id="userDropdownName"></p>
+                        <p class="user-dropdown-email" id="userDropdownEmail"></p>
+                    </div>
+                    <button class="user-dropdown-item" id="logoutBtn" data-action="logout">
+                        Sign Out
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <button class="nav-toggle" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>

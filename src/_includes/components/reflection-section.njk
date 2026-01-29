@@ -1,0 +1,75 @@
+{# 
+    REFLECTION SECTION
+    ==================
+    Three-step reflection prompts with save to API/localStorage
+#}
+
+<section class="reflection-section" id="reflectionSection">
+    <h2 class="section-title">Personal Reflection</h2>
+    <p class="section-subtitle">Take a moment to ponder and record your thoughts</p>
+    
+    <div class="reflection-container">
+        <!-- Step 1: What stood out -->
+        <div class="reflection-step" data-step="1">
+            <div class="step-header">
+                <span class="step-number">1</span>
+                <h3>What stood out to you?</h3>
+            </div>
+            <p class="step-prompt">Which ideas, phrases, or scriptures resonated with you as you read?</p>
+            <textarea 
+                class="reflection-input" 
+                id="reflection1"
+                placeholder="Write your thoughts here..."
+                data-chapter="{{ chapterId }}"
+                data-prompt="1"
+            ></textarea>
+        </div>
+        
+        <!-- Step 2: Why it matters -->
+        <div class="reflection-step" data-step="2">
+            <div class="step-header">
+                <span class="step-number">2</span>
+                <h3>Why does it matter to you?</h3>
+            </div>
+            <p class="step-prompt">How does this connect to your life, experiences, or current questions?</p>
+            <textarea 
+                class="reflection-input" 
+                id="reflection2"
+                placeholder="Consider how this applies to your journey..."
+                data-chapter="{{ chapterId }}"
+                data-prompt="2"
+            ></textarea>
+        </div>
+        
+        <!-- Step 3: Action -->
+        <div class="reflection-step" data-step="3">
+            <div class="step-header">
+                <span class="step-number">3</span>
+                <h3>What will you do?</h3>
+            </div>
+            <p class="step-prompt">What is one thing you feel prompted to do as a result of this reading?</p>
+            <textarea 
+                class="reflection-input" 
+                id="reflection3"
+                placeholder="A specific action or commitment..."
+                data-chapter="{{ chapterId }}"
+                data-prompt="3"
+            ></textarea>
+        </div>
+        
+        <!-- Save / Clear actions -->
+        <div class="reflection-footer">
+            <span class="save-status" id="saveStatus">
+                <span class="status-icon"></span>
+                <span class="status-text">Reflections auto-save as you type</span>
+            </span>
+            <div class="reflection-footer-actions">
+                <button class="reflection-btn primary" id="saveReflections">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    Save Reflections
+                </button>
+                <button class="reflection-btn secondary" id="clearReflections">Clear All</button>
+            </div>
+        </div>
+    </div>
+</section>

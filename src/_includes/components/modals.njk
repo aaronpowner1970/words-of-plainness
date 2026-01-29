@@ -1,0 +1,120 @@
+{# Modals for Study Resources #}
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop" id="modalBackdrop"></div>
+
+<!-- Chapter Podcast Modal -->
+<div class="modal" id="overviewModal" role="dialog" aria-labelledby="overviewTitle" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="overviewTitle">Chapter Podcast</h3>
+            <button class="modal-close" data-modal-close aria-label="Close modal">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-description">Usually a brief summary in interview format. Sometimes a longer dramatized dialogue.</p>
+            <audio controls preload="metadata" class="modal-audio" id="overviewAudio">
+                <source src="/assets/audio/{{ audio.overview }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+</div>
+
+<!-- Musical Testimony Modal -->
+<div class="modal" id="testimonyModal" role="dialog" aria-labelledby="testimonyTitle" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="testimonyTitle">Musical Testimony</h3>
+            <button class="modal-close" data-modal-close aria-label="Close modal">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-description">An original song by Aaron Powner, inspired by the themes of this chapter.</p>
+            <p class="modal-description">All songs will be added to a single playlist found in the <a href="/music/">Music</a> page of this website.</p>
+            <audio controls preload="metadata" class="modal-audio" id="testimonyAudio">
+                <source src="/assets/audio/{{ audio.testimony }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+</div>
+
+<!-- Infographic Modal -->
+<div class="modal modal-large" id="infographicModal" role="dialog" aria-labelledby="infographicTitle" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="infographicTitle">Visual Summary</h3>
+            <button class="modal-close" data-modal-close aria-label="Close modal">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <img src="/assets/images/{{ infographic }}" alt="Chapter {{ chapter }} visual summary" class="modal-image">
+        </div>
+    </div>
+</div>
+
+<!-- Slides Carousel Modal -->
+<div class="modal modal-large" id="slidesModal" role="dialog" aria-labelledby="slidesTitle" aria-modal="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="slidesTitle">Study Slides</h3>
+            <div class="modal-header-actions">
+                <button class="modal-fullscreen" id="slidesFullscreen" aria-label="Toggle fullscreen">
+                    <svg class="icon-expand" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <polyline points="9 21 3 21 3 15"></polyline>
+                        <line x1="21" y1="3" x2="14" y2="10"></line>
+                        <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                    <svg class="icon-collapse" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" style="display:none">
+                        <polyline points="4 14 10 14 10 20"></polyline>
+                        <polyline points="20 10 14 10 14 4"></polyline>
+                        <line x1="14" y1="10" x2="21" y2="3"></line>
+                        <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                </button>
+                <button class="modal-close" data-modal-close aria-label="Close modal">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="slides-carousel" id="slidesCarousel">
+                <div class="slide-container">
+                    <img id="currentSlide" src="" alt="Study slide" class="slide-image">
+                </div>
+                <div class="slide-nav">
+                    <button id="slidePrev" aria-label="Previous slide">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <span class="slide-counter">
+                        <span id="slideCurrentNum">1</span> / <span id="slideTotalNum">{{ slides.count or 10 }}</span>
+                    </span>
+                    <button id="slideNext" aria-label="Next slide">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
