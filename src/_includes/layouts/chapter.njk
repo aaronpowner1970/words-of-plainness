@@ -10,9 +10,6 @@
     <div class="reading-progress-fill" id="readingProgressFill"></div>
 </div>
 
-<!-- Floating Action Bar (v3.0) -->
-{% include "components/floating-action-bar.njk" %}
-
 <!-- Resume Prompt -->
 {% include "components/resume-prompt.njk" %}
 
@@ -29,6 +26,9 @@
     </blockquote>
     <p class="chapter-meta">{{ readingTime | readingTime }}</p>
 </section>
+
+<!-- Primary Actions Bar (sticky below header) -->
+{% include "components/floating-action-bar.njk" %}
 
 <!-- Main Layout: TOC Sidebar + Content -->
 <div class="chapter-layout">

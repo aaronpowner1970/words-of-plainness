@@ -1444,15 +1444,19 @@ body.player-active {
    COMPONENT STYLES (Eleventy templates)
    ========================================= */
 
-/* Floating Action Bar */
+/* Floating Action Bar - full-width sticky bar below header */
 .floating-action-bar {
-    position: fixed;
-    top: 85px;
-    right: 1rem;
-    z-index: 500;
+    position: sticky;
+    top: 80px;
+    z-index: 1001;
     display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-md);
+    background: var(--brown-rich);
+    border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+    flex-wrap: wrap;
 }
 
 .action-pill {
@@ -1508,7 +1512,7 @@ body.player-active {
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
-    z-index: 101;
+    z-index: 1002;
 }
 
 .dropdown-menu.open {
