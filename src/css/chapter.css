@@ -1650,13 +1650,15 @@ body.player-active {
     border: none;
     color: var(--cream);
     cursor: pointer;
-    padding: 0;
-    opacity: 0.7;
-    transition: opacity 0.2s;
+    padding: 0.25rem;
+    opacity: 0.85;
+    transition: all 0.2s;
+    line-height: 0;
 }
 
 .toc-mobile-close:hover {
     opacity: 1;
+    color: var(--gold-primary);
 }
 
 .toc-mobile-nav .toc-list a {

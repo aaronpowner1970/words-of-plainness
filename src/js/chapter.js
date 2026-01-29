@@ -282,21 +282,27 @@ const ChapterManager = {
     // Table of Contents
     initTOC() {
         const tocLinks = document.querySelectorAll('.toc-link');
-        
+
         tocLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href').slice(1);
                 const target = document.getElementById(targetId);
-                
+
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-                
+
                 // Close mobile TOC if open
                 this.closeMobileTOC();
             });
         });
+
+        // Close button
+        document.getElementById('tocMobileClose')?.addEventListener('click', () => this.closeMobileTOC());
+
+        // Overlay click to close
+        document.getElementById('tocMobileOverlay')?.addEventListener('click', () => this.closeMobileTOC());
     },
     
     openMobileTOC() {
