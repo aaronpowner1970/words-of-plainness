@@ -9,7 +9,11 @@ permalink: /music/
 <link rel="stylesheet" href="/css/music.css">
 {% endblock %}
 
-<!-- Music Player Bar (sticky) -->
+<!-- Music Layout (clears fixed header) -->
+<div class="music-layout">
+
+<!-- Music Player Wrapper (sticky below header) -->
+<div class="music-player-wrapper">
 <div class="music-player-bar" id="musicPlayerBar">
     <div class="player-bar-inner">
         <div class="now-playing">
@@ -84,6 +88,7 @@ permalink: /music/
     </div>
     <audio id="musicAudio" preload="metadata"></audio>
 </div>
+</div>
 
 <!-- Page Content -->
 <div class="music-page">
@@ -156,9 +161,11 @@ permalink: /music/
 
     <div class="music-footer">
         <p>Each chapter of <a href="/writings/">Words of Plainness</a> includes a musical testimony — an original song inspired by the themes explored in that chapter.</p>
-        <p>All music written and performed by Aaron Powner.</p>
+        <p>All music written and produced by Aaron Powner.</p>
     </div>
 </div>
+
+</div><!-- /.music-layout -->
 
 {% block scripts %}
 <script src="/js/music-player.js"></script>
