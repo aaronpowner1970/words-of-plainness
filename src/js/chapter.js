@@ -51,18 +51,20 @@ const ChapterManager = {
         this.audioPlayer = document.getElementById('chapterAudio');
         const playPauseBtn = document.getElementById('audioPlayPause');
         const audioSeek = document.getElementById('audioSeek');
-        const speedBtn = document.getElementById('audioSpeed');
+        const speedDownBtn = document.getElementById('audioSpeedDown');
+        const speedUpBtn = document.getElementById('audioSpeedUp');
         const closeBtn = document.getElementById('audioClose');
         const rewindBtn = document.getElementById('audioRewind');
         const forwardBtn = document.getElementById('audioForward');
-        
+
         // Listen button triggers
         document.getElementById('btnListenFloat')?.addEventListener('click', () => this.showAudioPlayer());
-        
+
         playPauseBtn?.addEventListener('click', () => this.togglePlayPause());
         rewindBtn?.addEventListener('click', () => this.seek(-10));
         forwardBtn?.addEventListener('click', () => this.seek(10));
-        speedBtn?.addEventListener('click', () => this.cycleSpeed());
+        speedDownBtn?.addEventListener('click', () => this.changeSpeed(-1));
+        speedUpBtn?.addEventListener('click', () => this.changeSpeed(1));
         closeBtn?.addEventListener('click', () => this.hideAudioPlayer());
         
         this.audioPlayer?.addEventListener('timeupdate', () => this.updateProgress());
@@ -115,15 +117,19 @@ const ChapterManager = {
         }
     },
     
-    cycleSpeed() {
+    changeSpeed(direction) {
         const speeds = [0.75, 1, 1.25, 1.5];
         const currentIndex = speeds.indexOf(this.currentSpeed);
-        this.currentSpeed = speeds[(currentIndex + 1) % speeds.length];
-        
+        const newIndex = currentIndex + direction;
+
+        if (newIndex < 0 || newIndex >= speeds.length) return;
+
+        this.currentSpeed = speeds[newIndex];
+
         if (this.audioPlayer) {
             this.audioPlayer.playbackRate = this.currentSpeed;
         }
-        
+
         document.getElementById('audioSpeed').textContent = this.currentSpeed + 'x';
     },
     
