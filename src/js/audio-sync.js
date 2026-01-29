@@ -51,7 +51,10 @@ const AudioSync = {
     makeClickable() {
         this.sentences.forEach(sentence => {
             sentence.classList.add('clickable');
-            sentence.addEventListener('click', () => this.onSentenceClick(sentence));
+            sentence.addEventListener('click', (e) => {
+                if (e.target.closest('a')) return;
+                this.onSentenceClick(sentence);
+            });
         });
     },
     
