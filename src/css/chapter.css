@@ -728,6 +728,11 @@ body.player-active {
     background: var(--brown-deep);
 }
 
+/* Offset anchor scroll position to account for fixed header + FAB */
+h2[id], h3[id], [id^="section-"] {
+    scroll-margin-top: 160px;
+}
+
 .chapter-reading h2 {
     font-family: var(--font-serif);
     font-size: 1.6rem;
@@ -980,6 +985,89 @@ body.player-active {
 .step-textarea::placeholder {
     color: var(--cream);
     opacity: 0.5;
+}
+
+.reflection-input {
+    width: 100%;
+    min-height: 100px;
+    padding: var(--space-sm);
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: 4px;
+    color: var(--cream);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+}
+
+.reflection-input:focus {
+    outline: none;
+    border-color: var(--gold-primary);
+}
+
+.reflection-input::placeholder {
+    color: var(--cream);
+    opacity: 0.5;
+}
+
+.reflection-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(196, 148, 58, 0.15);
+    margin-top: var(--space-sm);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.save-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--cream);
+    opacity: 0.7;
+}
+
+.reflection-footer-actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.reflection-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.reflection-btn.primary {
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+    font-weight: 600;
+}
+
+.reflection-btn.primary:hover {
+    background: var(--gold-light);
+}
+
+.reflection-btn.secondary {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(232, 220, 196, 0.3);
+}
+
+.reflection-btn.secondary:hover {
+    border-color: var(--gold-primary);
+    color: var(--gold-primary);
 }
 
 .reflection-actions {
@@ -1555,10 +1643,10 @@ body.player-active {
 /* Resume Prompt */
 .resume-prompt {
     position: fixed;
-    top: 80px;
+    top: 150px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 150;
+    z-index: 1500;
     background: var(--brown-rich);
     border: 1px solid var(--gold-primary);
     border-radius: 8px;
@@ -2029,6 +2117,7 @@ body.player-active {
     right: 1.5rem;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: 0.5rem;
     z-index: 99;
     opacity: 0;
@@ -2044,14 +2133,21 @@ body.player-active {
 .fab-menu-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    gap: 0.75rem;
+    padding: 0.6rem 1.2rem;
     background: var(--brown-rich);
     color: var(--cream);
     border: 1px solid rgba(196, 148, 58, 0.3);
     border-radius: 30px;
     font-size: 0.85rem;
     cursor: pointer;
+    white-space: nowrap;
+}
+
+.fab-menu-item svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
     text-decoration: none;
     transition: all 0.2s ease;
     white-space: nowrap;

@@ -119,11 +119,25 @@ const AudioSync = {
         const time = (typeof ts === 'object') ? ts.start : ts;
 
         if (time !== undefined && this.audioPlayer) {
+            // Show the audio player if it's hidden
+            const playerEl = document.getElementById('audioPlayer');
+            if (playerEl && !playerEl.classList.contains('visible')) {
+                playerEl.classList.add('visible');
+            }
+
             this.audioPlayer.currentTime = time;
-            
+
             // Start playing if paused
             if (this.audioPlayer.paused) {
                 this.audioPlayer.play();
+                // Sync play/pause icons in ChapterManager
+                if (window.ChapterManager) {
+                    window.ChapterManager.isPlaying = true;
+                    const playIcon = document.getElementById('playIcon');
+                    const pauseIcon = document.getElementById('pauseIcon');
+                    if (playIcon) playIcon.style.display = 'none';
+                    if (pauseIcon) pauseIcon.style.display = 'block';
+                }
             }
         }
     },

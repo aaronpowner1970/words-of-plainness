@@ -36,6 +36,7 @@ const ChapterManager = {
         this.initReadingProgress();
         this.initFontControls();
         this.initBookmark();
+        this.initShare();
         this.initFloatingActionBar();
         this.initTOC();
         this.initModals();
@@ -43,7 +44,8 @@ const ChapterManager = {
         this.initBackToTop();
         this.initMobileFAB();
         this.initResumePrompt();
-        
+        this.initReflections();
+
         console.log('ChapterManager initialized for:', config.title);
     },
     
@@ -246,7 +248,43 @@ const ChapterManager = {
         const data = localStorage.getItem(`wop-bookmark-${chapterId}`);
         return data ? JSON.parse(data) : null;
     },
-    
+
+    // Share
+    initShare() {
+        const shareBtn = document.getElementById('shareBtn');
+
+        shareBtn?.addEventListener('click', async () => {
+            const shareData = {
+                title: document.title,
+                url: window.location.href
+            };
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    await navigator.clipboard.writeText(window.location.href);
+                    this.showShareFeedback(shareBtn);
+                }
+            } catch (err) {
+                // User cancelled share dialog or clipboard failed
+                if (err.name !== 'AbortError') {
+                    await navigator.clipboard.writeText(window.location.href);
+                    this.showShareFeedback(shareBtn);
+                }
+            }
+        });
+    },
+
+    showShareFeedback(btn) {
+        const originalText = btn.querySelector('span')?.textContent;
+        const span = btn.querySelector('span');
+        if (span) {
+            span.textContent = 'Copied!';
+            setTimeout(() => { span.textContent = originalText; }, 2000);
+        }
+    },
+
     // Floating Action Bar
     initFloatingActionBar() {
         const bar = document.getElementById('floatingActionBar');
@@ -290,6 +328,9 @@ const ChapterManager = {
                 break;
             case 'toc':
                 this.openMobileTOC();
+                break;
+            case 'reflect':
+                document.getElementById('reflectionSection')?.scrollIntoView({ behavior: 'smooth' });
                 break;
         }
     },
@@ -546,6 +587,13 @@ const ChapterManager = {
     hideResumePrompt() {
         const prompt = document.getElementById('resumePrompt');
         prompt.style.display = 'none';
+    },
+
+    // Reflections
+    initReflections() {
+        if (typeof Reflections !== 'undefined' && this.config.id) {
+            Reflections.init(this.config.id);
+        }
     }
 };
 

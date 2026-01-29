@@ -16,9 +16,10 @@ const Reflections = {
     init(chapterId) {
         this.chapterId = chapterId;
         this.setupInputListeners();
+        this.setupSaveButton();
         this.loadReflections();
         this.setupClearButton();
-        
+
         console.log('Reflections initialized for:', chapterId);
     },
     
@@ -121,6 +122,19 @@ const Reflections = {
         });
     },
     
+    setupSaveButton() {
+        const saveBtn = document.getElementById('saveReflections');
+
+        saveBtn?.addEventListener('click', () => {
+            document.querySelectorAll('.reflection-input').forEach(input => {
+                const prompt = input.dataset.prompt;
+                if (input.value.trim()) {
+                    this.saveReflection(prompt, input.value);
+                }
+            });
+        });
+    },
+
     setupClearButton() {
         const clearBtn = document.getElementById('clearReflections');
         

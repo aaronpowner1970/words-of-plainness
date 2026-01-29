@@ -57,13 +57,19 @@
             ></textarea>
         </div>
         
-        <!-- Save status -->
+        <!-- Save / Clear actions -->
         <div class="reflection-footer">
             <span class="save-status" id="saveStatus">
                 <span class="status-icon"></span>
                 <span class="status-text">Reflections auto-save as you type</span>
             </span>
-            <button class="btn-secondary" id="clearReflections">Clear All</button>
+            <div class="reflection-footer-actions">
+                <button class="reflection-btn primary" id="saveReflections">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    Save Reflections
+                </button>
+                <button class="reflection-btn secondary" id="clearReflections">Clear All</button>
+            </div>
         </div>
     </div>
 </section>
