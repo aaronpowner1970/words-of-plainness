@@ -23,24 +23,24 @@
             <a href="/new-here/" class="btn-new-here">New Here?</a>
 
             <!-- Auth Buttons (shown when logged out) -->
-            <div class="nav-auth-buttons">
-                <button class="btn-sign-in">Sign In</button>
-                <button class="btn-join-free">Join Free</button>
+            <div class="nav-auth-buttons" id="navAuthButtons">
+                <button class="btn-sign-in" id="signInBtn">Sign In</button>
+                <button class="btn-join-free" id="joinFreeBtn">Join Free</button>
             </div>
 
-            <!-- User Menu (shown when logged in) -->
-            <div class="user-menu">
-                <button class="user-menu-toggle">
-                    <span class="user-avatar">?</span>
-                    <span class="user-display-name">User</span>
+            <!-- User Menu (shown when logged in, hidden by default) -->
+            <div class="user-menu hidden" id="userMenu">
+                <button class="user-menu-toggle" id="userMenuToggle">
+                    <span class="user-avatar" id="userAvatar"></span>
+                    <span class="user-display-name" id="userName"></span>
                     <span class="user-menu-arrow">&#9660;</span>
                 </button>
-                <div class="user-dropdown">
+                <div class="user-dropdown" id="userDropdown">
                     <div class="user-dropdown-header">
-                        <p class="user-dropdown-name">User</p>
-                        <p class="user-dropdown-email">user@example.com</p>
+                        <p class="user-dropdown-name" id="userDropdownName"></p>
+                        <p class="user-dropdown-email" id="userDropdownEmail"></p>
                     </div>
-                    <button class="user-dropdown-item" data-action="logout">
+                    <button class="user-dropdown-item" id="logoutBtn" data-action="logout">
                         Sign Out
                     </button>
                 </div>

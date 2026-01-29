@@ -17,12 +17,35 @@ const API = {
         this.baseUrl = baseUrl || '';
         this.token = localStorage.getItem('wop-auth-token');
         this.user = JSON.parse(localStorage.getItem('wop-user') || 'null');
-        
-        if (this.token) {
-            this.updateUIForAuth();
-        }
-        
+
+        this.updateUIForAuth();
+        this.setupUserMenu();
+
         console.log('API client initialized');
+    },
+
+    setupUserMenu() {
+        // User menu dropdown toggle
+        const toggle = document.getElementById('userMenuToggle');
+        const dropdown = document.getElementById('userDropdown');
+
+        if (toggle && dropdown) {
+            toggle.addEventListener('click', () => {
+                dropdown.classList.toggle('open');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        }
+
+        // Logout button
+        document.getElementById('logoutBtn')?.addEventListener('click', () => {
+            this.logout();
+        });
     },
     
     isAuthenticated() {
@@ -96,19 +119,31 @@ const API = {
     
     updateUIForAuth() {
         // Update header UI based on auth state
+        const authButtons = document.getElementById('navAuthButtons');
         const userMenu = document.getElementById('userMenu');
-        const signInBtn = document.getElementById('signInBtn');
-        
-        if (this.isAuthenticated()) {
-            signInBtn?.classList.add('hidden');
+
+        if (this.isAuthenticated() && this.user) {
+            // Hide login buttons, show user menu
+            authButtons?.classList.add('hidden');
             userMenu?.classList.remove('hidden');
-            
+
+            // Populate user info
+            const displayName = this.user.name || this.user.email || 'User';
+            const email = this.user.email || '';
+            const initial = displayName.charAt(0).toUpperCase();
+
             const userName = document.getElementById('userName');
-            if (userName && this.user) {
-                userName.textContent = this.user.name || this.user.email;
-            }
+            const userAvatar = document.getElementById('userAvatar');
+            const userDropdownName = document.getElementById('userDropdownName');
+            const userDropdownEmail = document.getElementById('userDropdownEmail');
+
+            if (userName) userName.textContent = displayName;
+            if (userAvatar) userAvatar.textContent = initial;
+            if (userDropdownName) userDropdownName.textContent = displayName;
+            if (userDropdownEmail) userDropdownEmail.textContent = email;
         } else {
-            signInBtn?.classList.remove('hidden');
+            // Show login buttons, hide user menu
+            authButtons?.classList.remove('hidden');
             userMenu?.classList.add('hidden');
         }
     },

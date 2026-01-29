@@ -26,6 +26,11 @@ const AuthModal = {
         document.getElementById('signInBtn')?.addEventListener('click', () => {
             this.open('signin');
         });
+
+        // Join Free button in header
+        document.getElementById('joinFreeBtn')?.addEventListener('click', () => {
+            this.open('signup');
+        });
         
         // Close button
         document.querySelector('[data-auth-close]')?.addEventListener('click', () => {
