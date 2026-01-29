@@ -16,7 +16,10 @@ sectionCount: 11
 audio:
   narration: "WoP_Ch02_Our_Search_Narration.mp3"
   overview: "WoP_CH02_Our_Search_Overview_Podcast.mp3"
-  testimony: "02_1_Our_Search_-_Sacred_Americana_Testimony.mp3"
+  testimony:
+    file: "02_1_Our_Search_-_Sacred_Americana_Testimony.mp3"
+    title: "Our Search"
+    description: "The universal longing for meaning and connection"
 
 pdf: "WoP_Ch02_Our_Search.pdf"
 infographic: "WoP_Ch02_Our_Search_Infographic.png"

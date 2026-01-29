@@ -26,7 +26,10 @@ sectionCount: 16
 audio:
   narration: "chapter-01-narration.mp3"
   overview: "chapter-01-overview.mp3"
-  testimony: "chapter-01-testimony.mp3"
+  testimony:
+    file: "chapter-01-testimony.mp3"
+    title: "Song Title Here"
+    description: "Brief theme description"
 
 # Resources
 pdf: "WoP_Ch01_Title.pdf"
