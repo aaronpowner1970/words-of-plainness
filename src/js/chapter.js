@@ -351,11 +351,18 @@ const ChapterManager = {
     
     closeAllModals() {
         document.querySelectorAll('.modal').forEach(modal => {
-            modal.classList.remove('open');
+            modal.classList.remove('open', 'fullscreen');
         });
         document.getElementById('modalBackdrop')?.classList.remove('visible');
         document.body.style.overflow = '';
-        
+
+        // Reset fullscreen icon
+        const fsBtn = document.getElementById('slidesFullscreen');
+        if (fsBtn) {
+            fsBtn.querySelector('.icon-expand').style.display = '';
+            fsBtn.querySelector('.icon-collapse').style.display = 'none';
+        }
+
         // Pause any playing audio
         document.querySelectorAll('.modal audio').forEach(audio => {
             audio.pause();
@@ -366,14 +373,27 @@ const ChapterManager = {
     initSlides() {
         const prevBtn = document.getElementById('slidePrev');
         const nextBtn = document.getElementById('slideNext');
-        
+        const fullscreenBtn = document.getElementById('slidesFullscreen');
+
         this.currentSlide = 1;
         this.totalSlides = this.config.totalSlides || 10;
-        
+
         prevBtn?.addEventListener('click', () => this.navigateSlide(-1));
         nextBtn?.addEventListener('click', () => this.navigateSlide(1));
-        
+        fullscreenBtn?.addEventListener('click', () => this.toggleSlidesFullscreen());
+
         this.updateSlideImage();
+    },
+
+    toggleSlidesFullscreen() {
+        const modal = document.getElementById('slidesModal');
+        const btn = document.getElementById('slidesFullscreen');
+        if (!modal || !btn) return;
+
+        modal.classList.toggle('fullscreen');
+        const isFullscreen = modal.classList.contains('fullscreen');
+        btn.querySelector('.icon-expand').style.display = isFullscreen ? 'none' : '';
+        btn.querySelector('.icon-collapse').style.display = isFullscreen ? '' : 'none';
     },
     
     navigateSlide(direction) {
