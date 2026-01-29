@@ -16,7 +16,10 @@ sectionCount: 16
 audio:
   narration: "chapter-01-narration.mp3"
   overview: "WoP_Ch01_Introduction_Overview_Podcast.mp3"
-  testimony: "01_1_Introduction_to_Plainness_-_Sacred_Americana_Testimony.mp3"
+  testimony:
+    file: "01_1_Introduction_to_Plainness_-_Sacred_Americana_Testimony.mp3"
+    title: "Introduction to Plainness"
+    description: "A gentle invitation to approach faith with an open heart"
 
 pdf: "WoP_Ch01_Introduction.pdf"
 infographic: "WoP_Ch01_Introduction_Infographic.png"
