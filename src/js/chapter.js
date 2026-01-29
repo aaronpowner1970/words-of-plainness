@@ -350,18 +350,21 @@ const ChapterManager = {
     },
     
     closeAllModals() {
+        // Exit browser fullscreen if active
+        const fsElement = document.fullscreenElement || document.webkitFullscreenElement;
+        if (fsElement) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+
         document.querySelectorAll('.modal').forEach(modal => {
-            modal.classList.remove('open', 'fullscreen');
+            modal.classList.remove('open');
         });
         document.getElementById('modalBackdrop')?.classList.remove('visible');
         document.body.style.overflow = '';
-
-        // Reset fullscreen icon
-        const fsBtn = document.getElementById('slidesFullscreen');
-        if (fsBtn) {
-            fsBtn.querySelector('.icon-expand').style.display = '';
-            fsBtn.querySelector('.icon-collapse').style.display = 'none';
-        }
 
         // Pause any playing audio
         document.querySelectorAll('.modal audio').forEach(audio => {
@@ -382,16 +385,39 @@ const ChapterManager = {
         nextBtn?.addEventListener('click', () => this.navigateSlide(1));
         fullscreenBtn?.addEventListener('click', () => this.toggleSlidesFullscreen());
 
+        // Listen for fullscreen change (Escape key, browser controls, etc.)
+        document.addEventListener('fullscreenchange', () => this.onFullscreenChange());
+        document.addEventListener('webkitfullscreenchange', () => this.onFullscreenChange());
+
         this.updateSlideImage();
     },
 
     toggleSlidesFullscreen() {
         const modal = document.getElementById('slidesModal');
-        const btn = document.getElementById('slidesFullscreen');
-        if (!modal || !btn) return;
+        if (!modal) return;
 
-        modal.classList.toggle('fullscreen');
-        const isFullscreen = modal.classList.contains('fullscreen');
+        const fsElement = document.fullscreenElement || document.webkitFullscreenElement;
+
+        if (fsElement) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        } else {
+            if (modal.requestFullscreen) {
+                modal.requestFullscreen();
+            } else if (modal.webkitRequestFullscreen) {
+                modal.webkitRequestFullscreen();
+            }
+        }
+    },
+
+    onFullscreenChange() {
+        const btn = document.getElementById('slidesFullscreen');
+        if (!btn) return;
+
+        const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
         btn.querySelector('.icon-expand').style.display = isFullscreen ? 'none' : '';
         btn.querySelector('.icon-collapse').style.display = isFullscreen ? '' : 'none';
     },

@@ -2107,16 +2107,70 @@ body.player-active {
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
 }
 
-.modal.fullscreen {
-    top: 0;
-    left: 0;
-    transform: none;
-    width: 100%;
-    max-width: 100%;
+/* True browser fullscreen (Fullscreen API) */
+#slidesModal:fullscreen,
+#slidesModal:-webkit-full-screen {
+    position: static;
+    width: 100vw;
     height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
+    max-width: none;
+    max-height: none;
+    background: #000;
     border: none;
+    border-radius: 0;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#slidesModal:fullscreen .modal-content,
+#slidesModal:-webkit-full-screen .modal-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#slidesModal:fullscreen .modal-header,
+#slidesModal:-webkit-full-screen .modal-header {
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom-color: rgba(196, 148, 58, 0.3);
+    flex-shrink: 0;
+}
+
+#slidesModal:fullscreen .modal-body,
+#slidesModal:-webkit-full-screen .modal-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+}
+
+#slidesModal:fullscreen .slide-image,
+#slidesModal:-webkit-full-screen .slide-image {
+    max-height: 85vh;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+#slidesModal:fullscreen .slide-nav,
+#slidesModal:-webkit-full-screen .slide-nav {
+    padding: var(--space-sm) 0;
+}
+
+#slidesModal:fullscreen .slide-nav button,
+#slidesModal:-webkit-full-screen .slide-nav button {
+    width: 48px;
+    height: 48px;
+    border-color: rgba(232, 220, 196, 0.5);
+}
+
+#slidesModal:fullscreen .slide-counter,
+#slidesModal:-webkit-full-screen .slide-counter {
+    font-size: 1rem;
 }
 
 .modal.open {
