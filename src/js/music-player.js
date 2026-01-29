@@ -167,7 +167,7 @@ const MusicPlayer = {
     // Playback
     // =========================================
 
-    playTrack(index) {
+    playTrack(index, forceRestart) {
         if (index < 0 || index >= this.tracks.length) return;
 
         const track = this.tracks[index];
@@ -175,14 +175,19 @@ const MusicPlayer = {
 
         this.currentIndex = index;
 
-        if (wasSameTrack && this.audio.src) {
+        if (wasSameTrack && this.audio.src && !forceRestart) {
             // Toggle play/pause on same track
             this.togglePlay();
             return;
         }
 
         this.audio.src = track.src;
-        this.audio.play().catch(() => {});
+        this.audio.play().catch(() => {
+            // If play fails (e.g. after ended event), retry once audio is ready
+            this.audio.addEventListener('canplay', () => {
+                this.audio.play().catch(() => {});
+            }, { once: true });
+        });
 
         // Update Now Playing
         this.els.npTitle.textContent = track.title;
@@ -295,11 +300,27 @@ const MusicPlayer = {
             return;
         }
 
-        const nextIndex = this.getAdjacentIndex(1);
-        if (nextIndex !== -1) {
-            this.playTrack(nextIndex);
+        if (this.currentIndex < this.tracks.length - 1) {
+            // Not at end, play next
+            const nextIdx = this.shuffle
+                ? this.shuffleOrder[this.shuffleOrder.indexOf(this.currentIndex) + 1]
+                : this.currentIndex + 1;
+            this.playTrack(nextIdx);
+        } else if (this.repeat === 'all') {
+            // At end with repeat-all, loop to beginning
+            const firstIdx = this.shuffle ? this.getShuffledIndex(0) : 0;
+            // Brief delay lets browser fully process ended state
+            setTimeout(() => this.playTrack(firstIdx, true), 50);
         } else {
-            // Playlist ended
+            // At end with repeat off, stop
+            this.currentIndex = -1;
+            this.els.npTitle.textContent = 'Select a song';
+            this.els.npChapter.textContent = '';
+            this.els.progressFill.style.width = '0%';
+            this.els.progressInput.value = 0;
+            this.els.timeCurrent.textContent = '0:00';
+            this.els.timeTotal.textContent = '0:00';
+            this.tracks.forEach(t => t.row.classList.remove('playing', 'is-playing'));
             this.updatePlayState(false);
         }
     },
