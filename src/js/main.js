@@ -8,34 +8,56 @@
 
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    const mobileMenuClose = document.getElementById('mobileMenuClose');
-    
+    const toggle = document.getElementById('mobileMenuToggle');
+    const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const closeBtn = document.getElementById('mobileMenuClose');
+
     function openMobileMenu() {
-        mobileMenu?.classList.add('active');
-        mobileMenuOverlay?.classList.add('active');
+        toggle?.classList.add('active');
+        menu?.classList.add('active');
+        overlay?.classList.add('active');
+        toggle?.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
     }
 
     function closeMobileMenu() {
-        mobileMenu?.classList.remove('active');
-        mobileMenuOverlay?.classList.remove('active');
+        toggle?.classList.remove('active');
+        menu?.classList.remove('active');
+        overlay?.classList.remove('active');
+        toggle?.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     }
-    
-    mobileMenuToggle?.addEventListener('click', function(e) {
+
+    function toggleMobileMenu(e) {
         e.preventDefault();
         e.stopPropagation();
-        openMobileMenu();
-    });
-    mobileMenuClose?.addEventListener('click', closeMobileMenu);
-    mobileMenuOverlay?.addEventListener('click', closeMobileMenu);
-    
-    // Close menu on link click
-    mobileMenu?.querySelectorAll('a').forEach(link => {
+        if (menu?.classList.contains('active')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    }
+
+    // Toggle button (hamburger / X)
+    toggle?.addEventListener('click', toggleMobileMenu);
+
+    // Close button inside menu header
+    closeBtn?.addEventListener('click', closeMobileMenu);
+
+    // Close on overlay tap
+    overlay?.addEventListener('click', closeMobileMenu);
+
+    // Close on menu link tap
+    menu?.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu?.classList.contains('active')) {
+            closeMobileMenu();
+        }
     });
 });
 
