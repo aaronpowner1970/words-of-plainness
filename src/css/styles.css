@@ -352,14 +352,24 @@ p {
 .nav-toggle {
     display: none;
     flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
     background: transparent;
     border: none;
-    padding: 0;
+    padding: 10px;
     margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    position: relative;
+    z-index: 1001;
+}
+
+.nav-toggle > * {
+    pointer-events: none;
 }
 
 .nav-toggle span {
@@ -373,7 +383,7 @@ p {
 }
 
 .nav-toggle.active span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
 }
 
 .nav-toggle.active span:nth-child(2) {
@@ -381,10 +391,29 @@ p {
 }
 
 .nav-toggle.active span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Mobile Menu Overlay */
+/* Mobile Menu Overlay Background */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile Menu Panel */
 .mobile-menu {
     position: fixed;
     top: 0;

@@ -7,7 +7,7 @@ layout: layouts/chapter.njk
 scripture:
   text: "The heart of him that hath understanding seeketh knowledge."
   reference: "Proverbs 15:14"
-readingTime: "~26 min read"
+readingTime: 26
 audio:
   narration: chapter-03-narration.mp3
   overview: chapter-03-overview.mp3

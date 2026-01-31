@@ -2175,6 +2175,11 @@ h2[id], h3[id], [id^="section-"] {
 @media (max-width: 768px) {
     .fab-lantern {
         display: flex;
+        bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .fab-menu {
+        bottom: calc(8.5rem + env(safe-area-inset-bottom, 0px));
     }
 
     .floating-action-bar {

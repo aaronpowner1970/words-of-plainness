@@ -14,18 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuClose = document.getElementById('mobileMenuClose');
     
     function openMobileMenu() {
-        mobileMenu?.classList.add('open');
-        mobileMenuOverlay?.classList.add('visible');
+        mobileMenu?.classList.add('active');
+        mobileMenuOverlay?.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
-    
+
     function closeMobileMenu() {
-        mobileMenu?.classList.remove('open');
-        mobileMenuOverlay?.classList.remove('visible');
+        mobileMenu?.classList.remove('active');
+        mobileMenuOverlay?.classList.remove('active');
         document.body.style.overflow = '';
     }
     
-    mobileMenuToggle?.addEventListener('click', openMobileMenu);
+    mobileMenuToggle?.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openMobileMenu();
+    });
     mobileMenuClose?.addEventListener('click', closeMobileMenu);
     mobileMenuOverlay?.addEventListener('click', closeMobileMenu);
     
