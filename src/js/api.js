@@ -122,6 +122,12 @@ const API = {
         const authButtons = document.getElementById('navAuthButtons');
         const userMenu = document.getElementById('userMenu');
 
+        // Mobile menu auth elements
+        const mobileLoggedOut = document.getElementById('mobileAuthLoggedOut');
+        const mobileLoggedIn = document.getElementById('mobileAuthLoggedIn');
+        const mobileUsername = document.getElementById('mobileUsername');
+        const mobileAvatar = document.getElementById('mobileUserAvatar');
+
         if (this.isAuthenticated() && this.user) {
             // Hide login buttons, show user menu
             authButtons?.classList.add('hidden');
@@ -141,10 +147,20 @@ const API = {
             if (userAvatar) userAvatar.textContent = initial;
             if (userDropdownName) userDropdownName.textContent = displayName;
             if (userDropdownEmail) userDropdownEmail.textContent = email;
+
+            // Mobile menu: show logged-in state
+            mobileLoggedOut?.classList.add('hidden');
+            mobileLoggedIn?.classList.remove('hidden');
+            if (mobileUsername) mobileUsername.textContent = displayName;
+            if (mobileAvatar) mobileAvatar.textContent = initial;
         } else {
             // Show login buttons, hide user menu
             authButtons?.classList.remove('hidden');
             userMenu?.classList.add('hidden');
+
+            // Mobile menu: show logged-out state
+            mobileLoggedOut?.classList.remove('hidden');
+            mobileLoggedIn?.classList.add('hidden');
         }
     },
     

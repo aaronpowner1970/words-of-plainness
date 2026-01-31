@@ -23,6 +23,23 @@
         {% endfor %}
     </ul>
     
+    <!-- Auth Section -->
+    <div class="mobile-menu-auth" id="mobileMenuAuth">
+        <!-- Logged out state -->
+        <div class="mobile-menu-auth-loggedout" id="mobileAuthLoggedOut">
+            <button class="mobile-menu-signin" id="mobileSignIn">Sign In</button>
+            <button class="mobile-menu-join" id="mobileJoinFree">Join Free</button>
+        </div>
+        <!-- Logged in state (hidden by default) -->
+        <div class="mobile-menu-auth-loggedin hidden" id="mobileAuthLoggedIn">
+            <div class="mobile-menu-user-info">
+                <span class="mobile-menu-user-avatar" id="mobileUserAvatar"></span>
+                <span class="mobile-menu-username" id="mobileUsername"></span>
+            </div>
+            <button class="mobile-menu-signout" id="mobileSignOut">Sign Out</button>
+        </div>
+    </div>
+
     <div class="mobile-menu-footer">
         <a href="{{ site.social.discord }}" class="mobile-discord-link" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="20" height="20">

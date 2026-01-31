@@ -31,19 +31,38 @@ const AuthModal = {
         document.getElementById('joinFreeBtn')?.addEventListener('click', () => {
             this.open('signup');
         });
-        
+
+        // Mobile menu auth buttons
+        document.getElementById('mobileSignIn')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.closeMobileMenu();
+            this.open('signin');
+        });
+
+        document.getElementById('mobileJoinFree')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.closeMobileMenu();
+            this.open('signup');
+        });
+
+        document.getElementById('mobileSignOut')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.closeMobileMenu();
+            window.API?.logout();
+        });
+
         // Close button
         document.querySelector('[data-auth-close]')?.addEventListener('click', () => {
             this.close();
         });
-        
+
         // Close on backdrop click
         this.modal?.addEventListener('click', (e) => {
             if (e.target === this.modal) {
                 this.close();
             }
         });
-        
+
         // Close on Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.modal?.classList.contains('open')) {
@@ -71,6 +90,17 @@ const AuthModal = {
         });
     },
     
+    closeMobileMenu() {
+        const toggle = document.getElementById('mobileMenuToggle');
+        const menu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('mobileMenuOverlay');
+        toggle?.classList.remove('active');
+        menu?.classList.remove('active');
+        overlay?.classList.remove('active');
+        toggle?.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    },
+
     open(mode = 'signin') {
         this.mode = mode;
         this.updateUI();
