@@ -350,18 +350,29 @@ const API = {
     // =========================================
 
     async saveReflection(data) {
-        return this.request('/reflections/', {
+        return this.request('/reflections/mine/', {
             method: 'POST',
             body: JSON.stringify(data)
         });
     },
 
     async getReflections(chapterId) {
-        return this.request(`/reflections/?chapter=${chapterId}`);
+        return this.request(`/reflections/chapters/${chapterId}/`);
     },
 
     async getAllReflections() {
-        return this.request('/reflections/');
+        return this.request('/reflections/mine/');
+    },
+
+    async getCommunityReflections(chapterId) {
+        const query = chapterId ? `?chapter=${chapterId}` : '';
+        return this.request(`/reflections/community/${query}`);
+    },
+
+    async appreciateReflection(id) {
+        return this.request(`/reflections/${id}/appreciate/`, {
+            method: 'POST'
+        });
     }
 };
 
