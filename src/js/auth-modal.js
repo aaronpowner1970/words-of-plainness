@@ -168,7 +168,10 @@ const AuthModal = {
             this.showSuccess('Welcome! You are now signed in.');
             
         } catch (error) {
-            this.showError(error.message);
+            const msg = error.message === 'Failed to fetch'
+                ? 'Unable to connect. Please check your internet connection.'
+                : error.message;
+            this.showError(msg);
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = this.mode === 'signin' ? 'Sign In' : 'Sign Up';

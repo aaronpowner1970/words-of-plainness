@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/css/auth-modal.css">
     {% block styles %}{% endblock %}
 </head>
-<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %} data-api-url="{{ site.api.baseUrl }}">
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
     {% include "partials/header.njk" %}

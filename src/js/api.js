@@ -1,31 +1,44 @@
 /**
  * WORDS OF PLAINNESS - API Client
  * ================================
- * 
+ *
  * Handles communication with the Django API on PythonAnywhere.
- * - Authentication (login, logout, register)
+ * - Authentication (login, logout, register) with JWT access/refresh tokens
+ * - Automatic token refresh on 401
  * - Reflection storage and retrieval
  * - User profile management
  */
 
 const API = {
-    baseUrl: '', // Set from site.json or config
-    token: null,
+    baseUrl: '',
+    accessToken: null,
+    refreshToken: null,
     user: null,
-    
+    _refreshing: null, // mutex for token refresh
+
     init(baseUrl) {
         this.baseUrl = baseUrl || '';
-        this.token = localStorage.getItem('wop-auth-token');
+
+        // Load tokens — support both new JWT keys and legacy single-token key
+        this.accessToken = localStorage.getItem('wop_access_token')
+            || localStorage.getItem('wop-auth-token')
+            || null;
+        this.refreshToken = localStorage.getItem('wop_refresh_token') || null;
         this.user = JSON.parse(localStorage.getItem('wop-user') || 'null');
+
+        // Migrate legacy key if present
+        if (localStorage.getItem('wop-auth-token') && !localStorage.getItem('wop_access_token')) {
+            localStorage.setItem('wop_access_token', this.accessToken);
+            localStorage.removeItem('wop-auth-token');
+        }
 
         this.updateUIForAuth();
         this.setupUserMenu();
 
-        console.log('API client initialized');
+        console.log('API client initialized', this.baseUrl ? `→ ${this.baseUrl}` : '(no API URL)');
     },
 
     setupUserMenu() {
-        // User menu dropdown toggle
         const toggle = document.getElementById('userMenuToggle');
         const dropdown = document.getElementById('userDropdown');
 
@@ -34,7 +47,6 @@ const API = {
                 dropdown.classList.toggle('open');
             });
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
                 if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
                     dropdown.classList.remove('open');
@@ -42,83 +54,200 @@ const API = {
             });
         }
 
-        // Logout button
         document.getElementById('logoutBtn')?.addEventListener('click', () => {
             this.logout();
         });
     },
-    
+
     isAuthenticated() {
-        return !!this.token;
+        return !!this.accessToken;
     },
-    
+
     getHeaders() {
-        const headers = {
-            'Content-Type': 'application/json'
-        };
-        
-        if (this.token) {
-            headers['Authorization'] = `Token ${this.token}`;
+        const headers = { 'Content-Type': 'application/json' };
+
+        if (this.accessToken) {
+            // Support both JWT ("Bearer") and DRF TokenAuth ("Token") formats.
+            // JWT tokens contain dots; legacy DRF tokens do not.
+            const prefix = this.accessToken.includes('.') ? 'Bearer' : 'Token';
+            headers['Authorization'] = `${prefix} ${this.accessToken}`;
         }
-        
+
         return headers;
     },
-    
-    async request(endpoint, options = {}) {
+
+    /**
+     * Core request method with automatic 401 retry via token refresh.
+     */
+    async request(endpoint, options = {}, _retried = false) {
+        if (!this.baseUrl) {
+            throw new Error('API not configured');
+        }
+
         const url = `${this.baseUrl}${endpoint}`;
-        
+
         const response = await fetch(url, {
             ...options,
             headers: this.getHeaders()
         });
-        
-        if (!response.ok) {
-            const error = await response.json().catch(() => ({}));
-            throw new Error(error.detail || `API Error: ${response.status}`);
+
+        // On 401, try refreshing the token once
+        if (response.status === 401 && !_retried && this.refreshToken) {
+            const refreshed = await this.tryRefreshToken();
+            if (refreshed) {
+                return this.request(endpoint, options, true);
+            }
+            // Refresh failed — force logout
+            this.logout();
+            throw new Error('Session expired. Please sign in again.');
         }
-        
+
+        if (!response.ok) {
+            const body = await response.json().catch(() => ({}));
+            throw new Error(this.parseErrorMessage(body, response.status));
+        }
+
+        // Handle 204 No Content
+        if (response.status === 204) return null;
+
         return response.json();
     },
-    
+
+    /**
+     * Extract a user-friendly error message from API error responses.
+     */
+    parseErrorMessage(body, status) {
+        // Django REST Framework returns errors in several formats
+        if (body.detail) return body.detail;
+        if (body.non_field_errors) return body.non_field_errors.join(' ');
+
+        // Field-level errors: { "email": ["This field is required."] }
+        const fieldErrors = Object.entries(body)
+            .filter(([, v]) => Array.isArray(v))
+            .map(([field, msgs]) => `${field}: ${msgs.join(' ')}`)
+            .join('. ');
+        if (fieldErrors) return fieldErrors;
+
+        // Fallback
+        switch (status) {
+            case 400: return 'Please check your input and try again.';
+            case 401: return 'Invalid email or password.';
+            case 403: return 'You do not have permission to do that.';
+            case 404: return 'The requested resource was not found.';
+            case 409: return 'An account with that email already exists.';
+            case 429: return 'Too many requests. Please wait a moment.';
+            case 500: return 'Server error. Please try again later.';
+            default: return `Something went wrong (error ${status}).`;
+        }
+    },
+
+    /**
+     * Attempt to refresh the access token using the refresh token.
+     */
+    async tryRefreshToken() {
+        // Prevent concurrent refresh attempts
+        if (this._refreshing) return this._refreshing;
+
+        this._refreshing = (async () => {
+            try {
+                const response = await fetch(`${this.baseUrl}/auth/token/refresh/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ refresh: this.refreshToken })
+                });
+
+                if (!response.ok) return false;
+
+                const data = await response.json();
+                this.accessToken = data.access;
+                localStorage.setItem('wop_access_token', data.access);
+
+                // Some backends rotate the refresh token too
+                if (data.refresh) {
+                    this.refreshToken = data.refresh;
+                    localStorage.setItem('wop_refresh_token', data.refresh);
+                }
+
+                return true;
+            } catch {
+                return false;
+            } finally {
+                this._refreshing = null;
+            }
+        })();
+
+        return this._refreshing;
+    },
+
+    // =========================================
     // Authentication
+    // =========================================
+
     async login(email, password) {
         const data = await this.request('/auth/login/', {
             method: 'POST',
             body: JSON.stringify({ email, password })
         });
-        
-        this.setAuth(data.token, data.user);
+
+        this.setAuth(data);
         return data;
     },
-    
+
     async register(email, password, name) {
         const data = await this.request('/auth/register/', {
             method: 'POST',
             body: JSON.stringify({ email, password, name })
         });
-        
-        this.setAuth(data.token, data.user);
+
+        this.setAuth(data);
         return data;
     },
-    
+
     logout() {
-        this.token = null;
+        this.accessToken = null;
+        this.refreshToken = null;
         this.user = null;
-        localStorage.removeItem('wop-auth-token');
+        localStorage.removeItem('wop_access_token');
+        localStorage.removeItem('wop_refresh_token');
+        localStorage.removeItem('wop-auth-token'); // legacy cleanup
         localStorage.removeItem('wop-user');
         this.updateUIForAuth();
     },
-    
-    setAuth(token, user) {
-        this.token = token;
-        this.user = user;
-        localStorage.setItem('wop-auth-token', token);
-        localStorage.setItem('wop-user', JSON.stringify(user));
+
+    /**
+     * Save auth data from login/register response.
+     * Supports both JWT format ({ access, refresh, user })
+     * and DRF TokenAuth format ({ token, user }).
+     */
+    setAuth(data) {
+        if (data.access) {
+            // JWT format
+            this.accessToken = data.access;
+            this.refreshToken = data.refresh || null;
+            localStorage.setItem('wop_access_token', data.access);
+            if (data.refresh) localStorage.setItem('wop_refresh_token', data.refresh);
+        } else if (data.token) {
+            // Legacy DRF TokenAuth format
+            this.accessToken = data.token;
+            localStorage.setItem('wop_access_token', data.token);
+        }
+
+        if (data.user) {
+            this.user = data.user;
+            localStorage.setItem('wop-user', JSON.stringify(data.user));
+        }
+
         this.updateUIForAuth();
+
+        // After login, check for localStorage reflections to migrate
+        this.checkReflectionMigration();
     },
-    
+
+    // =========================================
+    // UI Updates
+    // =========================================
+
     updateUIForAuth() {
-        // Update header UI based on auth state
         const authButtons = document.getElementById('navAuthButtons');
         const userMenu = document.getElementById('userMenu');
 
@@ -129,11 +258,9 @@ const API = {
         const mobileAvatar = document.getElementById('mobileUserAvatar');
 
         if (this.isAuthenticated() && this.user) {
-            // Hide login buttons, show user menu
             authButtons?.classList.add('hidden');
             userMenu?.classList.remove('hidden');
 
-            // Populate user info
             const displayName = this.user.name || this.user.email || 'User';
             const email = this.user.email || '';
             const initial = displayName.charAt(0).toUpperCase();
@@ -148,34 +275,91 @@ const API = {
             if (userDropdownName) userDropdownName.textContent = displayName;
             if (userDropdownEmail) userDropdownEmail.textContent = email;
 
-            // Mobile menu: show logged-in state
             mobileLoggedOut?.classList.add('hidden');
             mobileLoggedIn?.classList.remove('hidden');
             if (mobileUsername) mobileUsername.textContent = displayName;
             if (mobileAvatar) mobileAvatar.textContent = initial;
         } else {
-            // Show login buttons, hide user menu
             authButtons?.classList.remove('hidden');
             userMenu?.classList.add('hidden');
 
-            // Mobile menu: show logged-out state
             mobileLoggedOut?.classList.remove('hidden');
             mobileLoggedIn?.classList.add('hidden');
         }
     },
-    
-    // Reflections
+
+    // =========================================
+    // Reflection Migration (localStorage → API)
+    // =========================================
+
+    checkReflectionMigration() {
+        if (!this.isAuthenticated()) return;
+
+        // Look for any localStorage reflections
+        const localReflections = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith('wop-reflection-')) {
+                try {
+                    localReflections.push({
+                        key: key,
+                        data: JSON.parse(localStorage.getItem(key))
+                    });
+                } catch { /* skip malformed */ }
+            }
+        }
+
+        if (localReflections.length === 0) return;
+
+        // Show migration prompt
+        const count = localReflections.length;
+        const noun = count === 1 ? 'reflection' : 'reflections';
+
+        // Small delay so the auth modal has time to close
+        setTimeout(() => {
+            if (confirm(`You have ${count} ${noun} saved on this device. Would you like to sync them to your account so they're available on all your devices?`)) {
+                this.migrateReflections(localReflections);
+            }
+        }, 500);
+    },
+
+    async migrateReflections(items) {
+        let migrated = 0;
+
+        for (const item of items) {
+            try {
+                await this.saveReflection(item.data);
+                localStorage.removeItem(item.key);
+                migrated++;
+            } catch (error) {
+                console.warn('Failed to migrate reflection:', item.key, error);
+            }
+        }
+
+        if (migrated > 0) {
+            console.log(`Migrated ${migrated} reflections to account`);
+            // Reload reflections UI if on a chapter page
+            if (typeof Reflections !== 'undefined' && Reflections.chapterId) {
+                Reflections.loadReflections();
+            }
+        }
+    },
+
+    // =========================================
+    // Reflections API
+    // =========================================
+
     async saveReflection(data) {
         return this.request('/reflections/', {
             method: 'POST',
             body: JSON.stringify(data)
         });
     },
-    
+
     async getReflections(chapterId) {
         return this.request(`/reflections/?chapter=${chapterId}`);
     },
-    
+
     async getAllReflections() {
         return this.request('/reflections/');
     }
@@ -183,7 +367,6 @@ const API = {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Get API URL from site config or data attribute
     const apiUrl = document.body.dataset.apiUrl || '';
     API.init(apiUrl);
 });
