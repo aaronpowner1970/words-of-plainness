@@ -150,7 +150,7 @@ const API = {
 
         this._refreshing = (async () => {
             try {
-                const response = await fetch(`${this.baseUrl}/auth/token/refresh/`, {
+                const response = await fetch(`${this.baseUrl}/token/refresh/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ refresh: this.refreshToken })
@@ -184,7 +184,7 @@ const API = {
     // =========================================
 
     async login(email, password) {
-        const data = await this.request('/auth/login/', {
+        const data = await this.request('/accounts/login/', {
             method: 'POST',
             body: JSON.stringify({ email, password })
         });
@@ -194,7 +194,7 @@ const API = {
     },
 
     async register(email, password, name) {
-        const data = await this.request('/auth/register/', {
+        const data = await this.request('/accounts/register/', {
             method: 'POST',
             body: JSON.stringify({ email, password, name })
         });
