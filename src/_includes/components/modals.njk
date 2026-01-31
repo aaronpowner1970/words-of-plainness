@@ -21,6 +21,14 @@
                 <source src="/assets/audio/{{ audio.overview }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+            {% if podcastTranscript %}
+            <details class="media-transcript">
+                <summary>View Transcript</summary>
+                <div class="transcript-content">
+                    {{ podcastTranscript | safe }}
+                </div>
+            </details>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -44,6 +52,14 @@
                 <source src="/assets/audio/{{ audio.testimony.file }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+            {% if lyrics %}
+            <details class="media-transcript">
+                <summary>View Lyrics</summary>
+                <div class="transcript-content">
+                    {{ lyrics | safe }}
+                </div>
+            </details>
+            {% endif %}
         </div>
     </div>
 </div>

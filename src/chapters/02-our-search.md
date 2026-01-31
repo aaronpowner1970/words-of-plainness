@@ -36,6 +36,263 @@ nextChapter:
 
 discordChannelId: ""
 
+lyrics: |
+  <p class="section"><strong>[Verse 1]</strong></p>
+  <p class="verse">There's a hunger deep inside I cannot name<br>
+  Feelin' homesick for a place I've never known<br>
+  Filled it up with pride and empty pleasure<br>
+  Oh, but bitter waters never satisfy</p>
+
+  <p class="section"><strong>[Verse 2]</strong></p>
+  <p class="verse">I've walked roads of despair and rebellion<br>
+  Let go of who I was to fit a mold<br>
+  Made excuses out of worldly wisdom<br>
+  But clever words can't warm a weary soul</p>
+
+  <p class="section"><strong>[Chorus]</strong></p>
+  <p class="chorus">Seek and you will find<br>
+  Knock and the door swings open wide<br>
+  There's a humble road between the shadows<br>
+  Where the hungry come to find the light<br>
+  The search is worth the risking<br>
+  Every question, every climb<br>
+  Seek and you will find</p>
+
+  <p class="section"><strong>[Verse 3]</strong></p>
+  <p class="verse">I see it now through a glass so darkly<br>
+  But even shadows cannot hide what's true<br>
+  There's meaning waiting just past my understanding<br>
+  A living water, crystal, still, and free<br>
+  <em>Reflecting back the face of God in me</em></p>
+
+  <p class="section"><strong>[Chorus]</strong></p>
+  <p class="chorus">Seek and you will find<br>
+  Knock and the door swings open wide<br>
+  There's a humble road between the shadows<br>
+  Where the hungry come to find the light<br>
+  The search is worth the risking<br>
+  Every question, every climb<br>
+  Seek and you will find</p>
+
+  <p class="section"><strong>[Bridge]</strong></p>
+  <p class="bridge">Between the pride and the despair<br>
+  Between the running and standing still<br>
+  There's a narrow way for honest seekers<br>
+  Where the deepest thirst is finally filled</p>
+
+  <p class="section"><strong>[Final Chorus]</strong></p>
+  <p class="chorus">Seek and you will find<br>
+  Knock and the door swings open wide<br>
+  There's a humble road between the shadows<br>
+  Where the hungry come to find the light<br>
+  The search is worth the risking<br>
+  Worth any sacrifice<br>
+  Seek and you will find<br>
+  Seek and you will find</p>
+
+  <p class="section"><strong>[Outro]</strong></p>
+  <p class="verse"><em>The hunger was no curse<br>
+  God planted it on purpose<br>
+  A holy homesickness<br>
+  To lead me home</em></p>
+
+podcastTranscript: |
+  <p><strong>Jordan:</strong> Mr. Powner? Is that—wait, is that actually you?</p>
+
+  <p><strong>Aaron:</strong> Jordan! Wow! How long has it been—six, seven years?</p>
+
+  <p><strong>Jordan:</strong> Almost ten years! Junior year was my last year with you before you retired. We were all pretty sad when you left.</p>
+
+  <p><strong>Aaron:</strong> I miss it more than I expected, honestly. Thirty years in the classroom, and then suddenly you're just… not. It's been an adjustment.</p>
+
+  <p><strong>Jordan:</strong> What have you been doing with yourself?</p>
+
+  <p><strong>Aaron:</strong> Well... staying busy. Lot's of traveling in our RV. I've been writing most nights. Some ministry work I'd been planning for years... Figuring out who I am when I'm not "Mr. Powner" anymore. But enough about me—what about you? You were headed to State, right? Pre-med or something?</p>
+
+  <p><strong>Jordan:</strong> Yeah, that didn't exactly work out. Changed majors twice, took a gap year that turned into two, finally finished with a business degree. Now I'm doing project management for a tech company.</p>
+
+  <p><strong>Aaron:</strong> Hey, that's not nothing. You landed on your feet.</p>
+
+  <p><strong>Jordan:</strong> I guess... Actually… I was kind of hoping I'd run into you sometime.</p>
+
+  <p><strong>Aaron:</strong> Really?</p>
+
+  <p><strong>Jordan:</strong> You always said in class that you couldn't share your religious views at a public school, but that after we graduated, we could ask you anything. I finally get to ask.</p>
+
+  <p><strong>Aaron:</strong> I remember that you were one of the persistent ones, weren't you? Always trying to get me to slip up.</p>
+
+  <p><strong>Jordan:</strong> I was convinced you were a member of my church. The way you talked about families, the way you treated people… I kept looking for clues.</p>
+
+  <p><strong>Aaron:</strong> And I kept telling you—</p>
+
+  <p><strong>Jordan:</strong> You said, "Watch how I live and treat people. Pay attention to what I care about and what upsets me. You can probably figure out what I believe without me saying a word."</p>
+
+  <p><strong>Aaron:</strong> Did you figure it out?</p>
+
+  <p><strong>Jordan:</strong> I had my suspicions. But you never confirmed anything. It drove me crazy.</p>
+
+  <p><strong>Aaron:</strong> Well... You aren't my student anymore. You can ask me anything now.</p>
+
+  <p><strong>Jordan:</strong> I guess I'm not here to ask what church you belong to. I already know the answer to that. I'm here because… I don't know what I believe anymore. And I thought maybe you could help.</p>
+
+  <p><strong>Aaron:</strong> That's a big thing to carry. What's on your mind, Jordan? You look like you're holding very tight to something.</p>
+
+  <p><strong>Jordan:</strong> Can we sit for a minute?</p>
+
+  <p><strong>Aaron:</strong> Of course. Let me grab my lunch. And hey—you can call me Aaron now. I think you've earned it.</p>
+
+  <p><strong>Jordan:</strong> It feels a little strange to call you by your first name. I always saw you as a trusted adult. You're a minister now. What do people call you in that role?</p>
+
+  <p><strong>Aaron:</strong> Some folks I serve and work with call me Brother Aaron.</p>
+
+  <p><strong>Jordan:</strong> Okay, then... Brother Aaron–I hope you can help me. I don't even know how to start. It's going to sound stupid.</p>
+
+  <p><strong>Aaron:</strong> Go ahead. Try me.</p>
+
+  <p><strong>Jordan:</strong> I did most of what I was supposed to do, you know? Finished school. Got a decent job. I'm not rich, but I'm not struggling either. I've got friends, a relationship that's going pretty well. On paper, things are fine. But there's this… I don't know how to describe it.</p>
+
+  <p><strong>Aaron:</strong> It's okay. Take your time with it.</p>
+
+  <p><strong>Jordan:</strong> I am proud of what I've accomplished, but I feel tired. Maybe I'm burnt out. It's like an itch I can't scratch. This feeling that something's missing, even when nothing's actually wrong. Some days I wake up and think, "Is this it? Is this what I worked so hard for? Is this who I'm supposed to be?" And then I feel guilty for even feeling that way, because I know people have it way worse.</p>
+
+  <p><strong>Aaron:</strong> That doesn't sound stupid at all.</p>
+
+  <p><strong>Jordan:</strong> No?</p>
+
+  <p><strong>Aaron:</strong> No. Actually, what you're describing is so common it's almost universal. I've heard versions of it from students, from people I've worked with in ministry, from my own mirror. There's this hunger that most people feel at some point in their lives. We don't all feel it at the same time, and it's not even continuous within an individual's lifetime. Some days it's silent, others it is a full-blown existential crisis. It depends on what's happening in one's life. When we feel it, it's a hunger for something more than just getting by. More than just being comfortable. And the strange thing is, it often shows up strongest when things are going well.</p>
+
+  <p><strong>Jordan:</strong> Why would that be?</p>
+
+  <p><strong>Aaron:</strong> When things are hard, you're mostly too busy surviving to notice the hunger. You're just trying to get through the day. But when the pressure lets up and you finally have room to breathe… that's when you start asking the bigger questions. Who am I? What's this all for? Is there something I'm supposed to be doing that I'm not?</p>
+
+  <p><strong>Jordan:</strong> Yeah. That's exactly it.</p>
+
+  <p><strong>Aaron:</strong> Then you're in good company. That hunger isn't a sign that something's wrong with you. If anything, it's a sign you're paying attention.</p>
+
+  <p><strong>Jordan:</strong> But what am I supposed to do with it? I've tried stuff. I went through a phase where I was really into self-improvement—books, podcasts, the whole thing. Some of it helped for a while. Then I tried getting more serious about fitness, thinking maybe I just needed to feel stronger. That helped too, kind of. But the feeling always comes back.</p>
+
+  <p><strong>Aaron:</strong> It does, doesn't it?</p>
+
+  <p><strong>Jordan:</strong> So what's the answer? More therapy? Meditation? Going back to church? Get a hobby?</p>
+
+  <p><strong>Aaron:</strong> Therapy when you need to work through things is a healthy choice. Going back to church to find a supportive community is a good choice, too. Can I tell you something that might sound strange?</p>
+
+  <p><strong>Jordan:</strong> Sure.</p>
+
+  <p><strong>Aaron:</strong> What if the hunger we all sometimes feel isn't a problem to solve?</p>
+
+  <p><strong>Jordan:</strong> What do you mean?</p>
+
+  <p><strong>Aaron:</strong> I spent a lot of years thinking exactly what you're thinking—that the restlessness was a bug, and my job was to find the fix. The right answer, the right practice, the right doctrines or belief system would finally make it go away. But I've started to see it differently now.</p>
+
+  <p><strong>Jordan:</strong> How so?</p>
+
+  <p><strong>Aaron:</strong> What if the hunger is actually… a feature? What if it's built into us on purpose?</p>
+
+  <p><strong>Jordan:</strong> That sounds like something someone says to make suffering feel meaningful.</p>
+
+  <p><strong>Aaron:</strong> Fair enough. You always were sharp. But think about it from a teaching perspective. You remember what I used to say when you guys got stuck on a lab experiment and wanted me to just give you the answer?</p>
+
+  <p><strong>Jordan:</strong> "The struggle is where the learning happens."</p>
+
+  <p><strong>Aaron:</strong> Drove you crazy, didn't I?</p>
+
+  <p><strong>Jordan:</strong> Little bit, yeah.</p>
+
+  <p><strong>Aaron:</strong> But was I wrong?</p>
+
+  <p><strong>Jordan:</strong> No. The labs where I had to figure it out myself were the ones I actually remembered.</p>
+
+  <p><strong>Aaron:</strong> Right. Because struggle isn't the enemy of growth—it's the mechanism of growth. The discomfort of not knowing, of having to reach for something just beyond your grasp… that's where the transformation happens. What if spiritual growth works the same way?</p>
+
+  <p><strong>Jordan:</strong> So you're saying the restlessness is… productive?</p>
+
+  <p><strong>Aaron:</strong> I'm saying it might be the engine. The thing that keeps us from settling. The thing that keeps us becoming.</p>
+
+  <p><strong>Jordan:</strong> Becoming what?</p>
+
+  <p><strong>Aaron:</strong> <em>That's</em> the question, isn't it?</p>
+
+  <p><strong>Jordan:</strong> Okay, but becoming what? I don't even know what I'm supposed to be aiming at. I've got more questions than answers at this point.</p>
+
+  <p><strong>Aaron:</strong> Good for you!</p>
+
+  <p><strong>Jordan:</strong> Good? How is that good?</p>
+
+  <p><strong>Aaron:</strong> Because questions are how we grow. You remember Socrates?</p>
+
+  <p><strong>Jordan:</strong> Vaguely. Drank poison. Asked too many questions.</p>
+
+  <p><strong>Aaron:</strong> That's the guy. He was onto something, though. The unexamined life and all that. Look, here's what I've learned after a few decades of wrestling with this stuff: the questions don't go away. They're not supposed to.</p>
+
+  <p><strong>Jordan:</strong> Can I ask you something personal?</p>
+
+  <p><strong>Aaron:</strong> Of course.</p>
+
+  <p><strong>Jordan:</strong> Do you ever doubt? Like, really doubt? Or has your faith gotten solid enough that you don't have to deal with that anymore?</p>
+
+  <p><strong>Aaron:</strong> Oh, I have frequent doubts... mostly about myself. I don't doubt God so much anymore. But there are nights I lie awake and wonder if I've got the whole thing wrong. If I've wasted my time and energy to do things that just don't matter.</p>
+
+  <p><strong>Jordan:</strong> Really?</p>
+
+  <p><strong>Aaron:</strong> Really. But here's the thing—those doubts don't scare me the way they used to. They've become part of the process. Part of the curriculum, if you want to use the school metaphor again. I've made a decision to follow Christ whether or not I have perfect understanding, whether or not I fit into any particular tradition's definition of proper belief, you know, creeds and theology. I feel the Lord's peace. I see his influence in my life. And that's enough for me to keep walking, even when I can't see where the path leads.</p>
+
+  <p><strong>Jordan:</strong> Conviction and uncertainty at the same time.</p>
+
+  <p><strong>Aaron:</strong> That's exactly it. They're not opposites. They're companions—just like the questions.</p>
+
+  <p><strong>Jordan:</strong> I don't know what I expected from this conversation. Maybe some kind of answer that would make the restlessness stop.</p>
+
+  <p><strong>Aaron:</strong> And instead?</p>
+
+  <p><strong>Jordan:</strong> Instead I'm starting to think maybe it's not supposed to stop. Maybe the hunger is the point.</p>
+
+  <p><strong>Aaron:</strong> Look at you. You're doing the work.</p>
+
+  <p><strong>Jordan:</strong> There's that teacher talk again.</p>
+
+  <p><strong>Aaron:</strong> I told you, thirty years leaves a mark. But listen—I want you to hear something clearly before we go.</p>
+
+  <p><strong>Jordan:</strong> Okay.</p>
+
+  <p><strong>Aaron:</strong> Wherever you are in this search—just beginning, deep in the middle, tired or angry and ready to give up—the search itself is sacred. The hunger is evidence of your aliveness. The questions are doorways, not walls. And you are not alone in any of it.</p>
+
+  <p><strong>Jordan:</strong> What do you mean?</p>
+
+  <p><strong>Aaron:</strong> I mean there are people all over this world—across every culture, every tradition, every generation—wrestling with the same questions you are. We're all fellow searchers. And in my experience, we find each other along the way. Sometimes in churches, sometimes in food courts, sometimes in the most unexpected places.</p>
+
+  <p><strong>Jordan:</strong> Like running into your old science teacher.</p>
+
+  <p><strong>Aaron:</strong> Exactly like that.</p>
+
+  <p><strong>Jordan:</strong> So what do I do now?</p>
+
+  <p><strong>Aaron:</strong> Keep searching. But maybe search differently than before. Instead of looking for answers that will make the questions stop, look for a way of living that makes the questions bearable—even beautiful. Find people who will search alongside you. And when you stumble—because you will, we all do—remember that the stumbling is part of it. The Refiner is patient. There's always grace for another try.</p>
+
+  <p><strong>Jordan:</strong> Thank you, Brother Aaron. Really.</p>
+
+  <p><strong>Aaron:</strong> Thank you for trusting me with this. One more thing?</p>
+
+  <p><strong>Jordan:</strong> Yeah?</p>
+
+  <p><strong>Aaron:</strong> The fact that you're asking these questions, feeling this hunger, wrestling with what it all means—that's not weakness. It's strength. It's what being a child of God looks like. Don't let anyone—including yourself—convince you otherwise.</p>
+
+  <p><strong>Jordan:</strong> I'll try to remember that.</p>
+
+  <p><strong>Aaron:</strong> And hey—don't be a stranger. This conversation doesn't have to be a one-time thing.</p>
+
+  <p><strong>Jordan:</strong> I'd like that. Good bye, Brother Aaron.</p>
+
+  <p class="reflection"><em><strong>Aaron (reflecting):</strong> Well, I didn't expect to have that conversation today. But then, I rarely expect the moments that end up mattering most.</em></p>
+
+  <p class="reflection"><em>Jordan is still searching. So am I. After all these years—after teaching and writing and ministering and failing and trying again—I'm still on the path to Christ, still feeling the hunger, still asking questions I can't fully answer.</em></p>
+
+  <p class="reflection"><em>Creation is not finished. Neither is Jordan. Neither am I. None of us is finished.</em></p>
+
+  <p class="reflection"><em>And that, I've come to believe, is very good news.</em></p>
+
+  <p class="reflection"><em>I can testify of my confidence in the divinity of this process—in the hunger, in the questions, in the grace that holds us through it all—in the name of Jesus Christ—Amen.</em></p>
+
 toc:
   - id: "section-note-to-the-reader"
     title: "Note to the Reader"

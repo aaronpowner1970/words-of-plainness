@@ -448,6 +448,60 @@
 }
 
 /* =========================================
+   Lyrics Panel
+   ========================================= */
+
+.music-lyrics-panel {
+    max-width: 800px;
+    margin: var(--space-md, 1.5rem) auto;
+    background: rgba(42, 29, 20, 0.4);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+}
+
+.music-lyrics-panel summary {
+    cursor: pointer;
+    color: var(--gold-primary, #C4943A);
+    font-weight: 500;
+    padding: 0.25rem 0;
+}
+
+.lyrics-content {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+    margin-top: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    line-height: 1.7;
+    color: var(--cream, #E8DCC4);
+}
+
+.lyrics-content .verse {
+    margin-bottom: 1em;
+}
+
+.lyrics-content .chorus {
+    font-weight: 500;
+}
+
+.lyrics-content .bridge {
+    font-style: italic;
+}
+
+.lyrics-content .section {
+    margin-top: 1.5em;
+    color: var(--gold-primary, #C4943A);
+}
+
+.no-lyrics {
+    color: var(--cream, #E8DCC4);
+    opacity: 0.6;
+    font-style: italic;
+}
+
+/* =========================================
    Music Footer
    ========================================= */
 

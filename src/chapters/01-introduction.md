@@ -36,6 +36,109 @@ nextChapter:
 
 discordChannelId: ""
 
+lyrics: |
+  <p class="section"><strong>[Opening Witness]</strong></p>
+  <p class="verse">I was a traveler, lost among the hills,<br>
+  Until the Shepherd's voice found me still.<br>
+  Before I cast a single seed upon this ground,<br>
+  I lift my heart to Him in whom my soul is found.<br>
+  I stand a witness of the risen, living Christ—<br>
+  Whose mercy held me fast, whose love has paid my price.</p>
+
+  <p class="section"><strong>[Verse 1]</strong></p>
+  <p class="verse">We are all of us so human,<br>
+  Travelers wrapped in dust and skin,<br>
+  Searching for a clearing where the light comes pouring in.<br>
+  Our wandering feet will carry us down paths that twist and turn,<br>
+  Through the curious and the frightening—so much to unlearn.<br>
+  Our untamed hearts keep pulling toward the wild and the unknown,<br>
+  Walking through the shadow and the beauty, never quite alone.</p>
+
+  <p class="section"><strong>[Chorus]</strong></p>
+  <p class="chorus">For we are hunters! We are gatherers of light,<br>
+  Reaching for the sacred in the middle of the night.<br>
+  Not with the wisdom of the world or the scholars' heavy pen,<br>
+  But in the language of a father—where the plainness all begins.<br>
+  Speaking truth to searching souls, to harmonize and heal—<br>
+  In the words of plainness, He makes the broken whole,<br>
+  In the words of plainness, He's calling to your soul.</p>
+
+  <p class="section"><strong>[Verse 2]</strong></p>
+  <p class="verse">Our restless voices speak so much, yet say so little truth;<br>
+  We trade away the wonder that we carried in our youth.<br>
+  Our weary ears grow tired of the world's discordant sound,<br>
+  But in the quiet of the morning, mercy can be found.<br>
+  We wrestle for the meaning through the bitter and the sweet,<br>
+  And lay our tangled stories at the Shepherd's wounded feet.</p>
+
+  <p class="section"><strong>[Bridge]</strong></p>
+  <p class="bridge">These are letters for the unborn,<br>
+  A heritage of grace.<br>
+  Bread crumbs for the ones who'll walk<br>
+  This wide and weary place.<br>
+  Sometimes, just sometimes,<br>
+  Humanity finds its way back home—<br>
+  Because He first came looking,<br>
+  So we'd never walk alone.</p>
+
+  <p class="section"><strong>[Selah]</strong></p>
+  <p class="verse"><em>My soul delights in plainness—<br>
+  Not the gilded words of men,<br>
+  But the simple truth that finds us<br>
+  And brings us home again.</em></p>
+
+  <p class="section"><strong>[Final Chorus]</strong></p>
+  <p class="chorus">For we are hunters! We are gatherers of light,<br>
+  Reaching for the sacred in the middle of the night.<br>
+  Not with the wisdom of the world or the scholars' heavy pen,<br>
+  But in the language of a father—where the plainness all begins.<br>
+  Speaking truth to searching souls, to harmonize and heal—<br>
+  In the words of plainness, He makes the broken whole,<br>
+  In the words of plainness, He's calling to your soul.</p>
+
+  <p class="section"><strong>[Closing Witness]</strong></p>
+  <p class="verse"><em>These words of mine are plain,<br>
+  But oh, my heart is full.<br>
+  I am a debtor to His grace,<br>
+  A receiver of His mercy.<br>
+  Jesus is the Christ—<br>
+  The Light that finds us in the dark,<br>
+  The Voice that calls us home.<br>
+  In Him I find my peace.<br>
+  In Him I find my rest.<br>
+  In His holy name, Amen.</em></p>
+
+podcastTranscript: |
+  <p><strong>Host:</strong> Welcome to a Words of Plainness podcast. I'm your host, David. Today I'm sitting down with Brother Aaron Powner to discuss the opening chapter of his book entitled <em>Words of Plainness: A Latter-day Witness of Christ</em>. Aaron, this introduction chapter struck me as deeply personal. You and your brother Jim don't seem to be positioning yourselves as theologians or scholars. You call yourselves "hunters and gatherers of knowledge." Why that distinction?</p>
+
+  <p><strong>Aaron:</strong> That's intentional, David. My brother and I have no interest in setting ourselves up as authorities. We're not claiming to have discovered anything new. We've simply gathered truths that God has already revealed—through scripture, through prophets, through life experience—and we're trying to share them in plain language. We till and seed the soils of our souls hoping to harvest wisdom. That's really all this is.</p>
+
+  <p><strong>Host:</strong> There's a beautiful vulnerability in that. You mention this project began as letters to your unborn children. How did personal letters become a published book?</p>
+
+  <p><strong>Aaron:</strong> Well, I feel it evolved naturally. After my mission to Argentina, I came home with this burning desire to capture the things that matter most—not money or possessions, but understanding, faith, meaning of life stuff. I started writing without knowing who I was writing to. Eventually I realized I was writing to my future children. This would be my inheritance to them. When I shared the drafts with my brother Jim, his contributions became so essential that the work became ours together.</p>
+
+  <p><strong>Host:</strong> Now here's something that surprised me. You and Jim weren't born into a Latter-day Saint family. Your mother converted while pregnant with you, coming from a Lutheran background. Some relatives opposed her decision, right? That's a significant detail.</p>
+
+  <p><strong>Aaron:</strong> Yes, it's central to who we are. Our mother investigated many faiths and spiritual traditions on her own and then made a courageous choice that not everyone in our family understood. She was baptized to join the Church of Jesus Christ of Latter-day Saints while carrying me. Jim converted later. We grew up immersed in the faith—yes—but we also grew up knowing what it costs to choose a different path than the one your family expects. That shapes how we write. We're not speaking from some ivory tower. We know what it's like to have loved ones question your beliefs.</p>
+
+  <p><strong>Host:</strong> That explains the tone of invitation rather than argument that runs through chapter one of your writings. You address something directly that I think many listeners wonder about. You write that Latter-day Saints really do worship Jesus Christ as the Savior of us all, despite what some critics claim. But you don't get defensive. You simply state it and move on.</p>
+
+  <p><strong>Aaron:</strong> That's exactly right. We're not interested in arguing. We believe what the Apostle Paul taught—that no one can say Jesus is Lord except by the Holy Spirit. If someone professes Christ as their Savior, who are we to question that? Theological differences don't disqualify someone from being a disciple of Jesus Christ. We feel a genuine kinship with all who believe in Him. Our hope is to add light to what others already have, not take anything away.</p>
+
+  <p><strong>Host:</strong> You even tell readers that if they can't accept Latter-day Saint doctrine, you plead with them to at least believe in Jesus Christ and embrace His commandments and teachings.</p>
+
+  <p><strong>Aaron:</strong> That's the heart of it. If we all follow His call to "come, follow me," we'll end up in the same place eventually. The specifics matter less than the direction we're walking.</p>
+
+  <p><strong>Host:</strong> The book is organized into five parts—Faith, Promises, Practices, Theology, and your Witness of Christ. It sounds like a journey.</p>
+
+  <p><strong>Aaron:</strong> Writing these letters, now chapters, really has been a journey to understand the faith we were raised with. It took more than twenty years to get to this point. And the journey isn't over yet. Each section of writings builds on the last. We start with the basics that any Christian would recognize, then move deeper into the covenants and practices that shape Latter-day Saint life, and finally into the doctrines that distinguish our faith. But it all points back to Christ as the divine Son of God and our Savior. Always.</p>
+
+  <p><strong>Host:</strong> Aaron, for someone holding this book, unsure whether to keep reading—what would you say to them?</p>
+
+  <p><strong>Aaron:</strong> I'd say: what you get out of these words depends entirely on what you're looking for. If you come searching for reasons to dismiss us, you'll find them. But if you come with an open heart, searching for truth and meaning and lasting happiness—I believe you'll find something of worth. That's our prayer.</p>
+
+  <p><strong>Host:</strong> Brother Aaron Powner, thank you. Listeners, the full chapter is available to read and study at BrotherAaron.org, home of his Words of Plainness website. Until next time.</p>
+
 toc:
   - id: "section-human-condition"
     title: "The Human Condition"

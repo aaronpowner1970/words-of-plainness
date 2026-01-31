@@ -97,6 +97,13 @@ permalink: /music/
         <p class="music-subtitle">Original songs by Aaron Powner, inspired by the themes of each chapter</p>
     </div>
 
+    <details class="music-lyrics-panel" id="lyricsPanel">
+        <summary>View Lyrics</summary>
+        <div class="lyrics-content" id="lyricsContent">
+            <p class="no-lyrics">Select a song to view lyrics</p>
+        </div>
+    </details>
+
     <div class="playlist-container">
         <table class="playlist-table" id="playlistTable">
             <thead>
@@ -117,7 +124,8 @@ permalink: /music/
                     data-src="/assets/audio/{{ chapter.data.audio.testimony.file }}"
                     data-title="{{ chapter.data.audio.testimony.title }}"
                     data-chapter="Chapter {{ chapter.data.chapter }}: {{ chapter.data.title }}"
-                    data-chapter-url="{{ chapter.url }}">
+                    data-chapter-url="{{ chapter.url }}"
+                    data-lyrics="{{ chapter.data.lyrics | escape if chapter.data.lyrics else '' }}">
                     <td class="col-play">
                         <button class="btn-row-play" aria-label="Play {{ chapter.data.audio.testimony.title }}">
                             <svg class="icon-play" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none">

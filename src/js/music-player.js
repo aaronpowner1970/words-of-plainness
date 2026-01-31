@@ -58,6 +58,7 @@ const MusicPlayer = {
             title: row.dataset.title,
             chapter: row.dataset.chapter,
             chapterUrl: row.dataset.chapterUrl,
+            lyrics: row.dataset.lyrics || null,
             row: row
         }));
     },
@@ -193,6 +194,9 @@ const MusicPlayer = {
         this.els.npTitle.textContent = track.title;
         this.els.npChapter.textContent = track.chapter;
 
+        // Update lyrics panel
+        this.updateLyrics(index);
+
         // Highlight row
         this.tracks.forEach(t => {
             t.row.classList.remove('playing', 'is-playing');
@@ -314,6 +318,7 @@ const MusicPlayer = {
         } else {
             // At end with repeat off, stop
             this.currentIndex = -1;
+            this.currentIndex = -1;
             this.els.npTitle.textContent = 'Select a song';
             this.els.npChapter.textContent = '';
             this.els.progressFill.style.width = '0%';
@@ -322,6 +327,7 @@ const MusicPlayer = {
             this.els.timeTotal.textContent = '0:00';
             this.tracks.forEach(t => t.row.classList.remove('playing', 'is-playing'));
             this.updatePlayState(false);
+            this.updateLyrics(-1);
         }
     },
 
@@ -418,6 +424,26 @@ const MusicPlayer = {
         } else {
             volOn.style.display = 'block';
             volMute.style.display = 'none';
+        }
+    },
+
+    // =========================================
+    // Lyrics
+    // =========================================
+
+    updateLyrics(songIndex) {
+        const lyricsContent = document.getElementById('lyricsContent');
+        if (!lyricsContent) return;
+
+        if (songIndex >= 0 && songIndex < this.tracks.length) {
+            const track = this.tracks[songIndex];
+            if (track.lyrics) {
+                lyricsContent.innerHTML = track.lyrics;
+            } else {
+                lyricsContent.innerHTML = '<p class="no-lyrics">No lyrics available for this song.</p>';
+            }
+        } else {
+            lyricsContent.innerHTML = '<p class="no-lyrics">Select a song to view lyrics</p>';
         }
     },
 

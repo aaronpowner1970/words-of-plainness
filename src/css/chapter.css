@@ -2416,3 +2416,51 @@ h2[id], h3[id], [id^="section-"] {
     min-width: 60px;
     text-align: center;
 }
+
+/* Media Transcript (Lyrics / Podcast Transcript in Modals) */
+.media-transcript {
+    margin-top: var(--space-md);
+    border-top: 1px solid rgba(196, 148, 58, 0.3);
+    padding-top: var(--space-md);
+}
+
+.media-transcript summary {
+    cursor: pointer;
+    color: var(--gold-primary);
+    font-weight: 500;
+}
+
+.transcript-content {
+    margin-top: var(--space-sm);
+    max-height: 300px;
+    overflow-y: auto;
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+    font-size: 0.9em;
+    line-height: 1.7;
+}
+
+.transcript-content .verse {
+    margin-bottom: 1em;
+}
+
+.transcript-content .chorus {
+    font-weight: 500;
+}
+
+.transcript-content .bridge {
+    font-style: italic;
+}
+
+.transcript-content .section {
+    margin-top: 1.5em;
+    color: var(--gold-primary);
+}
+
+.transcript-content .reflection {
+    background: rgba(196, 148, 58, 0.1);
+    padding: 1em;
+    border-left: 3px solid var(--gold-primary);
+    margin-top: 1em;
+}
