@@ -186,7 +186,7 @@ const API = {
     async login(email, password) {
         const data = await this.request('/accounts/login/', {
             method: 'POST',
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ username: email, password })
         });
 
         this.setAuth(data);
