@@ -31,8 +31,8 @@ prevChapter:
   url: "/chapters/01-introduction/"
   title: "Chapter 1: Introduction"
 nextChapter:
-  url: "/chapters/03-our-need/"
-  title: "Chapter 3: Our Need"
+  url: "/chapters/03-academic-knowledge/"
+  title: "Chapter 3: Academic Knowledge"
 
 discordChannelId: ""
 
