@@ -373,6 +373,13 @@ const API = {
         });
     },
 
+    async updateReflection(id, data) {
+        return this.request(`/reflections/mine/${id}/`, {
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        });
+    },
+
     async getReflections(chapterSlug) {
         return this.request(`/reflections/mine/?chapter_slug=${encodeURIComponent(chapterSlug)}`);
     },

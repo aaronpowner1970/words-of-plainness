@@ -3,9 +3,9 @@
  * =========================================
  *
  * Handles saving and loading reflection prompts.
- * - Saves to Django API for authenticated users
+ * - Saves to Django API for authenticated users (POST new, PATCH existing)
  * - Falls back to localStorage for guests
- * - Auto-saves as user types (debounced)
+ * - Auto-saves as user types (2s debounce)
  */
 
 const PROMPT_TITLES = {
@@ -15,10 +15,11 @@ const PROMPT_TITLES = {
 };
 
 const Reflections = {
-    chapterId: null,    // e.g. "chapter-01-introduction" (matches chapter_slug)
+    chapterId: null,
     debounceTimers: {},
-    saveDelay: 1000,
-    savedIds: {},       // prompt number → API reflection id (for updates)
+    saveDelay: 2000,    // 2 second debounce for auto-save
+    savedIds: {},       // prompt number → API reflection id (for PATCH updates)
+    saving: {},         // prompt number → true while a save is in-flight
 
     init(chapterId) {
         this.chapterId = chapterId;
@@ -27,27 +28,22 @@ const Reflections = {
         this.setupClearButton();
 
         console.log('[Reflections] Initialized for:', chapterId);
-        console.log('[Reflections] API available:', !!window.API);
-        console.log('[Reflections] API baseUrl:', window.API?.baseUrl || '(none)');
         console.log('[Reflections] Authenticated:', this.isUserAuthenticated());
 
         this.loadReflections();
     },
 
-    /**
-     * Check if user is authenticated.
-     * Uses API.isAuthenticated() if available, with localStorage fallback
-     * in case API.init() hasn't run yet.
-     */
     isUserAuthenticated() {
-        // Primary: check the API client
         if (window.API && window.API.isAuthenticated()) {
             return true;
         }
-        // Fallback: check localStorage directly (handles init timing issues)
         const token = localStorage.getItem('wop_access_token')
             || localStorage.getItem('wop-auth-token');
         return !!token;
+    },
+
+    canUseAPI() {
+        return this.isUserAuthenticated() && window.API && window.API.baseUrl;
     },
 
     setupInputListeners() {
@@ -60,24 +56,36 @@ const Reflections = {
     },
 
     debounceSave(prompt, value) {
+        // Cancel any pending timer for this prompt
         if (this.debounceTimers[prompt]) {
             clearTimeout(this.debounceTimers[prompt]);
+        }
+
+        if (!value.trim()) {
+            this.updateStatus('default');
+            return;
         }
 
         this.updateStatus('saving');
 
         this.debounceTimers[prompt] = setTimeout(() => {
-            if (value.trim()) {
-                this.saveReflection(prompt, value);
-            } else {
-                this.updateStatus('default');
-            }
+            this.debounceTimers[prompt] = null;
+            this.saveReflection(prompt, value);
         }, this.saveDelay);
     },
 
     /**
-     * Build the API payload matching Django's expected schema.
+     * Cancel all pending debounce timers. Called before immediate save.
      */
+    cancelAllTimers() {
+        for (const prompt of Object.keys(this.debounceTimers)) {
+            if (this.debounceTimers[prompt]) {
+                clearTimeout(this.debounceTimers[prompt]);
+                this.debounceTimers[prompt] = null;
+            }
+        }
+    },
+
     buildPayload(prompt, value) {
         return {
             content: value,
@@ -90,26 +98,46 @@ const Reflections = {
     async saveReflection(prompt, value) {
         if (!value.trim()) return;
 
-        // Try API if authenticated
-        if (this.isUserAuthenticated() && window.API && window.API.baseUrl) {
+        // Prevent concurrent saves for the same prompt
+        if (this.saving[prompt]) {
+            console.log('[Reflections] Save already in-flight for prompt', prompt, '— skipping');
+            return;
+        }
+
+        if (this.canUseAPI()) {
+            this.saving[prompt] = true;
             try {
-                const payload = this.buildPayload(prompt, value);
-                console.log('[Reflections] Saving to API...', payload.title);
-                const result = await window.API.saveReflection(payload);
-                console.log('[Reflections] Reflection saved:', payload.title, result);
-                if (result && result.id) {
-                    this.savedIds[prompt] = result.id;
+                const existingId = this.savedIds[prompt];
+
+                if (existingId) {
+                    // PATCH existing reflection
+                    console.log('[Reflections] Updating existing reflection', existingId, 'for prompt', prompt);
+                    const result = await window.API.updateReflection(existingId, {
+                        content: value
+                    });
+                    console.log('[Reflections] Reflection updated:', result);
+                } else {
+                    // POST new reflection
+                    const payload = this.buildPayload(prompt, value);
+                    console.log('[Reflections] Creating new reflection:', payload.title);
+                    const result = await window.API.saveReflection(payload);
+                    console.log('[Reflections] Reflection created:', result);
+                    if (result && result.id) {
+                        this.savedIds[prompt] = result.id;
+                    }
                 }
+
                 this.updateStatus('saved');
                 return;
             } catch (error) {
                 console.warn('[Reflections] API save failed, falling back to localStorage:', error.message);
+            } finally {
+                this.saving[prompt] = false;
             }
         } else {
-            console.log('[Reflections] Not authenticated or API not configured, saving to localStorage');
+            console.log('[Reflections] Not authenticated, saving to localStorage');
         }
 
-        // Fallback to localStorage
         this.saveToLocalStorage(prompt, value);
         this.updateStatus('saved-local');
     },
@@ -126,8 +154,7 @@ const Reflections = {
     },
 
     async loadReflections() {
-        // Try API first
-        if (this.isUserAuthenticated() && window.API && window.API.baseUrl) {
+        if (this.canUseAPI()) {
             try {
                 console.log('[Reflections] Loading from API for:', this.chapterId);
                 const reflections = await window.API.getReflections(this.chapterId);
@@ -144,11 +171,6 @@ const Reflections = {
         this.loadFromLocalStorage();
     },
 
-    /**
-     * Populate inputs from API response.
-     * API returns an array or { results: [...] } with { id, title, content, ... }.
-     * Match them back to prompt numbers by title.
-     */
     populateFromAPI(reflections) {
         // Unwrap paginated response
         if (!Array.isArray(reflections)) {
@@ -168,6 +190,9 @@ const Reflections = {
             titleToPrompt[title] = num;
         }
 
+        // Clear savedIds before repopulating
+        this.savedIds = {};
+
         reflections.forEach(r => {
             const promptNum = titleToPrompt[r.title] || r.prompt;
             if (!promptNum) {
@@ -178,12 +203,14 @@ const Reflections = {
             const input = document.getElementById(`reflection${promptNum}`);
             if (input) {
                 input.value = r.content || '';
-                console.log('[Reflections] Loaded prompt', promptNum, ':', (r.content || '').substring(0, 50) + '...');
+                console.log('[Reflections] Loaded prompt', promptNum, '(id:', r.id + '):', (r.content || '').substring(0, 50));
             }
             if (r.id) {
                 this.savedIds[promptNum] = r.id;
             }
         });
+
+        console.log('[Reflections] Saved IDs map:', JSON.stringify(this.savedIds));
     },
 
     loadFromLocalStorage() {
@@ -214,7 +241,11 @@ const Reflections = {
         const saveBtn = document.getElementById('saveReflections');
 
         saveBtn?.addEventListener('click', () => {
-            console.log('[Reflections] Save button clicked');
+            console.log('[Reflections] Save button clicked — cancelling pending auto-saves');
+
+            // Cancel all pending debounce timers to prevent double-saves
+            this.cancelAllTimers();
+
             let saved = 0;
             document.querySelectorAll('.reflection-input').forEach(input => {
                 const prompt = input.dataset.prompt;
@@ -240,6 +271,8 @@ const Reflections = {
     },
 
     clearAllReflections() {
+        this.cancelAllTimers();
+
         document.querySelectorAll('.reflection-input').forEach(input => {
             input.value = '';
         });
