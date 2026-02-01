@@ -276,6 +276,7 @@ p {
     color: var(--gold-primary);
     letter-spacing: 0.12em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
 }
 
 .logo-subtitle {
@@ -1119,18 +1120,25 @@ p {
 
 /* --- Responsive Design --- */
 
+/* Nav breakpoint — switch to hamburger menu below 1200px */
+@media (max-width: 1199px) {
+    .nav-desktop {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+}
+
 /* Tablet */
 @media (max-width: 1024px) {
     .hero-content {
         max-width: 65%;
     }
-    
+
     .menu-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .nav-links {
-        gap: var(--space-md);
     }
 }
 
@@ -1139,15 +1147,6 @@ p {
     :root {
         --space-xl: 2rem;
         --space-xxl: 3rem;
-    }
-    
-    /* Show mobile nav, hide desktop nav */
-    .nav-desktop {
-        display: none;
-    }
-    
-    .nav-toggle {
-        display: flex;
     }
     
     .header {
