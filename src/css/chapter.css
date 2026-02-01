@@ -2479,3 +2479,172 @@ h2[id], h3[id], [id^="section-"] {
     border-left: 3px solid var(--gold-primary);
     margin-top: 1em;
 }
+
+/* =========================================
+   Progress Resume Banner
+   ========================================= */
+
+.progress-resume-banner {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    max-width: 600px;
+    background: #2A1D14;
+    border-left: 3px solid var(--gold-primary);
+    border-radius: 6px;
+    padding: 0.875rem 1.25rem;
+    z-index: 150;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.3s ease-out;
+}
+
+.progress-resume-banner.hidden {
+    display: none;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.progress-resume-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.progress-resume-text {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--cream);
+    min-width: 150px;
+}
+
+.progress-resume-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.progress-resume-btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+}
+
+.progress-resume-btn:hover {
+    background: var(--gold-light);
+}
+
+.progress-resume-btn.secondary {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(232, 220, 196, 0.3);
+}
+
+.progress-resume-btn.secondary:hover {
+    border-color: var(--gold-primary);
+    color: var(--gold-primary);
+}
+
+/* =========================================
+   Bookmark Toast
+   ========================================= */
+
+.bookmark-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 200;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.bookmark-toast.hidden {
+    display: none;
+}
+
+.bookmark-toast.show {
+    display: block;
+    opacity: 1;
+}
+
+/* =========================================
+   Chapter Progress Badges (Writings Page)
+   ========================================= */
+
+.chapter-progress-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.chapter-progress-badge:empty {
+    display: none;
+}
+
+.chapter-progress-badge.badge-in-progress {
+    background: rgba(196, 148, 58, 0.2);
+    color: var(--gold-primary);
+    border: 1px solid rgba(196, 148, 58, 0.4);
+}
+
+.chapter-progress-badge.badge-completed {
+    background: rgba(76, 175, 80, 0.2);
+    color: #81c784;
+    border: 1px solid rgba(76, 175, 80, 0.4);
+}
+
+/* Mobile adjustments for progress resume banner */
+@media (max-width: 768px) {
+    .progress-resume-banner {
+        top: 70px;
+        left: 0.5rem;
+        right: 0.5rem;
+        width: auto;
+        transform: none;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .progress-resume-content {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}

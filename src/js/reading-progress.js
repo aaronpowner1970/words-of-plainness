@@ -2,7 +2,7 @@
  * WORDS OF PLAINNESS - Reading Progress Sync
  * ============================================
  *
- * Syncs reading progress (scroll position, audio position, bookmarks)
+ * Syncs reading progress (scroll position, bookmarks, completion status)
  * to the Django API for authenticated users. Falls back to localStorage
  * when offline or unauthenticated.
  */
@@ -13,9 +13,6 @@ const ReadingProgress = {
     lastScrollPosition: 0,
     lastSentence: null,
     saveInterval: null,
-    audioSaveInterval: null,
-    audioPosition: 0,
-    savedAudioPosition: 0,
     hasSentInProgress: false,
     hasSentCompleted: false,
     scrollDirty: false,
@@ -33,7 +30,6 @@ const ReadingProgress = {
 
         this.setupScrollTracking();
         this.setupUnload();
-        this.setupAudioSync();
         this.enhanceBookmark();
     },
 
@@ -59,10 +55,6 @@ const ReadingProgress = {
         if (data.scroll_position > 5) {
             const label = data.bookmark_label || 'where you left off';
             this.showResumeBanner(label, data.scroll_position);
-        }
-
-        if (data.audio_position > 0) {
-            this.savedAudioPosition = data.audio_position;
         }
     },
 
@@ -231,68 +223,6 @@ const ReadingProgress = {
     },
 
     // =========================================
-    // Audio Position Sync
-    // =========================================
-
-    setupAudioSync() {
-        const audio = document.getElementById('chapterAudio');
-        if (!audio) return;
-
-        document.addEventListener('wop:audio-pause', () => {
-            if (window.API?.isAuthenticated()) {
-                this.patchProgress({ audio_position: audio.currentTime });
-            }
-        });
-
-        document.addEventListener('wop:audio-play', () => {
-            if (!this.audioSaveInterval) {
-                this.audioSaveInterval = setInterval(() => {
-                    if (window.API?.isAuthenticated() && !audio.paused) {
-                        this.patchProgress({ audio_position: audio.currentTime });
-                    }
-                }, 60000);
-            }
-        });
-
-        audio.addEventListener('pause', () => {
-            if (this.audioSaveInterval) {
-                clearInterval(this.audioSaveInterval);
-                this.audioSaveInterval = null;
-            }
-        });
-
-        // Show audio resume banner when audio player is opened
-        const listenBtn = document.getElementById('btnListenFloat');
-        listenBtn?.addEventListener('click', () => {
-            if (this.savedAudioPosition > 0) {
-                this.showAudioResumeBanner(audio);
-            }
-        });
-    },
-
-    showAudioResumeBanner(audio) {
-        const banner = document.getElementById('audioResumeBanner');
-        const text = document.getElementById('audioResumeText');
-        if (!banner || !text) return;
-
-        const mins = Math.floor(this.savedAudioPosition / 60);
-        const secs = Math.floor(this.savedAudioPosition % 60);
-        text.textContent = `Resume from ${mins}:${secs.toString().padStart(2, '0')}?`;
-
-        banner.classList.remove('hidden');
-
-        document.getElementById('audioResumeYes')?.addEventListener('click', () => {
-            audio.currentTime = this.savedAudioPosition;
-            banner.classList.add('hidden');
-        }, { once: true });
-
-        document.getElementById('audioResumeNo')?.addEventListener('click', () => {
-            audio.currentTime = 0;
-            banner.classList.add('hidden');
-        }, { once: true });
-    },
-
-    // =========================================
     // Resume Banner
     // =========================================
 
@@ -348,9 +278,6 @@ const ReadingProgress = {
             if (data && data.scroll_position > 5) {
                 this.showResumeBanner(data.bookmark_label || 'where you left off', data.scroll_position);
             }
-            if (data && data.audio_position > 0) {
-                this.savedAudioPosition = data.audio_position;
-            }
         } catch (e) { /* ignore */ }
     },
 
@@ -365,9 +292,6 @@ const ReadingProgress = {
             if (local.scroll_position != null && local.scroll_position > (apiData.scroll_position || 0)) {
                 patch.scroll_position = local.scroll_position;
                 patch.last_sentence = local.last_sentence;
-            }
-            if (local.audio_position != null && local.audio_position > (apiData.audio_position || 0)) {
-                patch.audio_position = local.audio_position;
             }
             if (local.bookmark_sentence) {
                 patch.bookmark_sentence = local.bookmark_sentence;
