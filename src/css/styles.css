@@ -1165,12 +1165,14 @@ p {
     /* Hero adjustments for mobile — immersive portrait image */
     .hero {
         min-height: 100vh;
+        min-height: 100svh;
         background-image: url('/assets/images/hero-mobile-800x1200.png');
         background-size: cover;
         background-position: center 15%;
         background-repeat: no-repeat;
     }
 
+    /* Layer 1: full gradient overlay — bottom fades to solid dark */
     .hero::before {
         content: '';
         position: absolute;
@@ -1189,6 +1191,7 @@ p {
         z-index: 1;
     }
 
+    /* Layer 2: top legibility band for title area */
     .hero::after {
         content: '';
         position: absolute;
@@ -1210,11 +1213,12 @@ p {
         display: none;
     }
 
+    /* Content fills hero, flex column with top/bottom split */
     .hero-content {
         max-width: 100%;
-        padding: calc(70px + var(--space-lg)) var(--space-md) var(--space-lg);
+        padding: calc(70px + 20px) var(--space-md) 20px;
         text-align: center;
-        justify-content: flex-end;
+        justify-content: flex-start;
         position: relative;
         z-index: 2;
         background: none;
@@ -1231,10 +1235,13 @@ p {
 
     .hero-subtitle {
         font-size: 1.1rem;
+        margin-bottom: 0;
         text-shadow: 0 1px 12px rgba(0,0,0,0.7);
     }
 
+    /* Greeting text — push to bottom via auto margin (creates the clear middle zone) */
     .hero-text {
+        margin-top: auto;
         font-size: 1rem;
         text-shadow: 0 1px 10px rgba(0,0,0,0.6);
     }
