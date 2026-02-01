@@ -19,8 +19,7 @@
 <!-- Chapter Hero Section -->
 <section class="chapter-hero" data-pagefind-ignore>
     <p class="chapter-number">Chapter {{ chapter }}</p>
-    <h1 class="chapter-title" data-pagefind-meta="title">{{ title }}</h1>
-    <span data-pagefind-filter="chapter" hidden>Chapter {{ chapter }}: {{ title }}</span>
+    <h1 class="chapter-title">{{ title }}</h1>
     <blockquote class="chapter-scripture">
         "{{ scripture.text }}"
         <cite>— <a href="https://www.churchofjesuschrist.org/study/scriptures/{{ scripture.url }}" target="_blank" rel="noopener">{{ scripture.reference }}</a></cite>
@@ -42,6 +41,8 @@
 
     <!-- Chapter Content -->
     <article class="chapter-content" id="chapterContent" data-pagefind-body>
+        <span data-pagefind-meta="title" hidden>Chapter {{ chapter }}: {{ title }}</span>
+        <span data-pagefind-filter="chapter" hidden>Chapter {{ chapter }}: {{ title }}</span>
         {{ content | safe }}
     </article>
 </div>

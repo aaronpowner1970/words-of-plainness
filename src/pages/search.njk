@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: Search
-description: Search across all chapters of Words of Plainness
+description: Find passages, scriptures, and topics across all chapters of Words of Plainness
 permalink: /search/
 ---
 
@@ -11,12 +11,13 @@ permalink: /search/
     .search-page {
         max-width: 800px;
         margin: 0 auto;
-        padding: 3rem 1.5rem;
+        padding: 3rem 1.5rem 4rem;
     }
 
     .search-page h1 {
         font-family: 'Crimson Pro', serif;
         font-size: 2.25rem;
+        font-weight: 600;
         color: #3D2B1F;
         margin-bottom: 0.5rem;
     }
@@ -26,80 +27,214 @@ permalink: /search/
         color: #6b5a4e;
         margin-bottom: 2rem;
         font-size: 1.1rem;
+        line-height: 1.5;
     }
 
-    /* Pagefind UI overrides to match site brand */
+    /* =========================================
+       Pagefind UI — WOP Brand Overrides
+       ========================================= */
     .pagefind-ui {
         --pagefind-ui-scale: 1;
         --pagefind-ui-primary: #C4943A;
         --pagefind-ui-text: #3D2B1F;
         --pagefind-ui-background: #FDFBF7;
-        --pagefind-ui-border: #d4c5a9;
+        --pagefind-ui-border: #C4943A;
         --pagefind-ui-tag: #E8DCC4;
         --pagefind-ui-border-width: 2px;
-        --pagefind-ui-border-radius: 6px;
+        --pagefind-ui-border-radius: 8px;
         --pagefind-ui-font: 'Source Sans Pro', sans-serif;
     }
 
+    /* --- Search Input --- */
     .pagefind-ui .pagefind-ui__search-input {
-        font-size: 1.1rem;
-        padding: 0.75rem 1rem;
+        background: #E8DCC4;
+        color: #3D2B1F;
+        font-size: 1.15rem;
+        padding: 0.85rem 1rem 0.85rem 2.8rem;
+        border: 2px solid #C4943A;
+        border-radius: 8px;
+        font-weight: 400;
+    }
+
+    .pagefind-ui .pagefind-ui__search-input::placeholder {
+        color: #8a7a6a;
     }
 
     .pagefind-ui .pagefind-ui__search-input:focus {
         border-color: #C4943A;
         outline: none;
-        box-shadow: 0 0 0 3px rgba(196, 148, 58, 0.2);
+        box-shadow: 0 0 0 3px rgba(196, 148, 58, 0.3);
+        background: #f0e8d8;
     }
 
-    .pagefind-ui .pagefind-ui__result-link {
+    /* --- Search Clear Button --- */
+    .pagefind-ui .pagefind-ui__search-clear {
         color: #3D2B1F;
+        opacity: 0.6;
+    }
+
+    .pagefind-ui .pagefind-ui__search-clear:hover {
+        opacity: 1;
+    }
+
+    /* --- Filter Section --- */
+    .pagefind-ui .pagefind-ui__filter-panel {
+        border-top: 1px solid #d4c5a9;
+        padding-top: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .pagefind-ui .pagefind-ui__filter-name {
         font-family: 'Crimson Pro', serif;
-        font-size: 1.25rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #3D2B1F;
+        text-transform: capitalize;
+    }
+
+    .pagefind-ui .pagefind-ui__filter-checkbox {
+        accent-color: #C4943A;
+    }
+
+    .pagefind-ui .pagefind-ui__filter-label {
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #3D2B1F;
+        font-size: 0.95rem;
+    }
+
+    /* --- Results Container --- */
+    .pagefind-ui .pagefind-ui__results-area {
+        margin-top: 1.5rem;
+    }
+
+    .pagefind-ui .pagefind-ui__message {
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #6b5a4e;
+        font-size: 1rem;
+        padding: 1rem 0;
+    }
+
+    /* --- Individual Result Cards --- */
+    .pagefind-ui .pagefind-ui__result {
+        background: #E8DCC4;
+        border: 1px solid #d4c5a9;
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .pagefind-ui .pagefind-ui__result:hover {
+        border-color: #C4943A;
+        box-shadow: 0 2px 8px rgba(61, 43, 31, 0.08);
+    }
+
+    .pagefind-ui .pagefind-ui__result-nested {
+        padding-left: 1.5rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border: none;
+        background: none;
+        border-left: 3px solid #C4943A;
+        border-radius: 0;
+        margin-top: 0.75rem;
+    }
+
+    .pagefind-ui .pagefind-ui__result-nested:hover {
+        box-shadow: none;
+        border-color: #C4943A;
+    }
+
+    /* --- Result Title / Link --- */
+    .pagefind-ui .pagefind-ui__result-link {
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: #C4943A;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
     }
 
     .pagefind-ui .pagefind-ui__result-link:hover {
-        color: #C4943A;
+        color: #b3842f;
+        text-decoration: underline;
     }
 
+    /* --- Result Excerpt / Snippet --- */
     .pagefind-ui .pagefind-ui__result-excerpt {
-        color: #5a4a3a;
-        line-height: 1.6;
+        color: #3D2B1F;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1rem;
+        line-height: 1.7;
     }
 
+    /* --- Highlighted Search Terms --- */
     .pagefind-ui mark {
-        background-color: rgba(196, 148, 58, 0.25);
-        color: inherit;
-        padding: 0.1em 0.2em;
-        border-radius: 2px;
+        background-color: #C4943A;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.1em 0.35em;
+        border-radius: 3px;
     }
 
+    /* --- Result Tags --- */
+    .pagefind-ui .pagefind-ui__result-tag {
+        background: #f5edd8;
+        color: #6b5a4e;
+        border: 1px solid #d4c5a9;
+        font-size: 0.8rem;
+        border-radius: 4px;
+    }
+
+    /* --- Result Thumbnail (hidden, but just in case) --- */
+    .pagefind-ui .pagefind-ui__result-thumb {
+        display: none;
+    }
+
+    /* --- Load More Button --- */
     .pagefind-ui .pagefind-ui__button {
         background-color: #C4943A;
         color: #fff;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
+        padding: 0.75rem 2rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
     }
 
     .pagefind-ui .pagefind-ui__button:hover {
         background-color: #b3842f;
     }
 
+    /* --- Responsive --- */
     @media (max-width: 768px) {
         .search-page {
-            padding: 2rem 1rem;
+            padding: 2rem 1rem 3rem;
         }
 
         .search-page h1 {
             font-size: 1.75rem;
+        }
+
+        .pagefind-ui .pagefind-ui__result {
+            padding: 1rem;
+        }
+
+        .pagefind-ui .pagefind-ui__result-link {
+            font-size: 1.15rem;
         }
     }
 </style>
 {% endblock %}
 
 <div class="search-page">
-    <h1>Search</h1>
-    <p class="search-intro">Search across all chapters of Words of Plainness</p>
+    <h1>Search Words of Plainness</h1>
+    <p class="search-intro">Find passages, scriptures, and topics across all chapters</p>
     <div id="search"></div>
 </div>
 
@@ -110,7 +245,8 @@ permalink: /search/
         new PagefindUI({
             element: "#search",
             showSubResults: true,
-            showImages: false
+            showImages: false,
+            showEmptyFilters: false
         });
     });
 </script>
