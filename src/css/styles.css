@@ -1162,48 +1162,93 @@ p {
         font-size: 0.7rem;
     }
     
-    /* Hero adjustments for mobile */
+    /* Hero adjustments for mobile — immersive portrait image */
     .hero {
-        min-height: auto;
+        min-height: 100vh;
+        background-image: url('/assets/images/hero-mobile-800x1200.png');
+        background-size: cover;
+        background-position: center 15%;
+        background-repeat: no-repeat;
     }
-    
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(42,29,20,0.6) 0%,
+            rgba(42,29,20,0.25) 15%,
+            rgba(42,29,20,0.15) 35%,
+            rgba(42,29,20,0.25) 55%,
+            rgba(42,29,20,0.6) 72%,
+            rgba(42,29,20,0.88) 85%,
+            rgba(42,29,20,0.97) 95%,
+            rgba(42,29,20,1) 100%
+        );
+        z-index: 1;
+    }
+
+    .hero::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 38%;
+        background: linear-gradient(
+            to bottom,
+            rgba(42,29,20,0.72) 0%,
+            rgba(42,29,20,0.65) 60%,
+            rgba(42,29,20,0.45) 85%,
+            rgba(42,29,20,0.0) 100%
+        );
+        z-index: 1;
+    }
+
     .hero-background {
         display: none;
     }
-    
+
     .hero-content {
         max-width: 100%;
         padding: calc(70px + var(--space-lg)) var(--space-md) var(--space-lg);
         text-align: center;
-        background: 
-            radial-gradient(ellipse at top left, rgba(196, 148, 58, 0.08) 0%, transparent 50%),
-            radial-gradient(ellipse at bottom right, rgba(107, 61, 61, 0.1) 0%, transparent 50%),
-            linear-gradient(180deg, var(--brown-rich) 0%, var(--brown-deep) 50%, var(--brown-rich) 100%);
+        justify-content: flex-end;
+        position: relative;
+        z-index: 2;
+        background: none;
     }
-    
+
+    .hero-tagline {
+        text-shadow: 0 1px 12px rgba(0,0,0,0.7);
+    }
+
     .hero-title {
         font-size: 2rem;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.7);
     }
-    
+
     .hero-subtitle {
         font-size: 1.1rem;
+        text-shadow: 0 1px 12px rgba(0,0,0,0.7);
     }
-    
+
     .hero-text {
         font-size: 1rem;
-        text-shadow: none;
+        text-shadow: 0 1px 10px rgba(0,0,0,0.6);
     }
-    
+
     .hero-cta {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .hero-cta .btn {
         width: 100%;
         max-width: 280px;
     }
-    
+
     .scroll-indicator {
         display: none;
     }
