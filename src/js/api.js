@@ -104,7 +104,10 @@ const API = {
 
         if (!response.ok) {
             const body = await response.json().catch(() => ({}));
-            throw new Error(this.parseErrorMessage(body, response.status));
+            const err = new Error(this.parseErrorMessage(body, response.status));
+            err.status = response.status;
+            err.fieldErrors = body;
+            throw err;
         }
 
         // Handle 204 No Content
@@ -125,7 +128,7 @@ const API = {
         const fieldErrors = Object.entries(body)
             .filter(([, v]) => Array.isArray(v))
             .map(([field, msgs]) => `${field}: ${msgs.join(' ')}`)
-            .join('. ');
+            .join('\n');
         if (fieldErrors) return fieldErrors;
 
         // Fallback

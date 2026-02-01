@@ -50,6 +50,7 @@ const Reflections = {
         document.querySelectorAll('.reflection-input').forEach(input => {
             input.addEventListener('input', (e) => {
                 const prompt = e.target.dataset.prompt;
+                this.clearReflectionError(prompt);
                 this.debounceSave(prompt, e.target.value);
             });
         });
@@ -128,8 +129,18 @@ const Reflections = {
                 }
 
                 this.updateStatus('saved');
+                this.clearReflectionError(prompt);
                 return;
             } catch (error) {
+                // Content moderation or validation error (400) — do NOT fall back to localStorage
+                if (error.status === 400) {
+                    console.warn('[Reflections] Content rejected by server:', error.message);
+                    const fieldMsg = this.extractFieldError(error);
+                    this.showReflectionError(prompt, fieldMsg || error.message);
+                    this.updateStatus('error');
+                    return;
+                }
+                // Network or server error — fall back to localStorage
                 console.warn('[Reflections] API save failed, falling back to localStorage:', error.message);
             } finally {
                 this.saving[prompt] = false;
@@ -284,6 +295,33 @@ const Reflections = {
 
         this.savedIds = {};
         this.updateStatus('cleared');
+    },
+
+    extractFieldError(error) {
+        if (!error.fieldErrors || typeof error.fieldErrors !== 'object') return null;
+        const msgs = Object.entries(error.fieldErrors)
+            .filter(([, v]) => Array.isArray(v))
+            .map(([, msgs]) => msgs.join(' '));
+        return msgs.length > 0 ? msgs.join(' ') : null;
+    },
+
+    showReflectionError(prompt, message) {
+        const input = document.getElementById(`reflection${prompt}`);
+        if (!input) return;
+
+        // Remove existing error for this prompt
+        this.clearReflectionError(prompt);
+
+        const errorEl = document.createElement('div');
+        errorEl.className = 'reflection-error';
+        errorEl.setAttribute('data-prompt-error', prompt);
+        errorEl.textContent = message;
+        input.insertAdjacentElement('afterend', errorEl);
+    },
+
+    clearReflectionError(prompt) {
+        const existing = document.querySelector(`[data-prompt-error="${prompt}"]`);
+        existing?.remove();
     },
 
     updateStatus(status) {

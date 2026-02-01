@@ -217,9 +217,18 @@ const AuthModal = {
             this.showSuccess('Welcome! You are now signed in.');
             
         } catch (error) {
-            const msg = error.message === 'Failed to fetch'
-                ? 'Unable to connect. Please check your internet connection.'
-                : error.message;
+            let msg;
+            if (error.message === 'Failed to fetch') {
+                msg = 'Unable to connect. Please check your internet connection.';
+            } else if (error.fieldErrors && typeof error.fieldErrors === 'object') {
+                // Build per-field error lines from structured API response
+                const lines = Object.entries(error.fieldErrors)
+                    .filter(([, v]) => Array.isArray(v))
+                    .map(([field, msgs]) => `${field}: ${msgs.join(' ')}`);
+                msg = lines.length > 0 ? lines.join('\n') : error.message;
+            } else {
+                msg = error.message;
+            }
             this.showError(msg);
         } finally {
             submitBtn.disabled = false;
