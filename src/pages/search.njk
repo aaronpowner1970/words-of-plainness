@@ -87,21 +87,30 @@ permalink: /search/
         opacity: 1;
     }
 
+    /* --- Gold divider between search bar and results --- */
+    .pagefind-ui .pagefind-ui__drawer::before {
+        content: "";
+        display: block;
+        height: 2px;
+        background: #C4943A;
+        margin: 1.5rem 0;
+    }
+
     /* --- Results Area --- */
     .pagefind-ui .pagefind-ui__results-area {
-        margin-top: 1.5rem;
+        margin-top: 0;
     }
 
     .pagefind-ui .pagefind-ui__message {
         font-family: 'Source Sans Pro', sans-serif;
-        color: #6b5a4e;
+        color: #E8DCC4;
         font-size: 1rem;
         padding: 1rem 0;
     }
 
     /* Dismiss hint appended to the results message */
     .pagefind-dismiss-hint {
-        color: #8B7355;
+        color: #d4c5a9;
         font-size: 0.9rem;
         font-style: italic;
     }
