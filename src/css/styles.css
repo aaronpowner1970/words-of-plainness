@@ -1155,11 +1155,13 @@ p {
     }
     
     .logo-title {
-        font-size: 1.2rem;
+        font-size: clamp(0.55rem, 3.5vw, 0.85rem);
+        white-space: nowrap;
     }
-    
+
     .logo-subtitle {
-        font-size: 0.7rem;
+        font-size: clamp(0.4rem, 2.2vw, 0.65rem);
+        white-space: nowrap;
     }
     
     /* Hero adjustments for mobile — immersive portrait image */
@@ -1292,11 +1294,6 @@ p {
 
 /* Small mobile */
 @media (max-width: 380px) {
-    .logo-title {
-        font-size: 1rem;
-        letter-spacing: 0.08em;
-    }
-    
     .hero-title {
         font-size: 1.75rem;
     }
