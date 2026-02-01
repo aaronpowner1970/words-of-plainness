@@ -41,8 +41,7 @@
 
     <!-- Chapter Content -->
     <article class="chapter-content" id="chapterContent" data-pagefind-body>
-        <span data-pagefind-meta="title" hidden>Chapter {{ chapter }}: {{ title }}</span>
-        <span data-pagefind-filter="chapter" hidden>Chapter {{ chapter }}: {{ title }}</span>
+        <span data-pagefind-meta="title" data-pagefind-filter="chapter" style="display:none">Chapter {{ chapter }}: {{ title }}</span>
         {{ content | safe }}
     </article>
 </div>
