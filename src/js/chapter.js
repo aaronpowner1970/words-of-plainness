@@ -46,6 +46,7 @@ const ChapterManager = {
         this.initResumePrompt();
         this.initReflections();
         this.linkScriptures();
+        this.initReadingProgressSync();
 
         console.log('ChapterManager initialized for:', config.title);
     },
@@ -108,13 +109,15 @@ const ChapterManager = {
         this.isPlaying = true;
         document.getElementById('playIcon').style.display = 'none';
         document.getElementById('pauseIcon').style.display = 'block';
+        document.dispatchEvent(new Event('wop:audio-play'));
     },
-    
+
     pause() {
         this.audioPlayer?.pause();
         this.isPlaying = false;
         document.getElementById('playIcon').style.display = 'block';
         document.getElementById('pauseIcon').style.display = 'none';
+        document.dispatchEvent(new Event('wop:audio-pause'));
     },
     
     seek(seconds) {
@@ -232,16 +235,18 @@ const ChapterManager = {
     saveBookmark() {
         const scrollPos = window.scrollY;
         const chapterId = this.config.id;
-        
+
         localStorage.setItem(`wop-bookmark-${chapterId}`, JSON.stringify({
             position: scrollPos,
             timestamp: Date.now()
         }));
-        
+
         // Visual feedback
         const btn = document.getElementById('bookmarkBtn');
         btn?.classList.add('saved');
         setTimeout(() => btn?.classList.remove('saved'), 2000);
+
+        document.dispatchEvent(new Event('wop:bookmark-saved'));
     },
     
     getBookmark() {
@@ -556,10 +561,12 @@ const ChapterManager = {
         }
     },
     
-    // Resume Prompt
+    // Resume Prompt (localStorage-based, for anonymous users only)
     initResumePrompt() {
+        if (window.API?.isAuthenticated()) return;
+
         const bookmark = this.getBookmark();
-        
+
         if (bookmark && bookmark.position > 500) {
             this.showResumePrompt(bookmark.position);
         }
@@ -594,6 +601,13 @@ const ChapterManager = {
     initReflections() {
         if (typeof Reflections !== 'undefined' && this.config.id) {
             Reflections.init(this.config.id);
+        }
+    },
+
+    // Reading Progress Sync
+    initReadingProgressSync() {
+        if (typeof ReadingProgress !== 'undefined') {
+            ReadingProgress.init(this.config);
         }
     },
 
