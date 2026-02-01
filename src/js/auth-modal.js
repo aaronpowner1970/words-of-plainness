@@ -128,20 +128,43 @@ const AuthModal = {
         const title = document.getElementById('authTitle');
         const submitBtn = document.getElementById('authSubmit');
         const nameField = document.getElementById('authNameField');
+        const usernameField = document.getElementById('authUsernameField');
+        const passwordConfirmField = document.getElementById('authPasswordConfirmField');
+        const emailLabel = document.getElementById('authEmailLabel');
+        const emailInput = document.getElementById('authEmail');
         const switchText = document.getElementById('authSwitchText');
-        
+
         if (this.mode === 'signup') {
             title.textContent = 'Create Account';
             submitBtn.textContent = 'Sign Up';
             nameField?.classList.remove('hidden');
+            usernameField?.classList.remove('hidden');
+            passwordConfirmField?.classList.remove('hidden');
+            if (emailLabel) emailLabel.textContent = 'Email Address';
+            if (emailInput) {
+                emailInput.type = 'email';
+                emailInput.placeholder = 'Enter your email address';
+            }
             switchText.innerHTML = 'Already have an account? <a href="#" id="switchToSignin">Sign in</a>';
         } else {
             title.textContent = 'Sign In';
             submitBtn.textContent = 'Sign In';
             nameField?.classList.add('hidden');
+            usernameField?.classList.add('hidden');
+            passwordConfirmField?.classList.add('hidden');
+            if (emailLabel) emailLabel.textContent = 'Username or Email';
+            if (emailInput) {
+                emailInput.type = 'text';
+                emailInput.placeholder = 'Enter username or email';
+            }
             switchText.innerHTML = 'Don\'t have an account? <a href="#" id="switchToSignup">Sign up</a>';
         }
-        
+
+        // Clear validation errors on mode switch
+        this.clearError();
+        const matchError = document.getElementById('authPasswordMatchError');
+        matchError?.classList.add('hidden');
+
         // Re-attach switch listeners
         this.setupModeSwitching();
     },
@@ -150,16 +173,42 @@ const AuthModal = {
         const email = document.getElementById('authEmail')?.value;
         const password = document.getElementById('authPassword')?.value;
         const name = document.getElementById('authName')?.value;
-        
+        const username = document.getElementById('authUsername')?.value;
+        const passwordConfirm = document.getElementById('authPasswordConfirm')?.value;
+
+        // Client-side validation for signup
+        if (this.mode === 'signup') {
+            const matchError = document.getElementById('authPasswordMatchError');
+            matchError?.classList.add('hidden');
+
+            if (!username?.trim()) {
+                this.showError('Username is required.');
+                return;
+            }
+            if (!email?.trim() || !email.includes('@')) {
+                this.showError('Please enter a valid email address.');
+                return;
+            }
+            if (!password) {
+                this.showError('Password is required.');
+                return;
+            }
+            if (password !== passwordConfirm) {
+                matchError?.classList.remove('hidden');
+                this.showError('Passwords do not match.');
+                return;
+            }
+        }
+
         const submitBtn = document.getElementById('authSubmit');
         submitBtn.disabled = true;
         submitBtn.textContent = this.mode === 'signin' ? 'Signing in...' : 'Creating account...';
-        
+
         try {
             if (this.mode === 'signin') {
                 await window.API.login(email, password);
             } else {
-                await window.API.register(email, password, name);
+                await window.API.register({ username, email, password, password_confirm: passwordConfirm, display_name: name });
             }
             
             this.close();

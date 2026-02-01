@@ -193,10 +193,10 @@ const API = {
         return data;
     },
 
-    async register(email, password, name) {
+    async register({ username, email, password, password_confirm, display_name }) {
         const data = await this.request('/accounts/register/', {
             method: 'POST',
-            body: JSON.stringify({ email, password, name })
+            body: JSON.stringify({ username, email, password, password_confirm, display_name })
         });
 
         this.setAuth(data);

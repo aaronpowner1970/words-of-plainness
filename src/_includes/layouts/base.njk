@@ -55,15 +55,25 @@
             <form class="auth-form" id="authForm">
                 <div class="auth-field hidden" id="authNameField">
                     <label for="authName">Display Name</label>
-                    <input type="text" id="authName" name="name" placeholder="How should we address you?">
+                    <input type="text" id="authName" name="display_name" placeholder="How should we address you?">
+                </div>
+                <div class="auth-field hidden" id="authUsernameField">
+                    <label for="authUsername">Username</label>
+                    <input type="text" id="authUsername" name="username" placeholder="Choose a username">
+                    <small class="auth-hint">Choose a unique username (letters, numbers, underscores)</small>
                 </div>
                 <div class="auth-field">
-                    <label for="authEmail">Username or Email</label>
+                    <label for="authEmail" id="authEmailLabel">Username or Email</label>
                     <input type="text" id="authEmail" name="email" required placeholder="Enter username or email">
                 </div>
                 <div class="auth-field">
                     <label for="authPassword">Password</label>
                     <input type="password" id="authPassword" name="password" required placeholder="Your password">
+                </div>
+                <div class="auth-field hidden" id="authPasswordConfirmField">
+                    <label for="authPasswordConfirm">Confirm Password</label>
+                    <input type="password" id="authPasswordConfirm" name="password_confirm" placeholder="Re-enter your password">
+                    <small class="auth-field-error hidden" id="authPasswordMatchError">Passwords do not match</small>
                 </div>
                 <button type="submit" class="auth-submit" id="authSubmit">Sign In</button>
             </form>
