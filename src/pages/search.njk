@@ -1,0 +1,117 @@
+---
+layout: layouts/base.njk
+title: Search
+description: Search across all chapters of Words of Plainness
+permalink: /search/
+---
+
+{% block styles %}
+<link href="/_pagefind/pagefind-ui.css" rel="stylesheet">
+<style>
+    .search-page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+    }
+
+    .search-page h1 {
+        font-family: 'Crimson Pro', serif;
+        font-size: 2.25rem;
+        color: #3D2B1F;
+        margin-bottom: 0.5rem;
+    }
+
+    .search-page .search-intro {
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #6b5a4e;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+    }
+
+    /* Pagefind UI overrides to match site brand */
+    .pagefind-ui {
+        --pagefind-ui-scale: 1;
+        --pagefind-ui-primary: #C4943A;
+        --pagefind-ui-text: #3D2B1F;
+        --pagefind-ui-background: #FDFBF7;
+        --pagefind-ui-border: #d4c5a9;
+        --pagefind-ui-tag: #E8DCC4;
+        --pagefind-ui-border-width: 2px;
+        --pagefind-ui-border-radius: 6px;
+        --pagefind-ui-font: 'Source Sans Pro', sans-serif;
+    }
+
+    .pagefind-ui .pagefind-ui__search-input {
+        font-size: 1.1rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .pagefind-ui .pagefind-ui__search-input:focus {
+        border-color: #C4943A;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(196, 148, 58, 0.2);
+    }
+
+    .pagefind-ui .pagefind-ui__result-link {
+        color: #3D2B1F;
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.25rem;
+    }
+
+    .pagefind-ui .pagefind-ui__result-link:hover {
+        color: #C4943A;
+    }
+
+    .pagefind-ui .pagefind-ui__result-excerpt {
+        color: #5a4a3a;
+        line-height: 1.6;
+    }
+
+    .pagefind-ui mark {
+        background-color: rgba(196, 148, 58, 0.25);
+        color: inherit;
+        padding: 0.1em 0.2em;
+        border-radius: 2px;
+    }
+
+    .pagefind-ui .pagefind-ui__button {
+        background-color: #C4943A;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+    }
+
+    .pagefind-ui .pagefind-ui__button:hover {
+        background-color: #b3842f;
+    }
+
+    @media (max-width: 768px) {
+        .search-page {
+            padding: 2rem 1rem;
+        }
+
+        .search-page h1 {
+            font-size: 1.75rem;
+        }
+    }
+</style>
+{% endblock %}
+
+<div class="search-page">
+    <h1>Search</h1>
+    <p class="search-intro">Search across all chapters of Words of Plainness</p>
+    <div id="search"></div>
+</div>
+
+{% block scripts %}
+<script src="/_pagefind/pagefind-ui.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        new PagefindUI({
+            element: "#search",
+            showSubResults: true,
+            showImages: false
+        });
+    });
+</script>
+{% endblock %}

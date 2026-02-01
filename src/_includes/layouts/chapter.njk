@@ -17,9 +17,10 @@
 {% include "components/toc-mobile.njk" %}
 
 <!-- Chapter Hero Section -->
-<section class="chapter-hero">
+<section class="chapter-hero" data-pagefind-ignore>
     <p class="chapter-number">Chapter {{ chapter }}</p>
-    <h1 class="chapter-title">{{ title }}</h1>
+    <h1 class="chapter-title" data-pagefind-meta="title">{{ title }}</h1>
+    <span data-pagefind-filter="chapter" hidden>Chapter {{ chapter }}: {{ title }}</span>
     <blockquote class="chapter-scripture">
         "{{ scripture.text }}"
         <cite>— <a href="https://www.churchofjesuschrist.org/study/scriptures/{{ scripture.url }}" target="_blank" rel="noopener">{{ scripture.reference }}</a></cite>
@@ -28,22 +29,30 @@
 </section>
 
 <!-- Primary Actions Bar (sticky below header) -->
+<div data-pagefind-ignore>
 {% include "components/floating-action-bar.njk" %}
+</div>
 
 <!-- Main Layout: TOC Sidebar + Content -->
 <div class="chapter-layout">
     <!-- Desktop TOC Sidebar -->
+    <div data-pagefind-ignore>
     {% include "components/toc-sidebar.njk" %}
-    
+    </div>
+
     <!-- Chapter Content -->
-    <article class="chapter-content" id="chapterContent">
+    <article class="chapter-content" id="chapterContent" data-pagefind-body>
         {{ content | safe }}
     </article>
 </div>
 
 <!-- Study Resources Section -->
+<div data-pagefind-ignore>
 {% include "components/study-resources.njk" %}
+</div>
 
+<!-- Non-content sections excluded from search -->
+<div data-pagefind-ignore>
 <!-- Reflection Section -->
 {% include "components/reflection-section.njk" %}
 
@@ -67,6 +76,7 @@
 
 <!-- Modals (Overview, Testimony, Infographic, Slides) -->
 {% include "components/modals.njk" %}
+</div>
 
 {% endblock %}
 
