@@ -1,18 +1,25 @@
 /**
  * WORDS OF PLAINNESS - Reflections Manager
  * =========================================
- * 
+ *
  * Handles saving and loading reflection prompts.
  * - Saves to Django API for authenticated users
  * - Falls back to localStorage for guests
  * - Auto-saves as user types (debounced)
  */
 
+const PROMPT_TITLES = {
+    '1': 'What stood out to you?',
+    '2': 'Why does it matter to you?',
+    '3': 'What will you do?'
+};
+
 const Reflections = {
-    chapterId: null,
+    chapterId: null,    // e.g. "chapter-01-introduction" (matches chapter_slug)
     debounceTimers: {},
-    saveDelay: 1000, // 1 second debounce
-    
+    saveDelay: 1000,
+    savedIds: {},       // prompt number → API reflection id (for updates)
+
     init(chapterId) {
         this.chapterId = chapterId;
         this.setupInputListeners();
@@ -22,7 +29,7 @@ const Reflections = {
 
         console.log('Reflections initialized for:', chapterId);
     },
-    
+
     setupInputListeners() {
         document.querySelectorAll('.reflection-input').forEach(input => {
             input.addEventListener('input', (e) => {
@@ -31,72 +38,125 @@ const Reflections = {
             });
         });
     },
-    
+
     debounceSave(prompt, value) {
-        // Clear existing timer
         if (this.debounceTimers[prompt]) {
             clearTimeout(this.debounceTimers[prompt]);
         }
-        
-        // Show saving status
+
         this.updateStatus('saving');
-        
-        // Set new timer
+
         this.debounceTimers[prompt] = setTimeout(() => {
-            this.saveReflection(prompt, value);
+            if (value.trim()) {
+                this.saveReflection(prompt, value);
+            } else {
+                this.updateStatus('default');
+            }
         }, this.saveDelay);
     },
-    
-    async saveReflection(prompt, value) {
-        const data = {
-            chapter: this.chapterId,
-            prompt: prompt,
+
+    /**
+     * Build the API payload matching Django's expected schema.
+     */
+    buildPayload(prompt, value) {
+        return {
             content: value,
-            timestamp: Date.now()
+            chapter_slug: this.chapterId,
+            title: PROMPT_TITLES[prompt] || `Reflection ${prompt}`,
+            visibility: 'private'
         };
-        
-        // Try API first if user is authenticated
+    },
+
+    async saveReflection(prompt, value) {
+        if (!value.trim()) return;
+
+        // Try API first if authenticated
         if (window.API && window.API.isAuthenticated()) {
             try {
-                await window.API.saveReflection(data);
+                const payload = this.buildPayload(prompt, value);
+                const result = await window.API.saveReflection(payload);
+                if (result && result.id) {
+                    this.savedIds[prompt] = result.id;
+                }
                 this.updateStatus('saved');
                 return;
             } catch (error) {
                 console.warn('API save failed, falling back to localStorage:', error);
             }
         }
-        
+
         // Fallback to localStorage
-        this.saveToLocalStorage(data);
+        this.saveToLocalStorage(prompt, value);
         this.updateStatus('saved-local');
     },
-    
-    saveToLocalStorage(data) {
-        const key = `wop-reflection-${data.chapter}-${data.prompt}`;
-        localStorage.setItem(key, JSON.stringify(data));
+
+    saveToLocalStorage(prompt, value) {
+        const key = `wop-reflection-${this.chapterId}-${prompt}`;
+        localStorage.setItem(key, JSON.stringify({
+            content: value,
+            chapter_slug: this.chapterId,
+            title: PROMPT_TITLES[prompt] || `Reflection ${prompt}`,
+            prompt: prompt,
+            timestamp: Date.now()
+        }));
     },
-    
+
     async loadReflections() {
         // Try API first
         if (window.API && window.API.isAuthenticated()) {
             try {
                 const reflections = await window.API.getReflections(this.chapterId);
-                this.populateInputs(reflections);
+                this.populateFromAPI(reflections);
                 return;
             } catch (error) {
                 console.warn('API load failed, falling back to localStorage:', error);
             }
         }
-        
-        // Load from localStorage
+
         this.loadFromLocalStorage();
     },
-    
+
+    /**
+     * Populate inputs from API response.
+     * API returns an array of reflection objects with { id, title, content, ... }.
+     * Match them back to prompt numbers by title.
+     */
+    populateFromAPI(reflections) {
+        if (!Array.isArray(reflections)) {
+            // Some APIs wrap in { results: [...] }
+            if (reflections && Array.isArray(reflections.results)) {
+                reflections = reflections.results;
+            } else {
+                return;
+            }
+        }
+
+        // Build reverse lookup: title → prompt number
+        const titleToPrompt = {};
+        for (const [num, title] of Object.entries(PROMPT_TITLES)) {
+            titleToPrompt[title] = num;
+        }
+
+        reflections.forEach(r => {
+            // Try matching by title first, then fall back to prompt field
+            const promptNum = titleToPrompt[r.title] || r.prompt;
+            if (!promptNum) return;
+
+            const input = document.getElementById(`reflection${promptNum}`);
+            if (input) {
+                input.value = r.content || '';
+            }
+            if (r.id) {
+                this.savedIds[promptNum] = r.id;
+            }
+        });
+    },
+
     loadFromLocalStorage() {
         for (let i = 1; i <= 3; i++) {
             const key = `wop-reflection-${this.chapterId}-${i}`;
             const data = localStorage.getItem(key);
-            
+
             if (data) {
                 try {
                     const parsed = JSON.parse(data);
@@ -110,88 +170,80 @@ const Reflections = {
             }
         }
     },
-    
-    populateInputs(reflections) {
-        if (!Array.isArray(reflections)) return;
-        
-        reflections.forEach(r => {
-            const input = document.getElementById(`reflection${r.prompt}`);
-            if (input) {
-                input.value = r.content || '';
-            }
-        });
-    },
-    
+
     setupSaveButton() {
         const saveBtn = document.getElementById('saveReflections');
 
         saveBtn?.addEventListener('click', () => {
+            let saved = 0;
             document.querySelectorAll('.reflection-input').forEach(input => {
                 const prompt = input.dataset.prompt;
                 if (input.value.trim()) {
                     this.saveReflection(prompt, input.value);
+                    saved++;
                 }
             });
+            if (saved === 0) {
+                this.updateStatus('default');
+            }
         });
     },
 
     setupClearButton() {
         const clearBtn = document.getElementById('clearReflections');
-        
+
         clearBtn?.addEventListener('click', () => {
             if (confirm('Are you sure you want to clear all reflections for this chapter?')) {
                 this.clearAllReflections();
             }
         });
     },
-    
+
     clearAllReflections() {
-        // Clear inputs
         document.querySelectorAll('.reflection-input').forEach(input => {
             input.value = '';
         });
-        
+
         // Clear localStorage
         for (let i = 1; i <= 3; i++) {
             const key = `wop-reflection-${this.chapterId}-${i}`;
             localStorage.removeItem(key);
         }
-        
-        // TODO: Clear from API if authenticated
-        
+
+        this.savedIds = {};
         this.updateStatus('cleared');
     },
-    
+
     updateStatus(status) {
         const statusEl = document.querySelector('.save-status .status-text');
         const iconEl = document.querySelector('.save-status .status-icon');
-        
+
         if (!statusEl) return;
-        
+
         switch (status) {
             case 'saving':
                 statusEl.textContent = 'Saving...';
-                iconEl.innerHTML = '⏳';
+                if (iconEl) iconEl.textContent = '';
                 break;
             case 'saved':
                 statusEl.textContent = 'Saved to your account';
-                iconEl.innerHTML = '✓';
+                if (iconEl) iconEl.textContent = '\u2713';
                 break;
             case 'saved-local':
                 statusEl.textContent = 'Saved locally (sign in to sync across devices)';
-                iconEl.innerHTML = '✓';
+                if (iconEl) iconEl.textContent = '\u2713';
                 break;
             case 'cleared':
                 statusEl.textContent = 'Reflections cleared';
-                iconEl.innerHTML = '';
+                if (iconEl) iconEl.textContent = '';
                 break;
             case 'error':
                 statusEl.textContent = 'Error saving';
-                iconEl.innerHTML = '⚠';
+                if (iconEl) iconEl.textContent = '\u26A0';
                 break;
             default:
                 statusEl.textContent = 'Reflections auto-save as you type';
-                iconEl.innerHTML = '';
+                if (iconEl) iconEl.textContent = '';
         }
     }
 };

@@ -324,11 +324,28 @@ const API = {
     },
 
     async migrateReflections(items) {
+        const promptTitles = {
+            '1': 'What stood out to you?',
+            '2': 'Why does it matter to you?',
+            '3': 'What will you do?'
+        };
         let migrated = 0;
 
         for (const item of items) {
             try {
-                await this.saveReflection(item.data);
+                // Normalize old format { chapter, prompt, content } to Django schema
+                const d = item.data;
+                const payload = {
+                    content: d.content || '',
+                    chapter_slug: d.chapter_slug || d.chapter || '',
+                    title: d.title || promptTitles[d.prompt] || `Reflection ${d.prompt}`,
+                    visibility: d.visibility || 'private'
+                };
+                if (!payload.content || !payload.chapter_slug) {
+                    localStorage.removeItem(item.key);
+                    continue;
+                }
+                await this.saveReflection(payload);
                 localStorage.removeItem(item.key);
                 migrated++;
             } catch (error) {
