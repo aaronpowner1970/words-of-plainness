@@ -9,7 +9,7 @@ permalink: /search/
 <link href="/_pagefind/pagefind-ui.css" rel="stylesheet">
 <style>
     .search-page {
-        max-width: 960px;
+        max-width: 800px;
         margin: 0 auto;
         padding: 3rem 1.5rem 4rem;
     }
@@ -45,6 +45,16 @@ permalink: /search/
         --pagefind-ui-font: 'Source Sans Pro', sans-serif;
     }
 
+    /* --- Hide filter panel entirely --- */
+    .pagefind-ui .pagefind-ui__filter-panel {
+        display: none !important;
+    }
+
+    /* --- Single column layout --- */
+    .pagefind-ui .pagefind-ui__drawer {
+        display: block;
+    }
+
     /* --- Search Input --- */
     .pagefind-ui .pagefind-ui__search-input {
         background: #E8DCC4;
@@ -77,84 +87,9 @@ permalink: /search/
         opacity: 1;
     }
 
-    /* =========================================
-       Filter Panel — Sidebar Layout
-       ========================================= */
-
-    /* Pagefind wraps filters + results in .pagefind-ui__drawer */
-    .pagefind-ui .pagefind-ui__drawer {
-        display: flex;
-        gap: 2rem;
-        align-items: flex-start;
-    }
-
-    /* --- Filter Panel (left sidebar on desktop) --- */
-    .pagefind-ui .pagefind-ui__filter-panel {
-        flex: 0 0 210px;
-        background: #2A1D14;
-        border-radius: 8px;
-        padding: 1.25rem;
-        position: sticky;
-        top: 5rem;
-    }
-
-    /* "Filter by Chapter" heading — injected via ::before on the panel */
-    .pagefind-ui .pagefind-ui__filter-panel::before {
-        content: "Filter by Chapter";
-        display: block;
-        font-family: 'Crimson Pro', serif;
-        font-size: 1rem;
-        font-weight: 600;
-        color: #C4943A;
-        padding-bottom: 0.75rem;
-        margin-bottom: 0.75rem;
-        border-bottom: 1px solid rgba(196, 148, 58, 0.3);
-    }
-
-    /* Hide Pagefind's default filter group heading (it shows "Chapter") */
-    .pagefind-ui .pagefind-ui__filter-panel-label {
-        display: none;
-    }
-
-    /* Filter group container */
-    .pagefind-ui .pagefind-ui__filter-group {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    /* Individual filter items */
-    .pagefind-ui .pagefind-ui__filter-value {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .pagefind-ui .pagefind-ui__filter-checkbox {
-        accent-color: #C4943A;
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-        cursor: pointer;
-    }
-
-    .pagefind-ui .pagefind-ui__filter-label {
-        font-family: 'Source Sans Pro', sans-serif;
-        color: #E8DCC4;
-        font-size: 0.9rem;
-        line-height: 1.3;
-        cursor: pointer;
-    }
-
-    .pagefind-ui .pagefind-ui__filter-label:hover {
-        color: #C4943A;
-    }
-
-    /* --- Results Area (right side) --- */
+    /* --- Results Area --- */
     .pagefind-ui .pagefind-ui__results-area {
-        flex: 1;
-        min-width: 0;
-        margin-top: 0;
+        margin-top: 1.5rem;
     }
 
     .pagefind-ui .pagefind-ui__message {
@@ -162,6 +97,13 @@ permalink: /search/
         color: #6b5a4e;
         font-size: 1rem;
         padding: 1rem 0;
+    }
+
+    /* Dismiss hint appended to the results message */
+    .pagefind-dismiss-hint {
+        color: #8B7355;
+        font-size: 0.9rem;
+        font-style: italic;
     }
 
     /* --- Individual Result Cards --- */
@@ -178,8 +120,11 @@ permalink: /search/
         box-shadow: 0 2px 8px rgba(61, 43, 31, 0.08);
     }
 
+    /* Sub-results (nested snippets) */
     .pagefind-ui .pagefind-ui__result-nested {
+        position: relative;
         padding-left: 1.5rem;
+        padding-right: 2rem;
         padding-top: 0;
         padding-bottom: 0;
         margin-bottom: 0;
@@ -193,6 +138,46 @@ permalink: /search/
     .pagefind-ui .pagefind-ui__result-nested:hover {
         box-shadow: none;
         border-color: #C4943A;
+    }
+
+    /* --- Dismiss Button on sub-results --- */
+    .pagefind-dismiss-btn {
+        position: absolute;
+        top: 0.15rem;
+        right: 0;
+        background: none;
+        border: none;
+        color: #8B7355;
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0.25rem 0.4rem;
+        border-radius: 3px;
+        opacity: 0;
+        transition: opacity 0.15s, color 0.15s;
+    }
+
+    .pagefind-ui .pagefind-ui__result-nested:hover .pagefind-dismiss-btn,
+    .pagefind-dismiss-btn:focus {
+        opacity: 1;
+    }
+
+    .pagefind-dismiss-btn:hover {
+        color: #C4943A;
+    }
+
+    /* Also add dismiss to top-level result excerpts */
+    .pagefind-ui .pagefind-ui__result-inner {
+        position: relative;
+    }
+
+    .pagefind-ui .pagefind-ui__result-inner > .pagefind-dismiss-btn {
+        top: 0;
+        right: -0.25rem;
+    }
+
+    .pagefind-ui .pagefind-ui__result:hover > .pagefind-ui__result-inner > .pagefind-dismiss-btn {
+        opacity: 1;
     }
 
     /* --- Result Title / Link --- */
@@ -261,10 +246,8 @@ permalink: /search/
         background-color: #b3842f;
     }
 
-    /* =========================================
-       Mobile: filters collapse above results
-       ========================================= */
-    @media (max-width: 900px) {
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
         .search-page {
             padding: 2rem 1rem 3rem;
         }
@@ -273,33 +256,17 @@ permalink: /search/
             font-size: 1.75rem;
         }
 
-        .pagefind-ui .pagefind-ui__drawer {
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .pagefind-ui .pagefind-ui__filter-panel {
-            flex: none;
-            width: 100%;
-            position: static;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-
-        /* On mobile, show filters as a horizontal wrap */
-        .pagefind-ui .pagefind-ui__filter-group {
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 8px 16px;
-        }
-
         .pagefind-ui .pagefind-ui__result {
             padding: 1rem;
         }
 
         .pagefind-ui .pagefind-ui__result-link {
             font-size: 1.15rem;
+        }
+
+        /* Always show dismiss buttons on mobile (no hover) */
+        .pagefind-dismiss-btn {
+            opacity: 0.6;
         }
     }
 </style>
@@ -318,9 +285,44 @@ permalink: /search/
         new PagefindUI({
             element: "#search",
             showSubResults: true,
-            showImages: false,
-            showEmptyFilters: false
+            showImages: false
         });
+
+        // Observe the results area for new results and inject dismiss buttons
+        var searchEl = document.getElementById('search');
+        if (!searchEl) return;
+
+        var observer = new MutationObserver(function() {
+            // Add dismiss hint to the results message
+            var msg = searchEl.querySelector('.pagefind-ui__message');
+            if (msg && !msg.querySelector('.pagefind-dismiss-hint')) {
+                var text = msg.textContent.trim();
+                if (text && !text.includes('Click')) {
+                    var hint = document.createElement('span');
+                    hint.className = 'pagefind-dismiss-hint';
+                    hint.textContent = '  \u00B7  Click \u2715 to dismiss irrelevant results.';
+                    msg.appendChild(hint);
+                }
+            }
+
+            // Add dismiss buttons to sub-results
+            var nested = searchEl.querySelectorAll('.pagefind-ui__result-nested:not([data-has-dismiss])');
+            nested.forEach(function(el) {
+                el.setAttribute('data-has-dismiss', 'true');
+                var btn = document.createElement('button');
+                btn.className = 'pagefind-dismiss-btn';
+                btn.setAttribute('aria-label', 'Dismiss this result');
+                btn.textContent = '\u2715';
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    el.style.display = 'none';
+                });
+                el.appendChild(btn);
+            });
+        });
+
+        observer.observe(searchEl, { childList: true, subtree: true });
     });
 </script>
 {% endblock %}
