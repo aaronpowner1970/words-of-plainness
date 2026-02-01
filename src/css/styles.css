@@ -243,6 +243,10 @@ p {
     backdrop-filter: blur(10px);
 }
 
+.header:has(.nav-toggle.active) {
+    background: #2A1D14;
+}
+
 .header-inner {
     display: flex;
     justify-content: space-between;
@@ -421,8 +425,7 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--overlay-dark);
-    backdrop-filter: blur(10px);
+    background: linear-gradient(180deg, #2A1D14 0%, #1a1210 100%);
     z-index: 999;
     display: flex;
     flex-direction: column;
@@ -452,6 +455,13 @@ p {
     padding: var(--space-xs);
 }
 
+.mobile-menu-title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--gold-primary);
+    letter-spacing: 0.08em;
+}
+
 .mobile-menu-new-here {
     display: block;
     background: var(--gold-primary);
@@ -463,19 +473,20 @@ p {
     margin-bottom: var(--space-md);
 }
 
-.mobile-nav-list > li {
+.mobile-menu-nav > li {
     border-bottom: 1px solid rgba(232, 220, 196, 0.1);
 }
 
-.mobile-nav-list > li > a {
+.mobile-menu-nav > li > a {
     display: block;
     padding: var(--space-sm) 0;
     font-family: var(--font-serif);
     font-size: 1.3rem;
     color: var(--cream);
+    text-align: center;
 }
 
-.mobile-nav-list > li > a:hover {
+.mobile-menu-nav > li > a:hover {
     color: var(--gold-primary);
 }
 
@@ -589,6 +600,37 @@ p {
 
 .mobile-menu-signout:hover {
     background: rgba(196, 148, 58, 0.15);
+}
+
+.mobile-menu-footer {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(196, 148, 58, 0.2);
+    text-align: center;
+}
+
+.mobile-discord-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--cream);
+    font-size: 0.95rem;
+    opacity: 0.8;
+}
+
+.mobile-discord-link:hover {
+    color: var(--gold-primary);
+    opacity: 1;
+}
+
+.mobile-menu-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--cream);
+    opacity: 0.6;
+    margin-top: var(--space-sm);
+    text-align: center;
 }
 
 /* --- Hero Section --- */
