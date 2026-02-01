@@ -373,8 +373,8 @@ const API = {
         });
     },
 
-    async getReflections(chapterId) {
-        return this.request(`/reflections/chapters/${chapterId}/`);
+    async getReflections(chapterSlug) {
+        return this.request(`/reflections/mine/?chapter_slug=${encodeURIComponent(chapterSlug)}`);
     },
 
     async getAllReflections() {

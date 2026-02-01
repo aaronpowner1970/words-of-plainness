@@ -24,10 +24,30 @@ const Reflections = {
         this.chapterId = chapterId;
         this.setupInputListeners();
         this.setupSaveButton();
-        this.loadReflections();
         this.setupClearButton();
 
-        console.log('Reflections initialized for:', chapterId);
+        console.log('[Reflections] Initialized for:', chapterId);
+        console.log('[Reflections] API available:', !!window.API);
+        console.log('[Reflections] API baseUrl:', window.API?.baseUrl || '(none)');
+        console.log('[Reflections] Authenticated:', this.isUserAuthenticated());
+
+        this.loadReflections();
+    },
+
+    /**
+     * Check if user is authenticated.
+     * Uses API.isAuthenticated() if available, with localStorage fallback
+     * in case API.init() hasn't run yet.
+     */
+    isUserAuthenticated() {
+        // Primary: check the API client
+        if (window.API && window.API.isAuthenticated()) {
+            return true;
+        }
+        // Fallback: check localStorage directly (handles init timing issues)
+        const token = localStorage.getItem('wop_access_token')
+            || localStorage.getItem('wop-auth-token');
+        return !!token;
     },
 
     setupInputListeners() {
@@ -70,19 +90,23 @@ const Reflections = {
     async saveReflection(prompt, value) {
         if (!value.trim()) return;
 
-        // Try API first if authenticated
-        if (window.API && window.API.isAuthenticated()) {
+        // Try API if authenticated
+        if (this.isUserAuthenticated() && window.API && window.API.baseUrl) {
             try {
                 const payload = this.buildPayload(prompt, value);
+                console.log('[Reflections] Saving to API...', payload.title);
                 const result = await window.API.saveReflection(payload);
+                console.log('[Reflections] Reflection saved:', payload.title, result);
                 if (result && result.id) {
                     this.savedIds[prompt] = result.id;
                 }
                 this.updateStatus('saved');
                 return;
             } catch (error) {
-                console.warn('API save failed, falling back to localStorage:', error);
+                console.warn('[Reflections] API save failed, falling back to localStorage:', error.message);
             }
+        } else {
+            console.log('[Reflections] Not authenticated or API not configured, saving to localStorage');
         }
 
         // Fallback to localStorage
@@ -103,14 +127,18 @@ const Reflections = {
 
     async loadReflections() {
         // Try API first
-        if (window.API && window.API.isAuthenticated()) {
+        if (this.isUserAuthenticated() && window.API && window.API.baseUrl) {
             try {
+                console.log('[Reflections] Loading from API for:', this.chapterId);
                 const reflections = await window.API.getReflections(this.chapterId);
+                console.log('[Reflections] API returned:', reflections);
                 this.populateFromAPI(reflections);
                 return;
             } catch (error) {
-                console.warn('API load failed, falling back to localStorage:', error);
+                console.warn('[Reflections] API load failed, falling back to localStorage:', error.message);
             }
+        } else {
+            console.log('[Reflections] Not authenticated, loading from localStorage');
         }
 
         this.loadFromLocalStorage();
@@ -118,18 +146,21 @@ const Reflections = {
 
     /**
      * Populate inputs from API response.
-     * API returns an array of reflection objects with { id, title, content, ... }.
+     * API returns an array or { results: [...] } with { id, title, content, ... }.
      * Match them back to prompt numbers by title.
      */
     populateFromAPI(reflections) {
+        // Unwrap paginated response
         if (!Array.isArray(reflections)) {
-            // Some APIs wrap in { results: [...] }
             if (reflections && Array.isArray(reflections.results)) {
                 reflections = reflections.results;
             } else {
+                console.log('[Reflections] No reflections found in API response');
                 return;
             }
         }
+
+        console.log('[Reflections] Populating', reflections.length, 'reflections from API');
 
         // Build reverse lookup: title → prompt number
         const titleToPrompt = {};
@@ -138,13 +169,16 @@ const Reflections = {
         }
 
         reflections.forEach(r => {
-            // Try matching by title first, then fall back to prompt field
             const promptNum = titleToPrompt[r.title] || r.prompt;
-            if (!promptNum) return;
+            if (!promptNum) {
+                console.log('[Reflections] Could not match reflection to prompt:', r.title);
+                return;
+            }
 
             const input = document.getElementById(`reflection${promptNum}`);
             if (input) {
                 input.value = r.content || '';
+                console.log('[Reflections] Loaded prompt', promptNum, ':', (r.content || '').substring(0, 50) + '...');
             }
             if (r.id) {
                 this.savedIds[promptNum] = r.id;
@@ -153,6 +187,7 @@ const Reflections = {
     },
 
     loadFromLocalStorage() {
+        let loaded = 0;
         for (let i = 1; i <= 3; i++) {
             const key = `wop-reflection-${this.chapterId}-${i}`;
             const data = localStorage.getItem(key);
@@ -163,11 +198,15 @@ const Reflections = {
                     const input = document.getElementById(`reflection${i}`);
                     if (input) {
                         input.value = parsed.content || '';
+                        loaded++;
                     }
                 } catch (e) {
-                    console.error('Error parsing reflection:', e);
+                    console.error('[Reflections] Error parsing localStorage:', e);
                 }
             }
+        }
+        if (loaded > 0) {
+            console.log('[Reflections] Loaded', loaded, 'reflections from localStorage');
         }
     },
 
@@ -175,6 +214,7 @@ const Reflections = {
         const saveBtn = document.getElementById('saveReflections');
 
         saveBtn?.addEventListener('click', () => {
+            console.log('[Reflections] Save button clicked');
             let saved = 0;
             document.querySelectorAll('.reflection-input').forEach(input => {
                 const prompt = input.dataset.prompt;
@@ -204,7 +244,6 @@ const Reflections = {
             input.value = '';
         });
 
-        // Clear localStorage
         for (let i = 1; i <= 3; i++) {
             const key = `wop-reflection-${this.chapterId}-${i}`;
             localStorage.removeItem(key);
