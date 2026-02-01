@@ -411,6 +411,17 @@ const API = {
             method: 'POST',
             body: JSON.stringify(data)
         });
+    },
+
+    // =========================================
+    // Newsletter API
+    // =========================================
+
+    async subscribeNewsletter(data) {
+        return this.request('/newsletter/subscribe/', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
     }
 };
 

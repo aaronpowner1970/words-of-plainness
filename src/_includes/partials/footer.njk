@@ -1,3 +1,21 @@
+<!-- Footer Newsletter -->
+<section class="footer-newsletter">
+    <div class="footer-newsletter-inner">
+        <h3 class="footer-newsletter-heading">Stay Connected</h3>
+        <p class="footer-newsletter-text">Receive chapter announcements, ministry updates, and devotional insights delivered to your inbox.</p>
+        <form class="newsletter-form" id="footerNewsletterForm">
+            <div class="newsletter-fields">
+                <input type="text" name="name" class="newsletter-input" id="footerNlName" placeholder="Your name" aria-label="Your name">
+                <input type="email" name="email" class="newsletter-input" id="footerNlEmail" placeholder="Your email address" required aria-label="Email address">
+                <button type="submit" class="newsletter-btn" id="footerNlSubmit">Subscribe</button>
+            </div>
+            <small class="newsletter-field-error hidden" data-nl-error="email"></small>
+            <small class="newsletter-field-error hidden" data-nl-error="name"></small>
+        </form>
+        <div class="newsletter-message hidden" id="footerNlMessage"></div>
+    </div>
+</section>
+
 <footer class="footer">
     <img src="/assets/favicons/lantern-icon-64.png" alt="Lantern" class="footer-lantern" width="48" height="48">
     <p class="footer-tagline">{{ site.description }}</p>

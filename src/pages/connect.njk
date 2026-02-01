@@ -85,39 +85,24 @@ permalink: /connect/
             your information, just genuine connection.
         </p>
 
-        <form class="newsletter-form" style="margin-top: 1.5rem; max-width: 500px;">
+        <form class="newsletter-form newsletter-form--page" id="connectNewsletterForm" style="margin-top: 1.5rem; max-width: 500px;">
             <div class="form-group">
-                <label for="newsletter-name">Your Name</label>
-                <input type="text" id="newsletter-name" name="name" placeholder="How should I address you?">
+                <label for="connectNlName">Your Name</label>
+                <input type="text" id="connectNlName" name="name" placeholder="How should I address you?">
+                <small class="newsletter-field-error hidden" data-nl-error="name"></small>
             </div>
 
             <div class="form-group">
-                <label for="newsletter-email">Email Address <span class="text-gold">*</span></label>
-                <input type="email" id="newsletter-email" name="email" required placeholder="your@email.com">
-            </div>
-
-            <div class="form-group">
-                <label>I'm interested in: (optional)</label>
-                <div class="checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="interests" value="writings"> New writings and chapters
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="interests" value="apps"> Discipleship app updates
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="interests" value="vr"> VR Chat session announcements
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="interests" value="rv"> RV ministry schedule
-                    </label>
-                </div>
+                <label for="connectNlEmail">Email Address <span class="text-gold">*</span></label>
+                <input type="email" id="connectNlEmail" name="email" required placeholder="your@email.com">
+                <small class="newsletter-field-error hidden" data-nl-error="email"></small>
             </div>
 
             <button type="submit" class="btn btn-primary" style="margin-top: 1rem;">
                 Subscribe
             </button>
         </form>
+        <div class="newsletter-message hidden" id="connectNlMessage" style="max-width: 500px;"></div>
     </div>
 </section>
 
