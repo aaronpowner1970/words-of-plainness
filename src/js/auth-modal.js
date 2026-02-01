@@ -162,8 +162,6 @@ const AuthModal = {
 
         // Clear validation errors on mode switch
         this.clearError();
-        const matchError = document.getElementById('authPasswordMatchError');
-        matchError?.classList.add('hidden');
 
         // Re-attach switch listeners
         this.setupModeSwitching();
@@ -178,26 +176,30 @@ const AuthModal = {
 
         // Client-side validation for signup
         if (this.mode === 'signup') {
-            const matchError = document.getElementById('authPasswordMatchError');
-            matchError?.classList.add('hidden');
+            this.clearFieldErrors();
+            let hasError = false;
 
             if (!username?.trim()) {
-                this.showError('Username is required.');
-                return;
+                this.showFieldError('username', 'This field is required.');
+                hasError = true;
             }
             if (!email?.trim() || !email.includes('@')) {
-                this.showError('Please enter a valid email address.');
-                return;
+                this.showFieldError('email', 'Please enter a valid email address.');
+                hasError = true;
             }
             if (!password) {
-                this.showError('Password is required.');
-                return;
+                this.showFieldError('password', 'This field is required.');
+                hasError = true;
             }
-            if (password !== passwordConfirm) {
-                matchError?.classList.remove('hidden');
-                this.showError('Passwords do not match.');
-                return;
+            if (!passwordConfirm) {
+                this.showFieldError('password_confirm', 'This field is required.');
+                hasError = true;
+            } else if (password && password !== passwordConfirm) {
+                this.showFieldError('password_confirm', 'Passwords do not match.');
+                hasError = true;
             }
+
+            if (hasError) return;
         }
 
         const submitBtn = document.getElementById('authSubmit');
@@ -217,19 +219,34 @@ const AuthModal = {
             this.showSuccess('Welcome! You are now signed in.');
             
         } catch (error) {
-            let msg;
             if (error.message === 'Failed to fetch') {
-                msg = 'Unable to connect. Please check your internet connection.';
+                this.showError('Unable to connect. Please check your internet connection.');
             } else if (error.fieldErrors && typeof error.fieldErrors === 'object') {
-                // Build per-field error lines from structured API response
-                const lines = Object.entries(error.fieldErrors)
-                    .filter(([, v]) => Array.isArray(v))
-                    .map(([field, msgs]) => `${field}: ${msgs.join(' ')}`);
-                msg = lines.length > 0 ? lines.join('\n') : error.message;
+                this.clearFieldErrors();
+                const unmapped = [];
+
+                // Show non_field_errors in the general area
+                if (Array.isArray(error.fieldErrors.non_field_errors)) {
+                    unmapped.push(error.fieldErrors.non_field_errors.join(' '));
+                }
+
+                // Show field-level errors inline where possible
+                for (const [field, msgs] of Object.entries(error.fieldErrors)) {
+                    if (field === 'non_field_errors' || !Array.isArray(msgs)) continue;
+                    const el = document.querySelector(`[data-field-error="${field}"]`);
+                    if (el) {
+                        this.showFieldError(field, msgs.join(' '));
+                    } else {
+                        unmapped.push(`${field}: ${msgs.join(' ')}`);
+                    }
+                }
+
+                if (unmapped.length > 0) {
+                    this.showError(unmapped.join('\n'));
+                }
             } else {
-                msg = error.message;
+                this.showError(error.message);
             }
-            this.showError(msg);
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = this.mode === 'signin' ? 'Sign In' : 'Sign Up';
@@ -243,13 +260,29 @@ const AuthModal = {
             errorEl.classList.remove('hidden');
         }
     },
-    
+
     clearError() {
         const errorEl = document.getElementById('authError');
         if (errorEl) {
             errorEl.textContent = '';
             errorEl.classList.add('hidden');
         }
+        this.clearFieldErrors();
+    },
+
+    showFieldError(field, message) {
+        const el = document.querySelector(`[data-field-error="${field}"]`);
+        if (el) {
+            el.textContent = message;
+            el.classList.remove('hidden');
+        }
+    },
+
+    clearFieldErrors() {
+        document.querySelectorAll('[data-field-error]').forEach(el => {
+            el.textContent = '';
+            el.classList.add('hidden');
+        });
     },
     
     showSuccess(message) {
