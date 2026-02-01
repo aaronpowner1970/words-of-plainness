@@ -170,39 +170,58 @@ permalink: /connect/
             during our RV travels? I'd love to hear from you.
         </p>
 
-        <form class="contact-form" style="margin-top: 1.5rem; max-width: 600px;">
-            <div class="form-group">
-                <label for="contact-name">Your Name <span class="text-gold">*</span></label>
-                <input type="text" id="contact-name" name="name" required placeholder="Your name">
-            </div>
+        <div id="contactFormWrapper" style="margin-top: 1.5rem; max-width: 600px;">
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="contact-name">Name <span class="text-gold">*</span></label>
+                    <input type="text" id="contact-name" name="name" required placeholder="Your name">
+                    <small class="form-field-error hidden" data-contact-error="name"></small>
+                </div>
 
-            <div class="form-group">
-                <label for="contact-email">Email Address <span class="text-gold">*</span></label>
-                <input type="email" id="contact-email" name="email" required placeholder="your@email.com">
-            </div>
+                <div class="form-group">
+                    <label for="contact-email">Email Address <span class="text-gold">*</span></label>
+                    <input type="email" id="contact-email" name="email" required placeholder="your@email.com">
+                    <small class="form-field-error hidden" data-contact-error="email"></small>
+                </div>
 
-            <div class="form-group">
-                <label for="contact-subject">Subject</label>
-                <select id="contact-subject" name="subject">
-                    <option value="">Select a topic...</option>
-                    <option value="general">General inquiry</option>
-                    <option value="feedback">Feedback on writings</option>
-                    <option value="rv">RV ministry visit</option>
-                    <option value="vr">VR Chat sessions</option>
-                    <option value="technical">Technical issue with site</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="contact-type">Type <span class="text-gold">*</span></label>
+                    <select id="contact-type" name="submission_type" required>
+                        <option value="">Select a topic...</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="suggestion">Content Suggestion</option>
+                        <option value="technical">Technical Issue</option>
+                        <option value="prayer">Prayer Request</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <small class="form-field-error hidden" data-contact-error="submission_type"></small>
+                </div>
 
-            <div class="form-group">
-                <label for="contact-message">Your Message <span class="text-gold">*</span></label>
-                <textarea id="contact-message" name="message" required placeholder="What would you like to share or ask?"></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="contact-subject">Subject <span class="text-gold">*</span></label>
+                    <input type="text" id="contact-subject" name="subject" required placeholder="What is this about?">
+                    <small class="form-field-error hidden" data-contact-error="subject"></small>
+                </div>
 
-            <button type="submit" class="btn btn-primary">
-                Send Message
-            </button>
-        </form>
+                <div class="form-group">
+                    <label for="contact-message">Message <span class="text-gold">*</span></label>
+                    <textarea id="contact-message" name="message" required placeholder="What would you like to share or ask?"></textarea>
+                    <small class="form-field-error hidden" data-contact-error="message"></small>
+                </div>
+
+                <div class="contact-form-error hidden" id="contactFormError"></div>
+
+                <button type="submit" class="btn btn-primary" id="contactSubmit">
+                    Send Message
+                </button>
+            </form>
+
+            <div class="contact-success hidden" id="contactSuccess">
+                <h3 style="color: var(--gold-primary); margin-bottom: var(--space-sm);">Message Sent!</h3>
+                <p>Thank you for reaching out! We'll respond as soon as possible.</p>
+                <a href="#" id="contactSendAnother" style="color: var(--gold-primary); margin-top: var(--space-md); display: inline-block;">Send Another Message</a>
+            </div>
+        </div>
     </div>
 </section>
 

@@ -1136,6 +1136,41 @@ p {
     resize: vertical;
 }
 
+.form-field-error {
+    display: block;
+    color: #e88;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.form-field-error.hidden {
+    display: none;
+}
+
+.contact-form-error {
+    background: rgba(200, 0, 0, 0.15);
+    border: 1px solid rgba(200, 0, 0, 0.3);
+    border-radius: var(--radius-sm);
+    color: #e88;
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+    font-size: 0.9rem;
+    white-space: pre-line;
+}
+
+.contact-form-error.hidden {
+    display: none;
+}
+
+.contact-success {
+    text-align: center;
+    padding: var(--space-xl) 0;
+}
+
+.contact-success.hidden {
+    display: none;
+}
+
 .checkbox-group {
     display: flex;
     flex-direction: column;

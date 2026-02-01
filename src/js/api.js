@@ -400,6 +400,17 @@ const API = {
         return this.request(`/reflections/${id}/appreciate/`, {
             method: 'POST'
         });
+    },
+
+    // =========================================
+    // Contact API
+    // =========================================
+
+    async submitContact(data) {
+        return this.request('/contact/', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
     }
 };
 
