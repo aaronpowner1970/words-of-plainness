@@ -9,6 +9,94 @@ readingTime: "~20 min read"
 audio:
   narration: /assets/audio/chapter-04-narration.mp3
   overview: /assets/audio/chapter-04-overview.mp3
+  testimony:
+    file: /assets/audio/04_1_When_God_Becomes_Real.mp3
+    title: "When God Becomes Real"
+    description: "A musical reflection on spiritual knowledge"
+    lyrics: |
+      [INTRO]
+      I've chased down every question
+      Read the books and followed every thread
+      But standing at the edge of all I know
+      I feel a deeper hunger in me
+      
+      [VERSE 1]
+      There's a thirst that won't be satisfied
+      By everything the world has shown
+      We gather pearls of wisdom as we go
+      But the deepest truths remain unknown
+      We learn from what our senses tell us
+      We trust the ones who came before
+      We reason through the darkness for a light
+      But something's calling out for more
+      
+      [VERSE 2]
+      Human minds have built cathedrals
+      Mapped the stars and split the atom wide
+      But when I ask "Why am I here?"
+      The world has never satisfied
+      Ever learning, never landing
+      On the ground where certainty begins
+      I've found the limits of my reach —
+      Now I'm ready to look within
+      
+      [CHORUS]
+      Faith and learning, companions in the same cause
+      Walking toward the light that never dims
+      What the mind begins to question
+      The spirit can complete
+      Truth is knowable — God is not silent
+      He's waiting at the edge of all we seek
+      
+      [VERSE 3]
+      How did all of this begin?
+      Is there purpose in the change?
+      Is someone guiding, watching, reaching down
+      To meet me where I am?
+      I won't cling to fear of answers
+      I won't hide behind my doubt
+      Great wisdom leads to peace, I'm told
+      And I'm ready to find out
+      
+      [CHORUS]
+      Faith and learning, companions in the same cause
+      Walking toward the light that never dims
+      What the mind begins to question
+      The spirit can complete
+      Truth is knowable — God is not silent
+      He's waiting at the edge of all we seek
+      
+      [BRIDGE]
+      I am more than flesh and reasoning
+      There's a spirit living here inside
+      When I reached beyond what I could prove
+      That's when God became real to me
+      The questions didn't disappear
+      But fear gave way to hope
+      In the stillness something spoke to me:
+      "You were never searching alone"
+      This is when God becomes real —
+      Not a theory, but a voice you feel
+      
+      [FINAL CHORUS]
+      Faith and learning, companions in the same cause
+      Walking toward the light that never dims
+      What the mind begins to question
+      The spirit can complete
+      Truth is knowable — God is not silent
+      He's waiting at the edge of all we seek
+      
+      [OUTRO]
+      So if you're standing where I stood
+      Hungry, searching, wondering if it's real
+      Ask Him — just speak what's in your heart
+      He has answered me
+      He will answer you
+      Truth is knowable
+      Peace can be found
+      This I promise
+      In the name of Jesus Christ
+      Amen.
 pdf: /assets/pdf/WoP_Ch04_Spiritual_Knowledge.pdf
 infographic: /assets/images/chapter-04-infographic.png
 slidesPath: "WoP_Ch04"
