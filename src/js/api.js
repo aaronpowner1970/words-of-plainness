@@ -422,6 +422,25 @@ const API = {
             method: 'POST',
             body: JSON.stringify(data)
         });
+    },
+
+    // =========================================
+    // Reading Progress API
+    // =========================================
+
+    async getProgress(chapterSlug) {
+        return this.request(`/progress/${encodeURIComponent(chapterSlug)}/`);
+    },
+
+    async updateProgress(chapterSlug, data) {
+        return this.request(`/progress/${encodeURIComponent(chapterSlug)}/`, {
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        });
+    },
+
+    async getAllProgress() {
+        return this.request('/progress/');
     }
 };
 

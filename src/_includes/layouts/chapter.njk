@@ -13,6 +13,22 @@
 <!-- Resume Prompt -->
 {% include "components/resume-prompt.njk" %}
 
+<!-- Progress Resume Banner (API-synced) -->
+<div class="progress-resume-banner hidden" id="progressResumeBanner">
+    <div class="progress-resume-content">
+        <span class="progress-resume-text" id="progressResumeText">
+            Welcome back! Resume reading from where you left off?
+        </span>
+        <div class="progress-resume-actions">
+            <button class="progress-resume-btn" id="progressResumeYes">Resume</button>
+            <button class="progress-resume-btn secondary" id="progressResumeNo">Start from Beginning</button>
+        </div>
+    </div>
+</div>
+
+<!-- Bookmark Toast -->
+<div class="bookmark-toast hidden" id="bookmarkToast">Bookmark saved</div>
+
 <!-- Mobile TOC Panel -->
 {% include "components/toc-mobile.njk" %}
 
@@ -81,6 +97,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="/js/reading-progress.js"></script>
 <script src="/js/chapter.js"></script>
 <script src="/js/audio-sync.js"></script>
 <script src="/js/reflections.js"></script>

@@ -42,9 +42,10 @@ permalink: /writings/
 
         <div class="feature-grid" style="margin-top: 1.5rem;">
             {%- for chapter in collections.chapters -%}
-            <a href="{{ chapter.url }}" class="feature-card" style="text-decoration: none; border-left: 3px solid var(--gold-primary);">
+            <a href="{{ chapter.url }}" class="feature-card" data-chapter-slug="{{ chapter.data.chapterId }}" style="text-decoration: none; border-left: 3px solid var(--gold-primary);">
                 <h3 style="display: flex; align-items: center; gap: 0.5rem;">
                     <span style="color: var(--gold-primary);">Chapter {{ chapter.data.chapter }}</span>
+                    <span class="chapter-progress-badge" data-progress-for="{{ chapter.data.chapterId }}"></span>
                 </h3>
                 <p style="font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem;">{{ chapter.data.title }}</p>
                 {% if chapter.data.scripture.text %}
@@ -96,6 +97,27 @@ permalink: /writings/
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    if (!window.API?.isAuthenticated()) return;
+    try {
+        const progress = await window.API.getAllProgress();
+        const items = Array.isArray(progress) ? progress : (progress.results || []);
+        items.forEach(p => {
+            const badge = document.querySelector(`[data-progress-for="${p.chapter_slug}"]`);
+            if (!badge) return;
+            if (p.status === 'completed') {
+                badge.textContent = 'Completed';
+                badge.classList.add('badge-completed');
+            } else if (p.status === 'in_progress') {
+                badge.textContent = 'In Progress';
+                badge.classList.add('badge-in-progress');
+            }
+        });
+    } catch (e) { console.warn('Could not load progress:', e); }
+});
+</script>
 
 <!-- Study Tools -->
 <section class="content-section alt" id="tools">
