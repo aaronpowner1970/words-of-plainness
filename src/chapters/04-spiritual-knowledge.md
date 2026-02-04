@@ -25,7 +25,7 @@ pdf: "WoP_Ch04_Spiritual_Knowledge.pdf"
 infographic: "chapter-04-infographic.png"
 slides:
   count: 10
-  path: "WoP_Ch04"
+  path: "WoP_Ch04/"
 
 prevChapter:
   url: "/chapters/03-academic-knowledge/"
