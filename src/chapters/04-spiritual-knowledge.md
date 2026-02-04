@@ -1,135 +1,182 @@
 ---
+layout: layouts/chapter.njk
 title: "Spiritual Knowledge"
 chapter: 4
-layout: layouts/chapter.njk
+slug: "04-spiritual-knowledge"
+chapterId: "chapter-04-spiritual-knowledge"
+
 scripture:
   text: "To be spiritually minded is life and peace."
   reference: "Romans 8:6"
-readingTime: "~20 min read"
+  url: "nt/rom/8?id=p6#p6"
+
+readingTime: 20
+sectionCount: 11
+
 audio:
-  narration: /assets/audio/chapter-04-narration.mp3
-  overview: /assets/audio/chapter-04-overview.mp3
+  narration: "chapter-04-narration.mp3"
+  overview: "chapter-04-overview.mp3"
   testimony:
-    file: /assets/audio/04_1_When_God_Becomes_Real.mp3
+    file: "04_1_When_God_Becomes_Real.mp3"
     title: "When God Becomes Real"
     description: "A musical reflection on spiritual knowledge"
-    lyrics: |
-      [INTRO]
-      I've chased down every question
-      Read the books and followed every thread
-      But standing at the edge of all I know
-      I feel a deeper hunger in me
-      
-      [VERSE 1]
-      There's a thirst that won't be satisfied
-      By everything the world has shown
-      We gather pearls of wisdom as we go
-      But the deepest truths remain unknown
-      We learn from what our senses tell us
-      We trust the ones who came before
-      We reason through the darkness for a light
-      But something's calling out for more
-      
-      [VERSE 2]
-      Human minds have built cathedrals
-      Mapped the stars and split the atom wide
-      But when I ask "Why am I here?"
-      The world has never satisfied
-      Ever learning, never landing
-      On the ground where certainty begins
-      I've found the limits of my reach —
-      Now I'm ready to look within
-      
-      [CHORUS]
-      Faith and learning, companions in the same cause
-      Walking toward the light that never dims
-      What the mind begins to question
-      The spirit can complete
-      Truth is knowable — God is not silent
-      He's waiting at the edge of all we seek
-      
-      [VERSE 3]
-      How did all of this begin?
-      Is there purpose in the change?
-      Is someone guiding, watching, reaching down
-      To meet me where I am?
-      I won't cling to fear of answers
-      I won't hide behind my doubt
-      Great wisdom leads to peace, I'm told
-      And I'm ready to find out
-      
-      [CHORUS]
-      Faith and learning, companions in the same cause
-      Walking toward the light that never dims
-      What the mind begins to question
-      The spirit can complete
-      Truth is knowable — God is not silent
-      He's waiting at the edge of all we seek
-      
-      [BRIDGE]
-      I am more than flesh and reasoning
-      There's a spirit living here inside
-      When I reached beyond what I could prove
-      That's when God became real to me
-      The questions didn't disappear
-      But fear gave way to hope
-      In the stillness something spoke to me:
-      "You were never searching alone"
-      This is when God becomes real —
-      Not a theory, but a voice you feel
-      
-      [FINAL CHORUS]
-      Faith and learning, companions in the same cause
-      Walking toward the light that never dims
-      What the mind begins to question
-      The spirit can complete
-      Truth is knowable — God is not silent
-      He's waiting at the edge of all we seek
-      
-      [OUTRO]
-      So if you're standing where I stood
-      Hungry, searching, wondering if it's real
-      Ask Him — just speak what's in your heart
-      He has answered me
-      He will answer you
-      Truth is knowable
-      Peace can be found
-      This I promise
-      In the name of Jesus Christ
-      Amen.
-pdf: /assets/pdf/WoP_Ch04_Spiritual_Knowledge.pdf
-infographic: /assets/images/chapter-04-infographic.png
-slidesPath: "WoP_Ch04"
-slidesCount: 10
-toc:
-  - id: the-fifth-faculty
-    title: The Fifth Faculty
-  - id: what-spirituality-is-not
-    title: What Spirituality Is Not
-  - id: the-human-spirit-within
-    title: The Human Spirit Within
-  - id: three-gifts-of-the-spirit
-    title: Three Gifts of the Spirit
-  - id: righteous-and-wicked-spirituality
-    title: Righteous and Wicked Spirituality
-  - id: how-to-develop-righteous-spirituality
-    title: How to Develop Righteous Spirituality
-  - id: experimenting-on-the-word
-    title: Experimenting on the Word
-  - id: how-revelation-comes
-    title: How Revelation Comes
-  - id: promises-to-the-seeker
-    title: Promises to the Seeker
-  - id: two-paths-to-confirmation
-    title: Two Paths to Confirmation
-  - id: our-witness
-    title: Our Witness
-navigation:
-  prevChapter: "/chapters/03-academic-knowledge/"
-  prevTitle: "Academic Knowledge"
-  nextChapter: "/chapters/05-sincere-prayer/"
-  nextTitle: "Sincere Prayer"
+
+pdf: "WoP_Ch04_Spiritual_Knowledge.pdf"
+infographic: "chapter-04-infographic.png"
+slides:
+  count: 10
+  path: "WoP_Ch04"
+
+prevChapter:
+  url: "/chapters/03-academic-knowledge/"
+  title: "Chapter 3: Academic Knowledge"
+nextChapter:
+  url: "/chapters/05-sincere-prayer/"
+  title: "Chapter 5: Sincere Prayer"
+
 discordChannelId: ""
+
+lyrics: |
+  [INTRO]
+  I've chased down every question
+  Read the books and followed every thread
+  But standing at the edge of all I know
+  I feel a deeper hunger in me
+  
+  [VERSE 1]
+  There's a thirst that won't be satisfied
+  By everything the world has shown
+  We gather pearls of wisdom as we go
+  But the deepest truths remain unknown
+  We learn from what our senses tell us
+  We trust the ones who came before
+  We reason through the darkness for a light
+  But something's calling out for more
+  
+  [VERSE 2]
+  Human minds have built cathedrals
+  Mapped the stars and split the atom wide
+  But when I ask "Why am I here?"
+  The world has never satisfied
+  Ever learning, never landing
+  On the ground where certainty begins
+  I've found the limits of my reach —
+  Now I'm ready to look within
+  
+  [CHORUS]
+  Faith and learning, companions in the same cause
+  Walking toward the light that never dims
+  What the mind begins to question
+  The spirit can complete
+  Truth is knowable — God is not silent
+  He's waiting at the edge of all we seek
+  
+  [VERSE 3]
+  How did all of this begin?
+  Is there purpose in the change?
+  Is someone guiding, watching, reaching down
+  To meet me where I am?
+  I won't cling to fear of answers
+  I won't hide behind my doubt
+  Great wisdom leads to peace, I'm told
+  And I'm ready to find out
+  
+  [CHORUS]
+  Faith and learning, companions in the same cause
+  Walking toward the light that never dims
+  What the mind begins to question
+  The spirit can complete
+  Truth is knowable — God is not silent
+  He's waiting at the edge of all we seek
+  
+  [BRIDGE]
+  I am more than flesh and reasoning
+  There's a spirit living here inside
+  When I reached beyond what I could prove
+  That's when God became real to me
+  The questions didn't disappear
+  But fear gave way to hope
+  In the stillness something spoke to me:
+  "You were never searching alone"
+  This is when God becomes real —
+  Not a theory, but a voice you feel
+  
+  [FINAL CHORUS]
+  Faith and learning, companions in the same cause
+  Walking toward the light that never dims
+  What the mind begins to question
+  The spirit can complete
+  Truth is knowable — God is not silent
+  He's waiting at the edge of all we seek
+  
+  [OUTRO]
+  So if you're standing where I stood
+  Hungry, searching, wondering if it's real
+  Ask Him — just speak what's in your heart
+  He has answered me
+  He will answer you
+  Truth is knowable
+  Peace can be found
+  This I promise
+  In the name of Jesus Christ
+  Amen.
+
+podcastTranscript: |
+  <p><strong>Host:</strong> Welcome back to another Words of Plainness Podcast. I'm sitting with Aaron Powner, one of the co-authors of <em>Words of Plainness: A Latter-day Saint Witness of Jesus Christ</em>. Aaron, chapter four of your book — Spiritual Knowledge — makes a bold claim right out of the gate. You say there's a "fifth faculty" that human beings can use to know truth. What do you mean by that?</p>
+
+  <p><strong>Aaron:</strong> Thank you for having me. In the previous chapter, we walk through the four natural ways that everyone acquires knowledge — our senses, the authority of others, our reasoning, and intuition. Those faculties are gifts from God. We've built civilizations with them. But we also discovered their ceiling. There are big questions unanswered — Why am I here? Is there a God? What happens after death? — big questions that those four faculties simply cannot answer on their own. The fifth faculty is revelation: God's Spirit communicating directly with the human spirit.</p>
+
+  <p><strong>Host:</strong> Now, a lot of people today would say they're "spiritual." They meditate, they practice mindfulness, they feel connected to something bigger. Is that what you're talking about?</p>
+
+  <p><strong>Aaron:</strong> Those things can be good and healthy, but no — that's not what we mean by spirituality. We make a distinction early in the chapter. Managing stress, finding balance, even exploring morality — those are part of a good life, but they are not spirituality in the way we're using the word. True spirituality has to do with the relationship between your spirit — the real, living part of you that existed before birth and will exist after death — the relationship between your spirit and the Spirit of God. It's not a feeling you generate. It's a communication you receive.</p>
+
+  <p><strong>Host:</strong> That's a pretty strong distinction. You're saying there's something literally inside each of us that can hear from God?</p>
+
+  <p><strong>Aaron:</strong> Yes. And the chapter lays out three ways God reaches us. First, there's the Light of Christ, which is given to every person born into this world. It's the voice of conscience — that inner sense of right and wrong. Second, the Holy Ghost can touch anyone, member or not, believer or not, with moments of truth and power. And third, for those who enter the covenant through baptism, there's the Gift of the Holy Ghost — which is the promise of His constant companionship. Not just moments. A way of life.</p>
+
+  <p><strong>Host:</strong> Constant companionship. That's a remarkable promise. But let me push back a little. How does someone know the difference between a genuine spiritual witness and just — well — a strong emotion?</p>
+
+  <p><strong>Aaron:</strong> That's one of the most important questions in the chapter. There is a vast difference between the fleeting effects of strong emotions and the deeper reality of spiritual connection. We must also acknowledge that spirituality can be righteous or evil — because Satan is real and he communicates to spirits too. He can mimic many things. But there is one sensation he cannot counterfeit: the divine peace of the Lord. It's described as deep, abiding, cleansing, healing, and saving. When you feel that peace — and it always leads you toward greater faith in Christ, greater humility, greater love for others — you can trust it. If any spiritual experience leads to pride, cruelty, or distance from God, it is not from Him.</p>
+
+  <p><strong>Host:</strong> So there's a built-in test.</p>
+
+  <p><strong>Aaron:</strong> There is. And it's not just a feeling test — it's a fruit test. The Apostle John taught it plainly: test the spirits. We know them by their fruits. Do they produce faith in Christ? Humility? Compassion? Then you're on solid ground.</p>
+
+  <p><strong>Host:</strong> Your chapter also has a beautiful section where you invite the reader to experiment. Can you describe that?</p>
+
+  <p><strong>Aaron:</strong> That comes from the prophet Alma in the Book of Mormon. He compared the word of God to a seed. He told a group of seekers — people who didn't know what to believe, just had a desire to believe — to plant that seed in their hearts through sincere action and obedience, and then observe what happens. Does it enlarge your soul? Does it enlighten your understanding? Does it begin to be delicious to you? If so, you have evidence — not through a laboratory, but through the transformation of your own soul. It's a sacred experiment, and it's available to anyone willing to try.</p>
+
+  <p><strong>Host:</strong> And if someone listening right now is curious but unsure — what would you say to them?</p>
+
+  <p><strong>Aaron:</strong> I would say the same thing we say at the end of the chapter: you don't need perfect faith to pray. You don't need memorized words or complicated rituals. Just speak what is in your mind and heart, and ask God if these things are true. Pay attention to how you feel. Look for peace, warmth, and a calm assurance. Christ Himself promised: "Ask, and it shall be given you; seek, and ye shall find." God has answered the prayers of so many. He has answered us. He will answer you.</p>
+
+  <p><strong>Host:</strong> Aaron, thank you. The book is <em>Words of Plainness: A Latter-day Saint Witness of Jesus Christ</em>. Learn more by visiting brotheraaron.org.</p>
+
+  <p><strong>Aaron:</strong> Thank you. It's been a privilege.</p>
+
+toc:
+  - id: "the-fifth-faculty"
+    title: "The Fifth Faculty"
+  - id: "what-spirituality-is-not"
+    title: "What Spirituality Is Not"
+  - id: "the-human-spirit-within"
+    title: "The Human Spirit Within"
+  - id: "three-gifts-of-the-spirit"
+    title: "Three Gifts of the Spirit"
+  - id: "righteous-and-wicked-spirituality"
+    title: "Righteous and Wicked Spirituality"
+  - id: "how-to-develop-righteous-spirituality"
+    title: "How to Develop Righteous Spirituality"
+  - id: "experimenting-on-the-word"
+    title: "Experimenting on the Word"
+  - id: "how-revelation-comes"
+    title: "How Revelation Comes"
+  - id: "promises-to-the-seeker"
+    title: "Promises to the Seeker"
+  - id: "two-paths-to-confirmation"
+    title: "Two Paths to Confirmation"
+  - id: "our-witness"
+    title: "Our Witness"
 ---
 
 ## The Fifth Faculty
