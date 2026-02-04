@@ -6,31 +6,6 @@ pageSubtitle: "Scripture-Based Reflections"
 permalink: /writings/
 ---
 
-<!-- Search Section -->
-<section class="content-section" id="search">
-    <div class="content-wrapper">
-        <h2>Search the Writings</h2>
-        <p>
-            Explore the Words of Plainness chapters and social media archive.
-            Search by topic, scripture reference, or keyword.
-        </p>
-
-        <div class="form-group" style="margin-top: 1.5rem;">
-            <input
-                type="search"
-                class="search-input"
-                placeholder="Search writings... (e.g., 'faith', 'John 3:16', 'covenant')"
-                aria-label="Search writings"
-            >
-        </div>
-        <div class="search-results" style="display: none;"></div>
-
-        <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 1rem;">
-            <em>Full search functionality will be available when connected to the database.</em>
-        </p>
-    </div>
-</section>
-
 <!-- Words of Plainness Chapters -->
 <section class="content-section alt" id="chapters">
     <div class="content-wrapper">
@@ -160,3 +135,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
     </div>
 </section>
+
+{% include "partials/search-fab.njk" %}

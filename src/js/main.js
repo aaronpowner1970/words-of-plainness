@@ -109,4 +109,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Database Search FAB & Modal
+document.addEventListener('DOMContentLoaded', function() {
+  const fab = document.getElementById('searchFab');
+  const modal = document.getElementById('searchModal');
+  const closeBtn = document.getElementById('searchModalClose');
+  const backdrop = document.getElementById('searchModalBackdrop');
+
+  function openModal() {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  fab?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+});
+
 console.log('Words of Plainness - Main scripts loaded');
