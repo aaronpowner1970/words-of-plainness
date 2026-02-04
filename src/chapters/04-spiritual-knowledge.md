@@ -37,89 +37,89 @@ nextChapter:
 discordChannelId: ""
 
 lyrics: |
-  [INTRO]
-  I've chased down every question
-  Read the books and followed every thread
-  But standing at the edge of all I know
-  I feel a deeper hunger in me
-  
-  [VERSE 1]
-  There's a thirst that won't be satisfied
-  By everything the world has shown
-  We gather pearls of wisdom as we go
-  But the deepest truths remain unknown
-  We learn from what our senses tell us
-  We trust the ones who came before
-  We reason through the darkness for a light
-  But something's calling out for more
-  
-  [VERSE 2]
-  Human minds have built cathedrals
-  Mapped the stars and split the atom wide
-  But when I ask "Why am I here?"
-  The world has never satisfied
-  Ever learning, never landing
-  On the ground where certainty begins
-  I've found the limits of my reach —
-  Now I'm ready to look within
-  
-  [CHORUS]
-  Faith and learning, companions in the same cause
-  Walking toward the light that never dims
-  What the mind begins to question
-  The spirit can complete
-  Truth is knowable — God is not silent
-  He's waiting at the edge of all we seek
-  
-  [VERSE 3]
-  How did all of this begin?
-  Is there purpose in the change?
-  Is someone guiding, watching, reaching down
-  To meet me where I am?
-  I won't cling to fear of answers
-  I won't hide behind my doubt
-  Great wisdom leads to peace, I'm told
-  And I'm ready to find out
-  
-  [CHORUS]
-  Faith and learning, companions in the same cause
-  Walking toward the light that never dims
-  What the mind begins to question
-  The spirit can complete
-  Truth is knowable — God is not silent
-  He's waiting at the edge of all we seek
-  
-  [BRIDGE]
-  I am more than flesh and reasoning
-  There's a spirit living here inside
-  When I reached beyond what I could prove
-  That's when God became real to me
-  The questions didn't disappear
-  But fear gave way to hope
-  In the stillness something spoke to me:
-  "You were never searching alone"
-  This is when God becomes real —
-  Not a theory, but a voice you feel
-  
-  [FINAL CHORUS]
-  Faith and learning, companions in the same cause
-  Walking toward the light that never dims
-  What the mind begins to question
-  The spirit can complete
-  Truth is knowable — God is not silent
-  He's waiting at the edge of all we seek
-  
-  [OUTRO]
-  So if you're standing where I stood
-  Hungry, searching, wondering if it's real
-  Ask Him — just speak what's in your heart
-  He has answered me
-  He will answer you
-  Truth is knowable
-  Peace can be found
-  This I promise
-  In the name of Jesus Christ
-  Amen.
+  <p class="section"><strong>[INTRO]</strong></p>
+  <p class="verse">I've chased down every question<br>
+  Read the books and followed every thread<br>
+  But standing at the edge of all I know<br>
+  I feel a deeper hunger in me</p>
+
+  <p class="section"><strong>[VERSE 1]</strong></p>
+  <p class="verse">There's a thirst that won't be satisfied<br>
+  By everything the world has shown<br>
+  We gather pearls of wisdom as we go<br>
+  But the deepest truths remain unknown<br>
+  We learn from what our senses tell us<br>
+  We trust the ones who came before<br>
+  We reason through the darkness for a light<br>
+  But something's calling out for more</p>
+
+  <p class="section"><strong>[VERSE 2]</strong></p>
+  <p class="verse">Human minds have built cathedrals<br>
+  Mapped the stars and split the atom wide<br>
+  But when I ask "Why am I here?"<br>
+  The world has never satisfied<br>
+  Ever learning, never landing<br>
+  On the ground where certainty begins<br>
+  I've found the limits of my reach —<br>
+  Now I'm ready to look within</p>
+
+  <p class="section"><strong>[CHORUS]</strong></p>
+  <p class="chorus">Faith and learning, companions in the same cause<br>
+  Walking toward the light that never dims<br>
+  What the mind begins to question<br>
+  The spirit can complete<br>
+  Truth is knowable — God is not silent<br>
+  He's waiting at the edge of all we seek</p>
+
+  <p class="section"><strong>[VERSE 3]</strong></p>
+  <p class="verse">How did all of this begin?<br>
+  Is there purpose in the change?<br>
+  Is someone guiding, watching, reaching down<br>
+  To meet me where I am?<br>
+  I won't cling to fear of answers<br>
+  I won't hide behind my doubt<br>
+  Great wisdom leads to peace, I'm told<br>
+  And I'm ready to find out</p>
+
+  <p class="section"><strong>[CHORUS]</strong></p>
+  <p class="chorus">Faith and learning, companions in the same cause<br>
+  Walking toward the light that never dims<br>
+  What the mind begins to question<br>
+  The spirit can complete<br>
+  Truth is knowable — God is not silent<br>
+  He's waiting at the edge of all we seek</p>
+
+  <p class="section"><strong>[BRIDGE]</strong></p>
+  <p class="verse">I am more than flesh and reasoning<br>
+  There's a spirit living here inside<br>
+  When I reached beyond what I could prove<br>
+  That's when God became real to me<br>
+  The questions didn't disappear<br>
+  But fear gave way to hope<br>
+  In the stillness something spoke to me:<br>
+  "You were never searching alone"<br>
+  This is when God becomes real —<br>
+  Not a theory, but a voice you feel</p>
+
+  <p class="section"><strong>[FINAL CHORUS]</strong></p>
+  <p class="chorus">Faith and learning, companions in the same cause<br>
+  Walking toward the light that never dims<br>
+  What the mind begins to question<br>
+  The spirit can complete<br>
+  Truth is knowable — God is not silent<br>
+  He's waiting at the edge of all we seek</p>
+
+  <p class="section"><strong>[OUTRO]</strong></p>
+  <p class="verse">So if you're standing where I stood<br>
+  Hungry, searching, wondering if it's real<br>
+  Ask Him — just speak what's in your heart<br>
+  He has answered me<br>
+  He will answer you<br>
+  Truth is knowable<br>
+  Peace can be found<br>
+  This I promise<br>
+  In the name of Jesus Christ<br>
+  Amen.</p>
 
 podcastTranscript: |
   <p><strong>Host:</strong> Welcome back to another Words of Plainness Podcast. I'm sitting with Aaron Powner, one of the co-authors of <em>Words of Plainness: A Latter-day Saint Witness of Jesus Christ</em>. Aaron, chapter four of your book — Spiritual Knowledge — makes a bold claim right out of the gate. You say there's a "fifth faculty" that human beings can use to know truth. What do you mean by that?</p>
