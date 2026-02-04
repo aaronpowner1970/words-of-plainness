@@ -16,7 +16,7 @@ audio:
     title: "Two Halves of a Whole"
     description: "A Celtic ballad testimony on the unity of academic and spiritual knowledge"
 pdf: WoP_Ch03_Academic_Knowledge.pdf
-infographic: WoP_Ch03_Academic_Knowledge_Infographic.png
+infographic: chapter-03-infographic.png
 slides:
   count: 12
   path: "chapter-03/"
