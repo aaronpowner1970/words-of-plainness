@@ -179,7 +179,7 @@ toc:
     title: "Our Witness"
 ---
 
-## The Fifth Faculty
+<h2 id="the-fifth-faculty">The Fifth Faculty</h2>
 
 {% sentence 0 %}There are many pursuits that ennoble and enrich human life: great and moving works of literature, valuable accomplishments in the arts that please the senses and evoke strong emotions, tremendous progress in scientific learning and valuable resultant technologies, noble achievements in mathematics, studies of history and geography that fill us with a sense of our place in the world, awesome feats of engineering, and welcome advances in medicine.{% endsentence %} {% sentence 1 %}However valuable these may be, none of them can give us knowledge of ultimate truth or save us from our mortal condition.{% endsentence %}
 
@@ -189,13 +189,13 @@ toc:
 
 {% sentence 8 %}Across centuries and cultures, people of faith have affirmed that our mortal lives are not the sum total of our existence.{% endsentence %} {% sentence 9 %}Latter-day Saints stand with them in this conviction—and add our own witness.{% endsentence %} {% sentence 10 %}There is more.{% endsentence %} {% sentence 11 %}We are witnesses of the existence of a power that can allow us to rise above our current existence into something more pure, more perfect, and more whole—not only in this life, but after.{% endsentence %} {% sentence 12 %}Spirituality is required if you wish to experience this for yourself.{% endsentence %}
 
-## What Spirituality Is Not
+<h2 id="what-spirituality-is-not">What Spirituality Is Not</h2>
 
 {% sentence 13 %}Many today define spirituality as merely finding a sense of fulfillment, achieving balance in the various aspects of life, controlling obsessions, maintaining physical health, exploring morality, embracing responsibilities, and managing stress.{% endsentence %} {% sentence 14 %}These things are right and good.{% endsentence %} {% sentence 15 %}They are part of life, but these are not spirituality.{% endsentence %}
 
 {% sentence 16 %}Our physical bodies have an undeniably strong nature.{% endsentence %} {% sentence 17 %}It is so easy and pleasing to follow the many cravings of the flesh.{% endsentence %} {% sentence 18 %}It is not wrong that these desires exist.{% endsentence %} {% sentence 19 %}We believe they were given to us by God.{% endsentence %} {% sentence 20 %}A prophet of God once said, "Men are that they might have joy" (2 Nephi 2:25).{% endsentence %} {% sentence 21 %}But this does not mean that God intended for us to completely submit to our physical natures, making choices out of base instinct alone.{% endsentence %} {% sentence 22 %}Our physical bodies are only one aspect of our complex existence.{% endsentence %} {% sentence 23 %}Self-control is only a beginning to spirituality.{% endsentence %}
 
-## The Human Spirit Within
+<h2 id="the-human-spirit-within">The Human Spirit Within</h2>
 
 {% sentence 24 %}True spirituality has to do with far more vital and vibrant aspects of our existence than the flesh.{% endsentence %} {% sentence 25 %}Those who are acquainted with spirituality often speak of the human mind and heart.{% endsentence %} {% sentence 26 %}The scriptures only briefly explain the concepts of the human mind and heart, but it is clear by the context that the words *mind* and *heart* refer to something other than physical organs of flesh.{% endsentence %}
 
@@ -203,7 +203,7 @@ toc:
 
 {% sentence 30 %}In a similar fashion, human emotion is far more than the sum of hormonal and neural mechanisms found in the flesh.{% endsentence %} {% sentence 31 %}Emotions are extensively studied and documented.{% endsentence %} {% sentence 32 %}We are able to influence them by a variety of scientific means.{% endsentence %} {% sentence 33 %}Yet they are as poorly understood as the human brain.{% endsentence %} {% sentence 34 %}Emotions are commonly mentioned in connection with the human heart owing to the often powerful sensations of emotional stirrings deep within one's bosom, near the heart.{% endsentence %}
 
-### The Soul: Spirit and Body United
+<h3 id="the-soul-spirit-and-body-united">The Soul: Spirit and Body United</h3>
 
 {% sentence 35 %}Latter-day Saints believe that these intangible yet vital and vibrant portions of the human "self"—our minds and emotions—arise from the human spirit within the flesh.{% endsentence %} {% sentence 36 %}Along with many other groups, we also believe that the individual spirits of all humans existed prior to birth into this life and that they will continue to exist after physical death.{% endsentence %} {% sentence 37 %}With regards to spirituality, many speak of the importance of a person's character, which is the only thing that endures beyond the grave.{% endsentence %} {% sentence 38 %}Personal character is the manifestation of the true nature of one's immortal spirit.{% endsentence %}
 
@@ -225,11 +225,11 @@ toc:
 
 {% sentence 75 %}Our spirits are still actively influenced by both the Spirit of God and the spirit of Satan—good and evil influences respectively.{% endsentence %} {% sentence 76 %}Their spirits communicate directly with our own.{% endsentence %} {% sentence 77 %}Though we are free to choose our path, they influence our thoughts and feelings.{% endsentence %} {% sentence 78 %}As in pre-mortality, we continue to learn in mortality by making choices, experiencing consequences, and gathering wisdom in the process.{% endsentence %} {% sentence 79 %}The hopeful result is that we will grow and progress as children of God, but we are free to choose the direction of our growth.{% endsentence %}
 
-## Three Gifts of the Spirit
+<h2 id="three-gifts-of-the-spirit">Three Gifts of the Spirit</h2>
 
 {% sentence 80 %}God communicates to His children through three distinct manifestations of His Spirit.{% endsentence %} {% sentence 81 %}Understanding the differences between them is essential to developing righteous spirituality.{% endsentence %}
 
-### The Light of Christ
+<h3 id="the-light-of-christ">The Light of Christ</h3>
 
 {% sentence 82 %}The Light of Christ is the divine energy, power, or influence that shines from the person of God the Father through Christ "to fill the immensity of space—the light which is in all things, which giveth life to all things, which is the law by which all things are governed" (D&C 88:12–13).{% endsentence %} {% sentence 83 %}Men, women, and children are born with varying degrees of sensitivity to this light.{% endsentence %} {% sentence 84 %}It serves to allow God's children to know good from evil.{% endsentence %} {% sentence 85 %}This is the voice of our moral conscience.{% endsentence %}
 
@@ -237,7 +237,7 @@ toc:
 
 {% sentence 89 %}Unfortunately, by personal choice or social traditions one may reject this voice of conscience and, through continued sin against wisdom and righteousness, become insensitive to the Light of Christ.{% endsentence %} {% sentence 90 %}We are commanded, "Quench not the Spirit" (1 Thessalonians 5:19).{% endsentence %} {% sentence 91 %}Further, one can repeatedly offend the Lord to such an extent that the Lord will withhold His light, "for the Spirit of the Lord will not always strive with man" (2 Nephi 26:11).{% endsentence %} {% sentence 92 %}Yet the Light of Christ must not be confused with the Holy Ghost.{% endsentence %} {% sentence 93 %}The Light of Christ is not a person, but a power.{% endsentence %}
 
-### The Holy Ghost
+<h3 id="the-holy-ghost">The Holy Ghost</h3>
 
 {% sentence 94 %}Like Jesus Christ, the Holy Ghost is a distinct personage—a member of the Godhead who exists as a personage of spirit (D&C 130:22; see also John 14:16–17, 26).{% endsentence %} {% sentence 95 %}As do the Father and the Son, the Holy Ghost has an essential role to play in the lives of God's children.{% endsentence %} {% sentence 96 %}He works in perfect unity with the other members of the Godhead.{% endsentence %} {% sentence 97 %}His calling is to witness of the Father and the Son and to reveal the truth of all things.{% endsentence %} {% sentence 98 %}His personal and divine communication to our individual spirits carries far more certainty than any communication we can receive through our physical senses.{% endsentence %}
 
@@ -245,7 +245,7 @@ toc:
 
 {% sentence 103 %}The whisperings of the Holy Ghost bring to the human heart feelings of deep peace and warmth that accompany the discovery of truth.{% endsentence %} {% sentence 104 %}This blessing is also referred to as the still small voice of God.{% endsentence %} {% sentence 105 %}The Holy Ghost is the Light of Truth.{% endsentence %} {% sentence 106 %}However, this light is only short-lived.{% endsentence %} {% sentence 107 %}These temporary impressions, however precious, are not the same as the Gift of the Holy Ghost.{% endsentence %} {% sentence 108 %}One who wishes to feel such sensations more than once must give effort to repeatedly draw near to the Lord.{% endsentence %}
 
-### The Gift of the Holy Ghost
+<h3 id="the-gift-of-the-holy-ghost">The Gift of the Holy Ghost</h3>
 
 {% sentence 109 %}The most important of the three references to the Spirit is the "Gift of the Holy Ghost."{% endsentence %} {% sentence 110 %}Following baptism by immersion in water, the Gift of the Holy Ghost is given by the laying on of hands in a priesthood ordinance that requires true authority.{% endsentence %} {% sentence 111 %}The necessity of this priesthood ordinance for salvation was plainly understood and practiced in the ancient Church established in Christ's day.{% endsentence %} {% sentence 112 %}The Apostles Peter and John, hearing that Samaria had received the word of God, went to them quickly: "Who, when they were come down, prayed for them, that they might receive the Holy Ghost: for as yet he was fallen upon none of them: only they were baptized in the name of the Lord Jesus. Then laid they their hands on them, and they received the Holy Ghost" (Acts 8:15–17).{% endsentence %}
 
@@ -255,7 +255,7 @@ toc:
 
 {% sentence 121 %}These three gifts represent a progression: the Light of Christ prepares the soul to recognize truth, the Holy Ghost witnesses of that truth, and the Gift of the Holy Ghost enables the soul to be transformed by truth continually.{% endsentence %}
 
-## Righteous and Wicked Spirituality
+<h2 id="righteous-and-wicked-spirituality">Righteous and Wicked Spirituality</h2>
 
 {% sentence 122 %}True spirituality is to become more sensitive to the whisperings and influences of God or Satan.{% endsentence %} {% sentence 123 %}Spirituality can be righteous or evil.{% endsentence %} {% sentence 124 %}Spiritual sensitivity goes beyond our limited physical senses.{% endsentence %} {% sentence 125 %}We all have varying levels of spirituality, though many deny its existence.{% endsentence %} {% sentence 126 %}Those who are less spiritually sensitive seem blind to what many others can see.{% endsentence %} {% sentence 127 %}Still, for many, spirituality takes much desire, diligent effort, and reflection.{% endsentence %} {% sentence 128 %}This is often referred to as contemplation, pondering, or prayerful meditation.{% endsentence %}
 
@@ -263,7 +263,7 @@ toc:
 
 {% sentence 132 %}Righteous spirituality is when we come to love and obey the whisperings of the Spirit of God, which inspire compassion and selflessness in spite of the cravings of the flesh (2 Nephi 9:39).{% endsentence %} {% sentence 133 %}Wicked spirituality is when we come to love and obey the whisperings of the spirit of Satan, which inspire cruelty and selfishness (John 3:19).{% endsentence %} {% sentence 134 %}Wickedness usually involves surrendering to cravings of the flesh, eventually without restraint.{% endsentence %} {% sentence 135 %}When we stray from the path of wisdom, especially in selfishness or cruelty, we become less worthy vessels of the Spirit of God, reducing our ability to sense His righteous influence and leaving us more susceptible to the malevolent influence of Satan.{% endsentence %}
 
-### Discerning the Source
+<h3 id="discerning-the-source">Discerning the Source</h3>
 
 {% sentence 136 %}Many sincere people report spiritual experiences through various traditions and practices—premonitions, profound intuitions, near-death experiences, and other phenomena that seem to transcend ordinary perception.{% endsentence %} {% sentence 137 %}We do not dismiss these experiences.{% endsentence %} {% sentence 138 %}God works wonders among all His children regardless of nationality, religion, or background.{% endsentence %} {% sentence 139 %}So does the adversary.{% endsentence %} {% sentence 140 %}The vital question is not *whether* spiritual experiences are real, but *from what source* they originate and *toward what end* they lead.{% endsentence %}
 
@@ -273,7 +273,7 @@ toc:
 
 {% sentence 152 %}Importantly, we need not tremble with fear and uncertainty in the face of evil.{% endsentence %} {% sentence 153 %}We can be comforted by the knowledge that the power and wisdom of God is greater than that of Satan (1 John 4:4).{% endsentence %}
 
-## How to Develop Righteous Spirituality
+<h2 id="how-to-develop-righteous-spirituality">How to Develop Righteous Spirituality</h2>
 
 {% sentence 154 %}Though many feel uncertain about spiritual intuition, we testify that spirituality is a vital part of the human experience.{% endsentence %} {% sentence 155 %}Without it we are blind and deaf to many of the most precious and beautiful aspects of life.{% endsentence %} {% sentence 156 %}Can you feel the truth of these things?{% endsentence %} {% sentence 157 %}If not, can you learn spiritual sensitivity?{% endsentence %} {% sentence 158 %}Can you learn to experience these things for yourself?{% endsentence %} {% sentence 159 %}We proclaim to the world a resounding "YES!"{% endsentence %} {% sentence 160 %}We believe in the declaration of Paul, "The manifestation of the Spirit is given to every man to profit withal" (1 Corinthians 12:7).{% endsentence %} {% sentence 161 %}No man, woman, or child is without the ability to sense the spirit and power of God.{% endsentence %}
 
@@ -288,7 +288,7 @@ toc:
 - {% sentence 172 %}As knowledge of God and His plan for us is obtained, experiment on the word of God by obeying His teachings to see whether you find faith, hope, love, and personal peace in spite of the calamities of mortality.{% endsentence %}
 - {% sentence 173 %}Never stop feeling after the Spirit of God for the rest of your life, continuing to develop your spirituality.{% endsentence %}
 
-## Experimenting on the Word
+<h2 id="experimenting-on-the-word">Experimenting on the Word</h2>
 
 {% sentence 174 %}Just as the natural faculties allow for testing beliefs through observation and application, so does spiritual knowledge allow for a kind of sacred experiment.{% endsentence %} {% sentence 175 %}The prophet Alma taught this principle to a group of seekers who lacked perfect knowledge:{% endsentence %}
 
@@ -298,7 +298,7 @@ toc:
 
 {% sentence 184 %}This does not bypass the intellect; it fulfills its highest purpose.{% endsentence %} {% sentence 185 %}In this holistic framework, faith becomes a rational extension of discovery—a way to perceive the *why* of our existence with the same clarity that science provides for the *how*.{% endsentence %}
 
-## How Revelation Comes
+<h2 id="how-revelation-comes">How Revelation Comes</h2>
 
 {% sentence 186 %}It is easy to fail to recognize or even dismiss revelations from God if we do not know for what we are looking.{% endsentence %} {% sentence 187 %}Spiritual manifestations of God can come in a wide variety of ways, including such things as simple mental or emotional inspiration, a swelling of calm assurance, a powerful sense of peace and warmth within, and meaningful dreams.{% endsentence %} {% sentence 188 %}The Lord seems to prefer to work by small and simple means, but upon occasion He has given to some to behold prophetic visions, perform mighty miracles, have literal conversations with heavenly messengers, and even witness the parting of the veil of eternity to behold the face of God.{% endsentence %}
 
@@ -308,7 +308,7 @@ toc:
 
 {% sentence 196 %}Personal revelation to spiritually sensitive people has been the pattern of God since the creation of mankind (Amos 3:7).{% endsentence %} {% sentence 197 %}Personal revelation is the only way you can know ultimate truth.{% endsentence %}
 
-## Promises to the Seeker
+<h2 id="promises-to-the-seeker">Promises to the Seeker</h2>
 
 {% sentence 198 %}As immortal beings, we have the right to choose our own destiny.{% endsentence %} {% sentence 199 %}God is intimately familiar with each of His children and knows beforehand what choices we will make, but He protects and preserves our freedom to make choices.{% endsentence %} {% sentence 200 %}The prophet Nephi declared, "Cheer up your hearts, and remember that ye are free to act for yourselves" (2 Nephi 10:23).{% endsentence %} {% sentence 201 %}The prophet Joshua challenged us to use our freedom and make a lasting decision without delay.{% endsentence %} {% sentence 202 %}He commanded, "Choose you this day whom ye will serve" (Joshua 24:15).{% endsentence %}
 
@@ -324,7 +324,7 @@ toc:
 
 {% sentence 227 %}If we do not give up the pursuit of truth and righteousness, we have promises from the Lord Jesus Christ.{% endsentence %} {% sentence 228 %}He taught: "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you: For every one that asketh receiveth; and he that seeketh findeth; and to him that knocketh it shall be opened" (Matthew 7:7–8).{% endsentence %} {% sentence 229 %}The resurrected Lord confirmed this promise and added: "Draw near unto me and I will draw near unto you; seek me diligently and ye shall find me" (D&C 88:63).{% endsentence %}
 
-## Two Paths to Confirmation
+<h2 id="two-paths-to-confirmation">Two Paths to Confirmation</h2>
 
 {% sentence 230 %}How can you know whether these things are true?{% endsentence %} {% sentence 231 %}Are these teachings merely the product of mankind's mortal fears?{% endsentence %} {% sentence 232 %}Are these ideas the result of our hopes and dreams for immortal glory?{% endsentence %} {% sentence 233 %}Or are they real?{% endsentence %} {% sentence 234 %}The answers to such questions can only be received by personal revelation from God, which requires the development of spirituality.{% endsentence %}
 
@@ -334,7 +334,7 @@ toc:
 
 {% sentence 244 %}If you find our writings to be of interest or of comfort, even if you can only wish that these teachings are true, ask God if these things are of Him.{% endsentence %} {% sentence 245 %}Pay attention to how you feel.{% endsentence %} {% sentence 246 %}Look for peace, hope, warmth in your heart, and a calm but absolute assurance in your mind.{% endsentence %} {% sentence 247 %}When these powerful yet peaceful sensations blossom in your soul, the power of God is testifying to your spirit of the truthfulness of these things.{% endsentence %}
 
-## Our Witness
+<h2 id="our-witness">Our Witness</h2>
 
 {% sentence 248 %}We return now to a principle taught earlier in this work, because the reader who has come this far stands in a different place than before.{% endsentence %} {% sentence 249 %}Having explored the nature of the human spirit, the gifts of God's Spirit, and the means by which revelation is received and confirmed, you are no longer considering these ideas in the abstract.{% endsentence %} {% sentence 250 %}You are being invited to act—to seek, to ask, to experiment upon the word.{% endsentence %} {% sentence 251 %}The disposition you bring to that invitation matters greatly.{% endsentence %} {% sentence 252 %}And so we offer this counsel once more, now as preparation for the search itself.{% endsentence %}
 
