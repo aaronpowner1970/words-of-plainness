@@ -41,11 +41,12 @@ toc:
     title: The Ceiling of the Natural Framework
   - id: our-witness
     title: Our Witness
-navigation:
-  prevChapter: "/chapters/02-our-search/"
-  prevTitle: "Our Search"
-  nextChapter: "/chapters/04-spiritual-knowledge/"
-  nextTitle: "Spiritual Knowledge"
+prevChapter:
+  url: "/chapters/02-our-search-for-meaning/"
+  title: "Chapter 2: Our Search for Meaning"
+nextChapter:
+  url: "/chapters/04-spiritual-knowledge/"
+  title: "Chapter 4: Spiritual Knowledge"
 discordChannelId: "1463835777141309506"
 
 lyrics: |
