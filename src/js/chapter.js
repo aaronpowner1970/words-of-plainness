@@ -294,7 +294,7 @@ const ChapterManager = {
     // Floating Action Bar
     initFloatingActionBar() {
         const bar = document.getElementById('floatingActionBar');
-        const dropdownBtn = document.getElementById('btnOtherFeatures');
+        const dropdownBtn = document.getElementById('btnLearningTools');
         const dropdown = document.getElementById('featuresDropdown');
         
         // Toggle dropdown
