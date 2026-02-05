@@ -1501,6 +1501,265 @@ p {
     }
 }
 
+/* --- How to Use Walkthrough Cards --- */
+.intro-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    color: var(--cream);
+}
+
+.walkthrough-cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.walkthrough-card {
+    background: var(--brown-rich);
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.walkthrough-card:hover {
+    border-color: rgba(196, 148, 58, 0.4);
+}
+
+.walkthrough-card.is-open {
+    border-color: var(--gold-primary);
+    box-shadow: var(--shadow-gold);
+}
+
+.walkthrough-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--transition-fast);
+}
+
+.walkthrough-header:hover {
+    background: rgba(196, 148, 58, 0.08);
+}
+
+.walkthrough-header:focus {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: -2px;
+}
+
+.walkthrough-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(196, 148, 58, 0.15);
+    border-radius: 50%;
+    transition: background var(--transition-fast);
+}
+
+.walkthrough-card.is-open .walkthrough-icon {
+    background: var(--gold-primary);
+}
+
+.walkthrough-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--gold-primary);
+    transition: color var(--transition-fast);
+}
+
+.walkthrough-card.is-open .walkthrough-icon svg {
+    color: var(--brown-deep);
+}
+
+.walkthrough-title {
+    flex: 1;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    margin: 0;
+}
+
+.walkthrough-toggle {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    transition: transform var(--transition-normal);
+}
+
+.walkthrough-toggle::before,
+.walkthrough-toggle::after {
+    content: '';
+    position: absolute;
+    background: var(--gold-primary);
+    border-radius: 2px;
+    transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+/* Horizontal line (always visible) */
+.walkthrough-toggle::before {
+    width: 14px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Vertical line (hidden when open) */
+.walkthrough-toggle::after {
+    width: 2px;
+    height: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.walkthrough-card.is-open .walkthrough-toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+}
+
+.walkthrough-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--transition-normal);
+}
+
+.walkthrough-card.is-open .walkthrough-content {
+    grid-template-rows: 1fr;
+}
+
+.walkthrough-content-inner {
+    overflow: hidden;
+}
+
+.walkthrough-list {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-sm) var(--space-lg) var(--space-lg);
+    padding-left: calc(40px + var(--space-md) + var(--space-lg));
+}
+
+.walkthrough-list li {
+    position: relative;
+    padding: var(--space-sm) 0;
+    padding-left: var(--space-md);
+    color: var(--cream);
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.1);
+}
+
+.walkthrough-list li:last-child {
+    border-bottom: none;
+}
+
+.walkthrough-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(var(--space-sm) + 0.5em);
+    width: 6px;
+    height: 6px;
+    background: var(--gold-primary);
+    border-radius: 50%;
+}
+
+.walkthrough-list strong {
+    color: var(--cream-soft);
+}
+
+/* CTA Buttons */
+.cta-buttons {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+}
+
+.btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--cream);
+    border: 2px solid var(--cream);
+}
+
+.btn-secondary:hover {
+    border-color: var(--gold-primary);
+    color: var(--gold-primary);
+}
+
+/* Walkthrough mobile responsive */
+@media (max-width: 768px) {
+    .walkthrough-header {
+        padding: var(--space-sm) var(--space-md);
+        gap: var(--space-sm);
+    }
+
+    .walkthrough-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .walkthrough-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .walkthrough-title {
+        font-size: 1.1rem;
+    }
+
+    .walkthrough-list {
+        padding: var(--space-xs) var(--space-md) var(--space-md);
+        padding-left: calc(36px + var(--space-sm) + var(--space-md));
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
 /* --- Print Styles --- */
 @media print {
     .header,

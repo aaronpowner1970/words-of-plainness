@@ -139,4 +139,59 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Walkthrough Cards - Expand/Collapse (Accordion)
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.walkthrough-card');
+
+    function closeAllCards() {
+        cards.forEach(c => {
+            c.classList.remove('is-open');
+            const h = c.querySelector('.walkthrough-header');
+            h?.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    cards.forEach(card => {
+        const header = card.querySelector('.walkthrough-header');
+
+        header?.addEventListener('click', () => {
+            const isOpen = card.classList.contains('is-open');
+
+            // Close all cards first (accordion behavior)
+            closeAllCards();
+
+            // If this card wasn't open, open it
+            if (!isOpen) {
+                card.classList.add('is-open');
+                header.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    // Handle deep linking - open card if URL has matching hash
+    function openCardFromHash() {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetCard = document.querySelector(`.walkthrough-card${hash}`);
+            if (targetCard) {
+                // Open the card
+                targetCard.classList.add('is-open');
+                const header = targetCard.querySelector('.walkthrough-header');
+                header?.setAttribute('aria-expanded', 'true');
+
+                // Smooth scroll to card after a brief delay for layout
+                setTimeout(() => {
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+    }
+
+    // Check hash on load
+    openCardFromHash();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', openCardFromHash);
+});
+
 console.log('Words of Plainness - Main scripts loaded');
