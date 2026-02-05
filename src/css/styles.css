@@ -1501,6 +1501,63 @@ p {
     }
 }
 
+/* --- User Guide Block (New Here page) --- */
+.user-guide-block {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    background: var(--brown-rich);
+    border: 1px solid rgba(196, 148, 58, 0.3);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.user-guide-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.user-guide-button:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-gold);
+}
+
+.user-guide-button svg {
+    flex-shrink: 0;
+}
+
+.user-guide-text {
+    color: var(--cream);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .user-guide-block {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-md);
+        padding: var(--space-md);
+    }
+
+    .user-guide-text {
+        font-size: 0.9rem;
+    }
+}
+
 /* --- How to Use Walkthrough Cards --- */
 .intro-text {
     font-size: 1.1rem;
