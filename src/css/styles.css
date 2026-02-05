@@ -1501,6 +1501,107 @@ p {
     }
 }
 
+/* --- About Page Collage Image --- */
+.about-collage-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-lg);
+}
+
+.about-collage {
+    max-width: 550px;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(196, 148, 58, 0.4);
+    box-shadow: var(--shadow-medium);
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.about-collage:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-gold);
+    border-color: var(--gold-primary);
+}
+
+/* --- Image Lightbox --- */
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.image-lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.image-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(42, 29, 20, 0.92);
+}
+
+.image-lightbox__content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.image-lightbox.is-open .image-lightbox__content {
+    transform: scale(1);
+}
+
+.image-lightbox__image {
+    display: block;
+    max-width: 90vw;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.image-lightbox__close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--gold-primary);
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.image-lightbox__close:hover {
+    color: var(--cream);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .about-collage {
+        max-width: 100%;
+    }
+
+    .image-lightbox__close {
+        top: -2rem;
+        right: 0;
+        font-size: 2rem;
+    }
+}
+
 /* --- User Guide Block (New Here page) --- */
 .user-guide-block {
     display: flex;

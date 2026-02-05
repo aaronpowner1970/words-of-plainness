@@ -11,6 +11,15 @@ permalink: /about/
     <div class="content-wrapper">
         <h2>About Brother Aaron</h2>
 
+        <div class="about-collage-wrapper">
+            <img
+                src="/assets/images/aaron-collage.png"
+                alt="Collage of Brother Aaron - teaching, traveling, and ministry moments"
+                class="about-collage"
+                id="aboutCollageImage"
+            >
+        </div>
+
         <p>
             I spent 26 years in the classroom teaching science to young people&mdash;helping them
             understand the natural world and discover the joy of asking good questions. Now,
@@ -237,3 +246,12 @@ permalink: /about/
         </p>
     </div>
 </section>
+
+<!-- Image Lightbox -->
+<div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <div class="image-lightbox__backdrop" id="imageLightboxBackdrop"></div>
+    <div class="image-lightbox__content">
+        <button class="image-lightbox__close" id="imageLightboxClose" aria-label="Close lightbox">&times;</button>
+        <img src="/assets/images/aaron-collage.png" alt="Collage of Brother Aaron" class="image-lightbox__image">
+    </div>
+</div>

@@ -139,6 +139,38 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Image Lightbox (About page collage)
+document.addEventListener('DOMContentLoaded', () => {
+    const collageImage = document.getElementById('aboutCollageImage');
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxClose = document.getElementById('imageLightboxClose');
+    const lightboxBackdrop = document.getElementById('imageLightboxBackdrop');
+
+    if (!collageImage || !lightbox) return;
+
+    function openLightbox() {
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    collageImage.addEventListener('click', openLightbox);
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxBackdrop?.addEventListener('click', closeLightbox);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+            closeLightbox();
+        }
+    });
+});
+
 // Walkthrough Cards - Expand/Collapse (Accordion)
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.walkthrough-card');
