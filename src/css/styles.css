@@ -1502,16 +1502,12 @@ p {
 }
 
 /* --- About Page Collage Image --- */
-.about-collage-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: var(--space-lg);
-}
-
 .about-collage {
-    max-width: 550px;
+    float: left;
+    max-width: 380px;
     width: 100%;
     height: auto;
+    margin: 0 1.5rem 1rem 0;
     border-radius: var(--radius-lg);
     border: 2px solid rgba(196, 148, 58, 0.4);
     box-shadow: var(--shadow-medium);
@@ -1592,7 +1588,10 @@ p {
 
 @media (max-width: 768px) {
     .about-collage {
+        float: none;
+        display: block;
         max-width: 100%;
+        margin: 0 auto 1.5rem auto;
     }
 
     .image-lightbox__close {
