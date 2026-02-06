@@ -2166,6 +2166,7 @@ h2[id], h3[id], [id^="section-"] {
     font-size: 0.85rem;
     cursor: pointer;
     white-space: nowrap;
+    text-decoration: none;
 }
 
 .fab-menu-item svg {
@@ -2185,11 +2186,11 @@ h2[id], h3[id], [id^="section-"] {
 @media (max-width: 768px) {
     .fab-lantern {
         display: flex;
-        bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+        bottom: calc(12rem + env(safe-area-inset-bottom, 0px));
     }
 
     .fab-menu {
-        bottom: calc(8.5rem + env(safe-area-inset-bottom, 0px));
+        bottom: calc(16rem + env(safe-area-inset-bottom, 0px));
     }
 
     .floating-action-bar {

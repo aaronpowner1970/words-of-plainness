@@ -552,11 +552,23 @@ const ChapterManager = {
             case 'listen':
                 this.showAudioPlayer();
                 break;
+            case 'overview':
+                this.openModal('overviewModal');
+                break;
+            case 'testimony':
+                this.openModal('testimonyModal');
+                break;
+            case 'infographic':
+                this.openModal('infographicModal');
+                break;
+            case 'slides':
+                this.openModal('slidesModal');
+                break;
             case 'toc':
                 this.openMobileTOC();
                 break;
-            case 'resources':
-                document.getElementById('studyResources')?.scrollIntoView({ behavior: 'smooth' });
+            case 'reflect':
+                document.getElementById('reflectionSection')?.scrollIntoView({ behavior: 'smooth' });
                 break;
         }
     },

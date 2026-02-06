@@ -439,6 +439,12 @@ p {
     transform: translateX(0);
 }
 
+/* Hide FAB behind mobile menu when open */
+.mobile-menu.active ~ main .fab-lantern,
+.mobile-menu.active ~ main .fab-menu {
+    display: none !important;
+}
+
 .mobile-menu-header {
     display: flex;
     justify-content: space-between;

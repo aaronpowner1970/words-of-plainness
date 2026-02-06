@@ -104,6 +104,7 @@ const AuthModal = {
     open(mode = 'signin') {
         this.mode = mode;
         this.updateUI();
+        if (this.modal) this.modal.style.display = '';
         this.modal?.classList.add('open');
         document.body.style.overflow = 'hidden';
         
@@ -113,6 +114,7 @@ const AuthModal = {
     
     close() {
         this.modal?.classList.remove('open');
+        if (this.modal) this.modal.style.display = 'none';
         document.body.style.overflow = '';
         this.clearError();
         this.form?.reset();
