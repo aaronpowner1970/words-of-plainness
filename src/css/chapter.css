@@ -1664,6 +1664,20 @@ h2[id], h3[id], [id^="section-"] {
     margin: 0.25rem 0;
 }
 
+/* Chapter Nav Arrows (top bar) */
+.chapter-nav-arrow {
+    display: flex;
+    align-items: center;
+    color: rgba(196, 148, 58, 0.5);
+    text-decoration: none;
+    padding: 0.4rem;
+    transition: color 0.2s ease;
+}
+
+.chapter-nav-arrow:hover {
+    color: var(--gold-primary);
+}
+
 /* Resume Prompt */
 .resume-prompt {
     position: fixed;

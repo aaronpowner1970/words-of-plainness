@@ -16,6 +16,13 @@
 
 <!-- Floating Action Bar (v3.0) - Phase 2 extraction pending -->
 <div class="floating-action-bar" id="floatingActionBar">
+    {% if prevChapter %}
+    <a href="{{ prevChapter.url }}" class="chapter-nav-arrow prev" title="Previous Chapter" aria-label="Previous Chapter">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </a>
+    {% endif %}
     <button class="action-pill primary" id="btnListenFloat">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9 18V5l12-2v13"></path>
@@ -78,4 +85,11 @@
             </a>
         </div>
     </div>
+    {% if nextChapter %}
+    <a href="{{ nextChapter.url }}" class="chapter-nav-arrow next" title="Next Chapter" aria-label="Next Chapter">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </a>
+    {% endif %}
 </div>
