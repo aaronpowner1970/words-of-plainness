@@ -527,22 +527,34 @@ const ChapterManager = {
         });
     },
     
-    // Mobile FAB
+    // Mobile FAB Bottom Sheet
     initMobileFAB() {
         const fab = document.getElementById('fabLantern');
-        const menu = document.getElementById('fabMenu');
-        
-        fab?.addEventListener('click', () => {
-            menu?.classList.toggle('open');
-            fab?.classList.toggle('active');
-        });
-        
-        menu?.querySelectorAll('[data-action]').forEach(item => {
+        const sheet = document.getElementById('fabSheet');
+        const overlay = document.getElementById('fabSheetOverlay');
+        const closeBtn = document.getElementById('fabSheetClose');
+
+        const openSheet = () => {
+            sheet?.classList.add('open');
+            overlay?.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeSheet = () => {
+            sheet?.classList.remove('open');
+            overlay?.classList.remove('open');
+            document.body.style.overflow = '';
+        };
+
+        fab?.addEventListener('click', openSheet);
+        overlay?.addEventListener('click', closeSheet);
+        closeBtn?.addEventListener('click', closeSheet);
+
+        sheet?.querySelectorAll('[data-action]').forEach(item => {
             item.addEventListener('click', () => {
                 const action = item.dataset.action;
+                closeSheet();
                 this.handleFABAction(action);
-                menu.classList.remove('open');
-                fab?.classList.remove('active');
             });
         });
     },
