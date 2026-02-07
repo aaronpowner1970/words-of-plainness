@@ -16,6 +16,10 @@ const MusicPlayer = {
     // DOM refs
     els: {},
 
+    // Alternate version state
+    altAudio: null,
+    altPlaying: null, // currently playing alt-entry element
+
     init() {
         this.audio = document.getElementById('musicAudio');
         if (!this.audio) return;
@@ -25,6 +29,7 @@ const MusicPlayer = {
         this.loadVolume();
         this.bindEvents();
         this.loadDurations();
+        this.initAlternates();
 
         console.log('MusicPlayer initialized with', this.tracks.length, 'tracks');
     },
@@ -181,6 +186,9 @@ const MusicPlayer = {
             this.togglePlay();
             return;
         }
+
+        // Stop any playing alternate version
+        this.stopAltPlayback();
 
         this.audio.src = track.src;
         this.audio.play().catch(() => {
@@ -445,6 +453,95 @@ const MusicPlayer = {
         } else {
             lyricsContent.innerHTML = '<p class="no-lyrics">Select a song to view lyrics</p>';
         }
+    },
+
+    // =========================================
+    // Alternate Versions
+    // =========================================
+
+    initAlternates() {
+        // Toggle expand/collapse
+        document.querySelectorAll('.alt-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const list = btn.nextElementSibling;
+                const expanded = btn.classList.toggle('expanded');
+                list.classList.toggle('expanded', expanded);
+                btn.setAttribute('aria-expanded', expanded);
+            });
+        });
+
+        // Inline players
+        document.querySelectorAll('.alt-entry').forEach(entry => {
+            const playBtn = entry.querySelector('.alt-play-btn');
+            const seek = entry.querySelector('.alt-seek');
+            const fill = entry.querySelector('.alt-progress-fill');
+            const timeEl = entry.querySelector('.alt-time');
+            const src = entry.dataset.src;
+
+            playBtn.addEventListener('click', () => {
+                // If this alternate is already playing, toggle pause
+                if (this.altPlaying === entry && this.altAudio && !this.altAudio.paused) {
+                    this.altAudio.pause();
+                    playBtn.classList.remove('playing');
+                    return;
+                }
+
+                // Stop any other playing alternate
+                this.stopAltPlayback();
+
+                // Pause main player if playing
+                if (!this.audio.paused) {
+                    this.audio.pause();
+                }
+
+                // Create or reuse audio
+                if (!this.altAudio) {
+                    this.altAudio = new Audio();
+                    this.altAudio.addEventListener('timeupdate', () => {
+                        if (!this.altAudio.duration || !this.altPlaying) return;
+                        const pct = (this.altAudio.currentTime / this.altAudio.duration) * 100;
+                        const curFill = this.altPlaying.querySelector('.alt-progress-fill');
+                        const curSeek = this.altPlaying.querySelector('.alt-seek');
+                        const curTime = this.altPlaying.querySelector('.alt-time');
+                        if (curFill) curFill.style.width = pct + '%';
+                        if (curSeek) curSeek.value = pct;
+                        if (curTime) curTime.textContent = this.formatTime(this.altAudio.currentTime);
+                    });
+                    this.altAudio.addEventListener('ended', () => {
+                        this.stopAltPlayback();
+                    });
+                }
+
+                this.altAudio.src = src;
+                this.altAudio.play().catch(() => {});
+                this.altPlaying = entry;
+                playBtn.classList.add('playing');
+            });
+
+            // Seek
+            seek.addEventListener('input', (e) => {
+                if (this.altAudio && this.altAudio.duration && this.altPlaying === entry) {
+                    this.altAudio.currentTime = (e.target.value / 100) * this.altAudio.duration;
+                }
+            });
+        });
+    },
+
+    stopAltPlayback() {
+        if (this.altAudio && !this.altAudio.paused) {
+            this.altAudio.pause();
+        }
+        if (this.altPlaying) {
+            const btn = this.altPlaying.querySelector('.alt-play-btn');
+            if (btn) btn.classList.remove('playing');
+            const fill = this.altPlaying.querySelector('.alt-progress-fill');
+            if (fill) fill.style.width = '0%';
+            const seek = this.altPlaying.querySelector('.alt-seek');
+            if (seek) seek.value = 0;
+            const time = this.altPlaying.querySelector('.alt-time');
+            if (time) time.textContent = '0:00';
+        }
+        this.altPlaying = null;
     },
 
     // =========================================

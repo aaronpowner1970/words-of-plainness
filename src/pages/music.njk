@@ -95,6 +95,7 @@ permalink: /music/
     <div class="music-header">
         <h1 class="music-title">Sacred Americana Testimonies</h1>
         <p class="music-subtitle">Original songs by Aaron Powner, inspired by the themes of each chapter</p>
+        <p class="music-intro-note">Each chapter's musical testimony is an original song inspired by its themes. Some chapters have alternate arrangements — tap "More Versions" on any song to explore them.</p>
     </div>
 
     <details class="music-lyrics-panel" id="lyricsPanel">
@@ -161,6 +162,39 @@ permalink: /music/
                         </a>
                     </td>
                 </tr>
+                {%- if chapter.data.audio.testimony.alternates and chapter.data.audio.testimony.alternates.length > 0 -%}
+                <tr class="alt-versions-row">
+                    <td colspan="7">
+                        <button class="alt-toggle" aria-expanded="false">
+                            <span class="alt-toggle-arrow">&#9656;</span>
+                            More Versions ({{ chapter.data.audio.testimony.alternates.length }})
+                        </button>
+                        <div class="alt-list">
+                            {%- for alt in chapter.data.audio.testimony.alternates -%}
+                            <div class="alt-entry" data-src="/assets/audio/{{ alt.file }}">
+                                <span class="alt-label">{{ alt.label }}</span>
+                                <div class="alt-player">
+                                    <button class="alt-play-btn" aria-label="Play {{ alt.label }}">
+                                        <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none">
+                                            <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                                        </svg>
+                                        <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none" style="display:none">
+                                            <rect x="5" y="3" width="5" height="18"></rect>
+                                            <rect x="14" y="3" width="5" height="18"></rect>
+                                        </svg>
+                                    </button>
+                                    <div class="alt-progress-track">
+                                        <div class="alt-progress-fill"></div>
+                                        <input type="range" class="alt-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek {{ alt.label }}">
+                                    </div>
+                                    <span class="alt-time">0:00</span>
+                                </div>
+                            </div>
+                            {%- endfor -%}
+                        </div>
+                    </td>
+                </tr>
+                {%- endif -%}
                 {%- endif -%}
                 {%- endfor -%}
             </tbody>
