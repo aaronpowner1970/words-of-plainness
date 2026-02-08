@@ -87,15 +87,13 @@ const AudioSync = {
     highlightSentence(index) {
         // Remove previous highlight
         this.clearHighlight();
-        
-        // Add new highlight
-        const sentence = document.querySelector(`.sentence[data-index="${index}"]`);
-        if (sentence) {
-            sentence.classList.add('highlighted');
-            
-            if (this.autoScrollEnabled) {
-                this.scrollToSentence(sentence);
-            }
+
+        // Add new highlight to ALL elements sharing this data-index
+        const sentences = document.querySelectorAll(`.sentence[data-index="${index}"]`);
+        sentences.forEach(s => s.classList.add('highlighted'));
+
+        if (sentences.length > 0 && this.autoScrollEnabled) {
+            this.scrollToSentence(sentences[0]);
         }
     },
     
