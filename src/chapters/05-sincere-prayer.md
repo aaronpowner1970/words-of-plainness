@@ -20,6 +20,17 @@ audio:
     file: "05.1_Souls_Sincere_Desire.mp3"
     title: "The Soul's Sincere Desire"
     description: "A soul worship piano ballad on learning to speak to God — and hear Him answer"
+    alternates:
+      - file: "05.2_Souls_Sincere_Desire_Contemporary_Christian.mp3"
+        label: "Contemporary Christian Worship — Anthemic and Congregational"
+      - file: "05.3_Souls_Sincere_Desire_Cinematic_Inspirational.mp3"
+        label: "Cinematic Orchestral — Piano-Led with Full Orchestra Build"
+      - file: "05.4_Souls_Sincere_Desire_Celtic_Worship.mp3"
+        label: "Celtic Worship — Harp, Pipes, and Thin Places Spirituality"
+      - file: "05.5_Souls_Sincere_Desire_Americana_Folk.mp3"
+        label: "Americana Folk — Fingerpicked Guitar and Front Porch Testimony"
+      - file: "05.6_Souls_Sincere_Desire_Broadway_Ballad.mp3"
+        label: "Broadway Ballad — Theatrical Journey from Doubt to Discovery"
 
 pdf: "chapter-05-sincere-prayer.pdf"
 infographic: "chapter-05-infographic.png"
