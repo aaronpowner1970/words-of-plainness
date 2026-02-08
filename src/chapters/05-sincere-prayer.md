@@ -91,13 +91,11 @@ toc:
 
 <h2 id="a-pattern-for-meaningful-prayer">{% sentence 19 %}A Pattern for Meaningful Prayer{% endsentence %}</h2>
 
-{% sentence 19 %}
-- Speak directly to God, and address Him respectfully (e.g., Father in Heaven).
-- Express gratitude for blessings while in a mindset of worship.
-- Share your burdens, for He is a Counselor and a Comforter.
-- Ask for forgiveness from our sins, and for help to forgive others of their sins against us.
-- Plead for desired knowledge and blessings in an attitude of humility and patience.
-{% endsentence %}
+- {% sentence 19 %}Speak directly to God, and address Him respectfully (e.g., Father in Heaven).{% endsentence %}
+- {% sentence 19 %}Express gratitude for blessings while in a mindset of worship.{% endsentence %}
+- {% sentence 19 %}Share your burdens, for He is a Counselor and a Comforter.{% endsentence %}
+- {% sentence 19 %}Ask for forgiveness from our sins, and for help to forgive others of their sins against us.{% endsentence %}
+- {% sentence 19 %}Plead for desired knowledge and blessings in an attitude of humility and patience.{% endsentence %}
 - {% sentence 20 %}Pray for others—for their needs, their struggles, and their salvation.{% endsentence %}
 - {% sentence 21 %}Pray all things in the name of Jesus Christ (Colossians 3:17).{% endsentence %}
 - {% sentence 22 %}Conclude with the word "Amen," which Christians adopted from the ancient Hebrew אָמֵן ('āmēn), meaning "truth" or "certainty," used as a sincere expression of belief in what has been said.{% endsentence %}
