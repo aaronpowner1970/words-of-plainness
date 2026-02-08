@@ -15,6 +15,11 @@ audio:
     file: 03.1_Two_Halves_of_a_Whole_Celtic_Ballad.mp3
     title: "Two Halves of a Whole"
     description: "A Celtic ballad testimony on the unity of academic and spiritual knowledge"
+    alternates:
+      - file: "03.2_Two_Halves_of_a_Whole_Americana_Folk.mp3"
+        label: "Americana Folk"
+      - file: "03.3_Two_Halves_of_a_Whole_Classical_Crossover.mp3"
+        label: "Classical Crossover"
 pdf: WoP_Ch03_Academic_Knowledge.pdf
 infographic: chapter-03-infographic.png
 slides:
