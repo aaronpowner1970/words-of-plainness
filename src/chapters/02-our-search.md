@@ -20,6 +20,11 @@ audio:
     file: "02_1_Our_Search_-_Sacred_Americana_Testimony.mp3"
     title: "Our Search"
     description: "The universal longing for meaning and connection"
+    alternates:
+      - file: "02.2_Our_Search_Cinematic Inspirational.mp3"
+        label: "Cinematic Inspirational"
+      - file: "02.3_Our_Search_Celtic_Worship.mp3"
+        label: "Celtic Worship"
 
 pdf: "WoP_Ch02_Our_Search.pdf"
 infographic: "WoP_Ch02_Our_Search_Infographic.png"
