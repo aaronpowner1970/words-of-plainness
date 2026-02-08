@@ -91,14 +91,16 @@ toc:
 
 <h2 id="a-pattern-for-meaningful-prayer">{% sentence 19 %}A Pattern for Meaningful Prayer{% endsentence %}</h2>
 
-- Speak directly to God, and address Him respectfully (e.g., Father in Heaven).
-- Express gratitude for blessings while in a mindset of worship.
-- Share your burdens, for He is a Counselor and a Comforter.
-- Ask for forgiveness from our sins, and for help to forgive others of their sins against us.
-- Plead for desired knowledge and blessings in an attitude of humility and patience.
-- {% sentence 20 %}Pray for others—for their needs, their struggles, and their salvation.{% endsentence %}
-- {% sentence 21 %}Pray all things in the name of Jesus Christ (Colossians 3:17).{% endsentence %}
-- {% sentence 22 %}Conclude with the word "Amen," which Christians adopted from the ancient Hebrew אָמֵן ('āmēn), meaning "truth" or "certainty," used as a sincere expression of belief in what has been said.{% endsentence %}
+<ul>
+<li>{% sentence 19 %}Speak directly to God, and address Him respectfully (e.g., Father in Heaven).{% endsentence %}</li>
+<li>{% sentence 19 %}Express gratitude for blessings while in a mindset of worship.{% endsentence %}</li>
+<li>{% sentence 19 %}Share your burdens, for He is a Counselor and a Comforter.{% endsentence %}</li>
+<li>{% sentence 19 %}Ask for forgiveness from our sins, and for help to forgive others of their sins against us.{% endsentence %}</li>
+<li>{% sentence 19 %}Plead for desired knowledge and blessings in an attitude of humility and patience.{% endsentence %}</li>
+<li>{% sentence 20 %}Pray for others—for their needs, their struggles, and their salvation.{% endsentence %}</li>
+<li>{% sentence 21 %}Pray all things in the name of Jesus Christ (Colossians 3:17).{% endsentence %}</li>
+<li>{% sentence 22 %}Conclude with the word "Amen," which Christians adopted from the ancient Hebrew אָמֵן ('āmēn), meaning "truth" or "certainty," used as a sincere expression of belief in what has been said.{% endsentence %}</li>
+</ul>
 
 {% sentence 23 %}Latter-day Saints direct their prayers to God the Father, in the name of His Son, Jesus Christ.{% endsentence %} {% sentence 24 %}This is not merely tradition; it is the pattern the Savior Himself established.{% endsentence %} {% sentence 25 %}When the disciples asked Him how to pray, He taught them to begin, "Our Father who art in heaven" (JST Matthew 6:9).{% endsentence %} {% sentence 26 %}Christ is our Mediator and Advocate with the Father (D&C 45:3), and it is through His name and His atoning sacrifice that we are granted access to the Father's presence in prayer.{% endsentence %} {% sentence 27 %}We pray to the Father, through the Son, by the power of the Holy Ghost.{% endsentence %}
 
