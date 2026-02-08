@@ -23,6 +23,8 @@ audio:
     alternates:
       - file: "01_2_Introduction_to_Plainness_Cinematic_Inspirational.mp3"
         label: "Cinematic Inspirational — Piano-Led with Dramatic Orchestral Build"
+      - file: "01_3_Introduction_to_Plainness_Americana_Folk_Female_Vocal.mp3"
+        label: "Americana Folk — Confident Female Mezzo-Soprano"
 
 pdf: "WoP_Ch01_Introduction.pdf"
 infographic: "WoP_Ch01_Introduction_Infographic.png"
