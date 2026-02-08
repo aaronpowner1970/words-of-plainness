@@ -44,6 +44,76 @@ prevChapter:
 
 discordChannelId: ""
 
+lyrics: |
+  <p class="section"><strong>[Verse 1]</strong></p>
+  <p class="verse">I don't have pretty words or practiced speech,<br>
+  No memorized petition, polished bright.<br>
+  Just everything that's tangled in my heart—<br>
+  The gratitude, the worry, and the fight.<br>
+  He told me God don't care about the language,<br>
+  The Lord looks past the stumblings of the soul.<br>
+  So I speak the way a child speaks to a Father—<br>
+  Honest, reaching, longing to be whole.</p>
+  <p class="section"><strong>[Chorus]</strong></p>
+  <p class="chorus">Prayer is the soul's sincere desire,<br>
+  The first breath, and the last amen.<br>
+  On bended knees or striving through the dark,<br>
+  Just talk to Him — and then<br>
+  Be still, and learn to listen,<br>
+  For the Spirit speaks within.<br>
+  The Father hears you, every word—<br>
+  So pour your whole heart out.</p>
+  <p class="section"><strong>[Verse 2]</strong></p>
+  <p class="verse">Sometimes I bow my head before the sunrise.<br>
+  Sometimes I cry for help with no time to kneel.<br>
+  Sometimes it's just a whisper while I'm working—<br>
+  A constant prayer for everything I feel.<br>
+  He said to pray in closets, not for show,<br>
+  To come with real intent and not with pride.<br>
+  So here behind the door, I bring my burdens,<br>
+  And lay them down with nothing left to hide.</p>
+  <p class="section"><strong>[Chorus]</strong></p>
+  <p class="chorus">Prayer is the soul's sincere desire,<br>
+  The first breath, and the last amen.<br>
+  On bended knees or striving through the dark,<br>
+  Just talk to Him — and then<br>
+  Be still, and learn to listen,<br>
+  For the Spirit speaks within.<br>
+  The Father hears you, every word—<br>
+  So pour your whole heart out.</p>
+  <p class="section"><strong>[Bridge]</strong></p>
+  <p class="verse">I used to think that prayer was only asking,<br>
+  Sending words like postcards, never received.<br>
+  But then I paused — and something stirred inside me,<br>
+  A still, small voice I'd never learned to heed.</p>
+  <p class="verse">He speaks to mind and heart at once,<br>
+  A burning and a peace.<br>
+  The Spirit carries back His word<br>
+  Until the questions cease.<br>
+  This is how the Father answers—<br>
+  Not in thunder, but in light.<br>
+  He said, "Ask, and I will show you."<br>
+  And He meant it. And He's right.</p>
+  <p class="section"><strong>[Final Chorus]</strong></p>
+  <p class="chorus">Prayer is the soul's sincere desire,<br>
+  The offering that never ends.<br>
+  He knew my needs before I spoke—<br>
+  And still He calls me friend.<br>
+  So speak, and then be still and listen,<br>
+  For the heavens aren't sealed tight.<br>
+  The God who spoke to prophets old<br>
+  Still speaks from the light.</p>
+  <p class="section"><strong>[Outro]</strong></p>
+  <p class="verse">Pray always… listen well.<br>
+  Think things over, and then ask God.<br>
+  He'll cause your heart to burn<br>
+  if it's right and true.</p>
+  <p class="verse">He's the same God He's always been.<br>
+  And He is waiting for you now…<br>
+  when you're ready.</p>
+  <p class="verse">In the name of Jesus Christ,<br>
+  Amen.</p>
+
 toc:
   - id: the-souls-sincere-desire
     title: "The Soul's Sincere Desire"
