@@ -19,7 +19,7 @@ audio:
   testimony:
     file: "05.1_Souls_Sincere_Desire.mp3"
     title: "The Soul's Sincere Desire"
-    description: "A Sacred Americana testimony on the nature and power of sincere prayer"
+    description: "A soul worship piano ballad on learning to speak to God — and hear Him answer"
 
 pdf: "chapter-05-sincere-prayer.pdf"
 infographic: "chapter-05-infographic.png"
