@@ -221,33 +221,8 @@ lyrics: |
   In the name of Jesus Christ. Amen.</p>
 ---
 
-<div class="chorus-inset">
-
-<h2 id="discipleship-chorus" class="chorus-heading">{% sentence 0 %}A Discipleship Chorus{% endsentence %}</h2>
-
-<div class="chorus-movement">
-<p class="chorus-label">{% sentence 1 %}*[The Reception]:*{% endsentence %}</p>
-<p class="chorus-line">{% sentence 2 %}*I have tasted the Light, Grace of the Living Son of God, and my heart is full, my heart is full.*{% endsentence %}</p>
-</div>
-
-<div class="chorus-movement">
-<p class="chorus-label">{% sentence 3 %}*[The Transformation]:*{% endsentence %}</p>
-<p class="chorus-line">{% sentence 4 %}*His truth rises in me like the morning sun, and it calls me to move, oh, it calls me to move.*{% endsentence %}</p>
-</div>
-
-<div class="chorus-movement">
-<p class="chorus-label">{% sentence 5 %}*[The Consecration]:*{% endsentence %}</p>
-<p class="chorus-line">{% sentence 6 %}*I will dance before the Lord with all the life He's given me. I'll use these hands to bear His light.*{% endsentence %}</p>
-</div>
-
-<div class="chorus-movement">
-<p class="chorus-label">{% sentence 7 %}*[The Testimony]:*{% endsentence %}</p>
-<p class="chorus-line">{% sentence 8 %}*Now I'm reborn, now I'm free.*{% endsentence %}</p>
-</div>
-
-</div>
-
 <style>
+/* — Discipleship Chorus Inset — */
 .chorus-inset {
   margin: 2rem auto 0;
   max-width: 640px;
@@ -316,7 +291,7 @@ lyrics: |
     font-size: 0.95rem !important;
   }
 }
-</style>
+/* — Spoken Word Player — */
 .spoken-word-card {
   margin: 2.5rem auto;
   max-width: 640px;
@@ -439,6 +414,32 @@ lyrics: |
   margin-bottom: 0;
 }
 </style>
+
+<div class="chorus-inset">
+
+<h2 id="discipleship-chorus" class="chorus-heading">{% sentence 0 %}A Discipleship Chorus{% endsentence %}</h2>
+
+<div class="chorus-movement">
+<p class="chorus-label">{% sentence 1 %}[The Reception]:{% endsentence %}</p>
+<p class="chorus-line">{% sentence 2 %}I have tasted the Light, Grace of the Living Son of God, and my heart is full, my heart is full.{% endsentence %}</p>
+</div>
+
+<div class="chorus-movement">
+<p class="chorus-label">{% sentence 3 %}[The Transformation]:{% endsentence %}</p>
+<p class="chorus-line">{% sentence 4 %}His truth rises in me like the morning sun, and it calls me to move, oh, it calls me to move.{% endsentence %}</p>
+</div>
+
+<div class="chorus-movement">
+<p class="chorus-label">{% sentence 5 %}[The Consecration]:{% endsentence %}</p>
+<p class="chorus-line">{% sentence 6 %}I will dance before the Lord with all the life He's given me. I'll use these hands to bear His light.{% endsentence %}</p>
+</div>
+
+<div class="chorus-movement">
+<p class="chorus-label">{% sentence 7 %}[The Testimony]:{% endsentence %}</p>
+<p class="chorus-line">{% sentence 8 %}Now I'm reborn, now I'm free.{% endsentence %}</p>
+</div>
+
+</div>
 
 <div class="spoken-word-card" id="spoken-word-player">
   <button class="spoken-word-toggle" onclick="this.closest('.spoken-word-card').classList.toggle('open')" aria-expanded="false" aria-controls="spoken-word-content">
