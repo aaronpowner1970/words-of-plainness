@@ -908,10 +908,22 @@ h2[id], h3[id], [id^="section-"] {
     margin-bottom: 0.5em;
 }
 
-/* Reflection Section */
+/* Reflection Section — Inverted (cream background, dark text) */
 .reflection-section {
-    background: var(--brown-rich);
-    padding: var(--space-xl) var(--space-md);
+    background: var(--cream);
+    padding: 3rem var(--space-md);
+    border-top: 3px solid var(--gold-primary);
+    border-bottom: 3px solid var(--gold-primary);
+}
+
+.reflection-section .section-title {
+    color: var(--gold-primary);
+    border-bottom-color: rgba(196, 148, 58, 0.4);
+}
+
+.reflection-section .section-subtitle {
+    color: var(--brown-deep);
+    opacity: 0.8;
 }
 
 .reflection-container {
@@ -940,6 +952,7 @@ h2[id], h3[id], [id^="section-"] {
 
 .reflection-intro p {
     font-size: 0.95rem;
+    color: var(--brown-deep);
     opacity: 0.85;
     margin: 0;
 }
@@ -972,17 +985,23 @@ h2[id], h3[id], [id^="section-"] {
     font-size: 0.9rem;
 }
 
+.reflection-section .step-header h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--brown-deep);
+}
+
 .step-title {
     font-family: var(--font-serif);
     font-size: 1.15rem;
-    color: var(--cream);
+    color: var(--brown-deep);
 }
 
 .step-prompt {
     font-style: italic;
-    font-size: 0.95rem;
-    color: var(--cream);
-    opacity: 0.85;
+    font-size: 1.05rem;
+    color: var(--brown-deep);
+    opacity: 0.75;
     margin-bottom: 0.75rem;
     padding-left: calc(28px + var(--space-sm));
 }
@@ -991,44 +1010,45 @@ h2[id], h3[id], [id^="section-"] {
     width: 100%;
     min-height: 100px;
     padding: var(--space-sm);
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(196, 148, 58, 0.2);
+    background: #ffffff;
+    border: 2px solid var(--gold-primary);
     border-radius: 4px;
-    color: var(--cream);
+    color: var(--brown-deep);
     font-family: var(--font-sans);
     font-size: 1rem;
     resize: vertical;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .step-textarea:focus {
     outline: none;
     border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px rgba(196, 148, 58, 0.2);
 }
 
 .step-textarea::placeholder {
-    color: var(--cream);
-    opacity: 0.5;
+    color: var(--brown-deep);
+    opacity: 0.4;
 }
 
 .reflection-input {
     width: 100%;
     min-height: 100px;
     padding: var(--space-sm);
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(196, 148, 58, 0.2);
+    background: #ffffff;
+    border: 2px solid var(--gold-primary);
     border-radius: 4px;
-    color: var(--cream);
+    color: var(--brown-deep);
     font-family: var(--font-sans);
     font-size: 1rem;
     resize: vertical;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .reflection-error {
-    color: #f8a0a0;
-    background: rgba(200, 0, 0, 0.15);
-    border: 1px solid rgba(200, 0, 0, 0.3);
+    color: #a03030;
+    background: rgba(200, 0, 0, 0.08);
+    border: 1px solid rgba(200, 0, 0, 0.25);
     border-radius: 4px;
     padding: 0.5rem 0.75rem;
     margin-top: 0.4rem;
@@ -1038,11 +1058,12 @@ h2[id], h3[id], [id^="section-"] {
 .reflection-input:focus {
     outline: none;
     border-color: var(--gold-primary);
+    box-shadow: 0 0 0 3px rgba(196, 148, 58, 0.2);
 }
 
 .reflection-input::placeholder {
-    color: var(--cream);
-    opacity: 0.5;
+    color: var(--brown-deep);
+    opacity: 0.4;
 }
 
 .reflection-footer {
@@ -1050,7 +1071,7 @@ h2[id], h3[id], [id^="section-"] {
     justify-content: space-between;
     align-items: center;
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(196, 148, 58, 0.15);
+    border-top: 1px solid rgba(196, 148, 58, 0.4);
     margin-top: var(--space-sm);
     flex-wrap: wrap;
     gap: var(--space-sm);
@@ -1061,7 +1082,7 @@ h2[id], h3[id], [id^="section-"] {
     align-items: center;
     gap: 0.4rem;
     font-size: 0.85rem;
-    color: var(--cream);
+    color: var(--brown-deep);
     opacity: 0.7;
 }
 
@@ -1085,7 +1106,7 @@ h2[id], h3[id], [id^="section-"] {
 
 .reflection-btn.primary {
     background: var(--gold-primary);
-    color: var(--brown-deep);
+    color: var(--brown-rich);
     font-weight: 600;
 }
 
@@ -1095,8 +1116,8 @@ h2[id], h3[id], [id^="section-"] {
 
 .reflection-btn.secondary {
     background: transparent;
-    color: var(--cream);
-    border: 1px solid rgba(232, 220, 196, 0.3);
+    color: var(--brown-deep);
+    border: 1px solid rgba(61, 43, 31, 0.3);
 }
 
 .reflection-btn.secondary:hover {
@@ -1115,6 +1136,7 @@ h2[id], h3[id], [id^="section-"] {
 .reflection-note {
     text-align: center;
     font-size: 0.85rem;
+    color: var(--brown-deep);
     opacity: 0.6;
     margin-top: var(--space-md);
 }
