@@ -246,6 +246,12 @@ const ReadingProgress = {
             this.dismissResumeBanner();
         }, { once: true });
 
+        document.getElementById('progressResumeReflect')?.addEventListener('click', () => {
+            this.dismissResumeBanner();
+            document.getElementById('reflectionSection')?.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => document.getElementById('reflection1')?.focus(), 800);
+        }, { once: true });
+
         this.autoDismissTimer = setTimeout(() => this.dismissResumeBanner(), 10000);
     },
 

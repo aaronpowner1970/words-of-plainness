@@ -622,18 +622,25 @@ const ChapterManager = {
         const prompt = document.getElementById('resumePrompt');
         const yesBtn = document.getElementById('resumeYes');
         const noBtn = document.getElementById('resumeNo');
-        
+        const reflectBtn = document.getElementById('resumeReflect');
+
         prompt.style.display = 'block';
-        
+
         yesBtn?.addEventListener('click', () => {
             window.scrollTo({ top: position, behavior: 'smooth' });
             this.hideResumePrompt();
         });
-        
+
         noBtn?.addEventListener('click', () => {
             this.hideResumePrompt();
         });
-        
+
+        reflectBtn?.addEventListener('click', () => {
+            this.hideResumePrompt();
+            document.getElementById('reflectionSection')?.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => document.getElementById('reflection1')?.focus(), 800);
+        });
+
         // Auto-dismiss after 8 seconds
         setTimeout(() => this.hideResumePrompt(), 8000);
     },

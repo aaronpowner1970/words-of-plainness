@@ -1728,11 +1728,35 @@ h2[id], h3[id], [id^="section-"] {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 .resume-actions {
     display: flex;
     gap: 0.5rem;
+}
+
+.resume-reflect-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(196, 148, 58, 0.2);
+    margin: 0.25rem 0;
+}
+
+.resume-btn.outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    color: var(--gold-primary);
+    border: 1px solid rgba(196, 148, 58, 0.4);
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+}
+
+.resume-btn.outline:hover {
+    background: rgba(196, 148, 58, 0.15);
+    border-color: var(--gold-primary);
 }
 
 .resume-btn {
@@ -2701,6 +2725,27 @@ h2[id], h3[id], [id^="section-"] {
 .progress-resume-btn.secondary:hover {
     border-color: var(--gold-primary);
     color: var(--gold-primary);
+}
+
+.progress-resume-reflect-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(196, 148, 58, 0.2);
+    margin: 0.4rem 0 0.25rem;
+}
+
+.progress-resume-btn.outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    color: var(--gold-primary);
+    border: 1px solid rgba(196, 148, 58, 0.4);
+}
+
+.progress-resume-btn.outline:hover {
+    background: rgba(196, 148, 58, 0.15);
+    border-color: var(--gold-primary);
 }
 
 /* =========================================
