@@ -1819,50 +1819,29 @@ h2[id], h3[id], [id^="section-"] {
     color: var(--gold-primary);
 }
 
-/* Study Resources (grid layout for templates) */
-.study-resources {
+/* Bottom Learning Tools Dropdown */
+.bottom-learning-tools {
+    display: flex;
+    justify-content: center;
     padding: var(--space-xl) var(--space-md);
     background: var(--brown-rich);
 }
 
-.study-resources .section-title {
-    text-align: center;
+.bottom-learning-tools .dropdown-container {
+    position: relative;
 }
 
-.section-subtitle {
-    text-align: center;
-    font-size: 0.95rem;
-    color: var(--cream);
-    opacity: 0.7;
-    margin-bottom: var(--space-lg);
-}
-
-.resources-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--space-md);
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.resources-grid .resource-card {
-    flex-direction: column;
-    text-align: center;
-    padding: var(--space-lg) var(--space-md);
-}
-
-.resources-grid .resource-content h3 {
-    font-family: var(--font-serif);
+.bottom-learning-tools .action-pill {
     font-size: 1rem;
-    color: var(--cream);
-    margin-bottom: 0.25rem;
+    padding: 0.75rem 1.5rem;
 }
 
-.resources-grid .resource-content p {
-    font-size: 0.85rem;
-    color: var(--cream);
-    opacity: 0.7;
-    margin: 0;
+/* Dropup modifier - opens menu upward */
+.dropdown-menu.dropup {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
 }
 
 /* Discord Section */

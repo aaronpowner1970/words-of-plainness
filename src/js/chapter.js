@@ -296,24 +296,46 @@ const ChapterManager = {
         const bar = document.getElementById('floatingActionBar');
         const dropdownBtn = document.getElementById('btnLearningTools');
         const dropdown = document.getElementById('featuresDropdown');
-        
-        // Toggle dropdown
+
+        // Bottom Learning Tools dropdown
+        const bottomBtn = document.getElementById('btnLearningToolsBottom');
+        const bottomDropdown = document.getElementById('bottomFeaturesDropdown');
+
+        // Toggle top dropdown
         dropdownBtn?.addEventListener('click', (e) => {
             e.stopPropagation();
+            bottomDropdown?.classList.remove('open');
             dropdown?.classList.toggle('open');
         });
-        
-        // Close dropdown on outside click
+
+        // Toggle bottom dropdown
+        bottomBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown?.classList.remove('open');
+            bottomDropdown?.classList.toggle('open');
+        });
+
+        // Close all dropdowns on outside click
         document.addEventListener('click', () => {
             dropdown?.classList.remove('open');
+            bottomDropdown?.classList.remove('open');
         });
-        
-        // Handle dropdown items
+
+        // Handle dropdown items (top)
         dropdown?.querySelectorAll('[data-action]').forEach(item => {
             item.addEventListener('click', () => {
                 const action = item.dataset.action;
                 this.handleFeatureAction(action);
                 dropdown.classList.remove('open');
+            });
+        });
+
+        // Handle dropdown items (bottom)
+        bottomDropdown?.querySelectorAll('[data-action]').forEach(item => {
+            item.addEventListener('click', () => {
+                const action = item.dataset.action;
+                this.handleFeatureAction(action);
+                bottomDropdown.classList.remove('open');
             });
         });
     },

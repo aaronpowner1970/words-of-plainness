@@ -1,84 +1,57 @@
-{# Study Resources Section - cards for PDF, overview, testimony, etc. #}
+{# Bottom Learning Tools Dropdown - mirrors the floating action bar's Learning Tools menu #}
 
-<section class="study-resources" id="studyResources">
-    <h2 class="section-title">Study Resources</h2>
-    <p class="section-subtitle">Deepen your understanding with these supplementary materials</p>
-    
-    <div class="resources-grid">
-        <!-- PDF Download -->
-        <a href="/assets/pdf/{{ pdf }}" class="resource-card" download>
-            <div class="resource-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-            </div>
-            <div class="resource-content">
-                <h3>Download Chapter</h3>
-                <p>PDF format for offline reading</p>
-            </div>
-        </a>
-        
-        <!-- Chapter Podcast -->
-        <button class="resource-card" data-modal="overview">
-            <div class="resource-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"></polygon>
-                </svg>
-            </div>
-            <div class="resource-content">
-                <h3>Chapter Podcast</h3>
-                <p>Usually a brief summary in interview format</p>
-            </div>
+<section class="bottom-learning-tools" id="bottomLearningTools">
+    <div class="dropdown-container">
+        <button class="action-pill primary" id="btnLearningToolsBottom">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path>
+            </svg>
+            <span>Learning Tools</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 15 12 9 18 15"></polyline>
+            </svg>
         </button>
-        
-        <!-- Musical Testimony -->
-        <button class="resource-card" data-modal="testimony">
-            <div class="resource-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
-                    <path d="M9 18V5l12-2v13"></path>
-                    <circle cx="6" cy="18" r="3"></circle>
-                    <circle cx="18" cy="16" r="3"></circle>
-                </svg>
-            </div>
-            <div class="resource-content">
-                <h3>Musical Testimony</h3>
-                <p>Original song inspired by this chapter</p>
-            </div>
-        </button>
-        
-        <!-- Visual Summary -->
-        <button class="resource-card" data-modal="infographic">
-            <div class="resource-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                    <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"></circle>
-                    <polyline points="21 15 16 10 5 21"></polyline>
-                </svg>
-            </div>
-            <div class="resource-content">
-                <h3>Visual Summary</h3>
-                <p>Key concepts at a glance</p>
-            </div>
-        </button>
-        
-        <!-- Study Slides -->
-        <button class="resource-card" data-modal="slides">
-            <div class="resource-icon">
-                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-            </div>
-            <div class="resource-content">
-                <h3>Study Slides</h3>
-                <p>For group discussion</p>
-            </div>
-        </button>
+        <div class="dropdown-menu dropup" id="bottomFeaturesDropdown">
+            <button class="dropdown-item" data-action="overview">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+                <span>Chapter Podcast</span>
+            </button>
+            <button class="dropdown-item" data-action="testimony">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Musical Testimony</span>
+            </button>
+            <button class="dropdown-item" data-action="infographic">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Visual Summary</span>
+            </button>
+            <button class="dropdown-item" data-action="slides">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Study Slides</span>
+            </button>
+            <button class="dropdown-item" data-action="toc">
+                <svg viewBox="0 0 24 24" width="18" height="18"><line x1="8" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/><line x1="8" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/><line x1="8" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/><line x1="3" y1="6" x2="3.01" y2="6" stroke="currentColor" stroke-width="2"/><line x1="3" y1="12" x2="3.01" y2="12" stroke="currentColor" stroke-width="2"/><line x1="3" y1="18" x2="3.01" y2="18" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Table of Contents</span>
+            </button>
+            <a class="dropdown-item" href="/search/">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Search All Chapters</span>
+            </a>
+            <button class="dropdown-item" data-action="reflect">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 20h9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Personal Reflection</span>
+            </button>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="/assets/pdf/{{ pdf }}" download>
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Download PDF</span>
+            </a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="/how-to-use/">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>How to Use This Website</span>
+            </a>
+        </div>
     </div>
 </section>
