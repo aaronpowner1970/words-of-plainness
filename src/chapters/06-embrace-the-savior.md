@@ -221,25 +221,102 @@ lyrics: |
   In the name of Jesus Christ. Amen.</p>
 ---
 
-<h2 id="discipleship-chorus">{% sentence 0 %}A Discipleship Chorus{% endsentence %}</h2>
+<div class="chorus-inset">
 
-{% sentence 1 %}*[The Reception]:*{% endsentence %}
+<h2 id="discipleship-chorus" class="chorus-heading">{% sentence 0 %}A Discipleship Chorus{% endsentence %}</h2>
 
-{% sentence 2 %}*I have tasted the Light, Grace of the Living Son of God, and my heart is full, my heart is full.*{% endsentence %}
+<div class="chorus-movement">
+<p class="chorus-label">{% sentence 1 %}*[The Reception]:*{% endsentence %}</p>
+<p class="chorus-line">{% sentence 2 %}*I have tasted the Light, Grace of the Living Son of God, and my heart is full, my heart is full.*{% endsentence %}</p>
+</div>
 
-{% sentence 3 %}*[The Transformation]:*{% endsentence %}
+<div class="chorus-movement">
+<p class="chorus-label">{% sentence 3 %}*[The Transformation]:*{% endsentence %}</p>
+<p class="chorus-line">{% sentence 4 %}*His truth rises in me like the morning sun, and it calls me to move, oh, it calls me to move.*{% endsentence %}</p>
+</div>
 
-{% sentence 4 %}*His truth rises in me like the morning sun, and it calls me to move, oh, it calls me to move.*{% endsentence %}
+<div class="chorus-movement">
+<p class="chorus-label">{% sentence 5 %}*[The Consecration]:*{% endsentence %}</p>
+<p class="chorus-line">{% sentence 6 %}*I will dance before the Lord with all the life He's given me. I'll use these hands to bear His light.*{% endsentence %}</p>
+</div>
 
-{% sentence 5 %}*[The Consecration]:*{% endsentence %}
+<div class="chorus-movement">
+<p class="chorus-label">{% sentence 7 %}*[The Testimony]:*{% endsentence %}</p>
+<p class="chorus-line">{% sentence 8 %}*Now I'm reborn, now I'm free.*{% endsentence %}</p>
+</div>
 
-{% sentence 6 %}*I will dance before the Lord with all the life He's given me. I'll use these hands to bear His light.*{% endsentence %}
-
-{% sentence 7 %}*[The Testimony]:*{% endsentence %}
-
-{% sentence 8 %}*Now I'm reborn, now I'm free.*{% endsentence %}
+</div>
 
 <style>
+.chorus-inset {
+  margin: 2rem auto 0;
+  max-width: 640px;
+  padding: 2rem 2.5rem 1.5rem;
+  background: linear-gradient(145deg, #2A1D14 0%, #3D2B1F 60%, #4a3528 100%);
+  border: 1px solid rgba(196, 148, 58, 0.3);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(196, 148, 58, 0.1);
+  text-align: center;
+}
+.chorus-inset + .spoken-word-card {
+  border-radius: 0 0 12px 12px;
+  border-top: 1px solid rgba(196, 148, 58, 0.1);
+  margin-top: 0;
+}
+.chorus-heading {
+  font-size: 1.3rem !important;
+  letter-spacing: 0.08em;
+  color: #C4943A !important;
+  margin: 0 0 1.8rem 0 !important;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(196, 148, 58, 0.2);
+}
+.chorus-movement {
+  margin-bottom: 1.6rem;
+}
+.chorus-movement:last-child {
+  margin-bottom: 0.5rem;
+}
+.chorus-label {
+  margin: 0 0 0.3rem 0 !important;
+  font-size: 0.7rem !important;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(196, 148, 58, 0.7) !important;
+}
+.chorus-label em {
+  font-style: normal !important;
+}
+.chorus-line {
+  margin: 0 !important;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.05rem !important;
+  line-height: 1.7;
+  color: rgba(232, 220, 196, 0.9) !important;
+}
+.chorus-line em {
+  font-style: italic;
+}
+@media (max-width: 768px) {
+  .chorus-inset {
+    margin: 1.5rem 0 0;
+    padding: 1.5rem 1.25rem 1rem;
+    border-radius: 10px 10px 0 0;
+  }
+  .chorus-inset + .spoken-word-card {
+    border-radius: 0 0 10px 10px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .chorus-heading {
+    font-size: 1.15rem !important;
+  }
+  .chorus-line {
+    font-size: 0.95rem !important;
+  }
+}
+</style>
 .spoken-word-card {
   margin: 2.5rem auto;
   max-width: 640px;
