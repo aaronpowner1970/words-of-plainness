@@ -47,8 +47,8 @@ toc:
   - id: our-witness
     title: Our Witness
 prevChapter:
-  url: "/chapters/02-our-search-for-meaning/"
-  title: "Chapter 2: Our Search for Meaning"
+  url: "/chapters/02-our-search/"
+  title: "Chapter 2: Our Search"
 nextChapter:
   url: "/chapters/04-spiritual-knowledge/"
   title: "Chapter 4: Spiritual Knowledge"

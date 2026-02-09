@@ -41,8 +41,11 @@ slides:
 prevChapter:
   url: "/chapters/04-spiritual-knowledge/"
   title: "Chapter 4: Spiritual Knowledge"
+nextChapter:
+  url: "/chapters/06-embrace-the-savior/"
+  title: "Chapter 6: Embrace the Savior"
 
-discordChannelId: ""
+discordChannelId: "1463835887782858994"
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>
