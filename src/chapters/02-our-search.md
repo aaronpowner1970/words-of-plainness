@@ -39,7 +39,7 @@ nextChapter:
   url: "/chapters/03-academic-knowledge/"
   title: "Chapter 3: Academic Knowledge"
 
-discordChannelId: ""
+discordChannelId: "1463835723995152457"
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>

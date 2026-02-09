@@ -39,7 +39,7 @@ nextChapter:
   url: "/chapters/02-our-search/"
   title: "Chapter 2: Our Search"
 
-discordChannelId: ""
+discordChannelId: "1463835662238224578"
 
 lyrics: |
   <p class="section"><strong>[Opening Witness]</strong></p>
