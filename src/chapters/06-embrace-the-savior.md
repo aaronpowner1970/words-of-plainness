@@ -64,7 +64,7 @@ prevChapter:
 nextChapter:
   url: "/chapters/07-repentance-and-discipleship/"
   title: "Chapter 7: Repentance & Discipleship"
-discordChannelId: "1463835929125978163"
+discordChannelId: ""
 podcastTranscript: |
   <p><strong>Host:</strong> Welcome back to the Words of Plainness podcast overview series. I'm here with Brother Aaron Powner, and today we're walking through Chapter 6 of the book — "Embrace the Savior." Aaron, welcome.</p>
   <p><strong>Aaron:</strong> Thank you. Glad to be here.</p>
@@ -238,6 +238,383 @@ lyrics: |
 {% sentence 7 %}*[The Testimony]:*{% endsentence %}
 
 {% sentence 8 %}*Now I'm reborn, now I'm free.*{% endsentence %}
+
+<style>
+.spoken-word-card {
+  margin: 2.5rem auto;
+  max-width: 640px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #2A1D14 0%, #3D2B1F 60%, #4a3528 100%);
+  border: 1px solid rgba(196, 148, 58, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(196, 148, 58, 0.1);
+}
+.spoken-word-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+.spoken-word-toggle:hover {
+  background: rgba(196, 148, 58, 0.08);
+}
+.spoken-word-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #C4943A 0%, #a07a2e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(196, 148, 58, 0.3);
+}
+.spoken-word-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: #2A1D14;
+}
+.spoken-word-meta {
+  flex: 1;
+  min-width: 0;
+}
+.spoken-word-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #C4943A;
+  margin: 0 0 0.2rem 0;
+}
+.spoken-word-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #E8DCC4;
+  margin: 0 0 0.15rem 0;
+  font-style: italic;
+}
+.spoken-word-subtitle {
+  font-size: 0.8rem;
+  color: rgba(232, 220, 196, 0.5);
+  margin: 0;
+}
+.spoken-word-chevron {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  fill: rgba(196, 148, 58, 0.6);
+  transition: transform 0.3s ease;
+}
+.spoken-word-card.open .spoken-word-chevron {
+  transform: rotate(180deg);
+}
+.spoken-word-body {
+  display: none;
+  padding: 0 1.5rem 1.5rem;
+}
+.spoken-word-card.open .spoken-word-body {
+  display: block;
+}
+.spoken-word-divider {
+  border: none;
+  border-top: 1px solid rgba(196, 148, 58, 0.15);
+  margin: 0 0 1.25rem 0;
+}
+.spoken-word-audio {
+  width: 100%;
+  height: 48px;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  filter: sepia(20%) saturate(70%) brightness(90%);
+}
+.spoken-word-audio::-webkit-media-controls-panel {
+  background: rgba(61, 43, 31, 0.8);
+}
+.spoken-word-text {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(232, 220, 196, 0.85);
+}
+.spoken-word-text .sw-break {
+  display: block;
+  height: 1.2rem;
+}
+.spoken-word-text .sw-indent {
+  padding-left: 1.5rem;
+  display: block;
+}
+.spoken-word-text .sw-emphasis {
+  color: #C4943A;
+  font-weight: 500;
+  font-style: italic;
+}
+.spoken-word-text .sw-stanza {
+  margin-bottom: 1.4rem;
+}
+.spoken-word-text .sw-stanza:last-child {
+  margin-bottom: 0;
+}
+</style>
+
+<div class="spoken-word-card" id="spoken-word-player">
+  <button class="spoken-word-toggle" onclick="this.closest('.spoken-word-card').classList.toggle('open')" aria-expanded="false" aria-controls="spoken-word-content">
+    <div class="spoken-word-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2H3v2a9 9 0 0 0 8 8.94V23h2v-2.06A9 9 0 0 0 21 12v-2h-2z"/></svg>
+    </div>
+    <div class="spoken-word-meta">
+      <p class="spoken-word-label">Spoken Word Performance</p>
+      <p class="spoken-word-title">I Have Tasted the Light</p>
+      <p class="spoken-word-subtitle">A poetic reading of the Discipleship Chorus</p>
+    </div>
+    <svg class="spoken-word-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+  </button>
+  <div class="spoken-word-body" id="spoken-word-content">
+    <hr class="spoken-word-divider">
+    <audio class="spoken-word-audio" controls preload="none">
+      <source src="/assets/audio/chapter-06-spoken-word-lyrics.mp3" type="audio/mpeg">
+    </audio>
+    <div class="spoken-word-text">
+      <div class="sw-stanza">
+        I was standing at the edge of something<br>
+        when the questions finally stopped.
+      </div>
+      <div class="sw-stanza">
+        Not answered. Stopped.<br>
+        Like a wind that's been howling so long<br>
+        you forgot what silence sounds like.<br>
+        And then it stops.
+      </div>
+      <div class="sw-stanza">
+        And the silence wasn't empty.<br>
+        It was full of everything I'd been too loud to hear.
+      </div>
+      <div class="sw-stanza">
+        I had nothing left to offer.<br>
+        No arguments. No conditions. No backup plan.<br>
+        Just a willingness—<br>
+        <span class="sw-indent">finally—</span>
+        <span class="sw-indent">to fall.</span>
+      </div>
+      <div class="sw-stanza">
+        And the arms that caught me<br>
+        whispered something I'd been running from<br>
+        my whole life:
+      </div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">Child—this is what I made you for.</span>
+      </div>
+      <div class="sw-stanza"><span class="sw-break"></span></div>
+      <div class="sw-stanza">
+        I used to think that faith meant certainty.<br>
+        That if I could know enough,<br>
+        understand enough,<br>
+        build a wall of evidence high enough—<br>
+        I'd be safe.
+      </div>
+      <div class="sw-stanza">
+        But even the demons believe.<br>
+        James tells us that.<br>
+        Even the demons believe,<br>
+        and they tremble at the truth.
+      </div>
+      <div class="sw-stanza">
+        So what was I doing that was any different?
+      </div>
+      <div class="sw-stanza">
+        It wasn't facts that finally freed me.<br>
+        It was falling to my knees.<br>
+        It was opening these hands I'd clenched so tight<br>
+        the knuckles had gone white.<br>
+        And letting myself<br>
+        <span class="sw-indent">breathe.</span>
+      </div>
+      <div class="sw-stanza">
+        What I thought was strength<br>
+        <span class="sw-indent">was prison.</span>
+        What I thought was loss<br>
+        <span class="sw-indent">is gain.</span>
+        Every wall I built for safety<br>
+        was the architecture of my chains.
+      </div>
+      <div class="sw-stanza"><span class="sw-break"></span></div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">I have tasted the Light.</span>
+      </div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">Grace of the Living Son of God.</span>
+      </div>
+      <div class="sw-stanza"><span class="sw-break"></span></div>
+      <div class="sw-stanza">
+        The world looks the same this morning.<br>
+        Same sun. Same street. Same cracks in the sidewalk.<br>
+        But I swear—these eyes are new.
+      </div>
+      <div class="sw-stanza">
+        Something ancient woke inside me.<br>
+        Something that was always there<br>
+        but sleeping—<br>
+        buried under all my noise,<br>
+        all my striving,<br>
+        all my desperate, grasping need to be right.
+      </div>
+      <div class="sw-stanza">
+        Something deathless.<br>
+        Something true.
+      </div>
+      <div class="sw-stanza">
+        And how do I explain that?<br>
+        How do I explain this healing<br>
+        to a heart that's never broke?
+      </div>
+      <div class="sw-stanza">
+        You can't describe water to someone<br>
+        who's never been thirsty.<br>
+        You can't describe home to someone<br>
+        who's never been lost.
+      </div>
+      <div class="sw-stanza">
+        But the ones who've tasted—<br>
+        <span class="sw-indent">they know.</span>
+      </div>
+      <div class="sw-stanza">
+        The Spirit witnessed.
+      </div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">Now I know.</span>
+      </div>
+      <div class="sw-stanza">
+        His truth rises within me like the morning sun.<br>
+        Not an argument. Not a proof.<br>
+        A sunrise.<br>
+        You don't argue with the sunrise.<br>
+        You don't need evidence that morning has come.<br>
+        You just open your eyes,<br>
+        and there it is.
+      </div>
+      <div class="sw-stanza"><span class="sw-break"></span></div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">And it calls me to move.</span>
+      </div>
+      <div class="sw-stanza">
+        Do you hear that?<br>
+        <strong>It CALLS me to move!</strong>
+      </div>
+      <div class="sw-stanza">
+        I will dance before the Lord<br>
+        with all the life He's given me.<br>
+        I'll use these hands—<br>
+        these hands that were clenched,<br>
+        these hands that were fists,<br>
+        these hands that held onto everything<br>
+        because I was terrified of letting go—
+      </div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">I'll use these hands to bear His light.</span>
+      </div>
+      <div class="sw-stanza">
+        Because His mercy wore me down!<br>
+        Not like a storm wears down a cliff—<br>
+        like a river wears down a stone.<br>
+        Patient.<br>
+        Relentless.<br>
+        Kind.
+      </div>
+      <div class="sw-stanza">
+        He didn't break down my door.<br>
+        He knocked.<br>
+        And knocked.<br>
+        And knocked.<br>
+        Until the day I finally opened it<br>
+        and realized<br>
+        He'd been standing there the whole time.
+      </div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">Now I'm reborn.<br>
+        Now I'm FREE.</span>
+      </div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">I have tasted the Light!</span>
+      </div>
+      <div class="sw-stanza">
+        And my heart is full.
+      </div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">My heart is full.</span>
+      </div>
+      <div class="sw-stanza"><span class="sw-break"></span></div>
+      <div class="sw-stanza">
+        Like the woman at the well,<br>
+        I ran to tell what I had found.
+      </div>
+      <div class="sw-stanza">
+        Not because my life was perfect—<br>
+        not because I had it figured out—<br>
+        because His mercy wore me down<br>
+        and I couldn't keep it to myself.
+      </div>
+      <div class="sw-stanza">
+        That's what testimony does.<br>
+        It doesn't wait until you're ready.<br>
+        It doesn't wait until you're worthy.<br>
+        It pours out of you<br>
+        the way water pours out of a spring—<br>
+        not because it's trying to go anywhere,<br>
+        but because that's what springs do.
+      </div>
+      <div class="sw-stanza">
+        We are not called to walk in silence.<br>
+        We are not called to walk alone.<br>
+        There is a family.<br>
+        There is a table.<br>
+        There is a testimony.<br>
+        There is a home.
+      </div>
+      <div class="sw-stanza">
+        When the shadows press their questions—<br>
+        <span class="sw-indent">and they will—</span>
+        when the old doubts come clawing back—<br>
+        <span class="sw-indent">and they will—</span>
+      </div>
+      <div class="sw-stanza">
+        I return to the moment<br>
+        when He spoke<br>
+        and night became day.
+      </div>
+      <div class="sw-stanza">
+        What witness could be greater<br>
+        than the peace He put in me?
+      </div>
+      <div class="sw-stanza">
+        So I choose to remember.<br>
+        And the Light comes back.<br>
+        It always comes back.
+      </div>
+      <div class="sw-stanza"><span class="sw-break"></span></div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">Come unto Him.</span><br>
+        <span class="sw-emphasis">Learn of Him.</span><br>
+        <span class="sw-emphasis">Believe in Him.</span><br>
+        <span class="sw-emphasis">Follow Him.</span><br>
+        <span class="sw-emphasis">Remember Him.</span>
+      </div>
+      <div class="sw-stanza"><span class="sw-break"></span></div>
+      <div class="sw-stanza">
+        <span class="sw-emphasis">I have tasted the Light.</span>
+      </div>
+      <div class="sw-stanza">
+        In the name of Jesus Christ.<br>
+        Amen.
+      </div>
+    </div>
+  </div>
+</div>
 
 <h2 id="you-have-come-this-far">{% sentence 9 %}You Have Come This Far on the Journey{% endsentence %}</h2>
 
