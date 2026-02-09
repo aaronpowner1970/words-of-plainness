@@ -1,22 +1,42 @@
 ---
 title: "Embrace the Savior"
 chapter: 6
+slug: "06-embrace-the-savior"
+chapterId: "chapter-06-embrace-the-savior"
 layout: layouts/chapter.njk
 scripture:
   text: "Ye are all the children of God by faith in Christ Jesus."
   reference: "Galatians 3:26"
-readingTime: "~12 min read"
+readingTime: 12
 audio:
-  narration: /assets/audio/chapter-06-narration.mp3
-  overview: /assets/audio/chapter-06-overview-postproduction.mp3
+  narration: chapter-06-narration.mp3
+  overview: chapter-06-overview.mp3
   testimony:
-    file: /assets/audio/06-1-i-have-tasted-the-light-americana-folk.mp3
+    file: "06.1 I Have Tasted the Light - Americana Folk.mp3"
     title: "I Have Tasted the Light"
     description: "A Sacred Americana testimony celebrating the journey from tasting the Light to being reborn in Christ"
-pdf: /assets/pdf/WoP_Ch06_Embrace_the_Savior.pdf
-infographic: /assets/images/chapter-06-infographic.png
-slidesPath: "WoP_Ch06"
-slidesCount: 9
+    alternates:
+      - file: "06.2 I Have Tasted the Light - Contemporary Christian.mp3"
+        label: "Contemporary Christian"
+      - file: "06.3 I Have Tasted the Light - Classical Duet Male-Female.mp3"
+        label: "Classical Duet (Male-Female)"
+      - file: "06.4 I Have Tasted the Light - Soul Worship.mp3"
+        label: "Soul Worship"
+      - file: "06.5 I Have Tasted the Light - Broadway Ballad.mp3"
+        label: "Broadway Ballad"
+      - file: "06.6 I Have Tasted the Light - Grandpa on the Porch.mp3"
+        label: "Grandpa on the Porch"
+      - file: "06.7 I Have Tasted the Light - Contemplative Piano Female Vocal.mp3"
+        label: "Contemplative Piano (Female Vocal)"
+      - file: "06.8 I Have Tasted the Light - Classical Duet Female Vocals.mp3"
+        label: "Classical Duet (Female Vocals)"
+      - file: "06.9 I Have Tasted the Light - Indie Folk.mp3"
+        label: "Indie Folk"
+pdf: WoP_Ch06_Embrace_the_Savior.pdf
+infographic: chapter-06-infographic.png
+slides:
+  count: 9
+  path: "chapter-06/"
 toc:
   - id: discipleship-chorus
     title: A Discipleship Chorus
@@ -41,7 +61,164 @@ toc:
 prevChapter:
   url: "/chapters/05-sincere-prayer/"
   title: "Chapter 5: Sincere Prayer"
+nextChapter:
+  url: "/chapters/07-repentance-and-discipleship/"
+  title: "Chapter 7: Repentance & Discipleship"
 discordChannelId: "1463835929125978163"
+podcastTranscript: |
+  <p><strong>Host:</strong> Welcome back to the Words of Plainness podcast overview series. I'm here with Brother Aaron Powner, and today we're walking through Chapter 6 of the book — "Embrace the Savior." Aaron, welcome.</p>
+  <p><strong>Aaron:</strong> Thank you. Glad to be here.</p>
+  <p><strong>Host:</strong> So, I have to say — this chapter surprised me. I opened it expecting what you'd expect from a chapter about faith in Jesus Christ. And the first thing I see is a poem. Or, I guess — a chorus?</p>
+  <p><strong>Aaron:</strong> A Discipleship Chorus, yeah. It's structured in four movements. And it's not just decorative — it's actually the heartbeat of the whole chapter. Each movement maps to a stage of what happens when someone genuinely embraces the Savior.</p>
+  <p><strong>Host:</strong> Walk me through that. Because I'll be honest, on first read I almost skimmed past it to get to the "real content." And then I realized — that was the content.</p>
+  <p><strong>Aaron:</strong> Right. And I think that's how faith works for a lot of people, actually. We rush past the experience trying to get to the explanation. But the chorus is meant to be felt first. Then the chapter unpacks what you just felt.</p>
+  <p><strong>Host:</strong> Okay, so let's take them one at a time. The first movement is called "The Reception." And the line is — "I have tasted the Light, Grace of the Living Son of God, and my heart is full." What does that represent?</p>
+  <p><strong>Aaron:</strong> That's the moment of first contact. You've been searching — honestly searching — and something breaks through. A warmth in your heart. A clarity you can't manufacture on your own. The chapter sets this up by reminding the reader of everything they've already walked through in the book — prayer, questions about existence, the limits of human knowledge — and then it asks this very direct question: Has the seed begun to swell within you?</p>
+  <p><strong>Host:</strong> And that seed language — that's from Alma in the Book of Mormon?</p>
+  <p><strong>Aaron:</strong> Alma chapter 32, yes. He compares the word of God to a seed, and he says if it's real, it will swell and become delicious to you. So "The Reception" is about recognizing that moment — you tasted something. You don't have all the answers yet, but something real has happened inside you.</p>
+  <p><strong>Host:</strong> I like that it says "my heart is full" — not "my mind is convinced."</p>
+  <p><strong>Aaron:</strong> Exactly. And that's deliberate. Faith isn't first an intellectual conclusion. It begins as an experience. The chapter makes a pretty sharp distinction early on — it says the devils also believe. Satan knows God is real. That knowledge brings him nothing but misery. So belief alone, just raw intellectual acknowledgment, isn't what saves anyone. What separates saving faith from the belief of devils is surrender, trust, and willingness to be changed. "The Reception" is that first taste — not yet the full meal, but enough to know something real is on the table.</p>
+  <p><strong>Host:</strong> All right. Movement two. "The Transformation." "His truth rises in me like the morning sun, and it calls me to move." Now we're getting somewhere.</p>
+  <p><strong>Aaron:</strong> Now you're being changed. And the chapter covers this under the heading "Born Again" — which, by the way, is not just a phrase people throw around at revivals. Jesus said it plainly: unless you're born again, you can't see the kingdom of God. And the chapter treats that seriously. It's not self-improvement. It's not turning over a new leaf with your own willpower. It's a transformation of the whole soul by the power of God.</p>
+  <p><strong>Host:</strong> The chapter has this beautiful line about how for some people the new birth arrives like lightning, and for others it comes like dawn — so gradually you can't name the exact moment the light became unmistakable.</p>
+  <p><strong>Aaron:</strong> And then it says: both are real. Which I think matters a lot, because people sometimes disqualify their own spiritual experiences because they didn't have some dramatic, cinematic moment. The chapter says no — what matters is whether the tree is growing, not how dramatically the seed first sprouted.</p>
+  <p><strong>Host:</strong> That's a generous way to put it. And I notice the chorus says "it calls me to move" — not "it makes me feel warm and fuzzy."</p>
+  <p><strong>Aaron:</strong> Right. Faith is not passive. Joseph Smith taught that faith is the principle of action — the moving cause of all action, actually. So if you've genuinely been transformed, you don't just sit there basking in it. Something stirs in you. You want to move. You want to respond. That's "The Transformation" — the morning sun rises, and you can't stay in bed.</p>
+  <p><strong>Host:</strong> [laughs] Well, some of us try.</p>
+  <p><strong>Aaron:</strong> [laughs] Oh, we all try. But the sun doesn't stop rising just because you pulled the covers up.</p>
+  <p><strong>Host:</strong> Fair enough. Okay, movement three — and this one feels like the weightiest. "The Consecration." "I will dance before the Lord with all the life He's given me. I'll use these hands to bear His light." That's a big shift from receiving to giving.</p>
+  <p><strong>Aaron:</strong> It is. And the chapter builds to this through two sections that I think people need to sit with. The first is on surrender. The world teaches that surrender is weakness — to yield is to lose, to submit is to be conquered. But the chapter flips that entirely. Surrender to Christ is victory. It's the only true freedom. The chains we thought were holding us together were actually holding us down.</p>
+  <p><strong>Host:</strong> That's a line that might sting a little for some people.</p>
+  <p><strong>Aaron:</strong> It should, gently. Because most of us have spent a lot of energy trying to control our own lives, protect ourselves, keep everything managed. And the chapter says — that control you thought was protecting you? It was imprisoning you. When you actually let go and fall into His arms, you discover He wasn't waiting to diminish you. He was waiting to enlarge you.</p>
+  <p><strong>Host:</strong> And then there's the section on grace.</p>
+  <p><strong>Aaron:</strong> Yes. And this is where the chapter addresses something that has divided Christians for centuries — are we saved by grace or by works? And the answer the chapter gives is: yes. Both.</p>
+  <p><strong>Host:</strong> [laughs] That's very Latter-day Saint of you.</p>
+  <p><strong>Aaron:</strong> [laughs] Maybe. But the logic is sound, I think. Grace is God reaching toward us, unearned and freely offered. But grace that is truly received changes you. It doesn't leave you where it found you. The chapter uses this image of a tree — a tree that has been made alive will bear fruit. Not to prove it deserves sunlight, but because that's what living trees do with light.</p>
+  <p><strong>Host:</strong> So the works aren't the payment. They're the evidence.</p>
+  <p><strong>Aaron:</strong> The fruit. The natural outgrowth. And that's what "The Consecration" is about. Once you've tasted the Light and been transformed by it, your hands want to work. Your feet want to move. You dance before the Lord — that's not grim duty. That's overflow. That's a heart so full it can't hold still.</p>
+  <p><strong>Host:</strong> There's real joy in that image. It's not the picture a lot of people have of religious obligation.</p>
+  <p><strong>Aaron:</strong> No, and I think that's part of the point. The chapter says the joy of serving Him is not a grim duty fulfilled — it's the delight of a heart that has found its home, hands that have found their purpose, feet that cannot be still. That's consecration. You're not paying God back. You're becoming the kind of person who can't stop pouring out what's been poured in.</p>
+  <p><strong>Host:</strong> And that naturally leads into the chapter's section on fellowship and testimony, doesn't it?</p>
+  <p><strong>Aaron:</strong> It does. Because consecration doesn't happen in a vacuum. The chapter is pretty direct on this — faith is personal, but it's not private. God gathers His followers into communities. We need other people. We need correction, instruction, shared burdens.</p>
+  <p><strong>Host:</strong> And there's a line in there that had some real teeth to it — something about finding an audience instead of a family?</p>
+  <p><strong>Aaron:</strong> [laughs] Yes. "If no one in your fellowship ever challenges you, you may have found an audience, not a family." That's meant to provoke a little self-examination. Because it's tempting to find a congregation that only affirms what you already want to hear. But the body of Christ is supposed to be a family, and families speak uncomfortable truth to each other sometimes.</p>
+  <p><strong>Host:</strong> Okay. Final movement. "The Testimony." "Now I'm reborn. Now I'm free." Short. Direct.</p>
+  <p><strong>Aaron:</strong> And that's the point. A testimony doesn't have to be long or sophisticated. The chapter uses the example of the woman at the well — she'd lived a complicated life. Five husbands. The man she was with wasn't her husband. And when she encountered Christ, she didn't go home and write a theological paper. She didn't wait until her life was cleaned up and presentable. She dropped her waterpot and ran to the city and said, "Come, see a man who told me all things that I ever did — is not this the Christ?"</p>
+  <p><strong>Host:</strong> She just said, come and see.</p>
+  <p><strong>Aaron:</strong> That's testimony. It's not an argument. It's not proof designed to compel agreement. It's witness. Here's what happened to me. Here's what changed. Come and see for yourself. And the chapter says no one can argue with your experience. They can only hear it and feel the Spirit confirm or deny its truth in their own hearts.</p>
+  <p><strong>Host:</strong> And then the chapter doesn't shy away from the hard part — what happens when faith gets tested. When the light dims.</p>
+  <p><strong>Aaron:</strong> No, it doesn't. And I appreciate that honesty. Because everyone who has ever exercised faith has had seasons of doubt or darkness. The chapter makes this important distinction: doubt is not the opposite of faith. Fear and despair is. Doubt that keeps seeking is — and I love this line — "faith wearing different clothes."</p>
+  <p><strong>Host:</strong> That's a gift of a line for anyone in a dark season.</p>
+  <p><strong>Aaron:</strong> And the Lord's own counsel to Oliver Cowdery in Doctrine and Covenants section 6 is the anchor. He says, in essence, "Remember the night you prayed and I spoke peace to your mind? What greater witness can you have than from God?" The chapter tells the reader — you've felt it before. The seed has swelled. The light has tasted sweet. Return to that memory. Let it hold you until the sun rises again.</p>
+  <p><strong>Host:</strong> So the four movements of the chorus — Reception, Transformation, Consecration, Testimony — they're not just stages. They're a cycle you keep living.</p>
+  <p><strong>Aaron:</strong> That's a beautiful way to put it, and I think you're right. You taste the Light. It transforms you. You consecrate your life. You bear testimony of what happened. And then, inevitably, you'll be tested — and you return to the wellspring and taste again. And each time through, the roots go deeper.</p>
+  <p><strong>Host:</strong> The chapter closes with what it calls "The Invitation" — Come unto Him, Learn of Him, Believe in Him, Follow Him, Remember Him — and a promise.</p>
+  <p><strong>Aaron:</strong> A promise made in the name of Jesus Christ. That if you do these things, your faith will be made unshakable by the power of the Spirit of God. "Then shall thy confidence wax strong in the presence of God." You'll move from belief to knowledge. You'll know — not hope, not guess — know that Jesus Christ is the Son of God. And that embracing Him is not loss but gain, not bondage but freedom, not the end of the journey but its true beginning.</p>
+  <p><strong>Host:</strong> Now I'm reborn. Now I'm free.</p>
+  <p><strong>Aaron:</strong> Amen.</p>
+  <p><strong>Host:</strong> Aaron, thank you. That's Chapter 6 — "Embrace the Savior." You can read the full chapter at words-of-plainness.vercel.app. We'll see you next time.</p>
+lyrics: |
+  <p class="section"><strong>[Opening]</strong></p>
+  <p class="verse">I was standing at the edge of something<br>
+  When the questions finally stopped<br>
+  And the silence wasn't empty<br>
+  It was full of what I'd lost</p>
+  <p class="verse">I had nothing left to offer<br>
+  But a willingness to fall<br>
+  And the arms that caught me whispered:<br>
+  "Child—this is what I made you for"</p>
+  <p class="section"><strong>[Verse 1]</strong></p>
+  <p class="verse">I used to think that faith meant certainty<br>
+  That knowing was enough<br>
+  But even demons believe in Him<br>
+  And they tremble at the truth</p>
+  <p class="verse">It wasn't facts that finally freed me<br>
+  It was falling to my knees<br>
+  It was opening these hands I'd clenched so tight<br>
+  And letting myself breathe</p>
+  <p class="section"><strong>[Pre-Chorus]</strong></p>
+  <p class="verse">What I thought was strength was prison<br>
+  What I thought was loss is gain<br>
+  Every wall I built for safety<br>
+  Was the architecture of my chains</p>
+  <p class="section"><strong>[Chorus 1]</strong></p>
+  <p class="chorus">I have tasted the Light<br>
+  Grace of the Living Son of God<br>
+  And my heart is full, my heart is full</p>
+  <p class="chorus">His truth rises within me like the morning sun<br>
+  And it calls me to move<br>
+  Oh, it calls me to move</p>
+  <p class="chorus">I will dance before the Lord<br>
+  With all the life He's given me<br>
+  I'll use these hands to bear His light</p>
+  <p class="chorus">Now I'm reborn<br>
+  Now I'm free</p>
+  <p class="section"><strong>[Verse 2]</strong></p>
+  <p class="verse">The world looks just the same this morning<br>
+  But I swear these eyes are new<br>
+  Something ancient woke inside me<br>
+  Something deathless, something true</p>
+  <p class="verse">How do I explain this healing<br>
+  To a heart that's never broke?<br>
+  But the ones who've tasted know—<br>
+  The Spirit witnessed. Now I know.</p>
+  <p class="section"><strong>[Chorus 2]</strong></p>
+  <p class="chorus">I have tasted the Light<br>
+  Grace of the Living Son of God<br>
+  And my heart is full, my heart is full</p>
+  <p class="chorus">His truth rises within me like the morning sun<br>
+  And it calls me to move<br>
+  Oh, it calls me to move</p>
+  <p class="chorus">I will dance before the Lord<br>
+  With all the life He's given me<br>
+  I'll use these hands to bear His light</p>
+  <p class="chorus">Now I'm reborn<br>
+  Now I'm free</p>
+  <p class="section"><strong>[Verse 3]</strong></p>
+  <p class="verse">Like the woman at the well<br>
+  I ran to tell what I had found<br>
+  Not because my life was perfect—<br>
+  Because His mercy wore me down</p>
+  <p class="verse">We are not called to walk in silence<br>
+  We are not called to walk alone<br>
+  There's a family, there's a table<br>
+  There's a testimony—there's a home</p>
+  <p class="section"><strong>[Bridge]</strong></p>
+  <p class="verse">When the shadows press their questions<br>
+  And the old doubts claw their way<br>
+  I return to the moment<br>
+  When He spoke and night became day</p>
+  <p class="verse">What witness could be greater<br>
+  Than the peace He put in me?<br>
+  So I choose to remember—<br>
+  And the Light comes back to me</p>
+  <p class="section"><strong>[Interlude]</strong></p>
+  <p class="verse">Come unto Him<br>
+  Learn of Him<br>
+  Believe in Him<br>
+  Follow Him<br>
+  Remember Him</p>
+  <p class="section"><strong>[Final Chorus]</strong></p>
+  <p class="chorus">I have tasted the Light<br>
+  Grace of the Living Son of God<br>
+  And my heart is full, my heart is full!</p>
+  <p class="chorus">His truth rises within me like the morning sun<br>
+  And it calls me to move<br>
+  Oh, it calls me to move!</p>
+  <p class="chorus">I will dance before the Lord<br>
+  With all the life He's given me<br>
+  I'll use these hands to bear His light!</p>
+  <p class="chorus">Now I'm reborn<br>
+  Now I'm free!</p>
+  <p class="section"><strong>[Outro]</strong></p>
+  <p class="verse">Now I'm reborn...<br>
+  Now I'm free...</p>
+  <p class="verse">I have tasted the Light<br>
+  (Grace of the Living Son of God)<br>
+  I have tasted the Light<br>
+  (My heart is full, my heart is full)</p>
+  <p class="verse">I have tasted the Light...<br>
+  In the name of Jesus Christ. Amen.</p>
 ---
 
 <h2 id="discipleship-chorus">{% sentence 0 %}A Discipleship Chorus{% endsentence %}</h2>

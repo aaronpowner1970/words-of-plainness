@@ -87,13 +87,15 @@ const AudioSync = {
     highlightSentence(index) {
         // Remove previous highlight
         this.clearHighlight();
-
-        // Add new highlight to ALL elements sharing this data-index
-        const sentences = document.querySelectorAll(`.sentence[data-index="${index}"]`);
-        sentences.forEach(s => s.classList.add('highlighted'));
-
-        if (sentences.length > 0 && this.autoScrollEnabled) {
-            this.scrollToSentence(sentences[0]);
+        
+        // Add new highlight to ALL elements sharing this index
+        const matches = document.querySelectorAll(`.sentence[data-index="${index}"]`);
+        if (matches.length > 0) {
+            matches.forEach(el => el.classList.add('highlighted'));
+            
+            if (this.autoScrollEnabled) {
+                this.scrollToSentence(matches[0]);
+            }
         }
     },
     

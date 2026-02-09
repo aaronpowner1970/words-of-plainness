@@ -41,7 +41,7 @@ nextChapter:
   url: "/chapters/05-sincere-prayer/"
   title: "Chapter 5: Sincere Prayer"
 
-discordChannelId: ""
+discordChannelId: "1463835837291565200"
 
 lyrics: |
   <p class="section"><strong>[INTRO]</strong></p>
