@@ -1,0 +1,596 @@
+/**
+ * My Reflections & Goals Dashboard
+ * =================================
+ * Uses the inverted cream/gold color scheme from the chapter reflection sections.
+ */
+
+/* =========================================
+   Auth Gate
+   ========================================= */
+
+.mr-auth-gate {
+    text-align: center;
+    padding: var(--space-xxl) var(--space-md);
+}
+
+.mr-auth-card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--cream);
+    border: 2px solid var(--gold-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    color: var(--brown-deep);
+}
+
+.mr-auth-card svg {
+    color: var(--gold-primary);
+    margin-bottom: var(--space-md);
+}
+
+.mr-auth-card h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--gold-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.mr-auth-card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--brown-deep);
+    opacity: 0.85;
+    margin-bottom: var(--space-lg);
+}
+
+.mr-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mr-btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+}
+
+/* =========================================
+   Dashboard — Inverted Cream Scheme
+   ========================================= */
+
+.mr-dashboard {
+    background: var(--cream);
+    border-top: 3px solid var(--gold-primary);
+    color: var(--brown-deep);
+}
+
+/* =========================================
+   Summary Section
+   ========================================= */
+
+.mr-summary {
+    padding: var(--space-xl) var(--space-md);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.mr-scripture {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.mr-scripture blockquote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--brown-deep);
+    opacity: 0.85;
+    margin: 0 0 0.5rem;
+}
+
+.mr-scripture cite {
+    font-size: 0.9rem;
+    color: var(--gold-primary);
+    font-style: normal;
+}
+
+.mr-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-md);
+}
+
+.mr-stat-card {
+    background: #ffffff;
+    border: 1px solid rgba(196, 148, 58, 0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+}
+
+.mr-stat-number {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    margin-bottom: 0.25rem;
+}
+
+.mr-stat-label {
+    font-size: 0.85rem;
+    color: var(--brown-deep);
+    opacity: 0.7;
+}
+
+/* =========================================
+   Sections
+   ========================================= */
+
+.mr-section {
+    padding: var(--space-xl) var(--space-md);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.mr-section-alt {
+    background: rgba(196, 148, 58, 0.08);
+    max-width: none;
+}
+
+.mr-section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.mr-section-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--gold-primary);
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-xs);
+    border-bottom: 2px solid rgba(196, 148, 58, 0.3);
+}
+
+.mr-section-subtitle {
+    font-size: 0.95rem;
+    color: var(--brown-deep);
+    opacity: 0.7;
+    margin-bottom: var(--space-lg);
+}
+
+.mr-loading,
+.mr-empty {
+    font-style: italic;
+    color: var(--brown-deep);
+    opacity: 0.6;
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+/* =========================================
+   Chapter Accordion
+   ========================================= */
+
+.mr-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.mr-chapter-card {
+    background: #ffffff;
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+}
+
+.mr-chapter-card:hover {
+    border-color: var(--gold-primary);
+}
+
+.mr-chapter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    cursor: pointer;
+    user-select: none;
+    gap: var(--space-sm);
+}
+
+.mr-chapter-header:hover {
+    background: rgba(196, 148, 58, 0.05);
+}
+
+.mr-chapter-info {
+    flex: 1;
+}
+
+.mr-chapter-title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--brown-deep);
+    margin-bottom: 0.15rem;
+}
+
+.mr-chapter-meta {
+    font-size: 0.8rem;
+    color: var(--brown-deep);
+    opacity: 0.6;
+}
+
+.mr-chapter-toggle {
+    width: 24px;
+    height: 24px;
+    color: var(--gold-primary);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.mr-chapter-card.open .mr-chapter-toggle {
+    transform: rotate(180deg);
+}
+
+.mr-chapter-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+
+.mr-chapter-card.open .mr-chapter-body {
+    max-height: 3000px;
+}
+
+.mr-chapter-content {
+    padding: 0 var(--space-md) var(--space-md);
+    border-top: 1px solid rgba(196, 148, 58, 0.15);
+}
+
+/* =========================================
+   Reflection Entries
+   ========================================= */
+
+.mr-entry {
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.1);
+}
+
+.mr-entry:last-child {
+    border-bottom: none;
+}
+
+.mr-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+    gap: var(--space-sm);
+}
+
+.mr-entry-title {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+}
+
+.mr-entry-date {
+    font-size: 0.75rem;
+    color: var(--brown-deep);
+    opacity: 0.5;
+    white-space: nowrap;
+}
+
+.mr-entry-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--brown-deep);
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+}
+
+.mr-entry-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mr-btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.8rem;
+    background: transparent;
+    border: 1px solid rgba(196, 148, 58, 0.3);
+    border-radius: var(--radius-sm);
+    color: var(--gold-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mr-btn-action:hover {
+    background: rgba(196, 148, 58, 0.1);
+    border-color: var(--gold-primary);
+}
+
+.mr-btn-action.delete {
+    color: #a03030;
+    border-color: rgba(160, 48, 48, 0.3);
+}
+
+.mr-btn-action.delete:hover {
+    background: rgba(160, 48, 48, 0.1);
+    border-color: #a03030;
+}
+
+/* Edit Mode */
+.mr-edit-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: var(--space-sm);
+    background: #ffffff;
+    border: 2px solid var(--gold-primary);
+    border-radius: var(--radius-sm);
+    color: var(--brown-deep);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    resize: vertical;
+    margin-bottom: 0.5rem;
+}
+
+.mr-edit-textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(196, 148, 58, 0.2);
+}
+
+.mr-edit-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mr-btn-save {
+    padding: 0.3rem 0.8rem;
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.mr-btn-save:hover {
+    background: var(--gold-light);
+}
+
+.mr-btn-cancel {
+    padding: 0.3rem 0.8rem;
+    background: transparent;
+    color: var(--brown-deep);
+    border: 1px solid rgba(61, 43, 31, 0.3);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.mr-btn-cancel:hover {
+    border-color: var(--gold-primary);
+}
+
+/* =========================================
+   Goals Section
+   ========================================= */
+
+.mr-goal-input-row {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    align-items: flex-start;
+}
+
+.mr-goal-textarea {
+    flex: 1;
+    padding: var(--space-sm);
+    background: #ffffff;
+    border: 2px solid var(--gold-primary);
+    border-radius: var(--radius-sm);
+    color: var(--brown-deep);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 50px;
+}
+
+.mr-goal-textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(196, 148, 58, 0.2);
+}
+
+.mr-goal-textarea::placeholder {
+    color: var(--brown-deep);
+    opacity: 0.4;
+}
+
+.mr-btn-add-goal {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.mr-btn-add-goal:hover {
+    background: var(--gold-light);
+}
+
+.mr-goals-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.mr-goal-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    background: #ffffff;
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    transition: all 0.2s ease;
+}
+
+.mr-goal-card.completed {
+    opacity: 0.6;
+}
+
+.mr-goal-card.completed .mr-goal-text {
+    text-decoration: line-through;
+}
+
+.mr-goal-checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--gold-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    transition: all 0.2s;
+    background: transparent;
+    padding: 0;
+}
+
+.mr-goal-checkbox:hover {
+    background: rgba(196, 148, 58, 0.15);
+}
+
+.mr-goal-card.completed .mr-goal-checkbox {
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+}
+
+.mr-goal-body {
+    flex: 1;
+}
+
+.mr-goal-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--brown-deep);
+    margin-bottom: 0.25rem;
+}
+
+.mr-goal-meta {
+    font-size: 0.75rem;
+    color: var(--brown-deep);
+    opacity: 0.5;
+}
+
+.mr-goal-delete {
+    background: none;
+    border: none;
+    color: var(--brown-deep);
+    opacity: 0.3;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.mr-goal-delete:hover {
+    opacity: 1;
+    color: #a03030;
+}
+
+.mr-goals-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--brown-deep);
+    opacity: 0.5;
+    margin-top: var(--space-md);
+}
+
+/* =========================================
+   Export Section
+   ========================================= */
+
+.mr-export {
+    text-align: center;
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+    border-top: 1px solid rgba(196, 148, 58, 0.2);
+}
+
+.mr-btn-export {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: var(--gold-primary);
+    border: 2px solid var(--gold-primary);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mr-btn-export:hover {
+    background: var(--gold-primary);
+    color: var(--brown-deep);
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 768px) {
+    .mr-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .mr-stat-number {
+        font-size: 1.5rem;
+    }
+
+    .mr-goal-input-row {
+        flex-direction: column;
+    }
+
+    .mr-btn-add-goal {
+        align-self: flex-end;
+    }
+
+    .mr-chapter-header {
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .mr-entry-header {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
