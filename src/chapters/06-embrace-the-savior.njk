@@ -21,6 +21,293 @@ nextChapter:
   font-size: 1.1em;
   color: #C4943A;
 }
+
+/* Gateway Learning Tools Accordion */
+.gateway-learning-tools {
+    max-width: 420px;
+    margin: 28px auto 0;
+}
+
+.learning-tools-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: 8px;
+    color: rgba(232, 220, 196, 0.6);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.learning-tools-toggle:hover {
+    color: rgba(232, 220, 196, 0.85);
+    border-color: rgba(196, 148, 58, 0.4);
+}
+
+.learning-tools-toggle[aria-expanded="true"] {
+    color: rgba(232, 220, 196, 0.85);
+    border-color: rgba(196, 148, 58, 0.35);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+}
+
+.toggle-chevron {
+    transition: transform 0.3s ease;
+}
+
+.learning-tools-toggle[aria-expanded="true"] .toggle-chevron {
+    transform: rotate(180deg);
+}
+
+.learning-tools-panel {
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 8px;
+    background: rgba(42, 29, 19, 0.5);
+}
+
+.learning-tools-panel[hidden] {
+    display: none;
+}
+
+.learning-tool-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: rgba(232, 220, 196, 0.7);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.learning-tool-item:hover {
+    background: rgba(196, 148, 58, 0.08);
+    color: rgba(232, 220, 196, 0.95);
+}
+
+.learning-tool-item svg {
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
+.learning-tool-item:hover svg {
+    opacity: 0.9;
+}
+
+.learning-tools-divider {
+    border: none;
+    border-top: 1px solid rgba(196, 148, 58, 0.12);
+    margin: 4px 12px;
+}
+
+.learning-tool-item.full-chapter-link {
+    color: rgba(196, 148, 58, 0.7);
+    font-weight: 600;
+}
+
+.learning-tool-item.full-chapter-link:hover {
+    color: #C4943A;
+}
+
+/* Gateway Modals */
+.gw-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.gw-modal-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.gw-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: 1001;
+    background: #1a1208;
+    border: 1px solid rgba(196, 148, 58, 0.3);
+    border-radius: 12px;
+    width: min(90vw, 640px);
+    max-height: 90vh;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gw-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.gw-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+}
+
+.gw-modal-header h3 {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    color: #C4943A;
+}
+
+.gw-modal-close {
+    background: none;
+    border: none;
+    color: rgba(232, 220, 196, 0.5);
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s;
+}
+
+.gw-modal-close:hover {
+    color: rgba(232, 220, 196, 0.9);
+}
+
+.gw-modal-body {
+    padding: 20px;
+}
+
+.gw-modal-body p {
+    color: rgba(232, 220, 196, 0.7);
+    font-size: 14px;
+    margin: 0 0 16px;
+    line-height: 1.5;
+}
+
+.gw-modal-body audio {
+    width: 100%;
+    margin-top: 4px;
+}
+
+/* Lyrics dropdown inside gateway modal */
+.gw-lyrics-toggle {
+    margin-top: 16px;
+}
+
+.gw-lyrics-toggle summary {
+    cursor: pointer;
+    color: #C4943A;
+    font-size: 14px;
+    font-family: Georgia, 'Times New Roman', serif;
+    padding: 8px 0;
+    list-style: none;
+}
+
+.gw-lyrics-toggle summary::-webkit-details-marker {
+    display: none;
+}
+
+.gw-lyrics-toggle summary::before {
+    content: '▸ ';
+    transition: transform 0.2s;
+}
+
+.gw-lyrics-toggle[open] summary::before {
+    content: '▾ ';
+}
+
+.gw-lyrics-content {
+    margin-top: 12px;
+    padding: 16px;
+    background: rgba(42, 29, 19, 0.6);
+    border-radius: 8px;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.gw-lyrics-content p {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(232, 220, 196, 0.85);
+    white-space: pre-line;
+    margin: 0 0 1rem;
+}
+
+.gw-lyrics-content hr {
+    border: none;
+    border-top: 1px solid rgba(196, 148, 58, 0.2);
+    margin: 1.5rem auto;
+    width: 40%;
+}
+
+.gw-lyrics-content em {
+    color: #C4943A;
+    font-style: italic;
+}
+
+/* Slides carousel */
+.gw-slide-container {
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gw-slide-container img {
+    max-width: 100%;
+    max-height: 65vh;
+    border-radius: 6px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+.gw-slide-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 16px;
+}
+
+.gw-slide-nav button {
+    background: none;
+    border: 1px solid rgba(196, 148, 58, 0.3);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(232, 220, 196, 0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.gw-slide-nav button:hover {
+    border-color: #C4943A;
+    color: #C4943A;
+}
+
+.gw-slide-counter {
+    color: rgba(232, 220, 196, 0.5);
+    font-size: 14px;
+    font-family: Georgia, 'Times New Roman', serif;
+}
 </style>
 
 <!-- ============================================================
@@ -28,7 +315,7 @@ nextChapter:
      ============================================================ -->
 <div id="gateway">
     <div class="gateway-chapter-label">Chapter Six</div>
-    <h1 class="gateway-title">Embrace the Savior</h1>
+    <h1 class="gateway-title">Embrace the Savior <span class="star-icon">۞</span> Interactive</h1>
     <div class="gateway-epigraph">&ldquo;Ye are all the children of God by faith in Christ Jesus.&rdquo; &mdash; Galatians 3:26</div>
 
     <div class="polaris-container">
@@ -77,6 +364,100 @@ nextChapter:
             narration audio, chapter podcast, musical testimony,<br />
             visual summary, study slides, TOC, search feature,<br />
             spoken word testimony, reflection journal, and PDF download.</div>
+        </div>
+    </div>
+
+    <!-- Learning Tools Accordion -->
+    <div class="gateway-learning-tools">
+        <button class="learning-tools-toggle" id="learningToolsToggle" aria-expanded="false" aria-controls="learningToolsPanel">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"></path><path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path>
+            </svg>
+            <span>Other ways to explore this chapter</span>
+            <svg class="toggle-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <div class="learning-tools-panel" id="learningToolsPanel" hidden>
+            <a class="learning-tool-item" href="/assets/audio/chapter-06-overview.mp3" target="_blank">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+                <span>Chapter Podcast</span>
+            </a>
+            <a class="learning-tool-item" href="#" onclick="openGwModal('gwTestimonyModal'); return false;">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Musical Testimony</span>
+            </a>
+            <a class="learning-tool-item" href="/assets/images/chapter-06-infographic.png" target="_blank">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Visual Summary</span>
+            </a>
+            <a class="learning-tool-item" href="#" onclick="openGwModal('gwSlidesModal'); return false;">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Study Slides</span>
+            </a>
+            <a class="learning-tool-item" href="/assets/pdf/WoP_Ch06_Embrace_the_Savior.pdf" download>
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Download PDF</span>
+            </a>
+            <hr class="learning-tools-divider">
+            <a class="learning-tool-item full-chapter-link" href="/chapters/06-embrace-the-savior-full/">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" fill="none"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Read Full Chapter</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     GATEWAY MODALS
+     ============================================================ -->
+<div class="gw-modal-backdrop" id="gwModalBackdrop"></div>
+
+<!-- Musical Testimony Modal -->
+<div class="gw-modal" id="gwTestimonyModal" role="dialog" aria-labelledby="gwTestimonyTitle" aria-modal="true">
+    <div class="gw-modal-header">
+        <h3 id="gwTestimonyTitle">Musical Testimony</h3>
+        <button class="gw-modal-close" onclick="closeGwModals()" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="gw-modal-body">
+        <p>An original song by Aaron Powner, inspired by the themes of this chapter.</p>
+        <p><strong style="color: #C4943A;">I Have Tasted the Light</strong><br>A spoken word testimony exploring the reception of grace.</p>
+        <audio controls preload="metadata" id="gwTestimonyAudio">
+            <source src="/assets/audio/06.1 I Have Tasted the Light - Americana Folk.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <details class="gw-lyrics-toggle">
+            <summary>View Lyrics</summary>
+            <div class="gw-lyrics-content">
+                {% include "lyrics/chapter-06.njk" %}
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- Study Slides Modal -->
+<div class="gw-modal" id="gwSlidesModal" role="dialog" aria-labelledby="gwSlidesTitle" aria-modal="true">
+    <div class="gw-modal-header">
+        <h3 id="gwSlidesTitle">Study Slides</h3>
+        <button class="gw-modal-close" onclick="closeGwModals()" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="gw-modal-body">
+        <div class="gw-slide-container">
+            <img id="gwSlideImg" src="/assets/slides/WoP_Ch06/slide-01.png" alt="Study slide 1 of 9">
+        </div>
+        <div class="gw-slide-nav">
+            <button onclick="gwSlideNav(-1)" aria-label="Previous slide">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <span class="gw-slide-counter"><span id="gwSlideNum">1</span> / 9</span>
+            <button onclick="gwSlideNav(1)" aria-label="Next slide">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
         </div>
     </div>
 </div>
@@ -964,6 +1345,57 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
     </div>
 </div>
 <script>
+// Learning Tools accordion toggle
+(function() {
+    const toggle = document.getElementById('learningToolsToggle');
+    const panel = document.getElementById('learningToolsPanel');
+    if (toggle && panel) {
+        toggle.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            panel.hidden = expanded;
+        });
+    }
+})();
+
+// Gateway modals (self-contained, no navigation away)
+function openGwModal(id) {
+    document.getElementById(id)?.classList.add('open');
+    document.getElementById('gwModalBackdrop')?.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGwModals() {
+    document.querySelectorAll('.gw-modal').forEach(m => m.classList.remove('open'));
+    document.getElementById('gwModalBackdrop')?.classList.remove('visible');
+    document.body.style.overflow = '';
+    // Pause testimony audio if playing
+    const audio = document.getElementById('gwTestimonyAudio');
+    if (audio) { audio.pause(); }
+}
+
+// Backdrop click and Escape key close
+document.getElementById('gwModalBackdrop')?.addEventListener('click', closeGwModals);
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.querySelector('.gw-modal.open')) {
+        closeGwModals();
+    }
+});
+
+// Slides carousel
+var gwCurrentSlide = 1;
+var gwTotalSlides = 9;
+
+function gwSlideNav(dir) {
+    gwCurrentSlide += dir;
+    if (gwCurrentSlide < 1) gwCurrentSlide = gwTotalSlides;
+    if (gwCurrentSlide > gwTotalSlides) gwCurrentSlide = 1;
+    var num = String(gwCurrentSlide).padStart(2, '0');
+    document.getElementById('gwSlideImg').src = '/assets/slides/WoP_Ch06/slide-' + num + '.png';
+    document.getElementById('gwSlideImg').alt = 'Study slide ' + gwCurrentSlide + ' of ' + gwTotalSlides;
+    document.getElementById('gwSlideNum').textContent = gwCurrentSlide;
+}
+
 // Scripture auto-linking for interactive pathways
 (function() {
     const bookMappings = {

@@ -6,7 +6,7 @@ chapterId: "chapter-06-embrace-the-savior"
 layout: layouts/chapter.njk
 permalink: /chapters/06-embrace-the-savior-full/
 writingsUrl: /chapters/06-embrace-the-savior/
-sscripture:
+scripture:
   text: "Ye are all the children of God by faith in Christ Jesus."
   reference: "Galatians 3:26"
   url: "nt/gal/3?id=p26#p26"
@@ -50,6 +50,7 @@ toc:
     title: When Faith Is Tested
   - id: the-invitation
     title: The Invitation
+lyricsInclude: "lyrics/chapter-06.njk"
 discordChannelId: "1463835929125978163"
 prevChapter:
   url: "/chapters/05-sincere-prayer/"

@@ -47,6 +47,7 @@ const ChapterManager = {
         this.initReflections();
         this.linkScriptures();
         this.initReadingProgressSync();
+        this.checkHashRoute();
 
         console.log('ChapterManager initialized for:', config.title);
     },
@@ -456,6 +457,24 @@ const ChapterManager = {
         });
     },
     
+    // Hash-based modal routing (for deep links from interactive gateway)
+    checkHashRoute() {
+        const hash = window.location.hash;
+        const hashMap = {
+            '#open-slides': 'slidesModal',
+            '#open-testimony': 'testimonyModal',
+            '#open-podcast': 'overviewModal',
+            '#open-infographic': 'infographicModal'
+        };
+        const modalId = hashMap[hash];
+        if (modalId) {
+            // Small delay to ensure modals are fully initialized
+            setTimeout(() => this.openModal(modalId), 300);
+            // Clean hash from URL without scrolling
+            history.replaceState(null, '', window.location.pathname);
+        }
+    },
+
     // Slides Carousel
     initSlides() {
         const prevBtn = document.getElementById('slidePrev');
