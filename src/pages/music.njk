@@ -12,17 +12,14 @@ permalink: /music/
 <!-- Music Layout (clears fixed header) -->
 <div class="music-layout">
 
-<!-- Music Player Wrapper (sticky below header) -->
-<div class="music-player-wrapper">
+<!-- ==========================================
+     Sticky Player
+     ========================================== -->
+<div class="music-player-sticky" id="musicPlayerSticky">
 <div class="music-player-bar" id="musicPlayerBar">
     <div class="player-bar-inner">
-        <div class="now-playing">
-            <span class="now-playing-label">Now Playing:</span>
-            <span class="now-playing-title" id="npTitle">Select a song</span>
-            <span class="now-playing-chapter" id="npChapter"></span>
-        </div>
         <div class="player-controls">
-            <button class="player-btn btn-shuffle" id="btnShuffle" title="Shuffle" aria-label="Toggle shuffle">
+            <button class="player-btn btn-shuffle" id="btnShuffle" title="Shuffle: Off" aria-label="Toggle shuffle">
                 <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
                     <polyline points="16 3 21 3 21 8"></polyline>
                     <line x1="4" y1="20" x2="21" y2="3"></line>
@@ -62,6 +59,10 @@ permalink: /music/
                 <span class="repeat-badge" id="repeatBadge" style="display:none">1</span>
             </button>
         </div>
+        <div class="now-playing">
+            <span class="now-playing-title" id="npTitle">Select a song</span>
+            <span class="now-playing-chapter" id="npChapter"></span>
+        </div>
         <div class="player-progress">
             <span class="time-current" id="timeCurrent">0:00</span>
             <div class="progress-track" id="progressTrack">
@@ -86,117 +87,119 @@ permalink: /music/
             <input type="range" class="volume-input" id="volumeInput" min="0" max="100" value="80" aria-label="Volume">
         </div>
     </div>
-    <audio id="musicAudio" preload="metadata"></audio>
+    <audio id="musicAudio" preload="none"></audio>
 </div>
 </div>
 
-<!-- Page Content -->
+<!-- ==========================================
+     Page Content
+     ========================================== -->
 <div class="music-page">
     <div class="music-header">
-        <h1 class="music-title">Sacred Americana Testimonies</h1>
-        <p class="music-subtitle">Original songs by Aaron Powner, inspired by the themes of each chapter</p>
-        <p class="music-intro-note">Each chapter's musical testimony is an original song inspired by its themes. Some chapters have alternate arrangements — tap "More Versions" on any song to explore them.</p>
+        <h1 class="music-title">Complete Collection of Musical Testimonies</h1>
     </div>
 
-    <details class="music-lyrics-panel" id="lyricsPanel">
-        <summary>View Lyrics</summary>
-        <div class="lyrics-content" id="lyricsContent">
-            <p class="no-lyrics">Select a song to view lyrics</p>
+    <!-- Lyrics Panel (collapsible, default closed) -->
+    <div class="lyrics-wrapper" id="lyricsWrapper">
+        <button class="lyrics-toggle" id="lyricsToggle" type="button" aria-expanded="false" aria-controls="lyricsPanel">
+            <span class="lyrics-toggle-label">Lyrics</span>
+            <span class="lyrics-toggle-arrow" id="lyricsArrow">&#9660;</span>
+        </button>
+        <div class="lyrics-panel-body" id="lyricsPanel">
+            <div class="music-lyrics-panel">
+                <h2 class="lyrics-heading" id="lyricsHeading">Select a song to view lyrics</h2>
+                <div class="lyrics-content" id="lyricsContent">
+                    <p class="no-lyrics">Choose a track from the playlist below to begin listening.</p>
+                </div>
+                <p class="lyrics-alt-note" id="lyricsAltNote" style="display:none">Lyrics shown are for the primary arrangement. This version may include minor lyrical variations.</p>
+            </div>
         </div>
-    </details>
+    </div>
 
+    <!-- ==========================================
+         Track List
+         ========================================== -->
     <div class="playlist-container">
+
+        <!-- Section 1: The Journey (Primaries) -->
+        <div class="playlist-section-header">
+            <h2 class="section-title">The Journey</h2>
+            <p class="section-subtitle">The core musical testimony, chapter by chapter</p>
+        </div>
+
         <table class="playlist-table" id="playlistTable">
             <thead>
                 <tr>
-                    <th class="col-play" aria-label="Play"></th>
                     <th class="col-num">#</th>
                     <th class="col-title">Title</th>
-                    <th class="col-description">Theme</th>
                     <th class="col-chapter">Chapter</th>
                     <th class="col-duration">Duration</th>
-                    <th class="col-download" aria-label="Download"></th>
                 </tr>
             </thead>
             <tbody>
+                {%- set trackNum = 1 -%}
                 {%- for chapter in collections.chapters -%}
                 {%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.file -%}
                 <tr class="playlist-row"
                     data-src="/assets/audio/{{ chapter.data.audio.testimony.file }}"
                     data-title="{{ chapter.data.audio.testimony.title }}"
-                    data-chapter="Chapter {{ chapter.data.chapter }}: {{ chapter.data.title }}"
+                    data-label=""
+                    data-chapter="{{ chapter.data.chapter }}"
+                    data-chapter-title="{{ chapter.data.title }}"
                     data-chapter-url="{{ chapter.url }}"
                     data-lyrics="{{ chapter.data.lyrics | escape if chapter.data.lyrics else '' }}">
-                    <td class="col-play">
-                        <button class="btn-row-play" aria-label="Play {{ chapter.data.audio.testimony.title }}">
-                            <svg class="icon-play" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none">
-                                <polygon points="6 3 20 12 6 21 6 3"></polygon>
-                            </svg>
-                            <svg class="icon-pause" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none" style="display:none">
-                                <rect x="5" y="3" width="5" height="18"></rect>
-                                <rect x="14" y="3" width="5" height="18"></rect>
-                            </svg>
-                            <svg class="icon-eq" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none" style="display:none">
-                                <rect x="4" y="14" width="3" height="6" rx="1"></rect>
-                                <rect x="10.5" y="8" width="3" height="12" rx="1"></rect>
-                                <rect x="17" y="11" width="3" height="9" rx="1"></rect>
-                            </svg>
-                        </button>
-                    </td>
-                    <td class="col-num">{{ chapter.data.chapter }}</td>
+                    <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
-                        <span class="song-title">{{ chapter.data.audio.testimony.title }}</span>
+                        <div class="track-title-group">
+                            <span class="song-title">{{ chapter.data.audio.testimony.title }}</span>
+                            <span class="track-chapter-mobile">Ch. {{ chapter.data.chapter }}</span>
+                        </div>
                     </td>
-                    <td class="col-description">{{ chapter.data.audio.testimony.description }}</td>
                     <td class="col-chapter">
                         <a href="{{ chapter.url }}" class="chapter-link">Ch. {{ chapter.data.chapter }}</a>
                     </td>
-                    <td class="col-duration" data-duration>—</td>
-                    <td class="col-download">
-                        <a href="/assets/audio/{{ chapter.data.audio.testimony.file }}" download class="btn-download" title="Download" aria-label="Download {{ chapter.data.audio.testimony.title }}">
-                            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="7 10 12 15 17 10"></polyline>
-                                <line x1="12" y1="15" x2="12" y2="3"></line>
-                            </svg>
-                        </a>
-                    </td>
+                    <td class="col-duration" data-duration>{{ chapter.data.audio.testimony.duration if chapter.data.audio.testimony.duration else '&mdash;' | safe }}</td>
                 </tr>
-                {%- if chapter.data.audio.testimony.alternates and chapter.data.audio.testimony.alternates.length > 0 -%}
-                <tr class="alt-versions-row">
-                    <td></td>
-                    <td></td>
-                    <td colspan="5">
-                        <button class="alt-toggle" aria-expanded="false">
-                            <span class="alt-toggle-arrow">&#9656;</span>
-                            More Versions ({{ chapter.data.audio.testimony.alternates.length }})
-                        </button>
-                        <div class="alt-list">
-                            {%- for alt in chapter.data.audio.testimony.alternates -%}
-                            <div class="alt-entry" data-src="/assets/audio/{{ alt.file }}">
-                                <span class="alt-label">{{ alt.label }}</span>
-                                <div class="alt-player">
-                                    <button class="alt-play-btn" aria-label="Play {{ alt.label }}">
-                                        <svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none">
-                                            <polygon points="6 3 20 12 6 21 6 3"></polygon>
-                                        </svg>
-                                        <svg class="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none" style="display:none">
-                                            <rect x="5" y="3" width="5" height="18"></rect>
-                                            <rect x="14" y="3" width="5" height="18"></rect>
-                                        </svg>
-                                    </button>
-                                    <div class="alt-progress-track">
-                                        <div class="alt-progress-fill"></div>
-                                        <input type="range" class="alt-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek {{ alt.label }}">
-                                    </div>
-                                    <span class="alt-time">0:00</span>
-                                </div>
-                            </div>
-                            {%- endfor -%}
+                {%- set trackNum = trackNum + 1 -%}
+                {%- endif -%}
+                {%- endfor -%}
+
+                <!-- Section 2: More Arrangements (Alternates) -->
+                <tr class="playlist-section-divider" id="altSectionDivider">
+                    <td colspan="4">
+                        <div class="playlist-section-header playlist-section-header--inline">
+                            <h2 class="section-title">More Arrangements</h2>
+                            <p class="section-subtitle">The same truths in different musical languages</p>
                         </div>
                     </td>
                 </tr>
-                {%- endif -%}
+
+                {%- for chapter in collections.chapters -%}
+                {%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.alternates and chapter.data.audio.testimony.alternates.length > 0 -%}
+                {%- for alt in chapter.data.audio.testimony.alternates -%}
+                <tr class="playlist-row playlist-row--alt"
+                    data-src="/assets/audio/{{ alt.file }}"
+                    data-title="{{ chapter.data.audio.testimony.title }}"
+                    data-label="{{ alt.label }}"
+                    data-chapter="{{ chapter.data.chapter }}"
+                    data-chapter-title="{{ chapter.data.title }}"
+                    data-chapter-url="{{ chapter.url }}"
+                    data-lyrics="{{ chapter.data.lyrics | escape if chapter.data.lyrics else '' }}">
+                    <td class="col-num">{{ trackNum }}</td>
+                    <td class="col-title">
+                        <div class="track-title-group">
+                            <span class="song-title">{{ chapter.data.audio.testimony.title }}</span>
+                            <span class="song-label">&mdash; {{ alt.label }}</span>
+                            <span class="track-chapter-mobile">Ch. {{ chapter.data.chapter }}</span>
+                        </div>
+                    </td>
+                    <td class="col-chapter">
+                        <a href="{{ chapter.url }}" class="chapter-link">Ch. {{ chapter.data.chapter }}</a>
+                    </td>
+                    <td class="col-duration" data-duration>{{ alt.duration if alt.duration else '&mdash;' | safe }}</td>
+                </tr>
+                {%- set trackNum = trackNum + 1 -%}
+                {%- endfor -%}
                 {%- endif -%}
                 {%- endfor -%}
             </tbody>

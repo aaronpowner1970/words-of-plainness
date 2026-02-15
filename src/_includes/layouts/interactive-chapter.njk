@@ -1,0 +1,25 @@
+---
+# This layout is used by interactive multi-path chapters.
+# It extends the base layout to inherit header, footer, and site chrome.
+---
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<link rel="stylesheet" href="/css/interactive-chapter.css">
+
+<main class="interactive-chapter" data-chapter="{{ chapter }}">
+  {{ content | safe }}
+</main>
+
+<button id="float-back" onclick="showGateway()" aria-label="Return to pathway selection">&#8617; Back to Paths</button>
+
+<div id="transition-screen" aria-hidden="true">
+  <div class="star-melchizedek">
+    <div class="sq"></div>
+    <div class="sq"></div>
+  </div>
+  <div class="transition-text">Preparing your place at the table&hellip;</div>
+</div>
+
+<script src="/js/interactive-chapter.js"></script>
+{% endblock %}

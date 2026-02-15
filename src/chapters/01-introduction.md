@@ -19,12 +19,15 @@ audio:
   testimony:
     file: "01_1_Introduction_to_Plainness_-_Sacred_Americana_Testimony.mp3"
     title: "Introduction to Plainness"
+    duration: "4:09"
     description: "A gentle invitation to approach faith with an open heart"
     alternates:
       - file: "01_2_Introduction_to_Plainness_Cinematic_Inspirational.mp3"
         label: "Cinematic Inspirational — Piano-Led with Dramatic Orchestral Build"
+        duration: "4:19"
       - file: "01_3_Introduction_to_Plainness_Americana_Folk_Female_Vocal.mp3"
         label: "Americana Folk — Confident Female Mezzo-Soprano"
+        duration: "4:24"
 
 pdf: "WoP_Ch01_Introduction.pdf"
 infographic: "WoP_Ch01_Introduction_Infographic.png"

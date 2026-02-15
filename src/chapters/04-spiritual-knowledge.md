@@ -19,14 +19,18 @@ audio:
   testimony:
     file: "04_1_When_God_Becomes_Real.mp3"
     title: "When God Becomes Real"
+    duration: "5:09"
     description: "A musical reflection on spiritual knowledge"
     alternates:
       - file: "04_2_When_God_Becomes_Real_Academics_Remix.mp3"
         label: "Academics Remix"
+        duration: "4:42"
       - file: "04_3_When_God_Becomes_Real_Soul_Worship.mp3"
         label: "Gospel Soul — Male Baritone Lead with Full Choir Call-and-Response"
+        duration: "4:33"
       - file: "04_4_When_God_Becomes_Real_Contemplative_Worship_Female_Vocal.mp3"
         label: "Contemplative Worship — Warm Female Alto with Piano and Cello"
+        duration: "7:59"
 
 pdf: "WoP_Ch04_Spiritual_Knowledge.pdf"
 infographic: "chapter-04-infographic.png"

@@ -1,7 +1,8 @@
 /**
  * WORDS OF PLAINNESS — Music Player
  * ==================================
- * Full playlist player for the Music page.
+ * Unified playlist player for the Music page.
+ * All primaries and alternates play through a single audio element.
  */
 
 const MusicPlayer = {
@@ -12,13 +13,10 @@ const MusicPlayer = {
     shuffle: false,
     repeat: 'none', // 'none', 'all', 'one'
     shuffleOrder: [],
+    playIntent: 0, // incremented on each playTrack call to cancel stale play attempts
 
     // DOM refs
     els: {},
-
-    // Alternate version state
-    altAudio: null,
-    altPlaying: null, // currently playing alt-entry element
 
     init() {
         this.audio = document.getElementById('musicAudio');
@@ -28,8 +26,6 @@ const MusicPlayer = {
         this.loadTracks();
         this.loadVolume();
         this.bindEvents();
-        this.loadDurations();
-        this.initAlternates();
 
         console.log('MusicPlayer initialized with', this.tracks.length, 'tracks');
     },
@@ -51,7 +47,12 @@ const MusicPlayer = {
             progressInput: id('progressInput'),
             btnVolume: id('btnVolume'),
             volumeInput: id('volumeInput'),
-            table: id('playlistTable')
+            lyricsHeading: id('lyricsHeading'),
+            lyricsContent: id('lyricsContent'),
+            lyricsAltNote: id('lyricsAltNote'),
+            lyricsWrapper: id('lyricsWrapper'),
+            lyricsToggle: id('lyricsToggle'),
+            lyricsArrow: id('lyricsArrow')
         };
     },
 
@@ -61,9 +62,11 @@ const MusicPlayer = {
             index: i,
             src: row.dataset.src,
             title: row.dataset.title,
-            chapter: row.dataset.chapter,
+            label: row.dataset.label || '',
+            chapter: parseInt(row.dataset.chapter, 10),
+            chapterTitle: row.dataset.chapterTitle,
             chapterUrl: row.dataset.chapterUrl,
-            lyrics: row.dataset.lyrics || null,
+            lyrics: row.dataset.lyrics || '',
             row: row
         }));
     },
@@ -75,21 +78,6 @@ const MusicPlayer = {
         this.els.volumeInput.value = vol;
     },
 
-    loadDurations() {
-        // Preload metadata for each track to get duration
-        this.tracks.forEach((track) => {
-            const tempAudio = new Audio();
-            tempAudio.preload = 'metadata';
-            tempAudio.addEventListener('loadedmetadata', () => {
-                const cell = track.row.querySelector('[data-duration]');
-                if (cell) {
-                    cell.textContent = this.formatTime(tempAudio.duration);
-                }
-            });
-            tempAudio.src = track.src;
-        });
-    },
-
     bindEvents() {
         // Audio events
         this.audio.addEventListener('timeupdate', () => this.onTimeUpdate());
@@ -97,6 +85,7 @@ const MusicPlayer = {
         this.audio.addEventListener('ended', () => this.onTrackEnded());
         this.audio.addEventListener('play', () => this.updatePlayState(true));
         this.audio.addEventListener('pause', () => this.updatePlayState(false));
+        this.audio.addEventListener('error', (e) => this.onAudioError(e));
 
         // Control buttons
         this.els.btnPlay.addEventListener('click', () => this.togglePlay());
@@ -104,6 +93,7 @@ const MusicPlayer = {
         this.els.btnNext.addEventListener('click', () => this.next());
         this.els.btnShuffle.addEventListener('click', () => this.toggleShuffle());
         this.els.btnRepeat.addEventListener('click', () => this.toggleRepeat());
+        this.els.lyricsToggle.addEventListener('click', () => this.toggleLyrics());
 
         // Progress seeking
         this.els.progressInput.addEventListener('input', (e) => {
@@ -128,16 +118,14 @@ const MusicPlayer = {
 
         // Playlist row clicks
         this.tracks.forEach((track, i) => {
-            // Row click (except links and buttons)
             track.row.addEventListener('click', (e) => {
-                if (e.target.closest('a') || e.target.closest('.btn-download')) return;
+                if (e.target.closest('a')) return;
                 this.playTrack(i);
             });
         });
 
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
-            // Don't capture when typing in inputs
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
             switch (e.code) {
@@ -182,48 +170,53 @@ const MusicPlayer = {
         this.currentIndex = index;
 
         if (wasSameTrack && this.audio.src && !forceRestart) {
-            // Toggle play/pause on same track
             this.togglePlay();
             return;
         }
 
-        // Stop any playing alternate version
-        this.stopAltPlayback();
+        // Cancel any stale play attempt
+        this.playIntent++;
+        const thisIntent = this.playIntent;
 
+        // Stop current playback cleanly before switching
+        this.audio.pause();
         this.audio.src = track.src;
-        this.audio.play().catch(() => {
-            // If play fails (e.g. after ended event), retry once audio is ready
-            this.audio.addEventListener('canplay', () => {
-                this.audio.play().catch(() => {});
-            }, { once: true });
-        });
 
-        // Update Now Playing
-        this.els.npTitle.textContent = track.title;
-        this.els.npChapter.textContent = track.chapter;
-
-        // Update lyrics panel
-        this.updateLyrics(index);
-
-        // Highlight row
-        this.tracks.forEach(t => {
-            t.row.classList.remove('playing', 'is-playing');
-        });
+        // Update UI immediately (don't wait for audio)
+        this.updateNowPlaying(track);
+        this.updateLyrics(track);
+        this.tracks.forEach(t => t.row.classList.remove('playing', 'is-playing'));
         track.row.classList.add('playing', 'is-playing');
-
-        // Scroll row into view if needed
         track.row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Play immediately — browser handles buffering natively
+        this.audio.play().catch((err) => {
+            if (thisIntent !== this.playIntent) return; // stale — user clicked another track
+            if (err.name === 'AbortError') return; // expected when switching tracks
+            if (err.name === 'NotAllowedError') return; // autoplay policy
+            console.warn('Playback failed:', err.message);
+        });
+    },
+
+    updateNowPlaying(track) {
+        // Always show style label — primaries default to "Sacred Americana"
+        var displayLabel = track.label || 'Sacred Americana';
+        this.els.npTitle.textContent = track.title + ' \u2014 ' + displayLabel;
+        this.els.npChapter.textContent = '(Ch ' + track.chapter + ')';
     },
 
     togglePlay() {
         if (this.currentIndex === -1) {
-            // Nothing loaded — play first track
             this.playTrack(this.shuffle ? this.getShuffledIndex(0) : 0);
             return;
         }
 
         if (this.audio.paused) {
-            this.audio.play().catch(() => {});
+            this.audio.play().catch((err) => {
+                if (err.name !== 'AbortError') {
+                    console.warn('Play failed:', err.message);
+                }
+            });
         } else {
             this.audio.pause();
         }
@@ -252,6 +245,10 @@ const MusicPlayer = {
         }
     },
 
+    /**
+     * Get the next or previous track index for button presses.
+     * Wraps around when repeat is 'all'.
+     */
     getAdjacentIndex(direction) {
         if (this.shuffle) {
             const shufflePos = this.shuffleOrder.indexOf(this.currentIndex);
@@ -303,40 +300,85 @@ const MusicPlayer = {
 
     onMetadataLoaded() {
         this.els.timeTotal.textContent = this.formatTime(this.audio.duration);
+
+        // Populate the duration cell in the track list for the current track
+        if (this.currentIndex >= 0) {
+            const cell = this.tracks[this.currentIndex].row.querySelector('[data-duration]');
+            if (cell) {
+                cell.textContent = this.formatTime(this.audio.duration);
+            }
+        }
+    },
+
+    onAudioError(e) {
+        const err = this.audio.error;
+        if (err) {
+            console.warn('Audio error:', err.code, err.message);
+        }
+        // If a track fails to load, auto-advance to next
+        if (this.currentIndex >= 0) {
+            const nextIndex = this.getNextAutoAdvance();
+            if (nextIndex !== -1) {
+                setTimeout(() => this.playTrack(nextIndex), 500);
+            }
+        }
     },
 
     onTrackEnded() {
+        // Repeat one: loop current track regardless of shuffle
         if (this.repeat === 'one') {
             this.audio.currentTime = 0;
             this.audio.play().catch(() => {});
             return;
         }
 
-        if (this.currentIndex < this.tracks.length - 1) {
-            // Not at end, play next
-            const nextIdx = this.shuffle
-                ? this.shuffleOrder[this.shuffleOrder.indexOf(this.currentIndex) + 1]
-                : this.currentIndex + 1;
-            this.playTrack(nextIdx);
+        // Find next track in current order (no wrapping)
+        const nextIndex = this.getNextAutoAdvance();
+
+        if (nextIndex !== -1) {
+            // More tracks in the current pass
+            this.playTrack(nextIndex);
         } else if (this.repeat === 'all') {
-            // At end with repeat-all, loop to beginning
-            const firstIdx = this.shuffle ? this.getShuffledIndex(0) : 0;
-            // Brief delay lets browser fully process ended state
+            // End of list with repeat-all
+            if (this.shuffle) {
+                this.generateShuffleOrder(); // reshuffle for new pass
+            }
+            const firstIdx = this.shuffle ? this.shuffleOrder[0] : 0;
             setTimeout(() => this.playTrack(firstIdx, true), 50);
         } else {
-            // At end with repeat off, stop
-            this.currentIndex = -1;
-            this.currentIndex = -1;
-            this.els.npTitle.textContent = 'Select a song';
-            this.els.npChapter.textContent = '';
-            this.els.progressFill.style.width = '0%';
-            this.els.progressInput.value = 0;
-            this.els.timeCurrent.textContent = '0:00';
-            this.els.timeTotal.textContent = '0:00';
-            this.tracks.forEach(t => t.row.classList.remove('playing', 'is-playing'));
-            this.updatePlayState(false);
-            this.updateLyrics(-1);
+            // End of list, no repeat — stop
+            this.resetPlayer();
         }
+    },
+
+    /**
+     * Get the next track for auto-advance (no wrapping).
+     * Returns -1 when at end of the current order.
+     */
+    getNextAutoAdvance() {
+        if (this.shuffle) {
+            const shufflePos = this.shuffleOrder.indexOf(this.currentIndex);
+            const nextPos = shufflePos + 1;
+            if (nextPos < this.shuffleOrder.length) {
+                return this.shuffleOrder[nextPos];
+            }
+            return -1;
+        }
+        const nextIndex = this.currentIndex + 1;
+        return nextIndex < this.tracks.length ? nextIndex : -1;
+    },
+
+    resetPlayer() {
+        this.currentIndex = -1;
+        this.els.npTitle.textContent = 'Select a song';
+        this.els.npChapter.textContent = '';
+        this.els.progressFill.style.width = '0%';
+        this.els.progressInput.value = 0;
+        this.els.timeCurrent.textContent = '0:00';
+        this.els.timeTotal.textContent = '0:00';
+        this.tracks.forEach(t => t.row.classList.remove('playing', 'is-playing'));
+        this.updatePlayState(false);
+        this.updateLyrics(null);
     },
 
     updatePlayState(isPlaying) {
@@ -353,7 +395,7 @@ const MusicPlayer = {
             this.els.btnPlay.title = 'Play';
         }
 
-        // Update row icon state
+        // Update row highlight
         if (this.currentIndex >= 0) {
             const row = this.tracks[this.currentIndex].row;
             if (isPlaying) {
@@ -439,109 +481,38 @@ const MusicPlayer = {
     // Lyrics
     // =========================================
 
-    updateLyrics(songIndex) {
-        const lyricsContent = document.getElementById('lyricsContent');
-        if (!lyricsContent) return;
+    toggleLyrics() {
+        const wrapper = this.els.lyricsWrapper;
+        const isOpen = wrapper.classList.toggle('open');
+        this.els.lyricsToggle.setAttribute('aria-expanded', isOpen);
+        this.els.lyricsArrow.innerHTML = isOpen ? '&#9650;' : '&#9660;';
+    },
 
-        if (songIndex >= 0 && songIndex < this.tracks.length) {
-            const track = this.tracks[songIndex];
+    updateLyrics(track) {
+        if (!this.els.lyricsContent) return;
+
+        if (track) {
+            // Update heading with song title
+            this.els.lyricsHeading.textContent = track.title;
+
             if (track.lyrics) {
-                lyricsContent.innerHTML = track.lyrics;
+                this.els.lyricsContent.innerHTML = track.lyrics;
             } else {
-                lyricsContent.innerHTML = '<p class="no-lyrics">No lyrics available for this song.</p>';
+                this.els.lyricsContent.innerHTML = '<p class="no-lyrics">Lyrics not yet available for this testimony.</p>';
+            }
+
+            // Show alt note when playing an alternate version
+            if (this.els.lyricsAltNote) {
+                this.els.lyricsAltNote.style.display = track.label ? 'block' : 'none';
             }
         } else {
-            lyricsContent.innerHTML = '<p class="no-lyrics">Select a song to view lyrics</p>';
+            // No track selected
+            this.els.lyricsHeading.textContent = 'Select a song to view lyrics';
+            this.els.lyricsContent.innerHTML = '<p class="no-lyrics">Choose a track from the playlist below to begin listening.</p>';
+            if (this.els.lyricsAltNote) {
+                this.els.lyricsAltNote.style.display = 'none';
+            }
         }
-    },
-
-    // =========================================
-    // Alternate Versions
-    // =========================================
-
-    initAlternates() {
-        // Toggle expand/collapse
-        document.querySelectorAll('.alt-toggle').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const list = btn.nextElementSibling;
-                const expanded = btn.classList.toggle('expanded');
-                list.classList.toggle('expanded', expanded);
-                btn.setAttribute('aria-expanded', expanded);
-            });
-        });
-
-        // Inline players
-        document.querySelectorAll('.alt-entry').forEach(entry => {
-            const playBtn = entry.querySelector('.alt-play-btn');
-            const seek = entry.querySelector('.alt-seek');
-            const fill = entry.querySelector('.alt-progress-fill');
-            const timeEl = entry.querySelector('.alt-time');
-            const src = entry.dataset.src;
-
-            playBtn.addEventListener('click', () => {
-                // If this alternate is already playing, toggle pause
-                if (this.altPlaying === entry && this.altAudio && !this.altAudio.paused) {
-                    this.altAudio.pause();
-                    playBtn.classList.remove('playing');
-                    return;
-                }
-
-                // Stop any other playing alternate
-                this.stopAltPlayback();
-
-                // Pause main player if playing
-                if (!this.audio.paused) {
-                    this.audio.pause();
-                }
-
-                // Create or reuse audio
-                if (!this.altAudio) {
-                    this.altAudio = new Audio();
-                    this.altAudio.addEventListener('timeupdate', () => {
-                        if (!this.altAudio.duration || !this.altPlaying) return;
-                        const pct = (this.altAudio.currentTime / this.altAudio.duration) * 100;
-                        const curFill = this.altPlaying.querySelector('.alt-progress-fill');
-                        const curSeek = this.altPlaying.querySelector('.alt-seek');
-                        const curTime = this.altPlaying.querySelector('.alt-time');
-                        if (curFill) curFill.style.width = pct + '%';
-                        if (curSeek) curSeek.value = pct;
-                        if (curTime) curTime.textContent = this.formatTime(this.altAudio.currentTime);
-                    });
-                    this.altAudio.addEventListener('ended', () => {
-                        this.stopAltPlayback();
-                    });
-                }
-
-                this.altAudio.src = src;
-                this.altAudio.play().catch(() => {});
-                this.altPlaying = entry;
-                playBtn.classList.add('playing');
-            });
-
-            // Seek
-            seek.addEventListener('input', (e) => {
-                if (this.altAudio && this.altAudio.duration && this.altPlaying === entry) {
-                    this.altAudio.currentTime = (e.target.value / 100) * this.altAudio.duration;
-                }
-            });
-        });
-    },
-
-    stopAltPlayback() {
-        if (this.altAudio && !this.altAudio.paused) {
-            this.altAudio.pause();
-        }
-        if (this.altPlaying) {
-            const btn = this.altPlaying.querySelector('.alt-play-btn');
-            if (btn) btn.classList.remove('playing');
-            const fill = this.altPlaying.querySelector('.alt-progress-fill');
-            if (fill) fill.style.width = '0%';
-            const seek = this.altPlaying.querySelector('.alt-seek');
-            if (seek) seek.value = 0;
-            const time = this.altPlaying.querySelector('.alt-time');
-            if (time) time.textContent = '0:00';
-        }
-        this.altPlaying = null;
     },
 
     // =========================================
