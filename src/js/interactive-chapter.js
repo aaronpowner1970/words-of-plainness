@@ -133,6 +133,28 @@
     });
   };
 
+  window.goBackOnPath = function () {
+    if (state.movement <= 1) {
+      showGateway();
+      return;
+    }
+    state.movement--;
+    saveState();
+    showTransition(function () {
+      hideAll();
+      var target = document.querySelector(
+        '.movement-section[data-path="' + state.path + '"][data-movement="' + state.movement + '"]'
+      );
+      if (target) {
+        target.style.display = 'block';
+        target.classList.add('ic-fade-in');
+        setTimeout(function () { target.classList.remove('ic-fade-in'); }, 600);
+      }
+      updateDots();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  };
+
   window.showReflection = function () {
     state.screen = 'reflection';
 

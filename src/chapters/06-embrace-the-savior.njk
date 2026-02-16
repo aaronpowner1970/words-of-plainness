@@ -21,6 +21,20 @@ nextChapter:
   font-size: 1.1em;
   color: #C4943A;
 }
+.btn-back {
+  background: transparent;
+  color: #C4943A;
+  border: 1px solid rgba(196, 148, 58, 0.4);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-back:hover {
+  background: rgba(196, 148, 58, 0.1);
+  border-color: #C4943A;
+}
 
 /* Gateway Learning Tools Accordion */
 .gateway-learning-tools {
@@ -569,6 +583,7 @@ nextChapter:
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 1</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 3 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -616,6 +631,7 @@ nextChapter:
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 2</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 4 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -665,6 +681,7 @@ nextChapter:
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 3</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 5 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -709,6 +726,7 @@ nextChapter:
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 4</button>
             <button class="btn-continue" onclick="showReflection()">Personal Reflection &amp; 30-Day Challenge &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -760,6 +778,7 @@ nextChapter:
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 5</button>
             <button class="btn-switch" onclick="showGateway()">Return to Chapter Paths</button>
         </div>
     </div>
@@ -848,11 +867,11 @@ nextChapter:
 
 <h3>Faith That Reaches Beyond Belief</h3>
 <p>Scripture describes faith as &ldquo;the substance of things hoped for, the evidence of things not seen&rdquo; (Hebrews 11:1). Paul also taught that &ldquo;faith cometh by hearing, and hearing by the word of God&rdquo; (Romans 10:17). But faith that merely hears and acknowledges is incomplete. The Book of Mormon offers a complementary witness: faith is hope for things &ldquo;which are not seen, which are true&rdquo; (Alma 32:21)&mdash;emphasis on <em>true</em>. Faith is not believing whatever we wish were real. It is trusting in what is real before we have full proof of it.</p>
-<p>Joseph Smith, whom we sustain as the founding prophet of the Restoration, taught three requirements for mature faith: <br />
-<span class="star-icon">۞</span> first, the idea that God exists<br />
-<span class="star-icon">۞</span> second, a correct understanding of God&rsquo;s character.<br />
-This is vital to get right! Knowledge of God's character... <em>NOT</em> theological knowledge of his nature as a deity. Perfect understanding is <em>NOT</em> required. A personal relationship with God <em>IS</em>.<br />
-<span class="star-icon">۞</span> third, an actual knowledge that the course of one&rsquo;s life is pleasing to Him.</p>
+<p>Joseph Smith, whom Latter-day Saints sustain as the founding prophet of the Restoration, taught three requirements for mature faith: <br />
+<span class="star-icon">۞</span> 1st, the idea that God exists<br />
+<span class="star-icon">۞</span> 2nd, a correct understanding of God&rsquo;s character.<br />
+This is vital to get right! He said, "knowledge of God's character"... NOT theological knowledge of his true nature as a deity. Perfect understanding is NOT required. A personal relationship with God IS.<br />
+<span class="star-icon">۞</span> 3rd, an actual knowledge that the course of one&rsquo;s life is pleasing to God.</p>
 <p>We share this not to impose our framework but because these principles may resonate with your own experience. The first two are matters of belief and doctrine. The third is a matter of lived relationship with God. That third element is what transforms belief into discipleship.</p>
 
 <h3>The Restoration: Not a Rejection but a Recovery</h3>
@@ -867,6 +886,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 1</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 3 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -916,6 +936,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 2</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 4 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -959,6 +980,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 3</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 5 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -1002,6 +1024,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 4</button>
             <button class="btn-continue" onclick="showReflection()">Personal Reflection &amp; 30-Day Challenge &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -1053,6 +1076,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 5</button>
             <button class="btn-switch" onclick="showGateway()">Return to Chapter Paths</button>
         </div>
     </div>
@@ -1148,6 +1172,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 1</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 3 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -1194,6 +1219,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 2</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 4 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -1241,6 +1267,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 3</button>
             <button class="btn-continue" onclick="continueOnPath()">Continue to Movement 5 &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -1288,6 +1315,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 4</button>
             <button class="btn-continue" onclick="showReflection()">Personal Reflection &amp; 30-Day Challenge &rarr;</button>
             <button class="btn-switch" onclick="showGateway()">Explore a Different Path</button>
             <div class="progress-dots">
@@ -1340,6 +1368,7 @@ This is vital to get right! Knowledge of God's character... <em>NOT</em> theolog
         </div>
         
         <div class="movement-nav">
+            <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 5</button>
             <button class="btn-switch" onclick="showGateway()">Return to Chapter Paths</button>
         </div>
     </div>
