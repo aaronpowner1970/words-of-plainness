@@ -1,0 +1,186 @@
+---
+# ===========================================
+# CARD-CHAPTER TEMPLATE (Post-Chapter 6)
+# Copy this file and rename for new chapters
+# Three-tab discipleship cards format
+# ===========================================
+
+layout: layouts/card-chapter.njk
+
+# Basic Info
+title: "Chapter Title Here"
+chapter: 7
+slug: "07-chapter-slug"
+chapterId: "chapter-07-slug"
+
+# Scripture Epigraph (hero section)
+scripture:
+  text: "Scripture quote text here..."
+  reference: "Book Chapter:Verse"
+  url: "bofm/book/chapter?id=pVERSE#pVERSE"
+
+# Navigation
+prevChapter:
+  url: "/chapters/06-embrace-the-savior/"
+  title: "Chapter 6: Embrace the Savior"
+nextChapter:
+  url: "/chapters/08-next-chapter/"
+  title: "Chapter 8: Next Title"
+
+# Discord
+discordChannelId: ""
+
+# ============================================================
+# DISCIPLESHIP CARDS
+# Each card has: title, scriptures, practice, blesses, commitments
+# Aim for 3-5 cards per chapter (sweet spot is ~4-5)
+# ============================================================
+cards:
+
+  # ──────────────────────────────────────────────
+  # CARD 1: [Topic Name]
+  # ──────────────────────────────────────────────
+  - title: "Card Title Here"
+
+    # Scripture anchors for the card header
+    # url format: testament/book/chapter?id=pVERSE#pVERSE
+    # Examples:
+    #   NT:  nt/matt/6?id=p6#p6
+    #   OT:  ot/isa/58?id=p6#p6
+    #   BofM: bofm/alma/34?id=p27#p27
+    #   D&C: dc-testament/dc/19?id=p38#p38
+    scriptures:
+      - display: "Matthew 6:6"
+        url: "nt/matt/6?id=p6#p6"
+      - display: "Alma 34:27"
+        url: "bofm/alma/34?id=p27#p27"
+
+    # -- Tab 1: How We Practice --
+    # Documentary tone. Teach what Latter-day Saints do and why.
+    # Open with <h4> subheading. Use <p> tags for paragraphs.
+    # Embed scripture hyperlinks inline using <a> tags:
+    #   <a class="scripture-link"
+    #      href="https://www.churchofjesuschrist.org/study/scriptures/URL"
+    #      target="_blank">Display Reference</a>
+    # Keep proportions flexible:
+    #   - Familiar practice (prayer, service): 1-2 paragraphs
+    #   - Distinctive practice (fasting, temple): 2-3 paragraphs
+    practice: |
+      <h4>Subheading for Practice Section</h4>
+      <p>First paragraph explaining the practice. What do Latter-day Saints do? How is it structured? What is its scriptural basis?</p>
+      <p>Second paragraph adding context, quoting scripture inline if needed. Example: The Prophet Alma taught his people to "cry unto God for all their support" (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?id=p27#p27" target="_blank">Alma 34:27</a>).</p>
+
+    # -- Tab 2: How It Blesses --
+    # Testimonial tone. First-person pastoral witness.
+    # Must end with a bridge paragraph using class="bridge-text".
+    # The bridge transitions from testimony to invitation.
+    blesses: |
+      <h4>Subheading for Testimony Section</h4>
+      <p>First paragraph: a personal story, anecdote, or witness. Write in first person. Be specific and honest, not sentimental.</p>
+      <p>Second paragraph: what the practice has done over time. What has it changed? What would be lost without it?</p>
+      <p class="bridge-text">Bridge text here -- a pastoral invitation that connects the testimony to the reader's own decision. Example: "Whether this resonates with you or not, the next step invites you to choose one practice that fits where you are right now."</p>
+
+    # -- Tab 3: How Will You Practice? --
+    # Commitment options: exactly 3, one per reader tier.
+    # Tier values: "covenant" | "seeker" | "explore"
+    #   covenant = robust LDS-aligned commitment
+    #   seeker   = genuine but tradition-flexible commitment
+    #   explore  = gentle entry point, no religious assumption
+    # Readers self-identify through their choice -- no pathway selector.
+    commitments:
+      - text: "Covenant-level commitment text here."
+        tier: "covenant"
+      - text: "Seeker-level commitment text here."
+        tier: "seeker"
+      - text: "Explore-level commitment text here."
+        tier: "explore"
+
+    # Reflection prompt (optional but recommended)
+    # A single question that invites introspection.
+    reflection: "A thoughtful question related to this card's topic?"
+
+  # ──────────────────────────────────────────────
+  # CARD 2: [Topic Name]
+  # ──────────────────────────────────────────────
+  - title: "Second Card Title"
+    scriptures:
+      - display: "Reference"
+        url: "testament/book/chapter?id=pVERSE#pVERSE"
+
+    practice: |
+      <h4>Practice Subheading</h4>
+      <p>Content here.</p>
+
+    blesses: |
+      <h4>Testimony Subheading</h4>
+      <p>Content here.</p>
+      <p class="bridge-text">Bridge text here.</p>
+
+    commitments:
+      - text: "Covenant commitment."
+        tier: "covenant"
+      - text: "Seeker commitment."
+        tier: "seeker"
+      - text: "Explore commitment."
+        tier: "explore"
+
+    reflection: "Reflection question?"
+
+  # ──────────────────────────────────────────────
+  # CARD 3: [Topic Name]
+  # ──────────────────────────────────────────────
+  - title: "Third Card Title"
+    scriptures:
+      - display: "Reference"
+        url: "testament/book/chapter?id=pVERSE#pVERSE"
+
+    practice: |
+      <h4>Practice Subheading</h4>
+      <p>Content here.</p>
+
+    blesses: |
+      <h4>Testimony Subheading</h4>
+      <p>Content here.</p>
+      <p class="bridge-text">Bridge text here.</p>
+
+    commitments:
+      - text: "Covenant commitment."
+        tier: "covenant"
+      - text: "Seeker commitment."
+        tier: "seeker"
+      - text: "Explore commitment."
+        tier: "explore"
+
+    reflection: "Reflection question?"
+
+  # ──────────────────────────────────────────────
+  # CARD 4: [Topic Name]
+  # (For practices with NO non-LDS equivalent,
+  #  include the N/A option -- the template handles
+  #  this automatically via the "Not applicable"
+  #  radio button built into card-chapter.njk)
+  # ──────────────────────────────────────────────
+  - title: "Fourth Card Title"
+    scriptures:
+      - display: "Reference"
+        url: "testament/book/chapter?id=pVERSE#pVERSE"
+
+    practice: |
+      <h4>Practice Subheading</h4>
+      <p>Content here.</p>
+
+    blesses: |
+      <h4>Testimony Subheading</h4>
+      <p>Content here.</p>
+      <p class="bridge-text">Bridge text here.</p>
+
+    commitments:
+      - text: "Covenant commitment."
+        tier: "covenant"
+      - text: "Seeker commitment."
+        tier: "seeker"
+      - text: "Explore commitment."
+        tier: "explore"
+
+    reflection: "Reflection question?"
+---
