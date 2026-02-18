@@ -1,0 +1,308 @@
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/card-chapter.css?v={{ site.version }}">
+{% endblock %}
+
+{% block content %}
+{# ============================================================
+   CARD-CHAPTER LAYOUT
+   Data-driven discipleship cards from frontmatter
+   ============================================================ #}
+
+{# Hero Section #}
+<section class="card-chapter-hero chapter-hero" data-pagefind-ignore>
+    <p class="chapter-number">Chapter {{ chapter }}</p>
+    <h1 class="chapter-title">{{ title }}</h1>
+    <blockquote class="chapter-scripture">
+        "{{ scripture.text }}"
+        <cite>— <a href="https://www.churchofjesuschrist.org/study/scriptures/{{ scripture.url }}" target="_blank" rel="noopener">{{ scripture.reference }}</a></cite>
+    </blockquote>
+</section>
+
+{# How This Chapter Works #}
+<section class="how-it-works" data-pagefind-ignore>
+    <h2>How This Chapter Works</h2>
+    <p>Each card below explores a practice of discipleship. Read how Latter-day Saints understand and live it, consider how it blesses, then decide how you will practice it in your own life.</p>
+    <div class="steps-row">
+        <div class="step-item">
+            <div class="step-icon">
+                <img src="/assets/images/lds_faith.png" alt="How We Practice" width="96" height="96">
+            </div>
+            <div class="step-label">How We Practice</div>
+            <div class="step-desc">Latter-day Saint teaching</div>
+        </div>
+        <div class="step-item">
+            <div class="step-icon">
+                <img src="/assets/images/blessings.png" alt="How It Blesses" width="96" height="96">
+            </div>
+            <div class="step-label">How It Blesses</div>
+            <div class="step-desc">Personal witness</div>
+        </div>
+        <div class="step-item">
+            <div class="step-icon">
+                <img src="/assets/images/shield_of_faith.png" alt="How Will You Practice?" width="96" height="96">
+            </div>
+            <div class="step-label">How Will You Practice?</div>
+            <div class="step-desc">Your commitment</div>
+        </div>
+    </div>
+</section>
+
+{# Discipleship Cards #}
+<section class="cards-container" data-pagefind-body>
+    <span data-pagefind-meta="title" class="visually-hidden">Chapter {{ chapter }}: {{ title }}</span>
+
+    {% for card in cards %}
+    <div class="discipleship-card" id="card-{{ loop.index }}">
+        {# Card Header #}
+        <div class="card-header">
+            <div class="card-badge">{{ loop.index }}</div>
+            <div class="card-header-text">
+                <h3>{{ card.title }}</h3>
+                <div class="card-anchor">
+                    {% for ref in card.scriptures %}
+                    <a href="https://www.churchofjesuschrist.org/study/scriptures/{{ ref.url }}" target="_blank" rel="noopener" class="scripture-link">{{ ref.display }}</a>{% if not loop.last %} · {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        {# Tab Navigation #}
+        <div class="card-tabs" role="tablist">
+            <button class="card-tab{% if true %} active{% endif %}" data-card="{{ loop.index }}" data-tab="practice" role="tab">How We Practice</button>
+            <button class="card-tab" data-card="{{ loop.index }}" data-tab="blesses" role="tab">How It Blesses</button>
+            <button class="card-tab" data-card="{{ loop.index }}" data-tab="personalize" role="tab">How Will You Practice?</button>
+        </div>
+
+        {# Tab 1: How We Practice #}
+        <div class="card-panel active" data-card="{{ loop.index }}" data-panel="practice" role="tabpanel">
+            {{ card.practice | safe }}
+        </div>
+
+        {# Tab 2: How It Blesses #}
+        <div class="card-panel" data-card="{{ loop.index }}" data-panel="blesses" role="tabpanel">
+            {{ card.blesses | safe }}
+        </div>
+
+        {# Tab 3: How Will You Practice? #}
+        <div class="card-panel" data-card="{{ loop.index }}" data-panel="personalize" role="tabpanel">
+            <div class="commitment-group">
+                <label>Choose a practice that fits where you are right now:</label>
+                <div class="commitment-options">
+                    {% for opt in card.commitments %}
+                    <label class="commitment-option">
+                        <input type="radio" name="commit-{{ loop.parent.loop.index }}" value="option-{{ loop.index }}">
+                        <span class="option-text">{{ opt.text }}
+                            <span class="option-tag tag-{{ opt.tier }}">{{ opt.tier | capitalize }}</span>
+                        </span>
+                    </label>
+                    {% endfor %}
+
+                    {# Custom input #}
+                    <div class="custom-input-row">
+                        <input type="radio" name="commit-{{ loop.index }}" value="custom">
+                        <input type="text" placeholder="Or propose your own practice…">
+                    </div>
+
+                    {# N/A option #}
+                    <label class="na-option">
+                        <input type="radio" name="commit-{{ loop.index }}" value="na">
+                        <span>Not applicable to me right now</span>
+                    </label>
+                </div>
+            </div>
+
+            {% if card.reflection %}
+            <p class="reflection-prompt">{{ card.reflection }}</p>
+            <textarea class="reflection-area" placeholder="Write your thoughts here…" rows="4"></textarea>
+            {% endif %}
+
+            <button class="card-save-btn" data-card="{{ loop.index }}">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Save My Choice
+            </button>
+            <div class="save-feedback" data-card="{{ loop.index }}">✓ Choice saved to your summary below</div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{# Cumulative Summary #}
+<section class="summary-section" data-pagefind-ignore>
+    <div class="summary-card">
+        <h2>My Chapter {{ chapter }} Commitments</h2>
+        <p class="summary-subtitle">Your choices are saved here as you work through each card</p>
+
+        <div class="summary-list">
+            {% for card in cards %}
+            <div class="summary-item empty" data-summary="{{ loop.index }}">
+                <span class="item-number">{{ loop.index }}.</span>
+                <span class="item-text">{{ card.title }} — not yet saved</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="milestone-section">
+            <h3>How confident are you in these commitments?</h3>
+            <p class="milestone-prompt">Rate your readiness to follow through this week</p>
+            <div class="star-rating">
+                <button class="star-btn" data-star="1" aria-label="1 star">★</button>
+                <button class="star-btn" data-star="2" aria-label="2 stars">★</button>
+                <button class="star-btn" data-star="3" aria-label="3 stars">★</button>
+                <button class="star-btn" data-star="4" aria-label="4 stars">★</button>
+                <button class="star-btn" data-star="5" aria-label="5 stars">★</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ============================================================
+   LEARNING TOOLS — Collapsible accordion + modals
+   ============================================================ #}
+<section class="cc-learning-tools" data-pagefind-ignore>
+    <div class="cc-lt-wrapper">
+        <button class="cc-lt-toggle" id="ccLtToggle" aria-expanded="false" aria-controls="ccLtPanel">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"></path><path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path>
+            </svg>
+            <span>Other ways to explore this chapter</span>
+            <svg class="cc-lt-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <div class="cc-lt-panel" id="ccLtPanel" hidden>
+            {% if audio and audio.testimony %}
+            <a class="cc-lt-item" href="#" onclick="openCcModal('ccTestimonyModal'); return false;">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Musical Testimony</span>
+            </a>
+            {% endif %}
+            {% if infographic %}
+            <a class="cc-lt-item" href="#" onclick="openCcModal('ccInfographicModal'); return false;">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Visual Summary</span>
+            </a>
+            {% endif %}
+            {% if slides %}
+            <a class="cc-lt-item" href="#" onclick="openCcModal('ccSlidesModal'); return false;">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Study Slides</span>
+            </a>
+            {% endif %}
+            {% if pdf %}
+            <a class="cc-lt-item" href="/assets/pdf/{{ pdf }}" download>
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Download PDF</span>
+            </a>
+            {% endif %}
+            <hr class="cc-lt-divider">
+            <a class="cc-lt-item" href="/search/">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Search All Chapters</span>
+            </a>
+            <a class="cc-lt-item" href="/how-to-use/">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>How to Use This Website</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{# ============================================================
+   LEARNING TOOLS MODALS
+   ============================================================ #}
+<div class="cc-modal-backdrop" id="ccModalBackdrop" data-pagefind-ignore></div>
+
+{% if audio and audio.testimony %}
+{# Musical Testimony Modal #}
+<div class="cc-modal" id="ccTestimonyModal" role="dialog" aria-labelledby="ccTestimonyTitle" aria-modal="true" data-pagefind-ignore>
+    <div class="cc-modal-header">
+        <h3 id="ccTestimonyTitle">Musical Testimony</h3>
+        <button class="cc-modal-close" onclick="closeCcModals()" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="cc-modal-body">
+        <p>An original song by Aaron Powner, inspired by the themes of this chapter.</p>
+        <p><strong style="color: var(--gold-primary);">{{ audio.testimony.title }}</strong><br>{{ audio.testimony.description }}</p>
+        <audio controls preload="metadata" id="ccTestimonyAudio">
+            <source src="/assets/audio/{{ audio.testimony.file }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        {% if lyrics %}
+        {% set lyricsPath = "lyrics/chapter-" + chapterId + ".njk" %}
+        <details class="cc-lyrics-toggle">
+            <summary>View Lyrics</summary>
+            <div class="cc-lyrics-content">
+                {% include lyricsPath %}
+            </div>
+        </details>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+{% if infographic %}
+{# Infographic Lightbox Modal #}
+<div class="cc-modal cc-modal-wide" id="ccInfographicModal" role="dialog" aria-labelledby="ccInfographicTitle" aria-modal="true" data-pagefind-ignore>
+    <div class="cc-modal-header">
+        <h3 id="ccInfographicTitle">Visual Summary</h3>
+        <button class="cc-modal-close" onclick="closeCcModals()" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="cc-modal-body" style="text-align: center;">
+        <img class="cc-infographic-img" src="/assets/images/{{ infographic }}" alt="Chapter {{ chapter }} infographic summary">
+    </div>
+</div>
+{% endif %}
+
+{% if slides %}
+{# Study Slides Carousel Modal #}
+<div class="cc-modal cc-modal-wide" id="ccSlidesModal" role="dialog" aria-labelledby="ccSlidesTitle" aria-modal="true" data-pagefind-ignore>
+    <div class="cc-modal-header">
+        <h3 id="ccSlidesTitle">Study Slides</h3>
+        <button class="cc-modal-close" onclick="closeCcModals()" aria-label="Close">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="cc-modal-body">
+        <div class="cc-slide-container">
+            <img id="ccSlideImg" src="/assets/slides/{{ slides.path }}slide-01.png" alt="Study slide 1 of {{ slides.count }}">
+        </div>
+        <div class="cc-slide-nav">
+            <button onclick="ccSlideNav(-1)" aria-label="Previous slide">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <span class="cc-slide-counter"><span id="ccSlideNum">1</span> / {{ slides.count }}</span>
+            <button onclick="ccSlideNav(1)" aria-label="Next slide">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{# Non-content sections #}
+<div data-pagefind-ignore>
+    {# Discord Community Section #}
+    {% include "components/discord-section.njk" %}
+
+    {# Chapter Navigation (Prev/Next) #}
+    {% include "components/chapter-nav.njk" %}
+
+    {# Back to Top Button #}
+    {% include "components/back-to-top.njk" %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/card-chapter.js"></script>
+<script>
+    document.body.dataset.chapter = '{{ chapterId }}';
+</script>
+{% endblock %}

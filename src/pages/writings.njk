@@ -6,43 +6,96 @@ pageSubtitle: "Scripture-Based Reflections"
 permalink: /writings/
 ---
 
-<!-- Words of Plainness Chapters -->
-<section class="content-section alt" id="chapters">
-    <div class="content-wrapper">
-        <h2>Words of Plainness Chapters</h2>
+<style>
+.volume-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.volume-hub-card {
+    background: var(--overlay-medium);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-left: 4px solid var(--gold-primary);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: all var(--transition-normal);
+}
+
+.volume-hub-card:hover {
+    border-color: var(--gold-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.volume-hub-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    margin-bottom: 0.25rem;
+}
+
+.volume-hub-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    color: var(--cream-soft);
+    margin-bottom: var(--space-xs);
+}
+
+.volume-hub-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--cream);
+    opacity: 0.85;
+    margin-bottom: var(--space-md);
+}
+
+.volume-hub-meta {
+    font-size: 0.85rem;
+    color: var(--cream);
+    opacity: 0.6;
+    margin-bottom: var(--space-sm);
+}
+</style>
+
+<!-- Words of Plainness Volumes -->
+<section class="content-section alt" id="volumes">
+    <div class="content-wrapper" style="max-width: 900px;">
+        <h2>Words of Plainness</h2>
         <p>
             The heart of this ministry&mdash;extended reflections on scripture and discipleship,
             written for both seekers exploring faith and saints deepening their walk with Christ.
         </p>
 
-        <div class="feature-grid" style="margin-top: 1.5rem;">
-            {%- for chapter in collections.chapters -%}
-            <a href="{{ chapter.data.writingsUrl or chapter.url }}" class="feature-card" data-chapter-slug="{{ chapter.data.chapterId }}" style="text-decoration: none; border-left: 3px solid var(--gold-primary);">
-                <h3 style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span style="color: var(--gold-primary);">Chapter {{ chapter.data.chapter }}{% if chapter.data.writingsUrl %} ۞ Interactive{% endif %}</span>
-                    <span class="chapter-progress-badge" data-progress-for="{{ chapter.data.chapterId }}"></span>
-                </h3>
-                <p style="font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem;">{{ chapter.data.title }}</p>
-                {% if chapter.data.scripture.text %}
-                <p style="font-size: 0.85rem; opacity: 0.7;">
-                    "{{ chapter.data.scripture.text | truncate(80) }}"
+        <div class="volume-hub-grid">
+            <div class="volume-hub-card">
+                <div class="volume-hub-label">Volume 1</div>
+                <h3>Christ-Centered Discipleship</h3>
+                <p>
+                    An interfaith journey beginning with the foundations of faith, moving through
+                    the life and character of Jesus Christ, and exploring discipleship practices
+                    that transform daily living. For every seeker and saint.
                 </p>
-                {% endif %}
-            </a>
-            {%- endfor -%}
+                <div class="volume-hub-meta">37 chapters &bull; 6 available now</div>
+                <a href="/volume-1/" class="btn btn-primary">Explore Volume 1</a>
+            </div>
 
-            <!-- More Chapters Developing -->
-            <div class="feature-card" style="opacity: 0.7; text-align: center; grid-column: 1 / -1; padding: 2rem 1.5rem;">
-                <h3 style="color: var(--cream); font-style: italic; margin-bottom: 0.25rem;">More Chapters Developing</h3>
-                <p style="font-size: 0.9rem; color: var(--cream); opacity: 0.8; margin-bottom: 1rem; font-style: italic;">Patience is a Virtue</p>
-                <p style="font-size: 1rem; color: var(--cream); opacity: 0.9; margin-bottom: 0.5rem; font-family: var(--font-serif); line-height: 1.6;">
-                    "The Lord is good to those who wait for him,<br>to the soul who seeks him."
+            <div class="volume-hub-card">
+                <div class="volume-hub-label">Volume 2</div>
+                <h3>Covenants &amp; Theology</h3>
+                <p>
+                    A deep study of Latter-day Saint covenants and theology&mdash;from the nature
+                    of God and the spiritual creation to the plan of salvation and our eternal
+                    inheritance. For readers with a foundation in the restored gospel.
                 </p>
-                <p style="font-size: 0.85rem; color: var(--gold-primary); margin: 0;">Lamentations 3:25</p>
+                <div class="volume-hub-meta">23 chapters &bull; Coming soon</div>
+                <a href="/volume-2/" class="btn btn-outline-gold">Explore Volume 2</a>
             </div>
         </div>
 
-        <p style="margin-top: 2rem;">
+        <p style="margin-top: 2rem; text-align: center;">
             <a href="/connect/#newsletter" class="btn btn-outline-gold">
                 Subscribe to be notified when new chapters are published
             </a>
@@ -68,27 +121,6 @@ permalink: /writings/
         </div>
     </div>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', async () => {
-    if (!window.API?.isAuthenticated()) return;
-    try {
-        const progress = await window.API.getAllProgress();
-        const items = Array.isArray(progress) ? progress : (progress.results || []);
-        items.forEach(p => {
-            const badge = document.querySelector(`[data-progress-for="${p.chapter_slug}"]`);
-            if (!badge) return;
-            if (p.status === 'completed') {
-                badge.textContent = 'Completed';
-                badge.classList.add('badge-completed');
-            } else if (p.status === 'in_progress') {
-                badge.textContent = 'In Progress';
-                badge.classList.add('badge-in-progress');
-            }
-        });
-    } catch (e) { console.warn('Could not load progress:', e); }
-});
-</script>
 
 <!-- Study Tools -->
 <section class="content-section alt" id="tools">

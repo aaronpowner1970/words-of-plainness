@@ -285,9 +285,8 @@ module.exports = function(eleventyConfig) {
     // CONFIGURATION
     // =========================================
     
-    // Ignore template/internal files that aren't actual content
-    eleventyConfig.ignores.add("src/chapters/_template.md");
-    eleventyConfig.ignores.add("src/chapters/_card-template.njk");
+    // Ignore template/internal files and retired chapters (underscore-prefixed)
+    eleventyConfig.ignores.add("src/chapters/_*");
 
     return {
         dir: {
