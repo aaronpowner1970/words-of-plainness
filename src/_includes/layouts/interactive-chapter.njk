@@ -7,6 +7,10 @@
 {% block content %}
 <link rel="stylesheet" href="/css/interactive-chapter.css">
 
+<script>
+    window.WOP_SCRIPTURE_BOOKS = {{ "" | scriptureBooksJson | safe }};
+</script>
+
 <main class="interactive-chapter" data-chapter="{{ chapter }}">
   {{ content | safe }}
 </main>
@@ -21,9 +25,6 @@
   <div class="transition-text">Preparing your place at the table&hellip;</div>
 </div>
 
-<script>
-    window.WOP_SCRIPTURE_BOOKS = {{ "" | scriptureBooksJson | safe }};
-</script>
 <script src="/js/wop-reflections.js"></script>
 <script src="/js/interactive-chapter.js"></script>
 {% endblock %}
