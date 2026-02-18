@@ -21,12 +21,18 @@ const Dashboard = {
     },
 
     init() {
-        if (!window.API) return;
+        const hasAPI = window.API && typeof API.isAuthenticated === 'function';
+        const isAuthed = hasAPI && API.isAuthenticated();
 
-        if (API.isAuthenticated()) {
+        if (isAuthed) {
             document.getElementById('dashboardAuthGate').style.display = 'none';
             document.getElementById('dashboardContent').style.display = 'block';
             this.loadData();
+        } else if (window.wopReflections) {
+            // Not authenticated — show local reflections instead
+            document.getElementById('dashboardAuthGate').style.display = 'none';
+            document.getElementById('dashboardContent').style.display = 'block';
+            this.loadLocalData();
         }
 
         // Sign-in button opens auth modal
@@ -40,14 +46,16 @@ const Dashboard = {
         this.setupExport();
 
         // Watch for login while on this page
-        this._authCheck = setInterval(() => {
-            if (API.isAuthenticated() && document.getElementById('dashboardContent').style.display === 'none') {
-                clearInterval(this._authCheck);
-                document.getElementById('dashboardAuthGate').style.display = 'none';
-                document.getElementById('dashboardContent').style.display = 'block';
-                this.loadData();
-            }
-        }, 500);
+        if (hasAPI) {
+            this._authCheck = setInterval(() => {
+                if (API.isAuthenticated() && document.getElementById('dashboardContent').style.display === 'none') {
+                    clearInterval(this._authCheck);
+                    document.getElementById('dashboardAuthGate').style.display = 'none';
+                    document.getElementById('dashboardContent').style.display = 'block';
+                    this.loadData();
+                }
+            }, 500);
+        }
     },
 
     // =========================================
@@ -71,6 +79,33 @@ const Dashboard = {
             console.error('[Dashboard] Failed to load data:', error);
             document.getElementById('reflectionsLoading').textContent = 'Failed to load reflections. Please try refreshing.';
         }
+    },
+
+    /**
+     * Load reflections from unified localStorage when user is not authenticated.
+     * Maps unified entries to the shape the Dashboard renderer expects.
+     */
+    loadLocalData() {
+        if (!window.wopReflections) return;
+
+        const entries = window.wopReflections.loadAll();
+
+        // Map unified entries to the shape used by renderSummary / renderChapters / renderEntry
+        this.reflections = entries.map(e => ({
+            id: e.id,
+            title: e.promptLabel || 'Reflection',
+            content: e.content || '',
+            chapter_slug: e.chapterId,
+            created_at: e.timestamp,
+            updated_at: e.timestamp,
+            type: e.type
+        }));
+
+        this.progress = [];
+
+        document.getElementById('reflectionsLoading').style.display = 'none';
+        this.renderSummary();
+        this.renderChapters();
     },
 
     unwrapResults(data) {

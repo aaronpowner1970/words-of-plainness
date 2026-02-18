@@ -21,14 +21,31 @@
     }
   } catch (e) { /* ignore */ }
 
-  // Load saved reflections into textareas
+  // Step-label map for deriving promptLabel from data-step attribute
+  var STEP_LABELS = {
+    assess: 'Honest Assessment',
+    align: 'What Stirred in Me',
+    act: 'My Commitment'
+  };
+
+  // Load saved reflections into textareas from unified storage
   function loadReflections() {
+    if (!window.wopReflections) return;
+
+    var entries = window.wopReflections.load('06-embrace-the-savior');
+
     document.querySelectorAll('.reflection-textarea').forEach(function (ta) {
-      const key = 'wop_ch06_ref_' + ta.dataset.path + '_' + ta.dataset.step;
-      try {
-        const val = localStorage.getItem(key);
-        if (val) ta.value = val;
-      } catch (e) { /* ignore */ }
+      var path = ta.dataset.path;
+      var step = ta.dataset.step;
+
+      // Find the most recent entry matching this pathway + step
+      for (var i = 0; i < entries.length; i++) {
+        var e = entries[i];
+        if (e.meta && e.meta.pathway === path && e.meta.step === step) {
+          ta.value = e.content || '';
+          return;
+        }
+      }
     });
   }
 
@@ -194,12 +211,21 @@
   };
 
   window.saveReflections = function (pathKey) {
+    if (!window.wopReflections) return;
+
     var textareas = document.querySelectorAll(
       '.reflection-textarea[data-path="' + pathKey + '"]'
     );
     textareas.forEach(function (ta) {
-      var key = 'wop_ch06_ref_' + ta.dataset.path + '_' + ta.dataset.step;
-      try { localStorage.setItem(key, ta.value); } catch (e) { /* ignore */ }
+      if (!ta.value.trim()) return;
+      window.wopReflections.save({
+        chapterId: '06-embrace-the-savior',
+        chapterTitle: 'Embrace the Savior',
+        type: 'reflection',
+        promptLabel: STEP_LABELS[ta.dataset.step] || ta.dataset.step,
+        content: ta.value,
+        meta: { pathway: pathKey, step: ta.dataset.step }
+      });
     });
 
     var status = document.getElementById('save-status-' + pathKey);
@@ -209,11 +235,24 @@
     }
   };
 
-  // Auto-save reflections on input
+  // Auto-save reflections on input (debounced via unified storage)
+  var _autoSaveTimers = {};
   document.addEventListener('input', function (e) {
-    if (e.target.classList.contains('reflection-textarea')) {
-      var key = 'wop_ch06_ref_' + e.target.dataset.path + '_' + e.target.dataset.step;
-      try { localStorage.setItem(key, e.target.value); } catch (err) { /* ignore */ }
+    if (e.target.classList.contains('reflection-textarea') && window.wopReflections) {
+      var ta = e.target;
+      var timerKey = ta.dataset.path + '_' + ta.dataset.step;
+      if (_autoSaveTimers[timerKey]) clearTimeout(_autoSaveTimers[timerKey]);
+      _autoSaveTimers[timerKey] = setTimeout(function () {
+        if (!ta.value.trim()) return;
+        window.wopReflections.save({
+          chapterId: '06-embrace-the-savior',
+          chapterTitle: 'Embrace the Savior',
+          type: 'reflection',
+          promptLabel: STEP_LABELS[ta.dataset.step] || ta.dataset.step,
+          content: ta.value,
+          meta: { pathway: ta.dataset.path, step: ta.dataset.step }
+        });
+      }, 2000);
     }
   });
 

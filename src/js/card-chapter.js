@@ -113,24 +113,39 @@
                 if (feedback) feedback.classList.remove('show');
             }, 2500);
 
-            // Store in localStorage for persistence
+            // Store via unified reflection system
             try {
-                var chapterKey = 'wop-card-' + (document.body.dataset.chapter || 'unknown');
-                var saved = JSON.parse(localStorage.getItem(chapterKey) || '{}');
-                saved['card-' + card] = {
-                    value: selected.value,
-                    label: labelText,
-                    title: cardTitle,
-                    timestamp: new Date().toISOString()
-                };
-                // Save reflection text if present
-                var reflectionArea = document.querySelector('#card-' + card + ' .reflection-area');
-                if (reflectionArea && reflectionArea.value.trim()) {
-                    saved['card-' + card].reflection = reflectionArea.value.trim();
+                var chapterId = document.body.dataset.chapter || 'unknown';
+
+                // Read current confidence from active stars
+                var confidence = 0;
+                document.querySelectorAll('.star-btn.active').forEach(function () {
+                    confidence++;
+                });
+
+                if (window.wopReflections) {
+                    window.wopReflections.save({
+                        chapterId: chapterId,
+                        type: 'commitment',
+                        promptLabel: cardTitle,
+                        content: labelText,
+                        meta: { cardId: 'card-' + card, tier: selected.value, confidence: confidence }
+                    });
+
+                    // Save reflection text if present
+                    var reflectionArea = document.querySelector('#card-' + card + ' .reflection-area');
+                    if (reflectionArea && reflectionArea.value.trim()) {
+                        window.wopReflections.save({
+                            chapterId: chapterId,
+                            type: 'reflection',
+                            promptLabel: cardTitle + ' (Reflection)',
+                            content: reflectionArea.value.trim(),
+                            meta: { cardId: 'card-' + card }
+                        });
+                    }
                 }
-                localStorage.setItem(chapterKey, JSON.stringify(saved));
             } catch (e) {
-                // localStorage unavailable — fail silently
+                // storage unavailable — fail silently
             }
         });
     });
@@ -147,73 +162,107 @@
                 }
             });
 
-            // Store rating
-            try {
-                var chapterKey = 'wop-card-' + (document.body.dataset.chapter || 'unknown');
-                var saved = JSON.parse(localStorage.getItem(chapterKey) || '{}');
-                saved.confidence = rating;
-                localStorage.setItem(chapterKey, JSON.stringify(saved));
-            } catch (e) {
-                // fail silently
+            // Update confidence on all existing commitment entries for this chapter
+            if (window.wopReflections) {
+                try {
+                    var chapterId = document.body.dataset.chapter || 'unknown';
+                    var entries = window.wopReflections.load(chapterId);
+                    var updated = false;
+                    entries.forEach(function (e) {
+                        if (e.type === 'commitment' && e.meta) {
+                            e.meta.confidence = rating;
+                            updated = true;
+                        }
+                    });
+                    if (updated) {
+                        // Write back the full array (entries are newest-first from load,
+                        // but writeBucket expects any order)
+                        localStorage.setItem('wop-reflection-' + chapterId, JSON.stringify(entries));
+                    }
+                } catch (e) {
+                    // fail silently
+                }
             }
         });
     });
 
     // ---- Restore Saved State on Load ----
     function restoreSavedState() {
+        if (!window.wopReflections) return;
+
         try {
-            var chapterKey = 'wop-card-' + (document.body.dataset.chapter || 'unknown');
-            var saved = JSON.parse(localStorage.getItem(chapterKey) || '{}');
+            var chapterId = document.body.dataset.chapter || 'unknown';
+            var entries = window.wopReflections.load(chapterId);
 
-            Object.keys(saved).forEach(function (key) {
-                if (key === 'confidence') {
-                    var rating = saved.confidence;
-                    document.querySelectorAll('.star-btn').forEach(function (s) {
-                        if (parseInt(s.dataset.star, 10) <= rating) {
-                            s.classList.add('active');
+            // Track which cards have been restored (newest first, first match wins)
+            var restoredCards = {};
+            var maxConfidence = 0;
+
+            entries.forEach(function (entry) {
+                if (entry.type === 'commitment' && entry.meta && entry.meta.cardId) {
+                    var cardId = entry.meta.cardId;     // e.g. "card-1"
+                    var match = cardId.match(/^card-(\d+)$/);
+                    if (!match || restoredCards[cardId]) return;
+                    restoredCards[cardId] = true;
+
+                    var cardNum = match[1];
+                    var tier = entry.meta.tier;
+                    var labelText = entry.content;
+
+                    // Restore radio selection
+                    var radio = document.querySelector('input[name="commit-' + cardNum + '"][value="' + tier + '"]');
+                    if (radio) {
+                        radio.checked = true;
+                        var option = radio.closest('.commitment-option');
+                        if (option) option.classList.add('selected');
+                    }
+
+                    // Restore custom text
+                    if (tier === 'custom' && radio) {
+                        var customRow = radio.closest('.custom-input-row');
+                        if (customRow) {
+                            var textInput = customRow.querySelector('input[type="text"]');
+                            if (textInput) textInput.value = labelText;
                         }
-                    });
-                    return;
-                }
+                    }
 
-                var match = key.match(/^card-(\d+)$/);
-                if (!match) return;
-                var cardNum = match[1];
-                var data = saved[key];
+                    // Restore summary
+                    var summaryItem = document.querySelector('.summary-item[data-summary="' + cardNum + '"]');
+                    if (summaryItem && entry.promptLabel) {
+                        summaryItem.classList.remove('empty');
+                        var itemText = summaryItem.querySelector('.item-text');
+                        if (itemText) {
+                            itemText.textContent = entry.promptLabel + ': ' + labelText;
+                        }
+                    }
 
-                // Restore radio selection
-                var radio = document.querySelector('input[name="commit-' + cardNum + '"][value="' + data.value + '"]');
-                if (radio) {
-                    radio.checked = true;
-                    var option = radio.closest('.commitment-option');
-                    if (option) option.classList.add('selected');
-                }
-
-                // Restore custom text
-                if (data.value === 'custom') {
-                    var customRow = radio ? radio.closest('.custom-input-row') : null;
-                    if (customRow) {
-                        var textInput = customRow.querySelector('input[type="text"]');
-                        if (textInput) textInput.value = data.label;
+                    // Track highest confidence
+                    if (entry.meta.confidence && entry.meta.confidence > maxConfidence) {
+                        maxConfidence = entry.meta.confidence;
                     }
                 }
 
-                // Restore reflection
-                if (data.reflection) {
-                    var reflectionArea = document.querySelector('#card-' + cardNum + ' .reflection-area');
-                    if (reflectionArea) reflectionArea.value = data.reflection;
-                }
-
-                // Restore summary
-                var summaryItem = document.querySelector('.summary-item[data-summary="' + cardNum + '"]');
-                if (summaryItem && data.title) {
-                    summaryItem.classList.remove('empty');
-                    var itemText = summaryItem.querySelector('.item-text');
-                    if (itemText) {
-                        itemText.textContent = data.title + ': ' + data.label;
+                // Restore card reflections
+                if (entry.type === 'reflection' && entry.meta && entry.meta.cardId) {
+                    var rCardId = entry.meta.cardId;
+                    var rMatch = rCardId.match(/^card-(\d+)$/);
+                    if (rMatch) {
+                        var reflectionArea = document.querySelector('#card-' + rMatch[1] + ' .reflection-area');
+                        if (reflectionArea && !reflectionArea.value) {
+                            reflectionArea.value = entry.content || '';
+                        }
                     }
                 }
             });
+
+            // Restore star rating
+            if (maxConfidence > 0) {
+                document.querySelectorAll('.star-btn').forEach(function (s) {
+                    if (parseInt(s.dataset.star, 10) <= maxConfidence) {
+                        s.classList.add('active');
+                    }
+                });
+            }
         } catch (e) {
             // fail silently
         }

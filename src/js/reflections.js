@@ -154,14 +154,15 @@ const Reflections = {
     },
 
     saveToLocalStorage(prompt, value) {
-        const key = `wop-reflection-${this.chapterId}-${prompt}`;
-        localStorage.setItem(key, JSON.stringify({
-            content: value,
-            chapter_slug: this.chapterId,
-            title: PROMPT_TITLES[prompt] || `Reflection ${prompt}`,
-            prompt: prompt,
-            timestamp: Date.now()
-        }));
+        if (window.wopReflections) {
+            window.wopReflections.save({
+                chapterId: this.chapterId,
+                type: 'reflection',
+                promptLabel: PROMPT_TITLES[prompt] || `Reflection ${prompt}`,
+                content: value,
+                meta: {}
+            });
+        }
     },
 
     async loadReflections() {
@@ -225,24 +226,31 @@ const Reflections = {
     },
 
     loadFromLocalStorage() {
-        let loaded = 0;
-        for (let i = 1; i <= 3; i++) {
-            const key = `wop-reflection-${this.chapterId}-${i}`;
-            const data = localStorage.getItem(key);
+        if (!window.wopReflections) return;
 
-            if (data) {
-                try {
-                    const parsed = JSON.parse(data);
-                    const input = document.getElementById(`reflection${i}`);
-                    if (input) {
-                        input.value = parsed.content || '';
-                        loaded++;
-                    }
-                } catch (e) {
-                    console.error('[Reflections] Error parsing localStorage:', e);
-                }
-            }
+        // Build reverse lookup: promptLabel → prompt number
+        const labelToPrompt = {};
+        for (const [num, title] of Object.entries(PROMPT_TITLES)) {
+            labelToPrompt[title] = num;
         }
+
+        const entries = window.wopReflections.load(this.chapterId);
+        let loaded = 0;
+
+        // Track which prompts have been filled (newest first, so first match wins)
+        const filled = {};
+        entries.forEach(entry => {
+            const promptNum = labelToPrompt[entry.promptLabel];
+            if (!promptNum || filled[promptNum]) return;
+
+            const input = document.getElementById(`reflection${promptNum}`);
+            if (input) {
+                input.value = entry.content || '';
+                filled[promptNum] = true;
+                loaded++;
+            }
+        });
+
         if (loaded > 0) {
             console.log('[Reflections] Loaded', loaded, 'reflections from localStorage');
         }
@@ -288,9 +296,8 @@ const Reflections = {
             input.value = '';
         });
 
-        for (let i = 1; i <= 3; i++) {
-            const key = `wop-reflection-${this.chapterId}-${i}`;
-            localStorage.removeItem(key);
+        if (window.wopReflections) {
+            window.wopReflections.clear(this.chapterId);
         }
 
         this.savedIds = {};
