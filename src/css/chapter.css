@@ -1593,6 +1593,41 @@ h2[id], h3[id], [id^="section-"] {
    COMPONENT STYLES (Eleventy templates)
    ========================================= */
 
+/* Breadcrumb row inside the floating action bar */
+.fab-breadcrumb {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.1);
+    margin-bottom: 0.1rem;
+}
+
+.fab-breadcrumb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--gold-primary);
+    opacity: 0.8;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.fab-breadcrumb-link:hover {
+    opacity: 1;
+}
+
+/* Breadcrumb bar for card-chapter layout (below hero, not sticky) */
+.card-chapter-breadcrumb {
+    display: flex;
+    justify-content: center;
+    padding: 0.6rem var(--space-md);
+    background: var(--brown-rich);
+    border-bottom: 1px solid rgba(196, 148, 58, 0.1);
+}
+
 /* Floating Action Bar - full-width sticky bar below header */
 .floating-action-bar {
     position: sticky;

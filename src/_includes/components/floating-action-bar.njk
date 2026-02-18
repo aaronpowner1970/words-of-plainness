@@ -16,6 +16,14 @@
 
 <!-- Floating Action Bar (v3.0) - Phase 2 extraction pending -->
 <div class="floating-action-bar" id="floatingActionBar">
+    {% if volumeUrl %}
+    <div class="fab-breadcrumb">
+        <a href="{{ volumeUrl }}" class="fab-breadcrumb-link">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Volume {{ volume }} Contents
+        </a>
+    </div>
+    {% endif %}
     {% if prevChapter %}
     <a href="{{ prevChapter.url }}" class="chapter-nav-arrow prev" title="Previous Chapter" aria-label="Previous Chapter">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">

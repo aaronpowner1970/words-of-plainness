@@ -1,12 +1,29 @@
 ---
 layout: layouts/page.njk
 title: "Volume 1: Christ-Centered Discipleship"
-pageTitle: "Volume 1: Christ-Centered Discipleship"
-pageSubtitle: "A Christ-Centered Journey for Every Seeker and Saint"
 permalink: /volume-1/
 ---
 
 <style>
+.vol1-hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 400;
+    color: var(--cream);
+    text-align: center;
+    line-height: 1.3;
+    margin: 0 auto var(--space-xs);
+}
+
+.vol1-hero-title .vol1-series {
+    display: block;
+    font-size: 0.6em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    margin-bottom: 0.3em;
+}
+
 .vol1-intro {
     font-family: var(--font-serif);
     font-size: 1.15rem;
@@ -70,6 +87,7 @@ permalink: /volume-1/
     margin-bottom: var(--space-sm);
     padding-bottom: var(--space-xs);
     border-bottom: 1px solid rgba(196, 148, 58, 0.25);
+    scroll-margin-top: 5rem;
 }
 
 .movement-heading-sub {
@@ -189,6 +207,12 @@ a.chapter-item:hover {
 }
 </style>
 
+<!-- Custom Hero Title -->
+<h1 class="vol1-hero-title">
+    <span class="vol1-series"><br /><br />Words of Plainness &mdash; Volume 1</span>
+    Christ-Centered Discipleship
+</h1>
+
 <!-- Introduction -->
 <section class="content-section">
     <div class="content-wrapper">
@@ -210,22 +234,22 @@ a.chapter-item:hover {
         <p style="text-align: center; opacity: 0.7; font-size: 0.95rem;">Four movements, 37 chapters, one transformative path</p>
 
         <div class="movement-grid">
-            <a href="/chapters/01-introduction/" class="movement-card">
+            <a href="#movement-1" class="movement-card">
                 <div class="movement-card-label">Movement 1</div>
                 <h3>Finding Faith in Christ</h3>
                 <p>6 chapters</p>
             </a>
-            <a href="/chapters/07-prophecies-birth-youth/" class="movement-card">
+            <a href="#movement-2" class="movement-card">
                 <div class="movement-card-label">Movement 2</div>
                 <h3>Learn of Me</h3>
                 <p>5 chapters</p>
             </a>
-            <a href="/chapters/12-beatitudes/" class="movement-card">
+            <a href="#movement-3" class="movement-card">
                 <div class="movement-card-label">Movement 3</div>
                 <h3>Discipleship Practices</h3>
                 <p>17 interactive chapters</p>
             </a>
-            <a href="/chapters/30-prophets-of-god/" class="movement-card">
+            <a href="#movement-4" class="movement-card">
                 <div class="movement-card-label">Movement 4</div>
                 <h3>Restoration of Christ&rsquo;s Church</h3>
                 <p>7 chapters</p>
@@ -243,7 +267,7 @@ a.chapter-item:hover {
     <div class="content-wrapper" style="max-width: 900px;">
 
         <!-- Movement 1 -->
-        <h2 class="movement-heading">
+        <h2 id="movement-1" class="movement-heading">
             <span class="movement-heading-sub">Movement 1</span>
             Finding Faith in Christ
         </h2>
@@ -293,7 +317,7 @@ a.chapter-item:hover {
         </div>
 
         <!-- Movement 2 -->
-        <h2 class="movement-heading">
+        <h2 id="movement-2" class="movement-heading">
             <span class="movement-heading-sub">Movement 2</span>
             Learn of Me
         </h2>
@@ -336,7 +360,7 @@ a.chapter-item:hover {
         </div>
 
         <!-- Movement 3 -->
-        <h2 class="movement-heading">
+        <h2 id="movement-3" class="movement-heading">
             <span class="movement-heading-sub">Movement 3</span>
             Discipleship Practices
         </h2>
@@ -463,7 +487,7 @@ a.chapter-item:hover {
         </div>
 
         <!-- Hinge -->
-        <h2 class="movement-heading">
+        <h2 id="hinge" class="movement-heading">
             <span class="movement-heading-sub">Hinge</span>
             Our Testimonies
         </h2>
@@ -478,7 +502,7 @@ a.chapter-item:hover {
         </div>
 
         <!-- Movement 4 -->
-        <h2 class="movement-heading">
+        <h2 id="movement-4" class="movement-heading">
             <span class="movement-heading-sub">Movement 4</span>
             Restoration of Christ&rsquo;s Church
         </h2>
@@ -535,7 +559,7 @@ a.chapter-item:hover {
         </div>
 
         <!-- Conclusion -->
-        <h2 class="movement-heading">
+        <h2 id="conclusion" class="movement-heading">
             <span class="movement-heading-sub">Conclusion</span>
             Conclusion &amp; Benediction
         </h2>

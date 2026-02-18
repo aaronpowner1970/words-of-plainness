@@ -6,12 +6,45 @@
 
 {% block content %}
 <link rel="stylesheet" href="/css/interactive-chapter.css">
+<style>
+.vol-breadcrumb {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 1rem 3rem;
+    position: sticky;
+    top: 105px;
+    z-index: 999;
+    background: transparent;
+}
+.vol-breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--gold-primary, #C4943A);
+    opacity: 0.8;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+.vol-breadcrumb a:hover {
+    opacity: 1;
+}
+</style>
 
 <script>
     window.WOP_SCRIPTURE_BOOKS = {{ "" | scriptureBooksJson | safe }};
 </script>
 
 <main class="interactive-chapter" data-chapter="{{ chapter }}">
+  {% if volumeUrl %}
+  <div class="vol-breadcrumb">
+      <a href="{{ volumeUrl }}">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          Volume {{ volume }} Contents
+      </a>
+  </div>
+  {% endif %}
   {{ content | safe }}
 </main>
 
