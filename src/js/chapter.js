@@ -536,9 +536,9 @@ const ChapterManager = {
     
     updateSlideImage() {
         const slideNum = String(this.currentSlide).padStart(2, '0');
-        // Support two naming conventions:
-        // 1. Subdirectory: /assets/slides/chapter-02/slide-01.png (slidesPath ends with /)
-        // 2. Flat prefix:  /assets/slides/WoP_Ch01_01.png (slidesPath ends without /)
+        // Slides use subdirectory convention: /assets/slides/chapter-01/slide-01.png
+        // slidesPath should end with / (e.g. "chapter-01/")
+        // Legacy flat prefix support retained: prefix_01.png (slidesPath without trailing /)
         const slidesPath = this.config.slidesPath;
         let path;
         if (slidesPath.endsWith('/')) {

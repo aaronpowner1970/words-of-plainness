@@ -93,7 +93,8 @@ module.exports = function(eleventyConfig) {
     
     // Chapters collection - sorted by chapter number
     eleventyConfig.addCollection("chapters", function(collectionApi) {
-        return collectionApi.getFilteredByGlob("src/chapters/*.md")
+        return collectionApi.getFilteredByGlob("src/chapters/*.{md,njk}")
+            .filter(item => !path.basename(item.inputPath).startsWith("_"))
             .sort((a, b) => a.data.chapter - b.data.chapter);
     });
     
@@ -284,8 +285,9 @@ module.exports = function(eleventyConfig) {
     // CONFIGURATION
     // =========================================
     
-    // Ignore template files that aren't actual content
+    // Ignore template/internal files that aren't actual content
     eleventyConfig.ignores.add("src/chapters/_template.md");
+    eleventyConfig.ignores.add("src/chapters/_card-template.njk");
 
     return {
         dir: {

@@ -32,7 +32,7 @@ audio:
     description: "Brief theme description"
 
 # Resources
-pdf: "WoP_Ch01_Title.pdf"
+pdf: "chapter-01-title.pdf"
 infographic: "chapter-01-infographic.png"
 slides:
   count: 10

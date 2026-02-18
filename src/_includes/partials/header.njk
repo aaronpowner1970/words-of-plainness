@@ -13,12 +13,11 @@
         
         <nav class="nav-desktop">
             <ul class="nav-links">
-                <li><a href="/"{% if page.url == "/" %} class="active"{% endif %}>Home</a></li>
-                <li><a href="/writings/"{% if "/writings" in page.url %} class="active"{% endif %}>Writings</a></li>
-                <li><a href="/music/"{% if "/music" in page.url %} class="active"{% endif %}>Music</a></li>
-                <li><a href="/discipleship/"{% if "/discipleship" in page.url %} class="active"{% endif %}>Discipleship</a></li>
-                <li><a href="/connect/"{% if "/connect" in page.url %} class="active"{% endif %}>Connect</a></li>
-                <li><a href="/about/"{% if "/about" in page.url %} class="active"{% endif %}>About</a></li>
+                {% for item in navigation.main %}
+                {% if item.url != "/new-here/" %}
+                <li><a href="{{ item.url }}"{% if (item.url == "/" and page.url == "/") or (item.url != "/" and item.url in page.url) %} class="active"{% endif %}>{{ item.title }}</a></li>
+                {% endif %}
+                {% endfor %}
             </ul>
             <a href="/new-here/" class="btn-new-here">New Here?</a>
 

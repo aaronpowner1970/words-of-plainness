@@ -14,23 +14,23 @@ readingTime: 27
 sectionCount: 11
 
 audio:
-  narration: "WoP_Ch02_Our_Search_Narration.mp3"
-  overview: "WoP_CH02_Our_Search_Overview_Podcast.mp3"
+  narration: "chapter-02-narration.mp3"
+  overview: "chapter-02-overview.mp3"
   testimony:
-    file: "02_1_Our_Search_-_Sacred_Americana_Testimony.mp3"
+    file: "chapter-02-testimony.mp3"
     title: "Our Search"
     duration: "3:58"
     description: "The universal longing for meaning and connection"
     alternates:
-      - file: "02.2_Our_Search_Cinematic Inspirational.mp3"
+      - file: "chapter-02-testimony-alt-cinematic.mp3"
         label: "Cinematic Inspirational"
         duration: "3:59"
-      - file: "02.3_Our_Search_Celtic_Worship.mp3"
+      - file: "chapter-02-testimony-alt-celtic.mp3"
         label: "Celtic Worship"
         duration: "5:59"
 
-pdf: "WoP_Ch02_Our_Search.pdf"
-infographic: "WoP_Ch02_Our_Search_Infographic.png"
+pdf: "chapter-02-our-search.pdf"
+infographic: "chapter-02-infographic.png"
 slides:
   count: 16
   path: "chapter-02/"
