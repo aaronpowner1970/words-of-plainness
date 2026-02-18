@@ -7,6 +7,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const scriptureData = require('./src/_data/scriptures.json');
 
 module.exports = function(eleventyConfig) {
 
@@ -115,6 +116,12 @@ module.exports = function(eleventyConfig) {
         return new Date().toISOString();
     });
 
+    // Scripture book mappings as JSON (for client-side injection)
+    eleventyConfig.addFilter("scriptureBooksJson", function() {
+        const data = require('./src/_data/scriptures.json');
+        return JSON.stringify(data.books);
+    });
+
     // Format reading time
     eleventyConfig.addFilter("readingTime", minutes => {
         if (minutes < 1) return "< 1 min read";
@@ -151,107 +158,7 @@ module.exports = function(eleventyConfig) {
     function generateScriptureUrl(reference) {
         const baseUrl = "https://www.churchofjesuschrist.org/study/scriptures";
         
-        // Book mappings
-        const bookMappings = {
-            // Book of Mormon
-            "1 nephi": "bofm/1-ne",
-            "2 nephi": "bofm/2-ne",
-            "jacob": "bofm/jacob",
-            "enos": "bofm/enos",
-            "jarom": "bofm/jarom",
-            "omni": "bofm/omni",
-            "words of mormon": "bofm/w-of-m",
-            "mosiah": "bofm/mosiah",
-            "alma": "bofm/alma",
-            "helaman": "bofm/hel",
-            "3 nephi": "bofm/3-ne",
-            "4 nephi": "bofm/4-ne",
-            "mormon": "bofm/morm",
-            "ether": "bofm/ether",
-            "moroni": "bofm/moro",
-            
-            // Doctrine and Covenants
-            "d&c": "dc-testament/dc",
-            "doctrine and covenants": "dc-testament/dc",
-            
-            // Pearl of Great Price
-            "moses": "pgp/moses",
-            "abraham": "pgp/abr",
-            "joseph smith—matthew": "pgp/js-m",
-            "joseph smith—history": "pgp/js-h",
-            "articles of faith": "pgp/a-of-f",
-            
-            // Old Testament
-            "genesis": "ot/gen",
-            "exodus": "ot/ex",
-            "leviticus": "ot/lev",
-            "numbers": "ot/num",
-            "deuteronomy": "ot/deut",
-            "joshua": "ot/josh",
-            "judges": "ot/judg",
-            "ruth": "ot/ruth",
-            "1 samuel": "ot/1-sam",
-            "2 samuel": "ot/2-sam",
-            "1 kings": "ot/1-kgs",
-            "2 kings": "ot/2-kgs",
-            "1 chronicles": "ot/1-chr",
-            "2 chronicles": "ot/2-chr",
-            "ezra": "ot/ezra",
-            "nehemiah": "ot/neh",
-            "esther": "ot/esth",
-            "job": "ot/job",
-            "psalms": "ot/ps",
-            "psalm": "ot/ps",
-            "proverbs": "ot/prov",
-            "ecclesiastes": "ot/eccl",
-            "song of solomon": "ot/song",
-            "isaiah": "ot/isa",
-            "jeremiah": "ot/jer",
-            "lamentations": "ot/lam",
-            "ezekiel": "ot/ezek",
-            "daniel": "ot/dan",
-            "hosea": "ot/hosea",
-            "joel": "ot/joel",
-            "amos": "ot/amos",
-            "obadiah": "ot/obad",
-            "jonah": "ot/jonah",
-            "micah": "ot/micah",
-            "nahum": "ot/nahum",
-            "habakkuk": "ot/hab",
-            "zephaniah": "ot/zeph",
-            "haggai": "ot/hag",
-            "zechariah": "ot/zech",
-            "malachi": "ot/mal",
-            
-            // New Testament
-            "matthew": "nt/matt",
-            "mark": "nt/mark",
-            "luke": "nt/luke",
-            "john": "nt/john",
-            "acts": "nt/acts",
-            "romans": "nt/rom",
-            "1 corinthians": "nt/1-cor",
-            "2 corinthians": "nt/2-cor",
-            "galatians": "nt/gal",
-            "ephesians": "nt/eph",
-            "philippians": "nt/philip",
-            "colossians": "nt/col",
-            "1 thessalonians": "nt/1-thes",
-            "2 thessalonians": "nt/2-thes",
-            "1 timothy": "nt/1-tim",
-            "2 timothy": "nt/2-tim",
-            "titus": "nt/titus",
-            "philemon": "nt/philem",
-            "hebrews": "nt/heb",
-            "james": "nt/james",
-            "1 peter": "nt/1-pet",
-            "2 peter": "nt/2-pet",
-            "1 john": "nt/1-jn",
-            "2 john": "nt/2-jn",
-            "3 john": "nt/3-jn",
-            "jude": "nt/jude",
-            "revelation": "nt/rev"
-        };
+        const bookMappings = scriptureData.books;
         
         // Parse reference: "Alma 42:8" or "2 Nephi 31:3-5"
         const match = reference.match(/^(.+?)\s+(\d+):(\d+)(?:-(\d+))?$/i);
@@ -273,9 +180,9 @@ module.exports = function(eleventyConfig) {
         // Build URL with verse anchor
         let url = `${baseUrl}/${bookPath}/${chapter}`;
         if (verseEnd) {
-            url += `?id=p${verseStart}-p${verseEnd}#p${verseStart}`;
+            url += `?lang=eng&id=p${verseStart}-p${verseEnd}#p${verseStart}-p${verseEnd}`;
         } else {
-            url += `?id=p${verseStart}#p${verseStart}`;
+            url += `?lang=eng&id=p${verseStart}#p${verseStart}`;
         }
         
         return url;
