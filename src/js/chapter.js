@@ -359,11 +359,12 @@ const ChapterManager = {
                 this.openMobileTOC();
                 break;
             case 'reflect':
-                document.getElementById('reflectionSection')?.scrollIntoView({ behavior: 'smooth' });
+                var target = document.querySelector('.pause-point') || document.getElementById('reflectionSection');
+                target?.scrollIntoView({ behavior: 'smooth' });
                 break;
         }
     },
-    
+
     // Table of Contents
     initTOC() {
         const tocLinks = document.querySelectorAll('.toc-link');
@@ -621,11 +622,12 @@ const ChapterManager = {
                 this.openMobileTOC();
                 break;
             case 'reflect':
-                document.getElementById('reflectionSection')?.scrollIntoView({ behavior: 'smooth' });
+                var target = document.querySelector('.pause-point') || document.getElementById('reflectionSection');
+                target?.scrollIntoView({ behavior: 'smooth' });
                 break;
         }
     },
-    
+
     // Resume Prompt (localStorage-based, for anonymous users only)
     initResumePrompt() {
         if (window.API?.isAuthenticated()) return;
