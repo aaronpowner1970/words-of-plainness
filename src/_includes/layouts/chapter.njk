@@ -75,8 +75,11 @@
 
 <!-- Non-content sections excluded from search -->
 <div data-pagefind-ignore>
-<!-- Reflection Section -->
+<!-- ORIGINAL REFLECTION SECTION — hidden when R·J·W pauses are present.
+     Remove pauses: from frontmatter to restore. -->
+{% if not pauses or pauses.length == 0 %}
 {% include "components/reflection-section.njk" %}
+{% endif %}
 
 <!-- Discord Community Section -->
 {% include "components/discord-section.njk" %}

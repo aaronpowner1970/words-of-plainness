@@ -896,6 +896,7 @@ h2[id], h3[id], [id^="section-"] {
     max-width: 900px;
     margin: 0 auto;
     padding: var(--space-xl) var(--space-md);
+    padding-right: var(--rjw-gutter, 54px);   /* keep prose clear of R·J·W pill tabs */
 }
 
 .chapter-content ul {
@@ -2921,7 +2922,7 @@ h2[id], h3[id], [id^="section-"] {
 .pause-point {
     position: relative;
     height: 0;
-    margin: 48px 0 0 0;
+    margin: 48px calc(-1 * var(--rjw-gutter, 54px)) 0 0;  /* extend into the padding gutter */
     overflow: visible;
 }
 
@@ -3416,6 +3417,10 @@ h2[id], h3[id], [id^="section-"] {
 
 /* ── R·J·W RESPONSIVE ─────────────────────────── */
 @media (max-width: 768px) {
+    .chapter-content {
+        padding-right: var(--space-md);          /* reset gutter — pills go horizontal on mobile */
+    }
+
     .pause-point {
         margin: 32px 0 0 0;
     }
