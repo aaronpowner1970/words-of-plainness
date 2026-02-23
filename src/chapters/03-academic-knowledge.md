@@ -56,6 +56,16 @@ nextChapter:
   url: "/chapters/04-spiritual-knowledge/"
   title: "Chapter 4: Spiritual Knowledge"
 discordChannelId: "1463835777141309506"
+pauses:
+  - id: "pause-closing"
+    title: "Closing Reflection"
+    default: "reflect"
+    reflect:
+      prompt: "<p>Where in your own search for knowledge have you encountered something that reason alone could not explain?</p>"
+    journal:
+      prompt: "<p>Write about a moment when what you thought you knew was not enough.</p>"
+    witness:
+      prompt: "<p>If you have experienced a witness of truth that came through spiritual means rather than academic ones, this is a good place to share it.</p>"
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>
@@ -291,3 +301,5 @@ podcastTranscript: |
 {% sentence 227 %}We caution you: do not be persuaded by our words alone!{% endsentence %} {% sentence 228 %}Though there are beautiful and hopeful ideas in this book, their truth can only be known by the power of God and verified through your own personal spiritual experiences (Matthew 16:17; Moroni 10:3–5).{% endsentence %} {% sentence 229 %}It is our simple hope that our efforts will engender in your heart a desire to search for God—though He has never been far from you—as well as a desire to search for truth, meaning, and lasting happiness (Acts 17:27; D&C 88:63).{% endsentence %} {% sentence 230 %}We invite you to experiment on our words (Alma 32:27).{% endsentence %}
 
 {% sentence 231 %}If the natural faculties have brought you to the ceiling of what they can provide, the following chapter will explore the fifth faculty—the one that completes the others.{% endsentence %} {% sentence 232 %}We testify that God has not left His children without a way to know Him and the truths He has in store for us.{% endsentence %} {% sentence 233 %}This we witness in the name of Jesus Christ.{% endsentence %} {% sentence 234 %}Amen.{% endsentence %}
+
+{% pausePoint "pause-closing", "reflect" %}

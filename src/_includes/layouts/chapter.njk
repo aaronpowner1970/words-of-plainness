@@ -2,6 +2,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -95,6 +96,82 @@
 <!-- Mobile FAB (Lantern Icon) -->
 {% include "components/fab-lantern.njk" %}
 
+<!-- R·J·W Modal Panel (Reflect · Journal · Witness) -->
+<div class="rjw-overlay" id="rjwOverlay" onclick="RJW.closeModal()"></div>
+<div class="rjw-panel" id="rjwPanel">
+    <button class="rjw-close" onclick="RJW.closeModal()" aria-label="Close">✕</button>
+    <div class="rjw-header">
+        <div class="rjw-section-label">Pause · Chapter {{ chapter }}</div>
+        <div class="rjw-section-title" id="rjwSectionTitle"></div>
+        <div class="rjw-tabs">
+            <button class="rjw-tab-btn reflect" onclick="RJW.switchTab('reflect')">Reflect</button>
+            <button class="rjw-tab-btn journal" onclick="RJW.switchTab('journal')">Journal</button>
+            <button class="rjw-tab-btn witness" onclick="RJW.switchTab('witness')">Witness</button>
+        </div>
+    </div>
+    <div class="rjw-body">
+        <!-- REFLECT TAB -->
+        <div class="tab-pane" id="tab-reflect">
+            <div class="reflect-toggle">
+                <button class="reflect-toggle-btn active" id="toggle-universal" onclick="RJW.switchReflectMode('universal')">Universal</button>
+                <button class="reflect-toggle-btn" id="toggle-chapter" onclick="RJW.switchReflectMode('chapter')">This Chapter</button>
+            </div>
+            <div class="prompt-block reflect" id="reflect-prompt-universal">
+                <p>What stood out to you? Which ideas, phrases, or scriptures resonated with you as you read?</p>
+                <p>Why does it matter to you? How does this connect to your life, experiences, or current questions?</p>
+                <p>What will you do? What is one thing you feel prompted to do as a result of this reading?</p>
+            </div>
+            <div class="prompt-block reflect" id="reflect-prompt-chapter" style="display:none;"></div>
+            <textarea class="response-area" id="reflect-ta" placeholder="Your thoughts are private by default. Sign in to keep them across sessions."></textarea>
+            <div class="action-row">
+                <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('reflect')">Save Response</button>
+                <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('reflect')">Clear</button>
+                <span class="save-indicator" id="save-reflect">Saved</span>
+            </div>
+            <p class="rjw-auth-notice">Responses are saved to your browser. <a href="#" data-auth-trigger>Sign in</a> to keep them in your account.</p>
+        </div>
+        <!-- JOURNAL TAB -->
+        <div class="tab-pane" id="tab-journal">
+            <div class="prompt-block journal" id="journal-prompt"></div>
+            <textarea class="response-area" id="journal-ta" placeholder="Write freely. No one reads this unless you choose to share it."></textarea>
+            <div class="action-row">
+                <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('journal')">Save to Journal</button>
+                <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('journal')">Clear</button>
+                <span class="save-indicator" id="save-journal">Saved</span>
+            </div>
+            <p class="rjw-auth-notice">Journal entries are automatically included in your portable document. <a href="#" data-auth-trigger>Sign in</a> to save across sessions.</p>
+        </div>
+        <!-- WITNESS TAB -->
+        <div class="tab-pane" id="tab-witness">
+            <div class="prompt-block witness" id="witness-prompt"></div>
+            <textarea class="response-area" id="witness-ta" placeholder="Write your witness here."></textarea>
+            <div class="witness-submit-form">
+                <div class="witness-checkbox-group">
+                    <label class="witness-checkbox-label">
+                        <input type="checkbox" id="cb-document" class="witness-cb">
+                        <span class="witness-cb-text">Include this witness in my portable discipleship document</span>
+                    </label>
+                    <label class="witness-checkbox-label">
+                        <input type="checkbox" id="cb-community" class="witness-cb">
+                        <span class="witness-cb-text">Share this witness with the Words of Plainness community</span>
+                    </label>
+                </div>
+                <p class="witness-moderation-notice">
+                    Community submissions pass through a moderation review before becoming visible on the site. Your witness will not appear publicly until it has been approved.
+                </p>
+                <div class="action-row" style="margin-top:14px;">
+                    <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('witness')">Save Witness</button>
+                    <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('witness')">Clear</button>
+                    <span class="save-indicator" id="save-witness">Saved</span>
+                </div>
+            </div>
+            <p class="rjw-auth-notice" style="margin-top:8px;">A free account is required to include your witness in your portable document or share it with the community. <a href="#" data-auth-trigger>Sign in or register.</a></p>
+            <div class="community-label" style="margin-top:28px;">From the Community</div>
+            <div id="witness-cards"></div>
+        </div>
+    </div>
+</div>
+
 <!-- Modals (Overview, Testimony, Infographic, Slides) -->
 {% include "components/modals.njk" %}
 </div>
@@ -105,6 +182,11 @@
 <script>
     window.WOP_SCRIPTURE_BOOKS = {{ "" | scriptureBooksJson | safe }};
 </script>
+{% if pauses %}
+<script>
+    window.WOP_PAUSES = {{ pauses | dump | safe }};
+</script>
+{% endif %}
 <script src="/js/reading-progress.js"></script>
 <script src="/js/chapter.js"></script>
 <script src="/js/audio-sync.js"></script>

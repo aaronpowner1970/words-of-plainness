@@ -759,3 +759,233 @@ const ChapterManager = {
 
 // Export for use in templates
 window.ChapterManager = ChapterManager;
+
+/* ═══════════════════════════════════════════════
+   REFLECT · JOURNAL · WITNESS — PAUSE-POINT SYSTEM
+   ═══════════════════════════════════════════════ */
+
+/**
+ * R·J·W Pause-Point System
+ * Manages the Reflect / Journal / Witness modal panel.
+ * PAUSES data is injected at build time via window.WOP_PAUSES
+ * in chapter.njk from each chapter's frontmatter `pauses` array.
+ */
+const RJW = (function() {
+
+    /* ── PAUSES DATA ──────────────────────────────────── */
+    // Populated from frontmatter at build time.
+    // window.WOP_PAUSES is an array; convert to an object keyed by id.
+    function loadPauses() {
+        const raw = window.WOP_PAUSES || [];
+        const map = {};
+        if (Array.isArray(raw)) {
+            raw.forEach(function(p) { map[p.id] = p; });
+        } else if (typeof raw === 'object') {
+            // If already an object (shouldn't happen, but be safe)
+            Object.assign(map, raw);
+        }
+        return map;
+    }
+
+    let PAUSES = {};
+
+    /* ── STATE ────────────────────────────────────────── */
+    let activePauseId = null;
+    let activeTabKey  = null;
+    let reflectMode   = 'universal';   // 'universal' | 'chapter'
+
+    /* ── LOCAL STORAGE PERSISTENCE ────────────────────── */
+    const STORAGE_PREFIX = 'wop-rjw-';
+
+    function storageKey(pauseId, tabKey) {
+        return STORAGE_PREFIX + pauseId + '::' + tabKey;
+    }
+
+    function loadStored(pauseId, tabKey) {
+        try {
+            return localStorage.getItem(storageKey(pauseId, tabKey)) || '';
+        } catch (e) {
+            return '';
+        }
+    }
+
+    function saveStored(pauseId, tabKey, value) {
+        try {
+            localStorage.setItem(storageKey(pauseId, tabKey), value);
+        } catch (e) {
+            // localStorage full or unavailable — silent fail
+        }
+    }
+
+    function loadStoredBool(pauseId, key) {
+        try {
+            return localStorage.getItem(storageKey(pauseId, key)) === 'true';
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function saveStoredBool(pauseId, key, value) {
+        try {
+            localStorage.setItem(storageKey(pauseId, key), value ? 'true' : 'false');
+        } catch (e) {
+            // silent
+        }
+    }
+
+    /* ── RENDER MODAL CONTENT ─────────────────────────── */
+    function renderModal(pauseId, tabKey) {
+        var data = PAUSES[pauseId];
+        if (!data) return;
+        var tabData = data[tabKey] || {};
+
+        document.getElementById('rjwSectionTitle').textContent = data.title || '';
+
+        // Highlight active tab button
+        ['reflect','journal','witness'].forEach(function(k) {
+            var btn = document.querySelector('.rjw-tab-btn.' + k);
+            if (btn) btn.classList.toggle('active', k === tabKey);
+        });
+
+        // REFLECT TAB — populate both prompt blocks, show active mode
+        if (tabKey === 'reflect') {
+            var chapterPrompt = (data.reflect && data.reflect.prompt) ? data.reflect.prompt : '';
+            document.getElementById('reflect-prompt-chapter').innerHTML = chapterPrompt;
+            applyReflectMode();
+        }
+
+        // JOURNAL & WITNESS — fill single prompt block
+        if (tabKey === 'journal') {
+            document.getElementById('journal-prompt').innerHTML = tabData.prompt || '';
+        }
+        if (tabKey === 'witness') {
+            document.getElementById('witness-prompt').innerHTML = tabData.prompt || '';
+            var cardsEl = document.getElementById('witness-cards');
+            cardsEl.innerHTML = '';
+            if (tabData.cards && tabData.cards.length) {
+                tabData.cards.forEach(function(c) {
+                    cardsEl.innerHTML += '<div class="witness-card"><p>' + c.text + '</p><span class="witness-meta">— ' + c.meta + '</span></div>';
+                });
+            }
+        }
+
+        // Show correct pane
+        document.querySelectorAll('.rjw-body .tab-pane').forEach(function(p) {
+            p.classList.remove('active');
+        });
+        var pane = document.getElementById('tab-' + tabKey);
+        if (pane) pane.classList.add('active');
+
+        // Restore saved text
+        var ta = document.getElementById(tabKey + '-ta');
+        if (ta) ta.value = loadStored(pauseId, tabKey);
+
+        // Restore checkbox states for witness
+        if (tabKey === 'witness') {
+            var cbDoc  = document.getElementById('cb-document');
+            var cbComm = document.getElementById('cb-community');
+            if (cbDoc)  cbDoc.checked  = loadStoredBool(pauseId, 'witness-include-document');
+            if (cbComm) cbComm.checked = loadStoredBool(pauseId, 'witness-submit-community');
+        }
+    }
+
+    /* ── REFLECT MODE TOGGLE ──────────────────────────── */
+    function switchReflectMode(mode) {
+        reflectMode = mode;
+        applyReflectMode();
+    }
+
+    function applyReflectMode() {
+        var universalBlock = document.getElementById('reflect-prompt-universal');
+        var chapterBlock   = document.getElementById('reflect-prompt-chapter');
+        var btnUniversal   = document.getElementById('toggle-universal');
+        var btnChapter     = document.getElementById('toggle-chapter');
+
+        var showUniversal = (reflectMode === 'universal');
+        if (universalBlock) universalBlock.style.display = showUniversal ? '' : 'none';
+        if (chapterBlock)   chapterBlock.style.display   = showUniversal ? 'none' : '';
+        if (btnUniversal)   btnUniversal.classList.toggle('active', showUniversal);
+        if (btnChapter)     btnChapter.classList.toggle('active', !showUniversal);
+    }
+
+    /* ── OPEN ─────────────────────────────────────────── */
+    function openModal(pauseId, tabKey) {
+        PAUSES = loadPauses();  // ensure latest data
+        activePauseId = pauseId;
+        activeTabKey  = tabKey;
+        reflectMode   = 'universal';
+        renderModal(pauseId, tabKey);
+        document.getElementById('rjwOverlay').classList.add('open');
+        document.getElementById('rjwPanel').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    /* ── CLOSE — saves current text, NEVER clears it ──── */
+    function closeModal() {
+        persistCurrent();
+        document.getElementById('rjwOverlay').classList.remove('open');
+        document.getElementById('rjwPanel').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    /* ── SWITCH TAB ────────────────────────────────────── */
+    function switchTab(tabKey) {
+        if (!activePauseId) return;
+        persistCurrent();
+        activeTabKey = tabKey;
+        renderModal(activePauseId, tabKey);
+    }
+
+    /* ── PERSIST ───────────────────────────────────────── */
+    function persistCurrent() {
+        if (!activePauseId || !activeTabKey) return;
+        var ta = document.getElementById(activeTabKey + '-ta');
+        if (ta) saveStored(activePauseId, activeTabKey, ta.value);
+    }
+
+    /* ── SAVE BUTTON ───────────────────────────────────── */
+    function saveResponse(tabKey) {
+        var ta = document.getElementById(tabKey + '-ta');
+        if (ta && activePauseId) {
+            saveStored(activePauseId, tabKey, ta.value);
+
+            if (tabKey === 'witness') {
+                var cbDoc  = document.getElementById('cb-document');
+                var cbComm = document.getElementById('cb-community');
+                saveStoredBool(activePauseId, 'witness-include-document',  cbDoc  ? cbDoc.checked  : false);
+                saveStoredBool(activePauseId, 'witness-submit-community', cbComm ? cbComm.checked : false);
+            }
+        }
+        var ind = document.getElementById('save-' + tabKey);
+        if (ind) {
+            ind.classList.add('visible');
+            setTimeout(function() { ind.classList.remove('visible'); }, 2200);
+        }
+    }
+
+    /* ── CLEAR BUTTON ──────────────────────────────────── */
+    function clearTA(tabKey) {
+        var ta = document.getElementById(tabKey + '-ta');
+        if (ta) ta.value = '';
+        if (activePauseId) saveStored(activePauseId, tabKey, '');
+    }
+
+    /* ── KEYBOARD ──────────────────────────────────────── */
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    /* ── PUBLIC API ────────────────────────────────────── */
+    return {
+        openModal: openModal,
+        closeModal: closeModal,
+        switchTab: switchTab,
+        switchReflectMode: switchReflectMode,
+        saveResponse: saveResponse,
+        clearTA: clearTA
+    };
+
+})();
+
+// Export for global use
+window.RJW = RJW;
