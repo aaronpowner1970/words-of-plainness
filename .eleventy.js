@@ -139,6 +139,20 @@ module.exports = function(eleventyConfig) {
         return `<span class="sentence" data-index="${index}">${content.trim()}</span>`;
     });
     
+    // Pause-point for Reflect · Journal · Witness system
+    // Usage: {% pausePoint "pause-closing", "reflect" %}
+    eleventyConfig.addShortcode("pausePoint", function(id, defaultTab) {
+        const tab = defaultTab || "reflect";
+        return `<div class="pause-point" id="${id}">
+  <div class="tab-cluster">
+    <div class="tab-pill reflect" onclick="RJW.openModal('${id}','reflect')">Reflect</div>
+    <div class="tab-pill journal" onclick="RJW.openModal('${id}','journal')">Journal</div>
+    <div class="tab-pill witness" onclick="RJW.openModal('${id}','witness')">Witness</div>
+  </div>
+</div>
+<div class="section-gap"></div>`;
+    });
+
     // Scripture link (build-time)
     // Usage: {% scripture "Alma 42:8" %}
     eleventyConfig.addShortcode("scripture", function(reference) {
