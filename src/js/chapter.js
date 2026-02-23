@@ -359,8 +359,12 @@ const ChapterManager = {
                 this.openMobileTOC();
                 break;
             case 'reflect':
-                var target = document.querySelector('.pause-point') || document.getElementById('reflectionSection');
-                target?.scrollIntoView({ behavior: 'smooth' });
+                var pp = document.querySelector('.pause-point');
+                if (pp) {
+                    pp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    document.getElementById('reflectionSection')?.scrollIntoView({ behavior: 'smooth' });
+                }
                 break;
         }
     },
@@ -622,8 +626,12 @@ const ChapterManager = {
                 this.openMobileTOC();
                 break;
             case 'reflect':
-                var target = document.querySelector('.pause-point') || document.getElementById('reflectionSection');
-                target?.scrollIntoView({ behavior: 'smooth' });
+                var pp = document.querySelector('.pause-point');
+                if (pp) {
+                    pp.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    document.getElementById('reflectionSection')?.scrollIntoView({ behavior: 'smooth' });
+                }
                 break;
         }
     },
