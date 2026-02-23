@@ -156,6 +156,16 @@ toc:
     title: "God's Unchanging Nature"
   - id: a-witness-of-the-power-of-prayer
     title: A Witness of the Power of Prayer
+pauses:
+  - id: "pause-closing"
+    title: "Sincere Prayer"
+    default: "reflect"
+    reflect:
+      prompt: "<p>The chapter describes prayer not as raising our voices to God but as two-way communication — learning to receive, not just to ask. What would change in your prayer life if you spent as much time listening as speaking?</p><p>A pastoral note in the chapter warns: \"Do not dismiss a genuine answer from God because it arrives differently or more quietly than you expected.\" Has this ever happened to you — an answer you almost missed because it did not come the way you imagined?</p>"
+    journal:
+      prompt: "<p>The chapter says that \"prayer opens the channel; the Holy Ghost carries the message\" — and that learning to pray and learning to recognize God's voice are not separate skills but one discipline practiced from two directions. Write about your experience with that channel. Is it open, closed, or somewhere in between? What would it take to widen it?</p>"
+    witness:
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The authors testify \"with all our strength of the power of prayer.\" If prayer has been answered in your life — not necessarily the way you expected, but in a way you could not dismiss — we invite you to share that witness here.</p>"
 ---
 
 <h2 id="the-souls-sincere-desire">{% sentence 0 %}The Soul's Sincere Desire{% endsentence %}</h2>
@@ -278,3 +288,5 @@ toc:
 <h2 id="a-witness-of-the-power-of-prayer">{% sentence 206 %}A Witness of the Power of Prayer{% endsentence %}</h2>
 
 {% sentence 206 %}We testify with all our strength of the power of prayer.{% endsentence %} {% sentence 207 %}God knows our needs and listens as we pray to Him.{% endsentence %} {% sentence 208 %}We all desperately need the strength of a personal relationship with God that only prayer can provide.{% endsentence %} {% sentence 209 %}Reach out to God with your heart and mind.{% endsentence %} {% sentence 210 %}Pray with a sincere heart to know Him and to know truth.{% endsentence %} {% sentence 211 %}He will answer.{% endsentence %} {% sentence 212 %}We promise this to you in the name of Jesus Christ.{% endsentence %} {% sentence 213 %}Amen.{% endsentence %}
+
+{% pausePoint "pause-closing", "reflect" %}

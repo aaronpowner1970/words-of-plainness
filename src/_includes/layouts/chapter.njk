@@ -75,8 +75,7 @@
 
 <!-- Non-content sections excluded from search -->
 <div data-pagefind-ignore>
-<!-- ORIGINAL REFLECTION SECTION — hidden when R·J·W pauses are present.
-     Remove pauses: from frontmatter to restore. -->
+<!-- Reflection Section — hidden when R·J·W pause-points are active -->
 {% if not pauses or pauses.length == 0 %}
 {% include "components/reflection-section.njk" %}
 {% endif %}
