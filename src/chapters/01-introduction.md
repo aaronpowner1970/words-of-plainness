@@ -174,6 +174,16 @@ toc:
     title: "Organization of Our Writings"
   - id: "section-plea"
     title: "Our Plea to You"
+pauses:
+  - id: "pause-closing"
+    title: "Introduction"
+    default: "reflect"
+    reflect:
+      prompt: "<p>The authors write that \"what you get out of reading our Words of Plainness depends entirely upon what you are looking for as you study them.\" What are you looking for? Be honest with yourself about what brought you to this page.</p><p>They describe a kinship with all who believe in Christ, and say they do not seek to take away light others already possess but to add to it. How does that land with you — does it feel genuine? What would it take for you to trust that intent?</p>"
+    journal:
+      prompt: "<p>The authors confess their own imperfections and say they feel as if they have \"awakened from a deep sleep, made new and somehow more whole\" by their acquaintance with God. Write about where you are in your own awakening — just beginning, mid-journey, or somewhere you did not expect to be.</p>"
+    witness:
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If something stirred in you as you read this opening — a recognition, a memory, a quiet pull toward something you cannot quite name — we invite you to put it into words here.</p>"
 ---
 
 <h2 id="section-human-condition">The Human Condition</h2>
@@ -424,3 +434,5 @@ toc:
 {% sentence 172 %}We hope that you find in our writings encouragement and inspiration to believe in God and in His Son Jesus Christ.{% endsentence %}
 {% sentence 173 %}Our prayer is that you will be blessed by the Spirit and grace of God as you consider our words, in the name of Jesus Christ.{% endsentence %}
 {% sentence 174 %}Amen.{% endsentence %}
+
+{% pausePoint "pause-closing", "reflect" %}

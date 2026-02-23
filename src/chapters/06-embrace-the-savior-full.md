@@ -58,6 +58,16 @@ prevChapter:
 nextChapter:
   url: "/chapters/07-prophecies-birth-youth/"
   title: "Chapter 7: Prophecies, Birth, and Youth"
+pauses:
+  - id: "pause-closing"
+    title: "Embrace the Savior"
+    default: "reflect"
+    reflect:
+      prompt: "<p>The chapter ends with five invitations: Come unto Him. Learn of Him. Believe in Him. Follow Him. Remember Him. Which of these feels like the one you most need right now — and which feels like the one that would cost you the most?</p><p>The authors write that \"faith begins as we reach toward God, but it becomes His gift to us as He reaches back.\" Have you felt that exchange — your small effort met by something larger than yourself?</p>"
+    journal:
+      prompt: "<p>The chapter describes faith not as a single decision but as an ongoing relationship — \"surrender, trust, willingness to be changed.\" Write about what you are willing to surrender today. Not what you think you should surrender. What you are actually ready to let go of.</p>"
+    witness:
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The chapter promises that if you come unto Christ, learn of Him, believe, follow, and remember — your faith will be made unshakable. If there is a moment when embracing Christ became personal rather than abstract for you, we invite you to share it here.</p>"
 ---
 
 <style>
@@ -803,6 +813,8 @@ Amen.
 
 {% sentence 251 %}In the name of Jesus Christ.{% endsentence %}
 {% sentence 252 %}Amen.{% endsentence %}
+
+{% pausePoint "pause-closing", "reflect" %}
 
 <!-- ============================================================
      POSTSCRIPT: What Comes Next

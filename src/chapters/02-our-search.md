@@ -324,6 +324,16 @@ toc:
     title: "To My Fellow Searchers"
   - id: "section-a-promise-i-hope-to-fulfill"
     title: "A Promise I Hope to Fulfill"
+pauses:
+  - id: "pause-closing"
+    title: "Our Search"
+    default: "reflect"
+    reflect:
+      prompt: "<p>The chapter describes holy dissatisfaction as a divine gift — the idea that God built restlessness into us so we would never stop growing. Does that reframe how you see your own restlessness, or does it raise new questions?</p><p>\"Seeds must break open to grow. Bread must be broken to nourish. Hearts must be broken to become capable of deeper love.\" Where in your life has brokenness led to something you could not have reached otherwise?</p>"
+    journal:
+      prompt: "<p>The chapter names five responses to the hunger within us — pride, despair, rebellion, submission, and the narrow way of humility. Without judging yourself, write about which of these you have walked through and where you find yourself now.</p>"
+    witness:
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The chapter closes with the image of God sitting as a refiner — present, patient, watching until His image can be seen in us. If you have experienced a moment when you sensed that kind of patient, attentive presence in the middle of something hard, we invite you to share it.</p>"
 ---
 
 <h2 id="section-note-to-the-reader">{% sentence 0 %}Note to the Reader{% endsentence %}</h2>
@@ -708,3 +718,5 @@ toc:
 {% sentence 291 %}If I am blessed to remain in this mortal educational environment for another twenty years, I am confident that I will need to revise this chapter again to reflect yet another cycle of spiritual wrestlings and personal growth.{% endsentence %}
 {% sentence 292 %}I testify of my confidence in the divinity of the process—confidence in "Our Search," in the name of Jesus Christ.{% endsentence %}
 {% sentence 293 %}Amen.{% endsentence %}
+
+{% pausePoint "pause-closing", "reflect" %}

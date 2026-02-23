@@ -188,6 +188,16 @@ toc:
     title: "Two Paths to Confirmation"
   - id: "our-witness"
     title: "Our Witness"
+pauses:
+  - id: "pause-closing"
+    title: "Spiritual Knowledge"
+    default: "reflect"
+    reflect:
+      prompt: "<p>The chapter describes revelation as often arriving \"like the rising of the sun\" — so gradual that we may not recognize it. Have you experienced knowing something to be true before you could explain how you knew it? What did that feel like?</p><p>Alma invites us to \"experiment upon the word\" — to plant a spiritual claim like a seed and observe what it produces in our souls. Is there a truth you have tested this way, or one you are willing to test now?</p>"
+    journal:
+      prompt: "<p>The chapter names five spiritual faculties — feeling after God, discerning good from evil, recognizing truth, perceiving divine communication, and growing in light over time. Write honestly about which of these feels most alive in you right now, and which feels dormant or unfamiliar.</p>"
+    witness:
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The chapter promises that \"God has answered the prayers of so many. He has answered us. He will answer you.\" If you have received spiritual knowledge — through whatever means it came — we invite you to share what that experience was like.</p>"
 ---
 
 <h2 id="the-fifth-faculty">The Fifth Faculty</h2>
@@ -354,3 +364,5 @@ toc:
 {% sentence 259 %}We invite you to embrace the search for truth with honest humility and careful judgment.{% endsentence %} {% sentence 260 %}Even when you have found a portion of the whole truth, there is always far more understanding to be gained in this life.{% endsentence %} {% sentence 261 %}We assure you that truth is knowable.{% endsentence %} {% sentence 262 %}There is meaning and purpose to our existence.{% endsentence %} {% sentence 263 %}Enduring happiness can be found in this life.{% endsentence %} {% sentence 264 %}Renew and redouble your search, courageously choosing hope.{% endsentence %} {% sentence 265 %}The search is worthy of every effort, worth any sacrifice.{% endsentence %}
 
 {% sentence 266 %}God has answered the prayers of so many.{% endsentence %} {% sentence 267 %}He has answered us.{% endsentence %} {% sentence 268 %}He will answer you.{% endsentence %} {% sentence 269 %}This we promise in the name of Jesus Christ.{% endsentence %} {% sentence 270 %}Amen.{% endsentence %}
+
+{% pausePoint "pause-closing", "reflect" %}
