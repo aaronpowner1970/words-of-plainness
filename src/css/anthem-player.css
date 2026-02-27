@@ -1,0 +1,403 @@
+/* ============================================
+   ANTHEM PLAYER — Homepage Hero Component
+   Words of Plainness · "The Marks of Your Worth"
+   ============================================
+   
+   Sits inside .hero-content between .hero-subtitle
+   and .hero-text. Uses site CSS custom properties
+   from styles.css exclusively.
+   ============================================ */
+
+/* ── Anthem Block Container ───────────────── */
+.anthem-block {
+    position: relative;
+    z-index: 2;
+    max-width: 520px;
+    width: 100%;
+    margin: var(--space-lg) 0;
+}
+
+/* Thin decorative rule separating identity from player */
+.anthem-rule {
+    width: 120px;
+    height: 1px;
+    margin: 0 auto var(--space-lg);
+    background: linear-gradient(90deg, transparent, rgba(196, 148, 58, 0.5), transparent);
+}
+
+.anthem-label {
+    font-family: var(--font-serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: var(--space-xs);
+}
+
+.anthem-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--cream-soft);
+    margin-bottom: 0.15rem;
+    line-height: 1.25;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.anthem-subtitle {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--gold-primary);
+    opacity: 0.8;
+    margin-bottom: var(--space-md);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Play Area (button + waveform) ────────── */
+.anthem-play-area {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 0.875rem 1.125rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.625rem;
+    cursor: pointer;
+    transition: border-color var(--transition-normal), background var(--transition-normal);
+}
+
+.anthem-play-area:hover {
+    border-color: rgba(196, 148, 58, 0.35);
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* Play / Pause Button */
+.anthem-play-btn {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gold-dark);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background var(--transition-fast), transform 0.15s ease;
+    box-shadow: 0 2px 16px rgba(196, 148, 58, 0.3);
+}
+
+.anthem-play-btn:hover {
+    background: var(--gold-primary);
+    transform: scale(1.06);
+}
+
+.anthem-play-btn svg {
+    fill: var(--brown-deep);
+    width: 20px;
+    height: 20px;
+}
+
+.anthem-play-btn .icon-play {
+    margin-left: 3px; /* optical centering for triangle */
+}
+
+.anthem-play-btn .icon-pause {
+    display: none;
+}
+
+.anthem-play-btn.is-playing .icon-play {
+    display: none;
+}
+
+.anthem-play-btn.is-playing .icon-pause {
+    display: block;
+}
+
+/* ── Waveform Visualization ───────────────── */
+.anthem-waveform {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.anthem-waveform-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 34px;
+}
+
+.anthem-waveform-bars span {
+    flex: 1;
+    background: var(--gold-dark);
+    border-radius: 1px;
+    opacity: 0.45;
+    transition: height 0.25s ease, opacity 0.2s ease;
+}
+
+/* Static bar heights (30 bars, varied) */
+.anthem-waveform-bars span:nth-child(1)  { height: 35%; }
+.anthem-waveform-bars span:nth-child(2)  { height: 55%; }
+.anthem-waveform-bars span:nth-child(3)  { height: 42%; }
+.anthem-waveform-bars span:nth-child(4)  { height: 72%; }
+.anthem-waveform-bars span:nth-child(5)  { height: 88%; }
+.anthem-waveform-bars span:nth-child(6)  { height: 62%; }
+.anthem-waveform-bars span:nth-child(7)  { height: 100%; }
+.anthem-waveform-bars span:nth-child(8)  { height: 78%; }
+.anthem-waveform-bars span:nth-child(9)  { height: 52%; }
+.anthem-waveform-bars span:nth-child(10) { height: 93%; }
+.anthem-waveform-bars span:nth-child(11) { height: 68%; }
+.anthem-waveform-bars span:nth-child(12) { height: 44%; }
+.anthem-waveform-bars span:nth-child(13) { height: 82%; }
+.anthem-waveform-bars span:nth-child(14) { height: 58%; }
+.anthem-waveform-bars span:nth-child(15) { height: 76%; }
+.anthem-waveform-bars span:nth-child(16) { height: 48%; }
+.anthem-waveform-bars span:nth-child(17) { height: 88%; }
+.anthem-waveform-bars span:nth-child(18) { height: 64%; }
+.anthem-waveform-bars span:nth-child(19) { height: 38%; }
+.anthem-waveform-bars span:nth-child(20) { height: 56%; }
+.anthem-waveform-bars span:nth-child(21) { height: 82%; }
+.anthem-waveform-bars span:nth-child(22) { height: 94%; }
+.anthem-waveform-bars span:nth-child(23) { height: 50%; }
+.anthem-waveform-bars span:nth-child(24) { height: 72%; }
+.anthem-waveform-bars span:nth-child(25) { height: 46%; }
+.anthem-waveform-bars span:nth-child(26) { height: 86%; }
+.anthem-waveform-bars span:nth-child(27) { height: 62%; }
+.anthem-waveform-bars span:nth-child(28) { height: 38%; }
+.anthem-waveform-bars span:nth-child(29) { height: 74%; }
+.anthem-waveform-bars span:nth-child(30) { height: 52%; }
+
+/* Progress row */
+.anthem-waveform-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.anthem-waveform-time {
+    font-family: var(--font-sans);
+    font-size: 0.688rem;
+    color: var(--cream-dark);
+    letter-spacing: 0.03em;
+}
+
+.anthem-progress-track {
+    flex: 1;
+    height: 2px;
+    background: rgba(196, 148, 58, 0.2);
+    border-radius: 1px;
+    margin: 0 10px;
+    position: relative;
+}
+
+.anthem-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    background: var(--gold-primary);
+    border-radius: 1px;
+    transition: width 0.1s linear;
+}
+
+/* ── Footer Row (lyrics toggle + music link) ─ */
+.anthem-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* ── Lyrics Toggle ────────────────────────── */
+.anthem-lyrics-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 0;
+    cursor: pointer;
+    user-select: none;
+    background: none;
+    border: none;
+}
+
+.anthem-lyrics-toggle-text {
+    font-family: var(--font-serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    transition: color var(--transition-fast);
+}
+
+.anthem-lyrics-toggle:hover .anthem-lyrics-toggle-text {
+    color: var(--gold-primary);
+}
+
+.anthem-lyrics-chevron {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.anthem-lyrics-chevron path {
+    stroke: var(--gold-dark);
+    stroke-width: 2;
+}
+
+.anthem-lyrics-toggle:hover .anthem-lyrics-chevron path {
+    stroke: var(--gold-primary);
+}
+
+.anthem-lyrics-toggle.is-open .anthem-lyrics-chevron {
+    transform: rotate(180deg);
+}
+
+/* ── Music Page Link ──────────────────────── */
+.anthem-music-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    text-decoration: none;
+    padding: 6px 0;
+    transition: color var(--transition-fast);
+}
+
+.anthem-music-link:hover {
+    color: var(--gold-primary);
+}
+
+.anthem-music-link svg {
+    width: 12px;
+    height: 12px;
+}
+
+.anthem-music-link svg path {
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+/* ── Lyrics Dropdown Body ─────────────────── */
+.anthem-lyrics-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    opacity: 0;
+}
+
+.anthem-lyrics-body.is-open {
+    max-height: 2200px;
+    opacity: 1;
+}
+
+.anthem-lyrics-scroll {
+    max-height: 380px;
+    overflow-y: auto;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(196, 148, 58, 0.1);
+    border-radius: var(--radius-sm);
+    text-align: left;
+    margin-top: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--brown-medium) transparent;
+}
+
+.anthem-lyrics-scroll .lyrics-label {
+    font-family: var(--font-serif);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-top: 18px;
+    margin-bottom: 6px;
+}
+
+.anthem-lyrics-scroll .lyrics-label:first-child {
+    margin-top: 0;
+}
+
+.anthem-lyrics-scroll .lyrics-verse {
+    font-family: var(--font-serif);
+    font-size: 0.97rem;
+    color: var(--cream);
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.anthem-lyrics-scroll .lyrics-chorus {
+    font-family: var(--font-serif);
+    font-size: 0.97rem;
+    color: var(--gold-light);
+    line-height: 1.7;
+    margin-bottom: 14px;
+    font-style: italic;
+    padding-left: 16px;
+    border-left: 2px solid rgba(196, 148, 58, 0.25);
+}
+
+/* ── Welcome Rule (below anthem, above hero-text) ─ */
+.anthem-welcome-rule {
+    width: 80px;
+    height: 1px;
+    margin: var(--space-lg) auto var(--space-md);
+    background: linear-gradient(90deg, transparent, rgba(196, 148, 58, 0.35), transparent);
+}
+
+/* ── Responsive ───────────────────────────── */
+@media (max-width: 768px) {
+    .anthem-block {
+        margin: var(--space-md) auto;
+        max-width: 100%;
+    }
+
+    .anthem-play-area {
+        padding: 0.75rem 0.875rem;
+        gap: 0.75rem;
+    }
+
+    .anthem-play-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .anthem-play-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .anthem-footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .anthem-title {
+        font-size: 1.15rem;
+    }
+}
+
+/* ── Reduced motion ───────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .anthem-waveform-bars span {
+        transition: none !important;
+    }
+
+    .anthem-lyrics-body {
+        transition: none !important;
+    }
+
+    .anthem-lyrics-chevron {
+        transition: none !important;
+    }
+}
