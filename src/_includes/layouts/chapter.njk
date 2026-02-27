@@ -2,6 +2,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/ambient-player.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
 {% endblock %}
 
@@ -221,4 +222,14 @@
         }
     });
 </script>
+{% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+<script>
+    window.WOP_AMBIENT_TRACKS = [
+        {% for track in ministryMusic.ambient %}
+        { file: "/assets/audio/{{ track.file }}", title: "{{ track.title }}", duration: "{{ track.duration }}" }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+</script>
+<script src="/js/ambient-player.js"></script>
+{% endif %}
 {% endblock %}

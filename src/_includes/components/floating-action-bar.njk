@@ -39,7 +39,17 @@
         </svg>
         <span>Listen to Chapter</span>
     </button>
-    
+    {% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+    <div class="ambient-control" id="ambientControl">
+        <span class="ambient-icon" id="ambientIcon" aria-hidden="true">&#9835;</span>
+        <span class="ambient-label" id="ambientLabel">Reading Atmosphere</span>
+        <button class="ambient-skip" id="ambientSkip" aria-label="Skip to next ambient track">&#9197;</button>
+        <button class="ambient-toggle-btn" id="ambientToggle" role="switch" aria-checked="false" aria-label="Toggle reading atmosphere music">
+            <span class="ambient-switch-track"><span class="ambient-switch-thumb"></span></span>
+        </button>
+    </div>
+    {% endif %}
+
     <div class="dropdown-container">
         <button class="action-pill primary" id="btnLearningTools">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

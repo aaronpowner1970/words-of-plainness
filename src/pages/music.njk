@@ -121,10 +121,10 @@ permalink: /music/
          ========================================== -->
     <div class="playlist-container">
 
-        <!-- Section 1: The Journey (Primaries) -->
+        <!-- Section 0: Ministry Collection -->
         <div class="playlist-section-header">
-            <h2 class="section-title">The Journey</h2>
-            <p class="section-subtitle">The core musical testimony, chapter by chapter</p>
+            <h2 class="section-title">Ministry Collection</h2>
+            <p class="section-subtitle">Sacred music at the heart of this ministry</p>
         </div>
 
         <table class="playlist-table" id="playlistTable">
@@ -138,6 +138,41 @@ permalink: /music/
             </thead>
             <tbody>
                 {%- set trackNum = 1 -%}
+                {%- for item in ministryMusic.collection -%}
+                <tr class="playlist-row"
+                    data-src="/assets/audio/{{ item.file }}"
+                    data-title="{{ item.title }}"
+                    data-label="{{ item.label }}"
+                    data-chapter="0"
+                    data-chapter-title=""
+                    data-chapter-url=""
+                    data-is-ministry="true"
+                    data-has-lyrics="{{ item.hasLyrics }}"
+                    data-description="{{ item.description | escape }}"
+                    data-lyrics="{{ ministryMusic.anthemLyrics | escape if item.hasLyrics else '' }}">
+                    <td class="col-num">{{ trackNum }}</td>
+                    <td class="col-title">
+                        <div class="track-title-group">
+                            <span class="song-title">{{ item.title }}</span>
+                            <span class="song-label">&mdash; {{ item.label }}</span>
+                        </div>
+                    </td>
+                    <td class="col-chapter"></td>
+                    <td class="col-duration" data-duration>{{ item.duration if item.duration else '&mdash;' | safe }}</td>
+                </tr>
+                {%- set trackNum = trackNum + 1 -%}
+                {%- endfor -%}
+
+                <!-- Section 1: The Core Journey (Primaries) -->
+                <tr class="playlist-section-divider">
+                    <td colspan="4">
+                        <div class="playlist-section-header playlist-section-header--inline">
+                            <h2 class="section-title">The Core Journey</h2>
+                            <p class="section-subtitle">The core musical testimony, chapter by chapter</p>
+                        </div>
+                    </td>
+                </tr>
+
                 {%- for chapter in collections.chapters -%}
                 {%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.file -%}
                 <tr class="playlist-row"

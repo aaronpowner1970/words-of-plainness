@@ -7,6 +7,7 @@
 {% block content %}
 <link rel="stylesheet" href="/css/interactive-chapter.css">
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/ambient-player.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
 <style>
 .vol-breadcrumb {
@@ -37,6 +38,19 @@
 <script>
     window.WOP_SCRIPTURE_BOOKS = {{ "" | scriptureBooksJson | safe }};
 </script>
+
+{% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+<div class="ambient-control-standalone">
+    <div class="ambient-control" id="ambientControl">
+        <span class="ambient-icon" id="ambientIcon" aria-hidden="true">&#9835;</span>
+        <span class="ambient-label" id="ambientLabel">Reading Atmosphere</span>
+        <button class="ambient-skip" id="ambientSkip" aria-label="Skip to next ambient track">&#9197;</button>
+        <button class="ambient-toggle-btn" id="ambientToggle" role="switch" aria-checked="false" aria-label="Toggle reading atmosphere music">
+            <span class="ambient-switch-track"><span class="ambient-switch-thumb"></span></span>
+        </button>
+    </div>
+</div>
+{% endif %}
 
 <main class="interactive-chapter" data-chapter="{{ chapter }}">
   {% if volumeUrl %}
@@ -146,4 +160,14 @@
 <script src="/js/wop-reflections.js"></script>
 <script src="/js/chapter.js"></script>
 <script src="/js/interactive-chapter.js"></script>
+{% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+<script>
+    window.WOP_AMBIENT_TRACKS = [
+        {% for track in ministryMusic.ambient %}
+        { file: "/assets/audio/{{ track.file }}", title: "{{ track.title }}", duration: "{{ track.duration }}" }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+</script>
+<script src="/js/ambient-player.js"></script>
+{% endif %}
 {% endblock %}

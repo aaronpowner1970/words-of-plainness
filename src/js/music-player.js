@@ -64,9 +64,11 @@ const MusicPlayer = {
             title: row.dataset.title,
             label: row.dataset.label || '',
             chapter: parseInt(row.dataset.chapter, 10),
-            chapterTitle: row.dataset.chapterTitle,
-            chapterUrl: row.dataset.chapterUrl,
+            chapterTitle: row.dataset.chapterTitle || '',
+            chapterUrl: row.dataset.chapterUrl || '',
             lyrics: row.dataset.lyrics || '',
+            isMinistry: row.dataset.isMinistry === 'true',
+            hasLyrics: row.dataset.hasLyrics !== 'false',
             row: row
         }));
     },
@@ -202,7 +204,12 @@ const MusicPlayer = {
         // Always show style label — primaries default to "Sacred Americana"
         var displayLabel = track.label || 'Sacred Americana';
         this.els.npTitle.textContent = track.title + ' \u2014 ' + displayLabel;
-        this.els.npChapter.textContent = '(Ch ' + track.chapter + ')';
+        // Hide chapter reference for ministry tracks
+        if (track.isMinistry || !track.chapter) {
+            this.els.npChapter.textContent = '';
+        } else {
+            this.els.npChapter.textContent = '(Ch ' + track.chapter + ')';
+        }
     },
 
     togglePlay() {
@@ -495,15 +502,18 @@ const MusicPlayer = {
             // Update heading with song title
             this.els.lyricsHeading.textContent = track.title;
 
-            if (track.lyrics) {
+            if (track.isMinistry && !track.lyrics) {
+                // Ministry instrumental — show instrumental indicator
+                this.els.lyricsContent.innerHTML = '<p class="instrumental-indicator"><em>\u266A Instrumental</em></p>';
+            } else if (track.lyrics) {
                 this.els.lyricsContent.innerHTML = track.lyrics;
             } else {
                 this.els.lyricsContent.innerHTML = '<p class="no-lyrics">Lyrics not yet available for this testimony.</p>';
             }
 
-            // Show alt note when playing an alternate version
+            // Show alt note only for chapter alternate versions (not ministry tracks)
             if (this.els.lyricsAltNote) {
-                this.els.lyricsAltNote.style.display = track.label ? 'block' : 'none';
+                this.els.lyricsAltNote.style.display = (!track.isMinistry && track.label) ? 'block' : 'none';
             }
         } else {
             // No track selected
