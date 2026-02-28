@@ -50,7 +50,7 @@ import sys
 from datetime import datetime
 
 try:
-    from openpyxl import load_workbook
+    from openpyxl import Workbook, load_workbook
     OPENPYXL_OK = True
 except ImportError:
     OPENPYXL_OK = False
@@ -71,6 +71,37 @@ DEFAULTS = {
     "composer": "Aaron J Powner",
     "copyright": "© 2026 Aaron J Powner",
 }
+
+
+HEADERS = [
+    "ISRC", "Filename", "Title", "Prefix", "Chapter", "Version",
+    "Style", "Artist", "Album", "Track #", "Year", "Genre",
+    "Composer", "Copyright", "Release Date", "Album Art",
+    "Archive WAV", "Distro WAV", "Web MP3", "Website Live",
+    "DistroKid", "Notes",
+]
+
+
+def create_new_catalog(path):
+    """Bootstrap a new WoP_ISRC_Catalog.xlsx with headers."""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Track Catalog"
+    for col_idx, header in enumerate(HEADERS, 1):
+        ws.cell(row=1, column=col_idx, value=header)
+
+    # Summary sheet
+    summary = wb.create_sheet("Summary")
+    summary["A1"] = "Metric"
+    summary["B1"] = "Value"
+    summary["A2"] = "Last Updated"
+    summary["B2"] = datetime.now().strftime("%Y-%m-%d")
+    summary["A3"] = "Total Tracks"
+    summary["B3"] = 0
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    wb.save(path)
+    wb.close()
 
 
 def find_row_by_filename(ws, filename):
@@ -98,7 +129,7 @@ def cmd_add(args):
     # Check for duplicates
     existing = find_row_by_filename(ws, args.filename)
     if existing:
-        print(f"  ⚠  Track already exists at row {existing}: {args.filename}")
+        print(f"  WARNING: Track already exists at row {existing}: {args.filename}")
         print(f"      Use 'update' command to modify existing entries.")
         wb.close()
         return 1
@@ -122,11 +153,11 @@ def cmd_add(args):
     ws[f"N{row}"] = DEFAULTS["copyright"]
     ws[f"O{row}"] = ""  # Release date — set during DistroKid upload
     ws[f"P{row}"] = "Pending"  # Album art
-    ws[f"Q{row}"] = "—"  # Archive WAV
-    ws[f"R{row}"] = "—"  # Distro WAV
-    ws[f"S{row}"] = "—"  # Web MP3
-    ws[f"T{row}"] = "—"  # Website Live
-    ws[f"U{row}"] = "—"  # DistroKid
+    ws[f"Q{row}"] = "--"  # Archive WAV
+    ws[f"R{row}"] = "--"  # Distro WAV
+    ws[f"S{row}"] = "--"  # Web MP3
+    ws[f"T{row}"] = "--"  # Website Live
+    ws[f"U{row}"] = "--"  # DistroKid
     ws[f"V{row}"] = args.notes if args.notes else ""
 
     # Update Summary sheet total
@@ -141,7 +172,7 @@ def cmd_add(args):
     wb.save(args.catalog)
     wb.close()
 
-    print(f"  ✓  Added to catalog at row {row}: {args.title}")
+    print(f"  [OK] Added to catalog at row {row}: {args.title}")
     print(f"      Filename: {args.filename}")
     return 0
 
@@ -153,7 +184,7 @@ def cmd_update(args):
 
     row = find_row_by_filename(ws, args.filename)
     if not row:
-        print(f"  ✗  Track not found: {args.filename}")
+        print(f"  [FAIL] Track not found: {args.filename}")
         wb.close()
         return 1
 
@@ -177,7 +208,7 @@ def cmd_update(args):
     wb.save(args.catalog)
     wb.close()
 
-    print(f"  ✓  Updated row {row}: {args.filename}")
+    print(f"  [OK] Updated row {row}: {args.filename}")
     for col, val in updates.items():
         print(f"      Column {col}: {val}")
     return 0
@@ -190,7 +221,7 @@ def cmd_set_isrc(args):
 
     row = find_row_by_filename(ws, args.filename)
     if not row:
-        print(f"  ✗  Track not found: {args.filename}")
+        print(f"  [FAIL] Track not found: {args.filename}")
         wb.close()
         return 1
 
@@ -198,7 +229,7 @@ def cmd_set_isrc(args):
     wb.save(args.catalog)
     wb.close()
 
-    print(f"  ✓  ISRC set for row {row}: {args.isrc}")
+    print(f"  [OK] ISRC set for row {row}: {args.isrc}")
     return 0
 
 
@@ -207,11 +238,11 @@ def cmd_list(args):
     wb = load_workbook(args.catalog, data_only=True)
     ws = wb["Track Catalog"]
 
-    print(f"\n{'═' * 80}")
-    print(f"  WoP ISRC Catalog — Track Listing")
-    print(f"{'═' * 80}")
+    print(f"\n{'=' * 80}")
+    print(f"  WoP ISRC Catalog -- Track Listing")
+    print(f"{'=' * 80}")
     print(f"  {'#':>3}  {'Title':<35} {'Style':<25} {'Pipeline'}")
-    print(f"  {'─' * 3}  {'─' * 35} {'─' * 25} {'─' * 15}")
+    print(f"  {'-' * 3}  {'-' * 35} {'-' * 25} {'-' * 15}")
 
     count = 0
     for row in range(2, ws.max_row + 1):
@@ -220,18 +251,18 @@ def cmd_list(args):
             continue
         count += 1
 
-        style = ws[f"G{row}"].value or "—"
-        archive = ws[f"Q{row}"].value or "—"
-        distro = ws[f"R{row}"].value or "—"
-        web = ws[f"S{row}"].value or "—"
-        live = ws[f"T{row}"].value or "—"
-        dk = ws[f"U{row}"].value or "—"
+        style = ws[f"G{row}"].value or "--"
+        archive = ws[f"Q{row}"].value or "--"
+        distro = ws[f"R{row}"].value or "--"
+        web = ws[f"S{row}"].value or "--"
+        live = ws[f"T{row}"].value or "--"
+        dk = ws[f"U{row}"].value or "--"
 
         pipeline = f"A:{archive} D:{distro} W:{web} L:{live} DK:{dk}"
         print(f"  {count:>3}  {str(title):<35} {str(style):<25} {pipeline}")
 
     print(f"\n  Total: {count} tracks")
-    print(f"{'═' * 80}\n")
+    print(f"{'=' * 80}\n")
 
     wb.close()
     return 0
@@ -284,8 +315,8 @@ def main():
         sys.exit(1)
 
     if not os.path.exists(args.catalog):
-        print(f"ERROR: Catalog not found: {args.catalog}")
-        sys.exit(1)
+        create_new_catalog(args.catalog)
+        print(f"  [NEW] Created catalog: {args.catalog}")
 
     if args.command == "add":
         return cmd_add(args)

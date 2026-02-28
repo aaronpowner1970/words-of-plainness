@@ -84,9 +84,9 @@ def load_album_art(art_path):
         img = Image.open(art_path)
         w, h = img.size
         if w < 3000 or h < 3000:
-            print(f"  ⚠  Album art is {w}×{h}px — 3000×3000 recommended")
+            print(f"  WARNING: Album art is {w}x{h}px -- 3000x3000 recommended")
         if w != h:
-            print(f"  ⚠  Album art is not square ({w}×{h}) — may display cropped")
+            print(f"  WARNING: Album art is not square ({w}x{h}) -- may display cropped")
 
     with open(art_path, "rb") as f:
         art_data = f.read()
@@ -104,7 +104,7 @@ def apply_id3_tags(filepath, metadata, art_data=None, art_mime=None):
     elif ext == ".wav":
         audio = WAVE(filepath)
     else:
-        print(f"  ⚠  Unsupported format: {ext}")
+        print(f"  WARNING: Unsupported format: {ext}")
         return False
 
     try:
@@ -165,16 +165,16 @@ def create_three_tiers(source_wav, filename, archive_dir, distro_dir, web_dir, d
 
     # Tier 1: Archive Master (copy original resolution)
     if dry_run:
-        print(f"  🔍 Would copy → {archive_path}")
+        print(f"  [DRY] Would copy -> {archive_path}")
     else:
         os.makedirs(archive_dir, exist_ok=True)
         shutil.copy2(source_wav, archive_path)
-        print(f"  ✓  Archive Master: {archive_path}")
+        print(f"  [OK] Archive Master: {archive_path}")
     results["archive"] = archive_path
 
     # Tier 2: Distribution Master (16-bit 44.1kHz WAV)
     if dry_run:
-        print(f"  🔍 Would convert → {distro_path}")
+        print(f"  [DRY] Would convert -> {distro_path}")
     else:
         os.makedirs(distro_dir, exist_ok=True)
         subprocess.run([
@@ -182,20 +182,20 @@ def create_three_tiers(source_wav, filename, archive_dir, distro_dir, web_dir, d
             "-ar", "44100", "-sample_fmt", "s16", "-c:a", "pcm_s16le",
             distro_path
         ], capture_output=True, check=True)
-        print(f"  ✓  Distribution WAV: {distro_path}")
+        print(f"  [OK] Distribution WAV: {distro_path}")
     results["distro"] = distro_path
 
-    # Tier 3: Web Master (320kbps MP3)
+    # Tier 3: Web Master (VBR V2 ~190kbps MP3, metadata stripped)
     if dry_run:
-        print(f"  🔍 Would encode → {web_path}")
+        print(f"  [DRY] Would encode -> {web_path}")
     else:
         os.makedirs(web_dir, exist_ok=True)
         subprocess.run([
             "ffmpeg", "-y", "-i", source_wav,
-            "-codec:a", "libmp3lame", "-b:a", "320k",
+            "-vn", "-codec:a", "libmp3lame", "-q:a", "2", "-map_metadata", "-1",
             web_path
         ], capture_output=True, check=True)
-        print(f"  ✓  Web MP3: {web_path}")
+        print(f"  [OK] Web MP3: {web_path}")
     results["web"] = web_path
 
     return results
@@ -214,8 +214,8 @@ def measure_duration(filepath):
         secs = int(seconds % 60)
         return f"{minutes}:{secs:02d}"
     except Exception as e:
-        print(f"  ⚠  Could not measure duration: {e}")
-        return "—"
+        print(f"  WARNING: Could not measure duration: {e}")
+        return "--"
 
 
 def main():
@@ -252,23 +252,23 @@ def main():
         print(f"ERROR: Source file not found: {args.source}")
         sys.exit(1)
 
-    print(f"\n{'═' * 60}")
-    print(f"  WoP Publish — Tag & Archive")
-    print(f"{'═' * 60}")
+    print(f"\n{'=' * 60}")
+    print(f"  WoP Publish -- Tag & Archive")
+    print(f"{'=' * 60}")
     print(f"  Source:   {args.source}")
     print(f"  Filename: {args.filename}")
     print(f"  Title:    {args.title}")
     print(f"  Style:    {args.style or '(none)'}")
     print(f"  Dry run:  {args.dry_run}")
-    print(f"{'═' * 60}\n")
+    print(f"{'=' * 60}\n")
 
     # ── Load album art ──
     art_data, art_mime = load_album_art(args.art)
     if art_data:
-        print(f"✓ Album art loaded: {args.art}\n")
+        print(f"[OK] Album art loaded: {args.art}\n")
 
     # ── Step 3: Create three-tier archive ──
-    print("── Creating Three-Tier Archive ──")
+    print("-- Creating Three-Tier Archive --")
     tiers = create_three_tiers(
         args.source, args.filename,
         args.archive_dir, args.distro_dir, args.web_dir,
@@ -290,34 +290,37 @@ def main():
     }
 
     if not args.dry_run:
-        print("\n── Embedding ID3 Tags ──")
+        print("\n-- Embedding ID3 Tags --")
         for tier_name, filepath in tiers.items():
             if os.path.exists(filepath):
-                ok = apply_id3_tags(filepath, metadata, art_data, art_mime)
-                status = "✓" if ok else "✗"
-                print(f"  {status}  Tagged {tier_name}: {os.path.basename(filepath)}")
+                if tier_name == "web":
+                    ok = apply_id3_tags(filepath, metadata, art_data=None, art_mime=None)
+                else:
+                    ok = apply_id3_tags(filepath, metadata, art_data, art_mime)
+                status = "[OK]" if ok else "[FAIL]"
+                print(f"  {status} Tagged {tier_name}: {os.path.basename(filepath)}")
     else:
-        print("\n── Would Tag ──")
+        print("\n-- Would Tag --")
         for tier_name, filepath in tiers.items():
-            print(f"  🔍 Would tag {tier_name}: {os.path.basename(filepath)}")
+            print(f"  [DRY] Would tag {tier_name}: {os.path.basename(filepath)}")
         print(f"       Artist:    {metadata['artist']}")
         print(f"       Album:     {metadata['album']}")
         print(f"       Genre:     {metadata['genre']}")
         print(f"       Composer:  {metadata['composer']}")
         print(f"       Art:       {'Yes' if art_data else 'No'}")
 
-    # ── Measure duration ──
+    # -- Measure duration --
     web_path = tiers.get("web")
     if web_path and os.path.exists(web_path):
         duration = measure_duration(web_path)
         print(f"\n  Duration: {duration}")
     else:
-        duration = "—"
+        duration = "--"
 
-    # ── Summary ──
-    print(f"\n{'═' * 60}")
+    # -- Summary --
+    print(f"\n{'=' * 60}")
     print(f"  COMPLETE")
-    print(f"{'═' * 60}")
+    print(f"{'=' * 60}")
     for tier_name, filepath in tiers.items():
         exists = os.path.exists(filepath) if not args.dry_run else "(dry run)"
         size = ""
@@ -326,7 +329,7 @@ def main():
             size = f" ({mb:.1f} MB)"
         print(f"  {tier_name:12s}: {filepath}{size}")
     print(f"  Duration:     {duration}")
-    print(f"{'═' * 60}\n")
+    print(f"{'=' * 60}\n")
 
     return 0
 
