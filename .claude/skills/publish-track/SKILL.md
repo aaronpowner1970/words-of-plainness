@@ -254,7 +254,7 @@ Commit types:
 ### Step 9: Catalog Update & QA Report
 
 Run `scripts/catalog_update.py` to:
-1. Add or update the track's row in WoP_ISRC_Catalog.xlsx
+1. Add or update the track's row in WoP_Media_Catalog.xlsx
 2. Mark pipeline checkboxes: Album Art, Archive WAV, Distro WAV, Web MP3,
    Website Live
 3. Leave ISRC and DistroKid columns empty (filled after manual upload)
@@ -340,7 +340,7 @@ vercel --prod   # Production deployment
 ├── SKILL.md                          ← You are here
 ├── scripts/
 │   ├── tag_and_archive.py            ← ID3 tagging + three-tier file creation
-│   ├── catalog_update.py             ← ISRC spreadsheet read/write
+│   ├── catalog_update.py             ← Media Catalog spreadsheet read/write
 │   └── masterchannel.py              ← Masterchannel API integration (scaffold)
 ├── templates/
 │   ├── newsletter.md                 ← Email newsletter template

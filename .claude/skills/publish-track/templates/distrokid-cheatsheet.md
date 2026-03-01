@@ -60,10 +60,11 @@ After submission, grab the pre-save link from DistroKid and share on:
 
 After DistroKid assigns an ISRC, update the catalog:
 ```
-python catalog_update.py set-isrc \
-    --catalog WoP_ISRC_Catalog.xlsx \
-    --filename "${FILENAME}" \
-    --isrc "${ISRC_FROM_DISTROKID}"
+python catalog_update.py update-by-title \
+    --title "${SONG_TITLE}" \
+    --style "${STYLE_DESCRIPTOR}" \
+    --isrc "${ISRC_FROM_DISTROKID}" \
+    --distrokid "✓" --streaming-live "✓"
 ```
 
 ---
