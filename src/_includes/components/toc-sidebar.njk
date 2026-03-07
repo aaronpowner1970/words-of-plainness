@@ -1,0 +1,28 @@
+{# 
+    TABLE OF CONTENTS SIDEBAR
+    ==========================
+    Desktop sidebar with section navigation.
+    Highlights current section during scroll.
+#}
+
+<aside class="toc-sidebar" id="tocSidebar">
+    <div class="toc-header">
+        <h3>Contents</h3>
+    </div>
+    <nav class="toc-nav" aria-label="Table of contents">
+        <ul class="toc-list">
+            {% if toc %}
+                {% for section in toc %}
+                <li>
+                    <a href="#{{ section.id }}" class="toc-link" data-section="{{ section.id }}">
+                        {{ section.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            {% else %}
+                {# Fallback if no TOC defined - will be auto-generated from h2 headings #}
+                <li><a href="#content" class="toc-link">Chapter Content</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</aside>

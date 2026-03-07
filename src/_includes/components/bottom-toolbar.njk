@@ -1,0 +1,30 @@
+{# Bottom Toolbar - Font size, Bookmark, Share #}
+
+<div class="bottom-toolbar" id="bottomToolbar">
+    <!-- Font Size Controls -->
+    <div class="toolbar-group font-controls">
+        <button class="toolbar-btn" id="fontDecrease" aria-label="Decrease font size">A-</button>
+        <button class="toolbar-btn" id="fontReset" aria-label="Reset font size">A</button>
+        <button class="toolbar-btn" id="fontIncrease" aria-label="Increase font size">A+</button>
+    </div>
+    
+    <!-- Bookmark -->
+    <button class="toolbar-btn" id="bookmarkBtn" aria-label="Bookmark current position">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span>Bookmark</span>
+    </button>
+    
+    <!-- Share -->
+    <button class="toolbar-btn" id="shareBtn" aria-label="Share this chapter">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+        <span>Share</span>
+    </button>
+</div>

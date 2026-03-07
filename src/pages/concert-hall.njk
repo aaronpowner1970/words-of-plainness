@@ -1,0 +1,187 @@
+---
+layout: layouts/base.njk
+title: Concert Hall
+pagination:
+  data: concertList
+  size: 1
+  alias: concert
+permalink: /concert/{{ concert.slug }}/
+---
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/concert-hall.css">
+{% endblock %}
+
+<div class="concert-hall">
+  <!-- Manifest data for JS -->
+  <script id="concertManifest" type="application/json">{{ concert | json | safe }}</script>
+
+  <!-- Hero -->
+  <div class="concert-hall-hero">
+    <div class="concert-hall-hero-overlay"></div>
+    <div class="concert-hall-hero-content">
+      <h1 class="concert-hall-title">{{ concert.title }}</h1>
+      <p class="concert-hall-subtitle">{{ concert.subtitle }}</p>
+    </div>
+  </div>
+
+  <!-- Welcome -->
+  <div class="concert-hall-welcome">
+    <p>{{ concert.welcome }}</p>
+  </div>
+
+  <!-- Active Movement Panel -->
+  <div class="concert-hall-player" id="concertPlayer">
+    <div class="ch-player-columns">
+      <!-- Left: Player Column -->
+      <div class="ch-player-col">
+        <div class="player-movement-info" id="playerMovementInfo">
+          <div class="player-mvt-number" id="playerMvtNumber">Movement 1</div>
+          <h2 class="player-mvt-title" id="playerMvtTitle">{{ concert.movements[0].title }}</h2>
+          <p class="player-grace-label" id="playerGraceLabel">{{ concert.movements[0].graceLabel }}</p>
+        </div>
+
+        <!-- Audio Player (styled, not default browser chrome) -->
+        <div class="player-controls" id="playerControls">
+          <audio id="concertAudio" preload="metadata"></audio>
+
+          <div class="player-progress-wrap">
+            <div class="player-progress-bar" id="playerProgressBar">
+              <div class="player-progress-fill" id="playerProgressFill"></div>
+            </div>
+            <input type="range" class="player-seek" id="playerSeek"
+                   min="0" max="100" value="0" step="0.1" aria-label="Seek">
+          </div>
+
+          <div class="player-time">
+            <span id="playerCurrentTime">0:00</span>
+            <span id="playerDuration">--:--</span>
+          </div>
+
+          <div class="player-buttons">
+            <button class="player-btn player-btn-prev" id="playerPrev" aria-label="Previous movement">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z"/>
+              </svg>
+            </button>
+            <button class="player-btn player-btn-play" id="playerPlayPause" aria-label="Play">
+              <svg class="icon-play" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" style="display:none">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+              </svg>
+            </button>
+            <button class="player-btn player-btn-next" id="playerNext" aria-label="Next movement">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M6 18l8.5-6L6 6v12zm10 0h2V6h-2v12z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Script Toggle -->
+        <div class="player-script-toggle" id="playerScriptToggle" style="display:none">
+          <button class="btn-script-toggle" id="btnScriptToggle">Read the Script</button>
+        </div>
+        <div class="player-script-panel" id="playerScriptPanel" style="display:none">
+          <div id="playerScriptContent"></div>
+        </div>
+      </div>
+
+      <!-- Right: Program Notes Panel -->
+      <div class="ch-program-panel" id="chProgramPanel">
+        <div class="ch-program-heading">Program Notes</div>
+        <p class="ch-program-teaser" id="chProgramTeaser"></p>
+        <button class="ch-program-toggle" data-action="toggle-program-notes">Read more &darr;</button>
+        <div class="ch-program-expanded">
+          <div class="ch-program-section">
+            <div class="ch-program-section-label">Journey</div>
+            <p class="ch-program-arc" id="chProgramArc"></p>
+          </div>
+          <div class="ch-program-section">
+            <p class="ch-program-note" id="chProgramNote"></p>
+          </div>
+          <hr class="ch-program-divider">
+          <div class="ch-program-grid">
+            <div class="ch-program-grid-item">
+              <span class="ch-program-grid-label">Key</span>
+              <span class="ch-program-key" id="chProgramKey"></span>
+            </div>
+            <div class="ch-program-grid-item">
+              <span class="ch-program-grid-label">Tempo</span>
+              <span class="ch-program-tempo" id="chProgramTempo"></span>
+            </div>
+            <div class="ch-program-grid-item">
+              <span class="ch-program-grid-label">Leitmotif</span>
+              <span class="ch-program-leitmotif" id="chProgramLeitmotif"></span>
+            </div>
+            <div class="ch-program-grid-item">
+              <span class="ch-program-grid-label">Form</span>
+              <span class="ch-program-form" id="chProgramForm"></span>
+            </div>
+            <div class="ch-program-grid-item ch-program-grid-item--full">
+              <span class="ch-program-grid-label">Dynamic Range</span>
+              <span class="ch-program-dynamic" id="chProgramDynamic"></span>
+            </div>
+            <div class="ch-program-grid-item ch-program-grid-item--full">
+              <span class="ch-program-grid-label">Featured Instruments</span>
+              <span class="ch-program-instruments" id="chProgramInstruments"></span>
+            </div>
+            <div class="ch-program-grid-item ch-program-grid-item--full ch-program-beatitude-row" id="chProgramBeatitudeRow" style="display:none">
+              <span class="ch-program-grid-label">Beatitude</span>
+              <span class="ch-program-beatitude" id="chProgramBeatitude"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Movement Timeline Strip -->
+  <div class="concert-hall-timeline" id="concertTimeline">
+    {% for mvt in concert.movements %}
+    <button class="timeline-mvt{% if loop.first %} timeline-mvt--active{% endif %}"
+            data-movement="{{ loop.index0 }}"
+            aria-label="Movement {{ mvt.number }}: {{ mvt.title }}">
+      <span class="timeline-mvt-num">{{ mvt.number }}</span>
+      <span class="timeline-mvt-title">{{ mvt.title }}</span>
+    </button>
+    {% endfor %}
+  </div>
+
+  <!-- Interstitial (shown between movements) -->
+  <div class="concert-hall-interstitial" id="concertInterstitial" style="display:none">
+    <p id="interstitialText"></p>
+  </div>
+
+  <!-- Closing Reflection (after final movement) -->
+  <div class="concert-hall-closing" id="concertClosing" style="display:none">
+    <p class="closing-reflection" id="closingReflectionText">{{ concert.closingReflection }}</p>
+    <a href="{{ concert.chapterUrl }}/" class="closing-chapter-link" id="closingChapterLink" style="display:none">
+      Read the chapter that inspired this suite &rarr;
+    </a>
+  </div>
+</div>
+
+<!-- Mobile Now Playing Bar -->
+<div class="mobile-now-playing" id="mobileNowPlaying" style="display:none">
+  <div class="mobile-np-info">
+    <span class="mobile-np-number" id="mobileNpNumber"></span>
+    <span class="mobile-np-title" id="mobileNpTitle"></span>
+  </div>
+  <button class="mobile-np-play" id="mobileNpPlay" aria-label="Play/Pause">
+    <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="display:none">
+      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+    </svg>
+  </button>
+</div>
+
+{% block scripts %}
+<script>document.title = {{ concert.title | json | safe }} + ' \u2014 Concert Hall | {{ site.name }}';</script>
+<script src="/js/concert-player.js"></script>
+{% endblock %}

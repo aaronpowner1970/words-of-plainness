@@ -1,0 +1,56 @@
+# Build output
+_site/
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Claude Code
+.claude/worktrees/
+
+# Vercel
+.vercel
+
+# Local testing
+*.local.js
+nul
+
+# Audit artifacts
+AUDIT_*.txt
+
+# Tools config/output
+tools/wop_r2_config.json
+tools/wop_r2_report.json
+tools/wop_registry.json
+tools/__pycache__/
+
+# Wrangler local storage
+.wrangler/
+
+# Migration test artifacts
+test_remote.mp3
+test_web.mp3
+
+# Upload/verify scripts (credentials in env, not repo)
+wop_r2_upload.ps1
+wop_r2_verify.ps1

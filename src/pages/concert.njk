@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+title: Concert Hall
+description: "Experience the Words of Plainness musical suites — sacred performances of narrator and orchestra."
+permalink: /concert/
+---
+
+{% block styles %}
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/concert-hall.css">
+{% endblock %}
+
+<div class="concert-lobby">
+  <div class="concert-hero">
+    <div class="concert-hero-overlay"></div>
+    <div class="concert-hero-content">
+      <h1 class="concert-hero-title">The Concert Hall</h1>
+      <p class="concert-hero-subtitle">Sacred performances of narrator and orchestra</p>
+    </div>
+  </div>
+
+  <div class="concert-lobby-body">
+    <div class="concert-lobby-intro">
+      <p>Each suite is a complete musical experience — a sacred reading performed by narrator and orchestra, designed to be heard from beginning to end.</p>
+    </div>
+
+    <div class="concert-card-grid">
+      {% for concert in concertList %}
+      <a href="/concert/{{ concert.slug }}/" class="concert-card">
+        <div class="concert-card-type">{{ concert.type | replace("-", " ") | title }}</div>
+        <h2 class="concert-card-title">{{ concert.title }}</h2>
+        <p class="concert-card-subtitle">{{ concert.subtitle }}</p>
+        <div class="concert-card-meta">
+          <span class="concert-card-movements">{{ concert.movements | length }} movements</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% block scripts %}{% endblock %}

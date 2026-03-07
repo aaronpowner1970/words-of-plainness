@@ -1,0 +1,842 @@
+/* =========================================
+   Concert Hall — Virtual Concert Hall
+   /concert (lobby) and /concert/[slug] (performance)
+   ========================================= */
+
+/* ---- Concert-specific tokens ---- */
+.concert-lobby,
+.concert-hall {
+  --font-display: 'Cormorant Garamond', 'Crimson Pro', Georgia, serif;
+  --concert-gold: #C9A84C;
+  --concert-cream: #F5F0E8;
+  --concert-brown: #1A0F00;
+  --concert-brown-mid: #2A1A08;
+  --transition-ceremonial: 700ms ease;
+}
+
+/* =========================================
+   LOBBY PAGE — /concert
+   ========================================= */
+
+.concert-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/assets/images/concert-hall-bg.jpg') center top / cover no-repeat scroll;
+  overflow: hidden;
+}
+
+.concert-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(20,12,5,0.45) 100%);
+}
+
+.concert-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.concert-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 600;
+  color: var(--concert-gold);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+}
+
+.concert-hero-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: var(--concert-cream);
+  opacity: 0.85;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ---- Lobby Body ---- */
+
+.concert-lobby-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.concert-lobby-intro {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.concert-lobby-intro p {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--concert-cream);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ---- Performance Card Grid ---- */
+
+.concert-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-lg);
+}
+
+.concert-card {
+  display: block;
+  text-decoration: none;
+  background: var(--concert-brown-mid);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition:
+    border-color var(--transition-ceremonial),
+    box-shadow var(--transition-ceremonial),
+    transform 400ms ease;
+}
+
+.concert-card:hover {
+  border-color: var(--concert-gold);
+  box-shadow: 0 8px 30px rgba(201, 168, 76, 0.15);
+  transform: translateY(-2px);
+}
+
+.concert-card-type {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--concert-gold);
+  opacity: 0.7;
+  margin-bottom: var(--space-sm);
+}
+
+.concert-card-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--concert-cream);
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+
+.concert-card-subtitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--concert-cream);
+  opacity: 0.7;
+  margin: 0 0 var(--space-md);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.concert-card-meta {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--concert-gold);
+  opacity: 0.6;
+}
+
+
+/* =========================================
+   PERFORMANCE PAGE — /concert/[slug]
+   ========================================= */
+
+/* ---- Hero ---- */
+
+.concert-hall-hero {
+  position: relative;
+  min-height: 40vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: url('/assets/images/concert-hall-bg.jpg') center top / cover no-repeat scroll;
+  overflow: hidden;
+}
+
+.concert-hall-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(20,12,5,0.45) 100%);
+}
+
+.concert-hall-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md) var(--space-lg);
+}
+
+.concert-hall-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--concert-gold);
+  letter-spacing: 0.03em;
+  margin: 0 0 0.4rem;
+}
+
+.concert-hall-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--concert-cream);
+  opacity: 0.8;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ---- Welcome Note ---- */
+
+.concert-hall-welcome {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+}
+
+.concert-hall-welcome p {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.85;
+  color: var(--concert-cream);
+  opacity: 0.9;
+}
+
+/* ---- Movement Timeline Strip ---- */
+
+.concert-hall-timeline {
+  padding: 1.5rem;
+  max-width: 680px;
+  margin: 0 auto var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timeline-mvt {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+  border-radius: 0;
+  cursor: pointer;
+  text-align: left;
+  transition: background 300ms ease;
+}
+
+.timeline-mvt:hover {
+  background: rgba(201, 168, 76, 0.08);
+}
+
+.timeline-mvt--active {
+  background: rgba(201, 168, 76, 0.14);
+  border-left: 3px solid #C9A84C;
+  padding-left: calc(1.25rem - 3px);
+}
+
+.timeline-mvt-num {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--concert-cream);
+  opacity: 0.5;
+  transition: opacity var(--transition-ceremonial), color var(--transition-ceremonial);
+}
+
+.timeline-mvt--active .timeline-mvt-num {
+  color: var(--concert-gold);
+  opacity: 1;
+}
+
+.timeline-mvt-title {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--concert-cream);
+  opacity: 0.4;
+  transition: opacity var(--transition-ceremonial);
+}
+
+.timeline-mvt--active .timeline-mvt-title {
+  opacity: 0.85;
+}
+
+/* ---- Player Panel ---- */
+
+.concert-hall-player {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+  background: var(--concert-brown);
+  border-radius: var(--radius-lg);
+  transition: opacity var(--transition-ceremonial);
+}
+
+.concert-hall-player--dimmed {
+  opacity: 0.4;
+}
+
+.player-movement-info {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.player-mvt-number {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--concert-gold);
+  opacity: 0.6;
+  margin-bottom: 0.3rem;
+}
+
+.player-mvt-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--concert-cream);
+  margin: 0 0 0.4rem;
+}
+
+.player-grace-label {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--concert-cream);
+  opacity: 0.6;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ---- Audio Controls ---- */
+
+.player-controls {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.player-progress-wrap {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.player-progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.player-progress-fill {
+  height: 100%;
+  background: var(--concert-gold);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.player-seek {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  opacity: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  background: transparent;
+}
+
+.player-time {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--concert-cream);
+  opacity: 0.5;
+  margin-bottom: var(--space-md);
+}
+
+.player-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.player-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--concert-cream);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: color var(--transition-normal), background var(--transition-normal);
+}
+
+.player-btn:hover {
+  color: var(--concert-gold);
+  background: rgba(201, 168, 76, 0.1);
+}
+
+.player-btn-play {
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--concert-gold);
+}
+
+.player-btn-play:hover {
+  background: rgba(201, 168, 76, 0.15);
+}
+
+/* ---- Script Panel ---- */
+
+.player-script-toggle {
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+.btn-script-toggle {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--concert-gold);
+  background: none;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: border-color var(--transition-normal), background var(--transition-normal);
+}
+
+.btn-script-toggle:hover {
+  border-color: var(--concert-gold);
+  background: rgba(201, 168, 76, 0.08);
+}
+
+.player-script-panel {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+.player-script-panel p {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--concert-cream);
+  opacity: 0.85;
+}
+
+/* ---- Interstitial (between movements) ---- */
+
+.concert-hall-interstitial {
+  max-width: 680px;
+  margin: var(--space-lg) auto;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  opacity: 0;
+  transition: opacity var(--transition-ceremonial);
+}
+
+.interstitial--visible {
+  opacity: 1;
+}
+
+.concert-hall-interstitial p {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--concert-cream);
+  opacity: 0.7;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ---- Closing Reflection (after final movement) ---- */
+
+.concert-hall-closing {
+  max-width: 680px;
+  margin: var(--space-xxl) auto;
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.closing--visible {
+  opacity: 1;
+}
+
+.closing-reflection {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 400;
+  color: var(--concert-gold);
+  font-style: italic;
+  margin: 0 0 var(--space-xl);
+  line-height: 1.4;
+}
+
+.closing-chapter-link {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--concert-cream);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+  padding-bottom: 2px;
+  opacity: 0;
+  transition: opacity 1.2s ease, color var(--transition-normal);
+}
+
+.closing-link--visible {
+  opacity: 0.7;
+}
+
+.closing-chapter-link:hover {
+  color: var(--concert-gold);
+  opacity: 1;
+}
+
+/* ---- Mobile Now-Playing Bar ---- */
+
+.mobile-now-playing {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--concert-brown);
+  border-top: 1px solid rgba(201, 168, 76, 0.2);
+  padding: 0.75rem var(--space-md);
+  align-items: center;
+  justify-content: space-between;
+  /* display controlled by JS: none | flex */
+}
+
+.mobile-np-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  flex: 1;
+  cursor: pointer;
+}
+
+.mobile-np-number {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--concert-gold);
+  flex-shrink: 0;
+}
+
+.mobile-np-title {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--concert-cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-np-play {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 1.5px solid var(--concert-gold);
+  border-radius: 50%;
+  color: var(--concert-cream);
+  cursor: pointer;
+}
+
+/* ---- Chapter 9 Concert Callout ---- */
+
+.concert-callout {
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-left: 3px solid var(--gold-primary, #C4943A);
+  border-radius: var(--radius-md, 8px);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.concert-callout p {
+  font-family: var(--font-serif, 'Crimson Pro', Georgia, serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--cream, #E8DCC4);
+  margin: 0 0 0.75rem;
+}
+
+.concert-callout a {
+  display: inline-block;
+  font-family: var(--font-sans, 'Source Sans Pro', sans-serif);
+  font-size: 0.95rem;
+  color: var(--gold-primary, #C4943A);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.4);
+  padding-bottom: 1px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.concert-callout a:hover {
+  color: #E0C060;
+  border-color: #E0C060;
+}
+
+
+/* ---- Program Notes Panel ---- */
+
+.ch-player-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.ch-player-col {
+  min-width: 0;
+}
+
+.ch-program-panel {
+  background: rgba(245, 240, 232, 0.04);
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.ch-program-heading {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--concert-gold);
+  opacity: 0.6;
+  margin-bottom: 0.75rem;
+}
+
+.ch-program-teaser {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--concert-cream);
+  font-style: italic;
+  margin: 0 0 0.75rem;
+}
+
+.ch-program-toggle {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--concert-gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.7;
+  transition: opacity var(--transition-normal);
+}
+
+.ch-program-toggle:hover {
+  opacity: 1;
+}
+
+/* Expanded section — hidden by default */
+.ch-program-expanded {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 800ms ease, opacity 600ms ease;
+}
+
+.ch-program-panel--expanded .ch-program-expanded {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.ch-program-section {
+  margin-top: var(--space-md);
+}
+
+.ch-program-section-label {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--concert-cream);
+  opacity: 0.4;
+  margin-bottom: 0.3rem;
+}
+
+.ch-program-arc,
+.ch-program-note {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--concert-cream);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.ch-program-divider {
+  border: none;
+  border-top: 1px solid rgba(201, 168, 76, 0.12);
+  margin: var(--space-md) 0;
+}
+
+/* Architecture grid */
+.ch-program-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 1rem;
+}
+
+.ch-program-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ch-program-grid-item--full {
+  grid-column: 1 / -1;
+}
+
+.ch-program-grid-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--concert-cream);
+  opacity: 0.35;
+}
+
+.ch-program-key,
+.ch-program-tempo,
+.ch-program-leitmotif,
+.ch-program-form,
+.ch-program-dynamic,
+.ch-program-beatitude {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  color: var(--concert-cream);
+  opacity: 0.8;
+}
+
+/* Leitmotif tier indicators */
+.ch-leitmotif-full {
+  color: var(--concert-gold);
+  opacity: 1;
+}
+
+.ch-leitmotif-echo {
+  color: #8a7030;
+  opacity: 1;
+}
+
+.ch-leitmotif-absent {
+  color: #555;
+  opacity: 1;
+}
+
+/* Instrument pill tags */
+.ch-program-instruments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.ch-instrument-tag {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--concert-cream);
+  opacity: 0.8;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 100px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+  .concert-hero,
+  .concert-hall-hero {
+    min-height: 35vh;
+    background-attachment: scroll; /* fixed bg causes issues on mobile */
+  }
+
+  .concert-lobby-body {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .concert-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .concert-hall-timeline {
+    padding: 1rem var(--space-sm);
+  }
+
+  .concert-hall-player {
+    margin: 0 var(--space-sm);
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .ch-player-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .player-mvt-title {
+    font-size: 1.4rem;
+  }
+
+  /* Add bottom padding when mobile bar might appear */
+  .concert-hall {
+    padding-bottom: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .concert-hero-title {
+    font-size: 2rem;
+  }
+
+  .concert-hall-title {
+    font-size: 1.8rem;
+  }
+
+  .player-buttons {
+    gap: var(--space-sm);
+  }
+
+  .player-btn-play {
+    width: 48px;
+    height: 48px;
+  }
+}

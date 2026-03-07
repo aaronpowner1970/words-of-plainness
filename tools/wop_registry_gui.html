@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WoP Registry — Audio Asset Control</title>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --bg2: #141414;
+    --bg3: #1a1a1a;
+    --border: #2a2a2a;
+    --amber: #f0a020;
+    --amber-dim: #a06a10;
+    --amber-bright: #ffbb44;
+    --green: #30c060;
+    --red: #d03030;
+    --yellow: #d0a030;
+    --blue: #4090d0;
+    --text: #c8c8c8;
+    --text-dim: #666;
+    --text-bright: #f0f0f0;
+    --mono: 'Courier New', Courier, monospace;
+    --sans: system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 13px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--amber-dim);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  header h1 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+    font-family: var(--mono);
+  }
+  .header-tag {
+    font-size: 10px;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    letter-spacing: 0.08em;
+  }
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    transition: background 0.3s;
+    margin-left: auto;
+  }
+  .status-dot.ok { background: var(--green); }
+  .status-dot.warn { background: var(--yellow); }
+  .status-dot.err { background: var(--red); }
+
+  /* ── Main layout ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 200px 1fr 280px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── Panel base ── */
+  .panel {
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .panel-header {
+    padding: 6px 10px;
+    font-size: 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.1em;
+    color: var(--amber-dim);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    flex-shrink: 0;
+  }
+  .panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+  }
+  .panel-body::-webkit-scrollbar { width: 4px; }
+  .panel-body::-webkit-scrollbar-track { background: var(--bg); }
+  .panel-body::-webkit-scrollbar-thumb { background: var(--border); }
+
+  /* ── Left panel: controls ── */
+  .btn-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+  .btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 10px;
+    font-family: var(--mono);
+    font-size: 11px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    border-radius: 2px;
+  }
+  .btn:hover { border-color: var(--amber); color: var(--amber-bright); }
+  .btn.primary { border-color: var(--amber-dim); color: var(--amber); }
+  .btn.primary:hover { background: #1a1200; border-color: var(--amber); }
+  .btn.running { border-color: var(--yellow); color: var(--yellow); animation: pulse 1s infinite; }
+  .btn.success { border-color: var(--green); color: var(--green); }
+  .btn.danger { border-color: var(--red); color: var(--red); }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  .section-label {
+    font-size: 9px;
+    font-family: var(--mono);
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+    margin-top: 8px;
+  }
+
+  .stat-block {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 8px;
+    margin-bottom: 4px;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+    font-size: 11px;
+  }
+  .stat-label { color: var(--text-dim); font-family: var(--mono); }
+  .stat-value { color: var(--text-bright); font-family: var(--mono); font-weight: 700; }
+  .stat-value.ok { color: var(--green); }
+  .stat-value.warn { color: var(--yellow); }
+  .stat-value.err { color: var(--red); }
+
+  .filter-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 5px 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    border-radius: 2px;
+    margin-bottom: 6px;
+  }
+  .filter-input:focus { outline: none; border-color: var(--amber-dim); }
+
+  .filter-row { display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: wrap; }
+  .filter-chip {
+    font-size: 10px;
+    padding: 2px 7px;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+    color: var(--text-dim);
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: var(--mono);
+  }
+  .filter-chip.active { border-color: var(--amber); color: var(--amber); }
+
+  /* ── Center panel: registry table ── */
+  .tab-bar {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    background: var(--bg2);
+  }
+  .tab {
+    padding: 5px 12px;
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--text-dim);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+  .tab:hover { color: var(--text); }
+
+  .tab-content { display: none; flex: 1; overflow: hidden; flex-direction: column; }
+  .tab-content.active { display: flex; }
+
+  /* Registry table */
+  .registry-table { width: 100%; border-collapse: collapse; font-size: 11px; font-family: var(--mono); }
+  .registry-table th {
+    background: var(--bg2);
+    color: var(--amber-dim);
+    padding: 5px 8px;
+    text-align: left;
+    font-weight: normal;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+  .registry-table td { padding: 4px 8px; border-bottom: 1px solid #1a1a1a; }
+  .registry-table tr { cursor: pointer; transition: background 0.1s; }
+  .registry-table tr:hover { background: #1a1400; }
+  .registry-table tr.selected { background: #201800; }
+
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-family: var(--mono);
+  }
+  .badge.ok { background: #102010; color: var(--green); border: 1px solid #204020; }
+  .badge.warn { background: #201800; color: var(--yellow); border: 1px solid #402000; }
+  .badge.err { background: #200808; color: var(--red); border: 1px solid #401010; }
+  .badge.r2 { background: #081020; color: var(--blue); border: 1px solid #102040; }
+
+  /* Console */
+  .console {
+    background: var(--bg);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 8px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .console::-webkit-scrollbar { width: 4px; }
+  .console::-webkit-scrollbar-thumb { background: var(--border); }
+  .console-line { margin-bottom: 2px; white-space: pre-wrap; word-break: break-all; }
+  .console-line.status { color: var(--text); }
+  .console-line.success { color: var(--green); }
+  .console-line.warn { color: var(--yellow); }
+  .console-line.error { color: var(--red); }
+  .console-line.info { color: var(--blue); }
+  .console-line.stat { color: var(--amber); }
+  .console-line.item { color: var(--text-dim); }
+  .console-line.done { color: var(--amber-bright); font-weight: bold; }
+  .console-line.report { color: var(--text); }
+  .console-line.entry { color: var(--text-dim); }
+
+  /* ── Right panel: detail ── */
+  .detail-field { margin-bottom: 10px; }
+  .detail-key {
+    font-size: 9px;
+    font-family: var(--mono);
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+  }
+  .detail-value {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--text-bright);
+    word-break: break-all;
+  }
+  .detail-value.mono { color: var(--amber); }
+  .detail-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 10px 0;
+  }
+  .ref-list { margin-top: 4px; }
+  .ref-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 5px 8px;
+    margin-bottom: 4px;
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--text-dim);
+  }
+  .ref-item span { color: var(--amber-dim); }
+
+  .rename-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--amber);
+    padding: 6px 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    border-radius: 2px;
+    margin-bottom: 6px;
+  }
+  .rename-input:focus { outline: none; border-color: var(--amber); }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-align: center;
+    gap: 8px;
+  }
+  .empty-state .big { font-size: 28px; }
+
+  /* ── R2 config panel ── */
+  .r2-status {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 8px;
+    font-size: 11px;
+    font-family: var(--mono);
+    margin-bottom: 8px;
+  }
+
+  /* ── Progress bar ── */
+  .progress-bar-outer {
+    height: 2px;
+    background: var(--bg3);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    width: 0%;
+    background: var(--amber);
+    transition: width 0.3s;
+  }
+  .progress-bar-inner.running {
+    animation: progress-slide 1.5s infinite;
+    width: 100%;
+  }
+  @keyframes progress-slide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>◈ WoP Registry</h1>
+  <span class="header-tag">AUDIO ASSET CONTROL</span>
+  <span class="header-tag" id="last-updated">—</span>
+  <div class="status-dot" id="status-dot" title="Server status"></div>
+</header>
+
+<div class="layout">
+
+  <!-- ── LEFT PANEL ── -->
+  <div class="panel">
+    <div class="panel-header">COMMANDS</div>
+    <div class="panel-body">
+      <div class="section-label">LOCAL AUDIT</div>
+      <div class="btn-group">
+        <button class="btn primary" onclick="runCommand('audit')">▶ audit</button>
+        <button class="btn" onclick="runCommand('check')">▶ check</button>
+        <button class="btn" onclick="runCommand('report')">▶ report</button>
+      </div>
+      <div class="section-label">R2 / CDN</div>
+      <div class="btn-group">
+        <button class="btn" onclick="runCommand('r2-audit')">▶ r2-audit</button>
+        <button class="btn" onclick="runCommand('r2-check')">▶ r2-check</button>
+      </div>
+      <div class="section-label">FILTER</div>
+      <input class="filter-input" id="filter-input" type="text" placeholder="filename..." oninput="filterTable()">
+      <div class="filter-row">
+        <span class="filter-chip" onclick="setFilter('all')">all</span>
+        <span class="filter-chip" onclick="setFilter('orphan')">orphan</span>
+        <span class="filter-chip" onclick="setFilter('broken')">broken</span>
+        <span class="filter-chip" onclick="setFilter('r2')">on r2</span>
+        <span class="filter-chip" onclick="setFilter('local')">local only</span>
+      </div>
+      <div class="section-label">STATS</div>
+      <div class="stat-block">
+        <div class="stat-row">
+          <span class="stat-label">files</span>
+          <span class="stat-value" id="stat-files">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">refs</span>
+          <span class="stat-value" id="stat-refs">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">orphans</span>
+          <span class="stat-value warn" id="stat-orphans">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">broken</span>
+          <span class="stat-value err" id="stat-broken">—</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">on R2</span>
+          <span class="stat-value" id="stat-r2">—</span>
+        </div>
+      </div>
+      <div class="section-label">CDN BASE URL</div>
+      <div class="stat-block">
+        <div class="stat-value mono" id="stat-base-url" style="font-size:10px; word-break:break-all;">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CENTER PANEL ── -->
+  <div class="panel">
+    <div class="tab-bar">
+      <div class="tab active" onclick="switchTab('registry')">Registry</div>
+      <div class="tab" onclick="switchTab('console')">Console</div>
+    </div>
+    <div class="tab-content active" id="tab-registry" style="overflow:hidden;">
+      <div style="overflow-y:auto; flex:1;">
+        <table class="registry-table" id="registry-table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Filename</th>
+              <th>Size</th>
+              <th>Refs</th>
+              <th>R2</th>
+            </tr>
+          </thead>
+          <tbody id="registry-tbody">
+            <tr><td colspan="5" style="padding:20px; text-align:center; color: var(--text-dim); font-family: var(--mono);">
+              Run <strong>audit</strong> to populate the registry
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-console">
+      <div id="console" class="console">
+        <div class="console-line info">WoP Registry Console ready. Run a command to begin.</div>
+      </div>
+    </div>
+    <div class="progress-bar-outer">
+      <div class="progress-bar-inner" id="progress-bar"></div>
+    </div>
+  </div>
+
+  <!-- ── RIGHT PANEL ── -->
+  <div class="panel" style="border-right:none;">
+    <div class="panel-header">DETAIL / RENAME</div>
+    <div class="panel-body" id="detail-panel">
+      <div class="empty-state">
+        <div class="big">⊙</div>
+        <div>Select a file to inspect</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = 'http://localhost:7430';
+let registry = null;
+let selectedFile = null;
+let activeFilter = 'all';
+
+// ── Bootstrap ──────────────────────────────────────────────────────────────
+async function init() {
+  await checkServer();
+  await loadRegistry();
+}
+
+async function checkServer() {
+  try {
+    const r = await fetch(`${API}/api/health`);
+    if (r.ok) {
+      document.getElementById('status-dot').className = 'status-dot ok';
+    }
+  } catch(e) {
+    document.getElementById('status-dot').className = 'status-dot err';
+  }
+}
+
+async function loadRegistry() {
+  try {
+    const r = await fetch(`${API}/api/registry`);
+    if (!r.ok) return;
+    registry = await r.json();
+    updateStats();
+    renderTable();
+    const updated = registry.updated ? new Date(registry.updated).toLocaleString() : '—';
+    document.getElementById('last-updated').textContent = updated;
+  } catch(e) {
+    console.warn('Registry not loaded:', e);
+  }
+}
+
+// ── Stats ──────────────────────────────────────────────────────────────────
+function updateStats() {
+  if (!registry) return;
+  const s = registry.stats || {};
+  document.getElementById('stat-files').textContent = s.total_files ?? '—';
+  document.getElementById('stat-refs').textContent = s.total_refs ?? '—';
+  const orphans = s.orphan_count ?? 0;
+  const broken = s.broken_ref_count ?? 0;
+  const orphEl = document.getElementById('stat-orphans');
+  orphEl.textContent = orphans;
+  orphEl.className = 'stat-value ' + (orphans > 0 ? 'warn' : 'ok');
+  const brkEl = document.getElementById('stat-broken');
+  brkEl.textContent = broken;
+  brkEl.className = 'stat-value ' + (broken > 0 ? 'err' : 'ok');
+
+  const entries = Object.values(registry.entries || {});
+  const r2Count = entries.filter(e => e.r2_uploaded).length;
+  document.getElementById('stat-r2').textContent = `${r2Count}/${entries.length}`;
+  document.getElementById('stat-base-url').textContent = registry.audio_base_url || '—';
+
+  // Status dot
+  const dot = document.getElementById('status-dot');
+  if (broken > 0) dot.className = 'status-dot err';
+  else if (orphans > 0) dot.className = 'status-dot warn';
+  else dot.className = 'status-dot ok';
+}
+
+// ── Table ──────────────────────────────────────────────────────────────────
+function renderTable(filterText) {
+  const tbody = document.getElementById('registry-tbody');
+  if (!registry || !registry.entries || Object.keys(registry.entries).length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" style="padding:20px; text-align:center; color: var(--text-dim); font-family:var(--mono);">
+      No entries — run <strong>audit</strong></td></tr>`;
+    return;
+  }
+
+  const search = (filterText || document.getElementById('filter-input').value || '').toLowerCase();
+  const entries = Object.entries(registry.entries);
+
+  const filtered = entries.filter(([name, e]) => {
+    if (search && !name.toLowerCase().includes(search)) return false;
+    if (activeFilter === 'orphan') return !e.referenced;
+    if (activeFilter === 'broken') return (registry.broken_refs || []).includes(name);
+    if (activeFilter === 'r2') return e.r2_uploaded;
+    if (activeFilter === 'local') return !e.r2_uploaded;
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" style="padding:12px; text-align:center; color:var(--text-dim); font-family:var(--mono);">No matches</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(([name, e]) => {
+    const refBadge = e.referenced
+      ? `<span class="badge ok">ref✓</span>`
+      : `<span class="badge warn">orphan</span>`;
+    const r2Badge = e.r2_uploaded
+      ? `<span class="badge r2">R2✓</span>`
+      : `<span class="badge warn">local</span>`;
+    const sizeKB = e.size ? Math.round(e.size / 1024) + 'K' : '—';
+    const sel = selectedFile === name ? ' selected' : '';
+    return `<tr class="${sel}" onclick="selectFile('${escHtml(name)}')">
+      <td>${refBadge}</td>
+      <td style="color:var(--text-bright); max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${escHtml(name)}">${escHtml(name)}</td>
+      <td>${sizeKB}</td>
+      <td style="color:var(--text-dim)">${e.ref_count || 0}</td>
+      <td>${r2Badge}</td>
+    </tr>`;
+  }).join('');
+}
+
+function filterTable() { renderTable(); }
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  renderTable();
+}
+
+// ── File selection ─────────────────────────────────────────────────────────
+function selectFile(name) {
+  selectedFile = name;
+  renderTable();
+  renderDetail(name);
+}
+
+function renderDetail(name) {
+  const panel = document.getElementById('detail-panel');
+  if (!registry || !registry.entries[name]) {
+    panel.innerHTML = `<div class="empty-state"><div>File not in registry</div></div>`;
+    return;
+  }
+  const e = registry.entries[name];
+  const sizeKB = e.size ? (e.size / 1024).toFixed(1) + ' KB' : '—';
+  const modified = e.modified ? new Date(e.modified).toLocaleDateString() : '—';
+
+  const refs = (e.refs || []).map(r =>
+    `<div class="ref-item"><span>${escHtml(r.file)}</span>:${r.line}<br>${escHtml(r.url)}</div>`
+  ).join('') || '<div style="color:var(--text-dim); font-size:10px;">No references found</div>';
+
+  panel.innerHTML = `
+    <div class="detail-field">
+      <div class="detail-key">FILENAME</div>
+      <div class="detail-value mono">${escHtml(name)}</div>
+    </div>
+    <div class="detail-field">
+      <div class="detail-key">SIZE / MODIFIED</div>
+      <div class="detail-value">${sizeKB} · ${modified}</div>
+    </div>
+    <div class="detail-field">
+      <div class="detail-key">REFERENCED</div>
+      <div class="detail-value">${e.referenced ? '✓ Yes' : '⚠ No (orphaned)'}</div>
+    </div>
+    <div class="detail-field">
+      <div class="detail-key">R2 STATUS</div>
+      <div class="detail-value">${e.r2_uploaded ? '✓ Uploaded' : '✗ Local only'}</div>
+    </div>
+    ${e.cdn_url ? `<div class="detail-field">
+      <div class="detail-key">CDN URL</div>
+      <div class="detail-value mono" style="font-size:10px;">${escHtml(e.cdn_url)}</div>
+    </div>` : ''}
+    <hr class="detail-divider">
+    <div class="detail-field">
+      <div class="detail-key">REFERENCES (${e.ref_count || 0})</div>
+      <div class="ref-list">${refs}</div>
+    </div>
+    <hr class="detail-divider">
+    <div class="detail-field">
+      <div class="detail-key">RENAME</div>
+      <input class="rename-input" id="rename-input" type="text" value="${escHtml(name)}" placeholder="New filename...">
+      <button class="btn" onclick="stageRename('${escHtml(name)}')">Stage rename (dry run)</button>
+    </div>
+  `;
+}
+
+function stageRename(oldName) {
+  const newName = document.getElementById('rename-input').value.trim();
+  if (!newName || newName === oldName) return;
+  consoleLine('warn', `STAGED RENAME: ${oldName} → ${newName}`);
+  consoleLine('info', 'Note: Execute renames via Claude Code with the refactor command.');
+  switchTab('console');
+}
+
+// ── Command runner ─────────────────────────────────────────────────────────
+function runCommand(cmd) {
+  switchTab('console');
+  clearConsole();
+  setProgress(true);
+
+  consoleLine('status', `$ ${cmd}`);
+
+  const es = new EventSource(`${API}/api/run/${cmd}`);
+  es.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      consoleLine(data.type, data.message);
+      if (data.type === 'done') {
+        es.close();
+        setProgress(false);
+        loadRegistry().then(() => {
+          if (selectedFile) renderDetail(selectedFile);
+        });
+      }
+    } catch(e) {
+      consoleLine('info', event.data);
+    }
+  };
+  es.onerror = () => {
+    consoleLine('error', 'Connection lost. Is the server running?');
+    es.close();
+    setProgress(false);
+  };
+}
+
+// ── Console ────────────────────────────────────────────────────────────────
+function consoleLine(type, msg) {
+  const div = document.createElement('div');
+  div.className = `console-line ${type}`;
+  const prefix = {
+    status: '→', success: '✓', warn: '⚠', error: '✗', info: 'ℹ',
+    stat: '•', item: ' ', done: '■', report: '', entry: '  '
+  }[type] || '·';
+  div.textContent = `${prefix} ${msg}`;
+  const c = document.getElementById('console');
+  c.appendChild(div);
+  c.scrollTop = c.scrollHeight;
+}
+
+function clearConsole() {
+  document.getElementById('console').innerHTML = '';
+}
+
+// ── Progress ───────────────────────────────────────────────────────────────
+function setProgress(running) {
+  const bar = document.getElementById('progress-bar');
+  if (running) bar.className = 'progress-bar-inner running';
+  else { bar.className = 'progress-bar-inner'; bar.style.width = '100%'; setTimeout(() => { bar.style.width = '0%'; }, 500); }
+}
+
+// ── Tabs ───────────────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.tab[onclick="switchTab('${name}')"]`).classList.add('active');
+  document.getElementById(`tab-${name}`).classList.add('active');
+}
+
+// ── Utils ──────────────────────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+init();
+setInterval(checkServer, 30000);
+</script>
+</body>
+</html>

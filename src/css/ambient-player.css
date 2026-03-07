@@ -1,0 +1,183 @@
+/**
+ * Ambient Reading Player — Styles
+ * ================================
+ * Desktop: flex item inside floating action bar (between Listen + Learning Tools)
+ * Mobile: row inside bottom Learning Tools dropdown
+ */
+
+/* =========================================
+   Desktop Control (inside floating action bar)
+   ========================================= */
+
+.ambient-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    border-radius: 30px;
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    background: transparent;
+    font-size: 0.85rem;
+    height: 38px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    flex-shrink: 0;
+}
+
+.ambient-control:hover {
+    border-color: rgba(196, 148, 58, 0.4);
+}
+
+.ambient-control.active {
+    border-color: rgba(196, 148, 58, 0.4);
+}
+
+/* =========================================
+   Shared Elements (desktop + mobile)
+   ========================================= */
+
+.ambient-icon {
+    font-size: 1rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.6;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.ambient-control.active .ambient-icon,
+.ambient-control-mobile.active .ambient-icon {
+    color: var(--gold-primary, #C4943A);
+    opacity: 1;
+    animation: ambient-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ambient-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.9); }
+}
+
+.ambient-label {
+    color: var(--cream, #E8DCC4);
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+}
+
+.ambient-control.active .ambient-label,
+.ambient-control-mobile.active .ambient-label {
+    opacity: 0.9;
+}
+
+.ambient-skip {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.5;
+    cursor: pointer;
+    font-size: 0.75rem;
+    padding: 2px;
+    line-height: 1;
+    transition: opacity 0.15s, color 0.15s;
+}
+
+.ambient-skip:hover {
+    opacity: 1;
+    color: var(--gold-primary, #C4943A);
+}
+
+.ambient-control.active .ambient-skip,
+.ambient-control-mobile.active .ambient-skip {
+    display: inline-flex;
+}
+
+/* =========================================
+   Toggle Switch
+   ========================================= */
+
+.ambient-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.ambient-switch-track {
+    position: relative;
+    width: 32px;
+    height: 18px;
+    background: rgba(232, 220, 196, 0.15);
+    border-radius: 9px;
+    transition: background 0.2s;
+}
+
+.ambient-toggle-btn[aria-checked="true"] .ambient-switch-track {
+    background: var(--gold-primary, #C4943A);
+}
+
+.ambient-switch-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    background: var(--cream, #E8DCC4);
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.ambient-toggle-btn[aria-checked="true"] .ambient-switch-thumb {
+    transform: translateX(14px);
+}
+
+/* =========================================
+   Mobile Control (inside Learning Tools dropdown)
+   ========================================= */
+
+.ambient-control-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border-radius: 4px;
+    border-top: 1px solid rgba(196, 148, 58, 0.15);
+    margin-top: 0.25rem;
+    padding-top: 0.75rem;
+}
+
+.ambient-control-mobile .ambient-label {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   Standalone Control (interactive chapters)
+   ========================================= */
+
+.ambient-control-standalone {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 768px) {
+    .ambient-control {
+        display: none;
+    }
+
+    .ambient-control-standalone .ambient-control {
+        display: inline-flex;
+    }
+}

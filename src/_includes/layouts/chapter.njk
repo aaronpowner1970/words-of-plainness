@@ -1,0 +1,235 @@
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/ambient-player.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Reading Progress Bar -->
+<div class="reading-progress">
+    <div class="reading-progress-fill" id="readingProgressFill"></div>
+</div>
+
+<!-- Resume Prompt -->
+{% include "components/resume-prompt.njk" %}
+
+<!-- Progress Resume Banner (API-synced) -->
+<div class="progress-resume-banner hidden" id="progressResumeBanner">
+    <div class="progress-resume-content">
+        <span class="progress-resume-text" id="progressResumeText">
+            Welcome back! Resume reading from where you left off?
+        </span>
+        <div class="progress-resume-actions">
+            <button class="progress-resume-btn" id="progressResumeYes">Resume</button>
+            <button class="progress-resume-btn secondary" id="progressResumeNo">Start from Beginning</button>
+        </div>
+        <div class="progress-resume-reflect-divider"></div>
+        <button class="progress-resume-btn outline" id="progressResumeReflect">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            Record Personal Reflection
+        </button>
+    </div>
+</div>
+
+<!-- Bookmark Toast -->
+<div class="bookmark-toast hidden" id="bookmarkToast">Bookmark saved</div>
+
+<!-- Mobile TOC Panel -->
+{% include "components/toc-mobile.njk" %}
+
+<!-- Chapter Hero Section -->
+<section class="chapter-hero" data-pagefind-ignore>
+    <p class="chapter-number">Chapter {{ chapter }}</p>
+    <h1 class="chapter-title">{{ title }}</h1>
+    <blockquote class="chapter-scripture">
+        "{{ scripture.text }}"
+        <cite>— <a href="https://www.churchofjesuschrist.org/study/scriptures/{{ scripture.url }}" target="_blank" rel="noopener">{{ scripture.reference }}</a></cite>
+    </blockquote>
+    <p class="chapter-meta">{{ readingTime | readingTime }}</p>
+</section>
+
+<!-- Primary Actions Bar (sticky below header) -->
+<div data-pagefind-ignore>
+{% include "components/floating-action-bar.njk" %}
+</div>
+
+<!-- Main Layout: TOC Sidebar + Content -->
+<div class="chapter-layout">
+    <!-- Desktop TOC Sidebar -->
+    <div data-pagefind-ignore>
+    {% include "components/toc-sidebar.njk" %}
+    </div>
+
+    <!-- Chapter Content -->
+    <article class="chapter-content" id="chapterContent" data-pagefind-body>
+        <span data-pagefind-meta="title" class="visually-hidden">Chapter {{ chapter }}: {{ title }}</span>
+        {{ content | safe }}
+    </article>
+</div>
+
+<!-- Bottom Learning Tools Dropdown -->
+<div data-pagefind-ignore>
+{% include "components/study-resources.njk" %}
+</div>
+
+<!-- Non-content sections excluded from search -->
+<div data-pagefind-ignore>
+<!-- Reflection Section — hidden when R·J·W pause-points are active -->
+{% if not pauses or pauses.length == 0 %}
+{% include "components/reflection-section.njk" %}
+{% endif %}
+
+<!-- Discord Community Section -->
+{% include "components/discord-section.njk" %}
+
+<!-- Chapter Navigation (Prev/Next) -->
+{% include "components/chapter-nav.njk" %}
+
+<!-- Audio Player (hidden until activated) -->
+{% include "components/audio-player.njk" %}
+
+<!-- Bottom Toolbar -->
+{% include "components/bottom-toolbar.njk" %}
+
+<!-- Back to Top Button -->
+{% include "components/back-to-top.njk" %}
+
+<!-- Mobile FAB (Lantern Icon) -->
+{% include "components/fab-lantern.njk" %}
+
+<!-- R·J·W Modal Panel (Reflect · Journal · Witness) -->
+<div class="rjw-overlay" id="rjwOverlay" onclick="RJW.closeModal()"></div>
+<div class="rjw-panel" id="rjwPanel">
+    <button class="rjw-close" onclick="RJW.closeModal()" aria-label="Close">✕</button>
+    <div class="rjw-header">
+        <div class="rjw-section-label">Pause · Chapter {{ chapter }}</div>
+        <div class="rjw-section-title" id="rjwSectionTitle"></div>
+        <div class="rjw-tabs">
+            <button class="rjw-tab-btn reflect" onclick="RJW.switchTab('reflect')">Reflect</button>
+            <button class="rjw-tab-btn journal" onclick="RJW.switchTab('journal')">Journal</button>
+            <button class="rjw-tab-btn witness" onclick="RJW.switchTab('witness')">Witness</button>
+        </div>
+    </div>
+    <div class="rjw-body">
+        <!-- REFLECT TAB -->
+        <div class="tab-pane" id="tab-reflect">
+            <div class="reflect-toggle">
+                <button class="reflect-toggle-btn active" id="toggle-universal" onclick="RJW.switchReflectMode('universal')">Universal</button>
+                <button class="reflect-toggle-btn" id="toggle-chapter" onclick="RJW.switchReflectMode('chapter')">This Chapter</button>
+            </div>
+            <div class="prompt-block reflect" id="reflect-prompt-universal">
+                <p>What stood out to you? Which ideas, phrases, or scriptures resonated with you as you read?</p>
+                <p>Why does it matter to you? How does this connect to your life, experiences, or current questions?</p>
+                <p>What will you do? What is one thing you feel prompted to do as a result of this reading?</p>
+            </div>
+            <div class="prompt-block reflect" id="reflect-prompt-chapter" style="display:none;"></div>
+            <textarea class="response-area" id="reflect-ta" placeholder="Your thoughts are private by default. Sign in to keep them across sessions."></textarea>
+            <div class="action-row">
+                <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('reflect')">Save Response</button>
+                <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('reflect')">Clear</button>
+                <span class="save-indicator" id="save-reflect">Saved</span>
+            </div>
+            <p class="rjw-auth-notice">Responses are saved to your browser. <a href="#" data-auth-trigger>Sign in</a> to keep them in your account.</p>
+        </div>
+        <!-- JOURNAL TAB -->
+        <div class="tab-pane" id="tab-journal">
+            <div class="prompt-block journal" id="journal-prompt"></div>
+            <textarea class="response-area" id="journal-ta" placeholder="Write freely. No one reads this unless you choose to share it."></textarea>
+            <div class="action-row">
+                <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('journal')">Save to Journal</button>
+                <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('journal')">Clear</button>
+                <span class="save-indicator" id="save-journal">Saved</span>
+            </div>
+            <p class="rjw-auth-notice">Journal entries are automatically included in your portable document. <a href="#" data-auth-trigger>Sign in</a> to save across sessions.</p>
+        </div>
+        <!-- WITNESS TAB -->
+        <div class="tab-pane" id="tab-witness">
+            <div class="prompt-block witness" id="witness-prompt"></div>
+            <textarea class="response-area" id="witness-ta" placeholder="Write your witness here."></textarea>
+            <div class="witness-submit-form">
+                <div class="witness-checkbox-group">
+                    <label class="witness-checkbox-label">
+                        <input type="checkbox" id="cb-document" class="witness-cb">
+                        <span class="witness-cb-text">Include this witness in my portable discipleship document</span>
+                    </label>
+                    <label class="witness-checkbox-label">
+                        <input type="checkbox" id="cb-community" class="witness-cb">
+                        <span class="witness-cb-text">Share this witness with the Words of Plainness community</span>
+                    </label>
+                </div>
+                <p class="witness-moderation-notice">
+                    Community submissions pass through a moderation review before becoming visible on the site. Your witness will not appear publicly until it has been approved.
+                </p>
+                <div class="action-row" style="margin-top:14px;">
+                    <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('witness')">Save Witness</button>
+                    <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('witness')">Clear</button>
+                    <span class="save-indicator" id="save-witness">Saved</span>
+                </div>
+            </div>
+            <p class="rjw-auth-notice" style="margin-top:8px;">A free account is required to include your witness in your portable document or share it with the community. <a href="#" data-auth-trigger>Sign in or register.</a></p>
+            <div class="community-label" style="margin-top:28px;">From the Community</div>
+            <div id="witness-cards"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals (Overview, Testimony, Infographic, Slides) -->
+{% include "components/modals.njk" %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    window.WOP_SCRIPTURE_BOOKS = {{ "" | scriptureBooksJson | safe }};
+</script>
+{% if pauses %}
+<script>
+    window.WOP_PAUSES = {{ pauses | dump | safe }};
+</script>
+{% endif %}
+<script src="/js/reading-progress.js"></script>
+<script src="/js/chapter.js"></script>
+<script src="/js/audio-sync.js"></script>
+<script src="/js/wop-reflections.js"></script>
+<script src="/js/reflections.js"></script>
+<script>
+    // Chapter-specific configuration
+    // Timestamps are loaded from src/_data/timestamps/{{ chapterId }}.json
+    {% set chapterTimestamps = timestamps[chapterId] or {} %}
+    
+    const CHAPTER_CONFIG = {
+        id: '{{ chapterId }}',
+        number: {{ chapter }},
+        title: '{{ title }}',
+        audioFile: 'https://media.wordsofplainness.org/web/{{ audio.narration }}',
+        overviewFile: 'https://media.wordsofplainness.org/web/{{ audio.overview }}',
+        testimonyFile: 'https://media.wordsofplainness.org/web/{{ audio.testimony.file }}',
+        pdfFile: '/assets/pdf/{{ pdf }}',
+        infographicFile: '/assets/images/{{ infographic }}',
+        slidesPath: '/assets/slides/{{ slides.path }}',
+        totalSlides: {{ slides.count or 10 }},
+        discordChannelId: '{{ discordChannelId }}',
+        timestamps: {{ chapterTimestamps | json | safe }}
+    };
+    
+    // Initialize chapter functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof ChapterManager !== 'undefined') {
+            ChapterManager.init(CHAPTER_CONFIG);
+        }
+    });
+</script>
+{% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+<script>
+    window.WOP_AMBIENT_TRACKS = [
+        {% for track in ministryMusic.ambient %}
+        { file: "https://media.wordsofplainness.org/web/{{ track.file }}", title: "{{ track.title }}", duration: "{{ track.duration }}" }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+</script>
+<script src="/js/ambient-player.js"></script>
+{% endif %}
+{% endblock %}

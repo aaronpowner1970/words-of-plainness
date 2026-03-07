@@ -1,0 +1,31 @@
+{# Previous/Next Chapter Navigation #}
+
+<nav class="chapter-nav" aria-label="Chapter navigation">
+    {% if prevChapter %}
+    <a href="{{ prevChapter.url }}" class="chapter-nav-link prev">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <div class="nav-text">
+            <span class="nav-label">Previous</span>
+            <span class="nav-title">{{ prevChapter.title }}</span>
+        </div>
+    </a>
+    {% else %}
+    <div class="chapter-nav-link disabled"></div>
+    {% endif %}
+    
+    {% if nextChapter %}
+    <a href="{{ nextChapter.url }}" class="chapter-nav-link next">
+        <div class="nav-text">
+            <span class="nav-label">Next</span>
+            <span class="nav-title">{{ nextChapter.title }}</span>
+        </div>
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </a>
+    {% else %}
+    <div class="chapter-nav-link disabled"></div>
+    {% endif %}
+</nav>

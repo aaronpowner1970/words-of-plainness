@@ -1,0 +1,59 @@
+<!-- Header Partial -->
+<!-- This will be populated from the current site header -->
+
+<header class="header">
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <img src="/assets/favicons/lantern-icon-64.png" alt="" class="header-lantern" width="54" height="54">
+            <span class="logo-text">
+                <span class="logo-title">WORDS OF PLAINNESS</span>
+                <span class="logo-subtitle">{{ site.tagline }}</span>
+            </span>
+        </a>
+        
+        <nav class="nav-desktop">
+            <ul class="nav-links">
+                {% for item in navigation.main %}
+                {% if item.url != "/new-here/" %}
+                <li><a href="{{ item.url }}"{% if (item.url == "/" and page.url == "/") or (item.url != "/" and item.url in page.url) %} class="active"{% endif %}>{{ item.title }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <a href="/new-here/" class="btn-new-here">New Here?</a>
+
+            <!-- Auth Buttons (shown when logged out) -->
+            <div class="nav-auth-buttons" id="navAuthButtons">
+                <button class="btn-sign-in" id="signInBtn">Sign In</button>
+                <button class="btn-join-free" id="joinFreeBtn">Join Free</button>
+            </div>
+
+            <!-- User Menu (shown when logged in, hidden by default) -->
+            <div class="user-menu hidden" id="userMenu">
+                <button class="user-menu-toggle" id="userMenuToggle">
+                    <span class="user-avatar" id="userAvatar"></span>
+                    <span class="user-display-name" id="userName"></span>
+                    <span class="user-menu-arrow">&#9660;</span>
+                </button>
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="user-dropdown-header">
+                        <p class="user-dropdown-name" id="userDropdownName"></p>
+                        <p class="user-dropdown-email" id="userDropdownEmail"></p>
+                    </div>
+                    <a class="user-dropdown-item" href="/my-reflections/">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        My Reflections &amp; Goals
+                    </a>
+                    <button class="user-dropdown-item" id="logoutBtn" data-action="logout">
+                        Sign Out
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
+        <button class="nav-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>

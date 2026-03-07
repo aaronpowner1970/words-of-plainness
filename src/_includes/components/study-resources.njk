@@ -1,0 +1,68 @@
+{# Bottom Learning Tools Dropdown - mirrors the floating action bar's Learning Tools menu #}
+
+<section class="bottom-learning-tools" id="bottomLearningTools">
+    <div class="dropdown-container">
+        <button class="action-pill primary" id="btnLearningToolsBottom">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path>
+            </svg>
+            <span>Learning Tools</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 15 12 9 18 15"></polyline>
+            </svg>
+        </button>
+        <div class="dropdown-menu dropup" id="bottomFeaturesDropdown">
+            <button class="dropdown-item" data-action="overview">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+                <span>Chapter Podcast</span>
+            </button>
+            <button class="dropdown-item" data-action="testimony">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Musical Testimony</span>
+            </button>
+            <button class="dropdown-item" data-action="infographic">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Visual Summary</span>
+            </button>
+            <button class="dropdown-item" data-action="slides">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Study Slides</span>
+            </button>
+            <button class="dropdown-item" data-action="toc">
+                <svg viewBox="0 0 24 24" width="18" height="18"><line x1="8" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2"/><line x1="8" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/><line x1="8" y1="18" x2="21" y2="18" stroke="currentColor" stroke-width="2"/><line x1="3" y1="6" x2="3.01" y2="6" stroke="currentColor" stroke-width="2"/><line x1="3" y1="12" x2="3.01" y2="12" stroke="currentColor" stroke-width="2"/><line x1="3" y1="18" x2="3.01" y2="18" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Table of Contents</span>
+            </button>
+            <a class="dropdown-item" href="/search/">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Search All Chapters</span>
+            </a>
+            <button class="dropdown-item" data-action="reflect">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 20h9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Personal Reflection</span>
+            </button>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="/assets/pdf/{{ pdf }}" download>
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Download PDF</span>
+            </a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="/how-to-use/">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>How to Use This Website</span>
+            </a>
+            {% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+            <hr class="dropdown-divider">
+            <div class="ambient-control-mobile" id="ambientControlMobile">
+                <span class="ambient-icon" aria-hidden="true">&#9835;</span>
+                <span class="ambient-label" id="ambientLabelMobile">Reading Atmosphere</span>
+                <button class="ambient-skip" id="ambientSkipMobile" aria-label="Skip to next ambient track">&#9197;</button>
+                <button class="ambient-toggle-btn" id="ambientToggleMobile" role="switch" aria-checked="false" aria-label="Toggle reading atmosphere music">
+                    <span class="ambient-switch-track"><span class="ambient-switch-thumb"></span></span>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

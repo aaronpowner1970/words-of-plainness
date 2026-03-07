@@ -1,0 +1,337 @@
+---
+layout: layouts/base.njk
+title: Search
+description: Find passages, scriptures, and topics across all chapters of Words of Plainness
+permalink: /search/
+---
+
+{% block styles %}
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<style>
+    .search-page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 4rem;
+    }
+
+    .search-page h1 {
+        font-family: 'Crimson Pro', serif;
+        font-size: 2.25rem;
+        font-weight: 600;
+        color: #3D2B1F;
+        margin-bottom: 0.5rem;
+    }
+
+    .search-page .search-intro {
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #6b5a4e;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+
+    /* =========================================
+       Pagefind UI — WOP Brand Overrides
+       ========================================= */
+    .pagefind-ui {
+        --pagefind-ui-scale: 1;
+        --pagefind-ui-primary: #C4943A;
+        --pagefind-ui-text: #3D2B1F;
+        --pagefind-ui-background: #FDFBF7;
+        --pagefind-ui-border: #C4943A;
+        --pagefind-ui-tag: #E8DCC4;
+        --pagefind-ui-border-width: 2px;
+        --pagefind-ui-border-radius: 8px;
+        --pagefind-ui-font: 'Source Sans Pro', sans-serif;
+    }
+
+    /* --- Hide filter panel entirely --- */
+    .pagefind-ui .pagefind-ui__filter-panel {
+        display: none !important;
+    }
+
+    /* --- Single column layout --- */
+    .pagefind-ui .pagefind-ui__drawer {
+        display: block;
+    }
+
+    /* --- Search Input --- */
+    .pagefind-ui .pagefind-ui__search-input {
+        background: #E8DCC4;
+        color: #3D2B1F;
+        font-size: 1.15rem;
+        padding: 0.85rem 1rem 0.85rem 2.8rem;
+        border: 2px solid #C4943A;
+        border-radius: 8px;
+        font-weight: 400;
+    }
+
+    .pagefind-ui .pagefind-ui__search-input::placeholder {
+        color: #8a7a6a;
+    }
+
+    .pagefind-ui .pagefind-ui__search-input:focus {
+        border-color: #C4943A;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(196, 148, 58, 0.3);
+        background: #f0e8d8;
+    }
+
+    /* --- Search Clear Button --- */
+    .pagefind-ui .pagefind-ui__search-clear {
+        color: #3D2B1F;
+        opacity: 0.6;
+    }
+
+    .pagefind-ui .pagefind-ui__search-clear:hover {
+        opacity: 1;
+    }
+
+    /* --- Gold divider between search bar and results --- */
+    .pagefind-ui .pagefind-ui__drawer::before {
+        content: "";
+        display: block;
+        height: 2px;
+        background: #C4943A;
+        margin: 1.5rem 0;
+    }
+
+    /* --- Results Area --- */
+    .pagefind-ui .pagefind-ui__results-area {
+        margin-top: 0;
+    }
+
+    .pagefind-ui .pagefind-ui__message {
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #E8DCC4;
+        font-size: 1rem;
+        padding: 1rem 0;
+    }
+
+    /* Dismiss hint appended to the results message */
+    .pagefind-dismiss-hint {
+        color: #d4c5a9;
+        font-size: 0.9rem;
+        font-style: italic;
+    }
+
+    /* --- Individual Result Cards --- */
+    .pagefind-ui .pagefind-ui__result {
+        background: #E8DCC4;
+        border: 1px solid #d4c5a9;
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .pagefind-ui .pagefind-ui__result:hover {
+        border-color: #C4943A;
+        box-shadow: 0 2px 8px rgba(61, 43, 31, 0.08);
+    }
+
+    /* Sub-results (nested snippets) */
+    .pagefind-ui .pagefind-ui__result-nested {
+        position: relative;
+        padding-left: 1.5rem;
+        padding-right: 2rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border: none;
+        background: none;
+        border-left: 3px solid #C4943A;
+        border-radius: 0;
+        margin-top: 0.75rem;
+    }
+
+    .pagefind-ui .pagefind-ui__result-nested:hover {
+        box-shadow: none;
+        border-color: #C4943A;
+    }
+
+    /* --- Dismiss Button on sub-results --- */
+    .pagefind-dismiss-btn {
+        position: absolute;
+        top: 0.15rem;
+        right: 0;
+        background: none;
+        border: none;
+        color: #8B7355;
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0.25rem 0.4rem;
+        border-radius: 3px;
+        opacity: 0;
+        transition: opacity 0.15s, color 0.15s;
+    }
+
+    .pagefind-ui .pagefind-ui__result-nested:hover .pagefind-dismiss-btn,
+    .pagefind-dismiss-btn:focus {
+        opacity: 1;
+    }
+
+    .pagefind-dismiss-btn:hover {
+        color: #C4943A;
+    }
+
+    /* Also add dismiss to top-level result excerpts */
+    .pagefind-ui .pagefind-ui__result-inner {
+        position: relative;
+    }
+
+    .pagefind-ui .pagefind-ui__result-inner > .pagefind-dismiss-btn {
+        top: 0;
+        right: -0.25rem;
+    }
+
+    .pagefind-ui .pagefind-ui__result:hover > .pagefind-ui__result-inner > .pagefind-dismiss-btn {
+        opacity: 1;
+    }
+
+    /* --- Result Title / Link --- */
+    .pagefind-ui .pagefind-ui__result-link {
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: #C4943A;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.4rem;
+        line-height: 1.3;
+    }
+
+    .pagefind-ui .pagefind-ui__result-link:hover {
+        color: #b3842f;
+        text-decoration: underline;
+    }
+
+    /* --- Result Excerpt / Snippet --- */
+    .pagefind-ui .pagefind-ui__result-excerpt {
+        color: #3D2B1F;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    /* --- Highlighted Search Terms --- */
+    .pagefind-ui mark {
+        background-color: #C4943A;
+        color: #fff;
+        font-weight: 600;
+        padding: 0.1em 0.35em;
+        border-radius: 3px;
+    }
+
+    /* --- Result Tags --- */
+    .pagefind-ui .pagefind-ui__result-tag {
+        background: #f5edd8;
+        color: #6b5a4e;
+        border: 1px solid #d4c5a9;
+        font-size: 0.8rem;
+        border-radius: 4px;
+    }
+
+    /* --- Result Thumbnail (hidden) --- */
+    .pagefind-ui .pagefind-ui__result-thumb {
+        display: none;
+    }
+
+    /* --- Load More Button --- */
+    .pagefind-ui .pagefind-ui__button {
+        background-color: #C4943A;
+        color: #fff;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 2rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .pagefind-ui .pagefind-ui__button:hover {
+        background-color: #b3842f;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+        .search-page {
+            padding: 2rem 1rem 3rem;
+        }
+
+        .search-page h1 {
+            font-size: 1.75rem;
+        }
+
+        .pagefind-ui .pagefind-ui__result {
+            padding: 1rem;
+        }
+
+        .pagefind-ui .pagefind-ui__result-link {
+            font-size: 1.15rem;
+        }
+
+        /* Always show dismiss buttons on mobile (no hover) */
+        .pagefind-dismiss-btn {
+            opacity: 0.6;
+        }
+    }
+</style>
+{% endblock %}
+
+<div class="search-page">
+    <h1>Search Words of Plainness</h1>
+    <p class="search-intro">Find passages, scriptures, and topics across all chapters</p>
+    <div id="search"></div>
+</div>
+
+{% block scripts %}
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        new PagefindUI({
+            element: "#search",
+            showSubResults: true,
+            showImages: false
+        });
+
+        // Observe the results area for new results and inject dismiss buttons
+        var searchEl = document.getElementById('search');
+        if (!searchEl) return;
+
+        var observer = new MutationObserver(function() {
+            // Add dismiss hint to the results message
+            var msg = searchEl.querySelector('.pagefind-ui__message');
+            if (msg && !msg.querySelector('.pagefind-dismiss-hint')) {
+                var text = msg.textContent.trim();
+                if (text && !text.includes('Click')) {
+                    var hint = document.createElement('span');
+                    hint.className = 'pagefind-dismiss-hint';
+                    hint.textContent = '  \u00B7  Click section heading to jump to result  \u00B7  Click \u2715 to dismiss irrelevant results.';
+                    msg.appendChild(hint);
+                }
+            }
+
+            // Add dismiss buttons to sub-results
+            var nested = searchEl.querySelectorAll('.pagefind-ui__result-nested:not([data-has-dismiss])');
+            nested.forEach(function(el) {
+                el.setAttribute('data-has-dismiss', 'true');
+                var btn = document.createElement('button');
+                btn.className = 'pagefind-dismiss-btn';
+                btn.setAttribute('aria-label', 'Dismiss this result');
+                btn.textContent = '\u2715';
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    el.style.display = 'none';
+                });
+                el.appendChild(btn);
+            });
+        });
+
+        observer.observe(searchEl, { childList: true, subtree: true });
+    });
+</script>
+{% endblock %}

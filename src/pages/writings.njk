@@ -1,0 +1,167 @@
+---
+layout: layouts/page.njk
+title: Writings
+pageTitle: My Writings
+pageSubtitle: "Scripture-Based Reflections"
+permalink: /writings/
+---
+
+<style>
+.volume-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.volume-hub-card {
+    background: var(--overlay-medium);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-left: 4px solid var(--gold-primary);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: all var(--transition-normal);
+}
+
+.volume-hub-card:hover {
+    border-color: var(--gold-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.volume-hub-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    margin-bottom: 0.25rem;
+}
+
+.volume-hub-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    color: var(--cream-soft);
+    margin-bottom: var(--space-xs);
+}
+
+.volume-hub-card p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--cream);
+    opacity: 0.85;
+    margin-bottom: var(--space-md);
+}
+
+.volume-hub-meta {
+    font-size: 0.85rem;
+    color: var(--cream);
+    opacity: 0.6;
+    margin-bottom: var(--space-sm);
+}
+</style>
+
+<!-- Words of Plainness Volumes -->
+<section class="content-section alt" id="volumes">
+    <div class="content-wrapper" style="max-width: 900px;">
+        <h2>Words of Plainness</h2>
+        <p>
+            The heart of this ministry&mdash;extended reflections on scripture and discipleship,
+            written for both seekers exploring faith and saints deepening their walk with Christ.
+        </p>
+
+        <div class="volume-hub-grid">
+            <div class="volume-hub-card">
+                <div class="volume-hub-label">Volume 1</div>
+                <h3>Christ-Centered Discipleship</h3>
+                <p>
+                    An interfaith journey beginning with the foundations of faith, moving through
+                    the life and character of Jesus Christ, and exploring discipleship practices
+                    that transform daily living. For every seeker and saint.
+                </p>
+                <div class="volume-hub-meta">37 chapters &bull; 6 available now</div>
+                <a href="/volume-1/" class="btn btn-primary">Explore Volume 1</a>
+            </div>
+
+            <div class="volume-hub-card">
+                <div class="volume-hub-label">Volume 2</div>
+                <h3>Covenants &amp; Theology</h3>
+                <p>
+                    A deep study of Latter-day Saint covenants and theology&mdash;from the nature
+                    of God and the spiritual creation to the plan of salvation and our eternal
+                    inheritance. For readers with a foundation in the restored gospel.
+                </p>
+                <div class="volume-hub-meta">23 chapters &bull; Coming soon</div>
+                <a href="/volume-2/" class="btn btn-outline-gold">Explore Volume 2</a>
+            </div>
+        </div>
+
+        <p style="margin-top: 2rem; text-align: center;">
+            <a href="/connect/#newsletter" class="btn btn-outline-gold">
+                Subscribe to be notified when new chapters are published
+            </a>
+        </p>
+    </div>
+</section>
+
+<!-- Social Media Archive -->
+<section class="content-section" id="archive">
+    <div class="content-wrapper">
+        <h2>Social Media Archive</h2>
+        <p>
+            Shorter reflections, scripture insights, and thoughts shared across social platforms&mdash;
+            collected here for easy reference and deeper exploration.
+        </p>
+
+        <div class="feature-card" style="margin-top: 1.5rem;">
+            <h3>Archive In Development</h3>
+            <p>
+                The social media archive is being compiled and will be searchable alongside
+                the main chapters. Check back soon, or subscribe to the newsletter for updates.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Study Tools -->
+<section class="content-section alt" id="tools">
+    <div class="content-wrapper">
+        <h2>Study Tools</h2>
+        <p>
+            Interactive features to help you engage more deeply with the writings.
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Scripture Cross-References</h3>
+                <p>
+                    Click any scripture reference to see the full passage and related verses
+                    across multiple translations.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Topic Index</h3>
+                <p>
+                    Browse writings by theme: faith, repentance, grace, covenant, prophecy,
+                    and more.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Personal Notes</h3>
+                <p>
+                    Save your own reflections and insights as you study. (Requires free account)
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Reading Plans</h3>
+                <p>
+                    Structured paths through the writings for new visitors or focused study.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "partials/search-fab.njk" %}
