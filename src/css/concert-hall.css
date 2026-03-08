@@ -20,13 +20,21 @@
 
 .concert-hero {
   position: relative;
-  min-height: 50vh;
-  max-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('/assets/images/concert-hall-bg.jpg') center top / 100% auto no-repeat scroll;
   overflow: hidden;
+
+  /* FIXED: use contain so the whole image is visible, centered over a dark bg */
+  background: #1a0f05 url("/assets/images/concert-hall-bg.jpg") center center / contain no-repeat;
+  
+  /* FIXED: height driven by the image's aspect ratio at a reasonable max width */
+  width: 100%;
+  max-width: 1400px;         /* cap how wide the hero gets */
+  margin: 0 auto;            /* center it if viewport is wider */
+  aspect-ratio: 16 / 9;     /* matches the concert_hall.png proportions */
+  max-height: 80vh;          /* safety ceiling on very tall viewports */
+  min-height: 300px;         /* safety floor on very small screens */
 }
 
 .concert-hero-overlay {
