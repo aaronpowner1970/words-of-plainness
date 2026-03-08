@@ -31,7 +31,7 @@ permalink: /concert/{{ concert.slug }}/
     <p>{{ concert.welcome }}</p>
   </div>
 
-  <!-- Programme Notes Download Link -->
+  <!-- Programme Notes + Architecture Visual Thumbnail -->
   <div class="concert-hall-programme-notes">
     <a href="https://media.wordsofplainness.org/docs/Ch09_Suite_Listener_Notes.pdf"
        class="programme-notes-link"
@@ -48,21 +48,42 @@ permalink: /concert/{{ concert.slug }}/
       </span>
       <span class="programme-notes-text">Programme Notes — Notes on the Making of a Suite</span>
     </a>
+
+    <!-- Architecture Visual Thumbnail -->
+    <button class="arch-visual-thumbnail" id="archVisualBtn" aria-label="View suite architecture diagram">
+      <img
+        src="https://media.wordsofplainness.org/images/Ch09_Suite_Architecture_Visual.png"
+        alt="Suite architecture map — click to expand"
+        class="arch-visual-thumb-img"
+      >
+      <span class="arch-visual-thumb-label">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+        </svg>
+        Suite Architecture
+      </span>
+    </button>
   </div>
 
-  <!-- Suite Architecture Visual -->
-  <div class="concert-hall-architecture-visual">
-    <figure class="architecture-visual-figure">
+  <!-- Architecture Visual Modal -->
+  <div class="arch-visual-modal" id="archVisualModal" role="dialog" aria-modal="true" aria-label="Suite architecture diagram">
+    <div class="arch-visual-modal-overlay" id="archVisualOverlay"></div>
+    <div class="arch-visual-modal-content">
+      <button class="arch-visual-modal-close" id="archVisualClose" aria-label="Close diagram">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
       <img
         src="https://media.wordsofplainness.org/images/Ch09_Suite_Architecture_Visual.png"
         alt="Suite architecture map showing ten movements of Yehoshua the Man, with tonal arc, tempo shape, and leitmotif presence across all movements"
-        class="architecture-visual-img"
-        loading="lazy"
+        class="arch-visual-modal-img"
       >
-      <figcaption class="architecture-visual-caption">
+      <p class="arch-visual-modal-caption">
         Tonal arc rises with distance from home key D. Movement VII (Justice &amp; Mercy) reaches maximum tonal distance in B&#x266D;. Movement VIII (Joy) peaks in tempo at 84–96 BPM. Movement IX (Beatitudes) arrives home in D major.
-      </figcaption>
-    </figure>
+      </p>
+    </div>
   </div>
 
   <!-- Active Movement Panel -->
@@ -218,4 +239,18 @@ permalink: /concert/{{ concert.slug }}/
 {% block scripts %}
 <script>document.title = {{ concert.title | json | safe }} + ' \u2014 Concert Hall | {{ site.name }}';</script>
 <script src="/js/concert-player.js"></script>
+<script>
+  (function () {
+    var btn = document.getElementById('archVisualBtn');
+    var modal = document.getElementById('archVisualModal');
+    var overlay = document.getElementById('archVisualOverlay');
+    var close = document.getElementById('archVisualClose');
+    function openModal() { modal.classList.add('arch-visual-modal--open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { modal.classList.remove('arch-visual-modal--open'); document.body.style.overflow = ''; }
+    btn.addEventListener('click', openModal);
+    overlay.addEventListener('click', closeModal);
+    close.addEventListener('click', closeModal);
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+  })();
+</script>
 {% endblock %}
