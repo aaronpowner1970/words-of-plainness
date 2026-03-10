@@ -191,11 +191,14 @@
         }
       }
 
-      // Update the accordion trigger label to show active movement
+      // Update the accordion trigger label: "Now Playing: [#] — [Title]  ← Navigate Movements"
       var mvt = this.manifest.movements[index];
       var labelEl = document.getElementById('chAccordionLabel');
       if (labelEl && mvt) {
-        labelEl.textContent = mvt.number + ' \u2014 ' + mvt.title;
+        labelEl.innerHTML =
+          '<span class="ch-accordion-now-playing">Now Playing:</span> ' +
+          mvt.number + ' \u2014 ' + mvt.title +
+          '<span class="ch-accordion-nav-hint"> \u2190 Navigate Movements</span>';
       }
     },
 

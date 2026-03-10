@@ -748,13 +748,31 @@
   background: rgba(201, 168, 76, 0.06);
 }
 
+/* Accordion trigger label — now carries three styled spans */
 .ch-accordion-label {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
-  font-style: italic;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--concert-cream);
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+.ch-accordion-now-playing {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--concert-gold);
-  opacity: 0.8;
-  letter-spacing: 0.02em;
+  margin-right: 0.35em;
+}
+
+.ch-accordion-nav-hint {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--concert-cream);
+  opacity: 0.35;
+  margin-left: 0.5em;
 }
 
 .ch-accordion-chevron {
@@ -1061,5 +1079,9 @@
 
   .extras-link {
     font-size: 0.82rem;
+  }
+
+  .ch-accordion-nav-hint {
+    display: none; /* too long on small screens — drop the hint */
   }
 }
