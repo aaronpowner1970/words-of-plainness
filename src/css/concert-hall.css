@@ -584,37 +584,40 @@
 /* ---- Chapter 9 Concert Callout ---- */
 
 .concert-callout {
-  background: rgba(201, 168, 76, 0.08);
-  border: 1px solid rgba(201, 168, 76, 0.25);
-  border-left: 3px solid var(--gold-primary, #C4943A);
-  border-radius: var(--radius-md, 8px);
-  padding: 1.25rem 1.5rem;
-  margin: 1.5rem 0;
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 1.25rem 0;
   text-align: center;
+  border-top: 1px solid rgba(196, 148, 58, 0.2);
+  border-bottom: 1px solid rgba(196, 148, 58, 0.2);
 }
 
 .concert-callout p {
   font-family: var(--font-serif, 'Crimson Pro', Georgia, serif);
-  font-size: 1.05rem;
+  font-size: 0.9rem;
+  font-style: italic;
   line-height: 1.7;
   color: var(--cream, #E8DCC4);
-  margin: 0 0 0.75rem;
+  opacity: 0.72;
+  margin: 0 0 0.6rem;
 }
 
 .concert-callout a {
   display: inline-block;
-  font-family: var(--font-sans, 'Source Sans Pro', sans-serif);
-  font-size: 0.95rem;
+  font-family: var(--font-serif, 'Crimson Pro', Georgia, serif);
+  font-size: 0.9rem;
+  font-style: italic;
   color: var(--gold-primary, #C4943A);
   text-decoration: none;
-  border-bottom: 1px solid rgba(201, 168, 76, 0.4);
+  border-bottom: 1px solid rgba(196, 148, 58, 0.35);
   padding-bottom: 1px;
+  letter-spacing: 0.01em;
   transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .concert-callout a:hover {
-  color: #E0C060;
-  border-color: #E0C060;
+  color: #d4a84b;
+  border-color: rgba(212, 168, 75, 0.7);
 }
 
 
