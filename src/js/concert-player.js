@@ -20,6 +20,11 @@
     /* ---- Initialization ---- */
 
     init: function () {
+      // Always open at the top — disable browser scroll restoration
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+
       var dataEl = document.getElementById('concertManifest');
       if (!dataEl) return;
 
@@ -327,8 +332,8 @@
           self.play();
         });
       } else {
-        this.loadMovement(this.currentIndex + 1);
-        this.play();
+        this.loadMovement(self.currentIndex + 1);
+        self.play();
       }
     },
 
