@@ -32,7 +32,19 @@ const AudioSync = {
         this.sentences = document.querySelectorAll('.sentence[data-index]');
 
         if (!this.audioPlayer || Object.keys(this.timestamps).length === 0) {
-            console.log('AudioSync: No timestamps or audio player');
+            console.log('AudioSync: No timestamps or audio player — sync disabled');
+            return;
+        }
+
+        // Placeholder guard: if all timestamp values are 0, sync is not yet calibrated.
+        // Bail out to prevent bogus scroll-to-bottom and broken click-to-seek.
+        const values = Object.values(this.timestamps);
+        const allZero = values.every(v => {
+            const t = (typeof v === 'object') ? v.start : v;
+            return t === 0 || t === 0.0;
+        });
+        if (allZero) {
+            console.log('AudioSync: All timestamps are placeholder zeros — sync disabled');
             return;
         }
         
