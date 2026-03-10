@@ -3,7 +3,8 @@
  * Words of Plainness Ministry
  *
  * Handles: play/pause, movement navigation, auto-advance with interstitial,
- * script toggle, closing reflection, mobile now-playing bar.
+ * script toggle, closing reflection, mobile now-playing bar,
+ * phase-banded accordion movement list.
  */
 (function () {
   'use strict';
@@ -14,6 +15,7 @@
     currentIndex: 0,
     isPlaying: false,
     interstitialTimer: null,
+    accordionOpen: false,
 
     /* ---- Initialization ---- */
 
@@ -25,10 +27,50 @@
       this.audio = document.getElementById('concertAudio');
       if (!this.audio || !this.manifest) return;
 
+      this.buildAccordion();
       this.bindEvents();
       this.loadMovement(0);
       this.setupMobileBar();
     },
+
+    /* ---- Accordion Build ---- */
+
+    buildAccordion: function () {
+      var container = document.getElementById('chAccordionContent');
+      if (!container || !this.manifest.phases) return;
+
+      var html = '';
+      var phases = this.manifest.phases;
+      var movements = this.manifest.movements;
+
+      for (var p = 0; p < phases.length; p++) {
+        var phase = phases[p];
+        html += '<div class="ch-accordion-phase">';
+        html += '<div class="ch-accordion-phase-label">' + phase.label + '</div>';
+
+        for (var m = 0; m < movements.length; m++) {
+          var mvt = movements[m];
+          if (mvt.phase !== phase.id) continue;
+
+          var durationStr = mvt.duration ? mvt.duration : '';
+          var activeClass = (m === 0) ? ' ch-accordion-mvt--active' : '';
+
+          html += '<button class="ch-accordion-mvt' + activeClass + '" data-movement="' + m + '" aria-label="Movement ' + mvt.number + ': ' + mvt.title + '">';
+          html += '<span class="ch-accordion-mvt-num">' + mvt.number + '</span>';
+          html += '<span class="ch-accordion-mvt-title">' + mvt.title + '</span>';
+          if (durationStr) {
+            html += '<span class="ch-accordion-mvt-duration">' + durationStr + '</span>';
+          }
+          html += '</button>';
+        }
+
+        html += '</div>'; // close phase
+      }
+
+      container.innerHTML = html;
+    },
+
+    /* ---- Event Binding ---- */
 
     bindEvents: function () {
       var self = this;
@@ -50,16 +92,27 @@
       var nextBtn = document.getElementById('playerNext');
       if (nextBtn) nextBtn.addEventListener('click', function () { self.nextMovement(); });
 
-      // Timeline clicks (event delegation)
-      var timeline = document.getElementById('concertTimeline');
-      if (timeline) {
-        timeline.addEventListener('click', function (e) {
+      // Accordion trigger
+      var accordionTrigger = document.getElementById('chAccordionTrigger');
+      if (accordionTrigger) {
+        accordionTrigger.addEventListener('click', function () {
+          self.toggleAccordion();
+        });
+      }
+
+      // Accordion movement clicks (event delegation on content container)
+      var accordionContent = document.getElementById('chAccordionContent');
+      if (accordionContent) {
+        accordionContent.addEventListener('click', function (e) {
           var btn = e.target.closest('[data-movement]');
           if (btn) {
             var idx = parseInt(btn.dataset.movement, 10);
             self.loadMovement(idx);
             self.play();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Stay open — do not collapse on selection
+            // Scroll player into view
+            var player = document.getElementById('concertPlayer');
+            if (player) player.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         });
       }
@@ -106,6 +159,46 @@
       }
     },
 
+    /* ---- Accordion Toggle ---- */
+
+    toggleAccordion: function () {
+      this.accordionOpen = !this.accordionOpen;
+      var body = document.getElementById('chAccordionBody');
+      var trigger = document.getElementById('chAccordionTrigger');
+      if (!body || !trigger) return;
+
+      if (this.accordionOpen) {
+        body.classList.add('ch-accordion-body--open');
+        trigger.setAttribute('aria-expanded', 'true');
+        body.setAttribute('aria-hidden', 'false');
+      } else {
+        body.classList.remove('ch-accordion-body--open');
+        trigger.setAttribute('aria-expanded', 'false');
+        body.setAttribute('aria-hidden', 'true');
+      }
+    },
+
+    /* ---- Accordion Active State ---- */
+
+    updateAccordionActive: function (index) {
+      var buttons = document.querySelectorAll('.ch-accordion-mvt');
+      for (var i = 0; i < buttons.length; i++) {
+        var idx = parseInt(buttons[i].dataset.movement, 10);
+        if (idx === index) {
+          buttons[i].classList.add('ch-accordion-mvt--active');
+        } else {
+          buttons[i].classList.remove('ch-accordion-mvt--active');
+        }
+      }
+
+      // Update the accordion trigger label to show active movement
+      var mvt = this.manifest.movements[index];
+      var labelEl = document.getElementById('chAccordionLabel');
+      if (labelEl && mvt) {
+        labelEl.textContent = mvt.number + ' \u2014 ' + mvt.title;
+      }
+    },
+
     /* ---- Movement Loading ---- */
 
     loadMovement: function (index) {
@@ -130,20 +223,8 @@
       if (titleEl) titleEl.textContent = mvt.title;
       if (graceEl) graceEl.textContent = mvt.graceLabel;
 
-      // Update timeline active state
-      var buttons = document.querySelectorAll('.timeline-mvt');
-      for (var i = 0; i < buttons.length; i++) {
-        if (i === index) {
-          buttons[i].classList.add('timeline-mvt--active');
-        } else {
-          buttons[i].classList.remove('timeline-mvt--active');
-        }
-      }
-
-      // Scroll active timeline button into view
-      if (buttons[index]) {
-        buttons[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }
+      // Update accordion active state
+      this.updateAccordionActive(index);
 
       // Script toggle visibility
       var scriptToggle = document.getElementById('playerScriptToggle');
@@ -165,7 +246,7 @@
       if (fill) fill.style.width = '0%';
       if (seek) seek.value = 0;
       if (curTime) curTime.textContent = '0:00';
-      if (durTime) durTime.textContent = '--:--';
+      if (durTime) durTime.textContent = mvt.duration ? mvt.duration : '--:--';
 
       // Update mobile bar
       this.updateMobileBar();
@@ -203,13 +284,11 @@
     },
 
     updatePlayButtons: function (playing) {
-      // Main player
       var mainPlay = document.querySelector('#playerPlayPause .icon-play');
       var mainPause = document.querySelector('#playerPlayPause .icon-pause');
       if (mainPlay) mainPlay.style.display = playing ? 'none' : '';
       if (mainPause) mainPause.style.display = playing ? '' : 'none';
 
-      // Mobile bar
       var mobilePlay = document.querySelector('#mobileNpPlay .icon-play');
       var mobilePause = document.querySelector('#mobileNpPlay .icon-pause');
       if (mobilePlay) mobilePlay.style.display = playing ? 'none' : '';
@@ -238,16 +317,13 @@
       var isLast = this.currentIndex === this.manifest.movements.length - 1;
 
       if (isLast) {
-        // Final movement: show closing reflection
         this.showClosing();
       } else if (mvt.interstitial) {
-        // Show interstitial text, pause 4 seconds, then auto-advance
         this.showInterstitial(mvt.interstitial, function () {
           self.loadMovement(self.currentIndex + 1);
           self.play();
         });
       } else {
-        // No interstitial: advance directly
         this.loadMovement(this.currentIndex + 1);
         this.play();
       }
@@ -260,13 +336,10 @@
       var textEl = document.getElementById('interstitialText');
       var player = document.getElementById('concertPlayer');
 
-      // Dim the player
       if (player) player.classList.add('concert-hall-player--dimmed');
-
       if (textEl) textEl.textContent = text;
       if (el) {
         el.style.display = '';
-        // Force reflow for transition
         el.offsetHeight;
         el.classList.add('interstitial--visible');
       }
@@ -300,8 +373,6 @@
         el.offsetHeight;
         el.classList.add('closing--visible');
       }
-
-      // After 10 seconds, reveal the chapter link
       setTimeout(function () {
         var link = document.getElementById('closingChapterLink');
         if (link) {
@@ -394,12 +465,11 @@
       var panel = document.getElementById('chProgramPanel');
       if (!panel) return;
 
-      // Collapse panel on movement change
+      // Collapse on movement change
       panel.classList.remove('ch-program-panel--expanded');
       var toggleBtn = panel.querySelector('[data-action="toggle-program-notes"]');
       if (toggleBtn) toggleBtn.innerHTML = 'Read more &darr;';
 
-      // Populate fields
       var teaserEl = document.getElementById('chProgramTeaser');
       var arcEl = document.getElementById('chProgramArc');
       var noteEl = document.getElementById('chProgramNote');
@@ -424,9 +494,9 @@
       if (leitmotifEl) {
         var tier = mvt.leitmotifTier || 'Absent';
         var slug = 'absent';
-        var indicator = '\u25CB'; // ○
-        if (tier === 'Full Statement') { slug = 'full'; indicator = '\u25CF'; } // ●
-        else if (tier === 'Echo Fragment') { slug = 'echo'; indicator = '\u25C9'; } // ◉
+        var indicator = '\u25CB';
+        if (tier === 'Full Statement') { slug = 'full'; indicator = '\u25CF'; }
+        else if (tier === 'Echo Fragment') { slug = 'echo'; indicator = '\u25C9'; }
         leitmotifEl.className = 'ch-program-leitmotif ch-leitmotif-' + slug;
         leitmotifEl.textContent = indicator + ' ' + tier;
       }
@@ -443,13 +513,9 @@
         }
       }
 
-      // Beatitude row: show/hide
-      if (beatitudeRow) {
-        beatitudeRow.style.display = mvt.beatitude ? '' : 'none';
-      }
-      if (beatitudeEl) {
-        beatitudeEl.textContent = mvt.beatitude || '';
-      }
+      // Beatitude row
+      if (beatitudeRow) beatitudeRow.style.display = mvt.beatitude ? '' : 'none';
+      if (beatitudeEl) beatitudeEl.textContent = mvt.beatitude || '';
     },
 
     toggleProgramNotes: function (btn) {
@@ -468,7 +534,6 @@
     }
   };
 
-  // Initialize on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { ConcertPlayer.init(); });
   } else {

@@ -31,61 +31,6 @@ permalink: /concert/{{ concert.slug }}/
     <p>{{ concert.welcome }}</p>
   </div>
 
-  <!-- Programme Notes + Architecture Visual Thumbnail -->
-  <div class="concert-hall-programme-notes">
-    <a href="https://media.wordsofplainness.org/docs/Ch09_Suite_Listener_Notes.pdf"
-       class="programme-notes-link"
-       target="_blank"
-       rel="noopener"
-       download="Yehoshua_the_Man_Listener_Notes.pdf">
-      <span class="programme-notes-icon">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="12" y1="18" x2="12" y2="12"/>
-          <polyline points="9 15 12 18 15 15"/>
-        </svg>
-      </span>
-      <span class="programme-notes-text">Programme Notes — Notes on the Making of a Suite</span>
-    </a>
-
-    <!-- Architecture Visual Thumbnail -->
-    <button class="arch-visual-thumbnail" id="archVisualBtn" aria-label="View suite architecture diagram">
-      <img
-        src="https://media.wordsofplainness.org/images/Ch09_Suite_Architecture_Visual.png"
-        alt="Suite architecture map — click to expand"
-        class="arch-visual-thumb-img"
-      >
-      <span class="arch-visual-thumb-label">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
-        </svg>
-        Suite Architecture
-      </span>
-    </button>
-  </div>
-
-  <!-- Architecture Visual Modal -->
-  <div class="arch-visual-modal" id="archVisualModal" role="dialog" aria-modal="true" aria-label="Suite architecture diagram">
-    <div class="arch-visual-modal-overlay" id="archVisualOverlay"></div>
-    <div class="arch-visual-modal-content">
-      <button class="arch-visual-modal-close" id="archVisualClose" aria-label="Close diagram">
-        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
-          <line x1="18" y1="6" x2="6" y2="18"/>
-          <line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-      <img
-        src="https://media.wordsofplainness.org/images/Ch09_Suite_Architecture_Visual.png"
-        alt="Suite architecture map showing ten movements of Yehoshua the Man, with tonal arc, tempo shape, and leitmotif presence across all movements"
-        class="arch-visual-modal-img"
-      >
-      <p class="arch-visual-modal-caption">
-        Tonal arc rises with distance from home key D. Movement VII (Justice &amp; Mercy) reaches maximum tonal distance in B&#x266D;. Movement VIII (Joy) peaks in tempo at 84–96 BPM. Movement IX (Beatitudes) arrives home in D major.
-      </p>
-    </div>
-  </div>
-
   <!-- Active Movement Panel -->
   <div class="concert-hall-player" id="concertPlayer">
     <div class="ch-player-columns">
@@ -97,7 +42,7 @@ permalink: /concert/{{ concert.slug }}/
           <p class="player-grace-label" id="playerGraceLabel">{{ concert.movements[0].graceLabel }}</p>
         </div>
 
-        <!-- Audio Player (styled, not default browser chrome) -->
+        <!-- Audio Player -->
         <div class="player-controls" id="playerControls">
           <audio id="concertAudio" preload="metadata"></audio>
 
@@ -192,18 +137,20 @@ permalink: /concert/{{ concert.slug }}/
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Movement Timeline Strip -->
-  <div class="concert-hall-timeline" id="concertTimeline">
-    {% for mvt in concert.movements %}
-    <button class="timeline-mvt{% if loop.first %} timeline-mvt--active{% endif %}"
-            data-movement="{{ loop.index0 }}"
-            aria-label="Movement {{ mvt.number }}: {{ mvt.title }}">
-      <span class="timeline-mvt-num">{{ mvt.number }}</span>
-      <span class="timeline-mvt-title">{{ mvt.title }}</span>
-    </button>
-    {% endfor %}
+    <!-- Movement Accordion — attached to bottom of player -->
+    <div class="ch-accordion" id="chAccordion">
+      <button class="ch-accordion-trigger" id="chAccordionTrigger" aria-expanded="false" aria-controls="chAccordionBody">
+        <span class="ch-accordion-label" id="chAccordionLabel">Movement List</span>
+        <svg class="ch-accordion-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <div class="ch-accordion-body" id="chAccordionBody" aria-hidden="true">
+        <!-- Phase bands + movement rows rendered by JS from manifest -->
+        <div id="chAccordionContent"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Interstitial (shown between movements) -->
@@ -217,6 +164,51 @@ permalink: /concert/{{ concert.slug }}/
     <a href="{{ concert.chapterUrl }}/" class="closing-chapter-link" id="closingChapterLink" style="display:none">
       Read the chapter that inspired this suite &rarr;
     </a>
+  </div>
+
+  <!-- Easter Egg: Composition Notes + Architecture Visual (below player) -->
+  <div class="concert-hall-extras" id="concertExtras">
+    <a href="https://media.wordsofplainness.org/docs/Ch09_Suite_Listener_Notes.pdf"
+       class="extras-link"
+       target="_blank"
+       rel="noopener"
+       download="Yehoshua_the_Man_Composition_Notes.pdf">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="12" y1="18" x2="12" y2="12"/>
+        <polyline points="9 15 12 18 15 15"/>
+      </svg>
+      Composition Notes — the Making of this Suite
+    </a>
+    <button class="extras-link extras-arch-btn" id="archVisualBtn" aria-label="View suite architecture diagram">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <path d="M3 9h18M9 21V9"/>
+      </svg>
+      Suite Architecture Diagram
+    </button>
+  </div>
+</div>
+
+<!-- Architecture Visual Modal -->
+<div class="arch-visual-modal" id="archVisualModal" role="dialog" aria-modal="true" aria-label="Suite architecture diagram">
+  <div class="arch-visual-modal-overlay" id="archVisualOverlay"></div>
+  <div class="arch-visual-modal-content">
+    <button class="arch-visual-modal-close" id="archVisualClose" aria-label="Close diagram">
+      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <img
+      src="https://media.wordsofplainness.org/images/Ch09_Suite_Architecture_Visual.png"
+      alt="Suite architecture map showing ten movements of Yehoshua the Man, with tonal arc, tempo shape, and leitmotif presence across all movements"
+      class="arch-visual-modal-img"
+    >
+    <p class="arch-visual-modal-caption">
+      Tonal arc rises with distance from home key D. Movement VII (Justice &amp; Mercy) reaches maximum tonal distance in B&#x266D;. Movement VIII (Joy) peaks in tempo at 84–96 BPM. Movement IX (Beatitudes) arrives home in D major.
+    </p>
   </div>
 </div>
 
@@ -247,9 +239,9 @@ permalink: /concert/{{ concert.slug }}/
     var close = document.getElementById('archVisualClose');
     function openModal() { modal.classList.add('arch-visual-modal--open'); document.body.style.overflow = 'hidden'; }
     function closeModal() { modal.classList.remove('arch-visual-modal--open'); document.body.style.overflow = ''; }
-    btn.addEventListener('click', openModal);
-    overlay.addEventListener('click', closeModal);
-    close.addEventListener('click', closeModal);
+    if (btn) btn.addEventListener('click', openModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+    if (close) close.addEventListener('click', closeModal);
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
   })();
 </script>
