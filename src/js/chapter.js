@@ -36,6 +36,7 @@ const ChapterManager = {
         this.initReadingProgress();
         this.initFontControls();
         this.initBookmark();
+        this.initComplete();
         this.initShare();
         this.initFloatingActionBar();
         this.initTOC();
@@ -229,25 +230,89 @@ const ChapterManager = {
     // Bookmarking
     initBookmark() {
         const bookmarkBtn = document.getElementById('bookmarkBtn');
-        
-        bookmarkBtn?.addEventListener('click', () => this.saveBookmark());
-    },
-    
-    saveBookmark() {
-        const scrollPos = window.scrollY;
         const chapterId = this.config.id;
 
-        localStorage.setItem(`wop-bookmark-${chapterId}`, JSON.stringify({
-            position: scrollPos,
-            timestamp: Date.now()
-        }));
+        // Restore active state if bookmark flag is already set
+        try {
+            if (localStorage.getItem(`wop-bookmark-flag-${chapterId}`) === 'true') {
+                bookmarkBtn?.classList.add('active');
+            }
+        } catch (e) { /* silent */ }
 
-        // Visual feedback
+        bookmarkBtn?.addEventListener('click', () => this.toggleBookmark());
+    },
+
+    toggleBookmark() {
+        const chapterId = this.config.id;
         const btn = document.getElementById('bookmarkBtn');
-        btn?.classList.add('saved');
-        setTimeout(() => btn?.classList.remove('saved'), 2000);
 
-        document.dispatchEvent(new Event('wop:bookmark-saved'));
+        let isBookmarked = false;
+        try {
+            isBookmarked = localStorage.getItem(`wop-bookmark-flag-${chapterId}`) === 'true';
+        } catch (e) { /* silent */ }
+
+        const nowBookmarked = !isBookmarked;
+
+        if (nowBookmarked) {
+            // Save scroll position (used by resume prompt)
+            try {
+                localStorage.setItem(`wop-bookmark-${chapterId}`, JSON.stringify({
+                    position: window.scrollY,
+                    timestamp: Date.now()
+                }));
+            } catch (e) { /* silent */ }
+        } else {
+            // Remove scroll position when unbookmarking
+            try {
+                localStorage.removeItem(`wop-bookmark-${chapterId}`);
+            } catch (e) { /* silent */ }
+        }
+
+        try {
+            localStorage.setItem(`wop-bookmark-flag-${chapterId}`, nowBookmarked ? 'true' : 'false');
+        } catch (e) { /* silent */ }
+
+        btn?.classList.toggle('active', nowBookmarked);
+        document.dispatchEvent(new CustomEvent('wop:bookmark-changed', { detail: { chapterId, bookmarked: nowBookmarked } }));
+    },
+
+    // kept for any legacy callers — delegates to toggleBookmark
+    saveBookmark() {
+        this.toggleBookmark();
+    },
+
+    // ── MARK COMPLETE ──────────────────────────────────────
+    initComplete() {
+        const btn = document.getElementById('completeBtn');
+        const chapterId = this.config.id;
+
+        // Restore saved state on load
+        try {
+            if (localStorage.getItem(`wop-complete-${chapterId}`) === 'true') {
+                btn?.classList.add('active');
+            }
+        } catch (e) { /* silent */ }
+
+        btn?.addEventListener('click', () => this.toggleComplete());
+    },
+
+    toggleComplete() {
+        const chapterId = this.config.id;
+        const btn = document.getElementById('completeBtn');
+
+        let isComplete = false;
+        try {
+            isComplete = localStorage.getItem(`wop-complete-${chapterId}`) === 'true';
+        } catch (e) { /* silent */ }
+
+        const nowComplete = !isComplete;
+
+        try {
+            localStorage.setItem(`wop-complete-${chapterId}`, nowComplete ? 'true' : 'false');
+        } catch (e) { /* silent */ }
+
+        btn?.classList.toggle('active', nowComplete);
+        document.dispatchEvent(new CustomEvent('wop:complete-changed', { detail: { chapterId, complete: nowComplete } }));
     },
     
     getBookmark() {

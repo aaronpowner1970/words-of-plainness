@@ -34,79 +34,121 @@ permalink: /volume-1/
     color: var(--cream);
 }
 
-.movement-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: var(--space-md);
+/* ── ACCORDION ─────────────────────────────── */
+.movement-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
     margin-top: var(--space-lg);
 }
 
-.movement-card {
+.movement-section {
     background: var(--overlay-medium);
     border: 1px solid rgba(196, 148, 58, 0.15);
-    border-left: 3px solid var(--gold-primary);
     border-radius: var(--radius-md);
-    padding: var(--space-md);
-    text-decoration: none;
-    transition: all var(--transition-normal);
-    display: block;
+    overflow: hidden;
+    transition: border-color var(--transition-normal);
 }
 
-.movement-card:hover {
-    border-color: var(--gold-primary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-gold);
+.movement-section.is-open {
+    border-color: rgba(196, 148, 58, 0.35);
 }
 
-.movement-card-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
+.movement-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-md);
+    cursor: pointer;
+    user-select: none;
+    border-left: 3px solid var(--gold-primary);
+    transition: background var(--transition-fast);
+    /* no default button styles */
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    color: var(--cream);
+    font-family: inherit;
+}
+
+.movement-header:hover {
+    background: rgba(196, 148, 58, 0.06);
+}
+
+.movement-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.movement-header-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
     text-transform: uppercase;
     color: var(--gold-primary);
-    margin-bottom: 0.25rem;
+    line-height: 1;
 }
 
-.movement-card h3 {
+.movement-header-name {
     font-family: var(--font-serif);
     font-size: 1.15rem;
     color: var(--cream-soft);
-    margin-bottom: var(--space-xs);
+    line-height: 1.2;
 }
 
-.movement-card p {
-    font-size: 0.9rem;
-    color: var(--cream);
-    opacity: 0.75;
-    margin: 0;
-}
-
-.movement-heading {
-    font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
-    color: var(--gold-primary);
-    margin-bottom: var(--space-sm);
-    padding-bottom: var(--space-xs);
-    border-bottom: 1px solid rgba(196, 148, 58, 0.25);
-    scroll-margin-top: 5rem;
-}
-
-.movement-heading-sub {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+.movement-header-meta {
+    font-size: 0.82rem;
     color: var(--cream);
     opacity: 0.6;
-    margin-bottom: 0.25rem;
+    margin-top: 0.15rem;
 }
 
+.movement-header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+}
+
+.movement-header-desc {
+    font-size: 0.85rem;
+    color: var(--cream);
+    opacity: 0.65;
+    max-width: 340px;
+    line-height: 1.5;
+    text-align: right;
+}
+
+.movement-chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--gold-primary);
+    opacity: 0.7;
+    flex-shrink: 0;
+    transition: transform var(--transition-normal);
+}
+
+.movement-section.is-open .movement-chevron {
+    transform: rotate(180deg);
+}
+
+/* ── ACCORDION BODY ────────────────────────── */
+.movement-body {
+    display: none;
+    padding: 0 var(--space-md) var(--space-md);
+}
+
+.movement-section.is-open .movement-body {
+    display: block;
+}
+
+/* ── CHAPTER LIST ──────────────────────────── */
 .chapter-list {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
     margin-top: var(--space-sm);
-    margin-bottom: var(--space-lg);
 }
 
 .chapter-item {
@@ -115,7 +157,7 @@ permalink: /volume-1/
     justify-content: space-between;
     gap: var(--space-sm);
     padding: 0.75rem var(--space-sm);
-    background: var(--overlay-medium);
+    background: rgba(26, 21, 16, 0.4);
     border: 1px solid rgba(196, 148, 58, 0.1);
     border-radius: var(--radius-sm);
     transition: all var(--transition-fast);
@@ -177,10 +219,59 @@ a.chapter-item:hover {
     cursor: default;
 }
 
+/* ── CHAPTER STATUS ICONS ─────────────────── */
+.chapter-status-icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+
+.ch-icon {
+    display: none;          /* hidden until flag is set */
+    width: 18px;
+    height: 18px;
+    opacity: 0.9;
+}
+
+.ch-icon.visible {
+    display: block;
+}
+
+.ch-icon-bookmark { color: var(--gold-primary); }
+.ch-icon-complete  { color: var(--gold-light); }
+
+.chapter-status-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+}
+.chapter-status-label.label-bookmark { color: var(--gold-primary); opacity: 0.85; }
+.chapter-status-label.label-complete  { color: var(--gold-light);   opacity: 0.85; }
+
+/* ── DESKTOP SPACING — page-specific overrides ── */
+/*
+  The global .page-header has 4rem bottom padding and .content-section
+  has 4rem top/bottom padding — too generous for this two-section layout.
+  These overrides apply at all screen sizes above the 768px mobile breakpoint.
+*/
+.vol1-hero-title {
+    padding-top: var(--space-lg);
+}
+.content-section {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-lg);
+}
+
+/* ── CTA ───────────────────────────────────── */
 .vol1-cta {
     text-align: center;
     padding-top: var(--space-lg);
     border-top: 1px solid rgba(196, 148, 58, 0.2);
+    margin-top: var(--space-lg);
 }
 
 .vol1-cta-buttons {
@@ -192,6 +283,9 @@ a.chapter-item:hover {
 }
 
 @media (max-width: 768px) {
+    .movement-header-desc {
+        display: none;
+    }
     .chapter-item {
         flex-wrap: wrap;
         gap: 0.35rem;
@@ -204,12 +298,23 @@ a.chapter-item:hover {
         width: 100%;
         max-width: 280px;
     }
+    /* Tighten all vertical spacing on mobile */
+    .page-header {
+        padding-bottom: var(--space-xs);
+    }
+    .vol1-hero-title {
+        padding-top: var(--space-sm);
+    }
+    .content-section {
+        padding-top: var(--space-sm);
+        padding-bottom: var(--space-sm);
+    }
 }
 </style>
 
 <!-- Custom Hero Title -->
 <h1 class="vol1-hero-title">
-    <span class="vol1-series"><br /><br />Words of Plainness &mdash; Volume 1</span>
+    <span class="vol1-series">Words of Plainness &mdash; Volume 1</span>
     Christ-Centered Discipleship
 </h1>
 
@@ -227,351 +332,440 @@ a.chapter-item:hover {
     </div>
 </section>
 
-<!-- Four-Movement Overview -->
+<!-- Chapter Listing — Accordion -->
 <section class="content-section alt">
-    <div class="content-wrapper" style="max-width: 1000px;">
-        <h2 style="text-align: center; color: var(--gold-primary); margin-bottom: var(--space-xs);">The Reader Journey</h2>
-        <p style="text-align: center; opacity: 0.7; font-size: 0.95rem;">Four movements, 37 chapters, one transformative path</p>
-
-        <div class="movement-grid">
-            <a href="#movement-1" class="movement-card">
-                <div class="movement-card-label">Movement 1</div>
-                <h3>Finding Faith in Christ</h3>
-                <p>6 chapters</p>
-            </a>
-            <a href="#movement-2" class="movement-card">
-                <div class="movement-card-label">Movement 2</div>
-                <h3>Learn of Him</h3>
-                <p>5 chapters</p>
-            </a>
-            <a href="#movement-3" class="movement-card">
-                <div class="movement-card-label">Movement 3</div>
-                <h3>Discipleship Practices</h3>
-                <p>17 interactive chapters</p>
-            </a>
-            <a href="#movement-4" class="movement-card">
-                <div class="movement-card-label">Movement 4</div>
-                <h3>Need for Restoration</h3>
-                <p>7 chapters</p>
-            </a>
-        </div>
-
-        <p style="text-align: center; margin-top: var(--space-md); font-size: 0.9rem; opacity: 0.6;">
-            Plus: Hinge &mdash; Our Testimonies &bull; Conclusion &amp; Benediction
-        </p>
-    </div>
-</section>
-
-<!-- Chapter Listing -->
-<section class="content-section">
     <div class="content-wrapper" style="max-width: 900px;">
 
-        <!-- Movement 1 -->
-        <h2 id="movement-1" class="movement-heading">
-            <span class="movement-heading-sub">Movement 1</span>
-            Finding Faith in Christ
-        </h2>
-        <div class="chapter-list">
-            <a href="/chapters/01-introduction/" class="chapter-item">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 1</span>
-                    <span class="chapter-title">Introduction</span>
-                </div>
-                <span class="badge badge-available">Available</span>
-            </a>
-            <a href="/chapters/02-our-search/" class="chapter-item">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 2</span>
-                    <span class="chapter-title">Our Search</span>
-                </div>
-                <span class="badge badge-available">Available</span>
-            </a>
-            <a href="/chapters/03-academic-knowledge/" class="chapter-item">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 3</span>
-                    <span class="chapter-title">Academic Knowledge</span>
-                </div>
-                <span class="badge badge-available">Available</span>
-            </a>
-            <a href="/chapters/04-spiritual-knowledge/" class="chapter-item">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 4</span>
-                    <span class="chapter-title">Spiritual Knowledge</span>
-                </div>
-                <span class="badge badge-available">Available</span>
-            </a>
-            <a href="/chapters/05-sincere-prayer/" class="chapter-item">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 5</span>
-                    <span class="chapter-title">Sincere Prayer</span>
-                </div>
-                <span class="badge badge-available">Available</span>
-            </a>
-            <a href="/chapters/06-embrace-the-savior/" class="chapter-item">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 6</span>
-                    <span class="chapter-title">Embrace the Savior</span>
-                </div>
-                <span class="badge badge-available">Available</span>
-            </a>
-        </div>
+        <div class="movement-accordion" id="movementAccordion">
 
-        <!-- Movement 2 -->
-        <h2 id="movement-2" class="movement-heading">
-            <span class="movement-heading-sub">Movement 2</span>
-            Learn of Him
-        </h2>
-        <div class="chapter-list">
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 7</span>
-                    <span class="chapter-title">Prophecies, Birth, and Youth</span>
+            <!-- Movement 1 -->
+            <div class="movement-section is-open" id="acc-m1">
+                <button class="movement-header" aria-expanded="true" aria-controls="body-m1" data-acc-id="m1">
+                    <div class="movement-header-left">
+                        <span class="movement-header-label">Movement 1</span>
+                        <span class="movement-header-name">Finding Faith in Christ</span>
+                        <span class="movement-header-meta">6 chapters &bull; 6 available</span>
+                    </div>
+                    <div class="movement-header-right">
+                        <span class="movement-header-desc">Foundational epistemology and the experience of receiving Christ.</span>
+                        <svg class="movement-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </button>
+                <div class="movement-body" id="body-m1">
+                    <div class="chapter-list">
+                        <a href="/chapters/01-introduction/" class="chapter-item" data-chapter-id="chapter-01-introduction">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 1</span>
+                                <span class="chapter-title">Introduction</span>
+                            </div>
+                            <div class="chapter-status-icons">
+                                <svg class="ch-icon ch-icon-bookmark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                <span class="chapter-status-label label-bookmark ch-icon">Bookmarked</span>
+                                <svg class="ch-icon ch-icon-complete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                                <span class="chapter-status-label label-complete ch-icon">Completed</span>
+                            </div>
+                            <span class="badge badge-available">Available</span>
+                        </a>
+                        <a href="/chapters/02-our-search/" class="chapter-item" data-chapter-id="chapter-02-our-search">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 2</span>
+                                <span class="chapter-title">Our Search</span>
+                            </div>
+                            <div class="chapter-status-icons">
+                                <svg class="ch-icon ch-icon-bookmark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                <span class="chapter-status-label label-bookmark ch-icon">Bookmarked</span>
+                                <svg class="ch-icon ch-icon-complete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                                <span class="chapter-status-label label-complete ch-icon">Completed</span>
+                            </div>
+                            <span class="badge badge-available">Available</span>
+                        </a>
+                        <a href="/chapters/03-academic-knowledge/" class="chapter-item" data-chapter-id="chapter-03-academic-knowledge">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 3</span>
+                                <span class="chapter-title">Academic Knowledge</span>
+                            </div>
+                            <div class="chapter-status-icons">
+                                <svg class="ch-icon ch-icon-bookmark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                <span class="chapter-status-label label-bookmark ch-icon">Bookmarked</span>
+                                <svg class="ch-icon ch-icon-complete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                                <span class="chapter-status-label label-complete ch-icon">Completed</span>
+                            </div>
+                            <span class="badge badge-available">Available</span>
+                        </a>
+                        <a href="/chapters/04-spiritual-knowledge/" class="chapter-item" data-chapter-id="chapter-04-spiritual-knowledge">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 4</span>
+                                <span class="chapter-title">Spiritual Knowledge</span>
+                            </div>
+                            <div class="chapter-status-icons">
+                                <svg class="ch-icon ch-icon-bookmark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                <span class="chapter-status-label label-bookmark ch-icon">Bookmarked</span>
+                                <svg class="ch-icon ch-icon-complete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                                <span class="chapter-status-label label-complete ch-icon">Completed</span>
+                            </div>
+                            <span class="badge badge-available">Available</span>
+                        </a>
+                        <a href="/chapters/05-sincere-prayer/" class="chapter-item" data-chapter-id="chapter-05-sincere-prayer">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 5</span>
+                                <span class="chapter-title">Sincere Prayer</span>
+                            </div>
+                            <div class="chapter-status-icons">
+                                <svg class="ch-icon ch-icon-bookmark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                <span class="chapter-status-label label-bookmark ch-icon">Bookmarked</span>
+                                <svg class="ch-icon ch-icon-complete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                                <span class="chapter-status-label label-complete ch-icon">Completed</span>
+                            </div>
+                            <span class="badge badge-available">Available</span>
+                        </a>
+                        <a href="/chapters/06-embrace-the-savior/" class="chapter-item" data-chapter-id="chapter-06-embrace-the-savior">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 6</span>
+                                <span class="chapter-title">Embrace the Savior</span>
+                            </div>
+                            <div class="chapter-status-icons">
+                                <svg class="ch-icon ch-icon-bookmark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                <span class="chapter-status-label label-bookmark ch-icon">Bookmarked</span>
+                                <svg class="ch-icon ch-icon-complete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                                <span class="chapter-status-label label-complete ch-icon">Completed</span>
+                            </div>
+                            <span class="badge badge-available">Available</span>
+                        </a>
+                    </div>
                 </div>
-                <span class="badge badge-soon">Coming Soon</span>
             </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 8</span>
-                    <span class="chapter-title">Baptism, Temptations, and Mortal Ministry</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <a href="/chapters/09-yehoshua-the-man/" class="chapter-item">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 9</span>
-                    <span class="chapter-title">Christ&rsquo;s Personal Character</span>
-                </div>
-                <span class="badge badge-available">Available</span>
-            </a>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 10</span>
-                    <span class="chapter-title">Suffering, Trial, Crucifixion, and Resurrection</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 11</span>
-                    <span class="chapter-title">The Living Christ</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-        </div>
 
-        <!-- Movement 3 -->
-        <h2 id="movement-3" class="movement-heading">
-            <span class="movement-heading-sub">Movement 3</span>
-            Discipleship Practices
-        </h2>
-        <div class="chapter-list">
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 12</span>
-                    <span class="chapter-title">The Beatitudes &mdash; Christlike Character</span>
+            <!-- Movement 2 -->
+            <div class="movement-section" id="acc-m2">
+                <button class="movement-header" aria-expanded="false" aria-controls="body-m2" data-acc-id="m2">
+                    <div class="movement-header-left">
+                        <span class="movement-header-label">Movement 2</span>
+                        <span class="movement-header-name">Learn of Me</span>
+                        <span class="movement-header-meta">5 chapters &bull; 1 available</span>
+                    </div>
+                    <div class="movement-header-right">
+                        <span class="movement-header-desc">An intimate study of the personal character and atoning mission of Jesus Christ.</span>
+                        <svg class="movement-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </button>
+                <div class="movement-body" id="body-m2">
+                    <div class="chapter-list">
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 7</span>
+                                <span class="chapter-title">Prophecies, Birth, and Youth</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 8</span>
+                                <span class="chapter-title">Baptism, Temptations, and Mortal Ministry</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <a href="/chapters/09-yehoshua-the-man/" class="chapter-item" data-chapter-id="chapter-09-christs-personal-character">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 9</span>
+                                <span class="chapter-title">Christ&rsquo;s Personal Character</span>
+                            </div>
+                            <div class="chapter-status-icons">
+                                <svg class="ch-icon ch-icon-bookmark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                <span class="chapter-status-label label-bookmark ch-icon">Bookmarked</span>
+                                <svg class="ch-icon ch-icon-complete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                                <span class="chapter-status-label label-complete ch-icon">Completed</span>
+                            </div>
+                            <span class="badge badge-available">Available</span>
+                        </a>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 10</span>
+                                <span class="chapter-title">Suffering, Trial, Crucifixion, and Resurrection</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 11</span>
+                                <span class="chapter-title">The Living Christ</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="badge badge-soon">Coming Soon</span>
             </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 13</span>
-                    <span class="chapter-title">The Sermon on the Mount &mdash; Christ&rsquo;s Standard for Discipleship</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 14</span>
-                    <span class="chapter-title">Prayer as a Lifestyle</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 15</span>
-                    <span class="chapter-title">Repentance as a Lifestyle</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 16</span>
-                    <span class="chapter-title">Keeping the Sabbath</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 17</span>
-                    <span class="chapter-title">Christlike Virtues</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 18</span>
-                    <span class="chapter-title">Loving Our Neighbors</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 19</span>
-                    <span class="chapter-title">Building Godly Marriages</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 20</span>
-                    <span class="chapter-title">Raising Children in Righteousness</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 21</span>
-                    <span class="chapter-title">Developing Our Talents</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 22</span>
-                    <span class="chapter-title">Financial Stewardship</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 23</span>
-                    <span class="chapter-title">Tending the Garden</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 24</span>
-                    <span class="chapter-title">Witnessing of Christ</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 25</span>
-                    <span class="chapter-title">Faithful Service</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 26</span>
-                    <span class="chapter-title">Bearing Trials in Faith</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 27</span>
-                    <span class="chapter-title">Laying Up Treasures in Heaven</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 28</span>
-                    <span class="chapter-title">Enduring to the End</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-        </div>
 
-        <!-- Hinge -->
-        <h2 id="hinge" class="movement-heading">
-            <span class="movement-heading-sub">Hinge</span>
-            Our Testimonies
-        </h2>
-        <div class="chapter-list">
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 29</span>
-                    <span class="chapter-title">Our Testimonies</span>
+            <!-- Movement 3 -->
+            <div class="movement-section" id="acc-m3">
+                <button class="movement-header" aria-expanded="false" aria-controls="body-m3" data-acc-id="m3">
+                    <div class="movement-header-left">
+                        <span class="movement-header-label">Movement 3</span>
+                        <span class="movement-header-name">Discipleship Practices</span>
+                        <span class="movement-header-meta">17 interactive chapters &bull; coming soon</span>
+                    </div>
+                    <div class="movement-header-right">
+                        <span class="movement-header-desc">Practical discipleship organized from Christ&rsquo;s manifesto through character, relationships, and endurance.</span>
+                        <svg class="movement-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </button>
+                <div class="movement-body" id="body-m3">
+                    <div class="chapter-list">
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 12</span>
+                                <span class="chapter-title">The Beatitudes &mdash; Christlike Character</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 13</span>
+                                <span class="chapter-title">The Sermon on the Mount &mdash; Christ&rsquo;s Standard for Discipleship</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 14</span>
+                                <span class="chapter-title">Prayer as a Lifestyle</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 15</span>
+                                <span class="chapter-title">Repentance as a Lifestyle</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 16</span>
+                                <span class="chapter-title">Keeping the Sabbath</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 17</span>
+                                <span class="chapter-title">Christlike Virtues</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 18</span>
+                                <span class="chapter-title">Loving Our Neighbors</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 19</span>
+                                <span class="chapter-title">Building Godly Marriages</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 20</span>
+                                <span class="chapter-title">Raising Children in Righteousness</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 21</span>
+                                <span class="chapter-title">Developing Our Talents</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 22</span>
+                                <span class="chapter-title">Financial Stewardship</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 23</span>
+                                <span class="chapter-title">Tending the Garden</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 24</span>
+                                <span class="chapter-title">Witnessing of Christ</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 25</span>
+                                <span class="chapter-title">Faithful Service</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 26</span>
+                                <span class="chapter-title">Bearing Trials in Faith</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 27</span>
+                                <span class="chapter-title">Laying Up Treasures in Heaven</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 28</span>
+                                <span class="chapter-title">Enduring to the End</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="badge badge-soon">Coming Soon</span>
             </div>
-        </div>
 
-        <!-- Movement 4 -->
-        <h2 id="movement-4" class="movement-heading">
-            <span class="movement-heading-sub">Movement 4</span>
-            Need for Restoration
-        </h2>
-        <div class="chapter-list">
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 30</span>
-                    <span class="chapter-title">Prophets of God</span>
+            <!-- Hinge -->
+            <div class="movement-section" id="acc-hinge">
+                <button class="movement-header" aria-expanded="false" aria-controls="body-hinge" data-acc-id="hinge">
+                    <div class="movement-header-left">
+                        <span class="movement-header-label">Hinge</span>
+                        <span class="movement-header-name">Our Testimonies</span>
+                        <span class="movement-header-meta">1 chapter &bull; coming soon</span>
+                    </div>
+                    <div class="movement-header-right">
+                        <span class="movement-header-desc">A Christ-centered interfaith testimony before the Restoration chapters.</span>
+                        <svg class="movement-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </button>
+                <div class="movement-body" id="body-hinge">
+                    <div class="chapter-list">
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 29</span>
+                                <span class="chapter-title">Our Testimonies</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="badge badge-soon">Coming Soon</span>
             </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 31</span>
-                    <span class="chapter-title">Gospel Dispensations</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 32</span>
-                    <span class="chapter-title">The Restoration of Christ&rsquo;s Church</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 33</span>
-                    <span class="chapter-title">General Membership Covenants and Ordinances</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 34</span>
-                    <span class="chapter-title">Personal Temple Covenants and Ordinances</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 35</span>
-                    <span class="chapter-title">Vicarious Temple Service</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 36</span>
-                    <span class="chapter-title">Christ&rsquo;s Church Organization</span>
-                </div>
-                <span class="badge badge-soon">Coming Soon</span>
-            </div>
-        </div>
 
-        <!-- Conclusion -->
-        <h2 id="conclusion" class="movement-heading">
-            <span class="movement-heading-sub">Conclusion</span>
-            Conclusion &amp; Benediction
-        </h2>
-        <div class="chapter-list">
-            <div class="chapter-item disabled">
-                <div class="chapter-item-info">
-                    <span class="chapter-num">Ch 37</span>
-                    <span class="chapter-title">Conclusion &amp; Benediction</span>
+            <!-- Movement 4 -->
+            <div class="movement-section" id="acc-m4">
+                <button class="movement-header" aria-expanded="false" aria-controls="body-m4" data-acc-id="m4">
+                    <div class="movement-header-left">
+                        <span class="movement-header-label">Movement 4</span>
+                        <span class="movement-header-name">Restoration of Christ&rsquo;s Church</span>
+                        <span class="movement-header-meta">7 chapters &bull; coming soon</span>
+                    </div>
+                    <div class="movement-header-right">
+                        <span class="movement-header-desc">The identity, history, covenants, and institutions of The Church of Jesus Christ of Latter-day Saints.</span>
+                        <svg class="movement-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </button>
+                <div class="movement-body" id="body-m4">
+                    <div class="chapter-list">
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 30</span>
+                                <span class="chapter-title">Prophets of God</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 31</span>
+                                <span class="chapter-title">Gospel Dispensations</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 32</span>
+                                <span class="chapter-title">The Restoration of Christ&rsquo;s Church</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 33</span>
+                                <span class="chapter-title">General Membership Covenants and Ordinances</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 34</span>
+                                <span class="chapter-title">Personal Temple Covenants and Ordinances</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 35</span>
+                                <span class="chapter-title">Vicarious Temple Service</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 36</span>
+                                <span class="chapter-title">Christ&rsquo;s Church Organization</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="badge badge-soon">Coming Soon</span>
             </div>
-        </div>
+
+            <!-- Conclusion -->
+            <div class="movement-section" id="acc-conclusion">
+                <button class="movement-header" aria-expanded="false" aria-controls="body-conclusion" data-acc-id="conclusion">
+                    <div class="movement-header-left">
+                        <span class="movement-header-label">Conclusion</span>
+                        <span class="movement-header-name">Conclusion &amp; Benediction</span>
+                        <span class="movement-header-meta">1 chapter &bull; coming soon</span>
+                    </div>
+                    <div class="movement-header-right">
+                        <span class="movement-header-desc">A pastoral farewell and invitation to continue the journey.</span>
+                        <svg class="movement-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </button>
+                <div class="movement-body" id="body-conclusion">
+                    <div class="chapter-list">
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch 37</span>
+                                <span class="chapter-title">Conclusion &amp; Benediction</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /movement-accordion -->
 
         <!-- CTA -->
         <div class="vol1-cta">
@@ -588,3 +782,90 @@ a.chapter-item:hover {
 
     </div>
 </section>
+
+<script>
+(function () {
+    'use strict';
+
+    const STORAGE_KEY = 'wop_vol1_accordion';
+    const DEFAULT_OPEN = ['m1'];
+
+    // ── Read / write localStorage ───────────────────────────────
+    function loadState() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function saveState(openIds) {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(openIds));
+        } catch (e) { /* storage unavailable — silent */ }
+    }
+
+    // ── Apply open/closed state to a section ───────────────────
+    function applyState(section, isOpen) {
+        const btn  = section.querySelector('.movement-header');
+        const body = section.querySelector('.movement-body');
+        section.classList.toggle('is-open', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    // ── Toggle a single section ─────────────────────────────────
+    function toggle(section) {
+        const isNowOpen = !section.classList.contains('is-open');
+        applyState(section, isNowOpen);
+
+        // Persist new state
+        const openIds = Array.from(
+            document.querySelectorAll('.movement-section.is-open')
+        ).map(s => s.id.replace('acc-', ''));
+        saveState(openIds);
+    }
+
+    // ── Decorate chapter rows from localStorage flags ────────
+    function decorateChapterStatus() {
+        try {
+            document.querySelectorAll('.chapter-item[data-chapter-id]').forEach(function (row) {
+                const id = row.dataset.chapterId;
+                const bookmarked = localStorage.getItem('wop-bookmark-flag-' + id) === 'true';
+                const completed  = localStorage.getItem('wop-complete-' + id)   === 'true';
+                const bmIcon = row.querySelector('.ch-icon-bookmark');
+                const cpIcon = row.querySelector('.ch-icon-complete');
+                if (bmIcon) bmIcon.classList.toggle('visible', bookmarked);
+                if (cpIcon) cpIcon.classList.toggle('visible', completed);
+            });
+        } catch (e) { /* localStorage unavailable */ }
+    }
+
+    // ── Initialise ──────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+        const sections = document.querySelectorAll('.movement-section');
+        const saved    = loadState();
+        const openIds  = saved !== null ? saved : DEFAULT_OPEN;
+
+        sections.forEach(function (section) {
+            const id     = section.id.replace('acc-', '');
+            const isOpen = openIds.includes(id);
+            applyState(section, isOpen);
+
+            section.querySelector('.movement-header').addEventListener('click', function () {
+                toggle(section);
+            });
+        });
+
+        // Decorate chapter rows with bookmark / complete icons
+        decorateChapterStatus();
+
+        // Keep in sync if another tab writes to localStorage
+        window.addEventListener('storage', function (e) {
+            if (e.key && (e.key.startsWith('wop-bookmark-flag-') || e.key.startsWith('wop-complete-'))) {
+                decorateChapterStatus();
+            }
+        });
+    });
+}());
+</script>
