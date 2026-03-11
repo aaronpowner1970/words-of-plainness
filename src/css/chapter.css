@@ -2204,6 +2204,42 @@ h2[id], h3[id], [id^="section-"] {
     border: 1px solid rgba(196, 148, 58, 0.2);
 }
 
+.bottom-toolbar .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.bottom-toolbar .toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: none;
+    color: var(--cream);
+    cursor: pointer;
+    padding: 0.4rem 0.65rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.bottom-toolbar .toolbar-btn:hover {
+    background: rgba(196, 148, 58, 0.2);
+    color: var(--gold-primary);
+}
+
+.bottom-toolbar .toolbar-btn svg {
+    flex-shrink: 0;
+}
+
+.bottom-toolbar .toolbar-btn span {
+    font-size: 0.85rem;
+    letter-spacing: 0.01em;
+}
+
 /* Back to Top (template class) */
 .back-to-top-btn {
     position: fixed;
@@ -3462,4 +3498,23 @@ h2[id], h3[id], [id^="section-"] {
     .rjw-body {
         padding: 18px;
     }
+}
+
+/* ── TOOLBAR BUTTON ACTIVE STATES (Bookmark + Complete) ────── */
+/* Bookmark: gold fill when set */
+.toolbar-btn#bookmarkBtn.active svg {
+    fill: var(--gold-primary);
+    stroke: var(--gold-primary);
+}
+.toolbar-btn#bookmarkBtn.active {
+    color: var(--gold-primary);
+}
+
+/* Complete: gold-light fill when set */
+.toolbar-btn#completeBtn.active svg {
+    stroke: var(--gold-light);
+    fill: rgba(212, 168, 74, 0.15);
+}
+.toolbar-btn#completeBtn.active {
+    color: var(--gold-light);
 }
