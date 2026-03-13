@@ -19,8 +19,8 @@ prevChapter:
   url: "/chapters/07-prophecies-birth-youth/"
   title: "Chapter 7: Prophecies, Birth, and Youth"
 nextChapter:
-  url: "/chapters/09-christs-personal-character/"
-  title: "Chapter 9: Christ's Personal Character"
+  url: "/chapters/09-yehoshua-the-man/"
+  title: "Chapter 9: Yehoshua the Man"
 ---
 
 <div class="coming-soon-notice" style="text-align: center; padding: 3rem 1.5rem; opacity: 0.85;">

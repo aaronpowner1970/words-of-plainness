@@ -16,8 +16,8 @@ audio:
   narration: ""
 
 prevChapter:
-  url: "/chapters/09-christs-personal-character/"
-  title: "Chapter 9: Christ's Personal Character"
+  url: "/chapters/09-yehoshua-the-man/"
+  title: "Chapter 9: Yehoshua the Man"
 nextChapter:
   url: "/chapters/11-the-living-christ/"
   title: "Chapter 11: The Living Christ"
