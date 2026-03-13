@@ -598,7 +598,7 @@ p {
     padding: 0.75rem 1.5rem;
     color: var(--cream);
     background: none;
-    border: 1px solid rgba(196, 148, 58, 0.3);
+    border: 1px solid rgba(196, 148, 60, 0.3);
     border-radius: 6px;
     font-size: 0.95rem;
     cursor: pointer;
@@ -638,6 +638,22 @@ p {
     opacity: 0.6;
     margin-top: var(--space-sm);
     text-align: center;
+}
+
+/* Safety & Support link in mobile menu footer — Protocol §4.1 visibility requirement */
+.mobile-menu-safety-link {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-size: 0.8rem;
+    color: var(--cream);
+    opacity: 0.55;
+    letter-spacing: 0.04em;
+    transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+
+.mobile-menu-safety-link:hover {
+    color: var(--gold-primary);
+    opacity: 1;
 }
 
 /* --- Hero Section --- */
