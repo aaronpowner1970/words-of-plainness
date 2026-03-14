@@ -45,76 +45,51 @@ nextChapter:
 discordChannelId: "1463835662238224578"
 
 lyrics: |
-  <p class="section"><strong>[Opening Witness]</strong></p>
-  <p class="verse">I was a traveler, lost among the hills,<br>
-  Until the Shepherd's voice found me still.<br>
-  Before I cast a single seed upon this ground,<br>
-  I lift my heart to Him in whom my soul is found.<br>
-  I stand a witness of the risen, living Christ—<br>
-  Whose mercy held me fast, whose love has paid my price.</p>
+    <p class="section"><strong>[Opening Witness]</strong></p>
+    <p class="verse">I was a traveler, lost among the hills,<br>
+    Until the Shepherd's voice found me still.<br>
+    I stand a witness of the risen, living Christ—<br>
+    Whose mercy held me fast, whose love has paid my price.</p>
 
-  <p class="section"><strong>[Verse 1]</strong></p>
-  <p class="verse">We are all of us so human,<br>
-  Travelers wrapped in dust and skin,<br>
-  Searching for a clearing where the light comes pouring in.<br>
-  Our wandering feet will carry us down paths that twist and turn,<br>
-  Through the curious and the frightening—so much to unlearn.<br>
-  Our untamed hearts keep pulling toward the wild and the unknown,<br>
-  Walking through the shadow and the beauty, never quite alone.</p>
+    <p class="section"><strong>[Verse 1]</strong></p>
+    <p class="verse">We are all of us so human,<br>
+    Travelers wrapped in dust and skin,<br>
+    Searching for a clearing where the light comes pouring in.<br>
+    Our untamed hearts keep pulling toward the wild and the unknown,<br>
+    We wrestle through the bitter and the sweet to find our way back home,<br>
+    Walking through the shadow and the beauty, never quite alone.</p>
 
-  <p class="section"><strong>[Chorus]</strong></p>
-  <p class="chorus">For we are hunters! We are gatherers of light,<br>
-  Reaching for the sacred in the middle of the night.<br>
-  Not with the wisdom of the world or the scholars' heavy pen,<br>
-  But in the language of a father—where the plainness all begins.<br>
-  Speaking truth to searching souls, to harmonize and heal—<br>
-  In the words of plainness, He makes the broken whole,<br>
-  In the words of plainness, He's calling to your soul.</p>
+    <p class="section"><strong>[Chorus]</strong></p>
+    <p class="chorus">For we are hunters! We are gatherers of light,<br>
+    Reaching for the sacred in the middle of the night.<br>
+    Not with the wisdom of the world or the scholars' heavy pen,<br>
+    But in the language of a father—where the plainness all begins.<br>
+    Speaking truth to searching souls, to harmonize and heal—<br>
+    In the words of plainness, He makes the broken whole,<br>
+    In the words of plainness, He's calling to your soul.</p>
 
-  <p class="section"><strong>[Verse 2]</strong></p>
-  <p class="verse">Our restless voices speak so much, yet say so little truth;<br>
-  We trade away the wonder that we carried in our youth.<br>
-  Our weary ears grow tired of the world's discordant sound,<br>
-  But in the quiet of the morning, mercy can be found.<br>
-  We wrestle for the meaning through the bitter and the sweet,<br>
-  And lay our tangled stories at the Shepherd's wounded feet.</p>
+    <p class="section"><strong>[Bridge]</strong></p>
+    <p class="bridge">These are letters for the unborn, a heritage of grace,<br>
+    For the ones who'll walk this wide and weary place.<br>
+    Because He first came looking, we will never walk alone—</p>
 
-  <p class="section"><strong>[Bridge]</strong></p>
-  <p class="bridge">These are letters for the unborn,<br>
-  A heritage of grace.<br>
-  Bread crumbs for the ones who'll walk<br>
-  This wide and weary place.<br>
-  Sometimes, just sometimes,<br>
-  Humanity finds its way back home—<br>
-  Because He first came looking,<br>
-  So we'd never walk alone.</p>
+    <p class="section"><strong>[Selah]</strong></p>
+    <p class="verse"><em>My soul delights in plainness—<br>
+    Not the gilded words of men,<br>
+    But the simple truth that finds us<br>
+    And brings us home again.</em></p>
 
-  <p class="section"><strong>[Selah]</strong></p>
-  <p class="verse"><em>My soul delights in plainness—<br>
-  Not the gilded words of men,<br>
-  But the simple truth that finds us<br>
-  And brings us home again.</em></p>
+    <p class="section"><strong>[Final Chorus]</strong></p>
+    <p class="chorus">For we are hunters! We are gatherers of light,<br>
+    Reaching for the sacred in the middle of the night—<br>
+    In the words of plainness, He's calling to your soul.</p>
 
-  <p class="section"><strong>[Final Chorus]</strong></p>
-  <p class="chorus">For we are hunters! We are gatherers of light,<br>
-  Reaching for the sacred in the middle of the night.<br>
-  Not with the wisdom of the world or the scholars' heavy pen,<br>
-  But in the language of a father—where the plainness all begins.<br>
-  Speaking truth to searching souls, to harmonize and heal—<br>
-  In the words of plainness, He makes the broken whole,<br>
-  In the words of plainness, He's calling to your soul.</p>
-
-  <p class="section"><strong>[Closing Witness]</strong></p>
-  <p class="verse"><em>These words of mine are plain,<br>
-  But oh, my heart is full.<br>
-  I am a debtor to His grace,<br>
-  A receiver of His mercy.<br>
-  Jesus is the Christ—<br>
-  The Light that finds us in the dark,<br>
-  The Voice that calls us home.<br>
-  In Him I find my peace.<br>
-  In Him I find my rest.<br>
-  In His holy name, Amen.</em></p>
+    <p class="section"><strong>[Closing Witness]</strong></p>
+    <p class="verse"><em>These words of mine are plain, but oh, my heart is full.<br>
+    I am a debtor to His grace, a receiver of His mercy.<br>
+    Jesus is the Christ—the Light that finds us in the dark.<br>
+    In Him I find my rest.<br>
+    In His holy name, amen.</em></p>
 
 podcastTranscript: |
   <p><strong>Host:</strong> Welcome to a Words of Plainness podcast. I'm your host, David. Today I'm sitting down with Brother Aaron Powner to discuss the opening chapter of his book entitled <em>Words of Plainness: A Latter-day Witness of Christ</em>. Aaron, this introduction chapter struck me as deeply personal. You and your brother Jim don't seem to be positioning yourselves as theologians or scholars. You call yourselves "hunters and gatherers of knowledge." Why that distinction?</p>
