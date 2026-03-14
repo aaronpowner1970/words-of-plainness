@@ -155,11 +155,18 @@ const AudioSync = {
         }
     },
 
-    // Return the paragraph index whose startTime is <= currentTime
+    // Return the paragraph index whose startTime is <= currentTime.
+    // TIMING OFFSET: ElevenLabs word timestamps are measured from the start of
+    // each chunk. After loudnorm normalization the assembled MP3 has a small
+    // pre-roll (~0.025s from the mp3 header) and inter-chunk joins. The net
+    // effect is that highlighting fires roughly one sentence late. Subtracting
+    // a 0.4s lookahead compensates without overcorrecting.
     getParagraphAtTime(time) {
+        const LOOKAHEAD = 0.4;
+        const adjustedTime = time + LOOKAHEAD;
         let last = -1;
         for (const [paraIdx, startTime] of this.paragraphTimes) {
-            if (startTime <= time) {
+            if (startTime <= adjustedTime) {
                 last = paraIdx;
             } else {
                 break;
@@ -168,8 +175,11 @@ const AudioSync = {
         return last;
     },
 
-    // Return the cue index if the current time falls within a cue window, else null
-    // Cue window = [cueTime, cueTime + 15s] — long enough to cover the cue line
+    // Return the cue index if currentTime has reached or passed a cue start time.
+    // Uses a simple threshold — once currentTime >= cueTime the trigger fires.
+    // The checkPauseTrigger fired-guard prevents it from re-firing.
+    // Window upper bound of cueTime + 15s is kept as a safety net to avoid
+    // late-arriving timeupdate events triggering a cue that was already handled.
     getCueAtTime(time) {
         for (const [cueIdx, cueTime] of Object.entries(this.cueTimes)) {
             if (time >= cueTime && time < cueTime + 15) {
@@ -210,11 +220,17 @@ const AudioSync = {
         if (paragraphIndex < 0) return;
 
         const el = document.querySelector(`[data-paragraph="${paragraphIndex}"]`);
-        if (el) {
-            el.classList.add('highlighted');
-            if (this.autoScrollEnabled) {
-                this.scrollToElement(el);
-            }
+        if (!el) return;
+
+        // Skip highlighting if the element is a heading span (paraspan inside h2).
+        // Headings are structural — the narrator does not read them, so the
+        // highlight should not sit on them while prose beneath them is playing.
+        // A paraspan inside an h2 identifies itself via its parent element.
+        if (el.tagName === 'SPAN' && el.closest('h2, h3')) return;
+
+        el.classList.add('highlighted');
+        if (this.autoScrollEnabled) {
+            this.scrollToElement(el);
         }
     },
 
