@@ -153,6 +153,7 @@ pauses:
 
 {% sentence 80 %}My mother used to remind me that one does not announce one's own humility.{% endsentence %} {% sentence 81 %}Throughout my life, I have never felt safer than when I am with genuinely humble people.{% endsentence %} {% sentence 82 %}Sensing no competition, no threat, it allows me to let down my guard.{% endsentence %} {% sentence 83 %}Humility in others allows us to see deeper than the facade of ego to real depth of character.{% endsentence %} {% sentence 84 %}This is what it must have felt like to be near Yehoshua.{% endsentence %} {% sentence 85 %}To some it may have been frightening or suspicious; to disciples it feels like coming home.{% endsentence %}
 
+<span class="sentence narration-only" data-index="385" data-pause-id="pause-humility"></span>
 {% pausePoint "pause-humility", "reflect" %}
 
 <h2 id="mastery-of-obedience">{% sentence 86 %}Mastery of Obedience: Grace Received{% endsentence %}</h2>
@@ -189,6 +190,7 @@ pauses:
 
 {% sentence 149 %}You do not lose yourself in Him.{% endsentence %} {% sentence 150 %}You find yourself—lit up, set free, and finally moving in the direction you were built to travel.{% endsentence %}
 
+<span class="sentence narration-only" data-index="386" data-pause-id="pause-obedience"></span>
 {% pausePoint "pause-obedience", "reflect" %}
 
 <h2 id="mastery-of-compassion">{% sentence 151 %}Mastery of Compassion: Grace Encountering{% endsentence %}</h2>
@@ -221,6 +223,7 @@ pauses:
 
 {% sentence 195 %}When someone is in crisis beyond their own capacity to survive, sympathy is insufficient.{% endsentence %} {% sentence 196 %}The leper didn't need someone to quote Levitical laws.{% endsentence %} {% sentence 197 %}He needed someone to touch him with grace.{% endsentence %} {% sentence 198 %}There is a wide difference between knowing about the suffering of others and entering into it to support them.{% endsentence %} {% sentence 199 %}Grace at its most Christlike is compassion combined with the wisdom to know when and how to get involved.{% endsentence %}
 
+<span class="sentence narration-only" data-index="387" data-pause-id="pause-compassion"></span>
 {% pausePoint "pause-compassion", "reflect" %}
 
 <h2 id="mastery-of-teaching">{% sentence 200 %}Mastery of Teaching: Grace Communicated{% endsentence %}</h2>
@@ -343,4 +346,5 @@ pauses:
 
 {% sentence 384 %}In the name of Jesus Christ, Amen.{% endsentence %}
 
+<span class="sentence narration-only" data-index="388" data-pause-id="pause-closing"></span>
 {% pausePoint "pause-closing", "reflect" %}

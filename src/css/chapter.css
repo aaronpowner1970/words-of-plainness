@@ -3500,6 +3500,12 @@ h2[id], h3[id], [id^="section-"] {
     }
 }
 
+/* ── NARRATION-ONLY CUE SPANS ──────────────────────────────── */
+/* Pause-cue sentences read aloud but never displayed to the reader. */
+.narration-only {
+    display: none !important;
+}
+
 /* ── TOOLBAR BUTTON ACTIVE STATES (Bookmark + Complete) ────── */
 /* Bookmark: gold fill when set */
 .toolbar-btn#bookmarkBtn.active svg {

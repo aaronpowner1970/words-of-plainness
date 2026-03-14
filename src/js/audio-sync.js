@@ -12,6 +12,8 @@ const AudioSync = {
     sentences: [],
     currentSentence: -1,
     autoScrollEnabled: true,
+    pauseTriggers: {},        // { sentenceIndex: pausePointId }
+    pauseFired: {},           // { sentenceIndex: true } — prevent re-firing
     
     /**
      * Initialize audio sync
@@ -48,12 +50,32 @@ const AudioSync = {
             return;
         }
         
+        this.buildPauseTriggers();
         this.setupEventListeners();
         this.makeClickable();
         
         console.log(`AudioSync initialized with ${this.sentences.length} sentences`);
     },
     
+    // Build pause trigger map from narration-only cue spans in the DOM.
+    // Each cue span carries data-pause-id matching a frontmatter pause ID.
+    // Called once during init, after timestamps are loaded.
+    buildPauseTriggers() {
+        this.pauseTriggers = {};
+        this.pauseFired = {};
+        document.querySelectorAll('.narration-only[data-pause-id]').forEach(el => {
+            const idx = parseInt(el.dataset.index);
+            const pauseId = el.dataset.pauseId;
+            if (!isNaN(idx) && pauseId) {
+                this.pauseTriggers[idx] = pauseId;
+            }
+        });
+        const count = Object.keys(this.pauseTriggers).length;
+        if (count > 0) {
+            console.log(`AudioSync: ${count} pause trigger(s) registered`);
+        }
+    },
+
     setupEventListeners() {
         this.audioPlayer.addEventListener('timeupdate', () => this.onTimeUpdate());
         this.audioPlayer.addEventListener('ended', () => this.clearHighlight());
@@ -77,7 +99,38 @@ const AudioSync = {
         if (sentenceIndex !== this.currentSentence) {
             this.highlightSentence(sentenceIndex);
             this.currentSentence = sentenceIndex;
+            this.checkPauseTrigger(sentenceIndex);
         }
+    },
+
+    // If the newly-reached sentence is a pause cue, stop playback and
+    // open the RJW panel. The fired guard prevents re-triggering if the
+    // listener seeks back into the same sentence.
+    checkPauseTrigger(sentenceIndex) {
+        const pauseId = this.pauseTriggers[sentenceIndex];
+        if (!pauseId) return;
+        if (this.pauseFired[sentenceIndex]) return;
+        this.pauseFired[sentenceIndex] = true;
+
+        // Small delay so the cue line begins playing before the pause fires.
+        // 100 ms is imperceptible to the listener but ensures the audio
+        // buffer has advanced past the sentence boundary.
+        setTimeout(() => {
+            if (window.ChapterManager) {
+                window.ChapterManager.pause();
+            } else {
+                this.audioPlayer.pause();
+            }
+            if (window.RJW) {
+                window.RJW.openModal(pauseId, 'reflect');
+            }
+        }, 100);
+    },
+
+    // Reset fired guards when the user manually seeks — allows re-triggering
+    // if they replay a section.
+    resetPauseFired() {
+        this.pauseFired = {};
     },
     
     getSentenceAtTime(time) {
@@ -134,6 +187,9 @@ const AudioSync = {
         const time = (typeof ts === 'object') ? ts.start : ts;
 
         if (time !== undefined && this.audioPlayer) {
+            // Reset pause-fired guards on manual seek so triggers re-arm.
+            this.resetPauseFired();
+
             // Show the audio player if it's hidden
             const playerEl = document.getElementById('audioPlayer');
             if (playerEl && !playerEl.classList.contains('visible')) {
