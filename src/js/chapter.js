@@ -190,41 +190,16 @@ const ChapterManager = {
     },
     
     // Font Controls
+    // Delegates entirely to WopFontSize (font-size.js) which is loaded
+    // globally in base.njk and applies font size to <html> via rem.
+    // The bottom-toolbar A- / A / A+ buttons on chapter pages are wired
+    // by WopFontSize.init() via their IDs (wopFontDecrease / wopFontReset
+    // / wopFontIncrease). The legacy #fontDecrease/#fontReset/#fontIncrease
+    // IDs in bottom-toolbar.njk are kept as aliases and wired here.
     initFontControls() {
-        const content = document.querySelector('.chapter-content');
-        const decreaseBtn = document.getElementById('fontDecrease');
-        const resetBtn = document.getElementById('fontReset');
-        const increaseBtn = document.getElementById('fontIncrease');
-        
-        let fontSize = parseFloat(localStorage.getItem('wop-font-size')) || 1.125;
-        this.applyFontSize(fontSize);
-        
-        decreaseBtn?.addEventListener('click', () => this.changeFontSize(-0.125));
-        resetBtn?.addEventListener('click', () => this.setFontSize(1.125));
-        increaseBtn?.addEventListener('click', () => this.changeFontSize(0.125));
-    },
-    
-    changeFontSize(delta) {
-        const content = document.querySelector('.chapter-content');
-        if (!content) return;
-        
-        let current = parseFloat(content.style.fontSize) || 1.125;
-        this.setFontSize(Math.max(0.875, Math.min(1.5, current + delta)));
-    },
-    
-    setFontSize(size) {
-        const content = document.querySelector('.chapter-content');
-        if (!content) return;
-        
-        content.style.fontSize = size + 'rem';
-        localStorage.setItem('wop-font-size', size);
-    },
-    
-    applyFontSize(size) {
-        const content = document.querySelector('.chapter-content');
-        if (content) {
-            content.style.fontSize = size + 'rem';
-        }
+        document.getElementById('fontDecrease')?.addEventListener('click', () => WopFontSize.decrease());
+        document.getElementById('fontReset')   ?.addEventListener('click', () => WopFontSize.reset());
+        document.getElementById('fontIncrease')?.addEventListener('click', () => WopFontSize.increase());
     },
     
     // Bookmarking

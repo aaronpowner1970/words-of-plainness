@@ -2309,3 +2309,68 @@ select:focus-visible {
   font-style: italic;
   margin: 0;
 }
+
+/* ── GLOBAL FONT SIZE WIDGET ───────────────────────────────────
+   Fixed bottom-left on every page. Unobtrusive until hovered.
+   On chapter pages, the bottom-toolbar A-/A/A+ buttons delegate
+   to the same WopFontSize module — this widget is additive, not
+   a replacement.
+──────────────────────────────────────────────────────────────── */
+.wop-font-widget {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 1.25rem;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: rgba(26, 21, 16, 0.82);
+    border: 1px solid rgba(196, 148, 58, 0.25);
+    border-radius: 6px;
+    padding: 4px 6px;
+    backdrop-filter: blur(6px);
+    opacity: 0.45;
+    transition: opacity 0.25s ease, border-color 0.25s ease;
+}
+.wop-font-widget:hover,
+.wop-font-widget:focus-within {
+    opacity: 1;
+    border-color: rgba(196, 148, 58, 0.55);
+}
+.wop-font-btn {
+    font-family: var(--font-serif);
+    font-size: 0.78rem;
+    color: var(--cream-dark);
+    background: transparent;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.18s ease, background 0.18s ease;
+    letter-spacing: 0.01em;
+}
+.wop-font-btn sup {
+    font-size: 0.6em;
+    vertical-align: super;
+}
+.wop-font-btn:hover {
+    color: var(--gold-primary);
+    background: rgba(196, 148, 58, 0.1);
+}
+.wop-font-btn.reset {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--cream);
+    border-left: 1px solid rgba(196, 148, 58, 0.2);
+    border-right: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: 0;
+    padding: 3px 8px;
+}
+/* Hide the global widget on chapter pages — the bottom-toolbar
+   already shows A-/A/A+ controls there, avoiding duplication.
+   :has() targets any page that contains a .bottom-toolbar,
+   requiring no bodyClass frontmatter on individual chapters. */
+body:has(.bottom-toolbar) .wop-font-widget {
+    display: none;
+}
