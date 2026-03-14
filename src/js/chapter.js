@@ -55,8 +55,14 @@ const ChapterManager = {
     
     // Audio Sync (sentence highlighting + click-to-seek)
     initAudioSync() {
-        if (typeof AudioSync !== 'undefined' && this.config.timestamps) {
-            const audio = document.getElementById('chapterAudio');
+        if (typeof AudioSync === 'undefined') return;
+        const audio = document.getElementById('chapterAudio');
+
+        if (this.config.sections && this.config.sections.length > 0) {
+            // Section-based architecture (Ch 9+): each section is its own audio file
+            AudioSync.initSections(this.config.sections, this.config.allTimestamps || {}, audio);
+        } else if (this.config.timestamps) {
+            // Legacy single-file architecture (Chs 1-8)
             AudioSync.init(this.config.timestamps, audio);
         }
     },
@@ -976,6 +982,13 @@ const RJW = (function() {
         document.getElementById('rjwOverlay').classList.remove('open');
         document.getElementById('rjwPanel').classList.remove('open');
         document.body.style.overflow = '';
+
+        // Advance to next section if using section-based audio architecture
+        if (window.AudioSync && typeof window.AudioSync.advanceSection === 'function') {
+            if (window.AudioSync.state === 'RJW_OPEN') {
+                window.AudioSync.advanceSection();
+            }
+        }
     }
 
     /* ── SWITCH TAB ────────────────────────────────────── */

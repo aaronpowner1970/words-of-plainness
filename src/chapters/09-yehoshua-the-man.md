@@ -13,12 +13,32 @@ scripture:
 readingTime: 22
 
 audio:
-  narration: NR_09_01_Yehoshua_the_Man.mp3
   overview: PO_09_01_Yehoshua_the_Man.mp3
   testimony:
     file: "09_01_Established_in_Him_Sacred_Americana.mp3"
     title: "Established in Him"
     description: "A sacred folk hymn testimony from beholding the heart of Christ."
+  sections:
+    - id: "pause-humility"
+      prose: NR_09_S01_Invocation_Humility.mp3
+      cue: NR_09_CUE_01_Humility.mp3
+      paragraphs: [1, 23]
+      timestamps: chapter-09-s01.json
+    - id: "pause-obedience"
+      prose: NR_09_S02_Obedience.mp3
+      cue: NR_09_CUE_02_Obedience.mp3
+      paragraphs: [25, 40]
+      timestamps: chapter-09-s02.json
+    - id: "pause-compassion"
+      prose: NR_09_S03_Compassion.mp3
+      cue: NR_09_CUE_03_Compassion.mp3
+      paragraphs: [42, 55]
+      timestamps: chapter-09-s03.json
+    - id: "pause-closing"
+      prose: NR_09_S04_Teaching_Benediction.mp3
+      cue: NR_09_CUE_04_Closing.mp3
+      paragraphs: [57, 115]
+      timestamps: chapter-09-s04.json
 
 pdf: WoP_Ch09_Yehoshua_the_Man.pdf
 infographic: IG_09_01_Yehoshua_the_Man.png

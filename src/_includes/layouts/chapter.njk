@@ -198,9 +198,9 @@
 <script src="/js/reflections.js"></script>
 <script>
     // Chapter-specific configuration
-    // Timestamps are loaded from src/_data/timestamps/{{ chapterId }}.json
+    // Legacy single-file timestamps
     {% set chapterTimestamps = timestamps[chapterId] or {} %}
-    
+
     const CHAPTER_CONFIG = {
         id: '{{ chapterId }}',
         number: {{ chapter }},
@@ -213,7 +213,9 @@
         slidesPath: '/assets/slides/{{ slides.path }}',
         totalSlides: {{ slides.count or 10 }},
         discordChannelId: '{{ discordChannelId }}',
-        timestamps: {{ chapterTimestamps | json | safe }}
+        timestamps: {{ chapterTimestamps | json | safe }},
+        sections: {{ audio.sections | dump | safe if audio.sections else 'null' }},
+        allTimestamps: {{ timestamps | json | safe }}
     };
     
     // Initialize chapter functionality

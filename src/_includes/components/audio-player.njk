@@ -8,7 +8,11 @@
 <!-- Audio Player -->
 <div class="audio-player" id="audioPlayer">
     <audio id="chapterAudio" preload="metadata">
+        {% if audio.narration %}
         <source src="https://media.wordsofplainness.org/web/{{ audio.narration }}" type="audio/mpeg">
+        {% elif audio.sections and audio.sections.length > 0 %}
+        <source src="https://media.wordsofplainness.org/web/{{ audio.sections[0].prose }}" type="audio/mpeg">
+        {% endif %}
     </audio>
     
     <div class="audio-player-content">
