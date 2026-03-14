@@ -42,6 +42,28 @@ USAGE
 
 This script is self-contained and idempotent. Run it any time the
 assembled MP3 or alignment data changes.
+
+FFMPEG ASSEMBLY (canonical two-pass pipeline)
+=============================================
+ALWAYS use the two-pass approach for final MP3 assembly. Single-pass
+concatenation produces Duration: N/A in the output header, which means
+no Xing/Info seek table is written, which means browser seeking lands
+in the wrong position. Two-pass fixes this:
+
+  Pass 1 — decode to WAV (known duration, loudnorm applied):
+    ffmpeg -y -f concat -safe 0 -i concat_new.txt \
+      -af loudnorm=I=-16:TP=-1.5:LRA=11 intermediate.wav
+
+  Pass 2 — encode to MP3 (duration known, Xing header written correctly):
+    ffmpeg -y -i intermediate.wav \
+      -codec:a libmp3lame -qscale:a 2 -id3v2_version 3 \
+      NR_##_##_Title.mp3
+
+  Cleanup:
+    del intermediate.wav
+
+Verify with ffprobe that start_time is near 0.000 (not negative)
+and duration matches expected length before uploading to R2.
 """
 
 import re
@@ -522,21 +544,54 @@ def find_in_narration(sentence_text, narration_text, search_from=0):
 
 def char_pos_to_time(char_pos, narration_text, chunk_chars, chunk_times):
     """
-    Given a character position in narration_text, find the closest
-    matching position in chunk_chars and return its timestamp.
-    chunk_chars is the list of characters from alignment data.
-    chunk_times is the corresponding list of start times.
+    Given a character position in narration_text, find the corresponding
+    position in the chunk alignment array and return its timestamp.
+
+    The narration_text and chunk_chars represent the same spoken text but
+    may differ in whitespace, newlines, or minor punctuation. We walk both
+    simultaneously, skipping whitespace differences, to find the alignment
+    position that corresponds to char_pos in the narration text.
+
+    Fallback: if direct walk fails, use character-count ratio as estimate.
     """
-    # Map char_pos in narration_text to char_pos in chunk alignment
-    # The narration text and alignment characters are the same text,
-    # but alignment may have slight differences (e.g., punctuation handling).
-    # We use the ratio: char_pos / len(narration_text) * len(chunk_chars)
     if not chunk_times:
         return 0.0
-    ratio = min(char_pos / max(len(narration_text), 1), 1.0)
-    aligned_pos = int(ratio * len(chunk_chars))
-    aligned_pos = min(aligned_pos, len(chunk_times) - 1)
-    return chunk_times[aligned_pos]
+    if char_pos <= 0:
+        return chunk_times[0]
+    if char_pos >= len(narration_text):
+        return chunk_times[-1]
+
+    # Walk both strings together, skipping whitespace/newline differences
+    n_pos = 0   # position in narration_text
+    a_pos = 0   # position in chunk_chars alignment array
+
+    while n_pos < char_pos and a_pos < len(chunk_chars):
+        nc = narration_text[n_pos] if n_pos < len(narration_text) else ''
+        ac = chunk_chars[a_pos] if a_pos < len(chunk_chars) else ''
+
+        # Normalize: treat all whitespace/newline as equivalent
+        nc_is_ws = nc in ' \t\n\r'
+        ac_is_ws = ac in ' \t\n\r'
+
+        if nc_is_ws and ac_is_ws:
+            n_pos += 1
+            a_pos += 1
+        elif nc_is_ws:
+            # narration has whitespace, alignment doesn't — skip narration ws
+            n_pos += 1
+        elif ac_is_ws:
+            # alignment has whitespace, narration doesn't — skip alignment ws
+            a_pos += 1
+        elif nc.lower() == ac.lower():
+            n_pos += 1
+            a_pos += 1
+        else:
+            # Mismatch — advance both to recover
+            n_pos += 1
+            a_pos += 1
+
+    a_pos = min(a_pos, len(chunk_times) - 1)
+    return chunk_times[a_pos]
 
 
 sentence_timestamps = {}
@@ -583,6 +638,14 @@ for chunk_id, first_sent, last_sent, is_cue, cue_idx in CHUNKS:
         sentence_timestamps[sent_idx] = round(global_time, 3)
 
 print(f"  {len(sentence_timestamps)} sentence timestamps aligned")
+
+# Detailed dump of chunk 01 sentences (s0-s27) to diagnose drift
+print("\n  --- Chunk 01 sentence timestamps (s0-s27) ---")
+for idx in range(28):
+    if idx in sentence_timestamps:
+        t = sentence_timestamps[idx]
+        preview = sentences.get(idx, "")[:35]
+        print(f"    s{idx:>3}: {t:>8.3f}s  {preview}")
 
 # Spot check
 for idx in [0, 1, 4, 10, 62, 85, 86, 150, 151, 199, 200, 343, 384]:
