@@ -10,9 +10,20 @@
  * STATE MACHINE:
  *   IDLE → PLAYING_PROSE → PLAYING_CUE → RJW_OPEN → PLAYING_PROSE (next) → ...
  *
- * TIMESTAMP JSON FORMAT (per section, produced by convert-to-sentence-timestamps.py):
+ * TIMESTAMP JSON FORMAT (per section, produced by build_section_timestamps.py):
  *   "p{N}"  : float   — start time of paragraph N within this section file
  *   "s{N}"  : integer — paragraph index for sentence N (click-to-seek mapping)
+ *
+ * HIGHLIGHTING:
+ *   Paragraph-level. On timeupdate, find the largest p{N} timestamp ≤ currentTime,
+ *   highlight the [data-paragraph="N"] element. Sentences within that paragraph
+ *   are highlighted implicitly (they live inside the paragraph element).
+ *
+ * CLICK-TO-SEEK:
+ *   Clicking any sentence span looks up its paragraph via s{N} → paragraphIdx,
+ *   then seeks to p{paragraphIdx}. If the sentence belongs to a different section,
+ *   that section is loaded first; seek fires on the 'canplay' event (not a
+ *   fragile setTimeout) to guarantee the file is ready before seeking.
  *
  * FRONTMATTER SECTIONS ARRAY:
  *   sections:
@@ -32,7 +43,7 @@ const AudioSync = {
     /* ── State ──────────────────────────────────────────────────────── */
 
     sections: [],           // Array of section objects from frontmatter
-    allTimestamps: {},      // { sectionId: { p0: t, s0: paraIdx, ... } }
+    allTimestamps: {},      // { sectionId: { p1: t, s0: paraIdx, ... } }
 
     currentSectionIndex: -1,
     state: 'IDLE',          // IDLE | PLAYING_PROSE | PLAYING_CUE | RJW_OPEN
@@ -40,22 +51,22 @@ const AudioSync = {
     audioPlayer: null,      // The single <audio id="chapterAudio"> element
 
     // Per-section paragraph data (rebuilt on section load)
-    paragraphTimes: [],     // [[paraIdx, startTime], ...] sorted ascending
-    sentenceToPara: {},     // { sentenceIdx: paragraphIdx }
-    paragraphRange: [0, 0], // [firstPara, lastPara] for this section
+    paragraphTimes: [],     // [[paraIdx, startTime], ...] sorted ascending by startTime
+    sentenceToPara: {},     // { sentenceIdx: paragraphIdx } — section scope only
+    paragraphRange: [0, 0], // [firstPara, lastPara] inclusive
 
     currentParagraph: -1,
     autoScrollEnabled: true,
+
+    // Pending seek: used when switching sections via click-to-seek.
+    // Cleared once the canplay event fires and the seek is executed.
+    _pendingSeekTime: null,
 
     /* ── Init ───────────────────────────────────────────────────────── */
 
     /**
      * Initialize section-based audio sync.
      * Called from ChapterManager.initAudioSync() when sections data is present.
-     *
-     * @param {Array}            sections   - Array of section objects from CHAPTER_CONFIG
-     * @param {Object}           timestamps - Map of { sectionId: timestampObject }
-     * @param {HTMLAudioElement} audioPlayer
      */
     initSections(sections, timestamps, audioPlayer) {
         if (!sections || sections.length === 0) {
@@ -67,14 +78,15 @@ const AudioSync = {
             return;
         }
 
-        this.sections       = sections;
-        this.allTimestamps  = timestamps || {};
-        this.audioPlayer    = audioPlayer;
-        this.state          = 'IDLE';
+        this.sections      = sections;
+        this.allTimestamps = timestamps || {};
+        this.audioPlayer   = audioPlayer;
+        this.state         = 'IDLE';
         this.currentSectionIndex = -1;
+        this._pendingSeekTime    = null;
 
-        this.setupEventListeners();
-        this.makeClickable();
+        this._setupPlayerListeners();
+        this._makeClickable();
         this.loadSection(0);
 
         console.log(
@@ -85,21 +97,9 @@ const AudioSync = {
 
     /**
      * Legacy init path for chapters without sections (Chs 1–8).
-     * Preserves backwards compatibility with existing sentence-level timestamps.
      */
     init(timestamps, audioPlayer) {
         if (!timestamps || !audioPlayer) return;
-
-        // Detect section-based vs legacy format
-        const keys = Object.keys(timestamps);
-        const hasParagraphKeys = keys.some(k => k.startsWith('p'));
-
-        if (!hasParagraphKeys && keys.length === 0) {
-            console.log('AudioSync: Empty timestamps — sync disabled');
-            return;
-        }
-
-        // Legacy paragraph-level format (single file, no sections)
         this.audioPlayer = audioPlayer;
         this._legacyInit(timestamps);
     },
@@ -115,195 +115,287 @@ const AudioSync = {
 
         const section = this.sections[index];
         this.currentSectionIndex = index;
-        this.currentParagraph = -1;
-        this.state = 'PLAYING_PROSE';
+        this.currentParagraph    = -1;
+        this.state               = 'PLAYING_PROSE';
 
-        // allTimestamps is keyed by section.id (built in chapter.njk)
         const sectionTimestamps = this.allTimestamps[section.id] || {};
         this._buildSectionTimestamps(sectionTimestamps);
         this.paragraphRange = section.paragraphs || [0, 9999];
 
-        // Swap audio src to this section's prose file
+        // Swap src — canplay listener below will fire the pending seek if one exists
         const src = this.CDN_BASE + section.prose;
         this.audioPlayer.src = src;
         this.audioPlayer.load();
 
-        console.log(`AudioSync: Loading section ${index + 1}/${this.sections.length} — ${section.id}`);
-        console.log(`  Prose: ${section.prose}`);
-        console.log(`  Paragraphs: ${this.paragraphRange[0]}–${this.paragraphRange[1]}`);
-        console.log(`  Timestamps: ${Object.keys(sectionTimestamps).length} keys`);
+        console.log(
+            `AudioSync: Section ${index + 1}/${this.sections.length} — ${section.id} ` +
+            `| paras ${this.paragraphRange[0]}–${this.paragraphRange[1]} ` +
+            `| ${Object.keys(sectionTimestamps).length} ts keys`
+        );
     },
 
     _buildSectionTimestamps(timestamps) {
-        // timestamps here is the section-level object (already looked up by key)
         this.paragraphTimes = [];
         this.sentenceToPara = {};
 
         for (const [key, value] of Object.entries(timestamps)) {
             if (key.startsWith('p')) {
-                const idx = parseInt(key.slice(1));
+                const idx = parseInt(key.slice(1), 10);
                 if (!isNaN(idx)) this.paragraphTimes.push([idx, parseFloat(value)]);
             } else if (key.startsWith('s')) {
-                const sentIdx = parseInt(key.slice(1));
-                if (!isNaN(sentIdx)) this.sentenceToPara[sentIdx] = parseInt(value);
+                const sentIdx = parseInt(key.slice(1), 10);
+                if (!isNaN(sentIdx)) this.sentenceToPara[sentIdx] = parseInt(value, 10);
             }
         }
 
+        // Sort by time ascending so getParagraphAtTime() can linear-scan
         this.paragraphTimes.sort((a, b) => a[1] - b[1]);
 
-        // Set p_first to 0.0 so highlighting fires immediately when section starts
+        // Force the first paragraph's timestamp to 0.0 — any silence pre-roll
+        // in the assembled file shouldn't delay the first highlight.
         if (this.paragraphTimes.length > 0) {
-            const firstPara = this.paragraphTimes[0][0];
-            this.paragraphTimes[0] = [firstPara, 0.0];
+            this.paragraphTimes[0] = [this.paragraphTimes[0][0], 0.0];
+        }
+
+        const hasRealData = this.paragraphTimes.some(([, t]) => t > 0);
+        if (!hasRealData && this.paragraphTimes.length > 0) {
+            console.warn(
+                'AudioSync: All paragraph timestamps are 0 — timestamp JSON may be a placeholder. ' +
+                'Run build_section_timestamps.py to populate.'
+            );
         }
     },
 
-    /* ── Event Listeners ────────────────────────────────────────────── */
+    /* ── Player Event Listeners ─────────────────────────────────────── */
 
-    setupEventListeners() {
-        this.audioPlayer.addEventListener('timeupdate', () => this.onTimeUpdate());
-        this.audioPlayer.addEventListener('ended',      () => this.onEnded());
-        this.audioPlayer.addEventListener('pause',      () => { /* keep highlight */ });
-        this.audioPlayer.addEventListener('play',       () => {
-            // If resuming after RJW was dismissed without Continue, re-enter prose state
+    _setupPlayerListeners() {
+        // timeupdate — paragraph highlighting
+        this.audioPlayer.addEventListener('timeupdate', () => this._onTimeUpdate());
+
+        // ended — advance state machine
+        this.audioPlayer.addEventListener('ended', () => this._onEnded());
+
+        // canplay — fire any pending cross-section seek
+        // This is the reliable hook for "file is loaded enough to seek"
+        this.audioPlayer.addEventListener('canplay', () => {
+            if (this._pendingSeekTime !== null) {
+                const t = this._pendingSeekTime;
+                this._pendingSeekTime = null;
+                this._execSeek(t);
+            }
+        });
+
+        // play — if resuming after RJW was dismissed without Continue
+        this.audioPlayer.addEventListener('play', () => {
             if (this.state === 'RJW_OPEN') {
                 this.state = 'PLAYING_PROSE';
             }
         });
+
+        // pause — keep highlight visible (no action needed)
+        // seeking — browser fires this; no action needed
     },
 
-    makeClickable() {
-        document.querySelectorAll('.sentence[data-index]').forEach(sentence => {
-            sentence.classList.add('clickable');
-            sentence.addEventListener('click', (e) => {
+    /* ── Sentence Click-to-Seek ─────────────────────────────────────── */
+
+    _makeClickable() {
+        document.querySelectorAll('.sentence[data-index]').forEach(el => {
+            el.classList.add('clickable');
+            el.addEventListener('click', (e) => {
+                // Don't intercept clicks on scripture links inside sentence spans
                 if (e.target.closest('a')) return;
-                this.onSentenceClick(sentence);
+                this._onSentenceClick(el);
             });
         });
     },
 
+    _onSentenceClick(sentenceEl) {
+        const sentIdx = parseInt(sentenceEl.dataset.index, 10);
+
+        // ── Case 1: sentence is in the current section ─────────────────
+        if (sentIdx in this.sentenceToPara) {
+            const paraIdx = this.sentenceToPara[sentIdx];
+            const entry   = this.paragraphTimes.find(([idx]) => idx === paraIdx);
+            if (entry) {
+                this._seekWithinCurrentSection(entry[1]);
+                return;
+            }
+        }
+
+        // ── Case 2: sentence is in a different section ──────────────────
+        this._seekToSentenceAcrossSections(sentIdx);
+    },
+
+    _seekWithinCurrentSection(time) {
+        this.state = 'PLAYING_PROSE';
+        this._showPlayer();
+        this.audioPlayer.currentTime = time;
+        this._ensurePlaying();
+    },
+
+    _seekToSentenceAcrossSections(sentIdx) {
+        const sentKey = `s${sentIdx}`;
+
+        for (let i = 0; i < this.sections.length; i++) {
+            const sectionTimestamps = this.allTimestamps[this.sections[i].id] || {};
+
+            if (sentKey in sectionTimestamps) {
+                const paraIdx  = sectionTimestamps[sentKey];
+                const paraKey  = `p${paraIdx}`;
+                const paraTime = parseFloat(sectionTimestamps[paraKey] ?? 0);
+
+                if (i === this.currentSectionIndex) {
+                    // Same section but sentenceToPara was stale — just seek
+                    this._seekWithinCurrentSection(paraTime);
+                } else {
+                    // Different section — load it, queue the seek for canplay
+                    this._pendingSeekTime = paraTime;
+                    this.loadSection(i);
+                    this._showPlayer();
+                    // _execSeek() will fire from the canplay listener
+                }
+                return;
+            }
+        }
+
+        console.warn(`AudioSync: sentence ${sentIdx} not found in any section timestamps`);
+    },
+
+    _execSeek(time) {
+        this.state = 'PLAYING_PROSE';
+        this.audioPlayer.currentTime = time;
+        this._ensurePlaying();
+    },
+
+    _showPlayer() {
+        const playerEl = document.getElementById('audioPlayer');
+        if (playerEl && !playerEl.classList.contains('visible')) {
+            playerEl.classList.add('visible');
+        }
+    },
+
+    _ensurePlaying() {
+        if (this.audioPlayer.paused) {
+            this.audioPlayer.play().catch(() => {});
+            if (window.ChapterManager) {
+                ChapterManager.isPlaying = true;
+                document.getElementById('playIcon')  ?.style && (document.getElementById('playIcon').style.display  = 'none');
+                document.getElementById('pauseIcon') ?.style && (document.getElementById('pauseIcon').style.display = 'block');
+            }
+        }
+    },
+
     /* ── Playback Events ────────────────────────────────────────────── */
 
-    onTimeUpdate() {
+    _onTimeUpdate() {
         if (this.state !== 'PLAYING_PROSE') return;
 
         const currentTime    = this.audioPlayer.currentTime;
-        const paragraphIndex = this.getParagraphAtTime(currentTime);
+        const paragraphIndex = this._getParagraphAtTime(currentTime);
 
         if (paragraphIndex !== this.currentParagraph) {
-            this.highlightParagraph(paragraphIndex);
+            this._highlightParagraph(paragraphIndex);
             this.currentParagraph = paragraphIndex;
         }
     },
 
-    onEnded() {
-        this.clearHighlight();
+    _onEnded() {
+        this._clearHighlight();
 
         if (this.state === 'PLAYING_PROSE') {
-            // Prose section finished — play the cue file
-            this.playCue();
+            this._playCue();
         } else if (this.state === 'PLAYING_CUE') {
-            // Cue finished — open RJW panel
-            this.openRJW();
+            this._openRJW();
         } else {
             this.state = 'IDLE';
         }
     },
 
-    playCue() {
+    _playCue() {
         const section = this.sections[this.currentSectionIndex];
         if (!section || !section.cue) {
-            // No cue file — go straight to RJW
-            this.openRJW();
+            this._openRJW();
             return;
         }
 
         this.state = 'PLAYING_CUE';
 
-        // Lock playback speed to 1.0 for cue — always contemplative pace
-        const savedRate = this.audioPlayer.playbackRate;
+        // Lock to 1.0x during the contemplative cue — restore after
+        this._savedPlaybackRate = this.audioPlayer.playbackRate;
         this.audioPlayer.playbackRate = 1.0;
 
         const src = this.CDN_BASE + section.cue;
         this.audioPlayer.src = src;
         this.audioPlayer.load();
-        this.audioPlayer.play().then(() => {
-            console.log(`AudioSync: Playing cue — ${section.cue}`);
-        }).catch(err => {
+        this.audioPlayer.play().catch(err => {
             console.warn('AudioSync: Cue playback failed:', err);
-            this.openRJW();
+            this._openRJW();
         });
 
-        // Restore speed after cue finishes (handled in onEnded → openRJW → advanceSection)
-        this._savedPlaybackRate = savedRate;
+        console.log(`AudioSync: Cue — ${section.cue}`);
     },
 
-    openRJW() {
+    _openRJW() {
         this.state = 'RJW_OPEN';
         const section = this.sections[this.currentSectionIndex];
 
-        // Pause the audio player and update UI
         if (window.ChapterManager) {
-            window.ChapterManager.pause();
+            ChapterManager.pause();
         } else {
             this.audioPlayer.pause();
         }
 
-        // Restore playback rate for next section
         if (this._savedPlaybackRate) {
             this.audioPlayer.playbackRate = this._savedPlaybackRate;
             this._savedPlaybackRate = null;
         }
 
         if (window.RJW && section && section.id) {
-            console.log(`AudioSync: Opening RJW panel — ${section.id}`);
-            window.RJW.openModal(section.id, 'reflect');
+            console.log(`AudioSync: RJW — ${section.id}`);
+            RJW.openModal(section.id, 'reflect');
         }
     },
 
     /**
      * Called by RJW.closeModal() when the reader clicks Continue.
-     * Advances to the next section and begins playback.
      */
     advanceSection() {
         const nextIndex = this.currentSectionIndex + 1;
         if (nextIndex >= this.sections.length) {
-            console.log('AudioSync: Chapter complete — no more sections');
+            console.log('AudioSync: Chapter complete');
             this.state = 'IDLE';
             return;
         }
 
         this.loadSection(nextIndex);
 
-        // Small delay to allow src/load to settle before play
         setTimeout(() => {
             if (window.ChapterManager) {
-                window.ChapterManager.play();
+                ChapterManager.play();
             } else {
-                this.audioPlayer.play();
+                this.audioPlayer.play().catch(() => {});
             }
         }, 300);
     },
 
     /**
-     * Replay the current section's cue audio independently.
-     * Can be triggered from a "Hear the prompt again" button in the RJW panel.
+     * Replay current section's cue. Can be called from "Hear again" button.
      */
     replayCue() {
         const section = this.sections[this.currentSectionIndex];
         if (!section || !section.cue) return;
-
-        const src = this.CDN_BASE + section.cue;
-        this.audioPlayer.src = src;
+        this.state = 'PLAYING_CUE';
+        this.audioPlayer.src = this.CDN_BASE + section.cue;
         this.audioPlayer.load();
         this.audioPlayer.playbackRate = 1.0;
-        this.audioPlayer.play();
-        this.state = 'PLAYING_CUE';
+        this.audioPlayer.play().catch(() => {});
     },
 
     /* ── Paragraph Highlighting ─────────────────────────────────────── */
 
-    getParagraphAtTime(time) {
+    _getParagraphAtTime(time) {
+        // paragraphTimes is sorted ascending by time.
+        // Find the last entry whose startTime ≤ currentTime.
         let last = -1;
         for (const [paraIdx, startTime] of this.paragraphTimes) {
             if (startTime <= time) {
@@ -315,96 +407,33 @@ const AudioSync = {
         return last;
     },
 
-    highlightParagraph(paragraphIndex) {
-        this.clearHighlight();
+    _highlightParagraph(paragraphIndex) {
+        this._clearHighlight();
         if (paragraphIndex < 0) return;
 
         const el = document.querySelector(`[data-paragraph="${paragraphIndex}"]`);
         if (!el) return;
 
-        // Skip heading spans (paraspan inside h2/h3)
+        // Don't highlight heading spans (paraspan inside h2/h3)
         if (el.tagName === 'SPAN' && el.closest('h2, h3')) return;
 
         el.classList.add('highlighted');
+
         if (this.autoScrollEnabled) {
-            this.scrollToElement(el);
+            this._scrollToElement(el);
         }
     },
 
-    clearHighlight() {
+    _clearHighlight() {
         document.querySelectorAll('[data-paragraph].highlighted')
             .forEach(el => el.classList.remove('highlighted'));
     },
 
-    scrollToElement(el) {
+    _scrollToElement(el) {
         const rect = el.getBoundingClientRect();
         const vh   = window.innerHeight;
         if (rect.top < vh * 0.3 || rect.bottom > vh * 0.7) {
             el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    },
-
-    /* ── Click-to-Seek ──────────────────────────────────────────────── */
-
-    onSentenceClick(sentence) {
-        const sentIdx = parseInt(sentence.dataset.index);
-        const paraIdx = this.sentenceToPara[sentIdx];
-
-        if (paraIdx === undefined) {
-            // Sentence not in current section — find which section owns it
-            this._seekToSentenceInSection(sentIdx);
-            return;
-        }
-
-        // Sentence is in current section — seek within current file
-        const entry = this.paragraphTimes.find(([idx]) => idx === paraIdx);
-        if (!entry) return;
-
-        this._seekTo(entry[1]);
-    },
-
-    _seekToSentenceInSection(sentIdx) {
-        // Find which section contains this sentence
-        for (let i = 0; i < this.sections.length; i++) {
-            const section = this.sections[i];
-            const sectionTimestamps = this.allTimestamps[section.id] || {};
-            const sentKey = `s${sentIdx}`;
-
-            if (sentKey in sectionTimestamps) {
-                const paraIdx = sectionTimestamps[sentKey];
-                const paraTime = sectionTimestamps[`p${paraIdx}`] || 0;
-
-                if (i !== this.currentSectionIndex) {
-                    this.loadSection(i);
-                    setTimeout(() => this._seekTo(paraTime), 300);
-                } else {
-                    this._seekTo(paraTime);
-                }
-                return;
-            }
-        }
-        console.warn(`AudioSync: sentence ${sentIdx} not found in any section`);
-    },
-
-    _seekTo(time) {
-        this.state = 'PLAYING_PROSE';
-
-        const playerEl = document.getElementById('audioPlayer');
-        if (playerEl && !playerEl.classList.contains('visible')) {
-            playerEl.classList.add('visible');
-        }
-
-        this.audioPlayer.currentTime = time;
-
-        if (this.audioPlayer.paused) {
-            this.audioPlayer.play();
-            if (window.ChapterManager) {
-                window.ChapterManager.isPlaying = true;
-                const playIcon  = document.getElementById('playIcon');
-                const pauseIcon = document.getElementById('pauseIcon');
-                if (playIcon)  playIcon.style.display  = 'none';
-                if (pauseIcon) pauseIcon.style.display = 'block';
-            }
         }
     },
 
@@ -421,14 +450,14 @@ const AudioSync = {
 
         for (const [key, value] of Object.entries(timestamps)) {
             if (key.startsWith('p')) {
-                const idx = parseInt(key.slice(1));
+                const idx = parseInt(key.slice(1), 10);
                 if (!isNaN(idx)) this.paragraphTimes.push([idx, parseFloat(value)]);
             } else if (key.startsWith('s')) {
-                const sentIdx = parseInt(key.slice(1));
-                if (!isNaN(sentIdx)) this.sentenceToPara[sentIdx] = parseInt(value);
+                const sentIdx = parseInt(key.slice(1), 10);
+                if (!isNaN(sentIdx)) this.sentenceToPara[sentIdx] = parseInt(value, 10);
             } else {
                 // Legacy numeric sentence keys
-                const idx = parseInt(key);
+                const idx = parseInt(key, 10);
                 if (!isNaN(idx)) this.paragraphTimes.push([idx, parseFloat(value)]);
             }
         }
@@ -447,8 +476,8 @@ const AudioSync = {
         }
 
         this.state = 'PLAYING_PROSE';
+        this._makeClickable();
         this._setupLegacyListeners();
-        this.makeClickable();
 
         console.log(`AudioSync (legacy): ${this.paragraphTimes.length} paragraph timestamps`);
     },
@@ -456,13 +485,13 @@ const AudioSync = {
     _setupLegacyListeners() {
         this.audioPlayer.addEventListener('timeupdate', () => {
             if (this.state !== 'PLAYING_PROSE') return;
-            const paragraphIndex = this.getParagraphAtTime(this.audioPlayer.currentTime);
+            const paragraphIndex = this._getParagraphAtTime(this.audioPlayer.currentTime);
             if (paragraphIndex !== this.currentParagraph) {
-                this.highlightParagraph(paragraphIndex);
+                this._highlightParagraph(paragraphIndex);
                 this.currentParagraph = paragraphIndex;
             }
         });
-        this.audioPlayer.addEventListener('ended', () => this.clearHighlight());
+        this.audioPlayer.addEventListener('ended', () => this._clearHighlight());
     },
 };
 
