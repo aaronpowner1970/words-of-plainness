@@ -162,11 +162,9 @@ const AudioSync = {
     // effect is that highlighting fires roughly one sentence late. Subtracting
     // a 0.4s lookahead compensates without overcorrecting.
     getParagraphAtTime(time) {
-        const LOOKAHEAD = 0.4;
-        const adjustedTime = time + LOOKAHEAD;
         let last = -1;
         for (const [paraIdx, startTime] of this.paragraphTimes) {
-            if (startTime <= adjustedTime) {
+            if (startTime <= time) {
                 last = paraIdx;
             } else {
                 break;
