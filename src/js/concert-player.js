@@ -14,6 +14,7 @@
     audio: null,
     currentIndex: 0,
     isPlaying: false,
+    narratedMode: true,
     interstitialTimer: null,
     accordionOpen: false,
 
@@ -33,6 +34,7 @@
       if (!this.audio || !this.manifest) return;
 
       this.buildAccordion();
+      this.buildModeBar();
       this.bindEvents();
       this.loadMovement(0);
       this.setupMobileBar();
@@ -220,7 +222,10 @@
       this.hideClosing();
 
       // Set audio source
-      this.audio.src = mvt.audioUrl;
+      var useUrl = (this.narratedMode || !mvt.instrumentalUrl)
+        ? mvt.audioUrl
+        : mvt.instrumentalUrl;
+      this.audio.src = useUrl;
       this.audio.load();
 
       // Update movement info
@@ -233,6 +238,10 @@
 
       // Update accordion active state
       this.updateAccordionActive(index);
+
+      this.updateModeBar();
+      var unavailableEl = document.getElementById('chModeUnavailable');
+      if (unavailableEl) unavailableEl.style.display = 'none';
 
       // Script toggle visibility
       var scriptToggle = document.getElementById('playerScriptToggle');
@@ -531,6 +540,50 @@
       if (!panel) return;
       var expanded = panel.classList.toggle('ch-program-panel--expanded');
       if (btn) btn.innerHTML = expanded ? 'Close &uarr;' : 'Read more &darr;';
+    },
+
+    buildModeBar: function () {
+      var self = this;
+      var btn = document.getElementById('chModeToggle');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        self.narratedMode = !self.narratedMode;
+        self.updateModeBar();
+        self.updateAudioSource();
+      });
+    },
+
+    updateModeBar: function () {
+      var btn = document.getElementById('chModeToggle');
+      var label = document.getElementById('chModeLabel');
+      if (btn) btn.setAttribute('aria-checked', this.narratedMode ? 'true' : 'false');
+      if (label) label.textContent = this.narratedMode ? 'With Narration' : 'Without Narration';
+    },
+
+    updateAudioSource: function () {
+      var mvt = this.manifest.movements[this.currentIndex];
+      var wasPlaying = this.isPlaying;
+      var currentTime = this.audio.currentTime;
+      var unavailableEl = document.getElementById('chModeUnavailable');
+      var url = this.narratedMode
+        ? mvt.audioUrl
+        : (mvt.instrumentalUrl || null);
+      if (!this.narratedMode && !mvt.instrumentalUrl) {
+        // No instrumental available — stay on narrated, show notice
+        this.narratedMode = true;
+        this.updateModeBar();
+        if (unavailableEl) unavailableEl.style.display = '';
+        return;
+      }
+      if (unavailableEl) unavailableEl.style.display = 'none';
+      if (url) {
+        this.audio.src = url;
+        this.audio.load();
+        this.audio.currentTime = currentTime;
+        if (wasPlaying) {
+          this.play();
+        }
+      }
     },
 
     updateMobileBar: function () {

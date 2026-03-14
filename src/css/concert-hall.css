@@ -1008,6 +1008,88 @@
   line-height: 1.5;
 }
 
+/* ═══════════════════════════════════════════════════
+   Mode Toggle Bar — With / Without Narration
+   ═══════════════════════════════════════════════════ */
+.ch-mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+.ch-mode-label {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--concert-cream);
+  opacity: 0.55;
+  transition: opacity 300ms ease;
+  user-select: none;
+}
+.ch-mode-label--right {
+  opacity: 0.35;
+}
+/* When toggle is OFF (Without Narration active), flip opacities */
+.ch-mode-toggle[aria-checked="false"] ~ .ch-mode-label--right,
+.ch-mode-bar:has(.ch-mode-toggle[aria-checked="false"]) .ch-mode-label--right {
+  opacity: 0.55;
+}
+.ch-mode-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.ch-mode-toggle-track {
+  display: block;
+  width: 42px;
+  height: 24px;
+  background: rgba(201, 168, 76, 0.18);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 12px;
+  position: relative;
+  transition: background 300ms ease, border-color 300ms ease;
+}
+.ch-mode-toggle[aria-checked="true"] .ch-mode-toggle-track {
+  background: rgba(201, 168, 76, 0.28);
+  border-color: rgba(201, 168, 76, 0.6);
+}
+.ch-mode-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: var(--concert-gold);
+  border-radius: 50%;
+  transition: transform 300ms ease, opacity 300ms ease;
+  opacity: 0.6;
+}
+.ch-mode-toggle[aria-checked="true"] .ch-mode-toggle-thumb {
+  transform: translateX(0px);
+  opacity: 1;
+}
+.ch-mode-toggle[aria-checked="false"] .ch-mode-toggle-thumb {
+  transform: translateX(18px);
+  opacity: 0.85;
+}
+.ch-mode-unavailable {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--concert-cream);
+  opacity: 0.38;
+  width: 100%;
+  text-align: center;
+}
+
 /* =========================================
    RESPONSIVE
    ========================================= */

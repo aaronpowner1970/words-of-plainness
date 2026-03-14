@@ -81,6 +81,26 @@ permalink: /concert/{{ concert.slug }}/
           </div>
         </div>
 
+        <!-- Mode Toggle Bar -->
+        <div class="ch-mode-bar" id="chModeBar">
+          <span class="ch-mode-label" id="chModeLabel">With Narration</span>
+          <button
+            class="ch-mode-toggle"
+            id="chModeToggle"
+            role="switch"
+            aria-checked="true"
+            aria-label="Switch between narrated and instrumental versions"
+          >
+            <span class="ch-mode-toggle-track">
+              <span class="ch-mode-toggle-thumb"></span>
+            </span>
+          </button>
+          <span class="ch-mode-label ch-mode-label--right" id="chModeLabelRight">Without Narration</span>
+          <span class="ch-mode-unavailable" id="chModeUnavailable" style="display:none">
+            (instrumental not yet available for this movement)
+          </span>
+        </div>
+
         <!-- Script Toggle -->
         <div class="player-script-toggle" id="playerScriptToggle" style="display:none">
           <button class="btn-script-toggle" id="btnScriptToggle">Read the Script</button>
