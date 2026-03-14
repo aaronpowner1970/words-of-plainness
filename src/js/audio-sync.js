@@ -1,86 +1,122 @@
 /**
  * WORDS OF PLAINNESS - Audio Synchronization
  * ==========================================
- * 
- * Handles sentence-level highlighting synchronized with audio playback.
- * Uses timestamps data provided by the chapter template.
+ *
+ * Paragraph-level highlighting synchronized with audio playback.
+ * Sentence-level click-to-seek maps any sentence click to its paragraph timestamp.
+ * Cue-based pause triggers (indices 385-388) open the RJW panel.
+ *
+ * Timestamp JSON format (produced by build_paragraph_timestamps.py):
+ *   "p{N}"     : float   — start time of paragraph N in seconds
+ *   "s{N}"     : integer — paragraph index for sentence N (click-to-seek mapping)
+ *   "cue{N}"   : float   — start time of pause cue N in seconds
  */
 
 const AudioSync = {
-    timestamps: {},
-    timestampsSorted: [],     // [[sentenceIndex, startTime], ...] sorted by startTime
+    // Paragraph timestamps: { paragraphIndex: startTimeSeconds }
+    paragraphTimes: [],      // [[paragraphIndex, startTime], ...] sorted by startTime ascending
+
+    // Sentence-to-paragraph lookup: { sentenceIndex: paragraphIndex }
+    sentenceToPara: {},
+
+    // Cue timestamps: { cueIndex: startTimeSeconds }
+    cueTimes: {},
+
     audioPlayer: null,
-    sentences: [],
-    currentSentence: -1,
+    paragraphs: [],          // DOM elements with data-paragraph attribute
+    sentences: [],           // DOM elements with data-index (for click-to-seek)
+    currentParagraph: -1,
     autoScrollEnabled: true,
-    pauseTriggers: {},        // { sentenceIndex: pausePointId }
-    pauseFired: {},           // { sentenceIndex: true } — prevent re-firing
-    
+    pauseTriggers: {},       // { cueIndex: pausePointId }
+    pauseFired: {},          // { cueIndex: true } — prevent re-firing
+
     /**
      * Initialize audio sync
-     * @param {Object} timestamps - Sentence index to time mapping
+     * @param {Object} timestamps - Timestamp data from chapter template
      * @param {HTMLAudioElement} audioPlayer - Audio element
      */
     init(timestamps, audioPlayer) {
-        // Normalize timestamps: convert array of {index, start, end} to lookup map
-        if (Array.isArray(timestamps)) {
-            this.timestamps = {};
-            timestamps.forEach(t => {
-                this.timestamps[t.index] = { start: t.start, end: t.end };
-            });
-        } else {
-            this.timestamps = timestamps || {};
+        // Parse the mixed-format timestamp object
+        // Keys starting with "p" = paragraph timestamps
+        // Keys starting with "s" = sentence-to-paragraph mappings
+        // Keys starting with "cue" = cue timestamps
+        // Legacy numeric keys (old sentence-level format) = ignored for highlighting
+        //   but used for click-to-seek fallback
+
+        this.paragraphTimes = [];
+        this.sentenceToPara = {};
+        this.cueTimes = {};
+        const legacyTimes = {};
+
+        for (const [key, value] of Object.entries(timestamps || {})) {
+            if (key.startsWith('p')) {
+                const idx = parseInt(key.slice(1));
+                if (!isNaN(idx)) this.paragraphTimes.push([idx, parseFloat(value)]);
+            } else if (key.startsWith('cue')) {
+                const idx = parseInt(key.slice(3));
+                if (!isNaN(idx)) this.cueTimes[idx] = parseFloat(value);
+            } else if (key.startsWith('s')) {
+                const sentIdx = parseInt(key.slice(1));
+                if (!isNaN(sentIdx)) this.sentenceToPara[sentIdx] = parseInt(value);
+            } else {
+                // Legacy numeric key — plain sentence timestamp
+                const idx = parseInt(key);
+                if (!isNaN(idx)) legacyTimes[idx] = parseFloat(value);
+            }
         }
 
-        // Build a sorted array of [sentenceIndex, startTime] pairs ordered
-        // by startTime ascending. Object.entries() uses insertion order which
-        // is not reliable for numeric string keys — especially when cue indices
-        // (385-388) are appended after prose indices but have mid-chapter times.
-        // getSentenceAtTime() must iterate in time order, not insertion order.
-        this.timestampsSorted = Object.entries(this.timestamps)
-            .map(([k, v]) => [parseInt(k), (typeof v === 'object') ? v.start : v])
-            .sort((a, b) => a[1] - b[1]);
+        // Sort paragraph times by startTime ascending for binary-search-style lookup
+        this.paragraphTimes.sort((a, b) => a[1] - b[1]);
+
+        // If no paragraph keys found, fall back gracefully to legacy sentence format
+        if (this.paragraphTimes.length === 0 && Object.keys(legacyTimes).length > 0) {
+            console.log('AudioSync: No paragraph timestamps found — falling back to legacy sentence format');
+            this.paragraphTimes = Object.entries(legacyTimes)
+                .map(([k, v]) => [parseInt(k), v])
+                .sort((a, b) => a[1] - b[1]);
+        }
 
         this.audioPlayer = audioPlayer;
-        this.sentences = document.querySelectorAll('.sentence[data-index]');
+        this.paragraphs = document.querySelectorAll('[data-paragraph]');
+        this.sentences  = document.querySelectorAll('.sentence[data-index]');
 
-        if (!this.audioPlayer || Object.keys(this.timestamps).length === 0) {
+        if (!this.audioPlayer || this.paragraphTimes.length === 0) {
             console.log('AudioSync: No timestamps or audio player — sync disabled');
             return;
         }
 
-        // Placeholder guard: if all timestamp values are 0, sync is not yet calibrated.
-        // Bail out to prevent bogus scroll-to-bottom and broken click-to-seek.
-        const values = Object.values(this.timestamps);
-        const allZero = values.every(v => {
-            const t = (typeof v === 'object') ? v.start : v;
-            return t === 0 || t === 0.0;
-        });
+        // Placeholder guard: bail if all paragraph timestamps are zero
+        const allZero = this.paragraphTimes.every(([, t]) => t === 0);
         if (allZero) {
             console.log('AudioSync: All timestamps are placeholder zeros — sync disabled');
             return;
         }
-        
+
         this.buildPauseTriggers();
         this.setupEventListeners();
         this.makeClickable();
-        
-        console.log(`AudioSync initialized with ${this.sentences.length} sentences, ${this.timestampsSorted.length} timestamps`);
+
+        console.log(
+            `AudioSync initialized: ${this.paragraphTimes.length} paragraphs, ` +
+            `${Object.keys(this.cueTimes).length} cues, ` +
+            `${Object.keys(this.sentenceToPara).length} sentence mappings`
+        );
     },
-    
+
     // Build pause trigger map from narration-only cue spans in the DOM.
     // Each cue span carries data-pause-id matching a frontmatter pause ID.
-    // Called once during init, after timestamps are loaded.
     buildPauseTriggers() {
         this.pauseTriggers = {};
-        this.pauseFired = {};
+        this.pauseFired   = {};
+
         document.querySelectorAll('.narration-only[data-pause-id]').forEach(el => {
-            const idx = parseInt(el.dataset.index);
+            const idx     = parseInt(el.dataset.index);
             const pauseId = el.dataset.pauseId;
             if (!isNaN(idx) && pauseId) {
                 this.pauseTriggers[idx] = pauseId;
             }
         });
+
         const count = Object.keys(this.pauseTriggers).length;
         if (count > 0) {
             console.log(`AudioSync: ${count} pause trigger(s) registered`, this.pauseTriggers);
@@ -89,11 +125,12 @@ const AudioSync = {
 
     setupEventListeners() {
         this.audioPlayer.addEventListener('timeupdate', () => this.onTimeUpdate());
-        this.audioPlayer.addEventListener('ended', () => this.clearHighlight());
-        this.audioPlayer.addEventListener('pause', () => this.onPause());
+        this.audioPlayer.addEventListener('ended',      () => this.clearHighlight());
+        this.audioPlayer.addEventListener('pause',      () => this.onPause());
     },
-    
+
     makeClickable() {
+        // Make sentence spans clickable for seek-to-paragraph
         this.sentences.forEach(sentence => {
             sentence.classList.add('clickable');
             sentence.addEventListener('click', (e) => {
@@ -102,31 +139,56 @@ const AudioSync = {
             });
         });
     },
-    
+
     onTimeUpdate() {
-        const currentTime = this.audioPlayer.currentTime;
-        const sentenceIndex = this.getSentenceAtTime(currentTime);
-        
-        if (sentenceIndex !== this.currentSentence) {
-            this.highlightSentence(sentenceIndex);
-            this.currentSentence = sentenceIndex;
-            this.checkPauseTrigger(sentenceIndex);
+        const currentTime    = this.audioPlayer.currentTime;
+        const paragraphIndex = this.getParagraphAtTime(currentTime);
+        const cueIndex       = this.getCueAtTime(currentTime);
+
+        if (paragraphIndex !== this.currentParagraph) {
+            this.highlightParagraph(paragraphIndex);
+            this.currentParagraph = paragraphIndex;
+        }
+
+        if (cueIndex !== null) {
+            this.checkPauseTrigger(cueIndex);
         }
     },
 
-    // If the newly-reached sentence is a pause cue, stop playback and
-    // open the RJW panel. The fired guard prevents re-triggering if the
-    // listener seeks back into the same sentence.
-    checkPauseTrigger(sentenceIndex) {
-        const pauseId = this.pauseTriggers[sentenceIndex];
+    // Return the paragraph index whose startTime is <= currentTime
+    getParagraphAtTime(time) {
+        let last = -1;
+        for (const [paraIdx, startTime] of this.paragraphTimes) {
+            if (startTime <= time) {
+                last = paraIdx;
+            } else {
+                break;
+            }
+        }
+        return last;
+    },
+
+    // Return the cue index if the current time falls within a cue window, else null
+    // Cue window = [cueTime, cueTime + 15s] — long enough to cover the cue line
+    getCueAtTime(time) {
+        for (const [cueIdx, cueTime] of Object.entries(this.cueTimes)) {
+            if (time >= cueTime && time < cueTime + 15) {
+                return parseInt(cueIdx);
+            }
+        }
+        return null;
+    },
+
+    // Stop playback and open the RJW panel when a cue is reached
+    checkPauseTrigger(cueIndex) {
+        const pauseId = this.pauseTriggers[cueIndex];
         if (!pauseId) return;
-        if (this.pauseFired[sentenceIndex]) return;
-        this.pauseFired[sentenceIndex] = true;
+        if (this.pauseFired[cueIndex]) return;
+        this.pauseFired[cueIndex] = true;
 
-        console.log(`AudioSync: pause trigger fired for ${sentenceIndex} -> ${pauseId}`);
+        console.log(`AudioSync: pause trigger fired for cue ${cueIndex} -> ${pauseId}`);
 
-        // Let the cue line play for 1 second before pausing — long enough
-        // for the listener to hear it begin, short enough to not cut it off.
+        // 1 second delay so the listener hears the cue begin before playback stops
         setTimeout(() => {
             if (window.ChapterManager) {
                 window.ChapterManager.pause();
@@ -139,97 +201,79 @@ const AudioSync = {
         }, 1000);
     },
 
-    // Reset fired guards when the user manually seeks — allows re-triggering
-    // if they replay a section.
     resetPauseFired() {
         this.pauseFired = {};
     },
-    
-    getSentenceAtTime(time) {
-        // Use timestampsSorted (sorted by startTime ascending) so we never
-        // break early due to out-of-order entries. Walk the full sorted array
-        // and return the last sentence whose startTime is <= currentTime.
-        let lastSentence = -1;
-        for (const [sentenceIndex, startTime] of this.timestampsSorted) {
-            if (startTime <= time) {
-                lastSentence = sentenceIndex;
-            } else {
-                // Since array is sorted by time, all subsequent entries will
-                // also be > time. Safe to stop here.
-                break;
-            }
-        }
-        return lastSentence;
-    },
-    
-    highlightSentence(index) {
-        // Remove previous highlight
+
+    highlightParagraph(paragraphIndex) {
         this.clearHighlight();
-        
-        // Add new highlight to ALL elements sharing this index
-        const matches = document.querySelectorAll(`.sentence[data-index="${index}"]`);
-        if (matches.length > 0) {
-            matches.forEach(el => el.classList.add('highlighted'));
-            
+        if (paragraphIndex < 0) return;
+
+        const el = document.querySelector(`[data-paragraph="${paragraphIndex}"]`);
+        if (el) {
+            el.classList.add('highlighted');
             if (this.autoScrollEnabled) {
-                this.scrollToSentence(matches[0]);
+                this.scrollToElement(el);
             }
         }
     },
-    
+
     clearHighlight() {
-        this.sentences.forEach(s => s.classList.remove('highlighted'));
+        document.querySelectorAll('[data-paragraph].highlighted')
+            .forEach(el => el.classList.remove('highlighted'));
     },
-    
-    scrollToSentence(sentence) {
-        const rect = sentence.getBoundingClientRect();
+
+    scrollToElement(el) {
+        const rect          = el.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        
-        // Only scroll if sentence is not in the middle third of viewport
         if (rect.top < viewportHeight * 0.3 || rect.bottom > viewportHeight * 0.7) {
-            sentence.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-            });
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     },
-    
+
+    // Click on any sentence -> find its paragraph -> seek to paragraph start time
     onSentenceClick(sentence) {
-        const index = parseInt(sentence.dataset.index);
-        const ts = this.timestamps[index];
-        const time = (typeof ts === 'object') ? ts.start : ts;
+        const sentIdx  = parseInt(sentence.dataset.index);
+        const paraIdx  = this.sentenceToPara[sentIdx];
 
-        if (time !== undefined && this.audioPlayer) {
-            // Reset pause-fired guards on manual seek so triggers re-arm.
-            this.resetPauseFired();
+        if (paraIdx === undefined) {
+            console.warn(`AudioSync: no paragraph mapping for sentence ${sentIdx}`);
+            return;
+        }
 
-            // Show the audio player if it's hidden
-            const playerEl = document.getElementById('audioPlayer');
-            if (playerEl && !playerEl.classList.contains('visible')) {
-                playerEl.classList.add('visible');
-            }
+        // Find the paragraph's start time
+        const entry = this.paragraphTimes.find(([idx]) => idx === paraIdx);
+        if (!entry) {
+            console.warn(`AudioSync: no timestamp for paragraph ${paraIdx}`);
+            return;
+        }
 
-            this.audioPlayer.currentTime = time;
+        const time = entry[1];
+        this.resetPauseFired();
 
-            // Start playing if paused
-            if (this.audioPlayer.paused) {
-                this.audioPlayer.play();
-                // Sync play/pause icons in ChapterManager
-                if (window.ChapterManager) {
-                    window.ChapterManager.isPlaying = true;
-                    const playIcon = document.getElementById('playIcon');
-                    const pauseIcon = document.getElementById('pauseIcon');
-                    if (playIcon) playIcon.style.display = 'none';
-                    if (pauseIcon) pauseIcon.style.display = 'block';
-                }
+        const playerEl = document.getElementById('audioPlayer');
+        if (playerEl && !playerEl.classList.contains('visible')) {
+            playerEl.classList.add('visible');
+        }
+
+        this.audioPlayer.currentTime = time;
+
+        if (this.audioPlayer.paused) {
+            this.audioPlayer.play();
+            if (window.ChapterManager) {
+                window.ChapterManager.isPlaying = true;
+                const playIcon  = document.getElementById('playIcon');
+                const pauseIcon = document.getElementById('pauseIcon');
+                if (playIcon)  playIcon.style.display  = 'none';
+                if (pauseIcon) pauseIcon.style.display = 'block';
             }
         }
     },
-    
+
     onPause() {
-        // Optionally keep highlight visible when paused
+        // Keep highlight visible when paused
     },
-    
+
     toggleAutoScroll() {
         this.autoScrollEnabled = !this.autoScrollEnabled;
         return this.autoScrollEnabled;

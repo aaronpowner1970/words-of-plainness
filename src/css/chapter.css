@@ -3506,6 +3506,18 @@ h2[id], h3[id], [id^="section-"] {
     display: none !important;
 }
 
+/* ── PARAGRAPH SYNC HIGHLIGHTING ───────────────────────────── */
+/* Paragraph-level audio sync highlight. Applied by audio-sync.js
+   to the [data-paragraph] element matching the current audio position. */
+.sync-para.highlighted {
+    background-color: rgba(196, 148, 58, 0.12);
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+.sync-para {
+    transition: background-color 0.3s ease;
+}
+
 /* ── TOOLBAR BUTTON ACTIVE STATES (Bookmark + Complete) ────── */
 /* Bookmark: gold fill when set */
 .toolbar-btn#bookmarkBtn.active svg {

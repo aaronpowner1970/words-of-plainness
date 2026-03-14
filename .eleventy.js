@@ -138,6 +138,17 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPairedShortcode("sentence", function(content, index) {
         return `<span class="sentence" data-index="${index}">${content.trim()}</span>`;
     });
+
+    // Paragraph wrapper for audio sync highlighting
+    // Usage: {% para 0 %}...paragraph content...{% endpara %}
+    // Wraps content in a <p> with data-paragraph attribute.
+    // Heading paragraphs use {% parahead 0 %} which wraps in a <span> instead.
+    eleventyConfig.addPairedShortcode("para", function(content, index) {
+        return `<p class="sync-para" data-paragraph="${index}">${content.trim()}</p>`;
+    });
+    eleventyConfig.addPairedShortcode("paraspan", function(content, index) {
+        return `<span class="sync-para" data-paragraph="${index}">${content.trim()}</span>`;
+    });
     
     // Pause-point for Reflect · Journal · Witness system
     // Usage: {% pausePoint "pause-closing", "reflect" %}
