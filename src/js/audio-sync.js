@@ -118,13 +118,8 @@ const AudioSync = {
         this.currentParagraph = -1;
         this.state = 'PLAYING_PROSE';
 
-        // Look up this section's timestamps.
-        // section.timestamps is the filename e.g. "chapter-09-s01.json"
-        // Eleventy's timestamps data object keys strip the .json extension.
-        const tsKey = section.timestamps
-            ? section.timestamps.replace(/\.json$/, '')
-            : section.id;
-        const sectionTimestamps = this.allTimestamps[tsKey] || this.allTimestamps[section.id] || {};
+        // allTimestamps is keyed by section.id (built in chapter.njk)
+        const sectionTimestamps = this.allTimestamps[section.id] || {};
         this._buildSectionTimestamps(sectionTimestamps);
         this.paragraphRange = section.paragraphs || [0, 9999];
 
@@ -369,21 +364,19 @@ const AudioSync = {
     },
 
     _seekToSentenceInSection(sentIdx) {
-        // Find which section contains this sentence by checking paragraph ranges
+        // Find which section contains this sentence
         for (let i = 0; i < this.sections.length; i++) {
             const section = this.sections[i];
-            const [firstPara, lastPara] = section.paragraphs || [0, 0];
             const sectionTimestamps = this.allTimestamps[section.id] || {};
             const sentKey = `s${sentIdx}`;
 
             if (sentKey in sectionTimestamps) {
                 const paraIdx = sectionTimestamps[sentKey];
-                const paraKey = `p${paraIdx}`;
-                const paraTime = sectionTimestamps[paraKey] || 0;
+                const paraTime = sectionTimestamps[`p${paraIdx}`] || 0;
 
                 if (i !== this.currentSectionIndex) {
                     this.loadSection(i);
-                    setTimeout(() => this._seekTo(i === 0 ? paraTime : 0), 200);
+                    setTimeout(() => this._seekTo(paraTime), 300);
                 } else {
                     this._seekTo(paraTime);
                 }

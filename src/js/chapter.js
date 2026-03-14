@@ -60,7 +60,7 @@ const ChapterManager = {
 
         if (this.config.sections && this.config.sections.length > 0) {
             // Section-based architecture (Ch 9+): each section is its own audio file
-            AudioSync.initSections(this.config.sections, this.config.allTimestamps || {}, audio);
+            AudioSync.initSections(this.config.sections, this.config.sectionTimestamps || {}, audio);
         } else if (this.config.timestamps) {
             // Legacy single-file architecture (Chs 1-8)
             AudioSync.init(this.config.timestamps, audio);

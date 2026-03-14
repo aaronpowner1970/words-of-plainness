@@ -215,7 +215,14 @@
         discordChannelId: '{{ discordChannelId }}',
         timestamps: {{ chapterTimestamps | json | safe }},
         sections: {{ audio.sections | dump | safe if audio.sections else 'null' }},
-        allTimestamps: {{ timestamps | json | safe }}
+        sectionTimestamps: {
+            {% if audio.sections %}
+            {% for section in audio.sections %}
+            {% set sKey = section.timestamps | replace('.json','') %}
+            '{{ section.id }}': {{ timestamps[sKey] | json | safe if timestamps[sKey] else '{}' }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+            {% endif %}
+        }
     };
     
     // Initialize chapter functionality
