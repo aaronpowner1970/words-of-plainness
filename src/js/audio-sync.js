@@ -8,6 +8,7 @@
 
 const AudioSync = {
     timestamps: {},
+    timestampsSorted: [],     // [[sentenceIndex, startTime], ...] sorted by startTime
     audioPlayer: null,
     sentences: [],
     currentSentence: -1,
@@ -30,6 +31,16 @@ const AudioSync = {
         } else {
             this.timestamps = timestamps || {};
         }
+
+        // Build a sorted array of [sentenceIndex, startTime] pairs ordered
+        // by startTime ascending. Object.entries() uses insertion order which
+        // is not reliable for numeric string keys — especially when cue indices
+        // (385-388) are appended after prose indices but have mid-chapter times.
+        // getSentenceAtTime() must iterate in time order, not insertion order.
+        this.timestampsSorted = Object.entries(this.timestamps)
+            .map(([k, v]) => [parseInt(k), (typeof v === 'object') ? v.start : v])
+            .sort((a, b) => a[1] - b[1]);
+
         this.audioPlayer = audioPlayer;
         this.sentences = document.querySelectorAll('.sentence[data-index]');
 
@@ -54,7 +65,7 @@ const AudioSync = {
         this.setupEventListeners();
         this.makeClickable();
         
-        console.log(`AudioSync initialized with ${this.sentences.length} sentences`);
+        console.log(`AudioSync initialized with ${this.sentences.length} sentences, ${this.timestampsSorted.length} timestamps`);
     },
     
     // Build pause trigger map from narration-only cue spans in the DOM.
@@ -72,7 +83,7 @@ const AudioSync = {
         });
         const count = Object.keys(this.pauseTriggers).length;
         if (count > 0) {
-            console.log(`AudioSync: ${count} pause trigger(s) registered`);
+            console.log(`AudioSync: ${count} pause trigger(s) registered`, this.pauseTriggers);
         }
     },
 
@@ -112,9 +123,10 @@ const AudioSync = {
         if (this.pauseFired[sentenceIndex]) return;
         this.pauseFired[sentenceIndex] = true;
 
-        // Small delay so the cue line begins playing before the pause fires.
-        // 100 ms is imperceptible to the listener but ensures the audio
-        // buffer has advanced past the sentence boundary.
+        console.log(`AudioSync: pause trigger fired for ${sentenceIndex} -> ${pauseId}`);
+
+        // Let the cue line play for 1 second before pausing — long enough
+        // for the listener to hear it begin, short enough to not cut it off.
         setTimeout(() => {
             if (window.ChapterManager) {
                 window.ChapterManager.pause();
@@ -124,7 +136,7 @@ const AudioSync = {
             if (window.RJW) {
                 window.RJW.openModal(pauseId, 'reflect');
             }
-        }, 100);
+        }, 1000);
     },
 
     // Reset fired guards when the user manually seeks — allows re-triggering
@@ -134,18 +146,19 @@ const AudioSync = {
     },
     
     getSentenceAtTime(time) {
+        // Use timestampsSorted (sorted by startTime ascending) so we never
+        // break early due to out-of-order entries. Walk the full sorted array
+        // and return the last sentence whose startTime is <= currentTime.
         let lastSentence = -1;
-
-        // Find the sentence whose start time is <= current time
-        for (const [index, ts] of Object.entries(this.timestamps)) {
-            const start = (typeof ts === 'object') ? ts.start : ts;
-            if (start <= time) {
-                lastSentence = parseInt(index);
+        for (const [sentenceIndex, startTime] of this.timestampsSorted) {
+            if (startTime <= time) {
+                lastSentence = sentenceIndex;
             } else {
+                // Since array is sorted by time, all subsequent entries will
+                // also be > time. Safe to stop here.
                 break;
             }
         }
-
         return lastSentence;
     },
     
