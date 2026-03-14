@@ -621,6 +621,12 @@ for para_idx, first_sent in sorted(PARAGRAPH_MAP.items()):
     else:
         print(f"  WARNING: s{first_sent} (para {para_idx}) not found")
 
+# p0 is the Invocation heading (never highlighted — heading span).
+# p1 is the first prose paragraph. Its ElevenLabs timestamp reflects the
+# silence at the start of the assembled MP3 before the narrator begins.
+# Set p1 to 0.0 so highlighting fires immediately when play is pressed.
+para_timestamps[1] = 0.0
+
 print(f"  {len(para_timestamps)} paragraph timestamps built")
 
 # ── Step 7: Build sentence-to-paragraph lookup ────────────────────────────
