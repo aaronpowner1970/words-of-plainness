@@ -24,7 +24,7 @@ lyrics: true
 pdf: WoP_Ch07_Prophecies_Birth_Youth.pdf
 infographic: chapter-07-infographic.png
 slides:
-  count: 0
+  count: 16
   path: "chapter-07/"
 
 toc:
