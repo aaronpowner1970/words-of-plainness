@@ -20,6 +20,7 @@ audio:
     title: "Promises Kept"
     description: "A sacred folk hymn testimony of the ancient promise kept — from prophecy through the hidden years."
 
+lyrics: true
 pdf: WoP_Ch07_Prophecies_Birth_Youth.pdf
 infographic: chapter-07-infographic.png
 slides:
