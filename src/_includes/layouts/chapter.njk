@@ -177,6 +177,9 @@
 </div>
 
 <!-- Modals (Overview, Testimony, Infographic, Slides) -->
+{% if lyrics %}
+{% set lyricsInclude = "lyrics/" + chapterId + ".njk" %}
+{% endif %}
 {% include "components/modals.njk" %}
 </div>
 
