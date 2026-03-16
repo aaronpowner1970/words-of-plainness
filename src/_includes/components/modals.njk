@@ -52,18 +52,11 @@
                 <source src="https://media.wordsofplainness.org/web/{{ audio.testimony.file }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-            {% if lyricsInclude %}
+            {% if lyricsHtml %}
             <details class="media-transcript">
                 <summary>View Lyrics</summary>
                 <div class="transcript-content">
-                    {% include lyricsInclude %}
-                </div>
-            </details>
-            {% elif lyrics %}
-            <details class="media-transcript">
-                <summary>View Lyrics</summary>
-                <div class="transcript-content">
-                    {{ lyrics | safe }}
+                    {{ lyricsHtml | safe }}
                 </div>
             </details>
             {% endif %}

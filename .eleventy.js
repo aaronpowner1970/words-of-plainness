@@ -122,6 +122,20 @@ module.exports = function(eleventyConfig) {
         return JSON.stringify(data.books);
     });
 
+    // Lyrics content loader — reads lyrics partial at build time, returns HTML string
+    // Usage in templates: {{ chapter | lyricsContent | safe }}
+    // Returns empty string if no lyrics file exists for this chapter number
+    eleventyConfig.addFilter("lyricsContent", function(chapterNum) {
+        if (!chapterNum) return '';
+        const padded = String(chapterNum).padStart(2, '0');
+        const lyricsPath = path.join(__dirname, 'src', '_includes', 'lyrics', `chapter-${padded}.njk`);
+        try {
+            return fs.readFileSync(lyricsPath, 'utf8');
+        } catch (e) {
+            return '';
+        }
+    });
+
     // Format reading time
     eleventyConfig.addFilter("readingTime", minutes => {
         if (minutes < 1) return "< 1 min read";
