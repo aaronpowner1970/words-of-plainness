@@ -56,7 +56,7 @@ pauses:
 
 {% para 3 %}{% sentence 9 %}The people of Judea went out to him in the desert margins by the hundreds---farmers, tax collectors, soldiers, Pharisees in their long robes.{% endsentence %} {% sentence 10 %}Something in his voice drew them forth.{% endsentence %}{% endpara %}
 
-{% para 4 %}{% sentence 11 %}His message was not complicated: "Repent ye: for the kingdom of heaven is at hand." {% sentence 12 %}It was the message the prophets had always carried, compressed now to a single sentence, urgent in the way a man is urgent when he knows the hour has nearly come.{% endsentence %}{% endpara %}
+{% para 4 %}{% sentence 11 %}His message was not complicated: "Repent ye: for the kingdom of heaven is at hand."{% endsentence %} {% sentence 12 %}It was the message the prophets had always carried, compressed now to a single sentence, urgent in the way a man is urgent when he knows the hour has nearly come.{% endsentence %}{% endpara %}
 
 {% para 5 %}{% sentence 13 %}Matthew paused to tell his readers who this was: "This is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight."{% endsentence %} {% sentence 14 %}Seven hundred years before John's birth, Isaiah had seen him.{% endsentence %} {% sentence 15 %}He had written him down.{% endsentence %} {% sentence 16 %}And here he was---exactly where the prophecy said he would be, calling Israel to the river, calling them to the threshold they had been approaching for four thousand years.{% endsentence %}{% endpara %}
 
