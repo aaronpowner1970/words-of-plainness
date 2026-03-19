@@ -10,6 +10,7 @@ scripture:
 readingTime: 26
 audio:
   narration: NR_03_01_Academic_Knowledge.mp3
+  cue: NR_03_CUE_01_Closing.mp3
   overview: PO_03_01_Academic_Knowledge.mp3
   testimony:
     file: 03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3
@@ -58,14 +59,14 @@ nextChapter:
 discordChannelId: "1463835777141309506"
 pauses:
   - id: "pause-closing"
-    title: "Closing Reflection"
+    title: "Academic Knowledge"
     default: "reflect"
     reflect:
-      prompt: "<p>Where in your own search for knowledge have you encountered something that reason alone could not explain?</p>"
+      prompt: "<p>Where has academic knowledge genuinely served your faith? Where has it created friction? How do you navigate that tension?</p><p>The chapter describes a \"ceiling of the natural framework\" — questions reason cannot answer. Is there a question your mind keeps returning to that reason alone hasn't settled? What would it look like to hold that question with patience rather than urgency?</p>"
     journal:
-      prompt: "<p>Write about a moment when what you thought you knew was not enough.</p>"
+      prompt: "<p>The chapter says the natural framework \"functions precisely as designed for the questions it is equipped to address\" — the problem is not reason itself but expecting it to do more than it was made to do. Write about a time when you pushed reason past its ceiling. What happened? What did you find on the other side?</p>"
     witness:
-      prompt: "<p>If you have experienced a witness of truth that came through spiritual means rather than academic ones, this is a good place to share it.</p>"
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>Has there been a moment when something you learned — a fact, a discovery, a text — opened a door to something sacred? Or a moment when the limits of learning drove you toward something beyond it? We invite you to share it here.</p>"
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>
