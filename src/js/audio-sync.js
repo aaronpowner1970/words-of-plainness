@@ -470,17 +470,33 @@ const AudioSync = {
         this._legacyCueFile   = cueFile  || null;
         this._legacyPauseId   = pauseId  || null;
 
-        for (const [key, value] of Object.entries(timestamps)) {
-            if (key.startsWith('p')) {
-                const idx = parseInt(key.slice(1), 10);
-                if (!isNaN(idx)) this.paragraphTimes.push([idx, parseFloat(value)]);
-            } else if (key.startsWith('s')) {
-                const sentIdx = parseInt(key.slice(1), 10);
-                if (!isNaN(sentIdx)) this.sentenceToPara[sentIdx] = parseInt(value, 10);
-            } else {
-                // Legacy numeric sentence keys
-                const idx = parseInt(key, 10);
-                if (!isNaN(idx)) this.paragraphTimes.push([idx, parseFloat(value)]);
+        // Handle three legacy timestamp formats:
+        // Format A (Chs 1-2): Array of {index, start, end} objects
+        // Format B (Chs 3-6): Object with bare numeric string keys {"0": time, "1": time}
+        // Format C (Chs 7-8): Object with p{N}/s{N} keys
+
+        if (Array.isArray(timestamps)) {
+            // Format A — array of {index, start, end}
+            for (const entry of timestamps) {
+                if (entry && typeof entry.index === 'number' && typeof entry.start === 'number') {
+                    this.paragraphTimes.push([entry.index, entry.start]);
+                }
+            }
+        } else {
+            for (const [key, value] of Object.entries(timestamps)) {
+                if (key.startsWith('p')) {
+                    // Format C — paragraph time
+                    const idx = parseInt(key.slice(1), 10);
+                    if (!isNaN(idx)) this.paragraphTimes.push([idx, parseFloat(value)]);
+                } else if (key.startsWith('s')) {
+                    // Format C — sentence-to-paragraph map
+                    const sentIdx = parseInt(key.slice(1), 10);
+                    if (!isNaN(sentIdx)) this.sentenceToPara[sentIdx] = parseInt(value, 10);
+                } else {
+                    // Format B — bare numeric key, value is the timestamp directly
+                    const idx = parseInt(key, 10);
+                    if (!isNaN(idx)) this.paragraphTimes.push([idx, parseFloat(value)]);
+                }
             }
         }
 
