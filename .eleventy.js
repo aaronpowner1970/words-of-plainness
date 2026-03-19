@@ -169,6 +169,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addShortcode("pausePoint", function(id, defaultTab) {
         const tab = defaultTab || "reflect";
         return `<div class="pause-point" id="${id}">
+  <span class="pause-cue">Pause here &#10230; Use these tabs to reflect on what you have just read &#10230;</span>
   <div class="tab-cluster">
     <div class="tab-pill reflect" onclick="RJW.openModal('${id}','reflect')">Reflect</div>
     <div class="tab-pill journal" onclick="RJW.openModal('${id}','journal')">Journal</div>
