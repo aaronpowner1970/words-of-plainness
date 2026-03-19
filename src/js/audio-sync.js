@@ -97,11 +97,13 @@ const AudioSync = {
 
     /**
      * Legacy init path for chapters without sections (Chs 1–8).
+     * cueFile: filename only (CDN base prepended automatically)
+     * pauseId: the pause-point id to pass to RJW.openModal()
      */
-    init(timestamps, audioPlayer) {
+    init(timestamps, audioPlayer, cueFile, pauseId) {
         if (!timestamps || !audioPlayer) return;
         this.audioPlayer = audioPlayer;
-        this._legacyInit(timestamps);
+        this._legacyInit(timestamps, cueFile, pauseId);
     },
 
     /* ── Section Loading ────────────────────────────────────────────── */
@@ -216,6 +218,16 @@ const AudioSync = {
         if (sentIdx in this.sentenceToPara) {
             const paraIdx = this.sentenceToPara[sentIdx];
             const entry   = this.paragraphTimes.find(([idx]) => idx === paraIdx);
+            if (entry) {
+                this._seekWithinCurrentSection(entry[1]);
+                return;
+            }
+        }
+
+        // ── Case 1b: legacy bare-numeric format (Chs 1-6) ──────────────
+        // sentenceToPara is empty; sentence index == paragraph index directly.
+        if (this.sentenceToPara && Object.keys(this.sentenceToPara).length === 0) {
+            const entry = this.paragraphTimes.find(([idx]) => idx === sentIdx);
             if (entry) {
                 this._seekWithinCurrentSection(entry[1]);
                 return;
@@ -411,10 +423,18 @@ const AudioSync = {
         this._clearHighlight();
         if (paragraphIndex < 0) return;
 
-        const el = document.querySelector(`[data-paragraph="${paragraphIndex}"]`);
+        // Section/Ch7+ architecture: highlight by data-paragraph
+        let el = document.querySelector(`[data-paragraph="${paragraphIndex}"]`);
+
+        // Legacy bare-numeric architecture (Chs 1-6): no data-paragraph,
+        // fall back to highlighting the sentence span by data-index
+        if (!el) {
+            el = document.querySelector(`[data-index="${paragraphIndex}"]`);
+        }
+
         if (!el) return;
 
-        // Don't highlight heading spans (paraspan inside h2/h3)
+        // Don't highlight heading spans inside h2/h3
         if (el.tagName === 'SPAN' && el.closest('h2, h3')) return;
 
         el.classList.add('highlighted');
@@ -425,7 +445,7 @@ const AudioSync = {
     },
 
     _clearHighlight() {
-        document.querySelectorAll('[data-paragraph].highlighted')
+        document.querySelectorAll('[data-paragraph].highlighted, [data-index].highlighted')
             .forEach(el => el.classList.remove('highlighted'));
     },
 
@@ -444,9 +464,11 @@ const AudioSync = {
 
     /* ── Legacy Single-File Support (Chs 1–8) ──────────────────────── */
 
-    _legacyInit(timestamps) {
-        this.paragraphTimes = [];
-        this.sentenceToPara = {};
+    _legacyInit(timestamps, cueFile, pauseId) {
+        this.paragraphTimes   = [];
+        this.sentenceToPara   = {};
+        this._legacyCueFile   = cueFile  || null;
+        this._legacyPauseId   = pauseId  || null;
 
         for (const [key, value] of Object.entries(timestamps)) {
             if (key.startsWith('p')) {
@@ -491,7 +513,35 @@ const AudioSync = {
                 this.currentParagraph = paragraphIndex;
             }
         });
-        this.audioPlayer.addEventListener('ended', () => this._clearHighlight());
+
+        this.audioPlayer.addEventListener('ended', () => {
+            this._clearHighlight();
+
+            if (this.state === 'PLAYING_PROSE' && this._legacyCueFile) {
+                // Play cue file then open RJW — same flow as section architecture
+                this.state = 'PLAYING_CUE';
+                this._savedPlaybackRate = this.audioPlayer.playbackRate;
+                this.audioPlayer.playbackRate = 1.0;
+                this.audioPlayer.src = this.CDN_BASE + this._legacyCueFile;
+                this.audioPlayer.load();
+                this.audioPlayer.play().catch(() => this._legacyOpenRJW());
+            } else if (this.state === 'PLAYING_CUE') {
+                this._legacyOpenRJW();
+            }
+            // If no cue file, just clear highlight and stop (original behaviour)
+        });
+    },
+
+    _legacyOpenRJW() {
+        this.state = 'RJW_OPEN';
+        if (this._savedPlaybackRate) {
+            this.audioPlayer.playbackRate = this._savedPlaybackRate;
+            this._savedPlaybackRate = null;
+        }
+        if (window.ChapterManager) ChapterManager.pause();
+        if (window.RJW && this._legacyPauseId) {
+            RJW.openModal(this._legacyPauseId, 'reflect');
+        }
     },
 };
 
