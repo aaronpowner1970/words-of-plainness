@@ -26,14 +26,26 @@ permalink: /concert/
 
     <div class="concert-card-grid">
       {% for concert in concertList %}
-      <a href="/concert/{{ concert.slug }}/" class="concert-card">
-        <div class="concert-card-type">{{ concert.type | replace("-", " ") | title }}</div>
-        <h2 class="concert-card-title">{{ concert.title }}</h2>
-        <p class="concert-card-subtitle">{{ concert.subtitle }}</p>
-        <div class="concert-card-meta">
-          <span class="concert-card-movements">{{ concert.movements | length }} movements</span>
+        {% if concert.comingSoon %}
+        <div class="concert-card concert-card--coming-soon">
+          <div class="concert-card-type">{{ concert.type | replace("-", " ") | title }}</div>
+          <h2 class="concert-card-title">{{ concert.title }}{% if concert.titleLine2 %}<span class="concert-card-title-line2">{{ concert.titleLine2 }}</span>{% endif %}</h2>
+          <p class="concert-card-subtitle">{{ concert.subtitle }}</p>
+          <div class="concert-card-meta">
+            <span class="concert-card-movements">12 movements</span>
+            <span class="concert-card-coming-soon-badge">Coming Soon</span>
+          </div>
         </div>
-      </a>
+        {% else %}
+        <a href="/concert/{{ concert.slug }}/" class="concert-card">
+          <div class="concert-card-type">{{ concert.type | replace("-", " ") | title }}</div>
+          <h2 class="concert-card-title">{{ concert.title }}</h2>
+          <p class="concert-card-subtitle">{{ concert.subtitle }}</p>
+          <div class="concert-card-meta">
+            <span class="concert-card-movements">{{ concert.movements | length }} movements</span>
+          </div>
+        </a>
+        {% endif %}
       {% endfor %}
     </div>
   </div>

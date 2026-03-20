@@ -1090,6 +1090,52 @@
   text-align: center;
 }
 
+/* ---- Coming Soon Card Variant ---- */
+
+.concert-card--coming-soon {
+  display: block;
+  background: var(--concert-brown-mid);
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  opacity: 0.72;
+  cursor: default;
+  position: relative;
+}
+
+.concert-card--coming-soon .concert-card-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+}
+
+.concert-card-title-line2 {
+  display: block;
+  font-size: 0.75em;
+  font-style: italic;
+  opacity: 0.85;
+  letter-spacing: 0.06em;
+}
+
+.concert-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.concert-card-coming-soon-badge {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--concert-gold);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 3px;
+  padding: 2px 7px;
+  opacity: 0.9;
+}
+
 /* =========================================
    RESPONSIVE
    ========================================= */
