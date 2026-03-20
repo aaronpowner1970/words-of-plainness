@@ -188,6 +188,16 @@ permalink: /concert/{{ concert.slug }}/
 
   <!-- Easter Egg: Composition Notes + Architecture Visual (below player) -->
   <div class="concert-hall-extras" id="concertExtras">
+    {% if concert.coverImage %}
+    <button class="extras-link extras-album-art-btn" id="albumArtBtn" aria-label="View album art">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      Album Art
+    </button>
+    {% endif %}
     <a href="https://media.wordsofplainness.org/docs/Ch09_Suite_Listener_Notes.pdf"
        class="extras-link"
        target="_blank"
@@ -232,6 +242,27 @@ permalink: /concert/{{ concert.slug }}/
   </div>
 </div>
 
+<!-- Album Art Modal -->
+{% if concert.coverImage %}
+<div class="album-art-modal" id="albumArtModal" role="dialog" aria-modal="true" aria-label="Suite album art">
+  <div class="album-art-modal-overlay" id="albumArtOverlay"></div>
+  <div class="album-art-modal-content">
+    <button class="album-art-modal-close" id="albumArtClose" aria-label="Close album art">
+      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <img
+      src="{{ concert.coverImage }}"
+      alt="Album art for {{ concert.title }}"
+      class="album-art-modal-img"
+    >
+    <p class="album-art-modal-caption">{{ concert.title }}{% if concert.titleLine2 %} — {{ concert.titleLine2 }}{% endif %} &middot; Composed by Aaron John Powner</p>
+  </div>
+</div>
+{% endif %}
+
 <!-- Mobile Now Playing Bar -->
 <div class="mobile-now-playing" id="mobileNowPlaying" style="display:none">
   <div class="mobile-np-info">
@@ -260,6 +291,21 @@ permalink: /concert/{{ concert.slug }}/
     function openModal() { modal.classList.add('arch-visual-modal--open'); document.body.style.overflow = 'hidden'; }
     function closeModal() { modal.classList.remove('arch-visual-modal--open'); document.body.style.overflow = ''; }
     if (btn) btn.addEventListener('click', openModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+    if (close) close.addEventListener('click', closeModal);
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+  })();
+</script>
+<script>
+  (function () {
+    var btn = document.getElementById('albumArtBtn');
+    var modal = document.getElementById('albumArtModal');
+    var overlay = document.getElementById('albumArtOverlay');
+    var close = document.getElementById('albumArtClose');
+    if (!btn || !modal) return;
+    function openModal() { modal.classList.add('album-art-modal--open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { modal.classList.remove('album-art-modal--open'); document.body.style.overflow = ''; }
+    btn.addEventListener('click', openModal);
     if (overlay) overlay.addEventListener('click', closeModal);
     if (close) close.addEventListener('click', closeModal);
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });

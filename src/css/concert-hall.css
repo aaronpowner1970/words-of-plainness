@@ -1090,6 +1090,112 @@
   text-align: center;
 }
 
+/* ---- Card Inner Layout (thumbnail support) ---- */
+
+.concert-card-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.concert-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.concert-card-thumb {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-md);
+  background-size: cover;
+  background-position: center top;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  overflow: hidden;
+  transition: border-color var(--transition-ceremonial);
+}
+
+.concert-card:hover .concert-card-thumb {
+  border-color: rgba(201, 168, 76, 0.45);
+}
+
+/* ---- Album Art Modal ---- */
+
+.album-art-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.album-art-modal--open {
+  display: flex;
+}
+
+.album-art-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 5, 0, 0.88);
+  cursor: pointer;
+}
+
+.album-art-modal-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.album-art-modal-close {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background: rgba(26, 15, 0, 0.9);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--concert-cream);
+  cursor: pointer;
+  transition: border-color var(--transition-normal), color var(--transition-normal);
+}
+
+.album-art-modal-close:hover {
+  border-color: var(--concert-gold);
+  color: var(--concert-gold);
+}
+
+.album-art-modal-img {
+  display: block;
+  max-width: min(560px, 85vw);
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.album-art-modal-caption {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--concert-cream);
+  opacity: 0.5;
+  text-align: center;
+  margin: 0;
+}
+
 /* ---- Coming Soon Card Variant ---- */
 
 .concert-card--coming-soon {
