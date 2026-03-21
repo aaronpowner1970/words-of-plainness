@@ -25,7 +25,91 @@ audio:
         label: "Contemporary Christian"
         duration: "6:14"
 
-lyrics: true
+lyrics: |
+  <p class="lyrics-section"><strong>[Verse 1]</strong></p>
+  <p>Before the morning star was named,<br>
+  before the covenant was sealed,<br>
+  a lamb laid on an altar stone<br>
+  and heaven began to say:<br>
+  He is coming.<br>
+  He is coming.<br>
+  Wait on the Lord — hold on.</p>
+
+  <p class="lyrics-section"><strong>[Verse 2]</strong></p>
+  <p>You have carried promises too —<br>
+  through silence and through wondering years.<br>
+  Those who hope and quietly wait<br>
+  are not forgotten — they are carried.<br>
+  Your strength will rise like eagles rising.<br>
+  Rest in Him and do not strive.<br>
+  You, too, Lord — keep Your word.<br>
+  He is coming.<br>
+  He is coming.<br>
+  Wait on the Lord — we will hold on.</p>
+
+  <p class="lyrics-section"><strong>[Chorus]</strong></p>
+  <p><em>Mary said yes to what she could not see<br>
+  and treasured all she could not understand.<br>
+  Joseph said yes to what he did not know —<br>
+  heaven placed in mortal hands.<br>
+  He came. He came.<br>
+  The night that never went dark.<br>
+  She pondered these things in her heart —<br>
+  and so can you.<br>
+  He came. He came.<br>
+  God keeping His ancient word.<br>
+  Ponder these things in your heart.</em></p>
+
+  <p class="lyrics-section"><strong>[Verse 3]</strong></p>
+  <p>You have your own unspoken years,<br>
+  your own familiar bench and trade —<br>
+  ordinary days of faithful living,<br>
+  the hidden years inside His plan.<br>
+  He grew in wisdom and in stature,<br>
+  in favor with God and man.<br>
+  And so do you — in ways unseen,<br>
+  in every quiet, steady span.</p>
+
+  <p class="lyrics-section"><strong>[Chorus]</strong></p>
+  <p><em>Mary said yes to what she could not see<br>
+  and treasured all she could not understand.<br>
+  Joseph said yes to what he did not know —<br>
+  heaven placed in mortal hands.<br>
+  He came. He came.<br>
+  The night that never went dark.<br>
+  She pondered these things in her heart —<br>
+  and so can you.<br>
+  He came. He came.<br>
+  God keeping His ancient word.<br>
+  Ponder these things in your heart.</em></p>
+
+  <p class="lyrics-section"><strong>[Bridge]</strong></p>
+  <p>And when the time has come for you to leave<br>
+  the workbench and the road you know,<br>
+  trust in the Lord with all your heart —<br>
+  lean not on what you think you see.<br>
+  Acknowledge Him in all your ways<br>
+  and He will make the pathway clear.<br>
+  For we walk by faith and not by sight —<br>
+  this is the word He speaks to you right here.</p>
+
+  <p class="lyrics-section"><strong>[Final Chorus]</strong></p>
+  <p><em>He said yes before the world began.<br>
+  She said yes in a Galilean town.<br>
+  And you — can say yes today,<br>
+  as all His promises come down.<br>
+  He came. He came.<br>
+  God keeping His word through it all.<br>
+  He came. He came —<br>
+  and nothing faithful will be small.</em></p>
+
+  <p class="lyrics-section"><strong>[Outro]</strong></p>
+  <p><em>Wait on the Lord.<br>
+  Be of good courage.<br>
+  He kept His word.<br>
+  Wait on the Lord.<br>
+  He will renew your strength.<br>
+  He always keeps His word.</em></p>
 pdf: WoP_Ch07_Prophecies_Birth_Youth.pdf
 infographic: chapter-07-infographic.png
 slides:

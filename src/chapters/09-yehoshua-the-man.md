@@ -68,7 +68,85 @@ toc:
   - id: benediction
     title: Benediction
 
-lyricsInclude: "lyrics/chapter-09.njk"
+lyrics: |
+  <p class="lyrics-section-label">[intro]</p>
+  <p>The scriptures call Him the Bridegroom,<br>
+  His Church the beloved bride.<br>
+  Discipleship is the wedding dance —<br>
+  Come walk with me inside.</p>
+
+  <p class="lyrics-section-label">[verse 1]</p>
+  <p>I opened Your journal and there You are —<br>
+  Not the stranger I'd imagined.<br>
+  A heart so tender it stuns me still,<br>
+  A love too patient to measure.</p>
+
+  <p>The more I look, the more I behold —<br>
+  Mercy woven through every word.<br>
+  Something in me begins to rise,<br>
+  Like a song I always knew but never heard.</p>
+
+  <p class="lyrics-section-label">[chorus]</p>
+  <p>Like the joy of a bride on her wedding day,<br>
+  Received by her Lord at the altar —<br>
+  Every heart overflowing, every voice lifted high,<br>
+  We behold You, Yehoshua — established we are.</p>
+
+  <p class="lyrics-section-label">[verse 2]</p>
+  <p>Now I see in Your eyes what You see in me —<br>
+  Every broken moment, now mending.<br>
+  You don't turn away from what I've been —<br>
+  You call me forward into Your knowing.</p>
+
+  <p>My heart swells. My soul is claimed.<br>
+  I am walking in Your light.<br>
+  Not alone — not anymore.<br>
+  Yoked together, every labor feels right.</p>
+
+  <p class="lyrics-section-label">[chorus]</p>
+  <p>Like the joy of a bride on her wedding day,<br>
+  Received by her Lord at the altar —<br>
+  Every heart overflowing, every voice lifted high,<br>
+  We behold You, Yehoshua — established we are.</p>
+
+  <p>At the feast You have prepared, we eat and drink —<br>
+  Your grace has made us more than we could be.</p>
+
+  <p class="lyrics-section-label">[verse 3]</p>
+  <p>For most of Your holy life You worked the wood and stone,<br>
+  Dust on Your hands and feet.<br>
+  A household fed by labor,<br>
+  Joy around the table — years among Your own.</p>
+
+  <p><em>And now I'm one of them.</em></p>
+
+  <p>A foundation laid in quiet repetition<br>
+  For a glory none could yet imagine.<br>
+  So I set my hands to what is mine —<br>
+  The humble road now holy ground beneath me.<br>
+  Each ordinary day a preparation,<br>
+  Built on faithfulness and laughter.</p>
+
+  <p class="lyrics-section-label">[chorus]</p>
+  <p>Like the joy of a bride on her wedding day,<br>
+  Received by her Lord at the altar —<br>
+  Every heart overflowing, every voice lifted high,<br>
+  We behold You, Yehoshua — established we are.</p>
+
+  <p>At the feast You have prepared, we eat and drink —<br>
+  Your grace has made us more than we could be.</p>
+
+  <p>Entering Your mansions, every promise fulfilled —<br>
+  A new life everlasting begins now with You.</p>
+
+  <p class="lyrics-section-label">[outro]</p>
+  <p>Father, thank You for the heart of Your Son.<br>
+  Thank You for letting me see as I have been seen —<br>
+  For the table, the labor, and the road ahead.<br>
+  Make me faithful in the ordinary days,<br>
+  Joyful in the dust and duty,<br>
+  And worthy of the name I now carry.<br>
+  In His holy name, Jesus Christ, amen.</p>
 discordChannelId: "1463836089163976734"
 
 prevChapter:
