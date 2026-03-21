@@ -70,7 +70,7 @@
         <div class="modal-header">
             <h3 id="infographicTitle">Visual Summary</h3>
             <div class="modal-header-actions">
-                <a href="/assets/images/{{ infographic }}" target="_blank" rel="noopener" class="modal-open-tab" aria-label="Open in new tab">
+                <a href="{% if slides.cdn %}https://media.wordsofplainness.org/images/{{ slides.path }}{{ infographic }}{% else %}/assets/images/{{ infographic }}{% endif %}" target="_blank" rel="noopener" class="modal-open-tab" aria-label="Open in new tab">
                     <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                         <polyline points="15 3 21 3 21 9"></polyline>
@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="modal-body infographic-body">
-            <img src="/assets/images/{{ infographic }}" alt="Chapter {{ chapter }} visual summary" class="modal-image">
+            <img src="{% if slides.cdn %}https://media.wordsofplainness.org/images/{{ slides.path }}{{ infographic }}{% else %}/assets/images/{{ infographic }}{% endif %}" alt="Chapter {{ chapter }} visual summary" class="modal-image">
         </div>
     </div>
 </div>
