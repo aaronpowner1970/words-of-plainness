@@ -63,7 +63,8 @@ const ChapterManager = {
             AudioSync.initSections(this.config.sections, this.config.sectionTimestamps || {}, audio);
         } else if (this.config.timestamps) {
             // Legacy single-file architecture (Chs 1-8)
-            AudioSync.init(this.config.timestamps, audio);
+            // Pass cueFile and cueId so the cue plays and RJW opens after narration ends
+            AudioSync.init(this.config.timestamps, audio, this.config.cueFile, this.config.cueId);
         }
     },
 
@@ -463,10 +464,14 @@ const ChapterManager = {
         // Backdrop click
         backdrop?.addEventListener('click', () => this.closeAllModals());
         
-        // Escape key
+        // Escape key + arrow key slide navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.closeAllModals();
+            }
+            if (document.getElementById('slidesModal')?.classList.contains('open')) {
+                if (e.key === 'ArrowLeft')  { e.preventDefault(); this.navigateSlide(-1); }
+                if (e.key === 'ArrowRight') { e.preventDefault(); this.navigateSlide(1);  }
             }
         });
         
@@ -538,6 +543,12 @@ const ChapterManager = {
         prevBtn?.addEventListener('click', () => this.navigateSlide(-1));
         nextBtn?.addEventListener('click', () => this.navigateSlide(1));
         fullscreenBtn?.addEventListener('click', () => this.toggleSlidesFullscreen());
+
+        // Mouse wheel navigation (only when slides modal is open)
+        document.getElementById('slidesCarousel')?.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            this.navigateSlide(e.deltaY > 0 ? 1 : -1);
+        }, { passive: false });
 
         // Listen for fullscreen change (Escape key, browser controls, etc.)
         document.addEventListener('fullscreenchange', () => this.onFullscreenChange());
