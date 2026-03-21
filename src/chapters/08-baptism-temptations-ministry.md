@@ -15,6 +15,7 @@ readingTime: 16
 audio:
   narration: NR_08_01_Baptism_Temptations_Ministry.mp3
   cue: NR_08_CUE_01_Closing.mp3
+  overview: PO_08_01_Baptism_Temptations_Ministry.mp3
 
 infographic: chapter-08-infographic.png
 slides:
