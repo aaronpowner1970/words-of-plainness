@@ -19,6 +19,11 @@ audio:
     file: "07_01_Promises_Kept_Folk_Hymn.mp3"
     title: "Promises Kept"
     description: "A sacred folk hymn testimony of the ancient promise kept — from prophecy through the hidden years."
+    duration: "7:29"
+    alternates:
+      - file: "07_02_Promises_Kept_Contemporary_Christian.mp3"
+        label: "Contemporary Christian"
+        duration: "6:14"
 
 lyrics: true
 pdf: WoP_Ch07_Prophecies_Birth_Youth.pdf
