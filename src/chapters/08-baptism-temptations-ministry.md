@@ -17,6 +17,7 @@ audio:
   cue: NR_08_CUE_01_Closing.mp3
   overview: PO_08_01_Baptism_Temptations_Ministry.mp3
 
+pdf: WoP_Ch08_Baptism_Temptations_Ministry.pdf
 infographic: chapter-08-infographic.png
 slides:
   count: 10
