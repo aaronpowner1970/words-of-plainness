@@ -16,7 +16,12 @@ audio:
   narration: NR_08_01_Baptism_Temptations_Ministry.mp3
   cue: NR_08_CUE_01_Closing.mp3
   overview: PO_08_01_Baptism_Temptations_Ministry.mp3
+  testimony:
+    file: "08_01_Prepared_in_All_Things_Desert_Troubadour.mp3"
+    title: "Prepared in All Things"
+    description: "A desert troubadour testimony of baptism, temptation, and the beginning of mortal ministry."
 
+lyrics: true
 pdf: WoP_Ch08_Baptism_Temptations_Ministry.pdf
 infographic: chapter-08-infographic.png
 slides:
