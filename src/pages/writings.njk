@@ -1,8 +1,6 @@
 ---
 layout: layouts/page.njk
-title: Writings
-pageTitle: "Words of Plainness: A Latter-day Witness of Jesus Christ"
-pageSubtitle: "Where Seekers and Saints Find Common Ground"
+title: "Words of Plainness: A Latter-day Witness of Jesus Christ"
 permalink: /writings/
 ---
 
@@ -62,7 +60,70 @@ permalink: /writings/
     opacity: 0.6;
     margin-bottom: var(--space-sm);
 }
+
+.writings-hero {
+    text-align: center;
+    padding: calc(80px + var(--space-xxl)) var(--space-xl) var(--space-xl);
+    background:
+        linear-gradient(to bottom, var(--overlay-lighter) 0%, var(--overlay-light) 100%),
+        url('../assets/images/library-empty.png') center center / cover no-repeat;
+    position: relative;
+}
+
+.writings-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at top, rgba(196,148,58,0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.writings-hero-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: var(--cream-soft);
+    line-height: 1.15;
+    margin: 0 auto var(--space-sm);
+    position: relative;
+}
+
+.writings-hero-title .title-main {
+    display: block;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+}
+
+.writings-hero-title .title-sub {
+    display: block;
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    margin-top: 0.2em;
+    font-style: italic;
+}
+
+.writings-hero-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold-primary);
+    opacity: 0.8;
+    letter-spacing: 0.06em;
+    position: relative;
+}
 </style>
+
+<!-- Custom hero — bypasses pageTitle/pageSubtitle to allow two-line title layout -->
+<div class="writings-hero">
+    <h1 class="writings-hero-title">
+        <span class="title-main">Words of Plainness</span>
+        <span class="title-sub">A Latter-day Witness of Jesus Christ</span>
+    </h1>
+    <p class="writings-hero-tagline">Where Seekers and Saints Find Common Ground</p>
+</div>
 
 <!-- Words of Plainness Volumes -->
 <section class="content-section alt" id="volumes">
