@@ -208,6 +208,26 @@ Separate landing page, separate navigation, self-contained reading experience. P
 
 ---
 
+## Site Pages (Non-Chapter)
+
+### About Brother Aaron
+
+Existing page introducing the author and his background.
+
+### Personal Studies (Planned — Near Future)
+
+A page linked from the About Brother Aaron section. Contains Aaron's independent theological and interdisciplinary research, offered as personal intellectual exploration distinct from ministry teaching.
+
+**Planned content:**
+- *Evolution vs. Creationism: A Science Teacher's Dilemma* — Aaron's master's thesis; intellectual biography as a theistic science educator
+- *Defining Spiritual Sensitivity: A Multidisciplinary Approach* — Research on spiritual sensitivity as cultivated interoceptive awareness; neuroscience/psychology convergence with mystical experience
+
+**Page framing note:** "These studies inform Aaron's thinking but are offered here as personal exploration, not as ministry teaching."
+
+**Not included here:** Divine Council / Evolution of Deity research (→ Volume 2 Go Deeper, Chapters 30–32); Interfaith Condemnation piece (→ Chapter 29 or resources section); Theosis Integration material (→ already on deployment track).
+
+---
+
 ## Phases of Development
 
 ### Phase 1 — Framework Launch (Immediate Priority)
