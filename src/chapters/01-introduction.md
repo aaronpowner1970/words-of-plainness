@@ -15,6 +15,7 @@ sectionCount: 16
 
 audio:
   narration: "NR_01_01_Introduction_to_Plainness.mp3"
+  cue: "NR_01_CUE_01_Closing.mp3"
   overview: "PO_01_01_Introduction_to_Plainness.mp3"
   testimony:
     file: "01_01_Introduction_to_Plainness_Sacred_Americana.mp3"
@@ -161,6 +162,16 @@ pauses:
       prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If something stirred in you as you read this opening — a recognition, a memory, a quiet pull toward something you cannot quite name — we invite you to put it into words here.</p>"
 ---
 
+<style>
+.statement-callout {
+  border-left: 3px solid var(--gold-primary);
+  background: rgba(196, 148, 58, 0.06);
+  padding: 20px 24px;
+  margin: 0 0 var(--space-md) 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+</style>
+
 <h2 id="section-human-condition">The Human Condition</h2>
 
 {% sentence 0 %}We are all so very human.{% endsentence %}
@@ -303,6 +314,7 @@ pauses:
 
 <h2 id="section-christ-centered">Christ-Centered Faith</h2>
 
+<div class="statement-callout">
 {% sentence 102 %}Our witness of Jesus Christ is the most important aspect of Words of Plainness.{% endsentence %}
 {% sentence 103 %}Many who are unfamiliar with the teachings of The Church of Jesus Christ of Latter-day Saints question or even deny our status as a Christian faith.{% endsentence %}
 {% sentence 104 %}We do not question or deny anyone else's status as Christians.{% endsentence %}
@@ -311,6 +323,7 @@ pauses:
 {% sentence 107 %}We believe the words of the Apostle Paul: "No man can say that Jesus is the Lord, but by the Holy Ghost." (1 Corinthians 12:3){% endsentence %}
 {% sentence 108 %}Again, in the truest sense of the word "Christian," theological and doctrinal differences between religious denominations need not determine whether a person is a sincere disciple of Christ.{% endsentence %}
 {% sentence 109 %}Words of Plainness is an attempt to explain what it means to be a sincere follower of Christ to faithful members of The Church of Jesus Christ of Latter-day Saints.{% endsentence %}
+</div>
 
 <h2 id="section-witness">Our Witness of the Savior</h2>
 
