@@ -25,6 +25,83 @@ audio:
       - file: "10_03_He_Always_Knew_Me_Gospel_Soul.mp3"
         label: "Gospel Soul"
 
+lyrics: |
+  <p class="lyrics-section"><strong>[Verse 1]</strong></p>
+  <p>I — have worn too many names.<br>
+  Tried to find the one that fits.<br>
+  Identified myself by what I've done.<br>
+  Cared what the world thinks.</p>
+
+  <p>Afraid to come up empty.<br>
+  Afraid to leave no mark.<br>
+  Traded everything I was.<br>
+  Trying to find out who I am.</p>
+
+  <p class="lyrics-section"><strong>[Verse 2]</strong></p>
+  <p>But in the garden in the dark.<br>
+  He — didn't come to teach or speak.<br>
+  Christ — measured the full weight of me.<br>
+  Every sorrow, every dream.</p>
+
+  <p>Every shame I've carried quietly.<br>
+  Every hope I couldn't name.<br>
+  He felt it all from the inside.<br>
+  And — He didn't turn away.</p>
+
+  <p class="lyrics-section"><strong>[Chorus]</strong></p>
+  <p><em>You always knew me.<br>
+  Before I knew myself.<br>
+  You didn't wait for me to find you.<br>
+  You came to know me first, earn my trust.</em></p>
+
+  <p><em>I am a child of God.<br>
+  That's who I've always been.<br>
+  I don't have to search anymore.<br>
+  I'm already known.<br>
+  I'm already loved.<br>
+  I've found my heavenly home.</em></p>
+
+  <p class="lyrics-section"><strong>[Verse 3]</strong></p>
+  <p>He — didn't stay dead, He lives<br>
+  That's the thing that makes it real.<br>
+  He — rose and works among the faithful still.<br>
+  Not a memory.<br>
+  Not just an ideal.</p>
+
+  <p>All that time I spent on fear.<br>
+  All that searching, all that weight.<br>
+  Now I set it free — and I'll use it well.<br>
+  On something worth my days.</p>
+
+  <p class="lyrics-section"><strong>[Bridge]</strong></p>
+  <p><em>Not just a teacher.<br>
+  Not just a death.<br>
+  He used the power of Creation.<br>
+  To know me first.</em></p>
+
+  <p><em>And knowing me completely.<br>
+  He thought I was worth His life.<br>
+  He thought you were worth it, too.<br>
+  He still does.</em></p>
+
+  <p class="lyrics-section"><strong>[Final Chorus]</strong></p>
+  <p><em>You always knew me.<br>
+  Before I knew myself.<br>
+  You didn't wait for me to find you.<br>
+  You came to know me first, earn my trust.</em></p>
+
+  <p><em>I am a child of God, and so are you.<br>
+  You don't have to search anymore.<br>
+  You're already known.<br>
+  You're already loved.<br>
+  Welcome home...</em></p>
+
+  <p class="lyrics-section"><strong>[Outro]</strong></p>
+  <p><em>The search is over it was always over.<br>
+  He just wanted you to know.<br>
+  In the name of Jesus Christ.<br>
+  Amen.</em></p>
+
 pdf: WoP_Ch10_Suffering_Trial_Crucifixion_Resurrection.pdf
 infographic: chapter-10-infographic.png
 slides:
@@ -43,7 +120,7 @@ toc:
   - id: saved-and-then-what
     title: Saved, and Then What?
 
-discordChannelId: ""
+discordChannelId: "1463836125587181706"
 
 prevChapter:
   url: "/chapters/09-yehoshua-the-man/"
