@@ -119,6 +119,7 @@ const ChapterManager = {
         document.getElementById('playIcon').style.display = 'none';
         document.getElementById('pauseIcon').style.display = 'block';
         document.dispatchEvent(new Event('wop:audio-play'));
+        if (window.Engagement) window.Engagement.track('audio_play', { section_id: window.AudioSync?.currentSectionId || null });
     },
 
     pause() {
@@ -181,8 +182,9 @@ const ChapterManager = {
         this.isPlaying = false;
         document.getElementById('playIcon').style.display = 'block';
         document.getElementById('pauseIcon').style.display = 'none';
+        if (window.Engagement) window.Engagement.track('audio_complete', { section_id: window.AudioSync?.currentSectionId || null, duration_seconds: Math.round(this.audioPlayer?.duration || 0) });
     },
-    
+
     // Reading Progress
     initReadingProgress() {
         const progressFill = document.getElementById('readingProgressFill');
@@ -234,6 +236,7 @@ const ChapterManager = {
         } catch (e) { /* silent */ }
 
         const nowBookmarked = !isBookmarked;
+        if (nowBookmarked && window.Engagement) window.Engagement.track('bookmark', {});
 
         if (nowBookmarked) {
             // Save scroll position (used by resume prompt)
@@ -288,6 +291,7 @@ const ChapterManager = {
         } catch (e) { /* silent */ }
 
         const nowComplete = !isComplete;
+        if (nowComplete && window.Engagement) window.Engagement.track('complete', {});
 
         try {
             localStorage.setItem(`wop-complete-${chapterId}`, nowComplete ? 'true' : 'false');
@@ -488,6 +492,7 @@ const ChapterManager = {
         document.getElementById(modalId)?.classList.add('open');
         document.getElementById('modalBackdrop')?.classList.add('visible');
         document.body.style.overflow = 'hidden';
+        if (window.Engagement) window.Engagement.track('modal_open', { modal_type: modalId.replace('Modal', '') });
     },
     
     closeAllModals() {
@@ -985,6 +990,7 @@ const RJW = (function() {
         document.getElementById('rjwOverlay').classList.add('open');
         document.getElementById('rjwPanel').classList.add('open');
         document.body.style.overflow = 'hidden';
+        if (window.Engagement) window.Engagement.track('rjw_open', { pause_id: pauseId, tab: tabKey });
     }
 
     /* ── CLOSE — saves current text, NEVER clears it ──── */
@@ -1030,6 +1036,7 @@ const RJW = (function() {
                 saveStoredBool(activePauseId, 'witness-submit-community', cbComm ? cbComm.checked : false);
             }
         }
+        if (window.Engagement) window.Engagement.track('rjw_save', { pause_id: activePauseId, tab: tabKey });
         var ind = document.getElementById('save-' + tabKey);
         if (ind) {
             ind.classList.add('visible');

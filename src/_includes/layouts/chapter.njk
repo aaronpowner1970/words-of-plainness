@@ -233,6 +233,7 @@
         if (typeof ChapterManager !== 'undefined') {
             ChapterManager.init(CHAPTER_CONFIG);
         }
+        if (window.Engagement) window.Engagement.initChapterPage();
     });
 </script>
 {% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}

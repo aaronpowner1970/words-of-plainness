@@ -244,6 +244,8 @@ const API = {
 
         // After login, check for localStorage reflections to migrate
         this.checkReflectionMigration();
+        if (window.Engagement) window.Engagement.flushQueue();
+        document.dispatchEvent(new CustomEvent('wop:auth-login', { detail: { user: this.user } }));
     },
 
     // =========================================
