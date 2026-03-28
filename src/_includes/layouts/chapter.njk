@@ -306,42 +306,52 @@
 
   let citePanelOpen = false;
   let citeActiveEntry = null;
-  let citeHighlightTimer = null;
   let _citeAudioWasPlaying = false;
+  let _citeWasSyncScrollEnabled;
 
   /* ── OPEN ─────────────────────────────────────── */
   function citePanelOpen_() {
     document.getElementById('citePanel').classList.add('open');
-    document.getElementById('citeBackdrop').classList.add('open');
+    var backdrop = document.getElementById('citeBackdrop');
+    if (backdrop) backdrop.classList.add('open');
     citePanelOpen = true;
-    // Pause narration if playing
-    if (window.ChapterManager && window.ChapterManager.isPlaying) {
-      _citeAudioWasPlaying = true;
+
+    // Suspend prose auto-scroll so citation panel controls the scroll
+    if (window.AudioSync) {
+      _citeWasSyncScrollEnabled = window.AudioSync.autoScrollEnabled;
+      window.AudioSync.autoScrollEnabled = false;
+    }
+
+    // Pause audio if currently playing
+    _citeAudioWasPlaying = !!(window.ChapterManager && window.ChapterManager.isPlaying);
+    if (_citeAudioWasPlaying && window.ChapterManager) {
       window.ChapterManager.pause();
-    } else {
-      _citeAudioWasPlaying = false;
     }
   }
 
   /* ── CLOSE ────────────────────────────────────── */
   window.citePanelClose = function () {
     document.getElementById('citePanel').classList.remove('open');
-    document.getElementById('citeBackdrop').classList.remove('open');
+    var backdrop = document.getElementById('citeBackdrop');
+    if (backdrop) backdrop.classList.remove('open');
     citePanelOpen = false;
     clearCiteHighlight();
-    // Resume narration if it was playing when panel opened
+
+    // Restore prose auto-scroll
+    if (window.AudioSync && _citeWasSyncScrollEnabled !== undefined) {
+      window.AudioSync.autoScrollEnabled = _citeWasSyncScrollEnabled;
+      _citeWasSyncScrollEnabled = undefined;
+    }
+
+    // Resume audio only if it was playing when the panel opened
     if (_citeAudioWasPlaying && window.ChapterManager) {
-      _citeAudioWasPlaying = false;
       window.ChapterManager.play();
+      _citeAudioWasPlaying = false;
     }
   };
 
   /* ── CLEAR HIGHLIGHT ──────────────────────────── */
   function clearCiteHighlight() {
-    if (citeHighlightTimer) {
-      clearTimeout(citeHighlightTimer);
-      citeHighlightTimer = null;
-    }
     if (citeActiveEntry) {
       var el = document.getElementById(citeActiveEntry);
       if (el) el.classList.remove('highlight');
@@ -366,16 +376,6 @@
         if (!el) return;
         el.classList.add('highlight');
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        var dur = parseInt(
-          getComputedStyle(document.documentElement)
-            .getPropertyValue('--cite-highlight-duration')
-        ) || 1800;
-
-        citeHighlightTimer = setTimeout(function () {
-          el.classList.remove('highlight');
-          citeHighlightTimer = null;
-        }, dur);
       }, delay);
     }
 
