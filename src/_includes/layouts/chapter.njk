@@ -323,7 +323,8 @@
     }
 
     // Pause audio if currently playing
-    _citeAudioWasPlaying = !!(window.ChapterManager && window.ChapterManager.isPlaying);
+    var _audio = document.getElementById('chapterAudio');
+    _citeAudioWasPlaying = !!(_audio && !_audio.paused && !_audio.ended && _audio.readyState > 2);
     if (_citeAudioWasPlaying && window.ChapterManager) {
       window.ChapterManager.pause();
     }
