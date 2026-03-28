@@ -179,6 +179,63 @@
 <!-- Modals (Overview, Testimony, Infographic, Slides) -->
 {% set lyricsHtml = chapter | lyricsContent %}
 {% include "components/modals.njk" %}
+
+<!-- Citation Panel (left slide-out) -->
+{% if citations %}
+<div class="cite-overlay" id="citePanel" aria-label="Citations panel" role="complementary">
+  <div class="cite-header">
+    <div class="cite-header-top">
+      <div>
+        <div class="cite-eyebrow">Sources &amp; Citations</div>
+        <div class="cite-chapter-name">{{ title }}</div>
+      </div>
+      <button class="cite-close" onclick="citePanelClose()" aria-label="Close citations panel">✕</button>
+    </div>
+    <div class="cite-explanation">
+      <p>This chapter draws on the Old and New Testaments as its primary witnesses,
+         with Restoration scriptures cited where they offer the clearest amplification
+         of a biblical truth. All citations open in the Church of Jesus Christ
+         scripture tool for reading and study.</p>
+      <div class="source-key">
+        <span class="source-badge ot">Old Testament</span>
+        <span class="source-badge nt">New Testament</span>
+        <span class="source-badge bom">Book of Mormon</span>
+        <span class="source-badge dc">D&amp;C / Pearl</span>
+      </div>
+      <a class="cite-learn-link" href="/about/sources/">About our sources →</a>
+    </div>
+  </div>
+
+  <div class="cite-body" id="citeBody">
+    {% for group in citations %}
+    <div class="cite-section-group">
+      <div class="cite-section-label">{{ group.section }}</div>
+      {% for entry in group.entries %}
+      <div class="cite-entry" id="{{ entry.id }}">
+        <span class="cite-entry-badge">
+          <span class="source-badge {{ entry.type }}">
+            {% if entry.type == "ot" %}OT
+            {% elif entry.type == "nt" %}NT
+            {% elif entry.type == "bom" %}BoM
+            {% elif entry.type == "dc" %}D&amp;C
+            {% endif %}
+          </span>
+        </span>
+        <div>
+          <a class="cite-ref-link"
+             href="{{ entry.ref | scriptureUrl }}"
+             target="_blank"
+             rel="noopener noreferrer">{{ entry.ref }}</a>
+          <div class="cite-ref-text">{{ entry.note }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
 </div>
 
 {% endblock %}
@@ -236,6 +293,115 @@
         if (window.Engagement) window.Engagement.initChapterPage();
     });
 </script>
+{% if citations %}
+<script>
+/* ── CITATION PANEL ──────────────────────────────────
+   Coexists with R·J·W system. Left-side panel only.
+   R·J·W modal (right side) closes before this opens.
+   ─────────────────────────────────────────────────── */
+
+(function () {
+  'use strict';
+
+  let citePanelOpen = false;
+  let citeActiveEntry = null;
+  let citeHighlightTimer = null;
+
+  /* ── OPEN ─────────────────────────────────────── */
+  function citePanelOpen_() {
+    document.getElementById('citePanel').classList.add('open');
+    citePanelOpen = true;
+  }
+
+  /* ── CLOSE ────────────────────────────────────── */
+  window.citePanelClose = function () {
+    document.getElementById('citePanel').classList.remove('open');
+    citePanelOpen = false;
+    clearCiteHighlight();
+  };
+
+  /* ── CLEAR HIGHLIGHT ──────────────────────────── */
+  function clearCiteHighlight() {
+    if (citeHighlightTimer) {
+      clearTimeout(citeHighlightTimer);
+      citeHighlightTimer = null;
+    }
+    if (citeActiveEntry) {
+      var el = document.getElementById(citeActiveEntry);
+      if (el) el.classList.remove('highlight');
+      citeActiveEntry = null;
+    }
+  }
+
+  /* ── OPEN AT ENTRY ────────────────────────────── */
+  window.citeOpenAt = function (entryId) {
+    var rjwPanel = document.getElementById('rjwPanel');
+    var rjwIsOpen = rjwPanel && rjwPanel.classList.contains('open');
+
+    function doOpen() {
+      var wasOpen = citePanelOpen;
+      if (!citePanelOpen) citePanelOpen_();
+      clearCiteHighlight();
+      citeActiveEntry = entryId;
+
+      var delay = wasOpen ? 0 : 420;
+      setTimeout(function () {
+        var el = document.getElementById(entryId);
+        if (!el) return;
+        el.classList.add('highlight');
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        var dur = parseInt(
+          getComputedStyle(document.documentElement)
+            .getPropertyValue('--cite-highlight-duration')
+        ) || 1800;
+
+        citeHighlightTimer = setTimeout(function () {
+          el.classList.remove('highlight');
+          citeHighlightTimer = null;
+        }, dur);
+      }, delay);
+    }
+
+    if (rjwIsOpen) {
+      /* Close R·J·W first. RJW.closeModal() is the existing R·J·W
+         close function defined in chapter.js. */
+      RJW.closeModal();
+      setTimeout(doOpen, 400);
+    } else {
+      doOpen();
+    }
+  };
+
+  /* ── WIRE UP DAGGER MARKS ─────────────────────── */
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.cite-mark').forEach(function (mark) {
+      var entryId = mark.getAttribute('data-entry');
+      if (!entryId) return;
+
+      mark.addEventListener('click', function () {
+        citeOpenAt(entryId);
+      });
+
+      mark.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          citeOpenAt(entryId);
+        }
+      });
+    });
+  });
+
+  /* ── KEYBOARD CLOSE ───────────────────────────── */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && citePanelOpen) {
+      window.citePanelClose();
+    }
+  });
+
+})();
+</script>
+{% endif %}
 {% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
 <script>
     window.WOP_AMBIENT_TRACKS = [

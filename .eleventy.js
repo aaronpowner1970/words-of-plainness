@@ -141,6 +141,12 @@ module.exports = function(eleventyConfig) {
         if (minutes < 1) return "< 1 min read";
         return `~${minutes} min read`;
     });
+
+    // Scripture URL construction (build-time filter for citation panel)
+    // Wraps existing generateScriptureUrl helper, normalizing en-dashes
+    eleventyConfig.addFilter("scriptureUrl", function(ref) {
+        return generateScriptureUrl(ref.replace(/\u2013/g, '-'));
+    });
     
     // =========================================
     // SHORTCODES
@@ -184,6 +190,13 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addShortcode("scripture", function(reference) {
         const url = generateScriptureUrl(reference);
         return `<a href="${url}" class="scripture-link" target="_blank" rel="noopener">${reference}</a>`;
+    });
+
+    // Citation dagger mark (build-time)
+    // Usage: {% cite "ce-matt1129" %}
+    eleventyConfig.addShortcode("cite", function(entryId, tip) {
+        const tooltip = tip || "Open citations panel.";
+        return `<span class="cite-mark" data-tip="${tooltip}" data-entry="${entryId}" tabindex="0" role="button" aria-label="Open citations panel"></span>`;
     });
     
     // =========================================
