@@ -182,6 +182,7 @@
 
 <!-- Citation Panel (left slide-out) -->
 {% if citations %}
+<div class="cite-backdrop" id="citeBackdrop" onclick="window.citePanelClose()"></div>
 <div class="cite-overlay" id="citePanel" aria-label="Citations panel" role="complementary">
   <div class="cite-header">
     <div class="cite-header-top">
@@ -306,18 +307,33 @@
   let citePanelOpen = false;
   let citeActiveEntry = null;
   let citeHighlightTimer = null;
+  let _citeAudioWasPlaying = false;
 
   /* ── OPEN ─────────────────────────────────────── */
   function citePanelOpen_() {
     document.getElementById('citePanel').classList.add('open');
+    document.getElementById('citeBackdrop').classList.add('open');
     citePanelOpen = true;
+    // Pause narration if playing
+    if (window.ChapterManager && window.ChapterManager.isPlaying) {
+      _citeAudioWasPlaying = true;
+      window.ChapterManager.pause();
+    } else {
+      _citeAudioWasPlaying = false;
+    }
   }
 
   /* ── CLOSE ────────────────────────────────────── */
   window.citePanelClose = function () {
     document.getElementById('citePanel').classList.remove('open');
+    document.getElementById('citeBackdrop').classList.remove('open');
     citePanelOpen = false;
     clearCiteHighlight();
+    // Resume narration if it was playing when panel opened
+    if (_citeAudioWasPlaying && window.ChapterManager) {
+      _citeAudioWasPlaying = false;
+      window.ChapterManager.play();
+    }
   };
 
   /* ── CLEAR HIGHLIGHT ──────────────────────────── */

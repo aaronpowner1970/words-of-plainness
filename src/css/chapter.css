@@ -3632,6 +3632,19 @@ h2[id], h3[id], [id^="section-"] {
 
 /* ── CITATION PANEL — LEFT SLIDE-OUT ──────────────── */
 
+.cite-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 299;
+    /* Sits just below cite-overlay; captures click-outside-to-close */
+}
+
+.cite-backdrop.open {
+    display: block;
+}
+
 .cite-overlay {
     position: fixed;
     top: 0;
@@ -3655,6 +3668,7 @@ h2[id], h3[id], [id^="section-"] {
 
 /* HEADER */
 .cite-header {
+    position: relative;
     padding: 22px 20px 14px;
     background: var(--mid-brown);
     border-bottom: 1px solid rgba(196,148,58,0.15);
@@ -3664,8 +3678,8 @@ h2[id], h3[id], [id^="section-"] {
 .cite-header-top {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
     margin-bottom: 12px;
+    padding-right: 40px;
 }
 
 .cite-eyebrow {
@@ -3686,26 +3700,29 @@ h2[id], h3[id], [id^="section-"] {
 }
 
 .cite-close {
-    width: 28px;
-    height: 28px;
-    background: transparent;
-    border: 1px solid rgba(196,148,58,0.2);
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    background: rgba(196,148,58,0.1);
+    border: 1px solid rgba(196,148,58,0.45);
     border-radius: 50%;
-    color: var(--cream-dim);
+    color: var(--gold-pale);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 15px;
     flex-shrink: 0;
-    margin-top: 2px;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
+    z-index: 1;
 }
 
 .cite-close:hover {
-    background: var(--cream-faint);
-    border-color: var(--gold-dim);
-    color: var(--cream);
+    background: rgba(196,148,58,0.22);
+    border-color: var(--gold);
+    color: var(--gold-pale);
 }
 
 /* EXPLANATION BLOCK */
@@ -3822,11 +3839,16 @@ h2[id], h3[id], [id^="section-"] {
     padding: 9px 10px;
     margin-bottom: 4px;
     border-radius: 3px;
-    transition: background 0.38s cubic-bezier(0.4,0,0.2,1);
+    border-left: 3px solid transparent;
+    transition: background 0.38s cubic-bezier(0.4,0,0.2,1),
+                border-color 0.38s cubic-bezier(0.4,0,0.2,1),
+                box-shadow 0.38s cubic-bezier(0.4,0,0.2,1);
 }
 
 .cite-entry.highlight {
-    background: rgba(196,148,58,0.13);
+    background: rgba(196,148,58,0.22);
+    border-left-color: var(--gold);
+    box-shadow: inset 0 0 0 1px rgba(196,148,58,0.18);
 }
 
 .cite-entry:hover {
