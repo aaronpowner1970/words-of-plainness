@@ -239,6 +239,7 @@ const AudioSync = {
     },
 
     _seekWithinCurrentSection(time) {
+        if (!this._isPlayerActive()) return;
         this.state = 'PLAYING_PROSE';
         this._showPlayer();
         this.audioPlayer.currentTime = time;
@@ -246,6 +247,7 @@ const AudioSync = {
     },
 
     _seekToSentenceAcrossSections(sentIdx) {
+        if (!this._isPlayerActive()) return;
         const sentKey = `s${sentIdx}`;
 
         for (let i = 0; i < this.sections.length; i++) {
@@ -274,6 +276,7 @@ const AudioSync = {
     },
 
     _execSeek(time) {
+        if (!this._isPlayerActive()) return;
         this.state = 'PLAYING_PROSE';
         this.audioPlayer.currentTime = time;
         this._ensurePlaying();
@@ -284,6 +287,13 @@ const AudioSync = {
         if (playerEl && !playerEl.classList.contains('visible')) {
             playerEl.classList.add('visible');
         }
+    },
+
+    _isPlayerActive() {
+        const playerEl = document.getElementById('audioPlayer');
+        const isVisible = playerEl && playerEl.classList.contains('visible');
+        const isPlaying = this.audioPlayer && !this.audioPlayer.paused;
+        return isVisible || isPlaying;
     },
 
     _ensurePlaying() {

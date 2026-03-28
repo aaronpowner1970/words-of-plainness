@@ -396,13 +396,15 @@
       var entryId = mark.getAttribute('data-entry');
       if (!entryId) return;
 
-      mark.addEventListener('click', function () {
+      mark.addEventListener('click', function (e) {
+        e.stopPropagation();
         citeOpenAt(entryId);
       });
 
       mark.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
+          e.stopPropagation();
           citeOpenAt(entryId);
         }
       });
