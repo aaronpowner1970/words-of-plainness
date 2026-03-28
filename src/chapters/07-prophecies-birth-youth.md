@@ -14,6 +14,7 @@ readingTime: 22
 
 audio:
   narration: NR_07_01_Prophecies_Birth_and_Youth.mp3
+  cue: NR_07_CUE_01_Closing.mp3
   overview: PO_07_01_Prophecies_Birth_and_Youth.mp3
   testimony:
     file: "07_01_Promises_Kept_Folk_Hymn.mp3"

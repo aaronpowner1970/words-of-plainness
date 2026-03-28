@@ -15,6 +15,7 @@ Before closing or when Aaron says "that's it," "done," "wrap up," or similar:
    - A descriptive title
 2. Call `memory:create_entities` or `memory:add_observations` if any new architectural decisions, milestones, or technical knowledge should persist.
 3. Prompt Aaron: "Before we close, should I store anything else to the graph?"
+4. Remind Aaron: "Before you close Claude Code — kill all Claude processes in Task Manager, then delete `.claude\worktrees\*` folders."
 
 ## Key References
 - Definitive Architecture: see project file `WoP_Definitive_Architecture_20260217.md`
