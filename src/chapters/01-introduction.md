@@ -160,6 +160,43 @@ pauses:
       prompt: "<p>The authors confess their own imperfections and say they feel as if they have \"awakened from a deep sleep, made new and somehow more whole\" by their acquaintance with God. Write about where you are in your own awakening — just beginning, mid-journey, or somewhere you did not expect to be.</p>"
     witness:
       prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If something stirred in you as you read this opening — a recognition, a memory, a quiet pull toward something you cannot quite name — we invite you to put it into words here.</p>"
+citations:
+  - section: "Our Lives as Latter-day Saints"
+    entries:
+      - id: "ce-1cor12"
+        ref: "1 Corinthians 12"
+        type: "nt"
+        note: "The gifts of the Spirit — wisdom, faith, healing, miracles, prophecy, discernment, tongues, and interpretation."
+
+  - section: "Christ-Centered Faith"
+    entries:
+      - id: "ce-1cor123"
+        ref: "1 Corinthians 12:3"
+        type: "nt"
+        note: "\"No man can say that Jesus is the Lord, but by the Holy Ghost\" — the Spirit as the arbiter of Christian confession."
+
+  - section: "Kinship with All Believers"
+    entries:
+      - id: "ce-matt522"
+        ref: "Matthew 5:22"
+        type: "nt"
+        note: "Those who are angry with a brother without cause are in danger of judgment."
+      - id: "ce-prov330"
+        ref: "Proverbs 3:30"
+        type: "ot"
+        note: "\"Strive not with a man without cause, if he have done thee no harm.\""
+      - id: "ce-ps1093"
+        ref: "Psalms 109:3"
+        type: "ot"
+        note: "\"They compassed me about also with words of hatred; and fought against me without a cause.\""
+      - id: "ce-luke950"
+        ref: "Luke 9:50"
+        type: "nt"
+        note: "\"He that is not against us is for us\" — Christ's expansive definition of who belongs to His cause."
+      - id: "ce-john317"
+        ref: "John 3:17"
+        type: "nt"
+        note: "\"God sent not his Son into the world to condemn the world; but that the world through him might be saved.\""
 ---
 
 <style>
@@ -301,7 +338,7 @@ pauses:
 {% sentence 90 %}We read and study the Scriptures.{% endsentence %}
 {% sentence 91 %}We are not perfect, but we continually repent and seek to align our lives with God's will.{% endsentence %}
 {% sentence 92 %}We strive to cultivate the fruits of the Spirit: patience, kindness, love, charity, peace, joy, meekness, etc.{% endsentence %}
-{% sentence 93 %}We seek to obtain the gifts of the Spirit described in 1 Corinthians 12: wisdom, faith, healing, miracles, prophecy, discerning of spirits, speaking in tongues, and interpretation of tongues.{% endsentence %}
+{% sentence 93 %}We seek to obtain the gifts of the Spirit described in 1 Corinthians 12{% cite "ce-1cor12" %}: wisdom, faith, healing, miracles, prophecy, discerning of spirits, speaking in tongues, and interpretation of tongues.{% endsentence %}
 {% sentence 94 %}We study with open hearts and minds.{% endsentence %}
 
 {% sentence 95 %}We seek to be of service to our fellowman.{% endsentence %}
@@ -320,7 +357,7 @@ pauses:
 {% sentence 104 %}We do not question or deny anyone else's status as Christians.{% endsentence %}
 {% sentence 105 %}Regardless of the opinions of critics, members of our Church are Christians.{% endsentence %}
 {% sentence 106 %}We are of the same Spirit as other Christians, though of a different understanding.{% endsentence %}
-{% sentence 107 %}We believe the words of the Apostle Paul: "No man can say that Jesus is the Lord, but by the Holy Ghost." (1 Corinthians 12:3){% endsentence %}
+{% sentence 107 %}We believe the words of the Apostle Paul: "No man can say that Jesus is the Lord, but by the Holy Ghost."{% cite "ce-1cor123" %}{% endsentence %}
 {% sentence 108 %}Again, in the truest sense of the word "Christian," theological and doctrinal differences between religious denominations need not determine whether a person is a sincere disciple of Christ.{% endsentence %}
 {% sentence 109 %}Words of Plainness is an attempt to explain what it means to be a sincere follower of Christ to faithful members of The Church of Jesus Christ of Latter-day Saints.{% endsentence %}
 </div>
@@ -349,9 +386,9 @@ pauses:
 {% sentence 125 %}If we all heed the Savior's call, "Come follow me," we will undoubtedly find ourselves together in His kingdom at last.{% endsentence %}
 
 {% sentence 126 %}However, if any of us dare to persecute one another over differences in doctrine and silly rumors—as though we were truly wise in any way—we will undoubtedly find ourselves both unworthy and uncomfortable upon leaving this life to stand in judgment before God.{% endsentence %}
-{% sentence 127 %}Jesus said that those who are angry with a brother without cause are in danger of judgment. (Matthew 5:22; Proverbs 3:30; Psalms 109:3){% endsentence %}
-{% sentence 128 %}He also taught, "He that is not against us is for us." (Luke 9:50){% endsentence %}
-{% sentence 129 %}Further, Jesus "came not to condemn the world." (John 3:17){% endsentence %}
+{% sentence 127 %}Jesus said that those who are angry with a brother without cause are in danger of judgment.{% cite "ce-matt522" %}{% cite "ce-prov330" %}{% cite "ce-ps1093" %}{% endsentence %}
+{% sentence 128 %}He also taught, "He that is not against us is for us."{% cite "ce-luke950" %}{% endsentence %}
+{% sentence 129 %}Further, Jesus "came not to condemn the world."{% cite "ce-john317" %}{% endsentence %}
 {% sentence 130 %}Do we, then, have any right to condemn one another?{% endsentence %}
 {% sentence 131 %}Are any of us better or wiser than He?{% endsentence %}
 
