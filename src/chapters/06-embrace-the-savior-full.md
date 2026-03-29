@@ -212,6 +212,21 @@ prevChapter:
 nextChapter:
   url: "/chapters/07-prophecies-birth-youth/"
   title: "Chapter 7: Prophecies, Birth, and Youth"
+citations:
+  - section: "When Faith Is Tested"
+    entries:
+      - id: ce-dc622
+        ref: "D&C 6:22–23"
+        type: dc
+        url: "dc-testament/dc/6?id=p22-p23#p22"
+        text: "Cast your mind upon the night that you cried unto me in your heart. Did I not speak peace to your mind concerning the matter? What greater witness can you have than from God?"
+  - section: "The Invitation"
+    entries:
+      - id: ce-dc12145
+        ref: "D&C 121:45"
+        type: dc
+        url: "dc-testament/dc/121?id=p45#p45"
+        text: "Then shall thy confidence wax strong in the presence of God; and the doctrine of the priesthood shall distil upon thy soul as the dews from heaven."
 pauses:
   - id: "pause-closing"
     title: "Embrace the Savior"
@@ -931,7 +946,7 @@ Amen.
 
 {% sentence 229 %}The Lord counseled a struggling disciple: "Cast your mind upon the night that you cried unto me in your heart.{% endsentence %}
 {% sentence 230 %}Did I not speak peace to your mind concerning the matter?{% endsentence %}
-{% sentence 231 %}What greater witness can you have than from God?" (D&C 6:22–23).{% endsentence %}
+{% sentence 231 %}What greater witness can you have than from God?"{% cite "ce-dc622" %}.{% endsentence %}
 
 {% sentence 232 %}Remind yourself that you have felt the Spirit of God before.{% endsentence %}
 {% sentence 233 %}The seed has swelled within.{% endsentence %}
@@ -962,7 +977,7 @@ Amen.
 *{% sentence 247 %}<span class="star-icon">۞</span> Remember Him.{% endsentence %}*
 
 {% sentence 248 %}We promise you, in the name of Jesus Christ, that if you do these things your faith will be made unshakable by the power of the Spirit of God.{% endsentence %}
-{% sentence 249 %}"Then shall thy confidence wax strong in the presence of God" (D&C 121:45).{% endsentence %}
+{% sentence 249 %}"Then shall thy confidence wax strong in the presence of God"{% cite "ce-dc12145" %}.{% endsentence %}
 {% sentence 250 %}You will know—not merely believe, but know—that Jesus Christ is the Son of God, the Savior of all who receive Him, and that embracing Him is not loss but gain, not bondage but freedom, not the end of your journey but its true beginning.{% endsentence %}
 
 {% sentence 251 %}In the name of Jesus Christ.{% endsentence %}
