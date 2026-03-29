@@ -3586,15 +3586,15 @@ h2[id], h3[id], [id^="section-"] {
 /* ── DAGGER MARK (.cite-mark) ─────────────────── */
 .cite-mark {
     display: inline-block;
-    font-size: 0.78em;
+    font-size: 0.82em;
     vertical-align: super;
     line-height: 1;
-    color: var(--gold-dim);
+    color: var(--gold-primary);
     cursor: pointer;
     margin-left: 2px;
     font-family: 'Cinzel', serif;
-    font-weight: 400;
-    border-bottom: 1px solid transparent;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(196,148,58,0.5);
     transition: color 0.18s, border-color 0.18s;
     user-select: none;
     position: relative;
@@ -3605,8 +3605,8 @@ h2[id], h3[id], [id^="section-"] {
 }
 
 .cite-mark:hover {
-    color: var(--gold);
-    border-bottom-color: rgba(196,148,58,0.5);
+    color: var(--gold-pale);
+    border-bottom-color: rgba(232,201,122,0.8);
 }
 
 /* Tooltip — desktop hover only */

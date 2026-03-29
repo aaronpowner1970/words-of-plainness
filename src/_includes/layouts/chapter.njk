@@ -227,7 +227,7 @@
              href="{{ entry.ref | scriptureUrl }}"
              target="_blank"
              rel="noopener noreferrer">{{ entry.ref }}</a>
-          <div class="cite-ref-text">{{ entry.note }}</div>
+          <div class="cite-ref-text">{{ entry.note or entry.text }}</div>
         </div>
       </div>
       {% endfor %}
