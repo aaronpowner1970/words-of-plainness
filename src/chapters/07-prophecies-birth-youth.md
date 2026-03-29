@@ -158,6 +158,174 @@ pauses:
       prompt: "<p>Mary said yes to a calling she did not fully understand, before she knew what it would cost. Joseph absorbed shame he did not deserve without a word of complaint recorded. Have you ever been asked to say yes before you understood — or to carry something that wasn't your fault? Write about what that season asked of you.</p>"
     witness:
       prompt: "<p>Jesus spent thirty years living humbly before anyone recognized him publicly. What does that say about the value God places on ordinary, faithful, daily living? If your hidden years have produced something in you that surprised you, this is a good place to share it.</p>"
+
+citations:
+  - section: "The Ancient Promise"
+    entries:
+      - id: "ce-moses57"
+        ref: "Moses 5:7"
+        type: "dc"
+        note: "The angel explains Adam's altar offering: a similitude of the sacrifice of the Only Begotten, full of grace and truth."
+      - id: "ce-moses59"
+        ref: "Moses 5:9"
+        type: "dc"
+        note: "The Holy Ghost's witness to Adam: \"I am the Only Begotten of the Father… that as thou hast fallen thou mayest be redeemed.\""
+      - id: "ce-gen4910"
+        ref: "Genesis 49:10"
+        type: "ot"
+        note: "Jacob's deathbed prophecy: the scepter shall not leave Judah until Shiloh — \"the one to whom it belongs\" — comes."
+      - id: "ce-moses16"
+        ref: "Moses 1:6"
+        type: "dc"
+        note: "God tells Moses plainly: \"Mine Only Begotten is and shall be the Savior.\""
+
+  - section: "What Was Promised"
+    entries:
+      - id: "ce-isa714"
+        ref: "Isaiah 7:14"
+        type: "ot"
+        note: "A virgin will conceive and bear a son — his name Immanuel, God with us."
+      - id: "ce-mic52"
+        ref: "Micah 5:2"
+        type: "ot"
+        note: "The Messiah's birthplace named: Bethlehem, small among the villages of Judah."
+      - id: "ce-isa96"
+        ref: "Isaiah 9:6"
+        type: "ot"
+        note: "\"Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace.\""
+      - id: "ce-isa535"
+        ref: "Isaiah 53:5"
+        type: "ot"
+        note: "\"He was wounded for our transgressions… with his stripes we are healed\" — written seven centuries before the Crucifixion."
+      - id: "ce-ps1610"
+        ref: "Psalm 16:10"
+        type: "ot"
+        note: "God will not leave His Holy One to see corruption in the grave — a prophecy of the Resurrection."
+
+  - section: "Voices from the Other Side of the World"
+    entries:
+      - id: "ce-jacob44"
+        ref: "Jacob 4:4"
+        type: "bom"
+        note: "Abraham saw the Messiah's coming and was filled with gladness; prophets were called according to the order of His Son from the beginning."
+      - id: "ce-mosiah38"
+        ref: "Mosiah 3:8"
+        type: "bom"
+        note: "Over a century before His birth, a Nephite king prophesied the names: Jesus Christ, Son of God — \"and his mother shall be called Mary.\""
+      - id: "ce-hel1435"
+        ref: "Helaman 14:3–5"
+        type: "bom"
+        note: "Samuel the Lamanite describes the night-without-darkness sign: one night and one day with no darkness between, and a new star the world had never seen."
+
+  - section: "Holy Family"
+    entries:
+      - id: "ce-1ne1115"
+        ref: "1 Nephi 11:15"
+        type: "bom"
+        note: "A Book of Mormon prophet sees Mary in vision: \"most beautiful and fair above all other virgins.\""
+      - id: "ce-alma710"
+        ref: "Alma 7:10"
+        type: "bom"
+        note: "Mary called \"a precious and chosen vessel\" — heaven had been watching her for a long time."
+      - id: "ce-luke126-38"
+        ref: "Luke 1:26–38"
+        type: "nt"
+        note: "Gabriel's annunciation to Mary — she was troubled, then joy came, then she said yes."
+      - id: "ce-luke138"
+        ref: "Luke 1:38"
+        type: "nt"
+        note: "\"Behold the handmaid of the Lord; be it unto me according to thy word\" — one of the great acts of faith in all of scripture."
+
+  - section: "Joseph"
+    entries:
+      - id: "ce-matt118-19"
+        ref: "Matthew 1:18–19"
+        type: "nt"
+        note: "Joseph learns Mary is pregnant — hurt and embarrassment the natural response; the scripture does not pretend otherwise."
+      - id: "ce-matt120-21"
+        ref: "Matthew 1:20–21"
+        type: "nt"
+        note: "Gabriel comes to Joseph: do not fear, the child is the Son of God."
+      - id: "ce-luke132"
+        ref: "Luke 1:32"
+        type: "nt"
+        note: "\"He shall be great, and shall be called the Son of the Highest: and the Lord God shall give unto him the throne of his father David.\""
+
+  - section: "Bethlehem"
+    entries:
+      - id: "ce-luke215"
+        ref: "Luke 2:1–5"
+        type: "nt"
+        note: "Caesar Augustus orders a census; Joseph and Mary travel to Bethlehem — Micah's town, David's town, the town the prophets named."
+
+  - section: "The First Witnesses"
+    entries:
+      - id: "ce-luke2814"
+        ref: "Luke 2:8–14"
+        type: "nt"
+        note: "Shepherds in the fields outside Bethlehem — the angel comes, the glory of God shines, the sky fills with a heavenly host singing."
+      - id: "ce-luke21011"
+        ref: "Luke 2:10–11"
+        type: "nt"
+        note: "\"Fear not: for, behold, I bring you good tidings of great joy… For unto you is born this day in the city of David a Saviour, which is Christ the Lord.\""
+      - id: "ce-luke2228"
+        ref: "Luke 2:22–28"
+        type: "nt"
+        note: "Mary and Joseph bring the infant to the Temple forty days after birth, as the Law of Moses required."
+      - id: "ce-luke226"
+        ref: "Luke 2:26"
+        type: "nt"
+        note: "The Holy Ghost had promised Simeon he would not die before seeing the Lord's Christ — he had waited in the Temple his whole life."
+      - id: "ce-luke22932"
+        ref: "Luke 2:29–32"
+        type: "nt"
+        note: "Simeon's Nunc Dimittis: \"mine eyes have seen thy salvation… a light to lighten the Gentiles, and the glory of thy people Israel.\""
+      - id: "ce-luke2236-38"
+        ref: "Luke 2:36–38"
+        type: "nt"
+        note: "Anna the prophetess, eighty-four years old, fasting and praying in the Temple for decades — she recognizes the child and tells everyone who will listen."
+      - id: "ce-matt212"
+        ref: "Matthew 2:1–2"
+        type: "nt"
+        note: "Wise men from the east have seen the new star rise and followed it; they come bearing gifts for a king."
+
+  - section: "Herod and Egypt"
+    entries:
+      - id: "ce-matt21316"
+        ref: "Matthew 2:13–16"
+        type: "nt"
+        note: "Herod orders the massacre of every male child under two in Bethlehem; Joseph warned in a dream, flees with the family to Egypt."
+      - id: "ce-ps9111-12"
+        ref: "Psalm 91:11–12"
+        type: "ot"
+        note: "\"He shall give his angels charge concerning thee: and in their hands they shall bear thee up\" — protection exercised through the courage of ordinary people."
+
+  - section: "Nazareth and the Years of Formation"
+    entries:
+      - id: "ce-deut1616"
+        ref: "Deuteronomy 16:16"
+        type: "ot"
+        note: "Observant Jews commanded to present themselves before God at the Temple three times yearly: Passover, Pentecost, and Tabernacles."
+      - id: "ce-luke241"
+        ref: "Luke 2:41"
+        type: "nt"
+        note: "Luke records the family made the Passover journey to Jerusalem every year."
+      - id: "ce-luke24150"
+        ref: "Luke 2:41–50"
+        type: "nt"
+        note: "At twelve, Jesus stays behind in Jerusalem; found three days later in the Temple courts, astonishing the teachers with his understanding."
+      - id: "ce-luke248"
+        ref: "Luke 2:48"
+        type: "nt"
+        note: "Mary: \"Son, why hast thou thus dealt with us? behold, thy father and I have sought thee sorrowing.\""
+      - id: "ce-luke249"
+        ref: "Luke 2:49"
+        type: "nt"
+        note: "\"Wist ye not that I must be about my Father's business?\" — his awareness of his divine identity carried quietly, not broadcast."
+      - id: "ce-luke252"
+        ref: "Luke 2:52"
+        type: "nt"
+        note: "\"And Jesus increased in wisdom and stature, and in favour with God and man.\""
 ---
 
 <h2 id="the-ancient-promise">{% paraspan 0 %}{% sentence 0 %}The Ancient Promise{% endsentence %}{% endparaspan %}</h2>
@@ -174,11 +342,11 @@ pauses:
 
 {% para 6 %}{% sentence 18 %}From the moment humankind left paradise, God began revealing His plan to redeem us from our necessary journey through mortality.{% endsentence %}{% endpara %}
 
-{% para 7 %}{% sentence 19 %}The Lord did not wait for Israel.{% endsentence %} {% sentence 20 %}He did not wait for Isaiah.{% endsentence %} {% sentence 21 %}He began with Adam—with an altar, with the blood of an animal, and with an angel's voice explaining what the offering meant.{% endsentence %} {% sentence 22 %}"This thing," the angel said, "is a similitude of the sacrifice of the Only Begotten of the Father, which is full of grace and truth.{% endsentence %} {% sentence 23 %}Wherefore, thou shalt do all that thou doest in the name of the Son" ({% scripture "Moses 5:7" %}).{% endsentence %} {% sentence 24 %}Adam obeyed without fully understanding, and the Holy Ghost fell upon him and bore witness: "I am the Only Begotten of the Father from the beginning, henceforth and forever, that as thou hast fallen thou mayest be redeemed, and all mankind, even as many as will" ({% scripture "Moses 5:9" %}).{% endsentence %}{% endpara %}
+{% para 7 %}{% sentence 19 %}The Lord did not wait for Israel.{% endsentence %} {% sentence 20 %}He did not wait for Isaiah.{% endsentence %} {% sentence 21 %}He began with Adam—with an altar, with the blood of an animal, and with an angel's voice explaining what the offering meant.{% endsentence %} {% sentence 22 %}"This thing," the angel said, "is a similitude of the sacrifice of the Only Begotten of the Father, which is full of grace and truth.{% endsentence %} {% sentence 23 %}Wherefore, thou shalt do all that thou doest in the name of the Son" ({% cite "ce-moses57" %}).{% endsentence %} {% sentence 24 %}Adam obeyed without fully understanding, and the Holy Ghost fell upon him and bore witness: "I am the Only Begotten of the Father from the beginning, henceforth and forever, that as thou hast fallen thou mayest be redeemed, and all mankind, even as many as will" ({% cite "ce-moses59" %}).{% endsentence %}{% endpara %}
 
 {% para 8 %}{% sentence 25 %}Every lamb that bled on every altar from that morning forward was a living prophecy, a symbolic promise that would take thousands of years to be fulfilled.{% endsentence %} {% sentence 26 %}A promise that every generation of seekers and saints has sought to understand since that first sacrifice.{% endsentence %}{% endpara %}
 
-{% para 9 %}{% sentence 27 %}The chain of witness grew longer with every generation.{% endsentence %} {% sentence 28 %}The Prophet Enoch received the name—Jesus, Yehoshua, "Jehovah is Salvation"—long before the nation of Israel existed.{% endsentence %} {% sentence 29 %}Noah preached repentance and baptism in that same name centuries before Abraham walked out of Ur.{% endsentence %} {% sentence 30 %}Jacob, dying, said the scepter would not leave the tribe of Judah until Shiloh came—a name scholars translate as "the one to whom it belongs" ({% scripture "Genesis 49:10" %}).{% endsentence %} {% sentence 31 %}Moses, face to face with God, was told plainly: "Mine Only Begotten is and shall be the Savior" ({% scripture "Moses 1:6" %}).{% endsentence %} {% sentence 32 %}And then Moses gave an entire nation a Law whose whole purpose was not to save them through their keeping of it, but to keep pointing their eyes in one direction—forward, toward the One the Law was always about.{% endsentence %}{% endpara %}
+{% para 9 %}{% sentence 27 %}The chain of witness grew longer with every generation.{% endsentence %} {% sentence 28 %}The Prophet Enoch received the name—Jesus, Yehoshua, "Jehovah is Salvation"—long before the nation of Israel existed.{% endsentence %} {% sentence 29 %}Noah preached repentance and baptism in that same name centuries before Abraham walked out of Ur.{% endsentence %} {% sentence 30 %}Jacob, dying, said the scepter would not leave the tribe of Judah until Shiloh came—a name scholars translate as "the one to whom it belongs" ({% cite "ce-gen4910" %}).{% endsentence %} {% sentence 31 %}Moses, face to face with God, was told plainly: "Mine Only Begotten is and shall be the Savior" ({% cite "ce-moses16" %}).{% endsentence %} {% sentence 32 %}And then Moses gave an entire nation a Law whose whole purpose was not to save them through their keeping of it, but to keep pointing their eyes in one direction—forward, toward the One the Law was always about.{% endsentence %}{% endpara %}
 
 {% para 10 %}{% sentence 33 %}I try to imagine what it meant to live before the coming of the Messiah—to wonder what Israel would feel when her King finally arrived.{% endsentence %} {% sentence 34 %}Would I have understood His true mission from the prophecies?{% endsentence %} {% sentence 35 %}Would I have heard His teachings and felt the Spirit fill me with recognition of the promised Messiah?{% endsentence %}{% endpara %}
 
@@ -188,15 +356,15 @@ pauses:
 
 {% para 13 %}{% sentence 46 %}As the centuries passed, the collected prophetic knowledge of the coming Chosen One grew in volume and detail.{% endsentence %} {% sentence 47 %}The prophecies were not vague spiritual impressions.{% endsentence %} {% sentence 48 %}They were specific.{% endsentence %} {% sentence 49 %}And they converged on a growing portrait of the Messiah, so He would be recognized.{% endsentence %}{% endpara %}
 
-{% para 14 %}{% sentence 50 %}Isaiah wrote that a virgin would conceive and bear a son, and that his name would be called Immanuel—God with us ({% scripture "Isaiah 7:14" %}).{% endsentence %} {% sentence 51 %}Micah named the town: not Jerusalem, not the great city, but Bethlehem—a small one, obscure even among the villages of Judah ({% scripture "Micah 5:2" %}).{% endsentence %}{% endpara %}
+{% para 14 %}{% sentence 50 %}Isaiah wrote that a virgin would conceive and bear a son, and that his name would be called Immanuel—God with us ({% cite "ce-isa714" %}).{% endsentence %} {% sentence 51 %}Micah named the town: not Jerusalem, not the great city, but Bethlehem—a small one, obscure even among the villages of Judah ({% cite "ce-mic52" %}).{% endsentence %}{% endpara %}
 
-{% para 15 %}{% sentence 52 %}His nature and mission exceeded every imagining Israel had conceived of for a deliverer: "Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace" ({% scripture "Isaiah 9:6" %}).{% endsentence %}{% endpara %}
+{% para 15 %}{% sentence 52 %}His nature and mission exceeded every imagining Israel had conceived of for a deliverer: "Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace" ({% cite "ce-isa96" %}).{% endsentence %}{% endpara %}
 
-{% para 16 %}{% sentence 53 %}Isaiah also described what His divine mission would cost Him: "He was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed" ({% scripture "Isaiah 53:5" %}).{% endsentence %}{% endpara %}
+{% para 16 %}{% sentence 53 %}Isaiah also described what His divine mission would cost Him: "He was wounded for our transgressions, he was bruised for our iniquities: the chastisement of our peace was upon him; and with his stripes we are healed" ({% cite "ce-isa535" %}).{% endsentence %}{% endpara %}
 
 {% para 17 %}{% sentence 54 %}That passage was written seven centuries before His sacrifice.{% endsentence %} {% sentence 55 %}Read it again slowly.{% endsentence %} {% sentence 56 %}Wounded for our transgressions.{% endsentence %} {% sentence 57 %}He did it for us.{% endsentence %} {% sentence 58 %}The prophet saw the suffering servant before the servant had been born, and described him well enough that when it happened, those who had eyes to see could recognize it.{% endsentence %}{% endpara %}
 
-{% para 18 %}{% sentence 59 %}And after the suffering—{% scripture "Psalm 16:10" %} promised that God would not leave His Holy One to see corruption in the grave.{% endsentence %} {% sentence 60 %}He would rise.{% endsentence %} {% sentence 61 %}This prophecy was also written far in advance of the events.{% endsentence %}{% endpara %}
+{% para 18 %}{% sentence 59 %}And after the suffering—{% cite "ce-ps1610" %} promised that God would not leave His Holy One to see corruption in the grave.{% endsentence %} {% sentence 60 %}He would rise.{% endsentence %} {% sentence 61 %}This prophecy was also written far in advance of the events.{% endsentence %}{% endpara %}
 
 <h2 id="voices-from-the-other-side-of-the-world">{% paraspan 19 %}{% sentence 62 %}Voices from the Other Side of the World{% endsentence %}{% endparaspan %}</h2>
 
@@ -204,11 +372,11 @@ pauses:
 
 {% para 21 %}{% sentence 64 %}A family had left Jerusalem around 600 BC, led by a prophet named Lehi.{% endsentence %} {% sentence 65 %}They crossed the wilderness, built a ship, and sailed to a land they had never seen.{% endsentence %} {% sentence 66 %}And in that new world, the same Spirit that moved on the waters of creation continued to speak.{% endsentence %} {% sentence 67 %}Lehi taught his children that "a Prophet would the Lord God raise up among the Jews—even a Messiah, or, in other words, a Savior of the world.{% endsentence %} {% sentence 68 %}And he also spake concerning the Prophets, how great a number had testified of these things."{% endsentence %}{% endpara %}
 
-{% para 22 %}{% sentence 69 %}Another prophet named Nephi taught that Abraham had seen the Messiah's coming and was filled with gladness, and that thousands of years before His birth, prophets had already been called according to the order of His Son ({% scripture "Jacob 4:4" %}).{% endsentence %} {% sentence 70 %}A king named Mosiah received a revelation more than a hundred years before His birth.{% endsentence %} {% sentence 71 %}He prophesied: "He shall be called Jesus Christ, the Son of God, the Father of heaven and Earth, the Creator of all things from the beginning; and his mother shall be called Mary" ({% scripture "Mosiah 3:8" %}).{% endsentence %}{% endpara %}
+{% para 22 %}{% sentence 69 %}Another prophet named Nephi taught that Abraham had seen the Messiah's coming and was filled with gladness, and that thousands of years before His birth, prophets had already been called according to the order of His Son ({% cite "ce-jacob44" %}).{% endsentence %} {% sentence 70 %}A king named Mosiah received a revelation more than a hundred years before His birth.{% endsentence %} {% sentence 71 %}He prophesied: "He shall be called Jesus Christ, the Son of God, the Father of heaven and Earth, the Creator of all things from the beginning; and his mother shall be called Mary" ({% cite "ce-mosiah38" %}).{% endsentence %}{% endpara %}
 
 {% para 23 %}{% sentence 72 %}Not a title.{% endsentence %} {% sentence 73 %}Not a symbol.{% endsentence %} {% sentence 74 %}A name.{% endsentence %} {% sentence 75 %}A woman's name.{% endsentence %} {% sentence 76 %}Given a century early, to a prophet on the other side of the earth.{% endsentence %} {% sentence 77 %}I have never been able to read that passage casually.{% endsentence %} {% sentence 78 %}There is something in that specificity—his mother shall be called Mary—that lands differently for me every time.{% endsentence %} {% sentence 79 %}The divine promise was moving toward a particular woman in a particular village, and God named her to prophets who would never meet her.{% endsentence %}{% endpara %}
 
-{% para 24 %}{% sentence 80 %}About five years before the birth of the Messiah, a man named Samuel climbed the wall of a city filled with people who wanted him dead and told the people what to watch for ({% scripture "Helaman 14:3-5" %}).{% endsentence %} {% sentence 81 %}He said there would be a night that did not go dark.{% endsentence %} {% sentence 82 %}The sun would set, and the darkness would not come—the night before the Savior's birth would be as bright as day.{% endsentence %} {% sentence 83 %}One day and one night and another day, as if there were no night between them.{% endsentence %} {% sentence 84 %}And a new star would appear—one no one had ever seen.{% endsentence %} {% sentence 85 %}He described the sign that would be seen the whole world over.{% endsentence %}{% endpara %}
+{% para 24 %}{% sentence 80 %}About five years before the birth of the Messiah, a man named Samuel climbed the wall of a city filled with people who wanted him dead and told the people what to watch for ({% cite "ce-hel1435" %}).{% endsentence %} {% sentence 81 %}He said there would be a night that did not go dark.{% endsentence %} {% sentence 82 %}The sun would set, and the darkness would not come—the night before the Savior's birth would be as bright as day.{% endsentence %} {% sentence 83 %}One day and one night and another day, as if there were no night between them.{% endsentence %} {% sentence 84 %}And a new star would appear—one no one had ever seen.{% endsentence %} {% sentence 85 %}He described the sign that would be seen the whole world over.{% endsentence %}{% endpara %}
 
 <h2 id="holy-family">{% paraspan 25 %}{% sentence 86 %}Holy Family{% endsentence %}{% endparaspan %}</h2>
 
@@ -216,21 +384,21 @@ pauses:
 
 {% para 27 %}{% sentence 88 %}She was not a figure of public importance.{% endsentence %} {% sentence 89 %}She was a girl, probably in her early teens, betrothed to a craftsman named Joseph—a man of quiet faithfulness who worked with his hands and held the legal inheritance of a royal bloodline that the Roman occupation had suppressed, along with every other reminder that Israel had once been a kingdom.{% endsentence %} {% sentence 90 %}As a child of a devout Jewish household, Mary had been raised to look forward with faith for the coming of God's Messiah.{% endsentence %} {% sentence 91 %}She was a daughter of Abraham through the tribe of Judah.{% endsentence %} {% sentence 92 %}She was a royal descendant of David himself, though that mattered very little in a village under occupation.{% endsentence %}{% endpara %}
 
-{% para 28 %}{% sentence 93 %}Prophets described her hundreds of years before she was born.{% endsentence %} {% sentence 94 %}A Book of Mormon prophet saw her in vision and called her "most beautiful and fair above all other virgins" ({% scripture "1 Nephi 11:15" %}).{% endsentence %} {% sentence 95 %}Another called her "a precious and chosen vessel" ({% scripture "Alma 7:10" %}).{% endsentence %} {% sentence 96 %}Heaven had been watching her for a long time.{% endsentence %}{% endpara %}
+{% para 28 %}{% sentence 93 %}Prophets described her hundreds of years before she was born.{% endsentence %} {% sentence 94 %}A Book of Mormon prophet saw her in vision and called her "most beautiful and fair above all other virgins" ({% cite "ce-1ne1115" %}).{% endsentence %} {% sentence 95 %}Another called her "a precious and chosen vessel" ({% cite "ce-alma710" %}).{% endsentence %} {% sentence 96 %}Heaven had been watching her for a long time.{% endsentence %}{% endpara %}
 
-{% para 29 %}{% sentence 97 %}And then she was visited by the angel Gabriel ({% scripture "Luke 1:26-38" %}).{% endsentence %} {% sentence 98 %}I don't think we give enough thought to what that moment must have felt like.{% endsentence %} {% sentence 99 %}An angel of God, in her home, telling her she had been chosen to be the mother of the Messiah—the One all those sacrifices had pointed to, the One Enoch had named, the One Samuel had predicted with a night without darkness.{% endsentence %} {% sentence 100 %}The One Israel had waited for across forty generations.{% endsentence %}{% endpara %}
+{% para 29 %}{% sentence 97 %}And then she was visited by the angel Gabriel ({% cite "ce-luke126-38" %}).{% endsentence %} {% sentence 98 %}I don't think we give enough thought to what that moment must have felt like.{% endsentence %} {% sentence 99 %}An angel of God, in her home, telling her she had been chosen to be the mother of the Messiah—the One all those sacrifices had pointed to, the One Enoch had named, the One Samuel had predicted with a night without darkness.{% endsentence %} {% sentence 100 %}The One Israel had waited for across forty generations.{% endsentence %}{% endpara %}
 
-{% para 30 %}{% sentence 101 %}The text says she was troubled.{% endsentence %} {% sentence 102 %}Of course she was.{% endsentence %} {% sentence 103 %}But then it says joy came.{% endsentence %} {% sentence 104 %}And then she said yes.{% endsentence %} {% sentence 105 %}"Behold the handmaid of the Lord; be it unto me according to thy word" ({% scripture "Luke 1:38" %}).{% endsentence %}{% endpara %}
+{% para 30 %}{% sentence 101 %}The text says she was troubled.{% endsentence %} {% sentence 102 %}Of course she was.{% endsentence %} {% sentence 103 %}But then it says joy came.{% endsentence %} {% sentence 104 %}And then she said yes.{% endsentence %} {% sentence 105 %}"Behold the handmaid of the Lord; be it unto me according to thy word" ({% cite "ce-luke138" %}).{% endsentence %}{% endpara %}
 
 {% para 31 %}{% sentence 106 %}That sentence is one of the great acts of faith in all of scripture.{% endsentence %} {% sentence 107 %}She did not know what it would cost her.{% endsentence %} {% sentence 108 %}She did not know about Herod, or Egypt, or the sorrow that Simeon would say would pierce her own soul.{% endsentence %} {% sentence 109 %}She knew she had been chosen, and she accepted.{% endsentence %} {% sentence 110 %}Everything that follows in this chapter, and the next, and the one after that—everything comes from that moment of faithful consent.{% endsentence %}{% endpara %}
 
 <h2 id="joseph">{% paraspan 32 %}{% sentence 111 %}Joseph{% endsentence %}{% endparaspan %}</h2>
 
-{% para 33 %}{% sentence 112 %}When word reached Joseph in Nazareth that Mary was pregnant, he had no way to understand what had happened ({% scripture "Matthew 1:18-19" %}).{% endsentence %} {% sentence 113 %}In a small community where everyone knew everyone, the sting of this shocking news would have been devastating—hurt and embarrassment are the natural human response, and the scripture does not pretend it was otherwise.{% endsentence %}{% endpara %}
+{% para 33 %}{% sentence 112 %}When word reached Joseph in Nazareth that Mary was pregnant, he had no way to understand what had happened ({% cite "ce-matt118-19" %}).{% endsentence %} {% sentence 113 %}In a small community where everyone knew everyone, the sting of this shocking news would have been devastating—hurt and embarrassment are the natural human response, and the scripture does not pretend it was otherwise.{% endsentence %}{% endpara %}
 
 {% para 34 %}{% sentence 114 %}But Joseph was a just and righteous man.{% endsentence %} {% sentence 115 %}He knew what the Law required of him—it required him to bring her before the judges of Israel, who would very likely have condemned her to being stoned to death for adultery committed during betrothal.{% endsentence %} {% sentence 116 %}He could not do it.{% endsentence %} {% sentence 117 %}He would end the engagement privately, quietly, sparing her whatever shame and harm he could.{% endsentence %}{% endpara %}
 
-{% para 35 %}{% sentence 118 %}Mercifully, God intervened.{% endsentence %} {% sentence 119 %}The angel Gabriel came to Joseph too ({% scripture "Matthew 1:20-21" %}).{% endsentence %} {% sentence 120 %}He was told not to fear, that the child was the Son of God, that He would "be great, and shall be called the Son of the Highest: and the Lord God shall give unto him the throne of his father David" ({% scripture "Luke 1:32" %}).{% endsentence %} {% sentence 121 %}Joseph received this witness and accepted Mary as his wife—a woman several months pregnant, in a small town where nothing was private, at great social cost to himself.{% endsentence %}{% endpara %}
+{% para 35 %}{% sentence 118 %}Mercifully, God intervened.{% endsentence %} {% sentence 119 %}The angel Gabriel came to Joseph too ({% cite "ce-matt120-21" %}).{% endsentence %} {% sentence 120 %}He was told not to fear, that the child was the Son of God, that He would "be great, and shall be called the Son of the Highest: and the Lord God shall give unto him the throne of his father David" ({% cite "ce-luke132" %}).{% endsentence %} {% sentence 121 %}Joseph received this witness and accepted Mary as his wife—a woman several months pregnant, in a small town where nothing was private, at great social cost to himself.{% endsentence %}{% endpara %}
 
 {% para 36 %}{% sentence 122 %}That act deserves more than a footnote.{% endsentence %} {% sentence 123 %}Joseph's willingness to absorb shame he did not deserve, to protect a woman carrying a child that was not his, to step into a story bigger than himself without fully understanding it—that is a portrait of a man worth knowing.{% endsentence %} {% sentence 124 %}James E. Talmage wrote that had Judah been a free nation ruled by her rightful sovereign, Joseph the carpenter would have been her crowned king; and his lawful successor to the throne would have been Jesus of Nazareth, the King of the Jews.{% endsentence %} {% sentence 125 %}Joseph, the rightful king of Israel, was humbly building things with his hands in a Roman-occupied province.{% endsentence %} {% sentence 126 %}And he willingly spent his best years raising the Son of God as his own.{% endsentence %}{% endpara %}
 
@@ -238,7 +406,7 @@ pauses:
 
 <h2 id="bethlehem">{% paraspan 38 %}{% sentence 130 %}Bethlehem{% endsentence %}{% endparaspan %}</h2>
 
-{% para 39 %}{% sentence 131 %}Near the end of Mary's pregnancy, Caesar Augustus required a census ({% scripture "Luke 2:1-5" %}).{% endsentence %} {% sentence 132 %}Every Jewish family was obligated to register in the city of their ancestral origin.{% endsentence %} {% sentence 133 %}For Joseph, that meant Bethlehem—Micah's town, David's town, the town the prophets had named.{% endsentence %}{% endpara %}
+{% para 39 %}{% sentence 131 %}Near the end of Mary's pregnancy, Caesar Augustus required a census ({% cite "ce-luke215" %}).{% endsentence %} {% sentence 132 %}Every Jewish family was obligated to register in the city of their ancestral origin.{% endsentence %} {% sentence 133 %}For Joseph, that meant Bethlehem—Micah's town, David's town, the town the prophets had named.{% endsentence %}{% endpara %}
 
 {% para 40 %}{% sentence 134 %}We know only scattered details of their journey.{% endsentence %} {% sentence 135 %}The text says only that she went with Joseph, that they arrived, that there was no room at the inn.{% endsentence %} {% sentence 136 %}What we know is that the Son of God was born in a stable—in the company of animals, in the smell of hay and earth, with a feeding trough for His first bed.{% endsentence %} {% sentence 137 %}There was no midwife named in the record.{% endsentence %} {% sentence 138 %}No gathered family.{% endsentence %} {% sentence 139 %}No dignitary.{% endsentence %} {% sentence 140 %}Just the two of them, and then the three of them.{% endsentence %}{% endpara %}
 
@@ -248,25 +416,25 @@ pauses:
 
 <h2 id="the-first-witnesses">{% paraspan 43 %}{% sentence 146 %}The First Witnesses{% endsentence %}{% endparaspan %}</h2>
 
-{% para 44 %}{% sentence 147 %}In the fields outside Bethlehem, shepherds were keeping watch over their flocks ({% scripture "Luke 2:8-14" %}).{% endsentence %} {% sentence 148 %}They were not important men.{% endsentence %} {% sentence 149 %}They were not the kind of people to whom announcements were made, in any normal order of things.{% endsentence %} {% sentence 150 %}And then the angel came, and the glory of God shone around them, and they were terrified—a reasonable response—and the angel said: "Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people.{% endsentence %} {% sentence 151 %}For unto you is born this day in the city of David a Saviour, which is Christ the Lord" ({% scripture "Luke 2:10-11" %}).{% endsentence %} {% sentence 152 %}And then the sky filled with more of them, a host of angels, and they were singing.{% endsentence %}{% endpara %}
+{% para 44 %}{% sentence 147 %}In the fields outside Bethlehem, shepherds were keeping watch over their flocks ({% cite "ce-luke2814" %}).{% endsentence %} {% sentence 148 %}They were not important men.{% endsentence %} {% sentence 149 %}They were not the kind of people to whom announcements were made, in any normal order of things.{% endsentence %} {% sentence 150 %}And then the angel came, and the glory of God shone around them, and they were terrified—a reasonable response—and the angel said: "Fear not: for, behold, I bring you good tidings of great joy, which shall be to all people.{% endsentence %} {% sentence 151 %}For unto you is born this day in the city of David a Saviour, which is Christ the Lord" ({% cite "ce-luke21011" %}).{% endsentence %} {% sentence 152 %}And then the sky filled with more of them, a host of angels, and they were singing.{% endsentence %}{% endpara %}
 
 {% para 45 %}{% sentence 153 %}The Lord Jesus would be known as the Good Shepherd.{% endsentence %} {% sentence 154 %}It is no accident that the first people to worship Him were shepherds.{% endsentence %} {% sentence 155 %}They found the child exactly as they had been told.{% endsentence %} {% sentence 156 %}After worshiping, they went and told everyone they could find.{% endsentence %} {% sentence 157 %}Shepherds became evangelists decades before fishermen became apostles.{% endsentence %}{% endpara %}
 
-{% para 46 %}{% sentence 158 %}Forty days later, Mary and Joseph brought the infant to Jerusalem to be presented at the Temple as the Law of Moses required ({% scripture "Luke 2:22-28" %}).{% endsentence %} {% sentence 159 %}An old man named Simeon had been waiting in the Temple his whole life—the Holy Ghost had promised him he would not die before he had seen the Lord's Christ ({% scripture "Luke 2:26" %}).{% endsentence %} {% sentence 160 %}Day after day, year after year, he had come to the Temple.{% endsentence %}{% endpara %}
+{% para 46 %}{% sentence 158 %}Forty days later, Mary and Joseph brought the infant to Jerusalem to be presented at the Temple as the Law of Moses required ({% cite "ce-luke2228" %}).{% endsentence %} {% sentence 159 %}An old man named Simeon had been waiting in the Temple his whole life—the Holy Ghost had promised him he would not die before he had seen the Lord's Christ ({% cite "ce-luke226" %}).{% endsentence %} {% sentence 160 %}Day after day, year after year, he had come to the Temple.{% endsentence %}{% endpara %}
 
-{% para 47 %}{% sentence 161 %}On that day, Simeon saw them come in and the Spirit moved him to take the baby into his arms and say: "Lord, now lettest thou thy servant depart in peace, according to thy word: for mine eyes have seen thy salvation, which thou hast prepared before the face of all people; a light to lighten the Gentiles, and the glory of thy people Israel" ({% scripture "Luke 2:29-32" %}).{% endsentence %}{% endpara %}
+{% para 47 %}{% sentence 161 %}On that day, Simeon saw them come in and the Spirit moved him to take the baby into his arms and say: "Lord, now lettest thou thy servant depart in peace, according to thy word: for mine eyes have seen thy salvation, which thou hast prepared before the face of all people; a light to lighten the Gentiles, and the glory of thy people Israel" ({% cite "ce-luke22932" %}).{% endsentence %}{% endpara %}
 
-{% para 48 %}{% sentence 162 %}A prophetess named Anna was also there that day—eighty-four years old, who had been fasting and praying in the Temple for decades ({% scripture "Luke 2:36-38" %}).{% endsentence %} {% sentence 163 %}Being in the Spirit, she recognized the child as the promised Messiah.{% endsentence %} {% sentence 164 %}She told everyone who would listen that the redemption of Israel had arrived.{% endsentence %}{% endpara %}
+{% para 48 %}{% sentence 162 %}A prophetess named Anna was also there that day—eighty-four years old, who had been fasting and praying in the Temple for decades ({% cite "ce-luke2236-38" %}).{% endsentence %} {% sentence 163 %}Being in the Spirit, she recognized the child as the promised Messiah.{% endsentence %} {% sentence 164 %}She told everyone who would listen that the redemption of Israel had arrived.{% endsentence %}{% endpara %}
 
-{% para 49 %}{% sentence 165 %}Outside, a star was burning that the world had never seen.{% endsentence %} {% sentence 166 %}Wise men from the east had seen it rise and followed it ({% scripture "Matthew 2:1-2" %}).{% endsentence %} {% sentence 167 %}They came bearing gifts for a king—gold, frankincense, and myrrh—and they found the King of Kings in the last place earthly wisdom would have looked.{% endsentence %}{% endpara %}
+{% para 49 %}{% sentence 165 %}Outside, a star was burning that the world had never seen.{% endsentence %} {% sentence 166 %}Wise men from the east had seen it rise and followed it ({% cite "ce-matt212" %}).{% endsentence %} {% sentence 167 %}They came bearing gifts for a king—gold, frankincense, and myrrh—and they found the King of Kings in the last place earthly wisdom would have looked.{% endsentence %}{% endpara %}
 
 <h2 id="herod-and-egypt">{% paraspan 50 %}{% sentence 168 %}Herod and Egypt{% endsentence %}{% endparaspan %}</h2>
 
-{% para 51 %}{% sentence 169 %}King Herod heard about the wise men's errand and understood what it meant ({% scripture "Matthew 2:13-16" %}).{% endsentence %} {% sentence 170 %}A prophesied king of the Jews was a threat to his throne.{% endsentence %} {% sentence 171 %}He ordered the massacre of every male child under two years of age in Bethlehem.{% endsentence %} {% sentence 172 %}Joseph was warned in a dream and fled before the soldiers came, taking his family south through the Nile delta into Egypt.{% endsentence %} {% sentence 173 %}They lived there as refugees for several years, until Herod died and it was safe to return.{% endsentence %}{% endpara %}
+{% para 51 %}{% sentence 169 %}King Herod heard about the wise men's errand and understood what it meant ({% cite "ce-matt21316" %}).{% endsentence %} {% sentence 170 %}A prophesied king of the Jews was a threat to his throne.{% endsentence %} {% sentence 171 %}He ordered the massacre of every male child under two years of age in Bethlehem.{% endsentence %} {% sentence 172 %}Joseph was warned in a dream and fled before the soldiers came, taking his family south through the Nile delta into Egypt.{% endsentence %} {% sentence 173 %}They lived there as refugees for several years, until Herod died and it was safe to return.{% endsentence %}{% endpara %}
 
 {% para 52 %}{% sentence 174 %}The Son of God spent His early childhood in exile.{% endsentence %} {% sentence 175 %}He would have been a brown-skinned child of refugee parents, speaking Aramaic in a foreign country, entirely dependent on the faithfulness of two young people who understood only in part what they were carrying.{% endsentence %}{% endpara %}
 
-{% para 53 %}{% sentence 176 %}God the Father was watching all of it.{% endsentence %} {% sentence 177 %}Of His Son, the ancient scripture promised: "He shall give his angels charge concerning thee: and in their hands they shall bear thee up" ({% scripture "Psalm 91:11-12" %}).{% endsentence %} {% sentence 178 %}That protection was real.{% endsentence %} {% sentence 179 %}It was also exercised through the courage and obedience of ordinary people—a man who listened to dreams, a woman who said yes in the dark.{% endsentence %}{% endpara %}
+{% para 53 %}{% sentence 176 %}God the Father was watching all of it.{% endsentence %} {% sentence 177 %}Of His Son, the ancient scripture promised: "He shall give his angels charge concerning thee: and in their hands they shall bear thee up" ({% cite "ce-ps9111-12" %}).{% endsentence %} {% sentence 178 %}That protection was real.{% endsentence %} {% sentence 179 %}It was also exercised through the courage and obedience of ordinary people—a man who listened to dreams, a woman who said yes in the dark.{% endsentence %}{% endpara %}
 
 <h2 id="nazareth-and-the-years-of-formation">{% paraspan 54 %}{% sentence 180 %}Nazareth and the Years of Formation{% endsentence %}{% endparaspan %}</h2>
 
@@ -280,7 +448,7 @@ pauses:
 
 {% para 59 %}{% sentence 196 %}He was not a monolingual villager.{% endsentence %} {% sentence 197 %}His mother tongue was Galilean Aramaic—the language of his home, his friendships, his prayers with his family, most of his later teaching.{% endsentence %} {% sentence 198 %}His name in that tongue is "Yeshua."{% endsentence %} {% sentence 199 %}Hebrew was the sacred language of the synagogue, where he would have been called the more formal "Yehoshua," and he was literate in it—Luke records him reading publicly from the Isaiah scroll.{% endsentence %} {% sentence 200 %}Greek, the trade language of the region, was almost certainly part of his working life as he grew older.{% endsentence %}{% endpara %}
 
-{% para 60 %}{% sentence 201 %}Three times each year—at Passover, Pentecost, and Tabernacles—observant Jews were commanded to present themselves before God at the Temple in Jerusalem ({% scripture "Deuteronomy 16:16" %}).{% endsentence %} {% sentence 202 %}Luke tells us the family made the Passover journey every year ({% scripture "Luke 2:41" %}).{% endsentence %} {% sentence 203 %}These were not casual trips.{% endsentence %} {% sentence 204 %}They were caravan journeys—extended family, neighbors, the whole village moving together, days of walking and sleeping outdoors, arriving at Jerusalem with thousands of pilgrims from across the Jewish world, the city swelling beyond its walls.{% endsentence %} {% sentence 205 %}The Temple itself: its courts, its sacrifices, the smoke of the offerings, the sound of the shofar at the great festivals.{% endsentence %} {% sentence 206 %}These were the defining experiences of Jewish childhood.{% endsentence %}{% endpara %}
+{% para 60 %}{% sentence 201 %}Three times each year—at Passover, Pentecost, and Tabernacles—observant Jews were commanded to present themselves before God at the Temple in Jerusalem ({% cite "ce-deut1616" %}).{% endsentence %} {% sentence 202 %}Luke tells us the family made the Passover journey every year ({% cite "ce-luke241" %}).{% endsentence %} {% sentence 203 %}These were not casual trips.{% endsentence %} {% sentence 204 %}They were caravan journeys—extended family, neighbors, the whole village moving together, days of walking and sleeping outdoors, arriving at Jerusalem with thousands of pilgrims from across the Jewish world, the city swelling beyond its walls.{% endsentence %} {% sentence 205 %}The Temple itself: its courts, its sacrifices, the smoke of the offerings, the sound of the shofar at the great festivals.{% endsentence %} {% sentence 206 %}These were the defining experiences of Jewish childhood.{% endsentence %}{% endpara %}
 
 {% para 61 %}{% sentence 207 %}Jesus absorbed all of it.{% endsentence %} {% sentence 208 %}Every word of Torah he memorized, every sacrifice he watched, every Sabbath his family kept, every Passover he celebrated—all of it was shaping the One who would one day say "I am the resurrection and the life" and mean it literally.{% endsentence %}{% endpara %}
 
@@ -288,13 +456,13 @@ pauses:
 
 {% para 63 %}{% sentence 218 %}The parables he would later tell were not invented illustrations.{% endsentence %} {% sentence 219 %}They were memories.{% endsentence %}{% endpara %}
 
-{% para 64 %}{% sentence 220 %}At twelve, Jesus was approaching the threshold of bar mitzvah—the age at which a Jewish boy was considered old enough to begin assuming adult religious responsibilities.{% endsentence %} {% sentence 221 %}Luke records a Passover journey to Jerusalem that year, and what happened when the family turned for home: Jesus stayed behind, and they did not discover this for a full day of travel ({% scripture "Luke 2:41-50" %}).{% endsentence %} {% sentence 222 %}When they came back and found him, he was in the Temple courts—sitting among the teachers, listening to them, asking questions.{% endsentence %} {% sentence 223 %}And the text says everyone who heard him was astonished at his understanding and his answers.{% endsentence %}{% endpara %}
+{% para 64 %}{% sentence 220 %}At twelve, Jesus was approaching the threshold of bar mitzvah—the age at which a Jewish boy was considered old enough to begin assuming adult religious responsibilities.{% endsentence %} {% sentence 221 %}Luke records a Passover journey to Jerusalem that year, and what happened when the family turned for home: Jesus stayed behind, and they did not discover this for a full day of travel ({% cite "ce-luke24150" %}).{% endsentence %} {% sentence 222 %}When they came back and found him, he was in the Temple courts—sitting among the teachers, listening to them, asking questions.{% endsentence %} {% sentence 223 %}And the text says everyone who heard him was astonished at his understanding and his answers.{% endsentence %}{% endpara %}
 
-{% para 65 %}{% sentence 224 %}His mother said what any mother would say after three days of searching: "Son, why hast thou thus dealt with us?{% endsentence %} {% sentence 225 %}behold, thy father and I have sought thee sorrowing" ({% scripture "Luke 2:48" %}).{% endsentence %}{% endpara %}
+{% para 65 %}{% sentence 224 %}His mother said what any mother would say after three days of searching: "Son, why hast thou thus dealt with us?{% endsentence %} {% sentence 225 %}behold, thy father and I have sought thee sorrowing" ({% cite "ce-luke248" %}).{% endsentence %}{% endpara %}
 
-{% para 66 %}{% sentence 226 %}He looked at her and said, with the calm directness that would characterize him for the rest of his life: "Wist ye not that I must be about my Father's business?" ({% scripture "Luke 2:49" %}){% endsentence %} {% sentence 227 %}His awareness of his divine identity was not something he broadcast.{% endsentence %} {% sentence 228 %}It was something he carried quietly, maturing in him, showing itself in moments like this one—and then, apparently, he went home to Nazareth and was subject to his parents for another eighteen years, and the Gospels say nothing more about it.{% endsentence %}{% endpara %}
+{% para 66 %}{% sentence 226 %}He looked at her and said, with the calm directness that would characterize him for the rest of his life: "Wist ye not that I must be about my Father's business?" ({% cite "ce-luke249" %}){% endsentence %} {% sentence 227 %}His awareness of his divine identity was not something he broadcast.{% endsentence %} {% sentence 228 %}It was something he carried quietly, maturing in him, showing itself in moments like this one—and then, apparently, he went home to Nazareth and was subject to his parents for another eighteen years, and the Gospels say nothing more about it.{% endsentence %}{% endpara %}
 
-{% para 67 %}{% sentence 229 %}"And Jesus increased in wisdom and stature, and in favour with God and man" ({% scripture "Luke 2:52" %}).{% endsentence %}{% endpara %}
+{% para 67 %}{% sentence 229 %}"And Jesus increased in wisdom and stature, and in favour with God and man" ({% cite "ce-luke252" %}).{% endsentence %}{% endpara %}
 
 <h2 id="the-hidden-years">{% paraspan 68 %}{% sentence 230 %}The Hidden Years{% endsentence %}{% endparaspan %}</h2>
 
