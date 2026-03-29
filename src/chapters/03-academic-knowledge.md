@@ -68,6 +68,55 @@ pauses:
     witness:
       prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>Has there been a moment when something you learned — a fact, a discovery, a text — opened a door to something sacred? Or a moment when the limits of learning drove you toward something beyond it? We invite you to share it here.</p>"
 
+citations:
+  - section: "The Nature of Truth"
+    entries:
+      - id: "ce-dc9324-a"
+        ref: "D&C 93:24"
+        type: "dc"
+        note: "\"Truth is knowledge of things as they are, and as they were, and as they are to come\" — the Restoration's formal definition of truth."
+
+  - section: "The Limitations of Academic Knowledge"
+    entries:
+      - id: "ce-2tim37"
+        ref: "2 Timothy 3:7"
+        type: "nt"
+        note: "\"Ever learning, and never able to come to the knowledge of the truth\" — Paul's description of learning without spiritual grounding."
+      - id: "ce-1cor214"
+        ref: "1 Corinthians 2:14"
+        type: "nt"
+        note: "\"The natural man receiveth not the things of the Spirit of God: for they are foolishness unto him\" — reason alone cannot perceive spiritual truth."
+
+  - section: "The Ceiling of the Natural Framework"
+    entries:
+      - id: "ce-dc9324-b"
+        ref: "D&C 93:24"
+        type: "dc"
+        note: "Truth as knowledge of things as they are, were, and are to come — the standard our natural faculties can only partially reach."
+
+  - section: "Our Witness"
+    entries:
+      - id: "ce-matt1617"
+        ref: "Matthew 16:17"
+        type: "nt"
+        note: "\"Flesh and blood hath not revealed it unto thee, but my Father which is in heaven\" — spiritual witness comes from God, not human reasoning."
+      - id: "ce-moro1035"
+        ref: "Moroni 10:3–5"
+        type: "bom"
+        note: "Ask God with sincere heart and real intent — He will manifest truth by the power of the Holy Ghost."
+      - id: "ce-acts1727"
+        ref: "Acts 17:27"
+        type: "nt"
+        note: "\"That they should seek the Lord, if haply they might feel after him\" — God is never far from any of us."
+      - id: "ce-dc8863"
+        ref: "D&C 88:63"
+        type: "dc"
+        note: "\"Draw near unto me and I will draw near unto you; seek me diligently and ye shall find me.\""
+      - id: "ce-alma3227"
+        ref: "Alma 32:27"
+        type: "bom"
+        note: "\"Even if ye can no more than desire to believe, let this desire work in you\" — the invitation to experiment on the word."
+
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>
   <p class="verse">I've walked the avenues of life,<br>
@@ -189,7 +238,7 @@ podcastTranscript: |
 
 {% sentence 18 %}Many suspect that ultimate truth exists, but some question whether human beings are capable of "knowing" truth with any degree of certainty.{% endsentence %} {% sentence 19 %}Human beings have discovered so much about our existence in the universe, but what portion of reality yet escapes our attention?{% endsentence %} {% sentence 20 %}Of those quiet things yet hidden, both still and active, how much is there yet to learn?{% endsentence %} {% sentence 21 %}Regardless of our indefinable level of ignorance, what does it mean to have knowledge?{% endsentence %} {% sentence 22 %}What does it mean to know?{% endsentence %}
 
-{% sentence 23 %}In preparation for our careers in education and throughout our combined decades in front of classrooms, my brother and I carefully considered these questions.{% endsentence %} {% sentence 24 %}Our formal studies and personal experiences reveal a disappointing lack of a unified definition of the word *knowledge*.{% endsentence %} {% sentence 25 %}In the place of clarity, numerous theories exist to explain the concept of knowledge.{% endsentence %} {% sentence 26 %}Though the definition of knowledge may be unclear, we feel it is important to plainly define the Latter-day Saint view of truth.{% endsentence %} {% sentence 27 %}One formal doctrine states: "Truth is knowledge of things as they are, and as they were, and as they are to come" (D&C 93:24).{% endsentence %} {% sentence 28 %}To this definition we add the following: The whole, ultimate truth is known only to God.{% endsentence %} {% sentence 29 %}There is only one ultimate truth; no separate truths exist for academics and spirituality.{% endsentence %} {% sentence 30 %}We can perceive or discover part of the whole truth, but we cannot know by academic means how correct this partial knowledge is in the ultimate sense.{% endsentence %} {% sentence 31 %}Truth does not have to be perceived, understood, believed, or justified to still be true.{% endsentence %}
+{% sentence 23 %}In preparation for our careers in education and throughout our combined decades in front of classrooms, my brother and I carefully considered these questions.{% endsentence %} {% sentence 24 %}Our formal studies and personal experiences reveal a disappointing lack of a unified definition of the word *knowledge*.{% endsentence %} {% sentence 25 %}In the place of clarity, numerous theories exist to explain the concept of knowledge.{% endsentence %} {% sentence 26 %}Though the definition of knowledge may be unclear, we feel it is important to plainly define the Latter-day Saint view of truth.{% endsentence %} {% sentence 27 %}One formal doctrine states: "Truth is knowledge of things as they are, and as they were, and as they are to come"{% cite "ce-dc9324-a" %}.{% endsentence %} {% sentence 28 %}To this definition we add the following: The whole, ultimate truth is known only to God.{% endsentence %} {% sentence 29 %}There is only one ultimate truth; no separate truths exist for academics and spirituality.{% endsentence %} {% sentence 30 %}We can perceive or discover part of the whole truth, but we cannot know by academic means how correct this partial knowledge is in the ultimate sense.{% endsentence %} {% sentence 31 %}Truth does not have to be perceived, understood, believed, or justified to still be true.{% endsentence %}
 
 <h2 id="how-human-beings-gain-knowledge">{% sentence 32 %}How Human Beings Gain Knowledge{% endsentence %}</h2>
 
@@ -265,7 +314,7 @@ podcastTranscript: |
 
 {% sentence 153 %}Philosophy!{% endsentence %} {% sentence 154 %}Arts!{% endsentence %} {% sentence 155 %}Sciences!{% endsentence %} {% sentence 156 %}For ages, these have been intellectual altars before which many have chosen to worship human ingenuity.{% endsentence %} {% sentence 157 %}Yet an embarrassing truth is recognized by humble and honest intellectuals: in spite of all our discoveries and greatness, human academics cannot produce or define ultimate truth and meaning with finality.{% endsentence %} {% sentence 158 %}Strangely, humans often react to this embarrassing limitation by trying in vain to define truth by means of democracy or even tyranny.{% endsentence %} {% sentence 159 %}Public sentiment and political actions cannot produce truth.{% endsentence %} {% sentence 160 %}Left to our own devices, we can only slowly and imperfectly approach genuine truth by academic means.{% endsentence %}
 
-{% sentence 161 %}Mature scholars admit that academic knowledge is often based on sweeping, foundational assumptions.{% endsentence %} {% sentence 162 %}What if these academic assumptions are even a little wrong?{% endsentence %} {% sentence 163 %}In spite of our valuable accomplishments in analyzing the human condition and our noble construction of technology, human academics cannot produce ultimate truth.{% endsentence %} {% sentence 164 %}Instead, we often remain trapped in expansive and energetic debate, following an endless pattern of ever learning but never coming to a sure knowledge of truth (2 Timothy 3:7).{% endsentence %}
+{% sentence 161 %}Mature scholars admit that academic knowledge is often based on sweeping, foundational assumptions.{% endsentence %} {% sentence 162 %}What if these academic assumptions are even a little wrong?{% endsentence %} {% sentence 163 %}In spite of our valuable accomplishments in analyzing the human condition and our noble construction of technology, human academics cannot produce ultimate truth.{% endsentence %} {% sentence 164 %}Instead, we often remain trapped in expansive and energetic debate, following an endless pattern of ever learning but never coming to a sure knowledge of truth{% cite "ce-2tim37" %}.{% endsentence %}
 
 {% sentence 165 %}Anyone familiar with the history of science remembers well the lessons of discarded theories and models such as spontaneous generation, classical elements, flat earth, geocentric universe, and static universe.{% endsentence %} {% sentence 166 %}We like to think that we are far more advanced than the "primitive thinkers" who produced such ideas, when the fact is that ancient scholars were at least as brilliant as we are.{% endsentence %} {% sentence 167 %}Like us, they formed their philosophies and theories using the best evidence and tools available at the time.{% endsentence %} {% sentence 168 %}We also like to think that we have vastly superior evidence as well as more perfect tools of science with which to discern truth.{% endsentence %} {% sentence 169 %}It is humbling to consider what scholars of future generations will think of the imperfect theories and primitive tools of our day.{% endsentence %} {% sentence 170 %}Will we ever learn the lessons of simple humility?{% endsentence %}
 
@@ -273,7 +322,7 @@ podcastTranscript: |
 
 {% sentence 172 %}Surveys indicate that most of us believe or suspect that there is intelligence behind the formation of our universe and the precious life it contains.{% endsentence %} {% sentence 173 %}Common experience dictates that every organized structure or system has an architect.{% endsentence %} {% sentence 174 %}An appealing belief is that complex organization is the footprint of intelligence.{% endsentence %} {% sentence 175 %}Many innately suspect that such order and majesty as are found in nature cannot be without cause or effect.{% endsentence %} {% sentence 176 %}The hopeful insist that there must be purpose to life and that our surroundings are a work of art, the result of devoted attention.{% endsentence %} {% sentence 177 %}There are many religions, each with their own doctrines and practices.{% endsentence %} {% sentence 178 %}The simple assumption is made that all of life and existence has come from a source and is moving toward some destiny.{% endsentence %}
 
-{% sentence 179 %}Some view this hopeful assumption as an ignorant and uneducated mindset.{% endsentence %} {% sentence 180 %}"Advanced thought" sometimes leads the mind to question whether there is anything more to our existence than identifiable patterns of physical laws—an empirically identifiable evolution of the organization of matter, energy, and dimension.{% endsentence %} {% sentence 181 %}Paul spoke of this when he wrote: "The natural man receiveth not the things of the Spirit of God: for they are foolishness unto him: neither can he know them, because they are spiritually discerned" (1 Corinthians 2:14).{% endsentence %} {% sentence 182 %}The possibility of genuine spiritual intuition is often rejected.{% endsentence %} {% sentence 183 %}Empiricism is simply an intellectually disguised statement of old: "I will only believe what I can see."{% endsentence %} {% sentence 184 %}Clinging only to humanistic knowledge restricts us to merely observing and manipulating our existence rather than seeking to identify its purpose.{% endsentence %} {% sentence 185 %}At best, this choice is a sore limitation on the human experience.{% endsentence %}
+{% sentence 179 %}Some view this hopeful assumption as an ignorant and uneducated mindset.{% endsentence %} {% sentence 180 %}"Advanced thought" sometimes leads the mind to question whether there is anything more to our existence than identifiable patterns of physical laws—an empirically identifiable evolution of the organization of matter, energy, and dimension.{% endsentence %} {% sentence 181 %}Paul spoke of this when he wrote: "The natural man receiveth not the things of the Spirit of God: for they are foolishness unto him: neither can he know them, because they are spiritually discerned" {% cite "ce-1cor214" %}.{% endsentence %} {% sentence 182 %}The possibility of genuine spiritual intuition is often rejected.{% endsentence %} {% sentence 183 %}Empiricism is simply an intellectually disguised statement of old: "I will only believe what I can see."{% endsentence %} {% sentence 184 %}Clinging only to humanistic knowledge restricts us to merely observing and manipulating our existence rather than seeking to identify its purpose.{% endsentence %} {% sentence 185 %}At best, this choice is a sore limitation on the human experience.{% endsentence %}
 
 <h2 id="the-ceiling-of-the-natural-framework">{% sentence 186 %}The Ceiling of the Natural Framework{% endsentence %}</h2>
 
@@ -287,7 +336,7 @@ podcastTranscript: |
 
 {% sentence 201 %}This natural framework—the four faculties of senses, authority, reason, and academic intuition—is not defective.{% endsentence %} {% sentence 202 %}It functions precisely as designed for the questions it is equipped to address.{% endsentence %} {% sentence 203 %}Philosophy, arts, and sciences have yielded incalculable benefits to the human experience.{% endsentence %} {% sentence 204 %}Yet certain existential questions exceed its reach: Why is there something rather than nothing?{% endsentence %} {% sentence 205 %}Does a loving God truly exist?{% endsentence %} {% sentence 206 %}Does personal consciousness persist beyond death?{% endsentence %} {% sentence 207 %}What is the ultimate purpose of my existence?{% endsentence %}
 
-{% sentence 208 %}Science can describe *how* things work, but it cannot explain *why* we exist.{% endsentence %} {% sentence 209 %}These are not failures of the natural framework—the framework itself predicts these limits.{% endsentence %} {% sentence 210 %}If ultimate truth is "knowledge of things as they are, and as they were, and as they are to come" (D&C 93:24), and our natural faculties perceive only a fraction of that whole, we should expect to reach a ceiling.{% endsentence %}
+{% sentence 208 %}Science can describe *how* things work, but it cannot explain *why* we exist.{% endsentence %} {% sentence 209 %}These are not failures of the natural framework—the framework itself predicts these limits.{% endsentence %} {% sentence 210 %}If ultimate truth is "knowledge of things as they are, and as they were, and as they are to come"{% cite "ce-dc9324-b" %}, and our natural faculties perceive only a fraction of that whole, we should expect to reach a ceiling.{% endsentence %}
 
 {% sentence 211 %}Here, the seeker faces a choice: accept permanent ignorance on life's most vital questions, or consider whether there exists a faculty beyond the natural ones.{% endsentence %}
 
@@ -299,7 +348,7 @@ podcastTranscript: |
 
 {% sentence 221 %}Though we are still challenged by the worries, disappointments, and imperfections of mortal life, we have found profound underlying peace, hope, and joy in the application of the knowledge we wish to share.{% endsentence %} {% sentence 222 %}We have seen the happy effects of hope and faith in the lives of many others.{% endsentence %} {% sentence 223 %}We offer you the following personal witnesses in words of plainness: Ultimate truth can be known, at least in part—a significant and meaningful part.{% endsentence %} {% sentence 224 %}An individual, immortal spirit dwells within the flesh of each person.{% endsentence %} {% sentence 225 %}God lives and wishes to help us.{% endsentence %} {% sentence 226 %}Life has grand purpose and great meaning.{% endsentence %}
 
-{% sentence 227 %}We caution you: do not be persuaded by our words alone!{% endsentence %} {% sentence 228 %}Though there are beautiful and hopeful ideas in this book, their truth can only be known by the power of God and verified through your own personal spiritual experiences (Matthew 16:17; Moroni 10:3–5).{% endsentence %} {% sentence 229 %}It is our simple hope that our efforts will engender in your heart a desire to search for God—though He has never been far from you—as well as a desire to search for truth, meaning, and lasting happiness (Acts 17:27; D&C 88:63).{% endsentence %} {% sentence 230 %}We invite you to experiment on our words (Alma 32:27).{% endsentence %}
+{% sentence 227 %}We caution you: do not be persuaded by our words alone!{% endsentence %} {% sentence 228 %}Though there are beautiful and hopeful ideas in this book, their truth can only be known by the power of God and verified through your own personal spiritual experiences {% cite "ce-matt1617" %}{% cite "ce-moro1035" %}.{% endsentence %} {% sentence 229 %}It is our simple hope that our efforts will engender in your heart a desire to search for God—though He has never been far from you—as well as a desire to search for truth, meaning, and lasting happiness {% cite "ce-acts1727" %}{% cite "ce-dc8863" %}.{% endsentence %} {% sentence 230 %}We invite you to experiment on our words {% cite "ce-alma3227" %}.{% endsentence %}
 
 {% sentence 231 %}If the natural faculties have brought you to the ceiling of what they can provide, the following chapter will explore the fifth faculty—the one that completes the others.{% endsentence %} {% sentence 232 %}We testify that God has not left His children without a way to know Him and the truths He has in store for us.{% endsentence %} {% sentence 233 %}This we witness in the name of Jesus Christ.{% endsentence %} {% sentence 234 %}Amen.{% endsentence %}
 
