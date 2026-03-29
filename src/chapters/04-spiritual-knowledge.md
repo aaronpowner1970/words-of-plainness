@@ -199,6 +199,214 @@ pauses:
       prompt: "<p>The chapter names five spiritual faculties — feeling after God, discerning good from evil, recognizing truth, perceiving divine communication, and growing in light over time. Write honestly about which of these feels most alive in you right now, and which feels dormant or unfamiliar.</p>"
     witness:
       prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The chapter promises that \"God has answered the prayers of so many. He has answered us. He will answer you.\" If you have received spiritual knowledge — through whatever means it came — we invite you to share what that experience was like.</p>"
+
+citations:
+  - section: "What Spirituality Is Not"
+    entries:
+      - id: "ce-2ne225"
+        ref: "2 Nephi 2:25"
+        type: "bom"
+        note: "\"Men are that they might have joy\" — joy is part of God's design for mortal life."
+
+  - section: "The Human Spirit Within"
+    entries:
+      - id: "ce-num1622"
+        ref: "Numbers 16:22"
+        type: "ot"
+        note: "\"O God, the God of the spirits of all flesh\" — God as Father of spirits."
+      - id: "ce-eccl127"
+        ref: "Ecclesiastes 12:7"
+        type: "ot"
+        note: "\"The spirit shall return unto God who gave it\" — the spirit's origin and destiny."
+      - id: "ce-heb129"
+        ref: "Hebrews 12:9"
+        type: "nt"
+        note: "\"The Father of spirits\" — New Testament witness of God's parentage of human spirits."
+      - id: "ce-acts1729-a"
+        ref: "Acts 17:29"
+        type: "nt"
+        note: "\"We are the offspring of God\" — Paul on Mars Hill, establishing divine parentage."
+      - id: "ce-dc9330"
+        ref: "D&C 93:30"
+        type: "dc"
+        note: "All truth is independent in that sphere in which God has placed it — agency as eternal inheritance."
+      - id: "ce-job328"
+        ref: "Job 32:8"
+        type: "ot"
+        note: "\"There is a spirit in man: and the inspiration of the Almighty giveth them understanding.\""
+      - id: "ce-gen27-a"
+        ref: "Genesis 2:7"
+        type: "ot"
+        note: "\"Man became a living soul\" — the union of spirit and body that constitutes the soul."
+      - id: "ce-gen27-b"
+        ref: "Genesis 2:7"
+        type: "ot"
+        note: "The soul as the joined state of spirit and flesh — two creations of God united for a mortal season."
+      - id: "ce-gal517"
+        ref: "Galatians 5:17"
+        type: "nt"
+        note: "\"The flesh lusteth against the Spirit, and the Spirit against the flesh\" — the competition between mortal natures."
+      - id: "ce-john5"
+        ref: "John 5"
+        type: "nt"
+        note: "Christ's teaching on resurrection — \"they that have done good, unto the resurrection of life.\""
+      - id: "ce-1pet58"
+        ref: "1 Peter 5:8"
+        type: "nt"
+        note: "\"Your adversary the devil, as a roaring lion, walketh about, seeking whom he may devour.\""
+      - id: "ce-jude16"
+        ref: "Jude 1:6"
+        type: "nt"
+        note: "Angels who kept not their first estate — the pre-mortal rebellion."
+      - id: "ce-rev129"
+        ref: "Revelation 12:9"
+        type: "nt"
+        note: "Satan cast out, \"which deceiveth the whole world\" — the adversary and his hosts."
+      - id: "ce-1cor1312"
+        ref: "1 Corinthians 13:12"
+        type: "nt"
+        note: "\"For now we see through a glass, darkly\" — the veil of mortality limiting our pre-mortal knowledge."
+
+  - section: "Three Gifts of the Spirit"
+    entries:
+      - id: "ce-dc8812"
+        ref: "D&C 88:12–13"
+        type: "dc"
+        note: "The Light of Christ fills the immensity of space — the light in all things, giving life to all things."
+      - id: "ce-moro716"
+        ref: "Moroni 7:16, 19"
+        type: "bom"
+        note: "The Spirit of Christ is given to every person to know good from evil — lay hold upon every good thing."
+      - id: "ce-1thes519"
+        ref: "1 Thessalonians 5:19"
+        type: "nt"
+        note: "\"Quench not the Spirit\" — the warning against suppressing spiritual sensitivity."
+      - id: "ce-2ne2611"
+        ref: "2 Nephi 26:11"
+        type: "bom"
+        note: "\"The Spirit of the Lord will not always strive with man\" — the consequence of persistent rejection."
+      - id: "ce-dc13022"
+        ref: "D&C 130:22"
+        type: "dc"
+        note: "The Holy Ghost is a personage of spirit — a distinct member of the Godhead."
+      - id: "ce-john1416"
+        ref: "John 14:16–17, 26"
+        type: "nt"
+        note: "Christ's promise of the Comforter — \"the Holy Ghost, whom the Father will send in my name.\""
+      - id: "ce-acts815"
+        ref: "Acts 8:15–17"
+        type: "nt"
+        note: "Peter and John lay hands on those baptized in Samaria — they receive the Holy Ghost."
+      - id: "ce-1cor29"
+        ref: "1 Corinthians 2:9–14"
+        type: "nt"
+        note: "\"The natural man receiveth not the things of the Spirit of God\" — spiritual discernment surpasses natural faculties."
+
+  - section: "Righteous and Wicked Spirituality"
+    entries:
+      - id: "ce-2ne939"
+        ref: "2 Nephi 9:39"
+        type: "bom"
+        note: "\"To be carnally-minded is death, and to be spiritually-minded is life eternal.\""
+      - id: "ce-john319"
+        ref: "John 3:19"
+        type: "nt"
+        note: "\"Men loved darkness rather than light, because their deeds were evil.\""
+      - id: "ce-2cor1114"
+        ref: "2 Corinthians 11:14"
+        type: "nt"
+        note: "\"Satan himself is transformed into an angel of light\" — the deceiver's capacity to counterfeit."
+      - id: "ce-2ne99"
+        ref: "2 Nephi 9:9"
+        type: "bom"
+        note: "\"The devil… transformeth himself nigh unto an angel of light\" — Restoration witness of counterfeit spirituality."
+      - id: "ce-1john41"
+        ref: "1 John 4:1–3"
+        type: "nt"
+        note: "\"Try the spirits whether they are of God\" — the test of faith in Christ as discernment standard."
+      - id: "ce-1john44"
+        ref: "1 John 4:4"
+        type: "nt"
+        note: "\"Greater is he that is in you, than he that is in the world\" — God's power exceeds Satan's."
+
+  - section: "How to Develop Righteous Spirituality"
+    entries:
+      - id: "ce-1cor127"
+        ref: "1 Corinthians 12:7"
+        type: "nt"
+        note: "\"The manifestation of the Spirit is given to every man to profit withal\" — spiritual gifts are universal."
+
+  - section: "Experimenting on the Word"
+    entries:
+      - id: "ce-alma3227"
+        ref: "Alma 32:27–28"
+        type: "bom"
+        note: "Plant the word as a seed — if it swells, enlarges the soul, and enlightens understanding, it is good."
+
+  - section: "How Revelation Comes"
+    entries:
+      - id: "ce-dc12145"
+        ref: "D&C 121:45–46"
+        type: "dc"
+        note: "\"Line upon line, precept upon precept\" — revelation distilling as the dews from heaven."
+      - id: "ce-1ne1741"
+        ref: "1 Nephi 17:41"
+        type: "bom"
+        note: "\"Because of the simpleness of the way\" — God's works are simple; the proud overlook them."
+      - id: "ce-amos37"
+        ref: "Amos 3:7"
+        type: "ot"
+        note: "\"Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets.\""
+
+  - section: "Promises to the Seeker"
+    entries:
+      - id: "ce-2ne1023"
+        ref: "2 Nephi 10:23"
+        type: "bom"
+        note: "\"Ye are free to act for yourselves\" — agency as a gift and a calling."
+      - id: "ce-josh2415"
+        ref: "Joshua 24:15"
+        type: "ot"
+        note: "\"Choose you this day whom ye will serve\" — Joshua's challenge to active, decisive commitment."
+      - id: "ce-acts1729-b"
+        ref: "Acts 17:29"
+        type: "nt"
+        note: "\"We are the offspring of God\" — Paul's declaration of divine parentage as foundation of our inheritance."
+      - id: "ce-2ne2523"
+        ref: "2 Nephi 25:23"
+        type: "bom"
+        note: "\"We labor diligently… to persuade our children… to believe in Christ, and to be reconciled to God.\""
+      - id: "ce-dc1316"
+        ref: "D&C 131:6"
+        type: "dc"
+        note: "\"It is impossible for a man to be saved in ignorance\" — knowledge is a condition of exaltation."
+      - id: "ce-isa4523"
+        ref: "Isaiah 45:23"
+        type: "ot"
+        note: "\"Every knee shall bow, every tongue shall swear\" — universal acknowledgment of God."
+      - id: "ce-rom1411"
+        ref: "Romans 14:11"
+        type: "nt"
+        note: "\"Every knee shall bow to me, and every tongue shall confess to God\" — New Testament echo of Isaiah."
+      - id: "ce-mosiah2731"
+        ref: "Mosiah 27:31"
+        type: "bom"
+        note: "\"Every knee shall bow and every tongue confess\" — Restoration parallel witness."
+      - id: "ce-matt778"
+        ref: "Matthew 7:7–8"
+        type: "nt"
+        note: "\"Ask, and it shall be given you; seek, and ye shall find\" — the foundational promise of the search."
+      - id: "ce-dc8863"
+        ref: "D&C 88:63"
+        type: "dc"
+        note: "\"Draw near unto me and I will draw near unto you; seek me diligently and ye shall find me.\""
+
+  - section: "Two Paths to Confirmation"
+    entries:
+      - id: "ce-john717"
+        ref: "John 7:17"
+        type: "nt"
+        note: "\"If any man will do his will, he shall know of the doctrine\" — obedience as the path to doctrinal confirmation."
 ---
 
 <h2 id="the-fifth-faculty">The Fifth Faculty</h2>
@@ -215,7 +423,7 @@ pauses:
 
 {% sentence 13 %}Many today define spirituality as merely finding a sense of fulfillment, achieving balance in the various aspects of life, controlling obsessions, maintaining physical health, exploring morality, embracing responsibilities, and managing stress.{% endsentence %} {% sentence 14 %}These things are right and good.{% endsentence %} {% sentence 15 %}They are part of life, but these are not spirituality.{% endsentence %}
 
-{% sentence 16 %}Our physical bodies have an undeniably strong nature.{% endsentence %} {% sentence 17 %}It is so easy and pleasing to follow the many cravings of the flesh.{% endsentence %} {% sentence 18 %}It is not wrong that these desires exist.{% endsentence %} {% sentence 19 %}We believe they were given to us by God.{% endsentence %} {% sentence 20 %}A prophet of God once said, "Men are that they might have joy" (2 Nephi 2:25).{% endsentence %} {% sentence 21 %}But this does not mean that God intended for us to completely submit to our physical natures, making choices out of base instinct alone.{% endsentence %} {% sentence 22 %}Our physical bodies are only one aspect of our complex existence.{% endsentence %} {% sentence 23 %}Self-control is only a beginning to spirituality.{% endsentence %}
+{% sentence 16 %}Our physical bodies have an undeniably strong nature.{% endsentence %} {% sentence 17 %}It is so easy and pleasing to follow the many cravings of the flesh.{% endsentence %} {% sentence 18 %}It is not wrong that these desires exist.{% endsentence %} {% sentence 19 %}We believe they were given to us by God.{% endsentence %} {% sentence 20 %}A prophet of God once said, "Men are that they might have joy"{% cite "ce-2ne225" %}.{% endsentence %} {% sentence 21 %}But this does not mean that God intended for us to completely submit to our physical natures, making choices out of base instinct alone.{% endsentence %} {% sentence 22 %}Our physical bodies are only one aspect of our complex existence.{% endsentence %} {% sentence 23 %}Self-control is only a beginning to spirituality.{% endsentence %}
 
 <h2 id="the-human-spirit-within">The Human Spirit Within</h2>
 
@@ -229,21 +437,21 @@ pauses:
 
 {% sentence 35 %}Latter-day Saints believe that these intangible yet vital and vibrant portions of the human "self"—our minds and emotions—arise from the human spirit within the flesh.{% endsentence %} {% sentence 36 %}Along with many other groups, we also believe that the individual spirits of all humans existed prior to birth into this life and that they will continue to exist after physical death.{% endsentence %} {% sentence 37 %}With regards to spirituality, many speak of the importance of a person's character, which is the only thing that endures beyond the grave.{% endsentence %} {% sentence 38 %}Personal character is the manifestation of the true nature of one's immortal spirit.{% endsentence %}
 
-{% sentence 39 %}The Holy Bible identifies God as the "Father of spirits" (Numbers 16:22; Ecclesiastes 12:7; Hebrews 12:9; Acts 17:29).{% endsentence %} {% sentence 40 %}We believe that long before the physical formation of this world, as an act of procreation, God the Father created our spirits.{% endsentence %} {% sentence 41 %}Each spirit is the offspring of God, possessing parts, senses, intelligence, emotion, and an individual identity.{% endsentence %} {% sentence 42 %}As part of our inheritance as spiritual offspring of God, we were promised eternal freedom of choice—personal agency (D&C 93:30).{% endsentence %}
+{% sentence 39 %}The Holy Bible identifies God as the "Father of spirits" {% cite "ce-num1622" %}{% cite "ce-eccl127" %}{% cite "ce-heb129" %}{% cite "ce-acts1729-a" %}.{% endsentence %} {% sentence 40 %}We believe that long before the physical formation of this world, as an act of procreation, God the Father created our spirits.{% endsentence %} {% sentence 41 %}Each spirit is the offspring of God, possessing parts, senses, intelligence, emotion, and an individual identity.{% endsentence %} {% sentence 42 %}As part of our inheritance as spiritual offspring of God, we were promised eternal freedom of choice—personal agency{% cite "ce-dc9330" %}.{% endsentence %}
 
-{% sentence 43 %}Sometime between the moment of physical conception and physical birth into this mortal life, God places an individual spirit inside the growing body of flesh and bone (Job 32:8).{% endsentence %} {% sentence 44 %}The physical body becomes an extension of one's spirit, adding new layers of abilities and senses, bringing the individual to a new level of existence.{% endsentence %} {% sentence 45 %}When a spirit child of God is born into a mortal body of flesh, he or she is no longer what he or she was as an individual spirit.{% endsentence %} {% sentence 46 %}The character of an individual evolves and expands with each stage of existence.{% endsentence %}
+{% sentence 43 %}Sometime between the moment of physical conception and physical birth into this mortal life, God places an individual spirit inside the growing body of flesh and bone{% cite "ce-job328" %}.{% endsentence %} {% sentence 44 %}The physical body becomes an extension of one's spirit, adding new layers of abilities and senses, bringing the individual to a new level of existence.{% endsentence %} {% sentence 45 %}When a spirit child of God is born into a mortal body of flesh, he or she is no longer what he or she was as an individual spirit.{% endsentence %} {% sentence 46 %}The character of an individual evolves and expands with each stage of existence.{% endsentence %}
 
 {% sentence 47 %}Latter-day Saints do not believe in reincarnation.{% endsentence %} {% sentence 48 %}We believe in eternal progression—a forward journey through distinct stages of existence, each adding a purposeful layer to our existence and progression as children of God.{% endsentence %} {% sentence 49 %}Within our theology, the individual spirits of all humans that were created by God lived in His presence before birth.{% endsentence %} {% sentence 50 %}These spirits now inhabit bodies of flesh and will not return to repeat mortality.{% endsentence %} {% sentence 51 %}This life is the one season appointed for this mortal learning environment, which is what gives our life choices their lasting weight and consequence to the course of our eternal development.{% endsentence %}
 
-{% sentence 52 %}Spirituality has to do with the individual spirit that resides within one's physical body (John A. Widtsoe, *Program of The Church of Jesus Christ of Latter-day Saints*, 63).{% endsentence %} {% sentence 53 %}Our spiritual nature involves individual freedom of mind, limitless potential for greatness, reasoning, learning, emotion, a connection to the flesh, and—most importantly—interaction with other spirits.{% endsentence %} {% sentence 54 %}In mortality our spiritual and physical natures are tied together, but imperfectly and temporarily.{% endsentence %} {% sentence 55 %}Latter-day Saints identify this union of spirit and flesh as the soul (Genesis 2:7).{% endsentence %}
+{% sentence 52 %}Spirituality has to do with the individual spirit that resides within one's physical body (John A. Widtsoe, *Program of The Church of Jesus Christ of Latter-day Saints*, 63).{% endsentence %} {% sentence 53 %}Our spiritual nature involves individual freedom of mind, limitless potential for greatness, reasoning, learning, emotion, a connection to the flesh, and—most importantly—interaction with other spirits.{% endsentence %} {% sentence 54 %}In mortality our spiritual and physical natures are tied together, but imperfectly and temporarily.{% endsentence %} {% sentence 55 %}Latter-day Saints identify this union of spirit and flesh as the soul{% cite "ce-gen27-a" %}.{% endsentence %}
 
-{% sentence 56 %}A note of clarification may serve seekers from other Christian traditions.{% endsentence %} {% sentence 57 %}Many Christians use the word *soul* to describe what Latter-day Saints would call the *spirit*—the whole immaterial self.{% endsentence %} {% sentence 58 %}In our understanding, however, the terms are distinct.{% endsentence %} {% sentence 59 %}The *spirit* is the individual, intelligent personality—a literal offspring of God who existed before birth and will persist after death.{% endsentence %} {% sentence 60 %}The *soul* is what comes into being when that spirit is joined to a body of flesh: two natures, two creations of God, united into one being for a mortal season (Genesis 2:7).{% endsentence %} {% sentence 61 %}It is the spirit within the flesh that possesses the faculty of revelation—the fifth faculty—through which God communes with His children.{% endsentence %} {% sentence 62 %}This distinction matters because it is not the body alone, nor some vague inner self, but the literal spirit offspring of God within you that can perceive His voice.{% endsentence %}
+{% sentence 56 %}A note of clarification may serve seekers from other Christian traditions.{% endsentence %} {% sentence 57 %}Many Christians use the word *soul* to describe what Latter-day Saints would call the *spirit*—the whole immaterial self.{% endsentence %} {% sentence 58 %}In our understanding, however, the terms are distinct.{% endsentence %} {% sentence 59 %}The *spirit* is the individual, intelligent personality—a literal offspring of God who existed before birth and will persist after death.{% endsentence %} {% sentence 60 %}The *soul* is what comes into being when that spirit is joined to a body of flesh: two natures, two creations of God, united into one being for a mortal season{% cite "ce-gen27-b" %}.{% endsentence %} {% sentence 61 %}It is the spirit within the flesh that possesses the faculty of revelation—the fifth faculty—through which God communes with His children.{% endsentence %} {% sentence 62 %}This distinction matters because it is not the body alone, nor some vague inner self, but the literal spirit offspring of God within you that can perceive His voice.{% endsentence %}
 
-{% sentence 63 %}These two halves of our personal nature, the spirit and the flesh, compete for dominance of our character (Galatians 5:17).{% endsentence %} {% sentence 64 %}Finding and maintaining a wise and righteous balance between the spirit and the flesh takes a lifetime and more of effort and experience.{% endsentence %} {% sentence 65 %}Latter-day Saints believe in the resurrection from the dead that was promised by Jesus Himself (John 5).{% endsentence %} {% sentence 66 %}Following resurrection we will have the capacity to master the perfect balance of our souls through all eternity, but we are expected to begin this process now.{% endsentence %} {% sentence 67 %}We will never become truly whole (holy) unless we learn to bring our spirit and flesh into a righteous and lively state of mutual reverence.{% endsentence %}
+{% sentence 63 %}These two halves of our personal nature, the spirit and the flesh, compete for dominance of our character{% cite "ce-gal517" %}.{% endsentence %} {% sentence 64 %}Finding and maintaining a wise and righteous balance between the spirit and the flesh takes a lifetime and more of effort and experience.{% endsentence %} {% sentence 65 %}Latter-day Saints believe in the resurrection from the dead that was promised by Jesus Himself{% cite "ce-john5" %}.{% endsentence %} {% sentence 66 %}Following resurrection we will have the capacity to master the perfect balance of our souls through all eternity, but we are expected to begin this process now.{% endsentence %} {% sentence 67 %}We will never become truly whole (holy) unless we learn to bring our spirit and flesh into a righteous and lively state of mutual reverence.{% endsentence %}
 
-{% sentence 68 %}Latter-day Saints not only believe that God is a real and living entity, but we believe that Satan is also a real and living entity.{% endsentence %} {% sentence 69 %}Scriptures state that one of God's spirit offspring became His eternal adversary, leading many angels of heaven in open rebellion against God (1 Peter 5:8; Jude 1:6; Revelation 12:9).{% endsentence %} {% sentence 70 %}This adversary is known as Satan or the Devil.{% endsentence %} {% sentence 71 %}As part of our pre-mortal existence, our spirits were under the influence of God and this adversary for unknown spans of eternity.{% endsentence %}
+{% sentence 68 %}Latter-day Saints not only believe that God is a real and living entity, but we believe that Satan is also a real and living entity.{% endsentence %} {% sentence 69 %}Scriptures state that one of God's spirit offspring became His eternal adversary, leading many angels of heaven in open rebellion against God{% cite "ce-1pet58" %}{% cite "ce-jude16" %}{% cite "ce-rev129" %}.{% endsentence %} {% sentence 70 %}This adversary is known as Satan or the Devil.{% endsentence %} {% sentence 71 %}As part of our pre-mortal existence, our spirits were under the influence of God and this adversary for unknown spans of eternity.{% endsentence %}
 
-{% sentence 72 %}We further believe that when we are born in the flesh, God places a kind of veil of forgetfulness over our minds to test us during our stay in mortality (1 Corinthians 13:12).{% endsentence %} {% sentence 73 %}This veil suppresses much of the strength of our pre-mortal knowledge, creating a testing condition in which we make our choices in this life as a product of spiritual and physical desires.{% endsentence %} {% sentence 74 %}In the absence of perfect knowledge, we reveal the true character of our souls.{% endsentence %}
+{% sentence 72 %}We further believe that when we are born in the flesh, God places a kind of veil of forgetfulness over our minds to test us during our stay in mortality{% cite "ce-1cor1312" %}.{% endsentence %} {% sentence 73 %}This veil suppresses much of the strength of our pre-mortal knowledge, creating a testing condition in which we make our choices in this life as a product of spiritual and physical desires.{% endsentence %} {% sentence 74 %}In the absence of perfect knowledge, we reveal the true character of our souls.{% endsentence %}
 
 {% sentence 75 %}Our spirits are still actively influenced by both the Spirit of God and the spirit of Satan—good and evil influences respectively.{% endsentence %} {% sentence 76 %}Their spirits communicate directly with our own.{% endsentence %} {% sentence 77 %}Though we are free to choose our path, they influence our thoughts and feelings.{% endsentence %} {% sentence 78 %}As in pre-mortality, we continue to learn in mortality by making choices, experiencing consequences, and gathering wisdom in the process.{% endsentence %} {% sentence 79 %}The hopeful result is that we will grow and progress as children of God, but we are free to choose the direction of our growth.{% endsentence %}
 
@@ -253,15 +461,15 @@ pauses:
 
 <h3 id="the-light-of-christ">The Light of Christ</h3>
 
-{% sentence 82 %}The Light of Christ is the divine energy, power, or influence that shines from the person of God the Father through Christ "to fill the immensity of space—the light which is in all things, which giveth life to all things, which is the law by which all things are governed" (D&C 88:12–13).{% endsentence %} {% sentence 83 %}Men, women, and children are born with varying degrees of sensitivity to this light.{% endsentence %} {% sentence 84 %}It serves to allow God's children to know good from evil.{% endsentence %} {% sentence 85 %}This is the voice of our moral conscience.{% endsentence %}
+{% sentence 82 %}The Light of Christ is the divine energy, power, or influence that shines from the person of God the Father through Christ "to fill the immensity of space—the light which is in all things, which giveth life to all things, which is the law by which all things are governed" {% cite "ce-dc8812" %}.{% endsentence %} {% sentence 83 %}Men, women, and children are born with varying degrees of sensitivity to this light.{% endsentence %} {% sentence 84 %}It serves to allow God's children to know good from evil.{% endsentence %} {% sentence 85 %}This is the voice of our moral conscience.{% endsentence %}
 
-{% sentence 86 %}The Light of Christ guides all those who listen with their heart to further light and knowledge.{% endsentence %} {% sentence 87 %}It is the beginning of wisdom.{% endsentence %} {% sentence 88 %}The prophet Moroni explained: "The Spirit of Christ is given to every man, that he may know good from evil… Wherefore, I beseech of you, brethren, that ye should search diligently in the light of Christ that ye may know good from evil; and if ye will lay hold upon every good thing, and condemn it not, ye certainly will be a child of Christ" (Moroni 7:16, 19).{% endsentence %}
+{% sentence 86 %}The Light of Christ guides all those who listen with their heart to further light and knowledge.{% endsentence %} {% sentence 87 %}It is the beginning of wisdom.{% endsentence %} {% sentence 88 %}The prophet Moroni explained: "The Spirit of Christ is given to every man, that he may know good from evil… Wherefore, I beseech of you, brethren, that ye should search diligently in the light of Christ that ye may know good from evil; and if ye will lay hold upon every good thing, and condemn it not, ye certainly will be a child of Christ" {% cite "ce-moro716" %}.{% endsentence %}
 
-{% sentence 89 %}Unfortunately, by personal choice or social traditions one may reject this voice of conscience and, through continued sin against wisdom and righteousness, become insensitive to the Light of Christ.{% endsentence %} {% sentence 90 %}We are commanded, "Quench not the Spirit" (1 Thessalonians 5:19).{% endsentence %} {% sentence 91 %}Further, one can repeatedly offend the Lord to such an extent that the Lord will withhold His light, "for the Spirit of the Lord will not always strive with man" (2 Nephi 26:11).{% endsentence %} {% sentence 92 %}Yet the Light of Christ must not be confused with the Holy Ghost.{% endsentence %} {% sentence 93 %}The Light of Christ is not a person, but a power.{% endsentence %}
+{% sentence 89 %}Unfortunately, by personal choice or social traditions one may reject this voice of conscience and, through continued sin against wisdom and righteousness, become insensitive to the Light of Christ.{% endsentence %} {% sentence 90 %}We are commanded, "Quench not the Spirit"{% cite "ce-1thes519" %}.{% endsentence %} {% sentence 91 %}Further, one can repeatedly offend the Lord to such an extent that the Lord will withhold His light, "for the Spirit of the Lord will not always strive with man"{% cite "ce-2ne2611" %}.{% endsentence %} {% sentence 92 %}Yet the Light of Christ must not be confused with the Holy Ghost.{% endsentence %} {% sentence 93 %}The Light of Christ is not a person, but a power.{% endsentence %}
 
 <h3 id="the-holy-ghost">The Holy Ghost</h3>
 
-{% sentence 94 %}Like Jesus Christ, the Holy Ghost is a distinct personage—a member of the Godhead who exists as a personage of spirit (D&C 130:22; see also John 14:16–17, 26).{% endsentence %} {% sentence 95 %}As do the Father and the Son, the Holy Ghost has an essential role to play in the lives of God's children.{% endsentence %} {% sentence 96 %}He works in perfect unity with the other members of the Godhead.{% endsentence %} {% sentence 97 %}His calling is to witness of the Father and the Son and to reveal the truth of all things.{% endsentence %} {% sentence 98 %}His personal and divine communication to our individual spirits carries far more certainty than any communication we can receive through our physical senses.{% endsentence %}
+{% sentence 94 %}Like Jesus Christ, the Holy Ghost is a distinct personage—a member of the Godhead who exists as a personage of spirit {% cite "ce-dc13022" %}{% cite "ce-john1416" %}.{% endsentence %} {% sentence 95 %}As do the Father and the Son, the Holy Ghost has an essential role to play in the lives of God's children.{% endsentence %} {% sentence 96 %}He works in perfect unity with the other members of the Godhead.{% endsentence %} {% sentence 97 %}His calling is to witness of the Father and the Son and to reveal the truth of all things.{% endsentence %} {% sentence 98 %}His personal and divine communication to our individual spirits carries far more certainty than any communication we can receive through our physical senses.{% endsentence %}
 
 {% sentence 99 %}All can be blessed by the touch of the Holy Ghost—members and non-members of the Church of Christ, believers and nonbelievers alike.{% endsentence %} {% sentence 100 %}The Holy Ghost can provide a temporary blessing of knowledge and power to mankind.{% endsentence %} {% sentence 101 %}All men, women, and children may feel the momentary sensations of the Holy Ghost.{% endsentence %} {% sentence 102 %}Indeed, God moves nations and individuals by the power of the Holy Ghost.{% endsentence %}
 
@@ -269,11 +477,11 @@ pauses:
 
 <h3 id="the-gift-of-the-holy-ghost">The Gift of the Holy Ghost</h3>
 
-{% sentence 109 %}The most important of the three references to the Spirit is the "Gift of the Holy Ghost."{% endsentence %} {% sentence 110 %}Following baptism by immersion in water, the Gift of the Holy Ghost is given by the laying on of hands in a priesthood ordinance that requires true authority.{% endsentence %} {% sentence 111 %}The necessity of this priesthood ordinance for salvation was plainly understood and practiced in the ancient Church established in Christ's day.{% endsentence %} {% sentence 112 %}The Apostles Peter and John, hearing that Samaria had received the word of God, went to them quickly: "Who, when they were come down, prayed for them, that they might receive the Holy Ghost: for as yet he was fallen upon none of them: only they were baptized in the name of the Lord Jesus. Then laid they their hands on them, and they received the Holy Ghost" (Acts 8:15–17).{% endsentence %}
+{% sentence 109 %}The most important of the three references to the Spirit is the "Gift of the Holy Ghost."{% endsentence %} {% sentence 110 %}Following baptism by immersion in water, the Gift of the Holy Ghost is given by the laying on of hands in a priesthood ordinance that requires true authority.{% endsentence %} {% sentence 111 %}The necessity of this priesthood ordinance for salvation was plainly understood and practiced in the ancient Church established in Christ's day.{% endsentence %} {% sentence 112 %}The Apostles Peter and John, hearing that Samaria had received the word of God, went to them quickly: "Who, when they were come down, prayed for them, that they might receive the Holy Ghost: for as yet he was fallen upon none of them: only they were baptized in the name of the Lord Jesus. Then laid they their hands on them, and they received the Holy Ghost" {% cite "ce-acts815" %}.{% endsentence %}
 
 {% sentence 113 %}What does it mean to receive the Gift of the Holy Ghost?{% endsentence %} {% sentence 114 %}When disciples receive this priesthood ordinance from an authorized servant of God and seek to remain worthy, they may enjoy the *constant companionship* of the Holy Ghost throughout their lives.{% endsentence %} {% sentence 115 %}This sacred priesthood ordinance also serves to confirm the worthy recipient as a member of The Church of Jesus Christ.{% endsentence %}
 
-{% sentence 116 %}The Gift of the Holy Ghost is the Comforter spoken of by Christ—the baptism by fire.{% endsentence %} {% sentence 117 %}One who receives the Gift of the Holy Ghost and remains worthy is continuously worked upon by the power of the Holy Ghost unto salvation and perfection in Christ.{% endsentence %} {% sentence 118 %}We can enjoy the constant guidance, correction, and companionship of the Holy Ghost.{% endsentence %} {% sentence 119 %}Feeling peace, comfort, joy, warmth, and the love of God can be uninterrupted for those who are worthy and possess this blessing.{% endsentence %} {% sentence 120 %}This gift offers a divine endowment of God's power that leads to greater light, knowledge, wisdom, and personal growth than can be obtained through natural faculties alone (see 1 Corinthians 2:9–14).{% endsentence %}
+{% sentence 116 %}The Gift of the Holy Ghost is the Comforter spoken of by Christ—the baptism by fire.{% endsentence %} {% sentence 117 %}One who receives the Gift of the Holy Ghost and remains worthy is continuously worked upon by the power of the Holy Ghost unto salvation and perfection in Christ.{% endsentence %} {% sentence 118 %}We can enjoy the constant guidance, correction, and companionship of the Holy Ghost.{% endsentence %} {% sentence 119 %}Feeling peace, comfort, joy, warmth, and the love of God can be uninterrupted for those who are worthy and possess this blessing.{% endsentence %} {% sentence 120 %}This gift offers a divine endowment of God's power that leads to greater light, knowledge, wisdom, and personal growth than can be obtained through natural faculties alone {% cite "ce-1cor29" %}.{% endsentence %}
 
 {% sentence 121 %}These three gifts represent a progression: the Light of Christ prepares the soul to recognize truth, the Holy Ghost witnesses of that truth, and the Gift of the Holy Ghost enables the soul to be transformed by truth continually.{% endsentence %}
 
@@ -283,7 +491,7 @@ pauses:
 
 {% sentence 129 %}Unfortunately, some see tragedies and the very real existence of evil in the hearts of humans as proof that there is no value to spirituality.{% endsentence %} {% sentence 130 %}This response stems from a lack of understanding.{% endsentence %} {% sentence 131 %}We must not allow anything to deter us from developing spirituality to the degree that we can distinguish truth from error, answer life's important questions, and find meaning in the process.{% endsentence %}
 
-{% sentence 132 %}Righteous spirituality is when we come to love and obey the whisperings of the Spirit of God, which inspire compassion and selflessness in spite of the cravings of the flesh (2 Nephi 9:39).{% endsentence %} {% sentence 133 %}Wicked spirituality is when we come to love and obey the whisperings of the spirit of Satan, which inspire cruelty and selfishness (John 3:19).{% endsentence %} {% sentence 134 %}Wickedness usually involves surrendering to cravings of the flesh, eventually without restraint.{% endsentence %} {% sentence 135 %}When we stray from the path of wisdom, especially in selfishness or cruelty, we become less worthy vessels of the Spirit of God, reducing our ability to sense His righteous influence and leaving us more susceptible to the malevolent influence of Satan.{% endsentence %}
+{% sentence 132 %}Righteous spirituality is when we come to love and obey the whisperings of the Spirit of God, which inspire compassion and selflessness in spite of the cravings of the flesh{% cite "ce-2ne939" %}.{% endsentence %} {% sentence 133 %}Wicked spirituality is when we come to love and obey the whisperings of the spirit of Satan, which inspire cruelty and selfishness{% cite "ce-john319" %}.{% endsentence %} {% sentence 134 %}Wickedness usually involves surrendering to cravings of the flesh, eventually without restraint.{% endsentence %} {% sentence 135 %}When we stray from the path of wisdom, especially in selfishness or cruelty, we become less worthy vessels of the Spirit of God, reducing our ability to sense His righteous influence and leaving us more susceptible to the malevolent influence of Satan.{% endsentence %}
 
 <h3 id="discerning-the-source">Discerning the Source</h3>
 
@@ -291,13 +499,13 @@ pauses:
 
 {% sentence 141 %}Righteous spirituality always leads to humility, selflessness, and compassionate love.{% endsentence %} {% sentence 142 %}Good influences and powers always lead to greater peace, freedom, and unity between the children of God—to protecting and caring for the poor, the weak, and the downtrodden.{% endsentence %} {% sentence 143 %}If any activity leads you to lift yourself up in pride, thinking yourself above your brothers and sisters, it is unrighteous and is not God's work.{% endsentence %} {% sentence 144 %}If any activity leads you to exercise power over others with any degree of selfishness, compulsion, or cruelty, it is certainly evil.{% endsentence %}
 
-{% sentence 145 %}As the adversary to God, Satan is the great deceiver.{% endsentence %} {% sentence 146 %}He has power to appear as an angel of light and to perform miracles, signs, and wonders which are sufficient in many cases to deceive even the very elect of God (2 Corinthians 11:14; 2 Nephi 9:9).{% endsentence %} {% sentence 147 %}So how are we to distinguish powers of light from powers of darkness?{% endsentence %} {% sentence 148 %}The only spiritual sensation that Satan cannot mimic is the divine peace of the Lord, which is described as deep, abiding, cleansing, gentling, uplifting, pervasive, healing, transformative, and saving.{% endsentence %} {% sentence 149 %}Powers of God and righteous spiritual intuition are always accompanied by this divine peace.{% endsentence %} {% sentence 150 %}Most importantly, powers of God and righteous spiritual intuition always lead to faith in God and faith in His Son, Jesus Christ (1 John 4:1–3).{% endsentence %} {% sentence 151 %}If any activity leads away from faith in Christ, it is not inspired by God.{% endsentence %}
+{% sentence 145 %}As the adversary to God, Satan is the great deceiver.{% endsentence %} {% sentence 146 %}He has power to appear as an angel of light and to perform miracles, signs, and wonders which are sufficient in many cases to deceive even the very elect of God {% cite "ce-2cor1114" %}{% cite "ce-2ne99" %}.{% endsentence %} {% sentence 147 %}So how are we to distinguish powers of light from powers of darkness?{% endsentence %} {% sentence 148 %}The only spiritual sensation that Satan cannot mimic is the divine peace of the Lord, which is described as deep, abiding, cleansing, gentling, uplifting, pervasive, healing, transformative, and saving.{% endsentence %} {% sentence 149 %}Powers of God and righteous spiritual intuition are always accompanied by this divine peace.{% endsentence %} {% sentence 150 %}Most importantly, powers of God and righteous spiritual intuition always lead to faith in God and faith in His Son, Jesus Christ{% cite "ce-1john41" %}.{% endsentence %} {% sentence 151 %}If any activity leads away from faith in Christ, it is not inspired by God.{% endsentence %}
 
-{% sentence 152 %}Importantly, we need not tremble with fear and uncertainty in the face of evil.{% endsentence %} {% sentence 153 %}We can be comforted by the knowledge that the power and wisdom of God is greater than that of Satan (1 John 4:4).{% endsentence %}
+{% sentence 152 %}Importantly, we need not tremble with fear and uncertainty in the face of evil.{% endsentence %} {% sentence 153 %}We can be comforted by the knowledge that the power and wisdom of God is greater than that of Satan {% cite "ce-1john44" %}.{% endsentence %}
 
 <h2 id="how-to-develop-righteous-spirituality">How to Develop Righteous Spirituality</h2>
 
-{% sentence 154 %}Though many feel uncertain about spiritual intuition, we testify that spirituality is a vital part of the human experience.{% endsentence %} {% sentence 155 %}Without it we are blind and deaf to many of the most precious and beautiful aspects of life.{% endsentence %} {% sentence 156 %}Can you feel the truth of these things?{% endsentence %} {% sentence 157 %}If not, can you learn spiritual sensitivity?{% endsentence %} {% sentence 158 %}Can you learn to experience these things for yourself?{% endsentence %} {% sentence 159 %}We proclaim to the world a resounding "YES!"{% endsentence %} {% sentence 160 %}We believe in the declaration of Paul, "The manifestation of the Spirit is given to every man to profit withal" (1 Corinthians 12:7).{% endsentence %} {% sentence 161 %}No man, woman, or child is without the ability to sense the spirit and power of God.{% endsentence %}
+{% sentence 154 %}Though many feel uncertain about spiritual intuition, we testify that spirituality is a vital part of the human experience.{% endsentence %} {% sentence 155 %}Without it we are blind and deaf to many of the most precious and beautiful aspects of life.{% endsentence %} {% sentence 156 %}Can you feel the truth of these things?{% endsentence %} {% sentence 157 %}If not, can you learn spiritual sensitivity?{% endsentence %} {% sentence 158 %}Can you learn to experience these things for yourself?{% endsentence %} {% sentence 159 %}We proclaim to the world a resounding "YES!"{% endsentence %} {% sentence 160 %}We believe in the declaration of Paul, "The manifestation of the Spirit is given to every man to profit withal"{% cite "ce-1cor127" %}.{% endsentence %} {% sentence 161 %}No man, woman, or child is without the ability to sense the spirit and power of God.{% endsentence %}
 
 {% sentence 162 %}To develop healthy and saving spirituality, we must search for truth and nourish our spirits to a lively state of being.{% endsentence %} {% sentence 163 %}Though each person's spirit has different needs and is nourished by different activities, the following are universal ways to develop and exercise the kind of spirituality that allows one to distinguish truth from error:{% endsentence %}
 
@@ -314,7 +522,7 @@ pauses:
 
 {% sentence 174 %}Just as the natural faculties allow for testing beliefs through observation and application, so does spiritual knowledge allow for a kind of sacred experiment.{% endsentence %} {% sentence 175 %}The prophet Alma taught this principle to a group of seekers who lacked perfect knowledge:{% endsentence %}
 
-> {% sentence 176 %}"If ye will awake and arouse your faculties, even to an experiment upon my words, and exercise a particle of faith, yea, even if ye can no more than desire to believe, let this desire work in you, even until ye believe in a manner that ye can give place for a portion of my words.{% endsentence %} {% sentence 177 %}Now, we will compare the word unto a seed.{% endsentence %} {% sentence 178 %}Now, if ye give place, that a seed may be planted in your heart, behold, if it be a true seed, or a good seed, if ye do not cast it out by your unbelief, that ye will resist the Spirit of the Lord, behold, it will begin to swell within your breasts; and when you feel these swelling motions, ye will begin to say within yourselves—It must needs be that this is a good seed, or that the word is good, for it beginneth to enlarge my soul; yea, it beginneth to enlighten my understanding, yea, it beginneth to be delicious to me." (Alma 32:27–28){% endsentence %}
+> {% sentence 176 %}"If ye will awake and arouse your faculties, even to an experiment upon my words, and exercise a particle of faith, yea, even if ye can no more than desire to believe, let this desire work in you, even until ye believe in a manner that ye can give place for a portion of my words.{% endsentence %} {% sentence 177 %}Now, we will compare the word unto a seed.{% endsentence %} {% sentence 178 %}Now, if ye give place, that a seed may be planted in your heart, behold, if it be a true seed, or a good seed, if ye do not cast it out by your unbelief, that ye will resist the Spirit of the Lord, behold, it will begin to swell within your breasts; and when you feel these swelling motions, ye will begin to say within yourselves—It must needs be that this is a good seed, or that the word is good, for it beginneth to enlarge my soul; yea, it beginneth to enlighten my understanding, yea, it beginneth to be delicious to me." {% cite "ce-alma3227" %}{% endsentence %}
 
 {% sentence 179 %}This is a spiritual method: treat a spiritual claim as a hypothesis, plant it through sincere action and obedience, and observe the results in your own soul.{% endsentence %} {% sentence 180 %}Does it produce faith, hope, and love?{% endsentence %} {% sentence 181 %}Does it bring peace to your mind and warmth to your heart?{% endsentence %} {% sentence 182 %}Does it enlarge your understanding and draw you closer to God?{% endsentence %} {% sentence 183 %}If so, you have evidence of its truth—not through external measurement, but through internal transformation.{% endsentence %}
 
@@ -324,33 +532,33 @@ pauses:
 
 {% sentence 186 %}It is easy to fail to recognize or even dismiss revelations from God if we do not know for what we are looking.{% endsentence %} {% sentence 187 %}Spiritual manifestations of God can come in a wide variety of ways, including such things as simple mental or emotional inspiration, a swelling of calm assurance, a powerful sense of peace and warmth within, and meaningful dreams.{% endsentence %} {% sentence 188 %}The Lord seems to prefer to work by small and simple means, but upon occasion He has given to some to behold prophetic visions, perform mighty miracles, have literal conversations with heavenly messengers, and even witness the parting of the veil of eternity to behold the face of God.{% endsentence %}
 
-{% sentence 189 %}Some have awakened spiritually to sudden, dramatic, powerful revelations from God.{% endsentence %} {% sentence 190 %}For most of us, however, revelation is a gradual process, like the rising of the sun.{% endsentence %} {% sentence 191 %}With life experiences and personal efforts at spirituality, we receive "line upon line, precept upon precept" in such ways that revelations from God gradually and subtly "distil upon [us] as the dews from heaven" (D&C 121:45–46).{% endsentence %} {% sentence 192 %}Spiritual intuition is often similar to the almost imperceptible increase in light at the dawning of a new day.{% endsentence %} {% sentence 193 %}We eventually recognize the light and warmth, and we are glad of it.{% endsentence %}
+{% sentence 189 %}Some have awakened spiritually to sudden, dramatic, powerful revelations from God.{% endsentence %} {% sentence 190 %}For most of us, however, revelation is a gradual process, like the rising of the sun.{% endsentence %} {% sentence 191 %}With life experiences and personal efforts at spirituality, we receive "line upon line, precept upon precept" in such ways that revelations from God gradually and subtly "distil upon [us] as the dews from heaven"{% cite "ce-dc12145" %}.{% endsentence %} {% sentence 192 %}Spiritual intuition is often similar to the almost imperceptible increase in light at the dawning of a new day.{% endsentence %} {% sentence 193 %}We eventually recognize the light and warmth, and we are glad of it.{% endsentence %}
 
-{% sentence 194 %}It is common as we search for God to expect marvelous and dramatic spiritual manifestations to the extent that we fail to appreciate or even recognize the power of God working within us because of the "simpleness of the way" (1 Nephi 17:41).{% endsentence %} {% sentence 195 %}In spite of this, it is possible for us to nurture our spirituality such that we cannot fail to recognize the "light of day" when it is upon us.{% endsentence %}
+{% sentence 194 %}It is common as we search for God to expect marvelous and dramatic spiritual manifestations to the extent that we fail to appreciate or even recognize the power of God working within us because of the "simpleness of the way"{% cite "ce-1ne1741" %}.{% endsentence %} {% sentence 195 %}In spite of this, it is possible for us to nurture our spirituality such that we cannot fail to recognize the "light of day" when it is upon us.{% endsentence %}
 
-{% sentence 196 %}Personal revelation to spiritually sensitive people has been the pattern of God since the creation of mankind (Amos 3:7).{% endsentence %} {% sentence 197 %}Personal revelation is the only way you can know ultimate truth.{% endsentence %}
+{% sentence 196 %}Personal revelation to spiritually sensitive people has been the pattern of God since the creation of mankind{% cite "ce-amos37" %}.{% endsentence %} {% sentence 197 %}Personal revelation is the only way you can know ultimate truth.{% endsentence %}
 
 <h2 id="promises-to-the-seeker">Promises to the Seeker</h2>
 
-{% sentence 198 %}As immortal beings, we have the right to choose our own destiny.{% endsentence %} {% sentence 199 %}God is intimately familiar with each of His children and knows beforehand what choices we will make, but He protects and preserves our freedom to make choices.{% endsentence %} {% sentence 200 %}The prophet Nephi declared, "Cheer up your hearts, and remember that ye are free to act for yourselves" (2 Nephi 10:23).{% endsentence %} {% sentence 201 %}The prophet Joshua challenged us to use our freedom and make a lasting decision without delay.{% endsentence %} {% sentence 202 %}He commanded, "Choose you this day whom ye will serve" (Joshua 24:15).{% endsentence %}
+{% sentence 198 %}As immortal beings, we have the right to choose our own destiny.{% endsentence %} {% sentence 199 %}God is intimately familiar with each of His children and knows beforehand what choices we will make, but He protects and preserves our freedom to make choices.{% endsentence %} {% sentence 200 %}The prophet Nephi declared, "Cheer up your hearts, and remember that ye are free to act for yourselves"{% cite "ce-2ne1023" %}.{% endsentence %} {% sentence 201 %}The prophet Joshua challenged us to use our freedom and make a lasting decision without delay.{% endsentence %} {% sentence 202 %}He commanded, "Choose you this day whom ye will serve"{% cite "ce-josh2415" %}.{% endsentence %}
 
-{% sentence 203 %}As the New Testament of the Bible says, "We are the offspring of God" (Acts 17:29).{% endsentence %} {% sentence 204 %}We are His children.{% endsentence %} {% sentence 205 %}As part of this royal birthright, we stand to gain a glorious inheritance in the eternities, if we are willing to receive it.{% endsentence %} {% sentence 206 %}Consider what the nature of such an inheritance might be.{% endsentence %}
+{% sentence 203 %}As the New Testament of the Bible says, "We are the offspring of God"{% cite "ce-acts1729-b" %}.{% endsentence %} {% sentence 204 %}We are His children.{% endsentence %} {% sentence 205 %}As part of this royal birthright, we stand to gain a glorious inheritance in the eternities, if we are willing to receive it.{% endsentence %} {% sentence 206 %}Consider what the nature of such an inheritance might be.{% endsentence %}
 
 {% sentence 207 %}Knowledge and power are not what makes one righteous, or even spiritual.{% endsentence %} {% sentence 208 %}We believe that this mortal life is a test of the character of our souls, a means to judge our worthiness as children of God.{% endsentence %} {% sentence 209 %}One's true character is clearly revealed by personal choices, sincere desires, and persistent attitudes manifested in this life.{% endsentence %} {% sentence 210 %}Latter-day Saints believe that, sometime following death, the individual character of each child of God will be judged and an inheritance (or lack thereof) will be given to us in the Eternal Kingdom of God.{% endsentence %}
 
-{% sentence 211 %}Because of our agency and due to our imperfections, we invariably experience personal falls from righteousness in this life.{% endsentence %} {% sentence 212 %}We proclaim, as do other Christians, that God sent His own Son, Jesus Christ, to open the way for us to recover from the tragic effects of sin and to regain an inheritance in the Kingdom of Heaven following this life.{% endsentence %} {% sentence 213 %}As ancient prophets and apostles of God have done, "We labor diligently to write, to persuade our children, and also our brethren, to believe in Christ, and to be reconciled to God" (2 Nephi 25:23).{% endsentence %} {% sentence 214 %}Salvation of our souls is the purpose of the gospel of Jesus Christ and the reason for His life and sacrifice.{% endsentence %}
+{% sentence 211 %}Because of our agency and due to our imperfections, we invariably experience personal falls from righteousness in this life.{% endsentence %} {% sentence 212 %}We proclaim, as do other Christians, that God sent His own Son, Jesus Christ, to open the way for us to recover from the tragic effects of sin and to regain an inheritance in the Kingdom of Heaven following this life.{% endsentence %} {% sentence 213 %}As ancient prophets and apostles of God have done, "We labor diligently to write, to persuade our children, and also our brethren, to believe in Christ, and to be reconciled to God" {% cite "ce-2ne2523" %}.{% endsentence %} {% sentence 214 %}Salvation of our souls is the purpose of the gospel of Jesus Christ and the reason for His life and sacrifice.{% endsentence %}
 
-{% sentence 215 %}It is certain that the eternal judgment of our souls will especially focus on what we do with truth when we find it.{% endsentence %} {% sentence 216 %}We believe that we cannot be saved in ignorance (D&C 131:6).{% endsentence %} {% sentence 217 %}Whether in this life or the next, all will come to a full knowledge of God's Plan of Redemption.{% endsentence %} {% sentence 218 %}"Every knee shall bow, and every tongue confess" (Isaiah 45:23; Romans 14:11; Mosiah 27:31) that Jesus Christ is our Savior when we are brought before His judgment seat.{% endsentence %}
+{% sentence 215 %}It is certain that the eternal judgment of our souls will especially focus on what we do with truth when we find it.{% endsentence %} {% sentence 216 %}We believe that we cannot be saved in ignorance{% cite "ce-dc1316" %}.{% endsentence %} {% sentence 217 %}Whether in this life or the next, all will come to a full knowledge of God's Plan of Redemption.{% endsentence %} {% sentence 218 %}"Every knee shall bow, and every tongue confess" {% cite "ce-isa4523" %}{% cite "ce-rom1411" %}{% cite "ce-mosiah2731" %} that Jesus Christ is our Savior when we are brought before His judgment seat.{% endsentence %}
 
 {% sentence 219 %}There is an opposition to our finding eternal truth during our mortal testing.{% endsentence %} {% sentence 220 %}Satan uses truth mixed with lies to lead us away from righteousness and knowledge of God.{% endsentence %} {% sentence 221 %}He is happy when we believe partial truths.{% endsentence %} {% sentence 222 %}In this way we can be influenced little by little away from salvation and be led carefully to destruction.{% endsentence %} {% sentence 223 %}It is unfortunate that there is such confusion of religions and diversity of philosophies in the world.{% endsentence %} {% sentence 224 %}Too many are led in frustration from doctrine to doctrine until they give up entirely.{% endsentence %} {% sentence 225 %}It is NOT correct doctrine that will save one's soul.{% endsentence %} {% sentence 226 %}Rather, it is one's faith in God and efforts to follow His Christ.{% endsentence %}
 
-{% sentence 227 %}If we do not give up the pursuit of truth and righteousness, we have promises from the Lord Jesus Christ.{% endsentence %} {% sentence 228 %}He taught: "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you: For every one that asketh receiveth; and he that seeketh findeth; and to him that knocketh it shall be opened" (Matthew 7:7–8).{% endsentence %} {% sentence 229 %}The resurrected Lord confirmed this promise and added: "Draw near unto me and I will draw near unto you; seek me diligently and ye shall find me" (D&C 88:63).{% endsentence %}
+{% sentence 227 %}If we do not give up the pursuit of truth and righteousness, we have promises from the Lord Jesus Christ.{% endsentence %} {% sentence 228 %}He taught: "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you: For every one that asketh receiveth; and he that seeketh findeth; and to him that knocketh it shall be opened" {% cite "ce-matt778" %}.{% endsentence %} {% sentence 229 %}The resurrected Lord confirmed this promise and added: "Draw near unto me and I will draw near unto you; seek me diligently and ye shall find me" {% cite "ce-dc8863" %}.{% endsentence %}
 
 <h2 id="two-paths-to-confirmation">Two Paths to Confirmation</h2>
 
 {% sentence 230 %}How can you know whether these things are true?{% endsentence %} {% sentence 231 %}Are these teachings merely the product of mankind's mortal fears?{% endsentence %} {% sentence 232 %}Are these ideas the result of our hopes and dreams for immortal glory?{% endsentence %} {% sentence 233 %}Or are they real?{% endsentence %} {% sentence 234 %}The answers to such questions can only be received by personal revelation from God, which requires the development of spirituality.{% endsentence %}
 
-{% sentence 235 %}There are two ways to confirm the truth of spiritual knowledge.{% endsentence %} {% sentence 236 %}First, if you endeavor to keep the commandments of God, you will come to know whether they are of human invention or of divine origin by their effect on you (John 7:17).{% endsentence %} {% sentence 237 %}However, the practice of morality is not sufficient to gain full knowledge of the nature of God.{% endsentence %} {% sentence 238 %}To begin to do this, effort must be made to search out God spiritually.{% endsentence %}
+{% sentence 235 %}There are two ways to confirm the truth of spiritual knowledge.{% endsentence %} {% sentence 236 %}First, if you endeavor to keep the commandments of God, you will come to know whether they are of human invention or of divine origin by their effect on you{% cite "ce-john717" %}.{% endsentence %} {% sentence 237 %}However, the practice of morality is not sufficient to gain full knowledge of the nature of God.{% endsentence %} {% sentence 238 %}To begin to do this, effort must be made to search out God spiritually.{% endsentence %}
 
 {% sentence 239 %}Following the second path to spiritual knowledge, you can learn to reach outside of yourself with your mind and heart, praying with sincerity to perceive truth spiritually.{% endsentence %} {% sentence 240 %}Ask if God is really there.{% endsentence %} {% sentence 241 %}There is no need for memorized phrases or complicated communication.{% endsentence %} {% sentence 242 %}Just speak what is in your mind and heart.{% endsentence %} {% sentence 243 %}He will listen.{% endsentence %}
 
