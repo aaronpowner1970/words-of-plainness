@@ -213,6 +213,260 @@ nextChapter:
   url: "/chapters/07-prophecies-birth-youth/"
   title: "Chapter 7: Prophecies, Birth, and Youth"
 citations:
+  - section: "More Than Belief"
+    entries:
+      - id: fl-james219
+        ref: "James 2:19"
+        type: nt
+        url: "nt/james/2?id=p19#p19"
+        text: "The devils also believe, and tremble."
+      - id: fl-heb111
+        ref: "Hebrews 11:1"
+        type: nt
+        url: "nt/heb/11?id=p1#p1"
+        text: "Now faith is the substance of things hoped for, the evidence of things not seen."
+      - id: fl-alma3221
+        ref: "Alma 32:21"
+        type: bom
+        url: "bofm/alma/32?id=p21#p21"
+        text: "Faith is not to have a perfect knowledge of things; therefore if ye have faith ye hope for things which are not seen, which are true."
+      - id: fl-ether126
+        ref: "Ether 12:6"
+        type: bom
+        url: "bofm/ether/12?id=p6#p6"
+        text: "Dispute not because ye see not, for ye receive no witness until after the trial of your faith."
+      - id: fl-matt1720
+        ref: "Matthew 17:20"
+        type: nt
+        url: "nt/matt/17?id=p20#p20"
+        text: "If ye have faith as a grain of mustard seed... nothing shall be impossible unto you."
+      - id: fl-heb113
+        ref: "Hebrews 11:3"
+        type: nt
+        url: "nt/heb/11?id=p3#p3"
+        text: "Through faith we understand that the worlds were framed by the word of God."
+      - id: fl-matt115
+        ref: "Matthew 11:5"
+        type: nt
+        url: "nt/matt/11?id=p5#p5"
+        text: "The blind receive their sight, and the lame walk, the lepers are cleansed, and the deaf hear, the dead are raised up."
+
+  - section: "Born Again"
+    entries:
+      - id: fl-eph289
+        ref: "Ephesians 2:8–9"
+        type: nt
+        url: "nt/eph/2?id=p8-p9#p8"
+        text: "By grace are ye saved through faith; and that not of yourselves: it is the gift of God: not of works, lest any man should boast."
+      - id: fl-2cor517
+        ref: "2 Corinthians 5:17"
+        type: nt
+        url: "nt/2-cor/5?id=p17#p17"
+        text: "If any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new."
+      - id: fl-eph42324
+        ref: "Ephesians 4:23–24"
+        type: nt
+        url: "nt/eph/4?id=p23-p24#p23"
+        text: "Be renewed in the spirit of your mind; and that ye put on the new man, which after God is created in righteousness and true holiness."
+      - id: fl-ezek3626
+        ref: "Ezekiel 36:26"
+        type: ot
+        url: "ot/ezek/36?id=p26#p26"
+        text: "A new heart also will I give you, and a new spirit will I put within you."
+      - id: fl-mosiah2726
+        ref: "Mosiah 27:25–26"
+        type: bom
+        url: "bofm/mosiah/27?id=p25-p26#p25"
+        text: "All mankind must be born again; yea, born of God, changed from their carnal and fallen state, to a state of righteousness."
+      - id: fl-alma514
+        ref: "Alma 5:14"
+        type: bom
+        url: "bofm/alma/5?id=p14#p14"
+        text: "Have ye spiritually been born of God? Have ye received his image in your countenances? Have ye experienced this mighty change in your hearts?"
+      - id: fl-heb1014
+        ref: "Hebrews 10:14"
+        type: nt
+        url: "nt/heb/10?id=p14#p14"
+        text: "By one offering he hath perfected for ever them that are sanctified."
+      - id: fl-alma3228
+        ref: "Alma 32:28–43"
+        type: bom
+        url: "bofm/alma/32?id=p28-p43#p28"
+        text: "If it be a true seed... it will begin to swell within your breasts; and when you feel these swelling motions, ye will begin to say within yourselves — It must needs be that this is a good seed."
+
+  - section: "Surrender as Strength"
+    entries:
+      - id: fl-2sam614
+        ref: "2 Samuel 6:14"
+        type: ot
+        url: "ot/2-sam/6?id=p14#p14"
+        text: "David danced before the Lord with all his might."
+      - id: fl-ps1493
+        ref: "Psalm 149:3"
+        type: ot
+        url: "ot/ps/149?id=p3#p3"
+        text: "Let them praise his name in the dance: let them sing praises unto him with the timbrel and harp."
+
+  - section: "Grace, Faith, and Works"
+    entries:
+      - id: fl-gal216
+        ref: "Galatians 2:16"
+        type: nt
+        url: "nt/gal/2?id=p16#p16"
+        text: "A man is not justified by the works of the law, but by the faith of Jesus Christ... for by the works of the law shall no flesh be justified."
+      - id: fl-eph28
+        ref: "Ephesians 2:8"
+        type: nt
+        url: "nt/eph/2?id=p8#p8"
+        text: "By grace are ye saved through faith; and that not of yourselves: it is the gift of God."
+      - id: fl-james214
+        ref: "James 2:14, 17"
+        type: nt
+        url: "nt/james/2?id=p14#p14"
+        text: "What doth it profit, my brethren, though a man say he hath faith, and have not works?... Faith, if it hath not works, is dead, being alone."
+      - id: fl-gal522
+        ref: "Galatians 5:22–23"
+        type: nt
+        url: "nt/gal/5?id=p22-p23#p22"
+        text: "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance."
+      - id: fl-eph210
+        ref: "Ephesians 2:10"
+        type: nt
+        url: "nt/eph/2?id=p10#p10"
+        text: "We are his workmanship, created in Christ Jesus unto good works, which God hath before ordained that we should walk in them."
+
+  - section: "Perfection in Christ"
+    entries:
+      - id: fl-phil16
+        ref: "Philippians 1:6"
+        type: nt
+        url: "nt/philip/1?id=p6#p6"
+        text: "He which hath begun a good work in you will perform it until the day of Jesus Christ."
+      - id: fl-heb646
+        ref: "Hebrews 6:4–6"
+        type: nt
+        url: "nt/heb/6?id=p4-p6#p4"
+        text: "It is impossible for those who were once enlightened... if they shall fall away, to renew them again unto repentance."
+      - id: fl-2pet220
+        ref: "2 Peter 2:20–22"
+        type: nt
+        url: "nt/2-pet/2?id=p20-p22#p20"
+        text: "If after they have escaped the pollutions of the world... they are again entangled therein and overcome, the latter end is worse with them than the beginning."
+      - id: fl-luke2343
+        ref: "Luke 23:43"
+        type: nt
+        url: "nt/luke/23?id=p43#p43"
+        text: "Verily I say unto thee, To day shalt thou be with me in paradise."
+      - id: fl-matt548
+        ref: "Matthew 5:48"
+        type: nt
+        url: "nt/matt/5?id=p48#p48"
+        text: "Be ye therefore perfect, even as your Father which is in heaven is perfect."
+      - id: fl-2ne2523
+        ref: "2 Nephi 25:23"
+        type: bom
+        url: "bofm/2-ne/25?id=p23#p23"
+        text: "It is by grace that we are saved, after all we can do."
+      - id: fl-rom323
+        ref: "Romans 3:23"
+        type: nt
+        url: "nt/rom/3?id=p23#p23"
+        text: "For all have sinned, and come short of the glory of God."
+      - id: fl-matt131
+        ref: "Matthew 13:1–23"
+        type: nt
+        url: "nt/matt/13?id=p1-p23#p1"
+        text: "The parable of the sower — some fell by the wayside, some on stony ground, some among thorns, but some fell into good ground and brought forth fruit."
+
+  - section: "Fellowship with Disciples"
+    entries:
+      - id: fl-heb1024
+        ref: "Hebrews 10:24–25"
+        type: nt
+        url: "nt/heb/10?id=p24-p25#p24"
+        text: "Let us consider one another to provoke unto love and to good works: not forsaking the assembling of ourselves together."
+      - id: fl-alma66
+        ref: "Alma 6:6"
+        type: bom
+        url: "bofm/alma/6?id=p6#p6"
+        text: "The church did meet together oft, to fast and to pray, and to speak one with another concerning the welfare of their souls."
+      - id: fl-moro65
+        ref: "Moroni 6:5–6"
+        type: bom
+        url: "bofm/moro/6?id=p5-p6#p5"
+        text: "The church did meet together oft... to speak one with another concerning the welfare of their souls, and to partake of bread and wine, in remembrance of the Lord Jesus."
+      - id: fl-acts242
+        ref: "Acts 2:42"
+        type: nt
+        url: "nt/acts/2?id=p42#p42"
+        text: "They continued stedfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers."
+      - id: fl-matt1820
+        ref: "Matthew 18:20"
+        type: nt
+        url: "nt/matt/18?id=p20#p20"
+        text: "Where two or three are gathered together in my name, there am I in the midst of them."
+      - id: fl-matt23
+        ref: "Matthew 23"
+        type: nt
+        url: "nt/matt/23?id=p1#p1"
+        text: "Woe unto you, scribes and Pharisees, hypocrites — Christ's extended condemnation of religious hypocrisy, legalism, and pride."
+      - id: fl-prov1310
+        ref: "Proverbs 13:10"
+        type: ot
+        url: "ot/prov/13?id=p10#p10"
+        text: "Only by pride cometh contention: but with the well advised is wisdom."
+      - id: fl-2tim224
+        ref: "2 Timothy 2:24–25"
+        type: nt
+        url: "nt/2-tim/2?id=p24-p25#p24"
+        text: "The servant of the Lord must not strive; but be gentle unto all men... in meekness instructing those that oppose themselves."
+      - id: fl-john317
+        ref: "John 3:17"
+        type: nt
+        url: "nt/john/3?id=p17#p17"
+        text: "God sent not his Son into the world to condemn the world; but that the world through him might be saved."
+
+  - section: "The Cross of Christ"
+    entries:
+      - id: fl-matt1624
+        ref: "Matthew 16:24"
+        type: nt
+        url: "nt/matt/16?id=p24#p24"
+        text: "If any man will come after me, let him deny himself, and take up his cross, and follow me."
+      - id: fl-2ne918
+        ref: "2 Nephi 9:18"
+        type: bom
+        url: "bofm/2-ne/9?id=p18#p18"
+        text: "The righteous, the saints of the Holy One of Israel, they who have believed in the Holy One of Israel, they who have endured the crosses of the world."
+      - id: fl-matt2732
+        ref: "Matthew 27:32"
+        type: nt
+        url: "nt/matt/27?id=p32#p32"
+        text: "As they came out, they found a man of Cyrene, Simon by name: him they compelled to bear his cross."
+      - id: fl-1cor117
+        ref: "1 Corinthians 1:17"
+        type: nt
+        url: "nt/1-cor/1?id=p17#p17"
+        text: "Christ sent me not to baptize, but to preach the gospel: not with wisdom of words, lest the cross of Christ should be made of none effect."
+      - id: fl-col120
+        ref: "Colossians 1:20"
+        type: nt
+        url: "nt/col/1?id=p20#p20"
+        text: "Having made peace through the blood of his cross, by him to reconcile all things unto himself."
+
+  - section: "Bearing Testimony"
+    entries:
+      - id: fl-john429
+        ref: "John 4:29"
+        type: nt
+        url: "nt/john/4?id=p29#p29"
+        text: "Come, see a man, which told me all things that ever I did: is not this the Christ?"
+      - id: fl-matt516
+        ref: "Matthew 5:16"
+        type: nt
+        url: "nt/matt/5?id=p16#p16"
+        text: "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven."
+
   - section: "When Faith Is Tested"
     entries:
       - id: ce-dc622
@@ -220,6 +474,7 @@ citations:
         type: dc
         url: "dc-testament/dc/6?id=p22-p23#p22"
         text: "Cast your mind upon the night that you cried unto me in your heart. Did I not speak peace to your mind concerning the matter? What greater witness can you have than from God?"
+
   - section: "The Invitation"
     entries:
       - id: ce-dc12145
@@ -619,7 +874,7 @@ Amen.
 {% sentence 5 %}And now?{% endsentence %}
 {% sentence 6 %}Have you attempted prayer and listening for God's still small voice?{% endsentence %}
 {% sentence 7 %}Have you planted the seed of the gospel within yourself?{% endsentence %}
-{% sentence 8 %}Has the seed begun to swell within you (Alma 32)?{% endsentence %}
+{% sentence 8 %}Has the seed begun to swell within you {% cite "fl-alma3228" %}?{% endsentence %}
 {% sentence 9 %}Have you tasted something sweet—a warmth in your heart, a clarity in your mind, a peace you cannot quite explain?{% endsentence %}
 {% sentence 10 %}Do you stand at the threshold, willing to believe but not yet certain, hoping that what you have heard is true?{% endsentence %}
 
@@ -633,7 +888,7 @@ Amen.
 <h2 id="more-than-belief">{% sentence 15 %}More Than Belief{% endsentence %}</h2>
 
 {% sentence 16 %}Faith is not mere belief.{% endsentence %}
-{% sentence 17 %}The scriptures are clear on this point: "The devils also believe, and tremble" (James 2:19).{% endsentence %}
+{% sentence 17 %}The scriptures are clear on this point: "The devils also believe, and tremble"{% cite "fl-james219" %}.{% endsentence %}
 {% sentence 18 %}Satan and his servants know that God exists.{% endsentence %}
 {% sentence 19 %}They know Jesus is the Christ.{% endsentence %}
 {% sentence 20 %}Satan's knowledge of this fact is perfect—and it brings him only misery.{% endsentence %}
@@ -651,20 +906,20 @@ Amen.
 {% sentence 29 %}Faith is not passive.{% endsentence %}
 {% sentence 30 %}It is an action word in a variety of languages—English, Spanish, Italian, French, Latin, German, Greek, Hebrew—and it has meant throughout the ages "to be persuaded to the point of trust, reliance, and loyalty; to highly value and truly love; and to make a strong commitment."{% endsentence %}
 
-{% sentence 31 %}Scripture describes faith as "the substance of things hoped for, the evidence of things not seen" (Hebrews 11:1).{% endsentence %}
-{% sentence 32 %}Faith is also defined as hope for things "which are not seen, which are true" (Alma 32:21)—emphasis on "true."{% endsentence %}
+{% sentence 31 %}Scripture describes faith as "the substance of things hoped for, the evidence of things not seen"{% cite "fl-heb111" %}.{% endsentence %}
+{% sentence 32 %}Faith is also defined as hope for things "which are not seen, which are true"{% cite "fl-alma3221" %}—emphasis on "true."{% endsentence %}
 {% sentence 33 %}It is trusting in what is real before we have full proof of it.{% endsentence %}
-{% sentence 34 %}Surprisingly, God often chooses not to reveal Himself or confirm our faith through the witness of His Spirit "until after the trial of [our] faith" (Ether 12:6).{% endsentence %}
+{% sentence 34 %}Surprisingly, God often chooses not to reveal Himself or confirm our faith through the witness of His Spirit "until after the trial of [our] faith"{% cite "fl-ether126" %}.{% endsentence %}
 {% sentence 35 %}Spiritual experiences and divine evidence come to those who step forward, not to those who demand proof before they will move.{% endsentence %}
 
 {% sentence 36 %}Faith is also the principle of change—the force that moves us from knowing to becoming.{% endsentence %}
 {% sentence 37 %}Joseph Smith taught that faith is "the moving cause of all action" and "the principle of power also, in all intelligent beings, whether in heaven or on earth" (Lectures on Faith 1:13, 15).{% endsentence %}
 
-{% sentence 38 %}Scriptures indicate that God's power to create and destroy stems not only from His wisdom, understanding, and knowledge but also from His own spiritual faith; the same kind of faith that Christ taught (Matthew 17:20).{% endsentence %}
-{% sentence 39 %}Faith is the real principle of power in heaven (Hebrews 11:3).{% endsentence %}
+{% sentence 38 %}Scriptures indicate that God's power to create and destroy stems not only from His wisdom, understanding, and knowledge but also from His own spiritual faith; the same kind of faith that Christ taught{% cite "fl-matt1720" %}.{% endsentence %}
+{% sentence 39 %}Faith is the real principle of power in heaven{% cite "fl-heb113" %}.{% endsentence %}
 
 {% sentence 40 %}When we exercise faith—though small and imperfect—we take hold of that same principle that called light out of darkness, that formed the Earth and life upon it.{% endsentence %}
-{% sentence 41 %}It is that potent faculty that caused the blind to receive their sight, and the lame to walk, the lepers to be cleansed, the deaf to hear, and the dead to be raised up (Matthew 11:5).{% endsentence %}
+{% sentence 41 %}It is that potent faculty that caused the blind to receive their sight, and the lame to walk, the lepers to be cleansed, the deaf to hear, and the dead to be raised up{% cite "fl-matt115" %}.{% endsentence %}
 
 {% sentence 42 %}And here is the beautiful paradox: faith begins as we reach toward God, but it becomes His gift to us as He reaches back.{% endsentence %}
 {% sentence 43 %}We extend a particle of hope, and He returns it multiplied into knowledge.{% endsentence %}
@@ -681,8 +936,8 @@ Amen.
 {% sentence 50 %}This is not just a metaphor.{% endsentence %}
 {% sentence 51 %}It is the Good Physician's prescription for salvation.{% endsentence %}
 
-{% sentence 52 %}Those who have experienced the promised "rebirth" speak of a mighty change of heart—not self-improvement through one's own will and works (Ephesians 2:8–9) but a transformation of the whole soul by the miraculous power of God (2 Corinthians 5:17, Ephesians 4:23–24, Ezekiel 36:26, Mosiah 27:25–26, Alma 5:14).{% endsentence %}
-{% sentence 53 %}We do not reach personal perfection in this mortal life (Hebrews 10:14), but we receive a glimpse of God's perfect and eternal love for us.{% endsentence %}
+{% sentence 52 %}Those who have experienced the promised "rebirth" speak of a mighty change of heart—not self-improvement through one's own will and works{% cite "fl-eph289" %} but a transformation of the whole soul by the miraculous power of God{% cite "fl-2cor517" %}{% cite "fl-eph42324" %}{% cite "fl-ezek3626" %}{% cite "fl-mosiah2726" %}{% cite "fl-alma514" %}.{% endsentence %}
+{% sentence 53 %}We do not reach personal perfection in this mortal life{% cite "fl-heb1014" %}, but we receive a glimpse of God's perfect and eternal love for us.{% endsentence %}
 
 {% sentence 54 %}In words of plainness, being born again is a divine miracle—the most powerful display of godly might—resulting in a conversion of character.{% endsentence %}
 {% sentence 55 %}What does it feel like?{% endsentence %}
@@ -696,7 +951,7 @@ Amen.
 {% sentence 62 %}God works uniquely with each soul.{% endsentence %}
 {% sentence 63 %}What matters is whether the tree of faith is growing within us, not how dramatically the seed of salvation first sprouted.{% endsentence %}
 
-{% sentence 64 %}Remember how Alma compared the word of God to a seed (Alma 32:28–43)?{% endsentence %}
+{% sentence 64 %}Remember how Alma compared the word of God to a seed{% cite "fl-alma3228" %}?{% endsentence %}
 {% sentence 65 %}This soul-enriching transformation is what the seed becomes when it takes root.{% endsentence %}
 {% sentence 66 %}He promised: the word would "enlarge your soul" and "enlighten your understanding" and become "delicious" to you.{% endsentence %}
 {% sentence 67 %}The swelling within, the growing inner light, the sweetness of spiritual freedom—these are signs of the new birth beginning.{% endsentence %}
@@ -727,7 +982,7 @@ Amen.
 {% sentence 84 %}They speak not of bondage but of liberation.{% endsentence %}
 {% sentence 85 %}Serving Him is not a grim duty.{% endsentence %}
 {% sentence 86 %}It is a homecoming for the travel-worn heart, a new vocation for restless hands.{% endsentence %}
-{% sentence 87 %}It is the song a once-quiet voice cannot stop singing—and the dance of feet that will not be still before the Lord (2 Samuel 6:14, Psalm 149:3).{% endsentence %}
+{% sentence 87 %}It is the song a once-quiet voice cannot stop singing—and the dance of feet that will not be still before the Lord{% cite "fl-2sam614" %}{% cite "fl-ps1493" %}.{% endsentence %}
 
 *Lyric: "I will dance before the Lord with all the life He's given me."*
 
@@ -740,15 +995,15 @@ Amen.
 {% sentence 92 %}There was great debate about this in Paul's time.{% endsentence %}
 {% sentence 93 %}The cause was lingering loyalties of the early Christians to the Jewish practices under the Mosaic Law.{% endsentence %}
 {% sentence 94 %}Many had faith in Christ, but continued to believe that they could only be saved by observing the traditions and rituals of the Law of Moses.{% endsentence %}
-{% sentence 95 %}Paul explained, "A man is not justified by the works of the law, but by the faith of Jesus Christ... for by the works of the law shall no flesh be justified" (Galatians 2:16).{% endsentence %}
+{% sentence 95 %}Paul explained, "A man is not justified by the works of the law, but by the faith of Jesus Christ... for by the works of the law shall no flesh be justified"{% cite "fl-gal216" %}.{% endsentence %}
 {% sentence 96 %}Paul was not saying faith is superior to obedience to Christ's commandments.{% endsentence %}
 {% sentence 97 %}Rather, he was dissuading the Saints from observance of the Law of Moses, whose prophecies and ordinances had at long last been fulfilled by the atonement of Jesus Christ, who was God's promised Messiah to the people of Israel.{% endsentence %}
 
 {% sentence 98 %}Returning to the question at hand, does salvation come by grace or works?{% endsentence %}
 {% sentence 99 %}Again, we answer: Both!{% endsentence %}
-{% sentence 100 %}Paul wrote, "By grace are ye saved through faith" (Ephesians 2:8).{% endsentence %}
+{% sentence 100 %}Paul wrote, "By grace are ye saved through faith"{% cite "fl-eph28" %}.{% endsentence %}
 {% sentence 101 %}But the Apostle James wrote, "What doth it profit, my brethren, though a man say he hath faith, and have not works?{% endsentence %}
-{% sentence 102 %}Can faith save him?" He then answered his own question, saying, "Faith, if it hath not works, is dead, being alone" (James 2:14, 17).{% endsentence %}
+{% sentence 102 %}Can faith save him?" He then answered his own question, saying, "Faith, if it hath not works, is dead, being alone"{% cite "fl-james214" %}.{% endsentence %}
 {% sentence 103 %}Both Apostles of Jesus Christ were right.{% endsentence %}
 {% sentence 104 %}There is no opposition between faith and works.{% endsentence %}
 {% sentence 105 %}These two elements of salvation are companions in a godly relationship.{% endsentence %}
@@ -764,31 +1019,31 @@ Amen.
 *Lyric: "I'll use these hands to bear His light."*
 
 {% sentence 113 %}Good works are not payment in exchange for salvation.{% endsentence %}
-{% sentence 114 %}The strong desire to do good in the world is a natural byproduct of receiving saving grace and experiencing the transformation of one's spirit, the fruit of the Spirit of God (Galatians 5:22–23).{% endsentence %}
+{% sentence 114 %}The strong desire to do good in the world is a natural byproduct of receiving saving grace and experiencing the transformation of one's spirit, the fruit of the Spirit of God{% cite "fl-gal522" %}.{% endsentence %}
 
-{% sentence 115 %}"We are God's workmanship, created in Christ Jesus to do good works, which God prepared in advance for us to do" (Ephesians 2:10).{% endsentence %}
+{% sentence 115 %}"We are God's workmanship, created in Christ Jesus to do good works, which God prepared in advance for us to do"{% cite "fl-eph210" %}.{% endsentence %}
 {% sentence 116 %}A tree does not bear fruit to prove it deserves sunlight but because that is what living trees do with light.{% endsentence %}
 
 <h2 id="perfection-in-christ">{% sentence 117 %}Perfection in Christ{% endsentence %}</h2>
 
 {% sentence 118 %}Scriptures have good news on this subject.{% endsentence %}
-{% sentence 119 %}"By one sacrifice He has perfected forever those who are being made holy" (Hebrews 10:14).{% endsentence %}
-{% sentence 120 %}We can also be confident of this: "He that began a good work in you will carry it on to completion" (Philippians 1:6).{% endsentence %}
-{% sentence 121 %}But we cannot allow ourselves to get cocky (Hebrews 6:4–6, 2 Peter 2:20–22).{% endsentence %}
+{% sentence 119 %}"By one sacrifice He has perfected forever those who are being made holy"{% cite "fl-heb1014" %}.{% endsentence %}
+{% sentence 120 %}We can also be confident of this: "He that began a good work in you will carry it on to completion"{% cite "fl-phil16" %}.{% endsentence %}
+{% sentence 121 %}But we cannot allow ourselves to get cocky{% cite "fl-heb646" %}{% cite "fl-2pet220" %}.{% endsentence %}
 {% sentence 122 %}This is not a license to sin.{% endsentence %}
 
-{% sentence 123 %}We do not believe that reaching perfection in this mortal lifetime is required to be saved in Heaven (Luke 23:43), though we are commanded to be perfect (Matthew 5:48).{% endsentence %}
+{% sentence 123 %}We do not believe that reaching perfection in this mortal lifetime is required to be saved in Heaven{% cite "fl-luke2343" %}, though we are commanded to be perfect{% cite "fl-matt548" %}.{% endsentence %}
 {% sentence 124 %}For now, perfection is the persistent direction of the journey, not the price of admission to the Kingdom of God; Christ's grace has already paid that price.{% endsentence %}
-{% sentence 125 %}Christ commands us to aim at the Father's wholeness, and grace carries us forward when we fall short (2 Nephi 25:23, Romans 3:23).{% endsentence %}
+{% sentence 125 %}Christ commands us to aim at the Father's wholeness, and grace carries us forward when we fall short{% cite "fl-2ne2523" %}{% cite "fl-rom323" %}.{% endsentence %}
 {% sentence 126 %}The consistent direction of our growth matters far more than any level of attainment.{% endsentence %}
 {% sentence 127 %}Genuine faith produces genuine change.{% endsentence %}
-{% sentence 128 %}If nothing is growing, we might ask whether the seed was ever truly planted, protected, nourished, and encouraged to produce fruit (Matthew 13:1–23).{% endsentence %}
+{% sentence 128 %}If nothing is growing, we might ask whether the seed was ever truly planted, protected, nourished, and encouraged to produce fruit{% cite "fl-matt131" %}.{% endsentence %}
 
 <h2 id="fellowship-with-disciples">{% sentence 129 %}Fellowship with Disciples{% endsentence %}</h2>
 
 {% sentence 130 %}Faith in Christ is personal, but it is not private.{% endsentence %}
 {% sentence 131 %}From the beginning, the Lord has gathered His followers into communities of covenant and care.{% endsentence %}
-{% sentence 132 %}He calls us not only to Himself but to one another (Hebrews 10:24–25, Alma 6:6, Moroni 6:5–6).{% endsentence %}
+{% sentence 132 %}He calls us not only to Himself but to one another{% cite "fl-heb1024" %}{% cite "fl-alma66" %}{% cite "fl-moro65" %}.{% endsentence %}
 
 *Lyric: "We are not called to walk alone. There's a family... there's a home."*
 
@@ -797,7 +1052,7 @@ Amen.
 {% sentence 135 %}Forgiveness is practiced when brothers and sisters disappoint us—as we inevitably disappoint them.{% endsentence %}
 {% sentence 136 %}Love is perfected not in solitude but in the daily friction and grace of life together.{% endsentence %}
 
-{% sentence 137 %}The early Christians "continued steadfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers" (Acts 2:42).{% endsentence %}
+{% sentence 137 %}The early Christians "continued steadfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers"{% cite "fl-acts242" %}.{% endsentence %}
 {% sentence 138 %}They understood that discipleship is communal.{% endsentence %}
 {% sentence 139 %}We need teachers to instruct us, elders to guide us, peers to walk beside us, and younger souls to serve.{% endsentence %}
 {% sentence 140 %}We need the sacraments that can only be administered in gathered worship.{% endsentence %}
@@ -807,7 +1062,7 @@ Amen.
 {% sentence 143 %}Find His people.{% endsentence %}
 {% sentence 144 %}Join them.{% endsentence %}
 {% sentence 145 %}Bear their burdens as they bear yours.{% endsentence %}
-{% sentence 146 %}"Where two or three are gathered together in my name," Jesus promised, "there am I in the midst of them" (Matthew 18:20).{% endsentence %}
+{% sentence 146 %}"Where two or three are gathered together in my name," Jesus promised, "there am I in the midst of them"{% cite "fl-matt1820" %}.{% endsentence %}
 {% sentence 147 %}His presence is found in the fellowship as surely as in the private places of prayer.{% endsentence %}
 
 {% sentence 148 %}The body of Christ is not a metaphor.{% endsentence %}
@@ -823,7 +1078,7 @@ Amen.
 
 <div class="admonition">
 
-{% sentence 153 %}<span class="star-icon">۞</span> **Admonition:** Within our communities of worship, we must recognize and guard against the temptation to embrace the "Woes of the Pharisees" (Matthew 23).{% endsentence %}
+{% sentence 153 %}<span class="star-icon">۞</span> **Admonition:** Within our communities of worship, we must recognize and guard against the temptation to embrace the "Woes of the Pharisees"{% cite "fl-matt23" %}.{% endsentence %}
 {% sentence 154 %}Few were condemned more harshly than the self-righteous Pharisees, whom Jesus condemned for hypocrisy, scriptural legalism, making religion burdensome to their communities, greed, vanity, ambition, and personal pride.{% endsentence %}
 {% sentence 155 %}These things destroy tender hearts and divide communities, leading away from the plainness of practicing the Lord's grace and compassion.{% endsentence %}
 
@@ -832,7 +1087,7 @@ Amen.
 <div class="admonition">
 
 {% sentence 156 %}<span class="star-icon">۞</span> **Admonition:** Not all who have faith in Jesus Christ agree on doctrines, creeds, traditions, authorities, interpretations, or practices.{% endsentence %}
-{% sentence 157 %}Avoid contention with those who do not share your views (Proverbs 13:10; 2 Timothy 2:24–25) and do not condemn others (John 3:17).{% endsentence %}
+{% sentence 157 %}Avoid contention with those who do not share your views{% cite "fl-prov1310" %}{% cite "fl-2tim224" %} and do not condemn others{% cite "fl-john317" %}.{% endsentence %}
 {% sentence 158 %}However any of us conceive of the divinity of God's Son, let's do our best to follow Him in our hearts and to seek His Spirit in our daily lives.{% endsentence %}
 {% sentence 159 %}Do not cast out those who do not fit your mold, as undesirables.{% endsentence %}
 {% sentence 160 %}Do not judge that they worship the wrong Jesus because they do not have the same understanding as you.{% endsentence %}
@@ -873,12 +1128,12 @@ Amen.
 
 <h2 id="the-cross-of-christ">{% sentence 178 %}The Cross of Christ{% endsentence %}</h2>
 
-{% sentence 179 %}Jesus said that if anyone wishes to follow Him he should "deny himself, and take up his cross" (Matthew 16:24).{% endsentence %}
-{% sentence 180 %}The prophet Jacob described followers of the Holy One of Israel as those "who have endured the crosses of the world" (2 Nephi 9:18).{% endsentence %}
-{% sentence 181 %}Simon of Cyrene was compelled to literally bear the cross of Christ (Matthew 27:32).{% endsentence %}
+{% sentence 179 %}Jesus said that if anyone wishes to follow Him he should "deny himself, and take up his cross"{% cite "fl-matt1624" %}.{% endsentence %}
+{% sentence 180 %}The prophet Jacob described followers of the Holy One of Israel as those "who have endured the crosses of the world"{% cite "fl-2ne918" %}.{% endsentence %}
+{% sentence 181 %}Simon of Cyrene was compelled to literally bear the cross of Christ{% cite "fl-matt2732" %}.{% endsentence %}
 
-{% sentence 182 %}Paul wrote of the saving effect of the cross of Christ (1 Corinthians 1:17).{% endsentence %}
-{% sentence 183 %}He also wrote of the saving blood of the cross (Colossians 1:20).{% endsentence %}
+{% sentence 182 %}Paul wrote of the saving effect of the cross of Christ{% cite "fl-1cor117" %}.{% endsentence %}
+{% sentence 183 %}He also wrote of the saving blood of the cross{% cite "fl-col120" %}.{% endsentence %}
 {% sentence 184 %}Does this mean that we cannot be saved unless we adorn ourselves, our homes, and our places of worship with crosses?{% endsentence %}
 
 {% sentence 185 %}Truly consider, was it the physical wooden cross that is of saving effect and which bled for our sins, or was it the unparalleled suffering, sacrifice, death, and resurrection of God's own Son that can save us?{% endsentence %}
@@ -902,7 +1157,7 @@ Amen.
 {% sentence 196 %}Consider the woman at the well.{% endsentence %}
 {% sentence 197 %}She had lived a complicated life—five husbands, and the man she was with was not her husband.{% endsentence %}
 {% sentence 198 %}Yet when she encountered Christ, she did not wait until her life was in order to speak of Him.{% endsentence %}
-{% sentence 199 %}She left her waterpot and ran to the city: "Come, see a man, which told me all things that ever I did: is not this the Christ?" (John 4:29).{% endsentence %}
+{% sentence 199 %}She left her waterpot and ran to the city: "Come, see a man, which told me all things that ever I did: is not this the Christ?"{% cite "fl-john429" %}.{% endsentence %}
 {% sentence 200 %}Her testimony was simple, honest, and immediate.{% endsentence %}
 {% sentence 201 %}And many believed because of her word.{% endsentence %}
 {% sentence 202 %}She did not argue theology.{% endsentence %}
@@ -921,7 +1176,7 @@ Amen.
 {% sentence 213 %}We bear plain witness of His love and express discipleship with every choice to forgive when the world says we should retaliate.{% endsentence %}
 {% sentence 214 %}The life you live preaches sermons that never end.{% endsentence %}
 
-{% sentence 215 %}Jesus said, "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven" (Matthew 5:16).{% endsentence %}
+{% sentence 215 %}Jesus said, "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven"{% cite "fl-matt516" %}.{% endsentence %}
 {% sentence 216 %}This is testimony in action—light borne into darkness, not for your own glory but for His.{% endsentence %}
 
 *Lyric: "It calls me to move. Oh, it calls me to move."*
