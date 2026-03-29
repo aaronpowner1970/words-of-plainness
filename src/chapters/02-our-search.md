@@ -335,6 +335,39 @@ pauses:
       prompt: "<p>The chapter names five responses to the hunger within us — pride, despair, rebellion, submission, and the narrow way of humility. Without judging yourself, write about which of these you have walked through and where you find yourself now.</p>"
     witness:
       prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The chapter closes with the image of God sitting as a refiner — present, patient, watching until His image can be seen in us. If you have experienced a moment when you sensed that kind of patient, attentive presence in the middle of something hard, we invite you to share it.</p>"
+
+citations:
+  - section: "Thesis 4: The Path Forward"
+    entries:
+      - id: "ce-matt77"
+        ref: "Matthew 7:7"
+        type: "nt"
+        note: "\"Ask, and it shall be given you; seek, and ye shall find\" — the foundational promise of the search."
+
+  - section: "The Gift of Holy Dissatisfaction"
+    entries:
+      - id: "ce-matt56"
+        ref: "Matthew 5:6"
+        type: "nt"
+        note: "\"Blessed are they which do hunger and thirst after righteousness: for they shall be filled\" — the hunger itself is the Beatitude."
+
+  - section: "The Safety Net of Grace"
+    entries:
+      - id: "ce-mal33"
+        ref: "Malachi 3:3"
+        type: "ot"
+        note: "The Lord \"shall sit as a refiner and purifier of silver\" — patient, attentive, present until His image is seen reflected in us."
+
+  - section: "God Loves Broken Things"
+    entries:
+      - id: "ce-ps5117"
+        ref: "Psalm 51:17"
+        type: "ot"
+        note: "\"A broken and a contrite heart, O God, thou wilt not despise\" — the most holy sacrifice."
+      - id: "ce-3ne920"
+        ref: "3 Nephi 9:20"
+        type: "bom"
+        note: "\"Ye shall offer for a sacrifice unto me a broken heart and a contrite spirit\" — the Restoration's parallel witness."
 ---
 
 <h2 id="section-note-to-the-reader">{% sentence 0 %}Note to the Reader{% endsentence %}</h2>
@@ -558,7 +591,7 @@ pauses:
 {% sentence 168 %}We invite you to embrace the search with honest humility.{% endsentence %}
 {% sentence 169 %}Even when we grasp important truths, vast understanding still awaits discovery.{% endsentence %}
 {% sentence 170 %}We assure you that truth is knowable, and enduring happiness can be found in this life.{% endsentence %}
-{% sentence 171 %}Renew your search with courage and hope, remembering the promise: "Ask, and it shall be given you; seek, and ye shall find." "Our search" is worth any sacrifice.{% endsentence %}
+{% sentence 171 %}Renew your search with courage and hope, remembering the promise: "Ask, and it shall be given you; seek, and ye shall find."{% cite "ce-matt77" %} "Our search" is worth any sacrifice.{% endsentence %}
 {% sentence 172 %}These things we testify in the name of Jesus Christ, Amen.{% endsentence %}
 
 <h3 id="section-later-4">{% sentence 173 %}Twenty-Plus Years Later{% endsentence %}</h3>
@@ -611,7 +644,7 @@ pauses:
 {% sentence 209 %}This is not evidence that we are broken or ungrateful or missing the point.{% endsentence %}
 {% sentence 210 %}It is the deliberate design of a wise God who is the literal parent of our spirits—the divine pedagogy of a divine teacher.{% endsentence %}
 
-{% sentence 211 %}"Blessed are they which do hunger and thirst after righteousness: for they shall be filled." Why would a loving Creator build restlessness into our souls? Because creation is not yet finished.{% endsentence %}
+{% sentence 211 %}"Blessed are they which do hunger and thirst after righteousness: for they shall be filled."{% cite "ce-matt56" %} Why would a loving Creator build restlessness into our souls? Because creation is not yet finished.{% endsentence %}
 
 {% sentence 212 %}We are still being created—shaped, refined, and polished.{% endsentence %}
 {% sentence 213 %}The process that began before mortality does not conclude in mortality.{% endsentence %}
@@ -632,7 +665,7 @@ pauses:
 {% sentence 223 %}The good news is that we can recover from mistakes.{% endsentence %}
 {% sentence 224 %}Through the grace of Christ's atonement, we can recover and grow.{% endsentence %}
 {% sentence 225 %}He has promised never to give up on us.{% endsentence %}
-{% sentence 226 %}The prophet Malachi described Him as one who would "sit as a refiner and purifier of silver." The Lord patiently, attentively, watches us over the refining fire until the impurities are drawn out and His own image can be seen reflected in us.{% endsentence %}
+{% sentence 226 %}The prophet Malachi described Him as one who would "sit as a refiner and purifier of silver."{% cite "ce-mal33" %} The Lord patiently, attentively, watches us over the refining fire until the impurities are drawn out and His own image can be seen reflected in us.{% endsentence %}
 
 {% sentence 227 %}This divine transformation—named in various traditions as sanctification, theosis, purification, insight, discipleship, consecration, holy anointing, and more—happens through the power of the Holy Ghost, the Spirit of Truth.{% endsentence %}
 {% sentence 228 %}It is not instantaneous.{% endsentence %}
@@ -657,7 +690,7 @@ pauses:
 {% sentence 242 %}Seeds must break open to grow.{% endsentence %}
 {% sentence 243 %}Bread must be broken to nourish.{% endsentence %}
 {% sentence 244 %}Hearts must be broken to become capable of deeper love.{% endsentence %}
-{% sentence 245 %}The most holy of sacrifices we can give to God is a "broken spirit: a broken and a contrite heart" (Psalm 51:17, 3 Nephi 9:20).{% endsentence %}
+{% sentence 245 %}The most holy of sacrifices we can give to God is a "broken spirit: a broken and a contrite heart"{% cite "ce-ps5117" %}{% cite "ce-3ne920" %}.{% endsentence %}
 {% sentence 246 %}This, He can work with.{% endsentence %}
 
 {% sentence 247 %}The hunger we feel, the dissatisfaction with any resting place, the holy restlessness that drives us forward—this is the breaking that makes growth possible.{% endsentence %}
