@@ -167,17 +167,252 @@ pauses:
       prompt: "<p>The chapter says that \"prayer opens the channel; the Holy Ghost carries the message\" — and that learning to pray and learning to recognize God's voice are not separate skills but one discipline practiced from two directions. Write about your experience with that channel. Is it open, closed, or somewhere in between? What would it take to widen it?</p>"
     witness:
       prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The authors testify \"with all our strength of the power of prayer.\" If prayer has been answered in your life — not necessarily the way you expected, but in a way you could not dismiss — we invite you to share that witness here.</p>"
+
+citations:
+  - section: "The Soul's Sincere Desire"
+    entries:
+      - id: "ce-1thes517"
+        ref: "1 Thessalonians 5:17"
+        type: "nt"
+        note: "\"Pray without ceasing\" — prayer as a continuous state of life, not a periodic activity."
+      - id: "ce-3ne1821"
+        ref: "3 Nephi 18:21"
+        type: "bom"
+        note: "The resurrected Lord's command to pray in families — always in His name."
+      - id: "ce-jst-matt69"
+        ref: "JST Matthew 6:9–15"
+        type: "nt"
+        note: "The Lord's Prayer as given in the Joseph Smith Translation — the pattern for all sincere prayer."
+      - id: "ce-matt67"
+        ref: "Matthew 6:7"
+        type: "nt"
+        note: "\"Use not vain repetitions\" — the Lord warns against empty or performative prayer."
+      - id: "ce-1sam167"
+        ref: "1 Samuel 16:7"
+        type: "ot"
+        note: "\"The Lord looketh on the heart\" — God sees past language and form to the soul's intent."
+
+  - section: "A Pattern for Meaningful Prayer"
+    entries:
+      - id: "ce-col317"
+        ref: "Colossians 3:17"
+        type: "nt"
+        note: "\"Whatsoever ye do in word or deed, do all in the name of the Lord Jesus\" — all prayer is offered through Christ."
+      - id: "ce-jst-matt69b"
+        ref: "JST Matthew 6:9"
+        type: "nt"
+        note: "\"Our Father who art in heaven\" — Christ's own address to the Father establishes the pattern."
+      - id: "ce-dc453"
+        ref: "D&C 45:3"
+        type: "dc"
+        note: "Christ as our Advocate with the Father — \"Listen to him who is the advocate with the Father.\""
+
+  - section: "Forms and Postures of Prayer"
+    entries:
+      - id: "ce-matt1820"
+        ref: "Matthew 18:20"
+        type: "nt"
+        note: "\"Where two or three are gathered together in my name, there am I\" — the promise of communal prayer."
+      - id: "ce-acts431"
+        ref: "Acts 4:31"
+        type: "nt"
+        note: "The early Church prayed together — the place was shaken and they were filled with the Holy Ghost."
+
+  - section: "True Prayer Is Not for Show"
+    entries:
+      - id: "ce-matt656"
+        ref: "Matthew 6:5–6"
+        type: "nt"
+        note: "\"When thou prayest, thou shalt not be as the hypocrites\" — true prayer is private and sincere."
+
+  - section: "Preparing for Meaningful Prayer"
+    entries:
+      - id: "ce-alma173"
+        ref: "Alma 17:3"
+        type: "bom"
+        note: "The sons of Mosiah fasted and prayed much — their spirituality made them instruments of divine power."
+
+  - section: "Constant Prayer"
+    entries:
+      - id: "ce-rom826"
+        ref: "Romans 8:26"
+        type: "nt"
+        note: "\"The Spirit itself maketh intercession for us\" — the Spirit aligns our prayers with God's will."
+      - id: "ce-matt77"
+        ref: "Matthew 7:7"
+        type: "nt"
+        note: "\"Ask, and it shall be given you; seek, and ye shall find\" — the standing invitation of constant prayer."
+
+  - section: "Praying for Others"
+    entries:
+      - id: "ce-enos19"
+        ref: "Enos 1:9–11"
+        type: "bom"
+        note: "Enos prays first for himself, then for his people, then even for his enemies — intercessory prayer expanding."
+      - id: "ce-mosiah2714"
+        ref: "Mosiah 27:14"
+        type: "bom"
+        note: "Alma the elder's faith for his wayward son — an angel sent in answer to a parent's prayer."
+      - id: "ce-john1720"
+        ref: "John 17:9, 20"
+        type: "nt"
+        note: "Christ's High Priestly Prayer — He intercedes for His disciples and for all who would believe through them."
+      - id: "ce-matt544"
+        ref: "Matthew 5:44"
+        type: "nt"
+        note: "\"Pray for them which despitefully use you\" — intercessory prayer even for enemies."
+
+  - section: "When Prayers Seem Unanswered"
+    entries:
+      - id: "ce-jas43"
+        ref: "James 4:3"
+        type: "nt"
+        note: "\"Ye ask, and receive not, because ye ask amiss\" — selfish or unrighteous prayer is not answered."
+      - id: "ce-1thes517-b"
+        ref: "1 Thessalonians 5:17"
+        type: "nt"
+        note: "\"Pray without ceasing\" — paired with Colossians 4:12 as the standard of sincere, constant prayer."
+      - id: "ce-col412"
+        ref: "Colossians 4:12"
+        type: "nt"
+        note: "\"Always labouring fervently for you in prayers\" — fervent, persevering prayer as the model."
+      - id: "ce-matt2639"
+        ref: "Matthew 26:39"
+        type: "nt"
+        note: "\"Not as I will, but as thou wilt\" — Christ's own prayer of submission in Gethsemane."
+      - id: "ce-luke2243"
+        ref: "Luke 22:43"
+        type: "nt"
+        note: "An angel appeared and strengthened Him — the Father heard even when He did not remove the cup."
+      - id: "ce-matt68"
+        ref: "Matthew 6:8"
+        type: "nt"
+        note: "\"Your Father knoweth what things ye have need of, before ye ask him\" — foreknowledge does not replace asking."
+
+  - section: "Balancing Agency and Divine Dependence"
+    entries:
+      - id: "ce-luke2136"
+        ref: "Luke 21:36"
+        type: "nt"
+        note: "\"Pray always\" — Christ's command covering all seasons of life."
+      - id: "ce-prov35"
+        ref: "Proverbs 3:5"
+        type: "ot"
+        note: "\"Trust in the Lord with all thine heart; and lean not unto thine own understanding.\""
+      - id: "ce-prov37"
+        ref: "Proverbs 3:7"
+        type: "ot"
+        note: "\"Be not wise in thine own eyes\" — the warning against substituting self-reliance for God-reliance."
+      - id: "ce-dc4607"
+        ref: "D&C 46:7"
+        type: "dc"
+        note: "\"Ye are commanded in all things to ask of God\" — the scope of the commandment to seek divine guidance."
+      - id: "ce-job328"
+        ref: "Job 32:8"
+        type: "ot"
+        note: "\"The inspiration of the Almighty giveth them understanding\" — divine inspiration as the reward of prayer."
+      - id: "ce-matt23"
+        ref: "Matthew 23"
+        type: "nt"
+        note: "Christ's rebukes of the scribes and Pharisees — doing commandments outwardly while missing inward transformation."
+      - id: "ce-luke11"
+        ref: "Luke 11"
+        type: "nt"
+        note: "Christ's warnings against the Pharisees — hypocrisy in religious practice."
+      - id: "ce-mark12"
+        ref: "Mark 12"
+        type: "nt"
+        note: "Christ's denunciation of scribes who devour widows' houses and make long prayers for show."
+      - id: "ce-luke20"
+        ref: "Luke 20"
+        type: "nt"
+        note: "Christ's confrontations with chief priests, scribes, and Sadducees in the temple."
+      - id: "ce-dc5826"
+        ref: "D&C 58:26–29"
+        type: "dc"
+        note: "\"Men should be anxiously engaged in a good cause\" — the balance between divine guidance and personal initiative."
+
+  - section: "Humility and Submission Before God"
+    entries:
+      - id: "ce-mosiah221"
+        ref: "Mosiah 2:21"
+        type: "bom"
+        note: "King Benjamin on our complete dependence on God — we are indebted to Him for our very breath."
+
+  - section: "Grace After All We Can Do"
+    entries:
+      - id: "ce-2ne2523"
+        ref: "2 Nephi 25:23"
+        type: "bom"
+        note: "\"It is by grace that we are saved, after all we can do\" — grace and faithful effort working together."
+      - id: "ce-dc9024"
+        ref: "D&C 90:24"
+        type: "dc"
+        note: "\"All things shall work together for your good\" — the promise to those who trust God through prayer."
+
+  - section: "Prayer as Two-Way Communication"
+    entries:
+      - id: "ce-ps14518"
+        ref: "Psalm 145:18"
+        type: "ot"
+        note: "\"The Lord is nigh unto all them that call upon him in truth\" — God's nearness to sincere prayer."
+      - id: "ce-moro1045"
+        ref: "Moroni 10:4–5"
+        type: "bom"
+        note: "Ask God with sincere heart and real intent — He will manifest truth by the power of the Holy Ghost."
+      - id: "ce-jas15"
+        ref: "James 1:5–6"
+        type: "nt"
+        note: "\"If any of you lack wisdom, let him ask of God\" — the promise that sparked Joseph Smith's first prayer."
+      - id: "ce-dc97"
+        ref: "D&C 9:7–9"
+        type: "dc"
+        note: "Study it out, then ask — a burning bosom confirms; a stupor of thought denies."
+      - id: "ce-dc82"
+        ref: "D&C 8:2"
+        type: "dc"
+        note: "\"I will tell you in your mind and in your heart\" — God speaks to both intellect and feeling."
+
+  - section: "Prayer as a Covenant Practice"
+    entries:
+      - id: "ce-dc2077"
+        ref: "D&C 20:77"
+        type: "dc"
+        note: "The sacrament prayer covenant — to always remember Him, that we may always have His Spirit."
+
+  - section: "God's Unchanging Nature"
+    entries:
+      - id: "ce-heb138"
+        ref: "Hebrews 13:8"
+        type: "nt"
+        note: "\"Jesus Christ the same yesterday, and to day, and for ever\" — the constancy of God's nature."
+      - id: "ce-morm99"
+        ref: "Mormon 9:9"
+        type: "bom"
+        note: "\"God is the same yesterday, today, and forever\" — Restoration echo of Paul's witness."
+      - id: "ce-moro1019"
+        ref: "Moroni 10:7, 19"
+        type: "bom"
+        note: "God's gifts and nature are unchanging — He who gave revelation to the ancients gives it still."
+      - id: "ce-dc2011"
+        ref: "D&C 20:11–12"
+        type: "dc"
+        note: "The scriptures are given by the Spirit — God the same in all ages, speaking to His children."
+      - id: "ce-mal36"
+        ref: "Malachi 3:6"
+        type: "ot"
+        note: "\"I am the Lord, I change not\" — God's own declaration of His immutability."
 ---
 
 <h2 id="the-souls-sincere-desire">{% sentence 0 %}The Soul's Sincere Desire{% endsentence %}</h2>
 
-{% sentence 1 %}Prayer is an important way to exercise one's spirituality.{% endsentence %} {% sentence 2 %}More than this, prayer is a commandment of God (1 Thessalonians 5:17).{% endsentence %} {% sentence 3 %}During His mortal life, Christ frequently prayed in public and in private, setting the example we should follow.{% endsentence %} {% sentence 4 %}The resurrected Lord commanded, "Pray in your families unto the Father, always in my name, that your wives and your children may be blessed" (3 Nephi 18:21).{% endsentence %}
+{% sentence 1 %}Prayer is an important way to exercise one's spirituality.{% endsentence %} {% sentence 2 %}More than this, prayer is a commandment of God{% cite "ce-1thes517" %}.{% endsentence %} {% sentence 3 %}During His mortal life, Christ frequently prayed in public and in private, setting the example we should follow.{% endsentence %} {% sentence 4 %}The resurrected Lord commanded, "Pray in your families unto the Father, always in my name, that your wives and your children may be blessed"{% cite "ce-3ne1821" %}.{% endsentence %}
 
 {% sentence 5 %}So what is prayer?{% endsentence %} {% sentence 6 %}How do we know when we are doing it right?{% endsentence %} {% sentence 7 %}James Montgomery wrote an insightful poem about prayer that has been turned into a beautiful hymn.{% endsentence %} {% sentence 8 %}In it he expresses a simple and poignant truth:{% endsentence %} {% sentence 9 %}"Prayer is the soul's sincere desire" (James Montgomery, "Prayer Is the Soul's Sincere Desire," Hymns, no. 145).{% endsentence %} {% sentence 10 %}Truly, the essence of prayer is desire.{% endsentence %} {% sentence 11 %}There are prayers of praise, thanksgiving, supplication, and confession.{% endsentence %} {% sentence 12 %}Prayer can even come out of the simple need to feel reassured by the love and power of God.{% endsentence %} {% sentence 13 %}All sincere prayers, great and small, come from the longings of the soul.{% endsentence %} {% sentence 14 %}The Lord Jesus Christ taught us the pattern for prayer.{% endsentence %} {% sentence 15 %}His example is known as the Lord's Prayer:{% endsentence %}
 
-> {% sentence 15 %}Our Father who art in heaven, Hallowed be thy name. Thy kingdom come. Thy will be done on Earth, as it is done in heaven. Give us this day, our daily bread. And forgive us our trespasses, as we forgive those who trespass against us. And suffer us not to be led into temptation, but deliver us from evil. For thine is the kingdom, and the power, and the glory, forever and ever, Amen. (JST Matthew 6:9-15){% endsentence %}
+> {% sentence 15 %}Our Father who art in heaven, Hallowed be thy name. Thy kingdom come. Thy will be done on Earth, as it is done in heaven. Give us this day, our daily bread. And forgive us our trespasses, as we forgive those who trespass against us. And suffer us not to be led into temptation, but deliver us from evil. For thine is the kingdom, and the power, and the glory, forever and ever, Amen.{% cite "ce-jst-matt69" %}{% endsentence %}
 
-{% sentence 16 %}The Lord did not intend for us to repeat memorized prayers.{% endsentence %} {% sentence 17 %}He said plainly, "When ye pray, use not vain repetitions, as the heathen do: for they think that they shall be heard for their much speaking" (Matthew 6:7).{% endsentence %} {% sentence 18 %}More than this, there is no need for sophisticated language, for "the Lord looketh on the heart" (1 Samuel 16:7). Speak what is in your mind and heart. And speak truthfully, for there can be no deception before God.{% endsentence %} {% sentence 19 %}The words used in prayer change and the circumstances vary from day to day, but prayers often include the following elements, though not necessarily in this order.{% endsentence %}
+{% sentence 16 %}The Lord did not intend for us to repeat memorized prayers.{% endsentence %} {% sentence 17 %}He said plainly, "When ye pray, use not vain repetitions, as the heathen do: for they think that they shall be heard for their much speaking"{% cite "ce-matt67" %}.{% endsentence %} {% sentence 18 %}More than this, there is no need for sophisticated language, for "the Lord looketh on the heart"{% cite "ce-1sam167" %}. Speak what is in your mind and heart. And speak truthfully, for there can be no deception before God.{% endsentence %} {% sentence 19 %}The words used in prayer change and the circumstances vary from day to day, but prayers often include the following elements, though not necessarily in this order.{% endsentence %}
 
 <h2 id="a-pattern-for-meaningful-prayer">{% sentence 19 %}A Pattern for Meaningful Prayer{% endsentence %}</h2>
 
@@ -188,27 +423,27 @@ pauses:
 <li>{% sentence 19 %}Ask for forgiveness from our sins, and for help to forgive others of their sins against us.{% endsentence %}</li>
 <li>{% sentence 19 %}Plead for desired knowledge and blessings in an attitude of humility and patience.{% endsentence %}</li>
 <li>{% sentence 20 %}Pray for others—for their needs, their struggles, and their salvation.{% endsentence %}</li>
-<li>{% sentence 21 %}Pray all things in the name of Jesus Christ (Colossians 3:17).{% endsentence %}</li>
+<li>{% sentence 21 %}Pray all things in the name of Jesus Christ{% cite "ce-col317" %}.{% endsentence %}</li>
 <li>{% sentence 22 %}Conclude with the word "Amen," which Christians adopted from the ancient Hebrew אָמֵן ('āmēn), meaning "truth" or "certainty," used as a sincere expression of belief in what has been said.{% endsentence %}</li>
 </ul>
 
-{% sentence 23 %}Latter-day Saints direct their prayers to God the Father, in the name of His Son, Jesus Christ.{% endsentence %} {% sentence 24 %}This is not merely tradition; it is the pattern the Savior Himself established.{% endsentence %} {% sentence 25 %}When the disciples asked Him how to pray, He taught them to begin, "Our Father who art in heaven" (JST Matthew 6:9).{% endsentence %} {% sentence 26 %}Christ is our Mediator and Advocate with the Father (D&C 45:3), and it is through His name and His atoning sacrifice that we are granted access to the Father's presence in prayer.{% endsentence %} {% sentence 27 %}We pray to the Father, through the Son, by the power of the Holy Ghost.{% endsentence %}
+{% sentence 23 %}Latter-day Saints direct their prayers to God the Father, in the name of His Son, Jesus Christ.{% endsentence %} {% sentence 24 %}This is not merely tradition; it is the pattern the Savior Himself established.{% endsentence %} {% sentence 25 %}When the disciples asked Him how to pray, He taught them to begin, "Our Father who art in heaven"{% cite "ce-jst-matt69b" %}.{% endsentence %} {% sentence 26 %}Christ is our Mediator and Advocate with the Father{% cite "ce-dc453" %}, and it is through His name and His atoning sacrifice that we are granted access to the Father's presence in prayer.{% endsentence %} {% sentence 27 %}We pray to the Father, through the Son, by the power of the Holy Ghost.{% endsentence %}
 
 <h2 id="forms-and-postures-of-prayer">{% sentence 28 %}Forms and Postures of Prayer{% endsentence %}</h2>
 
 {% sentence 28 %}Prayer can take many forms.{% endsentence %} {% sentence 29 %}It may be a group effort of an entire congregation of believers.{% endsentence %} {% sentence 30 %}It can be spoken out loud in family, or alone as a personal prayer.{% endsentence %} {% sentence 31 %}It can take place while kneeling, standing, sitting, lying down, working, traveling, and so on.{% endsentence %} {% sentence 32 %}It can even take the form of private thoughts directed to God.{% endsentence %} {% sentence 33 %}No matter the case, the focus of prayer should be on heartfelt and intimate communion with God.{% endsentence %}
 
-{% sentence 34 %}While much of this chapter focuses on personal and family prayer, we should not overlook the power of united prayer among the Saints.{% endsentence %} {% sentence 35 %}Jesus promised, "Where two or three are gathered together in my name, there am I in the midst of them" (Matthew 18:20).{% endsentence %} {% sentence 36 %}The early Church practiced communal prayer with great effect (Acts 4:31).{% endsentence %} {% sentence 37 %}In our day, congregational prayers, group fasts, and the practice of placing names on a prayer list reflect the same principle:{% endsentence %} {% sentence 38 %}there is power when the faith of a community is united in petition before God.{% endsentence %} {% sentence 39 %}The prayers of a congregation can bear up an individual in ways that his or her own prayers alone cannot.{% endsentence %} {% sentence 40 %}This is one of the blessings of belonging to the body of Christ.{% endsentence %}
+{% sentence 34 %}While much of this chapter focuses on personal and family prayer, we should not overlook the power of united prayer among the Saints.{% endsentence %} {% sentence 35 %}Jesus promised, "Where two or three are gathered together in my name, there am I in the midst of them"{% cite "ce-matt1820" %}.{% endsentence %} {% sentence 36 %}The early Church practiced communal prayer with great effect{% cite "ce-acts431" %}.{% endsentence %} {% sentence 37 %}In our day, congregational prayers, group fasts, and the practice of placing names on a prayer list reflect the same principle:{% endsentence %} {% sentence 38 %}there is power when the faith of a community is united in petition before God.{% endsentence %} {% sentence 39 %}The prayers of a congregation can bear up an individual in ways that his or her own prayers alone cannot.{% endsentence %} {% sentence 40 %}This is one of the blessings of belonging to the body of Christ.{% endsentence %}
 
 <h2 id="true-prayer-is-not-for-show">{% sentence 41 %}True Prayer Is Not for Show{% endsentence %}</h2>
 
-{% sentence 42 %}True prayer—the soul's sincere desire—is not for show.{% endsentence %} {% sentence 43 %}It displeases God when we try to give the public appearance of righteousness or an open pretense of spiritual piety (Matthew 6:5-6).{% endsentence %} {% sentence 44 %}Prayer is not a matter of vanity, pride, or competition; yet one can stand no taller in this life than while on bended knees in humble prayer before the Lord.{% endsentence %}
+{% sentence 42 %}True prayer—the soul's sincere desire—is not for show.{% endsentence %} {% sentence 43 %}It displeases God when we try to give the public appearance of righteousness or an open pretense of spiritual piety {% cite "ce-matt656" %}.{% endsentence %} {% sentence 44 %}Prayer is not a matter of vanity, pride, or competition; yet one can stand no taller in this life than while on bended knees in humble prayer before the Lord.{% endsentence %}
 
 <h2 id="preparing-for-meaningful-prayer">{% sentence 45 %}Preparing for Meaningful Prayer{% endsentence %}</h2>
 
 {% sentence 45 %}When we choose to pause and pray, it is important to mentally and physically prepare ourselves beforehand.{% endsentence %} {% sentence 46 %}It is ideal to take time to spiritually meditate and pray over ideas, choices, and responses to the needs of others.{% endsentence %} {% sentence 47 %}Whether we come to prayer composed or desperate, the essential act is the same–we must go inward and then reach upward.{% endsentence %} {% sentence 48 %}Find the innermost part of who we are, and from that place reach out with sincere desire to connect with God the Father.{% endsentence %}
 
-{% sentence 49 %}Enabled by such preparation, there have been disciples described in the scriptures as praying mightily unto God.{% endsentence %} {% sentence 50 %}Such prayer requires real mental effort and the exercising of faith.{% endsentence %} {% sentence 51 %}In addition to spiritual preparation, faithful disciples in all ages have often coupled fasting with prayer.{% endsentence %} {% sentence 52 %}Fasting is a sign of devotion and serves to strengthen our spirits over physical appetites, enhancing our sensitivity to spiritual impressions (Alma 17:3).{% endsentence %}
+{% sentence 49 %}Enabled by such preparation, there have been disciples described in the scriptures as praying mightily unto God.{% endsentence %} {% sentence 50 %}Such prayer requires real mental effort and the exercising of faith.{% endsentence %} {% sentence 51 %}In addition to spiritual preparation, faithful disciples in all ages have often coupled fasting with prayer.{% endsentence %} {% sentence 52 %}Fasting is a sign of devotion and serves to strengthen our spirits over physical appetites, enhancing our sensitivity to spiritual impressions {% cite "ce-alma173" %}.{% endsentence %}
 
 <h2 id="prayer-in-urgent-moments">{% sentence 53 %}Prayer in Urgent Moments{% endsentence %}</h2>
 
@@ -218,69 +453,69 @@ pauses:
 
 {% sentence 59 %}When not formally and actively praying, we should still maintain a prayerful mindset.{% endsentence %} {% sentence 60 %}We can come to be eternally-minded and learn to nurture a continual prayer in our hearts.{% endsentence %} {% sentence 61 %}We must remember the Lord's command to "pray always."{% endsentence %}
 
-{% sentence 62 %}In all three types of prayer—meditative, urgent, and constant—the most powerful prayers are those in which our intent and words flow from the inspiration of the Spirit of God within us.{% endsentence %} {% sentence 63 %}When we are sensitive to the promptings of the Holy Spirit, our prayers and desires can align with God's will.{% endsentence %} {% sentence 64 %}As the Apostle Paul taught, "The Spirit itself maketh intercession for us" (Romans 8:26).{% endsentence %} {% sentence 65 %}When we do these things, the invitation of the Lord is in effect:{% endsentence %} {% sentence 66 %}"Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you" (Matthew 7:7).{% endsentence %}
+{% sentence 62 %}In all three types of prayer—meditative, urgent, and constant—the most powerful prayers are those in which our intent and words flow from the inspiration of the Spirit of God within us.{% endsentence %} {% sentence 63 %}When we are sensitive to the promptings of the Holy Spirit, our prayers and desires can align with God's will.{% endsentence %} {% sentence 64 %}As the Apostle Paul taught, "The Spirit itself maketh intercession for us"{% cite "ce-rom826" %}.{% endsentence %} {% sentence 65 %}When we do these things, the invitation of the Lord is in effect:{% endsentence %} {% sentence 66 %}"Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you" {% cite "ce-matt77" %}.{% endsentence %}
 
 <h2 id="praying-for-others">{% sentence 67 %}Praying for Others{% endsentence %}</h2>
 
-{% sentence 67 %}One of the marks of maturing discipleship is learning to pray not only for ourselves but for others.{% endsentence %} {% sentence 68 %}This is intercessory prayer—the practice of bringing the needs, struggles, and salvation of others before God.{% endsentence %} {% sentence 69 %}The scriptures are rich with examples of this selfless form of prayer.{% endsentence %} {% sentence 70 %}Enos began by praying for himself, but as the Spirit filled him, his heart reached outward—first to his own people, and then even to his enemies (Enos 1:9-11).{% endsentence %} {% sentence 71 %}Alma the elder prayed with such faith for his wayward son that an angel was sent to intervene (Mosiah 27:14).{% endsentence %} {% sentence 72 %}The Savior Himself, in the most intimate intercessory prayer recorded in scripture, prayed not for Himself alone but for His disciples and for all who would believe on their words (John 17:9, 20).{% endsentence %}
+{% sentence 67 %}One of the marks of maturing discipleship is learning to pray not only for ourselves but for others.{% endsentence %} {% sentence 68 %}This is intercessory prayer—the practice of bringing the needs, struggles, and salvation of others before God.{% endsentence %} {% sentence 69 %}The scriptures are rich with examples of this selfless form of prayer.{% endsentence %} {% sentence 70 %}Enos began by praying for himself, but as the Spirit filled him, his heart reached outward—first to his own people, and then even to his enemies {% cite "ce-enos19" %}.{% endsentence %} {% sentence 71 %}Alma the elder prayed with such faith for his wayward son that an angel was sent to intervene {% cite "ce-mosiah2714" %}.{% endsentence %} {% sentence 72 %}The Savior Himself, in the most intimate intercessory prayer recorded in scripture, prayed not for Himself alone but for His disciples and for all who would believe on their words {% cite "ce-john1720" %}.{% endsentence %}
 
-{% sentence 73 %}As our hearts grow in charity, our prayers naturally expand beyond our own concerns to embrace the needs of those around us—our families, our neighbors, those who suffer, those who serve, and even those who have wronged us.{% endsentence %} {% sentence 74 %}The Savior commanded, "Pray for them which despitefully use you" (Matthew 5:44).{% endsentence %} {% sentence 75 %}Intercessory prayer is both a sign of spiritual growth and a means by which God accomplishes His work through the faith of His children.{% endsentence %}
+{% sentence 73 %}As our hearts grow in charity, our prayers naturally expand beyond our own concerns to embrace the needs of those around us—our families, our neighbors, those who suffer, those who serve, and even those who have wronged us.{% endsentence %} {% sentence 74 %}The Savior commanded, "Pray for them which despitefully use you"{% cite "ce-matt544" %}.{% endsentence %} {% sentence 75 %}Intercessory prayer is both a sign of spiritual growth and a means by which God accomplishes His work through the faith of His children.{% endsentence %}
 
 <h2 id="when-prayers-seem-unanswered">{% sentence 76 %}When Prayers Seem Unanswered{% endsentence %}</h2>
 
-{% sentence 76 %}It is important to understand that unrighteous, uninspired, or selfish prayers do not bring the blessings we seek.{% endsentence %} {% sentence 77 %}The Apostle James taught this principle in these words: "Ye ask, and receive not, because ye ask amiss, that ye may consume it upon your lusts" (James 4:3).{% endsentence %} {% sentence 78 %}We must avoid false and vain prayer.{% endsentence %} {% sentence 79 %}The scriptures teach us to pray constantly, sincerely, and wisely (1 Thessalonians 5:17; Colossians 4:12).{% endsentence %}
+{% sentence 76 %}It is important to understand that unrighteous, uninspired, or selfish prayers do not bring the blessings we seek.{% endsentence %} {% sentence 77 %}The Apostle James taught this principle in these words: "Ye ask, and receive not, because ye ask amiss, that ye may consume it upon your lusts"{% cite "ce-jas43" %}.{% endsentence %} {% sentence 78 %}We must avoid false and vain prayer.{% endsentence %} {% sentence 79 %}The scriptures teach us to pray constantly, sincerely, and wisely {% cite "ce-1thes517-b" %}{% cite "ce-col412" %}.{% endsentence %}
 
 {% sentence 80 %}But what of the righteous prayer that seems to go unanswered?{% endsentence %} {% sentence 81 %}The parent who pleads for a sick child. The faithful believer who prays for years over a wayward loved one. The humble seeker who kneels and hears only silence.{% endsentence %} {% sentence 82 %}These experiences are real, and they can be deeply painful.{% endsentence %} {% sentence 83 %}We must be honest about this:{% endsentence %} {% sentence 84 %}not every sincere prayer receives an immediate or recognizable answer, and this is not evidence that God has rejected the one who prays.{% endsentence %}
 
-{% sentence 85 %}Sometimes God's answer is "no" or "not yet."{% endsentence %} {% sentence 86 %}Sometimes His answer is "I have something better in mind."{% endsentence %} {% sentence 87 %}And sometimes He asks us to continue in faith without explanation, trusting that He sees what we cannot.{% endsentence %} {% sentence 88 %}The Savior Himself, while in agony, prayed to the Father, "If it be possible, let this cup pass from me:{% endsentence %} {% sentence 89 %}nevertheless not as I will, but as thou wilt" (Matthew 26:39).{% endsentence %} {% sentence 90 %}The Father did not take away his suffering. Yet the Father heard Him, and an angel was sent to strengthen Him (Luke 22:43).{% endsentence %} {% sentence 91 %}Divine silence is not divine absence.{% endsentence %} {% sentence 92 %}God may not always remove our burdens, but He is always present in them.{% endsentence %} {% sentence 93 %}The patience to wait upon the Lord in seasons of silence is itself a form of faith, and it is precious to God.{% endsentence %}
+{% sentence 85 %}Sometimes God's answer is "no" or "not yet."{% endsentence %} {% sentence 86 %}Sometimes His answer is "I have something better in mind."{% endsentence %} {% sentence 87 %}And sometimes He asks us to continue in faith without explanation, trusting that He sees what we cannot.{% endsentence %} {% sentence 88 %}The Savior Himself, while in agony, prayed to the Father, "If it be possible, let this cup pass from me:{% endsentence %} {% sentence 89 %}nevertheless not as I will, but as thou wilt"{% cite "ce-matt2639" %}.{% endsentence %} {% sentence 90 %}The Father did not take away his suffering. Yet the Father heard Him, and an angel was sent to strengthen Him {% cite "ce-luke2243" %}.{% endsentence %} {% sentence 91 %}Divine silence is not divine absence.{% endsentence %} {% sentence 92 %}God may not always remove our burdens, but He is always present in them.{% endsentence %} {% sentence 93 %}The patience to wait upon the Lord in seasons of silence is itself a form of faith, and it is precious to God.{% endsentence %}
 
-{% sentence 94 %}We testify that our Heavenly Father is mindful of us and always listens to our prayers.{% endsentence %} {% sentence 95 %}He already knows our needs before we ask.{% endsentence %} {% sentence 96 %}Jesus explained, "Your Father knoweth what things ye have need of, before ye ask him" (Matthew 6:8).{% endsentence %} {% sentence 97 %}However, many blessings seem to be dependent on asking for them in righteousness (supplication).{% endsentence %} {% sentence 98 %}Further, unless we ask Him, we cannot know for sure whether important ideas are true in the ultimate sense or that a choice we are making is in agreement with His will and wisdom.{% endsentence %}
+{% sentence 94 %}We testify that our Heavenly Father is mindful of us and always listens to our prayers.{% endsentence %} {% sentence 95 %}He already knows our needs before we ask.{% endsentence %} {% sentence 96 %}Jesus explained, "Your Father knoweth what things ye have need of, before ye ask him"{% cite "ce-matt68" %}.{% endsentence %} {% sentence 97 %}However, many blessings seem to be dependent on asking for them in righteousness (supplication).{% endsentence %} {% sentence 98 %}Further, unless we ask Him, we cannot know for sure whether important ideas are true in the ultimate sense or that a choice we are making is in agreement with His will and wisdom.{% endsentence %}
 
 <h2 id="balancing-agency-and-divine-dependence">{% sentence 99 %}Balancing Agency and Divine Dependence{% endsentence %}</h2>
 
-{% sentence 99 %}Again, prayer is a commandment of God.{% endsentence %} {% sentence 100 %}Though we might not always receive revelation on every detail of our lives, the Lord commanded us clearly, "Pray always" (Luke 21:36).{% endsentence %} {% sentence 101 %}Scriptural proverbs teach us: "Trust in the Lord with all thine heart; and lean not unto thine own understanding.{% endsentence %} {% sentence 102 %}In all thy ways acknowledge him, and he shall direct thy paths" (Proverbs 3:5).{% endsentence %} {% sentence 103 %}We are also instructed: "Be not wise in thine own eyes" (Proverbs 3:7).{% endsentence %} {% sentence 104 %}The Lord clarified this, saying, "Ye are commanded in all things to ask of God... and that which the Spirit testifies unto you... ye should do in all holiness of heart... doing all things with prayer and thanksgiving" (Doctrine and Covenants 46:7).{% endsentence %} {% sentence 105 %}Those who obey this commandment are promised that the "inspiration of the Almighty [will] give them understanding" (Job 32:8).{% endsentence %}
+{% sentence 99 %}Again, prayer is a commandment of God.{% endsentence %} {% sentence 100 %}Though we might not always receive revelation on every detail of our lives, the Lord commanded us clearly, "Pray always"{% cite "ce-luke2136" %}.{% endsentence %} {% sentence 101 %}Scriptural proverbs teach us: "Trust in the Lord with all thine heart; and lean not unto thine own understanding.{% endsentence %} {% sentence 102 %}In all thy ways acknowledge him, and he shall direct thy paths"{% cite "ce-prov35" %}.{% endsentence %} {% sentence 103 %}We are also instructed: "Be not wise in thine own eyes"{% cite "ce-prov37" %}.{% endsentence %} {% sentence 104 %}The Lord clarified this, saying, "Ye are commanded in all things to ask of God... and that which the Spirit testifies unto you... ye should do in all holiness of heart... doing all things with prayer and thanksgiving" {% cite "ce-dc4607" %}.{% endsentence %} {% sentence 105 %}Those who obey this commandment are promised that the "inspiration of the Almighty [will] give them understanding" {% cite "ce-job328" %}.{% endsentence %}
 
 {% sentence 106 %}Pray always? Pray about everything?{% endsentence %} {% sentence 107 %}This commandment may seem impractical to some who value self-reliance and fear excessive dependence on others.{% endsentence %} {% sentence 108 %}Humans need freedom and a healthy measure of independence to grow, develop, and thrive.{% endsentence %} {% sentence 109 %}But this reasoning does not hold true when the "other" person is God.{% endsentence %} {% sentence 110 %}A wise balance must be maintained between using our God-given minds and seeking to know the mind of God.{% endsentence %}
 
-{% sentence 111 %}While it is wise to exercise our minds in the search for truth and in meeting the challenges of life, it is reckless to stubbornly refuse to ask for God's help in these endeavors.{% endsentence %} {% sentence 112 %}It is equally unwise to refuse to make choices or take action until God commands us to do so.{% endsentence %} {% sentence 113 %}It is truly foolish to obtain an answer to prayers and then disregard it.{% endsentence %} {% sentence 114 %}Regarding all these cases the Lord revealed His wisdom, explaining, "It is not meet that I should command in all things;{% endsentence %} {% sentence 115 %}for he that is compelled in all things, the same is a slothful and not a wise servant; wherefore he receiveth no reward.{% endsentence %} {% sentence 116 %}Verily I say, men should be anxiously engaged in a good cause, and do many things of their own free will, and bring to pass much righteousness;{% endsentence %} {% sentence 117 %}for the power is in them, wherein they are agents unto themselves.{% endsentence %} {% sentence 118 %}And inasmuch as men do good they shall in nowise lose their reward.{% endsentence %} {% sentence 119 %}But he that doeth not anything until he is commanded, and receiveth a commandment with a doubtful heart, and keepeth it with slothfulness, the same is damned" (Doctrine and Covenants 58:26-29).{% endsentence %}
+{% sentence 111 %}While it is wise to exercise our minds in the search for truth and in meeting the challenges of life, it is reckless to stubbornly refuse to ask for God's help in these endeavors.{% endsentence %} {% sentence 112 %}It is equally unwise to refuse to make choices or take action until God commands us to do so.{% endsentence %} {% sentence 113 %}It is truly foolish to obtain an answer to prayers and then disregard it.{% endsentence %} {% sentence 114 %}Regarding all these cases the Lord revealed His wisdom, explaining, "It is not meet that I should command in all things;{% endsentence %} {% sentence 115 %}for he that is compelled in all things, the same is a slothful and not a wise servant; wherefore he receiveth no reward.{% endsentence %} {% sentence 116 %}Verily I say, men should be anxiously engaged in a good cause, and do many things of their own free will, and bring to pass much righteousness;{% endsentence %} {% sentence 117 %}for the power is in them, wherein they are agents unto themselves.{% endsentence %} {% sentence 118 %}And inasmuch as men do good they shall in nowise lose their reward.{% endsentence %} {% sentence 119 %}But he that doeth not anything until he is commanded, and receiveth a commandment with a doubtful heart, and keepeth it with slothfulness, the same is damned" {% cite "ce-dc5826" %}.{% endsentence %}
 
-{% sentence 120 %}Can one keep commandments of God and still be damned?{% endsentence %} {% sentence 121 %}Searching for answers to this question in the scriptures, one finds that the Pharisees, scribes, and Sadducees at the time of Christ were among the most scrupulous in keeping the commandments and laws of Judaism,{% endsentence %} {% sentence 122 %}yet they drew many of Christ's most vehement rebukes for hypocrisy (see Matthew 23; Luke 11; Mark 12; Luke 20).{% endsentence %} {% sentence 123 %}As the embodiment of perfect justice, Christ's judgment in these matters was without flaw.{% endsentence %} {% sentence 124 %}Doing good is not enough for the Lord.{% endsentence %} {% sentence 125 %}He wants us to be good.{% endsentence %} {% sentence 126 %}Prayer is an important part of becoming good.{% endsentence %} {% sentence 127 %}As we grow in spirituality, we can learn to be eternally-minded and to pray continually.{% endsentence %}
+{% sentence 120 %}Can one keep commandments of God and still be damned?{% endsentence %} {% sentence 121 %}Searching for answers to this question in the scriptures, one finds that the Pharisees, scribes, and Sadducees at the time of Christ were among the most scrupulous in keeping the commandments and laws of Judaism,{% endsentence %} {% sentence 122 %}yet they drew many of Christ's most vehement rebukes for hypocrisy {% cite "ce-matt23" %}{% cite "ce-luke11" %}{% cite "ce-mark12" %}{% cite "ce-luke20" %}.{% endsentence %} {% sentence 123 %}As the embodiment of perfect justice, Christ's judgment in these matters was without flaw.{% endsentence %} {% sentence 124 %}Doing good is not enough for the Lord.{% endsentence %} {% sentence 125 %}He wants us to be good.{% endsentence %} {% sentence 126 %}Prayer is an important part of becoming good.{% endsentence %} {% sentence 127 %}As we grow in spirituality, we can learn to be eternally-minded and to pray continually.{% endsentence %}
 
 {% sentence 128 %}We ought to weigh every thought, measure every choice, craft every communication, and perform every deed prayerfully so that we might be inspired in all these things; especially when we do not have time to evaluate and consider our actions beforehand.{% endsentence %}
 
 <h2 id="humility-and-submission-before-god">{% sentence 129 %}Humility and Submission Before God{% endsentence %}</h2>
 
-{% sentence 129 %}It is a matter of personal character development to sincerely humble one's self and praise another more-deserving soul (especially God), submitting to higher wisdom.{% endsentence %} {% sentence 130 %}We are completely dependent upon God's justice, mercy, and grace (see Mosiah 2:21).{% endsentence %} {% sentence 131 %}We must not be petulant children, expecting our Father in Heaven to bend to our will at every turn.{% endsentence %} {% sentence 132 %}To do so would be irresponsible parenting on His part.{% endsentence %} {% sentence 133 %}Rather, our prayers ought to be the humble petitions of a submissive child to a righteous Father.{% endsentence %} {% sentence 134 %}It is God's right to choose which blessings to bestow, when it is right to give them, and how to go about it.{% endsentence %} {% sentence 135 %}Like any loving parent with growing children, He holds our best interests in His almighty heart.{% endsentence %} {% sentence 136 %}He makes His choices out of wisdom far greater than our own.{% endsentence %} {% sentence 137 %}God knows what will bring about righteousness and what would bring sorrow.{% endsentence %}
+{% sentence 129 %}It is a matter of personal character development to sincerely humble one's self and praise another more-deserving soul (especially God), submitting to higher wisdom.{% endsentence %} {% sentence 130 %}We are completely dependent upon God's justice, mercy, and grace {% cite "ce-mosiah221" %}.{% endsentence %} {% sentence 131 %}We must not be petulant children, expecting our Father in Heaven to bend to our will at every turn.{% endsentence %} {% sentence 132 %}To do so would be irresponsible parenting on His part.{% endsentence %} {% sentence 133 %}Rather, our prayers ought to be the humble petitions of a submissive child to a righteous Father.{% endsentence %} {% sentence 134 %}It is God's right to choose which blessings to bestow, when it is right to give them, and how to go about it.{% endsentence %} {% sentence 135 %}Like any loving parent with growing children, He holds our best interests in His almighty heart.{% endsentence %} {% sentence 136 %}He makes His choices out of wisdom far greater than our own.{% endsentence %} {% sentence 137 %}God knows what will bring about righteousness and what would bring sorrow.{% endsentence %}
 
 <h2 id="grace-after-all-we-can-do">{% sentence 138 %}Grace After All We Can Do{% endsentence %}</h2>
 
-{% sentence 138 %}When we plead for a blessing, we must also remember an important principle taught by the Prophet Nephi:{% endsentence %} {% sentence 139 %}"We know that it is by grace that we are saved, after all we can do" (2 Nephi 25:23).{% endsentence %} {% sentence 140 %}This readily applies to prayer.{% endsentence %} {% sentence 141 %}We must be willing to do all in our power to bring about righteousness, while praying for heaven's help.{% endsentence %} {% sentence 142 %}We cannot sit idly, expecting blessings to fall upon us without any effort of our own.{% endsentence %}
+{% sentence 138 %}When we plead for a blessing, we must also remember an important principle taught by the Prophet Nephi:{% endsentence %} {% sentence 139 %}"We know that it is by grace that we are saved, after all we can do"{% cite "ce-2ne2523" %}.{% endsentence %} {% sentence 140 %}This readily applies to prayer.{% endsentence %} {% sentence 141 %}We must be willing to do all in our power to bring about righteousness, while praying for heaven's help.{% endsentence %} {% sentence 142 %}We cannot sit idly, expecting blessings to fall upon us without any effort of our own.{% endsentence %}
 
 {% sentence 143 %}The relationship between grace and faithful obedience is explored more fully in the next chapter.{% endsentence %} {% sentence 144 %}For now, it is enough to understand that this principle applies directly to prayer.{% endsentence %}
 
-{% sentence 145 %}Many unbelievers say that we only bring about our desires by our own strength.{% endsentence %} {% sentence 146 %}Those who practice sincere and faithful prayer know that God takes an active role in guiding us to goodness, inspiring the direction of our labor, strengthening our efforts with the powers of heaven, and blessing us in such ways that all things eventually work together for our good (D&C 90:24).{% endsentence %} {% sentence 147 %}Trust in God and pray with patient faith, believing that the blessings will come according to God's own will and on God's own terms.{% endsentence %}
+{% sentence 145 %}Many unbelievers say that we only bring about our desires by our own strength.{% endsentence %} {% sentence 146 %}Those who practice sincere and faithful prayer know that God takes an active role in guiding us to goodness, inspiring the direction of our labor, strengthening our efforts with the powers of heaven, and blessing us in such ways that all things eventually work together for our good {% cite "ce-dc9024" %}.{% endsentence %} {% sentence 147 %}Trust in God and pray with patient faith, believing that the blessings will come according to God's own will and on God's own terms.{% endsentence %}
 
 <h2 id="prayer-as-two-way-communication">{% sentence 148 %}Prayer as Two-Way Communication{% endsentence %}</h2>
 
-{% sentence 148 %}Prayer is not only the raising of our voices to God.{% endsentence %} {% sentence 149 %}It can become two-way communication.{% endsentence %} {% sentence 150 %}We can learn to receive answers to our questions, recognize inspiration in our daily lives, and to perceive the will of God.{% endsentence %} {% sentence 151 %}A common theme throughout our writings is this principle of personal revelation.{% endsentence %} {% sentence 152 %}Receiving answers to our prayers is personal revelation, no matter what form those divine answers take.{% endsentence %} {% sentence 153 %}We witness that God is willing to help all seekers find truth and wisdom.{% endsentence %} {% sentence 154 %}As the Psalmist wrote, "The Lord is nigh unto all them that call upon him, to all that call upon him in truth" (Psalm 145:18). More than this, as we take questions and concerns to prayer, the power of God's spirit can confirm correct ideas to our souls with such depth that it is as much a physical recognition as it is a spiritual acceptance of a truth.{% endsentence %} {% sentence 155 %}In this way, eternal truths become a vital part of who we are and what we will become.{% endsentence %}
+{% sentence 148 %}Prayer is not only the raising of our voices to God.{% endsentence %} {% sentence 149 %}It can become two-way communication.{% endsentence %} {% sentence 150 %}We can learn to receive answers to our questions, recognize inspiration in our daily lives, and to perceive the will of God.{% endsentence %} {% sentence 151 %}A common theme throughout our writings is this principle of personal revelation.{% endsentence %} {% sentence 152 %}Receiving answers to our prayers is personal revelation, no matter what form those divine answers take.{% endsentence %} {% sentence 153 %}We witness that God is willing to help all seekers find truth and wisdom.{% endsentence %} {% sentence 154 %}As the Psalmist wrote, "The Lord is nigh unto all them that call upon him, to all that call upon him in truth" {% cite "ce-ps14518" %}. More than this, as we take questions and concerns to prayer, the power of God's spirit can confirm correct ideas to our souls with such depth that it is as much a physical recognition as it is a spiritual acceptance of a truth.{% endsentence %} {% sentence 155 %}In this way, eternal truths become a vital part of who we are and what we will become.{% endsentence %}
 
 {% sentence 156 %}The means by which God communicates with us is the Holy Ghost.{% endsentence %} {% sentence 157 %}As discussed in the previous chapter on spiritual knowledge, the Holy Ghost is the channel through which divine truth is confirmed to the human soul.{% endsentence %} {% sentence 158 %}Prayer opens the channel;{% endsentence %} {% sentence 159 %}the Holy Ghost carries the message.{% endsentence %} {% sentence 160 %}Understanding this connection is vital, for it means that the same spiritual faculties we develop in seeking knowledge of truth are the very faculties we exercise in prayer.{% endsentence %} {% sentence 161 %}Learning to recognize the voice of God's Spirit and learning to call out with our own spirit to pray with power are not separate skills—{% endsentence %}{% sentence 162 %}they are one discipline, practiced from two directions.{% endsentence %}
 
-{% sentence 163 %}The Prophet Moroni said to those who search for the truth, "I would exhort you that ye would ask God, the Eternal Father, in the name of Christ, if these things are not true; and if ye shall ask with a sincere heart, with real intent, having faith in Christ, he will manifest the truth of it unto you, by the power of the Holy Ghost. And by the power of the Holy Ghost ye may know the truth of all things" (Moroni 10:4-5).{% endsentence %} {% sentence 164 %}The Apostle James also taught the principle of personal revelation of truth.{% endsentence %} {% sentence 165 %}He wrote, "If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him" (James 1:5-6).{% endsentence %}
+{% sentence 163 %}The Prophet Moroni said to those who search for the truth, "I would exhort you that ye would ask God, the Eternal Father, in the name of Christ, if these things are not true; and if ye shall ask with a sincere heart, with real intent, having faith in Christ, he will manifest the truth of it unto you, by the power of the Holy Ghost. And by the power of the Holy Ghost ye may know the truth of all things" {% cite "ce-moro1045" %}.{% endsentence %} {% sentence 164 %}The Apostle James also taught the principle of personal revelation of truth.{% endsentence %} {% sentence 165 %}He wrote, "If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him" {% cite "ce-jas15" %}.{% endsentence %}
 
-{% sentence 165 %}The Lord revealed to a modern Prophet instructions on the subject of obtaining clear answers to prayer:{% endsentence %} {% sentence 166 %}"Behold, you have not understood;{% endsentence %} {% sentence 167 %}you have supposed that I would give [the answer] unto you, when you took no thought save it was to ask me.{% endsentence %} {% sentence 168 %}But, behold, I say unto you, that you must study it out in your mind;{% endsentence %} {% sentence 169 %}then you must ask me if [your choice] be right, and if it is right I will cause that your bosom shall burn within you;{% endsentence %} {% sentence 170 %}therefore, you shall feel that it is right.{% endsentence %} {% sentence 171 %}But if it be not right you shall have no such feelings, but you shall have a stupor of thought" (D&C 9:7-9).{% endsentence %}
+{% sentence 165 %}The Lord revealed to a modern Prophet instructions on the subject of obtaining clear answers to prayer:{% endsentence %} {% sentence 166 %}"Behold, you have not understood;{% endsentence %} {% sentence 167 %}you have supposed that I would give [the answer] unto you, when you took no thought save it was to ask me.{% endsentence %} {% sentence 168 %}But, behold, I say unto you, that you must study it out in your mind;{% endsentence %} {% sentence 169 %}then you must ask me if [your choice] be right, and if it is right I will cause that your bosom shall burn within you;{% endsentence %} {% sentence 170 %}therefore, you shall feel that it is right.{% endsentence %} {% sentence 171 %}But if it be not right you shall have no such feelings, but you shall have a stupor of thought" {% cite "ce-dc97" %}.{% endsentence %}
 
-{% sentence 172 %}A word of pastoral counsel regarding this passage: the Lord's description of a "burning in the bosom" has led some to expect a single, dramatic physical sensation as the sole form of divine confirmation.{% endsentence %} {% sentence 173 %}In practice, the Spirit speaks to different souls in different ways.{% endsentence %} {% sentence 174 %}For some, the confirmation comes as a warm feeling of peace and assurance.{% endsentence %} {% sentence 175 %}For others, it is a quiet clarity of mind, an unmistakable sense that a thing is right, or simply the absence of confusion where confusion had been.{% endsentence %} {% sentence 176 %}The Lord said He would speak "in your mind and in your heart" (D&C 8:2)—{% endsentence %}{% sentence 177 %}both intellect and feeling are involved, and the balance between them may differ from person to person and from question to question.{% endsentence %} {% sentence 178 %}Do not dismiss a genuine answer from God because it arrives differently or more quietly than you expected.{% endsentence %} {% sentence 179 %}Learn to recognize His voice in whatever form it takes.{% endsentence %}
+{% sentence 172 %}A word of pastoral counsel regarding this passage: the Lord's description of a "burning in the bosom" has led some to expect a single, dramatic physical sensation as the sole form of divine confirmation.{% endsentence %} {% sentence 173 %}In practice, the Spirit speaks to different souls in different ways.{% endsentence %} {% sentence 174 %}For some, the confirmation comes as a warm feeling of peace and assurance.{% endsentence %} {% sentence 175 %}For others, it is a quiet clarity of mind, an unmistakable sense that a thing is right, or simply the absence of confusion where confusion had been.{% endsentence %} {% sentence 176 %}The Lord said He would speak "in your mind and in your heart"{% cite "ce-dc82" %}—{% endsentence %}{% sentence 177 %}both intellect and feeling are involved, and the balance between them may differ from person to person and from question to question.{% endsentence %} {% sentence 178 %}Do not dismiss a genuine answer from God because it arrives differently or more quietly than you expected.{% endsentence %} {% sentence 179 %}Learn to recognize His voice in whatever form it takes.{% endsentence %}
 
 {% sentence 180 %}After we pray, we should pause and meditate upon our thoughts and feelings.{% endsentence %} {% sentence 181 %}How can we hear God's voice if we do not listen?{% endsentence %}
 
 <h2 id="prayer-as-a-covenant-practice">{% sentence 182 %}Prayer as a Covenant Practice{% endsentence %}</h2>
 
-{% sentence 183 %}For those who have entered into covenants with God through baptism and temple ordinances, prayer takes on an added dimension.{% endsentence %} {% sentence 184 %}It is not merely a devotional habit or a technique for receiving answers.{% endsentence %} {% sentence 185 %}Prayer is a covenant practice—a vital expression of the ongoing relationship between a disciple and the God to whom he or she has made binding promises.{% endsentence %} {% sentence 186 %}When we covenant with God, we promise to "always remember him" (D&C 20:77).{% endsentence %} {% sentence 187 %}Prayer is the most direct way we fulfill that promise each day.{% endsentence %} {% sentence 188 %}In return, He promises that we may "always have his Spirit" to be with us.{% endsentence %} {% sentence 189 %}The covenant and the prayer are inseparable:{% endsentence %} {% sentence 190 %}to cease praying is, in a very real sense, to turn away from the covenant itself.{% endsentence %}
+{% sentence 183 %}For those who have entered into covenants with God through baptism and temple ordinances, prayer takes on an added dimension.{% endsentence %} {% sentence 184 %}It is not merely a devotional habit or a technique for receiving answers.{% endsentence %} {% sentence 185 %}Prayer is a covenant practice—a vital expression of the ongoing relationship between a disciple and the God to whom he or she has made binding promises.{% endsentence %} {% sentence 186 %}When we covenant with God, we promise to "always remember him" {% cite "ce-dc2077" %}.{% endsentence %} {% sentence 187 %}Prayer is the most direct way we fulfill that promise each day.{% endsentence %} {% sentence 188 %}In return, He promises that we may "always have his Spirit" to be with us.{% endsentence %} {% sentence 189 %}The covenant and the prayer are inseparable:{% endsentence %} {% sentence 190 %}to cease praying is, in a very real sense, to turn away from the covenant itself.{% endsentence %}
 
 <h2 id="gods-unchanging-nature">{% sentence 190 %}God's Unchanging Nature{% endsentence %}</h2>
 
-{% sentence 191 %}As do many other Christians, Latter-day Saints believe that God is the same yesterday, today, and forever (Hebrews 13:8; Mormon 9:9; Moroni 10:7, 19; D&C 20:11-12).{% endsentence %} {% sentence 192 %}In spite of this common belief, many scoff or recoil at the thought of prayer leading to personal revelation from God in this modern day and age.{% endsentence %} {% sentence 193 %}God said of Himself, "I am the Lord, I change not" (Malachi 3:6).{% endsentence %}
+{% sentence 191 %}As do many other Christians, Latter-day Saints believe that God is the same yesterday, today, and forever {% cite "ce-heb138" %}{% cite "ce-morm99" %}{% cite "ce-moro1019" %}{% cite "ce-dc2011" %}.{% endsentence %} {% sentence 192 %}In spite of this common belief, many scoff or recoil at the thought of prayer leading to personal revelation from God in this modern day and age.{% endsentence %} {% sentence 193 %}God said of Himself, "I am the Lord, I change not"{% cite "ce-mal36" %}.{% endsentence %}
 
 {% sentence 194 %}Through personal revelation, God has spoken to Prophets and righteous men and women in the past in ways both great and small.{% endsentence %} {% sentence 195 %}This has not changed.{% endsentence %} {% sentence 196 %}If His work was finished in the days of Adam, He would not have revealed His will to the rest of the great patriarchs.{% endsentence %} {% sentence 197 %}If God's work was finished in the days of Abraham, Isaac, and Jacob, He would not have revealed His will to Moses.{% endsentence %} {% sentence 198 %}If His work was finished in the days of Moses, He would not have revealed His will to later Prophets of Israel.{% endsentence %} {% sentence 199 %}If His work was finished upon the completion of the collected books of the Old Testament, Christ would not have come in the flesh.{% endsentence %} {% sentence 200 %}If God's work was finished upon the perfection of Christ's sacrifice, He would not have revealed His will to the Apostles following Christ's death and resurrection.{% endsentence %} {% sentence 201 %}God's work is never finished.{% endsentence %} {% sentence 202 %}He yet speaks to those who both ask and listen.{% endsentence %} {% sentence 203 %}He is the same yesterday, today, and forever.{% endsentence %}
 
