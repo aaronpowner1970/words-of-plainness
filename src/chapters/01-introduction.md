@@ -152,14 +152,14 @@ toc:
     title: "Our Plea to You"
 pauses:
   - id: "pause-closing"
-    title: "Introduction"
+    title: "Our Witness of the Savior"
     default: "reflect"
     reflect:
-      prompt: "<p>The authors write that \"what you get out of reading our Words of Plainness depends entirely upon what you are looking for as you study them.\" What are you looking for? Be honest with yourself about what brought you to this page.</p><p>They describe a kinship with all who believe in Christ, and say they do not seek to take away light others already possess but to add to it. How does that land with you — does it feel genuine? What would it take for you to trust that intent?</p>"
+      prompt: "<p>What brought you here? Not the link or the recommendation — what is it in you that has not yet stopped searching?</p><p>This chapter describes a ministry built by two brothers who believe they have found something worth sharing. What would it take for you to trust that kind of claim long enough to keep reading?</p>"
     journal:
-      prompt: "<p>The authors confess their own imperfections and say they feel as if they have \"awakened from a deep sleep, made new and somehow more whole\" by their acquaintance with God. Write about where you are in your own awakening — just beginning, mid-journey, or somewhere you did not expect to be.</p>"
+      prompt: "<p>Write about the hunger. Not a theological argument — the actual experience. When was the last time you felt the gap between what your life offers and what your soul seems to need? What did you do with that feeling?</p>"
     witness:
-      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If something stirred in you as you read this opening — a recognition, a memory, a quiet pull toward something you cannot quite name — we invite you to put it into words here.</p>"
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If there is a moment in your life when the gap between what you were searching for and what you found began to close — when something true arrived and you recognized it — we invite you to share that here.</p>"
 citations:
   - section: "Our Lives as Latter-day Saints"
     entries:

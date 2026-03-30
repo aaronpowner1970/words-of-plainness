@@ -159,14 +159,14 @@ toc:
     title: A Witness of the Power of Prayer
 pauses:
   - id: "pause-closing"
-    title: "Sincere Prayer"
+    title: "A Witness of the Power of Prayer"
     default: "reflect"
     reflect:
-      prompt: "<p>The chapter describes prayer not as raising our voices to God but as two-way communication — learning to receive, not just to ask. What would change in your prayer life if you spent as much time listening as speaking?</p><p>A pastoral note in the chapter warns: \"Do not dismiss a genuine answer from God because it arrives differently or more quietly than you expected.\" Has this ever happened to you — an answer you almost missed because it did not come the way you imagined?</p>"
+      prompt: "<p>What is your honest relationship with prayer right now? Is it alive, routine, abandoned, or something you have never seriously tried? What would have to change for prayer to become what this chapter describes — heartfelt and intimate communion with God?</p><p>The chapter teaches that God answers prayer — but not always in the way or on the timeline we expect. Have you experienced an answer to prayer that came in a form you did not anticipate? What did it teach you about how God communicates?</p>"
     journal:
-      prompt: "<p>The chapter says that \"prayer opens the channel; the Holy Ghost carries the message\" — and that learning to pray and learning to recognize God's voice are not separate skills but one discipline practiced from two directions. Write about your experience with that channel. Is it open, closed, or somewhere in between? What would it take to widen it?</p>"
+      prompt: "<p>Write about your most honest prayer — the one where you stopped performing and simply spoke to God as you are. If that prayer has not happened yet, write the one you would pray if you believed with certainty that someone was listening.</p>"
     witness:
-      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The authors testify \"with all our strength of the power of prayer.\" If prayer has been answered in your life — not necessarily the way you expected, but in a way you could not dismiss — we invite you to share that witness here.</p>"
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If prayer has changed something real in your life — not a theological concept but an actual experience of being heard, answered, or held — we invite you to share it here.</p>"
 
 citations:
   - section: "The Soul's Sincere Desire"

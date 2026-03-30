@@ -327,14 +327,14 @@ toc:
     title: "A Promise I Hope to Fulfill"
 pauses:
   - id: "pause-closing"
-    title: "Our Search"
+    title: "The Invitation"
     default: "reflect"
     reflect:
-      prompt: "<p>The chapter describes holy dissatisfaction as a divine gift — the idea that God built restlessness into us so we would never stop growing. Does that reframe how you see your own restlessness, or does it raise new questions?</p><p>\"Seeds must break open to grow. Bread must be broken to nourish. Hearts must be broken to become capable of deeper love.\" Where in your life has brokenness led to something you could not have reached otherwise?</p>"
+      prompt: "<p>This chapter describes a hunger that no worldly pursuit fully satisfies. Have you felt this hunger? What, if anything, has come closest to satisfying it — and where did it fall short?</p><p>Aaron writes that restlessness is not a flaw but the voice of your eternal nature refusing to settle. Does that reframing change how you see your own searching? Why or why not?</p>"
     journal:
-      prompt: "<p>The chapter names five responses to the hunger within us — pride, despair, rebellion, submission, and the narrow way of humility. Without judging yourself, write about which of these you have walked through and where you find yourself now.</p>"
+      prompt: "<p>Trace the arc of your own search. Where did it begin — in a church, in a crisis, in a quiet moment you never told anyone about? Where are you now? Write honestly about what you are still looking for.</p>"
     witness:
-      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The chapter closes with the image of God sitting as a refiner — present, patient, watching until His image can be seen in us. If you have experienced a moment when you sensed that kind of patient, attentive presence in the middle of something hard, we invite you to share it.</p>"
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If your search for truth has led you to a moment of genuine discovery — a point where something real broke through the noise — we invite you to share it. Not an argument. A witness.</p>"
 
 citations:
   - section: "Thesis 4: The Path Forward"

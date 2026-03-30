@@ -374,15 +374,33 @@ citations:
         url: "bofm/3-ne/18?id=p24#p24"
         text: "Hold up your light that it may shine unto the world. Behold I am the light which ye shall hold up — that which ye have seen me do."
 pauses:
-  - id: "pause-closing"
-    title: "Embrace the Savior"
+  - id: "pause-skeptic"
+    title: "The Open-Minded Skeptic"
     default: "reflect"
     reflect:
-      prompt: "<p>The chapter ends with five invitations: Come unto Him. Learn of Him. Believe in Him. Follow Him. Remember Him. Which of these feels like the one you most need right now — and which feels like the one that would cost you the most?</p><p>The authors write that \"faith begins as we reach toward God, but it becomes His gift to us as He reaches back.\" Have you felt that exchange — your small effort met by something larger than yourself?</p>"
+      prompt: "<p>This pathway asked you to consider that there are ways of knowing beyond empiricism and reason — and invited you to test that claim through an experiment of the soul. Did anything in this reading shift how you think about the boundaries of knowledge? What moved, and what held firm?</p><p>The invitation at the end was simple: come and see. What would it actually cost you to accept that invitation — not as a conversion but as an honest inquiry? What are you protecting by staying where you are?</p>"
     journal:
-      prompt: "<p>The chapter describes faith not as a single decision but as an ongoing relationship — \"surrender, trust, willingness to be changed.\" Write about what you are willing to surrender today. Not what you think you should surrender. What you are actually ready to let go of.</p>"
+      prompt: "<p>Write about where you stand right now — not where you think you should stand. What do you believe? What do you doubt? What are you willing to try? There is no wrong answer here. The only requirement is honesty.</p>"
     witness:
-      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The chapter promises that if you come unto Christ, learn of Him, believe, follow, and remember — your faith will be made unshakable. If there is a moment when embracing Christ became personal rather than abstract for you, we invite you to share it here.</p>"
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If something in this reading surprised you — a thought that would not let go, a feeling you did not expect, a question that became more interesting than the skepticism that brought you here — we invite you to name it. You do not have to call it faith. Just say what happened.</p>"
+  - id: "pause-seeker"
+    title: "The Sincere Seeker"
+    default: "reflect"
+    reflect:
+      prompt: "<p>This pathway described faith as a seed — something that begins small and grows through honest effort. Have you felt that seed swell within you as you have read these chapters? What, specifically, stirred it?</p><p>The chapter closed with an invitation: the door is yours to open. What is the door for you right now? What feels like it is on the other side of it?</p>"
+    journal:
+      prompt: "<p>Write about what brought you to this point in your search. Not the arguments or the theology — the personal moment. What happened that made you willing to keep reading, keep asking, keep looking? What do you hope to find?</p>"
+    witness:
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If your seeking has led you to a moment of witness — however small, however tentative — where something true broke through, we invite you to share it. You do not need certainty. You need only honesty about what you have experienced.</p>"
+  - id: "pause-disciple"
+    title: "The Covenant Disciple"
+    default: "reflect"
+    reflect:
+      prompt: "<p>Alma asked, \"If ye have felt to sing the song of redeeming love, I would ask, can ye feel so now?\" How do you answer that question today — not as a performance for anyone, but between you and the Lord? Where has your discipleship become routine, and where is it still alive?</p><p>This pathway reminded you that grace is not only for converts — it is especially for the faithful who have grown weary. Where in your covenant life do you need the Atonement most right now? Not where you have already repented — where you have not yet been willing to look.</p>"
+    journal:
+      prompt: "<p>Hold up the mirror of the Three Lists. Write honestly about what you see. Where is your faith burning? Where has it dimmed? Where have you stopped expecting the promises? This is not a performance — it is between you and God.</p>"
+    witness:
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If there is a moment in your covenant journey when the grace of Christ became personal to you — not a doctrine you believed but a reality you experienced — we invite you to share it here. Your witness may be the thing that helps another disciple get up one more time.</p>"
 ---
 <style>
 .star-icon {
@@ -1086,12 +1104,14 @@ pauses:
 <p>The door is yours to open. We pray that you will.</p>
 <p class="amen">In the name of Jesus Christ. Amen.</p>
 
+{% pausePoint "pause-skeptic", "reflect" %}
+
         </div>
-        
+
         <div class="movement-lyric-close">
             <em>&ldquo;Come and see, come and see.&rdquo;</em>
         </div>
-        
+
         <div class="movement-nav">
             <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 4</button>
             {% if pauses and pauses.length > 0 %}
@@ -1405,12 +1425,14 @@ This is vital to get right! He said, "knowledge of God's character"... NOT theol
 <p>We believe what the Lord Jesus Christ has promised us. We accept Him as our personal Savior and Redeemer. We invite you to walk with us&mdash;not because our path is the only one that matters, but because we believe the Lord has something to add to yours.</p>
 <p class="amen">Come and see.<br>In the name of Jesus Christ. Amen.</p>
 
+{% pausePoint "pause-seeker", "reflect" %}
+
         </div>
-        
+
         <div class="movement-lyric-close">
             <em>&ldquo;Come and see, come and see.&rdquo;</em>
         </div>
-        
+
         <div class="movement-nav">
             <button class="btn-back" onclick="goBackOnPath()">&larr; Back to Movement 4</button>
             {% if pauses and pauses.length > 0 %}
@@ -1718,8 +1740,10 @@ This is vital to get right! He said, "knowledge of God's character"... NOT theol
 <p>You have tasted the Light. Now share it. Let your light so shine before men that they may see your good works and glorify your Father which is in heaven {% cite "ce-3ne1824" %}. The Lord has a great work for you to do {% cite "ce-dc417" %}. Now go forth to serve.</p>
 <p class="amen">In the name of Jesus Christ. Amen.</p>
 
+{% pausePoint "pause-disciple", "reflect" %}
+
         </div>
-        
+
         <div class="movement-lyric-close">
             <em>&ldquo;Come and see, come and see.&rdquo;</em>
         </div>
@@ -1804,8 +1828,6 @@ This is vital to get right! He said, "knowledge of God's character"... NOT theol
         </div>
     </div>
     {% endif %}
-
-    {% pausePoint "pause-closing", "reflect" %}
 
     <!-- ============================================================
          POSTSCRIPT: What Comes Next

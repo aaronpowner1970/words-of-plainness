@@ -191,14 +191,14 @@ toc:
     title: "Our Witness"
 pauses:
   - id: "pause-closing"
-    title: "Spiritual Knowledge"
+    title: "Our Witness"
     default: "reflect"
     reflect:
-      prompt: "<p>The chapter describes revelation as often arriving \"like the rising of the sun\" — so gradual that we may not recognize it. Have you experienced knowing something to be true before you could explain how you knew it? What did that feel like?</p><p>Alma invites us to \"experiment upon the word\" — to plant a spiritual claim like a seed and observe what it produces in our souls. Is there a truth you have tested this way, or one you are willing to test now?</p>"
+      prompt: "<p>This chapter claims that there is a way of knowing that operates beyond the senses, beyond reason — through the Spirit of God communing with the spirit within you. Does that claim resonate with anything you have experienced, or does it feel foreign? Be honest.</p><p>What would it mean for you to experiment upon the word — not to accept a conclusion, but to test a hypothesis with your whole self? What would that experiment look like in your life right now?</p>"
     journal:
-      prompt: "<p>The chapter names five spiritual faculties — feeling after God, discerning good from evil, recognizing truth, perceiving divine communication, and growing in light over time. Write honestly about which of these feels most alive in you right now, and which feels dormant or unfamiliar.</p>"
+      prompt: "<p>Write about a time when you knew something was true before you could explain why. It may have been spiritual, or it may not. What did that knowing feel like in your body, in your mind? How did you respond to it?</p>"
     witness:
-      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>The chapter promises that \"God has answered the prayers of so many. He has answered us. He will answer you.\" If you have received spiritual knowledge — through whatever means it came — we invite you to share what that experience was like.</p>"
+      prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If you have received a witness through the Spirit of God — a moment of revelation, however quiet — that confirmed something your mind alone could not prove, we invite you to share it here.</p>"
 
 citations:
   - section: "What Spirituality Is Not"

@@ -864,7 +864,7 @@ const RJW = (function() {
     /* ── STATE ────────────────────────────────────────── */
     let activePauseId = null;
     let activeTabKey  = null;
-    let reflectMode   = 'universal';   // 'universal' | 'chapter'
+    let reflectMode   = 'chapter';     // 'universal' | 'chapter'
 
     /* ── LOCAL STORAGE PERSISTENCE ────────────────────── */
     const STORAGE_PREFIX = 'wop-rjw-';
@@ -989,7 +989,7 @@ const RJW = (function() {
         PAUSES = loadPauses();  // ensure latest data
         activePauseId = pauseId;
         activeTabKey  = tabKey;
-        reflectMode   = 'universal';
+        reflectMode   = 'chapter';   // always land on chapter-specific questions on fresh open
         renderModal(pauseId, tabKey);
         document.getElementById('rjwOverlay').classList.add('open');
         document.getElementById('rjwPanel').classList.add('open');
