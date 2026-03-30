@@ -8,6 +8,121 @@ permalink: /my-reflections/
 
 <link rel="stylesheet" href="/css/my-reflections.css?v={{ site.version }}">
 
+<style>
+/* Portable Discipleship Document */
+.pd-section { margin-top: 16px; }
+.pd-document {
+    border: 1px solid rgba(196,148,58,0.2);
+    border-radius: 6px;
+    padding: 32px 28px;
+    margin-top: 16px;
+    background: rgba(30,18,8,0.4);
+}
+.pd-doc-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(196,148,58,0.15);
+}
+.pd-doc-title {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    color: var(--cream, #E8DCC4);
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+}
+.pd-doc-subtitle {
+    font-size: 14px;
+    color: var(--gold-dim, #8A6628);
+    font-style: italic;
+}
+.pd-chapter {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(196,148,58,0.1);
+}
+.pd-chapter:last-of-type { border-bottom: none; margin-bottom: 12px; }
+.pd-chapter-title {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: var(--gold, #C4943A);
+    margin-bottom: 14px;
+    letter-spacing: 0.03em;
+}
+.pd-pause-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim, #8A6628);
+    margin-bottom: 10px;
+    margin-top: 8px;
+}
+.pd-entry {
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 0 4px 4px 0;
+}
+.pd-journal { background: rgba(107,61,61,0.12); border-left: 3px solid #6B3D3D; }
+.pd-witness { background: rgba(138,102,40,0.1); border-left: 3px solid #8A6628; }
+.pd-entry-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim, #8A6628);
+    margin-bottom: 6px;
+}
+.pd-entry-text {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--cream, #E8DCC4);
+    white-space: pre-wrap;
+}
+.pd-empty .pd-entry-text {
+    font-style: italic;
+    opacity: 0.5;
+}
+.pd-actions {
+    text-align: center;
+    margin-top: 24px;
+}
+.pd-auth-notice {
+    font-style: italic;
+    color: var(--cream-dim, #B8A888);
+    opacity: 0.6;
+    text-align: center;
+    padding: 24px;
+}
+
+/* Print styles */
+@media print {
+    header, footer, nav,
+    .mr-summary, .mr-section:not(.pd-section),
+    .mr-auth-gate, .mr-stats, .mr-scripture,
+    .pd-actions, .mr-btn-export, #exportBtn,
+    .mr-goals-list, .mr-goal-input-row, .mr-goals-note,
+    .floating-action-bar, .bottom-toolbar, #backToTop,
+    #fabLantern, #fabSheet, #fabSheetOverlay,
+    .mr-section-alt, .mr-export {
+        display: none !important;
+    }
+    body {
+        background: white !important;
+        color: #1a1a1a !important;
+    }
+    .pd-document {
+        border: none !important;
+        background: none !important;
+        padding: 0 !important;
+    }
+    .pd-doc-title, .pd-chapter-title { color: #1a1a1a !important; }
+    .pd-doc-subtitle, .pd-entry-label, .pd-pause-label { color: #555 !important; }
+    .pd-entry-text { color: #1a1a1a !important; }
+    .pd-entry { background: #f5f5f5 !important; border-left-color: #999 !important; }
+}
+</style>
+
 <!-- Auth Gate (shown when not logged in) -->
 <section class="mr-auth-gate" id="dashboardAuthGate">
     <div class="mr-auth-card">
@@ -81,6 +196,13 @@ permalink: /my-reflections/
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download My Reflections
         </button>
+    </section>
+
+    <!-- Discipleship Document -->
+    <section class="mr-section pd-section">
+        <h2 class="mr-section-title">My Discipleship Document</h2>
+        <p class="mr-section-subtitle">Your Reflect · Journal · Witness responses, formatted for print or export</p>
+        <div id="pauseDocSection"></div>
     </section>
 
 </div>

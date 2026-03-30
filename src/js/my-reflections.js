@@ -510,6 +510,127 @@ const Dashboard = {
 
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => Dashboard.init(), 100);
+    setTimeout(() => PauseDoc.init(), 200);
 });
 
 window.Dashboard = Dashboard;
+
+const PauseDoc = {
+    CHAPTER_TITLES: {
+        '01-introduction':       'Chapter 1 · Introduction',
+        '02-our-search':         'Chapter 2 · Our Search',
+        '03-academic-knowledge': 'Chapter 3 · Academic Knowledge',
+        '04-spiritual-knowledge':'Chapter 4 · Spiritual Knowledge',
+        '05-sincere-prayer':     'Chapter 5 · Sincere Prayer',
+        '06-embrace-the-savior': 'Chapter 6 · Embrace the Savior',
+        '07-prophecies-birth-and-youth': 'Chapter 7 · Prophecies, Birth, and Youth',
+        '08-baptism-temptations-and-mortal-ministry': 'Chapter 8 · Baptism, Temptations, and Mortal Ministry',
+        '09-christs-personal-character': 'Chapter 9 · Yehoshua the Man',
+        '10-suffering-trial-crucifixion-and-resurrection': 'Chapter 10 · Suffering, Trial, Crucifixion, and Resurrection'
+    },
+
+    init() {
+        var container = document.getElementById('pauseDocSection');
+        if (!container) return;
+
+        if (!window.API || !API.isAuthenticated()) {
+            container.innerHTML = '<p class="pd-auth-notice">Sign in to view your discipleship document.</p>';
+            return;
+        }
+
+        container.innerHTML = '<p class="mr-loading">Loading your discipleship document...</p>';
+
+        API.getAllPauseResponses().then(function(data) {
+            var responses = Array.isArray(data) ? data : (data && data.results ? data.results : []);
+            if (responses.length === 0) {
+                container.innerHTML = '<p class="mr-empty">No pause-point responses recorded yet. Visit a chapter and use the Reflect · Journal · Witness tabs to begin.</p>';
+                return;
+            }
+            PauseDoc.render(container, responses);
+        }).catch(function(err) {
+            console.error('[PauseDoc] Failed to load:', err);
+            container.innerHTML = '<p class="mr-empty">Failed to load discipleship document. Please try refreshing.</p>';
+        });
+    },
+
+    render(container, responses) {
+        // Group: chapter_slug -> pause_id -> tab_type -> response
+        var chapters = {};
+        responses.forEach(function(r) {
+            if (!chapters[r.chapter_slug]) chapters[r.chapter_slug] = {};
+            if (!chapters[r.chapter_slug][r.pause_id]) chapters[r.chapter_slug][r.pause_id] = {};
+            chapters[r.chapter_slug][r.pause_id][r.tab_type] = r;
+        });
+
+        // Sort chapter slugs
+        var slugs = Object.keys(chapters).sort();
+
+        var html = '<div class="pd-document">';
+        html += '<div class="pd-doc-header">';
+        html += '<h3 class="pd-doc-title">My Discipleship Document</h3>';
+        html += '<p class="pd-doc-subtitle">Words of Plainness · Personal Study Record</p>';
+        html += '</div>';
+
+        slugs.forEach(function(slug) {
+            var title = PauseDoc.CHAPTER_TITLES[slug] || slug;
+            html += '<div class="pd-chapter">';
+            html += '<h4 class="pd-chapter-title">' + PauseDoc.esc(title) + '</h4>';
+
+            var pauses = chapters[slug];
+            var pauseIds = Object.keys(pauses).sort();
+
+            pauseIds.forEach(function(pauseId) {
+                var tabs = pauses[pauseId];
+
+                // Show pause label only if multiple pauses in this chapter
+                if (pauseIds.length > 1) {
+                    var pauseLabel = pauseId.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+                    html += '<div class="pd-pause-label">' + PauseDoc.esc(pauseLabel) + '</div>';
+                }
+
+                // Journal entry — always shown if present
+                if (tabs.journal && tabs.journal.response_text && tabs.journal.response_text.trim()) {
+                    html += '<div class="pd-entry pd-journal">';
+                    html += '<div class="pd-entry-label">Journal</div>';
+                    html += '<div class="pd-entry-text">' + PauseDoc.esc(tabs.journal.response_text) + '</div>';
+                    html += '</div>';
+                } else {
+                    html += '<div class="pd-entry pd-journal pd-empty">';
+                    html += '<div class="pd-entry-label">Journal</div>';
+                    html += '<div class="pd-entry-text">No journal entry for this section.</div>';
+                    html += '</div>';
+                }
+
+                // Witness entry — only if include_in_document is true
+                if (tabs.witness && tabs.witness.include_in_document && tabs.witness.response_text && tabs.witness.response_text.trim()) {
+                    html += '<div class="pd-entry pd-witness">';
+                    html += '<div class="pd-entry-label">Witness</div>';
+                    html += '<div class="pd-entry-text">' + PauseDoc.esc(tabs.witness.response_text) + '</div>';
+                    html += '</div>';
+                } else {
+                    html += '<div class="pd-entry pd-witness pd-empty">';
+                    html += '<div class="pd-entry-label">Witness</div>';
+                    html += '<div class="pd-entry-text">No witness entry for this section.</div>';
+                    html += '</div>';
+                }
+            });
+
+            html += '</div>'; // pd-chapter
+        });
+
+        html += '<div class="pd-actions">';
+        html += '<button class="mr-btn-export pd-print-btn" onclick="window.print()">Print / Save as PDF</button>';
+        html += '</div>';
+        html += '</div>'; // pd-document
+
+        container.innerHTML = html;
+    },
+
+    esc(str) {
+        var div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+};
+
+window.PauseDoc = PauseDoc;
