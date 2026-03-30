@@ -1068,28 +1068,29 @@ const RJW = (function() {
 
     function flushQueue() {
         var slug = getChapterSlug();
-        if (!slug) return;  // not on a chapter page
+        if (!slug) return;
         if (!window.API || !API.isAuthenticated()) return;
 
         var prefix = STORAGE_PREFIX;
-        var keys = [];
+        var queue = [];
         for (var i = 0; i < localStorage.length; i++) {
             var k = localStorage.key(i);
-            if (k && k.indexOf(prefix) === 0) keys.push(k);
+            if (k && k.indexOf(prefix) === 0) queue.push(k);
         }
 
-        keys.forEach(function(key) {
+        function processNext() {
+            if (queue.length === 0) return;
+            var key = queue.shift();
             var val = '';
-            try { val = localStorage.getItem(key) || ''; } catch(e) { return; }
-            if (!val.trim() || val === 'true' || val === 'false') return;  // skip booleans and empty
+            try { val = localStorage.getItem(key) || ''; } catch(e) { processNext(); return; }
+            if (!val.trim() || val === 'true' || val === 'false') { processNext(); return; }
 
-            // Parse key: wop-rjw-{pauseId}::{tabKey}
             var remainder = key.substring(prefix.length);
             var parts = remainder.split('::');
-            if (parts.length !== 2) return;
+            if (parts.length !== 2) { processNext(); return; }
             var pauseId = parts[0];
             var tabKey = parts[1];
-            if (['reflect','journal','witness'].indexOf(tabKey) === -1) return;
+            if (['reflect','journal','witness'].indexOf(tabKey) === -1) { processNext(); return; }
 
             var payload = {
                 pause_id: pauseId,
@@ -1105,10 +1106,15 @@ const RJW = (function() {
                 } catch(e) { /* silent */ }
             }
 
-            API.savePauseResponse(payload).catch(function(err) {
+            API.savePauseResponse(payload).then(function() {
+                processNext();
+            }).catch(function(err) {
                 console.warn('[RJW] Flush failed for', pauseId, tabKey, err.message);
+                processNext();
             });
-        });
+        }
+
+        processNext();
     }
 
     /* ── CLEAR BUTTON ──────────────────────────────────── */
