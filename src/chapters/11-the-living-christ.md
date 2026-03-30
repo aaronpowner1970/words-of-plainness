@@ -298,8 +298,6 @@ You have followed Him this far. It is time to self-assess. What do you feel?
 
 All seekers arrive at this threshold from different places. There are now three doorways before you with one destination. The record you build is yours regardless of which door you enter.
 
-{% pausePoint "pause-closing", "reflect" %}
-
 <!-- ═══════════════════════════════════════════════
      DOORWAY ACCORDION — Three entrances to Movement 3
 ═══════════════════════════════════════════════ -->
@@ -377,6 +375,8 @@ All seekers arrive at this threshold from different places. There are now three 
   </div>
 
 </div>
+
+{% pausePoint "pause-closing", "reflect" %}
 
 <script>
 (function() {
