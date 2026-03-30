@@ -31,6 +31,8 @@ toc:
     title: How to Know He Is Present
   - id: the-record-you-are-building
     title: The Record You Are Building
+  - id: self-assessment
+    title: Self-Assessment Before Moving On
 
 pauses:
   - id: "pause-closing"
@@ -198,8 +200,6 @@ That burning is not a historical artifact. It is available today, in whatever ro
 
 The chapters ahead of us are designed to develop the capacity to recognize and follow Him.
 
----
-
 <h2 id="clear-warning-to-the-self-righteous">Clear Warning to the Self-Righteous</h2>
 
 One thing must be stated in words of plainness before we move on to the study of discipleship.
@@ -240,6 +240,7 @@ Again, in the name of Jesus Christ, I call to you with an intensity borne of the
 
 Do not stand between the Shepherd and His lambs. You will not survive the encounter.
 
+
 <div class="study-callout">
   <div class="study-callout-inner">
     <div class="study-callout-eyebrow">Study the Scriptures</div>
@@ -248,8 +249,6 @@ Do not stand between the Shepherd and His lambs. You will not survive the encoun
     <a class="study-callout-link" href="/studies/contention-and-the-reach-of-christ/">Open Study Pathway →</a>
   </div>
 </div>
-
----
 
 <h2 id="how-to-know-he-is-present">How to Know He Is Present</h2>
 
@@ -279,8 +278,6 @@ This ministry exists so that no one leaves it trembling. The warning above is no
 
 The card chapters ahead are that momentum, made concrete.
 
----
-
 <h2 id="the-record-you-are-building">The Record You Are Building</h2>
 
 Okay, now just breathe.
@@ -307,6 +304,8 @@ All seekers arrive at this threshold from different places. There are now three 
      DOORWAY ACCORDION — Three entrances to Movement 3
 ═══════════════════════════════════════════════ -->
 <div class="doorway-divider"></div>
+
+<h2 id="self-assessment" style="text-align:center; margin-bottom:1.5rem;">Self-Assessment Before Moving On</h2>
 
 <div class="doorway-accordion" id="doorwayAccordion">
 
