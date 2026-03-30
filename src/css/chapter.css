@@ -3887,3 +3887,178 @@ h2[id], h3[id], [id^="section-"] {
     line-height: 1.55;
     font-style: italic;
 }
+
+/* ════════════════════════════════════════════════════════
+   STUDY CALLOUT — links to /studies/ pathway pages
+════════════════════════════════════════════════════════ */
+.study-callout {
+    max-width: 680px;
+    margin: 2.5rem auto;
+    padding: 1.5rem 1.75rem;
+    border: 1px solid rgba(196, 148, 58, 0.25);
+    border-radius: 8px;
+    background: rgba(196, 148, 58, 0.04);
+    text-align: center;
+}
+.study-callout-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-dim, #8A6628);
+    margin-bottom: 0.4rem;
+}
+.study-callout-title {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gold-primary, #C4943A);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+.study-callout-desc {
+    font-size: 0.92rem;
+    color: var(--cream-dark, #D4C8B0);
+    margin-bottom: 0.75rem;
+}
+.study-callout-link {
+    display: inline-block;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gold-primary, #C4943A);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.4);
+    transition: color 0.2s, border-color 0.2s;
+}
+.study-callout-link:hover {
+    color: var(--gold-light, #D4A84A);
+    border-bottom-color: var(--gold-light, #D4A84A);
+}
+
+/* ════════════════════════════════════════════════════════
+   DOORWAY ACCORDION — Chapter 11 Movement 3 entrance
+════════════════════════════════════════════════════════ */
+.doorway-divider {
+    width: 100%;
+    height: 1px;
+    margin: 3rem 0 2rem;
+    background: linear-gradient(90deg, transparent 0%, var(--gold-primary, #C4943A) 20%, var(--gold-primary, #C4943A) 80%, transparent 100%);
+    opacity: 0.55;
+}
+.doorway-accordion {
+    max-width: 720px;
+    margin: 0 auto 2rem;
+}
+.doorway-card {
+    border: 1px solid rgba(196, 148, 58, 0.18);
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+}
+.doorway-card:hover {
+    border-color: rgba(196, 148, 58, 0.35);
+}
+.doorway-card.is-open {
+    border-color: rgba(196, 148, 58, 0.45);
+}
+.doorway-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: rgba(26, 21, 16, 0.4);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+    transition: background 0.2s ease;
+}
+.doorway-header:hover {
+    background: rgba(196, 148, 58, 0.06);
+}
+.doorway-label {
+    flex-shrink: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim, #8A6628);
+    min-width: 70px;
+}
+.doorway-title {
+    flex: 1;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--cream, #E8DCC4);
+    line-height: 1.4;
+}
+.doorway-chevron {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    color: var(--gold-dim, #8A6628);
+    transition: transform 0.25s ease;
+}
+.doorway-card.is-open .doorway-chevron {
+    transform: rotate(180deg);
+}
+.doorway-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+}
+.doorway-card.is-open .doorway-body {
+    grid-template-rows: 1fr;
+}
+.doorway-content {
+    overflow: hidden;
+    padding: 0 1.5rem;
+}
+.doorway-card.is-open .doorway-content {
+    padding: 1rem 1.5rem 1.5rem;
+}
+.doorway-content p {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--cream, #E8DCC4);
+    margin-bottom: 1rem;
+}
+.doorway-content p:last-child {
+    margin-bottom: 0;
+}
+.doorway-welcome {
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+.doorway-welcome a {
+    color: var(--gold-primary, #C4943A);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.4);
+    transition: color 0.2s, border-color 0.2s;
+}
+.doorway-welcome a:hover {
+    color: var(--gold-light, #D4A84A);
+    border-bottom-color: var(--gold-light, #D4A84A);
+}
+
+@media (max-width: 768px) {
+    .doorway-header {
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        padding: 0.85rem 1rem;
+    }
+    .doorway-label {
+        width: 100%;
+    }
+    .doorway-content {
+        padding: 0 1rem;
+    }
+    .doorway-card.is-open .doorway-content {
+        padding: 0.75rem 1rem 1.25rem;
+    }
+}

@@ -21,7 +21,8 @@ const Dashboard = {
         'chapter-07-prophecies-birth-youth': { number: 7, title: 'Prophecies, Birth, and Youth' },
         'chapter-08-baptism-temptations-ministry': { number: 8, title: 'Baptism, Temptations, and Mortal Ministry' },
         'chapter-09-christs-personal-character': { number: 9, title: 'Yehoshua the Man' },
-        'chapter-10-suffering-trial-crucifixion-resurrection': { number: 10, title: 'Suffering, Trial, Crucifixion, and Resurrection' }
+        'chapter-10-suffering-trial-crucifixion-resurrection': { number: 10, title: 'Suffering, Trial, Crucifixion, and Resurrection' },
+        'chapter-11-the-living-christ': { number: 11, title: 'The Living Christ' }
     },
 
     init() {
@@ -530,7 +531,8 @@ const PauseDoc = {
         'chapter-07-prophecies-birth-youth': 'Chapter 7 · Prophecies, Birth, and Youth',
         'chapter-08-baptism-temptations-ministry': 'Chapter 8 · Baptism, Temptations, and Mortal Ministry',
         'chapter-09-christs-personal-character': 'Chapter 9 · Yehoshua the Man',
-        'chapter-10-suffering-trial-crucifixion-resurrection': 'Chapter 10 · Suffering, Trial, Crucifixion, and Resurrection'
+        'chapter-10-suffering-trial-crucifixion-resurrection': 'Chapter 10 · Suffering, Trial, Crucifixion, and Resurrection',
+        'chapter-11-the-living-christ': 'Chapter 11 · The Living Christ'
     },
 
     init() {
