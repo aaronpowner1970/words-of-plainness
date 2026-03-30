@@ -19,6 +19,8 @@ audio:
     title: "Panteles"
     description: "A sacred ballad on the reach of Christ — completely, for all time, for anyone."
 
+lyrics: true
+
 prevChapter:
   url: "/chapters/10-suffering-trial-crucifixion-resurrection/"
   title: "Chapter 10: Suffering, Trial, Crucifixion, and Resurrection"
