@@ -13,7 +13,11 @@ scripture:
 readingTime: 18
 
 audio:
-  narration: ""
+  narration: NR_11_1_The_Living_Christ.mp3
+  testimony:
+    file: "11_01_Panteles_Sacred_Ballad.mp3"
+    title: "Panteles"
+    description: "A sacred ballad on the reach of Christ — completely, for all time, for anyone."
 
 prevChapter:
   url: "/chapters/10-suffering-trial-crucifixion-resurrection/"
@@ -37,6 +41,7 @@ toc:
 pauses:
   - id: "pause-closing"
     title: "Closing Reflection"
+    cue: NR_11_CUE_01_Closing.mp3
     default: "reflect"
     reflect:
       prompt: "<p>This chapter moved from the Ascension to a warning to a call to action. Which of those three movements spoke most directly to where you are right now — and what did it say to you?</p>"
