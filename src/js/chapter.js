@@ -905,6 +905,10 @@ const RJW = (function() {
         }
     }
 
+    function getChapterSlug() {
+        return (window.CHAPTER_CONFIG && window.CHAPTER_CONFIG.id) || '';
+    }
+
     /* ── RENDER MODAL CONTENT ─────────────────────────── */
     function renderModal(pauseId, tabKey) {
         var data = PAUSES[pauseId];
@@ -1035,6 +1039,24 @@ const RJW = (function() {
                 saveStoredBool(activePauseId, 'witness-include-document',  cbDoc  ? cbDoc.checked  : false);
                 saveStoredBool(activePauseId, 'witness-submit-community', cbComm ? cbComm.checked : false);
             }
+
+            // Sync to backend if authenticated
+            if (window.API && API.isAuthenticated() && ta.value.trim()) {
+                var payload = {
+                    pause_id: activePauseId,
+                    chapter_slug: getChapterSlug(),
+                    tab_type: tabKey,
+                    response_text: ta.value,
+                    include_in_document: false
+                };
+                if (tabKey === 'witness') {
+                    var cbDocSync = document.getElementById('cb-document');
+                    payload.include_in_document = cbDocSync ? cbDocSync.checked : false;
+                }
+                API.savePauseResponse(payload).catch(function(err) {
+                    console.warn('[RJW] Backend save failed (will retry on next login):', err.message);
+                });
+            }
         }
         if (window.Engagement) window.Engagement.track('rjw_save', { pause_id: activePauseId, tab: tabKey });
         var ind = document.getElementById('save-' + tabKey);
@@ -1042,6 +1064,51 @@ const RJW = (function() {
             ind.classList.add('visible');
             setTimeout(function() { ind.classList.remove('visible'); }, 2200);
         }
+    }
+
+    function flushQueue() {
+        var slug = getChapterSlug();
+        if (!slug) return;  // not on a chapter page
+        if (!window.API || !API.isAuthenticated()) return;
+
+        var prefix = STORAGE_PREFIX;
+        var keys = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            var k = localStorage.key(i);
+            if (k && k.indexOf(prefix) === 0) keys.push(k);
+        }
+
+        keys.forEach(function(key) {
+            var val = '';
+            try { val = localStorage.getItem(key) || ''; } catch(e) { return; }
+            if (!val.trim() || val === 'true' || val === 'false') return;  // skip booleans and empty
+
+            // Parse key: wop-rjw-{pauseId}::{tabKey}
+            var remainder = key.substring(prefix.length);
+            var parts = remainder.split('::');
+            if (parts.length !== 2) return;
+            var pauseId = parts[0];
+            var tabKey = parts[1];
+            if (['reflect','journal','witness'].indexOf(tabKey) === -1) return;
+
+            var payload = {
+                pause_id: pauseId,
+                chapter_slug: slug,
+                tab_type: tabKey,
+                response_text: val,
+                include_in_document: false
+            };
+
+            if (tabKey === 'witness') {
+                try {
+                    payload.include_in_document = localStorage.getItem(prefix + pauseId + '::witness-include-document') === 'true';
+                } catch(e) { /* silent */ }
+            }
+
+            API.savePauseResponse(payload).catch(function(err) {
+                console.warn('[RJW] Flush failed for', pauseId, tabKey, err.message);
+            });
+        });
     }
 
     /* ── CLEAR BUTTON ──────────────────────────────────── */
@@ -1063,7 +1130,8 @@ const RJW = (function() {
         switchTab: switchTab,
         switchReflectMode: switchReflectMode,
         saveResponse: saveResponse,
-        clearTA: clearTA
+        clearTA: clearTA,
+        flushQueue: flushQueue
     };
 
 })();

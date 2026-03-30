@@ -245,6 +245,7 @@ const API = {
         // After login, check for localStorage reflections to migrate
         this.checkReflectionMigration();
         if (window.Engagement) window.Engagement.flushQueue();
+        if (window.RJW && typeof RJW.flushQueue === 'function') RJW.flushQueue();
         document.dispatchEvent(new CustomEvent('wop:auth-login', { detail: { user: this.user } }));
     },
 
@@ -443,6 +444,25 @@ const API = {
 
     async getAllProgress() {
         return this.request('/progress/');
+    },
+
+    // =========================================
+    // R·J·W Pause-Point Responses API
+    // =========================================
+
+    async savePauseResponse(data) {
+        return this.request('/progress/pause-responses/', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+    },
+
+    async getPauseResponses(chapterSlug) {
+        return this.request(`/progress/pause-responses/?chapter_slug=${encodeURIComponent(chapterSlug)}`);
+    },
+
+    async getAllPauseResponses() {
+        return this.request('/progress/pause-responses/');
     }
 };
 
