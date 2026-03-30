@@ -906,7 +906,7 @@ const RJW = (function() {
     }
 
     function getChapterSlug() {
-        return (window.CHAPTER_CONFIG && window.CHAPTER_CONFIG.id) || '';
+        return (typeof CHAPTER_CONFIG !== 'undefined' && CHAPTER_CONFIG.id) || '';
     }
 
     /* ── RENDER MODAL CONTENT ─────────────────────────── */
