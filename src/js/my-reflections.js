@@ -12,12 +12,16 @@ const Dashboard = {
     goals: [],
 
     CHAPTER_MAP: {
-        '01-introduction':       { number: 1, title: 'Introduction' },
-        '02-our-search':         { number: 2, title: 'Our Search' },
-        '03-academic-knowledge': { number: 3, title: 'Academic Knowledge' },
-        '04-spiritual-knowledge':{ number: 4, title: 'Spiritual Knowledge' },
-        '05-sincere-prayer':     { number: 5, title: 'Sincere Prayer' },
-        '06-embrace-the-savior': { number: 6, title: 'Embrace the Savior' }
+        'chapter-01-introduction':       { number: 1, title: 'Introduction' },
+        'chapter-02-our-search':         { number: 2, title: 'Our Search' },
+        'chapter-03-academic-knowledge': { number: 3, title: 'Academic Knowledge' },
+        'chapter-04-spiritual-knowledge':{ number: 4, title: 'Spiritual Knowledge' },
+        'chapter-05-sincere-prayer':     { number: 5, title: 'Sincere Prayer' },
+        'chapter-06-embrace-the-savior': { number: 6, title: 'Embrace the Savior' },
+        'chapter-07-prophecies-birth-youth': { number: 7, title: 'Prophecies, Birth, and Youth' },
+        'chapter-08-baptism-temptations-ministry': { number: 8, title: 'Baptism, Temptations, and Mortal Ministry' },
+        'chapter-09-christs-personal-character': { number: 9, title: 'Yehoshua the Man' },
+        'chapter-10-suffering-trial-crucifixion-resurrection': { number: 10, title: 'Suffering, Trial, Crucifixion, and Resurrection' }
     },
 
     init() {
@@ -517,16 +521,16 @@ window.Dashboard = Dashboard;
 
 const PauseDoc = {
     CHAPTER_TITLES: {
-        '01-introduction':       'Chapter 1 · Introduction',
-        '02-our-search':         'Chapter 2 · Our Search',
-        '03-academic-knowledge': 'Chapter 3 · Academic Knowledge',
-        '04-spiritual-knowledge':'Chapter 4 · Spiritual Knowledge',
-        '05-sincere-prayer':     'Chapter 5 · Sincere Prayer',
-        '06-embrace-the-savior': 'Chapter 6 · Embrace the Savior',
-        '07-prophecies-birth-and-youth': 'Chapter 7 · Prophecies, Birth, and Youth',
-        '08-baptism-temptations-and-mortal-ministry': 'Chapter 8 · Baptism, Temptations, and Mortal Ministry',
-        '09-christs-personal-character': 'Chapter 9 · Yehoshua the Man',
-        '10-suffering-trial-crucifixion-and-resurrection': 'Chapter 10 · Suffering, Trial, Crucifixion, and Resurrection'
+        'chapter-01-introduction':       'Chapter 1 · Introduction',
+        'chapter-02-our-search':         'Chapter 2 · Our Search',
+        'chapter-03-academic-knowledge': 'Chapter 3 · Academic Knowledge',
+        'chapter-04-spiritual-knowledge':'Chapter 4 · Spiritual Knowledge',
+        'chapter-05-sincere-prayer':     'Chapter 5 · Sincere Prayer',
+        'chapter-06-embrace-the-savior': 'Chapter 6 · Embrace the Savior',
+        'chapter-07-prophecies-birth-youth': 'Chapter 7 · Prophecies, Birth, and Youth',
+        'chapter-08-baptism-temptations-ministry': 'Chapter 8 · Baptism, Temptations, and Mortal Ministry',
+        'chapter-09-christs-personal-character': 'Chapter 9 · Yehoshua the Man',
+        'chapter-10-suffering-trial-crucifixion-resurrection': 'Chapter 10 · Suffering, Trial, Crucifixion, and Resurrection'
     },
 
     init() {
