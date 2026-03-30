@@ -20,6 +20,7 @@ audio:
     description: "A sacred ballad on the reach of Christ — completely, for all time, for anyone."
 
 lyrics: true
+infographic: chapter-11-infographic.png
 
 prevChapter:
   url: "/chapters/10-suffering-trial-crucifixion-resurrection/"
