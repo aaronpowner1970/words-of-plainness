@@ -139,6 +139,26 @@ module.exports = function(eleventyConfig) {
         return d.toISOString().split('T')[0];
     });
 
+    // RFC-3339 date for Atom feeds — "2026-03-31T00:00:00Z"
+    eleventyConfig.addFilter("rfc3339Date", function(dateObj) {
+        if (!dateObj) return '';
+        return new Date(dateObj).toISOString();
+    });
+
+    // Get newest date from a collection (for Atom feed <updated>)
+    eleventyConfig.addFilter("newestDate", function(collection) {
+        if (!collection || !collection.length) return new Date().toISOString();
+        const dates = collection.map(item => new Date(item.date));
+        return new Date(Math.max(...dates)).toISOString();
+    });
+
+    // Build absolute URL from relative path
+    eleventyConfig.addFilter("absoluteUrl", function(relPath) {
+        const base = "https://www.wordsofplainness.org";
+        if (!relPath) return base;
+        return base + relPath;
+    });
+
     // Scripture book mappings as JSON (for client-side injection)
     eleventyConfig.addFilter("scriptureBooksJson", function() {
         const data = require('./src/_data/scriptures.json');
