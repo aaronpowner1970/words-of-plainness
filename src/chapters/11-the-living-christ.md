@@ -19,7 +19,57 @@ audio:
     title: "Panteles"
     description: "A sacred ballad on the reach of Christ — completely, for all time, for anyone."
 
-lyrics: true
+lyrics: |
+  <p class="section"><strong>[Verse 1]</strong></p>
+  <p>They watched Him rise until the cloud received Him.<br>
+  And stood there staring at an empty sky.<br>
+  Two angels came and asked them gently.<br>
+  Why are you looking up?<br>
+  What looked like leaving was a promise kept:<br>
+  I will not leave you here alone.<br>
+  Two walked a road with hearts too heavy to see.<br>
+  He broke the bread, and then they knew.</p>
+
+  <p class="section"><strong>[Chorus]</strong></p>
+  <p><em>He ever lives — He is not gone.<br>
+  Panteles — to the uttermost,<br>
+  Completely, for all time, for anyone.<br>
+  No gatekeeper stands at His door.</em></p>
+
+  <p class="section"><strong>[Verse 2]</strong></p>
+  <p>That burning is not ancient history.<br>
+  It is alive in any road you walk.<br>
+  A warmth of heart, a conscience growing clear.<br>
+  A pull toward goodness in the dark.<br>
+  The question is not was my lamp once lit?<br>
+  But is it burning still today?<br>
+  His grace is not just words that leave you where you are.<br>
+  It is a power that can change.</p>
+
+  <p class="section"><strong>[Chorus]</strong></p>
+  <p><em>He ever lives — He is not gone.<br>
+  Panteles — to the uttermost,<br>
+  Completely, for all time, for anyone.<br>
+  No gatekeeper stands at His door.</em></p>
+
+  <p class="section"><strong>[Bridge]</strong></p>
+  <p>Whatever looking back has cost you,<br>
+  The plow is still in the field.<br>
+  Whatever name you carry, wherever you have been,<br>
+  The choice to turn is here.</p>
+
+  <p class="section"><strong>[Final Chorus]</strong></p>
+  <p><em>He ever lives — He is not gone.<br>
+  Panteles — to the uttermost,<br>
+  No gatekeeper stands at His door.<br>
+  He lives — come walk with Him today.</em></p>
+
+  <p class="section"><strong>[Outro]</strong></p>
+  <p><em>He is present.<br>
+  Always, everywhere,<br>
+  For everyone.<br>
+  In the name of Jesus Christ.<br>
+  Amen.</em></p>
 infographic: chapter-11-infographic.png
 pdf: WoP_Ch11_The_Living_Christ.pdf
 slides:

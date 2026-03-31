@@ -70,13 +70,13 @@ toc:
     title: Benediction
 
 lyrics: |
-  <p class="lyrics-section-label">[intro]</p>
+  <p class="section"><strong>[Intro]</strong></p>
   <p>The scriptures call Him the Bridegroom,<br>
   His Church the beloved bride.<br>
   Discipleship is the wedding dance —<br>
   Come walk with me inside.</p>
 
-  <p class="lyrics-section-label">[verse 1]</p>
+  <p class="section"><strong>[Verse 1]</strong></p>
   <p>I opened Your journal and there You are —<br>
   Not the stranger I'd imagined.<br>
   A heart so tender it stuns me still,<br>
@@ -87,13 +87,13 @@ lyrics: |
   Something in me begins to rise,<br>
   Like a song I always knew but never heard.</p>
 
-  <p class="lyrics-section-label">[chorus]</p>
+  <p class="section"><strong>[Chorus]</strong></p>
   <p>Like the joy of a bride on her wedding day,<br>
   Received by her Lord at the altar —<br>
   Every heart overflowing, every voice lifted high,<br>
   We behold You, Yehoshua — established we are.</p>
 
-  <p class="lyrics-section-label">[verse 2]</p>
+  <p class="section"><strong>[Verse 2]</strong></p>
   <p>Now I see in Your eyes what You see in me —<br>
   Every broken moment, now mending.<br>
   You don't turn away from what I've been —<br>
@@ -104,7 +104,7 @@ lyrics: |
   Not alone — not anymore.<br>
   Yoked together, every labor feels right.</p>
 
-  <p class="lyrics-section-label">[chorus]</p>
+  <p class="section"><strong>[Chorus]</strong></p>
   <p>Like the joy of a bride on her wedding day,<br>
   Received by her Lord at the altar —<br>
   Every heart overflowing, every voice lifted high,<br>
@@ -113,7 +113,7 @@ lyrics: |
   <p>At the feast You have prepared, we eat and drink —<br>
   Your grace has made us more than we could be.</p>
 
-  <p class="lyrics-section-label">[verse 3]</p>
+  <p class="section"><strong>[Verse 3]</strong></p>
   <p>For most of Your holy life You worked the wood and stone,<br>
   Dust on Your hands and feet.<br>
   A household fed by labor,<br>
@@ -128,7 +128,7 @@ lyrics: |
   Each ordinary day a preparation,<br>
   Built on faithfulness and laughter.</p>
 
-  <p class="lyrics-section-label">[chorus]</p>
+  <p class="section"><strong>[Chorus]</strong></p>
   <p>Like the joy of a bride on her wedding day,<br>
   Received by her Lord at the altar —<br>
   Every heart overflowing, every voice lifted high,<br>
@@ -140,7 +140,7 @@ lyrics: |
   <p>Entering Your mansions, every promise fulfilled —<br>
   A new life everlasting begins now with You.</p>
 
-  <p class="lyrics-section-label">[outro]</p>
+  <p class="section"><strong>[Outro]</strong></p>
   <p>Father, thank You for the heart of Your Son.<br>
   Thank You for letting me see as I have been seen —<br>
   For the table, the labor, and the road ahead.<br>

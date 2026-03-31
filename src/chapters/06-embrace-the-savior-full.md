@@ -78,7 +78,7 @@ toc:
   - id: the-invitation
     title: The Invitation
 lyrics: |
-  <p class="lyrics-section"><strong>[Opening]</strong></p>
+  <p class="section"><strong>[Opening]</strong></p>
   <p>I was standing at the edge of something
   When the questions finally stopped
   And the silence wasn't empty
@@ -89,7 +89,7 @@ lyrics: |
   And the arms that caught me whispered:
   "Child—this is what I made you for"</p>
 
-  <p class="lyrics-section"><strong>[Verse 1]</strong></p>
+  <p class="section"><strong>[Verse 1]</strong></p>
   <p>I used to think that faith meant certainty
   That knowing was enough
   But even demons believe in Him
@@ -100,13 +100,13 @@ lyrics: |
   It was opening these hands I'd clenched so tight
   And letting myself breathe</p>
 
-  <p class="lyrics-section"><strong>[Pre-Chorus]</strong></p>
+  <p class="section"><strong>[Pre-Chorus]</strong></p>
   <p>What I thought was strength was prison
   What I thought was loss is gain
   Every wall I built for safety
   Was the architecture of my chains</p>
 
-  <p class="lyrics-section"><strong>[Chorus 1]</strong></p>
+  <p class="section"><strong>[Chorus 1]</strong></p>
   <p><em>I have tasted the Light
   Grace of the Living Son of God
   And my heart is full, my heart is full</em></p>
@@ -122,7 +122,7 @@ lyrics: |
   <p><em>Now I'm reborn
   Now I'm free</em></p>
 
-  <p class="lyrics-section"><strong>[Verse 2]</strong></p>
+  <p class="section"><strong>[Verse 2]</strong></p>
   <p>The world looks just the same this morning
   But I swear these eyes are new
   Something ancient woke inside me
@@ -133,7 +133,7 @@ lyrics: |
   But the ones who've tasted know—
   The Spirit witnessed. Now I know.</p>
 
-  <p class="lyrics-section"><strong>[Chorus 2]</strong></p>
+  <p class="section"><strong>[Chorus 2]</strong></p>
   <p><em>I have tasted the Light
   Grace of the Living Son of God
   And my heart is full, my heart is full</em></p>
@@ -149,7 +149,7 @@ lyrics: |
   <p><em>Now I'm reborn
   Now I'm free</em></p>
 
-  <p class="lyrics-section"><strong>[Verse 3]</strong></p>
+  <p class="section"><strong>[Verse 3]</strong></p>
   <p>Like the woman at the well
   I ran to tell what I had found
   Not because my life was perfect—
@@ -160,7 +160,7 @@ lyrics: |
   There's a family, there's a table
   There's a testimony—there's a home</p>
 
-  <p class="lyrics-section"><strong>[Bridge]</strong></p>
+  <p class="section"><strong>[Bridge]</strong></p>
   <p>When the shadows press their questions
   And the old doubts claw their way
   I return to the moment
@@ -171,14 +171,14 @@ lyrics: |
   So I choose to remember—
   And the Light comes back to me</p>
 
-  <p class="lyrics-section"><strong>[Interlude]</strong></p>
+  <p class="section"><strong>[Interlude]</strong></p>
   <p><em>Come unto Him
   Learn of Him
   Believe in Him
   Follow Him
   Remember Him</em></p>
 
-  <p class="lyrics-section"><strong>[Final Chorus]</strong></p>
+  <p class="section"><strong>[Final Chorus]</strong></p>
   <p><em>I have tasted the Light
   Grace of the Living Son of God
   And my heart is full, my heart is full!</em></p>
@@ -194,7 +194,7 @@ lyrics: |
   <p><em>Now I'm reborn
   Now I'm free!</em></p>
 
-  <p class="lyrics-section"><strong>[Outro]</strong></p>
+  <p class="section"><strong>[Outro]</strong></p>
   <p><em>Now I'm reborn...
   Now I'm free...</em></p>
 
