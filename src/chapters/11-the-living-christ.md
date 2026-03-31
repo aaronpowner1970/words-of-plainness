@@ -21,6 +21,7 @@ audio:
 
 lyrics: true
 infographic: chapter-11-infographic.png
+pdf: WoP_Ch11_The_Living_Christ.pdf
 
 prevChapter:
   url: "/chapters/10-suffering-trial-crucifixion-resurrection/"
