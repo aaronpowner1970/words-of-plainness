@@ -165,4 +165,62 @@ permalink: /writings/
     </div>
 </section>
 
+<!-- ═══════════════════════════════════════════════════════
+     APPENDICES
+═══════════════════════════════════════════════════════ -->
+<!-- Future: convert to Eleventy collection when appendix count exceeds 3 -->
+<section class="content-section alt" id="appendices">
+    <div class="content-wrapper" style="max-width: 900px;">
+        <h2 style="font-family: var(--font-serif); color: var(--gold-primary); text-align: center; margin-bottom: var(--space-xs);">Appendices</h2>
+        <p style="color: var(--cream); opacity: 0.8; font-style: italic; text-align: center; margin-bottom: var(--space-lg); font-size: 1rem;">Study pathways, topical resources, and supplementary essays.</p>
+
+        <a href="/studies/contention-and-the-reach-of-christ/" class="appendix-entry">
+            <h3 class="appendix-entry-title">Contention, Gatekeeping, and the Reach of Christ</h3>
+            <p class="appendix-entry-subtitle">A Curated Scripture Study Pathway</p>
+            <p class="appendix-entry-note">Accompanies Chapter 11: The Living Christ</p>
+        </a>
+    </div>
+</section>
+
+<style>
+.appendix-entry {
+    display: block;
+    background: var(--overlay-medium);
+    border-left: 3px solid rgba(196, 148, 58, 0.45);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.appendix-entry:hover {
+    border-color: var(--gold-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.appendix-entry-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--cream-soft);
+    margin-bottom: var(--space-xs);
+}
+
+.appendix-entry-subtitle {
+    font-size: 0.95rem;
+    color: var(--gold-primary);
+    margin-bottom: var(--space-xs);
+    font-style: italic;
+}
+
+.appendix-entry-note {
+    font-size: 0.85rem;
+    color: var(--cream);
+    opacity: 0.6;
+    margin-bottom: 0;
+}
+</style>
+
 {% include "partials/search-fab.njk" %}
