@@ -26,7 +26,7 @@ The site is organized into two volumes. **Volume 1: Christ-Centered Discipleship
 
 **Volume 2: Covenants & Theology** presents the full systematic theology of the Restoration—from the nature of God and the spiritual creation to the Plan of Salvation and our eternal inheritance. Volume 2 arrives after Volume 1's shared ground, so that the distinctive claims of the Restoration gain weight from the fruit the reader has already witnessed.
 
-Every chapter includes audio narration you can listen to as you read, with the text highlighted sentence by sentence. Many chapters include musical testimonies—original songs in a Sacred Americana tradition that carry the chapter's themes into worship. Study slides, downloadable PDFs, and reflection tools are woven throughout. This is not a static reading experience. It is a place to encounter Christ and respond.
+Every chapter includes audio narration you can listen to as you read. While listening, paragraphs are highlighted in sync to the audio (not perfect but helpful). Many chapters include musical testimonies—original songs in a Sacred Americana tradition that carry the chapter's themes into worship. The lyrics and musical production of all songs were done by Brother Aaron. Study slides, downloadable PDFs, and interactive reflection tools are woven throughout. This is not a static reading experience. It is a place to encounter Christ and respond from your own faith and traditions.
 
 ## What Is Coming
 
