@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+title: "Posts"
+permalink: /posts/
+---
+
+<link rel="stylesheet" href="/css/blog.css">
+
+<div class="blog-hero">
+    <h1>Posts</h1>
+    <p class="blog-hero-tagline">Updates, reflections, and news from the Words of Plainness ministry</p>
+</div>
+
+<div class="blog-listing" data-pagefind-body>
+    {% set posts = collections.posts %}
+    {% if posts.length > 0 %}
+        {% for post in posts %}
+        <a href="{{ post.url }}" class="blog-entry">
+            <div class="blog-entry-date">{{ post.date | blogDate }}</div>
+            <h2 class="blog-entry-title">{{ post.data.title }}</h2>
+            {% if post.data.description %}
+            <p class="blog-entry-description">{{ post.data.description }}</p>
+            {% endif %}
+            {% if post.data.tags %}
+            <div class="blog-entry-tags">
+                {% for tag in post.data.tags %}
+                    {% if tag != "post" %}
+                    <span class="blog-tag">{{ tag }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <span class="blog-entry-read">Read more &rarr;</span>
+        </a>
+        {% endfor %}
+    {% else %}
+        <p class="blog-empty">No posts yet. Check back soon.</p>
+    {% endif %}
+</div>
+
+{% include "partials/search-fab.njk" %}

@@ -98,6 +98,13 @@ module.exports = function(eleventyConfig) {
             .filter(item => !path.basename(item.inputPath).startsWith("_"))
             .sort((a, b) => a.data.chapter - b.data.chapter);
     });
+
+    // Blog posts collection - sorted by date descending (newest first)
+    eleventyConfig.addCollection("posts", function(collectionApi) {
+        return collectionApi.getFilteredByGlob("src/posts/*.md")
+            .filter(item => !path.basename(item.inputPath).startsWith("_"))
+            .sort((a, b) => b.date - a.date);
+    });
     
     // =========================================
     // FILTERS
@@ -114,6 +121,22 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addFilter("now", (value, format) => {
         if (format === "YYYY") return new Date().getFullYear();
         return new Date().toISOString();
+    });
+
+    // Blog date formatting — "March 31, 2026"
+    eleventyConfig.addFilter("blogDate", function(dateObj) {
+        if (!dateObj) return '';
+        const d = new Date(dateObj);
+        const months = ['January','February','March','April','May','June',
+                        'July','August','September','October','November','December'];
+        return `${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
+    });
+
+    // ISO date for datetime attributes — "2026-03-31"
+    eleventyConfig.addFilter("isoDate", function(dateObj) {
+        if (!dateObj) return '';
+        const d = new Date(dateObj);
+        return d.toISOString().split('T')[0];
     });
 
     // Scripture book mappings as JSON (for client-side injection)

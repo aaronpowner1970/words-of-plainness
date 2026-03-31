@@ -1,0 +1,105 @@
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/blog.css">
+{% endblock %}
+
+{% block content %}
+<article class="blog-post" data-pagefind-body>
+    <!-- Post Header -->
+    <header class="blog-post-header">
+        <div class="blog-post-header-inner">
+            <a href="/posts/" class="blog-back-link">&larr; Back to Posts</a>
+            <h1 class="blog-post-title">{{ title }}</h1>
+            <div class="blog-post-meta">
+                <time datetime="{{ date | isoDate }}">{{ date | blogDate }}</time>
+                {% if author %}<span class="blog-post-author">by {{ author }}</span>{% endif %}
+            </div>
+            {% if tags %}
+            <div class="blog-post-tags">
+                {% for tag in tags %}
+                    {% if tag != "post" %}
+                    <span class="blog-tag">{{ tag }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Post Body -->
+    <div class="blog-post-body">
+        {{ content | safe }}
+    </div>
+
+    <!-- Post Footer -->
+    <footer class="blog-post-footer">
+        <!-- Discord Discussion -->
+        {% if discordChannelId %}
+        <div class="blog-discord-section">
+            <div class="blog-discord-inner">
+                <svg viewBox="0 0 24 24" width="32" height="32" class="blog-discord-icon">
+                    <path fill="currentColor" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/>
+                </svg>
+                <h3>Discuss This Post</h3>
+                <p>Share your thoughts, ask questions, or respond to others in our Discord community.</p>
+                <div class="blog-discord-buttons">
+                    <a href="https://discord.com/channels/1463830471526846653/{{ discordChannelId }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn btn-primary">
+                        Join the Discussion
+                    </a>
+                    <a href="https://discord.gg/tNwADDjTRV"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn btn-outline-gold">
+                        Join Our Discord Server
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Post Navigation -->
+        {% set newerPost = collections.posts | getPreviousCollectionItem(page) %}
+        {% set olderPost = collections.posts | getNextCollectionItem(page) %}
+
+        {% if newerPost or olderPost %}
+        <nav class="blog-post-nav" aria-label="Post navigation">
+            {% if olderPost %}
+            <a href="{{ olderPost.url }}" class="blog-nav-link blog-nav-prev">
+                <span class="blog-nav-label">&larr; Older</span>
+                <span class="blog-nav-title">{{ olderPost.data.title }}</span>
+            </a>
+            {% else %}
+            <span></span>
+            {% endif %}
+
+            {% if newerPost %}
+            <a href="{{ newerPost.url }}" class="blog-nav-link blog-nav-next">
+                <span class="blog-nav-label">Newer &rarr;</span>
+                <span class="blog-nav-title">{{ newerPost.data.title }}</span>
+            </a>
+            {% endif %}
+        </nav>
+        {% endif %}
+
+        <!-- Subscribe CTA -->
+        <div class="blog-subscribe-cta">
+            <h3>Stay Connected</h3>
+            <p>Receive chapter announcements, ministry updates, and devotional insights delivered to your inbox.</p>
+            <form class="newsletter-form" id="blogNewsletterForm">
+                <div class="newsletter-fields">
+                    <input type="text" name="name" class="newsletter-input" id="blogNlName" placeholder="Your name" aria-label="Your name">
+                    <input type="email" name="email" class="newsletter-input" id="blogNlEmail" placeholder="Your email address" required aria-label="Email address">
+                    <button type="submit" class="newsletter-btn" id="blogNlSubmit">Subscribe</button>
+                </div>
+                <small class="newsletter-field-error hidden" data-nl-error="email"></small>
+                <small class="newsletter-field-error hidden" data-nl-error="name"></small>
+            </form>
+            <div class="newsletter-message hidden" id="blogNlMessage"></div>
+        </div>
+    </footer>
+</article>
+{% endblock %}
