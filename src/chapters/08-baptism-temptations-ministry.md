@@ -24,7 +24,7 @@ audio:
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>
-  <p>A voice came crying from the wilderness edge<br>
+  <p class="verse">A voice came crying from the wilderness edge<br>
   Prepare His way, His hour has nearly come<br>
   He walked south from the hills of Galilee<br>
   To stand where four thousand years of promise led<br>
@@ -35,13 +35,13 @@ lyrics: |
   I am well pleased with Him today</p>
 
   <p class="section"><strong>[Chorus]</strong></p>
-  <p><em>He could have had anything He desired<br>
+  <p class="chorus"><em>He could have had anything He desired<br>
   Instead He gave everything for those He loves<br>
   Into the water, into the wilderness<br>
   He was prepared in all things for us</em></p>
 
   <p class="section"><strong>[Verse 2]</strong></p>
-  <p>Forty days with nothing but silence and hunger<br>
+  <p class="verse">Forty days with nothing but silence and hunger<br>
   A voice hissed doubt, tempting self service and pride<br>
   Are you who you think you are<br>
   Then prove it, take the shortcut<br>
@@ -53,13 +53,13 @@ lyrics: |
   Who came for sacrifice, not imitation of it</p>
 
   <p class="section"><strong>[Chorus]</strong></p>
-  <p><em>He could have had anything He desired<br>
+  <p class="chorus"><em>He could have had anything He desired<br>
   Instead He gave everything for those He loves<br>
   Into the water, into the wilderness<br>
   He was prepared in all things for us</em></p>
 
   <p class="section"><strong>[Verse 3]</strong></p>
-  <p>He returned in the power of the Spirit<br>
+  <p class="verse">He returned in the power of the Spirit<br>
   Not only surviving, strengthened<br>
   He stood in the room where He had grown up<br>
   And told them what they were looking at<br>
@@ -67,7 +67,7 @@ lyrics: |
   Is fulfilled in your hearing</p>
 
   <p class="section"><strong>[Final Chorus]</strong></p>
-  <p><em>He could have had anything He desired<br>
+  <p class="chorus"><em>He could have had anything He desired<br>
   Instead He gave everything for those He loves<br>
   Into the water, into the wilderness<br>
   He was prepared in all things for us<br>

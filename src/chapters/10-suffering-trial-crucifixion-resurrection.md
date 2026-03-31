@@ -27,34 +27,34 @@ audio:
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>
-  <p>I — have worn too many names.<br>
+  <p class="verse">I — have worn too many names.<br>
   Tried to find the one that fits.<br>
   Identified myself by what I've done.<br>
   Cared what the world thinks.</p>
 
-  <p>Afraid to come up empty.<br>
+  <p class="verse">Afraid to come up empty.<br>
   Afraid to leave no mark.<br>
   Traded everything I was.<br>
   Trying to find out who I am.</p>
 
   <p class="section"><strong>[Verse 2]</strong></p>
-  <p>But in the garden in the dark.<br>
+  <p class="verse">But in the garden in the dark.<br>
   He — didn't come to teach or speak.<br>
   Christ — measured the full weight of me.<br>
   Every sorrow, every dream.</p>
 
-  <p>Every shame I've carried quietly.<br>
+  <p class="verse">Every shame I've carried quietly.<br>
   Every hope I couldn't name.<br>
   He felt it all from the inside.<br>
   And — He didn't turn away.</p>
 
   <p class="section"><strong>[Chorus]</strong></p>
-  <p><em>You always knew me.<br>
+  <p class="chorus"><em>You always knew me.<br>
   Before I knew myself.<br>
   You didn't wait for me to find you.<br>
   You came to know me first, earn my trust.</em></p>
 
-  <p><em>I am a child of God.<br>
+  <p class="chorus"><em>I am a child of God.<br>
   That's who I've always been.<br>
   I don't have to search anymore.<br>
   I'm already known.<br>
@@ -62,42 +62,42 @@ lyrics: |
   I've found my heavenly home.</em></p>
 
   <p class="section"><strong>[Verse 3]</strong></p>
-  <p>He — didn't stay dead, He lives<br>
+  <p class="verse">He — didn't stay dead, He lives<br>
   That's the thing that makes it real.<br>
   He — rose and works among the faithful still.<br>
   Not a memory.<br>
   Not just an ideal.</p>
 
-  <p>All that time I spent on fear.<br>
+  <p class="verse">All that time I spent on fear.<br>
   All that searching, all that weight.<br>
   Now I set it free — and I'll use it well.<br>
   On something worth my days.</p>
 
   <p class="section"><strong>[Bridge]</strong></p>
-  <p><em>Not just a teacher.<br>
+  <p class="verse"><em>Not just a teacher.<br>
   Not just a death.<br>
   He used the power of Creation.<br>
   To know me first.</em></p>
 
-  <p><em>And knowing me completely.<br>
+  <p class="verse"><em>And knowing me completely.<br>
   He thought I was worth His life.<br>
   He thought you were worth it, too.<br>
   He still does.</em></p>
 
   <p class="section"><strong>[Final Chorus]</strong></p>
-  <p><em>You always knew me.<br>
+  <p class="chorus"><em>You always knew me.<br>
   Before I knew myself.<br>
   You didn't wait for me to find you.<br>
   You came to know me first, earn my trust.</em></p>
 
-  <p><em>I am a child of God, and so are you.<br>
+  <p class="chorus"><em>I am a child of God, and so are you.<br>
   You don't have to search anymore.<br>
   You're already known.<br>
   You're already loved.<br>
   Welcome home...</em></p>
 
   <p class="section"><strong>[Outro]</strong></p>
-  <p><em>The search is over it was always over.<br>
+  <p class="verse"><em>The search is over it was always over.<br>
   He just wanted you to know.<br>
   In the name of Jesus Christ.<br>
   Amen.</em></p>

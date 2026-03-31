@@ -28,7 +28,7 @@ audio:
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>
-  <p>Before the morning star was named,<br>
+  <p class="verse">Before the morning star was named,<br>
   before the covenant was sealed,<br>
   a lamb laid on an altar stone<br>
   and heaven began to say:<br>
@@ -37,7 +37,7 @@ lyrics: |
   Wait on the Lord — hold on.</p>
 
   <p class="section"><strong>[Verse 2]</strong></p>
-  <p>You have carried promises too —<br>
+  <p class="verse">You have carried promises too —<br>
   through silence and through wondering years.<br>
   Those who hope and quietly wait<br>
   are not forgotten — they are carried.<br>
@@ -49,7 +49,7 @@ lyrics: |
   Wait on the Lord — we will hold on.</p>
 
   <p class="section"><strong>[Chorus]</strong></p>
-  <p><em>Mary said yes to what she could not see<br>
+  <p class="chorus"><em>Mary said yes to what she could not see<br>
   and treasured all she could not understand.<br>
   Joseph said yes to what he did not know —<br>
   heaven placed in mortal hands.<br>
@@ -62,7 +62,7 @@ lyrics: |
   Ponder these things in your heart.</em></p>
 
   <p class="section"><strong>[Verse 3]</strong></p>
-  <p>You have your own unspoken years,<br>
+  <p class="verse">You have your own unspoken years,<br>
   your own familiar bench and trade —<br>
   ordinary days of faithful living,<br>
   the hidden years inside His plan.<br>
@@ -72,7 +72,7 @@ lyrics: |
   in every quiet, steady span.</p>
 
   <p class="section"><strong>[Chorus]</strong></p>
-  <p><em>Mary said yes to what she could not see<br>
+  <p class="chorus"><em>Mary said yes to what she could not see<br>
   and treasured all she could not understand.<br>
   Joseph said yes to what he did not know —<br>
   heaven placed in mortal hands.<br>
@@ -85,7 +85,7 @@ lyrics: |
   Ponder these things in your heart.</em></p>
 
   <p class="section"><strong>[Bridge]</strong></p>
-  <p>And when the time has come for you to leave<br>
+  <p class="verse">And when the time has come for you to leave<br>
   the workbench and the road you know,<br>
   trust in the Lord with all your heart —<br>
   lean not on what you think you see.<br>
@@ -95,7 +95,7 @@ lyrics: |
   this is the word He speaks to you right here.</p>
 
   <p class="section"><strong>[Final Chorus]</strong></p>
-  <p><em>He said yes before the world began.<br>
+  <p class="chorus"><em>He said yes before the world began.<br>
   She said yes in a Galilean town.<br>
   And you — can say yes today,<br>
   as all His promises come down.<br>
@@ -105,7 +105,7 @@ lyrics: |
   and nothing faithful will be small.</em></p>
 
   <p class="section"><strong>[Outro]</strong></p>
-  <p><em>Wait on the Lord.<br>
+  <p class="verse"><em>Wait on the Lord.<br>
   Be of good courage.<br>
   He kept His word.<br>
   Wait on the Lord.<br>
