@@ -97,6 +97,21 @@ module.exports = async (req, res) => {
 };
 
 /**
+ * Decode common HTML/XML entities in RSS content.
+ */
+function decodeEntities(str) {
+  if (!str) return str;
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#39;/g, "'")
+    .replace(/&#x27;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'");
+}
+
+/**
  * Parse the newest <entry> from an Atom feed XML string.
  * Uses simple string parsing — no external dependencies.
  */
@@ -115,7 +130,13 @@ function parseNewestEntry(xml) {
   const linkMatch = entry.match(/<link\s+href="([^"]+)"/);
   const url = linkMatch ? linkMatch[1] : null;
 
-  return { title, url, summary, published, author };
+  return {
+    title: decodeEntities(title),
+    url,
+    summary: decodeEntities(summary),
+    published,
+    author: decodeEntities(author)
+  };
 }
 
 function extractTag(xml, tag) {
