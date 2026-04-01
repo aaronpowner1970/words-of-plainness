@@ -83,6 +83,8 @@ nextChapter:
   url: "/chapters/12-beatitudes/"
   title: "Chapter 12: The Beatitudes"
 
+discordChannelId: "1481807993849909299"
+
 toc:
   - id: he-is-not-gone
     title: He Is Not Gone
