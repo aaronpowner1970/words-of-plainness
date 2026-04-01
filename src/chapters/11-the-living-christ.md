@@ -14,6 +14,7 @@ readingTime: 18
 
 audio:
   narration: NR_11_1_The_Living_Christ.mp3
+  overview: PO_11_01_The_Living_Christ.mp3
   testimony:
     file: "11_01_Panteles_Sacred_Ballad.mp3"
     title: "Panteles"
