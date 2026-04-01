@@ -4,6 +4,8 @@ date: 2026-03-31
 author: "Brother Aaron"
 description: "A word of welcome from the author—what this ministry is, what you'll find here, and why it exists."
 tags: ["community", "announcement", "welcome"]
+type: "article"
+image: ""
 layout: layouts/post.njk
 discordChannelId: "1488676127995334818"
 ---
