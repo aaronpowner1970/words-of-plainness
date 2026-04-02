@@ -2,11 +2,148 @@
 layout: layouts/page.njk
 title: Connect
 pageTitle: Connect
-pageSubtitle: "Community & Conversation"
+pageSubtitle: "Community, Tools & Conversation"
 permalink: /connect/
 ---
 
-<!-- Chat Threads / Discord -->
+<style>
+/* ── Connect Page TOC ── */
+.connect-toc {
+    max-width: 680px;
+    margin: 0 auto 2.5rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(42, 29, 20, 0.4);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-radius: var(--radius-lg, 12px);
+}
+.connect-toc-title {
+    font-family: var(--font-heading, 'Cinzel', serif);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold-primary, #C4943A);
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
+}
+.connect-toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.25rem;
+}
+.connect-toc-list li {
+    line-height: 1.6;
+}
+.connect-toc-list a {
+    color: var(--gold-primary, #C4943A);
+    text-decoration: none;
+    font-size: 0.92rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.25);
+    transition: color 0.2s, border-color 0.2s;
+}
+.connect-toc-list a:hover {
+    color: var(--gold-light, #D4A84A);
+    border-color: var(--gold-light, #D4A84A);
+}
+
+/* ── Intro Card (Posts & Discipleship) ── */
+.connect-intro-card {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(42, 29, 20, 0.35);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-radius: var(--radius-lg, 12px);
+    max-width: 600px;
+}
+.connect-intro-card h3 {
+    color: var(--cream, #E8DCC4);
+    margin-bottom: 0.75rem;
+}
+.connect-intro-card p {
+    margin-bottom: 1rem;
+}
+.connect-intro-card .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+</style>
+
+<!-- ═══════════ TABLE OF CONTENTS ═══════════ -->
+
+<div class="connect-toc">
+    <div class="connect-toc-title">On This Page</div>
+    <ul class="connect-toc-list">
+        <li><a href="#guidelines">Community Guidelines</a></li>
+        <li><a href="#posts">Posts</a></li>
+        <li><a href="#discord">Discord</a></li>
+        <li><a href="#discipleship">Discipleship Apps</a></li>
+        <li><a href="#newsletter">Newsletter</a></li>
+        <li><a href="#prayer">Prayer &amp; Reflection</a></li>
+        <li><a href="#contact">Contact Brother Aaron</a></li>
+        <li><a href="#testimonials">Visitor Stories</a></li>
+    </ul>
+</div>
+
+<!-- ═══════════ 1. COMMUNITY GUIDELINES ═══════════ -->
+
+<section class="content-section" id="guidelines">
+    <div class="content-wrapper">
+        <h2>Community Guidelines</h2>
+
+        <div class="feature-card" style="margin-top: 1.25rem; border-left: 3px solid var(--gold-primary);">
+            <p>
+                Words of Plainness is a space for honest seekers and committed disciples. We ask
+                everyone&mdash;on the website and in Discord&mdash;to abide by the same principles:
+            </p>
+            <ul style="margin: 0.75rem 0 0.75rem 1.25rem; line-height: 1.8;">
+                <li><strong>Respectful dialogue.</strong> Disagree with ideas, never with contempt for people.</li>
+                <li><strong>Honest questions welcome.</strong> Doubt and seeking are not disqualifying&mdash;they are the starting point of faith.</li>
+                <li><strong>No harassment, threats, or personal attacks.</strong> Ever, toward anyone.</li>
+                <li><strong>No content that demeans or exploits.</strong> This includes sexual content, hate speech, and content targeting vulnerable people.</li>
+                <li><strong>Transparent moderation.</strong> All community content is reviewed. Reported concerns are handled with care, and reporter identity is never disclosed.</li>
+            </ul>
+            <p style="margin-top: 0.75rem;">
+                <a href="/community-guidelines/" class="text-gold">Read the full Community Guidelines &rarr;</a>
+            </p>
+            <p style="margin-top: 0.75rem; font-size: 0.9rem; opacity: 0.8;">
+                To report a concern&mdash;on the website or in Discord&mdash;use the
+                <a href="/safety/" class="text-gold">Safety &amp; Support</a> page or contact
+                <a href="#contact" class="text-gold">Brother Aaron</a> directly.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ 2. POSTS ═══════════ -->
+
+<section class="content-section alt" id="posts">
+    <div class="content-wrapper">
+        <h2>Posts</h2>
+
+        <p>
+            Updates, reflections, and news from the Words of Plainness ministry. These are
+            personal writings from Brother Aaron&mdash;thoughts from the road, ministry
+            milestones, and occasional meditations that don&rsquo;t fit neatly into the
+            chapter format.
+        </p>
+
+        <div class="connect-intro-card">
+            <h3>Ministry Blog</h3>
+            <p>
+                Read the latest posts, announcements, and personal reflections from the ministry.
+            </p>
+            <a href="/posts/" class="btn btn-primary">
+                View All Posts &rarr;
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ 3. DISCORD ═══════════ -->
+
 <section class="content-section" id="discord">
     <div class="content-wrapper">
         <h2>Discord Community</h2>
@@ -59,35 +196,37 @@ permalink: /connect/
                 </p>
             </div>
         </div>
+    </div>
+</section>
 
-        <!-- Community guidelines summary -->
-        <div class="feature-card" style="margin-top: 1.25rem; border-left: 3px solid var(--gold-primary);">
-            <h3 style="margin-bottom: 0.75rem;">Community Guidelines</h3>
+<!-- ═══════════ 4. DISCIPLESHIP APPS ═══════════ -->
+
+<section class="content-section alt" id="discipleship">
+    <div class="content-wrapper">
+        <h2>Discipleship Apps</h2>
+
+        <p>
+            Discipleship is faith in action&mdash;not earning salvation through works, but expressing
+            love through living. These tools are designed to support your daily walk with Christ,
+            helping you engage intentionally with His teachings and covenants.
+        </p>
+
+        <div class="connect-intro-card">
+            <h3>Tools for Daily Faith</h3>
             <p>
-                Words of Plainness is a space for honest seekers and committed disciples. We ask
-                everyone&mdash;on the website and in Discord&mdash;to abide by the same principles:
+                Explore the Keep My Commandments daily discipleship tracker, Christ&rsquo;s Teachings
+                study tool, and scripture resources to support your personal walk with Christ.
             </p>
-            <ul style="margin: 0.75rem 0 0.75rem 1.25rem; line-height: 1.8;">
-                <li><strong>Respectful dialogue.</strong> Disagree with ideas, never with contempt for people.</li>
-                <li><strong>Honest questions welcome.</strong> Doubt and seeking are not disqualifying&mdash;they are the starting point of faith.</li>
-                <li><strong>No harassment, threats, or personal attacks.</strong> Ever, toward anyone.</li>
-                <li><strong>No content that demeans or exploits.</strong> This includes sexual content, hate speech, and content targeting vulnerable people.</li>
-                <li><strong>Transparent moderation.</strong> All community content is reviewed. Reported concerns are handled with care, and reporter identity is never disclosed.</li>
-            </ul>
-            <p style="margin-top: 0.75rem;">
-                <a href="/community-guidelines/" class="text-gold">Read the full Community Guidelines &rarr;</a>
-            </p>
-            <p style="margin-top: 0.75rem; font-size: 0.9rem; opacity: 0.8;">
-                To report a concern&mdash;on the website or in Discord&mdash;use the
-                <a href="/safety/" class="text-gold">Safety &amp; Support</a> page or contact
-                <a href="#contact" class="text-gold">Brother Aaron</a> directly.
-            </p>
+            <a href="/discipleship/" class="btn btn-primary">
+                Explore Discipleship Apps &rarr;
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Newsletter -->
-<section class="content-section alt" id="newsletter">
+<!-- ═══════════ 5. NEWSLETTER ═══════════ -->
+
+<section class="content-section" id="newsletter">
     <div class="content-wrapper">
         <h2>Newsletter</h2>
 
@@ -118,8 +257,9 @@ permalink: /connect/
     </div>
 </section>
 
-<!-- Prayer Requests -->
-<section class="content-section" id="prayer">
+<!-- ═══════════ 6. PRAYER & REFLECTION ═══════════ -->
+
+<section class="content-section alt" id="prayer">
     <div class="content-wrapper">
         <h2>Prayer &amp; Reflection Requests</h2>
 
@@ -157,8 +297,9 @@ permalink: /connect/
     </div>
 </section>
 
-<!-- Contact -->
-<section class="content-section alt" id="contact">
+<!-- ═══════════ 7. CONTACT BROTHER AARON ═══════════ -->
+
+<section class="content-section" id="contact">
     <div class="content-wrapper">
         <h2>Contact Brother Aaron</h2>
 
@@ -222,8 +363,9 @@ permalink: /connect/
     </div>
 </section>
 
-<!-- Testimonials -->
-<section class="content-section" id="testimonials">
+<!-- ═══════════ 8. VISITOR STORIES ═══════════ -->
+
+<section class="content-section alt" id="testimonials">
     <div class="content-wrapper">
         <h2>Visitor Stories</h2>
 
