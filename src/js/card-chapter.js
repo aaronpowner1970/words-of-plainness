@@ -270,16 +270,55 @@
 
     document.addEventListener('DOMContentLoaded', restoreSavedState);
 
-    // ---- Learning Tools Accordion ----
-    var ccLtToggle = document.getElementById('ccLtToggle');
-    var ccLtPanel = document.getElementById('ccLtPanel');
-    if (ccLtToggle && ccLtPanel) {
-        ccLtToggle.addEventListener('click', function () {
-            var expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !expanded);
-            ccLtPanel.hidden = expanded;
+    // ---- Learning Tools Dropdowns (top + bottom) ----
+    var dropdownBtn = document.getElementById('btnLearningTools');
+    var dropdown = document.getElementById('featuresDropdown');
+    var bottomBtn = document.getElementById('btnLearningToolsBottom');
+    var bottomDropdown = document.getElementById('bottomFeaturesDropdown');
+
+    if (dropdownBtn && dropdown) {
+        dropdownBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (bottomDropdown) bottomDropdown.classList.remove('open');
+            dropdown.classList.toggle('open');
         });
     }
+
+    if (bottomBtn && bottomDropdown) {
+        bottomBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (dropdown) dropdown.classList.remove('open');
+            bottomDropdown.classList.toggle('open');
+        });
+    }
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', function () {
+        if (dropdown) dropdown.classList.remove('open');
+        if (bottomDropdown) bottomDropdown.classList.remove('open');
+    });
+
+    // Handle data-action items in both dropdowns
+    function handleCcAction(action) {
+        switch (action) {
+            case 'cc-testimony':
+                openCcModal('ccTestimonyModal');
+                break;
+            case 'cc-infographic':
+                openCcModal('ccInfographicModal');
+                break;
+        }
+    }
+
+    [dropdown, bottomDropdown].forEach(function (dd) {
+        if (!dd) return;
+        dd.querySelectorAll('[data-action]').forEach(function (item) {
+            item.addEventListener('click', function () {
+                handleCcAction(this.dataset.action);
+                dd.classList.remove('open');
+            });
+        });
+    });
 })();
 
 // ============================================================
