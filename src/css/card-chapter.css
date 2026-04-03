@@ -786,6 +786,52 @@
     border-radius: 8px;
 }
 
+/* Fullscreen toggle button */
+.cc-modal-fullscreen-toggle {
+    background: none;
+    border: none;
+    color: var(--gold-primary, #C4943A);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.cc-modal-fullscreen-toggle:hover {
+    opacity: 0.7;
+}
+
+.cc-modal-fullscreen-toggle .icon-collapse {
+    display: none;
+}
+
+.cc-modal.fullscreen .cc-modal-fullscreen-toggle .icon-expand {
+    display: none;
+}
+
+.cc-modal.fullscreen .cc-modal-fullscreen-toggle .icon-collapse {
+    display: block;
+}
+
+/* Fullscreen modal state */
+.cc-modal.fullscreen {
+    max-width: 100%;
+    width: 100%;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    transform: none;
+}
+
+.cc-modal.fullscreen .cc-infographic-img {
+    max-height: calc(100vh - 4rem);
+    object-fit: contain;
+}
+
 /* Slide Carousel */
 .cc-slide-container {
     text-align: center;

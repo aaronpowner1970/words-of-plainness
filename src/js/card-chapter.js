@@ -335,7 +335,7 @@ function openCcModal(id) {
 
 function closeCcModals() {
     document.querySelectorAll('.cc-modal').forEach(function (m) {
-        m.classList.remove('open');
+        m.classList.remove('open', 'fullscreen');
     });
     var backdrop = document.getElementById('ccModalBackdrop');
     if (backdrop) backdrop.classList.remove('visible');
@@ -356,6 +356,14 @@ function closeCcModals() {
         if (e.key === 'Escape' && document.querySelector('.cc-modal.open')) {
             closeCcModals();
         }
+    });
+
+    // Fullscreen toggle
+    document.querySelectorAll('[data-cc-fullscreen]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var modal = this.closest('.cc-modal');
+            if (modal) modal.classList.toggle('fullscreen');
+        });
     });
 })();
 
