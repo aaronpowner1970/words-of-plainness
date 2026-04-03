@@ -755,18 +755,23 @@
     font-size: 0.9rem;
     line-height: 1.8;
     color: rgba(232, 220, 196, 0.85);
-    white-space: pre-line;
-    margin: 0 0 1rem;
+    margin: 0 0 0.25rem;
 }
 .cc-lyrics-content .section {
     margin-top: 1.5em;
+    margin-bottom: 0.25em;
     color: var(--gold-primary, #C4943A);
+}
+.cc-lyrics-content .section:first-child {
+    margin-top: 0;
 }
 .cc-lyrics-content .verse {
     margin-bottom: 1em;
 }
 .cc-lyrics-content .chorus {
     font-weight: 500;
+    font-style: italic;
+    margin-bottom: 1em;
 }
 .cc-lyrics-content hr {
     border: none;
@@ -775,7 +780,6 @@
     width: 40%;
 }
 .cc-lyrics-content em {
-    color: var(--gold-primary, #C4943A);
     font-style: italic;
 }
 
