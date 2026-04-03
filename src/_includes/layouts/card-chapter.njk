@@ -308,11 +308,10 @@
             Your browser does not support the audio element.
         </audio>
         {% if lyrics %}
-        {% set lyricsPath = "lyrics/chapter-" + chapterId + ".njk" %}
         <details class="cc-lyrics-toggle">
             <summary>View Lyrics</summary>
             <div class="cc-lyrics-content">
-                {% include lyricsPath %}
+                {{ lyrics | safe }}
             </div>
         </details>
         {% endif %}
