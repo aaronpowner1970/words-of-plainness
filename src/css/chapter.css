@@ -2935,6 +2935,51 @@ h2[id], h3[id], [id^="section-"] {
     opacity: 0.7;
 }
 
+/* Fullscreen toggle button */
+.modal-fullscreen-toggle {
+    background: none;
+    border: none;
+    color: var(--gold-primary);
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.modal-fullscreen-toggle:hover {
+    opacity: 0.7;
+}
+
+.modal-fullscreen-toggle .icon-collapse {
+    display: none;
+}
+
+.modal.fullscreen .modal-fullscreen-toggle .icon-expand {
+    display: none;
+}
+
+.modal.fullscreen .modal-fullscreen-toggle .icon-collapse {
+    display: block;
+}
+
+/* Fullscreen modal state */
+.modal.fullscreen {
+    max-width: 100%;
+    width: 100%;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    transform: none;
+}
+
+.modal.fullscreen .infographic-body .modal-image {
+    max-height: calc(100vh - 4rem);
+}
+
 /* ═══════════════════════════════════════════════
    REFLECT · JOURNAL · WITNESS — PAUSE-POINT SYSTEM
    ═══════════════════════════════════════════════ */

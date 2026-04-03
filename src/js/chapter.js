@@ -479,6 +479,14 @@ const ChapterManager = {
             }
         });
         
+        // Fullscreen toggle
+        document.querySelectorAll('[data-modal-fullscreen]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('.modal');
+                if (modal) modal.classList.toggle('fullscreen');
+            });
+        });
+
         // Resource cards
         document.querySelectorAll('[data-modal]').forEach(card => {
             card.addEventListener('click', () => {
@@ -507,7 +515,7 @@ const ChapterManager = {
         }
 
         document.querySelectorAll('.modal').forEach(modal => {
-            modal.classList.remove('open');
+            modal.classList.remove('open', 'fullscreen');
         });
         document.getElementById('modalBackdrop')?.classList.remove('visible');
         document.body.style.overflow = '';
