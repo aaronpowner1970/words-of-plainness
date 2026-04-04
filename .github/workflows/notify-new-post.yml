@@ -1,0 +1,35 @@
+name: Notify New Post
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/posts/**.md'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel deploy
+        run: sleep 120
+
+      - name: Trigger notification pipeline
+        env:
+          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+          SITE_URL: https://www.wordsofplainness.org
+        run: |
+          response=$(curl -s -w "\n%{http_code}" \
+            -X POST \
+            -H "Authorization: Bearer $NOTIFY_SECRET" \
+            "$SITE_URL/api/post-deploy-notify")
+          
+          http_code=$(echo "$response" | tail -1)
+          body=$(echo "$response" | head -n -1)
+          
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+          
+          if [ "$http_code" -ge 400 ]; then
+            echo "::error::Notification failed with HTTP $http_code"
+            exit 1
+          fi

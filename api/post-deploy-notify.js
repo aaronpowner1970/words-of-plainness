@@ -1,16 +1,18 @@
 /**
- * Words of Plainness — Combined Post Distribution Notifier
+ * Words of Plainness — Post-Deploy Auto-Notification
  *
  * Vercel Serverless Function
- * Fetches the Atom RSS feed ONCE, finds the newest post,
- * and distributes to all configured platforms in parallel:
- *   Discord (forum thread), X/Twitter (tweet), Facebook (page post).
+ * Called by GitHub Action after each successful deployment that includes
+ * a new post in src/posts/. Fetches the Atom feed, compares the newest
+ * entry against a stored "last notified" marker in the Django backend,
+ * and fires the distribution pipeline only if there is a genuinely new post.
  *
- * Trigger: POST /api/notify-all
+ * Trigger: POST /api/post-deploy-notify
  * Auth: Bearer token matching NOTIFY_SECRET env var
  *
  * Environment variables required:
  *   NOTIFY_SECRET — shared secret for endpoint authentication
+ *   DJANGO_API_URL — base URL for Django API (e.g. https://apowner.pythonanywhere.com)
  *   DISCORD_WEBHOOK_URL — Discord webhook URL for #blog-discussions forum
  *   X_API_KEY — OAuth consumer key
  *   X_API_SECRET — OAuth consumer secret
@@ -23,20 +25,25 @@
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
-  // Only accept POST
-  if (req.method !== 'POST') {
+  // Accept both POST (GitHub Action) and GET (manual browser test)
+  if (req.method !== 'POST' && req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Verify auth token
+  // Verify auth token (header or query param)
   const authHeader = req.headers.authorization || '';
   const token = authHeader.replace('Bearer ', '');
-  if (!token || token !== process.env.NOTIFY_SECRET) {
+  const queryToken = req.query?.token;
+  const authToken = token || queryToken;
+
+  if (!authToken || authToken !== process.env.NOTIFY_SECRET) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
+  const djangoBase = process.env.DJANGO_API_URL || 'https://apowner.pythonanywhere.com';
+
   try {
-    // Fetch the live RSS feed ONCE
+    // ── Step 1: Fetch the live Atom feed ──────────────────────────────────
     const feedUrl = 'https://www.wordsofplainness.org/posts/feed.xml';
     const feedResponse = await fetch(feedUrl);
     if (!feedResponse.ok) {
@@ -44,28 +51,74 @@ module.exports = async (req, res) => {
     }
     const feedXml = await feedResponse.text();
 
-    // Parse the newest entry from Atom feed
     const entry = parseNewestEntry(feedXml);
     if (!entry) {
-      return res.status(404).json({ error: 'No entries found in feed' });
+      return res.status(200).json({ action: 'none', reason: 'No entries found in feed' });
     }
 
-    // Fire all platforms in parallel
+    // ── Step 2: Check the last-notified marker ────────────────────────────
+    let lastNotifiedUrl = null;
+    try {
+      const markerResponse = await fetch(`${djangoBase}/api/v1/last-notified/`);
+      if (markerResponse.ok) {
+        const markerData = await markerResponse.json();
+        lastNotifiedUrl = markerData.post_url || null;
+      }
+    } catch (markerErr) {
+      // If Django is unreachable, skip to avoid duplicates
+      console.error('Failed to reach last-notified endpoint:', markerErr.message);
+      return res.status(200).json({
+        action: 'skipped',
+        reason: 'Could not reach Django last-notified endpoint — skipping to avoid duplicates',
+        error: markerErr.message
+      });
+    }
+
+    // ── Step 3: Compare ───────────────────────────────────────────────────
+    if (entry.url === lastNotifiedUrl) {
+      return res.status(200).json({
+        action: 'none',
+        reason: 'Newest post already notified',
+        post: entry.title,
+        url: entry.url
+      });
+    }
+
+    // ── Step 4: New post detected — fire notifications ────────────────────
     const [discordResult, xResult, facebookResult] = await Promise.allSettled([
       sendDiscord(entry),
       sendX(entry),
       sendFacebook(entry)
     ]);
 
+    const results = {
+      discord: unwrapResult(discordResult),
+      x: unwrapResult(xResult),
+      facebook: unwrapResult(facebookResult)
+    };
+
+    // ── Step 5: Update the last-notified marker ───────────────────────────
+    try {
+      await fetch(`${djangoBase}/api/v1/last-notified/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NOTIFY_SECRET}`
+        },
+        body: JSON.stringify({
+          post_url: entry.url,
+          post_title: entry.title
+        })
+      });
+    } catch (updateErr) {
+      console.error('Failed to update last-notified marker:', updateErr.message);
+    }
+
     return res.status(200).json({
-      success: true,
+      action: 'notified',
       post: entry.title,
       url: entry.url,
-      results: {
-        discord: unwrapResult(discordResult),
-        x: unwrapResult(xResult),
-        facebook: unwrapResult(facebookResult)
-      }
+      results
     });
 
   } catch (err) {
@@ -73,9 +126,8 @@ module.exports = async (req, res) => {
   }
 };
 
-/**
- * Unwrap a Promise.allSettled result into a status object.
- */
+// ─── Result unwrapper ─────────────────────────────────────────────────────────
+
 function unwrapResult(settled) {
   if (settled.status === 'fulfilled') return settled.value;
   return { status: 'error', detail: settled.reason?.message || String(settled.reason) };
@@ -93,13 +145,9 @@ async function sendDiscord(entry) {
     title: entry.title,
     url: entry.url,
     description: entry.summary || 'A new post has been published on Words of Plainness.',
-    color: 0xC4943A,  // WoP gold
-    author: {
-      name: entry.author || 'Brother Aaron'
-    },
-    footer: {
-      text: 'Words of Plainness'
-    },
+    color: 0xC4943A,
+    author: { name: entry.author || 'Brother Aaron' },
+    footer: { text: 'Words of Plainness' },
     timestamp: entry.published || new Date().toISOString()
   };
 
@@ -159,12 +207,6 @@ async function sendX(entry) {
   return { status: 'sent', detail: `Tweet ID: ${result.data?.id}` };
 }
 
-/**
- * Compose tweet text from an RSS entry.
- * - Thought type (summary < 200 chars): full summary + signature
- * - Article type: title + excerpt + URL
- * Total must stay under 280 chars.
- */
 function composeTweet(entry) {
   const signature = '\n\n\u2014 Brother Aaron';
 
@@ -187,9 +229,6 @@ function composeTweet(entry) {
   return entry.title + '\n\n' + url;
 }
 
-/**
- * Build OAuth 1.0a Authorization header for X API v2.
- */
 function buildOAuthHeader(method, url, consumerKey, consumerSecret, tokenKey, tokenSecret) {
   const oauthParams = {
     oauth_consumer_key: consumerKey,
@@ -227,9 +266,6 @@ function buildOAuthHeader(method, url, consumerKey, consumerSecret, tokenKey, to
   return 'OAuth ' + headerString;
 }
 
-/**
- * Percent-encode a string per RFC 3986.
- */
 function percentEncode(str) {
   return encodeURIComponent(str)
     .replace(/!/g, '%21')
@@ -255,20 +291,13 @@ async function sendFacebook(entry) {
 
   if (isThought) {
     message = `${entry.summary}\n\n— Brother Aaron\nwordsofplainness.org`;
-    fbBody = {
-      message,
-      access_token: pageToken
-    };
+    fbBody = { message, access_token: pageToken };
   } else {
     const excerpt = entry.summary
       ? entry.summary.substring(0, 200) + '...'
       : 'A new post has been published.';
     message = `${entry.title}\n\n${excerpt}\n\nRead more at Words of Plainness`;
-    fbBody = {
-      message,
-      link: entry.url,
-      access_token: pageToken
-    };
+    fbBody = { message, link: entry.url, access_token: pageToken };
   }
 
   const fbUrl = `https://graph.facebook.com/v19.0/${pageId}/feed`;
@@ -289,9 +318,6 @@ async function sendFacebook(entry) {
 
 // ─── Shared RSS helpers ───────────────────────────────────────────────────────
 
-/**
- * Decode common HTML/XML entities in RSS content.
- */
 function decodeEntities(str) {
   if (!str) return str;
   return str
@@ -304,10 +330,6 @@ function decodeEntities(str) {
     .replace(/&apos;/g, "'");
 }
 
-/**
- * Parse the newest <entry> from an Atom feed XML string.
- * Uses simple string parsing — no external dependencies.
- */
 function parseNewestEntry(xml) {
   const entryMatch = xml.match(/<entry>([\s\S]*?)<\/entry>/);
   if (!entryMatch) return null;
