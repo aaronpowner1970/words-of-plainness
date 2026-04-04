@@ -12,6 +12,11 @@ const Newsletter = {
     forms: [],
 
     init() {
+        // Set page-load timestamp on all newsletter forms for anti-bot timing check
+        document.querySelectorAll('.newsletter-form input[name="loaded_at"]').forEach(input => {
+            input.value = Date.now().toString();
+        });
+
         document.querySelectorAll('.newsletter-form').forEach(form => {
             this.setupForm(form);
         });
@@ -74,6 +79,12 @@ const Newsletter = {
         try {
             const data = { email };
             if (name) data.name = name;
+
+            // Anti-bot fields — server validates these silently
+            const hpField = form.querySelector('input[name="website"]');
+            if (hpField) data.website = hpField.value;
+            const tsField = form.querySelector('input[name="loaded_at"]');
+            if (tsField) data.loaded_at = tsField.value;
 
             const result = await window.API.subscribeNewsletter(data);
             this.showSuccess(form, result.message || 'Thank you for subscribing!');
