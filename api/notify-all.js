@@ -254,9 +254,10 @@ async function sendFacebook(entry) {
   let fbBody;
 
   if (isThought) {
-    message = `${entry.summary}\n\n— Brother Aaron\nwordsofplainness.org`;
+    message = `${entry.summary}\n\n— Brother Aaron`;
     fbBody = {
       message,
+      link: entry.url,
       access_token: pageToken
     };
   } else {
