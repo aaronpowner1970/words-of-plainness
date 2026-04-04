@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
     const tweetText = composeTweet(entry);
 
     // Post tweet via X API v2
-    const tweetUrl = 'https://api.x.com/2/tweets';
+    const tweetUrl = 'https://api.twitter.com/2/tweets';
     const oauthHeader = buildOAuthHeader(
       'POST', tweetUrl, apiKey, apiSecret, accessToken, accessSecret
     );
