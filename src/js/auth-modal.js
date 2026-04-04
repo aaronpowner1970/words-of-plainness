@@ -142,6 +142,7 @@ const AuthModal = {
             nameField?.classList.remove('hidden');
             usernameField?.classList.remove('hidden');
             passwordConfirmField?.classList.remove('hidden');
+            document.getElementById('authNewsletterField')?.classList.remove('hidden');
             if (emailLabel) emailLabel.textContent = 'Email Address';
             if (emailInput) {
                 emailInput.type = 'email';
@@ -154,6 +155,7 @@ const AuthModal = {
             nameField?.classList.add('hidden');
             usernameField?.classList.add('hidden');
             passwordConfirmField?.classList.add('hidden');
+            document.getElementById('authNewsletterField')?.classList.add('hidden');
             if (emailLabel) emailLabel.textContent = 'Username or Email';
             if (emailInput) {
                 emailInput.type = 'text';
@@ -212,7 +214,8 @@ const AuthModal = {
             if (this.mode === 'signin') {
                 await window.API.login(email, password);
             } else {
-                await window.API.register({ username, email, password, password_confirm: passwordConfirm, display_name: name });
+                const subscribeNewsletter = document.getElementById('authNewsletter')?.checked ?? true;
+                await window.API.register({ username, email, password, password_confirm: passwordConfirm, display_name: name, subscribe_newsletter: subscribeNewsletter });
             }
             
             this.close();
