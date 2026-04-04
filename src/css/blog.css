@@ -303,6 +303,26 @@
 .blog-hero {
     text-align: center;
     padding: calc(80px + var(--space-xxl)) var(--space-xl) var(--space-xl);
+    background:
+        linear-gradient(to bottom, var(--overlay-lighter) 0%, var(--overlay-light) 100%),
+        url('../assets/images/library-empty.png') center center / cover no-repeat;
+    position: relative;
+}
+
+.blog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top, rgba(196, 148, 58, 0.08) 0%, transparent 60%);
+    z-index: 0;
+}
+
+.blog-hero > * {
+    position: relative;
+    z-index: 1;
 }
 
 .blog-hero h1 {
