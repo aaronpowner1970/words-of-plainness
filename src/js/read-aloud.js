@@ -1,0 +1,300 @@
+/* ============================================================
+   READ ALOUD — Browser TTS for Card-Chapter Tabs
+   Uses Web Speech API (speechSynthesis) to read Practice and
+   Blesses tab content aloud with word-level highlighting.
+
+   Injected into card-chapter pages via card-chapter.njk layout.
+   ============================================================ */
+
+(function () {
+    'use strict';
+
+    // Check for browser support
+    if (!('speechSynthesis' in window)) return;
+
+    var synth = window.speechSynthesis;
+    var activeBtn = null;    // currently playing button
+    var activePanel = null;  // panel being read
+
+    // ---- Voice Selection ----
+    // Prefer a natural-sounding English voice
+    var preferredVoice = null;
+
+    function pickVoice() {
+        var voices = synth.getVoices();
+        if (!voices.length) return null;
+
+        // Priority: look for high-quality English voices
+        var priorities = [
+            // macOS / iOS neural voices
+            function (v) { return v.lang.startsWith('en') && v.name.indexOf('Samantha') !== -1; },
+            function (v) { return v.lang.startsWith('en') && v.name.indexOf('Daniel') !== -1; },
+            // Google neural voices (Chrome)
+            function (v) { return v.lang.startsWith('en') && v.name.indexOf('Google US English') !== -1; },
+            function (v) { return v.lang.startsWith('en') && v.name.indexOf('Google UK English') !== -1; },
+            // Microsoft neural voices (Edge/Windows)
+            function (v) { return v.lang.startsWith('en') && v.name.indexOf('Microsoft') !== -1 && v.name.indexOf('Online') !== -1; },
+            // Any English voice
+            function (v) { return v.lang.startsWith('en'); }
+        ];
+
+        for (var i = 0; i < priorities.length; i++) {
+            for (var j = 0; j < voices.length; j++) {
+                if (priorities[i](voices[j])) return voices[j];
+            }
+        }
+        return voices[0]; // absolute fallback
+    }
+
+    // Voices may load asynchronously
+    if (synth.getVoices().length) {
+        preferredVoice = pickVoice();
+    }
+    synth.addEventListener('voiceschanged', function () {
+        preferredVoice = pickVoice();
+    });
+
+    // ---- Text Extraction ----
+    // Extract readable text from a panel, skipping scripture-link URLs
+    // and bridge-text "how will you practice" transitions
+    function extractText(panel) {
+        // Clone to avoid modifying DOM
+        var clone = panel.cloneNode(true);
+
+        // Remove any existing read-aloud buttons from clone
+        var btns = clone.querySelectorAll('.cc-read-aloud-btn');
+        for (var i = 0; i < btns.length; i++) btns[i].remove();
+
+        return clone.textContent.replace(/\s+/g, ' ').trim();
+    }
+
+    // ---- Highlighting ----
+    // Wrap each text node's words in <span> elements for highlighting
+    function wrapWordsInPanel(panel) {
+        var walker = document.createTreeWalker(
+            panel,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode: function (node) {
+                    // Skip text inside buttons, links (keep link text but wrap it),
+                    // and the read-aloud button itself
+                    var parent = node.parentElement;
+                    if (!parent) return NodeFilter.FILTER_REJECT;
+                    if (parent.closest('.cc-read-aloud-btn')) return NodeFilter.FILTER_REJECT;
+                    // Skip empty/whitespace-only nodes
+                    if (!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+
+        var textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+        var wordIndex = 0;
+        textNodes.forEach(function (textNode) {
+            var text = textNode.textContent;
+            // Split on word boundaries but keep whitespace
+            var parts = text.split(/(\s+)/);
+            if (parts.length <= 1 && !text.trim()) return;
+
+            var frag = document.createDocumentFragment();
+            parts.forEach(function (part) {
+                if (!part) return;
+                if (/^\s+$/.test(part)) {
+                    frag.appendChild(document.createTextNode(part));
+                } else {
+                    var span = document.createElement('span');
+                    span.className = 'cc-tts-word';
+                    span.dataset.wordIdx = wordIndex++;
+                    span.textContent = part;
+                    frag.appendChild(span);
+                }
+            });
+            textNode.parentNode.replaceChild(frag, textNode);
+        });
+
+        return wordIndex; // total word count
+    }
+
+    // Remove word wrapping, restoring original text nodes
+    function unwrapWordsInPanel(panel) {
+        var wordSpans = panel.querySelectorAll('.cc-tts-word');
+        wordSpans.forEach(function (span) {
+            var text = document.createTextNode(span.textContent);
+            span.parentNode.replaceChild(text, span);
+        });
+        // Normalize adjacent text nodes
+        panel.normalize();
+    }
+
+    // ---- Playback Control ----
+    function stopReading() {
+        synth.cancel();
+        if (activePanel) {
+            unwrapWordsInPanel(activePanel);
+            activePanel.classList.remove('cc-tts-active');
+            activePanel = null;
+        }
+        if (activeBtn) {
+            activeBtn.classList.remove('playing');
+            activeBtn.setAttribute('aria-label', 'Read aloud');
+            activeBtn.title = 'Read Aloud';
+            activeBtn = null;
+        }
+    }
+
+    function startReading(btn, panel) {
+        // Stop any current reading first
+        stopReading();
+
+        activeBtn = btn;
+        activePanel = panel;
+        panel.classList.add('cc-tts-active');
+        btn.classList.add('playing');
+        btn.setAttribute('aria-label', 'Stop reading');
+        btn.title = 'Stop Reading';
+
+        // Wrap words for highlighting
+        var totalWords = wrapWordsInPanel(panel);
+        var text = extractText(panel);
+
+        if (!text) {
+            stopReading();
+            return;
+        }
+
+        var utterance = new SpeechSynthesisUtterance(text);
+        if (preferredVoice) utterance.voice = preferredVoice;
+        utterance.rate = 0.95;  // slightly slower for comprehension
+        utterance.pitch = 1.0;
+
+        // Word-level highlighting via boundary events
+        var currentWordIdx = 0;
+        utterance.addEventListener('boundary', function (e) {
+            if (e.name !== 'word') return;
+
+            // Clear previous highlight
+            var prev = panel.querySelector('.cc-tts-word.cc-tts-highlight');
+            if (prev) prev.classList.remove('cc-tts-highlight');
+
+            // Highlight current word
+            var wordEl = panel.querySelector('.cc-tts-word[data-word-idx="' + currentWordIdx + '"]');
+            if (wordEl) {
+                wordEl.classList.add('cc-tts-highlight');
+
+                // Scroll word into view if needed
+                var rect = wordEl.getBoundingClientRect();
+                if (rect.top < 80 || rect.bottom > window.innerHeight - 40) {
+                    wordEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+            currentWordIdx++;
+        });
+
+        utterance.addEventListener('end', function () {
+            stopReading();
+        });
+
+        utterance.addEventListener('error', function () {
+            stopReading();
+        });
+
+        synth.speak(utterance);
+    }
+
+    // ---- Button Injection ----
+    // Add Read Aloud button to practice and blesses panels
+    function injectButtons() {
+        var panels = document.querySelectorAll('.card-panel[data-panel="practice"], .card-panel[data-panel="blesses"]');
+
+        panels.forEach(function (panel) {
+            // Don't double-inject
+            if (panel.querySelector('.cc-read-aloud-btn')) return;
+
+            var btn = document.createElement('button');
+            btn.className = 'cc-read-aloud-btn';
+            btn.type = 'button';
+            btn.setAttribute('aria-label', 'Read aloud');
+            btn.title = 'Read Aloud';
+            btn.innerHTML =
+                '<svg class="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>' +
+                    '<path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>' +
+                    '<path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>' +
+                '</svg>' +
+                '<svg class="icon-stop" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<rect x="6" y="4" width="4" height="16"></rect>' +
+                    '<rect x="14" y="4" width="4" height="16"></rect>' +
+                '</svg>' +
+                '<span class="cc-ra-label">Read Aloud</span>';
+
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (activeBtn === btn) {
+                    // Toggle off
+                    stopReading();
+                } else {
+                    startReading(btn, panel);
+                }
+            });
+
+            // Insert at the top of the panel, before content
+            panel.insertBefore(btn, panel.firstChild);
+        });
+    }
+
+    // ---- Stop on Tab Switch ----
+    // When user switches tabs, stop any active reading
+    document.querySelectorAll('.card-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+            if (activeBtn) stopReading();
+        });
+    });
+
+    // ---- Stop on Page Navigation ----
+    window.addEventListener('beforeunload', function () {
+        synth.cancel();
+    });
+
+    // ---- Chrome Bug Workaround ----
+    // Chrome pauses speech after ~15 seconds of continuous speech.
+    // This keeps it alive by resuming periodically.
+    var chromePauseTimer = null;
+    var origSpeak = synth.speak.bind(synth);
+
+    synth.speak = function (utterance) {
+        if (chromePauseTimer) clearInterval(chromePauseTimer);
+
+        chromePauseTimer = setInterval(function () {
+            if (synth.speaking && !synth.paused) {
+                synth.pause();
+                synth.resume();
+            }
+        }, 10000);
+
+        utterance.addEventListener('end', function () {
+            if (chromePauseTimer) {
+                clearInterval(chromePauseTimer);
+                chromePauseTimer = null;
+            }
+        });
+        utterance.addEventListener('error', function () {
+            if (chromePauseTimer) {
+                clearInterval(chromePauseTimer);
+                chromePauseTimer = null;
+            }
+        });
+
+        origSpeak(utterance);
+    };
+
+    // ---- Initialize ----
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', injectButtons);
+    } else {
+        injectButtons();
+    }
+})();
