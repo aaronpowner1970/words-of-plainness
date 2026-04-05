@@ -1095,6 +1095,15 @@ Amen.
 
 </div>
 
+<div class="study-callout">
+  <div class="study-callout-inner">
+    <div class="study-callout-eyebrow">Go Deeper</div>
+    <div class="study-callout-title">The Church of the Lamb of God: Who Belongs to Christ?</div>
+    <p class="study-callout-desc">The scriptural and theological foundations of this conviction</p>
+    <a class="study-callout-link" href="/studies/church-of-the-lamb/">Open Study →</a>
+  </div>
+</div>
+
 <h2 id="core-principles-of-salvation">{% sentence 162 %}Core Principles of Salvation{% endsentence %}</h2>
 
 {% sentence 163 %}True discipleship to Christ cannot be judged by mortals.{% endsentence %}
