@@ -118,14 +118,15 @@
 
 .discipleship-card {
     background: var(--brown-rich);
-    border: 1px solid rgba(196, 148, 58, 0.15);
+    border: 1px solid rgba(196, 148, 58, 0.3);
     border-radius: var(--radius-lg);
     margin-bottom: var(--space-lg);
     overflow: hidden;
-    transition: border-color var(--transition-normal);
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
 }
 .discipleship-card:hover {
-    border-color: rgba(196, 148, 58, 0.35);
+    border-color: rgba(196, 148, 58, 0.55);
+    box-shadow: 0 2px 12px rgba(196, 148, 58, 0.08);
 }
 
 /* Card Header */

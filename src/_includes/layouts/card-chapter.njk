@@ -3,6 +3,7 @@
 {% block styles %}
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/card-chapter.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/cc-intro-readiness.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/ambient-player.css">
 {% endblock %}
 
@@ -95,6 +96,23 @@
     </a>
     {% endif %}
 </div>
+
+{# Chapter Introduction (optional — renders from frontmatter intro field) #}
+{% if intro %}
+<section class="cc-intro" data-pagefind-body>
+    {{ intro | safe }}
+</section>
+{% endif %}
+
+{# Readiness Check (optional — renders from frontmatter readinessCheck field) #}
+{% if readinessCheck %}
+<section class="cc-readiness-check" data-pagefind-ignore>
+    <div class="cc-readiness-check-inner">
+        <div class="cc-readiness-check-label">Before You Begin</div>
+        {{ readinessCheck | safe }}
+    </div>
+</section>
+{% endif %}
 
 {# How This Chapter Works #}
 <section class="how-it-works" data-pagefind-ignore>

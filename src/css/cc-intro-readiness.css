@@ -1,0 +1,74 @@
+/* ============================================================
+   CHAPTER INTRODUCTION — Optional prose before cards
+   Renders from frontmatter `intro` field
+   ============================================================ */
+.cc-intro {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md) var(--space-md);
+}
+.cc-intro p {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--cream);
+    opacity: 0.92;
+    margin-bottom: 1.25rem;
+}
+.cc-intro a.scripture-link {
+    color: var(--gold-primary);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(196, 148, 58, 0.5);
+    transition: color 0.2s, border-color 0.2s;
+}
+.cc-intro a.scripture-link:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+}
+
+/* ============================================================
+   READINESS CHECK — Optional prerequisite callout
+   Renders from frontmatter `readinessCheck` field
+   ============================================================ */
+.cc-readiness-check {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 0 var(--space-md) var(--space-xl);
+}
+.cc-readiness-check-inner {
+    border-left: 3px solid var(--gold-primary);
+    background: rgba(196, 148, 58, 0.04);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.cc-readiness-check-label {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+}
+.cc-readiness-check p {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.88;
+    margin: 0;
+}
+.cc-readiness-check a {
+    color: var(--gold-primary);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(196, 148, 58, 0.5);
+}
+.cc-readiness-check a:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+}
+@media (max-width: 768px) {
+    .cc-readiness-check-inner {
+        padding: 1rem 1.15rem;
+    }
+}
