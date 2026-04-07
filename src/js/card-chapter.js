@@ -393,3 +393,68 @@ function ccSlideNav(dir) {
     var numEl = document.getElementById('ccSlideNum');
     if (numEl) numEl.textContent = ccCurrentSlide;
 }
+
+// ---- Infographic Zoom (fullscreen mode) ----
+var ccZoomScale = 100;
+var CC_ZOOM_MIN = 50;
+var CC_ZOOM_MAX = 400;
+var CC_ZOOM_STEP = 25;
+
+function ccZoom(dir) {
+    if (dir === 0) {
+        ccZoomScale = 100;
+    } else {
+        ccZoomScale += dir * CC_ZOOM_STEP;
+        if (ccZoomScale < CC_ZOOM_MIN) ccZoomScale = CC_ZOOM_MIN;
+        if (ccZoomScale > CC_ZOOM_MAX) ccZoomScale = CC_ZOOM_MAX;
+    }
+    var imgs = document.querySelectorAll('#ccInfographicModal .cc-infographic-img');
+    imgs.forEach(function (img) {
+        img.style.transform = 'scale(' + (ccZoomScale / 100) + ')';
+        img.style.transformOrigin = 'top center';
+    });
+    var lvl = document.getElementById('ccZoomLevel');
+    if (lvl) lvl.textContent = ccZoomScale + '%';
+}
+
+// Reset zoom when exiting fullscreen or closing modal
+(function () {
+    var origClose = window.closeCcModals;
+    window.closeCcModals = function () {
+        ccZoomScale = 100;
+        var imgs = document.querySelectorAll('#ccInfographicModal .cc-infographic-img');
+        imgs.forEach(function (img) { img.style.transform = ''; });
+        var lvl = document.getElementById('ccZoomLevel');
+        if (lvl) lvl.textContent = '100%';
+        origClose();
+    };
+
+    // Also reset zoom when toggling out of fullscreen
+    document.querySelectorAll('[data-cc-fullscreen]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var modal = this.closest('.cc-modal');
+            // After the toggle in the existing handler, check if no longer fullscreen
+            setTimeout(function () {
+                if (modal && !modal.classList.contains('fullscreen')) {
+                    ccZoomScale = 100;
+                    var imgs = modal.querySelectorAll('.cc-infographic-img');
+                    imgs.forEach(function (img) { img.style.transform = ''; });
+                    var lvl = document.getElementById('ccZoomLevel');
+                    if (lvl) lvl.textContent = '100%';
+                }
+            }, 50);
+        });
+    });
+
+    // Scroll-to-zoom in fullscreen infographic modal
+    var igModal = document.getElementById('ccInfographicModal');
+    if (igModal) {
+        igModal.addEventListener('wheel', function (e) {
+            if (!igModal.classList.contains('fullscreen')) return;
+            // Only zoom when Ctrl/Cmd is held, or always on trackpad pinch (which fires as ctrl+wheel)
+            if (!e.ctrlKey && !e.metaKey) return;
+            e.preventDefault();
+            ccZoom(e.deltaY < 0 ? 1 : -1);
+        }, { passive: false });
+    }
+}());

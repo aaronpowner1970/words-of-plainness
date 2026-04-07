@@ -360,6 +360,12 @@
             <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
     </div>
+    <div class="cc-zoom-controls">
+        <button class="cc-zoom-btn" onclick="ccZoom(-1)" aria-label="Zoom out">&minus;</button>
+        <span class="cc-zoom-level" id="ccZoomLevel">100%</span>
+        <button class="cc-zoom-btn" onclick="ccZoom(1)" aria-label="Zoom in">&plus;</button>
+        <button class="cc-zoom-btn cc-zoom-btn-reset" onclick="ccZoom(0)" aria-label="Reset zoom">Reset</button>
+    </div>
     <div class="cc-modal-body" style="text-align: center;">
         {% if infographics %}
             {% for ig in infographics %}

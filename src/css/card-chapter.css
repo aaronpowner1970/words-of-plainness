@@ -832,9 +832,68 @@
     transform: none;
 }
 
+.cc-modal.fullscreen .cc-modal-body {
+    height: calc(100vh - 4rem);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .cc-modal.fullscreen .cc-infographic-img {
-    max-height: calc(100vh - 4rem);
-    object-fit: contain;
+    max-height: none;
+    object-fit: unset;
+    transform-origin: top center;
+    transition: transform 0.2s ease;
+}
+
+/* Zoom Controls — visible only in fullscreen */
+.cc-zoom-controls {
+    display: none;
+}
+
+.cc-modal.fullscreen .cc-zoom-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 0 2px;
+}
+
+.cc-zoom-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: rgba(196, 148, 58, 0.12);
+    border: 1px solid rgba(196, 148, 58, 0.25);
+    border-radius: 6px;
+    color: var(--gold-primary, #C4943A);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    line-height: 1;
+    padding: 0;
+}
+.cc-zoom-btn:hover {
+    background: rgba(196, 148, 58, 0.25);
+    border-color: var(--gold-primary, #C4943A);
+}
+
+.cc-zoom-level {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.7;
+    min-width: 3.5rem;
+    text-align: center;
+}
+
+.cc-zoom-btn-reset {
+    font-size: 0.75rem;
+    width: auto;
+    padding: 0 10px;
+    letter-spacing: 0.03em;
 }
 
 /* Slide Carousel */
