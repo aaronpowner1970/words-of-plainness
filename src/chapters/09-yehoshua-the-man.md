@@ -19,6 +19,9 @@ audio:
     title: "Established in Him"
     duration: "6:48"
     description: "A sacred folk hymn testimony from beholding the heart of Christ."
+    alternates:
+      - file: "09_02_Established_in_Him_Contemporary_Christian.mp3"
+        label: "Contemporary Christian"
   sections:
     - id: "pause-humility"
       prose: NR_09_S01_Invocation_Humility.mp3
