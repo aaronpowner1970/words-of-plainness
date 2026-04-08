@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "The Living Christ"
+og_title: "The Living Christ — He Lives Today"
+description: "The story did not end at the tomb. Jesus Christ lives, intercedes, and continues His work. A brief witness of the risen Lord and what comes next."
 chapter: 11
 slug: "11-the-living-christ"
 chapterId: "chapter-11-the-living-christ"

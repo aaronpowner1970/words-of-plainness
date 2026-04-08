@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "Our Search"
+og_title: "Our Search for Truth — Why We Seek God"
+description: "Every honest person has asked whether God is real. This chapter explores the universal human search for spiritual truth across Christian traditions."
 chapter: 2
 slug: "02-our-search"
 chapterId: "chapter-02-our-search"

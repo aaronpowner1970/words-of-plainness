@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "Prophecies, Birth, and Youth"
+og_title: "Prophecies, Birth, and Youth of Jesus Christ"
+description: "Centuries of prophecy pointed to one man. Trace the foretold arrival, miraculous birth, and hidden years of Jesus Christ through biblical witness."
 chapter: 7
 slug: "07-prophecies-birth-youth"
 chapterId: "chapter-07-prophecies-birth-youth"

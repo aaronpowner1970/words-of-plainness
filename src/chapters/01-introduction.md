@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "Introduction"
+og_title: "Introduction — Words of Plainness"
+description: "What does it mean to speak of Christ in plainness? A Christ-centered ministry begins with honesty about how we seek, find, and share truth."
 chapter: 1
 slug: "01-introduction"
 chapterId: "chapter-01-introduction"

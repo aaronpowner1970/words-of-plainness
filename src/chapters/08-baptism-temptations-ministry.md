@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "Baptism, Temptations, and Mortal Ministry"
+og_title: "Baptism, Temptations, and Ministry of Jesus"
+description: "From the Jordan River to the roads of Galilee — Christ's baptism, wilderness temptations, and the public ministry that changed the world forever."
 chapter: 8
 slug: "08-baptism-temptations-ministry"
 chapterId: "chapter-08-baptism-temptations-ministry"

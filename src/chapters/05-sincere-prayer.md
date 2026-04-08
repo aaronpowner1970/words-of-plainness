@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "Sincere Prayer"
+og_title: "Sincere Prayer — Learning to Speak with God"
+description: "Prayer is more than words — it is a relationship. Learn what sincere prayer looks like, why it works, and how to begin or deepen your practice."
 chapter: 5
 slug: "05-sincere-prayer"
 chapterId: "chapter-05-sincere-prayer"

@@ -1,5 +1,7 @@
 ---
 title: "Embrace the Savior"
+og_title: "Embrace the Savior — Your Personal Encounter with Christ"
+description: "Faith becomes real when it becomes personal. An interactive experience helping you identify where you stand with Christ and what your next step might be."
 chapter: 6
 slug: "06-embrace-the-savior-full"
 chapterId: "chapter-06-embrace-the-savior"

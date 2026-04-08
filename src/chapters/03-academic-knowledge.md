@@ -1,5 +1,7 @@
 ---
 title: "Academic Knowledge"
+og_title: "Academic Knowledge — What Scholarship Can and Cannot Prove About God"
+description: "Scholarship illuminates scripture but cannot prove God. Explore the proper role of academic knowledge in the life of a sincere seeker of Christ."
 chapter: 3
 slug: "03-academic-knowledge"
 chapterId: "chapter-03-academic-knowledge"

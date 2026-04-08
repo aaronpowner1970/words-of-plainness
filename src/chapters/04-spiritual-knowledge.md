@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "Spiritual Knowledge"
+og_title: "Spiritual Knowledge — How God Speaks to the Heart"
+description: "How does God communicate with His children? A careful exploration of spiritual knowledge — how revelation works, what it feels like, and why it matters."
 chapter: 4
 slug: "04-spiritual-knowledge"
 chapterId: "chapter-04-spiritual-knowledge"

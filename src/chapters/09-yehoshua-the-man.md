@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "Yehoshua the Man"
+og_title: "Yehoshua the Man — The Personal Character of Jesus Christ"
+description: "Before doctrine, before miracles — the man. A portrait of Christ's compassion, meekness, courage, and grief drawn from the Gospels and Restoration scripture."
 chapter: 9
 slug: "09-yehoshua-the-man"
 chapterId: "chapter-09-yehoshua-the-man"

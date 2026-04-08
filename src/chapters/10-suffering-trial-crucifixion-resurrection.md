@@ -1,6 +1,8 @@
 ---
 layout: layouts/chapter.njk
 title: "Suffering, Trial, Crucifixion, and Resurrection"
+og_title: "Suffering, Trial, Crucifixion, and Resurrection"
+description: "Gethsemane. Golgotha. The empty tomb. Walk through the final hours of Christ's mortal life and the resurrection that conquered death for all."
 chapter: 10
 slug: "10-suffering-trial-crucifixion-resurrection"
 chapterId: "chapter-10-suffering-trial-crucifixion-resurrection"
