@@ -78,6 +78,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy("src/css");
     eleventyConfig.addPassthroughCopy("src/js");
+    eleventyConfig.addPassthroughCopy({"src/robots.txt": "robots.txt"});
     
     // =========================================
     // WATCH TARGETS
