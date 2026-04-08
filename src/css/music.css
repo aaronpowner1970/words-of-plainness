@@ -365,26 +365,92 @@
 }
 
 /* =========================================
-   Concert Hall Callout
+   Concert Hall Card
    ========================================= */
 
-.concert-hall-callout {
-    text-align: center;
+.concert-hall-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
     max-width: 800px;
     margin: 0 auto 2rem;
-}
-
-.concert-hall-link {
-    color: var(--gold-primary, #C4943A);
+    padding: 0.875rem 1.25rem 0.875rem 0.875rem;
+    background: rgba(42, 29, 20, 0.45);
+    border: 1px solid rgba(196, 148, 58, 0.22);
+    border-radius: var(--radius-lg, 12px);
     text-decoration: none;
-    font-size: 0.95rem;
-    border-bottom: 1px solid rgba(196, 148, 58, 0.35);
-    transition: color 0.2s, border-color 0.2s;
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    cursor: pointer;
 }
 
-.concert-hall-link:hover {
-    color: var(--gold-light, #D4A84A);
-    border-color: var(--gold-light, #D4A84A);
+.concert-hall-card:hover {
+    border-color: rgba(196, 148, 58, 0.45);
+    background: rgba(42, 29, 20, 0.6);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Thumbnail */
+.chc-thumbnail {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: var(--radius-md, 8px);
+    overflow: hidden;
+    border: 1px solid rgba(196, 148, 58, 0.15);
+}
+
+.chc-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Text body */
+.chc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.chc-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold-primary, #C4943A);
+}
+
+.chc-title {
+    font-family: var(--font-serif, 'Crimson Pro', serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cream, #E8DCC4);
+    line-height: 1.3;
+}
+
+.chc-subtitle {
+    font-size: 0.8rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.5;
+    font-style: italic;
+    line-height: 1.35;
+}
+
+/* Arrow */
+.chc-arrow {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+    color: var(--gold-primary, #C4943A);
+    opacity: 0.5;
+    transition: opacity 0.25s, transform 0.25s;
+}
+
+.concert-hall-card:hover .chc-arrow {
+    opacity: 1;
+    transform: translateX(3px);
 }
 
 /* =========================================
@@ -658,6 +724,31 @@
         padding: 0.75rem 1rem;
     }
 
+    /* Concert Hall Card — stack vertical on tablet/mobile */
+    .concert-hall-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .chc-thumbnail {
+        width: 100%;
+        height: 140px;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+    }
+
+    .chc-body {
+        padding: 0.875rem 1rem 0.25rem;
+        align-items: center;
+    }
+
+    .chc-arrow {
+        padding-bottom: 0.75rem;
+    }
+
     /* Hide chapter column, show inline mobile chapter */
     .col-chapter,
     .playlist-table th.col-chapter {
@@ -703,5 +794,9 @@
 
     .playlist-section-header--inline {
         padding: 1.5rem 0.75rem 0.5rem;
+    }
+
+    .chc-thumbnail {
+        height: 110px;
     }
 }
