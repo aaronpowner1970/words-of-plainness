@@ -4,6 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ description | default(site.description) }}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.wordsofplainness.org{{ page.url }}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="{% if layout == 'layouts/chapter.njk' %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{{ og_title | default(title) | default(site.name) }}">
+    <meta property="og:description" content="{{ description | default(site.description) }}">
+    <meta property="og:url" content="https://www.wordsofplainness.org{{ page.url }}">
+    <meta property="og:site_name" content="Words of Plainness">
+    <meta property="og:image" content="https://www.wordsofplainness.org/assets/images/og-default.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ og_title | default(title) | default(site.name) }}">
+    <meta name="twitter:description" content="{{ description | default(site.description) }}">
+    <meta name="twitter:image" content="https://www.wordsofplainness.org/assets/images/og-default.png">
+
+    <!-- JSON-LD Structured Data -->
+    {% if layout == "layouts/chapter.njk" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{ og_title | default(title) }}",
+      "description": "{{ description | default(site.description) }}",
+      "url": "https://www.wordsofplainness.org{{ page.url }}",
+      "author": {
+        "@type": "Person",
+        "name": "Aaron Powner"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Words of Plainness",
+        "url": "https://www.wordsofplainness.org"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Words of Plainness",
+        "url": "https://www.wordsofplainness.org"
+      }
+    }
+    </script>
+    {% endif %}
+
     {% block head %}{% endblock %}
     <title>{{ title }}{% if title %} | {% endif %}{{ site.name }}</title>
     
