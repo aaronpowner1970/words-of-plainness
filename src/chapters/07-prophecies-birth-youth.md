@@ -21,6 +21,7 @@ audio:
   testimony:
     file: "07_01_Promises_Kept_Folk_Hymn.mp3"
     title: "Promises Kept"
+    label: "Folk Hymn"
     description: "A sacred folk hymn testimony of the ancient promise kept — from prophecy through the hidden years."
     duration: "7:29"
     alternates:

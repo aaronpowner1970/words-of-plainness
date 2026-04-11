@@ -22,6 +22,7 @@ audio:
   testimony:
     file: "01_01_Introduction_to_Plainness_Sacred_Americana.mp3"
     title: "Introduction to Plainness"
+    label: "Sacred Americana"
     duration: "4:09"
     description: "A gentle invitation to approach faith with an open heart"
     alternates:

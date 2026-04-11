@@ -20,6 +20,7 @@ audio:
   testimony:
     file: "10_01_He_Always_Knew_Me_Cinematic_Worship.mp3"
     title: "He Always Knew Me"
+    label: "Cinematic Worship"
     description: "A sacred cinematic testimony of the cross, the tomb, and the morning He spoke your name."
     alternates:
       - file: "10_02_He_Always_Knew_Me_Contemporary_Christian.mp3"

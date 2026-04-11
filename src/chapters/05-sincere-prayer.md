@@ -22,6 +22,7 @@ audio:
   testimony:
     file: "05_01_The_Souls_Sincere_Desire_Soul_Worship.mp3"
     title: "The Soul's Sincere Desire"
+    label: "Soul Worship"
     duration: "6:24"
     description: "A soul worship piano ballad on learning to speak to God — and hear Him answer"
     alternates:

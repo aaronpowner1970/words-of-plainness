@@ -29,6 +29,7 @@ audio:
   testimony:
     file: "chapter-01-testimony.mp3"
     title: "Song Title Here"
+    label: "Genre Descriptor"
     description: "Brief theme description"
 
 # Resources

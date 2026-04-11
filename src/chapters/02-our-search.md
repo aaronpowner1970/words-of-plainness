@@ -22,6 +22,7 @@ audio:
   testimony:
     file: "02_01_Our_Search_Sacred_Americana.mp3"
     title: "Our Search"
+    label: "Sacred Americana"
     duration: "3:58"
     description: "The universal longing for meaning and connection"
     alternates:

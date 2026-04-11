@@ -22,6 +22,7 @@ audio:
   testimony:
     file: "04_01_When_God_Becomes_Real_Sacred_Americana.mp3"
     title: "When God Becomes Real"
+    label: "Sacred Americana"
     duration: "5:09"
     description: "A musical reflection on spiritual knowledge"
     alternates:

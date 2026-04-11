@@ -19,6 +19,7 @@ audio:
   testimony:
     file: "09_01_Established_in_Him_Sacred_Americana.mp3"
     title: "Established in Him"
+    label: "Sacred Americana"
     duration: "6:48"
     description: "A sacred folk hymn testimony from beholding the heart of Christ."
     alternates:

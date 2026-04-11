@@ -20,6 +20,7 @@ audio:
   testimony:
     file: "11_01_Panteles_Sacred_Ballad.mp3"
     title: "Panteles"
+    label: "Sacred Ballad"
     description: "A sacred ballad on the reach of Christ — completely, for all time, for anyone."
 
 lyrics: |

@@ -20,6 +20,7 @@ audio:
   testimony:
     file: "06_01_I_Have_Tasted_the_Light_Sacred_Americana.mp3"
     title: "I Have Tasted the Light"
+    label: "Sacred Americana"
     description: "A spoken word testimony exploring the reception of grace."
     duration: "6:03"
     alternates:

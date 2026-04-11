@@ -193,7 +193,7 @@ permalink: /music/
                 <tr class="playlist-row"
                     data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.testimony.file }}"
                     data-title="{{ chapter.data.audio.testimony.title }}"
-                    data-label=""
+                    data-label="{{ chapter.data.audio.testimony.label if chapter.data.audio.testimony.label else '' }}"
                     data-chapter="{{ chapter.data.chapter }}"
                     data-chapter-title="{{ chapter.data.title }}"
                     data-chapter-url="{{ chapter.url }}"
@@ -202,6 +202,7 @@ permalink: /music/
                     <td class="col-title">
                         <div class="track-title-group">
                             <span class="song-title">{{ chapter.data.audio.testimony.title }}</span>
+                            {% if chapter.data.audio.testimony.label %}<span class="song-label">&mdash; {{ chapter.data.audio.testimony.label }}</span>{% endif %}
                             <span class="track-chapter-mobile">Ch. {{ chapter.data.chapter }}</span>
                         </div>
                     </td>

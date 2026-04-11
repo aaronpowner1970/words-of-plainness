@@ -21,6 +21,7 @@ audio:
   testimony:
     file: "08_01_Prepared_in_All_Things_Desert_Troubadour.mp3"
     title: "Prepared in All Things"
+    label: "Desert Troubadour"
     description: "A desert troubadour testimony of baptism, temptation, and the beginning of mortal ministry."
     duration: "5:34"
 

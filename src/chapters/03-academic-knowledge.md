@@ -17,6 +17,7 @@ audio:
   testimony:
     file: 03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3
     title: "Two Halves of a Whole"
+    label: "Celtic Ballad"
     duration: "5:53"
     description: "A Celtic ballad testimony on the unity of academic and spiritual knowledge"
     alternates:
