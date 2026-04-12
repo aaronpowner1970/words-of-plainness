@@ -169,11 +169,14 @@
 /* Tab Navigation */
 .card-tabs {
     display: flex;
-    border-bottom: 1px solid rgba(196, 148, 58, 0.12);
+    gap: 3px;
+    padding: 0.4rem 0.5rem 0;
+    background: rgba(16, 10, 6, 0.7);
+    border-bottom: 1px solid rgba(196, 148, 58, 0.35);
 }
 .card-tab {
     flex: 1;
-    padding: 0.75rem var(--space-sm);
+    padding: 0.7rem var(--space-sm) 0.65rem;
     text-align: center;
     font-family: var(--font-sans);
     font-size: 0.85rem;
@@ -181,21 +184,29 @@
     letter-spacing: 0.03em;
     color: var(--cream);
     opacity: 0.5;
-    background: transparent;
-    border: none;
-    border-bottom: 3px solid transparent;
+    background: rgba(22, 15, 10, 0.8);
+    border: 2px solid rgba(232, 220, 196, 0.45);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
     cursor: pointer;
     transition: all var(--transition-fast);
+    position: relative;
 }
 .card-tab:hover {
-    opacity: 0.8;
-    background: rgba(196, 148, 58, 0.05);
+    opacity: 0.85;
+    background: rgba(196, 148, 58, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 -2px 6px rgba(196, 148, 58, 0.08);
 }
 .card-tab.active {
     opacity: 1;
     color: var(--gold-primary);
-    border-bottom-color: var(--gold-primary);
-    background: rgba(196, 148, 58, 0.08);
+    background: var(--brown-rich);
+    border: 2px solid rgba(196, 148, 58, 0.4);
+    border-bottom: 2px solid var(--brown-rich);
+    margin-bottom: -1px;
+    z-index: 1;
+    box-shadow: 0 -2px 8px rgba(196, 148, 58, 0.1);
 }
 
 /* Tab Content Panels */
@@ -373,6 +384,14 @@
 }
 
 /* Reflection textarea */
+.writing-prompt-heading {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--gold-primary);
+    opacity: 0.7;
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.04em;
+}
 .reflection-prompt {
     font-family: var(--font-serif);
     font-style: italic;
@@ -954,7 +973,7 @@
     }
     .card-tab {
         font-size: 0.78rem;
-        padding: 0.65rem var(--space-xs);
+        padding: 0.65rem var(--space-xs) 0.6rem;
     }
     .summary-card {
         padding: var(--space-md);
