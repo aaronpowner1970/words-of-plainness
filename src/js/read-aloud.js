@@ -79,15 +79,15 @@
         btn.setAttribute('aria-label', 'Stop reading');
         btn.title = 'Stop Reading';
 
-        // Wrap words in panel for highlighting
-        var totalWords = wrapWordsInPanel(panel);
+        var words = entry.words || [];
+        if (words.length > 0) {
+            wrapWordsInPanel(panel);
+        }
 
         // Create audio element
         var audioUrl = CDN_BASE + entry.file;
         activeAudio = new Audio(audioUrl);
         activeAudio.preload = 'auto';
-
-        var words = entry.words || [];
 
         // Word-level highlighting via timeupdate
         var currentWordIdx = -1;
@@ -354,7 +354,7 @@
 
         // Check for pre-generated audio
         var entry = getManifestEntry(panel);
-        if (entry && entry.file && entry.words && entry.words.length > 0) {
+        if (entry && entry.file) {
             playPreGenerated(btn, panel, entry);
         } else if (hasSpeechSynthesis) {
             startBrowserTTS(btn, panel);
