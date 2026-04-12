@@ -57,6 +57,11 @@
     function getManifestEntry(panel) {
         if (!manifest || !manifest.tabs) return null;
 
+        // Intro section uses special key
+        if (panel.classList.contains('cc-intro')) {
+            return manifest.tabs['intro'] || null;
+        }
+
         var cardNum = panel.getAttribute('data-card');
         var tabName = panel.getAttribute('data-panel');
         var key = 'card' + cardNum + '_' + tabName;
@@ -360,7 +365,7 @@
     // ---- Button Injection ----
     function injectButtons() {
         var panels = document.querySelectorAll(
-            '.card-panel[data-panel="practice"], .card-panel[data-panel="blesses"]'
+            '.cc-intro, .card-panel[data-panel="practice"], .card-panel[data-panel="blesses"]'
         );
 
         panels.forEach(function (panel) {
