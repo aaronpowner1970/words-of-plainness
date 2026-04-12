@@ -75,9 +75,9 @@
         activeBtn = btn;
         activePanel = panel;
         panel.classList.add('cc-tts-active');
-        btn.classList.add('playing');
-        btn.setAttribute('aria-label', 'Stop reading');
-        btn.title = 'Stop Reading';
+        btn.classList.add('loading');
+        btn.setAttribute('aria-label', 'Loading audio');
+        btn.title = 'Loading\u2026';
 
         var words = entry.words || [];
         if (words.length > 0) {
@@ -137,6 +137,15 @@
             // Fall back to browser TTS
             if (hasSpeechSynthesis) {
                 startBrowserTTS(btn, panel);
+            }
+        });
+
+        activeAudio.addEventListener('playing', function () {
+            if (activeBtn) {
+                activeBtn.classList.remove('loading');
+                activeBtn.classList.add('playing');
+                activeBtn.setAttribute('aria-label', 'Stop reading');
+                activeBtn.title = 'Stop Reading';
             }
         });
 
@@ -265,7 +274,7 @@
         }
 
         if (activeBtn) {
-            activeBtn.classList.remove('playing');
+            activeBtn.classList.remove('playing', 'loading');
             activeBtn.setAttribute('aria-label', 'Read aloud');
             activeBtn.title = 'Read Aloud';
             activeBtn = null;

@@ -1043,6 +1043,38 @@
     50% { box-shadow: 0 0 0 4px rgba(196, 148, 58, 0); }
 }
 
+/* Loading state — waiting for CDN audio to buffer */
+.cc-read-aloud-btn.loading {
+    background: rgba(196, 148, 58, 0.15);
+    border-color: rgba(196, 148, 58, 0.4);
+    pointer-events: none;
+}
+.cc-read-aloud-btn.loading .icon-play,
+.cc-read-aloud-btn.loading .icon-stop {
+    display: none;
+}
+.cc-read-aloud-btn.loading::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(196, 148, 58, 0.3);
+    border-top-color: var(--gold-primary);
+    border-radius: 50%;
+    animation: ccReadAloudSpin 0.8s linear infinite;
+}
+.cc-read-aloud-btn.loading .cc-ra-label {
+    font-size: 0;
+}
+.cc-read-aloud-btn.loading .cc-ra-label::after {
+    content: 'Loading\2026';
+    font-size: 0.8rem;
+}
+
+@keyframes ccReadAloudSpin {
+    to { transform: rotate(360deg); }
+}
+
 /* Word-level highlighting */
 .cc-tts-word {
     transition: background-color 0.15s ease, color 0.15s ease;
