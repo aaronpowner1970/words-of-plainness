@@ -15,7 +15,28 @@
             <ul class="nav-links">
                 {% for item in navigation.main %}
                 {% if item.url != "/new-here/" %}
-                <li><a href="{{ item.url }}"{% if (item.url == "/" and page.url == "/") or (item.url != "/" and item.url in page.url) %} class="active"{% endif %}>{{ item.title }}</a></li>
+                  {% if item.children %}
+                  <li class="nav-has-dropdown">
+                    {% set isChildActive = false %}
+                    {% for child in item.children %}
+                      {% if child.url in page.url %}{% set isChildActive = true %}{% endif %}
+                    {% endfor %}
+                    <button class="nav-dropdown-trigger{% if isChildActive %} active{% endif %}" aria-expanded="false" aria-haspopup="true">
+                      {{ item.title }}
+                      <svg class="nav-dropdown-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="nav-dropdown" role="menu">
+                      {% for child in item.children %}
+                      <a href="{{ child.url }}" class="nav-dropdown-item{% if child.url in page.url %} active{% endif %}" role="menuitem">
+                        <span class="nav-dropdown-title">{{ child.title }}</span>
+                        <span class="nav-dropdown-desc">{{ child.descriptor }}</span>
+                      </a>
+                      {% endfor %}
+                    </div>
+                  </li>
+                  {% else %}
+                  <li><a href="{{ item.url }}"{% if (item.url == "/" and page.url == "/") or (item.url != "/" and item.url in page.url) %} class="active"{% endif %}>{{ item.title }}</a></li>
+                  {% endif %}
                 {% endif %}
                 {% endfor %}
             </ul>
@@ -57,3 +78,69 @@
         </button>
     </div>
 </header>
+
+<script>
+// Listen nav dropdown — dual activation: click + hover (250ms delay)
+(function() {
+  const container = document.querySelector('.nav-has-dropdown');
+  if (!container) return;
+
+  const trigger = container.querySelector('.nav-dropdown-trigger');
+  let hoverTimer = null;
+
+  function open() {
+    container.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+  }
+
+  function close() {
+    container.classList.remove('open');
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggle() {
+    if (container.classList.contains('open')) close();
+    else open();
+  }
+
+  // Click: toggle immediately, no navigation
+  trigger.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    clearTimeout(hoverTimer);
+    toggle();
+  });
+
+  // Hover: open after 250ms delay
+  container.addEventListener('mouseenter', function() {
+    hoverTimer = setTimeout(open, 250);
+  });
+
+  container.addEventListener('mouseleave', function() {
+    clearTimeout(hoverTimer);
+    close();
+  });
+
+  // Close on outside click
+  document.addEventListener('click', function(e) {
+    if (!container.contains(e.target)) close();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') close();
+  });
+})();
+
+// Mobile menu: Listen children expand/collapse
+document.querySelectorAll('.mobile-menu-parent').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    const children = btn.nextElementSibling;
+    if (children) {
+      children.style.display = expanded ? 'none' : 'block';
+    }
+  });
+});
+</script>

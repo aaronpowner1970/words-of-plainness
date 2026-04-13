@@ -15,10 +15,27 @@
     
     <ul class="mobile-menu-nav">
         {% for item in navigation.main %}
-        <li>
-            <a href="{{ item.url }}" class="mobile-menu-link{% if page.url == item.url %} active{% endif %}">
-                {{ item.title }}
-            </a>
+        <li{% if item.children %} class="mobile-menu-has-children"{% endif %}>
+          {% if item.children %}
+          <button class="mobile-menu-link mobile-menu-parent" aria-expanded="false">
+            {{ item.title }}
+            <svg class="mobile-menu-expand-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <ul class="mobile-menu-children" style="display:none;">
+            {% for child in item.children %}
+            <li>
+              <a href="{{ child.url }}" class="mobile-menu-link mobile-menu-child{% if page.url == child.url %} active{% endif %}">
+                <span class="mobile-menu-child-title">{{ child.title }}</span>
+                <span class="mobile-menu-child-desc">{{ child.descriptor }}</span>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <a href="{{ item.url }}" class="mobile-menu-link{% if page.url == item.url %} active{% endif %}">
+            {{ item.title }}
+          </a>
+          {% endif %}
         </li>
         {% endfor %}
     </ul>

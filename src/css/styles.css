@@ -337,6 +337,148 @@ p {
     width: 100%;
 }
 
+/* ── Listen Dropdown (Desktop) ──────────────────── */
+.nav-has-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-trigger {
+    background: none;
+    border: none;
+    color: var(--cream, #E8DCC4);
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.nav-dropdown-trigger:hover,
+.nav-dropdown-trigger.active {
+    color: var(--gold-primary);
+}
+
+.nav-dropdown-arrow {
+    transition: transform 0.2s;
+}
+
+.nav-has-dropdown.open .nav-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 280px;
+    background: var(--deep-brown, #2A1D14);
+    border: 1px solid rgba(196, 148, 58, 0.25);
+    border-radius: 6px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-8px);
+    transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+    z-index: 200;
+}
+
+.nav-has-dropdown.open .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-item {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.nav-dropdown-item:hover {
+    background: rgba(196, 148, 58, 0.1);
+}
+
+.nav-dropdown-item.active {
+    background: rgba(196, 148, 58, 0.15);
+    border-left: 3px solid var(--gold-primary);
+}
+
+.nav-dropdown-item + .nav-dropdown-item {
+    margin-top: 4px;
+}
+
+.nav-dropdown-title {
+    display: block;
+    color: var(--cream, #E8DCC4);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.nav-dropdown-desc {
+    display: block;
+    color: rgba(232, 220, 196, 0.6);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* ── Listen Dropdown (Mobile) ───────────────────── */
+.mobile-menu-parent {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    padding: inherit;
+}
+
+.mobile-menu-expand-icon {
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.mobile-menu-parent[aria-expanded="true"] .mobile-menu-expand-icon {
+    transform: rotate(180deg);
+}
+
+.mobile-menu-children {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu-child {
+    display: block;
+    padding: 10px 16px 10px 28px;
+}
+
+.mobile-menu-child-title {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.mobile-menu-child-desc {
+    display: block;
+    opacity: 0.6;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
 .btn-new-here {
     background: var(--gold-primary);
     color: var(--brown-deep);
