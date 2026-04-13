@@ -1,121 +1,189 @@
 ---
 layout: layouts/page.njk
-title: My Reflections & Goals
-pageTitle: My Reflections & Goals
-pageSubtitle: Your personal journal across all chapters
+title: My Discipleship Journal
+pageTitle: My Discipleship Journal
+pageSubtitle: Your personal record of reflection, commitment, and witness
 permalink: /my-reflections/
+description: "Your personal discipleship journal — reflections, commitments, and witness entries from your study of Words of Plainness."
 ---
 
 <link rel="stylesheet" href="/css/my-reflections.css?v={{ site.version }}">
 
 <style>
-/* Portable Discipleship Document */
+.dj-scripture { text-align: center; margin-bottom: 28px; padding: 0 20px; }
+.dj-scripture blockquote {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-style: italic; font-size: 17px; line-height: 1.65;
+    color: var(--cream, #E8DCC4); opacity: 0.85;
+    border: none; padding: 0; margin: 0 auto 6px;
+}
+.dj-scripture cite {
+    font-size: 13px; font-style: normal; color: var(--gold-dim, #8A6628);
+    letter-spacing: 0.04em;
+}
+.dj-stats {
+    display: flex; gap: 16px; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 32px;
+}
+.dj-stat-card {
+    background: rgba(196,148,58,0.08); border: 1px solid rgba(196,148,58,0.15);
+    border-radius: 6px; padding: 20px 28px; text-align: center; min-width: 140px;
+}
+.dj-stat-number {
+    display: block; font-family: 'Cinzel', serif; font-size: 28px;
+    color: var(--gold, #C4943A); margin-bottom: 4px;
+}
+.dj-stat-label {
+    font-size: 13px; color: var(--cream-dim, #B8A888);
+    letter-spacing: 0.02em;
+}
+.dj-chapter-card {
+    border: 1px solid rgba(196,148,58,0.12); border-radius: 6px;
+    margin-bottom: 10px; overflow: hidden;
+}
+.dj-chapter-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; cursor: pointer;
+    background: rgba(196,148,58,0.04);
+    transition: background 0.2s;
+}
+.dj-chapter-header:hover { background: rgba(196,148,58,0.08); }
+.dj-chapter-title {
+    font-family: 'Crimson Pro', serif; font-size: 17px; font-weight: 600;
+    color: var(--cream, #E8DCC4);
+}
+.dj-chapter-meta {
+    font-size: 12px; color: var(--cream-dim, #B8A888); margin-top: 2px;
+}
+.dj-chapter-toggle {
+    width: 20px; height: 20px; color: var(--gold-dim, #8A6628);
+    transition: transform 0.2s; flex-shrink: 0;
+}
+.dj-chapter-card.open .dj-chapter-toggle { transform: rotate(180deg); }
+.dj-chapter-body {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+}
+.dj-chapter-card.open .dj-chapter-body { max-height: 5000px; }
+.dj-chapter-content { padding: 0 18px 18px; }
+.dj-entry-group { margin-bottom: 16px; }
+.dj-entry-group-label {
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-dim, #8A6628);
+    margin-bottom: 8px; margin-top: 12px;
+}
+.dj-entry {
+    padding: 10px 14px; margin-bottom: 8px;
+    border-radius: 0 4px 4px 0; font-size: 15px; line-height: 1.6;
+}
+.dj-entry-reflect { background: rgba(58,99,99,0.12); border-left: 3px solid #3A6363; }
+.dj-entry-journal { background: rgba(107,61,61,0.12); border-left: 3px solid #6B3D3D; }
+.dj-entry-witness { background: rgba(138,102,40,0.1); border-left: 3px solid #8A6628; }
+.dj-entry-commitment { background: rgba(196,148,58,0.08); border-left: 3px solid #C4943A; }
+.dj-entry-label {
+    font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.22em;
+    text-transform: uppercase; margin-bottom: 4px;
+}
+.dj-entry-label.reflect { color: #3A6363; }
+.dj-entry-label.journal { color: #6B3D3D; }
+.dj-entry-label.witness { color: #8A6628; }
+.dj-entry-label.commitment { color: #C4943A; }
+.dj-entry-text {
+    color: var(--cream, #E8DCC4); white-space: pre-wrap;
+}
+.dj-entry-empty .dj-entry-text {
+    font-style: italic; opacity: 0.45;
+}
+.dj-commitment-meta {
+    font-size: 12px; color: var(--cream-dim, #B8A888);
+    margin-top: 4px;
+}
+.dj-stars { color: var(--gold, #C4943A); letter-spacing: 2px; }
 .pd-section { margin-top: 16px; }
 .pd-document {
-    border: 1px solid rgba(196,148,58,0.2);
-    border-radius: 6px;
-    padding: 32px 28px;
-    margin-top: 16px;
-    background: rgba(30,18,8,0.4);
+    border: 1px solid rgba(196,148,58,0.2); border-radius: 6px;
+    padding: 32px 28px; margin-top: 16px; background: rgba(30,18,8,0.4);
 }
 .pd-doc-header {
-    text-align: center;
-    margin-bottom: 28px;
-    padding-bottom: 20px;
+    text-align: center; margin-bottom: 28px; padding-bottom: 20px;
     border-bottom: 1px solid rgba(196,148,58,0.15);
 }
 .pd-doc-title {
-    font-family: 'Cinzel', serif;
-    font-size: 22px;
-    color: var(--cream, #E8DCC4);
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
+    font-family: 'Cinzel', serif; font-size: 22px;
+    color: var(--cream, #E8DCC4); letter-spacing: 0.04em; margin-bottom: 4px;
 }
 .pd-doc-subtitle {
-    font-size: 14px;
-    color: var(--gold-dim, #8A6628);
-    font-style: italic;
+    font-size: 14px; color: var(--gold-dim, #8A6628); font-style: italic;
 }
 .pd-chapter {
-    margin-bottom: 28px;
-    padding-bottom: 20px;
+    margin-bottom: 28px; padding-bottom: 20px;
     border-bottom: 1px solid rgba(196,148,58,0.1);
 }
 .pd-chapter:last-of-type { border-bottom: none; margin-bottom: 12px; }
 .pd-chapter-title {
-    font-family: 'Cinzel', serif;
-    font-size: 16px;
-    color: var(--gold, #C4943A);
-    margin-bottom: 14px;
-    letter-spacing: 0.03em;
+    font-family: 'Cinzel', serif; font-size: 16px;
+    color: var(--gold, #C4943A); margin-bottom: 14px; letter-spacing: 0.03em;
 }
 .pd-pause-label {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold-dim, #8A6628);
-    margin-bottom: 10px;
-    margin-top: 8px;
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold-dim, #8A6628);
+    margin-bottom: 10px; margin-top: 8px;
 }
 .pd-entry {
-    padding: 12px 16px;
-    margin-bottom: 10px;
-    border-radius: 0 4px 4px 0;
+    padding: 12px 16px; margin-bottom: 10px; border-radius: 0 4px 4px 0;
 }
 .pd-journal { background: rgba(107,61,61,0.12); border-left: 3px solid #6B3D3D; }
 .pd-witness { background: rgba(138,102,40,0.1); border-left: 3px solid #8A6628; }
+.pd-commitment { background: rgba(196,148,58,0.08); border-left: 3px solid #C4943A; }
 .pd-entry-label {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold-dim, #8A6628);
-    margin-bottom: 6px;
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold-dim, #8A6628); margin-bottom: 6px;
 }
 .pd-entry-text {
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--cream, #E8DCC4);
-    white-space: pre-wrap;
+    font-size: 16px; line-height: 1.65; color: var(--cream, #E8DCC4); white-space: pre-wrap;
 }
-.pd-empty .pd-entry-text {
-    font-style: italic;
-    opacity: 0.5;
-}
-.pd-actions {
-    text-align: center;
-    margin-top: 24px;
-}
+.pd-empty .pd-entry-text { font-style: italic; opacity: 0.5; }
+.pd-actions { text-align: center; margin-top: 24px; }
 .pd-auth-notice {
-    font-style: italic;
-    color: var(--cream-dim, #B8A888);
-    opacity: 0.6;
-    text-align: center;
-    padding: 24px;
+    font-style: italic; color: var(--cream-dim, #B8A888); opacity: 0.6;
+    text-align: center; padding: 24px;
 }
-
-/* Print styles */
+.dj-auth-gate { text-align: center; padding: 60px 20px; }
+.dj-auth-card { max-width: 400px; margin: 0 auto; }
+.dj-auth-card svg { color: var(--gold-dim, #8A6628); margin-bottom: 16px; }
+.dj-auth-card h2 {
+    font-family: 'Crimson Pro', serif; font-size: 22px;
+    color: var(--cream, #E8DCC4); margin-bottom: 10px;
+}
+.dj-auth-card p {
+    color: var(--cream-dim, #B8A888); font-size: 15px;
+    line-height: 1.6; margin-bottom: 20px;
+}
+.dj-btn-primary {
+    background: var(--gold, #C4943A); color: var(--rich-brown, #1E1208);
+    border: none; padding: 10px 28px; border-radius: 4px; cursor: pointer;
+    font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.15em;
+    text-transform: uppercase; transition: background 0.2s;
+}
+.dj-btn-primary:hover { background: var(--gold-pale, #E8C97A); }
+.dj-loading {
+    text-align: center; padding: 32px; color: var(--cream-dim, #B8A888);
+    font-style: italic;
+}
+.dj-empty {
+    text-align: center; padding: 32px; color: var(--cream-dim, #B8A888);
+    font-style: italic; opacity: 0.7;
+}
 @media print {
     header, footer, nav,
-    .mr-summary, .mr-section:not(.pd-section),
-    .mr-auth-gate, .mr-stats, .mr-scripture,
-    .pd-actions, .mr-btn-export, #exportBtn,
-    .mr-goals-list, .mr-goal-input-row, .mr-goals-note,
+    .dj-scripture, .dj-stats, .dj-auth-gate,
+    .mr-section:not(.pd-section),
+    .pd-actions, .dj-btn-primary,
     .floating-action-bar, .bottom-toolbar, #backToTop,
-    #fabLantern, #fabSheet, #fabSheetOverlay,
-    .mr-section-alt, .mr-export {
+    #fabLantern, #fabSheet, #fabSheetOverlay {
         display: none !important;
     }
-    body {
-        background: white !important;
-        color: #1a1a1a !important;
-    }
-    .pd-document {
-        border: none !important;
-        background: none !important;
-        padding: 0 !important;
-    }
+    body { background: white !important; color: #1a1a1a !important; }
+    .pd-document { border: none !important; background: none !important; padding: 0 !important; }
     .pd-doc-title, .pd-chapter-title { color: #1a1a1a !important; }
     .pd-doc-subtitle, .pd-entry-label, .pd-pause-label { color: #555 !important; }
     .pd-entry-text { color: #1a1a1a !important; }
@@ -123,88 +191,53 @@ permalink: /my-reflections/
 }
 </style>
 
-<!-- Auth Gate (shown when not logged in) -->
-<section class="mr-auth-gate" id="dashboardAuthGate">
-    <div class="mr-auth-card">
+<section class="dj-auth-gate" id="djAuthGate">
+    <div class="dj-auth-card">
         <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 20h9"/>
             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
         </svg>
-        <h2>Your Reflections Await</h2>
-        <p>Sign in to view your personal reflections and track your spiritual goals across all chapters.</p>
-        <button class="mr-btn-primary" id="dashboardSignIn">Sign In</button>
+        <h2>Your Discipleship Journal Awaits</h2>
+        <p>Sign in to view your reflections, commitments, and witness entries from across all chapters.</p>
+        <button class="dj-btn-primary" id="djSignIn">Sign In</button>
     </div>
 </section>
 
-<!-- Dashboard (shown when logged in) -->
-<div class="mr-dashboard" id="dashboardContent" style="display:none">
-
-    <!-- Summary Section -->
-    <section class="mr-summary">
-        <div class="mr-scripture">
-            <blockquote>"But Mary kept all these things, and pondered them in her heart."</blockquote>
-            <cite>— Luke 2:19</cite>
-        </div>
-        <div class="mr-stats">
-            <div class="mr-stat-card">
-                <span class="mr-stat-number" id="statTotalReflections">—</span>
-                <span class="mr-stat-label">Total Reflections</span>
-            </div>
-            <div class="mr-stat-card">
-                <span class="mr-stat-number" id="statChaptersCount">—</span>
-                <span class="mr-stat-label">Chapters with Reflections</span>
-            </div>
-            <div class="mr-stat-card">
-                <span class="mr-stat-number" id="statMostRecent">—</span>
-                <span class="mr-stat-label">Most Recent</span>
-            </div>
-        </div>
+<div class="dj-dashboard" id="djContent" style="display:none">
+    <section class="dj-scripture">
+        <blockquote>"But Mary kept all these things, and pondered them in her heart."</blockquote>
+        <cite>— Luke 2:19</cite>
     </section>
+    <div class="dj-stats">
+        <div class="dj-stat-card">
+            <span class="dj-stat-number" id="statTotal">—</span>
+            <span class="dj-stat-label">Total Entries</span>
+        </div>
+        <div class="dj-stat-card">
+            <span class="dj-stat-number" id="statChapters">—</span>
+            <span class="dj-stat-label">Chapters Engaged</span>
+        </div>
+        <div class="dj-stat-card">
+            <span class="dj-stat-number" id="statRecent">—</span>
+            <span class="dj-stat-label">Most Recent</span>
+        </div>
+    </div>
 
-    <!-- Chapter Reflections -->
     <section class="mr-section">
-        <h2 class="mr-section-title">Your Reflections by Chapter</h2>
-        <div id="chapterAccordion" class="mr-accordion">
-            <p class="mr-loading" id="reflectionsLoading">Loading your reflections...</p>
-            <p class="mr-empty" id="noReflectionsMsg" style="display:none">
-                You haven't recorded any reflections yet. Visit a chapter and use the Personal Reflection section to begin your journal.
+        <h2 class="mr-section-title">Your Journal by Chapter</h2>
+        <div id="chapterAccordion">
+            <p class="dj-loading" id="djLoading">Loading your journal...</p>
+            <p class="dj-empty" id="djEmpty" style="display:none">
+                You haven't recorded any entries yet. Visit a chapter and use the Reflect · Journal · Witness tabs or card commitments to begin.
             </p>
         </div>
     </section>
 
-    <!-- Goals Section -->
-    <section class="mr-section mr-section-alt">
-        <div class="mr-section-inner">
-            <h2 class="mr-section-title">Personal Goals</h2>
-            <p class="mr-section-subtitle">Commitments and aspirations from your study</p>
-
-            <div class="mr-goal-input-row">
-                <textarea id="goalInput" class="mr-goal-textarea" placeholder="Write a personal goal or commitment..." rows="2"></textarea>
-                <button class="mr-btn-add-goal" id="addGoalBtn">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    Add Goal
-                </button>
-            </div>
-            <div id="goalsList" class="mr-goals-list"></div>
-            <p class="mr-goals-note">Goals are saved locally on this device.</p>
-        </div>
-    </section>
-
-    <!-- Export Section -->
-    <section class="mr-section mr-export">
-        <button class="mr-btn-export" id="exportBtn">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download My Reflections
-        </button>
-    </section>
-
-    <!-- Discipleship Document -->
     <section class="mr-section pd-section">
         <h2 class="mr-section-title">My Discipleship Document</h2>
-        <p class="mr-section-subtitle">Your Reflect · Journal · Witness responses, formatted for print or export</p>
+        <p class="mr-section-subtitle">Your journal and witness entries, formatted for print or export</p>
         <div id="pauseDocSection"></div>
     </section>
-
 </div>
 
 <script src="/js/wop-reflections.js"></script>
