@@ -32,6 +32,7 @@ const NarrationPlayer = {
         this.loadChapters();
         this.loadVolume();
         this.bindEvents();
+        this.restoreViewTextState();
         this.restorePosition();
 
         console.log('NarrationPlayer initialized with', this.chapters.length, 'chapters');
@@ -210,6 +211,7 @@ const NarrationPlayer = {
 
         // Update UI
         this.updateNowPlaying(ch);
+        this.updateViewText(ch.chapter, ch.title);
         this.chapters.forEach(function(c) { c.row.classList.remove('playing', 'is-playing'); });
         ch.row.classList.add('playing', 'is-playing');
         ch.row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -421,6 +423,43 @@ const NarrationPlayer = {
         var isOpen = wrapper.classList.toggle('open');
         this.els.viewTextToggle.setAttribute('aria-expanded', isOpen);
         this.els.viewTextArrow.innerHTML = isOpen ? '&#9650;' : '&#9660;';
+        localStorage.setItem('wop-narration-viewtext', isOpen ? '1' : '0');
+    },
+
+    restoreViewTextState() {
+        var saved = localStorage.getItem('wop-narration-viewtext');
+        if (saved === '1') {
+            this.els.viewTextWrapper.classList.add('open');
+            this.els.viewTextToggle.setAttribute('aria-expanded', 'true');
+            this.els.viewTextArrow.innerHTML = '&#9650;';
+        }
+    },
+
+    updateViewText(chapterNum, chapterTitle) {
+        var store = document.getElementById('chapterContentStore');
+        if (!store) return;
+
+        var allChapters = store.querySelectorAll('.view-text-chapter');
+        var found = false;
+
+        allChapters.forEach(function(div) {
+            if (parseInt(div.dataset.chapter, 10) === chapterNum) {
+                // Replace the visible panel's inner content
+                var panel = document.querySelector('#viewTextPanel .view-text-panel');
+                if (panel) {
+                    panel.innerHTML = div.innerHTML;
+                }
+                found = true;
+            }
+        });
+
+        if (!found) {
+            var panel = document.querySelector('#viewTextPanel .view-text-panel');
+            if (panel) {
+                panel.innerHTML = '<h2 class="view-text-heading">Chapter ' + chapterNum + ': ' + chapterTitle + '</h2>' +
+                    '<div class="view-text-content"><p class="no-text">Text not available for this chapter.</p></div>';
+            }
+        }
     },
 
     // =========================================

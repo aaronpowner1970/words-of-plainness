@@ -180,6 +180,24 @@ module.exports = function(eleventyConfig) {
         }
     });
 
+    // Strip interactive elements from chapter content for View Text panel
+    eleventyConfig.addFilter("stripInteractive", function(content) {
+        if (!content) return '';
+        return content
+            // Remove pause-points and their following section-gap divs
+            .replace(/<div class="pause-point"[\s\S]*?<\/div>\s*<\/div>\s*<div class="section-gap"><\/div>/g, '')
+            // Remove standalone section-gap divs
+            .replace(/<div class="section-gap"><\/div>/g, '')
+            // Remove citation dagger marks
+            .replace(/<span class="cite-mark"[\s\S]*?<\/span>/g, '')
+            // Remove bottom learning tools section
+            .replace(/<section class="bottom-learning-tools"[\s\S]*?<\/section>/g, '')
+            // Remove chapter navigation
+            .replace(/<div class="chapter-nav-bottom"[\s\S]*?<\/div>/g, '')
+            // Remove discord section
+            .replace(/<section class="discord-section"[\s\S]*?<\/section>/g, '');
+    });
+
     // Format reading time
     eleventyConfig.addFilter("readingTime", minutes => {
         if (minutes < 1) return "< 1 min read";

@@ -220,6 +220,16 @@ permalink: /narrations/
     <div class="narration-footer">
         <p>All chapters narrated by Brother Aaron using his professional voice. Visit the <a href="/writings/">full chapter pages</a> for interactive study tools, musical testimonies, and community discussion.</p>
     </div>
+
+    <!-- Hidden chapter content for View Text panel (build-time embedded) -->
+    <div id="chapterContentStore" style="display:none;">
+        {%- for chapter in narratedChapters -%}
+        <div class="view-text-chapter" data-chapter="{{ chapter.data.chapter }}">
+            <h2 class="view-text-chapter-title">Chapter {{ chapter.data.chapter }}: {{ chapter.data.title }}</h2>
+            <div class="view-text-prose">{{ chapter.templateContent | stripInteractive | safe }}</div>
+        </div>
+        {%- endfor -%}
+    </div>
 </div>
 
 </div><!-- /.narration-layout -->
