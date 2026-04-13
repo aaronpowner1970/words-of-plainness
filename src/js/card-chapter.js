@@ -34,6 +34,9 @@
                 o.classList.remove('selected');
             });
             this.classList.add('selected');
+            // Explicitly check the radio — browser label forwarding is unreliable
+            var radio = this.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
         });
     });
 

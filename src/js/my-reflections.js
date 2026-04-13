@@ -335,6 +335,11 @@ var Journal = {
                     var label = pid.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
                     html += '<div class="pd-pause-label">' + djEsc(label) + '</div>';
                 }
+                // Reflect
+                if (tabs.reflect && tabs.reflect.response_text && tabs.reflect.response_text.trim()) {
+                    html += '<div class="pd-entry pd-journal"><div class="pd-entry-label">Reflect</div>';
+                    html += '<div class="pd-entry-text">' + djEsc(tabs.reflect.response_text) + '</div></div>';
+                }
                 if (tabs.journal && tabs.journal.response_text && tabs.journal.response_text.trim()) {
                     html += '<div class="pd-entry pd-journal"><div class="pd-entry-label">Journal</div>';
                     html += '<div class="pd-entry-text">' + djEsc(tabs.journal.response_text) + '</div></div>';
