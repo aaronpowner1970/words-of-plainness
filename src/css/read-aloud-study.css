@@ -10,29 +10,43 @@
 .study-read-aloud-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.5rem 1rem;
-    background: rgba(196, 148, 58, 0.1);
-    border: 1px solid rgba(196, 148, 58, 0.3);
-    border-radius: 22px;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(26, 18, 11, 0.75);
+    border: 1.5px solid var(--gold-primary);
+    border-radius: 24px;
     color: var(--gold-primary);
     font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     cursor: pointer;
     transition: all var(--transition-fast);
-    margin-top: 1rem;
+    margin-top: 1.25rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(196, 148, 58, 0.15);
 }
 .study-read-aloud-trigger:hover {
-    background: rgba(196, 148, 58, 0.2);
-    border-color: rgba(196, 148, 58, 0.5);
+    background: rgba(196, 148, 58, 0.25);
+    border-color: var(--gold-light);
+    box-shadow: 0 2px 16px rgba(196, 148, 58, 0.3), 0 0 0 1px rgba(196, 148, 58, 0.3);
+    color: var(--gold-light);
 }
 .study-read-aloud-trigger:active {
     transform: scale(0.97);
 }
 .study-read-aloud-trigger svg {
     flex-shrink: 0;
+}
+.study-read-aloud-trigger.listening {
+    background: rgba(196, 148, 58, 0.2);
+    border-color: var(--gold-primary);
+    animation: studyTriggerPulse 2.5s ease-in-out infinite;
+}
+@keyframes studyTriggerPulse {
+    0%, 100% { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(196, 148, 58, 0.15); }
+    50% { box-shadow: 0 2px 16px rgba(196, 148, 58, 0.35), 0 0 0 3px rgba(196, 148, 58, 0.1); }
 }
 
 /* ── Sticky Audio Player Bar ────────────────────────────── */
