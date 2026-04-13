@@ -77,11 +77,6 @@
 
 <!-- Non-content sections excluded from search -->
 <div data-pagefind-ignore>
-<!-- Reflection Section — hidden when R·J·W pause-points are active -->
-{% if not pauses or pauses.length == 0 %}
-{% include "components/reflection-section.njk" %}
-{% endif %}
-
 <!-- Discord Community Section -->
 {% include "components/discord-section.njk" %}
 
@@ -254,7 +249,6 @@
 <script src="/js/chapter.js?v={{ site.version }}"></script>
 <script src="/js/audio-sync.js"></script>
 <script src="/js/wop-reflections.js"></script>
-<script src="/js/reflections.js"></script>
 <script>
     // Chapter-specific configuration
     // Legacy single-file timestamps
