@@ -85,7 +85,7 @@ const MusicPlayer = {
         this.audio.addEventListener('timeupdate', () => this.onTimeUpdate());
         this.audio.addEventListener('loadedmetadata', () => this.onMetadataLoaded());
         this.audio.addEventListener('ended', () => this.onTrackEnded());
-        this.audio.addEventListener('play', () => this.updatePlayState(true));
+        this.audio.addEventListener('play', () => { this.els.btnPlay.classList.remove('loading'); this.updatePlayState(true); });
         this.audio.addEventListener('pause', () => this.updatePlayState(false));
         this.audio.addEventListener('error', (e) => this.onAudioError(e));
 
@@ -184,6 +184,9 @@ const MusicPlayer = {
         this.audio.pause();
         this.audio.src = track.src;
 
+        // Show loading state
+        this.els.btnPlay.classList.add('loading');
+
         // Update UI immediately (don't wait for audio)
         this.updateNowPlaying(track);
         this.updateLyrics(track);
@@ -191,11 +194,12 @@ const MusicPlayer = {
         track.row.classList.add('playing', 'is-playing');
         track.row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-        // Play immediately — browser handles buffering natively
+        // Play — loading spinner clears on 'play' event
         this.audio.play().catch((err) => {
             if (thisIntent !== this.playIntent) return; // stale — user clicked another track
             if (err.name === 'AbortError') return; // expected when switching tracks
             if (err.name === 'NotAllowedError') return; // autoplay policy
+            this.els.btnPlay.classList.remove('loading');
             console.warn('Playback failed:', err.message);
         });
     },
@@ -318,6 +322,7 @@ const MusicPlayer = {
     },
 
     onAudioError(e) {
+        this.els.btnPlay.classList.remove('loading');
         const err = this.audio.error;
         if (err) {
             console.warn('Audio error:', err.code, err.message);

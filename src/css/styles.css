@@ -343,22 +343,30 @@ p {
 }
 
 .nav-dropdown-trigger {
+    /* Strip all button defaults */
+    appearance: none;
+    -webkit-appearance: none;
     background: none;
     border: none;
-    color: var(--cream, #E8DCC4);
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    /* Match <a> link rendering */
+    display: inline;
+    vertical-align: baseline;
+    line-height: inherit;
+    font: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+    text-decoration: none;
     cursor: pointer;
+    transition: color 0.2s;
+}
+
+.nav-trigger-inner {
     display: inline-flex;
     align-items: center;
-    vertical-align: baseline;
     gap: 4px;
-    padding: var(--space-xs) 0;
-    margin: 0;
-    line-height: inherit;
-    transition: color 0.2s;
 }
 
 .nav-dropdown-trigger:hover,
@@ -451,9 +459,10 @@ p {
     border: none;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    position: relative;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
     font-family: inherit;
     font-size: inherit;
     color: inherit;
@@ -461,6 +470,8 @@ p {
 }
 
 .mobile-menu-expand-icon {
+    position: absolute;
+    right: 0;
     transition: transform 0.2s;
     flex-shrink: 0;
 }
@@ -477,7 +488,8 @@ p {
 
 .mobile-menu-child {
     display: block;
-    padding: 10px 16px 10px 28px;
+    padding: 10px 16px;
+    text-align: center;
 }
 
 .mobile-menu-child-title {
@@ -492,6 +504,7 @@ p {
     font-size: 0.8rem;
     line-height: 1.4;
     margin-top: 2px;
+    text-align: center;
 }
 
 .btn-new-here {

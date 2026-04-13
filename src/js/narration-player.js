@@ -102,7 +102,7 @@ const NarrationPlayer = {
         this.audio.addEventListener('timeupdate', function() { self.onTimeUpdate(); });
         this.audio.addEventListener('loadedmetadata', function() { self.onMetadataLoaded(); });
         this.audio.addEventListener('ended', function() { self.onEnded(); });
-        this.audio.addEventListener('play', function() { self.updatePlayState(true); });
+        this.audio.addEventListener('play', function() { self.clearLoading(); self.updatePlayState(true); });
         this.audio.addEventListener('pause', function() {
             self.updatePlayState(false);
             self.savePosition();
@@ -209,6 +209,9 @@ const NarrationPlayer = {
         this.audio.pause();
         this.audio.src = src;
 
+        // Show loading state
+        this.els.btnPlay.classList.add('loading');
+
         // Update UI
         this.updateNowPlaying(ch);
         this.updateViewText(ch.chapter, ch.title);
@@ -226,6 +229,10 @@ const NarrationPlayer = {
         this.els.timeTotal.textContent = '0:00';
     },
 
+    clearLoading() {
+        this.els.btnPlay.classList.remove('loading');
+    },
+
     play() {
         var self = this;
         var thisIntent = this.playIntent;
@@ -234,6 +241,7 @@ const NarrationPlayer = {
             if (thisIntent !== self.playIntent) return;
             if (err.name === 'AbortError') return;
             if (err.name === 'NotAllowedError') return;
+            self.clearLoading();
             console.warn('Playback failed:', err.message);
         });
     },
@@ -332,6 +340,7 @@ const NarrationPlayer = {
     },
 
     onAudioError() {
+        this.clearLoading();
         var err = this.audio.error;
         if (err) {
             console.warn('Audio error:', err.code, err.message);

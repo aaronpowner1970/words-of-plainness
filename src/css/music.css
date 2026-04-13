@@ -82,6 +82,36 @@
     color: #fff;
 }
 
+/* Audio loading state */
+.player-btn.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    position: relative;
+}
+
+.player-btn.loading .icon-play,
+.player-btn.loading .icon-pause {
+    visibility: hidden;
+}
+
+.player-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: playerSpin 0.8s linear infinite;
+}
+
+@keyframes playerSpin {
+    to { transform: rotate(360deg); }
+}
+
 .repeat-badge {
     position: absolute;
     top: -2px;
