@@ -307,6 +307,7 @@
 
 .view-text-wrapper.open .view-text-panel-body {
     max-height: 80vh;
+    overflow-y: auto;
 }
 
 .view-text-panel {
@@ -333,6 +334,42 @@
     border-radius: var(--radius-md, 8px);
     line-height: 1.8;
     color: var(--cream, #E8DCC4);
+}
+
+/* Custom scrollbar for View Text */
+.view-text-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.view-text-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.view-text-content::-webkit-scrollbar-thumb {
+    background: rgba(139, 90, 43, 0.4);
+    border-radius: 3px;
+}
+
+.view-text-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 90, 43, 0.65);
+}
+
+.view-text-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 90, 43, 0.4) transparent;
+}
+
+/* Podcast gating message */
+.view-text-gated {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    font-style: italic;
+    color: rgba(232, 220, 196, 0.5);
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 2rem 1rem;
 }
 
 .no-text {

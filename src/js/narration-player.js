@@ -248,7 +248,7 @@ var NarrationPlayer = {
 
         // Update UI
         this.updateNowPlaying(ch, trackType);
-        this.updateViewText(ch.chapter, ch.title);
+        this.updateViewText(ch.chapter, ch.title, trackType);
         this.clearAllHighlights();
         var activeRow = trackType === 'podcast' ? ch.podcastRow : ch.narrationRow;
         activeRow.classList.add('playing');
@@ -477,7 +477,17 @@ var NarrationPlayer = {
         }
     },
 
-    updateViewText: function(chapterNum, chapterTitle) {
+    updateViewText: function(chapterNum, chapterTitle, trackType) {
+        var panel = document.querySelector('#viewTextPanel .view-text-panel');
+        if (!panel) return;
+
+        // Gating: only show full text for narration tracks
+        if (trackType === 'podcast') {
+            panel.innerHTML = '<h2 class="view-text-heading">Chapter ' + chapterNum + ': ' + chapterTitle + '</h2>' +
+                '<div class="view-text-content"><p class="view-text-gated">Full chapter text is available when listening to the Full Narration.</p></div>';
+            return;
+        }
+
         var store = document.getElementById('chapterContentStore');
         if (!store) return;
 
@@ -486,20 +496,14 @@ var NarrationPlayer = {
 
         allChapters.forEach(function(div) {
             if (parseInt(div.dataset.chapter, 10) === chapterNum) {
-                var panel = document.querySelector('#viewTextPanel .view-text-panel');
-                if (panel) {
-                    panel.innerHTML = div.innerHTML;
-                }
+                panel.innerHTML = div.innerHTML;
                 found = true;
             }
         });
 
         if (!found) {
-            var panel = document.querySelector('#viewTextPanel .view-text-panel');
-            if (panel) {
-                panel.innerHTML = '<h2 class="view-text-heading">Chapter ' + chapterNum + ': ' + chapterTitle + '</h2>' +
-                    '<div class="view-text-content"><p class="no-text">Text not available for this chapter.</p></div>';
-            }
+            panel.innerHTML = '<h2 class="view-text-heading">Chapter ' + chapterNum + ': ' + chapterTitle + '</h2>' +
+                '<div class="view-text-content"><p class="no-text">Text not available for this chapter.</p></div>';
         }
     },
 
