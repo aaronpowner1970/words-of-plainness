@@ -454,6 +454,8 @@ p {
 
 /* ── Listen Dropdown (Mobile) ───────────────────── */
 .mobile-menu-parent {
+    appearance: none;
+    -webkit-appearance: none;
     width: 100%;
     background: none;
     border: none;
@@ -463,10 +465,10 @@ p {
     position: relative;
     cursor: pointer;
     text-align: center;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    padding: inherit;
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    color: var(--cream);
+    padding: var(--space-sm) 0;
 }
 
 .mobile-menu-expand-icon {
@@ -482,8 +484,17 @@ p {
 
 .mobile-menu-children {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 12px 16px;
+    margin: 8px 24px 8px 24px;
+    border: 1px solid rgba(196, 148, 58, 0.3);
+    border-radius: 6px;
+    background: rgba(196, 148, 58, 0.04);
+}
+
+.mobile-menu-children li + li {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(196, 148, 58, 0.12);
 }
 
 .mobile-menu-child {
