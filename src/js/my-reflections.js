@@ -288,7 +288,7 @@ var Journal = {
     },
 
     renderDocument: function() {
-        var container = document.getElementById('pauseDocSection');
+        var container = document.getElementById('printDocContent');
         if (!container) return;
 
         var chapters = {};
@@ -316,7 +316,7 @@ var Journal = {
             return;
         }
 
-        var html = '<div class="pd-document">';
+        var html = '';
         html += '<div class="pd-doc-header">';
         html += '<h3 class="pd-doc-title">My Discipleship Document</h3>';
         html += '<p class="pd-doc-subtitle">Words of Plainness \u00b7 Personal Study Record</p>';
@@ -367,10 +367,7 @@ var Journal = {
             html += '</div>';
         });
 
-        html += '<div class="pd-actions">';
-        html += '<button class="dj-btn-primary" onclick="window.print()">Print / Save as PDF</button>';
-        html += '</div>';
-        html += '</div>';
+
 
         container.innerHTML = html;
     },

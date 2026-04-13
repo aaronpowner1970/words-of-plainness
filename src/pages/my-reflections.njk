@@ -183,17 +183,16 @@ description: "Your personal discipleship journal — reflections, commitments, a
     text-align: center; padding: 32px; color: var(--cream-dim, #B8A888);
     font-style: italic; opacity: 0.7;
 }
+.pd-print-only { display: none; }
+.dj-print-section { text-align: center; padding: 24px 0 8px; }
 @media print {
-    header, footer, nav,
-    .dj-scripture, .dj-stats, .dj-auth-gate,
-    .mr-section:not(.pd-section),
-    .pd-actions, .dj-btn-primary,
+    header, footer, nav, .dj-scripture, .dj-stats, .dj-auth-gate,
+    .mr-section, .dj-print-section,
     .floating-action-bar, .bottom-toolbar, #backToTop,
-    #fabLantern, #fabSheet, #fabSheetOverlay {
-        display: none !important;
-    }
+    #fabLantern, #fabSheet, #fabSheetOverlay { display: none !important; }
+    .pd-print-only { display: block !important; padding: 0; }
     body { background: white !important; color: #1a1a1a !important; }
-    .pd-document { border: none !important; background: none !important; padding: 0 !important; }
+    .pd-print-only, .pd-doc-header, .pd-chapter { border: none !important; background: none !important; }
     .pd-doc-title, .pd-chapter-title { color: #1a1a1a !important; }
     .pd-doc-subtitle, .pd-entry-label, .pd-pause-label { color: #555 !important; }
     .pd-entry-text { color: #1a1a1a !important; }
@@ -243,11 +242,14 @@ description: "Your personal discipleship journal — reflections, commitments, a
         </div>
     </section>
 
-    <section class="mr-section pd-section">
-        <h2 class="mr-section-title">My Discipleship Document</h2>
-        <p class="mr-section-subtitle">Your journal and witness entries, formatted for print or export</p>
-        <div id="pauseDocSection"></div>
+    <section class="mr-section dj-print-section">
+        <button class="dj-btn-primary" onclick="window.print()">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -2px; margin-right: 6px;"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / Save as PDF
+        </button>
     </section>
+
+    <div id="printDocContent" class="pd-print-only"></div>
 </div>
 
 <script src="/js/wop-reflections.js"></script>
