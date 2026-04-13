@@ -48,6 +48,20 @@ description: "Blog posts, Discord community, newsletter, discipleship apps, and 
     color: var(--gold-light, #D4A84A);
     border-color: var(--gold-light, #D4A84A);
 }
+.connect-toc-list .connect-toc-highlight {
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-deep, #3D2B1F);
+    padding: 0.2rem 0.65rem;
+    border-radius: 4px;
+    border-bottom: none;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s;
+}
+.connect-toc-list .connect-toc-highlight:hover {
+    background: var(--gold-light, #D4A84A);
+    color: var(--brown-deep, #3D2B1F);
+    border-bottom: none;
+}
 
 /* ── Intro Card (Posts & Discipleship) ── */
 .connect-intro-card {
@@ -86,7 +100,7 @@ description: "Blog posts, Discord community, newsletter, discipleship apps, and 
     <div class="connect-toc-title">On This Page</div>
     <ul class="connect-toc-list">
         <li><a href="#guidelines">Community Guidelines</a></li>
-        <li><a href="/posts/">Posts</a></li>
+        <li><a href="/posts/" class="connect-toc-highlight">Posts</a></li>
         <li><a href="#discord">Discord</a></li>
         <li><a href="#discipleship">Discipleship Apps</a></li>
         <li><a href="#newsletter">Newsletter</a></li>
