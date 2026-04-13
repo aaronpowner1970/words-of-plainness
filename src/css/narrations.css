@@ -561,6 +561,7 @@
     cursor: pointer;
     transition: background 0.15s;
     border-radius: 4px;
+    position: relative;
 }
 
 .narration-track-row:hover {
@@ -595,8 +596,8 @@
 .track-completed {
     color: var(--gold-primary, #C4943A);
     font-size: 0.8rem;
-    margin-left: 6px;
-    flex-shrink: 0;
+    position: absolute;
+    right: 64px;
 }
 
 /* --- Resume Prompt --- */
@@ -781,6 +782,10 @@
 
     .narration-track-duration {
         display: none;
+    }
+
+    .track-completed {
+        right: 10px;
     }
 
     .narration-section-header {
