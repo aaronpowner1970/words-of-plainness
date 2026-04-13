@@ -17,8 +17,10 @@ sectionCount: 11
 
 audio:
   narration: "NR_04_01_Spiritual_Knowledge.mp3"
+  narrationDuration: "35:11"
   cue: "NR_04_CUE_01_Closing.mp3"
   overview: "PO_04_01_Spiritual_Knowledge.mp3"
+  overviewDuration: "6:03"
   testimony:
     file: "04_01_When_God_Becomes_Real_Sacred_Americana.mp3"
     title: "When God Becomes Real"

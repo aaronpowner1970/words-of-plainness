@@ -16,6 +16,8 @@ readingTime: 22
 
 audio:
   overview: PO_09_01_Yehoshua_the_Man.mp3
+  overviewDuration: "7:12"
+  narrationDuration: "37:32"
   testimony:
     file: "09_01_Established_in_Him_Sacred_Americana.mp3"
     title: "Established in Him"

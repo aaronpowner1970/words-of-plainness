@@ -98,6 +98,15 @@ permalink: /narrations/
     </div>
 
     <!-- ==========================================
+         How This Page Works
+         ========================================== -->
+    <div class="narration-how-it-works">
+      <h2 class="narration-note-heading">How This Page Works</h2>
+      <p>Every chapter offers two ways to listen. <strong>Podcast tracks</strong> give you the chapter's themes in a shorter format — some are brief overviews, others are dramatizations or discussions. <strong>Full narrations</strong> are the complete chapter read aloud by Brother Aaron, word for word.</p>
+      <p>Press play on any track and it will continue through each chapter automatically. Podcast tracks advance to the next chapter's podcast. Full narrations advance to the next chapter's full narration. You can switch between them at any time.</p>
+    </div>
+
+    <!-- ==========================================
          Chapter List
          ========================================== -->
     <div class="narration-container">
@@ -127,41 +136,41 @@ permalink: /narrations/
             <p class="section-subtitle">Foundations of faith and receiving Christ</p>
         </div>
 
-        <table class="narration-table">
-            <thead>
-                <tr>
-                    <th class="col-num">Ch.</th>
-                    <th class="col-title">Title</th>
-                    <th class="col-duration">Duration</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%- for chapter in m1Chapters -%}
-                <tr class="narration-row"
-                    data-chapter="{{ chapter.data.chapter }}"
-                    data-title="{{ chapter.data.title }}"
-                    data-chapter-url="{{ chapter.url }}"
-                    {%- if chapter.data.audio.sections and chapter.data.audio.sections.length > 0 %}
-                    data-narration-type="sections"
-                    data-sections='{{ chapter.data.audio.sections | dump | safe }}'
-                    {%- else %}
-                    data-narration-type="single"
-                    data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.narration }}"
-                    {%- endif %}>
-                    <td class="col-num">{{ chapter.data.chapter }}</td>
-                    <td class="col-title">
-                        <div class="narration-title-group">
-                            <span class="narration-title">{{ chapter.data.title }}</span>
-                            <a href="{{ chapter.url }}" class="narration-chapter-link" title="Read full chapter">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            </a>
-                        </div>
-                    </td>
-                    <td class="col-duration" data-duration>&mdash;</td>
-                </tr>
-                {%- endfor -%}
-            </tbody>
-        </table>
+        {%- for chapter in m1Chapters -%}
+        <div class="narration-chapter-group">
+          <div class="narration-chapter-header">
+            <span class="narration-ch-num">Ch {{ chapter.data.chapter }}</span>
+            <span class="narration-ch-title">{{ chapter.data.title }}</span>
+            <a href="{{ chapter.url }}" class="narration-chapter-link" title="Read full chapter">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
+          <div class="narration-track-row"
+               data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.overview }}"
+               data-chapter="{{ chapter.data.chapter }}"
+               data-title="{{ chapter.data.title }}"
+               data-track-type="podcast"
+               data-chapter-url="{{ chapter.url }}">
+            <span class="narration-track-label">{{ chapter.data.audio.overviewLabel | default("Podcast Overview") }}</span>
+            <span class="narration-track-duration">{{ chapter.data.audio.overviewDuration }}</span>
+          </div>
+          <div class="narration-track-row"
+               data-chapter="{{ chapter.data.chapter }}"
+               data-title="{{ chapter.data.title }}"
+               data-track-type="narration"
+               data-chapter-url="{{ chapter.url }}"
+               {%- if chapter.data.audio.narration and chapter.data.audio.narration != "" %}
+               data-narration-type="single"
+               data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.narration }}"
+               {%- elif chapter.data.audio.sections and chapter.data.audio.sections.length > 0 %}
+               data-narration-type="sections"
+               data-sections='{{ chapter.data.audio.sections | dump | safe }}'
+               {%- endif %}>
+            <span class="narration-track-label">Full Narration</span>
+            <span class="narration-track-duration">{{ chapter.data.audio.narrationDuration }}</span>
+          </div>
+        </div>
+        {%- endfor -%}
         {%- endif -%}
 
         {# Movement 2: Chapters 7-11 #}
@@ -178,41 +187,41 @@ permalink: /narrations/
             <p class="section-subtitle">The life and character of Jesus Christ</p>
         </div>
 
-        <table class="narration-table">
-            <thead>
-                <tr>
-                    <th class="col-num">Ch.</th>
-                    <th class="col-title">Title</th>
-                    <th class="col-duration">Duration</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%- for chapter in m2Chapters -%}
-                <tr class="narration-row"
-                    data-chapter="{{ chapter.data.chapter }}"
-                    data-title="{{ chapter.data.title }}"
-                    data-chapter-url="{{ chapter.url }}"
-                    {%- if chapter.data.audio.sections and chapter.data.audio.sections.length > 0 %}
-                    data-narration-type="sections"
-                    data-sections='{{ chapter.data.audio.sections | dump | safe }}'
-                    {%- else %}
-                    data-narration-type="single"
-                    data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.narration }}"
-                    {%- endif %}>
-                    <td class="col-num">{{ chapter.data.chapter }}</td>
-                    <td class="col-title">
-                        <div class="narration-title-group">
-                            <span class="narration-title">{{ chapter.data.title }}</span>
-                            <a href="{{ chapter.url }}" class="narration-chapter-link" title="Read full chapter">
-                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            </a>
-                        </div>
-                    </td>
-                    <td class="col-duration" data-duration>&mdash;</td>
-                </tr>
-                {%- endfor -%}
-            </tbody>
-        </table>
+        {%- for chapter in m2Chapters -%}
+        <div class="narration-chapter-group">
+          <div class="narration-chapter-header">
+            <span class="narration-ch-num">Ch {{ chapter.data.chapter }}</span>
+            <span class="narration-ch-title">{{ chapter.data.title }}</span>
+            <a href="{{ chapter.url }}" class="narration-chapter-link" title="Read full chapter">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
+          <div class="narration-track-row"
+               data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.overview }}"
+               data-chapter="{{ chapter.data.chapter }}"
+               data-title="{{ chapter.data.title }}"
+               data-track-type="podcast"
+               data-chapter-url="{{ chapter.url }}">
+            <span class="narration-track-label">{{ chapter.data.audio.overviewLabel | default("Podcast Overview") }}</span>
+            <span class="narration-track-duration">{{ chapter.data.audio.overviewDuration }}</span>
+          </div>
+          <div class="narration-track-row"
+               data-chapter="{{ chapter.data.chapter }}"
+               data-title="{{ chapter.data.title }}"
+               data-track-type="narration"
+               data-chapter-url="{{ chapter.url }}"
+               {%- if chapter.data.audio.narration and chapter.data.audio.narration != "" %}
+               data-narration-type="single"
+               data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.narration }}"
+               {%- elif chapter.data.audio.sections and chapter.data.audio.sections.length > 0 %}
+               data-narration-type="sections"
+               data-sections='{{ chapter.data.audio.sections | dump | safe }}'
+               {%- endif %}>
+            <span class="narration-track-label">Full Narration</span>
+            <span class="narration-track-duration">{{ chapter.data.audio.narrationDuration }}</span>
+          </div>
+        </div>
+        {%- endfor -%}
         {%- endif -%}
 
     </div>

@@ -17,8 +17,11 @@ sectionCount: 11
 
 audio:
   narration: "NR_02_01_Our_Search.mp3"
+  narrationDuration: "27:24"
   cue: "NR_02_CUE_01_Closing.mp3"
   overview: "PO_02_01_Our_Search.mp3"
+  overviewDuration: "27:13"
+  overviewLabel: "Podcast Dramatization"
   testimony:
     file: "02_01_Our_Search_Sacred_Americana.mp3"
     title: "Our Search"

@@ -1,18 +1,20 @@
 /**
- * WORDS OF PLAINNESS — Narration Player
- * ======================================
- * Sequential chapter narration player for the Narrations page.
- * Supports single-file and section-based chapters with continuous auto-advance.
+ * WORDS OF PLAINNESS — Narration Player (Two-Track)
+ * ==================================================
+ * Two-track-per-chapter player for the Narrations page.
+ * Each chapter has a podcast track and a full narration track.
+ * Auto-advance stays in the same lane (podcast→podcast, narration→narration).
  */
 
-const CDN_BASE = 'https://media.wordsofplainness.org/web/';
+var CDN_BASE = 'https://media.wordsofplainness.org/web/';
 
-const NarrationPlayer = {
+var NarrationPlayer = {
     // State
     audio: null,
     chapters: [],
     currentIndex: -1,
     currentSectionIndex: 0,
+    currentTrackType: null, // "podcast" or "narration"
     isPlaying: false,
     playIntent: 0,
 
@@ -20,11 +22,12 @@ const NarrationPlayer = {
     STORAGE_KEY_CHAPTER: 'wop-narration-chapter',
     STORAGE_KEY_POSITION: 'wop-narration-position',
     STORAGE_KEY_VOLUME: 'wop-narration-volume',
+    STORAGE_KEY_TRACK_TYPE: 'wop-narration-track-type',
 
     // DOM refs
     els: {},
 
-    init() {
+    init: function() {
         this.audio = document.getElementById('narrationAudio');
         if (!this.audio) return;
 
@@ -38,7 +41,7 @@ const NarrationPlayer = {
         console.log('NarrationPlayer initialized with', this.chapters.length, 'chapters');
     },
 
-    cacheElements() {
+    cacheElements: function() {
         var id = function(s) { return document.getElementById(s); };
         this.els = {
             npTitle: id('npTitle'),
@@ -60,42 +63,61 @@ const NarrationPlayer = {
         };
     },
 
-    loadChapters() {
-        var rows = document.querySelectorAll('.narration-row');
-        this.chapters = Array.from(rows).map(function(row, i) {
+    loadChapters: function() {
+        var groups = document.querySelectorAll('.narration-chapter-group');
+        var self = this;
+        this.chapters = Array.from(groups).map(function(group, i) {
+            var podcastRow = group.querySelector('[data-track-type="podcast"]');
+            var narrationRow = group.querySelector('[data-track-type="narration"]');
+
             var ch = {
                 index: i,
-                chapter: parseInt(row.dataset.chapter, 10),
-                title: row.dataset.title,
-                url: row.dataset.chapterUrl,
-                type: row.dataset.narrationType,
-                row: row
+                chapter: parseInt(podcastRow.dataset.chapter, 10),
+                title: podcastRow.dataset.title,
+                url: podcastRow.dataset.chapterUrl,
+                podcastRow: podcastRow,
+                narrationRow: narrationRow,
+                podcast: {
+                    src: podcastRow.dataset.src,
+                    type: 'single'
+                },
+                narration: self.parseNarrationTrack(narrationRow)
             };
-
-            if (ch.type === 'sections') {
-                try {
-                    ch.sections = JSON.parse(row.dataset.sections);
-                } catch (e) {
-                    ch.sections = [];
-                }
-                ch.src = ch.sections.length > 0 ? CDN_BASE + ch.sections[0].prose : '';
-            } else {
-                ch.src = row.dataset.src;
-                ch.sections = [];
-            }
 
             return ch;
         });
     },
 
-    loadVolume() {
+    parseNarrationTrack: function(row) {
+        var narrationType = row.dataset.narrationType;
+        if (narrationType === 'sections') {
+            var sections = [];
+            try {
+                sections = JSON.parse(row.dataset.sections);
+            } catch (e) {
+                sections = [];
+            }
+            return {
+                type: 'sections',
+                sections: sections,
+                src: sections.length > 0 ? CDN_BASE + sections[0].prose : ''
+            };
+        } else {
+            return {
+                type: 'single',
+                src: row.dataset.src
+            };
+        }
+    },
+
+    loadVolume: function() {
         var saved = localStorage.getItem(this.STORAGE_KEY_VOLUME);
         var vol = saved !== null ? parseInt(saved, 10) : 80;
         this.audio.volume = vol / 100;
         this.els.volumeInput.value = vol;
     },
 
-    bindEvents() {
+    bindEvents: function() {
         var self = this;
 
         // Audio events
@@ -136,11 +158,16 @@ const NarrationPlayer = {
             self.updateVolumeIcon();
         });
 
-        // Row clicks
+        // Track row clicks
         this.chapters.forEach(function(ch, i) {
-            ch.row.addEventListener('click', function(e) {
+            ch.podcastRow.addEventListener('click', function(e) {
                 if (e.target.closest('a')) return;
-                self.loadChapter(i);
+                self.loadTrack(i, 'podcast');
+                self.play();
+            });
+            ch.narrationRow.addEventListener('click', function(e) {
+                if (e.target.closest('a')) return;
+                self.loadTrack(i, 'narration');
                 self.play();
             });
         });
@@ -187,19 +214,26 @@ const NarrationPlayer = {
     // Playback
     // =========================================
 
-    loadChapter(index, sectionIndex) {
+    loadTrack: function(index, trackType, sectionIndex) {
         if (index < 0 || index >= this.chapters.length) return;
 
         var ch = this.chapters[index];
         this.currentIndex = index;
+        this.currentTrackType = trackType;
         this.currentSectionIndex = sectionIndex || 0;
 
         // Determine the audio source
         var src;
-        if (ch.type === 'sections' && ch.sections.length > 0) {
-            src = CDN_BASE + ch.sections[this.currentSectionIndex].prose;
+        if (trackType === 'podcast') {
+            src = ch.podcast.src;
         } else {
-            src = ch.src;
+            // narration
+            var narr = ch.narration;
+            if (narr.type === 'sections' && narr.sections.length > 0) {
+                src = CDN_BASE + narr.sections[this.currentSectionIndex].prose;
+            } else {
+                src = narr.src;
+            }
         }
 
         // Cancel stale play attempts
@@ -213,14 +247,16 @@ const NarrationPlayer = {
         this.els.btnPlay.classList.add('loading');
 
         // Update UI
-        this.updateNowPlaying(ch);
+        this.updateNowPlaying(ch, trackType);
         this.updateViewText(ch.chapter, ch.title);
-        this.chapters.forEach(function(c) { c.row.classList.remove('playing', 'is-playing'); });
-        ch.row.classList.add('playing', 'is-playing');
-        ch.row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        this.clearAllHighlights();
+        var activeRow = trackType === 'podcast' ? ch.podcastRow : ch.narrationRow;
+        activeRow.classList.add('playing');
+        activeRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
         // Save to localStorage
         localStorage.setItem(this.STORAGE_KEY_CHAPTER, ch.chapter);
+        localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
 
         // Reset progress display
         this.els.progressFill.style.width = '0%';
@@ -229,11 +265,18 @@ const NarrationPlayer = {
         this.els.timeTotal.textContent = '0:00';
     },
 
-    clearLoading() {
+    clearAllHighlights: function() {
+        var allRows = document.querySelectorAll('.narration-track-row');
+        for (var i = 0; i < allRows.length; i++) {
+            allRows[i].classList.remove('playing');
+        }
+    },
+
+    clearLoading: function() {
         this.els.btnPlay.classList.remove('loading');
     },
 
-    play() {
+    play: function() {
         var self = this;
         var thisIntent = this.playIntent;
 
@@ -246,13 +289,13 @@ const NarrationPlayer = {
         });
     },
 
-    pause() {
+    pause: function() {
         this.audio.pause();
     },
 
-    togglePlay() {
+    togglePlay: function() {
         if (this.currentIndex === -1) {
-            this.loadChapter(0);
+            this.loadTrack(0, 'podcast');
             this.play();
             return;
         }
@@ -264,50 +307,52 @@ const NarrationPlayer = {
         }
     },
 
-    prevChapter() {
+    prevChapter: function() {
         if (this.chapters.length === 0) return;
+        var trackType = this.currentTrackType || 'podcast';
 
-        // For section-based chapters, go to previous section first
-        if (this.currentIndex >= 0) {
+        // For section-based narrations, go to previous section first
+        if (this.currentIndex >= 0 && trackType === 'narration') {
             var ch = this.chapters[this.currentIndex];
-            if (ch.type === 'sections' && this.currentSectionIndex > 0 && this.audio.currentTime <= 5) {
-                this.loadChapter(this.currentIndex, this.currentSectionIndex - 1);
+            if (ch.narration.type === 'sections' && this.currentSectionIndex > 0 && this.audio.currentTime <= 5) {
+                this.loadTrack(this.currentIndex, 'narration', this.currentSectionIndex - 1);
                 this.play();
                 return;
             }
         }
 
-        // If more than 5 seconds in, restart current chapter/section
+        // If more than 5 seconds in, restart current track
         if (this.audio.currentTime > 5) {
             this.audio.currentTime = 0;
             return;
         }
 
-        // Go to previous chapter
+        // Go to previous chapter (same lane)
         var prevIndex = this.currentIndex - 1;
         if (prevIndex >= 0) {
-            this.loadChapter(prevIndex);
+            this.loadTrack(prevIndex, trackType);
             this.play();
         }
     },
 
-    nextChapter() {
+    nextChapter: function() {
         if (this.chapters.length === 0) return;
+        var trackType = this.currentTrackType || 'podcast';
 
-        // For section-based chapters, advance to next section first
-        if (this.currentIndex >= 0) {
+        // For section-based narrations, advance to next section first
+        if (this.currentIndex >= 0 && trackType === 'narration') {
             var ch = this.chapters[this.currentIndex];
-            if (ch.type === 'sections' && this.currentSectionIndex < ch.sections.length - 1) {
-                this.loadChapter(this.currentIndex, this.currentSectionIndex + 1);
+            if (ch.narration.type === 'sections' && this.currentSectionIndex < ch.narration.sections.length - 1) {
+                this.loadTrack(this.currentIndex, 'narration', this.currentSectionIndex + 1);
                 this.play();
                 return;
             }
         }
 
-        // Advance to next chapter
+        // Advance to next chapter (same lane)
         var nextIndex = this.currentIndex + 1;
         if (nextIndex < this.chapters.length) {
-            this.loadChapter(nextIndex);
+            this.loadTrack(nextIndex, trackType);
             this.play();
         }
     },
@@ -316,7 +361,7 @@ const NarrationPlayer = {
     // Audio Events
     // =========================================
 
-    onTimeUpdate() {
+    onTimeUpdate: function() {
         if (!this.audio.duration) return;
         var pct = (this.audio.currentTime / this.audio.duration) * 100;
         this.els.progressFill.style.width = pct + '%';
@@ -324,22 +369,11 @@ const NarrationPlayer = {
         this.els.timeCurrent.textContent = this.formatTime(this.audio.currentTime);
     },
 
-    onMetadataLoaded() {
+    onMetadataLoaded: function() {
         this.els.timeTotal.textContent = this.formatTime(this.audio.duration);
-
-        // Populate duration cell for single-file chapters
-        if (this.currentIndex >= 0) {
-            var ch = this.chapters[this.currentIndex];
-            if (ch.type === 'single') {
-                var cell = ch.row.querySelector('[data-duration]');
-                if (cell) {
-                    cell.textContent = this.formatTime(this.audio.duration);
-                }
-            }
-        }
     },
 
-    onAudioError() {
+    onAudioError: function() {
         this.clearLoading();
         var err = this.audio.error;
         if (err) {
@@ -352,22 +386,24 @@ const NarrationPlayer = {
         }
     },
 
-    onEnded() {
+    onEnded: function() {
         if (this.currentIndex < 0) return;
 
         var ch = this.chapters[this.currentIndex];
 
-        // For section-based chapters, advance to next section
-        if (ch.type === 'sections' && this.currentSectionIndex < ch.sections.length - 1) {
-            this.loadChapter(this.currentIndex, this.currentSectionIndex + 1);
-            this.play();
-            return;
+        // For section-based narrations, advance to next section within the chapter
+        if (this.currentTrackType === 'narration' && ch.narration.type === 'sections') {
+            if (this.currentSectionIndex < ch.narration.sections.length - 1) {
+                this.loadTrack(this.currentIndex, 'narration', this.currentSectionIndex + 1);
+                this.play();
+                return;
+            }
         }
 
-        // Advance to next chapter
+        // Advance to next chapter in the same lane
         var nextIndex = this.currentIndex + 1;
         if (nextIndex < this.chapters.length) {
-            this.loadChapter(nextIndex);
+            this.loadTrack(nextIndex, this.currentTrackType);
             this.play();
         } else {
             // End of list — stop
@@ -375,29 +411,36 @@ const NarrationPlayer = {
         }
     },
 
-    resetPlayer() {
+    resetPlayer: function() {
         this.currentIndex = -1;
         this.currentSectionIndex = 0;
+        this.currentTrackType = null;
         this.els.npTitle.textContent = 'Select a chapter';
         this.els.npChapter.textContent = '';
         this.els.progressFill.style.width = '0%';
         this.els.progressInput.value = 0;
         this.els.timeCurrent.textContent = '0:00';
         this.els.timeTotal.textContent = '0:00';
-        this.chapters.forEach(function(c) { c.row.classList.remove('playing', 'is-playing'); });
+        this.clearAllHighlights();
         this.updatePlayState(false);
     },
 
-    updateNowPlaying(ch) {
+    updateNowPlaying: function(ch, trackType) {
         this.els.npTitle.textContent = ch.title;
         var label = 'Ch. ' + ch.chapter;
-        if (ch.type === 'sections' && ch.sections.length > 1) {
-            label += ' \u2014 Part ' + (this.currentSectionIndex + 1) + ' of ' + ch.sections.length;
+        if (trackType === 'podcast') {
+            var podcastLabel = ch.podcastRow.querySelector('.narration-track-label');
+            label += ' \u2014 ' + (podcastLabel ? podcastLabel.textContent : 'Podcast');
+        } else {
+            label += ' \u2014 Full Narration';
+            if (ch.narration.type === 'sections' && ch.narration.sections.length > 1) {
+                label += ' (Part ' + (this.currentSectionIndex + 1) + ' of ' + ch.narration.sections.length + ')';
+            }
         }
         this.els.npChapter.textContent = label;
     },
 
-    updatePlayState(isPlaying) {
+    updatePlayState: function(isPlaying) {
         this.isPlaying = isPlaying;
         var playIcon = this.els.btnPlay.querySelector('.icon-play');
         var pauseIcon = this.els.btnPlay.querySelector('.icon-pause');
@@ -411,23 +454,13 @@ const NarrationPlayer = {
             pauseIcon.style.display = 'none';
             this.els.btnPlay.title = 'Play';
         }
-
-        // Update row highlight
-        if (this.currentIndex >= 0) {
-            var row = this.chapters[this.currentIndex].row;
-            if (isPlaying) {
-                row.classList.add('is-playing');
-            } else {
-                row.classList.remove('is-playing');
-            }
-        }
     },
 
     // =========================================
     // View Text Panel
     // =========================================
 
-    toggleViewText() {
+    toggleViewText: function() {
         var wrapper = this.els.viewTextWrapper;
         var isOpen = wrapper.classList.toggle('open');
         this.els.viewTextToggle.setAttribute('aria-expanded', isOpen);
@@ -435,7 +468,7 @@ const NarrationPlayer = {
         localStorage.setItem('wop-narration-viewtext', isOpen ? '1' : '0');
     },
 
-    restoreViewTextState() {
+    restoreViewTextState: function() {
         var saved = localStorage.getItem('wop-narration-viewtext');
         if (saved === '1') {
             this.els.viewTextWrapper.classList.add('open');
@@ -444,7 +477,7 @@ const NarrationPlayer = {
         }
     },
 
-    updateViewText(chapterNum, chapterTitle) {
+    updateViewText: function(chapterNum, chapterTitle) {
         var store = document.getElementById('chapterContentStore');
         if (!store) return;
 
@@ -453,7 +486,6 @@ const NarrationPlayer = {
 
         allChapters.forEach(function(div) {
             if (parseInt(div.dataset.chapter, 10) === chapterNum) {
-                // Replace the visible panel's inner content
                 var panel = document.querySelector('#viewTextPanel .view-text-panel');
                 if (panel) {
                     panel.innerHTML = div.innerHTML;
@@ -475,21 +507,24 @@ const NarrationPlayer = {
     // Position Persistence
     // =========================================
 
-    savePosition() {
+    savePosition: function() {
         if (this.currentIndex >= 0 && this.audio.currentTime > 0) {
             localStorage.setItem(this.STORAGE_KEY_CHAPTER, this.chapters[this.currentIndex].chapter);
             localStorage.setItem(this.STORAGE_KEY_POSITION, Math.floor(this.audio.currentTime));
+            localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, this.currentTrackType);
         }
     },
 
-    restorePosition() {
+    restorePosition: function() {
         var savedChapter = localStorage.getItem(this.STORAGE_KEY_CHAPTER);
         var savedPosition = localStorage.getItem(this.STORAGE_KEY_POSITION);
+        var savedTrackType = localStorage.getItem(this.STORAGE_KEY_TRACK_TYPE);
 
         if (savedChapter === null) return;
 
         var chapterNum = parseInt(savedChapter, 10);
         var position = savedPosition ? parseInt(savedPosition, 10) : 0;
+        var trackType = savedTrackType || 'podcast';
 
         // Find the chapter index
         var index = -1;
@@ -501,7 +536,7 @@ const NarrationPlayer = {
         }
 
         if (index >= 0) {
-            this.loadChapter(index);
+            this.loadTrack(index, trackType);
             if (position > 0) {
                 var self = this;
                 this.audio.addEventListener('loadedmetadata', function onMeta() {
@@ -521,7 +556,7 @@ const NarrationPlayer = {
     // Volume
     // =========================================
 
-    adjustVolume(delta) {
+    adjustVolume: function(delta) {
         var current = Math.round(this.audio.volume * 100);
         var next = Math.max(0, Math.min(100, current + delta));
         this.audio.volume = next / 100;
@@ -531,7 +566,7 @@ const NarrationPlayer = {
         this.updateVolumeIcon();
     },
 
-    updateVolumeIcon() {
+    updateVolumeIcon: function() {
         var volOn = this.els.btnVolume.querySelector('.icon-vol-on');
         var volMute = this.els.btnVolume.querySelector('.icon-vol-mute');
 
@@ -548,7 +583,7 @@ const NarrationPlayer = {
     // Helpers
     // =========================================
 
-    formatTime(seconds) {
+    formatTime: function(seconds) {
         if (!seconds || !isFinite(seconds)) return '0:00';
         var m = Math.floor(seconds / 60);
         var s = Math.floor(seconds % 60);

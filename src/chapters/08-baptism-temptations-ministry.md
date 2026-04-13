@@ -16,8 +16,10 @@ readingTime: 16
 
 audio:
   narration: NR_08_01_Baptism_Temptations_Ministry.mp3
+  narrationDuration: "15:26"
   cue: NR_08_CUE_01_Closing.mp3
   overview: PO_08_01_Baptism_Temptations_Ministry.mp3
+  overviewDuration: "6:23"
   testimony:
     file: "08_01_Prepared_in_All_Things_Desert_Troubadour.mp3"
     title: "Prepared in All Things"

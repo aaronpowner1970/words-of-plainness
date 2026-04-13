@@ -12,8 +12,10 @@ scripture:
 readingTime: 26
 audio:
   narration: NR_03_01_Academic_Knowledge.mp3
+  narrationDuration: "26:18"
   cue: NR_03_CUE_01_Closing.mp3
   overview: PO_03_01_Academic_Knowledge.mp3
+  overviewDuration: "5:10"
   testimony:
     file: 03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3
     title: "Two Halves of a Whole"

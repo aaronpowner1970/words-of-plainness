@@ -16,7 +16,9 @@ readingTime: 24
 
 audio:
   narration: NR_10_1_Suffering_Trial_Crucifixion_Resurrection.mp3
+  narrationDuration: "26:01"
   overview: PO_10_1_Suffering_Trial_Crucifixion_Resurrection.mp3
+  overviewDuration: "8:31"
   testimony:
     file: "10_01_He_Always_Knew_Me_Cinematic_Worship.mp3"
     title: "He Always Knew Me"

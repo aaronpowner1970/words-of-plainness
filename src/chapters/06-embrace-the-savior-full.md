@@ -15,8 +15,11 @@ scripture:
 readingTime: 20
 audio:
   narration: NR_06_01_Embrace_the_Savior.mp3
+  narrationDuration: "23:23"
   cue: NR_06_CUE_01_Closing.mp3
   overview: PO_06_01_Embrace_the_Savior.mp3
+  overviewDuration: "15:36"
+  overviewLabel: "Podcast Discussion"
   testimony:
     file: "06_01_I_Have_Tasted_the_Light_Sacred_Americana.mp3"
     title: "I Have Tasted the Light"

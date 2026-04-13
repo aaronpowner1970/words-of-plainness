@@ -431,7 +431,44 @@
 }
 
 /* =========================================
-   Chapter Table
+   UX Orientation Note
+   ========================================= */
+
+.narration-how-it-works {
+    max-width: 680px;
+    margin: 32px auto 40px;
+    padding: 20px 24px;
+    border-left: 3px solid var(--gold-primary, #C4943A);
+    background: rgba(196, 148, 58, 0.06);
+    border-radius: 0 6px 6px 0;
+}
+
+.narration-note-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-primary, #C4943A);
+    margin-bottom: 12px;
+}
+
+.narration-how-it-works p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(232, 220, 196, 0.85);
+    margin-bottom: 10px;
+}
+
+.narration-how-it-works p:last-child {
+    margin-bottom: 0;
+}
+
+.narration-how-it-works strong {
+    color: var(--cream, #E8DCC4);
+}
+
+/* =========================================
+   Chapter List — Two-Track Layout
    ========================================= */
 
 .narration-container {
@@ -441,123 +478,79 @@
     overflow: hidden;
 }
 
-.narration-table {
-    width: 100%;
-    border-collapse: collapse;
+.narration-chapter-group {
+    margin-bottom: 4px;
 }
 
-.narration-table thead {
-    border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+.narration-chapter-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 14px 16px 6px;
 }
 
-.narration-table th {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--cream, #E8DCC4);
-    opacity: 0.45;
-    padding: 0.6rem 0.75rem;
-    text-align: left;
+.narration-ch-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--gold-primary, #C4943A);
+    letter-spacing: 0.05em;
     white-space: nowrap;
 }
 
-.narration-table th.col-num {
-    width: 50px;
-    text-align: center;
-}
-
-.narration-table th.col-duration {
-    width: 65px;
-    text-align: right;
-}
-
-/* --- Rows --- */
-
-.narration-row {
-    border-bottom: 1px solid rgba(196, 148, 58, 0.06);
-    transition: background 0.15s;
-    cursor: pointer;
-}
-
-.narration-row:nth-child(even) {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.narration-row:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.narration-row:last-child {
-    border-bottom: none;
-}
-
-.narration-row td {
-    padding: 0.75rem 0.75rem;
-    color: var(--cream, #E8DCC4);
-    font-size: 0.9rem;
-    vertical-align: middle;
-}
-
-/* --- Playing state --- */
-
-.narration-row.playing {
-    background: rgba(196, 148, 58, 0.08);
-    border-left: 3px solid var(--gold-primary, #C4943A);
-}
-
-.narration-row.playing .col-num {
-    color: var(--gold-primary, #C4943A);
-    font-weight: 700;
-    opacity: 1;
-}
-
-.narration-row.playing .narration-title-group .narration-title {
-    color: var(--gold-primary, #C4943A);
-}
-
-/* --- Cells --- */
-
-.narration-row .col-num {
-    text-align: center;
-    opacity: 0.45;
-    font-size: 0.85rem;
-}
-
-.narration-row .col-duration {
-    text-align: right;
-    opacity: 0.45;
-    font-size: 0.8rem;
-    font-variant-numeric: tabular-nums;
-}
-
-/* --- Title group --- */
-
-.narration-title-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.narration-title-group .narration-title {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: 500;
+.narration-ch-title {
+    font-weight: 600;
+    font-size: 1rem;
     color: var(--cream, #E8DCC4);
 }
 
 .narration-chapter-link {
+    color: rgba(232, 220, 196, 0.4);
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: color 0.2s;
     display: inline-flex;
     align-items: center;
-    color: var(--cream, #E8DCC4);
-    opacity: 0.35;
-    transition: opacity 0.15s, color 0.15s;
-    flex-shrink: 0;
 }
 
 .narration-chapter-link:hover {
-    opacity: 1;
     color: var(--gold-primary, #C4943A);
+}
+
+.narration-track-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px 8px 48px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 4px;
+}
+
+.narration-track-row:hover {
+    background: rgba(196, 148, 58, 0.08);
+}
+
+.narration-track-row.playing {
+    background: rgba(196, 148, 58, 0.12);
+    border-left: 3px solid var(--gold-primary, #C4943A);
+    padding-left: 45px;
+}
+
+.narration-track-label {
+    font-size: 0.9rem;
+    color: rgba(232, 220, 196, 0.75);
+}
+
+.narration-track-row.playing .narration-track-label {
+    color: var(--cream, #E8DCC4);
+    font-weight: 600;
+}
+
+.narration-track-duration {
+    font-size: 0.85rem;
+    color: rgba(232, 220, 196, 0.5);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
 }
 
 /* =========================================
@@ -643,13 +636,26 @@
         padding: 0.75rem 1rem;
     }
 
-    /* Tighten row padding */
-    .narration-row td {
-        padding: 0.65rem 0.6rem;
+    /* Tighten track row padding */
+    .narration-track-row {
+        padding: 8px 12px 8px 36px;
+    }
+
+    .narration-track-row.playing {
+        padding-left: 33px;
+    }
+
+    .narration-chapter-header {
+        padding: 12px 12px 4px;
     }
 
     .narration-section-header .section-title {
         font-size: 1.1rem;
+    }
+
+    .narration-how-it-works {
+        margin: 24px auto 32px;
+        padding: 16px 18px;
     }
 }
 
@@ -658,14 +664,16 @@
    ========================================= */
 
 @media (max-width: 480px) {
-    /* Hide duration column on very small screens */
-    .narration-row .col-duration,
-    .narration-table th.col-duration {
-        display: none;
+    .narration-track-row {
+        padding: 7px 10px 7px 28px;
     }
 
-    .narration-row td {
-        padding: 0.6rem 0.5rem;
+    .narration-track-row.playing {
+        padding-left: 25px;
+    }
+
+    .narration-track-duration {
+        display: none;
     }
 
     .narration-section-header {

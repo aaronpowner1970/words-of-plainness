@@ -17,8 +17,11 @@ sectionCount: 16
 
 audio:
   narration: "NR_05_01_Sincere_Prayer.mp3"
+  narrationDuration: "25:06"
   cue: "NR_05_CUE_01_Closing.mp3"
   overview: "PO_05_01_Sincere_Prayer.mp3"
+  overviewDuration: "23:32"
+  overviewLabel: "Podcast Discussion"
   testimony:
     file: "05_01_The_Souls_Sincere_Desire_Soul_Worship.mp3"
     title: "The Soul's Sincere Desire"
