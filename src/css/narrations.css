@@ -590,6 +590,71 @@
     white-space: nowrap;
 }
 
+/* --- Completion Checkmark --- */
+
+.track-completed {
+    color: var(--gold-primary, #C4943A);
+    font-size: 0.8rem;
+    margin-left: 6px;
+    flex-shrink: 0;
+}
+
+/* --- Resume Prompt --- */
+
+.narration-resume-prompt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px 10px 48px;
+    background: rgba(196, 148, 58, 0.08);
+    border-left: 3px solid var(--gold-primary, #C4943A);
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 2px;
+}
+
+.resume-text {
+    font-size: 0.88rem;
+    color: rgba(232, 220, 196, 0.7);
+    flex: 1;
+}
+
+.resume-text strong {
+    color: var(--cream, #E8DCC4);
+}
+
+.resume-btn {
+    background: none;
+    border: 1px solid var(--gold-primary, #C4943A);
+    color: var(--gold-primary, #C4943A);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.resume-btn:hover {
+    background: var(--gold-primary, #C4943A);
+    color: #fff;
+}
+
+.resume-dismiss {
+    background: none;
+    border: none;
+    color: rgba(232, 220, 196, 0.35);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    transition: color 0.15s;
+}
+
+.resume-dismiss:hover {
+    color: rgba(232, 220, 196, 0.7);
+}
+
 /* =========================================
    Footer
    ========================================= */
@@ -693,6 +758,11 @@
     .narration-how-it-works {
         margin: 24px auto 32px;
         padding: 16px 18px;
+    }
+
+    .narration-resume-prompt {
+        padding: 8px 12px 8px 36px;
+        gap: 8px;
     }
 }
 

@@ -149,6 +149,7 @@ permalink: /narrations/
                data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.overview }}"
                data-chapter="{{ chapter.data.chapter }}"
                data-title="{{ chapter.data.title }}"
+               data-slug="{{ chapter.data.slug }}"
                data-track-type="podcast"
                data-chapter-url="{{ chapter.url }}">
             <span class="narration-track-label">{{ chapter.data.audio.overviewLabel | default("Podcast Overview") }}</span>
@@ -157,6 +158,7 @@ permalink: /narrations/
           <div class="narration-track-row"
                data-chapter="{{ chapter.data.chapter }}"
                data-title="{{ chapter.data.title }}"
+               data-slug="{{ chapter.data.slug }}"
                data-track-type="narration"
                data-chapter-url="{{ chapter.url }}"
                {%- if chapter.data.audio.narration and chapter.data.audio.narration != "" %}
@@ -200,6 +202,7 @@ permalink: /narrations/
                data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.overview }}"
                data-chapter="{{ chapter.data.chapter }}"
                data-title="{{ chapter.data.title }}"
+               data-slug="{{ chapter.data.slug }}"
                data-track-type="podcast"
                data-chapter-url="{{ chapter.url }}">
             <span class="narration-track-label">{{ chapter.data.audio.overviewLabel | default("Podcast Overview") }}</span>
@@ -208,6 +211,7 @@ permalink: /narrations/
           <div class="narration-track-row"
                data-chapter="{{ chapter.data.chapter }}"
                data-title="{{ chapter.data.title }}"
+               data-slug="{{ chapter.data.slug }}"
                data-track-type="narration"
                data-chapter-url="{{ chapter.url }}"
                {%- if chapter.data.audio.narration and chapter.data.audio.narration != "" %}

@@ -3,7 +3,8 @@
  * ==================================================
  * Two-track-per-chapter player for the Narrations page.
  * Each chapter has a podcast track and a full narration track.
- * Auto-advance stays in the same lane (podcast→podcast, narration→narration).
+ * Auto-advance stays in the same lane (podcast->podcast, narration->narration).
+ * Progress sync: authenticated users save to Django API; guests use localStorage.
  */
 
 var CDN_BASE = 'https://media.wordsofplainness.org/web/';
@@ -17,6 +18,11 @@ var NarrationPlayer = {
     currentTrackType: null, // "podcast" or "narration"
     isPlaying: false,
     playIntent: 0,
+
+    // Progress sync state
+    _saveInterval: null,
+    _saveInFlight: false,
+    SAVE_INTERVAL_MS: 30000,
 
     // localStorage keys
     STORAGE_KEY_CHAPTER: 'wop-narration-chapter',
@@ -36,6 +42,8 @@ var NarrationPlayer = {
         this.loadVolume();
         this.bindEvents();
         this.restoreViewTextState();
+        this.loadCheckmarks();
+        this.loadResumePrompt();
         this.restorePosition();
 
         console.log('NarrationPlayer initialized with', this.chapters.length, 'chapters');
@@ -74,7 +82,9 @@ var NarrationPlayer = {
                 index: i,
                 chapter: parseInt(podcastRow.dataset.chapter, 10),
                 title: podcastRow.dataset.title,
+                slug: podcastRow.dataset.slug,
                 url: podcastRow.dataset.chapterUrl,
+                group: group,
                 podcastRow: podcastRow,
                 narrationRow: narrationRow,
                 podcast: {
@@ -124,10 +134,15 @@ var NarrationPlayer = {
         this.audio.addEventListener('timeupdate', function() { self.onTimeUpdate(); });
         this.audio.addEventListener('loadedmetadata', function() { self.onMetadataLoaded(); });
         this.audio.addEventListener('ended', function() { self.onEnded(); });
-        this.audio.addEventListener('play', function() { self.clearLoading(); self.updatePlayState(true); });
+        this.audio.addEventListener('play', function() {
+            self.clearLoading();
+            self.updatePlayState(true);
+            self.startProgressInterval();
+        });
         this.audio.addEventListener('pause', function() {
             self.updatePlayState(false);
-            self.savePosition();
+            self.stopProgressInterval();
+            self.saveProgress(false);
         });
         this.audio.addEventListener('error', function() { self.onAudioError(); });
 
@@ -162,11 +177,13 @@ var NarrationPlayer = {
         this.chapters.forEach(function(ch, i) {
             ch.podcastRow.addEventListener('click', function(e) {
                 if (e.target.closest('a')) return;
+                self.dismissResume();
                 self.loadTrack(i, 'podcast');
                 self.play();
             });
             ch.narrationRow.addEventListener('click', function(e) {
                 if (e.target.closest('a')) return;
+                self.dismissResume();
                 self.loadTrack(i, 'narration');
                 self.play();
             });
@@ -204,9 +221,14 @@ var NarrationPlayer = {
             }
         });
 
-        // Save position on page unload
+        // Save on page unload and visibility change
         window.addEventListener('beforeunload', function() {
-            self.savePosition();
+            self.saveProgress(false);
+        });
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                self.saveProgress(false);
+            }
         });
     },
 
@@ -216,6 +238,9 @@ var NarrationPlayer = {
 
     loadTrack: function(index, trackType, sectionIndex) {
         if (index < 0 || index >= this.chapters.length) return;
+
+        // Stop progress interval for the old track
+        this.stopProgressInterval();
 
         var ch = this.chapters[index];
         this.currentIndex = index;
@@ -227,7 +252,6 @@ var NarrationPlayer = {
         if (trackType === 'podcast') {
             src = ch.podcast.src;
         } else {
-            // narration
             var narr = ch.narration;
             if (narr.type === 'sections' && narr.sections.length > 0) {
                 src = CDN_BASE + narr.sections[this.currentSectionIndex].prose;
@@ -311,7 +335,6 @@ var NarrationPlayer = {
         if (this.chapters.length === 0) return;
         var trackType = this.currentTrackType || 'podcast';
 
-        // For section-based narrations, go to previous section first
         if (this.currentIndex >= 0 && trackType === 'narration') {
             var ch = this.chapters[this.currentIndex];
             if (ch.narration.type === 'sections' && this.currentSectionIndex > 0 && this.audio.currentTime <= 5) {
@@ -321,13 +344,11 @@ var NarrationPlayer = {
             }
         }
 
-        // If more than 5 seconds in, restart current track
         if (this.audio.currentTime > 5) {
             this.audio.currentTime = 0;
             return;
         }
 
-        // Go to previous chapter (same lane)
         var prevIndex = this.currentIndex - 1;
         if (prevIndex >= 0) {
             this.loadTrack(prevIndex, trackType);
@@ -339,7 +360,6 @@ var NarrationPlayer = {
         if (this.chapters.length === 0) return;
         var trackType = this.currentTrackType || 'podcast';
 
-        // For section-based narrations, advance to next section first
         if (this.currentIndex >= 0 && trackType === 'narration') {
             var ch = this.chapters[this.currentIndex];
             if (ch.narration.type === 'sections' && this.currentSectionIndex < ch.narration.sections.length - 1) {
@@ -349,7 +369,6 @@ var NarrationPlayer = {
             }
         }
 
-        // Advance to next chapter (same lane)
         var nextIndex = this.currentIndex + 1;
         if (nextIndex < this.chapters.length) {
             this.loadTrack(nextIndex, trackType);
@@ -379,7 +398,6 @@ var NarrationPlayer = {
         if (err) {
             console.warn('Audio error:', err.code, err.message);
         }
-        // Auto-advance on error
         if (this.currentIndex >= 0) {
             var self = this;
             setTimeout(function() { self.nextChapter(); }, 500);
@@ -400,18 +418,22 @@ var NarrationPlayer = {
             }
         }
 
+        // Mark this track completed
+        this.saveProgress(true);
+        this.markTrackCompleted(ch.slug, this.currentTrackType);
+
         // Advance to next chapter in the same lane
         var nextIndex = this.currentIndex + 1;
         if (nextIndex < this.chapters.length) {
             this.loadTrack(nextIndex, this.currentTrackType);
             this.play();
         } else {
-            // End of list — stop
             this.resetPlayer();
         }
     },
 
     resetPlayer: function() {
+        this.stopProgressInterval();
         this.currentIndex = -1;
         this.currentSectionIndex = 0;
         this.currentTrackType = null;
@@ -457,6 +479,211 @@ var NarrationPlayer = {
     },
 
     // =========================================
+    // Progress Sync
+    // =========================================
+
+    _isAuthenticated: function() {
+        return window.API && API.isAuthenticated();
+    },
+
+    startProgressInterval: function() {
+        this.stopProgressInterval();
+        var self = this;
+        this._saveInterval = setInterval(function() {
+            self.saveProgress(false);
+        }, this.SAVE_INTERVAL_MS);
+    },
+
+    stopProgressInterval: function() {
+        if (this._saveInterval) {
+            clearInterval(this._saveInterval);
+            this._saveInterval = null;
+        }
+    },
+
+    saveProgress: function(completed) {
+        if (this.currentIndex < 0) return;
+        var ch = this.chapters[this.currentIndex];
+        var trackType = this.currentTrackType;
+        var position = completed ? 0 : Math.floor(this.audio.currentTime || 0);
+
+        // Always save to localStorage
+        var lsKey = 'wop-narration-progress::' + ch.slug + '::' + trackType;
+        localStorage.setItem(lsKey, JSON.stringify({
+            position_seconds: position,
+            completed: !!completed,
+            updated_at: new Date().toISOString()
+        }));
+
+        // Also save the simple restore keys
+        localStorage.setItem(this.STORAGE_KEY_CHAPTER, ch.chapter);
+        localStorage.setItem(this.STORAGE_KEY_POSITION, position);
+        localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
+
+        // If authenticated, save to API
+        if (this._isAuthenticated() && !this._saveInFlight) {
+            this._saveInFlight = true;
+            var self = this;
+            API.request('/progress/narration-progress/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    chapter_slug: ch.slug,
+                    track_type: trackType,
+                    position_seconds: position,
+                    completed: !!completed
+                })
+            }).catch(function(err) {
+                console.warn('Progress save failed:', err.message);
+            }).finally(function() {
+                self._saveInFlight = false;
+            });
+        }
+    },
+
+    // =========================================
+    // Checkmarks
+    // =========================================
+
+    markTrackCompleted: function(slug, trackType) {
+        var self = this;
+        // Find the chapter and add checkmark to the correct row
+        this.chapters.forEach(function(ch) {
+            if (ch.slug === slug) {
+                var row = trackType === 'podcast' ? ch.podcastRow : ch.narrationRow;
+                self._addCheckmark(row);
+            }
+        });
+    },
+
+    _addCheckmark: function(row) {
+        if (row.querySelector('.track-completed')) return;
+        var check = document.createElement('span');
+        check.className = 'track-completed';
+        check.textContent = '\u2713';
+        check.setAttribute('aria-label', 'Completed');
+        var label = row.querySelector('.narration-track-label');
+        if (label) {
+            label.parentNode.insertBefore(check, label.nextSibling);
+        }
+    },
+
+    loadCheckmarks: function() {
+        var self = this;
+
+        if (this._isAuthenticated()) {
+            API.request('/progress/narration-completions/').then(function(data) {
+                if (data && data.completed_tracks) {
+                    data.completed_tracks.forEach(function(entry) {
+                        self.markTrackCompleted(entry.chapter_slug, entry.track_type);
+                    });
+                }
+            }).catch(function(err) {
+                console.warn('Failed to load completions:', err.message);
+                // Fall back to localStorage
+                self._loadLocalCheckmarks();
+            });
+        } else {
+            this._loadLocalCheckmarks();
+        }
+    },
+
+    _loadLocalCheckmarks: function() {
+        var self = this;
+        this.chapters.forEach(function(ch) {
+            ['podcast', 'narration'].forEach(function(trackType) {
+                var key = 'wop-narration-progress::' + ch.slug + '::' + trackType;
+                var raw = localStorage.getItem(key);
+                if (raw) {
+                    try {
+                        var data = JSON.parse(raw);
+                        if (data.completed) {
+                            self.markTrackCompleted(ch.slug, trackType);
+                        }
+                    } catch (e) { /* skip */ }
+                }
+            });
+        });
+    },
+
+    // =========================================
+    // Resume Prompt
+    // =========================================
+
+    loadResumePrompt: function() {
+        if (!this._isAuthenticated()) return;
+
+        var self = this;
+        API.request('/progress/narration-progress/').then(function(data) {
+            if (!data || !data.progress) return;
+            var p = data.progress;
+            if (p.completed || p.position_seconds <= 0) return;
+
+            // Find the chapter
+            var ch = null;
+            var chIndex = -1;
+            for (var i = 0; i < self.chapters.length; i++) {
+                if (self.chapters[i].slug === p.chapter_slug) {
+                    ch = self.chapters[i];
+                    chIndex = i;
+                    break;
+                }
+            }
+            if (!ch) return;
+
+            // Build the track label
+            var trackLabel;
+            if (p.track_type === 'narration') {
+                trackLabel = 'Full Narration';
+            } else {
+                var podcastLabelEl = ch.podcastRow.querySelector('.narration-track-label');
+                trackLabel = podcastLabelEl ? podcastLabelEl.textContent : 'Podcast Overview';
+            }
+
+            var timeStr = self.formatTime(p.position_seconds);
+
+            // Create resume element
+            var resume = document.createElement('div');
+            resume.className = 'narration-resume-prompt';
+            resume.id = 'narrationResumePrompt';
+            resume.innerHTML = '<span class="resume-text">Resume <strong>' + trackLabel +
+                '</strong> at ' + timeStr + '</span>' +
+                '<button class="resume-btn" type="button">Resume</button>' +
+                '<button class="resume-dismiss" type="button" aria-label="Dismiss">&times;</button>';
+
+            // Insert after the chapter header
+            var header = ch.group.querySelector('.narration-chapter-header');
+            if (header) {
+                header.parentNode.insertBefore(resume, header.nextSibling);
+            }
+
+            // Bind events
+            resume.querySelector('.resume-btn').addEventListener('click', function() {
+                self.dismissResume();
+                self.loadTrack(chIndex, p.track_type);
+                // Seek to saved position after metadata loads
+                var seekTo = p.position_seconds;
+                self.audio.addEventListener('loadedmetadata', function onMeta() {
+                    self.audio.removeEventListener('loadedmetadata', onMeta);
+                    if (seekTo < self.audio.duration) {
+                        self.audio.currentTime = seekTo;
+                    }
+                });
+                self.play();
+            });
+            resume.querySelector('.resume-dismiss').addEventListener('click', function() {
+                self.dismissResume();
+            });
+        }).catch(function(err) {
+            console.warn('Failed to load resume state:', err.message);
+        });
+    },
+
+    dismissResume: function() {
+        var el = document.getElementById('narrationResumePrompt');
+        if (el) el.remove();
+    },
+
+    // =========================================
     // View Text Panel
     // =========================================
 
@@ -481,7 +708,6 @@ var NarrationPlayer = {
         var panel = document.querySelector('#viewTextPanel .view-text-panel');
         if (!panel) return;
 
-        // Gating: only show full text for narration tracks
         if (trackType === 'podcast') {
             panel.innerHTML = '<h2 class="view-text-heading">Chapter ' + chapterNum + ': ' + chapterTitle + '</h2>' +
                 '<div class="view-text-content"><p class="view-text-gated">Full chapter text is available when listening to the Full Narration.</p></div>';
@@ -508,16 +734,8 @@ var NarrationPlayer = {
     },
 
     // =========================================
-    // Position Persistence
+    // Position Persistence (localStorage)
     // =========================================
-
-    savePosition: function() {
-        if (this.currentIndex >= 0 && this.audio.currentTime > 0) {
-            localStorage.setItem(this.STORAGE_KEY_CHAPTER, this.chapters[this.currentIndex].chapter);
-            localStorage.setItem(this.STORAGE_KEY_POSITION, Math.floor(this.audio.currentTime));
-            localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, this.currentTrackType);
-        }
-    },
 
     restorePosition: function() {
         var savedChapter = localStorage.getItem(this.STORAGE_KEY_CHAPTER);
@@ -530,7 +748,6 @@ var NarrationPlayer = {
         var position = savedPosition ? parseInt(savedPosition, 10) : 0;
         var trackType = savedTrackType || 'podcast';
 
-        // Find the chapter index
         var index = -1;
         for (var i = 0; i < this.chapters.length; i++) {
             if (this.chapters[i].chapter === chapterNum) {
@@ -549,7 +766,6 @@ var NarrationPlayer = {
                         self.audio.currentTime = position;
                     }
                 });
-                // Trigger metadata load without playing
                 this.audio.preload = 'metadata';
                 this.audio.load();
             }
