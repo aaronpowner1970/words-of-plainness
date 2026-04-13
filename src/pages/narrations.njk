@@ -1,0 +1,229 @@
+---
+layout: layouts/base.njk
+title: Narrations
+description: "Listen to every chapter of Words of Plainness read aloud by the author — a complete audio library for seekers, students, and those who learn by listening."
+permalink: /narrations/
+---
+
+{% block styles %}
+<link rel="stylesheet" href="/css/narrations.css">
+{% endblock %}
+
+<!-- Narration Layout (clears fixed header) -->
+<div class="narration-layout">
+
+<!-- ==========================================
+     Sticky Player
+     ========================================== -->
+<div class="narration-player-sticky" id="narrationPlayerSticky">
+<div class="narration-player-bar" id="narrationPlayerBar">
+    <div class="player-bar-inner">
+        <div class="player-controls">
+            <button class="player-btn btn-prev" id="btnPrev" title="Previous chapter" aria-label="Previous chapter">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="currentColor">
+                    <polygon points="19 20 9 12 19 4 19 20"></polygon>
+                    <line x1="5" y1="4" x2="5" y2="20" stroke-width="3"></line>
+                </svg>
+            </button>
+            <button class="player-btn btn-play" id="btnPlay" title="Play" aria-label="Play">
+                <svg class="icon-play" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <svg class="icon-pause" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none" style="display:none">
+                    <rect x="5" y="3" width="4" height="18"></rect>
+                    <rect x="15" y="3" width="4" height="18"></rect>
+                </svg>
+            </button>
+            <button class="player-btn btn-next" id="btnNext" title="Next chapter" aria-label="Next chapter">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="currentColor">
+                    <polygon points="5 4 15 12 5 20 5 4"></polygon>
+                    <line x1="19" y1="4" x2="19" y2="20" stroke-width="3"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="now-playing">
+            <span class="now-playing-title" id="npTitle">Select a chapter</span>
+            <span class="now-playing-chapter" id="npChapter"></span>
+        </div>
+        <div class="player-progress">
+            <span class="time-current" id="timeCurrent">0:00</span>
+            <div class="progress-track" id="progressTrack">
+                <div class="progress-fill" id="progressFill"></div>
+                <input type="range" class="progress-input" id="progressInput" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+            </div>
+            <span class="time-total" id="timeTotal">0:00</span>
+        </div>
+        <div class="player-volume">
+            <button class="player-btn btn-volume" id="btnVolume" title="Volume" aria-label="Toggle mute">
+                <svg class="icon-vol-on" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+                <svg class="icon-vol-mute" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="display:none">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </button>
+            <input type="range" class="volume-input" id="volumeInput" min="0" max="100" value="80" aria-label="Volume">
+        </div>
+    </div>
+    <audio id="narrationAudio" preload="none"></audio>
+</div>
+</div>
+
+<!-- ==========================================
+     Page Content
+     ========================================== -->
+<div class="narration-page">
+    <div class="narration-header">
+        <h1 class="narration-title">Complete Collection of Narrations</h1>
+    </div>
+
+    <!-- View Text Panel (collapsible, default closed) -->
+    <div class="view-text-wrapper" id="viewTextWrapper">
+        <button class="view-text-toggle" id="viewTextToggle" type="button" aria-expanded="false" aria-controls="viewTextPanel">
+            <span class="view-text-toggle-label">View Text</span>
+            <span class="view-text-toggle-arrow" id="viewTextArrow">&#9660;</span>
+        </button>
+        <div class="view-text-panel-body" id="viewTextPanel">
+            <div class="view-text-panel">
+                <h2 class="view-text-heading" id="viewTextHeading">Chapter Text</h2>
+                <div class="view-text-content" id="viewTextContent">
+                    <p class="no-text">Select a chapter to view its text.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         Chapter List
+         ========================================== -->
+    <div class="narration-container">
+
+        {%- set narratedChapters = [] -%}
+        {%- for chapter in collections.chapters -%}
+          {%- if chapter.data.audio -%}
+            {%- if chapter.data.audio.narration and chapter.data.audio.narration != "" -%}
+              {%- set narratedChapters = (narratedChapters.push(chapter), narratedChapters) -%}
+            {%- elif chapter.data.audio.sections and chapter.data.audio.sections.length > 0 -%}
+              {%- set narratedChapters = (narratedChapters.push(chapter), narratedChapters) -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {# Movement 1: Chapters 1-6 #}
+        {%- set m1Chapters = [] -%}
+        {%- for ch in narratedChapters -%}
+          {%- if ch.data.chapter >= 1 and ch.data.chapter <= 6 -%}
+            {%- set m1Chapters = (m1Chapters.push(ch), m1Chapters) -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if m1Chapters.length > 0 -%}
+        <div class="narration-section-header">
+            <h2 class="section-title">Finding Faith in Christ</h2>
+            <p class="section-subtitle">Foundations of faith and receiving Christ</p>
+        </div>
+
+        <table class="narration-table">
+            <thead>
+                <tr>
+                    <th class="col-num">Ch.</th>
+                    <th class="col-title">Title</th>
+                    <th class="col-duration">Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%- for chapter in m1Chapters -%}
+                <tr class="narration-row"
+                    data-chapter="{{ chapter.data.chapter }}"
+                    data-title="{{ chapter.data.title }}"
+                    data-chapter-url="{{ chapter.url }}"
+                    {%- if chapter.data.audio.sections and chapter.data.audio.sections.length > 0 %}
+                    data-narration-type="sections"
+                    data-sections='{{ chapter.data.audio.sections | dump | safe }}'
+                    {%- else %}
+                    data-narration-type="single"
+                    data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.narration }}"
+                    {%- endif %}>
+                    <td class="col-num">{{ chapter.data.chapter }}</td>
+                    <td class="col-title">
+                        <div class="narration-title-group">
+                            <span class="narration-title">{{ chapter.data.title }}</span>
+                            <a href="{{ chapter.url }}" class="narration-chapter-link" title="Read full chapter">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            </a>
+                        </div>
+                    </td>
+                    <td class="col-duration" data-duration>&mdash;</td>
+                </tr>
+                {%- endfor -%}
+            </tbody>
+        </table>
+        {%- endif -%}
+
+        {# Movement 2: Chapters 7-11 #}
+        {%- set m2Chapters = [] -%}
+        {%- for ch in narratedChapters -%}
+          {%- if ch.data.chapter >= 7 and ch.data.chapter <= 11 -%}
+            {%- set m2Chapters = (m2Chapters.push(ch), m2Chapters) -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if m2Chapters.length > 0 -%}
+        <div class="narration-section-header narration-section-header--subsequent">
+            <h2 class="section-title">Learn of Me</h2>
+            <p class="section-subtitle">The life and character of Jesus Christ</p>
+        </div>
+
+        <table class="narration-table">
+            <thead>
+                <tr>
+                    <th class="col-num">Ch.</th>
+                    <th class="col-title">Title</th>
+                    <th class="col-duration">Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%- for chapter in m2Chapters -%}
+                <tr class="narration-row"
+                    data-chapter="{{ chapter.data.chapter }}"
+                    data-title="{{ chapter.data.title }}"
+                    data-chapter-url="{{ chapter.url }}"
+                    {%- if chapter.data.audio.sections and chapter.data.audio.sections.length > 0 %}
+                    data-narration-type="sections"
+                    data-sections='{{ chapter.data.audio.sections | dump | safe }}'
+                    {%- else %}
+                    data-narration-type="single"
+                    data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.narration }}"
+                    {%- endif %}>
+                    <td class="col-num">{{ chapter.data.chapter }}</td>
+                    <td class="col-title">
+                        <div class="narration-title-group">
+                            <span class="narration-title">{{ chapter.data.title }}</span>
+                            <a href="{{ chapter.url }}" class="narration-chapter-link" title="Read full chapter">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            </a>
+                        </div>
+                    </td>
+                    <td class="col-duration" data-duration>&mdash;</td>
+                </tr>
+                {%- endfor -%}
+            </tbody>
+        </table>
+        {%- endif -%}
+
+    </div>
+
+    <div class="narration-footer">
+        <p>All chapters narrated by Brother Aaron using his professional voice. Visit the <a href="/writings/">full chapter pages</a> for interactive study tools, musical testimonies, and community discussion.</p>
+    </div>
+</div>
+
+</div><!-- /.narration-layout -->
+
+{% block scripts %}
+<script src="/js/narration-player.js"></script>
+{% endblock %}
