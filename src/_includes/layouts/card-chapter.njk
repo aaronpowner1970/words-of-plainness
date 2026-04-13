@@ -184,9 +184,10 @@
             <div class="commitment-group">
                 <label>Choose a practice that fits where you are right now:</label>
                 <div class="commitment-options">
+                    {% set cardIndex = loop.index %}
                     {% for opt in card.commitments %}
                     <label class="commitment-option">
-                        <input type="radio" name="commit-{{ loop.parent.loop.index }}" value="option-{{ loop.index }}">
+                        <input type="radio" name="commit-{{ cardIndex }}" value="option-{{ loop.index }}">
                         <span class="option-text">{{ opt.text }}
                             <span class="option-tag tag-{{ opt.tier }}">{{ opt.tier | capitalize }}</span>
                         </span>
