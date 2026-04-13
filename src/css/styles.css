@@ -347,12 +347,17 @@ p {
     border: none;
     color: var(--cream, #E8DCC4);
     font-family: inherit;
-    font-size: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    vertical-align: baseline;
     gap: 4px;
-    padding: 0;
+    padding: var(--space-xs) 0;
+    margin: 0;
+    line-height: inherit;
     transition: color 0.2s;
 }
 
@@ -367,6 +372,16 @@ p {
 
 .nav-has-dropdown.open .nav-dropdown-arrow {
     transform: rotate(180deg);
+}
+
+.nav-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 0;
+    right: 0;
+    height: 16px;
+    background: transparent;
 }
 
 .nav-dropdown {

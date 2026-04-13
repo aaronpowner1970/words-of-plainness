@@ -133,14 +133,18 @@
 })();
 
 // Mobile menu: Listen children expand/collapse
-document.querySelectorAll('.mobile-menu-parent').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!expanded));
-    const children = btn.nextElementSibling;
-    if (children) {
-      children.style.display = expanded ? 'none' : 'block';
-    }
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.mobile-menu-parent').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var children = btn.nextElementSibling;
+      if (children) {
+        children.style.display = expanded ? 'none' : 'block';
+      }
+    });
   });
 });
 </script>
