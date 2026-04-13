@@ -1,0 +1,17 @@
+{% extends "layouts/page.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/read-aloud-study.css?v={{ site.version }}">
+{% endblock %}
+
+{% block scripts %}
+<script>
+window.STUDY_AUDIO_CONFIG = {
+    {% if narration %}
+    narrationUrl: 'https://media.wordsofplainness.org/web/{{ narration }}',
+    {% endif %}
+    title: {{ title | dump | safe }}
+};
+</script>
+<script src="/js/read-aloud-study.js"></script>
+{% endblock %}
