@@ -242,10 +242,9 @@ const API = {
 
         this.updateUIForAuth();
 
-        // After login, check for localStorage reflections to migrate
-        this.checkReflectionMigration();
         if (window.Engagement) window.Engagement.flushQueue();
         if (window.RJW && typeof RJW.flushQueue === 'function') RJW.flushQueue();
+        if (typeof window.flushCardCommitments === 'function') window.flushCardCommitments();
         document.dispatchEvent(new CustomEvent('wop:auth-login', { detail: { user: this.user } }));
     },
 
@@ -292,117 +291,6 @@ const API = {
             mobileLoggedOut?.classList.remove('hidden');
             mobileLoggedIn?.classList.add('hidden');
         }
-    },
-
-    // =========================================
-    // Reflection Migration (localStorage → API)
-    // =========================================
-
-    checkReflectionMigration() {
-        if (!this.isAuthenticated()) return;
-
-        // Look for any localStorage reflections
-        const localReflections = [];
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key && key.startsWith('wop-reflection-')) {
-                try {
-                    localReflections.push({
-                        key: key,
-                        data: JSON.parse(localStorage.getItem(key))
-                    });
-                } catch { /* skip malformed */ }
-            }
-        }
-
-        if (localReflections.length === 0) return;
-
-        // Show migration prompt
-        const count = localReflections.length;
-        const noun = count === 1 ? 'reflection' : 'reflections';
-
-        // Small delay so the auth modal has time to close
-        setTimeout(() => {
-            if (confirm(`You have ${count} ${noun} saved on this device. Would you like to sync them to your account so they're available on all your devices?`)) {
-                this.migrateReflections(localReflections);
-            }
-        }, 500);
-    },
-
-    async migrateReflections(items) {
-        const promptTitles = {
-            '1': 'What stood out to you?',
-            '2': 'Why does it matter to you?',
-            '3': 'What will you do?'
-        };
-        let migrated = 0;
-
-        for (const item of items) {
-            try {
-                // Normalize old format { chapter, prompt, content } to Django schema
-                const d = item.data;
-                const payload = {
-                    content: d.content || '',
-                    chapter_slug: d.chapter_slug || d.chapter || '',
-                    title: d.title || promptTitles[d.prompt] || `Reflection ${d.prompt}`,
-                    visibility: d.visibility || 'private'
-                };
-                if (!payload.content || !payload.chapter_slug) {
-                    localStorage.removeItem(item.key);
-                    continue;
-                }
-                await this.saveReflection(payload);
-                localStorage.removeItem(item.key);
-                migrated++;
-            } catch (error) {
-                console.warn('Failed to migrate reflection:', item.key, error);
-            }
-        }
-
-        if (migrated > 0) {
-            console.log(`Migrated ${migrated} reflections to account`);
-            // Reload reflections UI if on a chapter page
-            if (typeof Reflections !== 'undefined' && Reflections.chapterId) {
-                Reflections.loadReflections();
-            }
-        }
-    },
-
-    // =========================================
-    // Reflections API
-    // =========================================
-
-    async saveReflection(data) {
-        return this.request('/reflections/mine/', {
-            method: 'POST',
-            body: JSON.stringify(data)
-        });
-    },
-
-    async updateReflection(id, data) {
-        return this.request(`/reflections/mine/${id}/`, {
-            method: 'PATCH',
-            body: JSON.stringify(data)
-        });
-    },
-
-    async getReflections(chapterSlug) {
-        return this.request(`/reflections/mine/?chapter_slug=${encodeURIComponent(chapterSlug)}`);
-    },
-
-    async getAllReflections() {
-        return this.request('/reflections/mine/');
-    },
-
-    async getCommunityReflections(chapterId) {
-        const query = chapterId ? `?chapter=${chapterId}` : '';
-        return this.request(`/reflections/community/${query}`);
-    },
-
-    async appreciateReflection(id) {
-        return this.request(`/reflections/${id}/appreciate/`, {
-            method: 'POST'
-        });
     },
 
     // =========================================
@@ -463,6 +351,21 @@ const API = {
 
     async getAllPauseResponses() {
         return this.request('/progress/pause-responses/');
+    },
+
+    // =========================================
+    // Card Commitments API
+    // =========================================
+
+    async saveCardCommitment(data) {
+        return this.request('/progress/card-commitments/', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+    },
+
+    async getAllCardCommitments() {
+        return this.request('/progress/card-commitments/');
     }
 };
 
