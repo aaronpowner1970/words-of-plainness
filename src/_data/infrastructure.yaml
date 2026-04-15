@@ -1,0 +1,309 @@
+# ═══════════════════════════════════════════════════════════════════
+# Words of Plainness — Infrastructure Registry
+# All external services, credentials locations, failure impacts,
+# and dependencies. NEVER stores actual credentials.
+#
+# Last verified: April 14, 2026
+# Staleness threshold: 90 days (amber warning)
+# ═══════════════════════════════════════════════════════════════════
+
+services:
+
+  # ─── WEB INFRASTRUCTURE ────────────────────────────────────────
+
+  - id: github
+    name: GitHub
+    category: web-infrastructure
+    role: "Version control and CI/CD trigger. Repository hosts Eleventy source, Claude Code commits, and GitHub Actions."
+    url: https://github.com/apowne/words-of-plainness
+    credentials_location: "Git credential manager (Windows). GitHub Actions secrets in repo Settings > Secrets."
+    failure_impact: "CRITICAL — No deployments, no version control, no auto-notification pipeline."
+    dependencies: []
+    last_verified: "2026-04-14"
+
+  - id: vercel
+    name: Vercel
+    category: web-infrastructure
+    role: "Static site hosting. Auto-deploys from GitHub main branch. Serves all four custom domains. Hosts serverless functions (post-deploy-notify)."
+    url: https://vercel.com/apowne/words-of-plainness
+    credentials_location: "Vercel dashboard login. Environment variables in Vercel project settings (NOTIFY_SECRET, DJANGO_API_URL, X_* tokens, FACEBOOK_*)."
+    failure_impact: "CRITICAL — Site goes offline for all visitors."
+    dependencies:
+      - github
+    notes: "Project name: words-of-plainness. Framework: null (static). Env var changes require redeployment."
+    last_verified: "2026-04-14"
+
+  - id: pythonanywhere
+    name: PythonAnywhere
+    category: web-infrastructure
+    role: "Django REST API backend. Hosts user accounts, R·J·W data, card commitments, engagement events, newsletter subscriptions, last-notified marker."
+    url: https://apowner.pythonanywhere.com
+    credentials_location: "PythonAnywhere dashboard login (apowner). Django superuser credentials. MySQL: apowner$default on apowner.mysql.pythonanywhere-services.com. Settings at /home/apowner/wop-api/wop_api/settings.py."
+    failure_impact: "HIGH — User accounts, R·J·W sync, card commitment sync all fail. Site remains readable but interactive features degrade to localStorage-only."
+    dependencies: []
+    notes: "API base: /api/v1/. Virtualenv: /home/apowner/.virtualenvs/wop-api/. CNAME: commandments.brotheraaron.org → webapp-2898335.pythonanywhere.com."
+    last_verified: "2026-04-14"
+
+  - id: cloudflare
+    name: "Cloudflare (R2 + DNS)"
+    category: web-infrastructure
+    role: "R2 object storage for audio CDN. DNS management for wordsofplainness.org. Web Analytics (free tier)."
+    url: https://dash.cloudflare.com
+    credentials_location: "Cloudflare dashboard login (Aaron.powner@gmail.com). R2 S3 credentials in tools/wop_r2_config.json (gitignored). Account ID: 25850d71f01b14a07896cd3db8746c82."
+    failure_impact: "HIGH — All audio playback fails (narrations, testimonies, overviews, read-aloud). DNS resolution for wordsofplainness.org fails."
+    dependencies: []
+    notes: "CDN URL: https://media.wordsofplainness.org/web/. Bucket: wop-media (WNAM). CORS configured for all four domains + localhost. Nameservers: gannon.ns.cloudflare.com, monika.ns.cloudflare.com."
+    last_verified: "2026-04-14"
+
+  - id: bluehost
+    name: Bluehost
+    category: web-infrastructure
+    role: "Domain registrar for all domains. DNS management for brotheraaron.org (not migrated to Cloudflare)."
+    url: https://my.bluehost.com
+    credentials_location: "Bluehost dashboard login."
+    failure_impact: "MEDIUM — Domain renewals. brotheraaron.org DNS changes. wordsofplainness.org DNS now on Cloudflare."
+    dependencies: []
+    notes: "Domains: wordsofplainness.org (DNS on Cloudflare), brotheraaron.org (DNS on Bluehost), brotheraaron.faith, wordsofplainness.faith."
+    last_verified: "2026-03-06"
+
+  - id: google-workspace
+    name: Google Workspace
+    category: web-infrastructure
+    role: "Email (host@brotheraaron.org), Google Drive (manuscript storage, backup destination), Google Docs (chapter manuscripts)."
+    url: https://workspace.google.com
+    credentials_location: "Google account login (Aaron.powner@gmail.com or host@brotheraaron.org)."
+    failure_impact: "MEDIUM — Email, manuscript access, backup sync affected. Site itself unaffected."
+    dependencies: []
+    last_verified: "2026-04-14"
+
+  # ─── DISTRIBUTION ──────────────────────────────────────────────
+
+  - id: discord
+    name: Discord
+    category: distribution
+    role: "Community server with chapter discussion forums, blog discussions, moderation infrastructure. Webhook for auto-notification pipeline."
+    url: https://discord.gg/tNwADDjTRV
+    credentials_location: "Discord account login (meta_apowner). Webhook URL in Vercel env vars. Server ID: 1463830471526846653."
+    failure_impact: "MEDIUM — Community discussion unavailable. Auto-notification to Discord fails."
+    dependencies: []
+    notes: "Community Server enabled. AutoMod 5/5 rules. Onboarding configured. #report-a-concern private channel for moderation."
+    last_verified: "2026-04-14"
+
+  - id: x-twitter
+    name: "X / Twitter"
+    category: distribution
+    role: "Ministry social media distribution. Dedicated account @WoPlainness. Auto-post on new blog posts via notification pipeline."
+    url: https://x.com/WoPlainness
+    credentials_location: "X Developer Portal (App ID 32711216). OAuth 1.0a tokens in Vercel env vars: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET."
+    failure_impact: "LOW — Social media posts fail. No impact on site functionality."
+    dependencies: []
+    notes: "API endpoint: api.twitter.com (NOT api.x.com). Signature base string must use api.twitter.com."
+    last_verified: "2026-04-08"
+
+  - id: facebook
+    name: Facebook
+    category: distribution
+    role: "Ministry page distribution. Auto-post on new blog posts via notification pipeline."
+    url: https://www.facebook.com/profile.php?id=1024422634090699
+    credentials_location: "Meta Developer account (host@brotheraaron.org). App ID: 1481937430388411 (legacy Business type). Page Access Token (permanent, never-expiring) in Vercel env vars: FACEBOOK_PAGE_TOKEN. Page ID: 1024422634090699."
+    failure_impact: "LOW — Social media posts fail. No impact on site functionality."
+    dependencies: []
+    notes: "First app (ID 1499492661795309) was broken — created via 'no use case' path. Remove it. Working app uses legacy 'Other > Business' creation path."
+    last_verified: "2026-04-04"
+
+  - id: buttondown
+    name: Buttondown
+    category: distribution
+    role: "Email newsletter. RSS-to-email for blog posts. Welcome email on subscription. Auto-subscribe on user registration."
+    url: https://buttondown.com
+    credentials_location: "Buttondown dashboard login. API key in Django settings for registration auto-subscribe."
+    failure_impact: "LOW — Newsletter delivery fails. Registration still works (newsletter failure never blocks it)."
+    dependencies:
+      - pythonanywhere
+    notes: "Basic plan ($9/mo). RSS feed: /posts/feed.xml."
+    last_verified: "2026-04-04"
+
+  - id: google-search-console
+    name: Google Search Console
+    category: distribution
+    role: "SEO monitoring. Sitemap submission. Search performance tracking."
+    url: https://search.google.com/search-console
+    credentials_location: "Google account login. Verification meta tag in base.njk (DDP9QSxaOLU2O-pWXrMitcruy3ZVvx32b0PuJrYDp0E)."
+    failure_impact: "LOW — SEO visibility monitoring lost. No impact on site."
+    dependencies: []
+    notes: "Property: https://www.wordsofplainness.org. Sitemap: 72 pages discovered."
+    last_verified: "2026-04-08"
+
+  - id: distrokid
+    name: DistroKid
+    category: distribution
+    role: "Music distribution to streaming platforms (Spotify, Apple Music, etc.). ISRC assignment."
+    url: https://distrokid.com
+    credentials_location: "DistroKid dashboard login."
+    failure_impact: "LOW — Music not distributed to streaming platforms. No impact on site."
+    dependencies: []
+    last_verified: "2026-03-01"
+
+  # ─── MEDIA PRODUCTION ─────────────────────────────────────────
+
+  - id: elevenlabs
+    name: ElevenLabs
+    category: media-production
+    role: "Voice synthesis. Chapter narrations (Aaron PVC), podcast overviews, read-aloud card chapter audio. Text-to-Dialogue API for SCRIBE origin story."
+    url: https://elevenlabs.io
+    credentials_location: "ElevenLabs dashboard login. API key in C:\\Users\\aaron\\Documents\\elevenlabs\\.env (gitignored). MCP server configured in claude_desktop_config.json."
+    failure_impact: "MEDIUM — Cannot generate new narrations or read-aloud audio. Existing CDN audio unaffected."
+    dependencies: []
+    notes: "Aaron PVC Voice ID: As8zJaZyH4MAgaQ93FMc. Model: eleven_multilingual_v2. Jonathan Livingston narrator: PIGsltMj3gFMR34aFDI3. Text-to-Dialogue has 5,000 char limit per request."
+    last_verified: "2026-04-11"
+
+  - id: suno
+    name: Suno
+    category: media-production
+    role: "AI music generation. Primary tool for ministry songs (testimony tracks, anthem)."
+    url: https://suno.com
+    credentials_location: "Suno account login."
+    failure_impact: "LOW — Cannot generate new music. Existing tracks unaffected."
+    dependencies: []
+    last_verified: "2026-03-01"
+
+  - id: ace-studio
+    name: ACE Studio
+    category: media-production
+    role: "MIDI vocal synthesis. Powner Method hybrid workflow — refines Suno outputs with precise vocal control."
+    url: https://www.acestudio.ai
+    credentials_location: "ACE Studio license/login."
+    failure_impact: "LOW — Music production pipeline degraded but Suno-only workflow still functional."
+    dependencies: []
+    last_verified: "2026-03-01"
+
+  - id: masterchannel
+    name: Masterchannel
+    category: media-production
+    role: "AI mastering for final music tracks before distribution."
+    url: https://masterchannel.ai
+    credentials_location: "Masterchannel account login."
+    failure_impact: "LOW — Music not mastered to broadcast standard. Audacity manual mastering as fallback."
+    dependencies: []
+    last_verified: "2026-03-01"
+
+  - id: audacity
+    name: Audacity
+    category: media-production
+    role: "Local audio editing. Manual mastering fallback. Crossfade editing. Batch processing."
+    url: null  # Local application
+    credentials_location: "Installed locally. No account required."
+    failure_impact: "LOW — Audio editing capability lost. ffmpeg CLI as partial fallback."
+    dependencies: []
+    last_verified: "2026-04-11"
+
+  - id: adobe-creative-cloud
+    name: Adobe Creative Cloud
+    category: media-production
+    role: "Graphic design (infographics, thumbnails, OG images). Adobe Express and Photoshop."
+    url: https://creativecloud.adobe.com
+    credentials_location: "Adobe account login."
+    failure_impact: "LOW — Cannot create new graphics. Canva as fallback."
+    dependencies: []
+    last_verified: "2026-04-01"
+
+  - id: canva
+    name: Canva
+    category: media-production
+    role: "Quick graphic design. Social media images. Fallback for Adobe."
+    url: https://www.canva.com
+    credentials_location: "Canva account login."
+    failure_impact: "LOW — Minor graphic design capability lost."
+    dependencies: []
+    last_verified: "2026-04-01"
+
+  - id: kapwing
+    name: Kapwing
+    category: media-production
+    role: "Video editing. YouTube thumbnail overlays. Quick video assembly."
+    url: https://www.kapwing.com
+    credentials_location: "Kapwing account login."
+    failure_impact: "LOW — Video editing capability lost. ffmpeg CLI as fallback."
+    dependencies: []
+    last_verified: "2026-04-08"
+
+  - id: ltx-studio
+    name: LTX Studio
+    category: media-production
+    role: "AI video generation. Planned for 'Calling the Straying Stranger Home' music video."
+    url: https://ltx.studio
+    credentials_location: "LTX Studio account login. Standard plan ($35/mo)."
+    failure_impact: "LOW — Music video production blocked. No impact on site."
+    dependencies: []
+    notes: "Status: waiting on Suno audio finalization and scene-by-scene prompt document."
+    last_verified: "2026-03-01"
+
+  - id: gemini
+    name: Google Gemini
+    category: media-production
+    role: "Supplementary AI assistant for research, image generation concepts, and content brainstorming."
+    url: https://gemini.google.com
+    credentials_location: "Google account login."
+    failure_impact: "LOW — Supplementary tool. No impact on core workflows."
+    dependencies: []
+    last_verified: "2026-04-01"
+
+  # ─── LOCAL TOOLS ───────────────────────────────────────────────
+
+  - id: ollama
+    name: Ollama
+    category: local-tools
+    role: "Local embedding engine for ChromaDB. Runs nomic-embed-text model for RAG ingestion."
+    url: null  # Local application
+    credentials_location: "Installed locally. No account required. Must be running for RAG ingestion."
+    failure_impact: "MEDIUM — Cannot ingest new documents into RAG. Existing RAG queries still work via ChromaDB."
+    dependencies: []
+    notes: "Model: nomic-embed-text. Required running during ministry-rag MCP ingestion operations."
+    last_verified: "2026-04-14"
+
+  - id: chromadb
+    name: ChromaDB
+    category: local-tools
+    role: "Vector database for ministry RAG system. Three collections: ministry_knowledge, session_summaries, legacy_manuscripts."
+    url: null  # Local application
+    credentials_location: "Database files on local machine. Accessed via ministry-rag MCP server."
+    failure_impact: "MEDIUM — RAG search unavailable in Claude Desktop. Claude.ai ministry-rag MCP also affected."
+    dependencies:
+      - ollama
+    notes: "3,356+ chunks across 3 collections as of Feb 2026."
+    last_verified: "2026-04-14"
+
+# ═══════════════════════════════════════════════════════════════════
+# COMPOSITE PIPELINES
+# ═══════════════════════════════════════════════════════════════════
+
+pipelines:
+
+  - id: notification-pipeline
+    name: "Auto-Notification Pipeline"
+    role: "Fires on new blog post commits. GitHub Action → Vercel serverless function → Discord webhook + X API + Facebook Graph API."
+    components:
+      - github          # .github/workflows/notify-new-post.yml
+      - vercel          # api/post-deploy-notify.js
+      - pythonanywhere  # /api/v1/progress/last-notified/ (marker endpoint)
+      - discord         # Webhook
+      - x-twitter       # OAuth 1.0a post
+      - facebook        # Graph API post
+    trigger: "Push to src/posts/*.md on main branch"
+    manual_fallback: "tools/notify.ps1 (PowerShell)"
+    status: operational
+    last_verified: "2026-04-08"
+    notes: "NOTIFY_SECRET shared between Vercel env vars, GitHub Secrets, and tools/notify.ps1. Rotated April 4, 2026."
+
+  - id: music-production-pipeline
+    name: "Music Production Pipeline"
+    role: "End-to-end music creation from composition through distribution."
+    components:
+      - suno            # Initial generation
+      - ace-studio      # MIDI vocal refinement (Powner Method)
+      - audacity        # Editing and assembly
+      - masterchannel   # AI mastering
+      - distrokid       # Streaming distribution
+      - cloudflare      # R2 CDN upload for website playback
+    status: operational
+    last_verified: "2026-04-11"
