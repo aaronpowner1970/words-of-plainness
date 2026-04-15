@@ -78,18 +78,17 @@ workstreams:
 
   - id: community-safety-phase0
     name: "Community Safety Phase 0"
-    status: partially-complete
+    status: complete
     priority: high
-    description: "Abuse reporting infrastructure required before community witness sharing (Checkbox 2) goes live."
-    completed:
+    description: "Abuse reporting infrastructure — prerequisite for all community features."
+    completed: "2026-04-15"
+    items:
       - "Discord #report-a-concern channel"
       - "Discord #content-and-rules with full guidelines"
       - "Community Guidelines page (/community-guidelines/)"
       - "AutoMod 5/5 rules active"
-    remaining:
-      - "/safety/ page on website (currently 404)"
-    blocked_by: null
-    notes: "Non-negotiable deployment gate per Community Safety & Moderation Protocol v1.0."
+      - "/safety/ page with reporting form (POST to Django contact endpoint)"
+    notes: "Phase 0 gate cleared. Community witness sharing (Checkbox 2) now unblocked for Phase 1 (moderation pipeline)."
 
   - id: youtube-content
     name: "YouTube Content Pipeline"
@@ -114,9 +113,10 @@ workstreams:
 blocked_items:
 
   - item: "Community witness sharing (R·J·W Checkbox 2)"
-    blocked_by: "Phase 0 safety infrastructure incomplete (/safety/ page)"
+    blocked_by: "Phase 1 moderation pipeline not yet built"
     severity: medium
     workaround: "submit_for_community saves to localStorage only. No community display."
+    notes: "Phase 0 gate cleared April 15. Next: Phase 1 (submission moderation pipeline)."
 
   - item: "AI Conversational Response Agent"
     blocked_by: "Design decision pending from Aaron. Requires published_content RAG collection separation."
@@ -178,6 +178,10 @@ pipeline_health:
 # ═══════════════════════════════════════════════════════════════════
 
 milestones:
+
+  - date: "2026-04-15"
+    title: "Community Safety Phase 0 Complete"
+    description: "/safety/ page deployed with reporting form. All Phase 0 prerequisites met. Community witness sharing deployment gate cleared."
 
   - date: "2026-04-15"
     title: "Hybrid BM25+Vector Search Deployed"
@@ -316,8 +320,8 @@ governance_docs:
 # ═══════════════════════════════════════════════════════════════════
 
 next_priorities:
-  - "Build /safety/ page (Phase 0 final item — unblocks community witness sharing)"
   - "Ch 15 — Repentance as a Lifestyle (manuscript access, development package)"
   - "Ch 17 — Christlike Virtues (completes Phase 4)"
+  - "Phase 1 — Submission moderation pipeline (next community safety phase)"
   - "Fix /volume-1/ Ch 16 status (when Ch 15 deploys)"
   - "Admin analytics dashboard"
