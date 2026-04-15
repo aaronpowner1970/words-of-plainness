@@ -96,7 +96,7 @@ toc:
   - id: this-scripture-is-fulfilled
     title: This Scripture Is Fulfilled
 
-discordChannelId: ""
+discordChannelId: "1463836023871242394"
 
 prevChapter:
   url: "/chapters/07-prophecies-birth-youth/"
