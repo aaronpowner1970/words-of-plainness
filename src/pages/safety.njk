@@ -544,7 +544,7 @@ description: "Crisis resources, abuse reporting, and safety support for the Word
                 await window.API.submitContact({
                     name: name,
                     email: email,
-                    submission_type: 'safety_report',
+                    submission_type: 'general',
                     subject: subject,
                     message: message
                 });
@@ -556,7 +556,7 @@ description: "Crisis resources, abuse reporting, and safety support for the Word
                     body: JSON.stringify({
                         name: name,
                         email: email,
-                        submission_type: 'safety_report',
+                        submission_type: 'general',
                         subject: subject,
                         message: message
                     })
