@@ -2,203 +2,595 @@
 layout: layouts/page.njk
 title: Safety & Support
 pageTitle: Safety & Support
-pageSubtitle: "Reporting a Concern · Crisis Resources · How We Respond"
+pageSubtitle: "You Are Not Alone"
 permalink: /safety/
+description: "Crisis resources, abuse reporting, and safety support for the Words of Plainness community. If you need help, start here."
 ---
 
-<section class="content-section" id="safety-intro">
+<style>
+/* ── Crisis Banner ── */
+.crisis-banner {
+    max-width: 680px;
+    margin: 0 auto 2.5rem;
+    padding: 1.5rem 1.75rem;
+    background: rgba(196, 148, 58, 0.1);
+    border: 2px solid var(--gold-primary, #C4943A);
+    border-radius: var(--radius-lg, 12px);
+    text-align: center;
+}
+.crisis-banner-heading {
+    font-family: var(--font-heading, 'Cinzel', serif);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold-primary, #C4943A);
+    margin-bottom: 0.75rem;
+}
+.crisis-banner p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+}
+.crisis-banner p:last-child {
+    margin-bottom: 0;
+}
+.crisis-number {
+    font-family: var(--font-heading, 'Cinzel', serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold-primary, #C4943A);
+    letter-spacing: 0.05em;
+    display: block;
+    margin: 0.75rem 0;
+}
+.crisis-number a {
+    color: var(--gold-primary, #C4943A);
+    text-decoration: none;
+    border-bottom: 2px solid rgba(196, 148, 58, 0.4);
+    transition: border-color 0.2s;
+}
+.crisis-number a:hover {
+    border-color: var(--gold-primary, #C4943A);
+}
+
+/* ── Crisis Resource Cards ── */
+.crisis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+.crisis-card {
+    padding: 1.25rem 1.5rem;
+    background: rgba(42, 29, 20, 0.4);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-radius: var(--radius-lg, 12px);
+}
+.crisis-card h3 {
+    font-family: var(--font-heading, 'Cinzel', serif);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold-primary, #C4943A);
+    margin-bottom: 0.5rem;
+}
+.crisis-card p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 0.4rem;
+}
+.crisis-card .crisis-card-contact {
+    font-weight: 600;
+    color: var(--cream, #E8DCC4);
+}
+.crisis-card .crisis-card-contact a {
+    color: var(--gold-primary, #C4943A);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.3);
+}
+.crisis-card .crisis-card-contact a:hover {
+    color: var(--gold-light, #D4A84A);
+    border-color: var(--gold-light, #D4A84A);
+}
+
+/* ── Safety Form ── */
+.safety-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.safety-field {
+    margin-bottom: 1.25rem;
+}
+.safety-field label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--cream, #E8DCC4);
+    margin-bottom: 0.4rem;
+}
+.safety-field .safety-field-hint {
+    display: block;
+    font-size: 0.82rem;
+    color: rgba(232, 220, 196, 0.55);
+    font-style: italic;
+    margin-bottom: 0.4rem;
+}
+.safety-field select,
+.safety-field input,
+.safety-field textarea {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(196, 148, 58, 0.25);
+    border-radius: 6px;
+    color: var(--cream, #E8DCC4);
+    font-family: var(--font-body, 'Crimson Pro', Georgia, serif);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+}
+.safety-field select:focus,
+.safety-field input:focus,
+.safety-field textarea:focus {
+    outline: none;
+    border-color: var(--gold-primary, #C4943A);
+}
+.safety-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C4943A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.25rem;
+    cursor: pointer;
+}
+.safety-field select option {
+    background: #2A1D14;
+    color: #E8DCC4;
+}
+.safety-field textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+.safety-field-error {
+    font-size: 0.82rem;
+    color: #D4694A;
+    margin-top: 0.3rem;
+}
+.safety-form-error {
+    padding: 0.75rem 1rem;
+    background: rgba(212, 105, 74, 0.15);
+    border: 1px solid rgba(212, 105, 74, 0.3);
+    border-radius: 6px;
+    color: #D4694A;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.safety-submit-btn {
+    display: inline-block;
+    padding: 0.7rem 1.75rem;
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-deep, #1E1208);
+    font-family: var(--font-heading, 'Cinzel', serif);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.safety-submit-btn:hover {
+    background: var(--gold-light, #D4A84A);
+}
+.safety-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.safety-success {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: rgba(196, 148, 58, 0.08);
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: var(--radius-lg, 12px);
+}
+.safety-success h3 {
+    color: var(--gold-primary, #C4943A);
+    margin-bottom: 0.75rem;
+}
+.safety-whathappens {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(42, 29, 20, 0.35);
+    border-left: 3px solid var(--gold-primary, #C4943A);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+.safety-whathappens p {
+    margin-bottom: 0.5rem;
+}
+.safety-whathappens p:last-child {
+    margin-bottom: 0;
+}
+.hidden { display: none !important; }
+
+/* ── Honeypot (anti-bot) ── */
+.safety-hp {
+    position: absolute;
+    left: -5000px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+</style>
+
+<!-- ═══════════════════════════════════════
+     CRISIS RESOURCES — ALWAYS VISIBLE FIRST
+═══════════════════════════════════════ -->
+
+<section class="content-section" id="crisis">
     <div class="content-wrapper">
 
+        <div class="crisis-banner">
+            <div class="crisis-banner-heading">If You Are in Immediate Danger</div>
+            <p><strong>Call 911</strong> or your local emergency number.</p>
+            <p>If you or someone you know is in crisis, call or text:</p>
+            <span class="crisis-number"><a href="tel:988">988</a></span>
+            <p>Suicide &amp; Crisis Lifeline &mdash; available 24/7, free and confidential.</p>
+        </div>
+
         <p>
-            This page exists for one purpose: to give anyone in this community a clear,
-            direct path to report a safety concern, harmful content, or abusive behavior&mdash;and
-            to know what happens when they do.
+            This page exists because we take the safety of every person in this community seriously.
+            Whether you are experiencing something personally, are worried about someone else, or
+            want to report content that concerns you &mdash; you have come to the right place.
         </p>
         <p>
-            You are never bothering anyone by reporting. If something feels wrong, report it.
-            That is what this is for.
+            You are never bothering anyone by reaching out. This is exactly what this page is for.
         </p>
 
-        <div class="feature-card" style="margin-top: 1.5rem; border-left: 3px solid var(--gold-primary);">
-            <p style="margin: 0 0 0.5rem; font-weight: 600;">If you are in immediate danger, please call 911.</p>
-            <p style="margin: 0; font-size: 0.95rem;">
-                This community cares deeply about your safety, but it is not a substitute for
-                professional emergency or crisis support. Please use the resources at the
-                bottom of this page if you need help right now.
-            </p>
+        <div class="crisis-grid">
+            <div class="crisis-card">
+                <h3>988 Suicide &amp; Crisis Lifeline</h3>
+                <p>Free, confidential support for people in distress. Available 24/7.</p>
+                <p class="crisis-card-contact">
+                    Call or text: <a href="tel:988">988</a><br>
+                    Chat: <a href="https://988lifeline.org/chat/" target="_blank" rel="noopener noreferrer">988lifeline.org</a>
+                </p>
+            </div>
+            <div class="crisis-card">
+                <h3>Crisis Text Line</h3>
+                <p>Free crisis support via text message. Available 24/7.</p>
+                <p class="crisis-card-contact">
+                    Text <strong>HELLO</strong> to <a href="sms:741741">741741</a>
+                </p>
+            </div>
+            <div class="crisis-card">
+                <h3>National Domestic Violence Hotline</h3>
+                <p>Confidential support for anyone affected by domestic violence.</p>
+                <p class="crisis-card-contact">
+                    Call: <a href="tel:18007997233">1-800-799-7233</a><br>
+                    Chat: <a href="https://www.thehotline.org" target="_blank" rel="noopener noreferrer">thehotline.org</a>
+                </p>
+            </div>
+            <div class="crisis-card">
+                <h3>SAMHSA National Helpline</h3>
+                <p>Treatment referrals and information for substance abuse and mental health. Free, confidential, 24/7.</p>
+                <p class="crisis-card-contact">
+                    Call: <a href="tel:18006624357">1-800-662-4357</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     REPORT A CONCERN
+═══════════════════════════════════════ -->
+
+<section class="content-section alt" id="report">
+    <div class="content-wrapper">
+        <h2>Report a Concern</h2>
+
+        <p>
+            Use this form to report a safety concern, harmful content, or anything
+            that worries you about this community. Your report goes directly to
+            Brother Aaron and is treated with the seriousness it deserves.
+        </p>
+
+        <div class="safety-whathappens">
+            <p><strong>What happens when you submit this form:</strong></p>
+            <p>Your report will be sent directly to Brother Aaron. You will receive a personal
+            response. If you are in immediate danger, please call 911.</p>
+        </div>
+
+        <div class="safety-form-wrapper" style="margin-top: 1.5rem;">
+
+            <!-- SUCCESS STATE (hidden until submission) -->
+            <div class="safety-success hidden" id="safetySuccess">
+                <h3>Your Report Has Been Received</h3>
+                <p>
+                    Thank you for reaching out. Brother Aaron has received your report
+                    and will follow up with you personally. If your concern involves
+                    immediate safety, please also call 911 or the 988 Suicide &amp; Crisis
+                    Lifeline.
+                </p>
+                <p style="margin-top: 1rem;">
+                    <a href="#" id="safetySendAnother" class="text-gold">Submit another report</a>
+                </p>
+            </div>
+
+            <!-- FORM -->
+            <form id="safetyForm">
+                <!-- Honeypot -->
+                <input type="text" name="website" class="safety-hp" autocomplete="off" tabindex="-1" aria-hidden="true">
+                <input type="hidden" name="loaded_at" value="">
+
+                <div class="safety-field">
+                    <label for="safety-category">What brings you here?</label>
+                    <select id="safety-category" name="category" required>
+                        <option value="" disabled selected>Select one&hellip;</option>
+                        <option value="own_safety">I'm worried about my own safety.</option>
+                        <option value="someone_else">I'm worried about someone else's safety.</option>
+                        <option value="report_content">I want to report content that concerns me.</option>
+                        <option value="other">Something else.</option>
+                    </select>
+                    <small class="safety-field-error hidden" data-safety-error="category"></small>
+                </div>
+
+                <div class="safety-field">
+                    <label for="safety-description">Tell us what's happening</label>
+                    <span class="safety-field-hint">Share as much or as little as you feel comfortable sharing. We will follow up with you personally.</span>
+                    <textarea id="safety-description" name="description" placeholder=""></textarea>
+                    <small class="safety-field-error hidden" data-safety-error="description"></small>
+                </div>
+
+                <div class="safety-field">
+                    <label for="safety-email">Your email address</label>
+                    <span class="safety-field-hint">Required so Brother Aaron can respond to you.</span>
+                    <input type="email" id="safety-email" name="email" required>
+                    <small class="safety-field-error hidden" data-safety-error="email"></small>
+                </div>
+
+                <div class="safety-field">
+                    <label for="safety-name">Your name <span style="opacity: 0.5; font-weight: 400;">(optional)</span></label>
+                    <input type="text" id="safety-name" name="name">
+                </div>
+
+                <div class="safety-field">
+                    <label for="safety-phone">Phone number <span style="opacity: 0.5; font-weight: 400;">(optional)</span></label>
+                    <span class="safety-field-hint">If you prefer a phone call, include your number and we will call you.</span>
+                    <input type="tel" id="safety-phone" name="phone">
+                </div>
+
+                <div class="safety-form-error hidden" id="safetyFormError"></div>
+
+                <button type="submit" class="safety-submit-btn" id="safetySubmit">Submit Report</button>
+            </form>
         </div>
     </div>
 </section>
 
-<!-- HOW TO REPORT -->
-<section class="content-section alt" id="safety-report">
+<!-- ═══════════════════════════════════════
+     CONFIDENTIALITY & NO RETALIATION
+═══════════════════════════════════════ -->
+
+<section class="content-section" id="confidentiality">
     <div class="content-wrapper">
-        <h2>How to Report a Concern</h2>
+        <h2>Confidentiality and Your Protection</h2>
 
         <p>
-            There are three ways to reach us. Use whichever feels right for your situation.
-            All three go directly to Brother Aaron.
+            Your communication with us is treated with the highest respect and discretion.
+            In cases involving the safety of a child or imminent danger to any person, we
+            may be required by law to involve appropriate authorities.
         </p>
 
-        <div class="feature-grid" style="margin-top: 1.5rem;">
+        <p>
+            <strong>Your identity as a reporter is never disclosed to the person you
+            reported.</strong> This is a hard policy with no exceptions. No community member
+            shall face negative consequences for filing a report in good faith. If a report
+            leads to the removal of another member's content, the reporter is not identified.
+            If a report is found to be without merit, the reporter's account is not penalized.
+        </p>
+
+        <p>
+            The only exception is demonstrably malicious false reporting, which may result
+            in account review.
+        </p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     OTHER WAYS TO REACH US
+═══════════════════════════════════════ -->
+
+<section class="content-section alt" id="other-ways">
+    <div class="content-wrapper">
+        <h2>Other Ways to Report</h2>
+
+        <div class="feature-grid" style="margin-top: 1rem;">
             <div class="feature-card">
-                <h3>Discord: #report-a-concern</h3>
+                <h3>In Discord</h3>
                 <p>
-                    Use the <strong>#report-a-concern</strong> channel in our Discord server.
-                    This is a private channel&mdash;only you and Brother Aaron can see what
-                    is posted there.
+                    Use the <strong>#report-a-concern</strong> channel in the Discord server,
+                    or send a direct message to Brother Aaron.
                 </p>
                 <a href="https://discord.gg/tNwADDjTRV" target="_blank" rel="noopener noreferrer" class="text-gold" style="font-size: 0.95rem;">
                     Go to Discord &rarr;
                 </a>
             </div>
             <div class="feature-card">
-                <h3>Direct Message to Brother Aaron</h3>
+                <h3>Direct Contact</h3>
                 <p>
-                    Send Brother Aaron a direct message on Discord for anything you would
-                    prefer to raise privately and conversationally.
-                </p>
-                <a href="https://discord.gg/tNwADDjTRV" target="_blank" rel="noopener noreferrer" class="text-gold" style="font-size: 0.95rem;">
-                    Find Brother Aaron on Discord &rarr;
-                </a>
-            </div>
-            <div class="feature-card">
-                <h3>Contact Form</h3>
-                <p>
-                    Use the contact form on this website to report any concern in writing&mdash;whether
-                    it involves content on the site, activity in Discord, or anything else.
-                    You do not need an account to submit.
+                    You can always reach Brother Aaron directly through the Contact form
+                    for any concern you would prefer to raise privately.
                 </p>
                 <a href="/connect/#contact" class="text-gold" style="font-size: 0.95rem;">
-                    Open the Contact Form &rarr;
+                    Contact Brother Aaron &rarr;
                 </a>
             </div>
         </div>
 
-        <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
-            You can share as much or as little as you feel comfortable sharing.
-            You will receive a personal response.
-        </p>
-    </div>
-</section>
-
-<!-- WHAT HAPPENS WHEN YOU REPORT -->
-<section class="content-section" id="safety-process">
-    <div class="content-wrapper">
-        <h2>What Happens When You Report</h2>
-
-        <h3 style="margin-top: 1.5rem;">Reported content is hidden immediately</h3>
-        <p>
-            Any content reported for safety review is removed from public view right away&mdash;before
-            the review is complete. It is not visible to other community members while it is
-            under evaluation.
-        </p>
-
-        <h3 style="margin-top: 1.5rem;">Brother Aaron reviews it personally</h3>
-        <p>
-            Every report is reviewed by Brother Aaron. There is no automated system making
-            decisions here. Urgent reports are treated as such and addressed without delay.
-            Critical safety situations receive a same-hour response during waking hours.
-            High-priority abuse and safety concerns receive a personal follow-up within 24 hours.
-            All other reports are reviewed within 48 hours.
-        </p>
-
-        <h3 style="margin-top: 1.5rem;">Your identity is never disclosed</h3>
-        <p>
-            <strong>The identity of anyone who makes a report is never disclosed to the person
-            or content being reported.</strong> This is a hard policy with no exceptions.
-            If content is removed following a report, the person whose content was removed
-            is notified only that their submission did not meet community guidelines.
-            The existence of a report is never mentioned.
-        </p>
-
-        <h3 style="margin-top: 1.5rem;">You receive an acknowledgment</h3>
-        <p>
-            Every report receives a response confirming it was received. For urgent and
-            critical matters, that acknowledgment comes quickly, along with a personal
-            follow-up from Brother Aaron.
-        </p>
-    </div>
-</section>
-
-<!-- IMMINENT DANGER & MANDATORY REPORTING -->
-<section class="content-section alt" id="safety-mandatory">
-    <div class="content-wrapper">
-        <h2>Imminent Danger and Child Safety</h2>
-
-        <p>
-            If a report indicates imminent danger to any person&mdash;including any content
-            involving potential harm to a child&mdash;it is treated as a critical-priority
-            matter and escalated immediately.
-        </p>
-        <p>
-            Your communication with this ministry is treated with the highest respect and
-            discretion. In cases involving the safety of a child or imminent danger to any
-            person, we may be required by law to involve appropriate authorities.
-        </p>
-        <p>
-            If a child you know may be in danger, you can also contact:
-        </p>
-        <ul style="margin: 0.75rem 0 0.75rem 1.25rem; line-height: 1.9;">
-            <li><strong>Childhelp National Child Abuse Hotline:</strong> 1-800-422-4453 (24/7)</li>
-            <li><strong>Emergency services:</strong> 911 (US)</li>
-        </ul>
-    </div>
-</section>
-
-<!-- CRISIS RESOURCES -->
-<section class="content-section" id="safety-crisis">
-    <div class="content-wrapper">
-        <h2>Crisis Resources</h2>
-
-        <p>
-            If you are struggling right now&mdash;with thoughts of self-harm, a dangerous
-            situation, or anything that feels like too much to carry alone&mdash;please reach
-            out for help immediately. You do not have to wait for a response from this community.
-        </p>
-
-        <ul style="margin: 1rem 0 1rem 1.25rem; line-height: 2.1;">
-            <li><strong>Emergency services:</strong> 911 (US)</li>
-            <li><strong>988 Suicide &amp; Crisis Lifeline:</strong> Call or text <strong>988</strong> (US, available 24/7)</li>
-            <li><strong>Crisis Text Line:</strong> Text <strong>HOME</strong> to <strong>741741</strong> (US, available 24/7)</li>
-            <li><strong>National Domestic Violence Hotline:</strong> 1-800-799-7233 (24/7)</li>
-            <li><strong>Childhelp National Child Abuse Hotline:</strong> 1-800-422-4453 (24/7)</li>
-        </ul>
-
-        <p>
-            You are not alone. Whatever you are carrying, there are people whose entire
-            vocation is to be present to you in it.
-        </p>
-    </div>
-</section>
-
-<!-- CLOSING WORD -->
-<section class="content-section alt" id="safety-closing">
-    <div class="content-wrapper">
-        <h2>A Word from Brother Aaron</h2>
-
-        <p>
-            The moment this ministry invited people to share sacred experiences publicly,
-            it accepted responsibility for their safety in that space. That is not a legal
-            statement. It is a pastoral one.
-        </p>
-        <p>
-            If you are here because something happened and you needed a page like this to
-            exist, I am glad it does. Please use it. I take every report seriously, and I
-            will respond to you personally.
-        </p>
-        <p>
-            If you are not sure whether what you experienced rises to the level of a
-            reportable concern&mdash;report it anyway. You are the right person to decide
-            that something deserves attention, and I would rather hear from you than not.
-        </p>
         <p style="margin-top: 1.5rem;">
-            <a href="/connect/#contact" class="btn btn-outline-gold">Contact Brother Aaron</a>
+            <a href="/community-guidelines/" class="text-gold">
+                Read our Community Guidelines &rarr;
+            </a>
         </p>
 
-        <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.65;">
-            Community Safety &amp; Moderation Protocol v1.0 &mdash; Aaron Powner Publishing &mdash;
-            February 2026. This page is reviewed quarterly.
+        <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.55;">
+            Safety &amp; Support &mdash; Words of Plainness &mdash; Aaron Powner Publishing &mdash;
+            April 2026. Per Community Safety &amp; Moderation Protocol v1.0.
         </p>
     </div>
 </section>
+
+<script>
+/**
+ * Safety Report Form Handler
+ * Posts to the existing Django contact endpoint with submission_type "safety_report".
+ * The category and phone fields are embedded into the subject/message for Aaron's review.
+ */
+(function() {
+    const form = document.getElementById('safetyForm');
+    const submitBtn = document.getElementById('safetySubmit');
+    if (!form) return;
+
+    // Set honeypot timestamp
+    const loadedAt = form.querySelector('[name="loaded_at"]');
+    if (loadedAt) loadedAt.value = Date.now().toString();
+
+    // Pre-fill from auth if available
+    if (window.API && window.API.isAuthenticated && window.API.isAuthenticated() && window.API.user) {
+        const emailInput = document.getElementById('safety-email');
+        const nameInput = document.getElementById('safety-name');
+        if (emailInput && !emailInput.value && window.API.user.email) emailInput.value = window.API.user.email;
+        if (nameInput && !nameInput.value && window.API.user.name) nameInput.value = window.API.user.name;
+    }
+
+    // Clear field errors on input
+    form.querySelectorAll('input, textarea, select').forEach(function(el) {
+        el.addEventListener('input', function() {
+            var errEl = document.querySelector('[data-safety-error="' + el.name + '"]');
+            if (errEl) { errEl.textContent = ''; errEl.classList.add('hidden'); }
+        });
+    });
+
+    // Send another
+    document.getElementById('safetySendAnother').addEventListener('click', function(e) {
+        e.preventDefault();
+        form.reset();
+        clearErrors();
+        document.getElementById('safetySuccess').classList.add('hidden');
+        form.classList.remove('hidden');
+        if (loadedAt) loadedAt.value = Date.now().toString();
+    });
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        clearErrors();
+
+        // Honeypot check
+        var hp = form.querySelector('[name="website"]');
+        if (hp && hp.value) return; // bot filled honeypot
+
+        var ts = loadedAt ? parseInt(loadedAt.value, 10) : 0;
+        if (ts && (Date.now() - ts) < 3000) return; // submitted too fast
+
+        // Validate
+        var category = document.getElementById('safety-category').value;
+        var description = document.getElementById('safety-description').value.trim();
+        var email = document.getElementById('safety-email').value.trim();
+        var valid = true;
+
+        if (!category) {
+            showFieldError('category', 'Please select a category.');
+            valid = false;
+        }
+        if (!description || description.length < 10) {
+            showFieldError('description', 'Please share what is happening (at least 10 characters).');
+            valid = false;
+        }
+        if (!email || !email.includes('@')) {
+            showFieldError('email', 'Please enter a valid email address.');
+            valid = false;
+        }
+        if (!valid) return;
+
+        // Build the data for the contact endpoint
+        var categoryLabels = {
+            'own_safety': "I'm worried about my own safety",
+            'someone_else': "I'm worried about someone else's safety",
+            'report_content': "I want to report content that concerns me",
+            'other': "Something else"
+        };
+        var categoryLabel = categoryLabels[category] || category;
+        var name = document.getElementById('safety-name').value.trim() || 'Anonymous';
+        var phone = document.getElementById('safety-phone').value.trim();
+
+        var subject = '⚠️ Safety Report: ' + categoryLabel;
+        var message = 'SAFETY REPORT\n'
+            + '━━━━━━━━━━━━━\n'
+            + 'Category: ' + categoryLabel + '\n'
+            + (phone ? 'Phone: ' + phone + '\n' : '')
+            + '━━━━━━━━━━━━━\n\n'
+            + description;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        try {
+            if (window.API && window.API.submitContact) {
+                await window.API.submitContact({
+                    name: name,
+                    email: email,
+                    submission_type: 'safety_report',
+                    subject: subject,
+                    message: message
+                });
+            } else {
+                // Fallback: direct POST if API not available
+                var resp = await fetch('/api/v1/contact/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        submission_type: 'safety_report',
+                        subject: subject,
+                        message: message
+                    })
+                });
+                if (!resp.ok) throw new Error('Server error');
+            }
+
+            form.classList.add('hidden');
+            document.getElementById('safetySuccess').classList.remove('hidden');
+
+        } catch (err) {
+            showFormError(
+                'Unable to send your report right now. Please try again, or contact Brother Aaron directly at the Contact page.'
+            );
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit Report';
+        }
+    });
+
+    function showFieldError(field, msg) {
+        var el = document.querySelector('[data-safety-error="' + field + '"]');
+        if (el) { el.textContent = msg; el.classList.remove('hidden'); }
+    }
+    function showFormError(msg) {
+        var el = document.getElementById('safetyFormError');
+        if (el) { el.textContent = msg; el.classList.remove('hidden'); }
+    }
+    function clearErrors() {
+        document.querySelectorAll('[data-safety-error]').forEach(function(el) {
+            el.textContent = ''; el.classList.add('hidden');
+        });
+        var fe = document.getElementById('safetyFormError');
+        if (fe) { fe.textContent = ''; fe.classList.add('hidden'); }
+    }
+})();
+</script>

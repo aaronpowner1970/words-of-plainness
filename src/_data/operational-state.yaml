@@ -3,7 +3,7 @@
 # Current phase, workstreams, blockers, pipeline health,
 # milestones, and governance document index.
 #
-# Last updated: April 14, 2026
+# Last updated: April 15, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -47,25 +47,26 @@ workstreams:
 
   - id: operational-framework
     name: "Operational Framework (YAML Layer)"
-    status: in-progress
+    status: complete
     priority: high
-    description: "Three YAML files as single source of truth. Session A: write files to repo. Session B: monthly export script."
-    next_action: "Verify YAML files, commit to main, ingest RAG reference document."
-    blocked_by: null
+    description: "Three YAML files as single source of truth. Session A: files committed. Session B: monthly atlas export script deployed and scheduled."
+    completed: "2026-04-15"
+    notes: "tools/atlas-export.ps1 deployed. Task Scheduler: every 4 Sundays, 4 AM. RAG reference document ingested."
 
   - id: stale-data-fixes
     name: "Stale Data Fixes"
-    status: pending
-    priority: high
-    description: "Two landing page corrections identified in April 14 site audit."
-    items:
-      - page: /writings/
-        issue: "Shows '37 chapters • 6 available' — both numbers wrong (should be 30 chapters, 15 available)"
-        fix: "Update writings.njk chapter counts"
+    status: partially-complete
+    priority: low
+    description: "Landing page corrections identified in April 14 site audit."
+    completed_items:
+      - "/writings/ page counts fixed (30 chapters, 15 available) — commit bb6ab54"
+      - "discordChannelId deployed for Ch 8, 12, 13, 14 — commit 2c2f8e4"
+    remaining:
       - page: /volume-1/
         issue: "Ch 16 (Keeping the Sabbath) shows 'Coming Soon' despite being deployed"
         fix: "Update volume-1.njk to show Ch 16 as available"
-    next_action: "Claude Code prompt to fix both pages."
+        deferred_until: "Ch 15 deploys — will fix both Ch 15 and 16 in same commit"
+    next_action: "No action until Ch 15 is ready to deploy."
 
   - id: chapter-15-authoring
     name: "Ch 15 — Repentance as a Lifestyle"
@@ -78,7 +79,7 @@ workstreams:
   - id: community-safety-phase0
     name: "Community Safety Phase 0"
     status: partially-complete
-    priority: medium
+    priority: high
     description: "Abuse reporting infrastructure required before community witness sharing (Checkbox 2) goes live."
     completed:
       - "Discord #report-a-concern channel"
@@ -152,17 +153,39 @@ pipeline_health:
     destination: "H:\\My Drive\\Professional\\Aaron Powner Publishing\\backups\\"
     notes: "Restore script (wop-restore.ps1) not yet tested."
 
+  atlas_export:
+    status: operational
+    last_test: "2026-04-15"
+    schedule: "Every 4 Sundays, 4 AM"
+    destination: "H:\\My Drive\\Professional\\Aaron Powner Publishing\\backups\\atlas\\"
+    retention: "6-month auto-prune"
+    notes: "tools/atlas-export.ps1. Requires powershell-yaml module."
+
   analytics:
     layer_1_cloudflare: operational
     layer_2_django_member: "operational (needs admin dashboard view)"
     layer_3_engagement_js: operational
     notes: "Admin dashboard at /admin/dashboard/ designed but not built."
 
+  rag_infrastructure:
+    status: operational
+    last_test: "2026-04-15"
+    search_mode: "hybrid (BM25 + vector via Reciprocal Rank Fusion)"
+    notes: "mcp_server.py v2.0. ingest.py v2.1 (1500-char chunks, 200 overlap, auto summary chunks)."
+
 # ═══════════════════════════════════════════════════════════════════
 # MILESTONES (completed, reverse chronological)
 # ═══════════════════════════════════════════════════════════════════
 
 milestones:
+
+  - date: "2026-04-15"
+    title: "Hybrid BM25+Vector Search Deployed"
+    description: "mcp_server.py v2.0 with Reciprocal Rank Fusion. Structural/technical documents now retrieve reliably."
+
+  - date: "2026-04-15"
+    title: "Operational Framework Complete"
+    description: "Three YAML files committed, RAG reference ingested, atlas export script deployed and scheduled."
 
   - date: "2026-04-14"
     title: "Operational Framework Specified"
@@ -284,20 +307,17 @@ governance_docs:
     last_updated: "2026-03"
 
   - title: "Operational Framework Spec"
-    location: "Downloaded: WoP_Operational_Framework_Spec.md (not yet in repo or RAG)"
+    location: "RAG: session_summaries collection ('Operational Framework Spec v2.0'). Also ingested into ministry_knowledge."
     purpose: "YAML layer design, infrastructure inventory, monthly export specification."
-    last_updated: "2026-04-14"
+    last_updated: "2026-04-15"
 
 # ═══════════════════════════════════════════════════════════════════
 # NEXT PRIORITIES (ordered)
 # ═══════════════════════════════════════════════════════════════════
 
 next_priorities:
-  - "Commit YAML files to main and verify Eleventy build"
-  - "Fix stale data: /writings/ page counts, /volume-1/ Ch 16 status"
-  - "Ingest Operational Framework RAG reference document"
-  - "Build /safety/ page (Phase 0 final item)"
+  - "Build /safety/ page (Phase 0 final item — unblocks community witness sharing)"
   - "Ch 15 — Repentance as a Lifestyle (manuscript access, development package)"
   - "Ch 17 — Christlike Virtues (completes Phase 4)"
-  - "Monthly atlas export script (Session B)"
+  - "Fix /volume-1/ Ch 16 status (when Ch 15 deploys)"
   - "Admin analytics dashboard"
