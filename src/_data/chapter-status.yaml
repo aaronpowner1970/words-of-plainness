@@ -6,7 +6,7 @@
 # NUMBERING: Uses LIVE SITE numbering (wordsofplainness.org),
 # NOT repo file numbering. Repo file paths noted in `file` field.
 #
-# Last verified: April 14, 2026
+# Last verified: April 15, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 volume_1:
@@ -42,8 +42,12 @@ volume_1:
         rjw_pauses: 1
         resources:
           pdf: true
+          pdf_file: chapter-01-introduction.pdf
           slides: true
+          slides_count: 9
+          slides_path: "chapter-01/"
           infographic: true
+          infographic_file: chapter-01-infographic.png
         discord_channel_id: "1463835662238224578"
 
       - number: 2
@@ -56,18 +60,25 @@ volume_1:
         audio:
           narration: true
           narration_file: NR_02_01_Our_Search.mp3
+          narration_duration: "27:24"
           overview: true
           overview_file: PO_02_01_Our_Search.mp3
+          overview_duration: "27:13"
+          overview_label: "Podcast Dramatization"
           cue: true
           testimony: true
           testimony_title: "Our Search"
-          testimony_versions: 2
+          testimony_versions: 3
         citations: true
         rjw_pauses: 1
         resources:
           pdf: true
+          pdf_file: chapter-02-our-search.pdf
           slides: true
+          slides_count: 16
+          slides_path: "chapter-02/"
           infographic: true
+          infographic_file: chapter-02-infographic.png
         discord_channel_id: "1463835723995152457"
 
       - number: 3
@@ -80,18 +91,24 @@ volume_1:
         audio:
           narration: true
           narration_file: NR_03_01_Academic_Knowledge.mp3
+          narration_duration: "26:18"
           overview: true
           overview_file: PO_03_01_Academic_Knowledge.mp3
+          overview_duration: "5:10"
           cue: true
           testimony: true
-          testimony_title: "Academic Knowledge"
-          testimony_versions: 2
+          testimony_title: "Two Halves of a Whole"
+          testimony_versions: 3
         citations: true
         rjw_pauses: 1
         resources:
           pdf: true
+          pdf_file: WoP_Ch03_Academic_Knowledge.pdf
           slides: true
+          slides_count: 12
+          slides_path: "chapter-03/"
           infographic: true
+          infographic_file: chapter-03-infographic.png
         discord_channel_id: "1463835777141309506"
 
       - number: 4
@@ -104,18 +121,24 @@ volume_1:
         audio:
           narration: true
           narration_file: NR_04_01_Spiritual_Knowledge.mp3
+          narration_duration: "35:11"
           overview: true
           overview_file: PO_04_01_Spiritual_Knowledge.mp3
+          overview_duration: "6:03"
           cue: true
           testimony: true
-          testimony_title: "Spiritual Knowledge"
-          testimony_versions: 2
+          testimony_title: "When God Becomes Real"
+          testimony_versions: 4
         citations: true
         rjw_pauses: 1
         resources:
           pdf: true
+          pdf_file: WoP_Ch04_Spiritual_Knowledge.pdf
           slides: true
+          slides_count: 10
+          slides_path: "WoP_Ch04/"
           infographic: true
+          infographic_file: chapter-04-infographic.png
         discord_channel_id: "1463835837291565200"
 
       - number: 5
@@ -128,18 +151,25 @@ volume_1:
         audio:
           narration: true
           narration_file: NR_05_01_Sincere_Prayer.mp3
+          narration_duration: "25:06"
           overview: true
           overview_file: PO_05_01_Sincere_Prayer.mp3
+          overview_duration: "23:32"
+          overview_label: "Podcast Discussion"
           cue: true
           testimony: true
-          testimony_title: "Sincere Prayer"
-          testimony_versions: 3
+          testimony_title: "The Soul's Sincere Desire"
+          testimony_versions: 6
         citations: true
         rjw_pauses: 1
         resources:
           pdf: true
+          pdf_file: chapter-05-sincere-prayer.pdf
           slides: true
+          slides_count: 10
+          slides_path: "WoP_Ch05/"
           infographic: true
+          infographic_file: chapter-05-infographic.png
         discord_channel_id: "1463835887782858994"
 
       - number: 6
@@ -149,22 +179,27 @@ volume_1:
         slug: 06-embrace-the-savior
         status: deployed
         movement: 1
-        format: interactive  # Three-pathway gateway chapter
+        format: interactive
         audio:
           narration: true
           narration_file: NR_06_01_Embrace_the_Savior.mp3
+          narration_duration: "23:23"
           overview: true
           overview_file: PO_06_01_Embrace_the_Savior.mp3
+          overview_duration: "15:36"
+          overview_label: "Podcast Discussion"
           cue: true
           testimony: true
-          testimony_title: "Embrace the Savior"
-          testimony_versions: 2
+          testimony_title: "I Have Tasted the Light"
+          testimony_versions: 9
         citations: true
-        rjw_pauses: 3  # One per pathway (Covenant/Seeker/Open-Hearted)
+        rjw_pauses: 3
         resources:
           pdf: true
-          slides: true
+          pdf_file: WoP_Ch06_Embrace_the_Savior.pdf
+          slides: false
           infographic: true
+          infographic_file: chapter-06-infographic.png
         discord_channel_id: "1463835929125978163"
         notes: "Gateway chapter with three reader pathways. Full chapter at separate URL."
         appendix: "Church of the Lamb of God"
@@ -200,7 +235,9 @@ volume_1:
           pdf_file: WoP_Ch07_Prophecies_Birth_Youth.pdf
           slides: true
           slides_count: 16
+          slides_path: "chapter-07/"
           infographic: true
+          infographic_file: chapter-07-infographic.png
         discord_channel_id: "1463835973430411365"
 
       - number: 8
@@ -228,8 +265,10 @@ volume_1:
           pdf_file: WoP_Ch08_Baptism_Temptations_Ministry.pdf
           slides: true
           slides_count: 10
+          slides_path: "chapter-08/"
           slides_cdn: true
           infographic: true
+          infographic_file: chapter-08-infographic.png
         discord_channel_id: "1463836023871242394"
 
       - number: 9
@@ -242,7 +281,7 @@ volume_1:
         format: prose
         audio:
           narration: true
-          narration_sectioned: true  # 4 sections with individual audio files
+          narration_sectioned: true
           narration_sections: 4
           narration_duration: "37:32"
           overview: true
@@ -254,7 +293,7 @@ volume_1:
           testimony_versions: 2
         citations: true
         citation_count: 71
-        rjw_pauses: 4  # Multi-pause chapter (Invocation, Compassion, Meekness/Courage, Sorrows)
+        rjw_pauses: 4
         resources:
           pdf: false
           slides: false
@@ -288,7 +327,9 @@ volume_1:
           pdf_file: WoP_Ch10_Suffering_Trial_Crucifixion_Resurrection.pdf
           slides: true
           slides_count: 11
+          slides_path: "WoP_Ch10/"
           infographic: true
+          infographic_file: chapter-10-infographic.png
         discord_channel_id: "1463836125587181706"
         appendix: "How Oft Would I Have Gathered You"
 
@@ -318,9 +359,11 @@ volume_1:
           pdf_file: WoP_Ch11_The_Living_Christ.pdf
           slides: true
           slides_count: 12
+          slides_path: "chapter-11/"
           infographic: true
+          infographic_file: chapter-11-infographic.png
         discord_channel_id: "1481807993849909299"
-        notes: "Final Movement 2 chapter. Contains three-doorway self-assessment accordion into Movement 3."
+        notes: "Final Movement 2 chapter. Three-doorway self-assessment accordion into Movement 3."
         appendix: "Contention and the Reach of Christ"
 
   # ─── MOVEMENT 3 — Discipleship Practices ──────────────────────
@@ -329,7 +372,6 @@ volume_1:
     format: card-chapter
     chapters:
 
-      # ── Christ's Manifesto ──
       - number: 12
         title: "The Beatitudes — Christlike Character"
         file: 12-beatitudes.njk
@@ -380,11 +422,11 @@ volume_1:
           pdf: false
           slides: false
           infographic: true
+          infographic_file: IG_13_01_Sermon_Summary.png
         discord_channel_id: "1493812207832531034"
         appendix: "Sermon on the Mount Study Pathway"
-        notes: "Redirect page at 13-prayer-and-repentance-redirect.njk handles old Ch 13 URL."
+        notes: "Redirect at 13-prayer-and-repentance-redirect.njk handles old Ch 13 URL."
 
-      # ── Character and Worship ──
       - number: 14
         title: "Prayer as a Lifestyle"
         file: 14-prayer-as-a-lifestyle.njk
@@ -443,7 +485,7 @@ volume_1:
           slides: false
           infographic: false
         discord_channel_id: ""
-        notes: "Deployed but NOT linked from Volume 1 landing page. Landing page shows Coming Soon."
+        notes: "Deployed but NOT linked from Volume 1 landing page."
 
       - number: 17
         title: "Christlike Virtues"
@@ -454,7 +496,6 @@ volume_1:
         group: "Character and Worship"
         format: card-chapter
 
-      # ── Relational Practices ──
       - number: 18
         title: "Loving Our Neighbors"
         file: 18-loving-our-neighbors.njk
@@ -482,7 +523,6 @@ volume_1:
         group: "Relational Practices"
         format: card-chapter
 
-      # ── Stewardship Practices ──
       - number: 21
         title: "Developing Our Talents"
         file: 21-developing-our-talents.njk
@@ -510,7 +550,6 @@ volume_1:
         group: "Stewardship Practices"
         format: card-chapter
 
-      # ── Mission Practices ──
       - number: 24
         title: "Witnessing of Christ"
         file: 24-witnessing-of-christ.njk
@@ -529,7 +568,6 @@ volume_1:
         group: "Mission Practices"
         format: card-chapter
 
-      # ── Endurance Practices ──
       - number: 26
         title: "Bearing Trials in Faith"
         file: 26-bearing-trials-in-faith.njk
@@ -572,7 +610,7 @@ volume_1:
 
       - number: 30
         title: "Conclusion and Benediction"
-        file: 37-conclusion-benediction.md  # Repo uses old numbering
+        file: 37-conclusion-benediction.md
         slug: 37-conclusion-benediction
         status: placeholder
         format: prose
@@ -588,7 +626,6 @@ volume_2:
   url: /volume-2/
 
   # ─── MOVEMENT 1 — Restoration of Christ's Church ──────────────
-  # Transplanted from Vol 1 Movement 4 (March 2026 architecture revision)
   movement_1:
     title: "Restoration of Christ's Church"
     format: prose
@@ -597,7 +634,7 @@ volume_2:
 
       - number: 1
         title: "Prophets of God"
-        file: 30-prophets-of-god.md  # Old Vol 1 numbering
+        file: 30-prophets-of-god.md
         slug: 30-prophets-of-god
         status: placeholder
         movement: 1
@@ -659,7 +696,7 @@ volume_2:
 
       - number: 8
         title: "General Theology"
-        file: null  # No repo file yet
+        file: null
         status: placeholder
         movement: 2
         format: prose
