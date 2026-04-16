@@ -505,6 +505,119 @@
 }
 
 /* =========================================
+   Read Aloud Button — How This Page Works section
+   ========================================= */
+
+.narration-how-ra-btn {
+    float: right;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    margin: -4px 0 8px 12px;
+    background: rgba(196, 148, 58, 0.1);
+    border: 1px solid rgba(196, 148, 58, 0.25);
+    border-radius: 20px;
+    color: var(--gold-primary, #C4943A);
+    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.narration-how-ra-btn:hover {
+    background: rgba(196, 148, 58, 0.18);
+    border-color: rgba(196, 148, 58, 0.45);
+}
+
+.narration-how-ra-btn:active {
+    transform: scale(0.97);
+}
+
+.narration-how-ra-btn .icon-stop {
+    display: none;
+}
+
+.narration-how-ra-btn.playing .icon-play {
+    display: none;
+}
+
+.narration-how-ra-btn.playing .icon-stop {
+    display: inline;
+}
+
+.narration-how-ra-btn.playing {
+    background: rgba(196, 148, 58, 0.2);
+    border-color: var(--gold-primary, #C4943A);
+    animation: narrationHowRaPulse 2s ease-in-out infinite;
+}
+
+.narration-how-ra-btn.playing .narration-how-ra-label::after {
+    content: 'Stop';
+    font-size: 0.75rem;
+}
+
+.narration-how-ra-btn.playing .narration-how-ra-label {
+    font-size: 0;
+}
+
+@keyframes narrationHowRaPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(196, 148, 58, 0.25); }
+    50%      { box-shadow: 0 0 0 4px rgba(196, 148, 58, 0); }
+}
+
+/* Loading state (waiting for CDN HEAD check / first audio chunk) */
+.narration-how-ra-btn.loading {
+    background: rgba(196, 148, 58, 0.15);
+    border-color: rgba(196, 148, 58, 0.4);
+    pointer-events: none;
+}
+
+.narration-how-ra-btn.loading .icon-play,
+.narration-how-ra-btn.loading .icon-stop {
+    display: none;
+}
+
+.narration-how-ra-btn.loading::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(196, 148, 58, 0.3);
+    border-top-color: var(--gold-primary, #C4943A);
+    border-radius: 50%;
+    animation: narrationHowRaSpin 0.8s linear infinite;
+}
+
+.narration-how-ra-btn.loading .narration-how-ra-label {
+    font-size: 0;
+}
+
+.narration-how-ra-btn.loading .narration-how-ra-label::after {
+    content: 'Loading\2026';
+    font-size: 0.75rem;
+}
+
+@keyframes narrationHowRaSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* Word-level highlighting during browser TTS playback */
+.narration-tts-word {
+    transition: background-color 0.15s ease, color 0.15s ease;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+.narration-tts-word.narration-tts-highlight {
+    background-color: rgba(196, 148, 58, 0.3);
+    color: var(--cream, #E8DCC4);
+    box-shadow: 0 0 0 2px rgba(196, 148, 58, 0.15);
+}
+
+/* =========================================
    Chapter List — Two-Track Layout
    ========================================= */
 
@@ -759,6 +872,12 @@
     .narration-how-it-works {
         margin: 24px auto 32px;
         padding: 16px 18px;
+    }
+
+    .narration-how-ra-btn {
+        padding: 0.35rem 0.65rem;
+        font-size: 0.7rem;
+        margin: -2px 0 6px 8px;
     }
 
     .narration-resume-prompt {
