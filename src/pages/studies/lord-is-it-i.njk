@@ -1,0 +1,356 @@
+---
+layout: layouts/page.njk
+title: "Lord, Is It I? — A Call to Repentance"
+pageTitle: "Lord, Is It I?"
+pageSubtitle: "A Call to Repentance"
+permalink: /studies/lord-is-it-i/
+---
+
+<style>
+/* ── STUDY PAGE STYLES (PROSE ESSAY) ─────────────────── */
+.study-intro {
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.92;
+    font-style: italic;
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+.study-accompanies-note {
+    max-width: 720px;
+    margin: -0.5rem auto 1.5rem;
+    text-align: center;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--cream-dark);
+    opacity: 0.75;
+    padding: 0 1.5rem;
+}
+
+.study-section-heading {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.25);
+}
+
+.study-prose {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.92;
+    margin-bottom: 1.25rem;
+}
+
+.study-prose em {
+    font-style: italic;
+}
+
+.study-prose a.scripture-link {
+    color: var(--gold-primary);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(196, 148, 58, 0.5);
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.study-prose a.scripture-link:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+}
+
+.study-prose a.scripture-link::after {
+    display: none;
+}
+
+.study-scripture-block {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.92;
+    margin: 1.5rem 0 1.5rem 1.5rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--gold-primary);
+    background: rgba(196, 148, 58, 0.04);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.study-prompt-prayer {
+    max-width: 640px;
+    margin: 0 auto 2rem;
+    text-align: center;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--gold-primary);
+    opacity: 0.95;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(196, 148, 58, 0.25);
+    border-bottom: 1px solid rgba(196, 148, 58, 0.25);
+    letter-spacing: 0.01em;
+}
+
+.study-questions {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.5rem 0 1.75rem;
+    counter-reset: q-counter;
+}
+
+.study-questions li {
+    counter-increment: q-counter;
+    position: relative;
+    padding: 0.95rem 1.25rem 0.95rem 3.25rem;
+    margin-bottom: 0.85rem;
+    background: rgba(26, 21, 16, 0.4);
+    border-left: 3px solid rgba(196, 148, 58, 0.45);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--cream);
+    opacity: 0.92;
+}
+
+.study-questions li::before {
+    content: counter(q-counter);
+    position: absolute;
+    left: 1.1rem;
+    top: 0.95rem;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    opacity: 0.85;
+}
+
+.study-refrain {
+    max-width: 640px;
+    margin: 1.75rem auto;
+    text-align: center;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--gold-primary);
+    opacity: 0.95;
+    letter-spacing: 0.02em;
+}
+
+.study-divider {
+    text-align: center;
+    color: var(--gold-primary);
+    font-size: 1.2rem;
+    letter-spacing: 0.6em;
+    margin: 2.5rem 0;
+    opacity: 0.6;
+}
+
+.study-seal {
+    max-width: 720px;
+    margin: 2.5rem auto 1rem;
+    padding: 1.5rem 1.75rem;
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    background: rgba(196, 148, 58, 0.04);
+    border-radius: var(--radius-md);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--cream);
+    opacity: 0.9;
+}
+
+.study-seal-signature {
+    display: block;
+    margin-top: 1rem;
+    font-style: normal;
+    text-align: right;
+    color: var(--gold-primary);
+    opacity: 0.85;
+    font-size: 0.95rem;
+}
+
+.study-footer-note {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--cream-dark);
+    opacity: 0.5;
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .study-scripture-block,
+    .study-seal {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        padding: 1rem 1.15rem;
+    }
+    .study-questions li {
+        padding: 0.85rem 1rem 0.85rem 2.85rem;
+        font-size: 1rem;
+    }
+    .study-questions li::before {
+        left: 0.9rem;
+    }
+}
+</style>
+
+<p class="study-accompanies-note">
+    A companion to the <em>Articles of Interfaith Discipleship</em>.
+</p>
+
+<!-- Indexed by Pagefind for /search/ -->
+<div data-pagefind-body>
+
+<div class="study-scripture-block" style="max-width: 720px; margin-left: auto; margin-right: auto;">
+    &ldquo;Whom the Lord loveth he chasteneth, and scourgeth every son whom he receiveth.&rdquo;<br>
+    <span style="display:block; text-align:right; font-style:normal; opacity:0.85; margin-top:0.75rem;">&mdash;Hebrews 12:6</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SELF-EXAMINATION
+═══════════════════════════════════════════════════════ -->
+<section class="content-section" id="self-examination">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">Self-Examination</h2>
+
+        <p class="study-prompt-prayer">Pray to invite the Spirit of God into your heart.</p>
+
+        <p class="study-prose">Sit with the Lord. His table is set. The bread is broken. He has just said that one of those who eats with Him will betray Him &mdash; and around His table, true disciples neither accuse one another nor condemn. Each one, in his own conscience, asks Him honestly: &ldquo;Lord, is it I?&rdquo;</p>
+
+        <p class="study-prose">This is not a soft question. Neither is it optional. It is the question the Spirit puts to every disciple who will hear it. It is asked in love, but it is asked in earnest, and it cannot be set aside for long. <em>Whom the Lord loveth, He chasteneth.</em> The chastening is the love. The Spirit who reproves us is the same Spirit who comforts us &mdash; and the comfort cannot reach a heart that refuses the reproof.</p>
+
+        <p class="study-prose">The <em>Articles of Interfaith Discipleship</em> name the common ground on which any soul who comes to Christ may stand with another. This document names what it looks like when a disciple &mdash; any disciple, including the one who wrote these words &mdash; begins to drift from that common ground while believing in His name. Sit with Him. Let Him search you. Ask yourself, &ldquo;Lord, is it I?&rdquo;</p>
+    </div>
+</section>
+
+<div class="study-divider">&#10022;&ensp;&ensp;&#10022;&ensp;&ensp;&#10022;</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     THE PLAIN ACCOUNTING
+═══════════════════════════════════════════════════════ -->
+<section class="content-section alt" id="plain-accounting">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Plain Accounting</h2>
+
+        <p class="study-prose">Before any question is asked, hear what Christ has said plainly, so the question may be asked rightly.</p>
+
+        <p class="study-prose">He warned: &ldquo;<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/7?lang=eng&id=p2#p2" target="_blank" rel="noopener">With what judgment ye judge, ye shall be judged: and with what measure ye mete, it shall be measured to you again.</a>&rdquo;</p>
+
+        <p class="study-prose">Exercise personal caution and honesty here. The standard you hold against another &mdash; any other &mdash; is the standard by which you yourself will be measured by the Lord.</p>
+
+        <p class="study-prose">God also said: &ldquo;<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/ot/isa/55?lang=eng&id=p8-p9#p8-p9" target="_blank" rel="noopener">My thoughts are not your thoughts, neither are your ways my ways, saith the Lord. For as the heavens are higher than the earth, so are my ways higher than your ways, and my thoughts than your thoughts.</a>&rdquo;</p>
+
+        <p class="study-prose">No soul among us possesses the standard of perfect knowing. Every soul falls infinitely short of God&rsquo;s understanding. Whatever truth we hold, we hold by His mercy in choosing to reveal it. We possess nothing of our own. We are all doctrinally deficient compared to God. Will He hold us to the divine standard? Do you hold others to an impossible standard?</p>
+
+        <p class="study-prose">The apostle has said: &ldquo;<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rom/3?lang=eng&id=p23#p23" target="_blank" rel="noopener">All have sinned, and come short of the glory of God.</a>&rdquo;</p>
+
+        <p class="study-prose">This is not said of some; it is said of all, including you and me. If any disciple would judge another soul by a standard of correct knowing or perfect doctrine, that disciple has already condemned himself by his own judgment &mdash; for he himself does not possess the standard he wields as a weapon of condemnation. We must submit to God&rsquo;s wisdom, but we must not require others to submit to our own. We don&rsquo;t meet the high standard either.</p>
+
+        <p class="study-prose">Pharaoh chose his own judgment in this way. He hardened his heart against the witnesses God sent, and against the children of God in his keeping. Each refusal made the next refusal easier. The hardening was not a single act; it was a posture, sustained by stages, until the door of mercy that had been open before him was the door he himself had shut. <em>He chose his own judgment.</em></p>
+
+        <p class="study-prose">The same gradual hardening is possible in any of us when we repeatedly choose judgment over mercy. Let us ask again, &ldquo;Lord, is it I?&rdquo;</p>
+
+        <p class="study-prose">If we say within ourselves &ldquo;It can&rsquo;t be me,&rdquo; we deceive ourselves.</p>
+    </div>
+</section>
+
+<div class="study-divider">&#10022;&ensp;&ensp;&#10022;&ensp;&ensp;&#10022;</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     THE SEARCHING
+═══════════════════════════════════════════════════════ -->
+<section class="content-section" id="the-searching">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Searching</h2>
+
+        <p class="study-prose">Sit with Him at His table that He has set, not your own. He is asking you &mdash; not your neighbor, not the disciple across the room, not the tradition you have set yourself against. <em>You.</em> Give an honest accounting to Him now, at this moment. Examine yourself:</p>
+
+        <ol class="study-questions">
+            <li>Have I begun to claim, in word or in posture, an authority Christ did not give me &mdash; to bind or to loose, to test the faith of another, to determine whose discipleship is acceptable to the Lord?</li>
+            <li>Have I tested a brother or sister by the perfection of their understanding rather than by the fruits of their love for Christ &mdash; when He Himself said that by love, and not by knowledge, His disciples would be known?</li>
+            <li>Have I confused the institution I belong to with the Kingdom of God &mdash; and treated my membership in the lesser as if it gave me authority over the greater?</li>
+            <li>Have I returned insult for insult, exclusion for exclusion, suspicion for suspicion &mdash; and called it discernment?</li>
+            <li>Have I failed to bear with the weaknesses, scruples, or different expressions of faith in my brothers and sisters, or allowed fear of being &ldquo;wrong&rdquo; or &ldquo;contaminated&rdquo; to keep me from the table Christ would set? (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rom/14?lang=eng&id=p1-p4#p1-p4" target="_blank" rel="noopener">Romans 14:1&ndash;4</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rom/15?lang=eng&id=p7#p7" target="_blank" rel="noopener">15:7</a>)</li>
+            <li>Have I stood between the Shepherd and one of His lambs &mdash; using doctrine as a wall where Christ would have set a table and invited the poor, the crippled, the blind, the outcast, the foreigners, and sinners?</li>
+            <li>Have I delighted, even quietly, in being right more than in being merciful &mdash; and called the delight conviction?</li>
+            <li>Have I judged any soul by a standard of knowing that I myself cannot meet before God &mdash; and forgotten by whose grace I received whatever knowing I possess?</li>
+            <li>Have I obeyed Christ&rsquo;s command to engage in active reconciliation? (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/5?lang=eng&id=p23-p24#p23-p24" target="_blank" rel="noopener">Matthew 5:23&ndash;24</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/18?lang=eng&id=p15-p17#p15-p17" target="_blank" rel="noopener">18:15&ndash;17</a>)</li>
+        </ol>
+
+        <p class="study-refrain">Lord, is it I? Have I offended your little ones?</p>
+    </div>
+</section>
+
+<div class="study-divider">&#10022;&ensp;&ensp;&#10022;&ensp;&ensp;&#10022;</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     THE WEIGHT
+═══════════════════════════════════════════════════════ -->
+<section class="content-section alt" id="the-weight">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Weight</h2>
+
+        <p class="study-prose">If the Spirit has shown you any of these in your own heart, do not turn away from the showing. Avoidance is not a neutral act. Every refusal makes the next refusal easier. Pharaoh did not harden his heart in a single hour; he hardened it across many moments and days, each one smaller than the last, until the hardening was complete and the door was shut.</p>
+
+        <p class="study-prose">No honest disciple comes through these questions clean. The disciples in the upper room did not come through them unmarked. Peter would deny Him before the night was out. James and John had wanted to call fire down from heaven on those who would not receive Him. Thomas would doubt the Resurrection. Each of them sat at that table and asked, <em>Lord, is it I?</em> &mdash; and Christ did not turn from any one of them. Instead, He washed their feet and fed them, called them friends, beloved, little children, and brothers. (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/15?lang=eng&id=p15#p15" target="_blank" rel="noopener">John 15:15</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/13?lang=eng&id=p23#p23" target="_blank" rel="noopener">John 13:23</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/13?lang=eng&id=p33#p33" target="_blank" rel="noopener">John 13:33</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/heb/2?lang=eng&id=p11-p12#p11-p12" target="_blank" rel="noopener">Hebrews 2:11&ndash;12</a>)</p>
+
+        <p class="study-prose">The Spirit who has searched you has done so because He loves you. Don&rsquo;t shy away from God&rsquo;s correction. <em>Whom the Lord loveth, He chasteneth.</em></p>
+    </div>
+</section>
+
+<div class="study-divider">&#10022;&ensp;&ensp;&#10022;&ensp;&ensp;&#10022;</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     THE RETURN
+═══════════════════════════════════════════════════════ -->
+<section class="content-section" id="the-return">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Return</h2>
+
+        <p class="study-prose">Christ is at the door. He has not moved.</p>
+
+        <p class="study-prose">If any part of this self-examination has stung your heart, the uncomfortable piercing is His invitation, not His verdict. The fellowship of interfaith peace in Christ is not closed against you &mdash; it is waiting for you.</p>
+
+        <p class="study-prose">Go first to the Lord in confession. Lay down whatever standard you were holding against another that you cannot bear to be held to yourself. Then, as the Spirit leads, go be reconciled to your brothers or sisters (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/5?lang=eng&id=p23-p24#p23-p24" target="_blank" rel="noopener">Matthew 5:23&ndash;24</a>). Choose mercy today in one specific relationship, then move on to the next. Receive again, in plainness, the grace by which you yourself were received.</p>
+
+        <p class="study-prose">Christ still stands at the door. He knocks patiently but persistently. The wings of his atoning mercy are still spread. Come.</p>
+
+        <p class="study-prose" style="text-align: center; margin-top: 1.5rem; font-style: italic;">In the name of Jesus Christ, amen.</p>
+    </div>
+</section>
+
+<div class="study-divider">&#10022;&ensp;&ensp;&#10022;&ensp;&ensp;&#10022;</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     AUTHORIAL SEAL
+═══════════════════════════════════════════════════════ -->
+<section class="content-section">
+    <div class="content-wrapper">
+        <div class="study-seal">
+            These questions were not of my own invention. They were given to me, and I have sat beneath them before placing them before any other soul. I am not exempt from their governance. Wherever they have cut me, I have answered as honestly as I could. Wherever they cut you, may you do the same. We meet again at the table when we have both returned to Him.
+            <span class="study-seal-signature">&mdash; Aaron Powner, A Words of Plainness Project</span>
+        </div>
+    </div>
+</section>
+
+</div><!-- /data-pagefind-body -->
+
+<p class="study-footer-note">
+    &ldquo;For my soul delighteth in plainness; for after this manner doth the Lord God<br>
+    work among the children of men.&rdquo; &mdash; 2 Nephi 31:3
+</p>
+
+{% include "partials/search-fab.njk" %}
