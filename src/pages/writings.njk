@@ -168,54 +168,91 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
 
 <!-- ═══════════════════════════════════════════════════════
      APPENDICES
+     Sortable list. Default sort: Volume → Chapter → Title.
+     Entries carry data attributes consumed by the filter JS
+     at the bottom of this file.
 ═══════════════════════════════════════════════════════ -->
-<!-- Future: convert to Eleventy collection with sort toggles when appendix count exceeds 5 -->
 <section class="content-section alt" id="appendices">
     <div class="content-wrapper" style="max-width: 900px;">
         <h2 style="font-family: var(--font-serif); color: var(--gold-primary); text-align: center; margin-bottom: var(--space-xs);">Appendices</h2>
-        <p style="color: var(--cream); opacity: 0.8; font-style: italic; text-align: center; margin-bottom: var(--space-lg); font-size: 1rem;">Study pathways, topical resources, and supplementary essays.</p>
+        <p style="color: var(--cream); opacity: 0.8; font-style: italic; text-align: center; margin-bottom: var(--space-md); font-size: 1rem;">Study pathways, topical resources, and supplementary essays.</p>
 
-        <a href="/studies/church-of-the-lamb/" class="appendix-entry">
-            <h3 class="appendix-entry-title">The Church of the Lamb of God: Who Belongs to Christ?</h3>
-            <p class="appendix-entry-subtitle">A Words of Plainness Study</p>
-            <p class="appendix-entry-note">Accompanies Chapter 6: Embrace the Savior</p>
-        </a>
+        <div class="appendix-filter-bar" role="group" aria-label="Sort appendices">
+            <button type="button" class="appendix-filter-btn is-active" data-sort="default">By Volume &amp; Chapter</button>
+            <button type="button" class="appendix-filter-btn" data-sort="chapter">By Chapter</button>
+            <button type="button" class="appendix-filter-btn" data-sort="title">A &rarr; Z</button>
+        </div>
 
-        <a href="/studies/contention-and-the-reach-of-christ/" class="appendix-entry">
-            <h3 class="appendix-entry-title">Contention, Gatekeeping, and the Reach of Christ</h3>
-            <p class="appendix-entry-subtitle">A Curated Scripture Study Pathway</p>
-            <p class="appendix-entry-note">Accompanies Chapter 11: The Living Christ</p>
-        </a>
+        <div class="appendix-list" id="appendix-list">
 
-        <a href="/studies/sermon-on-the-mount/" class="appendix-entry">
-            <h3 class="appendix-entry-title">The Sermon on the Mount &mdash; A Discipleship Study Pathway</h3>
-            <p class="appendix-entry-subtitle">A Words of Plainness Study</p>
-            <p class="appendix-entry-note">Accompanies Chapter 12: The Beatitudes &amp; Chapter 13: The Sermon on the Mount</p>
-        </a>
+            <div class="appendix-divider" data-divider-key="cross-volume">Cross-Volume Companions</div>
 
-        <a href="/studies/how-oft-would-i-have-gathered-you/" class="appendix-entry">
-            <h3 class="appendix-entry-title">How Oft Would I Have Gathered You &mdash; The Lament of the Divine Parent</h3>
-            <p class="appendix-entry-subtitle">A Theological Meditation</p>
-            <p class="appendix-entry-note">Accompanies Chapter 9: Christ&rsquo;s Personal Character &amp; Chapter 10: Suffering, Trial, Crucifixion, and Resurrection</p>
-        </a>
+            <a href="/studies/broken-vessels/" class="appendix-entry"
+               data-sort-title="Broken Vessels"
+               data-accompanies-chapter="999"
+               data-accompanies-volume="0">
+                <h3 class="appendix-entry-title">Broken Vessels &mdash; Universal Fallibility and the Reach of Grace</h3>
+                <p class="appendix-entry-subtitle">A Words of Plainness Companion Essay</p>
+                <p class="appendix-entry-note">Accompanies the <em>Articles of Interfaith Discipleship</em></p>
+            </a>
 
-        <a href="/studies/merognosticism/" class="appendix-entry">
-            <h3 class="appendix-entry-title">Merognosticism &mdash; A Plain Confession of Partial Knowing</h3>
-            <p class="appendix-entry-subtitle">A Theological Coinage</p>
-            <p class="appendix-entry-note">Accompanies the <em>Articles of Interfaith Discipleship</em></p>
-        </a>
+            <a href="/studies/lord-is-it-i/" class="appendix-entry"
+               data-sort-title="Lord, Is It I?"
+               data-accompanies-chapter="999"
+               data-accompanies-volume="0">
+                <h3 class="appendix-entry-title">Lord, Is It I? &mdash; A Call to Repentance</h3>
+                <p class="appendix-entry-subtitle">A Words of Plainness Companion Essay</p>
+                <p class="appendix-entry-note">Accompanies the <em>Articles of Interfaith Discipleship</em></p>
+            </a>
 
-        <a href="/studies/broken-vessels/" class="appendix-entry">
-            <h3 class="appendix-entry-title">Broken Vessels &mdash; Universal Fallibility and the Reach of Grace</h3>
-            <p class="appendix-entry-subtitle">A Words of Plainness Companion Essay</p>
-            <p class="appendix-entry-note">Accompanies the <em>Articles of Interfaith Discipleship</em></p>
-        </a>
+            <a href="/studies/merognosticism/" class="appendix-entry"
+               data-sort-title="Merognosticism"
+               data-accompanies-chapter="999"
+               data-accompanies-volume="0">
+                <h3 class="appendix-entry-title">Merognosticism &mdash; A Plain Confession of Partial Knowing</h3>
+                <p class="appendix-entry-subtitle">A Theological Coinage</p>
+                <p class="appendix-entry-note">Accompanies the <em>Articles of Interfaith Discipleship</em></p>
+            </a>
 
-        <a href="/studies/lord-is-it-i/" class="appendix-entry">
-            <h3 class="appendix-entry-title">Lord, Is It I? &mdash; A Call to Repentance</h3>
-            <p class="appendix-entry-subtitle">A Words of Plainness Companion Essay</p>
-            <p class="appendix-entry-note">Accompanies the <em>Articles of Interfaith Discipleship</em></p>
-        </a>
+            <div class="appendix-divider" data-divider-key="vol-1">Volume 1 &mdash; Christ-Centered Discipleship</div>
+
+            <a href="/studies/church-of-the-lamb/" class="appendix-entry"
+               data-sort-title="Church of the Lamb of God, The"
+               data-accompanies-chapter="6"
+               data-accompanies-volume="1">
+                <h3 class="appendix-entry-title">The Church of the Lamb of God: Who Belongs to Christ?</h3>
+                <p class="appendix-entry-subtitle">A Words of Plainness Study</p>
+                <p class="appendix-entry-note">Accompanies Chapter 6: Embrace the Savior</p>
+            </a>
+
+            <a href="/studies/how-oft-would-i-have-gathered-you/" class="appendix-entry"
+               data-sort-title="How Oft Would I Have Gathered You"
+               data-accompanies-chapter="9"
+               data-accompanies-volume="1">
+                <h3 class="appendix-entry-title">How Oft Would I Have Gathered You &mdash; The Lament of the Divine Parent</h3>
+                <p class="appendix-entry-subtitle">A Theological Meditation</p>
+                <p class="appendix-entry-note">Accompanies Chapter 9: Christ&rsquo;s Personal Character &amp; Chapter 10: Suffering, Trial, Crucifixion, and Resurrection</p>
+            </a>
+
+            <a href="/studies/contention-and-the-reach-of-christ/" class="appendix-entry"
+               data-sort-title="Contention, Gatekeeping, and the Reach of Christ"
+               data-accompanies-chapter="11"
+               data-accompanies-volume="1">
+                <h3 class="appendix-entry-title">Contention, Gatekeeping, and the Reach of Christ</h3>
+                <p class="appendix-entry-subtitle">A Curated Scripture Study Pathway</p>
+                <p class="appendix-entry-note">Accompanies Chapter 11: The Living Christ</p>
+            </a>
+
+            <a href="/studies/sermon-on-the-mount/" class="appendix-entry"
+               data-sort-title="Sermon on the Mount, The"
+               data-accompanies-chapter="12"
+               data-accompanies-volume="1">
+                <h3 class="appendix-entry-title">The Sermon on the Mount &mdash; A Discipleship Study Pathway</h3>
+                <p class="appendix-entry-subtitle">A Words of Plainness Study</p>
+                <p class="appendix-entry-note">Accompanies Chapter 12: The Beatitudes &amp; Chapter 13: The Sermon on the Mount</p>
+            </a>
+
+        </div>
     </div>
 </section>
 
@@ -263,6 +300,163 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
     opacity: 0.6;
     margin-bottom: 0;
 }
+
+/* ─── Filter bar ─────────────────────────────────────── */
+.appendix-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+
+.appendix-filter-btn {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: transparent;
+    border: 1px solid rgba(196, 148, 58, 0.35);
+    border-radius: var(--radius-sm);
+    padding: 0.45rem 0.95rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    opacity: 0.75;
+}
+
+.appendix-filter-btn:hover {
+    opacity: 1;
+    border-color: var(--gold-primary);
+    color: var(--cream-soft);
+}
+
+.appendix-filter-btn.is-active {
+    opacity: 1;
+    color: var(--gold-primary);
+    border-color: var(--gold-primary);
+    background: rgba(196, 148, 58, 0.08);
+}
+
+.appendix-filter-btn:focus-visible {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 2px;
+}
+
+/* ─── Volume / group dividers ────────────────────────── */
+.appendix-divider {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    opacity: 0.7;
+    text-align: center;
+    padding: var(--space-md) 0 var(--space-sm);
+    border-top: 1px solid rgba(196, 148, 58, 0.18);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+.appendix-list .appendix-divider:first-child {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+/* When dividers are suppressed (any non-default sort),
+   hide them entirely so the list flows continuously. */
+.appendix-list[data-sort-mode="chapter"] .appendix-divider,
+.appendix-list[data-sort-mode="title"] .appendix-divider {
+    display: none;
+}
 </style>
+
+<script>
+// ─────────────────────────────────────────────────────────
+// Appendix Filter & Sort
+// Default sort: Volume → Chapter → Title (with dividers).
+// Other modes flatten the list; dividers are hidden via CSS.
+// ─────────────────────────────────────────────────────────
+(function () {
+    'use strict';
+
+    const list = document.getElementById('appendix-list');
+    if (!list) return;
+
+    const buttons = document.querySelectorAll('.appendix-filter-btn');
+    const entries = Array.from(list.querySelectorAll('.appendix-entry'));
+    const dividers = Array.from(list.querySelectorAll('.appendix-divider'));
+
+    // Preserve the original DOM order so we can restore "default" cleanly
+    // (the source order in the .njk file IS the default-sort canonical order).
+    const defaultOrder = Array.from(list.children);
+
+    function applySort(mode) {
+        // Set data attribute so CSS can hide dividers in non-default modes
+        list.setAttribute('data-sort-mode', mode);
+
+        // Remove all current children
+        while (list.firstChild) list.removeChild(list.firstChild);
+
+        if (mode === 'default') {
+            // Restore the source order (volume dividers in place)
+            defaultOrder.forEach(node => list.appendChild(node));
+            return;
+        }
+
+        // For non-default modes, sort entries and append (no dividers in DOM,
+        // but they remain hidden by CSS — easier than re-inserting/removing).
+        // Re-add hidden dividers first (so they're in the DOM but invisible)
+        dividers.forEach(d => list.appendChild(d));
+
+        const sorted = entries.slice();
+
+        if (mode === 'chapter') {
+            sorted.sort((a, b) => {
+                // Cross-Volume Companions (Articles-companion essays) are
+                // pinned to the top regardless of chapter sort — they sit
+                // at a higher level of ministry standard than chapter-bound
+                // studies. Detected by the chapter-999 sentinel.
+                const aIsCompanion = parseInt(a.getAttribute('data-accompanies-chapter'), 10) === 999 ? 1 : 0;
+                const bIsCompanion = parseInt(b.getAttribute('data-accompanies-chapter'), 10) === 999 ? 1 : 0;
+                if (aIsCompanion !== bIsCompanion) return bIsCompanion - aIsCompanion;
+
+                // Within companions, sort alphabetically by title.
+                // Within chapter-bound entries, sort by chapter number.
+                if (aIsCompanion === 1) {
+                    return a.getAttribute('data-sort-title')
+                            .localeCompare(b.getAttribute('data-sort-title'));
+                }
+                const ca = parseInt(a.getAttribute('data-accompanies-chapter'), 10);
+                const cb = parseInt(b.getAttribute('data-accompanies-chapter'), 10);
+                if (ca !== cb) return ca - cb;
+                // Same-chapter tie-breaker: alphabetical
+                return a.getAttribute('data-sort-title')
+                        .localeCompare(b.getAttribute('data-sort-title'));
+            });
+        } else if (mode === 'title') {
+            sorted.sort((a, b) => {
+                return a.getAttribute('data-sort-title')
+                        .localeCompare(b.getAttribute('data-sort-title'));
+            });
+        }
+
+        sorted.forEach(node => list.appendChild(node));
+    }
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const mode = this.getAttribute('data-sort');
+            buttons.forEach(b => b.classList.toggle('is-active', b === this));
+            applySort(mode);
+        });
+    });
+
+    // Initialize: source order is already default, but set the attribute
+    // so future toggles work consistently.
+    list.setAttribute('data-sort-mode', 'default');
+})();
+</script>
 
 {% include "partials/search-fab.njk" %}
