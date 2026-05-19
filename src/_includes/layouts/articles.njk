@@ -1,0 +1,272 @@
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/ambient-player.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Reading Progress Bar -->
+<div class="reading-progress">
+    <div class="reading-progress-fill" id="readingProgressFill"></div>
+</div>
+
+<!-- Bookmark Toast -->
+<div class="bookmark-toast hidden" id="bookmarkToast">Bookmark saved</div>
+
+<!-- Articles Hero -->
+<section class="chapter-hero articles-hero" data-pagefind-ignore>
+    <div class="articles-seal-wrap">
+        <a href="/articles/">
+            <img src="/assets/images/articles_banner_shadow.png"
+                 alt="Articles of Interfaith Discipleship seal"
+                 class="articles-seal-img">
+        </a>
+    </div>
+    <p class="articles-eyebrow">A Words of Plainness Declaration</p>
+    <h1 class="chapter-title">{{ title }}</h1>
+    <p class="articles-subtitle">{{ subtitle }}</p>
+</section>
+
+<!-- Floating Action Bar (articles variant) -->
+<div class="floating-action-bar" id="floatingActionBar" data-pagefind-ignore>
+    {% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+    <div class="ambient-control" id="ambientControl">
+        <span class="ambient-icon" id="ambientIcon" aria-hidden="true">&#9835;</span>
+        <span class="ambient-label" id="ambientLabel">Reading Atmosphere</span>
+        <button class="ambient-skip" id="ambientSkip" aria-label="Skip to next ambient track">&#9197;</button>
+        <button class="ambient-toggle-btn" id="ambientToggle" role="switch" aria-checked="false" aria-label="Toggle reading atmosphere music">
+            <span class="ambient-switch-track"><span class="ambient-switch-thumb"></span></span>
+        </button>
+    </div>
+    {% endif %}
+
+    <div class="dropdown-container">
+        <button class="action-pill primary" id="btnLearningTools">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path>
+            </svg>
+            <span>Learning Tools</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <div class="dropdown-menu" id="featuresDropdown">
+            {# PLACEHOLDER ITEMS — assets not yet produced #}
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+                <span>Articles Podcast</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Musical Testimony</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Visual Summary</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Study Slides</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 20h9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Personal Reflection</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <hr class="dropdown-divider">
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Download PDF</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <hr class="dropdown-divider">
+            {# ACTIVE ITEMS #}
+            <a class="dropdown-item" href="/search/">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Search Writings</span>
+            </a>
+            <a class="dropdown-item" href="/how-to-use/">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>How to Use This Website</span>
+            </a>
+            {% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+            <hr class="dropdown-divider">
+            <div class="ambient-control-mobile" id="ambientControlMobile">
+                <span class="ambient-icon" aria-hidden="true">&#9835;</span>
+                <span class="ambient-label" id="ambientLabelMobile">Reading Atmosphere</span>
+                <button class="ambient-skip" id="ambientSkipMobile" aria-label="Skip to next ambient track">&#9197;</button>
+                <button class="ambient-toggle-btn" id="ambientToggleMobile" role="switch" aria-checked="false" aria-label="Toggle reading atmosphere music">
+                    <span class="ambient-switch-track"><span class="ambient-switch-thumb"></span></span>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="chapter-layout articles-layout" data-pagefind-body>
+    <article class="chapter-content" id="chapterContent">
+        <span data-pagefind-meta="title" class="visually-hidden">{{ title }}: {{ subtitle }}</span>
+        {{ content | safe }}
+    </article>
+</div>
+
+<!-- Bottom Learning Tools -->
+<section class="bottom-learning-tools" id="bottomLearningTools" data-pagefind-ignore>
+    <div class="dropdown-container">
+        <button class="action-pill primary" id="btnLearningToolsBottom">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18h6"></path>
+                <path d="M10 22h4"></path>
+                <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"></path>
+            </svg>
+            <span>Learning Tools</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 15 12 9 18 15"></polyline>
+            </svg>
+        </button>
+        <div class="dropdown-menu dropup" id="bottomFeaturesDropdown">
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+                <span>Articles Podcast</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Musical Testimony</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Visual Summary</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Study Slides</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 20h9" stroke="currentColor" stroke-width="2" fill="none"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span>Personal Reflection</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <hr class="dropdown-divider">
+            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Download PDF</span>
+                <span class="placeholder-badge">Coming soon</span>
+            </button>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="/search/">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/></svg>
+                <span>Search All Chapters</span>
+            </a>
+            <a class="dropdown-item" href="/how-to-use/">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>How to Use This Website</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<div data-pagefind-ignore>
+{% include "components/discord-section.njk" %}
+{% include "components/bottom-toolbar.njk" %}
+{% include "components/back-to-top.njk" %}
+{% include "components/fab-lantern.njk" %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const progressFill = document.getElementById('readingProgressFill');
+    if (progressFill) {
+        window.addEventListener('scroll', function() {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+            progressFill.style.width = progress + '%';
+        });
+    }
+
+    const bookmarkBtn = document.getElementById('bookmarkBtn');
+    const pageId = 'articles-of-interfaith-discipleship';
+    if (bookmarkBtn) {
+        try {
+            if (localStorage.getItem('wop-bookmark-flag-' + pageId) === 'true') {
+                bookmarkBtn.classList.add('active');
+            }
+        } catch(e) {}
+        bookmarkBtn.addEventListener('click', function() {
+            let isBookmarked = false;
+            try { isBookmarked = localStorage.getItem('wop-bookmark-flag-' + pageId) === 'true'; } catch(e) {}
+            const nowBookmarked = !isBookmarked;
+            try { localStorage.setItem('wop-bookmark-flag-' + pageId, nowBookmarked ? 'true' : 'false'); } catch(e) {}\
+            bookmarkBtn.classList.toggle('active', nowBookmarked);
+            const toast = document.getElementById('bookmarkToast');
+            if (toast) { toast.classList.remove('hidden'); setTimeout(() => toast.classList.add('hidden'), 2000); }
+        });
+    }
+
+    const shareBtn = document.getElementById('shareBtn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', async function() {
+            try {
+                if (navigator.share) {
+                    await navigator.share({ title: document.title, url: window.location.href });
+                } else {
+                    await navigator.clipboard.writeText(window.location.href);
+                    const span = shareBtn.querySelector('span');
+                    if (span) { const orig = span.textContent; span.textContent = 'Copied!'; setTimeout(() => { span.textContent = orig; }, 2000); }
+                }
+            } catch(e) {}
+        });
+    }
+
+    const btnLT = document.getElementById('btnLearningTools');
+    const ddTop = document.getElementById('featuresDropdown');
+    if (btnLT && ddTop) {
+        btnLT.addEventListener('click', function(e) { e.stopPropagation(); ddTop.classList.toggle('visible'); });
+        document.addEventListener('click', function() { ddTop.classList.remove('visible'); });
+    }
+
+    const btnLTB = document.getElementById('btnLearningToolsBottom');
+    const ddBot = document.getElementById('bottomFeaturesDropdown');
+    if (btnLTB && ddBot) {
+        btnLTB.addEventListener('click', function(e) { e.stopPropagation(); ddBot.classList.toggle('visible'); });
+        document.addEventListener('click', function() { ddBot.classList.remove('visible'); });
+    }
+
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', function() { backToTop.classList.toggle('visible', window.scrollY > 400); });
+        backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    }
+
+    document.getElementById('fontDecrease')?.addEventListener('click', () => window.WopFontSize?.decrease());
+    document.getElementById('fontReset')?.addEventListener('click',    () => window.WopFontSize?.reset());
+    document.getElementById('fontIncrease')?.addEventListener('click', () => window.WopFontSize?.increase());
+
+    const fab = document.getElementById('floatingActionBar');
+    if (fab) {
+        let lastScroll = 0;
+        window.addEventListener('scroll', function() {
+            const current = window.scrollY;
+            fab.classList.toggle('hidden', current > lastScroll && current > 200);
+            lastScroll = current;
+        }, { passive: true });
+    }
+});
+</script>
+{% endblock %}

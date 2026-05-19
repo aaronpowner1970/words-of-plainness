@@ -758,6 +758,7 @@ p {
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
+    width: 100%;
     color: var(--cream);
     font-size: 1rem;
 }
@@ -794,7 +795,10 @@ p {
 }
 
 .mobile-menu-auth-loggedin .mobile-menu-link {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
     width: 100%;
     padding: var(--space-sm) 0;
     font-family: var(--font-serif);
@@ -2498,4 +2502,220 @@ body:has(.bottom-toolbar) .wop-font-widget {
   opacity: 0;
   overflow: hidden;
   pointer-events: none;
+}
+
+
+/* ============================================
+   ARTICLES GOLD SEAL — Homepage focal point
+   ============================================ */
+
+.articles-seal-section {
+    padding: var(--space-xxl) var(--space-xl);
+    background: linear-gradient(
+        to bottom,
+        rgba(26, 21, 16, 0.0) 0%,
+        rgba(42, 29, 20, 0.7) 40%,
+        rgba(42, 29, 20, 0.7) 60%,
+        rgba(26, 21, 16, 0.0) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.articles-seal-section-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    opacity: 0.8;
+    margin-bottom: var(--space-md);
+}
+
+.articles-seal-section-img-wrap {
+    margin-bottom: var(--space-md);
+}
+
+.articles-seal-section-img {
+    width: clamp(100px, 16vw, 160px);
+    height: auto;
+    display: block;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), var(--shadow-gold);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.articles-seal-section-img:hover {
+    transform: scale(1.04);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 4px 24px rgba(196, 148, 58, 0.45);
+}
+
+.articles-seal-section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    color: var(--cream-soft);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+}
+
+.articles-seal-section-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--cream);
+    opacity: 0.75;
+    max-width: 420px;
+    margin: 0 auto var(--space-lg);
+    line-height: 1.6;
+}
+
+.articles-seal-section-rule {
+    width: 60px;
+    border: none;
+    border-top: 1px solid rgba(196, 148, 58, 0.35);
+    margin: var(--space-sm) auto var(--space-md);
+}
+
+@media (max-width: 767px) {
+    .articles-seal-section {
+        padding: var(--space-xl) var(--space-md);
+    }
+}
+
+
+/* ============================================
+   ARTICLES SEAL WIDGET — Floating / draggable
+   ============================================ */
+
+.articles-seal-widget {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 500;
+    opacity: 0;
+    transform: translateX(-16px);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.55));
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.articles-seal-widget--visible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.articles-seal-widget--dragging {
+    cursor: grabbing;
+    filter: drop-shadow(0 8px 28px rgba(0, 0, 0, 0.75));
+    transition: filter 0.15s ease;
+}
+
+.articles-seal-widget-link {
+    display: block;
+    line-height: 0;
+}
+
+.articles-seal-widget-img {
+    width: 72px;        /* default: other pages (~60%) */
+    height: auto;
+    display: block;
+    pointer-events: none;
+    transition: transform 0.25s ease;
+    transform-origin: center bottom;
+}
+
+.articles-seal-widget--home .articles-seal-widget-img {
+    width: 120px;       /* homepage: full size */
+}
+
+.articles-seal-widget-link:hover .articles-seal-widget-img {
+    transform: scale(1.07);
+}
+
+/* Close button — hover-reveal on desktop */
+.articles-seal-widget-close {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--brown-deep);
+    border: 1px solid rgba(196, 148, 58, 0.35);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.15s ease, border-color 0.15s ease;
+    padding: 0;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+.articles-seal-widget-close:hover {
+    background: var(--brown-medium);
+    border-color: var(--gold-primary);
+}
+
+.articles-seal-widget:hover .articles-seal-widget-close {
+    opacity: 1;
+}
+
+/* Drag label — hint on hover */
+.articles-seal-widget-drag {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-sans);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.articles-seal-widget:hover .articles-seal-widget-drag {
+    opacity: 0.4;
+}
+
+/* Touch devices — always-visible close, no drag, smaller */
+@media (pointer: coarse) {
+    .articles-seal-widget {
+        cursor: default;
+        bottom: 16px;
+        left: 16px;
+    }
+
+    .articles-seal-widget-close {
+        opacity: 1;
+        width: 26px;
+        height: 26px;
+        top: -10px;
+        right: -10px;
+    }
+
+    .articles-seal-widget-img {
+        width: 56px;    /* mobile other pages */
+    }
+
+    .articles-seal-widget--home .articles-seal-widget-img {
+        width: 80px;    /* mobile homepage */
+    }
+
+    .articles-seal-widget-drag {
+        display: none;
+    }
 }

@@ -167,5 +167,162 @@
     <script src="/js/newsletter.js"></script>
     <script src="/js/anthem-player.js"></script>
     {% block scripts %}{% endblock %}
+
+    <!-- =====================================================
+         ARTICLES SEAL WIDGET
+         Floating / draggable link to /articles/
+         Suppressed on chapter-hero pages (chapters, card-
+         chapters, /articles/ itself). Session-dismissed.
+         ===================================================== -->
+    <div id="articlesSealWidget" class="articles-seal-widget" role="complementary" aria-label="Articles of Interfaith Discipleship">
+        <a href="/articles/" class="articles-seal-widget-link" title="Articles of Interfaith Discipleship — Christ-Centered Declarations of Shared Beliefs">
+            <img src="/assets/images/articles_banner_shadow.png"
+                 alt="Articles of Interfaith Discipleship"
+                 class="articles-seal-widget-img"
+                 draggable="false">
+        </a>
+        <button class="articles-seal-widget-close" id="articlesSealWidgetClose" aria-label="Close Articles seal">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <span class="articles-seal-widget-drag" aria-hidden="true">drag</span>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // Suppress on chapter, card-chapter, and /articles/ pages
+        // All three layouts use .chapter-hero
+        if (document.querySelector('.chapter-hero')) return;
+
+        var widget = document.getElementById('articlesSealWidget');
+        if (!widget) return;
+
+        // Session dismissal — dismissed state clears on new session
+        if (sessionStorage.getItem('wop-seal-dismissed') === '1') {
+            widget.style.display = 'none';
+            return;
+        }
+
+        // Homepage modifier: larger seal
+        var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
+        if (isHome) widget.classList.add('articles-seal-widget--home');
+
+        // Restore position saved earlier in this session
+        var savedPos = sessionStorage.getItem('wop-seal-pos');
+        if (savedPos) {
+            try {
+                var pos = JSON.parse(savedPos);
+                var maxLeft = window.innerWidth  - widget.offsetWidth  - 24;
+                var maxTop  = window.innerHeight - widget.offsetHeight - 24;
+                var safeLeft = Math.max(24, Math.min(maxLeft, parseInt(pos.left, 10)));
+                var safeTop  = Math.max(24, Math.min(maxTop,  parseInt(pos.top,  10)));
+                widget.style.left   = safeLeft + 'px';
+                widget.style.top    = safeTop  + 'px';
+                widget.style.bottom = 'auto';
+                widget.style.right  = 'auto';
+            } catch (e) {}
+        }
+
+        // 2-second delay, then fade in
+        setTimeout(function() {
+            widget.classList.add('articles-seal-widget--visible');
+        }, 2000);
+
+        // Close button
+        var closeBtn = document.getElementById('articlesSealWidgetClose');
+        closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            widget.classList.remove('articles-seal-widget--visible');
+            widget.style.transform = 'scale(0.65)';
+            widget.style.pointerEvents = 'none';
+            setTimeout(function() { widget.style.display = 'none'; }, 500);
+            sessionStorage.setItem('wop-seal-dismissed', '1');
+        });
+
+        // Drag — desktop (fine pointer) only
+        var isTouch = window.matchMedia('(pointer: coarse)').matches;
+        if (isTouch) return;
+
+        var isDragging = false;
+        var hasMoved   = false;
+        var startX, startY, startLeft, startTop;
+        var THRESHOLD  = 6; // px before drag activates
+
+        widget.addEventListener('mousedown', function(e) {
+            if (e.target.closest('#articlesSealWidgetClose')) return;
+            isDragging = true;
+            hasMoved   = false;
+            startX     = e.clientX;
+            startY     = e.clientY;
+            var rect   = widget.getBoundingClientRect();
+            startLeft  = rect.left;
+            startTop   = rect.top;
+            // Convert bottom/right to explicit top/left so we can freely position
+            widget.style.transition = 'none';
+            widget.style.left       = rect.left + 'px';
+            widget.style.top        = rect.top  + 'px';
+            widget.style.right      = 'auto';
+            widget.style.bottom     = 'auto';
+            widget.classList.add('articles-seal-widget--dragging');
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup',   stopDrag);
+            e.preventDefault();
+        });
+
+        function onDrag(e) {
+            if (!isDragging) return;
+            var dx = e.clientX - startX;
+            var dy = e.clientY - startY;
+            if (Math.abs(dx) > THRESHOLD || Math.abs(dy) > THRESHOLD) hasMoved = true;
+            var newLeft = Math.max(0, Math.min(window.innerWidth  - widget.offsetWidth,  startLeft + dx));
+            var newTop  = Math.max(0, Math.min(window.innerHeight - widget.offsetHeight, startTop  + dy));
+            widget.style.left = newLeft + 'px';
+            widget.style.top  = newTop  + 'px';
+        }
+
+        function stopDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            widget.classList.remove('articles-seal-widget--dragging');
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup',   stopDrag);
+            if (hasMoved) snapToCorner();
+            // Save position for this session
+            sessionStorage.setItem('wop-seal-pos', JSON.stringify({
+                left: widget.style.left,
+                top:  widget.style.top
+            }));
+        }
+
+        function snapToCorner() {
+            var wRect  = widget.getBoundingClientRect();
+            var cx     = wRect.left + wRect.width  / 2;
+            var cy     = wRect.top  + wRect.height / 2;
+            var vW     = window.innerWidth;
+            var vH     = window.innerHeight;
+            var margin = 24;
+            widget.style.transition = 'left 0.3s ease, top 0.3s ease';
+            widget.style.left   = (cx < vW / 2 ? margin : vW - widget.offsetWidth  - margin) + 'px';
+            widget.style.top    = (cy < vH / 2 ? margin : vH - widget.offsetHeight - margin) + 'px';
+            widget.style.right  = 'auto';
+            widget.style.bottom = 'auto';
+        }
+
+        // Prevent link navigation when user has dragged
+        var link = widget.querySelector('.articles-seal-widget-link');
+        if (link) {
+            link.addEventListener('click', function(e) {
+                if (hasMoved) { e.preventDefault(); hasMoved = false; }
+            });
+        }
+
+    }());
+    </script>
+
 </body>
 </html>
