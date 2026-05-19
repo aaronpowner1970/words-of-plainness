@@ -175,7 +175,7 @@
          chapters, /articles/ itself). Session-dismissed.
          ===================================================== -->
     <div id="articlesSealWidget" class="articles-seal-widget" role="complementary" aria-label="Articles of Interfaith Discipleship">
-        <a href="/articles/" class="articles-seal-widget-link" title="Articles of Interfaith Discipleship — Christ-Centered Declarations of Shared Beliefs">
+        <a href="/articles/" class="articles-seal-widget-link" title="Articles of Interfaith Discipleship — Christ-Centered Declarations of Shared Beliefs" draggable="false">
             <img src="/assets/images/articles_banner_shadow.png"
                  alt="Articles of Interfaith Discipleship"
                  class="articles-seal-widget-img"
@@ -225,6 +225,33 @@
                 widget.style.bottom = 'auto';
                 widget.style.right  = 'auto';
             } catch (e) {}
+        }
+
+        // Desktop homepage: position to the right of the hero CTA buttons
+        // (not on mobile — stacked layout has no room to the right)
+        var isDesktop = !window.matchMedia('(pointer: coarse)').matches;
+        if (isHome && !savedPos && isDesktop) {
+            // Wait one frame so layout is fully rendered before measuring
+            requestAnimationFrame(function() {
+                var cta = document.querySelector('.hero-cta');
+                if (!cta) return;
+                var rect   = widget.getBoundingClientRect();
+                var ctaRect = cta.getBoundingClientRect();
+                var gap    = 48;  // px gap between CTA right edge and seal left edge
+                var leftPos = ctaRect.right + gap;
+                // Clamp: don't overflow right edge
+                if (leftPos + rect.width > window.innerWidth - 24) {
+                    leftPos = window.innerWidth - rect.width - 24;
+                }
+                // Vertically: align center of seal with center of CTA group
+                var topPos = ctaRect.top + (ctaRect.height / 2) - (rect.height / 2);
+                // Clamp: keep on screen
+                topPos = Math.max(24, Math.min(window.innerHeight - rect.height - 24, topPos));
+                widget.style.left   = leftPos + 'px';
+                widget.style.top    = topPos  + 'px';
+                widget.style.bottom = 'auto';
+                widget.style.right  = 'auto';
+            });
         }
 
         // 2-second delay, then fade in
@@ -306,11 +333,22 @@
             var vW     = window.innerWidth;
             var vH     = window.innerHeight;
             var margin = 24;
-            widget.style.transition = 'left 0.3s ease, top 0.3s ease';
-            widget.style.left   = (cx < vW / 2 ? margin : vW - widget.offsetWidth  - margin) + 'px';
+            widget.style.transition = 'left 0.3s ease, right 0.3s ease, top 0.3s ease';
+            // Snap horizontally
+            if (cx < vW / 2) {
+                widget.style.left  = margin + 'px';
+                widget.style.right = 'auto';
+            } else {
+                widget.style.left  = (vW - widget.offsetWidth - margin) + 'px';
+                widget.style.right = 'auto';
+            }
+            // Snap vertically
             widget.style.top    = (cy < vH / 2 ? margin : vH - widget.offsetHeight - margin) + 'px';
-            widget.style.right  = 'auto';
             widget.style.bottom = 'auto';
+            // Restore transition after snap completes
+            setTimeout(function() {
+                widget.style.transition = '';
+            }, 350);
         }
 
         // Prevent link navigation when user has dragged
