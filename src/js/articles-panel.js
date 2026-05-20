@@ -17,7 +17,7 @@
  *     - Escape key              → close
  *
  * DATA SOURCE
- *   <script type="application/json" id="apparatusData">{{ apparatusData | dump | safe }}</script>
+ *   <script type="application/json" id="apparatusData">…</script>
  *   Structure: apparatus[articleId][spanId] = { text, type, named_concept,
  *     definition, panel_comment, biblical[], restoration[], crossref[] }
  *
@@ -29,8 +29,7 @@
 (function () {
     'use strict';
 
-    // ── Static article title map ─────────────────────────────────
-    // Article metadata is not included in apparatusData; kept here instead.
+    // ── Static article title map ──────────────────────────────────
     var ARTICLE_TITLES = {
         A01: 'Of Plainness',
         A02: 'Of God',
@@ -47,33 +46,41 @@
         A13: 'Of Our Confidence',
     };
 
-    // ── Element references ───────────────────────────────────────
-    var panel           = document.getElementById('apPanel');
-    var backdrop        = document.getElementById('apBackdrop');
-    var closeBtn        = document.getElementById('apClose');
-    var panelBody       = document.getElementById('apBody');
+    // ── Element references ────────────────────────────────────────
+    var panel    = document.getElementById('apPanel');
+    var backdrop = document.getElementById('apBackdrop');
+    var closeBtn = document.getElementById('apClose');
+    var panelBody = document.getElementById('apBody');
 
-    // Header elements
-    var elTypeBadge     = document.getElementById('apTypeBadge');
-    var elArticleLabel  = document.getElementById('apArticleLabel');
+    // Header
+    var elTypeBadge    = document.getElementById('apTypeBadge');
+    var elArticleLabel = document.getElementById('apArticleLabel');
 
-    // Body elements
-    var elSpanText          = document.getElementById('apSpanText');
-    var elDefinitionBlock   = document.getElementById('apDefinitionBlock');
-    var elDefinition        = document.getElementById('apDefinition');
-    var elCommentBlock      = document.getElementById('apCommentBlock');
-    var elComment           = document.getElementById('apComment');
-    var elBiblicalBlock     = document.getElementById('apBiblicalBlock');
-    var elBiblicalList      = document.getElementById('apBiblicalList');
-    var elRestorationBlock  = document.getElementById('apRestorationBlock');
-    var elRestorationList   = document.getElementById('apRestorationList');
-    var elCrossrefBlock     = document.getElementById('apCrossrefBlock');
-    var elCrossrefList      = document.getElementById('apCrossrefList');
+    // Body — span text + definition + commentary
+    var elSpanText        = document.getElementById('apSpanText');
+    var elDefinitionBlock = document.getElementById('apDefinitionBlock');
+    var elDefinition      = document.getElementById('apDefinition');
+    var elCommentBlock    = document.getElementById('apCommentBlock');
+    var elComment         = document.getElementById('apComment');
 
-    // Guard: bail if the panel isn't in the DOM
+    // Anchor tabs
+    var elAnchorTabsBlock  = document.getElementById('apAnchorTabsBlock');
+    var elTabBiblical      = document.getElementById('apTabBiblical');
+    var elTabRestoration   = document.getElementById('apTabRestoration');
+    var elBiblicalPane     = document.getElementById('apBiblicalPane');
+    var elRestorationPane  = document.getElementById('apRestorationPane');
+    var elBiblicalList     = document.getElementById('apBiblicalList');
+    var elRestorationList  = document.getElementById('apRestorationList');
+    var elBiblicalEmpty    = document.getElementById('apBiblicalEmpty');
+    var elRestorationEmpty = document.getElementById('apRestorationEmpty');
+
+    // Crossrefs
+    var elCrossrefBlock = document.getElementById('apCrossrefBlock');
+    var elCrossrefList  = document.getElementById('apCrossrefList');
+
     if (!panel) { return; }
 
-    // ── Load apparatus data ──────────────────────────────────────
+    // ── Load apparatus data ───────────────────────────────────────
     var apparatus = {};
     try {
         var dataScript = document.getElementById('apparatusData');
@@ -90,20 +97,42 @@
     var hoverTimer   = null;
     var leaveTimer   = null;
 
-    // ── Utility: breakpoint check ────────────────────────────────
+    // ── Helpers ───────────────────────────────────────────────────
+
     function isDesktopHover() {
         return window.matchMedia('(min-width: 1200px) and (hover: hover)').matches;
     }
 
-    // ── Panel open / close ───────────────────────────────────────
+    function toggleBlock(el, show) {
+        el.classList.toggle('ap-hidden', !show);
+    }
+
+    // ── Tab switching ─────────────────────────────────────────────
+
+    function switchTab(tabBtn) {
+        var tabs  = [elTabBiblical, elTabRestoration];
+        var panes = [elBiblicalPane, elRestorationPane];
+
+        tabs.forEach(function (t, i) {
+            var isActive = (t === tabBtn);
+            t.classList.toggle('ap-anchor-tab--active', isActive);
+            t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            toggleBlock(panes[i], isActive);
+        });
+    }
+
+    // Tab click listeners
+    elTabBiblical.addEventListener('click', function () { switchTab(elTabBiblical); });
+    elTabRestoration.addEventListener('click', function () { switchTab(elTabRestoration); });
+
+    // ── Panel open / close ────────────────────────────────────────
+
     function openPanel() {
         if (isOpen) { return; }
         isOpen = true;
         panel.classList.add('ap-open');
         panel.setAttribute('aria-hidden', 'false');
-        if (!isDesktopHover()) {
-            backdrop.classList.add('ap-open');
-        }
+        if (!isDesktopHover()) { backdrop.classList.add('ap-open'); }
     }
 
     function closePanel() {
@@ -126,16 +155,10 @@
         if (el) { el.classList.add('ap-active'); }
     }
 
-    // ── Build helpers ─────────────────────────────────────────────
+    // ── DOM builders ─────────────────────────────────────────────
 
     function typeBadgeLabel(type) {
-        var labels = {
-            direct:    'Direct',
-            concept:   'Concept',
-            paraphrase:'Paraphrase',
-            xref:      'Cross-ref',
-        };
-        return labels[type] || type || '';
+        return { direct: 'Direct', concept: 'Concept', paraphrase: 'Paraphrase', xref: 'Cross-ref' }[type] || type || '';
     }
 
     function buildAnchorItem(anchor, isRestoration) {
@@ -148,126 +171,117 @@
         li.appendChild(ref);
 
         if (anchor.text) {
-            var verseText = document.createElement('p');
-            verseText.className = 'ap-anchor-text';
-            verseText.textContent = anchor.text;
-            li.appendChild(verseText);
+            var vt = document.createElement('p');
+            vt.className = 'ap-anchor-text';
+            vt.textContent = anchor.text;
+            li.appendChild(vt);
         }
-
         if (anchor.comment) {
-            var comment = document.createElement('p');
-            comment.className = 'ap-anchor-comment';
-            comment.textContent = anchor.comment;
-            li.appendChild(comment);
+            var cm = document.createElement('p');
+            cm.className = 'ap-anchor-comment';
+            cm.textContent = anchor.comment;
+            li.appendChild(cm);
         }
-
         return li;
     }
 
     function buildCrossrefItem(xref) {
         var li = document.createElement('li');
-        var a = document.createElement('a');
+        var a  = document.createElement('a');
         a.className = 'ap-crossref-link';
         a.href = xref.href || '#';
         if (xref.href && xref.href.charAt(0) !== '#') {
             a.setAttribute('target', '_blank');
             a.setAttribute('rel', 'noopener');
         }
-
         if (xref.label) {
-            var labelEl = document.createElement('span');
-            labelEl.className = 'ap-crossref-label';
-            labelEl.textContent = xref.label;
-            a.appendChild(labelEl);
+            var lbl = document.createElement('span');
+            lbl.className = 'ap-crossref-label';
+            lbl.textContent = xref.label;
+            a.appendChild(lbl);
         }
-
-        var titleEl = document.createElement('span');
-        titleEl.className = 'ap-crossref-title';
-        titleEl.textContent = xref.title || '';
-        a.appendChild(titleEl);
-
+        var ttl = document.createElement('span');
+        ttl.className = 'ap-crossref-title';
+        ttl.textContent = xref.title || '';
+        a.appendChild(ttl);
         li.appendChild(a);
         return li;
     }
 
     // ── Populate panel ────────────────────────────────────────────
+
     function populatePanel(spanEl) {
         var spanId    = spanEl.dataset.span;
         var articleId = spanEl.dataset.article;
-        var spanType  = spanEl.dataset.type  || '';
+        var spanType  = spanEl.dataset.type || '';
         var isNamed   = spanEl.dataset.named === 'true';
 
-        // Span text (the declaration clause)
+        // Span text
         elSpanText.textContent = spanEl.textContent.trim();
 
-        // ── Header: type badge ─────────────────────────────────────
+        // Type badge
         var typeLabel = typeBadgeLabel(spanType);
-        elTypeBadge.textContent = typeLabel || '';
+        elTypeBadge.textContent = typeLabel;
         elTypeBadge.setAttribute('data-type', spanType);
         elTypeBadge.style.display = typeLabel ? '' : 'none';
 
-        // Remove old named badge if any
+        // Named badge
         var oldNamedBadge = elTypeBadge.parentElement.querySelector('.ap-named-badge');
         if (oldNamedBadge) { oldNamedBadge.remove(); }
         if (isNamed) {
-            var namedBadge = document.createElement('span');
-            namedBadge.className = 'ap-named-badge';
-            namedBadge.textContent = '\u25c8 Named';
-            elTypeBadge.insertAdjacentElement('afterend', namedBadge);
+            var nb = document.createElement('span');
+            nb.className = 'ap-named-badge';
+            nb.textContent = '\u25c8 Named';
+            elTypeBadge.insertAdjacentElement('afterend', nb);
         }
 
-        // ── Header: article label ───────────────────────────────────
+        // Article label
         var artTitle = ARTICLE_TITLES[articleId] || articleId || '';
         var artNum   = articleId ? parseInt(articleId.replace('A', ''), 10) : null;
         elArticleLabel.textContent = artNum ? ('Article ' + artNum + ': ' + artTitle) : artTitle;
 
-        // ── Retrieve span data ──────────────────────────────────────
-        var artData  = apparatus[articleId] || {};
-        var spanData = artData[spanId]       || {};
+        // Span data
+        var spanData = (apparatus[articleId] || {})[spanId] || {};
 
-        // ── Definition (named-concept spans) ───────────────────────
-        var hasDefinition = isNamed && !!(spanData.definition && spanData.definition.trim());
-        toggleBlock(elDefinitionBlock, hasDefinition);
-        if (hasDefinition) {
-            elDefinition.textContent = spanData.definition;
-        }
+        // Definition
+        var hasDef = isNamed && !!(spanData.definition && spanData.definition.trim());
+        toggleBlock(elDefinitionBlock, hasDef);
+        if (hasDef) { elDefinition.textContent = spanData.definition; }
 
-        // ── Panel comment ───────────────────────────────────────────
+        // Commentary
         var comment    = spanData.panel_comment || '';
         var hasComment = comment.trim().length > 0;
         toggleBlock(elCommentBlock, hasComment);
-        if (hasComment) {
-            elComment.textContent = comment;
+        if (hasComment) { elComment.textContent = comment; }
+
+        // Anchor tabs
+        var biblical    = Array.isArray(spanData.biblical)    ? spanData.biblical    : [];
+        var restoration = Array.isArray(spanData.restoration) ? spanData.restoration : [];
+        var hasAnchors  = biblical.length > 0 || restoration.length > 0;
+        toggleBlock(elAnchorTabsBlock, hasAnchors);
+
+        if (hasAnchors) {
+            elBiblicalList.innerHTML = '';
+            biblical.forEach(function (a) { elBiblicalList.appendChild(buildAnchorItem(a, false)); });
+            toggleBlock(elBiblicalEmpty, biblical.length === 0);
+
+            elRestorationList.innerHTML = '';
+            restoration.forEach(function (a) { elRestorationList.appendChild(buildAnchorItem(a, true)); });
+            toggleBlock(elRestorationEmpty, restoration.length === 0);
+
+            // Default to the tab that has content; biblical wins ties
+            switchTab(biblical.length > 0 ? elTabBiblical : elTabRestoration);
         }
 
-        // ── Biblical anchors ────────────────────────────────────────
-        var biblical = Array.isArray(spanData.biblical) ? spanData.biblical : [];
-        toggleBlock(elBiblicalBlock, biblical.length > 0);
-        elBiblicalList.innerHTML = '';
-        biblical.forEach(function (anchor) {
-            elBiblicalList.appendChild(buildAnchorItem(anchor, false));
-        });
-
-        // ── Restoration anchors ─────────────────────────────────────
-        var restoration = Array.isArray(spanData.restoration) ? spanData.restoration : [];
-        toggleBlock(elRestorationBlock, restoration.length > 0);
-        elRestorationList.innerHTML = '';
-        restoration.forEach(function (anchor) {
-            elRestorationList.appendChild(buildAnchorItem(anchor, true));
-        });
-
-        // ── Cross-references ────────────────────────────────────────
+        // Crossrefs
         var crossrefs = Array.isArray(spanData.crossref) ? spanData.crossref : [];
         toggleBlock(elCrossrefBlock, crossrefs.length > 0);
         elCrossrefList.innerHTML = '';
-        crossrefs.forEach(function (xref) {
-            elCrossrefList.appendChild(buildCrossrefItem(xref));
-        });
+        crossrefs.forEach(function (x) { elCrossrefList.appendChild(buildCrossrefItem(x)); });
 
-        // ── No-data fallback ────────────────────────────────────────
-        var hasAnyData = hasDefinition || hasComment || biblical.length > 0
-                          || restoration.length > 0 || crossrefs.length > 0;
-        var emptyNote = panelBody.querySelector('.ap-empty-note');
+        // No-data fallback
+        var hasAnyData = hasDef || hasComment || hasAnchors || crossrefs.length > 0;
+        var emptyNote  = panelBody.querySelector('.ap-empty-note');
         if (!hasAnyData) {
             if (!emptyNote) {
                 emptyNote = document.createElement('p');
@@ -280,29 +294,21 @@
             emptyNote.style.display = 'none';
         }
 
-        // Scroll body to top on each new span
         panelBody.scrollTop = 0;
     }
 
-    function toggleBlock(el, show) {
-        if (show) {
-            el.classList.remove('ap-hidden');
-        } else {
-            el.classList.add('ap-hidden');
-        }
-    }
+    // ── Activation ────────────────────────────────────────────────
 
-    // ── Activation (shared by click and hover paths) ──────────────
     function activateSpan(spanEl) {
         setActiveSpan(spanEl);
         populatePanel(spanEl);
         openPanel();
     }
 
-    // ── Click / tap handler (document delegation, capture phase) ──
+    // ── Event: click / tap ────────────────────────────────────────
+
     document.addEventListener('click', function (e) {
         var spanEl = e.target.closest('[data-span]');
-
         if (spanEl) {
             e.stopPropagation();
             clearTimeout(hoverTimer);
@@ -310,54 +316,36 @@
             activateSpan(spanEl);
             return;
         }
-
-        // Click outside closes on desktop (backdrop handles mobile)
-        if (isOpen && !panel.contains(e.target)) {
-            closePanel();
-        }
+        if (isOpen && !panel.contains(e.target)) { closePanel(); }
     }, true);
 
-    // ── Hover handlers (desktop / pointer:hover only) ─────────────
+    // ── Event: hover (desktop only) ───────────────────────────────
+
     document.addEventListener('mouseover', function (e) {
         if (!isDesktopHover()) { return; }
         var spanEl = e.target.closest('[data-span]');
         if (!spanEl) { return; }
-
         clearTimeout(leaveTimer);
         clearTimeout(hoverTimer);
-
-        hoverTimer = setTimeout(function () {
-            activateSpan(spanEl);
-        }, 120);
+        hoverTimer = setTimeout(function () { activateSpan(spanEl); }, 120);
     });
 
     document.addEventListener('mouseout', function (e) {
         if (!isDesktopHover()) { return; }
         var spanEl = e.target.closest('[data-span]');
         if (!spanEl) { return; }
-
-        // If moving into the panel, don't close
-        var dest = e.relatedTarget;
-        if (dest && panel.contains(dest)) { return; }
-
+        if (e.relatedTarget && panel.contains(e.relatedTarget)) { return; }
         clearTimeout(hoverTimer);
         leaveTimer = setTimeout(function () {
-            if (!panel.matches(':hover')) {
-                closePanel();
-            }
+            if (!panel.matches(':hover')) { closePanel(); }
         }, 260);
     });
 
-    // When cursor leaves the panel itself
     panel.addEventListener('mouseleave', function (e) {
         if (!isDesktopHover()) { return; }
-        var dest = e.relatedTarget;
-        if (dest && dest.closest('[data-span]')) { return; }
-
+        if (e.relatedTarget && e.relatedTarget.closest('[data-span]')) { return; }
         clearTimeout(hoverTimer);
-        leaveTimer = setTimeout(function () {
-            closePanel();
-        }, 300);
+        leaveTimer = setTimeout(closePanel, 300);
     });
 
     panel.addEventListener('mouseenter', function () {
@@ -366,31 +354,21 @@
         clearTimeout(hoverTimer);
     });
 
-    // ── Close handlers ────────────────────────────────────────────
-    closeBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        closePanel();
-    });
+    // ── Event: close ──────────────────────────────────────────────
 
-    backdrop.addEventListener('click', function (e) {
-        e.stopPropagation();
-        closePanel();
-    });
-
+    closeBtn.addEventListener('click', function (e) { e.stopPropagation(); closePanel(); });
+    backdrop.addEventListener('click', function (e) { e.stopPropagation(); closePanel(); });
     document.addEventListener('keydown', function (e) {
-        if ((e.key === 'Escape' || e.key === 'Esc') && isOpen) {
-            closePanel();
-        }
+        if ((e.key === 'Escape' || e.key === 'Esc') && isOpen) { closePanel(); }
     });
 
-    // ── Span keyboard activation ──────────────────────────────────
-    // Spans are inline text — add tabindex at runtime so they're keyboard-reachable
+    // ── Keyboard accessibility on spans ──────────────────────────
+
     document.querySelectorAll('[data-span]').forEach(function (el) {
         if (!el.hasAttribute('tabindex')) {
             el.setAttribute('tabindex', '0');
             el.setAttribute('role', 'button');
-            el.setAttribute('aria-label',
-                'View annotation: ' + el.textContent.trim().slice(0, 60));
+            el.setAttribute('aria-label', 'View annotation: ' + el.textContent.trim().slice(0, 60));
         }
         el.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {

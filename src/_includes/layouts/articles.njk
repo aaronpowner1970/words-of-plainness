@@ -212,15 +212,24 @@
             <h4 class="ap-section-title">Commentary</h4>
             <p class="ap-comment" id="apComment"></p>
         </div>
-        <!-- Biblical anchors -->
-        <div class="ap-anchors-block ap-hidden" id="apBiblicalBlock">
-            <h4 class="ap-section-title ap-section-title--biblical">Biblical</h4>
-            <ul class="ap-anchor-list" id="apBiblicalList"></ul>
-        </div>
-        <!-- Restoration anchors -->
-        <div class="ap-anchors-block ap-hidden" id="apRestorationBlock">
-            <h4 class="ap-section-title ap-section-title--restoration">Restoration</h4>
-            <ul class="ap-anchor-list" id="apRestorationList"></ul>
+        <!-- Anchor tabs (Biblical / Restoration) -->
+        <div class="ap-anchor-tabs-block ap-hidden" id="apAnchorTabsBlock">
+            <div class="ap-anchor-tab-bar" role="tablist">
+                <button class="ap-anchor-tab ap-anchor-tab--active" id="apTabBiblical"
+                        role="tab" aria-selected="true" aria-controls="apBiblicalPane"
+                        data-pane="apBiblicalPane">Biblical Witness</button>
+                <button class="ap-anchor-tab" id="apTabRestoration"
+                        role="tab" aria-selected="false" aria-controls="apRestorationPane"
+                        data-pane="apRestorationPane">Restoration Witness</button>
+            </div>
+            <div class="ap-anchor-pane" id="apBiblicalPane" role="tabpanel" aria-labelledby="apTabBiblical">
+                <ul class="ap-anchor-list" id="apBiblicalList"></ul>
+                <p class="ap-anchor-pane-empty ap-hidden" id="apBiblicalEmpty">No biblical anchors for this span.</p>
+            </div>
+            <div class="ap-anchor-pane ap-hidden" id="apRestorationPane" role="tabpanel" aria-labelledby="apTabRestoration">
+                <ul class="ap-anchor-list" id="apRestorationList"></ul>
+                <p class="ap-anchor-pane-empty ap-hidden" id="apRestorationEmpty">No Restoration anchors for this span.</p>
+            </div>
         </div>
         <!-- Cross-references -->
         <div class="ap-crossref-block ap-hidden" id="apCrossrefBlock">

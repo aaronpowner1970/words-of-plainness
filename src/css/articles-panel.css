@@ -377,6 +377,70 @@
 }
 
 
+/* ── Anchor tabs (Biblical / Restoration) ───────────────────── */
+
+.ap-anchor-tabs-block {
+    margin-bottom: 1.25rem;
+}
+
+.ap-anchor-tab-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.2);
+}
+
+.ap-anchor-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;    /* overlaps the tab-bar border-bottom */
+    padding: 0.55rem 0.75rem;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.5;
+    cursor: pointer;
+    transition: color 0.15s, opacity 0.15s, border-color 0.15s;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.ap-anchor-tab:hover {
+    opacity: 0.8;
+    color: var(--cream, #E8DCC4);
+}
+
+.ap-anchor-tab--active {
+    color: var(--gold-primary, #C4943A);
+    border-bottom-color: var(--gold-primary, #C4943A);
+    opacity: 1;
+}
+
+.ap-anchor-tab:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+
+.ap-anchor-pane {
+    padding-top: 0.875rem;
+}
+
+.ap-anchor-pane-empty {
+    font-style: italic;
+    font-size: 0.825rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.3;
+    text-align: center;
+    padding: 1rem 0;
+    margin: 0;
+}
+
+
 /* ── Anchor lists (biblical / restoration) ───────────────────── */
 
 .ap-anchors-block {
