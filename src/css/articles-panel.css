@@ -1,0 +1,524 @@
+/* ============================================
+   ARTICLES ANNOTATION PANEL  (ap-)
+   articles.njk — hover/tap [data-span] → panel
+   Desktop (≥1200px): fixed right sidebar slides in
+   Mobile/tablet (<1200px): bottom drawer slides up
+   ============================================
+
+   Z-index:
+     Panel   1200  (above FAB ≈1001, header 1000;
+                    below TOC 1600, mobile menu 1800)
+     Backdrop 1199
+   ============================================ */
+
+/* ── Span interactive indicator ──────────────────────────────── */
+
+[data-span] {
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background-color 0.15s ease, outline-color 0.15s ease;
+    /* Slightly warmer underline to hint interactivity */
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: rgba(196, 148, 58, 0.35);
+    text-underline-offset: 2px;
+}
+
+[data-span]:hover {
+    background-color: rgba(196, 148, 58, 0.15);
+    text-decoration-color: rgba(196, 148, 58, 0.6);
+}
+
+[data-span].ap-active {
+    background-color: rgba(196, 148, 58, 0.22);
+    outline: 1px solid rgba(196, 148, 58, 0.4);
+    outline-offset: 1px;
+    text-decoration-color: transparent;
+}
+
+[data-span]:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Named-concept spans get a slightly stronger treatment */
+[data-named="true"] {
+    text-decoration-color: rgba(196, 148, 58, 0.55);
+}
+
+[data-named="true"]:hover,
+[data-named="true"].ap-active {
+    text-decoration-style: solid;
+    text-decoration-color: var(--gold-primary, #C4943A);
+}
+
+
+/* ── Backdrop (mobile / tablet only) ─────────────────────────── */
+
+.ap-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 21, 16, 0.62);
+    z-index: 1199;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+}
+
+.ap-backdrop.ap-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (min-width: 1200px) {
+    /* no backdrop needed when panel is a sidebar alongside content */
+    .ap-backdrop {
+        display: none;
+    }
+}
+
+
+/* ── Panel ──────────────────────────────────────────────────────── */
+
+.ap-panel {
+    position: fixed;
+    z-index: 1200;
+    background: var(--brown-rich, #1F1012);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Desktop: right sidebar ─────────────────────────────────── */
+@media (min-width: 1200px) {
+    .ap-panel {
+        top: 0;
+        right: 0;
+        width: 380px;
+        height: 100vh;
+        border-left: 1px solid rgba(196, 148, 58, 0.22);
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.3s ease;
+        box-shadow: none;
+    }
+
+    .ap-panel.ap-open {
+        transform: translateX(0);
+        box-shadow: -6px 0 32px rgba(0, 0, 0, 0.55),
+                    -1px 0 0 rgba(196, 148, 58, 0.08);
+    }
+}
+
+/* ── Mobile / tablet: bottom drawer ─────────────────────────── */
+@media (max-width: 1199px) {
+    .ap-panel {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 78vh;
+        border-top: 1px solid rgba(196, 148, 58, 0.28);
+        border-radius: 16px 16px 0 0;
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 -6px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    .ap-panel.ap-open {
+        transform: translateY(0);
+    }
+}
+
+
+/* ── Panel header ────────────────────────────────────────────── */
+
+.ap-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+    flex-shrink: 0;
+    background: rgba(26, 21, 16, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Drag handle for mobile drawer */
+@media (max-width: 1199px) {
+    .ap-header {
+        position: relative;
+        padding-top: 1.375rem;
+    }
+
+    .ap-header::before {
+        content: '';
+        position: absolute;
+        top: 0.55rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 34px;
+        height: 4px;
+        background: rgba(196, 148, 58, 0.32);
+        border-radius: 2px;
+    }
+}
+
+.ap-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+/* ── Close button ────────────────────────────────────────────── */
+
+.ap-close {
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid rgba(196, 148, 58, 0.22);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--cream-dark, #D4C8B0);
+    padding: 0.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    line-height: 1;
+}
+
+.ap-close:hover {
+    border-color: var(--gold-primary, #C4943A);
+    color: var(--gold-primary, #C4943A);
+    background: rgba(196, 148, 58, 0.08);
+}
+
+.ap-close:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+
+
+/* ── Type badges ──────────────────────────────────────────────── */
+
+.ap-type-badge {
+    display: inline-block;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+.ap-type-badge[data-type="direct"] {
+    background: rgba(122, 48, 64, 0.28);
+    color: #e0a0b0;
+    border: 1px solid rgba(122, 48, 64, 0.45);
+}
+
+.ap-type-badge[data-type="concept"] {
+    background: rgba(196, 148, 58, 0.18);
+    color: var(--gold-light, #D4A84A);
+    border: 1px solid rgba(196, 148, 58, 0.38);
+}
+
+.ap-type-badge[data-type="paraphrase"] {
+    background: rgba(74, 107, 107, 0.22);
+    color: var(--teal-light, #6A8B8B);
+    border: 1px solid rgba(74, 107, 107, 0.38);
+}
+
+.ap-type-badge[data-type="xref"] {
+    background: rgba(139, 90, 90, 0.2);
+    color: var(--burgundy-light, #8B5A5A);
+    border: 1px solid rgba(139, 90, 90, 0.32);
+}
+
+.ap-type-badge:empty {
+    display: none;
+}
+
+/* Named-concept indicator */
+.ap-named-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--gold-primary, #C4943A);
+    border: 1px solid rgba(196, 148, 58, 0.32);
+    border-radius: 20px;
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+}
+
+/* Article label (e.g. "Article 8: Of Fellow Believers") */
+.ap-article-label {
+    font-size: 0.7rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.45;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+}
+
+
+/* ── Scrollable body ──────────────────────────────────────────── */
+
+.ap-body {
+    overflow-y: auto;
+    flex: 1;
+    padding: 1.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(196, 148, 58, 0.28) transparent;
+}
+
+.ap-body::-webkit-scrollbar {
+    width: 4px;
+}
+
+.ap-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ap-body::-webkit-scrollbar-thumb {
+    background: rgba(196, 148, 58, 0.28);
+    border-radius: 2px;
+}
+
+
+/* ── Span text (quoted excerpt) ──────────────────────────────── */
+
+.ap-span-text {
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: 0.975rem;
+    color: var(--cream-soft, #F5EFE4);
+    line-height: 1.65;
+    padding: 0.875rem 1rem;
+    background: rgba(196, 148, 58, 0.07);
+    border-left: 3px solid var(--gold-primary, #C4943A);
+    border-radius: 0 var(--radius-sm, 4px) var(--radius-sm, 4px) 0;
+    margin-bottom: 1.25rem;
+}
+
+
+/* ── Section headings ────────────────────────────────────────── */
+
+.ap-section-title {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.55;
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.1);
+    line-height: 1.4;
+}
+
+.ap-section-title--biblical {
+    color: var(--gold-light, #D4A84A);
+    opacity: 0.82;
+}
+
+.ap-section-title--restoration {
+    color: var(--teal-light, #6A8B8B);
+    opacity: 0.82;
+}
+
+
+/* ── Definition block ────────────────────────────────────────── */
+
+.ap-definition-block {
+    margin-bottom: 1.25rem;
+}
+
+.ap-definition {
+    font-size: 0.925rem;
+    line-height: 1.72;
+    color: var(--cream, #E8DCC4);
+    margin: 0;
+    padding: 0.75rem 1rem;
+    background: rgba(196, 148, 58, 0.06);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-radius: var(--radius-sm, 4px);
+}
+
+
+/* ── Commentary block ────────────────────────────────────────── */
+
+.ap-comment-block {
+    margin-bottom: 1.25rem;
+}
+
+.ap-comment {
+    font-size: 0.9rem;
+    line-height: 1.78;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.88;
+    margin: 0;
+    white-space: pre-line;
+}
+
+
+/* ── Anchor lists (biblical / restoration) ───────────────────── */
+
+.ap-anchors-block {
+    margin-bottom: 1.25rem;
+}
+
+.ap-anchor-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.ap-anchor-item {
+    background: rgba(31, 16, 18, 0.7);
+    border: 1px solid rgba(196, 148, 58, 0.11);
+    border-radius: var(--radius-sm, 4px);
+    padding: 0.75rem 0.875rem;
+    transition: border-color 0.15s;
+}
+
+.ap-anchor-item:hover {
+    border-color: rgba(196, 148, 58, 0.25);
+}
+
+.ap-anchor-ref {
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gold-primary, #C4943A);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+}
+
+.ap-anchor-text {
+    font-size: 0.825rem;
+    line-height: 1.6;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.82;
+    font-style: italic;
+    margin: 0 0 0.3rem;
+}
+
+.ap-anchor-comment {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.65;
+    margin: 0;
+}
+
+/* Restoration anchors: teal accent on ref */
+.ap-restoration-ref .ap-anchor-ref {
+    color: var(--teal-light, #6A8B8B);
+}
+
+
+/* ── Cross-reference list ────────────────────────────────────── */
+
+.ap-crossref-block {
+    margin-bottom: 0.75rem;
+}
+
+.ap-crossref-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.ap-crossref-link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    font-size: 0.875rem;
+    color: var(--gold-primary, #C4943A);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(196, 148, 58, 0.18);
+    border-radius: var(--radius-sm, 4px);
+    transition: background 0.15s, border-color 0.15s;
+    line-height: 1.4;
+}
+
+.ap-crossref-link:hover {
+    background: rgba(196, 148, 58, 0.07);
+    border-color: rgba(196, 148, 58, 0.38);
+}
+
+.ap-crossref-label {
+    font-size: 0.68rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.45;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.ap-crossref-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* ── Empty / no-data states ──────────────────────────────────── */
+
+.ap-hidden {
+    display: none !important;
+}
+
+.ap-empty-note {
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.38;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin: 0;
+}
+
+
+/* ── Section spacing ─────────────────────────────────────────── */
+
+.ap-body > *:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ── Reduced motion ──────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    .ap-panel,
+    .ap-backdrop,
+    [data-span] {
+        transition-duration: 0.01ms !important;
+    }
+}

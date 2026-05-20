@@ -3,6 +3,7 @@
 {% block styles %}
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/ambient-player.css">
+<link rel="stylesheet" href="/css/articles-panel.css?v={{ site.version }}">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
 {% endblock %}
 
@@ -186,9 +187,55 @@
 {% include "components/fab-lantern.njk" %}
 </div>
 
+<!-- Annotation Panel -->
+<div class="ap-backdrop" id="apBackdrop" aria-hidden="true"></div>
+<aside class="ap-panel" id="apPanel" role="complementary" aria-label="Span annotation" aria-hidden="true">
+    <header class="ap-header">
+        <div class="ap-header-left">
+            <span class="ap-type-badge" id="apTypeBadge"></span>
+            <span class="ap-article-label" id="apArticleLabel"></span>
+        </div>
+        <button class="ap-close" id="apClose" aria-label="Close annotation panel" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </header>
+    <div class="ap-body" id="apBody">
+        <!-- Quoted span text -->
+        <div class="ap-span-text" id="apSpanText"></div>
+        <!-- Named-concept definition -->
+        <div class="ap-definition-block ap-hidden" id="apDefinitionBlock">
+            <h4 class="ap-section-title">Definition</h4>
+            <p class="ap-definition" id="apDefinition"></p>
+        </div>
+        <!-- Panel commentary -->
+        <div class="ap-comment-block ap-hidden" id="apCommentBlock">
+            <h4 class="ap-section-title">Commentary</h4>
+            <p class="ap-comment" id="apComment"></p>
+        </div>
+        <!-- Biblical anchors -->
+        <div class="ap-anchors-block ap-hidden" id="apBiblicalBlock">
+            <h4 class="ap-section-title ap-section-title--biblical">Biblical</h4>
+            <ul class="ap-anchor-list" id="apBiblicalList"></ul>
+        </div>
+        <!-- Restoration anchors -->
+        <div class="ap-anchors-block ap-hidden" id="apRestorationBlock">
+            <h4 class="ap-section-title ap-section-title--restoration">Restoration</h4>
+            <ul class="ap-anchor-list" id="apRestorationList"></ul>
+        </div>
+        <!-- Cross-references -->
+        <div class="ap-crossref-block ap-hidden" id="apCrossrefBlock">
+            <h4 class="ap-section-title">See Also</h4>
+            <ul class="ap-crossref-list" id="apCrossrefList"></ul>
+        </div>
+    </div>
+</aside>
+
 {% endblock %}
 
 {% block scripts %}
+<!-- Apparatus data (build-time JSON embed) -->
+<script type="application/json" id="apparatusData">{{ apparatusData | dump | safe }}</script>
+<script src="/js/articles-panel.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const progressFill = document.getElementById('readingProgressFill');
