@@ -337,21 +337,25 @@
             var cy     = wRect.top  + wH / 2;
             var vW     = window.innerWidth;
             var vH     = window.innerHeight;
-            var margin = 24;
+            // Dynamic margins: 20% of each viewport dimension
+            // Outer snap positions are inset from screen edges by this amount,
+            // so the medallion never touches the edge regardless of screen size
+            var mX = Math.round(vW * 0.20);
+            var mY = Math.round(vH * 0.20);
 
-            // Divide viewport into thirds on each axis
+            // Divide viewport into thirds to determine snap zone
             // col: 0 = left, 1 = center, 2 = right
             var col = cx < vW / 3 ? 0 : (cx < 2 * vW / 3 ? 1 : 2);
             // row: 0 = top,  1 = middle, 2 = bottom
             var row = cy < vH / 3 ? 0 : (cy < 2 * vH / 3 ? 1 : 2);
 
-            var snapX = col === 0 ? margin
+            var snapX = col === 0 ? mX
                       : col === 1 ? Math.round((vW - wW) / 2)
-                      :             vW - wW - margin;
+                      :             vW - wW - mX;
 
-            var snapY = row === 0 ? margin
+            var snapY = row === 0 ? mY
                       : row === 1 ? Math.round((vH - wH) / 2)
-                      :             vH - wH - margin;
+                      :             vH - wH - mY;
 
             widget.style.transition = 'left 0.3s ease, top 0.3s ease';
             widget.style.left   = snapX + 'px';
