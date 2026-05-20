@@ -234,7 +234,7 @@
 
 {% block scripts %}
 <!-- Apparatus data (build-time JSON embed) -->
-<script type="application/json" id="apparatusData">{{ apparatusData | dump | safe }}</script>
+<script type="application/json" id="apparatusData">{{ (apparatusData if apparatusData else {}) | dump | safe }}</script>
 <script src="/js/articles-panel.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let isBookmarked = false;
             try { isBookmarked = localStorage.getItem('wop-bookmark-flag-' + pageId) === 'true'; } catch(e) {}
             const nowBookmarked = !isBookmarked;
-            try { localStorage.setItem('wop-bookmark-flag-' + pageId, nowBookmarked ? 'true' : 'false'); } catch(e) {}\
+            try { localStorage.setItem('wop-bookmark-flag-' + pageId, nowBookmarked ? 'true' : 'false'); } catch(e) {}
             bookmarkBtn.classList.toggle('active', nowBookmarked);
             const toast = document.getElementById('bookmarkToast');
             if (toast) { toast.classList.remove('hidden'); setTimeout(() => toast.classList.add('hidden'), 2000); }
