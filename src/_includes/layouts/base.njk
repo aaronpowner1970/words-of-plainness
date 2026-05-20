@@ -207,9 +207,11 @@
             return;
         }
 
-        // Homepage modifier: larger seal
-        var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
-        if (isHome) widget.classList.add('articles-seal-widget--home');
+        // Size modifier: homepage + /writings/ get the large seal
+        var path       = window.location.pathname;
+        var isHomePage = path === '/' || path === '/index.html';
+        var isLargeSeal = isHomePage || path === '/writings/' || path === '/writings';
+        if (isLargeSeal) widget.classList.add('articles-seal-widget--home');
 
         // Restore position saved earlier in this session
         var savedPos = sessionStorage.getItem('wop-seal-pos');
@@ -227,10 +229,11 @@
             } catch (e) {}
         }
 
-        // Desktop homepage: position to the right of the hero CTA buttons
-        // (not on mobile — stacked layout has no room to the right)
+        // Desktop homepage only: position to the right of the hero CTA buttons
+        // (not on mobile — stacked layout has no room to the right;
+        //  not on /writings/ — no .hero-cta element there)
         var isDesktop = !window.matchMedia('(pointer: coarse)').matches;
-        if (isHome && !savedPos && isDesktop) {
+        if (isHomePage && !savedPos && isDesktop) {
             // Wait one frame so layout is fully rendered before measuring
             requestAnimationFrame(function() {
                 var cta = document.querySelector('.hero-cta');
@@ -318,7 +321,7 @@
             widget.classList.remove('articles-seal-widget--dragging');
             document.removeEventListener('mousemove', onDrag);
             document.removeEventListener('mouseup',   stopDrag);
-            if (hasMoved) snapToCorner();
+            if (hasMoved) snapToGrid();
             // Save position for this session
             sessionStorage.setItem('wop-seal-pos', JSON.stringify({
                 left: widget.style.left,
@@ -326,29 +329,37 @@
             }));
         }
 
-        function snapToCorner() {
+        function snapToGrid() {
+            var wW     = widget.offsetWidth;
+            var wH     = widget.offsetHeight;
             var wRect  = widget.getBoundingClientRect();
-            var cx     = wRect.left + wRect.width  / 2;
-            var cy     = wRect.top  + wRect.height / 2;
+            var cx     = wRect.left + wW / 2;
+            var cy     = wRect.top  + wH / 2;
             var vW     = window.innerWidth;
             var vH     = window.innerHeight;
             var margin = 24;
-            widget.style.transition = 'left 0.3s ease, right 0.3s ease, top 0.3s ease';
-            // Snap horizontally
-            if (cx < vW / 2) {
-                widget.style.left  = margin + 'px';
-                widget.style.right = 'auto';
-            } else {
-                widget.style.left  = (vW - widget.offsetWidth - margin) + 'px';
-                widget.style.right = 'auto';
-            }
-            // Snap vertically
-            widget.style.top    = (cy < vH / 2 ? margin : vH - widget.offsetHeight - margin) + 'px';
+
+            // Divide viewport into thirds on each axis
+            // col: 0 = left, 1 = center, 2 = right
+            var col = cx < vW / 3 ? 0 : (cx < 2 * vW / 3 ? 1 : 2);
+            // row: 0 = top,  1 = middle, 2 = bottom
+            var row = cy < vH / 3 ? 0 : (cy < 2 * vH / 3 ? 1 : 2);
+
+            var snapX = col === 0 ? margin
+                      : col === 1 ? Math.round((vW - wW) / 2)
+                      :             vW - wW - margin;
+
+            var snapY = row === 0 ? margin
+                      : row === 1 ? Math.round((vH - wH) / 2)
+                      :             vH - wH - margin;
+
+            widget.style.transition = 'left 0.3s ease, top 0.3s ease';
+            widget.style.left   = snapX + 'px';
+            widget.style.top    = snapY + 'px';
+            widget.style.right  = 'auto';
             widget.style.bottom = 'auto';
-            // Restore transition after snap completes
-            setTimeout(function() {
-                widget.style.transition = '';
-            }, 350);
+
+            setTimeout(function() { widget.style.transition = ''; }, 350);
         }
 
         // Prevent link navigation when user has dragged
