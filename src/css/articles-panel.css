@@ -605,8 +605,8 @@
     transform: translateY(-50%);
     z-index: 1101;
 
-    background: rgba(31, 16, 18, 0.92);
-    border: 1px solid rgba(196, 148, 58, 0.25);
+    background: rgba(196, 148, 58, 0.1);
+    border: 1px solid rgba(196, 148, 58, 0.48);
     border-left: none;
     border-radius: 0 5px 5px 0;
 
@@ -627,8 +627,8 @@
 }
 
 .an-tab:hover {
-    background: rgba(196, 148, 58, 0.1);
-    border-color: rgba(196, 148, 58, 0.48);
+    background: rgba(196, 148, 58, 0.18);
+    border-color: var(--gold-primary, #C4943A);
 }
 
 .an-tab:focus-visible {
@@ -645,7 +645,7 @@
     writing-mode: vertical-rl;
     transform: rotate(180deg); /* bottom-to-top reading direction */
 
-    color: rgba(196, 148, 58, 0.72);
+    color: var(--gold-primary, #C4943A);
     font-family: var(--font-sans, sans-serif);
     font-size: 0.58rem;
     font-weight: 700;
