@@ -4,16 +4,11 @@
  * Annotation panel for the Articles of Interfaith Discipleship page.
  *
  * INTERACTION MODEL
- *   Desktop (≥1200px, hover device):
- *     - Hover over [data-span]  → open panel after 120ms delay
- *     - Mouse enters panel      → panel stays open
- *     - Mouse leaves both span and panel → close after 280ms
+ *   All viewports:
+ *     - Hover over [data-span]  → gold highlight only (no panel)
+ *     - Click [data-span]       → open panel
  *     - Click outside panel     → close
- *
- *   Mobile / tablet (<1200px, or touch device):
- *     - Tap [data-span]         → open panel
- *     - Tap backdrop            → close
- *     - Tap × button            → close
+ *     - Click × button          → close
  *     - Escape key              → close
  *
  * DATA SOURCE
@@ -94,14 +89,9 @@
     // ── State ─────────────────────────────────────────────────────
     var activeSpanEl = null;
     var isOpen       = false;
-    var hoverTimer   = null;
-    var leaveTimer   = null;
 
     // ── Helpers ───────────────────────────────────────────────────
 
-    function isDesktopHover() {
-        return window.matchMedia('(min-width: 1200px) and (hover: hover)').matches;
-    }
 
     function toggleBlock(el, show) {
         el.classList.toggle('ap-hidden', !show);
@@ -311,48 +301,11 @@
         var spanEl = e.target.closest('[data-span]');
         if (spanEl) {
             e.stopPropagation();
-            clearTimeout(hoverTimer);
-            clearTimeout(leaveTimer);
             activateSpan(spanEl);
             return;
         }
         if (isOpen && !panel.contains(e.target)) { closePanel(); }
     }, true);
-
-    // ── Event: hover (desktop only) ───────────────────────────────
-
-    document.addEventListener('mouseover', function (e) {
-        if (!isDesktopHover()) { return; }
-        var spanEl = e.target.closest('[data-span]');
-        if (!spanEl) { return; }
-        clearTimeout(leaveTimer);
-        clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(function () { activateSpan(spanEl); }, 120);
-    });
-
-    document.addEventListener('mouseout', function (e) {
-        if (!isDesktopHover()) { return; }
-        var spanEl = e.target.closest('[data-span]');
-        if (!spanEl) { return; }
-        if (e.relatedTarget && panel.contains(e.relatedTarget)) { return; }
-        clearTimeout(hoverTimer);
-        leaveTimer = setTimeout(function () {
-            if (!panel.matches(':hover')) { closePanel(); }
-        }, 260);
-    });
-
-    panel.addEventListener('mouseleave', function (e) {
-        if (!isDesktopHover()) { return; }
-        if (e.relatedTarget && e.relatedTarget.closest('[data-span]')) { return; }
-        clearTimeout(hoverTimer);
-        leaveTimer = setTimeout(closePanel, 300);
-    });
-
-    panel.addEventListener('mouseenter', function () {
-        if (!isDesktopHover()) { return; }
-        clearTimeout(leaveTimer);
-        clearTimeout(hoverTimer);
-    });
 
     // ── Event: close ──────────────────────────────────────────────
 
@@ -373,8 +326,6 @@
         el.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                clearTimeout(hoverTimer);
-                clearTimeout(leaveTimer);
                 activateSpan(el);
             }
         });
