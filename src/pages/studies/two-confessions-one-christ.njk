@@ -1,0 +1,722 @@
+---
+title: "Two Confessions, One Christ"
+layout: layouts/page.njk
+permalink: /studies/two-confessions-one-christ/
+description: "A comparative study of the Articles of Interfaith Discipleship and the Articles of Faith of The Church of Jesus Christ of Latter-day Saints, addressed to four audiences: seekers, interfaith readers, non-LDS Christians, and Latter-day Saints."
+pageSubtitle: "A Words of Plainness Study"
+---
+
+<style>
+/* ── STUDY PAGE STYLES ─────────────────────────────────── */
+.study-aoi-banner {
+    max-width: 760px;
+    margin: 0 auto 2.5rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(196, 148, 58, 0.35);
+    border-left: 4px solid var(--gold-primary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    background: rgba(196, 148, 58, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.study-aoi-banner-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.study-aoi-banner-link {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--cream-soft);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(196, 148, 58, 0.5);
+    transition: color 0.2s, border-color 0.2s;
+    line-height: 1.4;
+}
+
+.study-aoi-banner-link:hover {
+    color: var(--gold-light, #e8c47a);
+    border-bottom-color: var(--gold-primary);
+}
+
+.study-intro {
+    max-width: 760px;
+    margin: 0 auto 2rem;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.92;
+}
+
+.study-intro p {
+    margin-bottom: 1.25rem;
+}
+
+.study-intro p.study-lead {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--cream-soft);
+    margin-bottom: 1.5rem;
+}
+
+.study-intro p:last-child {
+    margin-bottom: 0;
+}
+
+/* ── WHAT THESE DOCUMENTS ARE ──── */
+.study-doc-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    max-width: 760px;
+    margin: 1.5rem auto 2rem;
+}
+
+.study-doc-card {
+    background: var(--overlay-medium);
+    border-radius: var(--radius-md);
+    padding: 1.4rem;
+}
+
+.study-doc-card-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.study-doc-card-label.aoi { color: var(--gold-primary); }
+.study-doc-card-label.aof { color: #7bafc8; }
+
+.study-doc-card h4 {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cream-soft);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+}
+
+.study-doc-card p {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.95rem;
+    color: var(--cream);
+    opacity: 0.8;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ── CORRESPONDENCE TABLE ──── */
+.study-table-wrap {
+    overflow-x: auto;
+    max-width: 900px;
+    margin: 1.5rem auto 2rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+}
+
+.study-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93rem;
+}
+
+.study-table thead tr {
+    background: rgba(196, 148, 58, 0.07);
+}
+
+.study-table thead th {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 500;
+}
+
+.study-table tbody tr {
+    border-top: 1px solid rgba(196, 148, 58, 0.1);
+}
+
+.study-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.study-table td {
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+    color: var(--cream);
+    line-height: 1.55;
+    font-family: 'Crimson Pro', Georgia, serif;
+}
+
+.study-table td:first-child {
+    color: var(--cream-soft);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.study-table td:last-child {
+    color: var(--cream);
+    opacity: 0.78;
+    font-style: italic;
+}
+
+.study-badge {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+    font-style: normal;
+}
+
+.study-badge-parallel { background: rgba(74, 128, 128, 0.2); color: #7bbfbf; border: 1px solid rgba(74,128,128,0.3); }
+.study-badge-diverge   { background: rgba(196, 148, 58, 0.15); color: var(--gold-primary); border: 1px solid rgba(196,148,58,0.3); }
+.study-badge-aoi-only  { background: rgba(107, 74, 128, 0.2); color: #b090d0; border: 1px solid rgba(107,74,128,0.3); }
+.study-badge-aof-only  { background: rgba(61, 90, 130, 0.2); color: #7bafc8; border: 1px solid rgba(61,90,130,0.3); }
+.study-badge-expand    { background: rgba(122, 61, 61, 0.2); color: #c08080; border: 1px solid rgba(122,61,61,0.3); }
+
+/* ── SECTION HEADINGS ──── */
+.study-section-heading {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.25);
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── AUDIENCE SECTIONS ──── */
+.study-audience-section {
+    max-width: 760px;
+    margin: 0 auto 2.5rem;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 4px solid;
+    background: rgba(255, 255, 255, 0.025);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.study-audience-section.seekers     { border-left-color: #4A8080; }
+.study-audience-section.interfaith  { border-left-color: var(--gold-primary); }
+.study-audience-section.non-lds     { border-left-color: #5080A0; }
+.study-audience-section.lds         { border-left-color: #7A5090; }
+
+.study-audience-tag {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.study-audience-tag.seekers    { color: #7bbfbf; }
+.study-audience-tag.interfaith { color: var(--gold-primary); }
+.study-audience-tag.non-lds    { color: #7bafc8; }
+.study-audience-tag.lds        { color: #b090d0; }
+
+.study-audience-title {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--cream-soft);
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+}
+
+.study-audience-section p {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--cream);
+    margin-bottom: 1.1rem;
+}
+
+.study-audience-section p:last-child { margin-bottom: 0; }
+
+/* ── COMPARISON PULL BOXES ──── */
+.study-comparison-pull {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.25rem 0 1.5rem;
+}
+
+.study-pull-item {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--cream);
+}
+
+.study-pull-item .study-pull-label {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-style: normal;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.study-pull-item.aoi {
+    background: rgba(196, 148, 58, 0.1);
+    border: 1px solid rgba(196, 148, 58, 0.2);
+}
+
+.study-pull-item.aoi .study-pull-label { color: var(--gold-primary); }
+
+.study-pull-item.aof {
+    background: rgba(61, 90, 130, 0.12);
+    border: 1px solid rgba(61, 90, 130, 0.25);
+}
+
+.study-pull-item.aof .study-pull-label { color: #7bafc8; }
+
+/* ── SYNTHESIS ──── */
+.study-synthesis-item {
+    max-width: 760px;
+    margin: 2rem auto;
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(196, 148, 58, 0.2);
+}
+
+.study-synthesis-num {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.study-synthesis-item h3 {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--cream-soft);
+    margin-bottom: 0.5rem;
+}
+
+.study-synthesis-item p {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--cream);
+    margin: 0;
+}
+
+/* ── FOOTER ──── */
+.study-aoi-return {
+    max-width: 760px;
+    margin: 3rem auto 0;
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: var(--radius-md);
+    background: rgba(196, 148, 58, 0.04);
+}
+
+.study-aoi-return a {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.4);
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.study-aoi-return a:hover {
+    color: var(--gold-light, #e8c47a);
+    border-bottom-color: var(--gold-primary);
+}
+
+.study-aoi-return p {
+    font-size: 0.85rem;
+    color: var(--cream-dark);
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.study-footer-note {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--cream-dark);
+    opacity: 0.5;
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .study-doc-cards { grid-template-columns: 1fr; }
+    .study-comparison-pull { grid-template-columns: 1fr; }
+    .study-audience-section { padding: 1.25rem 1.25rem 1.25rem 1.5rem; }
+    .study-table td:first-child { white-space: normal; }
+}
+</style>
+
+
+{# ── AoI HEADER LINK ─────────────────────────────────────── #}
+<div class="study-aoi-banner">
+    <span class="study-aoi-banner-label">Companion Study</span>
+    <a href="/articles/" class="study-aoi-banner-link">
+        Articles of Interfaith Discipleship &mdash; Christ-Centered Declarations of Shared Beliefs
+    </a>
+</div>
+
+
+{# ── PAGEFIND INDEX BOUNDARY ─────────────────────────────── #}
+<div data-pagefind-body>
+
+
+{# ── INTRODUCTION ─────────────────────────────────────────── #}
+<section class="content-section" id="introduction">
+    <div class="content-wrapper">
+        <div class="study-intro">
+            <p class="study-lead">Two confessional documents. Thirteen articles each. One tradition, two purposes, and a Christ standing at the center of both.</p>
+
+            <p>The Articles of Faith of The Church of Jesus Christ of Latter-day Saints and the Articles of Interfaith Discipleship of Words of Plainness Ministry are not competing documents. They do not contradict each other. But they are written for different moments, different readers, and different purposes&mdash;and placing them side by side reveals, with unusual clarity, what any confessional tradition holds at its center, what it is willing to name as shared with the wider Christian community, and where it draws the lines that define it as distinct.</p>
+
+            <p>This study maps the correspondences and contrasts between the two documents, then addresses four different readers: the seeker who stands at the edges of faith; the person of any Christian tradition who wants to know what ground can honestly be shared; the non-Latter-day Saint who is trying to understand this tradition from the outside; and the Latter-day Saint who is trying to understand others well enough to speak to them with wisdom and without offense.</p>
+        </div>
+    </div>
+</section>
+
+
+{# ── WHAT THESE DOCUMENTS ARE ─────────────────────────────── #}
+<section class="content-section alt" id="documents">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">What these documents are</h2>
+
+        <div class="study-doc-cards">
+            <div class="study-doc-card">
+                <span class="study-doc-card-label aof">Articles of Faith &mdash; 1842</span>
+                <h4>A doctrinal declaration for a new movement</h4>
+                <p>Written by Joseph Smith in 1842 in response to a newspaper editor&rsquo;s inquiry, the Articles of Faith served to distinguish the Latter-day Saint movement from mischaracterization while establishing its identity as a Christian church. They answer the question: <em>What does this church teach?</em> They are institutional and doctrinal in purpose, addressed to outsiders who needed orientation, and specific enough to mark clear doctrinal boundaries. They remain authoritative scripture for The Church of Jesus Christ of Latter-day Saints.</p>
+            </div>
+            <div class="study-doc-card">
+                <span class="study-doc-card-label aoi">Articles of Interfaith Discipleship &mdash; 2026</span>
+                <h4>A confessional declaration for shared ground</h4>
+                <p>Written by Aaron Powner for Words of Plainness Ministry in 2026, the Articles of Interfaith Discipleship carry the subtitle <em>Christ-Centered Declarations of Shared Beliefs.</em> They answer a different question: <em>What do we hold in common with all who confess Jesus Christ?</em> They are relational and confessional in purpose, addressed to sincere believers across traditions and to seekers at any stage of faith. They do not replace Restoration-specific theology; they establish the ground that precedes it.</p>
+            </div>
+        </div>
+
+        <div class="study-intro">
+            <p>The difference in purpose is the key to understanding every comparison that follows. The Articles of Faith are a doctrinal map of a tradition; the Articles of Interfaith Discipleship are a confession of shared terrain. One draws the boundaries from the inside; the other identifies the center that all sincere Christ-followers share before the boundaries become the relevant question.</p>
+        </div>
+    </div>
+</section>
+
+
+{# ── CORRESPONDENCE MAP ─────────────────────────────────────── #}
+<section class="content-section" id="correspondence-map">
+    <div class="content-wrapper" style="max-width: 960px;">
+        <h2 class="study-section-heading">The correspondence map</h2>
+
+        <div class="study-intro">
+            <p>The table below maps each article of the AoI to its closest equivalent(s) in the AoF, identifies the correspondence type, and notes the most significant points of divergence. Articles without a counterpart in the other document are noted explicitly&mdash;those silences are as theologically significant as the correspondences.</p>
+        </div>
+
+        <div class="study-table-wrap">
+            <table class="study-table">
+                <thead>
+                    <tr>
+                        <th style="width:20%">AoI article</th>
+                        <th style="width:22%">AoF match</th>
+                        <th style="width:13%">Type</th>
+                        <th>Key observation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A1 &mdash; Of Plainness</td>
+                        <td><em>No parallel</em></td>
+                        <td><span class="study-badge study-badge-aoi-only">AoI only</span></td>
+                        <td>The AoF has no epistemological opening. The AoI&rsquo;s commitment to plainness and its frank confession of partial knowing (merognosticism) is the document&rsquo;s most structurally original move.</td>
+                    </tr>
+                    <tr>
+                        <td>A2 &mdash; Of God</td>
+                        <td>AoF 1 &mdash; The Godhead</td>
+                        <td><span class="study-badge study-badge-diverge">Diverge</span></td>
+                        <td>AoF 1 names three distinct personages explicitly&mdash;a specifically Latter-day Saint claim. AoI A2 uses language that Trinitarians and non-Trinitarians can each inhabit from within their own understanding. Same topic; different register.</td>
+                    </tr>
+                    <tr>
+                        <td>A3 &mdash; Of Creation and Life</td>
+                        <td>AoF 10 <em>(partial)</em></td>
+                        <td><span class="study-badge study-badge-expand">Expanded</span></td>
+                        <td>AoF 10 touches the earth&rsquo;s end and renewal. AoI A3 addresses creation and life at the origin&mdash;a foundation the AoF does not develop explicitly.</td>
+                    </tr>
+                    <tr>
+                        <td>A4 &mdash; Of God&rsquo;s Word</td>
+                        <td>AoF 8 &mdash; Bible and Book of Mormon</td>
+                        <td><span class="study-badge study-badge-diverge">Diverge</span></td>
+                        <td>AoF 8 names both volumes of Restoration canon explicitly. AoI A4 uses a broader framing of &ldquo;God&rsquo;s Word&rdquo; that invites readers from traditions with different views of canon.</td>
+                    </tr>
+                    <tr>
+                        <td>A5 &mdash; Of Jesus Christ</td>
+                        <td>AoF 1, 3 <em>(distributed)</em></td>
+                        <td><span class="study-badge study-badge-expand">Expanded</span></td>
+                        <td>No single AoF article centers the person and work of Jesus Christ. The AoI places a full Christological article at position 5 of 13&mdash;the structural heart of the document. This is the most theologically significant asymmetry in the comparison.</td>
+                    </tr>
+                    <tr>
+                        <td>A6 &mdash; Of Salvation</td>
+                        <td>AoF 2, 3 &mdash; Atonement and accountability</td>
+                        <td><span class="study-badge study-badge-diverge">Diverge</span></td>
+                        <td>AoF 3 pairs the Atonement with &ldquo;obedience to laws and ordinances.&rdquo; AoI A6 foregrounds grace as the primary frame of salvation, with covenantal specifics embedded rather than front-loaded. Different sequencing, not different theology.</td>
+                    </tr>
+                    <tr>
+                        <td>A7 &mdash; Of the Kingdom at Hand</td>
+                        <td>AoF 10 <em>(partial)</em></td>
+                        <td><span class="study-badge study-badge-diverge">Diverge</span></td>
+                        <td>AoF 10 is eschatologically specific: gathering of Israel, Zion on the American continent, personal millennial reign. AoI A7 holds the kingdom theme in language accessible to all Christian eschatological traditions.</td>
+                    </tr>
+                    <tr>
+                        <td>A8 &mdash; Of Fellow Believers</td>
+                        <td>AoF 11 <em>(adjacent)</em></td>
+                        <td><span class="study-badge study-badge-expand">Expanded</span></td>
+                        <td>AoF 11 is a liberty claim: we allow all to worship as they choose. AoI A8 is a theological confession: those who confess Christ across traditions are genuine fellow believers. The distance between tolerance and fellowship is the measure of this article.</td>
+                    </tr>
+                    <tr>
+                        <td>A9 &mdash; Of Finding Our Way</td>
+                        <td>AoF 4 <em>(adjacent)</em></td>
+                        <td><span class="study-badge study-badge-diverge">Diverge</span></td>
+                        <td>AoF 4 presents a completed sequential checklist: faith, repentance, baptism, Holy Ghost. AoI A9 presents a sustained posture&mdash;the ongoing journey of a life oriented toward Christ. One is creedal; the other is dispositional.</td>
+                    </tr>
+                    <tr>
+                        <td>A10 &mdash; Of Living by Grace</td>
+                        <td>AoF 3 <em>(partial)</em></td>
+                        <td><span class="study-badge study-badge-aoi-only">AoI only</span></td>
+                        <td>The AoF does not develop grace as the animating condition of daily discipleship. This is the AoI&rsquo;s most important theological contribution relative to the AoF framework.</td>
+                    </tr>
+                    <tr>
+                        <td>A11 &mdash; Of Covenants and Commitments</td>
+                        <td>AoF 4, 5, 6 <em>(partial)</em></td>
+                        <td><span class="study-badge study-badge-diverge">Diverge</span></td>
+                        <td>AoF 4&ndash;6 address covenantal ordinances with institutional specificity: authority, laying on of hands, apostles and prophets. AoI A11 frames covenant anthropologically first: &ldquo;We are children of God by birth. We become disciples of Christ by covenant.&rdquo;</td>
+                    </tr>
+                    <tr>
+                        <td>A12 &mdash; Of Immortality and Eternal Life</td>
+                        <td>AoF 10 <em>(partial)</em></td>
+                        <td><span class="study-badge study-badge-diverge">Diverge</span></td>
+                        <td>AoF 10 holds eschatology in a specifically Restoration frame. AoI A12 holds the resurrection and eternal inheritance in language recognizable across all Christian traditions.</td>
+                    </tr>
+                    <tr>
+                        <td>A13 &mdash; Of Our Confidence</td>
+                        <td>AoF 13 &mdash; Moral excellence</td>
+                        <td><span class="study-badge study-badge-diverge">Diverge</span></td>
+                        <td>AoF 13 closes on the disciples&rsquo; virtuous striving. AoI A13 closes on the One in whom the disciples&rsquo; confidence rests. The AoF ends on human aspiration; the AoI ends on divine faithfulness.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--cream); opacity: 0.6; font-weight: 400;"><em>No AoI counterpart</em></td>
+                        <td>AoF 5 &mdash; Priesthood authority</td>
+                        <td><span class="study-badge study-badge-aof-only">AoF only</span></td>
+                        <td>Deliberately outside the AoI&rsquo;s interfaith register. This belongs to Volume 2 of Words of Plainness.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--cream); opacity: 0.6; font-weight: 400;"><em>No AoI counterpart</em></td>
+                        <td>AoF 6 &mdash; Church organization</td>
+                        <td><span class="study-badge study-badge-aof-only">AoF only</span></td>
+                        <td>Apostles, prophets, pastors, teachers, evangelists&mdash;the institutional structure of the restored church. Likewise a Volume 2 claim.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--cream); opacity: 0.6; font-weight: 400;"><em>No AoI counterpart</em></td>
+                        <td>AoF 9 &mdash; Continuing revelation</td>
+                        <td><span class="study-badge study-badge-aof-only">AoF only</span></td>
+                        <td>The Restoration&rsquo;s distinctive claim that God continues to reveal through living prophets. Echoed in AoI A4 and A9 but never named directly.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--cream); opacity: 0.6; font-weight: 400;"><em>No AoI counterpart</em></td>
+                        <td>AoF 12 &mdash; Civil law</td>
+                        <td><span class="study-badge study-badge-aof-only">AoF only</span></td>
+                        <td>The duty to honor and sustain civil government. The AoI&rsquo;s frame is discipleship, not civic obligation.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+{# ── AUDIENCE 1: SEEKERS ─────────────────────────────────────── #}
+<section class="content-section alt" id="for-seekers">
+    <div class="content-wrapper">
+        <div class="study-audience-section seekers">
+            <span class="study-audience-tag seekers">Audience 1</span>
+            <h2 class="study-audience-title">For the seeker</h2>
+
+            <p>A seeker, in the fullest sense of the word, is someone who has not arrived. They may have never entered a church, or they may have left one. They may carry questions they have never voiced, or convictions they cannot yet name. What they share is motion&mdash;they are moving toward something, even if they cannot say what it is.</p>
+
+            <p>The Articles of Faith were not written for seekers. They were written in response to a newspaper editor&rsquo;s question about what Latter-day Saints believe&mdash;a doctrinal declaration meant to orient outsiders and distinguish a young movement from mischaracterization. They answer the question <em>What does this church teach?</em> with confidence and specificity. That is a different question from <em>Is there a God?</em> or <em>Is there somewhere I belong?</em></p>
+
+            <p>The Articles of Interfaith Discipleship begin much closer to the seeker&rsquo;s actual position. The very first article&mdash;&ldquo;Of Plainness&rdquo;&mdash;does not open with a confident doctrinal claim. It opens with a commitment to speaking plainly, and it names honestly that we &ldquo;know in part.&rdquo; This is the concept called <em>merognosticism</em>&mdash;drawn from Paul&rsquo;s confession in 1 Corinthians 13:9 that we see through a glass darkly. The point is not that faith is uncertain. The point is that certainty is not the entry requirement. A seeker who approaches this declaration does not encounter a locked gate. They find a community that has already acknowledged its own partial seeing&mdash;and invites the seeker to join them in the looking.</p>
+
+            <p>Article 10 of the AoI&mdash;&ldquo;Of Living by Grace&rdquo;&mdash;may be the most important article for a seeker to read. Many people who stand at the edges of faith carry a fear that spiritual life is a performance they are already failing. The AoI does not present grace as the threshold the sinner crosses before the real work of religion begins. Grace is the animating condition of the disciple&rsquo;s entire life&mdash;the oxygen in which all discipleship breathes. The Articles of Faith touch the Atonement (AoF 3) and connect it to obedience to laws and ordinances. That is true and important. But it is the AoI that spells out what grace <em>feels like</em> in a life, and why it is the starting place rather than the reward. For a seeker who has been told they are not good enough to come, this is news worth hearing.</p>
+
+            <p>Article 8 of the AoI&mdash;&ldquo;Of Fellow Believers&rdquo;&mdash;carries another word for the seeker. The Articles of Faith, in Article 11, make a generous statement about religious liberty: all people have the right to worship as they choose. AoI A8 goes further. It makes a theological confession: those who confess Jesus Christ across all traditions are genuine fellow believers, part of the same body. The seeker who has been told they must belong to a specific institution before they qualify as part of God&rsquo;s family will find in this article a different claim&mdash;one grounded in the person of Christ himself rather than in membership rolls. The community is larger than the seeker may have been led to believe.</p>
+
+            <p>The wise seeker will eventually need both documents. The AoI meets them where they are; the AoF shows them where the journey leads. Neither inflates false promises. Both are honest.</p>
+        </div>
+    </div>
+</section>
+
+
+{# ── AUDIENCE 2: INTERFAITH ──────────────────────────────────── #}
+<section class="content-section" id="for-interfaith">
+    <div class="content-wrapper">
+        <div class="study-audience-section interfaith">
+            <span class="study-audience-tag interfaith">Audience 2</span>
+            <h2 class="study-audience-title">For the interfaith reader</h2>
+
+            <p>The most consequential architectural decision in the Articles of Interfaith Discipleship, from the perspective of any reader who comes from a Christian tradition other than Latter-day Saint, is a decision about language. Both the AoF and the AoI use terms like &ldquo;God,&rdquo; &ldquo;Christ,&rdquo; &ldquo;scripture,&rdquo; &ldquo;salvation,&rdquo; and &ldquo;covenant.&rdquo; But they use them very differently.</p>
+
+            <div class="study-comparison-pull">
+                <div class="study-pull-item aof">
+                    <span class="study-pull-label">AoF &mdash; Article 1</span>
+                    &ldquo;We believe in God, the Eternal Father, and in His Son, Jesus Christ, and in the Holy Ghost.&rdquo;
+                </div>
+                <div class="study-pull-item aoi">
+                    <span class="study-pull-label">AoI &mdash; A2: Of God</span>
+                    Language chosen so both Trinitarian and non-Trinitarian readers can confess it from within their own theological understanding of the Godhead.
+                </div>
+            </div>
+
+            <p>The AoF defines its terms with institutional precision: three distinct personages (a specifically Latter-day Saint theological claim), the Bible and the Book of Mormon named as canon, and authority to preach the gospel specified as requiring priestly lineage. These are not mistakes or aggressions; they are honest confessions of what the tradition believes. But they do establish doctrinal fences that most other Christian traditions cannot step across without surrendering their own theological commitments.</p>
+
+            <p>The AoI uses what might be called a container-word strategy. Terms like &ldquo;God our Eternal Father,&rdquo; &ldquo;God&rsquo;s Word,&rdquo; and &ldquo;salvation by grace through Christ&rsquo;s atonement&rdquo; are biblical terms that each tradition fills with its own theological content. A Trinitarian Christian reading AoI A2 is not being asked to surrender their Trinitarian theology. A Protestant reading AoI A4 is not being asked to add the Book of Mormon to their canon. They are being invited to confess, within their own theological understanding, what they hold genuinely in common with Latter-day Saints who confess the same terms from within the Restoration framework.</p>
+
+            <p>This is not evasion&mdash;it is deliberate sequencing. The AoI does not pretend there are no differences between traditions. It establishes the ground those traditions share before those differences become the relevant question. There is a theological logic here that the interfaith reader should recognize: genuine dialogue requires a genuine foundation. You cannot talk meaningfully about your differences if you have not first identified what you hold in common.</p>
+
+            <p>The most significant interfaith move in the AoI is the centering of Christ in Article 5. The Articles of Faith distributes Christological content across multiple articles without dedicating one to the person and work of Jesus Christ. The AoI places its Christological confession at the center&mdash;Article 5 of 13&mdash;as the structural and theological heart of the entire declaration. The implicit claim is clear: it is Christ himself, not doctrine <em>about</em> Christ, who is the foundation of Christian fellowship. Any Christian who confesses Jesus Christ has something genuine to share with any other person who confesses Jesus Christ, regardless of institutional affiliation.</p>
+
+            <p>The interfaith reader should also notice the difference between AoF 11 and AoI A8. The AoF extends religious liberty: all people may worship as they choose&mdash;a generous civil and moral commitment. AoI A8 is not a liberty claim; it is a theological confession. It says, in effect: the people across the aisle in a different church building, confessing Jesus Christ in their own tradition&rsquo;s language, are our fellow believers. They are not mission targets; they are part of the same body we belong to. For an interfaith reader, this article names the community differently than mere tolerance does.</p>
+        </div>
+    </div>
+</section>
+
+
+{# ── AUDIENCE 3: NON-LDS LOOKING IN ─────────────────────────── #}
+<section class="content-section alt" id="for-non-lds">
+    <div class="content-wrapper">
+        <div class="study-audience-section non-lds">
+            <span class="study-audience-tag non-lds">Audience 3</span>
+            <h2 class="study-audience-title">For the non-LDS reader looking in</h2>
+
+            <p>For most non-Latter-day Saints who encounter the tradition seriously for the first time, the Articles of Faith is one of the first systematic documents they read. And several of its articles create immediate surprise or concern&mdash;not because they are dishonest, but because they are specific about claims that distinguish the tradition sharply from most other Christian frameworks.</p>
+
+            <p>Article 8 states that the Bible is the word of God &ldquo;as far as it is translated correctly&rdquo; and adds that the Book of Mormon is also the word of God. For a tradition that holds the Bible alone as authoritative scripture, this is not a minor point. Article 5 states that a man must be &ldquo;called of God, by prophecy, and by the laying on of hands by those who are in authority&rdquo; to preach validly&mdash;a claim about priesthood lineage that implicitly calls into question the authority of every minister in every tradition that does not hold this lineage. Article 10 presents a specifically Latter-day Saint eschatology that does not appear in mainstream Protestant or Catholic frameworks.</p>
+
+            <p>These distinctive claims are sincere. They are not embarrassed about, and they should not be minimized. But what the Articles of Faith does not make immediately visible&mdash;because it was not written to make it visible&mdash;is the substantial body of belief that Latter-day Saints share with all other Christian traditions. The AoF is a declaration of what makes the Restoration distinctive, not a declaration of what it shares with the rest of Christianity.</p>
+
+            <p>The Articles of Interfaith Discipleship provides exactly this missing window. Reading A1 through A13, a non-LDS reader discovers that Latter-day Saint Christians confess one God and Father, the central and saving work of Jesus Christ, the authority of scripture, salvation by grace through the Atonement, covenant life, the resurrection, and the eternal hope. These are not hedged confessions&mdash;they are the sincere bedrock of the tradition. A non-LDS reader who encounters the AoI first will understand that the Latter-day Saint tradition is not a foreign religious movement that has appropriated Christian language; it is a genuinely Christ-centered tradition that also holds additional convictions about authority, canon, and ordinances.</p>
+
+            <p>Perhaps the most useful thing the comparison can offer a non-LDS reader is a clear picture of the architecture. Imagine two concentric circles. The inner circle is the shared confession of all who name Jesus Christ as Lord and Savior&mdash;the ground the AoI maps. The outer circle contains everything distinctive about the Restoration: the Book of Mormon, priesthood authority, temple ordinances, continuing revelation, the specific eschatology of AoF 10. The AoI says: the inner circle is real, substantial, and genuinely shared. The AoF says: here is everything in the outer circle, named honestly, because it is also real and genuinely held. A non-LDS reader who understands both circles is better positioned to engage the tradition honestly than one who knows only the distinctive outer claims or only the shared inner confession.</p>
+
+            <p>One specific contrast is worth noticing in how the two documents end. The Articles of Faith closes on the disciples&rsquo; virtuous striving: &ldquo;We believe in being honest, true, chaste, benevolent, virtuous&hellip;&rdquo; The AoI closes on the faithfulness of Christ. For a non-LDS reader who has sometimes experienced Latter-day Saint religion as performance-oriented, the AoI&rsquo;s closing note is worth sitting with. Both documents are authentic expressions of the tradition. The AoI simply holds the grace thread more visibly to the end.</p>
+        </div>
+    </div>
+</section>
+
+
+{# ── AUDIENCE 4: LDS LOOKING OUT ─────────────────────────────── #}
+<section class="content-section" id="for-lds">
+    <div class="content-wrapper">
+        <div class="study-audience-section lds">
+            <span class="study-audience-tag lds">Audience 4</span>
+            <h2 class="study-audience-title">For the Latter-day Saint looking out</h2>
+
+            <p>Latter-day Saints who engage seriously with Christians from other traditions face two opposite errors. The first is assuming that all sincere Christians share the same theological frameworks&mdash;that Protestant beliefs about grace, scripture, and ordinances are roughly equivalent to Latter-day Saint beliefs, just named differently. The second error is assuming the differences are so profound that genuine fellowship is impossible, making every interaction with a non-LDS Christian either a potential conversion moment or a theological standoff. Both errors produce miscommunication, sometimes offense, and occasionally estrangement from people who are genuine disciples of Jesus Christ.</p>
+
+            <p>The correspondence map above provides a precise tool for locating the actual boundaries. Articles 1 through 3 of the AoF&mdash;the Godhead, personal accountability, and the Atonement&mdash;map to shared territory in the AoI at A2 (Of God), A5 (Of Jesus Christ), and A6 (Of Salvation). A Latter-day Saint in conversation with a sincere evangelical, Catholic, or mainline Protestant about the grace of Christ, the reality of God, and the hope of salvation is talking about something real and shared. This is not polite fiction. The shared ground is substantive.</p>
+
+            <p>Articles 5, 6, and 8 of the AoF&mdash;priesthood authority, church organization, and the Restoration canon&mdash;have no counterpart in the AoI. This is the most practically important fact for a Latter-day Saint to hold clearly. These distinctive claims are genuinely not shared with other Christian traditions. The most frequent communication mistake Latter-day Saints make in interfaith settings is proceeding as though these claims are shared, or as though other Christians are simply unaware of them. A sincere Baptist who believes deeply in the grace of Christ, the authority of scripture, and the reality of the Holy Spirit does not need to be corrected about these matters. They are standing on genuine ground. The distinctive Restoration claims can be offered as invitation and testimony without being introduced as the correction of the other person&rsquo;s deficiency.</p>
+
+            <p>The distinction between AoF 11 and AoI A8 is particularly useful to internalize. AoF 11 commits to religious liberty: we will not interfere with your worship. This is generous, but it is fundamentally a posture of tolerance. AoI A8 takes a theologically different position: we <em>recognize</em> the faith of those who confess Christ across other traditions. They are fellow believers, not strangers whose worship we tolerate. A Latter-day Saint who carries the AoF 11 posture into interfaith conversation tends to treat non-LDS Christians with a kind of benevolent condescension. A Latter-day Saint who carries the AoI A8 posture leads with recognition: &ldquo;You are a disciple of Jesus Christ. So am I. We hold something real together.&rdquo; The second posture opens dialogue; the first closes it before it begins.</p>
+
+            <p>The AoI&rsquo;s closing article (A13: Of Our Confidence) also offers Latter-day Saints a corrective worth receiving. The AoF closes on the disciples&rsquo; aspiration and virtuous striving. The AoI closes on the faithfulness of Christ. Both are true. But Latter-day Saints are sometimes perceived&mdash;and sometimes actually operate&mdash;as if confidence before God is earned through worthiness, achievement, and institutional faithfulness rather than grounded in the finished and ongoing work of Christ. The Latter-day Saint who leads with confidence in Christ rather than confidence in personal performance speaks a language that all Christ-centered believers can understand. It is, in fact, the language of the Restoration at its most powerful.</p>
+
+            <p>To summarize the practical guidance this comparison offers: know the inner circle and the outer circle. Lead with the inner circle&mdash;the shared confession of Christ, scripture, grace, covenant, and resurrection. Name the outer circle honestly when asked, as testimony and invitation, not as correction. Recognize fellow believers as fellow believers before anything else. And close on Christ, not on the catalogue of virtues or the list of institutional requirements. This is not a diluted Latter-day Saint witness. It is the witness at its deepest level.</p>
+        </div>
+    </div>
+</section>
+
+
+{# ── SYNTHESIS ─────────────────────────────────────────────────── #}
+<section class="content-section alt" id="synthesis">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">Synthesis: what the mapping reveals</h2>
+
+        <div class="study-intro">
+            <p>Standing back from the article-by-article comparison, five structural findings emerge. Each reveals something about the architecture of Christian confession that neither document makes visible on its own.</p>
+        </div>
+
+        <div class="study-synthesis-item">
+            <span class="study-synthesis-num">Finding one</span>
+            <h3>The centering difference</h3>
+            <p>The AoF is organized around <em>what the Church believes</em>&mdash;an institutional confessional declaration. The AoI is organized around <em>what the disciple holds in common with all who confess Christ</em>&mdash;a relational confessional declaration. The AoF points inward, defining the tradition&rsquo;s doctrinal identity. The AoI points outward, identifying the center that all sincere Christ-followers share. These are complementary functions that a complete ministry must be able to perform. Volume 1 of Words of Plainness performs the outward function; Volume 2 performs the inward function.</p>
+        </div>
+
+        <div class="study-synthesis-item">
+            <span class="study-synthesis-num">Finding two</span>
+            <h3>The Christological asymmetry</h3>
+            <p>The AoI dedicates Article 5 entirely to the person and work of Jesus Christ, placing it at the center of the document. The AoF distributes Christological content across multiple articles without centering it in any single one. The AoF is, in this sense, <em>church-centric</em> in its architecture; the AoI is explicitly <em>Christ-centric.</em> This is not a deficiency of the AoF&mdash;it serves a different purpose. But the asymmetry reveals the fundamental difference in what each document is trying to do: the AoI builds from the person of Christ outward; the AoF builds from the institutional claims of the Restoration inward. The ministry that leads with Christ before leading with institution will find more doors open than it closes.</p>
+        </div>
+
+        <div class="study-synthesis-item">
+            <span class="study-synthesis-num">Finding three</span>
+            <h3>The grace gap</h3>
+            <p>AoI Article 10&mdash;&ldquo;Of Living by Grace&rdquo;&mdash;has no substantive counterpart in the AoF. The AoF addresses the Atonement as the mechanism of salvation (AoF 3) but does not develop grace as the animating condition of daily discipleship. The Latter-day Saint tradition has a rich theology of grace; it simply does not appear at the confessional level of the Articles of Faith. The AoI&rsquo;s development of grace as a sustained life-orientation&mdash;the oxygen in which all discipleship breathes&mdash;is its most distinctive theological contribution relative to the AoF framework, and the one most likely to reshape how both Latter-day Saints and seekers understand what the gospel of Jesus Christ actually offers.</p>
+        </div>
+
+        <div class="study-synthesis-item">
+            <span class="study-synthesis-num">Finding four</span>
+            <h3>The Restoration brackets</h3>
+            <p>The AoF&rsquo;s most specifically Restoration content&mdash;priesthood authority (5), church organization (6), the Restoration canon (8), continuing revelation (9), and specifically Latter-day Saint eschatology (10)&mdash;is almost entirely absent from the AoI. This is intentional architecture, not accidental omission. The AoI establishes shared ground first; the Restoration distinctives await Volume 2. A reader who understands this sequencing will not misread the AoI&rsquo;s silence on these matters as a denial of them. The AoI is not apologetic about the Restoration. It is strategic about when to introduce it.</p>
+        </div>
+
+        <div class="study-synthesis-item">
+            <span class="study-synthesis-num">Finding five</span>
+            <h3>What the AoI adds that the AoF never anticipated</h3>
+            <p>Two articles in the AoI have no counterpart anywhere in the AoF: Article 1 (Of Plainness) and Article 8 (Of Fellow Believers). The AoF was written by a movement establishing its doctrinal identity&mdash;it had no occasion to confess epistemic limitation or to name non-LDS Christians as genuine fellow believers. The AoI was written by a ministry reaching across traditions&mdash;and the two moves that make that reach possible are precisely these: acknowledging that we &ldquo;know in part,&rdquo; and confessing that those who confess Christ across other traditions are genuine members of his body. These two articles represent the most original theological contribution of the AoI relative to its Restoration heritage. They are extensions of that heritage into relational and missiological territory the AoF was never designed to occupy.</p>
+        </div>
+    </div>
+</section>
+
+
+</div>{# /data-pagefind-body #}
+
+
+{# ── AoI RETURN LINK ──────────────────────────────────────────── #}
+<div class="study-aoi-return">
+    <a href="/articles/">Read the Articles of Interfaith Discipleship &rarr;</a>
+    <p>Christ-Centered Declarations of Shared Beliefs</p>
+</div>
+
+<p class="study-footer-note">
+    Words of Plainness &middot; Aaron Powner Publishing &middot; 2026
+</p>
