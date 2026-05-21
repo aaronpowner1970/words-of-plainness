@@ -316,6 +316,20 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('fontReset')?.addEventListener('click',    () => window.WopFontSize?.reset());
     document.getElementById('fontIncrease')?.addEventListener('click', () => window.WopFontSize?.increase());
 
+    // RJW reflection persistence
+    document.querySelectorAll('.rjw-textarea').forEach(function(ta) {
+        var key = ta.dataset.rjwKey;
+        if (!key) return;
+        try { ta.value = localStorage.getItem('wop-' + key) || ''; } catch(e) {}
+        var timer;
+        ta.addEventListener('input', function() {
+            clearTimeout(timer);
+            timer = setTimeout(function() {
+                try { localStorage.setItem('wop-' + key, ta.value); } catch(e) {}
+            }, 400);
+        });
+    });
+
     const fab = document.getElementById('floatingActionBar');
     if (fab) {
         let lastScroll = 0;
