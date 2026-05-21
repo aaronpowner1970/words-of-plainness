@@ -588,6 +588,265 @@
 }
 
 
+/* ══════════════════════════════════════════════════════════════
+   ARTICLES NAVIGATION DRAWER  (an-)
+   Fixed-left slide-in panel: tab trigger → 13-article nav list
+   Fixed position: does not scroll with page content.
+   Z-index: 1100 (below ap-backdrop 1199 / ap-panel 1200)
+   Width: 260px
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Tab trigger ─────────────────────────────────────────────── */
+
+.an-tab {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1101;
+
+    background: rgba(31, 16, 18, 0.92);
+    border: 1px solid rgba(196, 148, 58, 0.25);
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+
+    padding: 1.2rem 0.48rem;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+
+    /* Left position transitions with drawer */
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.18s, border-color 0.18s;
+
+    outline: none;
+    user-select: none;
+}
+
+.an-tab:hover {
+    background: rgba(196, 148, 58, 0.1);
+    border-color: rgba(196, 148, 58, 0.48);
+}
+
+.an-tab:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+
+/* When drawer is open, tab slides to right edge of drawer */
+.an-tab.an-is-open {
+    left: 260px;
+}
+
+.an-tab-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg); /* bottom-to-top reading direction */
+
+    color: rgba(196, 148, 58, 0.72);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    transition: color 0.18s;
+}
+
+.an-tab:hover .an-tab-label,
+.an-tab.an-is-open .an-tab-label {
+    color: var(--gold-primary, #C4943A);
+}
+
+.an-tab-chevron {
+    color: rgba(196, 148, 58, 0.5);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.18s;
+    flex-shrink: 0;
+    display: block;
+}
+
+.an-tab:hover .an-tab-chevron {
+    color: rgba(196, 148, 58, 0.8);
+}
+
+.an-tab.an-is-open .an-tab-chevron {
+    transform: rotate(180deg);
+    color: var(--gold-primary, #C4943A);
+}
+
+
+/* ── Drawer panel ────────────────────────────────────────────── */
+
+.an-drawer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 260px;
+    z-index: 1100;
+
+    background: var(--brown-rich, #1F1012);
+    border-right: 1px solid rgba(196, 148, 58, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    pointer-events: none;
+
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
+    box-shadow: none;
+}
+
+.an-drawer.an-open {
+    transform: translateX(0);
+    box-shadow: 6px 0 28px rgba(0, 0, 0, 0.6),
+                1px 0 0 rgba(196, 148, 58, 0.06);
+    pointer-events: auto;
+}
+
+
+/* ── Drawer header ───────────────────────────────────────────── */
+
+.an-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+    flex-shrink: 0;
+    background: rgba(26, 21, 16, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.an-drawer-title {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-primary, #C4943A);
+}
+
+.an-drawer-close {
+    background: none;
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--cream-dark, #D4C8B0);
+    padding: 0.28rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    line-height: 1;
+}
+
+.an-drawer-close:hover {
+    border-color: var(--gold-primary, #C4943A);
+    color: var(--gold-primary, #C4943A);
+    background: rgba(196, 148, 58, 0.07);
+}
+
+.an-drawer-close:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+
+
+/* ── Nav list ────────────────────────────────────────────────── */
+
+.an-drawer-nav {
+    overflow-y: auto;
+    flex: 1;
+    padding: 0.5rem 0 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(196, 148, 58, 0.2) transparent;
+}
+
+.an-drawer-nav::-webkit-scrollbar { width: 4px; }
+.an-drawer-nav::-webkit-scrollbar-track { background: transparent; }
+.an-drawer-nav::-webkit-scrollbar-thumb {
+    background: rgba(196, 148, 58, 0.2);
+    border-radius: 2px;
+}
+
+.an-drawer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.an-link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    padding: 0.58rem 1rem;
+    color: var(--cream, #E8DCC4);
+    text-decoration: none;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 0.88rem;
+    line-height: 1.4;
+    opacity: 0.7;
+    border-left: 2px solid transparent;
+    transition: background 0.15s, opacity 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.an-link:hover {
+    background: rgba(196, 148, 58, 0.07);
+    opacity: 1;
+    color: var(--cream-soft, #F5EFE4);
+    border-left-color: rgba(196, 148, 58, 0.32);
+}
+
+.an-link.an-active {
+    opacity: 1;
+    color: var(--gold-primary, #C4943A);
+    border-left-color: var(--gold-primary, #C4943A);
+    background: rgba(196, 148, 58, 0.08);
+}
+
+.an-num {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.63rem;
+    font-weight: 700;
+    color: var(--gold-primary, #C4943A);
+    opacity: 0.5;
+    min-width: 1.4rem;
+    text-align: right;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+}
+
+.an-link:hover .an-num,
+.an-link.an-active .an-num {
+    opacity: 1;
+}
+
+
+/* ── Scroll offset for fixed header ──────────────────────────── */
+
+.article-section {
+    scroll-margin-top: 100px;
+}
+
+
+/* ── Reduced motion (nav drawer) ─────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    .an-tab,
+    .an-drawer {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
 /* ── Per-Article Read Aloud Button ───────────────────────────── */
 
 .article-read-aloud-btn {

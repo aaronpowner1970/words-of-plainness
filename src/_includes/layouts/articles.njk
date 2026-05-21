@@ -188,6 +188,54 @@
 {% include "components/fab-lantern.njk" %}
 </div>
 
+<!-- Articles Navigation Drawer -->
+<button class="an-tab" id="anTab"
+        aria-label="Open articles navigation"
+        aria-expanded="false"
+        aria-controls="anDrawer"
+        type="button">
+    <span class="an-tab-label">13 Articles</span>
+    <svg class="an-tab-chevron" viewBox="0 0 24 24" width="11" height="11"
+         fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</button>
+
+<aside class="an-drawer" id="anDrawer"
+       role="navigation"
+       aria-label="Articles navigation"
+       aria-hidden="true">
+    <div class="an-drawer-header">
+        <span class="an-drawer-title">Thirteen Articles</span>
+        <button class="an-drawer-close" id="anClose"
+                aria-label="Close navigation" type="button">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
+    <nav class="an-drawer-nav" aria-label="Jump to article">
+        <ol class="an-drawer-list">
+            <li><a href="#of-plainness"              class="an-link"><span class="an-num">1</span>Of Plainness</a></li>
+            <li><a href="#of-god"                    class="an-link"><span class="an-num">2</span>Of God</a></li>
+            <li><a href="#of-creation-and-life"      class="an-link"><span class="an-num">3</span>Of Creation and Life</a></li>
+            <li><a href="#of-gods-word"              class="an-link"><span class="an-num">4</span>Of God’s Word</a></li>
+            <li><a href="#of-jesus-christ"           class="an-link"><span class="an-num">5</span>Of Jesus Christ</a></li>
+            <li><a href="#of-salvation"              class="an-link"><span class="an-num">6</span>Of Salvation</a></li>
+            <li><a href="#of-the-kingdom-at-hand"    class="an-link"><span class="an-num">7</span>Of the Kingdom at Hand</a></li>
+            <li><a href="#of-fellow-believers"       class="an-link"><span class="an-num">8</span>Of Fellow Believers</a></li>
+            <li><a href="#of-finding-our-way"        class="an-link"><span class="an-num">9</span>Of Finding Our Way</a></li>
+            <li><a href="#of-living-by-grace"        class="an-link"><span class="an-num">10</span>Of Living by Grace</a></li>
+            <li><a href="#of-covenants-and-commitments"    class="an-link"><span class="an-num">11</span>Of Covenants and Commitments</a></li>
+            <li><a href="#of-immortality-and-eternal-life" class="an-link"><span class="an-num">12</span>Of Immortality and Eternal Life</a></li>
+            <li><a href="#of-our-confidence"         class="an-link"><span class="an-num">13</span>Of Our Confidence</a></li>
+        </ol>
+    </nav>
+</aside>
+
 <!-- Annotation Panel -->
 <div class="ap-backdrop" id="apBackdrop" aria-hidden="true"></div>
 <aside class="ap-panel" id="apPanel" role="complementary" aria-label="Span annotation" aria-hidden="true">
@@ -339,6 +387,93 @@ document.addEventListener('DOMContentLoaded', function() {
             lastScroll = current;
         }, { passive: true });
     }
+
+    // ── Articles Navigation Drawer ──────────────────────────────────
+    (function () {
+        var anTab    = document.getElementById('anTab');
+        var anDrawer = document.getElementById('anDrawer');
+        var anClose  = document.getElementById('anClose');
+        if (!anTab || !anDrawer) return;
+
+        var drawerOpen = false;
+
+        function openDrawer() {
+            drawerOpen = true;
+            anDrawer.classList.add('an-open');
+            anDrawer.setAttribute('aria-hidden', 'false');
+            anTab.classList.add('an-is-open');
+            anTab.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeDrawer() {
+            drawerOpen = false;
+            anDrawer.classList.remove('an-open');
+            anDrawer.setAttribute('aria-hidden', 'true');
+            anTab.classList.remove('an-is-open');
+            anTab.setAttribute('aria-expanded', 'false');
+        }
+
+        // Tab toggles drawer
+        anTab.addEventListener('click', function (e) {
+            e.stopPropagation();
+            drawerOpen ? closeDrawer() : openDrawer();
+        });
+
+        // Close button
+        if (anClose) {
+            anClose.addEventListener('click', function (e) {
+                e.stopPropagation();
+                closeDrawer();
+            });
+        }
+
+        // Click outside closes drawer
+        document.addEventListener('click', function (e) {
+            if (!drawerOpen) return;
+            if (anDrawer.contains(e.target)) return;
+            if (anTab.contains(e.target)) return;
+            closeDrawer();
+        });
+
+        // Escape key
+        document.addEventListener('keydown', function (e) {
+            if ((e.key === 'Escape' || e.key === 'Esc') && drawerOpen) {
+                closeDrawer();
+                anTab.focus();
+            }
+        });
+
+        // Smooth scroll on nav link click
+        anDrawer.querySelectorAll('.an-link').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var targetId = link.getAttribute('href').slice(1);
+                var targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                closeDrawer();
+            });
+        });
+
+        // IntersectionObserver: highlight active article in the drawer list
+        var sections = document.querySelectorAll('.article-section');
+        var navLinks = anDrawer.querySelectorAll('.an-link');
+
+        if (sections.length && 'IntersectionObserver' in window) {
+            var anObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    var id = entry.target.id;
+                    navLinks.forEach(function (l) {
+                        l.classList.toggle('an-active', l.getAttribute('href') === '#' + id);
+                    });
+                });
+            }, { rootMargin: '-15% 0px -65% 0px', threshold: 0 });
+
+            sections.forEach(function (s) { anObserver.observe(s); });
+        }
+    })();
 });
 </script>
 {% endblock %}
