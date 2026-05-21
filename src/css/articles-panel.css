@@ -586,3 +586,70 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+
+/* ── Per-Article Read Aloud Button ───────────────────────────── */
+
+.article-read-aloud-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    padding: 0.28rem 0.75rem;
+    background: rgba(196, 148, 58, 0.06);
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: 20px;
+    color: rgba(196, 148, 58, 0.7);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease,
+                box-shadow 0.18s ease;
+    margin-bottom: 0.9rem;
+    line-height: 1;
+}
+
+.article-read-aloud-btn svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.18s ease;
+}
+
+.article-read-aloud-btn:hover {
+    background: rgba(196, 148, 58, 0.13);
+    border-color: rgba(196, 148, 58, 0.42);
+    color: var(--gold-primary, #C4943A);
+}
+
+.article-read-aloud-btn:hover svg {
+    opacity: 1;
+}
+
+.article-read-aloud-btn:active {
+    transform: scale(0.97);
+}
+
+.article-read-aloud-btn.active {
+    background: rgba(196, 148, 58, 0.13);
+    border-color: var(--gold-primary, #C4943A);
+    color: var(--gold-primary, #C4943A);
+    animation: articleBtnPulse 2.8s ease-in-out infinite;
+}
+
+.article-read-aloud-btn.active svg {
+    opacity: 1;
+}
+
+@keyframes articleBtnPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(196, 148, 58, 0.18); }
+    50%       { box-shadow: 0 0 0 5px rgba(196, 148, 58, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .article-read-aloud-btn {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+    }
+}
