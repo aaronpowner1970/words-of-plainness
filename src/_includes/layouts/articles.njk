@@ -226,6 +226,16 @@
             <li><a href="#of-immortality-and-eternal-life" class="an-link"><span class="an-num">12</span>Of Immortality and Eternal Life</a></li>
             <li><a href="#of-our-confidence"         class="an-link"><span class="an-num">13</span>Of Our Confidence</a></li>
         </ol>
+
+        <div class="an-companions">
+            <p class="an-companions-heading">Companion Essays</p>
+            <ul class="an-drawer-list an-companions-list">
+                <li><a href="https://www.wordsofplainness.org/studies/merognosticism/" class="an-link an-companion-link" target="_blank" rel="noopener"><span class="an-num">†</span>Merognosticism</a></li>
+                <li><a href="https://www.wordsofplainness.org/studies/broken-vessels/" class="an-link an-companion-link" target="_blank" rel="noopener"><span class="an-num">†</span>Broken Vessels</a></li>
+                <li><a href="https://www.wordsofplainness.org/studies/contention-and-the-reach-of-christ/" class="an-link an-companion-link" target="_blank" rel="noopener"><span class="an-num">†</span>Contention &amp; the Reach of Christ</a></li>
+                <li><a href="https://www.wordsofplainness.org/studies/lord-is-it-i/" class="an-link an-companion-link" target="_blank" rel="noopener"><span class="an-num">†</span>Lord, Is It I?</a></li>
+            </ul>
+        </div>
     </nav>
 </aside>
 
@@ -439,8 +449,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Smooth scroll on nav link click
         anDrawer.querySelectorAll('.an-link').forEach(function (link) {
             link.addEventListener('click', function (e) {
+                var href = link.getAttribute('href');
+                if (href.charAt(0) !== '#') { return; }   // external companion links open normally
                 e.preventDefault();
-                var targetId = link.getAttribute('href').slice(1);
+                var targetId = href.slice(1);
                 var targetEl = document.getElementById(targetId);
                 if (targetEl) {
                     targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
