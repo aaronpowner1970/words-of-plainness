@@ -134,6 +134,56 @@ description: "Christ-Centered Discipleship — 37 chapters from finding faith th
     transform: rotate(180deg);
 }
 
+/* ── MOVEMENT THEMING (per-tier tag colors) ─────────────────────
+   Each of the three movement panels carries the color identity of a
+   card-chapter commitment-tier tag. The RGB values are taken verbatim
+   from src/css/card-chapter.css (.tag-explore / .tag-seeker / .tag-covenant).
+   The Conclusion panel (#acc-hinge) is intentionally not themed. */
+.movement-section--explore  { --mv-tag-r: 107; --mv-tag-g:  61; --mv-tag-b:  61; }
+.movement-section--seeker   { --mv-tag-r:  74; --mv-tag-g: 107; --mv-tag-b: 107; }
+.movement-section--covenant { --mv-tag-r: 196; --mv-tag-g: 148; --mv-tag-b:  58; }
+
+/* Single tint knob — increase for a more vivid look */
+.movement-section--explore,
+.movement-section--seeker,
+.movement-section--covenant { --mv-tint: 0.15; }
+
+.movement-section--explore,
+.movement-section--seeker,
+.movement-section--covenant {
+    background:
+        linear-gradient(
+            rgba(var(--mv-tag-r), var(--mv-tag-g), var(--mv-tag-b), var(--mv-tint)),
+            rgba(var(--mv-tag-r), var(--mv-tag-g), var(--mv-tag-b), var(--mv-tint))
+        ),
+        var(--overlay-medium);
+    border-color: rgba(var(--mv-tag-r), var(--mv-tag-g), var(--mv-tag-b), 0.25);
+}
+
+.movement-section--explore.is-open,
+.movement-section--seeker.is-open,
+.movement-section--covenant.is-open {
+    border-color: rgba(var(--mv-tag-r), var(--mv-tag-g), var(--mv-tag-b), 0.5);
+}
+
+.movement-section--explore  .movement-header,
+.movement-section--seeker   .movement-header,
+.movement-section--covenant .movement-header {
+    border-left-color: rgb(var(--mv-tag-r), var(--mv-tag-g), var(--mv-tag-b));
+}
+
+.movement-section--explore  .movement-header-label,
+.movement-section--seeker   .movement-header-label,
+.movement-section--covenant .movement-header-label {
+    color: rgb(var(--mv-tag-r), var(--mv-tag-g), var(--mv-tag-b));
+}
+
+.movement-section--explore  .movement-header:hover,
+.movement-section--seeker   .movement-header:hover,
+.movement-section--covenant .movement-header:hover {
+    background: rgba(var(--mv-tag-r), var(--mv-tag-g), var(--mv-tag-b), 0.08);
+}
+
 /* ── ACCORDION BODY ────────────────────────── */
 .movement-body {
     display: none;
@@ -340,7 +390,7 @@ a.chapter-item:hover {
         <div class="movement-accordion" id="movementAccordion">
 
             <!-- Movement 1 -->
-            <div class="movement-section is-open" id="acc-m1">
+            <div class="movement-section movement-section--explore is-open" id="acc-m1">
                 <button class="movement-header" aria-expanded="true" aria-controls="body-m1" data-acc-id="m1">
                     <div class="movement-header-left">
                         <span class="movement-header-label">Movement 1</span>
@@ -439,7 +489,7 @@ a.chapter-item:hover {
             </div>
 
             <!-- Movement 2 -->
-            <div class="movement-section" id="acc-m2">
+            <div class="movement-section movement-section--seeker" id="acc-m2">
                 <button class="movement-header" aria-expanded="false" aria-controls="body-m2" data-acc-id="m2">
                     <div class="movement-header-left">
                         <span class="movement-header-label">Movement 2</span>
@@ -523,7 +573,7 @@ a.chapter-item:hover {
             </div>
 
             <!-- Movement 3 -->
-            <div class="movement-section" id="acc-m3">
+            <div class="movement-section movement-section--covenant" id="acc-m3">
                 <button class="movement-header" aria-expanded="false" aria-controls="body-m3" data-acc-id="m3">
                     <div class="movement-header-left">
                         <span class="movement-header-label">Movement 3</span>
