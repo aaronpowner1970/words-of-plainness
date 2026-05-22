@@ -837,6 +837,25 @@
    of breathing room so the article title appears just below the header. */
 .article-section {
     scroll-margin-top: 130px;
+
+    /* Each article is a self-contained "packet": thin gold border,
+       padding, and clear separation from its neighbors. The inter-article
+       divider lines are removed (see .articles-divider rule below). */
+    border: 1px solid rgba(196, 148, 58, 0.4);
+    border-radius: 10px;
+    padding: 1.5rem clamp(1.25rem, 4vw, 2.25rem) 1.75rem;
+    margin: 0 0 2.5rem;
+}
+
+.article-section:first-of-type {
+    margin-top: 1rem;
+}
+
+/* Remove the thin gold rule between article packets — spacing is now
+   carried by each packet's margin. The closing divider before the
+   John 17 prayer is preserved. */
+.articles-divider:not(.articles-divider-closing) {
+    display: none;
 }
 
 
