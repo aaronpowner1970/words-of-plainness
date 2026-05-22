@@ -961,3 +961,57 @@
     border-color: rgba(196, 148, 58, 0.32);
     background: rgba(196, 148, 58, 0.07);
 }
+
+
+/* ── Companion Essay Footnote (gold callout box) ─────────────── */
+
+.article-footnote {
+    margin-top: 1.5rem;
+    padding: 0.7rem 1rem;
+    background: rgba(196, 148, 58, 0.05);
+    border: 1px solid rgba(196, 148, 58, 0.45);
+    border-radius: 8px;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--cream-dark, #D4C8B0);
+    transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.article-footnote:hover {
+    border-color: var(--gold-primary, #C4943A);
+    background: rgba(196, 148, 58, 0.08);
+}
+
+.article-footnote .article-companion-link {
+    color: var(--gold-primary, #C4943A);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.4);
+    transition: border-color 0.15s ease;
+}
+
+.article-footnote .article-companion-link:hover {
+    border-bottom-color: var(--gold-primary, #C4943A);
+}
+
+
+/* ── Numbered Article Headings (match nav drawer) ────────────── */
+
+.chapter-content {
+    counter-reset: article-counter;
+}
+
+.article-title {
+    counter-increment: article-counter;
+}
+
+.article-title::before {
+    content: counter(article-counter);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.5em;
+    font-weight: 700;
+    color: var(--gold-primary, #C4943A);
+    opacity: 0.6;
+    margin-right: 0.6rem;
+    vertical-align: 0.35em;
+}
