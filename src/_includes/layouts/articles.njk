@@ -386,15 +386,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnLT = document.getElementById('btnLearningTools');
     const ddTop = document.getElementById('featuresDropdown');
     if (btnLT && ddTop) {
-        btnLT.addEventListener('click', function(e) { e.stopPropagation(); ddTop.classList.toggle('visible'); });
-        document.addEventListener('click', function() { ddTop.classList.remove('visible'); });
+        btnLT.addEventListener('click', function(e) { e.stopPropagation(); ddTop.classList.toggle('open'); });
+        document.addEventListener('click', function() { ddTop.classList.remove('open'); });
     }
 
     const btnLTB = document.getElementById('btnLearningToolsBottom');
     const ddBot = document.getElementById('bottomFeaturesDropdown');
     if (btnLTB && ddBot) {
-        btnLTB.addEventListener('click', function(e) { e.stopPropagation(); ddBot.classList.toggle('visible'); });
-        document.addEventListener('click', function() { ddBot.classList.remove('visible'); });
+        btnLTB.addEventListener('click', function(e) { e.stopPropagation(); ddBot.classList.toggle('open'); });
+        document.addEventListener('click', function() { ddBot.classList.remove('open'); });
     }
 
     // ── Musical Testimony modal (One Voice, One Mind) ──
@@ -409,8 +409,8 @@ document.addEventListener('DOMContentLoaded', function() {
             mtBackdrop.classList.add('open');
             mtModal.setAttribute('aria-hidden', 'false');
             mtBackdrop.setAttribute('aria-hidden', 'false');
-            document.getElementById('featuresDropdown')?.classList.remove('visible');
-            document.getElementById('bottomFeaturesDropdown')?.classList.remove('visible');
+            document.getElementById('featuresDropdown')?.classList.remove('open');
+            document.getElementById('bottomFeaturesDropdown')?.classList.remove('open');
         }
         function closeMt() {
             mtModal.classList.remove('open');
