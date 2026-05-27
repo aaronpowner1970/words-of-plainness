@@ -851,6 +851,23 @@
     margin-top: 1rem;
 }
 
+/* ── Alternating packet fills ────────────────────────────────
+   Pure visual rhythm: every other article carries a subtly
+   different warm-dark tint so boundaries are obvious when
+   scrolling. No thematic grouping is implied. Same gold border
+   on every packet. Palette draws from /volume-1/'s
+   .content-section / .content-section.alt pair, softened so
+   the page background breathes through.
+   ─────────────────────────────────────────────────────────── */
+
+.article-section:nth-of-type(odd) {
+    background: rgba(45, 26, 28, 0.55);
+}
+
+.article-section:nth-of-type(even) {
+    background: rgba(31, 16, 18, 0.65);
+}
+
 /* Remove the thin gold rule between article packets — spacing is now
    carried by each packet's margin. The closing divider before the
    John 17 prayer is preserved. */
