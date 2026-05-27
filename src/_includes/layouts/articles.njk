@@ -56,10 +56,10 @@
                 <span>Articles Podcast</span>
                 <span class="placeholder-badge">Coming soon</span>
             </button>
-            <a class="dropdown-item" href="/music/">
+            <button class="dropdown-item" id="btnMusicalTestimony" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
                 <span>Musical Testimony</span>
-            </a>
+            </button>
             <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
                 <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
                 <span>Visual Summary</span>
@@ -134,10 +134,10 @@
                 <span>Articles Podcast</span>
                 <span class="placeholder-badge">Coming soon</span>
             </button>
-            <a class="dropdown-item" href="/music/">
+            <button class="dropdown-item" id="btnMusicalTestimonyBottom" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
                 <span>Musical Testimony</span>
-            </a>
+            </button>
             <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
                 <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
                 <span>Visual Summary</span>
@@ -289,6 +289,48 @@
     </div>
 </aside>
 
+<!-- Musical Testimony Modal (One Voice, One Mind) -->
+<style>
+.mt-backdrop{position:fixed;inset:0;background:rgba(20,10,12,.62);opacity:0;visibility:hidden;transition:opacity .25s;z-index:1200;}
+.mt-backdrop.open{opacity:1;visibility:visible;}
+.mt-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%);width:min(560px,92vw);max-height:86vh;overflow-y:auto;background:#2a1618;color:#f3e9e0;border:1px solid rgba(212,175,105,.35);border-radius:14px;padding:30px 26px 24px;box-shadow:0 24px 60px rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s;z-index:1201;}
+.mt-modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%);}
+.mt-close{position:absolute;top:12px;right:14px;background:none;border:none;color:#d9c4b0;font-size:20px;line-height:1;cursor:pointer;}
+.mt-close:hover{color:#fff;}
+.mt-eyebrow{margin:0 0 4px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#d4af69;}
+.mt-title{margin:0 0 2px;font-family:'Cinzel',serif;font-size:1.5rem;color:#fff;}
+.mt-label{margin:0 0 16px;font-size:.85rem;color:#c8b3a3;font-style:italic;}
+.mt-audio{width:100%;margin:0 0 4px;}
+.mt-lyrics{border-top:1px solid rgba(212,175,105,.25);margin-top:14px;}
+.mt-lyrics>summary{cursor:pointer;font-size:.9rem;color:#d4af69;list-style:none;padding:10px 0 6px;}
+.mt-lyrics>summary::-webkit-details-marker{display:none;}
+.mt-lyrics-body{font-size:.92rem;line-height:1.5;color:#ecdfd4;max-height:42vh;overflow-y:auto;padding:4px 2px 6px;}
+.mt-lyrics-body .section{margin:14px 0 4px;color:#d4af69;font-size:.8rem;letter-spacing:.04em;}
+.mt-lyrics-body .verse,.mt-lyrics-body .chorus{margin:0 0 8px;}
+.mt-lyrics-body .chorus{padding-left:12px;border-left:2px solid rgba(212,175,105,.4);font-style:italic;}
+.mt-music-link{display:inline-block;margin-top:12px;color:#d4af69;text-decoration:none;font-size:.88rem;}
+.mt-music-link:hover{text-decoration:underline;}
+</style>
+<div class="mt-backdrop" id="mtBackdrop" aria-hidden="true"></div>
+<div class="mt-modal" id="mtModal" role="dialog" aria-modal="true" aria-labelledby="mtTitle" aria-hidden="true">
+    <button class="mt-close" id="mtClose" aria-label="Close musical testimony" type="button">&#10005;</button>
+    <p class="mt-eyebrow">Musical Testimony</p>
+    <h2 class="mt-title" id="mtTitle">One Voice, One Mind</h2>
+    <p class="mt-label">Interfaith Anthem &middot; Cinematic Inspirational</p>
+    <audio class="mt-audio" id="mtAudio" controls preload="none" src="https://media.wordsofplainness.org/web/AN_01_One_Voice_One_Mind_Cinematic_Inspirational.mp3"></audio>
+    <details class="mt-lyrics">
+        <summary>Lyrics</summary>
+        <div class="mt-lyrics-body">
+            {%- for item in ministryMusic.collection -%}
+            {%- if item.file == "AN_01_One_Voice_One_Mind_Cinematic_Inspirational.mp3" -%}
+            {{ item.lyrics | safe }}
+            {%- endif -%}
+            {%- endfor -%}
+        </div>
+    </details>
+    <a class="mt-music-link" href="/music/">More music &rarr;</a>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -354,6 +396,37 @@ document.addEventListener('DOMContentLoaded', function() {
         btnLTB.addEventListener('click', function(e) { e.stopPropagation(); ddBot.classList.toggle('visible'); });
         document.addEventListener('click', function() { ddBot.classList.remove('visible'); });
     }
+
+    // ── Musical Testimony modal (One Voice, One Mind) ──
+    (function () {
+        var mtModal = document.getElementById('mtModal');
+        var mtBackdrop = document.getElementById('mtBackdrop');
+        var mtAudio = document.getElementById('mtAudio');
+        if (!mtModal || !mtBackdrop) return;
+        function openMt(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            mtModal.classList.add('open');
+            mtBackdrop.classList.add('open');
+            mtModal.setAttribute('aria-hidden', 'false');
+            mtBackdrop.setAttribute('aria-hidden', 'false');
+            document.getElementById('featuresDropdown')?.classList.remove('visible');
+            document.getElementById('bottomFeaturesDropdown')?.classList.remove('visible');
+        }
+        function closeMt() {
+            mtModal.classList.remove('open');
+            mtBackdrop.classList.remove('open');
+            mtModal.setAttribute('aria-hidden', 'true');
+            mtBackdrop.setAttribute('aria-hidden', 'true');
+            if (mtAudio) { mtAudio.pause(); }
+        }
+        document.getElementById('btnMusicalTestimony')?.addEventListener('click', openMt);
+        document.getElementById('btnMusicalTestimonyBottom')?.addEventListener('click', openMt);
+        document.getElementById('mtClose')?.addEventListener('click', closeMt);
+        mtBackdrop.addEventListener('click', closeMt);
+        document.addEventListener('keydown', function (e) {
+            if ((e.key === 'Escape' || e.key === 'Esc') && mtModal.classList.contains('open')) closeMt();
+        });
+    })();
 
     const backToTop = document.getElementById('backToTop');
     if (backToTop) {
