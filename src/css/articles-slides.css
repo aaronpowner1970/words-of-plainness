@@ -1,0 +1,412 @@
+/* ============================================================
+   ARTICLE STUDY SLIDES  (as-)
+   articles.njk — per-article "Slides" button → in-page carousel
+
+   - .article-slides-btn : twin of .article-read-aloud-btn (Listen)
+   - .as-modal : fixed slide-stage modal, Fullscreen-capable
+   - Slide types: title | points | concept | scripture | discuss | doorway
+   - Palette matches the Musical Testimony / Visual Summary modals
+   Z-index: 1201 (above FAB; matches the other article modals)
+   ============================================================ */
+
+/* ── Slides button — twin of the Listen button ─────────────── */
+
+.article-slides-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.9rem;
+    padding: 0.28rem 0.75rem;
+    background: rgba(196, 148, 58, 0.06);
+    border: 1px solid rgba(196, 148, 58, 0.2);
+    border-radius: 20px;
+    color: rgba(196, 148, 58, 0.7);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.article-slides-btn svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.18s ease;
+}
+
+.article-slides-btn:hover {
+    background: rgba(196, 148, 58, 0.13);
+    border-color: rgba(196, 148, 58, 0.42);
+    color: var(--gold-primary, #C4943A);
+}
+
+.article-slides-btn:hover svg { opacity: 1; }
+.article-slides-btn:active { transform: scale(0.97); }
+.article-slides-btn:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+
+
+/* ── Backdrop ──────────────────────────────────────────────── */
+
+.as-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 10, 12, 0.72);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+    z-index: 1200;
+}
+.as-backdrop.open { opacity: 1; visibility: visible; }
+
+
+/* ── Modal (slide stage) ───────────────────────────────────── */
+
+.as-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
+    width: min(880px, 95vw);
+    height: min(660px, 90vh);
+    display: flex;
+    flex-direction: column;
+    background: #2a1618;
+    color: #f3e9e0;
+    border: 1px solid rgba(212, 175, 105, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 1201;
+    overflow: hidden;
+}
+.as-modal.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+.as-modal:focus { outline: none; }
+
+
+/* ── Top bar ───────────────────────────────────────────────── */
+
+.as-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid rgba(212, 175, 105, 0.18);
+    flex-shrink: 0;
+}
+.as-eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #d4af69;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.as-bar-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+.as-fullscreen, .as-close {
+    background: none;
+    border: 1px solid rgba(212, 175, 105, 0.25);
+    border-radius: 6px;
+    color: #d9c4b0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.as-fullscreen:hover, .as-close:hover {
+    color: #fff;
+    border-color: #d4af69;
+    background: rgba(212, 175, 105, 0.1);
+}
+
+
+/* ── Stage ─────────────────────────────────────────────────── */
+
+.as-stage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem clamp(1.5rem, 5vw, 3.5rem);
+    overflow-y: auto;
+    text-align: center;
+}
+.as-slide {
+    width: 100%;
+    max-width: 680px;
+    animation: asFade 0.28s ease;
+}
+@keyframes asFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.as-heading {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #d4af69;
+    margin: 0 0 1.4rem;
+}
+
+/* title slide */
+.as-number {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #d4af69;
+    opacity: 0.85;
+    margin: 0 0 0.6rem;
+}
+.as-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: #fff;
+    line-height: 1.15;
+    margin: 0 0 1.1rem;
+}
+.as-lead {
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    line-height: 1.6;
+    color: #ecdfd4;
+    margin: 0;
+}
+
+/* points slide */
+.as-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.as-points li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.02rem, 2.1vw, 1.25rem);
+    line-height: 1.55;
+    color: #ecdfd4;
+}
+.as-points li::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d4af69;
+}
+
+/* concept slide */
+.as-term {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #fff;
+    margin: 0.4rem 0 1rem;
+}
+.as-def {
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    line-height: 1.6;
+    color: #f3e9e0;
+    margin: 0 0 0.9rem;
+}
+.as-sub {
+    font-size: clamp(0.92rem, 1.8vw, 1.05rem);
+    line-height: 1.6;
+    color: #c8b3a3;
+    margin: 0;
+}
+
+/* scripture slide */
+.as-verse { margin: 0 0 1.4rem; }
+.as-verse:last-child { margin-bottom: 0; }
+.as-verse-text {
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+    line-height: 1.5;
+    color: #fff;
+    margin: 0 0 0.5rem;
+}
+.as-verse-ref a {
+    color: #d4af69;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+.as-verse-ref a:hover { text-decoration: underline; }
+
+/* discuss slide */
+.as-q { text-align: left; margin: 0 0 1.4rem; }
+.as-q:last-child { margin-bottom: 0; }
+.as-q-tag {
+    display: inline-block;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #d4af69;
+    border: 1px solid rgba(212, 175, 105, 0.4);
+    border-radius: 20px;
+    padding: 0.18rem 0.6rem;
+    margin-bottom: 0.6rem;
+}
+.as-q-text {
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.05rem, 2.3vw, 1.4rem);
+    line-height: 1.55;
+    color: #ecdfd4;
+    margin: 0;
+}
+
+/* doorway slide */
+.as-doorway-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    color: #fff;
+    line-height: 1.2;
+    margin: 0.3rem 0 0.9rem;
+}
+.as-doorway-blurb {
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.55;
+    color: #ecdfd4;
+    margin: 0 0 1.4rem;
+}
+.as-doorway-link {
+    display: inline-block;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: #2a1618;
+    background: #d4af69;
+    padding: 0.65rem 1.3rem;
+    border-radius: 24px;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+.as-doorway-link:hover { background: #e3c483; }
+
+
+/* ── Controls ──────────────────────────────────────────────── */
+
+.as-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.85rem 1.1rem;
+    border-top: 1px solid rgba(212, 175, 105, 0.18);
+    flex-shrink: 0;
+}
+.as-prev, .as-next {
+    background: none;
+    border: 1px solid rgba(212, 175, 105, 0.3);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    color: #d4af69;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.as-prev:hover, .as-next:hover {
+    background: rgba(212, 175, 105, 0.15);
+    border-color: #d4af69;
+    color: #fff;
+}
+.as-prev:disabled, .as-next:disabled { opacity: 0.3; cursor: default; }
+.as-dots { display: flex; gap: 0.5rem; }
+.as-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(212, 175, 105, 0.3);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+}
+.as-dot.active { background: #d4af69; transform: scale(1.3); }
+.as-counter {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.72rem;
+    color: #c8b3a3;
+    min-width: 42px;
+    text-align: center;
+}
+
+
+/* ── Fullscreen (projection / VR) ──────────────────────────── */
+
+.as-modal:fullscreen {
+    width: 100vw; height: 100vh;
+    max-width: none;
+    top: 0; left: 0;
+    transform: none;
+    border: none;
+    border-radius: 0;
+}
+.as-modal:fullscreen .as-stage { padding: 5vh 8vw; }
+.as-modal:-webkit-full-screen {
+    width: 100vw; height: 100vh;
+    top: 0; left: 0;
+    transform: none;
+    border: none;
+    border-radius: 0;
+}
+
+
+/* ── Mobile ────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .as-modal {
+        width: 100vw; height: 100vh;
+        top: 0; left: 0;
+        transform: none;
+        border-radius: 0;
+    }
+    .as-modal.open { transform: none; }
+    .as-stage { padding: 1.5rem 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .as-backdrop, .as-modal, .as-slide {
+        transition-duration: 0.01ms !important;
+        animation: none !important;
+    }
+}
