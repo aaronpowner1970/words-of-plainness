@@ -60,10 +60,9 @@
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
                 <span>Musical Testimony</span>
             </button>
-            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+            <button class="dropdown-item" id="btnVisualSummary" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
                 <span>Visual Summary</span>
-                <span class="placeholder-badge">Coming soon</span>
             </button>
             <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
                 <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
@@ -76,11 +75,10 @@
                 <span class="placeholder-badge">Coming soon</span>
             </button>
             <hr class="dropdown-divider">
-            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+            <a class="dropdown-item" href="https://media.wordsofplainness.org/web/Articles_of_Interfaith_Discipleship.pdf" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/></svg>
                 <span>Download PDF</span>
-                <span class="placeholder-badge">Coming soon</span>
-            </button>
+            </a>
             <hr class="dropdown-divider">
             {# ACTIVE ITEMS #}
             <a class="dropdown-item" href="/search/">
@@ -138,10 +136,9 @@
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
                 <span>Musical Testimony</span>
             </button>
-            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+            <button class="dropdown-item" id="btnVisualSummaryBottom" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><polyline points="21 15 16 10 5 21" stroke="currentColor" stroke-width="2" fill="none"/></svg>
                 <span>Visual Summary</span>
-                <span class="placeholder-badge">Coming soon</span>
             </button>
             <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
                 <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
@@ -154,11 +151,10 @@
                 <span class="placeholder-badge">Coming soon</span>
             </button>
             <hr class="dropdown-divider">
-            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+            <a class="dropdown-item" href="https://media.wordsofplainness.org/web/Articles_of_Interfaith_Discipleship.pdf" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" fill="none"/><polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" fill="none"/><line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2"/></svg>
                 <span>Download PDF</span>
-                <span class="placeholder-badge">Coming soon</span>
-            </button>
+            </a>
             <hr class="dropdown-divider">
             <a class="dropdown-item" href="/search/">
                 <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/></svg>
@@ -331,6 +327,33 @@
     <a class="mt-music-link" href="/music/">More music &rarr;</a>
 </div>
 
+<!-- Visual Summary Modal (Articles infographic) -->
+<style>
+.vs-backdrop{position:fixed;inset:0;background:rgba(20,10,12,.72);opacity:0;visibility:hidden;transition:opacity .25s;z-index:1200;}
+.vs-backdrop.open{opacity:1;visibility:visible;}
+.vs-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%);width:min(760px,94vw);max-height:90vh;overflow-y:auto;background:#2a1618;color:#f3e9e0;border:1px solid rgba(212,175,105,.35);border-radius:14px;padding:26px 22px 20px;box-shadow:0 24px 60px rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s;z-index:1201;}
+.vs-modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%);}
+.vs-close{position:absolute;top:12px;right:14px;background:none;border:none;color:#d9c4b0;font-size:20px;line-height:1;cursor:pointer;}
+.vs-close:hover{color:#fff;}
+.vs-eyebrow{margin:0 0 4px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#d4af69;}
+.vs-title{margin:0 0 14px;font-family:'Cinzel',serif;font-size:1.5rem;color:#fff;}
+.vs-figure{margin:0;}
+.vs-img{width:100%;height:auto;border-radius:8px;display:block;background:rgba(0,0,0,.2);min-height:120px;}
+.vs-fulllink{display:inline-block;margin-top:12px;color:#d4af69;text-decoration:none;font-size:.88rem;}
+.vs-fulllink:hover{text-decoration:underline;}
+</style>
+<div class="vs-backdrop" id="vsBackdrop" aria-hidden="true"></div>
+<div class="vs-modal" id="vsModal" role="dialog" aria-modal="true" aria-labelledby="vsTitle" aria-hidden="true">
+    <button class="vs-close" id="vsClose" aria-label="Close visual summary" type="button">&#10005;</button>
+    <p class="vs-eyebrow">Visual Summary</p>
+    <h2 class="vs-title" id="vsTitle">The Thirteen Articles at a Glance</h2>
+    <figure class="vs-figure">
+        <img class="vs-img" id="vsImg" alt="Infographic summarizing the Articles of Interfaith Discipleship"
+             data-src="https://media.wordsofplainness.org/web/Articles_of_Interfaith_Discipleship_Infographic.png">
+    </figure>
+    <a class="vs-fulllink" id="vsFullLink" href="https://media.wordsofplainness.org/web/Articles_of_Interfaith_Discipleship_Infographic.png" target="_blank" rel="noopener">Open full resolution &#8599;</a>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -425,6 +448,38 @@ document.addEventListener('DOMContentLoaded', function() {
         mtBackdrop.addEventListener('click', closeMt);
         document.addEventListener('keydown', function (e) {
             if ((e.key === 'Escape' || e.key === 'Esc') && mtModal.classList.contains('open')) closeMt();
+        });
+    })();
+
+    // ── Visual Summary modal (Articles infographic, lazy-loaded) ──
+    (function () {
+        var vsModal = document.getElementById('vsModal');
+        var vsBackdrop = document.getElementById('vsBackdrop');
+        var vsImg = document.getElementById('vsImg');
+        if (!vsModal || !vsBackdrop) return;
+        var loaded = false;
+        function openVs(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            if (!loaded && vsImg && vsImg.dataset.src) { vsImg.src = vsImg.dataset.src; loaded = true; }
+            vsModal.classList.add('open');
+            vsBackdrop.classList.add('open');
+            vsModal.setAttribute('aria-hidden', 'false');
+            vsBackdrop.setAttribute('aria-hidden', 'false');
+            document.getElementById('featuresDropdown')?.classList.remove('open');
+            document.getElementById('bottomFeaturesDropdown')?.classList.remove('open');
+        }
+        function closeVs() {
+            vsModal.classList.remove('open');
+            vsBackdrop.classList.remove('open');
+            vsModal.setAttribute('aria-hidden', 'true');
+            vsBackdrop.setAttribute('aria-hidden', 'true');
+        }
+        document.getElementById('btnVisualSummary')?.addEventListener('click', openVs);
+        document.getElementById('btnVisualSummaryBottom')?.addEventListener('click', openVs);
+        document.getElementById('vsClose')?.addEventListener('click', closeVs);
+        vsBackdrop.addEventListener('click', closeVs);
+        document.addEventListener('keydown', function (e) {
+            if ((e.key === 'Escape' || e.key === 'Esc') && vsModal.classList.contains('open')) closeVs();
         });
     })();
 
