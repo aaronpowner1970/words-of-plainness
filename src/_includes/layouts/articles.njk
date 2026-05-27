@@ -552,4 +552,15 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
 });
 </script>
+
+{% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
+<script>
+    window.WOP_AMBIENT_TRACKS = [
+        {% for track in ministryMusic.ambient %}
+        { file: "https://media.wordsofplainness.org/web/{{ track.file }}", title: "{{ track.title }}", duration: "{{ track.duration }}" }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ];
+</script>
+<script src="/js/ambient-player.js"></script>
+{% endif %}
 {% endblock %}

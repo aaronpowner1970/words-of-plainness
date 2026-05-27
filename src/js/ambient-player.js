@@ -135,7 +135,7 @@
 
     function attachAudioListeners() {
         // Known audio element IDs on chapter pages
-        var ids = ['chapterAudio', 'overviewAudio', 'testimonyAudio', 'anthemAudio'];
+        var ids = ['chapterAudio', 'overviewAudio', 'testimonyAudio', 'anthemAudio', 'mtAudio'];
 
         ids.forEach(function(id) {
             var el = document.getElementById(id);
