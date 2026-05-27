@@ -113,6 +113,14 @@
         '<div class="as-bar">'
             + '<span class="as-eyebrow"></span>'
             + '<div class="as-bar-actions">'
+                + '<button class="as-notes" type="button" aria-label="Facilitator notes" aria-pressed="false">'
+                    + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+                        + '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>'
+                        + '<polyline points="14 2 14 8 20 8"/>'
+                        + '<line x1="8" y1="13" x2="16" y2="13"/>'
+                        + '<line x1="8" y1="17" x2="16" y2="17"/>'
+                    + '</svg>'
+                + '</button>'
                 + '<button class="as-fullscreen" type="button" aria-label="Toggle fullscreen">'
                     + '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
                         + '<path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/>'
@@ -125,7 +133,10 @@
                 + '</button>'
             + '</div>'
         + '</div>'
-        + '<div class="as-stage"></div>'
+        + '<div class="as-stage-host">'
+            + '<div class="as-stage"></div>'
+            + '<aside class="as-facilitator" aria-hidden="true"></aside>'
+        + '</div>'
         + '<div class="as-controls">'
             + '<button class="as-prev" type="button" aria-label="Previous slide">‹</button>'
             + '<div class="as-dots"></div>'
@@ -144,6 +155,8 @@
     var nextBtn   = modal.querySelector('.as-next');
     var fsBtn     = modal.querySelector('.as-fullscreen');
     var closeBtn  = modal.querySelector('.as-close');
+    var notesBtn  = modal.querySelector('.as-notes');
+    var facEl     = modal.querySelector('.as-facilitator');
 
     var current = null;   // { slides: [...], idx: 0 }
 
@@ -189,6 +202,77 @@
         render();
     }
 
+
+    /* ── Facilitator notes panel ─────────────────────── */
+
+    function renderFacilitator(fac) {
+        if (!fac) { facEl.innerHTML = ''; notesBtn.style.display = 'none'; return; }
+        notesBtn.style.display = '';
+        var html = '<div class="as-fac-inner">'
+            + '<header class="as-fac-header">'
+                + '<span class="as-fac-eyebrow">Facilitator Notes</span>'
+                + '<button class="as-fac-close-x" type="button" aria-label="Close facilitator notes">'
+                    + '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'
+                        + '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'
+                    + '</svg>'
+                + '</button>'
+            + '</header>'
+            + '<div class="as-fac-body">';
+        if (fac.intro) {
+            html += '<p class="as-fac-intro">' + esc(fac.intro) + '</p>';
+        }
+        if (fac.scriptureExamples && fac.scriptureExamples.length) {
+            html += '<section class="as-fac-block">'
+                + '<h4 class="as-fac-h4">Scripture echoes</h4>'
+                + '<ul class="as-fac-list">'
+                + fac.scriptureExamples.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('')
+                + '</ul>'
+                + '</section>';
+        }
+        if (fac.liveExamples && fac.liveExamples.length) {
+            html += '<section class="as-fac-block">'
+                + '<h4 class="as-fac-h4">Live disagreements</h4>'
+                + '<ul class="as-fac-list">'
+                + fac.liveExamples.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('')
+                + '</ul>'
+                + '</section>';
+        }
+        if (fac.frame) {
+            html += '<section class="as-fac-block">'
+                + '<h4 class="as-fac-h4">The frame</h4>'
+                + '<p class="as-fac-frame">' + esc(fac.frame) + '</p>'
+                + '</section>';
+        }
+        if (fac.probe) {
+            html += '<section class="as-fac-block as-fac-probe-block">'
+                + '<span class="as-fac-leader-tag">Leader-only</span>'
+                + '<p class="as-fac-probe">' + esc(fac.probe) + '</p>'
+                + '</section>';
+        }
+        html += '</div></div>';
+        facEl.innerHTML = html;
+        facEl.querySelector('.as-fac-close-x').addEventListener('click', closeFacilitator);
+    }
+
+    function openFacilitator() {
+        facEl.classList.add('open');
+        facEl.setAttribute('aria-hidden', 'false');
+        notesBtn.classList.add('active');
+        notesBtn.setAttribute('aria-pressed', 'true');
+    }
+
+    function closeFacilitator() {
+        facEl.classList.remove('open');
+        facEl.setAttribute('aria-hidden', 'true');
+        notesBtn.classList.remove('active');
+        notesBtn.setAttribute('aria-pressed', 'false');
+    }
+
+    function toggleFacilitator() {
+        if (facEl.classList.contains('open')) closeFacilitator();
+        else openFacilitator();
+    }
+
     /* ── Open / close ────────────────────────────────────────── */
 
     function openSlides(articleId) {
@@ -198,6 +282,8 @@
         eyebrowEl.textContent = data.eyebrow || '';
         buildDots(data.slides.length);
         render();
+        renderFacilitator(data.facilitator || null);
+        closeFacilitator();
         backdrop.classList.add('open');
         modal.classList.add('open');
         backdrop.setAttribute('aria-hidden', 'false');
@@ -211,6 +297,7 @@
     }
 
     function closeSlides() {
+        closeFacilitator();
         if (document.fullscreenElement || document.webkitFullscreenElement) {
             (document.exitFullscreen || document.webkitExitFullscreen).call(document);
         }
@@ -237,6 +324,17 @@
     fsBtn.addEventListener('click', toggleFullscreen);
     closeBtn.addEventListener('click', closeSlides);
     backdrop.addEventListener('click', closeSlides);
+    notesBtn.addEventListener('click', toggleFacilitator);
+
+    // Auto-close facilitator panel when entering fullscreen
+    function onFsChange() {
+        var fs = document.fullscreenElement || document.webkitFullscreenElement;
+        if (fs && facEl.classList.contains('open')) {
+            closeFacilitator();
+        }
+    }
+    document.addEventListener('fullscreenchange', onFsChange);
+    document.addEventListener('webkitfullscreenchange', onFsChange);
 
     document.addEventListener('keydown', function (e) {
         if (!modal.classList.contains('open')) return;

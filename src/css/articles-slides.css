@@ -410,3 +410,195 @@
         animation: none !important;
     }
 }
+
+
+/* ── Facilitator notes (overlay panel on the stage) ────────── */
+
+.as-notes {
+    background: none;
+    border: 1px solid rgba(212, 175, 105, 0.25);
+    border-radius: 6px;
+    color: #d9c4b0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.as-notes:hover {
+    color: #fff;
+    border-color: #d4af69;
+    background: rgba(212, 175, 105, 0.1);
+}
+.as-notes.active {
+    color: #2a1618;
+    background: #d4af69;
+    border-color: #d4af69;
+}
+
+.as-stage-host {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+.as-stage-host > .as-stage {
+    flex: 1;
+}
+
+.as-facilitator {
+    position: absolute;
+    inset: 0;
+    background: #2a1618;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    transform: translateY(8px);
+    pointer-events: none;
+    z-index: 2;
+}
+.as-facilitator.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.as-fac-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.as-fac-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.4rem;
+    border-bottom: 1px solid rgba(212, 175, 105, 0.18);
+    flex-shrink: 0;
+}
+.as-fac-eyebrow {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #d4af69;
+}
+.as-fac-close-x {
+    background: none;
+    border: 1px solid rgba(212, 175, 105, 0.25);
+    border-radius: 6px;
+    color: #d9c4b0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.as-fac-close-x:hover {
+    color: #fff;
+    border-color: #d4af69;
+    background: rgba(212, 175, 105, 0.1);
+}
+
+.as-fac-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.4rem 1.6rem 2rem;
+    text-align: left;
+    font-family: var(--font-serif, Georgia, serif);
+    color: #ecdfd4;
+    line-height: 1.6;
+}
+
+.as-fac-intro {
+    font-style: italic;
+    font-size: 1rem;
+    color: #d9c4b0;
+    margin: 0 0 1.4rem;
+    padding-left: 0.9rem;
+    border-left: 2px solid rgba(212, 175, 105, 0.45);
+}
+
+.as-fac-block { margin: 0 0 1.5rem; }
+.as-fac-block:last-child { margin-bottom: 0; }
+
+.as-fac-h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d4af69;
+    margin: 0 0 0.6rem;
+    font-weight: 600;
+}
+
+.as-fac-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+.as-fac-list li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+.as-fac-list li::before {
+    content: '';
+    position: absolute;
+    left: 0.2rem;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(212, 175, 105, 0.65);
+}
+
+.as-fac-frame {
+    font-size: 0.98rem;
+    margin: 0;
+}
+
+.as-fac-probe-block {
+    background: rgba(196, 90, 60, 0.08);
+    border: 1px solid rgba(196, 90, 60, 0.28);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+}
+.as-fac-leader-tag {
+    display: inline-block;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #e3a98c;
+    border: 1px solid rgba(227, 169, 140, 0.4);
+    border-radius: 20px;
+    padding: 0.18rem 0.6rem;
+    margin: 0 0 0.55rem;
+}
+.as-fac-probe {
+    font-style: italic;
+    font-size: 1rem;
+    margin: 0;
+    color: #f3e9e0;
+}
+
+@media (max-width: 768px) {
+    .as-fac-body { padding: 1rem 1.1rem 1.5rem; }
+    .as-fac-header { padding: 0.7rem 1.1rem; }
+}
