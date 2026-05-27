@@ -59,7 +59,7 @@
                     label: "For discussion",
                     questions: [
                         { tag: "Personal", text: "Is there a conviction you hold about God or faith that may be built more on what you inherited than on what you have personally witnessed?" },
-                        { tag: "Together", text: "Where might insisting on a “secret thing” be dividing believers who already agree on the weightier matters—justice, mercy, and faithfulness?" }
+                        { tag: "Together", text: "How might keeping justice, mercy, and faithfulness at the center—while still holding our convictions charitably—reduce contention and condemnation among believers?" }
                     ]
                 },
                 {
@@ -69,7 +69,24 @@
                     blurb: "How “knowing in part” becomes a posture of peace rather than a confession of defeat.",
                     href: "https://www.wordsofplainness.org/studies/merognosticism/"
                 }
-            ]
+            ],
+            facilitator: {
+                intro: "Examples to seed the discussion.",
+                scriptureExamples: [
+                    "The Pharisees tithed mint, dill, and cumin yet neglected the weightier matters (Matthew 23:23)—precision in the small, blindness to the heart.",
+                    "Jews and Samaritans despised each other as the false chosen, while both watched for the same Messiah (John 4).",
+                    "The first church nearly broke over circumcision and the law of Moses until the Jerusalem council sorted the essential from the non-essential (Acts 15)."
+                ],
+                liveExamples: [
+                    "Are the spiritual gifts for today? (cessationism / continuationism)",
+                    "Which canon and translation carry God’s word",
+                    "How grace and the human will meet (Calvinism / Arminianism)",
+                    "Infant or believer’s baptism",
+                    "Catholic and Orthodox, and the long schisms of the church"
+                ],
+                frame: "The point isn’t to decide who is right—Article 1 won’t. It is to ask: has the conviction become a test of fellowship or a weapon against a brother or sister? And do justice, mercy, and faithfulness still hold the center?",
+                probe: "What is one teaching God never made plain that you’ve seen turned into a test of fellowship?"
+            }
         }
     };
 
