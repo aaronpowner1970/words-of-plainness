@@ -164,7 +164,7 @@ permalink: /music/
                     data-is-ministry="true"
                     data-has-lyrics="{{ item.hasLyrics }}"
                     data-description="{{ item.description | escape }}"
-                    data-lyrics="{{ ministryMusic.anthemLyrics | escape if item.hasLyrics else '' }}">
+                    data-lyrics="{{ (item.lyrics | escape) if item.lyrics else ((ministryMusic.anthemLyrics | escape) if item.hasLyrics else '') }}">
                     <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
                         <div class="track-title-group">
@@ -224,6 +224,35 @@ permalink: /music/
                         </div>
                     </td>
                 </tr>
+
+                {#- Ministry anthem alternates -#}
+                {%- for item in ministryMusic.collection -%}
+                {%- if item.alternates and item.alternates.length > 0 -%}
+                {%- for alt in item.alternates -%}
+                <tr class="playlist-row playlist-row--alt"
+                    data-src="https://media.wordsofplainness.org/web/{{ alt.file }}"
+                    data-title="{{ item.title }}"
+                    data-label="{{ alt.label }}"
+                    data-chapter="0"
+                    data-chapter-title=""
+                    data-chapter-url=""
+                    data-is-ministry="true"
+                    data-has-lyrics="{{ item.hasLyrics }}"
+                    data-lyrics="{{ (item.lyrics | escape) if item.lyrics else ((ministryMusic.anthemLyrics | escape) if item.hasLyrics else '') }}">
+                    <td class="col-num">{{ trackNum }}</td>
+                    <td class="col-title">
+                        <div class="track-title-group">
+                            <span class="song-title">{{ item.title }}</span>
+                            <span class="song-label">&mdash; {{ alt.label }}</span>
+                        </div>
+                    </td>
+                    <td class="col-chapter"></td>
+                    <td class="col-duration" data-duration>{{ alt.duration if alt.duration else '&mdash;' | safe }}</td>
+                </tr>
+                {%- set trackNum = trackNum + 1 -%}
+                {%- endfor -%}
+                {%- endif -%}
+                {%- endfor -%}
 
                 {%- for chapter in collections.chapters -%}
                 {%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.alternates and chapter.data.audio.testimony.alternates.length > 0 -%}
