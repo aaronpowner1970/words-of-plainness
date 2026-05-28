@@ -1099,6 +1099,9 @@ const RJW = (function() {
             var pauseId = parts[0];
             var tabKey = parts[1];
             if (['reflect','journal','witness'].indexOf(tabKey) === -1) { processNext(); return; }
+            // Articles reflections (aoid-*) are synced by the /articles/ page with
+            // their own chapter_slug; never flush them under a chapter slug.
+            if (pauseId.indexOf('aoid-') === 0) { processNext(); return; }
 
             var payload = {
                 pause_id: pauseId,

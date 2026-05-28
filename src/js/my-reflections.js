@@ -23,8 +23,23 @@ var CHAPTER_INFO = {
     'chapter-12-beatitudes':         { number: 12, title: 'The Beatitudes' },
     'chapter-13-sermon-on-the-mount':{ number: 13, title: 'The Sermon on the Mount' },
     'chapter-14-prayer-as-a-lifestyle':{ number: 14, title: 'Prayer as a Lifestyle' },
-    'chapter-16-keeping-the-sabbath': { number: 16, title: 'Keeping the Sabbath' }
+    'chapter-16-keeping-the-sabbath': { number: 16, title: 'Keeping the Sabbath' },
+    'articles-of-interfaith-discipleship': { number: 99, title: 'Articles of Interfaith Discipleship', standalone: true }
 };
+
+var ARTICLE_TITLES = {
+    'A01': 'Of Plainness', 'A02': 'Of God', 'A03': 'Of Creation and Life',
+    'A04': "Of God's Word", 'A05': 'Of Jesus Christ', 'A06': 'Of Salvation',
+    'A07': 'Of the Kingdom at Hand', 'A08': 'Of Fellow Believers',
+    'A09': 'Of Finding Our Way', 'A10': 'Of Living by Grace',
+    'A11': 'Of Covenants and Commitments', 'A12': 'Of Immortality and Eternal Life',
+    'A13': 'Of Our Confidence'
+};
+
+function djArticleLabel(slug, pauseId) {
+    if (slug !== 'articles-of-interfaith-discipleship') return '';
+    return ARTICLE_TITLES[(pauseId || '').replace(/^aoid-/, '')] || '';
+}
 
 function djGetChapterInfo(slug) {
     if (CHAPTER_INFO[slug]) return CHAPTER_INFO[slug];
@@ -124,12 +139,13 @@ var Journal = {
                 if (parts.length !== 2) continue;
                 var tabKey = parts[1];
                 if (['reflect','journal','witness'].indexOf(tabKey) === -1) continue;
+                var pauseId = parts[0];
                 rjw.push({
-                    pause_id: parts[0],
-                    chapter_slug: 'unknown',
+                    pause_id: pauseId,
+                    chapter_slug: pauseId.indexOf('aoid-') === 0 ? 'articles-of-interfaith-discipleship' : 'unknown',
                     tab_type: tabKey,
                     response_text: val,
-                    include_in_document: localStorage.getItem('wop-rjw-' + parts[0] + '::witness-include-document') === 'true',
+                    include_in_document: localStorage.getItem('wop-rjw-' + pauseId + '::witness-include-document') === 'true',
                     updated_at: null
                 });
             }
@@ -242,7 +258,8 @@ var Journal = {
                 });
                 Object.keys(byPause).forEach(function(pid) {
                     entriesHtml += '<div class="dj-entry-group">';
-                    entriesHtml += '<div class="dj-entry-group-label">Reflect \u00b7 Journal \u00b7 Witness</div>';
+                    var artLabel = djArticleLabel(slug, pid);
+                    entriesHtml += '<div class="dj-entry-group-label">' + (artLabel ? djEsc(artLabel) : 'Reflect \u00b7 Journal \u00b7 Witness') + '</div>';
                     byPause[pid].forEach(function(r) {
                         var cls = 'dj-entry dj-entry-' + r.tab_type;
                         entriesHtml += '<div class="' + cls + '">';
@@ -275,7 +292,7 @@ var Journal = {
             return '<div class="dj-chapter-card" data-chapter="' + djEsc(slug) + '">' +
                 '<div class="dj-chapter-header" onclick="Journal.toggleChapter(this)">' +
                     '<div>' +
-                        '<div class="dj-chapter-title">Chapter ' + info.number + ': ' + djEsc(info.title) + '</div>' +
+                        '<div class="dj-chapter-title">' + (info.standalone ? '' : 'Chapter ' + info.number + ': ') + djEsc(info.title) + '</div>' +
                         '<div class="dj-chapter-meta">' + entryCount + ' entr' + (entryCount === 1 ? 'y' : 'ies') + '</div>' +
                     '</div>' +
                     '<svg class="dj-chapter-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>' +
@@ -326,12 +343,15 @@ var Journal = {
             var info = djGetChapterInfo(slug);
             var data = chapters[slug];
             html += '<div class="pd-chapter">';
-            html += '<h4 class="pd-chapter-title">Chapter ' + info.number + ' \u00b7 ' + djEsc(info.title) + '</h4>';
+            html += '<h4 class="pd-chapter-title">' + (info.standalone ? '' : 'Chapter ' + info.number + ' \u00b7 ') + djEsc(info.title) + '</h4>';
 
             var pauseIds = Object.keys(data.rjw).sort();
             pauseIds.forEach(function(pid) {
                 var tabs = data.rjw[pid];
-                if (pauseIds.length > 1) {
+                var artLabel = djArticleLabel(slug, pid);
+                if (artLabel) {
+                    html += '<div class="pd-pause-label">' + djEsc(artLabel) + '</div>';
+                } else if (pauseIds.length > 1) {
                     var label = pid.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
                     html += '<div class="pd-pause-label">' + djEsc(label) + '</div>';
                 }
@@ -343,14 +363,14 @@ var Journal = {
                 if (tabs.journal && tabs.journal.response_text && tabs.journal.response_text.trim()) {
                     html += '<div class="pd-entry pd-journal"><div class="pd-entry-label">Journal</div>';
                     html += '<div class="pd-entry-text">' + djEsc(tabs.journal.response_text) + '</div></div>';
-                } else {
+                } else if (!info.standalone) {
                     html += '<div class="pd-entry pd-journal pd-empty"><div class="pd-entry-label">Journal</div>';
                     html += '<div class="pd-entry-text">No journal entry for this section.</div></div>';
                 }
                 if (tabs.witness && tabs.witness.include_in_document && tabs.witness.response_text && tabs.witness.response_text.trim()) {
                     html += '<div class="pd-entry pd-witness"><div class="pd-entry-label">Witness</div>';
                     html += '<div class="pd-entry-text">' + djEsc(tabs.witness.response_text) + '</div></div>';
-                } else {
+                } else if (!info.standalone) {
                     html += '<div class="pd-entry pd-witness pd-empty"><div class="pd-entry-label">Witness</div>';
                     html += '<div class="pd-entry-text">No witness entry for this section.</div></div>';
                 }

@@ -486,19 +486,79 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('fontReset')?.addEventListener('click',    () => window.WopFontSize?.reset());
     document.getElementById('fontIncrease')?.addEventListener('click', () => window.WopFontSize?.increase());
 
-    // RJW reflection persistence
-    document.querySelectorAll('.rjw-textarea').forEach(function(ta) {
-        var key = ta.dataset.rjwKey;
-        if (!key) return;
-        try { ta.value = localStorage.getItem('wop-' + key) || ''; } catch(e) {}
-        var timer;
-        ta.addEventListener('input', function() {
-            clearTimeout(timer);
-            timer = setTimeout(function() {
-                try { localStorage.setItem('wop-' + key, ta.value); } catch(e) {}
-            }, 400);
+    // ── R·J·W reflection persistence (Articles) ──────────────────────
+    // Saves each article reflection in the shape the Discipleship Journal
+    // consumes: localStorage key  wop-rjw-{pauseId}::reflect  and, for
+    // signed-in readers, POST /progress/pause-responses/ with chapter_slug
+    // "articles-of-interfaith-discipleship". The "aoid-" pauseId namespace
+    // buckets these under the Articles card and is skipped by the chapter
+    // R·J·W flush so it is never mis-attributed.
+    (function () {
+        var ARTICLES_SLUG = 'articles-of-interfaith-discipleship';
+
+        function pauseIdFor(ta) {
+            var raw = ta.dataset.rjwKey || '';        // e.g. "rjw-A01"
+            var articleId = raw.replace(/^rjw-/, ''); // -> "A01"
+            return articleId ? 'aoid-' + articleId : null;
+        }
+        function storageKey(pauseId) { return 'wop-rjw-' + pauseId + '::reflect'; }
+
+        function syncToApi(pauseId, value) {
+            if (!window.API || !API.isAuthenticated()) return;
+            if (!value || !value.trim()) return;
+            API.savePauseResponse({
+                pause_id: pauseId,
+                chapter_slug: ARTICLES_SLUG,
+                tab_type: 'reflect',
+                response_text: value,
+                include_in_document: false
+            }).catch(function (err) {
+                console.warn('[Articles RJW] Backend save failed (will retry on next login):', err && err.message);
+            });
+        }
+
+        var textareas = document.querySelectorAll('.rjw-textarea');
+
+        textareas.forEach(function (ta) {
+            var pauseId = pauseIdFor(ta);
+            if (!pauseId) return;
+            var key = storageKey(pauseId);
+
+            // One-time migration from the pre-fix scheme (wop-rjw-A01, no ::reflect)
+            try {
+                if (!localStorage.getItem(key)) {
+                    var legacyKey = 'wop-rjw-' + (ta.dataset.rjwKey || '').replace(/^rjw-/, '');
+                    var legacyVal = localStorage.getItem(legacyKey);
+                    if (legacyVal && legacyVal.trim()) {
+                        localStorage.setItem(key, legacyVal);
+                        localStorage.removeItem(legacyKey);
+                    }
+                }
+            } catch (e) {}
+
+            try { ta.value = localStorage.getItem(key) || ''; } catch (e) {}
+
+            var timer;
+            ta.addEventListener('input', function () {
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    try { localStorage.setItem(key, ta.value); } catch (e) {}
+                    syncToApi(pauseId, ta.value);
+                }, 400);
+            });
         });
-    });
+
+        // Guest signs in while on this page → push their entries to the account journal.
+        document.addEventListener('wop:auth-login', function () {
+            textareas.forEach(function (ta) {
+                var pauseId = pauseIdFor(ta);
+                if (!pauseId) return;
+                var val = '';
+                try { val = localStorage.getItem(storageKey(pauseId)) || ''; } catch (e) {}
+                syncToApi(pauseId, val);
+            });
+        });
+    })();
 
     const fab = document.getElementById('floatingActionBar');
     if (fab) {
