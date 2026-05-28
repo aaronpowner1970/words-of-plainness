@@ -998,6 +998,25 @@
     background: rgba(196, 148, 58, 0.07);
 }
 
+/* RJW save status / sign-in nudge */
+.rjw-status {
+    margin: 0.4rem 0 0; min-height: 1em;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.72rem; letter-spacing: 0.02em;
+    color: var(--cream, #E8DCC4); opacity: 0.55;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+.rjw-status:empty { opacity: 0; }
+.rjw-status--saving { opacity: 0.45; font-style: italic; }
+.rjw-status--synced { color: var(--gold-primary, #C4943A); opacity: 0.85; }
+.rjw-status--local, .rjw-status--error { color: var(--cream-dark, #D4C8B0); opacity: 0.7; }
+.rjw-signin-link {
+    background: none; border: none; padding: 0; font: inherit;
+    color: var(--gold-primary, #C4943A);
+    text-decoration: underline; text-underline-offset: 2px; cursor: pointer;
+}
+.rjw-signin-link:hover { color: var(--gold-light, #D4A84A); }
+
 
 /* ── Companion Essay Footnote (gold callout box) ─────────────── */
 

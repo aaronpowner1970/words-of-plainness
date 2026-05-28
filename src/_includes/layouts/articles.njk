@@ -487,34 +487,37 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('fontIncrease')?.addEventListener('click', () => window.WopFontSize?.increase());
 
     // ── R·J·W reflection persistence (Articles) ──────────────────────
-    // Saves each article reflection in the shape the Discipleship Journal
-    // consumes: localStorage key  wop-rjw-{pauseId}::reflect  and, for
-    // signed-in readers, POST /progress/pause-responses/ with chapter_slug
-    // "articles-of-interfaith-discipleship". The "aoid-" pauseId namespace
-    // buckets these under the Articles card and is skipped by the chapter
-    // R·J·W flush so it is never mis-attributed.
+    // localStorage key  wop-rjw-{pauseId}::reflect  + POST /progress/pause-responses/
+    // for signed-in readers (chapter_slug "articles-of-interfaith-discipleship").
+    // The "aoid-" pauseId namespace buckets these under the Articles card in the
+    // journal and is skipped by the chapter R·J·W flush. A status line confirms
+    // saves and, for guests, invites sign-in (device-local until then).
     (function () {
         var ARTICLES_SLUG = 'articles-of-interfaith-discipleship';
 
         function pauseIdFor(ta) {
-            var raw = ta.dataset.rjwKey || '';        // e.g. "rjw-A01"
-            var articleId = raw.replace(/^rjw-/, ''); // -> "A01"
+            var articleId = (ta.dataset.rjwKey || '').replace(/^rjw-/, '');
             return articleId ? 'aoid-' + articleId : null;
         }
         function storageKey(pauseId) { return 'wop-rjw-' + pauseId + '::reflect'; }
 
         function syncToApi(pauseId, value) {
-            if (!window.API || !API.isAuthenticated()) return;
-            if (!value || !value.trim()) return;
-            API.savePauseResponse({
-                pause_id: pauseId,
-                chapter_slug: ARTICLES_SLUG,
-                tab_type: 'reflect',
-                response_text: value,
-                include_in_document: false
-            }).catch(function (err) {
-                console.warn('[Articles RJW] Backend save failed (will retry on next login):', err && err.message);
-            });
+            if (!window.API || !API.isAuthenticated()) return Promise.resolve('local');
+            if (!value || !value.trim()) return Promise.resolve('empty');
+            return API.savePauseResponse({
+                pause_id: pauseId, chapter_slug: ARTICLES_SLUG,
+                tab_type: 'reflect', response_text: value, include_in_document: false
+            }).then(function () { return 'synced'; });
+        }
+
+        function setStatus(el, state) {
+            if (!el) return;
+            el.className = 'rjw-status rjw-status--' + state;
+            if (state === 'saving')      el.innerHTML = 'Saving…';
+            else if (state === 'synced') el.innerHTML = 'Saved to your journal ✓';
+            else if (state === 'local')  el.innerHTML = 'Saved on this device — <button type="button" class="rjw-signin-link">sign in</button> to keep it in your journal';
+            else if (state === 'error')  el.innerHTML = 'Saved on this device · will sync to your journal when reconnected';
+            else                         el.innerHTML = '';
         }
 
         var textareas = document.querySelectorAll('.rjw-textarea');
@@ -523,6 +526,16 @@ document.addEventListener('DOMContentLoaded', function() {
             var pauseId = pauseIdFor(ta);
             if (!pauseId) return;
             var key = storageKey(pauseId);
+
+            var statusEl = document.createElement('p');
+            statusEl.className = 'rjw-status';
+            statusEl.setAttribute('aria-live', 'polite');
+            ta.insertAdjacentElement('afterend', statusEl);
+            statusEl.addEventListener('click', function (e) {
+                if (!e.target.closest('.rjw-signin-link')) return;
+                var modal = document.getElementById('authModal');
+                if (modal) modal.style.display = 'flex';
+            });
 
             // One-time migration from the pre-fix scheme (wop-rjw-A01, no ::reflect)
             try {
@@ -541,21 +554,29 @@ document.addEventListener('DOMContentLoaded', function() {
             var timer;
             ta.addEventListener('input', function () {
                 clearTimeout(timer);
+                if (window.API && API.isAuthenticated()) setStatus(statusEl, 'saving');
                 timer = setTimeout(function () {
                     try { localStorage.setItem(key, ta.value); } catch (e) {}
-                    syncToApi(pauseId, ta.value);
-                }, 400);
+                    if (!ta.value.trim()) { setStatus(statusEl, ''); return; }
+                    syncToApi(pauseId, ta.value)
+                        .then(function (r) { setStatus(statusEl, r === 'synced' ? 'synced' : 'local'); })
+                        .catch(function () { setStatus(statusEl, 'error'); });
+                }, 600);
             });
         });
 
-        // Guest signs in while on this page → push their entries to the account journal.
+        // Guest signs in while on this page → push entries up and confirm.
         document.addEventListener('wop:auth-login', function () {
             textareas.forEach(function (ta) {
                 var pauseId = pauseIdFor(ta);
                 if (!pauseId) return;
+                var statusEl = ta.nextElementSibling;
                 var val = '';
                 try { val = localStorage.getItem(storageKey(pauseId)) || ''; } catch (e) {}
-                syncToApi(pauseId, val);
+                if (!val.trim()) return;
+                syncToApi(pauseId, val).then(function () {
+                    if (statusEl && statusEl.classList.contains('rjw-status')) setStatus(statusEl, 'synced');
+                });
             });
         });
     })();
