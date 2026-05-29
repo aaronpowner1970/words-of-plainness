@@ -51,11 +51,9 @@
             </svg>
         </button>
         <div class="dropdown-menu" id="featuresDropdown">
-            {# PLACEHOLDER ITEMS — assets not yet produced #}
-            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+            <button class="dropdown-item" id="btnArticlesPodcast" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
                 <span>Articles Podcast</span>
-                <span class="placeholder-badge">Coming soon</span>
             </button>
             <button class="dropdown-item" id="btnMusicalTestimony" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
@@ -118,10 +116,9 @@
             </svg>
         </button>
         <div class="dropdown-menu dropup" id="bottomFeaturesDropdown">
-            <button class="dropdown-item articles-placeholder" disabled aria-disabled="true">
+            <button class="dropdown-item" id="btnArticlesPodcastBottom" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
                 <span>Articles Podcast</span>
-                <span class="placeholder-badge">Coming soon</span>
             </button>
             <button class="dropdown-item" id="btnMusicalTestimonyBottom" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="2" fill="none"/></svg>
@@ -335,6 +332,68 @@
     <a class="vs-fulllink" id="vsFullLink" href="https://media.wordsofplainness.org/web/Articles_of_Interfaith_Discipleship_Infographic.png" target="_blank" rel="noopener">Open full resolution &#8599;</a>
 </div>
 
+<!-- Articles Podcast Modal (3-episode dramatized series) -->
+<style>
+.pod-backdrop{position:fixed;inset:0;background:rgba(20,10,12,.62);opacity:0;visibility:hidden;transition:opacity .25s;z-index:1200;}
+.pod-backdrop.open{opacity:1;visibility:visible;}
+.pod-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%);width:min(580px,92vw);max-height:88vh;overflow-y:auto;background:#2a1618;color:#f3e9e0;border:1px solid rgba(212,175,105,.35);border-radius:14px;padding:30px 26px 24px;box-shadow:0 24px 60px rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s;z-index:1201;}
+.pod-modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%);}
+.pod-close{position:absolute;top:12px;right:14px;background:none;border:none;color:#d9c4b0;font-size:20px;line-height:1;cursor:pointer;}
+.pod-close:hover{color:#fff;}
+.pod-eyebrow{margin:0 0 4px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#d4af69;}
+.pod-title{margin:0 0 2px;font-family:'Cinzel',serif;font-size:1.5rem;color:#fff;}
+.pod-label{margin:0 0 16px;font-size:.85rem;color:#c8b3a3;font-style:italic;}
+.pod-eplist{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:8px;}
+.pod-ep{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:rgba(212,175,105,.06);border:1px solid rgba(212,175,105,.22);border-radius:10px;padding:11px 13px;color:#ecdfd4;cursor:pointer;transition:background .15s,border-color .15s;}
+.pod-ep:hover{background:rgba(212,175,105,.12);}
+.pod-ep.active{background:rgba(212,175,105,.16);border-color:rgba(212,175,105,.55);}
+.pod-ep-num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:rgba(212,175,105,.18);color:#d4af69;font-size:.8rem;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.pod-ep-body{flex:1 1 auto;min-width:0;}
+.pod-ep-title{display:block;font-size:.98rem;color:#fff;line-height:1.25;}
+.pod-ep-meta{display:block;font-size:.78rem;color:#c8b3a3;margin-top:2px;}
+.pod-now{margin:0 0 6px;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#d4af69;}
+.pod-now span{color:#ecdfd4;text-transform:none;letter-spacing:0;font-style:italic;}
+.pod-audio{width:100%;margin:0;}
+</style>
+<div class="pod-backdrop" id="podBackdrop" aria-hidden="true"></div>
+<div class="pod-modal" id="podModal" role="dialog" aria-modal="true" aria-labelledby="podTitle" aria-hidden="true">
+    <button class="pod-close" id="podClose" aria-label="Close articles podcast" type="button">&#10005;</button>
+    <p class="pod-eyebrow">Articles Podcast</p>
+    <h2 class="pod-title" id="podTitle">The Interfaith Chat Room</h2>
+    <p class="pod-label">A dramatized companion &middot; the thirteen Articles as lived conversation</p>
+    <ul class="pod-eplist" id="podEplist">
+        <li>
+            <button class="pod-ep active" type="button" data-pod-src="https://media.wordsofplainness.org/web/POD_Articles_S1.mp3" data-pod-title="How Can We Even Talk About This?">
+                <span class="pod-ep-num">1</span>
+                <span class="pod-ep-body">
+                    <span class="pod-ep-title">How Can We Even Talk About This?</span>
+                    <span class="pod-ep-meta">Articles 1&ndash;4 &middot; establishing the room, who God is, His Word</span>
+                </span>
+            </button>
+        </li>
+        <li>
+            <button class="pod-ep" type="button" data-pod-src="https://media.wordsofplainness.org/web/POD_Articles_S2.mp3" data-pod-title="The Heart of It">
+                <span class="pod-ep-num">2</span>
+                <span class="pod-ep-body">
+                    <span class="pod-ep-title">The Heart of It</span>
+                    <span class="pod-ep-meta">Articles 5, 6, 7, 10 &middot; Christ, salvation, the kingdom, grace</span>
+                </span>
+            </button>
+        </li>
+        <li>
+            <button class="pod-ep" type="button" data-pod-src="https://media.wordsofplainness.org/web/POD_Articles_S3.mp3" data-pod-title="Walking It Out">
+                <span class="pod-ep-num">3</span>
+                <span class="pod-ep-body">
+                    <span class="pod-ep-title">Walking It Out</span>
+                    <span class="pod-ep-meta">Articles 8, 9, 11, 12, 13 &middot; belonging, endurance, hope</span>
+                </span>
+            </button>
+        </li>
+    </ul>
+    <p class="pod-now">Now playing: <span id="podNowTitle">How Can We Even Talk About This?</span></p>
+    <audio class="pod-audio" id="podAudio" controls preload="none" src="https://media.wordsofplainness.org/web/POD_Articles_S1.mp3"></audio>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -463,6 +522,53 @@ document.addEventListener('DOMContentLoaded', function() {
         vsBackdrop.addEventListener('click', closeVs);
         document.addEventListener('keydown', function (e) {
             if ((e.key === 'Escape' || e.key === 'Esc') && vsModal.classList.contains('open')) closeVs();
+        });
+    })();
+
+    // ── Articles Podcast modal (3-episode dramatized series) ──
+    (function () {
+        var podModal = document.getElementById('podModal');
+        var podBackdrop = document.getElementById('podBackdrop');
+        var podAudio = document.getElementById('podAudio');
+        var podNowTitle = document.getElementById('podNowTitle');
+        if (!podModal || !podBackdrop) return;
+        function openPod(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            podModal.classList.add('open');
+            podBackdrop.classList.add('open');
+            podModal.setAttribute('aria-hidden', 'false');
+            podBackdrop.setAttribute('aria-hidden', 'false');
+            document.getElementById('featuresDropdown')?.classList.remove('open');
+            document.getElementById('bottomFeaturesDropdown')?.classList.remove('open');
+        }
+        function closePod() {
+            podModal.classList.remove('open');
+            podBackdrop.classList.remove('open');
+            podModal.setAttribute('aria-hidden', 'true');
+            podBackdrop.setAttribute('aria-hidden', 'true');
+            if (podAudio) { podAudio.pause(); }
+        }
+        document.getElementById('btnArticlesPodcast')?.addEventListener('click', openPod);
+        document.getElementById('btnArticlesPodcastBottom')?.addEventListener('click', openPod);
+        document.getElementById('podClose')?.addEventListener('click', closePod);
+        podBackdrop.addEventListener('click', closePod);
+        document.addEventListener('keydown', function (e) {
+            if ((e.key === 'Escape' || e.key === 'Esc') && podModal.classList.contains('open')) closePod();
+        });
+        podModal.querySelectorAll('.pod-ep').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var src = btn.getAttribute('data-pod-src');
+                var title = btn.getAttribute('data-pod-title');
+                if (!src || !podAudio) return;
+                if (podAudio.getAttribute('src') !== src) {
+                    podAudio.setAttribute('src', src);
+                    podAudio.load();
+                    if (podNowTitle) podNowTitle.textContent = title || '';
+                }
+                podModal.querySelectorAll('.pod-ep').forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                podAudio.play().catch(function () {});
+            });
         });
     })();
 
