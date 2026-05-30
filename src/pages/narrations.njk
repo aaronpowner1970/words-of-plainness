@@ -102,7 +102,8 @@ permalink: /narrations/
          ========================================== -->
     <div class="narration-how-it-works">
       <h2 class="narration-note-heading">How This Page Works</h2>
-      <p>Every chapter offers two ways to listen. <strong>Podcast tracks</strong> give you the chapter's themes in a shorter format — some are brief overviews, others are dramatizations or discussions. <strong>Full narrations</strong> are the complete chapter read aloud by Brother Aaron, word for word.</p>
+      <p>At the top, the <strong>Articles Podcast</strong> is a three-part dramatized series exploring the Articles of Interfaith Discipleship as a living conversation. It plays start to finish as its own series.</p>
+      <p>Below it, every chapter offers two ways to listen. <strong>Podcast tracks</strong> give you the chapter's themes in a shorter format — some are brief overviews, others are dramatizations or discussions. <strong>Full narrations</strong> are the complete chapter read aloud by Brother Aaron, word for word.</p>
       <p>Press play on any track and it will continue through each chapter automatically. Podcast tracks advance to the next chapter's podcast. Full narrations advance to the next chapter's full narration. You can switch between them at any time.</p>
     </div>
 
@@ -110,6 +111,36 @@ permalink: /narrations/
          Chapter List
          ========================================== -->
     <div class="narration-container">
+
+        <!-- Articles Podcast — dramatized 3-part series (single-track episodes) -->
+        <div class="narration-section-header">
+            <h2 class="section-title">Articles Podcast</h2>
+            <p class="section-subtitle">The Interfaith Chat Room &middot; a dramatized companion to the thirteen Articles</p>
+        </div>
+        <div class="narration-episode-row" data-episode="1" data-chapter-url="/articles/" data-title="Intro to Interfaith Articles" data-src="https://media.wordsofplainness.org/web/POD_Articles_S1.mp3">
+            <div class="narration-episode-info">
+                <span class="narration-ep-num">Ep 1</span>
+                <span class="narration-track-label">Intro to Interfaith Articles</span>
+                <span class="narration-episode-desc">Articles 1&ndash;4: plainness, who God is, creation and life, and how He still speaks.</span>
+            </div>
+            <span class="narration-track-duration">18:16</span>
+        </div>
+        <div class="narration-episode-row" data-episode="2" data-chapter-url="/articles/" data-title="The Heart of Our Faith" data-src="https://media.wordsofplainness.org/web/POD_Articles_S2.mp3">
+            <div class="narration-episode-info">
+                <span class="narration-ep-num">Ep 2</span>
+                <span class="narration-track-label">The Heart of Our Faith</span>
+                <span class="narration-episode-desc">Articles 5, 6, 7, 10: Jesus Christ, the salvation He offers, the kingdom at hand, and a life lived by grace.</span>
+            </div>
+            <span class="narration-track-duration">16:25</span>
+        </div>
+        <div class="narration-episode-row" data-episode="3" data-chapter-url="/articles/" data-title="Walking His Path" data-src="https://media.wordsofplainness.org/web/POD_Articles_S3.mp3">
+            <div class="narration-episode-info">
+                <span class="narration-ep-num">Ep 3</span>
+                <span class="narration-track-label">Walking His Path</span>
+                <span class="narration-episode-desc">Articles 8, 9, 11, 12, 13: fellow believers, finding our way, covenants, and the confidence that carries us home.</span>
+            </div>
+            <span class="narration-track-duration">14:49</span>
+        </div>
 
         {%- set narratedChapters = [] -%}
         {%- for chapter in collections.chapters -%}
@@ -131,7 +162,7 @@ permalink: /narrations/
         {%- endfor -%}
 
         {%- if m1Chapters.length > 0 -%}
-        <div class="narration-section-header">
+        <div class="narration-section-header narration-section-header--subsequent">
             <h2 class="section-title">Finding Faith in Christ</h2>
             <p class="section-subtitle">Foundations of faith and receiving Christ</p>
         </div>

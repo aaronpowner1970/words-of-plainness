@@ -72,14 +72,31 @@ var NarrationPlayer = {
     },
 
     loadChapters: function() {
-        var groups = document.querySelectorAll('.narration-chapter-group');
         var self = this;
-        this.chapters = Array.from(groups).map(function(group, i) {
+
+        // Articles Podcast series — single-track episode rows (no chapter twin)
+        var episodes = Array.from(document.querySelectorAll('.narration-episode-row')).map(function(row) {
+            return {
+                isEpisode: true,
+                chapter: null,
+                title: row.dataset.title,
+                slug: 'articles-pod-' + row.dataset.episode,
+                url: row.dataset.chapterUrl || '/articles/',
+                group: row,
+                podcastRow: row,
+                narrationRow: null,
+                podcast: { src: row.dataset.src, type: 'single' },
+                narration: { type: 'single', src: row.dataset.src }
+            };
+        });
+
+        var groups = document.querySelectorAll('.narration-chapter-group');
+        var chapters = Array.from(groups).map(function(group) {
             var podcastRow = group.querySelector('[data-track-type="podcast"]');
             var narrationRow = group.querySelector('[data-track-type="narration"]');
 
-            var ch = {
-                index: i,
+            return {
+                isEpisode: false,
                 chapter: parseInt(podcastRow.dataset.chapter, 10),
                 title: podcastRow.dataset.title,
                 slug: podcastRow.dataset.slug,
@@ -93,9 +110,11 @@ var NarrationPlayer = {
                 },
                 narration: self.parseNarrationTrack(narrationRow)
             };
-
-            return ch;
         });
+
+        // Episodes first (DOM order), then chapters. Re-index sequentially.
+        this.chapters = episodes.concat(chapters);
+        this.chapters.forEach(function(ch, i) { ch.index = i; });
     },
 
     parseNarrationTrack: function(row) {
@@ -181,12 +200,14 @@ var NarrationPlayer = {
                 self.loadTrack(i, 'podcast');
                 self.play();
             });
-            ch.narrationRow.addEventListener('click', function(e) {
-                if (e.target.closest('a')) return;
-                self.dismissResume();
-                self.loadTrack(i, 'narration');
-                self.play();
-            });
+            if (ch.narrationRow) {
+                ch.narrationRow.addEventListener('click', function(e) {
+                    if (e.target.closest('a')) return;
+                    self.dismissResume();
+                    self.loadTrack(i, 'narration');
+                    self.play();
+                });
+            }
         });
 
         // Keyboard shortcuts
@@ -243,6 +264,7 @@ var NarrationPlayer = {
         this.stopProgressInterval();
 
         var ch = this.chapters[index];
+        if (ch.isEpisode) { trackType = 'podcast'; }
         this.currentIndex = index;
         this.currentTrackType = trackType;
         this.currentSectionIndex = sectionIndex || 0;
@@ -275,12 +297,16 @@ var NarrationPlayer = {
         this.updateViewText(ch.chapter, ch.title, trackType);
         this.clearAllHighlights();
         var activeRow = trackType === 'podcast' ? ch.podcastRow : ch.narrationRow;
-        activeRow.classList.add('playing');
-        activeRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (activeRow) {
+            activeRow.classList.add('playing');
+            activeRow.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
 
-        // Save to localStorage
-        localStorage.setItem(this.STORAGE_KEY_CHAPTER, ch.chapter);
-        localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
+        // Save to localStorage (chapter restore keys don't apply to episodes)
+        if (!ch.isEpisode) {
+            localStorage.setItem(this.STORAGE_KEY_CHAPTER, ch.chapter);
+            localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
+        }
 
         // Reset progress display
         this.els.progressFill.style.width = '0%';
@@ -290,7 +316,7 @@ var NarrationPlayer = {
     },
 
     clearAllHighlights: function() {
-        var allRows = document.querySelectorAll('.narration-track-row');
+        var allRows = document.querySelectorAll('.narration-track-row, .narration-episode-row');
         for (var i = 0; i < allRows.length; i++) {
             allRows[i].classList.remove('playing');
         }
@@ -409,6 +435,20 @@ var NarrationPlayer = {
 
         var ch = this.chapters[this.currentIndex];
 
+        // Articles Podcast: advance to the next episode, then stop at the end of the series
+        if (ch.isEpisode) {
+            this.saveProgress(true);
+            this.markTrackCompleted(ch.slug, 'podcast');
+            var nextEp = this.currentIndex + 1;
+            if (nextEp < this.chapters.length && this.chapters[nextEp].isEpisode) {
+                this.loadTrack(nextEp, 'podcast');
+                this.play();
+            } else {
+                this.resetPlayer();
+            }
+            return;
+        }
+
         // For section-based narrations, advance to next section within the chapter
         if (this.currentTrackType === 'narration' && ch.narration.type === 'sections') {
             if (this.currentSectionIndex < ch.narration.sections.length - 1) {
@@ -449,6 +489,10 @@ var NarrationPlayer = {
 
     updateNowPlaying: function(ch, trackType) {
         this.els.npTitle.textContent = ch.title;
+        if (ch.isEpisode) {
+            this.els.npChapter.textContent = 'Articles Podcast';
+            return;
+        }
         var label = 'Ch. ' + ch.chapter;
         if (trackType === 'podcast') {
             var podcastLabel = ch.podcastRow.querySelector('.narration-track-label');
@@ -515,13 +559,15 @@ var NarrationPlayer = {
             updated_at: new Date().toISOString()
         }));
 
-        // Also save the simple restore keys
-        localStorage.setItem(this.STORAGE_KEY_CHAPTER, ch.chapter);
-        localStorage.setItem(this.STORAGE_KEY_POSITION, position);
-        localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
+        // Also save the simple restore keys (chapters only — episodes don't restore by number)
+        if (!ch.isEpisode) {
+            localStorage.setItem(this.STORAGE_KEY_CHAPTER, ch.chapter);
+            localStorage.setItem(this.STORAGE_KEY_POSITION, position);
+            localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
+        }
 
-        // If authenticated, save to API
-        if (this._isAuthenticated() && !this._saveInFlight) {
+        // If authenticated, save to API (skip episodes — not chapter-backed)
+        if (!ch.isEpisode && this._isAuthenticated() && !this._saveInFlight) {
             this._saveInFlight = true;
             var self = this;
             API.request('/progress/narration-progress/', {
@@ -707,6 +753,12 @@ var NarrationPlayer = {
     updateViewText: function(chapterNum, chapterTitle, trackType) {
         var panel = document.querySelector('#viewTextPanel .view-text-panel');
         if (!panel) return;
+
+        if (chapterNum == null) {
+            panel.innerHTML = '<h2 class="view-text-heading">' + chapterTitle + '</h2>' +
+                '<div class="view-text-content"><p class="view-text-gated">This is a dramatized episode from the Articles Podcast. You can read the Articles of Interfaith Discipleship in full on the <a href="/articles/">Articles page</a>.</p></div>';
+            return;
+        }
 
         if (trackType === 'podcast') {
             panel.innerHTML = '<h2 class="view-text-heading">Chapter ' + chapterNum + ': ' + chapterTitle + '</h2>' +
