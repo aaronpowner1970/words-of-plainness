@@ -8,6 +8,7 @@
         <button class="toolbar-btn" id="fontIncrease" aria-label="Increase font size">A+</button>
     </div>
     
+    {% if not hideProgressTools %}
     <!-- Bookmark -->
     <button class="toolbar-btn" id="bookmarkBtn" aria-label="Bookmark current position">
         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
@@ -24,6 +25,7 @@
         </svg>
         <span>Mark Complete</span>
     </button>
+    {% endif %}
 
     <!-- Share -->
     <button class="toolbar-btn" id="shareBtn" aria-label="Share this chapter">

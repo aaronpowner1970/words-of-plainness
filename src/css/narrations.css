@@ -635,7 +635,8 @@
 .narration-chapter-header {
     display: flex;
     align-items: baseline;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 4px 10px;
     padding: 14px 16px 6px;
 }
 
@@ -654,12 +655,19 @@
 }
 
 .narration-chapter-link {
-    color: rgba(232, 220, 196, 0.4);
+    color: rgba(196, 148, 58, 0.85);
     margin-left: auto;
     flex-shrink: 0;
+    gap: 5px;
     transition: color 0.2s;
     display: inline-flex;
     align-items: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.narration-chapter-link::before {
+    content: "Read the Full Chapter";
 }
 
 .narration-chapter-link:hover {
@@ -954,14 +962,6 @@
 
     .narration-track-row.playing {
         padding-left: 25px;
-    }
-
-    .narration-track-duration {
-        display: none;
-    }
-
-    .track-completed {
-        right: 10px;
     }
 
     .narration-section-header {

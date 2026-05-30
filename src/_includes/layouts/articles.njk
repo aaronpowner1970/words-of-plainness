@@ -148,6 +148,7 @@
 
 <div data-pagefind-ignore>
 {% include "components/discord-section.njk" %}
+{% set hideProgressTools = true %}
 {% include "components/bottom-toolbar.njk" %}
 {% include "components/back-to-top.njk" %}
 {% include "components/fab-lantern.njk" %}
@@ -351,6 +352,7 @@
 .pod-ep-body{flex:1 1 auto;min-width:0;}
 .pod-ep-title{display:block;font-size:.98rem;color:#fff;line-height:1.25;}
 .pod-ep-meta{display:block;font-size:.78rem;color:#c8b3a3;margin-top:2px;}
+.pod-ep-dur{flex:0 0 auto;font-size:.78rem;color:#c8b3a3;font-variant-numeric:tabular-nums;padding-top:2px;}
 .pod-now{margin:0 0 6px;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:#d4af69;}
 .pod-now span{color:#ecdfd4;text-transform:none;letter-spacing:0;font-style:italic;}
 .pod-audio{width:100%;margin:0;}
@@ -369,6 +371,7 @@
                     <span class="pod-ep-title">Intro to Interfaith Articles</span>
                     <span class="pod-ep-meta">Articles 1&ndash;4 &middot; establishing the room, who God is, His Word</span>
                 </span>
+                <span class="pod-ep-dur">18:16</span>
             </button>
         </li>
         <li>
@@ -378,6 +381,7 @@
                     <span class="pod-ep-title">The Heart of Our Faith</span>
                     <span class="pod-ep-meta">Articles 5, 6, 7, 10 &middot; Christ, salvation, the kingdom, grace</span>
                 </span>
+                <span class="pod-ep-dur">16:25</span>
             </button>
         </li>
         <li>
@@ -387,6 +391,7 @@
                     <span class="pod-ep-title">Walking His Path</span>
                     <span class="pod-ep-meta">Articles 8, 9, 11, 12, 13 &middot; belonging, endurance, hope</span>
                 </span>
+                <span class="pod-ep-dur">14:49</span>
             </button>
         </li>
     </ul>

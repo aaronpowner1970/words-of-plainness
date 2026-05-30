@@ -70,6 +70,9 @@ const WopFontSize = (() => {
     return { init, increase, decrease, reset, set, get, DEFAULT, MIN, MAX };
 })();
 
+// Expose globally so inline page scripts (e.g. /articles/) can call it via window.WopFontSize
+window.WopFontSize = WopFontSize;
+
 // Auto-init as soon as the DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', WopFontSize.init);
