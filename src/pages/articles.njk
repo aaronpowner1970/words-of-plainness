@@ -223,3 +223,36 @@ discordChannelId: ""
         <p class="articles-colophon-line">A Words of Plainness Project · <a href="mailto:host@brotheraaron.org">host@brotheraaron.org</a></p>
     </div>
 </div>
+
+<style>
+/* What's Next CTA — closes the Articles page, above the Learning Tools band */
+.whats-next-row {
+    text-align: center;
+    margin: var(--space-xl) auto var(--space-lg);
+}
+.whats-next-link {
+    display: inline-block;
+    color: var(--gold-primary);
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: 0.5rem 1.1rem;
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast), background var(--transition-fast),
+                text-shadow var(--transition-fast), filter var(--transition-fast);
+}
+.whats-next-link:hover {
+    color: var(--gold-light);
+    background: rgba(196, 148, 58, 0.10);
+    text-shadow: 0 0 14px rgba(212, 168, 74, 0.45);
+}
+.whats-next-link:active {
+    filter: brightness(1.25);
+}
+</style>
+
+<div class="whats-next-row">
+    <a href="/writings/" class="whats-next-link">What&rsquo;s Next? Explore My Writings</a>
+</div>
