@@ -119,6 +119,53 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
     letter-spacing: 0.06em;
     position: relative;
 }
+
+/* ── Start Here: Articles of Interfaith Discipleship ──────────
+   Centered gold CTA above the volume cards. Medallion sits left
+   of the text and scales with it. Highlights on hover (brighter
+   gold + soft glow), brightens on click (:active).
+──────────────────────────────────────────────────────────── */
+.start-here-row {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.start-here-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--gold-primary);
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast), background var(--transition-fast),
+                text-shadow var(--transition-fast), filter var(--transition-fast);
+}
+
+.start-here-link:hover {
+    color: var(--gold-light);
+    background: rgba(196, 148, 58, 0.10);
+    text-shadow: 0 0 14px rgba(212, 168, 74, 0.45);
+}
+
+.start-here-link:hover .start-here-medallion {
+    filter: drop-shadow(0 2px 10px rgba(196, 148, 58, 0.55));
+}
+
+.start-here-link:active {
+    filter: brightness(1.25);
+}
+
+.start-here-medallion {
+    width: 3em;
+    height: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
 </style>
 
 <!-- Custom hero — bypasses pageTitle/pageSubtitle to allow two-line title layout -->
@@ -133,6 +180,13 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
 <!-- Words of Plainness Volumes -->
 <section class="content-section alt" id="volumes">
     <div class="content-wrapper" style="max-width: 900px;">
+        <div class="start-here-row">
+            <a href="/articles/" class="start-here-link">
+                <img src="/assets/images/articles_banner_shadow.png" alt="Articles of Interfaith Discipleship medallion" class="start-here-medallion">
+                <span>Start Here: Articles of Interfaith Discipleship</span>
+            </a>
+        </div>
+
         <div class="volume-hub-grid">
             <a href="/volume-1/" class="volume-hub-card">
                 <div class="volume-hub-label">Volume 1</div>
