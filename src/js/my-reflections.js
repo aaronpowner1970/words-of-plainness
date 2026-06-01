@@ -198,7 +198,7 @@ var Journal = {
         var slugs = {};
         this.rjwEntries.forEach(function(r) { if (r.chapter_slug) slugs[r.chapter_slug] = true; });
         this.commitments.forEach(function(c) { if (c.chapter_slug) slugs[c.chapter_slug] = true; });
-        var chapterCount = Object.keys(slugs).length;
+        var chapterCount = Object.keys(slugs).filter(function(s) { return !(CHAPTER_INFO[s] && CHAPTER_INFO[s].standalone); }).length;
 
         var allDates = [];
         this.rjwEntries.forEach(function(r) { if (r.updated_at) allDates.push(r.updated_at); });
@@ -207,7 +207,7 @@ var Journal = {
         var recent = allDates.length > 0 ? djFormatDate(allDates[0]) : '\u2014';
 
         document.getElementById('statTotal').textContent = total;
-        document.getElementById('statChapters').textContent = chapterCount + ' of ' + Object.keys(CHAPTER_INFO).length;
+        document.getElementById('statChapters').textContent = chapterCount + ' of ' + Object.keys(CHAPTER_INFO).filter(function(k) { return !CHAPTER_INFO[k].standalone; }).length;
         document.getElementById('statRecent').textContent = recent;
     },
 
