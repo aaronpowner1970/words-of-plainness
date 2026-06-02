@@ -1100,3 +1100,84 @@
     font-size: 0.95rem;
     opacity: 0.6;
 }
+
+
+/* ═════════════════════════════════════════════════════
+   GOLD CONTENTS TAB + DRAWER  (Option C — June 2026)
+   Tab: solid gold fill, dark text, larger "Click for Contents:
+   13 Articles" label, clearer chevron. Drawer: gold fill matching
+   the tab (the tab reads as the drawer's lip), with all inner
+   text / links / dividers re-darkened for contrast on gold.
+   Overrides the an- rules above by source order.
+   ═════════════════════════════════════════════════════ */
+
+/* Tab — solid gold, dark text, larger */
+.an-tab {
+    background: var(--gold-primary, #C4943A);
+    border-color: #8a6722;
+    padding: 1.2rem 0.85rem;
+}
+.an-tab:hover {
+    background: var(--gold-light, #D4A84A);
+    border-color: #8a6722;
+}
+.an-tab-label {
+    color: var(--brown-rich, #1F1012);
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+}
+.an-tab:hover .an-tab-label,
+.an-tab.an-is-open .an-tab-label {
+    color: var(--brown-rich, #1F1012);
+}
+.an-tab-chevron { color: rgba(31, 16, 18, 0.75); }
+.an-tab:hover .an-tab-chevron,
+.an-tab.an-is-open .an-tab-chevron { color: var(--brown-rich, #1F1012); }
+
+/* Drawer — gold fill to match the tab */
+.an-drawer {
+    background: var(--gold-primary, #C4943A);
+    border-right-color: rgba(31, 16, 18, 0.32);
+}
+.an-drawer-header {
+    background: transparent;
+    border-bottom-color: rgba(31, 16, 18, 0.22);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.an-drawer-title { color: var(--brown-rich, #1F1012); }
+.an-drawer-close {
+    color: var(--brown-rich, #1F1012);
+    border-color: rgba(31, 16, 18, 0.3);
+}
+.an-drawer-close:hover {
+    color: var(--brown-rich, #1F1012);
+    border-color: var(--brown-rich, #1F1012);
+    background: rgba(31, 16, 18, 0.08);
+}
+.an-drawer-nav { scrollbar-color: rgba(31, 16, 18, 0.35) transparent; }
+.an-drawer-nav::-webkit-scrollbar-thumb { background: rgba(31, 16, 18, 0.35); }
+
+/* Drawer links — dark on gold */
+.an-link {
+    color: var(--brown-rich, #1F1012);
+    opacity: 0.82;
+}
+.an-link:hover {
+    background: rgba(31, 16, 18, 0.10);
+    color: var(--brown-rich, #1F1012);
+    opacity: 1;
+    border-left-color: rgba(31, 16, 18, 0.5);
+}
+.an-link.an-active {
+    color: var(--brown-rich, #1F1012);
+    opacity: 1;
+    border-left-color: var(--brown-rich, #1F1012);
+    background: rgba(31, 16, 18, 0.13);
+    font-weight: 600;
+}
+.an-num { color: var(--brown-rich, #1F1012); opacity: 0.55; }
+
+/* Companion essays section */
+.an-companions { border-top-color: rgba(31, 16, 18, 0.22); }
+.an-companions-heading { color: var(--brown-rich, #1F1012); opacity: 0.85; }
