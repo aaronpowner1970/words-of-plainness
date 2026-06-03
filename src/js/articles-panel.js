@@ -122,7 +122,7 @@
         isOpen = true;
         panel.classList.add('ap-open');
         panel.setAttribute('aria-hidden', 'false');
-        if (!isDesktopHover()) { backdrop.classList.add('ap-open'); }
+        if (!window.matchMedia('(min-width: 1200px)').matches) { backdrop.classList.add('ap-open'); }
     }
 
     function closePanel() {

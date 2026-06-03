@@ -343,6 +343,8 @@
         else if (e.key === 'Escape' || e.key === 'Esc') {
             if (document.fullscreenElement || document.webkitFullscreenElement) {
                 (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            } else if (facEl.classList.contains('open')) {
+                closeFacilitator();
             } else {
                 closeSlides();
             }

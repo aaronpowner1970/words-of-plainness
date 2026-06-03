@@ -8,6 +8,8 @@
 const fs = require('fs');
 const path = require('path');
 const scriptureData = require('./src/_data/scriptures.json');
+const articleThemes = require('./src/_data/articleThemes.json');
+const chapterThemes = require('./src/_data/chapterThemes.json');
 
 module.exports = function(eleventyConfig) {
 
@@ -117,6 +119,85 @@ module.exports = function(eleventyConfig) {
     
     // JSON stringify without pretty printing (for inline use)
     eleventyConfig.addFilter("json", obj => JSON.stringify(obj));
+
+    // =========================================
+    // GO-DEEPER ENGINE (#4 auto-absorb)
+    // Recomputes Articles ↔ chapter correlations on EVERY build from
+    // collections.chapters. A chapter joins all article correlations the
+    // moment it carries a `themes:` frontmatter line (or a chapterThemes.json
+    // seed entry). Nothing here is hand-maintained.
+    //   Usage: window.WOP_GODEEPER = {{ collections.chapters | goDeeperData | safe }}
+    // =========================================
+    eleventyConfig.addFilter("goDeeperData", function(chapters) {
+        // Frontmatter `themes:` wins; else fall back to the chapterThemes seed.
+        function resolveThemes(ch) {
+            if (Array.isArray(ch.data.themes) && ch.data.themes.length) return ch.data.themes;
+            var key = ch.data.slug || ch.fileSlug;
+            return chapterThemes[key] || [];
+        }
+
+        // Index only chapters that actually carry themes.
+        var indexed = (chapters || []).map(function(ch) {
+            var themes = resolveThemes(ch);
+            if (!themes.length) return null;
+            var t = (ch.data.audio && ch.data.audio.testimony) ? ch.data.audio.testimony : null;
+            return {
+                slug: ch.data.slug || ch.fileSlug,
+                chapter: ch.data.chapter,
+                title: ch.data.title,
+                description: ch.data.description || '',
+                url: ch.url,
+                scripture: (ch.data.scripture && ch.data.scripture.reference) || '',
+                themes: themes,
+                testimony: t ? {
+                    file: t.file || '',
+                    title: t.title || '',
+                    label: t.label || '',
+                    duration: t.duration || null
+                } : null
+            };
+        }).filter(Boolean);
+
+        var out = {};
+        Object.keys(articleThemes).forEach(function(slug) {
+            var art = articleThemes[slug] || {};
+            var artThemes = art.themes || [];
+
+            // Score each themed chapter by count of shared themes.
+            var scored = indexed.map(function(ch) {
+                var overlap = ch.themes.filter(function(th) { return artThemes.indexOf(th) !== -1; }).length;
+                return { ch: ch, overlap: overlap };
+            }).filter(function(s) { return s.overlap > 0; });
+
+            // Highest overlap first; ties broken by ascending chapter number.
+            scored.sort(function(a, b) {
+                if (b.overlap !== a.overlap) return b.overlap - a.overlap;
+                return (a.ch.chapter || 0) - (b.ch.chapter || 0);
+            });
+
+            var top = scored.slice(0, 6).map(function(s) { return s.ch; });
+
+            out[slug] = {
+                themes: artThemes,
+                searchSeed: art.searchSeed || '',
+                chapters: top.map(function(c) {
+                    return { chapter: c.chapter, title: c.title, description: c.description, url: c.url, scripture: c.scripture };
+                }),
+                music: top.filter(function(c) { return c.testimony; }).map(function(c) {
+                    return {
+                        title: c.testimony.title,
+                        file: c.testimony.file,
+                        label: c.testimony.label,
+                        duration: c.testimony.duration,
+                        chapter: c.chapter,
+                        url: c.url
+                    };
+                })
+            };
+        });
+
+        return JSON.stringify(out);
+    });
     
     // Current year/date for templates
     eleventyConfig.addFilter("now", (value, format) => {

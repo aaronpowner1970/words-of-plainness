@@ -1181,3 +1181,310 @@
 /* Companion essays section */
 .an-companions { border-top-color: rgba(31, 16, 18, 0.22); }
 .an-companions-heading { color: var(--brown-rich, #1F1012); opacity: 0.85; }
+
+
+/* ============================================
+   PATHWAYS BAND  (pw-)
+   articles.njk — "how do you want to begin?" wayfinding band.
+   Two labeled groups (Start with the whole / Go deep on one),
+   two cards each. 2×2 on desktop, single column on mobile.
+   ============================================ */
+
+.pw-band {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin: 4px 0 16px;
+}
+
+.pw-group-label {
+    margin: 0 0 10px;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-primary, #C4943A);
+}
+
+.pw-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pw-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 13px;
+    row-gap: 3px;
+    width: 100%;
+    text-align: left;
+    background: rgba(196, 148, 58, 0.06);
+    border: 1px solid rgba(196, 148, 58, 0.22);
+    border-radius: 12px;
+    padding: 15px 17px;
+    color: var(--cream, #E8DCC4);
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.pw-card:hover {
+    background: rgba(196, 148, 58, 0.12);
+    border-color: rgba(196, 148, 58, 0.5);
+}
+
+.pw-card:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+
+.pw-card-icon {
+    grid-row: 1 / 3;
+    align-self: center;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(196, 148, 58, 0.12);
+    color: var(--gold-light, #D4A84A);
+}
+
+.pw-card-icon svg { width: 19px; height: 19px; }
+
+.pw-card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.02rem;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.pw-card-desc {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.82;
+}
+
+@media (max-width: 720px) {
+    .pw-band {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
+
+/* ============================================
+   GO-DEEPER PANEL  (gd-)
+   articles.njk — per-article inline disclosure injected by
+   articles-godeeper.js, reading window.WOP_GODEEPER. Three tabs:
+   Related chapters / Musical testimonies / Search this theme.
+   Collapsed by default; "Go deeper" toggle expands the body.
+   ============================================ */
+
+.gd-block {
+    margin-top: 24px;
+    border-top: 1px solid rgba(196, 148, 58, 0.22);
+    padding-top: 14px;
+}
+
+.gd-toggle {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    text-align: left;
+    padding: 13px 16px;
+    cursor: pointer;
+    border: 1px solid rgba(196, 148, 58, 0.30);
+    border-radius: 12px;
+    background: rgba(196, 148, 58, 0.07);
+    color: var(--gold-primary, #C4943A);
+    font-family: inherit;
+    transition: background 0.18s ease, border-color 0.18s ease;
+}
+.gd-toggle:hover {
+    background: rgba(196, 148, 58, 0.13);
+    border-color: rgba(196, 148, 58, 0.55);
+}
+.gd-toggle:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 3px;
+}
+.gd-toggle-icon {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(196, 148, 58, 0.14);
+    color: var(--gold-light, #D4A84A);
+}
+.gd-toggle-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.gd-toggle-label {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: var(--gold-primary, #C4943A);
+}
+.gd-toggle-scent {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.8rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.7;
+}
+.gd-toggle-chevron {
+    flex: 0 0 auto;
+    margin-left: auto;
+    color: var(--gold-light, #D4A84A);
+    transition: transform 0.2s ease;
+}
+.gd-block.gd-open .gd-toggle-chevron { transform: rotate(180deg); }
+
+.gd-body { margin-top: 12px; }
+
+.gd-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.22);
+    margin-bottom: 14px;
+}
+.gd-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    padding: 7px 12px;
+    cursor: pointer;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.72;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.92rem;
+    transition: color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+.gd-tab:hover { opacity: 1; color: var(--gold-light, #D4A84A); }
+.gd-tab--active {
+    opacity: 1;
+    color: var(--gold-primary, #C4943A);
+    border-bottom-color: var(--gold-primary, #C4943A);
+}
+.gd-tab:focus-visible { outline: 2px solid var(--gold-primary, #C4943A); outline-offset: 2px; }
+
+.gd-pane.gd-hidden { display: none; }
+
+.gd-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.gd-item-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+.gd-item-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.98rem;
+    line-height: 1.25;
+    color: var(--gold-primary, #C4943A);
+}
+.gd-item-num {
+    color: var(--gold-light, #D4A84A);
+    opacity: 0.7;
+    font-weight: 600;
+    margin-right: 8px;
+}
+.gd-item-link:hover .gd-item-title {
+    color: var(--gold-light, #D4A84A);
+    text-decoration: underline;
+}
+.gd-item-meta {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.8rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.7;
+    margin-top: 1px;
+}
+.gd-item-desc {
+    margin: 3px 0 0;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.82;
+}
+
+.gd-item--music .gd-item-link { flex-direction: row; align-items: center; gap: 10px; }
+.gd-music-icon {
+    flex: 0 0 auto;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(196, 148, 58, 0.12);
+    color: var(--gold-light, #D4A84A);
+}
+.gd-music-body { display: flex; flex-direction: column; }
+.gd-music-foot { margin: 14px 0 0; font-size: 0.85rem; }
+.gd-music-foot a { color: var(--gold-primary, #C4943A); text-decoration: none; }
+.gd-music-foot a:hover { color: var(--gold-light, #D4A84A); text-decoration: underline; }
+
+.gd-search-lead {
+    margin: 0 0 12px;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.92rem;
+    line-height: 1.4;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.82;
+}
+.gd-search-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--gold-primary, #C4943A);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 9px 16px;
+    border: 1px solid rgba(196, 148, 58, 0.5);
+    border-radius: 999px;
+    background: rgba(196, 148, 58, 0.06);
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.gd-search-btn:hover {
+    background: rgba(196, 148, 58, 0.14);
+    border-color: var(--gold-light, #D4A84A);
+    color: var(--gold-light, #D4A84A);
+}
+.gd-search-btn:focus-visible { outline: 2px solid var(--gold-primary, #C4943A); outline-offset: 2px; }
+.gd-search-ext { margin-left: 2px; opacity: 0.85; }
+
+.gd-empty {
+    margin: 0;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.6;
+}

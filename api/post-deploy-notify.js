@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
     // ── Step 2: Check the last-notified marker ────────────────────────────
     let lastNotifiedUrl = null;
     try {
-      const markerResponse = await fetch(`${djangoBase}/api/v1/last-notified/`);
+      const markerResponse = await fetch(`${djangoBase}/api/v1/progress/last-notified/`);
       if (markerResponse.ok) {
         const markerData = await markerResponse.json();
         lastNotifiedUrl = markerData.post_url || null;
@@ -99,7 +99,7 @@ module.exports = async (req, res) => {
 
     // ── Step 5: Update the last-notified marker ───────────────────────────
     try {
-      await fetch(`${djangoBase}/api/v1/last-notified/`, {
+      await fetch(`${djangoBase}/api/v1/progress/last-notified/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

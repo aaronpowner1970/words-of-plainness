@@ -7,10 +7,66 @@ description: "Christ-centered declarations of shared beliefs — a confessional 
 discordChannelId: ""
 ---
 
+<script>window.WOP_GODEEPER = {{ collections.chapters | goDeeperData | safe }};</script>
+
 <div class="articles-prologue">
     <p class="articles-epigraph"><em>"Pure religion and undefiled before God and the Father is this…"</em></p>
     <p>These declarations reflect the belief that followers of Jesus Christ have more things in common than the things which divide us. These articles are not meant to be a formal creed of a single religious tradition, but a foundation of peaceful fellowship. It is in the spirit of "unity of faith" that we offer this olive branch to all who are willing to sit together and partake of His grace.</p>
 </div>
+
+<!-- Pathways band — ways to begin (wires to existing podcast modal, contents drawer, and span apparatus) -->
+<nav class="pw-band" aria-label="Ways to begin">
+    <div class="pw-group">
+        <p class="pw-group-label">Start with the whole</p>
+        <div class="pw-cards">
+            <button class="pw-card" type="button" id="pwListen">
+                <span class="pw-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></span>
+                <span class="pw-card-title">Listen</span>
+                <span class="pw-card-desc">Hear all thirteen as a dramatized conversation — three short episodes.</span>
+            </button>
+            <button class="pw-card" type="button" id="pwReadAll">
+                <span class="pw-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 7.5 4.5 4 5v13c3.5-.5 6.5 0 8 1.5"/><path d="M12 6.5C13.5 5 16.5 4.5 20 5v13c-3.5-.5-6.5 0-8 1.5"/><line x1="12" y1="6.5" x2="12" y2="19.5"/></svg></span>
+                <span class="pw-card-title">Read straight through</span>
+                <span class="pw-card-desc">Begin at the first article and read all thirteen in order.</span>
+            </button>
+        </div>
+    </div>
+    <div class="pw-group">
+        <p class="pw-group-label">Go deep on one</p>
+        <div class="pw-cards">
+            <button class="pw-card" type="button" id="pwTopical">
+                <span class="pw-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1" fill="currentColor" stroke="none"/></svg></span>
+                <span class="pw-card-title">By topic</span>
+                <span class="pw-card-desc">Open the contents and jump to the article that speaks to you.</span>
+            </button>
+            <button class="pw-card" type="button" id="pwScripture">
+                <span class="pw-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><line x1="12" y1="7.5" x2="12" y2="21"/><path d="M5 12a7 7 0 0 0 14 0"/><line x1="5" y1="12" x2="3" y2="12"/><line x1="19" y1="12" x2="21" y2="12"/></svg></span>
+                <span class="pw-card-title">By scriptural witness</span>
+                <span class="pw-card-desc">Start reading, then tap any underlined phrase to see the verses beneath it.</span>
+            </button>
+        </div>
+    </div>
+</nav>
+<script>
+(function () {
+    function wire() {
+        function scrollToFirst() {
+            var el = document.getElementById('of-plainness');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        document.getElementById('pwListen') && document.getElementById('pwListen').addEventListener('click', function () {
+            var b = document.getElementById('btnArticlesPodcastBottom'); if (b) b.click();
+        });
+        document.getElementById('pwReadAll') && document.getElementById('pwReadAll').addEventListener('click', scrollToFirst);
+        document.getElementById('pwTopical') && document.getElementById('pwTopical').addEventListener('click', function (e) {
+            e.stopPropagation();
+            var t = document.getElementById('anTab'); if (t) t.click();
+        });
+        document.getElementById('pwScripture') && document.getElementById('pwScripture').addEventListener('click', scrollToFirst);
+    }
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', wire); } else { wire(); }
+})();
+</script>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
@@ -231,25 +287,37 @@ discordChannelId: ""
     margin: var(--space-xl) auto var(--space-lg);
 }
 .whats-next-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     color: var(--gold-primary);
     font-family: var(--font-serif);
     font-weight: 600;
     font-size: clamp(1.15rem, 2.4vw, 1.6rem);
     letter-spacing: 0.04em;
     text-decoration: none;
-    padding: 0.5rem 1.1rem;
-    border-radius: var(--radius-md);
+    padding: 0.7rem 1.7rem;
+    border: 1.5px solid rgba(196, 148, 58, 0.55);
+    border-radius: 999px;
+    background: rgba(196, 148, 58, 0.06);
     transition: color var(--transition-fast), background var(--transition-fast),
-                text-shadow var(--transition-fast), filter var(--transition-fast);
+                border-color var(--transition-fast), box-shadow var(--transition-fast),
+                transform var(--transition-fast);
 }
 .whats-next-link:hover {
     color: var(--gold-light);
-    background: rgba(196, 148, 58, 0.10);
-    text-shadow: 0 0 14px rgba(212, 168, 74, 0.45);
+    background: rgba(196, 148, 58, 0.14);
+    border-color: var(--gold-light);
+    box-shadow: 0 0 18px rgba(212, 168, 74, 0.30);
+    transform: translateY(-1px);
+}
+.whats-next-link:focus-visible {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 3px;
 }
 .whats-next-link:active {
-    filter: brightness(1.25);
+    transform: translateY(0);
+    background: rgba(196, 148, 58, 0.20);
+    filter: brightness(1.1);
 }
 </style>
 
