@@ -623,6 +623,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: true });
     }
 
+    // ── Keep the floating reader toolbar clear of the Pathways band ──
+    (function () {
+        var toolbar = document.getElementById('bottomToolbar');
+        var band = document.querySelector('.pw-band');
+        if (!toolbar || !band || !('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+            toolbar.classList.toggle('tb-stowed', entries[0].isIntersecting);
+        }, { threshold: 0 });
+        io.observe(band);
+    })();
+
     // ── Articles Navigation Drawer ──────────────────────────────────
     (function () {
         var anTab    = document.getElementById('anTab');

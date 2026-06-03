@@ -1488,3 +1488,22 @@
     color: var(--cream, #E8DCC4);
     opacity: 0.6;
 }
+
+/* ============================================
+   Keep the floating reader toolbar (.bottom-toolbar) clear of the
+   Pathways band (.pw-band). The band only occupies the top of the page;
+   while it is on-screen we stow the toolbar so its opaque pill never sits
+   over the wayfinding tiles (which it otherwise does on phone widths at
+   load, killing the Listen tile). Toggled by the IntersectionObserver in
+   the articles.njk layout. Articles-only: .tb-stowed is never applied
+   elsewhere.
+   ============================================ */
+.bottom-toolbar {
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+.bottom-toolbar.tb-stowed {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(12px);
+}
