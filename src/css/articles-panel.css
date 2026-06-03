@@ -1190,11 +1190,35 @@
    two cards each. 2×2 on desktop, single column on mobile.
    ============================================ */
 
+.pw-heading {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--gold-primary, #C4943A);
+    margin: 8px 0 18px;
+}
+
 .pw-band {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 22px;
     margin: 4px 0 16px;
+    position: relative;
+}
+
+/* Thin gold rule dividing the two halves (hidden when stacked on mobile) */
+.pw-band::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 50%;
+    width: 1px;
+    transform: translateX(-50%);
+    background: rgba(196, 148, 58, 0.4);
+    pointer-events: none;
 }
 
 .pw-group-label {
@@ -1275,6 +1299,9 @@
     .pw-band {
         grid-template-columns: 1fr;
         gap: 18px;
+    }
+    .pw-band::before {
+        display: none;
     }
 }
 
