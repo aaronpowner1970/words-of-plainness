@@ -90,7 +90,7 @@
         aria-expanded="false"
         aria-controls="anDrawer"
         type="button">
-    <span class="an-tab-label">Click for Contents: 13 Articles</span>
+    <span class="an-tab-label">Contents</span>
     <svg class="an-tab-chevron" viewBox="0 0 24 24" width="11" height="11"
          fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
          aria-hidden="true">
@@ -137,6 +137,14 @@
                 <li><a href="https://www.wordsofplainness.org/studies/broken-vessels/" class="an-link an-companion-link" target="_blank" rel="noopener"><span class="an-num">†</span>Broken Vessels</a></li>
                 <li><a href="https://www.wordsofplainness.org/studies/contention-and-the-reach-of-christ/" class="an-link an-companion-link" target="_blank" rel="noopener"><span class="an-num">†</span>Contention &amp; the Reach of Christ</a></li>
                 <li><a href="https://www.wordsofplainness.org/studies/lord-is-it-i/" class="an-link an-companion-link" target="_blank" rel="noopener"><span class="an-num">†</span>Lord, Is It I?</a></li>
+            </ul>
+        </div>
+
+        <div class="an-commonground">
+            <p class="an-companions-heading">Of Common Ground</p>
+            <ul class="an-drawer-list an-commonground-list">
+                <li><button type="button" class="an-link an-ocg-btn" data-ocg-open="ocgPanelShared" aria-haspopup="dialog" aria-controls="ocgPanelShared"><span class="an-num">&#9670;</span>The Common Ground We Share</button></li>
+                <li><button type="button" class="an-link an-ocg-btn" data-ocg-open="ocgPanelReceived" aria-haspopup="dialog" aria-controls="ocgPanelReceived"><span class="an-num">&#9670;</span>How These Have Been Received</button></li>
             </ul>
         </div>
     </nav>
@@ -191,6 +199,70 @@
             <h4 class="ap-section-title">See Also</h4>
             <ul class="ap-crossref-list" id="apCrossrefList"></ul>
         </div>
+    </div>
+</aside>
+
+<!-- Of Common Ground Panels (contents drawer → slide-out, ap-panel pattern) -->
+<div class="ocg-backdrop" id="ocgBackdrop" aria-hidden="true"></div>
+
+<aside class="ocg-panel" id="ocgPanelShared" role="dialog" aria-labelledby="ocgSharedTitle" aria-hidden="true" tabindex="-1">
+    <header class="ocg-header">
+        <span class="ocg-kicker">Of Common Ground</span>
+        <button class="ocg-close" data-ocg-close aria-label="Close panel" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </header>
+    <div class="ocg-body">
+        <h2 class="ocg-title" id="ocgSharedTitle">The Common Ground We Share</h2>
+        <p class="ocg-subtitle">Nineteen teachings of Christ, held in common across the historic Christian families.</p>
+        <p class="ocg-text">Before these Articles were written, a great deal was already shared. Drawn from the four gospels — the words of Jesus first — these nineteen teachings can be confessed together by the historic Christian families. They are the ground these Articles stand on: not what any one tradition adds, but what nearly all already hold.</p>
+        <p class="ocg-list-heading">The nineteen:</p>
+        <ol class="ocg-nineteen">
+            <li>The Two Great Commandments</li>
+            <li>The Golden Rule</li>
+            <li>Love Your Enemies, and Pray for Those Who Persecute</li>
+            <li>Forgiveness Received and Extended</li>
+            <li>Care for the Least — Serving Christ in the Vulnerable</li>
+            <li>God as Father, and the Pattern of Prayer</li>
+            <li>Come to Me, All Who Labor</li>
+            <li>Repentance and the Nearness of God&rsquo;s Kingdom</li>
+            <li>The Call to Follow Christ in Self-Denial</li>
+            <li>Christ Came to Seek and Save the Lost</li>
+            <li>Christ&rsquo;s Authority to Forgive Sins</li>
+            <li>Christ, the Way to the Father</li>
+            <li>Christ Gave His Life for Many</li>
+            <li>The Resurrection of Jesus Christ</li>
+            <li>The New Birth by the Spirit</li>
+            <li>The Gift of the Holy Spirit, the Comforter</li>
+            <li>Christ Will Return, and All Will Stand Before Him</li>
+            <li>The Lord&rsquo;s Supper, in Remembrance of Him</li>
+            <li>Jesus, the Son of God, One with the Father</li>
+        </ol>
+        <p class="ocg-pull">Each is estimated to be affirmed by roughly nineteen in twenty creedal Christians.</p>
+        <p class="ocg-fineprint">These figures are reasoned estimates grounded in each tradition&rsquo;s own confessions, not survey results. The full study gathers the witness beneath each teaching, an honest boundary of what we could not yet share, and a wider edition written for all who confess Jesus.</p>
+        <div class="ocg-links">
+            {# TODO: swap to /studies/declarations/creedal-core/ and /studies/declarations/expanded-tent/ once those pages are live — interim R2 PDFs below #}
+            <a class="ocg-edition-link" href="https://media.wordsofplainness.org/web/WoP-Declarations-Creedal-Core.pdf" target="_blank" rel="noopener">What We Confess Together <span aria-hidden="true">&rarr;</span></a>
+            <a class="ocg-edition-link" href="https://media.wordsofplainness.org/web/WoP-Declarations-Expanded-Tent.pdf" target="_blank" rel="noopener">What We Hold in Common <span aria-hidden="true">&rarr;</span></a>
+        </div>
+    </div>
+</aside>
+
+<aside class="ocg-panel" id="ocgPanelReceived" role="dialog" aria-labelledby="ocgReceivedTitle" aria-hidden="true" tabindex="-1">
+    <header class="ocg-header">
+        <span class="ocg-kicker">Of Common Ground</span>
+        <button class="ocg-close" data-ocg-close aria-label="Close panel" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </header>
+    <div class="ocg-body">
+        <h2 class="ocg-title" id="ocgReceivedTitle">How These Have Been Received</h2>
+        <p class="ocg-subtitle">A reflective note.</p>
+        <p class="ocg-text">We were curious whether the claim on the cover — that these are beliefs most who follow Christ can share — would hold up if it were tested. So we asked several independent systems, working from the historic confessions of the Christian traditions, to weigh two different things: how much of the body of Christ would affirm the moral vision of these Articles, and how much would find the doctrine, and the manner of its holding, acceptable enough to fellowship around.</p>
+        <p class="ocg-text">The answers converged on a single, clarifying shape. The moral vision — humility before mystery, mercy, grace, the refusal to gatekeep, fellowship across difference — is very nearly common air among Christians, something on the order of nine in ten. Acceptance of the doctrine, and of holding it so plainly, is far more modest, and varies sharply from one tradition to the next.</p>
+        <p class="ocg-text">The distance between those two is the whole of the matter — and it is not a discouraging finding but a clarifying one. We are not, in the main, divided from one another by ethics. We are divided by trust: by creed, by authority, by the long memory of old quarrels. And that gap is exactly what these Articles were written to meet. They bind no conscience. They ask for fellowship, not merger. They invite every tradition to keep what it cannot surrender.</p>
+        <p class="ocg-fineprint">A word of plain honesty about all of this: these are reasoned estimates — machines reasoning about people, not surveys of people. No one has polled the world&rsquo;s Christians on this document. We trust the shape of the finding and hold its numbers loosely, and offer it not as proof, but as the reason we keep setting the table.</p>
+        <p class="ocg-closing">&ldquo;For my soul delighteth in plainness.&rdquo; <span class="ocg-closing-cite">&mdash; 2 Nephi 31:3</span></p>
     </div>
 </aside>
 
@@ -634,6 +706,48 @@ document.addEventListener('DOMContentLoaded', function() {
         io.observe(band);
     })();
 
+    // ── Of Common Ground panels (opened from the contents drawer) ──
+    (function () {
+        var backdrop = document.getElementById('ocgBackdrop');
+        var panels = Array.prototype.slice.call(document.querySelectorAll('.ocg-panel'));
+        if (!backdrop || !panels.length) return;
+
+        function closeAll() {
+            panels.forEach(function (p) {
+                p.classList.remove('ocg-open');
+                p.setAttribute('aria-hidden', 'true');
+            });
+            backdrop.classList.remove('ocg-open');
+            backdrop.setAttribute('aria-hidden', 'true');
+        }
+
+        function open(id) {
+            var panel = document.getElementById(id);
+            if (!panel) return;
+            closeAll();
+            panel.classList.add('ocg-open');
+            panel.setAttribute('aria-hidden', 'false');
+            backdrop.classList.add('ocg-open');
+            backdrop.setAttribute('aria-hidden', 'false');
+            panel.focus({ preventScroll: true });
+        }
+
+        panels.forEach(function (p) {
+            p.querySelectorAll('[data-ocg-close]').forEach(function (btn) {
+                btn.addEventListener('click', closeAll);
+            });
+        });
+        backdrop.addEventListener('click', closeAll);
+        document.addEventListener('keydown', function (e) {
+            if ((e.key === 'Escape' || e.key === 'Esc') &&
+                panels.some(function (p) { return p.classList.contains('ocg-open'); })) {
+                closeAll();
+            }
+        });
+
+        window.WopOcgPanels = { open: open, closeAll: closeAll };
+    })();
+
     // ── Articles Navigation Drawer ──────────────────────────────────
     (function () {
         var anTab    = document.getElementById('anTab');
@@ -689,11 +803,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // "Of Common Ground" entries open their panel and close the drawer
+        anDrawer.querySelectorAll('[data-ocg-open]').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                closeDrawer();
+                if (window.WopOcgPanels) window.WopOcgPanels.open(btn.getAttribute('data-ocg-open'));
+            });
+        });
+
         // Smooth scroll on nav link click
         anDrawer.querySelectorAll('.an-link').forEach(function (link) {
             link.addEventListener('click', function (e) {
                 var href = link.getAttribute('href');
-                if (href.charAt(0) !== '#') { return; }   // external companion links open normally
+                if (!href || href.charAt(0) !== '#') { return; }   // panel buttons / external companion links handled elsewhere
                 e.preventDefault();
                 var targetId = href.slice(1);
                 var targetEl = document.getElementById(targetId);

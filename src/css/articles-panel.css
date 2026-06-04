@@ -1535,3 +1535,353 @@
     pointer-events: none;
     transform: translateX(-50%) translateY(12px);
 }
+
+
+/* ============================================
+   OF COMMON GROUND  (ocg-)
+   Contents drawer third section + two slide-out panels
+   (same overlay pattern as the annotation panel above).
+   Drawer entries are dark-on-gold to match the Option C
+   gold drawer; panels are the oxblood page with gold accents.
+   ============================================ */
+
+/* ── Drawer section (below Companion Essays) ─────────────────── */
+
+.an-commonground {
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(31, 16, 18, 0.22);  /* matches .an-companions divider on gold */
+}
+
+/* Section header reuses .an-companions-heading */
+
+.an-ocg-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    border-left: 2px solid transparent;
+    text-align: left;
+    cursor: pointer;
+}
+
+.an-ocg-btn .an-num {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.an-ocg-btn:hover .an-num {
+    opacity: 1;
+}
+
+.an-ocg-btn:focus-visible {
+    outline: 2px solid var(--brown-rich, #1F1012);
+    outline-offset: -2px;
+}
+
+
+/* ── Backdrop (mobile / tablet only, mirrors .ap-backdrop) ───── */
+
+.ocg-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 21, 16, 0.62);
+    z-index: 1199;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+}
+
+.ocg-backdrop.ocg-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (min-width: 1200px) {
+    .ocg-backdrop {
+        display: none;
+    }
+}
+
+
+/* ── Panel shell (mirrors .ap-panel) ─────────────────────────── */
+
+.ocg-panel {
+    position: fixed;
+    z-index: 1200;
+    background: var(--brown-rich, #1F1012);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    outline: none;
+}
+
+@media (min-width: 1200px) {
+    .ocg-panel {
+        top: 0;
+        right: 0;
+        width: 420px;
+        height: 100vh;
+        border-left: 1px solid rgba(196, 148, 58, 0.22);
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.3s ease;
+        box-shadow: none;
+    }
+
+    .ocg-panel.ocg-open {
+        transform: translateX(0);
+        box-shadow: -6px 0 32px rgba(0, 0, 0, 0.55),
+                    -1px 0 0 rgba(196, 148, 58, 0.08);
+    }
+}
+
+@media (max-width: 1199px) {
+    .ocg-panel {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 82vh;
+        border-top: 1px solid rgba(196, 148, 58, 0.28);
+        border-radius: 16px 16px 0 0;
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 -6px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    .ocg-panel.ocg-open {
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ocg-panel,
+    .ocg-backdrop {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* ── Panel header ────────────────────────────────────────────── */
+
+.ocg-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.15);
+    flex-shrink: 0;
+    background: rgba(26, 21, 16, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+@media (max-width: 1199px) {
+    .ocg-header {
+        position: relative;
+        padding-top: 1.375rem;
+    }
+
+    .ocg-header::before {
+        content: '';
+        position: absolute;
+        top: 0.55rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 34px;
+        height: 4px;
+        background: rgba(196, 148, 58, 0.32);
+        border-radius: 2px;
+    }
+}
+
+.ocg-kicker {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-primary, #C4943A);
+}
+
+.ocg-close {
+    flex-shrink: 0;
+    background: none;
+    border: 1px solid rgba(196, 148, 58, 0.22);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--cream-dark, #D4C8B0);
+    padding: 0.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    line-height: 1;
+}
+
+.ocg-close:hover {
+    border-color: var(--gold-primary, #C4943A);
+    color: var(--gold-primary, #C4943A);
+    background: rgba(196, 148, 58, 0.08);
+}
+
+.ocg-close:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+
+
+/* ── Panel body ──────────────────────────────────────────────── */
+
+.ocg-body {
+    overflow-y: auto;
+    flex: 1;
+    padding: 1.4rem 1.5rem 1.75rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(196, 148, 58, 0.28) transparent;
+}
+
+.ocg-body::-webkit-scrollbar { width: 4px; }
+.ocg-body::-webkit-scrollbar-track { background: transparent; }
+.ocg-body::-webkit-scrollbar-thumb {
+    background: rgba(196, 148, 58, 0.28);
+    border-radius: 2px;
+}
+
+.ocg-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #fff;
+    margin: 0 0 0.35rem;
+}
+
+.ocg-subtitle {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.72;
+    margin: 0 0 1.1rem;
+}
+
+.ocg-text {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.97rem;
+    line-height: 1.7;
+    color: var(--cream, #E8DCC4);
+    margin: 0 0 1rem;
+}
+
+.ocg-list-heading {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light, #D4A84A);
+    opacity: 0.82;
+    margin: 1.2rem 0 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.1);
+}
+
+.ocg-nineteen {
+    margin: 0 0 1.2rem;
+    padding: 0 0 0 1.5rem;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--cream, #E8DCC4);
+}
+
+.ocg-nineteen li {
+    margin-bottom: 0.3rem;
+    padding-left: 0.2rem;
+}
+
+.ocg-nineteen li::marker {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gold-primary, #C4943A);
+}
+
+.ocg-pull {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-style: italic;
+    font-size: 0.97rem;
+    line-height: 1.65;
+    color: var(--cream-soft, #F5EFE4);
+    padding: 0.875rem 1rem;
+    background: rgba(196, 148, 58, 0.07);
+    border-left: 3px solid var(--gold-primary, #C4943A);
+    border-radius: 0 var(--radius-sm, 4px) var(--radius-sm, 4px) 0;
+    margin: 0 0 1rem;
+}
+
+.ocg-fineprint {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.65;
+    margin: 0 0 1.2rem;
+}
+
+.ocg-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.2rem;
+}
+
+.ocg-edition-link {
+    display: block;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold-primary, #C4943A);
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(196, 148, 58, 0.35);
+    border-radius: 8px;
+    background: rgba(196, 148, 58, 0.06);
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.ocg-edition-link:hover {
+    background: rgba(196, 148, 58, 0.13);
+    border-color: var(--gold-primary, #C4943A);
+    color: var(--gold-light, #D4A84A);
+}
+
+.ocg-edition-link:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+
+.ocg-closing {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--gold-light, #D4A84A);
+    text-align: center;
+    margin: 1.4rem 0 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(196, 148, 58, 0.15);
+}
+
+.ocg-closing-cite {
+    display: block;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.7;
+    margin-top: 0.25rem;
+}
