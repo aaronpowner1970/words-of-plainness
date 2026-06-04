@@ -66,12 +66,14 @@
     gap: 0.75rem;
     transform: translateY(-100%);
     opacity: 0;
+    pointer-events: none;
     transition: transform 0.35s ease, opacity 0.35s ease;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 .study-player-bar.visible {
     transform: translateY(0);
     opacity: 1;
+    pointer-events: auto;
 }
 
 /* Play / Pause Button */
