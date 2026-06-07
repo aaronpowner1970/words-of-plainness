@@ -28,7 +28,7 @@ discordChannelId: ""
             <button class="pw-card" type="button" id="pwReadAll">
                 <span class="pw-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 7.5 4.5 4 5v13c3.5-.5 6.5 0 8 1.5"/><path d="M12 6.5C13.5 5 16.5 4.5 20 5v13c-3.5-.5-6.5 0-8 1.5"/><line x1="12" y1="6.5" x2="12" y2="19.5"/></svg></span>
                 <span class="pw-card-title">Read straight through</span>
-                <span class="pw-card-desc">Begin at the first article and read all thirteen in order.</span>
+                <span class="pw-card-desc">Begin at the first article and read all thirteen declarations in order, start to finish.</span>
             </button>
         </div>
     </div>
@@ -43,7 +43,7 @@ discordChannelId: ""
             <button class="pw-card" type="button" id="pwScripture">
                 <span class="pw-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><line x1="12" y1="7.5" x2="12" y2="21"/><path d="M5 12a7 7 0 0 0 14 0"/><line x1="5" y1="12" x2="3" y2="12"/><line x1="19" y1="12" x2="21" y2="12"/></svg></span>
                 <span class="pw-card-title">Check the sources</span>
-                <span class="pw-card-desc">Jump to an article of interest from the contents tab, then click any underlined claim to study the authoritative sources and commentary.</span>
+                <span class="pw-card-desc">Open any article, then click an underlined claim to study its biblical and Restoration sources.</span>
             </button>
         </div>
     </div>
@@ -63,7 +63,10 @@ discordChannelId: ""
             e.stopPropagation();
             var t = document.getElementById('anTab'); if (t) t.click();
         });
-        document.getElementById('pwScripture') && document.getElementById('pwScripture').addEventListener('click', scrollToFirst);
+        document.getElementById('pwScripture') && document.getElementById('pwScripture').addEventListener('click', function (e) {
+            e.stopPropagation();
+            var t = document.getElementById('anTab'); if (t) t.click();
+        });
     }
     if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', wire); } else { wire(); }
 })();

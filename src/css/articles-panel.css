@@ -1233,8 +1233,14 @@
     pointer-events: none;
 }
 
+.pw-group {
+    display: flex;
+    flex-direction: column;
+}
+
 .pw-group-label {
     margin: 0 0 10px;
+    min-height: 1.5em;
     text-align: center;
     font-family: 'Crimson Pro', Georgia, serif;
     font-size: 0.72rem;
@@ -1244,8 +1250,9 @@
 }
 
 .pw-cards {
-    display: flex;
-    flex-direction: column;
+    flex: 1;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
     gap: 12px;
 }
 
@@ -1253,6 +1260,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
+    align-content: center;
     column-gap: 13px;
     row-gap: 3px;
     width: 100%;
@@ -1315,6 +1323,10 @@
     }
     .pw-band::before {
         display: none;
+    }
+    .pw-cards {
+        display: flex;
+        flex-direction: column;
     }
 }
 
