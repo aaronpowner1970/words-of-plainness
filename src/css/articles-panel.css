@@ -1922,3 +1922,141 @@
     opacity: 0.7;
     margin-top: 0.25rem;
 }
+
+/* ============================================
+   HOW-WE-HOLD-THIS  (hw-)
+   articles.njk — per-article reader-facing confessional disclosure
+   injected by articles-howwehold.js. Inline cue (.hw-cue) on a span
+   + collapsed disclosure (.hw-block), sibling of the gd-block pattern.
+   ============================================ */
+
+/* ── Inline cue (the labeled pill on the phrase) ─────────────── */
+.hw-cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 0 0 6px;
+    padding: 1px 10px 2px;
+    vertical-align: 1px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    color: var(--gold-light, #D4A84A);
+    background: rgba(196, 148, 58, 0.13);
+    border: 1px solid rgba(196, 148, 58, 0.5);
+    border-radius: 20px;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.hw-cue:hover {
+    background: rgba(196, 148, 58, 0.2);
+    border-color: var(--gold-primary, #C4943A);
+    color: var(--gold-primary, #C4943A);
+}
+.hw-cue:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+.hw-cv { transition: transform 0.2s ease; }
+.hw-cue[aria-expanded="true"] .hw-cv { transform: rotate(180deg); }
+
+/* ── Disclosure block (foot of the article) ──────────────────── */
+.hw-block {
+    margin-top: 20px;
+    border-top: 1px solid rgba(196, 148, 58, 0.22);
+    padding-top: 14px;
+}
+.hw-toggle {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    text-align: left;
+    padding: 13px 16px;
+    cursor: pointer;
+    border: 1px solid rgba(196, 148, 58, 0.30);
+    border-radius: 12px;
+    background: rgba(196, 148, 58, 0.07);
+    color: var(--gold-primary, #C4943A);
+    font-family: inherit;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: background 0.18s, border-color 0.18s;
+}
+.hw-toggle:hover {
+    background: rgba(196, 148, 58, 0.13);
+    border-color: rgba(196, 148, 58, 0.55);
+}
+.hw-toggle:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 3px;
+}
+.hw-toggle-icon {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(196, 148, 58, 0.14);
+    color: var(--gold-light, #D4A84A);
+}
+.hw-toggle-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.hw-toggle-label {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: var(--gold-primary, #C4943A);
+}
+.hw-toggle-scent {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.8rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.7;
+}
+.hw-toggle-chevron {
+    flex: 0 0 auto;
+    margin-left: auto;
+    color: var(--gold-light, #D4A84A);
+}
+.hw-block.hw-open .hw-toggle-chevron .hw-cv { transform: rotate(180deg); }
+
+.hw-body { margin-top: 12px; }
+.hw-inner { padding: 2px 2px 0; }
+.hw-inner p {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.72;
+    color: var(--cream, #E8DCC4);
+    margin: 0 0 0.85rem;
+}
+.hw-inner p:last-child { margin-bottom: 0; }
+.hw-inner em { color: var(--cream-soft, #F5EFE4); font-style: italic; }
+
+.hw-scripture {
+    color: var(--teal-light, #6A8B8B);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(106, 139, 139, 0.4);
+    transition: border-color 0.15s, color 0.15s;
+}
+.hw-scripture:hover {
+    color: var(--gold-light, #D4A84A);
+    border-bottom-color: rgba(196, 148, 58, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hw-cv { transition-duration: 0.01ms !important; }
+}
