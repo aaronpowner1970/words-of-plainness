@@ -218,6 +218,9 @@
 .ocg-godeeper-link:hover{text-decoration:underline;}
 .ocg-figure{margin:1.25rem 0;}
 .ocg-figure svg{width:100%;height:auto;display:block;}
+.ocg-figure--video iframe{width:100%;aspect-ratio:16/9;height:auto;display:block;border:0;border-radius:10px;}
+.ocg-figcap{margin:.5rem 0 0;font-family:'Crimson Pro',Georgia,serif;font-size:.95rem;font-style:italic;color:#c8b3a3;}
+.ocg-figcap-note{display:block;margin-top:.15rem;font-size:.82rem;color:#a8978a;}
 .ocg-recording-link{display:inline-block;margin:.2rem 0 .6rem;color:#d4af69;text-decoration:none;font-style:italic;}
 .ocg-recording-link:hover{text-decoration:underline;}
 </style>
@@ -314,9 +317,16 @@
         </figure>
         <p class="ocg-text">The distance between those two is the whole of the matter — and it is not a discouraging finding but a clarifying one. We are not, in the main, divided from one another by ethics. We are divided by trust: by creed, by authority, by the long memory of old quarrels. And that gap is exactly what these Articles were written to meet. They bind no conscience. They ask for fellowship, not merger. They invite every tradition to keep what it cannot surrender.</p>
         <p class="ocg-fineprint">A word of plain honesty about all of this: these are reasoned estimates — machines reasoning about people, not surveys of people. No one has polled the world&rsquo;s Christians on this document. We trust the shape of the finding and hold its numbers loosely, and offer it not as proof, but as the reason we keep setting the table.</p>
-        {# Recording link — uncomment and set href once the reflection video/audio is hosted on R2.
-        <p><a class="ocg-recording-link" href="REPLACE_WITH_R2_URL" target="_blank" rel="noopener">A short reflection — how I hold this in conversation <span aria-hidden="true">&rarr;</span></a></p>
-        #}
+        <figure class="ocg-figure ocg-figure--video">
+            <iframe src="https://www.youtube-nocookie.com/embed/OSyBTXbD15M?rel=0"
+                    title="A short reflection — how I hold this in conversation"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+            <figcaption class="ocg-figcap">A short reflection — how I hold this in conversation.
+                <span class="ocg-figcap-note">Narrated by an AI avatar of Brother Aaron — the words are his own.</span></figcaption>
+        </figure>
         <p class="ocg-text">The full readings behind this note, together with the sources and the method behind every claim in the Articles, are gathered in the Scholarly Edition &mdash; available to download from the Contents panel. We offer it in the same spirit as the note above: not as proof, but as an open accounting of how we came to what we hold.</p>
         <p class="ocg-closing">&ldquo;For my soul delighteth in plainness.&rdquo; <span class="ocg-closing-cite">&mdash; 2 Nephi 31:3</span></p>
     </div>
