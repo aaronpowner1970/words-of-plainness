@@ -1,0 +1,427 @@
+---
+layout: layouts/study.njk
+title: "What We Hold in Common"
+pageTitle: "What We Hold in Common"
+pageSubtitle: "Belief declarations from the four gospels, shared across all who confess Christ."
+permalink: /studies/declarations/expanded-tent/
+eleventyExcludeFromCollections: true
+---
+
+<style>
+/* ── DECLARATIONS (reader-first) ─────────────────────── */
+.decl-intro { max-width:720px; margin:0 auto 1.5rem; font-family:'Crimson Pro',Georgia,serif; font-size:1.1rem; line-height:1.75; color:var(--cream); opacity:.92; }
+.decl-intro p { margin-bottom:1rem; }
+.decl-method, .decl-methodology { max-width:760px; margin:1.5rem auto; }
+.decl-method > summary, .decl-methodology > summary { cursor:pointer; font-family:'Crimson Pro',Georgia,serif; font-size:1.05rem; color:var(--gold-primary); font-weight:600; list-style:none; padding:.4rem 0; }
+.decl-method > summary::-webkit-details-marker, .decl-methodology > summary::-webkit-details-marker { display:none; }
+.decl-method > summary::before, .decl-methodology > summary::before { content:'\25B8'; display:inline-block; margin-right:.5rem; transition:transform .2s; color:var(--gold-primary); }
+.decl-method[open] > summary::before, .decl-methodology[open] > summary::before { transform:rotate(90deg); }
+.decl-method ol { font-family:'Crimson Pro',Georgia,serif; font-size:1.02rem; line-height:1.65; color:var(--cream); opacity:.88; padding-left:1.4rem; }
+.decl-method li { margin-bottom:.6rem; }
+
+.decl-card { max-width:760px; margin:0 auto 1.75rem; padding:1.5rem 1.75rem; background:rgba(196,148,58,0.035); border:1px solid rgba(196,148,58,0.18); border-radius:var(--radius-sm); }
+.decl-num { color:var(--gold-primary); font-weight:600; margin-right:.4rem; }
+.decl-title { font-family:'Crimson Pro',Georgia,serif; font-size:1.3rem; font-weight:600; color:var(--cream); margin:0 0 .9rem; }
+.decl-statement { font-family:'Crimson Pro',Georgia,serif; font-size:1.12rem; font-style:italic; line-height:1.7; color:var(--cream); opacity:.95; margin:0 0 1rem; padding:.25rem 0 .25rem 1.1rem; border-left:3px solid var(--gold-primary); }
+.decl-rating { font-family:'Crimson Pro',Georgia,serif; font-size:1rem; line-height:1.6; color:var(--cream); opacity:.9; margin:0 0 .75rem; }
+.decl-pill { display:inline-block; font-size:.74rem; letter-spacing:.04em; text-transform:uppercase; font-weight:700; padding:.18rem .5rem; border-radius:1rem; margin-right:.5rem; vertical-align:.06em; }
+.decl-pill-pass { background:rgba(196,148,58,0.18); color:var(--gold-light); border:1px solid rgba(196,148,58,0.45); }
+.decl-pill-qual { background:rgba(196,148,58,0.10); color:#d8b77a; border:1px solid rgba(196,148,58,0.30); }
+.decl-pill-fail { background:rgba(122,48,64,0.20); color:#d98a9a; border:1px solid rgba(122,48,64,0.5); }
+.decl-pct { color:var(--gold-primary); font-weight:600; margin-right:.35rem; }
+.decl-readerspace { font-family:'Crimson Pro',Georgia,serif; font-size:.98rem; line-height:1.6; color:var(--cream); opacity:.82; margin:0 0 .85rem; padding:.6rem .9rem; background:rgba(245,230,208,0.04); border-radius:var(--radius-sm); }
+.decl-readerspace strong { color:var(--gold-primary); }
+.decl-readerspace em { font-style:italic; }
+details.decl-witness { margin-top:.25rem; }
+details.decl-witness > summary { cursor:pointer; font-family:'Crimson Pro',Georgia,serif; font-size:.92rem; letter-spacing:.02em; color:var(--gold-primary); list-style:none; padding:.3rem 0; opacity:.9; }
+details.decl-witness > summary::-webkit-details-marker { display:none; }
+details.decl-witness > summary::before { content:'\25B8'; display:inline-block; margin-right:.45rem; transition:transform .2s; }
+details.decl-witness[open] > summary::before { transform:rotate(90deg); }
+.decl-witness-body { padding:.6rem 0 .2rem; }
+.decl-stack { font-family:'Crimson Pro',Georgia,serif; font-size:.96rem; line-height:1.65; color:var(--cream); opacity:.86; margin:0 0 .55rem; }
+.decl-stack strong { color:var(--gold-primary); font-weight:600; }
+.decl-meta-rule { border:none; border-top:1px solid rgba(196,148,58,0.18); margin:.9rem 0; }
+.decl-meta { font-family:'Crimson Pro',Georgia,serif; font-size:.94rem; line-height:1.6; color:var(--cream); opacity:.82; margin:0 0 .5rem; }
+.decl-meta strong { color:var(--gold-primary); font-weight:600; }
+.decl-flag strong { color:#d98a9a; }
+.decl-card a.scripture-link { color:var(--gold-primary); text-decoration:none; border-bottom:1px dotted rgba(196,148,58,0.5); transition:color .2s, border-color .2s; }
+.decl-card a.scripture-link:hover { color:var(--gold-light); border-bottom-color:var(--gold-light); }
+.decl-boundary { max-width:760px; margin:1.5rem auto; }
+.decl-boundary-item { margin:0 auto 1.25rem; padding:1.1rem 1.4rem; background:rgba(122,48,64,0.06); border-left:3px solid rgba(122,48,64,0.5); border-radius:0 var(--radius-sm) var(--radius-sm) 0; }
+.decl-boundary-item h4 { font-family:'Crimson Pro',Georgia,serif; font-size:1.08rem; font-weight:600; color:#d98a9a; margin:0 0 .5rem; }
+.decl-boundary-item p { font-family:'Crimson Pro',Georgia,serif; font-size:1rem; line-height:1.65; color:var(--cream); opacity:.88; margin:0 0 .5rem; }
+.decl-boundary-refs { font-size:.9rem; opacity:.85; }
+.decl-boundary-item a.scripture-link { color:var(--gold-primary); text-decoration:none; border-bottom:1px dotted rgba(196,148,58,0.5); }
+@media (max-width:768px){ .decl-card{padding:1.2rem 1.15rem;} }
+</style>
+
+<div data-pagefind-body>
+
+  <p class="study-intro">A Words of Plainness Companion Study</p>
+
+  <div class="decl-intro">
+    <p>These declarations are written for the widest household of Christ — every group that confesses Jesus, including those outside Nicene orthodoxy: Latter-day Saints, Jehovah&rsquo;s Witnesses, and other non-Trinitarian Christians. Each begins in the words of Jesus in the four gospels and is worded at the level where affirmation across this whole tent is real.</p>
+    <p>Eighteen declarations clear the 80-percent threshold across the expanded tent. One — the full deity of Christ — does not, and it is named honestly on the boundary list rather than softened to pass. This document records what can be jointly declared, not what any single tradition holds in private; the Words of Plainness conviction on Christ&rsquo;s divinity is the biblical and creedal one, set out plainly in the companion creedal-core declarations.</p>
+    <p>An honest word about the numbers: no one can poll the living church. Every percentage here is an estimate grounded in documented confessional positions, not a measured statistic. Where an estimate is soft, the entry says so. The boundary list at the end is as much the point as the declarations — a shorter set of truly shared affirmations is worth more than a long list of forced ones.</p>
+  </div>
+
+  <details class="decl-method"><summary>How we built this — the method in seven phases</summary>
+    <ol>
+      <li><strong>Harvest.</strong> Recurring teaching principles about Christ were drawn from the four gospels, red letters first, noting multi-gospel attestation.</li>
+      <li><strong>Cluster.</strong> Principles were grouped into a candidate set; near-duplicates merged, and any item bundling a universal idea with a contested one was split.</li>
+      <li><strong>Frame.</strong> Each declaration is worded at the level where affirmation is genuine, anchored in the words Jesus used; no post-biblical metaphysics was imported into the shared wording.</li>
+      <li><strong>Build the witness stack.</strong> Tier 1 to Tier 2 to Tier 3 anchors were assembled beneath each declaration; Tier 3 corroborates only; contested-reading anchors are tagged; the Restoration layer is witness-only and never counts toward a rating.</li>
+      <li><strong>Resolve from inside the gospels.</strong> Where a teaching is contested by interpretation, the meaning is resolved from another gospel passage where possible, not from the epistles.</li>
+      <li><strong>Validate.</strong> For each tradition, the declaration as worded was assessed Affirm, Affirm-with-qualification, or Reject against that tradition&rsquo;s own confessional position.</li>
+      <li><strong>Score and boundary-map.</strong> Agreement is estimated under the denominator in view, governed by the highest tier that still clears 80 percent; teachings that could not clear the bar are recorded honestly on the boundary list.</li>
+    </ol>
+  </details>
+
+  <div class="study-divider">&#10022;&ensp;&ensp;&#10022;&ensp;&ensp;&#10022;</div>
+
+  <h2 class="study-section-heading">The Declarations</h2>
+
+<article class="decl-card" id="decl-01">
+  <h3 class="decl-title"><span class="decl-num">01</span> The Two Great Commandments</h3>
+  <blockquote class="decl-statement">We affirm that Jesus taught the love of God with all one&rsquo;s heart, soul, mind, and strength, and the love of one&rsquo;s neighbor as oneself, as the greatest commandments, on which all the Law and the Prophets depend.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~98%</span> &mdash; Affirmed across every tested expanded group.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/22?lang=eng&id=p37-p40#p37" target="_blank" rel="noopener">Matthew 22:37-40</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/12?lang=eng&id=p29-p31#p29" target="_blank" rel="noopener">Mark 12:29-31</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/10?lang=eng&id=p27#p27" target="_blank" rel="noopener">Luke 10:27</a> (triple-attested)</p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/10?lang=eng&id=p29-p37#p29" target="_blank" rel="noopener">Luke 10:29-37</a> (the Good Samaritan — Jesus&rsquo;s own teaching defining &ldquo;neighbor&rdquo;)</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rom/13?lang=eng&id=p9-p10#p9" target="_blank" rel="noopener">Romans 13:9-10</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/gal/5?lang=eng&id=p14#p14" target="_blank" rel="noopener">Galatians 5:14</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/james/2?lang=eng&id=p8#p8" target="_blank" rel="noopener">James 2:8</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=eng&id=p17#p17" target="_blank" rel="noopener">Mosiah 2:17</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/59?lang=eng&id=p5-p6#p5" target="_blank" rel="noopener">D&amp;C 59:5-6</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1 — holds on the red letters alone.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed universally as a principle; no tradition rejects it as worded. Confessional sources: CCC §2055, §2083; Westminster Larger Catechism Q.102, Q.122; Baptist Faith &amp; Message 2000, Art. XV; LDS Articles of Faith 1:13.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Scope of &ldquo;neighbor&rdquo; (covenant community vs. universal) is resolved inside the gospels by the Good Samaritan, so no qualification is needed.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-02">
+  <h3 class="decl-title"><span class="decl-num">02</span> The Golden Rule</h3>
+  <blockquote class="decl-statement">We affirm that Jesus taught us to do to others as we would have them do to us, for this is the Law and the Prophets.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~99%</span> &mdash; Affirmed by all tested expanded groups.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/7?lang=eng&id=p12#p12" target="_blank" rel="noopener">Matthew 7:12</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/6?lang=eng&id=p31#p31" target="_blank" rel="noopener">Luke 6:31</a> (double-attested)</p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> —</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/14?lang=eng&id=p12#p12" target="_blank" rel="noopener">3 Nephi 14:12</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed universally. Confessional sources: Affirmed across the moral teaching of every tested family (CCC §1965–1974, the Law of the Gospel).</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> None of substance.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-03">
+  <h3 class="decl-title"><span class="decl-num">03</span> Love Your Enemies and Pray for Persecutors</h3>
+  <blockquote class="decl-statement">We affirm that Jesus taught us to love our enemies, to do good to those who hate us, to bless those who curse us, and to pray for those who persecute us, that we may be children of our Father in heaven.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~92%</span> &mdash; Affirmed across the tested expanded groups as Jesus&rsquo;s plain command.</p>
+  <p class="decl-readerspace"><strong>Left open for your tradition:</strong> <em>Whether the command requires absolute nonviolence or permits lawful defense and just-war reasoning belongs here.</em></p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/5?lang=eng&id=p44-p45#p44" target="_blank" rel="noopener">Matthew 5:44-45</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/6?lang=eng&id=p27-p28,p35#p27" target="_blank" rel="noopener">Luke 6:27-28,35</a> (double-attested in the Sermon on the Mount and the Sermon on the Plain)</p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/5?lang=eng&id=p46-p48#p46" target="_blank" rel="noopener">Matthew 5:46-48</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/23?lang=eng&id=p34#p34" target="_blank" rel="noopener">Luke 23:34</a> (Christ modeling the command from the cross)</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rom/12?lang=eng&id=p14,p17-p21#p14" target="_blank" rel="noopener">Romans 12:14,17-21</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-pet/3?lang=eng&id=p9#p9" target="_blank" rel="noopener">1 Peter 3:9</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/12?lang=eng&id=p44#p44" target="_blank" rel="noopener">3 Nephi 12:44</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/98?lang=eng&id=p39-p40#p39" target="_blank" rel="noopener">D&amp;C 98:39-40</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> <em>Whether the command requires absolute nonviolence or permits lawful defense and just-war reasoning belongs here.</em></p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed as worded by all. Anabaptist and Quaker traditions read it as binding nonresistance; Catholic, Orthodox, and magisterial Protestant traditions affirm the interpersonal ethic while permitting lawful defense and just war. Confessional sources: CCC §1825, §2844 (forgiveness and love of enemies), with legitimate-defense nuance at §2263–2267; Baptist Faith &amp; Message 2000, Art. XVI (Peace and War); Schleitheim Confession 1527, Art. VI (Anabaptist nonresistance).</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Pacifism versus just war is a divergence about application, not a rejection of the words; the command to love and pray for enemies is shared.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High. High for the teaching; the divergence is about application, not assent.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-04">
+  <h3 class="decl-title"><span class="decl-num">04</span> Forgiveness Received and Extended</h3>
+  <blockquote class="decl-statement">We affirm that Jesus taught us to forgive those who wrong us, and that the Father&rsquo;s forgiveness of us is bound up with our forgiveness of others.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~97%</span> &mdash; Affirmed by all tested expanded groups.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/6?lang=eng&id=p14-p15#p14" target="_blank" rel="noopener">Matthew 6:14-15</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/18?lang=eng&id=p21-p22#p21" target="_blank" rel="noopener">Matthew 18:21-22</a> (seventy times seven); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/18?lang=eng&id=p23-p35#p23" target="_blank" rel="noopener">Matthew 18:23-35</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/11?lang=eng&id=p25#p25" target="_blank" rel="noopener">Mark 11:25</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/6?lang=eng&id=p37#p37" target="_blank" rel="noopener">Luke 6:37</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/17?lang=eng&id=p3-p4#p3" target="_blank" rel="noopener">Luke 17:3-4</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/eph/4?lang=eng&id=p32#p32" target="_blank" rel="noopener">Ephesians 4:32</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/col/3?lang=eng&id=p13#p13" target="_blank" rel="noopener">Colossians 3:13</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/13?lang=eng&id=p14-p15#p14" target="_blank" rel="noopener">3 Nephi 13:14-15</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/64?lang=eng&id=p9-p10#p9" target="_blank" rel="noopener">D&amp;C 64:9-10</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed universally. Some traditions stress that our forgiving is the evidence, not the cause, of pardon, but none reject the teaching. Confessional sources: CCC §2842–2845; Heidelberg Catechism Q.126; Westminster Shorter Catechism Q.105; Baptist Faith &amp; Message 2000, Art. IV.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Whether the conditionality (&ldquo;as we forgive&rdquo;) bears on assurance of salvation divides grace-and-works frameworks; the command is not in dispute.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-05">
+  <h3 class="decl-title"><span class="decl-num">05</span> Care for the Least — Serving Christ in the Vulnerable</h3>
+  <blockquote class="decl-statement">We affirm that Jesus taught that as we feed the hungry, give drink to the thirsty, welcome the stranger, clothe the naked, and visit the sick and imprisoned, we do it unto him.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~96%</span> &mdash; Affirmed across the tested expanded groups.</p>
+  <p class="decl-readerspace"><strong>Left open for your tradition:</strong> <em>Whether these deeds merit, evidence, or flow from saving faith, and whether &ldquo;the least of these&rdquo; means fellow disciples or all the vulnerable, belong here.</em></p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/25?lang=eng&id=p31-p46#p31" target="_blank" rel="noopener">Matthew 25:31-46</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/10?lang=eng&id=p21#p21" target="_blank" rel="noopener">Mark 10:21</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/14?lang=eng&id=p13-p14#p13" target="_blank" rel="noopener">Luke 14:13-14</a> (the ethic in action)</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/james/1?lang=eng&id=p27#p27" target="_blank" rel="noopener">James 1:27</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-jn/3?lang=eng&id=p17-p18#p17" target="_blank" rel="noopener">1 John 3:17-18</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=eng&id=p17#p17" target="_blank" rel="noopener">Mosiah 2:17</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=eng&id=p16-p27#p16" target="_blank" rel="noopener">Mosiah 4:16-27</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?lang=eng&id=p28-p29#p28" target="_blank" rel="noopener">Alma 34:28-29</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> <em>Whether these deeds merit, evidence, or flow from saving faith, and whether &ldquo;the least of these&rdquo; means fellow disciples or all the vulnerable, belong here.</em></p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1. Matthew 25:31-46 also anchors the declaration on Christ&rsquo;s return; here it carries its distinct function — service to the least as service to Christ — rather than the judgment scene.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed universally as the ethic. The soteriological reading of the scene (merit versus the evidence of faith) diverges; the duty does not. Confessional sources: CCC §2447, §1822; Baptist Faith &amp; Message 2000, Art. XV; James 1:27.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> The identity of &ldquo;the least of these&rdquo; (fellow believers or all humanity) and the faith-and-works reading of the judgment are read variously; the operational command is the same either way.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High. High on the ethical core; the soteriological reading is held in reader space.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-06">
+  <h3 class="decl-title"><span class="decl-num">06</span> God as Father, and the Pattern of Prayer</h3>
+  <blockquote class="decl-statement">We affirm that Jesus taught us to know and address God as Father, to pray to him with trust in the manner of the prayer he gave his disciples, and to ask, seek, and knock in confidence that the Father gives good gifts to those who ask him.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~98%</span> &mdash; Affirmed by all tested expanded groups.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/6?lang=eng&id=p9-p13#p9" target="_blank" rel="noopener">Matthew 6:9-13</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/11?lang=eng&id=p2-p4#p2" target="_blank" rel="noopener">Luke 11:2-4</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/6?lang=eng&id=p6-p8#p6" target="_blank" rel="noopener">Matthew 6:6-8</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/7?lang=eng&id=p7-p11#p7" target="_blank" rel="noopener">Matthew 7:7-11</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/11?lang=eng&id=p9-p13#p9" target="_blank" rel="noopener">Luke 11:9-13</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/16?lang=eng&id=p23-p27#p23" target="_blank" rel="noopener">John 16:23-27</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rom/8?lang=eng&id=p15#p15" target="_blank" rel="noopener">Romans 8:15</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/gal/4?lang=eng&id=p6#p6" target="_blank" rel="noopener">Galatians 4:6</a> (&ldquo;Abba, Father&rdquo; — corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/13?lang=eng&id=p9-p13#p9" target="_blank" rel="noopener">3 Nephi 13:9-13</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/18?lang=eng&id=p19-p21#p19" target="_blank" rel="noopener">3 Nephi 18:19-21</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/14?lang=eng&id=p7-p11#p7" target="_blank" rel="noopener">3 Nephi 14:7-11</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed universally; the Lord&rsquo;s Prayer is recited or echoed across traditions. Confessional sources: CCC §2759, §2761, §2779 (Abba, Father); Westminster Shorter Catechism Q.98–107; Heidelberg Catechism Q.116–120.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> The doxology &ldquo;for thine is the kingdom...&rdquo; (Matthew 6:13) is textually absent from the earliest manuscripts; treated as non-essential and not leaned upon.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-07">
+  <h3 class="decl-title"><span class="decl-num">07</span> Come to Me, All Who Labor</h3>
+  <blockquote class="decl-statement">We affirm that Jesus invited all who labor and are heavy laden to come to him for rest, for his yoke is easy and his burden is light, and that in him our souls find rest.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~95%</span> &mdash; Affirmed across the tested expanded groups.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/11?lang=eng&id=p28-p30#p28" target="_blank" rel="noopener">Matthew 11:28-30</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/11?lang=eng&id=p25-p27#p25" target="_blank" rel="noopener">Matthew 11:25-27</a> (the Father revealed through the Son)</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/heb/4?lang=eng&id=p1-p11#p1" target="_blank" rel="noopener">Hebrews 4:1-11</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-pet/5?lang=eng&id=p7#p7" target="_blank" rel="noopener">1 Peter 5:7</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/10?lang=eng&id=p32#p32" target="_blank" rel="noopener">Moroni 10:32</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/25?lang=eng&id=p23,p26#p23" target="_blank" rel="noopener">2 Nephi 25:23,26</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed as worded by all tested traditions. Confessional sources: Heidelberg Catechism Q.1 (our only comfort in Christ); echoed across the devotional and liturgical traditions.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> The nature of the &ldquo;yoke&rdquo; and the &ldquo;rest&rdquo; (present relief or eschatological rest) is read variously; the invitation itself is not contested.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High. High. &ldquo;Come unto me&rdquo; is the most encounter-bearing of the declarations.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-08">
+  <h3 class="decl-title"><span class="decl-num">08</span> Repentance and the Nearness of God&rsquo;s Kingdom</h3>
+  <blockquote class="decl-statement">We affirm that Jesus proclaimed the good news of the kingdom of God and called all people to repent and believe.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~97%</span> &mdash; Affirmed by all tested expanded groups.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/1?lang=eng&id=p14-p15#p14" target="_blank" rel="noopener">Mark 1:14-15</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/4?lang=eng&id=p17#p17" target="_blank" rel="noopener">Matthew 4:17</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/13?lang=eng&id=p3,p5#p3" target="_blank" rel="noopener">Luke 13:3,5</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/5?lang=eng&id=p32#p32" target="_blank" rel="noopener">Luke 5:32</a> (&ldquo;to call sinners to repentance&rdquo;)</p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/2?lang=eng&id=p38#p38" target="_blank" rel="noopener">Acts 2:38</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/3?lang=eng&id=p19#p19" target="_blank" rel="noopener">Acts 3:19</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/17?lang=eng&id=p30#p30" target="_blank" rel="noopener">Acts 17:30</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/27?lang=eng&id=p20#p20" target="_blank" rel="noopener">3 Nephi 27:20</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=eng&id=p10#p10" target="_blank" rel="noopener">Mosiah 4:10</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed universally. Traditions differ on whether repentance precedes or follows regeneration, but none reject the call. Confessional sources: CCC §1427–1430; Westminster Confession ch. 15 (Of Repentance unto Life); Baptist Faith &amp; Message 2000, Art. IV; LDS Articles of Faith 1:4.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> &ldquo;Kingdom of God&rdquo; (present vs. future, inward vs. consummated) is read variously, but the call to repent is not contested.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-09">
+  <h3 class="decl-title"><span class="decl-num">09</span> The Call to Follow Christ in Self-Denial</h3>
+  <blockquote class="decl-statement">We affirm that Jesus calls all who would follow him to deny themselves, take up their cross daily, and follow him.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~97%</span> &mdash; Affirmed by all tested expanded groups.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/16?lang=eng&id=p24#p24" target="_blank" rel="noopener">Matthew 16:24</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/8?lang=eng&id=p34#p34" target="_blank" rel="noopener">Mark 8:34</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/9?lang=eng&id=p23#p23" target="_blank" rel="noopener">Luke 9:23</a> (triple-attested); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/10?lang=eng&id=p38#p38" target="_blank" rel="noopener">Matthew 10:38</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/14?lang=eng&id=p27#p27" target="_blank" rel="noopener">Luke 14:27</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/12?lang=eng&id=p26#p26" target="_blank" rel="noopener">John 12:26</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-pet/2?lang=eng&id=p21#p21" target="_blank" rel="noopener">1 Peter 2:21</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/27?lang=eng&id=p21#p21" target="_blank" rel="noopener">3 Nephi 27:21</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/omni/1?lang=eng&id=p26#p26" target="_blank" rel="noopener">Omni 1:26</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed universally as the shape of discipleship. Confessional sources: CCC §618 (sharing in Christ&rsquo;s cross); Westminster Confession ch. 13 (Of Sanctification); affirmed across the discipleship teaching of every tested family.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Whether self-denial is meritorious or the fruit of grace divides theologies of justification, but the command itself is shared.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-10">
+  <h3 class="decl-title"><span class="decl-num">10</span> Christ Came to Seek and Save the Lost</h3>
+  <blockquote class="decl-statement">We affirm that Jesus came to seek and to save the lost, and that he called sinners, not the righteous, to repentance.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~97%</span> &mdash; Affirmed by all tested expanded groups.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/19?lang=eng&id=p10#p10" target="_blank" rel="noopener">Luke 19:10</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/2?lang=eng&id=p17#p17" target="_blank" rel="noopener">Mark 2:17</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/9?lang=eng&id=p13#p13" target="_blank" rel="noopener">Matthew 9:13</a> (multi-attested); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/5?lang=eng&id=p31-p32#p31" target="_blank" rel="noopener">Luke 5:31-32</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/15?lang=eng" target="_blank" rel="noopener">Luke 15</a> (the lost sheep, coin, and son)</p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-tim/1?lang=eng&id=p15#p15" target="_blank" rel="noopener">1 Timothy 1:15</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/9?lang=eng&id=p21#p21" target="_blank" rel="noopener">3 Nephi 9:21</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/18?lang=eng&id=p10-p13#p10" target="_blank" rel="noopener">D&amp;C 18:10-13</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed universally. Confessional sources: CCC §457 (the Word became flesh to save us); Westminster Confession ch. 8 (Of Christ the Mediator); Baptist Faith &amp; Message 2000, Art. IV; 1 Timothy 1:15.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> The extent and efficacy of that saving work (for whom, and how applied) diverges, but his coming &ldquo;to seek and to save&rdquo; is not contested.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-11">
+  <h3 class="decl-title"><span class="decl-num">11</span> Christ&rsquo;s Authority to Forgive Sins</h3>
+  <blockquote class="decl-statement">We affirm that Jesus exercised on earth the authority to forgive sins.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~94%</span> &mdash; Affirmed as worded; expanded groups grant Jesus forgave sins even where they read his authority as conferred.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/2?lang=eng&id=p5-p11#p5" target="_blank" rel="noopener">Mark 2:5-11</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/5?lang=eng&id=p20-p24#p20" target="_blank" rel="noopener">Luke 5:20-24</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/9?lang=eng&id=p2-p6#p2" target="_blank" rel="noopener">Matthew 9:2-6</a> (triple-attested); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/7?lang=eng&id=p48#p48" target="_blank" rel="noopener">Luke 7:48</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> —</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/26?lang=eng&id=p29-p30#p29" target="_blank" rel="noopener">Mosiah 26:29-30</a> (the pattern of forgiveness through Christ&rsquo;s authority)</p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed as worded. The creedal families take the scribes&rsquo; question (&ldquo;who can forgive sins but God alone?&rdquo;, Mark 2:7) as evidence of deity; this declaration does not require that inference to be affirmed. Confessional sources: CCC §1441 (God alone forgives sins; Christ exercised that authority); Westminster Confession ch. 8; affirmed across families.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Whether the episode proves Christ&rsquo;s deity (creedal core) or displays delegated authority (Jehovah&rsquo;s Witnesses) is an interpretive divergence about meaning, not about the fact.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-12">
+  <h3 class="decl-title"><span class="decl-num">12</span> Christ, the Way to the Father</h3>
+  <blockquote class="decl-statement">We affirm that Jesus is the way to the Father, and that he came that we might have life.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~92%</span> &mdash; Affirmed; Latter-day Saints confess no other name whereby salvation comes (2 Nephi 31:21); Jehovah&rsquo;s Witnesses affirm Jesus as God&rsquo;s appointed means.</p>
+  <p class="decl-readerspace"><strong>Left open for your tradition:</strong> <em>How the unevangelized are reached, and the place of other religions, belong here.</em></p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/14?lang=eng&id=p6#p6" target="_blank" rel="noopener">John 14:6</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/10?lang=eng&id=p10#p10" target="_blank" rel="noopener">John 10:10</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/5?lang=eng&id=p24#p24" target="_blank" rel="noopener">John 5:24</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/6?lang=eng&id=p35-p40#p35" target="_blank" rel="noopener">John 6:35-40</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/4?lang=eng&id=p12#p12" target="_blank" rel="noopener">Acts 4:12</a> (&ldquo;no other name&rdquo; — corroboration); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-tim/2?lang=eng&id=p5#p5" target="_blank" rel="noopener">1 Timothy 2:5</a></p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/31?lang=eng&id=p21#p21" target="_blank" rel="noopener">2 Nephi 31:21</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/25?lang=eng&id=p23#p23" target="_blank" rel="noopener">2 Nephi 25:23</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> <em>How the unevangelized are reached, and the place of other religions, belong here.</em></p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed as worded by all tested traditions. Confessional sources: CCC §161; Westminster Confession ch. 8; Baptist Faith &amp; Message 2000, Art. IV; LDS Articles of Faith 1:3.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> The soteriological scope of the exclusivity (exclusivism vs. inclusivism vs. larger-hope readings) divides traditions, but none reject the words; it is divergence about reach, not about Christ as the way.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-13">
+  <h3 class="decl-title"><span class="decl-num">13</span> Christ Gave His Life for Many</h3>
+  <blockquote class="decl-statement">We affirm that Jesus gave his life for others — that the Son of Man came not to be served but to serve, and to give his life a ransom for many.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~96%</span> &mdash; Latter-day Saints center the Atonement; &ldquo;ransom&rdquo; is itself a load-bearing term for Jehovah&rsquo;s Witnesses.</p>
+  <p class="decl-readerspace"><strong>Left open for your tradition:</strong> <em>The theory of the atonement — penal substitution, satisfaction, Christus Victor, moral influence, governmental, or ransom — belongs here.</em></p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/10?lang=eng&id=p45#p45" target="_blank" rel="noopener">Mark 10:45</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/20?lang=eng&id=p28#p28" target="_blank" rel="noopener">Matthew 20:28</a> (double-attested); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/10?lang=eng&id=p11,p15,p17-p18#p11" target="_blank" rel="noopener">John 10:11,15,17-18</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/15?lang=eng&id=p13#p13" target="_blank" rel="noopener">John 15:13</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/22?lang=eng&id=p19-p20#p19" target="_blank" rel="noopener">Luke 22:19-20</a> (&ldquo;for you&rdquo;)</p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-cor/15?lang=eng&id=p3#p3" target="_blank" rel="noopener">1 Corinthians 15:3</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rom/5?lang=eng&id=p8#p8" target="_blank" rel="noopener">Romans 5:8</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-pet/2?lang=eng&id=p24#p24" target="_blank" rel="noopener">1 Peter 2:24</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/3?lang=eng&id=p7-p11#p7" target="_blank" rel="noopener">Mosiah 3:7-11</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/34?lang=eng&id=p14-p16#p14" target="_blank" rel="noopener">Alma 34:14-16</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/9?lang=eng&id=p21-p22#p21" target="_blank" rel="noopener">2 Nephi 9:21-22</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> <em>The theory of the atonement — penal substitution, satisfaction, Christus Victor, moral influence, governmental, or ransom — belongs here.</em></p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed as worded by all tested traditions. Confessional sources: CCC §605, §613–618 (Christ&rsquo;s redeeming sacrifice); Heidelberg Catechism Q.37–40; Baptist Faith &amp; Message 2000, Art. II.B; atonement theories held in reader space.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Thick on the fact, thin on the meaning: traditions affirm that Christ gave his life &ldquo;for&rdquo; us while disputing how the atonement works. The shared word is &ldquo;for / ransom&rdquo;; the theory is reader space.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High. High on the fact; the unanimity is at the level of the gospel&rsquo;s own language, not the later theories.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-14">
+  <h3 class="decl-title"><span class="decl-num">14</span> The Resurrection of Jesus Christ</h3>
+  <blockquote class="decl-statement">We affirm that Jesus, having been crucified, rose from the dead — the same Jesus, alive and triumphant over death — as he himself foretold and as his disciples witnessed.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-qual">Shared, with care</span> <span class="decl-pct">~94%</span> &mdash; Latter-day Saints affirm a literal bodily resurrection. Jehovah&rsquo;s Witnesses affirm Jesus was raised but as a spirit creature, not in the body — a real divergence on the nature, not the fact.</p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/16?lang=eng&id=p21#p21" target="_blank" rel="noopener">Matthew 16:21</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/8?lang=eng&id=p31#p31" target="_blank" rel="noopener">Mark 8:31</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/9?lang=eng&id=p22#p22" target="_blank" rel="noopener">Luke 9:22</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/2?lang=eng&id=p19#p19" target="_blank" rel="noopener">John 2:19</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/17?lang=eng&id=p22-p23#p22" target="_blank" rel="noopener">Matthew 17:22-23</a>; the risen Christ&rsquo;s own words: Luke 24:38-39,46; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/20?lang=eng&id=p19-p29#p19" target="_blank" rel="noopener">John 20:19-29</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/28?lang=eng&id=p18-p20#p18" target="_blank" rel="noopener">Matthew 28:18-20</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/28?lang=eng" target="_blank" rel="noopener">Matthew 28</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/24?lang=eng" target="_blank" rel="noopener">Luke 24</a>; John 20-21 (the resurrection appearances — the clearest case in which gospel narration may originate a declaration)</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-cor/15?lang=eng&id=p3-p8#p3" target="_blank" rel="noopener">1 Corinthians 15:3-8</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/2?lang=eng&id=p24,p32#p24" target="_blank" rel="noopener">Acts 2:24,32</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/11?lang=eng&id=p8-p15#p8" target="_blank" rel="noopener">3 Nephi 11:8-15</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/11?lang=eng&id=p42-p45#p42" target="_blank" rel="noopener">Alma 11:42-45</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/16?lang=eng&id=p7-p8#p7" target="_blank" rel="noopener">Mosiah 16:7-8</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> open</p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 2 (resurrection appearances), supported by the Tier 1 predictions and the red-letter words of the risen Christ.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> The resurrection itself is affirmed by all tested traditions. The bodily nature is creedal-core consensus; Jehovah&rsquo;s Witnesses qualify it (spiritual resurrection). Confessional sources: CCC §638–658; Thirty-Nine Articles, Art. IV; Baptist Faith &amp; Message 2000, Art. II.B; bodily resurrection — LDS standard works; spiritual resurrection — Watch Tower teaching.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Bodily vs. spiritual resurrection is the divergence (Jehovah&rsquo;s Witnesses); the declaration is worded &ldquo;rose from the dead... the same Jesus&rdquo; to state what all affirm while naming the divergence honestly.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-15">
+  <h3 class="decl-title"><span class="decl-num">15</span> The New Birth by the Spirit</h3>
+  <blockquote class="decl-statement">We affirm that Jesus taught that one must be born anew, of the Spirit, to see and enter the kingdom of God.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-qual">Shared, with care</span> <span class="decl-pct">~85%</span> &mdash; Latter-day Saints affirm strongly (water + Spirit = baptism and the gift of the Holy Ghost). Jehovah&rsquo;s Witnesses restrict being &ldquo;born again&rdquo; to the 144,000 anointed, a real narrowing.</p>
+  <p class="decl-readerspace"><strong>Left open for your tradition:</strong> <em>Whether &ldquo;born of water&rdquo; (John 3:5) entails baptismal regeneration, the proper mode and subjects of baptism, and the timing of regeneration belong here, by tradition.</em></p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/3?lang=eng&id=p3-p8#p3" target="_blank" rel="noopener">John 3:3-8</a> (Jesus to Nicodemus)</p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/titus/3?lang=eng&id=p5#p5" target="_blank" rel="noopener">Titus 3:5</a> (tagged — &ldquo;washing of regeneration&rdquo; is read by some toward baptismal regeneration); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-pet/1?lang=eng&id=p3,p23#p3" target="_blank" rel="noopener">1 Peter 1:3,23</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/27?lang=eng&id=p25-p26#p25" target="_blank" rel="noopener">Mosiah 27:25-26</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/5?lang=eng&id=p14#p14" target="_blank" rel="noopener">Alma 5:14</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> <em>Whether &ldquo;born of water&rdquo; (John 3:5) entails baptismal regeneration, the proper mode and subjects of baptism, and the timing of regeneration belong here, by tradition.</em></p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1 — stated at the consensus level; baptismal-regeneration anchors are deliberately kept in reader space so they do not narrow the declaration below the bar.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed by the creedal families and Latter-day Saints. Jehovah&rsquo;s Witnesses affirm-with-qualification, limiting the new birth to the anointed class (Watch Tower teaching). Confessional sources: CCC §1213–1215 (regeneration); Westminster Confession ch. 10 (Of Effectual Calling); Baptist Faith &amp; Message 2000, Art. IV; LDS Articles of Faith 1:4; restriction to the anointed — Watch Tower teaching; baptismal-regeneration specifics held in reader space.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> &ldquo;Water&rdquo; (baptism, physical birth, or the cleansing word) and whether regeneration is sacramentally effected are read incompatibly — handled in reader space.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> Medium. The expanded-tent figure turns on the Jehovah&rsquo;s Witness restriction of the new birth; estimate, not measurement.</p>
+    <p class="decl-meta decl-flag"><strong>Verification flag.</strong> The ~85% expanded-tent rating depends on the Watch Tower restriction of the new birth to the 144,000 anointed; confirm against a current Watch Tower statement before wide distribution.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-16">
+  <h3 class="decl-title"><span class="decl-num">16</span> The Gift of the Holy Spirit, the Comforter</h3>
+  <blockquote class="decl-statement">We affirm that Jesus promised the Holy Spirit, the Comforter, to teach his followers, to bear witness of him, and to abide with them.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-qual">Shared, with care</span> <span class="decl-pct">~88%</span> &mdash; Latter-day Saints affirm the Holy Ghost. Jehovah&rsquo;s Witnesses affirm &ldquo;holy spirit&rdquo; but as God&rsquo;s impersonal active force, not a person — the promise is affirmed; the personhood is not.</p>
+  <p class="decl-readerspace"><strong>Left open for your tradition:</strong> <em>The personhood and full deity of the Spirit, and the manner of receiving the gift, belong here.</em></p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/14?lang=eng&id=p16-p17,p26#p16" target="_blank" rel="noopener">John 14:16-17,26</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/15?lang=eng&id=p26#p26" target="_blank" rel="noopener">John 15:26</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/16?lang=eng&id=p7-p15#p7" target="_blank" rel="noopener">John 16:7-15</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/24?lang=eng&id=p49#p49" target="_blank" rel="noopener">Luke 24:49</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/20?lang=eng&id=p22#p22" target="_blank" rel="noopener">John 20:22</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/1?lang=eng&id=p8#p8" target="_blank" rel="noopener">Acts 1:8</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/2?lang=eng&id=p1-p4,p38#p1" target="_blank" rel="noopener">Acts 2:1-4,38</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/19?lang=eng&id=p9,p13#p9" target="_blank" rel="noopener">3 Nephi 19:9,13</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/8?lang=eng&id=p26#p26" target="_blank" rel="noopener">Moroni 8:26</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/32?lang=eng&id=p5#p5" target="_blank" rel="noopener">2 Nephi 32:5</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> <em>The personhood and full deity of the Spirit, and the manner of receiving the gift, belong here.</em></p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1 — stated as the promise and gift; the personhood and deity of the Spirit are held in reader space.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed as worded by the creedal families and Latter-day Saints. Jehovah&rsquo;s Witnesses affirm-with-qualification (active force, not person). Confessional sources: Nicene Creed (&ldquo;the Lord, the giver of life&rdquo;); CCC §683–688; Baptist Faith &amp; Message 2000, Art. II.C; LDS Articles of Faith 1:1; impersonal active force — Watch Tower teaching.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Personal vs. impersonal Spirit is the divergence (Jehovah&rsquo;s Witnesses); the filioque divides East and West on procession but not on the gift.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> Medium. The expanded-tent figure turns on the Jehovah&rsquo;s Witness denial of the Spirit&rsquo;s personhood; estimate.</p>
+    <p class="decl-meta decl-flag"><strong>Verification flag.</strong> The ~88% expanded-tent rating depends on the Jehovah&rsquo;s Witness denial of the Spirit&rsquo;s personhood; confirm against a current Watch Tower statement before wide distribution.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-17">
+  <h3 class="decl-title"><span class="decl-num">17</span> Christ Will Return, and All Will Stand Before Him</h3>
+  <blockquote class="decl-statement">We affirm that Jesus will come again, and that all will stand accountable before him.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-pass">Widely shared</span> <span class="decl-pct">~97%</span> &mdash; Affirmed by all tested expanded groups.</p>
+  <p class="decl-readerspace"><strong>Left open for your tradition:</strong> <em>Millennial schemes (pre-, a-, post-millennial, preterist) and the timing of events belong here.</em></p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/24?lang=eng&id=p30-p31#p30" target="_blank" rel="noopener">Matthew 24:30-31</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/25?lang=eng&id=p31-p46#p31" target="_blank" rel="noopener">Matthew 25:31-46</a> (the sheep and the goats); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/16?lang=eng&id=p27#p27" target="_blank" rel="noopener">Matthew 16:27</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/26?lang=eng&id=p64#p64" target="_blank" rel="noopener">Matthew 26:64</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/14?lang=eng&id=p3#p3" target="_blank" rel="noopener">John 14:3</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/5?lang=eng&id=p28-p29#p28" target="_blank" rel="noopener">John 5:28-29</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/13?lang=eng&id=p26#p26" target="_blank" rel="noopener">Mark 13:26</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/21?lang=eng&id=p27#p27" target="_blank" rel="noopener">Luke 21:27</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> —</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/1?lang=eng&id=p11#p11" target="_blank" rel="noopener">Acts 1:11</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-thes/4?lang=eng&id=p16-p17#p16" target="_blank" rel="noopener">1 Thessalonians 4:16-17</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rev/22?lang=eng&id=p12#p12" target="_blank" rel="noopener">Revelation 22:12</a> (corroboration)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/27?lang=eng&id=p14-p16#p14" target="_blank" rel="noopener">3 Nephi 27:14-16</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/morm/7?lang=eng&id=p6-p7#p6" target="_blank" rel="noopener">Mormon 7:6-7</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/45?lang=eng&id=p44#p44" target="_blank" rel="noopener">D&amp;C 45:44</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> <em>Millennial schemes (pre-, a-, post-millennial, preterist) and the timing of events belong here.</em></p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed as worded by all tested traditions. Confessional sources: Nicene Creed (&ldquo;will come again to judge the living and the dead&rdquo;); CCC §668–679; Thirty-Nine Articles, Art. IV; Baptist Faith &amp; Message 2000, Art. X (Last Things).</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> The nature of final punishment (eternal conscious torment vs. annihilation vs. larger hope) and millennial timing diverge sharply — see the boundary list. The fact of return and judgment is not in dispute.</p>
+    <p class="decl-meta"><strong>Confidence.</strong> High.</p>
+  </div></details>
+</article>
+<article class="decl-card" id="decl-18">
+  <h3 class="decl-title"><span class="decl-num">18</span> The Lord&rsquo;s Supper, in Remembrance of Him</h3>
+  <blockquote class="decl-statement">We affirm that on the night he was betrayed Jesus took bread and the cup, gave them to his disciples, and bade them do this in remembrance of him.</blockquote>
+  <p class="decl-rating"><span class="decl-pill decl-pill-qual">Shared, with care</span> <span class="decl-pct">~90%</span> &mdash; Latter-day Saints observe the sacrament in remembrance; Jehovah&rsquo;s Witnesses keep an annual Memorial. Both affirm the remembrance framing.</p>
+  <p class="decl-readerspace"><strong>Left open for your tradition:</strong> <em>What the Supper IS — transubstantiation, sacramental union, pneumatic presence, Holy Mystery, or pure memorial — and whether it conveys grace belong here. Some groups (Quakers, the Salvation Army) do not observe it.</em></p>
+  <details class="decl-witness"><summary>Show the witness</summary><div class="decl-witness-body">
+    <p class="decl-stack"><strong>Tier 1 · red letter —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/22?lang=eng&id=p19-p20#p19" target="_blank" rel="noopener">Luke 22:19-20</a> (&ldquo;this do in remembrance of me&rdquo;); <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/26?lang=eng&id=p26-p28#p26" target="_blank" rel="noopener">Matthew 26:26-28</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/14?lang=eng&id=p22-p24#p22" target="_blank" rel="noopener">Mark 14:22-24</a></p>
+    <p class="decl-stack"><strong>Tier 2 · gospel —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/6?lang=eng&id=p53-p58#p53" target="_blank" rel="noopener">John 6:53-58</a> (tagged — the &ldquo;eat my flesh&rdquo; discourse carries the canon&rsquo;s heaviest eucharistic reading and divides traditions)</p>
+    <p class="decl-stack"><strong>Tier 3 · apostolic —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-cor/11?lang=eng&id=p23-p26#p23" target="_blank" rel="noopener">1 Corinthians 11:23-26</a> (corroboration — Paul transmits the same institution and command to remember)</p>
+    <p class="decl-stack"><strong>Restoration —</strong> <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/18?lang=eng&id=p1-p11#p1" target="_blank" rel="noopener">3 Nephi 18:1-11</a>; Moroni 4-5; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/20?lang=eng&id=p75-p79#p75" target="_blank" rel="noopener">D&amp;C 20:75-79</a></p>
+    <p class="decl-stack"><strong>Reader space —</strong> <em>What the Supper IS — transubstantiation, sacramental union, pneumatic presence, Holy Mystery, or pure memorial — and whether it conveys grace belong here. Some groups (Quakers, the Salvation Army) do not observe it.</em></p>
+    <hr class="decl-meta-rule">
+    <p class="decl-meta"><strong>Governing tier.</strong> Tier 1 — at the level of institution and remembrance only. The presence question is reader space; it cannot be stated in shared wording without breaking consensus.</p>
+    <p class="decl-meta"><strong>Affirm / Qualify / Reject.</strong> Affirmed as worded (institution + remembrance) by nearly all; non-observing groups (Quakers, Salvation Army) and the depth of the presence dispute hold this at QUALIFIED. Confessional sources: transubstantiation — CCC §1373–1377 (Trent); sacramental union — Augsburg Confession Art. X, Formula of Concord VII; pneumatic presence — Westminster Confession ch. 29; &ldquo;cannot be proved by Holy Writ&rdquo; — Thirty-Nine Articles, Art. XXVIII; memorial — Baptist Faith &amp; Message 2000, Art. VII; not observed — Quaker and Salvation Army practice.</p>
+    <p class="decl-meta"><strong>Interpretive divergence.</strong> Real presence vs. memorial is the historic fault line; see the boundary list. The shared declaration deliberately states only what the red letters command: &ldquo;do this in remembrance of me.&rdquo;</p>
+    <p class="decl-meta"><strong>Confidence.</strong> Medium. Non-observing groups and the severity of the presence dispute make the rating a judgment call; the remembrance core is solid.</p>
+    <p class="decl-meta decl-flag"><strong>Verification flag.</strong> The QUALIFIED rating is a judgment call weighing the non-observing groups (Quaker, Salvation Army) and the severity of the presence dispute; confirm both against primary confessions before wide distribution.</p>
+  </div></details>
+</article>
+
+  <div class="study-divider">&#10022;&ensp;&ensp;&#10022;&ensp;&ensp;&#10022;</div>
+
+  <h2 class="study-section-heading">The Boundary — What We Could Not Yet Share</h2>
+  <p class="decl-intro"><em>Gospel teachings that could not clear the 80-percent bar as a joint declaration across the expanded tent. Recorded plainly and unwatered — the boundary is honest ground, not failure.</em></p>
+
+  <div class="decl-boundary">
+  <div class="decl-boundary-item"><h4>01 — The deity of Christ under the expanded tent</h4><p>Red-letter grounded and creedal-core consensus (Declaration #19), but Jehovah&rsquo;s Witnesses and Unitarian Christians reject Jesus as God; it cannot clear 80% under the expanded denominator without denying the gospel witness.</p><p class="decl-boundary-refs"><a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/10?lang=eng&id=p30#p30" target="_blank" rel="noopener">John 10:30</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/8?lang=eng&id=p58#p58" target="_blank" rel="noopener">John 8:58</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/20?lang=eng&id=p28#p28" target="_blank" rel="noopener">John 20:28</a></p></div>
+  <div class="decl-boundary-item"><h4>02 — Baptismal regeneration; the necessity and mode of baptism</h4><p>Whether baptism regenerates, who may receive it (infants vs. believers only), its proper mode, and its necessity divide the sacramental families from most Baptists and Evangelicals — and Quakers and the Salvation Army do not practice water baptism at all.</p><p class="decl-boundary-refs"><a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/3?lang=eng&id=p5#p5" target="_blank" rel="noopener">John 3:5</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/28?lang=eng&id=p19#p19" target="_blank" rel="noopener">Matthew 28:19</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/16?lang=eng&id=p16#p16" target="_blank" rel="noopener">Mark 16:16</a></p></div>
+  <div class="decl-boundary-item"><h4>03 — The real presence in the Eucharist</h4><p>The institution is shared (Declaration #18), but transubstantiation, sacramental union, pneumatic presence, and pure memorialism cannot be jointly affirmed; the meaning of &ldquo;this is my body&rdquo; is the deepest historic fault line of all.</p><p class="decl-boundary-refs"><a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/6?lang=eng&id=p53-p56#p53" target="_blank" rel="noopener">John 6:53-56</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/luke/22?lang=eng&id=p19#p19" target="_blank" rel="noopener">Luke 22:19</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/26?lang=eng&id=p26#p26" target="_blank" rel="noopener">Matthew 26:26</a></p></div>
+  <div class="decl-boundary-item"><h4>04 — The nature of final punishment</h4><p>Eternal conscious torment (the historic majority), annihilation / conditional immortality (Adventists, Jehovah&rsquo;s Witnesses, some Evangelicals), and universal restoration cannot be jointly affirmed.</p><p class="decl-boundary-refs"><a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/25?lang=eng&id=p46#p46" target="_blank" rel="noopener">Matthew 25:46</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/9?lang=eng&id=p43-p48#p43" target="_blank" rel="noopener">Mark 9:43-48</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/10?lang=eng&id=p28#p28" target="_blank" rel="noopener">Matthew 10:28</a></p></div>
+  <div class="decl-boundary-item"><h4>05 — The authority of the church; Peter and the keys</h4><p>Papal primacy (Catholic), conciliar-episcopal succession (Orthodox), and the priesthood of all believers (Protestant) read &ldquo;the keys&rdquo; and &ldquo;binding and loosing&rdquo; incompatibly.</p><p class="decl-boundary-refs"><a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/16?lang=eng&id=p18-p19#p18" target="_blank" rel="noopener">Matthew 16:18-19</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/18?lang=eng&id=p18#p18" target="_blank" rel="noopener">Matthew 18:18</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/20?lang=eng&id=p23#p23" target="_blank" rel="noopener">John 20:23</a></p></div>
+  <div class="decl-boundary-item"><h4>06 — Marriage, divorce, and remarriage</h4><p>Indissolubility with annulment (Catholic), economia and permitted remarriage (Orthodox), and varied Protestant grounds for divorce are genuinely divisive. Included here unwatered, per the no-softening rule — the disagreement is real and the boundary is honest.</p><p class="decl-boundary-refs"><a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/5?lang=eng&id=p31-p32#p31" target="_blank" rel="noopener">Matthew 5:31-32</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/19?lang=eng&id=p3-p9#p3" target="_blank" rel="noopener">Matthew 19:3-9</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/10?lang=eng&id=p11-p12#p11" target="_blank" rel="noopener">Mark 10:11-12</a></p></div>
+  <div class="decl-boundary-item"><h4>07 — The mode of Christ&rsquo;s second coming and millennial scheme</h4><p>The fact of the return and judgment is shared (Declaration #17); premillennial, amillennial, postmillennial, and preterist readings of how and when cannot be jointly affirmed.</p><p class="decl-boundary-refs"><a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/24?lang=eng&id=p29-p31#p29" target="_blank" rel="noopener">Matthew 24:29-31</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/25?lang=eng&id=p31#p31" target="_blank" rel="noopener">Matthew 25:31</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/rev/20?lang=eng&id=p1-p6#p1" target="_blank" rel="noopener">Revelation 20:1-6</a></p></div>
+  </div>
+
+  <details class="decl-methodology"><summary>Methodology &amp; limits</summary>
+    <p class="decl-meta"><strong>Translation basis.</strong> Red letters were identified against public-domain baselines (KJV / World English Bible) with cross-checks. Where editions disagree on where Jesus&rsquo;s speech ends (e.g. John 3:16ff), the disputed verses were treated conservatively and no declaration leans on a contested attribution.</p>
+    <p class="decl-meta"><strong>Sources consulted.</strong> Confessional positions were drawn from the historic standards of the tested families: the Nicene and Apostles&rsquo; Creeds; the Catechism of the Catholic Church; Eastern Orthodox confessions; the Book of Concord; the Westminster, Heidelberg, and Belgic standards; the Thirty-Nine Articles; the Baptist Faith &amp; Message; the Wesleyan Articles of Religion; classic Pentecostal statements; Stone-Campbell and Anabaptist positions; the Seventh-day Adventist Fundamental Beliefs; and, for the expanded tent, the Latter-day Saint Articles of Faith and Watch Tower doctrinal statements. The eucharistic-presence spectrum, expanded-tent Christology, and the views of final punishment were additionally checked against current comparative sources.</p>
+    <p class="decl-meta"><strong>What the estimates can and cannot do.</strong> The figures distinguish broad consensus from contested ground; they cannot stand as measured data. Medium-confidence ratings turn on a single tradition&rsquo;s qualification and are flagged as such. Three declarations carry an explicit verification flag — the new birth, the gift of the Spirit, and the Lord&rsquo;s Supper — marking ratings that should be confirmed against the named confessions before wide distribution. The Restoration witness is included throughout as witness-only and never affects a rating, because most Christian traditions do not receive that canon.</p>
+    <p class="decl-meta"><strong>Style.</strong> &ldquo;Latter-day Saint,&rdquo; not &ldquo;Mormon,&rdquo; except in historical quotation; em-dashes per Chicago; scripture hyperlinked to churchofjesuschrist.org/study.</p>
+  </details>
+
+  <p class="study-footer-note">&ldquo;For my soul delighteth in plainness; for after this manner doth the Lord God<br>work among the children of men.&rdquo; &mdash; 2 Nephi 31:3</p>
+
+</div>
+{% include "partials/search-fab.njk" %}
