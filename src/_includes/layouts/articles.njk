@@ -139,6 +139,21 @@
             </ul>
         </div>
 
+        <div class="an-companions an-music">
+            <p class="an-companions-heading">Musical Testimony</p>
+            <ul class="an-drawer-list an-companions-list">
+                <li>
+                    <button type="button" class="an-link an-music-btn" id="btnMusicalTestimonyDrawer" aria-haspopup="dialog" aria-controls="mtModal">
+                        <span class="an-num an-num--music" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+                        <span class="an-music-text">
+                            <span class="an-music-title">One Voice, One Mind</span>
+                            <span class="an-music-sub">Interfaith Anthem</span>
+                        </span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
         <div class="an-companions">
             <p class="an-companions-heading">Companion Essays</p>
             <ul class="an-drawer-list an-companions-list">
@@ -878,6 +893,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (window.WopOcgPanels) window.WopOcgPanels.open(btn.getAttribute('data-ocg-open'));
             });
         });
+
+        // Musical Testimony entry → close drawer, open the existing testimony modal
+        var anMusicBtn = document.getElementById('btnMusicalTestimonyDrawer');
+        if (anMusicBtn) {
+            anMusicBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                closeDrawer();
+                var t = document.getElementById('btnMusicalTestimonyBottom');
+                if (t) t.click();
+            });
+        }
 
         // Smooth scroll on nav link click
         anDrawer.querySelectorAll('.an-link').forEach(function (link) {
