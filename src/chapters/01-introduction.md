@@ -17,7 +17,7 @@ sectionCount: 14
 
 audio:
   narration: "NR_01_01_Introduction_to_Plainness.mp3"
-  narrationDuration: "21:48"
+  narrationDuration: "29:34"
   cue: "NR_01_CUE_01_Closing.mp3"
   overview: "PO_01_01_Introduction_to_Plainness.mp3"
   overviewDuration: "6:28"
