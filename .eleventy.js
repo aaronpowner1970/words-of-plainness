@@ -343,24 +343,33 @@ module.exports = function(eleventyConfig) {
     });
     
     // =========================================
-    // PARAGRAPH SYNC TRANSFORM (clean-paragraph chapters)
+    // BLOCK SYNC TRANSFORM (clean-paragraph chapters)
     // -----------------------------------------------------------------
     // Assigns a sequential data-paragraph="N" hook to each NARRATED block
     // in a chapter's prose container so audio-sync.js can highlight and
-    // (when real timestamps land) click-to-seek at PARAGRAPH granularity —
+    // (when real timestamps land) click-to-seek at BLOCK granularity —
     // without re-introducing per-sentence {% sentence %} / {% para %}
     // shortcodes into the clean markdown body.
     //
     // INDEXING CONVENTION (must match the audio/timestamp pipeline — see
     // NARRATION.md; timestamp JSON uses Format-C "p{N}" keys):
-    //   • Scope:   only <p> and <li> inside <article class="chapter-content">.
-    //              Everything outside the article (RJW modal, citation panel,
-    //              study/learning tools, discord, nav) is never touched.
-    //   • Indexed: <p> and <li> elements ONLY, in document order, 0-based.
-    //   • Skipped: <h2>/<h3> headings, the <style> block, and any non-<p>/<li>
-    //              UI markup (pause-point, tab pills, section gaps).
+    //   • Scope:   only <h2>, <h3>, <p>, and <li> inside
+    //              <article class="chapter-content">. Everything outside the
+    //              article (RJW modal, citation panel, study/learning tools,
+    //              discord, nav) is never touched.
+    //   • Indexed: EVERY narrated block — <h2>, <h3>, <p>, and <li> — in
+    //              document order, 0-based. This means section headings, the
+    //              bold group-label paragraphs (<p><strong>…</strong></p>),
+    //              prose paragraphs (including the two inside the
+    //              statement-callout <div>), and list items are ALL indexed.
+    //   • Skipped: the <style> block and any non-block UI markup
+    //              (pause-point, tab pills, section gaps) — none of which use
+    //              the four indexed tags.
     //   • Each indexed element also gets class="sync-para" so it reuses the
-    //     existing .sync-para.highlighted styling in chapter.css.
+    //     existing .sync-para.highlighted styling in chapter.css. Putting
+    //     data-paragraph DIRECTLY on the <h2>/<h3> (not a span inside it) is
+    //     highlighted correctly by audio-sync.js — its SPAN-only heading guard
+    //     does not apply to bare heading elements.
     //
     // SAFETY: applies ONLY to "clean" chapters whose prose contains neither
     // {% sentence %} spans (class="sentence") nor pre-existing data-paragraph
@@ -387,7 +396,7 @@ module.exports = function(eleventyConfig) {
         }
 
         let counter = 0;
-        const indexed = inner.replace(/<(p|li)\b([^>]*)>/g, function(full, tag, attrs) {
+        const indexed = inner.replace(/<(h2|h3|p|li)\b([^>]*)>/g, function(full, tag, attrs) {
             const idx = counter++;
             let a = attrs || '';
             if (/\bclass\s*=\s*["']/.test(a)) {

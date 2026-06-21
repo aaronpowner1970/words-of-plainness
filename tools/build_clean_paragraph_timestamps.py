@@ -1,18 +1,23 @@
 """
-Build a Format-C paragraph timestamp JSON for a CLEAN-PARAGRAPH chapter.
+Build a Format-C BLOCK timestamp JSON for a CLEAN-PARAGRAPH chapter.
 
 "Clean-paragraph" chapters keep their markdown body free of {% sentence %} /
 {% para %} shortcodes. Instead, the Eleventy `paragraphSync` transform (see
 .eleventy.js) stamps a sequential data-paragraph="N" hook onto every narrated
-<p>/<li> inside <article class="chapter-content"> at BUILD time.
+BLOCK — <h2>, <h3>, <p>, and <li> — inside <article class="chapter-content">
+at BUILD time.
 
 This script reads those data-paragraph hooks straight from the BUILT HTML — so
 the p{N} keys it emits are guaranteed to match what audio-sync.js looks for in
 the DOM. It NEVER touches audio: it only reads alignment data you already have.
 
 INDEXING CONVENTION (kept in lock-step with the transform and NARRATION.md):
-  * <p> and <li> inside the chapter prose article, document order, 0-based.
-  * Headings (<h2>/<h3>), the <style> block, and non-prose UI are NOT indexed.
+  * Every narrated block — <h2>, <h3>, <p>, and <li> — inside the chapter prose
+    article, document order, 0-based. Section headings, the bold group-label
+    paragraphs, prose paragraphs (incl. those inside the statement-callout div),
+    and list items are ALL indexed.
+  * The <style> block and non-prose UI (pause-point, tab pills, section gaps)
+    are NOT indexed.
 
 OUTPUT (Format C, consumed by AudioSync legacy init path):
   "p{N}": float   -- start time (seconds) of paragraph N in the narration file
@@ -51,7 +56,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ── HTML extraction ─────────────────────────────────────────────────────────
 
 def extract_paragraphs(built_html_path):
-    """Return [(idx, plain_text), ...] for every data-paragraph element, in
+    """Return [(idx, plain_text), ...] for every data-paragraph block, in
     document order, scoped to the chapter prose article."""
     with open(built_html_path, "r", encoding="utf-8") as f:
         html = f.read()
@@ -63,11 +68,11 @@ def extract_paragraphs(built_html_path):
         raise SystemExit(f"No <article class=\"chapter-content\"> in {built_html_path}")
     inner = art.group(1)
 
-    # <p ... data-paragraph="N">...</p>  /  <li ... data-paragraph="N">...</li>
-    # <p>/<li> are not nested in their own kind in our content, so non-greedy
+    # <h2|h3|p|li ... data-paragraph="N">...</same tag>
+    # These blocks are not nested in their own kind in our content, so non-greedy
     # capture to the matching close tag is safe.
     pat = re.compile(
-        r'<(p|li)\b[^>]*\bdata-paragraph="(\d+)"[^>]*>(.*?)</\1>',
+        r'<(h2|h3|p|li)\b[^>]*\bdata-paragraph="(\d+)"[^>]*>(.*?)</\1>',
         re.DOTALL,
     )
     out = []
