@@ -12,8 +12,8 @@ scripture:
   reference: "2 Nephi 31:3"
   url: "bofm/2-ne/31?id=p3#p3"
 
-readingTime: 15
-sectionCount: 16
+readingTime: 17
+sectionCount: 14
 
 audio:
   narration: "NR_01_01_Introduction_to_Plainness.mp3"
@@ -133,10 +133,12 @@ toc:
     title: "The Human Condition"
   - id: "section-origin"
     title: "Origin of Our Writings"
-  - id: "section-timeliness"
-    title: "Timeliness of Our Words"
-  - id: "section-authoritative"
-    title: "Learning from Authoritative Sources"
+  - id: "section-relevance"
+    title: "Relevance of Our Writings"
+  - id: "section-are-we-christians"
+    title: "Are We Christians?"
+  - id: "section-common"
+    title: "What We Hold in Common With Other Christians"
   - id: "section-credentials"
     title: "Our Credentials as Latter-day Saints"
   - id: "section-conversion"
@@ -146,18 +148,18 @@ toc:
   - id: "section-lives"
     title: "Our Lives as Latter-day Saints"
   - id: "section-christ-centered"
-    title: "Christ-Centered Faith"
-  - id: "section-witness"
-    title: "Our Witness of the Savior"
+    title: "Christ-Centered Plainness"
   - id: "section-kinship"
     title: "Kinship with All Believers"
+  - id: "section-faith-tried"
+    title: "When Faith Is Tried"
   - id: "section-organization"
-    title: "Organization of Our Writings"
+    title: "Finding Your Way Through Our Writings"
   - id: "section-plea"
     title: "Our Plea to You"
 pauses:
   - id: "pause-closing"
-    title: "Our Witness of the Savior"
+    title: "Our Plea to You"
     default: "reflect"
     reflect:
       prompt: "<p>What brought you here? Not the link or the recommendation — what is it in you that has not yet stopped searching?</p><p>This chapter describes a ministry built by two brothers who believe they have found something worth sharing. What would it take for you to trust that kind of claim long enough to keep reading?</p>"
@@ -166,6 +168,13 @@ pauses:
     witness:
       prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If there is a moment in your life when the gap between what you were searching for and what you found began to close — when something true arrived and you recognized it — we invite you to share that here.</p>"
 citations:
+  - section: "Are We Christians?"
+    entries:
+      - id: "ce-luke950"
+        ref: "Luke 9:50"
+        type: "nt"
+        note: "\"He that is not against us is for us\" — Christ's expansive definition of who belongs to His cause."
+
   - section: "Our Lives as Latter-day Saints"
     entries:
       - id: "ce-1cor12"
@@ -173,7 +182,7 @@ citations:
         type: "nt"
         note: "The gifts of the Spirit — wisdom, faith, healing, miracles, prophecy, discernment, tongues, and interpretation."
 
-  - section: "Christ-Centered Faith"
+  - section: "Christ-Centered Plainness"
     entries:
       - id: "ce-1cor123"
         ref: "1 Corinthians 12:3"
@@ -191,17 +200,44 @@ citations:
         type: "ot"
         note: "\"Strive not with a man without cause, if he have done thee no harm.\""
       - id: "ce-ps1093"
-        ref: "Psalms 109:3"
+        ref: "Psalm 109:3"
         type: "ot"
         note: "\"They compassed me about also with words of hatred; and fought against me without a cause.\""
-      - id: "ce-luke950"
-        ref: "Luke 9:50"
-        type: "nt"
-        note: "\"He that is not against us is for us\" — Christ's expansive definition of who belongs to His cause."
       - id: "ce-john317"
         ref: "John 3:17"
         type: "nt"
         note: "\"God sent not his Son into the world to condemn the world; but that the world through him might be saved.\""
+
+  - section: "When Faith Is Tried"
+    entries:
+      - id: "ce-matt1814"
+        ref: "Matthew 18:14"
+        type: "nt"
+        note: "\"It is not the will of your Father which is in heaven, that one of these little ones should perish.\""
+      - id: "ce-luke154"
+        ref: "Luke 15:4"
+        type: "nt"
+        note: "The shepherd leaves the ninety and nine and goes after the one that is lost until he finds it."
+      - id: "ce-john1016"
+        ref: "John 10:16"
+        type: "nt"
+        note: "\"Other sheep I have, which are not of this fold ... and there shall be one fold, and one shepherd.\""
+      - id: "ce-luke638"
+        ref: "Luke 6:38"
+        type: "nt"
+        note: "\"With the same measure that ye mete withal it shall be measured to you again.\""
+      - id: "ce-matt1220"
+        ref: "Matthew 12:20"
+        type: "nt"
+        note: "\"A bruised reed shall he not break, and smoking flax shall he not quench.\""
+      - id: "ce-isa423"
+        ref: "Isaiah 42:3"
+        type: "ot"
+        note: "\"A bruised reed shall he not break, and the smoking flax shall he not quench.\""
+      - id: "ce-gal61"
+        ref: "Galatians 6:1"
+        type: "nt"
+        note: "Restore the fallen \"in the spirit of meekness; considering thyself, lest thou also be tempted.\""
 ---
 
 <style>
@@ -216,253 +252,154 @@ citations:
 
 <h2 id="section-human-condition">The Human Condition</h2>
 
-{% sentence 0 %}We are all so very human.{% endsentence %}
-{% sentence 1 %}Our wandering feet carry us along many curious and often frightening paths.{% endsentence %}
-{% sentence 2 %}Our untamed hearts pull or push us in unexpected directions.{% endsentence %}
-{% sentence 3 %}Our wide eyes marvel at the fleeting scenes of beauty and filth which unfold around us.{% endsentence %}
-{% sentence 4 %}Our grasping hands shape the environments and cultures we touch.{% endsentence %}
-{% sentence 5 %}Our unceasing voices speak much, yet too often say little.{% endsentence %}
-{% sentence 6 %}Our twitching ears are filled with the discordant noises of life.{% endsentence %}
-{% sentence 7 %}Our restless minds wrestle with the meaning of it all, desperate to forget the bitter and remember the sweet.{% endsentence %}
-{% sentence 8 %}Yet humanity occasionally manages to find itself, to gentle itself—to see, free, quiet, harmonize, and understand itself.{% endsentence %}
+We are all so very human. Our wandering feet carry us along many curious and often frightening paths. Our untamed hearts pull or push us in unexpected directions. Our wide eyes marvel at the fleeting scenes of beauty and filth which unfold around us. Our grasping hands shape the environments and cultures we touch. Our unceasing voices speak much, yet too often say little. Our twitching ears are filled with the discordant noises of life. Our restless minds wrestle with the meaning of it all, desperate to forget the bitter and remember the sweet. Yet humanity occasionally manages to find itself, to gentle itself—to see, free, quiet, harmonize, and understand itself.
 
-{% sentence 9 %}The writers of this book are brothers.{% endsentence %}
-{% sentence 10 %}We use the word writers because we feel that we are not the authors of any particular words of greatness.{% endsentence %}
-{% sentence 11 %}Instead, we are hunters and gatherers of knowledge.{% endsentence %}
-{% sentence 12 %}We till and seed the soils of our souls hoping to harvest wisdom.{% endsentence %}
+The writers of this book are brothers. We use the word writers because we feel that we are not the authors of any particular words of greatness. Instead, we are hunters and gatherers of knowledge. We till and seed the soils of our souls hoping to harvest wisdom.
 
-{% sentence 13 %}We are native citizens of the world, yet we perceive the foreign nature of mankind's walk upon the Earth.{% endsentence %}
-{% sentence 14 %}Though our journey is not complete, my brother and I have found ourselves both on the side of right and clearly in the wrong often enough to have gained an abiding appreciation for the many profound lessons that can be gleaned from the human experience.{% endsentence %}
+We are native citizens of the world, yet we perceive the foreign nature of mankind's walk upon the Earth. Though our journey is not complete, my brother and I have found ourselves both on the side of right and clearly in the wrong often enough to have gained an abiding appreciation for the many profound lessons that can be gleaned from the human experience.
 
 <h2 id="section-origin">Origin of Our Writings</h2>
 
-{% sentence 15 %}As a young man I, Aaron, chose to serve a mission to the people of Argentina for The Church of Jesus Christ of Latter-day Saints.{% endsentence %}
-{% sentence 16 %}In my idealism, I hoped to bring light and goodness to people who had been less fortunate.{% endsentence %}
-{% sentence 17 %}I like to believe that I left something of value behind for the people I came to love, but I returned deeply transformed by my experiences.{% endsentence %}
+As a young man I, Aaron, chose to serve a mission to the people of Argentina for The Church of Jesus Christ of Latter-day Saints. In my idealism, I hoped to bring light and goodness to people who had been less fortunate. I like to believe that I left something of value behind for the people I came to love, but I returned deeply transformed by my experiences.
 
-{% sentence 18 %}The new thoughts I learned to think and the tender feelings I came to cherish during my mission planted in my heart a seed of passion for sharing things of worth with others.{% endsentence %}
-{% sentence 19 %}I returned to a world that is far more complex and fast-paced than my mission experience had been, and I found it somehow the lesser for it.{% endsentence %}
-{% sentence 20 %}In spite of this, that latent kernel of desire swelled in my heart and grew.{% endsentence %}
-{% sentence 21 %}I began searching for ideas, experiences, and things of great worth.{% endsentence %}
-{% sentence 22 %}I wrote of them.{% endsentence %}
-{% sentence 23 %}I did not know to whom I was writing.{% endsentence %}
-{% sentence 24 %}I had not considered my audience.{% endsentence %}
+The new thoughts I learned to think and the tender feelings I came to cherish during my mission planted in my heart a seed of passion for sharing things of worth with others. I returned to a world that is far more complex and fast-paced than my mission experience had been, and I found it somehow the lesser for it. In spite of this, that latent kernel of desire swelled in my heart and grew. I began searching for ideas, experiences, and things of great worth. I wrote of them. I did not know to whom I was writing. I had not considered my audience.
 
-{% sentence 25 %}After some time, I suspected that I might be crafting letters to my unborn children.{% endsentence %}
-{% sentence 26 %}I came to believe that my collection of writings could become a simple legacy that I might leave behind at my journey's end.{% endsentence %}
-{% sentence 27 %}I became convinced that stories of my life, my tempering experiences, and meaningful traditions, along with my humble understandings, precious beliefs, and faith-filled encouragement are the only meaningful inheritance I can bequeath to my posterity.{% endsentence %}
+After some time, I suspected that I might be crafting letters to my unborn children. I came to believe that my collection of writings could become a simple legacy that I might leave behind at my journey's end. I became convinced that stories of my life, my tempering experiences, and meaningful traditions, along with my humble understandings, precious beliefs, and faith-filled encouragement are the only meaningful inheritance I can bequeath to my posterity.
 
-{% sentence 28 %}When my adventures with family and children began, my yearning to gather and then write of these things became a driving need.{% endsentence %}
-{% sentence 29 %}In my late thirties, I felt a strong urge to better organize my hard-learned lessons and happy discoveries in the form of a book or collection of letters.{% endsentence %}
-{% sentence 30 %}I am not finished learning, but I felt my experience and understanding was sufficient to truly begin sharing.{% endsentence %}
-{% sentence 31 %}Spending a few hours each night, as I could spare, I finished my first rough draft in a little more than six months.{% endsentence %}
+When my adventures with family and children began, my yearning to gather and then write of these things became a driving need. In my late thirties, I felt a strong urge to better organize my hard-learned lessons and happy discoveries in the form of a book or collection of letters. I am not finished learning, but I felt my experience and understanding was sufficient to truly begin sharing. Spending a few hours each night, as I could spare, I finished my first rough draft in a little more than six months.
 
-{% sentence 32 %}I shared my collected works with my older brother, Jim.{% endsentence %}
-{% sentence 33 %}He has long been more than an example of manhood to me; he is a trusted friend.{% endsentence %}
-{% sentence 34 %}His comments, questions, suggestions, and assistance became such an important part of editing my letters that I realized they are as much the result of his life experiences as they are of my own.{% endsentence %}
+I shared my collected works with my older brother, Jim. He has long been more than an example of manhood to me; he is a trusted friend. His comments, questions, suggestions, and assistance became such an important part of editing my letters that I realized they are as much the result of his life experiences as they are of my own.
 
-{% sentence 35 %}Our long studies and preparations seemed to take on a life of their own.{% endsentence %}
-{% sentence 36 %}We quickly adopted the belief that such beautiful ideas and experiences must be shared in words of plainness.{% endsentence %}
-{% sentence 37 %}This philosophy became the title of our work.{% endsentence %}
-{% sentence 38 %}We understand that the publication of such personal things may open us to criticism and unforeseen consequences.{% endsentence %}
-{% sentence 39 %}We have long considered and earnestly prayed about our decision to act in accordance with our desires.{% endsentence %}
-{% sentence 40 %}We offer our Words of Plainness to you with hope, for they are the treasured things of our souls.{% endsentence %}
+Our long studies and preparations seemed to take on a life of their own. We quickly adopted the belief that such beautiful ideas and experiences must be shared in words of plainness. This philosophy became the title of our work. We understand that the publication of such personal things may open us to criticism and unforeseen consequences. We have long considered and earnestly prayed about our decision to act in accordance with our desires. We offer our Words of Plainness to you with hope, for they are the treasured things of our souls.
 
-<h2 id="section-timeliness">Timeliness of Our Words</h2>
+<h2 id="section-relevance">Relevance of Our Writings</h2>
 
-{% sentence 41 %}The topics of our writings seem appropriate for the times in which we find ourselves.{% endsentence %}
-{% sentence 42 %}The Church of Jesus Christ of Latter-day Saints and its members have become the subject of a surprising amount of media coverage, both favorable and not.{% endsentence %}
-{% sentence 43 %}Debate over the Church's history, beliefs, and practices appears in popular tabloids, newspapers, books, television programs, online forums, and even in widely public political arenas.{% endsentence %}
+The topics of our writings seem appropriate for our day and age. The Church of Jesus Christ of Latter-day Saints and its members have become the subject of a surprising amount of social media coverage, both favorable and not. Debate over the Church's history, beliefs, and practices appears in popular tabloids, newspapers, books, television programs, online forums, and even in widely public political arenas.
 
-{% sentence 44 %}An enormous volume of misinformation and malicious propaganda exists about the restored gospel of Jesus Christ and members of the Church.{% endsentence %}
-{% sentence 45 %}During our long years as public school teachers, we struggled to convince students of the vital importance of using authoritative sources of information when doing research and in the formation of lasting opinions.{% endsentence %}
-{% sentence 46 %}Gossip columns, hate blogs, and literature critical of the Church are tantalizing reads, but they seldom offer much in the way of actual credibility.{% endsentence %}
-{% sentence 47 %}Tracing the citations and sources of such information, one finds little more than hearsay and quotations either taken out of context or hastily borrowed from other unverifiable sources.{% endsentence %}
-{% sentence 48 %}Though false information might be presented energetically and even well-received by many, it remains fundamentally untrue.{% endsentence %}
+Since the 1830s, newspapers and publications of detractors have called us "Mormons" or refer to our theology as "Mormonism" because we use the Book of Mormon as a companion to the Bible as a source of scripture about the Gospel of Jesus Christ.
 
-{% sentence 49 %}Throughout history, it has been consistently true that the odd combination of ignorance and confidence eventually leads to suffering, oppression, bigotry, and hatred.{% endsentence %}
-{% sentence 50 %}We believe that it is essential to the character of each human being to search for truth, meaning, and lasting happiness—and that we must do so while upholding the virtues of honesty, compassion, and tolerance.{% endsentence %}
-{% sentence 51 %}Surely these are the noblest of emerging characteristics possessed by enlightened individuals and found within civilized cultures.{% endsentence %}
+Over the generations the term became culturally widespread. Some members of the Church even adopted the term "Mormon" to rob it of its derogatory intent towards our culture and beliefs. Why have recent Church leaders discouraged the use of the term? Why don't members prefer the term? Simply put, we aren't followers of Mormon. Along the same line of thinking, we don't worship Joseph Smith, and we don't replace the Bible with the Book of Mormon either.
 
-<h2 id="section-authoritative">Learning from Authoritative Sources</h2>
+With regards to faith and religion, it seems like common sense that if you want to know what a Baptist believes you should ask a Baptist. If you want to know what a Methodist believes you should ask a Methodist. This is also true for Roman Catholics, Buddhists, Hindus, Muslims, and so on. It is equally true that not all Baptists believe the same body of doctrines or behave the same way. Likewise are the Methodists, Catholics, Buddhists, Hindus, Muslims, and so forth.
 
-{% sentence 52 %}With regards to faith and religion, it seems like common sense that if you want to know what a Baptist believes you should ask a Baptist.{% endsentence %}
-{% sentence 53 %}If you want to know what a Methodist believes you should ask a Methodist.{% endsentence %}
-{% sentence 54 %}This is also true for Roman Catholics, Buddhists, Hindus, Muslims, and so on.{% endsentence %}
-{% sentence 55 %}It is equally true that not all Baptists believe the same body of doctrines or behave the same way.{% endsentence %}
-{% sentence 56 %}Likewise are the Methodists, Catholics, Buddhists, Hindus, Muslims, and so forth.{% endsentence %}
+In recent years, leaders of The Church of Jesus Christ of Latter-day Saints have discouraged using the name "Mormon" to refer to the Church or its members. This is because it obscures the Church's Christ-centered identity and reduces a complex, Christ-centered faith to a nickname given by those who first coined it in derision.
 
-{% sentence 57 %}On a related note, the term "Mormon," though once commonly used as a shorthand, is technically inaccurate and increasingly discouraged when referring to The Church of Jesus Christ of Latter-day Saints, its doctrine, history, or its members.{% endsentence %}
-{% sentence 58 %}This is because it obscures the Church's Christ-centered identity and reduces a complex faith to a nickname derived from the Book of Mormon rather than from Jesus Christ, whom Latter-day Saints worship as the Son of God.{% endsentence %}
-{% sentence 59 %}The name "Mormon" originated as an external label and later became culturally widespread, but it does not appear in the Church's formal name and can unintentionally imply that members follow a figure named Mormon rather than Christ.{% endsentence %}
-{% sentence 60 %}In recent years, Church leaders have emphasized using the full name of the Church or the term "Latter-day Saints" to reflect theological accuracy, historical continuity, and respect for religious self-identification.{% endsentence %}
-{% sentence 61 %}Using precise language not only honors the beliefs of its members but also avoids reinforcing misunderstandings about their faith, practices, and relationship to broader Christianity.{% endsentence %}
+Instead, Church officials have emphasized using the full name of the Church or "The Church of Jesus Christ" for brevity. Also, the term "Latter-day Saints" is preferred for referring to its members. This reflects theological accuracy, historical continuity, and respect for religious self-identification. Using precise language not only honors the beliefs of its members but also avoids reinforcing misunderstandings about their faith, practices, and relationship to broader Christianity. Our goal is to keep the focus of worship squarely on Jesus Christ, where it belongs.
+
+In modern times, the human right to self-identification for cultures and individuals has become an important topic within national and international legal systems. More importantly, it is a matter of civility and correct social skills. Latter-day Saints reserve the same right as other groups and individuals to self-identify and invite the respectful use of the name and identity we embrace.
+
+<h2 id="section-are-we-christians">Are We Christians?</h2>
+
+Many outsiders claim Latter-day Saints are not Christians. Some declare that we believe in the wrong Jesus. Do we worship a different Jesus? Do we teach a different gospel from other Christians?
+
+**Simply:** the name of our church is The Church of Jesus Christ.
+
+**Specifically:** Latter-day Saints follow Jesus of Nazareth, whom many religions embrace as the Christ, the promised Messiah, and the divine Son of God. To become members, we embrace the truth that we are all sinners, having fallen short of the glory of God. We accept that we need God's forgiveness. We have faith that Jesus of Nazareth is the Christ, that He died on the cross for our sins and rose from the dead. We take His name upon us, make sincere covenants through baptism and receiving the Gift of the Holy Ghost. We labor to continue to turn from our sins, inviting God into our hearts and lives. We trust Jesus as our Savior and follow Him as our Lord.
+
+**Strangely:** An enormous volume of misinformation and malicious propaganda exists about the restored gospel of Jesus Christ and members of our Church. Importantly, the Church of Jesus Christ of Latter-day Saints does not claim that the Church as an institution or its mortal leaders are infallible or free from error.
+
+During our long years as public school teachers, we struggled to convince students of the vital importance of using authoritative sources of information that have been developed from multiple perspectives when doing research and in the formation of lasting opinions. Gossip columns, hate blogs, and literature critical of the Church are tantalizing reads, but they seldom offer much in the way of actual credibility. Tracing the citations and sources of such information, one finds little more than hearsay and quotations either taken out of context or hastily borrowed from other unverifiable sources. Though false information might be presented energetically and even well-received by many, it remains fundamentally untrue.
+
+Throughout history, it has been consistently true that the odd combination of ignorance and confidence eventually leads to suffering, oppression, bigotry, and hatred. We believe that it is essential to the character of each human being to search for truth, meaning, and lasting happiness—and that we must do so while upholding the virtues of honesty, compassion, and tolerance. Surely these are the noblest of emerging characteristics possessed by enlightened individuals and found within civilized cultures.
+
+It is surely anti-Christian to bash, belittle, and discourage anyone's faith in Jesus Christ. No one has perfect knowledge of all truth, and all believers seek to follow Christ as best we can. Jesus said, "whoever is not against us is for us."{% cite "ce-luke950" %} Also, Christ condemned the Pharisee's spirit—certain, superior, quick to condemn. It poses a danger in every age, and none of us is immune to it. We must not claim to know more about what others believe than they do.
+
+Accordingly, we claim the right to be the supreme mortal authorities over what we personally believe, how this makes us feel, and how we interpret the effects of living as Latter-day Saints within our own life experiences.
+
+<h2 id="section-common">What We Hold in Common With Other Christians</h2>
+
+Our [Articles of Interfaith Discipleship](/articles/) declare, in full, what beliefs we hold in common with all who confess Jesus Christ. In brief, this is the gospel they proclaim:
+
+**What we trust for salvation**
+
+- God is the Eternal Father—loving, good, and sustaining—known truly only as far as He reveals Himself.
+- Jesus Christ is the promised Messiah, Divinity made flesh, the living image of the Father's heart: sinless, crucified for our sins, risen on the third day, and the living measure of every witness.
+- Salvation comes through Christ's grace and Atonement—saving us from sin and death and forming His image in us, from creation in His image to fellowship with Him as co-heirs.
+- We do not reduce salvation to any single part. It is the whole work of Christ held together—grace and Atonement; faith, repentance, and the new birth; the Christlike virtues; and the Spirit's sanctifying, sealing work unto eternal life.
+- The Kingdom is at hand. Eternal life is to know God and walk in fellowship with His Son, begun the moment we come to Him—not a reward withheld until death or perfection.
+- The grave is not the end. Christ's resurrection is both the promise and the proof; every soul will rise and stand honestly before a merciful God, and what is entrusted to Him is not lost.
+- Christ is enough—for the flawed, the weary, the wounded, and the searching, in every tribe and tongue and tradition. No soul is barred from Him for want of a perfect understanding.
+
+**How we follow as disciples**
+
+- We walk humbly, knowing in part—receiving gladly what God reveals plainly, leaving the secret things to Him, and binding no one's conscience with speculation.
+- We search the scriptures by the Spirit, worshiping God alone and never idolizing the vessel through whom His word comes.
+- We take Christ as our fixed point—the North Star—with the Spirit as our compass and scripture as our map, each calibrated always to Him.
+- We become disciples by covenant: surrendering our will into His, taking up the cross daily, repenting when we fall short, and living the gospel rather than merely professing it.
+- We live by God's grace as a transformative power, not a license to sin. Discipleship is a walk, a journey, a maturing, a becoming—doing good whether or not it is seen or rewarded.
+- We receive every soul who comes to Christ as family, refusing to weaponize doctrine or defend the walls He never built.
+- We deal gently with the weak and the searching, leave judgment to the one righteous Judge, and never stand between the Shepherd and His lambs.
+
+For more detailed information, read the full [Articles of Interfaith Discipleship](/articles/).
 
 <h2 id="section-credentials">Our Credentials as Latter-day Saints</h2>
 
-{% sentence 62 %}My brother and I have spent our lives within the culture and practices of the faith of The Church of Jesus Christ of Latter-day Saints.{% endsentence %}
-{% sentence 63 %}We vehemently oppose any who are audacious enough to pretend to know more about our own personal views than we do.{% endsentence %}
-{% sentence 64 %}We claim the right to be the supreme mortal authorities over what we personally believe, how this makes us feel, and how we interpret the effects of living as Latter-day Saints within our own life experiences.{% endsentence %}
+My brother and I have spent our lives within the culture and practices of the faith of The Church of Jesus Christ of Latter-day Saints. We are active members of The Church of Jesus Christ of Latter-day Saints, yet we feel the need to offer some few credentials which establish our general worthiness to represent regular, ordinary, everyday members of our Church and that we live a reasonably common Latter-day Saint lifestyle.
 
-{% sentence 65 %}We are active members of The Church of Jesus Christ of Latter-day Saints, yet we feel the need to offer some few credentials which establish our general worthiness to represent regular, ordinary, everyday members of our Church and that we live a reasonably common Latter-day Saint lifestyle.{% endsentence %}
+<h3 id="section-conversion">Our Conversion and Upbringing</h3>
 
-<h2 id="section-conversion">Our Conversion and Upbringing</h2>
+We were born to Lutheran parents. Our mother investigated and eventually chose to convert to The Church of Jesus Christ of Latter-day Saints. Many friends and relatives questioned or even opposed her decision. She was baptized while she was pregnant with Aaron, the younger of the two writer brothers. James also later converted. Our childhoods were strongly enmeshed in the culture and society of Church members. We actively and regularly attended worship services and participated in the Church's Primary and youth programs.
 
-{% sentence 66 %}We were born to Lutheran parents.{% endsentence %}
-{% sentence 67 %}Our mother investigated and eventually chose to convert to The Church of Jesus Christ of Latter-day Saints.{% endsentence %}
-{% sentence 68 %}Many friends and relatives questioned or even opposed her decision.{% endsentence %}
-{% sentence 69 %}She was baptized while she was pregnant with Aaron, the younger of the two writer brothers.{% endsentence %}
-{% sentence 70 %}James also later converted.{% endsentence %}
-{% sentence 71 %}Our childhoods were strongly enmeshed in the culture and society of Church members.{% endsentence %}
-{% sentence 72 %}We actively and regularly attended worship services and participated in the Church's Primary and youth programs.{% endsentence %}
+<h3 id="section-priesthood">Priesthood and Service</h3>
 
-<h2 id="section-priesthood">Priesthood and Service</h2>
+We were both formally ordained to the "Lesser" Priesthood in our adolescence. We were successively set apart in the offices of Deacon, Teacher, and Priest. We feel that we faithfully officiated in these offices by preparing and passing the emblems of the Lord's Supper, collecting fast offerings for the poor, home teaching our fellow members, baptizing those who came into the Church, and assisting in assorted temporal responsibilities.
 
-{% sentence 73 %}We were both formally ordained to the "Lesser" Priesthood in our adolescence.{% endsentence %}
-{% sentence 74 %}We were successively set apart in the offices of Deacon, Teacher, and Priest.{% endsentence %}
-{% sentence 75 %}We feel that we faithfully officiated in these offices by preparing and passing the emblems of the Lord's Supper, collecting fast offerings for the poor, home teaching our fellow members, baptizing those who came into the Church, and assisting in assorted temporal responsibilities.{% endsentence %}
+As young adults we were both ordained to the "Higher" Priesthood. We were both set apart as Elders and performed as such. We were both called and set apart to full-time proselyting missionary service. We both received our temple endowments, whereby we made sacred covenants (promises) with God in His holy temple.
 
-{% sentence 76 %}As young adults we were both ordained to the "Higher" Priesthood.{% endsentence %}
-{% sentence 77 %}We were both set apart as Elders and performed as such.{% endsentence %}
-{% sentence 78 %}We were both called and set apart to full-time proselyting missionary service.{% endsentence %}
-{% sentence 79 %}We both received our temple endowments, whereby we made sacred covenants (promises) with God in His holy temple.{% endsentence %}
+We have been married to our wives in the Temple of the Lord. We have done our best to raise our children to walk uprightly before the Lord. We have been called and set apart in many positions of service throughout our lives in the Church. Currently, James is serving as a High Priest in his ward. Aaron is serving as an Elder in his ward. We anticipate, God willing, a lifetime of service to our fellow members and to all God's children.
 
-{% sentence 80 %}We have been married to our wives in the temple and sealed to them for time and all eternity.{% endsentence %}
-{% sentence 81 %}We have raised (and are raising) children who have been sealed to us for eternity in the temple.{% endsentence %}
-{% sentence 82 %}We have been called and set apart in many positions of service throughout our lives in the Church.{% endsentence %}
-{% sentence 83 %}Currently, James is serving as a High Priest in his ward.{% endsentence %}
-{% sentence 84 %}Aaron is serving as an Elder in his ward.{% endsentence %}
-{% sentence 85 %}We anticipate, God willing, a lifetime of service to our fellow members and to all God's children.{% endsentence %}
+<h3 id="section-lives">Our Lives as Latter-day Saints</h3>
 
-<h2 id="section-lives">Our Lives as Latter-day Saints</h2>
+We worship with our congregations. We fast and we pray. We read and study the Scriptures. We have paid tithes and given offerings. We have attended and officiated in temple worship. We are not perfect, but we continually repent and seek to align our lives with God's will. We strive to cultivate the fruits of the Spirit: patience, kindness, love, charity, peace, joy, meekness, etc. We seek to obtain the gifts of the Spirit described in 1 Corinthians 12{% cite "ce-1cor12" %}: wisdom, faith, healing, miracles, prophecy, discerning of spirits, speaking in tongues, and interpretation of tongues. We study with open hearts and minds.
 
-{% sentence 86 %}We pay our tithes and offerings.{% endsentence %}
-{% sentence 87 %}We worship in our ward congregations every Sunday.{% endsentence %}
-{% sentence 88 %}We attend and officiate in temple worship.{% endsentence %}
-{% sentence 89 %}We fast and we pray.{% endsentence %}
-{% sentence 90 %}We read and study the Scriptures.{% endsentence %}
-{% sentence 91 %}We are not perfect, but we continually repent and seek to align our lives with God's will.{% endsentence %}
-{% sentence 92 %}We strive to cultivate the fruits of the Spirit: patience, kindness, love, charity, peace, joy, meekness, etc.{% endsentence %}
-{% sentence 93 %}We seek to obtain the gifts of the Spirit described in 1 Corinthians 12{% cite "ce-1cor12" %}: wisdom, faith, healing, miracles, prophecy, discerning of spirits, speaking in tongues, and interpretation of tongues.{% endsentence %}
-{% sentence 94 %}We study with open hearts and minds.{% endsentence %}
+We seek to be of service to our fellowman. We seek to be forgiving, slow to anger, and to avoid unrighteous behaviors. We seek to be good neighbors. We seek to be good friends and good examples, even if no one is watching. We seek to be humble and teachable. We seek to be genuine disciples of Jesus Christ. We bear public witness that Jesus Christ lives, that He loves us, that He has made it possible for us to be forgiven of our sins, and that all are invited to come unto Him and be sanctified of their sins and made righteous if they will but have faith in Him, repent, be baptized, and follow Him to the end of their mortal journey.
 
-{% sentence 95 %}We seek to be of service to our fellowman.{% endsentence %}
-{% sentence 96 %}We seek to be forgiving, slow to anger, and to avoid unrighteous behaviors.{% endsentence %}
-{% sentence 97 %}We seek to be good neighbors.{% endsentence %}
-{% sentence 98 %}We seek to be good friends and good examples, even if no one is watching.{% endsentence %}
-{% sentence 99 %}We seek to be humble and teachable.{% endsentence %}
-{% sentence 100 %}We seek to be genuine disciples of Jesus Christ.{% endsentence %}
-{% sentence 101 %}We bear public witness that Jesus Christ lives, that He loves us, that He has made it possible for us to be forgiven of our sins, and that all are invited to come unto Him and be sanctified of their sins and made righteous if they will but have faith in Him, repent, be baptized, and follow Him to the end of their mortal journey.{% endsentence %}
-
-<h2 id="section-christ-centered">Christ-Centered Faith</h2>
+<h2 id="section-christ-centered">Christ-Centered Plainness</h2>
 
 <div class="statement-callout">
-{% sentence 102 %}Our witness of Jesus Christ is the most important aspect of Words of Plainness.{% endsentence %}
-{% sentence 103 %}Many who are unfamiliar with the teachings of The Church of Jesus Christ of Latter-day Saints question or even deny our status as a Christian faith.{% endsentence %}
-{% sentence 104 %}We do not question or deny anyone else's status as Christians.{% endsentence %}
-{% sentence 105 %}Regardless of the opinions of critics, members of our Church are Christians.{% endsentence %}
-{% sentence 106 %}We are of the same Spirit as other Christians, though of a different understanding.{% endsentence %}
-{% sentence 107 %}We believe the words of the Apostle Paul: "No man can say that Jesus is the Lord, but by the Holy Ghost."{% cite "ce-1cor123" %}{% endsentence %}
-{% sentence 108 %}Again, in the truest sense of the word "Christian," theological and doctrinal differences between religious denominations need not determine whether a person is a sincere disciple of Christ.{% endsentence %}
-{% sentence 109 %}Words of Plainness is an attempt to explain what it means to be a sincere follower of Christ to faithful members of The Church of Jesus Christ of Latter-day Saints.{% endsentence %}
+<p>Our witness of Jesus Christ is the most important aspect of Words of Plainness. We do not question or deny anyone else's status as Christians. Regardless of the opinions of critics, members of our Church are Christians. We are of the same Spirit as other Christians, though of a different understanding. We believe the words of the Apostle Paul: "No man can say that Jesus is the Lord, but by the Holy Ghost."{% cite "ce-1cor123" %} Again, in the truest sense of the word "Christian," theological and doctrinal differences between religious denominations need not determine whether a person is a sincere disciple of Christ. Words of Plainness is an attempt to explain what it means to be a sincere disciple for any Christ-believer.</p>
+
+<p>Though we authors are imperfect and subject to the same temptations and foolishness as are all members of humankind, we labor to invite the Spirit of God to sanctify our lives—to become holy through the grace of Christ through continued repentance and devotion to the gospel of Jesus Christ. We invite others to do the same out of genuine concern and love for all God's children. We hope to truly be worthy of the title "Saints" in these latter days.</p>
 </div>
-
-<h2 id="section-witness">Our Witness of the Savior</h2>
-
-{% sentence 110 %}Latter-day Saint Christians proclaim with deep gratitude and open enthusiasm that Jesus Christ is the Lord and Master of all creation.{% endsentence %}
-{% sentence 111 %}We seek to take His name upon us.{% endsentence %}
-{% sentence 112 %}We believe and testify that He is the divine Son of God, our Savior and Redeemer.{% endsentence %}
-{% sentence 113 %}While theologians debate the nature of Christ's divinity, we believe that Jesus of Nazareth was the long-awaited Messiah of whom ancient Prophets had written.{% endsentence %}
-{% sentence 114 %}We accept Him as our personal Savior.{% endsentence %}
-{% sentence 115 %}We study His life and teachings, laboring to make ourselves His disciples through faith in Him, repentance, baptism, and seeking after the peaceable gifts of the Spirit of God.{% endsentence %}
-
-{% sentence 116 %}Those Latter-day Saints who remain faithful dedicate their lives to the service of God and our fellowman.{% endsentence %}
-{% sentence 117 %}Though we are imperfect and subject to the same temptations and foolishness as are all members of humankind, Latter-day Saint Christians labor to sanctify our lives—to become holy through the grace of Christ through continued repentance and devotion to the gospel of Jesus Christ.{% endsentence %}
-{% sentence 118 %}We invite others to do the same out of genuine concern and love for all God's children.{% endsentence %}
-{% sentence 119 %}We hope to truly be worthy of the title "Saints" in these latter days.{% endsentence %}
 
 <h2 id="section-kinship">Kinship with All Believers</h2>
 
-{% sentence 120 %}We as Latter-day Saints happily recognize the light and goodness found in all people who search for truth, meaning, and lasting happiness.{% endsentence %}
-{% sentence 121 %}We feel a close kinship with all those who believe in Jesus Christ.{% endsentence %}
-{% sentence 122 %}We do not discourage their faith.{% endsentence %}
-{% sentence 123 %}Faithful Latter-day Saints who understand the core teachings of the restored gospel do not condemn others; rather, we humbly believe that Jesus Christ is the Savior of us all.{% endsentence %}
-{% sentence 124 %}If you cannot agree with the doctrines of The Church of Jesus Christ of Latter-day Saints, we plead with you at least to believe in Christ.{% endsentence %}
-{% sentence 125 %}If we all heed the Savior's call, "Come follow me," we will undoubtedly find ourselves together in His kingdom at last.{% endsentence %}
+We as Latter-day Saints happily recognize the light and goodness found in all people who search for truth, meaning, and lasting happiness. We feel a close kinship with all those who believe in Jesus Christ. We do not discourage their faith. Faithful Latter-day Saints who understand the core teachings of the restored gospel do not condemn others; rather, we humbly believe that Jesus Christ is the Savior of us all. If you cannot agree with the doctrines of The Church of Jesus Christ of Latter-day Saints, we plead with you at least to believe in Christ. If we all heed the Savior's call, "Come follow me," we will undoubtedly find ourselves together in His kingdom at last.
 
-{% sentence 126 %}However, if any of us dare to persecute one another over differences in doctrine and silly rumors—as though we were truly wise in any way—we will undoubtedly find ourselves both unworthy and uncomfortable upon leaving this life to stand in judgment before God.{% endsentence %}
-{% sentence 127 %}Jesus said that those who are angry with a brother without cause are in danger of judgment.{% cite "ce-matt522" %}{% cite "ce-prov330" %}{% cite "ce-ps1093" %}{% endsentence %}
-{% sentence 128 %}He also taught, "He that is not against us is for us."{% cite "ce-luke950" %}{% endsentence %}
-{% sentence 129 %}Further, Jesus "came not to condemn the world."{% cite "ce-john317" %}{% endsentence %}
-{% sentence 130 %}Do we, then, have any right to condemn one another?{% endsentence %}
-{% sentence 131 %}Are any of us better or wiser than He?{% endsentence %}
+We truly believe that all Christians have more in common than what divides us. However, if any of us dare to persecute one another over differences in doctrine and silly rumors—as though we were truly wise in any way—we will undoubtedly find ourselves both unworthy and uncomfortable upon leaving this life to stand in judgment before God. Jesus said that those who are angry with a brother without cause are in danger of judgment.{% cite "ce-matt522" %}{% cite "ce-prov330" %}{% cite "ce-ps1093" %} Further, Jesus "came not to condemn the world."{% cite "ce-john317" %} Do we, then, have any right to condemn one another? Are any of us better or wiser than He?
 
-{% sentence 132 %}When Latter-day Saints invite others to investigate the Church, we do not attempt to take away what light and faith they have.{% endsentence %}
-{% sentence 133 %}Rather, we invite all to come and see what the Lord has done in our lives in the hope that we can add to the light others already possess.{% endsentence %}
-{% sentence 134 %}A vital point to make is that those who think that Latter-day Saints believe only members of our Church will reach heaven misunderstand our doctrine of God's expansive mercy and multiple degrees of glory.{% endsentence %}
+When Latter-day Saints invite others to investigate the Church, we do not attempt to take away what light and faith they have. Rather, we invite all to come and see what the Lord has done in our lives in the hope that we can add to the light others already possess. A vital point to make is that those who think that Latter-day Saints believe only members of our Church will reach heaven misunderstand our doctrine of God's expansive mercy and multiple degrees of glory.
 
-<h2 id="section-organization">Organization of Our Writings</h2>
+<h2 id="section-faith-tried">When Faith Is Tried</h2>
 
-{% sentence 135 %}This book explains what it means to be a sincere Christian disciple from the perspective of faithful Latter-day Saints.{% endsentence %}
-{% sentence 136 %}Our writings are divided into five parts.{% endsentence %}
-{% sentence 137 %}Each section builds upon the previous, representing increasing depth of sincere discipleship and understanding.{% endsentence %}
+Some who come to these writings arrive with a settled faith. Others arrive in the middle of a hard season—when the faith they were given no longer fits the questions they have come to ask, and they cannot tell whether what is shaking is their belief in God or only the frame that once held it. If that is where you stand, we want to say it plainly: doubt is not the same as departure, and the loss of an old certainty is not the loss of Christ. The treasure and the vessel that carries it are not the same thing. A vessel may crack without the treasure being spilled.
 
-<h3 id="section-part1">Part 1: Our Faith</h3>
+We know this road because we have walked it. We had to learn, slowly and sometimes painfully, to tell the difference between the gospel of Jesus Christ and the culture that had grown up around it—the inherited assumptions, the borrowed certainties, the things people had added to what God actually said. We do not say this to fault the faith that raised us; we say it because every vessel that carries the treasure is an earthen one, ours included. What we found, when we stopped clutching the frame and reached instead for Christ, was not less faith but more—and a deeper respect for sincere believers whose path looks nothing like our own. The work can be frightening, for the one who walks it and for those who love them. Walk it anyway. Surrender to Christ, seek the best gifts, and trust that the God who began the work is faithful to finish it.
 
-{% sentence 138 %}The intent of these first chapters is to lay a foundation upon which all readers can build a common understanding of simple and sincere Christianity, no matter what specific beliefs to which one subscribes.{% endsentence %}
-{% sentence 139 %}We begin by describing that deep longing for truth, meaning, and lasting happiness which is common to all humanity.{% endsentence %}
-{% sentence 140 %}We then explain our views of academic knowledge and spiritual knowledge, both of which are essential to the search for God.{% endsentence %}
-{% sentence 141 %}We continue by explaining the Latter-day Saint understanding of and approaches to prayer, faith in Jesus Christ, repentance, and discipleship.{% endsentence %}
-{% sentence 142 %}We conclude this section by seeking to clearly explain the core concepts of living prophets, gospel dispensations, and the restoration of Christ's Church in the latter days in our day.{% endsentence %}
+And to those who remain settled while someone they love begins to wander: we know that you worry, and that the worry is love. But hear the consolation before you let the fear harden. The Shepherd does not forget the one sheep that strays; He leaves the ninety and nine and goes after it until He finds it, for it is not the will of your Father which is in heaven that one of these little ones should perish.{% cite "ce-matt1814" %}{% cite "ce-luke154" %} His reach is longer than your arms, and longer than the grave—He has other sheep that are not of this fold,{% cite "ce-john1016" %} and He remembers even those who never knew His name. You may trust Him with the ones you cannot reach.
 
-<h3 id="section-part2">Part 2: Our Promises</h3>
+And because you may trust Him with them, you are freed—from the burden, and the danger, of appointing yourself their judge. Guard your own heart here, for the measure you give will be the measure you receive.{% cite "ce-luke638" %} Do not let grief curdle into indignation, or let love for the truth become a club; the Good Physician does not break the bruised reed nor quench the smoking flax,{% cite "ce-matt1220" %}{% cite "ce-isa423" %} and neither must we. This is not indifference to truth—error is still error, and we are called to restore the wandering gently, watching our own hearts lest we also be tempted.{% cite "ce-gal61" %} The honest question, when another's faith falters, is never only "What is wrong with them?" but also, quietly, "Lord, is it I?"
 
-{% sentence 143 %}It is not enough to merely discover the truth.{% endsentence %}
-{% sentence 144 %}We must be willing to embrace it to benefit therefrom.{% endsentence %}
-{% sentence 145 %}In these chapters we demonstrate that God has asked His people to make sacred promises (covenants) in every gospel dispensation.{% endsentence %}
-{% sentence 146 %}We then endeavor to clearly explain the sacred covenants Latter-day Saints make as we embrace faith in Jesus Christ.{% endsentence %}
-{% sentence 147 %}These include covenants made in local congregations and in the holy temples of the Lord.{% endsentence %}
+Underneath all of it is one plain truth: we know in part, and He knows in full. We cannot see the end of anyone's story; He can, and He loves them more than we do. That single humility is enough to keep the doubter walking and to keep the faithful from the wrong spirit. We have written more fully about these things elsewhere—about [partial knowing](/studies/merognosticism/), about [the treasure in broken vessels](/studies/broken-vessels/), about [the long reach of Christ toward those who wander](/studies/contention-and-the-reach-of-christ/), and [the lament of the God who would gather them](/studies/how-oft-would-i-have-gathered-you/)—and those pathways will be waiting whenever you are ready for them.
 
-<h3 id="section-part3">Part 3: Our Practices</h3>
+<h2 id="section-organization">Finding Your Way Through Our Writings</h2>
 
-{% sentence 148 %}Yet again, it is not enough to merely promise to abide by truth and commit to faith in Jesus Christ.{% endsentence %}
-{% sentence 149 %}We must exercise our faith in keeping our promises to God and His Son Jesus Christ.{% endsentence %}
-{% sentence 150 %}In this part of our book we describe the day-to-day practices of faithful Latter-day Saints—the ways in which we sincerely strive to live our faith.{% endsentence %}
+These writings have grown into something larger than a single book. They live here as a study you can move through at your own pace, gathered into two volumes—and everything in them is meant to lead you toward the same Person.
 
-<h3 id="section-part4">Part 4: Our Theology</h3>
+Volume 1 of our writings is for everyone who will consider Jesus Christ. It begins with the foundations of faith, moves through the life and character of the Savior, and arrives at the practices that shape anyone who follows Him. It asks no prior beliefs of you and presses no membership upon you—only a willing heart. Whatever your tradition, or if you carry none at all, this volume is meant to meet you where you stand.
 
-{% sentence 151 %}As we search for truth, meaning, and lasting happiness we eventually awake to the realization that God lives and still participates in the lives of all His children.{% endsentence %}
-{% sentence 152 %}Further, as we exercise faith in the gospel of salvation we come to know the character and divinity of Jesus Christ, and we discover the nature of our relationship with Him.{% endsentence %}
-{% sentence 153 %}As we mature spiritually we begin to sense our individual worth and eternal potential.{% endsentence %}
-{% sentence 154 %}As matters of theology all of these things have been described by Prophets and Apostles throughout the ages, but each of us must discover these things as part of his or her personal salvation.{% endsentence %}
+Volume 2 of our writings is for those whom the Spirit moves to go further. Here we open the fullness of what Latter-day Saints believe—the covenants, the nature of God, the Plan of Salvation, and the hope of our eternal inheritance. We have placed it second on purpose. We would rather you meet Christ with us first, on the ground we already share, than ask you to weigh our distinctive claims before that friendship has had time to form. This is not concealment; it is the order in which we ourselves came to understand, and the order in which we believe these things are best received.
 
-<h3 id="section-part5">Part 5: Our Witness of Christ</h3>
-
-{% sentence 155 %}Finally, we provide an overview of God's Plan of Salvation.{% endsentence %}
-{% sentence 156 %}We then conclude our writings with our personal witnesses of Christ and offer our assurances that these things are true.{% endsentence %}
+And these pages are more than words to read. You can listen as well as read, pause to reflect or to record your own witness, and follow the deeper study pathways and companion essays wherever a question opens beneath your feet. The Writings page will always be your map: it shows you where to begin and what has newly arrived, so you need never wonder what comes next.
 
 <h2 id="section-plea">Our Plea to You</h2>
 
-{% sentence 157 %}Our work has been to gather plain and precious truths that God has revealed concerning His personal nature and His will for mankind.{% endsentence %}
-{% sentence 158 %}We generally write in our own words and according to our own understanding, but we cite the sources of truth.{% endsentence %}
-{% sentence 159 %}We draw from the inspired teachings of prophets and apostles of God, both ancient and modern.{% endsentence %}
-{% sentence 160 %}We quote holy scripture—the Bible, the Book of Mormon, the Doctrine and Covenants, and the Pearl of Great Price—which contain the word of God.{% endsentence %}
-{% sentence 161 %}We encourage you to study the references from which we have drawn in performing this labor of love.{% endsentence %}
+Our work has been to gather plain and precious truths that God has revealed concerning His personal nature and His will for mankind. We generally write in our own words and according to our own understanding, but we cite the sources of truth. We draw from the inspired teachings of prophets and apostles of God, both ancient and modern. We quote holy scripture—the Bible, the Book of Mormon, the Doctrine and Covenants, and the Pearl of Great Price—which contain the word of God. We encourage you to study the references from which we have drawn in performing this labor of love.
 
-{% sentence 162 %}We plead with you not to be offended by the fact that we may hold some ideas different from your own.{% endsentence %}
-{% sentence 163 %}More importantly, we implore you not to rebel against the idea that there is a higher authority than mankind, or against the idea that we all ought to obey commandments of God.{% endsentence %}
-{% sentence 164 %}We encourage you not to reject the idea that mankind needs to be saved.{% endsentence %}
-{% sentence 165 %}At the very least, we need to be saved from sources of unhappiness: ignorance of life's purpose, the consequences of wandering from wisdom's path, and our estrangement from our Creator.{% endsentence %}
+We plead with you not to be offended by the fact that we may hold some ideas different from your own. More importantly, we implore you not to rebel against the idea that there is a higher authority than mankind, or against the idea that we all ought to obey commandments of God. We encourage you not to reject the idea that mankind needs to be saved. At the very least, we need to be saved from sources of unhappiness: ignorance of life's purpose, the consequences of wandering from wisdom's path, and our estrangement from our Creator.
 
-{% sentence 166 %}My brother and I take great joy and comfort in what small light and knowledge God has given to us.{% endsentence %}
-{% sentence 167 %}We feel as if we have awakened from a deep sleep, made new and somehow more whole by our acquaintance with God and His Son.{% endsentence %}
-{% sentence 168 %}We openly confess our own imperfections and limitations.{% endsentence %}
-{% sentence 169 %}We do not seek to set ourselves up as a source of light for the world.{% endsentence %}
-{% sentence 170 %}Rather, we seek to remind all humanity that God is the light by which all may see in the dark.{% endsentence %}
+My brother and I take great joy and comfort in what small light and knowledge God has given to us. We feel as if we have awakened from a deep sleep, made new and somehow more whole by our acquaintance with God and His Son. We openly confess our own imperfections and limitations. We do not seek to set ourselves up as a source of light for the world. Rather, we seek to remind all humanity that God is the light by which all may see in the dark.
 
-{% sentence 171 %}What you get out of reading our Words of Plainness depends entirely upon what you are looking for as you study them.{% endsentence %}
-{% sentence 172 %}We hope that you find in our writings encouragement and inspiration to believe in God and in His Son Jesus Christ.{% endsentence %}
-{% sentence 173 %}Our prayer is that you will be blessed by the Spirit and grace of God as you consider our words, in the name of Jesus Christ.{% endsentence %}
-{% sentence 174 %}Amen.{% endsentence %}
+What you get out of reading our Words of Plainness depends entirely upon what you are looking for as you study them. We hope that you find in our writings encouragement and inspiration to believe in God and in His Son Jesus Christ. Our prayer is that you will be blessed by the Spirit and grace of God as you consider our words, in the name of Jesus Christ. Amen.
 
 {% pausePoint "pause-closing", "reflect" %}

@@ -201,6 +201,7 @@ const AudioSync = {
     /* ── Sentence Click-to-Seek ─────────────────────────────────────── */
 
     _makeClickable() {
+        // Sentence-span chapters (Chs 2–10): click a sentence to seek.
         document.querySelectorAll('.sentence[data-index]').forEach(el => {
             el.classList.add('clickable');
             el.addEventListener('click', (e) => {
@@ -209,6 +210,27 @@ const AudioSync = {
                 this._onSentenceClick(el);
             });
         });
+
+        // Clean-paragraph chapters (Ch 1, future destructured chapters):
+        // click a paragraph to seek to its p{N} time. Mirrors the sentence
+        // flow — clicks on <a> (cite daggers, scripture/study links) are
+        // ignored so they keep their own behaviour.
+        document.querySelectorAll('[data-paragraph]').forEach(el => {
+            el.classList.add('clickable');
+            el.addEventListener('click', (e) => {
+                if (e.target.closest('a')) return;
+                this._onParagraphClick(el);
+            });
+        });
+    },
+
+    _onParagraphClick(paragraphEl) {
+        const paraIdx = parseInt(paragraphEl.dataset.paragraph, 10);
+        if (isNaN(paraIdx)) return;
+        const entry = this.paragraphTimes.find(([idx]) => idx === paraIdx);
+        if (entry) {
+            this._seekWithinCurrentSection(entry[1]);
+        }
     },
 
     _onSentenceClick(sentenceEl) {

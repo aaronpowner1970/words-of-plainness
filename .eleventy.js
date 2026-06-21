@@ -343,6 +343,69 @@ module.exports = function(eleventyConfig) {
     });
     
     // =========================================
+    // PARAGRAPH SYNC TRANSFORM (clean-paragraph chapters)
+    // -----------------------------------------------------------------
+    // Assigns a sequential data-paragraph="N" hook to each NARRATED block
+    // in a chapter's prose container so audio-sync.js can highlight and
+    // (when real timestamps land) click-to-seek at PARAGRAPH granularity —
+    // without re-introducing per-sentence {% sentence %} / {% para %}
+    // shortcodes into the clean markdown body.
+    //
+    // INDEXING CONVENTION (must match the audio/timestamp pipeline — see
+    // NARRATION.md; timestamp JSON uses Format-C "p{N}" keys):
+    //   • Scope:   only <p> and <li> inside <article class="chapter-content">.
+    //              Everything outside the article (RJW modal, citation panel,
+    //              study/learning tools, discord, nav) is never touched.
+    //   • Indexed: <p> and <li> elements ONLY, in document order, 0-based.
+    //   • Skipped: <h2>/<h3> headings, the <style> block, and any non-<p>/<li>
+    //              UI markup (pause-point, tab pills, section gaps).
+    //   • Each indexed element also gets class="sync-para" so it reuses the
+    //     existing .sync-para.highlighted styling in chapter.css.
+    //
+    // SAFETY: applies ONLY to "clean" chapters whose prose contains neither
+    // {% sentence %} spans (class="sentence") nor pre-existing data-paragraph
+    // markup from the {% para %} shortcode. Chapters 2–10 use one or both and
+    // are therefore left BYTE-FOR-BYTE unchanged.
+    // =========================================
+    eleventyConfig.addTransform("paragraphSync", function(content) {
+        const outputPath = (this.page && this.page.outputPath) || this.outputPath || '';
+        if (!outputPath || !outputPath.endsWith('.html')) return content;
+
+        const ARTICLE_RE = /(<article class="chapter-content"[^>]*>)([\s\S]*?)(<\/article>)/;
+        const m = content.match(ARTICLE_RE);
+        if (!m) return content;
+
+        const openTag  = m[1];
+        const inner    = m[2];
+        const closeTag = m[3];
+
+        // Leave self-indexed chapters untouched:
+        //   class="sentence"   → Chs 2–6, 7–10 ({% sentence %} highlighting)
+        //   data-paragraph     → Chs 7–10 ({% para %} shortcode highlighting)
+        if (inner.includes('class="sentence"') || inner.includes('data-paragraph')) {
+            return content;
+        }
+
+        let counter = 0;
+        const indexed = inner.replace(/<(p|li)\b([^>]*)>/g, function(full, tag, attrs) {
+            const idx = counter++;
+            let a = attrs || '';
+            if (/\bclass\s*=\s*["']/.test(a)) {
+                a = a.replace(/\bclass\s*=\s*["']/, function(cm) { return cm + 'sync-para '; });
+            } else {
+                a = ' class="sync-para"' + a;
+            }
+            return `<${tag}${a} data-paragraph="${idx}">`;
+        });
+
+        if (counter === 0) return content;
+
+        return content.replace(ARTICLE_RE, function() {
+            return openTag + indexed + closeTag;
+        });
+    });
+
+    // =========================================
     // HELPER FUNCTIONS
     // =========================================
     

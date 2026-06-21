@@ -3582,6 +3582,14 @@ h2[id], h3[id], [id^="section-"] {
 .sync-para {
     transition: background-color 0.3s ease;
 }
+/* Click-to-seek affordance — .clickable is added by audio-sync.js only when
+   real (non-zero) timestamps are present, so paragraphs are inert until then. */
+.sync-para.clickable {
+    cursor: pointer;
+}
+.sync-para.clickable:hover {
+    background-color: rgba(196, 148, 58, 0.08);
+}
 
 /* ── TOOLBAR BUTTON ACTIVE STATES (Bookmark + Complete) ────── */
 /* Bookmark: gold fill when set */
