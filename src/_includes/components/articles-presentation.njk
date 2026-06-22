@@ -1,0 +1,82 @@
+{# Articles Presentation — slide-01 poster opens an 18-slide WebP carousel.
+   Slides on R2: media.wordsofplainness.org/web/aoid-slides/slide-NN.webp
+   Trigger: #pwPresentation (placed in the Learning Pathways band on /articles/). #}
+<style>
+.ps-poster{display:block;width:100%;margin:1.75rem 0 .5rem;padding:0;border:1px solid rgba(212,175,105,.4);border-radius:14px;overflow:hidden;background:#2a1618;cursor:pointer;position:relative;line-height:0;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.ps-poster:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.45);border-color:rgba(212,175,105,.7);}
+.ps-poster:focus-visible{outline:3px solid #d4af69;outline-offset:3px;}
+.ps-poster-img{width:100%;height:auto;display:block;}
+.ps-poster-badge{position:absolute;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;background:rgba(20,10,12,.72);border:1px solid rgba(212,175,105,.5);border-radius:999px;color:#f3e9e0;font-family:'Crimson Pro',Georgia,serif;font-size:.9rem;transition:background .2s;}
+.ps-poster:hover .ps-poster-badge{background:rgba(20,10,12,.9);}
+.ps-backdrop{position:fixed;inset:0;background:rgba(12,6,8,.86);opacity:0;visibility:hidden;transition:opacity .25s;z-index:1200;}
+.ps-backdrop.open{opacity:1;visibility:visible;}
+.ps-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%);width:min(1100px,96vw);max-height:94vh;display:flex;flex-direction:column;background:#1c1012;border:1px solid rgba(212,175,105,.35);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s;z-index:1201;overflow:hidden;}
+.ps-modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%);}
+.ps-bar{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid rgba(212,175,105,.22);}
+.ps-eyebrow{font-family:'Cinzel',serif;font-size:.95rem;letter-spacing:.04em;color:#d4af69;}
+.ps-bar-actions{display:flex;gap:4px;}
+.ps-bar button{background:none;border:none;color:#d9c4b0;cursor:pointer;padding:6px;border-radius:6px;line-height:0;}
+.ps-bar button:hover{color:#fff;background:rgba(212,175,105,.14);}
+.ps-stage{position:relative;background:#000;flex:1 1 auto;display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;min-height:0;}
+.ps-stage img{max-width:100%;max-height:100%;display:block;}
+.ps-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(20,10,12,.6);border:1px solid rgba(212,175,105,.4);color:#f3e9e0;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.ps-nav:hover{background:rgba(20,10,12,.9);}
+.ps-nav:disabled{opacity:.3;cursor:default;}
+.ps-prev{left:14px;} .ps-next{right:14px;}
+.ps-footer{display:flex;align-items:center;justify-content:center;padding:9px;border-top:1px solid rgba(212,175,105,.22);color:#c8b3a3;font-size:.85rem;font-variant-numeric:tabular-nums;}
+.ps-modal:fullscreen{width:100vw;height:100vh;max-height:none;border:none;border-radius:0;top:0;left:0;transform:none;}
+.ps-modal:fullscreen .ps-stage{aspect-ratio:auto;}
+@media(max-width:640px){.ps-nav{width:38px;height:38px;font-size:20px;}.ps-poster-badge{font-size:.8rem;}}
+</style>
+
+<button class="ps-poster" type="button" id="pwPresentation" aria-haspopup="dialog" aria-controls="psModal"
+        aria-label="Open the presentation — The Common Ground We Share, a visual walkthrough of the thirteen Articles">
+  <img class="ps-poster-img" src="https://media.wordsofplainness.org/web/aoid-slides/slide-01.webp"
+       alt="The Common Ground We Share — Presentation: Articles of Interfaith Discipleship" loading="lazy" decoding="async">
+  <span class="ps-poster-badge" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+    Open the presentation · 18 slides
+  </span>
+</button>
+
+<div class="ps-backdrop" id="psBackdrop" aria-hidden="true"></div>
+<div class="ps-modal" id="psModal" role="dialog" aria-modal="true" aria-label="The Common Ground We Share — presentation" aria-hidden="true" tabindex="-1">
+  <div class="ps-bar">
+    <span class="ps-eyebrow">The Common Ground We Share</span>
+    <div class="ps-bar-actions">
+      <button class="ps-fs" type="button" aria-label="Toggle fullscreen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+      <button class="ps-close" type="button" aria-label="Close presentation"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+  </div>
+  <div class="ps-stage">
+    <button class="ps-nav ps-prev" type="button" aria-label="Previous slide">‹</button>
+    <img id="psImg" alt="">
+    <button class="ps-nav ps-next" type="button" aria-label="Next slide">›</button>
+  </div>
+  <div class="ps-footer"><span id="psCounter">1 / 18</span></div>
+</div>
+
+<script>
+(function () {
+  var BASE = 'https://media.wordsofplainness.org/web/aoid-slides/', COUNT = 18;
+  function url(n){ return BASE + 'slide-' + String(n).padStart(2,'0') + '.webp'; }
+  var poster=document.getElementById('pwPresentation'), backdrop=document.getElementById('psBackdrop'), modal=document.getElementById('psModal');
+  if(!poster||!modal||!backdrop) return;
+  var img=document.getElementById('psImg'), counter=document.getElementById('psCounter');
+  var prevBtn=modal.querySelector('.ps-prev'), nextBtn=modal.querySelector('.ps-next'), fsBtn=modal.querySelector('.ps-fs'), closeBtn=modal.querySelector('.ps-close');
+  var idx=1;
+  function pre(n){ if(n>=1&&n<=COUNT){ var i=new Image(); i.src=url(n); } }
+  function render(){ img.src=url(idx); img.alt='Slide '+idx+' of '+COUNT; counter.textContent=idx+' / '+COUNT; prevBtn.disabled=(idx===1); nextBtn.disabled=(idx===COUNT); pre(idx+1); pre(idx-1); }
+  function nav(d){ var n=idx+d; if(n<1||n>COUNT) return; idx=n; render(); }
+  function open(){ render(); backdrop.classList.add('open'); modal.classList.add('open'); backdrop.setAttribute('aria-hidden','false'); modal.setAttribute('aria-hidden','false'); modal.focus(); }
+  function close(){ if(document.fullscreenElement){ document.exitFullscreen(); } backdrop.classList.remove('open'); modal.classList.remove('open'); backdrop.setAttribute('aria-hidden','true'); modal.setAttribute('aria-hidden','true'); poster.focus(); }
+  function fs(){ if(!document.fullscreenElement){ modal.requestFullscreen && modal.requestFullscreen(); } else { document.exitFullscreen(); } }
+  poster.addEventListener('click', open);
+  prevBtn.addEventListener('click', function(){ nav(-1); });
+  nextBtn.addEventListener('click', function(){ nav(1); });
+  fsBtn.addEventListener('click', fs);
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(!modal.classList.contains('open')) return; if(e.key==='ArrowRight') nav(1); else if(e.key==='ArrowLeft') nav(-1); else if(e.key==='Escape'||e.key==='Esc'){ document.fullscreenElement ? document.exitFullscreen() : close(); } });
+})();
+</script>
