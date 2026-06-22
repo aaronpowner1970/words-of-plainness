@@ -23,7 +23,11 @@
 .ps-nav:hover{background:rgba(20,10,12,.9);}
 .ps-nav:disabled{opacity:.3;cursor:default;}
 .ps-prev{left:14px;} .ps-next{right:14px;}
-.ps-footer{display:flex;align-items:center;justify-content:center;padding:9px;border-top:1px solid rgba(212,175,105,.22);color:#c8b3a3;font-size:.85rem;font-variant-numeric:tabular-nums;}
+.ps-footer{position:relative;display:flex;align-items:center;justify-content:center;padding:9px;border-top:1px solid rgba(212,175,105,.22);color:#c8b3a3;font-size:.85rem;font-variant-numeric:tabular-nums;}
+.ps-jump{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:5px;padding:5px 11px;background:rgba(212,175,105,.12);border:1px solid rgba(212,175,105,.4);border-radius:999px;color:#e8d3a8;font-size:.8rem;text-decoration:none;cursor:pointer;opacity:.72;transition:opacity .15s,background .15s,color .15s;}
+.ps-jump:hover,.ps-jump:focus-visible{opacity:1;background:rgba(212,175,105,.22);color:#fff;}
+.ps-jump[hidden]{display:none;}
+@media(max-width:640px){.ps-jump{font-size:.72rem;padding:4px 9px;right:8px;}}
 .ps-modal:fullscreen{width:100vw;height:100vh;max-height:none;border:none;border-radius:0;top:0;left:0;transform:none;}
 .ps-modal:fullscreen .ps-stage{aspect-ratio:auto;}
 @media(max-width:640px){.ps-nav{width:38px;height:38px;font-size:20px;}.ps-poster-badge{font-size:.8rem;}}
@@ -53,30 +57,49 @@
     <img id="psImg" alt="">
     <button class="ps-nav ps-next" type="button" aria-label="Next slide">›</button>
   </div>
-  <div class="ps-footer"><span id="psCounter">1 / 18</span></div>
+  <div class="ps-footer">
+    <span id="psCounter">1 / 18</span>
+    <a class="ps-jump" id="psJump" href="#" hidden>Open Article <span id="psJumpNum">1</span> ↗</a>
+  </div>
 </div>
 
 <script>
 (function () {
-  var BASE = 'https://media.wordsofplainness.org/web/aoid-slides/', COUNT = 18;
+  var BASE = 'https://media.wordsofplainness.org/web/aoid-slides/', COUNT = 18, STORE = 'wop-aoid-pres-slide';
+  var ANCHORS = ['of-plainness','of-god','of-creation-and-life','of-gods-word','of-jesus-christ','of-salvation','of-the-kingdom-at-hand','of-fellow-believers','of-finding-our-way','of-living-by-grace','of-covenants-and-commitments','of-immortality-and-eternal-life','of-our-confidence'];
+  var FIRST_ARTICLE_SLIDE = 4;  // slide 4 = Article 1, one slide per article
   function url(n){ return BASE + 'slide-' + String(n).padStart(2,'0') + '.webp'; }
+  function articleFor(s){ var i = s - FIRST_ARTICLE_SLIDE; return (i >= 0 && i < ANCHORS.length) ? { num: i + 1, anchor: ANCHORS[i] } : null; }
   var poster=document.getElementById('pwPresentation'), backdrop=document.getElementById('psBackdrop'), modal=document.getElementById('psModal');
   if(!poster||!modal||!backdrop) return;
   var img=document.getElementById('psImg'), counter=document.getElementById('psCounter');
+  var jump=document.getElementById('psJump'), jumpNum=document.getElementById('psJumpNum');
   var prevBtn=modal.querySelector('.ps-prev'), nextBtn=modal.querySelector('.ps-next'), fsBtn=modal.querySelector('.ps-fs'), closeBtn=modal.querySelector('.ps-close');
-  var idx=1;
+  var idx=(function(){ try{ var v=parseInt(localStorage.getItem(STORE),10); return (v>=1&&v<=COUNT)?v:1; }catch(e){ return 1; } })();
   function pre(n){ if(n>=1&&n<=COUNT){ var i=new Image(); i.src=url(n); } }
-  function render(){ img.src=url(idx); img.alt='Slide '+idx+' of '+COUNT; counter.textContent=idx+' / '+COUNT; prevBtn.disabled=(idx===1); nextBtn.disabled=(idx===COUNT); pre(idx+1); pre(idx-1); }
+  function render(){
+    img.src=url(idx); img.alt='Slide '+idx+' of '+COUNT;
+    counter.textContent=idx+' / '+COUNT;
+    prevBtn.disabled=(idx===1); nextBtn.disabled=(idx===COUNT);
+    var art=articleFor(idx);
+    if(art){ jumpNum.textContent=art.num; jump.href='#'+art.anchor; jump.hidden=false; } else { jump.hidden=true; }
+    try{ localStorage.setItem(STORE, idx); }catch(e){}
+    pre(idx+1); pre(idx-1);
+  }
   function nav(d){ var n=idx+d; if(n<1||n>COUNT) return; idx=n; render(); }
   function open(){ render(); backdrop.classList.add('open'); modal.classList.add('open'); backdrop.setAttribute('aria-hidden','false'); modal.setAttribute('aria-hidden','false'); modal.focus(); }
-  function close(){ if(document.fullscreenElement){ document.exitFullscreen(); } backdrop.classList.remove('open'); modal.classList.remove('open'); backdrop.setAttribute('aria-hidden','true'); modal.setAttribute('aria-hidden','true'); poster.focus(); }
+  function hide(){ backdrop.classList.remove('open'); modal.classList.remove('open'); backdrop.setAttribute('aria-hidden','true'); modal.setAttribute('aria-hidden','true'); }
+  function close(){ if(document.fullscreenElement){ document.exitFullscreen(); } hide(); poster.focus(); }
   function fs(){ if(!document.fullscreenElement){ modal.requestFullscreen && modal.requestFullscreen(); } else { document.exitFullscreen(); } }
+  function goToArticle(anchor){ var el=document.getElementById(anchor); if(!el) return; el.scrollIntoView({behavior:'smooth', block:'start'}); history.replaceState(null,'','#'+anchor); }
+  function jumpToArticle(){ var art=articleFor(idx); if(!art) return; hide(); if(document.fullscreenElement){ document.addEventListener('fullscreenchange', function once(){ document.removeEventListener('fullscreenchange', once); setTimeout(function(){ goToArticle(art.anchor); }, 60); }); document.exitFullscreen(); } else { goToArticle(art.anchor); } }
   poster.addEventListener('click', open);
   prevBtn.addEventListener('click', function(){ nav(-1); });
   nextBtn.addEventListener('click', function(){ nav(1); });
   fsBtn.addEventListener('click', fs);
   closeBtn.addEventListener('click', close);
   backdrop.addEventListener('click', close);
+  jump.addEventListener('click', function(e){ e.preventDefault(); jumpToArticle(); });
   document.addEventListener('keydown', function(e){ if(!modal.classList.contains('open')) return; if(e.key==='ArrowRight') nav(1); else if(e.key==='ArrowLeft') nav(-1); else if(e.key==='Escape'||e.key==='Esc'){ document.fullscreenElement ? document.exitFullscreen() : close(); } });
 })();
 </script>
