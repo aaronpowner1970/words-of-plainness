@@ -10,9 +10,38 @@ discordChannelId: ""
 <script>window.WOP_GODEEPER = {{ collections.chapters | goDeeperData | safe }};</script>
 <script>window.WOP_HOLD = {{ howWeHold | dump | safe }};</script>
 
+<style>
+.articles-prologue-video {
+    width: 100%;
+    max-width: 720px;
+    margin: 2rem auto 0;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(196, 148, 58, 0.20);
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.38);
+}
+.articles-prologue-video iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+</style>
+
 <div class="articles-prologue">
     <p class="articles-epigraph"><em>"Pure religion and undefiled before God our Father is this…"</em></p>
-    <p>These declarations grow from one plain trust — what unites us in Jesus Christ runs deeper than anything that divides us. These articles are not a formal creed of a single tradition, nor a blending of faiths into one, but a foundation of peaceful fellowship; we confess Christ openly and with joy, and ask no one to leave the tradition they love. It is in the spirit of "unity of faith" that we offer this olive branch — to all who would sit together and partake of His grace, and no less to any who come without that faith, curious or questioning: you are welcome here as a respected guest among friends, and we will not press our creeds upon you.</p>
+    <p>These interfaith declarations grow from one plain trust — what unites us in Jesus Christ runs deeper than anything that divides us. These articles are not a formal creed of a single tradition, nor a blending of faiths into one, but a foundation of peaceful fellowship.</p>
+    <p>We confess Christ openly and with joy, and ask no one to leave the tradition they love. It is in the spirit of "unity of faith" that we offer this olive branch — to all who would sit together and partake of His grace, and no less to any who come without that faith, curious or questioning: you are welcome here as a respected guest among friends, and we will not press our creeds upon you.</p>
+    <div class="articles-prologue-video">
+        <iframe
+            src="https://www.youtube-nocookie.com/embed/OSyBTXbD15M"
+            title="Words of Plainness — Articles of Interfaith Discipleship"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+    </div>
 </div>
 
 <!-- Pathways band — ways to begin (wires to existing podcast modal, contents drawer, and span apparatus) -->
