@@ -2753,3 +2753,12 @@ body:has(.bottom-toolbar) .wop-font-widget {
         display: none;
     }
 }
+
+/* ── Live Gathering badge ────────────────────────────
+   Reuses .articles-seal-widget styling; positioned just above the
+   Articles seal by its own inline script (homepage only). The
+   z-index keeps it above the Articles seal if they ever overlap.
+───────────────────────────────────── */
+.gathering-seal-widget {
+    z-index: 951;
+}
