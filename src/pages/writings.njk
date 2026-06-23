@@ -158,6 +158,14 @@ description: "Explore both volumes of Words of Plainness plus study appendices â
     text-align: center;
 }
 
+/* Mirror spacer (matches medallion width) so the text centers on the box's
+   true center â€” keeping the banner lines aligned with the "Then Read" heading. */
+.start-here-link::after {
+    content: "";
+    width: 3.4em;
+    flex: 0 0 auto;
+}
+
 .start-here-link:hover {
     color: var(--gold-light);
     border-color: var(--gold-light);
