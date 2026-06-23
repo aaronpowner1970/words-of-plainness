@@ -127,28 +127,42 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
 ──────────────────────────────────────────────────────────── */
 .start-here-row {
     text-align: center;
-    margin-bottom: var(--space-lg);
+    margin-bottom: 2.4rem;
 }
 
 .start-here-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 0.7rem;
+    justify-content: flex-start;
+    gap: 1.1rem;
+    max-width: 760px;
+    margin: 0 auto;
     color: var(--gold-primary);
     font-family: var(--font-serif);
     font-weight: 600;
     font-size: clamp(1.15rem, 2.4vw, 1.6rem);
     letter-spacing: 0.04em;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-md);
+    padding: 1.15rem 1.9rem;
+    border: 2px solid var(--gold-primary);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(196, 148, 58, 0.12), rgba(196, 148, 58, 0.045));
+    box-shadow: 0 0 0 4px rgba(196, 148, 58, 0.06), 0 6px 22px rgba(0, 0, 0, 0.35);
     transition: color var(--transition-fast), background var(--transition-fast),
+                border-color var(--transition-fast), box-shadow var(--transition-fast),
                 text-shadow var(--transition-fast), filter var(--transition-fast);
+}
+
+.start-here-link span {
+    flex: 1;
+    text-align: center;
 }
 
 .start-here-link:hover {
     color: var(--gold-light);
-    background: rgba(196, 148, 58, 0.10);
+    border-color: var(--gold-light);
+    background: linear-gradient(180deg, rgba(196, 148, 58, 0.20), rgba(196, 148, 58, 0.08));
+    box-shadow: 0 0 0 4px rgba(212, 168, 74, 0.12), 0 0 26px rgba(212, 168, 74, 0.35), 0 8px 26px rgba(0, 0, 0, 0.4);
     text-shadow: 0 0 14px rgba(212, 168, 74, 0.45);
 }
 
@@ -161,10 +175,35 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
 }
 
 .start-here-medallion {
-    width: 3em;
+    width: 3.4em;
     height: auto;
     flex-shrink: 0;
     filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
+
+/* ── "Then Read" group heading above the two volume cards ──── */
+.vgl-wrap {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 1.6rem;
+}
+
+.vgl-step {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    opacity: 0.7;
+    margin-bottom: 0.35rem;
+}
+
+.vgl-title {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--cream-soft);
+    letter-spacing: 0.02em;
 }
 </style>
 
@@ -185,6 +224,11 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
                 <img src="/assets/images/articles_banner_shadow.png" alt="Articles of Interfaith Discipleship medallion" class="start-here-medallion">
                 <span>Start Here: Articles of Interfaith Discipleship</span>
             </a>
+        </div>
+
+        <div class="vgl-wrap">
+            <span class="vgl-step">Then Read</span>
+            <span class="vgl-title">The Writings, in Two Volumes</span>
         </div>
 
         <div class="volume-hub-grid">
