@@ -416,25 +416,40 @@
         var articles = document.getElementById('articlesSealWidget');
         function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
-        // Default placement: centered just above the Articles seal's rect
+        // Lay out BOTH seals as one aligned vertical pair: the Articles seal on
+        // TOP, this Live Gathering badge directly BELOW it, sharing a center line.
+        // The pair is built from the bottom up off the Articles seal's anchored
+        // spot (desktop: beside the hero CTA; mobile: bottom-right), so the badge
+        // never overflows and the Articles seal always leads.
         function placeDefault() {
-            var w = widget.offsetWidth, h = widget.offsetHeight;
-            if (articles && articles.style.display !== 'none' && articles.offsetWidth > 0) {
-                var r = articles.getBoundingClientRect();
-                widget.style.left = clamp(r.left + (r.width / 2) - (w / 2), 12, window.innerWidth - w - 12) + 'px';
-                // Articles leads when there's room beneath it (desktop layout).
-                // When the Articles seal is pinned to the bottom edge (mobile), there
-                // is no room below, so the badge stacks ABOVE it instead of clamping
-                // down onto it.
-                var below = r.bottom + GAP;
-                var top   = (below + h <= window.innerHeight - 12) ? below : (r.top - h - GAP);
-                widget.style.top  = clamp(top, 12, window.innerHeight - h - 12) + 'px';
-            } else {
-                widget.style.left = (window.innerWidth - w - 24) + 'px';
-                widget.style.top  = (window.innerHeight - h - 24 - 180 - GAP) + 'px';
+            var gW = widget.offsetWidth, gH = widget.offsetHeight;
+            if (!articles || articles.style.display === 'none' || articles.offsetWidth === 0) {
+                widget.style.left = clamp(window.innerWidth - gW - 24, 12, window.innerWidth - gW - 12) + 'px';
+                widget.style.top  = clamp(window.innerHeight - gH - 24, 12, window.innerHeight - gH - 12) + 'px';
+                widget.style.right = 'auto';
+                widget.style.bottom = 'auto';
+                return;
             }
+            var aRect = articles.getBoundingClientRect();
+            var aW = aRect.width, aH = aRect.height;
+            var centerX = aRect.left + aW / 2;
+
+            var gTop = aRect.bottom - gH;        // badge takes the bottom slot
+            var aTop = gTop - GAP - aH;          // Articles lifts above the badge
+            if (aTop < 84) { var d = 84 - aTop; aTop += d; gTop += d; }  // clear the header
+
+            widget.style.left = clamp(centerX - gW / 2, 12, window.innerWidth - gW - 12) + 'px';
+            widget.style.top  = clamp(gTop, 12, window.innerHeight - gH - 12) + 'px';
             widget.style.right = 'auto';
             widget.style.bottom = 'auto';
+
+            // Lift the Articles seal above the badge unless the reader dragged it.
+            if (!sessionStorage.getItem('wop-seal-pos')) {
+                articles.style.left = clamp(centerX - aW / 2, 12, window.innerWidth - aW - 12) + 'px';
+                articles.style.top  = clamp(aTop, 12, window.innerHeight - aH - 12) + 'px';
+                articles.style.right = 'auto';
+                articles.style.bottom = 'auto';
+            }
         }
 
         var savedPos = sessionStorage.getItem('wop-gathering-pos');
