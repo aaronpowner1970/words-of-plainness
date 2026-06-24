@@ -252,6 +252,23 @@ permalink: /
             font-size: 0.9rem;
             opacity: 0.75;
         }
+        .gathering-pill { gap: 0.55rem; }
+        .gathering-live-dot { display: none; }
+        .gathering-pill.is-live .gathering-live-dot {
+            display: inline-block;
+            width: 9px; height: 9px;
+            border-radius: 50%;
+            background: #e23b3b;
+            animation: gatheringPulse 1.8s ease-out infinite;
+        }
+        .gathering-pill.is-live {
+            box-shadow: var(--shadow-gold), 0 0 18px rgba(196, 148, 58, 0.45);
+        }
+        @keyframes gatheringPulse {
+            0%   { box-shadow: 0 0 0 0 rgba(226, 59, 59, 0.65); }
+            70%  { box-shadow: 0 0 0 7px rgba(226, 59, 59, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(226, 59, 59, 0); }
+        }
     </style>
     <div class="featured-card forum-card">
         <p class="featured-label">Live Gathering</p>
@@ -263,15 +280,58 @@ permalink: /
             the questions that matter most. Brother Aaron guides the conversation; you bring an
             honest heart. There is room here for you.
         </p>
-        <a href="https://discord.gg/UKEBz2YmdF"
+        <a id="gatheringPill"
+           href="https://discord.gg/tNwADDjTRV"
            target="_blank"
            rel="noopener noreferrer"
-           class="btn btn-primary">
-            Join the Gathering
+           class="btn btn-primary gathering-pill"
+           data-live-href="https://discord.gg/UKEBz2YmdF"
+           data-live-label="Live Now &mdash; Join the Gathering"
+           data-idle-href="https://discord.gg/tNwADDjTRV"
+           data-idle-label="Join the Community"
+           aria-label="Join the Words of Plainness community on Discord">
+            <span class="gathering-live-dot" aria-hidden="true"></span>
+            <span class="gathering-pill-label">Join the Community</span>
         </a>
+        <script>
+        (function () {
+          var pill = document.getElementById('gatheringPill');
+          if (!pill) return;
+          var label = pill.querySelector('.gathering-pill-label');
+          var LIVE_DAY = 'Wed', START_MIN = 19 * 60, END_MIN = 23 * 60 + 30;
+          function denverNow() {
+            var parts = new Intl.DateTimeFormat('en-US', {
+              timeZone: 'America/Denver', weekday: 'short',
+              hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+            }).formatToParts(new Date());
+            var m = {};
+            parts.forEach(function (p) { m[p.type] = p.value; });
+            return { weekday: m.weekday, minutes: parseInt(m.hour, 10) * 60 + parseInt(m.minute, 10) };
+          }
+          function isLive() {
+            try {
+              var n = denverNow();
+              return n.weekday === LIVE_DAY && n.minutes >= START_MIN && n.minutes < END_MIN;
+            } catch (e) { return false; }
+          }
+          function apply() {
+            var live = isLive();
+            pill.classList.toggle('is-live', live);
+            pill.setAttribute('href', live ? pill.dataset.liveHref : pill.dataset.idleHref);
+            if (label) label.textContent = live ? pill.dataset.liveLabel : pill.dataset.idleLabel;
+            pill.setAttribute('aria-label', live
+              ? 'Live now — join the gathering voice room on Discord'
+              : 'Join the Words of Plainness community on Discord');
+          }
+          apply();
+          setInterval(apply, 60000);
+        })();
+        </script>
         <p class="forum-note">
-            Newcomers welcome&mdash;the link takes you straight in. More weekly times are
-            opening as interest grows; come, and tell us what fits your week.
+            Newcomers welcome&mdash;during our Wednesday gathering the link takes you straight
+            in; any other time it opens our community, where you can settle in before the next
+            one. More weekly times are opening as interest grows; come, and tell us what fits
+            your week.
         </p>
     </div>
 </section>
