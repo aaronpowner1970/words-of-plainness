@@ -168,6 +168,85 @@
     <script src="/js/anthem-player.js"></script>
     {% block scripts %}{% endblock %}
 
+    <!-- Shared medallion minimize/restore controller (used by the seals below) -->
+    <script>
+    window.WopSeal = (function () {
+        'use strict';
+        function isMin(el) { return !!el && el.classList.contains('minimized'); }
+
+        function makeMinimizable(widget, closeBtn, prefix, dock) {
+            if (!widget) return { minimizedOnLoad: false };
+            var MIN = prefix + '-min';
+            var POS = prefix + '-minpos';
+
+            function applyDock() {
+                widget.style.left = 'auto';
+                widget.style.bottom = 'auto';
+                widget.style.right = dock.right;
+                widget.style.top = dock.top;
+            }
+
+            function minimize() {
+                sessionStorage.setItem(POS, JSON.stringify({ left: widget.style.left, top: widget.style.top }));
+                sessionStorage.setItem(MIN, '1');
+                widget.classList.add('minimized');
+                widget.classList.add('articles-seal-widget--visible');
+                widget.style.transform = '';
+                widget.style.pointerEvents = 'all';
+                widget.setAttribute('title', 'Click to restore');
+                applyDock();
+            }
+
+            function restore() {
+                widget.classList.remove('minimized');
+                widget.removeAttribute('title');
+                sessionStorage.removeItem(MIN);
+                var saved = sessionStorage.getItem(POS);
+                sessionStorage.removeItem(POS);
+                if (saved) {
+                    try {
+                        var p = JSON.parse(saved);
+                        if (p.left && p.top) {
+                            widget.style.left = p.left;
+                            widget.style.top = p.top;
+                            widget.style.right = 'auto';
+                            widget.style.bottom = 'auto';
+                            return;
+                        }
+                    } catch (e) {}
+                }
+                widget.style.left = ''; widget.style.top = '';
+                widget.style.right = ''; widget.style.bottom = '';
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function (e) {
+                    e.stopPropagation(); e.preventDefault();
+                    if (!isMin(widget)) minimize();
+                });
+            }
+            widget.addEventListener('mousedown', function (e) {
+                if (isMin(widget)) { e.stopImmediatePropagation(); e.preventDefault(); }
+            }, true);
+            widget.addEventListener('click', function (e) {
+                if (isMin(widget)) { e.stopImmediatePropagation(); e.preventDefault(); restore(); }
+            }, true);
+
+            if (sessionStorage.getItem(MIN) === '1') {
+                widget.classList.add('minimized');
+                widget.classList.add('articles-seal-widget--visible');
+                widget.style.pointerEvents = 'all';
+                widget.setAttribute('title', 'Click to restore');
+                applyDock();
+                return { minimizedOnLoad: true };
+            }
+            return { minimizedOnLoad: false };
+        }
+
+        return { makeMinimizable: makeMinimizable, isMin: isMin };
+    })();
+    </script>
+
     <!-- =====================================================
          ARTICLES SEAL WIDGET
          Floating / draggable link to /articles/
@@ -181,10 +260,9 @@
                  class="articles-seal-widget-img"
                  draggable="false">
         </a>
-        <button class="articles-seal-widget-close" id="articlesSealWidgetClose" aria-label="Close Articles seal">
-            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
+        <button class="articles-seal-widget-close" id="articlesSealWidgetClose" aria-label="Minimize Articles seal">
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
             </svg>
         </button>
         <span class="articles-seal-widget-drag" aria-hidden="true">drag</span>
@@ -201,11 +279,10 @@
         var widget = document.getElementById('articlesSealWidget');
         if (!widget) return;
 
-        // Session dismissal — dismissed state clears on new session
-        if (sessionStorage.getItem('wop-seal-dismissed') === '1') {
-            widget.style.display = 'none';
-            return;
-        }
+        // Minimize-to-thumbnail (session-persisted). The corner chevron tucks
+        // this seal to a docked thumbnail instead of dismissing it; clicking the
+        // thumbnail restores it. Replaces the former hard dismissal.
+        var minCtl = WopSeal.makeMinimizable(widget, document.getElementById('articlesSealWidgetClose'), 'wop-seal', { right: '16px', top: '40%' });
 
         // Size modifier: homepage + /writings/ get the large seal
         var path       = window.location.pathname;
@@ -213,6 +290,7 @@
         var isLargeSeal = isHomePage || path === '/writings/' || path === '/writings';
         if (isLargeSeal) widget.classList.add('articles-seal-widget--home');
 
+        if (minCtl.minimizedOnLoad) { /* came up docked — skip default placement & fade */ } else {
         // Restore position saved earlier in this session
         var savedPos = sessionStorage.getItem('wop-seal-pos');
         if (savedPos) {
@@ -261,18 +339,9 @@
         setTimeout(function() {
             widget.classList.add('articles-seal-widget--visible');
         }, 2000);
+        }
 
-        // Close button
-        var closeBtn = document.getElementById('articlesSealWidgetClose');
-        closeBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            widget.classList.remove('articles-seal-widget--visible');
-            widget.style.transform = 'scale(0.65)';
-            widget.style.pointerEvents = 'none';
-            setTimeout(function() { widget.style.display = 'none'; }, 500);
-            sessionStorage.setItem('wop-seal-dismissed', '1');
-        });
+        // (Minimize/restore is wired by WopSeal.makeMinimizable above.)
 
         // Drag — desktop (fine pointer) only
         var isTouch = window.matchMedia('(pointer: coarse)').matches;
@@ -391,10 +460,9 @@
                  class="articles-seal-widget-img"
                  draggable="false">
         </a>
-        <button class="articles-seal-widget-close" id="gatheringSealWidgetClose" aria-label="Close Live Gathering badge">
-            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
+        <button class="articles-seal-widget-close" id="gatheringSealWidgetClose" aria-label="Minimize Live Gathering badge">
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
             </svg>
         </button>
         <span class="articles-seal-widget-drag" aria-hidden="true">drag</span>
@@ -407,11 +475,8 @@
         if (!widget) return;
         var GAP = 18; // px gap above the Articles seal
 
-        // Session dismissal
-        if (sessionStorage.getItem('wop-gathering-dismissed') === '1') {
-            widget.style.display = 'none';
-            return;
-        }
+        // Minimize-to-thumbnail (session-persisted)
+        var minCtl = WopSeal.makeMinimizable(widget, document.getElementById('gatheringSealWidgetClose'), 'wop-gathering', { right: '16px', top: 'calc(40% + 70px)' });
 
         var articles = document.getElementById('articlesSealWidget');
         function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
@@ -423,7 +488,7 @@
         // never overflows and the Articles seal always leads.
         function placeDefault() {
             var gW = widget.offsetWidth, gH = widget.offsetHeight;
-            if (!articles || articles.style.display === 'none' || articles.offsetWidth === 0) {
+            if (!articles || articles.style.display === 'none' || articles.offsetWidth === 0 || WopSeal.isMin(articles)) {
                 widget.style.left = clamp(window.innerWidth - gW - 24, 12, window.innerWidth - gW - 12) + 'px';
                 widget.style.top  = clamp(window.innerHeight - gH - 24, 12, window.innerHeight - gH - 12) + 'px';
                 widget.style.right = 'auto';
@@ -443,8 +508,9 @@
             widget.style.right = 'auto';
             widget.style.bottom = 'auto';
 
-            // Lift the Articles seal above the badge unless the reader dragged it.
-            if (!sessionStorage.getItem('wop-seal-pos')) {
+            // Lift the Articles seal above the badge unless the reader dragged it
+            // or it has been tucked to a thumbnail.
+            if (!sessionStorage.getItem('wop-seal-pos') && !WopSeal.isMin(articles)) {
                 articles.style.left = clamp(centerX - aW / 2, 12, window.innerWidth - aW - 12) + 'px';
                 articles.style.top  = clamp(aTop, 12, window.innerHeight - aH - 12) + 'px';
                 articles.style.right = 'auto';
@@ -452,6 +518,7 @@
             }
         }
 
+        if (minCtl.minimizedOnLoad) { /* came up docked — skip default placement */ } else {
         var savedPos = sessionStorage.getItem('wop-gathering-pos');
         if (savedPos) {
             try {
@@ -467,21 +534,14 @@
             // Two frames so the Articles seal finishes its own positioning first
             requestAnimationFrame(function() { requestAnimationFrame(placeDefault); });
         }
+        }
 
         // Fade in just after the Articles seal so the stack cascades
         setTimeout(function() {
             widget.classList.add('articles-seal-widget--visible');
         }, 2300);
 
-        // Close
-        document.getElementById('gatheringSealWidgetClose').addEventListener('click', function(e) {
-            e.stopPropagation(); e.preventDefault();
-            widget.classList.remove('articles-seal-widget--visible');
-            widget.style.transform = 'scale(0.65)';
-            widget.style.pointerEvents = 'none';
-            setTimeout(function() { widget.style.display = 'none'; }, 500);
-            sessionStorage.setItem('wop-gathering-dismissed', '1');
-        });
+        // (Minimize/restore is wired by WopSeal.makeMinimizable above.)
 
         // Drag — desktop (fine pointer) only
         if (window.matchMedia('(pointer: coarse)').matches) return;
@@ -564,10 +624,9 @@
                  class="articles-seal-widget-img"
                  draggable="false">
         </a>
-        <button class="articles-seal-widget-close" id="articlesGatheringSealWidgetClose" aria-label="Close Live Gathering badge">
-            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
+        <button class="articles-seal-widget-close" id="articlesGatheringSealWidgetClose" aria-label="Minimize Live Gathering badge">
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
             </svg>
         </button>
         <span class="articles-seal-widget-drag" aria-hidden="true">drag</span>
@@ -579,11 +638,8 @@
         var widget = document.getElementById('articlesGatheringSealWidget');
         if (!widget) return;
 
-        // Session dismissal
-        if (sessionStorage.getItem('wop-aoid-gathering-dismissed') === '1') {
-            widget.style.display = 'none';
-            return;
-        }
+        // Minimize-to-thumbnail (session-persisted)
+        var minCtl = WopSeal.makeMinimizable(widget, document.getElementById('articlesGatheringSealWidgetClose'), 'wop-aoid-gathering', { right: '16px', top: '40%' });
 
         function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
@@ -606,6 +662,7 @@
             widget.style.bottom = 'auto';
         }
 
+        if (minCtl.minimizedOnLoad) { /* came up docked — skip default placement */ } else {
         var savedPos = sessionStorage.getItem('wop-aoid-gathering-pos');
         if (savedPos) {
             try {
@@ -620,21 +677,14 @@
         } else {
             requestAnimationFrame(function() { requestAnimationFrame(placeDefault); });
         }
+        }
 
         // Fade in
         setTimeout(function() {
             widget.classList.add('articles-seal-widget--visible');
         }, 1500);
 
-        // Close / dismiss
-        document.getElementById('articlesGatheringSealWidgetClose').addEventListener('click', function(e) {
-            e.stopPropagation(); e.preventDefault();
-            widget.classList.remove('articles-seal-widget--visible');
-            widget.style.transform = 'scale(0.65)';
-            widget.style.pointerEvents = 'none';
-            setTimeout(function() { widget.style.display = 'none'; }, 500);
-            sessionStorage.setItem('wop-aoid-gathering-dismissed', '1');
-        });
+        // (Minimize/restore is wired by WopSeal.makeMinimizable above.)
 
         // Drag — desktop (fine pointer) only
         if (window.matchMedia('(pointer: coarse)').matches) return;

@@ -2660,7 +2660,7 @@ body:has(.bottom-toolbar) .wop-font-widget {
     height: auto;
     display: block;
     pointer-events: none;
-    transition: transform 0.25s ease;
+    transition: width 0.35s ease, transform 0.25s ease;
     transform-origin: center bottom;
 }
 
@@ -2772,4 +2772,33 @@ body:has(.bottom-toolbar) .wop-font-widget {
 ───────────────────────────────────── */
 .gathering-seal-widget {
     z-index: 951;
+}
+
+/* Tucked-away (minimized) state — the seal collapses to a small disc docked
+   on the right rail. Click anywhere on the disc to restore (handled in JS). */
+.articles-seal-widget.minimized {
+    cursor: pointer;
+    z-index: 952;
+    filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.5));
+}
+
+.articles-seal-widget.minimized .articles-seal-widget-img {
+    width: 56px;
+    opacity: 0.78;
+}
+
+.articles-seal-widget.minimized:hover .articles-seal-widget-img {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+.articles-seal-widget.minimized .articles-seal-widget-close,
+.articles-seal-widget.minimized .articles-seal-widget-drag {
+    display: none;
+}
+
+@media (pointer: coarse) {
+    .articles-seal-widget.minimized .articles-seal-widget-img {
+        width: 46px;
+    }
 }
