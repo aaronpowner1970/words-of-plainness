@@ -2668,6 +2668,13 @@ body:has(.bottom-toolbar) .wop-font-widget {
     width: 180px;       /* homepage: full size (50% larger) */
 }
 
+/* Articles seal enlarged on home/writings to match the Live Gathering seal's
+   emblem. Its art sits on a wider canvas, so an equal width renders a smaller
+   disc. :not(.gathering-seal-widget) leaves the Gathering badge at 180px. */
+.articles-seal-widget--home:not(.gathering-seal-widget) .articles-seal-widget-img {
+    width: 210px;       /* match the Live Gathering disc */
+}
+
 .articles-seal-widget-link:hover .articles-seal-widget-img {
     transform: scale(1.07);
 }
@@ -2747,6 +2754,10 @@ body:has(.bottom-toolbar) .wop-font-widget {
 
     .articles-seal-widget--home .articles-seal-widget-img {
         width: 120px;   /* mobile homepage */
+    }
+
+    .articles-seal-widget--home:not(.gathering-seal-widget) .articles-seal-widget-img {
+        width: 140px;   /* mobile homepage — Articles enlarged to match */
     }
 
     .articles-seal-widget-drag {
