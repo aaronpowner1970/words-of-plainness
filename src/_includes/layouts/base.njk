@@ -422,7 +422,13 @@
             if (articles && articles.style.display !== 'none' && articles.offsetWidth > 0) {
                 var r = articles.getBoundingClientRect();
                 widget.style.left = clamp(r.left + (r.width / 2) - (w / 2), 12, window.innerWidth - w - 12) + 'px';
-                widget.style.top  = clamp(r.bottom + GAP, 12, window.innerHeight - h - 12) + 'px';
+                // Articles leads when there's room beneath it (desktop layout).
+                // When the Articles seal is pinned to the bottom edge (mobile), there
+                // is no room below, so the badge stacks ABOVE it instead of clamping
+                // down onto it.
+                var below = r.bottom + GAP;
+                var top   = (below + h <= window.innerHeight - 12) ? below : (r.top - h - GAP);
+                widget.style.top  = clamp(top, 12, window.innerHeight - h - 12) + 'px';
             } else {
                 widget.style.left = (window.innerWidth - w - 24) + 'px';
                 widget.style.top  = (window.innerHeight - h - 24 - 180 - GAP) + 'px';
