@@ -1,0 +1,103 @@
+{# Articles Video — per-article "Video" pill → fullscreen-capable YouTube overlay.
+   Mirrors the Slides pill/overlay (articles-presentation.njk + articles-slides.css).
+   Add a reading by extending VIDEOS: { A01: 'YouTubeID', A02: '…' }.
+   Pill injects to the right of the Slides pill, only on articles that have a video. #}
+<style>
+/* ── Video pill — twin of .article-slides-btn ─────────────── */
+.article-video-btn{display:inline-flex;align-items:center;gap:.38rem;margin-left:.5rem;margin-bottom:.9rem;padding:.28rem .75rem;background:rgba(196,148,58,.06);border:1px solid rgba(196,148,58,.2);border-radius:20px;color:rgba(196,148,58,.7);font-family:var(--font-sans,sans-serif);font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;line-height:1;transition:background .18s ease,border-color .18s ease,color .18s ease;}
+.article-video-btn svg{flex-shrink:0;opacity:.7;transition:opacity .18s ease;}
+.article-video-btn:hover{background:rgba(196,148,58,.13);border-color:rgba(196,148,58,.42);color:var(--gold-primary,#C4943A);}
+.article-video-btn:hover svg{opacity:1;}
+.article-video-btn:active{transform:scale(.97);}
+.article-video-btn:focus-visible{outline:2px solid var(--gold-primary,#C4943A);outline-offset:2px;}
+/* ── Overlay — mirrors the .ps- presentation modal ─────────── */
+.av-backdrop{position:fixed;inset:0;background:rgba(12,6,8,.86);opacity:0;visibility:hidden;transition:opacity .25s;z-index:1200;}
+.av-backdrop.open{opacity:1;visibility:visible;}
+.av-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%);width:min(1100px,96vw);max-height:94vh;display:flex;flex-direction:column;background:#1c1012;border:1px solid rgba(212,175,105,.35);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s;z-index:1201;overflow:hidden;}
+.av-modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%);}
+.av-modal:focus{outline:none;}
+.av-bar{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:11px 15px;border-bottom:1px solid rgba(212,175,105,.22);}
+.av-eyebrow{font-family:'Cinzel',serif;font-size:.95rem;letter-spacing:.04em;color:#d4af69;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.av-bar-actions{display:flex;gap:4px;flex-shrink:0;}
+.av-bar button{background:none;border:none;color:#d9c4b0;cursor:pointer;padding:6px;border-radius:6px;line-height:0;}
+.av-bar button:hover{color:#fff;background:rgba(212,175,105,.14);}
+.av-stage{position:relative;background:#000;flex:1 1 auto;aspect-ratio:16/9;min-height:0;}
+.av-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;}
+.av-modal:fullscreen{width:100vw;height:100vh;max-height:none;border:none;border-radius:0;top:0;left:0;transform:none;}
+.av-modal:fullscreen .av-stage{aspect-ratio:auto;flex:1;}
+@media(max-width:768px){.av-modal{width:100vw;height:100vh;max-height:none;top:0;left:0;transform:none;border-radius:0;}.av-modal.open{transform:none;}}
+@media(prefers-reduced-motion:reduce){.av-backdrop,.av-modal{transition-duration:.01ms !important;}}
+</style>
+
+<div class="av-backdrop" id="avBackdrop" aria-hidden="true"></div>
+<div class="av-modal" id="avModal" role="dialog" aria-modal="true" aria-label="Video reading" aria-hidden="true" tabindex="-1">
+  <div class="av-bar">
+    <span class="av-eyebrow" id="avEyebrow">Video Reading</span>
+    <div class="av-bar-actions">
+      <button class="av-fs" type="button" aria-label="Toggle fullscreen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+      <button class="av-close" type="button" aria-label="Close video"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+  </div>
+  <div class="av-stage" id="avStage"></div>
+</div>
+
+<script>
+(function(){
+  /* Add a reading: map the article code (A01…A13) to its YouTube ID. */
+  var VIDEOS = { A01: 'v3ZJY3CT0Rc' };
+  var EYEBROW_PREFIX = 'A Reading \u2014 ';
+
+  var backdrop=document.getElementById('avBackdrop'), modal=document.getElementById('avModal');
+  if(!backdrop||!modal) return;
+  var stage=document.getElementById('avStage'), eyebrow=document.getElementById('avEyebrow');
+  var fsBtn=modal.querySelector('.av-fs'), closeBtn=modal.querySelector('.av-close');
+
+  function src(id){ return 'https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1'; }
+  function mount(id){ var f=document.createElement('iframe'); f.src=src(id); f.title='Video reading'; f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'; f.referrerPolicy='strict-origin-when-cross-origin'; f.allowFullscreen=true; stage.appendChild(f); }
+  function unmount(){ stage.innerHTML=''; }
+
+  function open(id,label){
+    eyebrow.textContent = label ? (EYEBROW_PREFIX+label) : 'Video Reading';
+    modal.setAttribute('aria-label', label ? ('Video reading \u2014 '+label) : 'Video reading');
+    unmount(); mount(id);
+    backdrop.classList.add('open'); modal.classList.add('open');
+    backdrop.setAttribute('aria-hidden','false'); modal.setAttribute('aria-hidden','false');
+    modal.focus();
+  }
+  function close(){
+    if(document.fullscreenElement){ document.exitFullscreen(); }
+    backdrop.classList.remove('open'); modal.classList.remove('open');
+    backdrop.setAttribute('aria-hidden','true'); modal.setAttribute('aria-hidden','true');
+    unmount();
+  }
+  function fs(){ if(!document.fullscreenElement){ modal.requestFullscreen && modal.requestFullscreen(); } else { document.exitFullscreen(); } }
+
+  fsBtn.addEventListener('click', fs);
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(!modal.classList.contains('open')) return; if(e.key==='Escape'||e.key==='Esc'){ document.fullscreenElement ? document.exitFullscreen() : close(); } });
+
+  function icon(){ return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>'; }
+
+  function inject(){
+    document.querySelectorAll('.article-section[data-audio]').forEach(function(section){
+      if(section.querySelector('.article-video-btn')) return;
+      var m=/AP_(A\d{2})_/.exec(section.dataset.audio||''); if(!m) return;
+      var id=VIDEOS[m[1]]; if(!id) return;
+      var titleEl=section.querySelector('.article-title');
+      var titleText=titleEl?titleEl.textContent.trim():'this article';
+      var b=document.createElement('button');
+      b.className='article-video-btn'; b.type='button';
+      b.setAttribute('aria-label','Watch the video reading of '+titleText);
+      b.innerHTML=icon()+'<span class="avb-label">Video</span>';
+      var slidesBtn=section.querySelector('.article-slides-btn');
+      var listenBtn=section.querySelector('.article-read-aloud-btn');
+      if(slidesBtn){ slidesBtn.insertAdjacentElement('afterend', b); }
+      else if(listenBtn){ listenBtn.insertAdjacentElement('afterend', b); }
+      else if(titleEl){ var n=titleEl.nextElementSibling; n?section.insertBefore(b,n):section.appendChild(b); }
+      b.addEventListener('click', function(){ open(id, titleText); });
+    });
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', inject); } else { inject(); }
+})();
+</script>
