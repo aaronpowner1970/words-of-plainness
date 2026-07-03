@@ -8,6 +8,12 @@
    Tokens inherited from styles.css (--gold-primary, --cream, etc.)
    ============================================================ */
 
+/* Restore viewport scrolling so the player's position:sticky works.
+   chapter.css sets html,body{overflow-x:hidden}, which forces overflow-y:auto
+   and makes the root a scroll container; clip prevents horizontal scroll
+   without establishing one. creation.css loads after chapter.css, so this wins. */
+html, body { overflow-x: clip; overflow-y: visible; }
+
 /* ── Hero “About” button ─────────────────────────────────────── */
 .creation-about-btn {
     margin-top: 0.75rem;
