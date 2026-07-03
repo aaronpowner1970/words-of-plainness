@@ -367,3 +367,69 @@ discordChannelId: ""
 <div class="whats-next-row">
     <a href="/writings/" class="whats-next-link">What&rsquo;s Next? Explore My Writings</a>
 </div>
+
+<!-- A3 "Watch the Film" pill -> /creation/  (injected into #of-creation-and-life only) -->
+<style>
+.article-film-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.85rem;
+    margin: 0 0 0.9rem 0.1rem;
+    background: var(--gold-primary, #C4943A);
+    border: 1px solid var(--gold-primary, #C4943A);
+    border-radius: 20px;
+    color: var(--brown-rich, #1F1012);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(212, 168, 74, 0.5);
+    transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+    animation: filmPulse 2.6s ease-in-out infinite;
+}
+.article-film-btn:hover {
+    background: var(--gold-light, #D4A84A);
+    box-shadow: 0 4px 16px rgba(212, 168, 74, 0.45);
+    transform: translateY(-1px);
+}
+.article-film-btn:active { transform: translateY(0); filter: brightness(1.05); }
+.article-film-btn:focus-visible { outline: 2px solid var(--cream-soft, #F5EFE4); outline-offset: 2px; }
+.article-film-btn svg { flex-shrink: 0; }
+@keyframes filmPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 168, 74, 0.45); }
+    50%      { box-shadow: 0 0 0 6px rgba(212, 168, 74, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .article-film-btn { animation: none; }
+}
+</style>
+<script>
+(function () {
+    'use strict';
+    function inject() {
+        var section = document.getElementById('of-creation-and-life');
+        if (!section || section.querySelector('.article-film-btn')) return;
+        var body = section.querySelector('.article-body');
+        var a = document.createElement('a');
+        a.className = 'article-film-btn';
+        a.href = '/creation/';
+        a.setAttribute('aria-label', 'Watch the film: His Work and Glory');
+        a.innerHTML =
+            '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+            '<path d="m22 8-6 4 6 4V8Z"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>' +
+            '<span>Watch the Film</span>';
+        if (body) { section.insertBefore(a, body); } else { section.appendChild(a); }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', inject);
+    } else {
+        inject();
+    }
+})();
+</script>

@@ -1,0 +1,63 @@
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/articles-panel.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/creation.css?v={{ site.version }}">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="chapter-hero creation-hero" data-pagefind-ignore>
+    <p class="articles-eyebrow">A Words of Plainness Film</p>
+    <h1 class="chapter-title">{{ title }}</h1>
+    <p class="articles-subtitle">{{ subtitle }}</p>
+    <button class="creation-about-btn" id="creationAboutBtn" type="button">About this film</button>
+</section>
+
+<!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->
+<div class="creation-stage-wrap" data-pagefind-ignore>
+    <div class="creation-player" id="creationPlayerWrap">
+        <!-- The IFrame API replaces this node with a youtube-nocookie iframe -->
+        <div id="creationVideo"></div>
+        <!-- Ended overlay: covers YouTube's end-screen suggestion grid -->
+        <div class="creation-ended" id="creationEnded" aria-hidden="true">
+            <p class="creation-ended-line">This film is a form of worship</p>
+            <p class="creation-ended-sub">No endorsements or polemics implied</p>
+            <button class="creation-replay" id="creationReplay" type="button">&#8635; Watch again</button>
+        </div>
+    </div>
+</div>
+
+<!-- Following transcript (auto-scrolls with the film; every claim is a citation span) -->
+<div class="creation-transcript" id="creationTranscript" data-pagefind-body>
+    <p class="ct-lead">Scroll along with the film. Each underlined passage opens the scriptures behind it &mdash; biblical witnesses first, Restoration witnesses beside them.</p>
+    {% for para in creation_transcript %}
+    <p class="ct-p">{% for span in para %}<span class="ct-span" data-s="{{ span.id }}" data-start="{{ span.start }}">{% for c in span.cues %}<span class="ct-cue" data-i="{{ c.i }}" data-cs="{{ c.s }}" data-ce="{{ c.e }}">{{ c.t }} </span>{% endfor %}</span> {% endfor %}</p>
+    {% endfor %}
+    <p class="ct-closing">This film is a form of worship &middot; No endorsements or polemics implied</p>
+</div>
+
+<!-- Resume-follow pill -->
+<button class="ct-resume" id="ctResume" type="button" aria-live="polite">&#8635; Resume follow</button>
+
+<!-- Entry / About worship notice -->
+<div class="creation-entry" id="creationEntry" role="dialog" aria-modal="true" aria-labelledby="creationEntryTitle">
+    <div class="creation-entry-card">
+        <img class="creation-entry-thumb" id="creationEntryThumb"
+             src="https://i.ytimg.com/vi/4CpGCkx19m4/maxresdefault.jpg" alt="His Work and Glory">
+        <h2 id="creationEntryTitle">This film is a form of worship.</h2>
+        <p>It is meant to praise God and share faith in His wonders, using the words of the scriptures in plainness and gratitude. We pray that you receive it in the Spirit it was intended.</p>
+        <p class="creation-entry-nop">No endorsements or polemics implied &mdash; of creeds, theologies, philosophies, traditions, or dogmas.</p>
+        <button id="creationEnterBtn" type="button">Enter</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>window.WOP_CREATION_CITES = {{ creation_citations | dump | safe }};</script>
+<script>window.WOP_CREATION_VIDEO_ID = "4CpGCkx19m4";</script>
+<script src="/js/creation.js?v={{ site.version }}"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+{% endblock %}

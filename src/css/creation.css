@@ -1,0 +1,276 @@
+/* ============================================================
+   CREATION FILM PAGE  (creation.css)
+   /creation/ — sticky player (YouTube nocookie) + following
+   transcript + comprehensive citation apparatus (reuses
+   articles-panel.css .ap- classes; adds a two-column
+   Biblical/Restoration body and a widened panel via
+   .ap-panel--creation).
+   Tokens inherited from styles.css (--gold-primary, --cream, etc.)
+   ============================================================ */
+
+/* ── Hero “About” button ─────────────────────────────────────── */
+.creation-about-btn {
+    margin-top: 0.75rem;
+    background: none;
+    border: 1px solid rgba(196, 148, 58, 0.5);
+    color: var(--gold-primary, #C4943A);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+.creation-about-btn:hover {
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+}
+
+/* ── Sticky player ───────────────────────────────────────────── */
+.creation-stage-wrap {
+    position: sticky;
+    top: 84px;                 /* clears the fixed site header */
+    z-index: 5;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 clamp(0.75rem, 3vw, 1.5rem);
+    background: var(--brown-rich, #1F1012);
+}
+.creation-player {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+    background: #000;
+}
+.creation-player iframe,
+.creation-player #creationVideo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+/* ENDED overlay — covers YouTube's end-screen suggestion grid */
+.creation-ended {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    text-align: center;
+    padding: 1rem;
+    background: rgba(10, 7, 6, 0.94);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+.creation-ended.creation-ended--show { opacity: 1; pointer-events: auto; }
+.creation-ended-line {
+    font-family: var(--font-serif, Georgia, serif);
+    color: var(--cream-soft, #F5EFE4);
+    font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+}
+.creation-ended-sub {
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    color: var(--gold-light, #D4A84A);
+    font-size: 0.95rem;
+}
+.creation-replay {
+    margin-top: 0.75rem;
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+    border: none;
+    border-radius: 8px;
+    padding: 0.55rem 1.3rem;
+    font-family: var(--font-sans, sans-serif);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.creation-replay:hover { background: var(--gold-light, #D4A84A); }
+@media (max-width: 700px) {
+    .creation-stage-wrap { top: 64px; }
+}
+
+/* ── Transcript ──────────────────────────────────────────────── */
+.creation-transcript {
+    max-width: 760px;
+    margin: 1.5rem auto 0;
+    padding: 0 clamp(1rem, 4vw, 1.75rem) 40vh;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(1.05rem, 2.05vw, 1.28rem);
+    line-height: 1.95;
+    color: var(--cream, #E8DCC4);
+}
+.ct-lead {
+    font-style: italic;
+    text-align: center;
+    color: var(--cream-dark, #D4C8B0);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    padding: 0.5rem 5% 1.5rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.16);
+    margin-bottom: 1.25rem;
+}
+.ct-p { margin: 0 0 1.35em; }
+
+/* interactive citation span (mirrors [data-span] in articles-panel.css) */
+.ct-span {
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.15s ease;
+}
+.ct-span[data-has-cite] {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: rgba(196, 148, 58, 0.5);
+    text-underline-offset: 3px;
+}
+.ct-span[data-status="draft"] {
+    text-decoration-color: rgba(196, 148, 58, 0.85);
+}
+.ct-span:hover { background-color: rgba(196, 148, 58, 0.14); }
+.ct-span.ct-open {
+    background-color: rgba(196, 148, 58, 0.22);
+    outline: 1px solid rgba(196, 148, 58, 0.4);
+    outline-offset: 1px;
+}
+
+/* active-cue highlight (karaoke follow) */
+.ct-cue { color: var(--cream-dark, #D4C8B0); transition: color 0.25s, text-shadow 0.25s; }
+.ct-cue.ct-lit {
+    color: var(--cream-soft, #F5EFE4);
+    text-shadow: 0 0 18px rgba(196, 148, 58, 0.35);
+}
+
+.ct-closing {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(196, 148, 58, 0.25);
+    text-align: center;
+    font-style: italic;
+    color: var(--gold-light, #D4A84A);
+    font-size: 1.02rem;
+}
+
+/* ── Resume-follow pill ──────────────────────────────────────── */
+.ct-resume {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 30;
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+    border: none;
+    border-radius: 22px;
+    padding: 0.55rem 1.1rem;
+    font-family: var(--font-sans, sans-serif);
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+.ct-resume.ct-show { opacity: 1; pointer-events: auto; }
+
+/* ── Citation panel: widen + two columns (extends .ap-panel) ─── */
+@media (min-width: 1200px) {
+    .ap-panel.ap-panel--creation { width: min(640px, 46vw); }
+}
+.ap-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+@media (max-width: 620px) {
+    .ap-cols { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+.ap-col-empty {
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.4;
+    padding: 0.5rem 0;
+    margin: 0;
+}
+.ap-pending {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--cream-dark, #D4C8B0);
+    background: rgba(196, 148, 58, 0.06);
+    border: 1px solid rgba(196, 148, 58, 0.15);
+    border-radius: var(--radius-sm, 4px);
+    padding: 0.85rem 1rem;
+}
+.ap-anchor-ref a { color: inherit; text-decoration: none; }
+.ap-anchor-ref a:hover { text-decoration: underline; }
+
+/* ── Entry / About worship notice ────────────────────────────── */
+.creation-entry {
+    position: fixed;
+    inset: 0;
+    z-index: 2100;
+    background: rgba(10, 7, 6, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow-y: auto;
+    transition: opacity 0.4s ease;
+}
+.creation-entry.creation-hide { opacity: 0; pointer-events: none; }
+.creation-entry-card { max-width: 620px; text-align: center; margin: auto; }
+.creation-entry-thumb {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(196, 148, 58, 0.5);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
+    margin-bottom: 22px;
+}
+.creation-entry h2 {
+    font-family: var(--font-serif, Georgia, serif);
+    color: var(--cream-soft, #F5EFE4);
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+.creation-entry p {
+    font-family: var(--font-serif, Georgia, serif);
+    color: var(--cream, #E8DCC4);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+.creation-entry-nop {
+    color: var(--gold-light, #D4A84A);
+    font-size: 0.95rem;
+    margin: 18px 0 26px !important;
+}
+.creation-entry button {
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 30px;
+    font-family: var(--font-sans, sans-serif);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+.creation-entry button:hover { background: var(--gold-light, #D4A84A); }
+
+@media (prefers-reduced-motion: reduce) {
+    .ct-cue, .ct-span, .ct-resume, .creation-entry { transition-duration: 0.01ms !important; }
+}
