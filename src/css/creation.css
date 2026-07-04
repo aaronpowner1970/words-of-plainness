@@ -129,11 +129,11 @@ html, body { overflow-x: clip; overflow-y: visible; }
 
 /* interactive citation span (mirrors [data-span] in articles-panel.css) */
 .ct-span {
-    cursor: pointer;
     border-radius: 3px;
     transition: background-color 0.15s ease;
 }
 .ct-span[data-has-cite] {
+    cursor: pointer;
     text-decoration: underline;
     text-decoration-style: dotted;
     text-decoration-color: rgba(196, 148, 58, 0.5);
@@ -142,7 +142,7 @@ html, body { overflow-x: clip; overflow-y: visible; }
 .ct-span[data-status="draft"] {
     text-decoration-color: rgba(196, 148, 58, 0.85);
 }
-.ct-span:hover { background-color: rgba(196, 148, 58, 0.14); }
+.ct-span[data-has-cite]:hover { background-color: rgba(196, 148, 58, 0.14); }
 .ct-span.ct-open {
     background-color: rgba(196, 148, 58, 0.22);
     outline: 1px solid rgba(196, 148, 58, 0.4);

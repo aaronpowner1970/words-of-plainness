@@ -28,9 +28,15 @@
         return { el: el, s: parseFloat(el.dataset.cs), e: parseFloat(el.dataset.ce) };
     });
 
+    // A span is interactive only when it carries real, viewable citation content
+    // (drafted or locked). Pending scaffold stubs and removed narrative bridges
+    // (e.g. s18, s35, s56, s57) get no marker — they render as inert prose.
     spans.forEach(function (sp) {
         var d = CITES[sp.dataset.s];
-        if (d) { sp.setAttribute('data-has-cite', ''); sp.setAttribute('data-status', d.st || 'pending'); }
+        if (d && d.st && d.st !== 'pending') {
+            sp.setAttribute('data-has-cite', '');
+            sp.setAttribute('data-status', d.st);
+        }
     });
 
     var player = null, playerReady = false;
@@ -191,6 +197,7 @@
     }
 
     spans.forEach(function (sp) {
+        if (!sp.hasAttribute('data-has-cite')) return;   // inert bridge / pending stub
         sp.addEventListener('click', function () { openPanel(sp); });
         sp.setAttribute('tabindex', '0');
         sp.addEventListener('keydown', function (e) {
