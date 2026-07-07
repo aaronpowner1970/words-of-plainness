@@ -280,3 +280,37 @@ html, body { overflow-x: clip; overflow-y: visible; }
 @media (prefers-reduced-motion: reduce) {
     .ct-cue, .ct-span, .ct-resume, .creation-entry { transition-duration: 0.01ms !important; }
 }
+
+/* ── "Play from here": deliberate seek control in the creation citation
+   panel header. Scoped to .ap-panel--creation so the shared /articles/
+   apparatus is untouched. Seeks to the span's data-start + plays + closes
+   (wired in creation.js). ── */
+.ap-panel--creation .ap-seek {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.34rem;
+    flex-shrink: 0;
+    padding: 0.3rem 0.7rem;
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+    border: 1px solid #8a6722;
+    border-radius: 20px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+.ap-panel--creation .ap-seek svg { display: block; flex-shrink: 0; }
+.ap-panel--creation .ap-seek:hover { background: var(--gold-light, #D4A84A); }
+.ap-panel--creation .ap-seek:active { transform: scale(0.97); }
+.ap-panel--creation .ap-seek:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+    .ap-panel--creation .ap-seek { transition-duration: 0.01ms !important; }
+}
