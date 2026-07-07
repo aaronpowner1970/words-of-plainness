@@ -71,6 +71,26 @@
     }
 
     /* ---- follow + highlight (poll the API clock) ---- */
+    var stageWrap = document.querySelector('.creation-stage-wrap');
+
+    // Center the active line in the reading band *below* the sticky player, not
+    // in the whole viewport. On desktop the tall pinned player pushes viewport-
+    // center onto its own bottom edge, so the lit line rode the player border.
+    // Measured live each call: adapts to desktop/mobile, resize, fullscreen, and
+    // the not-yet-pinned state (player off-screen -> offset 0 -> old behavior).
+    function centerCue(el) {
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var top = 0;
+        if (stageWrap) {
+            var pr = stageWrap.getBoundingClientRect();
+            top = Math.min(Math.max(pr.bottom, 0), vh);   // how much of the top the player covers
+        }
+        if (vh - top < 160) top = Math.max(0, vh - 320);  // guard a too-thin band on short windows
+        var r = el.getBoundingClientRect();
+        var target = top + (vh - top) / 2;
+        window.scrollBy({ top: (r.top + r.height / 2) - target, behavior: 'smooth' });
+    }
+
     function startPoll() { if (!pollTimer) { pollTimer = window.setInterval(tick, 200); tick(); } }
 
     function activeCue(t) {
@@ -90,7 +110,7 @@
                 c.classList.add('ct-lit');
                 if (follow) {
                     programmatic = true;
-                    c.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                    centerCue(c);
                     window.clearTimeout(tick._p);
                     tick._p = window.setTimeout(function () { programmatic = false; }, 650);
                 }
@@ -116,7 +136,7 @@
     }, { passive: true });
     if (resume) resume.addEventListener('click', function () {
         follow = true; resume.classList.remove('ct-show');
-        if (litEl) { programmatic = true; litEl.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        if (litEl) { programmatic = true; centerCue(litEl);
             window.setTimeout(function () { programmatic = false; }, 650); }
     });
 
