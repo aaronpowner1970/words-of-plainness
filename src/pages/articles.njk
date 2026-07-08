@@ -433,3 +433,110 @@ discordChannelId: ""
     }
 })();
 </script>
+<!-- ============================================================= -->
+<!-- Articles narration-video pills  (IRL Articles-reading series) -->
+<!-- Data-driven: add ONE line to NARRATION_VIDEOS per article as  -->
+<!-- each YouTube narration goes live. Independent of the A3       -->
+<!-- "Watch the Film" pill (different class + guard), so an article -->
+<!-- may carry both a film pill and a narration pill.              -->
+<!--                                                               -->
+<!-- A03 IS THE SERIES EXCEPTION: "Of Creation and Life" uses the  -->
+<!-- unique "Watch the Film" pill linking to /creation/, NOT a     -->
+<!-- YouTube narration pill. DO NOT add of-creation-and-life to    -->
+<!-- NARRATION_VIDEOS.                                             -->
+<!--                                                               -->
+<!-- Section IDs by article:                                       -->
+<!--   A01 of-plainness                                            -->
+<!--   A02 of-god                                                  -->
+<!--   A03 of-creation-and-life   *** EXCEPTION — film pill to /creation/ -->
+<!--   A04 of-gods-word                                            -->
+<!--   A05 of-jesus-christ                                         -->
+<!--   A06 of-salvation                                            -->
+<!--   A07 of-the-kingdom-at-hand                                  -->
+<!--   A08 of-fellow-believers                                     -->
+<!--   A09 of-finding-our-way                                      -->
+<!--   A10 of-living-by-grace                                      -->
+<!--   A11 of-covenants-and-commitments                            -->
+<!--   A12 of-immortality-and-eternal-life                         -->
+<!--   A13 of-our-confidence                                       -->
+<!-- ============================================================= -->
+<style>
+.article-narration-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.85rem;
+    margin: 0 0 0.9rem 0.1rem;
+    background: var(--gold-primary, #C4943A);
+    border: 1px solid var(--gold-primary, #C4943A);
+    border-radius: 20px;
+    color: var(--brown-rich, #1F1012);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(212, 168, 74, 0.5);
+    transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+    animation: narrationPulse 2.6s ease-in-out infinite;
+}
+.article-narration-btn:hover {
+    background: var(--gold-light, #D4A84A);
+    box-shadow: 0 4px 16px rgba(212, 168, 74, 0.45);
+    transform: translateY(-1px);
+}
+.article-narration-btn:active { transform: translateY(0); filter: brightness(1.05); }
+.article-narration-btn:focus-visible { outline: 2px solid var(--cream-soft, #F5EFE4); outline-offset: 2px; }
+.article-narration-btn svg { flex-shrink: 0; }
+@keyframes narrationPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 168, 74, 0.45); }
+    50%      { box-shadow: 0 0 0 6px rgba(212, 168, 74, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .article-narration-btn { animation: none; }
+}
+</style>
+<script>
+(function () {
+    'use strict';
+    // sectionId -> YouTube video ID. Add one line per article as narrations go live.
+    // Do NOT add 'of-creation-and-life' (A03) — it uses the film pill to /creation/.
+    var NARRATION_VIDEOS = {
+        'of-jesus-christ': '_HWBD4A2Hyk'   // A05 — Of Jesus Christ
+    };
+    function makePill(videoId, title) {
+        var a = document.createElement('a');
+        a.className = 'article-narration-btn';
+        a.href = 'https://youtu.be/' + videoId;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.setAttribute('aria-label',
+            'Watch the narration of “' + title + '” on YouTube (opens in a new tab)');
+        a.innerHTML =
+            '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+            '<path d="m22 8-6 4 6 4V8Z"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>' +
+            '<span>Watch the Narration</span>';
+        return a;
+    }
+    function inject() {
+        Object.keys(NARRATION_VIDEOS).forEach(function (sectionId) {
+            var section = document.getElementById(sectionId);
+            if (!section || section.querySelector('.article-narration-btn')) return;
+            var titleEl = section.querySelector('.article-title');
+            var title = titleEl ? titleEl.textContent.trim() : 'this article';
+            var body = section.querySelector('.article-body');
+            var a = makePill(NARRATION_VIDEOS[sectionId], title);
+            if (body) { section.insertBefore(a, body); } else { section.appendChild(a); }
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', inject);
+    } else {
+        inject();
+    }
+})();
+</script>
