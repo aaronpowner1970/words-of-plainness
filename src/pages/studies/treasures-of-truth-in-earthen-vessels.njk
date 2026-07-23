@@ -1,0 +1,591 @@
+---
+layout: layouts/page.njk
+title: "Treasures of Truth in Earthen Vessels: Why the Living Voice Reaches Farther Than the Record"
+pageTitle: "Treasures of Truth in Earthen Vessels"
+pageSubtitle: "Why the Living Voice Reaches Farther Than the Record"
+permalink: /studies/treasures-of-truth-in-earthen-vessels/
+# --- Canonical Tag Vocabulary v1.0 (facets pending build migration; harmless until wired) ---
+facets:
+  cluster: [plain-religion]
+  accompanies: [ministry-wide]
+  topic-major: [epistemology]
+  topic-minor: [revelation, scripture, partial-knowing, broken-vessels, merognosticism]
+  audience: [interfaith, latter-day-saint, scholar]
+  type: [study-pathway]
+relations:
+  - slug: merognosticism
+    role: companion-to
+  - slug: broken-vessels
+    role: companion-to
+---
+
+<!--
+  DEPLOY NOTES (for Claude Code, direct-push-to-main):
+  1. The <style> block below is copied from the page-local pattern in
+     church-of-the-lamb.njk (study-* classes are defined per-page, not global).
+     Reconcile against the current church-of-the-lamb.njk / sermon-on-the-mount.njk
+     before deploy; drop any rule that has since moved to a global stylesheet.
+     Two small additions are marked ADDED: .study-crossref and sup.study-dagger.
+  2. BYTE-VERIFY every scripture quotation against churchofjesuschrist.org/study
+     before deploy — especially the Restoration passages (standing cadence).
+     Quotes here are KJV / standard-works to best knowledge, not yet byte-verified.
+  3. facets frontmatter follows Canonical Tag Vocabulary v1.0; if the build does
+     not yet consume it, it is inert. Reconcile with the live migration state.
+-->
+
+<style>
+.study-intro {
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.92;
+    font-style: italic;
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+.study-section-heading {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.25);
+}
+
+.study-subsection-heading {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.study-prose {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.92;
+    margin-bottom: 1.25rem;
+}
+
+.study-prose a.scripture-link {
+    color: var(--gold-primary);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(196, 148, 58, 0.5);
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.study-prose a.scripture-link:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+}
+
+.study-prose a.scripture-link::after {
+    display: none;
+}
+
+.study-scripture-block {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.92;
+    margin: 1.5rem 0 1.5rem 1.5rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--gold-primary);
+    background: rgba(196, 148, 58, 0.04);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.study-scripture-block .ref {
+    display: block;
+    font-style: normal;
+    font-size: 0.95rem;
+    margin-top: 0.6rem;
+    opacity: 0.85;
+}
+
+.study-scripture-block a.scripture-link {
+    color: var(--gold-primary);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(196, 148, 58, 0.5);
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.study-scripture-block a.scripture-link:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+}
+
+.statement-callout {
+    border-left: 3px solid var(--gold-primary);
+    background: rgba(196, 148, 58, 0.06);
+    padding: 20px 24px;
+    margin: 1.5rem 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.statement-callout p {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--cream);
+    opacity: 0.92;
+    margin-bottom: 0.75rem;
+}
+
+.statement-callout p:last-child {
+    margin-bottom: 0;
+}
+
+/* ADDED for this study: merognosis dagger cross-reference footnote */
+sup.study-dagger a {
+    color: var(--gold-primary);
+    text-decoration: none;
+}
+
+.study-crossref {
+    max-width: 720px;
+    margin: 1.5rem auto 0;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--cream-dark);
+    opacity: 0.7;
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(196, 148, 58, 0.3);
+}
+
+.study-crossref a {
+    color: var(--gold-primary);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(196, 148, 58, 0.5);
+}
+
+.study-sources {
+    max-width: 720px;
+    margin: 0 auto;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--cream);
+    opacity: 0.75;
+    padding-left: 1.5rem;
+}
+
+.study-sources li {
+    margin-bottom: 0.5rem;
+}
+
+.study-sources a {
+    color: var(--gold-primary);
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(196, 148, 58, 0.4);
+    transition: color 0.2s, border-color 0.2s;
+    word-break: break-all;
+}
+
+.study-sources a:hover {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold-light);
+}
+
+.study-footer-note {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--cream-dark);
+    opacity: 0.5;
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .study-scripture-block {
+        margin-left: 0.5rem;
+        padding: 1rem 1.15rem;
+    }
+
+    .statement-callout {
+        padding: 15px 18px;
+    }
+}
+</style>
+
+<!-- Indexed by Pagefind for /search/ -->
+<div data-pagefind-body>
+
+<p class="study-intro">
+    A Words of Plainness Study by Brother Aaron&mdash;July 2026
+</p>
+
+<!-- ===================================================================
+     0. THE QUESTION THAT STARTED THIS
+==================================================================== -->
+<section class="content-section alt" id="the-question">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Question That Started This</h2>
+
+        <p class="study-prose">This study began with a question I could not set down.</p>
+
+        <p class="study-prose">I love the scriptures. I have also spent much of my life being taught, in a hundred quiet ways, that the written word is the end of the matter&mdash;that if a thing is not on the page, or not in the creed, it cannot be trusted. And yet, again and again&mdash;in campgrounds and hospital rooms and across kitchen tables&mdash;I have watched the Spirit of God speak to a soul directly and say plainly what no page had ever said to them. I have felt Him do it in my own heart.</p>
+
+        <p class="study-prose">So I began to ask, in plainness:</p>
+
+        <div class="statement-callout">
+            <p>If the same Spirit who gave us the scriptures is still speaking, does the living voice of God reach a soul more surely than the written record can?</p>
+            <p>The word is true&mdash;but it came to us through prophets who saw only in part, from within a limited mortal perspective, recorded in the imperfect languages and cultures of their day, copied and carried and then translated by mortal hands for uncounted generations.</p>
+            <p>What confidence, then, ought we to place in scriptural records and human interpretations, set beside the personal revelation available to us now from the Spirit of God? Does not the same divine voice that speaks to us today come from the same God&mdash;without all of that wear?</p>
+            <p>And if it does&mdash;if the living word reaches farther than the written one&mdash;how do we honor that without cutting the anchor and drifting off after every human notion or philosophy of our own making?</p>
+        </div>
+
+        <p class="study-prose">I took these questions to the scriptures themselves. What follows is their answer.</p>
+    </div>
+</section>
+
+<!-- ===================================================================
+     I. THE FRAME
+==================================================================== -->
+<section class="content-section" id="frame">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Treasure and the Vessel</h2>
+
+        <p class="study-prose">Paul gives us the image in a single sentence. &ldquo;But we have this treasure in earthen vessels, that the excellency of the power may be of God, and not of us&rdquo; (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/2-cor/4?lang=eng&id=p7#p7" target="_blank" rel="noopener">2&nbsp;Corinthians&nbsp;4:7</a>). The treasure is God&rsquo;s. The vessel is clay. And the whole of this study lives in the space between those two words.</p>
+
+        <p class="study-prose">The written record is a faithful vessel. It is not a broken one. But it is earthen. A revelation given to a prophet passed first through his own limited comprehension, for he saw in part what God is in full. It was worded after the manner of his language, in the idiom and vocabulary he had to hand. It was written by mortal fingers, gathered and copied by human hands, carried across centuries, and translated out of tongues that few of its readers will ever speak. Each of those is a vessel in its own right&mdash;the prophet&rsquo;s comprehension, his language, the copyist&rsquo;s hand, the translator&rsquo;s craft&mdash;and each is earthen. At every one the treasure remained the treasure, but it was being carried in clay.</p>
+
+        <p class="study-prose">Living revelation reaches the disciple by another road&mdash;through none of those vessels at all. When the Spirit of God speaks to a soul directly, the word arrives from the same Source without that accumulated mediation. It has not yet been compressed into one prophet&rsquo;s comprehension, or fitted to one prophet&rsquo;s language, or copied, canonized, and translated before it reaches you. This is why the living voice can carry a higher salvific truth-value and a more exact situational guidance than the record can&mdash;not because Scripture errs, but because the record is earthen and the living voice is not.</p>
+
+        <p class="study-prose">The Scriptures below are gathered to bear witness to this one truth. They are set out Bible-first, with the Restoration confirming, and they are meant to be read slowly. This is not an argument against the written word. It is an argument about what the written word is for, and about the living Voice that gave it and has never stopped speaking.</p>
+
+        <div class="statement-callout">
+            <p>The record is the treasure carried in clay. The living Voice is the One who filled the vessel&mdash;and who still speaks.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===================================================================
+     II. THE VESSEL (HINGE)
+==================================================================== -->
+<section class="content-section alt" id="the-vessel">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Vessels: Why the Record Is Earthen and the Living Voice Is Not</h2>
+
+        <p class="study-prose">Before we can say the living Voice reaches farther, we have to be honest about the clay. These passages name, without cynicism, the several vessels every written revelation is carried through: the prophet&rsquo;s partial sight, his mortal language, the labor of transmission, the losses of compilation, and the limits of translation. Scripture itself confesses them. The Bible names the earthenness; the Restoration then makes the confession explicit.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;But we have this treasure in earthen vessels, that the excellency of the power may be of God, and not of us.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/2-cor/4?lang=eng&id=p7#p7" target="_blank" rel="noopener">2&nbsp;Corinthians&nbsp;4:7</a></span>
+        </div>
+        <p class="study-prose">The frame itself: the treasure is genuine and the vessel is clay, and God intends it so, that the power be seen to be His.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;For we know in part, and we prophesy in part. &hellip; For now we see through a glass, darkly; but then face to face: now I know in part; but then shall I know even as also I am known.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-cor/13?lang=eng&id=p9,p12#p9" target="_blank" rel="noopener">1&nbsp;Corinthians&nbsp;13:9,&nbsp;12</a><sup class="study-dagger"><a href="/studies/merognosticism/" title="See the companion study">&dagger;</a></sup></span>
+        </div>
+        <p class="study-prose">Even the prophet who receives the revelation knows in part. The vessel is not only the page; it is the mortal mind that first received the light.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;And I heard, but I understood not: then said I, O my Lord, what shall be the end of these things? And he said, Go thy way, Daniel: for the words are closed up and sealed till the time of the end.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/ot/dan/12?lang=eng&id=p8-p9#p8" target="_blank" rel="noopener">Daniel&nbsp;12:8&ndash;9</a></span>
+        </div>
+        <p class="study-prose">The prophet faithfully records what he does not himself fully understand&mdash;the vessel carries more than the vessel comprehends.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;Of which salvation the prophets have inquired and searched diligently &hellip; searching what, or what manner of time the Spirit of Christ which was in them did signify.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-pet/1?lang=eng&id=p10-p12#p10" target="_blank" rel="noopener">1&nbsp;Peter&nbsp;1:10&ndash;12</a></span>
+        </div>
+        <p class="study-prose">The prophets searched their own words to learn what the Spirit meant by them; the revelation exceeded its first recipients.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;I have yet many things to say unto you, but ye cannot bear them now.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/16?lang=eng&id=p12#p12" target="_blank" rel="noopener">John&nbsp;16:12</a></span>
+        </div>
+        <p class="study-prose">Christ Himself withheld truth the vessels of that hour could not yet contain&mdash;revelation is measured to the receiver&rsquo;s capacity.</p>
+
+        <h3 class="study-subsection-heading">The Restoration Makes the Confession Plain</h3>
+
+        <p class="study-prose">What the Bible confesses in image, the Restoration states as doctrine. The keystone is the eighth Article of Faith, which is unafraid to name the condition of the vessel:</p>
+
+        <div class="study-scripture-block">
+            &ldquo;We believe the Bible to be the word of God as far as it is translated correctly; we also believe the Book of Mormon to be the word of God.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/pgp/a-of-f/1?lang=eng&id=p8#p8" target="_blank" rel="noopener">Articles&nbsp;of&nbsp;Faith&nbsp;1:8</a> <em>(keystone)</em></span>
+        </div>
+        <p class="study-prose">The clause &ldquo;as far as it is translated correctly&rdquo; is the whole doctrine of the earthen vessel in seven words: the word of God, carried by a fallible means.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;There are many plain and precious things taken away from the book &hellip; because of these things which are taken away &hellip; an exceedingly great many do stumble.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/1-ne/13?lang=eng&id=p26-p29#p26" target="_blank" rel="noopener">1&nbsp;Nephi&nbsp;13:26&ndash;29</a></span>
+        </div>
+        <p class="study-prose">The record has suffered loss in transmission&mdash;the vessel arrives with parts of the treasure missing.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;And because that I have spoken one word ye need not suppose that I cannot speak another; for my work is not yet finished.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/29?lang=eng&id=p3-p10#p3" target="_blank" rel="noopener">2&nbsp;Nephi&nbsp;29:3&ndash;10</a></span>
+        </div>
+        <p class="study-prose">To treat the record as complete is to presume upon a God who has not finished speaking; a closed canon is a claim He never made.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;These commandments &hellip; were given unto my servants in their weakness, after the manner of their language, that they might come to understanding.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/1?lang=eng&id=p24-p28#p24" target="_blank" rel="noopener">Doctrine&nbsp;&amp;&nbsp;Covenants&nbsp;1:24&ndash;28</a></span>
+        </div>
+        <p class="study-prose">The Lord Himself says His word is fitted to the language and weakness of the servant who receives it&mdash;and owns that errors of men may attend it.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;I give unto men weakness that they may be humble &hellip; then will I make weak things become strong unto them.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/ether/12?lang=eng&id=p23-p27#p23" target="_blank" rel="noopener">Ether&nbsp;12:23&ndash;27</a></span>
+        </div>
+        <p class="study-prose">Moroni feared his &ldquo;weakness in writing&rdquo; would give occasion to mock; the Lord did not deny the weakness but promised grace to work through it&mdash;the vessel is clay, and grace is the treasure.</p>
+
+        <p class="study-crossref">
+            &dagger; On knowing &ldquo;in part&rdquo;&mdash;the merognosis at the heart of this study&mdash;see the companion, <a href="/studies/merognosticism/">Merognosticism: A Plain Confession of Partial Knowing</a>. On the universal fallibility of every human vessel, see <a href="/studies/broken-vessels/">Broken Vessels: Universal Fallibility and the Reach of Grace</a>.
+        </p>
+    </div>
+</section>
+
+<!-- ===================================================================
+     III. GROUP A
+==================================================================== -->
+<section class="content-section" id="spirit-source">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Spirit as the Source of Saving Knowledge</h2>
+
+        <p class="study-prose">If the record is earthen, what certifies its treasure? The same Spirit that gave it. Saving knowledge is not finally reached by study, argument, or inheritance; it is revealed. This is the positive ground beneath everything that follows&mdash;and it stands directly beneath Chapters&nbsp;3 and&nbsp;4 of <em>Words of Plainness</em>, on academic and spiritual knowing.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;But the natural man receiveth not the things of the Spirit of God: for they are foolishness unto him: neither can he know them, because they are spiritually discerned.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-cor/2?lang=eng&id=p9-p14#p9" target="_blank" rel="noopener">1&nbsp;Corinthians&nbsp;2:9&ndash;14</a></span>
+        </div>
+        <p class="study-prose">The biblical spine: saving truth is closed to natural means and opened only by the Spirit that reveals it.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;Blessed art thou, Simon Bar-jona: for flesh and blood hath not revealed it unto thee, but my Father which is in heaven.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/16?lang=eng&id=p15-p17#p15" target="_blank" rel="noopener">Matthew&nbsp;16:15&ndash;17</a></span>
+        </div>
+        <p class="study-prose">The saving confession that Jesus is the Christ comes by revelation, not by human teaching&mdash;and it is the rock.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;They are made known unto me by the Holy Spirit of God &hellip; I have fasted and prayed many days that I might know these things of myself.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/5?lang=eng&id=p45-p46#p45" target="_blank" rel="noopener">Alma&nbsp;5:45&ndash;46</a></span>
+        </div>
+        <p class="study-prose">Sure knowledge is grounded in personal revelation sought firsthand, not in inherited tradition.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;And by the power of the Holy Ghost ye may know the truth of all things.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/10?lang=eng&id=p3-p5#p3" target="_blank" rel="noopener">Moroni&nbsp;10:3&ndash;5</a></span>
+        </div>
+        <p class="study-prose">The truth of the record itself is confirmed by revelation&mdash;it is the Spirit that certifies which of the treasure the vessel holds.</p>
+    </div>
+</section>
+
+<!-- ===================================================================
+     IV. GROUP B
+==================================================================== -->
+<section class="content-section alt" id="living-christ">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Living Christ Above the Text Treated as an End</h2>
+
+        <p class="study-prose">The record is a testimony, and a testimony points beyond itself. When the page is loved as the destination rather than the door, it can become the very thing that keeps a soul from the Christ it was written to reveal. These passages hold the record in its right place: honored, but never mistaken for the life it testifies of.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;Search the scriptures; for in them ye think ye have eternal life: and they are they which testify of me. And ye will not come to me, that ye might have life.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/5?lang=eng&id=p39-p40#p39" target="_blank" rel="noopener">John&nbsp;5:39&ndash;40</a></span>
+        </div>
+        <p class="study-prose">The strongest single word on the matter: the text testifies <em>of</em> Him; it is not itself the life, and it can be held so tightly that one refuses to come to the One it names.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;Not of the letter, but of the spirit: for the letter killeth, but the spirit giveth life.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/2-cor/3?lang=eng&id=p6#p6" target="_blank" rel="noopener">2&nbsp;Corinthians&nbsp;3:6</a></span>
+        </div>
+        <p class="study-prose">The written code apart from the living Spirit does not save; the letter without the Spirit is death.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;I will put my law in their inward parts, and write it in their hearts &hellip; they shall all know me, from the least of them unto the greatest of them.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/31?lang=eng&id=p33-p34#p33" target="_blank" rel="noopener">Jeremiah&nbsp;31:33&ndash;34</a></span>
+        </div>
+        <p class="study-prose">The new covenant&rsquo;s promise is an inward, revealed knowing of God that supersedes the outward tablet and scroll.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;He, the Spirit of truth &hellip; will guide you into all truth &hellip; he shall teach you all things.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/16?lang=eng&id=p13#p13" target="_blank" rel="noopener">John&nbsp;16:13</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/14?lang=eng&id=p26#p26" target="_blank" rel="noopener">14:26</a></span>
+        </div>
+        <p class="study-prose">Truth-guidance is an ongoing, living act of the Spirit, not a closed deposit finished long ago.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;The words of Christ will tell you all things what ye should do &hellip; the Holy Ghost &hellip; will show unto you all things what ye should do.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/32?lang=eng&id=p3,p5#p3" target="_blank" rel="noopener">2&nbsp;Nephi&nbsp;32:3,&nbsp;5</a></span>
+        </div>
+        <p class="study-prose">The Restoration confirms it plainly: the living guidance of the Spirit supplies the situational direction the fixed text alone cannot.</p>
+
+        <p class="study-crossref">
+            The same promise&mdash;Christ manifesting Himself to the individual soul, &ldquo;not mediated by clergy, by councils, or by creeds&rdquo; (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/14?lang=eng&id=p21-p23#p21" target="_blank" rel="noopener">John&nbsp;14:21&ndash;23</a>)&mdash;is treated at length in the companion study, <a href="/studies/church-of-the-lamb/">The Church of the Lamb of God</a>.
+        </p>
+    </div>
+</section>
+
+<!-- ===================================================================
+     V. GROUP C
+==================================================================== -->
+<section class="content-section" id="more-sure-word">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The More Sure Word</h2>
+
+        <p class="study-prose">Scripture calls the witness of the Spirit not merely another word but a <em>more sure</em> one. The highest assurance of salvation a soul can carry in this life is not a verse memorized but a Voice heard&mdash;God revealing to the disciple, personally, that he is His. This is the crown of the pattern, not its everyday floor; and the last passage in this group opens the door to the guardrail that keeps it honest.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;We have also a more sure word of prophecy &hellip; holy men of God spake as they were moved by the Holy Ghost.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/2-pet/1?lang=eng&id=p19-p21#p19" target="_blank" rel="noopener">2&nbsp;Peter&nbsp;1:19&ndash;21</a></span>
+        </div>
+        <p class="study-prose">The biblical anchor: the word borne by the Holy Ghost is the surer word, and it is the Spirit&rsquo;s moving that made prophecy in the first place.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;The more sure word of prophecy means a man&rsquo;s knowing that he is sealed up unto eternal life, by revelation and the spirit of prophecy, through the power of the Holy Priesthood.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/131?lang=eng&id=p5#p5" target="_blank" rel="noopener">Doctrine&nbsp;&amp;&nbsp;Covenants&nbsp;131:5</a></span>
+        </div>
+        <p class="study-prose">The Restoration&rsquo;s explicit gloss on Peter: the supreme salvific assurance comes by personal revelation. Read the two together, deliberately.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;I will tell you in your mind and in your heart, by the Holy Ghost &hellip; this is the spirit of revelation.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/8?lang=eng&id=p2-p3#p2" target="_blank" rel="noopener">Doctrine&nbsp;&amp;&nbsp;Covenants&nbsp;8:2&ndash;3</a></span>
+        </div>
+        <p class="study-prose">The definitional text for how the living word is received&mdash;in mind and heart together, the whole soul and not the brain alone.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;You must study it out in your mind; then you must ask me if it be right, and if it is right I will cause that your bosom shall burn within you.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/9?lang=eng&id=p7-p9#p7" target="_blank" rel="noopener">Doctrine&nbsp;&amp;&nbsp;Covenants&nbsp;9:7&ndash;9</a></span>
+        </div>
+        <p class="study-prose">And here the pattern polices itself: revelation is sought after honest study and confirmed, never seized as a shortcut around it. This verse is the bridge to the guardrail below.</p>
+    </div>
+</section>
+
+<!-- ===================================================================
+     VI. GROUP D
+==================================================================== -->
+<section class="content-section alt" id="living-voice">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Living Voice as Scripture</h2>
+
+        <p class="study-prose">The Voice that gave the record has never gone silent. God&rsquo;s ordinary way of dealing with His children is to speak&mdash;and what He speaks now, by His Spirit, is itself scripture, itself His word. Under the frame of this study the point sharpens: the living word outranks the prior record precisely because it has not yet passed through the vessel.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/ot/amos/3?lang=eng&id=p7#p7" target="_blank" rel="noopener">Amos&nbsp;3:7</a></span>
+        </div>
+        <p class="study-prose">The biblical spine: living revelation is God&rsquo;s standing method, not an exception to it.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;Whatsoever they shall speak when moved upon by the Holy Ghost shall be scripture, shall be the will of the Lord &hellip; shall be the voice of the Lord, and the power of God unto salvation.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/68?lang=eng&id=p4#p4" target="_blank" rel="noopener">Doctrine&nbsp;&amp;&nbsp;Covenants&nbsp;68:4</a></span>
+        </div>
+        <p class="study-prose">The Restoration confirms it: the Spirit-moved word spoken now carries the full authority of scripture&mdash;the living voice is not a lesser thing than the page.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;We believe all that God has revealed, all that He does now reveal, and we believe that He will yet reveal many great and important things pertaining to the Kingdom of God.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/pgp/a-of-f/1?lang=eng&id=p9#p9" target="_blank" rel="noopener">Articles&nbsp;of&nbsp;Faith&nbsp;1:9</a></span>
+        </div>
+        <p class="study-prose">The canon of revelation is open; the written word is not sealed against further light.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;God shall give unto you knowledge by his Holy Spirit &hellip; that has not been revealed since the world was until now.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/121?lang=eng&id=p26#p26" target="_blank" rel="noopener">Doctrine&nbsp;&amp;&nbsp;Covenants&nbsp;121:26</a></span>
+        </div>
+        <p class="study-prose">Revelation can exceed the sum of all prior record&mdash;the Voice is not bounded by what it has already said.</p>
+    </div>
+</section>
+
+<!-- ===================================================================
+     VII. GROUP E
+==================================================================== -->
+<section class="content-section" id="above-the-creeds">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">Above the Creeds and the Precepts of Men</h2>
+
+        <p class="study-prose">There is a further vessel, later and more brittle than Scripture: the creed&mdash;the human formula that gathers up revelation and, in time, is mistaken for it. A creed can be a faithful summary and a gift to the Church. It becomes a danger only when the formula is set above the living God it was meant to confess, so that men honor the wording and lose the Voice. Scripture warns of this first; the Restoration then names it.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;Their fear toward me is taught by the precept of men &hellip; in vain they do worship me, teaching for doctrines the commandments of men.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/ot/isa/29?lang=eng&id=p13#p13" target="_blank" rel="noopener">Isaiah&nbsp;29:13</a>; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/15?lang=eng&id=p8-p9#p8" target="_blank" rel="noopener">Matthew&nbsp;15:8&ndash;9</a></span>
+        </div>
+        <p class="study-prose">The biblical spine: worship built on human precept, with the heart removed far from God, is worship in vain&mdash;Christ Himself makes the charge.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;Beware lest any man spoil you through philosophy and vain deceit, after the tradition of men &hellip; and not after Christ.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/col/2?lang=eng&id=p8#p8" target="_blank" rel="noopener">Colossians&nbsp;2:8</a></span>
+        </div>
+        <p class="study-prose">The tradition of men is set explicitly against Christ Himself&mdash;the measure is never the formula but the living Lord.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;They were all wrong &hellip; that all their creeds were an abomination in his sight.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/pgp/js-h/1?lang=eng&id=p18-p19#p18" target="_blank" rel="noopener">Joseph&nbsp;Smith&mdash;History&nbsp;1:18&ndash;19</a> <em>(Restoration keystone)</em></span>
+        </div>
+        <p class="study-prose">The verdict falls on the <em>creeds</em>&mdash;on formulas of men that had displaced the living voice of God&mdash;and not upon the many sincere souls who have loved Christ within those traditions. Read rightly, the passage is the sharpest possible statement of this study&rsquo;s thesis: when a human formulation is set over living revelation, God calls the substitution what it is. The Restoration&rsquo;s answer is not contempt for other believers but the recovery of the Voice the formulas had crowded out.</p>
+
+        <p class="study-crossref">
+            The fuller treatment of creed-and-council theology set beside direct revelation&mdash;handled pastorally, and unilaterally toward every Christ-believing tradition&mdash;lives in the companion study, <a href="/studies/how-oft-would-i-have-gathered-you/">How Oft Would I Have Gathered You</a>.
+        </p>
+    </div>
+</section>
+
+<!-- ===================================================================
+     VIII. THE GUARDRAIL
+==================================================================== -->
+<section class="content-section alt" id="the-guardrail">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">The Guardrail: The Chart and the Compass</h2>
+
+        <p class="study-prose">Everything above can be misheard. A soul in a hurry could take &ldquo;the living voice reaches farther&rdquo; to mean &ldquo;my impression outranks any text&rdquo;&mdash;and with that, cut the very anchor these Scriptures were given to secure. So the study must end where the ministry always ends: with the discipline that keeps revelation honest.</p>
+
+        <p class="study-prose">Think of it as a sailor&rsquo;s navigation. Christ is the North Star&mdash;the fixed and external reference that does not move. The written record is the sure chart, tested and handed down, &ldquo;the testimony of the Lord is sure&rdquo; (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/19?lang=eng&id=p7#p7" target="_blank" rel="noopener">Psalm&nbsp;19:7</a>), the &ldquo;more sure word of prophecy&rdquo; (<a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/nt/2-pet/1?lang=eng&id=p19#p19" target="_blank" rel="noopener">2&nbsp;Peter&nbsp;1:19</a>). Personal revelation is the compass in the hand&mdash;the living instrument that reads your position now, where the chart cannot. We do not walk by the inward whisper alone. We do not walk by the written word alone. The compass is trusted because it calibrates to the same North Star the chart was drawn by.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;To the law and to the testimony: if they speak not according to this word, it is because there is no light in them.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/ot/isa/8?lang=eng&id=p20#p20" target="_blank" rel="noopener">Isaiah&nbsp;8:20</a></span>
+        </div>
+        <p class="study-prose">Every impression is tested against the pattern of the word. A leading that contradicts the plain testimony of Christ in Scripture is not the compass; it is a magnet in the hull.</p>
+
+        <div class="study-scripture-block">
+            &ldquo;You must study it out in your mind; then you must ask me if it be right &hellip; you shall feel that it is right.&rdquo;
+            <span class="ref">&mdash; <a class="scripture-link" href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/9?lang=eng&id=p7-p9#p7" target="_blank" rel="noopener">Doctrine&nbsp;&amp;&nbsp;Covenants&nbsp;9:7&ndash;9</a></span>
+        </div>
+        <p class="study-prose">The pattern is study first, then ask, then confirm&mdash;revelation crowns honest labor in the record; it does not replace it.</p>
+
+        <div class="statement-callout">
+            <p>The record and the living Voice do not compete. They witness to each other. The chart was drawn by the light of the same Star the compass points to; and the compass is trusted because it agrees with the Star that drew the chart.</p>
+            <p>The living voice reaches farther&mdash;not because the anchor is cut, but because the One who set the anchor is still holding the line.</p>
+        </div>
+
+        <p class="study-prose">And so we hold all of this the way Paul told us we must: in part. We know truly, but not yet wholly, &ldquo;for now we see through a glass, darkly.&rdquo; The disciple who has heard the living Voice does not thereby graduate from Scripture, nor from humility, nor from the fellowship of others who are also listening. He simply knows Whom he has believed&mdash;and keeps the chart open, the compass calibrated, and his eyes on the Star.</p>
+    </div>
+</section>
+
+<!-- ===================================================================
+     IX. SOURCES
+==================================================================== -->
+<section class="content-section" id="sources">
+    <div class="content-wrapper">
+        <h2 class="study-section-heading">Companion Studies</h2>
+
+        <ol class="study-sources">
+            <li><a href="/studies/merognosticism/">Merognosticism: A Plain Confession of Partial Knowing</a>&mdash;the doctrine of knowing &ldquo;in part&rdquo; that stands beneath this study&rsquo;s frame.</li>
+            <li><a href="/studies/broken-vessels/">Broken Vessels: Universal Fallibility and the Reach of Grace</a>&mdash;on the fallibility of every human vessel that carries the treasure.</li>
+            <li><a href="/studies/church-of-the-lamb/">The Church of the Lamb of God: Who Belongs to Christ?</a>&mdash;Christ manifesting Himself to the soul, unmediated by creed or council.</li>
+            <li><a href="/studies/how-oft-would-i-have-gathered-you/">How Oft Would I Have Gathered You</a>&mdash;creed-and-council theology set beside direct revelation.</li>
+            <li><em>Words of Plainness</em>, Chapters 3&ndash;5&mdash;Academic Knowledge, Spiritual Knowledge, and Sincere Prayer.</li>
+        </ol>
+    </div>
+</section>
+
+<p class="study-footer-note">
+    &ldquo;For my soul delighteth in plainness; for after this manner doth the Lord God work among the children of men.&rdquo; &mdash; 2 Nephi 31:3<br>
+    Words of Plainness &middot; Aaron Powner Publishing &middot; 2026
+</p>
+
+</div><!-- /data-pagefind-body -->
