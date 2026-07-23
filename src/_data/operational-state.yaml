@@ -1,327 +1,156 @@
 # ═══════════════════════════════════════════════════════════════════
 # Words of Plainness — Operational State
-# Current phase, workstreams, blockers, pipeline health,
-# milestones, and governance document index.
+# Current phase, workstreams, blockers, pipeline health, governance index.
 #
-# Last updated: April 15, 2026
+# This is a CURRENT-STATE file. It is kept lean on purpose.
+# Historical milestones live in the memory graph and ministry-rag
+# session_summaries — NOT here. Update this file in the same session
+# whenever phase, deployment status, or blockers change.
+#
+# Last updated: July 23, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
-  name: "Phase 3 — Beatitudes and Sermon on the Mount (Complete) + Phase 4 Partial"
-  description: "First four card chapters deployed (Ch 12, 13, 14, 16). Phase 4 partially complete. Next content milestone: remaining Character and Worship chapters (Ch 15, 17)."
-  development_phases:
-    - phase: 1
-      name: "Framework Launch"
-      status: complete
-      completed: "2026-02"
-    - phase: 2
-      name: "Learn of Me"
-      status: complete
-      completed: "2026-03-30"
-      notes: "All 5 chapters deployed (Ch 7-11). Movement 2 complete."
-    - phase: 3
-      name: "Beatitudes and Sermon on the Mount"
-      status: complete
-      completed: "2026-04"
-      notes: "Ch 12-13 deployed. Card-chapter authoring pipeline proven."
-    - phase: 4
-      name: "Character and Worship"
-      status: in-progress
-      notes: "Ch 14 and 16 deployed. Ch 15 (Repentance) and 17 (Christlike Virtues) remain."
-    - phase: 5
-      name: "Remaining Card-Chapters"
-      status: not-started
-    - phase: 6
-      name: "Hinge and Movement 4"
-      status: not-started
-      notes: "Movement 4 transplanted to Vol 2. Hinge (Ch 29) remains in Vol 1."
-    - phase: 7
-      name: "Benediction and Volume 2"
-      status: not-started
+  name: "Articles of Interfaith Discipleship — Full-Arc Completion"
+  description: >
+    Chapter content development is intentionally paused. Following a
+    prayer- and inspiration-directed sequence, Aaron set chapter authoring
+    down to complete the full arc of the Articles of Interfaith Discipleship
+    — the interfaith ministry's central instrument. The Articles are a
+    cross-volume declaration and a visual/conceptual map that launches all
+    interfaith discussions and ties to every chapter of Volume 1. They are
+    peer to both volume landing pages, not part of either.
+  resume_trigger: >
+    Chapter development resumes when the full Articles arc is complete:
+    declaration, citation apparatus, page + learning-tools assets, companion
+    essays, IRL video series, and the group-display / VR mode.
 
 # ═══════════════════════════════════════════════════════════════════
 # ACTIVE WORKSTREAMS
 # ═══════════════════════════════════════════════════════════════════
-
 workstreams:
 
-  - id: operational-framework
-    name: "Operational Framework (YAML Layer)"
+  - id: articles-arc
+    name: "Articles of Interfaith Discipleship — full arc"
+    status: active
+    priority: highest
+    state:
+      declaration: "Text locked 2026-04-25. 13 sections, 'Of ___' naming. Subtitle: Christ-Centered Declarations of Shared Beliefs."
+      apparatus: "13-article citation cluster v1.0 CLOSED 2026-05-19/20."
+      page: "/articles/ live — chapter-equivalent page with full toolbar."
+      assets: "LIVE: PDF, Visual Summary/infographic, Articles Podcast (3 episodes), per-article Slides viewer (A01–A13), Personal Reflection → Discipleship Journal. Facilitator-notes layer seeded; delivery method undecided."
+    frontier:
+      group_display_vr: >
+        ACTIVE FIELD-TEST. The 2D /articles/ page is displayed inside a
+        Bigscreen VR-integrated desktop browser during live group discussions;
+        effectiveness notes and feedback are being gathered. A dedicated
+        group-display mode was deliberately deferred to be informed by this
+        VR use before it lands as a site feature.
+    next_action: "VR field-test findings → group-display mode design (separate session; findings being organized by Aaron)."
+
+  - id: creation-film
+    name: "'His Work and Glory' creation film — /creation/"
     status: complete
-    priority: high
-    description: "Three YAML files as single source of truth. Session A: files committed. Session B: monthly atlas export script deployed and scheduled."
-    completed: "2026-04-15"
-    notes: "tools/atlas-export.ps1 deployed. Task Scheduler: every 4 Sundays, 4 AM. RAG reference document ingested."
-
-  - id: stale-data-fixes
-    name: "Stale Data Fixes"
-    status: partially-complete
     priority: low
-    description: "Landing page corrections identified in April 14 site audit."
-    completed_items:
-      - "/writings/ page counts fixed (30 chapters, 15 available) — commit bb6ab54"
-      - "discordChannelId deployed for Ch 8, 12, 13, 14 — commit 2c2f8e4"
-    remaining:
-      - page: /volume-1/
-        issue: "Ch 16 (Keeping the Sabbath) shows 'Coming Soon' despite being deployed"
-        fix: "Update volume-1.njk to show Ch 16 as available"
-        deferred_until: "Ch 15 deploys — will fix both Ch 15 and 16 in same commit"
-    next_action: "No action until Ch 15 is ready to deploy."
+    state: "Film + 135-span citation apparatus complete and deployed. Live at /creation/."
 
-  - id: chapter-15-authoring
-    name: "Ch 15 — Repentance as a Lifestyle"
-    status: not-started
+  - id: video-series
+    name: "IRL Articles-reading YouTube series"
+    status: active
     priority: medium
-    description: "Next card chapter to build. Includes Spiritual Cycles diagram."
-    next_action: "Access manuscript (Ms Ch 7 repentance theology), begin development package."
-    blocked_by: null
+    state: "Articles 1, 2, 4, 5, 6, 7 live on YouTube. A10 in production."
+    next_action: "Complete A10 video."
 
-  - id: community-safety-phase0
-    name: "Community Safety Phase 0"
-    status: complete
-    priority: high
-    description: "Abuse reporting infrastructure — prerequisite for all community features."
-    completed: "2026-04-15"
-    items:
-      - "Discord #report-a-concern channel"
-      - "Discord #content-and-rules with full guidelines"
-      - "Community Guidelines page (/community-guidelines/)"
-      - "AutoMod 5/5 rules active"
-      - "/safety/ page with reporting form (POST to Django contact endpoint)"
-    notes: "Phase 0 gate cleared. Community witness sharing (Checkbox 2) now unblocked for Phase 1 (moderation pipeline)."
+  - id: companion-essays
+    name: "Companion essays and studies (/studies/)"
+    status: active
+    priority: medium
+    state: >
+      DEPLOYED: Merognosticism, Contention and the Reach of Christ, Broken
+      Vessels, Lord Is It I?; plus chapter appendices Church of the Lamb of
+      God, How Oft Would I Have Gathered You, Sermon on the Mount Study
+      Pathway. Companion doorways wired into Article slides
+      (Merognosticism→A1, Broken Vessels→A4, Contention→A8, Lord Is It I?→A10).
+    deferred: "'Merognosticism and the Shape of Schism' — not drafted; gated, not blocking the arc."
 
-  - id: youtube-content
-    name: "YouTube Content Pipeline"
-    status: paused
+  - id: music-production
+    name: "Sacred music (Powner Method)"
+    status: active
+    priority: medium
+    state: >
+      One Voice, One Mind — entire composition drafted end-to-end at Gate 1A
+      (lead + leitmotif cello); Gate 2 (SATB expansion + Ace Studio render +
+      ElevenLabs solo baritone + Audacity assembly) is next. Yehoshua the Man
+      Sacred Reading Suite in catalogue. Calling the Straying Stranger Home
+      paused (Suno three-generation strategy).
+
+  - id: studio
+    name: "Mobile studio (RV)"
+    status: operational
     priority: low
-    description: "11 podcast overview videos uploaded. Yehoshua suite playlist ready. Chapter narration videos next."
-    next_action: "Add chapter narration MP4s to YouTube as second content type."
-    blocked_by: null
+    state: "OBS + NVIDIA Broadcast + Westcott green screen operational (obs-mcp live). Enables video ministry, podcast, VR recording, grandkids digital stage."
 
-  - id: calling-the-straying-stranger
-    name: "Calling the Straying Stranger Home"
+# ═══════════════════════════════════════════════════════════════════
+# PAUSED
+# ═══════════════════════════════════════════════════════════════════
+  - id: chapter-development
+    name: "Volume 1 chapter authoring"
     status: paused
+    priority: on-hold
+    reason: "Prayer-/inspiration-directed pivot to the Articles arc (see current_phase.resume_trigger)."
+    state: "Vol 1: 15 chapters deployed (1–14, 16). Vol 2: 0 deployed. See chapter-status.yaml for per-chapter detail."
+    resume_next: "Ch 15 (Repentance as a Lifestyle), then Ch 17 (Christlike Virtues) — completes Movement 3 'Character and Worship' group."
+
+# ═══════════════════════════════════════════════════════════════════
+# OPEN / BLOCKED
+# ═══════════════════════════════════════════════════════════════════
+  - id: search-ux
+    name: "Pagefind search enhancement"
+    status: open
     priority: low
-    description: "Ministry anthem — Suno three-generation strategy. LTX Studio video concept designed."
-    next_action: "Suno audio generation (three-generation approach per CTF_Duet_Three_Generation_Suno_Package.md)."
-    blocked_by: null
+    state: "Filter panel hidden site-wide; no data-pagefind-filter tags; no h2 data-pagefind-weight. Dedicated session reserved."
+
+  - id: community-witness-phase1
+    name: "Community witness sharing — moderation pipeline"
+    status: blocked
+    priority: low
+    blocked_by: "Phase 1 submission-moderation pipeline not built (Phase 0 abuse-reporting infrastructure complete 2026-04-15)."
+    workaround: "submit_for_community saves to localStorage only; no community display."
 
 # ═══════════════════════════════════════════════════════════════════
-# BLOCKED ITEMS
+# PIPELINE HEALTH  (dates are LAST-VERIFIED; several are >90d — re-verify)
 # ═══════════════════════════════════════════════════════════════════
-
-blocked_items:
-
-  - item: "Community witness sharing (R·J·W Checkbox 2)"
-    blocked_by: "Phase 1 moderation pipeline not yet built"
-    severity: medium
-    workaround: "submit_for_community saves to localStorage only. No community display."
-    notes: "Phase 0 gate cleared April 15. Next: Phase 1 (submission moderation pipeline)."
-
-  - item: "AI Conversational Response Agent"
-    blocked_by: "Design decision pending from Aaron. Requires published_content RAG collection separation."
-    severity: low
-    workaround: "Pagefind search at /search/ provides static search capability."
-
-# ═══════════════════════════════════════════════════════════════════
-# PIPELINE HEALTH
-# ═══════════════════════════════════════════════════════════════════
-
 pipeline_health:
-
-  notification_pipeline:
-    status: operational
-    last_test: "2026-04-08"
-    channels:
-      discord: operational
-      x_twitter: operational
-      facebook: operational
-      buttondown_rss: operational
-
-  music_production_pipeline:
-    status: operational
-    last_test: "2026-04-11"
-    notes: "Read Aloud batch production (generate_read_aloud.py) tested for Ch 12-14, 16."
-
-  backup_system:
-    status: operational
-    last_test: "2026-04-13"
-    schedule:
-      daily: "3 AM, 14-day retention"
-      weekly: "Sunday 3 AM, 8 archives"
-      monthly: "Every 4 weeks, 3 archives"
-    destination: "H:\\My Drive\\Professional\\Aaron Powner Publishing\\backups\\"
-    notes: "Restore script (wop-restore.ps1) not yet tested."
-
-  atlas_export:
-    status: operational
-    last_test: "2026-04-15"
-    schedule: "Every 4 Sundays, 4 AM"
-    destination: "H:\\My Drive\\Professional\\Aaron Powner Publishing\\backups\\atlas\\"
-    retention: "6-month auto-prune"
-    notes: "tools/atlas-export.ps1. Requires powershell-yaml module."
-
-  analytics:
-    layer_1_cloudflare: operational
-    layer_2_django_member: "operational (needs admin dashboard view)"
-    layer_3_engagement_js: operational
-    notes: "Admin dashboard at /admin/dashboard/ designed but not built."
-
-  rag_infrastructure:
-    status: operational
-    last_test: "2026-04-15"
-    search_mode: "hybrid (BM25 + vector via Reciprocal Rank Fusion)"
-    notes: "mcp_server.py v2.0. ingest.py v2.1 (1500-char chunks, 200 overlap, auto summary chunks)."
+  notification: { status: operational, last_verified: "2026-04-08", channels: "Discord, X/@WoPlainness, Facebook, Buttondown RSS" }
+  music_production: { status: operational, last_verified: "2026-04-11" }
+  audio_narration: { status: operational, note: "Two-pass ffmpeg loudnorm (I=-16, TP=-1.5, LRA=11); ElevenLabs with-timestamps canonical." }
+  backup_system: { status: operational, last_verified: "2026-04-13", note: "Daily/weekly/monthly to Google Drive. RESTORE SCRIPT (wop-restore.ps1) STILL UNTESTED — off-machine restore rehearsal outstanding." }
+  atlas_export: { status: operational, last_verified: "2026-04-15", schedule: "every 4 Sundays, 4 AM" }
+  rag_infrastructure: { status: operational, last_verified: "2026-04-15", note: "Hybrid BM25+vector (RRF); ingest v2.1." }
+  staleness_note: "Pipeline last-verified dates predate the Articles-arc period. Re-verify at next infrastructure session."
 
 # ═══════════════════════════════════════════════════════════════════
-# MILESTONES (completed, reverse chronological)
+# GOVERNANCE DOCUMENT INDEX  (with staleness flags)
 # ═══════════════════════════════════════════════════════════════════
-
-milestones:
-
-  - date: "2026-04-15"
-    title: "Community Safety Phase 0 Complete"
-    description: "/safety/ page deployed with reporting form. All Phase 0 prerequisites met. Community witness sharing deployment gate cleared."
-
-  - date: "2026-04-15"
-    title: "Hybrid BM25+Vector Search Deployed"
-    description: "mcp_server.py v2.0 with Reciprocal Rank Fusion. Structural/technical documents now retrieve reliably."
-
-  - date: "2026-04-15"
-    title: "Operational Framework Complete"
-    description: "Three YAML files committed, RAG reference ingested, atlas export script deployed and scheduled."
-
-  - date: "2026-04-14"
-    title: "Operational Framework Specified"
-    description: "YAML-first replacement for Operations Atlas. Spec produced, live site audited."
-
-  - date: "2026-04-13"
-    title: "Backup System Operational"
-    description: "Three-tier scheduled backups (daily/weekly/monthly) to Google Drive."
-
-  - date: "2026-04-13"
-    title: "My Discipleship Journal Rewrite"
-    description: "Unified dashboard, card commitment backend, dead code cleanup."
-
-  - date: "2026-04-11"
-    title: "Read Aloud Narration Deployed"
-    description: "34 ElevenLabs audio files for 4 card chapters. CDN manifests live."
-
-  - date: "2026-04-08"
-    title: "SEO Package Fully Deployed"
-    description: "Sitemap, robots.txt, OG/Twitter tags, JSON-LD, Google Search Console verified."
-
-  - date: "2026-04-08"
-    title: "YouTube Channel Built"
-    description: "11 podcast overview MP4s uploaded. Playlists, thumbnails, pipeline configured."
-
-  - date: "2026-04-04"
-    title: "Distribution Pipeline Fully Operational"
-    description: "Discord, X/Twitter, Facebook, Buttondown all confirmed. Auto-trigger pipeline deployed."
-
-  - date: "2026-04-04"
-    title: "Newsletter Hardening"
-    description: "Anti-bot measures (honeypot, timing, IP rate limiting). Registration auto-subscribe."
-
-  - date: "2026-03-30"
-    title: "Movement 2 Complete"
-    description: "All 5 Learn of Me chapters deployed (Ch 7-11). R·J·W account save + portable document live."
-
-  - date: "2026-03-30"
-    title: "Chapter 11 (The Living Christ) Deployed"
-    description: "Final Movement 2 chapter. Doorway accordion, study pathway link."
-
-  - date: "2026-03-29"
-    title: "Citation Panel Retrofit Complete"
-    description: "All deployed chapters (1-10) retrofitted with citation panels."
-
-  - date: "2026-03-28"
-    title: "Citation Panel System Deployed"
-    description: "Left-side slide-out panel. Site-wide standard for scripture citations."
-
-  - date: "2026-03-19"
-    title: "R·J·W Pause-Cue Text Deployed"
-    description: "Site-wide visual cue for pause-points."
-
-  - date: "2026-03-12"
-    title: "Discord Phase 0 Infrastructure"
-    description: "#report-a-concern channel, #content-and-rules configured."
-
-  - date: "2026-03-07"
-    title: "Cloudflare R2 CDN Complete"
-    description: "Custom domain, CORS, API tokens, cache rule. Audio migration path established."
-
-  - date: "2026-02-23"
-    title: "R·J·W System Deployed"
-    description: "Reflect · Journal · Witness pause-points rolled out to all deployed chapters."
-
-  - date: "2026-02-20"
-    title: "RAG System Operational"
-    description: "Ollama + ChromaDB + ministry-rag MCP. 3,356 chunks across 3 collections."
-
-  - date: "2026-02-20"
-    title: "Community Safety Protocol v1.0"
-    description: "Three-tier moderation framework. AI agent guardrails. Phase 0 requirements defined."
-
-# ═══════════════════════════════════════════════════════════════════
-# GOVERNANCE DOCUMENT INDEX
-# ═══════════════════════════════════════════════════════════════════
-
 governance_docs:
-
-  - title: "Definitive Site Architecture"
-    location: "Project file: WoP_Definitive_Architecture_20260217.md"
-    purpose: "Two-volume chapter architecture, development phases, content format definitions."
-    last_updated: "2026-02-17"
-    notes: "Architecture revision (Movement 4 transplant) documented in knowledge graph but not yet reflected in this document."
-
-  - title: "Community Safety & Moderation Protocol v1.0"
-    location: "RAG: ministry_knowledge collection"
-    purpose: "Three-tier moderation, AI agent guardrails, Phase 0 requirements."
-    last_updated: "2026-02-20"
-
-  - title: "Collaborator Agent Design Document"
-    location: "RAG: ministry_knowledge collection. Google Drive."
-    purpose: "Editorial voice, theological guardrails, AI transparency standards."
-    last_updated: "2026-02"
-
-  - title: "R·J·W System Design"
-    location: "Project file: RAG_RJW_System_Feb2026.md. Mockup: WoP_Ch09_ModalMockup.html"
-    purpose: "Reflect · Journal · Witness architecture, modal panel design, state management."
-    last_updated: "2026-02"
-
-  - title: "Citation Panel Spec"
-    location: "Repo: docs/WoP_CitationPanel_Spec_Mar2026.md"
-    purpose: "Left-side slide-out panel, shortcode system, retrofit process."
-    last_updated: "2026-03-28"
-
-  - title: "CLAUDE.md"
-    location: "Repo root: CLAUDE.md"
-    purpose: "Claude Code tab behavior — start-of-session and end-of-session protocols."
-    last_updated: "2026-02"
-
-  - title: "Editorial Pipeline Atlas"
-    location: "Google Drive / RAG"
-    purpose: "Editorial and deployment process reference."
-    last_updated: "2026-03"
-
-  - title: "Music Pipeline Atlas"
-    location: "Google Drive / RAG"
-    purpose: "Music production process — Powner Method, Suno/ACE workflow, distribution."
-    last_updated: "2026-03"
-
-  - title: "Operational Framework Spec"
-    location: "RAG: session_summaries collection ('Operational Framework Spec v2.0'). Also ingested into ministry_knowledge."
-    purpose: "YAML layer design, infrastructure inventory, monthly export specification."
-    last_updated: "2026-04-15"
+  - { title: "CLAUDE.md hierarchy", location: "repo: CLAUDE.md, src/chapters/CLAUDE.md, src/_data/CLAUDE.md", status: current, note: "Durable Claude Code behavior + frontmatter/data traps. Created 2026-07-23." }
+  - { title: "operational-state.yaml (this file)", location: "src/_data/", status: current, note: "Canonical current-state source of truth." }
+  - { title: "chapter-status.yaml", location: "src/_data/", status: "verify", note: "Per-chapter deployment registry; last verified 2026-04-15 (chapters unchanged since)." }
+  - { title: "Articles Citation Apparatus Playbook", location: "working-folder/Articles_of_Interfaith_Discipleship_Essay_Cluster/", status: current }
+  - { title: "Card-Chapter Authoring Guide + Addendum 1", location: "project knowledge", status: current, note: "Applies when chapter development resumes." }
+  - { title: "WoP_Definitive_Architecture_20260217.md", location: "repo root + project knowledge", status: STALE, note: "Feb snapshot; superseded (Movement 4 transplant, Articles arc). Historical reference only." }
+  - { title: "Community Safety & Moderation Protocol v1.0", location: "ministry-rag", status: current }
+  - { title: "Collaborator Agent Design Document", location: "ministry-rag / Google Drive", status: current }
 
 # ═══════════════════════════════════════════════════════════════════
 # NEXT PRIORITIES (ordered)
 # ═══════════════════════════════════════════════════════════════════
-
 next_priorities:
-  - "Ch 15 — Repentance as a Lifestyle (manuscript access, development package)"
-  - "Ch 17 — Christlike Virtues (completes Phase 4)"
-  - "Phase 1 — Submission moderation pipeline (next community safety phase)"
-  - "Fix /volume-1/ Ch 16 status (when Ch 15 deploys)"
-  - "Admin analytics dashboard"
+  - "Articles arc: VR/group-display field-test findings → group-display mode design (next session)"
+  - "Complete A10 IRL Articles-reading video"
+  - "Search UX / Pagefind dedicated session"
+  - "Community Safety Phase 1 — submission moderation pipeline"
+  - "SECURITY: rotate secrets exposed in .claude/settings.local.json; move to .env references (flagged 2026-07-23)"
+  - "Off-machine backup restore rehearsal (wop-restore.ps1 untested)"
+  - "[On Articles-arc completion] Resume chapters: Ch 15 Repentance, then Ch 17 Christlike Virtues"
+  - "[Deferred] Merognosticism and the Shape of Schism essay"

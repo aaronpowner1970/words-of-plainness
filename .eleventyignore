@@ -1,0 +1,8 @@
+# Eleventy ignore file (additive — node_modules and .gitignore entries stay ignored).
+#
+# CLAUDE.md files are instructions for Claude Code, never site content.
+# They must not enter the Eleventy build. src/chapters/*.md is rendered as
+# templates, and CLAUDE.md prose contains literal Nunjucks-sensitive tokens
+# (e.g. the {#...} heading-ID trap it documents), which crash the build as
+# unterminated comments. Exclude every CLAUDE.md at any depth.
+**/CLAUDE.md
