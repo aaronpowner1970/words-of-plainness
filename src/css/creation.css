@@ -142,6 +142,13 @@ html, body { overflow-x: clip; overflow-y: visible; }
 .ct-span[data-status="draft"] {
     text-decoration-color: rgba(196, 148, 58, 0.85);
 }
+/* The sentence containing the lit cue — a calm band at well under half the
+   cue's opacity, so the sentence reads as context and the active words inside
+   it stay the brightest thing on screen. Deliberately placed BEFORE the hover
+   and .ct-open rules: all three are single-class specificity, so source order
+   is what lets hover feedback and the opened-citation state still win. */
+.ct-span.ct-active-span { background-color: rgba(212, 168, 74, 0.10); }
+
 .ct-span[data-has-cite]:hover { background-color: rgba(196, 148, 58, 0.14); }
 .ct-span.ct-open {
     background-color: rgba(196, 148, 58, 0.22);
@@ -150,9 +157,21 @@ html, body { overflow-x: clip; overflow-y: visible; }
 }
 
 /* active-cue highlight (karaoke follow) */
-.ct-cue { color: var(--cream-dark, #D4C8B0); transition: color 0.25s, text-shadow 0.25s; }
+.ct-cue {
+    color: var(--cream-dark, #D4C8B0);
+    border-radius: 3px;
+    transition: color 0.25s, text-shadow 0.25s, background-color 0.25s;
+}
+
+/* Matches the /articles/ active-sentence highlight exactly: --gold-light
+   #D4A84A at 0.32, the same token and opacity as [data-span]:hover in
+   articles-panel.css, so the two pages read as one system. A tint, not a solid
+   fill — the text stays legible. The existing glow is kept; it complements the
+   tint rather than competing with it. No padding on purpose: lighting a word
+   must never reflow the line mid-follow. */
 .ct-cue.ct-lit {
     color: var(--cream-soft, #F5EFE4);
+    background-color: rgba(212, 168, 74, 0.32);
     text-shadow: 0 0 18px rgba(196, 148, 58, 0.35);
 }
 

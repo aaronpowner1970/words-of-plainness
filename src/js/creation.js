@@ -105,9 +105,18 @@
     function tick() {
         var c = activeCue(currentTime());
         if (c !== litEl) {
-            if (litEl) litEl.classList.remove('ct-lit');
+            // ct-active-span tints the whole sentence containing the lit cue.
+            // Removed before it is added, so consecutive cues sharing a parent
+            // span end up with the class still applied.
+            if (litEl) {
+                litEl.classList.remove('ct-lit');
+                var prevSpan = litEl.closest && litEl.closest('.ct-span');
+                if (prevSpan) prevSpan.classList.remove('ct-active-span');
+            }
             if (c) {
                 c.classList.add('ct-lit');
+                var curSpan = c.closest && c.closest('.ct-span');
+                if (curSpan) curSpan.classList.add('ct-active-span');
                 if (follow) {
                     programmatic = true;
                     centerCue(c);
