@@ -16,34 +16,43 @@
     <button class="creation-about-btn" id="creationAboutBtn" type="button">About this film</button>
 </section>
 
-<!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->
-<div class="creation-stage-wrap" data-pagefind-ignore>
-    <div class="creation-player" id="creationPlayerWrap">
-        <!-- The IFrame API replaces this node with a youtube-nocookie iframe -->
-        <div id="creationVideo"></div>
-        <!-- Ended overlay: covers YouTube's end-screen suggestion grid -->
-        <div class="creation-ended" id="creationEnded" aria-hidden="true">
-            <p class="creation-ended-line">This film is a form of worship</p>
-            <p class="creation-ended-sub">No endorsements or polemics implied</p>
-            <button class="creation-replay" id="creationReplay" type="button">&#8635; Watch again</button>
+<!-- One centred reading container: the sticky film spans its full width at the
+     top, and the transcript + citation dock sit as columns beneath it. The film
+     is a normal-flow child of this container (NOT a grid item) so position:
+     sticky can travel the whole reading region — a sticky grid item is confined
+     to its own row and would not move.
+     #creationDock is display:contents below 1200px, so the panel inside it
+     falls back to the fixed overlay drawer without being hidden.
+     .dock-hidden is the default: the panel starts closed, so the transcript
+     holds full width until the stream actually opens. -->
+<div class="creation-reading dock-hidden" id="creationReading">
+
+    <!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->
+    <div class="creation-stage-wrap" data-pagefind-ignore>
+        <div class="creation-player" id="creationPlayerWrap">
+            <!-- The IFrame API replaces this node with a youtube-nocookie iframe -->
+            <div id="creationVideo"></div>
+            <!-- Ended overlay: covers YouTube's end-screen suggestion grid -->
+            <div class="creation-ended" id="creationEnded" aria-hidden="true">
+                <p class="creation-ended-line">This film is a form of worship</p>
+                <p class="creation-ended-sub">No endorsements or polemics implied</p>
+                <button class="creation-replay" id="creationReplay" type="button">&#8635; Watch again</button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- Reading row: transcript + (desktop only) the docked citation stream.
-     #creationDock is display:contents below 1200px, so the panel inside it
-     falls back to the fixed overlay drawer without being hidden. -->
-<div class="creation-reading">
-    <!-- Following transcript (auto-scrolls with the film; every claim is a citation span) -->
-    <div class="creation-transcript" id="creationTranscript" data-pagefind-body>
-        <p class="ct-lead">Scroll along with the film. The scriptures behind each underlined passage stream beside it &mdash; biblical witnesses first, Restoration witnesses beside them.</p>
-        {% for para in creation_transcript %}
-        <p class="ct-p">{% for span in para %}<span class="ct-span" data-s="{{ span.id }}" data-start="{{ span.start }}">{% for c in span.cues %}<span class="ct-cue" data-i="{{ c.i }}" data-cs="{{ c.s }}" data-ce="{{ c.e }}">{{ c.t }} </span>{% endfor %}</span> {% endfor %}</p>
-        {% endfor %}
-        <p class="ct-closing">This film is a form of worship &middot; No endorsements or polemics implied</p>
+    <div class="creation-columns">
+        <!-- Following transcript (auto-scrolls with the film; every claim is a citation span) -->
+        <div class="creation-transcript" id="creationTranscript" data-pagefind-body>
+            <p class="ct-lead">Scroll along with the film. The scriptures behind each underlined passage stream beside it &mdash; biblical witnesses first, Restoration witnesses beside them.</p>
+            {% for para in creation_transcript %}
+            <p class="ct-p">{% for span in para %}<span class="ct-span" data-s="{{ span.id }}" data-start="{{ span.start }}">{% for c in span.cues %}<span class="ct-cue" data-i="{{ c.i }}" data-cs="{{ c.s }}" data-ce="{{ c.e }}">{{ c.t }} </span>{% endfor %}</span> {% endfor %}</p>
+            {% endfor %}
+            <p class="ct-closing">This film is a form of worship &middot; No endorsements or polemics implied</p>
+        </div>
+
+        <div class="creation-dock" id="creationDock"></div>
     </div>
-
-    <div class="creation-dock" id="creationDock"></div>
 </div>
 
 <!-- Resume-follow pill -->

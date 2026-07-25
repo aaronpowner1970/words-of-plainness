@@ -33,18 +33,49 @@ html, body { overflow-x: clip; overflow-y: visible; }
     color: var(--brown-rich, #1F1012);
 }
 
+/* ── Reading container ───────────────────────────────────────── */
+/* The single centred container. The film, the transcript and the dock all
+   align to THIS width, which is what stops the film overlapping the columns:
+   previously the film was centred independently at 960px while the columns
+   were centred at a different width, so its right edge cut across them.
+
+   TUNABLE:
+     --ct-container   width of the whole reading region; the film spans it
+     --ct-film-max-h  ceiling on film height, so a full-width film cannot eat
+                      a short viewport and leave the dock no room
+     --ct-dock-w      width of the citation column */
+.creation-reading {
+    --ct-container: 1200px;
+    --ct-film-max-h: 62vh;
+    --ct-dock-w: 400px;
+    --ct-gutter: clamp(1rem, 2.2vw, 2rem);
+    --ct-pad: clamp(0.75rem, 3vw, 1.5rem);
+
+    --ct-film-w: min(var(--ct-container), calc(100vw - 2 * var(--ct-pad)));
+    --ct-film-h: min(calc(var(--ct-film-w) * 9 / 16), var(--ct-film-max-h));
+    --ct-dock-top: calc(84px + var(--ct-film-h) + 1rem);
+
+    max-width: var(--ct-container);
+    margin: 0 auto;
+    padding: 0 var(--ct-pad);
+}
+
 /* ── Sticky player ───────────────────────────────────────────── */
+/* Normal-flow child of .creation-reading (not a grid item), so its sticky
+   containing block is the tall reading container and it travels the whole
+   region. Spans the container; nothing sits beside or behind it. */
 .creation-stage-wrap {
     position: sticky;
     top: 84px;                 /* clears the fixed site header */
     z-index: 5;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 clamp(0.75rem, 3vw, 1.5rem);
     background: var(--brown-rich, #1F1012);
 }
 .creation-player {
     position: relative;
+    /* Cap the height so a container-width film still leaves the dock room on
+       short viewports; width follows from the cap to preserve 16:9. */
+    width: min(100%, calc(var(--ct-film-max-h, 62vh) * 16 / 9));
+    margin-inline: auto;
     aspect-ratio: 16 / 9;
     border-radius: 10px;
     overflow: hidden;
@@ -106,10 +137,12 @@ html, body { overflow-x: clip; overflow-y: visible; }
 }
 
 /* ── Transcript ──────────────────────────────────────────────── */
+/* max-width applies only when the transcript is alone (panel closed / narrow);
+   in the open two-column state the grid track governs. */
 .creation-transcript {
     max-width: 760px;
     margin: 1.5rem auto 0;
-    padding: 0 clamp(1rem, 4vw, 1.75rem) 40vh;
+    padding: 0 clamp(0.25rem, 1.5vw, 1rem) 40vh;
     font-family: var(--font-serif, Georgia, serif);
     font-size: clamp(1.05rem, 2.05vw, 1.28rem);
     line-height: 1.95;
@@ -270,31 +303,27 @@ html, body { overflow-x: clip; overflow-y: visible; }
 }
 .ct-hint-x:hover { opacity: 1; color: var(--gold-primary, #C4943A); }
 
-/* ── Reading row: transcript + docked citation stream ────────── */
+/* ── Columns beneath the film: transcript + citation dock ────── */
 /* Below 1200px the dock is display:contents — no box of its own, so the panel
    inside it still renders as the fixed overlay drawer from articles-panel.css
-   instead of being hidden. */
+   instead of being hidden. Never display:none, which would hide the panel. */
 .creation-dock { display: contents; }
 
 @media (min-width: 1200px) {
-    /* Film band, so the dock can start below the sticky player and never
-       overlay it. .creation-stage-wrap is max-width 960px with clamp padding;
-       16:9 gives the height. Tunable if the player geometry changes. */
-    .creation-reading {
-        --ct-film-w: calc(min(960px, 100vw) - 3rem);
-        --ct-film-h: calc(var(--ct-film-w) * 9 / 16);
-        --ct-dock-top: calc(84px + var(--ct-film-h) + 1.25rem);
-
+    .creation-columns {
         display: grid;
-        grid-template-columns: minmax(0, 760px) minmax(300px, 400px);
-        gap: clamp(1rem, 2.4vw, 2rem);
-        justify-content: center;
+        grid-template-columns: minmax(0, 1fr) var(--ct-dock-w);
+        column-gap: var(--ct-gutter);
+        /* align-items:start is load-bearing: it leaves the dock's grid area at
+           the row's full height so position:sticky has somewhere to travel. */
         align-items: start;
-        max-width: 1280px;
-        margin: 0 auto;
     }
 
-    .creation-reading .creation-transcript { margin-left: 0; margin-right: 0; }
+    .creation-columns .creation-transcript {
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
 
     .creation-dock {
         display: block;
@@ -302,6 +331,23 @@ html, body { overflow-x: clip; overflow-y: visible; }
         top: var(--ct-dock-top);
         height: calc(100vh - var(--ct-dock-top) - 1.5rem);
         min-height: 220px;
+    }
+
+    /* Panel closed — hidden, remembered 'off', or never opened: drop the dock
+       track entirely and let the transcript reflow to the full container width
+       rather than leaving dead space beside it. Toggled by showBox/hideBox. */
+    .creation-reading.dock-hidden .creation-columns {
+        grid-template-columns: minmax(0, 1fr);
+        column-gap: 0;
+    }
+
+    .creation-reading.dock-hidden .creation-dock { display: none; }
+
+    /* Alone again: keep a readable measure instead of a 1200px-wide line. */
+    .creation-reading.dock-hidden .creation-transcript {
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 

@@ -78,6 +78,13 @@
     // center onto its own bottom edge, so the lit line rode the player border.
     // Measured live each call: adapts to desktop/mobile, resize, fullscreen, and
     // the not-yet-pinned state (player off-screen -> offset 0 -> old behavior).
+    // The reading field is the band between the film's bottom and the viewport
+    // bottom; the active line is centred in THAT band, not in the viewport.
+    // Measured live each call from the film's own rect, so it holds identically
+    // whether the dock is open or closed (the film spans the container in both
+    // states and its bottom edge does not move), and adapts to resize,
+    // fullscreen, mobile, and the not-yet-pinned state (film off-screen ->
+    // offset 0 -> plain viewport centring).
     function centerCue(el) {
         var vh = window.innerHeight || document.documentElement.clientHeight;
         var top = 0;
@@ -263,11 +270,26 @@
         return null;
     }
 
-    function showBox() { panel.classList.add('ap-open'); panel.setAttribute('aria-hidden', 'false'); }
+    // .dock-hidden collapses the two-column grid to one and drops the dock
+    // track, so the transcript reflows to the full container width whenever the
+    // panel is not showing. Ships on by default in the markup (panel starts
+    // closed); every visibility change flows through showBox/hideBox, so the
+    // layout and the panel can never disagree.
+    var reading = document.getElementById('creationReading');
+    function setDockHidden(hidden) {
+        if (reading) reading.classList.toggle('dock-hidden', hidden);
+    }
+
+    function showBox() {
+        panel.classList.add('ap-open');
+        panel.setAttribute('aria-hidden', 'false');
+        setDockHidden(false);
+    }
     function hideBox() {
         panel.classList.remove('ap-open');
         panel.setAttribute('aria-hidden', 'true');
         backdrop.classList.remove('ap-open');
+        setDockHidden(true);
     }
 
     function paint(spanEl) {
