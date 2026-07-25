@@ -1190,6 +1190,41 @@
 }
 .an-num { color: var(--brown-rich, #1F1012); opacity: 0.55; }
 
+/* ── Progress indicator (scroll-spy) ─────────────────────────────
+   Driven by /js/articles-progress.js. Both elements start empty and are
+   hidden while empty, so with JS off the drawer and tab look untouched. */
+
+/* "Article N of 13 — Title" readout, under the drawer header. */
+.an-progress {
+    margin: 0;
+    padding: 0.5rem 1rem 0.6rem;
+    border-bottom: 1px solid rgba(31, 16, 18, 0.22);
+    color: var(--brown-rich, #1F1012);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.an-progress:empty { display: none; }
+
+/* Compact "N/13" on the tab — the only progress cue visible while the
+   drawer is shut. Rotated to match .an-tab-label. */
+.an-tab-count {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: var(--brown-rich, #1F1012);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+}
+
+.an-tab-count:empty { display: none; }
+
 /* Companion essays section */
 .an-companions { border-top-color: rgba(31, 16, 18, 0.22); }
 .an-companions-heading { color: var(--brown-rich, #1F1012); opacity: 0.85; }

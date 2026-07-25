@@ -91,6 +91,7 @@
         aria-controls="anDrawer"
         type="button">
     <span class="an-tab-label">Contents</span>
+    <span class="an-tab-count" id="anTabCount" aria-hidden="true"></span>
     <svg class="an-tab-chevron" viewBox="0 0 24 24" width="11" height="11"
          fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
          aria-hidden="true">
@@ -113,6 +114,8 @@
             </svg>
         </button>
     </div>
+    <p class="an-progress" id="anProgress" aria-live="polite"></p>
+
     <nav class="an-drawer-nav" aria-label="Jump to article">
         <ol class="an-drawer-list">
             <li><a href="#of-plainness"              class="an-link"><span class="an-num">1</span>Of Plainness</a></li>
@@ -491,6 +494,7 @@
 <script src="/js/articles-panel.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-godeeper.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-howwehold.js?v={{ site.version }}" defer></script>
+<script src="/js/articles-progress.js?v={{ site.version }}" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const progressFill = document.getElementById('readingProgressFill');
@@ -918,23 +922,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // IntersectionObserver: highlight active article in the drawer list
-        var sections = document.querySelectorAll('.article-section');
-        var navLinks = anDrawer.querySelectorAll('.an-link');
-
-        if (sections.length && 'IntersectionObserver' in window) {
-            var anObserver = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (!entry.isIntersecting) return;
-                    var id = entry.target.id;
-                    navLinks.forEach(function (l) {
-                        l.classList.toggle('an-active', l.getAttribute('href') === '#' + id);
-                    });
-                });
-            }, { rootMargin: '-15% 0px -65% 0px', threshold: 0 });
-
-            sections.forEach(function (s) { anObserver.observe(s); });
-        }
+        // Active-article highlighting moved to /js/articles-progress.js, which
+        // drives the drawer highlight, aria-current, and the "Article N of 13"
+        // readout from one observer. The observer that used to live here also
+        // toggled .an-active, and two writers fought over it.
     })();
 });
 </script>
