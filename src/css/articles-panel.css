@@ -1249,10 +1249,20 @@
     --an-badge-total: 0.58rem;
     --an-badge-mute: 0.55;
     --an-badge-slash: 0.45;
+    --an-badge-gap-x: 0.18rem;
+    --an-badge-gap-y: 0.12rem;
+    --an-badge-slash-len: 1.6rem;
 
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto;
+    /* An explicit centre channel (track 2 on both axes), not a 2x2 with gaps.
+       The numerator is ~2x the denominator, so on a 2x2 the badge's 50%/50%
+       pivot lands ABOVE the numerator's baseline — i.e. inside its ink — and a
+       slash pivoting there cuts through the numeral at every gap value. Giving
+       the slash its own track between the two numerals is what actually opens
+       the clearance. Widen --an-badge-gap-x / --an-badge-gap-y to increase it
+       (~2.4px at these values); raise them if --an-badge-num is raised. */
+    grid-template-columns: auto var(--an-badge-gap-x) auto;
+    grid-template-rows: auto var(--an-badge-gap-y) auto;
     align-items: center;
     justify-items: center;
 
@@ -1269,25 +1279,33 @@
 /* Beats the UA [hidden] rule, which display:grid above would otherwise win. */
 .an-tab-badge[hidden] { display: none; }
 
+/* Each numeral seats toward its own outer corner, away from the centre line,
+   so the pair still reads as one fraction across the slash. */
 .an-tab-badge-num {
     grid-column: 1;
     grid-row: 1;
+    justify-self: start;
+    align-self: start;
     font-size: var(--an-badge-num);
 }
 
 .an-tab-badge-total {
-    grid-column: 2;
-    grid-row: 2;
+    grid-column: 3;
+    grid-row: 3;
+    justify-self: end;
+    align-self: end;
     font-size: var(--an-badge-total);
     opacity: var(--an-badge-mute);
 }
 
 /* Drawn slash rather than a "/" glyph — keeps the angle exact at any size.
-   Spans both cells; decorative, so it is aria-hidden in the markup. */
+   Sits in the centre channel and overflows it, so its length is set explicitly
+   by --an-badge-slash-len rather than as a percentage of the channel.
+   Decorative; aria-hidden in the markup. */
 .an-tab-badge-slash {
     position: relative;
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
+    grid-column: 2;
+    grid-row: 2;
     width: 100%;
     height: 100%;
 }
@@ -1298,7 +1316,7 @@
     left: 50%;
     top: 50%;
     width: 1px;
-    height: 116%;
+    height: var(--an-badge-slash-len);
     transform: translate(-50%, -50%) rotate(30deg);
     background: currentColor;
     opacity: var(--an-badge-slash);
