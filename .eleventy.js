@@ -395,8 +395,25 @@ module.exports = function(eleventyConfig) {
             return content;
         }
 
+        // Mask <script> and <style> blocks before indexing. Pages can embed
+        // dumped JSON inside the article scope (/articles/ ships WOP_HOLD,
+        // WOP_GODEEPER, and apparatusData that way), and howWeHold.js builds its
+        // disclosures from literal '<p>…</p>' strings. Rewriting those <p> tags
+        // injects raw double-quotes into JSON string values, which terminates the
+        // string early and throws SyntaxError at parse time — so the payload never
+        // defines. Masking also keeps script/style content out of the counter, so
+        // real narrated blocks index exactly as before.
+        const masked = [];
+        const maskedInner = inner.replace(
+            /<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,
+            function(block) {
+                masked.push(block);
+                return ` WOP_MASK_${masked.length - 1} `;
+            }
+        );
+
         let counter = 0;
-        const indexed = inner.replace(/<(h2|h3|p|li)\b([^>]*)>/g, function(full, tag, attrs) {
+        const indexed = maskedInner.replace(/<(h2|h3|p|li)\b([^>]*)>/g, function(full, tag, attrs) {
             const idx = counter++;
             let a = attrs || '';
             if (/\bclass\s*=\s*["']/.test(a)) {
@@ -409,8 +426,15 @@ module.exports = function(eleventyConfig) {
 
         if (counter === 0) return content;
 
+        // Restore the masked blocks byte-for-byte. split/join rather than
+        // replace() so `$`-sequences inside the payloads are never interpreted.
+        let restored = indexed;
+        for (let i = 0; i < masked.length; i++) {
+            restored = restored.split(` WOP_MASK_${i} `).join(masked[i]);
+        }
+
         return content.replace(ARTICLE_RE, function() {
-            return openTag + indexed + closeTag;
+            return openTag + restored + closeTag;
         });
     });
 
