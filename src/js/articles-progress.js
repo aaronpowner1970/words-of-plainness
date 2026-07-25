@@ -2,12 +2,21 @@
    ARTICLES PROGRESS INDICATOR  (scroll-spy)
    /articles/ — tracks which of the thirteen articles is in view.
 
-   Two synchronized outputs, one source of truth:
-     1. #anProgress  — "Article N of 13 — Title" readout in the drawer
-                       header (aria-live="polite").
-     2. .an-link     — aria-current="true" + .an-active on the matching
-                       Contents-drawer entry (and #anTabCount "N/13" on the
-                       closed tab).
+   Outputs, all from one resolved value:
+     1. #anTabBadge  — diagonal "01 / 13" badge capping the Contents tab.
+                       #anTabNum carries the zero-padded current number; the
+                       badge's aria-label carries the full sentence.
+     2. #anRailCaption — the current article's title, upright in the margin
+                       beside the rail.
+     3. #anProgressLive — visually-hidden aria-live="polite" announcer. It
+                       lives OUTSIDE the drawer on purpose: the drawer is
+                       aria-hidden while closed, so a live region inside it
+                       would never announce.
+     4. #anProgress  — the same sentence, visible in the drawer header when
+                       the drawer is open. aria-hidden, so it does not
+                       double-announce alongside #anProgressLive.
+     5. .an-link     — aria-current="true" + .an-active on the matching
+                       Contents-drawer entry.
 
    Front matter (A00 banner, prologue, Learning Pathways) sits before
    Article 1, so the indicator holds a pre-count state — "Invitation" —
@@ -43,7 +52,10 @@
 
         var drawer  = document.getElementById('anDrawer');
         var readout = document.getElementById('anProgress');
-        var badge   = document.getElementById('anTabCount');
+        var live    = document.getElementById('anProgressLive');
+        var badge   = document.getElementById('anTabBadge');
+        var badgeNum = document.getElementById('anTabNum');
+        var caption = document.getElementById('anRailCaption');
 
         // Only the thirteen in-page article links — the download, companion,
         // and music links in the drawer share .an-link but are not articles.
@@ -64,18 +76,41 @@
             return h ? h.textContent.trim() : '';
         }
 
+        // Leading zero on 1–9 to match the edition style; the total stays "13".
+        function pad(n) {
+            return (n < 10 ? '0' : '') + n;
+        }
+
         function render() {
             var idx = current ? order.indexOf(current) : -1;
+            var title = idx < 0 ? '' : titleOf(sections[idx]);
+            var sentence = idx < 0
+                ? PRECOUNT_LABEL
+                : 'Article ' + (idx + 1) + ' of ' + TOTAL + ' — ' + title;
 
-            if (readout) {
-                readout.textContent = idx < 0
-                    ? PRECOUNT_LABEL
-                    : 'Article ' + (idx + 1) + ' of ' + TOTAL + ' — ' +
-                      titleOf(sections[idx]);
+            if (readout) readout.textContent = sentence;
+            if (live) live.textContent = sentence;
+
+            // Pre-count (A00 opener, prologue, Learning Pathways): no badge,
+            // no caption — the rail reads as it did before Article 1.
+            if (badge) {
+                if (idx < 0) {
+                    badge.setAttribute('hidden', '');
+                    badge.removeAttribute('aria-label');
+                } else {
+                    if (badgeNum) badgeNum.textContent = pad(idx + 1);
+                    badge.setAttribute('aria-label', sentence);
+                    badge.removeAttribute('hidden');
+                }
             }
 
-            if (badge) {
-                badge.textContent = idx < 0 ? '' : (idx + 1) + '/' + TOTAL;
+            if (caption) {
+                caption.textContent = title;
+                if (idx < 0) {
+                    caption.setAttribute('hidden', '');
+                } else {
+                    caption.removeAttribute('hidden');
+                }
             }
 
             links.forEach(function (l) {

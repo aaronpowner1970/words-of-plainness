@@ -90,14 +90,24 @@
         aria-expanded="false"
         aria-controls="anDrawer"
         type="button">
+    <span class="an-tab-badge" id="anTabBadge" role="img" hidden>
+        <span class="an-tab-badge-num" id="anTabNum">01</span>
+        <span class="an-tab-badge-slash" aria-hidden="true"></span>
+        <span class="an-tab-badge-total" aria-hidden="true">13</span>
+    </span>
     <span class="an-tab-label">Contents</span>
-    <span class="an-tab-count" id="anTabCount" aria-hidden="true"></span>
     <svg class="an-tab-chevron" viewBox="0 0 24 24" width="11" height="11"
          fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
          aria-hidden="true">
         <polyline points="9 18 15 12 9 6"></polyline>
     </svg>
+    <span class="an-rail-caption" id="anRailCaption" aria-hidden="true" hidden></span>
 </button>
+
+<!-- Sole announcer for the progress counter. The drawer's own readout sits
+     inside aria-hidden markup while the drawer is closed, so it cannot carry
+     this. -->
+<p class="visually-hidden" id="anProgressLive" aria-live="polite"></p>
 
 <aside class="an-drawer" id="anDrawer"
        role="navigation"
@@ -114,7 +124,7 @@
             </svg>
         </button>
     </div>
-    <p class="an-progress" id="anProgress" aria-live="polite"></p>
+    <p class="an-progress" id="anProgress" aria-hidden="true"></p>
 
     <nav class="an-drawer-nav" aria-label="Jump to article">
         <ol class="an-drawer-list">

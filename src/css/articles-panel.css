@@ -1227,20 +1227,124 @@
 
 .an-progress:empty { display: none; }
 
-/* Compact "N/13" on the tab — the only progress cue visible while the
-   drawer is shut. Rotated to match .an-tab-label. */
-.an-tab-count {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+/* Diagonal "01 / 13" jersey-fraction badge capping the top of the Contents
+   tab: current number upper-left, total lower-right, split by a drawn slash.
+   Numerals stay upright even though .an-tab-label is rotated vertical.
+
+   TUNABLE (all on .an-tab-badge):
+     --an-badge-num    current numeral size — the focal point
+     --an-badge-total  denominator size (currently ~0.50x the numeral)
+     --an-badge-mute   denominator opacity — how far the total recedes
+     --an-badge-slash  slash opacity
+
+   NOTE ON COLOUR: the Contents tab is a solid --gold-primary fill with
+   --brown-rich text (the Option C gold tab below). Gold numerals on a gold
+   tab would not read, so the numerator/denominator hierarchy is carried by
+   size + opacity of the tab's established dark ink rather than by two golds.
+   No new colour is introduced. To invert to gold-on-dark instead, give
+   .an-tab-badge a --brown-rich background and set the numeral to
+   --gold-light with the total on --gold-primary. */
+.an-tab-badge {
+    --an-badge-num: 1.15rem;
+    --an-badge-total: 0.58rem;
+    --an-badge-mute: 0.55;
+    --an-badge-slash: 0.45;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    justify-items: center;
+
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid rgba(31, 16, 18, 0.28);
+
     color: var(--brown-rich, #1F1012);
     font-family: var(--font-sans, sans-serif);
-    font-size: 0.55rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    opacity: 0.75;
+    line-height: 1;
 }
 
-.an-tab-count:empty { display: none; }
+/* Beats the UA [hidden] rule, which display:grid above would otherwise win. */
+.an-tab-badge[hidden] { display: none; }
+
+.an-tab-badge-num {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: var(--an-badge-num);
+}
+
+.an-tab-badge-total {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: var(--an-badge-total);
+    opacity: var(--an-badge-mute);
+}
+
+/* Drawn slash rather than a "/" glyph — keeps the angle exact at any size.
+   Spans both cells; decorative, so it is aria-hidden in the markup. */
+.an-tab-badge-slash {
+    position: relative;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    width: 100%;
+    height: 100%;
+}
+
+.an-tab-badge-slash::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1px;
+    height: 116%;
+    transform: translate(-50%, -50%) rotate(30deg);
+    background: currentColor;
+    opacity: var(--an-badge-slash);
+}
+
+/* Current article title, upright, in the empty margin beside the rail.
+   Absolutely positioned inside the tab so it tracks the tab's slide when the
+   drawer opens without any magic offsets; pointer-events:none so it can never
+   swallow a click meant for the page beneath it. Muted so the numeral stays
+   the primary read. */
+.an-rail-caption {
+    position: absolute;
+    left: calc(100% + 0.6rem);
+    top: 1.15rem;
+
+    max-width: 13rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+    pointer-events: none;
+
+    color: var(--gold-primary, #C4943A);
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    opacity: var(--an-caption-mute, 0.72);
+    transition: opacity 0.2s ease;
+}
+
+.an-rail-caption[hidden] { display: none; }
+
+/* The open drawer occupies the caption's space — fade it out rather than
+   letting it ride out over the page. */
+.an-tab.an-is-open .an-rail-caption { opacity: 0; }
+
+/* Below the desktop rail width there is no margin to hold the caption. */
+@media (max-width: 1199px) {
+    .an-rail-caption { display: none; }
+}
+
+/* On small screens drop the badge too, per the brief — the Contents tab,
+   its label, and the chevron are all left intact. */
+@media (max-width: 720px) {
+    .an-tab-badge { display: none; }
+}
 
 /* Companion essays section */
 .an-companions { border-top-color: rgba(31, 16, 18, 0.22); }
