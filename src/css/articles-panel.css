@@ -24,9 +24,19 @@
     text-underline-offset: 2px;
 }
 
+/* Hover: brighter, easier to track while reading.
+   Token: --gold-light #D4A84A = rgb(212, 168, 74) — the same honey gold as the
+   Contents drawer's "Download the Articles" band (.an-companions.an-downloads).
+   A TINT, not a fill. Starting opacity 0.32 on the background, 0.85 on the
+   underline; tune those two together.
+   Why 0.32: over --brown-deep #4E2925 it composites to rgb(121, 82, 49), which
+   keeps --cream body text at 5.05:1 (AA) while widening the hovered-vs-resting
+   delta from 1.50 to 1.84. Going brighter costs legibility fast — 0.38 drops
+   text to 4.54:1 (a hair over the 4.5 floor) and 0.45 fails AA at 3.98:1. */
 [data-span]:hover {
-    background-color: rgba(196, 148, 58, 0.25);
-    text-decoration-color: rgba(196, 148, 58, 0.7);
+    background-color: rgba(212, 168, 74, 0.32);
+    text-decoration-style: solid;
+    text-decoration-color: rgba(212, 168, 74, 0.85);
 }
 
 [data-span].ap-active {
@@ -47,7 +57,14 @@
     text-decoration-color: rgba(196, 148, 58, 0.55);
 }
 
-[data-named="true"]:hover,
+/* Named spans sit later in the cascade at equal specificity, so their hover
+   underline would otherwise override the brighter one above. Kept on the same
+   --gold-light token so both hover states read as one treatment. */
+[data-named="true"]:hover {
+    text-decoration-style: solid;
+    text-decoration-color: var(--gold-light, #D4A84A);
+}
+
 [data-named="true"].ap-active {
     text-decoration-style: solid;
     text-decoration-color: var(--gold-primary, #C4943A);
