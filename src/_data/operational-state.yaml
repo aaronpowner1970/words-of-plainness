@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: July 23, 2026
+# Last updated: July 25, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -38,7 +38,9 @@ workstreams:
       declaration: "Text locked 2026-04-25. 13 sections, 'Of ___' naming. Subtitle: Christ-Centered Declarations of Shared Beliefs."
       apparatus: "13-article citation cluster v1.0 CLOSED 2026-05-19/20."
       page: "/articles/ live — chapter-equivalent page with full toolbar."
-      assets: "LIVE: PDF, Visual Summary/infographic, Articles Podcast (3 episodes), per-article Slides viewer (A01–A13), Personal Reflection → Discipleship Journal. Facilitator-notes layer seeded; delivery method undecided."
+      assets: "LIVE: PDF, Visual Summary/infographic, Articles Podcast (3 episodes), per-article Slides viewer (A01–A13), Personal Reflection → Discipleship Journal, article banner art (A00 opener + A01–A13). Facilitator-notes layer seeded; delivery method undecided."
+      banners: "LIVE 2026-07-25 (commit 8dfa761). 53 WebP variants (3:1, q80, tiers 480/768/1536 + 2048 where native allows) on R2 under web/banners/, served from media.wordsofplainness.org with immutable cache headers. Wired via src/_data/banners.json + src/_includes/macros/banner.njk — import WITH CONTEXT. A00 eager/fetchpriority=high (page LCP); A01–A13 lazy, above each article title. Uploader: tools/wop_r2_upload_banners.py (boto3 + S3 endpoint; bare wrangler 403s)."
+      fixes: "2026-07-25 (commit f38c191): paragraphSync in .eleventy.js now masks <script>/<style> blocks before injecting sync-para/data-paragraph. It had been rewriting the <p> tags inside dumped-JSON scripts, breaking the JSON string literals — WOP_HOLD never defined and the 'How we hold this' disclosures on A06/A08 were dead on the live site. WOP_GODEEPER and apparatusData were exposed to the same break and are now covered."
     frontier:
       group_display_vr: >
         ACTIVE FIELD-TEST. The 2D /articles/ page is displayed inside a
