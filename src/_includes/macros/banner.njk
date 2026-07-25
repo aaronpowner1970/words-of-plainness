@@ -1,0 +1,34 @@
+{#
+  src/_includes/macros/banner.njk
+
+  Renders an /articles/ banner (3:1 WebP, served from R2 via
+  media.wordsofplainness.org). Data lives in src/_data/banners.json.
+
+  Import WITH CONTEXT — the macro reads the `banners` global, and Nunjucks
+  macros do not inherit the template context otherwise:
+
+      {% from "macros/banner.njk" import banner with context %}
+      {{ banner("a00", eager=true, cls="article-banner--opener") }}
+      {{ banner("a05") }}
+
+  The opener is the page LCP image, so it loads eager with fetchpriority=high;
+  every other banner lazy-loads.
+
+  Do NOT write a nested Nunjucks comment marker inside this block — the inner
+  closer ends the comment early and the build fails with "unexpected end of
+  comment".
+#}
+{% macro banner(key, eager=false, cls="") %}
+{%- set b = banners.items[key] -%}
+{%- if b -%}
+<figure class="article-banner{% if cls %} {{ cls }}{% endif %}">
+  <img
+    src="{{ b.urls['768'] }}"
+    srcset="{% for w in b.widths %}{{ b.urls[w|string] }} {{ w }}w{% if not loop.last %}, {% endif %}{% endfor %}"
+    sizes="(max-width: 960px) 100vw, 860px"
+    width="{{ b.nativeWidth }}" height="{{ b.nativeHeight }}"
+    alt="{{ b.alt }}"
+    {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+</figure>
+{%- endif -%}
+{% endmacro %}

@@ -4272,6 +4272,29 @@ h2[id], h3[id], [id^="section-"] {
     opacity: 1;
 }
 
+/* --- Article Banners (3:1 WebP, served from R2) --- */
+/* aspect-ratio reserves the band before the image lands, so nothing shifts. */
+.article-banner {
+    margin: 0 0 var(--space-md);
+    max-width: 100%;
+}
+
+.article-banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 1;
+    object-fit: cover;
+    border-radius: var(--radius-md, 8px);
+    border: 1px solid rgba(196, 148, 58, 0.20);
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.38);
+}
+
+/* Opening banner sits directly beneath the hero, above the prologue. */
+.article-banner--opener {
+    margin-bottom: var(--space-lg);
+}
+
 /* --- Article Section --- */
 .article-section {
     margin-bottom: var(--space-xl);
