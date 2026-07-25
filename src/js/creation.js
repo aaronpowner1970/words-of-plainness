@@ -117,6 +117,16 @@
                 c.classList.add('ct-lit');
                 var curSpan = c.closest && c.closest('.ct-span');
                 if (curSpan) curSpan.classList.add('ct-active-span');
+                // Stream: advance the panel only on a passage that actually has
+                // citations. Connective spans hold the last cited one rather
+                // than flashing an empty panel.
+                if (curSpan && curSpan !== activeSpan) {
+                    activeSpan = curSpan;
+                    if (curSpan.hasAttribute('data-has-cite')) {
+                        lastCited = curSpan;
+                        streamTo(curSpan);
+                    }
+                }
                 if (follow) {
                     programmatic = true;
                     centerCue(c);
@@ -149,16 +159,38 @@
             window.setTimeout(function () { programmatic = false; }, 650); }
     });
 
-    /* ---- citation panel (reuses articles-panel.css .ap-) ---- */
+    /* ---- citation panel (reuses articles-panel.css .ap-) ----
+       ONE panel serves three states:
+         stream  — docked column (>=1200px), follows the film, never pauses
+         pinned  — a passage held for study; the film is paused
+         overlay — narrow screens: tapping a passage raises it as a drawer
+       Non-modal by design. Focus was never trapped here, so aria-modal is no
+       longer claimed; role is complementary and the film keeps playing. */
+    var PREF_KEY = 'wop_creation_citations';
+    var HINT_KEY = 'wop_creation_hint';
+    var WIDE = window.matchMedia('(min-width: 1200px)');
+
+    function prefOff() {
+        try { return window.localStorage.getItem(PREF_KEY) === 'off'; } catch (_) { return false; }
+    }
+    function setPrefOff(off) {
+        try {
+            if (off) { window.localStorage.setItem(PREF_KEY, 'off'); }
+            else { window.localStorage.removeItem(PREF_KEY); }
+        } catch (_) {}
+    }
+
+    var dock = document.getElementById('creationDock');
+    var citeToggle = document.getElementById('ctCiteToggle');
     var backdrop = document.createElement('div');
     backdrop.className = 'ap-backdrop';
     var panel = document.createElement('aside');
-    panel.className = 'ap-panel ap-panel--creation';
-    panel.setAttribute('role', 'dialog');
-    panel.setAttribute('aria-modal', 'true');
+    panel.className = 'ap-panel ap-panel--creation ct-docked';
+    panel.setAttribute('role', 'complementary');
+    panel.setAttribute('aria-label', 'Scriptures behind the passage now playing');
     panel.setAttribute('aria-hidden', 'true');
     document.body.appendChild(backdrop);
-    document.body.appendChild(panel);
+    (dock || document.body).appendChild(panel);
 
     function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
@@ -176,14 +208,11 @@
         }).join('') + '</ul>';
     }
 
-    var openSpan = null;
-    function openPanel(spanEl) {
+    /* The ONE place citation markup is built. Both the stream and the
+       pinned/overlay view call this \u2014 there is no second renderer. */
+    function renderCitations(spanEl) {
         var id = spanEl.dataset.s;
         var d = CITES[id] || { st: 'pending', ty: '', tx: spanEl.textContent.trim(), pc: '', b: [], r: [] };
-
-        if (player && playerReady) { try { player.pauseVideo(); } catch (_) {} }
-        if (openSpan) openSpan.classList.remove('ct-open');
-        spanEl.classList.add('ct-open'); openSpan = spanEl;
 
         var body;
         if (d.st === 'pending') {
@@ -200,65 +229,172 @@
                 '</div>';
         }
 
-        panel.innerHTML =
-            '<div class="ap-header"><div class="ap-header-left">' +
+        return '<div class="ap-header"><div class="ap-header-left">' +
                 (d.ty ? '<span class="ap-type-badge" data-type="' + esc(d.ty) + '">' + esc(d.ty) + '</span>' : '') +
                 '<button class="ap-seek" type="button" aria-label="Play the film from this passage">' +
                     '<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>' +
                     '<span>Play from here</span>' +
                 '</button>' +
+                '<button class="ct-resume-film" type="button" hidden>' +
+                    '<svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>' +
+                    '<span>Resume film</span>' +
+                '</button>' +
             '</div>' +
-            '<button class="ap-close" type="button" aria-label="Close">' +
-                '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+            '<button class="ap-close ct-hide-cites" type="button" aria-label="Hide citations">' +
+                '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+                '<span>Hide citations</span>' +
             '</button></div>' +
             '<div class="ap-body">' +
                 '<div class="ap-span-text">\u201C' + esc(d.tx || spanEl.textContent.trim()) + '\u201D</div>' +
                 body +
             '</div>';
-
-        panel.querySelector('.ap-close').addEventListener('click', closePanel);
-        (function () {
-            var seekBtn = panel.querySelector('.ap-seek');
-            if (!seekBtn) return;
-            var startT = parseFloat(spanEl.dataset.start);
-            seekBtn.addEventListener('click', function () {
-                if (player && playerReady && !isNaN(startT)) {
-                    try { player.seekTo(startT, true); player.playVideo(); } catch (_) {}
-                }
-                follow = true; if (resume) resume.classList.remove('ct-show');  // re-arm auto-follow
-                closePanel();
-            });
-        })();
-        panel.classList.add('ap-open');
-        backdrop.classList.add('ap-open');
-        panel.setAttribute('aria-hidden', 'false');
     }
 
-    function closePanel() {
+    /* ---- panel state ---- */
+    var streamOn = false;      // stream enabled (and panel showing)
+    var pinned = null;         // span held for study; film paused
+    var activeSpan = null;     // span under the lit cue
+    var lastCited = null;      // last span that HAD citations \u2014 held over bridges
+
+    function firstCited() {
+        for (var i = 0; i < spans.length; i++) {
+            if (spans[i].hasAttribute('data-has-cite')) return spans[i];
+        }
+        return null;
+    }
+
+    function showBox() { panel.classList.add('ap-open'); panel.setAttribute('aria-hidden', 'false'); }
+    function hideBox() {
         panel.classList.remove('ap-open');
-        backdrop.classList.remove('ap-open');
         panel.setAttribute('aria-hidden', 'true');
-        if (openSpan) { openSpan.classList.remove('ct-open'); openSpan = null; }
+        backdrop.classList.remove('ap-open');
+    }
+
+    function paint(spanEl) {
+        panel.innerHTML = renderCitations(spanEl);
+
+        var hideBtn = panel.querySelector('.ct-hide-cites');
+        if (hideBtn) hideBtn.addEventListener('click', hideCitations);
+
+        var seekBtn = panel.querySelector('.ap-seek');
+        if (seekBtn) seekBtn.addEventListener('click', function () {
+            var startT = parseFloat(spanEl.dataset.start);
+            if (player && playerReady && !isNaN(startT)) {
+                try { player.seekTo(startT, true); player.playVideo(); } catch (_) {}
+            }
+            unpin(true);
+        });
+
+        var resumeFilm = panel.querySelector('.ct-resume-film');
+        if (resumeFilm) {
+            resumeFilm.hidden = !pinned;
+            resumeFilm.addEventListener('click', function () {
+                if (player && playerReady) { try { player.playVideo(); } catch (_) {} }
+                unpin(true);
+            });
+        }
+
+        // Calm fade on each new passage; the reduced-motion block neutralises it.
+        var b = panel.querySelector('.ap-body');
+        if (b) { b.classList.remove('ct-fade'); void b.offsetWidth; b.classList.add('ct-fade'); }
+    }
+
+    /* Stream: follow the film. Never pauses, never steals focus. */
+    function streamTo(spanEl) {
+        if (!streamOn || pinned || !WIDE.matches) return;
+        paint(spanEl);
+        showBox();
+    }
+
+    function openStream() {
+        if (prefOff()) { if (citeToggle) citeToggle.classList.add('ct-show'); return; }
+        streamOn = true;
+        if (citeToggle) citeToggle.classList.remove('ct-show');
+        if (!WIDE.matches) return;                       // no forced stream when narrow
+        var seed = lastCited || activeSpan || firstCited();
+        if (seed) { paint(seed); showBox(); }
+    }
+
+    function hideCitations() {
+        if (pinned) unpin(false);
+        streamOn = false;
+        hideBox();
+        setPrefOff(true);
+        if (citeToggle) citeToggle.classList.add('ct-show');
+    }
+
+    function showCitations() {
+        setPrefOff(false);
+        if (citeToggle) citeToggle.classList.remove('ct-show');
+        if (WIDE.matches) { openStream(); return; }
+        var sp = lastCited || activeSpan || firstCited();   // narrow: current passage on demand
+        if (sp) pinSpan(sp);
+    }
+
+    /* Pin: hold a passage for study. Pauses the film and suspends the stream. */
+    function pinSpan(spanEl) {
+        if (player && playerReady) { try { player.pauseVideo(); } catch (_) {} }
+        if (pinned) pinned.classList.remove('ct-open');
+        pinned = spanEl;
+        spanEl.classList.add('ct-open');
+        panel.classList.add('ct-pinned');
+        paint(spanEl);
+        showBox();
+        if (!WIDE.matches) backdrop.classList.add('ap-open');
+    }
+
+    function unpin(rearm) {
+        if (pinned) { pinned.classList.remove('ct-open'); pinned = null; }
+        panel.classList.remove('ct-pinned');
+        backdrop.classList.remove('ap-open');
+        if (rearm) { follow = true; if (resume) resume.classList.remove('ct-show'); }
+
+        if (!WIDE.matches || !streamOn) { hideBox(); return; }
+        var sp = lastCited || activeSpan;                // back to the stream
+        if (sp) paint(sp); else hideBox();
     }
 
     spans.forEach(function (sp) {
         if (!sp.hasAttribute('data-has-cite')) return;   // inert bridge / pending stub
-        sp.addEventListener('click', function () { openPanel(sp); });
+        sp.addEventListener('click', function () { pinSpan(sp); });
         sp.setAttribute('tabindex', '0');
         sp.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPanel(sp); }
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pinSpan(sp); }
         });
     });
-    backdrop.addEventListener('click', closePanel);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePanel(); });
 
-    /* ---- entry / about worship notice ---- */
+    // Backdrop / Escape release the pin (or close the narrow overlay). Neither
+    // sets the remembered preference \u2014 only the labelled Hide control does.
+    function dismiss() {
+        if (pinned) { unpin(true); return; }
+        if (!WIDE.matches) hideBox();
+    }
+    backdrop.addEventListener('click', dismiss);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') dismiss(); });
+    if (citeToggle) citeToggle.addEventListener('click', showCitations);
+
+    /* ---- streaming hint (dismissible, remembered) ---- */
+    var hint = document.getElementById('ctHint');
+    var hintX = document.getElementById('ctHintX');
+    function hintDismissed() {
+        try { return window.localStorage.getItem(HINT_KEY) === 'off'; } catch (_) { return false; }
+    }
+    function showHint() { if (hint && !hintDismissed()) hint.classList.add('ct-show'); }
+    if (hintX && hint) hintX.addEventListener('click', function () {
+        hint.classList.remove('ct-show');
+        try { window.localStorage.setItem(HINT_KEY, 'off'); } catch (_) {}
+    });
+
+    /* ---- entry / about worship notice ----
+       Worship gate first, always: the stream opens on Enter, never before. */
     var entry = document.getElementById('creationEntry');
     var enterBtn = document.getElementById('creationEnterBtn');
     var aboutBtn = document.getElementById('creationAboutBtn');
     if (enterBtn && entry) enterBtn.addEventListener('click', function () {
         entry.classList.add('creation-hide');
         if (player && playerReady) { try { player.playVideo(); } catch (_) {} }
+        openStream();          // no-ops (and offers the toggle) when the pref is 'off'
+        showHint();
     });
     if (aboutBtn && entry) aboutBtn.addEventListener('click', function () {
         entry.classList.remove('creation-hide');

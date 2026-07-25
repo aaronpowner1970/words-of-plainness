@@ -208,10 +208,186 @@ html, body { overflow-x: clip; overflow-y: visible; }
 }
 .ct-resume.ct-show { opacity: 1; pointer-events: auto; }
 
+/* ── Reopen affordance + streaming hint ──────────────────────── */
+/* Bottom-right, clear of the centred resume pill. */
+.ct-cite-toggle {
+    position: fixed;
+    right: 18px;
+    bottom: 22px;
+    z-index: 30;
+    background: rgba(31, 16, 18, 0.92);
+    color: var(--gold-primary, #C4943A);
+    border: 1px solid rgba(196, 148, 58, 0.5);
+    border-radius: 22px;
+    padding: 0.5rem 0.95rem;
+    font-family: var(--font-sans, sans-serif);
+    font-weight: 600;
+    font-size: 0.78rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, background 0.18s, color 0.18s;
+}
+.ct-cite-toggle.ct-show { opacity: 1; pointer-events: auto; }
+.ct-cite-toggle:hover { background: var(--gold-primary, #C4943A); color: var(--brown-rich, #1F1012); }
+
+/* Sits ABOVE the resume pill (pill: bottom 22px, ~34px tall -> top edge 56px),
+   so the two never collide when both are showing. */
+.ct-hint {
+    position: fixed;
+    left: 50%;
+    bottom: 64px;
+    transform: translateX(-50%);
+    z-index: 29;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: min(92vw, 27rem);
+    padding: 0.4rem 0.5rem 0.4rem 0.85rem;
+    background: rgba(31, 16, 18, 0.86);
+    border: 1px solid rgba(196, 148, 58, 0.28);
+    border-radius: 20px;
+    color: var(--cream-dark, #D4C8B0);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.ct-hint.ct-show { opacity: 1; pointer-events: auto; }
+.ct-hint-x {
+    flex-shrink: 0;
+    display: inline-flex;
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.65;
+    cursor: pointer;
+}
+.ct-hint-x:hover { opacity: 1; color: var(--gold-primary, #C4943A); }
+
+/* ── Reading row: transcript + docked citation stream ────────── */
+/* Below 1200px the dock is display:contents — no box of its own, so the panel
+   inside it still renders as the fixed overlay drawer from articles-panel.css
+   instead of being hidden. */
+.creation-dock { display: contents; }
+
+@media (min-width: 1200px) {
+    /* Film band, so the dock can start below the sticky player and never
+       overlay it. .creation-stage-wrap is max-width 960px with clamp padding;
+       16:9 gives the height. Tunable if the player geometry changes. */
+    .creation-reading {
+        --ct-film-w: calc(min(960px, 100vw) - 3rem);
+        --ct-film-h: calc(var(--ct-film-w) * 9 / 16);
+        --ct-dock-top: calc(84px + var(--ct-film-h) + 1.25rem);
+
+        display: grid;
+        grid-template-columns: minmax(0, 760px) minmax(300px, 400px);
+        gap: clamp(1rem, 2.4vw, 2rem);
+        justify-content: center;
+        align-items: start;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .creation-reading .creation-transcript { margin-left: 0; margin-right: 0; }
+
+    .creation-dock {
+        display: block;
+        position: sticky;
+        top: var(--ct-dock-top);
+        height: calc(100vh - var(--ct-dock-top) - 1.5rem);
+        min-height: 220px;
+    }
+}
+
 /* ── Citation panel: widen + two columns (extends .ap-panel) ─── */
 @media (min-width: 1200px) {
     .ap-panel.ap-panel--creation { width: min(640px, 46vw); }
+
+    /* Docked stream: cancel the fixed right-sidebar treatment .ap-panel gets
+       from articles-panel.css and sit in the grid track instead. Specificity
+       (0,3,0 / 0,4,0) beats .ap-panel and .ap-panel.ap-open; creation.css also
+       loads last. /articles/ is untouched — every selector here carries
+       .ap-panel--creation. */
+    .ap-panel.ap-panel--creation.ct-docked {
+        position: static;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        transform: none;
+        border: 1px solid rgba(196, 148, 58, 0.22);
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.28s ease;
+    }
+
+    .ap-panel.ap-panel--creation.ct-docked.ap-open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+    }
+
+    /* Study state: the held passage reads as deliberately different from the
+       passing stream. */
+    .ap-panel.ap-panel--creation.ct-docked.ct-pinned {
+        border-color: rgba(196, 148, 58, 0.55);
+        box-shadow: 0 10px 34px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(196, 148, 58, 0.18);
+    }
 }
+
+/* Calm fade as each new passage streams in. */
+@keyframes ctFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: none; }
+}
+.ap-panel--creation .ap-body.ct-fade { animation: ctFadeIn 0.32s ease both; }
+
+/* Hide control: labelled, not a bare X — the clean film is one click away. */
+.ap-panel--creation .ap-close.ct-hide-cites {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.34rem;
+    width: auto;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(196, 148, 58, 0.45);
+    border-radius: 20px;
+    color: var(--gold-primary, #C4943A);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+.ap-panel--creation .ap-close.ct-hide-cites:hover {
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+}
+
+/* Resume film: shown only while a passage is pinned. */
+.ap-panel--creation .ct-resume-film {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.34rem;
+    flex-shrink: 0;
+    padding: 0.3rem 0.7rem;
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+    border: 1px solid #8a6722;
+    border-radius: 20px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+.ap-panel--creation .ct-resume-film[hidden] { display: none; }
+.ap-panel--creation .ct-resume-film:hover { background: var(--gold-light, #D4A84A); }
 .ap-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -297,7 +473,9 @@ html, body { overflow-x: clip; overflow-y: visible; }
 .creation-entry button:hover { background: var(--gold-light, #D4A84A); }
 
 @media (prefers-reduced-motion: reduce) {
-    .ct-cue, .ct-span, .ct-resume, .creation-entry { transition-duration: 0.01ms !important; }
+    .ct-cue, .ct-span, .ct-resume, .creation-entry,
+    .ct-cite-toggle, .ct-hint, .ap-panel--creation.ct-docked { transition-duration: 0.01ms !important; }
+    .ap-panel--creation .ap-body.ct-fade { animation: none; }
 }
 
 /* ── "Play from here": deliberate seek control in the creation citation

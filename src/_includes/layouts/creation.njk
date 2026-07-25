@@ -30,17 +30,35 @@
     </div>
 </div>
 
-<!-- Following transcript (auto-scrolls with the film; every claim is a citation span) -->
-<div class="creation-transcript" id="creationTranscript" data-pagefind-body>
-    <p class="ct-lead">Scroll along with the film. Each underlined passage opens the scriptures behind it &mdash; biblical witnesses first, Restoration witnesses beside them.</p>
-    {% for para in creation_transcript %}
-    <p class="ct-p">{% for span in para %}<span class="ct-span" data-s="{{ span.id }}" data-start="{{ span.start }}">{% for c in span.cues %}<span class="ct-cue" data-i="{{ c.i }}" data-cs="{{ c.s }}" data-ce="{{ c.e }}">{{ c.t }} </span>{% endfor %}</span> {% endfor %}</p>
-    {% endfor %}
-    <p class="ct-closing">This film is a form of worship &middot; No endorsements or polemics implied</p>
+<!-- Reading row: transcript + (desktop only) the docked citation stream.
+     #creationDock is display:contents below 1200px, so the panel inside it
+     falls back to the fixed overlay drawer without being hidden. -->
+<div class="creation-reading">
+    <!-- Following transcript (auto-scrolls with the film; every claim is a citation span) -->
+    <div class="creation-transcript" id="creationTranscript" data-pagefind-body>
+        <p class="ct-lead">Scroll along with the film. The scriptures behind each underlined passage stream beside it &mdash; biblical witnesses first, Restoration witnesses beside them.</p>
+        {% for para in creation_transcript %}
+        <p class="ct-p">{% for span in para %}<span class="ct-span" data-s="{{ span.id }}" data-start="{{ span.start }}">{% for c in span.cues %}<span class="ct-cue" data-i="{{ c.i }}" data-cs="{{ c.s }}" data-ce="{{ c.e }}">{{ c.t }} </span>{% endfor %}</span> {% endfor %}</p>
+        {% endfor %}
+        <p class="ct-closing">This film is a form of worship &middot; No endorsements or polemics implied</p>
+    </div>
+
+    <div class="creation-dock" id="creationDock"></div>
 </div>
 
 <!-- Resume-follow pill -->
 <button class="ct-resume" id="ctResume" type="button" aria-live="polite">&#8635; Resume follow</button>
+
+<!-- Reopen affordance: shown whenever the citation stream is hidden -->
+<button class="ct-cite-toggle" id="ctCiteToggle" type="button">&#9670; Show citations</button>
+
+<!-- Streaming hint: sits above the resume pill so the two never collide -->
+<div class="ct-hint" id="ctHint" role="note">
+    <span>Tap any line to hold &amp; study its scriptures</span>
+    <button class="ct-hint-x" id="ctHintX" type="button" aria-label="Dismiss hint">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+</div>
 
 <!-- Entry / About worship notice -->
 <div class="creation-entry" id="creationEntry" role="dialog" aria-modal="true" aria-labelledby="creationEntryTitle">
