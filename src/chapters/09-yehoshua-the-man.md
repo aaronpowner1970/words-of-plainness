@@ -27,6 +27,7 @@ audio:
     lyricsUrl: /assets/lyrics/09_01_Established_in_Him_Sacred_Americana.vtt
     alternates:
       - file: "09_02_Established_in_Him_Contemporary_Christian.mp3"
+        lyricsUrl: /assets/lyrics/09_02_Established_in_Him_Contemporary_Christian.vtt
         label: "Contemporary Christian"
   sections:
     - id: "pause-humility"

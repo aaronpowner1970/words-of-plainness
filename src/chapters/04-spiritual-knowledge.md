@@ -23,18 +23,22 @@ audio:
   overviewDuration: "6:03"
   testimony:
     file: "04_01_When_God_Becomes_Real_Sacred_Americana.mp3"
+    lyricsUrl: /assets/lyrics/04_01_When_God_Becomes_Real_Sacred_Americana.vtt
     title: "When God Becomes Real"
     label: "Sacred Americana"
     duration: "5:09"
     description: "A musical reflection on spiritual knowledge"
     alternates:
       - file: "04_02_When_God_Becomes_Real_Americana_Folk_Academics_Remix.mp3"
+        lyricsUrl: /assets/lyrics/04_02_When_God_Becomes_Real_Americana_Folk_Academics_Remix.vtt
         label: "Academics Remix"
         duration: "4:42"
       - file: "04_03_When_God_Becomes_Real_Soul_Worship.mp3"
+        lyricsUrl: /assets/lyrics/04_03_When_God_Becomes_Real_Soul_Worship.vtt
         label: "Gospel Soul — Male Baritone Lead with Full Choir Call-and-Response"
         duration: "4:33"
       - file: "04_04_When_God_Becomes_Real_Contemplative_Worship.mp3"
+        lyricsUrl: /assets/lyrics/04_04_When_God_Becomes_Real_Contemplative_Worship.vtt
         label: "Contemplative Worship — Warm Female Alto with Piano and Cello"
         duration: "7:59"
 

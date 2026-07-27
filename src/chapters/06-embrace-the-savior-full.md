@@ -22,33 +22,42 @@ audio:
   overviewLabel: "Podcast Discussion"
   testimony:
     file: "06_01_I_Have_Tasted_the_Light_Sacred_Americana.mp3"
+    lyricsUrl: /assets/lyrics/06_01_I_Have_Tasted_the_Light_Sacred_Americana.vtt
     title: "I Have Tasted the Light"
     label: "Sacred Americana"
     description: "A spoken word testimony exploring the reception of grace."
     duration: "6:03"
     alternates:
       - file: "06_02_I_Have_Tasted_the_Light_Contemporary_Christian.mp3"
+        lyricsUrl: /assets/lyrics/06_02_I_Have_Tasted_the_Light_Contemporary_Christian.vtt
         label: "Contemporary Christian"
         duration: "6:03"
       - file: "06_03_I_Have_Tasted_the_Light_Classical_Duet.mp3"
+        lyricsUrl: /assets/lyrics/06_03_I_Have_Tasted_the_Light_Classical_Duet.vtt
         label: "Classical Duet"
         duration: "6:25"
       - file: "06_04_I_Have_Tasted_the_Light_Soul_Worship.mp3"
+        lyricsUrl: /assets/lyrics/06_04_I_Have_Tasted_the_Light_Soul_Worship.vtt
         label: "Soul Worship"
         duration: "5:00"
       - file: "06_05_I_Have_Tasted_the_Light_Broadway_Ballad.mp3"
+        lyricsUrl: /assets/lyrics/06_05_I_Have_Tasted_the_Light_Broadway_Ballad.vtt
         label: "Broadway Ballad"
         duration: "6:05"
       - file: "06_06_I_Have_Tasted_the_Light_Americana_Folk.mp3"
+        lyricsUrl: /assets/lyrics/06_06_I_Have_Tasted_the_Light_Americana_Folk.vtt
         label: "Americana Folk"
         duration: "6:29"
       - file: "06_07_I_Have_Tasted_the_Light_Contemplative_Worship_Female_Vocal.mp3"
+        lyricsUrl: /assets/lyrics/06_07_I_Have_Tasted_the_Light_Contemplative_Worship_Female_Vocal.vtt
         label: "Contemplative Worship — Female Vocal"
         duration: "5:18"
       - file: "06_08_I_Have_Tasted_the_Light_Classical_Duet_Female_Vocal.mp3"
+        lyricsUrl: /assets/lyrics/06_08_I_Have_Tasted_the_Light_Classical_Duet_Female_Vocal.vtt
         label: "Classical Duet — Female Vocal"
         duration: "5:28"
       - file: "06_09_I_Have_Tasted_the_Light_Indie_Folk.mp3"
+        lyricsUrl: /assets/lyrics/06_09_I_Have_Tasted_the_Light_Indie_Folk.vtt
         label: "Indie Folk"
         duration: "6:31"
 pdf: WoP_Ch06_Embrace_the_Savior.pdf

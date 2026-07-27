@@ -27,8 +27,10 @@ audio:
     lyricsUrl: /assets/lyrics/10_01_He_Always_Knew_Me_Cinematic_Worship.vtt
     alternates:
       - file: "10_02_He_Always_Knew_Me_Contemporary_Christian.mp3"
+        lyricsUrl: /assets/lyrics/10_02_He_Always_Knew_Me_Contemporary_Christian.vtt
         label: "Contemporary Christian"
       - file: "10_03_He_Always_Knew_Me_Gospel_Soul.mp3"
+        lyricsUrl: /assets/lyrics/10_03_He_Always_Knew_Me_Gospel_Soul.vtt
         label: "Gospel Soul"
 
 lyrics: |

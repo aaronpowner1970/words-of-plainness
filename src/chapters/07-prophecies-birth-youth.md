@@ -29,6 +29,7 @@ audio:
     lyricsUrl: /assets/lyrics/07_01_Promises_Kept_Folk_Hymn.vtt
     alternates:
       - file: "07_02_Promises_Kept_Contemporary_Christian.mp3"
+        lyricsUrl: /assets/lyrics/07_02_Promises_Kept_Contemporary_Christian.vtt
         label: "Contemporary Christian"
         duration: "6:14"
 

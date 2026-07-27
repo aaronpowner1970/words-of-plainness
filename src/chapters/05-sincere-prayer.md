@@ -24,24 +24,30 @@ audio:
   overviewLabel: "Podcast Discussion"
   testimony:
     file: "05_01_The_Souls_Sincere_Desire_Soul_Worship.mp3"
+    lyricsUrl: /assets/lyrics/05_01_The_Souls_Sincere_Desire_Soul_Worship.vtt
     title: "The Soul's Sincere Desire"
     label: "Soul Worship"
     duration: "6:24"
     description: "A soul worship piano ballad on learning to speak to God — and hear Him answer"
     alternates:
       - file: "05_02_The_Souls_Sincere_Desire_Contemporary_Christian.mp3"
+        lyricsUrl: /assets/lyrics/05_02_The_Souls_Sincere_Desire_Contemporary_Christian.vtt
         label: "Contemporary Christian Worship — Anthemic and Congregational"
         duration: "4:42"
       - file: "05_03_The_Souls_Sincere_Desire_Cinematic_Inspirational.mp3"
+        lyricsUrl: /assets/lyrics/05_03_The_Souls_Sincere_Desire_Cinematic_Inspirational.vtt
         label: "Cinematic Orchestral — Piano-Led with Full Orchestra Build"
         duration: "5:58"
       - file: "05_04_The_Souls_Sincere_Desire_Celtic_Worship.mp3"
+        lyricsUrl: /assets/lyrics/05_04_The_Souls_Sincere_Desire_Celtic_Worship.vtt
         label: "Celtic Worship — Harp, Pipes, and Thin Places Spirituality"
         duration: "6:54"
       - file: "05_05_The_Souls_Sincere_Desire_Americana_Folk.mp3"
+        lyricsUrl: /assets/lyrics/05_05_The_Souls_Sincere_Desire_Americana_Folk.vtt
         label: "Americana Folk — Fingerpicked Guitar and Front Porch Testimony"
         duration: "5:59"
       - file: "05_06_The_Souls_Sincere_Desire_Broadway_Ballad.mp3"
+        lyricsUrl: /assets/lyrics/05_06_The_Souls_Sincere_Desire_Broadway_Ballad.vtt
         label: "Broadway Ballad — Theatrical Journey from Doubt to Discovery"
         duration: "6:59"
 
