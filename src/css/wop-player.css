@@ -61,6 +61,34 @@ body.wp-visible {
 .wp-play:hover { background: var(--gold-light, #D4A84A); border-color: var(--gold-light, #D4A84A); }
 .wp-play.wp-loading { opacity: 0.65; cursor: progress; }
 
+/* Transport buttons (shuffle / prev / next / repeat) — hidden until a page
+   activates playlist mode via WopPlayer.setQueue([...]). /articles/ and
+   chapter pages never call setQueue, so their bar stays single-track. */
+.wp-tx { display: none; width: 34px; height: 34px; padding: 0; flex: 0 0 auto; }
+.wp.wp-playlist-mode .wp-tx { display: inline-flex; }
+.wp-tx.wp-active {
+    background: rgba(196, 148, 58, 0.22);
+    border-color: var(--gold-primary, #C4943A);
+    color: var(--gold-light, #D4A84A);
+}
+.wp-repeat { position: relative; }
+.wp-repeat-badge {
+    display: none;
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+    line-height: 14px;
+    font-size: 9px;
+    font-weight: 600;
+    text-align: center;
+    color: #1F1012;
+    background: var(--gold-primary, #C4943A);
+    border-radius: 7px;
+}
+
 .wp-meta {
     flex: 0 1 220px;
     min-width: 0;

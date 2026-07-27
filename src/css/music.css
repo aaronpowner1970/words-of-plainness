@@ -824,3 +824,40 @@
         height: 110px;
     }
 }
+
+/* Queue-scope toggle — segmented control above the playlist */
+.queue-scope {
+    display: inline-flex;
+    gap: 0;
+    margin: 0 auto 1.25rem;
+    padding: 3px;
+    background: rgba(196, 148, 58, 0.10);
+    border: 1px solid rgba(196, 148, 58, 0.35);
+    border-radius: 999px;
+    align-self: center;
+}
+.playlist-container > .queue-scope {
+    display: flex;
+    width: fit-content;
+}
+.queue-scope-btn {
+    background: transparent;
+    color: var(--cream, #E8DCC4);
+    border: 0;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+.queue-scope-btn:hover { color: var(--gold-light, #D4A84A); }
+.queue-scope-btn[aria-checked="true"] {
+    background: var(--gold-primary, #C4943A);
+    color: #1F1012;
+    font-weight: 600;
+}
+.queue-scope-btn:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}

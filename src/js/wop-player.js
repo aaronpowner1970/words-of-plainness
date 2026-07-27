@@ -16,6 +16,13 @@
  *                      and auto-scrolls the active line to center
  *                      (skipped when prefers-reduced-motion).
  *   • lyricsUrl null → renders lyricsHtml statically.
+ *
+ * Playlist mode (OPT-IN, /music/ only):
+ *   Call WopPlayer.setQueue([...files]) to activate — reveals shuffle,
+ *   prev/next, and repeat (off / all / one) transport buttons, enables
+ *   auto-advance on 'ended', and skip-on-error. Single-track callers
+ *   (/articles/, chapter pages) don't call setQueue and get the plain
+ *   bar unchanged. Behavior ported from the legacy src/js/music-player.js.
  */
 (function () {
     'use strict';
@@ -35,6 +42,13 @@
         prefersReducedMotion: false,
         initialized: false,
 
+        // Playlist mode (opt-in via setQueue). Ignored when queue is empty.
+        queue: [],           // ordered file names
+        queueIndex: -1,      // index of currentFile in queue, or -1 if off-queue
+        shuffle: false,
+        shuffleOrder: [],
+        repeat: 'off',       // 'off' | 'all' | 'one'
+
         // Public API — resolve a file id or descriptor and start playback.
         play: function (arg) {
             if (!this.initialized) this.init();
@@ -51,6 +65,11 @@
 
             this.currentFile = desc.file;
             this.currentDesc = desc;
+            // In playlist mode, track the queue index so prev/next and
+            // auto-advance work regardless of whether this play was triggered
+            // by the transport or by a direct row click (including off-queue
+            // rows like an alternate clicked while scope is Core Journey).
+            this.queueIndex = this.queue.length ? this.queue.indexOf(desc.file) : -1;
 
             this.audio.pause();
             this.detachVttTrack();
@@ -69,6 +88,120 @@
                 self.els.btnPlay.classList.remove('wp-loading');
                 console.warn('WopPlayer: play failed —', err && err.message);
             });
+        },
+
+        // ── Playlist mode API (opt-in — /music/ activates; other pages don't) ──
+
+        setQueue: function (files) {
+            if (!this.initialized) this.init();
+            this.queue = Array.isArray(files) ? files.slice() : [];
+            // Recompute queueIndex against the new queue so the transport
+            // handles the currently-playing track correctly if it's still in.
+            this.queueIndex = this.currentFile ? this.queue.indexOf(this.currentFile) : -1;
+            if (this.shuffle) this.generateShuffleOrder();
+            this.root.classList.toggle('wp-playlist-mode', this.queue.length > 0);
+        },
+
+        clearQueue: function () {
+            this.setQueue([]);
+        },
+
+        playlistMode: function () {
+            return this.queue.length > 0;
+        },
+
+        playIndex: function (i) {
+            if (i < 0 || i >= this.queue.length) return;
+            this.play(this.queue[i]);
+        },
+
+        prev: function () {
+            if (!this.playlistMode() || !this.queue.length) return;
+            // Restart current if we're more than 3s in — familiar player behavior.
+            if (this.audio.currentTime > 3) { this.audio.currentTime = 0; return; }
+            var i = this.getAdjacentIndex(-1);
+            if (i !== -1) this.playIndex(i);
+        },
+
+        next: function () {
+            if (!this.playlistMode() || !this.queue.length) return;
+            var i = this.getAdjacentIndex(1);
+            if (i !== -1) this.playIndex(i);
+        },
+
+        getAdjacentIndex: function (direction) {
+            var n = this.queue.length;
+            if (!n) return -1;
+            // If off-queue (queueIndex=-1), prev/next drops us into the queue
+            // at the start (or end) instead of no-op.
+            if (this.queueIndex === -1) {
+                if (this.shuffle) return this.shuffleOrder[direction > 0 ? 0 : this.shuffleOrder.length - 1];
+                return direction > 0 ? 0 : n - 1;
+            }
+            if (this.shuffle) {
+                var pos = this.shuffleOrder.indexOf(this.queueIndex);
+                var np = pos + direction;
+                if (np >= 0 && np < this.shuffleOrder.length) return this.shuffleOrder[np];
+                if (this.repeat === 'all') {
+                    return direction > 0 ? this.shuffleOrder[0]
+                                         : this.shuffleOrder[this.shuffleOrder.length - 1];
+                }
+                return -1;
+            }
+            var ni = this.queueIndex + direction;
+            if (ni >= 0 && ni < n) return ni;
+            if (this.repeat === 'all') return direction > 0 ? 0 : n - 1;
+            return -1;
+        },
+
+        getNextAutoAdvance: function () {
+            // Auto-advance never wraps on its own — end-of-list needs repeat=all
+            // to reshuffle and restart. Off-queue direct plays fall through to
+            // the start of the queue so the reader isn't stranded.
+            if (!this.queue.length) return -1;
+            if (this.queueIndex === -1) {
+                return this.shuffle ? (this.shuffleOrder[0] || 0) : 0;
+            }
+            if (this.shuffle) {
+                var pos = this.shuffleOrder.indexOf(this.queueIndex);
+                var np = pos + 1;
+                return np < this.shuffleOrder.length ? this.shuffleOrder[np] : -1;
+            }
+            var ni = this.queueIndex + 1;
+            return ni < this.queue.length ? ni : -1;
+        },
+
+        toggleShuffle: function () {
+            this.shuffle = !this.shuffle;
+            this.els.btnShuffle.classList.toggle('wp-active', this.shuffle);
+            this.els.btnShuffle.setAttribute('aria-pressed', this.shuffle ? 'true' : 'false');
+            this.els.btnShuffle.title = 'Shuffle: ' + (this.shuffle ? 'On' : 'Off');
+            if (this.shuffle) this.generateShuffleOrder();
+            else this.shuffleOrder = [];
+        },
+
+        generateShuffleOrder: function () {
+            // Fisher-Yates, ported from legacy music-player.js.
+            var n = this.queue.length;
+            this.shuffleOrder = [];
+            for (var i = 0; i < n; i++) this.shuffleOrder.push(i);
+            for (var j = n - 1; j > 0; j--) {
+                var k = Math.floor(Math.random() * (j + 1));
+                var tmp = this.shuffleOrder[j];
+                this.shuffleOrder[j] = this.shuffleOrder[k];
+                this.shuffleOrder[k] = tmp;
+            }
+        },
+
+        toggleRepeat: function () {
+            var modes = ['off', 'all', 'one'];
+            var i = modes.indexOf(this.repeat);
+            this.repeat = modes[(i + 1) % modes.length];
+            var b = this.els.btnRepeat;
+            b.classList.toggle('wp-active', this.repeat !== 'off');
+            b.title = 'Repeat: ' + (this.repeat === 'off' ? 'Off'
+                                   : this.repeat === 'all' ? 'All' : 'One');
+            this.els.repeatBadge.style.display = this.repeat === 'one' ? 'block' : 'none';
         },
 
         resolve: function (arg) {
@@ -101,9 +234,23 @@
             root.setAttribute('hidden', '');
             root.innerHTML = [
                 '<div class="wp-bar" role="region" aria-label="Music player">',
+                    // Transport (playlist mode only — hidden by CSS unless .wp has .wp-playlist-mode).
+                    '<button class="wp-btn wp-tx wp-shuffle" type="button" title="Shuffle: Off" aria-label="Toggle shuffle" aria-pressed="false">',
+                        '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>',
+                    '</button>',
+                    '<button class="wp-btn wp-tx wp-prev" type="button" aria-label="Previous track">',
+                        '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none" aria-hidden="true"><polygon points="19 20 9 12 19 4 19 20"/><rect x="4" y="4" width="2" height="16"/></svg>',
+                    '</button>',
                     '<button class="wp-btn wp-play" type="button" aria-label="Play/Pause">',
                         '<svg class="wp-icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><polygon points="5 3 20 12 5 21"/></svg>',
                         '<svg class="wp-icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" style="display:none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>',
+                    '</button>',
+                    '<button class="wp-btn wp-tx wp-next" type="button" aria-label="Next track">',
+                        '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" stroke="none" aria-hidden="true"><polygon points="5 4 15 12 5 20 5 4"/><rect x="18" y="4" width="2" height="16"/></svg>',
+                    '</button>',
+                    '<button class="wp-btn wp-tx wp-repeat" type="button" title="Repeat: Off" aria-label="Cycle repeat mode">',
+                        '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
+                        '<span class="wp-repeat-badge" aria-hidden="true">1</span>',
                     '</button>',
                     '<div class="wp-meta">',
                         '<div class="wp-title" aria-live="polite">—</div>',
@@ -142,7 +289,12 @@
             this.audio = root.querySelector('.wp-audio');
             this.els = {
                 bar:          root.querySelector('.wp-bar'),
+                btnShuffle:   root.querySelector('.wp-shuffle'),
+                btnPrev:      root.querySelector('.wp-prev'),
                 btnPlay:      root.querySelector('.wp-play'),
+                btnNext:      root.querySelector('.wp-next'),
+                btnRepeat:    root.querySelector('.wp-repeat'),
+                repeatBadge:  root.querySelector('.wp-repeat-badge'),
                 iconPlay:     root.querySelector('.wp-icon-play'),
                 iconPause:    root.querySelector('.wp-icon-pause'),
                 title:        root.querySelector('.wp-title'),
@@ -172,11 +324,21 @@
             a.addEventListener('error', function () {
                 self.els.btnPlay.classList.remove('wp-loading');
                 console.warn('WopPlayer: audio error', a.error);
+                // Skip-on-error: in playlist mode, jump to the next track so a
+                // single missing file doesn't stall the whole queue.
+                if (self.playlistMode()) {
+                    var nxt = self.getNextAutoAdvance();
+                    if (nxt !== -1) setTimeout(function () { self.playIndex(nxt); }, 400);
+                }
             });
 
-            this.els.btnPlay.addEventListener('click',   function () { self.togglePlay(); });
-            this.els.btnClose.addEventListener('click',  function () { self.stopAndHide(); });
-            this.els.btnLyrics.addEventListener('click', function () { self.toggleDrawer(); });
+            this.els.btnPlay.addEventListener('click',    function () { self.togglePlay(); });
+            this.els.btnClose.addEventListener('click',   function () { self.stopAndHide(); });
+            this.els.btnLyrics.addEventListener('click',  function () { self.toggleDrawer(); });
+            this.els.btnPrev.addEventListener('click',    function () { self.prev(); });
+            this.els.btnNext.addEventListener('click',    function () { self.next(); });
+            this.els.btnShuffle.addEventListener('click', function () { self.toggleShuffle(); });
+            this.els.btnRepeat.addEventListener('click',  function () { self.toggleRepeat(); });
 
             this.els.progress.addEventListener('input', function (e) {
                 if (!a.duration) return;
@@ -231,6 +393,28 @@
             this.els.progress.value = '0';
             this.els.timeCur.textContent = '0:00';
             this.clearActiveLine();
+
+            if (!this.playlistMode()) return;
+
+            // Repeat-one loops the same track regardless of shuffle.
+            if (this.repeat === 'one') {
+                this.audio.currentTime = 0;
+                var self = this;
+                this.audio.play().catch(function () {});
+                return;
+            }
+
+            var nxt = this.getNextAutoAdvance();
+            if (nxt !== -1) {
+                this.playIndex(nxt);
+                return;
+            }
+            if (this.repeat === 'all') {
+                // End of pass with repeat-all: reshuffle (if shuffling) and restart from top.
+                if (this.shuffle) this.generateShuffleOrder();
+                this.playIndex(this.shuffle ? this.shuffleOrder[0] : 0);
+            }
+            // Else: end of list, no repeat — leave the bar showing but idle.
         },
 
         setPlayIcon: function (isPlaying) {

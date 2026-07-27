@@ -42,6 +42,17 @@ permalink: /music/
          ========================================== -->
     <div class="playlist-container">
 
+        <!-- Queue-scope toggle — governs which rows are in the auto-advance,
+             shuffle, and repeat queue. Individual rows stay clickable in
+             both modes; the toggle only bounds the queue. Persisted in
+             localStorage as 'wop-music-queue-scope' ('core' | 'full'). -->
+        <div class="queue-scope" id="queueScope" role="radiogroup" aria-label="Queue scope">
+            <button type="button" class="queue-scope-btn" data-scope="core"
+                    role="radio" aria-checked="true">Core Journey</button>
+            <button type="button" class="queue-scope-btn" data-scope="full"
+                    role="radio" aria-checked="false">Full Collection</button>
+        </div>
+
         <!-- Section 0: Ministry Collection -->
         <div class="playlist-section-header">
             <h2 class="section-title">Ministry Anthems</h2>
@@ -175,18 +186,71 @@ permalink: /music/
 <script>window.WOP_MUSIC_CATALOG = {{ collections.chapters | musicCatalog | safe }};</script>
 <script src="/js/wop-player.js?v={{ site.version }}" defer></script>
 <script>
-// Wire every .playlist-row click to the shared WopPlayer. Row already
-// carries data-play-file="<mp3>" which WopPlayer.play() resolves against
-// WOP_MUSIC_CATALOG (title, style, lyricsUrl, lyricsHtml — same source of
-// truth /articles/ and chapter pages consume).
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.playlist-row[data-play-file]').forEach(function (row) {
-        row.addEventListener('click', function (e) {
-            if (e.target.closest('a')) return;   // let chapter-link anchors navigate
-            var file = row.getAttribute('data-play-file');
-            if (file && window.WopPlayer) window.WopPlayer.play(file);
+// /music/ playlist controller — thin wrapper over WopPlayer's opt-in
+// playlist mode. Row clicks call WopPlayer.play(file); the transport
+// (shuffle/prev/next/repeat) lives inside the player itself and only
+// renders because we call setQueue() below.
+(function () {
+    var SCOPE_KEY = 'wop-music-queue-scope';
+
+    function loadScope() {
+        try { return localStorage.getItem(SCOPE_KEY) === 'full' ? 'full' : 'core'; }
+        catch (_) { return 'core'; }
+    }
+
+    function saveScope(v) {
+        try { localStorage.setItem(SCOPE_KEY, v); } catch (_) {}
+    }
+
+    function collectQueue(scope) {
+        var sel = scope === 'full'
+            ? '.playlist-row[data-play-file]'
+            : '.playlist-row:not(.playlist-row--alt)[data-play-file]';
+        return Array.prototype.map.call(
+            document.querySelectorAll(sel),
+            function (row) { return row.getAttribute('data-play-file'); }
+        );
+    }
+
+    function applyScope(scope) {
+        // Rebuild the queue + reshuffle. Does NOT interrupt the current
+        // track (WopPlayer.setQueue only updates queue/queueIndex/shuffleOrder;
+        // audio playback isn't touched). If the currently-playing track was
+        // removed from the new queue (queueIndex = -1), the auto-advance
+        // fallback in getNextAutoAdvance drops the reader into the new set
+        // when this song ends.
+        if (window.WopPlayer) window.WopPlayer.setQueue(collectQueue(scope));
+
+        document.querySelectorAll('#queueScope .queue-scope-btn').forEach(function (b) {
+            var on = b.dataset.scope === scope;
+            b.setAttribute('aria-checked', on ? 'true' : 'false');
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Row clicks always play the clicked file — even if it isn't in the
+        // current scope's queue (spec: alternates stay clickable in Core mode).
+        document.querySelectorAll('.playlist-row[data-play-file]').forEach(function (row) {
+            row.addEventListener('click', function (e) {
+                if (e.target.closest('a')) return;   // let chapter-link anchors navigate
+                var file = row.getAttribute('data-play-file');
+                if (file && window.WopPlayer) window.WopPlayer.play(file);
+            });
+        });
+
+        // Scope toggle: buttons, persistence, initial state.
+        var currentScope = loadScope();
+        applyScope(currentScope);
+        document.querySelectorAll('#queueScope .queue-scope-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var s = btn.dataset.scope;
+                if (s === currentScope) return;
+                currentScope = s;
+                saveScope(s);
+                applyScope(s);
+            });
         });
     });
-});
+})();
 </script>
 {% endblock %}
