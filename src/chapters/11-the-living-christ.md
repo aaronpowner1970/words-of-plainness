@@ -25,6 +25,7 @@ audio:
     title: "Panteles"
     label: "Sacred Ballad"
     description: "A sacred ballad on the reach of Christ — completely, for all time, for anyone."
+    lyricsUrl: /assets/lyrics/11_01_Panteles_Sacred_Ballad.vtt
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>

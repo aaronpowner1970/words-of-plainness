@@ -328,11 +328,12 @@
         },
 
         attachVttTrack: function (vttUrl) {
-            // <track> from a cross-origin URL requires the audio element to be
-            // CORS-enabled AND the server to send the CORS headers. Set it
-            // only when a VTT is present so the plain-mp3 path (Phase 1) is
-            // never blocked by missing CORS on the CDN.
-            this.audio.crossOrigin = 'anonymous';
+            // <track> requires the audio element to be CORS-enabled ONLY when
+            // the track src is cross-origin from the page. Same-origin VTTs
+            // (shipped under /assets/lyrics/) work without CORS on either
+            // side, which lets the pilot avoid a Cloudflare-dashboard round
+            // trip to expand R2 bucket CORS beyond the two production hosts.
+            if (isCrossOrigin(vttUrl)) this.audio.crossOrigin = 'anonymous';
             var t = document.createElement('track');
             t.kind = 'metadata';
             t.src = vttUrl;
@@ -424,6 +425,16 @@
         var m = Math.floor(seconds / 60);
         var s = Math.floor(seconds % 60);
         return m + ':' + (s < 10 ? '0' + s : s);
+    }
+
+    function isCrossOrigin(url) {
+        // Relative URLs are always same-origin.
+        if (!/^https?:\/\//i.test(url)) return false;
+        try {
+            return new URL(url, window.location.href).origin !== window.location.origin;
+        } catch (_) {
+            return true;
+        }
     }
 
     if (document.readyState === 'loading') {

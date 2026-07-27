@@ -24,6 +24,7 @@ audio:
     label: "Sacred Americana"
     duration: "6:48"
     description: "A sacred folk hymn testimony from beholding the heart of Christ."
+    lyricsUrl: /assets/lyrics/09_01_Established_in_Him_Sacred_Americana.vtt
     alternates:
       - file: "09_02_Established_in_Him_Contemporary_Christian.mp3"
         label: "Contemporary Christian"

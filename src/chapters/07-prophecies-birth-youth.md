@@ -26,6 +26,7 @@ audio:
     label: "Folk Hymn"
     description: "A sacred folk hymn testimony of the ancient promise kept — from prophecy through the hidden years."
     duration: "7:29"
+    lyricsUrl: /assets/lyrics/07_01_Promises_Kept_Folk_Hymn.vtt
     alternates:
       - file: "07_02_Promises_Kept_Contemporary_Christian.mp3"
         label: "Contemporary Christian"

@@ -26,6 +26,7 @@ audio:
     label: "Desert Troubadour"
     description: "A desert troubadour testimony of baptism, temptation, and the beginning of mortal ministry."
     duration: "5:34"
+    lyricsUrl: /assets/lyrics/08_01_Prepared_in_All_Things_Desert_Troubadour.vtt
 
 lyrics: |
   <p class="section"><strong>[Verse 1]</strong></p>
