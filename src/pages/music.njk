@@ -7,89 +7,12 @@ permalink: /music/
 
 {% block styles %}
 <link rel="stylesheet" href="/css/music.css">
+<link rel="stylesheet" href="/css/wop-player.css?v={{ site.version }}">
 {% endblock %}
 
-<!-- Music Layout (clears fixed header) -->
+<!-- Music Layout — sticky mini-player + anchored lyrics drawer render from
+     /js/wop-player.js (shared with /articles/ and chapter pages). -->
 <div class="music-layout">
-
-<!-- ==========================================
-     Sticky Player
-     ========================================== -->
-<div class="music-player-sticky" id="musicPlayerSticky">
-<div class="music-player-bar" id="musicPlayerBar">
-    <div class="player-bar-inner">
-        <div class="player-controls">
-            <button class="player-btn btn-shuffle" id="btnShuffle" title="Shuffle: Off" aria-label="Toggle shuffle">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
-                    <polyline points="16 3 21 3 21 8"></polyline>
-                    <line x1="4" y1="20" x2="21" y2="3"></line>
-                    <polyline points="21 16 21 21 16 21"></polyline>
-                    <line x1="15" y1="15" x2="21" y2="21"></line>
-                    <line x1="4" y1="4" x2="9" y2="9"></line>
-                </svg>
-            </button>
-            <button class="player-btn btn-prev" id="btnPrev" title="Previous track" aria-label="Previous track">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="currentColor">
-                    <polygon points="19 20 9 12 19 4 19 20"></polygon>
-                    <line x1="5" y1="4" x2="5" y2="20" stroke-width="3"></line>
-                </svg>
-            </button>
-            <button class="player-btn btn-play" id="btnPlay" title="Play" aria-label="Play">
-                <svg class="icon-play" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                <svg class="icon-pause" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none" style="display:none">
-                    <rect x="5" y="3" width="4" height="18"></rect>
-                    <rect x="15" y="3" width="4" height="18"></rect>
-                </svg>
-            </button>
-            <button class="player-btn btn-next" id="btnNext" title="Next track" aria-label="Next track">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="currentColor">
-                    <polygon points="5 4 15 12 5 20 5 4"></polygon>
-                    <line x1="19" y1="4" x2="19" y2="20" stroke-width="3"></line>
-                </svg>
-            </button>
-            <button class="player-btn btn-repeat" id="btnRepeat" title="Repeat: Off" aria-label="Toggle repeat">
-                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
-                    <polyline points="17 1 21 5 17 9"></polyline>
-                    <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-                    <polyline points="7 23 3 19 7 15"></polyline>
-                    <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-                </svg>
-                <span class="repeat-badge" id="repeatBadge" style="display:none">1</span>
-            </button>
-        </div>
-        <div class="now-playing">
-            <span class="now-playing-title" id="npTitle">Select a song</span>
-            <span class="now-playing-chapter" id="npChapter"></span>
-        </div>
-        <div class="player-progress">
-            <span class="time-current" id="timeCurrent">0:00</span>
-            <div class="progress-track" id="progressTrack">
-                <div class="progress-fill" id="progressFill"></div>
-                <input type="range" class="progress-input" id="progressInput" min="0" max="100" value="0" step="0.1" aria-label="Seek">
-            </div>
-            <span class="time-total" id="timeTotal">0:00</span>
-        </div>
-        <div class="player-volume">
-            <button class="player-btn btn-volume" id="btnVolume" title="Volume" aria-label="Toggle mute">
-                <svg class="icon-vol-on" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                </svg>
-                <svg class="icon-vol-mute" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="display:none">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"></polygon>
-                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                    <line x1="17" y1="9" x2="23" y2="15"></line>
-                </svg>
-            </button>
-            <input type="range" class="volume-input" id="volumeInput" min="0" max="100" value="80" aria-label="Volume">
-        </div>
-    </div>
-    <audio id="musicAudio" preload="none"></audio>
-</div>
-</div>
 
 <!-- ==========================================
      Page Content
@@ -97,23 +20,6 @@ permalink: /music/
 <div class="music-page">
     <div class="music-header">
         <h1 class="music-title">Complete Collection of Musical Testimonies</h1>
-    </div>
-
-    <!-- Lyrics Panel (collapsible, default closed) -->
-    <div class="lyrics-wrapper" id="lyricsWrapper">
-        <button class="lyrics-toggle" id="lyricsToggle" type="button" aria-expanded="false" aria-controls="lyricsPanel">
-            <span class="lyrics-toggle-label">Lyrics</span>
-            <span class="lyrics-toggle-arrow" id="lyricsArrow">&#9660;</span>
-        </button>
-        <div class="lyrics-panel-body" id="lyricsPanel">
-            <div class="music-lyrics-panel">
-                <h2 class="lyrics-heading" id="lyricsHeading">Select a song to view lyrics</h2>
-                <div class="lyrics-content" id="lyricsContent">
-                    <p class="no-lyrics">Choose a track from the playlist below to begin listening.</p>
-                </div>
-                <p class="lyrics-alt-note" id="lyricsAltNote" style="display:none">Lyrics shown are for the primary arrangement. This version may include minor lyrical variations.</p>
-            </div>
-        </div>
     </div>
 
     <!-- Concert Hall Card -->
@@ -155,16 +61,7 @@ permalink: /music/
                 {%- set trackNum = 1 -%}
                 {%- for item in ministryMusic.collection -%}
                 <tr class="playlist-row"
-                    data-src="https://media.wordsofplainness.org/web/{{ item.file }}"
-                    data-title="{{ item.title }}"
-                    data-label="{{ item.label }}"
-                    data-chapter="0"
-                    data-chapter-title=""
-                    data-chapter-url=""
-                    data-is-ministry="true"
-                    data-has-lyrics="{{ item.hasLyrics }}"
-                    data-description="{{ item.description | escape }}"
-                    data-lyrics="{{ (item.lyrics | escape) if item.lyrics else ((ministryMusic.anthemLyrics | escape) if item.hasLyrics else '') }}">
+                    data-play-file="{{ item.file }}">
                     <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
                         <div class="track-title-group">
@@ -191,13 +88,7 @@ permalink: /music/
                 {%- for chapter in collections.chapters -%}
                 {%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.file -%}
                 <tr class="playlist-row"
-                    data-src="https://media.wordsofplainness.org/web/{{ chapter.data.audio.testimony.file }}"
-                    data-title="{{ chapter.data.audio.testimony.title }}"
-                    data-label="{{ chapter.data.audio.testimony.label if chapter.data.audio.testimony.label else '' }}"
-                    data-chapter="{{ chapter.data.chapter }}"
-                    data-chapter-title="{{ chapter.data.title }}"
-                    data-chapter-url="{{ chapter.url }}"
-                    data-lyrics="{{ chapter.data.lyrics | escape if chapter.data.lyrics else '' }}">
+                    data-play-file="{{ chapter.data.audio.testimony.file }}">
                     <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
                         <div class="track-title-group">
@@ -230,15 +121,7 @@ permalink: /music/
                 {%- if item.alternates and item.alternates.length > 0 -%}
                 {%- for alt in item.alternates -%}
                 <tr class="playlist-row playlist-row--alt"
-                    data-src="https://media.wordsofplainness.org/web/{{ alt.file }}"
-                    data-title="{{ item.title }}"
-                    data-label="{{ alt.label }}"
-                    data-chapter="0"
-                    data-chapter-title=""
-                    data-chapter-url=""
-                    data-is-ministry="true"
-                    data-has-lyrics="{{ item.hasLyrics }}"
-                    data-lyrics="{{ (item.lyrics | escape) if item.lyrics else ((ministryMusic.anthemLyrics | escape) if item.hasLyrics else '') }}">
+                    data-play-file="{{ alt.file }}">
                     <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
                         <div class="track-title-group">
@@ -258,13 +141,7 @@ permalink: /music/
                 {%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.alternates and chapter.data.audio.testimony.alternates.length > 0 -%}
                 {%- for alt in chapter.data.audio.testimony.alternates -%}
                 <tr class="playlist-row playlist-row--alt"
-                    data-src="https://media.wordsofplainness.org/web/{{ alt.file }}"
-                    data-title="{{ chapter.data.audio.testimony.title }}"
-                    data-label="{{ alt.label }}"
-                    data-chapter="{{ chapter.data.chapter }}"
-                    data-chapter-title="{{ chapter.data.title }}"
-                    data-chapter-url="{{ chapter.url }}"
-                    data-lyrics="{{ chapter.data.lyrics | escape if chapter.data.lyrics else '' }}">
+                    data-play-file="{{ alt.file }}">
                     <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
                         <div class="track-title-group">
@@ -295,5 +172,21 @@ permalink: /music/
 </div><!-- /.music-layout -->
 
 {% block scripts %}
-<script src="/js/music-player.js"></script>
+<script>window.WOP_MUSIC_CATALOG = {{ collections.chapters | musicCatalog | safe }};</script>
+<script src="/js/wop-player.js?v={{ site.version }}" defer></script>
+<script>
+// Wire every .playlist-row click to the shared WopPlayer. Row already
+// carries data-play-file="<mp3>" which WopPlayer.play() resolves against
+// WOP_MUSIC_CATALOG (title, style, lyricsUrl, lyricsHtml — same source of
+// truth /articles/ and chapter pages consume).
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.playlist-row[data-play-file]').forEach(function (row) {
+        row.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;   // let chapter-link anchors navigate
+            var file = row.getAttribute('data-play-file');
+            if (file && window.WopPlayer) window.WopPlayer.play(file);
+        });
+    });
+});
+</script>
 {% endblock %}
