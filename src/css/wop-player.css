@@ -1,0 +1,260 @@
+/* WORDS OF PLAINNESS — Singleton Mini-Player
+   Sticky footer bar + collapsible lyrics drawer.
+   Palette borrows the site tokens (--gold-primary, --brown-rich, --cream-soft)
+   with hard-coded fallbacks for pages that don't load styles.css. */
+
+.wp {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1150; /* above bottom toolbar / floating action bar */
+    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+    color: var(--cream-soft, #F5EFE4);
+}
+
+.wp[hidden] { display: none; }
+
+body.wp-visible {
+    /* Keep page content from being covered by the bar. */
+    padding-bottom: 76px;
+}
+
+.wp-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background: #1F1012;
+    background: linear-gradient(180deg, rgba(31,16,18,0.98) 0%, rgba(31,16,18,1) 100%);
+    border-top: 1px solid rgba(196, 148, 58, 0.35);
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.45);
+    min-height: 56px;
+}
+
+.wp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: transparent;
+    color: var(--cream-soft, #F5EFE4);
+    border: 1px solid rgba(196, 148, 58, 0.25);
+    border-radius: 999px;
+    padding: 6px 10px;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.wp-btn:hover  { background: rgba(196, 148, 58, 0.12); border-color: rgba(196, 148, 58, 0.55); }
+.wp-btn:focus-visible { outline: 2px solid var(--gold-primary, #C4943A); outline-offset: 2px; }
+
+.wp-play {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    color: #1F1012;
+    background: var(--gold-primary, #C4943A);
+    border-color: var(--gold-primary, #C4943A);
+    flex: 0 0 auto;
+}
+.wp-play:hover { background: var(--gold-light, #D4A84A); border-color: var(--gold-light, #D4A84A); }
+.wp-play.wp-loading { opacity: 0.65; cursor: progress; }
+
+.wp-meta {
+    flex: 0 1 220px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.wp-title {
+    font-family: var(--font-serif, 'Crimson Pro', Georgia, serif);
+    font-size: 0.98rem;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.wp-style {
+    font-size: 0.78rem;
+    color: #c8b3a3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wp-scrub {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+.wp-time {
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: #c8b3a3;
+    flex: 0 0 auto;
+    min-width: 34px;
+    text-align: center;
+}
+.wp-progress {
+    flex: 1 1 auto;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background: rgba(245, 239, 228, 0.16);
+    border-radius: 2px;
+    cursor: pointer;
+}
+.wp-progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px; height: 12px;
+    background: var(--gold-primary, #C4943A);
+    border-radius: 50%;
+    border: 0;
+    cursor: pointer;
+}
+.wp-progress::-moz-range-thumb {
+    width: 12px; height: 12px;
+    background: var(--gold-primary, #C4943A);
+    border-radius: 50%;
+    border: 0;
+    cursor: pointer;
+}
+
+.wp-vol {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+.wp-mute {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+}
+.wp-volume {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 70px;
+    height: 4px;
+    background: rgba(245, 239, 228, 0.16);
+    border-radius: 2px;
+    cursor: pointer;
+}
+.wp-volume::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 10px; height: 10px;
+    background: var(--gold-primary, #C4943A);
+    border-radius: 50%; border: 0;
+}
+.wp-volume::-moz-range-thumb {
+    width: 10px; height: 10px;
+    background: var(--gold-primary, #C4943A);
+    border-radius: 50%; border: 0;
+}
+
+.wp-lyrics-toggle {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 8px 12px;
+}
+.wp-lyrics-toggle svg { transition: transform 0.2s; }
+.wp[class*="wp-drawer-open"] .wp-lyrics-toggle svg { transform: rotate(180deg); }
+
+.wp-close {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+/* ── Drawer ─────────────────────────────────────────── */
+
+.wp-drawer {
+    background: rgba(31, 16, 18, 0.97);
+    border-top: 1px solid rgba(196, 148, 58, 0.25);
+    max-height: 42vh;
+    overflow-y: auto;
+}
+.wp-drawer[hidden] { display: none; }
+
+.wp-drawer-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 18px 20px 22px;
+}
+
+/* Static-lyrics fallback (formatted HTML from ministryMusic.json /
+   chapter frontmatter — same shape as /music/ page). */
+.wp-static-lyrics {
+    color: #ecdfd4;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+.wp-static-lyrics .section {
+    margin: 14px 0 4px;
+    color: var(--gold-light, #D4A84A);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.wp-static-lyrics .verse,
+.wp-static-lyrics .chorus {
+    margin: 0 0 10px;
+}
+.wp-static-lyrics .chorus {
+    padding-left: 14px;
+    border-left: 2px solid rgba(196, 148, 58, 0.45);
+    font-style: italic;
+}
+
+.wp-lyrics-empty {
+    margin: 0;
+    color: #a8978a;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+/* VTT-synced lines (Phase 2 lights these up as .vtt files land). */
+.wp-vtt-lines {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: #a8978a;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+}
+.wp-vtt-line {
+    padding: 4px 6px;
+    transition: color 0.25s, transform 0.25s;
+    cursor: default;
+}
+.wp-vtt-line.wp-vtt-active {
+    color: #fff;
+    font-weight: 500;
+    transform: scale(1.03);
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+
+@media (max-width: 720px) {
+    .wp-bar { flex-wrap: wrap; row-gap: 8px; padding: 8px 12px; }
+    .wp-meta { flex: 1 1 60%; order: 1; }
+    .wp-play { order: 0; }
+    .wp-vol { display: none; }        /* hide volume on narrow screens */
+    .wp-scrub { flex: 1 1 100%; order: 3; }
+    .wp-lyrics-toggle { order: 2; }
+    .wp-close { order: 4; }
+    body.wp-visible { padding-bottom: 110px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wp-vtt-line { transition: none; }
+    .wp-lyrics-toggle svg { transition: none; }
+}

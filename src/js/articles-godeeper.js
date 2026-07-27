@@ -61,15 +61,15 @@
         var items = music.map(function (m) {
             var meta = [m.label, m.duration].filter(Boolean).map(esc).join(' \u00b7 ');
             return '<li class="gd-item gd-item--music">'
-                + '<a class="gd-item-link" href="' + esc(m.url) + '">'
+                + '<button type="button" class="gd-item-link gd-item-play" data-play-file="' + esc(m.file) + '" aria-label="Play ' + esc(m.title) + '">'
                     + '<span class="gd-music-icon" aria-hidden="true">'
-                        + '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
+                        + '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" stroke="none"><polygon points="6 4 20 12 6 20"/></svg>'
                     + '</span>'
                     + '<span class="gd-music-body">'
                         + '<span class="gd-item-title">' + esc(m.title) + '</span>'
                         + (meta ? '<span class="gd-item-meta">' + meta + '</span>' : '')
                     + '</span>'
-                + '</a>'
+                + '</button>'
             + '</li>';
         }).join('');
         return '<ul class="gd-list gd-list--music">' + items + '</ul>'
@@ -148,6 +148,16 @@
                 panes.forEach(function (p) {
                     p.classList.toggle('gd-hidden', p.getAttribute('data-gd-pane') !== key);
                 });
+            });
+        });
+
+        // Testimony rows trigger the singleton mini-player instead of
+        // navigating to the chapter (defect fix — readers used to land
+        // lost on the chapter page with the audio hidden behind a pill).
+        block.querySelectorAll('[data-play-file]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var file = btn.getAttribute('data-play-file');
+                if (file && window.WopPlayer) window.WopPlayer.play(file);
             });
         });
     }

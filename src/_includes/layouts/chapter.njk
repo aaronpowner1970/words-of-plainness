@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/ambient-player.css">
 <link rel="stylesheet" href="/css/concert-hall.css">
+<link rel="stylesheet" href="/css/wop-player.css?v={{ site.version }}">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
 {% endblock %}
 
@@ -245,6 +246,8 @@
     window.WOP_PAUSES = {{ pauses | dump | safe }};
 </script>
 {% endif %}
+<script>window.WOP_MUSIC_CATALOG = {{ collections.chapters | musicCatalog | safe }};</script>
+<script src="/js/wop-player.js?v={{ site.version }}" defer></script>
 <script src="/js/reading-progress.js"></script>
 <script src="/js/chapter.js?v={{ site.version }}"></script>
 <script src="/js/audio-sync.js"></script>
@@ -263,6 +266,7 @@
         cueId: '{{ pauses[0].id if pauses and pauses.length > 0 else "pause-closing" }}',
         overviewFile: 'https://media.wordsofplainness.org/web/{{ audio.overview }}',
         testimonyFile: 'https://media.wordsofplainness.org/web/{{ audio.testimony.file }}',
+        testimonyFileName: '{{ audio.testimony.file if audio.testimony and audio.testimony.file else "" }}',
         pdfFile: '/assets/pdf/{{ pdf }}',
         infographicFile: '{% if slides.cdn %}https://media.wordsofplainness.org/images/{{ slides.path }}{{ infographic }}{% else %}/assets/images/{{ infographic }}{% endif %}',
         slidesPath: '{% if slides.cdn %}https://media.wordsofplainness.org/images/{{ slides.path }}{% else %}/assets/slides/{{ slides.path }}{% endif %}',

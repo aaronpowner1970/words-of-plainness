@@ -10,6 +10,9 @@ const path = require('path');
 const scriptureData = require('./src/_data/scriptures.json');
 const articleThemes = require('./src/_data/articleThemes.json');
 const chapterThemes = require('./src/_data/chapterThemes.json');
+const ministryMusic = require('./src/_data/ministryMusic.json');
+
+const MEDIA_BASE = 'https://media.wordsofplainness.org/web/';
 
 module.exports = function(eleventyConfig) {
 
@@ -198,7 +201,105 @@ module.exports = function(eleventyConfig) {
 
         return JSON.stringify(out);
     });
-    
+
+    // =========================================
+    // MUSIC CATALOG — flattens every playable testimony into one map
+    // Keyed by R2 filename (stable, unique). Consumed client-side by
+    // wop-player.js on /articles/ and chapter pages so a testimony
+    // trigger can look up its full playback record without duplicating
+    // song metadata anywhere.
+    //   Usage: window.WOP_MUSIC_CATALOG = {{ collections.chapters | musicCatalog | safe }}
+    // Sources (in this order):
+    //   1. ministryMusic.json .collection[] + each .alternates[]
+    //   2. chapter.data.audio.testimony + each .alternates[]
+    // Each entry:
+    //   { file, audioUrl, title, style, duration, lyricsUrl, lyricsHtml,
+    //     chapter, chapterUrl, isMinistry, isAlternate, primaryFile }
+    // lyricsUrl is OPTIONAL — Phase 2 backfills .vtt paths per song.
+    // lyricsHtml is the existing inline formatted lyrics fallback for
+    // songs without a VTT (drawer renders static text in that case).
+    // =========================================
+    eleventyConfig.addFilter("musicCatalog", function(chapters) {
+        var catalog = {};
+
+        function put(entry) {
+            if (!entry.file) return;
+            entry.audioUrl = MEDIA_BASE + entry.file;
+            catalog[entry.file] = entry;
+        }
+
+        // Ministry collection (anthems + alternates)
+        (ministryMusic.collection || []).forEach(function(item) {
+            var primaryLyrics = item.lyrics
+                || (item.hasLyrics ? (ministryMusic.anthemLyrics || '') : '');
+            put({
+                file: item.file,
+                title: item.title,
+                style: item.label || '',
+                duration: item.duration || '',
+                lyricsUrl: item.lyricsUrl || null,
+                lyricsHtml: primaryLyrics,
+                chapter: null,
+                chapterUrl: null,
+                isMinistry: true,
+                isAlternate: false,
+                primaryFile: item.file
+            });
+            (item.alternates || []).forEach(function(alt) {
+                put({
+                    file: alt.file,
+                    title: item.title,
+                    style: alt.label || '',
+                    duration: alt.duration || '',
+                    lyricsUrl: alt.lyricsUrl || null,
+                    lyricsHtml: primaryLyrics,
+                    chapter: null,
+                    chapterUrl: null,
+                    isMinistry: true,
+                    isAlternate: true,
+                    primaryFile: item.file
+                });
+            });
+        });
+
+        // Chapter testimonies (primaries + alternates)
+        (chapters || []).forEach(function(ch) {
+            var t = ch.data && ch.data.audio && ch.data.audio.testimony;
+            if (!t || !t.file) return;
+            var chLyrics = ch.data.lyrics || '';
+            put({
+                file: t.file,
+                title: t.title || '',
+                style: t.label || '',
+                duration: t.duration || '',
+                lyricsUrl: t.lyricsUrl || null,
+                lyricsHtml: chLyrics,
+                chapter: ch.data.chapter,
+                chapterUrl: ch.url,
+                isMinistry: false,
+                isAlternate: false,
+                primaryFile: t.file
+            });
+            (t.alternates || []).forEach(function(alt) {
+                put({
+                    file: alt.file,
+                    title: t.title || '',
+                    style: alt.label || '',
+                    duration: alt.duration || '',
+                    lyricsUrl: alt.lyricsUrl || null,
+                    lyricsHtml: chLyrics,
+                    chapter: ch.data.chapter,
+                    chapterUrl: ch.url,
+                    isMinistry: false,
+                    isAlternate: true,
+                    primaryFile: t.file
+                });
+            });
+        });
+
+        return JSON.stringify(catalog);
+    });
+
     // Current year/date for templates
     eleventyConfig.addFilter("now", (value, format) => {
         if (format === "YYYY") return new Date().getFullYear();

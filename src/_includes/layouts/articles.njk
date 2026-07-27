@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/css/articles-panel.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/read-aloud-study.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/articles-slides.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/wop-player.css?v={{ site.version }}">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
 {% endblock %}
 
@@ -500,6 +501,7 @@
 {% block scripts %}
 <!-- Apparatus data (build-time JSON embed) -->
 <script type="application/json" id="apparatusData">{{ (apparatusData if apparatusData else {}) | dump | safe }}</script>
+<script src="/js/wop-player.js?v={{ site.version }}" defer></script>
 <script src="/js/read-aloud-articles.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-panel.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-godeeper.js?v={{ site.version }}" defer></script>

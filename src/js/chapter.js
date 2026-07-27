@@ -398,7 +398,14 @@ const ChapterManager = {
                 this.openModal('overviewModal');
                 break;
             case 'testimony':
-                this.openModal('testimonyModal');
+                // Route to the singleton mini-player when a testimony exists
+                // for this chapter; falls back to the legacy modal otherwise.
+                var tFile = this.config && this.config.testimonyFileName;
+                if (tFile && window.WopPlayer) {
+                    window.WopPlayer.play(tFile);
+                } else {
+                    this.openModal('testimonyModal');
+                }
                 break;
             case 'infographic':
                 this.openModal('infographicModal');
@@ -684,7 +691,14 @@ const ChapterManager = {
                 this.openModal('overviewModal');
                 break;
             case 'testimony':
-                this.openModal('testimonyModal');
+                // Route to the singleton mini-player when a testimony exists
+                // for this chapter; falls back to the legacy modal otherwise.
+                var tFile = this.config && this.config.testimonyFileName;
+                if (tFile && window.WopPlayer) {
+                    window.WopPlayer.play(tFile);
+                } else {
+                    this.openModal('testimonyModal');
+                }
                 break;
             case 'infographic':
                 this.openModal('infographicModal');
