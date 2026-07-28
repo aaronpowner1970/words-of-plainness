@@ -451,32 +451,3 @@ discordChannelId: ""
     }
 })();
 </script>
-
-<!-- A11 "Watch the Film" pill -> YouTube  (injected into #of-covenants-and-commitments only) -->
-<script>
-(function () {
-    'use strict';
-    function inject() {
-        var section = document.getElementById('of-covenants-and-commitments');
-        if (!section || section.querySelector('.article-film-btn')) return;
-        var body = section.querySelector('.article-body');
-        var a = document.createElement('a');
-        a.className = 'article-film-btn';
-        a.href = 'https://youtu.be/PNZ8vCzZJGg';
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.setAttribute('aria-label', 'Watch the film: Covenants and Commitments (Article 11)');
-        a.innerHTML =
-            '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" ' +
-            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-            '<path d="m22 8-6 4 6 4V8Z"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>' +
-            '<span>Watch the Film</span>';
-        if (body) { section.insertBefore(a, body); } else { section.appendChild(a); }
-    }
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', inject);
-    } else {
-        inject();
-    }
-})();
-</script>
