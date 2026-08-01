@@ -34,6 +34,7 @@
       "sameAs": [
         "https://www.facebook.com/profile.php?id=61577415137382",
         "https://x.com/WoPlainness",
+        "https://discord.gg/UKEBz2YmdF",
         "https://aaronpowner.com",
         "https://www.pub.powner.org"
       ]
@@ -50,7 +51,9 @@
       "publisher": { "@id": "https://www.wordsofplainness.org/#organization" }
     }
     </script>
-    {% if layout == "layouts/chapter.njk" or layout == "layouts/study.njk" or layout == "layouts/articles.njk" %}
+    {%- set _articleByLayout = layout == "layouts/chapter.njk" or layout == "layouts/study.njk" or layout == "layouts/articles.njk" -%}
+    {%- set _articleByStudiesUrl = page.url and page.url.startsWith("/studies/") and page.url != "/studies/" and page.url != "/studies/declarations/" and not _articleByLayout -%}
+    {% if _articleByLayout %}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -65,6 +68,29 @@
       "publisher": { "@id": "https://www.wordsofplainness.org/#organization" },
       "isPartOf": { "@id": "https://www.wordsofplainness.org/#website" },
       "mainEntityOfPage": "https://www.wordsofplainness.org{{ page.url }}"
+    }
+    </script>
+    {% elif _articleByStudiesUrl %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": {{ (og_title or title) | dump | safe }},
+      "description": {{ (description or site.description) | dump | safe }},
+      "url": "https://www.wordsofplainness.org{{ page.url }}",
+      "author": { "@type": "Person", "name": "Aaron Powner" },
+      "publisher": { "@id": "https://www.wordsofplainness.org/#organization" },
+      "isPartOf": { "@id": "https://www.wordsofplainness.org/#website" },
+      "mainEntityOfPage": "https://www.wordsofplainness.org{{ page.url }}"
+      {%- if date %},
+      "datePublished": "{{ date | isoDate }}"
+      {%- endif %}
+      {%- if dateModified %},
+      "dateModified": "{{ dateModified | isoDate }}"
+      {%- endif %}
+      {%- if og_image or image %},
+      "image": "{{ og_image or image }}"
+      {%- endif %}
     }
     </script>
     {% elif layout == "layouts/post.njk" %}
