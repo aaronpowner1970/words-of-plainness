@@ -22,29 +22,80 @@
     <meta name="twitter:description" content="{{ description | default(site.description) }}">
     <meta name="twitter:image" content="https://www.wordsofplainness.org/assets/images/og-default.png">
 
-    <!-- JSON-LD Structured Data -->
-    {% if layout == "layouts/chapter.njk" %}
+    <!-- JSON-LD Structured Data — sitewide Organization + WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.wordsofplainness.org/#organization",
+      "name": "Words of Plainness",
+      "url": "https://www.wordsofplainness.org",
+      "logo": "https://www.wordsofplainness.org/assets/images/lantern_logo_line_art.png",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61577415137382",
+        "https://x.com/WoPlainness",
+        "https://aaronpowner.com",
+        "https://www.pub.powner.org"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.wordsofplainness.org/#website",
+      "url": "https://www.wordsofplainness.org",
+      "name": "Words of Plainness",
+      "description": "A Christ-Centered Ministry for Seekers and Latter-day Saints",
+      "publisher": { "@id": "https://www.wordsofplainness.org/#organization" }
+    }
+    </script>
+    {% if layout == "layouts/chapter.njk" or layout == "layouts/study.njk" or layout == "layouts/articles.njk" %}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "{{ og_title | default(title) }}",
-      "description": "{{ description | default(site.description) }}",
+      "headline": {{ (og_title or title) | dump | safe }},
+      "description": {{ (description or site.description) | dump | safe }},
       "url": "https://www.wordsofplainness.org{{ page.url }}",
-      "author": {
-        "@type": "Person",
-        "name": "Aaron Powner"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Words of Plainness",
-        "url": "https://www.wordsofplainness.org"
-      },
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "Words of Plainness",
-        "url": "https://www.wordsofplainness.org"
-      }
+      "datePublished": "{{ page.date | isoDate }}",
+      "dateModified": "{% if dateModified %}{{ dateModified | isoDate }}{% else %}{{ page.date | isoDate }}{% endif %}",
+      "image": "https://www.wordsofplainness.org/assets/images/og-default.png",
+      "author": { "@type": "Person", "name": "Aaron Powner" },
+      "publisher": { "@id": "https://www.wordsofplainness.org/#organization" },
+      "isPartOf": { "@id": "https://www.wordsofplainness.org/#website" },
+      "mainEntityOfPage": "https://www.wordsofplainness.org{{ page.url }}"
+    }
+    </script>
+    {% elif layout == "layouts/post.njk" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ title | dump | safe }},
+      "description": {{ (description or title) | dump | safe }},
+      "url": "https://www.wordsofplainness.org{{ page.url }}",
+      "datePublished": "{{ page.date | isoDate }}",
+      "dateModified": "{% if dateModified %}{{ dateModified | isoDate }}{% else %}{{ page.date | isoDate }}{% endif %}",
+      "image": "{% if image %}https://www.wordsofplainness.org/assets/images/posts/{{ image }}{% else %}https://www.wordsofplainness.org/assets/images/wop-og-default.jpg{% endif %}",
+      "author": { "@type": "Person", "name": {{ (author or "Brother Aaron") | dump | safe }} },
+      "publisher": { "@id": "https://www.wordsofplainness.org/#organization" },
+      "isPartOf": { "@id": "https://www.wordsofplainness.org/#website" },
+      "mainEntityOfPage": "https://www.wordsofplainness.org{{ page.url }}"
+    }
+    </script>
+    {% endif %}
+    {% if page.url == "/volume-1/" or page.url == "/volume-2/" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": {{ title | dump | safe }},
+      "description": {{ description | dump | safe }},
+      "url": "https://www.wordsofplainness.org{{ page.url }}",
+      "inLanguage": "en",
+      "author": { "@type": "Person", "name": "Aaron Powner" },
+      "publisher": { "@id": "https://www.wordsofplainness.org/#organization" }
     }
     </script>
     {% endif %}
