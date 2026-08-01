@@ -16,8 +16,7 @@ discordChannelId: ""
 <style>
 .articles-prologue-video {
     width: 100%;
-    max-width: 720px;
-    margin: 2rem auto 0;
+    margin: 1.75rem auto;
     aspect-ratio: 16 / 9;
     border-radius: 8px;
     overflow: hidden;
@@ -30,14 +29,19 @@ discordChannelId: ""
     height: 100%;
     border: 0;
 }
+@media (min-width: 720px) {
+    .articles-prologue-video {
+        width: 58%;
+    }
+}
 </style>
 
 {{ banner("a00", eager=true, cls="article-banner--opener") }}
 
 <div class="articles-prologue">
+    <h2 class="pw-heading">Introduction</h2>
     <p class="articles-epigraph"><em>"Pure religion and undefiled before God our Father is this…"</em></p>
     <p>These interfaith declarations grow from one plain trust — what unites us in Jesus Christ runs deeper than anything that divides us. These articles are not a formal creed of a single tradition, nor a blending of faiths into one, but a foundation of peaceful fellowship.</p>
-    <p>We confess Christ openly and with joy, and ask no one to leave the tradition they love. It is in the spirit of "unity of faith" that we offer this olive branch — to all who would sit together and partake of His grace, and no less to any who come without that faith, curious or questioning: you are welcome here as a respected guest among friends, and we will not press our creeds upon you.</p>
     <div class="articles-prologue-video">
         <iframe
             src="https://www.youtube-nocookie.com/embed/OSyBTXbD15M"
@@ -47,6 +51,7 @@ discordChannelId: ""
             referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen></iframe>
     </div>
+    <p>We confess Christ openly and with joy, and ask no one to leave the tradition they love. It is in the spirit of "unity of faith" that we offer this olive branch — to all who would sit together and partake of His grace, and no less to any who come without that faith, curious or questioning: you are welcome here as a respected guest among friends, and we will not press our creeds upon you.</p>
 </div>
 
 <!-- Pathways band — ways to begin (wires to existing podcast modal, contents drawer, and span apparatus) -->
