@@ -123,6 +123,19 @@ module.exports = function(eleventyConfig) {
     // JSON stringify without pretty printing (for inline use)
     eleventyConfig.addFilter("json", obj => JSON.stringify(obj));
 
+    // Count chapters with status "available" across a volume, movement,
+    // or a raw chapters array. Backs the derived counts in the volume
+    // landing pages and the /writings/ hub so they can't drift from
+    // chapter-status.yaml.
+    eleventyConfig.addFilter("availableCount", function(input) {
+        if (!input) return 0;
+        const countIn = arr => (arr || []).filter(c => c && c.status === "available").length;
+        if (Array.isArray(input)) return countIn(input);
+        if (input.chapters) return countIn(input.chapters);
+        if (input.movements) return input.movements.reduce((s, m) => s + countIn(m.chapters), 0);
+        return 0;
+    });
+
     // =========================================
     // GO-DEEPER ENGINE (#4 auto-absorb)
     // Recomputes Articles ↔ chapter correlations on EVERY build from

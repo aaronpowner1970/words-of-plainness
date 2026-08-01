@@ -1,882 +1,966 @@
 # ═══════════════════════════════════════════════════════════════════
 # Words of Plainness — Chapter Status Registry
-# Source of truth for deployment state, assets, and infrastructure
-# per chapter across both volumes.
+# Source of truth for the volume landing pages, plus per-chapter
+# deployment state, assets, and infrastructure across both volumes.
+#
+# To activate a chapter on the volume pages, set its status to
+# 'available'. The landing pages render from this file.
 #
 # NUMBERING: Uses LIVE SITE numbering (wordsofplainness.org),
 # NOT repo file numbering. Repo file paths noted in `file` field.
 #
-# Last verified: April 15, 2026
+# STATUS values (per chapter): available | coming-soon
+#   'available'   → chapter is linked from the volume landing page with
+#                   an "Available" badge. Requires `url`.
+#   'coming-soon' → chapter is shown on the landing page as a muted
+#                   "Coming Soon" row. No link is rendered.
+#
+# Movements are ordered lists; the volume pages iterate them in the
+# order given here. Each movement carries the presentation metadata
+# (label, name, description, theme_class, acc_id) that used to be
+# hand-typed into the accordion markup.
+#
+# Last verified: August 1, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 volume_1:
+  slug: volume-1
+  title: "Christ-Centered Discipleship"
   total_chapters: 30
-  deployed_count: 16
   url: /volume-1/
 
-  # ─── MOVEMENT 1 — Come unto Me ─────────────────────
-  movement_1:
-    title: "Come unto Me — Matthew 11:28"
-    format: prose
-    chapters:
+  movements:
 
-      - number: 1
-        title: "Introduction"
-        file: 01-introduction.md
-        slug: 01-introduction
-        status: deployed
-        movement: 1
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_01_01_Introduction_to_Plainness.mp3
-          narration_duration: "21:48"
-          overview: true
-          overview_file: PO_01_01_Introduction_to_Plainness.mp3
-          overview_duration: "6:28"
-          cue: true
-          testimony: true
-          testimony_title: "Introduction to Plainness"
-          testimony_versions: 3
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: chapter-01-introduction.pdf
-          slides: true
-          slides_count: 9
-          slides_path: "chapter-01/"
-          infographic: true
-          infographic_file: chapter-01-infographic.png
-        discord_channel_id: "1463835662238224578"
+    # ─── MOVEMENT 1 — Come unto Me ─────────────────────
+    - label: "Movement 1"
+      name: "Come unto Me — Matthew 11:28"
+      description: "Foundational epistemology and the experience of receiving Christ."
+      theme_class: "explore"
+      acc_id: "m1"
+      format: prose
+      chapters:
 
-      - number: 2
-        title: "Our Search"
-        file: 02-our-search.md
-        slug: 02-our-search
-        status: deployed
-        movement: 1
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_02_01_Our_Search.mp3
-          narration_duration: "27:24"
-          overview: true
-          overview_file: PO_02_01_Our_Search.mp3
-          overview_duration: "27:13"
-          overview_label: "Podcast Dramatization"
-          cue: true
-          testimony: true
-          testimony_title: "Our Search"
-          testimony_versions: 3
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: chapter-02-our-search.pdf
-          slides: true
-          slides_count: 16
-          slides_path: "chapter-02/"
-          infographic: true
-          infographic_file: chapter-02-infographic.png
-        discord_channel_id: "1463835723995152457"
+        - number: 1
+          title: "Introduction"
+          file: 01-introduction.md
+          slug: 01-introduction
+          url: /chapters/01-introduction/
+          status: available
+          movement: 1
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_01_01_Introduction_to_Plainness.mp3
+            narration_duration: "21:48"
+            overview: true
+            overview_file: PO_01_01_Introduction_to_Plainness.mp3
+            overview_duration: "6:28"
+            cue: true
+            testimony: true
+            testimony_title: "Introduction to Plainness"
+            testimony_versions: 3
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: chapter-01-introduction.pdf
+            slides: true
+            slides_count: 9
+            slides_path: "chapter-01/"
+            infographic: true
+            infographic_file: chapter-01-infographic.png
+          discord_channel_id: "1463835662238224578"
 
-      - number: 3
-        title: "Academic Knowledge"
-        file: 03-academic-knowledge.md
-        slug: 03-academic-knowledge
-        status: deployed
-        movement: 1
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_03_01_Academic_Knowledge.mp3
-          narration_duration: "26:18"
-          overview: true
-          overview_file: PO_03_01_Academic_Knowledge.mp3
-          overview_duration: "5:10"
-          cue: true
-          testimony: true
-          testimony_title: "Two Halves of a Whole"
-          testimony_versions: 3
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: WoP_Ch03_Academic_Knowledge.pdf
-          slides: true
-          slides_count: 12
-          slides_path: "chapter-03/"
-          infographic: true
-          infographic_file: chapter-03-infographic.png
-        discord_channel_id: "1463835777141309506"
+        - number: 2
+          title: "Our Search"
+          file: 02-our-search.md
+          slug: 02-our-search
+          url: /chapters/02-our-search/
+          status: available
+          movement: 1
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_02_01_Our_Search.mp3
+            narration_duration: "27:24"
+            overview: true
+            overview_file: PO_02_01_Our_Search.mp3
+            overview_duration: "27:13"
+            overview_label: "Podcast Dramatization"
+            cue: true
+            testimony: true
+            testimony_title: "Our Search"
+            testimony_versions: 3
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: chapter-02-our-search.pdf
+            slides: true
+            slides_count: 16
+            slides_path: "chapter-02/"
+            infographic: true
+            infographic_file: chapter-02-infographic.png
+          discord_channel_id: "1463835723995152457"
 
-      - number: 4
-        title: "Spiritual Knowledge"
-        file: 04-spiritual-knowledge.md
-        slug: 04-spiritual-knowledge
-        status: deployed
-        movement: 1
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_04_01_Spiritual_Knowledge.mp3
-          narration_duration: "35:11"
-          overview: true
-          overview_file: PO_04_01_Spiritual_Knowledge.mp3
-          overview_duration: "6:03"
-          cue: true
-          testimony: true
-          testimony_title: "When God Becomes Real"
-          testimony_versions: 4
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: WoP_Ch04_Spiritual_Knowledge.pdf
-          slides: true
-          slides_count: 10
-          slides_path: "WoP_Ch04/"
-          infographic: true
-          infographic_file: chapter-04-infographic.png
-        discord_channel_id: "1463835837291565200"
+        - number: 3
+          title: "Academic Knowledge"
+          file: 03-academic-knowledge.md
+          slug: 03-academic-knowledge
+          url: /chapters/03-academic-knowledge/
+          status: available
+          movement: 1
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_03_01_Academic_Knowledge.mp3
+            narration_duration: "26:18"
+            overview: true
+            overview_file: PO_03_01_Academic_Knowledge.mp3
+            overview_duration: "5:10"
+            cue: true
+            testimony: true
+            testimony_title: "Two Halves of a Whole"
+            testimony_versions: 3
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: WoP_Ch03_Academic_Knowledge.pdf
+            slides: true
+            slides_count: 12
+            slides_path: "chapter-03/"
+            infographic: true
+            infographic_file: chapter-03-infographic.png
+          discord_channel_id: "1463835777141309506"
 
-      - number: 5
-        title: "Sincere Prayer"
-        file: 05-sincere-prayer.md
-        slug: 05-sincere-prayer
-        status: deployed
-        movement: 1
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_05_01_Sincere_Prayer.mp3
-          narration_duration: "25:06"
-          overview: true
-          overview_file: PO_05_01_Sincere_Prayer.mp3
-          overview_duration: "23:32"
-          overview_label: "Podcast Discussion"
-          cue: true
-          testimony: true
-          testimony_title: "The Soul's Sincere Desire"
-          testimony_versions: 6
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: chapter-05-sincere-prayer.pdf
-          slides: true
-          slides_count: 10
-          slides_path: "WoP_Ch05/"
-          infographic: true
-          infographic_file: chapter-05-infographic.png
-        discord_channel_id: "1463835887782858994"
+        - number: 4
+          title: "Spiritual Knowledge"
+          file: 04-spiritual-knowledge.md
+          slug: 04-spiritual-knowledge
+          url: /chapters/04-spiritual-knowledge/
+          status: available
+          movement: 1
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_04_01_Spiritual_Knowledge.mp3
+            narration_duration: "35:11"
+            overview: true
+            overview_file: PO_04_01_Spiritual_Knowledge.mp3
+            overview_duration: "6:03"
+            cue: true
+            testimony: true
+            testimony_title: "When God Becomes Real"
+            testimony_versions: 4
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: WoP_Ch04_Spiritual_Knowledge.pdf
+            slides: true
+            slides_count: 10
+            slides_path: "WoP_Ch04/"
+            infographic: true
+            infographic_file: chapter-04-infographic.png
+          discord_channel_id: "1463835837291565200"
 
-      - number: 6
-        title: "Embrace the Savior"
-        file: 06-embrace-the-savior.njk
-        file_full: 06-embrace-the-savior-full.md
-        slug: 06-embrace-the-savior
-        status: deployed
-        movement: 1
-        format: interactive
-        audio:
-          narration: true
-          narration_file: NR_06_01_Embrace_the_Savior.mp3
-          narration_duration: "23:23"
-          overview: true
-          overview_file: PO_06_01_Embrace_the_Savior.mp3
-          overview_duration: "15:36"
-          overview_label: "Podcast Discussion"
-          cue: true
-          testimony: true
-          testimony_title: "I Have Tasted the Light"
-          testimony_versions: 9
-        citations: true
-        rjw_pauses: 3
-        resources:
-          pdf: true
-          pdf_file: WoP_Ch06_Embrace_the_Savior.pdf
-          slides: false
-          infographic: true
-          infographic_file: chapter-06-infographic.png
-        discord_channel_id: "1463835929125978163"
-        notes: "Gateway chapter with three reader pathways. Full chapter at separate URL."
-        appendix: "Church of the Lamb of God"
+        - number: 5
+          title: "Sincere Prayer"
+          file: 05-sincere-prayer.md
+          slug: 05-sincere-prayer
+          url: /chapters/05-sincere-prayer/
+          status: available
+          movement: 1
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_05_01_Sincere_Prayer.mp3
+            narration_duration: "25:06"
+            overview: true
+            overview_file: PO_05_01_Sincere_Prayer.mp3
+            overview_duration: "23:32"
+            overview_label: "Podcast Discussion"
+            cue: true
+            testimony: true
+            testimony_title: "The Soul's Sincere Desire"
+            testimony_versions: 6
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: chapter-05-sincere-prayer.pdf
+            slides: true
+            slides_count: 10
+            slides_path: "WoP_Ch05/"
+            infographic: true
+            infographic_file: chapter-05-infographic.png
+          discord_channel_id: "1463835887782858994"
 
-  # ─── MOVEMENT 2 — Learn of Me ─────────────────────────────────
-  movement_2:
-    title: "Learn of Me — Matthew 11:29"
-    format: prose
-    chapters:
+        - number: 6
+          title: "Embrace the Savior"
+          file: 06-embrace-the-savior.njk
+          file_full: 06-embrace-the-savior-full.md
+          slug: 06-embrace-the-savior
+          url: /chapters/06-embrace-the-savior/
+          status: available
+          movement: 1
+          format: interactive
+          audio:
+            narration: true
+            narration_file: NR_06_01_Embrace_the_Savior.mp3
+            narration_duration: "23:23"
+            overview: true
+            overview_file: PO_06_01_Embrace_the_Savior.mp3
+            overview_duration: "15:36"
+            overview_label: "Podcast Discussion"
+            cue: true
+            testimony: true
+            testimony_title: "I Have Tasted the Light"
+            testimony_versions: 9
+          citations: true
+          rjw_pauses: 3
+          resources:
+            pdf: true
+            pdf_file: WoP_Ch06_Embrace_the_Savior.pdf
+            slides: false
+            infographic: true
+            infographic_file: chapter-06-infographic.png
+          discord_channel_id: "1463835929125978163"
+          notes: "Gateway chapter with three reader pathways. Full chapter at separate URL."
+          appendix: "Church of the Lamb of God"
 
-      - number: 7
-        title: "Prophecies, Birth, and Youth"
-        file: 07-prophecies-birth-youth.md
-        slug: 07-prophecies-birth-youth
-        status: deployed
-        movement: 2
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_07_01_Prophecies_Birth_and_Youth.mp3
-          narration_duration: "29:15"
-          overview: true
-          overview_file: PO_07_01_Prophecies_Birth_and_Youth.mp3
-          overview_duration: "3:57"
-          cue: true
-          testimony: true
-          testimony_title: "Promises Kept"
-          testimony_versions: 2
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: WoP_Ch07_Prophecies_Birth_Youth.pdf
-          slides: true
-          slides_count: 16
-          slides_path: "chapter-07/"
-          infographic: true
-          infographic_file: chapter-07-infographic.png
-        discord_channel_id: "1463835973430411365"
+    # ─── MOVEMENT 2 — Learn of Me ─────────────────────────────────
+    - label: "Movement 2"
+      name: "Learn of Me — Matthew 11:29"
+      description: "An intimate study of the personal character and atoning mission of Jesus Christ."
+      theme_class: "seeker"
+      acc_id: "m2"
+      format: prose
+      chapters:
 
-      - number: 8
-        title: "Baptism, Temptations, and Mortal Ministry"
-        file: 08-baptism-temptations-ministry.md
-        slug: 08-baptism-temptations-ministry
-        status: deployed
-        movement: 2
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_08_01_Baptism_Temptations_Ministry.mp3
-          narration_duration: "15:26"
-          overview: true
-          overview_file: PO_08_01_Baptism_Temptations_Ministry.mp3
-          overview_duration: "6:23"
-          cue: true
-          testimony: true
-          testimony_title: "Prepared in All Things"
-          testimony_versions: 1
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: WoP_Ch08_Baptism_Temptations_Ministry.pdf
-          slides: true
-          slides_count: 10
-          slides_path: "chapter-08/"
-          slides_cdn: true
-          infographic: true
-          infographic_file: chapter-08-infographic.png
-        discord_channel_id: "1463836023871242394"
+        - number: 7
+          title: "Prophecies, Birth, and Youth"
+          file: 07-prophecies-birth-youth.md
+          slug: 07-prophecies-birth-youth
+          url: /chapters/07-prophecies-birth-youth/
+          status: available
+          movement: 2
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_07_01_Prophecies_Birth_and_Youth.mp3
+            narration_duration: "29:15"
+            overview: true
+            overview_file: PO_07_01_Prophecies_Birth_and_Youth.mp3
+            overview_duration: "3:57"
+            cue: true
+            testimony: true
+            testimony_title: "Promises Kept"
+            testimony_versions: 2
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: WoP_Ch07_Prophecies_Birth_Youth.pdf
+            slides: true
+            slides_count: 16
+            slides_path: "chapter-07/"
+            infographic: true
+            infographic_file: chapter-07-infographic.png
+          discord_channel_id: "1463835973430411365"
 
-      - number: 9
-        title: "Yehoshua the Man"
-        file: 09-yehoshua-the-man.md
-        file_stub: 09-christs-personal-character.md
-        slug: 09-yehoshua-the-man
-        status: deployed
-        movement: 2
-        format: prose
-        audio:
-          narration: true
-          narration_sectioned: true
-          narration_sections: 4
-          narration_duration: "37:32"
-          overview: true
-          overview_file: PO_09_01_Yehoshua_the_Man.mp3
-          overview_duration: "7:12"
-          cue: true
-          testimony: true
-          testimony_title: "Established in Him"
-          testimony_versions: 2
-        citations: true
-        citation_count: 71
-        rjw_pauses: 4
-        resources:
-          pdf: false
-          slides: false
-          infographic: false
-        discord_channel_id: "1463836089163976734"
-        notes: "Centerpiece chapter. Sectioned narration with word-level timestamps. Sacred Reading Suite companion."
-        appendix: "How Oft Would I Have Gathered You"
+        - number: 8
+          title: "Baptism, Temptations, and Mortal Ministry"
+          file: 08-baptism-temptations-ministry.md
+          slug: 08-baptism-temptations-ministry
+          url: /chapters/08-baptism-temptations-ministry/
+          status: available
+          movement: 2
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_08_01_Baptism_Temptations_Ministry.mp3
+            narration_duration: "15:26"
+            overview: true
+            overview_file: PO_08_01_Baptism_Temptations_Ministry.mp3
+            overview_duration: "6:23"
+            cue: true
+            testimony: true
+            testimony_title: "Prepared in All Things"
+            testimony_versions: 1
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: WoP_Ch08_Baptism_Temptations_Ministry.pdf
+            slides: true
+            slides_count: 10
+            slides_path: "chapter-08/"
+            slides_cdn: true
+            infographic: true
+            infographic_file: chapter-08-infographic.png
+          discord_channel_id: "1463836023871242394"
 
-      - number: 10
-        title: "Suffering, Trial, Crucifixion, and Resurrection"
-        file: 10-suffering-trial-crucifixion-resurrection.md
-        slug: 10-suffering-trial-crucifixion-resurrection
-        status: deployed
-        movement: 2
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_10_1_Suffering_Trial_Crucifixion_Resurrection.mp3
-          narration_duration: "26:01"
-          overview: true
-          overview_file: PO_10_1_Suffering_Trial_Crucifixion_Resurrection.mp3
-          overview_duration: "8:31"
-          cue: false
-          testimony: true
-          testimony_title: "He Always Knew Me"
-          testimony_versions: 3
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: WoP_Ch10_Suffering_Trial_Crucifixion_Resurrection.pdf
-          slides: true
-          slides_count: 11
-          slides_path: "WoP_Ch10/"
-          infographic: true
-          infographic_file: chapter-10-infographic.png
-        discord_channel_id: "1463836125587181706"
-        appendix: "How Oft Would I Have Gathered You"
+        - number: 9
+          title: "Yehoshua the Man"
+          file: 09-yehoshua-the-man.md
+          file_stub: 09-christs-personal-character.md
+          slug: 09-yehoshua-the-man
+          url: /chapters/09-yehoshua-the-man/
+          status: available
+          movement: 2
+          format: prose
+          audio:
+            narration: true
+            narration_sectioned: true
+            narration_sections: 4
+            narration_duration: "37:32"
+            overview: true
+            overview_file: PO_09_01_Yehoshua_the_Man.mp3
+            overview_duration: "7:12"
+            cue: true
+            testimony: true
+            testimony_title: "Established in Him"
+            testimony_versions: 2
+          citations: true
+          citation_count: 71
+          rjw_pauses: 4
+          resources:
+            pdf: false
+            slides: false
+            infographic: false
+          discord_channel_id: "1463836089163976734"
+          notes: "Centerpiece chapter. Sectioned narration with word-level timestamps. Sacred Reading Suite companion."
+          appendix: "How Oft Would I Have Gathered You"
 
-      - number: 11
-        title: "The Living Christ"
-        file: 11-the-living-christ.md
-        slug: 11-the-living-christ
-        status: deployed
-        movement: 2
-        format: prose
-        audio:
-          narration: true
-          narration_file: NR_11_1_The_Living_Christ.mp3
-          narration_duration: "18:26"
-          overview: true
-          overview_file: PO_11_01_The_Living_Christ.mp3
-          overview_duration: "22:40"
-          overview_label: "Podcast Discussion"
-          cue: true
-          testimony: true
-          testimony_title: "Panteles"
-          testimony_versions: 1
-        citations: true
-        rjw_pauses: 1
-        resources:
-          pdf: true
-          pdf_file: WoP_Ch11_The_Living_Christ.pdf
-          slides: true
-          slides_count: 12
-          slides_path: "chapter-11/"
-          infographic: true
-          infographic_file: chapter-11-infographic.png
-        discord_channel_id: "1481807993849909299"
-        notes: "Final Movement 2 chapter. Three-doorway self-assessment accordion into Movement 3."
-        appendix: "Contention and the Reach of Christ"
+        - number: 10
+          title: "Suffering, Trial, Crucifixion, and Resurrection"
+          file: 10-suffering-trial-crucifixion-resurrection.md
+          slug: 10-suffering-trial-crucifixion-resurrection
+          url: /chapters/10-suffering-trial-crucifixion-resurrection/
+          status: available
+          movement: 2
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_10_1_Suffering_Trial_Crucifixion_Resurrection.mp3
+            narration_duration: "26:01"
+            overview: true
+            overview_file: PO_10_1_Suffering_Trial_Crucifixion_Resurrection.mp3
+            overview_duration: "8:31"
+            cue: false
+            testimony: true
+            testimony_title: "He Always Knew Me"
+            testimony_versions: 3
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: WoP_Ch10_Suffering_Trial_Crucifixion_Resurrection.pdf
+            slides: true
+            slides_count: 11
+            slides_path: "WoP_Ch10/"
+            infographic: true
+            infographic_file: chapter-10-infographic.png
+          discord_channel_id: "1463836125587181706"
+          appendix: "How Oft Would I Have Gathered You"
 
-  # ─── MOVEMENT 3 — Follow Me ──────────────────────
-  movement_3:
-    title: "Follow Me — Matthew 4:19"
-    format: card-chapter
-    chapters:
+        - number: 11
+          title: "The Living Christ"
+          file: 11-the-living-christ.md
+          slug: 11-the-living-christ
+          url: /chapters/11-the-living-christ/
+          status: available
+          movement: 2
+          format: prose
+          audio:
+            narration: true
+            narration_file: NR_11_1_The_Living_Christ.mp3
+            narration_duration: "18:26"
+            overview: true
+            overview_file: PO_11_01_The_Living_Christ.mp3
+            overview_duration: "22:40"
+            overview_label: "Podcast Discussion"
+            cue: true
+            testimony: true
+            testimony_title: "Panteles"
+            testimony_versions: 1
+          citations: true
+          rjw_pauses: 1
+          resources:
+            pdf: true
+            pdf_file: WoP_Ch11_The_Living_Christ.pdf
+            slides: true
+            slides_count: 12
+            slides_path: "chapter-11/"
+            infographic: true
+            infographic_file: chapter-11-infographic.png
+          discord_channel_id: "1481807993849909299"
+          notes: "Final Movement 2 chapter. Three-doorway self-assessment accordion into Movement 3."
+          appendix: "Contention and the Reach of Christ"
 
-      - number: 12
-        title: "The Beatitudes — Christlike Character"
-        file: 12-beatitudes.njk
-        slug: 12-beatitudes
-        status: deployed
-        movement: 3
-        group: "Christ's Manifesto"
-        format: card-chapter
-        audio:
-          narration: false
-          overview: false
-          cue: false
-          testimony: true
-          testimony_title: "What You Were Made to Be"
-          testimony_versions: 1
-          read_aloud: true
-          read_aloud_manifest: card-audio-12-beatitudes.json
-        citations: false
-        rjw_pauses: 1
-        resources:
-          pdf: false
-          slides: false
-          infographic: true
-          infographic_file: IG_12_01_Beatitudes.png
-        discord_channel_id: "1493812060310601780"
-        appendix: "Sermon on the Mount Study Pathway"
+    # ─── MOVEMENT 3 — Follow Me ──────────────────────
+    - label: "Movement 3"
+      name: "Follow Me — Matthew 4:19"
+      description: "Practical discipleship organized from Christ's manifesto through character, relationships, and endurance."
+      theme_class: "covenant"
+      acc_id: "m3"
+      format: card-chapter
+      chapters:
 
-      - number: 13
-        title: "The Sermon on the Mount"
-        file: 13-sermon-on-the-mount.njk
-        slug: 13-sermon-on-the-mount
-        status: deployed
-        movement: 3
-        group: "Christ's Manifesto"
-        format: card-chapter
-        audio:
-          narration: false
-          overview: false
-          cue: false
-          testimony: true
-          testimony_title: "Understood the Assignment"
-          testimony_versions: 6
-          read_aloud: true
-          read_aloud_manifest: card-audio-13-sermon-on-the-mount.json
-        citations: false
-        rjw_pauses: 1
-        resources:
-          pdf: false
-          slides: false
-          infographic: true
-          infographic_file: IG_13_01_Sermon_Summary.png
-        discord_channel_id: "1493812207832531034"
-        appendix: "Sermon on the Mount Study Pathway"
-        notes: "Redirect at 13-prayer-and-repentance-redirect.njk handles old Ch 13 URL."
+        - number: 12
+          title: "The Beatitudes — Christlike Character"
+          file: 12-beatitudes.njk
+          slug: 12-beatitudes
+          url: /chapters/12-beatitudes/
+          status: available
+          movement: 3
+          group: "Christ's Manifesto"
+          format: card-chapter
+          audio:
+            narration: false
+            overview: false
+            cue: false
+            testimony: true
+            testimony_title: "What You Were Made to Be"
+            testimony_versions: 1
+            read_aloud: true
+            read_aloud_manifest: card-audio-12-beatitudes.json
+          citations: false
+          rjw_pauses: 1
+          resources:
+            pdf: false
+            slides: false
+            infographic: true
+            infographic_file: IG_12_01_Beatitudes.png
+          discord_channel_id: "1493812060310601780"
+          appendix: "Sermon on the Mount Study Pathway"
 
-      - number: 14
-        title: "Prayer as a Lifestyle"
-        file: 14-prayer-as-a-lifestyle.njk
-        slug: 14-prayer-as-a-lifestyle
-        status: deployed
-        movement: 3
-        group: "Character and Worship"
-        format: card-chapter
-        audio:
-          narration: false
-          overview: false
-          cue: false
-          testimony: true
-          testimony_title: "The First One I Turn To"
-          testimony_versions: 1
-          read_aloud: true
-          read_aloud_manifest: card-audio-14-prayer-as-a-lifestyle.json
-        citations: false
-        rjw_pauses: 1
-        resources:
-          pdf: false
-          slides: false
-          infographic: false
-        discord_channel_id: "1493812282583416912"
+        - number: 13
+          title: "The Sermon on the Mount — Christ's Standard for Discipleship"
+          file: 13-sermon-on-the-mount.njk
+          slug: 13-sermon-on-the-mount
+          url: /chapters/13-sermon-on-the-mount/
+          status: available
+          movement: 3
+          group: "Christ's Manifesto"
+          format: card-chapter
+          audio:
+            narration: false
+            overview: false
+            cue: false
+            testimony: true
+            testimony_title: "Understood the Assignment"
+            testimony_versions: 6
+            read_aloud: true
+            read_aloud_manifest: card-audio-13-sermon-on-the-mount.json
+          citations: false
+          rjw_pauses: 1
+          resources:
+            pdf: false
+            slides: false
+            infographic: true
+            infographic_file: IG_13_01_Sermon_Summary.png
+          discord_channel_id: "1493812207832531034"
+          appendix: "Sermon on the Mount Study Pathway"
+          notes: "Redirect at 13-prayer-and-repentance-redirect.njk handles old Ch 13 URL."
 
-      - number: 15
-        title: "Repentance as a Lifestyle"
-        file: 15-repentance-as-a-lifestyle.njk
-        slug: 15-repentance-as-a-lifestyle
-        status: deployed
-        movement: 3
-        group: "Character and Worship"
-        format: card-chapter
-        audio:
-          narration: false
-          overview: false
-          cue: false
-          testimony: false
-        citations: false
-        rjw_pauses: 1
-        resources:
-          pdf: false
-          slides: false
-          infographic: false
-        discord_channel_id: ""
-        notes: "Assets (musical testimony, infographic, slides, PDF, audio, Discord channel) deferred."
+        - number: 14
+          title: "Prayer as a Lifestyle"
+          file: 14-prayer-as-a-lifestyle.njk
+          slug: 14-prayer-as-a-lifestyle
+          url: /chapters/14-prayer-as-a-lifestyle/
+          status: available
+          movement: 3
+          group: "Character and Worship"
+          format: card-chapter
+          audio:
+            narration: false
+            overview: false
+            cue: false
+            testimony: true
+            testimony_title: "The First One I Turn To"
+            testimony_versions: 1
+            read_aloud: true
+            read_aloud_manifest: card-audio-14-prayer-as-a-lifestyle.json
+          citations: false
+          rjw_pauses: 1
+          resources:
+            pdf: false
+            slides: false
+            infographic: false
+          discord_channel_id: "1493812282583416912"
 
-      - number: 16
-        title: "Keeping the Sabbath"
-        file: 16-keeping-the-sabbath.njk
-        slug: 16-keeping-the-sabbath
-        status: deployed
-        movement: 3
-        group: "Character and Worship"
-        format: card-chapter
-        audio:
-          narration: false
-          overview: false
-          cue: false
-          testimony: true
-          testimony_title: "One Day in Seven"
-          testimony_versions: 1
-          read_aloud: true
-          read_aloud_manifest: card-audio-16-keeping-the-sabbath.json
-        citations: false
-        rjw_pauses: 1
-        resources:
-          pdf: false
-          slides: false
-          infographic: false
-        discord_channel_id: ""
-        notes: "Deployed but NOT linked from Volume 1 landing page."
+        - number: 15
+          title: "Repentance as a Lifestyle"
+          file: 15-repentance-as-a-lifestyle.njk
+          slug: 15-repentance-as-a-lifestyle
+          url: /chapters/15-repentance-as-a-lifestyle/
+          status: available
+          movement: 3
+          group: "Character and Worship"
+          format: card-chapter
+          audio:
+            narration: false
+            overview: false
+            cue: false
+            testimony: false
+          citations: false
+          rjw_pauses: 1
+          resources:
+            pdf: false
+            slides: false
+            infographic: false
+          discord_channel_id: ""
+          notes: "Assets (musical testimony, infographic, slides, PDF, audio, Discord channel) deferred."
 
-      - number: 17
-        title: "Christlike Virtues"
-        file: 17-christlike-virtues.njk
-        slug: 17-christlike-virtues
-        status: placeholder
-        movement: 3
-        group: "Character and Worship"
-        format: card-chapter
+        - number: 16
+          title: "Keeping the Sabbath"
+          file: 16-keeping-the-sabbath.njk
+          slug: 16-keeping-the-sabbath
+          url: /chapters/16-keeping-the-sabbath/
+          status: coming-soon
+          movement: 3
+          group: "Character and Worship"
+          format: card-chapter
+          audio:
+            narration: false
+            overview: false
+            cue: false
+            testimony: true
+            testimony_title: "One Day in Seven"
+            testimony_versions: 1
+            read_aloud: true
+            read_aloud_manifest: card-audio-16-keeping-the-sabbath.json
+          citations: false
+          rjw_pauses: 1
+          resources:
+            pdf: false
+            slides: false
+            infographic: false
+          discord_channel_id: ""
+          notes: "Chapter page exists on disk but is intentionally held back from the Volume 1 landing page (status: coming-soon). Flip to 'available' when ready to reveal."
 
-      - number: 18
-        title: "Loving Our Neighbors"
-        file: 18-loving-our-neighbors.njk
-        slug: 18-loving-our-neighbors
-        status: placeholder
-        movement: 3
-        group: "Relational Practices"
-        format: card-chapter
+        - number: 17
+          title: "Christlike Virtues"
+          file: 17-christlike-virtues.njk
+          slug: 17-christlike-virtues
+          url: /chapters/17-christlike-virtues/
+          status: coming-soon
+          movement: 3
+          group: "Character and Worship"
+          format: card-chapter
 
-      - number: 19
-        title: "Building Godly Marriages"
-        file: 19-building-godly-marriages.njk
-        slug: 19-building-godly-marriages
-        status: placeholder
-        movement: 3
-        group: "Relational Practices"
-        format: card-chapter
+        - number: 18
+          title: "Loving Our Neighbors"
+          file: 18-loving-our-neighbors.njk
+          slug: 18-loving-our-neighbors
+          url: /chapters/18-loving-our-neighbors/
+          status: coming-soon
+          movement: 3
+          group: "Relational Practices"
+          format: card-chapter
 
-      - number: 20
-        title: "Raising Children in Righteousness"
-        file: 20-raising-children-in-righteousness.njk
-        slug: 20-raising-children-in-righteousness
-        status: placeholder
-        movement: 3
-        group: "Relational Practices"
-        format: card-chapter
+        - number: 19
+          title: "Building Godly Marriages"
+          file: 19-building-godly-marriages.njk
+          slug: 19-building-godly-marriages
+          url: /chapters/19-building-godly-marriages/
+          status: coming-soon
+          movement: 3
+          group: "Relational Practices"
+          format: card-chapter
 
-      - number: 21
-        title: "Developing Our Talents"
-        file: 21-developing-our-talents.njk
-        slug: 21-developing-our-talents
-        status: placeholder
-        movement: 3
-        group: "Stewardship Practices"
-        format: card-chapter
+        - number: 20
+          title: "Raising Children in Righteousness"
+          file: 20-raising-children-in-righteousness.njk
+          slug: 20-raising-children-in-righteousness
+          url: /chapters/20-raising-children-in-righteousness/
+          status: coming-soon
+          movement: 3
+          group: "Relational Practices"
+          format: card-chapter
 
-      - number: 22
-        title: "Financial Stewardship"
-        file: 22-financial-stewardship.njk
-        slug: 22-financial-stewardship
-        status: placeholder
-        movement: 3
-        group: "Stewardship Practices"
-        format: card-chapter
+        - number: 21
+          title: "Developing Our Talents"
+          file: 21-developing-our-talents.njk
+          slug: 21-developing-our-talents
+          url: /chapters/21-developing-our-talents/
+          status: coming-soon
+          movement: 3
+          group: "Stewardship Practices"
+          format: card-chapter
 
-      - number: 23
-        title: "Tending the Garden"
-        file: 23-tending-the-garden.njk
-        slug: 23-tending-the-garden
-        status: placeholder
-        movement: 3
-        group: "Stewardship Practices"
-        format: card-chapter
+        - number: 22
+          title: "Financial Stewardship"
+          file: 22-financial-stewardship.njk
+          slug: 22-financial-stewardship
+          url: /chapters/22-financial-stewardship/
+          status: coming-soon
+          movement: 3
+          group: "Stewardship Practices"
+          format: card-chapter
 
-      - number: 24
-        title: "Witnessing of Christ"
-        file: 24-witnessing-of-christ.njk
-        slug: 24-witnessing-of-christ
-        status: placeholder
-        movement: 3
-        group: "Mission Practices"
-        format: card-chapter
+        - number: 23
+          title: "Tending the Garden"
+          file: 23-tending-the-garden.njk
+          slug: 23-tending-the-garden
+          url: /chapters/23-tending-the-garden/
+          status: coming-soon
+          movement: 3
+          group: "Stewardship Practices"
+          format: card-chapter
 
-      - number: 25
-        title: "Faithful Service"
-        file: 25-faithful-service.njk
-        slug: 25-faithful-service
-        status: placeholder
-        movement: 3
-        group: "Mission Practices"
-        format: card-chapter
+        - number: 24
+          title: "Witnessing of Christ"
+          file: 24-witnessing-of-christ.njk
+          slug: 24-witnessing-of-christ
+          url: /chapters/24-witnessing-of-christ/
+          status: coming-soon
+          movement: 3
+          group: "Mission Practices"
+          format: card-chapter
 
-      - number: 26
-        title: "Bearing Trials in Faith"
-        file: 26-bearing-trials-in-faith.njk
-        slug: 26-bearing-trials-in-faith
-        status: placeholder
-        movement: 3
-        group: "Endurance Practices"
-        format: card-chapter
+        - number: 25
+          title: "Faithful Service"
+          file: 25-faithful-service.njk
+          slug: 25-faithful-service
+          url: /chapters/25-faithful-service/
+          status: coming-soon
+          movement: 3
+          group: "Mission Practices"
+          format: card-chapter
 
-      - number: 27
-        title: "Laying Up Treasures in Heaven"
-        file: 27-laying-up-treasures-in-heaven.njk
-        slug: 27-laying-up-treasures-in-heaven
-        status: placeholder
-        movement: 3
-        group: "Endurance Practices"
-        format: card-chapter
+        - number: 26
+          title: "Bearing Trials in Faith"
+          file: 26-bearing-trials-in-faith.njk
+          slug: 26-bearing-trials-in-faith
+          url: /chapters/26-bearing-trials-in-faith/
+          status: coming-soon
+          movement: 3
+          group: "Endurance Practices"
+          format: card-chapter
 
-      - number: 28
-        title: "Enduring to the End"
-        file: 28-enduring-to-the-end.njk
-        slug: 28-enduring-to-the-end
-        status: placeholder
-        movement: 3
-        group: "Endurance Practices"
-        format: card-chapter
+        - number: 27
+          title: "Laying Up Treasures in Heaven"
+          file: 27-laying-up-treasures-in-heaven.njk
+          slug: 27-laying-up-treasures-in-heaven
+          url: /chapters/27-laying-up-treasures-in-heaven/
+          status: coming-soon
+          movement: 3
+          group: "Endurance Practices"
+          format: card-chapter
 
-  # ─── CONCLUSION ────────────────────────────────────────────────
-  conclusion:
-    title: "Abide in Me — John 15:4"
-    chapters:
+        - number: 28
+          title: "Enduring to the End"
+          file: 28-enduring-to-the-end.njk
+          slug: 28-enduring-to-the-end
+          url: /chapters/28-enduring-to-the-end/
+          status: coming-soon
+          movement: 3
+          group: "Endurance Practices"
+          format: card-chapter
 
-      - number: 29
-        title: "Our Testimonies"
-        file: 29-our-testimonies.md
-        slug: 29-our-testimonies
-        status: placeholder
-        format: prose
-        notes: "Christ-centered, interfaith. Hinge chapter."
+    # ─── CONCLUSION ────────────────────────────────────────────────
+    - label: "Conclusion"
+      name: "Abide in Me — John 15:4"
+      description: "A Christ-centered interfaith testimony and pastoral benediction."
+      theme_class: null
+      acc_id: "hinge"
+      chapters:
 
-      - number: 30
-        title: "Conclusion and Benediction"
-        file: 37-conclusion-benediction.md
-        slug: 37-conclusion-benediction
-        status: placeholder
-        format: prose
-        notes: "Repo file retains old Ch 37 numbering from pre-transplant architecture."
+        - number: 29
+          title: "Our Testimonies"
+          file: 29-our-testimonies.md
+          slug: 29-our-testimonies
+          url: /chapters/29-our-testimonies/
+          status: coming-soon
+          format: prose
+          notes: "Christ-centered, interfaith. Hinge chapter."
+
+        - number: 30
+          title: "Conclusion & Benediction"
+          file: 37-conclusion-benediction.md
+          slug: 37-conclusion-benediction
+          url: /chapters/37-conclusion-benediction/
+          status: coming-soon
+          format: prose
+          notes: "Repo file retains old Ch 37 numbering from pre-transplant architecture."
 
 # ═══════════════════════════════════════════════════════════════════
 # VOLUME 2 — Covenants and Theology
 # ═══════════════════════════════════════════════════════════════════
 
 volume_2:
+  slug: volume-2
+  title: "Covenants and Theology"
   total_chapters: 29
-  deployed_count: 0
   url: /volume-2/
 
-  # ─── MOVEMENT 1 — Restoration of Christ's Church ──────────────
-  movement_1:
-    title: "Restoration of Christ's Church"
-    format: prose
-    transplant_note: "These 7 chapters were Vol 1 Ch 30-36. Repo files retain old numbering."
-    chapters:
+  movements:
 
-      - number: 1
-        title: "Prophets of God"
-        file: 30-prophets-of-god.md
-        slug: 30-prophets-of-god
-        status: placeholder
-        movement: 1
-        format: prose
+    # ─── MOVEMENT 1 — Restoration of Christ's Church ──────────────
+    - label: "Movement 1"
+      name: "Restoration of Christ's Church"
+      description: "The identity, history, covenants, and institutions of The Church of Jesus Christ of Latter-day Saints."
+      theme_class: null
+      acc_id: "v2m1"
+      format: prose
+      transplant_note: "These 7 chapters were Vol 1 Ch 30-36. Repo files retain old numbering."
+      chapters:
 
-      - number: 2
-        title: "Gospel Dispensations"
-        file: 31-gospel-dispensations.md
-        slug: 31-gospel-dispensations
-        status: placeholder
-        movement: 1
-        format: prose
+        - number: 1
+          title: "Prophets of God"
+          file: 30-prophets-of-god.md
+          slug: 30-prophets-of-god
+          url: /chapters/30-prophets-of-god/
+          status: coming-soon
+          movement: 1
+          format: prose
 
-      - number: 3
-        title: "The Restoration of Christ's Church"
-        file: 32-the-restoration.md
-        slug: 32-the-restoration
-        status: placeholder
-        movement: 1
-        format: prose
+        - number: 2
+          title: "Gospel Dispensations"
+          file: 31-gospel-dispensations.md
+          slug: 31-gospel-dispensations
+          url: /chapters/31-gospel-dispensations/
+          status: coming-soon
+          movement: 1
+          format: prose
 
-      - number: 4
-        title: "General Membership Covenants and Ordinances"
-        file: 33-general-covenants-ordinances.md
-        slug: 33-general-covenants-ordinances
-        status: placeholder
-        movement: 1
-        format: prose
+        - number: 3
+          title: "The Restoration of Christ's Church"
+          file: 32-the-restoration.md
+          slug: 32-the-restoration
+          url: /chapters/32-the-restoration/
+          status: coming-soon
+          movement: 1
+          format: prose
 
-      - number: 5
-        title: "Personal Temple Covenants and Ordinances"
-        file: 34-personal-temple-covenants.md
-        slug: 34-personal-temple-covenants
-        status: placeholder
-        movement: 1
-        format: prose
+        - number: 4
+          title: "General Membership Covenants and Ordinances"
+          file: 33-general-covenants-ordinances.md
+          slug: 33-general-covenants-ordinances
+          url: /chapters/33-general-covenants-ordinances/
+          status: coming-soon
+          movement: 1
+          format: prose
 
-      - number: 6
-        title: "Vicarious Temple Service"
-        file: 35-vicarious-temple-service.md
-        slug: 35-vicarious-temple-service
-        status: placeholder
-        movement: 1
-        format: prose
+        - number: 5
+          title: "Personal Temple Covenants and Ordinances"
+          file: 34-personal-temple-covenants.md
+          slug: 34-personal-temple-covenants
+          url: /chapters/34-personal-temple-covenants/
+          status: coming-soon
+          movement: 1
+          format: prose
 
-      - number: 7
-        title: "Christ's Church Organization"
-        file: 36-church-organization.md
-        slug: 36-church-organization
-        status: placeholder
-        movement: 1
-        format: prose
+        - number: 6
+          title: "Vicarious Temple Service"
+          file: 35-vicarious-temple-service.md
+          slug: 35-vicarious-temple-service
+          url: /chapters/35-vicarious-temple-service/
+          status: coming-soon
+          movement: 1
+          format: prose
 
-  # ─── MOVEMENT 2 — The Nature of God and Creation ──────────────
-  movement_2:
-    title: "The Nature of God and Creation"
-    format: prose
-    chapters:
+        - number: 7
+          title: "Christ's Church Organization"
+          file: 36-church-organization.md
+          slug: 36-church-organization
+          url: /chapters/36-church-organization/
+          status: coming-soon
+          movement: 1
+          format: prose
 
-      - number: 8
-        title: "General Theology"
-        file: null
-        status: placeholder
-        movement: 2
-        format: prose
+    # ─── MOVEMENT 2 — The Nature of God and Creation ──────────────
+    - label: "Movement 2"
+      name: "The Nature of God & Creation"
+      description: "From general theology and the nature of God through spiritual and physical creation to the Fall."
+      theme_class: null
+      acc_id: "v2m2"
+      format: prose
+      chapters:
 
-      - number: 9
-        title: "The Nature of God"
-        file: null
-        status: placeholder
-        movement: 2
-        format: prose
+        - number: 8
+          title: "General Theology"
+          file: null
+          status: coming-soon
+          movement: 2
+          format: prose
 
-      - number: 10
-        title: "Spiritual Creation"
-        file: null
-        status: placeholder
-        movement: 2
-        format: prose
+        - number: 9
+          title: "The Nature of God"
+          file: null
+          status: coming-soon
+          movement: 2
+          format: prose
 
-      - number: 11
-        title: "War in Heaven"
-        file: null
-        status: placeholder
-        movement: 2
-        format: prose
+        - number: 10
+          title: "Spiritual Creation"
+          file: null
+          status: coming-soon
+          movement: 2
+          format: prose
 
-      - number: 12
-        title: "First Judgment of Our Spirits"
-        file: null
-        status: placeholder
-        movement: 2
-        format: prose
+        - number: 11
+          title: "War in Heaven"
+          file: null
+          status: coming-soon
+          movement: 2
+          format: prose
 
-      - number: 13
-        title: "Physical Creation"
-        file: null
-        status: placeholder
-        movement: 2
-        format: prose
+        - number: 12
+          title: "First Judgment of Our Spirits"
+          file: null
+          status: coming-soon
+          movement: 2
+          format: prose
 
-      - number: 14
-        title: "Fall from Immortality"
-        file: null
-        status: placeholder
-        movement: 2
-        format: prose
+        - number: 13
+          title: "Physical Creation"
+          file: null
+          status: coming-soon
+          movement: 2
+          format: prose
 
-  # ─── MOVEMENT 3 — Atonement and Becoming One with God ─────────
-  movement_3:
-    title: "Atonement and Becoming One with God"
-    format: prose
-    chapters:
+        - number: 14
+          title: "Fall from Immortality"
+          file: null
+          status: coming-soon
+          movement: 2
+          format: prose
 
-      - number: 15
-        title: "Christ's Atonement as the Centerpiece of the Plan of Salvation"
-        file: null
-        status: placeholder
-        movement: 3
-        format: prose
+    # ─── MOVEMENT 3 — Atonement and Becoming One with God ─────────
+    - label: "Movement 3"
+      name: "Atonement and Becoming One with God"
+      description: "Christ's Atonement as the centerpiece of the plan, sanctification, calling and election, and the threshold of mortal death."
+      theme_class: null
+      acc_id: "v2m3"
+      format: prose
+      chapters:
 
-      - number: 16
-        title: "Spiritual Cycles"
-        file: null
-        status: placeholder
-        movement: 3
-        format: prose
+        - number: 15
+          title: "Christ's Atonement as the Centerpiece of the Plan of Salvation"
+          file: null
+          status: coming-soon
+          movement: 3
+          format: prose
 
-      - number: 17
-        title: "Calling and Election"
-        file: null
-        status: placeholder
-        movement: 3
-        format: prose
+        - number: 16
+          title: "Spiritual Cycles"
+          file: null
+          status: coming-soon
+          movement: 3
+          format: prose
 
-      - number: 18
-        title: "Mortal Death"
-        file: null
-        status: placeholder
-        movement: 3
-        format: prose
+        - number: 17
+          title: "Calling & Election"
+          file: null
+          status: coming-soon
+          movement: 3
+          format: prose
 
-  # ─── MOVEMENT 4 — Eschatology and Eternal Inheritance ─────────
-  movement_4:
-    title: "Eschatology and Eternal Inheritance"
-    format: prose
-    chapters:
+        - number: 18
+          title: "Mortal Death"
+          file: null
+          status: coming-soon
+          movement: 3
+          format: prose
 
-      - number: 19
-        title: "Messiah Will Come Again"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+    # ─── MOVEMENT 4 — Eschatology and Eternal Inheritance ─────────
+    - label: "Movement 4"
+      name: "Eschatology & Eternal Inheritance"
+      description: "From the Second Coming through the Final Judgment to our eternal inheritance and the Overview of the Plan of Salvation."
+      theme_class: null
+      acc_id: "v2m4"
+      format: prose
+      chapters:
 
-      - number: 20
-        title: "Approaching Messiah's Second Coming"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 19
+          title: "Messiah Will Come Again"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 21
-        title: "The Promised Resurrection"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 20
+          title: "Approaching Messiah's Second Coming"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 22
-        title: "First New Heaven and New Earth"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 21
+          title: "The Promised Resurrection"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 23
-        title: "Messiah's Great Millennial Work"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 22
+          title: "First New Heaven & New Earth"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 24
-        title: "Final Season of Rebellion"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 23
+          title: "Messiah's Great Millennial Work"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 25
-        title: "Final Judgment"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 24
+          title: "Final Season of Rebellion"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 26
-        title: "Second New Heaven and New Earth"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 25
+          title: "Final Judgment"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 27
-        title: "Our Eternal Inheritance"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 26
+          title: "Second New Heaven & New Earth"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 28
-        title: "Overview of the Plan of Salvation"
-        file: null
-        status: placeholder
-        movement: 4
-        format: prose
+        - number: 27
+          title: "Our Eternal Inheritance"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-  # ─── CONCLUSION ────────────────────────────────────────────────
-  conclusion:
-    title: "Conclusion"
-    chapters:
+        - number: 28
+          title: "Overview of the Plan of Salvation"
+          file: null
+          status: coming-soon
+          movement: 4
+          format: prose
 
-      - number: 29
-        title: "Our Testimonies"
-        file: null
-        status: placeholder
-        format: prose
-        notes: "LDS-specific testimony. Distinct from Vol 1 Ch 29 (interfaith)."
+    # ─── CONCLUSION ────────────────────────────────────────────────
+    - label: "Conclusion"
+      name: "Our Testimonies"
+      description: "A Latter-day Saint witness of the restored gospel of Jesus Christ."
+      theme_class: null
+      acc_id: "v2conclusion"
+      chapters:
+
+        - number: 29
+          title: "Our Testimonies"
+          file: null
+          status: coming-soon
+          format: prose
+          notes: "LDS-specific testimony. Distinct from Vol 1 Ch 29 (interfaith)."
 
 # ═══════════════════════════════════════════════════════════════════
 # APPENDICES / STUDY PATHWAYS (live)

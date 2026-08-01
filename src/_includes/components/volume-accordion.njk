@@ -1,0 +1,66 @@
+{# ============================================================
+   Volume landing accordion — shared between /volume-1/ and /volume-2/.
+   Renders a per-movement accordion driven entirely by
+   src/_data/chapter-status.yaml (exposed as `chapterStatus`).
+
+   Caller sets `volume` in scope:
+     {% set volume = chapterStatus.volume_1 %}
+     {% include "components/volume-accordion.njk" %}
+
+   The first movement in `volume.movements` renders open by default.
+   Chapter rows render as active <a> links with an Available badge when
+   `status == "available"`, and as muted <div> rows with a Coming Soon
+   badge otherwise. Markup, classes, and per-chapter status icons match
+   the previous hand-written accordion byte-for-byte.
+   ============================================================ #}
+
+<div class="movement-accordion" id="movementAccordion">
+    {% for movement in volume.movements %}
+        {% set totalCh = movement.chapters | length %}
+        {% set availCh = movement.chapters | availableCount %}
+        <div class="movement-section{% if movement.theme_class %} movement-section--{{ movement.theme_class }}{% endif %}{% if loop.first %} is-open{% endif %}" id="acc-{{ movement.acc_id }}">
+            <button class="movement-header" aria-expanded="{% if loop.first %}true{% else %}false{% endif %}" aria-controls="body-{{ movement.acc_id }}" data-acc-id="{{ movement.acc_id }}">
+                <div class="movement-header-left">
+                    <span class="movement-header-label">{{ movement.label }}</span>
+                    <span class="movement-header-name">{{ movement.name | safe }}</span>
+                    <span class="movement-header-meta">{{ totalCh }} {% if totalCh == 1 %}chapter{% else %}chapters{% endif %} &bull; {% if availCh == 0 %}coming soon{% else %}{{ availCh }} available{% endif %}</span>
+                </div>
+                <div class="movement-header-right">
+                    <span class="movement-header-desc">{{ movement.description | safe }}</span>
+                    <svg class="movement-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </button>
+            <div class="movement-body" id="body-{{ movement.acc_id }}">
+                <div class="chapter-list">
+                    {% for ch in movement.chapters %}
+                        {% if ch.status == "available" %}
+                        <a href="{{ ch.url }}" class="chapter-item" data-chapter-id="chapter-{{ ch.slug }}">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch {{ ch.number }}</span>
+                                <span class="chapter-title">{{ ch.title | safe }}</span>
+                            </div>
+                            <div class="chapter-status-icons">
+                                <svg class="ch-icon ch-icon-bookmark" viewBox="0 0 24 24" fill="currentColor"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                <span class="chapter-status-label label-bookmark ch-icon">Bookmarked</span>
+                                <svg class="ch-icon ch-icon-complete" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                                <span class="chapter-status-label label-complete ch-icon">Completed</span>
+                            </div>
+                            <span class="badge badge-available">Available</span>
+                        </a>
+                        {% else %}
+                        <div class="chapter-item disabled">
+                            <div class="chapter-item-info">
+                                <span class="chapter-num">Ch {{ ch.number }}</span>
+                                <span class="chapter-title">{{ ch.title | safe }}</span>
+                            </div>
+                            <span class="badge badge-soon">Coming Soon</span>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
