@@ -216,6 +216,35 @@ module.exports = function(eleventyConfig) {
     });
 
     // =========================================
+    // TESTIMONY-FOR — look up a single chapter's primary testimony by URL
+    // Backs the "Musical Testimony" badge on /volume-1/ and /volume-2/.
+    // Signature: {{ collections.chapters | testimonyFor(ch.url) }}
+    //   → { file, title, label, duration } or null
+    // Matches on chapter url (normalizing trailing slashes on both sides)
+    // because chapter-status.yaml uses live-site chapter numbering while
+    // chapter frontmatter is the sole source of the audio filename. Alternates
+    // are ignored on purpose — the volume badge represents the primary only.
+    // =========================================
+    eleventyConfig.addFilter("testimonyFor", function(chapters, url) {
+        if (!chapters || !url) return null;
+        var norm = String(url).replace(/\/+$/, '');
+        for (var i = 0; i < chapters.length; i++) {
+            var ch = chapters[i];
+            var chUrl = ch && ch.url ? String(ch.url).replace(/\/+$/, '') : '';
+            if (chUrl !== norm) continue;
+            var t = ch.data && ch.data.audio && ch.data.audio.testimony;
+            if (!t || !t.file) return null;
+            return {
+                file: t.file,
+                title: t.title || '',
+                label: t.label || '',
+                duration: t.duration || ''
+            };
+        }
+        return null;
+    });
+
+    // =========================================
     // MUSIC CATALOG — flattens every playable testimony into one map
     // Keyed by R2 filename (stable, unique). Consumed client-side by
     // wop-player.js on /articles/ and chapter pages so a testimony

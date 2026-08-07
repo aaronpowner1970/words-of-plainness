@@ -151,6 +151,10 @@
     <link rel="stylesheet" href="/css/styles.css?v={{ site.version }}">
     <link rel="stylesheet" href="/css/auth-modal.css">
     <link rel="stylesheet" href="/css/anthem-player.css">
+    {% if page.url == "/volume-1/" or page.url == "/volume-2/" %}
+    <link rel="stylesheet" href="/css/wop-player.css?v={{ site.version }}">
+    <link rel="stylesheet" href="/css/volume-testimony.css?v={{ site.version }}">
+    {% endif %}
     {% block styles %}{% endblock %}
 </head>
 <body{% if bodyClass %} class="{{ bodyClass }}"{% endif %} data-api-url="{{ site.api.baseUrl }}">
@@ -244,6 +248,26 @@
     <script src="/js/newsletter.js"></script>
     <script src="/js/anthem-player.js"></script>
     {% block scripts %}{% endblock %}
+    {% if page.url == "/volume-1/" or page.url == "/volume-2/" %}
+    <script>window.WOP_MUSIC_CATALOG = {{ collections.chapters | musicCatalog | safe }};</script>
+    <script src="/js/wop-player.js?v={{ site.version }}" defer></script>
+    <script defer>
+    // Volume-page testimony badge: intercept the link, play in place.
+    // The stretched chapter-item-link sits underneath, so stopPropagation is
+    // required. If WopPlayer isn't present (script failure, no-JS), the badge
+    // falls through to its href (/music/?play=FILE) — still a working deep link.
+    document.addEventListener('click', function (e) {
+        var badge = e.target.closest && e.target.closest('.badge-testimony');
+        if (!badge) return;
+        if (!window.WopPlayer) return;
+        var file = badge.getAttribute('data-play-file');
+        if (!file) return;
+        e.preventDefault();
+        e.stopPropagation();
+        window.WopPlayer.play(file);
+    });
+    </script>
+    {% endif %}
 
     <!-- Shared medallion minimize/restore controller (used by the seals below) -->
     <script>

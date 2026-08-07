@@ -216,10 +216,9 @@ description: "Christ-Centered Discipleship — 37 chapters from finding faith th
     color: var(--cream);
 }
 
-a.chapter-item:hover {
-    border-color: var(--gold-primary);
-    background: rgba(45, 32, 22, 0.92);
-}
+/* .chapter-item is now a <div>, not an <a>. The row hover rule was moved
+   to /css/volume-testimony.css so it fires on both the chapter link and
+   the testimony badge inside the row. */
 
 .chapter-item-info {
     display: flex;

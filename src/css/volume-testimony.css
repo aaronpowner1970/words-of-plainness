@@ -1,0 +1,102 @@
+/* WORDS OF PLAINNESS — Volume-page testimony badge
+   Loaded on /volume-1/ and /volume-2/. Turns the available-chapter row into
+   a positioning parent so a stretched overlay <a> can carry the chapter
+   navigation while a real <a class="badge badge-testimony"> sits above it
+   as a play trigger. The row was an anchor before this change — the
+   :hover rule that lived in volume-{1,2}.njk moved here so it still fires
+   after the outer element became a <div>. */
+
+/* Stretch-link overlay: the chapter's own <a> covers the whole row.
+   The badge is raised above it so its click never bubbles to the chapter. */
+.chapter-item {
+    position: relative;
+}
+.chapter-item-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    text-decoration: none;
+    /* No visible frame — the row it sits inside supplies all visuals. */
+}
+.chapter-item-link:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm, 4px);
+}
+
+/* Info column, status icons, and the two badges must all sit above the
+   stretched link so hover, focus, and clicks land on them — not on the
+   row-wide navigation overlay. */
+.chapter-item > .chapter-item-info,
+.chapter-item > .chapter-status-icons,
+.chapter-item > .badge {
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover on the whole row (chapter or badge). Reproduces the
+   a.chapter-item:hover rule that used to live in volume-{1,2}.njk. */
+.chapter-item:hover {
+    border-color: var(--gold-primary, #C4943A);
+    background: rgba(45, 32, 22, 0.92);
+}
+
+/* Testimony badge — gold family so it reads as a different KIND of
+   affordance than the green Available badge. Sits after Available on
+   desktop, wraps below both on narrow screens. */
+.badge-testimony {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(196, 148, 58, 0.15);
+    color: var(--gold-light, #D4A84A);
+    border: 1px solid rgba(196, 148, 58, 0.4);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.badge-testimony:hover {
+    background: rgba(196, 148, 58, 0.28);
+    border-color: var(--gold-primary, #C4943A);
+    color: var(--gold-light, #E8C878);
+}
+.badge-testimony:focus-visible {
+    outline: 2px solid var(--gold-primary, #C4943A);
+    outline-offset: 2px;
+}
+.badge-testimony svg {
+    flex-shrink: 0;
+    /* Nudge the play triangle up half a pixel for optical centering. */
+    transform: translateY(-0.5px);
+}
+
+/* Visually-hidden utility for the stretched-link's accessible name. */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Mobile: the row already wraps at 768px (see the inline @media rule in
+   volume-{1,2}.njk). Keep both badges on ONE wrap line — the row is
+   info column full-width, then a row of badges — instead of forcing a
+   third line for the testimony badge alone. */
+@media (max-width: 768px) {
+    .chapter-item {
+        row-gap: 0.35rem;
+    }
+    .badge-testimony {
+        padding: 0.18rem 0.5rem;
+    }
+    .badge-testimony span {
+        /* Tighten the label so it never pushes the row past two lines. */
+        font-size: 0.68rem;
+    }
+}

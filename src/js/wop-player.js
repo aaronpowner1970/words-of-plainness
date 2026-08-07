@@ -83,9 +83,19 @@
             var self = this;
             this.audio.play().catch(function (err) {
                 if (thisToken !== self.loadToken) return;         // superseded
-                if (err && (err.name === 'AbortError' ||
-                            err.name === 'NotAllowedError')) return;
+                // Always clear the loading spinner — AbortError (superseded
+                // load) and NotAllowedError (autoplay blocked) used to return
+                // early leaving wp-loading stuck on the play button forever.
                 self.els.btnPlay.classList.remove('wp-loading');
+                if (err && err.name === 'AbortError') return;
+                if (err && err.name === 'NotAllowedError') {
+                    // Autoplay blocked (Safari/iOS/Firefox on deep-link entry
+                    // and gesture-less plays). Leave the bar visible with the
+                    // track loaded, arm the play button, and clear the arm on
+                    // the first successful play (bound once in bindEvents).
+                    self.root.classList.add('wp-armed');
+                    return;
+                }
                 console.warn('WopPlayer: play failed —', err && err.message);
             });
         },
@@ -316,7 +326,7 @@
         bindEvents: function () {
             var self = this, a = this.audio;
 
-            a.addEventListener('play',           function () { self.setPlayIcon(true); self.els.btnPlay.classList.remove('wp-loading'); });
+            a.addEventListener('play',           function () { self.setPlayIcon(true); self.els.btnPlay.classList.remove('wp-loading'); self.root.classList.remove('wp-armed'); });
             a.addEventListener('pause',          function () { self.setPlayIcon(false); });
             a.addEventListener('loadedmetadata', function () { self.els.timeTot.textContent = fmt(a.duration); });
             a.addEventListener('timeupdate',     function () { self.onTimeUpdate(); });
@@ -621,10 +631,63 @@
         }
     }
 
+    // Deep-link handler — /music/?play=FILENAME arms and plays the track.
+    // Runs after init so P.play() has a built DOM and event bindings. Reads
+    // ?play=, decodes it, requires the file to exist in WOP_MUSIC_CATALOG,
+    // then calls P.play(). If autoplay policy blocks the play() promise, the
+    // NotAllowedError handler in P.play() adds .wp-armed to the root so the
+    // play button pulses; the .wp-armed class is cleared on the first
+    // successful 'play' event (see bindEvents). The ?play= parameter is
+    // stripped with history.replaceState so a refresh doesn't re-fire.
+    //
+    // On /music/, also scroll the matching playlist row into view and mark
+    // it as the current row so the reader sees where the track lives.
+    function processDeepLink() {
+        var params = new URLSearchParams(window.location.search);
+        var raw = params.get('play');
+        if (!raw) return;
+        var file;
+        try { file = decodeURIComponent(raw); } catch (_) { file = raw; }
+
+        var catalog = window.WOP_MUSIC_CATALOG || {};
+        if (!catalog[file]) return;
+
+        // /music/-specific decoration: scroll the row into view and mark it.
+        if (window.location.pathname.replace(/\/+$/, '') === '/music') {
+            var row = document.querySelector(
+                '.playlist-row[data-play-file="' + cssEscape(file) + '"]'
+            );
+            if (row) {
+                row.classList.add('playlist-row--current');
+                try { row.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+                catch (_) { row.scrollIntoView(); }
+            }
+        }
+
+        P.play(file);
+
+        // Strip ?play= so refresh doesn't re-fire. Preserve any other params.
+        params.delete('play');
+        var qs = params.toString();
+        var newUrl = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
+        try { history.replaceState(null, '', newUrl); } catch (_) {}
+    }
+
+    // Minimal CSS.escape polyfill for the row selector — modern browsers
+    // have it natively; fall back to a safe passthrough for older ones.
+    function cssEscape(s) {
+        if (window.CSS && typeof window.CSS.escape === 'function') return window.CSS.escape(s);
+        return String(s).replace(/["\\]/g, '\\$&');
+    }
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () { P.init(); });
+        document.addEventListener('DOMContentLoaded', function () {
+            P.init();
+            processDeepLink();
+        });
     } else {
         P.init();
+        processDeepLink();
     }
 
     window.WopPlayer = P;
