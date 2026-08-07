@@ -1,5 +1,6 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "Prophets of God"
 chapter: 30
 slug: "30-prophets-of-god"

@@ -1,5 +1,6 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "Personal Temple Covenants"
 chapter: 34
 slug: "34-personal-temple-covenants"

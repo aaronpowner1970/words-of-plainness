@@ -1,5 +1,6 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "Church Organization"
 chapter: 36
 slug: "36-church-organization"

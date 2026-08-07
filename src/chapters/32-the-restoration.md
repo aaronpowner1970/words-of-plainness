@@ -1,5 +1,6 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "The Restoration"
 chapter: 32
 slug: "32-the-restoration"

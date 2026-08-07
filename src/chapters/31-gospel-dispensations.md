@@ -1,5 +1,6 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "Gospel Dispensations"
 chapter: 31
 slug: "31-gospel-dispensations"

@@ -1,9 +1,10 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "Our Testimonies"
-chapter: 29
+chapter: 30
 slug: "29-our-testimonies"
-chapterId: "chapter-29-our-testimonies"
+chapterId: "chapter-30-our-testimonies"
 
 scripture:
   text: ""
@@ -16,11 +17,11 @@ audio:
   narration: ""
 
 prevChapter:
-  url: "/chapters/28-enduring-to-the-end/"
-  title: "Chapter 28: Enduring to the End"
+  url: "/chapters/enduring-to-the-end/"
+  title: "Chapter 29: Enduring to the End"
 nextChapter:
-  url: "/chapters/30-prophets-of-god/"
-  title: "Chapter 30: Prophets of God"
+  url: "/chapters/37-conclusion-benediction/"
+  title: "Chapter 31: Conclusion & Benediction"
 ---
 
 <div class="coming-soon-notice" style="text-align: center; padding: 3rem 1.5rem; opacity: 0.85;">

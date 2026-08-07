@@ -1,5 +1,6 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "General Covenants and Ordinances"
 chapter: 33
 slug: "33-general-covenants-ordinances"

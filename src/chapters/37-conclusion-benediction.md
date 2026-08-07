@@ -1,9 +1,10 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "Conclusion and Benediction"
-chapter: 37
+chapter: 31
 slug: "37-conclusion-benediction"
-chapterId: "chapter-37-conclusion-benediction"
+chapterId: "chapter-31-conclusion-benediction"
 
 scripture:
   text: ""
@@ -16,8 +17,8 @@ audio:
   narration: ""
 
 prevChapter:
-  url: "/chapters/36-church-organization/"
-  title: "Chapter 36: Church Organization"
+  url: "/chapters/29-our-testimonies/"
+  title: "Chapter 30: Our Testimonies"
 nextChapter:
   url: "/volume-1/"
   title: "Volume 1"

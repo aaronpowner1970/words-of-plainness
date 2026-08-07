@@ -1,5 +1,6 @@
 ---
 layout: layouts/chapter.njk
+eleventyExcludeFromCollections: true
 title: "Vicarious Temple Service"
 chapter: 35
 slug: "35-vicarious-temple-service"

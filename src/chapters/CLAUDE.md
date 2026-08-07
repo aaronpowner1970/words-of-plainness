@@ -55,3 +55,30 @@ full standard. Load-bearing points:
 - Readiness check after the governing frame, before the first card. Overflow /
   prerequisite depth goes to a companion appendix, not into the cards.
 - Every card drives toward commitment and character formation, not information.
+
+## Slug & asset naming (standing ruling, Aug 7 2026)
+
+The dividing line is "already published," not "which volume."
+
+- **Vol 1 Ch 1-16 (published).** Numbered slugs
+  (`/chapters/15-repentance-as-a-lifestyle/`) and the current asset scheme:
+  `NR_##_`, `PO_##_`, `CC_##_`, `IG_##_`, `slides_path: "chapter-##/"`.
+  Never retrofit. Renaming a published permalink costs 301s, R2 object
+  renames, and a Cloudflare purge, for zero reader benefit.
+- **Vol 1 Ch 17-31 (unwritten).** Unnumbered slugs from birth:
+  `/chapters/searching-the-scriptures/`. Filenames keep their numbers so the
+  directory sorts in reading order; only permalink and slug drop it.
+- **Vol 2 (all).** Unnumbered slugs plus volume-tokened assets: `V2_NR_`,
+  `V2_CC_`, `slides_path: "v2-chapter-01/"`. Required, not optional —
+  `slides_path: "chapter-15/"` collides between Vol 1 Ch 15 (Repentance) and
+  Vol 2 Ch 15 (Atonement), and R2 is a flat bucket with no namespacing.
+
+Volumes are **not** continuously numbered. Cite chapters as "Vol 1 Ch 15" /
+"Vol 2 Ch 15" everywhere — handoffs, RAG summaries, Discord channels, prose.
+
+`chapterId` is always `chapter-` + slug, and lives in the chapter's `.njk`
+frontmatter, never in `chapter-status.yaml`.
+
+**Corollary:** no asset filename receives a chapter number until that
+chapter's position is final. Assets stay deferred to the back end of a
+drafting batch.
