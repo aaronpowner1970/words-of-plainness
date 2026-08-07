@@ -216,32 +216,61 @@ module.exports = function(eleventyConfig) {
     });
 
     // =========================================
-    // TESTIMONY-FOR — look up a single chapter's primary testimony by URL
+    // TESTIMONY-FOR — look up a chapter's primary testimony
     // Backs the "Musical Testimony" badge on /volume-1/ and /volume-2/.
-    // Signature: {{ collections.chapters | testimonyFor(ch.url) }}
+    // Signature: {{ collections.chapters | testimonyFor(ch) }}
     //   → { file, title, label, duration } or null
-    // Matches on chapter url (normalizing trailing slashes on both sides)
-    // because chapter-status.yaml uses live-site chapter numbering while
-    // chapter frontmatter is the sole source of the audio filename. Alternates
-    // are ignored on purpose — the volume badge represents the primary only.
+    // Match order:
+    //   1. URL join — chapter-status.yaml ch.url ≡ collection url
+    //      (trailing slashes normalized on both sides). This is the safe
+    //      path; url is the sole join key because chapter-status.yaml uses
+    //      live-site chapter numbering while chapter frontmatter is the
+    //      source of the audio filename.
+    //   2. Number fallback WITHIN VOLUME — required when a chapter has a
+    //      dual-file split (e.g. Ch 6: `.njk` card page carries the live URL
+    //      but `-full.md` carries the audio.testimony frontmatter). Falls
+    //      back to matching data.chapter within collection entries whose
+    //      URL sits under the SAME top-level directory as the requested
+    //      URL, so /chapters/… never crosses into /volume-2/chapters/…
+    //      (V2 numbering restarts at 1 and would otherwise collide).
+    // Alternates are ignored on purpose — the volume badge represents the
+    // primary testimony only.
     // =========================================
-    eleventyConfig.addFilter("testimonyFor", function(chapters, url) {
-        if (!chapters || !url) return null;
-        var norm = String(url).replace(/\/+$/, '');
+    eleventyConfig.addFilter("testimonyFor", function(chapters, ch) {
+        if (!chapters || !ch || !ch.url) return null;
+        var norm = String(ch.url).replace(/\/+$/, '');
+        var chNumber = ch.number;
+
+        // Top-level segment of the requested URL — "/chapters" or "/volume-2".
+        // Number-fallback matches stay inside this prefix so V1 and V2 don't cross.
+        var prefixMatch = norm.match(/^(\/[^\/]+)/);
+        var prefix = prefixMatch ? prefixMatch[1] : '';
+
+        var numberCandidate = null;
         for (var i = 0; i < chapters.length; i++) {
-            var ch = chapters[i];
-            var chUrl = ch && ch.url ? String(ch.url).replace(/\/+$/, '') : '';
-            if (chUrl !== norm) continue;
-            var t = ch.data && ch.data.audio && ch.data.audio.testimony;
-            if (!t || !t.file) return null;
-            return {
+            var c = chapters[i];
+            var cUrl = c && c.url ? String(c.url).replace(/\/+$/, '') : '';
+            var t = c.data && c.data.audio && c.data.audio.testimony;
+            if (!t || !t.file) continue;
+            if (cUrl === norm) {
+                return {
+                    file: t.file,
+                    title: t.title || '',
+                    label: t.label || '',
+                    duration: t.duration || ''
+                };
+            }
+            if (numberCandidate) continue;
+            if (typeof chNumber !== 'number' || c.data.chapter !== chNumber) continue;
+            if (prefix && cUrl.indexOf(prefix + '/') !== 0) continue;
+            numberCandidate = {
                 file: t.file,
                 title: t.title || '',
                 label: t.label || '',
                 duration: t.duration || ''
             };
         }
-        return null;
+        return numberCandidate;
     });
 
     // =========================================

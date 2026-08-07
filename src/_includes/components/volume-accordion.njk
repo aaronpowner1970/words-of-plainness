@@ -36,7 +36,7 @@
                 <div class="chapter-list">
                     {% for ch in movement.chapters %}
                         {% if ch.status == "available" %}
-                        {% set testimony = collections.chapters | testimonyFor(ch.url) %}
+                        {% set testimony = collections.chapters | testimonyFor(ch) %}
                         <div class="chapter-item" data-chapter-id="chapter-{{ ch.slug }}">
                             <a href="{{ ch.url }}" class="chapter-item-link">
                                 <span class="visually-hidden">Read Chapter {{ ch.number }}: {{ ch.title | striptags | safe }}</span>
