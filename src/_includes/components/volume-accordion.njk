@@ -10,8 +10,9 @@
    The first movement in `volume.movements` renders open by default.
    Chapter rows render as active <a> links with an Available badge when
    `status == "available"`, and as muted <div> rows with a Coming Soon
-   badge otherwise. Markup, classes, and per-chapter status icons match
-   the previous hand-written accordion byte-for-byte.
+   badge when `status == "coming-soon"`. Rows with `status == "draft"`
+   are skipped entirely (the page still builds at its real URL for VR
+   field-testing, but the volume landing does not list it).
    ============================================================ #}
 
 <div class="movement-accordion" id="movementAccordion">
@@ -35,7 +36,9 @@
             <div class="movement-body" id="body-{{ movement.acc_id }}">
                 <div class="chapter-list">
                     {% for ch in movement.chapters %}
-                        {% if ch.status == "available" %}
+                        {% if ch.status == "draft" %}
+                        {# draft: intentionally rendered nowhere on volume pages #}
+                        {% elif ch.status == "available" %}
                         {% set testimony = collections.chapters | testimonyFor(ch) %}
                         <div class="chapter-item" data-chapter-id="chapter-{{ ch.slug }}">
                             <a href="{{ ch.url }}" class="chapter-item-link">

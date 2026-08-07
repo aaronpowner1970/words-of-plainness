@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ description | default(site.description) }}">
 
+    {% if draft %}<meta name="robots" content="noindex,nofollow">{% endif %}
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.wordsofplainness.org{{ page.url }}">
 

@@ -9,11 +9,17 @@
 # NUMBERING: Uses LIVE SITE numbering (wordsofplainness.org),
 # NOT repo file numbering. Repo file paths noted in `file` field.
 #
-# STATUS values (per chapter): available | coming-soon
+# STATUS values (per chapter): available | coming-soon | draft
 #   'available'   → chapter is linked from the volume landing page with
 #                   an "Available" badge. Requires `url`.
 #   'coming-soon' → chapter is shown on the landing page as a muted
 #                   "Coming Soon" row. No link is rendered.
+#   'draft'       → chapter builds at its real URL but renders NOWHERE on
+#                   the volume pages, is excluded from nav and sitemap
+#                   (draft .njk sets `eleventyExcludeFromCollections: true`
+#                   and `draft: true`, which triggers noindex in base.njk),
+#                   and does not count toward availableCount. Purpose:
+#                   field-testing in Bigscreen VR without publishing.
 #
 # Movements are ordered lists; the volume pages iterate them in the
 # order given here. Each movement carries the presentation metadata
@@ -26,7 +32,7 @@
 volume_1:
   slug: volume-1
   title: "Christ-Centered Discipleship"
-  total_chapters: 30
+  total_chapters: 31
   url: /volume-1/
 
   movements:
@@ -551,120 +557,132 @@ volume_1:
           notes: "Card-chapter live. Musical testimony 'One Day in Seven' active."
 
         - number: 17
+          title: "Searching the Scriptures"
+          file: 17-searching-the-scriptures.njk
+          slug: 17-searching-the-scriptures
+          chapterId: 17-searching-the-scriptures
+          url: /chapters/17-searching-the-scriptures/
+          status: coming-soon
+          movement: 3
+          group: "Character and Worship"
+          format: card-chapter
+          description: "Coming to the scriptures with purpose — how to study, ponder, and search the word so that it testifies of Christ."
+
+        - number: 18
           title: "Christlike Virtues"
-          file: 17-christlike-virtues.njk
-          slug: 17-christlike-virtues
-          url: /chapters/17-christlike-virtues/
+          file: 18-christlike-virtues.njk
+          slug: 18-christlike-virtues
+          url: /chapters/18-christlike-virtues/
           status: coming-soon
           movement: 3
           group: "Character and Worship"
           format: card-chapter
 
-        - number: 18
-          title: "Loving Our Neighbors"
-          file: 18-loving-our-neighbors.njk
-          slug: 18-loving-our-neighbors
-          url: /chapters/18-loving-our-neighbors/
-          status: coming-soon
-          movement: 3
-          group: "Relational Practices"
-          format: card-chapter
-
         - number: 19
-          title: "Building Godly Marriages"
-          file: 19-building-godly-marriages.njk
-          slug: 19-building-godly-marriages
-          url: /chapters/19-building-godly-marriages/
+          title: "Loving Our Neighbors"
+          file: 19-loving-our-neighbors.njk
+          slug: 19-loving-our-neighbors
+          url: /chapters/19-loving-our-neighbors/
           status: coming-soon
           movement: 3
           group: "Relational Practices"
           format: card-chapter
 
         - number: 20
-          title: "Raising Children in Righteousness"
-          file: 20-raising-children-in-righteousness.njk
-          slug: 20-raising-children-in-righteousness
-          url: /chapters/20-raising-children-in-righteousness/
+          title: "Building Godly Marriages"
+          file: 20-building-godly-marriages.njk
+          slug: 20-building-godly-marriages
+          url: /chapters/20-building-godly-marriages/
           status: coming-soon
           movement: 3
           group: "Relational Practices"
           format: card-chapter
 
         - number: 21
-          title: "Developing Our Talents"
-          file: 21-developing-our-talents.njk
-          slug: 21-developing-our-talents
-          url: /chapters/21-developing-our-talents/
+          title: "Raising Children in Righteousness"
+          file: 21-raising-children-in-righteousness.njk
+          slug: 21-raising-children-in-righteousness
+          url: /chapters/21-raising-children-in-righteousness/
           status: coming-soon
           movement: 3
-          group: "Stewardship Practices"
+          group: "Relational Practices"
           format: card-chapter
 
         - number: 22
-          title: "Financial Stewardship"
-          file: 22-financial-stewardship.njk
-          slug: 22-financial-stewardship
-          url: /chapters/22-financial-stewardship/
+          title: "Developing Our Talents"
+          file: 22-developing-our-talents.njk
+          slug: 22-developing-our-talents
+          url: /chapters/22-developing-our-talents/
           status: coming-soon
           movement: 3
           group: "Stewardship Practices"
           format: card-chapter
 
         - number: 23
-          title: "Tending the Garden"
-          file: 23-tending-the-garden.njk
-          slug: 23-tending-the-garden
-          url: /chapters/23-tending-the-garden/
+          title: "Financial Stewardship"
+          file: 23-financial-stewardship.njk
+          slug: 23-financial-stewardship
+          url: /chapters/23-financial-stewardship/
           status: coming-soon
           movement: 3
           group: "Stewardship Practices"
           format: card-chapter
 
         - number: 24
-          title: "Witnessing of Christ"
-          file: 24-witnessing-of-christ.njk
-          slug: 24-witnessing-of-christ
-          url: /chapters/24-witnessing-of-christ/
+          title: "Tending the Garden"
+          file: 24-tending-the-garden.njk
+          slug: 24-tending-the-garden
+          url: /chapters/24-tending-the-garden/
           status: coming-soon
           movement: 3
-          group: "Mission Practices"
+          group: "Stewardship Practices"
           format: card-chapter
 
         - number: 25
-          title: "Faithful Service"
-          file: 25-faithful-service.njk
-          slug: 25-faithful-service
-          url: /chapters/25-faithful-service/
+          title: "Witnessing of Christ"
+          file: 25-witnessing-of-christ.njk
+          slug: 25-witnessing-of-christ
+          url: /chapters/25-witnessing-of-christ/
           status: coming-soon
           movement: 3
           group: "Mission Practices"
           format: card-chapter
 
         - number: 26
-          title: "Bearing Trials in Faith"
-          file: 26-bearing-trials-in-faith.njk
-          slug: 26-bearing-trials-in-faith
-          url: /chapters/26-bearing-trials-in-faith/
+          title: "Faithful Service"
+          file: 26-faithful-service.njk
+          slug: 26-faithful-service
+          url: /chapters/26-faithful-service/
           status: coming-soon
           movement: 3
-          group: "Endurance Practices"
+          group: "Mission Practices"
           format: card-chapter
 
         - number: 27
-          title: "Laying Up Treasures in Heaven"
-          file: 27-laying-up-treasures-in-heaven.njk
-          slug: 27-laying-up-treasures-in-heaven
-          url: /chapters/27-laying-up-treasures-in-heaven/
+          title: "Bearing Trials in Faith"
+          file: 27-bearing-trials-in-faith.njk
+          slug: 27-bearing-trials-in-faith
+          url: /chapters/27-bearing-trials-in-faith/
           status: coming-soon
           movement: 3
           group: "Endurance Practices"
           format: card-chapter
 
         - number: 28
+          title: "Laying Up Treasures in Heaven"
+          file: 28-laying-up-treasures-in-heaven.njk
+          slug: 28-laying-up-treasures-in-heaven
+          url: /chapters/28-laying-up-treasures-in-heaven/
+          status: coming-soon
+          movement: 3
+          group: "Endurance Practices"
+          format: card-chapter
+
+        - number: 29
           title: "Enduring to the End"
-          file: 28-enduring-to-the-end.njk
-          slug: 28-enduring-to-the-end
-          url: /chapters/28-enduring-to-the-end/
+          file: 29-enduring-to-the-end.njk
+          slug: 29-enduring-to-the-end
+          url: /chapters/29-enduring-to-the-end/
           status: coming-soon
           movement: 3
           group: "Endurance Practices"
@@ -678,23 +696,23 @@ volume_1:
       acc_id: "hinge"
       chapters:
 
-        - number: 29
+        - number: 30
           title: "Our Testimonies"
           file: 29-our-testimonies.md
           slug: 29-our-testimonies
           url: /chapters/29-our-testimonies/
           status: coming-soon
           format: prose
-          notes: "Christ-centered, interfaith. Hinge chapter."
+          notes: "Christ-centered, interfaith. Hinge chapter. Repo file retains old numbering (29-*); live slug/URL match the file, but chapter number is now 30 following the Ch 17 insert."
 
-        - number: 30
+        - number: 31
           title: "Conclusion & Benediction"
           file: 37-conclusion-benediction.md
           slug: 37-conclusion-benediction
           url: /chapters/37-conclusion-benediction/
           status: coming-soon
           format: prose
-          notes: "Repo file retains old Ch 37 numbering from pre-transplant architecture."
+          notes: "Repo file retains old Ch 37 numbering from pre-transplant architecture; chapter number is now 31 following the Ch 17 insert."
 
 # ═══════════════════════════════════════════════════════════════════
 # VOLUME 2 — Covenants and Theology
