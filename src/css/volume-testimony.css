@@ -25,12 +25,11 @@
     border-radius: var(--radius-sm, 4px);
 }
 
-/* Info column, status icons, and the two badges must all sit above the
-   stretched link so hover, focus, and clicks land on them — not on the
-   row-wide navigation overlay. */
-.chapter-item > .chapter-item-info,
-.chapter-item > .chapter-status-icons,
-.chapter-item > .badge {
+/* ONLY the testimony badge is interactive, so only it is raised above the
+   stretched navigation link. The info column, status icons, and Available
+   pill are inert — raising them made the row's whole text region intercept
+   clicks meant for the chapter. */
+.chapter-item > .badge-testimony {
     position: relative;
     z-index: 2;
 }
