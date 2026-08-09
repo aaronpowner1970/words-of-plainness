@@ -1,0 +1,129 @@
+version: '0.1'
+status: developmental_not_psychometrically_validated
+purpose: Optional behavioral discernment aid that suggests two domains for exploration while preserving user agency.
+response_scale:
+- rarely
+- sometimes
+- often
+- usually
+- not_applicable_or_unsure
+presentation_notes:
+- Hide domain labels while answering.
+- Prefer situational behavior over abstract trait self-rating.
+- Recommend two possible growth focuses, not one diagnosis.
+- Always allow the user to choose any domain instead.
+- Do not describe results as validated unless formal validation is later performed.
+items:
+- id: A01
+  domain: attentive-presence
+  prompt: When someone begins telling me something important at an inconvenient time, I usually give them my attention before
+    deciding what needs to happen next.
+  direction: positive
+- id: A02
+  domain: attentive-presence
+  prompt: After helping someone through an immediate problem, I usually remember to check later whether they still need support.
+  direction: positive
+- id: A03
+  domain: attentive-presence
+  prompt: When I try to help, I make a point of checking whether my help actually improved the situation.
+  direction: positive
+- id: B01
+  domain: dignity-belonging
+  prompt: I can welcome and learn from someone whose background, status, or beliefs make them socially distant from me.
+  direction: positive
+- id: B02
+  domain: dignity-belonging
+  prompt: When a person is being dismissed or stigmatized, I am willing to protect their dignity even if others disapprove.
+  direction: positive
+- id: B03
+  domain: dignity-belonging
+  prompt: When someone outside my group does something genuinely good, I can recognize it without first needing to qualify
+    their outsider status.
+  direction: positive
+- id: C01
+  domain: truth-agency
+  prompt: I can tell someone a difficult truth without trying to control the decision they make afterward.
+  direction: positive
+- id: C02
+  domain: truth-agency
+  prompt: When a discussion becomes manipulative or fruitless, I can refuse the argument or step away without needing the
+    last word.
+  direction: positive
+- id: C03
+  domain: truth-agency
+  prompt: When another person offers a thoughtful challenge to my position, I can listen seriously enough to let it affect
+    my response.
+  direction: positive
+- id: D01
+  domain: grace-restoration
+  prompt: When someone repeatedly misunderstands something I have explained, I can usually teach it again without making them
+    feel foolish.
+  direction: positive
+- id: D02
+  domain: grace-restoration
+  prompt: When someone fails badly but sincerely wants to return, I am willing to imagine a meaningful future for them rather
+    than defining them by the failure.
+  direction: positive
+- id: D03
+  domain: grace-restoration
+  prompt: When someone expresses honest doubt, I can respond with patience and evidence rather than treating the question
+    itself as disloyalty.
+  direction: positive
+- id: E01
+  domain: humility-inner-government
+  prompt: When people praise me, I can receive it without needing to seek more attention or make the moment about my importance.
+  direction: positive
+- id: E02
+  domain: humility-inner-government
+  prompt: When I am distressed, I can acknowledge what I feel while still choosing my next action deliberately.
+  direction: positive
+- id: E03
+  domain: humility-inner-government
+  prompt: I make room for private prayer, reflection, or withdrawal before exhaustion and pressure determine my behavior for
+    me.
+  direction: positive
+- id: F01
+  domain: peace-right-use-power
+  prompt: When someone on my side treats an opponent unfairly, I am willing to acknowledge and repair the harm even if doing
+    so weakens my side’s position.
+  direction: positive
+- id: F02
+  domain: peace-right-use-power
+  prompt: When I have the power to retaliate, I can choose a response aimed at protection or restoration rather than payback.
+  direction: positive
+- id: F03
+  domain: peace-right-use-power
+  prompt: I can distinguish between a conflict worth confronting and a nonessential matter where yielding would prevent needless
+    harm.
+  direction: positive
+- id: G01
+  domain: servanthood-stewardship
+  prompt: When I serve someone, I pay attention to practical bodily needs rather than assuming the “spiritual” part is all
+    that matters.
+  direction: positive
+- id: G02
+  domain: servanthood-stewardship
+  prompt: I can receive another person’s help or generosity without needing always to occupy the role of giver.
+  direction: positive
+- id: G03
+  domain: servanthood-stewardship
+  prompt: I try to judge another person’s contribution in light of what they actually had to give, not merely by comparing
+    their output with someone else’s.
+  direction: positive
+- id: H01
+  domain: forming-others
+  prompt: When I can do something faster or better myself, I still make room for others to learn by participating.
+  direction: positive
+- id: H02
+  domain: forming-others
+  prompt: After someone I am mentoring tries and fails, I am willing to debrief what happened and let them try again rather
+    than simply taking the task back.
+  direction: positive
+- id: H03
+  domain: forming-others
+  prompt: I deliberately name specific things other people are doing well, not only the things they need to improve.
+  direction: positive
+initial_scoring_concept:
+  note: Developmental only. Lower average frequency may indicate a domain worth exploring; exclude NA/unsure. Prefer descriptive
+    recommendations over numeric scoring.
+  recommended_result_count: 2

@@ -83,6 +83,19 @@ When Aaron says "that's it," "done," "wrap up," or similar:
 5. Remind Aaron: "Before you close Claude Code — kill all Claude processes in Task
    Manager, then delete `.claude\worktrees\*` folders."
 
+## Christlike Practices app (Vol 1 Ch 18 companion)
+
+Replayable discipleship-formation app at `/practices/` built on observable
+behaviors of Jesus (corpus: CDP-### IDs, eight virtue domains, git-owned YAML).
+Canonical docs: `docs/ch18-christlike-practices/` (canonical/ arrives at Phase 2).
+Core rule: the unit of content is a Christlike practice; the unit of experience
+is a practice cycle. A cycle may close; a practice is NEVER permanently
+"completed" for a user — no terminal completion state in any schema, ever.
+Sibling semantics: Keep My Commandments = what Jesus commanded (keeps its own
+Studying/Practicing/Integrated vocabulary); Christlike Practices = what Jesus
+modeled (cycles forever). One unified journal (My Discipleship Journal) serves both.
+Implementation constraints: `.claude/rules/christlike-practices-app.md`.
+
 ## Key references
 Do not treat any of these as current-state authorities — the state file above wins.
 For the governance-document index (which doc covers what, and how stale each is),

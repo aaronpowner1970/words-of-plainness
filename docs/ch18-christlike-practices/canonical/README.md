@@ -1,0 +1,1 @@
+Canonical product docs (PRODUCT_SPEC, CONTENT_MODEL, UX_FLOWS, DATA_MODEL, DECISION_LOG) are authored at the Phase 2 gate, after the Phase 1 corpus pass. Until they exist, the reconciled architecture memo (project knowledge, 20260809) + Batch Design Brief Amendment 1 govern. The v0.1 packet one level up is source material, not canon.

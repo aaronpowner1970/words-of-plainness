@@ -100,8 +100,25 @@ workstreams:
     status: paused
     priority: on-hold
     reason: "Prayer-/inspiration-directed pivot to the Articles arc (see current_phase.resume_trigger)."
-    state: "Vol 1: 15 chapters deployed (1–14, 16). Vol 2: 0 deployed. See chapter-status.yaml for per-chapter detail."
-    resume_next: "Ch 15 (Repentance as a Lifestyle), then Ch 17 (Christlike Virtues) — completes Movement 3 'Character and Worship' group."
+    state: "Vol 1: 16 chapters published (1–16). Vol 2: 0 deployed. Movement 3 batch (Ch 17–29) governed by the Batch Design Brief as amended Aug 9 (Ch 18 slate withdrawn). See chapter-status.yaml for per-chapter detail."
+    resume_next: "Practice-corpus editorial batches (voice calibration), then Ch 25, 26 per amended drafting order. Ch 18 is now 'Do As I Have Done' — intro/tutorial for the Christlike Practices app, not a card-chapter."
+
+  - id: christlike-practices-app
+    name: "Christlike Practices app — Vol 1 Ch 18 companion (/practices/)"
+    status: active
+    priority: high
+    state: >
+      Phase 0 complete Aug 9 2026: reconciled architecture ratified (project
+      knowledge: WoP_Ch18_ChristlikePractices_ReconciledArchitecture_20260809.md).
+      Rulings: in-site route /practices/; one unified journal; new append-only
+      PracticeCycle model in wop-api (no terminal completion state, ever);
+      ~70-practice corpus (CDP-### IDs, eight virtue domains) as git-owned YAML;
+      Ch 18 titled "Do As I Have Done" (John 13:15), slug do-as-i-have-done.
+      Aaron's editorial pass over the practice corpus doubles as the Movement 3
+      voice-calibration corpus. KMC migrates in-site AFTER this app ships
+      (beta accounts dropped; KMC keeps Studying/Practicing/Integrated vocabulary);
+      KMC catalog.json fixture at working-folder/ch18-christlike-practices/kmc/.
+    next_action: "Phase 1 — corpus canonicalization, domain batch 1 (Attentive Presence, 9 practices), Cowork session."
 
 # ═══════════════════════════════════════════════════════════════════
 # OPEN / BLOCKED
@@ -143,12 +160,16 @@ governance_docs:
   - { title: "WoP_Definitive_Architecture_20260217.md", location: "repo root + project knowledge", status: STALE, note: "Feb snapshot; superseded (Movement 4 transplant, Articles arc). Historical reference only." }
   - { title: "Community Safety & Moderation Protocol v1.0", location: "ministry-rag", status: current }
   - { title: "Collaborator Agent Design Document", location: "ministry-rag / Google Drive", status: current }
+  - { title: "Ch 18 Christlike Practices Reconciled Architecture (20260809)", location: "project knowledge + docs/ch18-christlike-practices/", status: current, note: "Phase 0 memo + decision log; governs the app build." }
+  - { title: "Movement 3 Batch Design Brief + Amendment 1 (Aug 9)", location: "wop-scratch + docs/ch18-christlike-practices/", status: current, note: "Ch 18 slate withdrawn; calibration reassigned to practice-corpus edits." }
 
 # ═══════════════════════════════════════════════════════════════════
 # NEXT PRIORITIES (ordered)
 # ═══════════════════════════════════════════════════════════════════
 next_priorities:
   - "Articles arc: VR/group-display field-test findings → group-display mode design (next session)"
+  - "Christlike Practices app Phase 1: practice-corpus editorial batches (also Movement 3 voice calibration)"
+  - "KMC git backup on PythonAnywhere (Aaron; prerequisite for later KMC migration)"
   - "Complete A10 IRL Articles-reading video"
   - "Search UX / Pagefind dedicated session"
   - "Community Safety Phase 1 — submission moderation pipeline"
