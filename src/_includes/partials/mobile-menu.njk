@@ -31,6 +31,12 @@
             </li>
             {% endfor %}
           </ul>
+          {% elif item.action == "world-clocks" %}
+          {# Opens the site-wide World Clocks overlay — no navigation.
+             components/world-clocks-script.njk binds [data-wc-open]. #}
+          <a href="#" class="mobile-menu-link" data-wc-open>
+            {{ item.title }}
+          </a>
           {% else %}
           <a href="{{ item.url }}" class="mobile-menu-link{% if page.url == item.url %} active{% endif %}">
             {{ item.title }}

@@ -1,0 +1,147 @@
+<!-- World Clocks overlay — styles (site-wide, loaded from layouts/base.njk).
+     Source: wop-world-clocks.html, WC-INTEGRATION CSS block. The prototype's
+     stand-in site chrome (its nav bar, page body, and body reset, all marked
+     "NOT for production") is deliberately left behind — the live site supplies
+     all of that. -->
+<style id="wc-styles">
+  :root{
+    /* Lantern-warm dark theme: contrasts the light parchment site in value,
+       harmonizes with it in hue. Gold matches the site's #C4943A. */
+    --wc-panel:      #261e12;   /* overlay panel — deep umber */
+    --wc-panel-edge: #403423;
+    --wc-ink:        #f2ecdf;   /* text on panel */
+    --wc-muted:      #b3a68d;
+    --wc-gold:       #c4943a;   /* WoP site accent, exact */
+    --wc-gold-soft:  #e2c07a;
+    --wc-day-face:   #faf5e8;   /* daytime clock face — parchment */
+    --wc-day-ink:    #3c2f1b;
+    --wc-night-face: #171209;   /* nighttime clock face */
+    --wc-night-ink:  #d8cbb0;
+    --wc-hilite:     rgba(196,148,58,.16);
+    --wc-row-h:      118px;
+    --wc-rows-shown: 6;
+  }
+
+  /* ---- backdrop + panel ---- */
+  /* z-index 9990 (prototype used 1000): the live site stacks the header at
+     1000, the mobile menu at 1801, and floating widgets up to 9000. The
+     overlay must clear all of them, while staying under the .skip-link
+     (10000) so keyboard focus is never trapped behind it. */
+  #wc-overlay{position:fixed;inset:0;z-index:9990;display:none;
+    align-items:center;justify-content:center;
+    background:rgba(24,18,9,.62);backdrop-filter:blur(4px);}
+  #wc-overlay.wc-open{display:flex;}
+  .wc-panel{background:var(--wc-panel);color:var(--wc-ink);
+    border:1px solid var(--wc-panel-edge);border-radius:14px;
+    width:min(880px,94vw);max-height:92vh;display:flex;flex-direction:column;
+    box-shadow:0 24px 70px rgba(0,0,0,.55);overflow:hidden;
+    animation:wc-in .28s ease;}
+  @keyframes wc-in{from{opacity:0;transform:scale(.97) translateY(8px);}
+                   to{opacity:1;transform:none;}}
+
+  .wc-head{display:flex;align-items:baseline;gap:14px;
+    padding:18px 22px 12px;border-bottom:1px solid var(--wc-panel-edge);}
+  .wc-head h2{margin:0;font-family:Georgia,'Times New Roman',serif;
+    font-size:1.35rem;font-weight:600;color:var(--wc-gold-soft);letter-spacing:.02em;}
+  .wc-head .wc-sub{color:var(--wc-muted);font-size:.85rem;}
+  .wc-close{margin-left:auto;background:none;border:1px solid var(--wc-panel-edge);
+    color:var(--wc-muted);border-radius:8px;width:34px;height:34px;font-size:1.05rem;
+    cursor:pointer;line-height:1;}
+  .wc-close:hover{color:var(--wc-ink);border-color:var(--wc-gold);}
+
+  /* ---- drum ---- */
+  .wc-body{display:flex;gap:0;min-height:0;}
+  .wc-viewport{flex:1;overflow:hidden;position:relative;padding-top:8px;
+    height:calc(var(--wc-row-h) * var(--wc-rows-shown));}
+  .wc-viewport::before,.wc-viewport::after{content:"";position:absolute;left:0;right:0;
+    height:34px;z-index:5;pointer-events:none;}
+  .wc-viewport::before{top:0;height:22px;background:linear-gradient(var(--wc-panel),transparent);}
+  .wc-viewport::after{bottom:0;background:linear-gradient(transparent,var(--wc-panel));}
+  .wc-track{will-change:transform;}
+  .wc-track.wc-anim{transition:transform .38s cubic-bezier(.33,.72,.3,1);}
+  @media (prefers-reduced-motion: reduce){.wc-track.wc-anim{transition:none;}}
+
+  .wc-row{height:var(--wc-row-h);display:flex;align-items:center;gap:14px;
+    padding:0 18px;border-bottom:1px solid rgba(64,52,35,.55);box-sizing:border-box;}
+  .wc-row.wc-you{background:var(--wc-hilite);
+    box-shadow:inset 3px 0 0 var(--wc-gold);}
+  .wc-rowlabel{width:96px;flex:none;text-align:center;}
+  .wc-rowlabel .wc-utc{font-family:Georgia,serif;font-size:1.02rem;color:var(--wc-gold-soft);}
+  .wc-rowlabel .wc-name{display:block;font-size:.68rem;color:var(--wc-ink);
+    opacity:.85;margin-top:3px;line-height:1.25;}
+  .wc-rowlabel .wc-note{display:block;font-size:.62rem;color:var(--wc-muted);
+    margin-top:3px;line-height:1.25;}
+  .wc-cards{display:flex;gap:12px;flex:1;overflow-x:auto;scrollbar-width:thin;
+    padding:13px 2px 6px;}  /* extra top padding keeps the You/Aaron badges
+                               (which overhang the card) inside the scroll box */
+
+  /* ---- city card ---- */
+  .wc-card{flex:none;display:flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,.035);border:1px solid rgba(64,52,35,.7);
+    border-radius:10px;padding:8px 12px 8px 8px;min-width:178px;position:relative;}
+  .wc-card.wc-badged{border-color:var(--wc-gold);}
+  .wc-badges{position:absolute;top:-9px;left:10px;display:flex;gap:5px;}
+  .wc-badge{font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;
+    background:var(--wc-gold);color:#18120a;border-radius:99px;
+    padding:2px 8px;font-weight:700;white-space:nowrap;}
+  .wc-badge.wc-badge-you{background:#8fb4e5;color:#0c1523;}
+  .wc-cityname{font-weight:600;font-size:.88rem;line-height:1.2;}
+  .wc-digital{font-variant-numeric:tabular-nums;font-size:1.02rem;
+    color:var(--wc-gold-soft);letter-spacing:.02em;}
+  .wc-date{font-size:.7rem;color:var(--wc-muted);}
+  .wc-gmt{font-size:.62rem;color:var(--wc-muted);}
+
+  /* ---- analog face ---- */
+  .wc-clock{width:58px;height:58px;flex:none;}
+  .wc-face-day  .wc-facecirc{fill:var(--wc-day-face);}
+  .wc-face-day  .wc-tick{stroke:var(--wc-day-ink);}
+  .wc-face-day  .wc-hh,.wc-face-day .wc-mh{stroke:var(--wc-day-ink);}
+  .wc-face-night .wc-facecirc{fill:var(--wc-night-face);}
+  .wc-face-night .wc-tick{stroke:var(--wc-night-ink);}
+  .wc-face-night .wc-hh,.wc-face-night .wc-mh{stroke:var(--wc-night-ink);}
+  .wc-facecirc{stroke:var(--wc-gold);stroke-width:2.5;}
+  .wc-tick{stroke-width:2;stroke-linecap:round;}
+  .wc-hh{stroke-width:5;stroke-linecap:round;}
+  .wc-mh{stroke-width:3.2;stroke-linecap:round;}
+  .wc-sh{stroke:#c0392b;stroke-width:1.6;stroke-linecap:round;}
+  @media (prefers-reduced-motion: reduce){.wc-sh{display:none;}}
+  .wc-pin{fill:var(--wc-gold);}
+
+  /* ---- side controls ---- */
+  .wc-controls{flex:none;display:flex;flex-direction:column;justify-content:center;
+    gap:10px;padding:0 14px;border-left:1px solid var(--wc-panel-edge);}
+  .wc-arrow,.wc-home{background:rgba(255,255,255,.05);color:var(--wc-ink);
+    border:1px solid var(--wc-panel-edge);border-radius:10px;cursor:pointer;
+    width:64px;padding:10px 0;font-size:1rem;display:flex;flex-direction:column;
+    align-items:center;gap:2px;}
+  .wc-arrow small,.wc-home small{font-size:.58rem;color:var(--wc-muted);
+    text-transform:uppercase;letter-spacing:.06em;}
+  .wc-arrow:hover,.wc-home:hover{border-color:var(--wc-gold);color:var(--wc-gold-soft);}
+  .wc-home{font-size:.85rem;}
+
+  .wc-foot{padding:10px 22px;border-top:1px solid var(--wc-panel-edge);
+    font-size:.72rem;color:var(--wc-muted);display:flex;gap:16px;flex-wrap:wrap;
+    align-items:center;}
+  .wc-foot b{color:var(--wc-gold-soft);font-weight:600;}
+  .wc-youpick{display:flex;align-items:center;gap:7px;}
+  #wc-youzone{background:rgba(255,255,255,.06);color:var(--wc-ink);
+    border:1px solid var(--wc-panel-edge);border-radius:7px;
+    font-size:.72rem;padding:4px 6px;max-width:190px;}
+  #wc-youzone:hover{border-color:var(--wc-gold);}
+
+  /* Keep all six U.S. rows in a single viewing on shorter screens by
+     shrinking row height rather than dropping rows */
+  @media (max-height:840px){
+    :root{--wc-row-h:102px;}
+  }
+  @media (max-height:700px){
+    :root{--wc-row-h:88px;}
+    .wc-clock{width:46px;height:46px;}
+  }
+  @media (max-width:640px){
+    :root{--wc-rows-shown:4;--wc-row-h:112px;}
+    .wc-rowlabel{width:64px;}
+    .wc-controls{padding:0 8px;}
+    .wc-arrow,.wc-home{width:52px;}
+  }
+</style>

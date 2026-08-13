@@ -34,6 +34,10 @@
                       {% endfor %}
                     </div>
                   </li>
+                  {% elif item.action == "world-clocks" %}
+                  {# Opens the site-wide World Clocks overlay — no navigation.
+                     components/world-clocks-script.njk binds [data-wc-open]. #}
+                  <li><a href="#" data-wc-open>{{ item.title }}</a></li>
                   {% else %}
                   <li><a href="{{ item.url }}"{% if (item.url == "/" and page.url == "/") or (item.url != "/" and item.url in page.url) %} class="active"{% endif %}>{{ item.title }}</a></li>
                   {% endif %}

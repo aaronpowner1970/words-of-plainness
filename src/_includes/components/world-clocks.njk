@@ -1,0 +1,27 @@
+<!-- World Clocks overlay — markup (site-wide, loaded from layouts/base.njk just
+     before </body>). Source: wop-world-clocks.html, WC-INTEGRATION HTML block.
+     Opened by any element carrying data-wc-open (see navigation.json). -->
+<div id="wc-overlay" role="dialog" aria-modal="true" aria-label="World clocks">
+  <div class="wc-panel">
+    <div class="wc-head">
+      <h2>World Clocks</h2>
+      <span class="wc-sub">the fellowship spans every hour of the day</span>
+      <button class="wc-close" aria-label="Close world clocks">&times;</button>
+    </div>
+    <div class="wc-body">
+      <div class="wc-viewport"><div class="wc-track" id="wc-track"></div></div>
+      <div class="wc-controls">
+        <button class="wc-arrow" id="wc-east" aria-label="Spin east">&#9650;<small>East</small></button>
+        <button class="wc-home" id="wc-home" aria-label="Return to United States view">&#8962;<small>U.S.</small></button>
+        <button class="wc-arrow" id="wc-west" aria-label="Spin west">&#9660;<small>West</small></button>
+      </div>
+    </div>
+    <div class="wc-foot">
+      <label class="wc-youpick"><b>Your zone:</b>
+        <select id="wc-youzone" aria-label="Manually set your time zone"></select>
+      </label>
+      <span><b>Badges</b> — “You” and “Aaron”</span>
+      <span>Light faces are daytime; dark faces are night</span>
+    </div>
+  </div>
+</div>

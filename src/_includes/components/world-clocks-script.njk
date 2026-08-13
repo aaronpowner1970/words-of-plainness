@@ -1,0 +1,315 @@
+<!-- World Clocks overlay — behaviour (site-wide, loaded from layouts/base.njk
+     immediately after the overlay markup). Source: wop-world-clocks.html,
+     WC-INTEGRATION JS block. Menu wiring is one attribute: data-wc-open.
+     Aaron's traveling zone is one config line: WC_CONFIG.aaronZone. -->
+{% raw %}
+<script id="wc-script">
+(function(){
+"use strict";
+
+/* ------------ config ------------ */
+var WC_CONFIG = {
+  /* Aaron travels full-time: update this one line as the RV moves.
+     Near Lexington, KY as of Aug 2026 -> Eastern. */
+  aaronZone: "America/New_York",
+  aaronLabel: "Aaron",
+  defaultTopBand: -5,       /* U.S. view: Eastern at top ... */
+  rowsShown: 6              /* ... through Hawaii at bottom  */
+};
+
+/* Rows ordered east -> west, top -> bottom (UTC+12 down to UTC-11).
+   The wrap from -11 back to +12 is the International Date Line, so the
+   loop is geographically honest. Labels are nominal standard-time bands;
+   live offsets per city come from the Intl API. */
+var ROWS = [
+  {off:+12, name:"New Zealand Time", cities:[{n:"Auckland",tz:"Pacific/Auckland"},{n:"Fiji",tz:"Pacific/Fiji"}]},
+  {off:+11, name:"Solomon Is. Time", cities:[{n:"Nouméa",tz:"Pacific/Noumea"},{n:"Solomon Is.",tz:"Pacific/Guadalcanal"}]},
+  {off:+10, name:"Australian Eastern", cities:[{n:"Sydney",tz:"Australia/Sydney"},{n:"Brisbane",tz:"Australia/Brisbane"},{n:"Guam",tz:"Pacific/Guam"}]},
+  {off:+9, name:"Japan Standard", note:"Adelaide +9:30", cities:[{n:"Tokyo",tz:"Asia/Tokyo"},{n:"Seoul",tz:"Asia/Seoul"}]},
+  {off:+8, name:"China Standard", cities:[{n:"Beijing",tz:"Asia/Shanghai"},{n:"Singapore",tz:"Asia/Singapore"},{n:"Perth",tz:"Australia/Perth"}]},
+  {off:+7, name:"Indochina Time", cities:[{n:"Bangkok",tz:"Asia/Bangkok"},{n:"Jakarta",tz:"Asia/Jakarta"}]},
+  {off:+6, name:"Bangladesh Time", cities:[{n:"Dhaka",tz:"Asia/Dhaka"},{n:"Almaty",tz:"Asia/Almaty"}]},
+  {off:+5, name:"Pakistan Time", note:"India +5:30 · Nepal +5:45", cities:[{n:"Karachi",tz:"Asia/Karachi"},{n:"Tashkent",tz:"Asia/Tashkent"}]},
+  {off:+4, name:"Gulf Standard", cities:[{n:"Dubai",tz:"Asia/Dubai"},{n:"Tbilisi",tz:"Asia/Tbilisi"}]},
+  {off:+3, name:"Moscow · E. Africa", cities:[{n:"Moscow",tz:"Europe/Moscow"},{n:"Riyadh",tz:"Asia/Riyadh"},{n:"Nairobi",tz:"Africa/Nairobi"}]},
+  {off:+2, name:"Eastern European", cities:[{n:"Jerusalem",tz:"Asia/Jerusalem"},{n:"Cairo",tz:"Africa/Cairo"},{n:"Johannesburg",tz:"Africa/Johannesburg"}]},
+  {off:+1, name:"Central European", cities:[{n:"Paris",tz:"Europe/Paris"},{n:"Berlin",tz:"Europe/Berlin"},{n:"Lagos",tz:"Africa/Lagos"}]},
+  {off:0,  name:"Greenwich Mean", cities:[{n:"London",tz:"Europe/London"},{n:"Lisbon",tz:"Europe/Lisbon"},{n:"Accra",tz:"Africa/Accra"}]},
+  {off:-1, name:"Azores Time", cities:[{n:"Azores",tz:"Atlantic/Azores"},{n:"Cape Verde",tz:"Atlantic/Cape_Verde"}]},
+  {off:-2, name:"South Georgia", cities:[{n:"South Georgia",tz:"Atlantic/South_Georgia"},{n:"F. de Noronha",tz:"America/Noronha"}]},
+  {off:-3, name:"Argentina · Brasília", cities:[{n:"São Paulo",tz:"America/Sao_Paulo"},{n:"Buenos Aires",tz:"America/Argentina/Buenos_Aires"}]},
+  {off:-4, name:"Atlantic Time", cities:[{n:"Halifax",tz:"America/Halifax"},{n:"San Juan",tz:"America/Puerto_Rico"},{n:"Santiago",tz:"America/Santiago"}]},
+  {off:-5, name:"Eastern Time", cities:[{n:"New York",tz:"America/New_York"},{n:"Toronto",tz:"America/Toronto"},{n:"Lima",tz:"America/Lima"}]},
+  {off:-6, name:"Central Time", cities:[{n:"Chicago",tz:"America/Chicago"},{n:"Mexico City",tz:"America/Mexico_City"}]},
+  {off:-7, name:"Mountain Time", note:"Phoenix skips DST", cities:[{n:"Denver",tz:"America/Denver"},{n:"Salt Lake City",tz:"America/Denver"},{n:"Phoenix",tz:"America/Phoenix"}]},
+  {off:-8, name:"Pacific Time", cities:[{n:"Los Angeles",tz:"America/Los_Angeles"},{n:"Seattle",tz:"America/Los_Angeles"},{n:"Vancouver",tz:"America/Vancouver"}]},
+  {off:-9, name:"Alaska Time", cities:[{n:"Anchorage",tz:"America/Anchorage"},{n:"Juneau",tz:"America/Juneau"}]},
+  {off:-10, name:"Hawaii–Aleutian", cities:[{n:"Honolulu",tz:"Pacific/Honolulu"},{n:"Papeete",tz:"Pacific/Tahiti"}]},
+  {off:-11, name:"Samoa Time", cities:[{n:"Pago Pago",tz:"Pacific/Pago_Pago"},{n:"Niue",tz:"Pacific/Niue"}]}
+];
+var N = ROWS.length;                       /* 24 */
+var COPIES = 3;                             /* tripled track for seamless loop */
+
+/* ------------ time helpers (IANA + Intl, no hardcoded offsets) ------------ */
+var offsetCache = Object.create(null);      /* tz -> {min, at} */
+function zoneOffsetMinutes(tz, now){
+  var c = offsetCache[tz];
+  if (c && (now - c.at) < 30000) return c.min;
+  var dtf = new Intl.DateTimeFormat("en-US", {timeZone: tz, hourCycle: "h23",
+    year:"numeric", month:"2-digit", day:"2-digit",
+    hour:"2-digit", minute:"2-digit", second:"2-digit"});
+  var p = {};
+  dtf.formatToParts(new Date(now)).forEach(function(x){ p[x.type] = x.value; });
+  var asUTC = Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second);
+  var min = Math.round((asUTC - now) / 60000);
+  offsetCache[tz] = {min: min, at: now};
+  return min;
+}
+function gmtLabel(min){
+  var s = min < 0 ? "−" : "+";
+  var a = Math.abs(min);
+  return "GMT" + s + Math.floor(a/60) + (a % 60 ? ":" + String(a%60).padStart(2,"0") : "");
+}
+var DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+/* ------------ build DOM ------------ */
+var overlay = document.getElementById("wc-overlay");
+var track = document.getElementById("wc-track");
+var detectedZone = "";
+try { detectedZone = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch(e){}
+/* Manual override: survives reloads on this device (guarded — some embedded
+   previews block storage; the tool still works, the choice just won't stick) */
+var manualZone = null;
+try { manualZone = localStorage.getItem("wc-you-tz") || null; } catch(e){}
+var visitorZone = manualZone || detectedZone;
+var visitorOffMin = zoneOffsetMinutes(visitorZone || "UTC", Date.now());
+
+function svgClock(){
+  var t = "";
+  for (var i = 0; i < 12; i++){
+    var ang = i * Math.PI / 6, r1 = (i % 3 === 0) ? 38 : 41.5, r2 = 45;
+    t += '<line class="wc-tick" x1="' + (50 + r1*Math.sin(ang)).toFixed(1) +
+         '" y1="' + (50 - r1*Math.cos(ang)).toFixed(1) +
+         '" x2="' + (50 + r2*Math.sin(ang)).toFixed(1) +
+         '" y2="' + (50 - r2*Math.cos(ang)).toFixed(1) + '"/>';
+  }
+  return '<svg class="wc-clock" viewBox="0 0 100 100" aria-hidden="true">' +
+    '<circle class="wc-facecirc" cx="50" cy="50" r="47"/>' + t +
+    '<line class="wc-hh" x1="50" y1="50" x2="50" y2="27"/>' +
+    '<line class="wc-mh" x1="50" y1="50" x2="50" y2="16"/>' +
+    '<line class="wc-sh" x1="50" y1="54" x2="50" y2="13"/>' +
+    '<circle class="wc-pin" cx="50" cy="50" r="3"/></svg>';
+}
+
+function buildRow(row){
+  var el = document.createElement("div");
+  el.className = "wc-row";
+  el.dataset.off = row.off;
+  var lab = row.off === 0 ? "UTC±0" : "UTC" + (row.off > 0 ? "+" : "−") + Math.abs(row.off);
+  var html = '<div class="wc-rowlabel"><span class="wc-utc">' + lab + '</span>' +
+             (row.name ? '<span class="wc-name">' + row.name + '</span>' : "") +
+             (row.note ? '<span class="wc-note">' + row.note + '</span>' : "") + '</div>' +
+             '<div class="wc-cards">';
+  row.cities.forEach(function(c){
+    var badges = "";
+    var isAaron = (c.tz === WC_CONFIG.aaronZone && c.aaronCard);
+    var isYou = (c.tz === visitorZone && c.youCard);
+    if (isYou)  badges += '<span class="wc-badge wc-badge-you">You</span>';
+    if (isAaron) badges += '<span class="wc-badge">' + WC_CONFIG.aaronLabel + '</span>';
+    html += '<div class="wc-card' + (badges ? " wc-badged" : "") + '" data-tz="' + c.tz + '">' +
+      (badges ? '<div class="wc-badges">' + badges + '</div>' : "") +
+      svgClock() +
+      '<div><div class="wc-cityname">' + c.n + '</div>' +
+      '<div class="wc-digital">--:--</div>' +
+      '<div class="wc-date"></div><div class="wc-gmt"></div></div></div>';
+  });
+  html += "</div>";
+  el.innerHTML = html;
+  return el;
+}
+
+/* Mark exactly one card as Aaron's and one as the visitor's before build */
+function markBadges(){
+  ROWS.forEach(function(row){
+    delete row.youRow;
+    row.cities.forEach(function(c){ delete c.aaronCard; delete c.youCard; });
+  });
+  var aaronDone = false, youDone = false;
+  ROWS.forEach(function(row){ row.cities.forEach(function(c){
+    if (!aaronDone && c.tz === WC_CONFIG.aaronZone){ c.aaronCard = true; aaronDone = true; }
+    if (!youDone && visitorZone && c.tz === visitorZone){ c.youCard = true; youDone = true; }
+  });});
+  /* Visitor zone not in the list (e.g. Europe/Brussels): fall back to
+     highlighting the row whose live offset matches the visitor's. */
+  if (!youDone && visitorZone){
+    var best = null, now = Date.now();
+    ROWS.forEach(function(row){
+      var anchorOff = zoneOffsetMinutes(row.cities[0].tz, now);
+      if (anchorOff === visitorOffMin && best === null) best = row;
+    });
+    if (best) best.youRow = true;
+  } else if (youDone){
+    ROWS.forEach(function(row){ row.cities.forEach(function(c){
+      if (c.youCard) row.youRow = true;
+    });});
+  }
+}
+
+function buildTrack(){
+  track.innerHTML = "";
+  for (var copy = 0; copy < COPIES; copy++){
+    ROWS.forEach(function(row){
+      var el = buildRow(row);
+      if (row.youRow) el.classList.add("wc-you");
+      track.appendChild(el);
+    });
+  }
+}
+
+markBadges();
+buildTrack();
+
+/* ------------ drum position ------------ */
+var defaultIdx = ROWS.findIndex(function(r){ return r.off === WC_CONFIG.defaultTopBand; });
+if (defaultIdx < 0) defaultIdx = 0;
+var pos = N + defaultIdx;                  /* row units, middle copy */
+var rowH = 0;
+function measure(){
+  /* offsetHeight ignores CSS transforms, so measuring during the panel's
+     open animation (scale .97) still returns the true layout height */
+  var first = track.firstElementChild;
+  rowH = first ? first.offsetHeight : 118;
+}
+function apply(animate){
+  if (animate) track.classList.add("wc-anim");
+  else track.classList.remove("wc-anim");
+  track.style.transform = "translateY(" + (-pos * rowH) + "px)";
+}
+function normalize(){
+  /* keep pos inside the middle copy without visible jump */
+  var moved = false;
+  while (pos < N)      { pos += N; moved = true; }
+  while (pos >= 2 * N) { pos -= N; moved = true; }
+  if (moved) apply(false);
+}
+track.addEventListener("transitionend", function(e){
+  if (e.propertyName === "transform"){ track.classList.remove("wc-anim"); normalize(); }
+});
+function step(dir){                        /* dir -1 = east (up), +1 = west (down) */
+  normalize();
+  pos += dir;
+  apply(true);
+}
+function goHome(){
+  normalize();
+  var target = N + defaultIdx;
+  /* travel the short way around the loop */
+  var delta = target - pos;
+  if (delta > N/2)  delta -= N;
+  if (delta < -N/2) delta += N;
+  if (delta === 0) return;
+  pos += delta;
+  apply(true);
+}
+
+/* ------------ ticking ------------ */
+var timer = null;
+function tick(){
+  var now = Date.now();
+  var cards = track.querySelectorAll(".wc-card");
+  for (var i = 0; i < cards.length; i++){
+    var card = cards[i];
+    var tz = card.dataset.tz;
+    var off = zoneOffsetMinutes(tz, now);
+    var zd = new Date(now + off * 60000);
+    var H = zd.getUTCHours(), M = zd.getUTCMinutes(), S = zd.getUTCSeconds();
+    var h12 = H % 12 || 12;
+    var ampm = H < 12 ? "am" : "pm";
+    card.querySelector(".wc-digital").textContent =
+      h12 + ":" + String(M).padStart(2,"0") + " " + ampm;
+    card.querySelector(".wc-date").textContent =
+      DAYS[zd.getUTCDay()] + " · " + MONTHS[zd.getUTCMonth()] + " " + zd.getUTCDate();
+    card.querySelector(".wc-gmt").textContent = gmtLabel(off);
+    var svg = card.querySelector(".wc-clock");
+    svg.classList.toggle("wc-face-day", H >= 6 && H < 18);
+    svg.classList.toggle("wc-face-night", !(H >= 6 && H < 18));
+    var hDeg = (H % 12) * 30 + M * 0.5;
+    var mDeg = M * 6 + S * 0.1;
+    var sDeg = S * 6;
+    svg.querySelector(".wc-hh").setAttribute("transform","rotate(" + hDeg + " 50 50)");
+    svg.querySelector(".wc-mh").setAttribute("transform","rotate(" + mDeg + " 50 50)");
+    svg.querySelector(".wc-sh").setAttribute("transform","rotate(" + sDeg + " 50 50)");
+  }
+}
+
+/* ------------ open/close ------------ */
+var lastFocus = null;
+function openOverlay(){
+  lastFocus = document.activeElement;
+  /* Site integration: if the mobile menu launched us, close it through the
+     site's own close button so body scroll-lock and aria state are restored. */
+  var mobileMenu = document.getElementById("mobileMenu");
+  if (mobileMenu && mobileMenu.classList.contains("active")){
+    var mmClose = document.getElementById("mobileMenuClose");
+    if (mmClose) mmClose.click();
+  }
+  overlay.classList.add("wc-open");
+  measure(); apply(false); tick();
+  timer = setInterval(tick, 1000);
+  overlay.querySelector(".wc-close").focus();
+  document.addEventListener("keydown", onKey);
+}
+function closeOverlay(){
+  overlay.classList.remove("wc-open");
+  clearInterval(timer); timer = null;
+  document.removeEventListener("keydown", onKey);
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+function onKey(e){
+  if (e.key === "Escape") closeOverlay();
+  else if (e.key === "ArrowUp"){ e.preventDefault(); step(-1); }
+  else if (e.key === "ArrowDown"){ e.preventDefault(); step(1); }
+}
+
+/* ------------ manual "your zone" override ------------ */
+var zoneSelect = document.getElementById("wc-youzone");
+(function buildZonePicker(){
+  var opts = '<option value="auto">Auto — detected' +
+             (detectedZone ? " (" + detectedZone.split("/").pop().replace(/_/g," ") + ")" : "") +
+             '</option>';
+  ROWS.forEach(function(row){
+    opts += '<option value="' + row.cities[0].tz + '">' +
+            (row.name || "UTC" + row.off) + " — " + row.cities[0].n + '</option>';
+  });
+  zoneSelect.innerHTML = opts;
+  zoneSelect.value = manualZone || "auto";
+  if (zoneSelect.selectedIndex < 0) zoneSelect.value = "auto";
+})();
+zoneSelect.addEventListener("change", function(){
+  var v = zoneSelect.value;
+  manualZone = (v === "auto") ? null : v;
+  try {
+    if (manualZone) localStorage.setItem("wc-you-tz", manualZone);
+    else localStorage.removeItem("wc-you-tz");
+  } catch(e){}
+  visitorZone = manualZone || detectedZone;
+  visitorOffMin = zoneOffsetMinutes(visitorZone || "UTC", Date.now());
+  markBadges();
+  buildTrack();
+  measure(); apply(false); tick();
+});
+
+document.querySelectorAll("[data-wc-open]").forEach(function(a){
+  a.addEventListener("click", function(e){ e.preventDefault(); openOverlay(); });
+});
+overlay.querySelector(".wc-close").addEventListener("click", closeOverlay);
+overlay.addEventListener("click", function(e){ if (e.target === overlay) closeOverlay(); });
+document.getElementById("wc-east").addEventListener("click", function(){ step(-1); });
+document.getElementById("wc-west").addEventListener("click", function(){ step(1); });
+document.getElementById("wc-home").addEventListener("click", goHome);
+window.addEventListener("resize", function(){ if (overlay.classList.contains("wc-open")){ measure(); apply(false); } });
+
+})();
+</script>
+{% endraw %}
