@@ -637,6 +637,15 @@ citations:
 {% sentence 197 %}I perceive God's power and Spirit operating in my life.{% endsentence %}
 {% sentence 198 %}Whether I am accepted by particular traditions or philosophies has no bearing on my view of their adherents as fellow children of God, for I see them as brothers and sisters, fellow searchers.{% endsentence %}
 
+<div class="study-callout">
+  <div class="study-callout-inner">
+    <div class="study-callout-eyebrow">If You're Not There Yet</div>
+    <div class="study-callout-title">Approaches to Belief</div>
+    <p class="study-callout-desc">If what stands between you and this path is the thinking rather than the feeling—if the honest question is whether faith asks you to set your mind aside—that question deserves a fuller answer than this chapter can give. Approaches to Belief maps it out.</p>
+    <a class="study-callout-link" href="/studies/approaches-to-belief/">Open the Interactive Study →</a>
+  </div>
+</div>
+
 <h2 id="section-the-gift-of-holy-dissatisfaction">{% sentence 199 %}The Gift of Holy Dissatisfaction{% endsentence %}</h2>
 
 {% sentence 200 %}There is something I did not understand when I first wrote about the hunger within us.{% endsentence %}

@@ -348,6 +348,15 @@ podcastTranscript: |
 
 {% sentence 211 %}Here, the seeker faces a choice: accept permanent ignorance on life's most vital questions, or consider whether there exists a faculty beyond the natural ones.{% endsentence %}
 
+<div class="study-callout">
+  <div class="study-callout-inner">
+    <div class="study-callout-eyebrow">Interactive Companion</div>
+    <div class="study-callout-title">Approaches to Belief</div>
+    <p class="study-callout-desc">The choice this section describes is one people actually make—as theists, atheists, or agnostics—and each position has its own best reasons and its own objections to answer. This interactive study lets you walk the argument you are standing in and find where you land.</p>
+    <a class="study-callout-link" href="/studies/approaches-to-belief/">Open the Interactive Study →</a>
+  </div>
+</div>
+
 <h2 id="our-witness">{% sentence 212 %}Our Witness{% endsentence %}</h2>
 
 {% sentence 213 %}We, the writers, have come to know with certainty that there is more to humankind than our intellect and flesh.{% endsentence %} {% sentence 214 %}The reality of the human spirit and spiritual intuition may seem foolish to the educated mind.{% endsentence %} {% sentence 215 %}Often, those of great learning view the faithful as blind and deaf to the satisfaction of logic and reasoning.{% endsentence %} {% sentence 216 %}However, to those who have experienced the reality of the human spirit, men and women of exclusively empirical mindset seem blind and deaf to many of the most beautiful and moving experiences of life.{% endsentence %}
