@@ -340,6 +340,15 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
 
             <div class="appendix-divider" data-divider-key="vol-1">Volume 1 &mdash; Christ-Centered Discipleship</div>
 
+            <a href="/studies/approaches-to-belief/" class="appendix-entry appendix-entry--interactive"
+               data-sort-title="Approaches to Belief"
+               data-accompanies-chapter="3"
+               data-accompanies-volume="1">
+                <h3 class="appendix-entry-title">Approaches to Belief &mdash; A Map for the Honest Search</h3>
+                <p class="appendix-entry-subtitle"><span class="appendix-badge">Interactive</span> About 40 minutes &middot; Study or Present mode</p>
+                <p class="appendix-entry-note">Theist, atheist, agnostic &mdash; each argued at its strongest. Find where you actually stand. Accompanies Chapter 3: Academic Knowledge &amp; Chapter 4: Spiritual Knowledge</p>
+            </a>
+
             <a href="/studies/church-of-the-lamb/" class="appendix-entry"
                data-sort-title="Church of the Lamb of God, The"
                data-accompanies-chapter="6"
@@ -423,6 +432,28 @@ description: "Explore both volumes of Words of Plainness plus study appendices �
     color: var(--cream);
     opacity: 0.6;
     margin-bottom: 0;
+}
+
+/* Interactive entries (an exercise, not an article) carry a badge */
+.appendix-badge {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brown-deep);
+    background: var(--gold-primary);
+    border-radius: 3px;
+    padding: 0.12rem 0.5rem;
+    margin-right: 0.45rem;
+    vertical-align: 0.08em;
+}
+
+.appendix-entry--interactive {
+    border-left-style: double;
+    border-left-width: 5px;
 }
 
 /* ─── Filter bar ─────────────────────────────────────── */

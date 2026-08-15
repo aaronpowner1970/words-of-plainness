@@ -1,0 +1,626 @@
+---
+layout: layouts/interactive.njk
+title: "Approaches to Belief"
+pageTitle: "Approaches to Belief"
+pageSubtitle: "A map for the honest search"
+permalink: /studies/approaches-to-belief/
+description: "Theist, atheist, agnostic — each position argued by its own best reasons, with the objections each must answer. An interactive exercise in locating yourself honestly on the questions of belief and knowledge."
+og_image: "https://www.wordsofplainness.org/assets/studies/approaches-to-belief/merognosticism.jpg"
+date: 2026-08-15
+bodyClass: "ab-page"
+interactiveCss: "/css/approaches.css"
+interactiveJs: "/js/approaches.js"
+---
+{#
+  Approaches to Belief — interactive study (30 slides, Study / Present modes).
+  Ported from the Cowork prototype, 15 Aug 2026. Content source of truth:
+  WoP_ApproachesToBelief_ContentDraft_20260814.md (claude.ai project).
+  Slide 1 ships with class "ab-slide ab-on" and the <noscript> block below
+  reveals every slide, so the page reads as one long document without JS.
+  Reader placement + reflections live only in this browser (localStorage
+  wop-atb-v1). No account, no server, no analytics on placement.
+#}
+<div class="ab-app" id="ab-app">
+<noscript><style>.ab-slide{display:block!important}#ab-foot,#ab-tocWrap{display:none!important}</style></noscript>
+
+<div id="ab-stage">
+
+<!-- ============ COVER ============ -->
+<article class="ab-slide ab-on" data-sec="0" data-label="Welcome">
+  <img class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-01.jpg" alt="A worn brass compass resting on a folded paper map.">
+  <h1>Approaches to Belief</h1>
+  <blockquote style="font-size:1.14rem">"Come now, and let us reason together, saith the Lord."<cite>{% scripture "Isaiah 1:18" %}</cite></blockquote>
+  <p class="ab-lede">This is not an argument. It is a map.</p>
+  <p>Somewhere on it is the place you actually stand — not the place someone assumed you stand, and not the place you would be assigned by the label you happen to carry.</p>
+  <p>Whatever you believe when you arrive here, you are welcome. Theist, atheist, agnostic, or genuinely unsure — every one of those positions is argued in this resource by its own best reasons, sourced to the thinkers who actually made them. Including the objections mine has to answer.</p>
+  <p>Seven sections. Roughly forty minutes at a steady pace, or as long as you like. There is a reflection at the end of each one; nothing is graded, nothing is sent anywhere, and nothing is stored beyond your own browser.</p>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>Set the frame before advancing: <em>nobody here is being converted; we are locating ourselves honestly.</em></li>
+    <li>If the group is mixed, say so out loud. It earns the room.</li>
+    <li>Arrow keys or Space advance. Press <b>P</b> to toggle Present mode.</li>
+  </ul></div>
+</article>
+
+<!-- ============ PRE-ASSESSMENT ============ -->
+<article class="ab-slide" data-sec="pre" data-label="Where do I stand?">
+  <div class="ab-eyebrow"><span class="ab-num">Before we begin</span> Where do I stand?</div>
+  <h2>Two questions, not one</h2>
+  <p>People collapse them constantly, and the collapse is the source of most bad conversations about faith.</p>
+  <p>The first is about <b>belief</b>: do you hold that at least one God exists? The second is about <b>knowledge</b>: do you claim to <em>know</em> it?</p>
+  <p>These are independent. A person can believe firmly and claim no certainty. A person can disbelieve and freely admit they cannot prove it.</p>
+  <p class="ab-big">Place yourself where you actually are.</p>
+  <p>Not where you think you should be. Not where you would defend yourself if pressed.</p>
+
+  <div class="ab-gridwrap">
+  <svg class="ab-grid" id="ab-gridA" viewBox="0 0 620 620" role="application" aria-label="Belief and knowledge grid. Click to place yourself."><rect x="2" y="2" width="616" height="616" rx="16" fill="#FCF0C4" stroke="#8A7A48" stroke-width="2.5"/><line class="ab-gl" x1="31" y1="6" x2="31" y2="614"/><line class="ab-gl" x1="62" y1="6" x2="62" y2="614"/><line class="ab-gl" x1="93" y1="6" x2="93" y2="614"/><line class="ab-gl" x1="124" y1="6" x2="124" y2="614"/><line class="ab-gl" x1="155" y1="6" x2="155" y2="614"/><line class="ab-gl" x1="186" y1="6" x2="186" y2="614"/><line class="ab-gl" x1="217" y1="6" x2="217" y2="614"/><line class="ab-gl" x1="248" y1="6" x2="248" y2="614"/><line class="ab-gl" x1="279" y1="6" x2="279" y2="614"/><line class="ab-gl" x1="310" y1="6" x2="310" y2="614"/><line class="ab-gl" x1="341" y1="6" x2="341" y2="614"/><line class="ab-gl" x1="372" y1="6" x2="372" y2="614"/><line class="ab-gl" x1="403" y1="6" x2="403" y2="614"/><line class="ab-gl" x1="434" y1="6" x2="434" y2="614"/><line class="ab-gl" x1="465" y1="6" x2="465" y2="614"/><line class="ab-gl" x1="496" y1="6" x2="496" y2="614"/><line class="ab-gl" x1="527" y1="6" x2="527" y2="614"/><line class="ab-gl" x1="558" y1="6" x2="558" y2="614"/><line class="ab-gl" x1="589" y1="6" x2="589" y2="614"/><line class="ab-gl" x1="6" y1="31" x2="614" y2="31"/><line class="ab-gl" x1="6" y1="62" x2="614" y2="62"/><line class="ab-gl" x1="6" y1="93" x2="614" y2="93"/><line class="ab-gl" x1="6" y1="124" x2="614" y2="124"/><line class="ab-gl" x1="6" y1="155" x2="614" y2="155"/><line class="ab-gl" x1="6" y1="186" x2="614" y2="186"/><line class="ab-gl" x1="6" y1="217" x2="614" y2="217"/><line class="ab-gl" x1="6" y1="248" x2="614" y2="248"/><line class="ab-gl" x1="6" y1="279" x2="614" y2="279"/><line class="ab-gl" x1="6" y1="310" x2="614" y2="310"/><line class="ab-gl" x1="6" y1="341" x2="614" y2="341"/><line class="ab-gl" x1="6" y1="372" x2="614" y2="372"/><line class="ab-gl" x1="6" y1="403" x2="614" y2="403"/><line class="ab-gl" x1="6" y1="434" x2="614" y2="434"/><line class="ab-gl" x1="6" y1="465" x2="614" y2="465"/><line class="ab-gl" x1="6" y1="496" x2="614" y2="496"/><line class="ab-gl" x1="6" y1="527" x2="614" y2="527"/><line class="ab-gl" x1="6" y1="558" x2="614" y2="558"/><line class="ab-gl" x1="6" y1="589" x2="614" y2="589"/><g class="ab-qd" id="ab-A-at"><rect x="68" y="62" width="200" height="220" rx="34" fill="#F0574E"/><text class="ab-qt" x="168" y="89">Agnostic Theist</text><circle class="ab-bul" cx="85" cy="114" r="3.1"/><text class="ab-qb" x="95" y="118">Believes in at</text><text class="ab-qb" x="95" y="135">least one god</text><circle class="ab-bul" cx="85" cy="162" r="3.1"/><text class="ab-qb" x="95" y="166">Doesn't claim to</text><text class="ab-qb" x="95" y="183">know that god(s)</text><text class="ab-qb" x="95" y="200">exist</text></g><g class="ab-qd" id="ab-A-gt"><rect x="352" y="62" width="200" height="220" rx="34" fill="#8FB8E8"/><text class="ab-qt" x="452" y="89">Gnostic Theist</text><circle class="ab-bul" cx="369" cy="114" r="3.1"/><text class="ab-qb" x="379" y="118">Believes in at</text><text class="ab-qb" x="379" y="135">least one god</text><circle class="ab-bul" cx="369" cy="162" r="3.1"/><text class="ab-qb" x="379" y="166">Claims to know</text><text class="ab-qb" x="379" y="183">that god(s) exist</text></g><g class="ab-qd" id="ab-A-aa"><rect x="68" y="338" width="200" height="220" rx="34" fill="#4CC94C"/><text class="ab-qt" x="168" y="365">Agnostic Atheist</text><circle class="ab-bul" cx="85" cy="390" r="3.1"/><text class="ab-qb" x="95" y="394">Lacks belief</text><text class="ab-qb" x="95" y="411">in god(s)</text><circle class="ab-bul" cx="85" cy="438" r="3.1"/><text class="ab-qb" x="95" y="442">Doesn't claim to</text><text class="ab-qb" x="95" y="459">know that god(s)</text><text class="ab-qb" x="95" y="476">do not exist</text></g><g class="ab-qd" id="ab-A-ga"><rect x="352" y="338" width="200" height="220" rx="34" fill="#FBEE3C"/><text class="ab-qt" x="452" y="365">Gnostic Atheist</text><circle class="ab-bul" cx="369" cy="390" r="3.1"/><text class="ab-qb" x="379" y="394">Lacks belief</text><text class="ab-qb" x="379" y="411">in god(s)</text><circle class="ab-bul" cx="369" cy="438" r="3.1"/><text class="ab-qb" x="379" y="442">Claims to know</text><text class="ab-qb" x="379" y="459">that no god(s)</text><text class="ab-qb" x="379" y="476">exist</text></g><line class="ab-ax" x1="310" y1="46" x2="310" y2="574"/><line class="ab-ax" x1="46" y1="310" x2="574" y2="310"/><polygon class="ab-ah" points="310,36 302,56 318,56"/><polygon class="ab-ah" points="310,584 302,564 318,564"/><polygon class="ab-ah" points="584,310 564,302 564,318"/><polygon class="ab-ah" points="36,310 56,302 56,318"/><text class="ab-axl" x="310" y="24" text-anchor="middle">THEIST</text><text class="ab-axl" x="310" y="606" text-anchor="middle">ATHEIST</text><text class="ab-axl" x="602" y="310" text-anchor="middle" transform="rotate(90 602 310)">GNOSTIC</text><text class="ab-axl" x="18" y="310" text-anchor="middle" transform="rotate(-90 18 310)">AGNOSTIC</text><text class="ab-axs" x="326" y="334" text-anchor="start">knowledge</text><text class="ab-axs" x="292" y="296" text-anchor="end" transform="rotate(-90 292 296)">belief</text><g class="ab-mkg" id="ab-A-mk"><circle id="ab-A-c1" cx="310" cy="310" r="13" fill="#1A120B" stroke="#FCF0C4" stroke-width="4"/><circle id="ab-A-c2" cx="310" cy="310" r="23" fill="none" stroke="#FCF0C4" stroke-width="5" opacity=".92"/></g></svg></div>
+  <p class="ab-hint" id="ab-hintA">Click anywhere on the grid to place yourself.</p>
+
+  <div class="ab-result" id="ab-resA">
+    <h3 id="ab-nameA"></h3><p id="ab-defA"></p>
+    <div class="ab-approach" id="ab-appA"></div>
+    <div class="ab-personal">
+      <p class="ab-q">Now — can you say <em>why</em>?</p>
+      <p style="font-size:.94rem;color:var(--inkMute)">Not why someone else holds your position. Why <em>you</em> do. If the answer comes quickly and in someone else's words, that is worth noticing.</p>
+      <textarea data-j="pre-why" placeholder="I hold this because…"></textarea>
+    </div>
+  </div>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>Do not let anyone answer for someone else. Silence here is productive.</li>
+    <li>Ask aloud: <em>what would have to be true for you to move one box in any direction?</em></li>
+    <li>Watch for people who place themselves where they think they <em>ought</em> to be. Name it gently.</li>
+  </ul></div>
+</article>
+
+<!-- ============ SECTION 1 ============ -->
+<article class="ab-slide" data-sec="1" data-label="How We Come to Know">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-02.jpg" alt="Four antique brass keys of different shapes, laid side by side.">
+  <div class="ab-eyebrow"><span class="ab-num">1</span> How We Come to Know</div>
+  <h2>Before we compare answers, let us agree on what counts as knowing</h2>
+  <p>Most arguments about God are actually arguments about evidence — conducted by people who never said out loud what they would accept as evidence. So let us do that part first.</p>
+  <p>Human beings gather knowledge along four natural paths.</p>
+  <div class="ab-card"><b>The Senses</b><span>What we perceive directly: seen, heard, touched, measured.<br><i>Establishes:</i> the physical world, reliably and repeatably.<br><i>Cannot reach:</i> anything leaving no physical trace — and cannot check its own accuracy without using itself.</span></div>
+  <div class="ab-card"><b>Authority</b><span>What we accept on the testimony of others: teachers, texts, institutions, experts.<br><i>Establishes:</i> nearly everything any of us knows. You have not personally verified the speed of light.<br><i>Cannot reach:</i> certainty beyond the reliability of the witness.</span></div>
+  <div class="ab-card"><b>Reason</b><span>What we derive by logic from what we already hold.<br><i>Establishes:</i> consistency, valid inference, the exposure of contradiction.<br><i>Cannot reach:</i> new premises. Reason processes; it does not originate.</span></div>
+  <div class="ab-card"><b>Academic Intuition</b><span>Conclusions arriving without conscious derivation, drawn from accumulated experience — the physicist who <em>sees</em> the answer before working it. A rational process, however mysterious it feels.<br><i>Establishes:</i> insight faster than deliberation.<br><i>Cannot reach:</i> past the experience it was built from.</span></div>
+  <p>These four together are the <span class="ab-g" data-def="The four natural paths to knowledge: senses, authority, reason, and academic intuition.">natural framework</span>, and it is not defective. It functions precisely as designed for the questions it is equipped to address. Philosophy, the arts, and the sciences have yielded incalculable benefit to human life. Nothing here asks you to think less of them.</p>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>Press the authority card. Most people underestimate how much of what they "know" is testimony.</li>
+    <li>Good aside: <em>which of these four did you use to get to work this morning?</em> All four.</li>
+  </ul></div>
+</article>
+
+<article class="ab-slide" data-sec="1" data-label="Three axioms">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-03.jpg" alt="Three smooth river stones stacked in balance.">
+  <div class="ab-eyebrow"><span class="ab-num">1</span> How We Come to Know</div>
+  <h3>Three working axioms</h3>
+  <p>To go further we need three assumptions. They cannot be proven — every framework rests on something unproven — but they are the ones science itself runs on.</p>
+  <div class="ab-card"><b>1 · A shared reality</b><span>We exist together in the same world.</span></div>
+  <div class="ab-card"><b>2 · Genuine perception</b><span>To some extent we perceive that reality, and our own nature within it.</span></div>
+  <div class="ab-card"><b>3 · Sufficient uniformity</b><span>Reality is regular enough to be explored with some degree of certainty — through <em>patterns; cause and effect; scale, proportion, and quantity; systems and system models; energy and matter; structure and function;</em> and <em>stability and change</em>.</span></div>
+  <p>Those seven are not improvised. They are the <b>crosscutting concepts</b> — the organizing principles the Next Generation Science Standards identify as the lenses through which every scientific discipline examines the natural world. I taught them in a public-school science laboratory for twenty-six years.</p>
+  <p>They are how a scientist actually reasons about anything. And they work just as well pointed at questions science does not usually ask.</p>
+  <small>NGSS Lead States, <em>Next Generation Science Standards: For States, By States</em>, Appendix G (2013).</small>
+</article>
+
+<article class="ab-slide" data-sec="1" data-label="What truth is">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-04.jpg" alt="A small hourglass, sand caught mid-fall.">
+  <div class="ab-eyebrow"><span class="ab-num">1</span> How We Come to Know</div>
+  <h3>What truth is</h3>
+  <p>Philosophy offers a long menu — <span class="ab-g" data-def="A world exists independently of our perception of it.">realism</span>, <span class="ab-g" data-def="Reality is fundamentally mental; the material depends on mind.">idealism</span>, <span class="ab-g" data-def="Knowledge derives primarily from sensory experience.">empiricism</span>, <span class="ab-g" data-def="Only physical things exist; consciousness reduces to physical process.">materialism</span>, <span class="ab-g" data-def="Knowledge is actively constructed rather than passively discovered.">constructivism</span>, <span class="ab-g" data-def="A belief's truth is measured by its practical consequences.">pragmatism</span>, <span class="ab-g" data-def="Truth is relative to culture, society, or historical context.">relativism</span>, <span class="ab-g" data-def="Individuals create meaning through freedom, choice, and action.">existentialism</span>, and more. Each names something real. None settles the question, and a reader can spend a lifetime in that menu without ever eating.</p>
+  <p>Here is the definition this resource proceeds on:</p>
+  <blockquote style="font-size:1.2rem">"Truth is knowledge of things as they are, and as they were, and as they are to come."<cite>{% scripture "Doctrine and Covenants 93:24" %}</cite></blockquote>
+  <p>Examine it on its own terms. It makes truth a matter of <em>correspondence to actual states</em> — past, present, and future. It is not a claim about God; it is a claim about what the word <em>truth</em> means. You may hold it without holding anything else here.</p>
+  <p>And notice what follows immediately. If truth spans what <em>was</em>, what <em>is</em>, and what <em>is to come</em> — and our natural faculties sample only a portion of that whole — then those faculties will reach a limit. Not because they are broken. Because of what they are.</p>
+</article>
+
+<article class="ab-slide" data-sec="1" data-label="The ceiling">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-05.jpg" alt="A wooden ladder leaning upward into pale cloud.">
+  <div class="ab-eyebrow"><span class="ab-num">1</span> How We Come to Know</div>
+  <h3>The ceiling</h3>
+  <p>Certain questions exceed the natural framework's reach:</p>
+  <blockquote>Why is there something rather than nothing?<br>Does a loving God exist?<br>Does personal consciousness persist beyond death?<br>What is the ultimate purpose of my existence?</blockquote>
+  <p>Science can describe <em>how</em> things work. It does not tell us <em>why</em> we are here — and it does not claim to.</p>
+  <p class="ab-big">This is not a failure. The framework itself predicts the limit.</p>
+  <p>Which leaves a genuine fork. You can accept permanent ignorance on the questions that matter most. Or you can ask whether there exists a faculty the four do not include.</p>
+  <p>Words of Plainness proposes a fifth: <b>spiritual intuition</b> — the direct perception of truth by inspiration or revelation. It is sometimes called <em>irrational</em> intuition. No insult is intended by that word; <em>irrational</em> here means only that human reasoning is not its source.</p>
+  <p>That is a claim, not a proof, and it is the claim everything downstream depends on. We will come back to how it can be tested.</p>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>Strongest objection, and worth surfacing yourself: <em>is the ceiling real, or just the current edge of what we happen not to know yet?</em></li>
+    <li>Let that sit unresolved. The resource is stronger for it.</li>
+  </ul></div>
+</article>
+
+<article class="ab-slide ab-act-slide" data-sec="1" data-label="Reflect · 1">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-15.jpg" alt="An open blank notebook.">
+  <div class="ab-eyebrow"><span class="ab-num">1</span> Reflection</div>
+  <div class="ab-act">
+    <span class="ab-tag">Check your thinking</span>
+    <h3>Which path establishes it?</h3>
+    <p style="font-size:.96rem">"The Battle of Hastings took place in 1066." Which of the four natural paths is doing most of the work when you accept that?</p>
+    <div class="ab-opts" data-quiz="s1" data-answer="b">
+      <div class="ab-opt" data-k="a"><span class="ab-k">A</span><span>The senses</span></div>
+      <div class="ab-opt" data-k="b"><span class="ab-k">B</span><span>Authority</span></div>
+      <div class="ab-opt" data-k="c"><span class="ab-k">C</span><span>Reason</span></div>
+      <div class="ab-opt" data-k="d"><span class="ab-k">D</span><span>Academic intuition</span></div>
+    </div>
+    <div class="ab-fb" data-fb="s1">
+      <b>Authority.</b> You did not witness it, cannot measure it, and cannot derive it. You accept it because historians say so — and you are right to. Notice how much of what you confidently "know" arrives this way. The question is never <em>whether</em> to trust authority but <em>which</em> authorities, and why.
+    </div>
+    <div class="ab-personal">
+      <p class="ab-q">Which of the four paths do you personally trust most — and has it ever failed you?</p>
+      <textarea data-j="s1-trust" placeholder="I lean hardest on…"></textarea>
+      <p class="ab-q">Is there a question your mind keeps returning to that reason alone has not settled?</p>
+      <textarea data-j="s1-question" placeholder="The question I keep coming back to is…"></textarea>
+    </div>
+  </div>
+  <div class="ab-deeper"><strong>Go deeper:</strong> Chapter 3, <a href="/chapters/03-academic-knowledge/">Academic Knowledge</a> · Chapter 4, <a href="/chapters/04-spiritual-knowledge/">Spiritual Knowledge</a></div>
+</article>
+
+<!-- ============ SECTION 2 · THEIST ============ -->
+<article class="ab-slide" data-sec="2" data-label="Reasons to be a Theist">
+  <div class="ab-eyebrow"><span class="ab-num">2</span> Compelling Reasons to be a Theist</div>
+  <figure class="ab-fig ab-banner"><img loading="lazy" src="/assets/studies/approaches-to-belief/fingers.jpg" alt="Detail of two hands reaching toward one another, nearly touching, in the manner of Michelangelo&#39;s Creation of Adam." style="object-position:center 42%"><figcaption>The reach toward contact — the theist claim in a single gesture.</figcaption></figure>
+  <blockquote>"For since the creation of the world God's invisible qualities — his eternal power and divine nature — have been clearly seen, being understood from what has been made."<cite>{% scripture "Romans 1:20" %}</cite></blockquote>
+  <p><b>Theism</b> — from the Greek <em>theos</em>, "god." At its broadest, the belief that at least one deity exists; more restrictively, belief in God as Creator together with an openness to revelation. It contains an enormous range: deism, monotheism, trinitarianism, henotheism, pantheism, and more.</p>
+  <p class="ab-arg"><b>The Cosmological Argument.</b> Whatever begins to exist has a cause. The universe began to exist. Therefore it has a cause — one which, being the cause of space and time, must be outside both. <span class="ab-src">Aquinas, Summa Theologiae Ia, q. 2, a. 3; Leibniz; W.L. Craig, <em>The Kal&#257;m Cosmological Argument</em>, 1979.</span></p>
+  <p class="ab-arg"><b>The Teleological Argument.</b> The ordered complexity of the universe — particularly the conditions required for life — is better explained by design than by chance. <span class="ab-src">Paley, Natural Theology, 1802.</span></p>
+  <p class="ab-arg"><b>The Fine-Tuned Universe.</b> Several physical constants fall within extraordinarily narrow life-permitting ranges. Alter the cosmological constant or the strong nuclear force slightly and there is no chemistry, no stars, no observers. <span class="ab-src">Robin Collins, "The Teleological Argument: An Exploration of the Fine-Tuning of the Universe," in <em>The Blackwell Companion to Natural Theology</em>, 2009.</span></p>
+  <p class="ab-arg"><b>The Moral Argument.</b> If objective moral obligations exist — if cruelty is genuinely wrong and not merely disfavored — they require a ground beyond human preference. <span class="ab-src">Lewis, Mere Christianity I; Adams, Finite and Infinite Goods, 1999.</span></p>
+</article>
+
+<article class="ab-slide" data-sec="2" data-label="Theist, continued">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-06.jpg" alt="The keystone at the top of a stone arch.">
+  <div class="ab-eyebrow"><span class="ab-num">2</span> Compelling Reasons to be a Theist</div>
+  <p class="ab-arg"><b>The Argument from Contingency.</b> Everything we observe might not have existed. A chain of contingent things, however long, does not explain itself. <span class="ab-src">Leibniz; Swinburne, The Existence of God, 2nd ed. 2004.</span></p>
+  <p class="ab-arg"><b>Historicity.</b> The resurrection is defended as a historical claim on the standard tools of ancient history: multiple early independent sources, the criterion of embarrassment, and the rise of a movement whose central claim was falsifiable in its own city within living memory. <span class="ab-src">N.T. Wright, The Resurrection of the Son of God, 2003.</span></p>
+  <p class="ab-arg"><b>Properly Basic Belief.</b> Belief in God may be rational without being inferred — as belief in other minds, or in the reliability of memory, is rational without proof. <span class="ab-src">Plantinga, Warranted Christian Belief, 2000.</span></p>
+  <p class="ab-arg"><b>Personal Experience.</b> Enormous numbers of people across every culture and century report encounter with the divine — experiences they describe as more certain than argument and frequently transformative.</p>
+  <div class="ab-obj">
+    <h4>What theism must answer</h4>
+    <p class="ab-arg"><b>The Problem of Evil.</b> Gratuitous suffering — the child's cancer, the earthquake, the long private cruelty no one witnesses — is difficult to reconcile with a God simultaneously all-powerful, all-knowing, and wholly good. This is the strongest argument against the position I hold, and no answer I have encountered dissolves it entirely. <span class="ab-src">Mackie, 1955; Rowe, 1979.</span></p>
+    <p class="ab-arg"><b>Divine Hiddenness.</b> If God desires relationship with every person, the existence of sincere, non-resistant seekers who find nothing requires explanation. <span class="ab-src">Schellenberg, 1993.</span></p>
+    <p class="ab-arg"><b>The Inference Gap.</b> Even granting the cosmological and teleological arguments in full, they deliver a first cause and a designer. The distance to a God with a name, a character, and a Son is considerable — and is not crossed by argument.</p>
+  </div>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>Read the objections aloud yourself. A theist facilitator naming the problem of evil as unanswered buys enormous credibility.</li>
+    <li>Do not resolve it here. Section 7 addresses the shape of the answer, not the answer.</li>
+  </ul></div>
+</article>
+
+<article class="ab-slide ab-act-slide" data-sec="2" data-label="Reflect · 2">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-15.jpg" alt="An open blank notebook.">
+  <div class="ab-eyebrow"><span class="ab-num">2</span> Reflection</div>
+  <div class="ab-act">
+    <span class="ab-tag">Steel-man check</span>
+    <h3>State it in one sentence</h3>
+    <p class="ab-q">In your own words — not mine — what is the single strongest reason a thoughtful person becomes a theist?</p>
+    <div class="ab-personal"><textarea data-j="s2-steel" placeholder="The strongest reason is…"></textarea></div>
+    <p class="ab-q">Which of the three objections to theism do you find hardest to set aside?</p>
+    <div class="ab-personal"><textarea data-j="s2-obj" placeholder="The hardest one for me is…"></textarea></div>
+    <div class="ab-studyonly"><small>If you are a theist, this is the exercise that keeps your position honest. If you are not, this is the exercise that keeps the conversation possible.</small></div>
+  </div>
+</article>
+
+<!-- ============ SECTION 3 · ATHEIST ============ -->
+<article class="ab-slide" data-sec="3" data-label="Reasons to be an Atheist">
+  <div class="ab-eyebrow"><span class="ab-num">3</span> Compelling Reasons to be an Atheist</div>
+  <figure class="ab-fig ab-banner"><img loading="lazy" src="/assets/studies/approaches-to-belief/atheism.jpg" alt="A dictionary page with the entry &#39;Atheism&#39; highlighted in pink marker, the definition beginning &#39;doctrine or belief that there is no God.&#39;"><figcaption>A definition, marked for examination — which is exactly how this section treats it.</figcaption></figure>
+  <blockquote>"I had no need of that hypothesis."<cite>Pierre-Simon Laplace, reportedly, to Napoleon</cite></blockquote>
+  <p><b>Atheism</b> — from <em>a-</em> and <em>theos</em>. Disbelief in, or denial of, the existence of divine beings. <b>Atheism is not a belief system</b>, and it is not the same as being irreligious. It is an active judgment, usually grounded in personal experience or philosophical argument, and there are many varieties of atheist.</p>
+  <p class="ab-arg"><b>The Burden of Proof.</b> Extraordinary claims require proportionate evidence, and the burden falls on the one asserting. Bertrand Russell put it this way: if he claimed a china teapot were orbiting the sun somewhere between Earth and Mars, too small for any telescope to find, no one could disprove him &#8212; but nobody would think the claim deserved belief merely because it could not be refuted. Absent evidence, non-belief is the appropriate default, not a competing faith. <span class="ab-src">Bertrand Russell, "Is There a God?", 1952; Sagan, 1995.</span></p>
+  <p class="ab-arg"><b>Sufficient Natural Explanation.</b> Cosmology, evolutionary biology, and neuroscience account for the universe's origin, life's diversity, and the operations of mind without invoking an agent. <span class="ab-src">Hume, Dialogues, 1779; Dennett, 1995.</span></p>
+  <p class="ab-arg"><b>The Problem of Evil, as positive argument.</b> Not merely a difficulty for theism but evidence against it: gratuitous suffering is precisely what a universe without a benevolent governor would look like. <span class="ab-src">Mackie, 1955; Rowe, 1979; Draper, 1989.</span></p>
+  <p class="ab-arg"><b>Religious Pluralism.</b> Thousands of mutually exclusive traditions each claim revelation, and each is overwhelmingly predicted by the claimant's birthplace. <span class="ab-src">Hume, "Of Miracles," <em>Philosophical Essays Concerning Human Understanding</em>, 1748, sec. X.</span></p>
+</article>
+
+<article class="ab-slide" data-sec="3" data-label="Atheist, continued">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-07.jpg" alt="A small white porcelain teapot alone against empty space.">
+  <div class="ab-eyebrow"><span class="ab-num">3</span> Compelling Reasons to be an Atheist</div>
+  <p class="ab-arg"><b>Naturalistic Accounts of Belief.</b> Cognitive science offers explanations for why humans reliably generate god-beliefs — agency detection, theory of mind, in-group cohesion — that require no god. <span class="ab-src">Boyer, Religion Explained, 2001.</span></p>
+  <p class="ab-arg"><b>Textual and Historical Criticism.</b> Sacred texts show every mark of human composition, redaction, and cultural situation.</p>
+  <p class="ab-arg"><b>Moral Autonomy.</b> Ethics can be grounded in reason, empathy, and reciprocity without divine command — and the non-religious are not observably less ethical. <span class="ab-src">Kant, Groundwork, 1785; Foot, Natural Goodness, 2001.</span></p>
+  <p class="ab-arg"><b>The Absence of Personal Experience.</b> Where believers cite encounter as evidence, many have sought sincerely and found nothing. That absence is data too.</p>
+  <div class="ab-obj">
+    <h4>What atheism must answer</h4>
+    <p class="ab-arg"><b>Grounding Objective Morality.</b> If moral facts are real rather than preferred, naturalism must say what makes them so. If they are not real, "cruelty is wrong" reduces to "cruelty is disfavored" — and few atheists live as though that is all it means. <span class="ab-src">Mackie conceded the difficulty, 1977.</span></p>
+    <p class="ab-arg"><b>The Brute-Fact Terminus.</b> "Why is there something rather than nothing?" is answered with a stop rather than an explanation. That may be correct. It is not obviously more satisfying than the alternative stop.</p>
+    <p class="ab-arg"><b>Consciousness.</b> Why physical processes are accompanied by subjective experience remains unexplained on any current account. Not an argument for God — a live limit on the claim that the natural story is complete. <span class="ab-src">Chalmers, 1995.</span></p>
+  </div>
+</article>
+
+<article class="ab-slide ab-act-slide" data-sec="3" data-label="Reflect · 3">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-15.jpg" alt="An open blank notebook.">
+  <div class="ab-eyebrow"><span class="ab-num">3</span> Reflection</div>
+  <div class="ab-act">
+    <span class="ab-tag">Steel-man check</span>
+    <h3>State it in one sentence</h3>
+    <p class="ab-q">In your own words, what is the single strongest reason a thoughtful person becomes an atheist?</p>
+    <div class="ab-personal"><textarea data-j="s3-steel" placeholder="The strongest reason is…"></textarea></div>
+    <p class="ab-q">If you are not an atheist: which of these arguments has the most force against your own position?</p>
+    <div class="ab-personal"><textarea data-j="s3-force" placeholder="The one with real force is…"></textarea></div>
+  </div>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>The highest-yield exercise in the whole resource: <b>have each person argue the position they least hold, for two minutes.</b></li>
+    <li>Do it here, while all three are fresh.</li>
+  </ul></div>
+</article>
+
+<!-- ============ SECTION 4 · AGNOSTIC ============ -->
+<article class="ab-slide" data-sec="4" data-label="Reasons to be Agnostic">
+  <div class="ab-eyebrow"><span class="ab-num">4</span> Compelling Reasons to be Agnostic</div>
+  <figure class="ab-fig ab-banner"><img loading="lazy" src="/assets/studies/approaches-to-belief/agnosticism.jpg" alt="A magnifying glass held over printed text, bringing the word &#39;agnosticism&#39; into sharp focus while surrounding repetitions of the word remain blurred."><figcaption>Huxley&#39;s word was a method before it was a position — a way of looking, not a conclusion.</figcaption></figure>
+  <blockquote>"Agnosticism, in fact, is not a creed, but a method… In matters of the intellect, follow your reason as far as it will take you, without regard to any other consideration… do not pretend that conclusions are certain which are not demonstrated or demonstrable."<cite>Thomas Henry Huxley, "Agnosticism," 1889</cite></blockquote>
+  <p><b>Agnosticism</b> — coined by Huxley in 1869, by his own later account. In its specific form, the claim that ultimate truths of this kind are unknowable to <em>any</em> human — not merely unknown to the speaker.</p>
+  <p class="ab-arg"><b>Inconclusive Evidence.</b> The arguments on both sides are serious and neither is decisive. Suspending judgment where evidence is genuinely balanced is the correct response, not cowardice. <span class="ab-src">Huxley, 1889; Clifford, 1877.</span></p>
+  <p class="ab-arg"><b>Limits of Human Cognition.</b> Our concepts were built for mid-sized objects at moderate speeds. There is no reason to assume they scale to ultimate reality. <span class="ab-src">Kant, Critique of Pure Reason, 1781; Nagel, 1974.</span></p>
+  <p class="ab-arg"><b>The Unknowable in Principle.</b> The ultimate cause may be not merely undiscovered but permanently beyond the categories available to a finite mind. <span class="ab-src">Spencer, First Principles, 1862.</span></p>
+  <p class="ab-arg"><b>Religious Pluralism.</b> Committing to one tradition among thousands, all sincerely held, requires a confidence the evidence may not support.</p>
+  <p class="ab-arg"><b>Intellectual Humility.</b> Declining to assert more than one has is a virtue, not an evasion.</p>
+  <div class="ab-obj">
+    <h4>What agnosticism must answer</h4>
+    <p class="ab-arg"><b>The Practical Impossibility of Suspension.</b> On this question you cannot actually abstain. You will live either as though your life is accountable to something beyond itself or as though it is not. Neutrality is available in theory and not in practice. <span class="ab-src">Pascal, <em>Pens&#233;es</em> &#167;233 (Brunschvicg) = &#167;418 (Lafuma); James, "The Will to Believe," 1896.</span></p>
+    <p class="ab-arg"><b>Self-Application.</b> "Ultimate truths are unknowable to any human" is itself a strong claim about ultimate truth. What grants access to <em>that</em>?</p>
+    <p class="ab-arg"><b>Asymmetric Rigor.</b> The evidential standard applied to religious claims is rarely the standard applied to history, other minds, or moral facts. Applied evenly, very little would survive.</p>
+  </div>
+</article>
+
+<article class="ab-slide ab-act-slide" data-sec="4" data-label="Reflect · 4">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-15.jpg" alt="An open blank notebook.">
+  <div class="ab-eyebrow"><span class="ab-num">4</span> Reflection</div>
+  <div class="ab-act">
+    <span class="ab-tag">Steel-man check</span>
+    <h3>Three positions, honestly weighed</h3>
+    <p class="ab-q">In your own words, what is the strongest reason a thoughtful person remains agnostic?</p>
+    <div class="ab-personal"><textarea data-j="s4-steel" placeholder="The strongest reason is…"></textarea></div>
+    <p class="ab-q">Having now read all three argued fairly — has anything shifted? Even slightly?</p>
+    <div class="ab-personal"><textarea data-j="s4-shift" placeholder="What shifted, or did not…"></textarea></div>
+    <p class="ab-q">What would change your mind? If nothing would, is your position responsive to evidence at all?</p>
+    <div class="ab-personal"><textarea data-j="s4-change" placeholder="What would move me is…"></textarea></div>
+  </div>
+</article>
+
+<!-- ============ SECTION 5 · MEROGNOSTICISM ============ -->
+<article class="ab-slide" data-sec="5" data-label="The Space Between">
+  <div class="ab-eyebrow"><span class="ab-num">5</span> A Word for the Space Between</div>
+  <h2>Look again at the horizontal axis</h2>
+  <p>It offered you two options: you claim to know, or you hold that such things cannot be known. <b>Gnostic</b> or <b>agnostic</b>.</p>
+  <p>Thomas Henry Huxley coined <em>agnostic</em> in 1869 from the Greek — <em>a-</em>, "not," plus <em>gnōstos</em>, "known." It was an honest word and it filled a real gap. But it left another gap open, and that gap is where a great many thoughtful people actually live.</p>
+  <p>Paul named the condition long before Huxley named its denial. Writing to Corinth he said <em>ek merous gar ginōskomen</em> —</p>
+  <blockquote style="font-size:1.25rem">"For we know in part."<cite>{% scripture "1 Corinthians 13:9" %}</cite></blockquote>
+  <p>Not <em>we do not know</em>. Not <em>we know fully</em>. We know — really know — <b>in part</b>.</p>
+  <p>There has never been an English word for that. So I made one, on Huxley's own pattern: <em>meros</em>, "part," plus <em>gnōstos</em>, "known."</p>
+  
+  <p class="ab-big">Merognostic. One who knows in part.</p>
+  <figure class="ab-fig"><img loading="lazy" src="/assets/studies/approaches-to-belief/merognosticism.jpg" alt="A painted allegory: a robed figure holding a single puzzle piece stands before a large, partly assembled puzzle suspended in warm light. The completed pieces show a council of philosophers in session, a galaxy and planets, an open book with an eye, a lantern and magnifying glass, a balance scale, a deeply rooted tree, and people teaching and helping one another. Several piece-shaped gaps remain open and unfilled. Loose pieces lie on the pavement at his feet, and a stair of light rises at the centre toward a distant star."><figcaption>Enough pieces to see the picture. Honest about the ones still missing. <br><span style="opacity:.8">Illustration generated with ChatGPT to the author&#39;s specification, August 2026.</span></figcaption></figure>
+</article>
+
+<article class="ab-slide" data-sec="5" data-label="What it is not">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-08.jpg" alt="A broken pottery shard with part of its painted pattern still visible.">
+  <div class="ab-eyebrow"><span class="ab-num">5</span> A Word for the Space Between</div>
+  <h3>Set the four side by side</h3>
+  <div class="ab-card"><b>Gnostic</b><span>Claims more than has been given.</span></div>
+  <div class="ab-card"><b>Agnostic</b><span>Claims that nothing can be given.</span></div>
+  <div class="ab-card"><b>Skeptic</b><span>Is not sure whether anything has been given.</span></div>
+  <div class="ab-card ab-hl"><b>Merognostic</b><span>Holds what has genuinely been given, and declines to invent the rest.</span></div>
+  <p>Here is how I say it about myself:</p>
+  <blockquote>I am a merognostic, not an agnostic. I know God is real. I know the Spirit has spoken to me. And I know, with the same honesty, that what I hold is a portion.</blockquote>
+  <p>I offer the word; I do not assign it. It is a description of my own honesty, not a category for yours. If it names something you recognize, it is yours to use. If it does not, the grid is still perfectly good, and you are still perfectly welcome here.</p>
+  <p><b>One discipline keeps the word honest:</b> it is a self-description of honest faith, never a box into which other souls may be sorted. The moment it becomes a tribe, it has betrayed the posture it names.</p>
+  <div class="ab-deeper"><strong>Go deeper:</strong> <a href="/studies/merognosticism/">Merognosticism — A Plain Confession of Partial Knowing</a></div>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>This is the section that most often lands. Give it room and do not rush to the next slide.</li>
+    <li>Never say "so you're a merognostic." Let people claim it or leave it.</li>
+  </ul></div>
+</article>
+
+<article class="ab-slide ab-act-slide" data-sec="5" data-label="Reflect · 5">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-15.jpg" alt="An open blank notebook.">
+  <div class="ab-eyebrow"><span class="ab-num">5</span> Reflection</div>
+  <div class="ab-act">
+    <span class="ab-tag">Check your thinking</span>
+    <h3>Which posture is speaking?</h3>
+    <p style="font-size:.96rem">"I have felt God answer me. I could not tell you what heaven looks like, and I will not pretend to."</p>
+    <div class="ab-opts" data-quiz="s5" data-answer="c">
+      <div class="ab-opt" data-k="a"><span class="ab-k">A</span><span>Gnostic</span></div>
+      <div class="ab-opt" data-k="b"><span class="ab-k">B</span><span>Agnostic</span></div>
+      <div class="ab-opt" data-k="c"><span class="ab-k">C</span><span>Merognostic</span></div>
+      <div class="ab-opt" data-k="d"><span class="ab-k">D</span><span>Skeptic</span></div>
+    </div>
+    <div class="ab-fb" data-fb="s5">
+      <b>Merognostic.</b> Two claims held at once: something real <em>is</em> known, and the knowing is admittedly partial. The agnostic would not say "I have felt God answer me." The gnostic would go on to describe heaven. This is the distinction most often collapsed — partial knowing gets mistaken for no knowing, and people conclude they have lost their faith when they have only grown honest about its edges.
+    </div>
+    <div class="ab-personal">
+      <p class="ab-q">Does this word name something you recognize — in yourself, or in someone you know?</p>
+      <textarea data-j="s5-recognize" placeholder="What I recognize…"></textarea>
+    </div>
+  </div>
+</article>
+
+<!-- ============ SECTION 6 · THIRD AXIS ============ -->
+<article class="ab-slide" data-sec="6" data-label="The Third Axis">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-09.jpg" alt="A single deep footprint pressed into wet earth.">
+  <div class="ab-eyebrow"><span class="ab-num">6</span> The Third Axis</div>
+  <h2>A question the grid raises and cannot answer</h2>
+  <p>Two axes give four boxes. But something is obviously missing:</p>
+  <p class="ab-big">The grid says nothing about how a person lives.</p>
+  <p>A gnostic theist may be cruel. An agnostic atheist may be generous past all obligation. The map locates conviction and says nothing about consequence — and consequence is what anyone actually encounters when they meet you.</p>
+  <div class="ab-act">
+    <span class="ab-tag">Before you advance</span>
+    <h3>Propose a third axis</h3>
+    <p class="ab-q">What would you measure? Justify it.</p>
+    <div class="ab-personal"><textarea data-j="s6-zaxis" placeholder="My proposed z-axis would measure…"></textarea></div>
+    <div class="ab-notes" style="display:none"></div>
+  </div>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>Collect two or three proposals aloud before advancing. Do not advance early — the reveal only works if they have committed first.</li>
+  </ul></div>
+</article>
+
+<article class="ab-slide" data-sec="6" data-label="What the machine proposed">
+  <div class="ab-eyebrow"><span class="ab-num">6</span> The Third Axis</div>
+  <h3>What the machine proposed</h3>
+  <p>In January 2025 I put this exact question to an AI — ChatGPT 4o Mini — and asked it to propose a z-axis for the exercise. It returned a spectrum of <b>the consequences of actions, viewed through the framework of ecological ethics</b>:</p>
+  <blockquote>"When viewed through the lens of ecological ethics, the spectrum of good and evil is measured by the impact of beliefs and practices on both sustainability of community and quality of life."<cite>ChatGPT 4o Mini, 1 January 2025</cite></blockquote>
+  <figure class="ab-fig ab-plate"><img loading="lazy" src="/assets/studies/approaches-to-belief/zaxis.png" alt="A three-dimensional coordinate diagram. The horizontal x-axis runs from agnostic to gnostic, the vertical y-axis from atheistic to theistic, and a third z-axis runs diagonally from good to evil, each axis carrying a translucent plane. A heading reads: Ecological Definition of Good and Evil."><figcaption>The exercise in three dimensions. X: knowledge · Y: belief · Z: consequences of actions.</figcaption></figure>
+  <figure class="ab-fig ab-duo"><div class="ab-frame"><img loading="lazy" src="/assets/studies/approaches-to-belief/trees.jpg" alt="A single tree split down the middle: the left half in full green leaf above a field of wildflowers in warm light, the right half bare and dead above cracked barren ground under storm cloud. A working definition of good is set over the living side and a working definition of evil over the barren side."><div class="ab-ov ab-left"><b>Working Definition</b><p><q>GOOD</q> results in interconnectedness, ethical stewardship, and holistic well-being.</p><p><q>GOOD</q> creates stability within communities.</p></div><div class="ab-ov ab-right"><b>Working Definition</b><p><q>EVIL</q> results in disconnection, exploitation, and neglected quality of life.</p><p><q>EVIL</q> destroys stability within communities.</p></div></div><figcaption>One tree, two trajectories. The framework reads the ground, not the root.</figcaption></figure>
+</article>
+
+<article class="ab-slide" data-sec="6" data-label="Evaluating it">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-17.jpg" alt="A brass plumb bob hanging still on a knotted cord.">
+  <div class="ab-eyebrow"><span class="ab-num">6</span> The Third Axis</div>
+  <h3>What I think of that answer</h3>
+  <p>I want to say plainly why I kept this, because "an AI suggested it" is not a reason to keep anything.</p>
+  <p>I kept it because I taught it. For twenty-six years in a science laboratory I taught students to evaluate any system — a watershed, a cell, a food web, a population — by asking two questions: <em>does it sustain itself over time, and does it sustain the things that depend on it?</em> A system that consumes its own foundation is failing, however impressive its output looks in a given season. That is not a moral opinion. It is what the data does.</p>
+  <p>The machine, without being told any of that, reached for the same instrument.</p>
+  <h4>What it gets right</h4>
+  <p>It is <b>measurable</b>, or at least observable over time. It is <b>available to everyone in the room</b> — a committed atheist and a committed believer can both use it honestly without either conceding anything. And it lands on something scripture says constantly: <em>by their fruits ye shall know them</em> ({% scripture "Matthew 7:20" %}). The test of a thing is what it produces. That is an ecological claim before it is a theological one.</p>
+  <img loading="lazy" class="ab-ico ab-left" src="/assets/studies/approaches-to-belief/icons/atb-16.jpg" alt="A weathered wooden ship's rudder.">
+    <h4>What it structurally cannot see</h4>
+  <p>It cannot see <b>intent.</b> Two acts with identical downstream effects are morally identical on this framework. But the man who harms by accident and the man who harms by design are not the same man, and everyone knows it.</p>
+  <p>It cannot see <b>covenant.</b> Some obligations do not arise from measured outcomes. A promise creates a duty that persists even when breaking it would produce a better-looking result.</p>
+  <p>And it cannot see <b>repentance.</b> Ecological ethics reads a trajectory: a system trending toward collapse is failing, and the measurement is honest. But a human being is not a watershed. A person can turn. The whole Christian claim is that a life trending one direction can reverse — not gradually, not statistically, but actually — and that the reversal is a change in what the person <em>is</em>. No consequence-measuring instrument can detect that, because the change happens upstream of every consequence it knows how to read.</p>
+  <p class="ab-big">A good instrument pointed at the wrong depth. It measures the wake a life leaves behind. It cannot see the thing steering.</p>
+  <p>And notice — this is the same finding we reached about the natural framework in Section 1. A tool that works well within its domain, reaching a ceiling its own design predicts.</p>
+</article>
+
+<article class="ab-slide ab-act-slide" data-sec="6" data-label="Reflect · 6">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-15.jpg" alt="An open blank notebook.">
+  <div class="ab-eyebrow"><span class="ab-num">6</span> Reflection</div>
+  <div class="ab-act">
+    <span class="ab-tag">Check your thinking</span>
+    <h3>What can a consequences-only framework not detect?</h3>
+    <p style="font-size:.96rem">A man has spent a year quietly making amends for something no one knew he did. This month, none of it has produced a visible effect yet. What does the z-axis register?</p>
+    <div class="ab-opts" data-quiz="s6" data-answer="d">
+      <div class="ab-opt" data-k="a"><span class="ab-k">A</span><span>A strong positive — the intent is good</span></div>
+      <div class="ab-opt" data-k="b"><span class="ab-k">B</span><span>A strong negative — the original act still counts</span></div>
+      <div class="ab-opt" data-k="c"><span class="ab-k">C</span><span>It registers his sincerity accurately</span></div>
+      <div class="ab-opt" data-k="d"><span class="ab-k">D</span><span>Essentially nothing — it cannot see the turn</span></div>
+    </div>
+    <div class="ab-fb" data-fb="s6">
+      <b>Essentially nothing.</b> The instrument reads consequences, and no consequence has surfaced yet. The most important thing happening in this man's life is invisible to it. That is the whole limitation in one case: repentance is real before it is measurable, and any framework that only reads outcomes will always be reading late.
+    </div>
+    <div class="ab-personal">
+      <p class="ab-q">Where else in your life do you use a good instrument at the wrong depth?</p>
+      <textarea data-j="s6-depth" placeholder="I think I do this when…"></textarea>
+    </div>
+  </div>
+  <div class="ab-deeper"><strong>Go deeper:</strong> Chapter 3 — "The Limitations of Academic Knowledge"</div>
+</article>
+
+<!-- ============ SECTION 7 · REASON AND REVELATION ============ -->
+<article class="ab-slide" data-sec="7" data-label="Reason and Revelation">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-18.jpg" alt="A wooden dovetail joint, its two cut pieces fitted together.">
+  <div class="ab-eyebrow"><span class="ab-num">7</span> Reason and Revelation</div>
+  <h2>Two halves of a whole</h2>
+  <p>Rational and critical thinking are <b>not</b> evil. Yet scripture asks something that sounds frightening to the careful mind: <em>"Trust in the Lord with all thine heart; and lean not unto thine own understanding"</em> ({% scripture "Proverbs 3:5-6" %}).</p>
+  <p>The question is not whether to trust reason or to trust God. It is what each faculty is <em>for</em>.</p>
+  <p>Reason is not the enemy of faith, and scripture nowhere says it is. When Isaiah records the Lord's invitation — <em>"Come now, and let us reason together"</em> — the reasoning is not a concession God makes to skeptics. It is the form the invitation takes.</p>
+  <p class="ab-big">If any conflict exists between academic knowledge and spiritual knowledge, it is the result of a lack of sufficient information within one or both domains.</p>
+  <p>That is a strong claim, and it is meant to be. It says the appearance of conflict is a reliable signal that something is not yet known — not a verdict that one side must lose.</p>
+</article>
+
+<article class="ab-slide" data-sec="7" data-label="The diagram">
+  <div class="ab-eyebrow"><span class="ab-num">7</span> Reason and Revelation</div>
+  <svg class="ab-venn" viewBox="0 0 1200 800" role="img" aria-label="Venn diagram: Reason and Spirituality as two halves of a whole. Reason contains objective evidence, logical analysis, scientific methods, and rational cognition. Spirituality contains subjective evidence, inspired insights, spiritual methods, and spiritual intuition. The overlap describes how each completes the other.">
+    <defs>
+      <radialGradient id="ab-rF" cx="35%" cy="35%" r="75%"><stop offset="0%" stop-color="#2E6F7E" stop-opacity=".62"/><stop offset="100%" stop-color="#1B4A55" stop-opacity=".52"/></radialGradient>
+      <radialGradient id="ab-sF" cx="65%" cy="35%" r="75%"><stop offset="0%" stop-color="#A8703A" stop-opacity=".60"/><stop offset="100%" stop-color="#6E4520" stop-opacity=".52"/></radialGradient>
+    </defs>
+    <rect width="1200" height="800" fill="#1A120B"/>
+    <text x="600" y="58" text-anchor="middle" fill="#F5E6D0" font-size="38" font-weight="600" font-family="Crimson Pro,Georgia,serif">Reason and Spirituality</text>
+    <text x="600" y="90" text-anchor="middle" fill="#C4943A" font-size="19" font-style="italic" font-family="Crimson Pro,Georgia,serif">Two Halves of a Whole &#8212; a holistic epistemology</text>
+    <circle cx="450" cy="420" r="280" fill="url(#ab-rF)"/><circle cx="750" cy="420" r="280" fill="url(#ab-sF)"/>
+    <circle cx="450" cy="420" r="280" fill="none" stroke="#4E97A8" stroke-opacity=".55" stroke-width="1.6"/>
+    <circle cx="750" cy="420" r="280" fill="none" stroke="#C4943A" stroke-opacity=".55" stroke-width="1.6"/>
+    <g font-family="Crimson Pro,Georgia,serif" text-anchor="middle">
+      <text x="328" y="336" fill="#C4943A" font-size="31" font-weight="600">Reason</text>
+      <g fill="#F5E6D0" font-size="20"><text x="328" y="396">Objective Evidence</text><text x="328" y="438">Logical Analysis</text><text x="328" y="480">Scientific Methods</text><text x="328" y="522">Rational Cognition</text></g>
+      <text x="872" y="336" fill="#C4943A" font-size="31" font-weight="600">Spirituality</text>
+      <g fill="#F5E6D0" font-size="20"><text x="872" y="396">Subjective Evidence</text><text x="872" y="438">Inspired Insights</text><text x="872" y="480">Spiritual Methods</text></g>
+      <text x="872" y="522" fill="#E8C87E" font-size="20" font-weight="600">Spiritual Intuition</text>
+      <g fill="#EFE0C8" font-size="14.5">
+        <text x="600" y="327">Can lead to deeper</text><text x="600" y="346">understanding of truth.</text>
+        <text x="600" y="385">Complementary perspectives</text><text x="600" y="404">on moral and ethical issues.</text>
+        <text x="600" y="443">Reason can help interpret</text><text x="600" y="462">and understand revelation.</text>
+        <text x="600" y="501">Revelation can open new</text><text x="600" y="520">avenues for reasoned inquiry.</text>
+      </g>
+    </g>
+  </svg>
+  <p>Reason prepares the ground: it frames the question honestly, tests claims for coherence, guards against credulity, and interprets what revelation gives. Revelation answers what reason cannot reach, and hands reason new territory to work — because a revealed truth still has to be understood, integrated, and lived.</p>
+</article>
+
+<article class="ab-slide" data-sec="7" data-label="How Peter came to know">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-11.jpg" alt="A fisherman's net draped over a wooden post to dry.">
+  <div class="ab-eyebrow"><span class="ab-num">7</span> Reason and Revelation</div>
+  <h3>How Peter came to know</h3>
+  <p>"Lean not unto thine own understanding" is not an instruction to stop thinking. It is an instruction to stop asking one faculty to do work it was never built to do — and to stop concluding, when it fails, that the question has no answer.</p>
+  <p>Jesus asked Peter directly: <em>"Whom say ye that I am?"</em></p>
+  <p>Peter answered, <em>"Thou art the Christ, the Son of the living God."</em></p>
+  <p>And Jesus told him where that knowledge had come from: <em>"Flesh and blood hath not revealed it unto thee, but my Father which is in heaven"</em> ({% scripture "Matthew 16:15-17" %}).</p>
+  <p>Peter had walked with Him, watched Him, listened to Him — every natural faculty engaged and fully employed.</p>
+  <p class="ab-big">They brought him to the question. They did not produce the answer.</p>
+  <p>One honest difficulty remains, and it deserves to be named rather than managed. Spiritual knowledge cannot be transferred the way a proof can. No one can hand you their witness. This is not special pleading — the same is true of every genuinely first-person knowledge, and no one doubts the reality of grief or love on the grounds that neither can be demonstrated to a stranger. But it does mean the invitation must take a particular form.</p>
+  <p class="ab-lede">It cannot be <em>accept this</em>. It can only be <em>test this</em>.</p>
+  <div class="ab-song">
+    <h4>Two Halves of a Whole</h4>
+    <small>An original song by Aaron Powner · Chapter 3 testimony</small>
+    <p class="ab-chorus">For truth is knowledge as things really are,<br>A light that shines on what is yet to come.<br>Science isn't blind and faith isn't lame<br>When we see them both as one.</p>
+    <small>The chorus inverts Einstein's line — "science without religion is lame, religion without science is blind" (Albert Einstein, "Science and Religion," 1941; reprinted in <em>Ideas and Opinions</em>, 1954).</small>
+    <p style="margin-top:.9rem"><a class="ab-btn" href="/chapters/03-academic-knowledge/#open-testimony">▶ Listen &amp; read full lyrics</a></p>
+  </div>
+</article>
+
+<article class="ab-slide ab-act-slide" data-sec="7" data-label="Reflect · 7">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-15.jpg" alt="An open blank notebook.">
+  <div class="ab-eyebrow"><span class="ab-num">7</span> Reflection</div>
+  <div class="ab-act">
+    <span class="ab-tag">Reflect</span>
+    <h3>The edge of your own knowing</h3>
+    <p class="ab-q">Has reason ever brought you to a question it could not then answer? What did you do with it?</p>
+    <div class="ab-personal"><textarea data-j="s7-edge" placeholder="The question reason brought me to…"></textarea></div>
+    <p class="ab-q">Chapter 3 claims apparent conflict always means missing information in one domain or the other. Is that too convenient?</p>
+    <div class="ab-personal"><textarea data-j="s7-convenient" placeholder="I think that claim is…"></textarea></div>
+  </div>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>The "too convenient" question is a fair challenge. Let it be pressed hard — the resource survives it better than a defensive answer would.</li>
+  </ul></div>
+</article>
+
+<!-- ============ SUMMATIVE ============ -->
+<article class="ab-slide" data-sec="sum" data-label="Faith is built">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-12.jpg" alt="A half-finished dry-stone wall with a trowel resting on it.">
+  <div class="ab-eyebrow"><span class="ab-num">Bringing it together</span></div>
+  <h2>Nobody has ever been argued into faith</h2>
+  <p>If belief were installed by evidence, the strongest argument would produce the most believers, and it plainly does not. What actually forms conviction is a long accumulation: what you saw modeled, what you suffered, what you were given words for, what happened when you prayed and no one was watching.</p>
+  <p>The arguments matter — they clear obstacles and keep honest people honest — but they are not the mechanism. A constructed thing has to be built, and you have to do the building.</p>
+  <p>Which also means: <b>your doubts are not disqualifying.</b> They are part of the material. A faith assembled without them would be someone else's, borrowed and brittle.</p>
+  <h3>One boundary, stated plainly</h3>
+  <p>A belief must be livable — Christ said as much: <em>"If any man will do his will, he shall know of the doctrine"</em> ({% scripture "John 7:17" %}). But usefulness is not truth. A belief can comfort, cohere, and produce good behavior and still be false.</p>
+  <p class="ab-big">Plainness is not pluralism.</p>
+  <p>I hold real humility about what mortals cannot know. No one living has surveyed heaven. But humility about the unrevealed is not relativism about the revealed. A belief should be adaptable in the sense that <em>you</em> keep growing into it — seeing further, understanding better, repenting where you were wrong. That is not the same as the belief itself bending to accommodate you. The first is discipleship. The second is preference wearing better clothes.</p>
+</article>
+
+<article class="ab-slide" data-sec="sum" data-label="Has anything moved?">
+  <div class="ab-eyebrow"><span class="ab-num">Bringing it together</span></div>
+  <h2>Place yourself again</h2>
+  <p>You located yourself before we began. Seven sections later, place yourself again — honestly. Movement is not the goal, and staying exactly where you were is a legitimate result. The point is to notice.</p>
+  <div class="ab-gridwrap">
+  <svg class="ab-grid" id="ab-gridB" viewBox="0 0 620 620" role="application" aria-label="Belief and knowledge grid. Click to place yourself."><rect x="2" y="2" width="616" height="616" rx="16" fill="#FCF0C4" stroke="#8A7A48" stroke-width="2.5"/><line class="ab-gl" x1="31" y1="6" x2="31" y2="614"/><line class="ab-gl" x1="62" y1="6" x2="62" y2="614"/><line class="ab-gl" x1="93" y1="6" x2="93" y2="614"/><line class="ab-gl" x1="124" y1="6" x2="124" y2="614"/><line class="ab-gl" x1="155" y1="6" x2="155" y2="614"/><line class="ab-gl" x1="186" y1="6" x2="186" y2="614"/><line class="ab-gl" x1="217" y1="6" x2="217" y2="614"/><line class="ab-gl" x1="248" y1="6" x2="248" y2="614"/><line class="ab-gl" x1="279" y1="6" x2="279" y2="614"/><line class="ab-gl" x1="310" y1="6" x2="310" y2="614"/><line class="ab-gl" x1="341" y1="6" x2="341" y2="614"/><line class="ab-gl" x1="372" y1="6" x2="372" y2="614"/><line class="ab-gl" x1="403" y1="6" x2="403" y2="614"/><line class="ab-gl" x1="434" y1="6" x2="434" y2="614"/><line class="ab-gl" x1="465" y1="6" x2="465" y2="614"/><line class="ab-gl" x1="496" y1="6" x2="496" y2="614"/><line class="ab-gl" x1="527" y1="6" x2="527" y2="614"/><line class="ab-gl" x1="558" y1="6" x2="558" y2="614"/><line class="ab-gl" x1="589" y1="6" x2="589" y2="614"/><line class="ab-gl" x1="6" y1="31" x2="614" y2="31"/><line class="ab-gl" x1="6" y1="62" x2="614" y2="62"/><line class="ab-gl" x1="6" y1="93" x2="614" y2="93"/><line class="ab-gl" x1="6" y1="124" x2="614" y2="124"/><line class="ab-gl" x1="6" y1="155" x2="614" y2="155"/><line class="ab-gl" x1="6" y1="186" x2="614" y2="186"/><line class="ab-gl" x1="6" y1="217" x2="614" y2="217"/><line class="ab-gl" x1="6" y1="248" x2="614" y2="248"/><line class="ab-gl" x1="6" y1="279" x2="614" y2="279"/><line class="ab-gl" x1="6" y1="310" x2="614" y2="310"/><line class="ab-gl" x1="6" y1="341" x2="614" y2="341"/><line class="ab-gl" x1="6" y1="372" x2="614" y2="372"/><line class="ab-gl" x1="6" y1="403" x2="614" y2="403"/><line class="ab-gl" x1="6" y1="434" x2="614" y2="434"/><line class="ab-gl" x1="6" y1="465" x2="614" y2="465"/><line class="ab-gl" x1="6" y1="496" x2="614" y2="496"/><line class="ab-gl" x1="6" y1="527" x2="614" y2="527"/><line class="ab-gl" x1="6" y1="558" x2="614" y2="558"/><line class="ab-gl" x1="6" y1="589" x2="614" y2="589"/><g class="ab-qd" id="ab-B-at"><rect x="68" y="62" width="200" height="220" rx="34" fill="#F0574E"/><text class="ab-qt" x="168" y="89">Agnostic Theist</text><circle class="ab-bul" cx="85" cy="114" r="3.1"/><text class="ab-qb" x="95" y="118">Believes in at</text><text class="ab-qb" x="95" y="135">least one god</text><circle class="ab-bul" cx="85" cy="162" r="3.1"/><text class="ab-qb" x="95" y="166">Doesn't claim to</text><text class="ab-qb" x="95" y="183">know that god(s)</text><text class="ab-qb" x="95" y="200">exist</text></g><g class="ab-qd" id="ab-B-gt"><rect x="352" y="62" width="200" height="220" rx="34" fill="#8FB8E8"/><text class="ab-qt" x="452" y="89">Gnostic Theist</text><circle class="ab-bul" cx="369" cy="114" r="3.1"/><text class="ab-qb" x="379" y="118">Believes in at</text><text class="ab-qb" x="379" y="135">least one god</text><circle class="ab-bul" cx="369" cy="162" r="3.1"/><text class="ab-qb" x="379" y="166">Claims to know</text><text class="ab-qb" x="379" y="183">that god(s) exist</text></g><g class="ab-qd" id="ab-B-aa"><rect x="68" y="338" width="200" height="220" rx="34" fill="#4CC94C"/><text class="ab-qt" x="168" y="365">Agnostic Atheist</text><circle class="ab-bul" cx="85" cy="390" r="3.1"/><text class="ab-qb" x="95" y="394">Lacks belief</text><text class="ab-qb" x="95" y="411">in god(s)</text><circle class="ab-bul" cx="85" cy="438" r="3.1"/><text class="ab-qb" x="95" y="442">Doesn't claim to</text><text class="ab-qb" x="95" y="459">know that god(s)</text><text class="ab-qb" x="95" y="476">do not exist</text></g><g class="ab-qd" id="ab-B-ga"><rect x="352" y="338" width="200" height="220" rx="34" fill="#FBEE3C"/><text class="ab-qt" x="452" y="365">Gnostic Atheist</text><circle class="ab-bul" cx="369" cy="390" r="3.1"/><text class="ab-qb" x="379" y="394">Lacks belief</text><text class="ab-qb" x="379" y="411">in god(s)</text><circle class="ab-bul" cx="369" cy="438" r="3.1"/><text class="ab-qb" x="379" y="442">Claims to know</text><text class="ab-qb" x="379" y="459">that no god(s)</text><text class="ab-qb" x="379" y="476">exist</text></g><line class="ab-ax" x1="310" y1="46" x2="310" y2="574"/><line class="ab-ax" x1="46" y1="310" x2="574" y2="310"/><polygon class="ab-ah" points="310,36 302,56 318,56"/><polygon class="ab-ah" points="310,584 302,564 318,564"/><polygon class="ab-ah" points="584,310 564,302 564,318"/><polygon class="ab-ah" points="36,310 56,302 56,318"/><text class="ab-axl" x="310" y="24" text-anchor="middle">THEIST</text><text class="ab-axl" x="310" y="606" text-anchor="middle">ATHEIST</text><text class="ab-axl" x="602" y="310" text-anchor="middle" transform="rotate(90 602 310)">GNOSTIC</text><text class="ab-axl" x="18" y="310" text-anchor="middle" transform="rotate(-90 18 310)">AGNOSTIC</text><text class="ab-axs" x="326" y="334" text-anchor="start">knowledge</text><text class="ab-axs" x="292" y="296" text-anchor="end" transform="rotate(-90 292 296)">belief</text><g id="ab-ghost" style="display:none"><circle id="ab-gh1" cx="310" cy="310" r="11" fill="none" stroke="#6B5A3C" stroke-width="2.4" stroke-dasharray="5 4"/><text id="ab-ghlab" class="ab-axs" x="310" y="290">you began here</text></g><line id="ab-movline" x1="310" y1="310" x2="310" y2="310" stroke="#8A6520" stroke-width="2.6" stroke-dasharray="6 5" style="display:none"/><g class="ab-mkg" id="ab-B-mk"><circle id="ab-B-c1" cx="310" cy="310" r="13" fill="#1A120B" stroke="#FCF0C4" stroke-width="4"/><circle id="ab-B-c2" cx="310" cy="310" r="23" fill="none" stroke="#FCF0C4" stroke-width="5" opacity=".92"/></g></svg></div>
+  <p class="ab-hint" id="ab-hintB">Click to place yourself now.</p>
+  <div class="ab-result" id="ab-resB"><h3 id="ab-nameB"></h3><p id="ab-moveB"></p>
+    <div class="ab-personal"><p class="ab-q">What accounts for that — the movement, or the staying put?</p>
+      <textarea data-j="sum-move" placeholder="What accounts for it…"></textarea></div>
+  </div>
+</article>
+
+<article class="ab-slide" data-sec="sum" data-label="Two paths">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-13.jpg" alt="A dirt footpath dividing into two through tall grass.">
+  <div class="ab-eyebrow"><span class="ab-num">Where to go from here</span></div>
+  <h2>Two honest next steps</h2>
+  <p>Everything to this point has been reasoning. What follows is not — and you may take either path, or neither, and remain entirely welcome.</p>
+  <div class="ab-fork">
+    <div class="ab-forkcard" data-fork="experiment">
+      <b>1 · Run the experiment</b>
+      Test the claim rather than accept it. Set a commitment, a start date, and a date to evaluate honestly. Roughly thirty days.
+    </div>
+    <div class="ab-forkcard" data-fork="long">
+      <b>2 · Read the long version</b>
+      Everything compressed here is developed at length in the first six chapters of <em>Words of Plainness</em> — the search for meaning, academic knowledge, spiritual knowledge, sincere prayer, and faith in Jesus Christ.
+    </div>
+  </div>
+  <div id="ab-forkExperiment" style="display:none">
+    <h3>The experiment</h3>
+    <p>Just as the natural faculties allow beliefs to be tested by observation and application, spiritual knowledge allows for a kind of sacred experiment that produces observable outcomes. Three scripture verses summarize this, escalating in what they ask and what they promise:</p>
+    <div class="ab-verse"><b>"If any man will do his will, he shall know of the doctrine, whether it be of God."</b><small>{% scripture "John 7:17" %} — a conditional claim with a predicted result. Not <em>feel better</em>. Know.</small></div>
+    <div class="ab-verse"><b>"He that hath my commandments, and keepeth them… I will love him, and will manifest myself to him."</b><small>{% scripture "John 14:21" %} — the deeper promise</small></div>
+    <div class="ab-verse"><b>"Even if ye can no more than desire to believe, let this desire work in you."</b><small>{% scripture "Alma 32:27" %} — the honest entry point. You do not need conviction to begin.</small></div>
+    <div class="ab-act ab-personal">
+      <span class="ab-tag">Set it down</span>
+      <h3>Your experiment</h3>
+      <p style="font-size:.97rem">Thirty days is a good length. There are two honest ways to run it — either one is a real experiment:</p>
+      <div class="ab-card"><b>A · Practice something new</b><span>Pick one to three commandments of Christ and keep them deliberately for the period you set.</span></div>
+      <div class="ab-card"><b>B · Examine something you already do</b><span>Pick one to three behaviors you already practice, and observe honestly how they affect you and the people around you — measured on the ecological scale of good and evil from Section 6.</span></div>
+      <p class="ab-q">What will you do? Name the commandment or behavior specifically. If you need help choosing, open the <a href="https://commandments.brotheraaron.org/" target="_blank" rel="noopener">Keep My Commandments &#8599;</a> web app and browse until you find a few that are to your liking.</p>
+      <input type="text" data-j="goal-what" placeholder="e.g. Daily prayer, morning and evening, in my own words">
+      <p class="ab-q">Start date</p>
+      <input type="date" data-j="goal-start">
+      <p class="ab-q">Date you will stop and evaluate honestly</p>
+      <input type="date" data-j="goal-review">
+      <p class="ab-q">Decide now, before you begin: what would you accept as a result? What would you <em>not</em> be entitled to conclude either way?</p>
+      <textarea data-j="goal-criteria" placeholder="I would count it as a result if…"></textarea>
+    </div>
+    <h3>The second path</h3>
+    <p>The second path to direct personal discovery of spiritual truth is discussed in greater depth in my writings, <a href="/chapters/04-spiritual-knowledge/#two-paths-to-confirmation">Chapter 4: Spiritual Knowledge</a>.</p>
+    <blockquote>"You can learn to reach outside of yourself with your mind and heart, praying with sincerity to perceive truth spiritually. Ask if God is really there. There is no need for memorized phrases or complicated communication. Just speak what is in your mind and heart. He will listen."</blockquote>
+    <div class="ab-act ab-personal">
+      <p class="ab-q">Optional — how would you prepare yourself for such a prayer, and what would you ask?</p>
+      <textarea data-j="goal-prayer" placeholder="How I would prepare, and what I would ask…"></textarea>
+    </div>
+    <small><b style="color:var(--inkGoldD)">About Keep My Commandments</b> — a daily discipleship tracker. Choose a commandment, mark the days, and keep your own record of what happens. If you would rather see what it is before opening it, <a href="/discipleship/#commandments">read about it here</a>.</small>
+  </div>
+  <div id="ab-forkLong" style="display:none">
+    <h3>The long version</h3>
+    <div class="ab-movement"><b><a href="/chapters/01-introduction/">Chapter 1 · Introduction</a></b> — why plainness, and who this is for.</div>
+    <div class="ab-movement"><b><a href="/chapters/02-our-search/">Chapter 2 · Our Search</a></b> — the questions that motivate any honest search for meaning.</div>
+    <div class="ab-movement"><b><a href="/chapters/03-academic-knowledge/">Chapter 3 · Academic Knowledge</a></b> — the four paths, the nature of truth, and the ceiling of the natural framework. Section 1 of this resource is a compression of this chapter.</div>
+    <div class="ab-movement"><b><a href="/chapters/04-spiritual-knowledge/">Chapter 4 · Spiritual Knowledge</a></b> — the fifth faculty: how revelation is received and what it feels like.</div>
+    <div class="ab-movement"><b><a href="/chapters/05-sincere-prayer/">Chapter 5 · Sincere Prayer</a></b> — the practical how-to for the second path named in the experiment.</div>
+    <div class="ab-movement"><b><a href="/chapters/06-embrace-the-savior/">Chapter 6 · Embrace the Savior</a></b> — where the whole search has been going.</div>
+    <p style="margin-top:1.3rem"><a class="ab-btn ab-solid" href="/volume-1/#acc-m1">Open Movement 1 &#8212; Chapters 1&#8211;6 &#8594;</a><a class="ab-btn" href="/chapters/01-introduction/">Start reading at Chapter 1 &#8594;</a></p>
+  </div>
+  <div class="ab-notes"><h4>Facilitator</h4><ul>
+    <li>Do not press for a choice in a group setting. Name both paths, then stop talking.</li>
+    <li>The most powerful close is the last line on the next slide. Read it and let the silence hold.</li>
+  </ul></div>
+</article>
+
+<article class="ab-slide" data-sec="sum" data-label="Close">
+  <img loading="lazy" class="ab-ico" src="/assets/studies/approaches-to-belief/icons/atb-14.jpg" alt="A lit oil lantern set down on a stone doorstep.">
+  <div class="ab-eyebrow"><span class="ab-num">Close</span></div>
+  <h2>What you take with you</h2>
+  <p>You came in somewhere on the map. You have now seen your own position argued at its strongest, and the two you do not hold argued the same way. You have seen a framework reach its ceiling, and a word offered for the honest space between claiming everything and claiming nothing.</p>
+  <p>None of that requires you to change. It only asks that whatever you hold, you hold it knowingly — and that you not mistake the edge of one faculty for the edge of what is real.</p>
+  <blockquote style="font-size:1.2rem">"Come now, and let us reason together, saith the Lord."<cite>{% scripture "Isaiah 1:18" %}</cite></blockquote>
+  <p class="ab-lede">You are welcome here whatever you decide. That was true before you started and it is true now.</p>
+  <div class="ab-act ab-studyonly ab-personal">
+    <span class="ab-tag">Your record</span>
+    <h3>Take your reflections with you</h3>
+    <p style="font-size:.95rem">Everything you wrote is saved only in this browser. Nothing was sent anywhere and no one has seen it. Download it, print it, or keep it here for next time.</p>
+    <button type="button" class="ab-btn ab-solid" id="ab-dl">Download my reflections</button>
+    <button type="button" class="ab-btn" id="ab-pr">Print</button>
+    <button type="button" class="ab-btn" id="ab-clr">Erase everything</button>
+    <div class="ab-fb" id="ab-clrfb"></div>
+  </div>
+  <div class="ab-deeper"><strong>Go deeper:</strong> <a href="/studies/merognosticism/">Merognosticism</a> · <a href="/chapters/03-academic-knowledge/">Chapter 3</a> · <a href="/chapters/01-introduction/">Chapters 1–6</a></div>
+  <div class="ab-links"><a href="/privacy/">Privacy</a> · <a href="/disclaimer/">Disclaimer</a> · <a href="/connect/#contact">Contact</a> · <a href="/writings/#appendices">All studies</a></div>
+</article>
+
+</div>
+
+<div id="ab-tocWrap"><div id="ab-tocScrim"></div>
+  <div id="ab-toc" role="dialog" aria-label="Contents"><div class="ab-tocin">
+    <div class="ab-toch">Contents</div>
+    <div class="ab-modes">
+      <span class="ab-modelabel">Mode</span>
+      <div class="ab-modeset" role="group" aria-label="Study or Present mode">
+        <button type="button" id="ab-mStudy" class="ab-on" aria-pressed="true">Study</button>
+        <button type="button" id="ab-mPresent" aria-pressed="false">Present</button>
+      </div>
+      <span class="ab-modehint">Press <kbd>P</kbd> to toggle · <kbd>C</kbd> for Contents · arrows or Space to advance</span>
+    </div>
+    <div id="ab-tocBody"></div>
+  </div></div>
+</div>
+
+<div id="ab-foot">
+  <div id="ab-prog"><div id="ab-progfill"></div></div>
+  <div class="ab-footin">
+    <button type="button" id="ab-tocBtn" aria-controls="ab-toc"><span class="ab-car">&#9650;</span> Contents</button>
+    <span class="ab-where" id="ab-where"></span>
+    <div class="ab-nav">
+      <button type="button" id="ab-prev">&#8592; Back</button>
+      <button type="button" id="ab-next" class="ab-pri">Next &#8594;</button>
+    </div>
+  </div>
+</div>
+</div>

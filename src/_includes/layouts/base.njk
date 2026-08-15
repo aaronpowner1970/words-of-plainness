@@ -16,13 +16,13 @@
     <meta property="og:description" content="{{ description | default(site.description) }}">
     <meta property="og:url" content="https://www.wordsofplainness.org{{ page.url }}">
     <meta property="og:site_name" content="Words of Plainness">
-    <meta property="og:image" content="https://www.wordsofplainness.org/assets/images/og-default.png">
+    <meta property="og:image" content="{{ og_image | default('https://www.wordsofplainness.org/assets/images/og-default.png') }}">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ og_title | default(title) | default(site.name) }}">
     <meta name="twitter:description" content="{{ description | default(site.description) }}">
-    <meta name="twitter:image" content="https://www.wordsofplainness.org/assets/images/og-default.png">
+    <meta name="twitter:image" content="{{ og_image | default('https://www.wordsofplainness.org/assets/images/og-default.png') }}">
 
     <!-- JSON-LD Structured Data — sitewide Organization + WebSite -->
     <script type="application/ld+json">
@@ -175,7 +175,7 @@
         {% endblock %}
     </main>
     
-    {% include "partials/footer.njk" %}
+    {% if not hideFooter %}{% include "partials/footer.njk" %}{% endif %}
 
     <!-- Auth Modal -->
     <div id="authModal" role="dialog" aria-labelledby="authTitle" aria-modal="true" style="display:none">

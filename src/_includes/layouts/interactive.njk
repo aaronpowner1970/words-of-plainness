@@ -1,0 +1,26 @@
+---
+# Layout for interactive applications that own the viewport (fixed bottom
+# bar, one-panel-at-a-time display, present mode). Extends base.njk directly
+# — NOT page.njk — so there is no page-header, no read-aloud player, and no
+# site footer to collide with the app's own chrome. The site header stays.
+#
+# Page frontmatter it reads:
+#   interactiveCss  — stylesheet path (e.g. /css/approaches.css)
+#   interactiveJs   — script path   (e.g. /js/approaches.js)
+#   bodyClass       — page-scoped hook for chrome rules (e.g. ab-page)
+# Rationale: docs in WoP_ATB_PageIntegration_Spec_20260815.md.
+hideFooter: true
+---
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+{% if interactiveCss %}<link rel="stylesheet" href="{{ interactiveCss }}?v={{ site.version }}">{% endif %}
+{% endblock %}
+
+{% block content %}
+{{ content | safe }}
+{% endblock %}
+
+{% block scripts %}
+{% if interactiveJs %}<script src="{{ interactiveJs }}?v={{ site.version }}"></script>{% endif %}
+{% endblock %}
