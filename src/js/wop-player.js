@@ -642,9 +642,16 @@
     //
     // On /music/, also scroll the matching playlist row into view and mark
     // it as the current row so the reader sees where the track lives.
+    //
+    // Optional &lyrics=1 opens the lyrics drawer once the track has LOADED
+    // (P.play() attaches lyrics synchronously before calling audio.play()),
+    // so the drawer shows even when autoplay is blocked and the player lands
+    // in the armed-but-paused state. Absent the parameter, behaviour is
+    // unchanged. It is stripped alongside ?play= below.
     function processDeepLink() {
         var params = new URLSearchParams(window.location.search);
         var raw = params.get('play');
+        var wantLyrics = !!params.get('lyrics') && params.get('lyrics') !== '0';
         if (!raw) return;
         var file;
         try { file = decodeURIComponent(raw); } catch (_) { file = raw; }
@@ -665,9 +672,12 @@
         }
 
         P.play(file);
+        if (wantLyrics) P.openDrawer();
 
-        // Strip ?play= so refresh doesn't re-fire. Preserve any other params.
+        // Strip ?play= (and &lyrics=) so refresh doesn't re-fire. Preserve
+        // any other params.
         params.delete('play');
+        params.delete('lyrics');
         var qs = params.toString();
         var newUrl = window.location.pathname + (qs ? '?' + qs : '') + window.location.hash;
         try { history.replaceState(null, '', newUrl); } catch (_) {}
