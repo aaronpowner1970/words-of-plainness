@@ -34,6 +34,32 @@ discordChannelId: ""
         width: 58%;
     }
 }
+.articles-invitation {
+    margin: 1.75rem 0;
+    padding: 1.1rem 1.35rem;
+    border-left: 3px solid rgba(196, 148, 58, 0.55);
+    background: rgba(196, 148, 58, 0.06);
+    border-radius: 4px;
+}
+.articles-invitation p {
+    margin: 0 0 0.75rem;
+}
+.articles-invitation p:last-child {
+    margin-bottom: 0;
+}
+.articles-invitation-lead {
+    font-weight: 600;
+    color: #C4943A;
+    font-size: 1.06em;
+}
+.articles-invitation a {
+    text-decoration: underline;
+}
+@media (max-width: 600px) {
+    .articles-invitation {
+        padding: 0.9rem 1rem;
+    }
+}
 </style>
 
 {{ banner("a00", eager=true, cls="article-banner--opener") }}
@@ -42,6 +68,10 @@ discordChannelId: ""
     <h2 class="pw-heading">Introduction</h2>
     <p class="articles-epigraph"><em>"Pure religion and undefiled before God our Father is this…"</em></p>
     <p>These interfaith declarations grow from one plain trust — what unites us in Jesus Christ runs deeper than anything that divides us. These articles are not a formal creed of a single tradition, nor a blending of faiths into one, but a foundation of peaceful fellowship.</p>
+    <aside class="articles-invitation" aria-label="An invitation for readers who are not sure what they believe">
+        <p class="articles-invitation-lead">You do not have to believe in Jesus Christ to be welcome here.</p>
+        <p>We declare our faith in Him plainly here, but we ask nothing of you before you read on. If you are not ready to receive these Articles — or are not sure what you believe at all — there is a place to begin that does not start with declarations of shared faith. <a href="/studies/approaches-to-belief/">Approaches to Belief</a> sets out the compelling cases for theism, atheism, and agnosticism, each argued at its strongest, and asks only that you locate yourself truthfully. Begin there and come back when you like. Or read straight on, and bring your questions with you. Both doors are open, and you are welcome through either one.</p>
+    </aside>
     <div class="articles-prologue-video">
         <iframe
             src="https://www.youtube-nocookie.com/embed/OSyBTXbD15M"
