@@ -255,6 +255,22 @@ permalink: /
             font-size: 0.9rem;
             opacity: 0.75;
         }
+        .forum-start-here {
+            margin: 0 0 1rem;
+            font-size: 0.9rem;
+        }
+        .forum-start-here a {
+            color: var(--gold-light, #D4A84A);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(196, 148, 58, 0.45);
+            padding-bottom: 1px;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .forum-start-here a:hover,
+        .forum-start-here a:focus-visible {
+            color: var(--cream, #E8DCC4);
+            border-color: var(--cream, #E8DCC4);
+        }
         .gathering-pill { gap: 0.55rem; }
         .gathering-live-dot { display: none; }
         .gathering-pill.is-live .gathering-live-dot {
@@ -274,8 +290,13 @@ permalink: /
         }
     </style>
     <div class="featured-card forum-card">
-        <p class="featured-label">Live Gathering</p>
+        <p class="featured-label">Ministry Discord Server</p>
         <h3>The Christ-Centered Interfaith Forum</h3>
+        <p class="forum-start-here">
+            <a href="{{ gathering.startHereUrl }}"
+               target="_blank"
+               rel="noopener noreferrer">New here? Begin at #start-here &rarr;</a>
+        </p>
         <p class="forum-meta">Wednesdays &middot; 7:00 PM Mountain Time</p>
         <p>
             Once a week we gather live&mdash;seekers and saints at the same table&mdash;to
@@ -283,14 +304,15 @@ permalink: /
             the questions that matter most. Brother Aaron guides the conversation; you bring an
             honest heart. There is room here for you.
         </p>
+        {% if gathering.showJoinPill %}
         <a id="gatheringPill"
-           href="https://discord.gg/tNwADDjTRV"
+           href="{{ gathering.communityUrl }}"
            target="_blank"
            rel="noopener noreferrer"
            class="btn btn-primary gathering-pill"
-           data-live-href="https://discord.gg/UKEBz2YmdF"
+           data-live-href="{{ gathering.liveVoiceUrl }}"
            data-live-label="Live Now &mdash; Join the Gathering"
-           data-idle-href="https://discord.gg/tNwADDjTRV"
+           data-idle-href="{{ gathering.communityUrl }}"
            data-idle-label="Join the Community"
            aria-label="Join the Words of Plainness community on Discord">
             <span class="gathering-live-dot" aria-hidden="true"></span>
@@ -336,6 +358,7 @@ permalink: /
             one. More weekly times are opening as interest grows; come, and tell us what fits
             your week.
         </p>
+        {% endif %}
     </div>
 </section>
 

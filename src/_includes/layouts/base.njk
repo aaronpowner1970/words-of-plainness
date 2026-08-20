@@ -553,7 +553,7 @@
     }());
     </script>
 
-    {% if page.url == '/' %}
+    {% if page.url == '/' and gathering.showBadge %}
     <!-- =====================================================
          LIVE GATHERING BADGE  (homepage only)
          Floating / draggable link to the #gathering section.
@@ -716,7 +716,7 @@
     </script>
     {% endif %}
 
-    {% if page.url == '/articles/' %}
+    {% if page.url == '/articles/' and gathering.showBadge %}
     <!-- =====================================================
          LIVE GATHERING BADGE  (/articles/ only)
          Floating / draggable / dismissible link to the homepage
