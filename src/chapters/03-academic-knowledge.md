@@ -134,7 +134,7 @@ lyrics: |
   The world is organized in such complexity,<br>
   The Architect is found in every stone.<br>
   But even when survival needs are met,<br>
-  A hunger stays for something yet unknown.</p>
+  A hunger stays for something still unknown.</p>
 
   <p class="section"><strong>[Chorus]</strong></p>
   <p class="chorus">For truth is knowledge as things really are,<br>
@@ -157,15 +157,15 @@ lyrics: |
   Without the courage to truly believe.</p>
 
   <p class="section"><strong>[Bridge]</strong></p>
-  <p class="bridge">Now I'm standing at the edge of all my knowing,<br>
-  Looking out across the mist and rain.<br>
-  Reason is a candle in the wind<br>
+  <p class="bridge">Now I'm standing at the ceiling of the framework,<br>
+  Looking through the window at the rain.<br>
+  Reason is a shadow in the moonlight<br>
   If it cannot take away the pain.</p>
 
   <p class="section"><strong>[Build]</strong></p>
   <p class="verse">Why is there something rather than nothing at all?<br>
   Does who I am persist beyond the grave?<br>
-  I'm reaching for the sight that has been hidden,<br>
+  I'm reaching for the eyes that have been hidden,<br>
   For the spirit that the Savior came to save.</p>
 
   <p class="section"><strong>[Climax]</strong></p>

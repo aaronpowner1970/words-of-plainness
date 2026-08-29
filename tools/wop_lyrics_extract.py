@@ -10,10 +10,15 @@ Sources (both mine the same shape — a Nunjucks-friendly HTML fragment):
     src/chapters/*.{md,njk}        → frontmatter `lyrics:` field alongside
                                      audio.testimony.file
 
-Filter rules:
+Filter rules (denylist, not allowlist):
+    Every <p> is treated as sung EXCEPT those whose class is in NON_SUNG.
     <p class="section">…</p>   → NOT sung, dropped from aligner input
     <p class="verse">…</p>     → each <br>-separated line is one sung line
     <p class="chorus">…</p>    → each <br>-separated line is one sung line
+    <p class="bridge">…</p>    → each <br>-separated line is one sung line
+    Any other class is still treated as sung, and warns on stderr so a new
+    section type cannot silently disappear from the aligner input the way
+    .bridge once did.
     Whitespace collapsed; leading/trailing space stripped; blank lines dropped.
     HTML entities decoded; smart quotes preserved (aeneas + espeak handle
     them; whisperX doesn't care).
@@ -48,6 +53,18 @@ MANIFEST_PATH = OUT_DIR / "manifest.json"
 
 FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?\n)---\s*\n", re.DOTALL)
 
+# Paragraph classes that are NOT sung. Built from a survey of every
+# <p class=…> inside a lyrics: block across the repo: section (85 paras,
+# every one a bracketed [Verse 1]-style label), verse, chorus, bridge.
+NON_SUNG = {"section"}
+
+# Classes we already know are sung. Anything outside both sets is still
+# extracted, but warns - see extract_lines().
+KNOWN_SUNG = {"verse", "chorus", "bridge"}
+
+# Warn once per unrecognised class per run, not once per song.
+_warned_classes = set()
+
 
 def extract_lines(html):
     """Return a list of sung lines from a formatted-HTML lyrics fragment."""
@@ -55,15 +72,22 @@ def extract_lines(html):
         return []
     soup = BeautifulSoup(html, "html.parser")
     lines = []
-    # Only .verse and .chorus paragraphs carry sung content. .section is a
-    # non-sung label; anything without an explicit class we skip too, since
-    # the two source formats we see always classify the sung blocks.
+    # Denylist, not allowlist: a paragraph is sung unless its class says
+    # otherwise. An allowlist silently dropped .bridge for three songs, so a
+    # class we have not seen before is extracted AND warned about rather
+    # than discarded.
     for p in soup.find_all("p"):
         classes = p.get("class") or []
-        if "section" in classes:
+        if NON_SUNG.intersection(classes):
             continue
-        if not ("verse" in classes or "chorus" in classes):
-            continue
+        unknown = [c for c in classes if c not in KNOWN_SUNG]
+        if unknown or not classes:
+            label = ", ".join(unknown) if unknown else "(no class)"
+            if label not in _warned_classes:
+                _warned_classes.add(label)
+                print(f"  ! unrecognised lyric paragraph class {label!r} "
+                      f"- treating as sung; add it to NON_SUNG if it is not",
+                      file=sys.stderr)
         buf = []
         _walk(p, buf, lines)
         _flush(buf, lines)
