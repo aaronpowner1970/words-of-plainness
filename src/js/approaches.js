@@ -82,6 +82,13 @@ function go(n){
   save();
 }
 $('ab-prev').addEventListener('click',function(){go(i-1)});
+[].slice.call(app.querySelectorAll('[data-goto]')).forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var sec=a.dataset.goto;
+    for(var k=0;k<slides.length;k++){ if(slides[k].dataset.sec===sec){ closeToc(); go(k); return; } }
+  });
+});
 $('ab-next').addEventListener('click',function(){go(i+1)});
 document.addEventListener('keydown',function(e){
   var t=e.target.tagName;
@@ -134,13 +141,13 @@ bS.onclick=function(){setMode(false)}; bP.onclick=function(){setMode(true)};
 
 /* ---------- grids ---------- */
 var DATA={
- at:{n:'Agnostic Theist',d:'You believe in at least one God. You do not claim to know it.',
+ at:{n:'Agnostic Theist',d:'You believe that deity exists. You do not claim to know it.',
      a:'You believe without claiming to know. There may be more knowing in that than you have given yourself credit for.'},
- gt:{n:'Gnostic Theist',d:'You believe in at least one God, and you claim to know it.',
+ gt:{n:'Gnostic Theist',d:'You believe that deity exists, and you claim to know it.',
      a:'You claim to know. So do I. The question worth sitting with is how much — and whether certainty about God requires certainty about everything attached to Him.'},
- aa:{n:'Agnostic Atheist',d:'You lack belief in God. You do not claim to know that none exists.',
+ aa:{n:'Agnostic Atheist',d:'You do not believe that deity exists. You do not claim to know that none exists.',
      a:'You decline to claim knowledge you do not have. That is a discipline, not a deficiency — and it may be closer to Section 5 than you expect.'},
- ga:{n:'Gnostic Atheist',d:'You lack belief in God, and you claim to know that none exists.',
+ ga:{n:'Gnostic Atheist',d:'You do not believe that deity exists, and you claim to know that none exists.',
      a:'You claim knowledge of a universal negative. Applied evenly, would the standards you use elsewhere grant you that?'}
 };
 function quad(x,y){ return y<310?(x<310?'at':'gt'):(x<310?'aa':'ga'); }
@@ -217,6 +224,35 @@ function drawGhost(){
     L.style.display='';
   }
 }
+/* ---------- clearing placements ----------
+   Erase everything wiped the store but left both grids painted: markers, lit
+   quadrants, result panels, the ghost and the movement line all survived until
+   reload. resetGridUI() puts the SVGs back to their unplaced state; the global
+   erase and the grid-scoped reset both call it. ---------- */
+var HINT_A=$('ab-hintA').textContent, HINT_B=$('ab-hintB').textContent;
+function clearGridUI(tag){
+  var svg=$('ab-grid'+tag);
+  $('ab-'+tag+'-c1').setAttribute('cx',310); $('ab-'+tag+'-c1').setAttribute('cy',310);
+  $('ab-'+tag+'-c2').setAttribute('cx',310); $('ab-'+tag+'-c2').setAttribute('cy',310);
+  $('ab-'+tag+'-mk').classList.remove('ab-on');
+  svg.classList.remove('ab-chosen');
+  ['at','gt','aa','ga'].forEach(function(q){ $('ab-'+tag+'-'+q).classList.remove('ab-lit'); });
+  $('ab-res'+tag).classList.remove('ab-on');
+}
+function resetGridUI(){
+  clearGridUI('A'); clearGridUI('B');
+  $('ab-hintA').textContent=HINT_A; $('ab-hintB').textContent=HINT_B;
+  $('ab-ghost').style.display='none';
+  $('ab-movline').style.display='none';
+}
+$('ab-gridclr').onclick=function(){
+  ['preQ','preX','preY','postQ','postX','postY'].forEach(function(k){ delete store[k]; });
+  save(); resetGridUI();
+  var f=$('ab-gridclrfb');
+  f.textContent='Both placements cleared. Everything you wrote is untouched.';
+  f.classList.add('ab-on');
+};
+
 if(store.preX!=null){ restoreA(store.preX,store.preY); drawGhost(); }
 if(store.postX!=null){ restoreB(store.postX,store.postY); }
 
@@ -266,6 +302,8 @@ $('ab-pr').onclick=function(){ window.print(); };
 $('ab-clr').onclick=function(){
   store={}; try{localStorage.removeItem(KEY);}catch(e){}
   [].slice.call(app.querySelectorAll('[data-j]')).forEach(function(el){el.value='';});
+  resetGridUI();
+  $('ab-gridclrfb').classList.remove('ab-on');
   var f=$('ab-clrfb');
   f.textContent='Erased. Nothing remains in this browser.'; f.classList.add('ab-on');
 };
