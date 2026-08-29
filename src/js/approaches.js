@@ -145,9 +145,9 @@ var DATA={
      a:'You believe without claiming to know. There may be more knowing in that than you have given yourself credit for.'},
  gt:{n:'Gnostic Theist',d:'You believe that deity exists, and you claim to know it.',
      a:'You claim to know. So do I. The question worth sitting with is how much — and whether certainty about God requires certainty about everything attached to Him.'},
- aa:{n:'Agnostic Atheist',d:'You do not believe that deity exists. You do not claim to know that none exists.',
+ aa:{n:'Agnostic Atheist',d:'You do not believe that deity exists, and you do not claim to know that it does not.',
      a:'You decline to claim knowledge you do not have. That is a discipline, not a deficiency — and it may be closer to Section 5 than you expect.'},
- ga:{n:'Gnostic Atheist',d:'You do not believe that deity exists, and you claim to know that none exists.',
+ ga:{n:'Gnostic Atheist',d:'You do not believe that deity exists, and you claim to know that it does not.',
      a:'You claim knowledge of a universal negative. Applied evenly, would the standards you use elsewhere grant you that?'}
 };
 function quad(x,y){ return y<310?(x<310?'at':'gt'):(x<310?'aa':'ga'); }
@@ -214,8 +214,12 @@ function drawGhost(){
   var g=$('ab-ghost');
   $('ab-gh1').setAttribute('cx',store.preX);
   $('ab-gh1').setAttribute('cy',store.preY);
-  $('ab-ghlab').setAttribute('x',store.preX);
-  $('ab-ghlab').setAttribute('y',store.preY-20);
+  // The tag is a bordered pill now, so keep it inside the grid frame: its
+  // local box runs x -7..74, and a placement near the right edge would hang
+  // it off the board. Clamp inside the rotated pole labels (AGNOSTIC x 4-21,
+  // GNOSTIC x 599-616); the vertical offset never escapes the frame.
+  var ghx=Math.max(32,Math.min(521,store.preX));
+  $('ab-ghlabg').setAttribute('transform','translate('+ghx+','+(store.preY-20)+')');
   g.style.display='';
   if(store.postX!=null){
     var L=$('ab-movline');
