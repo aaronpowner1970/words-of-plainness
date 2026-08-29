@@ -22,7 +22,7 @@ audio:
     title: "Two Halves of a Whole"
     label: "Americana Folk"
     duration: "5:12"
-    description: "An Americana folk testimony on the unity of academic and spiritual knowledge"
+    description: "An Americana folk testimony that reason and revelation are two halves of a whole."
     alternates:
       - file: "03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3"
         lyricsUrl: /assets/lyrics/03_01_Two_Halves_of_a_Whole_Celtic_Ballad.vtt
