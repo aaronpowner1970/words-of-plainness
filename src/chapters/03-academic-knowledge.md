@@ -17,17 +17,17 @@ audio:
   overview: PO_03_01_Academic_Knowledge.mp3
   overviewDuration: "5:10"
   testimony:
-    file: 03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3
-    lyricsUrl: /assets/lyrics/03_01_Two_Halves_of_a_Whole_Celtic_Ballad.vtt
+    file: 03_02_Two_Halves_of_a_Whole_Americana_Folk.mp3
+    lyricsUrl: /assets/lyrics/03_02_Two_Halves_of_a_Whole_Americana_Folk.vtt
     title: "Two Halves of a Whole"
-    label: "Celtic Ballad"
-    duration: "5:53"
-    description: "A Celtic ballad testimony on the unity of academic and spiritual knowledge"
+    label: "Americana Folk"
+    duration: "5:12"
+    description: "An Americana folk testimony on the unity of academic and spiritual knowledge"
     alternates:
-      - file: "03_02_Two_Halves_of_a_Whole_Americana_Folk.mp3"
-        lyricsUrl: /assets/lyrics/03_02_Two_Halves_of_a_Whole_Americana_Folk.vtt
-        label: "Americana Folk"
-        duration: "5:12"
+      - file: "03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3"
+        lyricsUrl: /assets/lyrics/03_01_Two_Halves_of_a_Whole_Celtic_Ballad.vtt
+        label: "Celtic Ballad"
+        duration: "5:53"
       - file: "03_03_Two_Halves_of_a_Whole_Classical_Crossover.mp3"
         lyricsUrl: /assets/lyrics/03_03_Two_Halves_of_a_Whole_Classical_Crossover.vtt
         label: "Classical Crossover"
