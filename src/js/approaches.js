@@ -188,7 +188,7 @@ var restoreA=wire('A',function(k,x,y){
   $('ab-defA').textContent=d.d;
   $('ab-appA').textContent=d.a;
   $('ab-resA').classList.add('ab-on');
-  $('ab-hintA').textContent='Click again to move. Nothing is recorded beyond this browser.';
+  $('ab-hintAmsg').textContent='Click again to move. Nothing is recorded beyond this browser.';
   store.preQ=k; store.preX=x; store.preY=y; save();
 });
 
@@ -204,7 +204,7 @@ var restoreB=wire('B',function(k,x,y){
   }
   $('ab-moveB').textContent=msg;
   $('ab-resB').classList.add('ab-on');
-  $('ab-hintB').textContent='Click again to adjust.';
+  $('ab-hintBmsg').textContent='Click again to adjust.';
   store.postQ=k; store.postX=x; store.postY=y; save();
   drawGhost();
 });
@@ -229,7 +229,7 @@ function drawGhost(){
    quadrants, result panels, the ghost and the movement line all survived until
    reload. resetGridUI() puts the SVGs back to their unplaced state; the global
    erase and the grid-scoped reset both call it. ---------- */
-var HINT_A=$('ab-hintA').textContent, HINT_B=$('ab-hintB').textContent;
+var HINT_A=$('ab-hintAmsg').textContent, HINT_B=$('ab-hintBmsg').textContent;
 function clearGridUI(tag){
   var svg=$('ab-grid'+tag);
   $('ab-'+tag+'-c1').setAttribute('cx',310); $('ab-'+tag+'-c1').setAttribute('cy',310);
@@ -241,9 +241,25 @@ function clearGridUI(tag){
 }
 function resetGridUI(){
   clearGridUI('A'); clearGridUI('B');
-  $('ab-hintA').textContent=HINT_A; $('ab-hintB').textContent=HINT_B;
+  $('ab-hintAmsg').textContent=HINT_A; $('ab-hintBmsg').textContent=HINT_B;
   $('ab-ghost').style.display='none';
   $('ab-movline').style.display='none';
+}
+/* Erase everything clears the store, so the quiz and fork selections have to
+   come off the page too. The grid-scoped reset deliberately does NOT call this:
+   it clears placements only and leaves answers and reflections alone. */
+function resetAnswersUI(){
+  [].slice.call(app.querySelectorAll('.ab-opt')).forEach(function(o){
+    o.classList.remove('ab-sel','ab-right','ab-wrong');
+  });
+  [].slice.call(app.querySelectorAll('[data-fb]')).forEach(function(f){
+    f.classList.remove('ab-on');
+  });
+  [].slice.call(app.querySelectorAll('.ab-forkcard')).forEach(function(c){
+    c.classList.remove('ab-sel');
+  });
+  $('ab-forkExperiment').style.display='none';
+  $('ab-forkLong').style.display='none';
 }
 $('ab-gridclr').onclick=function(){
   ['preQ','preX','preY','postQ','postX','postY'].forEach(function(k){ delete store[k]; });
@@ -302,7 +318,7 @@ $('ab-pr').onclick=function(){ window.print(); };
 $('ab-clr').onclick=function(){
   store={}; try{localStorage.removeItem(KEY);}catch(e){}
   [].slice.call(app.querySelectorAll('[data-j]')).forEach(function(el){el.value='';});
-  resetGridUI();
+  resetGridUI(); resetAnswersUI();
   $('ab-gridclrfb').classList.remove('ab-on');
   var f=$('ab-clrfb');
   f.textContent='Erased. Nothing remains in this browser.'; f.classList.add('ab-on');
