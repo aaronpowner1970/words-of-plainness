@@ -1,0 +1,62 @@
+---
+layout: layouts/sjn.njk
+title: "Code It Yourself — Seeking Jesus of Nazareth"
+permalink: /seeking-jesus/code-it/
+description: "Twelve descriptions of God at a stated semantic floor. Decide whether the two traditions share, share differently, or differ, then compare your call with the project's coding and rationale."
+sjnModule: code-it
+sjnDraft: false
+draft: true
+eleventyExcludeFromCollections: true
+bodyClass: "sj-page"
+---
+{% from "macros/sjn.njk" import chip, witness %}
+{% set C = sjnClient %}
+{# M2 — twelve curated inherited rows spanning A, Q, and D (five A, five Q, two D). #}
+{% set curated = ["RNR-H01", "RNR-H05", "RNR-H14", "RNR-H26", "RNR-H46", "RNR-H03", "RNR-H22", "RNR-H37", "RNR-H45", "RNR-H52", "RNR-H42", "RNR-H57"] %}
+<section class="sj-section">
+  <div class="sj-wrap">
+    <span class="sj-eyebrow">Module 2</span>
+    <h1>Code It Yourself</h1>
+    <p class="sj-lede">Twelve descriptions of God. For each one you see the description at its stated semantic floor and the two texts that were compared. You decide the category first. Then the project’s code and its reasoning appear, and you can record where you would code differently.</p>
+    <p class="sj-note">Your codings stay in this browser. Disagreeing with the project is allowed and useful; the “I’d code this differently” notes are the kind of feedback that improves the map.</p>
+    <p class="sj-progress" id="sj-codeit-progress">0 of {{ curated | length }} coded</p>
+  </div>
+</section>
+
+<section class="sj-section">
+  <div class="sj-wrap">
+    {% for id in curated %}{% for p in C.predicates %}{% if p.id == id %}
+    <article class="sj-card sj-exercise" id="ex-{{ p.id }}" data-id="{{ p.id }}" data-code="{{ p.code }}">
+      <span class="sj-eyebrow">{{ p.id }} &middot; {{ p.family }} &middot; {{ p.mode }}</span>
+      <h2 style="color:var(--sj-text)">{{ p.predicate }}</h2>
+      <p class="sj-floor">{{ p.floor }}</p>
+      {{ witness(p) }}
+      <h4 style="margin-top:1rem">Your call</h4>
+      <p class="sj-mute">At this semantic floor, how do the two traditions relate?</p>
+      <div class="sj-choices" role="group" aria-label="Your coding">
+        <button type="button" class="sj-choice" data-code="A"><b>A &middot; Shared</b>Both affirm this of God in the same sense.</button>
+        <button type="button" class="sj-choice" data-code="Q"><b>Q &middot; Differently understood</b>Same word and concern, different picture behind it.</button>
+        <button type="button" class="sj-choice" data-code="D"><b>D &middot; Different</b>At the level intended, both cannot be true.</button>
+      </div>
+      <div class="sj-reveal">
+        <p class="sj-verdict"></p>
+        <p>{{ chip(p.code, C.code_labels, "lg") }} &nbsp; <em>{{ p.sentence }}</em></p>
+        <p><b>Project summary.</b> {{ p.summary }}</p>
+        <p class="sj-caution"><b>Rationale and caution.</b> {{ p.caution }}{% if p.scope and p.scope != p.caution %} {{ p.scope }}{% endif %}</p>
+        {% if p.vector %}<div class="sj-vector"><b>Multi-layer family</b>{{ p.vector.caption }}</div>{% endif %}
+        <p class="sj-meta">Confidence: {{ p.confidence }} &middot; {{ p.provenance }} &middot; <a href="/seeking-jesus/map/#{{ p.id }}">open on the map</a></p>
+        <label for="note-{{ p.id }}">I’d code this differently because…</label>
+        <textarea id="note-{{ p.id }}" placeholder="Optional. Say what the floor should be, or what the sources show."></textarea>
+        <div class="sj-btnrow">
+          <button type="button" class="sj-btn sj-btn--sm sj-save-note">Save note in this browser</button>
+          <button type="button" class="sj-btn sj-btn--sm sj-btn--ghost sj-to-journal">Copy to My Discipleship Journal</button>
+        </div>
+      </div>
+    </article>
+    {% endif %}{% endfor %}{% endfor %}
+    <div class="sj-btnrow">
+      <a class="sj-btn sj-btn--primary" href="/seeking-jesus/conversation/">Next: Conversation Builder</a>
+      <button type="button" class="sj-btn sj-btn--ghost" id="sj-codeit-clear">Clear my codings</button>
+    </div>
+  </div>
+</section>
