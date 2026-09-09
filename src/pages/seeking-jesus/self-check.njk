@@ -1,0 +1,100 @@
+---
+layout: layouts/sjn.njk
+title: "Self-check and Goals — Seeking Jesus of Nazareth"
+permalink: /seeking-jesus/self-check/
+description: "Rate your confidence before and after the study, set a goal or two, and keep them in your browser or in My Discipleship Journal."
+sjnModule: self-check
+sjnDraft: true
+draft: true
+eleventyExcludeFromCollections: true
+bodyClass: "sj-page"
+---
+{% set C = sjnClient %}
+{% set questions = [
+  { q: "agree", label: "I can name where my tradition and another Christian tradition genuinely agree about God." },
+  { q: "qualified", label: "I can explain a case where both traditions use the same word but mean something different." },
+  { q: "diverge", label: "I can state a real disagreement plainly, without caricaturing the other side." },
+  { q: "addition", label: "I can describe what the Restoration adds relative to the creeds without claiming it replaces them." },
+  { q: "numbers", label: "I can read a statistic about this comparison and say what it does not prove." },
+  { q: "charity", label: "I feel prepared to have this conversation with a friend from another tradition, charitably." }
+] %}
+{#
+  M6 — Self-check and goals. Descriptive only: before/after confidence on a 1–5 scale, shown side by
+  side; no aggregate score, no streaks. localStorage-first (sjn:selfcheck-*, sjn:goals); entries also
+  sync to My Discipleship Journal when a WoP account is signed in.
+#}
+<section class="sj-section">
+  <div class="sj-wrap">
+    <span class="sj-eyebrow">Module 4</span>
+    <h1>Self-check and goals</h1>
+    <p class="sj-lede">Two short check-ins and a place for goals. Nothing here is scored or ranked; the point is to see your own confidence change, and to decide what you will do with it.</p>
+  </div>
+</section>
+
+<section class="sj-section">
+  <div class="sj-wrap">
+    <h2>Before you begin</h2>
+    <p class="sj-mute">1 = not at all confident &middot; 5 = very confident</p>
+    {% for item in questions %}
+    <div class="sj-scale" data-phase="pre" data-q="{{ item.q }}">
+      <span>{{ item.label }}</span>
+      <span class="sj-scale-opts" role="radiogroup" aria-label="{{ item.label }} (before)">
+        {% for n in [1, 2, 3, 4, 5] %}<label><input type="radio" name="pre-{{ item.q }}" value="{{ n }}"><span>{{ n }}</span></label>{% endfor %}
+      </span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="sj-section">
+  <div class="sj-wrap">
+    <h2>After the study</h2>
+    <p class="sj-mute">Come back to this after the map, the coding exercise, and a conversation or two.</p>
+    {% for item in questions %}
+    <div class="sj-scale" data-phase="post" data-q="{{ item.q }}">
+      <span>{{ item.label }}</span>
+      <span class="sj-scale-opts" role="radiogroup" aria-label="{{ item.label }} (after)">
+        {% for n in [1, 2, 3, 4, 5] %}<label><input type="radio" name="post-{{ item.q }}" value="{{ n }}"><span>{{ n }}</span></label>{% endfor %}
+      </span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="sj-section">
+  <div class="sj-wrap">
+    <h2>Side by side</h2>
+    <table class="sj-compare">
+      <thead><tr><th>Statement</th><th>Before</th><th>After</th><th>Change</th></tr></thead>
+      <tbody>
+        {% for item in questions %}
+        <tr data-q="{{ item.q }}"><td class="c-label">{{ item.label }}</td><td class="c-pre">—</td><td class="c-post">—</td><td class="c-delta"></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="sj-btnrow">
+      <button type="button" class="sj-btn sj-btn--sm" id="sj-selfcheck-journal">Save self-check to My Discipleship Journal</button>
+    </div>
+  </div>
+</section>
+
+<section class="sj-section" id="goals">
+  <div class="sj-wrap">
+    <h2>Goals</h2>
+    <p>One or two is enough. A good goal names a person, a question, and a sentence you want to be able to say.</p>
+    <form class="sj-goalform" id="sj-goalform">
+      <label for="sj-goal-text">Goal</label>
+      <textarea id="sj-goal-text" placeholder="e.g. Ask my neighbor what ‘saved’ means to her, and say where we agree before I say where we differ."></textarea>
+      <label for="sj-goal-when">By when, or with whom (optional)</label>
+      <input type="text" id="sj-goal-when" placeholder="e.g. before Thanksgiving">
+      <div class="sj-btnrow"><button type="submit" class="sj-btn sj-btn--primary sj-btn--sm">Add goal</button></div>
+    </form>
+    <ul class="sj-goals" id="sj-goals"></ul>
+    <div class="sj-btnrow">
+      <button type="button" class="sj-btn sj-btn--sm" id="sj-goals-journal">Save goals to My Discipleship Journal</button>
+      <button type="button" class="sj-btn sj-btn--sm sj-btn--ghost" id="sj-export">Copy my whole record as text</button>
+      <button type="button" class="sj-btn sj-btn--sm sj-btn--ghost" id="sj-wipe">Erase everything stored in this browser</button>
+    </div>
+    <p class="sj-note">Signed in to a Words of Plainness account? Journal entries sync to <a href="/my-reflections/">My Discipleship Journal</a>. Not signed in? They stay in this browser and sync the next time you sign in.</p>
+  </div>
+</section>
