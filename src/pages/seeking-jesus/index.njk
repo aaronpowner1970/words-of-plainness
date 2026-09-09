@@ -1,0 +1,205 @@
+---
+layout: layouts/sjn.njk
+title: "Seeking Jesus of Nazareth"
+permalink: /seeking-jesus/
+description: "Common faith, real differences, and the Restoration: an interactive map comparing fifty-seven historic descriptions of God with Latter-day Saint teaching, with sources for every claim."
+sjnModule: orientation
+sjnDraft: true
+draft: true
+eleventyExcludeFromCollections: true
+bodyClass: "sj-page"
+---
+{% from "macros/sjn.njk" import stat, chip, stackedBar, twoBars %}
+{#
+  M0 — Orientation. Learner copy transcribed from WoP_SJN_Orientation_Copy_M0_Draft1_20260909.md
+  (Cowork draft 1, AUTHOR_REVIEW). Chicago em-dashes applied per site style law. Every number
+  on this page is rendered from sjnClient (build-time derivation of the pipeline output).
+#}
+{% set C = sjnClient %}
+{% set hazardCopy = [
+  { code: "SLOGAN_COMPRESSION", name: "Slogan compression.", text: "A short phrase is true but leaves out the distinction you need.", ex: "“Faith alone.” “After all we can do.”" },
+  { code: "SAME_WORD_DIFFERENT_MEANING", name: "Same word, different meaning.", text: "Two traditions use one term with different content.", ex: "“Spirit.” “Saved.”" },
+  { code: "APPARENT_CONTRADICTION", name: "Apparent contradiction.", text: "Two teachings look inconsistent until you separate the layers they belong to.", ex: "" },
+  { code: "ECCLESIAL_VS_SOTERIOLOGICAL", name: "Church standing vs. standing before God.", text: "A church’s judgment about membership is mistaken for God’s judgment of a soul.", ex: "" },
+  { code: "SOURCE_SILENCE_VS_DENIAL", name: "Silence vs. denial.", text: "A source that does not mention something is treated as rejecting it.", ex: "" },
+  { code: "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE", name: "Precedent vs. equivalence.", text: "An ancient idea that resembles a modern teaching is treated as identical to it.", ex: "" },
+  { code: "RELATIONAL_VS_METAPHYSICAL", name: "Relational vs. metaphysical.", text: "Language about relationship is read as a claim about substance, or the reverse.", ex: "" },
+  { code: "FAMILY_VARIATION", name: "One family, many voices.", text: "A whole tradition is treated as a single uniform body.", ex: "" },
+  { code: "AUTHORITY_SCOPE", name: "Whose authority, how far.", text: "One document or institution is taken to speak for a wider communion than it does.", ex: "" },
+  { code: "SEMANTIC_FLOOR", name: "The semantic floor.", text: "A broad label is read as a thicker claim than the comparison actually tested.", ex: "" }
+] %}
+
+<section class="sj-section sj-hero" id="welcome">
+  <div class="sj-wrap">
+    <span class="sj-eyebrow">Orientation</span>
+    <h1>Seeking Jesus of Nazareth</h1>
+    <p class="sj-lede"><em>Common faith, real differences, and the Restoration—a map you can inspect.</em></p>
+    <p>Christians who look to Jesus of Nazareth for salvation describe God in remarkably similar words and, in a few important places, in very different ones. This study lets you see where. It compares {{ C.counts.inherited }} ways the historic creeds and confessions describe God with what the Restoration teaches, one statement at a time, and it shows its sources for every claim.</p>
+    <p>It is not a contest. Nothing here will tell you which church is true. It will help you say, with precision and charity, where two traditions genuinely agree, where they share a concern but mean it differently, where they directly disagree, and where one of them makes a claim the other does not.</p>
+  </div>
+</section>
+
+<section class="sj-section" id="commitments">
+  <div class="sj-wrap">
+    <h2>Five commitments</h2>
+    <p>Before you begin, this study makes five promises, and it asks you to make them too.</p>
+    <ol class="sj-commitments">
+      <li><b>We will not mock other Christians.</b> Every tradition on this map is described in its own words, from its own official sources.</li>
+      <li><b>We will not hide real differences.</b> Where two traditions disagree, the map says so plainly and shows the texts.</li>
+      <li><b>We will not confuse similar words with identical meanings.</b> “Creator” is confessed by everyone here; what lies behind the word is not always the same.</li>
+      <li><b>We will not confuse unity with uniformity.</b> Shared devotion to Christ does not require agreement on every doctrine.</li>
+      <li><b>We will seek both truth and charity.</b> Accuracy without kindness wounds; kindness without accuracy deceives.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="sj-section" id="lens">
+  <div class="sj-wrap">
+    <h2>Choose your starting point</h2>
+    <p>Everyone sees the same map, the same sources, and the same numbers. Your starting point only changes which conversations are practiced first and which side of the table you are asked to imagine.</p>
+    <div class="sj-lensgrid" role="group" aria-label="Starting point">
+      <button type="button" class="sj-lensbtn" data-lens="latter_day_saint"><span class="sj-lensbtn-t">I come from a Latter-day Saint background.</span><span class="sj-lensbtn-s">Practice answering questions other Christians ask.</span></button>
+      <button type="button" class="sj-lensbtn" data-lens="other_christian"><span class="sj-lensbtn-t">I come from another Christian tradition.</span><span class="sj-lensbtn-s">Practice answering questions Latter-day Saints ask.</span></button>
+      <button type="button" class="sj-lensbtn" data-lens="exploring"><span class="sj-lensbtn-t">I’m exploring.</span><span class="sj-lensbtn-s">See both directions.</span></button>
+    </div>
+    <p class="sj-mute">You can change this at any time. Your choice is stored only in this browser.</p>
+  </div>
+</section>
+
+<section class="sj-section" id="what-57">
+  <div class="sj-wrap">
+    <h2>What “{{ C.counts.inherited }}” means</h2>
+    <p>The map’s core is {{ C.counts.inherited }} <b>descriptions of God</b> drawn from the Apostles’, Nicene, and Athanasian Creeds, the Fourth Lateran Council, the Augsburg Confession, the Thirty-Nine Articles, the Westminster Confession, and other historic formularies: God is living, true, Father, almighty, merciful, invisible, without body, unchangeable, and so on. Each description was compared with authoritative Latter-day Saint teaching and placed in one of three categories.</p>
+    <p>These are descriptions of God, not a list of every Christian doctrine. The map does not count teachings about the Church, sacraments, salvation, or the end of the world, and it does not by itself decide the question of the Trinity—which has its own panel below. {{ C.counts.additions }} additional Restoration teachings, mostly about who human beings are and what they may become, are counted separately because they do not appear in the creeds at all.</p>
+    {{ twoBars(C.counts) }}
+  </div>
+</section>
+
+<section class="sj-section" id="categories">
+  <div class="sj-wrap">
+    <h2>The four categories, in plain words</h2>
+    <table class="sj-cattable">
+      <thead><tr><th>On the map</th><th>What it means</th><th>The sentence you can say</th></tr></thead>
+      <tbody>
+        <tr><td>{{ chip("A", C.code_labels, "lg") }}</td><td>Both traditions affirm this of God in the same sense.</td><td><em>{{ C.four_clause.A }}</em></td></tr>
+        <tr><td>{{ chip("Q", C.code_labels, "lg") }}</td><td>Both use the word and share the concern, but the picture behind it differs—the <em>how</em> or the <em>what kind</em>.</td><td><em>{{ C.four_clause.Q }}</em></td></tr>
+        <tr><td>{{ chip("D", C.code_labels, "lg") }}</td><td>At the level the creeds intend, the two teachings cannot both be true.</td><td><em>{{ C.four_clause.D }}</em></td></tr>
+        <tr><td>{{ chip("ADDITION", C.code_labels, "lg") }}</td><td>A teaching the creeds and confessions studied do not contain as a positive doctrine.</td><td><em>{{ C.four_clause.ADDITION }}</em></td></tr>
+      </tbody>
+    </table>
+    <p>Those four sentences are the whole method. Every card on the map resolves to one of them, and every conversation you practice here ends with you able to say which.</p>
+    {{ stackedBar(C.counts) }}
+    <p class="sj-mute"><span class="sj-nl-swatch"></span> Where a source has not been located for a tradition, the map shows a hatched gap, never a colored tile. A gap is not a denial.</p>
+  </div>
+</section>
+
+<section class="sj-section" id="numbers">
+  <div class="sj-wrap">
+    <h2>How to read the numbers</h2>
+    <p>Every statistic on this site shows three things: the <b>count</b>, the <b>percentage</b>, and, where the research supports one, the <b>range</b> it moves within when the coding is weighted for how central a doctrine is. All three carry a <em>provisional</em> mark. For example:</p>
+    {{ stat(C.stats.shared_floor_A_plus_Q, "inherited descriptions share a conceptual floor (Shared + Shared, differently understood)") }}
+    <div class="sj-grid" style="margin-top:.6rem">
+      <div>{{ stat(C.stats.strict_A, "affirmed in the same sense") }}</div>
+      <div>{{ stat(C.stats.direct_D, "directly different") }}</div>
+    </div>
+    <p>The coding was done inside this project and has not yet been independently replicated by outside scholars. The numbers describe this bounded comparison; they do not measure “Christianity,” and they never rank one denomination as closer or farther than another. The site will not show you a denomination ranking, because the evidence is not complete enough to support one honestly.</p>
+  </div>
+</section>
+
+<section class="sj-section" id="hazards">
+  <div class="sj-wrap">
+    <h2>Ten ways a comparison goes wrong</h2>
+    <p>The map is only as good as the reader. These are the ten mistakes it is built to help you avoid. Each has a name; the Clarifications explorer uses them as labels.</p>
+    <ol class="sj-hazards">
+      {% for h in hazardCopy %}
+      <li><b>{{ h.name }}</b> {{ h.text }}{% if h.ex %} <em>{{ h.ex }}</em>{% endif %}<small>{{ h.code }}</small></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="sj-section" id="godhead">
+  <div class="sj-wrap">
+    <h2>The Godhead and the Trinity</h2>
+    <p class="sj-note">This panel is explanatory context. It is <b>not counted</b> in the {{ C.counts.inherited }} descriptions and never changes a denominator.</p>
+    <p>The {{ C.counts.inherited }} descriptions are about God’s attributes. They do not, by themselves, settle the question most people ask first: is God one being in three persons, or three persons one in purpose? That question belongs to the structure of the Godhead, and this panel addresses it directly, outside the count.</p>
+    <div class="sj-godhead-diagram">
+      <svg class="sj-diagram" viewBox="0 0 360 300" role="img" aria-label="Creedal Shield of the Trinity: the Father is God, the Son is God, the Holy Spirit is God; the Father is not the Son, the Son is not the Spirit, the Spirit is not the Father.">
+        <text x="180" y="24" class="cap">CREEDAL SHIELD OF THE TRINITY</text>
+        <line x1="180" y1="78" x2="72" y2="236" class="ed"/><line x1="180" y1="78" x2="288" y2="236" class="ed"/><line x1="72" y1="236" x2="288" y2="236" class="ed"/>
+        <text x="112" y="150" class="ld" transform="rotate(-56 112 150)">is not</text><text x="250" y="150" class="ld" transform="rotate(56 250 150)">is not</text><text x="180" y="230" class="ld">is not</text>
+        <line x1="180" y1="78" x2="180" y2="150" class="e"/><line x1="72" y1="236" x2="180" y2="150" class="e"/><line x1="288" y1="236" x2="180" y2="150" class="e"/>
+        <text x="196" y="118" class="l" text-anchor="start">is</text><text x="120" y="204" class="l">is</text><text x="242" y="204" class="l">is</text>
+        <circle cx="180" cy="150" r="30" class="g"/><text x="180" y="155" class="tg">GOD</text>
+        <circle cx="180" cy="60" r="30" class="n"/><text x="180" y="65" class="t">Father</text>
+        <circle cx="72" cy="248" r="30" class="n"/><text x="72" y="253" class="t">Son</text>
+        <circle cx="288" cy="248" r="30" class="n"/><text x="288" y="245" class="t">Holy</text><text x="288" y="261" class="t">Spirit</text>
+      </svg>
+      <svg class="sj-diagram" viewBox="0 0 360 300" role="img" aria-label="Latter-day Saint Godhead: the Father, the Son, and the Holy Ghost are each divine and together are one Godhead; each is a separate being; the Father presides.">
+        <text x="180" y="24" class="cap">LATTER-DAY SAINT GODHEAD</text>
+        <rect x="30" y="92" width="300" height="196" rx="18" fill="none" stroke="#C4943A" stroke-dasharray="7 6" stroke-width="2"/>
+        <text x="180" y="278" class="l">one Godhead · one in purpose · three separate beings</text>
+        <line x1="180" y1="118" x2="180" y2="170" class="e"/><line x1="90" y1="228" x2="152" y2="188" class="e"/><line x1="270" y1="228" x2="208" y2="188" class="e"/>
+        <text x="196" y="148" class="l" text-anchor="start">is divine</text><text x="102" y="200" class="l">is divine</text><text x="258" y="200" class="l">is divine</text>
+        <circle cx="180" cy="176" r="24" class="g"/><text x="180" y="181" class="tg">DIVINE</text>
+        <circle cx="180" cy="100" r="30" class="n"/><text x="180" y="105" class="t">Father</text>
+        <rect x="150" y="56" width="60" height="18" rx="9" class="badge"/><text x="180" y="69" class="badget">PRESIDES</text>
+        <circle cx="90" cy="240" r="30" class="n"/><text x="90" y="245" class="t">Son</text>
+        <circle cx="270" cy="240" r="30" class="n"/><text x="270" y="237" class="t">Holy</text><text x="270" y="253" class="t">Ghost</text>
+      </svg>
+    </div>
+    <p class="sj-mute">On the left, the creedal Shield of the Trinity: the Father is God, the Son is God, the Holy Spirit is God; the Father is not the Son, the Son is not the Spirit, the Spirit is not the Father. On the right, the Latter-day Saint Godhead: the Father, the Son, and the Holy Ghost are each divine and together are one Godhead; each is a separate being; the Father presides, and prayer is offered to the Father in the name of the Son. The one counted description that touches this structure—“neither confounding the persons nor dividing the substance”—is coded <em>shared, but differently understood</em> (<a href="/seeking-jesus/map/#RNR-H56">RNR-H56</a>).</p>
+    <div class="sj-godhead">
+      {% for g in C.godhead %}
+      <div class="sj-card">
+        <span class="sj-eyebrow">{{ g.id }} &middot; not counted</span>
+        <p><b>{{ g.proposition }}</b></p>
+        <p class="sj-caution">{{ g.caution }}</p>
+        <p class="sj-meta">{% if g.historic_url %}<a href="{{ g.historic_url }}" target="_blank" rel="noopener">{{ g.historic_source }}</a>{% else %}{{ g.historic_source }}{% endif %} &middot; <a href="{{ g.restoration_url }}" target="_blank" rel="noopener">{{ g.restoration_source }}</a></p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sj-section" id="clarifications">
+  <div class="sj-wrap">
+    <h2>About the Clarifications explorer</h2>
+    <p>Some misunderstandings are not about any single description of God. They come from a slogan, a shared word, or a difference in how a tradition governs itself. The Clarifications explorer holds short cases that untangle those—the first two are a Baptist case and a Latter-day Saint case on the same fault line, faith and works. These cases reach beyond the {{ C.counts.inherited }} descriptions, they are never counted, and a case appears automatically only once per view and only when it is relevant to what you are reading.</p>
+    <div class="sj-grid">
+      {% for cs in C.clarifications.cases %}
+      <details class="sj-card">
+        <summary>{{ cs.title }} <span class="sj-mute">({{ cs.tradition }})</span></summary>
+        <p><b>{{ cs.question }}</b></p>
+        <p>{{ cs.distinction }}</p>
+        <p>{{ cs.resolution }}</p>
+        <p class="sj-caution"><b>What this case does not prove.</b> {{ cs.does_not_prove }}</p>
+        <p class="sj-sources">Sources: {% for src in cs.sources %}<a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.document }}{% if src.locator %}, {{ src.locator }}{% endif %}</a>{% if not loop.last %} &middot; {% endif %}{% endfor %}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sj-section" id="how-made">
+  <div class="sj-wrap">
+    <h2>How this map was made</h2>
+    <div class="sj-provenance">
+      <p>This study was prepared by Aaron J. Powner for Words of Plainness Ministry. Historic descriptions of God were drawn from official creeds, councils, confessions, and catechisms, and every citation links to the text on the publishing tradition’s own site; every quoted phrase is checked against that text each time the site is built. Latter-day Saint comparators are drawn from canonized scripture, official Church publications, and General Conference addresses, with the source level shown on each card.</p>
+      <p>The classification of each description was carried out within this project with the assistance of an AI system, then reviewed and ratified line by line by the author. The results are internally consistent but have not yet been independently replicated by outside scholars, and they are labeled <em>provisional</em> wherever they appear. A denomination-by-denomination view exists in the research files but is withheld from this site until its evidence is complete enough to display fairly.</p>
+      <p class="sj-meta">Data version {{ C.version }} &middot; {{ C.counts.inherited }} inherited descriptions, {{ C.counts.additions }} Restoration additions &middot; pipeline run {{ C.run_at }} &middot; corrections are welcome through the <a href="/connect/">connect page</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sj-section" id="modules">
+  <div class="sj-wrap">
+    <h2>Begin</h2>
+    <div class="sj-modcards">
+      <a class="sj-modcard" href="/seeking-jesus/map/"><b>1 &middot; The Map</b><span>All {{ C.predicates | length }} descriptions, with sources, filters, and the sentence each one resolves to.</span></a>
+      <a class="sj-modcard" href="/seeking-jesus/code-it/"><b>2 &middot; Code It Yourself</b><span>Twelve descriptions. You decide the category first; then compare your call with the project’s.</span></a>
+      <a class="sj-modcard" href="/seeking-jesus/conversation/"><b>3 &middot; Conversation Builder</b><span>Ten real conversations, five from each side of the table, each resolved to the four sentences.</span></a>
+      <a class="sj-modcard" href="/seeking-jesus/self-check/"><b>4 &middot; Self-check and goals</b><span>Where you stand before and after, and what you will do with it.</span></a>
+    </div>
+  </div>
+</section>
