@@ -1,0 +1,36 @@
+{
+  "_purpose": "Pipeline-side corrections to quoted phrases whose workbook wording does not occur verbatim inside the cited locator on the live source. Each entry is a transcription correction (the source text itself), NOT a research-code, locator, or comparator change. Every override is logged in meta.json (phrase_overrides) and must be incorporated into the next controlled workbook version, after which the entry is deleted. Delete an entry to make the pipeline refuse again.",
+  "_authority": "Gate 2 pipeline session, Claude Code, 2026-09-09. Author (AJP) to ratify or reject; see handoff.",
+  "overrides": [
+    {
+      "kind": "CASE-STUDY",
+      "key": "Q-033",
+      "field": "phrase",
+      "workbook_value": "the only begotten Son of God, Jesus Christ",
+      "override_value": "Jesus Christ, the only begotten Son of God made flesh",
+      "source_reading": "Lateran IV, Canon 1 (Fordham sourcebook): “And finally, Jesus Christ, the only begotten Son of God made flesh by the entire Trinity…”",
+      "reason": "Workbook phrase inverts the word order; the inverted form does not occur inside Canon 1 on the cited witness.",
+      "verified": "2026-09-09 live fetch, CANON 1 block"
+    },
+    {
+      "kind": "CASE-STUDY",
+      "key": "Q-173",
+      "field": "phrase",
+      "workbook_value": "Maker and Preserver of all things both visible and invisible",
+      "override_value": "the Maker, and Preserver of all things both visible and invisible",
+      "source_reading": "Thirty-Nine Articles, Article I (churchofengland.org): “…the Maker, and Preserver of all things both visible and invisible.”",
+      "reason": "Workbook phrase omits the comma after ‘Maker’ present in the authorized text; normalization does not strip punctuation.",
+      "verified": "2026-09-09 live fetch, Article I block"
+    },
+    {
+      "kind": "CASE-STUDY",
+      "key": "Q-174",
+      "field": "phrase",
+      "workbook_value": "Creator of the universe",
+      "override_value": "Creator, Redeemer, Preserver, and Ruler of the universe",
+      "source_reading": "Baptist Faith and Message 2000, II. God: “…the Creator, Redeemer, Preserver, and Ruler of the universe.”",
+      "reason": "‘Creator of the universe’ is not a contiguous phrase in BF&M II; the full attribute series is.",
+      "verified": "2026-09-09 live fetch, Article II block"
+    }
+  ]
+}

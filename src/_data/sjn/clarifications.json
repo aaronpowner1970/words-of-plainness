@@ -1,0 +1,858 @@
+{
+  "app_master_version": "v2.16 H37 OCA SOURCE",
+  "canonical_hash": "0055602d54ce37e07673d93d30b1b4a81efb8714b13788246e72e676a87395d6",
+  "policy": {
+    "clarification_layer_enabled": true,
+    "clarification_case_sheet": "Interpretive Clarifications",
+    "clarification_trigger_sheet": "Clarification Trigger Map",
+    "clarification_vocabulary_sheet": "Clarification Vocabulary",
+    "clarification_source_sheet": "Clarification Sources",
+    "clarification_counted": false,
+    "clarification_default_behavior": "AUTO_CUE_MANUAL_EXPANSION",
+    "clarification_auto_priority_threshold": "HIGH",
+    "clarification_max_auto_cues_per_view": 1,
+    "clarification_auto_requires_approved_case": true,
+    "clarification_tradition_alone_auto_trigger": false,
+    "clarification_manual_explorer_enabled": true,
+    "clarification_assistant_authority_rule": "APPROVED_CASE preferred when matched",
+    "clarification_runtime_mode": "DETERMINISTIC_ONLY",
+    "clarification_anchor_rule": "THREE_WAY (counted predicate | Godhead proposition | declared explorer category)",
+    "clarification_hazards_in_orientation": "ALL_TEN_PLAIN_LANGUAGE",
+    "clarification_release_policy": "LENS_BALANCED_PAIR",
+    "clarification_v1_case_cap": "6",
+    "clarification_intake_rule": "OBSERVED_MISUNDERSTANDING",
+    "enabled": true
+  },
+  "cases": [
+    {
+      "id": "ICC-001",
+      "public_title": "Faith Alone, but Not Faith Without Fruit",
+      "short_label": "Baptist sola fide and church discipline",
+      "case_type": "APPARENT_TENSION_RESOLUTION",
+      "primary_tradition_family": "Baptist",
+      "subtradition_scope": "Southern Baptist + confessional/Reformed Baptist core; Free Will Baptist variation note",
+      "counted": false,
+      "quantitative_impact": "NONE — NOT COUNTED",
+      "primary_hazard": "SLOGAN_COMPRESSION",
+      "additional_hazards": [
+        "APPARENT_CONTRADICTION",
+        "ECCLESIAL_VS_SOTERIOLOGICAL",
+        "FAMILY_VARIATION"
+      ],
+      "auto_priority": "HIGH",
+      "display_mode": "AUTO_CUE_MANUAL_EXPANSION",
+      "max_auto_cues": 1,
+      "review_state": "APPROVED",
+      "app_availability": "HOLD — LENS BALANCE (awaiting ICC-002)",
+      "answer_authority": "APPROVED_CASE",
+      "public_release": false,
+      "release_hold_reason": "HOLD — LENS BALANCE (awaiting ICC-002)",
+      "learner_question": "If Baptists teach justification by faith alone, why can persistent sin or heresy result in church discipline or excommunication?",
+      "key_distinction": "Distinguish justification/standing before God from the congregation's judgment of visible profession, discipleship, and membership.",
+      "resolution_summary": "In Southern and confessional/Reformed Baptist theology, works do not merit justification. Repentance, sanctification, perseverance, and obedience are expected fruits/evidences of regeneration. Church discipline therefore addresses visible profession and ecclesial fellowship rather than functioning as a church cancellation of God's justification.",
+      "internal_variation": "Southern and confessional/Reformed Baptists typically resolve the tension through perseverance and evidentiary fruit. Free Will Baptists likewise deny salvation by works but allow that a genuinely saved person may later make shipwreck of faith and be lost.",
+      "interfaith_significance": "The case shows why 'faith alone' is not equivalent to 'conduct does not matter.' It reveals substantial shared Christian concern for repentance, holiness, perseverance, accountability, and discipleship while preserving real differences in the theology of justification and security.",
+      "does_not_prove": "It does not make Baptist and Latter-day Saint soteriology identical; it does not claim all Baptists share one perseverance model; and it does not treat excommunication as a direct determination of God's hidden judgment of regeneration.",
+      "learner_cue_copy": "How can faith alone and church discipline both fit Baptist theology? See the distinction.",
+      "explorer_category": "Salvation & discipleship",
+      "anchor": {
+        "type": "explorer_category",
+        "value": "Salvation & discipleship",
+        "related_predicate_ids": []
+      },
+      "author": {
+        "case": "RESOLVED",
+        "cue": "RESOLVED",
+        "notes": "AJP 2026-09-09: content approved (AUTH-ICC-001-CASE opt 1); cue = question form (AUTH-ICC-001-CUE opt 1); anchor = explorer category per AUTH-ARCH-003; release held for ICC-002 per AUTH-ARCH-005."
+      },
+      "sources": [
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-001",
+          "role": "ICC-001",
+          "url": "https://bfm.sbc.net/bfm2000/",
+          "locator": "Article IV — Salvation",
+          "document": "Baptist Faith and Message 2000",
+          "phrase": "Repentance and faith are inseparable experiences of grace",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "SECTION-SCOPED",
+          "scope_note": "BF&M IV",
+          "scoped_chars": 2203,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 8,
+          "claim_supported": "Saving response includes inseparable repentance and faith; sanctification follows regeneration.",
+          "source_role": "CURRENT_INSTITUTIONAL",
+          "institution": "Southern Baptist Convention",
+          "subtradition_scope": "Southern Baptist",
+          "authority_note": "Current SBC confession / cooperative doctrinal standard.",
+          "current": "YES",
+          "period": "2000"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-002",
+          "role": "ICC-001",
+          "url": "https://bfm.sbc.net/bfm2000/",
+          "locator": "Article V — God's Purpose of Grace",
+          "document": "Baptist Faith and Message 2000",
+          "phrase": "All true believers endure to the end",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "SECTION-SCOPED",
+          "scope_note": "BF&M V",
+          "scoped_chars": 1385,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 7,
+          "claim_supported": "Southern Baptist perseverance/eternal-security model.",
+          "source_role": "CURRENT_INSTITUTIONAL",
+          "institution": "Southern Baptist Convention",
+          "subtradition_scope": "Southern Baptist",
+          "authority_note": "Current SBC confession / cooperative doctrinal standard.",
+          "current": "YES",
+          "period": "2000"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-003",
+          "role": "ICC-001",
+          "url": "https://www.sbc.net/resource-library/resolutions/resolution-on-southern-baptists-and-roman-catholics/",
+          "locator": "1994 Annual Meeting resolution",
+          "document": "Resolution on Southern Baptists and Roman Catholics",
+          "phrase": "by grace alone through faith alone in Christ alone",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "DOCUMENT-IS-LOCATOR",
+          "scope_note": "resolution body (WHEREAS/RESOLVED clauses)",
+          "scoped_chars": 4584,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 9,
+          "claim_supported": "Explicit Southern Baptist faith-alone formulation.",
+          "source_role": "CURRENT_INSTITUTIONAL",
+          "institution": "Southern Baptist Convention",
+          "subtradition_scope": "Southern Baptist",
+          "authority_note": "Convention resolution; expression of SBC messengers, not a local-church magisterium.",
+          "current": "YES",
+          "period": "1994"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-004",
+          "role": "ICC-001",
+          "url": "https://www.sbc.net/resource-library/resolutions/on-integrity-in-sbc-leadership/",
+          "locator": "2024 Annual Meeting resolution",
+          "document": "On Integrity in SBC Leadership",
+          "phrase": "subject those in unrepentant sin to church discipline",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "DOCUMENT-IS-LOCATOR",
+          "scope_note": "resolution body (WHEREAS/RESOLVED clauses)",
+          "scoped_chars": 5203,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 8,
+          "claim_supported": "Contemporary SBC affirmation of church discipline for unrepentant sin.",
+          "source_role": "ECCLESIAL_PRACTICE",
+          "institution": "Southern Baptist Convention",
+          "subtradition_scope": "Southern Baptist",
+          "authority_note": "Convention resolution; local churches remain autonomous.",
+          "current": "YES",
+          "period": "2024"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-005",
+          "role": "ICC-001",
+          "url": "https://www.the1689confession.com/1689/chapter-11",
+          "locator": "Chapter 11, paragraph 2",
+          "document": "Second London Baptist Confession (1689)",
+          "phrase": "the alone instrument of justification",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "PARAGRAPH-SCOPED",
+          "scope_note": "1689 paragraph 2",
+          "scoped_chars": 302,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 5,
+          "claim_supported": "Faith is the sole instrument of justification in the historic confession.",
+          "source_role": "HISTORICAL_CONFESSIONAL",
+          "institution": "Particular / Reformed Baptist",
+          "subtradition_scope": "Confessional Baptist",
+          "authority_note": "Historical confessional witness; not a current universal Baptist standard.",
+          "current": "HISTORICAL",
+          "period": "1689"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-006",
+          "role": "ICC-001",
+          "url": "https://www.the1689confession.com/1689/chapter-11",
+          "locator": "Chapter 11, paragraph 2",
+          "document": "Second London Baptist Confession (1689)",
+          "phrase": "yet is not alone in the person justified",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "PARAGRAPH-SCOPED",
+          "scope_note": "1689 paragraph 2",
+          "scoped_chars": 302,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 8,
+          "claim_supported": "Justifying faith is accompanied by saving graces and works by love.",
+          "source_role": "HISTORICAL_CONFESSIONAL",
+          "institution": "Particular / Reformed Baptist",
+          "subtradition_scope": "Confessional Baptist",
+          "authority_note": "Historical confessional witness; semantic complement to ICS-005.",
+          "current": "HISTORICAL",
+          "period": "1689"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-007",
+          "role": "ICC-001",
+          "url": "https://www.the1689confession.com/1689/chapter-26",
+          "locator": "Chapter 26, paragraph 2",
+          "document": "Second London Baptist Confession (1689)",
+          "phrase": "not destroying their own profession",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "PARAGRAPH-SCOPED",
+          "scope_note": "1689 paragraph 2",
+          "scoped_chars": 399,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 5,
+          "claim_supported": "Visible sainthood/church membership is tied to a credible profession not destroyed by foundational error or unholy living.",
+          "source_role": "HISTORICAL_CONFESSIONAL",
+          "institution": "Particular / Reformed Baptist",
+          "subtradition_scope": "Confessional Baptist",
+          "authority_note": "Historical ecclesiology witness.",
+          "current": "HISTORICAL",
+          "period": "1689"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-008",
+          "role": "ICC-001",
+          "url": "https://www.the1689confession.com/1689/chapter-26",
+          "locator": "Chapter 26, paragraph 7",
+          "document": "Second London Baptist Confession (1689)",
+          "phrase": "order in worship and discipline",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "PARAGRAPH-SCOPED",
+          "scope_note": "1689 paragraph 7",
+          "scoped_chars": 416,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 5,
+          "claim_supported": "Local churches possess authority for ecclesial discipline.",
+          "source_role": "HISTORICAL_CONFESSIONAL",
+          "institution": "Particular / Reformed Baptist",
+          "subtradition_scope": "Confessional Baptist",
+          "authority_note": "Historical ecclesiology witness.",
+          "current": "HISTORICAL",
+          "period": "1689"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-009",
+          "role": "ICC-001",
+          "url": "https://nafwb.org/site/about/what-we-believe/",
+          "locator": "Salvation",
+          "document": "What We Believe",
+          "phrase": "a salvation by grace alone and not of works",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "SECTION-SCOPED",
+          "scope_note": "Salvation",
+          "scoped_chars": 424,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 9,
+          "claim_supported": "Free Will Baptist variation also denies salvation by works.",
+          "source_role": "VARIATION_WITNESS",
+          "institution": "National Association of Free Will Baptists",
+          "subtradition_scope": "Free Will Baptist",
+          "authority_note": "Current denominational explanatory source.",
+          "current": "YES",
+          "period": "current"
+        },
+        {
+          "kind": "CLARIFICATION",
+          "key": "ICS-010",
+          "role": "ICC-001",
+          "url": "https://nafwb.org/site/about/what-we-believe/",
+          "locator": "Perseverance",
+          "document": "What We Believe",
+          "phrase": "make shipwreck of his faith and be lost",
+          "extraction": "HTML",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "result": "PASS",
+          "scope_mode": "SECTION-SCOPED",
+          "scope_note": "Perseverance",
+          "scoped_chars": 572,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 8,
+          "claim_supported": "Free Will Baptist conditional-security variation.",
+          "source_role": "VARIATION_WITNESS",
+          "institution": "National Association of Free Will Baptists",
+          "subtradition_scope": "Free Will Baptist",
+          "authority_note": "Current denominational explanatory source.",
+          "current": "YES",
+          "period": "current"
+        }
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "id": "ICT-001",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "sola fide",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 100,
+      "manual_explorer": true,
+      "note": "Primary slogan trigger; require Baptist context.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-002",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "faith alone",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 100,
+      "manual_explorer": true,
+      "note": "Primary slogan trigger; require Baptist context.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-003",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "excommunication",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 95,
+      "manual_explorer": true,
+      "note": "Apparent tension with faith-alone language.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-004",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "church discipline",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 95,
+      "manual_explorer": true,
+      "note": "Apparent tension with faith-alone language.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-005",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "eternal security",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 90,
+      "manual_explorer": true,
+      "note": "Relevant to Southern/confessional perseverance solution.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-006",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "perseverance",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 90,
+      "manual_explorer": true,
+      "note": "Relevant to security/discipline relationship.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-007",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "sanctification",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": "Salvation",
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 85,
+      "manual_explorer": true,
+      "note": "Clarifies fruit/evidence versus basis of justification.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-008",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "repentance",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": "Salvation",
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 85,
+      "manual_explorer": true,
+      "note": "Clarifies inseparable grace response versus merit.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-009",
+      "case_id": "ICC-001",
+      "type": "TERM",
+      "value": "works",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": "Salvation",
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 80,
+      "manual_explorer": true,
+      "note": "Use only with Baptist + salvation context to avoid over-triggering.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-010",
+      "case_id": "ICC-001",
+      "type": "TOPIC",
+      "value": "Justification",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 90,
+      "manual_explorer": true,
+      "note": "Topic trigger when Baptist tradition is selected.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-011",
+      "case_id": "ICC-001",
+      "type": "TOPIC",
+      "value": "Church discipline",
+      "match_mode": "CONTEXT_BUNDLED",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 95,
+      "manual_explorer": true,
+      "note": "Topic trigger when Baptist tradition is selected.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-012",
+      "case_id": "ICC-001",
+      "type": "TRADITION",
+      "value": "Southern Baptist",
+      "match_mode": "EXACT",
+      "required_tradition": null,
+      "required_topic": "Justification or discipline",
+      "auto_cue_eligible": false,
+      "priority": "MEDIUM",
+      "relevance_weight": 60,
+      "manual_explorer": true,
+      "note": "Tradition alone never auto-surfaces; context is required.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-013",
+      "case_id": "ICC-001",
+      "type": "TRADITION",
+      "value": "Reformed Baptist",
+      "match_mode": "EXACT",
+      "required_tradition": null,
+      "required_topic": "Justification or discipline",
+      "auto_cue_eligible": false,
+      "priority": "MEDIUM",
+      "relevance_weight": 60,
+      "manual_explorer": true,
+      "note": "Tradition alone never auto-surfaces; context is required.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-014",
+      "case_id": "ICC-001",
+      "type": "TRADITION",
+      "value": "Free Will Baptist",
+      "match_mode": "EXACT",
+      "required_tradition": null,
+      "required_topic": "Perseverance or security",
+      "auto_cue_eligible": false,
+      "priority": "MEDIUM",
+      "relevance_weight": 60,
+      "manual_explorer": true,
+      "note": "Variation branch; manual/related access unless question context matches.",
+      "active": "YES"
+    },
+    {
+      "id": "ICT-018",
+      "case_id": "ICC-001",
+      "type": "HAZARD_TYPE",
+      "value": "ECCLESIAL_VS_SOTERIOLOGICAL",
+      "match_mode": "EXACT",
+      "required_tradition": null,
+      "required_topic": null,
+      "auto_cue_eligible": false,
+      "priority": "MEDIUM",
+      "relevance_weight": 70,
+      "manual_explorer": true,
+      "note": "Explorer/filter classification.",
+      "active": "YES"
+    }
+  ],
+  "deferred_triggers": [
+    {
+      "id": "ICT-015",
+      "case_id": "ICC-001",
+      "type": "QUESTION_PATTERN",
+      "value": "If faith alone saves, why does conduct matter?",
+      "match_mode": "SEMANTIC",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 100,
+      "manual_explorer": true,
+      "note": "Conversational trigger.",
+      "active": "DEFERRED",
+      "deferred_reason": "AUTH-ARCH-002: SEMANTIC / QUESTION_PATTERN triggers deferred; v1 deterministic only"
+    },
+    {
+      "id": "ICT-016",
+      "case_id": "ICC-001",
+      "type": "QUESTION_PATTERN",
+      "value": "Can a Baptist be excommunicated and still be saved?",
+      "match_mode": "SEMANTIC",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 100,
+      "manual_explorer": true,
+      "note": "Conversational trigger.",
+      "active": "DEFERRED",
+      "deferred_reason": "AUTH-ARCH-002: SEMANTIC / QUESTION_PATTERN triggers deferred; v1 deterministic only"
+    },
+    {
+      "id": "ICT-017",
+      "case_id": "ICC-001",
+      "type": "QUESTION_PATTERN",
+      "value": "Does excommunication cancel justification?",
+      "match_mode": "SEMANTIC",
+      "required_tradition": "Baptist",
+      "required_topic": null,
+      "auto_cue_eligible": true,
+      "priority": "HIGH",
+      "relevance_weight": 100,
+      "manual_explorer": true,
+      "note": "Conversational trigger.",
+      "active": "DEFERRED",
+      "deferred_reason": "AUTH-ARCH-002: SEMANTIC / QUESTION_PATTERN triggers deferred; v1 deterministic only"
+    }
+  ],
+  "vocabulary": {
+    "Case Type": [
+      {
+        "value": "SEMANTIC_CLARIFICATION",
+        "meaning": "Explains what a term means within one or more traditions.",
+        "rule": "NOT COUNTED."
+      },
+      {
+        "value": "APPARENT_TENSION_RESOLUTION",
+        "meaning": "Explains why two teachings/practices that appear contradictory can coexist.",
+        "rule": "NOT COUNTED."
+      },
+      {
+        "value": "FAMILY_VARIATION",
+        "meaning": "Explains material variation within a named tradition family.",
+        "rule": "NOT COUNTED."
+      },
+      {
+        "value": "SOURCE_SCOPE_CLARIFICATION",
+        "meaning": "Explains authority/scope differences among sources or institutions.",
+        "rule": "NOT COUNTED."
+      }
+    ],
+    "Hazard Type": [
+      {
+        "value": "SLOGAN_COMPRESSION",
+        "meaning": "A short slogan is true but omits distinctions needed to predict the theology.",
+        "rule": "May trigger automatic cue."
+      },
+      {
+        "value": "SAME_WORD_DIFFERENT_MEANING",
+        "meaning": "Same term is used with materially different semantic content.",
+        "rule": "May trigger automatic cue."
+      },
+      {
+        "value": "APPARENT_CONTRADICTION",
+        "meaning": "Two teachings/practices appear inconsistent until layers are distinguished.",
+        "rule": "May trigger automatic cue."
+      },
+      {
+        "value": "ECCLESIAL_VS_SOTERIOLOGICAL",
+        "meaning": "Ecclesial recognition/status is confused with standing before God.",
+        "rule": "May trigger automatic cue."
+      },
+      {
+        "value": "SOURCE_SILENCE_VS_DENIAL",
+        "meaning": "Absence from a reviewed source is mistaken for doctrinal rejection.",
+        "rule": "Usually contextual cue."
+      },
+      {
+        "value": "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE",
+        "meaning": "Historical antecedence is mistaken for identity/equivalence.",
+        "rule": "Usually manual/related clarification."
+      },
+      {
+        "value": "RELATIONAL_VS_METAPHYSICAL",
+        "meaning": "Relational language is confused with a thicker metaphysical claim.",
+        "rule": "May trigger automatic cue."
+      },
+      {
+        "value": "FAMILY_VARIATION",
+        "meaning": "A tradition family is mistaken for a single uniform body.",
+        "rule": "Often auto cue when variation is material."
+      },
+      {
+        "value": "AUTHORITY_SCOPE",
+        "meaning": "A source's institutional authority or jurisdictional scope is overgeneralized.",
+        "rule": "Contextual cue."
+      },
+      {
+        "value": "SEMANTIC_FLOOR",
+        "meaning": "A broad label is mistaken for a thicker proposition than the controlled floor.",
+        "rule": "Contextual cue."
+      }
+    ],
+    "Auto Priority": [
+      {
+        "value": "HIGH",
+        "meaning": "Omission creates material risk of misunderstanding the displayed comparison.",
+        "rule": "Eligible for automatic cue."
+      },
+      {
+        "value": "MEDIUM",
+        "meaning": "Useful clarification but omission does not usually reverse the interpretation.",
+        "rule": "Related clarifications; no automatic interruption."
+      },
+      {
+        "value": "LOW",
+        "meaning": "Enrichment rather than misunderstanding prevention.",
+        "rule": "Explorer/search only."
+      },
+      {
+        "value": "NONE",
+        "meaning": "Never auto-surface.",
+        "rule": "Manual only."
+      }
+    ],
+    "Display Mode": [
+      {
+        "value": "AUTO_CUE_MANUAL_EXPANSION",
+        "meaning": "Show one lightweight cue automatically; user opens full case manually.",
+        "rule": "Preferred HIGH-priority behavior."
+      },
+      {
+        "value": "RELATED_CLARIFICATION",
+        "meaning": "List under related clarifications without automatic cue.",
+        "rule": "Preferred MEDIUM behavior."
+      },
+      {
+        "value": "EXPLORER_ONLY",
+        "meaning": "Discoverable only through manual clarification explorer/search.",
+        "rule": "Preferred LOW behavior."
+      }
+    ],
+    "Review State": [
+      {
+        "value": "DRAFT",
+        "meaning": "Researcher/assistant working draft.",
+        "rule": "Not public."
+      },
+      {
+        "value": "AUTHOR_REVIEW",
+        "meaning": "Awaiting author approval/revision.",
+        "rule": "Not authoritative for conversational answers."
+      },
+      {
+        "value": "APPROVED",
+        "meaning": "Author-approved case.",
+        "rule": "May be used as preferred answer authority."
+      },
+      {
+        "value": "HOLD",
+        "meaning": "Known issue prevents release.",
+        "rule": "No public use."
+      },
+      {
+        "value": "RETIRED",
+        "meaning": "Superseded historical case.",
+        "rule": "Lineage only."
+      }
+    ],
+    "Trigger Type": [
+      {
+        "value": "TERM",
+        "meaning": "Named term or phrase.",
+        "rule": "Deterministic lexical/normalized term match."
+      },
+      {
+        "value": "TOPIC",
+        "meaning": "Topic/domain tag.",
+        "rule": "Used with conversation/card context."
+      },
+      {
+        "value": "TRADITION",
+        "meaning": "Tradition or subtradition context.",
+        "rule": "Usually a required context, not sufficient alone."
+      },
+      {
+        "value": "QUESTION_PATTERN",
+        "meaning": "Common natural-language question pattern.",
+        "rule": "Semantic or pattern match."
+      },
+      {
+        "value": "PREDICATE_ID",
+        "meaning": "Direct link to a counted or context predicate.",
+        "rule": "Strong deterministic trigger."
+      },
+      {
+        "value": "HAZARD_TYPE",
+        "meaning": "Interpretive hazard classification.",
+        "rule": "Explorer/filter and policy logic."
+      }
+    ],
+    "Match Mode": [
+      {
+        "value": "EXACT",
+        "meaning": "Exact normalized text.",
+        "rule": "Deterministic."
+      },
+      {
+        "value": "KEYWORD",
+        "meaning": "Keyword or normalized phrase match.",
+        "rule": "Deterministic."
+      },
+      {
+        "value": "SEMANTIC",
+        "meaning": "Meaning-level conversational match.",
+        "rule": "Assistant/runtime only."
+      },
+      {
+        "value": "CONTEXT_BUNDLED",
+        "meaning": "Requires trigger plus specified tradition/topic context.",
+        "rule": "Preferred for auto-cues."
+      }
+    ],
+    "Source Role": [
+      {
+        "value": "CURRENT_INSTITUTIONAL",
+        "meaning": "Current official institutional/confessional source.",
+        "rule": "Preferred for contemporary claims."
+      },
+      {
+        "value": "HISTORICAL_CONFESSIONAL",
+        "meaning": "Historical confession or classic confessional witness.",
+        "rule": "Use with explicit historical scope."
+      },
+      {
+        "value": "ECCLESIAL_PRACTICE",
+        "meaning": "Institutional statement/practice source bearing on discipline or governance.",
+        "rule": "Do not equate with soteriological mechanism."
+      },
+      {
+        "value": "VARIATION_WITNESS",
+        "meaning": "Authoritative witness to variation within the tradition family.",
+        "rule": "Required for family-variation claims."
+      }
+    ],
+    "Answer Authority": [
+      {
+        "value": "DRAFT_CASE",
+        "meaning": "Case may inform research but not override general assistant synthesis.",
+        "rule": "Not public authority."
+      },
+      {
+        "value": "APPROVED_CASE",
+        "meaning": "Author-approved case should be preferred for matching app/conversational questions.",
+        "rule": "Use with source citations and scope."
+      }
+    ]
+  },
+  "release_summary": {
+    "approved_cases": [
+      "ICC-001"
+    ],
+    "publicly_released_cases": [],
+    "held_cases": {
+      "ICC-001": "HOLD — LENS BALANCE (awaiting ICC-002)"
+    }
+  }
+}

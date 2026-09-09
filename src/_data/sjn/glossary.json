@@ -1,0 +1,236 @@
+{
+  "app_master_version": "v2.16 H37 OCA SOURCE",
+  "canonical_hash": "0055602d54ce37e07673d93d30b1b4a81efb8714b13788246e72e676a87395d6",
+  "terms": [
+    {
+      "term": "Predicate family",
+      "definition": "A normalized theological proposition/concept counted once even when similar language recurs in multiple documents."
+    },
+    {
+      "term": "Kataphatic / positive",
+      "definition": "Affirmative language about who God is or what God does."
+    },
+    {
+      "term": "Apophatic / privative",
+      "definition": "Language describing God by negation, denial, or limits placed on creaturely categories."
+    },
+    {
+      "term": "A — Substantive Agreement",
+      "definition": "The same or substantially equivalent proposition is affirmed at the controlling semantic floor."
+    },
+    {
+      "term": "Q — Qualified / Redefined Agreement",
+      "definition": "A genuine concern is shared, but ontology, mechanism, scope, or metaphysical interpretation is materially changed."
+    },
+    {
+      "term": "D — Direct Divergence",
+      "definition": "The historical proposition, at its accepted scope, is incompatible with authoritative Restoration teaching."
+    },
+    {
+      "term": "U — Underdetermined",
+      "definition": "Available evidence is insufficient for a responsible classification."
+    },
+    {
+      "term": "Continuity",
+      "definition": "Teaching label for inherited A rows."
+    },
+    {
+      "term": "Reconstruction / qualified continuity",
+      "definition": "Teaching label for inherited Q rows; descriptive comparison, not proof of primitive-Christian recovery."
+    },
+    {
+      "term": "Rejection / direct divergence",
+      "definition": "Teaching label for inherited D rows; does not establish historical origin or corruption."
+    },
+    {
+      "term": "Expansion",
+      "definition": "Teaching label for A01–A26 Restoration additions relative to the admitted historical creed/confession corpus."
+    },
+    {
+      "term": "Semantic floor",
+      "definition": "The minimum proposition that controls a comparison; prevents a shared term from importing all of a tradition's thicker metaphysical entailments."
+    },
+    {
+      "term": "Authority Tier I",
+      "definition": "Canonical scripture in the project source-role model."
+    },
+    {
+      "term": "Authority Tier II",
+      "definition": "Collective / strongly authoritative official doctrine in the project source-role model."
+    },
+    {
+      "term": "Authority Tier III",
+      "definition": "Attributable prophetic / apostolic exposition in the project source-role model."
+    },
+    {
+      "term": "Corpus-relative addition",
+      "definition": "Present as a positive Restoration proposition but absent as a substantive positive doctrine from the admitted historical creed/confession corpus."
+    },
+    {
+      "term": "Historical antecedent",
+      "definition": "An earlier biblical, patristic, medieval, or later-Christian analogue; analogue does not automatically mean exact equivalence."
+    },
+    {
+      "term": "External validation",
+      "definition": "Independent blinded coding planned for scholarly publication; not yet completed in the current project state."
+    },
+    {
+      "term": "Unity of faith",
+      "definition": "For teaching use: shared discipleship and common faith need not imply total conformity of doctrinal interpretation."
+    }
+  ],
+  "hazard_types": [
+    {
+      "type": "SLOGAN_COMPRESSION",
+      "plain_language": "A short slogan is true but omits distinctions needed to predict the theology.",
+      "app_rule": "May trigger automatic cue."
+    },
+    {
+      "type": "SAME_WORD_DIFFERENT_MEANING",
+      "plain_language": "Same term is used with materially different semantic content.",
+      "app_rule": "May trigger automatic cue."
+    },
+    {
+      "type": "APPARENT_CONTRADICTION",
+      "plain_language": "Two teachings/practices appear inconsistent until layers are distinguished.",
+      "app_rule": "May trigger automatic cue."
+    },
+    {
+      "type": "ECCLESIAL_VS_SOTERIOLOGICAL",
+      "plain_language": "Ecclesial recognition/status is confused with standing before God.",
+      "app_rule": "May trigger automatic cue."
+    },
+    {
+      "type": "SOURCE_SILENCE_VS_DENIAL",
+      "plain_language": "Absence from a reviewed source is mistaken for doctrinal rejection.",
+      "app_rule": "Usually contextual cue."
+    },
+    {
+      "type": "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE",
+      "plain_language": "Historical antecedence is mistaken for identity/equivalence.",
+      "app_rule": "Usually manual/related clarification."
+    },
+    {
+      "type": "RELATIONAL_VS_METAPHYSICAL",
+      "plain_language": "Relational language is confused with a thicker metaphysical claim.",
+      "app_rule": "May trigger automatic cue."
+    },
+    {
+      "type": "FAMILY_VARIATION",
+      "plain_language": "A tradition family is mistaken for a single uniform body.",
+      "app_rule": "Often auto cue when variation is material."
+    },
+    {
+      "type": "AUTHORITY_SCOPE",
+      "plain_language": "A source's institutional authority or jurisdictional scope is overgeneralized.",
+      "app_rule": "Contextual cue."
+    },
+    {
+      "type": "SEMANTIC_FLOOR",
+      "plain_language": "A broad label is mistaken for a thicker proposition than the controlled floor.",
+      "app_rule": "Contextual cue."
+    }
+  ],
+  "hazard_type_count": 10,
+  "rendered_states": [
+    {
+      "state": "A",
+      "metric_class": "A",
+      "public_meaning": "Substantive agreement at the controlled proposition floor.",
+      "rendering_rule": "Render positive agreement; source/scope drill-down required.",
+      "counts_as_result": "YES"
+    },
+    {
+      "state": "A-SF",
+      "metric_class": "A",
+      "public_meaning": "Source-floor agreement: source attests a narrower proposition wholly within the shared floor; master family may remain Q.",
+      "rendering_rule": "Render distinctly from A; explain source-floor qualification.",
+      "counts_as_result": "YES"
+    },
+    {
+      "state": "Q",
+      "metric_class": "Q",
+      "public_meaning": "Qualified/redefined agreement.",
+      "rendering_rule": "Render shared concern plus material reinterpretation.",
+      "counts_as_result": "YES"
+    },
+    {
+      "state": "D",
+      "metric_class": "D",
+      "public_meaning": "Direct divergence at the controlled scope.",
+      "rendering_rule": "Render divergence with exact scope and comparator source.",
+      "counts_as_result": "YES"
+    },
+    {
+      "state": "VECTOR COMPLETE",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "All required atomic layers recovered, but family is intrinsically multi-layered.",
+      "rendering_rule": "Render multi-segment vector, never collapse to one A/Q/D tile.",
+      "counts_as_result": "NO single tile"
+    },
+    {
+      "state": "VECTOR PENDING",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "Split family has unresolved or unrecovered atomic layer(s).",
+      "rendering_rule": "Render visibly incomplete/pending.",
+      "counts_as_result": "NO"
+    },
+    {
+      "state": "PENDING REVIEW",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "Evidence exists but semantic or scope review remains.",
+      "rendering_rule": "Render pending; no A/Q/D inference.",
+      "counts_as_result": "NO"
+    },
+    {
+      "state": "RECONCILIATION HOLD",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "Historical/current family state conflict not reconciled.",
+      "rendering_rule": "Render hold; no theological tile.",
+      "counts_as_result": "NO"
+    },
+    {
+      "state": "RECONCILIATION HOLD — SOURCE ROLE",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "Proposition evidence exists but source role is not approved for branch-level claim.",
+      "rendering_rule": "Render hold and source-role explanation.",
+      "counts_as_result": "NO"
+    },
+    {
+      "state": "NOT LOCATED — CURRENT SOURCE",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "Historical witness retired; no current institutional source certified.",
+      "rendering_rule": "Render explicit current-source gap.",
+      "counts_as_result": "NO"
+    },
+    {
+      "state": "NOT LOCATED — CURRENT STANDARD REVIEWED",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "Current controlling standard reviewed; exact predicate not attested.",
+      "rendering_rule": "Render explicit reviewed gap; never infer denial.",
+      "counts_as_result": "NO"
+    },
+    {
+      "state": "NOT LOCATED — NOT YET RECOVERED",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "Evidence recovery has not yet reached this branch×predicate cell.",
+      "rendering_rule": "Render explicit recovery gap.",
+      "counts_as_result": "NO"
+    },
+    {
+      "state": "NOT LOCATED — NO PUBLIC EVIDENCE",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "No evidence currently suitable for public display.",
+      "rendering_rule": "Render explicit evidence gap.",
+      "counts_as_result": "NO"
+    },
+    {
+      "state": "OUT OF SCOPE",
+      "metric_class": "EXCLUDED",
+      "public_meaning": "Source architecture excludes the cell from current branch analysis.",
+      "rendering_rule": "Render scope marker, not doctrine.",
+      "counts_as_result": "NO"
+    }
+  ],
+  "orientation_rule": "AUTH-ARCH-004."
+}

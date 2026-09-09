@@ -7,10 +7,13 @@
   "private": true,
   "scripts": {
     "start": "eleventy --serve",
+    "prebuild": "node scripts/sjn-verify-data.js",
     "build": "eleventy",
     "postbuild": "npx pagefind --site _site",
     "debug": "DEBUG=Eleventy* eleventy",
-    "clean": "rm -rf _site"
+    "clean": "rm -rf _site",
+    "sjn:pipeline": "python scripts/sjn-build-data.py",
+    "sjn:verify": "node scripts/sjn-verify-data.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
