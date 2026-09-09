@@ -253,11 +253,15 @@ def run_rules(ctx, targets, runner, decisions, gates, canonical, propagation_iss
         if int(s(c.get("Max auto cues")) or 0) > int(s(ctx.config.get("clarification_max_auto_cues_per_view")) or 1):
             viol.append((s(c["Case ID"]), "max auto cues"))
     add("P024", not viol, "0 FK/policy violations", len(viol), str(viol[:5]))
-    # P025 clarification sources
+    # P025 clarification sources (PENDING FETCH sources are conditional: failure drops the source, not the build)
     cl = [t for t in targets if t.kind == "CLARIFICATION"]
-    clp = [t for t in cl if t.result == "PASS"]
-    add("P025", len(cl) == 10 and len(clp) == 10, "10/10", f"{len(clp)}/{len(cl)}",
-        str([(t.key, t.detail) for t in cl if t.result != "PASS"][:5]))
+    active = [t for t in cl if not t.dropped]
+    dropped = [t for t in cl if t.dropped]
+    ap_ = [t for t in active if t.result == "PASS"]
+    add("P025", len(cl) == len(ctx.clar_sources) and len(ap_) == len(active),
+        f"{len(active)}/{len(active)} emitted sources pass locator-scoped containment",
+        f"{len(ap_)}/{len(active)} pass; dropped from cases: " + (", ".join(t.key for t in dropped) or "none"),
+        str([(t.key, t.detail) for t in active if t.result != "PASS"][:5]))
     # P026 answer authority
     viol = []
     for c in ctx.clar_cases:

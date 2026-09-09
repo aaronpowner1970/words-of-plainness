@@ -223,7 +223,12 @@ class Fetcher:
                     document.querySelectorAll('[id]').forEach(e => {
                         if (/^p\\d+$/.test(e.id)) pids[e.id] = e.innerText;
                     });
-                    return {main: pick.innerText, body: document.body.innerText, pids};
+                    const blocks = [];
+                    pick.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,blockquote').forEach(e => {
+                        const t = (e.innerText || '').trim();
+                        if (t) blocks.push({tag: e.tagName.toLowerCase(), id: e.id || '', text: t});
+                    });
+                    return {main: pick.innerText, body: document.body.innerText, pids, blocks};
                 }""")
                 fr.rendered = data
                 fr.ok = 200 <= fr.status < 400 and len(data.get("body", "")) > 200

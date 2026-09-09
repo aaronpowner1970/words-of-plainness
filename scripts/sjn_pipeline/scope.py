@@ -436,6 +436,20 @@ def resolve_rendered(url, locator, document, rendered):
         if pid not in pids:
             raise ScopeError(f"paragraph anchor {pid} not rendered")
         return ScopeResult(pids[pid], "PARAGRAPH-SCOPED", pid)
+    mm = re.match(r"\s*Section\s+[\"“'](.+?)[\"”']\s*$", locator or "", re.I)
+    if mm:
+        # named section of a rendered article (e.g. a General Conference talk heading)
+        blocks = rendered.get("blocks") or []
+        title = normalize(mm.group(1))
+        heads = [i for i, b_ in enumerate(blocks) if b_["tag"].startswith("h") and normalize(b_["text"]) == title]
+        if not heads:  # tolerate ordinal prefixes such as "First: …"
+            heads = [i for i, b_ in enumerate(blocks) if b_["tag"].startswith("h") and title in normalize(b_["text"])]
+        if not heads:
+            raise ScopeError(f"section heading {mm.group(1)!r} not found among rendered headings")
+        i = heads[0]
+        level = blocks[i]["tag"]
+        j = next((k for k in range(i + 1, len(blocks)) if blocks[k]["tag"].startswith("h") and blocks[k]["tag"] <= level), len(blocks))
+        return ScopeResult("\n".join(b_["text"] for b_ in blocks[i:j]), "SECTION-SCOPED", f"section “{mm.group(1)}”")
     main = rendered.get("main") or ""
     if len(main) < 200:
         raise ScopeError("rendered main content too short")

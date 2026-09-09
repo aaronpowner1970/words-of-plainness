@@ -27,7 +27,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
 from sjn_pipeline.model import load_context, recompute_author_workflow, ratification_decision  # noqa: E402
-from sjn_pipeline.assertions import build_targets, collect_public_urls, apply_overrides, Runner  # noqa: E402
+from sjn_pipeline.assertions import build_targets, collect_public_urls, Runner  # noqa: E402
 from sjn_pipeline.fetch import Fetcher, is_rendered_host, HOST_WHITELIST, ROBOTS_EXCEPTIONS  # noqa: E402
 from sjn_pipeline.rules import run_rules  # noqa: E402
 from sjn_pipeline import emit  # noqa: E402
@@ -119,9 +119,6 @@ def main():
 
     # ---- targets + fetch
     targets = build_targets(ctx)
-    overrides = apply_overrides(targets, os.path.join(HERE, "sjn-phrase-overrides.json"))
-    for o in overrides:
-        log(f"   phrase override {o['key']}: {'applied' if o['applied'] else 'NOT applied — ' + o.get('note', '')}")
     urls = collect_public_urls(ctx, targets)
     rendered_urls = {t.url for t in targets if t.extraction == "RENDERED"}
     log(f"   phrase targets: {len(targets)} ({sum(t.status == 'ASSERT' for t in targets)} ASSERT); distinct public URLs: {len(urls)}")
@@ -135,6 +132,13 @@ def main():
         mark = {"PASS": "ok  ", "FAIL": "FAIL", "SKIP": "skip"}[t.result]
         log(f"  {mark} {t.kind:<13} {t.key:<8} {t.role:<12} {t.scope_mode:<20} {t.detail[:70]}")
     fetcher.close()
+
+    # ---- clarification-source drop policy (handoff 2026-09-09): a source that cannot be confirmed
+    # inside its cited locator is dropped from its case, never the case itself, and reported loudly.
+    for t in targets:
+        if t.kind == "CLARIFICATION" and t.result != "PASS" and (t.conditional or t.page_hit):
+            t.dropped = True
+            log(f"  DROP {t.key} from {t.role}: {t.detail}")
 
     # ---- emit objects
     cells, branches, lineage_ids = emit.build_cells(ctx, targets)
@@ -189,27 +193,29 @@ def main():
     blocking = [r for r in results if r["severity"] == "BLOCK" and r["status"] == "FAIL"]
     gates_open = [r for r in results if r["status"] == "GATE-OPEN"]
     supp = [t for t in targets if t.kind == "QUEUE-CELL"]
-    supp_fail = [t for t in supp if t.result != "PASS"]
+    supp_fail = [t for t in supp if t.status == "ASSERT" and t.result != "PASS"]
+    results.append({"rule": "QUEUE-CELL", "severity": "BLOCK", "status": "FAIL" if supp_fail else "PASS",
+                    "expected": "every released non-case-study queue-cell phrase target in Case Study Phrase Targets passes",
+                    "actual": f"{len(supp) - len(supp_fail)}/{len(supp)} (" + ", ".join(f"{t.key} {t.role}" for t in supp) + ")",
+                    "detail": str([(t.key, t.role, t.detail) for t in supp_fail])})
     if supp_fail:
-        blocking.append({"rule": "SUPP-Q290", "severity": "BLOCK", "status": "FAIL", "expected": "2/2",
-                         "actual": f"{len(supp) - len(supp_fail)}/{len(supp)}", "detail": str([(t.key, t.role, t.detail) for t in supp_fail])})
-        results.append(blocking[-1])
-    else:
-        results.append({"rule": "SUPP-Q290", "severity": "BLOCK", "status": "PASS", "expected": "2/2 OCA phrase assertions (Q-290 primary + supplemental)",
-                        "actual": f"{len(supp)}/{len(supp)}", "detail": "pipeline supplement per Build Metadata v2.16"})
+        blocking.append(results[-1])
     replaced = [t for t in targets if t.kind == "RESTORATION" and "RECHECK" in t.note]
     results.append({"rule": "RECHECK-REPLACED", "severity": "BLOCK", "status": "PASS" if all(t.result == "PASS" for t in replaced) else "FAIL",
                     "expected": "all author-replaced Restoration phrases re-verified", "actual": f"{sum(t.result == 'PASS' for t in replaced)}/{len(replaced)}",
                     "detail": ", ".join(f"{t.key}={t.result}" for t in replaced)})
     if results[-1]["status"] == "FAIL":
         blocking.append(results[-1])
-    stale = [o for o in overrides if not o["applied"]]
-    results.append({"rule": "PHRASE-OVERRIDES", "severity": "BLOCK", "status": "FAIL" if stale else "PASS",
-                    "expected": "every override in scripts/sjn-phrase-overrides.json applies to the current workbook value",
-                    "actual": f"{len(overrides) - len(stale)}/{len(overrides)} applied",
-                    "detail": "; ".join(f"{o['key']}: {o.get('note')}" for o in stale)})
-    if stale:
-        blocking.append(results[-1])
+    mism = [t for t in targets if t.kind == "CLARIFICATION" and t.dropped and not t.conditional]
+    results.append({"rule": "LOCATOR-MISMATCH", "severity": "WARN", "status": "PASS" if not mism else "WARN",
+                    "expected": "every clarification source phrase sits inside its cited locator",
+                    "actual": f"{len(mism)} source(s) dropped pending workbook locator correction",
+                    "detail": "; ".join(f"{t.key} ({t.role}) locator {t.locator!r}: {t.detail}" for t in mism)})
+    cond = [t for t in targets if t.kind == "CLARIFICATION" and t.conditional]
+    results.append({"rule": "CONDITIONAL-SOURCES", "severity": "INFO", "status": "PASS" if all(t.result == "PASS" for t in cond) else "WARN",
+                    "expected": "PENDING FETCH clarification sources confirmed by rendered fetch (else dropped from the case)",
+                    "actual": ", ".join(f"{t.key}={t.result}" for t in cond) or "none",
+                    "detail": "; ".join(f"{t.key}: {t.detail}" for t in cond)})
 
     log("== rule results")
     for r in results:
@@ -255,8 +261,9 @@ def main():
             "released_result_cells": sum(c["metric_class"] != "EXCLUDED" for c in cells),
             "lineage_only_cells": len(lineage_ids), "inferences": len(inferences), "godhead": len(godhead),
             "vectors": len(vectors), "clarification_cases": len(clar["cases"]),
-            "phrase_assertions": {k: {"total": sum(1 for t in targets if t.kind == k and t.status == "ASSERT"),
-                                      "pass": sum(1 for t in targets if t.kind == k and t.result == "PASS")}
+            "phrase_assertions": {k: {"total": sum(1 for t in targets if t.kind == k and t.status == "ASSERT" and not t.dropped),
+                                      "pass": sum(1 for t in targets if t.kind == k and t.result == "PASS" and not t.dropped),
+                                      "dropped": sum(1 for t in targets if t.kind == k and t.dropped)}
                                   for k in ("HISTORICAL", "RESTORATION", "CASE-STUDY", "CLARIFICATION", "QUEUE-CELL")},
             "distinct_public_urls": len(urls),
         },
@@ -270,18 +277,19 @@ def main():
         "host_whitelist": HOST_WHITELIST,
         "robots_exceptions": ROBOTS_EXCEPTIONS,
         "propagation_issues": propagation_issues,
-        "phrase_overrides": overrides,
-        "supplement_targets": [t.public() for t in targets if t.kind == "QUEUE-CELL"],
+        "queue_cell_targets": [t.public() for t in targets if t.kind == "QUEUE-CELL"],
+        "conditional_sources": [t.public() for t in targets if t.kind == "CLARIFICATION" and t.conditional],
+        "dropped_sources": [t.public() for t in targets if t.kind == "CLARIFICATION" and t.dropped],
         "style_flags": style,
         "schema": {
-            "predicates.json": "{predicates:[83 records: id, corpus, family, predicate, mode, code|authority_tier, lens, summary, caution, ratification, card_mode, vector, inherited, citation{historical,restoration}, restoration, sentence{clauses[4],text}]}",
+            "predicates.json": "{predicates:[83 records: id, corpus, family, predicate, mode, code|authority_tier, lens, summary, caution, ratification, card_mode, vector, inherited, citation{historical,restoration}, restoration, sentence{clause,text,rule}, card{clauses[4],text}]}",
             "cells.json": "{cells:[456: id, family_id, branch, rendered_state, metric_class, institution_tag(+basis), certified, lineage_only, evidence|null, lineage|null, case_study_target, phrase_targets], branch_summary:[8 partition rows, counts only]}",
-            "inferences.json": "{inferences:[13: id, theme, metric, stat{count,denominator,percent,range,provisional}, texts, evidence_links]}",
+            "inferences.json": "{inferences:[13: id, theme, metric, stat{count,denominator,percent,range|null,provisional,badge}, texts, evidence_links]}",
             "godhead.json": "{panels:[GOD-01..04, not_counted:true]}",
             "vectors.json": "{families:[H07,H32,H56: caption, atomic_layer_summary, branch_layers]}",
-            "clarifications.json": "{policy, cases[ICC-001 …], triggers (deterministic), deferred_triggers, vocabulary, release_summary}",
+            "clarifications.json": "{policy, cases[ICC-001, ICC-002: … sources, dropped_sources], triggers (deterministic), deferred_triggers, vocabulary, release_summary}",
             "glossary.json": "{terms, hazard_types(10), rendered_states}",
-            "ranges.json": "{ranges{INF-xx: stat}, denominators, not_counted_layers}",
+            "ranges.json": "{ranges{metric_key: stat from Sensitivity Ranges sheet}, inference_stats{INF-xx}, sjn_stat_contract, denominators, not_counted_layers}",
         },
     }
 

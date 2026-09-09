@@ -1,24 +1,166 @@
 {
-  "app_master_version": "v2.16 H37 OCA SOURCE",
-  "canonical_hash": "0055602d54ce37e07673d93d30b1b4a81efb8714b13788246e72e676a87395d6",
-  "source": "Computed from workbook v2.16 raw sheets by the Gate 2 pipeline. Paper section 14 sensitivity ranges NOT available in the Code session — reconcile before publication.",
-  "policy": "Every number renders as count + percentage + sensitivity range through one sjn-stat component. No tradition-level percentages anywhere (full_branch_map_enabled = False).",
+  "app_master_version": "v2.18 CODE RECONCILED",
+  "canonical_hash": "3cd1ac9d336bec19d2854d50bb8f34f725cc9e281e3bf917c7d0f9552727d755",
+  "source": "Sensitivity Ranges sheet (paper v3.2-MR1 §14, Appendix B) in the controlled workbook.",
+  "policy": "Every number renders as count + percentage (+ range when the sheet carries one) through one sjn-stat component; never a bare percentage. No tradition-level percentages anywhere (full_branch_map_enabled = False).",
+  "sjn_stat_contract": {
+    "count": "int",
+    "denominator": "int",
+    "percent": "one decimal",
+    "range": "{low_percent, high_percent, basis} or null",
+    "badge": "Provisional: internal coding, external validation pending",
+    "rule": "when range is null render count + percent only; never a percent without its count"
+  },
   "ranges": {
+    "shared_floor_A_plus_Q": {
+      "label": "shared_floor_A_plus_Q",
+      "count": 52,
+      "denominator": 57,
+      "percent": 91.2,
+      "range": {
+        "low_percent": 87.8,
+        "high_percent": 91.2,
+        "basis": "Centrality weighting (moderate 89.4, strong 87.8); breadth models 89.7–91.1",
+        "source": "Paper v3.2-MR1 §14, Appendix B"
+      },
+      "provisional": true,
+      "external_validation": "PENDING",
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent + range; provisional",
+      "inference_id": "INF-01",
+      "raw_percent_sheet": 91.2,
+      "consistent_with_sheet": true
+    },
+    "strict_A": {
+      "label": "strict_A",
+      "count": 36,
+      "denominator": 57,
+      "percent": 63.2,
+      "range": {
+        "low_percent": 51.7,
+        "high_percent": 63.2,
+        "basis": "Centrality weighting (moderate 53.8, strong 51.7)",
+        "source": "Paper v3.2-MR1 §14, Appendix B"
+      },
+      "provisional": true,
+      "external_validation": "PENDING",
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent + range; provisional",
+      "inference_id": "FAMILY",
+      "raw_percent_sheet": 63.2,
+      "consistent_with_sheet": true
+    },
+    "direct_D": {
+      "label": "direct_D",
+      "count": 5,
+      "denominator": 57,
+      "percent": 8.8,
+      "range": {
+        "low_percent": 8.8,
+        "high_percent": 12.2,
+        "basis": "Centrality weighting (moderate 10.6, strong 12.2); breadth 8.9–10.3",
+        "source": "Paper v3.2-MR1 §14, Appendix B"
+      },
+      "provisional": true,
+      "external_validation": "PENDING",
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent + range; provisional",
+      "inference_id": "INF-04",
+      "raw_percent_sheet": 8.8,
+      "consistent_with_sheet": true
+    },
+    "positive_A_plus_Q": {
+      "label": "positive_A_plus_Q",
+      "count": 35,
+      "denominator": 35,
+      "percent": 100.0,
+      "range": {
+        "low_percent": 100.0,
+        "high_percent": 100.0,
+        "basis": "No sensitivity model reported; corpus-descriptive only",
+        "source": "Paper §6"
+      },
+      "provisional": true,
+      "external_validation": "PENDING",
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional",
+      "inference_id": "INF-02",
+      "raw_percent_sheet": 100.0,
+      "consistent_with_sheet": true
+    },
+    "negative_Q_or_D": {
+      "label": "negative_Q_or_D",
+      "count": 18,
+      "denominator": 22,
+      "percent": 81.8,
+      "range": null,
+      "provisional": true,
+      "external_validation": "PENDING",
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional",
+      "inference_id": "INF-03",
+      "raw_percent_sheet": 81.8,
+      "consistent_with_sheet": true
+    },
+    "human_destiny_additions": {
+      "label": "human_destiny_additions",
+      "count": 15,
+      "denominator": 26,
+      "percent": 57.7,
+      "range": null,
+      "provisional": true,
+      "external_validation": "PENDING",
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional",
+      "inference_id": "INF-11",
+      "raw_percent_sheet": 57.7,
+      "consistent_with_sheet": true
+    },
+    "tier_I_II_additions": {
+      "label": "tier_I_II_additions",
+      "count": 22,
+      "denominator": 26,
+      "percent": 84.6,
+      "range": null,
+      "provisional": true,
+      "external_validation": "PENDING",
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional",
+      "inference_id": "INF-12",
+      "raw_percent_sheet": 84.6,
+      "consistent_with_sheet": true
+    },
+    "constructive_vs_subtractive": {
+      "label": "constructive_vs_subtractive",
+      "count": 42,
+      "denominator": 47,
+      "percent": 89.4,
+      "range": null,
+      "provisional": true,
+      "external_validation": "PENDING",
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional",
+      "inference_id": "INF-13",
+      "raw_percent_sheet": 89.4,
+      "consistent_with_sheet": true
+    }
+  },
+  "inference_stats": {
     "INF-01": {
       "label": "Inherited predicates coded A or Q",
       "count": 52,
       "denominator": 57,
       "percent": 91.2,
       "range": {
-        "low": 36,
-        "high": 52,
-        "low_percent": 63.2,
+        "low_percent": 87.8,
         "high_percent": 91.2,
-        "basis": "low = A only (Q excluded from the floor); high = A + Q"
+        "basis": "Centrality weighting (moderate 89.4, strong 87.8); breadth models 89.7–91.1",
+        "source": "Paper v3.2-MR1 §14, Appendix B"
       },
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent + range; provisional"
     },
     "INF-02": {
       "label": "Positive predicates with A or Q",
@@ -26,31 +168,26 @@
       "denominator": 35,
       "percent": 100.0,
       "range": {
-        "low": 32,
-        "high": 35,
-        "low_percent": 91.4,
+        "low_percent": 100.0,
         "high_percent": 100.0,
-        "basis": "low = A only; high = A + Q"
+        "basis": "No sensitivity model reported; corpus-descriptive only",
+        "source": "Paper §6"
       },
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-03": {
       "label": "Negative/apophatic families coded Q or D",
       "count": 18,
       "denominator": 22,
       "percent": 81.8,
-      "range": {
-        "low": 5,
-        "high": 18,
-        "low_percent": 22.7,
-        "high_percent": 81.8,
-        "basis": "low = D only; high = Q + D"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-04": {
       "label": "Direct-divergence predicates",
@@ -58,160 +195,114 @@
       "denominator": 57,
       "percent": 8.8,
       "range": {
-        "low": 5,
-        "high": 21,
         "low_percent": 8.8,
-        "high_percent": 36.8,
-        "basis": "low = D only; high = D + Q treated as divergence"
+        "high_percent": 12.2,
+        "basis": "Centrality weighting (moderate 10.6, strong 12.2); breadth 8.9–10.3",
+        "source": "Paper v3.2-MR1 §14, Appendix B"
       },
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent + range; provisional"
     },
     "INF-05": {
       "label": "Released theological-result cells in the 456-cell evidence-first queue",
       "count": 141,
       "denominator": 456,
       "percent": 30.9,
-      "range": {
-        "low": 141,
-        "high": 144,
-        "low_percent": 30.9,
-        "high_percent": 31.6,
-        "basis": "low = released A/Q/D metric cells; high = released cells + VECTOR COMPLETE families"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-06": {
       "label": "Range of released-result counts (max − min)",
       "count": 27,
       "denominator": 57,
       "percent": 47.4,
-      "range": {
-        "low": 27,
-        "high": 27,
-        "low_percent": 47.4,
-        "high_percent": 47.4,
-        "basis": "low = released-result spread (max − min); high = released-result spread (max − min)"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-07": {
       "label": "Explicit NOT LOCATED states",
       "count": 294,
       "denominator": 456,
       "percent": 64.5,
-      "range": {
-        "low": 294,
-        "high": 304,
-        "low_percent": 64.5,
-        "high_percent": 66.7,
-        "basis": "low = explicit NOT LOCATED states; high = NOT LOCATED + PENDING/HOLD/VECTOR PENDING"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-08": {
       "label": "H05 Son certified A across eight teaching branches",
       "count": 8,
       "denominator": 8,
       "percent": 100.0,
-      "range": {
-        "low": 8,
-        "high": 8,
-        "low_percent": 100.0,
-        "high_percent": 100.0,
-        "basis": "low = certified A cells; high = certified A cells"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-09": {
       "label": "H22 Creator / Maker certified Q across eight teaching branches",
       "count": 8,
       "denominator": 8,
       "percent": 100.0,
-      "range": {
-        "low": 8,
-        "high": 8,
-        "low_percent": 100.0,
-        "high_percent": 100.0,
-        "basis": "low = certified Q cells; high = certified Q cells"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-10": {
       "label": "H43 Without parts / simple explicit-state distribution",
       "count": 5,
       "denominator": 8,
       "percent": 62.5,
-      "range": {
-        "low": 5,
-        "high": 5,
-        "low_percent": 62.5,
-        "high_percent": 62.5,
-        "basis": "low = certified D cells; high = certified D cells (3 unresolved cells are NOT projected)"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-11": {
       "label": "Kinship/premortality + exaltation/family/progression additions",
       "count": 15,
       "denominator": 26,
       "percent": 57.7,
-      "range": {
-        "low": 7,
-        "high": 15,
-        "low_percent": 26.9,
-        "high_percent": 57.7,
-        "basis": "low = kinship/premortality only; high = kinship/premortality + exaltation/family/progression"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-12": {
       "label": "Tier I + Tier II additions",
       "count": 22,
       "denominator": 26,
       "percent": 84.6,
-      "range": {
-        "low": 15,
-        "high": 22,
-        "low_percent": 57.7,
-        "high_percent": 84.6,
-        "basis": "low = Tier I only; high = Tier I + Tier II"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     },
     "INF-13": {
       "label": "Q + additions versus D among distinctive actions",
       "count": 42,
       "denominator": 47,
       "percent": 89.4,
-      "range": {
-        "low": 16,
-        "high": 42,
-        "low_percent": 34.0,
-        "high_percent": 89.4,
-        "basis": "low = Q only vs D (additions excluded); high = Q + additions vs D",
-        "denominator_note": "denominator changes with basis: Q vs D only = 21; Q + additions vs D = 47"
-      },
+      "range": null,
       "provisional": true,
       "external_validation": "PENDING",
-      "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+      "badge": "Provisional: internal coding, external validation pending",
+      "display_rule": "count + percent; provisional"
     }
   },
   "denominators": {

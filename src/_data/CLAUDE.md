@@ -52,6 +52,6 @@ workbook in `data-sources/sjn/`. `scripts/sjn-verify-data.js` runs as `npm prebu
 and fails the build if any file was edited after the run, if the run was not LIVE,
 or if any BLOCK rule failed. To change the data: update the workbook (author-owned),
 run `npm run sjn:pipeline` (about four minutes; needs Playwright chromium), commit
-the workbook copy and `src/_data/sjn/` together. Phrase corrections the workbook
-does not yet carry live in `scripts/sjn-phrase-overrides.json` (logged in
-`meta.json`); delete an entry to make the build refuse again.
+the workbook copy and `src/_data/sjn/` together. There is no override layer: a
+phrase or locator the live source does not confirm is a workbook fix, and the
+pipeline reports it in `meta.json` (rules, dropped_sources).

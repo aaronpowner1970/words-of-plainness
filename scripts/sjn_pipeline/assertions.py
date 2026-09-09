@@ -8,30 +8,11 @@ from .scope import resolve_html, resolve_pdf, resolve_rendered, ScopeError
 from .textnorm import contains, normalize, phrase_word_count, pdf_repair
 from .workbook import s
 
-# Pipeline-side supplement: targets the workbook instructs the pipeline to add
-# (Build Metadata v2.16 row: "pipeline must add a phrase target for this cell and rerun
-# P006/P020 on the two OCA URLs"). Carried here until incorporated in the next workbook version.
-SUPPLEMENT_TARGETS = [
-    {
-        "kind": "QUEUE-CELL", "key": "Q-290", "role": "PRIMARY", "predicate_id": "RNR-H37",
-        "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-holy-trinity/one-god-one-father",
-        "locator": "One God, One Father (OCA official catechesis, The Orthodox Faith Vol. I)",
-        "document": "The Orthodox Faith, Vol. I — The Holy Trinity: One God, One Father",
-        "phrase": "There is only one God because there is only one Father",
-        "extraction": "HTML", "status": "ASSERT",
-        "provenance": "Pipeline supplement per Build Metadata v2.16 (H37 Eastern Orthodox source strengthening); "
-                      "phrase and locator from Evidence-First Cell Queue Q-290 Source note.",
-    },
-    {
-        "kind": "QUEUE-CELL", "key": "Q-290", "role": "SUPPLEMENTAL", "predicate_id": "RNR-H37",
-        "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-symbol-of-faith/son-of-god",
-        "locator": "Symbol of Faith — Son of God (OCA official catechesis)",
-        "document": "The Orthodox Faith, Vol. I — The Symbol of Faith: Son of God",
-        "phrase": "God is an eternal Father by nature",
-        "extraction": "HTML", "status": "ASSERT",
-        "provenance": "Pipeline supplement per Build Metadata v2.16; supplemental witness named in Q-290 Source note.",
-    },
-]
+# Workbook v2.18 carries every phrase target; the pipeline no longer supplements or overrides
+# workbook phrases. Case Study Phrase Targets rows whose family is NOT one of the Matrix Case
+# Studies (H05/H22/H43) are released non-case-study queue-cell targets (e.g. Q-290) and are
+# validated under their own rule so P020/P021 keep the workbook's 140/24/21 expectations.
+CONDITIONAL_REVIEW_PREFIX = "PENDING FETCH"   # Clarification Sources awaiting rendered-fetch verification
 
 
 @dataclass
@@ -47,6 +28,10 @@ class Target:
     status: str          # ASSERT | NO TARGET — UNRELEASED | NO PUBLIC TARGET
     predicate_id: str = ""
     note: str = ""
+    conditional: bool = False   # PENDING FETCH source: failure drops the source, not the build
+    review_status: str = ""
+    dropped: bool = False       # clarification source excluded from the emitted case (see drop policy)
+    page_hit: bool = False      # phrase present somewhere on the fetched page (diagnostic only)
     # results
     result: str = ""     # PASS | FAIL | SKIP
     scope_mode: str = ""
@@ -81,49 +66,28 @@ def build_targets(ctx):
         targets.append(Target("RESTORATION", pid, s(r.get("Target Role")), url, s(r.get("Locator")),
                               s(r.get("Source label")), s(r.get("Quoted phrase")), ext, "ASSERT",
                               predicate_id=pid, note=s(r.get("QA status"))))
+    case_families = {s(r.get("Predicate ID")) for r in ctx.case_studies}
+    seen_qids = {}
     for r in ctx.case_targets:
         qid = s(r["Queue ID"])
         st = s(r.get("Target Status"))
         url = s(r.get("Assertion Text URL"))
+        fam = s(r.get("Family ID"))
         ext = "RENDERED" if is_rendered_host(url) else ("PDF" if s(r.get("Extraction type")) == "PDF" else "HTML")
-        targets.append(Target("CASE-STUDY", qid, "", url, s(r.get("Locator")), s(r.get("Document")),
+        kind = "CASE-STUDY" if fam in case_families else "QUEUE-CELL"
+        n = seen_qids.get(qid, 0); seen_qids[qid] = n + 1
+        role = "" if kind == "CASE-STUDY" else ("PRIMARY" if n == 0 else "SUPPLEMENTAL")
+        targets.append(Target(kind, qid, role, url, s(r.get("Locator")), s(r.get("Document")),
                               s(r.get("Quoted phrase")), ext, "ASSERT" if st == "ASSERT" else st,
-                              predicate_id=s(r.get("Family ID"))))
+                              predicate_id=fam, note=s(r.get("Notes"))))
     for r in ctx.clar_sources:
         url = s(r.get("URL"))
+        review = s(r.get("Review status"))
         targets.append(Target("CLARIFICATION", s(r["Source ID"]), s(r.get("Case ID")), url, s(r.get("Locator")),
                               s(r.get("Document / statement")), s(r.get("Quoted phrase (≤15 words)")),
-                              "RENDERED" if is_rendered_host(url) else "HTML", "ASSERT"))
-    for d in SUPPLEMENT_TARGETS:
-        targets.append(Target(d["kind"], d["key"], d["role"], d["url"], d["locator"], d["document"], d["phrase"],
-                              d["extraction"], d["status"], predicate_id=d["predicate_id"], note=d["provenance"]))
+                              "RENDERED" if is_rendered_host(url) else "HTML", "ASSERT",
+                              conditional=review.upper().startswith(CONDITIONAL_REVIEW_PREFIX), review_status=review))
     return targets
-
-
-def apply_overrides(targets, overrides_path):
-    """Apply scripts/sjn-phrase-overrides.json. Returns the list of applied override records
-    (each with 'applied' True/False and a mismatch note when the workbook value drifted)."""
-    import json, os
-    if not os.path.exists(overrides_path):
-        return []
-    with open(overrides_path, "r", encoding="utf-8") as fh:
-        data = json.load(fh)
-    applied = []
-    by = {(t.kind, t.key, t.role): t for t in targets}
-    for o in data.get("overrides", []):
-        rec = dict(o)
-        t = by.get((o["kind"], o["key"], o.get("role", "")))
-        if t is None:
-            rec["applied"] = False; rec["note"] = "target not found"
-        elif getattr(t, o["field"]) != o["workbook_value"]:
-            rec["applied"] = False
-            rec["note"] = f"workbook value changed to {getattr(t, o['field'])!r}; override is stale — delete it"
-        else:
-            setattr(t, o["field"], o["override_value"])
-            t.note = (t.note + " | " if t.note else "") + "PHRASE OVERRIDE applied (see meta.phrase_overrides)"
-            rec["applied"] = True
-        applied.append(rec)
-    return applied
 
 
 def collect_public_urls(ctx, targets):
@@ -224,20 +188,43 @@ class Runner:
                     t.result = "FAIL"; t.detail = f"fetch failed: {fr.error or 'empty body'}"; return t
                 sr = resolve_html(t.url, t.locator, t.document, fr.html)
         except ScopeError as e:
-            t.result = "FAIL"; t.detail = f"scope resolution failed: {e}"; return t
+            t.result = "FAIL"; t.detail = f"scope resolution failed: {e}"
+            t.page_hit = self._page_hit(t)
+            if t.page_hit:
+                t.detail += " (phrase present elsewhere on page)"
+            return t
         t.scope_mode, t.scope_note, t.scoped_chars = sr.mode, sr.note, len(sr.text)
         if contains(sr.text, t.phrase):
             t.result = "PASS"
             t.detail = "phrase found inside locator scope"
         else:
             t.result = "FAIL"
-            page_hit = False
-            if t.extraction == "HTML":
-                page_hit = contains(self.http[t.url].html, t.phrase)
-            elif t.extraction == "RENDERED":
-                page_hit = contains(self.rendered[t.url].rendered.get("body", ""), t.phrase)
-            elif t.extraction == "PDF":
-                page_hit = contains(pdf_repair(self.pdf_texts[t.url]), t.phrase)
+            t.page_hit = self._page_hit(t)
             t.detail = ("phrase NOT in locator scope" + (" (present elsewhere on page — locator/phrase mismatch)"
-                                                          if page_hit else " (absent from whole page)"))
+                                                          if t.page_hit else " (absent from whole page)"))
+            if t.page_hit and t.extraction == "RENDERED":
+                t.detail += self._rendered_location(t)
         return t
+
+    def _page_hit(self, t):
+        try:
+            if t.extraction == "HTML":
+                return contains(self.http[t.url].html, t.phrase)
+            if t.extraction == "RENDERED":
+                return contains(self.rendered[t.url].rendered.get("body", ""), t.phrase)
+            if t.extraction == "PDF":
+                return contains(pdf_repair(self.pdf_texts[t.url]), t.phrase)
+        except KeyError:
+            return False
+        return False
+
+    def _rendered_location(self, t):
+        """Name the heading under which the phrase actually sits (diagnostic for workbook correction)."""
+        blocks = self.rendered[t.url].rendered.get("blocks") or []
+        heading = ""
+        for b_ in blocks:
+            if b_["tag"].startswith("h"):
+                heading = b_["text"]
+            elif contains(b_["text"], t.phrase):
+                return f"; actual location: under heading “{heading}”" + (f" ({b_['id']})" if b_.get("id") else "")
+        return ""

@@ -1,6 +1,6 @@
 {
-  "app_master_version": "v2.16 H37 OCA SOURCE",
-  "canonical_hash": "0055602d54ce37e07673d93d30b1b4a81efb8714b13788246e72e676a87395d6",
+  "app_master_version": "v2.18 CODE RECONCILED",
+  "canonical_hash": "3cd1ac9d336bec19d2854d50bb8f34f725cc9e281e3bf917c7d0f9552727d755",
   "inferences": [
     {
       "id": "INF-01",
@@ -13,15 +13,15 @@
         "denominator": 57,
         "percent": 91.2,
         "range": {
-          "low": 36,
-          "high": 52,
-          "low_percent": 63.2,
+          "low_percent": 87.8,
           "high_percent": 91.2,
-          "basis": "low = A only (Q excluded from the floor); high = A + Q"
+          "basis": "Centrality weighting (moderate 89.4, strong 87.8); breadth models 89.7–91.1",
+          "source": "Paper v3.2-MR1 §14, Appendix B"
         },
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent + range; provisional"
       },
       "rate_recomputed": 0.9123,
       "direct_observation": "Most inherited predicate families fall in A or Q rather than D.",
@@ -60,15 +60,15 @@
         "denominator": 35,
         "percent": 100.0,
         "range": {
-          "low": 32,
-          "high": 35,
-          "low_percent": 91.4,
+          "low_percent": 100.0,
           "high_percent": 100.0,
-          "basis": "low = A only; high = A + Q"
+          "basis": "No sensitivity model reported; corpus-descriptive only",
+          "source": "Paper §6"
         },
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 1.0,
       "direct_observation": "All 35 positive/kataphatic families are A or Q; none are D.",
@@ -106,16 +106,11 @@
         "count": 18,
         "denominator": 22,
         "percent": 81.8,
-        "range": {
-          "low": 5,
-          "high": 18,
-          "low_percent": 22.7,
-          "high_percent": 81.8,
-          "basis": "low = D only; high = Q + D"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 0.8182,
       "direct_observation": "The negative/apophatic/delimiter corpus contains far more Q and all five D classifications.",
@@ -154,15 +149,15 @@
         "denominator": 57,
         "percent": 8.8,
         "range": {
-          "low": 5,
-          "high": 21,
           "low_percent": 8.8,
-          "high_percent": 36.8,
-          "basis": "low = D only; high = D + Q treated as divergence"
+          "high_percent": 12.2,
+          "basis": "Centrality weighting (moderate 10.6, strong 12.2); breadth 8.9–10.3",
+          "source": "Paper v3.2-MR1 §14, Appendix B"
         },
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent + range; provisional"
       },
       "rate_recomputed": 0.0877,
       "direct_observation": "Only five inherited families are coded D, and all belong to the negative/metaphysical side of the corpus.",
@@ -200,19 +195,14 @@
         "count": 141,
         "denominator": 456,
         "percent": 30.9,
-        "range": {
-          "low": 141,
-          "high": 144,
-          "low_percent": 30.9,
-          "high_percent": 31.6,
-          "basis": "low = released A/Q/D metric cells; high = released cells + VECTOR COMPLETE families"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 0.3092,
-      "direct_observation": "The repaired queue contains 140 released A/Q/D metric cells and 316 cells that are explicitly excluded because they are pending, vector, not located, held, or out of scope.",
+      "direct_observation": "The queue contains 141 released A/Q/D metric cells and 315 cells that are explicitly excluded because they are pending, vector, not located, held, or out of scope.",
       "defensible_inference": "The current branch layer is primarily an evidence-recovery map, not yet a complete denomination-concordance dataset.",
       "alternative_interpretation": "Coverage can increase materially as source recovery continues; released-result counts should not be confused with doctrinal importance.",
       "does_not_support": "It does not support a denomination similarity percentage, a population estimate of Christian doctrine, or closest/furthest ranking.",
@@ -230,7 +220,7 @@
           "source_sheet": "Evidence-First Cell Queue",
           "filter": "Metric Class = A/Q/D versus EXCLUDED",
           "rows": "All 456 queue cells",
-          "measure": "140 released result cells / 316 excluded",
+          "measure": "141 released result cells / 315 excluded",
           "why": "Establishes current evidence coverage rather than concordance.",
           "provenance_grade": "QUEUE-DERIVED",
           "caveat": "No denomination percentage or ranking."
@@ -247,19 +237,14 @@
         "count": 27,
         "denominator": 57,
         "percent": 47.4,
-        "range": {
-          "low": 27,
-          "high": 27,
-          "low_percent": 47.4,
-          "high_percent": 47.4,
-          "basis": "low = released-result spread (max − min); high = released-result spread (max − min)"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 0.4737,
-      "direct_observation": "Released A/Q/D results range from 9 to 37 cells across branches, while each branch still displays all 57 explicit states.",
+      "direct_observation": "Released A/Q/D results range from 10 to 37 cells across branches (spread 27), while each branch still displays all 57 explicit states.",
       "defensible_inference": "Branch comparisons must display evidence completeness alongside theological states; raw result counts are not comparable without the missingness context.",
       "alternative_interpretation": "Differences reflect admitted-source recovery as well as genuine formulation differences.",
       "does_not_support": "It does not support ranking traditions by closeness or interpreting a sparse branch as unusually harmonious.",
@@ -277,7 +262,7 @@
           "source_sheet": "Branch State Summary",
           "filter": "Released-result counts by teaching branch",
           "rows": "8 branch summaries",
-          "measure": "released-result range 9–37",
+          "measure": "released-result range 10–37 (spread 27)",
           "why": "Shows material coverage imbalance across branches.",
           "provenance_grade": "QUEUE-DERIVED",
           "caveat": "Missingness and recovery density affect branch comparability."
@@ -294,16 +279,11 @@
         "count": 294,
         "denominator": 456,
         "percent": 64.5,
-        "range": {
-          "low": 294,
-          "high": 304,
-          "low_percent": 64.5,
-          "high_percent": 66.7,
-          "basis": "low = explicit NOT LOCATED states; high = NOT LOCATED + PENDING/HOLD/VECTOR PENDING"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 0.6447,
       "direct_observation": "The repaired queue contains 294 explicit NOT LOCATED states rather than blank cells.",
@@ -341,16 +321,11 @@
         "count": 8,
         "denominator": 8,
         "percent": 100.0,
-        "range": {
-          "low": 8,
-          "high": 8,
-          "low_percent": 100.0,
-          "high_percent": 100.0,
-          "basis": "low = certified A cells; high = certified A cells"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 1.0,
       "direct_observation": "H05 Son is public-certified A in all eight teaching branches.",
@@ -388,16 +363,11 @@
         "count": 8,
         "denominator": 8,
         "percent": 100.0,
-        "range": {
-          "low": 8,
-          "high": 8,
-          "low_percent": 100.0,
-          "high_percent": 100.0,
-          "basis": "low = certified Q cells; high = certified Q cells"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 1.0,
       "direct_observation": "H22 Creator/Maker is Q in all eight teaching branches.",
@@ -419,7 +389,7 @@
           "filter": "Family ID = RNR-H22",
           "rows": "H22",
           "measure": "8 Q",
-          "why": "Shows universally attested Creator confession with materially reconstructed LDS creation ontology.",
+          "why": "Shows universally attested Creator confession with materially reconstructed Latter-day Saint creation ontology.",
           "provenance_grade": "QUEUE-DERIVED",
           "caveat": "Q is shared concept plus reinterpretation, not mere word overlap."
         }
@@ -435,22 +405,17 @@
         "count": 5,
         "denominator": 8,
         "percent": 62.5,
-        "range": {
-          "low": 5,
-          "high": 5,
-          "low_percent": 62.5,
-          "high_percent": 62.5,
-          "basis": "low = certified D cells; high = certified D cells (3 unresolved cells are NOT projected)"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 0.625,
       "direct_observation": "H43 currently shows five D cells, one PENDING REVIEW cell, and two NOT LOCATED — CURRENT SOURCE cells across the eight teaching branches.",
       "defensible_inference": "Divine simplicity is a real hard-divergence locus where certified, but the evidence-first display must preserve the unresolved Orthodox semantic review and current-source gaps for Baptist and Mennonite branches.",
       "alternative_interpretation": "More source recovery or semantic-floor review could alter the non-D cells without changing the already certified D cells.",
-      "does_not_support": "It does not support saying 'six of eight traditions reject the LDS view' or treating pending/gap states as D.",
+      "does_not_support": "It does not support saying 'six of eight traditions reject the Latter-day Saint view' or treating pending/gap states as D.",
       "drill_down_key": "Evidence-First Cell Queue: Family ID = RNR-H43; inspect all eight Rendered States",
       "evidence_status": "QUEUE-DERIVED — explicit-state case",
       "teaching_priority": "Core",
@@ -482,16 +447,11 @@
         "count": 15,
         "denominator": 26,
         "percent": 57.7,
-        "range": {
-          "low": 7,
-          "high": 15,
-          "low_percent": 26.9,
-          "high_percent": 57.7,
-          "basis": "low = kinship/premortality only; high = kinship/premortality + exaltation/family/progression"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 0.5769,
       "direct_observation": "The two human-destiny domains contain 15 of the 26 Restoration-addition families.",
@@ -529,16 +489,11 @@
         "count": 22,
         "denominator": 26,
         "percent": 84.6,
-        "range": {
-          "low": 15,
-          "high": 22,
-          "low_percent": 57.7,
-          "high_percent": 84.6,
-          "basis": "low = Tier I only; high = Tier I + Tier II"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 0.8462,
       "direct_observation": "Most Restoration additions in the corpus rest on canonical or high-level collective/official sources rather than Tier III exposition alone.",
@@ -576,17 +531,11 @@
         "count": 42,
         "denominator": 47,
         "percent": 89.4,
-        "range": {
-          "low": 16,
-          "high": 42,
-          "low_percent": 34.0,
-          "high_percent": 89.4,
-          "basis": "low = Q only vs D (additions excluded); high = Q + additions vs D",
-          "denominator_note": "denominator changes with basis: Q vs D only = 21; Q + additions vs D = 47"
-        },
+        "range": null,
         "provisional": true,
         "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage"
+        "badge": "Provisional: internal coding, external validation pending",
+        "display_rule": "count + percent; provisional"
       },
       "rate_recomputed": 0.8936,
       "direct_observation": "Among rows where the Restoration does something distinctive relative to the inherited corpus, reconstruction plus expansion greatly outnumber direct rejection.",
@@ -632,6 +581,11 @@
         57
       ],
       "narrative_match": true,
+      "sensitivity_sheet": [
+        52,
+        57
+      ],
+      "sensitivity_match": true,
       "formula_numerator": "=COUNTIF('Inherited 57'!F2:F58,\"A\")+COUNTIF('Inherited 57'!F2:F58,\"Q\")",
       "formula_denominator": "=COUNTA('Inherited 57'!A2:A58)"
     },
@@ -651,6 +605,11 @@
         35
       ],
       "narrative_match": true,
+      "sensitivity_sheet": [
+        35,
+        35
+      ],
+      "sensitivity_match": true,
       "formula_numerator": "=COUNTIFS('Inherited 57'!B2:B58,\"Kataphatic\",'Inherited 57'!F2:F58,\"A\")+COUNTIFS('Inherited 57'!B2:B58,\"Kataphatic\",'Inherited 57'!F2:F58,\"Q\")",
       "formula_denominator": "=COUNTIF('Inherited 57'!B2:B58,\"Kataphatic\")"
     },
@@ -670,6 +629,11 @@
         22
       ],
       "narrative_match": true,
+      "sensitivity_sheet": [
+        18,
+        22
+      ],
+      "sensitivity_match": true,
       "formula_numerator": "=COUNTIFS('Inherited 57'!B2:B58,\"<>Kataphatic\",'Inherited 57'!F2:F58,\"Q\")+COUNTIFS('Inherited 57'!B2:B58,\"<>Kataphatic\",'Inherited 57'!F2:F58,\"D\")",
       "formula_denominator": "=COUNTIF('Inherited 57'!B2:B58,\"<>Kataphatic\")"
     },
@@ -689,6 +653,11 @@
         57
       ],
       "narrative_match": true,
+      "sensitivity_sheet": [
+        5,
+        57
+      ],
+      "sensitivity_match": true,
       "formula_numerator": "=COUNTIF('Inherited 57'!F2:F58,\"D\")",
       "formula_denominator": "=COUNTA('Inherited 57'!A2:A58)"
     },
@@ -704,10 +673,12 @@
       ],
       "match": true,
       "evidence_map": [
-        140,
+        141,
         456
       ],
-      "narrative_match": false,
+      "narrative_match": true,
+      "sensitivity_sheet": null,
+      "sensitivity_match": null,
       "formula_numerator": "=COUNTIF('Evidence-First Cell Queue'!Y6:Y461,\"<>EXCLUDED\")",
       "formula_denominator": "=COUNTA('Evidence-First Cell Queue'!A6:A461)"
     },
@@ -723,10 +694,12 @@
       ],
       "match": true,
       "evidence_map": [
-        28,
+        27,
         57
       ],
-      "narrative_match": false,
+      "narrative_match": true,
+      "sensitivity_sheet": null,
+      "sensitivity_match": null,
       "formula_numerator": "=MAX('Branch State Summary'!M2:M9)-MIN('Branch State Summary'!M2:M9)",
       "formula_denominator": "=57"
     },
@@ -746,6 +719,8 @@
         456
       ],
       "narrative_match": true,
+      "sensitivity_sheet": null,
+      "sensitivity_match": null,
       "formula_numerator": "=SUM('Branch State Summary'!J2:J9)",
       "formula_denominator": "=COUNTA('Evidence-First Cell Queue'!A6:A461)"
     },
@@ -765,6 +740,8 @@
         8
       ],
       "narrative_match": true,
+      "sensitivity_sheet": null,
+      "sensitivity_match": null,
       "formula_numerator": "=COUNTIFS('Evidence-First Cell Queue'!B6:B461,\"RNR-H05\",'Evidence-First Cell Queue'!X6:X461,\"A\")",
       "formula_denominator": "=8"
     },
@@ -784,6 +761,8 @@
         8
       ],
       "narrative_match": true,
+      "sensitivity_sheet": null,
+      "sensitivity_match": null,
       "formula_numerator": "=COUNTIFS('Evidence-First Cell Queue'!B6:B461,\"RNR-H22\",'Evidence-First Cell Queue'!X6:X461,\"Q\")",
       "formula_denominator": "=8"
     },
@@ -803,6 +782,8 @@
         8
       ],
       "narrative_match": true,
+      "sensitivity_sheet": null,
+      "sensitivity_match": null,
       "formula_numerator": "=COUNTIFS('Evidence-First Cell Queue'!B6:B461,\"RNR-H43\",'Evidence-First Cell Queue'!X6:X461,\"D\")",
       "formula_denominator": "=8"
     },
@@ -822,6 +803,11 @@
         26
       ],
       "narrative_match": true,
+      "sensitivity_sheet": [
+        15,
+        26
+      ],
+      "sensitivity_match": true,
       "formula_numerator": "=COUNTIF('Restoration 26'!B2:B27,\"Divine-human kinship / premortality\")+COUNTIF('Restoration 26'!B2:B27,\"Exaltation / eternal family / progression\")",
       "formula_denominator": "=COUNTA('Restoration 26'!A2:A27)"
     },
@@ -841,6 +827,11 @@
         26
       ],
       "narrative_match": true,
+      "sensitivity_sheet": [
+        22,
+        26
+      ],
+      "sensitivity_match": true,
       "formula_numerator": "=COUNTIF('Restoration 26'!E2:E27,\"Tier I\")+COUNTIF('Restoration 26'!E2:E27,\"Tier II\")",
       "formula_denominator": "=COUNTA('Restoration 26'!A2:A27)"
     },
@@ -860,6 +851,11 @@
         47
       ],
       "narrative_match": true,
+      "sensitivity_sheet": [
+        42,
+        47
+      ],
+      "sensitivity_match": true,
       "formula_numerator": "=COUNTIF('Inherited 57'!F2:F58,\"Q\")+COUNTA('Restoration 26'!A2:A27)",
       "formula_denominator": "=COUNTIF('Inherited 57'!F2:F58,\"Q\")+COUNTIF('Inherited 57'!F2:F58,\"D\")+COUNTA('Restoration 26'!A2:A27)"
     }

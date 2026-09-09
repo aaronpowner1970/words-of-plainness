@@ -52,6 +52,7 @@ class Context:
     build_metadata: dict = field(default_factory=dict)
     hash_recipe: list = field(default_factory=list)
     family_summary: list = field(default_factory=list)
+    sensitivity_ranges: list = field(default_factory=list)
 
 
 def load_context(path):
@@ -91,7 +92,7 @@ def load_context(path):
     load("godhead", "Godhead Context", "Panel ID")
     load("current_source", "Current Source Recovery", "Branch teaching label")
     load("tradition_sources", "Tradition Sources", "Tradition family")
-    load("glossary", "Glossary", "Term")
+    load("glossary", "Glossary", "Term", stop=False)
     load("antecedents", "Antecedent Examples", "Predicate link")
     load("cta", "Related CTA Topics", "CTA parent")
     load("readiness", "Public Readiness", "Gate")
@@ -111,6 +112,9 @@ def load_context(path):
     load("gate_dashboard", "Author Gate Dashboard", "Gate")
     load("are", "Author Response Entry", "Sequence")
     load("family_summary", "Family Summary", "Core teaching lens")
+    if "Sensitivity Ranges" in wb.wb.sheetnames:
+        load("sensitivity_ranges", "Sensitivity Ranges", "Metric key")
+        ctx.sensitivity_ranges = [r for r in ctx.sensitivity_ranges if s(r.get("Metric key")) not in ("", "Rule")]
 
     # Build Metadata: artifact rows + canonical hash recipe rows
     ws = wb.ws("Build Metadata")

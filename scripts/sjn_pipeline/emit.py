@@ -10,21 +10,51 @@ H_KEY = "Historical quoted phrase (≤15 words)"
 R_KEY = "Restoration quoted phrase (primary, ≤15 words)"
 
 
-def stat(count, denominator, low=None, high=None, basis="", label=""):
-    """One uncertainty-carrying statistic: count + percentage + sensitivity range + provisional flag.
-    Rendered only through the sjn-stat component; never a tradition-level percentage."""
+PROVISIONAL_BADGE = "Provisional: internal coding, external validation pending"
+
+
+def stat(count, denominator, label="", range_row=None):
+    """One uncertainty-carrying statistic for the sjn-stat component: count, denominator,
+    percent (one decimal), and — only when the Sensitivity Ranges sheet carries a Low/High pair —
+    low/high percent with basis text. Never a tradition-level percentage."""
     pct = round(100.0 * count / denominator, 1) if denominator else None
-    low = count if low is None else low
-    high = count if high is None else high
+    rng = None
+    if range_row is not None:
+        lo, hi = range_row.get("Low percent"), range_row.get("High percent")
+        if lo not in (None, "") and hi not in (None, ""):
+            rng = {"low_percent": float(lo), "high_percent": float(hi),
+                   "basis": s(range_row.get("Basis")), "source": s(range_row.get("Source"))}
     return {
         "label": label, "count": count, "denominator": denominator, "percent": pct,
-        "range": {"low": low, "high": high,
-                  "low_percent": round(100.0 * low / denominator, 1) if denominator else None,
-                  "high_percent": round(100.0 * high / denominator, 1) if denominator else None,
-                  "basis": basis},
-        "provisional": True, "external_validation": "PENDING",
-        "display_rule": "count + percentage + range through one sjn-stat component; never rendered as a bare percentage",
+        "range": rng,
+        "provisional": True, "external_validation": "PENDING", "badge": PROVISIONAL_BADGE,
+        "display_rule": (s(range_row.get("Display rule")) if range_row else "count + percent; provisional"),
     }
+
+
+def _measure_pair(iid, text, inherited_n, cells_n):
+    """Parse the Evidence Map 'Measure contributed' text into (numerator, denominator)."""
+    ints = [int(x) for x in re.findall(r"\d+", text)]
+    m = re.search(r"(\d+)\s+of\s+(\d+)", text)
+    if m:
+        return int(m.group(1)), int(m.group(2))
+    if iid == "INF-02" and len(ints) >= 3:
+        return ints[0] + ints[1], ints[0] + ints[1] + ints[2]
+    if iid == "INF-03" and len(ints) >= 3:
+        return ints[1] + ints[2], ints[0] + ints[1] + ints[2]
+    if iid == "INF-04":
+        return ints[0], inherited_n
+    if iid == "INF-05" and len(ints) >= 2:
+        return ints[0], ints[0] + ints[1]
+    if iid == "INF-06" and len(ints) >= 2:
+        return ints[1] - ints[0], 57
+    if iid == "INF-07":
+        return ints[0], cells_n
+    if iid in ("INF-08", "INF-09", "INF-10"):
+        return ints[0], 8
+    if iid == "INF-13" and len(ints) >= 2:
+        return ints[0], ints[1]
+    return (ints[0], ints[1]) if len(ints) >= 2 else (None, None)
 
 
 def _num(v):
@@ -134,9 +164,22 @@ def build_predicates(ctx, targets, decisions):
                 "confidence": s(a.get("Confidence")),
                 "novelty_caution": s(a.get("Historical-novelty caution")),
             }
-        rec["sentence"] = _four_clause(rec)
+        rec["sentence"] = _sentence(ctx, rec)
+        rec["card"] = _card(rec)
         out.append(rec)
     return out, style
+
+
+def _sentence(ctx, rec):
+    """Four-clause sentence selected by code from APP CONFIG four_clause_* (paper §16)."""
+    if rec["corpus"] == "restoration":
+        key = "ADDITION"
+    else:
+        key = rec["code"]
+    text = s(ctx.config.get(f"four_clause_{key}"))
+    if not text:
+        raise ValueError(f"APP CONFIG four_clause_{key} missing")
+    return {"clause": key, "text": text, "rule": s(ctx.config.get("four_clause_rule"))}
 
 
 def _val(t):
@@ -147,9 +190,9 @@ def _val(t):
             "phrase_word_count": t.word_count}
 
 
-def _four_clause(rec):
-    """Four-clause sentence: predicate+lens | historical witness | Restoration witness | ratified scope.
-    (Structure inferred in the Gate-2 session; Gate-0 brief unavailable to Code — see handoff.)"""
+def _card(rec):
+    """Card composition (a layout, not the sentence): predicate+lens | historical witness |
+    Restoration witness | ratified caution. See APP CONFIG four_clause_rule."""
     if rec["corpus"] == "inherited":
         c = rec["citation"]; h = c["historical"]; r = c["restoration"]
         c1 = f"{rec['predicate']} — {rec['lens']} ({rec['code']})."
@@ -256,28 +299,6 @@ def build_cells(ctx, targets):
 
 
 # ------------------------------------------------------------------ inferences
-_EXPECT = {  # from Inference Evidence Map "Measure contributed" (numerator, denominator)
-    "INF-01": (52, 57), "INF-02": (35, 35), "INF-03": (18, 22), "INF-04": (5, 57), "INF-05": (140, 456),
-    "INF-06": (28, 57), "INF-07": (294, 456), "INF-08": (8, 8), "INF-09": (8, 8), "INF-10": (5, 8),
-    "INF-11": (15, 26), "INF-12": (22, 26), "INF-13": (42, 47),
-}
-_RANGE_BASIS = {
-    "INF-01": ("A only (Q excluded from the floor)", "A + Q"),
-    "INF-02": ("A only", "A + Q"),
-    "INF-03": ("D only", "Q + D"),
-    "INF-04": ("D only", "D + Q treated as divergence"),
-    "INF-05": ("released A/Q/D metric cells", "released cells + VECTOR COMPLETE families"),
-    "INF-06": ("released-result spread (max − min)", "released-result spread (max − min)"),
-    "INF-07": ("explicit NOT LOCATED states", "NOT LOCATED + PENDING/HOLD/VECTOR PENDING"),
-    "INF-08": ("certified A cells", "certified A cells"),
-    "INF-09": ("certified Q cells", "certified Q cells"),
-    "INF-10": ("certified D cells", "certified D cells (3 unresolved cells are NOT projected)"),
-    "INF-11": ("kinship/premortality only", "kinship/premortality + exaltation/family/progression"),
-    "INF-12": ("Tier I only", "Tier I + Tier II"),
-    "INF-13": ("Q only vs D (additions excluded)", "Q + additions vs D"),
-}
-
-
 def build_inferences(ctx, cells):
     wb = ctx.wb
     inh = ctx.inherited57
@@ -296,19 +317,8 @@ def build_inferences(ctx, cells):
     tiers = Counter(s(r.get("Current authority tier")) for r in res)
     dom = Counter(s(r.get("Domain / family")) for r in res)
     kin = dom.get("Divine-human kinship / premortality", 0); exa = dom.get("Exaltation / eternal family / progression", 0)
-    low_high = {
-        "INF-01": (codes["A"], codes["A"] + codes["Q"]),
-        "INF-02": (kA, kA + kQ),
-        "INF-03": (aD, aQ + aD),
-        "INF-04": (codes["D"], codes["D"] + codes["Q"]),
-        "INF-05": (released, released + vec_complete),
-        "INF-06": (spread, spread),
-        "INF-07": (not_located, not_located + unresolved),
-        "INF-08": (8, 8), "INF-09": (8, 8), "INF-10": (5, 5),
-        "INF-11": (kin, kin + exa),
-        "INF-12": (tiers.get("Tier I", 0), tiers.get("Tier I", 0) + tiers.get("Tier II", 0)),
-        "INF-13": (codes["Q"], codes["Q"] + len(res)),
-    }
+    range_rows = {s(r.get("Inference ID")): r for r in ctx.sensitivity_ranges}
+    measures = {s(e.get("Inference ID")): s(e.get("Measure contributed")) for e in ctx.evidence_map}
     # independent Python recount (never trusts the workbook formulas)
     h05 = Counter(c["rendered_state"] for c in cells if c["family_id"] == "RNR-H05")
     h22 = Counter(c["rendered_state"] for c in cells if c["family_id"] == "RNR-H22")
@@ -336,17 +346,17 @@ def build_inferences(ctx, cells):
         den = wb.eval_cell("Inference Support", f"F{row}")
         rate = wb.eval_cell("Inference Support", f"G{row}")
         num, den = int(round(num)), int(round(den))
-        exp = _EXPECT.get(iid)
+        exp = _measure_pair(iid, measures.get(iid, ""), len(inh), len(cells))
         ind = independent.get(iid)
+        rr = range_rows.get(iid)
+        sheet_pair = (int(rr.get("Count")), int(rr.get("Denominator"))) if rr else None
         checks.append({"id": iid, "recomputed": [num, den], "independent_recount": list(ind) if ind else None,
-                       "match": ind == (num, den), "evidence_map": list(exp) if exp else None,
-                       "narrative_match": (exp == (num, den)) if exp else None,
+                       "match": ind == (num, den), "evidence_map": list(exp) if exp[0] is not None else None,
+                       "narrative_match": (exp == (num, den)) if exp[0] is not None else None,
+                       "sensitivity_sheet": list(sheet_pair) if sheet_pair else None,
+                       "sensitivity_match": (sheet_pair == (num, den)) if sheet_pair else None,
                        "formula_numerator": s(r.get("Numerator")), "formula_denominator": s(r.get("Denominator"))})
-        lo, hi = low_high.get(iid, (num, num))
-        basis = _RANGE_BASIS.get(iid, ("", ""))
-        st = stat(num, den, lo, hi, f"low = {basis[0]}; high = {basis[1]}", s(r.get("Metric")))
-        if iid == "INF-13":
-            st["range"]["denominator_note"] = "denominator changes with basis: Q vs D only = 21; Q + additions vs D = 47"
+        st = stat(num, den, s(r.get("Metric")), rr)
         out.append(OrderedDict([
             ("id", iid), ("theme", s(r.get("Theme"))), ("evidence_layer", s(r.get("Evidence layer"))),
             ("metric", s(r.get("Metric"))), ("stat", st), ("rate_recomputed", round(float(rate), 4)),
@@ -423,8 +433,8 @@ def build_clarifications(ctx, decisions, targets):
             ("auto_priority", s(c.get("Auto priority"))), ("display_mode", s(c.get("Display mode"))),
             ("max_auto_cues", int(s(c.get("Max auto cues")) or 1)), ("review_state", review),
             ("app_availability", avail), ("answer_authority", s(c.get("Answer authority"))),
-            ("public_release", review == "APPROVED" and avail.upper().startswith("PUBLIC")),
-            ("release_hold_reason", None if avail.upper().startswith("PUBLIC") else avail),
+            ("public_release", review == "APPROVED" and avail.upper().startswith(("PUBLIC", "AVAILABLE"))),
+            ("release_hold_reason", None if avail.upper().startswith(("PUBLIC", "AVAILABLE")) else avail),
             ("learner_question", s(c.get("Learner question / apparent tension"))), ("key_distinction", s(c.get("Key distinction"))),
             ("resolution_summary", s(c.get("Resolution summary"))), ("internal_variation", s(c.get("Internal variation"))),
             ("interfaith_significance", s(c.get("Interfaith significance"))), ("does_not_prove", s(c.get("What this case does NOT prove"))),
@@ -436,9 +446,15 @@ def build_clarifications(ctx, decisions, targets):
             ("sources", [t.public() | {"claim_supported": s(src.get("Claim supported")), "source_role": s(src.get("Source role")),
                                        "institution": s(src.get("Tradition / institution")), "subtradition_scope": s(src.get("Subtradition scope")),
                                        "authority_note": s(src.get("Authority note")), "current": s(src.get("Current?")),
-                                       "period": s(src.get("Source date / historical period"))}
+                                       "period": s(src.get("Source date / historical period")),
+                                       "verified_by": "pipeline rendered fetch" if t.conditional else "workbook + pipeline"}
                          for src in ctx.clar_sources if s(src.get("Case ID")) == cid
-                         for t in targets if t.kind == "CLARIFICATION" and t.key == s(src["Source ID"])]),
+                         for t in targets if t.kind == "CLARIFICATION" and t.key == s(src["Source ID"]) and not t.dropped]),
+            ("dropped_sources", [{"id": t.key, "phrase": t.phrase, "url": t.url, "locator": t.locator, "detail": t.detail,
+                                  "reason": ("PENDING FETCH source not confirmed by rendered fetch" if t.conditional
+                                             else "phrase confirmed on the page but not inside the cited locator (workbook locator needs correction)")
+                                            + "; dropped from the case, not the case itself"}
+                                 for t in targets if t.kind == "CLARIFICATION" and t.role == cid and t.dropped]),
         ]))
     triggers, deferred = [], []
     for t in ctx.clar_triggers:
@@ -482,15 +498,25 @@ def build_glossary(ctx):
 
 
 def build_ranges(ctx, inferences, cells):
-    """Structural sensitivity ranges computed from the workbook. The paper's Section 14 ranges were
-    not available to this session; Cowork should reconcile these against the paper."""
+    """ranges.json emitted from the workbook's Sensitivity Ranges sheet (paper §14). Metrics without a
+    Low/High pair carry range: null and render count + percent only."""
     by = {i["id"]: i for i in inferences}
+    ranges = {}
+    for r in ctx.sensitivity_ranges:
+        key = s(r.get("Metric key"))
+        st = stat(int(r.get("Count")), int(r.get("Denominator")), key, r)
+        st["inference_id"] = s(r.get("Inference ID"))
+        st["raw_percent_sheet"] = float(r.get("Raw percent")) if r.get("Raw percent") not in (None, "") else None
+        st["consistent_with_sheet"] = st["percent"] == st["raw_percent_sheet"]
+        ranges[key] = st
     out = {
-        "source": "Computed from workbook v2.16 raw sheets by the Gate 2 pipeline. "
-                  "Paper section 14 sensitivity ranges NOT available in the Code session — reconcile before publication.",
-        "policy": "Every number renders as count + percentage + sensitivity range through one sjn-stat component. "
-                  "No tradition-level percentages anywhere (full_branch_map_enabled = False).",
-        "ranges": {k: by[k]["stat"] for k in by},
+        "source": "Sensitivity Ranges sheet (paper v3.2-MR1 §14, Appendix B) in the controlled workbook.",
+        "policy": "Every number renders as count + percentage (+ range when the sheet carries one) through one sjn-stat component; "
+                  "never a bare percentage. No tradition-level percentages anywhere (full_branch_map_enabled = False).",
+        "sjn_stat_contract": {"count": "int", "denominator": "int", "percent": "one decimal", "range": "{low_percent, high_percent, basis} or null",
+                              "badge": PROVISIONAL_BADGE, "rule": "when range is null render count + percent only; never a percent without its count"},
+        "ranges": ranges,
+        "inference_stats": {k: by[k]["stat"] for k in by},
         "denominators": {"inherited": 57, "restoration_additions": 26, "teaching_universe": 83, "branch_cells": 456, "branches": 8, "cells_per_branch": 57},
         "not_counted_layers": ["Godhead Context (GOD-01–GOD-04)", "Interpretive Clarifications", "Related CTA Topics", "Antecedent Examples"],
         "h43_note": "H43 shows 5 certified D cells, 1 PENDING REVIEW (Eastern Orthodox; essence–energies learner note pending), "
