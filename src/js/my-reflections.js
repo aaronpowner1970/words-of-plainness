@@ -24,7 +24,8 @@ var CHAPTER_INFO = {
     'chapter-13-sermon-on-the-mount':{ number: 13, title: 'The Sermon on the Mount' },
     'chapter-14-prayer-as-a-lifestyle':{ number: 14, title: 'Prayer as a Lifestyle' },
     'chapter-16-keeping-the-sabbath': { number: 16, title: 'Keeping the Sabbath' },
-    'articles-of-interfaith-discipleship': { number: 99, title: 'Articles of Interfaith Discipleship', standalone: true }
+    'articles-of-interfaith-discipleship': { number: 99, title: 'Articles of Interfaith Discipleship', standalone: true },
+    'seeking-jesus':                 { number: 98, title: 'Seeking Jesus of Nazareth', standalone: true }
 };
 
 var ARTICLE_TITLES = {

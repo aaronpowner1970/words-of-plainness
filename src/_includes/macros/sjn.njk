@@ -1,0 +1,91 @@
+{#
+  Seeking Jesus of Nazareth — build-time macros.
+  Import WITH CONTEXT is not required; every macro takes its data as arguments.
+
+  stat(st, label)      — the sjn-stat component. Contract (handoff 2026-09-09):
+                          count, denominator, percent (one decimal), low/high percent + basis
+                          when a range exists, and the literal provisional badge. When range is
+                          null render count + percent only. Never a percent without its count.
+  chip(code, labels)   — A / Q / D / ADDITION code chip with plain-English label.
+  stackedBar(counts)   — inline SVG: 36 / 16 / 5 stacked bar over the 57 inherited descriptions.
+  twoBars(counts)      — inline SVG: 57 inherited and 26 additions as two adjacent bars.
+#}
+
+{% macro stat(st, label) %}
+<span class="sj-stat" data-metric="{{ st.label }}">
+  <span class="sj-stat-count"><strong>{{ st.count }} of {{ st.denominator }}</strong>{% if label %} {{ label | safe }}{% endif %}</span>
+  <span class="sj-stat-pct" aria-label="percentage">{{ st.percent }}%</span>
+  {% if st.range %}
+  <span class="sj-stat-range">holding between <strong>{{ st.range.low_percent }}%</strong> and <strong>{{ st.range.high_percent }}%</strong><span class="sj-stat-basis"> ({{ st.range.basis }})</span></span>
+  {% endif %}
+  <span class="sj-stat-badge">{{ st.badge }}</span>
+</span>
+{% endmacro %}
+
+{% macro chip(code, labels, size) %}
+<span class="sj-chip sj-chip-{{ code }}{% if size %} sj-chip-{{ size }}{% endif %}" title="{{ labels[code].plain }}"><span class="sj-chip-code">{{ "+" if code == "ADDITION" else code }}</span><span class="sj-chip-label">{{ labels[code].label }}</span></span>
+{% endmacro %}
+
+{% macro stackedBar(counts) %}
+{% set total = counts.A + counts.Q + counts.D %}
+{% set w = 640 %}
+{% set wa = (counts.A / total * w) | round %}
+{% set wq = (counts.Q / total * w) | round %}
+{% set wd = w - wa - wq %}
+<figure class="sj-figure">
+  <svg class="sj-bar" viewBox="0 0 {{ w }} 92" role="img" aria-label="Of {{ total }} inherited descriptions of God, {{ counts.A }} are shared, {{ counts.Q }} are shared but differently understood, and {{ counts.D }} are different.">
+    <rect x="0" y="18" width="{{ wa }}" height="34" rx="4" class="sj-fill-A"/>
+    <rect x="{{ wa }}" y="18" width="{{ wq }}" height="34" class="sj-fill-Q"/>
+    <rect x="{{ wa + wq }}" y="18" width="{{ wd }}" height="34" rx="4" class="sj-fill-D"/>
+    <text x="{{ (wa / 2) | round }}" y="40" class="sj-bar-num" text-anchor="middle">{{ counts.A }}</text>
+    <text x="{{ (wa + wq / 2) | round }}" y="40" class="sj-bar-num" text-anchor="middle">{{ counts.Q }}</text>
+    <text x="{{ (wa + wq + wd / 2) | round }}" y="40" class="sj-bar-num sj-bar-num-light" text-anchor="middle">{{ counts.D }}</text>
+    <text x="0" y="74" class="sj-bar-lbl">Shared <tspan class="sj-bar-code">A</tspan></text>
+    <text x="{{ wa + 4 }}" y="74" class="sj-bar-lbl">Shared, differently understood <tspan class="sj-bar-code">Q</tspan></text>
+    <text x="{{ w }}" y="74" class="sj-bar-lbl" text-anchor="end">Different <tspan class="sj-bar-code">D</tspan></text>
+  </svg>
+  <figcaption>{{ total }} inherited descriptions of God, by category. Counts, not a ranking.</figcaption>
+</figure>
+{% endmacro %}
+
+{% macro twoBars(counts) %}
+{% set w = 640 %}
+{% set wi = (counts.inherited / (counts.inherited + counts.additions) * (w - 24)) | round %}
+{% set wr = w - 24 - wi %}
+<figure class="sj-figure">
+  <svg class="sj-bar" viewBox="0 0 {{ w }} 92" role="img" aria-label="Two separate denominators: {{ counts.inherited }} inherited descriptions of God and {{ counts.additions }} Restoration additions.">
+    <rect x="0" y="18" width="{{ wi }}" height="34" rx="4" class="sj-fill-inh"/>
+    <rect x="{{ wi + 24 }}" y="18" width="{{ wr }}" height="34" rx="4" class="sj-fill-ADDITION"/>
+    <text x="{{ (wi / 2) | round }}" y="40" class="sj-bar-num" text-anchor="middle">{{ counts.inherited }}</text>
+    <text x="{{ (wi + 24 + wr / 2) | round }}" y="40" class="sj-bar-num sj-bar-num-light" text-anchor="middle">{{ counts.additions }}</text>
+    <text x="0" y="74" class="sj-bar-lbl">Inherited descriptions (creeds and confessions)</text>
+    <text x="{{ w }}" y="74" class="sj-bar-lbl" text-anchor="end">Restoration additions</text>
+  </svg>
+  <figcaption>Two denominators that are never merged: the {{ counts.inherited }} inherited descriptions and the {{ counts.additions }} additions counted separately.</figcaption>
+</figure>
+{% endmacro %}
+
+{% macro witness(p) %}
+<div class="sj-witness">
+  {% if p.historical %}
+  <div class="sj-wit sj-wit-h">
+    <span class="sj-wit-k">Historic witness</span>
+    {% if p.historical.packet_only %}
+    <span class="sj-wit-v">{{ p.historical.institution }} &middot; {{ p.historical.document }}. <em>Historical source packet required; no public text witness yet.</em></span>
+    {% else %}
+    <span class="sj-wit-v">{{ p.historical.institution }} &middot; <a href="{{ p.historical.url }}" target="_blank" rel="noopener">{{ p.historical.document }}</a>{% if p.historical.locator %}, {{ p.historical.locator }}{% endif %}</span>
+    {% if p.historical.phrase %}<q class="sj-phrase">{{ p.historical.phrase }}</q>{% endif %}
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if p.restoration %}
+  <div class="sj-wit sj-wit-r">
+    <span class="sj-wit-k">{{ "Restoration source" if p.corpus == "restoration" else "Restoration comparator" }}</span>
+    <span class="sj-wit-v"><a href="{{ p.restoration.url }}" target="_blank" rel="noopener">{{ p.restoration.label }}</a>{% if p.restoration.source and p.corpus == "inherited" %} <span class="sj-dim">({{ p.restoration.source }})</span>{% endif %}{% if p.corpus == "restoration" %} <span class="sj-dim">({{ p.restoration.source }})</span>{% endif %}</span>
+    {% if p.restoration.phrase %}<q class="sj-phrase">{{ p.restoration.phrase }}</q>{% endif %}
+    {% if p.restoration.supplemental_url %}<span class="sj-wit-v sj-dim">Also: <a href="{{ p.restoration.supplemental_url }}" target="_blank" rel="noopener">supplemental source</a>{% if p.restoration.supplemental_phrase %} &middot; <q class="sj-phrase">{{ p.restoration.supplemental_phrase }}</q>{% endif %}</span>{% endif %}
+    {% if p.restoration.evidence_note %}<span class="sj-wit-v sj-dim">{{ p.restoration.evidence_note }}</span>{% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}

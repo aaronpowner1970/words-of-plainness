@@ -84,6 +84,15 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/css");
     eleventyConfig.addPassthroughCopy("src/js");
     eleventyConfig.addPassthroughCopy({"src/robots.txt": "robots.txt"});
+
+    // =========================================
+    // BUILD ENVIRONMENT
+    // Vercel sets VERCEL_ENV to production | preview | development. Pages use
+    // `isProd` to show draft ribbons on copy still under author review only in
+    // non-production builds (Seeking Jesus of Nazareth, Sept 2026).
+    // =========================================
+    eleventyConfig.addGlobalData("isProd", process.env.VERCEL_ENV === "production");
+    eleventyConfig.addGlobalData("buildEnv", process.env.VERCEL_ENV || "local");
     
     // =========================================
     // WATCH TARGETS

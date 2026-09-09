@@ -1,0 +1,65 @@
+---
+# Layout for the Seeking Jesus of Nazareth study app (/seeking-jesus/ …).
+# Extends base.njk directly (site header stays, site footer stays) and adds
+# the app stylesheet, the shared data payload, the module navigation, the
+# author-review ribbon (non-production builds only), and the data colophon.
+#
+# Page frontmatter it reads:
+#   sjnModule  — orientation | map | code-it | conversation | self-check
+#   sjnDraft   — true while learner copy on the page is still AUTHOR_REVIEW
+---
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/seeking-jesus.css?v={{ site.version }}">
+{% endblock %}
+
+{% block content %}
+{% set modules = [
+  { id: "orientation", url: "/seeking-jesus/", label: "Orientation", short: "Start" },
+  { id: "map", url: "/seeking-jesus/map/", label: "The Map", short: "Map" },
+  { id: "code-it", url: "/seeking-jesus/code-it/", label: "Code It Yourself", short: "Code it" },
+  { id: "conversation", url: "/seeking-jesus/conversation/", label: "Conversation Builder", short: "Converse" },
+  { id: "self-check", url: "/seeking-jesus/self-check/", label: "Self-check & Goals", short: "Goals" }
+] %}
+<div class="sj-app" id="sj-app" data-module="{{ sjnModule }}">
+  {% if sjnDraft and not isProd %}
+  <div class="sj-ribbon" role="status">Draft copy under author review (AUTHOR_REVIEW) &middot; {{ buildEnv }} build &middot; not final</div>
+  {% endif %}
+  <header class="sj-masthead">
+    <div class="sj-masthead-inner">
+      <a class="sj-brand" href="/seeking-jesus/">
+        <span class="sj-brand-eyebrow">Interactive study &middot; Volume 2 companion</span>
+        <span class="sj-brand-title">Seeking Jesus of Nazareth</span>
+      </a>
+      <nav class="sj-modnav" aria-label="Study modules">
+        {% for m in modules %}
+        <a href="{{ m.url }}" class="sj-modlink{% if m.id == sjnModule %} is-current{% endif %}"{% if m.id == sjnModule %} aria-current="page"{% endif %}>
+          <span class="sj-modlink-n">{{ loop.index0 }}</span><span class="sj-modlink-l">{{ m.label }}</span>
+        </a>
+        {% endfor %}
+      </nav>
+      <button type="button" class="sj-lensbadge" id="sj-lensbadge" title="Change your starting point" aria-label="Your starting point (change)">
+        <span class="sj-lensbadge-k">Starting point</span>
+        <span class="sj-lensbadge-v" id="sj-lensbadge-v">Not chosen</span>
+      </button>
+    </div>
+  </header>
+
+  {{ content | safe }}
+
+  <footer class="sj-colophon">
+    <p>
+      Data version <strong>{{ sjnClient.version }}</strong> &middot; pipeline run {{ sjnClient.run_at }} &middot; every quoted phrase re-checked against its source at build.
+      <span class="sj-badge-inline">{{ sjnClient.badge }}</span>
+    </p>
+    <p><a href="/seeking-jesus/#how-made">How this map was made</a> &middot; <a href="/connect/">Corrections welcome</a> &middot; <a href="/my-reflections/">My Discipleship Journal</a></p>
+  </footer>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/wop-reflections.js?v={{ site.version }}"></script>
+<script>window.SJN = {{ sjnClient.json_html | safe }};</script>
+<script src="/js/seeking-jesus.js?v={{ site.version }}"></script>
+{% endblock %}
