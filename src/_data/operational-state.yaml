@@ -97,27 +97,24 @@ workstreams:
     status: active
     priority: high
     state: >
-      Gate 2 data pipeline COMPLETE 2026-09-09 (commit "Add: Seeking Jesus of
-      Nazareth data pipeline (Gate 2) against workbook v2.16"). Canonical source
-      is the controlled workbook (data-sources/sjn/, v2.16 H37 OCA SOURCE); v1 is
-      static JSON only (AUTH-ARCH-001). scripts/sjn-build-data.py re-executes
-      P001–P031, live-fetches 103 URLs, asserts 152 phrases inside locator
-      scope, emits src/_data/sjn/*.json; scripts/sjn-verify-data.js (npm
-      prebuild) refuses the Eleventy build unless that data is a green LIVE run.
-      All author gates G1–G6 AUTHOR CLEAR; G7–G9 waiting on dependency. No app
-      modules (M0–M8) built yet; route /seeking-jesus/ not created.
+      Gate 2 pipeline live against workbook v2.18 CODE RECONCILED (commit a827433;
+      overrides retired; ranges.json from the Sensitivity Ranges sheet; sentence
+      selected by code from four_clause_*). Gate 3 MVP BUILT 2026-09-09 (commits
+      88c92db..d36303b): M0 Orientation /seeking-jesus/, M1 Map /map/, M2 Code It
+      Yourself /code-it/, M5 Conversation Builder /conversation/, M6 Self-check and
+      goals /self-check/; entry cards on /discipleship/, /volume-2/, /writings/.
+      Layout layouts/sjn.njk; data via _data/sjnClient.js; sjn-stat macro in
+      macros/sjn.njk; journal bridge writes commitments under chapterId
+      seeking-jesus. All five pages carry draft: true (noindex, unlisted) and the
+      author-review ribbon in non-production builds (isProd from VERCEL_ENV).
     open_items: >
-      (1) Three phrase transcription overrides (Q-033, Q-173, Q-174) in
-      scripts/sjn-phrase-overrides.json await author ratification and workbook
-      v2.17 incorporation, plus the Q-290 OCA phrase target supplement.
-      (2) Inference Evidence Map narrative stale by one cell (INF-05 141/456,
-      INF-06 spread 27) after the H37 change. (3) 26 style flags: "LDS" in
-      research-facing fields that surface on click (cells scope_control /
-      source_note, citation source labels, inference prose) — reported, not
-      rewritten. (4) ranges.json holds structural sensitivity ranges; paper
-      section 14 ranges not reconciled. (5) Four-clause sentence structure is
-      an inferred schema pending Gate-0 brief reconciliation.
-    next_action: "Cowork: ICC-002 (2 Nephi 25:23), ten scenario cards, Orientation copy against the emitted field names; then Code: /seeking-jesus/ route + sjn-stat component (M0–M8)."
+      (1) AJP sign-off on M0 Orientation copy, the ten M5 scenario cards, and the
+      six M6 self-check statements (Code placeholders for framework 7A/C); then flip
+      draft: true off. (2) Workbook v2.19: ICS-019 locator should read Section
+      "Why Then Obey?" (phrase sits there, not under "Grace Unlocks the Gates of
+      Heaven"); the source is dropped from ICC-002 on the site until then. (3) Inline
+      client payload is ~200 KB per page; trim per module in a later pass.
+    next_action: "Cowork: author read-through of M0/M5 on the live pages + workbook v2.19 → Code: apply edits, unflag draft, then M3 / M3a / M4."
 
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED
@@ -195,7 +192,7 @@ governance_docs:
 # ═══════════════════════════════════════════════════════════════════
 next_priorities:
   - "Articles arc: VR/group-display field-test findings → group-display mode design (next session)"
-  - "Seeking Jesus of Nazareth: Cowork content pass (ICC-002, scenario cards, Orientation) → Code app modules M0–M8 at /seeking-jesus/"
+  - "Seeking Jesus of Nazareth: author sign-off on M0/M5 copy → unflag draft → M3, M3a, M4"
   - "Christlike Practices app Phase 1: practice-corpus editorial batches (also Movement 3 voice calibration)"
   - "KMC git backup on PythonAnywhere (Aaron; prerequisite for later KMC migration)"
   - "Complete A10 IRL Articles-reading video"
