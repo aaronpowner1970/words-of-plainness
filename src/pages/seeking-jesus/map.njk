@@ -1,0 +1,93 @@
+---
+layout: layouts/sjn.njk
+title: "The Map — Seeking Jesus of Nazareth"
+permalink: /seeking-jesus/map/
+description: "Eighty-three descriptions of God and Restoration additions, each with its category, plain-language summary, caution, and the historic and Restoration sources behind it."
+sjnModule: map
+sjnDraft: false
+draft: true
+eleventyExcludeFromCollections: true
+bodyClass: "sj-page"
+---
+{% from "macros/sjn.njk" import chip, witness %}
+{% set C = sjnClient %}
+{#
+  M1 — The Map. All 83 cards are rendered at build from sjnClient.predicates (so the page reads
+  without JavaScript and Pagefind indexes it); js/seeking-jesus.js only filters and deep-links.
+  Vector families (H07, H32, H56) always render their caption and never as a single tile.
+#}
+<section class="sj-section">
+  <div class="sj-wrap sj-wrap--wide">
+    <span class="sj-eyebrow">Module 1</span>
+    <h1>The Map</h1>
+    <p class="sj-lede">{{ C.counts.inherited }} historic descriptions of God and {{ C.counts.additions }} Restoration additions. Every card shows its category, what it means in plain words, the caution that keeps it honest, and the two sources it rests on.</p>
+
+    <div class="sj-filters" role="group" aria-label="Filter the map">
+      <label>Corpus
+        <select id="sj-f-corpus">
+          <option value="all">All {{ C.predicates | length }}</option>
+          <option value="inherited">Inherited descriptions ({{ C.counts.inherited }})</option>
+          <option value="restoration">Restoration additions ({{ C.counts.additions }})</option>
+        </select>
+      </label>
+      <label>Category
+        <span class="sj-codebtns">
+          <button type="button" class="sj-codebtn is-on" data-code="all">All</button>
+          <button type="button" class="sj-codebtn" data-code="A">Shared</button>
+          <button type="button" class="sj-codebtn" data-code="Q">Differently understood</button>
+          <button type="button" class="sj-codebtn" data-code="D">Different</button>
+          <button type="button" class="sj-codebtn" data-code="ADDITION">Addition</button>
+        </span>
+      </label>
+      <label>Language
+        <select id="sj-f-mode">
+          <option value="all">All</option>
+          <option value="kataphatic">Positive (what God is)</option>
+          <option value="apophatic">Negative (what God is not)</option>
+        </select>
+      </label>
+      <label>Family
+        <select id="sj-f-family">
+          <option value="all">All families</option>
+          {% for f in C.families %}<option value="{{ f }}">{{ f }}</option>{% endfor %}
+        </select>
+      </label>
+      <label>Search
+        <input type="text" id="sj-f-q" placeholder="e.g. merciful, creator, body">
+      </label>
+      <button type="button" class="sj-btn sj-btn--ghost sj-btn--sm" id="sj-f-reset">Reset</button>
+    </div>
+    <p class="sj-count" id="sj-count">Showing {{ C.predicates | length }} of {{ C.predicates | length }} descriptions</p>
+
+    <div class="sj-mapgrid">
+      {% for p in C.predicates %}
+      {% set modeKey = "kataphatic" if "ataphatic" in p.mode else ("apophatic" if p.corpus == "inherited" else "addition") %}
+      <article class="sj-card sj-card--{{ p.code }} sj-pcard" id="{{ p.id }}" data-corpus="{{ p.corpus }}" data-code="{{ p.code }}" data-mode="{{ modeKey }}" data-family="{{ p.family }}">
+        <div class="sj-pcard-head">
+          <span class="sj-pcard-id">{{ p.id }}{% if p.tier %} &middot; {{ p.tier }}{% endif %}</span>
+          {{ chip(p.code, C.code_labels) }}
+        </div>
+        <h3>{{ p.predicate }}</h3>
+        <span class="sj-pcard-family">{{ p.family }} &middot; {{ p.mode }}</span>
+        <p class="sj-pcard-summary">{{ p.summary }}</p>
+        <p class="sj-sentence">{{ p.sentence }}</p>
+        {% if p.vector %}
+        <div class="sj-vector"><b>Multi-layer family</b>{{ p.vector.caption }} <span class="sj-mute">({{ p.vector.layers }})</span></div>
+        {% endif %}
+        <details>
+          <summary>Caution, scope, and sources</summary>
+          <p class="sj-caution">{{ p.caution }}</p>
+          {% if p.scope and p.scope != p.caution %}<p class="sj-caution"><b>Scope.</b> {{ p.scope }}</p>{% endif %}
+          {% if p.corpus == "inherited" %}<p class="sj-meta">Source definition: {{ p.floor }}</p>{% endif %}
+          {{ witness(p) }}
+          <p class="sj-meta">Confidence: {{ p.confidence }} &middot; {{ p.provenance }}{% if not p.ratified %} &middot; <b>wording not yet ratified</b>{% endif %}</p>
+          <div class="sj-pcard-actions">
+            <a class="sj-btn sj-btn--sm" href="/seeking-jesus/conversation/#{{ p.id }}">Use in a conversation</a>
+            <button type="button" class="sj-btn sj-btn--sm sj-btn--ghost sj-copy-sentence" data-id="{{ p.id }}">Copy sentence</button>
+          </div>
+        </details>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
