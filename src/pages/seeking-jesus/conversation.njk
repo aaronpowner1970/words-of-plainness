@@ -1,0 +1,100 @@
+---
+layout: layouts/sjn.njk
+title: "Conversation Builder — Seeking Jesus of Nazareth"
+permalink: /seeking-jesus/conversation/
+description: "Ten real conversations, five from each side of the table, each resolved to the four sentences: here we agree, here we share a concern but mean it differently, here we disagree, here one tradition adds a claim."
+sjnModule: conversation
+sjnDraft: true
+draft: true
+eleventyExcludeFromCollections: true
+bodyClass: "sj-page"
+---
+{% from "macros/sjn.njk" import chip %}
+{% set C = sjnClient %}
+{% set S = sjnScenarios %}
+{#
+  M5 — Conversation Builder. Scenario cards are hand-authored content (sjnScenarios, Cowork draft 1,
+  AUTHOR_REVIEW); every anchor resolves to a counted predicate, a Godhead proposition, or an approved
+  clarification case, and every card resolves to the four-clause sentence selected by code.
+#}
+<section class="sj-section">
+  <div class="sj-wrap">
+    <span class="sj-eyebrow">Module 3</span>
+    <h1>Conversation Builder</h1>
+    <p class="sj-lede">Ten things people actually say, five from each side of the table. Each card names what is really being asked, points to the descriptions on the map that answer it, and resolves to the four sentences.</p>
+    <div class="sj-lensrow" role="group" aria-label="Which side of the table">
+      <span class="sj-mute">Practice as:</span>
+      <button type="button" class="sj-codebtn sj-convo-lens" data-lens="latter_day_saint">Latter-day Saint learner</button>
+      <button type="button" class="sj-codebtn sj-convo-lens" data-lens="other_christian">Learner from another Christian tradition</button>
+    </div>
+    <p class="sj-mute" id="sj-convo-lenslabel"></p>
+  </div>
+</section>
+
+<section class="sj-section">
+  <div class="sj-wrap">
+    {% for sc in S.scenarios %}
+    <article class="sj-card sj-scn" id="{{ sc.id }}" data-id="{{ sc.id }}" data-lens="{{ sc.lens }}" data-title="{{ sc.title }}">
+      <span class="sj-eyebrow">{{ sc.id }} &middot; {{ sc.lens_label }}</span>
+      <h2 style="color:var(--sj-text)">{{ sc.title }}</h2>
+      <blockquote><span class="sj-scn-line">{{ sc.line }}</span><cite>{{ sc.speaker }}</cite></blockquote>
+      <h4>What is really being asked</h4>
+      <p class="sj-scn-asking">{{ sc.really_asking }}</p>
+      <h4>Where the map answers it</h4>
+      <div class="sj-anchors">
+        {% for a in sc.anchors %}
+          {% set found = false %}
+          {% for p in C.predicates %}{% if p.id == a %}{% set found = true %}
+            <a class="sj-anchor sj-anchor--{{ p.code }}" href="/seeking-jesus/map/#{{ p.id }}" title="{{ p.summary }}"><span class="sj-chip-code">{{ "+" if p.code == "ADDITION" else p.code }}</span>{{ p.predicate }}</a>
+          {% endif %}{% endfor %}
+          {% if not found %}
+            {% if a.startsWith("GOD-") %}<a class="sj-anchor sj-anchor--G" href="/seeking-jesus/#godhead" title="Godhead context panel (not counted)"><span class="sj-chip-code">G</span>{{ a }}</a>
+            {% elif a.startsWith("ICC-") %}<a class="sj-anchor sj-anchor--C" href="/seeking-jesus/#clarifications" title="Clarification case (not counted)"><span class="sj-chip-code">C</span>{{ a }}</a>
+            {% else %}<span class="sj-anchor"><span class="sj-chip-code">?</span>{{ a }}</span>{% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      <h4>Resolves to</h4>
+      <ul class="sj-clauses">
+        {% for k in sc.clauses %}
+          {% set code = { agree: "A", qualified: "Q", diverge: "D", addition: "ADDITION" }[k] %}
+          <li class="c-{{ code }}">{{ C.four_clause[code] }}</li>
+        {% endfor %}
+      </ul>
+      <h4>A response you could give</h4>
+      <p class="sj-scn-response">{{ sc.model_response | safe }}</p>
+      <div class="sj-avoid sj-scn-avoid"><b>Avoid.</b> {{ sc.avoid }}</div>
+      <p class="sj-sources" style="margin-top:.8rem">Sources on this card: {% for s in sc.source_links %}{% if s.url %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.ref }}</a>{% else %}{{ s.ref }}{% endif %}{% if not loop.last %} &middot; {% endif %}{% endfor %}</p>
+      <div class="sj-btnrow">
+        <button type="button" class="sj-btn sj-btn--sm sj-scn-journal">Save to My Discipleship Journal</button>
+        <button type="button" class="sj-btn sj-btn--sm sj-btn--ghost sj-scn-copy">Copy this card</button>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="sj-section" id="sj-build">
+  <div class="sj-wrap">
+    <h2>Build your own</h2>
+    <p>Pick the descriptions that belong to your conversation. The builder sorts them into the four sentences for you; the wording of each sentence never changes, only which descriptions sit under it.</p>
+    <label for="sj-build-pick">Add a description</label>
+    <select id="sj-build-pick">
+      <option value="">Choose…</option>
+      {% for code in ["A", "Q", "D", "ADDITION"] %}
+      <optgroup label="{{ C.code_labels[code].long }}">
+        {% for p in C.predicates %}{% if p.code == code %}<option value="{{ p.id }}">{{ p.predicate }} ({{ p.id }})</option>{% endif %}{% endfor %}
+      </optgroup>
+      {% endfor %}
+    </select>
+    <ul class="sj-clauses" id="sj-build-list"></ul>
+    <h4>Your four-clause sentence</h4>
+    <div class="sj-builder-script" id="sj-build-script"></div>
+    <div class="sj-btnrow">
+      <button type="button" class="sj-btn sj-btn--sm" id="sj-build-journal">Save to My Discipleship Journal</button>
+      <button type="button" class="sj-btn sj-btn--sm sj-btn--ghost" id="sj-build-copy">Copy</button>
+      <button type="button" class="sj-btn sj-btn--sm sj-btn--ghost" id="sj-build-clear">Clear</button>
+      <a class="sj-btn sj-btn--sm sj-btn--primary" href="/seeking-jesus/self-check/">Next: Self-check and goals</a>
+    </div>
+  </div>
+</section>
