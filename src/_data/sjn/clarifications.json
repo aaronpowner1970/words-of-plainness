@@ -1,19 +1,19 @@
 {
   "app_master_version": "v2.18 CODE RECONCILED",
-  "canonical_hash": "3cd1ac9d336bec19d2854d50bb8f34f725cc9e281e3bf917c7d0f9552727d755",
+  "canonical_hash": "0a9de282b33122c765c7f665b29dba0bc157093a16f643bf346428a1a8a42cb8",
   "policy": {
-    "clarification_layer_enabled": true,
+    "clarification_layer_enabled": "TRUE",
     "clarification_case_sheet": "Interpretive Clarifications",
     "clarification_trigger_sheet": "Clarification Trigger Map",
     "clarification_vocabulary_sheet": "Clarification Vocabulary",
     "clarification_source_sheet": "Clarification Sources",
-    "clarification_counted": false,
+    "clarification_counted": "FALSE",
     "clarification_default_behavior": "AUTO_CUE_MANUAL_EXPANSION",
     "clarification_auto_priority_threshold": "HIGH",
     "clarification_max_auto_cues_per_view": 1,
-    "clarification_auto_requires_approved_case": true,
-    "clarification_tradition_alone_auto_trigger": false,
-    "clarification_manual_explorer_enabled": true,
+    "clarification_auto_requires_approved_case": "TRUE",
+    "clarification_tradition_alone_auto_trigger": "FALSE",
+    "clarification_manual_explorer_enabled": "TRUE",
     "clarification_assistant_authority_rule": "APPROVED_CASE preferred when matched",
     "clarification_runtime_mode": "DETERMINISTIC_ONLY",
     "clarification_anchor_rule": "THREE_WAY (counted predicate | Godhead proposition | declared explorer category)",
@@ -693,6 +693,38 @@
         },
         {
           "kind": "CLARIFICATION",
+          "key": "ICS-019",
+          "role": "ICC-002",
+          "url": "https://www.churchofjesuschrist.org/study/general-conference/2015/04/the-gift-of-grace?lang=eng",
+          "locator": "Section \"Why Then Obey?\"",
+          "document": "Dieter F. Uchtdorf, \"The Gift of Grace,\" April 2015 General Conference",
+          "phrase": "the reaching out of our mortal hand to receive this sacred gift",
+          "extraction": "RENDERED",
+          "status": "ASSERT",
+          "predicate_id": "",
+          "note": "",
+          "conditional": false,
+          "review_status": "VERIFIED",
+          "dropped": false,
+          "page_hit": false,
+          "result": "PASS",
+          "scope_mode": "SECTION-SCOPED",
+          "scope_note": "section “Why Then Obey?”",
+          "scoped_chars": 1793,
+          "fetch_status": 200,
+          "detail": "phrase found inside locator scope",
+          "word_count": 12,
+          "claim_supported": "Obedience as the receiving response to grace.",
+          "source_role": "OFFICIAL_EXPOSITION",
+          "institution": "The Church of Jesus Christ of Latter-day Saints",
+          "subtradition_scope": "Churchwide (canonical/official)",
+          "authority_note": "General Conference address; official publication.",
+          "current": "YES",
+          "period": "2015",
+          "verified_by": "workbook + pipeline"
+        },
+        {
+          "kind": "CLARIFICATION",
           "key": "ICS-020",
           "role": "ICC-002",
           "url": "https://www.churchofjesuschrist.org/study/scriptures/bd/grace?lang=eng",
@@ -724,16 +756,7 @@
           "verified_by": "pipeline rendered fetch"
         }
       ],
-      "dropped_sources": [
-        {
-          "id": "ICS-019",
-          "phrase": "the reaching out of our mortal hand to receive this sacred gift",
-          "url": "https://www.churchofjesuschrist.org/study/general-conference/2015/04/the-gift-of-grace?lang=eng",
-          "locator": "Section \"Grace Unlocks the Gates of Heaven\"",
-          "detail": "phrase NOT in locator scope (present elsewhere on page — locator/phrase mismatch); actual location: under heading “Why Then Obey?” (p53)",
-          "reason": "phrase confirmed on the page but not inside the cited locator (workbook locator needs correction); dropped from the case, not the case itself"
-        }
-      ]
+      "dropped_sources": []
     }
   ],
   "triggers": [

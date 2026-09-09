@@ -8,10 +8,11 @@ from .scope import resolve_html, resolve_pdf, resolve_rendered, ScopeError
 from .textnorm import contains, normalize, phrase_word_count, pdf_repair
 from .workbook import s
 
-# Workbook v2.18 carries every phrase target; the pipeline no longer supplements or overrides
+# Workbook v2.18+ carries every phrase target; the pipeline no longer supplements or overrides
 # workbook phrases. Case Study Phrase Targets rows whose family is NOT one of the Matrix Case
-# Studies (H05/H22/H43) are released non-case-study queue-cell targets (e.g. Q-290) and are
-# validated under their own rule so P020/P021 keep the workbook's 140/24/21 expectations.
+# Studies (H05/H22/H43) are released non-case-study queue-cell targets (e.g. Q-290). Since
+# workbook v2.19 (Build Validation V063/V074/V089) they count with the case-study rows: P021 sees
+# 26 rows, P020 sees 142 content assertions, and the QUEUE-CELL rule remains a subset check.
 CONDITIONAL_REVIEW_PREFIX = "PENDING FETCH"   # Clarification Sources awaiting rendered-fetch verification
 
 
@@ -107,7 +108,7 @@ def collect_public_urls(ctx, targets):
         for k in ("Historical authority URL", "Historical text URL", "Restoration primary URL", "Restoration supplemental URL"):
             add(c.get(k))
     for r in ctx.godhead:
-        add(r.get("Historic source URL")); add(r.get("LDS URL"))
+        add(r.get("Historic source URL")); add(r.get("Latter-day Saint URL") or r.get("LDS URL"))
     for r in ctx.restoration26:
         add(r.get("Official / primary source URL"))
     for r in ctx.pass2:

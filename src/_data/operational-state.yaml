@@ -97,24 +97,27 @@ workstreams:
     status: active
     priority: high
     state: >
-      Gate 2 pipeline live against workbook v2.18 CODE RECONCILED (commit a827433;
-      overrides retired; ranges.json from the Sensitivity Ranges sheet; sentence
-      selected by code from four_clause_*). Gate 3 MVP BUILT 2026-09-09 (commits
-      88c92db..d36303b): M0 Orientation /seeking-jesus/, M1 Map /map/, M2 Code It
-      Yourself /code-it/, M5 Conversation Builder /conversation/, M6 Self-check and
-      goals /self-check/; entry cards on /discipleship/, /volume-2/, /writings/.
-      Layout layouts/sjn.njk; data via _data/sjnClient.js; sjn-stat macro in
-      macros/sjn.njk; journal bridge writes commitments under chapterId
-      seeking-jesus. All five pages carry draft: true (noindex, unlisted) and the
-      author-review ribbon in non-production builds (isProd from VERCEL_ENV).
+      LIVE (public, indexed) since 2026-09-09: author read-through complete, all ten
+      global calls ratified (AJP). Gate 2 pipeline runs against workbook v2.19
+      AUTHOR_RATIFIED (data-sources/sjn/; overrides retired; ranges.json from the
+      Sensitivity Ranges sheet; sentence selected by code from four_clause_*;
+      P020/P021 reconciled to the workbook's 26 rows / 142 / 162 counts with a
+      BUILD-VALIDATION rule that cross-checks V063/V074/V089 every run). Gate 3
+      MVP: M0 Orientation /seeking-jesus/, M1 Map /map/, M2 Code It Yourself
+      /code-it/, M5 Conversation Builder /conversation/, M6 Self-check and goals
+      /self-check/; entry cards on /discipleship/, /volume-2/, /writings/ plus
+      "Seeking Jesus" in the main menu. Layout layouts/sjn.njk; data via
+      _data/sjnClient.js; M5 cards in _data/sjnScenariosContent.json (ratified v2);
+      journal bridge writes commitments under chapterId seeking-jesus. Hazard
+      vocabulary codes hidden on M0 (names only); GOD-01–04 prose canonical in the
+      workbook Godhead Context sheet.
     open_items: >
-      (1) AJP sign-off on M0 Orientation copy, the ten M5 scenario cards, and the
-      six M6 self-check statements (Code placeholders for framework 7A/C); then flip
-      draft: true off. (2) Workbook v2.19: ICS-019 locator should read Section
-      "Why Then Obey?" (phrase sits there, not under "Grace Unlocks the Gates of
-      Heaven"); the source is dropped from ICC-002 on the site until then. (3) Inline
-      client payload is ~200 KB per page; trim per module in a later pass.
-    next_action: "Cowork: author read-through of M0/M5 on the live pages + workbook v2.19 → Code: apply edits, unflag draft, then M3 / M3a / M4."
+      (1) Workbook APP CONFIG app_master_version still reads "v2.18 CODE RECONCILED"
+      inside the v2.19 file, so the site colophon shows v2.18; Cowork to bump it on
+      the next workbook pass. (2) Inline client payload is ~200 KB per page; trim per
+      module in a later pass. (3) H43 stays PENDING; M7 branch map disabled; Gate 4
+      beta feedback form and M8 human-story pathway remain backlog.
+    next_action: "Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
 
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED
@@ -192,7 +195,7 @@ governance_docs:
 # ═══════════════════════════════════════════════════════════════════
 next_priorities:
   - "Articles arc: VR/group-display field-test findings → group-display mode design (next session)"
-  - "Seeking Jesus of Nazareth: author sign-off on M0/M5 copy → unflag draft → M3, M3a, M4"
+  - "Seeking Jesus of Nazareth (live 2026-09-09): build M3, M3a, M4"
   - "Christlike Practices app Phase 1: practice-corpus editorial batches (also Movement 3 voice calibration)"
   - "KMC git backup on PythonAnywhere (Aaron; prerequisite for later KMC migration)"
   - "Complete A10 IRL Articles-reading video"

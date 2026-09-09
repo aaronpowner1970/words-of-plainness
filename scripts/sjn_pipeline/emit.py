@@ -390,7 +390,9 @@ def build_godhead(ctx, decisions):
         out.append(OrderedDict([
             ("id", pid), ("proposition", s(r.get("Context proposition"))),
             ("historic_source", s(r.get("Historic-Christian source/example"))), ("historic_url", s(r.get("Historic source URL")) or None),
-            ("restoration_source", s(r.get("LDS source/example"))), ("restoration_url", s(r.get("LDS URL")) or None),
+            # Header renamed "LDS …" → "Latter-day Saint …" in workbook v2.18 (style law); accept both.
+            ("restoration_source", s(r.get("Latter-day Saint source/example") or r.get("LDS source/example"))),
+            ("restoration_url", s(r.get("Latter-day Saint URL") or r.get("LDS URL")) or None),
             ("relationship_to_counted_predicates", s(r.get("Relationship to counted predicates"))),
             ("not_counted", True), ("quantitative_status", s(r.get("Quantitative status"))),
             ("teaching_use", s(r.get("Teaching use"))), ("caution", s(r.get("Caution"))),

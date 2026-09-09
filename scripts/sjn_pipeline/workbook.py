@@ -208,6 +208,11 @@ def _json_safe(v):
     return v
 
 
+# Boolean cells re-saved through openpyxl (workbook v2.19, Cowork) come back in formula mode as the
+# literal formulas =TRUE() / =FALSE(); treat them as the booleans they are.
+_BOOL_FORMULAS = {"=TRUE()": "TRUE", "=FALSE()": "FALSE"}
+
+
 def s(v):
     """Cell value to stripped string ('' for None)."""
     if v is None:
@@ -216,7 +221,8 @@ def s(v):
         return v.date().isoformat() if isinstance(v, _dt.datetime) else v.isoformat()
     if isinstance(v, float) and v.is_integer():
         return str(int(v))
-    return str(v).strip()
+    out = str(v).strip()
+    return _BOOL_FORMULAS.get(out.upper().replace(" ", ""), out)
 
 
 def b(v):

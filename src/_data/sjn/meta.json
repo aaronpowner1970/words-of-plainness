@@ -3,14 +3,14 @@
   "pipeline_version": "1.0.0",
   "app_master_version": "v2.18 CODE RECONCILED",
   "build_date": "2026-09-09",
-  "pipeline_run_at": "2026-09-09T10:24:01Z",
-  "elapsed_seconds": 137.1,
-  "workbook_file": "Seeking_Jesus_Teaching_Predicate_Source_v2.18_CODE_RECONCILED_20260909.xlsx",
-  "workbook_sha256": "3b56728c1de614f4f3effa1cceacb12d55d047e767c37f259b664010c5ecdc59",
-  "canonical_hash": "3cd1ac9d336bec19d2854d50bb8f34f725cc9e281e3bf917c7d0f9552727d755",
+  "pipeline_run_at": "2026-09-09T20:46:42Z",
+  "elapsed_seconds": 136.2,
+  "workbook_file": "Seeking_Jesus_Teaching_Predicate_Source_v2.19_AUTHOR_RATIFIED_20260909.xlsx",
+  "workbook_sha256": "18492bace9b9dfef327c6829c83e845c49ef71d78fa0a9bb6933cc9617c5fab2",
+  "canonical_hash": "0a9de282b33122c765c7f665b29dba0bc157093a16f643bf346428a1a8a42cb8",
   "canonical": {
-    "hash": "3cd1ac9d336bec19d2854d50bb8f34f725cc9e281e3bf917c7d0f9552727d755",
-    "bytes": 1061538,
+    "hash": "0a9de282b33122c765c7f665b29dba0bc157093a16f643bf346428a1a8a42cb8",
+    "bytes": 1063928,
     "deterministic": true,
     "declared": "de32c6bfa2cd5cde8bd705eed11f8c209a0ff30f68d22f1ac7479bb439b04207",
     "matches_declared": false,
@@ -207,9 +207,9 @@
         "dropped": 0
       },
       "CLARIFICATION": {
-        "total": 19,
-        "pass": 19,
-        "dropped": 1
+        "total": 20,
+        "pass": 20,
+        "dropped": 0
       },
       "QUEUE-CELL": {
         "total": 2,
@@ -466,7 +466,7 @@
       "severity": "BLOCK",
       "status": "PASS",
       "expected": "reproducible SHA-256 per Build Metadata recipe",
-      "actual": "3cd1ac9d336bec19d2854d50bb8f34f725cc9e281e3bf917c7d0f9552727d755",
+      "actual": "0a9de282b33122c765c7f665b29dba0bc157093a16f643bf346428a1a8a42cb8",
       "detail": "declared(v2.14)=de32c6bfa2cd5cde8bd705eed11f8c209a0ff30f68d22f1ac7479bb439b04207; matches_declared=False; Declared hash is the v2.14 snapshot; Build Metadata v2.15/v2.16 rows instruct the pipeline to recompute. Recomputed hash is stamped as canonical for this build."
     },
     {
@@ -482,7 +482,7 @@
       "severity": "GATE",
       "status": "GATE-CLEAR",
       "expected": "FALSE",
-      "actual": "False",
+      "actual": "FALSE",
       "detail": ""
     },
     {
@@ -513,16 +513,24 @@
       "rule": "P020",
       "severity": "BLOCK",
       "status": "PASS",
-      "expected": "140 scoped assertions executable (56+63+21); 3 PDF rows",
-      "actual": "140/140 scoped; PDF rows=3; document-is-locator=7",
-      "detail": "document-is-locator keys=['RNR-H37', 'RNR-H52', 'RNR-H53', 'RNR-H54', 'RNR-H55', 'RNR-H56', 'Q-170']"
+      "expected": "142 scoped assertions executable (56+63+21+2 queue-cell); 3 PDF rows",
+      "actual": "142/142 scoped (queue-cell=2); PDF rows=3; document-is-locator=9",
+      "detail": "document-is-locator keys=['RNR-H37', 'RNR-H52', 'RNR-H53', 'RNR-H54', 'RNR-H55', 'RNR-H56', 'Q-170', 'Q-290', 'Q-290']"
     },
     {
       "rule": "P021",
       "severity": "BLOCK",
       "status": "PASS",
-      "expected": "24 valid; 21 assertions; 3 unreleased no-target",
-      "actual": "records=24 pass=21/21 state_mismatch=[] dist={('RNR-H05', 'ASSERT'): 8, ('RNR-H22', 'ASSERT'): 8, ('RNR-H43', 'ASSERT'): 5, ('RNR-H43', 'NO TARGET — UNRELEASED'): 3}",
+      "expected": "26 rows (24 case-study + 2 queue-cell); 23 assertions; 3 unreleased no-target",
+      "actual": "rows=26 (case-study=24 queue-cell=2) pass=23/23 state_mismatch=[] dist={('RNR-H05', 'ASSERT'): 8, ('RNR-H22', 'ASSERT'): 8, ('RNR-H43', 'ASSERT'): 5, ('RNR-H43', 'NO TARGET — UNRELEASED'): 3}",
+      "detail": "[]"
+    },
+    {
+      "rule": "BUILD-VALIDATION",
+      "severity": "BLOCK",
+      "status": "PASS",
+      "expected": "workbook V063/V074/V089 expected values equal pipeline counts (26 / 142 / 162)",
+      "actual": "V063: workbook=26 pipeline=26; V074: workbook=142 pipeline=142; V089: workbook=162 pipeline=162",
       "detail": "[]"
     },
     {
@@ -553,8 +561,8 @@
       "rule": "P025",
       "severity": "BLOCK",
       "status": "PASS",
-      "expected": "19/19 emitted sources pass locator-scoped containment",
-      "actual": "19/19 pass; dropped from cases: ICS-019",
+      "expected": "20/20 emitted sources pass locator-scoped containment",
+      "actual": "20/20 pass; dropped from cases: none",
       "detail": "[]"
     },
     {
@@ -624,10 +632,10 @@
     {
       "rule": "LOCATOR-MISMATCH",
       "severity": "WARN",
-      "status": "WARN",
+      "status": "PASS",
       "expected": "every clarification source phrase sits inside its cited locator",
-      "actual": "1 source(s) dropped pending workbook locator correction",
-      "detail": "ICS-019 (ICC-002) locator 'Section \"Grace Unlocks the Gates of Heaven\"': phrase NOT in locator scope (present elsewhere on page — locator/phrase mismatch); actual location: under heading “Why Then Obey?” (p53)"
+      "actual": "0 source(s) dropped pending workbook locator correction",
+      "detail": ""
     },
     {
       "rule": "CONDITIONAL-SOURCES",
@@ -4580,7 +4588,7 @@
       "key": "ICS-019",
       "role": "ICC-002",
       "url": "https://www.churchofjesuschrist.org/study/general-conference/2015/04/the-gift-of-grace?lang=eng",
-      "locator": "Section \"Grace Unlocks the Gates of Heaven\"",
+      "locator": "Section \"Why Then Obey?\"",
       "document": "Dieter F. Uchtdorf, \"The Gift of Grace,\" April 2015 General Conference",
       "phrase": "the reaching out of our mortal hand to receive this sacred gift",
       "extraction": "RENDERED",
@@ -4589,14 +4597,14 @@
       "note": "",
       "conditional": false,
       "review_status": "VERIFIED",
-      "dropped": true,
-      "page_hit": true,
-      "result": "FAIL",
+      "dropped": false,
+      "page_hit": false,
+      "result": "PASS",
       "scope_mode": "SECTION-SCOPED",
-      "scope_note": "section “Grace Unlocks the Gates of Heaven”",
-      "scoped_chars": 1979,
+      "scope_note": "section “Why Then Obey?”",
+      "scoped_chars": 1793,
       "fetch_status": 200,
-      "detail": "phrase NOT in locator scope (present elsewhere on page — locator/phrase mismatch); actual location: under heading “Why Then Obey?” (p53)",
+      "detail": "phrase found inside locator scope",
       "word_count": 12
     },
     {
@@ -4634,11 +4642,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 93,
+      "elapsed_ms": 141,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://bfm.sbc.net/bfm2000/",
@@ -4649,11 +4657,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 419,
+      "elapsed_ms": 188,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://bookofconcord.org/augsburg-confession/of-god/",
@@ -4664,11 +4672,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 75,
+      "elapsed_ms": 95,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://bookofconcord.org/ecumenical-creeds/athanasian-creed/",
@@ -4679,11 +4687,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 75,
+      "elapsed_ms": 107,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://bookofconcord.org/ecumenical-creeds/nicene-creed/",
@@ -4694,11 +4702,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 59,
+      "elapsed_ms": 63,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://bookofconcord.org/solid-declaration/",
@@ -4709,11 +4717,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 155,
+      "elapsed_ms": 226,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://ccel.org/ccel/creeds/athanasian.creed.html",
@@ -4724,11 +4732,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 67,
+      "elapsed_ms": 75,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://gameo.org/index.php?title=Dordrecht_Confession_of_Faith_%28Mennonite%2C_1632%29",
@@ -4739,11 +4747,11 @@
       "ok": false,
       "error": "HTTP 403",
       "attempts": 1,
-      "elapsed_ms": 371,
+      "elapsed_ms": 410,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": true,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://nafwb.org/site/about/what-we-believe/",
@@ -4754,11 +4762,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 24,
+      "elapsed_ms": 27,
       "from_cache": false,
       "robots": "unavailable",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://opc.org/sc.html",
@@ -4769,11 +4777,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 48,
+      "elapsed_ms": 42,
       "from_cache": false,
       "robots": "unavailable",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://opc.org/wcf.html",
@@ -4784,11 +4792,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 45,
+      "elapsed_ms": 53,
       "from_cache": false,
       "robots": "unavailable",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:27Z"
     },
     {
       "url": "https://pcusa.org/about-pcusa/agencies-entities/life-witness/ministry-areas/constitutional-interpretation/constitution",
@@ -4799,11 +4807,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 448,
+      "elapsed_ms": 1375,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:45Z"
+      "fetched_at": "2026-09-09T20:44:28Z"
     },
     {
       "url": "https://pcusa.org/sites/default/files/boc2016.pdf",
@@ -4814,11 +4822,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 320,
+      "elapsed_ms": 447,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:28Z"
     },
     {
       "url": "https://sourcebooks.web.fordham.edu/basis/lateran4.asp",
@@ -4829,11 +4837,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 184,
+      "elapsed_ms": 187,
       "from_cache": false,
       "robots": "unavailable",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:28Z"
     },
     {
       "url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/articles-religion",
@@ -4844,11 +4852,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 136,
+      "elapsed_ms": 135,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:28Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/manual/doctrines-of-the-gospel/chapter-3?lang=eng",
@@ -4859,11 +4867,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 123,
+      "elapsed_ms": 982,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:28Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/manual/eternal-marriage-student-manual/jesus-christ?lang=eng",
@@ -4874,11 +4882,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 215,
+      "elapsed_ms": 486,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:29Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/manual/eternal-marriage-student-manual/the-family-a-proclamation?lang=eng",
@@ -4889,11 +4897,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 447,
+      "elapsed_ms": 1244,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:29Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/manual/gospel-principles/chapter-47-exaltation?lang=eng",
@@ -4904,11 +4912,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 203,
+      "elapsed_ms": 900,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:29Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/manual/gospel-topics-essays/mother-in-heaven?lang=eng",
@@ -4919,11 +4927,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 501,
+      "elapsed_ms": 902,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:29Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/manual/teachings-of-presidents-of-the-church-lorenzo-snow/chapter-5-the-grand-destiny-of-the-faithful?lang=eng",
@@ -4934,11 +4942,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 552,
+      "elapsed_ms": 941,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:29Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/130?lang=eng",
@@ -4949,11 +4957,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 90,
+      "elapsed_ms": 486,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:30Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/131?lang=eng",
@@ -4964,11 +4972,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 121,
+      "elapsed_ms": 1415,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:46Z"
+      "fetched_at": "2026-09-09T20:44:30Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/132?lang=eng",
@@ -4979,11 +4987,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 133,
+      "elapsed_ms": 365,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:30Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/88?lang=eng",
@@ -4994,11 +5002,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 275,
+      "elapsed_ms": 529,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:30Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/93?lang=eng",
@@ -5009,11 +5017,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 163,
+      "elapsed_ms": 1045,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:30Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/pgp/abr/3?lang=eng",
@@ -5024,11 +5032,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 169,
+      "elapsed_ms": 361,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:30Z"
     },
     {
       "url": "https://www.crcna.org/welcome/beliefs/confessions/belgic-confession",
@@ -5039,11 +5047,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 119,
+      "elapsed_ms": 112,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:30Z"
     },
     {
       "url": "https://www.crcna.org/welcome/beliefs/confessions/heidelberg-catechism",
@@ -5054,11 +5062,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 123,
+      "elapsed_ms": 128,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:30Z"
     },
     {
       "url": "https://www.ewtn.com/catholicism/teachings/vatican-i-dogmatic-constitution-dei-filius-on-the-catholic-faith-241",
@@ -5069,11 +5077,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 63,
+      "elapsed_ms": 56,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:31Z"
     },
     {
       "url": "https://www.lcms.org/about/beliefs/lutheran-confessions",
@@ -5084,11 +5092,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 263,
+      "elapsed_ms": 298,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:31Z"
     },
     {
       "url": "https://www.mennoniteusa.org/who-are-mennonites/what-we-believe/confession-of-faith/creation-and-divine-providence/",
@@ -5099,11 +5107,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1759,
+      "elapsed_ms": 1799,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:31Z"
     },
     {
       "url": "https://www.mennoniteusa.org/who-are-mennonites/what-we-believe/confession-of-faith/god/",
@@ -5114,11 +5122,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1728,
+      "elapsed_ms": 1808,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:31Z"
     },
     {
       "url": "https://www.newadvent.org/fathers/3813.htm",
@@ -5129,11 +5137,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 739,
+      "elapsed_ms": 375,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:47Z"
+      "fetched_at": "2026-09-09T20:44:31Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/church-history/fifth-century/the-fourth-ecumenical-council",
@@ -5144,11 +5152,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 244,
+      "elapsed_ms": 157,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:48Z"
+      "fetched_at": "2026-09-09T20:44:31Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/church-history/seventh-century/the-sixth-ecumenical-council",
@@ -5159,11 +5167,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 196,
+      "elapsed_ms": 172,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:48Z"
+      "fetched_at": "2026-09-09T20:44:31Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/symbol-of-faith/nicene-creed",
@@ -5174,11 +5182,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 714,
+      "elapsed_ms": 344,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:48Z"
+      "fetched_at": "2026-09-09T20:44:31Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-holy-trinity/one-god-one-divine-nature-and-being",
@@ -5189,11 +5197,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 163,
+      "elapsed_ms": 134,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:48Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-holy-trinity/one-god-one-father",
@@ -5204,11 +5212,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 155,
+      "elapsed_ms": 151,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:48Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-holy-trinity/the-three-divine-persons",
@@ -5219,11 +5227,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 262,
+      "elapsed_ms": 171,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:48Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-symbol-of-faith/god",
@@ -5234,11 +5242,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 254,
+      "elapsed_ms": 163,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:48Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-symbol-of-faith/nicene-creed",
@@ -5253,7 +5261,7 @@
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-symbol-of-faith/son-of-god",
@@ -5264,11 +5272,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 191,
+      "elapsed_ms": 147,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.sbc.net/resource-library/resolutions/on-integrity-in-sbc-leadership/",
@@ -5279,11 +5287,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 97,
+      "elapsed_ms": 100,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.sbc.net/resource-library/resolutions/resolution-on-southern-baptists-and-roman-catholics/",
@@ -5294,11 +5302,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 98,
+      "elapsed_ms": 104,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.the1689confession.com/1689/chapter-11",
@@ -5309,11 +5317,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 104,
+      "elapsed_ms": 95,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.the1689confession.com/1689/chapter-26",
@@ -5328,7 +5336,7 @@
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:32Z"
     },
     {
       "url": "https://www.umc.org/en/content/articles-of-religion",
@@ -5339,11 +5347,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 307,
+      "elapsed_ms": 409,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:33Z"
     },
     {
       "url": "https://www.umc.org/en/content/confession-of-faith",
@@ -5354,11 +5362,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 331,
+      "elapsed_ms": 340,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:33Z"
     },
     {
       "url": "https://www.umc.org/en/content/foundational-documents",
@@ -5369,11 +5377,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 411,
+      "elapsed_ms": 431,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:33Z"
     },
     {
       "url": "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html",
@@ -5384,11 +5392,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 827,
+      "elapsed_ms": 116,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:49Z"
+      "fetched_at": "2026-09-09T20:44:33Z"
     },
     {
       "url": "https://www.vatican.va/archive/hist_councils/i-vatican-council/documents/vat-i_const_18700424_dei-filius_la.html",
@@ -5399,11 +5407,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 515,
+      "elapsed_ms": 41,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:50Z"
+      "fetched_at": "2026-09-09T20:44:33Z"
     },
     {
       "url": "https://www.vatican.va/content/catechism/en/part_one/section_one/chapter_one/iv_how_can_we_speak_about_god.html",
@@ -5414,11 +5422,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 500,
+      "elapsed_ms": 490,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:50Z"
+      "fetched_at": "2026-09-09T20:44:33Z"
     },
     {
       "url": "https://www.vatican.va/content/catechism/en/part_one/section_one/chapter_three/article_2/the_credo.html",
@@ -5429,11 +5437,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 496,
+      "elapsed_ms": 858,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:50Z"
+      "fetched_at": "2026-09-09T20:44:34Z"
     },
     {
       "url": "https://www.vatican.va/content/catechism/en/part_one/section_two/chapter_two/artcile_3.html",
@@ -5444,11 +5452,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 894,
+      "elapsed_ms": 920,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:51Z"
+      "fetched_at": "2026-09-09T20:44:34Z"
     },
     {
       "url": "https://www.vaticannews.va/en/prayers/the-apostles_-creed.html",
@@ -5459,11 +5467,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 336,
+      "elapsed_ms": 63,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:51Z"
+      "fetched_at": "2026-09-09T20:44:34Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/general-conference/2015/04/the-gift-of-grace?lang=eng",
@@ -5474,11 +5482,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2362,
+      "elapsed_ms": 2686,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:52Z"
+      "fetched_at": "2026-09-09T20:44:35Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/manual/gospel-topics/godhead?lang=eng",
@@ -5489,11 +5497,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1756,
+      "elapsed_ms": 2068,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:55Z"
+      "fetched_at": "2026-09-09T20:44:38Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/manual/gospel-topics/grace?lang=eng",
@@ -5504,11 +5512,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1749,
+      "elapsed_ms": 2137,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:56Z"
+      "fetched_at": "2026-09-09T20:44:40Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bd/grace?lang=eng",
@@ -5519,11 +5527,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2288,
+      "elapsed_ms": 2343,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:21:58Z"
+      "fetched_at": "2026-09-09T20:44:42Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/10?lang=eng&id=p24#p24",
@@ -5534,11 +5542,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 3027,
+      "elapsed_ms": 2034,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:00Z"
+      "fetched_at": "2026-09-09T20:44:44Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/25?lang=eng&id=p23#p23",
@@ -5549,11 +5557,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 3281,
+      "elapsed_ms": 2050,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:03Z"
+      "fetched_at": "2026-09-09T20:44:46Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/9?lang=eng&id=p15#p15",
@@ -5564,11 +5572,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 3434,
+      "elapsed_ms": 2250,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:07Z"
+      "fetched_at": "2026-09-09T20:44:48Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/9?lang=eng&id=p20#p20",
@@ -5579,11 +5587,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2195,
+      "elapsed_ms": 2348,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:10Z"
+      "fetched_at": "2026-09-09T20:44:51Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/24?lang=eng&id=p10-p11#p10",
@@ -5594,11 +5602,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 3255,
+      "elapsed_ms": 2057,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:12Z"
+      "fetched_at": "2026-09-09T20:44:53Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/26?lang=eng&id=p35#p35",
@@ -5609,11 +5617,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 3341,
+      "elapsed_ms": 2024,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:16Z"
+      "fetched_at": "2026-09-09T20:44:55Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/26?lang=eng&id=p8#p8",
@@ -5624,11 +5632,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1960,
+      "elapsed_ms": 2198,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:19Z"
+      "fetched_at": "2026-09-09T20:44:57Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/ether/3?lang=eng&id=p12#p12",
@@ -5639,11 +5647,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 3415,
+      "elapsed_ms": 2092,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:21Z"
+      "fetched_at": "2026-09-09T20:44:59Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/morm/9?lang=eng&id=p19#p19",
@@ -5654,11 +5662,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2676,
+      "elapsed_ms": 2002,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:24Z"
+      "fetched_at": "2026-09-09T20:45:01Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/10?lang=eng&id=p32#p32",
@@ -5669,11 +5677,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1947,
+      "elapsed_ms": 2074,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:27Z"
+      "fetched_at": "2026-09-09T20:45:03Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/7?lang=eng&id=p12#p12",
@@ -5684,11 +5692,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 3216,
+      "elapsed_ms": 2177,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:29Z"
+      "fetched_at": "2026-09-09T20:45:05Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/7?lang=eng&id=p12-p13#p12",
@@ -5699,11 +5707,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1982,
+      "elapsed_ms": 2261,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:32Z"
+      "fetched_at": "2026-09-09T20:45:08Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=eng&id=p21#p21",
@@ -5714,11 +5722,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 3293,
+      "elapsed_ms": 2190,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:34Z"
+      "fetched_at": "2026-09-09T20:45:10Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/4?lang=eng&id=p9#p9",
@@ -5729,11 +5737,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2101,
+      "elapsed_ms": 1911,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:37Z"
+      "fetched_at": "2026-09-09T20:45:12Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/104?lang=eng&id=p14-p17#p14",
@@ -5744,11 +5752,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2054,
+      "elapsed_ms": 2371,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:39Z"
+      "fetched_at": "2026-09-09T20:45:14Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/130?lang=eng&id=p22#p22",
@@ -5759,11 +5767,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1933,
+      "elapsed_ms": 2441,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:42Z"
+      "fetched_at": "2026-09-09T20:45:16Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/131?lang=eng&id=p7-p8#p7",
@@ -5774,11 +5782,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1914,
+      "elapsed_ms": 2037,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:43Z"
+      "fetched_at": "2026-09-09T20:45:19Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/1?lang=eng&id=p38#p38",
@@ -5789,11 +5797,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2102,
+      "elapsed_ms": 2127,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:45Z"
+      "fetched_at": "2026-09-09T20:45:21Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/20?lang=eng&id=p17#p17",
@@ -5804,11 +5812,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2194,
+      "elapsed_ms": 2620,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:48Z"
+      "fetched_at": "2026-09-09T20:45:23Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/20?lang=eng&id=p17-p28#p17",
@@ -5819,11 +5827,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2306,
+      "elapsed_ms": 2344,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:50Z"
+      "fetched_at": "2026-09-09T20:45:26Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/20?lang=eng&id=p19#p19",
@@ -5834,11 +5842,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2346,
+      "elapsed_ms": 2699,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:52Z"
+      "fetched_at": "2026-09-09T20:45:28Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/20?lang=eng&id=p21#p21",
@@ -5849,11 +5857,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2314,
+      "elapsed_ms": 2332,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:54Z"
+      "fetched_at": "2026-09-09T20:45:31Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/20?lang=eng&id=p24#p24",
@@ -5864,11 +5872,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2382,
+      "elapsed_ms": 3414,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:57Z"
+      "fetched_at": "2026-09-09T20:45:33Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/64?lang=eng&id=p10#p10",
@@ -5879,11 +5887,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2126,
+      "elapsed_ms": 2158,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:22:59Z"
+      "fetched_at": "2026-09-09T20:45:36Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/76?lang=eng&id=p114-p116#p114",
@@ -5894,11 +5902,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2446,
+      "elapsed_ms": 3842,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:01Z"
+      "fetched_at": "2026-09-09T20:45:39Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/76?lang=eng&id=p19-p20#p19",
@@ -5909,11 +5917,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2567,
+      "elapsed_ms": 2576,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:04Z"
+      "fetched_at": "2026-09-09T20:45:42Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/88?lang=eng&id=p13#p13",
@@ -5924,11 +5932,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2522,
+      "elapsed_ms": 2683,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:06Z"
+      "fetched_at": "2026-09-09T20:45:45Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/88?lang=eng&id=p6-p13#p6",
@@ -5939,11 +5947,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2562,
+      "elapsed_ms": 2665,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:09Z"
+      "fetched_at": "2026-09-09T20:45:48Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/88?lang=eng&id=p7-p13#p7",
@@ -5954,11 +5962,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2478,
+      "elapsed_ms": 2614,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:11Z"
+      "fetched_at": "2026-09-09T20:45:50Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/93?lang=eng&id=p21-p23#p21",
@@ -5969,11 +5977,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2182,
+      "elapsed_ms": 2313,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:14Z"
+      "fetched_at": "2026-09-09T20:45:53Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/93?lang=eng&id=p29-p33#p29",
@@ -5984,11 +5992,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2176,
+      "elapsed_ms": 2251,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:16Z"
+      "fetched_at": "2026-09-09T20:45:55Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/1-cor/1?lang=eng&id=p24#p24",
@@ -5999,11 +6007,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1863,
+      "elapsed_ms": 1970,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:18Z"
+      "fetched_at": "2026-09-09T20:45:57Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/1-jn/4?lang=eng&id=p8-p16#p8",
@@ -6014,11 +6022,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1976,
+      "elapsed_ms": 1942,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:20Z"
+      "fetched_at": "2026-09-09T20:45:59Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/heb/1?lang=eng&id=p3#p3",
@@ -6029,11 +6037,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1902,
+      "elapsed_ms": 1996,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:22Z"
+      "fetched_at": "2026-09-09T20:46:01Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/john/1?lang=eng&id=p1-p14#p1",
@@ -6044,11 +6052,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2006,
+      "elapsed_ms": 2041,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:24Z"
+      "fetched_at": "2026-09-09T20:46:03Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/john/1?lang=eng&id=p1-p3#p1",
@@ -6059,11 +6067,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2018,
+      "elapsed_ms": 2000,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:26Z"
+      "fetched_at": "2026-09-09T20:46:05Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/john/4?lang=eng&id=p24#p24",
@@ -6074,11 +6082,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1958,
+      "elapsed_ms": 2185,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:28Z"
+      "fetched_at": "2026-09-09T20:46:07Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/john/5?lang=eng&id=p21#p21",
@@ -6089,11 +6097,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1940,
+      "elapsed_ms": 1986,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:30Z"
+      "fetched_at": "2026-09-09T20:46:10Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/rom/11?lang=eng&id=p33#p33",
@@ -6104,11 +6112,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1883,
+      "elapsed_ms": 2226,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:32Z"
+      "fetched_at": "2026-09-09T20:46:12Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/nt/rom/1?lang=eng&id=p20#p20",
@@ -6119,11 +6127,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2014,
+      "elapsed_ms": 2054,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:34Z"
+      "fetched_at": "2026-09-09T20:46:14Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/ot/deut/32?lang=eng&id=p4#p4",
@@ -6134,11 +6142,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2064,
+      "elapsed_ms": 2333,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:36Z"
+      "fetched_at": "2026-09-09T20:46:16Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/ot/ex/34?lang=eng&id=p6#p6",
@@ -6149,11 +6157,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2002,
+      "elapsed_ms": 2081,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:38Z"
+      "fetched_at": "2026-09-09T20:46:18Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/pgp/a-of-f/1?lang=eng&id=p1#p1",
@@ -6164,11 +6172,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1883,
+      "elapsed_ms": 2024,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:40Z"
+      "fetched_at": "2026-09-09T20:46:20Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/pgp/a-of-f/1?lang=eng&id=p3#p3",
@@ -6179,11 +6187,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1983,
+      "elapsed_ms": 2029,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:42Z"
+      "fetched_at": "2026-09-09T20:46:22Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/pgp/abr/3?lang=eng&id=p24#p24",
@@ -6194,11 +6202,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1931,
+      "elapsed_ms": 2298,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:44Z"
+      "fetched_at": "2026-09-09T20:46:24Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/pgp/moses/1?lang=eng&id=p6#p6",
@@ -6209,11 +6217,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2332,
+      "elapsed_ms": 2110,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:46Z"
+      "fetched_at": "2026-09-09T20:46:27Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/pgp/moses/6?lang=eng&id=p61#p61",
@@ -6224,11 +6232,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2094,
+      "elapsed_ms": 2294,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:48Z"
+      "fetched_at": "2026-09-09T20:46:29Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/pgp/moses/7?lang=eng&id=p28-p29#p28",
@@ -6239,11 +6247,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2091,
+      "elapsed_ms": 2087,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:50Z"
+      "fetched_at": "2026-09-09T20:46:31Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/the-family-a-proclamation-to-the-world/the-family-a-proclamation-to-the-world?lang=eng",
@@ -6254,11 +6262,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 1792,
+      "elapsed_ms": 2024,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:52Z"
+      "fetched_at": "2026-09-09T20:46:33Z"
     },
     {
       "url": "https://www.churchofjesuschrist.org/study/scriptures/the-living-christ-the-testimony-of-the-apostles/the-living-christ-the-testimony-of-the-apostles?lang=eng",
@@ -6269,11 +6277,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2219,
+      "elapsed_ms": 1902,
       "from_cache": false,
       "robots": "allowed",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:54Z"
+      "fetched_at": "2026-09-09T20:46:35Z"
     },
     {
       "url": "https://www.josephsmithpapers.org/paper-summary/history-1838-1856-volume-f-1-1-may-1844-8-august-1844/109",
@@ -6284,11 +6292,11 @@
       "ok": true,
       "error": "",
       "attempts": 1,
-      "elapsed_ms": 2105,
+      "elapsed_ms": 2107,
       "from_cache": false,
       "robots": "unavailable",
       "whitelisted": false,
-      "fetched_at": "2026-09-09T10:23:56Z"
+      "fetched_at": "2026-09-09T20:46:37Z"
     }
   ],
   "host_whitelist": {
@@ -6374,32 +6382,7 @@
       "word_count": 8
     }
   ],
-  "dropped_sources": [
-    {
-      "kind": "CLARIFICATION",
-      "key": "ICS-019",
-      "role": "ICC-002",
-      "url": "https://www.churchofjesuschrist.org/study/general-conference/2015/04/the-gift-of-grace?lang=eng",
-      "locator": "Section \"Grace Unlocks the Gates of Heaven\"",
-      "document": "Dieter F. Uchtdorf, \"The Gift of Grace,\" April 2015 General Conference",
-      "phrase": "the reaching out of our mortal hand to receive this sacred gift",
-      "extraction": "RENDERED",
-      "status": "ASSERT",
-      "predicate_id": "",
-      "note": "",
-      "conditional": false,
-      "review_status": "VERIFIED",
-      "dropped": true,
-      "page_hit": true,
-      "result": "FAIL",
-      "scope_mode": "SECTION-SCOPED",
-      "scope_note": "section “Grace Unlocks the Gates of Heaven”",
-      "scoped_chars": 1979,
-      "fetch_status": 200,
-      "detail": "phrase NOT in locator scope (present elsewhere on page — locator/phrase mismatch); actual location: under heading “Why Then Obey?” (p53)",
-      "word_count": 12
-    }
-  ],
+  "dropped_sources": [],
   "style_flags": [],
   "schema": {
     "predicates.json": "{predicates:[83 records: id, corpus, family, predicate, mode, code|authority_tier, lens, summary, caution, ratification, card_mode, vector, inherited, citation{historical,restoration}, restoration, sentence{clause,text,rule}, card{clauses[4],text}]}",
@@ -6413,36 +6396,36 @@
   },
   "files": {
     "predicates.json": {
-      "sha256": "75faa51a6ac6b331529a7b4d256a22f52bdbee4a4659e2748f6a8ea469b96cb2",
+      "sha256": "ed2e931b4a0909374d1020f49da71d7d3e36d9e32be7f20beee76b0132ad8eab",
       "bytes": 372216
     },
     "cells.json": {
-      "sha256": "7a35d0237dd8a99b09bdd011c4f5b890a76f60abb8a0289f22e6f93fb364981f",
+      "sha256": "c4d24f276f7da0821b275c2f76b1ff8b5b058a168775c9b2be0f683c7d789312",
       "bytes": 524166
     },
     "inferences.json": {
-      "sha256": "726a675f72242921e606c87800519dffce150af8272274fd01b64804ddccb0fa",
-      "bytes": 36950
+      "sha256": "d74d7c38c923cbb78a96092b669ef0b854ed5324ef8e875dc96d9071e1f52b00",
+      "bytes": 37283
     },
     "godhead.json": {
-      "sha256": "6408db5c77e5db0d5e287c758bd9275f017e79152b51d693713431c2c885d802",
-      "bytes": 3790
+      "sha256": "ddfc8042da4e83187f9c8bdde9fdd48eec0155aa23ba7955fd9f06a499f7c329",
+      "bytes": 4581
     },
     "vectors.json": {
-      "sha256": "3014aa935d77abf74cf0d5f09060c4dd91d720ff82f047e27ca32176eadb337c",
+      "sha256": "73ef3c381e9b9d01fb986e6953dd3143c24f81b08e56aeab7257af8f1fc26881",
       "bytes": 7784
     },
     "clarifications.json": {
-      "sha256": "721ee904cbd34daba60fb94b6f4c4924b0ad6b71384e8b0da3034f84fb765387",
-      "bytes": 61520
+      "sha256": "9c1b075c41e7a8e5fa7d9608694cd1118127ef52420bfab78680358706b203c7",
+      "bytes": 62311
     },
     "glossary.json": {
-      "sha256": "c05d45fda3bda96b57f850790b39eeba354f2c0d85f963d1eee052a58ca34444",
+      "sha256": "010c37b7ce48845cc90275d4379fad45e409d8650e8951941b2672e9850c1440",
       "bytes": 12251
     },
     "ranges.json": {
-      "sha256": "a6ebbcf97aa6d748a24ea0d98971853b9f02cc85842804b21fcf5b5784ec47e1",
-      "bytes": 11828
+      "sha256": "da42db7019cf92ac7d40e78ea8824958f4813d35d74f17d5a558c632ae3eb4fc",
+      "bytes": 12636
     }
   }
 }

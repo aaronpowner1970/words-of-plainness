@@ -202,28 +202,52 @@ def run_rules(ctx, targets, runner, decisions, gates, canonical, propagation_iss
     add("P019", len(rest) == 63 and len(rp) == 63 and prim == 57 and supp == 6 and not mism, "63/63 (57 primary + 6 supplemental)",
         f"{len(rp)}/{len(rest)} pass; primary={prim} supplemental={supp}; citation/target phrase mismatches={mism}",
         str([(t.key, t.role, t.detail) for t in rest if t.result != "PASS"][:5]))
-    # P020 scoped extraction
-    core = [t for t in targets if t.kind in ("HISTORICAL", "RESTORATION", "CASE-STUDY") and t.status == "ASSERT"]
+    # P020 scoped extraction — workbook v2.19 (V074) counts the released queue-cell targets that live in
+    # Case Study Phrase Targets (the two Q-290 rows) as content assertions: 56 + 63 + 21 + 2 = 142.
+    core = [t for t in targets if t.kind in ("HISTORICAL", "RESTORATION", "CASE-STUDY", "QUEUE-CELL") and t.status == "ASSERT"]
     scoped = [t for t in core if t.scope_mode]
     doc_level = [t for t in core if t.scope_mode == "DOCUMENT-IS-LOCATOR"]
     pdf_rows = [t for t in core if t.extraction == "PDF"]
-    add("P020", len(core) == 140 and len(scoped) == 140 and len(pdf_rows) == 3, "140 scoped assertions executable (56+63+21); 3 PDF rows",
-        f"{len(scoped)}/{len(core)} scoped; PDF rows={len(pdf_rows)}; document-is-locator={len(doc_level)}",
+    n_queue_cell = sum(1 for t in core if t.kind == "QUEUE-CELL")
+    add("P020", len(core) == 142 and len(scoped) == 142 and len(pdf_rows) == 3 and n_queue_cell == 2,
+        "142 scoped assertions executable (56+63+21+2 queue-cell); 3 PDF rows",
+        f"{len(scoped)}/{len(core)} scoped (queue-cell={n_queue_cell}); PDF rows={len(pdf_rows)}; document-is-locator={len(doc_level)}",
         "document-is-locator keys=" + str([t.key for t in doc_level]))
-    # P021 case-study records
+    # P021 Case Study Phrase Targets sheet — every row (V063: 24 case-study + 2 queue-cell = 26)
     cs = [t for t in targets if t.kind == "CASE-STUDY"]
+    qc = [t for t in targets if t.kind == "QUEUE-CELL"]
+    rows = cs + qc
     by_fam = Counter((t.predicate_id, t.status) for t in cs)
     state_mism = []
     for r in ctx.case_targets:
         qr = by_qid.get(s(r["Queue ID"]))
         if not qr or s(r.get("Rendered State")) != s(qr.get("Rendered State (app-safe)")):
             state_mism.append(s(r["Queue ID"]))
-    asserts = [t for t in cs if t.status == "ASSERT"]; ap = [t for t in asserts if t.result == "PASS"]
-    ok = (len(cs) == 24 and by_fam[("RNR-H05", "ASSERT")] == 8 and by_fam[("RNR-H22", "ASSERT")] == 8
+    asserts = [t for t in rows if t.status == "ASSERT"]; ap = [t for t in asserts if t.result == "PASS"]
+    ok = (len(rows) == 26 and len(cs) == 24 and len(qc) == 2
+          and by_fam[("RNR-H05", "ASSERT")] == 8 and by_fam[("RNR-H22", "ASSERT")] == 8
           and by_fam[("RNR-H43", "ASSERT")] == 5 and by_fam[("RNR-H43", "NO TARGET — UNRELEASED")] == 3
-          and not state_mism and len(ap) == 21)
-    add("P021", ok, "24 valid; 21 assertions; 3 unreleased no-target", f"records={len(cs)} pass={len(ap)}/{len(asserts)} state_mismatch={state_mism} dist={dict(by_fam)}",
+          and all(t.status == "ASSERT" for t in qc)
+          and not state_mism and len(ap) == 23 and len(asserts) == 23)
+    add("P021", ok, "26 rows (24 case-study + 2 queue-cell); 23 assertions; 3 unreleased no-target",
+        f"rows={len(rows)} (case-study={len(cs)} queue-cell={len(qc)}) pass={len(ap)}/{len(asserts)} state_mismatch={state_mism} dist={dict(by_fam)}",
         str([(t.key, t.detail) for t in asserts if t.result != "PASS"][:5]))
+    # BUILD-VALIDATION — the workbook's own Build Validation sheet (V063 / V074 / V089) must agree with the
+    # pipeline's counts. This is the reconciliation guard: if the author-owned sheet and the code diverge
+    # again on how the queue-cell rows are counted, the build fails instead of passing on two different numbers.
+    bv = {s(r.get("Rule ID")): r for r in ctx.build_validation}
+    cl_all = [t for t in targets if t.kind == "CLARIFICATION"]
+    pipeline_actual = {"V063": len(rows), "V074": len(core), "V089": len(core) + len(cl_all)}
+    bv_mism = []
+    for rid, actual in pipeline_actual.items():
+        exp = s(bv.get(rid, {}).get("Expected"))
+        if not exp:
+            bv_mism.append((rid, "missing in Build Validation", actual))
+        elif str(exp) != str(actual):
+            bv_mism.append((rid, f"workbook expects {exp}", actual))
+    add("BUILD-VALIDATION", not bv_mism, "workbook V063/V074/V089 expected values equal pipeline counts (26 / 142 / 162)",
+        "; ".join(f"{k}: workbook={s(bv.get(k, {}).get('Expected'))} pipeline={v}" for k, v in pipeline_actual.items()),
+        str(bv_mism))
     # P022 vector captions
     v = ctx.vectors
     ok = {s(r["Family ID"]) for r in v} == {"RNR-H07", "RNR-H32", "RNR-H56"} and all(s(r.get("Card mode")) == "VECTOR" and s(r.get("Learner-facing caption")) for r in v) \

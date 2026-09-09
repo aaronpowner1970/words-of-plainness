@@ -4,29 +4,30 @@ title: "Seeking Jesus of Nazareth"
 permalink: /seeking-jesus/
 description: "Common faith, real differences, and the Restoration: an interactive map comparing fifty-seven historic descriptions of God with Latter-day Saint teaching, with sources for every claim."
 sjnModule: orientation
-sjnDraft: true
-draft: true
-eleventyExcludeFromCollections: true
+sjnDraft: false
 bodyClass: "sj-page"
 ---
 {% from "macros/sjn.njk" import stat, chip, stackedBar, twoBars %}
 {#
-  M0 — Orientation. Learner copy transcribed from WoP_SJN_Orientation_Copy_M0_Draft1_20260909.md
-  (Cowork draft 1, AUTHOR_REVIEW). Chicago em-dashes applied per site style law. Every number
+  M0 — Orientation. Learner copy transcribed from WoP_SJN_Orientation_Copy_M0_v2_20260909.md
+  (AUTHOR_RATIFIED by AJP, 2026-09-09). Chicago em-dashes applied per site style law. Every number
   on this page is rendered from sjnClient (build-time derivation of the pipeline output).
+  Hazard vocabulary codes (SLOGAN_COMPRESSION, …) are deliberately NOT shown here (author call 2):
+  §0.7 lists the ten plain-language names only; the codes surface in the Clarifications explorer / M4.
+  GOD-01–04 prose comes from the workbook's Godhead Context sheet (single canonical source, v2.19).
 #}
 {% set C = sjnClient %}
 {% set hazardCopy = [
-  { code: "SLOGAN_COMPRESSION", name: "Slogan compression.", text: "A short phrase is true but leaves out the distinction you need.", ex: "“Faith alone.” “After all we can do.”" },
-  { code: "SAME_WORD_DIFFERENT_MEANING", name: "Same word, different meaning.", text: "Two traditions use one term with different content.", ex: "“Spirit.” “Saved.”" },
-  { code: "APPARENT_CONTRADICTION", name: "Apparent contradiction.", text: "Two teachings look inconsistent until you separate the layers they belong to.", ex: "" },
-  { code: "ECCLESIAL_VS_SOTERIOLOGICAL", name: "Church standing vs. standing before God.", text: "A church’s judgment about membership is mistaken for God’s judgment of a soul.", ex: "" },
-  { code: "SOURCE_SILENCE_VS_DENIAL", name: "Silence vs. denial.", text: "A source that does not mention something is treated as rejecting it.", ex: "" },
-  { code: "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE", name: "Precedent vs. equivalence.", text: "An ancient idea that resembles a modern teaching is treated as identical to it.", ex: "" },
-  { code: "RELATIONAL_VS_METAPHYSICAL", name: "Relational vs. metaphysical.", text: "Language about relationship is read as a claim about substance, or the reverse.", ex: "" },
-  { code: "FAMILY_VARIATION", name: "One family, many voices.", text: "A whole tradition is treated as a single uniform body.", ex: "" },
-  { code: "AUTHORITY_SCOPE", name: "Whose authority, how far.", text: "One document or institution is taken to speak for a wider communion than it does.", ex: "" },
-  { code: "SEMANTIC_FLOOR", name: "The semantic floor.", text: "A broad label is read as a thicker claim than the comparison actually tested.", ex: "" }
+  { name: "Slogan compression.", text: "A short phrase is true but leaves out the distinction you need.", ex: "“Faith alone.” “After all we can do.”" },
+  { name: "Same word, different meaning.", text: "Two traditions use one term with different content.", ex: "“Spirit.” “Saved.”" },
+  { name: "Apparent contradiction.", text: "Two teachings look inconsistent until you separate the layers they belong to.", ex: "" },
+  { name: "Church standing vs. standing before God.", text: "A church’s judgment about membership is mistaken for God’s judgment of a soul.", ex: "" },
+  { name: "Silence vs. denial.", text: "A source that does not mention something is treated as rejecting it.", ex: "" },
+  { name: "Precedent vs. equivalence.", text: "An ancient idea that resembles a modern teaching is treated as identical to it.", ex: "" },
+  { name: "Relational vs. metaphysical.", text: "Language about relationship is read as a claim about substance, or the reverse.", ex: "" },
+  { name: "One family, many voices.", text: "A whole tradition is treated as a single uniform body.", ex: "" },
+  { name: "Whose authority, how far.", text: "One document or institution is taken to speak for a wider communion than it does.", ex: "" },
+  { name: "The semantic floor.", text: "A broad label is read as a thicker claim than the comparison actually tested.", ex: "" }
 ] %}
 
 <section class="sj-section sj-hero" id="welcome">
@@ -112,7 +113,7 @@ bodyClass: "sj-page"
     <p>The map is only as good as the reader. These are the ten mistakes it is built to help you avoid. Each has a name; the Clarifications explorer uses them as labels.</p>
     <ol class="sj-hazards">
       {% for h in hazardCopy %}
-      <li><b>{{ h.name }}</b> {{ h.text }}{% if h.ex %} <em>{{ h.ex }}</em>{% endif %}<small>{{ h.code }}</small></li>
+      <li><b>{{ h.name }}</b> {{ h.text }}{% if h.ex %} <em>{{ h.ex }}</em>{% endif %}</li>
       {% endfor %}
     </ol>
   </div>
@@ -154,8 +155,9 @@ bodyClass: "sj-page"
       <div class="sj-card">
         <span class="sj-eyebrow">{{ g.id }} &middot; not counted</span>
         <p><b>{{ g.proposition }}</b></p>
-        <p class="sj-caution">{{ g.caution }}</p>
-        <p class="sj-meta">{% if g.historic_url %}<a href="{{ g.historic_url }}" target="_blank" rel="noopener">{{ g.historic_source }}</a>{% else %}{{ g.historic_source }}{% endif %} &middot; <a href="{{ g.restoration_url }}" target="_blank" rel="noopener">{{ g.restoration_source }}</a></p>
+        {# The v2.19 proposition already carries its caution sentence; render the caution separately only if it does not. #}
+        {% if g.caution and (g.proposition.indexOf(g.caution) == -1) %}<p class="sj-caution">{{ g.caution }}</p>{% endif %}
+        <p class="sj-meta">{% if g.historic_url %}<a href="{{ g.historic_url }}" target="_blank" rel="noopener">{{ g.historic_source }}</a>{% else %}{{ g.historic_source }}{% endif %}{% if g.restoration_source %} &middot; {% if g.restoration_url %}<a href="{{ g.restoration_url }}" target="_blank" rel="noopener">{{ g.restoration_source }}</a>{% else %}{{ g.restoration_source }}{% endif %}{% endif %}</p>
       </div>
       {% endfor %}
     </div>

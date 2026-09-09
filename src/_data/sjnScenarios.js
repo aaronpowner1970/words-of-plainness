@@ -1,10 +1,10 @@
 /**
- * Seeking Jesus of Nazareth — M5 scenario cards (hand-authored content, AUTHOR_REVIEW).
- * Source of truth: src/_data/sjnScenariosDraft.json (Cowork draft 1, 2026-09-09).
+ * Seeking Jesus of Nazareth — M5 scenario cards (hand-authored content, AUTHOR_RATIFIED).
+ * Source of truth: src/_data/sjnScenariosContent.json (Cowork v2, ratified by AJP 2026-09-09).
  * This wrapper resolves scripture references in each card's `sources` to
  * churchofjesuschrist.org links using the site's book map, at build time.
  */
-const draft = require("./sjnScenariosDraft.json");
+const draft = require("./sjnScenariosContent.json");
 const scriptures = require("./scriptures.json");
 
 function scriptureUrl(ref) {
