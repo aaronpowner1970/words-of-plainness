@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: July 25, 2026
+# Last updated: September 9, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -92,6 +92,33 @@ workstreams:
     priority: low
     state: "OBS + NVIDIA Broadcast + Westcott green screen operational (obs-mcp live). Enables video ministry, podcast, VR recording, grandkids digital stage."
 
+  - id: sjn-study-app
+    name: "Seeking Jesus of Nazareth interactive study app (/seeking-jesus/)"
+    status: active
+    priority: high
+    state: >
+      Gate 2 data pipeline COMPLETE 2026-09-09 (commit "Add: Seeking Jesus of
+      Nazareth data pipeline (Gate 2) against workbook v2.16"). Canonical source
+      is the controlled workbook (data-sources/sjn/, v2.16 H37 OCA SOURCE); v1 is
+      static JSON only (AUTH-ARCH-001). scripts/sjn-build-data.py re-executes
+      P001–P031, live-fetches 103 URLs, asserts 152 phrases inside locator
+      scope, emits src/_data/sjn/*.json; scripts/sjn-verify-data.js (npm
+      prebuild) refuses the Eleventy build unless that data is a green LIVE run.
+      All author gates G1–G6 AUTHOR CLEAR; G7–G9 waiting on dependency. No app
+      modules (M0–M8) built yet; route /seeking-jesus/ not created.
+    open_items: >
+      (1) Three phrase transcription overrides (Q-033, Q-173, Q-174) in
+      scripts/sjn-phrase-overrides.json await author ratification and workbook
+      v2.17 incorporation, plus the Q-290 OCA phrase target supplement.
+      (2) Inference Evidence Map narrative stale by one cell (INF-05 141/456,
+      INF-06 spread 27) after the H37 change. (3) 26 style flags: "LDS" in
+      research-facing fields that surface on click (cells scope_control /
+      source_note, citation source labels, inference prose) — reported, not
+      rewritten. (4) ranges.json holds structural sensitivity ranges; paper
+      section 14 ranges not reconciled. (5) Four-clause sentence structure is
+      an inferred schema pending Gate-0 brief reconciliation.
+    next_action: "Cowork: ICC-002 (2 Nephi 25:23), ten scenario cards, Orientation copy against the emitted field names; then Code: /seeking-jesus/ route + sjn-stat component (M0–M8)."
+
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED
 # ═══════════════════════════════════════════════════════════════════
@@ -168,6 +195,7 @@ governance_docs:
 # ═══════════════════════════════════════════════════════════════════
 next_priorities:
   - "Articles arc: VR/group-display field-test findings → group-display mode design (next session)"
+  - "Seeking Jesus of Nazareth: Cowork content pass (ICC-002, scenario cards, Orientation) → Code app modules M0–M8 at /seeking-jesus/"
   - "Christlike Practices app Phase 1: practice-corpus editorial batches (also Movement 3 voice calibration)"
   - "KMC git backup on PythonAnywhere (Aaron; prerequisite for later KMC migration)"
   - "Complete A10 IRL Articles-reading video"

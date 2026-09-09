@@ -45,3 +45,13 @@ failure mode.
   content indexes.
 - `timestamps/` — per-chapter audio sync JSON (keyed by `chapterId`).
 - `concerts/`, `concertList.js`, `ministryMusic.json` — music/concert data.
+
+## sjn/ (Seeking Jesus of Nazareth) is pipeline output — never hand-edit
+`src/_data/sjn/*.json` is emitted by `scripts/sjn-build-data.py` from the controlled
+workbook in `data-sources/sjn/`. `scripts/sjn-verify-data.js` runs as `npm prebuild`
+and fails the build if any file was edited after the run, if the run was not LIVE,
+or if any BLOCK rule failed. To change the data: update the workbook (author-owned),
+run `npm run sjn:pipeline` (about four minutes; needs Playwright chromium), commit
+the workbook copy and `src/_data/sjn/` together. Phrase corrections the workbook
+does not yet carry live in `scripts/sjn-phrase-overrides.json` (logged in
+`meta.json`); delete an entry to make the build refuse again.
