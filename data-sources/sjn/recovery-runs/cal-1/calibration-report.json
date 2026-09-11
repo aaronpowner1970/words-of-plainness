@@ -22,21 +22,25 @@
   "Roman Catholic": {
    "sonnet": {
     "cells": 20,
-    "done": 20,
-    "located_any": 18,
+    "done": 19,
+    "located_any": 17,
     "hit_std": 15,
     "hit_div": 12,
-    "hit_phrase": 0,
+    "hit_tier": 17,
+    "partial_lower": 0,
+    "excluded_oos": 1,
     "no_corpus": 0,
     "empty": 2
    },
    "opus": {
     "cells": 20,
-    "done": 20,
-    "located_any": 20,
+    "done": 19,
+    "located_any": 19,
     "hit_std": 16,
     "hit_div": 12,
-    "hit_phrase": 0,
+    "hit_tier": 18,
+    "partial_lower": 1,
+    "excluded_oos": 1,
     "no_corpus": 0,
     "empty": 0
    }
@@ -48,7 +52,9 @@
     "located_any": 9,
     "hit_std": 9,
     "hit_div": 9,
-    "hit_phrase": 0,
+    "hit_tier": 9,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 1,
     "skipped": 2
@@ -59,7 +65,9 @@
     "located_any": 11,
     "hit_std": 10,
     "hit_div": 10,
-    "hit_phrase": 0,
+    "hit_tier": 10,
+    "partial_lower": 1,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 1
    }
@@ -71,7 +79,9 @@
     "located_any": 15,
     "hit_std": 15,
     "hit_div": 15,
-    "hit_phrase": 0,
+    "hit_tier": 15,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 0,
     "skipped": 1
@@ -82,7 +92,9 @@
     "located_any": 16,
     "hit_std": 16,
     "hit_div": 16,
-    "hit_phrase": 0,
+    "hit_tier": 16,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 0
    }
@@ -94,7 +106,9 @@
     "located_any": 16,
     "hit_std": 16,
     "hit_div": 15,
-    "hit_phrase": 0,
+    "hit_tier": 16,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 1,
     "skipped": 1
@@ -105,7 +119,9 @@
     "located_any": 17,
     "hit_std": 17,
     "hit_div": 16,
-    "hit_phrase": 0,
+    "hit_tier": 17,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 1
    }
@@ -117,7 +133,9 @@
     "located_any": 9,
     "hit_std": 3,
     "hit_div": 2,
-    "hit_phrase": 0,
+    "hit_tier": 8,
+    "partial_lower": 1,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 0,
     "skipped": 1
@@ -128,7 +146,9 @@
     "located_any": 10,
     "hit_std": 3,
     "hit_div": 2,
-    "hit_phrase": 0,
+    "hit_tier": 8,
+    "partial_lower": 2,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 0
    }
@@ -140,7 +160,9 @@
     "located_any": 10,
     "hit_std": 10,
     "hit_div": 6,
-    "hit_phrase": 0,
+    "hit_tier": 10,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 3,
     "skipped": 2
@@ -151,7 +173,9 @@
     "located_any": 11,
     "hit_std": 11,
     "hit_div": 7,
-    "hit_phrase": 0,
+    "hit_tier": 11,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 4
    }
@@ -163,7 +187,9 @@
     "located_any": 31,
     "hit_std": 22,
     "hit_div": 15,
-    "hit_phrase": 0,
+    "hit_tier": 31,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 4,
     "skipped": 2
@@ -174,7 +200,9 @@
     "located_any": 31,
     "hit_std": 23,
     "hit_div": 16,
-    "hit_phrase": 0,
+    "hit_tier": 31,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 4,
     "skipped": 2
@@ -187,7 +215,9 @@
     "located_any": 11,
     "hit_std": 11,
     "hit_div": 10,
-    "hit_phrase": 0,
+    "hit_tier": 11,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 2
    },
@@ -197,7 +227,9 @@
     "located_any": 8,
     "hit_std": 8,
     "hit_div": 8,
-    "hit_phrase": 0,
+    "hit_tier": 8,
+    "partial_lower": 0,
+    "excluded_oos": 0,
     "no_corpus": 0,
     "empty": 1,
     "skipped": 4
@@ -540,17 +572,742 @@
  "taxonomy": {
   "sonnet": {
    "A_same_standard": 101,
-   "B_different_ratified_standard_same_branch": 18,
+   "B1_other_standard_equal_or_higher_tier": 16,
    "C_all_candidates_rejected": 3,
-   "D_locator_empty": 10
+   "B2_other_standard_lower_tier_partial": 1,
+   "D_locator_empty": 10,
+   "E_excluded_out_of_ratified_scope": 1
   },
   "opus": {
    "A_same_standard": 104,
-   "B_different_ratified_standard_same_branch": 20,
+   "B1_other_standard_equal_or_higher_tier": 15,
    "C_all_candidates_rejected": 1,
-   "D_locator_empty": 10
+   "B2_other_standard_lower_tier_partial": 4,
+   "D_locator_empty": 10,
+   "E_excluded_out_of_ratified_scope": 1
   }
  },
+ "tier_rank": [
+  "CONCILIAR",
+  "CONFESSIONAL",
+  "CATECHETICAL",
+  "OFFICIAL_EXPOSITION",
+  "CURRENT_OFFICIAL_WITNESS"
+ ],
+ "out_of_ratified_scope": {
+  "Q-449": {
+   "cited": "Fourth Lateran Council, Constitution 1 (Firmiter credimus)",
+   "ratified_scope": "BSR-RC-04 ratifies Lateran IV canon 1 only (4 chunks, 3,574 chars).",
+   "phrase_actually_sits_in": "Lateran IV canon 2 (Damnamus… the condemnation of Joachim of Fiore), where the maior dissimilitudo clause stands.",
+   "reason": "No ratified Roman Catholic row contains 'dissimilitude', 'dissimilar', 'unlikeness' or 'Joachim' in any chunk. The predicate's own text is unreachable from the registry as ratified."
+  }
+ },
+ "residue": {
+  "opus": [
+   {
+    "queue_id": "Q-011",
+    "branch": "Lutheran",
+    "predicate": "True",
+    "cited_tier": "CONFESSIONAL",
+    "class": "ALL_CANDIDATES_REJECTED",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-034",
+    "branch": "Eastern Orthodox",
+    "predicate": "Son",
+    "cited_tier": "CONCILIAR",
+    "class": "PARTIAL_LOWER_TIER",
+    "lower_tier_offered": [
+     [
+      "BSR-EO-01",
+      "CONFESSIONAL",
+      "The Symbol of Faith — \"Nicene Creed\""
+     ],
+     [
+      "BSR-EO-05",
+      "CONFESSIONAL",
+      "Decree 1"
+     ],
+     [
+      "BSR-EO-04",
+      "CATECHETICAL",
+      "Q.129 (On the Second Article)"
+     ]
+    ]
+   },
+   {
+    "queue_id": "Q-042",
+    "branch": "Eastern Orthodox",
+    "predicate": "Lord",
+    "cited_tier": "CONCILIAR",
+    "class": "PARTIAL_LOWER_TIER",
+    "lower_tier_offered": [
+     [
+      "BSR-EO-02",
+      "CATECHETICAL",
+      "The Holy Trinity — \"The Holy Trinity Revealed\""
+     ]
+    ]
+   },
+   {
+    "queue_id": "Q-043",
+    "branch": "Lutheran",
+    "predicate": "Lord",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-044",
+    "branch": "Reformed / Presbyterian",
+    "predicate": "Lord",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-048",
+    "branch": "Mennonite / Anabaptist",
+    "predicate": "Lord",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-084",
+    "branch": "Reformed / Presbyterian",
+    "predicate": "Just / righteous",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-132",
+    "branch": "Reformed / Presbyterian",
+    "predicate": "Long-suffering / patient",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-148",
+    "branch": "Reformed / Presbyterian",
+    "predicate": "Blessed",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-209",
+    "branch": "Roman Catholic",
+    "predicate": "Savior",
+    "cited_tier": "CONFESSIONAL",
+    "class": "PARTIAL_LOWER_TIER",
+    "lower_tier_offered": [
+     [
+      "BSR-RC-07",
+      "CATECHETICAL",
+      "Compendium Q.1"
+     ],
+     [
+      "BSR-RC-07",
+      "CATECHETICAL",
+      "Compendium Q.78"
+     ]
+    ]
+   },
+   {
+    "queue_id": "Q-215",
+    "branch": "Methodist / Wesleyan",
+    "predicate": "Savior",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-291",
+    "branch": "Lutheran",
+    "predicate": "Unbegotten",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-293",
+    "branch": "Anglican",
+    "predicate": "Unbegotten",
+    "cited_tier": "CONFESSIONAL",
+    "class": "PARTIAL_LOWER_TIER",
+    "lower_tier_offered": [
+     [
+      "BSR-AN-05",
+      "CATECHETICAL",
+      "To Be a Christian, Q.38 — Who is God the Father?"
+     ]
+    ]
+   },
+   {
+    "queue_id": "Q-333",
+    "branch": "Anglican",
+    "predicate": "Incorporeal / without body",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-363",
+    "branch": "Lutheran",
+    "predicate": "Eternal",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   }
+  ],
+  "sonnet": [
+   {
+    "queue_id": "Q-032",
+    "branch": "Mennonite / Anabaptist",
+    "predicate": "Father",
+    "cited_tier": "CONFESSIONAL",
+    "class": "ALL_CANDIDATES_REJECTED",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-034",
+    "branch": "Eastern Orthodox",
+    "predicate": "Son",
+    "cited_tier": "CONCILIAR",
+    "class": "PARTIAL_LOWER_TIER",
+    "lower_tier_offered": [
+     [
+      "BSR-EO-01",
+      "CONFESSIONAL",
+      "The Symbol of Faith — \"Nicene Creed\""
+     ],
+     [
+      "BSR-EO-05",
+      "CONFESSIONAL",
+      "Decree 1"
+     ],
+     [
+      "BSR-EO-04",
+      "CATECHETICAL",
+      "Q.129 (On the Second Article)"
+     ]
+    ]
+   },
+   {
+    "queue_id": "Q-043",
+    "branch": "Lutheran",
+    "predicate": "Lord",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-044",
+    "branch": "Reformed / Presbyterian",
+    "predicate": "Lord",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-048",
+    "branch": "Mennonite / Anabaptist",
+    "predicate": "Lord",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-084",
+    "branch": "Reformed / Presbyterian",
+    "predicate": "Just / righteous",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-132",
+    "branch": "Reformed / Presbyterian",
+    "predicate": "Long-suffering / patient",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-148",
+    "branch": "Reformed / Presbyterian",
+    "predicate": "Blessed",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-201",
+    "branch": "Roman Catholic",
+    "predicate": "Judge",
+    "cited_tier": "CONFESSIONAL",
+    "class": "ALL_CANDIDATES_REJECTED",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-209",
+    "branch": "Roman Catholic",
+    "predicate": "Savior",
+    "cited_tier": "CONFESSIONAL",
+    "class": "ALL_CANDIDATES_REJECTED",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-215",
+    "branch": "Methodist / Wesleyan",
+    "predicate": "Savior",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-291",
+    "branch": "Lutheran",
+    "predicate": "Unbegotten",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-333",
+    "branch": "Anglican",
+    "predicate": "Incorporeal / without body",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   },
+   {
+    "queue_id": "Q-363",
+    "branch": "Lutheran",
+    "predicate": "Eternal",
+    "cited_tier": "CONFESSIONAL",
+    "class": "LOCATOR_EMPTY",
+    "lower_tier_offered": []
+   }
+  ]
+ },
+ "skipped_cells": {
+  "sonnet": [
+   [
+    "Q-015",
+    "Methodist / Wesleyan",
+    "True",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-042",
+    "Eastern Orthodox",
+    "Lord",
+    "VERIFICATION_INCOMPLETE",
+    "1/2 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-110",
+    "Baptist",
+    "Love / loving",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-155",
+    "Lutheran",
+    "Glorious",
+    "VERIFICATION_INCOMPLETE",
+    "1/1 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-293",
+    "Anglican",
+    "Unbegotten",
+    "VERIFICATION_INCOMPLETE",
+    "1/1 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-307",
+    "Lutheran",
+    "Infinite",
+    "VERIFICATION_INCOMPLETE",
+    "2/2 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-309",
+    "Anglican",
+    "Infinite",
+    "VERIFICATION_INCOMPLETE",
+    "1/2 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-364",
+    "Reformed / Presbyterian",
+    "Eternal",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-388",
+    "Reformed / Presbyterian",
+    "Inscrutable",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ]
+  ],
+  "opus": [
+   [
+    "Q-032",
+    "Mennonite / Anabaptist",
+    "Father",
+    "VERIFICATION_INCOMPLETE",
+    "1/2 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-096",
+    "Mennonite / Anabaptist",
+    "Holy",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-156",
+    "Reformed / Presbyterian",
+    "Glorious",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-216",
+    "Mennonite / Anabaptist",
+    "Savior",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-376",
+    "Mennonite / Anabaptist",
+    "Incomprehensible",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ],
+   [
+    "Q-388",
+    "Reformed / Presbyterian",
+    "Inscrutable",
+    "VERIFICATION_INCOMPLETE",
+    "1/3 candidates at UNPARSEABLE"
+   ]
+  ]
+ },
+ "caveat_hits": [
+  {
+   "queue_id": "Q-010",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "True",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-010",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "True",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.95 (On the First Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-010",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "True",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-010",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "True",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.95 (On the First Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-026",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Father",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-026",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Father",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.90 (On the First Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-026",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Father",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-026",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Father",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.90 (On the First Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-034",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Son",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": false,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-034",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Son",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.129 (On the Second Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-034",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Son",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": false,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-034",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Son",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.129 (On the Second Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-170",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Creator / Maker",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 4",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-170",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Creator / Maker",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.111 (On the First Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-170",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Creator / Maker",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 4",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-170",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Creator / Maker",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.111 (On the First Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-266",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Giver of life",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.240 (On the Eighth Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-266",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Giver of life",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.240 (On the Eighth Article)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-290",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Unbegotten",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-290",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Unbegotten",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.94 (On the First Article)",
+   "credited": true,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-290",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Unbegotten",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-290",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Unbegotten",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.94 (On the First Article)",
+   "credited": true,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-306",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Infinite",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-306",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Infinite",
+   "registry_id": "BSR-EO-05",
+   "locator": "Decree 1",
+   "credited": true,
+   "caveat": "AC-05 — the Confession of Dositheus (Synod of Jerusalem 1672) is CONFESSIONAL (local synod); its authority is regional, not pan-Orthodox."
+  },
+  {
+   "queue_id": "Q-354",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Immutable / unchangeable",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.86 (On the First Article)",
+   "credited": true,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-354",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Immutable / unchangeable",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.122 (On the First Article)",
+   "credited": true,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-354",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Immutable / unchangeable",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.86 (On the First Article)",
+   "credited": true,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-354",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Immutable / unchangeable",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.122 (On the First Article)",
+   "credited": true,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-434",
+   "model": "sonnet",
+   "branch": "Eastern Orthodox",
+   "predicate": "Without separation",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.182 (Of the Son of God)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  },
+  {
+   "queue_id": "Q-434",
+   "model": "opus",
+   "branch": "Eastern Orthodox",
+   "predicate": "Without separation",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.182 (Of the Son of God)",
+   "credited": false,
+   "caveat": "AC-03 — Philaret's Longer Catechism is CATECHETICAL (historic); it is a 19th-century Russian catechism, not a pan-Orthodox conciliar standard."
+  }
+ ],
  "dositheus_natural": {
   "sonnet": {
    "candidates": 7,
@@ -584,23 +1341,39 @@
  },
  "verdicts": {
   "sonnet": {
-   "recall": 0.7651515151515151,
+   "recall": 0.8931297709923665,
+   "recall_same_standard": 0.7709923664122137,
+   "recall_same_division": 0.6412213740458015,
+   "denominator": 131,
+   "hits_tier": 117,
+   "hits_same_standard": 101,
+   "hits_same_division": 84,
+   "partial_lower_tier": 1,
+   "excluded_out_of_ratified_scope": 1,
    "false_accept": 0.0,
    "dositheus_false_accept": 0.0,
-   "recall_ok": false,
+   "recall_ok": true,
    "false_accept_ok": true,
    "dositheus_ok": true
   },
   "opus": {
-   "recall": 0.7703703703703704,
+   "recall": 0.8880597014925373,
+   "recall_same_standard": 0.7761194029850746,
+   "recall_same_division": 0.6492537313432836,
+   "denominator": 134,
+   "hits_tier": 119,
+   "hits_same_standard": 104,
+   "hits_same_division": 87,
+   "partial_lower_tier": 4,
+   "excluded_out_of_ratified_scope": 1,
    "false_accept": 0.0,
    "dositheus_false_accept": 0.0,
-   "recall_ok": false,
+   "recall_ok": true,
    "false_accept_ok": true,
    "dositheus_ok": true
   }
  },
- "chosen_verifier": null,
+ "chosen_verifier": "sonnet",
  "details": [
   {
    "queue_id": "Q-001",
@@ -613,6 +1386,7 @@
     "BSR-RC-03"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-02",
@@ -627,6 +1401,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -639,6 +1415,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -648,6 +1425,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -660,6 +1439,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -679,6 +1459,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -691,6 +1473,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-01",
@@ -710,6 +1493,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -722,6 +1507,7 @@
     "BSR-RC-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RC-03",
@@ -741,6 +1527,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -753,6 +1541,7 @@
     "BSR-EO-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-EO-01",
@@ -772,6 +1561,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -784,6 +1575,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -798,6 +1590,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-LU-01",
@@ -817,6 +1611,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -826,6 +1621,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -838,6 +1635,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -852,6 +1650,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -864,6 +1664,7 @@
     "BSR-RC-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RC-06",
@@ -883,6 +1684,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -895,6 +1698,7 @@
     "BSR-EO-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-EO-05",
@@ -914,6 +1718,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -926,6 +1732,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-03",
@@ -940,6 +1747,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -952,6 +1761,7 @@
     "BSR-RP-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -971,6 +1781,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -983,6 +1795,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -1002,6 +1815,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1014,9 +1829,12 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-MA-02",
@@ -1042,6 +1860,7 @@
     "BSR-RC-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-06",
@@ -1056,6 +1875,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1068,6 +1889,7 @@
     "BSR-EO-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-EO-01",
@@ -1087,6 +1909,12 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [
+    "BSR-EO-01",
+    "BSR-EO-05",
+    "BSR-EO-04"
+   ],
    "rejected": []
   },
   {
@@ -1099,6 +1927,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -1118,6 +1947,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1130,6 +1961,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -1149,6 +1981,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1161,6 +1995,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -1180,6 +2015,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1192,6 +2029,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -1206,6 +2044,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-BA-01",
@@ -1225,6 +2065,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-01",
@@ -1244,6 +2085,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1256,6 +2099,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-02",
@@ -1270,6 +2114,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-MA-01",
@@ -1289,6 +2135,7 @@
     "BSR-RC-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CATECHETICAL",
    "survivors": [
     [
      "BSR-RC-02",
@@ -1308,6 +2155,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1320,9 +2169,12 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1335,9 +2187,12 @@
     "BSR-RP-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1350,6 +2205,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-02",
@@ -1369,6 +2225,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1381,9 +2239,12 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1396,6 +2257,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -1405,6 +2267,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1417,6 +2281,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -1436,6 +2301,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1448,6 +2315,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -1457,6 +2325,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1469,6 +2339,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -1483,6 +2354,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-BA-01",
@@ -1502,6 +2375,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-01",
@@ -1521,6 +2395,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1534,6 +2410,7 @@
     "BSR-RC-03"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-02",
@@ -1553,6 +2430,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1565,6 +2444,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -1584,6 +2464,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1596,6 +2478,7 @@
     "BSR-RP-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -1615,6 +2498,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1627,6 +2512,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -1641,6 +2527,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1653,6 +2541,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-02",
@@ -1672,6 +2561,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1684,6 +2575,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-01",
@@ -1693,6 +2585,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1705,6 +2599,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -1714,6 +2609,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-RP-04",
@@ -1739,9 +2636,12 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1754,6 +2654,7 @@
     "BSR-MW-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-02",
@@ -1768,6 +2669,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1780,6 +2683,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-04",
@@ -1794,6 +2698,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1806,6 +2712,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -1825,6 +2732,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1837,6 +2746,7 @@
     "BSR-MW-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-02",
@@ -1851,6 +2761,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1863,6 +2775,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-01",
@@ -1882,6 +2795,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1894,6 +2809,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-05",
@@ -1908,6 +2824,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-RP-04",
@@ -1927,6 +2845,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -1946,6 +2865,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1958,6 +2879,7 @@
     "BSR-MW-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-04",
@@ -1977,6 +2899,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -1989,6 +2913,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-01",
@@ -2008,6 +2933,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2020,6 +2947,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -2039,6 +2967,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2051,6 +2981,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -2065,6 +2996,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2077,6 +3010,7 @@
     "BSR-MW-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-02",
@@ -2086,6 +3020,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-MW-04",
@@ -2111,9 +3047,12 @@
     "BSR-RP-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2126,6 +3065,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-05",
@@ -2145,6 +3085,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2158,6 +3100,7 @@
     "BSR-RC-03"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-02",
@@ -2177,6 +3120,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2189,9 +3134,12 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2204,6 +3152,7 @@
     "BSR-RP-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -2218,6 +3167,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-RP-06",
@@ -2237,6 +3188,7 @@
     "BSR-RP-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-04",
@@ -2256,6 +3208,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2268,6 +3222,7 @@
     "BSR-RC-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RC-04",
@@ -2287,6 +3242,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2299,6 +3256,7 @@
     "BSR-EO-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-EO-05",
@@ -2313,6 +3271,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2325,6 +3285,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -2339,6 +3300,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2351,6 +3314,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-04",
@@ -2370,6 +3334,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2382,6 +3348,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -2401,6 +3368,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2413,6 +3382,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -2432,6 +3402,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2444,6 +3416,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-01",
@@ -2463,6 +3436,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2475,6 +3450,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-02",
@@ -2494,6 +3470,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2506,6 +3484,7 @@
     "BSR-RP-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -2525,6 +3504,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2537,6 +3518,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -2551,6 +3533,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2563,6 +3547,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -2577,6 +3562,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2589,6 +3576,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-01",
@@ -2608,6 +3596,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2620,6 +3610,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-01",
@@ -2639,6 +3630,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2652,6 +3645,7 @@
     "BSR-RC-03"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-02",
@@ -2671,6 +3665,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2683,6 +3679,7 @@
     "BSR-RP-05"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -2702,6 +3699,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2714,6 +3713,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -2733,6 +3733,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2745,6 +3747,7 @@
     "BSR-MW-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-02",
@@ -2754,6 +3757,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-MW-04",
@@ -2779,6 +3784,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -2798,6 +3804,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2810,6 +3818,7 @@
     "BSR-MW-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-02",
@@ -2829,6 +3838,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2841,9 +3852,12 @@
     "BSR-RC-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-RC-06",
@@ -2875,6 +3889,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-02",
@@ -2894,6 +3909,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2906,9 +3923,12 @@
     "BSR-RC-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-RC-07",
@@ -2934,6 +3954,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -2953,6 +3974,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2965,9 +3988,12 @@
     "BSR-MW-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -2980,6 +4006,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-02",
@@ -2999,6 +4026,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3011,6 +4040,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -3030,6 +4060,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3042,6 +4074,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-01",
@@ -3056,6 +4089,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-BA-01",
@@ -3075,6 +4110,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-01",
@@ -3089,6 +4125,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3101,6 +4139,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -3115,6 +4154,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-RP-04",
@@ -3134,6 +4175,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -3148,6 +4190,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3160,6 +4204,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-01",
@@ -3179,6 +4224,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3191,6 +4238,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -3205,6 +4253,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3217,6 +4267,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -3231,6 +4282,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3243,6 +4296,7 @@
     "BSR-RC-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RC-06",
@@ -3257,6 +4311,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3269,6 +4325,7 @@
     "BSR-EO-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-EO-01",
@@ -3288,6 +4345,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3300,6 +4359,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -3309,6 +4369,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3321,6 +4383,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -3335,6 +4398,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-RP-01",
@@ -3354,6 +4419,7 @@
     "BSR-RC-07"
    ],
    "corpus_available": true,
+   "cited_tier": "CATECHETICAL",
    "survivors": [
     [
      "BSR-RC-04",
@@ -3368,6 +4434,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3380,6 +4448,7 @@
     "BSR-EO-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CATECHETICAL",
    "survivors": [
     [
      "BSR-EO-05",
@@ -3394,6 +4463,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-EO-02",
@@ -3413,9 +4484,12 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3428,6 +4502,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -3447,6 +4522,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3460,6 +4537,7 @@
     "BSR-RC-03"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-03",
@@ -3479,6 +4557,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3491,6 +4571,7 @@
     "BSR-EO-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CATECHETICAL",
    "survivors": [
     [
      "BSR-EO-05",
@@ -3505,6 +4586,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-EO-05",
@@ -3524,6 +4607,7 @@
     "BSR-RP-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -3543,6 +4627,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3555,6 +4641,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-02",
@@ -3574,6 +4661,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3586,6 +4675,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-02",
@@ -3605,6 +4695,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3617,6 +4709,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-01",
@@ -3626,6 +4719,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3638,6 +4733,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -3657,6 +4753,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3669,6 +4767,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -3678,6 +4777,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3690,6 +4791,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -3699,6 +4801,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3711,9 +4815,12 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3726,6 +4833,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-01",
@@ -3740,6 +4848,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3753,6 +4863,7 @@
     "BSR-RC-03"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-04",
@@ -3772,6 +4883,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3784,6 +4897,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -3793,6 +4907,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3805,6 +4921,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-06",
@@ -3824,6 +4941,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3836,6 +4955,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -3845,6 +4965,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3857,6 +4979,7 @@
     "BSR-MW-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-01",
@@ -3866,6 +4989,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3878,6 +5003,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -3887,6 +5013,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3899,6 +5027,7 @@
     "BSR-AN-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-AN-01",
@@ -3908,6 +5037,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3920,6 +5051,7 @@
     "BSR-RC-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-03",
@@ -3934,6 +5066,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3946,6 +5080,7 @@
     "BSR-EO-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CATECHETICAL",
    "survivors": [
     [
      "BSR-EO-04",
@@ -3960,6 +5095,8 @@
    ],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3972,6 +5109,7 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-LU-01",
@@ -3981,6 +5119,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -3993,6 +5133,7 @@
     "BSR-RP-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -4012,6 +5153,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -4024,9 +5167,12 @@
     "BSR-LU-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [],
    "hit_same_standard": false,
    "hit_same_division": false,
+   "hit_tier_respecting": false,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -4039,6 +5185,7 @@
     "BSR-BA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-BA-02",
@@ -4058,6 +5205,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -4070,6 +5219,7 @@
     "BSR-MW-02"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MW-01",
@@ -4089,6 +5239,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -4102,6 +5254,7 @@
     "BSR-RC-03"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-02",
@@ -4121,6 +5274,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -4133,6 +5288,7 @@
     "BSR-RP-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-RP-01",
@@ -4152,6 +5308,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -4164,6 +5322,7 @@
     "BSR-MA-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CONFESSIONAL",
    "survivors": [
     [
      "BSR-MA-02",
@@ -4178,6 +5337,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": [
     [
      "BSR-MA-02",
@@ -4197,6 +5358,7 @@
     "BSR-RC-04"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-RC-04",
@@ -4216,6 +5378,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -4228,6 +5392,7 @@
     "BSR-RC-01"
    ],
    "corpus_available": true,
+   "cited_tier": "CATECHETICAL",
    "survivors": [
     [
      "BSR-RC-01",
@@ -4237,6 +5402,8 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": false,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
   },
   {
@@ -4249,6 +5416,7 @@
     "BSR-EO-06"
    ],
    "corpus_available": true,
+   "cited_tier": "CONCILIAR",
    "survivors": [
     [
      "BSR-EO-06",
@@ -4263,40 +5431,9 @@
    ],
    "hit_same_standard": true,
    "hit_same_division": true,
+   "hit_tier_respecting": true,
+   "partial_lower_tier": [],
    "rejected": []
-  },
-  {
-   "queue_id": "Q-449",
-   "branch": "Roman Catholic",
-   "family_id": "RNR-H57",
-   "predicate": "Greater dissimilarity than similarity",
-   "existing": "Fourth Lateran Council — Constitution 1, Firmiter credimus",
-   "equivalent_registry": [
-    "BSR-RC-04"
-   ],
-   "corpus_available": true,
-   "survivors": [
-    [
-     "BSR-RC-03",
-     "Chapter I (English witness), paragraph 1",
-     "declared to be, in reality and in essence, distinct from the world"
-    ],
-    [
-     "BSR-RC-01",
-     "CCC 300",
-     "God is infinitely greater than all his works"
-    ]
-   ],
-   "hit_same_standard": false,
-   "hit_same_division": false,
-   "rejected": [
-    [
-     "BSR-RC-02",
-     "Caput I — De Deo Rerum Omnium Creatore",
-     "REJECT",
-     "BELOW_FLOOR"
-    ]
-   ]
   }
  ]
 }

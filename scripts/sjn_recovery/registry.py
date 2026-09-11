@@ -2,6 +2,7 @@
 pieces the agents need (predicate definitions, released cells, Restoration comparators).
 
 The workbook is read only. Nothing here writes to it."""
+import re
 import os
 import sys
 
@@ -149,3 +150,24 @@ def released_cells(queue):
 
 def reviewed_empty_cells(queue):
     return [c for c in queue if c["rendered_state"] == "NOT LOCATED — CURRENT STANDARD REVIEWED"]
+
+
+# ---------------------------------------------------------------- authority tier rank
+# AUTHOR RATIFIED 2026-09-11 (AJP): authority_tier is a genuine authority rank, descending.
+# Used as given; not re-derived from the workbook. Proposed to Gate 7 as the APP CONFIG key
+# `authority_tier_rank` (recovery-runs/proposed-app-config-gate7.md). Gate 6 never writes the
+# workbook.
+TIER_RANK = ["CONCILIAR", "CONFESSIONAL", "CATECHETICAL", "OFFICIAL_EXPOSITION", "CURRENT_OFFICIAL_WITNESS"]
+
+
+def bare_tier(tier):
+    """Rank on the bare tier. The parenthetical qualifiers on three rows - "CONCILIAR (translation)"
+    on BSR-RC-03, "CATECHETICAL (historic)" on BSR-EO-04, "CONFESSIONAL (voluntary church-level
+    subscription)" on BSR-BA-02 - are disclosure, not rank, and are stripped here."""
+    return re.split(r"\s*\(", (tier or "").strip())[0].strip().upper()
+
+
+def tier_rank(tier):
+    """0 is the highest authority. An unknown tier sorts below every known one."""
+    b = bare_tier(tier)
+    return TIER_RANK.index(b) if b in TIER_RANK else len(TIER_RANK)

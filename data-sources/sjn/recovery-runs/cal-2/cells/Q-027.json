@@ -1,0 +1,367 @@
+{
+ "queue_id": "Q-027",
+ "branch": "Lutheran",
+ "family_id": "RNR-H04",
+ "predicate": "Father",
+ "passes": {
+  "1": {
+   "status": "DONE",
+   "call_id": "1e58dd2749b4bb3afa14886c",
+   "coverage": {
+    "BSR-LU-03": {
+     "coverage": "FULL",
+     "supplied": 1,
+     "of": 1
+    },
+    "BSR-LU-01": {
+     "coverage": "RETRIEVED",
+     "supplied": 29,
+     "of": 738,
+     "lexical": 28,
+     "method": "BM25+vector(RRF)+lexical-slice"
+    }
+   },
+   "supplied_chunks": [
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation"
+    ],
+    [
+     "BSR-LU-01",
+     "Ecumenical Creeds: The Athanasian Creed"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: XI. Election, ¶75–78"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Apostles' Creed, ¶10–17"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article III. Of the Son of God, ¶1–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article IV-b. Of Love and the Fulfilling of the Law, ¶243–244"
+    ],
+    [
+     "BSR-LU-01",
+     "Treatise on the Power and Primacy of the Pope: Treatise Compiled by the Theologians Assembled at Smalcald - 1537, ¶27–33"
+    ],
+    [
+     "BSR-LU-01",
+     "Small Catechism: Table of Duties, ¶5–13"
+    ],
+    [
+     "BSR-LU-01",
+     "Smalcald Articles: Signatures, ¶1–43"
+    ],
+    [
+     "BSR-LU-01",
+     "Treatise on the Power and Primacy of the Pope: Doctors and Preachers (signatories to the AC/AP), ¶1–32"
+    ],
+    [
+     "BSR-LU-01",
+     "Smalcald Articles: Article X - Of Ordination, ¶1–3"
+    ],
+    [
+     "BSR-LU-01",
+     "Smalcald Articles: Article II - Of the Mass, ¶12–15"
+    ],
+    [
+     "BSR-LU-01",
+     "Ecumenical Creeds: The Nicene Creed"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: XII. Other Sects, ¶25–31"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Ten Commandments, ¶326–329"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article VII. Of the Church, ¶1–4"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article XXI. Of the Invocation of Saints, ¶15–18"
+    ],
+    [
+     "BSR-LU-01",
+     "Smalcald Articles: , ¶1–3 [2]"
+    ],
+    [
+     "BSR-LU-01",
+     "Ecumenical Creeds: The Apostles' Creed"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: XII. Other Sects, ¶31–39"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Apostles' Creed, ¶1–9"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article III. Of Christ, ¶52"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶59–61"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶6–10"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶29–34"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶71–73"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Lord's Prayer, ¶39–46"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Ten Commandments, ¶103–109"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶74–77"
+    ]
+   ],
+   "standards": [
+    "BSR-LU-01",
+    "BSR-LU-02",
+    "BSR-LU-03"
+   ],
+   "raw": "{\"candidates\": [{\"chunk_key\": \"c1\", \"registry_id\": \"BSR-LU-03\", \"locator\": \"Small Catechism, The Creed — First Article (Part 1), explanation\", \"phrase\": \"I believe in God, the Father Almighty, Maker of heaven and earth\", \"rationale\": \"Confessional statement directly asserts God as Father in the Creed's first article.\", \"floor_claim\": \"FULL\"}, {\"chunk_key\": \"c19\", \"registry_id\": \"BSR-LU-01\", \"locator\": \"Ecumenical Creeds: The Apostles' Creed\", \"phrase\": \"I believe in God the Father Almighty, Maker of heaven and earth\", \"rationale\": \"Confessional Apostles' Creed asserts God is the Father, the required subject, at the controlling floor.\", \"floor_claim\": \"FULL\"}, {\"chunk_key\": \"c13\", \"registry_id\": \"BSR-LU-01\", \"locator\": \"Ecumenical Creeds: The Nicene Creed\", \"phrase\": \"I believe in one God, the Father Almighty, Maker of heaven and earth\", \"rationale\": \"Nicene Creed confessionally names God as the Father, asserting divine paternity of God directly.\", \"floor_claim\": \"FULL\"}]}",
+   "candidates": [
+    {
+     "candidate_id": "Q-027-p1-1",
+     "pass": 1,
+     "registry_id": "BSR-LU-03",
+     "locator": "Small Catechism, The Creed — First Article (Part 1), explanation",
+     "phrase": "I believe in God, the Father Almighty, Maker of heaven and earth",
+     "rationale": "Confessional statement directly asserts God as Father in the Creed's first article.",
+     "floor_claim": "FULL",
+     "chunk_text": "I believe in God, the Father Almighty, Maker of heaven and earth. What does this mean? I believe that God has made me and all creatures; that He has given me my body and soul, eyes, ears, and all my members, my reason and all my senses, and still takes care of them. He also gives me clothing and shoes, food and drink, house and home, wife and children, land, animals, and all I have. He richly and daily provides me with all that I need to support this body and life. He defends me against all danger and guards and protects me from all evil. All this He does only out of fatherly, divine goodness and mercy, without any merit or worthiness in me. For all this it is my duty to thank and praise, serve and obey Him. This is most certainly true.",
+     "chunk_hash": "370bd08f97da57ccfa3fa67adaa0a9ea57154d39737697210ebe04962406a706",
+     "division": "article",
+     "fallback_tier": false
+    },
+    {
+     "candidate_id": "Q-027-p1-2",
+     "pass": 1,
+     "registry_id": "BSR-LU-01",
+     "locator": "Ecumenical Creeds: The Apostles' Creed",
+     "phrase": "I believe in God the Father Almighty, Maker of heaven and earth",
+     "rationale": "Confessional Apostles' Creed asserts God is the Father, the required subject, at the controlling floor.",
+     "floor_claim": "FULL",
+     "chunk_text": "I believe in God the Father Almighty, Maker of heaven and earth. And in Jesus Christ, His only Son, our Lord; who was conceived by the Holy Ghost, born of the Virgin Mary; suffered under Pontius Pilate, was crucified, dead, and buried; He descended into hell; the third day He rose again from the dead; He ascended into heaven, and sitteth on the right hand of God the Father Almighty; from thence He shall come to judge the quick and the dead. I believe in the Holy Ghost; the holy catholic* Church, the communion of saints; the forgiveness of sins; the resurrection of the body; and the life everlasting. Amen. * catholic means “universal” and is not a reference to the Roman Catholic Church. Biblical references for the Apostles' Creed .",
+     "chunk_hash": "859723ad0cc15a05e20806e0bb107bacbfb7c2ad07fc5b22e8d9518a16ab33d2",
+     "division": "section",
+     "fallback_tier": false
+    },
+    {
+     "candidate_id": "Q-027-p1-3",
+     "pass": 1,
+     "registry_id": "BSR-LU-01",
+     "locator": "Ecumenical Creeds: The Nicene Creed",
+     "phrase": "I believe in one God, the Father Almighty, Maker of heaven and earth",
+     "rationale": "Nicene Creed confessionally names God as the Father, asserting divine paternity of God directly.",
+     "floor_claim": "FULL",
+     "chunk_text": "I believe in one God, the Father Almighty, Maker of heaven and earth, and of all things visible and invisible. And in one Lord Jesus Christ, the only-begotten Son of God, begotten of the Father before all worlds, God of God, Light of Light, very God of very God, begotten, not made, being of one substance with the Father; by whom all things were made; who for us men, and for our salvation, came down from heaven, and was incarnate by the Holy Ghost of the Virgin Mary, and was made man, and was crucified also for us under Pontius Pilate; He suffered and was buried; and the third day He rose again according to the Scriptures; and ascended into heaven, and sitteth on the right hand of the Father; and He shall come again with glory to judge the quick and the dead; whose kingdom shall have no end. And I believe in the Holy Ghost, the Lord and Giver of life, who proceedeth from the Father and the Son; who with the Father and the Son together is worshiped and glorified; who spake by the Prophets. And I believe in one holy catholic and apostolic Church.I acknowledge one Baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen.",
+     "chunk_hash": "a0e2483760350cc8f6d3bf00a9a9b66a4d458be43b24a7bc85e77c71b387ecb7",
+     "division": "section",
+     "fallback_tier": false
+    }
+   ],
+   "dropped": []
+  }
+ },
+ "verifications": {
+  "Q-027-p1-1": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "6f1a1cda3021902af15ee272",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "I (confessing believer) — asserting belief in 'God, the Father Almighty'; the named subject of the predicate is God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The catechism asserts in its own voice the creedal confession that God is 'the Father Almighty,' and explains this paternal identity through God's fatherly care.",
+    "floor": "FULL",
+    "floor_reason": "The text directly names God as Father and explicates this in terms of fatherly, divine goodness, asserting divine paternity of the required subject.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is God (the Father), and the passage asserts God's fatherly identity and care, meeting the FULL floor for divine paternity.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"I (confessing believer) — asserting belief in 'God, the Father Almighty'; the named subject of the predicate is God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice the creedal confession that God is 'the Father Almighty,' and explains this paternal identity through God's fatherly care.\", \"floor\": \"FULL\", \"floor_reason\": \"The text directly names God as Father and explicates this in terms of fatherly, divine goodness, asserting divine paternity of the required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is God (the Father), and the passage asserts God's fatherly identity and care, meeting the FULL floor for divine paternity.\"}",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "0c0566a9574964a0fdf020d3",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"God, the Father Almighty, Maker of heaven and earth\" — the named object of the confession; in the explanation the subject is \"He\" (= God), who acts \"out of fatherly, divine goodness\"",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "First-person creedal confession expounded in the catechism's own voice and sealed with \"This is most certainly true\"; no opponent's view, hypothetical, or petition.",
+    "floor": "FULL",
+    "floor_reason": "The passage names God as \"the Father Almighty\" and expounds that naming as His \"fatherly, divine goodness and mercy\" toward the creature, asserting divine paternity and relational identity of God.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Phrase is verbatim, the predicate is asserted of God in the standard's own voice, and the floor of divine paternity/relational identity is fully met; the exposition develops fatherhood chiefly in creational-providential terms rather than immanent-Trinitarian relation, which is noted but does not fall below the floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"God, the Father Almighty, Maker of heaven and earth\\\" — the named object of the confession; in the explanation the subject is \\\"He\\\" (= God), who acts \\\"out of fatherly, divine goodness\\\"\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"First-person creedal confession expounded in the catechism's own voice and sealed with \\\"This is most certainly true\\\"; no opponent's view, hypothetical, or petition.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage names God as \\\"the Father Almighty\\\" and expounds that naming as His \\\"fatherly, divine goodness and mercy\\\" toward the creature, asserting divine paternity and relational identity of God.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, the predicate is asserted of God in the standard's own voice, and the floor of divine paternity/relational identity is fully met; the exposition develops fatherhood chiefly in creational-providential terms rather than immanent-Trinitarian relation, which is noted but does not fall below the floor.\"}",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   }
+  },
+  "Q-027-p1-2": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "54a9ab3e54d92967c229dfee",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "I (believer confessing) believe in God the Father Almighty",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed asserts belief in God the Father Almighty as a positive confession, not a hypothetical or opponent's view.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly names God as Father, asserting divine paternity/relational identity of the required subject.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is God the Father, and the creed asserts this as a confession of faith, fully matching the predicate.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"I (believer confessing) believe in God the Father Almighty\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts belief in God the Father Almighty as a positive confession, not a hypothetical or opponent's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly names God as Father, asserting divine paternity/relational identity of the required subject.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is God the Father, and the creed asserts this as a confession of faith, fully matching the predicate.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "143a7b6c334e2bdb81f851aa",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"I\" is the grammatical subject of the confessing verb, but the subject of the predication is \"God the Father Almighty\"",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed confesses this in its own voice as first-person credal assertion, not a report, hypothetical, or denial.",
+    "floor": "FULL",
+    "floor_reason": "The article names God directly as \"the Father\" and correlates Him with \"His only Son,\" asserting divine paternity and relational identity at the controlling floor.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase; God is confessed as Father Almighty in the standard's own assertive voice, with paternity made relational by \"His only Son, our Lord\"; meets the full floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"I\\\" is the grammatical subject of the confessing verb, but the subject of the predication is \\\"God the Father Almighty\\\"\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed confesses this in its own voice as first-person credal assertion, not a report, hypothetical, or denial.\", \"floor\": \"FULL\", \"floor_reason\": \"The article names God directly as \\\"the Father\\\" and correlates Him with \\\"His only Son,\\\" asserting divine paternity and relational identity at the controlling floor.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase; God is confessed as Father Almighty in the standard's own assertive voice, with paternity made relational by \\\"His only Son, our Lord\\\"; meets the full floor.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   }
+  },
+  "Q-027-p1-3": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "2ffd379bb09e2b40185c8043",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "I (believing) ... one God, the Father Almighty",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed asserts belief in God as Father Almighty in its own voice, not reporting or rejecting a view.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly names God as 'the Father Almighty', asserting divine paternity of the required subject.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, correct subject (God/the Father), asserted directly as confession, matching the predicate's floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"I (believing) ... one God, the Father Almighty\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts belief in God as Father Almighty in its own voice, not reporting or rejecting a view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly names God as 'the Father Almighty', asserting divine paternity of the required subject.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, correct subject (God/the Father), asserted directly as confession, matching the predicate's floor.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "e3d168b75b88fb7a7d463b02",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"one God, the Father Almighty\" (the object of the confession \"I believe in one God...\"; the predicate is affirmed of God himself)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed confesses this in its own voice as a first-person credal affirmation, not a report of another's view.",
+    "floor": "FULL",
+    "floor_reason": "The one God is named as Father Almighty, and the surrounding text specifies the relational identity (the Son begotten of the Father, the Spirit proceeding from the Father), meeting the divine-paternity/relational-identity floor.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Phrase is word-for-word in the chunk; the required subject is the one God named as Father; the standard asserts it directly, and divine paternity as relational identity is fully present.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"one God, the Father Almighty\\\" (the object of the confession \\\"I believe in one God...\\\"; the predicate is affirmed of God himself)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed confesses this in its own voice as a first-person credal affirmation, not a report of another's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The one God is named as Father Almighty, and the surrounding text specifies the relational identity (the Son begotten of the Father, the Spirit proceeding from the Father), meeting the divine-paternity/relational-identity floor.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is word-for-word in the chunk; the required subject is the one God named as Father; the standard asserts it directly, and divine paternity as relational identity is fully present.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   }
+  }
+ },
+ "coding": {},
+ "phase": "DONE",
+ "survivors": [
+  {
+   "candidate_id": "Q-027-p1-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-03",
+   "locator": "Small Catechism, The Creed — First Article (Part 1), explanation",
+   "phrase": "I believe in God, the Father Almighty, Maker of heaven and earth",
+   "rationale": "Confessional statement directly asserts God as Father in the Creed's first article.",
+   "floor_claim": "FULL",
+   "chunk_text": "I believe in God, the Father Almighty, Maker of heaven and earth. What does this mean? I believe that God has made me and all creatures; that He has given me my body and soul, eyes, ears, and all my members, my reason and all my senses, and still takes care of them. He also gives me clothing and shoes, food and drink, house and home, wife and children, land, animals, and all I have. He richly and daily provides me with all that I need to support this body and life. He defends me against all danger and guards and protects me from all evil. All this He does only out of fatherly, divine goodness and mercy, without any merit or worthiness in me. For all this it is my duty to thank and praise, serve and obey Him. This is most certainly true.",
+   "chunk_hash": "370bd08f97da57ccfa3fa67adaa0a9ea57154d39737697210ebe04962406a706",
+   "division": "article",
+   "fallback_tier": false
+  },
+  {
+   "candidate_id": "Q-027-p1-2",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Ecumenical Creeds: The Apostles' Creed",
+   "phrase": "I believe in God the Father Almighty, Maker of heaven and earth",
+   "rationale": "Confessional Apostles' Creed asserts God is the Father, the required subject, at the controlling floor.",
+   "floor_claim": "FULL",
+   "chunk_text": "I believe in God the Father Almighty, Maker of heaven and earth. And in Jesus Christ, His only Son, our Lord; who was conceived by the Holy Ghost, born of the Virgin Mary; suffered under Pontius Pilate, was crucified, dead, and buried; He descended into hell; the third day He rose again from the dead; He ascended into heaven, and sitteth on the right hand of God the Father Almighty; from thence He shall come to judge the quick and the dead. I believe in the Holy Ghost; the holy catholic* Church, the communion of saints; the forgiveness of sins; the resurrection of the body; and the life everlasting. Amen. * catholic means “universal” and is not a reference to the Roman Catholic Church. Biblical references for the Apostles' Creed .",
+   "chunk_hash": "859723ad0cc15a05e20806e0bb107bacbfb7c2ad07fc5b22e8d9518a16ab33d2",
+   "division": "section",
+   "fallback_tier": false
+  },
+  {
+   "candidate_id": "Q-027-p1-3",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Ecumenical Creeds: The Nicene Creed",
+   "phrase": "I believe in one God, the Father Almighty, Maker of heaven and earth",
+   "rationale": "Nicene Creed confessionally names God as the Father, asserting divine paternity of God directly.",
+   "floor_claim": "FULL",
+   "chunk_text": "I believe in one God, the Father Almighty, Maker of heaven and earth, and of all things visible and invisible. And in one Lord Jesus Christ, the only-begotten Son of God, begotten of the Father before all worlds, God of God, Light of Light, very God of very God, begotten, not made, being of one substance with the Father; by whom all things were made; who for us men, and for our salvation, came down from heaven, and was incarnate by the Holy Ghost of the Virgin Mary, and was made man, and was crucified also for us under Pontius Pilate; He suffered and was buried; and the third day He rose again according to the Scriptures; and ascended into heaven, and sitteth on the right hand of the Father; and He shall come again with glory to judge the quick and the dead; whose kingdom shall have no end. And I believe in the Holy Ghost, the Lord and Giver of life, who proceedeth from the Father and the Son; who with the Father and the Son together is worshiped and glorified; who spake by the Prophets. And I believe in one holy catholic and apostolic Church.I acknowledge one Baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen.",
+   "chunk_hash": "a0e2483760350cc8f6d3bf00a9a9b66a4d458be43b24a7bc85e77c71b387ecb7",
+   "division": "section",
+   "fallback_tier": false
+  }
+ ],
+ "fallback_used": false,
+ "empty": false
+}

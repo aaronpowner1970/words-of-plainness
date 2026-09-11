@@ -7,7 +7,8 @@ import json
 import os
 import time
 
-from .config import PACKETS_DIR, EMPTY_RESULT
+from .config import PACKETS_DIR, EMPTY_RESULT, MAX_CANDIDATES
+from .registry import tier_rank
 from . import guards, store
 
 
@@ -80,7 +81,35 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     c["dropped_reason"] = "fallback-tier witness suppressed: a non-fallback standard yielded a candidate"
                     card["rejections"].append({"stage": "fallback-tier guard", **c})
                 card["candidates"] = [c for c in card["candidates"] if not c["fallback_tier"]]
-            card["candidates"] = card["candidates"][:3]
+            # Authority-tier ordering (AUTHOR RATIFIED 2026-09-11). Higher tier first. Where a higher
+            # tier wins AND a lower-tier standard of the same branch also asserts the predicate and
+            # passes the rubric, BOTH are kept: the lower-tier witness corroborates, and dropping it
+            # would hide from the author that the branch confesses the predicate at more than one
+            # level. The cap is therefore filled tier by tier — the best candidate of each distinct
+            # tier first, then the remainder in tier order — so a second candidate from the winning
+            # tier can never displace the only witness from another tier.
+            for c in card["candidates"]:
+                c["authority_tier_rank"] = tier_rank(c["authority_tier"])
+            order = sorted(range(len(card["candidates"])),
+                           key=lambda i: (card["candidates"][i]["authority_tier_rank"], i))
+            by_tier, seen = [], {}
+            for i in order:
+                seen.setdefault(card["candidates"][i]["authority_tier_rank"], []).append(i)
+            queues = [seen[k] for k in sorted(seen)]
+            while queues:
+                queues = [q for q in queues if q]
+                for q in list(queues):
+                    by_tier.append(q.pop(0))
+            kept = [card["candidates"][i] for i in by_tier][:MAX_CANDIDATES]
+            kept.sort(key=lambda c: c["authority_tier_rank"])
+            top = kept[0]["authority_tier_rank"] if kept else None
+            for c in kept:
+                c["corroborating_lower_tier"] = bool(top is not None and c["authority_tier_rank"] > top)
+            for c in card["candidates"]:
+                if c not in kept:
+                    c["dropped_reason"] = "candidate cap reached after tier allocation"
+                    card["rejections"].append({"stage": "tier allocation", **c})
+            card["candidates"] = kept
             card["status"] = "EMPTY" if (st.get("phase") == "DONE" and not card["candidates"]) else st.get("phase")
         cards.append(card)
     packet = {

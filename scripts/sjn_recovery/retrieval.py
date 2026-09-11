@@ -56,7 +56,92 @@ class BM25:
 
 
 def query_text(predicate):
-    return " ".join([predicate["predicate"], predicate["definition"], predicate["floor_note"]])
+    """The predicate term carries the signal. The floor note is analytic prose about the coding
+    decision ("temporal succession", "classical theology") and, weighted equally, it pulls ranking
+    toward long scholastic discussion and away from the terse creedal assertion that is the actual
+    evidence. Repeat the term so the ranking follows the predicate."""
+    return " ".join([predicate["predicate"]] * 3 + [predicate["definition"], predicate["floor_note"]])
+
+
+def predicate_terms(predicate):
+    """The words a confession would itself use for this predicate ("Eternal" -> eternal;
+    "Almighty / omnipotent" -> almighty, omnipotent), for the lexical slice in select_chunks."""
+    out = []
+    for variant in re.split(r"[/|,]", predicate["predicate"]):
+        for w in re.findall(r"[A-Za-z]{4,}", variant):
+            w = w.casefold()
+            if w not in out:
+                out.append(w)
+    return out
+
+
+def has_term(text, terms):
+    """True when the chunk literally uses one of the predicate's own words (any inflection)."""
+    n = normalize(text)
+    return any(re.search(r"\b" + re.escape(t) + r"\w*", n) for t in terms)
+
+
+# A predicate term that appears in a large share of a standard's chunks carries no signal for that
+# standard: "without" is in 48% of the Book of Concord and 55% of the Confession of Dositheus, so
+# admitting chunks on the strength of it fills the lexical slice with noise and pushes the real
+# evidence out. Terms above this document frequency are dropped for that standard; if every term is
+# above it, the rarest one is kept so the slice is never empty for the wrong reason.
+LEXICAL_DF_CEILING = 0.35
+
+
+def discriminating_terms(terms, chunks):
+    """The predicate terms that actually discriminate within THIS standard, by document frequency."""
+    if len(terms) < 2 or not chunks:
+        return terms
+    df = {}
+    for term in terms:
+        rx = re.compile(r"\b" + re.escape(term) + r"\w*")
+        df[term] = sum(1 for c in chunks if rx.search(normalize(c["text"]))) / len(chunks)
+    keep = [term for term in terms if df[term] <= LEXICAL_DF_CEILING]
+    return keep or [min(terms, key=lambda x: df[x])]
+
+
+def division_of(locator):
+    """The constituent work a chunk belongs to, read off the chunk's own locator.
+
+    Several registry rows are composite volumes: BSR-LU-01 is the whole Book of Concord, BSR-RP-04
+    the whole Book of Confessions. Their constituent documents differ enormously in length, so a
+    flat ranking lets the longest book swallow the standard's whole allowance - the three Ecumenical
+    Creeds are 3 chunks of BSR-LU-01's 738 and never surfaced, which is why Q-363 (Athanasian Creed)
+    drew an EMPTY locator. Grouping by division lets every constituent work be represented.
+
+    Locator shapes in this corpus:
+      "Book of Confessions 1.1 (Nicene Creed)"    -> Nicene Creed       (trailing parenthetical)
+      "Chapter 2.1 - Of God"                      -> Of God             (after the dash)
+      "Ecumenical Creeds: The Athanasian Creed"   -> Ecumenical Creeds  (before the colon)
+      "CCC 185"                                   -> CCC 185            (its own division, so the
+                                                     round robin degenerates to plain rank order,
+                                                     the correct no-op for a flat text)
+    """
+    loc = (locator or "").strip()
+    m = re.search(r"\(([^()]+)\)\s*$", loc)
+    if m:
+        return m.group(1).strip()
+    parts = re.split(r"\s[—–-]\s", loc, maxsplit=1)
+    if len(parts) > 1 and parts[1].strip():
+        return parts[1].strip()
+    return re.split(r"[:,]", loc)[0].strip() or loc
+
+
+def round_robin(chunks):
+    """Reorder a ranked list so that each division contributes its best chunk before any division
+    contributes its second. Order within a division, and the order in which divisions are first
+    seen, both follow the incoming ranking, so this never promotes a division that ranked nowhere."""
+    groups = {}
+    for c in chunks:
+        groups.setdefault(division_of(c["locator"]), []).append(c)
+    queues = list(groups.values())
+    order = []
+    while queues:
+        queues = [q for q in queues if q]
+        for q in list(queues):
+            order.append(q.pop(0))
+    return order
 
 
 def _vector_rank(chunks, query, rid):
@@ -114,16 +199,43 @@ def select_chunks(predicate, standards, budget=LOCATOR_CONTEXT_CHARS, top_k=RETR
             r2 = vec_rank.get(c["locator"], len(ch)) if vec_rank else r1
             return 1 / (60 + r1) + 1 / (60 + r2)
         ranked = sorted(ch, key=lambda c: -fused(c))
+        # Lexical slice. A predicate such as "Eternal" is confessed in short creedal clauses that
+        # lose on BM25 to long scholastic passages: the Athanasian Creed ranked 260th of 738 for
+        # RNR-H46 although it says "the Father eternal, the Son eternal". Reserve most of the
+        # allowance for chunks that actually use the predicate's own vocabulary, ranked among
+        # themselves by the same fusion, then spend the remainder on the general ranking so that
+        # evidence phrased without the term is still reachable.
+        terms = discriminating_terms(predicate_terms(predicate), ch)
+        lex = [c for c in ranked if terms and has_term(c["text"], terms)]
+        if lex:
+            # Inside the slice, rank on the predicate's own words alone. The full query still carries
+            # the floor note, and blending the two ranks (RRF) was measurably worse than dropping the
+            # general rank here: for RNR-H46 the Athanasian Creed sits at 139 of 157 on the full
+            # query, 78 blended, 33 on the predicate term. The general ranking still governs the
+            # remaining 30% of the allowance, so evidence phrased without the term is not lost.
+            lscore = BM25([c["text"] for c in lex]).score(" ".join(terms))
+            lex = [lex[i] for i in sorted(range(len(lex)), key=lambda i: -lscore[i])]
+            lex = round_robin(lex)
+            lex_keys, lex_allow, used_lex = set(), allowance * 0.7, 0
+            for c in lex:
+                if used_lex + len(c["text"]) > lex_allow:
+                    continue
+                lex_keys.add(c["locator"]); used_lex += len(c["text"])
+            ranked = ([c for c in lex if c["locator"] in lex_keys]
+                      + [c for c in ranked if c["locator"] not in lex_keys])
+        # Fill the character allowance. An earlier version also capped the count at top_k*2, which
+        # discarded most of the budget for standards whose divisions are short (the Book of Concord's
+        # Athanasian Creed never reached the locator for Q-363 because of it). The allowance is the
+        # only limit; top_k is the floor that guarantees a standard is represented at all.
         picked, used = [], 0
         for c in ranked:
-            if len(picked) >= max(top_k, 3) and used + len(c["text"]) > allowance:
-                break
-            if used + len(c["text"]) > allowance and picked:
-                continue
+            if used + len(c["text"]) > allowance:
+                if len(picked) >= max(top_k, 3):
+                    break
+                continue          # oversized chunk early on: skip it, keep looking for the floor
             picked.append(c); used += len(c["text"])
-            if len(picked) >= top_k * 2:
-                break
         selected.extend(picked)
         coverage[rid] = {"coverage": "RETRIEVED", "supplied": len(picked), "of": len(ch),
-                         "method": "BM25+vector(RRF)" if vec_rank else "BM25"}
+                         "lexical": sum(1 for c in picked if terms and has_term(c["text"], terms)),
+                         "method": ("BM25+vector(RRF)" if vec_rank else "BM25") + "+lexical-slice"}
     return selected, coverage

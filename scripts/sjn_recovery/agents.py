@@ -181,7 +181,7 @@ class CellRunner:
         st = self.load(cell["queue_id"]) or {"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"],
                                               "predicate": cell["predicate"], "passes": {}, "verifications": {}, "coding": {}, "phase": "locate-1"}
         # pass 1
-        if "1" not in st["passes"] or st["passes"]["1"].get("status") == "PENDING":
+        if "1" not in st["passes"] or st["passes"]["1"].get("status") in ("PENDING", "UNPARSEABLE"):
             r = self.locate(cell, 1, st)
             st["passes"]["1"] = r
             self.save(st)
@@ -195,7 +195,7 @@ class CellRunner:
         # pass 2 only if pass 1 left nothing surviving and the branch has a fallback row
         has_fallback = any(self.reg.is_fallback(r["registry_id"]) for r in self.reg.for_branch(cell["branch"]))
         if not survivors1 and has_fallback:
-            if "2" not in st["passes"] or st["passes"]["2"].get("status") == "PENDING":
+            if "2" not in st["passes"] or st["passes"]["2"].get("status") in ("PENDING", "UNPARSEABLE"):
                 r = self.locate(cell, 2, st)
                 st["passes"]["2"] = r
                 self.save(st)
@@ -230,7 +230,7 @@ class CellRunner:
                 if i > 0 and self.secondary_cells is not None and cell["queue_id"] not in self.secondary_cells:
                     v.setdefault(m, {"status": "SKIPPED_SAMPLE", "model": m})
                     continue
-                if m not in v or v[m].get("status") in ("PENDING", "SKIPPED_SAMPLE"):
+                if m not in v or v[m].get("status") in ("PENDING", "SKIPPED_SAMPLE", "UNPARSEABLE"):
                     v[m] = self.verify(cell, cand, m)
                 if v[m].get("status") == "PENDING":
                     pending = True

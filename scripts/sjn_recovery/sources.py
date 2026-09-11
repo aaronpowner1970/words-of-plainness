@@ -348,30 +348,49 @@ def goarch(ctx):
 
 
 def philaret(ctx):
+    """Longer Catechism of St Philaret: 611 numbered questions in one page.
+
+    The page changes shape partway through — questions 1-306 lead with a <p> carrying "N. text", from
+    307 they move into <b> with the text inline, and elsewhere a bare "N." in <b> precedes the question
+    in the next <p>. Splitting is therefore driven by the QUESTION SEQUENCE, not by tag shape: collect
+    every segment that opens with a number, then walk them in document order taking the strict successor,
+    resynchronising only when the wanted number never appears again (the page omits 288)."""
     url = ctx.row["canonical_url"]
     segs = segments(ctx.html(url))
-    out, cur, buf, expect, section, bold_num = [], None, [], 1, "", None
-    for tag, text in segs:
-        t = clean(text)
-        if tag in ("h2", "h3", "h4"):
-            section = t.rstrip(".")
+    cands = []          # (segment index, question number, inline text after the number)
+    for i, (tag, text) in enumerate(segs):
+        if tag not in ("p", "b", "strong"):
             continue
-        if tag in ("b", "strong") and re.fullmatch(r"\d{1,3}\.", t) and expect <= int(t[:-1]) <= expect + 3:
-            bold_num = int(t[:-1]); continue
-        m = re.match(r"^(\d{1,3})\.\s+(.+)$", t)
-        if tag == "p" and ((m and expect <= int(m.group(1)) <= expect + 3 and (t.endswith("?") or len(t) < 200)) or bold_num):
-            if cur:
-                _emit(ctx, out, f"Q.{cur} ({cur_section})", buf, "question", url)
-            n = bold_num or int(m.group(1))
-            cur, buf, expect, cur_section, bold_num = n, [t if not bold_num else f"{n}. {t}"], n + 1, section, None
+        m = re.match(r"^(\d{1,3})\.\s*(.*)$", clean(text), re.S)
+        if m:
+            cands.append((i, int(m.group(1)), clean(m.group(2))))
+    starts, want, ahead = {}, 1, [n for _, n, _ in cands]
+    for k, (i, n, inline) in enumerate(cands):
+        if n == want:
+            starts[i] = (n, inline); want = n + 1
+        elif n > want and want not in ahead[k:]:
+            starts[i] = (n, inline); want = n + 1       # the page skips a number; resynchronise
+    section, out, cur, buf = "", [], None, []
+    order = sorted(starts)
+    bounds = {s: (order[j + 1] if j + 1 < len(order) else len(segs)) for j, s in enumerate(order)}
+    for i, (tag, text) in enumerate(segs):
+        t_ = clean(text)
+        if tag in ("h2", "h3", "h4") and i not in starts:
+            section = t_.rstrip(".")
+        if i in starts:
+            if cur is not None:
+                _emit(ctx, out, f"Q.{cur} ({cur_sec})", buf, "question", url)
+            n, inline = starts[i]
+            cur, buf, cur_sec = n, ([f"{n}. {inline}"] if inline else [f"{n}."]), section
             continue
-        if cur and tag in ("p", "i", "em", "a", "b"):
-            if t in (".", ";", ",", ")", "(", ";.") or not t:
+        if cur is not None and tag in ("p", "i", "em", "a", "b", "strong", "blockquote", "li"):
+            if t_ in (".", ";", ",", ")", "(", ";.") or not t_:
                 continue
-            buf.append(t)
-    if cur:
-        _emit(ctx, out, f"Q.{cur} ({cur_section})", buf, "question", url)
-    return out, [f"{len(out)} numbered questions (continuous numbering; list items inside answers are not questions)"]
+            buf.append(t_)
+    if cur is not None:
+        _emit(ctx, out, f"Q.{cur} ({cur_sec})", buf, "question", url)
+    return out, [f"{len(out)} numbered questions of the 611 in the catechism; split by question sequence, "
+                 f"tolerant of the page's mid-document change from <p> to <b> question headings"]
 
 
 def dositheus(ctx):

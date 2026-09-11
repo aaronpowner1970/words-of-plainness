@@ -92,6 +92,12 @@ def call_one(client, job, done_dir, max_cost, log):
                 model=model_id, max_tokens=job.get("max_tokens", 1200),
                 system=job["system"], messages=[{"role": "user", "content": job["user"]}])
             text = "".join(getattr(b, "text", "") for b in r.content)
+            if not text.strip():
+                # The reply carried no text block: the token ceiling was consumed before any output was
+                # emitted. Recording this as a success would bank an empty answer the harness scores as
+                # a forced REJECT, so retry with more room instead.
+                raise RuntimeError(f"empty text block (stop_reason={getattr(r, 'stop_reason', None)}, "
+                                   f"output_tokens={r.usage.output_tokens})")
             usage = {"input_tokens": r.usage.input_tokens, "output_tokens": r.usage.output_tokens}
             c = cost_of(model_id, usage)
             rec = {"call_id": cid, "output": text, "model": job["model"], "model_id": model_id,
@@ -124,6 +130,9 @@ def call_one(client, job, done_dir, max_cost, log):
                     _state["stopped"] = True; _state["errors"] += 1
                 log(f"  SPEND LIMIT reached: {last}")
                 return None
+            if "empty text block" in last:
+                job["max_tokens"] = min(8000, int(job.get("max_tokens", 1200) * 2))
+                log(f"  empty reply {cid}: retrying with max_tokens={job['max_tokens']}")
             sleep = min(60, (2 ** attempt) + random.uniform(0, 1.5))
             log(f"  retry {attempt}/6 {cid} in {sleep:.1f}s ({last})")
             time.sleep(sleep)
