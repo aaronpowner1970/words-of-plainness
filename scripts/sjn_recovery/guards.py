@@ -1,0 +1,93 @@
+"""Guards enforced in code, never in a prompt (spec §5).
+
+  registry-only     agents receive chunk text and locators; URLs are stripped before any prompt is built
+  phrase assertion  a candidate phrase must be present verbatim (normalized) in the chunk it names
+  length            phrase ≤15 words after normalization; rationale ≤40; source_note ≤40
+  no cross-branch   a candidate's registry_id must belong to the cell's branch
+  duplicates        identical locator + phrase collapses to one candidate
+  fallback tier     fallback-only rows are admitted only in pass two (agents.py)
+"""
+from .config import PHRASE_MAX_WORDS, RATIONALE_MAX_WORDS, SOURCE_NOTE_MAX_WORDS
+from .textutil import normalize, phrase_word_count, contains
+
+
+class GuardError(Exception):
+    pass
+
+
+AGENT_CHUNK_FIELDS = ("chunk_key", "registry_id", "standard_title", "authority_tier", "locator", "text", "language")
+
+
+def agent_view(chunk, key):
+    """The only representation of a chunk an agent ever sees. No URL, no hash."""
+    return {"chunk_key": key, "registry_id": chunk["registry_id"], "standard_title": chunk["standard_title"],
+            "authority_tier": chunk["authority_tier"], "locator": chunk["locator"], "text": chunk["text"],
+            "language": chunk.get("language", "en")}
+
+
+def assert_no_urls(obj):
+    """Defensive: nothing that reaches a prompt may contain a URL."""
+    import json
+    import re
+    blob = json.dumps(obj, ensure_ascii=False)
+    if re.search(r"https?://|www\.[a-z]", blob, re.I):
+        raise GuardError("URL leaked into agent input")
+
+
+def check_phrase(phrase, chunk_text):
+    """Return (ok, reason). Verbatim containment after normalization; ≤15 words."""
+    if not phrase or not phrase.strip():
+        return False, "empty phrase"
+    n = phrase_word_count(phrase)
+    if n > PHRASE_MAX_WORDS:
+        return False, f"phrase exceeds {PHRASE_MAX_WORDS} words ({n})"
+    if not contains(chunk_text, phrase):
+        return False, "phrase not present verbatim in the named chunk"
+    return True, "verbatim"
+
+
+def check_length(text, cap, label):
+    n = phrase_word_count(text)
+    return (n <= cap), (f"{label} {n} words > {cap}" if n > cap else "ok")
+
+
+def check_branch(candidate_rid, branch, registry):
+    row = registry.by_id.get(candidate_rid)
+    if not row:
+        return False, f"{candidate_rid} is not an AUTHOR_RATIFIED registry row"
+    if row["branch"] != branch:
+        return False, f"{candidate_rid} belongs to {row['branch']}, not {branch} (cross-branch leakage)"
+    return True, "ok"
+
+
+def dedupe_key(candidate):
+    return (candidate["registry_id"], normalize(candidate["locator"]), normalize(candidate["phrase"]))
+
+
+def vet_candidate(cand, chunk_by_key, branch, registry, allow_fallback):
+    """Apply every code guard to a locator candidate. Returns (ok, reason, chunk)."""
+    key = cand.get("chunk_key")
+    chunk = chunk_by_key.get(key)
+    if chunk is None:
+        return False, f"unknown chunk_key {key!r} (candidate cites text it was not given)", None
+    if cand.get("registry_id") != chunk["registry_id"]:
+        return False, "registry_id does not match the cited chunk", chunk
+    ok, why = check_branch(chunk["registry_id"], branch, registry)
+    if not ok:
+        return False, why, chunk
+    if registry.is_fallback(chunk["registry_id"]) and not allow_fallback:
+        return False, "fallback-only standard cited in pass one", chunk
+    ok, why = check_phrase(cand.get("phrase", ""), chunk["text"])
+    if not ok:
+        return False, why, chunk
+    ok, why = check_length(cand.get("rationale", ""), RATIONALE_MAX_WORDS, "rationale")
+    if not ok:
+        cand["rationale"] = " ".join(cand["rationale"].split()[:RATIONALE_MAX_WORDS])
+    if cand.get("floor_claim") not in ("FULL", "PARTIAL", "WORD_ONLY"):
+        return False, f"floor_claim {cand.get('floor_claim')!r} not in FULL|PARTIAL|WORD_ONLY", chunk
+    return True, "ok", chunk
+
+
+def vet_source_note(note):
+    ok, why = check_length(note or "", SOURCE_NOTE_MAX_WORDS, "source_note")
+    return ok, why
