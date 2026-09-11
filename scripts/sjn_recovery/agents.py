@@ -77,7 +77,7 @@ class CellRunner:
             sv["coverage"] = coverage[sv["registry_id"]]
         user = prompts.locator_user(cell, pred, comp, views, standards_view, f"pass {pass_no}")
         guards.assert_no_urls({"u": user})
-        out, rec = self.llm.complete("locator", prompts.LOCATOR_SYSTEM, user, model=self.locator_model, max_tokens=1500,
+        out, rec = self.llm.complete("locator", prompts.LOCATOR_SYSTEM, user, model=self.locator_model, max_tokens=3000,
                                      meta={"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"], "pass": pass_no})
         if out is None:
             return {"status": "PENDING", "call_id": rec["call_id"]}
@@ -119,7 +119,7 @@ class CellRunner:
         chunk_view = {"registry_id": cand["registry_id"], "locator": cand["locator"], "text": cand["chunk_text"]}
         user = prompts.verifier_user(pred, cand, chunk_view)
         guards.assert_no_urls({"u": user})
-        out, rec = self.llm.complete("verifier", prompts.VERIFIER_SYSTEM, user, model=model, max_tokens=900,
+        out, rec = self.llm.complete("verifier", prompts.VERIFIER_SYSTEM, user, model=model, max_tokens=2500,
                                      meta={"queue_id": cell["queue_id"], "candidate_id": cand["candidate_id"], "verifier_model": model})
         if out is None:
             return {"status": "PENDING", "call_id": rec["call_id"], "model": model}
@@ -163,7 +163,7 @@ class CellRunner:
         std = self.reg.public(cand["registry_id"])
         user = prompts.coder_user(cell, pred, comp, cand, {k: rubric.get(k) for k in ("floor", "floor_reason", "hazard_flags", "verdict", "grammatical_subject")}, std)
         guards.assert_no_urls({"u": user})
-        out, rec = self.llm.complete("coder", prompts.CODER_SYSTEM, user, model=self.coder_model, max_tokens=700,
+        out, rec = self.llm.complete("coder", prompts.CODER_SYSTEM, user, model=self.coder_model, max_tokens=1200,
                                      meta={"queue_id": cell["queue_id"], "candidate_id": cand["candidate_id"]})
         if out is None:
             return {"status": "PENDING", "call_id": rec["call_id"]}

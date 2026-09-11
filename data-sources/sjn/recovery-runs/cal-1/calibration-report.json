@@ -1,0 +1,4302 @@
+{
+ "run": {
+  "run_id": "cal-1",
+  "kind": "calibration",
+  "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.23_REGISTRY_CORRECTIONS_20260910.xlsx",
+  "app_master_version": "v2.23 REGISTRY CORRECTIONS",
+  "locator_model": "sonnet",
+  "verifier_models": [
+   "sonnet",
+   "opus"
+  ],
+  "backend": "batch",
+  "prompt_version": "gate6-v1.1",
+  "cells": 148,
+  "released": 141,
+  "reviewed_empty": 7,
+  "secondary_scope": "ALL",
+  "secondary_cells": null,
+  "updated_at": "2026-09-11T19:29:00Z"
+ },
+ "per_branch": {
+  "Roman Catholic": {
+   "sonnet": {
+    "cells": 20,
+    "done": 20,
+    "located_any": 18,
+    "hit_std": 15,
+    "hit_div": 12,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 2
+   },
+   "opus": {
+    "cells": 20,
+    "done": 20,
+    "located_any": 20,
+    "hit_std": 16,
+    "hit_div": 12,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 0
+   }
+  },
+  "Anglican": {
+   "sonnet": {
+    "cells": 12,
+    "done": 10,
+    "located_any": 9,
+    "hit_std": 9,
+    "hit_div": 9,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 1,
+    "skipped": 2
+   },
+   "opus": {
+    "cells": 12,
+    "done": 12,
+    "located_any": 11,
+    "hit_std": 10,
+    "hit_div": 10,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 1
+   }
+  },
+  "Baptist": {
+   "sonnet": {
+    "cells": 16,
+    "done": 15,
+    "located_any": 15,
+    "hit_std": 15,
+    "hit_div": 15,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 0,
+    "skipped": 1
+   },
+   "opus": {
+    "cells": 16,
+    "done": 16,
+    "located_any": 16,
+    "hit_std": 16,
+    "hit_div": 16,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 0
+   }
+  },
+  "Methodist / Wesleyan": {
+   "sonnet": {
+    "cells": 18,
+    "done": 17,
+    "located_any": 16,
+    "hit_std": 16,
+    "hit_div": 15,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 1,
+    "skipped": 1
+   },
+   "opus": {
+    "cells": 18,
+    "done": 18,
+    "located_any": 17,
+    "hit_std": 17,
+    "hit_div": 16,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 1
+   }
+  },
+  "Eastern Orthodox": {
+   "sonnet": {
+    "cells": 10,
+    "done": 9,
+    "located_any": 9,
+    "hit_std": 3,
+    "hit_div": 2,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 0,
+    "skipped": 1
+   },
+   "opus": {
+    "cells": 10,
+    "done": 10,
+    "located_any": 10,
+    "hit_std": 3,
+    "hit_div": 2,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 0
+   }
+  },
+  "Lutheran": {
+   "sonnet": {
+    "cells": 15,
+    "done": 13,
+    "located_any": 10,
+    "hit_std": 10,
+    "hit_div": 6,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 3,
+    "skipped": 2
+   },
+   "opus": {
+    "cells": 15,
+    "done": 15,
+    "located_any": 11,
+    "hit_std": 11,
+    "hit_div": 7,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 4
+   }
+  },
+  "Reformed / Presbyterian": {
+   "sonnet": {
+    "cells": 37,
+    "done": 35,
+    "located_any": 31,
+    "hit_std": 22,
+    "hit_div": 15,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 4,
+    "skipped": 2
+   },
+   "opus": {
+    "cells": 37,
+    "done": 35,
+    "located_any": 31,
+    "hit_std": 23,
+    "hit_div": 16,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 4,
+    "skipped": 2
+   }
+  },
+  "Mennonite / Anabaptist": {
+   "sonnet": {
+    "cells": 13,
+    "done": 13,
+    "located_any": 11,
+    "hit_std": 11,
+    "hit_div": 10,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 2
+   },
+   "opus": {
+    "cells": 13,
+    "done": 9,
+    "located_any": 8,
+    "hit_std": 8,
+    "hit_div": 8,
+    "hit_phrase": 0,
+    "no_corpus": 0,
+    "empty": 1,
+    "skipped": 4
+   }
+  }
+ },
+ "expected_empty": [
+  {
+   "queue_id": "Q-294",
+   "branch": "Baptist",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "model": "sonnet",
+   "existing_document": "Baptist Faith and Message 2000",
+   "outcome": "LOCATED_IN_OTHER_REGISTRY_STANDARD",
+   "survivors": [
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+     "the Father is of none, neither begotten nor proceeding"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-294",
+   "branch": "Baptist",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "model": "opus",
+   "existing_document": "Baptist Faith and Message 2000",
+   "outcome": "LOCATED_IN_OTHER_REGISTRY_STANDARD",
+   "survivors": [
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+     "the Father is of none, neither begotten nor proceeding"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-295",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "model": "sonnet",
+   "existing_document": "Articles of Religion + Confession of Faith",
+   "outcome": "LOCATED_IN_SAME_STANDARD",
+   "survivors": [
+    [
+     "BSR-MW-04",
+     "Article 2. The Father, ¶212",
+     "the Father is the Source of all that exists"
+    ],
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "the maker and preserver of all things, both visible and invisible"
+    ],
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "Creator, Sovereign and Preserver of all things visible and invisible"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-295",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "model": "opus",
+   "existing_document": "Articles of Religion + Confession of Faith",
+   "outcome": "LOCATED_IN_OTHER_REGISTRY_STANDARD",
+   "survivors": [
+    [
+     "BSR-MW-04",
+     "Article 2. The Father, ¶212",
+     "the Father is the Source of all that exists"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-296",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "model": "sonnet",
+   "existing_document": "Confession of Faith in a Mennonite Perspective (1995)",
+   "outcome": "LOCATED_IN_SAME_STANDARD",
+   "survivors": [
+    [
+     "BSR-MA-02",
+     "Article I. Of God and the Creation of all Things",
+     "before whom no God was made or existed, nor shall there be any after Him"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 5. Creation and Divine Providence",
+     "Scripture is clear that God was before anything else existed"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-296",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "model": "opus",
+   "existing_document": "Confession of Faith in a Mennonite Perspective (1995)",
+   "outcome": "LOCATED_IN_OTHER_REGISTRY_STANDARD",
+   "survivors": [
+    [
+     "BSR-MA-02",
+     "Article I. Of God and the Creation of all Things",
+     "before whom no God was made or existed, nor shall there be any after Him"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-357",
+   "branch": "Anglican",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "model": "sonnet",
+   "existing_document": "Thirty-Nine Articles + received Athanasian Creed",
+   "outcome": "EMPTY",
+   "survivors": []
+  },
+  {
+   "queue_id": "Q-357",
+   "branch": "Anglican",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "model": "opus",
+   "existing_document": "Thirty-Nine Articles + received Athanasian Creed",
+   "outcome": "EMPTY",
+   "survivors": []
+  },
+  {
+   "queue_id": "Q-358",
+   "branch": "Baptist",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "model": "sonnet",
+   "existing_document": "Baptist Faith and Message 2000",
+   "outcome": "LOCATED_IN_OTHER_REGISTRY_STANDARD",
+   "survivors": [
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "who is immutable, immense, eternal, incomprehensible, almighty, every way infinite"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-358",
+   "branch": "Baptist",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "model": "opus",
+   "existing_document": "Baptist Faith and Message 2000",
+   "outcome": "LOCATED_IN_OTHER_REGISTRY_STANDARD",
+   "survivors": [
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "who is immutable, immense, eternal, incomprehensible, almighty, every way infinite"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-359",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "model": "sonnet",
+   "existing_document": "Articles of Religion + Confession of Faith",
+   "outcome": "EMPTY",
+   "survivors": []
+  },
+  {
+   "queue_id": "Q-359",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "model": "opus",
+   "existing_document": "Articles of Religion + Confession of Faith",
+   "outcome": "EMPTY",
+   "survivors": []
+  },
+  {
+   "queue_id": "Q-360",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "model": "sonnet",
+   "existing_document": "Confession of Faith in a Mennonite Perspective (1995)",
+   "outcome": "EMPTY",
+   "survivors": []
+  },
+  {
+   "queue_id": "Q-360",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "model": "opus",
+   "existing_document": "Confession of Faith in a Mennonite Perspective (1995)",
+   "outcome": "EMPTY",
+   "survivors": []
+  }
+ ],
+ "planted": {
+  "Dositheus": {
+   "sonnet": {
+    "n": 23,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 23,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  },
+  "Lutheran": {
+   "sonnet": {
+    "n": 13,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 13,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  },
+  "Roman Catholic": {
+   "sonnet": {
+    "n": 6,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 6,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  },
+  "Anglican": {
+   "sonnet": {
+    "n": 5,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 5,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  },
+  "Reformed / Presbyterian": {
+   "sonnet": {
+    "n": 9,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 9,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  },
+  "Baptist": {
+   "sonnet": {
+    "n": 5,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 5,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  },
+  "Methodist / Wesleyan": {
+   "sonnet": {
+    "n": 4,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 4,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  },
+  "Mennonite / Anabaptist": {
+   "sonnet": {
+    "n": 3,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 3,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  },
+  "Eastern Orthodox": {
+   "sonnet": {
+    "n": 6,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 6,
+    "false_accept": 0,
+    "pending": 0,
+    "items": []
+   }
+  }
+ },
+ "taxonomy": {
+  "sonnet": {
+   "A_same_standard": 101,
+   "B_different_ratified_standard_same_branch": 18,
+   "C_all_candidates_rejected": 3,
+   "D_locator_empty": 10
+  },
+  "opus": {
+   "A_same_standard": 104,
+   "B_different_ratified_standard_same_branch": 20,
+   "C_all_candidates_rejected": 1,
+   "D_locator_empty": 10
+  }
+ },
+ "dositheus_natural": {
+  "sonnet": {
+   "candidates": 7,
+   "accept": 6,
+   "reject": 1
+  },
+  "opus": {
+   "candidates": 7,
+   "accept": 6,
+   "reject": 1
+  }
+ },
+ "models": {
+  "calls": 973,
+  "by_model": {
+   "sonnet": {
+    "calls": 562,
+    "cost_usd": 11.651961,
+    "input_tokens": 3058077,
+    "output_tokens": 165182,
+    "estimated": true
+   },
+   "opus": {
+    "calls": 411,
+    "cost_usd": 26.461470000000013,
+    "input_tokens": 715488,
+    "output_tokens": 209722,
+    "estimated": true
+   }
+  }
+ },
+ "verdicts": {
+  "sonnet": {
+   "recall": 0.7651515151515151,
+   "false_accept": 0.0,
+   "dositheus_false_accept": 0.0,
+   "recall_ok": false,
+   "false_accept_ok": true,
+   "dositheus_ok": true
+  },
+  "opus": {
+   "recall": 0.7703703703703704,
+   "false_accept": 0.0,
+   "dositheus_false_accept": 0.0,
+   "recall_ok": false,
+   "false_accept_ok": true,
+   "dositheus_ok": true
+  }
+ },
+ "chosen_verifier": null,
+ "details": [
+  {
+   "queue_id": "Q-001",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H01",
+   "predicate": "Living",
+   "existing": "First Vatican Council, Dei Filius — Chapter I, God the Creator of All Things",
+   "equivalent_registry": [
+    "BSR-RC-02",
+    "BSR-RC-03"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "unum esse Deum verum et vivum, Creatorem ac Dominum caeli et terrae"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "there is one true and living God, creator and Lord of heaven and earth"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-005",
+   "branch": "Anglican",
+   "family_id": "RNR-H01",
+   "predicate": "Living",
+   "existing": "Thirty-Nine Articles — Articles I-II",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article I (1) — Of Faith In The Holy Trinity",
+     "THERE is but one living and true God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-006",
+   "branch": "Baptist",
+   "family_id": "RNR-H01",
+   "predicate": "Living",
+   "existing": "Baptist Faith and Message 2000 — II. God — one living and true God",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II. God",
+     "one and only one living and true God"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "one only living and true God"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2",
+     "having all life, glory, goodness, blessedness, in and of Himself"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-007",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H01",
+   "predicate": "Living",
+   "existing": "Articles of Religion of the Methodist Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "one living and true God"
+    ],
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "one true, holy and living God"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "one living and true God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-009",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H02",
+   "predicate": "True",
+   "existing": "Nicene / Niceno-Constantinopolitan Creed — Creed, Godhead and Christological clauses",
+   "equivalent_registry": [
+    "BSR-RC-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "there is one true and living God, creator and Lord of heaven and earth"
+    ],
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "there is only one true God, eternal and immeasurable, almighty, unchangeable"
+    ],
+    [
+     "BSR-RC-01",
+     "CCC 215",
+     "God is Truth itself, whose words cannot deceive."
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-010",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H02",
+   "predicate": "True",
+   "existing": "Nicene / Niceno-Constantinopolitan Creed — Nicene Creed, Godhead and Christological clauses",
+   "equivalent_registry": [
+    "BSR-EO-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-01",
+     "The Symbol of Faith — \"God\"",
+     "He is the true and living God, the only God"
+    ],
+    [
+     "BSR-EO-05",
+     "Decree 1",
+     "We believe in one God, true, almighty and infinite"
+    ],
+    [
+     "BSR-EO-04",
+     "Q.95 (On the First Article)",
+     "The Father is true God, the Son equally true God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-011",
+   "branch": "Lutheran",
+   "family_id": "RNR-H02",
+   "predicate": "True",
+   "existing": "Nicene / Niceno-Constantinopolitan Creed — Nicene Creed",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article III. Of the Son of God, ¶1–6",
+     "true God and true man"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶6–10",
+     "with the Father and the Holy Ghost, true, essential, perfect God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: III. The Righteousness of Faith Before God, ¶1–6",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-013",
+   "branch": "Anglican",
+   "family_id": "RNR-H02",
+   "predicate": "True",
+   "existing": "Thirty-Nine Articles — Articles I–II",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article I (1) — Of Faith In The Holy Trinity",
+     "THERE is but one living and true God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-014",
+   "branch": "Baptist",
+   "family_id": "RNR-H02",
+   "predicate": "True",
+   "existing": "Baptist Faith and Message 2000 — II. God — one living and true God",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II. God",
+     "There is one and only one living and true God"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "The Lord our God is but one only living and true God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-025",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H04",
+   "predicate": "Father",
+   "existing": "Apostles' Creed — Apostles' Creed, articles 1–12",
+   "equivalent_registry": [
+    "BSR-RC-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-06",
+     "Nicene Creed",
+     "We believe in one God, the Father, the Almighty, maker of heaven and earth"
+    ],
+    [
+     "BSR-RC-06",
+     "Apostles' Creed",
+     "I believe in God the Father almighty, creator of heaven and earth"
+    ],
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "Father, Son and holy Spirit, three persons but one absolutely simple essence, substance or nature"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-026",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H04",
+   "predicate": "Father",
+   "existing": "Nicene / Niceno-Constantinopolitan Creed — Nicene Creed, Godhead and Christological clauses",
+   "equivalent_registry": [
+    "BSR-EO-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-05",
+     "Decree 1",
+     "We believe in one God, true, almighty and infinite, the Father,"
+    ],
+    [
+     "BSR-EO-02",
+     "The Holy Trinity — \"One God, One Father\"",
+     "there is only one God because there is only one Father"
+    ],
+    [
+     "BSR-EO-04",
+     "Q.90 (On the First Article)",
+     "one in substance but trine in persons--the Father, the Son, and the Holy Ghost"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-027",
+   "branch": "Lutheran",
+   "family_id": "RNR-H04",
+   "predicate": "Father",
+   "existing": "Nicene Creed — Nicene Creed",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation",
+     "I believe in God, the Father Almighty, Maker of heaven and earth"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article I. Of God, ¶1–2",
+     "three distinct persons, of the same divine essence, and coeternal, Father, Son, and Holy Ghost"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-028",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H04",
+   "predicate": "Father",
+   "existing": "Nicene Creed — 1.1–3, Nicene Creed",
+   "equivalent_registry": [
+    "BSR-RP-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.3 — Of God, and of the Holy Trinity",
+     "God the Father, God the Son, and God the Holy Ghost"
+    ],
+    [
+     "BSR-RP-02",
+     "Shorter Catechism Q.6",
+     "the Father, the Son, and the Holy Ghost; and these three are one God"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 8: The Trinity",
+     "The Father is the cause, origin, and source of all things"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-030",
+   "branch": "Baptist",
+   "family_id": "RNR-H04",
+   "predicate": "Father",
+   "existing": "Baptist Faith and Message 2000 — II.A. God the Father",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II.A. God the Father",
+     "God as Father reigns with providential care over His universe, His creatures"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+     "there are three subsistences, the Father, the Word or Son, and Holy Spirit"
+    ],
+    [
+     "BSR-BA-01",
+     "II. God",
+     "The eternal triune God reveals Himself to us as Father, Son, and Holy Spirit"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-032",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H04",
+   "predicate": "Father",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — one holy and loving God who is Father, Son, and Holy Spirit",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-MA-02",
+     "Article I. Of God and the Creation of all Things",
+     "REJECT",
+     "NOT_ASSERTION"
+    ],
+    [
+     "BSR-MA-02",
+     "Article VII. Of Holy Baptism",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-033",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "existing": "Fourth Lateran Council — Constitution 1, Firmiter credimus",
+   "equivalent_registry": [
+    "BSR-RC-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-06",
+     "Nicene Creed",
+     "the only Son of God, eternally begotten of the Father"
+    ],
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "the Son being born, and the holy Spirit proceeding; consubstantial and coequal, co-omnipotent and coeternal"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-034",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "existing": "Third Council of Constantinople — Sixth Ecumenical Council",
+   "equivalent_registry": [
+    "BSR-EO-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-01",
+     "The Symbol of Faith — \"Nicene Creed\"",
+     "the Son of God, the only-begotten, begotten of the Father before all ages"
+    ],
+    [
+     "BSR-EO-05",
+     "Decree 1",
+     "the Son begotten of the Father before the ages, and consubstantial with him"
+    ],
+    [
+     "BSR-EO-04",
+     "Q.129 (On the Second Article)",
+     "the name of the second Person of the Holy Trinity in respect of his Godhead"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-035",
+   "branch": "Lutheran",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "existing": "Nicene / Niceno-Constantinopolitan Creed — Nicene Creed",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Ecumenical Creeds: The Athanasian Creed",
+     "The Son is of the Father alone; not made, nor created, but begotten."
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6",
+     "who also are coeternal, the Father, the Son, and the Holy Ghost"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶6–10",
+     "Son of God, although from eternity He has been a particular, distinct, entire divine person"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-036",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.3 — Of God, and of the Holy Trinity",
+     "the Son is eternally begotten of the Father"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 10: The Deity of Christ",
+     "is the only Son of God— eternally begotten, not made or created"
+    ],
+    [
+     "BSR-RP-05",
+     "Q&A 33 (Lord’s Day 13)",
+     "Christ alone is the eternal, natural Son of God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-037",
+   "branch": "Anglican",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "existing": "Thirty-Nine Articles — Articles I–II",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article II (2) — Of The Word Or Son Of God, Which Was Made Very Man",
+     "begotten from everlasting of the Father, the very and eternal God"
+    ],
+    [
+     "BSR-AN-03",
+     "Quicunque Vult (Creed of S. Athanasius), At Morning Prayer",
+     "The Son is of the Father alone: not made, nor created, but begotten."
+    ],
+    [
+     "BSR-AN-04",
+     "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+     "begotten of the Father before the ages"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-038",
+   "branch": "Baptist",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "existing": "Baptist Faith and Message 2000 — II.B. God the Son",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II.B. God the Son",
+     "Christ is the eternal Son of God."
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+     "the Son is eternally begotten of the Father"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": [
+    [
+     "BSR-BA-01",
+     "II. God",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "existing": "Articles of Religion of the Methodist Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-01",
+     "Article II — Of the Word, or Son of God, Who Was Made Very Man",
+     "The Son, who is the Word of the Father, the very and eternal God"
+    ],
+    [
+     "BSR-MW-02",
+     "Article II — Jesus Christ",
+     "the eternal Word made flesh, the only begotten Son of the Father"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 3. The Son of God, ¶214",
+     "Jesus Christ, the only begotten Son of God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-040",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — Father, Son, and Holy Spirit; only Son / Word",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-02",
+     "Article IV. The Advent of Christ into This World, and the Reason of His Coming",
+     "who is God’s only, first and own Son"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 2. Jesus Christ",
+     "We acknowledge Jesus Christ as the only Son of God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-041",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H06",
+   "predicate": "Lord",
+   "existing": "Third Council of Constantinople / CCC restatement — CCC 475; two natural wills and operations",
+   "equivalent_registry": [
+    "BSR-RC-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "unum esse Deum verum et vivum, Creatorem ac Dominum caeli et terrae"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "one true and living God, creator and Lord of heaven and earth"
+    ],
+    [
+     "BSR-RC-01",
+     "CCC 269",
+     "He is the Lord of the universe, whose order he established"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-043",
+   "branch": "Lutheran",
+   "family_id": "RNR-H06",
+   "predicate": "Lord",
+   "existing": "Nicene Creed — Nicene Creed",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-044",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H06",
+   "predicate": "Lord",
+   "existing": "Nicene Creed — 1.1–3, Nicene Creed",
+   "equivalent_registry": [
+    "BSR-RP-04"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-046",
+   "branch": "Baptist",
+   "family_id": "RNR-H06",
+   "predicate": "Lord",
+   "existing": "Baptist Faith and Message 2000 — II.B. God the Son — living and ever present Lord",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "The Lord our God is but one only living and true God"
+    ],
+    [
+     "BSR-BA-01",
+     "XVII. Religious Liberty",
+     "God alone is Lord of the conscience"
+    ],
+    [
+     "BSR-BA-01",
+     "II.A. God the Father",
+     "God as Father reigns with providential care over His universe, His creatures"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-048",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H06",
+   "predicate": "Lord",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — confessing Jesus Christ to be Savior and Lord",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-059",
+   "branch": "Lutheran",
+   "family_id": "RNR-H08",
+   "predicate": "Wise / all-wise",
+   "existing": "Augsburg Confession — Article I, God",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6",
+     "of infinite power, wisdom, and goodness, the Maker and Preserver of all things"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-060",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H08",
+   "predicate": "Wise / all-wise",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 1: The Only God",
+     "completely wise, just, and good, and the overflowing source of all good"
+    ],
+    [
+     "BSR-RP-01",
+     "Chapter 5.4 — Of Providence",
+     "The almighty power, unsearchable wisdom, and infinite goodness of God"
+    ],
+    [
+     "BSR-RP-02",
+     "Shorter Catechism Q.4",
+     "God is a spirit, infinite, eternal, and unchangeable, in his being, wisdom, power, holiness"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-061",
+   "branch": "Anglican",
+   "family_id": "RNR-H08",
+   "predicate": "Wise / all-wise",
+   "existing": "Thirty-Nine Articles — Articles I–II",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article I (1) — Of Faith In The Holy Trinity",
+     "of infinite power, wisdom, and goodness"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-062",
+   "branch": "Baptist",
+   "family_id": "RNR-H08",
+   "predicate": "Wise / all-wise",
+   "existing": "Baptist Faith and Message 2000 — II.A. God the Father — all wise",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II.A. God the Father",
+     "He is all powerful, all knowing, all loving, and all wise"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "most holy, most wise, most free, most absolute"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": [
+    [
+     "BSR-BA-01",
+     "V. God’s Purpose of Grace",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-063",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H08",
+   "predicate": "Wise / all-wise",
+   "existing": "Articles of Religion of the Methodist Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "of infinite power, wisdom, and goodness"
+    ],
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "He is infinite in power, wisdom, justice, goodness and love"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "unlimited in power, wisdom and goodness"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-065",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H09",
+   "predicate": "Good",
+   "existing": "First Vatican Council, Dei Filius — Chapter I, God the Creator of All Things",
+   "equivalent_registry": [
+    "BSR-RC-02",
+    "BSR-RC-03"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "Hic solus verus Deus bonitate sua et omnipotenti virtute"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 2",
+     "This one true God, in his goodness and almighty power"
+    ],
+    [
+     "BSR-RC-07",
+     "Compendium Q.6",
+     "God in his goodness and wisdom reveals himself"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-067",
+   "branch": "Lutheran",
+   "family_id": "RNR-H09",
+   "predicate": "Good",
+   "existing": "Augsburg Confession — Article I, Of God",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Ten Commandments, ¶10–15",
+     "He is the only eternal good"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Ten Commandments, ¶24–27",
+     "an eternal fountain which gushes forth abundantly nothing but what is good"
+    ],
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation",
+     "out of fatherly, divine goodness and mercy"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-068",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H09",
+   "predicate": "Good",
+   "existing": "Scots Confession — Chapter 1",
+   "equivalent_registry": [
+    "BSR-RP-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 21.1 — Of Religious Worship, and the Sabbath Day",
+     "there is a God, who hath lordship and sovereignty over all, is good"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 1: The Only God",
+     "whom we call God— eternal, incomprehensible, invisible, unchangeable, infinite, almighty; completely wise, just, and good"
+    ],
+    [
+     "BSR-RP-02",
+     "Shorter Catechism Q.4",
+     "is a spirit, infinite, eternal, and unchangeable, in his being, wisdom, power, holiness, justice, goodness"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-069",
+   "branch": "Anglican",
+   "family_id": "RNR-H09",
+   "predicate": "Good",
+   "existing": "Thirty-Nine Articles — Articles I–II",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article I (1) — Of Faith In The Holy Trinity",
+     "true God, ever- lasting, without body, parts, or passions; of infinite power, wisdom, and goodness;"
+    ],
+    [
+     "BSR-AN-02",
+     "Catechism, Q.13 — \"What desirest thou of God in this Prayer?\"",
+     "our heavenly Father, who is the giver of all goodness"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-071",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H09",
+   "predicate": "Good",
+   "existing": "Articles of Religion of the Methodist Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "He is infinite in power, wisdom, justice, goodness and love"
+    ],
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "living and true God, everlasting, without body or parts, of infinite power, wisdom, and goodness"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "living and true God, both holy and loving, eternal, unlimited in power, wisdom and goodness"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-072",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H09",
+   "predicate": "Good",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 5: Creation and Divine Providence — Article 5 — the world is created good because God is good",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-01",
+     "Article 5. Creation and Divine Providence",
+     "God is good and provides all that is needed for life"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-076",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H10",
+   "predicate": "Source of all good",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 1: The Only God",
+     "the overflowing source of all good"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": [
+    [
+     "BSR-RP-04",
+     "Book of Confessions 5.032 (Second Helvetic Confession)",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 5.046 (Second Helvetic Confession)",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-084",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H11",
+   "predicate": "Just / righteous",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-087",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H11",
+   "predicate": "Just / righteous",
+   "existing": "Confession of Faith of the Evangelical United Brethren Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "He is infinite in power, wisdom, justice, goodness and love"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 21. The Judgment of All Persons, ¶248",
+     "based on His omniscience and eternal justice"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-092",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H12",
+   "predicate": "Holy",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-04",
+     "Book of Confessions 11.1 (A Brief Statement of Faith)",
+     "the one triune God, the Holy One of Israel"
+    ],
+    [
+     "BSR-RP-03",
+     "Larger Catechism Q.152",
+     "against the sovereignty, goodness, and holiness of God"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-094",
+   "branch": "Baptist",
+   "family_id": "RNR-H12",
+   "predicate": "Holy",
+   "existing": "Baptist Faith and Message 2000 — II. God — infinite in holiness",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II. God",
+     "God is infinite in holiness and all other perfections."
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2",
+     "He is most holy in all His counsels"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "every way infinite, most holy, most wise, most free, most absolute"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-095",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H12",
+   "predicate": "Holy",
+   "existing": "Confession of Faith of the Evangelical United Brethren Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "the one true, holy and living God, Eternal Spirit"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "the one living and true God, both holy and loving"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-096",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H12",
+   "predicate": "Holy",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — one holy and loving God",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "the one holy and loving God who is Father, Son, and Holy Spirit eternally."
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "To the one holy and ever-loving triune God be glory for ever and ever!"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "God’s awesome glory and enduring compassion are perfect in holy love."
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-100",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H13",
+   "predicate": "Truthful / faithful",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-05",
+     "Q&A 26 (Lord’s Day 9)",
+     "desires to do this because he is a faithful Father"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 5.094 (Second Helvetic Confession)",
+     "he is faithful and just, and will forgive our sins"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-RP-04",
+     "Book of Confessions 5.183 (Second Helvetic Confession)",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-108",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H14",
+   "predicate": "Love / loving",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.1 — Of God, and of the Holy Trinity",
+     "most loving, gracious, merciful, long-suffering, abundant in goodness and truth"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 9.14 (Confession of 1967)",
+     "God’s love never changes."
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 6.055 (Westminster Confession of Faith)",
+     "God in infinite and perfect love"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-111",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H14",
+   "predicate": "Love / loving",
+   "existing": "Confession of Faith of the Evangelical United Brethren Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "the one living and true God, both holy and loving"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 2. The Father, ¶212",
+     "In love, He both seeks and receives penitent sinners."
+    ],
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "He is infinite in power, wisdom, justice, goodness and love"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-112",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H14",
+   "predicate": "Love / loving",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — one holy and loving God",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "the one holy and loving God who is Father, Son, and Holy Spirit eternally"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "God’s awesome glory and enduring compassion are perfect in holy love"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "To the one holy and ever-loving triune God be glory for ever and ever"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-116",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H15",
+   "predicate": "Merciful",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 16: The Doctrine of Election",
+     "God is merciful in withdrawing and saving from this perdition"
+    ],
+    [
+     "BSR-RP-05",
+     "Q&A 11 (Lord’s Day 4)",
+     "God is certainly merciful, but also just"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 20: The Justice and Mercy of God in Christ",
+     "God— who is perfectly merciful and also very just"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-124",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H16",
+   "predicate": "Gracious",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 5.5 — Of Providence",
+     "The most wise, righteous, and gracious God doth oftentimes leave"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 13: The Doctrine of God's Providence",
+     "our gracious heavenly Father, who watches over us with fatherly care"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-127",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H16",
+   "predicate": "Gracious",
+   "existing": "Confession of Faith of the Evangelical United Brethren Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "rules with gracious regard for the well-being and salvation of men"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": [
+    [
+     "BSR-MW-04",
+     "Article 18. The Sacraments: Baptism and the Lord’s Supper, ¶242",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ],
+    [
+     "BSR-MW-02",
+     "Article VI — The Sacraments",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-132",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H17",
+   "predicate": "Long-suffering / patient",
+   "existing": "Westminster Confession of Faith — 6.001 onward; Westminster Confession",
+   "equivalent_registry": [
+    "BSR-RP-04"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-140",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H18",
+   "predicate": "Forgiving",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-05",
+     "Q&A 70 (Lord’s Day 26)",
+     "God, by grace, has forgiven our sins because of Christ’s blood poured out for us"
+    ],
+    [
+     "BSR-RP-05",
+     "Q&A 56 (Lord’s Day 21)",
+     "God, because of Christ’s satisfaction, will no longer remember any of my sins"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 5.102 (Second Helvetic Confession)",
+     "he forgives all sinners of all sins except the one sin against the Holy Spirit"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-145",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H19",
+   "predicate": "Blessed",
+   "existing": "First Vatican Council, Dei Filius — Chapter I, God the Creator of All Things",
+   "equivalent_registry": [
+    "BSR-RC-02",
+    "BSR-RC-03"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "in se et ex se beatissimus"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "supremely happy in and from Himself"
+    ],
+    [
+     "BSR-RC-01",
+     "CCC 257",
+     "God is eternal blessedness, undying life, unfading light."
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-148",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H19",
+   "predicate": "Blessed",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-156",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H20",
+   "predicate": "Glorious",
+   "existing": "Scots Confession — 3.01–3.25; especially chapter 1",
+   "equivalent_registry": [
+    "BSR-RP-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.2 — Of God, and of the Holy Trinity",
+     "God hath all life, glory, goodness, blessedness, in and of himself"
+    ],
+    [
+     "BSR-RP-02",
+     "Shorter Catechism Q.6",
+     "these three are one God, the same in substance, equal in power and glory"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-RP-06",
+     "Article 11: The Deity of the Holy Spirit",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-164",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H21",
+   "predicate": "Life-giving",
+   "existing": "Second Helvetic Confession — 5.001 onward; chapter III",
+   "equivalent_registry": [
+    "BSR-RP-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-04",
+     "Book of Confessions 11.4 (A Brief Statement of Faith)",
+     "God the Holy Spirit everywhere the giver and renewer of life"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 9.26 (Confession of 1967)",
+     "bring to fulfillment the new life begun in Christ"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 20: The Justice and Mercy of God in Christ",
+     "raising him to life for our justification"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-169",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H22",
+   "predicate": "Creator / Maker",
+   "existing": "Niceno-Constantinopolitan Creed (Vatican-hosted Credo) — Maker/Creator clause",
+   "equivalent_registry": [
+    "BSR-RC-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "one principle of all things, creator of all things invisible and visible"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "there is one true and living God, creator and Lord of heaven and earth"
+    ],
+    [
+     "BSR-RC-06",
+     "Nicene Creed",
+     "one God, the Father, the Almighty, maker of heaven and earth"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-170",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H22",
+   "predicate": "Creator / Maker",
+   "existing": "Nicene Creed / Symbol of Faith — Maker of heaven and earth",
+   "equivalent_registry": [
+    "BSR-EO-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-05",
+     "Decree 4",
+     "the tri-personal God, the Father, the Son and the Holy Spirit, to be the maker"
+    ],
+    [
+     "BSR-EO-04",
+     "Q.111 (On the First Article)",
+     "In the beginning God created from nothing the heaven and the earth"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-171",
+   "branch": "Lutheran",
+   "family_id": "RNR-H22",
+   "predicate": "Creator / Maker",
+   "existing": "Augsburg Confession — Article I, Of God",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6",
+     "the Maker and Preserver of all things, visible and invisible"
+    ],
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation",
+     "I believe that God has made me and all creatures"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-172",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H22",
+   "predicate": "Creator / Maker",
+   "existing": "Westminster Confession of Faith — Chapter IV, Of Creation",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-04",
+     "Book of Confessions 2.1 (Apostles' Creed)",
+     "God the Father Almighty, Maker of heaven and earth"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 1.1 (Nicene Creed)",
+     "the Father, the Almighty, maker of heaven and earth"
+    ],
+    [
+     "BSR-RP-01",
+     "Chapter 5.1 — Of Providence",
+     "God the great Creator of all things"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-173",
+   "branch": "Anglican",
+   "family_id": "RNR-H22",
+   "predicate": "Creator / Maker",
+   "existing": "Thirty-Nine Articles — Article I",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article I (1) — Of Faith In The Holy Trinity",
+     "the Maker, and Preserver of all things both visible and invisible"
+    ],
+    [
+     "BSR-AN-02",
+     "Catechism, Q.5 — \"Rehearse the Articles of thy Belief.\"",
+     "I BELIEVE in God the Father Almighty, Maker of heaven and earth"
+    ],
+    [
+     "BSR-AN-04",
+     "Outline of the Faith (BCP p. 846) — God the Father: Q. What do we learn about God as creator from the revelation to Israel?",
+     "there is one God, the Father Almighty, creator of heaven and earth"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-174",
+   "branch": "Baptist",
+   "family_id": "RNR-H22",
+   "predicate": "Creator / Maker",
+   "existing": "Baptist Faith and Message 2000 — II. God — Creator of the universe",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II. God",
+     "the Creator, Redeemer, Preserver, and Ruler of the universe"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2",
+     "He is the alone fountain of all being"
+    ],
+    [
+     "BSR-BA-03",
+     "Fact 1",
+     "the God who is revealed as Creator, Savior and Advocate"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-175",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H22",
+   "predicate": "Creator / Maker",
+   "existing": "Articles of Religion — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "the maker and preserver of all things, both visible and invisible"
+    ],
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "who is Creator, Sovereign and Preserver of all things visible and invisible"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "the Creator and Preserver of all things"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-176",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H22",
+   "predicate": "Creator / Maker",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 5: Creation and Divine Providence — Article 5 — God has created the heavens and the earth and all that is in them",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-02",
+     "Article I. Of God and the Creation of all Things",
+     "He is the Creator of all things visible and invisible"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 5. Creation and Divine Providence",
+     "God has created the heavens and the earth and all that is in them"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "We believe that God has created all things visible and invisible"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-180",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H23",
+   "predicate": "Preserver / Sustainer",
+   "existing": "Scots Confession — Chapter 1",
+   "equivalent_registry": [
+    "BSR-RP-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 5.1 — Of Providence",
+     "doth uphold, direct, dispose, and govern all creatures, actions, and things"
+    ],
+    [
+     "BSR-RP-02",
+     "Shorter Catechism Q.11",
+     "his most holy, wise and powerful preserving and governing all his creatures"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 13: The Doctrine of God's Providence",
+     "sustaining all creatures under his lordship"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-181",
+   "branch": "Anglican",
+   "family_id": "RNR-H23",
+   "predicate": "Preserver / Sustainer",
+   "existing": "Thirty-Nine Articles — Article I",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article I (1) — Of Faith In The Holy Trinity",
+     "the Maker, and Preserver of all things both visible and invisible"
+    ],
+    [
+     "BSR-AN-04",
+     "Outline of the Faith (BCP p. 846) — God the Father: Q. What does this mean?",
+     "a single loving God who creates, sustains, and directs it"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-182",
+   "branch": "Baptist",
+   "family_id": "RNR-H23",
+   "predicate": "Preserver / Sustainer",
+   "existing": "Baptist Faith and Message 2000 — II. God — Preserver of the universe",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II. God",
+     "the Creator, Redeemer, Preserver, and Ruler of the universe"
+    ],
+    [
+     "BSR-BA-01",
+     "II.A. God the Father",
+     "reigns with providential care over His universe, His creatures"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-183",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H23",
+   "predicate": "Preserver / Sustainer",
+   "existing": "Articles of Religion of the Methodist Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "the maker and preserver of all things, both visible and invisible"
+    ],
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "Creator, Sovereign and Preserver of all things visible and invisible"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "the Creator and Preserver of all things"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-184",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H23",
+   "predicate": "Preserver / Sustainer",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 5: Creation and Divine Providence — Article 5 — God preserves and renews what has been made; sustains creation",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-01",
+     "Article 5. Creation and Divine Providence",
+     "God sustains creation in both continuity and change"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 5. Creation and Divine Providence",
+     "God preserves and renews what has been made"
+    ],
+    [
+     "BSR-MA-02",
+     "Article I. Of God and the Creation of all Things",
+     "He still governs and upholds the same and all His works"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-185",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H24",
+   "predicate": "Governor / Ruler",
+   "existing": "First Vatican Council, Dei Filius — Chapter I, God the Creator of All Things",
+   "equivalent_registry": [
+    "BSR-RC-02",
+    "BSR-RC-03"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "Deus providentia sua tuetur atque gubernat"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 3",
+     "God protects and governs by his providence all that He has created"
+    ],
+    [
+     "BSR-RC-01",
+     "CCC 302",
+     "By his providence God protects and governs all things which he has made"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-188",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H24",
+   "predicate": "Governor / Ruler",
+   "existing": "Heidelberg Catechism — Lord's Days 9–10, Q&A 26–28",
+   "equivalent_registry": [
+    "BSR-RP-05"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 5.1 — Of Providence",
+     "doth uphold, direct, dispose, and govern all creatures, actions, and things"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 13: The Doctrine of God's Providence",
+     "leads and governs them according to his holy will"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 5.029 (Second Helvetic Confession)",
+     "are preserved and governed by the providence of this wise, eternal and almighty God"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-190",
+   "branch": "Baptist",
+   "family_id": "RNR-H24",
+   "predicate": "Governor / Ruler",
+   "existing": "Baptist Faith and Message 2000 — II. God — Ruler of the universe",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II.A. God the Father",
+     "God as Father reigns with providential care over His universe"
+    ],
+    [
+     "BSR-BA-01",
+     "II. God",
+     "the Creator, Redeemer, Preserver, and Ruler of the universe"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2",
+     "He hath most sovereign dominion over all creatures, to do by them"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-191",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H24",
+   "predicate": "Governor / Ruler",
+   "existing": "Confession of Faith of the Evangelical United Brethren Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "rules with gracious regard for the well-being and salvation of men"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": [
+    [
+     "BSR-MW-04",
+     "Article 6. God’s Purpose for Humanity, ¶220",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ],
+    [
+     "BSR-MW-02",
+     "Article XVI — Civil Government",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-196",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H25",
+   "predicate": "Sovereign",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.2 — Of God, and of the Holy Trinity",
+     "hath most sovereign dominion over them"
+    ],
+    [
+     "BSR-RP-01",
+     "Chapter 21.1 — Of Religious Worship, and the Sabbath Day",
+     "hath lordship and sovereignty over all"
+    ],
+    [
+     "BSR-RP-02",
+     "Shorter Catechism Q.52",
+     "God’s sovereignty over us"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-199",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H25",
+   "predicate": "Sovereign",
+   "existing": "Confession of Faith of the Evangelical United Brethren Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "who is Creator, Sovereign and Preserver of all things visible and invisible"
+    ],
+    [
+     "BSR-MW-02",
+     "Article XVI — Civil Government",
+     "civil government derives its just powers from the sovereign God"
+    ],
+    [
+     "BSR-MW-02",
+     "Article XV — The Christian and Property",
+     "under the sovereignty of God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-201",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H26",
+   "predicate": "Judge",
+   "existing": "Apostles' Creed (Vatican Credo) — He will come to judge the living and the dead",
+   "equivalent_registry": [
+    "BSR-RC-06"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-RC-06",
+     "Nicene Creed",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ],
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 2",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ],
+    [
+     "BSR-RC-07",
+     "Compendium Q.214",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-206",
+   "branch": "Baptist",
+   "family_id": "RNR-H26",
+   "predicate": "Judge",
+   "existing": "Baptist Faith and Message 2000 — II.B. God the Son — will return to judge the world",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "most just and terrible in His judgments"
+    ],
+    [
+     "BSR-BA-01",
+     "X. Last Things",
+     "Christ will judge all men in righteousness"
+    ],
+    [
+     "BSR-BA-01",
+     "II.B. God the Son",
+     "He will return in power and glory to judge the world"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-209",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H27",
+   "predicate": "Savior",
+   "existing": "Apostles' Creed / Credo — Jesus Christ, salvific confession",
+   "equivalent_registry": [
+    "BSR-RC-06"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-RC-07",
+     "Compendium Q.1",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ],
+    [
+     "BSR-RC-07",
+     "Compendium Q.78",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-214",
+   "branch": "Baptist",
+   "family_id": "RNR-H27",
+   "predicate": "Savior",
+   "existing": "Baptist Faith and Message 2000 — II. God — Redeemer; II.B redemptive mission",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II. God",
+     "the Creator, Redeemer, Preserver, and Ruler of the universe"
+    ],
+    [
+     "BSR-BA-01",
+     "V. God’s Purpose of Grace",
+     "He regenerates, justifies, sanctifies, and glorifies sinners"
+    ],
+    [
+     "BSR-BA-03",
+     "Fact 1",
+     "the God who is revealed as Creator, Savior and Advocate"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-215",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H27",
+   "predicate": "Savior",
+   "existing": "EUB Confession of Faith — Article I",
+   "equivalent_registry": [
+    "BSR-MW-02"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-216",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H27",
+   "predicate": "Savior",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — confessing Jesus Christ to be Savior and Lord",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-02",
+     "Article IV. The Advent of Christ into This World, and the Reason of His Coming",
+     "this previously promised Messiah, Redeemer, and Savior, proceeded from God"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "confessing him to be Savior and Lord"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 8. Salvation",
+     "accept Jesus Christ as Savior and Lord"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-220",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H28",
+   "predicate": "Revealer",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 2: The Means by Which We Know God",
+     "God makes himself known to us more clearly by his holy and divine Word"
+    ],
+    [
+     "BSR-RP-01",
+     "Chapter 1.1 — Of the Holy Scripture",
+     "to reveal himself, and to declare that his will unto his church"
+    ],
+    [
+     "BSR-RP-05",
+     "Q&A 25 (Lord’s Day 8)",
+     "that is how God has revealed himself in his Word"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-222",
+   "branch": "Baptist",
+   "family_id": "RNR-H28",
+   "predicate": "Revealer",
+   "existing": "Baptist Faith and Message 2000 — II. God — eternal triune God reveals Himself",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-01",
+     "II. God",
+     "The eternal triune God reveals Himself to us as Father, Son, and Holy Spirit"
+    ],
+    [
+     "BSR-BA-03",
+     "Fact 1",
+     "the God who is revealed as Creator, Savior and Advocate"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": [
+    [
+     "BSR-BA-01",
+     "I. The Scriptures",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-224",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H28",
+   "predicate": "Revealer",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — God has spoken; the Son/Word revealed the divine being and character",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "God has spoken to humanity and related to us in many and various ways"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "God has spoken above all in the only Son, the Word who became flesh"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-228",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H29",
+   "predicate": "Fountain of being",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.2 — Of God, and of the Holy Trinity",
+     "He is the alone fountain of all being"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 6.012 (Westminster Confession of Faith)",
+     "he is the alone fountain of all being"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-RP-04",
+     "Book of Confessions 5.029 (Second Helvetic Confession)",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-236",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H30",
+   "predicate": "Word / Logos",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 8: The Trinity",
+     "The Son is the Word, the Wisdom, and the image of the Father"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 5.062 (Second Helvetic Confession)",
+     "the Word was with God, and the Word was God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-240",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H30",
+   "predicate": "Word / Logos",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — the only Son, the Word who became flesh",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-01",
+     "Article 2. Jesus Christ",
+     "Jesus Christ, the Word of God become flesh"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "the only Son, the Word who became flesh and revealed the divine being"
+    ],
+    [
+     "BSR-MA-02",
+     "Article IV. The Advent of Christ into This World, and the Reason of His Coming",
+     "the Word, Himself became flesh and man"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-244",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H31",
+   "predicate": "Wisdom",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 8: The Trinity",
+     "The Son is the Word, the Wisdom, and the image of the Father."
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 3.06 (Scots Confession)",
+     "his Son, his eternal wisdom, the substance of his own glory"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-260",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H33",
+   "predicate": "Image of the Father",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 10: The Deity of Christ",
+     "the exact image of the person of the Father"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 8: The Trinity",
+     "The Son is the Word, the Wisdom, and the image of the Father"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-265",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H34",
+   "predicate": "Giver of life",
+   "existing": "Nicene / Niceno-Constantinopolitan Creed — Creed, Godhead and Christological clauses",
+   "equivalent_registry": [
+    "BSR-RC-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-06",
+     "Nicene Creed",
+     "We believe in the Holy Spirit, the Lord, the giver of life"
+    ],
+    [
+     "BSR-RC-01",
+     "CCC 245",
+     "We believe in the Holy Spirit, the Lord and giver of life"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-266",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H34",
+   "predicate": "Giver of life",
+   "existing": "Nicene / Niceno-Constantinopolitan Creed — Nicene Creed, Godhead and Christological clauses",
+   "equivalent_registry": [
+    "BSR-EO-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-01",
+     "The Symbol of Faith — \"Nicene Creed\"",
+     "in the Holy Spirit, the Lord, the Giver of Life"
+    ],
+    [
+     "BSR-EO-04",
+     "Q.240 (On the Eighth Article)",
+     "the Holy Ghost is called the Giver of life"
+    ],
+    [
+     "BSR-EO-01",
+     "The Symbol of Faith — \"Holy Spirit\"",
+     "It is He who makes everything alive, the \"Giver of life\""
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-267",
+   "branch": "Lutheran",
+   "family_id": "RNR-H34",
+   "predicate": "Giver of life",
+   "existing": "Nicene Creed — Nicene Creed",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Ecumenical Creeds: The Nicene Creed",
+     "I believe in the Holy Ghost, the Lord and Giver of life"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-276",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H35",
+   "predicate": "Eternal power and might",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 8: The Trinity",
+     "The Holy Spirit is the eternal power and might"
+    ],
+    [
+     "BSR-RP-03",
+     "Larger Catechism Q.9",
+     "these three are one true, eternal God, the same in substance, equal in power"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.3 — Of God, and of the Holy Trinity",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-289",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "existing": "Compendium of the Catechism of the Catholic Church — Q47 — Father as 'principle without a principle' and origin of all trinitarian life",
+   "equivalent_registry": [
+    "BSR-RC-07"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "The Father is from none"
+    ],
+    [
+     "BSR-RC-01",
+     "CCC 254",
+     "the Father who generates, the Son who is begotten"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-290",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "existing": "The Orthodox Faith, Vol. I — The Holy Trinity: One God, One Father (OCA official catechesis) — \"One God, One Father\" — the Son is born from the Father and the Spirit proceeds from the Father in the timeless and eternal action of the Father's own being",
+   "equivalent_registry": [
+    "BSR-EO-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-05",
+     "Decree 1",
+     "the Father unbegotten"
+    ],
+    [
+     "BSR-EO-04",
+     "Q.94 (On the First Article)",
+     "God the Father is neither begotten, nor proceeds from any other Person"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-EO-02",
+     "The Holy Trinity — \"One God, One Father\"",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-291",
+   "branch": "Lutheran",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "existing": "Athanasian Creed — Trinity and person/substance clauses",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-292",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3 etc.",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.3 — Of God, and of the Holy Trinity",
+     "the Father is of none, neither begotten, nor proceeding"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 6.013 (Westminster Confession of Faith)",
+     "The Father is of none, neither begotten nor proceeding"
+    ],
+    [
+     "BSR-RP-03",
+     "Larger Catechism Q.10",
+     "It is proper to the Father to beget the Son"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-305",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H39",
+   "predicate": "Infinite",
+   "existing": "First Vatican Council, Dei Filius — Chapter I, God the Creator of All Things",
+   "equivalent_registry": [
+    "BSR-RC-02",
+    "BSR-RC-03"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "infinite in understanding, will and every perfection"
+    ],
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "intellectu ac voluntate omnique perfectione infinitum"
+    ],
+    [
+     "BSR-RC-01",
+     "CCC 310",
+     "With infinite power God could always create something better"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-306",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H39",
+   "predicate": "Infinite",
+   "existing": "The Orthodox Faith, Vol. I — The Holy Trinity — Timeless, spaceless, sizeless super-essential existence; absolute divine perfection",
+   "equivalent_registry": [
+    "BSR-EO-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-05",
+     "Decree 1",
+     "one God, true, almighty and infinite, the Father, the Son and the Holy Spirit"
+    ],
+    [
+     "BSR-EO-01",
+     "The Symbol of Faith — \"Man\"",
+     "God’s being and life are inexhaustible and boundless"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-EO-05",
+     "Decree 8",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-308",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H39",
+   "predicate": "Infinite",
+   "existing": "Westminster Shorter Catechism — Q&A 1 and 4–6 as applicable",
+   "equivalent_registry": [
+    "BSR-RP-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.1 — Of God, and of the Holy Trinity",
+     "who is infinite in being and perfection"
+    ],
+    [
+     "BSR-RP-02",
+     "Shorter Catechism Q.4",
+     "God is a spirit, infinite, eternal, and unchangeable, in his being"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 1: The Only God",
+     "whom we call God— eternal, incomprehensible, invisible, unchangeable, infinite, almighty"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-310",
+   "branch": "Baptist",
+   "family_id": "RNR-H39",
+   "predicate": "Infinite",
+   "existing": "Baptist Faith and Message 2000 — II. God — infinite in holiness and all other perfections",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "infinite in being and perfection"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+     "all infinite, without beginning, therefore but one God"
+    ],
+    [
+     "BSR-BA-01",
+     "II. God",
+     "God is infinite in holiness and all other perfections"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-311",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H39",
+   "predicate": "Infinite",
+   "existing": "Articles of Religion of the Methodist Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "He is infinite in power, wisdom, justice, goodness and love"
+    ],
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "of infinite power, wisdom, and goodness"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "unlimited in power, wisdom and goodness"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-312",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H39",
+   "predicate": "Infinite",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995) — Article 1 — infinite freedom; unlimited justice; sovereign power and knowledge",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "God's infinite freedom and constant self-giving are perfect in faithful love"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-324",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H41",
+   "predicate": "Invisible",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.1 — Of God, and of the Holy Trinity",
+     "a most pure spirit, invisible, without body, parts, or passions"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 3.01 (Scots Confession)",
+     "eternal, infinite, immeasurable, incomprehensible, omnipotent, invisible"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 1: The Only God",
+     "eternal, incomprehensible, invisible, unchangeable, infinite, almighty"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-331",
+   "branch": "Lutheran",
+   "family_id": "RNR-H42",
+   "predicate": "Incorporeal / without body",
+   "existing": "Augsburg Confession — Article I, God",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6",
+     "there is one Divine Essence which is called and which is God: eternal, without body"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-332",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H42",
+   "predicate": "Incorporeal / without body",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.1 — Of God, and of the Holy Trinity",
+     "a most pure spirit, invisible, without body, parts, or passions"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-333",
+   "branch": "Anglican",
+   "family_id": "RNR-H42",
+   "predicate": "Incorporeal / without body",
+   "existing": "Thirty-Nine Articles — Article I",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-335",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H42",
+   "predicate": "Incorporeal / without body",
+   "existing": "Articles of Religion of the Methodist Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "There is but one living and true God, everlasting, without body or parts"
+    ],
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "the one true, holy and living God, Eternal Spirit"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-337",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H43",
+   "predicate": "Without parts / simple",
+   "existing": "First Vatican Council, Dei Filius — Chapter I, God the Creator of All Things",
+   "equivalent_registry": [
+    "BSR-RC-02",
+    "BSR-RC-03"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "three persons but one absolutely simple essence, substance or nature"
+    ],
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "simplex omnino et incommutabilis substantia spiritualis"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "He is a one unique, completely simple and unchangeable spiritual substance"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-339",
+   "branch": "Lutheran",
+   "family_id": "RNR-H43",
+   "predicate": "Without parts / simple",
+   "existing": "Augsburg Confession — Article I, Of God",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6",
+     "eternal, without body, without parts, of infinite power, wisdom, and goodness"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-340",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H43",
+   "predicate": "Without parts / simple",
+   "existing": "Westminster Confession of Faith — Chapter II",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-06",
+     "Article 1: The Only God",
+     "there is a single and simple spiritual being, whom we call God"
+    ],
+    [
+     "BSR-RP-01",
+     "Chapter 2.1 — Of God, and of the Holy Trinity",
+     "a most pure spirit, invisible, without body, parts, or passions"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 6.011 (Westminster Confession of Faith)",
+     "a most pure spirit, invisible, without body, parts, or passions"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-341",
+   "branch": "Anglican",
+   "family_id": "RNR-H43",
+   "predicate": "Without parts / simple",
+   "existing": "Thirty-Nine Articles — Article I",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article I (1) — Of Faith In The Holy Trinity",
+     "without body, parts, or passions"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-343",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H43",
+   "predicate": "Without parts / simple",
+   "existing": "Articles of Religion — Article I",
+   "equivalent_registry": [
+    "BSR-MW-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "without body or parts"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-348",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H44",
+   "predicate": "Without passions / impassible",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.1 — Of God, and of the Holy Trinity",
+     "a most pure spirit, invisible, without body, parts, or passions"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-349",
+   "branch": "Anglican",
+   "family_id": "RNR-H44",
+   "predicate": "Without passions / impassible",
+   "existing": "Thirty-Nine Articles — Articles I–II",
+   "equivalent_registry": [
+    "BSR-AN-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-AN-01",
+     "Article I (1) — Of Faith In The Holy Trinity",
+     "without body, parts, or passions"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-353",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "existing": "Fourth Lateran Council — Constitution 1, Firmiter credimus",
+   "equivalent_registry": [
+    "BSR-RC-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "a one unique, completely simple and unchangeable spiritual substance"
+    ],
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "there is only one true God, eternal and immeasurable, almighty, unchangeable"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-354",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "existing": "The Orthodox Faith / Divine Liturgy — Ever-existing and eternally the same; perfect and unchanging",
+   "equivalent_registry": [
+    "BSR-EO-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-04",
+     "Q.86 (On the First Article)",
+     "God is a Spirit, eternal, all-good, omniscient, all-just, almighty, omnipresent, unchangeable, all-sufficing to himself, all-blessed"
+    ],
+    [
+     "BSR-EO-04",
+     "Q.122 (On the First Article)",
+     "predestination of man to happiness remain unchanged"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-355",
+   "branch": "Lutheran",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "existing": "Formula of Concord, Solid Declaration — Divine nature: 'since in God there is no change'",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: III. The Righteousness of Faith, ¶56–60",
+     "the eternal, immutable righteousness of God"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-356",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H45",
+   "predicate": "Immutable / unchangeable",
+   "existing": "Belgic Confession — Articles 1–2 and 8",
+   "equivalent_registry": [
+    "BSR-RP-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.1 — Of God, and of the Holy Trinity",
+     "without body, parts, or passions; immutable, immense, eternal, incomprehensible, almighty"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 1: The Only God",
+     "God— eternal, incomprehensible, invisible, unchangeable, infinite, almighty; completely wise, just, and good"
+    ],
+    [
+     "BSR-RP-02",
+     "Shorter Catechism Q.4",
+     "God is a spirit, infinite, eternal, and unchangeable, in his being, wisdom, power"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-363",
+   "branch": "Lutheran",
+   "family_id": "RNR-H46",
+   "predicate": "Eternal",
+   "existing": "Athanasian Creed — Trinity and person/substance clauses",
+   "equivalent_registry": [
+    "BSR-LU-01"
+   ],
+   "corpus_available": true,
+   "survivors": [],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-366",
+   "branch": "Baptist",
+   "family_id": "RNR-H46",
+   "predicate": "Eternal",
+   "existing": "Baptist Faith and Message 2000 — II. God — eternal triune God",
+   "equivalent_registry": [
+    "BSR-BA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "who is immutable, immense, eternal, incomprehensible, almighty, every way infinite"
+    ],
+    [
+     "BSR-BA-01",
+     "II. God",
+     "The eternal triune God reveals Himself to us as Father, Son, and Holy Spirit"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+     "of one substance, power, and eternity, each having the whole divine essence"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-367",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H46",
+   "predicate": "Eternal",
+   "existing": "Confession of Faith of the Evangelical United Brethren Church — Article I",
+   "equivalent_registry": [
+    "BSR-MW-02"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MW-01",
+     "Article I — Of Faith in the Holy Trinity",
+     "There is but one living and true God, everlasting, without body or parts"
+    ],
+    [
+     "BSR-MW-02",
+     "Article I — God",
+     "the one true, holy and living God, Eternal Spirit, who is Creator"
+    ],
+    [
+     "BSR-MW-04",
+     "Article 1. Faith in the Holy Trinity, ¶210",
+     "the one living and true God, both holy and loving, eternal, unlimited in power"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-369",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H47",
+   "predicate": "Incomprehensible",
+   "existing": "First Vatican Council, Dei Filius — Chapter I, God the Creator of All Things",
+   "equivalent_registry": [
+    "BSR-RC-02",
+    "BSR-RC-03"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "omnipotentem, aeternum, immensum, in comprehensibilem, intellectu ac voluntate omnique perfectione infinitum"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "almighty, eternal, immeasurable, incomprehensible, infinite in understanding, will and every perfection"
+    ],
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "one true God, eternal and immeasurable, almighty, unchangeable, incomprehensible and ineffable"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-372",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H47",
+   "predicate": "Incomprehensible",
+   "existing": "Westminster Confession of Faith — Chapters II.1–3; III; V; VI; IX; XIII as applicable",
+   "equivalent_registry": [
+    "BSR-RP-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RP-01",
+     "Chapter 2.1 — Of God, and of the Holy Trinity",
+     "immutable, immense, eternal, incomprehensible, almighty, most wise, most holy, most free"
+    ],
+    [
+     "BSR-RP-06",
+     "Article 1: The Only God",
+     "eternal, incomprehensible, invisible, unchangeable, infinite, almighty"
+    ],
+    [
+     "BSR-RP-04",
+     "Book of Confessions 6.011 (Westminster Confession of Faith)",
+     "invisible, without body, parts, or passions, immutable, immense, eternal, incomprehensible"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-376",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H47",
+   "predicate": "Incomprehensible",
+   "existing": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God — Article 1 — God far surpasses human comprehension and understanding",
+   "equivalent_registry": [
+    "BSR-MA-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-MA-02",
+     "Article I. Of God and the Creation of all Things",
+     "one eternal, almighty, and incomprehensible God, the Father, Son, and Holy Ghost"
+    ],
+    [
+     "BSR-MA-01",
+     "Article 1. God",
+     "We humbly recognize that God far surpasses human comprehension and understanding"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": [
+    [
+     "BSR-MA-02",
+     "Article XVIII. Of the Resurrection of the Dead, and the Last Judgment",
+     "REJECT",
+     "WRONG_SUBJECT"
+    ]
+   ]
+  },
+  {
+   "queue_id": "Q-377",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H48",
+   "predicate": "Ineffable",
+   "existing": "Fourth Lateran Council — Constitution 1, Firmiter credimus",
+   "equivalent_registry": [
+    "BSR-RC-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-04",
+     "Canon 1 (Confession of Faith), paragraph 1",
+     "there is only one true God, eternal and immeasurable, almighty, unchangeable, incomprehensible and ineffable"
+    ],
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "super omnia quae praeter ipsum sunt et concipi possunt, ineffabiliter excelsus"
+    ],
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "inexpressibly loftier than anything else which exists or can be imagined"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-433",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H55",
+   "predicate": "Without separation",
+   "existing": "Third Council of Constantinople / CCC restatement — CCC 475",
+   "equivalent_registry": [
+    "BSR-RC-01"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-01",
+     "CCC 467",
+     "two natures without confusion, change, division or separation"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": false,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-434",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H55",
+   "predicate": "Without separation",
+   "existing": "Third Council of Constantinople — Sixth Ecumenical Council",
+   "equivalent_registry": [
+    "BSR-EO-06"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-EO-06",
+     "Church History — Fifth Century — \"The Fourth Ecumenical Council\"",
+     "two natures—human and divine—united \"without change, without confusion, without division, without separation.\""
+    ],
+    [
+     "BSR-EO-04",
+     "Q.182 (Of the Son of God)",
+     "There are in him, without separation and without confusion, two natures"
+    ]
+   ],
+   "hit_same_standard": true,
+   "hit_same_division": true,
+   "rejected": []
+  },
+  {
+   "queue_id": "Q-449",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H57",
+   "predicate": "Greater dissimilarity than similarity",
+   "existing": "Fourth Lateran Council — Constitution 1, Firmiter credimus",
+   "equivalent_registry": [
+    "BSR-RC-04"
+   ],
+   "corpus_available": true,
+   "survivors": [
+    [
+     "BSR-RC-03",
+     "Chapter I (English witness), paragraph 1",
+     "declared to be, in reality and in essence, distinct from the world"
+    ],
+    [
+     "BSR-RC-01",
+     "CCC 300",
+     "God is infinitely greater than all his works"
+    ]
+   ],
+   "hit_same_standard": false,
+   "hit_same_division": false,
+   "rejected": [
+    [
+     "BSR-RC-02",
+     "Caput I — De Deo Rerum Omnium Creatore",
+     "REJECT",
+     "BELOW_FLOOR"
+    ]
+   ]
+  }
+ ]
+}

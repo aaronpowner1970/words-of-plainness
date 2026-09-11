@@ -133,5 +133,21 @@ def parse_json(text):
         try:
             return json.loads(m.group(0))
         except Exception:
-            return None
+            pass
+    # Truncated reply (the model hit max_tokens mid-object): salvage the complete key/value pairs
+    # by closing the object after the last one. Returns None when nothing usable survives.
+    if t.startswith("{"):
+        cut = max(t.rfind('",'), t.rfind('],'), t.rfind("},"))
+        if cut > 0:
+            for tail in ('"}', "}"):
+                try:
+                    return json.loads(t[:cut + 1] + "}")
+                except Exception:
+                    break
+        for end in range(len(t) - 1, 0, -1):
+            if t[end] in '",]}':
+                try:
+                    return json.loads(t[:end + 1] + "}")
+                except Exception:
+                    continue
     return None

@@ -20,7 +20,7 @@ import os
 import re
 import sys
 import time
-from collections import defaultdict
+from collections import Counter, defaultdict
 from urllib.parse import urlparse
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -346,7 +346,34 @@ def cmd_report(args):
     eligible = [m for m in vmodels if verdicts[m]["recall_ok"] and verdicts[m]["false_accept_ok"] and verdicts[m]["dositheus_ok"]]
     chosen = sorted(eligible, key=lambda m: (verdicts[m]["false_accept"], -verdicts[m]["recall"], cost_of(m)))[0] if eligible else None
 
+    # ---- outcome taxonomy per verifier model: why each released cell scored as it did.
+    # The threshold metric credits only the SAME registry standard the released cell cites. The Gate 5
+    # registry is broader than the standards those cells were closed against, so a verified citation from a
+    # different AUTHOR_RATIFIED standard of the same branch lands in category B. That is an author judgment,
+    # not an agent failure, so it is counted separately and never folded into the threshold.
+    tax = defaultdict(Counter)
+    for c in rel:
+        st = load_state(c["queue_id"])
+        if not st or st.get("phase") != "DONE":
+            continue
+        eq = equivalent_registry_ids(c)
+        cands = [cd for pp in st["passes"].values() for cd in pp.get("candidates", [])]
+        for m in vmodels:
+            if any(((st.get("verifications") or {}).get(cd["candidate_id"]) or {}).get(m, {}).get("status") != "DONE"
+                   for cd in cands):
+                continue
+            surv = [cd for cd in cands if _verdict(st, cd["candidate_id"], m) in ("ACCEPT", "ACCEPT_WITH_CAVEAT")]
+            if any(cd["registry_id"] in eq for cd in surv):
+                tax[m]["A_same_standard"] += 1
+            elif surv:
+                tax[m]["B_different_ratified_standard_same_branch"] += 1
+            elif cands:
+                tax[m]["C_all_candidates_rejected"] += 1
+            else:
+                tax[m]["D_locator_empty"] += 1
+
     report = {"run": meta, "per_branch": {b: dict(v) for b, v in per.items()}, "expected_empty": emp_rows, "planted": {s: dict(v) for s, v in fa.items()},
+              "taxonomy": {m: dict(v) for m, v in tax.items()},
               "dositheus_natural": dict(dos_nat), "models": summary, "verdicts": verdicts, "chosen_verifier": chosen, "details": details}
     with open(os.path.join(run_dir, "calibration-report.json"), "w", encoding="utf-8") as fh:
         json.dump(report, fh, ensure_ascii=False, indent=1)
@@ -384,6 +411,30 @@ def render_md(rep, reg, manifest):
     L.append(f"\nLocator `{meta['locator_model']}`: {loc.get('calls', 0)} calls, {loc.get('cost_usd', 0.0):.2f} USD"
              f"{' (est.)' if loc.get('estimated') else ''}. Total calls {rep['models']['calls']}.\n")
     L.append(f"**Verifier chosen for the live run: {('`' + rep['chosen_verifier'] + '`') if rep['chosen_verifier'] else 'NONE — thresholds not met'}.**\n")
+    L.append("## Why each released cell scored as it did\n")
+    L.append("The spec metric credits a hit only when the verified candidate sits in the SAME registry standard the released "
+             "cell cites. Gate 5 widened every branch to two tiers, so a branch may now carry several ratified standards that "
+             "each confess the same predicate. Row B counts cells where the team produced a verified citation from a DIFFERENT "
+             "ratified standard of the correct branch. Those are not agent failures and not false accepts; whether they count "
+             "as recall is an author judgment. Rows C and D are the genuine no-evidence outcomes.\n")
+    L.append("| outcome | " + " | ".join(f"`{m}`" for m in vm) + " |")
+    L.append("|---|" + "---|" * len(vm))
+    _labels = [("A_same_standard", "A. hit in the same standard the cell cites (the threshold metric)"),
+               ("B_different_ratified_standard_same_branch", "B. verified citation in a different ratified standard of the same branch"),
+               ("C_all_candidates_rejected", "C. candidates found, all rejected by the verifier"),
+               ("D_locator_empty", "D. locator returned empty")]
+    _tx = rep.get("taxonomy", {})
+    for _key, _label in _labels:
+        L.append(f"| {_label} | " + " | ".join(str(_tx.get(m, {}).get(_key, 0)) for m in vm) + " |")
+    L.append("| **total scored** | " + " | ".join(str(sum(_tx.get(m, {}).values())) for m in vm) + " |")
+    L.append("")
+    for m in vm:
+        _d = _tx.get(m, {}); _n = sum(_d.values()) or 1
+        _a = _d.get("A_same_standard", 0); _b = _d.get("B_different_ratified_standard_same_branch", 0)
+        L.append(f"- `{m}`: same-standard recall **{_a}/{_n} = {_a / _n:.3f}** (the threshold metric); "
+                 f"any-ratified-standard-of-branch **{_a + _b}/{_n} = {(_a + _b) / _n:.3f}** (diagnostic only, never a threshold); "
+                 f"genuine no-evidence **{_d.get('C_all_candidates_rejected', 0) + _d.get('D_locator_empty', 0)}/{_n}**.")
+    L.append("")
     L.append("## Recall per branch (same standard / same division), by verifier model\n")
     L.append(f"Secondary-verifier scope: {meta.get('secondary_scope', 'ALL')}. A model's recall denominator is the cells it verified in full "
              "(`done`); cells outside a secondary model's scope are counted under `skipped`.\n")

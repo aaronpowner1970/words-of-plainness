@@ -1,0 +1,162 @@
+{
+ "queue_id": "Q-339",
+ "branch": "Lutheran",
+ "family_id": "RNR-H43",
+ "predicate": "Without parts / simple",
+ "passes": {
+  "1": {
+   "status": "DONE",
+   "call_id": "7e570a88a29bcca19297b8fd",
+   "coverage": {
+    "BSR-LU-03": {
+     "coverage": "FULL",
+     "supplied": 1,
+     "of": 1
+    },
+    "BSR-LU-01": {
+     "coverage": "RETRIEVED",
+     "supplied": 12,
+     "of": 738,
+     "method": "BM25+vector(RRF)"
+    }
+   },
+   "supplied_chunks": [
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: VIII. The Person of Christ, ¶18–28"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶17–19"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶20–24"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: II. Free Will, ¶6–13"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶62–63"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶11–16"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: I. Original Sin, ¶17–23"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶29–34"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶35–39"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: III. The Righteousness of Faith, ¶56–60"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: I. Original Sin, ¶24–25"
+    ]
+   ],
+   "standards": [
+    "BSR-LU-01",
+    "BSR-LU-02",
+    "BSR-LU-03"
+   ],
+   "raw": "{\"candidates\": [{\"chunk_key\": \"c2\", \"registry_id\": \"BSR-LU-01\", \"locator\": \"Augsburg Confession: Article I. Of God, ¶1–6\", \"phrase\": \"eternal, without body, without parts, of infinite power, wisdom, and goodness\", \"rationale\": \"The Confession asserts the one Divine Essence, which is God, is without body and without parts, directly affirming metaphysical simplicity in the required sense.\", \"floor_claim\": \"FULL\"}]}",
+   "candidates": [
+    {
+     "candidate_id": "Q-339-p1-1",
+     "pass": 1,
+     "registry_id": "BSR-LU-01",
+     "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+     "phrase": "eternal, without body, without parts, of infinite power, wisdom, and goodness",
+     "rationale": "The Confession asserts the one Divine Essence, which is God, is without body and without parts, directly affirming metaphysical simplicity in the required sense.",
+     "floor_claim": "FULL",
+     "chunk_text": "Our Churches, with common consent, do teach that the decree of the Council of Nicaea concerning the Unity of the Divine Essence and concerning the Three Persons, is true and to be believed without any doubting; that is to say, there is one Divine Essence which is called and which is God: eternal, without body, without parts, of infinite power, wisdom, and goodness, the Maker and Preserver of all things, visible and invisible; and yet there are three Persons, of the same essence and power, who also are coeternal, the Father, the Son, and the Holy Ghost. And the term “person” they use as the Fathers have used it, to signify, not a part or quality in another, but that which subsists of itself. They condemn all heresies which have sprung up against this article, as the Manichaeans, who assumed two principles, one Good and the other Evil: also the Valentinians, Arians, Eunomians, Mohammedans, and all such. They condemn also the Samosatenes, old and new, who, contending that there is but one Person, sophistically and impiously argue that the Word and the Holy Ghost are not distinct Persons, but that “Word” signifies a spoken word, and “Spirit” signifies motion created in things.",
+     "chunk_hash": "bf3f3f494f6e8d582e0253c5d7f49db827d372ab8a643f5993ec577ae4183ec7",
+     "division": "paragraph-range",
+     "fallback_tier": false
+    }
+   ],
+   "dropped": []
+  }
+ },
+ "verifications": {
+  "Q-339-p1-1": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "fb880e0f8394bc67587d210b",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "there is one Divine Essence which is called and which is God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Confession positively teaches this as true doctrine, not merely reporting or rejecting a view.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts God is 'without parts', affirming divine simplicity in the classical sense of the required subject.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the one Divine Essence/God, and the assertion is made in the Confession's own affirming voice.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"there is one Divine Essence which is called and which is God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession positively teaches this as true doctrine, not merely reporting or rejecting a view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts God is 'without parts', affirming divine simplicity in the classical sense of the required subject.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the one Divine Essence/God, and the assertion is made in the Confession's own affirming voice.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "25ff3ff2a9cfb4c6a36b2279",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"one Divine Essence which is called and which is God\" (the one God)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "Asserted in the standard's own voice: \"Our Churches, with common consent, do teach ... there is one Divine Essence ... eternal, without body, without parts...\"; not a report of an opponent's view (the condemnations follow separately).",
+    "floor": "FULL",
+    "floor_reason": "\"Without parts\" (sine partibus), predicated of the one divine essence alongside \"without body\", is the classical term denying metaphysical composition in God, which is the defined predicate.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, required subject (the one Divine Essence which is God), direct confessional assertion, and the predicate is affirmed in the accepted classical sense of simplicity.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"one Divine Essence which is called and which is God\\\" (the one God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"Asserted in the standard's own voice: \\\"Our Churches, with common consent, do teach ... there is one Divine Essence ... eternal, without body, without parts...\\\"; not a report of an opponent's view (the condemnations follow separately).\", \"floor\": \"FULL\", \"floor_reason\": \"\\\"Without parts\\\" (sine partibus), predicated of the one divine essence alongside \\\"without body\\\", is the classical term denying metaphysical composition in God, which is the defined predicate.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, required subject (the one Divine Essence which is God), direct confessional assertion, and the predicate is affirmed in the accepted classical sense of simplicity.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   }
+  }
+ },
+ "coding": {},
+ "phase": "DONE",
+ "survivors": [
+  {
+   "candidate_id": "Q-339-p1-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+   "phrase": "eternal, without body, without parts, of infinite power, wisdom, and goodness",
+   "rationale": "The Confession asserts the one Divine Essence, which is God, is without body and without parts, directly affirming metaphysical simplicity in the required sense.",
+   "floor_claim": "FULL",
+   "chunk_text": "Our Churches, with common consent, do teach that the decree of the Council of Nicaea concerning the Unity of the Divine Essence and concerning the Three Persons, is true and to be believed without any doubting; that is to say, there is one Divine Essence which is called and which is God: eternal, without body, without parts, of infinite power, wisdom, and goodness, the Maker and Preserver of all things, visible and invisible; and yet there are three Persons, of the same essence and power, who also are coeternal, the Father, the Son, and the Holy Ghost. And the term “person” they use as the Fathers have used it, to signify, not a part or quality in another, but that which subsists of itself. They condemn all heresies which have sprung up against this article, as the Manichaeans, who assumed two principles, one Good and the other Evil: also the Valentinians, Arians, Eunomians, Mohammedans, and all such. They condemn also the Samosatenes, old and new, who, contending that there is but one Person, sophistically and impiously argue that the Word and the Holy Ghost are not distinct Persons, but that “Word” signifies a spoken word, and “Spirit” signifies motion created in things.",
+   "chunk_hash": "bf3f3f494f6e8d582e0253c5d7f49db827d372ab8a643f5993ec577ae4183ec7",
+   "division": "paragraph-range",
+   "fallback_tier": false
+  }
+ ],
+ "fallback_used": false,
+ "empty": false
+}

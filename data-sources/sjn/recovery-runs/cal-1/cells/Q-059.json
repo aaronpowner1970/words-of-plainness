@@ -1,0 +1,162 @@
+{
+ "queue_id": "Q-059",
+ "branch": "Lutheran",
+ "family_id": "RNR-H08",
+ "predicate": "Wise / all-wise",
+ "passes": {
+  "1": {
+   "status": "DONE",
+   "call_id": "2ce7ad30aca4f9761621b339",
+   "coverage": {
+    "BSR-LU-03": {
+     "coverage": "FULL",
+     "supplied": 1,
+     "of": 1
+    },
+    "BSR-LU-01": {
+     "coverage": "RETRIEVED",
+     "supplied": 12,
+     "of": 738,
+     "method": "BM25+vector(RRF)"
+    }
+   },
+   "supplied_chunks": [
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article IV-b. Of Love and the Fulfilling of the Law, ¶106–109"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶74–77"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶67–70"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Ten Commandments, ¶126–132"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Ten Commandments, ¶259–263"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶71–73"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶29–34"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article IV-b. Of Love and the Fulfilling of the Law, ¶183–187"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶17–19"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶64–66"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Ten Commandments, ¶24–27"
+    ]
+   ],
+   "standards": [
+    "BSR-LU-01",
+    "BSR-LU-02",
+    "BSR-LU-03"
+   ],
+   "raw": "{\"candidates\": [{\"chunk_key\": \"c4\", \"registry_id\": \"BSR-LU-01\", \"locator\": \"Augsburg Confession: Article I. Of God, ¶1–6\", \"phrase\": \"of infinite power, wisdom, and goodness, the Maker and Preserver of all things\", \"rationale\": \"This confessional article on God directly predicates wisdom, with power and goodness, of the one Divine Essence that is God, fully asserting the required subject's wisdom.\", \"floor_claim\": \"FULL\"}]}",
+   "candidates": [
+    {
+     "candidate_id": "Q-059-p1-1",
+     "pass": 1,
+     "registry_id": "BSR-LU-01",
+     "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+     "phrase": "of infinite power, wisdom, and goodness, the Maker and Preserver of all things",
+     "rationale": "This confessional article on God directly predicates wisdom, with power and goodness, of the one Divine Essence that is God, fully asserting the required subject's wisdom.",
+     "floor_claim": "FULL",
+     "chunk_text": "Our Churches, with common consent, do teach that the decree of the Council of Nicaea concerning the Unity of the Divine Essence and concerning the Three Persons, is true and to be believed without any doubting; that is to say, there is one Divine Essence which is called and which is God: eternal, without body, without parts, of infinite power, wisdom, and goodness, the Maker and Preserver of all things, visible and invisible; and yet there are three Persons, of the same essence and power, who also are coeternal, the Father, the Son, and the Holy Ghost. And the term “person” they use as the Fathers have used it, to signify, not a part or quality in another, but that which subsists of itself. They condemn all heresies which have sprung up against this article, as the Manichaeans, who assumed two principles, one Good and the other Evil: also the Valentinians, Arians, Eunomians, Mohammedans, and all such. They condemn also the Samosatenes, old and new, who, contending that there is but one Person, sophistically and impiously argue that the Word and the Holy Ghost are not distinct Persons, but that “Word” signifies a spoken word, and “Spirit” signifies motion created in things.",
+     "chunk_hash": "bf3f3f494f6e8d582e0253c5d7f49db827d372ab8a643f5993ec577ae4183ec7",
+     "division": "paragraph-range",
+     "fallback_tier": false
+    }
+   ],
+   "dropped": []
+  }
+ },
+ "verifications": {
+  "Q-059-p1-1": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "962516039dfaf6a3c9189d96",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "one Divine Essence...which is God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "'Our Churches...do teach that...there is one Divine Essence...which is God: [attributes]' is the confession's own positive doctrinal teaching; the condemnations of heresies follow afterward and are separate from this assertion.",
+    "floor": "FULL",
+    "floor_reason": "The confession directly asserts that the one Divine Essence (God) is of infinite wisdom, matching the predicate's definition.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, correct embedded subject (the one Divine Essence, God), and a positive doctrinal assertion of wisdom.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"one Divine Essence...which is God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"'Our Churches...do teach that...there is one Divine Essence...which is God: [attributes]' is the confession's own positive doctrinal teaching; the condemnations of heresies follow afterward and are separate from this assertion.\", \"floor\": \"FULL\", \"floor_reason\": \"The confession directly asserts that the one Divine Essence (God) is of infinite wisdom, matching the predicate's definition.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, correct embedded subject (the one Divine Essence, God), and a positive doctrinal assertion of wisdom.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "655a4688a044b4964aa2c480",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"one Divine Essence which is called and which is God\"",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession teaches this in its own voice (\"Our Churches, with common consent, do teach ... there is one Divine Essence ... of infinite power, wisdom, and goodness\"); it is a positive doctrinal assertion, not a report of an opponent's view.",
+    "floor": "FULL",
+    "floor_reason": "Infinite wisdom is predicated directly of the one Divine Essence which is God, which meets and exceeds the shared floor of affirming divine wisdom.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Phrase is verbatim, the subject is the one God, and the standard positively asserts infinite wisdom of God.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"one Divine Essence which is called and which is God\\\"\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession teaches this in its own voice (\\\"Our Churches, with common consent, do teach ... there is one Divine Essence ... of infinite power, wisdom, and goodness\\\"); it is a positive doctrinal assertion, not a report of an opponent's view.\", \"floor\": \"FULL\", \"floor_reason\": \"Infinite wisdom is predicated directly of the one Divine Essence which is God, which meets and exceeds the shared floor of affirming divine wisdom.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, the subject is the one God, and the standard positively asserts infinite wisdom of God.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   }
+  }
+ },
+ "coding": {},
+ "phase": "DONE",
+ "survivors": [
+  {
+   "candidate_id": "Q-059-p1-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+   "phrase": "of infinite power, wisdom, and goodness, the Maker and Preserver of all things",
+   "rationale": "This confessional article on God directly predicates wisdom, with power and goodness, of the one Divine Essence that is God, fully asserting the required subject's wisdom.",
+   "floor_claim": "FULL",
+   "chunk_text": "Our Churches, with common consent, do teach that the decree of the Council of Nicaea concerning the Unity of the Divine Essence and concerning the Three Persons, is true and to be believed without any doubting; that is to say, there is one Divine Essence which is called and which is God: eternal, without body, without parts, of infinite power, wisdom, and goodness, the Maker and Preserver of all things, visible and invisible; and yet there are three Persons, of the same essence and power, who also are coeternal, the Father, the Son, and the Holy Ghost. And the term “person” they use as the Fathers have used it, to signify, not a part or quality in another, but that which subsists of itself. They condemn all heresies which have sprung up against this article, as the Manichaeans, who assumed two principles, one Good and the other Evil: also the Valentinians, Arians, Eunomians, Mohammedans, and all such. They condemn also the Samosatenes, old and new, who, contending that there is but one Person, sophistically and impiously argue that the Word and the Holy Ghost are not distinct Persons, but that “Word” signifies a spoken word, and “Spirit” signifies motion created in things.",
+   "chunk_hash": "bf3f3f494f6e8d582e0253c5d7f49db827d372ab8a643f5993ec577ae4183ec7",
+   "division": "paragraph-range",
+   "fallback_tier": false
+  }
+ ],
+ "fallback_used": false,
+ "empty": false
+}

@@ -1,0 +1,162 @@
+{
+ "queue_id": "Q-331",
+ "branch": "Lutheran",
+ "family_id": "RNR-H42",
+ "predicate": "Incorporeal / without body",
+ "passes": {
+  "1": {
+   "status": "DONE",
+   "call_id": "f9ba3cb73ec98f0f6675d19a",
+   "coverage": {
+    "BSR-LU-03": {
+     "coverage": "FULL",
+     "supplied": 1,
+     "of": 1
+    },
+    "BSR-LU-01": {
+     "coverage": "RETRIEVED",
+     "supplied": 12,
+     "of": 738,
+     "method": "BM25+vector(RRF)"
+    }
+   },
+   "supplied_chunks": [
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: I. Original Sin, ¶1–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶3–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶114–118"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶7–10"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶35–38"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶86–89"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶59–60"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article X. Of the Holy Supper, ¶54–57"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶119–122"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶61–64"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VII. The Holy Supper, ¶90–98"
+    ]
+   ],
+   "standards": [
+    "BSR-LU-01",
+    "BSR-LU-02",
+    "BSR-LU-03"
+   ],
+   "raw": "{\"candidates\": [{\"chunk_key\": \"c4\", \"registry_id\": \"BSR-LU-01\", \"locator\": \"Augsburg Confession: Article I. Of God, ¶1–6\", \"phrase\": \"there is one Divine Essence which is called and which is God: eternal, without body\", \"rationale\": \"Confessional article directly asserts the one divine essence, God, is without body.\", \"floor_claim\": \"FULL\"}]}",
+   "candidates": [
+    {
+     "candidate_id": "Q-331-p1-1",
+     "pass": 1,
+     "registry_id": "BSR-LU-01",
+     "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+     "phrase": "there is one Divine Essence which is called and which is God: eternal, without body",
+     "rationale": "Confessional article directly asserts the one divine essence, God, is without body.",
+     "floor_claim": "FULL",
+     "chunk_text": "Our Churches, with common consent, do teach that the decree of the Council of Nicaea concerning the Unity of the Divine Essence and concerning the Three Persons, is true and to be believed without any doubting; that is to say, there is one Divine Essence which is called and which is God: eternal, without body, without parts, of infinite power, wisdom, and goodness, the Maker and Preserver of all things, visible and invisible; and yet there are three Persons, of the same essence and power, who also are coeternal, the Father, the Son, and the Holy Ghost. And the term “person” they use as the Fathers have used it, to signify, not a part or quality in another, but that which subsists of itself. They condemn all heresies which have sprung up against this article, as the Manichaeans, who assumed two principles, one Good and the other Evil: also the Valentinians, Arians, Eunomians, Mohammedans, and all such. They condemn also the Samosatenes, old and new, who, contending that there is but one Person, sophistically and impiously argue that the Word and the Holy Ghost are not distinct Persons, but that “Word” signifies a spoken word, and “Spirit” signifies motion created in things.",
+     "chunk_hash": "bf3f3f494f6e8d582e0253c5d7f49db827d372ab8a643f5993ec577ae4183ec7",
+     "division": "paragraph-range",
+     "fallback_tier": false
+    }
+   ],
+   "dropped": []
+  }
+ },
+ "verifications": {
+  "Q-331-p1-1": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "259a0a91abc924dbd2060d30",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "one Divine Essence which is called and which is God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession asserts this as its own teaching, affirming the Nicene decree in its own voice.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that God (the one Divine Essence) is 'without body,' denying material embodiment of God as required.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, correct subject (God), and asserted positively as confessional doctrine, satisfying the predicate at FULL floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"one Divine Essence which is called and which is God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts this as its own teaching, affirming the Nicene decree in its own voice.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that God (the one Divine Essence) is 'without body,' denying material embodiment of God as required.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, correct subject (God), and asserted positively as confessional doctrine, satisfying the predicate at FULL floor.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "1c6f12cb5d50755e2bb4e5d9",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"one Divine Essence which is called and which is God\"",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Confession teaches this in its own voice (\"Our Churches, with common consent, do teach... there is one Divine Essence... eternal, without body\"), affirming the Nicene decree as true and to be believed.",
+    "floor": "FULL",
+    "floor_reason": "The one Divine Essence which is God is positively predicated as \"without body,\" directly denying material embodiment of God.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, required subject (the one Divine Essence which is God), asserted in the standard's own teaching voice, meeting the full floor of incorporeality.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"one Divine Essence which is called and which is God\\\"\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession teaches this in its own voice (\\\"Our Churches, with common consent, do teach... there is one Divine Essence... eternal, without body\\\"), affirming the Nicene decree as true and to be believed.\", \"floor\": \"FULL\", \"floor_reason\": \"The one Divine Essence which is God is positively predicated as \\\"without body,\\\" directly denying material embodiment of God.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, required subject (the one Divine Essence which is God), asserted in the standard's own teaching voice, meeting the full floor of incorporeality.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   }
+  }
+ },
+ "coding": {},
+ "phase": "DONE",
+ "survivors": [
+  {
+   "candidate_id": "Q-331-p1-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+   "phrase": "there is one Divine Essence which is called and which is God: eternal, without body",
+   "rationale": "Confessional article directly asserts the one divine essence, God, is without body.",
+   "floor_claim": "FULL",
+   "chunk_text": "Our Churches, with common consent, do teach that the decree of the Council of Nicaea concerning the Unity of the Divine Essence and concerning the Three Persons, is true and to be believed without any doubting; that is to say, there is one Divine Essence which is called and which is God: eternal, without body, without parts, of infinite power, wisdom, and goodness, the Maker and Preserver of all things, visible and invisible; and yet there are three Persons, of the same essence and power, who also are coeternal, the Father, the Son, and the Holy Ghost. And the term “person” they use as the Fathers have used it, to signify, not a part or quality in another, but that which subsists of itself. They condemn all heresies which have sprung up against this article, as the Manichaeans, who assumed two principles, one Good and the other Evil: also the Valentinians, Arians, Eunomians, Mohammedans, and all such. They condemn also the Samosatenes, old and new, who, contending that there is but one Person, sophistically and impiously argue that the Word and the Holy Ghost are not distinct Persons, but that “Word” signifies a spoken word, and “Spirit” signifies motion created in things.",
+   "chunk_hash": "bf3f3f494f6e8d582e0253c5d7f49db827d372ab8a643f5993ec577ae4183ec7",
+   "division": "paragraph-range",
+   "fallback_tier": false
+  }
+ ],
+ "fallback_used": false,
+ "empty": false
+}

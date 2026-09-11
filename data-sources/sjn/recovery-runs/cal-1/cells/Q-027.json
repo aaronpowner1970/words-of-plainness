@@ -1,0 +1,249 @@
+{
+ "queue_id": "Q-027",
+ "branch": "Lutheran",
+ "family_id": "RNR-H04",
+ "predicate": "Father",
+ "passes": {
+  "1": {
+   "status": "DONE",
+   "call_id": "d6bafeb187cc2114f2103613",
+   "coverage": {
+    "BSR-LU-03": {
+     "coverage": "FULL",
+     "supplied": 1,
+     "of": 1
+    },
+    "BSR-LU-01": {
+     "coverage": "RETRIEVED",
+     "supplied": 12,
+     "of": 738,
+     "method": "BM25+vector(RRF)"
+    }
+   },
+   "supplied_chunks": [
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶29–34"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶59–61"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶6–10"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: VIII. The Person of Christ, ¶1–8"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article III. Of the Son of God, ¶1–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article I. Of God, ¶1–6"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article I. Of God, ¶1–2"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: VIII. The Person of Christ, ¶18–28"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶71–73"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶74–77"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶67–70"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶83–86"
+    ]
+   ],
+   "standards": [
+    "BSR-LU-01",
+    "BSR-LU-02",
+    "BSR-LU-03"
+   ],
+   "raw": "{\"candidates\": [\n{\"chunk_key\": \"c1\", \"registry_id\": \"BSR-LU-03\", \"locator\": \"Small Catechism, The Creed — First Article (Part 1), explanation\", \"phrase\": \"I believe in God, the Father Almighty, Maker of heaven and earth\", \"rationale\": \"Directly confesses God as Father, asserting divine paternity as a name/title of God at the controlling floor.\", \"floor_claim\": \"FULL\"},\n{\"chunk_key\": \"c7\", \"registry_id\": \"BSR-LU-01\", \"locator\": \"Augsburg Confession: Article I. Of God, ¶1–6\", \"phrase\": \"three Persons, of the same essence and power, who also are coeternal, the Father, the Son, and the Holy Ghost\", \"rationale\": \"Names the Father as a distinct divine Person sharing the one essence, asserting relational identity within the Godhead.\", \"floor_claim\": \"PARTIAL\"},\n{\"chunk_key\": \"c8\", \"registry_id\": \"BSR-LU-01\", \"locator\": \"Apology of the Augsburg Confession: Article I. Of God, ¶1–2\", \"phrase\": \"three distinct persons, of the same divine essence, and coeternal, Father, Son, and Holy Ghost\", \"rationale\": \"Confesses the Father as a coeternal divine person of the same essence, affirming relational divine identity.\", \"floor_claim\": \"PARTIAL\"}\n]}",
+   "candidates": [
+    {
+     "candidate_id": "Q-027-p1-1",
+     "pass": 1,
+     "registry_id": "BSR-LU-03",
+     "locator": "Small Catechism, The Creed — First Article (Part 1), explanation",
+     "phrase": "I believe in God, the Father Almighty, Maker of heaven and earth",
+     "rationale": "Directly confesses God as Father, asserting divine paternity as a name/title of God at the controlling floor.",
+     "floor_claim": "FULL",
+     "chunk_text": "I believe in God, the Father Almighty, Maker of heaven and earth. What does this mean? I believe that God has made me and all creatures; that He has given me my body and soul, eyes, ears, and all my members, my reason and all my senses, and still takes care of them. He also gives me clothing and shoes, food and drink, house and home, wife and children, land, animals, and all I have. He richly and daily provides me with all that I need to support this body and life. He defends me against all danger and guards and protects me from all evil. All this He does only out of fatherly, divine goodness and mercy, without any merit or worthiness in me. For all this it is my duty to thank and praise, serve and obey Him. This is most certainly true.",
+     "chunk_hash": "370bd08f97da57ccfa3fa67adaa0a9ea57154d39737697210ebe04962406a706",
+     "division": "article",
+     "fallback_tier": false
+    },
+    {
+     "candidate_id": "Q-027-p1-2",
+     "pass": 1,
+     "registry_id": "BSR-LU-01",
+     "locator": "Apology of the Augsburg Confession: Article I. Of God, ¶1–2",
+     "phrase": "three distinct persons, of the same divine essence, and coeternal, Father, Son, and Holy Ghost",
+     "rationale": "Confesses the Father as a coeternal divine person of the same essence, affirming relational divine identity.",
+     "floor_claim": "PARTIAL",
+     "chunk_text": "The First Article of our Confession our adversaries approve, in which we declare that we believe and teach that there is one divine essence, undivided, etc., and yet, that there are three distinct persons, of the same divine essence, and coeternal, Father, Son, and Holy Ghost. This article we have always taught and defended, and we believe that it has, in Holy Scripture, sure and firm testimonies that cannot be overthrown. And we constantly affirm that those thinking otherwise are outside of the Church of Christ. and are idolaters, and insult God.",
+     "chunk_hash": "48e81a59559de1d26b995618be22ed8f47b8b520277c1885fdf032d35fcf04e0",
+     "division": "paragraph-range",
+     "fallback_tier": false
+    }
+   ],
+   "dropped": [
+    {
+     "candidate": {
+      "chunk_key": "c7",
+      "registry_id": "BSR-LU-01",
+      "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+      "phrase": "three Persons, of the same essence and power, who also are coeternal, the Father, the Son, and the Holy Ghost",
+      "rationale": "Names the Father as a distinct divine Person sharing the one essence, asserting relational identity within the Godhead.",
+      "floor_claim": "PARTIAL"
+     },
+     "reason": "phrase exceeds 15 words (20)"
+    }
+   ]
+  }
+ },
+ "verifications": {
+  "Q-027-p1-1": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "6f1a1cda3021902af15ee272",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "I (confessing believer) — asserting belief in 'God, the Father Almighty'; the named subject of the predicate is God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The catechism asserts in its own voice the creedal confession that God is 'the Father Almighty,' and explains this paternal identity through God's fatherly care.",
+    "floor": "FULL",
+    "floor_reason": "The text directly names God as Father and explicates this in terms of fatherly, divine goodness, asserting divine paternity of the required subject.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is God (the Father), and the passage asserts God's fatherly identity and care, meeting the FULL floor for divine paternity.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"I (confessing believer) — asserting belief in 'God, the Father Almighty'; the named subject of the predicate is God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice the creedal confession that God is 'the Father Almighty,' and explains this paternal identity through God's fatherly care.\", \"floor\": \"FULL\", \"floor_reason\": \"The text directly names God as Father and explicates this in terms of fatherly, divine goodness, asserting divine paternity of the required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is God (the Father), and the passage asserts God's fatherly identity and care, meeting the FULL floor for divine paternity.\"}",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "0c0566a9574964a0fdf020d3",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"God, the Father Almighty, Maker of heaven and earth\" — the named object of the confession; in the explanation the subject is \"He\" (= God), who acts \"out of fatherly, divine goodness\"",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "First-person creedal confession expounded in the catechism's own voice and sealed with \"This is most certainly true\"; no opponent's view, hypothetical, or petition.",
+    "floor": "FULL",
+    "floor_reason": "The passage names God as \"the Father Almighty\" and expounds that naming as His \"fatherly, divine goodness and mercy\" toward the creature, asserting divine paternity and relational identity of God.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Phrase is verbatim, the predicate is asserted of God in the standard's own voice, and the floor of divine paternity/relational identity is fully met; the exposition develops fatherhood chiefly in creational-providential terms rather than immanent-Trinitarian relation, which is noted but does not fall below the floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"God, the Father Almighty, Maker of heaven and earth\\\" — the named object of the confession; in the explanation the subject is \\\"He\\\" (= God), who acts \\\"out of fatherly, divine goodness\\\"\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"First-person creedal confession expounded in the catechism's own voice and sealed with \\\"This is most certainly true\\\"; no opponent's view, hypothetical, or petition.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage names God as \\\"the Father Almighty\\\" and expounds that naming as His \\\"fatherly, divine goodness and mercy\\\" toward the creature, asserting divine paternity and relational identity of God.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, the predicate is asserted of God in the standard's own voice, and the floor of divine paternity/relational identity is fully met; the exposition develops fatherhood chiefly in creational-providential terms rather than immanent-Trinitarian relation, which is noted but does not fall below the floor.\"}",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   }
+  },
+  "Q-027-p1-2": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "3044efed3423a2fb0e0f5bd4",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "there [existential: three distinct persons] / one divine essence",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession asserts in its own voice ('we declare that we believe and teach') that there is one divine essence and three coeternal persons, Father, Son, and Holy Ghost.",
+    "floor": "PARTIAL",
+    "floor_reason": "The passage names 'Father' as one of the three coeternal persons of the same divine essence, asserting relational/personal distinction but not elaborating paternity specifically beyond the naming.",
+    "hazard_flags": [
+     "SLOGAN_COMPRESSION"
+    ],
+    "verdict_model": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the triune God asserted by the confession itself, and 'Father' is named as a distinct coeternal person, meeting a partial floor for divine paternity/relational identity.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"there [existential: three distinct persons] / one divine essence\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts in its own voice ('we declare that we believe and teach') that there is one divine essence and three coeternal persons, Father, Son, and Holy Ghost.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage names 'Father' as one of the three coeternal persons of the same divine essence, asserting relational/personal distinction but not elaborating paternity specifically beyond the naming.\", \"hazard_flags\": [\"SLOGAN_COMPRESSION\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the triune God asserted by the confession itself, and 'Father' is named as a distinct coeternal person, meeting a partial floor for divine paternity/relational identity.\"}",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "c448bddf20ff9091944fdd3c",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"there are three distinct persons, of the same divine essence, and coeternal, Father, Son, and Holy Ghost\" — the persons of the one undivided divine essence, i.e. God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The standard speaks in its own voice: \"we declare that we believe and teach... This article we have always taught and defended, and we constantly affirm...\"; the mention of adversaries' approval does not convert it into a report of another's view.",
+    "floor": "PARTIAL",
+    "floor_reason": "The text names the Father as a distinct coeternal person of the one divine essence, thus asserting relational identity within the Godhead, but does not develop divine paternity (generation/fatherhood) beyond the triune naming.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL",
+     "SEMANTIC_FLOOR"
+    ],
+    "verdict_model": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, required subject (the one God in three persons), genuine confessional assertion; floor is PARTIAL since only the triune relational naming of the Father, not paternity as such, is expressed.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"there are three distinct persons, of the same divine essence, and coeternal, Father, Son, and Holy Ghost\\\" — the persons of the one undivided divine essence, i.e. God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The standard speaks in its own voice: \\\"we declare that we believe and teach... This article we have always taught and defended, and we constantly affirm...\\\"; the mention of adversaries' approval does not convert it into a report of another's view.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The text names the Father as a distinct coeternal person of the one divine essence, thus asserting relational identity within the Godhead, but does not develop divine paternity (generation/fatherhood) beyond the triune naming.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, required subject (the one God in three persons), genuine confessional assertion; floor is PARTIAL since only the triune relational naming of the Father, not paternity as such, is expressed.\"}",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   }
+  }
+ },
+ "coding": {},
+ "phase": "DONE",
+ "survivors": [
+  {
+   "candidate_id": "Q-027-p1-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-03",
+   "locator": "Small Catechism, The Creed — First Article (Part 1), explanation",
+   "phrase": "I believe in God, the Father Almighty, Maker of heaven and earth",
+   "rationale": "Directly confesses God as Father, asserting divine paternity as a name/title of God at the controlling floor.",
+   "floor_claim": "FULL",
+   "chunk_text": "I believe in God, the Father Almighty, Maker of heaven and earth. What does this mean? I believe that God has made me and all creatures; that He has given me my body and soul, eyes, ears, and all my members, my reason and all my senses, and still takes care of them. He also gives me clothing and shoes, food and drink, house and home, wife and children, land, animals, and all I have. He richly and daily provides me with all that I need to support this body and life. He defends me against all danger and guards and protects me from all evil. All this He does only out of fatherly, divine goodness and mercy, without any merit or worthiness in me. For all this it is my duty to thank and praise, serve and obey Him. This is most certainly true.",
+   "chunk_hash": "370bd08f97da57ccfa3fa67adaa0a9ea57154d39737697210ebe04962406a706",
+   "division": "article",
+   "fallback_tier": false
+  },
+  {
+   "candidate_id": "Q-027-p1-2",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Apology of the Augsburg Confession: Article I. Of God, ¶1–2",
+   "phrase": "three distinct persons, of the same divine essence, and coeternal, Father, Son, and Holy Ghost",
+   "rationale": "Confesses the Father as a coeternal divine person of the same essence, affirming relational divine identity.",
+   "floor_claim": "PARTIAL",
+   "chunk_text": "The First Article of our Confession our adversaries approve, in which we declare that we believe and teach that there is one divine essence, undivided, etc., and yet, that there are three distinct persons, of the same divine essence, and coeternal, Father, Son, and Holy Ghost. This article we have always taught and defended, and we believe that it has, in Holy Scripture, sure and firm testimonies that cannot be overthrown. And we constantly affirm that those thinking otherwise are outside of the Church of Christ. and are idolaters, and insult God.",
+   "chunk_hash": "48e81a59559de1d26b995618be22ed8f47b8b520277c1885fdf032d35fcf04e0",
+   "division": "paragraph-range",
+   "fallback_tier": false
+  }
+ ],
+ "fallback_used": false,
+ "empty": false
+}

@@ -1,0 +1,162 @@
+{
+ "queue_id": "Q-267",
+ "branch": "Lutheran",
+ "family_id": "RNR-H34",
+ "predicate": "Giver of life",
+ "passes": {
+  "1": {
+   "status": "DONE",
+   "call_id": "d07ac746f7717b4a39616db9",
+   "coverage": {
+    "BSR-LU-03": {
+     "coverage": "FULL",
+     "supplied": 1,
+     "of": 1
+    },
+    "BSR-LU-01": {
+     "coverage": "RETRIEVED",
+     "supplied": 12,
+     "of": 738,
+     "method": "BM25+vector(RRF)"
+    }
+   },
+   "supplied_chunks": [
+    [
+     "BSR-LU-03",
+     "Small Catechism, The Creed — First Article (Part 1), explanation"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: XI. Election, ¶29–32"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: II. Free Will, ¶37–42"
+    ],
+    [
+     "BSR-LU-01",
+     "Ecumenical Creeds: The Nicene Creed"
+    ],
+    [
+     "BSR-LU-01",
+     "Large Catechism: The Apostles' Creed, ¶36–42"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: II. Free Will, ¶26–29"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: XI. Election, ¶72–74"
+    ],
+    [
+     "BSR-LU-01",
+     "Augsburg Confession: Article XVIII. Of Free Will, ¶1–9"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article IV-b. Of Love and the Fulfilling of the Law, ¶230–235"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: VIII. The Person of Christ, ¶71–73"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Solid Declaration: II. Free Will, ¶64–66"
+    ],
+    [
+     "BSR-LU-01",
+     "Apology of the Augsburg Confession: Article IV (II). Of Justification, ¶63–68"
+    ],
+    [
+     "BSR-LU-01",
+     "Formula of Concord, Epitome: II. Free Will, ¶1–5"
+    ]
+   ],
+   "standards": [
+    "BSR-LU-01",
+    "BSR-LU-02",
+    "BSR-LU-03"
+   ],
+   "raw": "{\"candidates\": [{\"chunk_key\": \"c4\", \"registry_id\": \"BSR-LU-01\", \"locator\": \"Ecumenical Creeds: The Nicene Creed\", \"phrase\": \"I believe in the Holy Ghost, the Lord and Giver of life\", \"rationale\": \"The Nicene Creed, confessed as an ecumenical standard, directly titles the Holy Spirit 'the Lord and Giver of life'.\", \"floor_claim\": \"FULL\"}]}",
+   "candidates": [
+    {
+     "candidate_id": "Q-267-p1-1",
+     "pass": 1,
+     "registry_id": "BSR-LU-01",
+     "locator": "Ecumenical Creeds: The Nicene Creed",
+     "phrase": "I believe in the Holy Ghost, the Lord and Giver of life",
+     "rationale": "The Nicene Creed, confessed as an ecumenical standard, directly titles the Holy Spirit 'the Lord and Giver of life'.",
+     "floor_claim": "FULL",
+     "chunk_text": "I believe in one God, the Father Almighty, Maker of heaven and earth, and of all things visible and invisible. And in one Lord Jesus Christ, the only-begotten Son of God, begotten of the Father before all worlds, God of God, Light of Light, very God of very God, begotten, not made, being of one substance with the Father; by whom all things were made; who for us men, and for our salvation, came down from heaven, and was incarnate by the Holy Ghost of the Virgin Mary, and was made man, and was crucified also for us under Pontius Pilate; He suffered and was buried; and the third day He rose again according to the Scriptures; and ascended into heaven, and sitteth on the right hand of the Father; and He shall come again with glory to judge the quick and the dead; whose kingdom shall have no end. And I believe in the Holy Ghost, the Lord and Giver of life, who proceedeth from the Father and the Son; who with the Father and the Son together is worshiped and glorified; who spake by the Prophets. And I believe in one holy catholic and apostolic Church.I acknowledge one Baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen.",
+     "chunk_hash": "a0e2483760350cc8f6d3bf00a9a9b66a4d458be43b24a7bc85e77c71b387ecb7",
+     "division": "section",
+     "fallback_tier": false
+    }
+   ],
+   "dropped": []
+  }
+ },
+ "verifications": {
+  "Q-267-p1-1": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "d8f79a893b0348aec8a64cc0",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "the Holy Ghost",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed asserts belief in the Holy Ghost as 'the Lord and Giver of life' in its own confessional voice.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly names the Holy Spirit as Giver of life, matching the predicate exactly.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, correct subject (the Holy Ghost), and asserted as a creedal confession, fully satisfying the predicate.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts belief in the Holy Ghost as 'the Lord and Giver of life' in its own confessional voice.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly names the Holy Spirit as Giver of life, matching the predicate exactly.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, correct subject (the Holy Ghost), and asserted as a creedal confession, fully satisfying the predicate.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "2dc2d2ca6e19269aa2444f17",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"the Holy Ghost\" (subject of the appositive predication \"the Lord and Giver of life\"; the confessing \"I\" is the subject of the verb \"believe\")",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "Creedal confession in the standard's own voice: \"And I believe in the Holy Ghost, the Lord and Giver of life\" — an affirmation, not a report or rejection of another's view.",
+    "floor": "FULL",
+    "floor_reason": "The title \"Giver of life\" is predicated directly of the Holy Ghost, naming the Spirit's vivifying agency as the floor requires.",
+    "hazard_flags": [],
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Phrase is present word-for-word (only the connective \"And\" omitted), the predicate is asserted of the Holy Ghost by appositive title, and the creed asserts it in its own confessional voice; full floor met.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"the Holy Ghost\\\" (subject of the appositive predication \\\"the Lord and Giver of life\\\"; the confessing \\\"I\\\" is the subject of the verb \\\"believe\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"Creedal confession in the standard's own voice: \\\"And I believe in the Holy Ghost, the Lord and Giver of life\\\" — an affirmation, not a report or rejection of another's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The title \\\"Giver of life\\\" is predicated directly of the Holy Ghost, naming the Spirit's vivifying agency as the floor requires.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is present word-for-word (only the connective \\\"And\\\" omitted), the predicate is asserted of the Holy Ghost by appositive title, and the creed asserts it in its own confessional voice; full floor met.\"}",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   }
+  }
+ },
+ "coding": {},
+ "phase": "DONE",
+ "survivors": [
+  {
+   "candidate_id": "Q-267-p1-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Ecumenical Creeds: The Nicene Creed",
+   "phrase": "I believe in the Holy Ghost, the Lord and Giver of life",
+   "rationale": "The Nicene Creed, confessed as an ecumenical standard, directly titles the Holy Spirit 'the Lord and Giver of life'.",
+   "floor_claim": "FULL",
+   "chunk_text": "I believe in one God, the Father Almighty, Maker of heaven and earth, and of all things visible and invisible. And in one Lord Jesus Christ, the only-begotten Son of God, begotten of the Father before all worlds, God of God, Light of Light, very God of very God, begotten, not made, being of one substance with the Father; by whom all things were made; who for us men, and for our salvation, came down from heaven, and was incarnate by the Holy Ghost of the Virgin Mary, and was made man, and was crucified also for us under Pontius Pilate; He suffered and was buried; and the third day He rose again according to the Scriptures; and ascended into heaven, and sitteth on the right hand of the Father; and He shall come again with glory to judge the quick and the dead; whose kingdom shall have no end. And I believe in the Holy Ghost, the Lord and Giver of life, who proceedeth from the Father and the Son; who with the Father and the Son together is worshiped and glorified; who spake by the Prophets. And I believe in one holy catholic and apostolic Church.I acknowledge one Baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen.",
+   "chunk_hash": "a0e2483760350cc8f6d3bf00a9a9b66a4d458be43b24a7bc85e77c71b387ecb7",
+   "division": "section",
+   "fallback_tier": false
+  }
+ ],
+ "fallback_used": false,
+ "empty": false
+}
