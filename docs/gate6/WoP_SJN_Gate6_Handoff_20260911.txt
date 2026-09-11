@@ -1,0 +1,115 @@
+TASK
+  Seeking Jesus of Nazareth (SJN) — Gate 5 is CLOSED. The Branch Source
+  Registries are author-ratified and merged. Next is Gate 6: Claude Code builds
+  and runs the Evidence Recovery Agent Team against the 315 open cells.
+  Build spec: WoP_SJN_Gate6_BuildSpec_20260911.md (wop-scratch and project).
+
+STATE
+  CANONICAL WORKBOOK: Seeking_Jesus_Teaching_Predicate_Source_v2.23_
+  REGISTRY_CORRECTIONS_20260910.xlsx (wop-scratch). Supersedes v2.22, which
+  superseded v2.21. Code is still building M3/M3a/M4 against v2.20 — swap v2.23
+  into data-sources/sjn/ on the next pipeline run. No doctrinal, copy, count or
+  gate-value change from v2.20 through v2.23; the only additions are the
+  registry sheet, the APP CONFIG keys below, and the V100 rewrite.
+
+  NEW SHEET "Branch Source Registry" — 38 rows, 18 columns, after Tradition
+  Sources. 36 AUTHOR_RATIFIED, 2 RETIRED (BSR-LU-04 ELCA pages, reason OTHER,
+  hosts no confession text; BSR-MA-03 Schleitheim, reason WRONG_SUBJECT, no
+  predicates of God's nature). 28 distinct publisher domains.
+
+  NEW APP CONFIG KEYS:
+    branch_source_registry_sheet = Branch Source Registry
+    registry_only_enforcement    = True        (the R001 rule)
+    registry_entries_ratified    = 36
+    registry_breadth             = TWO_TIERS
+    decision_console_medium      = ARTIFACT_DB
+    lineage_host_policy          = MIGRATE_WHERE_OFFICIAL
+    fetch_mode_confirmation      = CONFIRM_AS_DRAFTED
+    registry_fallback_only_rows  = BSR-AN-05
+    gate5_status                 = AUTHOR RATIFIED 2026-09-10
+
+  V100 is now CONDITIONAL:
+    =IF(COUNTIF('Author Decision Queue'!$AF$2:$AF$105,"YES")>0,1,0)
+  It mirrors the queue's Needs Author Attention column (AF), NOT Actionability
+  (F, which still counts 101 READY rows with every decision answered). Result:
+  Build Validation recalculates with ZERO FAIL cells — the first fully green
+  validation sheet since v2.15. Code's own V100 implementation (paired with
+  P028) must be updated to match, or the workbook will say PASS while the build
+  still says FAIL.
+
+  DECISION CONSOLE: private Claude artifact "SJN Decision Console", persistent
+  store, 48 cards, all decided. Cowork reads decisions straight out of its db
+  (collection "decisions", one doc per card_id; state doc
+  state/gate5-registries-20260910). Export of the ratifying payload:
+  wop-scratch\sjn-decisions-gate5-v223-20260910.json.
+
+  MERGE SCRIPT: wop-scratch\sjn_merge_decisions.py. openpyxl only. Phases:
+  build registry sheet, APP CONFIG, Build Metadata lineage row, Lineage & Merge
+  Audit row, V100; then cell-by-cell diff against an intended-change allowlist,
+  boolean census, and LibreOffice recalc on a *.VALIDATE-COPY.xlsx throwaway.
+  Registry CSV input: WoP_SJN_BranchSourceRegistries_Draft1r1_20260910.csv
+  (r1, not Draft1 — r1 carries the verified BSR-RC-06 URL).
+
+BLOCKERS
+  None. Gate 6 is unblocked and can start.
+
+DECISIONS (AJP, console sitting 2026-09-10)
+  SETUP-01 V100              CONDITIONAL
+  SETUP-02 registry breadth  TWO_TIERS
+  SETUP-03 console medium    ARTIFACT_DB
+  AC-02 LINEAGE hosts        MIGRATE_WHERE_OFFICIAL — migrate ewtn, Fordham,
+                             ccel and newadvent cells to official hosts during
+                             Gate 7 where one exists; keep bookofconcord.org
+                             (no denominational HTML host exists).
+  AC-03 Philaret/Dositheus   BOTH_IN — both registered, each with its caveat.
+  AC-04 ACNA catechism       INCLUDE_AS_FALLBACK_TIER — BSR-AN-05 is citable
+                             ONLY where no Canterbury-communion standard yields
+                             a candidate. Two-pass rule; see the build spec.
+  AC-05 1689 Confession      INCLUDE_WITH_CAVEAT
+  AC-06 GMC and Wesleyan     BOTH
+  AC-07 Dordrecht            INCLUDE_VIA_ANABAPTISTRESOURCES
+  AC-08 fetch modes          CONFIRM_AS_DRAFTED
+
+  BSR-EO-05 Dositheus stays on maximologia.org. Checked: CRI/Voice is Bratcher's
+  ADAPTATION (modernised wording — fails verbatim assertion), and the Robertson
+  1899 scan on archive.org has no decree-level locators and carries Greek OCR
+  noise. maximologia carries the unmodified Robertson text under Decree 1-18 and
+  Question 1-4 headings. The weakness is disclosed rather than relocated: the
+  row's author_note names the translation and the missing translator credit, and
+  the Eastern Orthodox scope caveat now names both the 1672 local-synod
+  authority problem and the private host.
+
+NEXT
+  1. CODE — Gate 6 per WoP_SJN_Gate6_BuildSpec_20260911.md: corpus builder,
+     locator/verifier/coder agents, packet builder, guards in code, calibration
+     on the 141 released cells (recall >= 0.8, false-accept <= 0.05), then the
+     live run branch by branch. Swap in v2.23 first. Update V100 to conditional.
+  2. COWORK — after Code delivers the packets: Gate 7 sittings in the console,
+     merge to v2.24, then the Gate 8 build.
+  3. GATE 7 AUTHOR WORK queued from the 2026-09-10 design pass: add an
+     `occasion` column to the registry sheet (one sentence per standard on what
+     the document was written against) — authored while the registry is open.
+
+  Every Claude Code handoff ends: Push this commit directly to main. Do not
+  create a PR.
+
+CARRIED DESIGN DECISIONS (2026-09-10, Cowork)
+  Two documents now govern learner-facing work and should be read before Gate 8:
+    claude/WoP_SJN_LearnerFeatures_Assessment_20260910.md
+    claude/WoP_Teaching_Practices_Standard_v1.0.md  (standing ministry standard,
+      also at WoP\ops\WoP-Teaching-Practices-Standard.md; four hard gates and a
+      ten-criterion readiness rubric; every app, presentation and teaching
+      writing is scored against it before deployment)
+  Gate 8 gains a copy requirement (state what the standard SAYS, never "what you
+  are supposed to believe"); Gate 9 caps comparison at three traditions plus the
+  fixed Restoration column with both cells hatched when either is empty; a new
+  APP CONFIG key will govern when a per-branch figure may render publicly.
+
+STANDING RULES
+  Workbook canonical; static JSON only; no branch percentages or rankings
+  anywhere public; full_branch_map_enabled False until the Gate 9 decision;
+  "Latter-day Saint" never "LDS"/"Mormon" in learner-facing text; "Mormon
+  Christianity" as a book subtitle is a term of art; scripture hyperlinked to
+  churchofjesuschrist.org/study; every citation carries a <=15-word asserted
+  phrase; agents may read only ratified-registry text; empty is a valid result;
+  the author ratifies every cell.

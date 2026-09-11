@@ -1,0 +1,101 @@
+SJN GATE 6 — CLAUDE CODE LAUNCH PROMPT
+Paste everything below the line into Claude Code, started in
+C:\Users\aaron\Documents\words-of-plainness (branch main).
+Source of truth for this prompt: wop-scratch\WoP_SJN_Gate6_LaunchPrompt_20260911.txt
+──────────────────────────────────────────────────────────────────────────────
+
+You are starting Gate 6 of the Seeking Jesus of Nazareth (SJN) build in the
+words-of-plainness repo, on main.
+
+STEP 0 — pull the inputs into the repo, then commit them.
+Copy these three files out of C:\Users\aaron\Documents\wop-scratch\ :
+
+  Seeking_Jesus_Teaching_Predicate_Source_v2.23_REGISTRY_CORRECTIONS_20260910.xlsx
+      -> data-sources\sjn\        (replaces v2.20 as the canonical workbook)
+  WoP_SJN_Gate6_BuildSpec_20260911.md
+      -> docs\gate6\
+  handoff.txt
+      -> docs\gate6\WoP_SJN_Gate6_Handoff_20260911.txt
+
+Commit them before doing anything else, so the spec this build follows is in
+version control beside the code it produced.
+
+STEP 1 — read both documents in full before writing code.
+docs\gate6\WoP_SJN_Gate6_Handoff_20260911.txt gives you the state.
+docs\gate6\WoP_SJN_Gate6_BuildSpec_20260911.md is the specification: §1–§10 are
+the design and the reasoning, §11 records this prompt. Read §1–§10 completely.
+The sections most easily skimmed past are §5 (guards) and §6 (calibration);
+those two carry the requirements that are hardest to retrofit.
+
+THREE CONSTRAINTS FOR THE WHOLE SESSION.
+These hold no matter how long this runs or what gets compacted out of context.
+Re-read them if you are ever unsure whether you are still in scope.
+
+  1. Do not write to the workbook. Gate 6 produces recovery packets only.
+     The workbook moves in Gate 7, through Cowork's merge script.
+  2. Stop after calibration and report. Do not begin the live run against the
+     315 open cells. The author decides whether to proceed.
+  3. Push commits directly to main. Do not create a PR, and do not leave work
+     on a worktree branch.
+
+THE WORK.
+
+Three corrections before the new work:
+  · The workbook is now v2.23. Re-run the pipeline against it. There is no
+    doctrinal, copy, count or gate-value change from v2.20 — the additions are
+    the Branch Source Registry sheet, nine APP CONFIG keys and the V100 rewrite.
+    Expect existing assertions to pass unchanged; investigate any that do not.
+  · Update the V100 implementation to the conditional form, keyed on the Author
+    Decision Queue's Needs Author Attention column (AF), not Actionability
+    (F, which still reports 101 READY rows even with every decision answered).
+    Paired with P028. If these disagree the workbook reports PASS while the
+    build reports FAIL.
+  · Add sjn-verify rule R001: any cell citation whose publisher domain is not
+    in its branch's AUTHOR_RATIFIED registry rows is a blocking error.
+
+Then build scripts\sjn_recovery\ per the spec:
+  · a deterministic corpus builder that splits each ratified standard by its own
+    divisions into an internal sjn_confessions collection (§3);
+  · locator, verifier and coder agents with the prompts and output contracts
+    in §4 — the verifier gets a different prompt and, where practical, a
+    different model from the locator;
+  · a packet builder that re-asserts every phrase and drops failures before the
+    author ever sees them (§4).
+
+Enforce the guards in code, never in a prompt (§5): registry-only chunks with
+URLs never passed to agents, phrase assertion, length caps, no cross-branch
+leakage, duplicate suppression, and a full audit log. Two are new in Gate 5 and
+are the ones most easily missed:
+  · the fallback-tier two-pass rule for registry_fallback_only_rows (BSR-AN-05,
+    the ACNA catechism — citable only where no Canterbury-communion standard
+    yields a candidate);
+  · the one-off Dositheus provenance diff against the Robertson edition, run
+    at corpus build.
+
+CALIBRATION — required before any live run.
+Run the locator and verifier against the 141 already-released cells with their
+locators hidden. Thresholds: recall ≥ 0.8 and false-accept ≤ 0.05. Report the
+Confession of Dositheus false-accept rate separately from the Eastern Orthodox
+aggregate and hold it to the same 0.05 ceiling individually — that confession
+was written against Cyril Lucaris, so its statements about God sit inside
+condemnations of a contrary position, and a denial of an opposed claim can read
+as an assertion of its opposite.
+
+Do not move the thresholds. If you miss one, fix the prompts or the chunking.
+
+Write the results to data-sources\sjn\recovery-runs\calibration-report.md,
+broken out by verifier model if more than one model is tried in that role:
+recall, false-accept, the Dositheus slice, call count and cost for each, and
+the model the live run will use. Document the choice; do not leave it to memory.
+
+Preserve every rejection with its rubric, chunk context and reason code (§8).
+They are the audit trail, and they are also the non-examples a later teaching
+module draws from.
+
+EXIT — report back, then stop.
+Report: calibration numbers per branch, the Dositheus slice, the model table,
+anything that failed a threshold and what you changed, and whether the three
+corrections in Step 0 landed clean. Then stop and wait. Do not start the live
+run.
+
+Push this commit directly to main. Do not create a PR.
