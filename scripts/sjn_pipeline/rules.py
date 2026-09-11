@@ -245,8 +245,35 @@ def run_rules(ctx, targets, runner, decisions, gates, canonical, propagation_iss
             bv_mism.append((rid, "missing in Build Validation", actual))
         elif str(exp) != str(actual):
             bv_mism.append((rid, f"workbook expects {exp}", actual))
-    add("BUILD-VALIDATION", not bv_mism, "workbook V063/V074/V089 expected values equal pipeline counts (26 / 142 / 162)",
-        "; ".join(f"{k}: workbook={s(bv.get(k, {}).get('Expected'))} pipeline={v}" for k, v in pipeline_actual.items()),
+    # V100 (workbook v2.23, Gate 5 SETUP-01 CONDITIONAL): "Current Item rows when author attention exists".
+    # The workbook's Expected is =IF(COUNTIF('Author Decision Queue'!$AF$2:$AF$105,"YES")>0,1,0) — keyed on the
+    # queue's Needs Author Attention column (AF), never on Actionability (F, which still reports 101 READY rows
+    # with every decision answered). The pipeline's own V100 is the same conditional computed from its own
+    # recompute of AF (model.recompute_author_workflow): expected = 1 iff any decision needs attention;
+    # actual = number of Current Item rows. Both the shape of the workbook formula and the value must agree,
+    # otherwise the workbook could report PASS while the build reports FAIL (or the reverse).
+    attn_n = sum(d["needs_attention"] for d in decisions)
+    cur_n = sum(d["current_item"] for d in decisions)
+    v100_expected = 1 if attn_n > 0 else 0
+    v100_row = bv.get("V100", {})
+    v100_formula = s(v100_row.get("Expected"))
+    v100_actual_formula = s(v100_row.get("Actual"))
+    v100_shape_ok = (re.search(r"COUNTIF\('Author Decision Queue'!\$?AF\$?\d+:\$?AF\$?\d+,\s*\"YES\"\)\s*>\s*0", v100_formula)
+                     and v100_formula.startswith("=IF(") and re.search(r",\s*1\s*,\s*0\s*\)\s*$", v100_formula))
+    v100_keyed_on_f = bool(re.search(r"!\$?F\$?\d+:\$?F\$?\d+", v100_formula))
+    v100_actual_ok = bool(re.search(r"COUNTIF\('Author Decision Queue'!\$?AG\$?\d+:\$?AG\$?\d+,\s*\"CURRENT\"\)", v100_actual_formula))
+    if not v100_row:
+        bv_mism.append(("V100", "missing in Build Validation", f"pipeline expected={v100_expected} actual={cur_n}"))
+    elif v100_keyed_on_f or not v100_shape_ok:
+        bv_mism.append(("V100", f"workbook Expected is not the conditional form keyed on AF: {v100_formula!r}", f"pipeline expected={v100_expected}"))
+    elif not v100_actual_ok:
+        bv_mism.append(("V100", f"workbook Actual does not count AG=CURRENT: {v100_actual_formula!r}", f"pipeline actual={cur_n}"))
+    elif v100_expected != cur_n:
+        bv_mism.append(("V100", f"pipeline expected {v100_expected} current item(s)", f"pipeline actual={cur_n}"))
+    add("BUILD-VALIDATION", not bv_mism,
+        "workbook V063/V074/V089 expected values equal pipeline counts (26 / 142 / 162); V100 conditional on Needs Author Attention (AF) and agreeing with the pipeline recompute",
+        "; ".join(f"{k}: workbook={s(bv.get(k, {}).get('Expected'))} pipeline={v}" for k, v in pipeline_actual.items())
+        + f"; V100: workbook-form={'conditional-on-AF' if (v100_shape_ok and not v100_keyed_on_f) else 'OTHER'} pipeline expected={v100_expected} actual={cur_n} (needs_attention={attn_n})",
         str(bv_mism))
     # P022 vector captions
     v = ctx.vectors
@@ -336,4 +363,43 @@ def run_rules(ctx, targets, runner, decisions, gates, canonical, propagation_iss
     fut = [d for d in decisions if d["id"].startswith("AUTH-FUTURE-")]
     add("P031", len(fut) == 3 and all(d["status"] == "BLOCKED" for d in fut), "3 future decisions registered BLOCKED",
         f"{len(fut)} registered; statuses={[d['status'] for d in fut]}")
+    # R001 (Gate 5, APP CONFIG registry_only_enforcement): every cell citation's host must belong to an
+    # AUTHOR_RATIFIED Branch Source Registry row of the cell's own branch. Keyed on publisher_domain; hosts a
+    # LINEAGE row names itself (canonical_url / standard_title) are admitted and reported separately so the
+    # Gate 7 migration (lineage_host_policy) can find them. Retired historical witnesses (lineage-only rows)
+    # are not citations and are listed, not judged. Blocking while the switch is True.
+    from .registry import branch_domain_index, resolve_host, enforcement_on, ratified
+    enforce = enforcement_on(ctx.config)
+    idx = branch_domain_index(ctx.registry)
+    viol, lineage_admitted, retired_rows, checked = [], [], [], 0
+    for r in q:
+        qid = s(r["Queue ID"])
+        branch = s(r.get("Teaching branch"))
+        urls = [s(r.get(k)) for k in ("Authority / adoption URL", "Text URL")]
+        urls = [u for u in urls if u.startswith("http")]
+        if not urls:
+            continue
+        if b(r.get("Historical Witness Retired")) or s(r.get("Evidence Display Role")) == "LINEAGE ONLY":
+            retired_rows.append(qid)
+            continue
+        for u in urls:
+            checked += 1
+            kind, rid = resolve_host(idx, branch, u)
+            if kind is None:
+                viol.append((qid, branch, u))
+            elif kind == "lineage":
+                lineage_admitted.append((qid, rid, u))
+    n_rat = len(ratified(ctx.registry))
+    exp_rat = s(ctx.config.get("registry_entries_ratified"))
+    reg_ok = not exp_rat or str(n_rat) == exp_rat
+    if not enforce:
+        out.append(R("R001", "INFO", "INFO", "registry_only_enforcement is False; rule not enforced",
+                     f"{checked} citation URLs would be checked; {len(viol)} outside registry", str(viol[:5])))
+    else:
+        out.append(R("R001", "BLOCK", "PASS" if (not viol and reg_ok and ctx.registry) else "FAIL",
+                     f"0 citation hosts outside the branch's AUTHOR_RATIFIED registry rows ({exp_rat or n_rat} ratified rows)",
+                     f"{checked} citation URLs checked; {len(viol)} outside registry; {len(lineage_admitted)} on lineage-admitted hosts "
+                     f"({len({x[0] for x in lineage_admitted})} cells); {len(retired_rows)} retired lineage-only rows not judged; "
+                     f"registry ratified rows={n_rat}",
+                     f"violations={viol[:8]}; lineage_admitted={sorted({(x[1], x[2].split('/')[2]) for x in lineage_admitted})}; retired={retired_rows}"))
     return out

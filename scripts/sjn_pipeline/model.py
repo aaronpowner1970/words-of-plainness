@@ -53,6 +53,7 @@ class Context:
     hash_recipe: list = field(default_factory=list)
     family_summary: list = field(default_factory=list)
     sensitivity_ranges: list = field(default_factory=list)
+    registry: list = field(default_factory=list)         # Branch Source Registry rows (Gate 5, v2.22+)
 
 
 def load_context(path):
@@ -115,6 +116,8 @@ def load_context(path):
     if "Sensitivity Ranges" in wb.wb.sheetnames:
         load("sensitivity_ranges", "Sensitivity Ranges", "Metric key")
         ctx.sensitivity_ranges = [r for r in ctx.sensitivity_ranges if s(r.get("Metric key")) not in ("", "Rule")]
+    from .registry import load_registry
+    ctx.registry = load_registry(wb)
 
     # Build Metadata: artifact rows + canonical hash recipe rows
     ws = wb.ws("Build Metadata")

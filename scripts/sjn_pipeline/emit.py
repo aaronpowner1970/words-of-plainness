@@ -299,6 +299,42 @@ def build_cells(ctx, targets):
 
 
 # ------------------------------------------------------------------ inferences
+def build_branches(ctx):
+    """branches.json — the Branch Source Registry as emitted (Gate 5). Public fields only; no counts by
+    branch, no rankings. AUTHOR_RATIFIED rows are the only sources a cell may cite (rule R001); RETIRED
+    rows are kept with their reason so the audit trail is visible."""
+    from .registry import admitted_domains, fallback_only_ids, enforcement_on
+    fallback = set(fallback_only_ids(ctx.config))
+    rows = []
+    for r in ctx.registry:
+        primary, extra = admitted_domains(r)
+        rows.append(OrderedDict([
+            ("registry_id", r.get("registry_id")), ("branch", r.get("branch")),
+            ("standard_title", r.get("standard_title")), ("authority_tier", r.get("authority_tier")),
+            ("speaks_for", r.get("speaks_for")), ("scope_caveat", r.get("scope_caveat")),
+            ("publisher_domain", r.get("publisher_domain")), ("canonical_url", r.get("canonical_url")),
+            ("fetch_mode", r.get("fetch_mode")), ("status", r.get("status")),
+            ("reason_code", r.get("reason_code") or None), ("author_note", r.get("author_note") or None),
+            ("fallback_only", r.get("registry_id") in fallback),
+            ("admitted_domains", [d for d in [primary] + extra if d]),
+            ("lineage_domains", extra),
+            ("author_decision", r.get("author_decision")), ("initials", r.get("initials")),
+            ("decision_date", r.get("decision_date")),
+        ]))
+    policy = {
+        "registry_only_enforcement": enforcement_on(ctx.config),
+        "registry_fallback_only_rows": sorted(fallback),
+        "registry_breadth": s(ctx.config.get("registry_breadth")),
+        "lineage_host_policy": s(ctx.config.get("lineage_host_policy")),
+        "fetch_mode_confirmation": s(ctx.config.get("fetch_mode_confirmation")),
+        "gate5_status": s(ctx.config.get("gate5_status")),
+        "no_ranking": "Registry rows are listed per branch; the app never renders per-branch counts or percentages.",
+    }
+    return {"registry": rows, "policy": policy,
+            "counts": {"rows": len(rows), "ratified": sum(r["status"] == "AUTHOR_RATIFIED" for r in rows),
+                       "retired": sum(r["status"] == "RETIRED" for r in rows)}}
+
+
 def build_inferences(ctx, cells):
     wb = ctx.wb
     inh = ctx.inherited57

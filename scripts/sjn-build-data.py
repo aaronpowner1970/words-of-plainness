@@ -36,7 +36,7 @@ from sjn_pipeline.textnorm import style_flags  # noqa: E402
 
 PIPELINE_VERSION = "1.0.0"
 EMITTED_FILES = ["meta.json", "predicates.json", "cells.json", "inferences.json", "godhead.json",
-                 "vectors.json", "clarifications.json", "glossary.json", "ranges.json"]
+                 "vectors.json", "clarifications.json", "glossary.json", "ranges.json", "branches.json"]
 
 
 def log(msg):
@@ -149,7 +149,12 @@ def main():
     clar = emit.build_clarifications(ctx, decisions, targets)
     glossary, style2 = emit.build_glossary(ctx)
     ranges = emit.build_ranges(ctx, inferences, cells)
+    branches_reg = emit.build_branches(ctx)
     style = style1 + style2
+    for r in branches_reg["registry"]:
+        for f in ("scope_caveat", "speaks_for", "standard_title"):
+            for flag in style_flags(r[f] or ""):
+                style.append({"file": "branches.json", "id": r["registry_id"], "field": f, "flag": flag})
     for g in godhead:
         for f in ("proposition", "teaching_use", "caution"):
             for flag in style_flags(g[f]):
@@ -261,6 +266,7 @@ def main():
             "released_result_cells": sum(c["metric_class"] != "EXCLUDED" for c in cells),
             "lineage_only_cells": len(lineage_ids), "inferences": len(inferences), "godhead": len(godhead),
             "vectors": len(vectors), "clarification_cases": len(clar["cases"]),
+            "registry_rows": branches_reg["counts"]["rows"], "registry_ratified": branches_reg["counts"]["ratified"],
             "phrase_assertions": {k: {"total": sum(1 for t in targets if t.kind == k and t.status == "ASSERT" and not t.dropped),
                                       "pass": sum(1 for t in targets if t.kind == k and t.result == "PASS" and not t.dropped),
                                       "dropped": sum(1 for t in targets if t.kind == k and t.dropped)}
@@ -290,6 +296,7 @@ def main():
             "clarifications.json": "{policy, cases[ICC-001, ICC-002: … sources, dropped_sources], triggers (deterministic), deferred_triggers, vocabulary, release_summary}",
             "glossary.json": "{terms, hazard_types(10), rendered_states}",
             "ranges.json": "{ranges{metric_key: stat from Sensitivity Ranges sheet}, inference_stats{INF-xx}, sjn_stat_contract, denominators, not_counted_layers}",
+            "branches.json": "{registry:[Branch Source Registry rows: registry_id, branch, standard_title, authority_tier, speaks_for, scope_caveat, publisher_domain, canonical_url, fetch_mode, status, fallback_only, admitted_domains, lineage_domains], policy{registry_only_enforcement, registry_fallback_only_rows, lineage_host_policy}, counts}",
         },
     }
 
@@ -310,6 +317,7 @@ def main():
         "clarifications.json": {"app_master_version": version, "canonical_hash": h1, **clar},
         "glossary.json": {"app_master_version": version, "canonical_hash": h1, **glossary},
         "ranges.json": {"app_master_version": version, "canonical_hash": h1, **ranges},
+        "branches.json": {"app_master_version": version, "canonical_hash": h1, **branches_reg},
     }
     for name, obj in files.items():
         dump(os.path.join(args.out, name), obj)

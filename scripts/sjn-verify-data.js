@@ -15,7 +15,7 @@ const crypto = require("crypto");
 
 const DIR = path.join(__dirname, "..", "src", "_data", "sjn");
 const REQUIRED = ["meta.json", "predicates.json", "cells.json", "inferences.json", "godhead.json",
-  "vectors.json", "clarifications.json", "glossary.json", "ranges.json"];
+  "vectors.json", "clarifications.json", "glossary.json", "ranges.json", "branches.json"];
 const problems = [];
 const fail = (m) => problems.push(m);
 
@@ -52,6 +52,41 @@ if (!fs.existsSync(path.join(DIR, "meta.json"))) {
     if (!pa[k] || pa[k].pass !== pa[k].total) fail(`phrase assertions ${k}: ${pa[k] && pa[k].pass}/${pa[k] && pa[k].total}`);
   }
   if (meta.policies && meta.policies.full_branch_map_enabled !== false) fail("full_branch_map_enabled must be false");
+
+  // R001 (Gate 5 — registry-only citations). The pipeline already runs R001 as a BLOCK rule; this is an
+  // independent re-check of the committed data set so the guard does not depend on the Python run alone:
+  // every citation URL on a cell must sit on a host admitted by an AUTHOR_RATIFIED Branch Source Registry
+  // row of that cell's own branch. Retired lineage-only rows are not citations.
+  const bPath = path.join(DIR, "branches.json");
+  const cPath = path.join(DIR, "cells.json");
+  if (fs.existsSync(bPath) && fs.existsSync(cPath)) {
+    const branches = JSON.parse(fs.readFileSync(bPath, "utf8"));
+    const cells = JSON.parse(fs.readFileSync(cPath, "utf8"));
+    const enforce = !!(branches.policy && branches.policy.registry_only_enforcement);
+    const r001 = (meta.rules || []).find((r) => r.rule === "R001");
+    if (enforce && !(r001 && r001.status === "PASS")) fail(`R001 registry-only rule not PASS in meta (status ${r001 && r001.status})`);
+    const norm = (h) => (h || "").toLowerCase().replace(/^www\./, "");
+    const reg = (h) => h.split(".").slice(-2).join(".");   // organization-level domain, as in sjn_pipeline/registry.py
+    const matches = (host, domain) => host === domain || host.endsWith("." + domain) || reg(host) === reg(domain);
+    const idx = {};
+    for (const row of branches.registry || []) {
+      if (row.status !== "AUTHOR_RATIFIED") continue;
+      (idx[row.branch] = idx[row.branch] || []).push(...(row.admitted_domains || []).map(norm));
+    }
+    const viol = [];
+    for (const c of cells.cells || []) {
+      if (!c.evidence || c.lineage_only) continue;
+      for (const k of ["authority_url", "text_url"]) {
+        const u = c.evidence[k];
+        if (!u) continue;
+        let host = "";
+        try { host = norm(new URL(u).hostname); } catch (e) { viol.push(`${c.id}: unparseable URL ${u}`); continue; }
+        if (!(idx[c.branch] || []).some((d) => matches(host, d))) viol.push(`${c.id} (${c.branch}): ${host}`);
+      }
+    }
+    if (enforce && viol.length) fail(`R001: ${viol.length} citation host(s) outside the branch registry: ${viol.slice(0, 6).join("; ")}`);
+    if (enforce && !(branches.counts && branches.counts.ratified > 0)) fail("R001: branches.json carries no AUTHOR_RATIFIED registry rows");
+  }
 }
 
 if (problems.length) {
