@@ -24,7 +24,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from sjn_pipeline.workbook import Workbook, s  # noqa: E402
-from sjn_pipeline.registry import (load_registry, ratified, fallback_only_ids, admitted_domains, config_list,  # noqa: E402
+from sjn_pipeline.registry import (load_registry, ratified, fallback_only_ids, admitted_domains, admission, config_list,  # noqa: E402
                                    reception_scope, is_dialogue_only, is_translation_witness, is_witness_row,
                                    citation_refusal, refusal_reason)
 
@@ -153,17 +153,24 @@ class Registry:
         return tier
 
     def public(self, rid):
-        """Fields an agent may see about a standard: never the URL."""
+        """Fields an agent may see about a standard: never a URL. Every text field is scrubbed — a
+        reception_note may legitimately carry one (BSR-MW-03's opens `LINKED FROM: https://…`, AC-15)."""
+        from .textutil import scrub_urls
         r = self.by_id[rid]
-        return {"registry_id": rid, "branch": r["branch"], "standard_title": r["standard_title"],
-                "authority_tier": r["authority_tier"], "speaks_for": r["speaks_for"],
-                "reception_scope": reception_scope(r), "reception_note": s(r.get("reception_note")),
-                "scope_caveat": r["scope_caveat"], "fallback_only": rid in self.fallback_ids,
+        return {"registry_id": rid, "branch": r["branch"], "standard_title": scrub_urls(r["standard_title"]),
+                "authority_tier": r["authority_tier"], "speaks_for": scrub_urls(r["speaks_for"]),
+                "reception_scope": reception_scope(r), "reception_note": scrub_urls(s(r.get("reception_note"))),
+                "scope_caveat": scrub_urls(r["scope_caveat"]), "fallback_only": rid in self.fallback_ids,
                 "witness_only": is_witness_row(r)}
 
     def domains(self, rid):
-        primary, extra = admitted_domains(self.by_id[rid])
-        return [primary] + extra
+        """Hosts the row admits under R001 (publisher_domain; plus the AC-15 official domain). Empty for a
+        refused row."""
+        primary, extra = admitted_domains(self.by_id[rid], self.config)
+        return [d for d in [primary] + extra if d]
+
+    def admission(self, rid):
+        return admission(self.by_id[rid], self.config)
 
 
 def load_predicates(wb):

@@ -11,8 +11,9 @@ Per-standard locate. The locator is called ONCE PER STANDARD with that standard'
 when they fit the budget, otherwise the hybrid ranking within that standard). Every standard that
 yields a candidate gets a GUARANTEED verification slot for its best candidate; the remaining
 candidates compete for VERIFY_EXTRA_CANDIDATES further slots, ranked by authority tier and floor
-claim. A phrase the locator cut too long (>15 words) is not repaired by code — the locator is asked
-once to re-cut it verbatim, and the re-cut goes through the same guards.
+claim. A phrase the locator cut too long (>15 words) is not repaired by code — the locator is asked to
+re-cut it verbatim (up to three attempts, shortening each time; on the last it chooses among the legal
+≤15-word spans enumerated in code), and the re-cut goes through the same guards.
 
 Routing. The primary verifier judges every slotted candidate. The adjudicator (opus) judges only the
 slice: candidates on the caveated rows, on fallback-only rows, on the guarded Synodikon row, and
@@ -24,10 +25,36 @@ the cell state records where it stopped; re-running continues from the audit log
 import json
 import os
 
-from .config import MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES
+import re
+
+from .config import MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES, PHRASE_MAX_WORDS
 from .registry import tier_rank
-from .textutil import scrub_urls
+from .textutil import scrub_urls, phrase_word_count
 from . import guards, prompts, retrieval
+
+
+def legal_spans(phrase, limit=PHRASE_MAX_WORDS, cap=12):
+    """The ≤limit-word sub-spans of an over-long phrase that start at its beginning or after a clause mark
+    (, ; : —) and end at its end or at a clause mark — offered to the locator to CHOOSE from, shortest
+    first. Every span is verbatim by construction (a contiguous run of the phrase's own words)."""
+    ws = phrase.split()
+    if not ws:
+        return []
+    starts = {0} | {i + 1 for i, w in enumerate(ws[:-1]) if re.search(r"[,;:—–]$", w)}
+    ends = {len(ws)} | {i + 1 for i, w in enumerate(ws) if re.search(r"[,;:—–.]$", w)}
+    out = []
+    for a in sorted(starts):
+        for b in sorted(ends):
+            n = b - a
+            if 2 <= n <= limit:
+                out.append(" ".join(ws[a:b]))
+    if len(ws) > limit:
+        out.append(" ".join(ws[:limit])); out.append(" ".join(ws[-limit:]))
+    seen, uniq = set(), []
+    for sp in sorted(out, key=lambda x: (len(x.split()), x)):
+        if sp not in seen:
+            seen.add(sp); uniq.append(sp)
+    return uniq[:cap]
 
 ACCEPTS = ("ACCEPT", "ACCEPT_WITH_CAVEAT")
 FLOOR_ORDER = {"FULL": 0, "PARTIAL": 1, "WORD_ONLY": 2}
@@ -104,23 +131,40 @@ class CellRunner:
             return [r for r in standards if not self.reg.is_fallback(r["registry_id"])]
         return [r for r in standards if self.reg.is_fallback(r["registry_id"])]      # pass two: the fallback row(s) only
 
+    RECUT_ATTEMPTS = 3
+
     def _recut(self, cell, pred, cand, chunk, key, rid, pass_no):
-        """One re-cut call for an over-long phrase. Returns (status, candidate_or_None, raw)."""
+        """Re-cut an over-long phrase until it fits the ≤15-word rule (2026-09-12: shorten, don't give up).
+
+        Up to RECUT_ATTEMPTS locator calls. Attempt 1 asks for the shortest span carrying the predicate;
+        attempt 2 feeds back the re-cut that was still too long with its word count; attempt 3 also lists
+        the legal ≤15-word spans of the original phrase (enumerated in code, chosen by the locator — code
+        never writes a phrase). The candidate is dropped only when the locator returns NO_VALID_CUT or
+        every attempt is still over the limit. Returns (status, candidate_or_None, raw, attempts)."""
         chunk_view = {"chunk_key": key, "registry_id": chunk["registry_id"], "locator": chunk["locator"], "text": scrub_urls(chunk["text"])}
-        user = prompts.recut_user(pred, chunk_view, cand)
-        guards.assert_no_urls({"u": user})
-        out, rec, parsed, _ = self._call("recut", prompts.RECUT_SYSTEM, user, self.locator_model, 600,
-                                         {"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"],
-                                          "pass": pass_no, "registry_id": rid, "recut_of": cand.get("phrase", "")[:80]})
-        if out is None:
-            return "PENDING", None, None
-        parsed = parsed or {}
-        if parsed.get("phrase"):
-            new = dict(cand)
-            new.update({"phrase": parsed["phrase"], "rationale": parsed.get("rationale") or cand.get("rationale", ""),
-                        "floor_claim": parsed.get("floor_claim") or cand.get("floor_claim"), "recut_from": cand.get("phrase")})
-            return "DONE", new, out[:600]
-        return "NO_VALID_CUT", None, out[:600]
+        too_long, raws = [], []
+        for attempt in range(self.RECUT_ATTEMPTS):
+            spans = legal_spans(cand.get("phrase", "")) if attempt >= 2 else None
+            user = prompts.recut_user(pred, chunk_view, cand, attempts=too_long or None, legal_spans=spans)
+            guards.assert_no_urls({"u": user})
+            out, rec, parsed, _ = self._call("recut", prompts.RECUT_SYSTEM, user, self.locator_model, 600,
+                                             {"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"],
+                                              "pass": pass_no, "registry_id": rid, "recut_of": cand.get("phrase", "")[:80], "recut_attempt": attempt + 1})
+            if out is None:
+                return "PENDING", None, None, too_long
+            raws.append(out[:600])
+            parsed = parsed or {}
+            phrase = (parsed.get("phrase") or "").strip()
+            if not phrase:
+                return "NO_VALID_CUT", None, " || ".join(raws), too_long
+            if phrase_word_count(phrase) <= PHRASE_MAX_WORDS:
+                new = dict(cand)
+                new.update({"phrase": phrase, "rationale": parsed.get("rationale") or cand.get("rationale", ""),
+                            "floor_claim": parsed.get("floor_claim") or cand.get("floor_claim"), "recut_from": cand.get("phrase"),
+                            "recut_attempts": attempt + 1})
+                return "DONE", new, " || ".join(raws), too_long
+            too_long.append(phrase)
+        return "STILL_TOO_LONG", None, " || ".join(raws), too_long
 
     def locate_standard(self, cell, pred, comp, row, pass_no):
         """Locator call for ONE standard. Returns the per-standard entry (status PENDING when a call
@@ -155,11 +199,12 @@ class CellRunner:
         for cand in parsed.get("candidates", [])[:MAX_CANDIDATES * 2]:
             ok, why, chunk = guards.vet_candidate(cand, by_key, cell["branch"], self.reg, allow_fallback=include_fallback)
             if not ok and why.startswith("phrase exceeds") and chunk is not None:
-                status, new, raw = self._recut(cell, pred, cand, chunk, cand.get("chunk_key"), rid, pass_no)
+                status, new, raw, too_long = self._recut(cell, pred, cand, chunk, cand.get("chunk_key"), rid, pass_no)
                 if status == "PENDING":
                     entry["status"] = "PENDING"
                     return entry
-                entry["recuts"].append({"from": cand.get("phrase"), "status": status, "to": (new or {}).get("phrase"), "raw": raw})
+                entry["recuts"].append({"from": cand.get("phrase"), "status": status, "to": (new or {}).get("phrase"),
+                                        "attempts": len(too_long) + 1, "still_too_long": too_long, "raw": raw})
                 if new is not None:
                     ok, why, chunk = guards.vet_candidate(new, by_key, cell["branch"], self.reg, allow_fallback=include_fallback)
                     cand = new

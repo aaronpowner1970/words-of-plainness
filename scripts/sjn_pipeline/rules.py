@@ -364,9 +364,9 @@ def run_rules(ctx, targets, runner, decisions, gates, canonical, propagation_iss
     add("P031", len(fut) == 3 and all(d["status"] == "BLOCKED" for d in fut), "3 future decisions registered BLOCKED",
         f"{len(fut)} registered; statuses={[d['status'] for d in fut]}")
     # R001 (Gate 5, APP CONFIG registry_only_enforcement): every cell citation's host must belong to an
-    # AUTHOR_RATIFIED Branch Source Registry row of the cell's own branch. Keyed on publisher_domain; hosts a
-    # LINEAGE row names itself (canonical_url / standard_title) are admitted and reported separately so the
-    # Gate 7 migration (lineage_host_policy) can find them. Retired historical witnesses (lineage-only rows)
+    # AUTHOR_RATIFIED Branch Source Registry row of the cell's own branch. Keyed on publisher_domain ONLY
+    # (parser rule of 2026-09-12, registry.admission): a host named in prose is never admitted; a
+    # controlled-storage row is admitted under AC-15 only with the `LINKED FROM: ` prefix on its note. Retired historical witnesses (lineage-only rows)
     # are not citations and are listed, not judged. Blocking while the switch is True.
     # Extended 2026-09-11 (v2.25 reception axis, AUTHOR RATIFIED): (a) a row whose reception_scope is
     # DIALOGUE_ONLY is admitted for provenance but REFUSED as a citation (dialogue_text_policy);
@@ -378,7 +378,7 @@ def run_rules(ctx, targets, runner, decisions, gates, canonical, propagation_iss
     from .registry import (branch_domain_index, resolve_row, enforcement_on, ratified, citation_refusal,
                            refusal_reason, is_translation_witness)
     enforce = enforcement_on(ctx.config)
-    idx = branch_domain_index(ctx.registry)
+    idx = branch_domain_index(ctx.registry, ctx.config)
     viol, lineage_admitted, retired_rows, checked = [], [], [], 0
     refused_named, witness_alone, dialogue_refused = [], [], []
     for r in q:

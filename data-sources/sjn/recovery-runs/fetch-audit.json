@@ -1,6 +1,6 @@
 {
- "audited_at": "2026-09-12T02:38:23Z",
- "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25_RECEPTION_AXIS_20260912.xlsx",
+ "audited_at": "2026-09-12T15:20:47Z",
+ "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r2_CONTROLLED_STORAGE_20260912.xlsx",
  "policy": "ratified URL requested byte for byte; redirects followed one hop at a time on the same host only; a cross-host redirect is recorded and refused; one request per URL; no crawling",
  "rows": [
   {
@@ -48,7 +48,7 @@
    "error": "",
    "ok": true,
    "content_type": "text/html; charset=utf-8",
-   "bytes": 116774,
+   "bytes": 116773,
    "verdict": "OK"
   },
   {
@@ -139,15 +139,8 @@
    "canonical_url": "https://www.goarch.org/-/the-basic-sources-of-the-teachings-of-the-eastern-orthodox-church",
    "fetch_mode": "RENDERED - one-time archived fetch, provenance recorded",
    "reception_scope": "JURISDICTIONAL",
-   "status": 403,
-   "final_url": "https://www.goarch.org/-/the-basic-sources-of-the-teachings-of-the-eastern-orthodox-church",
-   "redirects": [],
-   "cross_host_redirect": "",
-   "error": "HTTP 403",
-   "ok": false,
-   "content_type": "text/html; charset=UTF-8",
-   "bytes": 5968,
-   "verdict": "HOST: HTTP 403 to automated fetch (bot challenge)"
+   "status": null,
+   "verdict": "HOST_RETIRED: not requested — retired 2026-09-12 — its bot check fails for human users in an ordinary browser, so a citation there cannot be audited by a reader; BSR-EO-07 re-hosted to acrod.org (BSR-EO-14 goarchdiocese.ca)"
   },
   {
    "registry_id": "BSR-EO-04",
@@ -503,24 +496,18 @@
   {
    "registry_id": "BSR-MW-03",
    "branch": "Methodist / Wesleyan",
-   "canonical_url": "https://globalmethodist.org/what-we-believe/",
-   "fetch_mode": "HTML (apex host; do NOT normalise to www - www is a different site and 404s)",
+   "canonical_url": "https://irp.cdn-website.com/1876eae9/files/uploaded/2024-Book-of-Doctrines-Discipline-FINAL-15JAN2025.pdf",
+   "fetch_mode": "PDF - text layer present; controlled storage, admitted under the 12 Sep 2026 ruling",
    "reception_scope": "JURISDICTIONAL",
-   "status": 301,
-   "final_url": "https://globalmethodist.org/what-we-believe/",
-   "redirects": [
-    [
-     301,
-     "https://globalmethodist.org/what-we-believe/",
-     "https://www.globalmethodist.org/what-we-believe/"
-    ]
-   ],
-   "cross_host_redirect": "https://www.globalmethodist.org/what-we-believe/",
-   "error": "REDIRECT-CROSS-HOST: globalmethodist.org -> www.globalmethodist.org (301 https://www.globalmethodist.org/what-we-believe/)",
-   "ok": false,
-   "content_type": "",
-   "bytes": 0,
-   "verdict": "HOST: the ratified URL redirects onto another host (https://www.globalmethodist.org/what-we-believe/); refused, not followed"
+   "status": 200,
+   "final_url": "https://irp.cdn-website.com/1876eae9/files/uploaded/2024-Book-of-Doctrines-Discipline-FINAL-15JAN2025.pdf",
+   "redirects": [],
+   "cross_host_redirect": "",
+   "error": "",
+   "ok": true,
+   "content_type": "application/pdf",
+   "bytes": 2622600,
+   "verdict": "OK"
   },
   {
    "registry_id": "BSR-MW-04",
@@ -535,7 +522,7 @@
    "error": "",
    "ok": true,
    "content_type": "text/html; charset=UTF-8",
-   "bytes": 219064,
+   "bytes": 218836,
    "verdict": "OK"
   },
   {
@@ -579,18 +566,18 @@
   {
    "registry_id": "BSR-EO-07",
    "branch": "Eastern Orthodox",
-   "canonical_url": "https://www.goarch.org/-/the-divine-liturgy-of-saint-john-chrysostom",
-   "fetch_mode": "HTML - plain; do NOT follow other /-/ paths on this host, most return 403",
+   "canonical_url": "https://www.acrod.org/prayercorner/liturgicaltexts/divineliturgy",
+   "fetch_mode": "HTML - plain, no JavaScript, no bot challenge",
    "reception_scope": "UNIVERSAL",
-   "status": 403,
-   "final_url": "https://www.goarch.org/-/the-divine-liturgy-of-saint-john-chrysostom",
+   "status": 200,
+   "final_url": "https://www.acrod.org/prayercorner/liturgicaltexts/divineliturgy",
    "redirects": [],
    "cross_host_redirect": "",
-   "error": "HTTP 403",
-   "ok": false,
+   "error": "",
+   "ok": true,
    "content_type": "text/html; charset=UTF-8",
-   "bytes": 5881,
-   "verdict": "HOST: HTTP 403 to automated fetch (bot challenge)"
+   "bytes": 63802,
+   "verdict": "OK"
   },
   {
    "registry_id": "BSR-EO-08",
@@ -670,6 +657,38 @@
    "ok": true,
    "content_type": "text/html; charset=UTF-8",
    "bytes": 134481,
+   "verdict": "OK"
+  },
+  {
+   "registry_id": "BSR-EO-13",
+   "branch": "Eastern Orthodox",
+   "canonical_url": "https://www.newadvent.org/fathers/3813.htm",
+   "fetch_mode": "HTML - pages truncate on retrieval; witness role only",
+   "reception_scope": "TRANSLATION_WITNESS",
+   "status": 200,
+   "final_url": "https://www.newadvent.org/fathers/3813.htm",
+   "redirects": [],
+   "cross_host_redirect": "",
+   "error": "",
+   "ok": true,
+   "content_type": "text/html",
+   "bytes": 143109,
+   "verdict": "OK"
+  },
+  {
+   "registry_id": "BSR-EO-14",
+   "branch": "Eastern Orthodox",
+   "canonical_url": "https://goarchdiocese.ca/divine-liturgy-of-saint-john-chrysostom/",
+   "fetch_mode": "HTML plus text-layer PDF at /wp-content/uploads/2011/10/Divine-Liturgy-of-Saint-John-Chrysostom-PDF.pdf",
+   "reception_scope": "UNIVERSAL",
+   "status": 200,
+   "final_url": "https://goarchdiocese.ca/divine-liturgy-of-saint-john-chrysostom/",
+   "redirects": [],
+   "cross_host_redirect": "",
+   "error": "",
+   "ok": true,
+   "content_type": "text/html; charset=UTF-8",
+   "bytes": 232653,
    "verdict": "OK"
   }
  ]

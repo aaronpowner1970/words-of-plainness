@@ -14,7 +14,7 @@ from sjn_pipeline.textnorm import normalize, pdf_repair, phrase_word_count, cont
 
 __all__ = ["segments", "fix_mojibake", "strip_footnote_digits", "clean", "sha", "normalize",
            "pdf_repair", "phrase_word_count", "contains", "join", "words", "has_greek", "has_polytonic",
-           "nfc", "strip_foreign_parentheticals", "scrub_urls"]
+           "nfc", "strip_foreign_parentheticals", "scrub_urls", "dehyphenate", "hyphenation_residue"]
 
 _SKIP_TAGS = {"sup", "script", "style", "noscript", "figcaption", "button", "form", "input", "select", "option"}
 
@@ -124,3 +124,58 @@ def strip_foreign_parentheticals(text, latin_markers=("in duabus naturis", "inco
     out = _PAREN.sub(repl, text or "")
     out = re.sub(r"\s+([,.;:])", r"\1", out)
     return clean(out), removed
+
+
+# ---------------------------------------------------------------- hyphenation artifacts (2026-09-12)
+# Line-break hyphenation carried into the fetched text breaks verbatim matching: the Thirty-Nine
+# Articles page carries "ever- lasting" in its own HTML, the PCUSA and ROEA PDFs carry "na-\nture" and
+# "heav-\nenly", and a locator that quotes "everlasting" is then refused as "not present verbatim"
+# (cal-3, Q-341). A word split across a line break is joined here, at extraction, for every row.
+#
+# Decision per split `A- b` (hyphen, optional line break, lowercase continuation), using the whole
+# document's own vocabulary as evidence:
+#   1. `b` is a coordinating word ("and", "or", "et", …): a SUSPENDED hyphen ("wine- and beer-cellars",
+#      "patres- et matresfamilias") — left alone.
+#   2. the closed form "Ab" occurs elsewhere in the document — join without the hyphen ("everlasting").
+#   3. the hyphenated compound "A-b" occurs elsewhere unbroken — the break fell on a real hyphen
+#      ("life-\ncreating" → "life-creating"); the hyphen is kept and the break removed.
+#   4. otherwise — join without the hyphen (line-break hyphenation is the overwhelmingly common case).
+# Only a break at a line end (`-\n`) or the single-space residue of one (`- `) qualifies; a hyphen
+# followed by a capital ("Thirty- Nine") or by punctuation is never touched.
+_SUSPENDED_NEXT = {"and", "or", "nor", "et", "aut", "vel", "to", "the", "a", "an", "of", "as", "but", "und", "oder"}
+_SPLIT = re.compile(r"(?<![\w-])([A-Za-z]{2,})[-‐‑]( ?[ \t]*\r?\n[ \t]*| )([a-z][A-Za-z]*)")
+
+
+def _vocab(text):
+    """Word forms of the document: closed words and hyphenated compounds, casefolded."""
+    return set(w.casefold() for w in re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)*", text or ""))
+
+
+def dehyphenate(text, vocab_text=None, stats=None):
+    """Join words split across a line break (see the note above). `vocab_text` supplies the evidence
+    vocabulary (defaults to `text` itself); `stats`, if given, is a dict that receives counts per rule."""
+    if not text:
+        return text
+    vocab = _vocab(vocab_text if vocab_text is not None else text)
+    counts = stats if stats is not None else {}
+
+    def repl(m):
+        a, b = m.group(1), m.group(3)
+        if b.casefold() in _SUSPENDED_NEXT:
+            counts["suspended_kept"] = counts.get("suspended_kept", 0) + 1
+            return m.group(0)
+        closed, compound = (a + b).casefold(), f"{a}-{b}".casefold()
+        if closed in vocab:
+            counts["joined_closed"] = counts.get("joined_closed", 0) + 1
+            return a + b
+        if compound in vocab:
+            counts["joined_compound"] = counts.get("joined_compound", 0) + 1
+            return f"{a}-{b}"
+        counts["joined_default"] = counts.get("joined_default", 0) + 1
+        return a + b
+    return _SPLIT.sub(repl, text)
+
+
+def hyphenation_residue(text):
+    """Remaining `word- word` splits (lowercase continuation) after extraction — reported, never silent."""
+    return [m.group(0) for m in _SPLIT.finditer(text or "") if m.group(3).casefold() not in _SUSPENDED_NEXT]

@@ -1,0 +1,273 @@
+{
+ "generated_at": "2026-09-12T15:12:57Z",
+ "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r2_CONTROLLED_STORAGE_20260912.xlsx",
+ "app_master_version": "v2.25r2 CONTROLLED STORAGE",
+ "controlled_storage_policy": "ADMIT_IF_LINKED_FROM_OFFICIAL_DOMAIN",
+ "parser_rule": "RETIRED rule (cal-1 … cal-3): allowlist = publisher_domain + the host of canonical_url + EVERY domain-shaped token found by regex in canonical_url and standard_title, prose included (sjn_pipeline.registry.admitted_domains, now legacy_admitted_domains). The merge script's domain_of() takes only the first hostname, so the workbook's publisher_domain column and R001's effective allowlist disagreed on every row whose URL field carried prose. CURRENT rule (2026-09-12, registry.admission): allowlist = publisher_domain ONLY; no host is read from prose. AC-15 exception: a row whose publisher_domain is a controlled-storage host is admitted only when its note opens with `LINKED FROM: <url on the official domain>` and APP CONFIG controlled_storage_policy = ADMIT_IF_LINKED_FROM_OFFICIAL_DOMAIN; that official domain is admitted beside it. Absent the prefix, refused.",
+ "allowlist_per_branch": {
+  "Roman Catholic": {
+   "retired_parser": {
+    "ewtn.com": "BSR-RC-03",
+    "papalencyclicals.net": "BSR-RC-04",
+    "sourcebooks.web.fordham.edu": "BSR-RC-05",
+    "vatican.va": "BSR-RC-01",
+    "vaticannews.va": "BSR-RC-06 (lineage)"
+   },
+   "current_rule": {
+    "ewtn.com": "BSR-RC-03",
+    "papalencyclicals.net": "BSR-RC-04",
+    "sourcebooks.web.fordham.edu": "BSR-RC-05",
+    "vatican.va": "BSR-RC-01"
+   }
+  },
+  "Lutheran": {
+   "retired_parser": {
+    "bookofconcord.org": "BSR-LU-01",
+    "catechism.cph.org": "BSR-LU-03",
+    "files.lcms.org": "BSR-LU-02"
+   },
+   "current_rule": {
+    "bookofconcord.org": "BSR-LU-01",
+    "catechism.cph.org": "BSR-LU-03",
+    "files.lcms.org": "BSR-LU-02"
+   }
+  },
+  "Reformed / Presbyterian": {
+   "retired_parser": {
+    "crcna.org": "BSR-RP-05",
+    "opc.org": "BSR-RP-01",
+    "pcusa.org": "BSR-RP-04"
+   },
+   "current_rule": {
+    "crcna.org": "BSR-RP-05",
+    "opc.org": "BSR-RP-01",
+    "pcusa.org": "BSR-RP-04"
+   }
+  },
+  "Baptist": {
+   "retired_parser": {
+    "abc-usa.org": "BSR-BA-03",
+    "bfm.sbc.net": "BSR-BA-01",
+    "the1689confession.com": "BSR-BA-02"
+   },
+   "current_rule": {
+    "abc-usa.org": "BSR-BA-03",
+    "bfm.sbc.net": "BSR-BA-01",
+    "the1689confession.com": "BSR-BA-02"
+   }
+  },
+  "Methodist / Wesleyan": {
+   "retired_parser": {
+    "irp.cdn-website.com": "BSR-MW-03",
+    "umc.org": "BSR-MW-01",
+    "wesleyan.org": "BSR-MW-04"
+   },
+   "current_rule": {
+    "globalmethodist.org": "BSR-MW-03 (official_link)",
+    "irp.cdn-website.com": "BSR-MW-03 (controlled_storage)",
+    "umc.org": "BSR-MW-01",
+    "wesleyan.org": "BSR-MW-04"
+   }
+  },
+  "Anglican": {
+   "retired_parser": {
+    "anglicanchurch.net": "BSR-AN-05",
+    "ccel.org": "BSR-AN-03",
+    "churchofengland.org": "BSR-AN-01",
+    "episcopalchurch.org": "BSR-AN-04"
+   },
+   "current_rule": {
+    "anglicanchurch.net": "BSR-AN-05",
+    "ccel.org": "BSR-AN-03",
+    "churchofengland.org": "BSR-AN-01",
+    "episcopalchurch.org": "BSR-AN-04"
+   }
+  },
+  "Mennonite / Anabaptist": {
+   "retired_parser": {
+    "anabaptistresources.org": "BSR-MA-02",
+    "mennoniteusa.org": "BSR-MA-01"
+   },
+   "current_rule": {
+    "anabaptistresources.org": "BSR-MA-02",
+    "mennoniteusa.org": "BSR-MA-01"
+   }
+  },
+  "Eastern Orthodox": {
+   "retired_parser": {
+    "acrod.org": "BSR-EO-07",
+    "antiochpatriarchate.org": "BSR-EO-11",
+    "ccel.org": "BSR-EO-06",
+    "goarch.org": "BSR-EO-03",
+    "goarchdiocese.ca": "BSR-EO-14",
+    "holycouncil.org": "BSR-EO-10",
+    "immspartis.gr": "BSR-EO-12",
+    "maximologia.org": "BSR-EO-05",
+    "newadvent.org": "BSR-EO-13",
+    "oca.org": "BSR-EO-01",
+    "pravoslavieto.com": "BSR-EO-04",
+    "roea.org": "BSR-EO-08"
+   },
+   "current_rule": {
+    "acrod.org": "BSR-EO-07",
+    "antiochpatriarchate.org": "BSR-EO-11",
+    "ccel.org": "BSR-EO-06",
+    "goarch.org": "BSR-EO-03",
+    "goarchdiocese.ca": "BSR-EO-14",
+    "holycouncil.org": "BSR-EO-10",
+    "immspartis.gr": "BSR-EO-12",
+    "maximologia.org": "BSR-EO-05",
+    "newadvent.org": "BSR-EO-13",
+    "oca.org": "BSR-EO-01",
+    "pravoslavieto.com": "BSR-EO-04",
+    "roea.org": "BSR-EO-08"
+   }
+  }
+ },
+ "disagreements": [
+  {
+   "registry_id": "BSR-RC-06",
+   "branch": "Roman Catholic",
+   "publisher_domain": "vatican.va",
+   "extra_host_under_retired_parser": "vaticannews.va",
+   "prose": [
+    "standard_title: “…ostles', Nicene, Athanasian) on vatican.va / vaticannews.va…”"
+   ],
+   "still_admitted_for_branch_via_other_row": false,
+   "inverted": false
+  },
+  {
+   "registry_id": "BSR-AN-03",
+   "branch": "Anglican",
+   "publisher_domain": "ccel.org",
+   "extra_host_under_retired_parser": "churchofengland.org",
+   "prose": [
+    "canonical_url: “…el.org as cited (1 released cell); official: churchofengland.org BCP \"At Morning Prayer\"…”"
+   ],
+   "still_admitted_for_branch_via_other_row": true,
+   "inverted": false
+  },
+  {
+   "registry_id": "BSR-MW-03",
+   "branch": "Methodist / Wesleyan",
+   "publisher_domain": "irp.cdn-website.com",
+   "extra_host_under_current_rule": [
+    "globalmethodist.org"
+   ],
+   "reason": "AC-15: irp.cdn-website.com admitted as the body's own storage, linked from globalmethodist.org",
+   "linked_from": "https://www.globalmethodist.org/our-beliefs---governance"
+  }
+ ],
+ "refused_rows": [],
+ "canonical_url_host_not_publisher_domain": [],
+ "sweep": {
+  "run_id": "cal-3",
+  "manifest_built_at": "2026-09-12T02:44:52Z",
+  "manifest_workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25_RECEPTION_AXIS_20260912.xlsx",
+  "cells_scanned": 148,
+  "accepted_candidates": 671,
+  "accepted_off_publisher_domain": [
+   {
+    "queue_id": "Q-037",
+    "candidate_id": "Q-037-p1-BSR-AN-03-1",
+    "registry_id": "BSR-AN-03",
+    "locator": "Quicunque Vult (Creed of S. Athanasius), At Morning Prayer",
+    "chunk_host": "churchofengland.org",
+    "publisher_domain": "ccel.org",
+    "final": "ACCEPT",
+    "primary": "ACCEPT"
+   },
+   {
+    "queue_id": "Q-037",
+    "candidate_id": "Q-037-p1-BSR-AN-03-2",
+    "registry_id": "BSR-AN-03",
+    "locator": "Quicunque Vult (Creed of S. Athanasius), At Morning Prayer",
+    "chunk_host": "churchofengland.org",
+    "publisher_domain": "ccel.org",
+    "final": "ACCEPT",
+    "primary": "ACCEPT"
+   },
+   {
+    "queue_id": "Q-293",
+    "candidate_id": "Q-293-p1-BSR-AN-03-1",
+    "registry_id": "BSR-AN-03",
+    "locator": "Quicunque Vult (Creed of S. Athanasius), At Morning Prayer",
+    "chunk_host": "churchofengland.org",
+    "publisher_domain": "ccel.org",
+    "final": "ACCEPT_WITH_CAVEAT",
+    "primary": "ACCEPT_WITH_CAVEAT"
+   },
+   {
+    "queue_id": "Q-309",
+    "candidate_id": "Q-309-p1-BSR-AN-03-1",
+    "registry_id": "BSR-AN-03",
+    "locator": "Quicunque Vult (Creed of S. Athanasius), At Morning Prayer",
+    "chunk_host": "churchofengland.org",
+    "publisher_domain": "ccel.org",
+    "final": "ACCEPT_WITH_CAVEAT",
+    "primary": "ACCEPT_WITH_CAVEAT"
+   }
+  ],
+  "chunk_not_found": [],
+  "primary_accepted_off_publisher_domain": []
+ },
+ "corpus_fetched_off_publisher_domain": [
+  {
+   "registry_id": "BSR-AN-03",
+   "publisher_domain": "ccel.org",
+   "fetched_hosts": [
+    "churchofengland.org"
+   ],
+   "off_publisher_domain": [
+    "churchofengland.org"
+   ],
+   "n_chunks": 1
+  },
+  {
+   "registry_id": "BSR-MW-03",
+   "publisher_domain": "irp.cdn-website.com",
+   "fetched_hosts": [
+    "globalmethodist.org"
+   ],
+   "off_publisher_domain": [
+    "globalmethodist.org"
+   ],
+   "n_chunks": 0
+  },
+  {
+   "registry_id": "BSR-EO-07",
+   "publisher_domain": "acrod.org",
+   "fetched_hosts": [
+    "goarch.org"
+   ],
+   "off_publisher_domain": [
+    "goarch.org"
+   ],
+   "n_chunks": 0
+  }
+ ],
+ "gate2_r001": {
+  "citation_urls_checked": 322,
+  "flips": [
+   {
+    "queue_id": "Q-169",
+    "branch": "Roman Catholic",
+    "rendered_state": "Q",
+    "url": "https://www.vaticannews.va/en/prayers/the-apostles_-creed.html",
+    "retired_parser": "lineage:BSR-RC-06",
+    "current_rule": "REFUSED"
+   }
+  ],
+  "refused_under_current_rule": [
+   {
+    "queue_id": "Q-169",
+    "branch": "Roman Catholic",
+    "rendered_state": "Q",
+    "url": "https://www.vaticannews.va/en/prayers/the-apostles_-creed.html",
+    "retired_parser": "lineage:BSR-RC-06",
+    "current_rule": "REFUSED"
+   }
+  ],
+  "newly_admitted_under_current_rule": []
+ }
+}

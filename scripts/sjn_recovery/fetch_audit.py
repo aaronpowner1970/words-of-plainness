@@ -1,7 +1,7 @@
 """Fetcher audit (cal-3, Fix 2): request every AUTHOR_RATIFIED canonical_url exactly as the registry
 gives it, follow redirects one hop at a time WITHOUT crossing hosts, and record what the host answers.
-Writes data-sources/sjn/recovery-runs/fetch-audit.json. No crawling: one request per ratified URL
-(goarch.org included — its ratified URLs only). Never writes to the workbook.
+Writes data-sources/sjn/recovery-runs/fetch-audit.json. No crawling: one request per ratified URL.
+A retired host (config.RETIRED_HOSTS — goarch.org) is never requested. Never writes to the workbook.
 
   python scripts/sjn_recovery/fetch_audit.py [--workbook PATH]
 """
@@ -19,6 +19,7 @@ sys.path.insert(0, os.path.dirname(HERE))
 from sjn_pipeline.fetch import Fetcher  # noqa: E402
 from sjn_recovery.config import FETCH_AUDIT_PATH  # noqa: E402
 from sjn_recovery.registry import Registry  # noqa: E402
+from sjn_recovery.sources import retired_host  # noqa: E402
 
 
 def verdict_for(fr, url):
@@ -47,7 +48,10 @@ def main():
         url = (r.get("canonical_url") or "").strip()
         rec = {"registry_id": r["registry_id"], "branch": r["branch"], "canonical_url": url,
                "fetch_mode": r.get("fetch_mode"), "reception_scope": (r.get("reception_scope") or "").upper()}
-        if not url.startswith("http"):
+        retired = retired_host(url)
+        if retired:
+            rec.update({"status": None, "verdict": f"HOST_RETIRED: not requested — {retired}"})
+        elif not url.startswith("http"):
             rec.update({"status": None, "verdict": verdict_for(None, url)})
         else:
             fr = fetcher.get(url)

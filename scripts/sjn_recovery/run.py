@@ -42,6 +42,10 @@ def main():
     ap.add_argument("--limit", type=int)
     ap.add_argument("--i-have-author-authorization", action="store_true",
                     help="required: the live run starts only after the author reviews the calibration report")
+    ap.add_argument("--projection-per-cell-usd", type=float, default=0.405,
+                    help="the calibrated per-cell cost the branch is measured against (cal-3: 9.4 calls, 0.405 USD per cell)")
+    ap.add_argument("--branch-cost-cap-usd", type=float, default=None,
+                    help="recorded per branch; the executor (api_executor.py --max-cost-usd) is what enforces it")
     a = ap.parse_args()
     if not a.i_have_author_authorization:
         log("Refusing to start the live run: pass --i-have-author-authorization after the author has reviewed "
@@ -56,6 +60,7 @@ def main():
     llm = LLM(a.run_id, backend=a.backend, model=a.locator_model, log=log)
     runner = CellRunner(llm, reg, preds, comps, os.path.join(RUNS_DIR, a.run_id, "cells"), a.locator_model, vmodels,
                         coder_model=a.coder_model, log=log, run_coder=True)
+    branch_cost = {}
     for br in branches:
         bc = [c for c in cells if c["branch"] == br]
         if a.limit:
@@ -65,14 +70,37 @@ def main():
             st = runner.run_cell(c)
             done += st.get("phase") == "DONE"
         log(f"== {br}: {done}/{len(bc)} open cells DONE; pending calls {len(set(llm.pending))}")
+        branch_cost[br] = branch_spend(llm, bc, a.projection_per_cell_usd, a.branch_cost_cap_usd)
+        log(f"   spend so far: {branch_cost[br]['calls']} metered calls, {branch_cost[br]['cost_usd']:.2f} USD "
+            f"({branch_cost[br]['cost_per_cell_usd']:.3f}/cell vs projection {a.projection_per_cell_usd:.3f}; "
+            f"projected {branch_cost[br]['projected_usd']:.2f}; cap {a.branch_cost_cap_usd})")
         if done == len(bc):
             build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log)
     with open(os.path.join(RUNS_DIR, a.run_id, "run.json"), "w", encoding="utf-8") as fh:
         json.dump({"run_id": a.run_id, "kind": "live", "workbook": os.path.basename(reg.path), "app_master_version": reg.app_master_version,
                    "locator_model": a.locator_model, "verifier_models": vmodels, "coder_model": a.coder_model or a.locator_model,
-                   "backend": a.backend, "prompt_version": prompts.PROMPT_VERSION, "branches": branches,
-                   "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}, fh, indent=1)
+                   "backend": a.backend, "prompt_version": prompts.PROMPT_VERSION, "prompt_versions": prompts.PROMPT_VERSIONS, "branches": branches,
+                   "retrieval": "PER_STANDARD", "routing": runner.routing, "slice_rows": sorted(runner.slice_rows),
+                   "projection_per_cell_usd": a.projection_per_cell_usd, "branch_cost_cap_usd": a.branch_cost_cap_usd,
+                   "branch_spend": branch_cost, "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}, fh, indent=1)
     return 10 if llm.pending else 0
+
+
+def branch_spend(llm, cells, projection_per_cell, cap):
+    """Metered spend of this run on one branch's cells, from the audit log (calls whose meta names one of
+    the branch's queue ids), against the calibrated projection and the per-branch cap."""
+    qids = {c["queue_id"] for c in cells}
+    recs = [r for r in llm._cache.values() if r.get("run_id") == llm.run_id and (r.get("meta") or {}).get("queue_id") in qids]
+    cost = sum(r.get("cost_usd") or 0.0 for r in recs)
+    by_role = {}
+    for r in recs:
+        k = f"{r.get('role')}/{r.get('executor_model') or r.get('model')}"
+        b = by_role.setdefault(k, {"calls": 0, "cost_usd": 0.0})
+        b["calls"] += 1; b["cost_usd"] += r.get("cost_usd") or 0.0
+    return {"cells": len(cells), "calls": len(recs), "cost_usd": round(cost, 4), "calls_per_cell": round(len(recs) / max(1, len(cells)), 2),
+            "cost_per_cell_usd": round(cost / max(1, len(cells)), 4), "projection_per_cell_usd": projection_per_cell,
+            "projected_usd": round(projection_per_cell * len(cells), 2), "cap_usd": cap, "over_cap": bool(cap and cost > cap),
+            "estimated": any((r.get("usage") or {}).get("estimated") for r in recs), "by_role": by_role}
 
 
 if __name__ == "__main__":

@@ -1,0 +1,44 @@
+{
+ "run_id": "cal-3r",
+ "kind": "calibration",
+ "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r2_CONTROLLED_STORAGE_20260912.xlsx",
+ "app_master_version": "v2.25r2 CONTROLLED STORAGE",
+ "locator_model": "sonnet",
+ "verifier_models": [
+  "sonnet",
+  "opus"
+ ],
+ "primary": "sonnet",
+ "adjudicator": "opus",
+ "routing": "SONNET_WITH_OPUS_SLICE",
+ "slice_rows": [
+  "BSR-AN-05",
+  "BSR-EO-04",
+  "BSR-EO-05",
+  "BSR-EO-09"
+ ],
+ "gate_metric": "SAME_STANDARD",
+ "tier_rank": [
+  "CONCILIAR",
+  "CONFESSIONAL",
+  "CATECHETICAL",
+  "OFFICIAL_EXPOSITION",
+  "CURRENT_OFFICIAL_WITNESS"
+ ],
+ "lateran_iv_scope": "EXTEND_TO_CONSTITUTION_2",
+ "creed_tier_resolution": "TIER_PER_CITED_DOCUMENT",
+ "backend": "batch",
+ "prompt_version": "gate6-v1.2 (locator) / gate6-v1.3 (recut) / gate6-v1.1 (verifier, coder)",
+ "prompt_versions": {
+  "locator": "gate6-v1.2",
+  "recut": "gate6-v1.3",
+  "verifier": "gate6-v1.1",
+  "coder": "gate6-v1.1"
+ },
+ "seed_from": "cal-3",
+ "retrieval": "PER_STANDARD",
+ "cells": 3,
+ "released": 3,
+ "reviewed_empty": 0,
+ "updated_at": "2026-09-12T15:34:12Z"
+}

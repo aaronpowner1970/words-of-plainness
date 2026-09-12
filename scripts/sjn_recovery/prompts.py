@@ -2,14 +2,15 @@
 
 The prompts are versioned PER ROLE; the role's version string is part of every audit record's
 call identity. cal-3 revised the LOCATOR prompt (one standard per call, the 15-word cut stated
-with its consequence, and a re-cut contract for over-long phrases). The VERIFIER and CODER prompts
-are unchanged from cal-2, so their call identities — and their answered calls — carry over.
+with its consequence, and a re-cut contract for over-long phrases); the live run (2026-09-12) revised
+the RE-CUT prompt to shorten-to-fit (gate6-v1.3). The VERIFIER and CODER prompts are unchanged from
+cal-2, so their call identities — and their answered calls — carry over.
 Guards live in code (guards.py); the prompts state the contract so the model can follow it, but
 nothing here is relied on for enforcement."""
 import json
 
-PROMPT_VERSIONS = {"locator": "gate6-v1.2", "recut": "gate6-v1.2", "verifier": "gate6-v1.1", "coder": "gate6-v1.1"}
-PROMPT_VERSION = "gate6-v1.2 (locator, recut) / gate6-v1.1 (verifier, coder)"
+PROMPT_VERSIONS = {"locator": "gate6-v1.2", "recut": "gate6-v1.3", "verifier": "gate6-v1.1", "coder": "gate6-v1.1"}
+PROMPT_VERSION = "gate6-v1.2 (locator) / gate6-v1.3 (recut) / gate6-v1.1 (verifier, coder)"
 
 
 def prompt_version(role):
@@ -61,7 +62,16 @@ def locator_user(cell, predicate, comparator, chunks_view, standards_view, pass_
 
 
 # ------------------------------------------------------------------ RE-CUT (over-long phrase)
-RECUT_SYSTEM = """You are the LOCATOR, re-cutting one quotation. Your earlier candidate quoted MORE THAN 15 WORDS from a chunk, so the checker discarded it. Return the same passage cut to AT MOST 15 WORDS, VERBATIM from the chunk text supplied (same words, same order, same spelling; no ellipsis, no paraphrase), keeping the clause that carries the predicate of the required subject. If no 15-word span of the chunk asserts the predicate, return the empty result.
+# gate6-v1.3 (2026-09-12): the re-cut SHORTENS to fit. cal-3 lost Q-063 and Q-071 because the locator
+# re-cut a 19-word phrase to 16 words and the checker dropped it. The contract now asks for the SHORTEST
+# span that still carries the predicate, states the word count of the earlier attempt, and, on a
+# further attempt, lists the legal ≤15-word spans of the earlier phrase (enumerated in code, chosen by
+# the locator — code never writes a phrase). The ≤15-word rule itself is unchanged.
+RECUT_SYSTEM = """You are the LOCATOR, re-cutting one quotation. Your earlier candidate quoted MORE THAN 15 WORDS from a chunk, so the checker discarded it. Return the same passage cut to AT MOST 15 WORDS, VERBATIM from the chunk text supplied (same words, same order, same spelling; no ellipsis, no paraphrase, no added words).
+
+Prefer the SHORTEST span that still asserts the predicate of the required subject: the clause that carries the predicate, not the whole sentence. A phrase of 16 words is as lost as one of 40 — count the words before you answer. If the passage has several clauses, keep only the one that predicates the term of the subject (for "wisdom": "of infinite power, wisdom, and goodness" with its subject is enough; the list of other attributes is not needed).
+
+If no span of 15 words or fewer in the chunk asserts the predicate, return the empty result.
 
 Output: a single JSON object and nothing else:
 {"phrase": "...", "rationale": "...", "floor_claim": "FULL|PARTIAL|WORD_ONLY"}
@@ -70,8 +80,11 @@ or
 """
 
 
-def recut_user(predicate, chunk_view, over_long):
-    return json.dumps({
+def recut_user(predicate, chunk_view, over_long, attempts=None, legal_spans=None):
+    """`attempts`: earlier re-cut phrases that were still too long, with their word counts;
+    `legal_spans`: ≤15-word spans of the over-long phrase (enumerated in code) the locator may choose from."""
+    from .textutil import phrase_word_count
+    body = {
         "task": "recut",
         "family_id": predicate["family_id"],
         "predicate": predicate["predicate"],
@@ -79,10 +92,20 @@ def recut_user(predicate, chunk_view, over_long):
         "required_subject": predicate["subject_scope"],
         "chunk": chunk_view,
         "your_earlier_phrase_too_long": over_long.get("phrase"),
+        "its_word_count": phrase_word_count(over_long.get("phrase", "")),
+        "limit": 15,
         "your_earlier_rationale": over_long.get("rationale"),
         "your_earlier_floor_claim": over_long.get("floor_claim"),
-        "output_contract": "JSON only: {phrase (≤15 words verbatim), rationale, floor_claim} or {result:'NO_VALID_CUT'}",
-    }, ensure_ascii=False, indent=0)
+        "output_contract": "JSON only: {phrase (≤15 words verbatim, the SHORTEST span carrying the predicate), rationale, floor_claim} or {result:'NO_VALID_CUT'}",
+    }
+    if attempts:
+        body["your_re_cuts_so_far_still_too_long"] = [{"phrase": p, "word_count": phrase_word_count(p)} for p in attempts]
+        body["instruction"] = "Each of those is STILL over 15 words. Cut harder: return the shortest clause that carries the predicate."
+    if legal_spans:
+        body["spans_of_your_earlier_phrase_that_fit_15_words"] = legal_spans
+        body["instruction"] = ("Choose, verbatim, one of the listed spans (or any other span of the chunk of at most 15 words) that "
+                               "asserts the predicate of the required subject; prefer the shortest such span. If none does, return NO_VALID_CUT.")
+    return json.dumps(body, ensure_ascii=False, indent=0)
 
 
 # ------------------------------------------------------------------ VERIFIER

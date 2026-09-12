@@ -60,6 +60,14 @@ MODEL_IDS = {
 
 EMPTY_RESULT = "NOT LOCATED — CURRENT STANDARD REVIEWED"
 
+# Registry hosts RETIRED by the author (2026-09-12). A retired host is never requested, for any purpose:
+# not by the corpus builder, not by the fetch audit, not by an adapter's crawl. Rows still ratified on a
+# retired host (BSR-EO-03 in v2.25r2) build as HOST_RETIRED with no corpus, and any cached chunks are dropped.
+RETIRED_HOSTS = {
+    "goarch.org": "retired 2026-09-12 — its bot check fails for human users in an ordinary browser, so a citation "
+                  "there cannot be audited by a reader; BSR-EO-07 re-hosted to acrod.org (BSR-EO-14 goarchdiocese.ca)",
+}
+
 
 def newest_workbook():
     files = sorted(glob.glob(os.path.join(DATA_SOURCES, "*.xlsx")))

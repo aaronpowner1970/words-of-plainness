@@ -1,8 +1,8 @@
 {
- "built_at": "2026-09-12T02:44:52Z",
- "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25_RECEPTION_AXIS_20260912.xlsx",
- "app_master_version": "v2.25 RECEPTION AXIS",
- "registry_ratified": 42,
+ "built_at": "2026-09-12T15:32:30Z",
+ "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r2_CONTROLLED_STORAGE_20260912.xlsx",
+ "app_master_version": "v2.25r2 CONTROLLED STORAGE",
+ "registry_ratified": 44,
  "fallback_only_rows": [
   "BSR-AN-05"
  ],
@@ -16,7 +16,8 @@
   "verifier_routing": "SONNET_WITH_OPUS_SLICE",
   "dialogue_text_policy": "DIALOGUE_ONLY_NEVER_CITED",
   "encyclical_1848_status": "RECORD_STANDING_ONLY",
-  "registry_fallback_only_rows": "BSR-AN-05"
+  "registry_fallback_only_rows": "BSR-AN-05",
+  "controlled_storage_policy": "ADMIT_IF_LINKED_FROM_OFFICIAL_DOMAIN"
  },
  "opus_slice_rows": [
   "BSR-AN-05",
@@ -24,7 +25,11 @@
   "BSR-EO-05",
   "BSR-EO-09"
  ],
- "fetch_policy": "strict_host: ratified URLs fetched byte for byte; cross-host redirects refused; no crawling of goarch.org",
+ "fetch_policy": "strict_host: ratified URLs fetched byte for byte; cross-host redirects refused; every requested URL must sit on a host the row admits under R001 (publisher_domain / AC-15); retired hosts are never requested",
+ "retired_hosts": {
+  "goarch.org": "retired 2026-09-12 — its bot check fails for human users in an ordinary browser, so a citation there cannot be audited by a reader; BSR-EO-07 re-hosted to acrod.org (BSR-EO-14 goarchdiocese.ca)"
+ },
+ "controlled_storage_policy": "ADMIT_IF_LINKED_FROM_OFFICIAL_DOMAIN",
  "chroma": {
   "path": "C:\\Users\\aaron\\Documents\\ministry-rag\\chroma_db",
   "collection": "sjn_confessions",
@@ -47,7 +52,7 @@
    "n_chunks": 570,
    "chars": 295301,
    "text_hash": "730153fa76f95c1945ab768cc0a5a0e14b02a9d70e0055356e5e54afb1c9fea0",
-   "fetched_at": "2026-09-12T02:37:37Z",
+   "fetched_at": "2026-09-12T15:26:16Z",
    "urls": [
     {
      "url": "https://www.vatican.va/content/catechism/en/part_one/section_two.html",
@@ -814,7 +819,7 @@
    "n_chunks": 22,
    "chars": 16388,
    "text_hash": "186548d0e78e3683a29c7b070a3c4dbc66d3539f8a09d9d1344bb5990728587f",
-   "fetched_at": "2026-09-12T02:37:37Z",
+   "fetched_at": "2026-09-12T15:26:16Z",
    "urls": [
     {
      "url": "https://www.vatican.va/archive/hist_councils/i-vatican-council/documents/vat-i_const_18700424_dei-filius_la.html",
@@ -851,7 +856,7 @@
    "n_chunks": 3,
    "chars": 1227,
    "text_hash": "2d319bb4f88590d165086d93b5772c270763629684f9212b4a35f17b86e0e44c",
-   "fetched_at": "2026-09-12T02:37:37Z",
+   "fetched_at": "2026-09-12T15:26:16Z",
    "urls": [
     {
      "url": "https://www.ewtn.com/catholicism/teachings/vatican-i-dogmatic-constitution-dei-filius-on-the-catholic-faith-241",
@@ -875,7 +880,7 @@
    "polytonic_chunks": 0
   },
   "BSR-RC-04": {
-   "status": "REBUILT (drift accepted)",
+   "status": "UNCHANGED",
    "branch": "Roman Catholic",
    "standard_title": "Fourth Lateran Council, canons 1-2 (Firmiter credimus; Damnamus ergo)",
    "canonical_url": "https://www.papalencyclicals.net/councils/ecum12-2.htm",
@@ -888,7 +893,7 @@
    "n_chunks": 8,
    "chars": 9189,
    "text_hash": "472e2e00816e4f3e135c787a55583baa351cf4df6e543a2011f141f3edb7cb20",
-   "fetched_at": "2026-09-12T02:37:37Z",
+   "fetched_at": "2026-09-12T15:26:16Z",
    "urls": [
     {
      "url": "https://www.papalencyclicals.net/councils/ecum12-2.htm",
@@ -942,7 +947,7 @@
    "n_chunks": 2,
    "chars": 1794,
    "text_hash": "d89948bebbd4b3420c5cb469423ba79faf5b15fede1776c33d4b957f86fb5732",
-   "fetched_at": "2026-09-12T02:37:37Z",
+   "fetched_at": "2026-09-12T15:26:16Z",
    "urls": [
     {
      "url": "https://www.vatican.va/archive/ENG0015/__P13.HTM",
@@ -979,7 +984,7 @@
    "n_chunks": 533,
    "chars": 265013,
    "text_hash": "b254dc3ae461c26d80a3b2a973a9019c4c9fc2bc9c7b2d5339406ce23b9d1b01",
-   "fetched_at": "2026-09-12T02:37:38Z",
+   "fetched_at": "2026-09-12T15:26:22Z",
    "urls": [
     {
      "url": "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html",
@@ -1016,7 +1021,7 @@
    "n_chunks": 19,
    "chars": 158946,
    "text_hash": "ccce33eab3174ccd9eb953335587a8d391b8f0a58201ef4de4bdb319e4350e69",
-   "fetched_at": "2026-09-12T02:37:38Z",
+   "fetched_at": "2026-09-12T15:26:22Z",
    "urls": [
     {
      "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-symbol-of-faith",
@@ -1243,7 +1248,7 @@
    "n_chunks": 14,
    "chars": 21877,
    "text_hash": "1bb744445522ce611aa4603813cd6927814aa49b1e0bf1d028a1207bb07e8f66",
-   "fetched_at": "2026-09-12T02:37:38Z",
+   "fetched_at": "2026-09-12T15:26:22Z",
    "urls": [
     {
      "url": "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-holy-trinity",
@@ -1407,7 +1412,7 @@
    "polytonic_chunks": 0
   },
   "BSR-EO-03": {
-   "status": "FETCH_BLOCKED",
+   "status": "HOST_RETIRED",
    "branch": "Eastern Orthodox",
    "standard_title": "Greek Orthodox Archdiocese — \"Basic Sources of the Teachings\" and sibling articles",
    "canonical_url": "https://www.goarch.org/-/the-basic-sources-of-the-teachings-of-the-eastern-orthodox-church",
@@ -1418,28 +1423,9 @@
    "n_chunks": 0,
    "text_hash": null,
    "notes": [
-    "goarch.org: Cloudflare managed challenge on the ratified URL (plain HTTP 403; rendered HTTP 403, body 262 chars). Verdict: HOST. No crawl attempted."
+    "retired 2026-09-12 — its bot check fails for human users in an ordinary browser, so a citation there cannot be audited by a reader; BSR-EO-07 re-hosted to acrod.org (BSR-EO-14 goarchdiocese.ca)"
    ],
-   "urls": [
-    {
-     "url": "https://www.goarch.org/-/the-basic-sources-of-the-teachings-of-the-eastern-orthodox-church",
-     "mode": "http",
-     "status": 403,
-     "ok": false,
-     "error": "HTTP 403",
-     "final_url": "https://www.goarch.org/-/the-basic-sources-of-the-teachings-of-the-eastern-orthodox-church",
-     "redirects": [],
-     "cross_host_redirect": ""
-    },
-    {
-     "url": "https://www.goarch.org/-/the-basic-sources-of-the-teachings-of-the-eastern-orthodox-church",
-     "mode": "rendered",
-     "status": 403,
-     "ok": false,
-     "error": "HTTP 403 / body 262 chars"
-    }
-   ],
-   "fetch_verdict": "HOST: refuses automated fetch (403 / bot challenge)"
+   "fetch_verdict": "HOST_RETIRED: never requested"
   },
   "BSR-EO-04": {
    "status": "UNCHANGED",
@@ -1455,7 +1441,7 @@
    "n_chunks": 610,
    "chars": 197336,
    "text_hash": "9277b1dc0eb3ad015403625901ef67fb739babb59c73c020f8f344b1e9baf6a6",
-   "fetched_at": "2026-09-12T02:38:13Z",
+   "fetched_at": "2026-09-12T15:26:27Z",
    "urls": [
     {
      "url": "https://www.pravoslavieto.com/docs/eng/Orthodox_Catechism_of_Philaret.htm",
@@ -1492,7 +1478,7 @@
    "n_chunks": 22,
    "chars": 61845,
    "text_hash": "35687485fc5f9914e54081834af378dcdd678e796c7d4582b4080adca8ec5bc3",
-   "fetched_at": "2026-09-12T02:38:13Z",
+   "fetched_at": "2026-09-12T15:26:27Z",
    "urls": [
     {
      "url": "https://maximologia.org/the-confession-of-patriarch-dositheos-of-jerusalem-1672/",
@@ -1651,11 +1637,19 @@
       "ocr_offset": 15123
      }
     ],
-    "note": "Word-containment of each maximologia decree inside the OCR window anchored at the decree's opening words (words of four letters or more; OCR noise tolerated). DIVERGENT halts the build. UNANCHORED decrees (OCR damage at the opening) are reported and tolerated up to one sixth of the sample."
+    "note": "Word-containment of each maximologia decree inside the OCR window anchored at the decree's opening words (words of four letters or more; OCR noise tolerated). DIVERGENT halts the build. UNANCHORED decrees (OCR damage at the opening) are reported and tolerated up to one sixth of the sample.",
+    "fetched_from": "https://dn760109.eu.archive.org/0/items/actsdecreesofsyn00orth/actsdecreesofsyn00orth_djvu.txt",
+    "redirects": [
+     [
+      302,
+      "https://archive.org/download/actsdecreesofsyn00orth/actsdecreesofsyn00orth_djvu.txt",
+      "https://dn760109.eu.archive.org/0/items/actsdecreesofsyn00orth/actsdecreesofsyn00orth_djvu.txt"
+     ]
+    ]
    }
   },
   "BSR-EO-06": {
-   "status": "REBUILT (drift accepted)",
+   "status": "UNCHANGED",
    "branch": "Eastern Orthodox",
    "standard_title": "Chalcedon (451) and Third Constantinople (680-681) - the Definitions of Faith (NPNF2-14, Percival)",
    "canonical_url": "https://www.ccel.org/ccel/schaff/npnf214.xi.xiii.html",
@@ -1668,7 +1662,7 @@
    "n_chunks": 20,
    "chars": 17955,
    "text_hash": "1b0baa3d480255ff886bcfbfac258009cacff5b21327c7f3e6356f2211e8b984",
-   "fetched_at": "2026-09-12T02:44:49Z",
+   "fetched_at": "2026-09-12T15:26:30Z",
    "urls": [
     {
      "url": "https://www.ccel.org/ccel/schaff/npnf214.xi.xiii.html",
@@ -1703,7 +1697,7 @@
    "polytonic_chunks": 0
   },
   "BSR-LU-01": {
-   "status": "UNCHANGED",
+   "status": "REBUILT (drift accepted)",
    "branch": "Lutheran",
    "standard_title": "Book of Concord (Augsburg Confession, Apology, Smalcald, Catechisms, Formula) — bookofconcord.org",
    "canonical_url": "https://bookofconcord.org/augsburg-confession/of-god/",
@@ -1714,9 +1708,9 @@
    "fetch_mode": "HTML (intermittent timeouts)",
    "fallback_only": false,
    "n_chunks": 738,
-   "chars": 1598961,
-   "text_hash": "607c19c1d77aee648783c6677deb5b387ee5a50004fcbd324896d5edfcfd3085",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "chars": 1598957,
+   "text_hash": "0c0076c8e73d6300bc2c0a31285021fff11c533d5d4a600b6ddbf77785ec04fe",
+   "fetched_at": "2026-09-12T15:27:33Z",
    "urls": [
     {
      "url": "https://bookofconcord.org/",
@@ -2325,7 +2319,13 @@
      "ok": true,
      "error": "",
      "final_url": "https://bookofconcord.org/smalcald-articles/i/",
-     "redirects": [],
+     "redirects": [
+      [
+       307,
+       "https://bookofconcord.org/smalcald-articles/i/divine-majesty/",
+       "https://bookofconcord.org/smalcald-articles/i/"
+      ]
+     ],
      "cross_host_redirect": ""
     },
     {
@@ -2375,7 +2375,13 @@
      "ok": true,
      "error": "",
      "final_url": "https://bookofconcord.org/smalcald-articles/ii/",
-     "redirects": [],
+     "redirects": [
+      [
+       307,
+       "https://bookofconcord.org/smalcald-articles/ii/office-and-work-of-jesus/",
+       "https://bookofconcord.org/smalcald-articles/ii/"
+      ]
+     ],
      "cross_host_redirect": ""
     },
     {
@@ -2425,7 +2431,13 @@
      "ok": true,
      "error": "",
      "final_url": "https://bookofconcord.org/smalcald-articles/iii/",
-     "redirects": [],
+     "redirects": [
+      [
+       307,
+       "https://bookofconcord.org/smalcald-articles/iii/part-iii/",
+       "https://bookofconcord.org/smalcald-articles/iii/"
+      ]
+     ],
      "cross_host_redirect": ""
     },
     {
@@ -3060,7 +3072,8 @@
     }
    ],
    "notes": [
-    "133 document pages crawled from the site index; numbered-paragraph ranges (≤2600 chars) inside each article"
+    "133 document pages crawled from the site index; numbered-paragraph ranges (≤2600 chars) inside each article",
+    "de-hyphenation at extraction: {'suspended_kept': 3, 'joined_default': 2} in 2 chunk(s); residue (suspended hyphens, left as printed): []"
    ],
    "fetch_verdict": "OK",
    "noncitable_spans": 0,
@@ -3099,7 +3112,7 @@
    "n_chunks": 1,
    "chars": 746,
    "text_hash": "3a069b3a1e7864dd8abb27d0b9bea3fcbafc4fd786603e3fd14929fee250e20f",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "fetched_at": "2026-09-12T15:27:33Z",
    "urls": [
     {
      "url": "https://catechism.cph.org/en/creed-first-article-part-one.html",
@@ -3136,7 +3149,7 @@
    "n_chunks": 171,
    "chars": 66336,
    "text_hash": "05485eb547b3dd4c93f8ce6ce46a8ecc04b6e2d9469d59ca4cb784ae2133ae19",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "fetched_at": "2026-09-12T15:27:34Z",
    "urls": [
     {
      "url": "https://opc.org/wcf.html",
@@ -3173,7 +3186,7 @@
    "n_chunks": 107,
    "chars": 23843,
    "text_hash": "b7b1f9ccd36c36928fd947954a0164585ca31db3b99562641063abc713824296",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "fetched_at": "2026-09-12T15:27:34Z",
    "urls": [
     {
      "url": "https://opc.org/sc.html",
@@ -3210,7 +3223,7 @@
    "n_chunks": 196,
    "chars": 89564,
    "text_hash": "bcda58623f3075aa2669b0dcbc7c8029b51f7235b41a1dfea019611e372a4ef1",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "fetched_at": "2026-09-12T15:27:35Z",
    "urls": [
     {
      "url": "https://opc.org/lc.html",
@@ -3234,7 +3247,7 @@
    "polytonic_chunks": 0
   },
   "BSR-RP-04": {
-   "status": "UNCHANGED",
+   "status": "REBUILT (drift accepted)",
    "branch": "Reformed / Presbyterian",
    "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
    "canonical_url": "https://pcusa.org/sites/default/files/boc2016.pdf",
@@ -3245,9 +3258,9 @@
    "fetch_mode": "PDF (large; normalize)",
    "fallback_only": false,
    "n_chunks": 1018,
-   "chars": 660661,
-   "text_hash": "d8da688922b49cbe6d01c7b8276a449372e5bee79756cc8dfb0401e99245319c",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "chars": 660637,
+   "text_hash": "7eb36c085dd1dcdcc55310fe7eeddb0e5977b9d00284019ce57ab1f61ec76334",
+   "fetched_at": "2026-09-12T15:28:07Z",
    "urls": [
     {
      "url": "https://pcusa.org/sites/default/files/boc2016.pdf",
@@ -3261,7 +3274,8 @@
     }
    ],
    "notes": [
-    "PDF normalized; 1018 confessional numbers across 11 constituent documents"
+    "PDF normalized; 1018 confessional numbers across 11 constituent documents",
+    "de-hyphenation at extraction: {'joined_closed': 11, 'joined_default': 1} in 12 chunk(s); residue (suspended hyphens, left as printed): []"
    ],
    "fetch_verdict": "OK",
    "noncitable_spans": 0,
@@ -3284,7 +3298,7 @@
    "n_chunks": 128,
    "chars": 47216,
    "text_hash": "e1c55cc456ed6533195e8726a63940ca8d91d4601c9af586e946726b29e7846b",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "fetched_at": "2026-09-12T15:28:07Z",
    "urls": [
     {
      "url": "https://www.crcna.org/welcome/beliefs/confessions/heidelberg-catechism",
@@ -3321,7 +3335,7 @@
    "n_chunks": 37,
    "chars": 51165,
    "text_hash": "38fc2dae387e2dcb9d638b6e03389ba9c5cc7f74976151d8b0fb914a8d9453bd",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "fetched_at": "2026-09-12T15:28:08Z",
    "urls": [
     {
      "url": "https://www.crcna.org/welcome/beliefs/confessions/belgic-confession",
@@ -3345,7 +3359,7 @@
    "polytonic_chunks": 0
   },
   "BSR-AN-01": {
-   "status": "UNCHANGED",
+   "status": "REBUILT (drift accepted)",
    "branch": "Anglican",
    "standard_title": "Thirty-Nine Articles (Church of England)",
    "canonical_url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/articles-religion",
@@ -3356,9 +3370,9 @@
    "fetch_mode": "RENDERED (body not exposed to plain fetch)",
    "fallback_only": false,
    "n_chunks": 39,
-   "chars": 22553,
-   "text_hash": "e92adcb70cbfa1f7238040ab9adf68fac0b4ecd05db06d562682938359451797",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "chars": 22551,
+   "text_hash": "6866bca149293d0a9f9f5794804f79095835f5e91dbf15b178d5e0883d64fb92",
+   "fetched_at": "2026-09-12T15:28:08Z",
    "urls": [
     {
      "url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/articles-religion",
@@ -3369,7 +3383,8 @@
     }
    ],
    "notes": [
-    "39 articles (rendered page)"
+    "39 articles (rendered page)",
+    "de-hyphenation at extraction: {'joined_closed': 1} in 1 chunk(s); residue (suspended hyphens, left as printed): []"
    ],
    "fetch_verdict": "OK",
    "noncitable_spans": 0,
@@ -3392,7 +3407,7 @@
    "n_chunks": 25,
    "chars": 10198,
    "text_hash": "996065cc233542927443e3fba49a06b08fbcebe3f20f6e56a36b9ab875fd684c",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "fetched_at": "2026-09-12T15:28:08Z",
    "urls": [
     {
      "url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/catechism",
@@ -3424,21 +3439,23 @@
    "fetch_mode": "HTML",
    "fallback_only": false,
    "n_chunks": 1,
-   "chars": 3943,
-   "text_hash": "e79967cdb9c67bed719bffb0da4d1a3e4e3f6139e5b4952d102be581a565f9f3",
-   "fetched_at": "2026-09-12T02:38:17Z",
+   "chars": 3783,
+   "text_hash": "3797280b272d9a003501c128e67b392c024d43a2a0ae31aa8753368d10013e9d",
+   "fetched_at": "2026-09-12T15:28:08Z",
    "urls": [
     {
-     "url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/creed-s-athanasius",
-     "mode": "rendered",
+     "url": "https://ccel.org/ccel/creeds/athanasian.creed.html",
+     "mode": "http",
      "status": 200,
      "ok": true,
-     "error": ""
+     "error": "",
+     "final_url": "https://ccel.org/ccel/creeds/athanasian.creed.html",
+     "redirects": [],
+     "cross_host_redirect": ""
     }
    ],
    "notes": [
-    "official host churchofengland.org (registry lists ccel.org as lineage for 1 released cell)",
-    "45 verses"
+    "ccel.org (publisher_domain) — 44 numbered verses in one division; the churchofengland.org text is the Gate 7 migration target, not fetched"
    ],
    "fetch_verdict": "OK",
    "noncitable_spans": 0,
@@ -3461,7 +3478,7 @@
    "n_chunks": 124,
    "chars": 24026,
    "text_hash": "986a05bfd46d47bb267caa4d8d21e7cd1c97bd69229502be483d13f6727f50f9",
-   "fetched_at": "2026-09-12T02:38:18Z",
+   "fetched_at": "2026-09-12T15:28:08Z",
    "urls": [
     {
      "url": "https://www.episcopalchurch.org/wp-content/uploads/2023/06/book_of_common_prayer.pdf",
@@ -3498,7 +3515,7 @@
    "n_chunks": 368,
    "chars": 223057,
    "text_hash": "ad8cc138a1d4de5403db4dc4eed69943bff9ecee4fca237f6936e62488bba03c",
-   "fetched_at": "2026-09-12T02:38:18Z",
+   "fetched_at": "2026-09-12T15:28:12Z",
    "urls": [
     {
      "url": "https://anglicanchurch.net/wp-content/uploads/2020/06/To-Be-a-Christian.pdf",
@@ -3535,7 +3552,7 @@
    "n_chunks": 21,
    "chars": 25003,
    "text_hash": "dbe91cb6eced643775a7266b74bd2d9a93f7631ea3cc28ae9fc382ec6cfcd91c",
-   "fetched_at": "2026-09-12T02:38:18Z",
+   "fetched_at": "2026-09-12T15:28:12Z",
    "urls": [
     {
      "url": "https://bfm.sbc.net/bfm2000/",
@@ -3559,7 +3576,7 @@
    "polytonic_chunks": 0
   },
   "BSR-BA-02": {
-   "status": "UNCHANGED",
+   "status": "HOST_REDIRECTS_CROSS_HOST",
    "branch": "Baptist",
    "standard_title": "Second London Confession 1689, ch. 2",
    "canonical_url": "https://the1689confession.com/1689/chapter-2",
@@ -3567,33 +3584,30 @@
    "reception_scope": "JURISDICTIONAL",
    "witness_only": false,
    "citation_refusal": null,
-   "fetch_mode": "HTML",
-   "fallback_only": false,
-   "n_chunks": 3,
-   "chars": 2938,
-   "text_hash": "03212ada6b0d8f19dab6898f10cca114abe83a8f12d0c2df4c62aef20ff186f9",
-   "fetched_at": "2026-09-12T02:38:18Z",
+   "n_chunks": 0,
+   "text_hash": null,
+   "notes": [
+    "https://the1689confession.com/1689/chapter-2: host redirected onto a different site (REDIRECT-CROSS-HOST: the1689confession.com -> www.the1689confession.com (301 https://www.the1689confession.com/1689/chapter-2)); the ratified URL is fetched byte for byte and cross-host redirects are refused"
+   ],
    "urls": [
     {
      "url": "https://the1689confession.com/1689/chapter-2",
      "mode": "http",
-     "status": 200,
-     "ok": true,
-     "error": "",
-     "final_url": "https://www.the1689confession.com/1689/chapter-2",
-     "redirects": [],
-     "cross_host_redirect": ""
+     "status": 301,
+     "ok": false,
+     "error": "REDIRECT-CROSS-HOST: the1689confession.com -> www.the1689confession.com (301 https://www.the1689confession.com/1689/chapter-2)",
+     "final_url": "https://the1689confession.com/1689/chapter-2",
+     "redirects": [
+      [
+       301,
+       "https://the1689confession.com/1689/chapter-2",
+       "https://www.the1689confession.com/1689/chapter-2"
+      ]
+     ],
+     "cross_host_redirect": "https://www.the1689confession.com/1689/chapter-2"
     }
    ],
-   "notes": [
-    "chapter 2 only, as ratified (the1689confession.com, single-congregation host)"
-   ],
-   "fetch_verdict": "OK",
-   "noncitable_spans": 0,
-   "languages": [
-    "en"
-   ],
-   "polytonic_chunks": 0
+   "fetch_verdict": "HOST: the ratified URL answers with a redirect onto a different host"
   },
   "BSR-BA-03": {
    "status": "UNCHANGED",
@@ -3609,7 +3623,7 @@
    "n_chunks": 10,
    "chars": 5359,
    "text_hash": "69d42a0abc8773ebdc4ab03ad9a012b340c61681da2a748fd863a28bfe994645",
-   "fetched_at": "2026-09-12T02:38:18Z",
+   "fetched_at": "2026-09-12T15:28:12Z",
    "urls": [
     {
      "url": "https://www.abc-usa.org/10facts",
@@ -3646,7 +3660,7 @@
    "n_chunks": 25,
    "chars": 10989,
    "text_hash": "c9012e386d004b37d184ceb4c9d9fca62be7b7cc9793ae084540ba636d0b201e",
-   "fetched_at": "2026-09-12T02:38:18Z",
+   "fetched_at": "2026-09-12T15:28:12Z",
    "urls": [
     {
      "url": "https://www.umc.org/en/content/articles-of-religion",
@@ -3683,7 +3697,7 @@
    "n_chunks": 16,
    "chars": 8548,
    "text_hash": "9b564212ef627a4cc47db37ee3137f68c72eabe4581ace2a10d58a93e7c0a4db",
-   "fetched_at": "2026-09-12T02:38:18Z",
+   "fetched_at": "2026-09-12T15:28:12Z",
    "urls": [
     {
      "url": "https://www.umc.org/en/content/confession-of-faith",
@@ -3707,38 +3721,43 @@
    "polytonic_chunks": 0
   },
   "BSR-MW-03": {
-   "status": "HOST_REDIRECTS_CROSS_HOST",
+   "status": "UNCHANGED",
    "branch": "Methodist / Wesleyan",
-   "standard_title": "Global Methodist Church doctrinal standards",
-   "canonical_url": "https://globalmethodist.org/what-we-believe/",
+   "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
+   "canonical_url": "https://irp.cdn-website.com/1876eae9/files/uploaded/2024-Book-of-Doctrines-Discipline-FINAL-15JAN2025.pdf",
    "authority_tier": "CONFESSIONAL",
    "reception_scope": "JURISDICTIONAL",
    "witness_only": false,
    "citation_refusal": null,
-   "n_chunks": 0,
-   "text_hash": null,
-   "notes": [
-    "https://globalmethodist.org/what-we-believe/: host redirected onto a different site (REDIRECT-CROSS-HOST: globalmethodist.org -> www.globalmethodist.org (301 https://www.globalmethodist.org/what-we-believe/)); the ratified URL is fetched byte for byte and cross-host redirects are refused"
-   ],
+   "fetch_mode": "PDF - text layer present; controlled storage, admitted under the 12 Sep 2026 ruling",
+   "fallback_only": false,
+   "n_chunks": 43,
+   "chars": 20074,
+   "text_hash": "fd0b21f34ad2dbafbc3a7df6347b38fafd02745da6b1f3ad402fc6e4e408ab36",
+   "fetched_at": "2026-09-12T15:28:12Z",
    "urls": [
     {
-     "url": "https://globalmethodist.org/what-we-believe/",
-     "mode": "http",
-     "status": 301,
-     "ok": false,
-     "error": "REDIRECT-CROSS-HOST: globalmethodist.org -> www.globalmethodist.org (301 https://www.globalmethodist.org/what-we-believe/)",
-     "final_url": "https://globalmethodist.org/what-we-believe/",
-     "redirects": [
-      [
-       301,
-       "https://globalmethodist.org/what-we-believe/",
-       "https://www.globalmethodist.org/what-we-believe/"
-      ]
-     ],
-     "cross_host_redirect": "https://www.globalmethodist.org/what-we-believe/"
+     "url": "https://irp.cdn-website.com/1876eae9/files/uploaded/2024-Book-of-Doctrines-Discipline-FINAL-15JAN2025.pdf",
+     "mode": "pdf",
+     "status": 200,
+     "ok": true,
+     "error": "",
+     "final_url": "https://irp.cdn-website.com/1876eae9/files/uploaded/2024-Book-of-Doctrines-Discipline-FINAL-15JAN2025.pdf",
+     "redirects": [],
+     "cross_host_redirect": ""
     }
    ],
-   "fetch_verdict": "HOST: the ratified URL answers with a redirect onto a different host"
+   "notes": [
+    "PDF pages 11–20: 27 Articles of Religion chunks (incl. the two 1939 additions) and 16 Confession of Faith chunks",
+    "Article I 'of infinite power, wisdom, and good' found in 1 chunk(s); 'wisdom, and goodness' in 0 chunk(s) (must be 0)",
+    "hyphenation at extraction: {'joined_default': 2, 'joined_compound': 12, 'joined_closed': 1}"
+   ],
+   "fetch_verdict": "OK",
+   "noncitable_spans": 0,
+   "languages": [
+    "en"
+   ],
+   "polytonic_chunks": 0
   },
   "BSR-MW-04": {
    "status": "UNCHANGED",
@@ -3754,7 +3773,7 @@
    "n_chunks": 22,
    "chars": 16153,
    "text_hash": "afb0153303069442018b05c7b2715624a48940801980fd5dcfaee45e0541333a",
-   "fetched_at": "2026-09-12T02:38:19Z",
+   "fetched_at": "2026-09-12T15:28:12Z",
    "urls": [
     {
      "url": "https://www.wesleyan.org/about/articles-of-religion",
@@ -3791,7 +3810,7 @@
    "n_chunks": 23,
    "chars": 114517,
    "text_hash": "bd1327f512bd783e29b2c547df5bcef479992a6f32736da53aeaf3d8e623702c",
-   "fetched_at": "2026-09-12T02:38:19Z",
+   "fetched_at": "2026-09-12T15:28:13Z",
    "urls": [
     {
      "url": "https://www.mennoniteusa.org/who-are-mennonites/what-we-believe/confession-of-faith/",
@@ -4068,7 +4087,7 @@
    "n_chunks": 18,
    "chars": 28794,
    "text_hash": "c9a2f489950fb4bffd4875d25a99c9176a0e3baa04e62ef99fd7dfb2081b39c0",
-   "fetched_at": "2026-09-12T02:38:19Z",
+   "fetched_at": "2026-09-12T15:28:13Z",
    "urls": [
     {
      "url": "https://www.anabaptistresources.org/en/resources/details/932/dordrecht-confession-of-faith",
@@ -4077,7 +4096,13 @@
      "ok": true,
      "error": "",
      "final_url": "https://www.anabaptistresources.org/resources/932?lang=en",
-     "redirects": [],
+     "redirects": [
+      [
+       301,
+       "https://www.anabaptistresources.org/en/resources/details/932/dordrecht-confession-of-faith",
+       "https://www.anabaptistresources.org/resources/932?lang=en"
+      ]
+     ],
      "cross_host_redirect": ""
     }
    ],
@@ -4092,42 +4117,47 @@
    "polytonic_chunks": 0
   },
   "BSR-EO-07": {
-   "status": "FETCH_BLOCKED",
+   "status": "UNCHANGED",
    "branch": "Eastern Orthodox",
-   "standard_title": "Divine Liturgy of St John Chrysostom (GOARCH)",
-   "canonical_url": "https://www.goarch.org/-/the-divine-liturgy-of-saint-john-chrysostom",
+   "standard_title": "Divine Liturgy of St John Chrysostom (American Carpatho-Russian Orthodox Diocese)",
+   "canonical_url": "https://www.acrod.org/prayercorner/liturgicaltexts/divineliturgy",
    "authority_tier": "CONFESSIONAL (liturgically confessed; the Creed within resolves CONCILIAR)",
    "reception_scope": "UNIVERSAL",
    "witness_only": false,
    "citation_refusal": null,
-   "n_chunks": 0,
-   "text_hash": null,
-   "notes": [
-    "goarch.org: Cloudflare managed challenge on the ratified URL (plain HTTP 403; rendered HTTP 403, body 262 chars). Verdict: HOST. No crawl attempted."
-   ],
+   "fetch_mode": "HTML - plain, no JavaScript, no bot challenge",
+   "fallback_only": false,
+   "n_chunks": 25,
+   "chars": 38150,
+   "text_hash": "8c236d2947891dc49586b46e0486c303e3e8182705a66382106f54857281420e",
+   "fetched_at": "2026-09-12T15:28:13Z",
    "urls": [
     {
-     "url": "https://www.goarch.org/-/the-divine-liturgy-of-saint-john-chrysostom",
+     "url": "https://www.acrod.org/prayercorner/liturgicaltexts/divineliturgy",
      "mode": "http",
-     "status": 403,
-     "ok": false,
-     "error": "HTTP 403",
-     "final_url": "https://www.goarch.org/-/the-divine-liturgy-of-saint-john-chrysostom",
+     "status": 200,
+     "ok": true,
+     "error": "",
+     "final_url": "https://www.acrod.org/prayercorner/liturgicaltexts/divineliturgy",
      "redirects": [],
      "cross_host_redirect": ""
-    },
-    {
-     "url": "https://www.goarch.org/-/the-divine-liturgy-of-saint-john-chrysostom",
-     "mode": "rendered",
-     "status": 403,
-     "ok": false,
-     "error": "HTTP 403 / body 262 chars"
     }
    ],
-   "fetch_verdict": "HOST: refuses automated fetch (403 / bot challenge)"
+   "notes": [
+    "fetched via http (acrod.org, publisher_domain)",
+    "25 divisions (the page's own capitalised headings); anaphora divisions 1; creed divisions 1",
+    "anaphora adjectives present: ineffable, inconceivable, invisible, incomprehensible",
+    "Creed reads 'Creator of heaven and earth'"
+   ],
+   "fetch_verdict": "OK",
+   "noncitable_spans": 0,
+   "languages": [
+    "en"
+   ],
+   "polytonic_chunks": 0
   },
   "BSR-EO-08": {
-   "status": "BUILT",
+   "status": "REBUILT (drift accepted)",
    "branch": "Eastern Orthodox",
    "standard_title": "Anaphora of St Basil the Great (Romanian Orthodox Episcopate of America)",
    "canonical_url": "https://roea.org/wp-content/uploads/2026/04/ST-BASIL-LITURGY-PRAYERS.pdf",
@@ -4139,8 +4169,8 @@
    "fallback_only": false,
    "n_chunks": 16,
    "chars": 22299,
-   "text_hash": "f7dce2330d48d0000272c30b5b949d2b11e46bbc3f36fd717f671b9d486cfc9d",
-   "fetched_at": "2026-09-12T02:38:52Z",
+   "text_hash": "d4337c98b3cef7b6ca7b32b1f242e5d7d4ae3917ca8d6b913adea661436927fc",
+   "fetched_at": "2026-09-12T15:28:13Z",
    "urls": [
     {
      "url": "https://roea.org/wp-content/uploads/2026/04/ST-BASIL-LITURGY-PRAYERS.pdf",
@@ -4155,7 +4185,8 @@
    ],
    "notes": [
     "16 English pages; 16 prayer chunks across 9 headings",
-    "word check: unseen=2, immutable=1, invisible=0, ineffable=0, unchangeable=0, incomprehensible=1, infinite=1"
+    "word check: unseen=2, immutable=1, invisible=0, ineffable=0, unchangeable=0, incomprehensible=1, infinite=1",
+    "de-hyphenation at extraction: {'joined_compound': 1, 'joined_closed': 1} in 2 chunk(s); residue (suspended hyphens, left as printed): []"
    ],
    "fetch_verdict": "OK",
    "noncitable_spans": 0,
@@ -4165,7 +4196,7 @@
    "polytonic_chunks": 0
   },
   "BSR-EO-09": {
-   "status": "REBUILT (drift accepted)",
+   "status": "UNCHANGED",
    "branch": "Eastern Orthodox",
    "standard_title": "The Synodikon of Orthodoxy (Romanian Orthodox Episcopate of America)",
    "canonical_url": "https://roea.org/wp-content/uploads/2026/04/The-Synodikon-of-Orthodoxy-I.pdf",
@@ -4178,7 +4209,7 @@
    "n_chunks": 6,
    "chars": 5693,
    "text_hash": "e53307208999ac24c0b69436b6d1e8e81aa56f531ad6fc0f62e72b62c0e10aec",
-   "fetched_at": "2026-09-12T02:44:49Z",
+   "fetched_at": "2026-09-12T15:28:13Z",
    "urls": [
     {
      "url": "https://roea.org/wp-content/uploads/2026/04/The-Synodikon-of-Orthodoxy-I.pdf",
@@ -4202,7 +4233,7 @@
    "polytonic_chunks": 0
   },
   "BSR-EO-10": {
-   "status": "BUILT",
+   "status": "UNCHANGED",
    "branch": "Eastern Orthodox",
    "standard_title": "Holy and Great Council of Crete (2016) - official documents",
    "canonical_url": "https://www.holycouncil.org/rest-of-christian-world",
@@ -4215,7 +4246,7 @@
    "n_chunks": 45,
    "chars": 50925,
    "text_hash": "3c68968cc4cb9f3c0f0761babf8e959c89a088775c7a61e75bca139f82e626f4",
-   "fetched_at": "2026-09-12T02:38:54Z",
+   "fetched_at": "2026-09-12T15:28:13Z",
    "urls": [
     {
      "url": "https://www.holycouncil.org/rest-of-christian-world",
@@ -4270,7 +4301,7 @@
    "polytonic_chunks": 0
   },
   "BSR-EO-11": {
-   "status": "BUILT",
+   "status": "UNCHANGED",
    "branch": "Eastern Orthodox",
    "standard_title": "Chalcedon clause as witnessed by the Patriarchate of Antioch",
    "canonical_url": "https://antiochpatriarchate.org/en/page/whose-goings-forth-are-from-of-old-from-everlasting/2320/",
@@ -4283,7 +4314,7 @@
    "n_chunks": 2,
    "chars": 1636,
    "text_hash": "a13ec79b4f9ed6a0d62194b53ab243eb5e2628bea4ec0b1f3f0f9c3f15ff2e29",
-   "fetched_at": "2026-09-12T02:38:55Z",
+   "fetched_at": "2026-09-12T15:28:13Z",
    "urls": [
     {
      "url": "https://antiochpatriarchate.org/en/page/whose-goings-forth-are-from-of-old-from-everlasting/2320/",
@@ -4320,7 +4351,7 @@
    "n_chunks": 12,
    "chars": 1089,
    "text_hash": "69c1fc86be407cf48fb94f70444f498e7150605c01e6a63acbfa33cb2a0b8695",
-   "fetched_at": "2026-09-12T02:44:49Z",
+   "fetched_at": "2026-09-12T15:28:13Z",
    "urls": [
     {
      "url": "https://immspartis.gr/ofelima/to-symvolo/",
@@ -4342,7 +4373,95 @@
     "el"
    ],
    "polytonic_chunks": 12
+  },
+  "BSR-EO-13": {
+   "status": "UNCHANGED",
+   "branch": "Eastern Orthodox",
+   "standard_title": "Third Council of Constantinople (New Advent transcription) - LINEAGE",
+   "canonical_url": "https://www.newadvent.org/fathers/3813.htm",
+   "authority_tier": "CONCILIAR (translation)",
+   "reception_scope": "TRANSLATION_WITNESS",
+   "witness_only": true,
+   "citation_refusal": null,
+   "fetch_mode": "HTML - pages truncate on retrieval; witness role only",
+   "fallback_only": false,
+   "n_chunks": 10,
+   "chars": 10054,
+   "text_hash": "30232dbfa4e02f8dd601a1629cac9edc5ab57101d9c12f91289340d082531503",
+   "fetched_at": "2026-09-12T15:28:13Z",
+   "urls": [
+    {
+     "url": "https://www.newadvent.org/fathers/3813.htm",
+     "mode": "http",
+     "status": 200,
+     "ok": true,
+     "error": "",
+     "final_url": "https://www.newadvent.org/fathers/3813.htm",
+     "redirects": [],
+     "cross_host_redirect": ""
+    }
+   ],
+   "notes": [
+    "Definition of Faith only: 10 paragraphs; 3 Greek glosses moved to parallel witness; witness row (TRANSLATION_WITNESS) — never controls a cell"
+   ],
+   "fetch_verdict": "OK",
+   "noncitable_spans": 0,
+   "languages": [
+    "en"
+   ],
+   "polytonic_chunks": 0
+  },
+  "BSR-EO-14": {
+   "status": "UNCHANGED",
+   "branch": "Eastern Orthodox",
+   "standard_title": "Divine Liturgy of St John Chrysostom (Greek Orthodox Archdiocese of Canada)",
+   "canonical_url": "https://goarchdiocese.ca/divine-liturgy-of-saint-john-chrysostom/",
+   "authority_tier": "CONFESSIONAL (liturgically confessed; the Creed within resolves CONCILIAR)",
+   "reception_scope": "UNIVERSAL",
+   "witness_only": false,
+   "citation_refusal": null,
+   "fetch_mode": "HTML plus text-layer PDF at /wp-content/uploads/2011/10/Divine-Liturgy-of-Saint-John-Chrysostom-PDF.pdf",
+   "fallback_only": false,
+   "n_chunks": 19,
+   "chars": 33486,
+   "text_hash": "920a4e572a7f3f6e161d527d5d9833ebef6285d4455894e8548ddca57b9791bf",
+   "fetched_at": "2026-09-12T15:28:13Z",
+   "urls": [
+    {
+     "url": "https://goarchdiocese.ca/divine-liturgy-of-saint-john-chrysostom/",
+     "mode": "http",
+     "status": 200,
+     "ok": true,
+     "error": "",
+     "final_url": "https://goarchdiocese.ca/divine-liturgy-of-saint-john-chrysostom/",
+     "redirects": [],
+     "cross_host_redirect": ""
+    },
+    {
+     "url": "https://goarchdiocese.ca/wp-content/uploads/2011/10/Divine-Liturgy-of-Saint-John-Chrysostom-PDF.pdf",
+     "mode": "pdf",
+     "status": 200,
+     "ok": true,
+     "error": "",
+     "final_url": "https://goarchdiocese.ca/wp-content/uploads/2011/10/Divine-Liturgy-of-Saint-John-Chrysostom-PDF.pdf",
+     "redirects": [],
+     "cross_host_redirect": ""
+    }
+   ],
+   "notes": [
+    "fetched via http (goarchdiocese.ca, publisher_domain)",
+    "19 divisions (the page's own capitalised headings); anaphora divisions 1; creed divisions 1",
+    "anaphora adjectives present: ineffable, beyond comprehension, invisible, beyond understanding",
+    "Creed reads 'Creator of heaven and earth'",
+    "text-layer PDF fetched as durability witness (17 pages): anaphora wording matches the page; not chunked"
+   ],
+   "fetch_verdict": "OK",
+   "noncitable_spans": 0,
+   "languages": [
+    "en"
+   ],
+   "polytonic_chunks": 0
   }
  },
- "total_chunks": 4995
+ "total_chunks": 5089
 }

@@ -4,11 +4,11 @@ Used by the Gate 2 pipeline (rule R001, branches.json) and by the Gate 6 recover
 team (scripts/sjn_recovery). The registry is the only list of sources a cell may
 cite; enforcement keys on `publisher_domain` (APP CONFIG `registry_only_enforcement`).
 
-Lineage admission: some AUTHOR_RATIFIED rows are LINEAGE rows whose text lives on a
-third-party host already cited by released cells (EWTN, Fordham, ccel, newadvent). Where
-the row names that host in `publisher_domain`, `canonical_url` or `standard_title`, the
-host is admitted for that branch and reported as lineage-admitted so the Gate 7
-migration (APP CONFIG `lineage_host_policy = MIGRATE_WHERE_OFFICIAL`) can find it.
+Parser rule (2026-09-12): a row admits its `publisher_domain` and nothing else — see `admission`.
+LINEAGE rows (EWTN, Fordham, ccel, newadvent) name their host in `publisher_domain` explicitly
+(BSR-RC-05, BSR-EO-13 pattern); a host that appears only in prose is never admitted. The one
+exception is AC-15 (controlled storage, `LINKED FROM: ` prefix). The retired all-tokens parser is
+kept as `legacy_admitted_domains` for the audit only.
 """
 import re
 from urllib.parse import urlparse
@@ -55,9 +55,82 @@ def host_matches(host, domain):
     return h == d or h.endswith("." + d) or registrable(h) == registrable(d)
 
 
-def admitted_domains(row):
-    """publisher_domain plus any host the row itself names (canonical_url, standard_title,
-    draft_recommendation). Returns (primary, lineage_extra) — both normalized."""
+LINKED_FROM_PREFIX = "LINKED FROM: "
+
+# Hosts that are storage endpoints of a website vendor or cloud account rather than a publishing
+# body's own domain. A registry row whose publisher_domain is one of these is a CONTROLLED-STORAGE
+# row: it is admitted only under AC-15 (below). The list is a recognition aid, not an allowlist —
+# nothing here is admitted by itself.
+CONTROLLED_STORAGE_HOSTS = ("cdn-website.com", "blob.core.windows.net", "web.core.windows.net", "azureedge.net",
+                            "amazonaws.com", "cloudfront.net", "googleusercontent.com", "storage.googleapis.com",
+                            "squarespace.com", "wixstatic.com", "dropboxusercontent.com", "sharepoint.com",
+                            "files.wordpress.com", "wp.com", "box.com")
+CONTROLLED_STORAGE_ADMIT = "ADMIT_IF_LINKED_FROM_OFFICIAL_DOMAIN"
+
+
+def is_controlled_storage_host(host):
+    h = normalize_host(host)
+    return bool(h) and any(h == d or h.endswith("." + d) for d in CONTROLLED_STORAGE_HOSTS)
+
+
+def linked_from_url(row):
+    """AC-15 (ratified 2026-09-12): the row note carries the FIXED prefix `LINKED FROM: ` naming a
+    URL on the publishing body's official domain. The prefix must open the note (reception_note or
+    author_note); prose mentioning a link elsewhere does not count. Returns the URL or None."""
+    for field in ("reception_note", "author_note"):
+        m = re.match(r"^\s*" + re.escape(LINKED_FROM_PREFIX.strip()) + r"\s*(https?://\S+)", s(row.get(field)))
+        if m:
+            return m.group(1).rstrip(").,;")
+    return None
+
+
+def admission(row, config=None):
+    """The R001 admission decision for one registry row — PARSER RULE (since 2026-09-12):
+
+      * the row's allowlist is its `publisher_domain` and NOTHING ELSE. No host is read out of
+        `canonical_url`, `standard_title` or any note: prose that names a host ("not on vatican.va",
+        "gameo.org returns 403", "a third-party convenience copy") never admits it. The earlier rule
+        (`legacy_admitted_domains`, retired) extracted every domain-shaped token from those fields.
+      * AC-15 exception: a storage endpoint the publishing body controls and links to from its own
+        domain counts as that body publishing (APP CONFIG controlled_storage_policy =
+        ADMIT_IF_LINKED_FROM_OFFICIAL_DOMAIN). A row whose publisher_domain is a controlled-storage
+        host is admitted ONLY when its note opens with `LINKED FROM: <url on the official domain>`;
+        the official domain named there is admitted beside it (it is the body's adoption page).
+        Absent the prefix, or under any other policy value, the row admits nothing and is REFUSED.
+
+    Returns {"primary", "extra", "kind", "refused", "reason", "linked_from"}."""
+    primary = normalize_host(row.get("publisher_domain", ""))
+    out = {"primary": primary, "extra": [], "kind": "primary", "refused": False, "reason": "", "linked_from": None}
+    if not primary:
+        out.update(refused=True, reason="publisher_domain is empty")
+        return out
+    if is_controlled_storage_host(primary):
+        policy = s((config or {}).get("controlled_storage_policy")).upper()
+        url = linked_from_url(row)
+        official = normalize_host(urlparse(url).netloc) if url else ""
+        if policy != CONTROLLED_STORAGE_ADMIT:
+            out.update(primary="", refused=True, reason=f"controlled-storage host {primary} refused: APP CONFIG controlled_storage_policy is {policy or 'unset'}")
+        elif not url:
+            out.update(primary="", refused=True, reason=f"controlled-storage host {primary} refused: no `LINKED FROM: <official url>` prefix on the row note (AC-15)")
+        elif not official or is_controlled_storage_host(official) or host_matches(official, primary):
+            out.update(primary="", refused=True, reason=f"controlled-storage host {primary} refused: LINKED FROM names {official or url!r}, not an official domain (AC-15)")
+        else:
+            out.update(kind="controlled_storage", extra=[official], linked_from=url,
+                       reason=f"AC-15: {primary} admitted as the body's own storage, linked from {official}")
+    return out
+
+
+def admitted_domains(row, config=None):
+    """(primary, extra) — publisher_domain only, plus the AC-15 official domain for an admitted
+    controlled-storage row. A refused row returns ("", [])."""
+    a = admission(row, config)
+    return a["primary"], list(a["extra"])
+
+
+def legacy_admitted_domains(row):
+    """RETIRED 2026-09-12 — kept only so the audit (sjn_recovery/allowlist_audit.py) can show what the
+    old parser admitted. It took publisher_domain PLUS every domain-shaped token in canonical_url and
+    standard_title, prose included, which is how "(not on vatican.va)" admitted vatican.va."""
     primary = normalize_host(row.get("publisher_domain", ""))
     extra = set()
     url = row.get("canonical_url", "")
@@ -71,17 +144,21 @@ def admitted_domains(row):
     return primary, sorted(extra)
 
 
-def branch_domain_index(rows):
-    """branch -> {domain: {"registry_id", "kind": "primary"|"lineage", "row"}} over AUTHOR_RATIFIED rows."""
+def branch_domain_index(rows, config=None):
+    """branch -> {domain: {"registry_id", "kind": "primary"|"controlled_storage"|"official_link", "row"}}
+    over AUTHOR_RATIFIED rows, built by `admission` (publisher_domain only; AC-15 for controlled storage).
+    A refused row contributes nothing."""
     idx = {}
     for r in ratified(rows):
         br = r.get("branch", "")
-        primary, extra = admitted_domains(r)
+        a = admission(r, config)
+        if a["refused"]:
+            continue
         bucket = idx.setdefault(br, {})
-        if primary and primary not in bucket:
-            bucket[primary] = {"registry_id": r["registry_id"], "kind": "primary", "row": r}
-        for d in extra:
-            bucket.setdefault(d, {"registry_id": r["registry_id"], "kind": "lineage", "row": r})
+        if a["primary"] and a["primary"] not in bucket:
+            bucket[a["primary"]] = {"registry_id": r["registry_id"], "kind": a["kind"], "row": r}
+        for d in a["extra"]:
+            bucket.setdefault(d, {"registry_id": r["registry_id"], "kind": "official_link", "row": r})
     return idx
 
 

@@ -99,9 +99,15 @@ def equivalent_registry_ids(cell):
             return {"BSR-EO-06"}          # the councils' definitions: v2.25 re-sourced BSR-EO-06 to Percival
         return {"BSR-EO-01", "BSR-EO-02", "BSR-EO-06"}
     if host == "newadvent.org":
-        return {"BSR-EO-06"}
+        return {"BSR-EO-13"}                # v2.25r2: its own LINEAGE row (Q-034); no longer prose inside BSR-EO-06
     if host == "goarch.org":
-        return {"BSR-EO-07"} if "chrysostom" in path else {"BSR-EO-03"}
+        return set()                        # host retired 2026-09-12: no ratified corpus stands behind the citation
+    if host == "acrod.org":
+        return {"BSR-EO-07"}
+    if host == "goarchdiocese.ca":
+        return {"BSR-EO-14"}
+    if host == "irp.cdn-website.com":
+        return {"BSR-MW-03"}
     if host == "roea.org":
         return {"BSR-EO-09"} if "synodikon" in path.casefold() else {"BSR-EO-08"}
     if host == "holycouncil.org":
@@ -659,8 +665,8 @@ def cmd_report(args):
                        "false_accept_ok": far is not None and far <= THRESH_FALSE_ACCEPT,
                        "dositheus_ok": dfar is not None and dfar <= THRESH_FALSE_ACCEPT}
     # ---- corpus facts for the report
-    new_rows = ["BSR-EO-07", "BSR-EO-08", "BSR-EO-09", "BSR-EO-10", "BSR-EO-11", "BSR-EO-12"]
-    changed_rows = ["BSR-RC-04", "BSR-EO-06", "BSR-MW-03", "BSR-EO-03"]
+    new_rows = ["BSR-EO-07", "BSR-EO-08", "BSR-EO-09", "BSR-EO-10", "BSR-EO-11", "BSR-EO-12", "BSR-EO-13", "BSR-EO-14"]
+    changed_rows = ["BSR-RC-04", "BSR-EO-06", "BSR-MW-03", "BSR-EO-03", "BSR-AN-03"]
     fetch_audit = json.load(open(FETCH_AUDIT_PATH, encoding="utf-8")) if os.path.exists(FETCH_AUDIT_PATH) else {}
     guard_tests = open(os.path.join(run_dir, "guard-tests.txt"), encoding="utf-8").read() if os.path.exists(os.path.join(run_dir, "guard-tests.txt")) else ""
     goarch_probe = json.load(open(os.path.join(run_dir, "goarch-probe.json"), encoding="utf-8")) if os.path.exists(os.path.join(run_dir, "goarch-probe.json")) else {}

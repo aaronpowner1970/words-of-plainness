@@ -20,9 +20,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from sjn_pipeline.fetch import pdf_text  # noqa: E402
 from sjn_pipeline.scope import html_segments  # noqa: E402
 
-from .config import ARCHIVE_DIR  # noqa: E402
+from urllib.parse import urlparse  # noqa: E402
+
+from sjn_pipeline.registry import host_matches, normalize_host  # noqa: E402
+
+from .config import ARCHIVE_DIR, RETIRED_HOSTS  # noqa: E402
 from .textutil import (segments, join, clean, strip_footnote_digits, sha, pdf_repair, fix_mojibake,  # noqa: E402
-                       nfc, has_polytonic, strip_foreign_parentheticals, normalize)
+                       nfc, has_polytonic, strip_foreign_parentheticals, normalize, dehyphenate, hyphenation_residue)
 
 ROMAN = r"(?:[IVXLC]+)"
 ROMAN_MAP = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, "X": 10, "XI": 11,
@@ -32,14 +36,41 @@ ROMAN_MAP = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VII
              "XXXVII": 37, "XXXVIII": 38, "XXXIX": 39}
 
 
+def retired_host(url):
+    """The retirement reason if `url` sits on a retired registry host (config.RETIRED_HOSTS), else None.
+    A retired host is never requested, for any purpose."""
+    host = normalize_host(urlparse(url or "").netloc) if str(url or "").startswith("http") else normalize_host(str(url or "").split("/")[0])
+    for h, reason in RETIRED_HOSTS.items():
+        if host and host_matches(host, h):
+            return reason
+    return None
+
+
 class Ctx:
-    def __init__(self, row, fetcher, log=print, config=None):
+    def __init__(self, row, fetcher, log=print, config=None, admitted_hosts=None):
         self.row = row
         self.rid = row["registry_id"]
         self.fetcher = fetcher
         self.log = log
         self.config = config or {}
         self.urls = []
+        # Host guard (2026-09-12): every URL an adapter requests must sit on a host the row admits under
+        # R001 — its publisher_domain, plus the AC-15 official domain for a controlled-storage row. A
+        # corpus fetched from any other host would put text in front of the agents that the registry
+        # never ratified for that row (cal-3 built BSR-AN-03 from churchofengland.org while its
+        # publisher_domain was ccel.org). None = no guard (tests only).
+        self.admitted_hosts = list(admitted_hosts) if admitted_hosts is not None else None
+
+    def _check_host(self, url):
+        reason = retired_host(url)
+        if reason:
+            raise RetiredHostError(f"{url}: host retired — {reason}")
+        if self.admitted_hosts is None:
+            return
+        host = normalize_host(urlparse(url).netloc)
+        if not any(host_matches(host, d) for d in self.admitted_hosts):
+            raise HostNotAdmittedError(f"{url}: host {host} is not admitted for {self.rid} (publisher_domain "
+                                       f"{self.row.get('publisher_domain')!r}; admitted {self.admitted_hosts})")
 
     def _log_fetch(self, url, mode, fr):
         rec = {"url": url, "mode": mode, "status": fr.status, "ok": fr.ok, "error": fr.error,
@@ -51,6 +82,7 @@ class Ctx:
         return rec
 
     def html(self, url):
+        self._check_host(url)
         fr = self.fetcher.get(url)
         self._log_fetch(url, "http", fr)
         if fr.status == 403:
@@ -60,19 +92,25 @@ class Ctx:
         return fr.html
 
     def pdf(self, url):
+        """PDF text with line-break hyphenation joined at extraction (textutil.dehyphenate, whole-document
+        vocabulary as evidence) — before any adapter splits it, so no adapter can carry "na-\nture" into a chunk."""
+        self._check_host(url)
         fr = self.fetcher.get(url)
         self._log_fetch(url, "pdf", fr)
         if fr.status == 403:
             raise BlockedError(f"{url}: HTTP 403")
         if not fr.ok or not fr.pdf_bytes:
             raise FetchError(f"{url}: {fr.error or 'no PDF bytes'}")
-        return pdf_text(fr.pdf_bytes)
+        raw = pdf_text(fr.pdf_bytes)
+        self.hyphenation = getattr(self, "hyphenation", {})
+        return dehyphenate(raw, stats=self.hyphenation)
 
     def archived(self, url, kind="html"):
         """A one-time archived fetch committed under recovery-runs/archived-fetches/<rid>.<ext> with a
         <rid>.provenance.json beside it (url, fetched_at, method, sha256). Returns the payload or None."""
         import hashlib
         import json as _json
+        self._check_host(url)
         ext = "pdf" if kind == "pdf" else "html"
         p = os.path.join(ARCHIVE_DIR, f"{self.rid}.{ext}")
         prov = os.path.join(ARCHIVE_DIR, f"{self.rid}.provenance.json")
@@ -89,6 +127,7 @@ class Ctx:
         return raw if kind == "pdf" else raw.decode(meta.get("encoding", "utf-8"), "replace")
 
     def rendered(self, url):
+        self._check_host(url)
         fr = self.fetcher.rendered(url)
         self.urls.append({"url": url, "mode": "rendered", "status": fr.status, "ok": fr.ok, "error": fr.error})
         if not fr.ok:
@@ -120,6 +159,35 @@ class BlockedError(FetchError):
 class RedirectError(FetchError):
     """The host redirected the ratified URL onto a different host. Verdict: host (the fetcher no
     longer follows it)."""
+
+
+class RetiredHostError(FetchError):
+    """The URL sits on a retired registry host (config.RETIRED_HOSTS). Never requested."""
+
+
+class HostNotAdmittedError(FetchError):
+    """An adapter asked for a URL on a host the row does not admit under R001 (publisher_domain / AC-15)."""
+
+
+def dehyphenate_chunks(chunks):
+    """Post-extraction pass over one standard's chunks: join words split across a line break in every
+    chunk text (and in the Synodikon's full_text / withheld spans, so the non-citable check keeps
+    matching), using the standard's whole vocabulary as evidence, and recompute text_hash. Returns
+    {"stats": per-rule counts, "residue": splits still present, "changed": n_chunks_changed}."""
+    vocab_text = "\n".join([c.get("text", "") for c in chunks] + [c.get("full_text", "") for c in chunks if c.get("full_text")])
+    stats, residue, changed = {}, [], 0
+    for c in chunks:
+        new = dehyphenate(c["text"], vocab_text, stats)
+        if new != c["text"]:
+            c["text"], c["text_hash"] = new, sha(new)
+            changed += 1
+        if c.get("full_text"):
+            c["full_text"] = dehyphenate(c["full_text"], vocab_text, {})
+        for sp in c.get("noncitable_spans") or []:
+            if isinstance(sp, dict) and sp.get("text"):
+                sp["text"] = dehyphenate(sp["text"], vocab_text, {})
+        residue.extend(hyphenation_residue(c["text"]))
+    return {"stats": stats, "residue": residue, "changed": changed}
 
 
 def _emit(ctx, out, locator, parts, division, url, language="en"):
@@ -438,7 +506,9 @@ def _html_sections(ctx, html, url, label_prefix=""):
 
 
 def goarch_single(ctx):
-    """BSR-EO-07 / BSR-EO-03 — ONE ratified URL on goarch.org, never crawled. The host answers automated
+    """(RETIRED 2026-09-12 with the host: goarch.org is never requested — config.RETIRED_HOSTS; BSR-EO-03 now
+    builds as HOST_RETIRED and BSR-EO-07 moved to acrod.org. Kept for the record.)
+    BSR-EO-07 / BSR-EO-03 — ONE ratified URL on goarch.org, never crawled. The host answers automated
     fetches with a Cloudflare managed challenge (HTTP 403, cf-mitigated: challenge) on every route tried
     in cal-3 (plain requests under five user agents, Playwright headless and headed, the desktop app's
     own Chromium), so the order is: (1) a committed one-time archived fetch with provenance, if present;
@@ -1108,6 +1178,8 @@ def bcp_catechism_1662(ctx):
 
 
 def athanasian_creed_cofe(ctx):
+    """(cal-1 … cal-3 adapter for BSR-AN-03. RETIRED 2026-09-12: it fetched churchofengland.org while the
+    row's publisher_domain is ccel.org — the host guard now refuses it. Kept for the record.)"""
     url = "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/creed-s-athanasius"
     blocks = ctx.rendered(url).get("blocks") or []
     start = next((i for i, b_ in enumerate(blocks) if b_["text"].strip().upper().startswith("QUICUNQUE VULT")), -1)
@@ -1122,6 +1194,24 @@ def athanasian_creed_cofe(ctx):
     out = []
     _emit(ctx, out, "Quicunque Vult (Creed of S. Athanasius), At Morning Prayer", verses, "creed", url)
     return out, ["official host churchofengland.org (registry lists ccel.org as lineage for 1 released cell)", f"{len(verses)} verses"]
+
+
+CCEL_ATHANASIAN = "https://ccel.org/ccel/creeds/athanasian.creed.html"
+
+
+def athanasian_creed_ccel(ctx):
+    """BSR-AN-03 (2026-09-12) — the Athanasian Creed on ccel.org, the row's ratified publisher_domain
+    ("ccel.org as cited (1 released cell)": Q-293 cites this page). APP CONFIG `athanasian_text_witness`
+    names the page; the 44 numbered verses are one division, cited as the creed. The Church of England
+    BCP text is the Gate 7 migration target (draft_recommendation), not this row's host."""
+    url = str(ctx.config.get("athanasian_text_witness") or CCEL_ATHANASIAN)
+    segs = segments(ctx.html(url))
+    verses = [clean(x) for tag, x in segs if tag == "p" and re.match(r"^\d{1,2}\.\s+\S", clean(x))]
+    if len(verses) < 40:
+        raise FetchError(f"ccel Athanasian Creed: expected ~44 numbered verses, found {len(verses)}")
+    out = []
+    _emit(ctx, out, f"Athanasian Creed (Quicunque Vult), verses 1–{len(verses)}", verses, "creed", url)
+    return out, [f"ccel.org (publisher_domain) — {len(verses)} numbered verses in one division; the churchofengland.org text is the Gate 7 migration target, not fetched"]
 
 
 def tec_outline_of_faith(ctx):
@@ -1410,21 +1500,201 @@ def dordrecht(ctx):
     return out, [f"{len(out)} articles"]
 
 
+# =============================================================== 2026-09-12 re-hosted / new rows
+def _caps_heading(t):
+    return bool(re.fullmatch(r"[A-Z][A-Z'’\-]*(?:\s+[A-Z][A-Z'’\-]*){0,7}", t)) and len(t) <= 60
+
+
+def _liturgy_notes(rid, out, four=("ineffable", "inconceivable", "invisible", "incomprehensible")):
+    anaph = [c for c in out if "anaphora" in c["locator"].casefold()]
+    creed = [c for c in out if re.search(r"creed|symbol of faith", c["locator"], re.I)]
+    notes = [f"{len(out)} divisions (the page's own capitalised headings); anaphora divisions {len(anaph)}; creed divisions {len(creed)}"]
+    if anaph:
+        present = [w for w in four if any(re.search(r"\b" + w + r"\b", c["text"], re.I) for c in anaph)]
+        notes.append(f"anaphora adjectives present: {', '.join(present) or 'none'}")
+    if creed:
+        notes.append("Creed reads 'Creator of heaven and earth'" if any("Creator of heaven and earth" in c["text"] for c in creed)
+                     else "Creed: 'Creator of heaven and earth' NOT found — check the split")
+    return notes
+
+
+def acrod_liturgy(ctx):
+    """BSR-EO-07 (v2.25r2) — the Divine Liturgy of St John Chrysostom on acrod.org (American Carpatho-Russian
+    Orthodox Diocese). Plain HTML, no challenge. The page's own capitalised headings (THE SYMBOL OF FAITH,
+    THE ANAPHORA, …) are the divisions; priest/people lines are inline in the paragraphs. Replaces the
+    retired goarch.org host, which is never requested."""
+    url = ctx.row["canonical_url"]
+    segs = segments(ctx.html(url))
+    start = next((i for i, (tag, x) in enumerate(segs) if tag == "strong" and "Divine Liturgy of St. John Chrysostom" in clean(x)), -1)
+    if start < 0:
+        raise FetchError("ACROD: 'The Divine Liturgy of St. John Chrysostom' title not found")
+    out, cur, buf = [], None, []
+    for tag, text in segs[start + 1:]:
+        t = clean(text)
+        if not t:
+            continue
+        if tag == "p" and _caps_heading(t):
+            if cur and buf:
+                _emit(ctx, out, cur, buf, "division", url)
+            cur, buf = t, []
+            continue
+        if cur and tag in ("p", "em", "strong", "i", "b", "li", "blockquote"):
+            buf.append(t)
+    if cur and buf:
+        _emit(ctx, out, cur, buf, "division", url)
+    return out, ["fetched via http (acrod.org, publisher_domain)"] + _liturgy_notes(ctx.rid, out)
+
+
+def goarchdiocese_liturgy(ctx):
+    """BSR-EO-14 (v2.25r2, NEW) — the Divine Liturgy of St John Chrysostom on goarchdiocese.ca (Greek Orthodox
+    Archdiocese of Canada; its own WordPress, not the GOARCH platform). Divisions are the page's capitalised
+    <span> headings (THE CREED, THE HOLY ANAPHORA, …); the <strong> speaker labels (Priest:, People:) are
+    folded into the paragraph that follows them. The text-layer PDF the row names is fetched once as the
+    durability witness and compared on the anaphora wording; it is not chunked (same text, second locator
+    would only split the locator's attention). Wording differs from BSR-EO-07 ('beyond comprehension',
+    'beyond understanding'); a cell quotes whichever file it cites."""
+    url = ctx.row["canonical_url"]
+    segs = segments(ctx.html(url))
+    out, cur, buf, label = [], None, [], None
+    for tag, text in segs:
+        t = clean(text)
+        if not t:
+            continue
+        if tag == "span" and _caps_heading(t):
+            if cur and buf:
+                _emit(ctx, out, cur, buf, "division", url)
+            cur, buf, label = t, [], None
+            continue
+        if not cur:
+            continue
+        if tag == "strong" and re.match(r"^(Priest|People|Deacon|Reader|Choir|Bishop|Celebrant)\b.*:$", t):
+            label = t
+            continue
+        if tag in ("p", "em", "i", "b", "li", "blockquote", "strong"):
+            buf.append(f"{label} {t}" if label else t)
+            label = None
+    if cur and buf:
+        _emit(ctx, out, cur, buf, "division", url)
+    notes = ["fetched via http (goarchdiocese.ca, publisher_domain)"] + _liturgy_notes(ctx.rid, out, four=("ineffable", "beyond comprehension", "invisible", "beyond understanding"))
+    m = re.search(r"(/wp-content/\S+?\.pdf)", ctx.row.get("fetch_mode", ""))
+    if m:
+        pdf_url = urljoin(url, m.group(1))
+        try:
+            pdf = ctx.pdf(pdf_url)
+            key = "beyond comprehension, invisible, beyond understanding"
+            notes.append(f"text-layer PDF fetched as durability witness ({pdf.count(chr(12)) + 1} pages): anaphora wording "
+                         f"{'matches the page' if normalize(key) in normalize(pdf) else 'NOT found in the PDF'}; not chunked")
+        except FetchError as e:
+            notes.append(f"text-layer PDF witness unavailable: {e}")
+    return out, notes
+
+
+def newadvent_constantinople_iii(ctx):
+    """BSR-EO-13 (v2.25r2, NEW, LINEAGE / TRANSLATION_WITNESS) — the Third Council of Constantinople on
+    newadvent.org (Percival's NPNF2-14 text, transcribed). Only 'The Definition of Faith' (Session XVIII)
+    is chunked, paragraph by paragraph; the letters, session extracts and the sentence are not the
+    council's definition. Greek glosses in parentheses move to a parallel witness. The row is a witness
+    (never controls a cell); it repairs released cell Q-034."""
+    from bs4 import BeautifulSoup
+    url = ctx.row["canonical_url"]
+    soup = BeautifulSoup(ctx.html(url), "lxml")
+    h2 = next((h for h in soup.find_all("h2") if clean(h.get_text(" ")) == "The Definition of Faith"), None)
+    if h2 is None:
+        raise FetchError("newadvent 3813: 'The Definition of Faith' heading not found")
+    out, n, greek = [], 0, []
+    for el in h2.find_all_next():
+        if el.name in ("h1", "h2"):
+            break
+        if el.name != "p":
+            continue
+        txt = clean(el.get_text(""))
+        if not txt or (txt.startswith("(") and ("Concilia" in txt or "Found in the Acts" in txt or "col." in txt)):
+            continue
+        if re.fullmatch(r"[.,;:\s]+", txt):
+            continue
+        eng, foreign = strip_foreign_parentheticals(txt)
+        greek.extend(foreign)
+        if not eng:
+            continue
+        n += 1
+        c = ctx.chunk(f"Definition of Faith (Session XVIII), paragraph {n}", eng, "paragraph", url,
+                      parallel_witness=({"language": "grc", "glosses": foreign} if foreign else None), witness=True)
+        if c:
+            out.append(c)
+    for c in out:
+        c["witness"] = True
+    return out, [f"Definition of Faith only: {n} paragraphs; {len(greek)} Greek glosses moved to parallel witness; witness row (TRANSLATION_WITNESS) — never controls a cell"]
+
+
+GMC_HEAD = re.compile(r"^Article\s+([IVXL]+)\s+[-–—]\s+(.+)$")
+GMC_UNNUMBERED = ("Of Sanctification (from the Methodist Protestant Discipline)", "Of the Duty of Christians to the Civil Authority")
+
+
+def gmc_bdd_2024(ctx):
+    """BSR-MW-03 (v2.25r2) — the Global Methodist Church's 2024 Book of Doctrines and Discipline, a text-layer
+    PDF on the church's controlled storage (irp.cdn-website.com/1876eae9/, admitted under AC-15: the row note
+    opens `LINKED FROM: https://www.globalmethodist.org/our-beliefs---governance`). Chunked as ratified —
+    'Articles of Religion, Article I onward' (¶106.1, the Twenty-Five Articles plus the two 1939 additions)
+    and ¶106.2, the Confession of Faith of the Evangelical United Brethren Church, sixteen articles — one
+    chunk per article, headings as printed ('Article I - Of Faith in the Holy Trinity'). The creeds of ¶105
+    are not in the ratified scope. Article I reads 'of infinite power, wisdom, and good' (not 'goodness')."""
+    url = ctx.row["canonical_url"]
+    pages = ctx.pdf(url).split("\f")
+    start = next((i for i, p in enumerate(pages) if re.search(r"1\.\s+THE ARTICLES OF RELIGION", p)), -1)
+    if start < 0:
+        raise FetchError("GMC BDD 2024: '1. THE ARTICLES OF RELIGION' not found")
+    end = next((i for i in range(start + 1, len(pages)) if re.search(r"¶\s*107\.", pages[i])), len(pages) - 1)
+    lines = []
+    for p in pages[start:end + 1]:
+        for l in p.split("\n"):
+            s_ = l.strip()
+            if not s_ or re.fullmatch(r"\d{1,3}", s_) or s_.startswith("2024 Book of Doctrines and Discipline") or s_ == "Go to Previous Page":
+                continue
+            lines.append(s_)
+    out, doc, cur, buf = [], None, None, []
+
+    def flush():
+        if doc and cur and buf:
+            _emit(ctx, out, f"{doc}, {cur}", buf, "article", url)
+    for l in lines:
+        if re.match(r"^1\.\s+THE ARTICLES OF RELIGION", l):
+            flush(); doc, cur, buf = "Articles of Religion", None, []; continue
+        if re.match(r"^2\.\s+THE CONFESSION OF FAITH", l):
+            flush(); doc, cur, buf = "Confession of Faith (Evangelical United Brethren)", None, []; continue
+        if re.match(r"^¶\s*107\.", l):
+            flush(); cur = None; break
+        if l.startswith("["):                       # the Uniting Conference notes: not article text
+            flush(); cur, buf = None, []; continue
+        m = GMC_HEAD.match(l)
+        if m or l in GMC_UNNUMBERED:
+            flush(); cur, buf = l, []; continue
+        if cur:
+            buf.append(l)
+    flush()
+    good = sum(1 for c in out if "infinite power, wisdom, and good;" in c["text"] or "infinite power, wisdom, and good " in c["text"])
+    goodness = sum(1 for c in out if "wisdom, and goodness" in c["text"])
+    aor = sum(1 for c in out if c["locator"].startswith("Articles of Religion"))
+    return out, [f"PDF pages {start + 1}–{end + 1}: {aor} Articles of Religion chunks (incl. the two 1939 additions) and {len(out) - aor} Confession of Faith chunks",
+                 f"Article I 'of infinite power, wisdom, and good' found in {good} chunk(s); 'wisdom, and goodness' in {goodness} chunk(s) (must be 0)",
+                 f"hyphenation at extraction: {getattr(ctx, 'hyphenation', {})}"]
+
+
 # =============================================================== dispatch
 ADAPTERS = {
     "BSR-RC-01": ccc_section_two, "BSR-RC-02": dei_filius_latin, "BSR-RC-03": dei_filius_ewtn,
     "BSR-RC-04": lateran_constitutions, "BSR-RC-06": vatican_creeds, "BSR-RC-07": compendium,
     "BSR-EO-01": oca_symbol_of_faith, "BSR-EO-02": oca_holy_trinity, "BSR-EO-03": goarch_single,
     "BSR-EO-04": philaret, "BSR-EO-05": dositheus, "BSR-EO-06": ccel_definitions,
-    "BSR-EO-07": goarch_single, "BSR-EO-08": roea_basil, "BSR-EO-09": roea_synodikon,
+    "BSR-EO-07": acrod_liturgy, "BSR-EO-08": roea_basil, "BSR-EO-09": roea_synodikon,
     "BSR-EO-10": crete_2016, "BSR-EO-11": antioch_witness, "BSR-EO-12": sparta_creed_greek,
+    "BSR-EO-13": newadvent_constantinople_iii, "BSR-EO-14": goarchdiocese_liturgy,
     "BSR-LU-01": book_of_concord, "BSR-LU-03": small_catechism_cph,
     "BSR-RP-01": wcf_opc, "BSR-RP-02": wsc_opc, "BSR-RP-03": wlc_opc, "BSR-RP-04": pcusa_book_of_confessions,
     "BSR-RP-05": heidelberg_crcna, "BSR-RP-06": belgic_crcna,
-    "BSR-AN-01": thirty_nine_articles, "BSR-AN-02": bcp_catechism_1662, "BSR-AN-03": athanasian_creed_cofe,
+    "BSR-AN-01": thirty_nine_articles, "BSR-AN-02": bcp_catechism_1662, "BSR-AN-03": athanasian_creed_ccel,
     "BSR-AN-04": tec_outline_of_faith, "BSR-AN-05": acna_to_be_a_christian,
     "BSR-BA-01": bfm2000, "BSR-BA-02": london_1689_ch2, "BSR-BA-03": abc_usa_10facts,
-    "BSR-MW-01": umc_articles, "BSR-MW-02": umc_eub_confession, "BSR-MW-03": gmc_what_we_believe, "BSR-MW-04": wesleyan_articles,
+    "BSR-MW-01": umc_articles, "BSR-MW-02": umc_eub_confession, "BSR-MW-03": gmc_bdd_2024, "BSR-MW-04": wesleyan_articles,
     "BSR-MA-01": mennonite_1995, "BSR-MA-02": dordrecht,
 }
 

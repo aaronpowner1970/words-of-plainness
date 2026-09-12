@@ -19,7 +19,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 
 from sjn_pipeline.fetch import Fetcher  # noqa: E402
-from sjn_recovery.config import FETCH_CACHE, ensure_dirs, CHROMA_COLLECTION, EMBED_MODEL, CHROMA_PATH  # noqa: E402
+from sjn_recovery.config import FETCH_CACHE, ensure_dirs, CHROMA_COLLECTION, EMBED_MODEL, CHROMA_PATH, RETIRED_HOSTS  # noqa: E402
 from sjn_recovery.registry import Registry  # noqa: E402
 from sjn_recovery import sources, provenance, store  # noqa: E402
 
@@ -36,7 +36,7 @@ def build(args):
     # strict_host: the ratified URL is fetched byte for byte; a redirect onto another host is refused.
     fetcher = Fetcher(FETCH_CACHE, reuse_cache=args.reuse_cache, strict_host=True)
     only = set(args.only.split(",")) if args.only else None
-    results, drift, halted = {}, [], False
+    results, drift, halted, dropped = {}, [], False, []
     log(f"== SJN Gate 6 corpus build — workbook {os.path.basename(reg.path)} ({reg.app_master_version}); "
         f"{len(reg.rows)} AUTHOR_RATIFIED rows; fetch cache {'REUSED' if args.reuse_cache else 'LIVE'}; "
         f"gate metric {reg.gate_metric}; routing {reg.verifier_routing}; lateran scope {reg.lateran_iv_scope}")
@@ -57,14 +57,38 @@ def build(args):
                             "fetch_verdict": "NO_TEXT_BY_POLICY"}
             log(f"-- {rid} {kind}: {note[:110]}")
             continue
+        retired = sources.retired_host(row.get("canonical_url", ""))
+        if retired:
+            results[rid] = {"status": "HOST_RETIRED", **base, "n_chunks": 0, "text_hash": None, "notes": [retired],
+                            "fetch_verdict": "HOST_RETIRED: never requested"}
+            dropped.append(rid)
+            log(f"-- {rid} HOST_RETIRED: {retired[:100]}")
+            continue
+        adm = reg.admission(rid)
+        if adm["refused"]:
+            results[rid] = {"status": "ROW_REFUSED_R001", **base, "n_chunks": 0, "text_hash": None, "notes": [adm["reason"]],
+                            "fetch_verdict": "R001: row admits no host"}
+            dropped.append(rid)
+            log(f"-- {rid} ROW_REFUSED_R001: {adm['reason'][:110]}")
+            continue
         fn = sources.ADAPTERS.get(rid)
         if not fn:
             results[rid] = {"status": "NO_ADAPTER", **base, "n_chunks": 0, "text_hash": None, "notes": [], "fetch_verdict": "FETCHER (no adapter)"}
             log(f"-- {rid} NO_ADAPTER"); continue
-        ctx = sources.Ctx(row, fetcher, log, config=reg.config)
-        log(f"-- {rid} {row['branch']} — {row['standard_title'][:70]}")
+        ctx = sources.Ctx(row, fetcher, log, config=reg.config, admitted_hosts=reg.domains(rid))
+        log(f"-- {rid} {row['branch']} — {row['standard_title'][:70]}  [admitted hosts: {', '.join(reg.domains(rid))}]")
         try:
             chunks, notes = fn(ctx)
+        except sources.RetiredHostError as e:
+            results[rid] = {"status": "HOST_RETIRED", **base, "n_chunks": 0, "text_hash": None, "notes": [str(e)], "urls": ctx.urls,
+                            "fetch_verdict": "HOST_RETIRED: never requested"}
+            dropped.append(rid)
+            log(f"   RETIRED HOST (refused): {e}"); continue
+        except sources.HostNotAdmittedError as e:
+            results[rid] = {"status": "HOST_NOT_ADMITTED", **base, "n_chunks": 0, "text_hash": None, "notes": [str(e)], "urls": ctx.urls,
+                            "fetch_verdict": "R001: the adapter asked for a host the row does not admit; refused, nothing chunked"}
+            dropped.append(rid)
+            log(f"   HOST NOT ADMITTED (refused): {e}"); continue
         except sources.RedirectError as e:
             results[rid] = {"status": "HOST_REDIRECTS_CROSS_HOST", **base, "n_chunks": 0, "text_hash": None,
                             "notes": [str(e)], "urls": ctx.urls, "fetch_verdict": "HOST: the ratified URL answers with a redirect onto a different host"}
@@ -78,6 +102,10 @@ def build(args):
                             "notes": [str(e)], "urls": ctx.urls, "fetch_verdict": "see notes"}
             log(f"   FAILED: {e}"); continue
         chunks = store.dedupe_locators(chunks)
+        hyph = sources.dehyphenate_chunks(chunks)
+        if hyph["changed"] or hyph["residue"]:
+            notes.append(f"de-hyphenation at extraction: {hyph['stats']} in {hyph['changed']} chunk(s); "
+                         f"residue (suspended hyphens, left as printed): {hyph['residue'][:8]}")
         h = store.standard_hash(chunks)
         old = prev.get(rid, {})
         status = "BUILT"
@@ -98,12 +126,21 @@ def build(args):
         log(f"   {status}: {len(chunks)} chunks, {chars:,} chars, {len(ctx.urls)} fetch(es), {time.time() - t0:.1f}s; {notes[0] if notes else ''}")
         if rid == "BSR-EO-05":
             log("   provenance: diffing decrees against the Robertson 1899 edition (archive.org OCR)")
-            fr = fetcher.get(provenance.ROBERTSON_DJVU)
+            # The archive.org edition is an AUTHORITY REFERENCE only (never chunked, not a registry row):
+            # archive.org/download answers with a 302 onto its own CDN host (dnNNN.eu.archive.org), which
+            # the strict registry fetcher rightly refuses. The reference is fetched with hops allowed and
+            # every hop recorded here, so the provenance record says exactly where the OCR came from.
+            prov_fetcher = Fetcher(os.path.join(FETCH_CACHE, "provenance"), reuse_cache=False, strict_host=False)
+            fr = prov_fetcher.get(provenance.ROBERTSON_DJVU)
+            prov_fetcher.close()
             if not fr.ok:
-                results[rid]["provenance"] = {"verdict": "HALT", "note": f"archive.org OCR fetch failed: {fr.error}"}
+                results[rid]["provenance"] = {"verdict": "HALT", "note": f"archive.org OCR fetch failed: {fr.error}",
+                                              "redirects": list(fr.redirects or [])}
             else:
                 decrees = [(c["locator"], c["text"]) for c in chunks if c["division"] == "decree"]
                 results[rid]["provenance"] = provenance.check(decrees, fr.html)
+                results[rid]["provenance"]["fetched_from"] = fr.final_url
+                results[rid]["provenance"]["redirects"] = list(fr.redirects or [])
             pv = results[rid]["provenance"]
             log(f"   provenance verdict: {pv['verdict']} — matched {pv.get('matched')} / checked {pv.get('decrees_checked')}, "
                 f"divergent {pv.get('divergent')}, unanchored {pv.get('unanchored')}")
@@ -134,6 +171,15 @@ def build(args):
         else:
             log(f"!! Ollama/{EMBED_MODEL} unavailable — chunk JSON written, Chroma skipped (retrieval falls back to BM25)")
     n_total = 0
+    for rid in dropped:                    # retired / refused rows: no chunk file, no embeddings
+        p_ = os.path.join(store.CHUNK_DIR, f"{rid}.json")
+        if os.path.exists(p_):
+            os.remove(p_); log(f"   dropped cached chunks for {rid}")
+        if col is not None:
+            try:
+                col.delete(where={"registry_id": rid})
+            except Exception:
+                pass
     for rid, r in results.items():
         chunks = r.pop("_chunks", None)
         if chunks is None:
@@ -151,9 +197,13 @@ def build(args):
         "registry_ratified": len(reg.rows), "fallback_only_rows": sorted(reg.fallback_ids),
         "app_config": {k: str(reg.config.get(k)) for k in ("gate6_threshold_metric", "authority_tier_rank", "reception_scope_vocabulary",
                                                           "reception_axis", "creed_tier_resolution", "lateran_iv_scope", "verifier_routing",
-                                                          "dialogue_text_policy", "encyclical_1848_status", "registry_fallback_only_rows")},
+                                                          "dialogue_text_policy", "encyclical_1848_status", "registry_fallback_only_rows",
+                                                          "controlled_storage_policy")},
         "opus_slice_rows": sorted(reg.opus_slice_rows()),
-        "fetch_policy": "strict_host: ratified URLs fetched byte for byte; cross-host redirects refused; no crawling of goarch.org",
+        "fetch_policy": "strict_host: ratified URLs fetched byte for byte; cross-host redirects refused; every requested URL must sit on a "
+                        "host the row admits under R001 (publisher_domain / AC-15); retired hosts are never requested",
+        "retired_hosts": dict(RETIRED_HOSTS),
+        "controlled_storage_policy": str(reg.config.get("controlled_storage_policy") or ""),
         "chroma": {"path": CHROMA_PATH, "collection": CHROMA_COLLECTION, "embedding_model": EMBED_MODEL,
                    "written": col is not None},
         "policy": "Chunks are internal only (never emitted to the site). URLs live in the manifest and chunk store; "
