@@ -1,18 +1,36 @@
-"""Locator → verifier → coder for one cell, with the guards applied in code and the fallback-tier
-two-pass rule (APP CONFIG registry_fallback_only_rows):
+"""Locator → verifier → coder for one cell, with the guards applied in code, the fallback-tier
+two-pass rule (APP CONFIG registry_fallback_only_rows), per-standard retrieval (cal-3, Fix 1) and
+the verifier routing SONNET_WITH_OPUS_SLICE (APP CONFIG verifier_routing, Fix 6).
 
   pass one   non-fallback rows of the branch only
   pass two   run ONLY if pass one produced no surviving (verified) candidate; then, and only then,
              the fallback row is admitted. A fallback citation never renders alongside a non-fallback
              witness for the same cell.
 
+Per-standard locate. The locator is called ONCE PER STANDARD with that standard's own chunks (whole
+when they fit the budget, otherwise the hybrid ranking within that standard). Every standard that
+yields a candidate gets a GUARANTEED verification slot for its best candidate; the remaining
+candidates compete for VERIFY_EXTRA_CANDIDATES further slots, ranked by authority tier and floor
+claim. A phrase the locator cut too long (>15 words) is not repaired by code — the locator is asked
+once to re-cut it verbatim, and the re-cut goes through the same guards.
+
+Routing. The primary verifier judges every slotted candidate. The adjudicator (opus) judges only the
+slice: candidates on the caveated rows, on fallback-only rows, on the guarded Synodikon row, and
+every candidate of a cell where the primary rejected all candidates. Where the adjudicator ran, its
+verdict is FINAL; the primary's verdict is kept beside it so overturns are visible in the report.
+
 Every function is resumable: with the batch backend a call that is not yet answered returns None and
 the cell state records where it stopped; re-running continues from the audit log."""
 import json
 import os
 
-from .config import MAX_CANDIDATES, EMPTY_RESULT
+from .config import MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES
+from .registry import tier_rank
+from .textutil import scrub_urls
 from . import guards, prompts, retrieval
+
+ACCEPTS = ("ACCEPT", "ACCEPT_WITH_CAVEAT")
+FLOOR_ORDER = {"FULL": 0, "PARTIAL": 1, "WORD_ONLY": 2}
 
 
 def _chunk_views(chunks):
@@ -27,10 +45,7 @@ def _chunk_views(chunks):
 
 class CellRunner:
     def __init__(self, llm, registry, predicates, comparators, state_dir, locator_model, verifier_models, coder_model=None,
-                 log=print, run_coder=True, secondary_cells=None):
-        # secondary_cells: when set, verifier models after the primary run only on these queue ids
-        # (calibration cost control; the report scopes each model's recall to the cells it verified)
-        self.secondary_cells = secondary_cells
+                 log=print, run_coder=True):
         self.llm = llm
         self.reg = registry
         self.predicates = predicates
@@ -38,7 +53,11 @@ class CellRunner:
         self.state_dir = state_dir
         os.makedirs(state_dir, exist_ok=True)
         self.locator_model = locator_model
-        self.verifier_models = verifier_models
+        self.verifier_models = list(verifier_models)
+        self.primary = self.verifier_models[0]
+        self.adjudicator = self.verifier_models[1] if len(self.verifier_models) > 1 else None
+        self.routing = registry.verifier_routing or "PRIMARY_ONLY"
+        self.slice_rows = registry.opus_slice_rows() if (self.adjudicator and registry.routing_is_slice()) else set()
         self.coder_model = coder_model or locator_model
         self.log = log
         self.run_coder = run_coder
@@ -58,59 +77,164 @@ class CellRunner:
         with open(self._path(st["queue_id"]), "w", encoding="utf-8") as fh:
             json.dump(st, fh, ensure_ascii=False, indent=1)
 
-    # ---------------------------------------------------------------- locator
-    def locate(self, cell, pass_no, st):
-        pred = self.predicates[cell["family_id"]]
-        comp = self.comparators.get(cell["family_id"], {})
-        include_fallback = pass_no == 2
-        standards = self.reg.for_branch(cell["branch"], include_fallback=True)
-        if pass_no == 1:
-            standards = [r for r in standards if not self.reg.is_fallback(r["registry_id"])]
-        else:
-            standards = [r for r in standards if self.reg.is_fallback(r["registry_id"])]  # pass two: the fallback row only
-        chunks, coverage = retrieval.select_chunks(pred, standards)
-        if not chunks:
-            return {"status": "NO_CORPUS", "candidates": [], "coverage": coverage, "standards": [r["registry_id"] for r in standards]}
-        views, by_key = _chunk_views(chunks)
-        standards_view = [self.reg.public(r["registry_id"]) for r in standards if r["registry_id"] in coverage]
-        for sv in standards_view:
-            sv["coverage"] = coverage[sv["registry_id"]]
-        user = prompts.locator_user(cell, pred, comp, views, standards_view, f"pass {pass_no}")
-        guards.assert_no_urls({"u": user})
-        out, rec = self.llm.complete("locator", prompts.LOCATOR_SYSTEM, user, model=self.locator_model, max_tokens=3000,
-                                     meta={"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"], "pass": pass_no})
+    # ---------------------------------------------------------------- calls with a ceiling retry
+    RETRY_CEILING = 8000
+
+    def _call(self, role, system, user, model, max_tokens, meta):
+        """One call, parsed. A reply that came back unparseable (the JSON cut off at the token ceiling,
+        as happens when the ceiling is spent before the text block) is re-sent ONCE with a larger
+        ceiling under a distinct call identity (attempt=1). Returns (out, rec, parsed, attempt);
+        out is None while a call is pending."""
+        out, rec = self.llm.complete(role, system, user, model=model, max_tokens=max_tokens, meta=meta)
         if out is None:
-            return {"status": "PENDING", "call_id": rec["call_id"]}
+            return None, rec, None, 0
         parsed = prompts.parse_json(out)
-        result = {"status": "DONE", "call_id": rec["call_id"], "coverage": coverage, "supplied_chunks": [(c["registry_id"], c["locator"]) for c in chunks],
-                  "standards": [r["registry_id"] for r in standards], "raw": out[:4000], "candidates": [], "dropped": []}
+        if parsed is not None:
+            return out, rec, parsed, 0
+        out2, rec2 = self.llm.complete(role, system, user, model=model, max_tokens=max(self.RETRY_CEILING, max_tokens * 2),
+                                       meta=meta, attempt=1)
+        if out2 is None:
+            return None, rec2, None, 1
+        return out2, rec2, prompts.parse_json(out2), 1
+
+    # ---------------------------------------------------------------- locator (per standard)
+    def standards_for_pass(self, branch, pass_no):
+        standards = self.reg.for_branch(branch, include_fallback=True, citable_only=True)
+        if pass_no == 1:
+            return [r for r in standards if not self.reg.is_fallback(r["registry_id"])]
+        return [r for r in standards if self.reg.is_fallback(r["registry_id"])]      # pass two: the fallback row(s) only
+
+    def _recut(self, cell, pred, cand, chunk, key, rid, pass_no):
+        """One re-cut call for an over-long phrase. Returns (status, candidate_or_None, raw)."""
+        chunk_view = {"chunk_key": key, "registry_id": chunk["registry_id"], "locator": chunk["locator"], "text": scrub_urls(chunk["text"])}
+        user = prompts.recut_user(pred, chunk_view, cand)
+        guards.assert_no_urls({"u": user})
+        out, rec, parsed, _ = self._call("recut", prompts.RECUT_SYSTEM, user, self.locator_model, 600,
+                                         {"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"],
+                                          "pass": pass_no, "registry_id": rid, "recut_of": cand.get("phrase", "")[:80]})
+        if out is None:
+            return "PENDING", None, None
+        parsed = parsed or {}
+        if parsed.get("phrase"):
+            new = dict(cand)
+            new.update({"phrase": parsed["phrase"], "rationale": parsed.get("rationale") or cand.get("rationale", ""),
+                        "floor_claim": parsed.get("floor_claim") or cand.get("floor_claim"), "recut_from": cand.get("phrase")})
+            return "DONE", new, out[:600]
+        return "NO_VALID_CUT", None, out[:600]
+
+    def locate_standard(self, cell, pred, comp, row, pass_no):
+        """Locator call for ONE standard. Returns the per-standard entry (status PENDING when a call
+        is unanswered — the caller re-runs; answered calls are served from the audit log)."""
+        rid = row["registry_id"]
+        include_fallback = pass_no == 2
+        chunks, coverage = retrieval.select_for_standard(pred, row)
+        if not chunks:
+            return {"status": "NO_CORPUS", "candidates": [], "dropped": []}
+        views, by_key = _chunk_views(chunks)
+        sv = self.reg.public(rid)
+        sv["coverage"] = coverage
+        user = prompts.locator_user(cell, pred, comp, views, [sv], f"pass {pass_no}")
+        guards.assert_no_urls({"u": user})
+        out, rec, parsed, attempt = self._call("locator", prompts.LOCATOR_SYSTEM, user, self.locator_model, 3000,
+                                               {"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"],
+                                                "pass": pass_no, "registry_id": rid})
+        entry = {"status": "PENDING", "call_id": rec["call_id"], "attempt": attempt, "coverage": coverage,
+                 "supplied_chunks": [(rid, c["locator"]) for c in chunks], "supplied_chars": sum(len(c["text"]) for c in chunks),
+                 "candidates": [], "dropped": [], "recuts": []}
+        if out is None:
+            return entry
+        entry["raw"] = out[:4000]
         if not parsed:
-            result["status"] = "UNPARSEABLE"
-            return result
+            entry["status"] = "UNPARSEABLE"           # retried on the next run
+            return entry
         if parsed.get("result", "").startswith("NOT LOCATED") or not parsed.get("candidates"):
-            result["empty"] = True
-            result["standards_reviewed"] = parsed.get("standards_reviewed", [r["registry_id"] for r in standards])
-            return result
+            entry["status"] = "EMPTY"
+            entry["empty"] = True
+            return entry
         seen = set()
         for cand in parsed.get("candidates", [])[:MAX_CANDIDATES * 2]:
             ok, why, chunk = guards.vet_candidate(cand, by_key, cell["branch"], self.reg, allow_fallback=include_fallback)
+            if not ok and why.startswith("phrase exceeds") and chunk is not None:
+                status, new, raw = self._recut(cell, pred, cand, chunk, cand.get("chunk_key"), rid, pass_no)
+                if status == "PENDING":
+                    entry["status"] = "PENDING"
+                    return entry
+                entry["recuts"].append({"from": cand.get("phrase"), "status": status, "to": (new or {}).get("phrase"), "raw": raw})
+                if new is not None:
+                    ok, why, chunk = guards.vet_candidate(new, by_key, cell["branch"], self.reg, allow_fallback=include_fallback)
+                    cand = new
+                    why = f"after re-cut: {why}" if not ok else why
+                else:
+                    why = f"{why}; re-cut returned {status}"
             if not ok:
-                result["dropped"].append({"candidate": cand, "reason": why})
+                entry["dropped"].append({"candidate": cand, "reason": why})
                 continue
             k = guards.dedupe_key({"registry_id": chunk["registry_id"], "locator": chunk["locator"], "phrase": cand["phrase"]})
             if k in seen:
-                result["dropped"].append({"candidate": cand, "reason": "duplicate locator+phrase"})
+                entry["dropped"].append({"candidate": cand, "reason": "duplicate locator+phrase"})
                 continue
             seen.add(k)
-            result["candidates"].append({
-                "candidate_id": f"{cell['queue_id']}-p{pass_no}-{len(result['candidates']) + 1}",
-                "pass": pass_no, "registry_id": chunk["registry_id"], "locator": chunk["locator"],
+            n = len(entry["candidates"]) + 1
+            entry["candidates"].append({
+                "candidate_id": f"{cell['queue_id']}-p{pass_no}-{rid}-{n}",
+                "pass": pass_no, "registry_id": rid, "locator": chunk["locator"],
                 "phrase": cand["phrase"], "rationale": cand.get("rationale", ""), "floor_claim": cand.get("floor_claim"),
-                "chunk_text": chunk["text"], "chunk_hash": chunk["text_hash"], "division": chunk["division"],
-                "fallback_tier": self.reg.is_fallback(chunk["registry_id"]),
+                "chunk_text": scrub_urls(chunk["text"]), "chunk_hash": chunk["text_hash"], "division": chunk["division"],
+                "fallback_tier": self.reg.is_fallback(rid), "witness": self.reg.is_witness(rid),
+                "effective_tier": self.reg.effective_tier(rid, chunk), "locator_rank": n,
+                "recut_from": cand.get("recut_from"),
             })
-            if len(result["candidates"]) >= MAX_CANDIDATES:
+            if len(entry["candidates"]) >= MAX_CANDIDATES:
                 break
+        entry["status"] = "DONE"
+        entry["empty"] = not entry["candidates"]
+        return entry
+
+    def locate(self, cell, pass_no, st):
+        pred = self.predicates[cell["family_id"]]
+        comp = self.comparators.get(cell["family_id"], {})
+        standards = self.standards_for_pass(cell["branch"], pass_no)
+        prev = (st["passes"].get(str(pass_no)) or {})
+        per = dict(prev.get("per_standard") or {})
+        result = {"status": "DONE", "standards": [r["registry_id"] for r in standards], "per_standard": per,
+                  "retrieval": "PER_STANDARD", "candidates": [], "unslotted": [], "dropped": [], "coverage": {}, "supplied_chunks": []}
+        if not standards:
+            result["status"] = "NO_CORPUS"
+            return result
+        pending = False
+        for row in standards:
+            rid = row["registry_id"]
+            e = per.get(rid)
+            if e and e.get("status") in ("DONE", "EMPTY", "NO_CORPUS"):
+                continue
+            e = self.locate_standard(cell, pred, comp, row, pass_no)
+            per[rid] = e
+            if e["status"] in ("PENDING", "UNPARSEABLE"):
+                pending = True
+        if pending:
+            result["status"] = "PENDING"
+            return result
+        if all(per[r["registry_id"]].get("status") == "NO_CORPUS" for r in standards):
+            result["status"] = "NO_CORPUS"
+            return result
+        # ---- slotting: one guaranteed slot per standard, then the extras by tier and floor
+        slotted, extra = [], []
+        for row in standards:
+            e = per[row["registry_id"]]
+            cands = e.get("candidates") or []
+            result["dropped"].extend([dict(d, registry_id=row["registry_id"]) for d in e.get("dropped", [])])
+            result["coverage"][row["registry_id"]] = e.get("coverage")
+            result["supplied_chunks"].extend(e.get("supplied_chunks", []))
+            if cands:
+                first = dict(cands[0]); first["slot"] = "GUARANTEED"
+                slotted.append(first)
+                extra.extend(dict(c, slot="EXTRA") for c in cands[1:])
+        extra.sort(key=lambda c: (tier_rank(c.get("effective_tier")), FLOOR_ORDER.get(c.get("floor_claim"), 9), c.get("locator_rank", 9)))
+        slotted.extend(extra[:VERIFY_EXTRA_CANDIDATES])
+        result["unslotted"] = [dict(c, slot="UNSLOTTED") for c in extra[VERIFY_EXTRA_CANDIDATES:]]
+        result["candidates"] = slotted
+        result["empty"] = not slotted
+        result["standards_reviewed"] = [r["registry_id"] for r in standards if per[r["registry_id"]].get("status") != "NO_CORPUS"]
         return result
 
     # ---------------------------------------------------------------- verifier
@@ -119,13 +243,13 @@ class CellRunner:
         chunk_view = {"registry_id": cand["registry_id"], "locator": cand["locator"], "text": cand["chunk_text"]}
         user = prompts.verifier_user(pred, cand, chunk_view)
         guards.assert_no_urls({"u": user})
-        out, rec = self.llm.complete("verifier", prompts.VERIFIER_SYSTEM, user, model=model, max_tokens=2500,
-                                     meta={"queue_id": cell["queue_id"], "candidate_id": cand["candidate_id"], "verifier_model": model})
+        out, rec, parsed, attempt = self._call("verifier", prompts.VERIFIER_SYSTEM, user, model, 2500,
+                                               {"queue_id": cell["queue_id"], "candidate_id": cand["candidate_id"], "verifier_model": model})
         if out is None:
             return {"status": "PENDING", "call_id": rec["call_id"], "model": model}
-        parsed = prompts.parse_json(out) or {}
+        parsed = parsed or {}
         rubric = {
-            "model": model, "call_id": rec["call_id"],
+            "model": model, "call_id": rec["call_id"], "attempt": attempt,
             "phrase_verbatim": parsed.get("phrase_verbatim"), "subject_is_required": parsed.get("subject_is_required"),
             "grammatical_subject": parsed.get("grammatical_subject"), "speech_act_is_assertion": parsed.get("speech_act_is_assertion"),
             "speech_act_note": parsed.get("speech_act_note"), "floor": parsed.get("floor"), "floor_reason": parsed.get("floor_reason"),
@@ -134,7 +258,7 @@ class CellRunner:
             "status": "DONE" if parsed else "UNPARSEABLE", "raw": out[:2000],
         }
         # the verdict is recomputed in code from the rubric lines: any N on 1–3 is REJECT; WORD_ONLY is REJECT
-        # (no lexical-floor family in v2.23); the code-side phrase assertion overrides item 1.
+        # (no lexical-floor family); the code-side phrase assertion overrides item 1.
         ok_phrase, _ = guards.check_phrase(cand["phrase"], cand["chunk_text"])
         if not parsed:
             verdict = "REJECT"; code = "UNPARSEABLE"
@@ -156,6 +280,63 @@ class CellRunner:
         rubric["reason_code_final"] = code
         return rubric
 
+    def needs_adjudication(self, cand, all_rejected):
+        if not self.adjudicator:
+            return None
+        if not self.reg.routing_is_slice():
+            return "SECONDARY_ALL"          # a non-slice routing: the second model verifies everything
+        if cand["registry_id"] in self.slice_rows:
+            return "SLICE_ROW"
+        if cand.get("fallback_tier"):
+            return "FALLBACK_ROW"
+        if all_rejected:
+            return "PRIMARY_REJECTED_ALL"
+        return None
+
+    @staticmethod
+    def finalize(v, primary, adjudicator):
+        """Final verdict = the adjudicator's where it ran, else the primary's. Overturns recorded."""
+        p = v.get(primary) or {}
+        a = v.get(adjudicator) if adjudicator else None
+        if a and a.get("status") == "DONE":
+            fin = {"verdict": a["verdict"], "reason_code_final": a.get("reason_code_final"), "adjudicated_by": adjudicator,
+                   "route": v.get("_route"), "primary_verdict": p.get("verdict")}
+            pa, aa = p.get("verdict") in ACCEPTS, a["verdict"] in ACCEPTS
+            fin["overturned"] = pa != aa
+            fin["direction"] = ("RESCUED" if (aa and not pa) else "OVERRULED" if (pa and not aa) else None)
+        else:
+            fin = {"verdict": p.get("verdict"), "reason_code_final": p.get("reason_code_final"), "adjudicated_by": primary,
+                   "route": v.get("_route"), "primary_verdict": p.get("verdict"), "overturned": False, "direction": None}
+        v["final"] = fin
+        return fin
+
+    def _verify_pass(self, cell, st, pass_key):
+        p = st["passes"].get(pass_key) or {}
+        cands = p.get("candidates", [])
+        pending = False
+        for cand in cands:
+            v = st["verifications"].setdefault(cand["candidate_id"], {})
+            if self.primary not in v or v[self.primary].get("status") in ("PENDING", "UNPARSEABLE"):
+                v[self.primary] = self.verify(cell, cand, self.primary)
+            if v[self.primary].get("status") == "PENDING":
+                pending = True
+        if pending:
+            return True
+        all_rejected = bool(cands) and all(st["verifications"][c["candidate_id"]][self.primary].get("verdict") not in ACCEPTS for c in cands)
+        for cand in cands:
+            v = st["verifications"][cand["candidate_id"]]
+            route = self.needs_adjudication(cand, all_rejected)
+            v["_route"] = route
+            if route and (self.adjudicator not in v or v[self.adjudicator].get("status") in ("PENDING", "UNPARSEABLE")):
+                v[self.adjudicator] = self.verify(cell, cand, self.adjudicator)
+            if route and v[self.adjudicator].get("status") == "PENDING":
+                pending = True
+        if pending:
+            return True
+        for cand in cands:
+            self.finalize(st["verifications"][cand["candidate_id"]], self.primary, self.adjudicator)
+        return False
+
     # ---------------------------------------------------------------- coder
     def code(self, cell, cand, rubric):
         pred = self.predicates[cell["family_id"]]
@@ -176,34 +357,31 @@ class CellRunner:
                 "scope_caveat": std["scope_caveat"], "raw": out[:1500]}
 
     # ---------------------------------------------------------------- orchestration
-    def run_cell(self, cell, verify_all_models=True):
+    def run_cell(self, cell):
         """Advance one cell as far as the backend allows. Returns the state dict."""
         st = self.load(cell["queue_id"]) or {"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"],
-                                              "predicate": cell["predicate"], "passes": {}, "verifications": {}, "coding": {}, "phase": "locate-1"}
+                                              "predicate": cell["predicate"], "passes": {}, "verifications": {}, "coding": {},
+                                              "phase": "locate-1", "routing": self.routing, "primary": self.primary,
+                                              "adjudicator": self.adjudicator, "slice_rows": sorted(self.slice_rows)}
         # pass 1
         if "1" not in st["passes"] or st["passes"]["1"].get("status") in ("PENDING", "UNPARSEABLE"):
-            r = self.locate(cell, 1, st)
-            st["passes"]["1"] = r
+            st["passes"]["1"] = self.locate(cell, 1, st)
             self.save(st)
-            if r["status"] == "PENDING":
-                return st
-        # verify pass-1 candidates
-        pending = self._verify_pass(cell, st, "1")
-        if pending:
-            self.save(st); return st
+            if st["passes"]["1"]["status"] == "PENDING":
+                st["phase"] = "locate-1"; return st
+        if self._verify_pass(cell, st, "1"):
+            st["phase"] = "verify-1"; self.save(st); return st
         survivors1 = self.survivors(st, "1")
         # pass 2 only if pass 1 left nothing surviving and the branch has a fallback row
         has_fallback = any(self.reg.is_fallback(r["registry_id"]) for r in self.reg.for_branch(cell["branch"]))
         if not survivors1 and has_fallback:
             if "2" not in st["passes"] or st["passes"]["2"].get("status") in ("PENDING", "UNPARSEABLE"):
-                r = self.locate(cell, 2, st)
-                st["passes"]["2"] = r
+                st["passes"]["2"] = self.locate(cell, 2, st)
                 self.save(st)
-                if r["status"] == "PENDING":
-                    return st
-            pending = self._verify_pass(cell, st, "2")
-            if pending:
-                self.save(st); return st
+                if st["passes"]["2"]["status"] == "PENDING":
+                    st["phase"] = "locate-2"; return st
+            if self._verify_pass(cell, st, "2"):
+                st["phase"] = "verify-2"; self.save(st); return st
         st["survivors"] = self.survivors(st, "1") or self.survivors(st, "2")
         st["fallback_used"] = bool(not self.survivors(st, "1") and self.survivors(st, "2"))
         # coder for survivors
@@ -211,8 +389,7 @@ class CellRunner:
             for cand in st["survivors"]:
                 cid = cand["candidate_id"]
                 if cid not in st["coding"] or st["coding"][cid].get("status") == "PENDING":
-                    rub = self.primary_rubric(st, cid)
-                    st["coding"][cid] = self.code(cell, cand, rub)
+                    st["coding"][cid] = self.code(cell, cand, self.final_rubric(st, cid))
             if any(v.get("status") == "PENDING" for v in st["coding"].values()):
                 st["phase"] = "coding"; self.save(st); return st
         st["phase"] = "DONE"
@@ -220,31 +397,28 @@ class CellRunner:
         self.save(st)
         return st
 
-    def _verify_pass(self, cell, st, pass_key):
-        p = st["passes"].get(pass_key) or {}
-        pending = False
-        for cand in p.get("candidates", []):
-            cid = cand["candidate_id"]
-            v = st["verifications"].setdefault(cid, {})
-            for i, m in enumerate(self.verifier_models):
-                if i > 0 and self.secondary_cells is not None and cell["queue_id"] not in self.secondary_cells:
-                    v.setdefault(m, {"status": "SKIPPED_SAMPLE", "model": m})
-                    continue
-                if m not in v or v[m].get("status") in ("PENDING", "SKIPPED_SAMPLE", "UNPARSEABLE"):
-                    v[m] = self.verify(cell, cand, m)
-                if v[m].get("status") == "PENDING":
-                    pending = True
-        return pending
-
     def primary_rubric(self, st, cid):
-        v = st["verifications"].get(cid, {})
-        return v.get(self.verifier_models[0], {})
+        return (st["verifications"].get(cid) or {}).get(self.primary, {})
+
+    def final_rubric(self, st, cid):
+        """The adjudicating model's rubric with the final verdict fields folded in."""
+        v = st["verifications"].get(cid) or {}
+        fin = v.get("final") or {}
+        base = dict(v.get(fin.get("adjudicated_by") or self.primary) or {})
+        base.update({k: fin.get(k) for k in ("verdict", "reason_code_final", "adjudicated_by", "route", "overturned", "direction", "primary_verdict")})
+        return base
+
+    def final_verdict(self, st, cid):
+        v = st["verifications"].get(cid) or {}
+        fin = v.get("final")
+        if fin:
+            return fin.get("verdict")
+        return (v.get(self.primary) or {}).get("verdict")
 
     def survivors(self, st, pass_key):
-        """Candidates whose PRIMARY verifier verdict is ACCEPT / ACCEPT_WITH_CAVEAT."""
+        """Candidates whose FINAL verdict (adjudicator where it ran, else primary) is ACCEPT / ACCEPT_WITH_CAVEAT."""
         out = []
         for cand in (st["passes"].get(pass_key) or {}).get("candidates", []):
-            rub = self.primary_rubric(st, cand["candidate_id"])
-            if rub.get("verdict") in ("ACCEPT", "ACCEPT_WITH_CAVEAT"):
+            if self.final_verdict(st, cand["candidate_id"]) in ACCEPTS:
                 out.append(cand)
         return out

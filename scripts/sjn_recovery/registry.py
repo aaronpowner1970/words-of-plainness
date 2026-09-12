@@ -1,7 +1,22 @@
 """Ratified Branch Source Registry rows, read from the workbook, plus the pipeline context
 pieces the agents need (predicate definitions, released cells, Restoration comparators).
 
-The workbook is read only. Nothing here writes to it."""
+The workbook is read only. Nothing here writes to it.
+
+v2.25 (RECEPTION AXIS): the registry sheet carries `reception_scope` and `reception_note`, and the
+APP CONFIG keys below govern the harness. They are READ from the workbook, never hard-coded:
+
+  gate6_threshold_metric      SAME_STANDARD            the gated recall metric
+  authority_tier_rank         CONCILIAR|CONFESSIONAL|…  descending authority rank (ungated diagnostics)
+  reception_scope_vocabulary  UNIVERSAL|MULTILATERAL|…  the closed vocabulary of reception_scope
+  reception_axis              ADOPT_BOTH               both columns are live
+  creed_tier_resolution       TIER_PER_CITED_DOCUMENT  a creed cited from a lower-tier row resolves CONCILIAR
+  lateran_iv_scope            EXTEND_TO_CONSTITUTION_2 BSR-RC-04 ratifies constitutions 1–2
+  verifier_routing            SONNET_WITH_OPUS_SLICE   primary verifier + adjudication slice
+  dialogue_text_policy        DIALOGUE_ONLY_NEVER_CITED
+  encyclical_1848_status      RECORD_STANDING_ONLY
+  registry_fallback_only_rows BSR-AN-05                fallback-tier rows (pass two only)
+"""
 import re
 import os
 import sys
@@ -9,9 +24,45 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from sjn_pipeline.workbook import Workbook, s  # noqa: E402
-from sjn_pipeline.registry import load_registry, ratified, fallback_only_ids, admitted_domains  # noqa: E402
+from sjn_pipeline.registry import (load_registry, ratified, fallback_only_ids, admitted_domains, config_list,  # noqa: E402
+                                   reception_scope, is_dialogue_only, is_translation_witness, is_witness_row,
+                                   citation_refusal, refusal_reason)
 
-from .config import newest_workbook  # noqa: E402
+from .config import newest_workbook, OPUS_SLICE_ROWS_DEFAULT, ROUTING_SONNET_WITH_OPUS_SLICE  # noqa: E402
+
+# ---------------------------------------------------------------- authority tier rank
+# The rank is READ from APP CONFIG `authority_tier_rank` (AUTHOR RATIFIED, v2.25). This module-level
+# default is only the fallback for a workbook that predates the key; Registry() replaces it.
+TIER_RANK_DEFAULT = ["CONCILIAR", "CONFESSIONAL", "CATECHETICAL", "OFFICIAL_EXPOSITION", "CURRENT_OFFICIAL_WITNESS"]
+TIER_RANK = list(TIER_RANK_DEFAULT)
+
+
+def set_tier_rank(rank):
+    global TIER_RANK
+    TIER_RANK[:] = list(rank)
+
+
+def bare_tier(tier):
+    """Rank on the bare tier. Parenthetical qualifiers - "CONCILIAR (translation)", "CATECHETICAL
+    (historic)", "CONFESSIONAL (liturgically confessed; the Creed within resolves CONCILIAR)" - are
+    disclosure, not rank, and are stripped here."""
+    return re.split(r"\s*\(", (tier or "").strip())[0].strip().upper()
+
+
+def tier_rank(tier):
+    """0 is the highest authority. An unknown tier sorts below every known one."""
+    b = bare_tier(tier)
+    return TIER_RANK.index(b) if b in TIER_RANK else len(TIER_RANK)
+
+
+_CREED_LOCATOR = re.compile(r"\b(creed|symbol of faith|nicene|niceno|athanasian|apostles'? creed|quicunque)\b", re.I)
+
+
+def creed_resolution_tier(tier_text):
+    """The tier a creed printed inside this row resolves to, per the row's own tier note
+    ("… the Creed within resolves CONCILIAR", "Nicene and Athanasian resolve CONCILIAR"), or None."""
+    m = re.search(r"resolves?\s+([A-Z_]+)", tier_text or "")
+    return m.group(1).upper() if m else None
 
 
 class Registry:
@@ -25,22 +76,90 @@ class Registry:
         self.fallback_ids = set(fallback_only_ids(self.config))
         self.by_id = {r["registry_id"]: r for r in self.rows}
         self.app_master_version = s(self.config.get("app_master_version"))
+        # ---- ratified APP CONFIG keys (v2.25). Read, never hard-coded.
+        self.gate_metric = s(self.config.get("gate6_threshold_metric")).upper() or "TIER_RESPECTING"
+        self.tier_rank_list = config_list(self.config, "authority_tier_rank", TIER_RANK_DEFAULT)
+        set_tier_rank(self.tier_rank_list)
+        self.reception_vocabulary = config_list(self.config, "reception_scope_vocabulary", [])
+        self.reception_axis = s(self.config.get("reception_axis")).upper()
+        self.creed_tier_resolution = s(self.config.get("creed_tier_resolution")).upper()
+        self.lateran_iv_scope = s(self.config.get("lateran_iv_scope")).upper()
+        self.verifier_routing = s(self.config.get("verifier_routing")).upper()
+        self.dialogue_text_policy = s(self.config.get("dialogue_text_policy")).upper()
+        self.encyclical_1848_status = s(self.config.get("encyclical_1848_status")).upper()
+        self.vocabulary_violations = [(r["registry_id"], reception_scope(r)) for r in self.rows
+                                      if self.reception_vocabulary and reception_scope(r) not in self.reception_vocabulary]
 
-    def for_branch(self, branch, include_fallback=True):
+    # ---------------------------------------------------------------- row selection
+    def for_branch(self, branch, include_fallback=True, citable_only=True):
+        """AUTHOR_RATIFIED rows of a branch. citable_only drops rows the policies refuse as citations
+        (DIALOGUE_ONLY, named refusals): they stay registered for provenance but never reach an agent."""
         out = [r for r in self.rows if r["branch"] == branch]
         if not include_fallback:
             out = [r for r in out if r["registry_id"] not in self.fallback_ids]
+        if citable_only:
+            out = [r for r in out if not self.citation_refusal(r["registry_id"])]
         return out
 
     def is_fallback(self, rid):
         return rid in self.fallback_ids
+
+    def is_witness(self, rid):
+        row = self.by_id.get(rid)
+        return bool(row) and is_witness_row(row)
+
+    def is_translation_witness(self, rid):
+        row = self.by_id.get(rid)
+        return bool(row) and is_translation_witness(row)
+
+    def is_dialogue_only(self, rid):
+        row = self.by_id.get(rid)
+        return bool(row) and is_dialogue_only(row)
+
+    def citation_refusal(self, rid):
+        return citation_refusal(self.by_id.get(rid))
+
+    def reception(self, rid):
+        return reception_scope(self.by_id.get(rid, {}))
+
+    def opus_slice_rows(self):
+        """Rows whose candidates the adjudicating verifier always sees: the caveated rows (CONTESTED
+        reception, or a historic catechism), the guarded Synodikon, and every fallback-only row."""
+        out = set(OPUS_SLICE_ROWS_DEFAULT) & set(self.by_id)
+        for r in self.rows:
+            if reception_scope(r) == "CONTESTED" or "(historic)" in s(r.get("authority_tier")).casefold():
+                out.add(r["registry_id"])
+            if "BLOCKING GUARD" in s(r.get("fetch_mode")).upper() or "BLOCKING GUARD" in s(r.get("reception_note")).upper():
+                out.add(r["registry_id"])
+        return out | (self.fallback_ids & set(self.by_id))
+
+    def routing_is_slice(self):
+        return self.verifier_routing == ROUTING_SONNET_WITH_OPUS_SLICE
+
+    # ---------------------------------------------------------------- tiers
+    def effective_tier(self, rid, chunk=None):
+        """The tier a citation resolves to. Under creed_tier_resolution = TIER_PER_CITED_DOCUMENT a
+        creed printed inside a lower-tier row (BSR-RC-06, BSR-EO-07) resolves to the tier the row's
+        note names, when the cited chunk is the creed itself."""
+        row = self.by_id.get(rid)
+        if not row:
+            return ""
+        tier = s(row.get("authority_tier"))
+        if self.creed_tier_resolution == "TIER_PER_CITED_DOCUMENT" and chunk is not None:
+            resolved = creed_resolution_tier(tier)
+            loc = (chunk.get("locator") or "") + " " + (chunk.get("division") or "")
+            if resolved and _CREED_LOCATOR.search(loc):
+                return resolved
+        return tier
 
     def public(self, rid):
         """Fields an agent may see about a standard: never the URL."""
         r = self.by_id[rid]
         return {"registry_id": rid, "branch": r["branch"], "standard_title": r["standard_title"],
                 "authority_tier": r["authority_tier"], "speaks_for": r["speaks_for"],
-                "scope_caveat": r["scope_caveat"], "fallback_only": rid in self.fallback_ids}
+                "reception_scope": reception_scope(r), "reception_note": s(r.get("reception_note")),
+                "scope_caveat": r["scope_caveat"], "fallback_only": rid in self.fallback_ids,
+                "witness_only": is_witness_row(r)}
 
     def domains(self, rid):
         primary, extra = admitted_domains(self.by_id[rid])
@@ -65,7 +184,7 @@ def load_predicates(wb):
             "family_code": s(r.get("Current A/Q/D/U")),
             "lens": s(r.get("Teaching lens")),
             "subject_scope": subject_scope(pid, definition, mode),
-            # The Predicate sheet carries no lexical-floor marker in v2.23, so no family is lexical:
+            # The Predicate sheet carries no lexical-floor marker, so no family is lexical:
             # WORD_ONLY is always REJECT (spec §4, Verifier).
             "lexical_floor": False,
         }
@@ -140,7 +259,7 @@ def load_case_targets(wb):
 
 
 def open_cells(queue):
-    """The 315 cells Gate 6 will eventually run: not released, not out of scope, not lineage-only."""
+    """The open cells Gate 6 will eventually run: not released, not out of scope, not lineage-only."""
     return [c for c in queue if c["rendered_state"].startswith("NOT LOCATED") and not c["retired"]]
 
 
@@ -152,22 +271,6 @@ def reviewed_empty_cells(queue):
     return [c for c in queue if c["rendered_state"] == "NOT LOCATED — CURRENT STANDARD REVIEWED"]
 
 
-# ---------------------------------------------------------------- authority tier rank
-# AUTHOR RATIFIED 2026-09-11 (AJP): authority_tier is a genuine authority rank, descending.
-# Used as given; not re-derived from the workbook. Proposed to Gate 7 as the APP CONFIG key
-# `authority_tier_rank` (recovery-runs/proposed-app-config-gate7.md). Gate 6 never writes the
-# workbook.
-TIER_RANK = ["CONCILIAR", "CONFESSIONAL", "CATECHETICAL", "OFFICIAL_EXPOSITION", "CURRENT_OFFICIAL_WITNESS"]
-
-
-def bare_tier(tier):
-    """Rank on the bare tier. The parenthetical qualifiers on three rows - "CONCILIAR (translation)"
-    on BSR-RC-03, "CATECHETICAL (historic)" on BSR-EO-04, "CONFESSIONAL (voluntary church-level
-    subscription)" on BSR-BA-02 - are disclosure, not rank, and are stripped here."""
-    return re.split(r"\s*\(", (tier or "").strip())[0].strip().upper()
-
-
-def tier_rank(tier):
-    """0 is the highest authority. An unknown tier sorts below every known one."""
-    b = bare_tier(tier)
-    return TIER_RANK.index(b) if b in TIER_RANK else len(TIER_RANK)
+__all__ = ["Registry", "load_predicates", "load_comparators", "load_queue", "load_case_targets", "open_cells",
+           "released_cells", "reviewed_empty_cells", "TIER_RANK", "bare_tier", "tier_rank", "set_tier_rank",
+           "refusal_reason", "citation_refusal"]

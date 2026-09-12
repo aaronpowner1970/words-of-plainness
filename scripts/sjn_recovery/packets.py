@@ -2,7 +2,13 @@
 
 Re-asserts every phrase against the stored chunk and DROPS failures before the author sees them.
 Keeps every rejected candidate with its rubric, chunk context and reason code (spec §8) in the
-`rejections` list of the card — never discarded. The empty-result option is always present."""
+`rejections` list of the card — never discarded. The empty-result option is always present.
+
+v2.25 additions: every entry carries the row's reception_scope / reception_note; a candidate on a
+witness row (TRANSLATION_WITNESS reception, or a tier qualified as a witness — BSR-EO-11) is flagged
+WITNESS and a cell may not rest on such candidates alone: where no non-witness candidate survives,
+the witness candidates are kept on the card as `witness_only_candidates` and the cell renders EMPTY.
+A DIALOGUE_ONLY row never reaches the locator, and is refused again here by name if one somehow did."""
 import json
 import os
 import time
@@ -10,6 +16,8 @@ import time
 from .config import PACKETS_DIR, EMPTY_RESULT, MAX_CANDIDATES
 from .registry import tier_rank
 from . import guards, store
+
+ACCEPTS = ("ACCEPT", "ACCEPT_WITH_CAVEAT")
 
 
 def _slug(branch):
@@ -19,7 +27,7 @@ def _slug(branch):
 def build_branch_packet(branch, cells, runner, registry, predicates, comparators, run_id, log=print):
     cards, dropped_at_build, n_rej = [], [], 0
     chunk_index = {}
-    for r in registry.for_branch(branch):
+    for r in registry.for_branch(branch, citable_only=False):
         for c in store.load_chunks(r["registry_id"]):
             chunk_index[(c["registry_id"], c["locator"])] = c
     for cell in cells:
@@ -33,47 +41,62 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
             "restoration_comparator": {k: comp.get(k) for k in ("label", "source", "locator", "phrase", "url", "scope_note")},
             "current_rendered_state": cell["rendered_state"],
             "status": "NOT_RUN" if not st else st.get("phase"),
-            "candidates": [], "rejections": [],
+            "candidates": [], "rejections": [], "witness_only_candidates": [],
             "empty_result_option": {"rendered_state": EMPTY_RESULT, "always_available": True,
-                                    "standards_reviewed": sorted({rid for p in (st or {}).get("passes", {}).values() for rid in p.get("standards", [])}) if st else []},
+                                    "standards_reviewed": sorted({rid for p in (st or {}).get("passes", {}).values() for rid in p.get("standards_reviewed", p.get("standards", []))}) if st else []},
             "fallback_used": bool(st and st.get("fallback_used")),
             "coverage": {k: p.get("coverage") for k, p in (st or {}).get("passes", {}).items()},
+            "routing": (st or {}).get("routing"),
         }
         if st:
             for pk, p in st["passes"].items():
                 for d in p.get("dropped", []):
                     card["rejections"].append({"stage": f"locator guard (pass {pk})", "candidate": d["candidate"], "reason": d["reason"]})
+                for cand in p.get("unslotted", []):
+                    card["rejections"].append({"stage": f"not slotted for verification (pass {pk})", "candidate": {k: cand.get(k) for k in ("registry_id", "locator", "phrase", "floor_claim")},
+                                               "reason": "beyond the guaranteed per-standard slot and the extra slots; kept for the author, never verified"})
                 for cand in p.get("candidates", []):
                     chunk = chunk_index.get((cand["registry_id"], cand["locator"]))
                     ok, why = guards.check_phrase(cand["phrase"], chunk["text"] if chunk else "")
+                    if ok and chunk:
+                        ok, why = guards.check_noncitable(cand["phrase"], chunk)
                     if chunk and chunk["text_hash"] != cand.get("chunk_hash"):
                         ok, why = False, "chunk text changed since the locator ran (hash mismatch)"
+                    refusal = registry.citation_refusal(cand["registry_id"])
+                    if refusal:
+                        ok, why = False, refusal
                     vers = st["verifications"].get(cand["candidate_id"], {})
                     std = registry.public(cand["registry_id"])
+                    final = vers.get("final") or {}
                     entry = {
                         "candidate_id": cand["candidate_id"], "pass": cand["pass"], "registry_id": cand["registry_id"],
-                        "standard_title": std["standard_title"], "authority_tier": std["authority_tier"], "speaks_for": std["speaks_for"],
+                        "standard_title": std["standard_title"], "authority_tier": std["authority_tier"],
+                        "effective_tier": cand.get("effective_tier") or std["authority_tier"], "speaks_for": std["speaks_for"],
+                        "reception_scope": std["reception_scope"], "reception_note": std["reception_note"],
                         "scope_caveat": std["scope_caveat"], "fallback_tier": cand["fallback_tier"],
+                        "witness": bool(cand.get("witness") or std.get("witness_only")), "slot": cand.get("slot"),
                         "locator": cand["locator"], "phrase": cand["phrase"], "locator_rationale": cand["rationale"],
                         "locator_floor_claim": cand["floor_claim"], "chunk_context": cand["chunk_text"],
+                        "recut_from": cand.get("recut_from"),
                         "source_url": chunk["source_url"] if chunk else None,
+                        "parallel_witness": chunk.get("parallel_witness") if chunk else None,
                         "verifier_rubrics": {m: {k: v.get(k) for k in ("phrase_verbatim", "subject_is_required", "grammatical_subject",
                                                                      "speech_act_is_assertion", "speech_act_note", "floor", "floor_reason",
                                                                      "hazard_flags", "verdict", "reason_code_final", "reason")}
-                                             for m, v in vers.items()},
+                                             for m, v in vers.items() if isinstance(v, dict) and m not in ("final", "_route")},
+                        "final_verdict": final,
                         "build_reassertion": {"ok": ok, "detail": why},
                     }
-                    primary = runner.primary_rubric(st, cand["candidate_id"])
                     if not ok:
                         entry["dropped_reason"] = f"packet build re-assertion failed: {why}"
                         dropped_at_build.append((cell["queue_id"], cand["candidate_id"], why))
                         card["rejections"].append({"stage": "packet re-assertion", **entry})
-                    elif primary.get("verdict") in ("ACCEPT", "ACCEPT_WITH_CAVEAT"):
+                    elif runner.final_verdict(st, cand["candidate_id"]) in ACCEPTS:
                         entry["coder_proposal"] = st.get("coding", {}).get(cand["candidate_id"])
                         card["candidates"].append(entry)
                     else:
                         n_rej += 1
-                        card["rejections"].append({"stage": "verifier", "reason_code": primary.get("reason_code_final"), **entry})
+                        card["rejections"].append({"stage": "verifier", "reason_code": final.get("reason_code_final"), **entry})
             # fallback guard: a fallback citation never renders alongside a non-fallback witness
             if any(not c["fallback_tier"] for c in card["candidates"]):
                 moved = [c for c in card["candidates"] if c["fallback_tier"]]
@@ -81,15 +104,17 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     c["dropped_reason"] = "fallback-tier witness suppressed: a non-fallback standard yielded a candidate"
                     card["rejections"].append({"stage": "fallback-tier guard", **c})
                 card["candidates"] = [c for c in card["candidates"] if not c["fallback_tier"]]
-            # Authority-tier ordering (AUTHOR RATIFIED 2026-09-11). Higher tier first. Where a higher
-            # tier wins AND a lower-tier standard of the same branch also asserts the predicate and
-            # passes the rubric, BOTH are kept: the lower-tier witness corroborates, and dropping it
-            # would hide from the author that the branch confesses the predicate at more than one
-            # level. The cap is therefore filled tier by tier — the best candidate of each distinct
-            # tier first, then the remainder in tier order — so a second candidate from the winning
-            # tier can never displace the only witness from another tier.
+            # witness guard: a cell may not rest on TRANSLATION_WITNESS / witness rows alone
+            if card["candidates"] and all(c["witness"] for c in card["candidates"]):
+                for c in card["candidates"]:
+                    c["dropped_reason"] = "WITNESS_ONLY: a cell may not rest on a translation/witness row alone (no controlling text survived)"
+                card["witness_only_candidates"] = card["candidates"]
+                card["candidates"] = []
+            # Authority-tier ordering (AUTHOR RATIFIED 2026-09-11), on the EFFECTIVE tier (creed_tier_resolution).
+            # Higher tier first; the cap is filled tier by tier so a second candidate from the winning tier can
+            # never displace the only witness from another tier; lower-tier corroborators are kept and marked.
             for c in card["candidates"]:
-                c["authority_tier_rank"] = tier_rank(c["authority_tier"])
+                c["authority_tier_rank"] = tier_rank(c["effective_tier"])
             order = sorted(range(len(card["candidates"])),
                            key=lambda i: (card["candidates"][i]["authority_tier_rank"], i))
             by_tier, seen = [], {}
@@ -110,13 +135,19 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     c["dropped_reason"] = "candidate cap reached after tier allocation"
                     card["rejections"].append({"stage": "tier allocation", **c})
             card["candidates"] = kept
-            card["status"] = "EMPTY" if (st.get("phase") == "DONE" and not card["candidates"]) else st.get("phase")
+            if st.get("phase") == "DONE" and not card["candidates"]:
+                card["status"] = "EMPTY_WITNESS_ONLY" if card["witness_only_candidates"] else "EMPTY"
+            else:
+                card["status"] = st.get("phase")
         cards.append(card)
     packet = {
         "branch": branch, "run_id": run_id, "built_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "app_master_version": registry.app_master_version, "registry_rows": [registry.public(r["registry_id"]) for r in registry.for_branch(branch)],
+        "app_master_version": registry.app_master_version,
+        "registry_rows": [registry.public(r["registry_id"]) for r in registry.for_branch(branch, citable_only=False)],
+        "refused_rows": [{"registry_id": r["registry_id"], "reason": registry.citation_refusal(r["registry_id"])}
+                         for r in registry.for_branch(branch, citable_only=False) if registry.citation_refusal(r["registry_id"])],
         "cells": len(cards), "cells_with_candidates": sum(1 for c in cards if c["candidates"]),
-        "cells_empty": sum(1 for c in cards if c["status"] == "EMPTY"), "rejections_kept": sum(len(c["rejections"]) for c in cards),
+        "cells_empty": sum(1 for c in cards if c["status"] in ("EMPTY", "EMPTY_WITNESS_ONLY")), "rejections_kept": sum(len(c["rejections"]) for c in cards),
         "dropped_at_build": dropped_at_build, "no_ranking": "counts are workbench totals for the author; never learner-facing",
         "cards": cards,
     }

@@ -159,8 +159,65 @@ def _vector_rank(chunks, query, rid):
         return None
 
 
+def rank_within_standard(predicate, rid, ch, allowance, top_k=RETRIEVAL_TOP_K_PER_STANDARD, use_vectors=True):
+    """Hybrid ranking of ONE standard's chunks into a character allowance. Returns (picked, coverage)."""
+    q = query_text(predicate)
+    bm = BM25([c["text"] for c in ch])
+    scores = bm.score(q)
+    order = sorted(range(len(ch)), key=lambda i: -scores[i])
+    bm_rank = {ch[i]["locator"]: r for r, i in enumerate(order)}
+    vec_rank = _vector_rank(ch, q, rid) if use_vectors else None
+
+    def fused(c):
+        r1 = bm_rank.get(c["locator"], len(ch))
+        r2 = vec_rank.get(c["locator"], len(ch)) if vec_rank else r1
+        return 1 / (60 + r1) + 1 / (60 + r2)
+    ranked = sorted(ch, key=lambda c: -fused(c))
+    terms = discriminating_terms(predicate_terms(predicate), ch)
+    lex = [c for c in ranked if terms and has_term(c["text"], terms)]
+    if lex:
+        lscore = BM25([c["text"] for c in lex]).score(" ".join(terms))
+        lex = [lex[i] for i in sorted(range(len(lex)), key=lambda i: -lscore[i])]
+        lex = round_robin(lex)
+        lex_keys, lex_allow, used_lex = set(), allowance * 0.7, 0
+        for c in lex:
+            if used_lex + len(c["text"]) > lex_allow:
+                continue
+            lex_keys.add(c["locator"]); used_lex += len(c["text"])
+        ranked = ([c for c in lex if c["locator"] in lex_keys]
+                  + [c for c in ranked if c["locator"] not in lex_keys])
+    picked, used = [], 0
+    for c in ranked:
+        if used + len(c["text"]) > allowance:
+            if len(picked) >= max(top_k, 3):
+                break
+            continue
+        picked.append(c); used += len(c["text"])
+    coverage = {"coverage": "RETRIEVED", "supplied": len(picked), "of": len(ch),
+                "lexical": sum(1 for c in picked if terms and has_term(c["text"], terms)),
+                "method": ("BM25+vector(RRF)" if vec_rank else "BM25") + "+lexical-slice"}
+    return picked, coverage
+
+
+def select_for_standard(predicate, row, budget=LOCATOR_CONTEXT_CHARS, top_k=RETRIEVAL_TOP_K_PER_STANDARD, use_vectors=True):
+    """Retrieval PER STANDARD (cal-3, Fix 1). One standard, its own full budget: supplied WHOLE when
+    it fits, otherwise the hybrid top ranking within that standard. Returns (chunks, coverage) or
+    ([], None) when the standard has no corpus. Nothing from any other standard competes for the
+    allowance, which is what gives a 2-chunk page and a 738-chunk volume the same guaranteed slot."""
+    rid = row["registry_id"]
+    ch = store.load_chunks(rid)
+    ch = [c for c in ch if c.get("text")]
+    if not ch:
+        return [], None
+    total = sum(len(c["text"]) for c in ch)
+    if total <= budget:
+        return ch, {"coverage": "FULL", "supplied": len(ch), "of": len(ch)}
+    return rank_within_standard(predicate, rid, ch, budget, top_k=top_k, use_vectors=use_vectors)
+
+
 def select_chunks(predicate, standards, budget=LOCATOR_CONTEXT_CHARS, top_k=RETRIEVAL_TOP_K_PER_STANDARD, use_vectors=True):
-    """standards: list of registry rows admitted for this pass. Returns (selected_chunks, coverage)."""
+    """(cal-1/cal-2 pooled policy, kept for reference and for the old run reports.)
+    standards: list of registry rows admitted for this pass. Returns (selected_chunks, coverage)."""
     per = {r["registry_id"]: store.load_chunks(r["registry_id"]) for r in standards}
     per = {rid: ch for rid, ch in per.items() if ch}
     if not per:

@@ -18,8 +18,11 @@ from urllib.parse import urljoin
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from sjn_pipeline.fetch import pdf_text  # noqa: E402
+from sjn_pipeline.scope import html_segments  # noqa: E402
 
-from .textutil import segments, join, clean, strip_footnote_digits, sha, pdf_repair, fix_mojibake  # noqa: E402
+from .config import ARCHIVE_DIR  # noqa: E402
+from .textutil import (segments, join, clean, strip_footnote_digits, sha, pdf_repair, fix_mojibake,  # noqa: E402
+                       nfc, has_polytonic, strip_foreign_parentheticals, normalize)
 
 ROMAN = r"(?:[IVXLC]+)"
 ROMAN_MAP = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, "X": 10, "XI": 11,
@@ -30,26 +33,60 @@ ROMAN_MAP = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VII
 
 
 class Ctx:
-    def __init__(self, row, fetcher, log=print):
+    def __init__(self, row, fetcher, log=print, config=None):
         self.row = row
         self.rid = row["registry_id"]
         self.fetcher = fetcher
         self.log = log
+        self.config = config or {}
         self.urls = []
+
+    def _log_fetch(self, url, mode, fr):
+        rec = {"url": url, "mode": mode, "status": fr.status, "ok": fr.ok, "error": fr.error,
+               "final_url": fr.final_url, "redirects": list(fr.redirects or []), "cross_host_redirect": fr.cross_host_redirect}
+        self.urls.append(rec)
+        if fr.cross_host_redirect:
+            raise RedirectError(f"{url}: host redirected onto a different site ({fr.error or fr.cross_host_redirect}); "
+                                f"the ratified URL is fetched byte for byte and cross-host redirects are refused")
+        return rec
 
     def html(self, url):
         fr = self.fetcher.get(url)
-        self.urls.append({"url": url, "mode": "http", "status": fr.status, "ok": fr.ok, "error": fr.error})
+        self._log_fetch(url, "http", fr)
+        if fr.status == 403:
+            raise BlockedError(f"{url}: HTTP 403 (host refuses automated fetch; Cloudflare challenge where the host is behind Cloudflare)")
         if not fr.ok or not fr.html:
             raise FetchError(f"{url}: {fr.error or 'empty body'}")
         return fr.html
 
     def pdf(self, url):
         fr = self.fetcher.get(url)
-        self.urls.append({"url": url, "mode": "pdf", "status": fr.status, "ok": fr.ok, "error": fr.error})
+        self._log_fetch(url, "pdf", fr)
+        if fr.status == 403:
+            raise BlockedError(f"{url}: HTTP 403")
         if not fr.ok or not fr.pdf_bytes:
             raise FetchError(f"{url}: {fr.error or 'no PDF bytes'}")
         return pdf_text(fr.pdf_bytes)
+
+    def archived(self, url, kind="html"):
+        """A one-time archived fetch committed under recovery-runs/archived-fetches/<rid>.<ext> with a
+        <rid>.provenance.json beside it (url, fetched_at, method, sha256). Returns the payload or None."""
+        import hashlib
+        import json as _json
+        ext = "pdf" if kind == "pdf" else "html"
+        p = os.path.join(ARCHIVE_DIR, f"{self.rid}.{ext}")
+        prov = os.path.join(ARCHIVE_DIR, f"{self.rid}.provenance.json")
+        if not (os.path.exists(p) and os.path.exists(prov)):
+            return None
+        with open(prov, encoding="utf-8") as fh:
+            meta = _json.load(fh)
+        raw = open(p, "rb").read()
+        digest = hashlib.sha256(raw).hexdigest()
+        if meta.get("sha256") and meta["sha256"] != digest:
+            raise FetchError(f"archived fetch for {self.rid} does not match its provenance sha256")
+        self.urls.append({"url": url, "mode": "archived", "status": 200, "ok": True, "error": "",
+                          "archived_at": meta.get("fetched_at"), "archive_method": meta.get("method"), "sha256": digest})
+        return raw if kind == "pdf" else raw.decode(meta.get("encoding", "utf-8"), "replace")
 
     def rendered(self, url):
         fr = self.fetcher.rendered(url)
@@ -58,15 +95,18 @@ class Ctx:
             raise FetchError(f"{url}: {fr.error}")
         return fr.rendered
 
-    def chunk(self, locator, text, division, url, language="en"):
+    def chunk(self, locator, text, division, url, language="en", **extra):
         text = clean(text)
         if not text:
             return None
         r = self.row
-        return {"registry_id": self.rid, "branch": r["branch"], "standard_title": r["standard_title"],
-                "authority_tier": r["authority_tier"], "scope_caveat": r["scope_caveat"],
-                "locator": locator, "division": division, "text": text, "text_hash": sha(text),
-                "source_url": url, "language": language}
+        c = {"registry_id": self.rid, "branch": r["branch"], "standard_title": r["standard_title"],
+             "authority_tier": r["authority_tier"], "scope_caveat": r["scope_caveat"],
+             "reception_scope": (r.get("reception_scope") or "").upper(),
+             "locator": locator, "division": division, "text": text, "text_hash": sha(text),
+             "source_url": url, "language": language}
+        c.update(extra)
+        return c
 
 
 class FetchError(Exception):
@@ -74,7 +114,12 @@ class FetchError(Exception):
 
 
 class BlockedError(FetchError):
-    pass
+    """The host refused the fetch (403 / bot challenge). Verdict: host."""
+
+
+class RedirectError(FetchError):
+    """The host redirected the ratified URL onto a different host. Verdict: host (the fetcher no
+    longer follows it)."""
 
 
 def _emit(ctx, out, locator, parts, division, url, language="en"):
@@ -178,20 +223,44 @@ def dei_filius_ewtn(ctx):
     return out, [f"EWTN excerpt page carries Chapter I only ({n} paragraphs); Latin controls (BSR-RC-02)"]
 
 
-def lateran_canon1(ctx):
+def lateran_constitutions(ctx):
+    """BSR-RC-04 — Fourth Lateran constitutions 1–2 (APP CONFIG lateran_iv_scope = EXTEND_TO_CONSTITUTION_2):
+    'Confession of Faith' (Firmiter credimus) and 'On the error of abbot Joachim' (Damnamus ergo), the latter
+    carrying the maior dissimilitudo clause. Under any other value only constitution 1 is chunked."""
     url = ctx.row["canonical_url"]
     segs = segments(ctx.html(url))
     idx = [i for i, (t, x) in enumerate(segs) if t == "strong" and x.strip() == "Confession of Faith"]
     if not idx:
         raise FetchError("Lateran IV 'Confession of Faith' heading not found")
+    extend = str(ctx.config.get("lateran_iv_scope") or "").upper() == "EXTEND_TO_CONSTITUTION_2"
     out, n = [], 0
-    for tag, text in segs[idx[-1] + 1:]:
+    i = idx[-1] + 1
+    while i < len(segs):
+        tag, text = segs[i]
         if tag == "strong" or (tag == "a" and text.strip().upper() == "TOP"):
             break
         if tag == "p":
             n += 1
-            _emit(ctx, out, f"Canon 1 (Confession of Faith), paragraph {n}", [text], "paragraph", url)
-    return out, ["Canon 1 only, as ratified (Tanner translation, unattributed on page)"]
+            _emit(ctx, out, f"Constitution 1 (Confession of Faith — Firmiter credimus), paragraph {n}", [text], "paragraph", url)
+        i += 1
+    notes = ["Constitution 1 (Confession of Faith), Tanner translation, unattributed on page"]
+    if extend:
+        # the page continues: <a>TOP</a>, <p>2.</p>, <strong>On the error of abbot Joachim</strong>, paragraphs, <a>TOP</a>
+        j = next((k for k in range(i, min(i + 6, len(segs))) if segs[k][0] == "strong" and segs[k][1].strip().startswith("On the error of abbot Joachim")), -1)
+        if j < 0:
+            raise FetchError("Lateran IV constitution 2 heading 'On the error of abbot Joachim' not found")
+        m = 0
+        for tag, text in segs[j + 1:]:
+            if tag == "strong" or (tag == "a" and text.strip().upper() == "TOP"):
+                break
+            if tag == "p" and not re.fullmatch(r"\d+\.", text.strip()):
+                m += 1
+                _emit(ctx, out, f"Constitution 2 (On the error of abbot Joachim — Damnamus ergo), paragraph {m}", [text], "paragraph", url)
+        notes.append(f"Constitution 2 (Damnamus ergo) chunked as ratified: {m} paragraphs; maior dissimilitudo clause "
+                     f"{'present' if any('dissimilitude' in c['text'] or 'unlikeness' in c['text'] or 'dissimilar' in c['text'] for c in out) else 'NOT FOUND'}")
+    else:
+        notes.append("lateran_iv_scope is not EXTEND_TO_CONSTITUTION_2: constitution 1 only")
+    return out, notes
 
 
 def vatican_creeds(ctx):
@@ -293,6 +362,7 @@ def oca_holy_trinity(ctx):
 
 
 def oca_councils(ctx):
+    """(cal-1/cal-2 source of BSR-EO-06: OCA church-history summaries. Superseded in v2.25 by ccel_definitions.)"""
     pages = [(f"{OCA}/orthodoxy/the-orthodox-faith/church-history/fifth-century/the-fourth-ecumenical-council", "Church History — Fifth Century"),
              (f"{OCA}/orthodoxy/the-orthodox-faith/church-history/seventh-century/the-sixth-ecumenical-council", "Church History — Seventh Century")]
     out = []
@@ -302,49 +372,395 @@ def oca_councils(ctx):
     return out, ["OCA history pages for Chalcedon and Constantinople III as cited by released cells; newadvent.org is lineage only"]
 
 
-def goarch(ctx):
-    """RENDERED, 403-prone (Cloudflare bot check). Playwright with backoff; headed browser as last resort."""
+CCEL_C3 = "https://www.ccel.org/ccel/schaff/npnf214.xiii.x.html"
+
+
+def ccel_definitions(ctx):
+    """BSR-EO-06 (v2.25) — the Definitions of Faith of Chalcedon (451) and Constantinople III (680–681),
+    NPNF2-14 (Percival) on ccel.org. The ratified canonical_url is the Chalcedon chapter page; the
+    Constantinople III definition is the sibling chapter page named in the standard title.
+
+    Hazard (Gate 7 host verification): each page interleaves Percival's editorial apparatus — page-number
+    anchors, footnote markers, marginal notes, and a 'Notes.' section (Anatolius, Hefele) — with the
+    conciliar text. Everything under the Notes heading and every footnote/marginal block is EXCLUDED; the
+    inline Greek glosses are moved to a parallel witness so no chunk mixes languages."""
+    from bs4 import BeautifulSoup
+    pages = [(ctx.row["canonical_url"], "Definition of Faith, Council of Chalcedon (451)"),
+             (CCEL_C3, "Definition of Faith, Third Council of Constantinople (680–681)")]
+    out, notes = [], []
+    for url, title in pages:
+        html = ctx.html(url)
+        soup = BeautifulSoup(html, "lxml")
+        content = soup.find("div", class_="book-content") or soup
+        removed = 0
+        for junk in content.select("sup.Note, span.mnote, span.pb, a.page, span.Footnote, div.footnotes, a.Note, a.NoteRef"):
+            junk.decompose(); removed += 1
+        greek_removed = []
+        n = 0
+        for p in content.find_all("p"):
+            txt = clean(p.get_text(" "))
+            if not txt:
+                continue
+            low = txt.casefold()
+            if low in ("notes.", "notes"):
+                break                       # editorial notes follow: excluded
+            if txt.startswith("(") and ("Concilia" in txt or "Labbe" in txt or "Found in the Acts" in txt or "col." in txt):
+                continue                    # Percival's source reference line, not the council's text
+            if low.startswith("the definition of faith") and len(txt) < 80:
+                continue                    # the chapter title
+            if p.find_parent(class_="footnotes") is not None:
+                continue
+            eng, foreign = strip_foreign_parentheticals(txt)
+            greek_removed.extend(foreign)
+            n += 1
+            c = ctx.chunk(f"{title}, paragraph {n}", eng, "paragraph", url,
+                          parallel_witness=({"language": "grc", "glosses": foreign} if foreign else None))
+            if c:
+                out.append(c)
+        notes.append(f"{title}: {n} paragraphs; {removed} editorial/footnote/page blocks excluded; {len(greek_removed)} Greek glosses moved to parallel witness")
+    return out, notes
+
+
+def _html_sections(ctx, html, url, label_prefix=""):
+    """Generic h1/h2/h3-sectioned page → one chunk per section."""
+    out, cur, buf = [], None, []
+    for tag, text in segments(html):
+        t = clean(text)
+        if tag in ("h1", "h2", "h3"):
+            if cur and buf:
+                _emit(ctx, out, f'{label_prefix}"{cur}"', buf, "section", url)
+            cur, buf = t, []
+        elif cur and tag in ("p", "li", "blockquote", "em", "strong", "b", "i", "h4"):
+            buf.append(t)
+    if cur and buf:
+        _emit(ctx, out, f'{label_prefix}"{cur}"', buf, "section", url)
+    return out
+
+
+def goarch_single(ctx):
+    """BSR-EO-07 / BSR-EO-03 — ONE ratified URL on goarch.org, never crawled. The host answers automated
+    fetches with a Cloudflare managed challenge (HTTP 403, cf-mitigated: challenge) on every route tried
+    in cal-3 (plain requests under five user agents, Playwright headless and headed, the desktop app's
+    own Chromium), so the order is: (1) a committed one-time archived fetch with provenance, if present;
+    (2) one plain fetch of the ratified URL; (3) one headless rendered attempt; then BLOCKED. No other
+    path on the host is ever requested."""
     url = ctx.row["canonical_url"]
-    from playwright.sync_api import sync_playwright
-    last = ""
-    with sync_playwright() as p:
-        for attempt, (headless, wait) in enumerate([(True, 8000), (True, 20000), (False, 30000)], 1):
-            try:
-                b = p.chromium.launch(headless=headless)
-                pg = b.new_page()
-                resp = pg.goto(url, wait_until="domcontentloaded", timeout=60000)
-                pg.wait_for_timeout(wait)
-                body = pg.evaluate("() => document.body.innerText")
-                status = resp.status if resp else 0
-                last = f"attempt {attempt} headless={headless}: HTTP {status}, body {len(body)} chars"
-                ctx.log("   " + last)
-                if status == 200 and len(body) > 2000 and "security verification" not in body.casefold():
-                    blocks = pg.evaluate("""() => { const out=[]; const pick=document.querySelector('article')||document.querySelector('main')||document.body;
-                        pick.querySelectorAll('h1,h2,h3,h4,p,li,blockquote').forEach(e=>{const t=(e.innerText||'').trim(); if(t) out.push([e.tagName.toLowerCase(), t]);}); return out; }""")
-                    b.close()
-                    ctx.urls.append({"url": url, "mode": "rendered", "status": status, "ok": True, "error": ""})
-                    out, cur, buf = [], None, []
-                    for tag, text in blocks:
-                        if tag in ("h1", "h2", "h3"):
-                            if cur and buf:
-                                _emit(ctx, out, f'"{cur}"', buf, "section", url)
-                            cur, buf = clean(text), []
-                        elif cur:
-                            buf.append(clean(text))
-                    if cur and buf:
-                        _emit(ctx, out, f'"{cur}"', buf, "section", url)
-                    return out, ["rendered after bot check"]
-                b.close()
-                time.sleep(2 ** attempt)
-            except Exception as e:
-                last = f"attempt {attempt}: {type(e).__name__}: {str(e)[:120]}"
-                ctx.log("   " + last)
-                try:
-                    b.close()
-                except Exception:
-                    pass
-    ctx.urls.append({"url": url, "mode": "rendered", "status": 403, "ok": False, "error": "Cloudflare bot verification"})
-    raise BlockedError(f"goarch.org blocked all rendered attempts ({last})")
+    html = ctx.archived(url)
+    mode = "archived"
+    if html is None:
+        try:
+            html = ctx.html(url)
+            mode = "http"
+        except BlockedError as e:
+            ctx.log(f"   plain fetch blocked ({str(e)[:80]}); one rendered attempt")
+            fr = ctx.fetcher.rendered(url)
+            ctx.urls.append({"url": url, "mode": "rendered", "status": fr.status, "ok": fr.ok, "error": fr.error})
+            body = (fr.rendered or {}).get("body", "")
+            if not fr.ok or "security verification" in body.casefold() or "just a moment" in body.casefold():
+                raise BlockedError(f"goarch.org: Cloudflare managed challenge on the ratified URL (plain HTTP 403; rendered "
+                                   f"HTTP {fr.status}, body {len(body)} chars). Verdict: HOST. No crawl attempted.")
+            blocks = fr.rendered.get("blocks") or []
+            html = "".join(f"<{b['tag']}>{b['text']}</{b['tag']}>" for b in blocks)
+            mode = "rendered"
+    out = _html_sections(ctx, html, url)
+    if ctx.rid == "BSR-EO-07":
+        creed = [c for c in out if "creed" in c["locator"].casefold() or "symbol" in c["locator"].casefold()]
+        anaph = [c for c in out if "anaphora" in c["locator"].casefold()]
+        notes = [f"fetched via {mode}; {len(out)} sections; anaphora sections {len(anaph)}; creed sections {len(creed)}",
+                 "Creed on this page reads 'Creator of heaven and earth' where OCA/Antiochian read 'Maker' — phrases are cut from this file"
+                 if any("Creator of heaven and earth" in c["text"] for c in out) else "'Creator of heaven and earth' NOT found on page — check the split"]
+    else:
+        notes = [f"fetched via {mode}; {len(out)} sections"]
+    return out, notes
+
+
+# ------------------------------------------------------------------ Synodikon guard (BSR-EO-09, FIX 0)
+# The marker must not itself carry the word (or the belt-and-braces rule would re-match it).
+ANATHEMA_MARKER = "[withheld: condemnation formula, non-citable]"
+_ANATHEMA_SPANS = [
+    # "To those who dare to say that … are not one God: ANATHEMA!" — the anathematised proposition and its verdict
+    re.compile(r"To those (?:who|that)\b(?:(?!To those (?:who|that)).)*?\bANATHEMA!", re.S),
+    # the people's response
+    re.compile(r"People:\s*(?:Anathema!\s*)+", re.I),
+    # belt and braces: any remaining sentence that still carries the word in any form (anathematize …)
+    re.compile(r"[^.!?\[\]]*\banathema\w*[^.!?\[\]]*[.!?]?", re.I),
+]
+
+
+def synodikon_guard(text):
+    """Withhold every anathema-framed span from the agent-visible text. Returns (visible, withheld).
+    An anathema names a proposition ONLY to condemn it; quoting its inner clause alone inverts the
+    doctrine ("the Son of God … [is] not one in essence with the Father"). The visible text keeps a
+    marker where each span stood so the locator can see that something was withheld; the withheld
+    spans travel with the chunk under `noncitable_spans` and guards.check_noncitable refuses any
+    phrase that lies inside one, even if an agent reconstructed it from memory."""
+    withheld = []
+    visible = clean(text)
+
+    def take(m):
+        span = clean(m.group(0))
+        if span and span != ANATHEMA_MARKER:
+            withheld.append({"kind": "anathema", "text": span})
+            return f" {ANATHEMA_MARKER} "
+        return m.group(0)
+    for rx in _ANATHEMA_SPANS:
+        visible = rx.sub(take, visible)
+    visible = re.sub(r"(\s*" + re.escape(ANATHEMA_MARKER) + r"\s*){2,}", f" {ANATHEMA_MARKER} ", visible)
+    return clean(visible), withheld
+
+
+def _pdf_pages_text(ctx, url, pages_filter=None):
+    """PDF → list of page texts (running headers and bare page numbers dropped, hyphenation repaired)."""
+    raw = ctx.pdf(url)
+    pages = raw.split("\f")
+    out = []
+    for i, p in enumerate(pages):
+        if pages_filter and not pages_filter(i):
+            continue
+        lines = []
+        for l in p.split("\n"):
+            s_ = l.strip()
+            if not s_:
+                lines.append("")
+                continue
+            if re.fullmatch(r"\d{1,3}", s_) or re.match(r"^(APPENDIX|ANEXA) [IVX]+", s_):
+                continue
+            lines.append(s_)
+        out.append(pdf_repair("\n".join(lines)))
+    return out
+
+
+def roea_synodikon(ctx):
+    """BSR-EO-09 — the Synodikon of Orthodoxy, ROEA text-layer PDF, six numbered sections (one per page),
+    section 2 titled 'The Symbol of Faith'. BLOCKING GUARD applied per section: anathema-framed spans are
+    withheld from the citable text (see synodikon_guard). Section 2, the Creed, carries no anathema and is
+    the safe region."""
+    url = ctx.row["canonical_url"]
+    pages = _pdf_pages_text(ctx, url)
+    out, n_spans, notes = [], 0, []
+    for i, page in enumerate(pages, 1):
+        body = re.sub(r"^\s*\d\s*\n", "", page, count=1)            # the section number that opens each page
+        paras = [clean(x) for x in re.split(r"\n\s*\n", body) if clean(x)]
+        if not paras:
+            continue
+        title = None
+        if paras and len(paras[0].split()) <= 6 and not paras[0].endswith((".", "!", ":")):
+            title = paras[0]
+            paras = paras[1:]
+        full = " ".join(paras)
+        visible, withheld = synodikon_guard(full)
+        n_spans += len(withheld)
+        loc = f"Synodikon §{i}" + (f" — {title}" if title else "")
+        c = ctx.chunk(loc, visible, "section", url, full_text=full, noncitable_spans=withheld,
+                      guard=("anathema-framed spans withheld" if withheld else "no anathema in this section"))
+        if c:
+            out.append(c)
+    creed = [c for c in out if "Symbol of Faith" in c["locator"]]
+    notes.append(f"{len(out)} sections; {n_spans} anathema-framed spans withheld as non-citable; "
+                 f"section 2 'The Symbol of Faith' {'present, no spans withheld' if creed and not creed[0]['noncitable_spans'] else 'CHECK'}")
+    if any("anathema" in c["text"].casefold().replace(ANATHEMA_MARKER.casefold(), "") for c in out):
+        raise FetchError("Synodikon guard failed: the word 'anathema' survives in a citable text")
+    return out, notes
+
+
+def roea_basil(ctx):
+    """BSR-EO-08 — Prayers of the Liturgy of St Basil (ROEA, Appendix VII), bilingual PDF: English on the
+    odd-numbered pages, Romanian ('Anexa VII') on the even. English pages only; divisions are the prayer
+    headings the book itself uses (a heading is followed by its '(See page N)' cross-reference); long
+    prayers are split into parts at paragraph boundaries. This translation reads 'unseen' and 'immutable'."""
+    url = ctx.row["canonical_url"]
+    pages = _pdf_pages_text(ctx, url, pages_filter=lambda i: i % 2 == 0)
+    text = "\n".join(pages)
+    lines = text.split("\n")
+    divisions, cur, buf = [], "Prayers of the Liturgy of St Basil — opening rubrics", []
+    i = 0
+    while i < len(lines):
+        l = lines[i].strip()
+        nxt = lines[i + 1].strip() if i + 1 < len(lines) else ""
+        m = re.match(r"^(.*?)\s*\(See page \d+\)\s*$", l)
+        if m and m.group(1):
+            divisions.append((cur, buf)); cur, buf = m.group(1).strip(), []; i += 1; continue
+        if nxt.startswith("(See page") and l and not l.endswith((".", ",", ";", ":")) and len(l.split()) <= 12:
+            divisions.append((cur, buf)); cur, buf = l, []; i += 2; continue
+        buf.append(l)
+        i += 1
+    divisions.append((cur, buf))
+    out = []
+    for title, blines in divisions:
+        paras = [clean(x) for x in re.split(r"\n\s*\n", "\n".join(blines)) if clean(x)]
+        if not paras:
+            continue
+        parts, part, size = [], [], 0
+        for p in paras:
+            if part and size + len(p) > 2200:
+                parts.append(part); part, size = [], 0
+            part.append(p); size += len(p)
+        if part:
+            parts.append(part)
+        for k, part in enumerate(parts, 1):
+            loc = title if len(parts) == 1 else f"{title}, part {k}"
+            _emit(ctx, out, loc, part, "prayer", url)
+    words = {w: sum(len(re.findall(r"\b" + w + r"\b", c["text"], re.I)) for c in out)
+             for w in ("unseen", "immutable", "invisible", "ineffable", "unchangeable", "incomprehensible", "infinite")}
+    notes = [f"{len(pages)} English pages; {len(out)} prayer chunks across {len(divisions)} headings",
+             "word check: " + ", ".join(f"{w}={n}" for w, n in words.items())]
+    return out, notes
+
+
+HOLYCOUNCIL = "https://www.holycouncil.org"
+
+
+def _crete_rest(soup):
+    ol = soup.find("ol")
+    return [clean(li.get_text(" ", strip=True)) for li in ol.find_all("li", recursive=False)] if ol else []
+
+
+def _crete_encyclical(soup):
+    """(section, paragraph number, text) triples: sections from roman-numeral <strong> headings,
+    paragraphs from 'N.' leads; unnumbered paragraphs continue the current number; the preamble and the
+    closing doxology are their own divisions."""
+    items, section, num, buf = [], "Preamble", None, []
+    started = False
+    for p in soup.find_all("p"):
+        t = clean(p.get_text(" ", strip=True))
+        if not t:
+            continue
+        if not started:
+            if re.match(r"^(ENCYCLICAL|ΕΓΚΥΚΛΙΟΣ)", t, re.I):
+                started = True
+            continue
+        if t == "***":
+            continue
+        m = re.match(r"^([IVX]+)\.\s+(.+)$", t)
+        if m and len(t) < 120:
+            if buf:
+                items.append((section, num, " ".join(buf))); buf = []
+            section, num = f"{m.group(1)}. {m.group(2)}", None
+            continue
+        m = re.match(r"^(\d{1,2})\.\s+(.+)$", t, re.S)
+        if m:
+            if buf:
+                items.append((section, num, " ".join(buf))); buf = []
+            num = int(m.group(1)); buf.append(m.group(2))
+            continue
+        if t.startswith("†") or re.match(r"^Delegation of", t):
+            break
+        buf.append(t)
+    if buf:
+        items.append((section, num, " ".join(buf)))
+    return items
+
+
+def crete_2016(ctx):
+    """BSR-EO-10 — Holy and Great Council of Crete (2016): 'Relations of the Orthodox Church with the Rest
+    of the Christian World' (flat ¶1–24) and the Encyclical (sections I–VII, ¶1–20, plus preamble and closing
+    doxology). The English text is chunked for citation; the Greek text (the '_el' page of each document)
+    is fetched separately and kept beside each chunk as a parallel witness — never in the same chunk."""
+    from bs4 import BeautifulSoup
+    rest_url = ctx.row["canonical_url"]
+    enc_url = f"{HOLYCOUNCIL}/encyclical-holy-council"
+    out, notes = [], []
+    en = BeautifulSoup(ctx.html(rest_url), "lxml")
+    try:
+        el = BeautifulSoup(nfc(ctx.html(rest_url + "_el")), "lxml")
+        el_paras = _crete_rest(el)
+    except FetchError as e:
+        el_paras = []; notes.append(f"Greek parallel for the Relations document unavailable: {e}")
+    paras = _crete_rest(en)
+    for i, t in enumerate(paras, 1):
+        c = ctx.chunk(f"Relations of the Orthodox Church with the Rest of the Christian World, ¶{i}", t, "paragraph", rest_url,
+                      parallel_witness=({"language": "el", "text": el_paras[i - 1]} if i - 1 < len(el_paras) else None))
+        if c:
+            out.append(c)
+    notes.append(f"Relations document: {len(paras)} numbered paragraphs (English); Greek parallel for {min(len(paras), len(el_paras))}")
+    en2 = BeautifulSoup(ctx.html(enc_url), "lxml")
+    try:
+        el2 = BeautifulSoup(nfc(ctx.html(enc_url + "_el")), "lxml")
+        el_items = {n: t for _, n, t in _crete_encyclical(el2) if n is not None}
+    except FetchError as e:
+        el_items = {}; notes.append(f"Greek parallel for the Encyclical unavailable: {e}")
+    items = _crete_encyclical(en2)
+    for section, num, t in items:
+        if num is None:
+            loc = f"Encyclical, {section}" if section == "Preamble" else f"Encyclical, {section} (closing)"
+        else:
+            loc = f"Encyclical, {section}, ¶{num}"
+        c = ctx.chunk(loc, t, "paragraph", enc_url,
+                      parallel_witness=({"language": "el", "text": el_items[num]} if num in el_items else None))
+        if c:
+            out.append(c)
+    notes.append(f"Encyclical: {len(items)} divisions; sections {sorted({s_.split('.')[0] for s_, _, _ in items})}")
+    return out, notes
+
+
+def antioch_witness(ctx):
+    """BSR-EO-11 — WITNESS ONLY. An unsigned article on antiochpatriarchate.org quoting the Chalcedon clause in
+    English with the Greek and the Latin inline in the same sentence. The quotation is chunked as English
+    only; the Greek and Latin groups are moved to a parallel witness so no candidate mixes languages. The
+    row is flagged witness in the registry (tier 'CONCILIAR (witness; translation)') and never controls."""
+    from bs4 import BeautifulSoup
+    url = ctx.row["canonical_url"]
+    soup = BeautifulSoup(ctx.html(url), "lxml")
+    title = soup.find("strong", string=re.compile(r"Whose goings forth"))
+    if title is None:
+        raise FetchError("Antioch article title not found")
+    paras = []
+    for sib in title.find_all_next():
+        if sib.name == "div" and "more" in (sib.get("class") or []):
+            break
+        if sib.name == "p":
+            t = clean(sib.get_text(""))          # inline spans continue mid-word ('a' + 'nd assumed')
+            if t:
+                paras.append(t)
+    quote = [p for p in paras if "Council of Chalcedon" in p or p.startswith("“") or "inconfusedly" in p]
+    body = [p for p in paras if p not in quote]
+    out = []
+    _emit(ctx, out, "Article (English), paragraphs 1–%d" % len(body), body, "article", url)
+    for p in quote:
+        if "inconfusedly" in p or p.startswith("“"):
+            eng, foreign = strip_foreign_parentheticals(p)
+            c = ctx.chunk("Chalcedon clause as quoted (English)", eng, "quotation", url,
+                          parallel_witness={"language": "grc+la", "glosses": foreign}, witness=True)
+            if c:
+                out.append(c)
+    for c in out:
+        c["witness"] = True
+    mixed = [c["locator"] for c in out if re.search(r"[Ͱ-Ͽἀ-῿]", c["text"])]
+    return out, [f"{len(out)} chunks; witness only; Greek/Latin groups moved out of the citable text; mixed-language chunks: {mixed or 'none'}"]
+
+
+def sparta_creed_greek(ctx):
+    """BSR-EO-12 — the Nicene-Constantinopolitan Creed in polytonic Greek, twelve numbered articles, on
+    immspartis.gr. Normalised to NFC exactly once, here, at fetch; the twelve articles are the divisions.
+    The page also carries the Creed in fourteen other languages; only the Greek is chunked."""
+    url = ctx.row["canonical_url"]
+    html = nfc(ctx.html(url))
+    segs = [(t, clean(x)) for t, x in html_segments(html)]
+    start = next((i for i, (t, x) in enumerate(segs) if "ΤΟ ΣΥΜΒΟΛΟΝ ΤΗΣ ΠΙΣΤΕΩΣ" in x), -1)
+    if start < 0:
+        raise FetchError("Greek Creed heading 'ΤΟ ΣΥΜΒΟΛΟΝ ΤΗΣ ΠΙΣΤΕΩΣ' not found")
+    out, expect = [], 1
+    for tag, x in segs[start + 1:]:
+        if "THE CREED" in x or "Αγγλικά" in x:
+            break
+        m = re.match(r"^(\d{1,2})\.\s*(.+)$", x, re.S)
+        if m and int(m.group(1)) == expect:
+            art = m.group(2).strip()
+            c = ctx.chunk(f"Σύμβολον τῆς Πίστεως, ἄρθρον {expect} (Symbol of Faith, article {expect})", art, "article", url, language="el",
+                          polytonic=has_polytonic(art))
+            if c:
+                out.append(c)
+            expect += 1
+    article_segs = [x for _, x in segs[start + 1:start + 14] if re.match(r"^\d{1,2}\.\s", x)]
+    poly_in = len(re.findall(r"[ἀ-῿]", "".join(article_segs)))
+    poly_out = len(re.findall(r"[ἀ-῿]", "".join(c["text"] for c in out)))
+    import unicodedata
+    nfc_ok = all(unicodedata.normalize("NFC", c["text"]) == c["text"] for c in out)
+    notes = [f"{len(out)} of 12 articles; polytonic code points in source region {poly_in}, in stored chunks {poly_out}; "
+             f"stored text is NFC: {nfc_ok}; every article polytonic: {all(c.get('polytonic') for c in out)}"]
+    if len(out) != 12:
+        raise FetchError(f"expected 12 Greek articles, found {len(out)}")
+    return out, notes
 
 
 def philaret(ctx):
@@ -878,6 +1294,35 @@ def umc_eub_confession(ctx):
     return _umc(ctx)
 
 
+def gmc_what_we_believe(ctx):
+    """BSR-MW-03 — Global Methodist Church, 'What We Believe' on the APEX host globalmethodist.org. The
+    ratified URL is fetched byte for byte; the fetcher no longer follows the host's redirect onto
+    www.globalmethodist.org (a different site, which 404s). Articles are split on their headings."""
+    from bs4 import BeautifulSoup
+    url = ctx.row["canonical_url"]
+    html = ctx.html(url)
+    soup = BeautifulSoup(html, "lxml")
+    out, cur, buf = [], None, []
+    for el in soup.find_all(["h1", "h2", "h3", "h4", "h5", "p", "li", "blockquote"]):
+        t = clean(el.get_text(" ", strip=True))
+        if not t:
+            continue
+        if el.name.startswith("h") and re.match(r"^(Article\s+[IVXLC0-9]+|[IVX]+\.)\b", t):
+            if cur and buf:
+                _emit(ctx, out, cur, buf, "article", url)
+            cur, buf = t, []
+        elif el.name.startswith("h"):
+            if cur and buf:
+                _emit(ctx, out, cur, buf, "article", url)
+            cur, buf = t, []
+        elif cur:
+            buf.append(t)
+    if cur and buf:
+        _emit(ctx, out, cur, buf, "article", url)
+    good = sum(1 for c in out if "infinite power, wisdom, and good" in c["text"])
+    return out, [f"{len(out)} sections; Article I 'of infinite power, wisdom, and good' (not 'goodness') found in {good} chunk(s)"]
+
+
 def wesleyan_articles(ctx):
     url = ctx.row["canonical_url"]
     segs = segments(ctx.html(url))
@@ -968,22 +1413,27 @@ def dordrecht(ctx):
 # =============================================================== dispatch
 ADAPTERS = {
     "BSR-RC-01": ccc_section_two, "BSR-RC-02": dei_filius_latin, "BSR-RC-03": dei_filius_ewtn,
-    "BSR-RC-04": lateran_canon1, "BSR-RC-06": vatican_creeds, "BSR-RC-07": compendium,
-    "BSR-EO-01": oca_symbol_of_faith, "BSR-EO-02": oca_holy_trinity, "BSR-EO-03": goarch,
-    "BSR-EO-04": philaret, "BSR-EO-05": dositheus, "BSR-EO-06": oca_councils,
+    "BSR-RC-04": lateran_constitutions, "BSR-RC-06": vatican_creeds, "BSR-RC-07": compendium,
+    "BSR-EO-01": oca_symbol_of_faith, "BSR-EO-02": oca_holy_trinity, "BSR-EO-03": goarch_single,
+    "BSR-EO-04": philaret, "BSR-EO-05": dositheus, "BSR-EO-06": ccel_definitions,
+    "BSR-EO-07": goarch_single, "BSR-EO-08": roea_basil, "BSR-EO-09": roea_synodikon,
+    "BSR-EO-10": crete_2016, "BSR-EO-11": antioch_witness, "BSR-EO-12": sparta_creed_greek,
     "BSR-LU-01": book_of_concord, "BSR-LU-03": small_catechism_cph,
     "BSR-RP-01": wcf_opc, "BSR-RP-02": wsc_opc, "BSR-RP-03": wlc_opc, "BSR-RP-04": pcusa_book_of_confessions,
     "BSR-RP-05": heidelberg_crcna, "BSR-RP-06": belgic_crcna,
     "BSR-AN-01": thirty_nine_articles, "BSR-AN-02": bcp_catechism_1662, "BSR-AN-03": athanasian_creed_cofe,
     "BSR-AN-04": tec_outline_of_faith, "BSR-AN-05": acna_to_be_a_christian,
     "BSR-BA-01": bfm2000, "BSR-BA-02": london_1689_ch2, "BSR-BA-03": abc_usa_10facts,
-    "BSR-MW-01": umc_articles, "BSR-MW-02": umc_eub_confession, "BSR-MW-04": wesleyan_articles,
+    "BSR-MW-01": umc_articles, "BSR-MW-02": umc_eub_confession, "BSR-MW-03": gmc_what_we_believe, "BSR-MW-04": wesleyan_articles,
     "BSR-MA-01": mennonite_1995, "BSR-MA-02": dordrecht,
 }
 
-# Rows with no text corpus by policy or by the state of the host (recorded in the manifest, never chunked).
+# Rows with no text corpus BY POLICY (recorded in the manifest, never chunked). A row whose host is
+# unavailable is no longer listed here: cal-1/cal-2 carried BSR-MW-03 as a hard-coded
+# UNAVAILABLE_ON_RATIFIED_DOMAIN entry, so the ratified URL was never actually requested at build
+# time — the self-inflicted half of that row's problem. Every row now goes through its adapter and
+# the manifest records what the host actually answered.
 NO_TEXT = {
-    "BSR-RC-05": ("LINEAGE", "Fordham sourcebook is a lineage host for 4 released cells; text corpus for Lateran IV canon 1 is BSR-RC-04"),
+    "BSR-RC-05": ("LINEAGE", "Fordham sourcebook is a TRANSLATION_WITNESS / lineage host for 4 released cells; the text corpus for Lateran IV constitutions 1–2 is BSR-RC-04"),
     "BSR-LU-02": ("AUTHORITY_URL_ONLY", "files.lcms.org is a client-side viewer (AC-08): registered as the LCMS adoption URL; no text extraction"),
-    "BSR-MW-03": ("UNAVAILABLE_ON_RATIFIED_DOMAIN", "canonical_url returns HTTP 404; the current 'Book of Doctrines & Discipline' page on globalmethodist.org carries no doctrinal text in HTML and links the BDD only as a PDF on irp.cdn-website.com (not a ratified domain). Needs an author registry correction before any text can be admitted"),
 }

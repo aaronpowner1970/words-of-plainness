@@ -6,9 +6,16 @@
   no cross-branch   a candidate's registry_id must belong to the cell's branch
   duplicates        identical locator + phrase collapses to one candidate
   fallback tier     fallback-only rows are admitted only in pass two (agents.py)
+  non-citable spans a chunk may carry spans withheld from its agent-visible text (the Synodikon's
+                    anathema-framed propositions); a phrase drawn from a withheld span is refused by
+                    name even if the agent reconstructed it
+  citation refusal  DIALOGUE_ONLY rows and named documents (the 1848 Encyclical) are refused as
+                    citations with the policy's own reason (registry.citation_refusal)
+  witness rows      a candidate on a TRANSLATION_WITNESS / witness row is flagged WITNESS; a cell may
+                    not rest on such rows alone (packets.py, calibrate.py)
 """
 from .config import PHRASE_MAX_WORDS, RATIONALE_MAX_WORDS, SOURCE_NOTE_MAX_WORDS
-from .textutil import normalize, phrase_word_count, contains
+from .textutil import normalize, phrase_word_count, contains, scrub_urls
 
 
 class GuardError(Exception):
@@ -19,9 +26,10 @@ AGENT_CHUNK_FIELDS = ("chunk_key", "registry_id", "standard_title", "authority_t
 
 
 def agent_view(chunk, key):
-    """The only representation of a chunk an agent ever sees. No URL, no hash."""
+    """The only representation of a chunk an agent ever sees. No URL, no hash, no withheld span:
+    `text` is the agent-visible text, which for a guarded row already lacks the non-citable spans."""
     return {"chunk_key": key, "registry_id": chunk["registry_id"], "standard_title": chunk["standard_title"],
-            "authority_tier": chunk["authority_tier"], "locator": chunk["locator"], "text": chunk["text"],
+            "authority_tier": chunk["authority_tier"], "locator": chunk["locator"], "text": scrub_urls(chunk["text"]),
             "language": chunk.get("language", "en")}
 
 
@@ -46,6 +54,19 @@ def check_phrase(phrase, chunk_text):
     return True, "verbatim"
 
 
+def check_noncitable(phrase, chunk):
+    """(ok, reason): the phrase must not lie inside a span the corpus builder withheld from this chunk."""
+    spans = chunk.get("noncitable_spans") or []
+    if not spans or not phrase:
+        return True, "ok"
+    p = normalize(phrase)
+    for sp in spans:
+        if p and p in normalize(sp["text"] if isinstance(sp, dict) else sp):
+            kind = sp.get("kind", "non-citable") if isinstance(sp, dict) else "non-citable"
+            return False, f"{kind.upper()}_SPAN: phrase lies inside a span withheld as non-citable (quoting it inverts or misstates the standard)"
+    return True, "ok"
+
+
 def check_length(text, cap, label):
     n = phrase_word_count(text)
     return (n <= cap), (f"{label} {n} words > {cap}" if n > cap else "ok")
@@ -57,6 +78,14 @@ def check_branch(candidate_rid, branch, registry):
         return False, f"{candidate_rid} is not an AUTHOR_RATIFIED registry row"
     if row["branch"] != branch:
         return False, f"{candidate_rid} belongs to {row['branch']}, not {branch} (cross-branch leakage)"
+    return True, "ok"
+
+
+def check_citable_row(candidate_rid, registry):
+    """DIALOGUE_ONLY rows and named-refusal documents are never citations, whatever the agent found."""
+    reason = registry.citation_refusal(candidate_rid)
+    if reason:
+        return False, reason
     return True, "ok"
 
 
@@ -75,8 +104,14 @@ def vet_candidate(cand, chunk_by_key, branch, registry, allow_fallback):
     ok, why = check_branch(chunk["registry_id"], branch, registry)
     if not ok:
         return False, why, chunk
+    ok, why = check_citable_row(chunk["registry_id"], registry)
+    if not ok:
+        return False, why, chunk
     if registry.is_fallback(chunk["registry_id"]) and not allow_fallback:
         return False, "fallback-only standard cited in pass one", chunk
+    ok, why = check_noncitable(cand.get("phrase", ""), chunk)
+    if not ok:
+        return False, why, chunk
     ok, why = check_phrase(cand.get("phrase", ""), chunk["text"])
     if not ok:
         return False, why, chunk

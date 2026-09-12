@@ -15,12 +15,19 @@ python scripts/sjn_recovery/corpus.py status
 # 2. Planted near-miss fixture (hand-authored items, re-asserted verbatim at build)
 python scripts/sjn_recovery/calibration_fixture.py
 
+# 2b. Fetcher audit (every ratified URL requested as written; cross-host redirects recorded, never followed)
+python scripts/sjn_recovery/fetch_audit.py                  # writes recovery-runs/fetch-audit.json
+
+# 2c. Guards: the Synodikon anathema guard, polytonic integrity, R001 refusals
+python -m pytest scripts/sjn_recovery/tests -q
+
 # 3. Calibration (released cells with locators hidden + planted near-misses) — resumable
-python scripts/sjn_recovery/calibrate.py run   --run-id cal-1 --locator-model sonnet --verifier-models sonnet,opus
-python scripts/sjn_recovery/calibrate.py plant --run-id cal-1 --locator-model sonnet --verifier-models sonnet,opus
-python scripts/sjn_recovery/jobs.py status --run-id cal-1
+#    --seed-from reuses another run's answered calls (identical role/model/prompt-version/text) at no cost
+python scripts/sjn_recovery/calibrate.py run   --run-id cal-3 --locator-model sonnet --verifier-models sonnet,opus --seed-from cal-2
+python scripts/sjn_recovery/calibrate.py plant --run-id cal-3 --locator-model sonnet --verifier-models sonnet,opus --seed-from cal-2
+python scripts/sjn_recovery/jobs.py status --run-id cal-3
 #    ... execute pending jobs (see Backends) and re-run `run` / `plant` until nothing is pending ...
-python scripts/sjn_recovery/calibrate.py report --run-id cal-1   # writes recovery-runs/calibration-report.md
+python scripts/sjn_recovery/calibrate.py report --run-id cal-3 --compare cal-2   # writes recovery-runs/calibration-report.md
 
 # 4. Live run — only after the author has reviewed the calibration report
 python scripts/sjn_recovery/run.py --run-id live-1 --all-branches --locator-model sonnet \
@@ -52,6 +59,29 @@ python scripts/sjn_recovery/api_executor.py --run-id cal-1 --workers 6 --max-cos
 ```
 
 `temperature` is not sent: it is deprecated on the Claude 5 family.
+
+## cal-3 design (v2.25 RECEPTION AXIS)
+
+- **APP CONFIG is read, not hard-coded** (`registry.py`): `gate6_threshold_metric` (SAME_STANDARD is the gate;
+  tier-respecting and same-division are reported, ungated), `authority_tier_rank`, `reception_scope_vocabulary`,
+  `creed_tier_resolution` (a creed cited from a lower-tier row resolves to the tier the row note names),
+  `lateran_iv_scope` (BSR-RC-04 chunks constitutions 1–2), `verifier_routing`, `dialogue_text_policy`,
+  `encyclical_1848_status`, `registry_fallback_only_rows`.
+- **Retrieval per standard** (`retrieval.select_for_standard`, `agents.locate`): one locator call per
+  AUTHOR_RATIFIED standard with that standard's own chunks (whole if ≤60k chars, else the hybrid ranking within it);
+  every standard's best candidate gets a guaranteed verification slot, then `VERIFY_EXTRA_CANDIDATES` more by
+  tier and floor. An over-long phrase is re-cut once by the locator (`recut` role), never repaired by code.
+- **Routing SONNET_WITH_OPUS_SLICE**: the primary verifies every slotted candidate; the adjudicator verifies
+  candidates on the slice rows (BSR-EO-04, BSR-EO-05, BSR-EO-09, fallback-only rows) and every cell the primary
+  rejected outright; where it ran, its verdict is final and overturns are recorded per candidate.
+- **Synodikon guard** (`sources.synodikon_guard`, tested in `tests/`): anathema-framed spans are withheld from the
+  agent-visible text and refused by name at candidate vetting.
+- **Witness rows** (TRANSLATION_WITNESS reception, or a tier qualified "witness"): candidates flagged; a cell may
+  not rest on them alone (scored and packeted accordingly). **DIALOGUE_ONLY** rows and the **1848 Encyclical**
+  are refused by name (`sjn_pipeline/registry.py`, R001 in `rules.py`, `guards.check_citable_row`).
+- **Fetcher**: ratified URLs fetched byte for byte; redirects followed one hop at a time and logged; the corpus
+  builder refuses a hop onto another host (`Fetcher(strict_host=True)`). goarch.org is never crawled.
+- Agent-visible chunk text has URL tokens scrubbed (`textutil.scrub_urls`); the stored text and hash are untouched.
 
 ## Guards enforced in code (`guards.py`, `agents.py`, `packets.py`)
 

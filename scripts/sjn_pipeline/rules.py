@@ -368,10 +368,19 @@ def run_rules(ctx, targets, runner, decisions, gates, canonical, propagation_iss
     # LINEAGE row names itself (canonical_url / standard_title) are admitted and reported separately so the
     # Gate 7 migration (lineage_host_policy) can find them. Retired historical witnesses (lineage-only rows)
     # are not citations and are listed, not judged. Blocking while the switch is True.
-    from .registry import branch_domain_index, resolve_host, enforcement_on, ratified
+    # Extended 2026-09-11 (v2.25 reception axis, AUTHOR RATIFIED): (a) a row whose reception_scope is
+    # DIALOGUE_ONLY is admitted for provenance but REFUSED as a citation (dialogue_text_policy);
+    # (b) the 1848 Encyclical of the Eastern Patriarchs is refused BY NAME with its own reason
+    # (encyclical_1848_status = RECORD_STANDING_ONLY) — it has no registry row, so a domain miss
+    # would already refuse it, but the named refusal survives the day an agent finds it compelling;
+    # (c) a cell may not rest on a TRANSLATION_WITNESS row alone (BSR-RC-03, BSR-RC-05): at least one
+    # of its citation URLs must resolve to a non-witness row of the branch.
+    from .registry import (branch_domain_index, resolve_row, enforcement_on, ratified, citation_refusal,
+                           refusal_reason, is_translation_witness)
     enforce = enforcement_on(ctx.config)
     idx = branch_domain_index(ctx.registry)
     viol, lineage_admitted, retired_rows, checked = [], [], [], 0
+    refused_named, witness_alone, dialogue_refused = [], [], []
     for r in q:
         qid = s(r["Queue ID"])
         branch = s(r.get("Teaching branch"))
@@ -382,24 +391,44 @@ def run_rules(ctx, targets, runner, decisions, gates, canonical, propagation_iss
         if b(r.get("Historical Witness Retired")) or s(r.get("Evidence Display Role")) == "LINEAGE ONLY":
             retired_rows.append(qid)
             continue
+        named = refusal_reason(r.get("Document"), r.get("Proposition locator"), *urls)
+        if named:
+            refused_named.append((qid, branch, named.split(" — ")[0]))
+            viol.append((qid, branch, named.split(" — ")[0]))
+        resolved_rows = []
         for u in urls:
             checked += 1
-            kind, rid = resolve_host(idx, branch, u)
+            kind, rid, row = resolve_row(idx, branch, u)
             if kind is None:
                 viol.append((qid, branch, u))
-            elif kind == "lineage":
+                continue
+            refusal = citation_refusal(row)
+            if refusal:
+                dialogue_refused.append((qid, rid, refusal.split(" — ")[0]))
+                viol.append((qid, branch, f"{u} [{refusal.split(' — ')[0]} via {rid}]"))
+                continue
+            resolved_rows.append(row)
+            if kind == "lineage":
                 lineage_admitted.append((qid, rid, u))
+        if resolved_rows and all(is_translation_witness(row) for row in resolved_rows):
+            witness_alone.append((qid, branch, [row["registry_id"] for row in resolved_rows]))
+            viol.append((qid, branch, "TRANSLATION_WITNESS_ALONE " + ",".join(row["registry_id"] for row in resolved_rows)))
     n_rat = len(ratified(ctx.registry))
     exp_rat = s(ctx.config.get("registry_entries_ratified"))
     reg_ok = not exp_rat or str(n_rat) == exp_rat
+    policy = (f"dialogue_text_policy={s(ctx.config.get('dialogue_text_policy')) or 'unset'}; "
+              f"encyclical_1848_status={s(ctx.config.get('encyclical_1848_status')) or 'unset'}")
     if not enforce:
         out.append(R("R001", "INFO", "INFO", "registry_only_enforcement is False; rule not enforced",
                      f"{checked} citation URLs would be checked; {len(viol)} outside registry", str(viol[:5])))
     else:
         out.append(R("R001", "BLOCK", "PASS" if (not viol and reg_ok and ctx.registry) else "FAIL",
-                     f"0 citation hosts outside the branch's AUTHOR_RATIFIED registry rows ({exp_rat or n_rat} ratified rows)",
-                     f"{checked} citation URLs checked; {len(viol)} outside registry; {len(lineage_admitted)} on lineage-admitted hosts "
+                     f"0 citation hosts outside the branch's AUTHOR_RATIFIED registry rows ({exp_rat or n_rat} ratified rows); "
+                     f"0 DIALOGUE_ONLY citations; 0 named-refusal documents; 0 cells resting on a TRANSLATION_WITNESS row alone",
+                     f"{checked} citation URLs checked; {len(viol)} violations; {len(lineage_admitted)} on lineage-admitted hosts "
                      f"({len({x[0] for x in lineage_admitted})} cells); {len(retired_rows)} retired lineage-only rows not judged; "
-                     f"registry ratified rows={n_rat}",
-                     f"violations={viol[:8]}; lineage_admitted={sorted({(x[1], x[2].split('/')[2]) for x in lineage_admitted})}; retired={retired_rows}"))
+                     f"registry ratified rows={n_rat}; dialogue_only refused={len(dialogue_refused)}; named refusals={len(refused_named)}; "
+                     f"translation-witness-alone={len(witness_alone)}; {policy}",
+                     f"violations={viol[:8]}; lineage_admitted={sorted({(x[1], x[2].split('/')[2]) for x in lineage_admitted})}; "
+                     f"retired={retired_rows}; named_refusals={refused_named[:5]}; witness_alone={witness_alone[:5]}"))
     return out

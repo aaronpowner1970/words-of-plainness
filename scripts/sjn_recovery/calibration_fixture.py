@@ -186,8 +186,12 @@ ITEMS = [
      "Creed clause about the Church."),
     ("BSR-EO-01", r'"Man"$', "RNR-H33", "created in the image and likeness of God", "CREATURE_PREDICATE",
      "Image predicated of man."),
-    ("BSR-EO-06", r"Fourth Ecumenical", "RNR-H42", "becoming a real man in every way, but without sin", "CHRISTOLOGICAL_HUMAN",
-     "Christ's real humanity; nothing about God being incorporeal."),
+    # PNM-074. cal-1/cal-2 cut this item from the OCA church-history page ("becoming a real man in every way, but
+    # without sin"). v2.25 re-sourced BSR-EO-06 to the NPNF2-14 Definitions (Percival), so the same near-miss —
+    # Christ's real humanity, the Chalcedonian "like unto us, sin only excepted" — is re-cut from the Percival text.
+    # Same row, same family, same type; only the wording follows the ratified source.
+    ("BSR-EO-06", r"Chalcedon", "RNR-H42", "made in all things like unto us, sin only excepted", "CHRISTOLOGICAL_HUMAN",
+     "Christ's real humanity (Chalcedon, Percival); nothing about God being incorporeal. Re-cut from the OCA paraphrase when the row was re-sourced for v2.25."),
 ]
 
 

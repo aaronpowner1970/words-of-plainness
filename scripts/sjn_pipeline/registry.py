@@ -72,17 +72,26 @@ def admitted_domains(row):
 
 
 def branch_domain_index(rows):
-    """branch -> {domain: {"registry_id", "kind": "primary"|"lineage"}} over AUTHOR_RATIFIED rows."""
+    """branch -> {domain: {"registry_id", "kind": "primary"|"lineage", "row"}} over AUTHOR_RATIFIED rows."""
     idx = {}
     for r in ratified(rows):
         br = r.get("branch", "")
         primary, extra = admitted_domains(r)
         bucket = idx.setdefault(br, {})
         if primary and primary not in bucket:
-            bucket[primary] = {"registry_id": r["registry_id"], "kind": "primary"}
+            bucket[primary] = {"registry_id": r["registry_id"], "kind": "primary", "row": r}
         for d in extra:
-            bucket.setdefault(d, {"registry_id": r["registry_id"], "kind": "lineage"})
+            bucket.setdefault(d, {"registry_id": r["registry_id"], "kind": "lineage", "row": r})
     return idx
+
+
+def resolve_row(idx, branch, url):
+    """Like resolve_host but returns (kind, registry_id, row)."""
+    host = normalize_host(urlparse(url).netloc)
+    for d, info in (idx.get(branch) or {}).items():
+        if host_matches(host, d):
+            return info["kind"], info["registry_id"], info.get("row")
+    return None, None, None
 
 
 def resolve_host(idx, branch, url):
@@ -101,3 +110,81 @@ def fallback_only_ids(config):
 
 def enforcement_on(config):
     return s(config.get("registry_only_enforcement")).casefold() in ("true", "1", "yes")
+
+
+def config_list(config, key, default=None):
+    """A pipe-separated APP CONFIG value as a list (authority_tier_rank, reception_scope_vocabulary)."""
+    v = s(config.get(key))
+    if not v:
+        return list(default or [])
+    return [x.strip() for x in v.split("|") if x.strip()]
+
+
+# ---------------------------------------------------------------- reception axis (v2.25, ADOPT_BOTH)
+def reception_scope(row):
+    return s(row.get("reception_scope")).upper()
+
+
+def is_dialogue_only(row):
+    """APP CONFIG dialogue_text_policy = DIALOGUE_ONLY_NEVER_CITED: such a row may be registered for
+    provenance but is refused as a cell citation. No such row exists in v2.25; the refusal is live."""
+    return reception_scope(row) == "DIALOGUE_ONLY"
+
+
+def is_translation_witness(row):
+    """A reading witness, not an independent source: a cell may not rest on it alone."""
+    return reception_scope(row) == "TRANSLATION_WITNESS"
+
+
+def is_witness_row(row):
+    """TRANSLATION_WITNESS rows (BSR-RC-03, BSR-RC-05) and rows whose tier is qualified as a witness
+    (BSR-EO-11, `CONCILIAR (witness; translation)`). Never the controlling text for a cell."""
+    return is_translation_witness(row) or "witness" in s(row.get("authority_tier")).casefold()
+
+
+# ---------------------------------------------------------------- documents refused by name
+# APP CONFIG encyclical_1848_status = RECORD_STANDING_ONLY. The 1848 Encyclical of the Eastern
+# Patriarchs is genuinely authoritative (the OCA calls it the most authoritative doctrinal statement
+# in modern Orthodox history), which is exactly why an agent may find it compelling. Its text is on
+# no official Orthodox host and every English version descends from one anonymous 19th-century
+# translation, so under R001 and the verbatim-assertion rule it cannot be cited. No registry row
+# exists for it; the refusal is made explicit here with a named reason rather than a generic domain
+# miss. Standing is recorded (Karmiris, Τά Δογματικά καί Συμβολικά Μνημεῖα, II, 916); text is not.
+NON_CITABLE_DOCUMENTS = [
+    {
+        "name": "1848 Encyclical of the Eastern Patriarchs",
+        "reason": "ENCYCLICAL_1848_NOT_CITABLE — APP CONFIG encyclical_1848_status = RECORD_STANDING_ONLY: "
+                  "text on no official Orthodox host; every English version descends from one anonymous "
+                  "19th-century translation; standing recorded, text never cited",
+        "patterns": [
+            r"\b1848\b.{0,40}\b(encyclical|epistle|patriarchs?)\b",
+            r"\b(encyclical|epistle)\b.{0,40}\b(eastern|orthodox)\s+patriarchs\b.{0,40}\b1848\b",
+            r"\bencyclical\s+of\s+the\s+(eastern|orthodox)\s+patriarchs\b",
+            r"\breply\s+of\s+the\s+orthodox\s+patriarchs\b.{0,30}\bpius\b",
+            r"\bpius\s+ix\b.{0,60}\b(eastern|orthodox)\s+patriarchs\b",
+        ],
+    },
+]
+
+
+def refusal_reason(*texts):
+    """Named refusal for a document that must never be cited, matched on any of the given strings
+    (document title, locator, URL, standard title). Returns the reason string or None."""
+    blob = " ".join(s(t) for t in texts if t).casefold()
+    if not blob:
+        return None
+    for doc in NON_CITABLE_DOCUMENTS:
+        for p in doc["patterns"]:
+            if re.search(p, blob, re.I | re.S):
+                return doc["reason"]
+    return None
+
+
+def citation_refusal(row):
+    """Why an otherwise-admitted registry row may not be cited for a cell, or None."""
+    if row is None:
+        return None
+    if is_dialogue_only(row):
+        return ("DIALOGUE_ONLY_NEVER_CITED — APP CONFIG dialogue_text_policy: the publisher disclaims the text as "
+                "an official position, and the disclaimer frequently does not appear on the document's own page")
+    return refusal_reason(row.get("standard_title"), row.get("canonical_url"))

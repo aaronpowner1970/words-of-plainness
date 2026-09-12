@@ -3,6 +3,17 @@ fetch for JavaScript-only hosts, PDF text extraction, on-disk cache.
 
 P006: accept final HTTP status 200–399 after redirects; retry transient errors
 (429, 5xx, timeouts); explicit whitelist only for access-controlled hosts.
+
+Host discipline (Gate 6 cal-3 audit, 2026-09-11). The fetcher never rewrites a hostname: no
+`www.` is added or stripped anywhere in this module (the only www-stripping in the pipeline is
+`registry.normalize_host`, which is used for R001 domain MATCHING and never for fetching). What the
+fetcher did do was follow every HTTP redirect the host issued, including a redirect onto a
+DIFFERENT host — which is how the ratified apex URL of BSR-MW-03 (globalmethodist.org) came back as
+the www site's 404. Redirects are now followed one hop at a time and recorded in
+`FetchResult.redirects`; with `strict_host=True` (the Gate 6 corpus builder) a redirect that changes
+the host is refused and reported as REDIRECT-CROSS-HOST, so the ratified URL is fetched exactly as
+the registry gives it. The Gate 2 cell-assertion pipeline keeps following (a released cell's own
+URL is what it is) but the hops are now logged so a cross-host redirect is visible in the audit.
 """
 import base64
 import hashlib
@@ -11,7 +22,7 @@ import os
 import time
 import urllib.robotparser
 from dataclasses import dataclass, field, asdict
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 
 import requests
 
@@ -54,6 +65,8 @@ class FetchResult:
     robots: str = ""             # allowed | disallowed | unavailable | skipped
     whitelisted: bool = False
     fetched_at: str = ""
+    redirects: list = field(default_factory=list)   # [(status, from_url, location)] hop by hop
+    cross_host_redirect: str = ""                    # the first Location that changed the host, if any
     # payloads (not serialized into meta)
     html: str = field(default="", repr=False)
     pdf_bytes: bytes = field(default=b"", repr=False)
@@ -99,13 +112,23 @@ class RobotsCache:
         return "allowed" if rp.can_fetch("*", url) else "disallowed"
 
 
+MAX_REDIRECT_HOPS = 8
+
+
+def same_host(a, b):
+    """Exact host comparison. `www.example.org` and `example.org` are DIFFERENT hosts here."""
+    return urlparse(a).netloc.casefold() == urlparse(b).netloc.casefold()
+
+
 class Fetcher:
-    def __init__(self, cache_dir, reuse_cache=False, timeout=45, max_attempts=4):
+    def __init__(self, cache_dir, reuse_cache=False, timeout=45, max_attempts=4, strict_host=False):
         self.cache_dir = cache_dir
         os.makedirs(cache_dir, exist_ok=True)
         self.reuse_cache = reuse_cache
         self.timeout = timeout
         self.max_attempts = max_attempts
+        # strict_host: refuse to follow a redirect onto another host (registry fetches, Gate 6).
+        self.strict_host = strict_host
         self.session = requests.Session()
         self.robots = RobotsCache(self.session)
         self._pw = None
@@ -125,7 +148,8 @@ class Fetcher:
             return None
         with open(p, "r", encoding="utf-8") as fh:
             d = json.load(fh)
-        fr = FetchResult(**{k: v for k, v in d.items() if k not in ("html_b64", "pdf_b64", "rendered")})
+        known = {f.name for f in FetchResult.__dataclass_fields__.values()}
+        fr = FetchResult(**{k: v for k, v in d.items() if k not in ("html_b64", "pdf_b64", "rendered") and k in known})
         fr.html = base64.b64decode(d.get("html_b64", "")).decode("utf-8", "replace") if d.get("html_b64") else ""
         fr.pdf_bytes = base64.b64decode(d.get("pdf_b64", "")) if d.get("pdf_b64") else b""
         fr.rendered = d.get("rendered", {})
@@ -156,7 +180,9 @@ class Fetcher:
         for attempt in range(1, self.max_attempts + 1):
             fr.attempts = attempt
             try:
-                r = self.session.get(url, headers=HEADERS, timeout=self.timeout, allow_redirects=True)
+                r = self._get_following(url, fr)
+                if r is None:          # cross-host redirect refused (strict_host)
+                    break
                 fr.status = r.status_code
                 fr.final_url = r.url
                 fr.content_type = r.headers.get("content-type", "")
@@ -169,7 +195,7 @@ class Fetcher:
                     fr.pdf_bytes = r.content
                 else:
                     fr.html = r.text
-                fr.ok = 200 <= r.status_code < 400
+                fr.ok = 200 <= r.status_code < 400 and not (300 <= r.status_code < 400)
                 fr.error = "" if fr.ok else f"HTTP {r.status_code}"
                 break
             except requests.RequestException as e:
@@ -181,6 +207,34 @@ class Fetcher:
             fr.whitelisted = True
         self._save_cache(fr, "http")
         return fr
+
+    def _get_following(self, url, fr):
+        """GET with redirects followed ONE HOP AT A TIME and recorded. The requested URL is sent
+        byte for byte. A hop that changes the host is recorded in fr.cross_host_redirect; under
+        strict_host it is refused (returns None with fr.error set) instead of being followed."""
+        cur = url
+        r = None
+        for hop in range(MAX_REDIRECT_HOPS + 1):
+            r = self.session.get(cur, headers=HEADERS, timeout=self.timeout, allow_redirects=False)
+            if r.status_code not in (301, 302, 303, 307, 308):
+                return r
+            loc = r.headers.get("location", "")
+            if not loc:
+                return r
+            nxt = urljoin(cur, loc)
+            fr.redirects.append((r.status_code, cur, nxt))
+            if not same_host(cur, nxt):
+                if not fr.cross_host_redirect:
+                    fr.cross_host_redirect = nxt
+                if self.strict_host:
+                    fr.status = r.status_code
+                    fr.final_url = cur
+                    fr.ok = False
+                    fr.error = f"REDIRECT-CROSS-HOST: {urlparse(cur).netloc} -> {urlparse(nxt).netloc} ({r.status_code} {nxt})"
+                    return None
+            cur = nxt
+        fr.error = f"too many redirects (> {MAX_REDIRECT_HOPS})"
+        return r
 
     # ---------- Playwright ----------
     def _ensure_browser(self):
@@ -211,6 +265,14 @@ class Fetcher:
                 resp = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                 fr.status = resp.status if resp else 0
                 fr.final_url = page.url
+                if not same_host(url, page.url):
+                    fr.cross_host_redirect = page.url
+                    fr.redirects.append((fr.status, url, page.url))
+                    if self.strict_host:
+                        fr.ok = False
+                        fr.error = f"REDIRECT-CROSS-HOST: {urlparse(url).netloc} -> {urlparse(page.url).netloc}"
+                        page.close()
+                        break
                 try:
                     page.wait_for_selector("p[id^='p'], article, main, .body", timeout=30000)
                 except Exception:

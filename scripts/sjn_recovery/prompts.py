@@ -1,35 +1,44 @@
 """Locator, verifier and coder prompts and output contracts (spec §4).
 
-The prompts are versioned; the version string is part of every audit record's prompt hash.
+The prompts are versioned PER ROLE; the role's version string is part of every audit record's
+call identity. cal-3 revised the LOCATOR prompt (one standard per call, the 15-word cut stated
+with its consequence, and a re-cut contract for over-long phrases). The VERIFIER and CODER prompts
+are unchanged from cal-2, so their call identities — and their answered calls — carry over.
 Guards live in code (guards.py); the prompts state the contract so the model can follow it, but
 nothing here is relied on for enforcement."""
 import json
 
-PROMPT_VERSION = "gate6-v1.1"
+PROMPT_VERSIONS = {"locator": "gate6-v1.2", "recut": "gate6-v1.2", "verifier": "gate6-v1.1", "coder": "gate6-v1.1"}
+PROMPT_VERSION = "gate6-v1.2 (locator, recut) / gate6-v1.1 (verifier, coder)"
+
+
+def prompt_version(role):
+    return PROMPT_VERSIONS.get(role, PROMPT_VERSIONS["locator"])
+
 
 HAZARD_TYPES = ["SLOGAN_COMPRESSION", "SAME_WORD_DIFFERENT_MEANING", "APPARENT_CONTRADICTION",
                 "ECCLESIAL_VS_SOTERIOLOGICAL", "SOURCE_SILENCE_VS_DENIAL", "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE",
                 "RELATIONAL_VS_METAPHYSICAL", "FAMILY_VARIATION", "AUTHORITY_SCOPE", "SEMANTIC_FLOOR"]
 
 # ------------------------------------------------------------------ LOCATOR
-LOCATOR_SYSTEM = """You are the LOCATOR in an evidence-recovery team for a comparative study of what official Christian standards confess about God. You receive ONE predicate (a property or title attributed to God, the Son, or the Holy Spirit), its controlled definition and semantic floor, and a set of text chunks from the author-ratified standards of ONE tradition branch. Each chunk carries a chunk_key, the standard's title, and the standard's own locator (article, question, paragraph number, canon, decree).
+LOCATOR_SYSTEM = """You are the LOCATOR in an evidence-recovery team for a comparative study of what official Christian standards confess about God. You receive ONE predicate (a property or title attributed to God, the Son, or the Holy Spirit), its controlled definition and semantic floor, and text chunks from ONE author-ratified standard of ONE tradition branch. Each chunk carries a chunk_key, the standard's title, and the standard's own locator (article, question, paragraph number, canon, decree, section).
 
-Your task: find up to three passages in the supplied chunks where the STANDARD ITSELF ASSERTS the predicate of the required subject at the stated floor.
+Your task: find up to three passages in the supplied chunks of THIS standard where the STANDARD ITSELF ASSERTS the predicate of the required subject at the stated floor.
 
 Rules you must keep:
-1. Use ONLY the supplied chunks. Do not draw on memory of these documents or any other source. If a passage is not in the chunks, it does not exist for this task.
-2. The `phrase` field must be a VERBATIM quotation of at most 15 words copied exactly from the chunk text (same words, same order, same spelling). No paraphrase, no ellipsis, no added words. Punctuation and capitalization are normalized by the checker, but the words must match.
+1. Use ONLY the supplied chunks. Do not draw on memory of this document or any other source. If a passage is not in the chunks, it does not exist for this task.
+2. The `phrase` field must be a VERBATIM quotation of AT MOST 15 WORDS copied exactly from the chunk text (same words, same order, same spelling). Count the words before you answer: a 16-word phrase is discarded by the checker and the passage is lost, so cut the phrase down to the clause that actually carries the predicate. No paraphrase, no ellipsis, no added words. Punctuation and capitalization are normalized by the checker, but the words must match.
 3. `chunk_key` and `registry_id` must be those of the chunk the phrase comes from.
 4. `floor_claim`: FULL if the passage asserts the predicate of the required subject in the defined sense; PARTIAL if it asserts a narrower or adjacent proposition wholly within the floor; WORD_ONLY if the word appears but the passage does not assert the proposition (a mere mention, a different sense, a different subject).
 5. `rationale`: one sentence, at most 40 words, saying why the passage meets (or only partly meets) the floor.
-6. The subject matters. A passage that predicates the term of the Church, of humanity, of Scripture, of Christ's human nature, or of an opponent's view does not count. A denial of a contrary view is not an assertion unless the standard also asserts the predicate positively in the same passage.
+6. The subject matters. A passage that predicates the term of the Church, of humanity, of Scripture, of Christ's human nature, or of an opponent's view does not count. A denial of a contrary view is not an assertion unless the standard also asserts the predicate positively in the same passage. A proposition the standard names only to condemn it (an anathema, a rejected error) is never evidence.
 7. An EMPTY result is correct when the standard is silent or only mentions the word. Do not stretch. Return the empty result rather than a weak candidate.
-8. Rank candidates best first. Prefer confessional/conciliar articles over expositions where both qualify.
+8. Rank candidates best first. Prefer the standard's own confessional or conciliar assertion over exposition where both qualify.
 
 Output: a single JSON object and nothing else, in one of these two shapes:
 {"candidates": [{"chunk_key": "...", "registry_id": "...", "locator": "...", "phrase": "...", "rationale": "...", "floor_claim": "FULL|PARTIAL|WORD_ONLY"}, ...]}
 or
-{"result": "NOT LOCATED — CURRENT STANDARD REVIEWED", "standards_reviewed": ["BSR-..", ...]}
+{"result": "NOT LOCATED — CURRENT STANDARD REVIEWED", "standards_reviewed": ["BSR-.."]}
 """
 
 
@@ -45,9 +54,34 @@ def locator_user(cell, predicate, comparator, chunks_view, standards_view, pass_
         "semantic_floor_note": predicate["floor_note"],
         "required_subject": predicate["subject_scope"],
         "restoration_comparator_for_context_only": {"label": comparator.get("label"), "phrase": comparator.get("phrase")},
-        "standards_supplied": standards_view,
+        "standard_supplied": standards_view[0] if len(standards_view) == 1 else standards_view,
         "chunks": chunks_view,
-        "output_contract": "JSON only: {candidates:[...≤3]} or {result:'NOT LOCATED — CURRENT STANDARD REVIEWED', standards_reviewed:[...]}",
+        "output_contract": "JSON only: {candidates:[...≤3, phrase ≤15 words verbatim]} or {result:'NOT LOCATED — CURRENT STANDARD REVIEWED', standards_reviewed:[...]}",
+    }, ensure_ascii=False, indent=0)
+
+
+# ------------------------------------------------------------------ RE-CUT (over-long phrase)
+RECUT_SYSTEM = """You are the LOCATOR, re-cutting one quotation. Your earlier candidate quoted MORE THAN 15 WORDS from a chunk, so the checker discarded it. Return the same passage cut to AT MOST 15 WORDS, VERBATIM from the chunk text supplied (same words, same order, same spelling; no ellipsis, no paraphrase), keeping the clause that carries the predicate of the required subject. If no 15-word span of the chunk asserts the predicate, return the empty result.
+
+Output: a single JSON object and nothing else:
+{"phrase": "...", "rationale": "...", "floor_claim": "FULL|PARTIAL|WORD_ONLY"}
+or
+{"result": "NO_VALID_CUT"}
+"""
+
+
+def recut_user(predicate, chunk_view, over_long):
+    return json.dumps({
+        "task": "recut",
+        "family_id": predicate["family_id"],
+        "predicate": predicate["predicate"],
+        "definition": predicate["definition"],
+        "required_subject": predicate["subject_scope"],
+        "chunk": chunk_view,
+        "your_earlier_phrase_too_long": over_long.get("phrase"),
+        "your_earlier_rationale": over_long.get("rationale"),
+        "your_earlier_floor_claim": over_long.get("floor_claim"),
+        "output_contract": "JSON only: {phrase (≤15 words verbatim), rationale, floor_claim} or {result:'NO_VALID_CUT'}",
     }, ensure_ascii=False, indent=0)
 
 

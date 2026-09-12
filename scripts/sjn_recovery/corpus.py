@@ -33,40 +33,49 @@ def build(args):
     reg = Registry(args.workbook)
     manifest = store.load_manifest()
     prev = manifest.get("standards", {})
-    fetcher = Fetcher(FETCH_CACHE, reuse_cache=args.reuse_cache)
+    # strict_host: the ratified URL is fetched byte for byte; a redirect onto another host is refused.
+    fetcher = Fetcher(FETCH_CACHE, reuse_cache=args.reuse_cache, strict_host=True)
     only = set(args.only.split(",")) if args.only else None
     results, drift, halted = {}, [], False
     log(f"== SJN Gate 6 corpus build — workbook {os.path.basename(reg.path)} ({reg.app_master_version}); "
-        f"{len(reg.rows)} AUTHOR_RATIFIED rows; fetch cache {'REUSED' if args.reuse_cache else 'LIVE'}")
+        f"{len(reg.rows)} AUTHOR_RATIFIED rows; fetch cache {'REUSED' if args.reuse_cache else 'LIVE'}; "
+        f"gate metric {reg.gate_metric}; routing {reg.verifier_routing}; lateran scope {reg.lateran_iv_scope}")
+    if reg.vocabulary_violations:
+        log(f"!! reception_scope outside the ratified vocabulary: {reg.vocabulary_violations}")
     for row in reg.rows:
         rid = row["registry_id"]
+        base = {"branch": row["branch"], "standard_title": row["standard_title"], "canonical_url": row["canonical_url"],
+                "authority_tier": row["authority_tier"], "reception_scope": (row.get("reception_scope") or "").upper(),
+                "witness_only": reg.is_witness(rid), "citation_refusal": reg.citation_refusal(rid)}
         if only and rid not in only:
             results[rid] = prev.get(rid, {"status": "SKIPPED"})
             continue
         t0 = time.time()
         if rid in sources.NO_TEXT:
             kind, note = sources.NO_TEXT[rid]
-            results[rid] = {"status": kind, "branch": row["branch"], "standard_title": row["standard_title"],
-                            "canonical_url": row["canonical_url"], "n_chunks": 0, "text_hash": None, "notes": [note]}
+            results[rid] = {"status": kind, **base, "n_chunks": 0, "text_hash": None, "notes": [note],
+                            "fetch_verdict": "NO_TEXT_BY_POLICY"}
             log(f"-- {rid} {kind}: {note[:110]}")
             continue
         fn = sources.ADAPTERS.get(rid)
         if not fn:
-            results[rid] = {"status": "NO_ADAPTER", "branch": row["branch"], "n_chunks": 0, "text_hash": None, "notes": []}
+            results[rid] = {"status": "NO_ADAPTER", **base, "n_chunks": 0, "text_hash": None, "notes": [], "fetch_verdict": "FETCHER (no adapter)"}
             log(f"-- {rid} NO_ADAPTER"); continue
-        ctx = sources.Ctx(row, fetcher, log)
+        ctx = sources.Ctx(row, fetcher, log, config=reg.config)
         log(f"-- {rid} {row['branch']} — {row['standard_title'][:70]}")
         try:
             chunks, notes = fn(ctx)
+        except sources.RedirectError as e:
+            results[rid] = {"status": "HOST_REDIRECTS_CROSS_HOST", **base, "n_chunks": 0, "text_hash": None,
+                            "notes": [str(e)], "urls": ctx.urls, "fetch_verdict": "HOST: the ratified URL answers with a redirect onto a different host"}
+            log(f"   REDIRECT (refused): {e}"); continue
         except sources.BlockedError as e:
-            results[rid] = {"status": "FETCH_BLOCKED", "branch": row["branch"], "standard_title": row["standard_title"],
-                            "canonical_url": row["canonical_url"], "n_chunks": 0, "text_hash": None,
-                            "notes": [str(e)], "urls": ctx.urls}
+            results[rid] = {"status": "FETCH_BLOCKED", **base, "n_chunks": 0, "text_hash": None,
+                            "notes": [str(e)], "urls": ctx.urls, "fetch_verdict": "HOST: refuses automated fetch (403 / bot challenge)"}
             log(f"   BLOCKED: {e}"); continue
         except sources.FetchError as e:
-            results[rid] = {"status": "FETCH_FAILED", "branch": row["branch"], "standard_title": row["standard_title"],
-                            "canonical_url": row["canonical_url"], "n_chunks": 0, "text_hash": None,
-                            "notes": [str(e)], "urls": ctx.urls}
+            results[rid] = {"status": "FETCH_FAILED", **base, "n_chunks": 0, "text_hash": None,
+                            "notes": [str(e)], "urls": ctx.urls, "fetch_verdict": "see notes"}
             log(f"   FAILED: {e}"); continue
         chunks = store.dedupe_locators(chunks)
         h = store.standard_hash(chunks)
@@ -78,11 +87,14 @@ def build(args):
         elif old.get("text_hash") == h:
             status = "UNCHANGED"
         chars = sum(len(c["text"]) for c in chunks)
-        results[rid] = {"status": status, "branch": row["branch"], "standard_title": row["standard_title"],
-                        "canonical_url": row["canonical_url"], "fetch_mode": row["fetch_mode"],
+        results[rid] = {"status": status, **base, "fetch_mode": row["fetch_mode"],
                         "fallback_only": reg.is_fallback(rid), "n_chunks": len(chunks), "chars": chars,
                         "text_hash": h, "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                        "urls": ctx.urls, "notes": notes, "_chunks": chunks}
+                        "urls": ctx.urls, "notes": notes, "fetch_verdict": "OK",
+                        "noncitable_spans": sum(len(c.get("noncitable_spans") or []) for c in chunks),
+                        "languages": sorted({c.get("language", "en") for c in chunks}),
+                        "polytonic_chunks": sum(1 for c in chunks if c.get("polytonic")),
+                        "_chunks": chunks}
         log(f"   {status}: {len(chunks)} chunks, {chars:,} chars, {len(ctx.urls)} fetch(es), {time.time() - t0:.1f}s; {notes[0] if notes else ''}")
         if rid == "BSR-EO-05":
             log("   provenance: diffing decrees against the Robertson 1899 edition (archive.org OCR)")
@@ -137,6 +149,11 @@ def build(args):
         "built_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "workbook": os.path.basename(reg.path), "app_master_version": reg.app_master_version,
         "registry_ratified": len(reg.rows), "fallback_only_rows": sorted(reg.fallback_ids),
+        "app_config": {k: str(reg.config.get(k)) for k in ("gate6_threshold_metric", "authority_tier_rank", "reception_scope_vocabulary",
+                                                          "reception_axis", "creed_tier_resolution", "lateran_iv_scope", "verifier_routing",
+                                                          "dialogue_text_policy", "encyclical_1848_status", "registry_fallback_only_rows")},
+        "opus_slice_rows": sorted(reg.opus_slice_rows()),
+        "fetch_policy": "strict_host: ratified URLs fetched byte for byte; cross-host redirects refused; no crawling of goarch.org",
         "chroma": {"path": CHROMA_PATH, "collection": CHROMA_COLLECTION, "embedding_model": EMBED_MODEL,
                    "written": col is not None},
         "policy": "Chunks are internal only (never emitted to the site). URLs live in the manifest and chunk store; "

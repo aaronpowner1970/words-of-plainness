@@ -24,7 +24,7 @@ import time
 import requests
 
 from .config import JOBS_DIR, RUNS_DIR, MODEL_IDS
-from .prompts import PROMPT_VERSION
+from .prompts import PROMPT_VERSION, prompt_version
 
 # USD per million tokens (input, output) — list prices used only for cost accounting.
 LIST_PRICES = {
@@ -65,8 +65,37 @@ class LLM:
         self.calls_made = 0
 
     # ---------------------------------------------------------------- identity / audit
-    def call_id(self, role, system, user, model=None):
-        return _sha("|".join([role, model or self.model_id, PROMPT_VERSION, system, user]))[:24]
+    def call_id(self, role, system, user, model=None, attempt=0):
+        """Identity = sha256(role | model | the ROLE's prompt version | system | user [| attempt]).
+        Versioning per role means a locator prompt revision never invalidates answered verifier calls.
+        `attempt` > 0 is the retry of a reply that hit its token ceiling before the JSON was complete:
+        the same call re-sent with a larger ceiling under its own identity, so the truncated answer
+        stays in the audit log and is never mistaken for the final one."""
+        parts = [role, model or self.model_id, prompt_version(role), system, user]
+        if attempt:
+            parts.append(f"attempt={attempt}")
+        return _sha("|".join(parts))[:24]
+
+    def seed_from(self, other_run_id, log=None):
+        """Load another run's answered calls into this run's cache so identical calls (same role,
+        model, prompt version, system and user text) are not sent again. The records keep their
+        original run_id, so cost accounting can separate reused from newly metered calls."""
+        p = os.path.join(RUNS_DIR, other_run_id, "calls.jsonl")
+        if not os.path.exists(p):
+            return 0
+        n = 0
+        with open(p, encoding="utf-8") as fh:
+            for line in fh:
+                try:
+                    rec = json.loads(line)
+                except Exception:
+                    continue
+                if rec.get("output") is not None and rec["call_id"] not in self._cache:
+                    self._cache[rec["call_id"]] = rec
+                    n += 1
+        if log:
+            log(f"   seeded {n} answered call(s) from {other_run_id}")
+        return n
 
     def _record(self, rec):
         with open(self.audit_path, "a", encoding="utf-8") as fh:
@@ -80,17 +109,17 @@ class LLM:
         return round((usage.get("input_tokens", 0) * p[0] + usage.get("output_tokens", 0) * p[1]) / 1e6, 6)
 
     # ---------------------------------------------------------------- public
-    def complete(self, role, system, user, model=None, max_tokens=1200, meta=None):
+    def complete(self, role, system, user, model=None, max_tokens=1200, meta=None, attempt=0):
         """Return (output_text, record) or (None, record) when pending (batch backend)."""
         model = model or self.model
         model_id = MODEL_IDS.get(model, model)
-        cid = self.call_id(role, system, user, model_id)
+        cid = self.call_id(role, system, user, model_id, attempt)
         if cid in self._cache and self._cache[cid].get("output") is not None:
             return self._cache[cid]["output"], self._cache[cid]
         rec = {"call_id": cid, "run_id": self.run_id, "role": role, "backend": self.backend, "model": model,
-               "model_id": model_id, "prompt_version": PROMPT_VERSION, "prompt_sha256": _sha(system),
-               "input_sha256": _sha(user), "input_chars": len(user), "meta": meta or {},
-               "requested_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+               "model_id": model_id, "prompt_version": prompt_version(role), "prompt_sha256": _sha(system),
+               "input_sha256": _sha(user), "input_chars": len(user), "meta": dict(meta or {}, attempt=attempt),
+               "max_tokens": max_tokens, "requested_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
         if self.backend == "batch":
             out = self._batch(cid, role, system, user, model, max_tokens, rec)
             if out is None:
@@ -188,15 +217,31 @@ class LLM:
         d = os.path.join(self.jobs_dir, "pending")
         return sorted(f[:-5] for f in os.listdir(d) if f.endswith(".json"))
 
-    def summary(self):
+    def summary(self, only_run=None):
+        """Call/cost totals. `by_model` covers every record in the cache (including calls seeded from
+        earlier runs); `this_run` covers only records answered under this run id, by model and by role,
+        which is the run's own metered spend."""
         recs = list(self._cache.values())
-        by_model = {}
-        for r in recs:
-            k = r.get("executor_model") or r.get("model")
-            b = by_model.setdefault(k, {"calls": 0, "cost_usd": 0.0, "input_tokens": 0, "output_tokens": 0, "estimated": False})
-            b["calls"] += 1
-            b["cost_usd"] += r.get("cost_usd") or 0.0
-            u = r.get("usage") or {}
-            b["input_tokens"] += u.get("input_tokens", 0); b["output_tokens"] += u.get("output_tokens", 0)
-            b["estimated"] = b["estimated"] or bool(u.get("estimated"))
-        return {"calls": len(recs), "by_model": by_model}
+
+        def tally(records):
+            out = {}
+            for r in records:
+                k = r.get("executor_model") or r.get("model")
+                b = out.setdefault(k, {"calls": 0, "cost_usd": 0.0, "input_tokens": 0, "output_tokens": 0, "estimated": False})
+                b["calls"] += 1
+                b["cost_usd"] += r.get("cost_usd") or 0.0
+                u = r.get("usage") or {}
+                b["input_tokens"] += u.get("input_tokens", 0); b["output_tokens"] += u.get("output_tokens", 0)
+                b["estimated"] = b["estimated"] or bool(u.get("estimated"))
+            return out
+
+        mine = [r for r in recs if r.get("run_id") == (only_run or self.run_id)]
+        by_role = {}
+        for r in mine:
+            k = (r.get("role"), r.get("executor_model") or r.get("model"))
+            b = by_role.setdefault(f"{k[0]}/{k[1]}", {"calls": 0, "cost_usd": 0.0})
+            b["calls"] += 1; b["cost_usd"] += r.get("cost_usd") or 0.0
+        return {"calls": len(recs), "by_model": tally(recs),
+                "this_run": {"run_id": only_run or self.run_id, "calls": len(mine), "by_model": tally(mine), "by_role": by_role,
+                             "cost_usd": sum(r.get("cost_usd") or 0.0 for r in mine),
+                             "reused_calls": len(recs) - len(mine)}}

@@ -1,0 +1,19 @@
+{
+ "policy": "Only the ratified goarch.org URLs (BSR-EO-07, BSR-EO-03) and the one page the cal-3 prompt asked to try were requested; no crawl.",
+ "the-dogmatic-tradition-of-the-orthodox-church": {
+  "result": "DID NOT RENDER. Plain requests (Chrome UA): HTTP 403, Cloudflare `cf-mitigated: challenge`. Playwright Chromium headless and headed (25 s wait): HTTP 403, 262-char challenge body. Not registered; proposed for Gate 7 only if a route to the host is found."
+ },
+ "BSR-EO-07 the-divine-liturgy-of-saint-john-chrysostom": {
+  "result": "BLOCKED at the host. Plain requests under five user agents (Chrome, Firefox, curl, python-urllib, requests default): HTTP 403 with `cf-mitigated: challenge`. Playwright headless and headed: 403. The desktop app's own Chromium: parked on 'Performing security verification' for 20 s and never advanced; the challenge was not completed (bot-detection is not something this session completes). The 'plain HTML, verified five times' claim did not hold from this network on 2026-09-11. Verdict: HOST."
+ },
+ "BSR-EO-03 the-basic-sources-of-the-teachings-of-the-eastern-orthodox-church": {
+  "result": "BLOCKED at the host, same challenge on every route; the authorised one-time archived fetch could not be executed. The adapter reads a committed archived snapshot (recovery-runs/archived-fetches/BSR-EO-03.html + provenance) if one is supplied later."
+ },
+ "routes_tried": [
+  "requests (5 user agents, redirects off and on)",
+  "Playwright Chromium headless, 12 s wait",
+  "Playwright Chromium headed, 25 s wait",
+  "desktop-app Chromium (in-app browser), 20 s"
+ ],
+ "tested_at": "2026-09-11"
+}
