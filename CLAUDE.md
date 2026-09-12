@@ -33,6 +33,25 @@ Aaron decides.
   push-off material for him to adopt, modify, or reject — never final voice. Flag
   any inferred theological claim for his review before treating it as established.
 
+## WoP standing standards
+Index: `C:\Users\aaron\Documents\WoP\ops\WoP-Standing-Standards.md` — read it before
+substantial work; it names every standard and when each applies.
+
+**Always resident, no lookup required.** Independence counts by instrument and by
+publisher, never by repetition — two retrievals through the same tool are one
+observation, and the instrument is named in the report. Verify the artifact, never a
+description of it. Where a finding is load-bearing — it governs what may be cited,
+enters the workbook, becomes an instruction, or spends money — report at least three
+ranked candidates with each one's weakness, not the winner alone. A negative claim
+needs an enumerated search space. Check hardest what you already believe. Does not
+apply to ordinary lookups (whether a file exists, what a command does); applying it
+there is waste.
+
+**Triggered.** Before deploying any learner-facing app, presentation, study guide or
+teaching writing, score it against `WoP\ops\WoP-Teaching-Practices-Standard.md` — read
+the file, do not score from memory.
+
+
 ## Deploy sequence
 1. Edit source files on disk.
 2. Local build check: `npx @11ty/eleventy` (or `npm run build`). Confirm no errors.

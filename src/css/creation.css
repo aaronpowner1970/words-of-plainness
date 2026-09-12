@@ -136,6 +136,31 @@ html, body { overflow-x: clip; overflow-y: visible; }
     .creation-stage-wrap { top: 64px; }
 }
 
+/* ── Tablet / portrait band: rein the film in ────────────────── */
+/* Below the 1200px dock breakpoint the film spans the whole container and can
+   own the entire first screen, pushing the transcript well past the fold. Cap
+   it in BOTH axes so it reads as an element on the page rather than the page
+   itself. 16:9 is preserved: the width cap does the work and aspect-ratio
+   follows, exactly as on desktop.
+
+   TUNABLE (this band only — the >=1200px composition is untouched):
+     --ct-film-max-w  centred width ceiling; bites on wider/taller tablets
+     --ct-film-max-h  height ceiling; bites on short landscape viewports */
+@media (max-width: 1199.98px) {
+    .creation-reading {
+        --ct-film-max-w: 940px;
+        --ct-film-max-h: 50vh;
+    }
+
+    .creation-player {
+        width: min(
+            100%,
+            var(--ct-film-max-w, 940px),
+            calc(var(--ct-film-max-h, 50vh) * 16 / 9)
+        );
+    }
+}
+
 /* ── Transcript ──────────────────────────────────────────────── */
 /* max-width applies only when the transcript is alone (panel closed / narrow);
    in the open two-column state the grid track governs. */

@@ -19,9 +19,13 @@ deployed chapter, not this file's examples.
   Full paths produce doubled URLs like `/assets/audio//assets/audio/...` that 404.
 - **`readingTime` is a bare number**, not a string. `readingTime: 12`, not
   `"~12 min read"` (the template adds "min read"; a string yields "min read min read").
-- **`slug` and `chapterId` are required.** `slug: "06-embrace-the-savior"`,
-  `chapterId: "chapter-06-embrace-the-savior"`. Missing `chapterId` breaks the
-  timestamp-file lookup.
+- **`slug` and `chapterId` are required**, and `chapterId` is always
+  `chapter-` + slug. Published Vol 1 Ch 1-16 use numbered slugs:
+  `slug: "06-embrace-the-savior"` / `chapterId: "chapter-06-embrace-the-savior"`.
+  Vol 1 Ch 17-31 and all of Vol 2 use unnumbered slugs:
+  `slug: "searching-the-scriptures"` /
+  `chapterId: "chapter-searching-the-scriptures"`. See the naming ruling below.
+  Missing `chapterId` breaks the timestamp-file lookup.
 - **`slides` is nested**, not flat: `slides.count` and `slides.path`, not
   `slidesCount`/`slidesPath`. Path convention is `"chapter-06/"` (not `WoP_Ch06/`).
 - **`prevChapter`/`nextChapter` are flat top-level keys**, not nested under
