@@ -36,7 +36,9 @@ python scripts/sjn_recovery/allowlist_audit.py --run-id cal-3     # writes recov
 python scripts/sjn_recovery/run.py --run-id live-1 --branch "Roman Catholic" --locator-model sonnet \
        --verifier-models sonnet,opus --branch-cost-cap-usd 25 --i-have-author-authorization
 python scripts/sjn_recovery/api_executor.py --run-id live-1 --workers 6 --max-cost-usd 25 --key-file <.env>
-#    ... loop run.py / api_executor.py until pending 0; the packet is written when every cell of the branch is DONE
+#    ... loop run.py / api_executor.py until pending 0; the packet is written when every cell of the branch is DONE.
+#    The per-branch cap is enforced from recovery-runs/<run>/cost-state.json across every invocation (fix 1d); when it is
+#    hit the executor skips that branch's jobs and run.py writes the PARTIAL packet.
 ```
 
 ## Live-run session 1 (2026-09-12, v2.25r2 CONTROLLED STORAGE)
@@ -65,6 +67,39 @@ python scripts/sjn_recovery/api_executor.py --run-id live-1 --workers 6 --max-co
   locator). A candidate is dropped only on NO_VALID_CUT or when every attempt is still over 15 words.
 - **Per-branch spend** (`run.py --projection-per-cell-usd --branch-cost-cap-usd`): recorded in run.json against
   the cal-3 projection (0.405 USD/cell); `api_executor.py --max-cost-usd` is what enforces the cap.
+
+## Live-run session 2 (2026-09-12, v2.25r3 AN03 MIGRATION VATICANNEWS) — packet-shape fixes, Anglican branch
+
+Workbook v2.25r3 (47 rows, 45 AUTHOR_RATIFIED): BSR-AN-03 MIGRATED to churchofengland.org (AC-02 MIGRATE_WHERE_OFFICIAL;
+fetch_mode RENDERED — the plain fetch returns chrome only; adapter `sources.athanasian_creed_cofe`, asserting the creed's
+opening under the pipeline's normalisation because the page prints WHOSOEVER; the BCP 1662 PDF is robots-disallowed and
+is NOT a fallback); BSR-RC-08 NEW (vaticannews.va, a second Holy See outlet; adapter `sources.vaticannews_creeds` chunks the
+Apostles' and Nicene Creeds SEPARATELY so a locator is validated against the named creed block, never the page);
+BSR-RC-06 title de-domained (no content change; the allowlist never read a title — `admission` is publisher_domain only).
+
+Four packet-shape changes adopted by the author after the Roman Catholic packet (`allocation.py` is the single allocator,
+used by `packets.py` AND by `agents.CellRunner.run_cell` before the coder):
+
+- **1a witness rows sort last within a tier.** Within an authority-tier tie, a row whose reception is TRANSLATION_WITNESS
+  or whose tier is marked "(translation)" / "witness" sorts after every non-witness row (`allocation.is_witness_like`).
+  Also applied when ranking the EXTRA verification slots (`agents.locate`). Invisible on Anglican (no witness rows);
+  unit-tested in `tests/test_packet_shape_fixes.py`.
+- **1b controlling phrase + English witness on one card.** `allocation.translation_pairs` DERIVES the pairs from the
+  registry (a witness row naming its controlling row, else a shared document name in the titles): RC-03→RC-02, RC-05→RC-04,
+  EO-11→EO-06, EO-13→EO-06. A paired witness candidate is attached to the controlling entry as `english_witness`
+  (same chapter where the locators say so), the entry is marked `role: CONTROLLING`, and the witness never competes for
+  a slot or gets its own coder call.
+- **1c coder after allocation.** `run_cell` allocates the card first and codes only `allocation.kept`; the skipped survivors
+  are recorded per cell as `coder_skipped`, and `run.py` reports the measured saving per branch (`branch_spend.<br>.coder`).
+- **1d persistent per-branch cost cap.** `coststate.py` — `recovery-runs/<run>/cost-state.json`, keyed by run id and branch:
+  `run.py` registers the branch (cap, queue_ids) before the first cell; `api_executor.py` reads it at start (logs the
+  figure it resumes from), credits every priced call to its branch (job meta `branch` / `queue_id`) and WRITES the file
+  after every call; a branch at its cap has its remaining jobs skipped; `run.py` then writes the PARTIAL packet
+  (`partial: true`, `cap_state`) and says so. `--max-cost-usd` remains the per-invocation guard. `run.json` is now merged
+  across branches (the Roman Catholic record survives a later branch's run).
+
+Task 3 re-validation (`fa-2`, both models, no seeding): 74 planted near-misses, false-accept 0.000 on sonnet, opus and
+the routed outcome, Dositheus slice 0.000 (`recovery-runs/fa-2/planted-summary.json`; 6.80 USD).
 
 ## Backends (`llm.py`)
 

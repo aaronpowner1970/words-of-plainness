@@ -29,9 +29,26 @@ sys.path.insert(0, os.path.dirname(HERE))
 
 from sjn_recovery.config import JOBS_DIR, MODEL_IDS  # noqa: E402
 from sjn_recovery.llm import LIST_PRICES  # noqa: E402
+from sjn_recovery import coststate  # noqa: E402
 
 _lock = threading.Lock()
-_state = {"cost": 0.0, "calls": 0, "in": 0, "out": 0, "stopped": False, "errors": 0}
+_state = {"cost": 0.0, "calls": 0, "in": 0, "out": 0, "stopped": False, "errors": 0, "skipped_cap": 0}
+# 1d: the persistent per-branch counter (coststate); `inv` holds this invocation's entry per branch touched.
+_cost = {"state": None, "inv": {}, "capped_logged": set()}
+
+
+def branch_for_job(state, job):
+    """The branch a job is charged to: meta.branch, else the branch whose registered queue_ids carry
+    meta.queue_id; None for calibration / planted items (charged to `unassigned`, no cap)."""
+    meta = job.get("meta") or {}
+    br = meta.get("branch")
+    if br and br in (state or {}).get("branches", {}):
+        return br
+    return coststate.branch_of(state, meta.get("queue_id")) if state else None
+
+
+def branch_capped(state, branch):
+    return bool(branch) and branch in state["branches"] and coststate.over_cap(state["branches"][branch])
 
 
 def load_key(key_file):
@@ -79,13 +96,23 @@ def call_one(client, job, done_dir, max_cost, log):
     cid = job["call_id"]
     model_id = job.get("model_id") or MODEL_IDS.get(job["model"], job["model"])
     last = ""
+    answered = None
+    branch = branch_for_job(_cost["state"], job)
     for attempt in range(1, 7):
         with _lock:
             if _state["stopped"]:
                 return None
             if max_cost and _state["cost"] >= max_cost:
                 _state["stopped"] = True
-                log(f"!! budget cap {max_cost} USD reached; stopping (spent {_state['cost']:.2f})")
+                log(f"!! invocation budget {max_cost} USD reached; stopping (spent {_state['cost']:.2f} this invocation)")
+                return None
+            if branch and branch_capped(_cost["state"], branch):
+                b = _cost["state"]["branches"][branch]
+                _state["skipped_cap"] += 1
+                if branch not in _cost["capped_logged"]:
+                    _cost["capped_logged"].add(branch)
+                    log(f"!! BRANCH CAP: {branch} has spent {b['spent_usd']:.2f} of its {b['cap_usd']} USD cap "
+                        f"(cost-state.json); its remaining jobs are SKIPPED, not answered")
                 return None
         try:
             r = client.messages.create(
@@ -108,13 +135,8 @@ def call_one(client, job, done_dir, max_cost, log):
             with open(tmp, "w", encoding="utf-8") as fh:
                 json.dump(rec, fh, ensure_ascii=False)
             os.replace(tmp, os.path.join(done_dir, cid + ".json"))
-            with _lock:
-                _state["cost"] += c; _state["calls"] += 1
-                _state["in"] += usage["input_tokens"]; _state["out"] += usage["output_tokens"]
-                n, tot = _state["calls"], _state["cost"]
-            log(f"  ok  {cid} {job['role']:<8} {job['model']:<7} in={usage['input_tokens']:>6} out={usage['output_tokens']:>5} "
-                f"${c:.4f}  [{n} calls, ${tot:.2f} total]")
-            return rec
+            answered = (rec, usage, c)
+            break
         except Exception as e:
             name = type(e).__name__
             last = f"{name}: {str(e)[:160]}"
@@ -136,10 +158,41 @@ def call_one(client, job, done_dir, max_cost, log):
             sleep = min(60, (2 ** attempt) + random.uniform(0, 1.5))
             log(f"  retry {attempt}/6 {cid} in {sleep:.1f}s ({last})")
             time.sleep(sleep)
+    if answered is not None:
+        rec, usage, c = answered
+        return _account(job, branch, cid, rec, usage, c, log)
     with _lock:
         _state["errors"] += 1
     log(f"  FAILED {cid} after retries: {last}")
     return None
+
+
+def _account(job, branch, cid, rec, usage, c, log):
+    """Bookkeeping for one ANSWERED call, outside the API retry block: a failure here (a transient PermissionError
+    writing cost-state.json on Windows, seen on the Anglican run) must never cause an answered call to be re-sent.
+    The done file is already written, so the harness ingests the answer whatever happens below."""
+    with _lock:
+        _state["cost"] += c; _state["calls"] += 1
+        _state["in"] += usage["input_tokens"]; _state["out"] += usage["output_tokens"]
+        n, tot = _state["calls"], _state["cost"]
+        btot = bcap = None
+        if _cost["state"] is not None:
+            # 1d: credit the branch and WRITE the state file now, so a killed process loses at most the call in flight
+            b = coststate.credit(_cost["state"], branch, c)
+            inv = _cost["inv"].get(branch)
+            if inv is not None:
+                inv["answered"] += 1; inv["spent_usd"] = round(inv["spent_usd"] + c, 6)
+                inv["ended_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            try:
+                coststate.save(_cost["state"])
+            except Exception as e:      # the in-memory counter is intact; the next successful save carries it forward
+                log(f"  !! cost-state write failed ({type(e).__name__}: {str(e)[:100]}); the counter is kept in memory and written on the next call")
+            if branch:
+                btot, bcap = b.get("spent_usd"), b.get("cap_usd")
+    log(f"  ok  {cid} {job['role']:<8} {job['model']:<7} in={usage['input_tokens']:>6} out={usage['output_tokens']:>5} "
+        f"${c:.4f}  [{n} calls, ${tot:.2f} this invocation"
+        + (f"; {branch} ${btot:.2f} of cap {bcap}" if branch else "") + "]")
+    return rec
 
 
 def main():
@@ -155,6 +208,23 @@ def main():
     a = ap.parse_args()
 
     jobs = pending_jobs(a.run_id, a.role, a.model)
+    # 1d: load the persistent per-branch counter; skip every job of a branch already at its cap
+    state = coststate.load(a.run_id)
+    _cost["state"] = state
+    for name, b in sorted(state.get("branches", {}).items()):
+        print(f"   cost-state {name}: spent ${b.get('spent_usd', 0):.2f} of cap {b.get('cap_usd')} USD, {b.get('calls', 0)} calls, {b.get('status')}"
+              + (" — resuming from this figure" if not coststate.over_cap(b) else " — AT CAP, jobs skipped"))
+    capped = {}
+    keep = []
+    for j in jobs:
+        br = branch_for_job(state, j)
+        if branch_capped(state, br):
+            capped[br] = capped.get(br, 0) + 1
+        else:
+            keep.append(j)
+    for br, n in capped.items():
+        print(f"!! BRANCH CAP: {n} pending job(s) of {br} skipped — spent {state['branches'][br]['spent_usd']:.2f} of {state['branches'][br]['cap_usd']} USD")
+    jobs = keep
     if a.limit:
         jobs = jobs[:a.limit]
     by = {}
@@ -176,14 +246,22 @@ def main():
     def log(m):
         print(m, flush=True)
 
+    started = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    for br in sorted({branch_for_job(state, j) for j in jobs} - {None}):
+        inv = {"started_at": started, "resumed_from_usd": state["branches"][br].get("spent_usd", 0.0), "answered": 0, "spent_usd": 0.0, "ended_at": None}
+        state["branches"][br].setdefault("invocations", []).append(inv)
+        _cost["inv"][br] = inv
     t0 = time.time()
     with cf.ThreadPoolExecutor(max_workers=a.workers) as ex:
         list(ex.map(lambda j: call_one(client, j, done_dir, a.max_cost_usd, log), jobs))
     el = time.time() - t0
+    coststate.save(state)
     print(f"== answered {_state['calls']} call(s) in {el / 60:.1f} min; tokens in={_state['in']:,} out={_state['out']:,}; "
-          f"metered cost ${_state['cost']:.2f}; errors {_state['errors']}"
+          f"metered cost ${_state['cost']:.2f} this invocation; errors {_state['errors']}; skipped by branch cap {_state['skipped_cap']}"
           + ("; STOPPED EARLY" if _state["stopped"] else ""))
-    return 1 if _state["stopped"] else 0
+    for name, b in sorted(state.get("branches", {}).items()):
+        print(f"   cost-state {name}: spent ${b.get('spent_usd', 0):.2f} of cap {b.get('cap_usd')} USD, {b.get('calls', 0)} calls, {b.get('status')}  -> {coststate.path_for(a.run_id)}")
+    return 1 if (_state["stopped"] or _state["skipped_cap"]) else 0
 
 
 if __name__ == "__main__":

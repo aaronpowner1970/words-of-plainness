@@ -30,6 +30,7 @@ import re
 from .config import MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES, PHRASE_MAX_WORDS
 from .registry import tier_rank
 from .textutil import scrub_urls, phrase_word_count
+from .allocation import allocate, translation_pairs
 from . import guards, prompts, retrieval
 
 
@@ -88,6 +89,16 @@ class CellRunner:
         self.coder_model = coder_model or locator_model
         self.log = log
         self.run_coder = run_coder
+        self._pairs = {}
+
+    def pairs(self, branch):
+        """Translation pairs of a branch (allocation.translation_pairs), derived once from the registry."""
+        if branch not in self._pairs:
+            try:
+                self._pairs[branch] = translation_pairs(self.reg, branch)
+            except Exception:
+                self._pairs[branch] = {}
+        return self._pairs[branch]
 
     # ---------------------------------------------------------------- state
     def _path(self, qid):
@@ -274,7 +285,9 @@ class CellRunner:
                 first = dict(cands[0]); first["slot"] = "GUARANTEED"
                 slotted.append(first)
                 extra.extend(dict(c, slot="EXTRA") for c in cands[1:])
-        extra.sort(key=lambda c: (tier_rank(c.get("effective_tier")), FLOOR_ORDER.get(c.get("floor_claim"), 9), c.get("locator_rank", 9)))
+        # extra slots: tier, then (1a) non-witness before witness within the tier, then floor claim, then locator rank
+        extra.sort(key=lambda c: (tier_rank(c.get("effective_tier")), 1 if c.get("witness") else 0,
+                                  FLOOR_ORDER.get(c.get("floor_claim"), 9), c.get("locator_rank", 9)))
         slotted.extend(extra[:VERIFY_EXTRA_CANDIDATES])
         result["unslotted"] = [dict(c, slot="UNSLOTTED") for c in extra[VERIFY_EXTRA_CANDIDATES:]]
         result["candidates"] = slotted
@@ -289,7 +302,7 @@ class CellRunner:
         user = prompts.verifier_user(pred, cand, chunk_view)
         guards.assert_no_urls({"u": user})
         out, rec, parsed, attempt = self._call("verifier", prompts.VERIFIER_SYSTEM, user, model, 2500,
-                                               {"queue_id": cell["queue_id"], "candidate_id": cand["candidate_id"], "verifier_model": model})
+                                               {"queue_id": cell["queue_id"], "branch": cell.get("branch"), "candidate_id": cand["candidate_id"], "verifier_model": model})
         if out is None:
             return {"status": "PENDING", "call_id": rec["call_id"], "model": model}
         parsed = parsed or {}
@@ -390,7 +403,7 @@ class CellRunner:
         user = prompts.coder_user(cell, pred, comp, cand, {k: rubric.get(k) for k in ("floor", "floor_reason", "hazard_flags", "verdict", "grammatical_subject")}, std)
         guards.assert_no_urls({"u": user})
         out, rec = self.llm.complete("coder", prompts.CODER_SYSTEM, user, model=self.coder_model, max_tokens=1200,
-                                     meta={"queue_id": cell["queue_id"], "candidate_id": cand["candidate_id"]})
+                                     meta={"queue_id": cell["queue_id"], "branch": cell.get("branch"), "candidate_id": cand["candidate_id"]})
         if out is None:
             return {"status": "PENDING", "call_id": rec["call_id"]}
         parsed = prompts.parse_json(out) or {}
@@ -429,10 +442,16 @@ class CellRunner:
                 st["phase"] = "verify-2"; self.save(st); return st
         st["survivors"] = self.survivors(st, "1") or self.survivors(st, "2")
         st["fallback_used"] = bool(not self.survivors(st, "1") and self.survivors(st, "2"))
-        # coder for survivors
+        # 1c: allocate the card FIRST (allocation.py, the same allocator the packet builder uses), then code only
+        # the candidates that will reach the card. Everything the allocation drops is recorded as coder_skipped.
+        alloc = allocate(self.allocation_view(st["survivors"]), self.pairs(cell["branch"]))
+        st["allocation"] = {k: alloc[k] for k in ("kept", "roles", "english_witness", "dropped", "witness_only")}
+        st["coder_skipped"] = dict(alloc["dropped"])
         if self.run_coder:
             for cand in st["survivors"]:
                 cid = cand["candidate_id"]
+                if cid not in alloc["kept"]:
+                    continue
                 if cid not in st["coding"] or st["coding"][cid].get("status") == "PENDING":
                     st["coding"][cid] = self.code(cell, cand, self.final_rubric(st, cid))
             if any(v.get("status") == "PENDING" for v in st["coding"].values()):
@@ -441,6 +460,18 @@ class CellRunner:
         st["empty"] = not st["survivors"]
         self.save(st)
         return st
+
+    def allocation_view(self, cands):
+        """The minimal candidate dicts allocation.allocate needs (tier, witness flag, reception, locator)."""
+        out = []
+        for c in cands:
+            try:
+                std = self.reg.public(c["registry_id"])
+            except Exception:
+                std = {}
+            out.append(dict(c, authority_tier=std.get("authority_tier") or c.get("effective_tier"),
+                            reception_scope=std.get("reception_scope"), witness=bool(c.get("witness") or std.get("witness_only"))))
+        return out
 
     def primary_rubric(self, st, cid):
         return (st["verifications"].get(cid) or {}).get(self.primary, {})

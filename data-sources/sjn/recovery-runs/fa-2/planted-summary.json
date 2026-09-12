@@ -1,0 +1,203 @@
+{
+ "run_id": "fa-2",
+ "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r3_AN03_MIGRATION_VATICANNEWS_20260912.xlsx",
+ "app_master_version": "v2.25r3 AN03 MIGRATION VATICANNEWS",
+ "items": 74,
+ "status": {
+  "RUN": 74
+ },
+ "routes": {
+  "SLICE_ROW": 26,
+  "PRIMARY_REJECTED_ALL": 48
+ },
+ "opus_calls": 74,
+ "by_model": {
+  "sonnet": {
+   "n": 74,
+   "false_accept": 0,
+   "rate": 0.0,
+   "dositheus_n": 23,
+   "dositheus_false_accept": 0,
+   "dositheus_rate": 0.0
+  },
+  "opus": {
+   "n": 74,
+   "false_accept": 0,
+   "rate": 0.0,
+   "dositheus_n": 23,
+   "dositheus_false_accept": 0,
+   "dositheus_rate": 0.0
+  },
+  "routed": {
+   "n": 74,
+   "false_accept": 0,
+   "rate": 0.0,
+   "dositheus_n": 23,
+   "dositheus_false_accept": 0,
+   "dositheus_rate": 0.0
+  }
+ },
+ "by_slice": {
+  "Dositheus": {
+   "sonnet": {
+    "n": 23,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 23,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 23,
+    "false_accept": 0,
+    "items": []
+   }
+  },
+  "Lutheran": {
+   "sonnet": {
+    "n": 13,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 13,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 13,
+    "false_accept": 0,
+    "items": []
+   }
+  },
+  "Roman Catholic": {
+   "sonnet": {
+    "n": 6,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 6,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 6,
+    "false_accept": 0,
+    "items": []
+   }
+  },
+  "Anglican": {
+   "sonnet": {
+    "n": 5,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 5,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 5,
+    "false_accept": 0,
+    "items": []
+   }
+  },
+  "Reformed / Presbyterian": {
+   "sonnet": {
+    "n": 9,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 9,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 9,
+    "false_accept": 0,
+    "items": []
+   }
+  },
+  "Baptist": {
+   "sonnet": {
+    "n": 5,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 5,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 5,
+    "false_accept": 0,
+    "items": []
+   }
+  },
+  "Methodist / Wesleyan": {
+   "sonnet": {
+    "n": 4,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 4,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 4,
+    "false_accept": 0,
+    "items": []
+   }
+  },
+  "Mennonite / Anabaptist": {
+   "sonnet": {
+    "n": 3,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 3,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 3,
+    "false_accept": 0,
+    "items": []
+   }
+  },
+  "Eastern Orthodox": {
+   "sonnet": {
+    "n": 6,
+    "false_accept": 0,
+    "items": []
+   },
+   "opus": {
+    "n": 6,
+    "false_accept": 0,
+    "items": []
+   },
+   "routed": {
+    "n": 6,
+    "false_accept": 0,
+    "items": []
+   }
+  }
+ },
+ "definition": "false accept = final ACCEPT or ACCEPT_WITH_CAVEAT on a planted near-miss; the routed column is the SONNET_WITH_OPUS_SLICE final verdict",
+ "threshold": 0.05,
+ "prompt_versions": {
+  "verifier": "gate6-v1.1"
+ },
+ "calls_answered": 148,
+ "metered_usd": 6.8,
+ "gate": "PASS"
+}

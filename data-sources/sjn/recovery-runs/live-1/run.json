@@ -1,8 +1,8 @@
 {
  "run_id": "live-1",
  "kind": "live",
- "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r2_CONTROLLED_STORAGE_20260912.xlsx",
- "app_master_version": "v2.25r2 CONTROLLED STORAGE",
+ "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r3_AN03_MIGRATION_VATICANNEWS_20260912.xlsx",
+ "app_master_version": "v2.25r3 AN03 MIGRATION VATICANNEWS",
  "locator_model": "sonnet",
  "verifier_models": [
   "sonnet",
@@ -18,7 +18,8 @@
   "coder": "gate6-v1.1"
  },
  "branches": [
-  "Roman Catholic"
+  "Roman Catholic",
+  "Anglican"
  ],
  "retrieval": "PER_STANDARD",
  "routing": "SONNET_WITH_OPUS_SLICE",
@@ -30,6 +31,7 @@
  ],
  "projection_per_cell_usd": 0.405,
  "branch_cost_cap_usd": 25.0,
+ "cost_state_file": "sjn/recovery-runs/live-1/cost-state.json",
  "branch_spend": {
   "Roman Catholic": {
    "cells": 34,
@@ -60,7 +62,60 @@
      "cost_usd": 1.3932660000000006
     }
    }
+  },
+  "Anglican": {
+   "cells": 43,
+   "calls": 437,
+   "cost_usd": 14.4625,
+   "calls_per_cell": 10.16,
+   "cost_per_cell_usd": 0.3363,
+   "projection_per_cell_usd": 0.405,
+   "projected_usd": 17.42,
+   "cap_usd": 25.0,
+   "over_cap": false,
+   "estimated": false,
+   "by_role": {
+    "locator/sonnet": {
+     "calls": 180,
+     "cost_usd": 9.277122
+    },
+    "verifier/sonnet": {
+     "calls": 148,
+     "cost_usd": 2.401884000000001
+    },
+    "recut/sonnet": {
+     "calls": 4,
+     "cost_usd": 0.038661
+    },
+    "coder/sonnet": {
+     "calls": 86,
+     "cost_usd": 0.7732560000000002
+    },
+    "verifier/opus": {
+     "calls": 19,
+     "cost_usd": 1.971555
+    }
+   },
+   "cap_state": {
+    "cap_usd": 25.0,
+    "spent_usd": 14.484573,
+    "calls": 440,
+    "status": "RUNNING",
+    "cap_hit_at": null
+   },
+   "coder": {
+    "survivors": 111,
+    "coded": 86,
+    "skipped_by_allocation": 25,
+    "mean_coder_call_usd": 0.00899,
+    "usd_avoided_measured": 0.2248,
+    "basis": "skipped = survivors the allocator dropped before coding (measured); USD = skipped x this branch's mean metered coder call"
+   }
   }
  },
- "updated_at": "2026-09-12T16:02:57Z"
+ "workbooks": [
+  "Seeking_Jesus_Teaching_Predicate_Source_v2.25r2_CONTROLLED_STORAGE_20260912.xlsx",
+  "Seeking_Jesus_Teaching_Predicate_Source_v2.25r3_AN03_MIGRATION_VATICANNEWS_20260912.xlsx"
+ ],
+ "updated_at": "2026-09-12T19:57:23Z"
 }

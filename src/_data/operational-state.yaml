@@ -124,25 +124,33 @@ workstreams:
       0.936 (sonnet with the opus slice), false-accept 0.000 on 74 planted near-misses,
       Dositheus slice 0.000; 57.08 USD metered. Report:
       data-sources/sjn/recovery-runs/calibration-report.md.
-      LIVE RUN STARTED 2026-09-12 on workbook v2.25r2 CONTROLLED STORAGE (canonical in
-      data-sources/sjn/, 44 AUTHOR_RATIFIED rows): run id live-1, Roman Catholic branch
-      only — 34/34 open cells filled (0 empty, 0 all-rejected, 180 rejections kept),
-      582 metered calls, 15.80 USD (0.465/cell vs the 0.405 projection). Packet:
-      data-sources/sjn/recovery-packets/roman-catholic.json. The other seven branches
-      WAIT for the author's go; Eastern Orthodox runs last (acrod.org corpus untested in
-      calibration). Session prep: R001 allowlist rebuilt from publisher_domain only with
-      AC-15 controlled storage (recovery-runs/allowlist-audit.md); goarch.org retired;
-      corpus rebuilt live with de-hyphenation (5089 chunks / 40 standards); re-cut
-      shortens to fit (Q-063, Q-071, Q-341 recovered); planted re-validation fa-1
-      false-accept 0.000 both models (6.80 USD).
+      LIVE RUN live-1, one branch per authorised session. Session 1 (2026-09-12, v2.25r2):
+      Roman Catholic 34/34 cells filled, 582 calls, 15.80 USD (0.465/cell); packet
+      accepted by the author. Session 2 (2026-09-12, workbook v2.25r3 AN03 MIGRATION
+      VATICANNEWS, canonical in data-sources/sjn/, 45 AUTHOR_RATIFIED rows): the four
+      ratified packet-shape fixes landed (allocation.py: witness rows last within a
+      tier; controlling phrase paired with its English witness; coder after
+      allocation; coststate.py: per-branch cap persisted in
+      recovery-runs/live-1/cost-state.json across invocations); BSR-AN-03 re-chunked
+      from churchofengland.org (RENDERED) and BSR-RC-08 (vaticannews.va, Apostles' and
+      Nicene Creeds as separate chunks) built; planted re-validation fa-2 false-accept
+      0.000 both models and routed, Dositheus 0.000 (6.80 USD); Anglican branch run:
+      43 cells, 38 filled, 5 honest empties (1 all-rejected), 80 rejections kept, 437
+      audit calls, 14.46 USD (0.336/cell). Packets:
+      data-sources/sjn/recovery-packets/{roman-catholic,anglican}.json.
+      Denominator: the harness counts 291 open cells (284 NOT YET RECOVERED + 7 CURRENT
+      STANDARD REVIEWED); the workbook's 456-141 = 315 differs by 24 (8 OUT OF SCOPE,
+      13 atomic-vector rows, 3 retired-witness rows) — a harness assumption awaiting the
+      author's ruling. Six branches remain (Lutheran 39, Reformed/Presbyterian 16,
+      Baptist 37, Methodist/Wesleyan 37, Mennonite/Anabaptist 41, Eastern Orthodox 44)
+      and each WAITS for the author's go; Eastern Orthodox runs alone and last.
       Blocked corpus rows: BSR-EO-03 (goarch.org, HOST_RETIRED), BSR-BA-02 (apex→www).
-      Gate 7 items: Q-434 phrase re-cut, Q-169 cites vaticannews.va (refused under the
-      publisher_domain-only rule; add the host to a row or re-cite from vatican.va),
-      BSR-AN-03 migration to churchofengland.org (corpus now from ccel.org, its
-      publisher_domain), BSR-EO-03 retire or re-host, BSR-BA-02 apex→www redirect, see
+      Gate 7 items: Q-434 phrase re-cut, Q-169 now resolvable under BSR-RC-08 (re-check
+      R001), the Roman Catholic packet's leading-witness cards to re-read under the new
+      ordering, BSR-EO-03 retire or re-host, BSR-BA-02 apex→www redirect, see
       recovery-runs/proposed-app-config-gate7.md. Running the Gate 2 pipeline against
       v2.25 blocks on R001 (Q-034) until Gate 7 re-points that cell.
-    next_action: "Author: read the cal-3 report and decide the live run (run.py --i-have-author-authorization). Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
+    next_action: "Author: review recovery-packets/anglican.json and rule on the 291/315 denominator; then give the go for the next single branch (Eastern Orthodox last, alone). Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
 
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED

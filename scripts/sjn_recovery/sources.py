@@ -26,7 +26,7 @@ from sjn_pipeline.registry import host_matches, normalize_host  # noqa: E402
 
 from .config import ARCHIVE_DIR, RETIRED_HOSTS  # noqa: E402
 from .textutil import (segments, join, clean, strip_footnote_digits, sha, pdf_repair, fix_mojibake,  # noqa: E402
-                       nfc, has_polytonic, strip_foreign_parentheticals, normalize, dehyphenate, hyphenation_residue)
+                       nfc, has_polytonic, strip_foreign_parentheticals, normalize, dehyphenate, hyphenation_residue, contains)
 
 ROMAN = r"(?:[IVXLC]+)"
 ROMAN_MAP = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, "X": 10, "XI": 11,
@@ -353,6 +353,49 @@ def vatican_creeds(ctx):
     if cur and buf:
         _emit(ctx, out, cur, buf, "creed", url)
     return out, ["Creeds as received (CCC Credo page): Apostles' and Nicene"]
+
+
+RC08_ASSERT = "begotten, not made, consubstantial with the Father"
+
+
+def vaticannews_creeds(ctx):
+    """BSR-RC-08 (NEW in v2.25r3, 2026-09-12): the Apostles' and Nicene Creeds on vaticannews.va, a second Holy
+    See publishing outlet distinct from vatican.va (its own row; not folded into BSR-RC-06, not AC-15).
+    LOCATOR CAUTION (from the row): the URL slug names the Apostles' Creed but the page carries BOTH creeds under
+    one "Credo" heading, and "judge the living and the dead" appears in both — so each creed is its OWN chunk
+    with its own locator ("Apostles' Creed" / "Nicene Creed"), and a phrase is asserted only against the named
+    creed's chunk, never against the page. The build asserts RC08_ASSERT inside the Nicene chunk alone."""
+    url = ctx.row["canonical_url"]
+    segs = segments(ctx.html(url))
+    start = next((i for i, (t, x) in enumerate(segs) if t == "h1" and clean(x) == "Credo"), -1)
+    if start < 0:
+        raise FetchError("vaticannews.va: 'Credo' heading not found")
+    out, cur, buf = [], None, []
+    for tag, text in segs[start + 1:]:
+        t = clean(text)
+        if tag == "b" and re.match(r"^The Apostles'? Creed$", t, re.I):
+            cur, buf = "Apostles' Creed", []; continue
+        if tag == "b" and re.match(r"^The Nicene Creed$", t, re.I):
+            if cur and buf:
+                _emit(ctx, out, cur, buf, "creed", url)
+            cur, buf = "Nicene Creed", []; continue
+        if cur and tag == "p":
+            buf.append(t)
+            if t == "Amen.":
+                _emit(ctx, out, cur, buf, "creed", url); cur, buf = None, []
+        elif cur and tag not in ("p", "b") and buf:
+            break
+    if cur and buf:
+        _emit(ctx, out, cur, buf, "creed", url)
+    locs = {c["locator"]: c for c in out}
+    if set(locs) != {"Apostles' Creed", "Nicene Creed"}:
+        raise FetchError(f"vaticannews.va Credo: expected exactly the Apostles' and Nicene Creed blocks, got {sorted(locs)}")
+    if not contains(locs["Nicene Creed"]["text"], RC08_ASSERT):
+        raise FetchError(f"vaticannews.va: assertion {RC08_ASSERT!r} not found in the Nicene Creed block")
+    if contains(locs["Apostles' Creed"]["text"], RC08_ASSERT):
+        raise FetchError("vaticannews.va: the Nicene assertion phrase leaked into the Apostles' Creed block (segmentation wrong)")
+    return out, ["vaticannews.va (publisher_domain) Credo page: Apostles' and Nicene Creeds as two chunks with their own locators; "
+                 f"asserted {RC08_ASSERT!r} in the Nicene block only"]
 
 
 def compendium(ctx):
@@ -1177,33 +1220,54 @@ def bcp_catechism_1662(ctx):
     return out, [f"{len(out)} question/answer pairs (unnumbered in the book; numbered here in order)"]
 
 
+AN03_ASSERT = "Whosoever will be saved: before all things it is necessary"
+
+
 def athanasian_creed_cofe(ctx):
-    """(cal-1 … cal-3 adapter for BSR-AN-03. RETIRED 2026-09-12: it fetched churchofengland.org while the
-    row's publisher_domain is ccel.org — the host guard now refuses it. Kept for the record.)"""
-    url = "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/creed-s-athanasius"
+    """BSR-AN-03 (v2.25r3, MIGRATED 2026-09-12 under AC-02 MIGRATE_WHERE_OFFICIAL): the Athanasian Creed on
+    the Church of England's own BCP page, publisher_domain churchofengland.org; ccel.org is RETIRED for this
+    row. fetch_mode is RENDERED — a plain fetch of the URL returns navigation chrome with no creed text
+    (verified 2026-09-12), so the page is rendered with Playwright and only the verse paragraphs between the
+    QUICUNQUE VULT heading and the Gloria's "Amen." are chunked: the "At Morning Prayer" rubric above the
+    heading and the Crown/CUP provenance line below the Gloria are not creed text and never enter the chunk.
+    The build asserts the row's opening words (AN03_ASSERT) against the chunk under the pipeline's own
+    normalisation (the page prints WHOSOEVER in capitals). The churchofengland.org BCP 1662 PDF is disallowed
+    by robots.txt and is NOT a fallback: a failure here is an honest empty for the row."""
+    url = ctx.row["canonical_url"]
     blocks = ctx.rendered(url).get("blocks") or []
     start = next((i for i, b_ in enumerate(blocks) if b_["text"].strip().upper().startswith("QUICUNQUE VULT")), -1)
     if start < 0:
-        raise FetchError("QUICUNQUE VULT heading not found")
+        raise FetchError("churchofengland.org Athanasian Creed: QUICUNQUE VULT heading not found in the rendered page "
+                         f"({len(blocks)} blocks) — chrome only?")
     verses = []
     for b_ in blocks[start + 1:]:
-        if b_["tag"].startswith("h"):
+        t = clean(b_["text"])
+        if b_["tag"].startswith("h") or t.startswith("Text from The Book of Common Prayer"):
             break
-        if b_["tag"] == "p":
-            verses.append(clean(b_["text"]))
+        if b_["tag"] == "p" and t:
+            verses.append(t)
+        if t.endswith("world without end. Amen."):
+            break
+    if len(verses) < 40:
+        raise FetchError(f"churchofengland.org Athanasian Creed: expected ~44 verse paragraphs plus the Gloria, found {len(verses)}")
+    text = join(verses)
+    if not contains(text, AN03_ASSERT):
+        raise FetchError(f"churchofengland.org Athanasian Creed: assertion {AN03_ASSERT!r} not found in the rendered creed text")
     out = []
-    _emit(ctx, out, "Quicunque Vult (Creed of S. Athanasius), At Morning Prayer", verses, "creed", url)
-    return out, ["official host churchofengland.org (registry lists ccel.org as lineage for 1 released cell)", f"{len(verses)} verses"]
+    # the page prints the creed as unnumbered paragraphs (some carry two traditional verses), so the locator names the
+    # creed and its BCP place, never a verse count the page does not give
+    _emit(ctx, out, "Athanasian Creed (Quicunque Vult), At Morning Prayer, BCP", verses, "creed", url)
+    return out, [f"churchofengland.org (publisher_domain; RENDERED) — {len(verses)} verse paragraphs incl. the Gloria; rubric and provenance line excluded; "
+                 f"asserted {AN03_ASSERT!r} (normalised: the page prints WHOSOEVER)"]
 
 
 CCEL_ATHANASIAN = "https://ccel.org/ccel/creeds/athanasian.creed.html"
 
 
 def athanasian_creed_ccel(ctx):
-    """BSR-AN-03 (2026-09-12) — the Athanasian Creed on ccel.org, the row's ratified publisher_domain
-    ("ccel.org as cited (1 released cell)": Q-293 cites this page). APP CONFIG `athanasian_text_witness`
-    names the page; the 44 numbered verses are one division, cited as the creed. The Church of England
-    BCP text is the Gate 7 migration target (draft_recommendation), not this row's host."""
+    """(v2.25r2 adapter for BSR-AN-03 — the Athanasian Creed on ccel.org. RETIRED 2026-09-12 with the row's
+    migration to churchofengland.org (v2.25r3, AC-02): ccel.org is no longer the row's host and the host guard
+    refuses it. Kept for the record; not dispatched.)"""
     url = str(ctx.config.get("athanasian_text_witness") or CCEL_ATHANASIAN)
     segs = segments(ctx.html(url))
     verses = [clean(x) for tag, x in segs if tag == "p" and re.match(r"^\d{1,2}\.\s+\S", clean(x))]
@@ -1682,7 +1746,7 @@ def gmc_bdd_2024(ctx):
 # =============================================================== dispatch
 ADAPTERS = {
     "BSR-RC-01": ccc_section_two, "BSR-RC-02": dei_filius_latin, "BSR-RC-03": dei_filius_ewtn,
-    "BSR-RC-04": lateran_constitutions, "BSR-RC-06": vatican_creeds, "BSR-RC-07": compendium,
+    "BSR-RC-04": lateran_constitutions, "BSR-RC-06": vatican_creeds, "BSR-RC-07": compendium, "BSR-RC-08": vaticannews_creeds,
     "BSR-EO-01": oca_symbol_of_faith, "BSR-EO-02": oca_holy_trinity, "BSR-EO-03": goarch_single,
     "BSR-EO-04": philaret, "BSR-EO-05": dositheus, "BSR-EO-06": ccel_definitions,
     "BSR-EO-07": acrod_liturgy, "BSR-EO-08": roea_basil, "BSR-EO-09": roea_synodikon,
@@ -1691,7 +1755,7 @@ ADAPTERS = {
     "BSR-LU-01": book_of_concord, "BSR-LU-03": small_catechism_cph,
     "BSR-RP-01": wcf_opc, "BSR-RP-02": wsc_opc, "BSR-RP-03": wlc_opc, "BSR-RP-04": pcusa_book_of_confessions,
     "BSR-RP-05": heidelberg_crcna, "BSR-RP-06": belgic_crcna,
-    "BSR-AN-01": thirty_nine_articles, "BSR-AN-02": bcp_catechism_1662, "BSR-AN-03": athanasian_creed_ccel,
+    "BSR-AN-01": thirty_nine_articles, "BSR-AN-02": bcp_catechism_1662, "BSR-AN-03": athanasian_creed_cofe,
     "BSR-AN-04": tec_outline_of_faith, "BSR-AN-05": acna_to_be_a_christian,
     "BSR-BA-01": bfm2000, "BSR-BA-02": london_1689_ch2, "BSR-BA-03": abc_usa_10facts,
     "BSR-MW-01": umc_articles, "BSR-MW-02": umc_eub_confession, "BSR-MW-03": gmc_bdd_2024, "BSR-MW-04": wesleyan_articles,

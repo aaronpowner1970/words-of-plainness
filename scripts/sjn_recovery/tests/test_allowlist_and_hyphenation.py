@@ -76,10 +76,15 @@ def test_live_registry_allowlist_if_present():
         reg = Registry()
     except Exception as e:
         pytest.skip(str(e))
+    # v2.25r3 (2026-09-12): BSR-AN-03 migrated to churchofengland.org (AC-02); BSR-RC-08 is the new vaticannews.va row;
+    # BSR-RC-06's title no longer carries a domain, and the allowlist never read one out of a title anyway.
     assert reg.domains("BSR-RC-06") == ["vatican.va"]
-    assert reg.domains("BSR-AN-03") == ["ccel.org"]
+    assert reg.domains("BSR-RC-08") == ["vaticannews.va"]
+    assert reg.domains("BSR-AN-03") == ["churchofengland.org"]
     assert reg.domains("BSR-MW-03") == ["irp.cdn-website.com", "globalmethodist.org"]
     assert reg.domains("BSR-EO-13") == ["newadvent.org"]
+    assert "vaticannews" not in reg.by_id["BSR-RC-06"]["standard_title"].casefold()
+    assert legacy_admitted_domains(reg.by_id["BSR-RC-06"]) == ("vatican.va", []), "even the retired parser finds no domain in the de-domained title"
 
 
 # ---------------------------------------------------------------- retired hosts and the host guard
@@ -104,13 +109,21 @@ def test_retired_host_is_never_requested():
 
 
 def test_host_guard_refuses_a_host_the_row_does_not_admit():
+    # the pre-migration shape of BSR-AN-03 (publisher_domain ccel.org) refused churchofengland.org; since v2.25r3 the
+    # row admits churchofengland.org and it is ccel.org that the guard refuses.
     ctx = sources.Ctx({"registry_id": "BSR-AN-03", "branch": "Anglican", "standard_title": "x", "authority_tier": "x", "scope_caveat": "",
                        "canonical_url": "ccel.org as cited", "publisher_domain": "ccel.org"}, _Fetcher(), log=lambda m: None, admitted_hosts=["ccel.org"])
     with pytest.raises(sources.HostNotAdmittedError):
         ctx.html("https://www.churchofengland.org/prayer-and-worship/x")
     with pytest.raises(sources.HostNotAdmittedError):
         ctx.rendered("https://www.churchofengland.org/prayer-and-worship/x")
-    assert "BSR-AN-03" in sources.ADAPTERS and sources.ADAPTERS["BSR-AN-03"] is sources.athanasian_creed_ccel
+    ctx3 = sources.Ctx({"registry_id": "BSR-AN-03", "branch": "Anglican", "standard_title": "x", "authority_tier": "x", "scope_caveat": "",
+                        "canonical_url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/creed-s-athanasius",
+                        "publisher_domain": "churchofengland.org"}, _Fetcher(), log=lambda m: None, admitted_hosts=["churchofengland.org"])
+    with pytest.raises(sources.HostNotAdmittedError):
+        ctx3.html("https://ccel.org/ccel/creeds/athanasian.creed.html")
+    assert "BSR-AN-03" in sources.ADAPTERS and sources.ADAPTERS["BSR-AN-03"] is sources.athanasian_creed_cofe   # migrated 2026-09-12
+    assert sources.ADAPTERS["BSR-RC-08"] is sources.vaticannews_creeds
     assert sources.ADAPTERS["BSR-EO-07"] is sources.acrod_liturgy and "BSR-EO-13" in sources.ADAPTERS and "BSR-EO-14" in sources.ADAPTERS
     assert sources.ADAPTERS["BSR-MW-03"] is sources.gmc_bdd_2024
 

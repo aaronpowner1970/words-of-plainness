@@ -1,8 +1,8 @@
 {
- "built_at": "2026-09-12T15:32:30Z",
- "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r2_CONTROLLED_STORAGE_20260912.xlsx",
- "app_master_version": "v2.25r2 CONTROLLED STORAGE",
- "registry_ratified": 44,
+ "built_at": "2026-09-12T19:43:48Z",
+ "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r3_AN03_MIGRATION_VATICANNEWS_20260912.xlsx",
+ "app_master_version": "v2.25r3 AN03 MIGRATION VATICANNEWS",
+ "registry_ratified": 45,
  "fallback_only_rows": [
   "BSR-AN-05"
  ],
@@ -999,6 +999,43 @@
    ],
    "notes": [
     "registry canonical_url is a host note; text fetched from the cited compendium page; 533 questions"
+   ],
+   "fetch_verdict": "OK",
+   "noncitable_spans": 0,
+   "languages": [
+    "en"
+   ],
+   "polytonic_chunks": 0
+  },
+  "BSR-RC-08": {
+   "status": "BUILT",
+   "branch": "Roman Catholic",
+   "standard_title": "Apostles' and Nicene Creeds (Credo), Vatican News prayer text",
+   "canonical_url": "https://www.vaticannews.va/en/prayers/the-apostles_-creed.html",
+   "authority_tier": "CONFESSIONAL (row floor; Nicene resolves CONCILIAR)",
+   "reception_scope": "UNIVERSAL",
+   "witness_only": false,
+   "citation_refusal": null,
+   "fetch_mode": "HTML",
+   "fallback_only": false,
+   "n_chunks": 2,
+   "chars": 1805,
+   "text_hash": "1697cdaa212afe93ea8d3efec8409d99a72fd2f72c144982c71c3d43ba22b636",
+   "fetched_at": "2026-09-12T19:42:42Z",
+   "urls": [
+    {
+     "url": "https://www.vaticannews.va/en/prayers/the-apostles_-creed.html",
+     "mode": "http",
+     "status": 200,
+     "ok": true,
+     "error": "",
+     "final_url": "https://www.vaticannews.va/en/prayers/the-apostles_-creed.html",
+     "redirects": [],
+     "cross_host_redirect": ""
+    }
+   ],
+   "notes": [
+    "vaticannews.va (publisher_domain) Credo page: Apostles' and Nicene Creeds as two chunks with their own locators; asserted 'begotten, not made, consubstantial with the Father' in the Nicene block only"
    ],
    "fetch_verdict": "OK",
    "noncitable_spans": 0,
@@ -3431,31 +3468,28 @@
    "status": "UNCHANGED",
    "branch": "Anglican",
    "standard_title": "Athanasian Creed (Quicunque Vult), BCP",
-   "canonical_url": "ccel.org as cited (1 released cell); official: churchofengland.org BCP \"At Morning Prayer\"",
+   "canonical_url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/creed-s-athanasius",
    "authority_tier": "CONFESSIONAL",
    "reception_scope": "JURISDICTIONAL",
    "witness_only": false,
    "citation_refusal": null,
-   "fetch_mode": "HTML",
+   "fetch_mode": "RENDERED (body not exposed to plain fetch — verified 2026-09-12)",
    "fallback_only": false,
    "n_chunks": 1,
-   "chars": 3783,
-   "text_hash": "3797280b272d9a003501c128e67b392c024d43a2a0ae31aa8753368d10013e9d",
-   "fetched_at": "2026-09-12T15:28:08Z",
+   "chars": 3780,
+   "text_hash": "1be209f47ae9d504f1c6a0780112db3bbb862816a35dcccf7632be9693ebff9a",
+   "fetched_at": "2026-09-12T19:43:47Z",
    "urls": [
     {
-     "url": "https://ccel.org/ccel/creeds/athanasian.creed.html",
-     "mode": "http",
+     "url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/creed-s-athanasius",
+     "mode": "rendered",
      "status": 200,
      "ok": true,
-     "error": "",
-     "final_url": "https://ccel.org/ccel/creeds/athanasian.creed.html",
-     "redirects": [],
-     "cross_host_redirect": ""
+     "error": ""
     }
    ],
    "notes": [
-    "ccel.org (publisher_domain) — 44 numbered verses in one division; the churchofengland.org text is the Gate 7 migration target, not fetched"
+    "churchofengland.org (publisher_domain; RENDERED) — 44 verse paragraphs incl. the Gloria; rubric and provenance line excluded; asserted 'Whosoever will be saved: before all things it is necessary' (normalised: the page prints WHOSOEVER)"
    ],
    "fetch_verdict": "OK",
    "noncitable_spans": 0,
@@ -4463,5 +4497,5 @@
    "polytonic_chunks": 0
   }
  },
- "total_chunks": 5089
+ "total_chunks": 5091
 }

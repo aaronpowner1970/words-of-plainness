@@ -22,7 +22,7 @@ from sjn_recovery.registry import Registry, load_predicates, load_comparators, l
 from sjn_recovery.llm import LLM  # noqa: E402
 from sjn_recovery.agents import CellRunner  # noqa: E402
 from sjn_recovery.packets import build_branch_packet  # noqa: E402
-from sjn_recovery import prompts  # noqa: E402
+from sjn_recovery import prompts, coststate  # noqa: E402
 
 
 def log(msg):
@@ -60,30 +60,82 @@ def main():
     llm = LLM(a.run_id, backend=a.backend, model=a.locator_model, log=log)
     runner = CellRunner(llm, reg, preds, comps, os.path.join(RUNS_DIR, a.run_id, "cells"), a.locator_model, vmodels,
                         coder_model=a.coder_model, log=log, run_coder=True)
-    branch_cost = {}
+    run_path = os.path.join(RUNS_DIR, a.run_id, "run.json")
+    prior = {}
+    if os.path.exists(run_path):
+        with open(run_path, encoding="utf-8") as fh:
+            prior = json.load(fh)
+    branch_cost = dict(prior.get("branch_spend") or {})
+    # 1d: the per-branch cap lives in recovery-runs/<run>/cost-state.json and survives every invocation of
+    # run.py and api_executor.py. Registered here before the first cell; enforced by the executor; reconciled below.
+    state = coststate.load(a.run_id)
     for br in branches:
         bc = [c for c in cells if c["branch"] == br]
         if a.limit:
             bc = bc[:a.limit]
-        done = 0
-        for c in bc:
-            st = runner.run_cell(c)
-            done += st.get("phase") == "DONE"
+        b = coststate.register_branch(state, br, a.branch_cost_cap_usd, [c["queue_id"] for c in bc])
+        coststate.save(state)
+        cap_hit = coststate.over_cap(b)
+        if cap_hit:
+            log(f"!! {br}: cost cap already reached ({b['spent_usd']:.2f} of {b['cap_usd']} USD, status {b['status']}); "
+                f"running no further cells; the partial packet is written below. Raise --branch-cost-cap-usd to continue.")
+        else:
+            for c in bc:
+                runner.run_cell(c)
+        done = sum(1 for c in bc if (runner.load(c["queue_id"]) or {}).get("phase") == "DONE")
         log(f"== {br}: {done}/{len(bc)} open cells DONE; pending calls {len(set(llm.pending))}")
-        branch_cost[br] = branch_spend(llm, bc, a.projection_per_cell_usd, a.branch_cost_cap_usd)
-        log(f"   spend so far: {branch_cost[br]['calls']} metered calls, {branch_cost[br]['cost_usd']:.2f} USD "
-            f"({branch_cost[br]['cost_per_cell_usd']:.3f}/cell vs projection {a.projection_per_cell_usd:.3f}; "
-            f"projected {branch_cost[br]['projected_usd']:.2f}; cap {a.branch_cost_cap_usd})")
+        spend = branch_spend(llm, bc, a.projection_per_cell_usd, a.branch_cost_cap_usd)
+        coststate.reconcile(state, br, spend["cost_usd"], spend["calls"])
+        b = state["branches"][br]
+        cap_hit = coststate.over_cap(b)
+        spend["cap_state"] = {k: b.get(k) for k in ("cap_usd", "spent_usd", "calls", "status", "cap_hit_at")}
+        spend["coder"] = coder_savings(llm, runner, bc)
+        log(f"   spend so far: {spend['calls']} metered calls, {spend['cost_usd']:.2f} USD "
+            f"({spend['cost_per_cell_usd']:.3f}/cell vs projection {a.projection_per_cell_usd:.3f}; "
+            f"projected {spend['projected_usd']:.2f}; cap {b['cap_usd']}; cost-state {b['spent_usd']:.2f} {b['status']})")
+        if spend["coder"]["survivors"]:
+            cs = spend["coder"]
+            log(f"   coder (1c): {cs['coded']} coded of {cs['survivors']} survivors; {cs['skipped_by_allocation']} skipped by allocation "
+                f"= {cs['usd_avoided_measured']:.2f} USD at the measured {cs['mean_coder_call_usd']:.4f}/call")
         if done == len(bc):
+            b["status"] = "DONE"
             build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log)
-    with open(os.path.join(RUNS_DIR, a.run_id, "run.json"), "w", encoding="utf-8") as fh:
+        elif cap_hit:
+            b["status"] = "CAP_HIT"
+            log(f"!! {br}: STOPPED by the cost cap ({b['spent_usd']:.2f} of {b['cap_usd']} USD) with {len(bc) - done} cell(s) unfinished — "
+                f"writing the PARTIAL packet")
+            build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log, partial=spend["cap_state"])
+        coststate.save(state)
+        branch_cost[br] = spend
+    all_branches = [x for x in BRANCHES if x in set(prior.get("branches") or []) | set(branches)]
+    with open(run_path, "w", encoding="utf-8") as fh:
         json.dump({"run_id": a.run_id, "kind": "live", "workbook": os.path.basename(reg.path), "app_master_version": reg.app_master_version,
                    "locator_model": a.locator_model, "verifier_models": vmodels, "coder_model": a.coder_model or a.locator_model,
-                   "backend": a.backend, "prompt_version": prompts.PROMPT_VERSION, "prompt_versions": prompts.PROMPT_VERSIONS, "branches": branches,
+                   "backend": a.backend, "prompt_version": prompts.PROMPT_VERSION, "prompt_versions": prompts.PROMPT_VERSIONS, "branches": all_branches,
                    "retrieval": "PER_STANDARD", "routing": runner.routing, "slice_rows": sorted(runner.slice_rows),
                    "projection_per_cell_usd": a.projection_per_cell_usd, "branch_cost_cap_usd": a.branch_cost_cap_usd,
-                   "branch_spend": branch_cost, "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}, fh, indent=1)
+                   "cost_state_file": os.path.relpath(coststate.path_for(a.run_id), os.path.dirname(os.path.dirname(RUNS_DIR))).replace("\\", "/"),
+                   "branch_spend": branch_cost, "workbooks": sorted(set((prior.get("workbooks") or [prior.get("workbook")] if prior else []) + [os.path.basename(reg.path)]) - {None}),
+                   "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}, fh, indent=1)
     return 10 if llm.pending else 0
+
+
+def coder_savings(llm, runner, cells):
+    """1c, MEASURED on this branch: survivors vs coder calls actually made vs candidates the allocation
+    dropped before the coder ran; USD avoided = skipped × this branch's own mean metered coder-call cost."""
+    survivors = coded = skipped = 0
+    for c in cells:
+        st = runner.load(c["queue_id"]) or {}
+        survivors += len(st.get("survivors") or [])
+        coded += sum(1 for v in (st.get("coding") or {}).values() if v.get("status") == "DONE")
+        skipped += len(st.get("coder_skipped") or {})
+    qids = {c["queue_id"] for c in cells}
+    costs = [r.get("cost_usd") or 0.0 for r in llm._cache.values()
+             if r.get("run_id") == llm.run_id and r.get("role") == "coder" and (r.get("meta") or {}).get("queue_id") in qids]
+    mean = (sum(costs) / len(costs)) if costs else 0.0
+    return {"survivors": survivors, "coded": coded, "skipped_by_allocation": skipped, "mean_coder_call_usd": round(mean, 5),
+            "usd_avoided_measured": round(skipped * mean, 4),
+            "basis": "skipped = survivors the allocator dropped before coding (measured); USD = skipped x this branch's mean metered coder call"}
 
 
 def branch_spend(llm, cells, projection_per_cell, cap):
