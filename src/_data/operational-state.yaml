@@ -120,15 +120,26 @@ workstreams:
     gate6_state: >
       Gate 6 (Evidence Recovery Agent Team, scripts/sjn_recovery/) calibrated three
       times against the 141 released cells; cal-3 (2026-09-11) ran on workbook v2.25
-      RECEPTION AXIS (canonical in data-sources/sjn/, 42 AUTHOR_RATIFIED rows) and MET
-      the ratified gate: same-standard recall 0.922 (sonnet) / 0.936 (sonnet with the
-      opus slice), false-accept 0.000 on 74 planted near-misses, Dositheus slice 0.000;
-      57.08 USD metered. Report: data-sources/sjn/recovery-runs/calibration-report.md.
-      The live run against the 291 open cells has NOT been started (author decision).
-      Blocked corpus rows: BSR-EO-07 and BSR-EO-03 (goarch.org Cloudflare challenge on
-      every route), BSR-MW-03 (apex host 301s onto the www site, which 404s). Gate 7
-      items: Q-434 phrase re-cut, Q-034 R001 failure under v2.25 (newadvent.org no
-      longer admitted), BSR-BA-02 apex→www redirect, see
+      RECEPTION AXIS and MET the ratified gate: same-standard recall 0.922 (sonnet) /
+      0.936 (sonnet with the opus slice), false-accept 0.000 on 74 planted near-misses,
+      Dositheus slice 0.000; 57.08 USD metered. Report:
+      data-sources/sjn/recovery-runs/calibration-report.md.
+      LIVE RUN STARTED 2026-09-12 on workbook v2.25r2 CONTROLLED STORAGE (canonical in
+      data-sources/sjn/, 44 AUTHOR_RATIFIED rows): run id live-1, Roman Catholic branch
+      only — 34/34 open cells filled (0 empty, 0 all-rejected, 180 rejections kept),
+      582 metered calls, 15.80 USD (0.465/cell vs the 0.405 projection). Packet:
+      data-sources/sjn/recovery-packets/roman-catholic.json. The other seven branches
+      WAIT for the author's go; Eastern Orthodox runs last (acrod.org corpus untested in
+      calibration). Session prep: R001 allowlist rebuilt from publisher_domain only with
+      AC-15 controlled storage (recovery-runs/allowlist-audit.md); goarch.org retired;
+      corpus rebuilt live with de-hyphenation (5089 chunks / 40 standards); re-cut
+      shortens to fit (Q-063, Q-071, Q-341 recovered); planted re-validation fa-1
+      false-accept 0.000 both models (6.80 USD).
+      Blocked corpus rows: BSR-EO-03 (goarch.org, HOST_RETIRED), BSR-BA-02 (apex→www).
+      Gate 7 items: Q-434 phrase re-cut, Q-169 cites vaticannews.va (refused under the
+      publisher_domain-only rule; add the host to a row or re-cite from vatican.va),
+      BSR-AN-03 migration to churchofengland.org (corpus now from ccel.org, its
+      publisher_domain), BSR-EO-03 retire or re-host, BSR-BA-02 apex→www redirect, see
       recovery-runs/proposed-app-config-gate7.md. Running the Gate 2 pipeline against
       v2.25 blocks on R001 (Q-034) until Gate 7 re-points that cell.
     next_action: "Author: read the cal-3 report and decide the live run (run.py --i-have-author-authorization). Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."

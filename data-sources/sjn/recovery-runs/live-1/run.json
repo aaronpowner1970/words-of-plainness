@@ -1,0 +1,66 @@
+{
+ "run_id": "live-1",
+ "kind": "live",
+ "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r2_CONTROLLED_STORAGE_20260912.xlsx",
+ "app_master_version": "v2.25r2 CONTROLLED STORAGE",
+ "locator_model": "sonnet",
+ "verifier_models": [
+  "sonnet",
+  "opus"
+ ],
+ "coder_model": "sonnet",
+ "backend": "batch",
+ "prompt_version": "gate6-v1.2 (locator) / gate6-v1.3 (recut) / gate6-v1.1 (verifier, coder)",
+ "prompt_versions": {
+  "locator": "gate6-v1.2",
+  "recut": "gate6-v1.3",
+  "verifier": "gate6-v1.1",
+  "coder": "gate6-v1.1"
+ },
+ "branches": [
+  "Roman Catholic"
+ ],
+ "retrieval": "PER_STANDARD",
+ "routing": "SONNET_WITH_OPUS_SLICE",
+ "slice_rows": [
+  "BSR-AN-05",
+  "BSR-EO-04",
+  "BSR-EO-05",
+  "BSR-EO-09"
+ ],
+ "projection_per_cell_usd": 0.405,
+ "branch_cost_cap_usd": 25.0,
+ "branch_spend": {
+  "Roman Catholic": {
+   "cells": 34,
+   "calls": 582,
+   "cost_usd": 15.798,
+   "calls_per_cell": 17.12,
+   "cost_per_cell_usd": 0.4646,
+   "projection_per_cell_usd": 0.405,
+   "projected_usd": 13.77,
+   "cap_usd": 25.0,
+   "over_cap": false,
+   "estimated": false,
+   "by_role": {
+    "locator/sonnet": {
+     "calls": 207,
+     "cost_usd": 10.833422999999998
+    },
+    "verifier/sonnet": {
+     "calls": 207,
+     "cost_usd": 3.5051760000000005
+    },
+    "recut/sonnet": {
+     "calls": 10,
+     "cost_usd": 0.06618
+    },
+    "coder/sonnet": {
+     "calls": 158,
+     "cost_usd": 1.3932660000000006
+    }
+   }
+  }
+ },
+ "updated_at": "2026-09-12T16:02:57Z"
+}
