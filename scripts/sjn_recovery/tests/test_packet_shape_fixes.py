@@ -147,8 +147,12 @@ class _Reg:
         return None
 
 
+_PHRASES = {"a": "maker of heaven and earth", "b": "factorem caeli et terrae", "c": "the Father almighty", "d": "almighty, maker of heaven",
+            "e": "of heaven and earth"}      # distinct texts: since session 6 (R6-4) an identical phrase takes no second slot
+
+
 def _accepted(cid, rid, tier, chunk="the Father almighty, maker of heaven and earth", witness=False):
-    return {"candidate_id": cid, "pass": 1, "registry_id": rid, "locator": "L", "phrase": "maker of heaven and earth",
+    return {"candidate_id": cid, "pass": 1, "registry_id": rid, "locator": "L", "phrase": _PHRASES.get(cid, "maker of heaven and earth"),
             "rationale": "r", "floor_claim": "FULL", "chunk_text": chunk, "chunk_hash": "h", "division": "d",
             "fallback_tier": False, "witness": witness, "effective_tier": tier, "locator_rank": 1}
 

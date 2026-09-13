@@ -6251,6 +6251,17 @@
    "source_note_guard": "ok",
    "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
    "raw": "{\"rendered_state\": \"A-SF\", \"diverges_from_family_code\": true, \"state_reason\": \"The verifier floor is PARTIAL: the Catechism affirms Christ subsists permanently 'in two entire distinct natures, and one person, forever,' a narrower proposition entailing no conversion of natures, wholly within the shared floor, even though the family remains coded Q for the broader two-natures metaphysic.\", \"source_note\": \"The Westminster Larger Catechism (Q.36) states Christ 'was and continues to be God and man, in two entire distinct natures, and one person, forever,' affirming permanent, unconverted union of both natures.\"}"
+  },
+  "Q-420-p1-BSR-RP-06-1": {
+   "status": "DONE",
+   "call_id": "13b69ec7058caa81192a8fc8",
+   "rendered_state": "A",
+   "diverges_from_family_code": true,
+   "state_reason": "Verifier floor is FULL, not PARTIAL: the Belgic Confession explicitly affirms both natures retain distinct properties without conversion, matching the controlled proposition directly rather than only within a narrower shared floor, so the family's Q code does not hold for this witness.",
+   "source_note": "The Belgic Confession (Article 19) states Christ's divine and human natures are united in one person, each retaining its own distinct properties, without conversion of one into the other.",
+   "source_note_guard": "ok",
+   "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": true, \"state_reason\": \"Verifier floor is FULL, not PARTIAL: the Belgic Confession explicitly affirms both natures retain distinct properties without conversion, matching the controlled proposition directly rather than only within a narrower shared floor, so the family's Q code does not hold for this witness.\", \"source_note\": \"The Belgic Confession (Article 19) states Christ's divine and human natures are united in one person, each retaining its own distinct properties, without conversion of one into the other.\"}"
   }
  },
  "phase": "DONE",
@@ -6459,18 +6470,18 @@
  "allocation": {
   "kept": [
    "Q-420-p1-BSR-RP-01-1",
-   "Q-420-p1-BSR-RP-04-1",
-   "Q-420-p1-BSR-RP-06-1"
+   "Q-420-p1-BSR-RP-06-1",
+   "Q-420-p1-BSR-RP-02-1"
   ],
   "roles": {
    "Q-420-p1-BSR-RP-01-1": "PRIMARY",
-   "Q-420-p1-BSR-RP-04-1": "PRIMARY",
-   "Q-420-p1-BSR-RP-06-1": "PRIMARY"
+   "Q-420-p1-BSR-RP-06-1": "PRIMARY",
+   "Q-420-p1-BSR-RP-02-1": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {
-   "Q-420-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
-   "Q-420-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
+   "Q-420-p1-BSR-RP-04-1": "SAME_TEXT parallel witness of Q-420-p1-BSR-RP-01-1: its phrase is textually identical to the seated phrase; takes no slot",
+   "Q-420-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: the cap was filled by groups ['crcna and rca', 'opc and westminster churches'])",
    "Q-420-p1-BSR-RP-05-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
    "Q-420-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
    "Q-420-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
@@ -6488,13 +6499,22 @@
   },
   "slot_order": {
    "Q-420-p1-BSR-RP-01-1": 0,
-   "Q-420-p1-BSR-RP-04-1": 1,
-   "Q-420-p1-BSR-RP-06-1": 2
+   "Q-420-p1-BSR-RP-06-1": 2,
+   "Q-420-p1-BSR-RP-02-1": 3
+  },
+  "parallel_witnesses": {
+   "Q-420-p1-BSR-RP-01-1": [
+    {
+     "candidate_id": "Q-420-p1-BSR-RP-04-1",
+     "registry_id": "BSR-RP-04",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
  "coder_skipped": {
-  "Q-420-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
-  "Q-420-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
+  "Q-420-p1-BSR-RP-04-1": "SAME_TEXT parallel witness of Q-420-p1-BSR-RP-01-1: its phrase is textually identical to the seated phrase; takes no slot",
+  "Q-420-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: the cap was filled by groups ['crcna and rca', 'opc and westminster churches'])",
   "Q-420-p1-BSR-RP-05-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
   "Q-420-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
   "Q-420-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"

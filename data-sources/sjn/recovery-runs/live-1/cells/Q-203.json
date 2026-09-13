@@ -919,40 +919,17 @@
    }
   },
   "Q-203-p1-BSR-LU-01-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "c21545cc5ff6792a9b754d53",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "He (referring to Jesus Christ, the Son)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The creed asserts this of the Son, not the Father or 'one God' as required.",
-    "floor": "PARTIAL",
-    "floor_reason": "Judgment is affirmed but attributed to the Son, a narrower subject than the required 'GOD (the one God, or the Father)'.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "FAMILY_VARIATION"
-    ],
-    "verdict_model": "ACCEPT_WITH_CAVEAT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The clause clearly asserts divine judgment but the subject is the Son (Christ), not the Father or 'one God' as the predicate's required subject specifies; since the Son is consubstantial with the Father in the creed's theology, this is a narrower/related but not identical subject match.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (referring to Jesus Christ, the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this of the Son, not the Father or 'one God' as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Judgment is affirmed but attributed to the Son, a narrower subject than the required 'GOD (the one God, or the Father)'.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause clearly asserts divine judgment but the subject is the Son (Christ), not the Father or 'one God' as the predicate's required subject specifies; since the Son is consubstantial with the Father in the creed's theology, this is a narrower/related but not identical subject match.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -969,43 +946,110 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "c21545cc5ff6792a9b754d53",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "He (referring to Jesus Christ, the Son)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this of the Son, not the Father or 'one God' as required.",
+      "floor": "PARTIAL",
+      "floor_reason": "Judgment is affirmed but attributed to the Son, a narrower subject than the required 'GOD (the one God, or the Father)'.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "FAMILY_VARIATION"
+      ],
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The clause clearly asserts divine judgment but the subject is the Son (Christ), not the Father or 'one God' as the predicate's required subject specifies; since the Son is consubstantial with the Father in the creed's theology, this is a narrower/related but not identical subject match.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (referring to Jesus Christ, the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this of the Son, not the Father or 'one God' as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Judgment is affirmed but attributed to the Son, a narrower subject than the required 'GOD (the one God, or the Father)'.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause clearly asserts divine judgment but the subject is the Son (Christ), not the Father or 'one God' as the predicate's required subject specifies; since the Son is consubstantial with the Father in the creed's theology, this is a narrower/related but not identical subject match.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "3b38d8274de308f0a18e63eb",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "He (referring to the only-begotten Son of God, Jesus Christ)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Creed asserts in its own voice that the Son shall come again to judge the living and the dead.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts divine judgment as an act of the Son, matching the predicate's definition exactly.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the Son (required subject), and the Creed asserts the predicate as a positive confession of faith, not a formula or report of another's view.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"He (referring to the only-begotten Son of God, Jesus Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Creed asserts in its own voice that the Son shall come again to judge the living and the dead.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts divine judgment as an act of the Son, matching the predicate's definition exactly.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the Son (required subject), and the Creed asserts the predicate as a positive confession of faith, not a formula or report of another's view.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-203-p1-BSR-LU-01-3": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "ad7bc813b5a179d8232ac703",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "He (referring to Jesus Christ, the Son)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The creed asserts in its own voice that Christ will come to judge, but the subject is the Son, not the Father or 'the one God' as required.",
-    "floor": "PARTIAL",
-    "floor_reason": "Judgment is affirmed but attributed to the Son's parousia, a narrower Christological claim than the required subject (God/the Father).",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "FAMILY_VARIATION"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical subject of the judging act is Jesus Christ (the Son), not God the Father or 'the one God' as the predicate's required subject specifies.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (referring to Jesus Christ, the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts in its own voice that Christ will come to judge, but the subject is the Son, not the Father or 'the one God' as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Judgment is affirmed but attributed to the Son's parousia, a narrower Christological claim than the required subject (God/the Father).\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the judging act is Jesus Christ (the Son), not God the Father or 'the one God' as the predicate's required subject specifies.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1022,45 +1066,110 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "ad7bc813b5a179d8232ac703",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "He (referring to Jesus Christ, the Son)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts in its own voice that Christ will come to judge, but the subject is the Son, not the Father or 'the one God' as required.",
+      "floor": "PARTIAL",
+      "floor_reason": "Judgment is affirmed but attributed to the Son's parousia, a narrower Christological claim than the required subject (God/the Father).",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "FAMILY_VARIATION"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject of the judging act is Jesus Christ (the Son), not God the Father or 'the one God' as the predicate's required subject specifies.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (referring to Jesus Christ, the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts in its own voice that Christ will come to judge, but the subject is the Son, not the Father or 'the one God' as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Judgment is affirmed but attributed to the Son's parousia, a narrower Christological claim than the required subject (God/the Father).\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the judging act is Jesus Christ (the Son), not God the Father or 'the one God' as the predicate's required subject specifies.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "f8571526e83a386b304b113b",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "He (Jesus Christ, His only Son, our Lord)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed asserts in its own voice, as a confession of belief, that Christ shall come to judge the quick and the dead.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that the Son will judge the living and the dead, which is the paradigmatic case of divine judgment predicated of the Son.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, correct subject (the Son as divine), and a direct creedal assertion of divine judgment.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"He (Jesus Christ, His only Son, our Lord)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts in its own voice, as a confession of belief, that Christ shall come to judge the quick and the dead.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the Son will judge the living and the dead, which is the paradigmatic case of divine judgment predicated of the Son.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, correct subject (the Son as divine), and a direct creedal assertion of divine judgment.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-203-p1-BSR-LU-02-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "b913056dcb200cb23b51eefa",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "Christ",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The confession asserts in its own voice that Christ will appear for judgment and raise the dead.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage asserts judgment performed by Christ, not explicitly by God/the Father as required.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical subject is Christ, not God or the Father as required by the predicate's subject constraint.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts in its own voice that Christ will appear for judgment and raise the dead.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts judgment performed by Christ, not explicitly by God/the Father as required.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is Christ, not God or the Father as required by the predicate's subject constraint.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1086,45 +1195,121 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "b913056dcb200cb23b51eefa",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "Christ",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The confession asserts in its own voice that Christ will appear for judgment and raise the dead.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage asserts judgment performed by Christ, not explicitly by God/the Father as required.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject is Christ, not God or the Father as required by the predicate's subject constraint.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts in its own voice that Christ will appear for judgment and raise the dead.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts judgment performed by Christ, not explicitly by God/the Father as required.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is Christ, not God or the Father as required by the predicate's subject constraint.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "677dfabef239a32fbce16994",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "Christ",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession positively teaches this as its own doctrine ('they teach that... Christ will appear for judgment').",
+    "floor": "FULL",
+    "floor_reason": "The passage asserts that Christ, as divine, will appear for judgment and judge the living and the dead, directly matching the predicate for the Son.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The chunk directly and assertively affirms Christ's divine judgment, matching the required subject and predicate in the defined sense.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession positively teaches this as its own doctrine ('they teach that... Christ will appear for judgment').\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts that Christ, as divine, will appear for judgment and judge the living and the dead, directly matching the predicate for the Son.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The chunk directly and assertively affirms Christ's divine judgment, matching the required subject and predicate in the defined sense.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-203-p1-BSR-LU-02-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "cf1b9a137459f9ce2193a96d",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "The same Christ",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The confession asserts this of Christ, not of God the Father or the one God as such.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage affirms judgment by Christ specifically, which is a narrower proposition than the required subject (God/the Father); it falls under Christ's divine judgment but the required_subject excludes Christ's human nature and specifies God/Father, so this is a Son-scoped assertion not matching the stated required_subject.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The judging subject named is 'the same Christ,' not God or the Father as required, so subject_is_required is N, making this REJECT despite verbatim phrase and clear assertion.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The same Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts this of Christ, not of God the Father or the one God as such.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage affirms judgment by Christ specifically, which is a narrower proposition than the required subject (God/the Father); it falls under Christ's divine judgment but the required_subject excludes Christ's human nature and specifies God/Father, so this is a Son-scoped assertion not matching the stated required_subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The judging subject named is 'the same Christ,' not God or the Father as required, so subject_is_required is N, making this REJECT despite verbatim phrase and clear assertion.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1150,6 +1335,109 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "cf1b9a137459f9ce2193a96d",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "The same Christ",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The confession asserts this of Christ, not of God the Father or the one God as such.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage affirms judgment by Christ specifically, which is a narrower proposition than the required subject (God/the Father); it falls under Christ's divine judgment but the required_subject excludes Christ's human nature and specifies God/Father, so this is a Son-scoped assertion not matching the stated required_subject.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The judging subject named is 'the same Christ,' not God or the Father as required, so subject_is_required is N, making this REJECT despite verbatim phrase and clear assertion.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The same Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts this of Christ, not of God the Father or the one God as such.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage affirms judgment by Christ specifically, which is a narrower proposition than the required subject (God/the Father); it falls under Christ's divine judgment but the required_subject excludes Christ's human nature and specifies God/Father, so this is a Son-scoped assertion not matching the stated required_subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The judging subject named is 'the same Christ,' not God or the Father as required, so subject_is_required is N, making this REJECT despite verbatim phrase and clear assertion.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "90fa15caefc13a4c551f21c6",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "The same Christ (the Son of God, true God and true man)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Confession teaches this in its own doctrinal voice, not quoting or reporting an opponent's view.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that Christ, affirmed as true God and true man, will come again to judge the living and the dead, matching the predicate for the Son as divine.",
+    "hazard_flags": [
+     "FAMILY_VARIATION"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The subject is the divine Son, the verb 'judge' is asserted in the Confession's own teaching voice, and the proposition matches the predicate at FULL floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The same Christ (the Son of God, true God and true man)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession teaches this in its own doctrinal voice, not quoting or reporting an opponent's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that Christ, affirmed as true God and true man, will come again to judge the living and the dead, matching the predicate for the Son as divine.\", \"hazard_flags\": [\"FAMILY_VARIATION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The subject is the divine Son, the verb 'judge' is asserted in the Confession's own teaching voice, and the proposition matches the predicate at FULL floor.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   }
  },
@@ -1164,6 +1452,28 @@
    "source_note_guard": "ok",
    "scope_caveat": "The Book of Concord is subscribed by Lutheran churches worldwide; the online text used here is a public-domain translation on a private site, and the LCMS and ELCA differ in how strictly they subscribe.",
    "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"The verifier confirms FULL floor with God as grammatical subject asserting divine judgment of the heart, matching the shared proposition of divine judgment affirmed by the Restoration comparator; family code A holds.\", \"source_note\": \"The Book of Concord's Apology of the Augsburg Confession (Article IV, §34–37) states that God judges the heart, affirming divine judgment as central to human accountability before God.\"}"
+  },
+  "Q-203-p1-BSR-LU-02-1": {
+   "status": "DONE",
+   "call_id": "d6d19a5d4517fe56a86bd096",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: Article XVII affirms Christ will appear for judgment and raise the dead, matching the shared proposition of divine judgment at the controlled scope, consistent with the family code.",
+   "source_note": "The Augsburg Confession (Article XVII) states that Christ will appear for judgment and raise all the dead, granting eternal life to the elect and condemning the ungodly.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Book of Concord is subscribed by Lutheran churches worldwide; the online text used here is a public-domain translation on a private site, and the LCMS and ELCA differ in how strictly they subscribe.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: Article XVII affirms Christ will appear for judgment and raise the dead, matching the shared proposition of divine judgment at the controlled scope, consistent with the family code.\", \"source_note\": \"The Augsburg Confession (Article XVII) states that Christ will appear for judgment and raise all the dead, granting eternal life to the elect and condemning the ungodly.\"}"
+  },
+  "Q-203-p1-BSR-LU-01-2": {
+   "status": "DONE",
+   "call_id": "7d978673435891e261968ffa",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: the Nicene Creed directly affirms Christ will judge the living and the dead, matching the shared divine judgment proposition at the controlled scope, consistent with the family code.",
+   "source_note": "The Nicene Creed, included in the Book of Concord's Ecumenical Creeds, states that Christ 'shall come again with glory to judge the quick and the dead.'",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Book of Concord is subscribed by Lutheran churches worldwide; the online text used here is a public-domain translation on a private site, and the LCMS and ELCA differ in how strictly they subscribe.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the Nicene Creed directly affirms Christ will judge the living and the dead, matching the shared divine judgment proposition at the controlled scope, consistent with the family code.\", \"source_note\": \"The Nicene Creed, included in the Book of Concord's Ecumenical Creeds, states that Christ 'shall come again with glory to judge the quick and the dead.'\"}"
   }
  },
  "phase": "DONE",
@@ -1195,6 +1505,82 @@
    "recut_from": null,
    "exhaustion_batch": null,
    "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-203-p1-BSR-LU-02-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-02",
+   "locator": "Augsburg Confession: Article XVII: Of Christ’s Return to Judgment, ¶1–5",
+   "phrase": "Christ will appear for judgment, and will raise up all the dead",
+   "rationale": "Confesses Christ, true God, as the one who will appear for judgment, asserting divine judgment of all mankind.",
+   "floor_claim": "FULL",
+   "chunk_text": "Also they teach that at the Consummation of the World Christ will appear for judgment, and will raise up all the dead; He will give to the godly and elect eternal life and everlasting joys, but ungodly men and the devils He will condemn to be tormented without end. They condemn the Anabaptists, who think that there will be an end to the punishments of condemned men and devils. They condemn also others who are now spreading certain Jewish opinions, that before the resurrection of the dead the godly shall take possession of the kingdom of the world, the ungodly being everywhere suppressed.",
+   "chunk_hash": "52e9a2b3881cdb60a4d0377e0d080d968dd489354302392506fa4a21ba1e58fc",
+   "division": "paragraph-range",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-203-p1-BSR-LU-01-2",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Ecumenical Creeds: The Nicene Creed",
+   "phrase": "He shall come again with glory to judge the quick and the dead",
+   "rationale": "Confesses that the one Lord Jesus Christ, 'very God of very God,' will judge the living and the dead, asserting divine judgment of the one God.",
+   "floor_claim": "FULL",
+   "chunk_text": "I believe in one God, the Father Almighty, Maker of heaven and earth, and of all things visible and invisible. And in one Lord Jesus Christ, the only-begotten Son of God, begotten of the Father before all worlds, God of God, Light of Light, very God of very God, begotten, not made, being of one substance with the Father; by whom all things were made; who for us men, and for our salvation, came down from heaven, and was incarnate by the Holy Ghost of the Virgin Mary, and was made man, and was crucified also for us under Pontius Pilate; He suffered and was buried; and the third day He rose again according to the Scriptures; and ascended into heaven, and sitteth on the right hand of the Father; and He shall come again with glory to judge the quick and the dead; whose kingdom shall have no end. And I believe in the Holy Ghost, the Lord and Giver of life, who proceedeth from the Father and the Son; who with the Father and the Son together is worshiped and glorified; who spake by the Prophets. And I believe in one holy catholic and apostolic Church.I acknowledge one Baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen.",
+   "chunk_hash": "a0e2483760350cc8f6d3bf00a9a9b66a4d458be43b24a7bc85e77c71b387ecb7",
+   "division": "section",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 2,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
+  },
+  {
+   "candidate_id": "Q-203-p1-BSR-LU-02-2",
+   "pass": 1,
+   "registry_id": "BSR-LU-02",
+   "locator": "Augsburg Confession: Article III: Of the Son of God, ¶1–6",
+   "phrase": "The same Christ shall openly come again to judge the quick and the dead",
+   "rationale": "States Christ, confessed as true God in the same article, will judge the living and dead at the last day.",
+   "floor_claim": "FULL",
+   "chunk_text": "Also they teach that the Word, that is, the Son of God, did assume the human nature in the womb of the blessed Virgin Mary, so that there are two natures, the divine and the human, inseparably enjoined in one Person, one Christ, true God and true man, who was born of the Virgin Mary, truly suffered, was crucified, dead, and buried, that He might reconcile the Father unto us, and be a sacrifice, not only for original guilt, but also for all actual sins of men. He also descended into hell, and truly rose again the third day; afterward He ascended into heaven that He might sit on the right hand of the Father, and forever reign and have dominion over all creatures, and sanctify them that believe in Him, by sending the Holy Ghost into their hearts, to rule, comfort, and quicken them, and to defend them against the devil and the power of sin. The same Christ shall openly come again to judge the quick and the dead, etc., according to the Apostles' Creed.",
+   "chunk_hash": "4cec11738280c9e6d691c9625797b9aae2636f36e44b9b2709531b13930975d6",
+   "division": "paragraph-range",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 2,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
+  },
+  {
+   "candidate_id": "Q-203-p1-BSR-LU-01-3",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Ecumenical Creeds: The Apostles' Creed",
+   "phrase": "from thence He shall come to judge the quick and the dead",
+   "rationale": "Confesses that Christ, seated at the right hand of God the Father Almighty, shall come to judge, affirming divine judgment.",
+   "floor_claim": "FULL",
+   "chunk_text": "I believe in God the Father Almighty, Maker of heaven and earth. And in Jesus Christ, His only Son, our Lord; who was conceived by the Holy Ghost, born of the Virgin Mary; suffered under Pontius Pilate, was crucified, dead, and buried; He descended into hell; the third day He rose again from the dead; He ascended into heaven, and sitteth on the right hand of God the Father Almighty; from thence He shall come to judge the quick and the dead. I believe in the Holy Ghost; the holy catholic* Church, the communion of saints; the forgiveness of sins; the resurrection of the body; and the life everlasting. Amen. * catholic means “universal” and is not a reference to the Roman Catholic Church. Biblical references for the Apostles' Creed .",
+   "chunk_hash": "859723ad0cc15a05e20806e0bb107bacbfb7c2ad07fc5b22e8d9518a16ab33d2",
+   "division": "section",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 3,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
   }
  ],
  "fallback_used": false,
@@ -1220,26 +1606,60 @@
  },
  "allocation": {
   "kept": [
-   "Q-203-p1-BSR-LU-01-1"
+   "Q-203-p1-BSR-LU-01-1",
+   "Q-203-p1-BSR-LU-02-1",
+   "Q-203-p1-BSR-LU-01-2"
   ],
   "roles": {
-   "Q-203-p1-BSR-LU-01-1": "PRIMARY"
+   "Q-203-p1-BSR-LU-01-1": "PRIMARY",
+   "Q-203-p1-BSR-LU-02-1": "PRIMARY",
+   "Q-203-p1-BSR-LU-01-2": "PRIMARY"
   },
   "english_witness": {},
-  "dropped": {},
+  "dropped": {
+   "Q-203-p1-BSR-LU-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)",
+   "Q-203-p1-BSR-LU-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lutheran churches subscribing the book of concord' already holds a slot)"
+  },
   "witness_only": [],
   "groups": {
-   "Q-203-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord"
+   "Q-203-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord",
+   "Q-203-p1-BSR-LU-02-1": "lcms",
+   "Q-203-p1-BSR-LU-01-2": "lutheran churches subscribing the book of concord",
+   "Q-203-p1-BSR-LU-02-2": "lcms",
+   "Q-203-p1-BSR-LU-01-3": "lutheran churches subscribing the book of concord"
   },
   "slot_order": {
-   "Q-203-p1-BSR-LU-01-1": 0
-  }
+   "Q-203-p1-BSR-LU-01-1": 0,
+   "Q-203-p1-BSR-LU-02-1": 1,
+   "Q-203-p1-BSR-LU-01-2": 2
+  },
+  "parallel_witnesses": {}
  },
- "coder_skipped": {},
+ "coder_skipped": {
+  "Q-203-p1-BSR-LU-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)",
+  "Q-203-p1-BSR-LU-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lutheran churches subscribing the book of concord' already holds a slot)"
+ },
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-203-p1-BSR-LU-01-2": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-203-p1-BSR-LU-01-3": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-203-p1-BSR-LU-02-1": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-203-p1-BSR-LU-02-2": [
+    "REJECT",
+    "ACCEPT_WITH_CAVEAT"
+   ]
+  }
  },
  "supplements": [
   {

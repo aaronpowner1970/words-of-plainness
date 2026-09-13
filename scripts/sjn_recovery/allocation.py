@@ -25,11 +25,20 @@ Order of operations on a cell's surviving (verifier-accepted) candidates:
                          locator's floor claim (FULL before PARTIAL), and only as the last resort by
                          registry row order, which orders presentation but never decides which body
                          is heard. Then each group's second candidate, in the same group order, etc.
-  5. cap                 MAX_CANDIDATES kept; lower-tier survivors marked corroborating
+  5. one text, one slot  (session 6, R6-4, RATIFIED) walking the slot order, a candidate whose phrase is
+                         textually identical — casefolded, whitespace and punctuation normalised
+                         (same_text_key) — to a candidate ALREADY SEATED takes no slot, whatever its
+                         speaks_for group or row (Q-243: one row twice), and is recorded on the seated
+                         entry as a parallel witness with its own registry_id. A row declared to
+                         publish the same text in DIFFERENT wording (rulings.same_text_rows:
+                         BSR-EO-14 -> BSR-EO-07) is a parallel witness of the declared row's seated
+                         candidate whatever its wording, and yields the slot to it whatever the order
+  6. cap                 MAX_CANDIDATES kept; lower-tier survivors marked corroborating
 
 The function is pure: it returns which candidate ids are kept, paired, suppressed or cut, with
 the reason for each, and never touches model calls or files."""
 import re
+import unicodedata
 
 from .config import MAX_CANDIDATES
 from .registry import tier_rank
@@ -211,13 +220,27 @@ def _division_key(locator):
     return m.group(1).upper() if m else None
 
 
-def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None):
+def same_text_key(phrase):
+    """R6-4: the phrase as compared by the one-text-one-slot guard — NFKC, casefolded, every punctuation and symbol
+    character (any quote or dash style) removed, whitespace collapsed. Nothing else: a different word, a different word
+    order or a spelling variant is a different text."""
+    t = unicodedata.normalize("NFKC", phrase or "").casefold()
+    t = "".join(" " if unicodedata.category(ch)[0] in "PS" else ch for ch in t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None, same_text_rows=None):
     """cands: surviving candidates as dicts carrying candidate_id, registry_id, fallback_tier, witness,
-    effective_tier, authority_tier, reception_scope, locator, floor_claim (and anything else; untouched).
+    effective_tier, authority_tier, reception_scope, locator, floor_claim, phrase (and anything else; untouched).
     groups: {registry_id: group} (speaks_for_groups / group_map); a row absent from it is its own group.
+    same_text_rows: {alternate_rid: controlling_rid} (rulings.same_text_rows); None reads the rulings file.
     Returns {"kept": [ids in card order], "roles": {id: "CONTROLLING"|"CORROBORATING"|"PRIMARY"},
              "english_witness": {controlling_id: witness_id}, "dropped": {id: reason}, "witness_only": [ids],
-             "corroborating_lower_tier": {id: bool}, "groups": {id: group}, "slot_order": {id: n}}"""
+             "corroborating_lower_tier": {id: bool}, "groups": {id: group}, "slot_order": {id: n},
+             "parallel_witnesses": {seated_id: [{"candidate_id", "registry_id", "rule"}]}}"""
+    if same_text_rows is None:
+        from .rulings import same_text_rows as _declared
+        same_text_rows = _declared()
     pairs = pairs or {}
     gmap = group_map(groups)
     by_id = {c["candidate_id"]: c for c in cands}
@@ -299,8 +322,44 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None):
     for seq in tier_sequences:
         for n, i in enumerate(seq):
             slot_pos[i] = n
-    kept = sorted(by_tier[:cap], key=lambda i: (rank(i), slot_pos[i]))
-    for i in by_tier[cap:]:
+
+    # 5. one text, one slot (R6-4). Declared same-text rows first: while the declared row has a live candidate, its
+    # alternate's candidates are held out of the slot order, so the declared row takes the slot whatever the order; if
+    # none of the declared row's candidates is then seated, the alternates compete as ordinary candidates.
+    def seat(sequence):
+        seated, parallel, cut, by_key = [], {}, [], {}
+        for i in sequence:
+            k = same_text_key(by_id[i].get("phrase"))
+            if k and k in by_key:
+                parallel.setdefault(by_key[k], []).append({"candidate_id": i, "registry_id": by_id[i]["registry_id"], "rule": "SAME_TEXT"})
+                continue
+            if len(seated) < cap:
+                seated.append(i)
+                if k:
+                    by_key[k] = i
+            else:
+                cut.append(i)
+        return seated, parallel, cut
+
+    declared = {alt: ctrl for alt, ctrl in (same_text_rows or {}).items()}
+    held = [i for i in by_tier if by_id[i]["registry_id"] in declared
+            and any(by_id[j]["registry_id"] == declared[by_id[i]["registry_id"]] for j in by_tier)]
+    seated, parallel, cut = seat([i for i in by_tier if i not in held])
+    for i in held:
+        ctrl = next((j for j in seated if by_id[j]["registry_id"] == declared[by_id[i]["registry_id"]]), None)
+        if ctrl is None:                                  # the declared row seated nothing: compete as usual
+            seated, parallel, cut = seat(by_tier)
+            break
+        parallel.setdefault(ctrl, []).append({"candidate_id": i, "registry_id": by_id[i]["registry_id"], "rule": "SAME_TEXT_ROW",
+                                              "same_text_as": declared[by_id[i]["registry_id"]]})
+    for ctrl, ws in parallel.items():
+        for w in ws:
+            dropped[w["candidate_id"]] = (f"SAME_TEXT parallel witness of {ctrl}: its phrase is textually identical to the seated phrase; takes no slot"
+                                          if w["rule"] == "SAME_TEXT" else
+                                          f"SAME_TEXT_ROW parallel witness of {ctrl}: {w['registry_id']} publishes the same text as "
+                                          f"{w['same_text_as']} (declared, different wording); takes no slot")
+    kept = sorted(seated, key=lambda i: (rank(i), slot_pos[i]))
+    for i in cut:
         holders = sorted({group_of(j) for j in kept if rank(j) == rank(i)})
         dropped[i] = ("candidate cap reached after tier allocation" +
                       (f" (speaks_for group rule: its group {group_of(i)!r} already holds a slot" if group_of(i) in holders else
@@ -316,4 +375,5 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None):
             dropped[w] = f"paired witness of {ctrl}, which the candidate cap cut"
     return {"kept": kept, "roles": roles, "english_witness": {c: w for c, w in witness_link.items() if c in kept},
             "dropped": dropped, "witness_only": witness_only, "corroborating_lower_tier": corr,
-            "groups": {i: group_of(i) for i in order}, "slot_order": {i: slot_pos[i] for i in kept}}
+            "groups": {i: group_of(i) for i in order}, "slot_order": {i: slot_pos[i] for i in kept},
+            "parallel_witnesses": {c: ws for c, ws in parallel.items() if c in kept}}

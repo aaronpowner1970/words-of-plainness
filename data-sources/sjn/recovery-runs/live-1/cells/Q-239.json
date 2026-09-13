@@ -1414,6 +1414,17 @@
    "source_note_guard": "ok",
    "scope_caveat": "The Articles of Religion and the EUB Confession are constitutionally protected standards of the United Methodist Church. The Global Methodist Church, which separated in 2022, holds the same Articles; its standards are cited here from its 2022 Transitional Book of Doctrines and Discipline, the only edition published on the church's own domain, and the Articles are unchanged in the 2024 edition. The Wesleyan Church holds its own articles, which the registry lists separately.",
    "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Floor is FULL: the Article directly names the Son as 'the Word of the Father, the very and eternal God,' matching the comparator's identification of the Word as God at the controlled proposition floor.\", \"source_note\": \"The Global Methodist Church's Articles of Religion (Article II) identify the Son as 'the Word of the Father, the very and eternal God,' affirming his eternal, undivided deity within one person.\"}"
+  },
+  "Q-239-p1-BSR-MW-03-2": {
+   "status": "DONE",
+   "call_id": "a4e77a7a7c43f4ac27b6df24",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: the confession positively identifies the Son as 'the eternal Word made flesh,' matching the controlled proposition shared with the Restoration comparator's identification of the Word as Christ. Family code A holds.",
+   "source_note": "The Global Methodist Church's EUB Confession of Faith, Article II, states that Jesus Christ 'is the eternal Word made flesh, the only begotten Son of the Father.'",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Articles of Religion and the EUB Confession are constitutionally protected standards of the United Methodist Church. The Global Methodist Church, which separated in 2022, holds the same Articles; its standards are cited here from its 2022 Transitional Book of Doctrines and Discipline, the only edition published on the church's own domain, and the Articles are unchanged in the 2024 edition. The Wesleyan Church holds its own articles, which the registry lists separately.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the confession positively identifies the Son as 'the eternal Word made flesh,' matching the controlled proposition shared with the Restoration comparator's identification of the Word as Christ. Family code A holds.\", \"source_note\": \"The Global Methodist Church's EUB Confession of Faith, Article II, states that Jesus Christ 'is the eternal Word made flesh, the only begotten Son of the Father.'\"}"
   }
  },
  "phase": "DONE",
@@ -1534,17 +1545,17 @@
  "allocation": {
   "kept": [
    "Q-239-p1-BSR-MW-01-1",
-   "Q-239-p1-BSR-MW-03-1",
-   "Q-239-p1-BSR-MW-02-1"
+   "Q-239-p1-BSR-MW-02-1",
+   "Q-239-p1-BSR-MW-03-2"
   ],
   "roles": {
    "Q-239-p1-BSR-MW-01-1": "PRIMARY",
-   "Q-239-p1-BSR-MW-03-1": "PRIMARY",
-   "Q-239-p1-BSR-MW-02-1": "PRIMARY"
+   "Q-239-p1-BSR-MW-02-1": "PRIMARY",
+   "Q-239-p1-BSR-MW-03-2": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {
-   "Q-239-p1-BSR-MW-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'global methodist church' already holds a slot)"
+   "Q-239-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-239-p1-BSR-MW-01-1: its phrase is textually identical to the seated phrase; takes no slot"
   },
   "witness_only": [],
   "groups": {
@@ -1555,12 +1566,21 @@
   },
   "slot_order": {
    "Q-239-p1-BSR-MW-01-1": 0,
-   "Q-239-p1-BSR-MW-03-1": 1,
-   "Q-239-p1-BSR-MW-02-1": 2
+   "Q-239-p1-BSR-MW-02-1": 2,
+   "Q-239-p1-BSR-MW-03-2": 3
+  },
+  "parallel_witnesses": {
+   "Q-239-p1-BSR-MW-01-1": [
+    {
+     "candidate_id": "Q-239-p1-BSR-MW-03-1",
+     "registry_id": "BSR-MW-03",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
  "coder_skipped": {
-  "Q-239-p1-BSR-MW-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'global methodist church' already holds a slot)"
+  "Q-239-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-239-p1-BSR-MW-01-1: its phrase is textually identical to the seated phrase; takes no slot"
  },
  "empty": false,
  "refinalized": {

@@ -1,0 +1,1624 @@
+{
+ "run_id": "pr-1",
+ "at": "2026-09-13T22:21:02Z",
+ "seed": 20260913,
+ "verifier": "sonnet only, gate6-v1.3",
+ "sample": 30,
+ "leaks": 14,
+ "leak_rate": 0.467,
+ "figures_ranked": [
+  {
+   "figure": "A_floor_leak",
+   "count": 14,
+   "rate": 0.467,
+   "definition": "lines 1–3 Y and the v1.3 re-ruling floors the candidate at WORD_ONLY (not by the formula cap)",
+   "weakness": "one draw of one model: counts resampling noise as leak; the control below measures that noise"
+  },
+  {
+   "figure": "B_inclusive",
+   "count": 17,
+   "rate": 0.567,
+   "definition": "A plus refusals on subject/speech act whose v1.3 floor is also WORD_ONLY (or PARTIAL marked N), outside the five R6-1 families",
+   "weakness": "mixes a line-2 refusal into a floor-rule rate; those candidates would fall for their subject line, not under R6-2"
+  },
+  {
+   "figure": "C_rule_effect_net_of_noise",
+   "count": 11,
+   "rate": 0.367,
+   "definition": "A, and a fresh gate6-v1.2 replicate of the same call (no rule) still accepts at PARTIAL or FULL",
+   "weakness": "one replicate per item: an item near the boundary can land either side on either draw"
+  }
+ ],
+ "control_v12_classes": {
+  "REFUSED_LINE_2_3": 5,
+  "HOLDS": 18,
+  "LEAK": 2,
+  "MOVED_UP": 5
+ },
+ "classes": {
+  "REFUSED_LINE_2_3": 5,
+  "HOLDS": 7,
+  "MOVED_UP": 4,
+  "LEAK": 14
+ },
+ "by_branch": {
+  "Anglican": {
+   "n": 5,
+   "leaks": 2
+  },
+  "Baptist": {
+   "n": 4,
+   "leaks": 2
+  },
+  "Lutheran": {
+   "n": 4,
+   "leaks": 2
+  },
+  "Mennonite / Anabaptist": {
+   "n": 5,
+   "leaks": 1
+  },
+  "Methodist / Wesleyan": {
+   "n": 4,
+   "leaks": 2
+  },
+  "Reformed / Presbyterian": {
+   "n": 4,
+   "leaks": 2
+  },
+  "Roman Catholic": {
+   "n": 4,
+   "leaks": 3
+  }
+ },
+ "regex": {
+  "hedge_shaped_in_sample": 22,
+  "hedge_shaped_and_leak": 11,
+  "hedge_shaped_but_holds_FALSE_POSITIVE": [
+   "PR-02",
+   "PR-03",
+   "PR-06",
+   "PR-12",
+   "PR-20",
+   "PR-22",
+   "PR-23",
+   "PR-24",
+   "PR-25",
+   "PR-29",
+   "PR-30"
+  ],
+  "not_hedge_shaped": 8,
+  "not_hedge_shaped_but_leak_FALSE_NEGATIVE": [
+   "PR-09",
+   "PR-10",
+   "PR-21"
+  ],
+  "precision": 0.5,
+  "recall": 0.786
+ },
+ "frame": {
+  "carded_partial_at_base": 145,
+  "excluded_refused_either_way": [
+   "Q-382-p1-BSR-BA-02-1",
+   "Q-382-p1-BSR-BA-02-2",
+   "Q-390-p1-BSR-BA-02-1",
+   "Q-390-p1-BSR-BA-02-2",
+   "Q-454-p1-BSR-BA-02-1"
+  ],
+  "frame_size": 140,
+  "by_branch": {
+   "Roman Catholic": 20,
+   "Anglican": 25,
+   "Lutheran": 21,
+   "Reformed / Presbyterian": 11,
+   "Baptist": 16,
+   "Methodist / Wesleyan": 22,
+   "Mennonite / Anabaptist": 25
+  },
+  "hedge_shaped_in_frame": 105
+ },
+ "estimate_frame_leaks": {
+  "stratified": 65.0
+ },
+ "decision_rule": "leak rate >= 0.5: apply the rule across all seven branches; below 0.5: apply to nothing but the three refused Baptist cells",
+ "items": [
+  {
+   "sample_id": "PR-01",
+   "branch": "Anglican",
+   "queue_id": "Q-213",
+   "predicate": "Savior",
+   "family_retyped_by_R6_1": true,
+   "candidate_id": "Q-213-p1-BSR-AN-04-1",
+   "registry_id": "BSR-AN-04",
+   "phrase": "Redemption is the act of God which sets us free",
+   "hedge_shaped_stored_reason": false,
+   "card_all_partial": true,
+   "card_size": 2,
+   "class": "REFUSED_LINE_2_3",
+   "leak": false,
+   "control_v12_class": "REFUSED_LINE_2_3",
+   "rule_effect": false,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": "PARTIAL",
+    "floor_capped_by": "NEIGHBOURING_PROPOSITION",
+    "partial_asserts_predicate": "N",
+    "floor_reason": "The passage does assert that redemption is 'the act of God,' which touches the predicate (God's redemptive action) but the sentence's主体 is redemption itself, making the assertion about redemption's origin rather than a direct predication of God as Savior.",
+    "grammatical_subject": "Redemption",
+    "subject_is_required": "N",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "165c9524fe817ba9c8c2ff14",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The clause identifies God as agent of redemptive action, but the grammatical subject is 'Redemption' rather than God himself, so the predicate is not directly asserted of God as required.",
+    "subject_is_required": "N",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "22708ae99b42a61a38bf109e"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage attributes redemptive action to God only indirectly via 'the act of God,' not as the grammatical subject performing the action.",
+    "opus": "The passage attributes the redemptive act — setting us free from evil, sin, and death — directly to God, which is the defined shared saving/redemptive action."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   }
+  },
+  {
+   "sample_id": "PR-02",
+   "branch": "Baptist",
+   "queue_id": "Q-334",
+   "predicate": "Incorporeal / without body",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-334-p1-BSR-BA-01-1",
+   "registry_id": "BSR-BA-01",
+   "phrase": "He is an intelligent, spiritual, and personal Being",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 2,
+   "class": "HOLDS",
+   "leak": false,
+   "control_v12_class": "HOLDS",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "PARTIAL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "Y",
+    "floor_reason": "Calling God a 'spiritual...Being' implies immateriality, a narrower or indirect way of asserting incorporeality without explicitly denying bodily form.",
+    "grammatical_subject": "He (referring to God)",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "7d7db9fdfdfe22747782343e",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "Describing God as a 'spiritual' Being implies a denial of material embodiment, but the text does not explicitly state incorporeality, so it only partially satisfies the predicate.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "85d44b2c6544e22a2bdb3bbe"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "Describing God as a 'spiritual...Being' implies non-material nature but does not explicitly deny bodily existence, making it a narrower claim that falls within the incorporeality floor without fully asserting it."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-03",
+   "branch": "Lutheran",
+   "queue_id": "Q-347",
+   "predicate": "Without passions / impassible",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-347-p3-BSR-LU-01-b13-1",
+   "registry_id": "BSR-LU-01",
+   "phrase": "the divine nature can neither suffer nor die",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 1,
+   "class": "MOVED_UP",
+   "leak": false,
+   "control_v12_class": "HOLDS",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage directly asserts that the divine nature—the very nature of God as instantiated in the Son—cannot suffer or die, which is a direct classical assertion of impassibility.",
+    "grammatical_subject": "the divine nature",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "15f8c9ac537b2a73a96e771a",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts a specific, narrower impassibility claim (the divine nature cannot suffer or die) rather than the broader classical denial of all passive susceptibility to creaturely alteration; it is a particular instance within the floor rather than the full predicate.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "5f65e73062e72d1a72a30065"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage denies suffering/death of the divine nature within a Christological context, a narrower claim than a general assertion of God's impassibility, though closely related.",
+    "opus": "The standard affirms that the divine nature is incapable of suffering and dying, i.e., denies passive susceptibility in the divine nature itself, ascribing passion only to the assumed human nature."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   }
+  },
+  {
+   "sample_id": "PR-04",
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-328",
+   "predicate": "Invisible",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-328-p1-BSR-MA-01-2",
+   "registry_id": "BSR-MA-01",
+   "phrase": "himself the image of the invisible God",
+   "hedge_shaped_stored_reason": false,
+   "card_all_partial": true,
+   "card_size": 1,
+   "class": "REFUSED_LINE_2_3",
+   "leak": false,
+   "control_v12_class": "HOLDS",
+   "rule_effect": false,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The word 'invisible' appears only as part of a fixed biblical epithet ('the image of the invisible God', echoing Col. 1:15) describing Christ's relation to God, not as an independent assertion that God (as subject) is invisible.",
+    "grammatical_subject": "himself (referring to Christ), described as 'the image of the invisible God'",
+    "subject_is_required": "N",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA",
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "9d44e3e376e32bce17d8000c",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The clause attributes invisibility to God only as a background descriptor within a Christological statement about Christ being God's image, not as an independent doctrinal assertion about God's nature.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "2519ea4d96e22fea50064aa4"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The phrase asserts God's invisibility only as an embedded descriptor within a Christological statement about Christ as God's image, not as a developed claim about invisibility as an intrinsic property of divine being."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-05",
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-287",
+   "predicate": "Uncreated",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-287-p1-BSR-MW-03-1",
+   "registry_id": "BSR-MW-03",
+   "phrase": "Eternal Spirit, who is Creator, Sovereign and Preserver of all things visible and invisible",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts that God is Creator, Sovereign and Preserver of all things, which is a claim about God's creative and sustaining activity toward creation, not an assertion that God himself is without origin or dependence on a creator; 'Eternal' alone does not establish the required beginninglessness claim within this quoted phrase.",
+    "grammatical_subject": "God (referenced by the relative pronoun 'who' following 'God, Eternal Spirit')",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "4b18c21e4d276875d3771c23",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage affirms God as 'Eternal' and as Creator of all things visible and invisible, which implies (rather than directly asserts) that God himself is not dependent on any creator or originating act; the explicit focus is on God's creative agency toward others, not on denying His own createdness.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "1ad8912e4ac8084f5730ad26"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts God is 'Eternal Spirit' and 'Creator... of all things visible and invisible,' which implies beginninglessness and non-dependence on any prior cause, but it does not explicitly deny that God depends on an originating act; the unc reatedness is inferred from eternity + universal creatorship rather than directly stated."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-06",
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-404",
+   "predicate": "No adequate likeness or comparison",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-404-p1-BSR-RP-01-1",
+   "registry_id": "BSR-RP-01",
+   "phrase": "The distance between God and the creature is so great",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 3,
+   "class": "REFUSED_LINE_2_3",
+   "leak": false,
+   "control_v12_class": "REFUSED_LINE_2_3",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts a great moral/ontological distance necessitating covenant condescension, not an epistemic denial of adequate likeness or comparison between God and creature; this is a neighbouring proposition about covenantal need, not the predicate itself.",
+    "grammatical_subject": "The distance between God and the creature",
+    "subject_is_required": "N",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "90d5d3c3271e3678134d5dd8",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts a great ontological distance/gap requiring condescension, which is a narrower claim about creaturely dependence rather than a full denial of adequate likeness by God as subject.",
+    "subject_is_required": "N",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "cc2810d1d3577fd5a6a8d199"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts a vast distance necessitating condescension, which entails epistemic/ontological restraint but does not explicitly deny all likeness or comparison as such.",
+    "opus": "It asserts an incommensurable Creator-creature distance such that no natural proportion secures fruition of God, which lies wholly within the floor, but it makes the point soteriologically/covenantally rather than asserting the inadequacy of likeness or comparison as such."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-07",
+   "branch": "Roman Catholic",
+   "queue_id": "Q-273",
+   "predicate": "Eternal power and might",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-273-p1-BSR-RC-07-1",
+   "registry_id": "BSR-RC-07",
+   "phrase": "He is God, one and equal with the Father and the Son",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 2,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts the Spirit's divinity and equality with the Father and Son, but this is a neighbouring proposition about divine status/equality, not a statement of the Spirit's 'eternal power and might' specifically.",
+    "grammatical_subject": "He (the Holy Spirit)",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "6e7e0c4dde31b5c6be35a3ef",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts the Spirit's full divinity and equality with Father and Son, which entails but does not explicitly name 'eternal power and might'.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "2ca9a35283e62c1e6ab9b0dc"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts the Spirit's full divinity and equality with the Father and Son, which entails but does not explicitly name 'eternal power and might'; it is a narrower/adjacent proposition (deity/equality) within the same doctrinal floor of shared divine power."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-08",
+   "branch": "Anglican",
+   "queue_id": "Q-317",
+   "predicate": "Immense / immeasurable",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-317-p1-BSR-AN-01-1",
+   "registry_id": "BSR-AN-01",
+   "phrase": "without body, parts, or passions",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "'Without body, parts, or passions' asserts divine simplicity, incorporeality, and impassibility — a neighbouring proposition — not the predicate of immensity/immeasurability (denial of spatial or metaphysical circumscription), which is a distinct doctrine typically tied to omnipresence/infinity claims rather than the negation of bodily composition.",
+    "grammatical_subject": "one living and true God",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "6673a9502f85a8cf940268c5",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "Denying 'body, parts, or passions' implies God is not materially composed or spatially confined, but it does not explicitly assert unlimited immensity or fill-all-space language; it is a narrower proposition within the floor of denying spatial/metaphysical circumscription.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "49b61ee6b522c0e71e84a859"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "Denying 'parts' entails denial of spatial circumscription, a narrower claim wholly within the immensity floor, though the phrase is primarily about incorporeality/impassibility rather than explicit omnipresence."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-09",
+   "branch": "Baptist",
+   "queue_id": "Q-102",
+   "predicate": "Truthful / faithful",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-102-p1-BSR-BA-02-2",
+   "registry_id": "BSR-BA-02",
+   "phrase": "one only living and true God",
+   "hedge_shaped_stored_reason": false,
+   "card_all_partial": false,
+   "card_size": 2,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "LEAK",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_NEGATIVE (not hedge-shaped, leaks)",
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "'true God' here functions in the classical sense of the one real/genuine God as opposed to false gods/idols (paired with 'living' and 'one only'), not the moral-relational sense of truthful/trustworthy in word or promise; the predicate's proper sense (truthfulness) is not asserted by this clause.",
+    "grammatical_subject": "The Lord our God",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "62c5d245ebb4096bdfacd4e6",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "WORD_ONLY",
+    "floor_reason": "'True God' here contrasts the one real God with false gods/idols (ontological genuineness), not a claim about His truthful, trustworthy speech or character; the moral 'truthfulness' sense appears later in the paragraph ('abundant in goodness and truth') but not within the quoted phrase.",
+    "subject_is_required": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "6d572e4e980b46d13ff3c554"
+   },
+   "stored_floor_reasons": {
+    "sonnet": null
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-10",
+   "branch": "Lutheran",
+   "queue_id": "Q-419",
+   "predicate": "Without change",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-419-p1-BSR-LU-02-1",
+   "registry_id": "BSR-LU-02",
+   "phrase": "there are two natures, the divine and the human, inseparably enjoined in one Person",
+   "hedge_shaped_stored_reason": false,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": "FALSE_NEGATIVE (not hedge-shaped, leaks)",
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts the inseparable union of the two natures in one Person, but says nothing about one nature not being converted or changed into the other; it addresses indivisibility, not immutability of the natures, which is a neighbouring proposition rather than the predicate itself.",
+    "grammatical_subject": "there are two natures, the divine and the human",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL",
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "fbf42c010e16ce9a696a771f",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts that the divine and human natures remain two, distinct, and inseparably united in one Person, which entails the natures are not converted into one another, but it does not explicitly use 'without change' or address conversion/mixture directly.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "66c63567e308e8b8104101fd"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts that the two natures remain distinct ('divine and human') while 'inseparably enjoined in one Person,' which implicitly denies collapse or conversion of one nature into the other, but it never explicitly addresses 'change' or 'conversion'—its explicit emphasis is on inseparability (non-division), not immutability of each nature."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-11",
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-416",
+   "predicate": "Without confusion",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-416-p1-BSR-MA-01-2",
+   "registry_id": "BSR-MA-01",
+   "phrase": "Jesus Christ has both a human and a divine nature",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 1,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "REFUSED_LINE_2_3",
+   "rule_effect": false,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage only asserts that Christ possesses two natures (human and divine); it says nothing about the manner of their union being 'without confusion' or resisting collapse of distinctions, so the specific predicate is not addressed, only a neighbouring claim (existence of dual natures) is made.",
+    "grammatical_subject": "Jesus Christ (within reported clause 'Christian creeds have confessed that Jesus Christ has...')",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING",
+     "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "b173d9e97b7bebdd839d69fc",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "WORD_ONLY",
+    "floor_reason": "The word 'nature(s)' occurs, but the predicate at issue—denial of collapse of distinctions between natures ('without confusion')—is never addressed; the passage only reports a creedal formula about dual nature existence while distancing itself from over-committing to that language.",
+    "subject_is_required": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "NOT_ASSERTION",
+    "call_id": "4fc5d7e1b2692ee2e6163402"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage affirms that Christ has both human and divine natures but does not explicitly assert the 'without confusion' concept (non-collapse of distinctions); it only cautions against overemphasizing either side, implying but not stating the predicate directly."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-12",
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-447",
+   "predicate": "Neither confounding nor dividing",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-447-p1-BSR-MW-01-1",
+   "registry_id": "BSR-MW-01",
+   "phrase": "in unity of this Godhead there are three persons, of one substance, power, and eternity",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "MOVED_UP",
+   "leak": false,
+   "control_v12_class": "MOVED_UP",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts both unity (one substance, power, eternity) and distinction (three persons) of the Godhead, which together constitute the predicate's exclusion of both collapse (via 'three persons') and division (via 'one substance')—even though it uses positive rather than explicit 'neither...nor' negation language.",
+    "grammatical_subject": "there are three persons [in unity of this Godhead]",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "FAMILY_VARIATION"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "328d3dfb565c648b540a4cfd",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "FULL",
+    "floor_reason": "The passage affirms three distinct persons (excluding confounding) united in one substance, power, and eternity (excluding dividing), positively achieving the predicate's content though not using the explicit 'neither...nor' negation formula.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "511a7cc7b7d7239f1e1d4a15"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The text asserts unity (one substance, power, eternity) and distinction (three persons) simultaneously, which supports but does not explicitly state the negative formula 'neither confounding nor dividing'."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-13",
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-300",
+   "predicate": "Not made",
+   "family_retyped_by_R6_1": true,
+   "candidate_id": "Q-300-p1-BSR-RP-03-1",
+   "registry_id": "BSR-RP-03",
+   "phrase": "in and of himself infinite in being, glory, blessedness, and perfection",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts God's self-sufficiency and infinite perfection ('in and of himself infinite in being...'), which is a neighbouring attribute (aseity/self-existence) rather than an explicit denial of creaturehood; it never states or implies 'not made' as such.",
+    "grammatical_subject": "God",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "a3b58c4185be25ed0f8b2890",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The phrase asserts God's aseity ('in and of himself') implying uncreated self-existence, which is narrower than but consistent with denying creaturehood; it does not explicitly say 'not made'.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "06fda4c09bd2864a5b24e9e4"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "Aseity language ('in and of himself infinite in being') entails self-existence and thus indirectly denies creaturehood, but does not explicitly assert 'not made'.",
+    "opus": "The passage asserts aseity (\"in and of himself\") together with eternity and unchangeableness, which entails that God is not made, but it does not in these words explicitly deny creaturehood."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-14",
+   "branch": "Roman Catholic",
+   "queue_id": "Q-193",
+   "predicate": "Sovereign",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-193-p1-BSR-RC-04-1",
+   "registry_id": "BSR-RC-04",
+   "phrase": "one principle of all things, creator of all things invisible and visible",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts God's role as creator/source of all things, a claim about causation and origin, not about supreme dominion or rule; sovereignty (governance/dominion) is a neighbouring but distinct proposition from creatorship.",
+    "grammatical_subject": "The Father...the Son...the holy Spirit (one God)",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL",
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "48aa5b8415f7a0beb1d1d3da",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The text asserts God as 'one principle of all things, creator of all things invisible and visible,' which entails supreme originative authority over creation but does not explicitly use the language of dominion or rule; it is a narrower, creation-grounded proposition within the broader sovereignty floor.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "c1055f5f422eb1f5d7b5c54a"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts God as sole creator and 'one principle of all things,' which implies supreme originative power but does not explicitly assert governing dominion over creation."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-15",
+   "branch": "Anglican",
+   "queue_id": "Q-453",
+   "predicate": "Greater dissimilarity than similarity",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-453-p1-BSR-AN-04-1",
+   "registry_id": "BSR-AN-04",
+   "phrase": "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 2,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "LEAK",
+   "rule_effect": false,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts the incomprehensibility of the divine Persons within a Trinitarian equality formula (Athanasian Creed), a claim about intra-Trinitarian unity and mystery, not about the adequacy or inadequacy of creaturely likeness to the divine mode of being; the predicate of 'greater dissimilarity than similarity' concerning creature-Creator analogy is not addressed here.",
+    "grammatical_subject": "The Father...the Son...and the Holy Ghost",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING",
+     "IDIOM_OR_FORMULA"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "7c9e6bc1167749a0da4d2f60",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage asserts God's (Trinity's) incomprehensibility as an attribute shared equally by the three Persons, not the specific principle that any creaturely likeness to God is exceeded by unlikeness; the topic is intra-Trinitarian equality of attributes, not Creator-creature analogy.",
+    "subject_is_required": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "6833191bbf56a7ee269c52b6"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "Incomprehensibility asserts God's transcendence beyond creaturely understanding, but does not itself state a dissimilarity-exceeds-similarity principle about creaturely likeness to God's mode of being; it is a narrower, related claim."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-16",
+   "branch": "Baptist",
+   "queue_id": "Q-158",
+   "predicate": "Glorious",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-158-p1-BSR-BA-02-3",
+   "registry_id": "BSR-BA-02",
+   "phrase": "for His own glory",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "MOVED_UP",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The phrase 'for His own glory' occurs within a clause describing the purpose of God's providential working ('working all things according to the counsel of His own immutable and most righteous will, for His own glory'), a teleological statement about the end of God's acts rather than an assertion that glory is itself a divine attribute shared by or proper to God's nature.",
+    "grammatical_subject": "The Lord our God (implied subject of 'working all things ... for His own glory')",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "c10e6e7d67fe8e2e2b85427e",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "FULL",
+    "floor_reason": "The clause affirms that glory belongs properly to God as the end of His own works, directly attributing glory to God's own being rather than to any creature.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "call_id": "3f69cc1901901ee3ece1c844"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The phrase asserts that glory belongs to God ('His own glory') as the end of His actions, which is narrower than a direct predication that God is glorious as an attribute, but it remains within the floor of glory being properly divine."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-17",
+   "branch": "Lutheran",
+   "queue_id": "Q-379",
+   "predicate": "Ineffable",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-379-p3-BSR-LU-01-b1-1",
+   "registry_id": "BSR-LU-01",
+   "phrase": "of His pure unutterable love",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage calls God's love 'unutterable', a specific attribute of God, rather than asserting that God himself resists exhaustive linguistic expression; this is a neighbouring attribute-claim, not the predicate itself.",
+    "grammatical_subject": "He (God), as subject of 'he has Himself revealed and opened ... his paternal heart and of His pure unutterable love'",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING",
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "8236b9f9c37f3edba86750ca",
+    "attempt": 1
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts that God's love is 'unutterable,' a specific attribute rather than a general claim that God as such defies all linguistic expression, so it is a narrower proposition within the ineffability floor.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "9fb7431cdb546404d60bbc9b"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts that God's love is 'unutterable,' a narrower claim about one divine attribute rather than a general denial that God as such can be exhaustively expressed in language.",
+    "opus": "The inexpressibility is predicated of a divine attribute (God's love, the depths of His paternal heart) rather than of the divine essence as such, but it is a narrower proposition lying wholly within the floor of denying exhaustive linguistic expression of God."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-18",
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-392",
+   "predicate": "Inscrutable",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-392-p1-BSR-MA-02-1",
+   "registry_id": "BSR-MA-02",
+   "phrase": "one eternal, almighty, and incomprehensible God, the Father, Son, and Holy Ghost",
+   "hedge_shaped_stored_reason": false,
+   "card_all_partial": true,
+   "card_size": 1,
+   "class": "HOLDS",
+   "leak": false,
+   "control_v12_class": "HOLDS",
+   "rule_effect": false,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "PARTIAL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "Y",
+    "floor_reason": "The passage asserts God's general incomprehensibility as part of a Trinitarian confession, which is a narrower/general form of denying exhaustive rational penetration of God, but does not specifically address divine counsel as the predicate defines.",
+    "grammatical_subject": "one eternal, almighty, and incomprehensible God, the Father, Son, and Holy Ghost",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "ad6b0346d02a31a3aeaedf67",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts God's general incomprehensibility as a classical divine attribute (paired with 'eternal' and 'almighty') in a creedal enumeration, which entails but does not specifically foreground the inscrutability of divine counsel as defined by the predicate.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "65c9c53e711064b8bf97ddd5"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The term 'incomprehensible' asserts that God's essence/nature transcends full human comprehension, which overlaps with but is not identical to the specific claim that God's counsel (plans/purposes) resists exhaustive rational penetration; it supports but does not fully specify the defined predicate."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-19",
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-431",
+   "predicate": "Without division",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-431-p1-BSR-MW-02-1",
+   "registry_id": "BSR-MW-02",
+   "phrase": "the divine and human natures are perfectly and inseparably united",
+   "hedge_shaped_stored_reason": false,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "MOVED_UP",
+   "leak": false,
+   "control_v12_class": "MOVED_UP",
+   "rule_effect": false,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage explicitly states the two natures are 'perfectly and inseparably united' in Christ, directly asserting that they are not divided into distinct subjects.",
+    "grammatical_subject": "the divine and human natures (in whom = Christ)",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "FAMILY_VARIATION"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "35336b4783700730a5ad2d1f",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that the two natures are 'perfectly and inseparably united,' which asserts the predicate (no division into distinct subjects) of Christ's natures.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "4cbed1cc887a57163a77ccd1"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts inseparable union of the two natures, which entails denial of partition into distinct subjects, but uses 'inseparably united' rather than explicit 'without division' language, so it captures the underlying concern narrowly rather than the full Chalcedonian formula."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-20",
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-284",
+   "predicate": "Uncreated",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-284-p1-BSR-RP-04-1",
+   "registry_id": "BSR-RP-04",
+   "phrase": "subsisting in himself, all sufficient in himself, invisible, incorporeal, immense, eternal",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "HOLDS",
+   "leak": false,
+   "control_v12_class": "HOLDS",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "PARTIAL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "Y",
+    "floor_reason": "The description 'subsisting in himself, all sufficient in himself...eternal' affirms divine self-existence and beginningless eternality, which entails non-dependence on any creator, but the passage does not explicitly deny createdness or address the God-vs-created binary directly.",
+    "grammatical_subject": "God (that God is one in essence or nature...)",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "5caabd00bcf938757816165f",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts God is eternal and self-subsisting ('subsisting in himself'), which entails beginningless, uncaused existence, but does not explicitly deny dependence on a creator or use 'uncreated' terminology, so it is a narrower proposition within the floor.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "c2e6293d2ab1e042ea11984e"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage affirms God as eternal, self-subsisting, and all-sufficient in himself, implying beginninglessness and non-dependence, though it does not explicitly deny a creator or originating act nor state the God-versus-created binary."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-21",
+   "branch": "Roman Catholic",
+   "queue_id": "Q-257",
+   "predicate": "Image of the Father",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-257-p1-BSR-RC-06-1",
+   "registry_id": "BSR-RC-06",
+   "phrase": "God from God, Light from Light, true God from true God",
+   "hedge_shaped_stored_reason": false,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": "FALSE_NEGATIVE (not hedge-shaped, leaks)",
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The phrase asserts the Son's consubstantiality and eternal generation ('God from God, Light from Light, true God from true God') but does not state or address the predicate of the Son being the 'image' or 'manifestation' of the Father; it is a neighbouring proposition about shared divine essence and origin, not manifestation/image language.",
+    "grammatical_subject": "Jesus Christ, the only Son of God",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "29cd8f02537aaff94132491f",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The phrase affirms the Son's co-equal divine origin from the Father via the light-generation metaphor, which is analogous to but not identical with the specific 'image of the Father' manifestation language required by the predicate.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "7eb021ad0d390a5f5e477953"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The phrase affirms the Son's derivation and consubstantiality with the Father ('Light from Light') which functions as manifestation language, though it emphasizes ontological equality/origin rather than explicit 'image' terminology."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-22",
+   "branch": "Anglican",
+   "queue_id": "Q-085",
+   "predicate": "Just / righteous",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-085-p2-BSR-AN-05-3",
+   "registry_id": "BSR-AN-05",
+   "phrase": "righteously opposing all sin and evil",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 2,
+   "class": "HOLDS",
+   "leak": false,
+   "control_v12_class": "MOVED_UP",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "PARTIAL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "Y",
+    "floor_reason": "The clause attributes righteousness to God specifically in the act of opposing sin and evil, which is the same predicate (justice/righteousness) but stated narrowly within a particular action rather than as a general affirmation of God's perfect justice.",
+    "grammatical_subject": "God",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "ecec7ddeba10a95a0bed44d3",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "FULL",
+    "floor_reason": "The passage asserts that God, in redeeming creation, righteously opposes sin and evil, which is a direct predication of righteousness/justice to God himself.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "call_id": "082fd64d0415695604895661"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The phrase asserts God's righteous opposition to sin and evil, a narrower relational/active sense rather than a full statement of God's perfect justice as an attribute.",
+    "opus": "The standard predicates righteousness of God himself — he acts righteously in opposing all sin and evil — which is the shared divine justice/righteousness the floor requires."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   }
+  },
+  {
+   "sample_id": "PR-23",
+   "branch": "Baptist",
+   "queue_id": "Q-246",
+   "predicate": "Wisdom",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-246-p1-BSR-BA-01-1",
+   "registry_id": "BSR-BA-01",
+   "phrase": "In Jesus Christ abide all the treasures of wisdom and knowledge",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 1,
+   "class": "REFUSED_LINE_2_3",
+   "leak": false,
+   "control_v12_class": "REFUSED_LINE_2_3",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts that wisdom (as a treasure) abides in Christ, a relational claim about Christ possessing/containing wisdom, not the predicate that the Son IS divine Wisdom; this is a neighbouring proposition rather than an incomplete statement of the same claim.",
+    "grammatical_subject": "all the treasures of wisdom and knowledge (the subject of 'abide'; 'In Jesus Christ' is a locative prepositional phrase, not the subject)",
+    "subject_is_required": "N",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL",
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "787ee9e86d903f1a7fd563f6",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage affirms that wisdom/knowledge dwell in Christ (echoing Col 2:3), a relational claim about Christ possessing wisdom rather than an identity statement naming him as Wisdom itself.",
+    "subject_is_required": "N",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "84c02cd88354708ec8d329c4"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The text affirms Christ contains wisdom rather than directly naming the Son as 'Wisdom' in the confessional-title sense; it is a related but narrower/adjacent claim about Christ possessing wisdom rather than being identified as Wisdom personified.",
+    "opus": "The confession locates all treasures of wisdom in Jesus Christ (echoing Colossians 2:3) rather than explicitly titling the eternal Son 'Wisdom', so it asserts a narrower proposition lying within the predicate's floor."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-24",
+   "branch": "Lutheran",
+   "queue_id": "Q-091",
+   "predicate": "Holy",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-091-p3-BSR-LU-01-b1-1",
+   "registry_id": "BSR-LU-01",
+   "phrase": "the name of God is in itself holy",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 1,
+   "class": "HOLDS",
+   "leak": false,
+   "control_v12_class": "HOLDS",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "PARTIAL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "Y",
+    "floor_reason": "The passage asserts holiness of God's name rather than of God directly, which is a narrower/derivative statement of the same underlying proposition about God's holiness, remaining within the floor of the predicate.",
+    "grammatical_subject": "the name of God",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "a2ed1637dd7f315929912ba6",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts holiness of God's name as intrinsic ('the name of God is in itself holy'), a narrower proposition (holiness of the divine name) within the broader predicate of God's holiness, rather than a direct 'God is holy' statement.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "be7eccddffe9e25a93b843ce"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage affirms holiness of God's name specifically, a narrower but included instance of affirming God's holiness.",
+    "opus": "The text affirms intrinsic holiness of God's name rather than predicating holiness of God directly, a narrower proposition that nonetheless falls within the floor since the divine name stands for God Himself as revealed."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-25",
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-360",
+   "predicate": "Immutable / unchangeable",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-360-p1-BSR-MA-01-2",
+   "registry_id": "BSR-MA-01",
+   "phrase": "God patiently preserves humanity and faithfully remains with us even through death",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 2,
+   "class": "HOLDS",
+   "leak": false,
+   "control_v12_class": "HOLDS",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "PARTIAL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "Y",
+    "floor_reason": "The passage asserts a narrower, relational instance of the predicate—God's steadfast, faithful presence with humanity even through death—which falls within the shared floor of covenant faithfulness/constancy rather than full metaphysical immutability.",
+    "grammatical_subject": "God",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "73a6db43105aa810b4b761d5",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts God's steadfast covenant faithfulness and constancy of presence through death, which is a narrower proposition wholly within the shared floor of constancy/faithfulness, not strong metaphysical immutability.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "ae551f99983b8572b952f493"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts God's steadfast faithfulness and constant presence 'even through death,' which falls within the floor's allowance for covenant faithfulness and constancy of character, though it does not assert strong metaphysical immutability."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-26",
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-167",
+   "predicate": "Life-giving",
+   "family_retyped_by_R6_1": true,
+   "candidate_id": "Q-167-p1-BSR-MW-04-2",
+   "registry_id": "BSR-MW-04",
+   "phrase": "He works within us to quicken, strengthen and confirm our faith",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts that God works through the sacraments to quicken, strengthen and confirm believers' faith—a sacramental/soteriological effect on faith—not the general divine predicate of communicating life; the word 'quicken' names a different, narrower spiritual-faith sense tied to sacramental means rather than asserting God's life-giving action as such.",
+    "grammatical_subject": "He (referring to God)",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING",
+     "ECCLESIAL_VS_SOTERIOLOGICAL"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "bee3f18892fb639675bf5945",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage affirms God quickening (making alive) faith specifically through the sacraments, a narrower, means-mediated instance of life-giving rather than a general assertion of God's life-communicating nature.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "33143a1b982a5cfdd88a56e0"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage asserts a narrower proposition—God quickening/strengthening faith via sacramental means—rather than a general theological claim about God's life-giving nature or action."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-27",
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-404",
+   "predicate": "No adequate likeness or comparison",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-404-p1-BSR-RP-06-2",
+   "registry_id": "BSR-RP-06",
+   "phrase": "God’s power and goodness are so great and incomprehensible",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 3,
+   "class": "LEAK",
+   "leak": true,
+   "control_v12_class": "HOLDS",
+   "rule_effect": true,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The passage asserts incomprehensibility of God's specific governance over sin/evil, not a denial of adequate likeness or comparison between Creator and creature generally; this is a neighbouring theodicy claim, not the predicate itself.",
+    "grammatical_subject": "God's power and goodness",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "call_id": "ac9fde62dc45033a4dfa904a",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The text asserts incomprehensibility of God's power and goodness specifically regarding providence over evil, not a general denial of adequate Creator-creature likeness or comparison.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "ac4e6481393442f75278a17f"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "This asserts incomprehensibility of God's power/goodness regarding providence and theodicy, not a denial of adequate Creator-creature likeness or comparison in general; it is a narrower epistemic claim about divine justice being beyond full human comprehension.",
+    "opus": "The passage asserts divine incomprehensibility and that God's works 'surpass human understanding and are beyond our ability to comprehend' — epistemic restraint that entails no adequate human grasp of God, but it stops short of an explicit denial of Creator-creature likeness or comparison."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-28",
+   "branch": "Roman Catholic",
+   "queue_id": "Q-057",
+   "predicate": "Wise / all-wise",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-057-p1-BSR-RC-07-1",
+   "registry_id": "BSR-RC-07",
+   "phrase": "God in his goodness and wisdom reveals himself",
+   "hedge_shaped_stored_reason": false,
+   "card_all_partial": false,
+   "card_size": 3,
+   "class": "MOVED_UP",
+   "leak": false,
+   "control_v12_class": "MOVED_UP",
+   "rule_effect": false,
+   "regex_misclassified": null,
+   "v13": {
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The clause 'God in his ... wisdom reveals himself' directly attributes wisdom to God as his own quality, not merely mentioning the term in passing.",
+    "grammatical_subject": "God",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [],
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "call_id": "b7215f496e1fff71599d3c46",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "FULL",
+    "floor_reason": "The passage attributes wisdom to God as an intrinsic divine attribute manifested in his self-revelation, satisfying the predicate of divine wisdom.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "call_id": "e0eaddbdef2e47d8363a0230"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "Wisdom is attributed to God as a descriptor of the manner of his self-revelation, not asserted as a standalone divine attribute proposition, but it still affirms God's wisdom within the floor."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-29",
+   "branch": "Anglican",
+   "queue_id": "Q-205",
+   "predicate": "Judge",
+   "family_retyped_by_R6_1": true,
+   "candidate_id": "Q-205-p1-BSR-AN-04-1",
+   "registry_id": "BSR-AN-04",
+   "phrase": "Christ will come in glory and judge the living and the dead",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 3,
+   "class": "REFUSED_LINE_2_3",
+   "leak": false,
+   "control_v12_class": "REFUSED_LINE_2_3",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "NA",
+    "floor_reason": "The predicate concerns divine judgment by God/the Father, but here the assertion is specifically about Christ's future coming and judgment, not God the Father acting as judge.",
+    "grammatical_subject": "Christ",
+    "subject_is_required": "N",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "0cbbc46c2d2121ba6feca784",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "Even if Christ's judgment implies divine judgment, the required_subject specification excludes the Son here, naming only 'the one God, or the Father'.",
+    "subject_is_required": "N",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "call_id": "a37a0a3d698ecb5e4be9ad13"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The passage affirms divine judgment but attributes it specifically to Christ (the Son), which is a narrower subject than the required GOD/Father scope.",
+    "opus": "It affirms divine eschatological judgment, but predicated of Christ in his coming glory rather than of God simpliciter or the Father, so it is a narrower proposition lying within the floor of shared divine judgment."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   }
+  },
+  {
+   "sample_id": "PR-30",
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-296",
+   "predicate": "Unbegotten",
+   "family_retyped_by_R6_1": false,
+   "candidate_id": "Q-296-p1-BSR-MA-02-1",
+   "registry_id": "BSR-MA-02",
+   "phrase": "before whom no God was made or existed, nor shall there be any after Him",
+   "hedge_shaped_stored_reason": true,
+   "card_all_partial": true,
+   "card_size": 1,
+   "class": "HOLDS",
+   "leak": false,
+   "control_v12_class": "HOLDS",
+   "rule_effect": false,
+   "regex_misclassified": "FALSE_POSITIVE (hedge-shaped, holds)",
+   "v13": {
+    "floor": "PARTIAL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "partial_asserts_predicate": "Y",
+    "floor_reason": "The clause asserts that no God existed before or after Him, which affirms His beginninglessness/self-existence—an aspect shared with 'unbegotten'—but it is framed as a uniqueness/monotheistic claim ('no God... nor any other') rather than an explicit denial of generation from another; it captures the source-status concern narrowly, not the full technical sense.",
+    "grammatical_subject": "the one eternal, almighty, and incomprehensible God (the Father, Son, and Holy Ghost), referenced by 'before whom'",
+    "subject_is_required": "Y",
+    "speech_act_is_assertion": "Y",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR",
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "3e2be5c2ab799e78b666a4d3",
+    "attempt": 0
+   },
+   "control_v12": {
+    "floor": "PARTIAL",
+    "floor_reason": "The passage asserts God's eternity and absence of any prior or subsequent God, which entails beginninglessness/source-status, but does not explicitly deny generation via 'unbegotten' language or address intra-Trinitarian origin distinctly from the Father as source.",
+    "subject_is_required": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "call_id": "3b4324da476ccce79dc2cd96"
+   },
+   "stored_floor_reasons": {
+    "sonnet": "The phrase asserts eternal beginninglessness and uniqueness ('no God was made or existed before Him, nor after Him'), which affirms source-status and lack of prior origin, but does not explicitly deny generation of the Son from the Father, so it captures beginninglessness rather than the full 'unbegotten from another' sense."
+   },
+   "stored_floors": {
+    "sonnet": "PARTIAL"
+   }
+  }
+ ],
+ "decision": "REFUSED_CELLS_ONLY"
+}

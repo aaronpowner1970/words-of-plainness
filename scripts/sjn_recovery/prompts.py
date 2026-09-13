@@ -9,8 +9,13 @@ Guards live in code (guards.py); the prompts state the contract so the model can
 nothing here is relied on for enforcement."""
 import json
 
-PROMPT_VERSIONS = {"locator": "gate6-v1.4", "recut": "gate6-v1.3", "verifier": "gate6-v1.2", "coder": "gate6-v1.1"}
-PROMPT_VERSION = "gate6-v1.4 (locator) / gate6-v1.3 (recut) / gate6-v1.2 (verifier) / gate6-v1.1 (coder)"
+PROMPT_VERSIONS = {"locator": "gate6-v1.5", "recut": "gate6-v1.3", "verifier": "gate6-v1.3", "coder": "gate6-v1.1"}
+PROMPT_VERSION = "gate6-v1.5 (locator) / gate6-v1.3 (recut) / gate6-v1.3 (verifier) / gate6-v1.1 (coder)"
+# Session 6 (2026-09-13, R6-2): verifier gate6-v1.3 is the verifier in force from here on (the seven finished branches keep
+# their stored v1.2-and-earlier rubrics; the rule was applied to them only on the three refused Baptist cells). Locator
+# gate6-v1.5: rule 4 no longer calls "an adjacent proposition" PARTIAL — the one line of the v1.4 locator prompt that told the
+# locator to propose exactly what R6-2 refuses. Nothing else in either prompt changed. gate6-v1.2 stays selectable
+# (set_verifier_version) for replays and controls.
 # gate6-v1.4 (2026-09-13, Task 2d): an EMPTY locator result carries a one-sentence `silence_rationale` —
 # what in the supplied chunks comes nearest the predicate and why it does not assert it — so an empty
 # cell can be audited per standard. The candidate shape, the retrieval and every rule are unchanged.
@@ -38,7 +43,7 @@ Rules you must keep:
 1. Use ONLY the supplied chunks. Do not draw on memory of this document or any other source. If a passage is not in the chunks, it does not exist for this task.
 2. The `phrase` field must be a VERBATIM quotation of AT MOST 15 WORDS copied exactly from the chunk text (same words, same order, same spelling). Count the words before you answer: a 16-word phrase is discarded by the checker and the passage is lost, so cut the phrase down to the clause that actually carries the predicate. No paraphrase, no ellipsis, no added words. Punctuation and capitalization are normalized by the checker, but the words must match.
 3. `chunk_key` and `registry_id` must be those of the chunk the phrase comes from.
-4. `floor_claim`: FULL if the passage asserts the predicate of the required subject in the defined sense; PARTIAL if it asserts a narrower or adjacent proposition wholly within the floor; WORD_ONLY if the word appears but the passage does not assert the proposition (a mere mention, a different sense, a different subject).
+4. `floor_claim`: FULL if the passage asserts the predicate of the required subject in the defined sense; PARTIAL if it asserts the predicate itself incompletely (a narrower statement of the same proposition) wholly within the floor — a neighbouring proposition (a related attribute, a consequence or a ground of the predicate) is not PARTIAL and is not a candidate; WORD_ONLY if the word appears but the passage does not assert the proposition (a mere mention, a different sense, a different subject).
 5. `rationale`: one sentence, at most 40 words, saying why the passage meets (or only partly meets) the floor.
 6. The subject matters. A passage that predicates the term of the Church, of humanity, of Scripture, of Christ's human nature, or of an opponent's view does not count. A denial of a contrary view is not an assertion unless the standard also asserts the predicate positively in the same passage. A proposition the standard names only to condemn it (an anathema, a rejected error) is never evidence.
 7. An EMPTY result is correct when the standard is silent or only mentions the word. Do not stretch. Return the empty result rather than a weak candidate. With an empty result give `silence_rationale`: ONE sentence of at most 40 words naming what in the supplied chunks comes nearest the predicate (its locator) and why it does not assert the predicate of the required subject — or that nothing in the supplied chunks approaches it.
@@ -132,6 +137,39 @@ Output: a single JSON object and nothing else:
 """
 
 
+# verifier gate6-v1.3 (2026-09-13, session 6, R6-2 — the hedged-PARTIAL rule): PARTIAL is for a passage that asserts the
+# predicate INCOMPLETELY, never for one that asserts a NEIGHBOURING proposition; if the verifier's own floor_reason says the
+# passage does not assert the predicate, the floor is WORD_ONLY. Line 4 says so, and a companion line
+# `partial_asserts_predicate` (Y/N/NA) makes the test auditable: PARTIAL with N is capped at WORD_ONLY in code
+# (agents.verify, floor_capped_by NEIGHBOURING_PROPOSITION). No predicate-specific example is given, so the audit sample is
+# not steered toward any family. Everything else is v1.2 verbatim.
+_V12_LINE4 = ("4. floor — FULL | PARTIAL | WORD_ONLY, with one sentence of reason. FULL: the passage asserts the predicate of the required subject in the defined sense. "
+              "PARTIAL: a narrower proposition wholly within the floor. WORD_ONLY:")
+_V13_LINE4 = ("4. floor — FULL | PARTIAL | WORD_ONLY, with one sentence of reason. FULL: the passage asserts the predicate of the required subject in the defined sense. "
+              "PARTIAL: the passage asserts THE PREDICATE ITSELF, but incompletely — a narrower statement of the same proposition, wholly within the floor. "
+              "A NEIGHBOURING proposition is never PARTIAL: where the passage asserts a different claim that sits next to the predicate (a related attribute, "
+              "a consequence or a ground of it, a claim about another object) and does not assert the predicate itself, the floor is WORD_ONLY. Test your own "
+              "floor_reason: if it has to say that the passage does not assert, address or state the predicate, the floor is WORD_ONLY. "
+              "Then answer partial_asserts_predicate — only when your floor is PARTIAL: Y if what the passage asserts IS the predicate, stated incompletely; "
+              "N if it is a neighbouring proposition; \"NA\" when the floor is not PARTIAL. WORD_ONLY:")
+assert _V12_LINE4 in VERIFIER_SYSTEM
+VERIFIER_SYSTEM_V13 = (VERIFIER_SYSTEM.replace(_V12_LINE4, _V13_LINE4)
+                       .replace('"floor_reason": "...", ', '"floor_reason": "...", "partial_asserts_predicate": "Y|N|NA", '))
+VERIFIER_SYSTEMS = {"gate6-v1.2": VERIFIER_SYSTEM, "gate6-v1.3": VERIFIER_SYSTEM_V13}
+
+
+def verifier_system():
+    """The verifier system prompt for the verifier version in force (PROMPT_VERSIONS['verifier'])."""
+    return VERIFIER_SYSTEMS[prompt_version("verifier")]
+
+
+def set_verifier_version(version):
+    """Select the verifier prompt version for this process (the call identity follows it)."""
+    if version not in VERIFIER_SYSTEMS:
+        raise SystemExit(f"unknown verifier version {version}; known {sorted(VERIFIER_SYSTEMS)}")
+    PROMPT_VERSIONS["verifier"] = version
+
+
 def verifier_user(predicate, candidate, chunk_view):
     return json.dumps({
         "task": "verify",
@@ -144,7 +182,8 @@ def verifier_user(predicate, candidate, chunk_view):
         "candidate": {"registry_id": candidate["registry_id"], "locator": candidate["locator"],
                       "phrase": candidate["phrase"], "floor_claim": candidate.get("floor_claim")},
         "chunk": chunk_view,
-        "output_contract": "JSON only, the six-line rubric plus asserted_outside_formula (Y|N|NA), reason_code and reason",
+        "output_contract": ("JSON only, the six-line rubric plus asserted_outside_formula (Y|N|NA), reason_code and reason"
+                            + (", and partial_asserts_predicate (Y|N|NA)" if prompt_version("verifier") != "gate6-v1.2" else "")),
     }, ensure_ascii=False, indent=0)
 
 

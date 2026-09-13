@@ -261,6 +261,29 @@ Report: `docs/gate6/WoP_SJN_Gate6_Session5_Report_20260913.md`; the review it an
   (`run.py --write-partial-packet`, also called by `branch_loop.py`); `SJN_PACKETS_DIR` redirects packets for harness tests only.
 - **Review extracts** (`extract.py`, written by every packet build): `recovery-packets/extracts/<branch>-extract.json`.
 
+## Live-run session 6 (2026-09-13, workbook unchanged) — the author's four rulings
+
+Report: `docs/gate6/WoP_SJN_Gate6_Session6_Report_20260913.md`; the rulings: `wop-scratch/WoP_SJN_B4_ReviewAddendum_20260913.md` §5.
+
+- **Rulings in memory** (`rulings.py`, `recovery-runs/author-rulings-pending-workbook.json`): read at every start. `Registry()` retires
+  BSR-EO-03 (R6-3); `load_predicates()` retypes required_subject for Lord / Life-giving / Judge / Savior / Not made (R6-1; a workbook
+  `Required subject` column, once added, wins and must agree); `agents.finalize` applies `floor_rulings` recorded on a verification
+  record (R6-2 refusals of Q-382 / Q-390 / Q-454); packet headers carry `author_rulings_applied`.
+- **One text, one slot** (`allocation.same_text_key`, `allocate` step 5; R6-4): a phrase textually identical to a seated phrase takes no
+  slot and is a `same_text_parallel_witnesses` entry on the seated card entry; declared same-text rows with different wording
+  (`rulings.same_text_rows`: BSR-EO-14 → BSR-EO-07) yield the slot to the declared row whatever the order.
+- **Verifier gate6-v1.3 in force** (R6-2): PARTIAL is the predicate asserted incompletely, never a neighbouring proposition;
+  `partial_asserts_predicate` N caps PARTIAL at WORD_ONLY (`NEIGHBOURING_PROPOSITION`). `prompts.set_verifier_version` keeps v1.2 for
+  replays. **Locator gate6-v1.5**: rule 4 no longer calls an adjacent proposition PARTIAL.
+- **`partial_rule.py`** sample / verify / control / report / refuse / frame / apply — the audit before applying R6-2 (run `pr-1`).
+- **`reverify.py --candidates-file`** — many candidates, each by the models that verified it before.
+- **`truepos.py run --seed-from / --fixture-from / --verifier-version`** — tp-2 (R6-1 on v1.2), tp-3 (the forward verifier).
+- **Defects fixed**: the packet builder now passes `floor_claim` to the allocator (8 of 247 cards had disagreed with the cell runner);
+  a verifier reply missing a rubric line takes the ceiling retry and a floorless rubric is never an accept (`agents._call(required=)`).
+- **Do not re-enter `run.py` on a finished branch to finish cards**: it resumes stopped exhaustion (Q-380), enters exhaustion on branches
+  that predate it (Anglican; BSR-AN-05 Q.368 trips the URL guard) and samples old caveated accepts. Card-only work:
+  `recovery-runs/session6/finish_coder.py` (coder, plus the 2c sample on new verdicts only).
+
 ## Guards enforced in code (`guards.py`, `agents.py`, `packets.py`)
 
 Registry-only chunks (URLs never enter a prompt; `assert_no_urls`) · phrase ≤15 words and verbatim in the

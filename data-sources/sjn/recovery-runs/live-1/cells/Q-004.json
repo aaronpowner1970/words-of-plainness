@@ -5874,6 +5874,17 @@
    "source_note_guard": "ok",
    "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
    "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the catechism directly predicates 'living' of the one true God, matching the controlled proposition that God possesses life intrinsically. This aligns with the family code A.\", \"source_note\": \"The Westminster Larger Catechism (Q.8), an OPC confessional standard, states there is 'but one only, the living and true God,' affirming that God possesses life intrinsically.\"}"
+  },
+  "Q-004-p1-BSR-RP-04-2": {
+   "status": "DONE",
+   "call_id": "6b5e9fa4ab9f53e54c31d89c",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "The verifier reports a FULL floor: the Second Helvetic Confession directly predicates 'living' of God's essence alongside other intrinsic attributes, matching the controlled proposition of intrinsic divine life affirmed in D&C 20:19. No narrowing or reinterpretation is present, so the family code A holds.",
+   "source_note": "The Second Helvetic Confession (Book of Confessions 5.015) describes God as one in essence, 'living, quickening and preserving all things,' affirming life as an attribute intrinsic to God's own nature.",
+   "source_note_guard": "ok",
+   "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"The verifier reports a FULL floor: the Second Helvetic Confession directly predicates 'living' of God's essence alongside other intrinsic attributes, matching the controlled proposition of intrinsic divine life affirmed in D&C 20:19. No narrowing or reinterpretation is present, so the family code A holds.\", \"source_note\": \"The Second Helvetic Confession (Book of Confessions 5.015) describes God as one in essence, 'living, quickening and preserving all things,' affirming life as an attribute intrinsic to God's own nature.\"}"
   }
  },
  "phase": "DONE",
@@ -6063,19 +6074,19 @@
  "allocation": {
   "kept": [
    "Q-004-p1-BSR-RP-01-1",
-   "Q-004-p1-BSR-RP-04-1",
-   "Q-004-p1-BSR-RP-02-1"
+   "Q-004-p1-BSR-RP-02-1",
+   "Q-004-p1-BSR-RP-04-2"
   ],
   "roles": {
    "Q-004-p1-BSR-RP-01-1": "PRIMARY",
-   "Q-004-p1-BSR-RP-04-1": "PRIMARY",
-   "Q-004-p1-BSR-RP-02-1": "PRIMARY"
+   "Q-004-p1-BSR-RP-02-1": "PRIMARY",
+   "Q-004-p1-BSR-RP-04-2": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {
-   "Q-004-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
-   "Q-004-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
-   "Q-004-p1-BSR-RP-04-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
+   "Q-004-p1-BSR-RP-04-1": "SAME_TEXT parallel witness of Q-004-p1-BSR-RP-01-1: its phrase is textually identical to the seated phrase; takes no slot",
+   "Q-004-p1-BSR-RP-03-1": "SAME_TEXT parallel witness of Q-004-p1-BSR-RP-02-1: its phrase is textually identical to the seated phrase; takes no slot",
+   "Q-004-p1-BSR-RP-04-3": "SAME_TEXT parallel witness of Q-004-p1-BSR-RP-02-1: its phrase is textually identical to the seated phrase; takes no slot",
    "Q-004-p1-BSR-RP-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
   },
   "witness_only": [],
@@ -6090,14 +6101,35 @@
   },
   "slot_order": {
    "Q-004-p1-BSR-RP-01-1": 0,
-   "Q-004-p1-BSR-RP-04-1": 1,
-   "Q-004-p1-BSR-RP-02-1": 2
+   "Q-004-p1-BSR-RP-02-1": 2,
+   "Q-004-p1-BSR-RP-04-2": 3
+  },
+  "parallel_witnesses": {
+   "Q-004-p1-BSR-RP-01-1": [
+    {
+     "candidate_id": "Q-004-p1-BSR-RP-04-1",
+     "registry_id": "BSR-RP-04",
+     "rule": "SAME_TEXT"
+    }
+   ],
+   "Q-004-p1-BSR-RP-02-1": [
+    {
+     "candidate_id": "Q-004-p1-BSR-RP-03-1",
+     "registry_id": "BSR-RP-03",
+     "rule": "SAME_TEXT"
+    },
+    {
+     "candidate_id": "Q-004-p1-BSR-RP-04-3",
+     "registry_id": "BSR-RP-04",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
  "coder_skipped": {
-  "Q-004-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
-  "Q-004-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
-  "Q-004-p1-BSR-RP-04-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
+  "Q-004-p1-BSR-RP-04-1": "SAME_TEXT parallel witness of Q-004-p1-BSR-RP-01-1: its phrase is textually identical to the seated phrase; takes no slot",
+  "Q-004-p1-BSR-RP-03-1": "SAME_TEXT parallel witness of Q-004-p1-BSR-RP-02-1: its phrase is textually identical to the seated phrase; takes no slot",
+  "Q-004-p1-BSR-RP-04-3": "SAME_TEXT parallel witness of Q-004-p1-BSR-RP-02-1: its phrase is textually identical to the seated phrase; takes no slot",
   "Q-004-p1-BSR-RP-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
  },
  "empty": false,

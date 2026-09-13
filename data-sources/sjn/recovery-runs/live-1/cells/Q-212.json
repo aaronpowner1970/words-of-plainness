@@ -6048,40 +6048,17 @@
  },
  "verifications": {
   "Q-212-p1-BSR-RP-01-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "4f5c578b9fb6e4e76a536c5d",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "the Lord Jesus, his only begotten Son",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The passage asserts that Christ (the Son) is the Head and Savior of his church, not that God the Father is Savior.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The predicate 'Savior' is applied to Christ the Mediator, not to God the Father or 'the one God' as required.",
-    "hazard_flags": [
-     "SAME_WORD_DIFFERENT_MEANING",
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The chunk affirms Christ, the Son, as Savior of the church, but the required subject is God/the Father, not the Son, so the predicate is not asserted of the correct subject.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Lord Jesus, his only begotten Son\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that Christ (the Son) is the Head and Savior of his church, not that God the Father is Savior.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The predicate 'Savior' is applied to Christ the Mediator, not to God the Father or 'the one God' as required.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The chunk affirms Christ, the Son, as Savior of the church, but the required subject is God/the Father, not the Son, so the predicate is not asserted of the correct subject.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "WORD_ONLY"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -6098,6 +6075,98 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "4f5c578b9fb6e4e76a536c5d",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the Lord Jesus, his only begotten Son",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The passage asserts that Christ (the Son) is the Head and Savior of his church, not that God the Father is Savior.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The predicate 'Savior' is applied to Christ the Mediator, not to God the Father or 'the one God' as required.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The chunk affirms Christ, the Son, as Savior of the church, but the required subject is God/the Father, not the Son, so the predicate is not asserted of the correct subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Lord Jesus, his only begotten Son\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that Christ (the Son) is the Head and Savior of his church, not that God the Father is Savior.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The predicate 'Savior' is applied to Christ the Mediator, not to God the Father or 'the one God' as required.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The chunk affirms Christ, the Son, as Savior of the church, but the required subject is God/the Father, not the Son, so the predicate is not asserted of the correct subject.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "6b0bb0da7cc8d831452d5771",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "the Lord Jesus, his only begotten Son (Christ)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession positively asserts, in its own voice, that God ordained Christ to be Mediator, Head and Savior of his church, and that his people are redeemed by him.",
+    "floor": "FULL",
+    "floor_reason": "The passage asserts that Christ, the divine Son, is Savior and that his people 'by him in time redeemed'—a direct affirmation of redemptive action by the required subject.",
+    "hazard_flags": [
+     "ECCLESIAL_VS_SOTERIOLOGICAL"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the divine Son, and the passage asserts his redemptive/saving role in its own voice, satisfying the predicate's floor despite the ecclesial framing of 'his church.'",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"the Lord Jesus, his only begotten Son (Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession positively asserts, in its own voice, that God ordained Christ to be Mediator, Head and Savior of his church, and that his people are redeemed by him.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts that Christ, the divine Son, is Savior and that his people 'by him in time redeemed'—a direct affirmation of redemptive action by the required subject.\", \"hazard_flags\": [\"ECCLESIAL_VS_SOTERIOLOGICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the divine Son, and the passage asserts his redemptive/saving role in its own voice, satisfying the predicate's floor despite the ecclesial framing of 'his church.'\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-212-p1-BSR-RP-02-1": {
@@ -6253,40 +6322,17 @@
    }
   },
   "Q-212-p1-BSR-RP-05-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "324d301968f7d772a4c747c0",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "he (referring to 'the Son of God'/Jesus)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The catechism directly asserts that Jesus saves believers from sin, in its own voice as a positive answer.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage asserts redemptive action but attributes it specifically to the Son (Jesus) rather than to 'the one God' or 'the Father' as required.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "FAMILY_VARIATION"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical and doctrinal subject is the Son ('he'/Jesus), not the one God or the Father as the predicate's required subject specifies, so despite verbatim phrase and clear assertion of redemptive action, the subject condition fails.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"he (referring to 'the Son of God'/Jesus)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism directly asserts that Jesus saves believers from sin, in its own voice as a positive answer.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts redemptive action but attributes it specifically to the Son (Jesus) rather than to 'the one God' or 'the Father' as required.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical and doctrinal subject is the Son ('he'/Jesus), not the one God or the Father as the predicate's required subject specifies, so despite verbatim phrase and clear assertion of redemptive action, the subject condition fails.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -6303,42 +6349,110 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "324d301968f7d772a4c747c0",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "he (referring to 'the Son of God'/Jesus)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism directly asserts that Jesus saves believers from sin, in its own voice as a positive answer.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage asserts redemptive action but attributes it specifically to the Son (Jesus) rather than to 'the one God' or 'the Father' as required.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "FAMILY_VARIATION"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical and doctrinal subject is the Son ('he'/Jesus), not the one God or the Father as the predicate's required subject specifies, so despite verbatim phrase and clear assertion of redemptive action, the subject condition fails.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"he (referring to 'the Son of God'/Jesus)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism directly asserts that Jesus saves believers from sin, in its own voice as a positive answer.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts redemptive action but attributes it specifically to the Son (Jesus) rather than to 'the one God' or 'the Father' as required.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical and doctrinal subject is the Son ('he'/Jesus), not the one God or the Father as the predicate's required subject specifies, so despite verbatim phrase and clear assertion of redemptive action, the subject condition fails.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "1514c8b505fc0a7258c010bc",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "he (the Son of God, i.e., Jesus)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The catechism directly asserts this as the answer to the question in its own doctrinal voice.",
+    "floor": "FULL",
+    "floor_reason": "The passage asserts that the Son of God saves us from our sins, a direct redemptive-action claim about the required divine subject.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the Son of God, and the standard asserts in its own voice that he saves us from our sins, meeting the floor for the Savior predicate.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (the Son of God, i.e., Jesus)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism directly asserts this as the answer to the question in its own doctrinal voice.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts that the Son of God saves us from our sins, a direct redemptive-action claim about the required divine subject.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the Son of God, and the standard asserts in its own voice that he saves us from our sins, meeting the floor for the Savior predicate.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-212-p1-BSR-RP-06-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "13e240fb57ef30457bb813e5",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "The Son",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The chunk asserts this directly of the Son, not the Father or the one God as required.",
-    "floor": "PARTIAL",
-    "floor_reason": "Redemptive action is affirmed, but predicated of the Son specifically rather than of God/the Father as the required subject.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The passage asserts the Son, not the required subject (God/the Father), is Savior and Redeemer.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The Son\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The chunk asserts this directly of the Son, not the Father or the one God as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Redemptive action is affirmed, but predicated of the Son specifically rather than of God/the Father as the required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage asserts the Son, not the required subject (God/the Father), is Savior and Redeemer.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -6355,6 +6469,95 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "13e240fb57ef30457bb813e5",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "The Son",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The chunk asserts this directly of the Son, not the Father or the one God as required.",
+      "floor": "PARTIAL",
+      "floor_reason": "Redemptive action is affirmed, but predicated of the Son specifically rather than of God/the Father as the required subject.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The passage asserts the Son, not the required subject (God/the Father), is Savior and Redeemer.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The Son\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The chunk asserts this directly of the Son, not the Father or the one God as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Redemptive action is affirmed, but predicated of the Son specifically rather than of God/the Father as the required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage asserts the Son, not the required subject (God/the Father), is Savior and Redeemer.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "879629a555b9dd021d8e3a1b",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "The Son",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession directly asserts this as part of its doctrinal statement on the persons' works, not quoting or reporting an opponent's view.",
+    "floor": "FULL",
+    "floor_reason": "The passage asserts that the Son, as divine person, is our Savior and Redeemer by his blood, directly affirming redemptive action.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the Son (required subject), and the standard asserts this in its own voice as a positive doctrinal claim about the Son's redemptive work.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Son\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession directly asserts this as part of its doctrinal statement on the persons' works, not quoting or reporting an opponent's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts that the Son, as divine person, is our Savior and Redeemer by his blood, directly affirming redemptive action.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the Son (required subject), and the standard asserts this in its own voice as a positive doctrinal claim about the Son's redemptive work.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-212-p1-BSR-RP-02-2": {
@@ -6410,40 +6613,17 @@
    }
   },
   "Q-212-p1-BSR-RP-05-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "a6f1b1f86cc2956c8f60c5f1",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "Jesus Christ (referred to as 'my faithful Savior')",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The text asserts that Christ has paid for sins and set the speaker free, but the subject is Christ, not the required subject (the one God/the Father).",
-    "floor": "PARTIAL",
-    "floor_reason": "Redemptive action is asserted, but of Christ specifically rather than of the one God/the Father as required.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The passage names Jesus Christ, not God/the Father, as the Savior performing redemptive action, failing the required_subject test.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Jesus Christ (referred to as 'my faithful Savior')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts that Christ has paid for sins and set the speaker free, but the subject is Christ, not the required subject (the one God/the Father).\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Redemptive action is asserted, but of Christ specifically rather than of the one God/the Father as required.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage names Jesus Christ, not God/the Father, as the Savior performing redemptive action, failing the required_subject test.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -6460,43 +6640,110 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "a6f1b1f86cc2956c8f60c5f1",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "Jesus Christ (referred to as 'my faithful Savior')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The text asserts that Christ has paid for sins and set the speaker free, but the subject is Christ, not the required subject (the one God/the Father).",
+      "floor": "PARTIAL",
+      "floor_reason": "Redemptive action is asserted, but of Christ specifically rather than of the one God/the Father as required.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The passage names Jesus Christ, not God/the Father, as the Savior performing redemptive action, failing the required_subject test.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Jesus Christ (referred to as 'my faithful Savior')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts that Christ has paid for sins and set the speaker free, but the subject is Christ, not the required subject (the one God/the Father).\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Redemptive action is asserted, but of Christ specifically rather than of the one God/the Father as required.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage names Jesus Christ, not God/the Father, as the Savior performing redemptive action, failing the required_subject test.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "b16162b103fb13a31b3a1781",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "Jesus Christ (referred to as 'my faithful Savior')",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The catechism asserts in its own voice that Christ is the believer's faithful Savior who has paid for sins and set free from the devil's tyranny.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that Christ, as Savior, accomplished redemptive action (paid for sins with his blood, freed from the devil's tyranny), fully within the predicate's sense.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is Christ (the Son, required subject), and the passage in its own confessional voice asserts his redemptive saving action, satisfying the FULL floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"Jesus Christ (referred to as 'my faithful Savior')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice that Christ is the believer's faithful Savior who has paid for sins and set free from the devil's tyranny.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that Christ, as Savior, accomplished redemptive action (paid for sins with his blood, freed from the devil's tyranny), fully within the predicate's sense.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is Christ (the Son, required subject), and the passage in its own confessional voice asserts his redemptive saving action, satisfying the FULL floor.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-212-p1-BSR-RP-06-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "e86db8e0d598163433bd9cbe",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "he (referring to Jesus Christ, the Son)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The confession asserts in its own voice that Jesus was named Savior because he would save his people.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage asserts redemptive action, but the subject is Jesus Christ (the Son) rather than the required subject (God/the Father) as defined for this predicate.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The clause's grammatical and logical subject is Jesus Christ ('he'), not God the Father or the undivided Godhead as required by the predicate's subject restriction, so the required-subject condition fails even though the phrase and assertion conditions are met.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"he (referring to Jesus Christ, the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts in its own voice that Jesus was named Savior because he would save his people.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts redemptive action, but the subject is Jesus Christ (the Son) rather than the required subject (God/the Father) as defined for this predicate.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's grammatical and logical subject is Jesus Christ ('he'), not God the Father or the undivided Godhead as required by the predicate's subject restriction, so the required-subject condition fails even though the phrase and assertion conditions are met.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -6513,6 +6760,96 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "e86db8e0d598163433bd9cbe",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "he (referring to Jesus Christ, the Son)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The confession asserts in its own voice that Jesus was named Savior because he would save his people.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage asserts redemptive action, but the subject is Jesus Christ (the Son) rather than the required subject (God/the Father) as defined for this predicate.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The clause's grammatical and logical subject is Jesus Christ ('he'), not God the Father or the undivided Godhead as required by the predicate's subject restriction, so the required-subject condition fails even though the phrase and assertion conditions are met.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"he (referring to Jesus Christ, the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts in its own voice that Jesus was named Savior because he would save his people.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts redemptive action, but the subject is Jesus Christ (the Son) rather than the required subject (God/the Father) as defined for this predicate.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's grammatical and logical subject is Jesus Christ ('he'), not God the Father or the undivided Godhead as required by the predicate's subject restriction, so the required-subject condition fails even though the phrase and assertion conditions are met.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "aef50d7047ac6efdbb392956",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "he (Jesus Christ, the Son)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession directly asserts, in its own voice, that Jesus was named 'Savior' because he would save his people from their sins.",
+    "floor": "FULL",
+    "floor_reason": "The clause explicitly asserts the redemptive/saving action of the Son ('he would save his people from their sins'), fulfilling the predicate in full.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The passage verbatim, with the correct subject (the Son), asserts in its own voice that he saves his people from their sins, satisfying the 'Savior' predicate fully.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (Jesus Christ, the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession directly asserts, in its own voice, that Jesus was named 'Savior' because he would save his people from their sins.\", \"floor\": \"FULL\", \"floor_reason\": \"The clause explicitly asserts the redemptive/saving action of the Son ('he would save his people from their sins'), fulfilling the predicate in full.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The passage verbatim, with the correct subject (the Son), asserts in its own voice that he saves his people from their sins, satisfying the 'Savior' predicate fully.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   }
  },
@@ -6549,6 +6886,28 @@
    "source_note_guard": "ok",
    "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
    "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the quoted text directly names God as 'a Savior,' affirming redemptive action at the controlled proposition floor, matching the family's established A code with no narrowing.\", \"source_note\": \"The Second Helvetic Confession (Book of Confessions 5.015) declares God to be 'a righteous God and a Savior,' affirming redemptive action as belonging to God alone.\"}"
+  },
+  "Q-212-p1-BSR-RP-01-1": {
+   "status": "DONE",
+   "call_id": "d5a3a26d533f7ecdc0ffa98b",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: the Confession names Christ, the only begotten Son, as Savior and affirms his people are 'by him in time redeemed'—substantive agreement at the shared redemptive-action floor, consistent with the family code.",
+   "source_note": "The Westminster Confession (8.1) states that God ordained the Lord Jesus, his only begotten Son, to be the Head and Savior of his church, by whom his people are redeemed.",
+   "source_note_guard": "ok",
+   "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the Confession names Christ, the only begotten Son, as Savior and affirms his people are 'by him in time redeemed'—substantive agreement at the shared redemptive-action floor, consistent with the family code.\", \"source_note\": \"The Westminster Confession (8.1) states that God ordained the Lord Jesus, his only begotten Son, to be the Head and Savior of his church, by whom his people are redeemed.\"}"
+  },
+  "Q-212-p1-BSR-RP-05-1": {
+   "status": "DONE",
+   "call_id": "5d5be4a2880cc73e28b3030a",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Floor is FULL: the Heidelberg Catechism directly affirms the Son of God as the one who saves us from our sins, matching the controlled redemptive-action proposition without qualification, consistent with the family code.",
+   "source_note": "The Heidelberg Catechism (Q&A 29, Lord's Day 11) states that Jesus saves us from our sins, and that salvation is found in no one else.",
+   "source_note_guard": "ok",
+   "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Floor is FULL: the Heidelberg Catechism directly affirms the Son of God as the one who saves us from our sins, matching the controlled redemptive-action proposition without qualification, consistent with the family code.\", \"source_note\": \"The Heidelberg Catechism (Q&A 29, Lord's Day 11) states that Jesus saves us from our sins, and that salvation is found in no one else.\"}"
   }
  },
  "phase": "DONE",
@@ -6562,6 +6921,25 @@
   "BSR-EO-09"
  ],
  "survivors": [
+  {
+   "candidate_id": "Q-212-p1-BSR-RP-01-1",
+   "pass": 1,
+   "registry_id": "BSR-RP-01",
+   "locator": "Chapter 8.1 — Of Christ the Mediator",
+   "phrase": "the Head and Savior of his church",
+   "rationale": "The Confession explicitly titles the divine Son 'Savior' in the act of redeeming and glorifying his people, asserting redemptive action of God the Son.",
+   "floor_claim": "FULL",
+   "chunk_text": "It pleased God, in his eternal purpose, to choose and ordain the Lord Jesus, his only begotten Son, to be the Mediator between God and man, the Prophet, Priest, and King, the Head and Savior of his church, the Heir of all things, and Judge of the world: unto whom he did from all eternity give a people, to be his seed, and to be by him in time redeemed, called, justified, sanctified, and glorified.",
+   "chunk_hash": "f2cebd10b776f97282a0fc5df47500a1f9e9d82fdc2ac4d500d5c60c6d8ff439",
+   "division": "paragraph",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
   {
    "candidate_id": "Q-212-p1-BSR-RP-02-1",
    "pass": 1,
@@ -6620,6 +6998,44 @@
    "slot": "GUARANTEED"
   },
   {
+   "candidate_id": "Q-212-p1-BSR-RP-05-1",
+   "pass": 1,
+   "registry_id": "BSR-RP-05",
+   "locator": "Q&A 29 (Lord’s Day 11)",
+   "phrase": "he saves us from our sins",
+   "rationale": "The catechism asserts that the Son of God, true God, saves us from sin, directly predicating redemptive Savior-action of God.",
+   "floor_claim": "FULL",
+   "chunk_text": "Q. Why is the Son of God called “Jesus,” meaning “savior”? A. Because he saves us from our sins, and because salvation should not be sought and cannot be found in anyone else.",
+   "chunk_hash": "b80a7912d48651158451d610734ad84fa8a463fae368a9e9dfac6385ce857beb",
+   "division": "question",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-212-p1-BSR-RP-06-1",
+   "pass": 1,
+   "registry_id": "BSR-RP-06",
+   "locator": "Article 9: The Scriptural Witness on the Trinity",
+   "phrase": "The Son is our Savior and Redeemer, by his blood.",
+   "rationale": "Confession directly titles the divine Son—fully God per the same article—Savior, asserting redemptive action of God.",
+   "floor_claim": "FULL",
+   "chunk_text": "All these things we know from the testimonies of Holy Scripture as well as from the effects of the persons, especially from those we feel within ourselves. The testimonies of the Holy Scriptures, which teach us to believe in this Holy Trinity, are written in many places of the Old Testament, which need not be enumerated but only chosen with discretion. In the book of Genesis God says, “Let us make humankind in our image, according to our likeness.” So “God created humankind in his image”— indeed, “male and female he created them.” “See, the man has become like one of us.” It appears from this that there is a plurality of persons within the Deity, when God says, “Let us make humankind in our image”— and afterward God indicates the unity in saying, “God created.” It is true that God does not say here how many persons there are— but what is somewhat obscure to us in the Old Testament is very clear in the New. For when our Lord was baptized in the Jordan, the voice of the Father was heard saying, “This is my Son, the Beloved;” the Son was seen in the water; and the Holy Spirit appeared in the form of a dove. So, in the baptism of all believers this form was prescribed by Christ: Baptize all people “in the name of the Father and of the Son and of the Holy Spirit.” In the Gospel according to Luke the angel Gabriel says to Mary, the mother of our Lord: “The Holy Spirit will come upon you, and the power of the Most High will overshadow you; therefore the child to be born will be holy; he will be called Son of God.” And in another place it says: “The grace of the Lord Jesus Christ, the love of God, and the communion of the Holy Spirit be with all of you.” [“There are three that testify in heaven, the Father, the Word, and the Holy Spirit, and these three are one.”] In all these passages we are fully taught that there are three persons in the one and only divine essence. And although this doctrine surpasses human understanding, we nevertheless believe it now, through the Word, waiting to know and enjoy it fully in heaven. Furthermore, we must note the particular works and activities of these three persons in relation to us. The Father is called our Creator, by reason of his power. The Son is our Savior and Redeemer, by his blood. The Holy Spirit is our Sanctifier, by living in our hearts. This doctrine of the holy Trinity has always been maintained in the true church, from the time of the apostles until the present, against Jews, Muslims, and certain false Christians and heretics, such as Marcion, Mani, Praxeas, Sabellius, Paul of Samosata, Arius, and others like them, who were rightly condemned by the holy fathers. And so, in this matter we willingly accept the three ecumenical creeds— the Apostles’, Nicene, and Athanasian— as well as what the ancient fathers decided in agreement with them. 6 7 8 9 10 11 12 —following the better Greek texts, the NRSV and other modern translations place this verse in a footnote.",
+   "chunk_hash": "abaeb3af1b111ed729e3d427a61738f5d733f67b2943d770bb960c79f09152ee",
+   "division": "article",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
+  {
    "candidate_id": "Q-212-p1-BSR-RP-02-2",
    "pass": 1,
    "registry_id": "BSR-RP-02",
@@ -6630,6 +7046,44 @@
    "chunk_text": "What is justification? A. Justification is an act of God’s free grace, wherein he pardoneth all our sins, and accepteth us as righteous in his sight, only for the righteousness of Christ imputed to us, and received by faith alone.",
    "chunk_hash": "66d590b56bc5746fdb73e707a2079bdb666cbdd8cee96caa3be518e3212f9f6f",
    "division": "question",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 2,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
+  },
+  {
+   "candidate_id": "Q-212-p1-BSR-RP-05-2",
+   "pass": 1,
+   "registry_id": "BSR-RP-05",
+   "locator": "Q&A 1 (Lord’s Day 1)",
+   "phrase": "to my faithful Savior, Jesus Christ",
+   "rationale": "Confesses Jesus Christ, affirmed elsewhere as true eternal God, as the believer's Savior who redeems from sin and the devil.",
+   "floor_claim": "FULL",
+   "chunk_text": "Q. What is your only comfort in life and in death? A. That I am not my own, but belong— body and soul, in life and in death—2 to my faithful Savior, Jesus Christ. He has fully paid for all my sins with his precious blood, and has set me free from the tyranny of the devil. He also watches over me in such a way that not a hair can fall from my head without the will of my Father in heaven; in fact, all things must work together for my salvation. Because I belong to him, Christ, by his Holy Spirit, assures me of eternal life and makes me wholeheartedly willing and ready from now on to live for him.",
+   "chunk_hash": "c52a53b54e5eb14ff10ed05e88b9a97aa349ee7385acd5dd068ac263efbcde81",
+   "division": "question",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 2,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
+  },
+  {
+   "candidate_id": "Q-212-p1-BSR-RP-06-2",
+   "pass": 1,
+   "registry_id": "BSR-RP-06",
+   "locator": "Article 21: The Atonement",
+   "phrase": "that is, “Savior”— because he would save his people from their sins.",
+   "rationale": "The standard names Christ Savior specifically because he enacts redemptive saving of people from sins, a divine act.",
+   "floor_claim": "FULL",
+   "chunk_text": "We believe that Jesus Christ is a high priest forever according to the order of Melchizedek— made such by an oath— and that he presented himself in our name before his Father, to appease his Father’s wrath with full satisfaction by offering himself on the tree of the cross and pouring out his precious blood for the cleansing of our sins, as the prophets had predicted. For it is written that “the punishment that made us whole” was placed on the Son of God and that “by his bruises we are healed.” He was “like a lamb that is led to the slaughter”; he was “numbered with the transgressors” and condemned as a criminal by Pontius Pilate, though Pilate had declared that he was innocent. So he paid back what he had not stolen, and he suffered— “the righteous for the unrighteous,” in both his body and his soul— in such a way that when he sensed the horrible punishment required by our sins “his sweat became like great drops of blood falling down on the ground.” He cried, “My God, my God, why have you forsaken me?” And he endured all this for the forgiveness of our sins. Therefore we rightly say with Paul that we know nothing “except Jesus Christ, and him crucified”; we “regard everything as loss because of the surpassing value of knowing Christ Jesus [our] Lord.” We find all comforts in his wounds and have no need to seek or invent any other means to reconcile ourselves with God than this one and only sacrifice, once made, which renders believers perfect forever. This is also why the angel of God called him Jesus— that is, “Savior”— because he would save his people from their sins. 46 47 48 49 50 51 52 53",
+   "chunk_hash": "2c8497053fc0e9c397716ffc77574631c6d89ad53a8d63372de2a3dbfaf58791",
+   "division": "article",
    "fallback_tier": false,
    "witness": false,
    "effective_tier": "CONFESSIONAL",
@@ -6680,38 +7134,75 @@
  },
  "allocation": {
   "kept": [
-   "Q-212-p1-BSR-RP-02-1",
+   "Q-212-p1-BSR-RP-01-1",
    "Q-212-p1-BSR-RP-04-1",
-   "Q-212-p1-BSR-RP-03-1"
+   "Q-212-p1-BSR-RP-05-1"
   ],
   "roles": {
-   "Q-212-p1-BSR-RP-02-1": "PRIMARY",
+   "Q-212-p1-BSR-RP-01-1": "PRIMARY",
    "Q-212-p1-BSR-RP-04-1": "PRIMARY",
-   "Q-212-p1-BSR-RP-03-1": "PRIMARY"
+   "Q-212-p1-BSR-RP-05-1": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {
-   "Q-212-p1-BSR-RP-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
+   "Q-212-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+   "Q-212-p1-BSR-RP-06-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
+   "Q-212-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+   "Q-212-p1-BSR-RP-05-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
+   "Q-212-p1-BSR-RP-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+   "Q-212-p1-BSR-RP-06-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)"
   },
   "witness_only": [],
   "groups": {
+   "Q-212-p1-BSR-RP-01-1": "opc and westminster churches",
    "Q-212-p1-BSR-RP-02-1": "opc and westminster churches",
    "Q-212-p1-BSR-RP-03-1": "opc and westminster churches",
    "Q-212-p1-BSR-RP-04-1": "pc(usa)",
-   "Q-212-p1-BSR-RP-02-2": "opc and westminster churches"
+   "Q-212-p1-BSR-RP-05-1": "crcna and rca",
+   "Q-212-p1-BSR-RP-06-1": "crcna and rca",
+   "Q-212-p1-BSR-RP-02-2": "opc and westminster churches",
+   "Q-212-p1-BSR-RP-05-2": "crcna and rca",
+   "Q-212-p1-BSR-RP-06-2": "crcna and rca"
   },
   "slot_order": {
-   "Q-212-p1-BSR-RP-02-1": 0,
+   "Q-212-p1-BSR-RP-01-1": 0,
    "Q-212-p1-BSR-RP-04-1": 1,
-   "Q-212-p1-BSR-RP-03-1": 2
-  }
+   "Q-212-p1-BSR-RP-05-1": 2
+  },
+  "parallel_witnesses": {}
  },
  "coder_skipped": {
-  "Q-212-p1-BSR-RP-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
+  "Q-212-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+  "Q-212-p1-BSR-RP-06-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
+  "Q-212-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+  "Q-212-p1-BSR-RP-05-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
+  "Q-212-p1-BSR-RP-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+  "Q-212-p1-BSR-RP-06-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)"
  },
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-212-p1-BSR-RP-01-1": [
+    "REJECT",
+    "ACCEPT_WITH_CAVEAT"
+   ],
+   "Q-212-p1-BSR-RP-05-1": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-212-p1-BSR-RP-06-1": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-212-p1-BSR-RP-05-2": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-212-p1-BSR-RP-06-2": [
+    "REJECT",
+    "ACCEPT"
+   ]
+  }
  }
 }

@@ -1411,32 +1411,6 @@
    }
   },
   "Q-167-p1-BSR-MW-04-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "591844862d94320b9ac58db7",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "one's moral nature (passive construction: 'is given...')",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The passage asserts regeneration as a divine work, but the quoted phrase's grammatical subject is the human moral nature, not God or the Spirit directly.",
-    "floor": "PARTIAL",
-    "floor_reason": "The clause describes the human recipient's transformation ('one's moral nature is given...life'), not God as the agent-subject asserting life-giving action, even though the broader sentence attributes the work to the Holy Spirit.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "ECCLESIAL_VS_SOTERIOLOGICAL"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The quoted phrase's grammatical subject is 'one's moral nature,' a human faculty, not God or the Spirit as required; the divine agency is only implied in a preceding clause, not in the cited phrase itself.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"one's moral nature (passive construction: 'is given...')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts regeneration as a divine work, but the quoted phrase's grammatical subject is the human moral nature, not God or the Spirit directly.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause describes the human recipient's transformation ('one's moral nature is given...life'), not God as the agent-subject asserting life-giving action, even though the broader sentence attributes the work to the Holy Spirit.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"ECCLESIAL_VS_SOTERIOLOGICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted phrase's grammatical subject is 'one's moral nature,' a human faculty, not God or the Spirit as required; the divine agency is only implied in a preceding clause, not in the cited phrase itself.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -1473,35 +1447,113 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
-   }
-  },
-  "Q-167-p1-BSR-MW-02-2": {
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "591844862d94320b9ac58db7",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "one's moral nature (passive construction: 'is given...')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The passage asserts regeneration as a divine work, but the quoted phrase's grammatical subject is the human moral nature, not God or the Spirit directly.",
+      "floor": "PARTIAL",
+      "floor_reason": "The clause describes the human recipient's transformation ('one's moral nature is given...life'), not God as the agent-subject asserting life-giving action, even though the broader sentence attributes the work to the Holy Spirit.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "ECCLESIAL_VS_SOTERIOLOGICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The quoted phrase's grammatical subject is 'one's moral nature,' a human faculty, not God or the Spirit as required; the divine agency is only implied in a preceding clause, not in the cited phrase itself.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"one's moral nature (passive construction: 'is given...')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts regeneration as a divine work, but the quoted phrase's grammatical subject is the human moral nature, not God or the Spirit directly.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause describes the human recipient's transformation ('one's moral nature is given...life'), not God as the agent-subject asserting life-giving action, even though the broader sentence attributes the work to the Holy Spirit.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"ECCLESIAL_VS_SOTERIOLOGICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted phrase's grammatical subject is 'one's moral nature,' a human faculty, not God or the Spirit as required; the divine agency is only implied in a preceding clause, not in the cited phrase itself.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
    "sonnet": {
     "model": "sonnet",
-    "call_id": "1ef7b205cb2a2a5d3bb975a1",
+    "call_id": "5fd045d339d2f769c7f28861",
     "attempt": 0,
     "prompt_version": "gate6-v1.2",
     "phrase_verbatim": "Y",
     "subject_is_required": "N",
-    "grammatical_subject": "regeneration (with implicit subject 'we' as recipients: 'whereby we are made partakers')",
+    "grammatical_subject": "one's moral nature",
     "speech_act_is_assertion": "Y",
-    "speech_act_note": "The passage asserts that regeneration, worked through Christ and the Holy Spirit, results in believers partaking of divine nature and new life; the grammatical subject of the clause is 'we' (the believers), not God.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The passage describes humanity's reception of new life through regeneration rather than asserting that God/the Father communicates life as agent-subject; the required subject (God) does not appear as the grammatical subject of the life-giving action in this clause.",
+    "speech_act_note": "The passage asserts that regeneration, a work of the Holy Spirit, results in a person's moral nature being given new life, but the clause's own subject is the human nature, not the Spirit.",
+    "floor": "PARTIAL",
+    "floor_reason": "The passage links the Spirit's regenerating work to a human receiving spiritual life, but the specific clause about being 'given a distinctively spiritual life' has the human moral nature as its grammatical subject, not God or the Spirit.",
     "hazard_flags": [
-     "ECCLESIAL_VS_SOTERIOLOGICAL",
      "RELATIONAL_VS_METAPHYSICAL"
     ],
     "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
     "verdict_model": "REJECT",
     "reason_code": "WRONG_SUBJECT",
-    "reason": "The clause's subject is the believer ('we') receiving new life through regeneration, not God as the one communicating life, so the required-subject condition fails despite the verbatim phrase.",
+    "reason": "The quoted phrase's grammatical subject is 'one's moral nature,' i.e., the human recipient, not God or the Holy Spirit as required by the predicate's subject constraint, even though the surrounding text attributes the action to the Spirit's work.",
     "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"regeneration (with implicit subject 'we' as recipients: 'whereby we are made partakers')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that regeneration, worked through Christ and the Holy Spirit, results in believers partaking of divine nature and new life; the grammatical subject of the clause is 'we' (the believers), not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage describes humanity's reception of new life through regeneration rather than asserting that God/the Father communicates life as agent-subject; the required subject (God) does not appear as the grammatical subject of the life-giving action in this clause.\", \"hazard_flags\": [\"ECCLESIAL_VS_SOTERIOLOGICAL\", \"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's subject is the believer ('we') receiving new life through regeneration, not God as the one communicating life, so the required-subject condition fails despite the verbatim phrase.\"}",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"one's moral nature\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that regeneration, a work of the Holy Spirit, results in a person's moral nature being given new life, but the clause's own subject is the human nature, not the Spirit.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage links the Spirit's regenerating work to a human receiving spiritual life, but the specific clause about being 'given a distinctively spiritual life' has the human moral nature as its grammatical subject, not God or the Spirit.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted phrase's grammatical subject is 'one's moral nature,' i.e., the human recipient, not God or the Holy Spirit as required by the predicate's subject constraint, even though the surrounding text attributes the action to the Spirit's work.\"}",
     "phrase_verbatim_code": "Y",
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT"
    },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
+   }
+  },
+  "Q-167-p1-BSR-MW-02-2": {
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -1538,6 +1590,111 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "1ef7b205cb2a2a5d3bb975a1",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "regeneration (with implicit subject 'we' as recipients: 'whereby we are made partakers')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The passage asserts that regeneration, worked through Christ and the Holy Spirit, results in believers partaking of divine nature and new life; the grammatical subject of the clause is 'we' (the believers), not God.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage describes humanity's reception of new life through regeneration rather than asserting that God/the Father communicates life as agent-subject; the required subject (God) does not appear as the grammatical subject of the life-giving action in this clause.",
+      "hazard_flags": [
+       "ECCLESIAL_VS_SOTERIOLOGICAL",
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The clause's subject is the believer ('we') receiving new life through regeneration, not God as the one communicating life, so the required-subject condition fails despite the verbatim phrase.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"regeneration (with implicit subject 'we' as recipients: 'whereby we are made partakers')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that regeneration, worked through Christ and the Holy Spirit, results in believers partaking of divine nature and new life; the grammatical subject of the clause is 'we' (the believers), not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage describes humanity's reception of new life through regeneration rather than asserting that God/the Father communicates life as agent-subject; the required subject (God) does not appear as the grammatical subject of the life-giving action in this clause.\", \"hazard_flags\": [\"ECCLESIAL_VS_SOTERIOLOGICAL\", \"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's subject is the believer ('we') receiving new life through regeneration, not God as the one communicating life, so the required-subject condition fails despite the verbatim phrase.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "3e551c6bd3b9e6ea5eefc7d1",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "we (the believers, via 'regeneration ... whereby we are made partakers')",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The article asserts a doctrinal claim about regeneration, but the grammatical subject of the clause is the believer ('we'), not God/Spirit/Son acting as the source of life.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage describes human newness of life obtained through Christ and the Spirit's power, but the sentence's subject is 'we'/'regeneration', not God as the giver of life; thus the predicate's required subject is not satisfied.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL",
+     "SEMANTIC_FLOOR"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The clause attributes life-giving experience to the believer, not to God/Son/Spirit as agent, failing the required-subject test for this predicate.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"we (the believers, via 'regeneration ... whereby we are made partakers')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The article asserts a doctrinal claim about regeneration, but the grammatical subject of the clause is the believer ('we'), not God/Spirit/Son acting as the source of life.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage describes human newness of life obtained through Christ and the Spirit's power, but the sentence's subject is 'we'/'regeneration', not God as the giver of life; thus the predicate's required subject is not satisfied.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause attributes life-giving experience to the believer, not to God/Son/Spirit as agent, failing the required-subject test for this predicate.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-167-p1-BSR-MW-03-2": {
@@ -1704,6 +1861,17 @@
    "source_note_guard": "ok",
    "scope_caveat": "The Articles of Religion and the EUB Confession are constitutionally protected standards of the United Methodist Church. The Global Methodist Church, which separated in 2022, holds the same Articles; its standards are cited here from its 2022 Transitional Book of Doctrines and Discipline, the only edition published on the church's own domain, and the Articles are unchanged in the 2024 edition. The Wesleyan Church holds its own articles, which the registry lists separately.",
    "raw": "{\"rendered_state\": \"A-SF\", \"diverges_from_family_code\": true, \"state_reason\": \"Verifier floor is PARTIAL: the Article attests a narrower proposition—God quickening/strengthening faith through the sacraments—rather than a general claim of divine life-giving action. This narrower proposition sits wholly within the shared floor, so A-SF is the honest state rather than the family's flat A.\", \"source_note\": \"The Wesleyan Church's Articles of Religion state that through the sacraments God 'works within us to quicken, strengthen and confirm our faith,' describing this quickening as part of God's gracious ministry toward believers.\"}"
+  },
+  "Q-167-p1-BSR-MW-03-2": {
+   "status": "DONE",
+   "call_id": "a8a172f61ef0bee6872a5d7e",
+   "rendered_state": "A-SF",
+   "diverges_from_family_code": true,
+   "state_reason": "The verifier floor is PARTIAL: Article XVI attests God quickening faith through the sacraments, a narrower instance wholly within the shared life-giving floor, rather than the general communication-of-life proposition the family code (A) presumes.",
+   "source_note": "The Global Methodist Church's Articles of Religion (Article XVI, Of the Sacraments) state that God works invisibly in believers and 'doth not only quicken, but also strengthen and confirm' their faith through the sacraments.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Articles of Religion and the EUB Confession are constitutionally protected standards of the United Methodist Church. The Global Methodist Church, which separated in 2022, holds the same Articles; its standards are cited here from its 2022 Transitional Book of Doctrines and Discipline, the only edition published on the church's own domain, and the Articles are unchanged in the 2024 edition. The Wesleyan Church holds its own articles, which the registry lists separately.",
+   "raw": "{\"rendered_state\": \"A-SF\", \"diverges_from_family_code\": true, \"state_reason\": \"The verifier floor is PARTIAL: Article XVI attests God quickening faith through the sacraments, a narrower instance wholly within the shared life-giving floor, rather than the general communication-of-life proposition the family code (A) presumes.\", \"source_note\": \"The Global Methodist Church's Articles of Religion (Article XVI, Of the Sacraments) state that God works invisibly in believers and 'doth not only quicken, but also strengthen and confirm' their faith through the sacraments.\"}"
   }
  },
  "phase": "DONE",
@@ -1842,17 +2010,17 @@
  "allocation": {
   "kept": [
    "Q-167-p1-BSR-MW-02-1",
-   "Q-167-p1-BSR-MW-03-1",
-   "Q-167-p1-BSR-MW-04-2"
+   "Q-167-p1-BSR-MW-04-2",
+   "Q-167-p1-BSR-MW-03-2"
   ],
   "roles": {
    "Q-167-p1-BSR-MW-02-1": "PRIMARY",
-   "Q-167-p1-BSR-MW-03-1": "PRIMARY",
-   "Q-167-p1-BSR-MW-04-2": "PRIMARY"
+   "Q-167-p1-BSR-MW-04-2": "PRIMARY",
+   "Q-167-p1-BSR-MW-03-2": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {
-   "Q-167-p1-BSR-MW-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'global methodist church' already holds a slot)"
+   "Q-167-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-167-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot"
   },
   "witness_only": [],
   "groups": {
@@ -1863,12 +2031,21 @@
   },
   "slot_order": {
    "Q-167-p1-BSR-MW-02-1": 0,
-   "Q-167-p1-BSR-MW-03-1": 1,
-   "Q-167-p1-BSR-MW-04-2": 2
+   "Q-167-p1-BSR-MW-04-2": 2,
+   "Q-167-p1-BSR-MW-03-2": 3
+  },
+  "parallel_witnesses": {
+   "Q-167-p1-BSR-MW-02-1": [
+    {
+     "candidate_id": "Q-167-p1-BSR-MW-03-1",
+     "registry_id": "BSR-MW-03",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
  "coder_skipped": {
-  "Q-167-p1-BSR-MW-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'global methodist church' already holds a slot)"
+  "Q-167-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-167-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot"
  },
  "empty": false,
  "refinalized": {

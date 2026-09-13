@@ -1,0 +1,52 @@
+{
+ "schema": "sjn-gate6-author-rulings/1",
+ "what": "Author rulings the Gate 6 harness applies IN MEMORY until the workbook carries them. Nothing here writes to the workbook. Each ruling names the workbook change that would supersede it; once the workbook holds that change the harness reads the workbook and checks it agrees (scripts/sjn_recovery/rulings.py).",
+ "source": "wop-scratch/WoP_SJN_B4_ReviewAddendum_20260913.md §5 and wop-scratch/WoP_SJN_Gate6_Session6_Prompt_20260913.txt (author rulings, 2026-09-13)",
+ "rulings": {
+  "R6-1_required_subject": {
+   "ruled": "2026-09-13",
+   "rule": "A predicate is satisfied when the passage asserts it of the Son or the Holy Spirit AS DIVINE. Christ's human nature stays excluded.",
+   "supersede_with": "Inherited 57: a 'Required subject' column (all 57 families; these five retyped). Until then registry.subject_scope() derives the other 52.",
+   "families": {
+    "RNR-H06": {"predicate": "Lord", "ruling_example": "\"the Lord, the giver of life\" — Lord, of the Spirit",
+                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"},
+    "RNR-H21": {"predicate": "Life-giving", "ruling_example": "\"the Lord, the giver of life\" — Life-giving, of the Spirit",
+                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"},
+    "RNR-H26": {"predicate": "Judge", "ruling_example": "\"to judge the living and the dead\" — Judge, of the Son",
+                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"},
+    "RNR-H27": {"predicate": "Savior", "ruling_example": "\"for us men and for our salvation\" — Savior, of the Son",
+                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"},
+    "RNR-H38": {"predicate": "Not made", "ruling_example": "\"begotten, not made\" — Not made, of the Son",
+                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"begotten, not made\" of the Son; not the Church, not humanity, not Christ's human nature as such)"}
+   }
+  },
+  "R6-2_hedged_partial": {
+   "ruled": "2026-09-13",
+   "rule": "If the verifier's own floor_reason states that the passage does not assert the predicate, the floor is WORD_ONLY. PARTIAL is for a passage that asserts the predicate INCOMPLETELY, never for one that asserts a NEIGHBOURING proposition.",
+   "refused_cells": {
+    "note": "2c: refused either way. Every candidate on these three Baptist cards rests on \"incomprehensible\" read as a neighbouring apophatic claim; their floor is set to WORD_ONLY by this ruling (floor_capped_by AUTHOR_RULING_R6-2).",
+    "Q-382": {"predicate": "Ineffable", "candidates": ["Q-382-p1-BSR-BA-02-1", "Q-382-p1-BSR-BA-02-2"]},
+    "Q-390": {"predicate": "Inscrutable", "candidates": ["Q-390-p1-BSR-BA-02-1", "Q-390-p1-BSR-BA-02-2"]},
+    "Q-454": {"predicate": "Greater dissimilarity than similarity", "candidates": ["Q-454-p1-BSR-BA-02-1"]}
+   }
+  },
+  "R6-3_retire_BSR-EO-03": {
+   "ruled": "2026-09-13",
+   "registry_id": "BSR-EO-03",
+   "status": "RETIRED",
+   "reason_code": "HOST_RETIRED",
+   "reason": "goarch.org is a retired registry host (its bot check fails for human users, so a citation there cannot be audited); the row has no text, and under the session-5 NO TEXT rule a citable ratified row with no text blocks the REVIEWED offer on every Eastern Orthodox cell. Recorded as a host fact and its consequence, not as a judgment about the source. GOARCH's rite remains in the branch through BSR-EO-07 (and BSR-EO-14).",
+   "supersede_with": "Branch Source Registry, BSR-EO-03: status AUTHOR_RATIFIED -> RETIRED (wop-scratch/WoP_SJN_BranchSourceRegistries_Draft3r5_20260913.csv)"
+  },
+  "R6-4_one_text_one_slot": {
+   "ruled": "2026-09-13",
+   "rule": "A candidate whose phrase is textually identical — after case folding and whitespace and punctuation normalisation — to one already seated on the card takes no slot, regardless of speaks_for group. It is recorded on the card as a parallel witness with its own registry_id and speaks_for.",
+   "implemented_in": "scripts/sjn_recovery/allocation.py (same_text_key, allocate)",
+   "same_text_rows": {
+    "note": "Rows that publish ONE text with DIFFERENT wording, so the textual guard cannot see them. Where both survive on a card the named row takes the slot and the other is recorded as a parallel witness, whatever the wording (Eastern Orthodox launch prompt, Task 2d: 'the higher-tier resolution takes the slot'). PENDING the author's confirmation of each pair.",
+    "BSR-EO-14": {"same_text_as": "BSR-EO-07", "text": "Divine Liturgy of St John Chrysostom", "precedence": "BSR-EO-07 takes the slot (EO consultation ladder Tier A; BSR-EO-14 is Tier B, 'the durable alternate to BSR-EO-07')",
+                  "evidence": "BSR-EO-14 reception_note: 'Registered alongside BSR-EO-07 so the branch does not depend on a single host again … WORDING DIFFERS from BSR-EO-07'; draft_recommendation: 'the durable alternate to BSR-EO-07'"}
+   }
+  }
+ }
+}

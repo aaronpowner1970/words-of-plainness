@@ -428,31 +428,6 @@
  },
  "verifications": {
   "Q-304-p1-BSR-MA-01-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "89abeaa30f555b9e06cbaf8a",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "the biblical account of creation by the word of God",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The clause asserts a claim about the biblical account's clarity, not a direct claim that God is not made.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage distinguishes God from creation but does not directly predicate 'not made' of God as the grammatical subject; it describes what the biblical account does.",
-    "hazard_flags": [
-     "SEMANTIC_FLOOR"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical subject of the cited clause is 'the biblical account,' not God, so the required subject condition fails despite the doctrinal content being consistent with denying creaturehood of God.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the biblical account of creation by the word of God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts a claim about the biblical account's clarity, not a direct claim that God is not made.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage distinguishes God from creation but does not directly predicate 'not made' of God as the grammatical subject; it describes what the biblical account does.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the cited clause is 'the biblical account,' not God, so the required subject condition fails despite the doctrinal content being consistent with denying creaturehood of God.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -461,9 +436,9 @@
     "route": null,
     "primary_verdict": "REJECT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "WORD_ONLY",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "WORD_ONLY"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -489,6 +464,109 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "89abeaa30f555b9e06cbaf8a",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the biblical account of creation by the word of God",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The clause asserts a claim about the biblical account's clarity, not a direct claim that God is not made.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage distinguishes God from creation but does not directly predicate 'not made' of God as the grammatical subject; it describes what the biblical account does.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject of the cited clause is 'the biblical account,' not God, so the required subject condition fails despite the doctrinal content being consistent with denying creaturehood of God.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the biblical account of creation by the word of God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts a claim about the biblical account's clarity, not a direct claim that God is not made.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage distinguishes God from creation but does not directly predicate 'not made' of God as the grammatical subject; it describes what the biblical account does.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the cited clause is 'the biblical account,' not God, so the required subject condition fails despite the doctrinal content being consistent with denying creaturehood of God.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "9127e088dcda1cef26ad5596",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "the biblical account of creation by the word of God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The commentary asserts, in its own voice, that Scripture distinguishes God from creation, but the sentence's grammatical subject is 'the biblical account,' not God.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage discusses a scriptural distinction between Creator and created rather than directly asserting that God himself is 'not made'; the predicate's subject is displaced onto the biblical narrative.",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "Though the phrase is verbatim and the passage does assert a Creator/creature distinction, the grammatical subject is the biblical account, not God, so it does not directly predicate 'not made' of God as required.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the biblical account of creation by the word of God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The commentary asserts, in its own voice, that Scripture distinguishes God from creation, but the sentence's grammatical subject is 'the biblical account,' not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage discusses a scriptural distinction between Creator and created rather than directly asserting that God himself is 'not made'; the predicate's subject is displaced onto the biblical narrative.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"Though the phrase is verbatim and the passage does assert a Creator/creature distinction, the grammatical subject is the biblical account, not God, so it does not directly predicate 'not made' of God as required.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"begotten, not made\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-304-p1-BSR-MA-02-1": {
@@ -736,7 +814,8 @@
   "slot_order": {
    "Q-304-p1-BSR-MA-02-1": 0,
    "Q-304-p1-BSR-MA-01-2": 1
-  }
+  },
+  "parallel_witnesses": {}
  },
  "coder_skipped": {},
  "empty": false,

@@ -36,7 +36,7 @@ from .config import (PACKETS_DIR, EMPTY_RESULT, EMPTY_RESULT_INCOMPLETE, MAX_CAN
                      CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA)
 from .registry import tier_rank
 from .allocation import allocate, translation_pairs, translation_pair_evidence, speaks_for_groups
-from . import guards, store
+from . import guards, store, rulings
 
 ACCEPTS = ("ACCEPT", "ACCEPT_WITH_CAVEAT")
 ORDERING = ("authority tier descending on the effective tier (creed_tier_resolution); the cap filled tier by tier; lower-tier "
@@ -54,6 +54,8 @@ VERDICT_RULE = {"rule": LOWER_FLOOR_RULE,
 WITNESS_FIELDS = ("candidate_id", "registry_id", "standard_title", "authority_tier", "effective_tier", "reception_scope",
                   "reception_note", "locator", "phrase", "locator_rationale", "locator_floor_claim", "chunk_context",
                   "recut_from", "source_url", "verifier_rubrics", "final_verdict", "build_reassertion")
+PARALLEL_FIELDS = ("candidate_id", "registry_id", "standard_title", "speaks_for", "speaks_for_group", "authority_tier", "locator", "phrase",
+                   "source_url", "final_verdict")
 COMPLETE_COVERAGE = ("FULL", "EXHAUSTED")
 
 
@@ -75,6 +77,8 @@ def _stage_for(reason):
         return "witness-only guard"
     if reason.startswith("paired"):
         return "translation pairing"
+    if reason.startswith("SAME_TEXT"):
+        return "same-text guard"
     return "tier allocation"
 
 
@@ -227,7 +231,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                                       "manifest_status": m.get("status") or "NO MANIFEST ENTRY", "fetch_mode": r.get("fetch_mode"),
                                       "notes": m.get("notes") or [], "refused": registry.citation_refusal(r["registry_id"]),
                                       "effect": "no chunks: the locator never saw this standard; every cell of the branch ran without it"})
-    caveat_slice, caveat_sample, exhaustion_cells = [], [], []
+    caveat_slice, caveat_sample, exhaustion_cells, same_text_cards = [], [], [], []
     citable_rows = registry.for_branch(branch, include_fallback=True, citable_only=True)
     no_text_on_cards = {}
     for cell in cells:
@@ -305,6 +309,9 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                         "found_in_exhaustion": bool(cand.get("exhaustion_batch") is not None or str(cand.get("pass")) == "3"),
                         "locator": cand["locator"], "phrase": cand["phrase"], "locator_rationale": cand["rationale"],
                         "locator_floor_claim": cand["floor_claim"], "chunk_context": cand["chunk_text"],
+                        # session 6: the allocator reads `floor_claim` (FULL before PARTIAL within a group); without it every packet
+                        # ordered on registry row alone and disagreed with the cell runner's (coder's) allocation on 8 of 247 cards
+                        "floor_claim": cand["floor_claim"], "locator_rank": cand.get("locator_rank"),
                         "recut_from": cand.get("recut_from"),
                         "source_url": chunk["source_url"] if chunk else None,
                         "parallel_witness": chunk.get("parallel_witness") if chunk else None,
@@ -346,6 +353,8 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     card["witness_only_candidates"].append(e)
                 elif stage == "translation pairing" and cid in alloc["english_witness"].values():
                     continue                      # shown on its controlling entry below, not as a rejection
+                elif stage == "same-text guard" and any(w["candidate_id"] == cid for ws in alloc["parallel_witnesses"].values() for w in ws):
+                    continue                      # R6-4: shown on the seated entry below as a parallel witness, not as a rejection
                 else:
                     card["rejections"].append({"stage": stage, **e})
             for cid in alloc["kept"]:
@@ -360,6 +369,16 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     e["english_witness"] = {k: w.get(k) for k in WITNESS_FIELDS}
                     e["english_witness"]["note"] = (f"{w['registry_id']} is the English witness of {e['registry_id']}; the "
                                                     f"{e['registry_id']} phrase controls, the witness is shown for reading only")
+                pws = alloc["parallel_witnesses"].get(cid) or []
+                if pws:
+                    e["same_text_parallel_witnesses"] = [
+                        dict({k: by_id[w["candidate_id"]].get(k) for k in PARALLEL_FIELDS}, rule=w["rule"], same_text_as=w.get("same_text_as"),
+                             note=(f"{w['registry_id']} ({by_id[w['candidate_id']].get('speaks_for')}) publishes this same sentence; one text takes one slot (R6-4)"
+                                   if w["rule"] == "SAME_TEXT" else
+                                   f"{w['registry_id']} publishes the same text as {w.get('same_text_as')} in different wording; it takes no slot beside it (R6-4, declared row)"))
+                        for w in pws]
+                    same_text_cards.append({"queue_id": cell["queue_id"], "seated": cid, "seated_registry_id": e["registry_id"],
+                                            "parallel": [(w["candidate_id"], w["registry_id"], w["rule"]) for w in pws]})
                 e["coder_proposal"] = st.get("coding", {}).get(cid)
                 if e["coder_proposal"] is None:
                     e["coder_note"] = ("not coded: this candidate was not allocated when the coder ran (the allocator has since changed, "
@@ -410,6 +429,17 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
         "cells_ran_on": (f"every card consulted every ratified row it should have" if not no_text_on_cards else
                          "; ".join(f"{rid} supplied no text to {v['cards']} of {len(cells)} card(s) ({v['empty_cards']} empty; manifest {v['manifest_status']})"
                                    for rid, v in sorted(no_text_on_cards.items()))),
+        # session 6: the author rulings applied in memory (rulings.py), and what the one-text-one-slot guard did on this branch
+        "author_rulings_applied": dict(rulings.summary(), registry_rows_retired_in_memory=getattr(registry, "rulings_applied", []),
+                                       required_subject_by_family={pid: {"predicate": p["predicate"], "source": p.get("subject_scope_source")}
+                                                                   for pid, p in predicates.items()
+                                                                   if str(p.get("subject_scope_source") or "").startswith(("AUTHOR", "WORKBOOK"))}),
+        "same_text_guard": {"rule": "R6-4 one text, one slot: a phrase textually identical (casefold, whitespace and punctuation normalised) to a seated "
+                                    "phrase takes no slot and is a parallel witness; a declared same-text row (different wording) likewise",
+                            "cards": len(same_text_cards), "parallel_witnesses": sum(len(x["parallel"]) for x in same_text_cards),
+                            "declared_same_text_rows": {k: v for k, v in rulings.same_text_rows().items()
+                                                        if k in {r["registry_id"] for r in registry.for_branch(branch, citable_only=False)}},
+                            "items": same_text_cards},
         "translation_pairs": pairs, "translation_pairs_evidence": translation_pair_evidence(registry, branch),
         "speaks_for_groups": groups,
         "verdict_rule": VERDICT_RULE,

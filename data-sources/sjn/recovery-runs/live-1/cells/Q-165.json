@@ -1763,39 +1763,17 @@
    }
   },
   "Q-165-p1-BSR-AN-04-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "79e54c05d644b833cd3cdc28",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "The Holy Spirit",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The catechism directly asserts this of the Holy Spirit in its own voice.",
-    "floor": "PARTIAL",
-    "floor_reason": "The predicate is asserted of the Holy Spirit, not of God/the Father as required, though the Spirit is divine.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The required subject is God/the Father, but the passage's grammatical subject is the Holy Spirit specifically, not the broader required subject.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The Holy Spirit\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism directly asserts this of the Holy Spirit in its own voice.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The predicate is asserted of the Holy Spirit, not of God/the Father as required, though the Spirit is divine.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject is God/the Father, but the passage's grammatical subject is the Holy Spirit specifically, not the broader required subject.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1812,6 +1790,95 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "79e54c05d644b833cd3cdc28",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "The Holy Spirit",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism directly asserts this of the Holy Spirit in its own voice.",
+      "floor": "PARTIAL",
+      "floor_reason": "The predicate is asserted of the Holy Spirit, not of God/the Father as required, though the Spirit is divine.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The required subject is God/the Father, but the passage's grammatical subject is the Holy Spirit specifically, not the broader required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The Holy Spirit\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism directly asserts this of the Holy Spirit in its own voice.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The predicate is asserted of the Holy Spirit, not of God/the Father as required, though the Spirit is divine.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject is God/the Father, but the passage's grammatical subject is the Holy Spirit specifically, not the broader required subject.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "8dc1a2b1da3176ceae73ec57",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "The Holy Spirit",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The catechism directly asserts this as a description of how the Spirit is revealed, in its own voice.",
+    "floor": "FULL",
+    "floor_reason": "The passage asserts that the Holy Spirit, as God, is the giver of life, directly matching the predicate of communicating life.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the Holy Spirit as divine person, and the assertion directly affirms life-giving in the catechism's own voice.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Holy Spirit\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism directly asserts this as a description of how the Spirit is revealed, in its own voice.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts that the Holy Spirit, as God, is the giver of life, directly matching the predicate of communicating life.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the Holy Spirit as divine person, and the assertion directly affirms life-giving in the catechism's own voice.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   }
  },
@@ -1826,6 +1893,17 @@
    "source_note_guard": "ok",
    "scope_caveat": "The Thirty-Nine Articles are a historic formulary of the Church of England received in different ways across the Anglican Communion; the catechisms speak for the province that adopted them.",
    "raw": "{\"rendered_state\":\"A-SF\",\"diverges_from_family_code\":true,\"state_reason\":\"The verifier floor is PARTIAL: Article XXV attests a narrower proposition—sacramental quickening of faith—wholly within the shared floor of life-giving divine action, rather than the general communication of life the family code 'A' presumes; so A-SF is the honest state.\",\"source_note\":\"The Thirty-Nine Articles (Article XXV, Of The Sacraments) state that God works invisibly through the sacraments, quickening as well as strengthening and confirming faith.\"}"
+  },
+  "Q-165-p1-BSR-AN-04-1": {
+   "status": "DONE",
+   "call_id": "52a97eae4089c08c9d3c194d",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: the Holy Spirit is affirmed as giver of life, matching the shared predicate of life-giving divine action; this aligns with the family code of A.",
+   "source_note": "The Episcopal Church's BCP 1979 Outline of the Faith teaches that the Holy Spirit is revealed in the Old Covenant as the giver of life, the One who spoke through the prophets.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Thirty-Nine Articles are a historic formulary of the Church of England received in different ways across the Anglican Communion; the catechisms speak for the province that adopted them.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the Holy Spirit is affirmed as giver of life, matching the shared predicate of life-giving divine action; this aligns with the family code of A.\", \"source_note\": \"The Episcopal Church's BCP 1979 Outline of the Faith teaches that the Holy Spirit is revealed in the Old Covenant as the giver of life, the One who spoke through the prophets.\"}"
   }
  },
  "phase": "DONE",
@@ -1856,25 +1934,48 @@
    "locator_rank": 1,
    "recut_from": null,
    "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-165-p1-BSR-AN-04-1",
+   "pass": 1,
+   "registry_id": "BSR-AN-04",
+   "locator": "Outline of the Faith (BCP p. 852) — The Holy Spirit: Q. How is the Holy Spirit revealed in the Old Covenant?",
+   "phrase": "The Holy Spirit is revealed in the Old Covenant as the giver of life",
+   "rationale": "Asserts that the Holy Spirit, the one God in Trinity, is the giver of life, a shared divine life-giving action.",
+   "floor_claim": "FULL",
+   "chunk_text": "How is the Holy Spirit revealed in the Old Covenant? The Holy Spirit is revealed in the Old Covenant as the giver of life, the One who spoke through the prophets.",
+   "chunk_hash": "da5c95f155ff81a1bb91d3e860880124d3f0cdbbd3852e2395a0bbef18374974",
+   "division": "question",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CATECHETICAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "slot": "GUARANTEED"
   }
  ],
  "fallback_used": false,
  "allocation": {
   "kept": [
-   "Q-165-p1-BSR-AN-01-1"
+   "Q-165-p1-BSR-AN-01-1",
+   "Q-165-p1-BSR-AN-04-1"
   ],
   "roles": {
-   "Q-165-p1-BSR-AN-01-1": "PRIMARY"
+   "Q-165-p1-BSR-AN-01-1": "PRIMARY",
+   "Q-165-p1-BSR-AN-04-1": "CORROBORATING"
   },
   "english_witness": {},
   "dropped": {},
   "witness_only": [],
   "groups": {
-   "Q-165-p1-BSR-AN-01-1": "church of england"
+   "Q-165-p1-BSR-AN-01-1": "church of england",
+   "Q-165-p1-BSR-AN-04-1": "the episcopal church"
   },
   "slot_order": {
-   "Q-165-p1-BSR-AN-01-1": 0
-  }
+   "Q-165-p1-BSR-AN-01-1": 0,
+   "Q-165-p1-BSR-AN-04-1": 0
+  },
+  "parallel_witnesses": {}
  },
  "coder_skipped": {},
  "empty": false,
@@ -1906,6 +2007,11 @@
  },
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-165-p1-BSR-AN-04-1": [
+    "REJECT",
+    "ACCEPT"
+   ]
+  }
  }
 }

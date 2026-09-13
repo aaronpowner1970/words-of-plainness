@@ -1342,31 +1342,148 @@
  },
  "verifications": {
   "Q-207-p1-BSR-MW-01-1": {
+   "_route": null,
+   "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "38cbc57c2485a167a31db683",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "good works (which are the fruits of faith...)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The clause asserts that good works cannot endure the severity of God's judgment, but the grammatical subject is 'good works,' not God.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage presupposes divine judgment's existence and severity but frames it as an object endured by works, not as an assertion with God as subject.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The sentence's subject is 'good works,' not God; the phrase 'God's judgment' occurs only as an object within that clause, so the predicate is not asserted of the required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"good works (which are the fruits of faith...)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts that good works cannot endure the severity of God's judgment, but the grammatical subject is 'good works,' not God.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage presupposes divine judgment's existence and severity but frames it as an object endured by works, not as an assertion with God as subject.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The sentence's subject is 'good works,' not God; the phrase 'God's judgment' occurs only as an object within that clause, so the predicate is not asserted of the required subject.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
    "sonnet": {
     "model": "sonnet",
-    "call_id": "38cbc57c2485a167a31db683",
+    "call_id": "29e19316fd72c77a9aab864a",
     "attempt": 0,
     "prompt_version": "gate6-v1.2",
     "phrase_verbatim": "Y",
     "subject_is_required": "N",
-    "grammatical_subject": "good works (which are the fruits of faith...)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The clause asserts that good works cannot endure the severity of God's judgment, but the grammatical subject is 'good works,' not God.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage presupposes divine judgment's existence and severity but frames it as an object endured by works, not as an assertion with God as subject.",
+    "grammatical_subject": "good works",
+    "speech_act_is_assertion": "N",
+    "speech_act_note": "The passage asserts a claim about good works' inability to endure God's judgment, not a direct assertion that God judges.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The phrase mentions God's judgment only as an object that good works cannot endure; it does not assert God as the judging subject in its own voice.",
     "hazard_flags": [
      "SEMANTIC_FLOOR"
     ],
     "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
     "verdict_model": "REJECT",
     "reason_code": "WRONG_SUBJECT",
-    "reason": "The sentence's subject is 'good works,' not God; the phrase 'God's judgment' occurs only as an object within that clause, so the predicate is not asserted of the required subject.",
+    "reason": "The grammatical subject is 'good works,' not God, so the passage does not assert the divine judgment predicate of the required subject.",
     "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"good works (which are the fruits of faith...)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts that good works cannot endure the severity of God's judgment, but the grammatical subject is 'good works,' not God.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage presupposes divine judgment's existence and severity but frames it as an object endured by works, not as an assertion with God as subject.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The sentence's subject is 'good works,' not God; the phrase 'God's judgment' occurs only as an object within that clause, so the predicate is not asserted of the required subject.\"}",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"good works\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The passage asserts a claim about good works' inability to endure God's judgment, not a direct assertion that God judges.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The phrase mentions God's judgment only as an object that good works cannot endure; it does not assert God as the judging subject in its own voice.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is 'good works,' not God, so the passage does not assert the divine judgment predicate of the required subject.\"}",
     "phrase_verbatim_code": "Y",
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT"
    },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
+   }
+  },
+  "Q-207-p1-BSR-MW-02-1": {
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -1403,34 +1520,112 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
-   }
-  },
-  "Q-207-p1-BSR-MW-02-1": {
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "018543a0cf3dfb927b537077",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "all men",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The passage asserts that all men stand under judgment; the judge named is Jesus Christ, not God/the Father as required by the predicate's required_subject.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage asserts divine judgment but attributes it to Jesus Christ rather than the required subject (God/the Father), and the grammatical subject of the sentence is 'all men,' not the judge.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The required subject is God/the Father, but the passage's grammatical subject is 'all men' and the judgment is attributed to Jesus Christ, not the Father, failing the required_subject criterion.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"all men\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that all men stand under judgment; the judge named is Jesus Christ, not God/the Father as required by the predicate's required_subject.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts divine judgment but attributes it to Jesus Christ rather than the required subject (God/the Father), and the grammatical subject of the sentence is 'all men,' not the judge.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject is God/the Father, but the passage's grammatical subject is 'all men' and the judgment is attributed to Jesus Christ, not the Father, failing the required_subject criterion.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
    "sonnet": {
     "model": "sonnet",
-    "call_id": "018543a0cf3dfb927b537077",
+    "call_id": "39134c020baa4877ae32a9a4",
     "attempt": 0,
     "prompt_version": "gate6-v1.2",
     "phrase_verbatim": "Y",
     "subject_is_required": "N",
     "grammatical_subject": "all men",
     "speech_act_is_assertion": "Y",
-    "speech_act_note": "The passage asserts that all men stand under judgment; the judge named is Jesus Christ, not God/the Father as required by the predicate's required_subject.",
+    "speech_act_note": "The confession asserts that all men stand under Christ's judgment, but the grammatical subject of the clause is 'all men,' not Christ himself acting as judge.",
     "floor": "PARTIAL",
-    "floor_reason": "The passage asserts divine judgment but attributes it to Jesus Christ rather than the required subject (God/the Father), and the grammatical subject of the sentence is 'all men,' not the judge.",
+    "floor_reason": "The passage implies Jesus Christ exercises righteous judgment, but the sentence's subject is humanity ('all men'), so the predicate is asserted only obliquely of the required subject.",
     "hazard_flags": [
      "RELATIONAL_VS_METAPHYSICAL"
     ],
     "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The required subject is God/the Father, but the passage's grammatical subject is 'all men' and the judgment is attributed to Jesus Christ, not the Father, failing the required_subject criterion.",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OTHER",
+    "reason": "The judgment of Christ is affirmed, but the grammatical subject is 'all men' rather than Christ, so while the proposition entails divine judgment by Christ, it is stated relationally rather than as a direct predication of God/Christ as judge.",
     "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"all men\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that all men stand under judgment; the judge named is Jesus Christ, not God/the Father as required by the predicate's required_subject.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts divine judgment but attributes it to Jesus Christ rather than the required subject (God/the Father), and the grammatical subject of the sentence is 'all men,' not the judge.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject is God/the Father, but the passage's grammatical subject is 'all men' and the judgment is attributed to Jesus Christ, not the Father, failing the required_subject criterion.\"}",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"all men\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts that all men stand under Christ's judgment, but the grammatical subject of the clause is 'all men,' not Christ himself acting as judge.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage implies Jesus Christ exercises righteous judgment, but the sentence's subject is humanity ('all men'), so the predicate is asserted only obliquely of the required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OTHER\", \"reason\": \"The judgment of Christ is affirmed, but the grammatical subject is 'all men' rather than Christ, so while the proposition entails divine judgment by Christ, it is stated relationally rather than as a direct predication of God/Christ as judge.\"}",
     "phrase_verbatim_code": "Y",
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT"
    },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
+   }
+  },
+  "Q-207-p1-BSR-MW-03-1": {
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -1439,9 +1634,9 @@
     "route": null,
     "primary_verdict": "REJECT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "WORD_ONLY",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "WORD_ONLY"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1457,9 +1652,9 @@
     "route": null,
     "primary_verdict": "REJECT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "WORD_ONLY",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "WORD_ONLY"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1467,70 +1662,109 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
-   }
-  },
-  "Q-207-p1-BSR-MW-03-1": {
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "2b945ccfa759051f1970ceb5",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "good works (the implied subject of 'endure')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The article asserts that good works cannot endure the severity of God's judgment; the assertion's subject is good works, not God.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The phrase mentions God's judgment only as an object that good works fail to withstand, presupposing divine judgment rather than asserting God as the one who judges.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject of the clause is 'good works,' not God; the passage presupposes divine judgment but does not assert God as judging subject, so the required-subject condition fails and the floor is WORD_ONLY.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"good works (the implied subject of 'endure')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The article asserts that good works cannot endure the severity of God's judgment; the assertion's subject is good works, not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The phrase mentions God's judgment only as an object that good works fail to withstand, presupposing divine judgment rather than asserting God as the one who judges.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the clause is 'good works,' not God; the passage presupposes divine judgment but does not assert God as judging subject, so the required-subject condition fails and the floor is WORD_ONLY.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
    "sonnet": {
     "model": "sonnet",
-    "call_id": "2b945ccfa759051f1970ceb5",
+    "call_id": "600f016bbbf3c7cc7fcf2770",
     "attempt": 0,
     "prompt_version": "gate6-v1.2",
     "phrase_verbatim": "Y",
     "subject_is_required": "N",
-    "grammatical_subject": "good works (the implied subject of 'endure')",
+    "grammatical_subject": "good works (they cannot put away our sins, and endure the severity of God's judgment)",
     "speech_act_is_assertion": "Y",
-    "speech_act_note": "The article asserts that good works cannot endure the severity of God's judgment; the assertion's subject is good works, not God.",
+    "speech_act_note": "The clause asserts something about good works' incapacity, not a direct assertion that God judges; God's judgment is presupposed as background, not the asserted proposition.",
     "floor": "WORD_ONLY",
-    "floor_reason": "The phrase mentions God's judgment only as an object that good works fail to withstand, presupposing divine judgment rather than asserting God as the one who judges.",
+    "floor_reason": "The phrase 'God's judgment' occurs but the sentence's grammatical subject and assertion concern good works' inability to endure it, not God's act of judging as the predicated subject.",
     "hazard_flags": [
-     "SAME_WORD_DIFFERENT_MEANING"
+     "SEMANTIC_FLOOR"
     ],
     "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
     "verdict_model": "REJECT",
     "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical subject of the clause is 'good works,' not God; the passage presupposes divine judgment but does not assert God as judging subject, so the required-subject condition fails and the floor is WORD_ONLY.",
+    "reason": "The required subject (God) is not the grammatical subject of the clause; 'good works' is the subject, so the predicate of divine judgment is only presupposed, not asserted of God.",
     "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"good works (the implied subject of 'endure')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The article asserts that good works cannot endure the severity of God's judgment; the assertion's subject is good works, not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The phrase mentions God's judgment only as an object that good works fail to withstand, presupposing divine judgment rather than asserting God as the one who judges.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the clause is 'good works,' not God; the passage presupposes divine judgment but does not assert God as judging subject, so the required-subject condition fails and the floor is WORD_ONLY.\"}",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"good works (they cannot put away our sins, and endure the severity of God's judgment)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts something about good works' incapacity, not a direct assertion that God judges; God's judgment is presupposed as background, not the asserted proposition.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The phrase 'God's judgment' occurs but the sentence's grammatical subject and assertion concern good works' inability to endure it, not God's act of judging as the predicated subject.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject (God) is not the grammatical subject of the clause; 'good works' is the subject, so the predicate of divine judgment is only presupposed, not asserted of God.\"}",
     "phrase_verbatim_code": "Y",
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT"
    },
-   "_route": null,
-   "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
-    "adjudicated_by": "sonnet",
-    "route": null,
-    "primary_verdict": "REJECT",
-    "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
-    "floor_by_model": {
-     "sonnet": "WORD_ONLY"
-    },
-    "floor_disagreement": false,
-    "lower_floor_applied": false,
-    "second_rubric": null,
-    "second_rubric_role": null,
-    "overturned": false,
-    "direction": null
-   },
-   "final_at_run": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
-    "adjudicated_by": "sonnet",
-    "route": null,
-    "primary_verdict": "REJECT",
-    "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
-    "floor_by_model": {
-     "sonnet": "WORD_ONLY"
-    },
-    "floor_disagreement": false,
-    "lower_floor_applied": false,
-    "second_rubric": null,
-    "second_rubric_role": null,
-    "overturned": false,
-    "direction": null
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-207-p1-BSR-MW-04-1": {
@@ -1596,42 +1830,17 @@
    }
   },
   "Q-207-p1-BSR-MW-02-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "6e5345213a3cd2c2cc0a2fc3",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "all men (passive subject); agent 'him' refers to Jesus Christ",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The creed asserts in its own voice that Christ will judge all men, but the acting subject is Christ, not the Father or 'the one God' as required.",
-    "floor": "PARTIAL",
-    "floor_reason": "Even if judgment is attributed to Christ, the required subject for this predicate is God/the Father, not the Son, so the passage does not meet the required-subject condition.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The clause 'by him all men will be judged' makes Jesus Christ the agent of judgment, not God the Father or 'the one God' as the predicate's required subject specifies; thus the required-subject condition fails despite the assertion being genuine.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"all men (passive subject); agent 'him' refers to Jesus Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts in its own voice that Christ will judge all men, but the acting subject is Christ, not the Father or 'the one God' as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Even if judgment is attributed to Christ, the required subject for this predicate is God/the Father, not the Son, so the passage does not meet the required-subject condition.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause 'by him all men will be judged' makes Jesus Christ the agent of judgment, not God the Father or 'the one God' as the predicate's required subject specifies; thus the required-subject condition fails despite the assertion being genuine.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1657,50 +1866,128 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "6e5345213a3cd2c2cc0a2fc3",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "all men (passive subject); agent 'him' refers to Jesus Christ",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts in its own voice that Christ will judge all men, but the acting subject is Christ, not the Father or 'the one God' as required.",
+      "floor": "PARTIAL",
+      "floor_reason": "Even if judgment is attributed to Christ, the required subject for this predicate is God/the Father, not the Son, so the passage does not meet the required-subject condition.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The clause 'by him all men will be judged' makes Jesus Christ the agent of judgment, not God the Father or 'the one God' as the predicate's required subject specifies; thus the required-subject condition fails despite the assertion being genuine.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"all men (passive subject); agent 'him' refers to Jesus Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts in its own voice that Christ will judge all men, but the acting subject is Christ, not the Father or 'the one God' as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Even if judgment is attributed to Christ, the required subject for this predicate is God/the Father, not the Son, so the passage does not meet the required-subject condition.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause 'by him all men will be judged' makes Jesus Christ the agent of judgment, not God the Father or 'the one God' as the predicate's required subject specifies; thus the required-subject condition fails despite the assertion being genuine.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "ce2796e23d1a78dcceeeb9a2",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "him (Jesus Christ, referring back to 'He is eternal Savior and Mediator')",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession asserts in its own voice that all men will be judged by Christ, affirmed as truly God.",
+    "floor": "FULL",
+    "floor_reason": "The passage asserts that Christ, confessed as truly God, will judge all men, directly matching the predicate of divine judgment exercised by the Son.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The subject is Christ, affirmed as truly God earlier in the passage, and the clause asserts his role as universal judge, fulfilling the predicate in full.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"him (Jesus Christ, referring back to 'He is eternal Savior and Mediator')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts in its own voice that all men will be judged by Christ, affirmed as truly God.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts that Christ, confessed as truly God, will judge all men, directly matching the predicate of divine judgment exercised by the Son.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The subject is Christ, affirmed as truly God earlier in the passage, and the clause asserts his role as universal judge, fulfilling the predicate in full.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-207-p1-BSR-MW-03-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "f76522e3dd4e0632d3465177",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "he (Christ)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The article asserts Christ will return to judge all men, but the subject is Christ, not God/the Father as required.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage asserts judgment as a future act of Christ's return, a narrower christological proposition not identical to the required subject's assertion of divine judgment.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The required subject is God/the Father, but the grammatical subject of the judging act here is Christ, so the predicate is not asserted of the required subject.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"he (Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The article asserts Christ will return to judge all men, but the subject is Christ, not God/the Father as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts judgment as a future act of Christ's return, a narrower christological proposition not identical to the required subject's assertion of divine judgment.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject is God/the Father, but the grammatical subject of the judging act here is Christ, so the predicate is not asserted of the required subject.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
-   "_route": null,
+   "_route": "CAVEATED_ACCEPT_SAMPLE",
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
-    "route": null,
-    "primary_verdict": "REJECT",
+    "route": "CAVEATED_ACCEPT_SAMPLE",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
     "floor_final": "PARTIAL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "PARTIAL",
+     "opus": "FULL"
     },
-    "floor_disagreement": false,
+    "floor_disagreement": true,
     "lower_floor_applied": false,
-    "second_rubric": null,
-    "second_rubric_role": null,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT",
     "overturned": false,
     "direction": null
    },
@@ -1721,6 +2008,131 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "f76522e3dd4e0632d3465177",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "he (Christ)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The article asserts Christ will return to judge all men, but the subject is Christ, not God/the Father as required.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage asserts judgment as a future act of Christ's return, a narrower christological proposition not identical to the required subject's assertion of divine judgment.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The required subject is God/the Father, but the grammatical subject of the judging act here is Christ, so the predicate is not asserted of the required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"he (Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The article asserts Christ will return to judge all men, but the subject is Christ, not God/the Father as required.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts judgment as a future act of Christ's return, a narrower christological proposition not identical to the required subject's assertion of divine judgment.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject is God/the Father, but the grammatical subject of the judging act here is Christ, so the predicate is not asserted of the required subject.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "88174a898c3e33f058d2d308",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "he (Christ, referring back to 'Christ did truly rise again')",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Article asserts in its own voice that Christ will return to judge all men at the last day.",
+    "floor": "PARTIAL",
+    "floor_reason": "The passage affirms the Son's future eschatological judgment of all men, a narrower instance wholly within the general predicate of divine judgment, without broader theological elaboration.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "reason": "Phrase is verbatim, subject is the Son (required subject), and the Article asserts this as its own doctrinal claim; floor is PARTIAL as it specifies a narrower scope (Christ's future judgment) within the broader predicate.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (Christ, referring back to 'Christ did truly rise again')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Article asserts in its own voice that Christ will return to judge all men at the last day.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage affirms the Son's future eschatological judgment of all men, a narrower instance wholly within the general predicate of divine judgment, without broader theological elaboration.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is the Son (required subject), and the Article asserts this as its own doctrinal claim; floor is PARTIAL as it specifies a narrower scope (Christ's future judgment) within the broader predicate.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "054907620f214ceb05f90685",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"he\" (Christ, the risen and ascended Son)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Article asserts in its own voice that Christ sitteth in heaven until he returns to judge; the temporal clause is part of the affirmation, not a quotation, hypothetical or condemned view.",
+    "floor": "FULL",
+    "floor_reason": "The passage affirms that the ascended Son will return to judge all men at the last day, which is the defined sense of divine judgment predicated of the Son as divine.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Phrase is verbatim, subject is the Son as the returning divine judge, and the standard asserts it directly; the eschatological judgment of all men meets the full floor rather than merely a narrower part of it.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"he\\\" (Christ, the risen and ascended Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Article asserts in its own voice that Christ sitteth in heaven until he returns to judge; the temporal clause is part of the affirmation, not a quotation, hypothetical or condemned view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage affirms that the ascended Son will return to judge all men at the last day, which is the defined sense of divine judgment predicated of the Son as divine.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is the Son as the returning divine judge, and the standard asserts it directly; the eschatological judgment of all men meets the full floor rather than merely a narrower part of it.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
    }
   },
   "Q-207-p1-BSR-MW-04-2": {
@@ -1810,6 +2222,28 @@
    "source_note_guard": "ok",
    "scope_caveat": "The Articles of Religion and the EUB Confession are constitutionally protected standards of the United Methodist Church. The Global Methodist Church, which separated in 2022, holds the same Articles; its standards are cited here from its 2022 Transitional Book of Doctrines and Discipline, the only edition published on the church's own domain, and the Articles are unchanged in the 2024 edition. The Wesleyan Church holds its own articles, which the registry lists separately.",
    "raw": "{\"rendered_state\": \"A-SF\", \"diverges_from_family_code\": true, \"state_reason\": \"Verifier floor is PARTIAL: the Article attests a narrower eschatological proposition (final gathering, throne, records, rewards/punishments) wholly within the shared divine-judgment floor, so source-floor agreement is the honest state rather than the family's general A.\", \"source_note\": \"The Wesleyan Church's Articles of Religion, Article 21, state that God's judgment will culminate in a final gathering of all before His throne, with records examined and rewards and punishments administered.\"}"
+  },
+  "Q-207-p1-BSR-MW-02-2": {
+   "status": "DONE",
+   "call_id": "1eb8b41a5c2f1fba0e6fb74c",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: the Confession affirms Christ, truly God, will judge all men, matching the shared predicate of divine judgment at the controlled scope, consistent with the family code.",
+   "source_note": "The Confession of Faith of the Evangelical United Brethren Church (Article II) states that all men will be judged by Jesus Christ, affirmed as truly God and truly man.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Articles of Religion and the EUB Confession are constitutionally protected standards of the United Methodist Church. The Global Methodist Church, which separated in 2022, holds the same Articles; its standards are cited here from its 2022 Transitional Book of Doctrines and Discipline, the only edition published on the church's own domain, and the Articles are unchanged in the 2024 edition. The Wesleyan Church holds its own articles, which the registry lists separately.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the Confession affirms Christ, truly God, will judge all men, matching the shared predicate of divine judgment at the controlled scope, consistent with the family code.\", \"source_note\": \"The Confession of Faith of the Evangelical United Brethren Church (Article II) states that all men will be judged by Jesus Christ, affirmed as truly God and truly man.\"}"
+  },
+  "Q-207-p1-BSR-MW-03-2": {
+   "status": "DONE",
+   "call_id": "db9715f99f73d6d778c00205",
+   "rendered_state": "A-SF",
+   "diverges_from_family_code": true,
+   "state_reason": "Verifier floor is PARTIAL: the Article affirms Christ's future judgment of all men at the last day, a narrower instance wholly within the shared divine-judgment floor, without broader elaboration warranting full family-level A.",
+   "source_note": "The Global Methodist Church's Articles of Religion (Article III) state that Christ, having risen and ascended, will return to judge all men at the last day.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Articles of Religion and the EUB Confession are constitutionally protected standards of the United Methodist Church. The Global Methodist Church, which separated in 2022, holds the same Articles; its standards are cited here from its 2022 Transitional Book of Doctrines and Discipline, the only edition published on the church's own domain, and the Articles are unchanged in the 2024 edition. The Wesleyan Church holds its own articles, which the registry lists separately.",
+   "raw": "{\"rendered_state\": \"A-SF\", \"diverges_from_family_code\": true, \"state_reason\": \"Verifier floor is PARTIAL: the Article affirms Christ's future judgment of all men at the last day, a narrower instance wholly within the shared divine-judgment floor, without broader elaboration warranting full family-level A.\", \"source_note\": \"The Global Methodist Church's Articles of Religion (Article III) state that Christ, having risen and ascended, will return to judge all men at the last day.\"}"
   }
  },
  "phase": "DONE",
@@ -1830,6 +2264,14 @@
    "branch_eligible_before": 2,
    "branch_sampled_before": 0,
    "reason": "branch sample share already at its cap"
+  },
+  "Q-207-p1-BSR-MW-03-2": {
+   "sampled": true,
+   "bucket": 12,
+   "share_cap": 0.2,
+   "branch_eligible_before": 21,
+   "branch_sampled_before": 3,
+   "reason": "sampled for disclosure"
   }
  },
  "survivors": [
@@ -1851,6 +2293,44 @@
    "recut_from": null,
    "exhaustion_batch": null,
    "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-207-p1-BSR-MW-02-2",
+   "pass": 1,
+   "registry_id": "BSR-MW-02",
+   "locator": "Article II — Jesus Christ",
+   "phrase": "by him all men will be judged",
+   "rationale": "Predicates judging of Christ, the eternal Word and Son, sharing the divine judgment proper to the one God.",
+   "floor_claim": "PARTIAL",
+   "chunk_text": "We believe in Jesus Christ, truly God and truly man, in whom the divine and human natures are perfectly and inseparably united. He is the eternal Word made flesh, the only begotten Son of the Father, born of the Virgin Mary by the power of the Holy Spirit. As ministering Servant he lived, suffered and died on the cross. He was buried, rose from the dead and ascended into heaven to be with the Father, from whence he shall return. He is eternal Savior and Mediator, who intercedes for us, and by him all men will be judged.",
+   "chunk_hash": "4883e01b53107726693e17d7b420bd3ca6903bdae703b91f44f387e1b37db9b6",
+   "division": "article",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+   "locator_rank": 2,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
+  },
+  {
+   "candidate_id": "Q-207-p1-BSR-MW-03-2",
+   "pass": 1,
+   "registry_id": "BSR-MW-03",
+   "locator": "Articles of Religion, Article III - Of the Resurrection of Christ",
+   "phrase": "he return to judge all men at the last day",
+   "rationale": "Asserts Christ, who is truly God, will judge all men, a divine judgment act though framed through the Son.",
+   "floor_claim": "PARTIAL",
+   "chunk_text": "Christ did truly rise again from the dead, and took again his body, with all things appertaining to the perfection of man’s nature, wherewith he ascended into heaven, and there sitteth until he return to judge all men at the last day.",
+   "chunk_hash": "147c313139109feb07230c5f709bec0f786cc15d96b04379a351268c0a128ea8",
+   "division": "article",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 2,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
   },
   {
    "candidate_id": "Q-207-p1-BSR-MW-04-2",
@@ -1902,28 +2382,47 @@
  "allocation": {
   "kept": [
    "Q-207-p1-BSR-MW-04-1",
-   "Q-207-p1-BSR-MW-04-2"
+   "Q-207-p1-BSR-MW-02-2",
+   "Q-207-p1-BSR-MW-03-2"
   ],
   "roles": {
    "Q-207-p1-BSR-MW-04-1": "PRIMARY",
-   "Q-207-p1-BSR-MW-04-2": "PRIMARY"
+   "Q-207-p1-BSR-MW-02-2": "PRIMARY",
+   "Q-207-p1-BSR-MW-03-2": "PRIMARY"
   },
   "english_witness": {},
-  "dropped": {},
+  "dropped": {
+   "Q-207-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)"
+  },
   "witness_only": [],
   "groups": {
    "Q-207-p1-BSR-MW-04-1": "the wesleyan church",
+   "Q-207-p1-BSR-MW-02-2": "united methodist church",
+   "Q-207-p1-BSR-MW-03-2": "global methodist church",
    "Q-207-p1-BSR-MW-04-2": "the wesleyan church"
   },
   "slot_order": {
    "Q-207-p1-BSR-MW-04-1": 0,
-   "Q-207-p1-BSR-MW-04-2": 1
-  }
+   "Q-207-p1-BSR-MW-02-2": 1,
+   "Q-207-p1-BSR-MW-03-2": 2
+  },
+  "parallel_witnesses": {}
  },
- "coder_skipped": {},
+ "coder_skipped": {
+  "Q-207-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)"
+ },
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-207-p1-BSR-MW-02-2": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-207-p1-BSR-MW-03-2": [
+    "REJECT",
+    "ACCEPT_WITH_CAVEAT"
+   ]
+  }
  }
 }

@@ -784,39 +784,17 @@
  },
  "verifications": {
   "Q-163-p1-BSR-LU-01-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "c1598bdc022d8a3ba4ffc5cd",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "the Holy Ghost",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The creed asserts this of the Holy Ghost, not of God the Father or the one God as such.",
-    "floor": "PARTIAL",
-    "floor_reason": "The predicate is affirmed of the Holy Ghost as 'Giver of life', a narrower subject than the required subject (God/the Father).",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The life-giving predicate is attributed to the Holy Ghost, not to the required subject of God or the Father.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this of the Holy Ghost, not of God the Father or the one God as such.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The predicate is affirmed of the Holy Ghost as 'Giver of life', a narrower subject than the required subject (God/the Father).\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The life-giving predicate is attributed to the Holy Ghost, not to the required subject of God or the Father.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -833,6 +811,95 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "c1598bdc022d8a3ba4ffc5cd",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the Holy Ghost",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this of the Holy Ghost, not of God the Father or the one God as such.",
+      "floor": "PARTIAL",
+      "floor_reason": "The predicate is affirmed of the Holy Ghost as 'Giver of life', a narrower subject than the required subject (God/the Father).",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The life-giving predicate is attributed to the Holy Ghost, not to the required subject of God or the Father.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this of the Holy Ghost, not of God the Father or the one God as such.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The predicate is affirmed of the Holy Ghost as 'Giver of life', a narrower subject than the required subject (God/the Father).\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The life-giving predicate is attributed to the Holy Ghost, not to the required subject of God or the Father.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "7ca6224bbbd84572a11e3682",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "the Holy Ghost",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed directly confesses belief in the Holy Ghost as 'the Lord and Giver of life' in its own voice.",
+    "floor": "FULL",
+    "floor_reason": "The passage asserts that the Holy Ghost, as divine person, is the Giver of life, directly matching the predicate of communicating life.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The subject (Holy Ghost) is required, the assertion is direct and creedal, and the phrase verbatim matches the predicate of life-giving divine action.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed directly confesses belief in the Holy Ghost as 'the Lord and Giver of life' in its own voice.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts that the Holy Ghost, as divine person, is the Giver of life, directly matching the predicate of communicating life.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The subject (Holy Ghost) is required, the assertion is direct and creedal, and the phrase verbatim matches the predicate of life-giving divine action.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-163-p1-BSR-LU-03-1": {
@@ -888,42 +955,17 @@
    }
   },
   "Q-163-p1-BSR-LU-02-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "f43530f64c980ab24c1a77a0",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "He (Christ)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The Confession asserts in its own voice that Christ will give eternal life to the elect at the judgment.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage asserts life-giving action but attributes it to Christ in His judicial/eschatological role, not explicitly to God/the Father as required subject.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The subject performing the life-giving act is Christ returning to judge, not God/the Father as specified by the required subject constraint.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession asserts in its own voice that Christ will give eternal life to the elect at the judgment.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts life-giving action but attributes it to Christ in His judicial/eschatological role, not explicitly to God/the Father as required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The subject performing the life-giving act is Christ returning to judge, not God/the Father as specified by the required subject constraint.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -949,45 +991,121 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "f43530f64c980ab24c1a77a0",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "He (Christ)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Confession asserts in its own voice that Christ will give eternal life to the elect at the judgment.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage asserts life-giving action but attributes it to Christ in His judicial/eschatological role, not explicitly to God/the Father as required subject.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The subject performing the life-giving act is Christ returning to judge, not God/the Father as specified by the required subject constraint.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession asserts in its own voice that Christ will give eternal life to the elect at the judgment.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts life-giving action but attributes it to Christ in His judicial/eschatological role, not explicitly to God/the Father as required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The subject performing the life-giving act is Christ returning to judge, not God/the Father as specified by the required subject constraint.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "c6e4cf8368f4872fab8167cf",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "Christ (He)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Confession asserts in its own voice that Christ will give eternal life to the godly and elect at the final judgment.",
+    "floor": "FULL",
+    "floor_reason": "Christ, as divine Son, is asserted to communicate eternal life to the elect, which is a direct instance of life-giving divine action.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The passage directly asserts that Christ, the divine Son, gives eternal life to the godly, satisfying the predicate for the required subject.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"Christ (He)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession asserts in its own voice that Christ will give eternal life to the godly and elect at the final judgment.\", \"floor\": \"FULL\", \"floor_reason\": \"Christ, as divine Son, is asserted to communicate eternal life to the elect, which is a direct instance of life-giving divine action.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The passage directly asserts that Christ, the divine Son, gives eternal life to the godly, satisfying the predicate for the required subject.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-163-p1-BSR-LU-02-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "b261eb63b05ae81e5f60eae1",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "He (Christ, the Son of God, referring back to 'afterward He ascended into heaven...')",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The Confession positively asserts that Christ, after ascending, sanctifies believers by sending the Holy Ghost to quicken them; it is a doctrinal assertion, not a quotation or denial.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage does assert a life-giving action ('to...quicken them'), but the acting subject is the Son (Christ), not 'the one God' or 'the Father' as the required subject specifies.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The clause's grammatical subject is Christ ('He'), who sanctifies and quickens believers via the Spirit, not 'the one God' or 'the Father' as the predicate's required subject demands, so the citation fails the subject test even though the phrase is verbatim and the tone is assertive.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (Christ, the Son of God, referring back to 'afterward He ascended into heaven...')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession positively asserts that Christ, after ascending, sanctifies believers by sending the Holy Ghost to quicken them; it is a doctrinal assertion, not a quotation or denial.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage does assert a life-giving action ('to...quicken them'), but the acting subject is the Son (Christ), not 'the one God' or 'the Father' as the required subject specifies.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's grammatical subject is Christ ('He'), who sanctifies and quickens believers via the Spirit, not 'the one God' or 'the Father' as the predicate's required subject demands, so the citation fails the subject test even though the phrase is verbatim and the tone is assertive.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1013,6 +1131,107 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "b261eb63b05ae81e5f60eae1",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "He (Christ, the Son of God, referring back to 'afterward He ascended into heaven...')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Confession positively asserts that Christ, after ascending, sanctifies believers by sending the Holy Ghost to quicken them; it is a doctrinal assertion, not a quotation or denial.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage does assert a life-giving action ('to...quicken them'), but the acting subject is the Son (Christ), not 'the one God' or 'the Father' as the required subject specifies.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The clause's grammatical subject is Christ ('He'), who sanctifies and quickens believers via the Spirit, not 'the one God' or 'the Father' as the predicate's required subject demands, so the citation fails the subject test even though the phrase is verbatim and the tone is assertive.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (Christ, the Son of God, referring back to 'afterward He ascended into heaven...')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession positively asserts that Christ, after ascending, sanctifies believers by sending the Holy Ghost to quicken them; it is a doctrinal assertion, not a quotation or denial.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage does assert a life-giving action ('to...quicken them'), but the acting subject is the Son (Christ), not 'the one God' or 'the Father' as the required subject specifies.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's grammatical subject is Christ ('He'), who sanctifies and quickens believers via the Spirit, not 'the one God' or 'the Father' as the predicate's required subject demands, so the citation fails the subject test even though the phrase is verbatim and the tone is assertive.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "5fb260ff8e81441f39eea145",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "He (Christ, the Son of God)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession asserts in its own voice that Christ, having ascended, sanctifies believers by sending the Holy Ghost to quicken them.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly attributes a life-giving action (‘quicken them’) to Christ acting through the Holy Ghost, fitting the definition of communication of life by a divine person.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The Son is the grammatical subject, the statement is a direct doctrinal assertion, and 'quicken' denotes life-giving divine action, satisfying the predicate at the FULL floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"He (Christ, the Son of God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts in its own voice that Christ, having ascended, sanctifies believers by sending the Holy Ghost to quicken them.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly attributes a life-giving action (‘quicken them’) to Christ acting through the Holy Ghost, fitting the definition of communication of life by a divine person.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The Son is the grammatical subject, the statement is a direct doctrinal assertion, and 'quicken' denotes life-giving divine action, satisfying the predicate at the FULL floor.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   }
  },
@@ -1027,6 +1246,28 @@
    "source_note_guard": "ok",
    "scope_caveat": "The Book of Concord is subscribed by Lutheran churches worldwide; the online text used here is a public-domain translation on a private site, and the LCMS and ELCA differ in how strictly they subscribe.",
    "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Floor is FULL: the First Article explanation directly attributes giving of body, soul, and life to God the Father, matching the shared life-giving divine action floor without narrowing or reinterpretation, so the family code A holds.\", \"source_note\": \"Luther's Small Catechism, First Article explanation, states that God the Father has given the believer body and soul and still sustains them, affirming God's life-giving action.\"}"
+  },
+  "Q-163-p1-BSR-LU-01-1": {
+   "status": "DONE",
+   "call_id": "698a9d4c115c395eadbf9023",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "The Nicene Creed as adopted in the Book of Concord affirms the Holy Ghost as 'Lord and Giver of life,' a full assertion of divine life-giving action matching the shared floor and consistent with the family's coded agreement.",
+   "source_note": "The Book of Concord's Ecumenical Creeds section (Nicene Creed) states the Holy Ghost is 'the Lord and Giver of life,' affirming the Spirit's life-giving divine action.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Book of Concord is subscribed by Lutheran churches worldwide; the online text used here is a public-domain translation on a private site, and the LCMS and ELCA differ in how strictly they subscribe.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"The Nicene Creed as adopted in the Book of Concord affirms the Holy Ghost as 'Lord and Giver of life,' a full assertion of divine life-giving action matching the shared floor and consistent with the family's coded agreement.\", \"source_note\": \"The Book of Concord's Ecumenical Creeds section (Nicene Creed) states the Holy Ghost is 'the Lord and Giver of life,' affirming the Spirit's life-giving divine action.\"}"
+  },
+  "Q-163-p1-BSR-LU-02-1": {
+   "status": "DONE",
+   "call_id": "a46baa591a8602ff8c5c33c5",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: Christ, as divine Son, directly gives eternal life to the elect, matching the shared floor of life-giving divine action; family code A holds without adjustment.",
+   "source_note": "The Augsburg Confession (Article XVII, ¶1–5) states that at the world's end Christ will give the godly and elect eternal life and everlasting joys.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Book of Concord is subscribed by Lutheran churches worldwide; the online text used here is a public-domain translation on a private site, and the LCMS and ELCA differ in how strictly they subscribe.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: Christ, as divine Son, directly gives eternal life to the elect, matching the shared floor of life-giving divine action; family code A holds without adjustment.\", \"source_note\": \"The Augsburg Confession (Article XVII, ¶1–5) states that at the world's end Christ will give the godly and elect eternal life and everlasting joys.\"}"
   }
  },
  "phase": "DONE",
@@ -1040,6 +1281,44 @@
   "BSR-EO-09"
  ],
  "survivors": [
+  {
+   "candidate_id": "Q-163-p1-BSR-LU-01-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Ecumenical Creeds: The Nicene Creed",
+   "phrase": "the Holy Ghost, the Lord and Giver of life",
+   "rationale": "The Creed confesses the Holy Ghost, who is the one God, as the divine source and giver of life, directly asserting life-giving divine action.",
+   "floor_claim": "FULL",
+   "chunk_text": "I believe in one God, the Father Almighty, Maker of heaven and earth, and of all things visible and invisible. And in one Lord Jesus Christ, the only-begotten Son of God, begotten of the Father before all worlds, God of God, Light of Light, very God of very God, begotten, not made, being of one substance with the Father; by whom all things were made; who for us men, and for our salvation, came down from heaven, and was incarnate by the Holy Ghost of the Virgin Mary, and was made man, and was crucified also for us under Pontius Pilate; He suffered and was buried; and the third day He rose again according to the Scriptures; and ascended into heaven, and sitteth on the right hand of the Father; and He shall come again with glory to judge the quick and the dead; whose kingdom shall have no end. And I believe in the Holy Ghost, the Lord and Giver of life, who proceedeth from the Father and the Son; who with the Father and the Son together is worshiped and glorified; who spake by the Prophets. And I believe in one holy catholic and apostolic Church.I acknowledge one Baptism for the remission of sins; and I look for the resurrection of the dead, and the life of the world to come. Amen.",
+   "chunk_hash": "a0e2483760350cc8f6d3bf00a9a9b66a4d458be43b24a7bc85e77c71b387ecb7",
+   "division": "section",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-163-p1-BSR-LU-02-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-02",
+   "locator": "Augsburg Confession: Article XVII: Of Christ’s Return to Judgment, ¶1–5",
+   "phrase": "He will give to the godly and elect eternal life",
+   "rationale": "Asserts that Christ (true God) bestows eternal life on the elect, a direct communication of life from God.",
+   "floor_claim": "FULL",
+   "chunk_text": "Also they teach that at the Consummation of the World Christ will appear for judgment, and will raise up all the dead; He will give to the godly and elect eternal life and everlasting joys, but ungodly men and the devils He will condemn to be tormented without end. They condemn the Anabaptists, who think that there will be an end to the punishments of condemned men and devils. They condemn also others who are now spreading certain Jewish opinions, that before the resurrection of the dead the godly shall take possession of the kingdom of the world, the ungodly being everywhere suppressed.",
+   "chunk_hash": "52e9a2b3881cdb60a4d0377e0d080d968dd489354302392506fa4a21ba1e58fc",
+   "division": "paragraph-range",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
   {
    "candidate_id": "Q-163-p1-BSR-LU-03-1",
    "pass": 1,
@@ -1058,6 +1337,25 @@
    "recut_from": null,
    "exhaustion_batch": null,
    "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-163-p1-BSR-LU-02-2",
+   "pass": 1,
+   "registry_id": "BSR-LU-02",
+   "locator": "Augsburg Confession: Article III: Of the Son of God, ¶1–6",
+   "phrase": "sending the Holy Ghost into their hearts, to rule, comfort, and quicken them",
+   "rationale": "States that the divine Son sends the Holy Ghost to quicken believers' hearts, an act of life-giving divine action by God.",
+   "floor_claim": "FULL",
+   "chunk_text": "Also they teach that the Word, that is, the Son of God, did assume the human nature in the womb of the blessed Virgin Mary, so that there are two natures, the divine and the human, inseparably enjoined in one Person, one Christ, true God and true man, who was born of the Virgin Mary, truly suffered, was crucified, dead, and buried, that He might reconcile the Father unto us, and be a sacrifice, not only for original guilt, but also for all actual sins of men. He also descended into hell, and truly rose again the third day; afterward He ascended into heaven that He might sit on the right hand of the Father, and forever reign and have dominion over all creatures, and sanctify them that believe in Him, by sending the Holy Ghost into their hearts, to rule, comfort, and quicken them, and to defend them against the devil and the power of sin. The same Christ shall openly come again to judge the quick and the dead, etc., according to the Apostles' Creed.",
+   "chunk_hash": "4cec11738280c9e6d691c9625797b9aae2636f36e44b9b2709531b13930975d6",
+   "division": "paragraph-range",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 2,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
   }
  ],
  "fallback_used": false,
@@ -1083,26 +1381,53 @@
  },
  "allocation": {
   "kept": [
+   "Q-163-p1-BSR-LU-01-1",
+   "Q-163-p1-BSR-LU-02-1",
    "Q-163-p1-BSR-LU-03-1"
   ],
   "roles": {
-   "Q-163-p1-BSR-LU-03-1": "PRIMARY"
+   "Q-163-p1-BSR-LU-01-1": "PRIMARY",
+   "Q-163-p1-BSR-LU-02-1": "PRIMARY",
+   "Q-163-p1-BSR-LU-03-1": "CORROBORATING"
   },
   "english_witness": {},
-  "dropped": {},
+  "dropped": {
+   "Q-163-p1-BSR-LU-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)"
+  },
   "witness_only": [],
   "groups": {
-   "Q-163-p1-BSR-LU-03-1": "lcms"
+   "Q-163-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord",
+   "Q-163-p1-BSR-LU-02-1": "lcms",
+   "Q-163-p1-BSR-LU-03-1": "lcms",
+   "Q-163-p1-BSR-LU-02-2": "lcms"
   },
   "slot_order": {
+   "Q-163-p1-BSR-LU-01-1": 0,
+   "Q-163-p1-BSR-LU-02-1": 1,
    "Q-163-p1-BSR-LU-03-1": 0
-  }
+  },
+  "parallel_witnesses": {}
  },
- "coder_skipped": {},
+ "coder_skipped": {
+  "Q-163-p1-BSR-LU-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)"
+ },
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-163-p1-BSR-LU-01-1": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-163-p1-BSR-LU-02-1": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-163-p1-BSR-LU-02-2": [
+    "REJECT",
+    "ACCEPT"
+   ]
+  }
  },
  "supplements": [
   {

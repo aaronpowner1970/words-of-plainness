@@ -195,14 +195,30 @@ workstreams:
       Harness: launch_branches.py fails loudly on any non-zero exit and verifies the packet;
       a failed branch writes partial:true with cap_state; review extracts in
       recovery-packets/extracts/. Report: docs/gate6/WoP_SJN_Gate6_Session5_Report_20260913.md.
-      Blocked corpus rows: BSR-EO-03 (goarch.org, HOST_RETIRED — under the NO TEXT rule it
-      blocks REVIEWED on every Eastern Orthodox cell unless retired), BSR-RC-05 (LINEAGE).
+      Blocked corpus rows: BSR-RC-05 (LINEAGE). BSR-EO-03 (goarch.org, HOST_RETIRED) was retired by
+      author ruling in session 6 (in memory; workbook delta Draft3r5 pending ratification).
+      Session 6 (2026-09-13, the author's four rulings, workbook unchanged; 4.42 of 25 USD): rulings applied in memory
+      from recovery-runs/author-rulings-pending-workbook.json (scripts/sjn_recovery/rulings.py). R6-1 required_subject admits the
+      Son or the Spirit as divine for Lord / Life-giving / Judge / Savior / Not made (the workbook has NO subject column; delta =
+      new Inherited 57 column, wop-scratch/WoP_SJN_RequiredSubject_Delta_20260913.csv): 49 WRONG_SUBJECT rejections re-verified,
+      30 now accepted, 11 cards gained 17 candidates, no cell changed state; tp-2 corrected recall 0.983 (59/60; TP-060 EO
+      Unbegotten remains). R6-2 hedged PARTIAL: 30-item stratified sample (seed 20260913, sonnet gate6-v1.3, pr-1) leak rate
+      0.467 (inclusive 0.567; net of a v1.2 replicate 0.367) — below 0.5, so applied only to Q-382 / Q-390 / Q-454 (refused;
+      Baptist 30/37 filled); the hedge regex has precision 0.50 and misses 3 of 14 leaks. Verifier gate6-v1.3 and locator
+      gate6-v1.5 are in force for EO; tp-3 forward recall 0.967 (also refuses TP-059 EO Unbegotten). R6-3 BSR-EO-03 RETIRED
+      (Draft3r5 CSV; corpus store confirms the other 13 EO rows have text). R6-4 one text, one slot (allocation.py): 28 cards,
+      34 parallel witnesses, 20 slots freed across AN / LU / RP / MW (mostly shared subscription wording, not two hosts); EO-14
+      declared a same-text row of EO-07 (only 8.2% of EO-07 clauses are textually identical in EO-14). Defects fixed: the packet
+      builder never passed floor_claim to the allocator (8 of 247 cards disagreed with the coder's allocation); a truncated
+      verifier reply without a floor was scored ACCEPT (Q-081, Q-099). A run.py re-entry on finished branches was reverted
+      before any job ran (it resumed Q-380 exhaustion and crashed Anglican on a BSR-AN-05 URL). Report:
+      docs/gate6/WoP_SJN_Gate6_Session6_Report_20260913.md.
       Gate 7 items: Q-434 phrase re-cut, Q-169 now resolvable under BSR-RC-08 (re-check
       R001), the Roman Catholic packet's leading-witness cards to re-read under the new
       ordering, BSR-EO-03 retire or re-host, BSR-BA-02 apex→www redirect, see
       recovery-runs/proposed-app-config-gate7.md. Running the Gate 2 pipeline against
       v2.25 blocks on R001 (Q-034) until Gate 7 re-points that cell.
-    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session5_Report_20260913.md; ratify (1) the Draft3r4 URL changes for BSR-BA-02 and BSR-LU-02 into the workbook, (2) a same-text guard for rows publishing identical wording (LU-01/LU-02 duplicate sentences on Q-179, Q-227, Q-235), (3) the required_subject for Lord / Life-giving / Judge / Savior / Not made (tp-1 misses; 49 WRONG_SUBJECT rejections in the packets), (4) whether BSR-EO-03 is retired before Eastern Orthodox (it would block REVIEWED on all 44 EO cells), (5) the EO consultation breadth and its cap (Code 55–65 USD vs Cowork 90–110 USD); review the Baptist caveated apophatic fills (Q-382, Q-390, Q-454); still open from session 4: the reject-all exemption question and the four derived translation pairs; then give the go for Eastern Orthodox alone, launched with launch_branches.py. Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
+    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session6_Report_20260913.md; ratify (1) the new Inherited 57 'Required subject' column (wop-scratch/WoP_SJN_RequiredSubject_Delta_20260913.csv), (2) the BSR-EO-03 retirement (Draft3r5 CSV), (3) the declared same-text pair BSR-EO-14 -> BSR-EO-07 and the scope of the one-text-one-slot guard beyond two-host cases (28 cards, mostly shared subscription wording); rule (4) verifier gate6-v1.3 as is or a v1.4 that treats an inferable proposition as neighbouring (v1.3 held PR-18, the Q-390 shape), and whether to apply R6-2 to the remaining 110 carded PARTIALs (~3.3 USD; measured leak 0.37-0.57), (5) before EO: the ratified EO Unbegotten citations (TP-059/TP-060) that R6-2 refuses, compound/triadic predication for Spirit-typed families (Eternal power and might), and whether a creed recited in a liturgy can be capped by IDIOM_OR_FORMULA (Q-161 was); still open: the reject-all exemption, the four derived translation pairs, the Draft3r4 URL ratifications. EO session: the ladder must teach packets.no_text_rows that unconsulted rows are NOT CONSULTED (else Tier C EO-11/EO-13 block REVIEWED on every EO empty), and read the 10-cell checkpoint by mode (the first 10 EO cells are all kataphatic); estimate 38-52 USD. Then give the go for Eastern Orthodox alone, launched with launch_branches.py. Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
 
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED

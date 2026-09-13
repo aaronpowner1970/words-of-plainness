@@ -818,40 +818,17 @@
  },
  "verifications": {
   "Q-211-p1-BSR-LU-01-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "00dcb8dee9f84f263ac128ce",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "Jesus Christ (referred to as 'His eternal Son'), not God the Father directly",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The text does assert Jesus Christ is Savior and Redeemer, but this ascribes the title to the Son, not to God/the Father as required by the predicate's subject scope.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The predicate 'Savior' is applied to Jesus Christ (the Son) as an appositive within a sentence whose main subject is God performing the act of preaching the Gospel; the required subject (God/the Father) is not the one directly named Savior.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The phrase verbatim identifies Jesus Christ, the Son, as 'our only Savior and Redeemer,' not God the Father or 'the one God' as the predicate's required subject specifies, so the citation does not satisfy the subject requirement even though the phrase is present and asserted.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Jesus Christ (referred to as 'His eternal Son'), not God the Father directly\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text does assert Jesus Christ is Savior and Redeemer, but this ascribes the title to the Son, not to God/the Father as required by the predicate's subject scope.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The predicate 'Savior' is applied to Jesus Christ (the Son) as an appositive within a sentence whose main subject is God performing the act of preaching the Gospel; the required subject (God/the Father) is not the one directly named Savior.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The phrase verbatim identifies Jesus Christ, the Son, as 'our only Savior and Redeemer,' not God the Father or 'the one God' as the predicate's required subject specifies, so the citation does not satisfy the subject requirement even though the phrase is present and asserted.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "WORD_ONLY"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -868,6 +845,96 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "00dcb8dee9f84f263ac128ce",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "Jesus Christ (referred to as 'His eternal Son'), not God the Father directly",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The text does assert Jesus Christ is Savior and Redeemer, but this ascribes the title to the Son, not to God/the Father as required by the predicate's subject scope.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The predicate 'Savior' is applied to Jesus Christ (the Son) as an appositive within a sentence whose main subject is God performing the act of preaching the Gospel; the required subject (God/the Father) is not the one directly named Savior.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The phrase verbatim identifies Jesus Christ, the Son, as 'our only Savior and Redeemer,' not God the Father or 'the one God' as the predicate's required subject specifies, so the citation does not satisfy the subject requirement even though the phrase is present and asserted.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Jesus Christ (referred to as 'His eternal Son'), not God the Father directly\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text does assert Jesus Christ is Savior and Redeemer, but this ascribes the title to the Son, not to God/the Father as required by the predicate's subject scope.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The predicate 'Savior' is applied to Jesus Christ (the Son) as an appositive within a sentence whose main subject is God performing the act of preaching the Gospel; the required subject (God/the Father) is not the one directly named Savior.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The phrase verbatim identifies Jesus Christ, the Son, as 'our only Savior and Redeemer,' not God the Father or 'the one God' as the predicate's required subject specifies, so the citation does not satisfy the subject requirement even though the phrase is present and asserted.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "464e9f8e09dfd394a992b711",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "His eternal Son, our only Savior and Redeemer, Jesus Christ",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The text asserts in its own voice that the eternal Son is preached as the sole Savior and Redeemer through whom God works redemption.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly names Jesus Christ, the eternal Son, as 'our only Savior and Redeemer' in the context of God's redemptive plan and work of salvation, asserting redemptive action of the divine Son.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the divine Son, and the passage asserts redemptive action as a positive claim rather than a formula or report of another's view.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"His eternal Son, our only Savior and Redeemer, Jesus Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts in its own voice that the eternal Son is preached as the sole Savior and Redeemer through whom God works redemption.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly names Jesus Christ, the eternal Son, as 'our only Savior and Redeemer' in the context of God's redemptive plan and work of salvation, asserting redemptive action of the divine Son.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the divine Son, and the passage asserts redemptive action as a positive claim rather than a formula or report of another's view.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-211-p1-BSR-LU-01-2": {
@@ -921,40 +988,17 @@
    }
   },
   "Q-211-p1-BSR-LU-01-3": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "ddbc1abf77d5ddf9d3fc5c62",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "the Lamb of God and the Son of God",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The text asserts that it is Christ, the Lamb/Son of God, who takes away sins, not a human work; this is a positive doctrinal claim in the text's own voice.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage affirms redemptive action performed by the Son (Christ), which is a Trinitarian person but the required subject is specified as God/the Father, not Christ per se, though Christ as Son of God may fall under 'God' broadly; however the required_subject explicitly excludes Christ's human nature and centers on 'the one God, or the Father,' making this a narrower Christological instance.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "FAMILY_VARIATION"
-    ],
-    "verdict_model": "ACCEPT_WITH_CAVEAT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The subject is Christ (Son of God/Lamb of God) rather than the one God/Father as required, though the redemptive action predicate is clearly asserted of this divine subject, warranting a caveated acceptance rather than outright rejection.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Lamb of God and the Son of God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts that it is Christ, the Lamb/Son of God, who takes away sins, not a human work; this is a positive doctrinal claim in the text's own voice.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage affirms redemptive action performed by the Son (Christ), which is a Trinitarian person but the required subject is specified as God/the Father, not Christ per se, though Christ as Son of God may fall under 'God' broadly; however the required_subject explicitly excludes Christ's human nature and centers on 'the one God, or the Father,' making this a narrower Christological instance.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The subject is Christ (Son of God/Lamb of God) rather than the one God/Father as required, though the redemptive action predicate is clearly asserted of this divine subject, warranting a caveated acceptance rather than outright rejection.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -971,6 +1015,96 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "ddbc1abf77d5ddf9d3fc5c62",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the Lamb of God and the Son of God",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The text asserts that it is Christ, the Lamb/Son of God, who takes away sins, not a human work; this is a positive doctrinal claim in the text's own voice.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage affirms redemptive action performed by the Son (Christ), which is a Trinitarian person but the required subject is specified as God/the Father, not Christ per se, though Christ as Son of God may fall under 'God' broadly; however the required_subject explicitly excludes Christ's human nature and centers on 'the one God, or the Father,' making this a narrower Christological instance.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "FAMILY_VARIATION"
+      ],
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The subject is Christ (Son of God/Lamb of God) rather than the one God/Father as required, though the redemptive action predicate is clearly asserted of this divine subject, warranting a caveated acceptance rather than outright rejection.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Lamb of God and the Son of God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts that it is Christ, the Lamb/Son of God, who takes away sins, not a human work; this is a positive doctrinal claim in the text's own voice.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage affirms redemptive action performed by the Son (Christ), which is a Trinitarian person but the required subject is specified as God/the Father, not Christ per se, though Christ as Son of God may fall under 'God' broadly; however the required_subject explicitly excludes Christ's human nature and centers on 'the one God, or the Father,' making this a narrower Christological instance.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The subject is Christ (Son of God/Lamb of God) rather than the one God/Father as required, though the redemptive action predicate is clearly asserted of this divine subject, warranting a caveated acceptance rather than outright rejection.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "b4a1a3c9d5b2562b580808fa",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "the Lamb of God and the Son of God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The text positively asserts that it is the Lamb of God and Son of God (not any human work) that taketh away sins, in contrast to the Mass as a human work.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that the Son of God takes away our sins, a clear redemptive/saving action attributed to the required divine subject.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The chunk explicitly names the Son of God as the one who takes away sins, directly asserting redemptive action of the required divine subject, not merely reporting or quoting an opposing view.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"the Lamb of God and the Son of God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text positively asserts that it is the Lamb of God and Son of God (not any human work) that taketh away sins, in contrast to the Mass as a human work.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the Son of God takes away our sins, a clear redemptive/saving action attributed to the required divine subject.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The chunk explicitly names the Son of God as the one who takes away sins, directly asserting redemptive action of the required divine subject, not merely reporting or quoting an opposing view.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-211-p1-BSR-LU-02-1": {
@@ -1060,6 +1194,17 @@
    "source_note_guard": "ok",
    "scope_caveat": "The Book of Concord is subscribed by Lutheran churches worldwide; the online text used here is a public-domain translation on a private site, and the LCMS and ELCA differ in how strictly they subscribe.",
    "raw": "{\"rendered_state\": \"A-SF\", \"diverges_from_family_code\": true, \"state_reason\": \"Verifier floor is PARTIAL: the text attests justification 'for Christ's sake' as a narrower redemptive act wholly within the shared floor, but does not itself use 'Savior,' so the source-floor state A-SF is more honest than the family's default A.\", \"source_note\": \"The Augsburg Confession, Article V, states that God justifies believers not for their own merits but for Christ's sake, through the Word and Sacraments, describing a redemptive act centered on Christ.\"}"
+  },
+  "Q-211-p1-BSR-LU-01-1": {
+   "status": "DONE",
+   "call_id": "122e9b67913c49f72e56c1d4",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Floor is FULL: the Formula of Concord explicitly names Jesus Christ, the eternal Son, as 'our only Savior and Redeemer' active in redemptive work, matching the shared saving/redemptive-action floor at full strength, consistent with family code A.",
+   "source_note": "The Book of Concord's Formula of Concord, Solid Declaration II, names Jesus Christ, the eternal Son, as 'our only Savior and Redeemer,' affirming his redemptive, saving action.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The Book of Concord is subscribed by Lutheran churches worldwide; the online text used here is a public-domain translation on a private site, and the LCMS and ELCA differ in how strictly they subscribe.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Floor is FULL: the Formula of Concord explicitly names Jesus Christ, the eternal Son, as 'our only Savior and Redeemer' active in redemptive work, matching the shared saving/redemptive-action floor at full strength, consistent with family code A.\", \"source_note\": \"The Book of Concord's Formula of Concord, Solid Declaration II, names Jesus Christ, the eternal Son, as 'our only Savior and Redeemer,' affirming his redemptive, saving action.\"}"
   }
  },
  "phase": "DONE",
@@ -1073,6 +1218,25 @@
   "BSR-EO-09"
  ],
  "survivors": [
+  {
+   "candidate_id": "Q-211-p1-BSR-LU-01-1",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Formula of Concord, Solid Declaration: II. Free Will, ¶50–54",
+   "phrase": "our only Savior and Redeemer, Jesus Christ",
+   "rationale": "Names God's eternal Son as 'our only Savior and Redeemer' who collects the Church and calls men to eternal salvation, asserting redemptive action of God.",
+   "floor_claim": "FULL",
+   "chunk_text": "Therefore God, out of His immense goodness and mercy, has His divine eternal Law and His wonderful plan concerning our redemption, namely, the holy, alone-saving Gospel of His eternal Son, our only Savior and Redeemer, Jesus Christ, publicly preached; and by this [preaching] collects an eternal Church for Himself from the human race, and works in the hearts of men true repentance and knowledge of sins, and true faith in the Son of God, Jesus Christ. And by this means, and in no other way, namely, through His holy Word, when men hear it preached or read it, and the holy Sacraments when they are used according to His Word, God desires to call men to eternal salvation, draw them to Himself, and convert, regenerate, and sanctify them. 1 Cor. 1:21: For after that in the wisdom of God the world by wisdom knew not God, it pleased God by the foolishness of preaching to save them that believe. Acts 10:5. 6: Peter shall tell thee what thou oughtest to do. Rom. 10:17: Faith cometh by hearing, and hearing by the Word of God. John 17:17. 20: Sanctify them by Thy truth; Thy Word is truth, etc. Neither pray I for these alone, but for them also which shall believe on Me through their Word. Therefore the eternal Father calls down from heaven concerning His dear Son and concerning all who preach repentance and forgiveness of sins in His name: Hear ye Him, Matt. 17:5. Now, all who wish to be saved ought to hear this preaching [of God’s Word]. For the preaching and hearing of God’s Word are instruments of the Holy Ghost, by, with, and through which He desires to work efficaciously, and to convert men to God, and to work in them both to will and to do. This Word man can externally hear and read, even though he is not yet converted to God and regenerate; for in these external things, as said above, man even since the Fall has to a certain extent a free will, so that he can go to church and hear or not hear the sermon. Through this means, namely, the preaching and hearing of His Word, God works, and breaks our hearts, and draws man, so that through the preaching of the Law he comes to know his sins and God’s wrath, and experiences in his heart true terrors, contrition, and sorrow, and through the preaching and consideration of the holy Gospel concerning the gracious forgiveness of sins in Christ a spark of faith is kindled in him, which accepts the forgiveness of sins for Christ’s sake, and comforts itself with the promise of the Gospel, and thus the Holy Ghost (who works all this) is sent into the heart, Gal. 4:6.",
+   "chunk_hash": "c7812512b0538b03718291673ea427a39ecd355e85ae8c4fe3569e5455d9e27a",
+   "division": "paragraph-range",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
   {
    "candidate_id": "Q-211-p1-BSR-LU-02-1",
    "pass": 1,
@@ -1110,6 +1274,25 @@
    "recut_from": null,
    "exhaustion_batch": null,
    "slot": "EXTRA"
+  },
+  {
+   "candidate_id": "Q-211-p1-BSR-LU-01-3",
+   "pass": 1,
+   "registry_id": "BSR-LU-01",
+   "locator": "Smalcald Articles: Article II - Of the Mass, ¶7–10",
+   "phrase": "Lamb of God and the Son of God, that taketh away our sins",
+   "rationale": "Identifies the Son of God as the one who takes away sins, asserting redemptive action of God the Son rather than of any human work.",
+   "floor_claim": "FULL",
+   "chunk_text": "Fifthly. But since the Mass is nothing else and can be nothing else (as the Canon and all books declare), than a work of men (even of wicked scoundrels), by which one attempts to reconcile himself and others to God, and to obtain and merit the remission of sins and grace (for thus the Mass is observed when it is observed at the very best; otherwise what purpose would it serve?), for this very reason it must and should [certainly] be condemned and rejected. For this directly conflicts with the chief article, which says that it is not a wicked or a godly hireling of the Mass with his own work, but the Lamb of God and the Son of God, that taketh away our sins. But if any one should advance the pretext that as an act of devotion he wishes to administer the Sacrament, or Communion, to himself, he is not in earnest [he would commit a great mistake, and would not be speaking seriously and sincerely]. For if he wishes to commune in sincerity, the surest and best way for him is in the Sacrament administered according to Christ’s institution. But that one administer communion to himself is a human notion, uncertain, unnecessary, yea, even prohibited. And he does not know what he is doing, because without the Word of God he obeys a false human opinion and invention. So, too, it is not right (even though the matter were otherwise correct) for one to use the common Sacrament of [belonging to] the Church according to his own private devotion, and without God’s Word and apart from the communion of the Church to trifle therewith. This article concerning the Mass will be the whole business of the Council. [The Council will perspire most over, and be occupied with this article concerning the Mass.] For if it were [although it would be] possible for them to concede to us all the other articles, yet they could not concede this. As Campegius said at Augsburg that he would be torn to pieces before he would relinquish the Mass, so, by the help of God, I, too, would suffer myself to be reduced to ashes before I would allow a hireling of the Mass, be he good or bad, to be made equal to Christ Jesus, my Lord and Savior, or to be exalted above Him. Thus we are and remain eternally separated and opposed to one another. They feel well enough that when the Mass falls, the Papacy lies in ruins. Before they will permit this to occur, they will put us all to death if they can.",
+   "chunk_hash": "6aef7f9cb3e4fa41ce22552d7c748704dba831b07952df72347d13750b5931eb",
+   "division": "paragraph-range",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 3,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "EXTRA"
   }
  ],
  "fallback_used": false,
@@ -1135,30 +1318,49 @@
  },
  "allocation": {
   "kept": [
-   "Q-211-p1-BSR-LU-01-2",
-   "Q-211-p1-BSR-LU-02-1"
+   "Q-211-p1-BSR-LU-01-1",
+   "Q-211-p1-BSR-LU-02-1",
+   "Q-211-p1-BSR-LU-01-2"
   ],
   "roles": {
-   "Q-211-p1-BSR-LU-01-2": "PRIMARY",
-   "Q-211-p1-BSR-LU-02-1": "PRIMARY"
+   "Q-211-p1-BSR-LU-01-1": "PRIMARY",
+   "Q-211-p1-BSR-LU-02-1": "PRIMARY",
+   "Q-211-p1-BSR-LU-01-2": "PRIMARY"
   },
   "english_witness": {},
-  "dropped": {},
+  "dropped": {
+   "Q-211-p1-BSR-LU-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lutheran churches subscribing the book of concord' already holds a slot)"
+  },
   "witness_only": [],
   "groups": {
+   "Q-211-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord",
    "Q-211-p1-BSR-LU-02-1": "lcms",
-   "Q-211-p1-BSR-LU-01-2": "lutheran churches subscribing the book of concord"
+   "Q-211-p1-BSR-LU-01-2": "lutheran churches subscribing the book of concord",
+   "Q-211-p1-BSR-LU-01-3": "lutheran churches subscribing the book of concord"
   },
   "slot_order": {
-   "Q-211-p1-BSR-LU-01-2": 0,
-   "Q-211-p1-BSR-LU-02-1": 1
-  }
+   "Q-211-p1-BSR-LU-01-1": 0,
+   "Q-211-p1-BSR-LU-02-1": 1,
+   "Q-211-p1-BSR-LU-01-2": 2
+  },
+  "parallel_witnesses": {}
  },
- "coder_skipped": {},
+ "coder_skipped": {
+  "Q-211-p1-BSR-LU-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lutheran churches subscribing the book of concord' already holds a slot)"
+ },
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-211-p1-BSR-LU-01-1": [
+    "REJECT",
+    "ACCEPT"
+   ],
+   "Q-211-p1-BSR-LU-01-3": [
+    "REJECT",
+    "ACCEPT"
+   ]
+  }
  },
  "supplements": [
   {

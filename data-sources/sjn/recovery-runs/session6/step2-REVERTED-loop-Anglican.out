@@ -1,0 +1,21 @@
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+!! Anglican: run.py FAILED — GuardError: URL leaked into agent input (while running cells;   File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\guards.py", line 42, in assert_no_urls); writing the PARTIAL packet before exiting non-zero
+!! Anglican: writing the PARTIAL packet (RUN_FAILED, exit 1): 43/43 cells DONE
+   packet C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-packets\anglican.json (PARTIAL — RUN FAILED): 43 cells, 38 with candidates, 5 empty (1 all-rejected; REVIEWED offered on 0, review incomplete on 5), 0 not finished, 77 rejections kept, 0 dropped at build; exhaustion entered on 0 cell(s), changed 0, 0 exhaustion-sourced candidate(s) on 0 card(s); caveat second rubrics 0 (0 lower-floor applied); 2c sample 0 of 0 eligible; 22 candidate(s) on chunks repaired after the run; extract C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-packets\extracts\anglican-extract.json
+Traceback (most recent call last):
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 370, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 140, in main
+    runner.run_cell(c)
+    ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\agents.py", line 836, in run_cell
+    status = self.locate_exhaust(cell, st)
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\agents.py", line 464, in locate_exhaust
+    e = self.locate_standard(cell, pred, comp, rows[rid], int(EXHAUST_PASS), chunks=chunks, coverage=cov, batch=k, n_batches=len(plan))
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\agents.py", line 274, in locate_standard
+    guards.assert_no_urls({"u": user})
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\guards.py", line 42, in assert_no_urls
+    raise GuardError("URL leaked into agent input")
+sjn_recovery.guards.GuardError: URL leaked into agent input

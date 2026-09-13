@@ -14,6 +14,7 @@ Contents — no prose beyond the refusal line the card itself shows, no chunk te
   per candidate   candidate_id, registry_id, speaks_for_group, slot (card position), verification_slot, found_in_exhaustion,
                   verdict, floor_final, floor_by_model, floor_disagreement, lower_floor_applied, route, second_rubric_role,
                   hazard_flags per model
+                  parallel_witnesses (session 6, R6-4: [candidate_id, registry_id, rule] recorded on the seated entry)
   per rejection   candidate_id, registry_id, speaks_for_group, stage, reason_code, floor_final"""
 import argparse
 import json
@@ -57,7 +58,8 @@ def _candidate(e, pos):
             "floor_disagreement": fv.get("floor_disagreement"), "lower_floor_applied": fv.get("lower_floor_applied"),
             "route": fv.get("route"), "second_rubric_role": fv.get("second_rubric_role"),
             "hazard_flags": {m: (rub.get(m) or {}).get("hazard_flags") for m in MODELS if m in rub},
-            "reverified": bool(e.get("superseded_rubrics")), "on_unslotted_prior": None}
+            "reverified": bool(e.get("superseded_rubrics")), "on_unslotted_prior": None,
+            "parallel_witnesses": [[w.get("candidate_id"), w.get("registry_id"), w.get("rule")] for w in e.get("same_text_parallel_witnesses") or []]}
 
 
 def _rejection(r):
@@ -100,6 +102,9 @@ def build_extract(packet):
     header["slots_by_speaks_for"] = dict(slots)
     header["leads_by_registry_id"] = dict(leads)
     header["failure_record_only"] = packet.get("failure_record_only")
+    stg = packet.get("same_text_guard") or {}
+    header["same_text_guard"] = {k: stg.get(k) for k in ("cards", "parallel_witnesses", "declared_same_text_rows")}
+    header["author_rulings_applied"] = {k: (packet.get("author_rulings_applied") or {}).get(k) for k in ("file", "required_subject_retyped", "registry_retired", "refused_candidates")}
     return {"schema": "sjn-gate6-extract/1", "source_packet": f"recovery-packets/{_slug(packet.get('branch') or '')}.json", "totals": header, "cells": cells}
 
 

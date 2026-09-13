@@ -1,11 +1,11 @@
 {
  "run_id": "live-1",
- "updated_at": "2026-09-13T18:51:43Z",
+ "updated_at": "2026-09-13T22:17:51Z",
  "branches": {
   "Roman Catholic": {
    "cap_usd": 25.0,
-   "spent_usd": 15.798,
-   "calls": 582,
+   "spent_usd": 15.947813,
+   "calls": 591,
    "status": "DONE",
    "cells": 34,
    "queue_ids": [
@@ -52,14 +52,28 @@
      "spent_usd": 15.798,
      "ended_at": "2026-09-12T16:02:57Z",
      "note": "reconstructed from run.json branch_spend; the executor invocations of session 1 were not individually recorded"
+    },
+    {
+     "started_at": "2026-09-13T22:08:10Z",
+     "resumed_from_usd": 15.798,
+     "answered": 7,
+     "spent_usd": 0.124044,
+     "ended_at": "2026-09-13T22:09:17Z"
+    },
+    {
+     "started_at": "2026-09-13T22:17:24Z",
+     "resumed_from_usd": 15.9221,
+     "answered": 2,
+     "spent_usd": 0.025713,
+     "ended_at": "2026-09-13T22:17:42Z"
     }
    ],
    "cap_hit_at": null
   },
   "Anglican": {
    "cap_usd": 25.0,
-   "spent_usd": 14.484573,
-   "calls": 440,
+   "spent_usd": 15.154269,
+   "calls": 461,
    "status": "DONE",
    "cells": 43,
    "queue_ids": [
@@ -156,14 +170,31 @@
      "answered": 2,
      "spent_usd": 0.015513,
      "ended_at": "2026-09-12T19:57:22Z"
+    },
+    {
+     "started_at": "2026-09-13T22:08:10Z",
+     "resumed_from_usd": 14.484573,
+     "answered": 10,
+     "spent_usd": 0.566277,
+     "ended_at": "2026-09-13T22:10:06Z"
+    },
+    {
+     "started_at": "2026-09-13T22:17:24Z",
+     "resumed_from_usd": 15.05085,
+     "answered": 11,
+     "spent_usd": 0.103419,
+     "ended_at": "2026-09-13T22:17:51Z"
     }
    ],
-   "cap_hit_at": null
+   "cap_hit_at": null,
+   "notes": [
+    "2026-09-13 session 6: status RUN_FAILED at 22:11:08Z was set by a run.py re-entry that crashed on the URL guard (BSR-AN-05 chunk in an exhaustion batch) before any job was answered; the re-entry was reverted (cells restored from git, its 40 unanswered jobs removed) and the branch is DONE as before. Spend recorded here is the session-6 re-verification only."
+   ]
   },
   "Lutheran": {
    "cap_usd": 34.0,
-   "spent_usd": 30.70573,
-   "calls": 579,
+   "spent_usd": 30.909097,
+   "calls": 595,
    "status": "DONE",
    "cells": 39,
    "queue_ids": [
@@ -382,14 +413,28 @@
      "answered": 1,
      "spent_usd": 0.03483,
      "ended_at": "2026-09-13T18:51:42Z"
+    },
+    {
+     "started_at": "2026-09-13T22:08:10Z",
+     "resumed_from_usd": 30.70573,
+     "answered": 11,
+     "spent_usd": 0.167754,
+     "ended_at": "2026-09-13T22:09:20Z"
+    },
+    {
+     "started_at": "2026-09-13T22:17:24Z",
+     "resumed_from_usd": 30.873484,
+     "answered": 5,
+     "spent_usd": 0.035613,
+     "ended_at": "2026-09-13T22:17:47Z"
     }
    ],
    "cap_hit_at": null
   },
   "Reformed / Presbyterian": {
    "cap_usd": 25.0,
-   "spent_usd": 15.182258,
-   "calls": 301,
+   "spent_usd": 15.447641,
+   "calls": 328,
    "status": "DONE",
    "cells": 16,
    "queue_ids": [
@@ -445,14 +490,28 @@
      "answered": 9,
      "spent_usd": 0.109515,
      "ended_at": "2026-09-13T09:50:10Z"
+    },
+    {
+     "started_at": "2026-09-13T22:08:10Z",
+     "resumed_from_usd": 15.182258,
+     "answered": 10,
+     "spent_usd": 0.133278,
+     "ended_at": "2026-09-13T22:09:03Z"
+    },
+    {
+     "started_at": "2026-09-13T22:17:24Z",
+     "resumed_from_usd": 15.315536,
+     "answered": 17,
+     "spent_usd": 0.132105,
+     "ended_at": "2026-09-13T22:17:51Z"
     }
    ],
    "cap_hit_at": null
   },
   "Baptist": {
    "cap_usd": 9.5,
-   "spent_usd": 6.220131,
-   "calls": 266,
+   "spent_usd": 6.487077,
+   "calls": 270,
    "status": "DONE",
    "cells": 37,
    "queue_ids": [
@@ -571,14 +630,21 @@
      "answered": 1,
      "spent_usd": 0.010062,
      "ended_at": "2026-09-13T18:43:21Z"
+    },
+    {
+     "started_at": "2026-09-13T22:08:10Z",
+     "resumed_from_usd": 6.220131,
+     "answered": 4,
+     "spent_usd": 0.266946,
+     "ended_at": "2026-09-13T22:09:20Z"
     }
    ],
    "cap_hit_at": null
   },
   "Methodist / Wesleyan": {
    "cap_usd": 25.0,
-   "spent_usd": 9.217395,
-   "calls": 326,
+   "spent_usd": 9.516957,
+   "calls": 343,
    "status": "DONE",
    "cells": 37,
    "queue_ids": [
@@ -676,14 +742,28 @@
      "answered": 2,
      "spent_usd": 0.014328,
      "ended_at": "2026-09-13T11:07:43Z"
+    },
+    {
+     "started_at": "2026-09-13T22:08:10Z",
+     "resumed_from_usd": 9.217395,
+     "answered": 10,
+     "spent_usd": 0.167754,
+     "ended_at": "2026-09-13T22:09:23Z"
+    },
+    {
+     "started_at": "2026-09-13T22:17:24Z",
+     "resumed_from_usd": 9.385149,
+     "answered": 7,
+     "spent_usd": 0.131808,
+     "ended_at": "2026-09-13T22:17:50Z"
     }
    ],
    "cap_hit_at": null
   },
   "Mennonite / Anabaptist": {
    "cap_usd": 25.0,
-   "spent_usd": 10.704146,
-   "calls": 270,
+   "spent_usd": 10.853515,
+   "calls": 277,
    "status": "DONE",
    "cells": 41,
    "queue_ids": [
@@ -757,6 +837,20 @@
      "answered": 17,
      "spent_usd": 0.581118,
      "ended_at": "2026-09-13T11:02:40Z"
+    },
+    {
+     "started_at": "2026-09-13T22:08:10Z",
+     "resumed_from_usd": 10.704146,
+     "answered": 6,
+     "spent_usd": 0.140019,
+     "ended_at": "2026-09-13T22:09:16Z"
+    },
+    {
+     "started_at": "2026-09-13T22:17:24Z",
+     "resumed_from_usd": 10.8442,
+     "answered": 1,
+     "spent_usd": 0.009315,
+     "ended_at": "2026-09-13T22:17:39Z"
     }
    ],
    "cap_hit_at": null

@@ -564,43 +564,17 @@
    }
   },
   "Q-208-p1-BSR-MA-02-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "fdf595c3ae3c14a4325ad8b1",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "He (referring to Christ, the Son, who 'sits on the right hand of God the Majesty on high')",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The clause is a direct doctrinal assertion, not a quotation, oath, or hypothetical.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The judgment predicate is asserted of Christ (the Son) as the one who will return to judge, not of 'God' or 'the Father' as required by the predicate's subject scope; the passage does not explicitly identify the judging subject as God the Father or the undifferentiated one God.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "FAMILY_VARIATION"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": null,
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (referring to Christ, the Son, who 'sits on the right hand of God the Majesty on high')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause is a direct doctrinal assertion, not a quotation, oath, or hypothetical.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The judgment predicate is asserted of Christ (the Son) as the one who will return to judge, not of 'God' or 'the Father' as required by the predicate's subject scope; the passage does not explicitly identify the judging subject as God the Father or the undifferentiated one God.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "WORD_ONLY"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -626,6 +600,108 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "fdf595c3ae3c14a4325ad8b1",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "He (referring to Christ, the Son, who 'sits on the right hand of God the Majesty on high')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The clause is a direct doctrinal assertion, not a quotation, oath, or hypothetical.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The judgment predicate is asserted of Christ (the Son) as the one who will return to judge, not of 'God' or 'the Father' as required by the predicate's subject scope; the passage does not explicitly identify the judging subject as God the Father or the undifferentiated one God.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "FAMILY_VARIATION"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": null,
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"He (referring to Christ, the Son, who 'sits on the right hand of God the Majesty on high')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause is a direct doctrinal assertion, not a quotation, oath, or hypothetical.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The judgment predicate is asserted of Christ (the Son) as the one who will return to judge, not of 'God' or 'the Father' as required by the predicate's subject scope; the passage does not explicitly identify the judging subject as God the Father or the undifferentiated one God.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"FAMILY_VARIATION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "c1d3cadb2e154c0185c0cd8e",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "He (the Son of God, referring to Christ)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession asserts in its own voice that Christ 'will come again to judge the quick and the dead,' as part of a doctrinal statement about His person and work.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that the Son, seated at God's right hand, will return to judge the living and the dead, fulfilling the predicate of divine judgment for the required subject (the Son as God).",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the Son (a valid required subject), and the confession positively asserts His future divine judgment of all people, matching the predicate at full floor.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"He (the Son of God, referring to Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts in its own voice that Christ 'will come again to judge the quick and the dead,' as part of a doctrinal statement about His person and work.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the Son, seated at God's right hand, will return to judge the living and the dead, fulfilling the predicate of divine judgment for the required subject (the Son as God).\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the Son (a valid required subject), and the confession positively asserts His future divine judgment of all people, matching the predicate at full floor.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-208-p1-BSR-MA-01-2": {
@@ -693,32 +769,6 @@
    }
   },
   "Q-208-p1-BSR-MA-02-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "4752375a85cd4024a1e603c1",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "they (the dead and living, in a passive construction 'shall be placed before the judgment seat of Christ')",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The confession asserts a future judgment scene, but the agent named is Christ, and even the grammatical subject of the clause is the assembled people, not God the Father or 'the one God.'",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The passage describes people being placed before Christ's judgment seat; it does not assert divine judgment by the required subject (God/the Father), only by Christ, and even then only as the locus before which people stand.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The clause's subject is the people being judged, and the judge named is Christ, not God the Father or 'the one God' as required by the predicate's scope.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"they (the dead and living, in a passive construction 'shall be placed before the judgment seat of Christ')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts a future judgment scene, but the agent named is Christ, and even the grammatical subject of the clause is the assembled people, not God the Father or 'the one God.'\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage describes people being placed before Christ's judgment seat; it does not assert divine judgment by the required subject (God/the Father), only by Christ, and even then only as the locus before which people stand.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's subject is the people being judged, and the judge named is Christ, not God the Father or 'the one God' as required by the predicate's scope.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -755,70 +805,252 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "4752375a85cd4024a1e603c1",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "they (the dead and living, in a passive construction 'shall be placed before the judgment seat of Christ')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The confession asserts a future judgment scene, but the agent named is Christ, and even the grammatical subject of the clause is the assembled people, not God the Father or 'the one God.'",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage describes people being placed before Christ's judgment seat; it does not assert divine judgment by the required subject (God/the Father), only by Christ, and even then only as the locus before which people stand.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The clause's subject is the people being judged, and the judge named is Christ, not God the Father or 'the one God' as required by the predicate's scope.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"they (the dead and living, in a passive construction 'shall be placed before the judgment seat of Christ')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts a future judgment scene, but the agent named is Christ, and even the grammatical subject of the clause is the assembled people, not God the Father or 'the one God.'\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage describes people being placed before Christ's judgment seat; it does not assert divine judgment by the required subject (God/the Father), only by Christ, and even then only as the locus before which people stand.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's subject is the people being judged, and the judge named is Christ, not God the Father or 'the one God' as required by the predicate's scope.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "2be9e3be115ccd0521584345",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "they (all men who have died and those alive, who shall be changed)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession asserts a future judgment event as part of its own creedal statement, not a report of an opponent's view.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The clause names Christ only as possessor of the judgment seat before which people are placed; Christ himself is not the grammatical subject performing the act of judging in this sentence.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The passage's grammatical subject is the resurrected and living humans being placed before Christ's judgment seat, not Christ (or God) as the one who judges, so the predicate 'divine judgment' is not asserted of the required subject.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"they (all men who have died and those alive, who shall be changed)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts a future judgment event as part of its own creedal statement, not a report of an opponent's view.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The clause names Christ only as possessor of the judgment seat before which people are placed; Christ himself is not the grammatical subject performing the act of judging in this sentence.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage's grammatical subject is the resurrected and living humans being placed before Christ's judgment seat, not Christ (or God) as the one who judges, so the predicate 'divine judgment' is not asserted of the required subject.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-208-p1-BSR-MA-01-3": {
+   "_route": null,
+   "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "63789247c138b9a680fb915c",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the idea of God's final judgment",
+      "speech_act_is_assertion": "N",
+      "speech_act_note": "The sentence reports an objection some raise against the doctrine ('For some, the idea of God's final judgment is problematic, because...'), not an assertion of divine judgment by the standard itself.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The words 'God's final judgment' appear only as the object of a concessive objection being acknowledged, not as an assertion that God judges; the standard elsewhere asserts judgment but this specific phrase does not.",
+      "hazard_flags": [
+       "SLOGAN_COMPRESSION"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "NOT_ASSERTION",
+      "reason": "The cited phrase names the doctrine only to acknowledge an objection to it, not to assert it, and its grammatical subject is 'the idea,' not God.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the idea of God's final judgment\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The sentence reports an objection some raise against the doctrine ('For some, the idea of God's final judgment is problematic, because...'), not an assertion of divine judgment by the standard itself.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The words 'God's final judgment' appear only as the object of a concessive objection being acknowledged, not as an assertion that God judges; the standard elsewhere asserts judgment but this specific phrase does not.\", \"hazard_flags\": [\"SLOGAN_COMPRESSION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"NOT_ASSERTION\", \"reason\": \"The cited phrase names the doctrine only to acknowledge an objection to it, not to assert it, and its grammatical subject is 'the idea,' not God.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
    "sonnet": {
     "model": "sonnet",
-    "call_id": "63789247c138b9a680fb915c",
+    "call_id": "a098547b065e927c10c0162b",
     "attempt": 0,
     "prompt_version": "gate6-v1.2",
     "phrase_verbatim": "Y",
     "subject_is_required": "N",
     "grammatical_subject": "the idea of God's final judgment",
     "speech_act_is_assertion": "N",
-    "speech_act_note": "The sentence reports an objection some raise against the doctrine ('For some, the idea of God's final judgment is problematic, because...'), not an assertion of divine judgment by the standard itself.",
+    "speech_act_note": "The clause reports a concern ('For some, the idea of God's final judgment is problematic') rather than asserting that God will judge; it is framing an objection to be addressed, not a positive claim in the confession's own voice.",
     "floor": "WORD_ONLY",
-    "floor_reason": "The words 'God's final judgment' appear only as the object of a concessive objection being acknowledged, not as an assertion that God judges; the standard elsewhere asserts judgment but this specific phrase does not.",
+    "floor_reason": "The word 'judgment' appears attached to 'God's final judgment' but the sentence's subject and assertion concern the *idea* being problematic, not God's act of judging.",
     "hazard_flags": [
-     "SLOGAN_COMPRESSION"
+     "SAME_WORD_DIFFERENT_MEANING"
     ],
     "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
     "verdict_model": "REJECT",
-    "reason_code": "NOT_ASSERTION",
-    "reason": "The cited phrase names the doctrine only to acknowledge an objection to it, not to assert it, and its grammatical subject is 'the idea,' not God.",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The phrase's grammatical subject is 'the idea', and the sentence functions as a concession to an objection rather than an assertion that God judges, so it fails both subject and assertion criteria.",
     "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the idea of God's final judgment\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The sentence reports an objection some raise against the doctrine ('For some, the idea of God's final judgment is problematic, because...'), not an assertion of divine judgment by the standard itself.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The words 'God's final judgment' appear only as the object of a concessive objection being acknowledged, not as an assertion that God judges; the standard elsewhere asserts judgment but this specific phrase does not.\", \"hazard_flags\": [\"SLOGAN_COMPRESSION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"NOT_ASSERTION\", \"reason\": \"The cited phrase names the doctrine only to acknowledge an objection to it, not to assert it, and its grammatical subject is 'the idea,' not God.\"}",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the idea of God's final judgment\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The clause reports a concern ('For some, the idea of God's final judgment is problematic') rather than asserting that God will judge; it is framing an objection to be addressed, not a positive claim in the confession's own voice.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'judgment' appears attached to 'God's final judgment' but the sentence's subject and assertion concern the *idea* being problematic, not God's act of judging.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The phrase's grammatical subject is 'the idea', and the sentence functions as a concession to an objection rather than an assertion that God judges, so it fails both subject and assertion criteria.\"}",
     "phrase_verbatim_code": "Y",
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT"
    },
-   "_route": null,
-   "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
-    "adjudicated_by": "sonnet",
-    "route": null,
-    "primary_verdict": "REJECT",
-    "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
-    "floor_by_model": {
-     "sonnet": "WORD_ONLY"
-    },
-    "floor_disagreement": false,
-    "lower_floor_applied": false,
-    "second_rubric": null,
-    "second_rubric_role": null,
-    "overturned": false,
-    "direction": null
-   },
-   "final_at_run": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
-    "adjudicated_by": "sonnet",
-    "route": null,
-    "primary_verdict": "REJECT",
-    "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
-    "floor_by_model": {
-     "sonnet": "WORD_ONLY"
-    },
-    "floor_disagreement": false,
-    "lower_floor_applied": false,
-    "second_rubric": null,
-    "second_rubric_role": null,
-    "overturned": false,
-    "direction": null
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   }
  },
@@ -844,6 +1076,17 @@
    "source_note_guard": "ok",
    "scope_caveat": "The 1995 Confession describes itself as guidance for belief and practice rather than a creed; it speaks for the two adopting denominations, and historic confessions are received differently by other Anabaptist bodies.",
    "raw": "{\"rendered_state\": \"A-SF\", \"diverges_from_family_code\": true, \"state_reason\": \"The verifier's floor is PARTIAL: the quoted phrase attests a narrower instance (God bringing justice to the persecuted) within the broader affirmation of final judgment stated elsewhere in Article 24. This narrower proposition falls wholly within the shared floor of divine judgment, so A-SF is the honest state rather than the family's blanket A.\", \"source_note\": \"The Confession of Faith in a Mennonite Perspective (1995), Article 24, states that at Christ's coming the dead will be judged and that God will bring justice to the persecuted.\"}"
+  },
+  "Q-208-p1-BSR-MA-02-1": {
+   "status": "DONE",
+   "call_id": "872965341b8c384c04e723c4",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: the Confession directly affirms Christ, seated at God's right hand, will return to judge the quick and the dead, matching the shared divine judgment proposition at the controlled scope. Family code A holds.",
+   "source_note": "The Dordrecht Confession (1632), Article IV, states that Christ will come again to judge the living and the dead, affirming divine judgment distinct from Latter-day Saint teaching on the same subject.",
+   "source_note_guard": "ok",
+   "scope_caveat": "The 1995 Confession describes itself as guidance for belief and practice rather than a creed; it speaks for the two adopting denominations, and historic confessions are received differently by other Anabaptist bodies.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the Confession directly affirms Christ, seated at God's right hand, will return to judge the quick and the dead, matching the shared divine judgment proposition at the controlled scope. Family code A holds.\", \"source_note\": \"The Dordrecht Confession (1632), Article IV, states that Christ will come again to judge the living and the dead, affirming divine judgment distinct from Latter-day Saint teaching on the same subject.\"}"
   }
  },
  "phase": "DONE",
@@ -887,6 +1130,25 @@
    "slot": "GUARANTEED"
   },
   {
+   "candidate_id": "Q-208-p1-BSR-MA-02-1",
+   "pass": 1,
+   "registry_id": "BSR-MA-02",
+   "locator": "Article IV. The Advent of Christ into This World, and the Reason of His Coming",
+   "phrase": "whence He will come again to judge the quick and the dead",
+   "rationale": "Asserts that Christ, the divine Son seated at God's right hand, will judge all people, affirming divine judgment.",
+   "floor_claim": "FULL",
+   "chunk_text": "We believe and confess further, that when the time of the promise, for which all the pious forefathers had so much longed and waited, had come and was fulfilled, this previously promised Messiah, Redeemer, and Savior, proceeded from God, was sent, and, according to the prediction of the prophets, and the testimony of the evangelists, came into the world, yea, into the flesh, was made manifest, and the Word, Himself became flesh and man; that He was conceived in the virgin Mary, who was espoused to a man named Joseph, of the house of David; and that she brought Him forth as her firstborn son, at Bethlehem, wrapped Him in swaddling clothes, and laid Him in a manger. John 4:25; 16:28; 1 Timothy 3:16; John 1:14; Matthew 1:23; Luke 2:7. We confess and believe also, that this is the same whose goings forth have been from of old, from everlasting, without beginning of days, or end of life; of whom it is testified that He Himself is the Alpha and Omega, the beginning and the ending, the first and the last; that He is the same, and no other, who was foreordained, promised, sent, and came into the world; who is God’s only, first and own Son; who was before John the Baptist, before Abraham, before the world; yea, who was David’s Lord, and the God of the whole world, the first-born of every creature; who was brought into the world, and for whom a body was prepared, which He yielded up as a sacrifice and offering, for a sweet savor unto God, yea, for the consolation, redemption, and salvation of all mankind. John 3:16; Hebrews 1:6; Romans 8:32; John 1:30; Matthew 22:43; Colossians 1:15; Hebrews 10:5. But as to how and in what manner this precious body was prepared, and how the Word became flesh, and He Himself man, in regard to this we content ourselves with the statement pertaining to this matter which the worthy evangelists have left us in their accounts, according to which we confess with all the saints, that He is the Son of the living God, in whom alone consist all our hope, consolation, redemption, and salvation, which we neither may nor must seek in any other. Luke 1:31, 32; John 20:31; Matthew 16:16. We furthermore believe and confess with the Scriptures, that, when He had finished His course, and accomplished the work for which He was sent and came into the world, He was, according to the providence of God, delivered into the hands of the unrighteous; suffered under the judge, Pontius Pilate; was crucified, dead, was buried, and on the third day, rose from the dead, and ascended to heaven; and that He sits on the right hand of God the Majesty on high, whence He will come again to judge the quick and the dead. Luke 22:53; Luke 23:1; Luke 24:6, 7, 51. And that thus the Son of God died, and tasted death and shed His precious blood for all men; and that He thereby bruised the serpent’s head, destroyed the works of the devil, annulled the handwriting and obtained forgiveness of sins for all mankind; thus becoming the cause of eternal salvation for all those who, from Adam unto the end of the world, each in his time, believe in, and obey Him. Genesis 3:15; 1 John 3:8; Colossians 2:14; Romans 5:18.",
+   "chunk_hash": "7b22152e33244df8889fbd03d90419891f9cf2382a8c7c87b0cea947bca15896",
+   "division": "article",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
+  {
    "candidate_id": "Q-208-p1-BSR-MA-01-2",
    "pass": 1,
    "registry_id": "BSR-MA-01",
@@ -924,10 +1186,12 @@
  "allocation": {
   "kept": [
    "Q-208-p1-BSR-MA-01-1",
+   "Q-208-p1-BSR-MA-02-1",
    "Q-208-p1-BSR-MA-01-2"
   ],
   "roles": {
    "Q-208-p1-BSR-MA-01-1": "PRIMARY",
+   "Q-208-p1-BSR-MA-02-1": "PRIMARY",
    "Q-208-p1-BSR-MA-01-2": "PRIMARY"
   },
   "english_witness": {},
@@ -935,17 +1199,25 @@
   "witness_only": [],
   "groups": {
    "Q-208-p1-BSR-MA-01-1": "mennonite church usa and mennonite church canada",
+   "Q-208-p1-BSR-MA-02-1": "historic",
    "Q-208-p1-BSR-MA-01-2": "mennonite church usa and mennonite church canada"
   },
   "slot_order": {
    "Q-208-p1-BSR-MA-01-1": 0,
-   "Q-208-p1-BSR-MA-01-2": 1
-  }
+   "Q-208-p1-BSR-MA-02-1": 1,
+   "Q-208-p1-BSR-MA-01-2": 2
+  },
+  "parallel_witnesses": {}
  },
  "coder_skipped": {},
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-208-p1-BSR-MA-02-1": [
+    "REJECT",
+    "ACCEPT"
+   ]
+  }
  }
 }

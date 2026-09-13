@@ -2841,40 +2841,17 @@
  },
  "verifications": {
   "Q-297-p1-BSR-RC-01-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "cafe42b2f9947b02fbf2ab75",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "the only-begotten Son of God (i.e., the Son)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The Church asserts the Nicene Creed's confession in its own voice, but the assertion is about the Son, not the Father or 'the one God' as such.",
-    "floor": "PARTIAL",
-    "floor_reason": "The clause denies the Son's createdness, a narrower christological proposition, not a general denial of God's (the Father's) creaturehood as required by this family.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical and theological subject of 'begotten not made' is the Son, not 'God (the one God, or the Father)' as the required subject for this predicate family specifies.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the only-begotten Son of God (i.e., the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Church asserts the Nicene Creed's confession in its own voice, but the assertion is about the Son, not the Father or 'the one God' as such.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause denies the Son's createdness, a narrower christological proposition, not a general denial of God's (the Father's) creaturehood as required by this family.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical and theological subject of 'begotten not made' is the Son, not 'God (the one God, or the Father)' as the required subject for this predicate family specifies.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -2891,31 +2868,101 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "cafe42b2f9947b02fbf2ab75",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the only-begotten Son of God (i.e., the Son)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Church asserts the Nicene Creed's confession in its own voice, but the assertion is about the Son, not the Father or 'the one God' as such.",
+      "floor": "PARTIAL",
+      "floor_reason": "The clause denies the Son's createdness, a narrower christological proposition, not a general denial of God's (the Father's) creaturehood as required by this family.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical and theological subject of 'begotten not made' is the Son, not 'God (the one God, or the Father)' as the required subject for this predicate family specifies.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the only-begotten Son of God (i.e., the Son)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Church asserts the Nicene Creed's confession in its own voice, but the assertion is about the Son, not the Father or 'the one God' as such.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause denies the Son's createdness, a narrower christological proposition, not a general denial of God's (the Father's) creaturehood as required by this family.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical and theological subject of 'begotten not made' is the Son, not 'God (the one God, or the Father)' as the required subject for this predicate family specifies.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "b8f6861e24876d366182d04a",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "the only-begotten Son of God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Church confesses this creedal formula as its own doctrinal assertion, not merely reporting or rejecting a view.",
+    "floor": "FULL",
+    "floor_reason": "The passage asserts of the Son, as God, that he is 'begotten not made, consubstantial with the Father,' directly denying creaturehood of the required divine subject.",
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA"
+    ],
+    "asserted_outside_formula": "Y",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Though embedded in a creedal/liturgical formula, the Church explicitly affirms this as its own confessed doctrine ('the Church confessed... that the Son is consubstantial... begotten not made'), satisfying assertion in its own voice of the required subject.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"the only-begotten Son of God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Church confesses this creedal formula as its own doctrinal assertion, not merely reporting or rejecting a view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts of the Son, as God, that he is 'begotten not made, consubstantial with the Father,' directly denying creaturehood of the required divine subject.\", \"hazard_flags\": [\"IDIOM_OR_FORMULA\"], \"asserted_outside_formula\": \"Y\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Though embedded in a creedal/liturgical formula, the Church explicitly affirms this as its own confessed doctrine ('the Church confessed... that the Son is consubstantial... begotten not made'), satisfying assertion in its own voice of the required subject.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"begotten, not made\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-297-p1-BSR-RC-02-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "b865f32479f68e8bcf626f3c",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "ratio creata (created reason)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The clause asserts that created reason is subject to uncreated Truth, but this is not an assertion about God's own createdness.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The word 'increatae' (uncreated) appears only as a dative modifier of 'Veritati' referring to God, but the grammatical subject of the sentence is 'ratio creata' (created reason), not God; the passage never asserts God is not made, only that human reason is subject to divine Truth.",
-    "hazard_flags": [
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The quoted phrase's grammatical subject is 'ratio creata' (created human reason), not God; the predicate 'not made' requires God as subject, and this passage does not assert God's uncreatedness—it merely uses 'uncreated' as an epithet for Truth/God in a dative phrase describing human reason's subjection.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"ratio creata (created reason)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts that created reason is subject to uncreated Truth, but this is not an assertion about God's own createdness.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'increatae' (uncreated) appears only as a dative modifier of 'Veritati' referring to God, but the grammatical subject of the sentence is 'ratio creata' (created reason), not God; the passage never asserts God is not made, only that human reason is subject to divine Truth.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"WRONG_SUBJECT\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted phrase's grammatical subject is 'ratio creata' (created human reason), not God; the predicate 'not made' requires God as subject, and this passage does not assert God's uncreatedness—it merely uses 'uncreated' as an epithet for Truth/God in a dative phrase describing human reason's subjection.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -2943,6 +2990,97 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "b865f32479f68e8bcf626f3c",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "ratio creata (created reason)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The clause asserts that created reason is subject to uncreated Truth, but this is not an assertion about God's own createdness.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The word 'increatae' (uncreated) appears only as a dative modifier of 'Veritati' referring to God, but the grammatical subject of the sentence is 'ratio creata' (created reason), not God; the passage never asserts God is not made, only that human reason is subject to divine Truth.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The quoted phrase's grammatical subject is 'ratio creata' (created human reason), not God; the predicate 'not made' requires God as subject, and this passage does not assert God's uncreatedness—it merely uses 'uncreated' as an epithet for Truth/God in a dative phrase describing human reason's subjection.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"ratio creata (created reason)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts that created reason is subject to uncreated Truth, but this is not an assertion about God's own createdness.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'increatae' (uncreated) appears only as a dative modifier of 'Veritati' referring to God, but the grammatical subject of the sentence is 'ratio creata' (created reason), not God; the passage never asserts God is not made, only that human reason is subject to divine Truth.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"WRONG_SUBJECT\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted phrase's grammatical subject is 'ratio creata' (created human reason), not God; the predicate 'not made' requires God as subject, and this passage does not assert God's uncreatedness—it merely uses 'uncreated' as an epithet for Truth/God in a dative phrase describing human reason's subjection.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "de495fae4fb699135a9ee0a5",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "ratio creata (created reason)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The clause asserts that created reason is subject to uncreated Truth; it does not predicate 'not made' of God but rather describes created reason's dependency, implying God's uncreatedness only indirectly via contrast.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The word 'increatae' (uncreated) appears only as an attribute of 'Veritati' (Truth) modifying the object of subjection, not as an assertion that God is not made; the grammatical subject is 'ratio creata', not God.",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The passage's subject is created reason, not God; the predicate 'not made' is not asserted of the required subject in its own voice.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"ratio creata (created reason)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts that created reason is subject to uncreated Truth; it does not predicate 'not made' of God but rather describes created reason's dependency, implying God's uncreatedness only indirectly via contrast.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'increatae' (uncreated) appears only as an attribute of 'Veritati' (Truth) modifying the object of subjection, not as an assertion that God is not made; the grammatical subject is 'ratio creata', not God.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage's subject is created reason, not God; the predicate 'not made' is not asserted of the required subject in its own voice.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"begotten, not made\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-297-p1-BSR-RC-03-1": {
@@ -3051,40 +3189,17 @@
    }
   },
   "Q-297-p1-BSR-RC-06-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "c39b5fc467b2bde370dfb783",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "Jesus Christ, the only Son of God (implied subject of 'begotten, not made')",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The Creed asserts this positively, but of the Son, not the Father/one God as required subject.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The predicate 'not made' is asserted of the Son's begetting relative to the Father, not of God/the Father as the required subject; the required subject definition explicitly scopes to the one God or the Father.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The phrase describes the Son's begottenness in relation to the Father, not a denial of creaturehood predicated of God/the Father himself, so the required subject condition fails.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Jesus Christ, the only Son of God (implied subject of 'begotten, not made')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Creed asserts this positively, but of the Son, not the Father/one God as required subject.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The predicate 'not made' is asserted of the Son's begetting relative to the Father, not of God/the Father as the required subject; the required subject definition explicitly scopes to the one God or the Father.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The phrase describes the Son's begottenness in relation to the Father, not a denial of creaturehood predicated of God/the Father himself, so the required subject condition fails.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "WORD_ONLY"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -3101,43 +3216,112 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "c39b5fc467b2bde370dfb783",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "Jesus Christ, the only Son of God (implied subject of 'begotten, not made')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Creed asserts this positively, but of the Son, not the Father/one God as required subject.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The predicate 'not made' is asserted of the Son's begetting relative to the Father, not of God/the Father as the required subject; the required subject definition explicitly scopes to the one God or the Father.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The phrase describes the Son's begottenness in relation to the Father, not a denial of creaturehood predicated of God/the Father himself, so the required subject condition fails.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Jesus Christ, the only Son of God (implied subject of 'begotten, not made')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Creed asserts this positively, but of the Son, not the Father/one God as required subject.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The predicate 'not made' is asserted of the Son's begetting relative to the Father, not of God/the Father as the required subject; the required subject definition explicitly scopes to the one God or the Father.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The phrase describes the Son's begottenness in relation to the Father, not a denial of creaturehood predicated of God/the Father himself, so the required subject condition fails.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "4021ecb90765b19a0471e534",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "Jesus Christ, the only Son of God (he)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Creed asserts in its own voice, as a confession of belief, that the Son is begotten, not made.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts of the Son, as divine, that he is 'begotten, not made, of one Being with the Father,' denying creaturehood.",
+    "hazard_flags": [
+     "FAMILY_VARIATION"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "Verbatim phrase, correct required subject (the Son as divine), and it is a direct creedal assertion denying that the Son is a creature.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"Jesus Christ, the only Son of God (he)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Creed asserts in its own voice, as a confession of belief, that the Son is begotten, not made.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts of the Son, as divine, that he is 'begotten, not made, of one Being with the Father,' denying creaturehood.\", \"hazard_flags\": [\"FAMILY_VARIATION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, correct required subject (the Son as divine), and it is a direct creedal assertion denying that the Son is a creature.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"begotten, not made\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-297-p1-BSR-RC-07-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "882687f1d74cf2f9cf445f75",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "the Son of God (Jesus Christ)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The text asserts the predicate, but of the Son, not of the Father/one God as required by the predicate's subject scope (which explicitly excludes Christ's human nature and does not extend the floor to the Son's generation language here).",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The phrase applies 'not made' to the Son as begotten of the Father, which is a Christological/Trinitarian generation statement, not an assertion that God (the Father/one God) is uncreated in the creaturehood sense defined by the predicate.",
-    "hazard_flags": [
-     "SAME_WORD_DIFFERENT_MEANING",
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The required subject is God/the Father as denying creaturehood, but the passage's grammatical and theological subject is the Son, describing his eternal generation from the Father, not a general assertion about God's uncreated nature.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Son of God (Jesus Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts the predicate, but of the Son, not of the Father/one God as required by the predicate's subject scope (which explicitly excludes Christ's human nature and does not extend the floor to the Son's generation language here).\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The phrase applies 'not made' to the Son as begotten of the Father, which is a Christological/Trinitarian generation statement, not an assertion that God (the Father/one God) is uncreated in the creaturehood sense defined by the predicate.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject is God/the Father as denying creaturehood, but the passage's grammatical and theological subject is the Son, describing his eternal generation from the Father, not a general assertion about God's uncreated nature.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "WORD_ONLY"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -3154,6 +3338,98 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "882687f1d74cf2f9cf445f75",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the Son of God (Jesus Christ)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The text asserts the predicate, but of the Son, not of the Father/one God as required by the predicate's subject scope (which explicitly excludes Christ's human nature and does not extend the floor to the Son's generation language here).",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The phrase applies 'not made' to the Son as begotten of the Father, which is a Christological/Trinitarian generation statement, not an assertion that God (the Father/one God) is uncreated in the creaturehood sense defined by the predicate.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The required subject is God/the Father as denying creaturehood, but the passage's grammatical and theological subject is the Son, describing his eternal generation from the Father, not a general assertion about God's uncreated nature.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Son of God (Jesus Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts the predicate, but of the Son, not of the Father/one God as required by the predicate's subject scope (which explicitly excludes Christ's human nature and does not extend the floor to the Son's generation language here).\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The phrase applies 'not made' to the Son as begotten of the Father, which is a Christological/Trinitarian generation statement, not an assertion that God (the Father/one God) is uncreated in the creaturehood sense defined by the predicate.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject is God/the Father as denying creaturehood, but the passage's grammatical and theological subject is the Son, describing his eternal generation from the Father, not a general assertion about God's uncreated nature.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "6c8aced78f704f66b6ce8b90",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "the Son of God (Jesus Christ)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Compendium asserts in its own voice that the Son of God is 'begotten, not made, consubstantial with the Father,' quoting the Creed affirmatively as doctrine.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly predicates 'not made' of the Son as God, denying creaturehood in the classic Nicene sense, consistent with the required subject scope.",
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA"
+    ],
+    "asserted_outside_formula": "Y",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the Son as divine, and the Compendium asserts it as doctrine rather than merely quoting or reporting it, satisfying the predicate's floor despite the creedal formula's fixed wording.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"the Son of God (Jesus Christ)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Compendium asserts in its own voice that the Son of God is 'begotten, not made, consubstantial with the Father,' quoting the Creed affirmatively as doctrine.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly predicates 'not made' of the Son as God, denying creaturehood in the classic Nicene sense, consistent with the required subject scope.\", \"hazard_flags\": [\"IDIOM_OR_FORMULA\"], \"asserted_outside_formula\": \"Y\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the Son as divine, and the Compendium asserts it as doctrine rather than merely quoting or reporting it, satisfying the predicate's floor despite the creedal formula's fixed wording.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"begotten, not made\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-297-p1-BSR-RC-02-2": {
@@ -3369,6 +3645,28 @@
    "source_note_guard": "ok",
    "scope_caveat": "These standards bind the whole Catholic Church; the Catechism is a synthesis of conciliar and magisterial teaching, not itself a council.",
    "raw": "{\"rendered_state\": \"A-SF\", \"diverges_from_family_code\": true, \"state_reason\": \"The verifier's floor is PARTIAL: the quoted phrase directly attests God as uncreated 'principle of all things, creator of all things' rather than made, a narrower proposition wholly within the shared floor of denying creaturehood. This licenses A-SF rather than the family's general Q, since the source itself does not engage the Restoration's distinctions among intelligence, spirit birth, and embodiment—it simply affirms the Creator/creature divide without redefining it.\", \"source_note\": \"Fourth Lateran Council's Firmiter credimus names God as 'one principle of all things, creator of all things invisible and visible,' who made all creatures from nothing—affirming God's own uncreated status as sole source of creation.\"}"
+  },
+  "Q-297-p1-BSR-RC-06-1": {
+   "status": "DONE",
+   "call_id": "5ddaa95b652fbf2f2c19e67c",
+   "rendered_state": "A",
+   "diverges_from_family_code": true,
+   "state_reason": "Verifier floor is FULL, not PARTIAL: the Nicene Creed directly and unqualifiedly asserts the Son is 'begotten, not made,' denying creaturehood at the controlled proposition. This full, direct assertion meets the substantive agreement floor rather than the family's typical qualified/reinterpreted pattern, so the individual witness diverges from the family code of Q.",
+   "source_note": "The Nicene Creed states that the Son is 'begotten, not made, of one Being with the Father,' affirming his divine, uncreated status within the Church's trinitarian confession.",
+   "source_note_guard": "ok",
+   "scope_caveat": "These standards bind the whole Catholic Church; the Catechism is a synthesis of conciliar and magisterial teaching, not itself a council.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": true, \"state_reason\": \"Verifier floor is FULL, not PARTIAL: the Nicene Creed directly and unqualifiedly asserts the Son is 'begotten, not made,' denying creaturehood at the controlled proposition. This full, direct assertion meets the substantive agreement floor rather than the family's typical qualified/reinterpreted pattern, so the individual witness diverges from the family code of Q.\", \"source_note\": \"The Nicene Creed states that the Son is 'begotten, not made, of one Being with the Father,' affirming his divine, uncreated status within the Church's trinitarian confession.\"}"
+  },
+  "Q-297-p1-BSR-RC-01-1": {
+   "status": "DONE",
+   "call_id": "61fb6c1b0be5b64cad4616fa",
+   "rendered_state": "A",
+   "diverges_from_family_code": true,
+   "state_reason": "Verifier floor is FULL: CCC 242 directly asserts the Son is 'begotten not made, consubstantial with the Father,' an unqualified denial of creaturehood for the divine subject. Unlike the family-level Q code (which reflects broader corpus material requiring Restoration's intelligence/spirit-birth distinctions), this specific witness offers no such qualification—it states the shared floor proposition directly and fully, warranting A rather than the inherited family code.",
+   "source_note": "The Catechism of the Catholic Church, Part One, records the Nicene Creed's confession that the Son is 'begotten not made, consubstantial with the Father,' affirming his uncreated, divine nature.",
+   "source_note_guard": "ok",
+   "scope_caveat": "These standards bind the whole Catholic Church; the Catechism is a synthesis of conciliar and magisterial teaching, not itself a council.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": true, \"state_reason\": \"Verifier floor is FULL: CCC 242 directly asserts the Son is 'begotten not made, consubstantial with the Father,' an unqualified denial of creaturehood for the divine subject. Unlike the family-level Q code (which reflects broader corpus material requiring Restoration's intelligence/spirit-birth distinctions), this specific witness offers no such qualification—it states the shared floor proposition directly and fully, warranting A rather than the inherited family code.\", \"source_note\": \"The Catechism of the Catholic Church, Part One, records the Nicene Creed's confession that the Son is 'begotten not made, consubstantial with the Father,' affirming his uncreated, divine nature.\"}"
   }
  },
  "phase": "DONE",
@@ -3382,6 +3680,24 @@
   "BSR-EO-09"
  ],
  "survivors": [
+  {
+   "candidate_id": "Q-297-p1-BSR-RC-01-1",
+   "pass": 1,
+   "registry_id": "BSR-RC-01",
+   "locator": "CCC 242",
+   "phrase": "begotten not made, consubstantial with the Father",
+   "rationale": "The Creed of Constantinople confesses the Son as begotten not made, denying his creaturehood as true God.",
+   "floor_claim": "FULL",
+   "chunk_text": "Following this apostolic tradition, the Church confessed at the first ecumenical council at Nicaea (325) that the Son is &uot;consubstantial\" with the Father, that is, one only God with him. The second ecumenical council, held at Constantinople in 381, kept this expression in its formulation of the Nicene Creed and confessed \"the only-begotten Son of God, eternally begotten of the Father, light from light, true God from true God, begotten not made, consubstantial with the Father\". The Father and the son revealed by the spirit",
+   "chunk_hash": "f86fefc120fb1b3d4a3b2a917ef150d8f99ad4a7428a0074c8c9728908225601",
+   "division": "paragraph",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CATECHETICAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "slot": "GUARANTEED"
+  },
   {
    "candidate_id": "Q-297-p1-BSR-RC-03-1",
    "pass": 1,
@@ -3414,6 +3730,42 @@
    "fallback_tier": false,
    "witness": false,
    "effective_tier": "CONCILIAR",
+   "locator_rank": 1,
+   "recut_from": null,
+   "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-297-p1-BSR-RC-06-1",
+   "pass": 1,
+   "registry_id": "BSR-RC-06",
+   "locator": "Nicene Creed",
+   "phrase": "begotten, not made, of one Being with the Father",
+   "rationale": "Explicitly denies creaturehood of the Son as true God, asserting he is 'not made' though begotten of the Father.",
+   "floor_claim": "FULL",
+   "chunk_text": "We believe in one God, the Father, the Almighty, maker of heaven and earth, of all that is, seen and unseen. We believe in one Lord, Jesus Christ, the only Son of God, eternally begotten of the Father, God from God, Light from Light, true God from true God, begotten, not made, of one Being with the Father. Through him all things were made. For us men and for our salvation, he came down from heaven: by the power of the Holy Spirit he was born of the Virgin Mary, and became man. For our sake he was crucified under Pontius Pilate; he suffered died and was buried. On the third day he rose again in fulfillment of the Scriptures; he ascended into heaven and is seated at the right hand of the Father. He will come again in glory to judge the living and the dead, and his kingdom will have no end. We believe in the Holy Spirit, the Lord, the giver of life, who proceeds from the Father and the Son. With the Father and the Son he is worshipped and glorified. He has spoken through the Prophets. We believe in one holy catholic and apostolic Church. We acknowledge one baptism for the forgiveness of sins. We look for the resurrection of the dead, and the life of the world to come. Amen.",
+   "chunk_hash": "e738f00a4efd6eb34a92ee60e58bd156a13c554e94a469e2787fc535009321eb",
+   "division": "creed",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONCILIAR",
+   "locator_rank": 1,
+   "recut_from": null,
+   "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-297-p1-BSR-RC-07-1",
+   "pass": 1,
+   "registry_id": "BSR-RC-07",
+   "locator": "Compendium Q.87",
+   "phrase": "begotten, not made, consubstantial with the Father",
+   "rationale": "Asserts the Son's divine nature as begotten, not made, denying creaturehood of the divine Son.",
+   "floor_claim": "FULL",
+   "chunk_text": "87. In what way is Jesus Christ true God and true man? Jesus is inseparably true God and true man in the unity of his divine Person. As the Son of God, who is “begotten, not made, consubstantial with the Father,” he was made true man, our brother, without ceasing to be God, our Lord.",
+   "chunk_hash": "b81f33c2b5475581e91e32ab7c27e180196db3e92f92d35fdab861b024632891",
+   "division": "question",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CATECHETICAL",
    "locator_rank": 1,
    "recut_from": null,
    "slot": "GUARANTEED"
@@ -3516,41 +3868,70 @@
  "allocation": {
   "kept": [
    "Q-297-p1-BSR-RC-04-1",
-   "Q-297-p1-BSR-RC-02-2",
-   "Q-297-p1-BSR-RC-04-2"
+   "Q-297-p1-BSR-RC-06-1",
+   "Q-297-p1-BSR-RC-01-1"
   ],
   "roles": {
    "Q-297-p1-BSR-RC-04-1": "PRIMARY",
-   "Q-297-p1-BSR-RC-02-2": "CONTROLLING",
-   "Q-297-p1-BSR-RC-04-2": "PRIMARY"
+   "Q-297-p1-BSR-RC-06-1": "PRIMARY",
+   "Q-297-p1-BSR-RC-01-1": "CORROBORATING"
   },
-  "english_witness": {
-   "Q-297-p1-BSR-RC-02-2": "Q-297-p1-BSR-RC-03-1"
-  },
+  "english_witness": {},
   "dropped": {
-   "Q-297-p1-BSR-RC-03-1": "paired as the English witness of Q-297-p1-BSR-RC-02-2 (controlling BSR-RC-02); shown on that card, not as a competing candidate",
+   "Q-297-p1-BSR-RC-03-1": "paired witness of Q-297-p1-BSR-RC-02-2, which the candidate cap cut",
+   "Q-297-p1-BSR-RC-07-1": "SAME_TEXT parallel witness of Q-297-p1-BSR-RC-01-1: its phrase is textually identical to the seated phrase; takes no slot",
+   "Q-297-p1-BSR-RC-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'universal church' already holds a slot)",
+   "Q-297-p1-BSR-RC-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'universal church' already holds a slot)",
    "Q-297-p1-BSR-RC-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'universal church' already holds a slot)"
   },
   "witness_only": [],
   "groups": {
+   "Q-297-p1-BSR-RC-01-1": "universal church",
    "Q-297-p1-BSR-RC-03-1": "universal church",
    "Q-297-p1-BSR-RC-04-1": "universal church",
+   "Q-297-p1-BSR-RC-06-1": "universal church",
+   "Q-297-p1-BSR-RC-07-1": "universal church",
    "Q-297-p1-BSR-RC-02-2": "universal church",
    "Q-297-p1-BSR-RC-03-2": "universal church",
    "Q-297-p1-BSR-RC-04-2": "universal church"
   },
   "slot_order": {
    "Q-297-p1-BSR-RC-04-1": 0,
-   "Q-297-p1-BSR-RC-02-2": 1,
-   "Q-297-p1-BSR-RC-04-2": 2
+   "Q-297-p1-BSR-RC-06-1": 1,
+   "Q-297-p1-BSR-RC-01-1": 0
+  },
+  "parallel_witnesses": {
+   "Q-297-p1-BSR-RC-01-1": [
+    {
+     "candidate_id": "Q-297-p1-BSR-RC-07-1",
+     "registry_id": "BSR-RC-07",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
  "coder_skipped": {
-  "Q-297-p1-BSR-RC-03-1": "paired as the English witness of Q-297-p1-BSR-RC-02-2 (controlling BSR-RC-02); shown on that card, not as a competing candidate",
+  "Q-297-p1-BSR-RC-03-1": "paired witness of Q-297-p1-BSR-RC-02-2, which the candidate cap cut",
+  "Q-297-p1-BSR-RC-07-1": "SAME_TEXT parallel witness of Q-297-p1-BSR-RC-01-1: its phrase is textually identical to the seated phrase; takes no slot",
+  "Q-297-p1-BSR-RC-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'universal church' already holds a slot)",
+  "Q-297-p1-BSR-RC-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'universal church' already holds a slot)",
   "Q-297-p1-BSR-RC-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'universal church' already holds a slot)"
  },
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-297-p1-BSR-RC-01-1": [
+    "REJECT",
+    "ACCEPT_WITH_CAVEAT"
+   ],
+   "Q-297-p1-BSR-RC-06-1": [
+    "REJECT",
+    "ACCEPT_WITH_CAVEAT"
+   ],
+   "Q-297-p1-BSR-RC-07-1": [
+    "REJECT",
+    "ACCEPT_WITH_CAVEAT"
+   ]
+  }
  }
 }

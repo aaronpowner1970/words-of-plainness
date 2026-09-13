@@ -1443,32 +1443,150 @@
    }
   },
   "Q-047-p1-BSR-MW-04-1": {
+   "_route": null,
+   "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "7b5d0b0cbbdea1dcd2e6db40",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the two great commandments (which require us to love the Lord our God...)",
+      "speech_act_is_assertion": "N",
+      "speech_act_note": "The clause quotes/paraphrases the biblical commandment; it commands love toward God as object, not asserting God's own lordship/sovereignty in the predicate's sense.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The word 'Lord' appears as part of the object of a commandment (‘love the Lord our God’), not as an assertion that God possesses authority/sovereignty.",
+      "hazard_flags": [
+       "IDIOM_OR_FORMULA",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "N",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The phrase's grammatical subject is the commandments, not God, and 'Lord' functions as the object of love rather than asserting God's sovereignty; the passage does not assert the predicate in its own voice about God as required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the two great commandments (which require us to love the Lord our God...)\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The clause quotes/paraphrases the biblical commandment; it commands love toward God as object, not asserting God's own lordship/sovereignty in the predicate's sense.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'Lord' appears as part of the object of a commandment (‘love the Lord our God’), not as an assertion that God possesses authority/sovereignty.\", \"hazard_flags\": [\"IDIOM_OR_FORMULA\", \"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"N\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The phrase's grammatical subject is the commandments, not God, and 'Lord' functions as the object of love rather than asserting God's sovereignty; the passage does not assert the predicate in its own voice about God as required subject.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
    "sonnet": {
     "model": "sonnet",
-    "call_id": "7b5d0b0cbbdea1dcd2e6db40",
+    "call_id": "be464b8f7045d8a6cbab6356",
     "attempt": 0,
     "prompt_version": "gate6-v1.2",
     "phrase_verbatim": "Y",
     "subject_is_required": "N",
     "grammatical_subject": "the two great commandments (which require us to love the Lord our God...)",
-    "speech_act_is_assertion": "N",
-    "speech_act_note": "The clause quotes/paraphrases the biblical commandment; it commands love toward God as object, not asserting God's own lordship/sovereignty in the predicate's sense.",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The passage asserts that the commandments require love of God, but the title 'Lord' is used only as part of the quoted commandment, not as an assertion of God's sovereignty; the sentence's grammatical subject is the commandments, not God.",
     "floor": "WORD_ONLY",
-    "floor_reason": "The word 'Lord' appears as part of the object of a commandment (‘love the Lord our God’), not as an assertion that God possesses authority/sovereignty.",
+    "floor_reason": "The phrase names God as 'Lord' only within a quoted biblical command to love Him; it does not itself assert divine authority or sovereignty as the predicate requires.",
     "hazard_flags": [
      "IDIOM_OR_FORMULA",
-     "SAME_WORD_DIFFERENT_MEANING"
+     "SLOGAN_COMPRESSION"
     ],
     "asserted_outside_formula": "N",
+    "partial_asserts_predicate": null,
     "verdict_model": "REJECT",
     "reason_code": "WRONG_SUBJECT",
-    "reason": "The phrase's grammatical subject is the commandments, not God, and 'Lord' functions as the object of love rather than asserting God's sovereignty; the passage does not assert the predicate in its own voice about God as required subject.",
+    "reason": "The quoted clause's grammatical subject is 'the commandments,' not God, and the title 'Lord' functions as part of a familiar biblical formula rather than an independent assertion of divine sovereignty.",
     "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the two great commandments (which require us to love the Lord our God...)\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The clause quotes/paraphrases the biblical commandment; it commands love toward God as object, not asserting God's own lordship/sovereignty in the predicate's sense.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'Lord' appears as part of the object of a commandment (‘love the Lord our God’), not as an assertion that God possesses authority/sovereignty.\", \"hazard_flags\": [\"IDIOM_OR_FORMULA\", \"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"N\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The phrase's grammatical subject is the commandments, not God, and 'Lord' functions as the object of love rather than asserting God's sovereignty; the passage does not assert the predicate in its own voice about God as required subject.\"}",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the two great commandments (which require us to love the Lord our God...)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that the commandments require love of God, but the title 'Lord' is used only as part of the quoted commandment, not as an assertion of God's sovereignty; the sentence's grammatical subject is the commandments, not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The phrase names God as 'Lord' only within a quoted biblical command to love Him; it does not itself assert divine authority or sovereignty as the predicate requires.\", \"hazard_flags\": [\"IDIOM_OR_FORMULA\", \"SLOGAN_COMPRESSION\"], \"asserted_outside_formula\": \"N\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted clause's grammatical subject is 'the commandments,' not God, and the title 'Lord' functions as part of a familiar biblical formula rather than an independent assertion of divine sovereignty.\"}",
     "phrase_verbatim_code": "Y",
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT"
    },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
+   }
+  },
+  "Q-047-p1-BSR-MW-02-2": {
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -1505,70 +1623,109 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
-   }
-  },
-  "Q-047-p1-BSR-MW-02-2": {
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "8ea3666ddc300c5d7ce0a8d3",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "civil government (within 'We believe civil government derives its just powers from the sovereign God')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The clause asserts a claim about civil government's authority, not a direct assertion about God's lordship.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The word 'sovereign God' appears only as the source of civil government's power, not as the asserted subject of the predicate.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject of the passage is 'civil government', not God, so the predicate 'Lord' (authority/sovereignty of God) is not directly asserted of the required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"civil government (within 'We believe civil government derives its just powers from the sovereign God')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts a claim about civil government's authority, not a direct assertion about God's lordship.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'sovereign God' appears only as the source of civil government's power, not as the asserted subject of the predicate.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the passage is 'civil government', not God, so the predicate 'Lord' (authority/sovereignty of God) is not directly asserted of the required subject.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
    "sonnet": {
     "model": "sonnet",
-    "call_id": "8ea3666ddc300c5d7ce0a8d3",
+    "call_id": "d05ece087dc4a948ccc4b5aa",
     "attempt": 0,
     "prompt_version": "gate6-v1.2",
     "phrase_verbatim": "Y",
     "subject_is_required": "N",
-    "grammatical_subject": "civil government (within 'We believe civil government derives its just powers from the sovereign God')",
+    "grammatical_subject": "civil government",
     "speech_act_is_assertion": "Y",
-    "speech_act_note": "The clause asserts a claim about civil government's authority, not a direct assertion about God's lordship.",
+    "speech_act_note": "The clause asserts that civil government derives its powers from God, not that God is Lord/sovereign as the grammatical subject; the sovereignty is attributed to God only as a modifier within a subordinate phrase.",
     "floor": "WORD_ONLY",
-    "floor_reason": "The word 'sovereign God' appears only as the source of civil government's power, not as the asserted subject of the predicate.",
+    "floor_reason": "The word 'sovereign' appears attached to 'God' but the sentence's main assertion concerns civil government's derivation of power, not a direct assertion of God's own lordship/sovereignty as the subject.",
     "hazard_flags": [
      "SEMANTIC_FLOOR"
     ],
     "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
     "verdict_model": "REJECT",
     "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical subject of the passage is 'civil government', not God, so the predicate 'Lord' (authority/sovereignty of God) is not directly asserted of the required subject.",
+    "reason": "The grammatical subject of the passage is 'civil government', not God; God's sovereignty is only mentioned as a modifying description within a subordinate clause, not asserted as the main predicate of the required subject.",
     "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"civil government (within 'We believe civil government derives its just powers from the sovereign God')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts a claim about civil government's authority, not a direct assertion about God's lordship.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'sovereign God' appears only as the source of civil government's power, not as the asserted subject of the predicate.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the passage is 'civil government', not God, so the predicate 'Lord' (authority/sovereignty of God) is not directly asserted of the required subject.\"}",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"civil government\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts that civil government derives its powers from God, not that God is Lord/sovereign as the grammatical subject; the sovereignty is attributed to God only as a modifier within a subordinate phrase.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'sovereign' appears attached to 'God' but the sentence's main assertion concerns civil government's derivation of power, not a direct assertion of God's own lordship/sovereignty as the subject.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the passage is 'civil government', not God; God's sovereignty is only mentioned as a modifying description within a subordinate clause, not asserted as the main predicate of the required subject.\"}",
     "phrase_verbatim_code": "Y",
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT"
    },
-   "_route": null,
-   "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
-    "adjudicated_by": "sonnet",
-    "route": null,
-    "primary_verdict": "REJECT",
-    "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
-    "floor_by_model": {
-     "sonnet": "WORD_ONLY"
-    },
-    "floor_disagreement": false,
-    "lower_floor_applied": false,
-    "second_rubric": null,
-    "second_rubric_role": null,
-    "overturned": false,
-    "direction": null
-   },
-   "final_at_run": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
-    "adjudicated_by": "sonnet",
-    "route": null,
-    "primary_verdict": "REJECT",
-    "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
-    "floor_by_model": {
-     "sonnet": "WORD_ONLY"
-    },
-    "floor_disagreement": false,
-    "lower_floor_applied": false,
-    "second_rubric": null,
-    "second_rubric_role": null,
-    "overturned": false,
-    "direction": null
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-047-p1-BSR-MW-04-2": {
@@ -1634,31 +1791,6 @@
    }
   },
   "Q-047-p1-BSR-MW-02-3": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "19776adcabede005dbbc42f4",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "All forms of property, whether private, corporate or public",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The clause is asserted in the confession's own voice, but it is a subordinate phrase modifying how property is to be held, not a direct assertion with God as its grammatical subject.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The word 'sovereignty' and 'God' appear together, but the sentence's subject is property, not God; God's sovereignty is invoked instrumentally rather than asserted as the main proposition.",
-    "hazard_flags": [
-     "SLOGAN_COMPRESSION"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The passage's grammatical subject is 'all forms of property,' not God; the phrase 'sovereignty of God' functions as a subordinate qualifier rather than a direct predication of Lordship/sovereignty to God as required subject.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"All forms of property, whether private, corporate or public\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause is asserted in the confession's own voice, but it is a subordinate phrase modifying how property is to be held, not a direct assertion with God as its grammatical subject.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'sovereignty' and 'God' appear together, but the sentence's subject is property, not God; God's sovereignty is invoked instrumentally rather than asserted as the main proposition.\", \"hazard_flags\": [\"SLOGAN_COMPRESSION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage's grammatical subject is 'all forms of property,' not God; the phrase 'sovereignty of God' functions as a subordinate qualifier rather than a direct predication of Lordship/sovereignty to God as required subject.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -1667,9 +1799,9 @@
     "route": null,
     "primary_verdict": "REJECT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
+    "floor_final": "PARTIAL",
     "floor_by_model": {
-     "sonnet": "WORD_ONLY"
+     "sonnet": "PARTIAL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -1695,6 +1827,109 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "19776adcabede005dbbc42f4",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "All forms of property, whether private, corporate or public",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The clause is asserted in the confession's own voice, but it is a subordinate phrase modifying how property is to be held, not a direct assertion with God as its grammatical subject.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The word 'sovereignty' and 'God' appear together, but the sentence's subject is property, not God; God's sovereignty is invoked instrumentally rather than asserted as the main proposition.",
+      "hazard_flags": [
+       "SLOGAN_COMPRESSION"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The passage's grammatical subject is 'all forms of property,' not God; the phrase 'sovereignty of God' functions as a subordinate qualifier rather than a direct predication of Lordship/sovereignty to God as required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"All forms of property, whether private, corporate or public\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause is asserted in the confession's own voice, but it is a subordinate phrase modifying how property is to be held, not a direct assertion with God as its grammatical subject.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word 'sovereignty' and 'God' appear together, but the sentence's subject is property, not God; God's sovereignty is invoked instrumentally rather than asserted as the main proposition.\", \"hazard_flags\": [\"SLOGAN_COMPRESSION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage's grammatical subject is 'all forms of property,' not God; the phrase 'sovereignty of God' functions as a subordinate qualifier rather than a direct predication of Lordship/sovereignty to God as required subject.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "31740074f61f514ee7142502",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "All forms of property",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The clause asserts that property use falls 'under the sovereignty of God,' but God appears only as the object of a preposition, not as the grammatical subject of the sentence.",
+    "floor": "PARTIAL",
+    "floor_reason": "The passage does affirm God's sovereignty as a governing reality, but the assertion is subordinate to a statement about property, not a direct predication of Lordship to God as subject.",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The required subject must be God as grammatical subject of the assertion; here the sentence's subject is 'all forms of property,' with God's sovereignty mentioned only in a prepositional phrase, so the predicate is not directly asserted of God.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"All forms of property\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause asserts that property use falls 'under the sovereignty of God,' but God appears only as the object of a preposition, not as the grammatical subject of the sentence.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage does affirm God's sovereignty as a governing reality, but the assertion is subordinate to a statement about property, not a direct predication of Lordship to God as subject.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The required subject must be God as grammatical subject of the assertion; here the sentence's subject is 'all forms of property,' with God's sovereignty mentioned only in a prepositional phrase, so the predicate is not directly asserted of God.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   }
  },
@@ -1832,16 +2067,16 @@
  "allocation": {
   "kept": [
    "Q-047-p1-BSR-MW-02-1",
-   "Q-047-p1-BSR-MW-03-1",
    "Q-047-p1-BSR-MW-04-2"
   ],
   "roles": {
    "Q-047-p1-BSR-MW-02-1": "PRIMARY",
-   "Q-047-p1-BSR-MW-03-1": "PRIMARY",
    "Q-047-p1-BSR-MW-04-2": "PRIMARY"
   },
   "english_witness": {},
-  "dropped": {},
+  "dropped": {
+   "Q-047-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-047-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot"
+  },
   "witness_only": [],
   "groups": {
    "Q-047-p1-BSR-MW-02-1": "united methodist church",
@@ -1850,11 +2085,21 @@
   },
   "slot_order": {
    "Q-047-p1-BSR-MW-02-1": 0,
-   "Q-047-p1-BSR-MW-03-1": 1,
    "Q-047-p1-BSR-MW-04-2": 2
+  },
+  "parallel_witnesses": {
+   "Q-047-p1-BSR-MW-02-1": [
+    {
+     "candidate_id": "Q-047-p1-BSR-MW-03-1",
+     "registry_id": "BSR-MW-03",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
- "coder_skipped": {},
+ "coder_skipped": {
+  "Q-047-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-047-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot"
+ },
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",

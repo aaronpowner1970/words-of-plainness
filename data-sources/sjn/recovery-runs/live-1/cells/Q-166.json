@@ -494,58 +494,7 @@
  },
  "verifications": {
   "Q-166-p1-BSR-BA-01-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "932944a8b1443eb1752e7767",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "Regeneration, or the new birth",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The passage asserts that regeneration is a work of God's grace, but the grammatical subject is 'regeneration,' not God.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The passage describes regeneration as God's grace-work producing new creatures, but does not assert God Himself as life-giving; the subject is the human experience of regeneration, not God as agent-subject of the predicate.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "SEMANTIC_FLOOR"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The predicate requires God as subject communicating life, but the text's subject is 'regeneration' as a process/work, only attributing agency to God's grace as a genitive modifier, not asserting God Himself as life-giving.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Regeneration, or the new birth\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that regeneration is a work of God's grace, but the grammatical subject is 'regeneration,' not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage describes regeneration as God's grace-work producing new creatures, but does not assert God Himself as life-giving; the subject is the human experience of regeneration, not God as agent-subject of the predicate.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The predicate requires God as subject communicating life, but the text's subject is 'regeneration' as a process/work, only attributing agency to God's grace as a genitive modifier, not asserting God Himself as life-giving.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": "PRIMARY_REJECTED_ALL",
-   "opus": {
-    "model": "opus",
-    "call_id": "f4eb2ea5421f79e3541dbe6a",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "\"Regeneration, or the new birth\" (the predicate nominative is \"a work of God's grace\"; God appears only as a genitive modifier)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The standard asserts this in its own voice as a definitional statement about regeneration.",
-    "floor": "PARTIAL",
-    "floor_reason": "The clause implies divine agency in effecting new birth (a narrower instance of life-communication), but it predicates this of regeneration, not of God as grammatical subject, and 'God' occurs only as a possessive modifier of 'grace'.",
-    "hazard_flags": [
-     "SEMANTIC_FLOOR"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The quoted phrase is verbatim and asserted in the standard's own voice, but its grammatical subject is 'Regeneration, or the new birth' rather than God; God appears only obliquely in 'God's grace', so the passage does not predicate life-giving of the required subject.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Regeneration, or the new birth\\\" (the predicate nominative is \\\"a work of God's grace\\\"; God appears only as a genitive modifier)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The standard asserts this in its own voice as a definitional statement about regeneration.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause implies divine agency in effecting new birth (a narrower instance of life-communication), but it predicates this of regeneration, not of God as grammatical subject, and 'God' occurs only as a possessive modifier of 'grace'.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted phrase is verbatim and asserted in the standard's own voice, but its grammatical subject is 'Regeneration, or the new birth' rather than God; God appears only obliquely in 'God's grace', so the passage does not predicate life-giving of the required subject.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "final": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
@@ -585,6 +534,167 @@
     "adjudicator_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "932944a8b1443eb1752e7767",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "Regeneration, or the new birth",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The passage asserts that regeneration is a work of God's grace, but the grammatical subject is 'regeneration,' not God.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage describes regeneration as God's grace-work producing new creatures, but does not assert God Himself as life-giving; the subject is the human experience of regeneration, not God as agent-subject of the predicate.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The predicate requires God as subject communicating life, but the text's subject is 'regeneration' as a process/work, only attributing agency to God's grace as a genitive modifier, not asserting God Himself as life-giving.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Regeneration, or the new birth\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that regeneration is a work of God's grace, but the grammatical subject is 'regeneration,' not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage describes regeneration as God's grace-work producing new creatures, but does not assert God Himself as life-giving; the subject is the human experience of regeneration, not God as agent-subject of the predicate.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The predicate requires God as subject communicating life, but the text's subject is 'regeneration' as a process/work, only attributing agency to God's grace as a genitive modifier, not asserting God Himself as life-giving.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     },
+     "opus": {
+      "model": "opus",
+      "call_id": "f4eb2ea5421f79e3541dbe6a",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "\"Regeneration, or the new birth\" (the predicate nominative is \"a work of God's grace\"; God appears only as a genitive modifier)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The standard asserts this in its own voice as a definitional statement about regeneration.",
+      "floor": "PARTIAL",
+      "floor_reason": "The clause implies divine agency in effecting new birth (a narrower instance of life-communication), but it predicates this of regeneration, not of God as grammatical subject, and 'God' occurs only as a possessive modifier of 'grace'.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The quoted phrase is verbatim and asserted in the standard's own voice, but its grammatical subject is 'Regeneration, or the new birth' rather than God; God appears only obliquely in 'God's grace', so the passage does not predicate life-giving of the required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Regeneration, or the new birth\\\" (the predicate nominative is \\\"a work of God's grace\\\"; God appears only as a genitive modifier)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The standard asserts this in its own voice as a definitional statement about regeneration.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause implies divine agency in effecting new birth (a narrower instance of life-communication), but it predicates this of regeneration, not of God as grammatical subject, and 'God' occurs only as a possessive modifier of 'grace'.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted phrase is verbatim and asserted in the standard's own voice, but its grammatical subject is 'Regeneration, or the new birth' rather than God; God appears only obliquely in 'God's grace', so the passage does not predicate life-giving of the required subject.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "opus",
+     "route": "PRIMARY_REJECTED_ALL",
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY",
+      "opus": "PARTIAL"
+     },
+     "floor_disagreement": true,
+     "lower_floor_applied": true,
+     "second_rubric": "opus",
+     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+     "adjudicator_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "opus",
+     "route": "PRIMARY_REJECTED_ALL",
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY",
+      "opus": "PARTIAL"
+     },
+     "floor_disagreement": true,
+     "lower_floor_applied": true,
+     "second_rubric": "opus",
+     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+     "adjudicator_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "cf8f48df2bf683382df94ba3",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "Regeneration, or the new birth",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The passage asserts that regeneration is a work of God's grace, but the grammatical subject of the clause is 'Regeneration', not God.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage names God's grace as the agency behind regeneration, but the required subject (God/Father/Son/Spirit) is not the grammatical subject asserting life-giving action; 'believers become new creatures' describes human transformation, not a direct predication of life-giving to God.",
+    "hazard_flags": [
+     "ECCLESIAL_VS_SOTERIOLOGICAL",
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The clause's grammatical subject is 'Regeneration', a soteriological process, not God himself; the predicate 'Life-giving' requires God (or a divine person) as subject, which this passage does not supply directly.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Regeneration, or the new birth\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts that regeneration is a work of God's grace, but the grammatical subject of the clause is 'Regeneration', not God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage names God's grace as the agency behind regeneration, but the required subject (God/Father/Son/Spirit) is not the grammatical subject asserting life-giving action; 'believers become new creatures' describes human transformation, not a direct predication of life-giving to God.\", \"hazard_flags\": [\"ECCLESIAL_VS_SOTERIOLOGICAL\", \"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The clause's grammatical subject is 'Regeneration', a soteriological process, not God himself; the predicate 'Life-giving' requires God (or a divine person) as subject, which this passage does not supply directly.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "ca8157aee60353d0c68e302f",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "\"Regeneration, or the new birth\" (God appears only in the genitive modifier \"God's grace\")",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The standard asserts this in its own doctrinal voice, not as a quoted or rejected view.",
+    "floor": "PARTIAL",
+    "floor_reason": "The clause implies divine agency in imparting new spiritual life (\"believers become new creatures\"), but it predicates this of regeneration, not of God as grammatical subject, so it falls short of a direct assertion that God gives life.",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The phrase is verbatim and asserted by the standard, but its subject is \"regeneration/the new birth,\" with God named only obliquely in \"God's grace\"; the required subject (God, Son or Spirit) is not the subject of the predication, so the citation fails item 2.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Regeneration, or the new birth\\\" (God appears only in the genitive modifier \\\"God's grace\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The standard asserts this in its own doctrinal voice, not as a quoted or rejected view.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause implies divine agency in imparting new spiritual life (\\\"believers become new creatures\\\"), but it predicates this of regeneration, not of God as grammatical subject, so it falls short of a direct assertion that God gives life.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The phrase is verbatim and asserted by the standard, but its subject is \\\"regeneration/the new birth,\\\" with God named only obliquely in \\\"God's grace\\\"; the required subject (God, Son or Spirit) is not the subject of the predication, so the citation fails item 2.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "route_kept": "PRIMARY_REJECTED_ALL",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-166-p1-BSR-BA-01-2": {
@@ -683,57 +793,7 @@
    }
   },
   "Q-166-p1-BSR-BA-01-3": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "2354fa751b6784d3b2006909",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "The new birth of man’s spirit by God’s Holy Spirit",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The sentence asserts a theological claim in the confession's own voice, not a quotation or hypothetical.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage speaks of the Spirit's agency in regeneration but the grammatical subject is 'the new birth,' not God or the Spirit directly, so it only partially matches the life-giving predicate as scoped to the required subject.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical subject of the clause is 'the new birth of man’s spirit,' not God or the Holy Spirit themselves, so the passage does not directly assert life-giving of the required subject despite mentioning the Spirit as agent.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The new birth of man’s spirit by God’s Holy Spirit\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The sentence asserts a theological claim in the confession's own voice, not a quotation or hypothetical.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage speaks of the Spirit's agency in regeneration but the grammatical subject is 'the new birth,' not God or the Spirit directly, so it only partially matches the life-giving predicate as scoped to the required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the clause is 'the new birth of man’s spirit,' not God or the Holy Spirit themselves, so the passage does not directly assert life-giving of the required subject despite mentioning the Spirit as agent.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": "PRIMARY_REJECTED_ALL",
-   "opus": {
-    "model": "opus",
-    "call_id": "80444af28ace07e529c10496",
-    "attempt": 0,
-    "prompt_version": "gate6-v1.2",
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "\"The new birth of man's spirit by God's Holy Spirit\" (the subject is the new birth; God's Holy Spirit appears only as agent inside a prepositional modifier)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The standard speaks in its own voice, but what it asserts is that the new birth \"means the birth of love for others\"; the divine giving of life is presupposed within the subject noun phrase rather than predicated.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The passage's assertion concerns the ethical/missionary consequence of regeneration; the communication of life by God is embedded as a presupposed modifier, and the grammatical subject is the new birth, not God.",
-    "hazard_flags": [
-     "SEMANTIC_FLOOR"
-    ],
-    "asserted_outside_formula": "NA",
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The quoted words are verbatim, but the sentence's subject is the new birth and its predicate is \"means the birth of love for others\"; God (or the Spirit, and the predicate is not scoped to the Spirit here) is not the grammatical subject and life-giving is presupposed, not asserted.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"The new birth of man's spirit by God's Holy Spirit\\\" (the subject is the new birth; God's Holy Spirit appears only as agent inside a prepositional modifier)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The standard speaks in its own voice, but what it asserts is that the new birth \\\"means the birth of love for others\\\"; the divine giving of life is presupposed within the subject noun phrase rather than predicated.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage's assertion concerns the ethical/missionary consequence of regeneration; the communication of life by God is embedded as a presupposed modifier, and the grammatical subject is the new birth, not God.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted words are verbatim, but the sentence's subject is the new birth and its predicate is \\\"means the birth of love for others\\\"; God (or the Spirit, and the predicate is not scoped to the Spirit here) is not the grammatical subject and life-giving is presupposed, not asserted.\"}",
-    "phrase_verbatim_code": "Y",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "final": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
@@ -741,12 +801,12 @@
     "route": "PRIMARY_REJECTED_ALL",
     "primary_verdict": "REJECT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "WORD_ONLY",
+    "floor_final": "PARTIAL",
     "floor_by_model": {
      "sonnet": "PARTIAL",
-     "opus": "WORD_ONLY"
+     "opus": "PARTIAL"
     },
-    "floor_disagreement": true,
+    "floor_disagreement": false,
     "lower_floor_applied": false,
     "second_rubric": "opus",
     "second_rubric_role": "ADJUDICATES_LINES_1_3",
@@ -773,6 +833,165 @@
     "adjudicator_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "2354fa751b6784d3b2006909",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "The new birth of man’s spirit by God’s Holy Spirit",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The sentence asserts a theological claim in the confession's own voice, not a quotation or hypothetical.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage speaks of the Spirit's agency in regeneration but the grammatical subject is 'the new birth,' not God or the Spirit directly, so it only partially matches the life-giving predicate as scoped to the required subject.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject of the clause is 'the new birth of man’s spirit,' not God or the Holy Spirit themselves, so the passage does not directly assert life-giving of the required subject despite mentioning the Spirit as agent.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The new birth of man’s spirit by God’s Holy Spirit\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The sentence asserts a theological claim in the confession's own voice, not a quotation or hypothetical.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage speaks of the Spirit's agency in regeneration but the grammatical subject is 'the new birth,' not God or the Spirit directly, so it only partially matches the life-giving predicate as scoped to the required subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject of the clause is 'the new birth of man’s spirit,' not God or the Holy Spirit themselves, so the passage does not directly assert life-giving of the required subject despite mentioning the Spirit as agent.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     },
+     "opus": {
+      "model": "opus",
+      "call_id": "80444af28ace07e529c10496",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.2",
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "\"The new birth of man's spirit by God's Holy Spirit\" (the subject is the new birth; God's Holy Spirit appears only as agent inside a prepositional modifier)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The standard speaks in its own voice, but what it asserts is that the new birth \"means the birth of love for others\"; the divine giving of life is presupposed within the subject noun phrase rather than predicated.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage's assertion concerns the ethical/missionary consequence of regeneration; the communication of life by God is embedded as a presupposed modifier, and the grammatical subject is the new birth, not God.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The quoted words are verbatim, but the sentence's subject is the new birth and its predicate is \"means the birth of love for others\"; God (or the Spirit, and the predicate is not scoped to the Spirit here) is not the grammatical subject and life-giving is presupposed, not asserted.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"The new birth of man's spirit by God's Holy Spirit\\\" (the subject is the new birth; God's Holy Spirit appears only as agent inside a prepositional modifier)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The standard speaks in its own voice, but what it asserts is that the new birth \\\"means the birth of love for others\\\"; the divine giving of life is presupposed within the subject noun phrase rather than predicated.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage's assertion concerns the ethical/missionary consequence of regeneration; the communication of life by God is embedded as a presupposed modifier, and the grammatical subject is the new birth, not God.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The quoted words are verbatim, but the sentence's subject is the new birth and its predicate is \\\"means the birth of love for others\\\"; God (or the Spirit, and the predicate is not scoped to the Spirit here) is not the grammatical subject and life-giving is presupposed, not asserted.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "opus",
+     "route": "PRIMARY_REJECTED_ALL",
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "PARTIAL",
+      "opus": "WORD_ONLY"
+     },
+     "floor_disagreement": true,
+     "lower_floor_applied": false,
+     "second_rubric": "opus",
+     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+     "adjudicator_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "opus",
+     "route": "PRIMARY_REJECTED_ALL",
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "PARTIAL",
+      "opus": "WORD_ONLY"
+     },
+     "floor_disagreement": true,
+     "lower_floor_applied": false,
+     "second_rubric": "opus",
+     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+     "adjudicator_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "c1de2eaf02d381c3a2ee1729",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "The new birth of man’s spirit by God’s Holy Spirit",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The sentence asserts a doctrinal claim about regeneration, not a hypothetical or quotation.",
+    "floor": "PARTIAL",
+    "floor_reason": "The passage attributes the new birth (a life-giving act) to God's Holy Spirit as agent, but the grammatical subject is the abstract noun phrase 'the new birth of man's spirit,' not the Spirit itself, so the predicate is not directly predicated of the required divine subject.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "While the Spirit is named as the agent of the new birth, the sentence's grammatical subject is 'the new birth,' not God's Holy Spirit, so it does not directly assert the life-giving predicate of the required divine subject.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"The new birth of man’s spirit by God’s Holy Spirit\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The sentence asserts a doctrinal claim about regeneration, not a hypothetical or quotation.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage attributes the new birth (a life-giving act) to God's Holy Spirit as agent, but the grammatical subject is the abstract noun phrase 'the new birth of man's spirit,' not the Spirit itself, so the predicate is not directly predicated of the required divine subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"While the Spirit is named as the agent of the new birth, the sentence's grammatical subject is 'the new birth,' not God's Holy Spirit, so it does not directly assert the life-giving predicate of the required divine subject.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "2f428ad55bb56cea22e7ff00",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "\"The new birth of man’s spirit by God’s Holy Spirit\" (the subject is the new birth; God's Holy Spirit appears only in an agentive prepositional modifier)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The standard asserts in its own voice, but what it asserts is what the new birth \"means\" (birth of love for others), with the Spirit's agency presupposed in a modifying phrase rather than predicated.",
+    "floor": "PARTIAL",
+    "floor_reason": "The regenerating agency of the Holy Spirit is implied by the agentive phrase, but the sentence's predication is about the meaning of the new birth (love for others), not a direct affirmation that God communicates life.",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "God/the Holy Spirit is not the grammatical subject; the subject is \"the new birth of man's spirit,\" and the divine life-giving action is only presupposed in an adjunct while the assertion concerns the new birth's meaning.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"The new birth of man’s spirit by God’s Holy Spirit\\\" (the subject is the new birth; God's Holy Spirit appears only in an agentive prepositional modifier)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The standard asserts in its own voice, but what it asserts is what the new birth \\\"means\\\" (birth of love for others), with the Spirit's agency presupposed in a modifying phrase rather than predicated.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The regenerating agency of the Holy Spirit is implied by the agentive phrase, but the sentence's predication is about the meaning of the new birth (love for others), not a direct affirmation that God communicates life.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"God/the Holy Spirit is not the grammatical subject; the subject is \\\"the new birth of man's spirit,\\\" and the divine life-giving action is only presupposed in an adjunct while the assertion concerns the new birth's meaning.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "route_kept": "PRIMARY_REJECTED_ALL",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
    }
   }
  },
@@ -856,7 +1075,8 @@
   },
   "slot_order": {
    "Q-166-p1-BSR-BA-01-2": 0
-  }
+  },
+  "parallel_witnesses": {}
  },
  "coder_skipped": {},
  "empty": false,

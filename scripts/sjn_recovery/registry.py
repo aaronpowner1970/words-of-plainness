@@ -107,6 +107,20 @@ class Registry:
                                               "status": "PENDING AUTHOR RATIFICATION"}
                 by[rid].update(ch)
             self.delta = prov
+        # Session 6 (R6-3): a row the author has retired is retired here, in memory, until the workbook says so.
+        from . import rulings
+        self.rulings_applied = []
+        by = {r["registry_id"]: r for r in self.rows_all}
+        for rid, ru in rulings.retirements().items():
+            if rid not in by:
+                raise SystemExit(f"author ruling {ru['ruling']} retires {rid}, which is not a workbook registry row")
+            if by[rid].get("status") == "RETIRED":
+                continue                                  # the workbook already carries it
+            by[rid]["_author_ruling"] = {"ruling": ru["ruling"], "workbook_status": by[rid].get("status"), "status": "RETIRED",
+                                         "reason_code": ru.get("reason_code"), "reason": ru.get("reason"),
+                                         "pending": "applied in memory; workbook not written"}
+            by[rid]["status"] = "RETIRED"
+            self.rulings_applied.append({"registry_id": rid, "ruling": ru["ruling"], "status": "RETIRED", "reason_code": ru.get("reason_code")})
         self.rows = ratified(self.rows_all)
         self.fallback_ids = set(fallback_only_ids(self.config))
         self.by_id = {r["registry_id"]: r for r in self.rows}
@@ -211,11 +225,24 @@ class Registry:
 def load_predicates(wb):
     """Inherited 57 rows keyed by Predicate ID with the fields the agents receive."""
     _, rows, _ = wb.table("Inherited 57", "Predicate ID")
+    from . import rulings
+    ruled = rulings.required_subjects()
     out = {}
     for r in rows:
         pid = s(r["Predicate ID"])
         definition = s(r.get("Historical source-report definition"))
         mode = s(r.get("Original mode"))
+        # Session 6 (R6-1): the workbook carries no required-subject column; the harness derives it (subject_scope) except
+        # where the author has ruled. A workbook column, once added, wins — and must agree with the ruling.
+        wb_subject = s(r.get("Required subject"))
+        if wb_subject and pid in ruled and wb_subject != ruled[pid]:
+            raise SystemExit(f"Inherited 57 'Required subject' for {pid} disagrees with author ruling R6-1: {wb_subject!r} vs {ruled[pid]!r}")
+        if wb_subject:
+            scope, source = wb_subject, "WORKBOOK"
+        elif pid in ruled:
+            scope, source = ruled[pid], "AUTHOR_RULING_R6-1 (2026-09-13; workbook delta pending)"
+        else:
+            scope, source = subject_scope(pid, definition, mode), "HARNESS_DERIVED (registry.subject_scope)"
         out[pid] = {
             "family_id": pid,
             "predicate": s(r.get("Normalized predicate family")),
@@ -225,7 +252,8 @@ def load_predicates(wb):
             "floor_note": s(r.get("Accepted comparison / semantic-floor note")),
             "family_code": s(r.get("Current A/Q/D/U")),
             "lens": s(r.get("Teaching lens")),
-            "subject_scope": subject_scope(pid, definition, mode),
+            "subject_scope": scope,
+            "subject_scope_source": source,
             # The Predicate sheet carries no lexical-floor marker, so no family is lexical:
             # WORD_ONLY is always REJECT (spec §4, Verifier).
             "lexical_floor": False,

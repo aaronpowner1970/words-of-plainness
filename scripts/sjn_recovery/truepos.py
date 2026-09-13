@@ -127,11 +127,18 @@ def cmd_build(a):
 
 
 def cmd_run(a):
+    if a.verifier_version:
+        prompts.set_verifier_version(a.verifier_version)
     reg = Registry()
     preds = load_predicates(reg.wb)
     d = _dir(a.run_id)
+    if not os.path.exists(os.path.join(d, "fixture.json")) and a.fixture_from:
+        import shutil
+        shutil.copy(os.path.join(_dir(a.fixture_from), "fixture.json"), os.path.join(d, "fixture.json"))
     fixture = json.load(open(os.path.join(d, "fixture.json"), encoding="utf-8"))
     llm = LLM(a.run_id, backend="batch", model="sonnet", log=print)
+    if a.seed_from:
+        llm.seed_from(a.seed_from, log=print)          # session 6: an identical call (same prompt, same subject) is served, not re-sent
     runner = CellRunner(llm, reg, preds, {}, os.path.join(d, "state"), "sonnet", ["sonnet"], log=print, run_coder=False)
     res_path = os.path.join(d, "tp-results.json")
     results = json.load(open(res_path, encoding="utf-8")) if os.path.exists(res_path) else {}
@@ -183,6 +190,8 @@ def cmd_run(a):
                                 "asserted_outside_formula": r["verdicts"]["sonnet"].get("asserted_outside_formula"),
                                 "floor_capped_by": r["verdicts"]["sonnet"].get("floor_capped_by")} for k, r in idiom],
                "by_branch": by_branch, "ratified_accepts_now_refused": refused,
+               "required_subject_sources": dict(Counter(preds[r["family_id"]].get("subject_scope_source", "").split(" (")[0] for _, r in done)),
+               "seeded_from": a.seed_from, "calls_served_from_seed": sum(1 for _, r in done if (llm._cache.get(r["verdicts"]["sonnet"].get("call_id")) or {}).get("run_id") != a.run_id),
                "stop_rule": f"recall below {RECALL_STOP} stops the session before Task 8",
                "stop": bool(recall is not None and recall < RECALL_STOP)}
     with open(os.path.join(d, "tp-summary.json"), "w", encoding="utf-8", newline="\n") as fh:
@@ -201,6 +210,9 @@ def main():
         p = sub.add_parser(name)
         p.add_argument("--run-id", required=True)
         p.add_argument("--max-items", type=int, default=60)
+        p.add_argument("--seed-from", help="serve identical calls from another run's audit log (session 6)")
+        p.add_argument("--fixture-from", help="copy fixture.json from another run id (session 6)")
+        p.add_argument("--verifier-version", help="verifier prompt version, e.g. gate6-v1.3 (session 6)")
     a = ap.parse_args()
     return cmd_build(a) if a.cmd == "build" else cmd_run(a)
 

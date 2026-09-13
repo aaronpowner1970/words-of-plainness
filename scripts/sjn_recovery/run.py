@@ -67,6 +67,8 @@ def main():
     reg = Registry(a.workbook)
     preds, comps, queue = load_predicates(reg.wb), load_comparators(reg.wb), load_queue(reg.wb)
     scope = assert_gate6_scope(reg, queue, log)          # fails loudly when the harness and APP CONFIG disagree
+    from sjn_recovery import rulings                     # session 6: the author rulings applied in memory, said at every start
+    log(f"== author rulings applied: {rulings.summary()}; verifier {prompts.prompt_version('verifier')}, locator {prompts.prompt_version('locator')}")
     cells = open_cells(queue)
     branches = BRANCHES if a.all_branches else [a.branch]
     vmodels = a.verifier_models.split(",")

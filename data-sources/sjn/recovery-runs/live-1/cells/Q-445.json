@@ -2179,16 +2179,16 @@
  "allocation": {
   "kept": [
    "Q-445-p1-BSR-AN-01-1",
-   "Q-445-p1-BSR-AN-03-1",
    "Q-445-p1-BSR-AN-04-1"
   ],
   "roles": {
    "Q-445-p1-BSR-AN-01-1": "PRIMARY",
-   "Q-445-p1-BSR-AN-03-1": "PRIMARY",
    "Q-445-p1-BSR-AN-04-1": "CORROBORATING"
   },
   "english_witness": {},
-  "dropped": {},
+  "dropped": {
+   "Q-445-p1-BSR-AN-03-1": "SAME_TEXT parallel witness of Q-445-p1-BSR-AN-04-1: its phrase is textually identical to the seated phrase; takes no slot"
+  },
   "witness_only": [],
   "groups": {
    "Q-445-p1-BSR-AN-01-1": "church of england",
@@ -2197,11 +2197,21 @@
   },
   "slot_order": {
    "Q-445-p1-BSR-AN-01-1": 0,
-   "Q-445-p1-BSR-AN-03-1": 1,
    "Q-445-p1-BSR-AN-04-1": 0
+  },
+  "parallel_witnesses": {
+   "Q-445-p1-BSR-AN-04-1": [
+    {
+     "candidate_id": "Q-445-p1-BSR-AN-03-1",
+     "registry_id": "BSR-AN-03",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
- "coder_skipped": {},
+ "coder_skipped": {
+  "Q-445-p1-BSR-AN-03-1": "SAME_TEXT parallel witness of Q-445-p1-BSR-AN-04-1: its phrase is textually identical to the seated phrase; takes no slot"
+ },
  "empty": false,
  "coverage_final": {
   "BSR-AN-01": {

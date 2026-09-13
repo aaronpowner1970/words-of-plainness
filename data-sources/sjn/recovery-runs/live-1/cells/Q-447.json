@@ -1957,8 +1957,8 @@
   },
   "english_witness": {},
   "dropped": {
-   "Q-447-p1-BSR-MW-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'united methodist church' already holds a slot)",
-   "Q-447-p1-BSR-MW-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'global methodist church' already holds a slot)",
+   "Q-447-p1-BSR-MW-02-1": "SAME_TEXT parallel witness of Q-447-p1-BSR-MW-03-1: its phrase is textually identical to the seated phrase; takes no slot",
+   "Q-447-p1-BSR-MW-03-2": "SAME_TEXT parallel witness of Q-447-p1-BSR-MW-01-1: its phrase is textually identical to the seated phrase; takes no slot",
    "Q-447-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)",
    "Q-447-p1-BSR-MW-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'united methodist church' already holds a slot)"
   },
@@ -1976,11 +1976,27 @@
    "Q-447-p1-BSR-MW-01-1": 0,
    "Q-447-p1-BSR-MW-03-1": 1,
    "Q-447-p1-BSR-MW-04-1": 2
+  },
+  "parallel_witnesses": {
+   "Q-447-p1-BSR-MW-03-1": [
+    {
+     "candidate_id": "Q-447-p1-BSR-MW-02-1",
+     "registry_id": "BSR-MW-02",
+     "rule": "SAME_TEXT"
+    }
+   ],
+   "Q-447-p1-BSR-MW-01-1": [
+    {
+     "candidate_id": "Q-447-p1-BSR-MW-03-2",
+     "registry_id": "BSR-MW-03",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
  "coder_skipped": {
-  "Q-447-p1-BSR-MW-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'united methodist church' already holds a slot)",
-  "Q-447-p1-BSR-MW-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'global methodist church' already holds a slot)",
+  "Q-447-p1-BSR-MW-02-1": "SAME_TEXT parallel witness of Q-447-p1-BSR-MW-03-1: its phrase is textually identical to the seated phrase; takes no slot",
+  "Q-447-p1-BSR-MW-03-2": "SAME_TEXT parallel witness of Q-447-p1-BSR-MW-01-1: its phrase is textually identical to the seated phrase; takes no slot",
   "Q-447-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)",
   "Q-447-p1-BSR-MW-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'united methodist church' already holds a slot)"
  },

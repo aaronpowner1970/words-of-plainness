@@ -6028,39 +6028,17 @@
    }
   },
   "Q-204-p1-BSR-RP-06-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "337964331625113f410ec999",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "our Lord Jesus Christ",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The text asserts that Christ will declare himself judge of the living and the dead, in the standard's own voice.",
-    "floor": "PARTIAL",
-    "floor_reason": "The judgment is affirmed of Christ (the Son), not of God the Father or the one God as such; the required subject is not met.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The passage's grammatical subject and judge is Jesus Christ, not the required subject GOD/the Father, so it fails the subject test despite verbatim phrase and clear assertion.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"our Lord Jesus Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts that Christ will declare himself judge of the living and the dead, in the standard's own voice.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The judgment is affirmed of Christ (the Son), not of God the Father or the one God as such; the required subject is not met.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage's grammatical subject and judge is Jesus Christ, not the required subject GOD/the Father, so it fails the subject test despite verbatim phrase and clear assertion.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": null,
    "final": {
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "REJECT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "FULL",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "FULL"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
@@ -6077,6 +6055,95 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-13T22:14:02Z",
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "337964331625113f410ec999",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "our Lord Jesus Christ",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The text asserts that Christ will declare himself judge of the living and the dead, in the standard's own voice.",
+      "floor": "PARTIAL",
+      "floor_reason": "The judgment is affirmed of Christ (the Son), not of God the Father or the one God as such; the required subject is not met.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The passage's grammatical subject and judge is Jesus Christ, not the required subject GOD/the Father, so it fails the subject test despite verbatim phrase and clear assertion.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"our Lord Jesus Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text asserts that Christ will declare himself judge of the living and the dead, in the standard's own voice.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The judgment is affirmed of Christ (the Son), not of God the Father or the one God as such; the required subject is not met.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The passage's grammatical subject and judge is Jesus Christ, not the required subject GOD/the Father, so it fails the subject test despite verbatim phrase and clear assertion.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "6da7fa0dc1d00836d7b1321f",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "our Lord Jesus Christ",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The confession positively asserts that Christ will come to declare himself judge of the living and the dead.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that the Son, as divine, will judge the living and the dead, matching the predicate's definition of divine judgment.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": null,
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the Son as divine, and the standard asserts the predicate in its own voice as a doctrinal claim about the Last Judgement.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"our Lord Jesus Christ\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession positively asserts that Christ will come to declare himself judge of the living and the dead.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the Son, as divine, will judge the living and the dead, matching the predicate's definition of divine judgment.\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the Son as divine, and the standard asserts the predicate in its own voice as a doctrinal claim about the Last Judgement.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK"
+   },
+   "reverified": {
+    "at": "2026-09-13T22:14:02Z",
+    "prompt_version": "gate6-v1.2",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 6 R6-1: required_subject admits the Son or the Holy Spirit as divine (Judge, Life-giving, Savior, Not made, Lord); WRONG_SUBJECT rejection re-verified",
+    "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
    }
   },
   "Q-204-p1-BSR-RP-01-2": {
@@ -6269,6 +6336,28 @@
    "source_note_guard": "ok",
    "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
    "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the Catechism directly affirms that the LORD will subject transgressors to his righteous judgment, matching the shared floor of divine judgment without narrowing or reinterpretation. This aligns with the family code of A.\", \"source_note\": \"The Westminster Larger Catechism (Q.114) states that God will not allow transgressors to escape his righteous judgment, affirming divine judgment as a consequence of disobedience.\"}"
+  },
+  "Q-204-p1-BSR-RP-04-1": {
+   "status": "DONE",
+   "call_id": "e08e1def4a0585e0fd94af13",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Verifier floor is FULL: the Westminster text names God as the one who appoints the day and will judge the world, matching the shared floor of divine judgment without narrowing or redefinition.",
+   "source_note": "The Book of Confessions, in the Westminster Confession of Faith (6.180), states that God has appointed a day when he will judge the world in righteousness through Jesus Christ.",
+   "source_note_guard": "ok",
+   "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Verifier floor is FULL: the Westminster text names God as the one who appoints the day and will judge the world, matching the shared floor of divine judgment without narrowing or redefinition.\", \"source_note\": \"The Book of Confessions, in the Westminster Confession of Faith (6.180), states that God has appointed a day when he will judge the world in righteousness through Jesus Christ.\"}"
+  },
+  "Q-204-p1-BSR-RP-05-1": {
+   "status": "DONE",
+   "call_id": "ad1c7a5a5ae22daa04263a4e",
+   "rendered_state": "A",
+   "diverges_from_family_code": false,
+   "state_reason": "Floor is FULL: the Catechism explicitly affirms God as just judge who punishes sin both now and in eternity, matching the shared divine judgment predicate at the controlled scope, consistent with the family code.",
+   "source_note": "The Heidelberg Catechism, Q&A 10, states that God, as a just judge, punishes sin both now and in eternity, affirming divine judgment.",
+   "source_note_guard": "ok",
+   "scope_caveat": "“Reformed / Presbyterian” gathers several bodies with overlapping but distinct standards; the Westminster text differs between the OPC and PC(USA) editions, and the Three Forms of Unity speak for the continental Reformed churches.",
+   "raw": "{\"rendered_state\": \"A\", \"diverges_from_family_code\": false, \"state_reason\": \"Floor is FULL: the Catechism explicitly affirms God as just judge who punishes sin both now and in eternity, matching the shared divine judgment predicate at the controlled scope, consistent with the family code.\", \"source_note\": \"The Heidelberg Catechism, Q&A 10, states that God, as a just judge, punishes sin both now and in eternity, affirming divine judgment.\"}"
   }
  },
  "phase": "DONE",
@@ -6369,6 +6458,25 @@
    "chunk_text": "Q. Does God permit such disobedience and rebellion to go unpunished? A. Certainly not. God is terribly angry with the sin we are born with as well as the sins we personally commit. As a just judge, God will punish them both now and in eternity, having declared: “Cursed is everyone who does not observe and obey all the things written in the book of the law.”",
    "chunk_hash": "61b6c47dc3066b76f8ceb351d425eea01ff2c976075cbacc77a852c5de3602ee",
    "division": "question",
+   "fallback_tier": false,
+   "witness": false,
+   "effective_tier": "CONFESSIONAL",
+   "locator_rank": 1,
+   "recut_from": null,
+   "exhaustion_batch": null,
+   "slot": "GUARANTEED"
+  },
+  {
+   "candidate_id": "Q-204-p1-BSR-RP-06-1",
+   "pass": 1,
+   "registry_id": "BSR-RP-06",
+   "locator": "Article 37: The Last Judgement",
+   "phrase": "to declare himself the judge of the living and the dead",
+   "rationale": "Confesses the divine Son will judge the living and the dead, asserting judgment as an act of God.",
+   "floor_claim": "FULL",
+   "chunk_text": "Finally we believe, according to God’s Word, that when the time appointed by the Lord is come (which is unknown to all creatures) and the number of the elect is complete, our Lord Jesus Christ will come from heaven, bodily and visibly, as he ascended, with great glory and majesty, to declare himself the judge of the living and the dead. He will burn this old world, in fire and flame, in order to cleanse it. Then all human creatures will appear in person before the great judge— men, women, and children, who have lived from the beginning until the end of the world. They will be summoned there “with the archangel’s call and with the sound of God’s trumpet.” For all those who died before that time will be raised from the earth, their spirits being joined and united with their own bodies in which they lived. And as for those who are still alive, they will not die like the others but will be changed “in the twinkling of an eye” from perishable to imperishable. Then the books (that is, the consciences) will be opened, and the dead will be judged according to the things they did in the world, whether good or evil. Indeed, all people will give account of all the idle words they have spoken, which the world regards as only playing games. And then the secrets and hypocrisies of all people will be publicly uncovered in the sight of all. Therefore, with good reason the thought of this judgment is horrible and dreadful to wicked and evil people. But it is very pleasant and a great comfort to the righteous and elect, since their total redemption will then be accomplished. They will then receive the fruits of their labor and of the trouble they have suffered; their innocence will be openly recognized by all; and they will see the terrible vengeance that God will bring on the evil ones who tyrannized, oppressed, and tormented them in this world. The evil ones will be convicted by the witness of their own consciences, and shall be made immortal— but only to be tormented in “the eternal fire prepared for the devil and his angels.” In contrast, the faithful and elect will be crowned with glory and honor. The Son of God will profess their names before God his Father and the holy and elect angels; all tears will be wiped from their eyes; and their cause— at present condemned as heretical and evil by many judges and civil officers— will be acknowledged as the cause of the Son of God. And as a gracious reward the Lord will make them possess a glory such as the human heart could never imagine. So we look forward to that great day with longing in order to enjoy fully the promises of God in Christ Jesus, our Lord. 81 82 83 84 85 86 87",
+   "chunk_hash": "43959e8828d5cb314fd4ff6eabe2f88b4c08d17c36723d42c5e655eb05870f2b",
+   "division": "article",
    "fallback_tier": false,
    "witness": false,
    "effective_tier": "CONFESSIONAL",
@@ -6487,11 +6595,12 @@
   },
   "english_witness": {},
   "dropped": {
+   "Q-204-p1-BSR-RP-01-2": "SAME_TEXT parallel witness of Q-204-p1-BSR-RP-04-1: its phrase is textually identical to the seated phrase; takes no slot",
    "Q-204-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
    "Q-204-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
-   "Q-204-p1-BSR-RP-05-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
+   "Q-204-p1-BSR-RP-06-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
    "Q-204-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
-   "Q-204-p1-BSR-RP-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
+   "Q-204-p1-BSR-RP-05-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)"
   },
   "witness_only": [],
   "groups": {
@@ -6500,6 +6609,7 @@
    "Q-204-p1-BSR-RP-03-1": "opc and westminster churches",
    "Q-204-p1-BSR-RP-04-1": "pc(usa)",
    "Q-204-p1-BSR-RP-05-1": "crcna and rca",
+   "Q-204-p1-BSR-RP-06-1": "crcna and rca",
    "Q-204-p1-BSR-RP-01-2": "opc and westminster churches",
    "Q-204-p1-BSR-RP-04-2": "pc(usa)",
    "Q-204-p1-BSR-RP-05-2": "crcna and rca"
@@ -6508,18 +6618,33 @@
    "Q-204-p1-BSR-RP-01-1": 0,
    "Q-204-p1-BSR-RP-04-1": 1,
    "Q-204-p1-BSR-RP-05-1": 2
+  },
+  "parallel_witnesses": {
+   "Q-204-p1-BSR-RP-04-1": [
+    {
+     "candidate_id": "Q-204-p1-BSR-RP-01-2",
+     "registry_id": "BSR-RP-01",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
  "coder_skipped": {
+  "Q-204-p1-BSR-RP-01-2": "SAME_TEXT parallel witness of Q-204-p1-BSR-RP-04-1: its phrase is textually identical to the seated phrase; takes no slot",
   "Q-204-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
   "Q-204-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
-  "Q-204-p1-BSR-RP-05-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
+  "Q-204-p1-BSR-RP-06-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
   "Q-204-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
-  "Q-204-p1-BSR-RP-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
+  "Q-204-p1-BSR-RP-05-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)"
  },
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-204-p1-BSR-RP-06-1": [
+    "REJECT",
+    "ACCEPT"
+   ]
+  }
  }
 }

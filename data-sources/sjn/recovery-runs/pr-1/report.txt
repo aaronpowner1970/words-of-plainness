@@ -1,0 +1,215 @@
+{
+ "run_id": "pr-1",
+ "at": "2026-09-13T22:21:02Z",
+ "seed": 20260913,
+ "verifier": "sonnet only, gate6-v1.3",
+ "sample": 30,
+ "leaks": 14,
+ "leak_rate": 0.467,
+ "figures_ranked": [
+  {
+   "figure": "A_floor_leak",
+   "count": 14,
+   "rate": 0.467,
+   "definition": "lines 1–3 Y and the v1.3 re-ruling floors the candidate at WORD_ONLY (not by the formula cap)",
+   "weakness": "one draw of one model: counts resampling noise as leak; the control below measures that noise"
+  },
+  {
+   "figure": "B_inclusive",
+   "count": 17,
+   "rate": 0.567,
+   "definition": "A plus refusals on subject/speech act whose v1.3 floor is also WORD_ONLY (or PARTIAL marked N), outside the five R6-1 families",
+   "weakness": "mixes a line-2 refusal into a floor-rule rate; those candidates would fall for their subject line, not under R6-2"
+  },
+  {
+   "figure": "C_rule_effect_net_of_noise",
+   "count": 11,
+   "rate": 0.367,
+   "definition": "A, and a fresh gate6-v1.2 replicate of the same call (no rule) still accepts at PARTIAL or FULL",
+   "weakness": "one replicate per item: an item near the boundary can land either side on either draw"
+  }
+ ],
+ "control_v12_classes": {
+  "REFUSED_LINE_2_3": 5,
+  "HOLDS": 18,
+  "LEAK": 2,
+  "MOVED_UP": 5
+ },
+ "classes": {
+  "REFUSED_LINE_2_3": 5,
+  "HOLDS": 7,
+  "MOVED_UP": 4,
+  "LEAK": 14
+ },
+ "by_branch": {
+  "Anglican": {
+   "n": 5,
+   "leaks": 2
+  },
+  "Baptist": {
+   "n": 4,
+   "leaks": 2
+  },
+  "Lutheran": {
+   "n": 4,
+   "leaks": 2
+  },
+  "Mennonite / Anabaptist": {
+   "n": 5,
+   "leaks": 1
+  },
+  "Methodist / Wesleyan": {
+   "n": 4,
+   "leaks": 2
+  },
+  "Reformed / Presbyterian": {
+   "n": 4,
+   "leaks": 2
+  },
+  "Roman Catholic": {
+   "n": 4,
+   "leaks": 3
+  }
+ },
+ "regex": {
+  "hedge_shaped_in_sample": 22,
+  "hedge_shaped_and_leak": 11,
+  "hedge_shaped_but_holds_FALSE_POSITIVE": [
+   "PR-02",
+   "PR-03",
+   "PR-06",
+   "PR-12",
+   "PR-20",
+   "PR-22",
+   "PR-23",
+   "PR-24",
+   "PR-25",
+   "PR-29",
+   "PR-30"
+  ],
+  "not_hedge_shaped": 8,
+  "not_hedge_shaped_but_leak_FALSE_NEGATIVE": [
+   "PR-09",
+   "PR-10",
+   "PR-21"
+  ],
+  "precision": 0.5,
+  "recall": 0.786
+ },
+ "frame": {
+  "carded_partial_at_base": 145,
+  "excluded_refused_either_way": [
+   "Q-382-p1-BSR-BA-02-1",
+   "Q-382-p1-BSR-BA-02-2",
+   "Q-390-p1-BSR-BA-02-1",
+   "Q-390-p1-BSR-BA-02-2",
+   "Q-454-p1-BSR-BA-02-1"
+  ],
+  "frame_size": 140,
+  "by_branch": {
+   "Roman Catholic": 20,
+   "Anglican": 25,
+   "Lutheran": 21,
+   "Reformed / Presbyterian": 11,
+   "Baptist": 16,
+   "Methodist / Wesleyan": 22,
+   "Mennonite / Anabaptist": 25
+  },
+  "hedge_shaped_in_frame": 105
+ },
+ "estimate_frame_leaks": {
+  "stratified": 65.0
+ },
+ "decision_rule": "leak rate >= 0.5: apply the rule across all seven branches; below 0.5: apply to nothing but the three refused Baptist cells",
+ "decision": "REFUSED_CELLS_ONLY"
+}
+   PR-01 Anglican   Q-213 Savior                   hedge=N v1.3 REFUSED_LINE_2_3  pap=N    v1.2-replicate REFUSED_LINE_2_3       "Redemption is the act of God which sets us free"
+        v1.3: The passage does assert that redemption is 'the act of God,' which touches the predicate (God's redemptive action) but the sentence's主体 is redemption itself, making the assertion about redemption's origin rather than a direct pred
+        v1.2r: PARTIAL The clause identifies God as agent of redemptive action, but the grammatical subject is 'Redemption' rather than God himself, so the predicate is not directly asserted of God as required.
+   PR-02 Baptist    Q-334 Incorporeal / without bo hedge=Y v1.3 HOLDS             pap=Y    v1.2-replicate HOLDS                  "He is an intelligent, spiritual, and personal Being"
+        v1.3: Calling God a 'spiritual...Being' implies immateriality, a narrower or indirect way of asserting incorporeality without explicitly denying bodily form.
+        v1.2r: PARTIAL Describing God as a 'spiritual' Being implies a denial of material embodiment, but the text does not explicitly state incorporeality, so it only partially satisfies the predicate.
+   PR-03 Lutheran   Q-347 Without passions / impas hedge=Y v1.3 MOVED_UP          pap=NA   v1.2-replicate HOLDS                  "the divine nature can neither suffer nor die"
+        v1.3: The passage directly asserts that the divine nature—the very nature of God as instantiated in the Son—cannot suffer or die, which is a direct classical assertion of impassibility.
+        v1.2r: PARTIAL The passage asserts a specific, narrower impassibility claim (the divine nature cannot suffer or die) rather than the broader classical denial of all passive susceptibility to creaturely alteration; i
+   PR-04 Mennonite  Q-328 Invisible                hedge=N v1.3 REFUSED_LINE_2_3  pap=NA   v1.2-replicate HOLDS                  "himself the image of the invisible God"
+        v1.3: The word 'invisible' appears only as part of a fixed biblical epithet ('the image of the invisible God', echoing Col. 1:15) describing Christ's relation to God, not as an independent assertion that God (as subject) is invisible.
+        v1.2r: PARTIAL The clause attributes invisibility to God only as a background descriptor within a Christological statement about Christ being God's image, not as an independent doctrinal assertion about God's nature
+   PR-05 Methodist  Q-287 Uncreated                hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "Eternal Spirit, who is Creator, Sovereign and Preserver of a"
+        v1.3: The passage asserts that God is Creator, Sovereign and Preserver of all things, which is a claim about God's creative and sustaining activity toward creation, not an assertion that God himself is without origin or dependence on a 
+        v1.2r: PARTIAL The passage affirms God as 'Eternal' and as Creator of all things visible and invisible, which implies (rather than directly asserts) that God himself is not dependent on any creator or originating ac
+   PR-06 Reformed / Q-404 No adequate likeness or  hedge=Y v1.3 REFUSED_LINE_2_3  pap=NA   v1.2-replicate REFUSED_LINE_2_3       "The distance between God and the creature is so great"
+        v1.3: The passage asserts a great moral/ontological distance necessitating covenant condescension, not an epistemic denial of adequate likeness or comparison between God and creature; this is a neighbouring proposition about covenantal 
+        v1.2r: PARTIAL The passage asserts a great ontological distance/gap requiring condescension, which is a narrower claim about creaturely dependence rather than a full denial of adequate likeness by God as subject.
+   PR-07 Roman Cath Q-273 Eternal power and might  hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "He is God, one and equal with the Father and the Son"
+        v1.3: The passage asserts the Spirit's divinity and equality with the Father and Son, but this is a neighbouring proposition about divine status/equality, not a statement of the Spirit's 'eternal power and might' specifically.
+        v1.2r: PARTIAL The passage asserts the Spirit's full divinity and equality with Father and Son, which entails but does not explicitly name 'eternal power and might'.
+   PR-08 Anglican   Q-317 Immense / immeasurable   hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "without body, parts, or passions"
+        v1.3: 'Without body, parts, or passions' asserts divine simplicity, incorporeality, and impassibility — a neighbouring proposition — not the predicate of immensity/immeasurability (denial of spatial or metaphysical circumscription), whi
+        v1.2r: PARTIAL Denying 'body, parts, or passions' implies God is not materially composed or spatially confined, but it does not explicitly assert unlimited immensity or fill-all-space language; it is a narrower prop
+   PR-09 Baptist    Q-102 Truthful / faithful      hedge=N v1.3 LEAK              pap=NA   v1.2-replicate LEAK                   "one only living and true God"
+        v1.3: 'true God' here functions in the classical sense of the one real/genuine God as opposed to false gods/idols (paired with 'living' and 'one only'), not the moral-relational sense of truthful/trustworthy in word or promise; the pred
+        v1.2r: WORD_ONLY 'True God' here contrasts the one real God with false gods/idols (ontological genuineness), not a claim about His truthful, trustworthy speech or character; the moral 'truthfulness' sense appears late
+   PR-10 Lutheran   Q-419 Without change           hedge=N v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "there are two natures, the divine and the human, inseparably"
+        v1.3: The passage asserts the inseparable union of the two natures in one Person, but says nothing about one nature not being converted or changed into the other; it addresses indivisibility, not immutability of the natures, which is a 
+        v1.2r: PARTIAL The passage asserts that the divine and human natures remain two, distinct, and inseparably united in one Person, which entails the natures are not converted into one another, but it does not explicit
+   PR-11 Mennonite  Q-416 Without confusion        hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate REFUSED_LINE_2_3       "Jesus Christ has both a human and a divine nature"
+        v1.3: The passage only asserts that Christ possesses two natures (human and divine); it says nothing about the manner of their union being 'without confusion' or resisting collapse of distinctions, so the specific predicate is not addre
+        v1.2r: WORD_ONLY The word 'nature(s)' occurs, but the predicate at issue—denial of collapse of distinctions between natures ('without confusion')—is never addressed; the passage only reports a creedal formula about du
+   PR-12 Methodist  Q-447 Neither confounding nor  hedge=Y v1.3 MOVED_UP          pap=NA   v1.2-replicate MOVED_UP               "in unity of this Godhead there are three persons, of one sub"
+        v1.3: The passage asserts both unity (one substance, power, eternity) and distinction (three persons) of the Godhead, which together constitute the predicate's exclusion of both collapse (via 'three persons') and division (via 'one subs
+        v1.2r: FULL The passage affirms three distinct persons (excluding confounding) united in one substance, power, and eternity (excluding dividing), positively achieving the predicate's content though not using the 
+   PR-13 Reformed / Q-300 Not made                 hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "in and of himself infinite in being, glory, blessedness, and"
+        v1.3: The passage asserts God's self-sufficiency and infinite perfection ('in and of himself infinite in being...'), which is a neighbouring attribute (aseity/self-existence) rather than an explicit denial of creaturehood; it never stat
+        v1.2r: PARTIAL The phrase asserts God's aseity ('in and of himself') implying uncreated self-existence, which is narrower than but consistent with denying creaturehood; it does not explicitly say 'not made'.
+   PR-14 Roman Cath Q-193 Sovereign                hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "one principle of all things, creator of all things invisible"
+        v1.3: The passage asserts God's role as creator/source of all things, a claim about causation and origin, not about supreme dominion or rule; sovereignty (governance/dominion) is a neighbouring but distinct proposition from creatorship.
+        v1.2r: PARTIAL The text asserts God as 'one principle of all things, creator of all things invisible and visible,' which entails supreme originative authority over creation but does not explicitly use the language o
+   PR-15 Anglican   Q-453 Greater dissimilarity th hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate LEAK                   "The Father incomprehensible, the Son incomprehensible, and t"
+        v1.3: The passage asserts the incomprehensibility of the divine Persons within a Trinitarian equality formula (Athanasian Creed), a claim about intra-Trinitarian unity and mystery, not about the adequacy or inadequacy of creaturely like
+        v1.2r: WORD_ONLY The passage asserts God's (Trinity's) incomprehensibility as an attribute shared equally by the three Persons, not the specific principle that any creaturely likeness to God is exceeded by unlikeness;
+   PR-16 Baptist    Q-158 Glorious                 hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate MOVED_UP          RULE "for His own glory"
+        v1.3: The phrase 'for His own glory' occurs within a clause describing the purpose of God's providential working ('working all things according to the counsel of His own immutable and most righteous will, for His own glory'), a teleolog
+        v1.2r: FULL The clause affirms that glory belongs properly to God as the end of His own works, directly attributing glory to God's own being rather than to any creature.
+   PR-17 Lutheran   Q-379 Ineffable                hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "of His pure unutterable love"
+        v1.3: The passage calls God's love 'unutterable', a specific attribute of God, rather than asserting that God himself resists exhaustive linguistic expression; this is a neighbouring attribute-claim, not the predicate itself.
+        v1.2r: PARTIAL The passage asserts that God's love is 'unutterable,' a specific attribute rather than a general claim that God as such defies all linguistic expression, so it is a narrower proposition within the ine
+   PR-18 Mennonite  Q-392 Inscrutable              hedge=N v1.3 HOLDS             pap=Y    v1.2-replicate HOLDS                  "one eternal, almighty, and incomprehensible God, the Father,"
+        v1.3: The passage asserts God's general incomprehensibility as part of a Trinitarian confession, which is a narrower/general form of denying exhaustive rational penetration of God, but does not specifically address divine counsel as the
+        v1.2r: PARTIAL The passage asserts God's general incomprehensibility as a classical divine attribute (paired with 'eternal' and 'almighty') in a creedal enumeration, which entails but does not specifically foregroun
+   PR-19 Methodist  Q-431 Without division         hedge=N v1.3 MOVED_UP          pap=NA   v1.2-replicate MOVED_UP               "the divine and human natures are perfectly and inseparably u"
+        v1.3: The passage explicitly states the two natures are 'perfectly and inseparably united' in Christ, directly asserting that they are not divided into distinct subjects.
+        v1.2r: FULL The passage directly asserts that the two natures are 'perfectly and inseparably united,' which asserts the predicate (no division into distinct subjects) of Christ's natures.
+   PR-20 Reformed / Q-284 Uncreated                hedge=Y v1.3 HOLDS             pap=Y    v1.2-replicate HOLDS                  "subsisting in himself, all sufficient in himself, invisible,"
+        v1.3: The description 'subsisting in himself, all sufficient in himself...eternal' affirms divine self-existence and beginningless eternality, which entails non-dependence on any creator, but the passage does not explicitly deny created
+        v1.2r: PARTIAL The passage asserts God is eternal and self-subsisting ('subsisting in himself'), which entails beginningless, uncaused existence, but does not explicitly deny dependence on a creator or use 'uncreate
+   PR-21 Roman Cath Q-257 Image of the Father      hedge=N v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "God from God, Light from Light, true God from true God"
+        v1.3: The phrase asserts the Son's consubstantiality and eternal generation ('God from God, Light from Light, true God from true God') but does not state or address the predicate of the Son being the 'image' or 'manifestation' of the Fa
+        v1.2r: PARTIAL The phrase affirms the Son's co-equal divine origin from the Father via the light-generation metaphor, which is analogous to but not identical with the specific 'image of the Father' manifestation lan
+   PR-22 Anglican   Q-085 Just / righteous         hedge=Y v1.3 HOLDS             pap=Y    v1.2-replicate MOVED_UP               "righteously opposing all sin and evil"
+        v1.3: The clause attributes righteousness to God specifically in the act of opposing sin and evil, which is the same predicate (justice/righteousness) but stated narrowly within a particular action rather than as a general affirmation o
+        v1.2r: FULL The passage asserts that God, in redeeming creation, righteously opposes sin and evil, which is a direct predication of righteousness/justice to God himself.
+   PR-23 Baptist    Q-246 Wisdom                   hedge=Y v1.3 REFUSED_LINE_2_3  pap=NA   v1.2-replicate REFUSED_LINE_2_3       "In Jesus Christ abide all the treasures of wisdom and knowle"
+        v1.3: The passage asserts that wisdom (as a treasure) abides in Christ, a relational claim about Christ possessing/containing wisdom, not the predicate that the Son IS divine Wisdom; this is a neighbouring proposition rather than an inc
+        v1.2r: PARTIAL The passage affirms that wisdom/knowledge dwell in Christ (echoing Col 2:3), a relational claim about Christ possessing wisdom rather than an identity statement naming him as Wisdom itself.
+   PR-24 Lutheran   Q-091 Holy                     hedge=Y v1.3 HOLDS             pap=Y    v1.2-replicate HOLDS                  "the name of God is in itself holy"
+        v1.3: The passage asserts holiness of God's name rather than of God directly, which is a narrower/derivative statement of the same underlying proposition about God's holiness, remaining within the floor of the predicate.
+        v1.2r: PARTIAL The passage asserts holiness of God's name as intrinsic ('the name of God is in itself holy'), a narrower proposition (holiness of the divine name) within the broader predicate of God's holiness, rath
+   PR-25 Mennonite  Q-360 Immutable / unchangeable hedge=Y v1.3 HOLDS             pap=Y    v1.2-replicate HOLDS                  "God patiently preserves humanity and faithfully remains with"
+        v1.3: The passage asserts a narrower, relational instance of the predicate—God's steadfast, faithful presence with humanity even through death—which falls within the shared floor of covenant faithfulness/constancy rather than full metap
+        v1.2r: PARTIAL The passage asserts God's steadfast covenant faithfulness and constancy of presence through death, which is a narrower proposition wholly within the shared floor of constancy/faithfulness, not strong 
+   PR-26 Methodist  Q-167 Life-giving              hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "He works within us to quicken, strengthen and confirm our fa"
+        v1.3: The passage asserts that God works through the sacraments to quicken, strengthen and confirm believers' faith—a sacramental/soteriological effect on faith—not the general divine predicate of communicating life; the word 'quicken' 
+        v1.2r: PARTIAL The passage affirms God quickening (making alive) faith specifically through the sacraments, a narrower, means-mediated instance of life-giving rather than a general assertion of God's life-communicat
+   PR-27 Reformed / Q-404 No adequate likeness or  hedge=Y v1.3 LEAK              pap=NA   v1.2-replicate HOLDS             RULE "God’s power and goodness are so great and incomprehensible"
+        v1.3: The passage asserts incomprehensibility of God's specific governance over sin/evil, not a denial of adequate likeness or comparison between Creator and creature generally; this is a neighbouring theodicy claim, not the predicate i
+        v1.2r: PARTIAL The text asserts incomprehensibility of God's power and goodness specifically regarding providence over evil, not a general denial of adequate Creator-creature likeness or comparison.
+   PR-28 Roman Cath Q-057 Wise / all-wise          hedge=N v1.3 MOVED_UP          pap=NA   v1.2-replicate MOVED_UP               "God in his goodness and wisdom reveals himself"
+        v1.3: The clause 'God in his ... wisdom reveals himself' directly attributes wisdom to God as his own quality, not merely mentioning the term in passing.
+        v1.2r: FULL The passage attributes wisdom to God as an intrinsic divine attribute manifested in his self-revelation, satisfying the predicate of divine wisdom.
+   PR-29 Anglican   Q-205 Judge                    hedge=Y v1.3 REFUSED_LINE_2_3  pap=NA   v1.2-replicate REFUSED_LINE_2_3       "Christ will come in glory and judge the living and the dead"
+        v1.3: The predicate concerns divine judgment by God/the Father, but here the assertion is specifically about Christ's future coming and judgment, not God the Father acting as judge.
+        v1.2r: PARTIAL Even if Christ's judgment implies divine judgment, the required_subject specification excludes the Son here, naming only 'the one God, or the Father'.
+   PR-30 Mennonite  Q-296 Unbegotten               hedge=Y v1.3 HOLDS             pap=Y    v1.2-replicate HOLDS                  "before whom no God was made or existed, nor shall there be a"
+        v1.3: The clause asserts that no God existed before or after Him, which affirms His beginninglessness/self-existence—an aspect shared with 'unbegotten'—but it is framed as a uniqueness/monotheistic claim ('no God... nor any other') rath
+        v1.2r: PARTIAL The passage asserts God's eternity and absence of any prior or subsequent God, which entails beginninglessness/source-status, but does not explicitly deny generation via 'unbegotten' language or addre

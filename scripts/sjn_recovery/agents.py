@@ -43,6 +43,10 @@ import hashlib
 from .config import (MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES, PHRASE_MAX_WORDS, EXHAUST_CALLS_PER_ROUND,
                      CAVEAT_SLICE_HAZARDS, ROUTE_CAVEATED_ACCEPT, ROUTE_CAVEAT_SAMPLE, CAVEAT_SAMPLE_SHARE, ADJUDICATING_ROUTES,
                      HAZARD_IDIOM_OR_FORMULA, FORMULA_FLOOR_CAP, LOWER_FLOOR_RULE)
+
+VERIFIER_REQUIRED = ("phrase_verbatim", "subject_is_required", "speech_act_is_assertion", "floor", "verdict")
+CAP_NEIGHBOURING_PROPOSITION = "NEIGHBOURING_PROPOSITION"      # session 6, R6-2 (verifier gate6-v1.3)
+NEIGHBOURING_FLOOR_CAP = "WORD_ONLY"
 from .registry import tier_rank
 from .textutil import scrub_urls, phrase_word_count
 from .allocation import allocate, translation_pairs, speaks_for_groups
@@ -112,6 +116,8 @@ def verdict_from_rubric(rubric, floor, lexical_floor=False):
         return "REJECT", "WRONG_SUBJECT"
     if str(rubric.get("speech_act_is_assertion")).upper() != "Y":
         return "REJECT", "NOT_ASSERTION"
+    if floor not in FLOOR_ORDER:
+        return "REJECT", "UNPARSEABLE"          # session 6: no floor line, no verdict (a salvaged truncated reply)
     if floor == "WORD_ONLY" and not lexical_floor:
         return "REJECT", "BELOW_FLOOR"
     if rubric.get("verdict_model") == "REJECT":
@@ -179,22 +185,28 @@ class CellRunner:
     # ---------------------------------------------------------------- calls with a ceiling retry
     RETRY_CEILING = 8000
 
-    def _call(self, role, system, user, model, max_tokens, meta):
+    def _call(self, role, system, user, model, max_tokens, meta, required=()):
         """One call, parsed. A reply that came back unparseable (the JSON cut off at the token ceiling,
         as happens when the ceiling is spent before the text block) is re-sent ONCE with a larger
         ceiling under a distinct call identity (attempt=1). Returns (out, rec, parsed, attempt);
-        out is None while a call is pending."""
+        out is None while a call is pending.
+        Session 6: `required` keys — a truncated reply that parse_json SALVAGES (it closes the object after the last complete
+        pair) but that lacks one of them is incomplete, not answered: it takes the same retry. (A verifier reply cut off before
+        its `floor` line was salvaged and scored ACCEPT on two carded live-1 candidates, Q-081 and Q-099.)"""
         out, rec = self.llm.complete(role, system, user, model=model, max_tokens=max_tokens, meta=meta)
         if out is None:
             return None, rec, None, 0
         parsed = prompts.parse_json(out)
-        if parsed is not None:
+        if parsed is not None and all(parsed.get(k) not in (None, "") for k in required):
             return out, rec, parsed, 0
         out2, rec2 = self.llm.complete(role, system, user, model=model, max_tokens=max(self.RETRY_CEILING, max_tokens * 2),
                                        meta=meta, attempt=1)
         if out2 is None:
             return None, rec2, None, 1
-        return out2, rec2, prompts.parse_json(out2), 1
+        parsed2 = prompts.parse_json(out2)
+        if parsed2 is not None and not all(parsed2.get(k) not in (None, "") for k in required):
+            parsed2 = None                                  # still incomplete after the retry: UNPARSEABLE, never a verdict
+        return out2, rec2, parsed2, 1
 
     # ---------------------------------------------------------------- locator (per standard)
     def standards_for_pass(self, branch, pass_no):
@@ -523,8 +535,9 @@ class CellRunner:
         chunk_view = {"registry_id": cand["registry_id"], "locator": cand["locator"], "text": cand["chunk_text"]}
         user = prompts.verifier_user(pred, cand, chunk_view)
         guards.assert_no_urls({"u": user})
-        out, rec, parsed, attempt = self._call("verifier", prompts.VERIFIER_SYSTEM, user, model, 2500,
-                                               {"queue_id": cell["queue_id"], "branch": cell.get("branch"), "candidate_id": cand["candidate_id"], "verifier_model": model})
+        out, rec, parsed, attempt = self._call("verifier", prompts.verifier_system(), user, model, 2500,
+                                               {"queue_id": cell["queue_id"], "branch": cell.get("branch"), "candidate_id": cand["candidate_id"], "verifier_model": model},
+                                               required=VERIFIER_REQUIRED)
         if out is None:
             return {"status": "PENDING", "call_id": rec["call_id"], "model": model}
         parsed = parsed or {}
@@ -535,6 +548,7 @@ class CellRunner:
             "speech_act_note": parsed.get("speech_act_note"), "floor": parsed.get("floor"), "floor_reason": parsed.get("floor_reason"),
             "hazard_flags": [h for h in (parsed.get("hazard_flags") or []) if h in prompts.HAZARD_TYPES],
             "asserted_outside_formula": parsed.get("asserted_outside_formula"),
+            "partial_asserts_predicate": parsed.get("partial_asserts_predicate"),
             "verdict_model": parsed.get("verdict"), "reason_code": parsed.get("reason_code"), "reason": parsed.get("reason"),
             "status": "DONE" if parsed else "UNPARSEABLE", "raw": out[:2000],
         }
@@ -545,6 +559,12 @@ class CellRunner:
             rubric["floor_model"] = rubric["floor"]
             rubric["floor"] = FORMULA_FLOOR_CAP
             rubric["floor_capped_by"] = HAZARD_IDIOM_OR_FORMULA
+        # Session 6 (R6-2, verifier gate6-v1.3): PARTIAL is for the predicate asserted incompletely, never a neighbouring
+        # proposition. A PARTIAL floor the verifier itself marks partial_asserts_predicate = N is capped at WORD_ONLY.
+        if parsed and rubric["floor"] == "PARTIAL" and str(rubric.get("partial_asserts_predicate")).upper() == "N":
+            rubric["floor_model"] = rubric["floor"]
+            rubric["floor"] = NEIGHBOURING_FLOOR_CAP
+            rubric["floor_capped_by"] = CAP_NEIGHBOURING_PROPOSITION
         # the verdict is recomputed in code from the rubric lines: any N on 1–3 is REJECT; WORD_ONLY is REJECT
         # (no lexical-floor family); the code-side phrase assertion overrides item 1.
         ok_phrase, _ = guards.check_phrase(cand["phrase"], cand["chunk_text"])
@@ -593,6 +613,12 @@ class CellRunner:
         if a_done:
             floors[adjudicator] = a.get("floor")
         floor = lower_floor(*floors.values()) if a_done else p.get("floor")
+        # Session 6 (R6-2): floor caps recorded on the verification record by an author ruling or by the hedged-PARTIAL audit
+        # (partial_rule.py) — never a raise; they survive a rebuild and a later re-verification alike.
+        caps = [c for c in (v.get("floor_rulings") or []) if c.get("floor_cap") in FLOOR_ORDER]
+        floor_before_rulings = floor
+        for c in caps:
+            floor = lower_floor(floor, c["floor_cap"]) if floor in FLOOR_ORDER else c["floor_cap"]
         verdict, code = verdict_from_rubric(base, floor)
         fin = {"verdict": verdict, "reason_code_final": code, "adjudicated_by": base_model, "route": route,
                "primary_verdict": p.get("verdict"), "verdict_rule": LOWER_FLOOR_RULE,
@@ -601,9 +627,14 @@ class CellRunner:
                "lower_floor_applied": bool(a_done and floor != base.get("floor") and floor in FLOOR_ORDER),
                "second_rubric": (adjudicator if a_done else None),
                "second_rubric_role": ("ADJUDICATES_LINES_1_3" if adjudicating else ("DISCLOSURE_FLOOR_ONLY" if a_done else None))}
+        if caps:
+            fin["floor_rulings_applied"] = [c.get("by") for c in caps]
+            fin["floor_before_rulings"] = floor_before_rulings
+            fin["floor_capped_by_ruling"] = floor != floor_before_rulings
         if a_done:
             fin["adjudicator_verdict"] = a.get("verdict")
-        pa, fa = p.get("verdict") in ACCEPTS, verdict in ACCEPTS
+        # an overturn is the second model's doing; a floor ruling's refusal is recorded separately (floor_capped_by_ruling)
+        pa, fa = p.get("verdict") in ACCEPTS, (verdict_from_rubric(base, floor_before_rulings)[0] if caps else verdict) in ACCEPTS
         fin["overturned"] = bool(a_done) and pa != fa
         fin["direction"] = ("RESCUED" if (fa and not pa) else "OVERRULED" if (pa and not fa) else None) if a_done else None
         v["final"] = fin
@@ -745,7 +776,7 @@ class CellRunner:
             st["coverage_final"] = self.coverage_final(st)
         branch = cell_branch or st.get("branch")
         alloc = allocate(self.allocation_view(st["survivors"]), self.pairs(branch), groups=self.groups(branch))
-        st["allocation"] = {k: alloc[k] for k in ("kept", "roles", "english_witness", "dropped", "witness_only", "groups", "slot_order")}
+        st["allocation"] = {k: alloc[k] for k in ("kept", "roles", "english_witness", "dropped", "witness_only", "groups", "slot_order", "parallel_witnesses")}
         st["coder_skipped"] = dict(alloc["dropped"])
         st["empty"] = not st["survivors"]
         st["refinalized"] = {"rule": LOWER_FLOOR_RULE, "verdicts_changed": changed}
@@ -829,7 +860,7 @@ class CellRunner:
         # 1c: allocate the card FIRST (allocation.py, the same allocator the packet builder uses), then code only
         # the candidates that will reach the card. Everything the allocation drops is recorded as coder_skipped.
         alloc = allocate(self.allocation_view(st["survivors"]), self.pairs(cell["branch"]), groups=self.groups(cell["branch"]))
-        st["allocation"] = {k: alloc[k] for k in ("kept", "roles", "english_witness", "dropped", "witness_only", "groups", "slot_order")}
+        st["allocation"] = {k: alloc[k] for k in ("kept", "roles", "english_witness", "dropped", "witness_only", "groups", "slot_order", "parallel_witnesses")}
         st["coder_skipped"] = dict(alloc["dropped"])
         if self.run_coder:
             for cand in st["survivors"]:

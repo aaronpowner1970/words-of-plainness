@@ -1384,18 +1384,18 @@
  "allocation": {
   "kept": [
    "Q-179-p1-BSR-LU-01-1",
-   "Q-179-p1-BSR-LU-02-1",
-   "Q-179-p1-BSR-LU-03-2"
+   "Q-179-p1-BSR-LU-03-2",
+   "Q-179-p1-BSR-LU-03-1"
   ],
   "roles": {
    "Q-179-p1-BSR-LU-01-1": "PRIMARY",
-   "Q-179-p1-BSR-LU-02-1": "PRIMARY",
-   "Q-179-p1-BSR-LU-03-2": "CORROBORATING"
+   "Q-179-p1-BSR-LU-03-2": "CORROBORATING",
+   "Q-179-p1-BSR-LU-03-1": "CORROBORATING"
   },
   "english_witness": {},
   "dropped": {
-   "Q-179-p1-BSR-LU-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)",
-   "Q-179-p1-BSR-LU-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)",
+   "Q-179-p1-BSR-LU-02-1": "SAME_TEXT parallel witness of Q-179-p1-BSR-LU-01-1: its phrase is textually identical to the seated phrase; takes no slot",
+   "Q-179-p1-BSR-LU-02-2": "candidate cap reached after tier allocation (speaks_for group rule: the cap was filled by groups ['lutheran churches subscribing the book of concord'])",
    "Q-179-p1-BSR-LU-03-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)"
   },
   "witness_only": [],
@@ -1409,13 +1409,22 @@
   },
   "slot_order": {
    "Q-179-p1-BSR-LU-01-1": 0,
-   "Q-179-p1-BSR-LU-02-1": 1,
-   "Q-179-p1-BSR-LU-03-2": 0
+   "Q-179-p1-BSR-LU-03-2": 0,
+   "Q-179-p1-BSR-LU-03-1": 1
+  },
+  "parallel_witnesses": {
+   "Q-179-p1-BSR-LU-01-1": [
+    {
+     "candidate_id": "Q-179-p1-BSR-LU-02-1",
+     "registry_id": "BSR-LU-02",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
  "coder_skipped": {
-  "Q-179-p1-BSR-LU-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)",
-  "Q-179-p1-BSR-LU-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)",
+  "Q-179-p1-BSR-LU-02-1": "SAME_TEXT parallel witness of Q-179-p1-BSR-LU-01-1: its phrase is textually identical to the seated phrase; takes no slot",
+  "Q-179-p1-BSR-LU-02-2": "candidate cap reached after tier allocation (speaks_for group rule: the cap was filled by groups ['lutheran churches subscribing the book of concord'])",
   "Q-179-p1-BSR-LU-03-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)"
  },
  "empty": false,

@@ -1021,26 +1021,36 @@
  },
  "allocation": {
   "kept": [
-   "Q-243-p1-BSR-LU-01-1",
-   "Q-243-p1-BSR-LU-01-2"
+   "Q-243-p1-BSR-LU-01-1"
   ],
   "roles": {
-   "Q-243-p1-BSR-LU-01-1": "PRIMARY",
-   "Q-243-p1-BSR-LU-01-2": "PRIMARY"
+   "Q-243-p1-BSR-LU-01-1": "PRIMARY"
   },
   "english_witness": {},
-  "dropped": {},
+  "dropped": {
+   "Q-243-p1-BSR-LU-01-2": "SAME_TEXT parallel witness of Q-243-p1-BSR-LU-01-1: its phrase is textually identical to the seated phrase; takes no slot"
+  },
   "witness_only": [],
   "groups": {
    "Q-243-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord",
    "Q-243-p1-BSR-LU-01-2": "lutheran churches subscribing the book of concord"
   },
   "slot_order": {
-   "Q-243-p1-BSR-LU-01-1": 0,
-   "Q-243-p1-BSR-LU-01-2": 1
+   "Q-243-p1-BSR-LU-01-1": 0
+  },
+  "parallel_witnesses": {
+   "Q-243-p1-BSR-LU-01-1": [
+    {
+     "candidate_id": "Q-243-p1-BSR-LU-01-2",
+     "registry_id": "BSR-LU-01",
+     "rule": "SAME_TEXT"
+    }
+   ]
   }
  },
- "coder_skipped": {},
+ "coder_skipped": {
+  "Q-243-p1-BSR-LU-01-2": "SAME_TEXT parallel witness of Q-243-p1-BSR-LU-01-1: its phrase is textually identical to the seated phrase; takes no slot"
+ },
  "empty": false,
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
