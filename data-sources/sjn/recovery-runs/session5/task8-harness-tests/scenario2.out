@@ -1,0 +1,34 @@
+=== launch 2026-09-13T18:59:47Z: run harness-t8, branches ['Baptist', 'Methodist / Wesleyan'], cap 0.01 USD each
+=== Baptist 2026-09-13T18:59:47Z
+== Baptist loop started 2026-09-13T18:59:47Z (cap 0.01 USD, max rounds 80)
+-- round 1: run.py 2026-09-13T18:59:47Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Baptist: 37/37 open cells DONE; pending calls 0
+   spend so far: 0 metered calls, 0.00 USD (0.000/cell vs projection 0.336; projected 12.43; cap 0.01; cost-state 0.00 RUNNING)
+   coder (1c): 61 coded of 61 survivors; 2 skipped by allocation = 0.00 USD at the measured 0.0000/call
+   caveat second rubrics: 3 candidate(s) (3 by the 2c sample of 23 eligible, share 0.13); 3 calls, 0.00 USD; 0 lower-floor applied, 0 overturned
+   lower-floor rule (2a): 4 floor disagreement(s) between the models; 3 lowered the final floor, 1 candidate(s) refused by it (of which 1 would have been opus rescues)
+
+[stderr]
+Traceback (most recent call last):
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 368, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 184, in main
+    build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\packets.py", line 294, in build_branch_packet
+    std = registry.public(cand["registry_id"])
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\registry.py", line 194, in public
+    r = self.by_id[rid]
+        ~~~~~~~~~~^^^^^
+KeyError: 'BSR-NOPE-99'
+   run.py exit 1
+!! run.py failed (exit 1); loop stopped; the branch is NOT complete
+-- round 1: run.py --write-partial-packet 2026-09-13T18:59:49Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+!! Baptist: writing the PARTIAL packet (RUN_FAILED, exit 1): 37/37 cells DONE
+!! Baptist: packet builder failed too (KeyError: 'BSR-NOPE-99'); wrote a minimal FAILURE record to C:\Users\aaron\AppData\Local\Temp/sjn-t8/packets\baptist.json
+   partial packet writer exit 0
+== Baptist loop FAILED (exit 1) 2026-09-13T18:59:50Z
+!! LAUNCH FAILED: Baptist branch_loop.py exited 1 at 2026-09-13T18:59:50Z; no further branch starts (Methodist / Wesleyan not run)

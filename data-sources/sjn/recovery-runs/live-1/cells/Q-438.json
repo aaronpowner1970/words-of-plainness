@@ -134,11 +134,6 @@
      "raw": "{\"candidates\": [{\"chunk_key\": \"c4\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"II.B. God the Son\", \"phrase\": \"the One Mediator, fully God, fully man, in whose Person is effected the reconciliation\", \"rationale\": \"Asserts Christ as one Person who is fully God and fully man, affirming the union of both natures without disjunction.\", \"floor_claim\": \"FULL\"}]}",
      "empty": false
     },
-    "BSR-BA-02": {
-     "status": "NO_CORPUS",
-     "candidates": [],
-     "dropped": []
-    },
     "BSR-BA-03": {
      "status": "EMPTY",
      "call_id": "f78d696241ac85f5af134fb3",
@@ -198,6 +193,38 @@
      "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-03\"], \"silence_rationale\": \"None of the ten fact statements address Christ's two natures or their union; Fact 1 mentions Christ's death and resurrection but never delimits a natures-union predicate.\"}",
      "empty": true,
      "silence_rationale": "None of the ten fact statements address Christ's two natures or their union; Fact 1 mentions Christ's death and resurrection but never delimits a natures-union predicate."
+    },
+    "BSR-BA-02": {
+     "status": "EMPTY",
+     "call_id": "5cfbfe4f774df6b7ee5b391e",
+     "attempt": 0,
+     "coverage": {
+      "coverage": "FULL",
+      "supplied": 3,
+      "of": 3
+     },
+     "supplied_chunks": [
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+      ]
+     ],
+     "supplied_chars": 2938,
+     "candidates": [],
+     "dropped": [],
+     "recuts": [],
+     "batch": null,
+     "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-02\"], \"silence_rationale\": \"Chapter 2 paragraph 3 (c3) treats the Trinity's undivided essence among Father, Son, and Spirit, not the union of Christ's two natures in the incarnation, so no supplied chunk addresses the Christological delimiter.\"}",
+     "empty": true,
+     "silence_rationale": "Chapter 2 paragraph 3 (c3) treats the Trinity's undivided essence among Father, Son, and Spirit, not the union of Christ's two natures in the incarnation, so no supplied chunk addresses the Christological delimiter."
     }
    },
    "retrieval": "PER_STANDARD",
@@ -230,7 +257,11 @@
      "supplied": 21,
      "of": 21
     },
-    "BSR-BA-02": null,
+    "BSR-BA-02": {
+     "coverage": "FULL",
+     "supplied": 3,
+     "of": 3
+    },
     "BSR-BA-03": {
      "coverage": "FULL",
      "supplied": 10,
@@ -323,6 +354,18 @@
      "XVIII. The Family"
     ],
     [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+    ],
+    [
      "BSR-BA-03",
      "Fact 1"
     ],
@@ -366,9 +409,11 @@
    "empty": false,
    "standards_reviewed": [
     "BSR-BA-01",
+    "BSR-BA-02",
     "BSR-BA-03"
    ],
    "silence_rationale": {
+    "BSR-BA-02": "Chapter 2 paragraph 3 (c3) treats the Trinity's undivided essence among Father, Son, and Spirit, not the union of Christ's two natures in the incarnation, so no supplied chunk addresses the Christological delimiter.",
     "BSR-BA-03": "None of the ten fact statements address Christ's two natures or their union; Fact 1 mentions Christ's death and resurrection but never delimits a natures-union predicate."
    }
   }
@@ -402,6 +447,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -483,6 +546,12 @@
    "of": 21,
    "pass": "1"
   },
+  "BSR-BA-02": {
+   "coverage": "FULL",
+   "supplied": 3,
+   "of": 3,
+   "pass": "1"
+  },
   "BSR-BA-03": {
    "coverage": "FULL",
    "supplied": 10,
@@ -508,5 +577,33 @@
   }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ },
+ "supplements": [
+  {
+   "registry_id": "BSR-BA-02",
+   "prepared_at": "2026-09-13T18:40:12Z",
+   "reason": "the row had no corpus when the branch ran; recovered in session 5 (2026-09-13)",
+   "prior_locator_entry": "NO_CORPUS",
+   "prior_card": {
+    "kept": [
+     "Q-438-p1-BSR-BA-01-1"
+    ],
+    "lead": "Q-438-p1-BSR-BA-01-1",
+    "lead_registry_id": "BSR-BA-01",
+    "groups": [
+     "southern baptist convention"
+    ],
+    "status": "DONE",
+    "reviewed_offered": false
+   },
+   "prior_passes": [
+    "1"
+   ],
+   "prior_exhaustion": null
+  }
+ ]
 }

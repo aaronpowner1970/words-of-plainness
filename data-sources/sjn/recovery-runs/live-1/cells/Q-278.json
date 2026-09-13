@@ -152,11 +152,6 @@
      "raw": "{\"candidates\": [\n  {\"chunk_key\": \"c5\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"II.C. God the Holy Spirit\", \"phrase\": \"The Holy Spirit is the Spirit of God, fully divine\", \"rationale\": \"Asserts the Spirit's full divinity, entailing divine power, though it does not name power explicitly.\", \"floor_claim\": \"PARTIAL\"},\n  {\"chunk_key\": \"c7\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"IV. Salvation\", \"phrase\": \"through the presence and power of the Holy Spirit dwelling in him\", \"rationale\": \"Directly attributes divine power to the indwelling Holy Spirit, a narrower instance within the floor of Spirit's divine power.\", \"floor_claim\": \"PARTIAL\"}\n]}",
      "empty": false
     },
-    "BSR-BA-02": {
-     "status": "NO_CORPUS",
-     "candidates": [],
-     "dropped": []
-    },
     "BSR-BA-03": {
      "status": "EMPTY",
      "call_id": "995f87e6a03fa833e3b6ed7c",
@@ -216,6 +211,56 @@
      "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-03\"], \"silence_rationale\": \"Fact 4 mentions 'the guidance of the Holy Spirit' but only regarding scriptural interpretation, not asserting the Spirit's eternal power or might.\"}",
      "empty": true,
      "silence_rationale": "Fact 4 mentions 'the guidance of the Holy Spirit' but only regarding scriptural interpretation, not asserting the Spirit's eternal power or might."
+    },
+    "BSR-BA-02": {
+     "status": "DONE",
+     "call_id": "80f555ac2a33c1926767dedc",
+     "attempt": 0,
+     "coverage": {
+      "coverage": "FULL",
+      "supplied": 3,
+      "of": 3
+     },
+     "supplied_chunks": [
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+      ]
+     ],
+     "supplied_chars": 2938,
+     "candidates": [
+      {
+       "candidate_id": "Q-278-p1-BSR-BA-02-1",
+       "pass": 1,
+       "registry_id": "BSR-BA-02",
+       "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+       "phrase": "the Father, the Word or Son, and Holy Spirit, of one substance, power, and eternity",
+       "rationale": "Confession asserts the Holy Spirit shares one substance, power, and eternity with the Father and Son, affirming eternal divine power.",
+       "floor_claim": "FULL",
+       "chunk_text": "In this divine and infinite Being there are three subsistences, the Father, the Word or Son, and Holy Spirit, of one substance, power, and eternity, each having the whole divine essence, yet the essence undivided: the Father is of none, neither begotten nor proceeding; the Son is eternally begotten of the Father; the Holy Spirit proceeding from the Father and the Son; all infinite, without beginning, therefore but one God, who is not to be divided in nature and being, but distinguished by several peculiar relative properties and personal relations; which doctrine of the Trinity is the foundation of all our communion with God, and comfortable dependence on Him. 1 John 5:7; Matt. 28:19; 2 Cor. 13:14 Exod. 3:14; John 14:11; I Cor. 8:6 John 1:14,18 John 15:26; Gal. 4:6",
+       "chunk_hash": "ca28eb286505bcfa6c1405b8e899b83c8c820c0c0fa14f361767600c59700bc2",
+       "division": "paragraph",
+       "fallback_tier": false,
+       "witness": false,
+       "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+       "locator_rank": 1,
+       "recut_from": null,
+       "exhaustion_batch": null
+      }
+     ],
+     "dropped": [],
+     "recuts": [],
+     "batch": null,
+     "raw": "{\"candidates\": [{\"chunk_key\": \"c3\", \"registry_id\": \"BSR-BA-02\", \"standard_title\": \"Second London Confession 1689, ch. 2\", \"locator\": \"Chapter 2, paragraph 3\", \"phrase\": \"the Father, the Word or Son, and Holy Spirit, of one substance, power, and eternity\", \"rationale\": \"Confession asserts the Holy Spirit shares one substance, power, and eternity with the Father and Son, affirming eternal divine power.\", \"floor_claim\": \"FULL\"}]}",
+     "empty": false
     }
    },
    "retrieval": "PER_STANDARD",
@@ -234,6 +279,25 @@
      "fallback_tier": false,
      "witness": false,
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "locator_rank": 1,
+     "recut_from": null,
+     "exhaustion_batch": null,
+     "slot": "GUARANTEED"
+    },
+    {
+     "candidate_id": "Q-278-p1-BSR-BA-02-1",
+     "pass": 1,
+     "registry_id": "BSR-BA-02",
+     "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+     "phrase": "the Father, the Word or Son, and Holy Spirit, of one substance, power, and eternity",
+     "rationale": "Confession asserts the Holy Spirit shares one substance, power, and eternity with the Father and Son, affirming eternal divine power.",
+     "floor_claim": "FULL",
+     "chunk_text": "In this divine and infinite Being there are three subsistences, the Father, the Word or Son, and Holy Spirit, of one substance, power, and eternity, each having the whole divine essence, yet the essence undivided: the Father is of none, neither begotten nor proceeding; the Son is eternally begotten of the Father; the Holy Spirit proceeding from the Father and the Son; all infinite, without beginning, therefore but one God, who is not to be divided in nature and being, but distinguished by several peculiar relative properties and personal relations; which doctrine of the Trinity is the foundation of all our communion with God, and comfortable dependence on Him. 1 John 5:7; Matt. 28:19; 2 Cor. 13:14 Exod. 3:14; John 14:11; I Cor. 8:6 John 1:14,18 John 15:26; Gal. 4:6",
+     "chunk_hash": "ca28eb286505bcfa6c1405b8e899b83c8c820c0c0fa14f361767600c59700bc2",
+     "division": "paragraph",
+     "fallback_tier": false,
+     "witness": false,
+     "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "locator_rank": 1,
      "recut_from": null,
      "exhaustion_batch": null,
@@ -267,7 +331,11 @@
      "supplied": 21,
      "of": 21
     },
-    "BSR-BA-02": null,
+    "BSR-BA-02": {
+     "coverage": "FULL",
+     "supplied": 3,
+     "of": 3
+    },
     "BSR-BA-03": {
      "coverage": "FULL",
      "supplied": 10,
@@ -360,6 +428,18 @@
      "XVIII. The Family"
     ],
     [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+    ],
+    [
      "BSR-BA-03",
      "Fact 1"
     ],
@@ -403,6 +483,7 @@
    "empty": false,
    "standards_reviewed": [
     "BSR-BA-01",
+    "BSR-BA-02",
     "BSR-BA-03"
    ],
    "silence_rationale": {
@@ -455,6 +536,24 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-278-p1-BSR-BA-01-2": {
@@ -485,6 +584,89 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   }
+  },
+  "Q-278-p1-BSR-BA-02-1": {
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "c8900f5e879a3b12fae718c1",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.2",
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "the Father, the Word or Son, and Holy Spirit (collectively, as three subsistences of one substance, power, and eternity)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The passage asserts the Trinity's shared substance, power, and eternity as a joint predicate of all three persons, not the Holy Spirit specifically or distinctly.",
+    "floor": "PARTIAL",
+    "floor_reason": "The passage affirms shared power/eternity of the Godhead as a whole, which entails but does not isolate the Holy Spirit's own eternal power and might as required by the predicate.",
+    "hazard_flags": [
+     "FAMILY_VARIATION",
+     "SEMANTIC_FLOOR"
+    ],
+    "asserted_outside_formula": "NA",
+    "verdict_model": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OTHER",
+    "reason": "The claim is verbatim and assertoric, but the grammatical subject is the Trinity collectively rather than the Holy Spirit alone, so it only partially meets the required-subject condition while still logically implying the Spirit's eternal power.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the Father, the Word or Son, and Holy Spirit (collectively, as three subsistences of one substance, power, and eternity)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts the Trinity's shared substance, power, and eternity as a joint predicate of all three persons, not the Holy Spirit specifically or distinctly.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage affirms shared power/eternity of the Godhead as a whole, which entails but does not isolate the Holy Spirit's own eternal power and might as required by the predicate.\", \"hazard_flags\": [\"FAMILY_VARIATION\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OTHER\", \"reason\": \"The claim is verbatim and assertoric, but the grammatical subject is the Trinity collectively rather than the Holy Spirit alone, so it only partially meets the required-subject condition while still logically implying the Spirit's eternal power.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT"
+   },
+   "_route": null,
+   "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "sonnet",
@@ -566,6 +748,12 @@
    "of": 21,
    "pass": "1"
   },
+  "BSR-BA-02": {
+   "coverage": "FULL",
+   "supplied": 3,
+   "of": 3,
+   "pass": "1"
+  },
   "BSR-BA-03": {
    "coverage": "FULL",
    "supplied": 10,
@@ -591,5 +779,33 @@
   }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ },
+ "supplements": [
+  {
+   "registry_id": "BSR-BA-02",
+   "prepared_at": "2026-09-13T18:40:12Z",
+   "reason": "the row had no corpus when the branch ran; recovered in session 5 (2026-09-13)",
+   "prior_locator_entry": "NO_CORPUS",
+   "prior_card": {
+    "kept": [
+     "Q-278-p1-BSR-BA-01-1"
+    ],
+    "lead": "Q-278-p1-BSR-BA-01-1",
+    "lead_registry_id": "BSR-BA-01",
+    "groups": [
+     "southern baptist convention"
+    ],
+    "status": "DONE",
+    "reviewed_offered": false
+   },
+   "prior_passes": [
+    "1"
+   ],
+   "prior_exhaustion": null
+  }
+ ]
 }

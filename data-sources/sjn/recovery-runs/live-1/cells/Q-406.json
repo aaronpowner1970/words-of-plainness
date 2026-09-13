@@ -116,11 +116,6 @@
      "empty": true,
      "silence_rationale": "Article II (God) affirms God's infinite perfections and omniscience but nowhere denies adequate creaturely likeness or comparison to God; no apophatic clause appears in any supplied chunk."
     },
-    "BSR-BA-02": {
-     "status": "NO_CORPUS",
-     "candidates": [],
-     "dropped": []
-    },
     "BSR-BA-03": {
      "status": "EMPTY",
      "call_id": "13e4715311e990e034912515",
@@ -180,6 +175,38 @@
      "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-03\"], \"silence_rationale\": \"None of the ten fact statements address divine incomprehensibility or Creator-creature likeness; the closest is Fact 1's mention of God as 'Creator, Savior and Advocate,' which asserts divine roles, not an apophatic denial of adequate likeness.\"}",
      "empty": true,
      "silence_rationale": "None of the ten fact statements address divine incomprehensibility or Creator-creature likeness; the closest is Fact 1's mention of God as 'Creator, Savior and Advocate,' which asserts divine roles, not an apophatic denial of adequate likeness."
+    },
+    "BSR-BA-02": {
+     "status": "EMPTY",
+     "call_id": "fe105feec6c644ea85270afb",
+     "attempt": 0,
+     "coverage": {
+      "coverage": "FULL",
+      "supplied": 3,
+      "of": 3
+     },
+     "supplied_chunks": [
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+      ]
+     ],
+     "supplied_chars": 2938,
+     "candidates": [],
+     "dropped": [],
+     "recuts": [],
+     "batch": null,
+     "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-02\"], \"silence_rationale\": \"Ch.2 §1 calls God's essence incomprehensible and His being infinite/immense, but this asserts transcendent incomprehensibility, not an explicit denial of adequate likeness or comparison between Creator and creature.\"}",
+     "empty": true,
+     "silence_rationale": "Ch.2 §1 calls God's essence incomprehensible and His being infinite/immense, but this asserts transcendent incomprehensibility, not an explicit denial of adequate likeness or comparison between Creator and creature."
     }
    },
    "retrieval": "PER_STANDARD",
@@ -192,7 +219,11 @@
      "supplied": 21,
      "of": 21
     },
-    "BSR-BA-02": null,
+    "BSR-BA-02": {
+     "coverage": "FULL",
+     "supplied": 3,
+     "of": 3
+    },
     "BSR-BA-03": {
      "coverage": "FULL",
      "supplied": 10,
@@ -285,6 +316,18 @@
      "XVIII. The Family"
     ],
     [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+    ],
+    [
      "BSR-BA-03",
      "Fact 1"
     ],
@@ -328,10 +371,12 @@
    "empty": true,
    "standards_reviewed": [
     "BSR-BA-01",
+    "BSR-BA-02",
     "BSR-BA-03"
    ],
    "silence_rationale": {
     "BSR-BA-01": "Article II (God) affirms God's infinite perfections and omniscience but nowhere denies adequate creaturely likeness or comparison to God; no apophatic clause appears in any supplied chunk.",
+    "BSR-BA-02": "Ch.2 §1 calls God's essence incomprehensible and His being infinite/immense, but this asserts transcendent incomprehensibility, not an explicit denial of adequate likeness or comparison between Creator and creature.",
     "BSR-BA-03": "None of the ten fact statements address divine incomprehensibility or Creator-creature likeness; the closest is Fact 1's mention of God as 'Creator, Savior and Advocate,' which asserts divine roles, not an apophatic denial of adequate likeness."
    }
   }
@@ -357,6 +402,12 @@
    "of": 21,
    "pass": "1"
   },
+  "BSR-BA-02": {
+   "coverage": "FULL",
+   "supplied": 3,
+   "of": 3,
+   "pass": "1"
+  },
   "BSR-BA-03": {
    "coverage": "FULL",
    "supplied": 10,
@@ -374,5 +425,29 @@
   "slot_order": {}
  },
  "coder_skipped": {},
- "empty": true
+ "empty": true,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ },
+ "supplements": [
+  {
+   "registry_id": "BSR-BA-02",
+   "prepared_at": "2026-09-13T18:40:12Z",
+   "reason": "the row had no corpus when the branch ran; recovered in session 5 (2026-09-13)",
+   "prior_locator_entry": "NO_CORPUS",
+   "prior_card": {
+    "kept": [],
+    "lead": null,
+    "lead_registry_id": null,
+    "groups": [],
+    "status": "EMPTY",
+    "reviewed_offered": false
+   },
+   "prior_passes": [
+    "1"
+   ],
+   "prior_exhaustion": null
+  }
+ ]
 }

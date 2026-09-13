@@ -116,11 +116,6 @@
      "empty": true,
      "silence_rationale": "Article II.B (c4) affirms Christ 'fully God, fully man' united in one Person but never states the union is without conversion or change of either nature."
     },
-    "BSR-BA-02": {
-     "status": "NO_CORPUS",
-     "candidates": [],
-     "dropped": []
-    },
     "BSR-BA-03": {
      "status": "EMPTY",
      "call_id": "0586142cd60b0a4bbafdf267",
@@ -180,6 +175,38 @@
      "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-03\"], \"silence_rationale\": \"None of the ten belief facts address the two natures of Christ or any delimiter on their union; Fact 1's mention of Christ as Lord and Savior is the nearest reference but asserts no such proposition.\"}",
      "empty": true,
      "silence_rationale": "None of the ten belief facts address the two natures of Christ or any delimiter on their union; Fact 1's mention of Christ as Lord and Savior is the nearest reference but asserts no such proposition."
+    },
+    "BSR-BA-02": {
+     "status": "EMPTY",
+     "call_id": "2cb805bf364c1d4482e72d20",
+     "attempt": 0,
+     "coverage": {
+      "coverage": "FULL",
+      "supplied": 3,
+      "of": 3
+     },
+     "supplied_chunks": [
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+      ]
+     ],
+     "supplied_chars": 2938,
+     "candidates": [],
+     "dropped": [],
+     "recuts": [],
+     "batch": null,
+     "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-02\"], \"silence_rationale\": \"Chapter 2 treats the Trinity and divine attributes (paragraphs 1-3); none discusses Christ's incarnate two natures or denies conversion of one nature into another.\"}",
+     "empty": true,
+     "silence_rationale": "Chapter 2 treats the Trinity and divine attributes (paragraphs 1-3); none discusses Christ's incarnate two natures or denies conversion of one nature into another."
     }
    },
    "retrieval": "PER_STANDARD",
@@ -192,7 +219,11 @@
      "supplied": 21,
      "of": 21
     },
-    "BSR-BA-02": null,
+    "BSR-BA-02": {
+     "coverage": "FULL",
+     "supplied": 3,
+     "of": 3
+    },
     "BSR-BA-03": {
      "coverage": "FULL",
      "supplied": 10,
@@ -285,6 +316,18 @@
      "XVIII. The Family"
     ],
     [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+    ],
+    [
      "BSR-BA-03",
      "Fact 1"
     ],
@@ -328,10 +371,12 @@
    "empty": true,
    "standards_reviewed": [
     "BSR-BA-01",
+    "BSR-BA-02",
     "BSR-BA-03"
    ],
    "silence_rationale": {
     "BSR-BA-01": "Article II.B (c4) affirms Christ 'fully God, fully man' united in one Person but never states the union is without conversion or change of either nature.",
+    "BSR-BA-02": "Chapter 2 treats the Trinity and divine attributes (paragraphs 1-3); none discusses Christ's incarnate two natures or denies conversion of one nature into another.",
     "BSR-BA-03": "None of the ten belief facts address the two natures of Christ or any delimiter on their union; Fact 1's mention of Christ as Lord and Savior is the nearest reference but asserts no such proposition."
    }
   }
@@ -357,6 +402,12 @@
    "of": 21,
    "pass": "1"
   },
+  "BSR-BA-02": {
+   "coverage": "FULL",
+   "supplied": 3,
+   "of": 3,
+   "pass": "1"
+  },
   "BSR-BA-03": {
    "coverage": "FULL",
    "supplied": 10,
@@ -374,5 +425,29 @@
   "slot_order": {}
  },
  "coder_skipped": {},
- "empty": true
+ "empty": true,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ },
+ "supplements": [
+  {
+   "registry_id": "BSR-BA-02",
+   "prepared_at": "2026-09-13T18:40:12Z",
+   "reason": "the row had no corpus when the branch ran; recovered in session 5 (2026-09-13)",
+   "prior_locator_entry": "NO_CORPUS",
+   "prior_card": {
+    "kept": [],
+    "lead": null,
+    "lead_registry_id": null,
+    "groups": [],
+    "status": "EMPTY",
+    "reviewed_offered": false
+   },
+   "prior_passes": [
+    "1"
+   ],
+   "prior_exhaustion": null
+  }
+ ]
 }

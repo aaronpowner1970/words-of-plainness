@@ -1,0 +1,30 @@
+=== launch 2026-09-13T19:00:08Z: run harness-t8, branches ['Baptist', 'Methodist / Wesleyan'], cap 0.01 USD each
+=== Baptist 2026-09-13T19:00:08Z
+== Baptist loop started 2026-09-13T19:00:08Z (cap 0.01 USD, max rounds 80)
+-- round 1: run.py 2026-09-13T19:00:08Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+!! Baptist: run.py FAILED — AttributeError: 'str' object has no attribute 'get' (while running cells;     if cid not in st["coding"] or st["coding"][cid].get("status") == "PENDING":); writing the PARTIAL packet before exiting non-zero
+!! Baptist: writing the PARTIAL packet (RUN_FAILED, exit 1): 36/37 cells DONE
+   packet C:\Users\aaron\AppData\Local\Temp/sjn-t8/packets\baptist.json (PARTIAL — RUN FAILED): 37 cells, 33 with candidates, 4 empty (0 all-rejected; REVIEWED offered on 4, review incomplete on 0), 1 not finished, 20 rejections kept, 0 dropped at build; exhaustion entered on 0 cell(s), changed 0, 0 exhaustion-sourced candidate(s) on 0 card(s); caveat second rubrics 3 (0 lower-floor applied); 2c sample 3 of 23 eligible; 0 candidate(s) on chunks repaired after the run
+
+[stderr]
+Traceback (most recent call last):
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 370, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 140, in main
+    runner.run_cell(c)
+    ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\agents.py", line 839, in run_cell
+    if cid not in st["coding"] or st["coding"][cid].get("status") == "PENDING":
+                                  ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+   run.py exit 1
+!! run.py failed (exit 1); loop stopped; the branch is NOT complete
+-- round 1: run.py --write-partial-packet 2026-09-13T19:00:09Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+!! Baptist: writing the PARTIAL packet (RUN_FAILED, exit 1): 36/37 cells DONE
+   packet C:\Users\aaron\AppData\Local\Temp/sjn-t8/packets\baptist.json (PARTIAL — RUN FAILED): 37 cells, 33 with candidates, 4 empty (0 all-rejected; REVIEWED offered on 4, review incomplete on 0), 1 not finished, 20 rejections kept, 0 dropped at build; exhaustion entered on 0 cell(s), changed 0, 0 exhaustion-sourced candidate(s) on 0 card(s); caveat second rubrics 3 (0 lower-floor applied); 2c sample 3 of 23 eligible; 0 candidate(s) on chunks repaired after the run
+   partial packet writer exit 0
+== Baptist loop FAILED (exit 1) 2026-09-13T19:00:11Z
+!! LAUNCH FAILED: Baptist branch_loop.py exited 1 at 2026-09-13T19:00:11Z; no further branch starts (Methodist / Wesleyan not run)

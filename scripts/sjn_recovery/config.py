@@ -8,7 +8,8 @@ ROOT = os.path.dirname(SCRIPTS)
 
 DATA_SOURCES = os.path.join(ROOT, "data-sources", "sjn")
 RUNS_DIR = os.path.join(DATA_SOURCES, "recovery-runs")          # committed: manifest, audit logs, reports
-PACKETS_DIR = os.path.join(DATA_SOURCES, "recovery-packets")    # committed: <branch>.json
+# SJN_PACKETS_DIR (session 5): harness failure-path tests write packets elsewhere; never set for a real run
+PACKETS_DIR = os.environ.get("SJN_PACKETS_DIR") or os.path.join(DATA_SOURCES, "recovery-packets")    # committed: <branch>.json
 CACHE_DIR = os.path.join(ROOT, ".cache", "sjn-recovery")        # gitignored
 FETCH_CACHE = os.path.join(CACHE_DIR, "fetch")
 CHUNK_DIR = os.path.join(CACHE_DIR, "chunks")

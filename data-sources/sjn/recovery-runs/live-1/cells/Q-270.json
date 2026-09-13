@@ -152,11 +152,6 @@
      "raw": "{\"candidates\": [{\"chunk_key\": \"c5\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"II.C. God the Holy Spirit\", \"phrase\": \"He calls men to the Saviour, and effects regeneration\", \"rationale\": \"Asserts the Spirit as agent effecting regeneration (spiritual new life), a narrower instance of vivifying agency within the floor.\", \"floor_claim\": \"PARTIAL\"}, {\"chunk_key\": \"c7\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"IV. Salvation\", \"phrase\": \"a change of heart wrought by the Holy Spirit through conviction of sin\", \"rationale\": \"Attributes the life-changing work of regeneration to the Holy Spirit, a narrower spiritual sense of giving life.\", \"floor_claim\": \"PARTIAL\"}]}",
      "empty": false
     },
-    "BSR-BA-02": {
-     "status": "NO_CORPUS",
-     "candidates": [],
-     "dropped": []
-    },
     "BSR-BA-03": {
      "status": "EMPTY",
      "call_id": "8f07525d0338ae5e2c36c7d2",
@@ -216,6 +211,38 @@
      "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-03\"], \"silence_rationale\": \"Chunk c4 mentions the Holy Spirit only as guide for interpreting Scripture; no chunk attributes vivifying or life-giving agency to the Holy Spirit.\"}",
      "empty": true,
      "silence_rationale": "Chunk c4 mentions the Holy Spirit only as guide for interpreting Scripture; no chunk attributes vivifying or life-giving agency to the Holy Spirit."
+    },
+    "BSR-BA-02": {
+     "status": "EMPTY",
+     "call_id": "062a8973433c6673cccc7d1c",
+     "attempt": 0,
+     "coverage": {
+      "coverage": "FULL",
+      "supplied": 3,
+      "of": 3
+     },
+     "supplied_chunks": [
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+      ]
+     ],
+     "supplied_chars": 2938,
+     "candidates": [],
+     "dropped": [],
+     "recuts": [],
+     "batch": null,
+     "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-02\"], \"silence_rationale\": \"Chapter 2 par.3 mentions the Holy Spirit's procession and Trinitarian relations, but none of the supplied chunks assert the Spirit's vivifying, life-giving agency.\"}",
+     "empty": true,
+     "silence_rationale": "Chapter 2 par.3 mentions the Holy Spirit's procession and Trinitarian relations, but none of the supplied chunks assert the Spirit's vivifying, life-giving agency."
     }
    },
    "retrieval": "PER_STANDARD",
@@ -267,7 +294,11 @@
      "supplied": 21,
      "of": 21
     },
-    "BSR-BA-02": null,
+    "BSR-BA-02": {
+     "coverage": "FULL",
+     "supplied": 3,
+     "of": 3
+    },
     "BSR-BA-03": {
      "coverage": "FULL",
      "supplied": 10,
@@ -360,6 +391,18 @@
      "XVIII. The Family"
     ],
     [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+    ],
+    [
      "BSR-BA-03",
      "Fact 1"
     ],
@@ -403,9 +446,11 @@
    "empty": false,
    "standards_reviewed": [
     "BSR-BA-01",
+    "BSR-BA-02",
     "BSR-BA-03"
    ],
    "silence_rationale": {
+    "BSR-BA-02": "Chapter 2 par.3 mentions the Holy Spirit's procession and Trinitarian relations, but none of the supplied chunks assert the Spirit's vivifying, life-giving agency.",
     "BSR-BA-03": "Chunk c4 mentions the Holy Spirit only as guide for interpreting Scripture; no chunk attributes vivifying or life-giving agency to the Holy Spirit."
    }
   }
@@ -455,6 +500,24 @@
     "second_rubric_role": null,
     "overturned": false,
     "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-270-p1-BSR-BA-01-2": {
@@ -485,6 +548,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "sonnet",
@@ -566,6 +647,12 @@
    "of": 21,
    "pass": "1"
   },
+  "BSR-BA-02": {
+   "coverage": "FULL",
+   "supplied": 3,
+   "of": 3,
+   "pass": "1"
+  },
   "BSR-BA-03": {
    "coverage": "FULL",
    "supplied": 10,
@@ -591,5 +678,33 @@
   }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ },
+ "supplements": [
+  {
+   "registry_id": "BSR-BA-02",
+   "prepared_at": "2026-09-13T18:40:12Z",
+   "reason": "the row had no corpus when the branch ran; recovered in session 5 (2026-09-13)",
+   "prior_locator_entry": "NO_CORPUS",
+   "prior_card": {
+    "kept": [
+     "Q-270-p1-BSR-BA-01-1"
+    ],
+    "lead": "Q-270-p1-BSR-BA-01-1",
+    "lead_registry_id": "BSR-BA-01",
+    "groups": [
+     "southern baptist convention"
+    ],
+    "status": "DONE",
+    "reviewed_offered": false
+   },
+   "prior_passes": [
+    "1"
+   ],
+   "prior_exhaustion": null
+  }
+ ]
 }

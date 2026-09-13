@@ -372,6 +372,16 @@ class CellRunner:
             result["supplied_chunks"].extend(e.get("supplied_chunks", []))
             entries.append(e)
         slotted, unslotted = self._slot(entries)
+        # Session 5 (supplementary single-standard passes): a re-locate over stored entries never un-slots a candidate that
+        # was already slotted and verified — its verification is paid for and its verdict stands. In an ordinary run a pass
+        # is re-located only while PENDING, before anything was slotted, so this changes nothing there.
+        slotted_ids = {c["candidate_id"] for c in slotted}
+        for c in prev.get("candidates") or []:
+            v = (st.get("verifications") or {}).get(c["candidate_id"]) or {}
+            if c["candidate_id"] not in slotted_ids and (v.get(self.primary) or {}).get("status") == "DONE":
+                slotted.append(dict(c, kept_from_prior_slotting=True))
+                slotted_ids.add(c["candidate_id"])
+                unslotted = [u for u in unslotted if u["candidate_id"] != c["candidate_id"]]
         result["unslotted"] = unslotted
         result["candidates"] = slotted
         result["empty"] = not slotted
@@ -722,7 +732,7 @@ class CellRunner:
         after = {cid: v["final"]["verdict"] for cid, v in st.get("verifications", {}).items()}
         changed = {cid: (before[cid], after[cid]) for cid in after if before.get(cid) != after[cid]}
         s1, s2, s3 = self.survivors(st, "1"), self.survivors(st, "2"), self.survivors(st, EXHAUST_PASS)
-        st["survivors"] = s1 or s2 or s3
+        st["survivors"] = self.all_survivors(st)
         st["fallback_used"] = bool(not s1 and s2)
         if st.get("exhaustion"):
             st["exhaustion"]["changed_outcome"] = bool(not s1 and not s2 and s3)
@@ -787,7 +797,9 @@ class CellRunner:
             if self._verify_pass(cell, st, "2"):
                 st["phase"] = "verify-2"; self.save(st); return st
         # pass 3 (Task 2c): exhaust every sampled standard before declaring an empty
-        if not (self.survivors(st, "1") or self.survivors(st, "2")) and self.exhaust and self.sampled_standards(st):
+        # (session 5) a cell whose earlier exhaustion already produced a survivor is not re-entered by a supplementary pass
+        if (not (self.survivors(st, "1") or self.survivors(st, "2")) and self.exhaust and self.sampled_standards(st)
+                and not (st.get("exhaustion") or {}).get("changed_outcome")):
             st.setdefault("exhaustion", {"entered": True, "changed_outcome": False})
             while True:
                 status = self.locate_exhaust(cell, st)
@@ -811,7 +823,7 @@ class CellRunner:
                 # ROUND_DONE with no survivor: the next round is issued by the loop
             st["exhaustion"]["standards"] = st["passes"][EXHAUST_PASS]["progress"]
             st["exhaustion"]["rounds"] = st["passes"][EXHAUST_PASS].get("rounds")
-        st["survivors"] = self.survivors(st, "1") or self.survivors(st, "2") or self.survivors(st, EXHAUST_PASS)
+        st["survivors"] = self.all_survivors(st)
         st["fallback_used"] = bool(not self.survivors(st, "1") and self.survivors(st, "2"))
         st["coverage_final"] = self.coverage_final(st)
         # 1c: allocate the card FIRST (allocation.py, the same allocator the packet builder uses), then code only
@@ -863,6 +875,18 @@ class CellRunner:
         if fin:
             return fin.get("verdict")
         return (v.get(self.primary) or {}).get("verdict")
+
+    def all_survivors(self, st):
+        """Survivors of every pass that ran, pass order. In an ordinary run pass 2 runs only when pass 1 left nothing and
+        pass 3 only when passes 1–2 left nothing, so this equals `s1 or s2 or s3`. It differs only after a supplementary
+        single-standard pass (session 5) fills pass 1 on a cell whose earlier exhaustion had already found survivors: those
+        verified candidates stay in the running for the card instead of being discarded because pass 1 is no longer empty."""
+        out, seen = [], set()
+        for pk in ("1", "2", EXHAUST_PASS):
+            for c in self.survivors(st, pk):
+                if c["candidate_id"] not in seen:
+                    out.append(c); seen.add(c["candidate_id"])
+        return out
 
     def survivors(self, st, pass_key):
         """Candidates whose FINAL verdict (adjudicator where it ran, else primary) is ACCEPT / ACCEPT_WITH_CAVEAT."""

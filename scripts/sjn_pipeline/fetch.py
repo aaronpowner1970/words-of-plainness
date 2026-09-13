@@ -67,6 +67,7 @@ class FetchResult:
     fetched_at: str = ""
     redirects: list = field(default_factory=list)   # [(status, from_url, location)] hop by hop
     cross_host_redirect: str = ""                    # the first Location that changed the host, if any
+    www_label_redirects: list = field(default_factory=list)  # hops followed under the www-label exception (session 5)
     # payloads (not serialized into meta)
     html: str = field(default="", repr=False)
     pdf_bytes: bytes = field(default=b"", repr=False)
@@ -114,10 +115,33 @@ class RobotsCache:
 
 MAX_REDIRECT_HOPS = 8
 
+# R001 redirect rule, as amended 2026-09-13 (Gate 6 session 5, after the Baptist packet review). Quoted verbatim in
+# docs/gate6/WoP_SJN_Gate6_Session5_Report_20260913.md; www_label_only() below is its only implementation.
+STRICT_HOST_REDIRECT_RULE = (
+    "Under strict_host a redirect that changes the host is refused and reported as REDIRECT-CROSS-HOST, with one "
+    "exception: a hop whose target differs from the URL requested ONLY by the leading \"www.\" label is not a "
+    "cross-host redirect and is followed. It qualifies only when all of these hold: one host is exactly the other with "
+    "\"www.\" prefixed (so the registrable domain, every other label and the port are the same); the path is the same; "
+    "the query is the same; and the scheme is the same or the hop is an http-to-https upgrade. Such a hop is recorded "
+    "in FetchResult.www_label_redirects as well as in redirects. Every other cross-host redirect stays refused: another "
+    "subdomain, another registrable domain, a changed path or query, an https-to-http downgrade, or a hop onto a "
+    "storage or CDN host.")
+
 
 def same_host(a, b):
     """Exact host comparison. `www.example.org` and `example.org` are DIFFERENT hosts here."""
     return urlparse(a).netloc.casefold() == urlparse(b).netloc.casefold()
+
+
+def www_label_only(a, b):
+    """True when the hop a -> b changes the host ONLY by the leading "www." label (STRICT_HOST_REDIRECT_RULE)."""
+    pa, pb = urlparse(a), urlparse(b)
+    ha, hb = pa.netloc.casefold(), pb.netloc.casefold()
+    if ha == hb or not (ha == "www." + hb or hb == "www." + ha):
+        return False
+    if (pa.path or "/") != (pb.path or "/") or pa.query != pb.query or pa.params != pb.params:
+        return False
+    return pa.scheme.casefold() == pb.scheme.casefold() or (pa.scheme.casefold(), pb.scheme.casefold()) == ("http", "https")
 
 
 class Fetcher:
@@ -190,7 +214,11 @@ class Fetcher:
                     ra = r.headers.get("Retry-After")
                     time.sleep(min(30, float(ra)) if ra and ra.isdigit() else 2 ** attempt)
                     continue
-                if "pdf" in fr.content_type.casefold() or url.casefold().endswith(".pdf"):
+                # A PDF is recognised by its magic bytes as well as by content-type / suffix: files.lcms.org
+                # serves the Augsburg Confession as application/octet-stream from a suffixless download route
+                # (session 5, 2026-09-13), which was otherwise decoded as HTML text and yielded no bytes.
+                if ("pdf" in fr.content_type.casefold() or url.casefold().endswith(".pdf")
+                        or r.content[:5] == b"%PDF-"):
                     fr.kind = "pdf"
                     fr.pdf_bytes = r.content
                 else:
@@ -223,7 +251,9 @@ class Fetcher:
                 return r
             nxt = urljoin(cur, loc)
             fr.redirects.append((r.status_code, cur, nxt))
-            if not same_host(cur, nxt):
+            if not same_host(cur, nxt) and www_label_only(cur, nxt):
+                fr.www_label_redirects.append((r.status_code, cur, nxt))       # not a cross-host redirect: followed
+            elif not same_host(cur, nxt):
                 if not fr.cross_host_redirect:
                     fr.cross_host_redirect = nxt
                 if self.strict_host:
@@ -265,7 +295,10 @@ class Fetcher:
                 resp = page.goto(url, wait_until="domcontentloaded", timeout=60000)
                 fr.status = resp.status if resp else 0
                 fr.final_url = page.url
-                if not same_host(url, page.url):
+                if not same_host(url, page.url) and www_label_only(url, page.url):
+                    fr.www_label_redirects.append((fr.status, url, page.url))
+                    fr.redirects.append((fr.status, url, page.url))
+                elif not same_host(url, page.url):
                     fr.cross_host_redirect = page.url
                     fr.redirects.append((fr.status, url, page.url))
                     if self.strict_host:

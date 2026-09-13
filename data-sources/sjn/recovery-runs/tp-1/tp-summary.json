@@ -1,0 +1,181 @@
+{
+ "run_id": "tp-1",
+ "at": "2026-09-13T18:55:36Z",
+ "verifier": "sonnet only",
+ "prompt_version": "gate6-v1.2",
+ "items": 60,
+ "accepted": 54,
+ "recall": 0.9,
+ "verdicts": {
+  "ACCEPT": 47,
+  "REJECT": 6,
+  "ACCEPT_WITH_CAVEAT": 7
+ },
+ "floors": {
+  "FULL": 53,
+  "WORD_ONLY": 4,
+  "PARTIAL": 3
+ },
+ "idiom_or_formula_raised": 0,
+ "idiom_or_formula_accepted": 0,
+ "recall_on_idiom_cells": null,
+ "idiom_items": [],
+ "by_branch": {
+  "Anglican": {
+   "items": 9,
+   "accepted": 9
+  },
+  "Reformed / Presbyterian": {
+   "items": 13,
+   "accepted": 12
+  },
+  "Baptist": {
+   "items": 7,
+   "accepted": 7
+  },
+  "Mennonite / Anabaptist": {
+   "items": 4,
+   "accepted": 4
+  },
+  "Methodist / Wesleyan": {
+   "items": 8,
+   "accepted": 7
+  },
+  "Roman Catholic": {
+   "items": 13,
+   "accepted": 10
+  },
+  "Eastern Orthodox": {
+   "items": 3,
+   "accepted": 2
+  },
+  "Lutheran": {
+   "items": 3,
+   "accepted": 3
+  }
+ },
+ "ratified_accepts_now_refused": [
+  {
+   "id": "TP-006",
+   "branch": "Reformed / Presbyterian",
+   "family_id": "RNR-H06",
+   "predicate": "Lord",
+   "registry_id": "BSR-RP-04",
+   "locator": "Book of Confessions 1.2 (Nicene Creed)",
+   "phrase": "one Lord, Jesus Christ",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "RELATIONAL_VS_METAPHYSICAL"
+   ],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "WRONG_SUBJECT",
+   "reason": "The passage predicates 'Lord' of Jesus Christ, but the required subject for this predicate is God (the one God or the Father), not the Son, so the citation does not match the defined subject scope."
+  },
+  {
+   "id": "TP-018",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H21",
+   "predicate": "Life-giving",
+   "registry_id": "BSR-RC-06",
+   "locator": "Nicene Creed",
+   "phrase": "the Lord, the giver of life",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "RELATIONAL_VS_METAPHYSICAL"
+   ],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "WRONG_SUBJECT",
+   "reason": "The phrase 'the giver of life' modifies the Holy Spirit, not the required subject (God/the Father), so the predicate is not affirmed of the correct subject."
+  },
+  {
+   "id": "TP-023",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H26",
+   "predicate": "Judge",
+   "registry_id": "BSR-RC-06",
+   "locator": "Apostles' Creed",
+   "phrase": "judge the living and the dead",
+   "floor": "PARTIAL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "WRONG_SUBJECT",
+   "reason": "The clause's grammatical subject is Jesus Christ (via 'He'), not God the Father or 'the one God' as the required_subject demands, so it fails the subject test despite verbatim phrase and clear assertion."
+  },
+  {
+   "id": "TP-024",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H27",
+   "predicate": "Savior",
+   "registry_id": "BSR-MW-02",
+   "locator": "Article II — Jesus Christ",
+   "phrase": "eternal Savior and Mediator",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "SAME_WORD_DIFFERENT_MEANING"
+   ],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "WRONG_SUBJECT",
+   "reason": "The chunk affirms Christ as eternal Savior and Mediator, not God or the Father as the required subject, so the predicate is not asserted of the correct subject."
+  },
+  {
+   "id": "TP-033",
+   "branch": "Roman Catholic",
+   "family_id": "RNR-H38",
+   "predicate": "Not made",
+   "registry_id": "BSR-RC-06",
+   "locator": "Nicene Creed",
+   "phrase": "begotten, not made",
+   "floor": "PARTIAL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "RELATIONAL_VS_METAPHYSICAL",
+    "SAME_WORD_DIFFERENT_MEANING"
+   ],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "WRONG_SUBJECT",
+   "reason": "The phrase 'begotten, not made' grammatically modifies Jesus Christ the Son, not the Father or 'the one God' as required by the predicate's subject restriction, so the citation applies the predicate to the wrong subject despite verbatim wording and assertive voice."
+  },
+  {
+   "id": "TP-060",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "registry_id": "BSR-EO-01",
+   "locator": "The Symbol of Faith — \"Son of God\"",
+   "phrase": "God is an eternal Father by nature",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "SAME_WORD_DIFFERENT_MEANING",
+    "SEMANTIC_FLOOR"
+   ],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "BELOW_FLOOR",
+   "reason": "The quoted phrase concerns God's eternal fatherhood relative to the Son, not a denial that God derives from another source; the specific predicate 'Unbegotten' (denial of generation from another) is nowhere asserted of the Father in this passage, so the proposition falls below the required floor."
+  }
+ ],
+ "stop_rule": "recall below 0.9 stops the session before Task 8",
+ "stop": false
+}

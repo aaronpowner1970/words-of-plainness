@@ -65,13 +65,48 @@ def creed_resolution_tier(tier_text):
     return m.group(1).upper() if m else None
 
 
+DELTA_FIELDS = ("canonical_url", "fetch_mode")
+
+
+def load_registry_delta(path):
+    """A registry draft CSV (wop-scratch WoP_SJN_BranchSourceRegistries_Draft3rN_*.csv) read as a DELTA: only rows whose
+    `r4_change` column names fields are applied, and only the fields in DELTA_FIELDS. Returns (changes, provenance)."""
+    import csv
+    import hashlib
+    raw = open(path, "rb").read()
+    rows = list(csv.DictReader(raw.decode("utf-8-sig").splitlines()))
+    changes = {}
+    for r in rows:
+        fields = [f.strip() for f in (r.get("r4_change") or "").split(";") if f.strip()]
+        bad = [f for f in fields if f not in DELTA_FIELDS]
+        if bad:
+            raise SystemExit(f"registry delta {os.path.basename(path)}: {r.get('registry_id')} names fields outside {DELTA_FIELDS}: {bad}")
+        if fields:
+            changes[r["registry_id"]] = {f: r.get(f) for f in fields}
+    return changes, {"file": os.path.basename(path), "sha256": hashlib.sha256(raw).hexdigest(), "rows": sorted(changes)}
+
+
 class Registry:
-    def __init__(self, workbook_path=None):
+    def __init__(self, workbook_path=None, registry_delta=None):
+        """registry_delta (session 5, 2026-09-13): the path of a draft registry CSV whose marked URL changes are applied
+        IN MEMORY for a corpus build the author has authorized before ratifying them. The workbook is never written; every
+        row so changed carries `_registry_delta` (old value, new value, file, sha256) and the corpus manifest records it."""
         self.path = workbook_path or newest_workbook()
         self.wb = Workbook(self.path)
         _, cfg, _ = self.wb.table("APP CONFIG", "Key")
         self.config = {s(r.get("Key")): r.get("Value") for r in cfg if s(r.get("Key"))}
         self.rows_all = load_registry(self.wb)
+        self.delta = None
+        if registry_delta:
+            changes, prov = load_registry_delta(registry_delta)
+            by = {r["registry_id"]: r for r in self.rows_all}
+            for rid, ch in changes.items():
+                if rid not in by:
+                    raise SystemExit(f"registry delta names {rid}, which is not a workbook registry row")
+                by[rid]["_registry_delta"] = {**prov, "fields": {f: {"workbook": by[rid].get(f), "draft": v} for f, v in ch.items()},
+                                              "status": "PENDING AUTHOR RATIFICATION"}
+                by[rid].update(ch)
+            self.delta = prov
         self.rows = ratified(self.rows_all)
         self.fallback_ids = set(fallback_only_ids(self.config))
         self.by_id = {r["registry_id"]: r for r in self.rows}

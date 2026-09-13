@@ -173,16 +173,36 @@ workstreams:
       docs/gate6/WoP_SJN_Gate6_Session4_Report_20260913.md. ONLY Eastern Orthodox remains
       (44 cells, 14 rows; estimate 55–65 USD as-is, locator 35 of it); it runs alone, after
       the author's go, the translation-pair ratification and the standards-per-cell decision.
-      BSR-LU-02 is a JavaScript viewer shell with no plain-fetch text: keep as adoption row
-      or retire (author's call).
-      Blocked corpus rows: BSR-EO-03 (goarch.org, HOST_RETIRED), BSR-BA-02 (apex→www),
-      BSR-LU-02 (client viewer).
+      Session 5 (2026-09-13, repairs before Eastern Orthodox, workbook unchanged; 9.38 of 25
+      USD): Cowork's session-4 review acted on. BSR-BA-02 (1689 ch. 2) and BSR-LU-02 (LCMS
+      Augsburg Confession, text-layer PDF behind the viewer's Download href) now have corpora
+      — BA-02 through the amended R001 redirect rule (a www-label-only hop is followed), LU-02
+      on the Draft3r4 URL held in memory as a registry delta pending ratification
+      (wop-scratch/WoP_SJN_BranchSourceRegistries_Draft3r4_20260913.csv). Source
+      Verification Standard v1.1 rule 7 (the artifact URL rule); 47-row audit: only BSR-LU-02
+      (viewer) is a wrapper; RC-05 / RC-07 are bare domains; EO-01/02, RC-01, LU-01, MA-01 are
+      entry pages of multi-page artifacts; EO-06 and EO-10 name one of two pages. NO TEXT rule:
+      a ratified row that supplied a cell no text is on the card and blocks REVIEWED (Baptist
+      lost it on 22 empty cells, Lutheran on 3, before the passes). Supplementary
+      single-standard passes (supplement.py): Baptist 15→33 filled (18 empties filled, Reformed
+      Baptist voice now 41 slots), Lutheran 35 filled before and after the LU-02 pass (LU-02 adds the LCMS voice to 14 cards, 0 empties filled; 34 after Q-003 below;
+      same Augsburg sentence shown twice on Q-179/Q-227/Q-235 — author ruling needed). Q-003
+      re-verified under gate6-v1.2: both models IDIOM_OR_FORMULA, WORD_ONLY, REJECT; cell now
+      NOT LOCATED — CURRENT STANDARD REVIEWED. Q-403 blocker closed by the lower-floor rule.
+      tp-1 true-positive fixture: sonnet recall 0.900 (54/60, exactly at the stop line); 5 of
+      6 misses are WRONG_SUBJECT from the code-derived required_subject (Lord, Life-giving,
+      Judge, Savior, Not made default to "God / the Father"), IDIOM_OR_FORMULA raised 0 times.
+      Harness: launch_branches.py fails loudly on any non-zero exit and verifies the packet;
+      a failed branch writes partial:true with cap_state; review extracts in
+      recovery-packets/extracts/. Report: docs/gate6/WoP_SJN_Gate6_Session5_Report_20260913.md.
+      Blocked corpus rows: BSR-EO-03 (goarch.org, HOST_RETIRED — under the NO TEXT rule it
+      blocks REVIEWED on every Eastern Orthodox cell unless retired), BSR-RC-05 (LINEAGE).
       Gate 7 items: Q-434 phrase re-cut, Q-169 now resolvable under BSR-RC-08 (re-check
       R001), the Roman Catholic packet's leading-witness cards to re-read under the new
       ordering, BSR-EO-03 retire or re-host, BSR-BA-02 apex→www redirect, see
       recovery-runs/proposed-app-config-gate7.md. Running the Gate 2 pipeline against
       v2.25 blocks on R001 (Q-034) until Gate 7 re-points that cell.
-    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session4_Report_20260913.md; rule on (1) whether the reject-all route is exempt from the lower-floor rule (it refuses 9 earlier opus rescues incl. Q-403), (2) Q-003 under the IDIOM_OR_FORMULA hazard, (3) BSR-LU-02 keep-as-adoption-row or retire, (4) BSR-BA-02 www canonical URL, (5) the Eastern Orthodox standards-per-cell cap; review recovery-packets/{baptist,methodist-wesleyan,mennonite-anabaptist}.json and the rebuilt Reformed packet; ratify the four derived translation pairs; then give the go for Eastern Orthodox alone. Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
+    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session5_Report_20260913.md; ratify (1) the Draft3r4 URL changes for BSR-BA-02 and BSR-LU-02 into the workbook, (2) a same-text guard for rows publishing identical wording (LU-01/LU-02 duplicate sentences on Q-179, Q-227, Q-235), (3) the required_subject for Lord / Life-giving / Judge / Savior / Not made (tp-1 misses; 49 WRONG_SUBJECT rejections in the packets), (4) whether BSR-EO-03 is retired before Eastern Orthodox (it would block REVIEWED on all 44 EO cells), (5) the EO consultation breadth and its cap (Code 55–65 USD vs Cowork 90–110 USD); review the Baptist caveated apophatic fills (Q-382, Q-390, Q-454); still open from session 4: the reject-all exemption question and the four derived translation pairs; then give the go for Eastern Orthodox alone, launched with launch_branches.py. Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
 
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED

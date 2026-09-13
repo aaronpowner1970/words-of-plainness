@@ -235,8 +235,31 @@ python scripts/sjn_recovery/api_executor.py --run-id cal-1 --workers 6 --max-cos
   not rest on them alone (scored and packeted accordingly). **DIALOGUE_ONLY** rows and the **1848 Encyclical**
   are refused by name (`sjn_pipeline/registry.py`, R001 in `rules.py`, `guards.check_citable_row`).
 - **Fetcher**: ratified URLs fetched byte for byte; redirects followed one hop at a time and logged; the corpus
-  builder refuses a hop onto another host (`Fetcher(strict_host=True)`). goarch.org is never crawled.
+  builder refuses a hop onto another host (`Fetcher(strict_host=True)`) except a www-label-only hop (session 5). goarch.org is never crawled.
 - Agent-visible chunk text has URL tokens scrubbed (`textutil.scrub_urls`); the stored text and hash are untouched.
+
+## Live-run session 5 (2026-09-13, workbook unchanged) — repairs before Eastern Orthodox
+
+Report: `docs/gate6/WoP_SJN_Gate6_Session5_Report_20260913.md`; the review it answers: `wop-scratch/WoP_SJN_B4_PacketReview_20260913.md`.
+
+- **R001 redirect rule amended** (`sjn_pipeline/fetch.py` `STRICT_HOST_REDIRECT_RULE`, `www_label_only`): a hop that changes the
+  host ONLY by the leading `www.` label (same path, same query, same scheme or http→https) is followed and recorded in
+  `www_label_redirects`; every other cross-host hop stays refused. A body starting `%PDF-` is a PDF whatever its content-type.
+- **Registry delta** (`registry.Registry(registry_delta=)`, `corpus.py build --registry-delta`, `pdf_audit.py --registry-delta`): a
+  draft registry CSV's `r4_change` rows (canonical_url / fetch_mode only) applied IN MEMORY for an authorised build before the
+  author ratifies them; the manifest and the packet header (`rows_on_unratified_url`) carry the file, sha256 and status.
+- **BSR-LU-02** adapter `sources.augsburg_confession_lcms` (the LCMS Download-href PDF); U+2028/U+2029 folded to spaces at extraction.
+- **NO TEXT on the card** (`packets.no_text_rows`): a citable ratified row the CELL never had text for is carried in
+  `standards_reviewed` as `NO TEXT` and blocks REVIEWED; read from the cell record, never from today's chunk store.
+- **Supplementary single-standard pass** (`supplement.py --prepare / --report`): re-opens one standard's locator entry on every DONE
+  cell, then the ordinary loop; a re-locate never un-slots a verified candidate (`agents.locate`), survivors are the union of every
+  pass that ran (`agents.all_survivors`), and a cell whose exhaustion already produced a survivor is not re-exhausted.
+- **Single-candidate re-verification** (`reverify.py`): stored rubrics moved to `superseded_rubrics`, both models re-run.
+- **tp-1 true-positive fixture** (`truepos.py build / run`): author-ratified phrases verbatim in their mapped row, sonnet only.
+- **Harness**: `launch_branches.py` reads each branch's exit code directly and stops loudly on non-zero, and does not trust exit 0
+  without a finished, non-partial packet; a failed branch writes `partial: true` with `cap_state.stopped_by = RUN_FAILED`
+  (`run.py --write-partial-packet`, also called by `branch_loop.py`); `SJN_PACKETS_DIR` redirects packets for harness tests only.
+- **Review extracts** (`extract.py`, written by every packet build): `recovery-packets/extracts/<branch>-extract.json`.
 
 ## Guards enforced in code (`guards.py`, `agents.py`, `packets.py`)
 

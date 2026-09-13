@@ -639,6 +639,26 @@
     "adjudicator_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY",
+     "opus": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "REJECT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-008-p1-BSR-MA-02-2": {
@@ -696,6 +716,26 @@
     "reason_code_final": "WRONG_SUBJECT"
    },
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY",
+     "opus": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "REJECT",
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "opus",
@@ -774,5 +814,9 @@
   "slot_order": {}
  },
  "coder_skipped": {},
- "empty": true
+ "empty": true,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

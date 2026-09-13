@@ -134,11 +134,6 @@
      "raw": "{\"candidates\": [{\"chunk_key\": \"c15\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"XII. Education\", \"phrase\": \"In Jesus Christ abide all the treasures of wisdom and knowledge\", \"rationale\": \"Asserts that divine wisdom resides in Christ, a narrower proposition adjacent to naming the Son as Wisdom itself.\", \"floor_claim\": \"PARTIAL\"}]}",
      "empty": false
     },
-    "BSR-BA-02": {
-     "status": "NO_CORPUS",
-     "candidates": [],
-     "dropped": []
-    },
     "BSR-BA-03": {
      "status": "EMPTY",
      "call_id": "2ae5c675a76445f80d90921d",
@@ -198,6 +193,38 @@
      "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-03\"], \"silence_rationale\": \"None of the ten facts mention Wisdom as a title of the Son; the closest is Fact 1's naming of Christ as Lord and Savior, which does not assert the predicate.\"}",
      "empty": true,
      "silence_rationale": "None of the ten facts mention Wisdom as a title of the Son; the closest is Fact 1's naming of Christ as Lord and Savior, which does not assert the predicate."
+    },
+    "BSR-BA-02": {
+     "status": "EMPTY",
+     "call_id": "22a09b711a65eb5d125f4c38",
+     "attempt": 0,
+     "coverage": {
+      "coverage": "FULL",
+      "supplied": 3,
+      "of": 3
+     },
+     "supplied_chunks": [
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+      ]
+     ],
+     "supplied_chars": 2938,
+     "candidates": [],
+     "dropped": [],
+     "recuts": [],
+     "batch": null,
+     "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-02\"], \"silence_rationale\": \"Paragraph 1 calls God 'most wise' but predicates this of the one divine essence generally, not the Son as Wisdom, and paragraph 3's Trinitarian statement gives the Son no such title.\"}",
+     "empty": true,
+     "silence_rationale": "Paragraph 1 calls God 'most wise' but predicates this of the one divine essence generally, not the Son as Wisdom, and paragraph 3's Trinitarian statement gives the Son no such title."
     }
    },
    "retrieval": "PER_STANDARD",
@@ -230,7 +257,11 @@
      "supplied": 21,
      "of": 21
     },
-    "BSR-BA-02": null,
+    "BSR-BA-02": {
+     "coverage": "FULL",
+     "supplied": 3,
+     "of": 3
+    },
     "BSR-BA-03": {
      "coverage": "FULL",
      "supplied": 10,
@@ -323,6 +354,18 @@
      "XVIII. The Family"
     ],
     [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+    ],
+    [
      "BSR-BA-03",
      "Fact 1"
     ],
@@ -366,9 +409,11 @@
    "empty": false,
    "standards_reviewed": [
     "BSR-BA-01",
+    "BSR-BA-02",
     "BSR-BA-03"
    ],
    "silence_rationale": {
+    "BSR-BA-02": "Paragraph 1 calls God 'most wise' but predicates this of the one divine essence generally, not the Son as Wisdom, and paragraph 3's Trinitarian statement gives the Son no such title.",
     "BSR-BA-03": "None of the ten facts mention Wisdom as a title of the Son; the closest is Fact 1's naming of Christ as Lord and Savior, which does not assert the predicate."
    }
   }
@@ -445,6 +490,26 @@
     "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": true,
     "direction": "RESCUED"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": true,
+    "direction": "RESCUED"
    }
   }
  },
@@ -500,6 +565,12 @@
    "of": 21,
    "pass": "1"
   },
+  "BSR-BA-02": {
+   "coverage": "FULL",
+   "supplied": 3,
+   "of": 3,
+   "pass": "1"
+  },
   "BSR-BA-03": {
    "coverage": "FULL",
    "supplied": 10,
@@ -525,5 +596,33 @@
   }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ },
+ "supplements": [
+  {
+   "registry_id": "BSR-BA-02",
+   "prepared_at": "2026-09-13T18:40:12Z",
+   "reason": "the row had no corpus when the branch ran; recovered in session 5 (2026-09-13)",
+   "prior_locator_entry": "NO_CORPUS",
+   "prior_card": {
+    "kept": [
+     "Q-246-p1-BSR-BA-01-1"
+    ],
+    "lead": "Q-246-p1-BSR-BA-01-1",
+    "lead_registry_id": "BSR-BA-01",
+    "groups": [
+     "southern baptist convention"
+    ],
+    "status": "DONE",
+    "reviewed_offered": false
+   },
+   "prior_passes": [
+    "1"
+   ],
+   "prior_exhaustion": null
+  }
+ ]
 }

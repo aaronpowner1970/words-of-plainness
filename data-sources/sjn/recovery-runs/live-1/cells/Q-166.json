@@ -170,11 +170,6 @@
      "raw": "{\"candidates\": [\n  {\"chunk_key\": \"c7\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"IV. Salvation\", \"phrase\": \"is a work of God’s grace whereby believers become new creatures\", \"rationale\": \"Attributes the new birth—new spiritual life—to God’s gracious act, affirming communication of life to believers.\", \"floor_claim\": \"PARTIAL\"},\n  {\"chunk_key\": \"c5\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"II.C. God the Holy Spirit\", \"phrase\": \"He calls men to the Saviour, and effects regeneration\", \"rationale\": \"The Spirit, who is fully divine, is asserted to effect regeneration, a communication of new spiritual life.\", \"floor_claim\": \"PARTIAL\"},\n  {\"chunk_key\": \"c14\", \"registry_id\": \"BSR-BA-01\", \"locator\": \"XI. Evangelism and Missions\", \"phrase\": \"The new birth of man’s spirit by God’s Holy Spirit\", \"rationale\": \"States that God’s Holy Spirit produces the new birth of the human spirit, a direct act of imparting life.\", \"floor_claim\": \"PARTIAL\"}\n]}",
      "empty": false
     },
-    "BSR-BA-02": {
-     "status": "NO_CORPUS",
-     "candidates": [],
-     "dropped": []
-    },
     "BSR-BA-03": {
      "status": "EMPTY",
      "call_id": "7250f29f2e0f88787d48d46c",
@@ -234,6 +229,38 @@
      "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-03\"], \"silence_rationale\": \"Fact 3 mentions baptism symbolizing 'resurrection to new life in Christ,' but this describes believers' symbolic act, not God's own life-giving action, so no chunk asserts the predicate of God.\"}",
      "empty": true,
      "silence_rationale": "Fact 3 mentions baptism symbolizing 'resurrection to new life in Christ,' but this describes believers' symbolic act, not God's own life-giving action, so no chunk asserts the predicate of God."
+    },
+    "BSR-BA-02": {
+     "status": "EMPTY",
+     "call_id": "5e8c1ea722aa0c4a11431dd6",
+     "attempt": 0,
+     "coverage": {
+      "coverage": "FULL",
+      "supplied": 3,
+      "of": 3
+     },
+     "supplied_chunks": [
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+      ],
+      [
+       "BSR-BA-02",
+       "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+      ]
+     ],
+     "supplied_chars": 2938,
+     "candidates": [],
+     "dropped": [],
+     "recuts": [],
+     "batch": null,
+     "raw": "{\"result\": \"NOT LOCATED — CURRENT STANDARD REVIEWED\", \"standards_reviewed\": [\"BSR-BA-02\"], \"silence_rationale\": \"Chapter 2, paragraph 2 states God has 'all life... in and of Himself' and is 'fountain of all being,' but this asserts self-existent life and origin of being, not God's communicating or giving life to another.\"}",
+     "empty": true,
+     "silence_rationale": "Chapter 2, paragraph 2 states God has 'all life... in and of Himself' and is 'fountain of all being,' but this asserts self-existent life and origin of being, not God's communicating or giving life to another."
     }
    },
    "retrieval": "PER_STANDARD",
@@ -304,7 +331,11 @@
      "supplied": 21,
      "of": 21
     },
-    "BSR-BA-02": null,
+    "BSR-BA-02": {
+     "coverage": "FULL",
+     "supplied": 3,
+     "of": 3
+    },
     "BSR-BA-03": {
      "coverage": "FULL",
      "supplied": 10,
@@ -397,6 +428,18 @@
      "XVIII. The Family"
     ],
     [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 1"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 2"
+    ],
+    [
+     "BSR-BA-02",
+     "Chapter 2 (Of God and the Holy Trinity), paragraph 3"
+    ],
+    [
      "BSR-BA-03",
      "Fact 1"
     ],
@@ -440,9 +483,11 @@
    "empty": false,
    "standards_reviewed": [
     "BSR-BA-01",
+    "BSR-BA-02",
     "BSR-BA-03"
    ],
    "silence_rationale": {
+    "BSR-BA-02": "Chapter 2, paragraph 2 states God has 'all life... in and of Himself' and is 'fountain of all being,' but this asserts self-existent life and origin of being, not God's communicating or giving life to another.",
     "BSR-BA-03": "Fact 3 mentions baptism symbolizing 'resurrection to new life in Christ,' but this describes believers' symbolic act, not God's own life-giving action, so no chunk asserts the predicate of God."
    }
   }
@@ -502,6 +547,26 @@
     "reason_code_final": "WRONG_SUBJECT"
    },
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": true,
+    "lower_floor_applied": true,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "REJECT",
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "opus",
@@ -595,6 +660,26 @@
     "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": true,
     "direction": "RESCUED"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": true,
+    "direction": "RESCUED"
    }
   },
   "Q-166-p1-BSR-BA-01-3": {
@@ -668,6 +753,26 @@
     "adjudicator_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "WORD_ONLY"
+    },
+    "floor_disagreement": true,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "REJECT",
+    "overturned": false,
+    "direction": null
    }
   }
  },
@@ -723,6 +828,12 @@
    "of": 21,
    "pass": "1"
   },
+  "BSR-BA-02": {
+   "coverage": "FULL",
+   "supplied": 3,
+   "of": 3,
+   "pass": "1"
+  },
   "BSR-BA-03": {
    "coverage": "FULL",
    "supplied": 10,
@@ -748,5 +859,33 @@
   }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ },
+ "supplements": [
+  {
+   "registry_id": "BSR-BA-02",
+   "prepared_at": "2026-09-13T18:40:12Z",
+   "reason": "the row had no corpus when the branch ran; recovered in session 5 (2026-09-13)",
+   "prior_locator_entry": "NO_CORPUS",
+   "prior_card": {
+    "kept": [
+     "Q-166-p1-BSR-BA-01-2"
+    ],
+    "lead": "Q-166-p1-BSR-BA-01-2",
+    "lead_registry_id": "BSR-BA-01",
+    "groups": [
+     "southern baptist convention"
+    ],
+    "status": "DONE",
+    "reviewed_offered": false
+   },
+   "prior_passes": [
+    "1"
+   ],
+   "prior_exhaustion": null
+  }
+ ]
 }

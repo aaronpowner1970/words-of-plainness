@@ -30,7 +30,7 @@ def log(msg):
 
 def build(args):
     ensure_dirs()
-    reg = Registry(args.workbook)
+    reg = Registry(args.workbook, registry_delta=args.registry_delta)
     manifest = store.load_manifest()
     prev = manifest.get("standards", {})
     # strict_host: the ratified URL is fetched byte for byte; a redirect onto another host is refused.
@@ -40,6 +40,8 @@ def build(args):
     log(f"== SJN Gate 6 corpus build — workbook {os.path.basename(reg.path)} ({reg.app_master_version}); "
         f"{len(reg.rows)} AUTHOR_RATIFIED rows; fetch cache {'REUSED' if args.reuse_cache else 'LIVE'}; "
         f"gate metric {reg.gate_metric}; routing {reg.verifier_routing}; lateran scope {reg.lateran_iv_scope}")
+    if reg.delta:
+        log(f"!! registry delta applied in memory (workbook NOT written): {reg.delta['file']} sha256 {reg.delta['sha256'][:12]} rows {reg.delta['rows']}")
     if reg.vocabulary_violations:
         log(f"!! reception_scope outside the ratified vocabulary: {reg.vocabulary_violations}")
     for row in reg.rows:
@@ -47,6 +49,8 @@ def build(args):
         base = {"branch": row["branch"], "standard_title": row["standard_title"], "canonical_url": row["canonical_url"],
                 "authority_tier": row["authority_tier"], "reception_scope": (row.get("reception_scope") or "").upper(),
                 "witness_only": reg.is_witness(rid), "citation_refusal": reg.citation_refusal(rid)}
+        if row.get("_registry_delta"):
+            base["registry_delta"] = row["_registry_delta"]      # built on a draft URL pending the author's ratification (session 5)
         if only and rid not in only:
             results[rid] = prev.get(rid, {"status": "SKIPPED"})
             continue
@@ -201,7 +205,8 @@ def build(args):
                                                           "dialogue_text_policy", "encyclical_1848_status", "registry_fallback_only_rows",
                                                           "controlled_storage_policy")},
         "opus_slice_rows": sorted(reg.opus_slice_rows()),
-        "fetch_policy": "strict_host: ratified URLs fetched byte for byte; cross-host redirects refused; every requested URL must sit on a "
+        "fetch_policy": "strict_host: ratified URLs fetched byte for byte; cross-host redirects refused except a www-label-only hop "
+                        "(sjn_pipeline.fetch.STRICT_HOST_REDIRECT_RULE, session 5); every requested URL must sit on a "
                         "host the row admits under R001 (publisher_domain / AC-15); retired hosts are never requested",
         "retired_hosts": dict(RETIRED_HOSTS),
         "controlled_storage_policy": str(reg.config.get("controlled_storage_policy") or ""),
@@ -238,6 +243,7 @@ def main():
     b.add_argument("--accept-drift", action="store_true")
     b.add_argument("--no-chroma", action="store_true")
     b.add_argument("--force-embed", action="store_true")
+    b.add_argument("--registry-delta", help="draft registry CSV whose r4_change rows are applied in memory (never written to the workbook)")
     sub.add_parser("status")
     args = ap.parse_args()
     if args.cmd == "build":

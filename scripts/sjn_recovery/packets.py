@@ -61,6 +61,13 @@ def _slug(branch):
     return branch.casefold().replace(" / ", "-").replace(" ", "-")
 
 
+def _stopped_by(partial):
+    """What stopped a partial branch, in the card's words (session 5: a run failure is not a cost cap)."""
+    if (partial or {}).get("stopped_by") == "RUN_FAILED":
+        return f"a run failure (exit {partial.get('exit_code')}): {str(partial.get('reason') or '')[:160]}"
+    return "its cost cap"
+
+
 def _stage_for(reason):
     if reason.startswith("fallback-tier"):
         return "fallback-tier guard"
@@ -127,11 +134,49 @@ def silence_rationales(st, runner, coverage_final, manifest_status):
     return out
 
 
-def empty_result_option(coverage_final, rationales, exhaustion=None):
+def no_text_rows(st, branch_rows, registry, manifest, card_empty):
+    """Session 5 (2026-09-13, after the Baptist packet review): the ratified rows this CELL ran without. Read from the
+    cell's own record, never from today's chunk store — a row whose corpus is built after the cell ran is still a row
+    the cell never saw. A row is NO TEXT on a card when it is a citable ratified row of the branch and the cell's
+    coverage has no entry for it: either the locator recorded NO_CORPUS for it, or it was not in the branch when the
+    cell ran. A fallback-only row is consulted only when pass one leaves the cell empty, so it counts on an empty card
+    (or wherever pass two ran), never on a filled one."""
+    coverage_final = (st or {}).get("coverage_final") or (_legacy_coverage(st) if st else {})
+    passes = (st or {}).get("passes") or {}
+    out = []
+    for r in branch_rows:
+        rid = r["registry_id"]
+        if rid in coverage_final:
+            continue
+        if registry.is_fallback(rid) and not card_empty and "2" not in passes:
+            continue
+        m = manifest.get(rid) or {}
+        recorded = [pk for pk, p in passes.items() if ((p.get("per_standard") or {}).get(rid) or {}).get("status") == "NO_CORPUS"]
+        if not st:
+            how = "the cell has not run"
+        elif recorded:
+            how = f"the locator had no corpus for this standard when the cell ran (pass {', '.join(sorted(recorded))}: NO_CORPUS)"
+        else:
+            how = "the cell ran before this standard had a corpus in the branch; it was never supplied to the locator"
+        note = (m.get("notes") or [""])[0]
+        out.append({"registry_id": rid, "manifest_status": m.get("status") or "NO MANIFEST ENTRY",
+                    "reason": how + (f"; manifest now: {m.get('status')}" if m.get("status") else "")
+                              + (f" — {note[:160]}" if note and not m.get("text_hash") else "")})
+    return out
+
+
+def empty_result_option(coverage_final, rationales, exhaustion=None, no_text=None):
     """2a/2b/2d, pure: the empty-result option for a card. The REVIEWED state is offered only when every
-    consulted standard is FULL or EXHAUSTED; a sampled standard blocks the claim and the honest state is named."""
+    consulted standard is FULL or EXHAUSTED; a sampled standard blocks the claim and the honest state is named.
+    Session 5: a ratified row that supplied the cell NO TEXT is carried in standards_reviewed with status NO TEXT
+    and its reason, and blocks the claim exactly as a sampled standard does; a card that consulted nothing offers nothing."""
     reviewed = []
     incomplete = []
+    for nt in no_text or []:
+        reviewed.append({"registry_id": nt["registry_id"], "coverage": None, "supplied": 0, "of": None, "share": None,
+                         "status": "NO TEXT", "manifest_status": nt.get("manifest_status"), "reason": nt.get("reason"),
+                         "silence_rationale": f"NO TEXT: {nt.get('reason')}"})
+        incomplete.append(nt["registry_id"])
     for rid in sorted(coverage_final):
         cov = coverage_final[rid] or {}
         rec = {"registry_id": rid, "coverage": cov.get("coverage"), "supplied": cov.get("supplied"), "of": cov.get("of"),
@@ -143,13 +188,16 @@ def empty_result_option(coverage_final, rationales, exhaustion=None):
         if rec["status"] == "SAMPLED":
             incomplete.append(rid)
         reviewed.append(rec)
-    complete = not incomplete
+    complete = not incomplete and bool(coverage_final)
+    reasons = ([f"{r['registry_id']} supplied no text ({r['manifest_status']}): {r['reason']}" for r in reviewed if r["status"] == "NO TEXT"]
+               + [f"{r['registry_id']} was sampled ({r['supplied']} of {r['of']} chunks, {int((r['share'] or 0) * 100)}%)" for r in reviewed if r["status"] == "SAMPLED"])
+    if not coverage_final and not reasons:
+        reasons = ["no standard was consulted for this cell"]
     return {
         "rendered_state": EMPTY_RESULT if complete else None,
         "offered": complete,
         "honest_state_if_not_offered": None if complete else EMPTY_RESULT_INCOMPLETE,
-        "why_not_offered": None if complete else ("'REVIEWED' may not be claimed: " + "; ".join(
-            f"{r['registry_id']} was sampled ({r['supplied']} of {r['of']} chunks, {int((r['share'] or 0) * 100)}%)" for r in reviewed if r["status"] == "SAMPLED")),
+        "why_not_offered": None if complete else ("'REVIEWED' may not be claimed: " + "; ".join(reasons)),
         "review_incomplete": incomplete,
         "always_available": True,
         "standards_reviewed": reviewed,
@@ -180,6 +228,8 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                                       "notes": m.get("notes") or [], "refused": registry.citation_refusal(r["registry_id"]),
                                       "effect": "no chunks: the locator never saw this standard; every cell of the branch ran without it"})
     caveat_slice, caveat_sample, exhaustion_cells = [], [], []
+    citable_rows = registry.for_branch(branch, include_fallback=True, citable_only=True)
+    no_text_on_cards = {}
     for cell in cells:
         st = runner.load(cell["queue_id"])
         pred = predicates[cell["family_id"]]
@@ -194,7 +244,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
             "current_rendered_state": cell["rendered_state"],
             "status": "NOT_RUN" if not st else st.get("phase"),
             "candidates": [], "rejections": [], "witness_only_candidates": [],
-            "empty_result_option": empty_result_option(coverage_final, rationales, (st or {}).get("exhaustion")),
+            "empty_result_option": None,          # set once the card's status is known (a fallback row counts only on an empty card)
             "fallback_used": bool(st and st.get("fallback_used")),
             "coverage": {k: p.get("coverage") for k, p in (st or {}).get("passes", {}).items()},
             "coverage_final": coverage_final,
@@ -261,7 +311,8 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                         "verifier_rubrics": {m: {k: v.get(k) for k in ("phrase_verbatim", "subject_is_required", "grammatical_subject",
                                                                      "speech_act_is_assertion", "speech_act_note", "floor", "floor_reason",
                                                                      "hazard_flags", "verdict", "reason_code_final", "reason")}
-                                             for m, v in vers.items() if isinstance(v, dict) and m not in ("final", "_route")},
+                                             for m, v in vers.items() if isinstance(v, dict) and m not in ("final", "_route", "final_at_run", "superseded_rubrics", "reverified")},
+                        "superseded_rubrics": vers.get("superseded_rubrics"),
                         "final_verdict": final,
                         "adjudication_route": vers.get("_route"),
                         "second_rubric_disclosure_only": vers.get("_route") in (ROUTE_CAVEAT_SAMPLE, ROUTE_CAVEATED_ACCEPT),
@@ -319,11 +370,17 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
             if st.get("phase") == "DONE" and not card["candidates"]:
                 card["status"] = "EMPTY_WITNESS_ONLY" if card["witness_only_candidates"] else "EMPTY"
             elif st.get("phase") != "DONE" and partial:
-                card["status"] = f"NOT_FINISHED ({st.get('phase')}): branch stopped by its cost cap"
+                card["status"] = f"NOT_FINISHED ({st.get('phase')}): branch stopped by {_stopped_by(partial)}"
             else:
                 card["status"] = st.get("phase")
         elif partial:
-            card["status"] = "NOT_RUN: branch stopped by its cost cap"
+            card["status"] = f"NOT_RUN: branch stopped by {_stopped_by(partial)}"
+        nt = no_text_rows(st, citable_rows, registry, manifest, card_empty=not card["candidates"])
+        card["empty_result_option"] = empty_result_option(coverage_final, rationales, (st or {}).get("exhaustion"), no_text=nt)
+        for x in nt:
+            no_text_on_cards.setdefault(x["registry_id"], {"cards": 0, "empty_cards": 0, "manifest_status": x["manifest_status"]})
+            no_text_on_cards[x["registry_id"]]["cards"] += 1
+            no_text_on_cards[x["registry_id"]]["empty_cards"] += 0 if card["candidates"] else 1
         cards.append(card)
     empties = [c for c in cards if c["status"] in ("EMPTY", "EMPTY_WITNESS_ONLY")]
     packet = {
@@ -338,8 +395,21 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                              for r in registry.for_branch(branch, citable_only=False)},
         "rows_without_text": rows_without_text,
         "rows_with_text": [r["registry_id"] for r in registry.for_branch(branch, citable_only=False) if r["registry_id"] not in {x["registry_id"] for x in rows_without_text}],
-        "branch_ran_on": f"{len(registry.for_branch(branch, citable_only=False)) - len(rows_without_text)} of {len(registry.for_branch(branch, citable_only=False))} ratified rows"
-                         + (": " + ", ".join(f"{x['registry_id']} had no text ({x['manifest_status']})" for x in rows_without_text) if rows_without_text else ""),
+        "branch_ran_on": f"{len(registry.for_branch(branch, citable_only=False)) - len(rows_without_text)} of {len(registry.for_branch(branch, citable_only=False))} ratified rows have text in the corpus now"
+                         + (": " + ", ".join(f"{x['registry_id']} had no text ({x['manifest_status']})" for x in rows_without_text) if rows_without_text else "")
+                         + (f" — BUT the cells did not all run on them: " + "; ".join(
+                             f"{rid} supplied no text to {v['cards']} of {len(cells)} card(s)" for rid, v in sorted(no_text_on_cards.items()))
+                            if no_text_on_cards else ""),
+        # session 5: rows_without_text reads today's chunk store; this reads the cells. A row listed here is on those cards
+        # as NO TEXT and blocks the REVIEWED offer there, whatever the store holds now.
+        "rows_no_text_on_cards": no_text_on_cards,
+        # session 5: a corpus built on a draft registry URL (pending the author's ratification) says so on the packet's face
+        "rows_on_unratified_url": [{"registry_id": r["registry_id"], **(manifest.get(r["registry_id"]) or {}).get("registry_delta", {})}
+                                   for r in registry.for_branch(branch, citable_only=False)
+                                   if (manifest.get(r["registry_id"]) or {}).get("registry_delta")],
+        "cells_ran_on": (f"every card consulted every ratified row it should have" if not no_text_on_cards else
+                         "; ".join(f"{rid} supplied no text to {v['cards']} of {len(cells)} card(s) ({v['empty_cards']} empty; manifest {v['manifest_status']})"
+                                   for rid, v in sorted(no_text_on_cards.items()))),
         "translation_pairs": pairs, "translation_pairs_evidence": translation_pair_evidence(registry, branch),
         "speaks_for_groups": groups,
         "verdict_rule": VERDICT_RULE,
@@ -372,7 +442,9 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
         json.dump(packet, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
-    log(f"   packet {path}{' (PARTIAL — cost cap)' if partial else ''}: {packet['cells']} cells, {packet['cells_with_candidates']} with candidates, "
+    from .extract import write_extract                  # session 5, Task 9: the review extract travels with every packet
+    extract_path = write_extract(packet, os.path.dirname(path))
+    log(f"   packet {path}{(' (PARTIAL — ' + ('RUN FAILED' if partial.get('stopped_by') == 'RUN_FAILED' else 'cost cap') + ')') if partial else ''}: {packet['cells']} cells, {packet['cells_with_candidates']} with candidates, "
         f"{packet['cells_empty']} empty ({packet['cells_all_rejected']} all-rejected; REVIEWED offered on {packet['cells_empty_reviewed_offered']}, "
         f"review incomplete on {packet['cells_empty_review_incomplete']}), {packet['cells_not_finished']} not finished, "
         f"{packet['rejections_kept']} rejections kept, {len(dropped_at_build)} dropped at build; exhaustion entered on "
@@ -381,5 +453,6 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
         f"caveat second rubrics {packet['caveat_slice']['candidates']} ({packet['caveat_slice']['lower_floor_applied']} lower-floor applied); "
         f"2c sample {packet['caveat_sample']['sampled']} of {packet['caveat_sample']['eligible']} eligible; "
         f"{len(repaired_chunks)} candidate(s) on chunks repaired after the run"
-        + (f"; ROWS WITHOUT TEXT: {[x['registry_id'] for x in rows_without_text]}" if rows_without_text else ""))
+        + (f"; ROWS WITHOUT TEXT: {[x['registry_id'] for x in rows_without_text]}" if rows_without_text else "")
+        + f"; extract {extract_path}")
     return packet

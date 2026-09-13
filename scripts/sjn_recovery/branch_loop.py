@@ -57,6 +57,27 @@ def main():
         return p.returncode, out
 
     py = sys.executable
+    started = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+    def partial_packet_since(t0):
+        import json
+        from sjn_recovery.config import PACKETS_DIR
+        pth = os.path.join(PACKETS_DIR, f"{slug(a.branch)}.json")
+        try:
+            with open(pth, encoding="utf-8") as fh:
+                pk = json.load(fh)
+        except Exception:
+            return False
+        return bool(pk.get("partial")) and str(pk.get("built_at") or "") >= t0
+
+    def write_partial(rc, reason):
+        """Task 8b (session 5): every non-zero end of the loop leaves a PARTIAL packet (partial true, cap_state with the
+        exit code and the reason) — run.py writes one itself when a cell crashes; this covers every other failure path."""
+        rc2, _ = run([py, os.path.join(HERE, "run.py"), "--run-id", a.run_id, "--branch", a.branch,
+                      "--locator-model", a.locator_model, "--verifier-models", a.verifier_models,
+                      "--branch-cost-cap-usd", str(a.branch_cost_cap_usd), "--write-partial-packet",
+                      "--failure-exit-code", str(rc), "--failure-reason", reason], "run.py --write-partial-packet")
+        log(f"   partial packet writer exit {rc2}")
     log(f"== {a.branch} loop started {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())} (cap {a.branch_cost_cap_usd} USD, max rounds {a.max_rounds})")
     for rnd in range(1, a.max_rounds + 1):
         rc, out = run([py, os.path.join(HERE, "run.py"), "--run-id", a.run_id, "--branch", a.branch,
@@ -68,7 +89,10 @@ def main():
             log(f"== branch complete (run.py exit 0) {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}")
             break
         if rc != 10:
-            log(f"!! run.py failed (exit {rc}); loop stopped")
+            tail = " | ".join(l.strip() for l in out.strip().splitlines()[-2:])[:400]
+            log(f"!! run.py failed (exit {rc}); loop stopped; the branch is NOT complete")
+            write_partial(rc, f"run.py exit {rc} in round {rnd}: {tail}")
+            log(f"== {a.branch} loop FAILED (exit {rc}) {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}")
             return rc
         rc, out = run([py, os.path.join(HERE, "api_executor.py"), "--run-id", a.run_id, "--workers", str(a.workers),
                        "--max-cost-usd", str(a.max_cost_usd_per_invocation or a.branch_cost_cap_usd), "--key-file", a.key_file], "api_executor")
@@ -81,9 +105,13 @@ def main():
                           "--branch-cost-cap-usd", str(a.branch_cost_cap_usd), "--projection-per-cell-usd", str(a.projection_per_cell_usd),
                           "--i-have-author-authorization"], "run.py")
             log(f"   run.py exit {rc2}; loop stopped")
-            return 1
+            if not partial_packet_since(started):          # a cap stop already wrote its own PARTIAL (CAP_HIT) packet
+                write_partial(rc, f"executor exit {rc} answered nothing in round {rnd} (cap, spend limit or fatal error)")
+            log(f"== {a.branch} loop FAILED (executor exit {rc}) {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}")
+            return rc or 1
     else:
         log(f"!! max rounds ({a.max_rounds}) reached; loop stopped with calls still pending")
+        write_partial(1, f"max rounds ({a.max_rounds}) reached with calls still pending")
         return 1
     log(f"== {a.branch} loop ended {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}")
     return 0

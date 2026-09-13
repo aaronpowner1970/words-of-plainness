@@ -1,0 +1,30 @@
+=== launch 2026-09-13T18:59:44Z: run harness-t8, branches ['Baptist', 'Methodist / Wesleyan'], cap 0.01 USD each
+=== Baptist 2026-09-13T18:59:44Z
+== Baptist loop started 2026-09-13T18:59:44Z (cap 0.01 USD, max rounds 80)
+-- round 1: run.py 2026-09-13T18:59:44Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+!! Baptist: run.py FAILED — AttributeError: 'str' object has no attribute 'get' (while running cells;     if "1" not in st["passes"] or st["passes"]["1"].get("status") in ("PENDING", "UNPARSEABLE"):); writing the PARTIAL packet before exiting non-zero
+!! Baptist: writing the PARTIAL packet (RUN_FAILED, exit 1): 36/37 cells DONE
+!! Baptist: packet builder failed too (AttributeError: 'str' object has no attribute 'get'); wrote a minimal FAILURE record to C:\Users\aaron\AppData\Local\Temp/sjn-t8/packets\baptist.json
+
+[stderr]
+Traceback (most recent call last):
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 368, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 140, in main
+    runner.run_cell(c)
+    ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\agents.py", line 781, in run_cell
+    if "1" not in st["passes"] or st["passes"]["1"].get("status") in ("PENDING", "UNPARSEABLE"):
+                                  ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+   run.py exit 1
+!! run.py failed (exit 1); loop stopped; the branch is NOT complete
+-- round 1: run.py --write-partial-packet 2026-09-13T18:59:46Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+!! Baptist: writing the PARTIAL packet (RUN_FAILED, exit 1): 36/37 cells DONE
+!! Baptist: packet builder failed too (AttributeError: 'str' object has no attribute 'get'); wrote a minimal FAILURE record to C:\Users\aaron\AppData\Local\Temp/sjn-t8/packets\baptist.json
+   partial packet writer exit 0
+== Baptist loop FAILED (exit 1) 2026-09-13T18:59:47Z
+!! LAUNCH FAILED: Baptist branch_loop.py exited 1 at 2026-09-13T18:59:47Z; no further branch starts (Methodist / Wesleyan not run)

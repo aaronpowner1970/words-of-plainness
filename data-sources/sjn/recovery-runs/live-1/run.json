@@ -52,7 +52,7 @@
  "caveat_sample_share": 0.2,
  "verdict_rule": "LOWER_FLOOR_2026-09-13",
  "projection_per_cell_usd": 0.336,
- "branch_cost_cap_usd": 25.0,
+ "branch_cost_cap_usd": 34.0,
  "cost_state_file": "sjn/recovery-runs/live-1/cost-state.json",
  "branch_spend": {
   "Roman Catholic": {
@@ -136,69 +136,76 @@
   },
   "Lutheran": {
    "cells": 39,
-   "calls": 457,
-   "cost_usd": 23.9133,
-   "calls_per_cell": 11.72,
-   "cost_per_cell_usd": 0.6132,
+   "calls": 578,
+   "cost_usd": 30.6964,
+   "calls_per_cell": 14.82,
+   "cost_per_cell_usd": 0.7871,
    "projection_per_cell_usd": 0.336,
    "projected_usd": 13.1,
-   "cap_usd": 40.0,
+   "cap_usd": 34.0,
    "over_cap": false,
    "estimated": false,
    "by_role": {
     "locator/sonnet": {
-     "calls": 274,
-     "cost_usd": 19.145943000000003
+     "calls": 346,
+     "cost_usd": 24.93001500000001
     },
     "verifier/sonnet": {
-     "calls": 91,
-     "cost_usd": 1.5702209999999996
+     "calls": 123,
+     "cost_usd": 2.2956929999999995
     },
     "coder/sonnet": {
-     "calls": 69,
-     "cost_usd": 0.6316439999999999
+     "calls": 85,
+     "cost_usd": 0.7869959999999999
     },
     "verifier/opus": {
-     "calls": 23,
-     "cost_usd": 2.5654649999999997
+     "calls": 24,
+     "cost_usd": 2.6837249999999995
     }
    },
    "cap_state": {
-    "cap_usd": 40.0,
-    "spent_usd": 23.922574,
-    "calls": 458,
-    "status": "RUNNING",
+    "cap_usd": 34.0,
+    "spent_usd": 30.70573,
+    "calls": 579,
+    "status": "DONE",
     "cap_hit_at": null
    },
    "coder": {
-    "survivors": 73,
-    "coded": 69,
-    "skipped_by_allocation": 4,
-    "mean_coder_call_usd": 0.00915,
-    "usd_avoided_measured": 0.0366,
+    "survivors": 88,
+    "coded": 85,
+    "skipped_by_allocation": 15,
+    "mean_coder_call_usd": 0.00926,
+    "usd_avoided_measured": 0.1389,
     "basis": "skipped = survivors the allocator dropped before coding (measured); USD = skipped x this branch's mean metered coder call"
    },
    "exhaustion": {
-    "cells_entered": 9,
-    "cells_changed": 7,
-    "locator_calls": 195,
+    "cells_entered": 10,
+    "cells_changed": 5,
+    "locator_calls": 227,
     "verifier_calls": 27,
-    "cost_usd": 16.4875,
-    "cost_per_entered_cell_usd": 1.8319,
-    "standards_exhausted": 5,
+    "cost_usd": 18.675,
+    "cost_per_entered_cell_usd": 1.8675,
+    "standards_exhausted": 11,
     "standards_stopped_early": 4,
     "per_cell": [
      {
       "queue_id": "Q-003",
-      "locator_calls": 27,
+      "locator_calls": 28,
       "verifier_calls": 2,
-      "cost_usd": 2.177,
-      "changed_outcome": true,
+      "cost_usd": 2.2075,
+      "changed_outcome": false,
       "standards": {
        "BSR-LU-01": {
         "batches_total": 27,
         "chunks_remaining_at_start": 715,
         "batches_done": 27,
+        "exhausted": true,
+        "stopped_early": false
+       },
+       "BSR-LU-02": {
+        "batches_total": 1,
+        "chunks_remaining_at_start": 13,
+        "batches_done": 1,
         "exhausted": true,
         "stopped_early": false
        }
@@ -237,6 +244,29 @@
       }
      },
      {
+      "queue_id": "Q-147",
+      "locator_calls": 28,
+      "verifier_calls": 0,
+      "cost_usd": 2.0534,
+      "changed_outcome": false,
+      "standards": {
+       "BSR-LU-01": {
+        "batches_total": 27,
+        "chunks_remaining_at_start": 715,
+        "batches_done": 27,
+        "exhausted": true,
+        "stopped_early": false
+       },
+       "BSR-LU-02": {
+        "batches_total": 1,
+        "chunks_remaining_at_start": 15,
+        "batches_done": 1,
+        "exhausted": true,
+        "stopped_early": false
+       }
+      }
+     },
+     {
       "queue_id": "Q-259",
       "locator_calls": 8,
       "verifier_calls": 1,
@@ -254,15 +284,22 @@
      },
      {
       "queue_id": "Q-323",
-      "locator_calls": 27,
+      "locator_calls": 28,
       "verifier_calls": 0,
-      "cost_usd": 2.0034,
+      "cost_usd": 2.0371,
       "changed_outcome": false,
       "standards": {
        "BSR-LU-01": {
         "batches_total": 27,
         "chunks_remaining_at_start": 711,
         "batches_done": 27,
+        "exhausted": true,
+        "stopped_early": false
+       },
+       "BSR-LU-02": {
+        "batches_total": 1,
+        "chunks_remaining_at_start": 14,
+        "batches_done": 1,
         "exhausted": true,
         "stopped_early": false
        }
@@ -302,10 +339,10 @@
      },
      {
       "queue_id": "Q-403",
-      "locator_calls": 27,
+      "locator_calls": 28,
       "verifier_calls": 8,
-      "cost_usd": 2.6407,
-      "changed_outcome": true,
+      "cost_usd": 2.6751,
+      "changed_outcome": false,
       "standards": {
        "BSR-LU-01": {
         "batches_total": 27,
@@ -313,20 +350,34 @@
         "batches_done": 27,
         "exhausted": true,
         "stopped_early": false
+       },
+       "BSR-LU-02": {
+        "batches_total": 1,
+        "chunks_remaining_at_start": 17,
+        "batches_done": 1,
+        "exhausted": true,
+        "stopped_early": false
        }
       }
      },
      {
       "queue_id": "Q-451",
-      "locator_calls": 27,
+      "locator_calls": 28,
       "verifier_calls": 0,
-      "cost_usd": 2.0158,
+      "cost_usd": 2.0513,
       "changed_outcome": false,
       "standards": {
        "BSR-LU-01": {
         "batches_total": 27,
         "chunks_remaining_at_start": 712,
         "batches_done": 27,
+        "exhausted": true,
+        "stopped_early": false
+       },
+       "BSR-LU-02": {
+        "batches_total": 1,
+        "chunks_remaining_at_start": 18,
+        "batches_done": 1,
         "exhausted": true,
         "stopped_early": false
        }
@@ -336,44 +387,44 @@
    },
    "caveat_slice": {
     "adjudicator": "opus",
-    "candidates": 17,
-    "calls": 17,
-    "cost_usd": 1.8253,
+    "candidates": 16,
+    "calls": 16,
+    "cost_usd": 1.7107,
     "overturned": 0,
     "overturn_rate": 0.0,
+    "lower_floor_applied": 2,
+    "eligible": 8,
+    "sampled": 0,
+    "share_cap": 0.2,
+    "share_actual": 0.0,
     "items": [
      {
-      "candidate_id": "Q-003-p3-BSR-LU-01-b22-1",
-      "call_id": "45f257f19397507508915381",
-      "primary_verdict": "ACCEPT_WITH_CAVEAT",
-      "primary_floor": "PARTIAL",
-      "primary_hazards": [
-       "SLOGAN_COMPRESSION"
-      ],
-      "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
-      "overturned": false,
-      "direction": null,
-      "reason_code_final": "OK",
-      "queue_id": "Q-003",
-      "cost_usd": 0.1146
-     },
-     {
       "candidate_id": "Q-019-p3-BSR-LU-01-b6-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "fa3aa823507d8844697e0455",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "FULL",
       "primary_hazards": [
        "SAME_WORD_DIFFERENT_MEANING"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT",
+      "second_floor": "FULL",
+      "second_hazards": [],
       "adjudicator_verdict": "ACCEPT",
+      "floor_final": "FULL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-019",
       "cost_usd": 0.0952
      },
      {
       "candidate_id": "Q-083-p1-BSR-LU-01-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "561a0b9e56f1e83f36b11603",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
@@ -381,135 +432,235 @@
        "ECCLESIAL_VS_SOTERIOLOGICAL",
        "RELATIONAL_VS_METAPHYSICAL"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-083",
       "cost_usd": 0.1343
      },
      {
       "candidate_id": "Q-091-p3-BSR-LU-01-b1-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "fe6f66eb0d623f710fb64b85",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
       "primary_hazards": [
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR",
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-091",
       "cost_usd": 0.1056
      },
      {
       "candidate_id": "Q-099-p1-BSR-LU-01-2",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "aa7266e89b3bd8ed38a183a9",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
       "primary_hazards": [
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-099",
       "cost_usd": 0.0851
      },
      {
       "candidate_id": "Q-179-p1-BSR-LU-03-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "37aa60da987551d23db6f485",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
       "primary_hazards": [
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-179",
       "cost_usd": 0.1029
      },
      {
       "candidate_id": "Q-187-p1-BSR-LU-03-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "159a94af76b4ef87fdb35a65",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
       "primary_hazards": [
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-187",
       "cost_usd": 0.0698
      },
      {
       "candidate_id": "Q-195-p1-BSR-LU-03-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "c044c1a4a56842a341a4b2cb",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "FULL",
       "primary_hazards": [
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "FULL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "FULL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-195",
       "cost_usd": 0.1084
      },
      {
       "candidate_id": "Q-195-p1-BSR-LU-01-2",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "6c365a2876a143e437f89f68",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
       "primary_hazards": [
        "SLOGAN_COMPRESSION"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-195",
       "cost_usd": 0.1159
      },
      {
       "candidate_id": "Q-227-p1-BSR-LU-01-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "ab67333b28a6d11a225f8bf8",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "FULL",
       "primary_hazards": [
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT",
+      "second_floor": "FULL",
+      "second_hazards": [],
       "adjudicator_verdict": "ACCEPT",
+      "floor_final": "FULL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-227",
       "cost_usd": 0.0751
      },
      {
       "candidate_id": "Q-243-p1-BSR-LU-01-2",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "1da3de0028202a5ee4b34188",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "FULL",
       "primary_hazards": [
        "SAME_WORD_DIFFERENT_MEANING"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": true,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-243",
       "cost_usd": 0.1071
      },
      {
       "candidate_id": "Q-275-p1-BSR-LU-01-2",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "434ec3341fc297968fa3a439",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
@@ -517,30 +668,52 @@
        "SEMANTIC_FLOOR",
        "SLOGAN_COMPRESSION"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
-      "reason_code_final": "OK",
+      "reason_code_final": "BELOW_FLOOR",
+      "disclosure_only": false,
       "queue_id": "Q-275",
       "cost_usd": 0.1138
      },
      {
       "candidate_id": "Q-315-p1-BSR-LU-01-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "618aadc113ebeb68f3d548c9",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "FULL",
       "primary_hazards": [
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": true,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-315",
       "cost_usd": 0.103
      },
      {
       "candidate_id": "Q-379-p3-BSR-LU-01-b1-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "66e2ced06e0bc01796e72fdc",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
@@ -548,15 +721,27 @@
        "SEMANTIC_FLOOR",
        "RELATIONAL_VS_METAPHYSICAL"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR",
+       "APPARENT_CONTRADICTION"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
-      "reason_code_final": "OK",
+      "reason_code_final": "BELOW_FLOOR",
+      "disclosure_only": false,
       "queue_id": "Q-379",
       "cost_usd": 0.11
      },
      {
       "candidate_id": "Q-379-p3-BSR-LU-01-b5-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "c306b54b198696f39130e866",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
@@ -564,15 +749,27 @@
        "SEMANTIC_FLOOR",
        "SLOGAN_COMPRESSION"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR",
+       "SOURCE_SILENCE_VS_DENIAL"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-379",
       "cost_usd": 0.1188
      },
      {
       "candidate_id": "Q-379-p3-BSR-LU-01-b16-1",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "ed51cecf908645e0ca1a5e5a",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
@@ -580,15 +777,27 @@
        "SLOGAN_COMPRESSION",
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-379",
       "cost_usd": 0.1302
      },
      {
       "candidate_id": "Q-387-p1-BSR-LU-01-2",
+      "route": "CAVEATED_ACCEPT",
       "call_id": "b3798bd36838ae186e98c620",
       "primary_verdict": "ACCEPT_WITH_CAVEAT",
       "primary_floor": "PARTIAL",
@@ -596,12 +805,102 @@
        "RELATIONAL_VS_METAPHYSICAL",
        "SEMANTIC_FLOOR"
       ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "FULL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
       "overturned": false,
       "direction": null,
       "reason_code_final": "OK",
+      "disclosure_only": false,
       "queue_id": "Q-387",
       "cost_usd": 0.1355
+     }
+    ]
+   },
+   "lower_floor": {
+    "disagreements": 6,
+    "applied": 5,
+    "refused": 2,
+    "rescues_refused": 2,
+    "items": [
+     {
+      "queue_id": "Q-147",
+      "candidate_id": "Q-147-p1-BSR-LU-01-1",
+      "route": "PRIMARY_REJECTED_ALL",
+      "floors": {
+       "sonnet": "WORD_ONLY",
+       "opus": "PARTIAL"
+      },
+      "floor_final": "WORD_ONLY",
+      "verdict": "REJECT",
+      "refused_by_lower_floor": true
+     },
+     {
+      "queue_id": "Q-243",
+      "candidate_id": "Q-243-p1-BSR-LU-01-2",
+      "route": "CAVEATED_ACCEPT",
+      "floors": {
+       "sonnet": "FULL",
+       "opus": "PARTIAL"
+      },
+      "floor_final": "PARTIAL",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "refused_by_lower_floor": false
+     },
+     {
+      "queue_id": "Q-315",
+      "candidate_id": "Q-315-p1-BSR-LU-01-1",
+      "route": "CAVEATED_ACCEPT",
+      "floors": {
+       "sonnet": "FULL",
+       "opus": "PARTIAL"
+      },
+      "floor_final": "PARTIAL",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "refused_by_lower_floor": false
+     },
+     {
+      "queue_id": "Q-347",
+      "candidate_id": "Q-347-p3-BSR-LU-01-b13-1",
+      "route": "PRIMARY_REJECTED_ALL",
+      "floors": {
+       "sonnet": "PARTIAL",
+       "opus": "FULL"
+      },
+      "floor_final": "PARTIAL",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "refused_by_lower_floor": false
+     },
+     {
+      "queue_id": "Q-387",
+      "candidate_id": "Q-387-p1-BSR-LU-01-2",
+      "route": "CAVEATED_ACCEPT",
+      "floors": {
+       "sonnet": "PARTIAL",
+       "opus": "FULL"
+      },
+      "floor_final": "PARTIAL",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "refused_by_lower_floor": false
+     },
+     {
+      "queue_id": "Q-403",
+      "candidate_id": "Q-403-p3-BSR-LU-01-b19-1",
+      "route": "PRIMARY_REJECTED_ALL",
+      "floors": {
+       "sonnet": "WORD_ONLY",
+       "opus": "PARTIAL"
+      },
+      "floor_final": "WORD_ONLY",
+      "verdict": "REJECT",
+      "refused_by_lower_floor": true
      }
     ]
    }
@@ -942,46 +1241,50 @@
   },
   "Baptist": {
    "cells": 37,
-   "calls": 136,
-   "cost_usd": 4.4127,
-   "calls_per_cell": 3.68,
-   "cost_per_cell_usd": 0.1193,
+   "calls": 266,
+   "cost_usd": 6.2201,
+   "calls_per_cell": 7.19,
+   "cost_per_cell_usd": 0.1681,
    "projection_per_cell_usd": 0.336,
    "projected_usd": 12.43,
-   "cap_usd": 25.0,
+   "cap_usd": 9.5,
    "over_cap": false,
    "estimated": false,
    "by_role": {
     "locator/sonnet": {
-     "calls": 74,
-     "cost_usd": 2.6304270000000005
+     "calls": 111,
+     "cost_usd": 3.2320320000000007
     },
     "verifier/sonnet": {
-     "calls": 32,
-     "cost_usd": 0.5663309999999999
+     "calls": 77,
+     "cost_usd": 1.2037769999999999
     },
     "coder/sonnet": {
-     "calls": 20,
-     "cost_usd": 0.15948
+     "calls": 61,
+     "cost_usd": 0.5311020000000001
     },
     "verifier/opus": {
-     "calls": 10,
-     "cost_usd": 1.05648
+     "calls": 12,
+     "cost_usd": 1.226025
+    },
+    "recut/sonnet": {
+     "calls": 5,
+     "cost_usd": 0.027153000000000004
     }
    },
    "cap_state": {
-    "cap_usd": 25.0,
-    "spent_usd": 4.41276,
-    "calls": 136,
-    "status": "RUNNING",
+    "cap_usd": 9.5,
+    "spent_usd": 6.220131,
+    "calls": 266,
+    "status": "DONE",
     "cap_hit_at": null
    },
    "coder": {
-    "survivors": 20,
-    "coded": 20,
-    "skipped_by_allocation": 0,
-    "mean_coder_call_usd": 0.00797,
-    "usd_avoided_measured": 0.0,
+    "survivors": 61,
+    "coded": 61,
+    "skipped_by_allocation": 2,
+    "mean_coder_call_usd": 0.00871,
+    "usd_avoided_measured": 0.0174,
     "basis": "skipped = survivors the allocator dropped before coding (measured); USD = skipped x this branch's mean metered coder call"
    },
    "exhaustion": {
@@ -997,17 +1300,67 @@
    },
    "caveat_slice": {
     "adjudicator": "opus",
-    "candidates": 1,
-    "calls": 1,
-    "cost_usd": 0.1058,
+    "candidates": 3,
+    "calls": 3,
+    "cost_usd": 0.2753,
     "overturned": 0,
     "overturn_rate": 0.0,
     "lower_floor_applied": 0,
-    "eligible": 10,
-    "sampled": 1,
+    "eligible": 23,
+    "sampled": 3,
     "share_cap": 0.2,
-    "share_actual": 0.1,
+    "share_actual": 0.13,
     "items": [
+     {
+      "candidate_id": "Q-302-p1-BSR-BA-02-2",
+      "route": "CAVEATED_ACCEPT_SAMPLE",
+      "call_id": "637a95f0be412044aa658bf1",
+      "primary_verdict": "ACCEPT_WITH_CAVEAT",
+      "primary_floor": "FULL",
+      "primary_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT",
+      "second_floor": "FULL",
+      "second_hazards": [],
+      "adjudicator_verdict": "ACCEPT",
+      "floor_final": "FULL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
+      "overturned": false,
+      "direction": null,
+      "reason_code_final": "OK",
+      "disclosure_only": true,
+      "queue_id": "Q-302",
+      "cost_usd": 0.0853
+     },
+     {
+      "candidate_id": "Q-390-p1-BSR-BA-02-2",
+      "route": "CAVEATED_ACCEPT_SAMPLE",
+      "call_id": "a1d604f7ccb2da930f5d6966",
+      "primary_verdict": "ACCEPT_WITH_CAVEAT",
+      "primary_floor": "PARTIAL",
+      "primary_hazards": [
+       "SLOGAN_COMPRESSION"
+      ],
+      "second_model": "opus",
+      "second_verdict": "ACCEPT_WITH_CAVEAT",
+      "second_floor": "PARTIAL",
+      "second_hazards": [
+       "SEMANTIC_FLOOR"
+      ],
+      "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "PARTIAL",
+      "lower_floor_applied": false,
+      "final_verdict": "ACCEPT_WITH_CAVEAT",
+      "overturned": false,
+      "direction": null,
+      "reason_code_final": "OK",
+      "disclosure_only": true,
+      "queue_id": "Q-390",
+      "cost_usd": 0.0842
+     },
      {
       "candidate_id": "Q-430-p1-BSR-BA-01-1",
       "route": "CAVEATED_ACCEPT_SAMPLE",
@@ -1590,7 +1943,7 @@
  },
  "packets_rebuilt": {
   "Roman Catholic": {
-   "at": "2026-09-13T10:44:33Z",
+   "at": "2026-09-13T19:01:52Z",
    "from": "stored cell states (candidates, rubrics, coder proposals)",
    "model_calls": 0,
    "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -1598,10 +1951,10 @@
    "verdict_rule": "LOWER_FLOOR_2026-09-13",
    "cells_with_verdict_changes": 0,
    "verdict_changes": {},
-   "note": "rebuilt 2026-09-13 (session 4) under the speaks_for candidate-slot diversity rule (Task 1), the lower-floor verdict rule 2a/2b/2c (Task 2) and the exhaustion mark (Task 4a); the IDIOM_OR_FORMULA hazard (Task 3) applies only to verifier calls made from session 4 on and is not reflected in these stored verdicts"
+   "note": "rebuilt 2026-09-13 (session 5): NO TEXT rule (Task 4) and review extract (Task 9); no model calls"
   },
   "Anglican": {
-   "at": "2026-09-13T10:44:31Z",
+   "at": "2026-09-13T19:01:54Z",
    "from": "stored cell states (candidates, rubrics, coder proposals)",
    "model_calls": 0,
    "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -1630,17 +1983,23 @@
      ]
     }
    },
-   "note": "rebuilt 2026-09-13 (session 4) under the speaks_for candidate-slot diversity rule (Task 1), the lower-floor verdict rule 2a/2b/2c (Task 2) and the exhaustion mark (Task 4a); the IDIOM_OR_FORMULA hazard (Task 3) applies only to verifier calls made from session 4 on and is not reflected in these stored verdicts"
+   "note": "rebuilt 2026-09-13 (session 5): NO TEXT rule (Task 4) and review extract (Task 9); no model calls"
   },
   "Lutheran": {
-   "at": "2026-09-13T10:44:35Z",
+   "at": "2026-09-13T19:01:55Z",
    "from": "stored cell states (candidates, rubrics, coder proposals)",
    "model_calls": 0,
    "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
    "cells": 39,
    "verdict_rule": "LOWER_FLOOR_2026-09-13",
-   "cells_with_verdict_changes": 4,
+   "cells_with_verdict_changes": 5,
    "verdict_changes": {
+    "Q-003": {
+     "Q-003-p3-BSR-LU-01-b22-1": [
+      "ACCEPT_WITH_CAVEAT",
+      "REJECT"
+     ]
+    },
     "Q-019": {
      "Q-019-p3-BSR-LU-01-b6-1": [
       "ACCEPT",
@@ -1666,10 +2025,10 @@
      ]
     }
    },
-   "note": "rebuilt 2026-09-13 (session 4) under the speaks_for candidate-slot diversity rule (Task 1), the lower-floor verdict rule 2a/2b/2c (Task 2) and the exhaustion mark (Task 4a); the IDIOM_OR_FORMULA hazard (Task 3) applies only to verifier calls made from session 4 on and is not reflected in these stored verdicts"
+   "note": "rebuilt 2026-09-13 (session 5): NO TEXT rule (Task 4); BSR-LU-02 supplementary single-standard pass merged (Task 5b); Q-003 candidate re-verified under gate6-v1.2 (Task 6); review extract (Task 9); no model calls in the rebuild"
   },
   "Reformed / Presbyterian": {
-   "at": "2026-09-13T10:44:36Z",
+   "at": "2026-09-13T19:01:57Z",
    "from": "stored cell states (candidates, rubrics, coder proposals)",
    "model_calls": 0,
    "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -1718,7 +2077,40 @@
      ]
     }
    },
-   "note": "rebuilt 2026-09-13 (session 4) under the speaks_for candidate-slot diversity rule (Task 1), the lower-floor verdict rule 2a/2b/2c (Task 2) and the exhaustion mark (Task 4a); the IDIOM_OR_FORMULA hazard (Task 3) applies only to verifier calls made from session 4 on and is not reflected in these stored verdicts"
+   "note": "rebuilt 2026-09-13 (session 5): NO TEXT rule (Task 4) and review extract (Task 9); no model calls"
+  },
+  "Baptist": {
+   "at": "2026-09-13T19:01:58Z",
+   "from": "stored cell states (candidates, rubrics, coder proposals)",
+   "model_calls": 0,
+   "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
+   "cells": 37,
+   "verdict_rule": "LOWER_FLOOR_2026-09-13",
+   "cells_with_verdict_changes": 0,
+   "verdict_changes": {},
+   "note": "rebuilt 2026-09-13 (session 5): NO TEXT rule (Task 4); BSR-BA-02 supplementary single-standard pass merged (Task 5a); review extract (Task 9); no model calls in the rebuild"
+  },
+  "Methodist / Wesleyan": {
+   "at": "2026-09-13T19:02:00Z",
+   "from": "stored cell states (candidates, rubrics, coder proposals)",
+   "model_calls": 0,
+   "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
+   "cells": 37,
+   "verdict_rule": "LOWER_FLOOR_2026-09-13",
+   "cells_with_verdict_changes": 0,
+   "verdict_changes": {},
+   "note": "rebuilt 2026-09-13 (session 5): NO TEXT rule (Task 4) and review extract (Task 9); no model calls"
+  },
+  "Mennonite / Anabaptist": {
+   "at": "2026-09-13T19:02:01Z",
+   "from": "stored cell states (candidates, rubrics, coder proposals)",
+   "model_calls": 0,
+   "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
+   "cells": 41,
+   "verdict_rule": "LOWER_FLOOR_2026-09-13",
+   "cells_with_verdict_changes": 0,
+   "verdict_changes": {},
+   "note": "rebuilt 2026-09-13 (session 5): NO TEXT rule (Task 4) and review extract (Task 9); no model calls"
   }
  },
  "workbooks": [
@@ -1726,5 +2118,5 @@
   "Seeking_Jesus_Teaching_Predicate_Source_v2.25r3_AN03_MIGRATION_VATICANNEWS_20260912.xlsx",
   "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx"
  ],
- "updated_at": "2026-09-13T11:07:44Z"
+ "updated_at": "2026-09-13T19:02:02Z"
 }

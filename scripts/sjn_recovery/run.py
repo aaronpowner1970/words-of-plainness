@@ -52,8 +52,14 @@ def main():
     ap.add_argument("--no-exhaust", action="store_true", help="disable the Task 2c exhaustion pass (sampled standards are then reported as sampled)")
     ap.add_argument("--rebuild-packet-only", action="store_true",
                     help="no model calls: rebuild the branch packet from the stored cell states (every cell must be DONE)")
+    ap.add_argument("--rebuild-note", help="the note recorded in packets_rebuilt / the packet header for this rebuild")
+    ap.add_argument("--write-partial-packet", action="store_true",
+                    help="no model calls, no cells run: write the branch packet as PARTIAL (partial true, cap_state populated) because "
+                         "the run failed — used by branch_loop.py after a non-zero run.py exit (session 5, Task 8b)")
+    ap.add_argument("--failure-exit-code", type=int, default=None)
+    ap.add_argument("--failure-reason", default="")
     a = ap.parse_args()
-    if not a.i_have_author_authorization and not a.rebuild_packet_only:
+    if not a.i_have_author_authorization and not a.rebuild_packet_only and not a.write_partial_packet:
         log("Refusing to start the live run: pass --i-have-author-authorization after the author has reviewed "
             "data-sources/sjn/recovery-runs/calibration-report.md (Gate 6 spec §6, launch constraint 2).")
         return 2
@@ -95,7 +101,7 @@ def main():
             note = {"at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "from": "stored cell states (candidates, rubrics, coder proposals)",
                     "model_calls": 0, "workbook": os.path.basename(reg.path), "cells": len(bc),
                     "verdict_rule": LOWER_FLOOR_RULE, "cells_with_verdict_changes": cells_changed, "verdict_changes": verdict_changes,
-                    "note": ("rebuilt 2026-09-13 (session 4) under the speaks_for candidate-slot diversity rule (Task 1), the lower-floor "
+                    "note": a.rebuild_note or ("rebuilt 2026-09-13 (session 4) under the speaks_for candidate-slot diversity rule (Task 1), the lower-floor "
                              "verdict rule 2a/2b/2c (Task 2) and the exhaustion mark (Task 4a); the IDIOM_OR_FORMULA hazard (Task 3) applies "
                              "only to verifier calls made from session 4 on and is not reflected in these stored verdicts")}
             log(f"== {br}: rebuilding the packet from {len(bc)} stored cell states (no model calls); verdicts changed in {cells_changed} cell(s)")
@@ -113,6 +119,11 @@ def main():
     # 1d: the per-branch cap lives in recovery-runs/<run>/cost-state.json and survives every invocation of
     # run.py and api_executor.py. Registered here before the first cell; enforced by the executor; reconciled below.
     state = coststate.load(a.run_id)
+    if a.write_partial_packet:
+        for br in branches:
+            bc = [c for c in cells if c["branch"] == br]
+            write_failed_partial(br, bc, runner, reg, preds, comps, a, state, a.failure_exit_code, a.failure_reason or "run.py exited non-zero")
+        return 0
     for br in branches:
         bc = [c for c in cells if c["branch"] == br]
         if a.limit:
@@ -124,8 +135,18 @@ def main():
             log(f"!! {br}: cost cap already reached ({b['spent_usd']:.2f} of {b['cap_usd']} USD, status {b['status']}); "
                 f"running no further cells; the partial packet is written below. Raise --branch-cost-cap-usd to continue.")
         else:
-            for c in bc:
-                runner.run_cell(c)
+            try:
+                for c in bc:
+                    runner.run_cell(c)
+            except BaseException as e:                     # session 5, Task 8b: a crash leaves a PARTIAL packet, then fails loudly
+                import traceback
+                reason = f"{type(e).__name__}: {e} (while running cells; {traceback.format_exc().strip().splitlines()[-3][:200]})"
+                log(f"!! {br}: run.py FAILED — {reason}; writing the PARTIAL packet before exiting non-zero")
+                try:
+                    write_failed_partial(br, bc, runner, reg, preds, comps, a, coststate.load(a.run_id), 1, reason)
+                except Exception as e2:                    # the partial writer must never mask the original failure
+                    log(f"!! {br}: the partial packet could not be written either: {type(e2).__name__}: {e2}")
+                raise
         done = sum(1 for c in bc if (runner.load(c["queue_id"]) or {}).get("phase") == "DONE")
         log(f"== {br}: {done}/{len(bc)} open cells DONE; pending calls {len(set(llm.pending))}")
         spend = branch_spend(llm, bc, a.projection_per_cell_usd, a.branch_cost_cap_usd)
@@ -183,6 +204,46 @@ def main():
                    "workbooks": sorted(set((prior.get("workbooks") or [prior.get("workbook")] if prior else []) + [os.path.basename(reg.path)]) - {None}),
                    "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}, fh, indent=1)
     return 10 if llm.pending else 0
+
+
+def write_failed_partial(br, bc, runner, reg, preds, comps, a, state, exit_code, reason):
+    """Task 8b (session 5): a branch that ends on a non-zero exit gets its packet written with partial true and cap_state
+    populated — the cost-state figures plus what stopped it — so a partial packet can never be mistaken for a finished one.
+    Also marks the branch RUN_FAILED in cost-state.json. No model calls."""
+    b = coststate.register_branch(state, br, a.branch_cost_cap_usd, [c["queue_id"] for c in bc])
+    done = sum(1 for c in bc if (runner.load(c["queue_id"]) or {}).get("phase") == "DONE")
+    b["status"] = "RUN_FAILED"
+    b["failed_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    coststate.save(state)
+    cap_state = {k: b.get(k) for k in ("cap_usd", "spent_usd", "calls", "status", "cap_hit_at")}
+    cap_state.update({"stopped_by": "RUN_FAILED", "exit_code": exit_code, "reason": reason[:600], "failed_at": b["failed_at"],
+                      "cells_done": done, "cells": len(bc)})
+    log(f"!! {br}: writing the PARTIAL packet (RUN_FAILED, exit {exit_code}): {done}/{len(bc)} cells DONE")
+    try:
+        build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log, partial=cap_state)
+    except Exception as e:
+        # The failure may lie in a cell state the builder itself cannot read. Then the packet is a minimal FAILURE record —
+        # never left as whatever finished packet stood before (that one stays in git history).
+        from sjn_recovery.config import PACKETS_DIR
+        cap_state["packet_builder_error"] = f"{type(e).__name__}: {e}"[:400]
+        phases = {}
+        for c in bc:
+            try:
+                phases[c["queue_id"]] = (runner.load(c["queue_id"]) or {}).get("phase") or "NOT_RUN"
+            except Exception as e3:
+                phases[c["queue_id"]] = f"UNREADABLE ({type(e3).__name__})"
+        stub = {"branch": br, "run_id": a.run_id, "built_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                "partial": True, "cap_state": cap_state, "failure_record_only": True, "cells": len(bc), "cells_with_candidates": None,
+                "cells_not_finished": sum(1 for p in phases.values() if p != "DONE") or len(bc),
+                "note": "RUN FAILED and the packet builder could not read the cell states: this is a failure record, not a packet",
+                "cards": [{"queue_id": q, "status": (f"NOT_FINISHED ({p}): branch stopped by a run failure" if p != "DONE" else
+                                                     "UNREVIEWABLE (cell DONE, but no card was built): branch stopped by a run failure")}
+                          for q, p in phases.items()]}
+        path = os.path.join(PACKETS_DIR, f"{br.casefold().replace(' / ', '-').replace(' ', '-')}.json")
+        with open(path, "w", encoding="utf-8", newline="\n") as fh:
+            json.dump(stub, fh, ensure_ascii=False, indent=1)
+            fh.write("\n")
+        log(f"!! {br}: packet builder failed too ({cap_state['packet_builder_error'][:160]}); wrote a minimal FAILURE record to {path}")
 
 
 def _call_cost(llm, call_id):

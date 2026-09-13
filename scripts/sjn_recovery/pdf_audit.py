@@ -135,7 +135,8 @@ def audit_row(reg, rid, fetcher, manifest):
     urls = (manifest.get("standards", {}).get(rid) or {}).get("urls") or []
     modes = sorted({u.get("mode") for u in urls})
     rec["fetch_modes_recorded"] = modes
-    is_pdf = "pdf" in modes
+    # a row not yet built (no manifest fetch record) is judged by its registry fetch_mode (session 5: BSR-LU-02 before its build)
+    is_pdf = "pdf" in modes or (not modes and "PDF" in (row.get("fetch_mode") or "").upper())
     rec["source_kind"] = "PDF_TEXT_LAYER" if is_pdf else ("HTML" if modes else "UNKNOWN")
     furniture_keys = []
     if is_pdf:
@@ -153,11 +154,17 @@ def audit_row(reg, rid, fetcher, manifest):
                           "furniture_bottom_first_pass": dict(sorted(found["bottom"].items(), key=lambda kv: -kv[1]))}
             furniture_keys = list(found["top"]) + list(found["bottom"])
     try:
-        legacy, _, _ = chunk_row(reg, row, fetcher, LegacyCtx)
         repaired, notes, ctx = chunk_row(reg, row, fetcher, sources.Ctx)
     except sources.FetchError as e:
         rec["error"] = str(e); rec["verdict"] = "REBUILD_FAILED"
         return rec
+    try:
+        legacy, _, _ = chunk_row(reg, row, fetcher, LegacyCtx)
+    except sources.FetchError as e:
+        # session 5: a row first chunked after the repairs (BSR-LU-02) may not chunk on the legacy path at all; no branch ever
+        # ran on a legacy chunking of it, so the comparison is recorded as not applicable rather than failing the audit
+        rec["legacy_error"] = f"the LEGACY path cannot chunk this row: {e}"
+        legacy = []
     cv = ctx.corpus_vocabulary() if is_pdf else set()
     if is_pdf:
         # the stacked-furniture keys the repaired path actually removed (all peeling rounds), for the splice scan
@@ -186,7 +193,9 @@ def audit_row(reg, rid, fetcher, manifest):
                                  "goodness_variant_in_repaired": sum(1 for c in repaired if "wisdom, and goodness" in c["text"]),
                                  "article_i_text": next((c["text"] for c in repaired if c["locator"].startswith("Articles of Religion, Article I ")), None)}
     d = rec["legacy_to_repaired"]
-    if d["changed"] or d["added"] or d["removed"]:
+    if rec.get("legacy_error"):
+        rec["verdict"] = "FIRST_CHUNKED_ON_REPAIRED_PATH"
+    elif d["changed"] or d["added"] or d["removed"]:
         rec["verdict"] = "AFFECTED"
     else:
         rec["verdict"] = "CLEAN" if is_pdf else "HTML_SOURCED"
@@ -256,11 +265,13 @@ def main():
     ap.add_argument("--all-pdf", action="store_true", help="also audit the other PDF rows (BSR-EO-08, BSR-EO-09)")
     ap.add_argument("--live-fetch", action="store_true", help="fetch the ratified URLs anew instead of reusing the fetch cache")
     ap.add_argument("--workbook")
+    ap.add_argument("--registry-delta", help="draft registry CSV applied in memory (session 5); the workbook is never written")
+    ap.add_argument("--out-stem", help="write <stem>.json / <stem>.md instead of recovery-runs/pdf-audit.*")
     a = ap.parse_args()
     rows = [r.strip() for r in a.rows.split(",") if r.strip()]
     if a.all_pdf:
         rows += [r for r in ALL_PDF_EXTRA if r not in rows]
-    reg = Registry(a.workbook)
+    reg = Registry(a.workbook, registry_delta=a.registry_delta)
     manifest = store.load_manifest()
     fetcher = Fetcher(FETCH_CACHE, reuse_cache=not a.live_fetch, strict_host=True)
     report = {"audited_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "workbook": os.path.basename(reg.path),
@@ -278,11 +289,12 @@ def main():
     report["affected_rows"] = [r["registry_id"] for r in report["per_row"] if r["verdict"] == "AFFECTED"]
     report["rows_needing_rechunk"] = [r["registry_id"] for r in report["per_row"] if r.get("store_matches_repaired") is False]
     os.makedirs(RUNS_DIR, exist_ok=True)
-    jp = os.path.join(RUNS_DIR, "pdf-audit.json")
+    report["registry_delta"] = reg.delta
+    jp = (a.out_stem + ".json") if a.out_stem else os.path.join(RUNS_DIR, "pdf-audit.json")
     with open(jp, "w", encoding="utf-8", newline="\n") as fh:
         json.dump(report, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
-    write_md(report, os.path.join(RUNS_DIR, "pdf-audit.md"))
+    write_md(report, (a.out_stem + ".md") if a.out_stem else os.path.join(RUNS_DIR, "pdf-audit.md"))
     log(f"== affected rows: {report['affected_rows']}; store still differs for: {report['rows_needing_rechunk']}; report -> {jp}")
     return 0
 

@@ -7,8 +7,8 @@ grouped and the locator names the real paragraph range.
 
 Adapters return (chunks, notes). Chunk fields: registry_id, branch, standard_title, authority_tier,
 scope_caveat, locator, division, text, text_hash, source_url (internal: never passed to an agent),
-language. Fetch modes follow the registry (AC-08): RENDERED hosts use Playwright; files.lcms.org is
-registered as an authority URL only and nothing is chunked."""
+language. Fetch modes follow the registry (AC-08): RENDERED hosts use Playwright. files.lcms.org was registered as
+an authority URL only until session 5, when the publisher's Download href was found to serve the PDF itself."""
 import os
 import re
 import sys
@@ -75,7 +75,10 @@ class Ctx:
 
     def _log_fetch(self, url, mode, fr):
         rec = {"url": url, "mode": mode, "status": fr.status, "ok": fr.ok, "error": fr.error,
-               "final_url": fr.final_url, "redirects": list(fr.redirects or []), "cross_host_redirect": fr.cross_host_redirect}
+               "final_url": fr.final_url, "redirects": list(fr.redirects or []), "cross_host_redirect": fr.cross_host_redirect,
+               "www_label_redirects": list(getattr(fr, "www_label_redirects", None) or []),
+               "content_type": getattr(fr, "content_type", ""),
+               "bytes": len(getattr(fr, "pdf_bytes", b"") or b"") or len((getattr(fr, "html", "") or "").encode("utf-8"))}
         self.urls.append(rec)
         if fr.cross_host_redirect:
             raise RedirectError(f"{url}: host redirected onto a different site ({fr.error or fr.cross_host_redirect}); "
@@ -118,6 +121,9 @@ class Ctx:
         self.hyphenation = getattr(self, "hyphenation", {})
         self.furniture = getattr(self, "furniture", {"top": {}, "bottom": {}, "lines_removed": 0})
         self.intraword_joins = getattr(self, "intraword_joins", [])
+        # 0. Unicode line / paragraph separators (U+2028, U+2029) are spacing: the LCMS Augsburg Confession PDF separates
+        #    every word with U+2029 (session 5). No stored chunk carried either character before this fold was added.
+        raw = (raw or "").replace(chr(0x2029), " ").replace(chr(0x2028), " ")
         text = join_soft_hyphens(raw, stats=self.hyphenation)
         rep = {}
         text = strip_page_furniture(text, rep)
@@ -1066,6 +1072,79 @@ def book_of_concord(ctx):
     return out, notes
 
 
+AC_LCMS_HEADING = re.compile(r"^(Preface to the Emperor Charles V\.|Article [IVXL]+: .+|Articles In Which Are Reviewed|Conclusion\.)$")
+AC_LCMS_PARA = re.compile(r"(?:(?<=\s)|^)(\d{1,3})\]\s*")
+AC_LCMS_FOOTER = "©The Lutheran Church"
+FF_CHAR, NL_CHAR = chr(12), chr(10)
+
+
+def augsburg_confession_lcms(ctx):
+    """BSR-LU-02 — the Augsburg Confession as the LCMS publishes it (files.lcms.org Download href, a text-layer PDF;
+    session 5, 2026-09-13). Split by the document's own divisions — the Preface, Articles I–XXVIII, the introduction to
+    the abuses corrected, the Conclusion — and inside a long division by the printed paragraph numbers ("12]"), grouped
+    like the Book of Concord adapter (≤ BOC_GROUP_CHARS). The paragraph markers are removed from the text (they fall
+    mid-sentence and would break a verbatim phrase) and named in the locator. Dropped: the table of contents and title
+    page before the Preface, every "Back to top" link line, and the publisher's address block after the final one
+    (it opens "©The Lutheran Church—Missouri Synod"); the running "Page N of 27" header is removed by the extraction
+    repair (page furniture)."""
+    url = ctx.row["canonical_url"]
+    text = ctx.pdf(url)
+    lines = [clean(l) for l in text.replace(FF_CHAR, NL_CHAR).split(NL_CHAR)]
+    divisions, cur, started, footer_at, back_links = [], None, False, None, 0
+    for i, t in enumerate(lines):
+        if not t:
+            continue
+        if t.startswith(AC_LCMS_FOOTER):
+            footer_at = i
+            break
+        if t == "Back to top":
+            back_links += 1
+            continue
+        m = AC_LCMS_HEADING.match(t)
+        if m and (started or t.startswith("Preface to the Emperor")):
+            started = True
+            cur = {"title": t.rstrip("."), "lines": []}
+            divisions.append(cur)
+            continue
+        if not started:
+            continue
+        if cur["title"] == "Articles In Which Are Reviewed" and not cur["lines"] and t.startswith("The Abuses"):
+            cur["title"] = f"{cur['title']} {t}"
+            continue
+        if t == "Chief Articles of Faith":
+            continue
+        cur["lines"].append(t)
+    if footer_at is None:
+        raise FetchError(f"{url}: publisher footer not found — the PDF layout changed; nothing chunked")
+    out = []
+    for d in divisions:
+        body = join(d["lines"])
+        parts = [p for p in AC_LCMS_PARA.split(body)]
+        paras, num = [], None
+        if parts and parts[0].strip():
+            paras.append((None, parts[0].strip()))
+        for k in range(1, len(parts) - 1, 2):
+            paras.append((int(parts[k]), parts[k + 1].strip()))
+        loc_base = f"Augsburg Confession: {d['title']}"
+        group, a, b, size = [], None, None, 0
+        for n, t in paras:
+            if not t:
+                continue
+            if group and size + len(t) > BOC_GROUP_CHARS and n is not None:
+                _emit(ctx, out, f"{loc_base}, ¶{a}" + (f"–{b}" if b != a else ""), group, "paragraph-range", url)
+                group, a, b, size = [], None, None, 0
+            if n is not None:
+                a = a if a is not None else n
+                b = n
+            group.append(t); size += len(t)
+        if group and a is None:
+            _emit(ctx, out, loc_base, group, "section", url)             # an article printed without paragraph numbers (XIV, XIX)
+        elif group:
+            _emit(ctx, out, f"{loc_base}, ¶{a}" + (f"–{b}" if b != a else ""), group, "paragraph-range", url)
+    return out, [f"{len(divisions)} divisions (Preface, Articles I–XXVIII, abuses introduction, Conclusion) in {len(out)} paragraph-range chunks; "
+                 f"{back_links} 'Back to top' link line(s) and the publisher address block after the last dropped; table of contents and title page skipped"]
+
+
 def small_catechism_cph(ctx):
     url = ctx.row["canonical_url"]
     segs = segments(ctx.html(url))
@@ -1806,7 +1885,7 @@ ADAPTERS = {
     "BSR-EO-07": acrod_liturgy, "BSR-EO-08": roea_basil, "BSR-EO-09": roea_synodikon,
     "BSR-EO-10": crete_2016, "BSR-EO-11": antioch_witness, "BSR-EO-12": sparta_creed_greek,
     "BSR-EO-13": newadvent_constantinople_iii, "BSR-EO-14": goarchdiocese_liturgy,
-    "BSR-LU-01": book_of_concord, "BSR-LU-03": small_catechism_cph,
+    "BSR-LU-01": book_of_concord, "BSR-LU-02": augsburg_confession_lcms, "BSR-LU-03": small_catechism_cph,
     "BSR-RP-01": wcf_opc, "BSR-RP-02": wsc_opc, "BSR-RP-03": wlc_opc, "BSR-RP-04": pcusa_book_of_confessions,
     "BSR-RP-05": heidelberg_crcna, "BSR-RP-06": belgic_crcna,
     "BSR-AN-01": thirty_nine_articles, "BSR-AN-02": bcp_catechism_1662, "BSR-AN-03": athanasian_creed_cofe,
@@ -1823,5 +1902,6 @@ ADAPTERS = {
 # the manifest records what the host actually answered.
 NO_TEXT = {
     "BSR-RC-05": ("LINEAGE", "Fordham sourcebook is a TRANSLATION_WITNESS / lineage host for 4 released cells; the text corpus for Lateran IV constitutions 1–2 is BSR-RC-04"),
-    "BSR-LU-02": ("AUTHORITY_URL_ONLY", "files.lcms.org is a client-side viewer (AC-08): registered as the LCMS adoption URL; no text extraction"),
+    # BSR-LU-02 left this list in session 5 (2026-09-13): the viewer page was a wrapper; the publisher's own Download href
+    # (files.lcms.org/dl/f/the-augsburg-confession, Draft3r4, pending ratification) serves the text-layer PDF itself.
 }

@@ -13,7 +13,7 @@ branch:
           "cap_usd": 25.0,               # the author's per-branch cap (run.py --branch-cost-cap-usd)
           "spent_usd": 12.3456,          # metered USD, every priced call, across every invocation
           "calls": 210,
-          "status": "RUNNING" | "CAP_HIT" | "DONE",
+          "status": "RUNNING" | "CAP_HIT" | "RUN_FAILED" | "DONE",
           "cells": 43,
           "queue_ids": ["Q-021", ...],   # how the executor maps a job (meta.queue_id) to its branch
           "invocations": [               # one entry per executor invocation that priced a call
@@ -88,6 +88,8 @@ def register_branch(state, branch, cap_usd, queue_ids):
     b["queue_ids"] = sorted(set(b["queue_ids"]) | set(queue_ids))
     if b["status"] == "CAP_HIT" and (b["cap_usd"] is None or b["spent_usd"] < b["cap_usd"]):
         b["status"] = "RUNNING"          # the author raised the cap: the branch may continue
+    if b["status"] == "RUN_FAILED":
+        b["status"] = "RUNNING"          # session 5: a relaunch after a run failure (the failure stays in failed_at)
     return b
 
 

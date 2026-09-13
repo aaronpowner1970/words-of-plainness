@@ -1,10 +1,10 @@
 {
  "branch": "Anglican",
  "run_id": "live-1",
- "built_at": "2026-09-13T10:44:32Z",
+ "built_at": "2026-09-13T19:01:54Z",
  "app_master_version": "v2.25r4 GATE6 SCOPE RATIFIED",
  "rebuilt_from": {
-  "at": "2026-09-13T10:44:31Z",
+  "at": "2026-09-13T19:01:54Z",
   "from": "stored cell states (candidates, rubrics, coder proposals)",
   "model_calls": 0,
   "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -33,7 +33,7 @@
     ]
    }
   },
-  "note": "rebuilt 2026-09-13 (session 4) under the speaks_for candidate-slot diversity rule (Task 1), the lower-floor verdict rule 2a/2b/2c (Task 2) and the exhaustion mark (Task 4a); the IDIOM_OR_FORMULA hazard (Task 3) applies only to verifier calls made from session 4 on and is not reflected in these stored verdicts"
+  "note": "rebuilt 2026-09-13 (session 5): NO TEXT rule (Task 4) and review extract (Task 9); no model calls"
  },
  "partial": false,
  "cap_state": null,
@@ -115,7 +115,10 @@
   "BSR-AN-04",
   "BSR-AN-05"
  ],
- "branch_ran_on": "5 of 5 ratified rows",
+ "branch_ran_on": "5 of 5 ratified rows have text in the corpus now",
+ "rows_no_text_on_cards": {},
+ "rows_on_unratified_url": [],
+ "cells_ran_on": "every card consulted every ratified row it should have",
  "translation_pairs": {},
  "translation_pairs_evidence": [],
  "speaks_for_groups": {
@@ -494,21 +497,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the one God/Godhead, and the text asserts the Father's identity as a divine Person, meeting the floor at a partial/creedal level."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -588,21 +579,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the Father, and the creed positively asserts the Father's divine identity as part of its confessional statement."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -680,21 +659,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is God the Father, and the statement is a direct creedal assertion of divine paternity, fully satisfying the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -830,21 +797,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The phrase is verbatim and does assert the Father's paternity relationally, but the sentence's grammatical subject is the Son, not the Father/God directly, so it only partially meets the required-subject condition."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -913,21 +868,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The grammatical subject is the Holy Ghost, not the Father/God as required; 'Father' is mentioned only relationally within the Spirit's procession, not asserted as a predicate of God."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -992,21 +935,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (God), asserted as catechetical teaching, fully instantiating the Father predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -1074,21 +1005,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subject is God the Father, and the creed asserts this in its own authoritative voice as core Trinitarian doctrine."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -1292,21 +1211,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The required subject (God, here as Trinity of Persons) is asserted to be Lord in the creed's own voice, matching the predicate's definition of shared authority and sovereignty."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -1386,21 +1293,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is God (each divine Person), and the creed asserts this in its own voice as binding Catholic doctrine, fully meeting the predicate's floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -1480,21 +1375,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, God is the grammatical and theological subject, and the statement is a direct scriptural assertion of divine lordship presented affirmatively by the catechism."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -1599,21 +1482,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The passage's grammatical subject and speech act are a command directed at the believer to love God, not an assertion of God's own lordship, so neither the subject nor the assertion condition is met."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -1680,21 +1551,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "God is the grammatical and rhetorical subject, the assertion is direct and in God's own voice, and it falls within the semantic floor of Lord as authority/sovereignty."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -1763,21 +1622,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (the one Godhead/Trinity as God), and a genuine doctrinal assertion, but the floor is only partial since it affirms unity of the title 'Lord' rather than expounding sovereignty in full."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -1982,21 +1829,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The passage supports a narrower claim (God as maker/preserver of all things) that falls within but does not fully match the specific predicate of creaturely goodness deriving from God."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "BELOW_FLOOR",
@@ -2074,21 +1909,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (God the Father), and asserted as doctrine rather than reported or denied."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -2173,21 +1996,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The phrase is verbatim and God's grace is indeed asserted as necessary cause of good will, but the grammatical subject is human incapacity, and the claim is soteriological (enabling good will) rather than a full metaphysical assertion that God is the source of all creaturely good."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -2255,21 +2066,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The passage's grammatical subject is 'the universe' (and 'it'), not God, so it fails the required-subject test even though it implies God's causal role in the universe's goodness."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -2338,21 +2137,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The chunk defines grace and its soteriological effects but does not assert that creaturely goodness is derived from God, so it falls outside the predicate's scope despite superficial thematic proximity."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -2563,21 +2350,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, God as grammatical subject, asserted in the standard's own voice as an attribute of the divine nature."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -2676,21 +2451,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, subject is God, asserted in the standard's own voice, and the assertion of God's righteous opposition to all sin and evil meets the floor of divine justice/righteousness."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -2793,21 +2556,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim and the standard asserts in its own voice that God possesses a righteousness to which all sin is opposed and from which holy condemnation follows; caveat because the attribution is by genitive rather than direct predication of God as subject, and 'perfect' justice is implied rather than stated."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -3036,21 +2787,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase directly and verbatim attributes holiness to God as an asserted truth acknowledged in worship, satisfying subject, assertion, and floor requirements."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -3284,21 +3023,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The phrase is verbatim and predicated of God in the standard's own voice, but the word \"true\" here means genuine/real rather than truthful or trustworthy, so the predicate of truthfulness/faithfulness is not asserted."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -3385,21 +3112,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The grammatical subject is marriage, not God; \"faithful love\" is attributed to the union rather than asserted of God as a divine attribute."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -3630,21 +3345,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The subject is God, the statement is a direct assertion, and the phrase is verbatim, fully satisfying the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -3722,21 +3425,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is God (the Father), and the catechism affirms in its own voice that God is loving in his creative action, fully matching the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -3821,21 +3512,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The text presupposes divine love but the grammatical focus is on human capacity to respond, not on God as the acting subject of love, so it only partially meets the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -4033,21 +3712,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (God), and asserted as doctrine, satisfying the mercy predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -4125,21 +3792,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, spoken by God as subject, and asserts mercy as a divine attribute/action, satisfying the predicate at FULL floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -4217,21 +3872,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim, subject is God (the Father), and the catechism asserts God's mercy as the basis of his gracious action, fulfilling the FULL floor for the Merciful predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -4315,21 +3958,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The passage's grammatical subject is the communicant ('they'), instructing them to have faith in God's mercy, not asserting God's mercy as the required subject in the catechism's own voice."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -4529,21 +4160,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the passage asserts God's gracious action through Christ toward humans, fulfilling the predicate, though the grammatical subject is technically 'the grace of God' rather than 'God' directly, a minor relational nuance."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -4623,21 +4242,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The chunk verbatim contains the phrase, asserts it of God as subject, and affirms gracious action toward creatures in the catechism's own voice."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -4751,21 +4358,9 @@
        "verdict": "REJECT",
        "reason_code_final": "NOT_ASSERTION",
        "reason": "The phrase is embedded in a prayer petition requesting grace, which the rubric explicitly excludes as a valid assertion of the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "NOT_ASSERTION",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "NOT_ASSERTION",
@@ -4834,21 +4429,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The clause's grammatical subject is 'we', with 'grace of God' functioning only as an instrumental phrase, so the required subject (GOD) is not the asserted subject of the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -4917,21 +4500,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The grammatical subject of the clause is 'Sacraments,' not God; the phrase describes sacraments as signifying grace and God's good will rather than asserting God's own gracious action toward creatures."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -4999,21 +4570,9 @@
        "verdict": "REJECT",
        "reason_code_final": "NOT_ASSERTION",
        "reason": "The catechism answer is explicitly a prayer of petition ('what desirest thou... I pray unto God that he will...'), not a first-person assertion by the standard that God is in fact gracious; per the rubric, prayer petitions do not satisfy the assertion requirement."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "NOT_ASSERTION",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "NOT_ASSERTION",
@@ -5230,21 +4789,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim and asserted in the standard's own voice; the subject is Jesus (the divine Son, not his human nature considered apart), and the patience is framed economically as delay of the return rather than as a stated divine attribute, so the support is partial."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -5486,21 +5033,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (God), and a direct doctrinal assertion of forgiveness of sins."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -5594,21 +5129,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The grammatical subject is the condemned opponents ('they'), not God, and the clause functions as a rejection of a contrary view rather than a positive assertion that God forgives sin, so both the subject and speech-act criteria fail."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -5676,21 +5199,9 @@
        "verdict": "REJECT",
        "reason_code_final": "NOT_ASSERTION",
        "reason": "The text is a prayer petition asking God to forgive, not a doctrinal assertion that God forgives sin, so it fails the assertion requirement despite verbatim phrase and correct subject."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "NOT_ASSERTION",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "NOT_ASSERTION",
@@ -5758,21 +5269,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The text speaks of baptism signifying and sealing the promise of forgiveness, not of God as the forgiving agent, so the required subject condition fails."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -5841,21 +5340,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The phrase is a petition in the Lord's Prayer asking God for forgiveness and conditioning it on human forgiveness, not a first-person assertion by the standard that God forgives sin."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -5924,21 +5411,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The required subject is God performing forgiveness, but the text's grammatical subject is the penitent (or the rite itself), making God only an implied recipient of confession rather than the asserting agent of forgiveness."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -6299,21 +5774,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the triune Godhead (God), and the assertion directly affirms shared divine glory as defined by the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -6391,21 +5854,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the grammatical subject is the Godhead (the one God in Trinity), and the creed asserts equal divine glory in its own voice, fully matching the predicate's floor of shared divine glory."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -6494,21 +5945,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The passage affirms glory as divine and shared, but its grammatical subject is the Holy Ghost, not God/the Father as strictly required, so it only partially satisfies the predicate's required-subject condition."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -6709,21 +6148,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim, subject is God acting through the sacraments, and the assertion is genuine, but the scope of 'life-giving' here is limited to sacramental quickening of faith, a partial instance of the broader predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -6807,21 +6234,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The required subject is God/the Father, but the passage's grammatical subject is the Holy Spirit specifically, not the broader required subject."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -7021,21 +6436,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The phrase affirms God's role as sustaining Preserver of creation, which lies within but does not fully match the broader providential 'Governor/Ruler' predicate, so it is accepted as a partial instantiation."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "BELOW_FLOOR",
@@ -7113,21 +6516,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, God is the subject, and the statement asserts providential direction/governance of the universe."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -7211,21 +6602,9 @@
        "verdict": "REJECT",
        "reason_code_final": "NOT_ASSERTION",
        "reason": "The text is a prayer petition expressing personal desire and hope ('I desire', 'I pray', 'I trust'), not a direct assertion by the catechism that God governs providentially; petitions are excluded from counting as assertions per the rubric."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "NOT_ASSERTION",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "NOT_ASSERTION",
@@ -7425,21 +6804,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, subject is God, and the assertion is affirmative, but it only implies sovereignty through creative/preservative power rather than stating dominion directly."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -7517,21 +6884,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The verbatim phrase, correct subject (including the Father as required), and clear assertoric mood together satisfy the FULL floor for shared divine sovereignty."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -7611,21 +6966,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, God is the grammatical subject of the descriptive clause, and the assertion affirms God's supreme governing dominion over creation, satisfying the sovereignty predicate at FULL floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -7719,21 +7062,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "Although the phrase implies God's dominion over creation, the grammatical subject is 'the world', not God, failing the required-subject test for the Sovereign predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -7800,21 +7131,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The clause verbatim asserts unity of Lordship (sovereignty) of the one God/Trinity, matching the required subject and predicate definition in its own doctrinal voice."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -7883,21 +7202,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is God (Father, Son, Holy Ghost), and the creed asserts shared omnipotence as one Almighty, which partially instantiates the sovereignty predicate though 'Almighty' and 'Sovereign' are related but distinct semantic notions."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -8116,21 +7423,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim and asserted in the standard's own voice; the judging subject is the incarnate Son rather than 'God' simpliciter or the Father, but the creed explicitly identifies the Son as God and co-equal, so the shared divine judgment floor is satisfied."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -8229,21 +7524,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim and asserted in the standard's own voice; the caveat is that the grammatical subject is the Son rather than the one God or the Father as named in the required-subject scope, though the Creed's surrounding confession (\"his only Son our Lord,\" seated at the Father's right hand) places the judgment within the shared divine prerogative rather than in Christ's human nature."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -8340,21 +7623,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim and asserted in the standard's own voice; the judging subject is the divine Christ (not his human nature), which supplies divine judgment in a narrowed, Christologically specified form."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -8455,21 +7726,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The quoted phrase is verbatim and asserted, but its grammatical subject is Christ, described precisely in terms of his resurrected human body and nature, which the required-subject rule excludes; the predicate is scoped to God (the one God or the Father), not to the Son."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -8684,21 +7943,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase; God is the agent of the asserted redemptive act; the standard asserts it directly in catechetical answer form."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -8796,21 +8043,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is a divine person named as God (not Christ's human nature, not the Church), and redemptive action is positively asserted; the caveat is that the assertion is appropriated to the Son rather than made of the one God or the Father, so the floor is PARTIAL as claimed."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -8933,21 +8168,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The quoted phrase is verbatim, but the grammatical subject of the passage is 'we' (humanity being accounted righteous); 'Saviour' appears only as a title of Jesus Christ within a prepositional phrase, so the chunk does not predicate redemptive action of the required subject (the one God/the Father)."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -9033,21 +8256,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim and the surrounding clause asserts the Father's redemptive action; caveat because the quoted words themselves title the Son 'Saviour', so the predicate of God rests on the adjoining clause 'he hath called me to this state of salvation' rather than on the quoted phrase alone."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -9134,21 +8345,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The grammatical subject is the Offering of Christ, not God (the one God or the Father); the passage predicates redemption of the oblation itself, so the citation fails the required-subject test."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -9235,21 +8434,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The quoted phrase is verbatim and asserted, but its subject is the incarnate Son/Christ acting toward the Father, not the required subject (the one God or the Father) as redemptive agent; the predicate is not scoped to the Son in this family."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -9452,21 +8639,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "God is the subject and the text asserts God spoke, satisfying a narrow sense of self-communication, but it is limited to giving the moral law rather than broader self-revelation, so it only partially meets the predicate's floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "BELOW_FLOOR",
@@ -9544,21 +8719,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (God), and a positive assertion of divine self-revelation, fully matching the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -9638,21 +8801,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The subject is God, the claim is asserted assertively, and it affirms God's self-communication, satisfying the predicate's floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -9735,21 +8886,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The text affirms a specific mode of God's self-disclosure (moral will via commandments), which falls within but is narrower than the general predicate of divine self-communication."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -9950,21 +9089,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (God), and a direct assertion that God is the Maker of all things, satisfying the fountain-of-being predicate at FULL floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -10044,21 +9171,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is God the Father, and the statement is a direct assertion of God as creator/maker of all, satisfying the fountain-of-being predicate at the full floor within the noted qualification."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -10136,21 +9251,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase present, subject is God the Father, and the catechism asserts this as its own doctrinal answer, fully matching the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -10243,21 +9346,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (God the Father), and the creed asserts this as a confessional statement of belief, satisfying the FULL floor for the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -10323,21 +9414,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The chunk verbatim and in its own voice affirms that the universe is created by God, matching the predicate's required assertion about God as source of creaturely existence."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -10405,21 +9484,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is 'the Lord' (God), and the catechism asserts in its own voice that God made heaven and earth, fulfilling the predicate of creaturely existence derived from God."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -10622,21 +9689,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the Son, and the clause is a direct positive assertion identifying the Son as the Word, matching the predicate fully."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -10716,21 +9771,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subject is the Son, and the Chalcedonian Definition positively asserts the identification of the Son with 'God the Word,' meeting the full floor of the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -11269,21 +10312,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (Jesus/the Son), and a direct doctrinal assertion of the Son as image of the Father."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -11496,21 +10527,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject, and direct assertion of the predicate in the catechetical answer."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -11725,21 +10744,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The predicate is asserted of the Holy Spirit only as part of a collective Trinitarian formula rather than as a subject singled out, so while the assertion is FULL in substance, the shared/collective phrasing warrants a caveat."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -11819,21 +10826,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The passage affirms the Holy Spirit's full divinity and equality with the Father and Son, which entails divine power even though 'power and might' is not the literal wording used, so a narrower but valid affirmation of the predicate holds."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -11913,21 +10908,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the Holy Spirit is explicitly named as Almighty within a triadic assertion, and the creed asserts this in its own voice as normative doctrine."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -12016,21 +10999,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The phrase is verbatim and does assert the Holy Ghost is Almighty, but the required subject is embedded in a triadic formula rather than singled out, so it only partially isolates the Spirit as required subject."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -12099,21 +11070,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The cited phrase establishes co-eternity, not power/might, so it falls short of the predicate's required content despite being verbatim and correctly subjected to the Holy Ghost."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -12182,21 +11141,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The cited phrase establishes the Holy Ghost's eternity, not its 'eternal power and might'; the predicate's core content (power/might) is absent from the quoted text, so the proposition asserted falls below the required floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -12400,21 +11347,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The term 'everlasting' supports beginninglessness but the fuller uncreated predicate (denial of dependence on a creator) is not explicitly stated, so this is a partial match to the floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "BELOW_FLOOR",
@@ -12494,21 +11429,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the divine Persons/one God, and the creed asserts uncreatedness in its own voice consistent with the predicate's floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -12588,21 +11511,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subjects are the divine Persons, and the creed asserts uncreatedness as core doctrine, satisfying the predicate for the required subject (God)."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -12701,21 +11612,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the one God (the Trinity understood as one Godhead), and the creed positively asserts uncreatedness of God, fulfilling the predicate at FULL floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -12783,21 +11682,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the Father (a permitted required subject), and the creed asserts this as doctrine rather than reporting or denying an opponent's view."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -12866,21 +11753,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The cited phrase affirms God's role as creator/sustainer of all things, which only indirectly implies God's own uncreated status rather than directly asserting it, so it meets a narrower, partial reading of the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "BELOW_FLOOR",
@@ -13085,21 +11960,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The passage directly asserts God as Creator of all things, from which unmade/uncreated status is reasonably inferred though not explicitly stated, matching the PARTIAL floor claim."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -13179,21 +12042,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the Father (a required subject), and the creed asserts in its own voice that the Father is not made nor created, matching the predicate 'Not made' as denial of creaturehood."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -13273,21 +12124,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subject includes the Father (God), and the creed asserts uncreatedness as doctrine, satisfying the 'not made' predicate at FULL floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -13374,21 +12213,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the Father, and the creed asserts the Father's uncreated status as a positive confessional claim, satisfying the predicate at FULL floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -13456,21 +12283,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is God (Trinity), and the Creed asserts in its own voice that God is uncreated, matching the predicate's floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -13674,21 +12489,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase asserts God as without parts, which implies non-circumscription, satisfying a partial reading of the immensity predicate for the required subject."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -13768,21 +12571,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the one God (Trinity), and the assertion is direct; however the archaic English word 'incomprehensible' translates the Latin 'immensus' (immeasurable/boundless) rather than modern 'cannot be understood,' so a caveat flags this potential lexical ambiguity even though the underlying doctrinal claim matches the immensity predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -13862,21 +12653,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject includes the Father and the unified Godhead, and the assertion is made in the creed's own voice; however, 'incomprehensible' here could be read epistemically rather than spatially, so a caveat flag is warranted even though the traditional theological sense aligns with immensity/circumscription-denial."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -13966,21 +12745,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "Though verbatim and asserted of the correct subject, 'incomprehensible' in this Trinitarian list conveys unfathomability rather than the specific spatial/metaphysical immensity the predicate requires, so the floor proposition is not met."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -14181,21 +12948,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The candidate phrase is verbatim and the subject is God, asserted as a positive doctrinal claim; however, the specific predicate 'invisible' is not directly applied to God in the quoted text—only inferred from 'without body'—while the actual word 'invisible' in the chunk refers to created things, warranting a caveat."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -14410,21 +13165,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, God is the subject, and the assertion of constant decree fits the PARTIAL floor of constancy of purpose without asserting full metaphysical immutability."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -14637,21 +13380,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The subject, assertion, and predicate all align with the required floor: God is directly declared everlasting in the Church's own confessional voice."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -14731,21 +13462,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (the Father, within required subject scope), and clear assertoric statement of eternity as a shared divine attribute."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -14825,21 +13544,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (Father/God), and the creed asserts eternity positively rather than merely denying an opponent's view."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -14936,21 +13643,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, asserted in the Creed's own voice, and predicates eternity of the one God (the unified Godhead), matching the required subject and floor definition."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -15018,21 +13713,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the Godhead/Persons (God), and the assertion affirms shared eternity among them, meeting the PARTIAL floor for the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -15098,21 +13781,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": null
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -15317,21 +13988,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subject includes the Father (and unified Godhead), and the creed asserts incomprehensibility in its own doctrinal voice, satisfying the FULL floor for the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -15411,21 +14070,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The verbatim phrase appears, the subject is the one God (via the Trinity-in-Unity formula), and the creed asserts incomprehensibility as settled catholic doctrine rather than reporting or denying an opponent's claim."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -15505,21 +14152,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase present, subject is the Father/Trinity (God), and the creed asserts incomprehensibility as doctrine, matching the predicate's floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -15606,21 +14241,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the one God (via the Trinitarian formula), and the Athanasian Creed asserts incomprehensibility of the divine substance in its own voice, fully matching the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -15828,21 +14451,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The verbatim phrase and assertive Trinitarian subject are present, but 'incomprehensible' targets cognitive/rational limitation rather than the specific predicate of ineffability (linguistic inexpressibility), so it only partially and analogically supports the target predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "BELOW_FLOOR",
@@ -15927,21 +14538,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The term 'incomprehensible' here functions within the traditional sense of divine infinitude/immensity rather than linguistic ineffability, so the passage does not assert the defined predicate even though the word appears verbatim."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -16143,21 +14742,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, God is the grammatical subject, the statement is an assertion of the Article itself, and it fully affirms that God's counsel is secret (inscrutable) to us."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -16242,21 +14829,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The word 'incomprehensible' appears verbatim and is asserted of the Father (among others), but in this creedal context it denotes metaphysical immeasurability of the divine substance, not the epistemic inscrutability of God's counsel required by the predicate, so the proposition is not actually asserted."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -16476,21 +15051,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; the claim that creatures cannot define God entails denial of fully adequate Creator-creature correspondence, but the vocabulary of likeness/comparison is not itself used, so the support is partial rather than fully explicit."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -16593,21 +15156,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim, subject is God the Father, and the standard asserts the unlikeness itself; but the unlikeness asserted is moral-qualitative (perfect love, almighty care, errorless judgment) within an accepted analogy rather than a formal denial of univocal Creator-creature correspondence, so the support is partial."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -16711,21 +15262,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "Phrase, subject and speech act all check out, but the floor note expressly distinguishes shared epistemic restraint from the denial of adequate Creator-creature likeness; 'incomprehensible' here renders immensus and asserts immeasurability, not the absence of univocal correspondence. The locator also names a Catechism question while the quoted words come from the appended Athanasian Creed."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
@@ -16958,21 +15497,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The passage explicitly asserts that the two natures remain whole and perfect while joined in one Person, satisfying the predicate's requirement that distinctions are not collapsed."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -17052,21 +15579,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is Christ, and the Creed asserts in its own voice that the union does not involve confusion of substance, matching the predicate's definition."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -17146,21 +15661,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The locator citation, though labeled as part of the Outline of the Faith, points to the embedded Chalcedonian Definition text, which asserts the predicate of the required subject in the standard's own voice."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -17261,21 +15764,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is Christ, and the assertion is made in the creed's own voice, but the specific 'without confusion' denial is stated just after the quoted phrase, making the match partial rather than full."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -17479,21 +15970,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The passage names the two natures joined in one Person as 'whole and perfect,' which supports a narrower, implicit denial of conversion consistent with the predicate, though it lacks explicit 'without change' language."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -17571,21 +16050,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (Christ's two natures), and the creed asserts this denial of conversion as part of its positive confession of the Incarnation."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -17665,21 +16132,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The chunk verbatim reproduces the Chalcedonian formula asserted of Christ's two natures in the Church's own catechetical voice, fully satisfying the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -17767,21 +16222,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject, and genuine assertion support the underlying Christological concern, but the specific wording targets indivisibility rather than explicitly asserting non-conversion, so it only partially fills the 'without change' floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -17984,21 +16427,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the two natures of Christ, and the assertion directly affirms the union without division in the Church's own voice."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18078,21 +16509,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subject is Christ (the incarnate Son), and the creed asserts the unity of the two natures in one Christ, fulfilling the predicate of denying division."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18172,21 +16591,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subject is Christ, and the Chalcedonian text asserts the predicate in its own voice as a historical doctrinal document within the BCP."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18273,21 +16680,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "Phrase is verbatim, subject is Christ (the incarnate Son), and the Creed asserts unity of Person against division, matching the predicate's floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18355,21 +16750,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The verbatim phrase, in its creedal context, asserts unity of the two natures in one Christ, fulfilling the 'without division' predicate for the required subject."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18573,21 +16956,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is the two natures of Christ, and the standard asserts in its own voice that they are joined without division, fully matching the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18667,21 +17038,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subject is Christ, and the Creed asserts in its own voice that the union of natures does not divide Christ into two, matching the 'without separation' predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18761,21 +17120,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is Christ, and the assertion is made in the confession's own voice as an inherited historical/doctrinal document affirmed by the Church."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18862,21 +17209,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, spoken in the creed's own voice about Christ, and asserts the unity of the two natures in one Person, which entails denial of their separation, satisfying the predicate's floor."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -18945,21 +17280,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The phrase is verbatim, the subject is Christ's two natures, and the Creed asserts their unity without separation, though the specific 'without separation' language is implicit via the surrounding confession rather than the exact predicate term, warranting a caveat."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -19163,21 +17486,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The quoted phrase is verbatim, the subject is God as Trinity, and the statement is a direct assertion affirming both unity and distinction of Persons, though it uses positive language rather than the exact 'neither confounding nor dividing' formula."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -19255,21 +17566,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase, correct subject (Trinity), and asserted in the creed's own confessional voice, fully matching the predicate."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -19347,21 +17646,9 @@
        "verdict": "ACCEPT",
        "reason_code_final": "OK",
        "reason": "Verbatim phrase present, correct subject (Trinity/Godhead), and asserted in the creed's own affirmative voice as the Catholic Faith."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT",
       "reason_code_final": "OK",
@@ -19450,21 +17737,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The text affirms consubstantiality of the Spirit with Father and Son, which bears on unity but only partially and indirectly on the full 'neither confounding nor dividing' predicate concerning the Trinity as a whole."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -19533,21 +17808,9 @@
        "verdict": "REJECT",
        "reason_code_final": "WRONG_SUBJECT",
        "reason": "The subject is the Creeds themselves (an authority claim about their reception), not God as Trinity, so the predicate about non-confounding/non-dividing of persons is not asserted here."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "WRONG_SUBJECT",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "WRONG_SUBJECT",
@@ -19748,21 +18011,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The phrase and subject fit, and the assertion is genuine, but it only instantiates a narrow negative attribute claim rather than the full predicate of denying adequacy of any creaturely likeness to God's mode of being."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "BELOW_FLOOR",
@@ -19843,21 +18094,9 @@
        "verdict": "ACCEPT_WITH_CAVEAT",
        "reason_code_final": "OK",
        "reason": "The passage asserts divine incomprehensibility of Father, Son, and Spirit, which falls within but does not fully articulate the greater-dissimilarity predicate, warranting a partial/caveated acceptance."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "ACCEPT_WITH_CAVEAT",
-       "reason_code_final": "OK",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "ACCEPT_WITH_CAVEAT",
       "reason_code_final": "OK",
@@ -19946,21 +18185,9 @@
        "verdict": "REJECT",
        "reason_code_final": "BELOW_FLOOR",
        "reason": "The word 'incomprehensible' appears, but the creed is affirming co-equal incomprehensibility among the Persons to safeguard unity of the Godhead, not asserting that creaturely likeness to God is inadequate or that dissimilarity exceeds similarity between God and creatures; the required predicate about creaturely analogy is simply not addressed here."
-      },
-      "final_at_run": {
-       "phrase_verbatim": null,
-       "subject_is_required": null,
-       "grammatical_subject": null,
-       "speech_act_is_assertion": null,
-       "speech_act_note": null,
-       "floor": null,
-       "floor_reason": null,
-       "hazard_flags": null,
-       "verdict": "REJECT",
-       "reason_code_final": "BELOW_FLOOR",
-       "reason": null
       }
      },
+     "superseded_rubrics": null,
      "final_verdict": {
       "verdict": "REJECT",
       "reason_code_final": "BELOW_FLOOR",
