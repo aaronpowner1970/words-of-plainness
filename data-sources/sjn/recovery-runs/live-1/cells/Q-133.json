@@ -1854,6 +1854,26 @@
     "adjudicated_by": "opus",
     "route": "SLICE_ROW",
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": true,
+    "direction": "RESCUED"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "SLICE_ROW",
+    "primary_verdict": "REJECT",
     "overturned": true,
     "direction": "RESCUED"
    }
@@ -1912,8 +1932,50 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-133-p2-BSR-AN-05-1": "anglican church in north america"
+  },
+  "slot_order": {
+   "Q-133-p2-BSR-AN-05-1": 0
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "coverage_final": {
+  "BSR-AN-01": {
+   "coverage": "FULL",
+   "supplied": 39,
+   "of": 39,
+   "pass": "1"
+  },
+  "BSR-AN-02": {
+   "coverage": "FULL",
+   "supplied": 25,
+   "of": 25,
+   "pass": "1"
+  },
+  "BSR-AN-03": {
+   "coverage": "FULL",
+   "supplied": 1,
+   "of": 1,
+   "pass": "1"
+  },
+  "BSR-AN-04": {
+   "coverage": "FULL",
+   "supplied": 124,
+   "of": 124,
+   "pass": "1"
+  },
+  "BSR-AN-05": {
+   "coverage": "RETRIEVED",
+   "supplied": 10,
+   "of": 368,
+   "pass": "2"
+  }
+ },
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

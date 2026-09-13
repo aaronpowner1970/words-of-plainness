@@ -434,6 +434,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    }
@@ -465,9 +483,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -492,6 +521,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"God\\\" (\\\"thus God wishes to indicate to us how He cares for us... and faithfully provides also for our temporal support\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice that God cares for us and faithfully provides; it is not a quotation, petition, or rejected opponent's view.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Faithfulness is predicated of God adverbially and only in the restricted domain of temporal provision/providence, not as a general affirmation of God's truthfulness and trustworthiness, so it is a narrower proposition wholly within the floor.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is God, and the standard asserts it directly; but the assertion covers faithfulness in providing daily bread rather than the full predicate of divine truthfulness/faithfulness, hence PARTIAL.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-099-p1-BSR-LU-01-3": {
@@ -517,6 +555,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": null,
+    "floor_by_model": {
+     "sonnet": null
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -659,8 +715,22 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-099-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord",
+   "Q-099-p1-BSR-LU-01-2": "lutheran churches subscribing the book of concord",
+   "Q-099-p1-BSR-LU-01-3": "lutheran churches subscribing the book of concord"
+  },
+  "slot_order": {
+   "Q-099-p1-BSR-LU-01-1": 0,
+   "Q-099-p1-BSR-LU-01-2": 1,
+   "Q-099-p1-BSR-LU-01-3": 2
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

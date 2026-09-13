@@ -20,7 +20,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 
-from sjn_recovery.config import RUNS_DIR, BRANCHES, ensure_dirs, ROUTE_CAVEATED_ACCEPT  # noqa: E402
+from sjn_recovery.config import RUNS_DIR, BRANCHES, ensure_dirs, ROUTE_CAVEATED_ACCEPT, ROUTE_CAVEAT_SAMPLE, LOWER_FLOOR_RULE, CAVEAT_SAMPLE_SHARE  # noqa: E402
 from sjn_recovery.registry import Registry, load_predicates, load_comparators, load_queue, open_cells, assert_gate6_scope  # noqa: E402
 from sjn_recovery.llm import LLM  # noqa: E402
 from sjn_recovery.agents import CellRunner, EXHAUST_PASS  # noqa: E402
@@ -82,11 +82,26 @@ def main():
             if not_done:
                 log(f"!! {br}: {len(not_done)} open cell(s) have no DONE state under run {a.run_id}: {not_done[:8]} — nothing rebuilt")
                 return 3
-            note = {"at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "from": "stored cell states (candidates, verdicts, coder proposals)",
+            # Session 4: every stored verdict is re-finalised under the lower-floor rule (2a/2b/2c) and every cell re-allocated
+            # under the speaks_for group rule, from the stored rubrics — no model calls. The cell states are saved so that
+            # survivors / allocation / coder_skipped agree with the packet.
+            verdict_changes, cells_changed = {}, 0
+            for c in bc:
+                st = runner.load(c["queue_id"])
+                changed = runner.refinalize(st, br)
+                runner.save(st)
+                if changed:
+                    verdict_changes[c["queue_id"]] = changed; cells_changed += 1
+            note = {"at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "from": "stored cell states (candidates, rubrics, coder proposals)",
                     "model_calls": 0, "workbook": os.path.basename(reg.path), "cells": len(bc),
-                    "note": ("rebuilt under the allocator of 2026-09-12 (1a witness rows last within a tier, 1b translation pairing) and the "
-                             "empty-result shape of 2026-09-13; the Task 3 caveat slice did not run on these stored verdicts")}
-            log(f"== {br}: rebuilding the packet from {len(bc)} stored cell states (no model calls)")
+                    "verdict_rule": LOWER_FLOOR_RULE, "cells_with_verdict_changes": cells_changed, "verdict_changes": verdict_changes,
+                    "note": ("rebuilt 2026-09-13 (session 4) under the speaks_for candidate-slot diversity rule (Task 1), the lower-floor "
+                             "verdict rule 2a/2b/2c (Task 2) and the exhaustion mark (Task 4a); the IDIOM_OR_FORMULA hazard (Task 3) applies "
+                             "only to verifier calls made from session 4 on and is not reflected in these stored verdicts")}
+            log(f"== {br}: rebuilding the packet from {len(bc)} stored cell states (no model calls); verdicts changed in {cells_changed} cell(s)")
+            for qid, ch in verdict_changes.items():
+                for cid, (b0, b1) in ch.items():
+                    log(f"   {qid} {cid}: {b0} -> {b1}")
             build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log, rebuilt_from=note)
             rebuilt[br] = note
         prior["packets_rebuilt"] = rebuilt
@@ -121,6 +136,7 @@ def main():
         spend["coder"] = coder_savings(llm, runner, bc)
         spend["exhaustion"] = exhaustion_report(llm, runner, bc)
         spend["caveat_slice"] = caveat_slice_report(llm, runner, bc)
+        spend["lower_floor"] = lower_floor_report(runner, bc)
         log(f"   spend so far: {spend['calls']} metered calls, {spend['cost_usd']:.2f} USD "
             f"({spend['cost_per_cell_usd']:.3f}/cell vs projection {a.projection_per_cell_usd:.3f}; "
             f"projected {spend['projected_usd']:.2f}; cap {b['cap_usd']}; cost-state {b['spent_usd']:.2f} {b['status']})")
@@ -135,8 +151,13 @@ def main():
                 f"({ex['cost_per_entered_cell_usd']:.3f}/entered cell); standards exhausted {ex['standards_exhausted']}, stopped early {ex['standards_stopped_early']}")
         cv = spend["caveat_slice"]
         if cv["candidates"]:
-            log(f"   caveat slice (3): {cv['candidates']} caveated accept(s) sent to {cv['adjudicator']}; {cv['calls']} calls, {cv['cost_usd']:.2f} USD; "
-                f"{cv['overturned']} overturned (rate {cv['overturn_rate']:.2f})")
+            log(f"   caveat second rubrics: {cv['candidates']} candidate(s) ({cv['sampled']} by the 2c sample of {cv['eligible']} eligible, share "
+                f"{cv['share_actual']}); {cv['calls']} calls, {cv['cost_usd']:.2f} USD; {cv['lower_floor_applied']} lower-floor applied, "
+                f"{cv['overturned']} overturned")
+        lf = spend["lower_floor"]
+        if lf["disagreements"]:
+            log(f"   lower-floor rule (2a): {lf['disagreements']} floor disagreement(s) between the models; {lf['applied']} lowered the final floor, "
+                f"{lf['refused']} candidate(s) refused by it (of which {lf['rescues_refused']} would have been opus rescues)")
         if done == len(bc):
             b["status"] = "DONE"
             build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log)
@@ -154,7 +175,8 @@ def main():
                    "locator_model": a.locator_model, "verifier_models": vmodels, "coder_model": a.coder_model or a.locator_model,
                    "backend": a.backend, "prompt_version": prompts.PROMPT_VERSION, "prompt_versions": prompts.PROMPT_VERSIONS, "branches": all_branches,
                    "retrieval": "PER_STANDARD", "exhaustion": not a.no_exhaust, "routing": runner.routing, "slice_rows": sorted(runner.slice_rows),
-                   "caveat_slice_route": ROUTE_CAVEATED_ACCEPT,
+                   "caveat_slice_route": ROUTE_CAVEATED_ACCEPT, "caveat_sample_route": ROUTE_CAVEAT_SAMPLE, "caveat_sample_share": CAVEAT_SAMPLE_SHARE,
+                   "verdict_rule": LOWER_FLOOR_RULE,
                    "projection_per_cell_usd": a.projection_per_cell_usd, "branch_cost_cap_usd": a.branch_cost_cap_usd,
                    "cost_state_file": os.path.relpath(coststate.path_for(a.run_id), os.path.dirname(os.path.dirname(RUNS_DIR))).replace("\\", "/"),
                    "branch_spend": branch_cost, "packets_rebuilt": rebuilt,
@@ -222,18 +244,48 @@ def exhaustion_report(llm, runner, cells):
 
 
 def caveat_slice_report(llm, runner, cells):
-    """Task 3, MEASURED: caveated accepts routed to the adjudicator because they would reach a card; calls,
-    cost, and how many the adjudicator overturned."""
-    items = []
+    """MEASURED: caveated accepts that carried a second rubric — the session-3 adjudication route on stored branches,
+    the session-4 disclosure sample (2c) on new ones — with calls, cost, the sample's eligible/sampled counts and
+    how often the lower-floor rule (2a) changed the final floor."""
+    items, decisions = [], []
     for c in cells:
         st = runner.load(c["queue_id"]) or {}
         for x in runner.caveat_slice_stats(st):
             x["queue_id"] = c["queue_id"]; x["cost_usd"] = round(_call_cost(llm, x.get("call_id")), 4)
             items.append(x)
+        decisions.extend(runner.caveat_sample_stats(st))
     calls = sum(1 for x in items if x.get("call_id"))
     over = sum(1 for x in items if x.get("overturned"))
+    sampled = sum(1 for d in decisions if d.get("sampled"))
     return {"adjudicator": runner.adjudicator, "candidates": len(items), "calls": calls, "cost_usd": round(sum(x["cost_usd"] for x in items), 4),
-            "overturned": over, "overturn_rate": round(over / len(items), 3) if items else 0.0, "items": items}
+            "overturned": over, "overturn_rate": round(over / len(items), 3) if items else 0.0,
+            "lower_floor_applied": sum(1 for x in items if x.get("lower_floor_applied")),
+            "eligible": len(decisions), "sampled": sampled, "share_cap": CAVEAT_SAMPLE_SHARE,
+            "share_actual": round(sampled / len(decisions), 3) if decisions else None, "items": items}
+
+
+def lower_floor_report(runner, cells):
+    """2a, MEASURED on this branch: floor disagreements between the two models, how many lowered the final floor,
+    and how many candidates the lower floor refused (of which how many the adjudicator alone would have rescued)."""
+    dis = applied = refused = rescues_refused = 0
+    items = []
+    for c in cells:
+        st = runner.load(c["queue_id"]) or {}
+        for cid, v in (st.get("verifications") or {}).items():
+            fin = v.get("final") or {}
+            if not fin.get("floor_disagreement"):
+                continue
+            dis += 1
+            applied += 1 if fin.get("lower_floor_applied") else 0
+            adj = fin.get("adjudicator_verdict") in ("ACCEPT", "ACCEPT_WITH_CAVEAT")
+            gone = fin.get("lower_floor_applied") and fin.get("verdict") == "REJECT" and fin.get("reason_code_final") == "BELOW_FLOOR"
+            if gone:
+                refused += 1
+                if adj and fin.get("primary_verdict") == "REJECT":
+                    rescues_refused += 1
+            items.append({"queue_id": c["queue_id"], "candidate_id": cid, "route": fin.get("route"), "floors": fin.get("floor_by_model"),
+                          "floor_final": fin.get("floor_final"), "verdict": fin.get("verdict"), "refused_by_lower_floor": bool(gone)})
+    return {"disagreements": dis, "applied": applied, "refused": refused, "rescues_refused": rescues_refused, "items": items}
 
 
 def branch_spend(llm, cells, projection_per_cell, cap):

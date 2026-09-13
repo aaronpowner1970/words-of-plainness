@@ -38,11 +38,14 @@ import os
 
 import re
 
+import hashlib
+
 from .config import (MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES, PHRASE_MAX_WORDS, EXHAUST_CALLS_PER_ROUND,
-                     CAVEAT_SLICE_HAZARDS, ROUTE_CAVEATED_ACCEPT)
+                     CAVEAT_SLICE_HAZARDS, ROUTE_CAVEATED_ACCEPT, ROUTE_CAVEAT_SAMPLE, CAVEAT_SAMPLE_SHARE, ADJUDICATING_ROUTES,
+                     HAZARD_IDIOM_OR_FORMULA, FORMULA_FLOOR_CAP, LOWER_FLOOR_RULE)
 from .registry import tier_rank
 from .textutil import scrub_urls, phrase_word_count
-from .allocation import allocate, translation_pairs
+from .allocation import allocate, translation_pairs, speaks_for_groups
 from . import guards, prompts, retrieval
 
 
@@ -76,13 +79,46 @@ EXHAUST_PASS = "3"
 
 
 def caveat_slice_hit(rubric):
-    """Task 3: does this PRIMARY rubric describe a caveated accept the adjudicator must see if it reaches
-    a card? ACCEPT_WITH_CAVEAT at a PARTIAL floor, or raising a CAVEAT_SLICE_HAZARDS flag."""
+    """Session 3, Task 3 (now the ELIGIBILITY test for the 2c sample): does this PRIMARY rubric describe a
+    caveated accept — ACCEPT_WITH_CAVEAT at a PARTIAL floor, or raising a CAVEAT_SLICE_HAZARDS flag?"""
     if not rubric or rubric.get("verdict") != "ACCEPT_WITH_CAVEAT":
         return False
     if rubric.get("floor") == "PARTIAL":
         return True
     return bool(set(rubric.get("hazard_flags") or []) & set(CAVEAT_SLICE_HAZARDS))
+
+
+def sample_bucket(candidate_id):
+    """Deterministic 0–99 bucket of a candidate id (sha256), so the 2c sample is reproducible across re-runs."""
+    return int(hashlib.sha256(candidate_id.encode("utf-8")).hexdigest()[:8], 16) % 100
+
+
+def lower_floor(*floors):
+    """2a: the LOWER of the floors returned (FULL > PARTIAL > WORD_ONLY); None-safe."""
+    known = [f for f in floors if f in FLOOR_ORDER]
+    return max(known, key=lambda f: FLOOR_ORDER[f]) if known else None
+
+
+def verdict_from_rubric(rubric, floor, lexical_floor=False):
+    """The verdict recomputed in code from a DONE rubric's lines 1–3 and model verdict at the given floor —
+    the one function both verify() and finalize() use, so a merged floor is judged by the same rule as a
+    model's own floor. Returns (verdict, reason_code)."""
+    if not rubric or rubric.get("status") != "DONE":
+        return "REJECT", "UNPARSEABLE"
+    if str(rubric.get("phrase_verbatim")).upper() != "Y" or rubric.get("phrase_verbatim_code") == "N" \
+            or rubric.get("reason_code_final") == "NOT_VERBATIM":
+        return "REJECT", "NOT_VERBATIM"
+    if str(rubric.get("subject_is_required")).upper() != "Y":
+        return "REJECT", "WRONG_SUBJECT"
+    if str(rubric.get("speech_act_is_assertion")).upper() != "Y":
+        return "REJECT", "NOT_ASSERTION"
+    if floor == "WORD_ONLY" and not lexical_floor:
+        return "REJECT", "BELOW_FLOOR"
+    if rubric.get("verdict_model") == "REJECT":
+        return "REJECT", rubric.get("reason_code") or "OTHER"
+    if floor == "PARTIAL" or rubric.get("hazard_flags") or rubric.get("verdict_model") == "ACCEPT_WITH_CAVEAT":
+        return "ACCEPT_WITH_CAVEAT", rubric.get("reason_code") or "OK"
+    return "ACCEPT", "OK"
 
 
 def _chunk_views(chunks):
@@ -237,7 +273,8 @@ class CellRunner:
         if not parsed:
             entry["status"] = "UNPARSEABLE"           # retried on the next run
             return entry
-        if parsed.get("result", "").startswith("NOT LOCATED") or not parsed.get("candidates"):
+        # a reply may carry an explicit `"result": null` beside its candidates (Methodist / Wesleyan, 2026-09-13): treat as absent
+        if str(parsed.get("result") or "").startswith("NOT LOCATED") or not parsed.get("candidates"):
             entry["status"] = "EMPTY"
             entry["empty"] = True
             entry["silence_rationale"] = " ".join(str(parsed.get("silence_rationale") or "").split()[:40]) or None
@@ -482,33 +519,27 @@ class CellRunner:
             return {"status": "PENDING", "call_id": rec["call_id"], "model": model}
         parsed = parsed or {}
         rubric = {
-            "model": model, "call_id": rec["call_id"], "attempt": attempt,
+            "model": model, "call_id": rec["call_id"], "attempt": attempt, "prompt_version": prompts.prompt_version("verifier"),
             "phrase_verbatim": parsed.get("phrase_verbatim"), "subject_is_required": parsed.get("subject_is_required"),
             "grammatical_subject": parsed.get("grammatical_subject"), "speech_act_is_assertion": parsed.get("speech_act_is_assertion"),
             "speech_act_note": parsed.get("speech_act_note"), "floor": parsed.get("floor"), "floor_reason": parsed.get("floor_reason"),
             "hazard_flags": [h for h in (parsed.get("hazard_flags") or []) if h in prompts.HAZARD_TYPES],
+            "asserted_outside_formula": parsed.get("asserted_outside_formula"),
             "verdict_model": parsed.get("verdict"), "reason_code": parsed.get("reason_code"), "reason": parsed.get("reason"),
             "status": "DONE" if parsed else "UNPARSEABLE", "raw": out[:2000],
         }
+        # Task 3 (session 4): IDIOM_OR_FORMULA caps the floor at WORD_ONLY unless the passage separately asserts
+        # the predicate outside the formula. The model's own floor is kept beside the capped one for the record.
+        if parsed and HAZARD_IDIOM_OR_FORMULA in rubric["hazard_flags"] and str(rubric["asserted_outside_formula"]).upper() != "Y" \
+                and FLOOR_ORDER.get(rubric["floor"], 9) < FLOOR_ORDER[FORMULA_FLOOR_CAP]:
+            rubric["floor_model"] = rubric["floor"]
+            rubric["floor"] = FORMULA_FLOOR_CAP
+            rubric["floor_capped_by"] = HAZARD_IDIOM_OR_FORMULA
         # the verdict is recomputed in code from the rubric lines: any N on 1–3 is REJECT; WORD_ONLY is REJECT
         # (no lexical-floor family); the code-side phrase assertion overrides item 1.
         ok_phrase, _ = guards.check_phrase(cand["phrase"], cand["chunk_text"])
-        if not parsed:
-            verdict = "REJECT"; code = "UNPARSEABLE"
-        elif not ok_phrase or str(rubric["phrase_verbatim"]).upper() != "Y":
-            verdict, code = "REJECT", "NOT_VERBATIM"
-        elif str(rubric["subject_is_required"]).upper() != "Y":
-            verdict, code = "REJECT", "WRONG_SUBJECT"
-        elif str(rubric["speech_act_is_assertion"]).upper() != "Y":
-            verdict, code = "REJECT", "NOT_ASSERTION"
-        elif rubric["floor"] == "WORD_ONLY" and not pred.get("lexical_floor"):
-            verdict, code = "REJECT", "BELOW_FLOOR"
-        elif rubric["verdict_model"] == "REJECT":
-            verdict, code = "REJECT", rubric["reason_code"] or "OTHER"
-        elif rubric["floor"] == "PARTIAL" or rubric["hazard_flags"] or rubric["verdict_model"] == "ACCEPT_WITH_CAVEAT":
-            verdict, code = "ACCEPT_WITH_CAVEAT", rubric["reason_code"] or "OK"
-        else:
-            verdict, code = "ACCEPT", "OK"
+        rubric["phrase_verbatim_code"] = "Y" if ok_phrase else "N"
+        verdict, code = verdict_from_rubric(rubric, rubric["floor"], bool(pred.get("lexical_floor")))
         rubric["verdict"] = verdict
         rubric["reason_code_final"] = code
         return rubric
@@ -528,18 +559,43 @@ class CellRunner:
 
     @staticmethod
     def finalize(v, primary, adjudicator):
-        """Final verdict = the adjudicator's where it ran, else the primary's. Overturns recorded."""
+        """Final verdict under the session-4 rulings (2a/2b/2c), recomputed in code from the stored rubrics:
+
+          base rubric   the adjudicator's where it ran on an ADJUDICATING route (slice row, fallback row, the
+                        primary rejected all, a secondary-verifies-all routing) — it still judges lines 1–3 and
+                        can rescue a candidate refused for subject or speech act (2b); on every other route
+                        that carries a second rubric (the retired CAVEATED_ACCEPT adjudication, the 2c sample,
+                        a both-models planted run) the base is the PRIMARY's rubric and the second rubric is
+                        disclosure only;
+          floor         the LOWER of the two models' floors wherever both returned one (2a) — never averaged,
+                        never the adjudicator's; the verdict is then recomputed at that floor by the same rule
+                        verify() applies, so a merged WORD_ONLY refuses the candidate (BELOW_FLOOR).
+
+        Overturns are recorded against the primary's own verdict, as before."""
         p = v.get(primary) or {}
         a = v.get(adjudicator) if adjudicator else None
-        if a and a.get("status") == "DONE":
-            fin = {"verdict": a["verdict"], "reason_code_final": a.get("reason_code_final"), "adjudicated_by": adjudicator,
-                   "route": v.get("_route"), "primary_verdict": p.get("verdict")}
-            pa, aa = p.get("verdict") in ACCEPTS, a["verdict"] in ACCEPTS
-            fin["overturned"] = pa != aa
-            fin["direction"] = ("RESCUED" if (aa and not pa) else "OVERRULED" if (pa and not aa) else None)
-        else:
-            fin = {"verdict": p.get("verdict"), "reason_code_final": p.get("reason_code_final"), "adjudicated_by": primary,
-                   "route": v.get("_route"), "primary_verdict": p.get("verdict"), "overturned": False, "direction": None}
+        a_done = bool(a and a.get("status") == "DONE")
+        route = v.get("_route")
+        adjudicating = a_done and route in ADJUDICATING_ROUTES
+        base_model = adjudicator if adjudicating else primary
+        base = a if adjudicating else p
+        floors = {primary: p.get("floor")}
+        if a_done:
+            floors[adjudicator] = a.get("floor")
+        floor = lower_floor(*floors.values()) if a_done else p.get("floor")
+        verdict, code = verdict_from_rubric(base, floor)
+        fin = {"verdict": verdict, "reason_code_final": code, "adjudicated_by": base_model, "route": route,
+               "primary_verdict": p.get("verdict"), "verdict_rule": LOWER_FLOOR_RULE,
+               "floor_final": floor, "floor_by_model": floors,
+               "floor_disagreement": bool(a_done and p.get("floor") != a.get("floor") and p.get("floor") in FLOOR_ORDER and a.get("floor") in FLOOR_ORDER),
+               "lower_floor_applied": bool(a_done and floor != base.get("floor") and floor in FLOOR_ORDER),
+               "second_rubric": (adjudicator if a_done else None),
+               "second_rubric_role": ("ADJUDICATES_LINES_1_3" if adjudicating else ("DISCLOSURE_FLOOR_ONLY" if a_done else None))}
+        if a_done:
+            fin["adjudicator_verdict"] = a.get("verdict")
+        pa, fa = p.get("verdict") in ACCEPTS, verdict in ACCEPTS
+        fin["overturned"] = bool(a_done) and pa != fa
+        fin["direction"] = ("RESCUED" if (fa and not pa) else "OVERRULED" if (pa and not fa) else None) if a_done else None
         v["final"] = fin
         return fin
 
@@ -572,27 +628,33 @@ class CellRunner:
             return True
         for cand in cands:
             self.finalize(st["verifications"][cand["candidate_id"]], self.primary, self.adjudicator)
-        # ---- Task 3: caveated accepts that would reach the card go to the adjudicator; loop until stable
+        # ---- 2c (session 4): caveated accepts are NOT routed for adjudication. A deterministic sample of at most
+        # CAVEAT_SAMPLE_SHARE of the caveated accepts that reach a card is sent to the second model for information;
+        # its rubric is disclosure on the card and, under 2a, can lower the floor but never raise the verdict.
+        # Repeated until the card is stable (a lowered floor can promote another survivor onto the card).
         if self.adjudicator and self.reg.routing_is_slice():
             for _ in range(len(cands) + 1):
                 survivors = [c for c in cands if self.final_verdict(st, c["candidate_id"]) in ACCEPTS]
-                alloc = allocate(self.allocation_view(survivors), self.pairs(cell["branch"]))
+                alloc = allocate(self.allocation_view(survivors), self.pairs(cell["branch"]), groups=self.groups(cell["branch"]))
                 on_card = set(alloc["kept"]) | set(alloc["english_witness"].values())
                 fired = False
                 for cand in cands:
                     cid = cand["candidate_id"]
                     v = st["verifications"][cid]
                     adj = v.get(self.adjudicator)
-                    if cid not in on_card or (adj and adj.get("status") == "DONE"):
+                    if cid not in on_card or (adj and adj.get("status") == "DONE") or not caveat_slice_hit(v.get(self.primary)):
                         continue
-                    # a caveated accept not yet adjudicated, or adjudicated but still PENDING / UNPARSEABLE from an
-                    # earlier round: (re)issue the call — an answered one is served from the audit log at no cost
-                    if caveat_slice_hit(v.get(self.primary)):
-                        v["_route"] = ROUTE_CAVEATED_ACCEPT
-                        v[self.adjudicator] = self.verify(cell, cand, self.adjudicator)
-                        fired = True
-                        if v[self.adjudicator].get("status") == "PENDING":
-                            pending = True
+                    rec = st.setdefault("caveat_sample", {}).get(cid)
+                    if rec is None:
+                        rec = self.sample_decision(cell["branch"], st, cid)
+                        st["caveat_sample"][cid] = rec
+                    if not rec["sampled"]:
+                        continue
+                    v["_route"] = ROUTE_CAVEAT_SAMPLE
+                    v[self.adjudicator] = self.verify(cell, cand, self.adjudicator)
+                    fired = True
+                    if v[self.adjudicator].get("status") == "PENDING":
+                        pending = True
                 if pending:
                     return True
                 if not fired:
@@ -600,6 +662,84 @@ class CellRunner:
                 for cand in cands:
                     self.finalize(st["verifications"][cand["candidate_id"]], self.primary, self.adjudicator)
         return False
+
+    # ---------------------------------------------------------------- 2c sample bookkeeping
+    def sample_quota(self, branch, exclude_qid=None):
+        """(eligible, sampled) so far on this branch, from the saved cell states, so the running share never
+        exceeds CAVEAT_SAMPLE_SHARE across a branch however the cells are ordered or resumed."""
+        eligible = sampled = 0
+        for fn in os.listdir(self.state_dir):
+            if not fn.endswith(".json") or fn[:-5] == exclude_qid:
+                continue
+            try:
+                with open(os.path.join(self.state_dir, fn), encoding="utf-8") as fh:
+                    st = json.load(fh)
+            except Exception:
+                continue
+            if st.get("branch") != branch:
+                continue
+            for rec in (st.get("caveat_sample") or {}).values():
+                eligible += 1
+                sampled += 1 if rec.get("sampled") else 0
+        return eligible, sampled
+
+    def sample_decision(self, branch, st, cid):
+        """Sample this eligible candidate? Deterministic by hash bucket, and bounded: the branch's running share
+        (including this cell's earlier decisions) stays at or under CAVEAT_SAMPLE_SHARE after the draw."""
+        eligible, sampled = self.sample_quota(branch, exclude_qid=st["queue_id"])
+        for rec in (st.get("caveat_sample") or {}).values():
+            eligible += 1; sampled += 1 if rec.get("sampled") else 0
+        bucket = sample_bucket(cid)
+        within_quota = (sampled + 1) <= CAVEAT_SAMPLE_SHARE * (eligible + 1)
+        take = bucket < int(CAVEAT_SAMPLE_SHARE * 100) and within_quota
+        return {"sampled": take, "bucket": bucket, "share_cap": CAVEAT_SAMPLE_SHARE,
+                "branch_eligible_before": eligible, "branch_sampled_before": sampled,
+                "reason": ("sampled for disclosure" if take else ("bucket outside the sample" if bucket >= int(CAVEAT_SAMPLE_SHARE * 100)
+                                                                     else "branch sample share already at its cap"))}
+
+    def groups(self, branch):
+        """speaks_for groups of a branch (allocation.speaks_for_groups), derived once from the registry."""
+        if not hasattr(self, "_groups"):
+            self._groups = {}
+        if branch not in self._groups:
+            try:
+                self._groups[branch] = speaks_for_groups(self.reg, branch)
+            except Exception:
+                self._groups[branch] = {}
+        return self._groups[branch]
+
+    def refinalize(self, st, cell_branch=None):
+        """Deterministic rebuild of a DONE cell state under the current verdict rule and allocator — no model calls.
+        Recomputes every `final` (2a/2b/2c from the stored rubrics), the survivors, the exhaustion outcome, the
+        allocation and coder_skipped. Coder proposals are left as stored (they were written for the rubric of the
+        time; a candidate that now reaches the card uncoded is marked on the card). Returns the change summary."""
+        before = {}
+        for cid, v in st.get("verifications", {}).items():
+            if "final_at_run" not in v and v.get("final"):
+                v["final_at_run"] = dict(v["final"])          # the verdict the live run finalised on; kept for the record
+            before[cid] = (v.get("final_at_run") or v.get("final") or {}).get("verdict")
+            self.finalize(v, self.primary, self.adjudicator)
+        after = {cid: v["final"]["verdict"] for cid, v in st.get("verifications", {}).items()}
+        changed = {cid: (before[cid], after[cid]) for cid in after if before.get(cid) != after[cid]}
+        s1, s2, s3 = self.survivors(st, "1"), self.survivors(st, "2"), self.survivors(st, EXHAUST_PASS)
+        st["survivors"] = s1 or s2 or s3
+        st["fallback_used"] = bool(not s1 and s2)
+        if st.get("exhaustion"):
+            st["exhaustion"]["changed_outcome"] = bool(not s1 and not s2 and s3)
+            p3 = st["passes"].get(EXHAUST_PASS) or {}
+            if not s3 and any(pr.get("stopped_early") for pr in (p3.get("progress") or {}).values()):
+                st["exhaustion"]["resumable"] = True
+                st["exhaustion"]["note"] = ("exhaustion stopped early on a candidate the lower-floor rule later refused; the standard "
+                                            "was not read to the end — re-running the branch would resume it")
+        if "coverage_final" in st or st.get("passes"):
+            st["coverage_final"] = self.coverage_final(st)
+        branch = cell_branch or st.get("branch")
+        alloc = allocate(self.allocation_view(st["survivors"]), self.pairs(branch), groups=self.groups(branch))
+        st["allocation"] = {k: alloc[k] for k in ("kept", "roles", "english_witness", "dropped", "witness_only", "groups", "slot_order")}
+        st["coder_skipped"] = dict(alloc["dropped"])
+        st["empty"] = not st["survivors"]
+        st["refinalized"] = {"rule": LOWER_FLOOR_RULE, "verdicts_changed": changed}
+        return changed
 
     # ---------------------------------------------------------------- coder
     def code(self, cell, cand, rubric):
@@ -676,8 +816,8 @@ class CellRunner:
         st["coverage_final"] = self.coverage_final(st)
         # 1c: allocate the card FIRST (allocation.py, the same allocator the packet builder uses), then code only
         # the candidates that will reach the card. Everything the allocation drops is recorded as coder_skipped.
-        alloc = allocate(self.allocation_view(st["survivors"]), self.pairs(cell["branch"]))
-        st["allocation"] = {k: alloc[k] for k in ("kept", "roles", "english_witness", "dropped", "witness_only")}
+        alloc = allocate(self.allocation_view(st["survivors"]), self.pairs(cell["branch"]), groups=self.groups(cell["branch"]))
+        st["allocation"] = {k: alloc[k] for k in ("kept", "roles", "english_witness", "dropped", "witness_only", "groups", "slot_order")}
         st["coder_skipped"] = dict(alloc["dropped"])
         if self.run_coder:
             for cand in st["survivors"]:
@@ -702,7 +842,8 @@ class CellRunner:
             except Exception:
                 std = {}
             out.append(dict(c, authority_tier=std.get("authority_tier") or c.get("effective_tier"),
-                            reception_scope=std.get("reception_scope"), witness=bool(c.get("witness") or std.get("witness_only"))))
+                            reception_scope=std.get("reception_scope"), witness=bool(c.get("witness") or std.get("witness_only")),
+                            speaks_for=std.get("speaks_for")))
         return out
 
     def primary_rubric(self, st, cid):
@@ -733,15 +874,25 @@ class CellRunner:
 
     # ---------------------------------------------------------------- per-cell statistics for the report
     def caveat_slice_stats(self, st):
-        """Task 3: candidates routed CAVEATED_ACCEPT in this cell, with the adjudicator's outcome."""
+        """Caveated accepts that carried a second rubric in this cell: the retired session-3 adjudication route
+        (CAVEATED_ACCEPT, stored branches) and the session-4 disclosure sample (CAVEATED_ACCEPT_SAMPLE), with the
+        second model's outcome and whether the lower-floor rule changed anything."""
         out = []
         for cid, v in (st.get("verifications") or {}).items():
-            if v.get("_route") != ROUTE_CAVEATED_ACCEPT:
+            if v.get("_route") not in (ROUTE_CAVEATED_ACCEPT, ROUTE_CAVEAT_SAMPLE):
                 continue
             fin = v.get("final") or {}
             a = v.get(self.adjudicator) or {}
-            out.append({"candidate_id": cid, "call_id": a.get("call_id"), "primary_verdict": (v.get(self.primary) or {}).get("verdict"),
+            out.append({"candidate_id": cid, "route": v.get("_route"), "call_id": a.get("call_id"),
+                        "primary_verdict": (v.get(self.primary) or {}).get("verdict"),
                         "primary_floor": (v.get(self.primary) or {}).get("floor"), "primary_hazards": (v.get(self.primary) or {}).get("hazard_flags"),
-                        "adjudicator_verdict": a.get("verdict"), "overturned": fin.get("overturned"), "direction": fin.get("direction"),
-                        "reason_code_final": fin.get("reason_code_final")})
+                        "second_model": self.adjudicator, "second_verdict": a.get("verdict"), "second_floor": a.get("floor"),
+                        "second_hazards": a.get("hazard_flags"), "adjudicator_verdict": a.get("verdict"),
+                        "floor_final": fin.get("floor_final"), "lower_floor_applied": fin.get("lower_floor_applied"),
+                        "final_verdict": fin.get("verdict"), "overturned": fin.get("overturned"), "direction": fin.get("direction"),
+                        "reason_code_final": fin.get("reason_code_final"), "disclosure_only": v.get("_route") == ROUTE_CAVEAT_SAMPLE})
         return out
+
+    def caveat_sample_stats(self, st):
+        """2c: the sample decisions recorded in this cell (eligible caveated accepts on the card, sampled or not)."""
+        return [dict(rec, candidate_id=cid) for cid, rec in (st.get("caveat_sample") or {}).items()]

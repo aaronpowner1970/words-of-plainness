@@ -32,17 +32,25 @@ import json
 import os
 import time
 
-from .config import PACKETS_DIR, EMPTY_RESULT, EMPTY_RESULT_INCOMPLETE, MAX_CANDIDATES, ROUTE_CAVEATED_ACCEPT
+from .config import (PACKETS_DIR, EMPTY_RESULT, EMPTY_RESULT_INCOMPLETE, MAX_CANDIDATES, ROUTE_CAVEATED_ACCEPT, ROUTE_CAVEAT_SAMPLE,
+                     CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA)
 from .registry import tier_rank
-from .allocation import allocate, translation_pairs, translation_pair_evidence
+from .allocation import allocate, translation_pairs, translation_pair_evidence, speaks_for_groups
 from . import guards, store
 
 ACCEPTS = ("ACCEPT", "ACCEPT_WITH_CAVEAT")
-ORDERING = ("authority tier descending on the effective tier (creed_tier_resolution); within a tier every non-witness row "
-            "before any witness row (1a); the cap filled tier by tier; lower-tier survivors kept and marked corroborating. "
-            "Residual tie-break within a tier and witness class (the whole ordering where every row shares one tier): the "
-            "slotting order — each standard's guaranteed (best) candidate in registry row order, then the extra slots by "
-            "locator floor claim and locator rank")
+ORDERING = ("authority tier descending on the effective tier (creed_tier_resolution); the cap filled tier by tier; lower-tier "
+            "survivors kept and marked corroborating. WITHIN a tier (ratified 2026-09-13, session 4): candidates are grouped by "
+            "the body the row speaks for (speaks_for, resolved — see speaks_for_groups) and no group takes a SECOND slot until "
+            "every group with a surviving verified candidate has taken a FIRST; groups are ranked for their first slot by the "
+            "existing keys — non-witness before witness (1a), then the locator's floor claim (FULL before PARTIAL) — and only as "
+            "the last resort by registry row order, which orders presentation but never decides which body is heard; then each "
+            "group's second candidate in the same group order")
+VERDICT_RULE = {"rule": LOWER_FLOOR_RULE,
+                "2a": "where two models returned different floors for one candidate the LOWER floor is final (never averaged, never the adjudicator's); the verdict is recomputed at that floor",
+                "2b": "opus adjudicates lines 1–3 on the reject-all and slice routes as before (a rescue for subject or speech act stands; a rescue by a higher floor does not)",
+                "2c": f"caveated accepts are not routed for adjudication; a deterministic sample of at most {int(CAVEAT_SAMPLE_SHARE * 100)}% is sent for disclosure (route {ROUTE_CAVEAT_SAMPLE}), shown on the card, floor-lowering only",
+                "3": f"hazard {HAZARD_IDIOM_OR_FORMULA} (verifier gate6-v1.2) caps the floor at WORD_ONLY unless the passage asserts the predicate outside the formula; applied to verifier calls made from session 4 onward, not to stored verdicts"}
 WITNESS_FIELDS = ("candidate_id", "registry_id", "standard_title", "authority_tier", "effective_tier", "reception_scope",
                   "reception_note", "locator", "phrase", "locator_rationale", "locator_floor_claim", "chunk_context",
                   "recut_from", "source_url", "verifier_rubrics", "final_verdict", "build_reassertion")
@@ -155,13 +163,23 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
     packet is still written, every cell carries its phase, and the header says so. rebuilt_from: a note when the
     packet is rebuilt from stored cell states with no new model calls (the Roman Catholic rebuild, 2026-09-13)."""
     pairs = translation_pairs(registry, branch)
-    manifest_status = {rid: (r.get("status") or "") for rid, r in store.load_manifest().get("standards", {}).items()}
-    cards, dropped_at_build, n_rej = [], [], 0
+    groups = speaks_for_groups(registry, branch)
+    manifest = store.load_manifest().get("standards", {})
+    manifest_status = {rid: (r.get("status") or "") for rid, r in manifest.items()}
+    cards, dropped_at_build, n_rej, repaired_chunks = [], [], 0, []
     chunk_index = {}
+    rows_without_text = []
     for r in registry.for_branch(branch, citable_only=False):
-        for c in store.load_chunks(r["registry_id"]):
+        chunks = store.load_chunks(r["registry_id"])
+        for c in chunks:
             chunk_index[(c["registry_id"], c["locator"])] = c
-    caveat_slice, exhaustion_cells = [], []
+        if not chunks:
+            m = manifest.get(r["registry_id"]) or {}
+            rows_without_text.append({"registry_id": r["registry_id"], "standard_title": registry.public(r["registry_id"])["standard_title"],
+                                      "manifest_status": m.get("status") or "NO MANIFEST ENTRY", "fetch_mode": r.get("fetch_mode"),
+                                      "notes": m.get("notes") or [], "refused": registry.citation_refusal(r["registry_id"]),
+                                      "effect": "no chunks: the locator never saw this standard; every cell of the branch ran without it"})
+    caveat_slice, caveat_sample, exhaustion_cells = [], [], []
     for cell in cells:
         st = runner.load(cell["queue_id"])
         pred = predicates[cell["family_id"]]
@@ -182,12 +200,16 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
             "coverage_final": coverage_final,
             "exhaustion": (st or {}).get("exhaustion"),
             "routing": (st or {}).get("routing"),
+            "verdict_rule": (st or {}).get("refinalized", {}).get("rule") if st else None,
             "caveat_slice": runner.caveat_slice_stats(st) if st else [],
+            "caveat_sample": runner.caveat_sample_stats(st) if st else [],
             "coder_skipped": (st or {}).get("coder_skipped") or {},
+            "exhaustion_sourced_candidates": [],
         }
         if st and st.get("exhaustion"):
             exhaustion_cells.append(cell["queue_id"])
         caveat_slice.extend(card["caveat_slice"])
+        caveat_sample.extend(card["caveat_sample"])
         if st:
             accepted = []
             for pk, p in st["passes"].items():
@@ -201,8 +223,20 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     ok, why = guards.check_phrase(cand["phrase"], chunk["text"] if chunk else "")
                     if ok and chunk:
                         ok, why = guards.check_noncitable(cand["phrase"], chunk)
+                    repaired = None
                     if chunk and chunk["text_hash"] != cand.get("chunk_hash"):
-                        ok, why = False, "chunk text changed since the locator ran (hash mismatch)"
+                        # The chunk store changed after the locator ran. Where the change is the audited extraction repair
+                        # (pdf-audit, 2026-09-13: BSR-AN-04 / BSR-AN-05 / BSR-RP-04 re-chunked) the phrase must still stand
+                        # verbatim BOTH in the text the verifier judged and in the repaired chunk; then the candidate is kept
+                        # with the disclosure below. Otherwise it is dropped as before — never repaired.
+                        ok_then, _ = guards.check_phrase(cand["phrase"], cand.get("chunk_text") or "")
+                        if ok and ok_then:
+                            repaired = {"chunk_repaired_after_run": True, "hash_at_run": cand.get("chunk_hash"), "hash_now": chunk["text_hash"],
+                                        "note": "the row was re-chunked by the extraction repair after this cell ran; the phrase is verbatim in both "
+                                                "the chunk the verifier judged and the repaired chunk (recovery-runs/pdf-audit.md)"}
+                            why = "verbatim (chunk repaired after the run; phrase verbatim in both texts)"
+                        else:
+                            ok, why = False, "chunk text changed since the locator ran (hash mismatch) and the phrase is not verbatim in both texts"
                     refusal = registry.citation_refusal(cand["registry_id"])
                     if refusal:
                         ok, why = False, refusal
@@ -216,7 +250,9 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                         "reception_scope": std["reception_scope"], "reception_note": std["reception_note"],
                         "scope_caveat": std["scope_caveat"], "fallback_tier": cand["fallback_tier"],
                         "witness": bool(cand.get("witness") or std.get("witness_only")), "slot": cand.get("slot"),
+                        "speaks_for_group": (groups.get(cand["registry_id"]) or {}).get("group"),
                         "exhaustion_batch": cand.get("exhaustion_batch"),
+                        "found_in_exhaustion": bool(cand.get("exhaustion_batch") is not None or str(cand.get("pass")) == "3"),
                         "locator": cand["locator"], "phrase": cand["phrase"], "locator_rationale": cand["rationale"],
                         "locator_floor_claim": cand["floor_claim"], "chunk_context": cand["chunk_text"],
                         "recut_from": cand.get("recut_from"),
@@ -228,8 +264,16 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                                              for m, v in vers.items() if isinstance(v, dict) and m not in ("final", "_route")},
                         "final_verdict": final,
                         "adjudication_route": vers.get("_route"),
+                        "second_rubric_disclosure_only": vers.get("_route") in (ROUTE_CAVEAT_SAMPLE, ROUTE_CAVEATED_ACCEPT),
                         "build_reassertion": {"ok": ok, "detail": why},
                     }
+                    if entry["found_in_exhaustion"]:
+                        prog = (((st.get("passes") or {}).get("3") or {}).get("progress") or {}).get(cand["registry_id"]) or {}
+                        entry["exhaustion_note"] = (f"FOUND IN EXHAUSTION: located in batch {cand.get('exhaustion_batch')} of "
+                                                    f"{prog.get('batches_total', '?')} over the chunks of {cand['registry_id']} that the sampled retrieval "
+                                                    f"did not supply; passes 1–2 found nothing surviving in this cell")
+                    if repaired:
+                        entry.update(repaired); repaired_chunks.append((cell["queue_id"], cand["candidate_id"]))
                     if not ok:
                         entry["dropped_reason"] = f"packet build re-assertion failed: {why}"
                         dropped_at_build.append((cell["queue_id"], cand["candidate_id"], why))
@@ -239,8 +283,9 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     else:
                         n_rej += 1
                         card["rejections"].append({"stage": "verifier", "reason_code": final.get("reason_code_final"), **entry})
-            # ---- allocation (allocation.py: fallback guard → translation pairing → witness-only guard → tier order, witness last → cap)
-            alloc = allocate(accepted, pairs)
+            # ---- allocation (allocation.py: fallback guard → translation pairing → witness-only guard → tier order with the
+            # speaks_for group rule inside a tier → cap)
+            alloc = allocate(accepted, pairs, groups=groups)
             by_id = {e["candidate_id"]: e for e in accepted}
             for cid, reason in alloc["dropped"].items():
                 e = by_id[cid]
@@ -266,8 +311,10 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                                                     f"{e['registry_id']} phrase controls, the witness is shown for reading only")
                 e["coder_proposal"] = st.get("coding", {}).get(cid)
                 if e["coder_proposal"] is None:
-                    e["coder_note"] = ("not coded: this candidate was not allocated when the coder ran (a higher candidate was "
-                                       "dropped at build-time re-assertion) — re-run the branch to code it")
+                    e["coder_note"] = ("not coded: this candidate was not allocated when the coder ran (the allocator has since changed, "
+                                       "or a higher candidate was dropped at build-time re-assertion) — re-running the branch would code it")
+                if e.get("found_in_exhaustion"):
+                    card["exhaustion_sourced_candidates"].append(cid)
                 card["candidates"].append(e)
             if st.get("phase") == "DONE" and not card["candidates"]:
                 card["status"] = "EMPTY_WITNESS_ONLY" if card["witness_only_candidates"] else "EMPTY"
@@ -289,7 +336,13 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                          for r in registry.for_branch(branch, citable_only=False) if registry.citation_refusal(r["registry_id"])],
         "corpus_text_hash": {r["registry_id"]: (store.load_manifest().get("standards", {}).get(r["registry_id"]) or {}).get("text_hash")
                              for r in registry.for_branch(branch, citable_only=False)},
+        "rows_without_text": rows_without_text,
+        "rows_with_text": [r["registry_id"] for r in registry.for_branch(branch, citable_only=False) if r["registry_id"] not in {x["registry_id"] for x in rows_without_text}],
+        "branch_ran_on": f"{len(registry.for_branch(branch, citable_only=False)) - len(rows_without_text)} of {len(registry.for_branch(branch, citable_only=False))} ratified rows"
+                         + (": " + ", ".join(f"{x['registry_id']} had no text ({x['manifest_status']})" for x in rows_without_text) if rows_without_text else ""),
         "translation_pairs": pairs, "translation_pairs_evidence": translation_pair_evidence(registry, branch),
+        "speaks_for_groups": groups,
+        "verdict_rule": VERDICT_RULE,
         "ordering": ORDERING, "candidate_cap": MAX_CANDIDATES,
         "cells": len(cards), "cells_with_candidates": sum(1 for c in cards if c["candidates"]),
         "cells_empty": len(empties),
@@ -299,8 +352,17 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
         "cells_all_rejected": sum(1 for c in cards if c["status"] == "EMPTY" and any(r["stage"] == "verifier" for r in c["rejections"])),
         "cells_exhaustion_entered": len(exhaustion_cells),
         "cells_exhaustion_changed_outcome": sum(1 for c in cards if (c.get("exhaustion") or {}).get("changed_outcome")),
+        "cards_with_exhaustion_sourced_candidates": sum(1 for c in cards if c["exhaustion_sourced_candidates"]),
+        "exhaustion_sourced_candidates_on_cards": sum(len(c["exhaustion_sourced_candidates"]) for c in cards),
         "caveat_slice": {"candidates": len(caveat_slice), "overturned": sum(1 for x in caveat_slice if x.get("overturned")),
-                         "route": ROUTE_CAVEATED_ACCEPT},
+                         "lower_floor_applied": sum(1 for x in caveat_slice if x.get("lower_floor_applied")),
+                         "routes": sorted({x.get("route") for x in caveat_slice}),
+                         "note": f"{ROUTE_CAVEATED_ACCEPT} = the retired session-3 adjudication (stored branches); {ROUTE_CAVEAT_SAMPLE} = the session-4 disclosure sample"},
+        "caveat_sample": {"eligible": len(caveat_sample), "sampled": sum(1 for x in caveat_sample if x.get("sampled")),
+                          "share_cap": CAVEAT_SAMPLE_SHARE,
+                          "share_actual": (round(sum(1 for x in caveat_sample if x.get("sampled")) / len(caveat_sample), 3) if caveat_sample else None)},
+        "candidates_lower_floor_applied": sum(1 for c in cards for e in c["candidates"] if (e.get("final_verdict") or {}).get("lower_floor_applied")),
+        "chunk_repaired_after_run": repaired_chunks,
         "rejections_kept": sum(len(c["rejections"]) for c in cards),
         "dropped_at_build": dropped_at_build, "no_ranking": "counts are workbench totals for the author; never learner-facing",
         "cards": cards,
@@ -314,6 +376,10 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
         f"{packet['cells_empty']} empty ({packet['cells_all_rejected']} all-rejected; REVIEWED offered on {packet['cells_empty_reviewed_offered']}, "
         f"review incomplete on {packet['cells_empty_review_incomplete']}), {packet['cells_not_finished']} not finished, "
         f"{packet['rejections_kept']} rejections kept, {len(dropped_at_build)} dropped at build; exhaustion entered on "
-        f"{packet['cells_exhaustion_entered']} cell(s), changed {packet['cells_exhaustion_changed_outcome']}; caveat slice "
-        f"{packet['caveat_slice']['candidates']} candidate(s), {packet['caveat_slice']['overturned']} overturned")
+        f"{packet['cells_exhaustion_entered']} cell(s), changed {packet['cells_exhaustion_changed_outcome']}, "
+        f"{packet['exhaustion_sourced_candidates_on_cards']} exhaustion-sourced candidate(s) on {packet['cards_with_exhaustion_sourced_candidates']} card(s); "
+        f"caveat second rubrics {packet['caveat_slice']['candidates']} ({packet['caveat_slice']['lower_floor_applied']} lower-floor applied); "
+        f"2c sample {packet['caveat_sample']['sampled']} of {packet['caveat_sample']['eligible']} eligible; "
+        f"{len(repaired_chunks)} candidate(s) on chunks repaired after the run"
+        + (f"; ROWS WITHOUT TEXT: {[x['registry_id'] for x in rows_without_text]}" if rows_without_text else ""))
     return packet

@@ -5395,9 +5395,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5423,6 +5434,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"The distance between God and the creature\\\" — a predication about God in his relation to creatures, which is the relational form the predicate requires\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts this in its own voice as a doctrinal statement; no quotation, condemnation, hypothetical, or petition.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"It asserts an incommensurable Creator-creature distance such that no natural proportion secures fruition of God, which lies wholly within the floor, but it makes the point soteriologically/covenantally rather than asserting the inadequacy of likeness or comparison as such.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"ECCLESIAL_VS_SOTERIOLOGICAL\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, asserted in the standard's own voice about God's relation to creatures; the claim of infinite distance requiring voluntary condescension is a narrower proposition within the floor, but it is framed toward covenant and blessedness rather than toward likeness or comparison directly.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-404-p1-BSR-RP-04-1": {
@@ -5452,10 +5472,21 @@
    "_route": "CAVEATED_ACCEPT",
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "BELOW_FLOOR",
-    "adjudicated_by": "opus",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5481,6 +5512,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"he\\\" — i.e., God, referred back to \\\"God as Spirit\\\" in the preceding clause\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts this in its own voice as a declarative grounded in God's invisibility and immensity; the following rejection of images is a consequence, not the mode of the claim.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The denial concerns representability by art or image (a representational register) rather than the general denial of adequate Creator-creature likeness or comparison, but the narrower proposition — no crafted creaturely form adequately corresponds to God — lies wholly within the floor.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"Phrase is verbatim, subject is God, and the standard asserts it directly; but the assertion covers artistic/iconic representation specifically, so it supports only a narrower form of the predicate rather than the full denial of adequate Creator-creature correspondence.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "BELOW_FLOOR"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-404-p1-BSR-RP-06-1": {
@@ -5509,6 +5549,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "BELOW_FLOOR",
     "adjudicated_by": "sonnet",
@@ -5549,6 +5607,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
    }
@@ -5579,6 +5655,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "sonnet",
@@ -5616,9 +5710,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5643,6 +5748,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"God’s power and goodness\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The article asserts this in its own confessional voice ('We believe... For God's power and goodness are so great and incomprehensible'); it is not a report of an opponent's view.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts divine incomprehensibility and that God's works 'surpass human understanding and are beyond our ability to comprehend' — epistemic restraint that entails no adequate human grasp of God, but it stops short of an explicit denial of Creator-creature likeness or comparison.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is God (via his attributes), and the standard asserts it directly; but the assertion is of incomprehensibility/epistemic limit rather than an express denial of adequate likeness, so the floor is PARTIAL.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   }
  },
@@ -5791,19 +5905,33 @@
  },
  "allocation": {
   "kept": [
-   "Q-404-p1-BSR-RP-01-1",
    "Q-404-p1-BSR-RP-04-1",
+   "Q-404-p1-BSR-RP-01-1",
    "Q-404-p1-BSR-RP-06-2"
   ],
   "roles": {
-   "Q-404-p1-BSR-RP-01-1": "PRIMARY",
    "Q-404-p1-BSR-RP-04-1": "PRIMARY",
+   "Q-404-p1-BSR-RP-01-1": "PRIMARY",
    "Q-404-p1-BSR-RP-06-2": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-404-p1-BSR-RP-01-1": "opc and westminster churches",
+   "Q-404-p1-BSR-RP-04-1": "pc(usa)",
+   "Q-404-p1-BSR-RP-06-2": "crcna and rca"
+  },
+  "slot_order": {
+   "Q-404-p1-BSR-RP-04-1": 0,
+   "Q-404-p1-BSR-RP-01-1": 1,
+   "Q-404-p1-BSR-RP-06-2": 2
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

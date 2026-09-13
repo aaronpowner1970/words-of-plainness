@@ -5399,10 +5399,21 @@
    "_route": "CAVEATED_ACCEPT",
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5428,6 +5439,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"The distance between God and the creature\\\" — a relation predicated of God vis-à-vis creatures; the passage's operative terms are God and his voluntary condescension, not the Church, humanity, or Christ's human nature\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts this in its own voice as a doctrinal statement ('The distance ... is so great, that ...'), not as a report, question, hypothetical, or bare denial.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"It positively asserts an ontological gulf between God and creatures so great that no creaturely capacity can reach him apart from voluntary condescension — a narrower covenantal/soteriological form of the denial that any creaturely likeness or continuity is adequate to the divine mode of being.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"ECCLESIAL_VS_SOTERIOLOGICAL\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, the subject is the God–creature relation with God as the required term, and the standard asserts it directly; but the distance is framed in terms of fruition/reward and covenant condescension rather than the general inadequacy of creaturely likeness, so the support is a narrower proposition within the floor.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-452-p1-BSR-RP-03-1": {
@@ -5456,6 +5476,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "BELOW_FLOOR",
     "adjudicated_by": "sonnet",
@@ -5496,6 +5534,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
    }
@@ -5526,6 +5582,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "BELOW_FLOOR",
     "adjudicated_by": "sonnet",
@@ -5567,6 +5641,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
    }
@@ -5597,6 +5689,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "sonnet",
@@ -5633,10 +5743,21 @@
    "_route": "CAVEATED_ACCEPT",
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5661,6 +5782,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"God's sovereign love\\\" (a divine attribute predicated of God; the following sentences take \\\"God\\\" itself as subject: \\\"But God reveals his love in Jesus Christ...\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts this in its own voice as a positive declaration, not as a reported or condemned view.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The text asserts divine incomprehensibility and expressly contrasts what \\\"human thought ascribes to God\\\" (superlatives of power, wisdom, goodness) with God's actual self-disclosure in servanthood, folly, and mercy — a denial that creaturely predication adequately maps the divine mode, though stated as unknowability rather than as a formal analogy/dissimilarity rule.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is God (his sovereign love), and the standard asserts it directly; the proposition is a narrower incomprehensibility claim plus a critique of creaturely superlatives, which lies wholly within the floor but does not state the full greater-dissimilarity principle.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   }
  },
@@ -5788,8 +5918,20 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-452-p1-BSR-RP-01-1": "opc and westminster churches",
+   "Q-452-p1-BSR-RP-04-2": "pc(usa)"
+  },
+  "slot_order": {
+   "Q-452-p1-BSR-RP-01-1": 0,
+   "Q-452-p1-BSR-RP-04-2": 1
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

@@ -7501,9 +7501,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -7529,6 +7540,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"I\\\" (= \\\"the Lord God\\\") in \\\"As I live, saith the Lord God\\\"; and \\\"He\\\" in \\\"Saying, 'I live,' He desires that He be believed\\\"\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The oath formula is quoted from Ezek. 33:11 but endorsed in the Apology's own voice, which builds its argument on it (\\\"as God swears... He shows that faith is required\\\"; \\\"Saying, 'I live,' He desires that He be believed\\\"); it is not a report of an opponent's view.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage affirms that God lives (divine self-attestation used as the ground of an oath), but it does not state that God possesses life intrinsically or underivatively; the aseity component of the predicate is presupposed rather than asserted.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"SLOGAN_COMPRESSION\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, the subject is God speaking of His own life, and the confession asserts it in its own voice; but the oath formula yields only the narrower proposition that God lives, short of an explicit claim of intrinsic life, hence PARTIAL.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   }
  },
@@ -7620,8 +7640,18 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-003-p3-BSR-LU-01-b22-1": "lutheran churches subscribing the book of concord"
+  },
+  "slot_order": {
+   "Q-003-p3-BSR-LU-01-b22-1": 0
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

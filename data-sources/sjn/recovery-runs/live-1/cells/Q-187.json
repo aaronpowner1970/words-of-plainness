@@ -389,9 +389,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -416,6 +427,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"He\\\" — referring to God the Father Almighty, Maker of heaven and earth\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism's explanation asserts this in its own confessional voice (\\\"I believe that God...\\\"), closing with \\\"This is most certainly true\\\"; not a quoted opponent, hypothetical, or denial.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts God's continuing preservation, provision, and protection of the creature — providential care, a narrower proposition wholly within the floor of providential ordering, though it does not use the language of rule or governance over all things as such.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase with God the Father as grammatical subject, asserted in the standard's own voice; the content is providential preservation and protection rather than explicit governance, so the floor is met only partially.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   }
  },
@@ -487,8 +507,18 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-187-p1-BSR-LU-03-1": "lcms"
+  },
+  "slot_order": {
+   "Q-187-p1-BSR-LU-03-1": 0
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

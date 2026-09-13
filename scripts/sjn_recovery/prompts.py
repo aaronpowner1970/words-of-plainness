@@ -9,11 +9,16 @@ Guards live in code (guards.py); the prompts state the contract so the model can
 nothing here is relied on for enforcement."""
 import json
 
-PROMPT_VERSIONS = {"locator": "gate6-v1.4", "recut": "gate6-v1.3", "verifier": "gate6-v1.1", "coder": "gate6-v1.1"}
-PROMPT_VERSION = "gate6-v1.4 (locator) / gate6-v1.3 (recut) / gate6-v1.1 (verifier, coder)"
+PROMPT_VERSIONS = {"locator": "gate6-v1.4", "recut": "gate6-v1.3", "verifier": "gate6-v1.2", "coder": "gate6-v1.1"}
+PROMPT_VERSION = "gate6-v1.4 (locator) / gate6-v1.3 (recut) / gate6-v1.2 (verifier) / gate6-v1.1 (coder)"
 # gate6-v1.4 (2026-09-13, Task 2d): an EMPTY locator result carries a one-sentence `silence_rationale` —
 # what in the supplied chunks comes nearest the predicate and why it does not assert it — so an empty
 # cell can be audited per standard. The candidate shape, the retrieval and every rule are unchanged.
+# verifier gate6-v1.2 (2026-09-13, session 4, Task 3): the hazard IDIOM_OR_FORMULA — a fixed idiom, oath,
+# doxology, greeting or liturgical formula whose surface wording names the predicate while the passage's
+# actual assertion lies elsewhere — with the companion line `asserted_outside_formula` (Y/N). Raising the
+# flag caps the floor at WORD_ONLY in code unless that line is Y. A new verifier version means every
+# verifier call from here on has a new identity; stored verdicts are not re-run for it.
 
 
 def prompt_version(role):
@@ -22,7 +27,7 @@ def prompt_version(role):
 
 HAZARD_TYPES = ["SLOGAN_COMPRESSION", "SAME_WORD_DIFFERENT_MEANING", "APPARENT_CONTRADICTION",
                 "ECCLESIAL_VS_SOTERIOLOGICAL", "SOURCE_SILENCE_VS_DENIAL", "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE",
-                "RELATIONAL_VS_METAPHYSICAL", "FAMILY_VARIATION", "AUTHORITY_SCOPE", "SEMANTIC_FLOOR"]
+                "RELATIONAL_VS_METAPHYSICAL", "FAMILY_VARIATION", "AUTHORITY_SCOPE", "SEMANTIC_FLOOR", "IDIOM_OR_FORMULA"]
 
 # ------------------------------------------------------------------ LOCATOR
 LOCATOR_SYSTEM = """You are the LOCATOR in an evidence-recovery team for a comparative study of what official Christian standards confess about God. You receive ONE predicate (a property or title attributed to God, the Son, or the Holy Spirit), its controlled definition and semantic floor, and text chunks from ONE author-ratified standard of ONE tradition branch. Each chunk carries a chunk_key, the standard's title, and the standard's own locator (article, question, paragraph number, canon, decree, section).
@@ -118,12 +123,12 @@ Apply the fixed six-line rubric:
 1. phrase_verbatim — Y/N: is the quoted phrase present word-for-word in the chunk (ignoring case, punctuation and quote/dash style)?
 2. subject_is_required — Y/N: is the grammatical subject of the passage the required subject (God; or the Son or the Spirit where the predicate is so scoped)? Quote the grammatical subject. The Church, humanity, Scripture, the sacraments, Christ's human nature, or an opponent's view are NOT the required subject.
 3. speech_act_is_assertion — Y/N: does the STANDARD ITSELF assert this, in its own voice? A quotation of an opponent, a report of a view it condemns, a hypothetical, a prayer petition, a question, or a denial of a contrary claim (without positive assertion) is N. Be strict here: a confession written against an adversary often names a doctrine only to reject it, and the rejection of a contrary claim does not by itself assert the predicate.
-4. floor — FULL | PARTIAL | WORD_ONLY, with one sentence of reason. FULL: the passage asserts the predicate of the required subject in the defined sense. PARTIAL: a narrower proposition wholly within the floor. WORD_ONLY: the word appears but the proposition is not asserted (different sense, different subject, mere mention).
-5. hazard_flags — a list (possibly empty) drawn ONLY from: SLOGAN_COMPRESSION, SAME_WORD_DIFFERENT_MEANING, APPARENT_CONTRADICTION, ECCLESIAL_VS_SOTERIOLOGICAL, SOURCE_SILENCE_VS_DENIAL, HISTORICAL_ANTECEDENT_VS_EQUIVALENCE, RELATIONAL_VS_METAPHYSICAL, FAMILY_VARIATION, AUTHORITY_SCOPE, SEMANTIC_FLOOR.
+4. floor — FULL | PARTIAL | WORD_ONLY, with one sentence of reason. FULL: the passage asserts the predicate of the required subject in the defined sense. PARTIAL: a narrower proposition wholly within the floor. WORD_ONLY: the word appears but the proposition is not asserted (different sense, different subject, mere mention). A fixed formula is WORD_ONLY: when the predicate's word occurs only inside an oath ("as I live, saith the Lord"), a doxology ("to whom be glory"), a greeting, an acclamation or a liturgical formula, the passage PRESUPPOSES the predicate rather than asserting it, and the floor is WORD_ONLY unless the passage separately asserts the predicate outside the formula.
+5. hazard_flags — a list (possibly empty) drawn ONLY from: SLOGAN_COMPRESSION, SAME_WORD_DIFFERENT_MEANING, APPARENT_CONTRADICTION, ECCLESIAL_VS_SOTERIOLOGICAL, SOURCE_SILENCE_VS_DENIAL, HISTORICAL_ANTECEDENT_VS_EQUIVALENCE, RELATIONAL_VS_METAPHYSICAL, FAMILY_VARIATION, AUTHORITY_SCOPE, SEMANTIC_FLOOR, IDIOM_OR_FORMULA. Raise IDIOM_OR_FORMULA whenever the phrase is, or lies inside, a fixed idiom, oath, doxology, greeting or liturgical formula whose surface wording names the predicate while the passage's actual assertion lies elsewhere; then also answer asserted_outside_formula — Y only if the same passage asserts the predicate of the required subject in its own voice OUTSIDE the formula (quote it in floor_reason), else N. Answer "NA" when the flag is not raised.
 6. verdict — ACCEPT | ACCEPT_WITH_CAVEAT | REJECT. Any N on items 1–3 is REJECT. WORD_ONLY is REJECT (no lexical-floor family is marked in this workbook). ACCEPT_WITH_CAVEAT when the floor is PARTIAL or a hazard flag materially qualifies the reading. Give a short reason_code: OK | NOT_VERBATIM | WRONG_SUBJECT | NOT_ASSERTION | BELOW_FLOOR | AUTHORITY_SCOPE | OTHER.
 
 Output: a single JSON object and nothing else:
-{"phrase_verbatim": "Y|N", "subject_is_required": "Y|N", "grammatical_subject": "...", "speech_act_is_assertion": "Y|N", "speech_act_note": "...", "floor": "FULL|PARTIAL|WORD_ONLY", "floor_reason": "...", "hazard_flags": [...], "verdict": "ACCEPT|ACCEPT_WITH_CAVEAT|REJECT", "reason_code": "...", "reason": "..."}
+{"phrase_verbatim": "Y|N", "subject_is_required": "Y|N", "grammatical_subject": "...", "speech_act_is_assertion": "Y|N", "speech_act_note": "...", "floor": "FULL|PARTIAL|WORD_ONLY", "floor_reason": "...", "hazard_flags": [...], "asserted_outside_formula": "Y|N|NA", "verdict": "ACCEPT|ACCEPT_WITH_CAVEAT|REJECT", "reason_code": "...", "reason": "..."}
 """
 
 
@@ -139,7 +144,7 @@ def verifier_user(predicate, candidate, chunk_view):
         "candidate": {"registry_id": candidate["registry_id"], "locator": candidate["locator"],
                       "phrase": candidate["phrase"], "floor_claim": candidate.get("floor_claim")},
         "chunk": chunk_view,
-        "output_contract": "JSON only, the six-line rubric plus reason_code and reason",
+        "output_contract": "JSON only, the six-line rubric plus asserted_outside_formula (Y|N|NA), reason_code and reason",
     }, ensure_ascii=False, indent=0)
 
 

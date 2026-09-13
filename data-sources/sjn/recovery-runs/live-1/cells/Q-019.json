@@ -4785,11 +4785,22 @@
    },
    "_route": "CAVEATED_ACCEPT",
    "final": {
-    "verdict": "ACCEPT",
+    "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL",
+     "opus": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT",
     "overturned": false,
     "direction": null
    },
@@ -4812,6 +4823,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"God (\\\"since God is a spiritual, undivided essence\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The clause is a causal premise (\\\"since...\\\") stated in the Formula's own voice; what is rejected is the inference drawn about Christ's human nature, not the premise that God is a spiritual, undivided, omnipresent essence.\", \"floor\": \"FULL\", \"floor_reason\": \"God is positively named as a spiritual essence, present everywhere, which is exactly the predicate's defined sense.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, required subject God, asserted as a premise in the standard's own voice; meets the full floor for spiritual being.\"}",
     "verdict": "ACCEPT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   }
  },
@@ -4903,8 +4923,23 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-019-p3-BSR-LU-01-b6-1": "lutheran churches subscribing the book of concord"
+  },
+  "slot_order": {
+   "Q-019-p3-BSR-LU-01-b6-1": 0
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {
+   "Q-019-p3-BSR-LU-01-b6-1": [
+    "ACCEPT",
+    "ACCEPT_WITH_CAVEAT"
+   ]
+  }
+ }
 }

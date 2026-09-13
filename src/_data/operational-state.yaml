@@ -153,17 +153,36 @@ workstreams:
       turned 7 of 9 empty-track cells into filled cells); Reformed/Presbyterian run: 16
       cells, 16 filled, 15.18 USD (0.949/cell; six standards per cell, no exhaustion).
       Caveat slice: 34 candidates, 3.33 USD, 0 overturned. Packets:
-      recovery-packets/{lutheran,reformed-presbyterian}.json. Four branches remain
-      (Baptist 37, Methodist/Wesleyan 37, Mennonite/Anabaptist 41, Eastern Orthodox 44)
-      and each WAITS for the author's go; Eastern Orthodox runs alone and last, after the
-      author ratifies the four derived translation pairs individually.
-      Blocked corpus rows: BSR-EO-03 (goarch.org, HOST_RETIRED), BSR-BA-02 (apex→www).
+      recovery-packets/{lutheran,reformed-presbyterian}.json.
+      Session 4 (2026-09-13, workbook unchanged): the author's rulings after the
+      Lutheran/Reformed review landed — candidate-slot diversity by speaks_for group
+      (no body takes a second slot before every body has a first; allocation.py),
+      the lower floor is final on a model disagreement (2a; opus adjudicates lines 1–3
+      only on the reject-all/slice routes; caveated accepts sampled ≤20% for disclosure,
+      not adjudicated), the IDIOM_OR_FORMULA hazard (verifier gate6-v1.2; caps the floor
+      at WORD_ONLY), exhaustion-sourced candidates marked on cards, rows without text named
+      on the branch record. The four packets were rebuilt with no model calls (Reformed: 10
+      cards gained PC(USA)/Three Forms candidates; Q-147, Q-403, Q-380 fell to honest
+      empties; the rule refuses 9 earlier opus floor rescues — author to rule whether the
+      reject-all route is exempt; Q-003 flagged for the formula ruling). fa-3 planted
+      re-validation: false-accept 0.000/0.000/0.000, Dositheus 0.000, 7.57 USD; the rule
+      costs 2 cells of cal-3 recall (0.929→0.915). Three branches run: Baptist 37 cells /
+      15 filled / 4.41 USD (0.119 per cell), Methodist/Wesleyan 37 / 22 / 9.22 USD (0.249),
+      Mennonite/Anabaptist 41 / 31 / 10.70 USD (0.261); 24.33 USD for 115 cells. Packets:
+      recovery-packets/{baptist,methodist-wesleyan,mennonite-anabaptist}.json. Report:
+      docs/gate6/WoP_SJN_Gate6_Session4_Report_20260913.md. ONLY Eastern Orthodox remains
+      (44 cells, 14 rows; estimate 55–65 USD as-is, locator 35 of it); it runs alone, after
+      the author's go, the translation-pair ratification and the standards-per-cell decision.
+      BSR-LU-02 is a JavaScript viewer shell with no plain-fetch text: keep as adoption row
+      or retire (author's call).
+      Blocked corpus rows: BSR-EO-03 (goarch.org, HOST_RETIRED), BSR-BA-02 (apex→www),
+      BSR-LU-02 (client viewer).
       Gate 7 items: Q-434 phrase re-cut, Q-169 now resolvable under BSR-RC-08 (re-check
       R001), the Roman Catholic packet's leading-witness cards to re-read under the new
       ordering, BSR-EO-03 retire or re-host, BSR-BA-02 apex→www redirect, see
       recovery-runs/proposed-app-config-gate7.md. Running the Gate 2 pipeline against
       v2.25 blocks on R001 (Q-034) until Gate 7 re-points that cell.
-    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session3_Report_20260913.md, review recovery-packets/{lutheran,reformed-presbyterian}.json (the seven exhaustion-filled Lutheran cells and the opus rescues first), ratify the four derived translation pairs individually, and rule on the Reformed/Presbyterian tie-break (registry row order within one tier); then give the go for the next single branch (Eastern Orthodox last, alone). Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
+    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session4_Report_20260913.md; rule on (1) whether the reject-all route is exempt from the lower-floor rule (it refuses 9 earlier opus rescues incl. Q-403), (2) Q-003 under the IDIOM_OR_FORMULA hazard, (3) BSR-LU-02 keep-as-adoption-row or retire, (4) BSR-BA-02 www canonical URL, (5) the Eastern Orthodox standards-per-cell cap; review recovery-packets/{baptist,methodist-wesleyan,mennonite-anabaptist}.json and the rebuilt Reformed packet; ratify the four derived translation pairs; then give the go for Eastern Orthodox alone. Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
 
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED

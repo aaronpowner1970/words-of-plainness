@@ -4066,9 +4066,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -4094,6 +4105,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"the name of God\\\" (in the clause \\\"just as the name of God is in itself holy\\\") — a metonymy for God as He is revealed and named\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"Though in a comparative/concessive clause (\\\"just as... so also\\\"), the catechism asserts it in its own voice as a given truth, not as a hypothetical, opponent's view, or petition; the petition (\\\"we pray nevertheless that it be holy among us\\\") is distinguished from it.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The text affirms intrinsic holiness of God's name rather than predicating holiness of God directly, a narrower proposition that nonetheless falls within the floor since the divine name stands for God Himself as revealed.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim and asserted in the standard's own voice; the subject is God's name rather than God simpliciter, so the affirmation of holiness is reached by metonymy and the floor is PARTIAL rather than FULL.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-091-p3-BSR-LU-01-b2-1": {
@@ -4121,6 +4141,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "NOT_ASSERTION",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "NOT_ASSERTION",
     "adjudicated_by": "sonnet",
@@ -4156,6 +4194,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "sonnet",
@@ -4254,8 +4310,18 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-091-p3-BSR-LU-01-b1-1": "lutheran churches subscribing the book of concord"
+  },
+  "slot_order": {
+   "Q-091-p3-BSR-LU-01-b1-1": 0
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

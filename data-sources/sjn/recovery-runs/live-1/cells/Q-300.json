@@ -5842,9 +5842,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "FULL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": true,
+    "lower_floor_applied": true,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5870,6 +5881,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"the Father\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The confession asserts this in its own voice as part of its positive statement on the Godhead; no quotation, hypothetical, or bare denial of an opponent.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause asserts the Father's unoriginateness ('is of none'), a proposition wholly within the floor of 'not made' — but it is framed in terms of relations of origin within the Trinity rather than an explicit denial of creaturehood.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, the subject is the Father, and the standard asserts it directly; the denial of any origin ('of none') entails non-creaturehood, but since the clause's immediate register is intra-Trinitarian processions rather than creation, the support is partial rather than a direct assertion of the predicate.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-300-p1-BSR-RP-02-1": {
@@ -5897,6 +5917,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "BELOW_FLOOR",
     "adjudicated_by": "sonnet",
@@ -5933,9 +5971,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5960,6 +6009,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"God (\\\"God is a Spirit, in and of himself infinite in being...\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism answers its own question in its own voice, positively predicating these attributes of God; no quotation, hypothetical, or bare rejection of a contrary view.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts aseity (\\\"in and of himself\\\") together with eternity and unchangeableness, which entails that God is not made, but it does not in these words explicitly deny creaturehood.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, required subject, assertoric voice; the floor is met only by entailment from self-existence rather than by an explicit denial of being made, so a partial-floor caveat applies.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-300-p1-BSR-RP-04-1": {
@@ -5988,6 +6046,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "sonnet",
@@ -6028,6 +6104,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
    }
@@ -6057,6 +6151,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -6097,6 +6209,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
    }
@@ -6126,6 +6256,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "sonnet",
@@ -6161,6 +6309,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
     "adjudicated_by": "sonnet",
@@ -6317,18 +6483,32 @@
  "allocation": {
   "kept": [
    "Q-300-p1-BSR-RP-01-1",
-   "Q-300-p1-BSR-RP-03-1",
-   "Q-300-p1-BSR-RP-06-1"
+   "Q-300-p1-BSR-RP-06-1",
+   "Q-300-p1-BSR-RP-03-1"
   ],
   "roles": {
    "Q-300-p1-BSR-RP-01-1": "PRIMARY",
-   "Q-300-p1-BSR-RP-03-1": "PRIMARY",
-   "Q-300-p1-BSR-RP-06-1": "PRIMARY"
+   "Q-300-p1-BSR-RP-06-1": "PRIMARY",
+   "Q-300-p1-BSR-RP-03-1": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-300-p1-BSR-RP-01-1": "opc and westminster churches",
+   "Q-300-p1-BSR-RP-03-1": "opc and westminster churches",
+   "Q-300-p1-BSR-RP-06-1": "crcna and rca"
+  },
+  "slot_order": {
+   "Q-300-p1-BSR-RP-01-1": 0,
+   "Q-300-p1-BSR-RP-06-1": 1,
+   "Q-300-p1-BSR-RP-03-1": 2
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

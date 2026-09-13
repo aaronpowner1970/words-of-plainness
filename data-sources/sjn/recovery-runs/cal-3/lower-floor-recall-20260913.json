@@ -1,0 +1,175 @@
+{
+ "run_id": "cal-3",
+ "verdict_rule": "LOWER_FLOOR_2026-09-13",
+ "metric": "SAME_STANDARD (gated)",
+ "cells": 141,
+ "recall_at_run": 0.9291,
+ "recall_lower_floor": 0.9149,
+ "hits_at_run": 131,
+ "hits_lower_floor": 129,
+ "cells_lost": [
+  {
+   "queue_id": "Q-155",
+   "branch": "Lutheran",
+   "predicate": "Glorious",
+   "cited": [
+    "BSR-LU-01"
+   ]
+  },
+  {
+   "queue_id": "Q-215",
+   "branch": "Methodist / Wesleyan",
+   "predicate": "Savior",
+   "cited": [
+    "BSR-MW-02"
+   ]
+  }
+ ],
+ "cells_gained": [],
+ "candidates_refused_by_rule": 7,
+ "refused": [
+  {
+   "queue_id": "Q-010",
+   "branch": "Eastern Orthodox",
+   "candidate_id": "Q-010-p1-BSR-EO-04-1",
+   "route": "SLICE_ROW",
+   "floors": {
+    "sonnet": "WORD_ONLY",
+    "opus": "PARTIAL"
+   },
+   "floor_final": "WORD_ONLY",
+   "on_cited_standard": false
+  },
+  {
+   "queue_id": "Q-010",
+   "branch": "Eastern Orthodox",
+   "candidate_id": "Q-010-p1-BSR-EO-09-1",
+   "route": "SLICE_ROW",
+   "floors": {
+    "sonnet": "WORD_ONLY",
+    "opus": "PARTIAL"
+   },
+   "floor_final": "WORD_ONLY",
+   "on_cited_standard": false
+  },
+  {
+   "queue_id": "Q-042",
+   "branch": "Eastern Orthodox",
+   "candidate_id": "Q-042-p1-BSR-EO-04-1",
+   "route": "SLICE_ROW",
+   "floors": {
+    "sonnet": "WORD_ONLY",
+    "opus": "PARTIAL"
+   },
+   "floor_final": "WORD_ONLY",
+   "on_cited_standard": false
+  },
+  {
+   "queue_id": "Q-042",
+   "branch": "Eastern Orthodox",
+   "candidate_id": "Q-042-p1-BSR-EO-05-1",
+   "route": "SLICE_ROW",
+   "floors": {
+    "sonnet": "WORD_ONLY",
+    "opus": "FULL"
+   },
+   "floor_final": "WORD_ONLY",
+   "on_cited_standard": false
+  },
+  {
+   "queue_id": "Q-155",
+   "branch": "Lutheran",
+   "candidate_id": "Q-155-p1-BSR-LU-01-1",
+   "route": "PRIMARY_REJECTED_ALL",
+   "floors": {
+    "sonnet": "WORD_ONLY",
+    "opus": "PARTIAL"
+   },
+   "floor_final": "WORD_ONLY",
+   "on_cited_standard": true
+  },
+  {
+   "queue_id": "Q-215",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "Q-215-p1-BSR-MW-02-1",
+   "route": "PRIMARY_REJECTED_ALL",
+   "floors": {
+    "sonnet": "WORD_ONLY",
+    "opus": "FULL"
+   },
+   "floor_final": "WORD_ONLY",
+   "on_cited_standard": true
+  },
+  {
+   "queue_id": "Q-215",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "Q-215-p1-BSR-MW-04-1",
+   "route": "PRIMARY_REJECTED_ALL",
+   "floors": {
+    "sonnet": "WORD_ONLY",
+    "opus": "PARTIAL"
+   },
+   "floor_final": "WORD_ONLY",
+   "on_cited_standard": false
+  }
+ ],
+ "per_branch": {
+  "Roman Catholic": {
+   "n": 20,
+   "before": 17,
+   "after": 17,
+   "recall_at_run": 0.85,
+   "recall_lower_floor": 0.85
+  },
+  "Anglican": {
+   "n": 12,
+   "before": 11,
+   "after": 11,
+   "recall_at_run": 0.917,
+   "recall_lower_floor": 0.917
+  },
+  "Baptist": {
+   "n": 16,
+   "before": 16,
+   "after": 16,
+   "recall_at_run": 1.0,
+   "recall_lower_floor": 1.0
+  },
+  "Methodist / Wesleyan": {
+   "n": 18,
+   "before": 16,
+   "after": 15,
+   "recall_at_run": 0.889,
+   "recall_lower_floor": 0.833
+  },
+  "Eastern Orthodox": {
+   "n": 10,
+   "before": 7,
+   "after": 7,
+   "recall_at_run": 0.7,
+   "recall_lower_floor": 0.7
+  },
+  "Lutheran": {
+   "n": 15,
+   "before": 14,
+   "after": 13,
+   "recall_at_run": 0.933,
+   "recall_lower_floor": 0.867
+  },
+  "Reformed / Presbyterian": {
+   "n": 37,
+   "before": 37,
+   "after": 37,
+   "recall_at_run": 1.0,
+   "recall_lower_floor": 1.0
+  },
+  "Mennonite / Anabaptist": {
+   "n": 13,
+   "before": 13,
+   "after": 13,
+   "recall_at_run": 1.0,
+   "recall_lower_floor": 1.0
+  }
+ },
+ "note": "recomputed in memory from the stored rubrics of the run; the run's own files are unchanged; the verifier prompt of the run (gate6-v1.1) predates the IDIOM_OR_FORMULA hazard, so Task 3 is not reflected here"
+}

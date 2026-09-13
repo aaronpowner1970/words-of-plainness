@@ -1,5 +1,6 @@
 """Card allocation — the ONE place that decides which surviving candidates a cell's card carries
-(2026-09-12, packet-shape fixes 1a–1c adopted by the author after the Roman Catholic packet).
+(2026-09-12, packet-shape fixes 1a–1c adopted by the author after the Roman Catholic packet;
+2026-09-13 session 4, the candidate-slot diversity rule adopted after the Reformed packet).
 
 Used by the packet builder (packets.py) and, since fix 1c, by the cell runner BEFORE the coder
 runs, so the coder is spent only on candidates that will actually reach the card. Both callers
@@ -16,9 +17,14 @@ Order of operations on a cell's surviving (verifier-accepted) candidates:
   3. witness-only guard  a cell may not rest on witness rows alone
   4. tier allocation     higher effective tier first; the cap is filled tier by tier so a second
                          candidate from the winning tier never displaces the only witness from
-                         another tier; WITHIN a tier every non-witness row sorts before any
-                         witness row (1a: reception TRANSLATION_WITNESS, or an authority_tier
-                         marked "(translation)" or "witness")
+                         another tier. WITHIN a tier (session 4, RATIFIED): candidates are grouped
+                         by the body the row speaks for (`speaks_for`, resolved — see
+                         speaks_for_groups), and NO GROUP TAKES A SECOND SLOT UNTIL EVERY GROUP WITH
+                         A SURVIVING CANDIDATE HAS TAKEN A FIRST. Groups are ranked for their first
+                         slot by the existing keys — non-witness before witness (1a), then the
+                         locator's floor claim (FULL before PARTIAL), and only as the last resort by
+                         registry row order, which orders presentation but never decides which body
+                         is heard. Then each group's second candidate, in the same group order, etc.
   5. cap                 MAX_CANDIDATES kept; lower-tier survivors marked corroborating
 
 The function is pure: it returns which candidate ids are kept, paired, suppressed or cut, with
@@ -34,6 +40,9 @@ _DOC_STOP = {"the", "and", "of", "on", "in", "as", "by", "to", "a", "an", "witne
              "council", "councils", "definition", "definitions", "faith", "received", "witnessed", "clause", "page",
              "new", "advent", "fordham", "ewtn", "npnf2", "percival", "row", "floor", "resolves", "conciliar", "confessional"}
 _RID = re.compile(r"\bBSR-[A-Z]{2}-\d{2}\b")
+FLOOR_ORDER = {"FULL": 0, "PARTIAL": 1, "WORD_ONLY": 2}
+_AS_ABOVE = re.compile(r"^\s*(as above|same as above|ditto|idem|\"|″|〃)\s*\.?\s*$", re.I)
+_NO_BODY = re.compile(r"^\s*[-—–]?\s*$")
 
 
 def is_witness_like(entry):
@@ -47,6 +56,75 @@ def is_witness_like(entry):
 def _doc_tokens(title):
     t = re.sub(r"[^A-Za-z0-9 ]", " ", (title or "").casefold())
     return {w for w in t.split() if len(w) >= 4 and w not in _DOC_STOP}
+
+
+# ---------------------------------------------------------------- speaks_for groups (session 4)
+def normalize_body(text):
+    """The body a `speaks_for` value names, for grouping: the text before the first semicolon (what follows
+    is a qualification — "CRCNA and RCA; Dort required subscription", "Universal Church; published by the Holy
+    See's Dicastery …"), parentheticals stripped ("Church of England (appointed in the BCP)"), casefolded,
+    trailing punctuation dropped."""
+    t = (text or "").split(";")[0]
+    t = re.sub(r"\s+\([^)]*\)", " ", t)          # a parenthetical after whitespace is a qualification; "PC(USA)" is a name
+    t = re.sub(r"[\s.,:]+$", "", re.sub(r"\s+", " ", t)).strip().casefold()
+    return t
+
+
+def speaks_for_groups(registry, branch):
+    """{registry_id: {"raw", "group", "rule"}} for one branch, derived from the registry sheet in row order:
+      AS_ABOVE_PREVIOUS_ROW   "as above" (and the like) resolves to the group of the nearest preceding row of the
+                              branch that names a body (BSR-RP-02 / BSR-RP-03 -> BSR-RP-01's "OPC and Westminster churches")
+      BODY_BEFORE_SEMICOLON   the value carried a qualification after a semicolon; the body before it is the group
+      PARENTHETICAL_STRIPPED  a parenthetical qualification was stripped
+      VERBATIM                the casefolded value is the group as written
+      WITNESS_OF_CONTROLLING_ROW  a translation witness speaks for the body its controlling row speaks for (BSR-RC-03 ->
+                              BSR-RC-02's "Universal Church"): it is the same body read in English, so it never takes a
+                              slot as a "second body" ahead of that body's own second candidate (the pairs come from
+                              translation_pairs — derived, and listed in every packet header for ratification)
+      WITNESS_ROW_OWN_GROUP   a witness row with no controlling row and no body ("—"): its own group; it sorts last (1a)
+      NO_BODY_OWN_GROUP       an empty / dash value on a non-witness row: its own group, reported for the author"""
+    rows = registry.for_branch(branch, include_fallback=True, citable_only=False)
+    try:
+        pairs = translation_pairs(registry, branch)
+    except Exception:
+        pairs = {}
+    out, prev_group = {}, None
+    for r in rows:
+        rid, raw = r["registry_id"], str(r.get("speaks_for") or "")
+        rec = {"raw": raw, "group": None, "rule": None}
+        if registry.is_witness(rid) and pairs.get(rid):
+            ctrl = pairs[rid]
+            ctrl_group = out.get(ctrl, {}).get("group") or normalize_body(str(next((x.get("speaks_for") for x in rows if x["registry_id"] == ctrl), "") or "")) or ctrl
+            rec.update(group=ctrl_group, rule="WITNESS_OF_CONTROLLING_ROW", controlling=ctrl)
+        elif registry.is_witness(rid) and (_NO_BODY.match(raw) or _AS_ABOVE.match(raw)):
+            rec.update(group=rid, rule="WITNESS_ROW_OWN_GROUP")
+        elif _AS_ABOVE.match(raw):
+            if prev_group:
+                rec.update(group=prev_group, rule="AS_ABOVE_PREVIOUS_ROW")
+            else:
+                rec.update(group=rid, rule="NO_BODY_OWN_GROUP")
+        elif _NO_BODY.match(raw):
+            rec.update(group=rid, rule="NO_BODY_OWN_GROUP")
+        else:
+            body = normalize_body(raw)
+            if ";" in raw:
+                rule = "BODY_BEFORE_SEMICOLON"
+            elif re.search(r"\s+\(", raw):
+                rule = "PARENTHETICAL_STRIPPED"
+            else:
+                rule = "VERBATIM"
+            rec.update(group=body or rid, rule=rule if body else "NO_BODY_OWN_GROUP")
+        out[rid] = rec
+        if rec["rule"] not in ("WITNESS_ROW_OWN_GROUP", "NO_BODY_OWN_GROUP", "WITNESS_OF_CONTROLLING_ROW"):
+            prev_group = rec["group"]
+    return out
+
+
+def group_map(groups):
+    """{registry_id: group} from speaks_for_groups() output (or an already flat map)."""
+    if not groups:
+        return {}
+    return {rid: (g["group"] if isinstance(g, dict) else g) for rid, g in groups.items()}
 
 
 def translation_pairs(registry, branch):
@@ -133,13 +211,15 @@ def _division_key(locator):
     return m.group(1).upper() if m else None
 
 
-def allocate(cands, pairs=None, cap=MAX_CANDIDATES):
+def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None):
     """cands: surviving candidates as dicts carrying candidate_id, registry_id, fallback_tier, witness,
-    effective_tier, authority_tier, reception_scope, locator (and anything else; untouched).
+    effective_tier, authority_tier, reception_scope, locator, floor_claim (and anything else; untouched).
+    groups: {registry_id: group} (speaks_for_groups / group_map); a row absent from it is its own group.
     Returns {"kept": [ids in card order], "roles": {id: "CONTROLLING"|"CORROBORATING"|"PRIMARY"},
              "english_witness": {controlling_id: witness_id}, "dropped": {id: reason}, "witness_only": [ids],
-             "corroborating_lower_tier": {id: bool}}"""
+             "corroborating_lower_tier": {id: bool}, "groups": {id: group}, "slot_order": {id: n}}"""
     pairs = pairs or {}
+    gmap = group_map(groups)
     by_id = {c["candidate_id"]: c for c in cands}
     order = [c["candidate_id"] for c in cands]
     dropped, witness_link = {}, {}
@@ -174,28 +254,57 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES):
         for i in live:
             dropped[i] = "WITNESS_ONLY: a cell may not rest on a translation/witness row alone (no controlling text survived)"
         live = []
-    # 4. tier allocation, witness rows last within a tier (1a), then the cap tier by tier
+    # 4. tier allocation; within a tier, the speaks_for group rule (session 4), then the cap tier by tier
 
     def rank(i):
         c = by_id[i]
         return tier_rank(c.get("effective_tier") or c.get("authority_tier"))
 
-    def sort_key(i):
-        return (rank(i), 1 if is_witness_like(by_id[i]) else 0, order.index(i))
+    def group_of(i):
+        rid = by_id[i]["registry_id"]
+        return gmap.get(rid, rid)
 
-    ranked = sorted(live, key=sort_key)
-    seen = {}
-    for i in ranked:
-        seen.setdefault(rank(i), []).append(i)
-    queues = [seen[k] for k in sorted(seen)]
+    def member_key(i):
+        """The existing keys, inside a tier: non-witness before witness (1a), floor claim, registry/slot order last."""
+        return (1 if is_witness_like(by_id[i]) else 0, FLOOR_ORDER.get(by_id[i].get("floor_claim"), 9), order.index(i))
+
+    tiers = {}
+    for i in live:
+        tiers.setdefault(rank(i), []).append(i)
+    tier_sequences = []
+    for rk in sorted(tiers):
+        members = sorted(tiers[rk], key=member_key)
+        grouped = {}
+        for i in members:                       # members already sorted: each group's list is in member_key order
+            grouped.setdefault(group_of(i), []).append(i)
+        group_order = sorted(grouped, key=lambda g: member_key(grouped[g][0]))
+        seq = []
+        depth = 0
+        while True:                             # round 1: every group's first; round 2: every group's second; …
+            got = False
+            for g in group_order:
+                if depth < len(grouped[g]):
+                    seq.append(grouped[g][depth]); got = True
+            if not got:
+                break
+            depth += 1
+        tier_sequences.append(seq)
+    queues = [list(q) for q in tier_sequences]
     by_tier = []
     while queues:
         queues = [q for q in queues if q]
         for q in list(queues):
             by_tier.append(q.pop(0))
-    kept = sorted(by_tier[:cap], key=sort_key)
+    slot_pos = {}
+    for seq in tier_sequences:
+        for n, i in enumerate(seq):
+            slot_pos[i] = n
+    kept = sorted(by_tier[:cap], key=lambda i: (rank(i), slot_pos[i]))
     for i in by_tier[cap:]:
-        dropped[i] = "candidate cap reached after tier allocation"
+        holders = sorted({group_of(j) for j in kept if rank(j) == rank(i)})
+        dropped[i] = ("candidate cap reached after tier allocation" +
+                      (f" (speaks_for group rule: its group {group_of(i)!r} already holds a slot" if group_of(i) in holders else
+                       f" (speaks_for group rule: the cap was filled by groups {holders}") + ")")
     top = rank(kept[0]) if kept else None
     corr = {i: bool(top is not None and rank(i) > top) for i in kept}
     roles = {}
@@ -206,4 +315,5 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES):
         if ctrl not in kept:
             dropped[w] = f"paired witness of {ctrl}, which the candidate cap cut"
     return {"kept": kept, "roles": roles, "english_witness": {c: w for c, w in witness_link.items() if c in kept},
-            "dropped": dropped, "witness_only": witness_only, "corroborating_lower_tier": corr}
+            "dropped": dropped, "witness_only": witness_only, "corroborating_lower_tier": corr,
+            "groups": {i: group_of(i) for i in order}, "slot_order": {i: slot_pos[i] for i in kept}}

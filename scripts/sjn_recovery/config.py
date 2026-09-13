@@ -75,7 +75,29 @@ EXHAUST_CALLS_PER_ROUND = 4
 # the shape of a planted near-miss and the thing the author actually sees. Fired only on candidates the
 # allocation keeps (or shows as an English witness); rejections never need it.
 CAVEAT_SLICE_HAZARDS = ("SEMANTIC_FLOOR", "SAME_WORD_DIFFERENT_MEANING")
-ROUTE_CAVEATED_ACCEPT = "CAVEATED_ACCEPT"
+ROUTE_CAVEATED_ACCEPT = "CAVEATED_ACCEPT"          # the 2026-09-13 session-3 route: RETIRED as an adjudication (see below)
+
+# Session 4 (2026-09-13, after the Lutheran / Reformed packet review) — the author's rulings on verdicts:
+#   2a  where two models return different floors for the same candidate, the LOWER floor is final. Never averaged,
+#       never the adjudicator's. Applied on EVERY route where a second rubric exists (the case that motivated it,
+#       Q-403, came through PRIMARY_REJECTED_ALL: sonnet WORD_ONLY, opus PARTIAL, opus carried it onto the card).
+#   2b  opus stays on the reject-all route (and the slice rows) exactly as before: it still judges lines 1–3 and may
+#       still rescue a candidate the primary refused for subject or speech act; only the floor cannot rise.
+#   2c  caveated accepts are no longer ROUTED to opus for adjudication. A deterministic sample of at most
+#       CAVEAT_SAMPLE_SHARE of the caveated accepts that reach a card is sent for INFORMATION; its rubric is shown
+#       on the card as disclosure (route CAVEATED_ACCEPT_SAMPLE) and under 2a can lower the floor, never raise it.
+LOWER_FLOOR_RULE = "LOWER_FLOOR_2026-09-13"
+ADJUDICATING_ROUTES = ("SLICE_ROW", "FALLBACK_ROW", "PRIMARY_REJECTED_ALL", "SECONDARY_ALL")
+ROUTE_CAVEAT_SAMPLE = "CAVEATED_ACCEPT_SAMPLE"
+CAVEAT_SAMPLE_SHARE = 0.20
+
+# Task 3 (session 4): an oath, doxology, greeting or liturgical formula whose surface wording names the predicate
+# while the passage asserts something else ("As I live, saith the Lord" for LIVING). Raising the flag caps the
+# floor at WORD_ONLY unless the verifier separately attests that the passage asserts the predicate outside the
+# formula. Applied from Task 6 onward; past branches are not re-run for it (the motivating cell, Q-003, is flagged
+# for the author instead).
+HAZARD_IDIOM_OR_FORMULA = "IDIOM_OR_FORMULA"
+FORMULA_FLOOR_CAP = "WORD_ONLY"
 
 # Registry hosts RETIRED by the author (2026-09-12). A retired host is never requested, for any purpose:
 # not by the corpus builder, not by the fetch audit, not by an adapter's crawl. Rows still ratified on a

@@ -1833,6 +1833,26 @@
     "adjudicated_by": "opus",
     "route": "PRIMARY_REJECTED_ALL",
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "REJECT",
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
    }
@@ -1886,6 +1906,26 @@
     "reason_code_final": "OK"
    },
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "FULL"
+    },
+    "floor_disagreement": true,
+    "lower_floor_applied": true,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": true,
+    "direction": "RESCUED"
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "opus",
@@ -1947,6 +1987,26 @@
     "adjudicated_by": "opus",
     "route": "PRIMARY_REJECTED_ALL",
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "FULL"
+    },
+    "floor_disagreement": true,
+    "lower_floor_applied": true,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": true,
+    "direction": "RESCUED"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
     "overturned": true,
     "direction": "RESCUED"
    }
@@ -1998,6 +2058,26 @@
     "reason_code_final": "OK"
    },
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "PRIMARY_REJECTED_ALL",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": true,
+    "direction": "RESCUED"
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "opus",
@@ -2123,8 +2203,48 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-205-p1-BSR-AN-02-1": "church of england",
+   "Q-205-p1-BSR-AN-03-1": "church of england",
+   "Q-205-p1-BSR-AN-04-1": "the episcopal church"
+  },
+  "slot_order": {
+   "Q-205-p1-BSR-AN-03-1": 0,
+   "Q-205-p1-BSR-AN-02-1": 0,
+   "Q-205-p1-BSR-AN-04-1": 1
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "coverage_final": {
+  "BSR-AN-01": {
+   "coverage": "FULL",
+   "supplied": 39,
+   "of": 39,
+   "pass": "1"
+  },
+  "BSR-AN-02": {
+   "coverage": "FULL",
+   "supplied": 25,
+   "of": 25,
+   "pass": "1"
+  },
+  "BSR-AN-03": {
+   "coverage": "FULL",
+   "supplied": 1,
+   "of": 1,
+   "pass": "1"
+  },
+  "BSR-AN-04": {
+   "coverage": "FULL",
+   "supplied": 124,
+   "of": 124,
+   "pass": "1"
+  }
+ },
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

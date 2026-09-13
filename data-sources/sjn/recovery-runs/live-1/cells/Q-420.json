@@ -5727,6 +5727,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT",
     "overturned": false,
     "direction": null
    }
@@ -5758,10 +5776,21 @@
    "_route": "CAVEATED_ACCEPT",
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5786,6 +5815,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The only redeemer of God's elect ... the Lord Jesus Christ, who ... was, and continueth to be, God and man in two distinct natures\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism answers in its own voice, affirming the abiding duality of natures in the one person.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The assertion that Christ continues forever to be God and man in two distinct natures excludes any conversion of one nature into the other by implication, but the denial of conversion is not stated in its own terms (the explicit note is persistence and distinctness rather than immutability of nature).\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, correct subject, genuine assertion; the delimiter 'without change' is entailed by 'two distinct natures ... forever' rather than expressly stated, so the floor is partial.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-420-p1-BSR-RP-03-1": {
@@ -5816,9 +5854,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -5844,6 +5893,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The only mediator of the covenant of grace ... the Lord Jesus Christ, who ... was and continues to be God and man\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism answer asserts this in its own voice as positive doctrine about the mediator, not as a report or rejection of another's view.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The text affirms that Christ permanently subsists in 'two entire distinct natures, and one person, forever,' which entails that neither nature was converted into the other, but it does not explicitly deny conversion/change in so many words.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is the incarnate Christ, and the standard asserts the permanence and entirety/distinctness of the two natures; the non-conversion predicate is carried by 'entire distinct ... forever' by entailment rather than by explicit denial, so the floor is PARTIAL.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-420-p1-BSR-RP-04-1": {
@@ -5869,6 +5927,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -5909,6 +5985,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    }
@@ -5943,6 +6037,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    }
@@ -5972,6 +6084,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -6012,6 +6142,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
    }
@@ -6042,6 +6190,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -6293,30 +6459,49 @@
  "allocation": {
   "kept": [
    "Q-420-p1-BSR-RP-01-1",
-   "Q-420-p1-BSR-RP-02-1",
-   "Q-420-p1-BSR-RP-03-1"
+   "Q-420-p1-BSR-RP-04-1",
+   "Q-420-p1-BSR-RP-06-1"
   ],
   "roles": {
    "Q-420-p1-BSR-RP-01-1": "PRIMARY",
-   "Q-420-p1-BSR-RP-02-1": "PRIMARY",
-   "Q-420-p1-BSR-RP-03-1": "PRIMARY"
+   "Q-420-p1-BSR-RP-04-1": "PRIMARY",
+   "Q-420-p1-BSR-RP-06-1": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {
-   "Q-420-p1-BSR-RP-04-1": "candidate cap reached after tier allocation",
-   "Q-420-p1-BSR-RP-05-1": "candidate cap reached after tier allocation",
-   "Q-420-p1-BSR-RP-06-1": "candidate cap reached after tier allocation",
-   "Q-420-p1-BSR-RP-04-2": "candidate cap reached after tier allocation",
-   "Q-420-p1-BSR-RP-03-2": "candidate cap reached after tier allocation"
+   "Q-420-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+   "Q-420-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
+   "Q-420-p1-BSR-RP-05-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
+   "Q-420-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+   "Q-420-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
   },
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-420-p1-BSR-RP-01-1": "opc and westminster churches",
+   "Q-420-p1-BSR-RP-02-1": "opc and westminster churches",
+   "Q-420-p1-BSR-RP-03-1": "opc and westminster churches",
+   "Q-420-p1-BSR-RP-04-1": "pc(usa)",
+   "Q-420-p1-BSR-RP-05-1": "crcna and rca",
+   "Q-420-p1-BSR-RP-06-1": "crcna and rca",
+   "Q-420-p1-BSR-RP-04-2": "pc(usa)",
+   "Q-420-p1-BSR-RP-03-2": "opc and westminster churches"
+  },
+  "slot_order": {
+   "Q-420-p1-BSR-RP-01-1": 0,
+   "Q-420-p1-BSR-RP-04-1": 1,
+   "Q-420-p1-BSR-RP-06-1": 2
+  }
  },
  "coder_skipped": {
-  "Q-420-p1-BSR-RP-04-1": "candidate cap reached after tier allocation",
-  "Q-420-p1-BSR-RP-05-1": "candidate cap reached after tier allocation",
-  "Q-420-p1-BSR-RP-06-1": "candidate cap reached after tier allocation",
-  "Q-420-p1-BSR-RP-04-2": "candidate cap reached after tier allocation",
-  "Q-420-p1-BSR-RP-03-2": "candidate cap reached after tier allocation"
+  "Q-420-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+  "Q-420-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
+  "Q-420-p1-BSR-RP-05-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
+  "Q-420-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
+  "Q-420-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
  },
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

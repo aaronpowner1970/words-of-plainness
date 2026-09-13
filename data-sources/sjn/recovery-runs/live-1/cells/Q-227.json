@@ -496,11 +496,22 @@
    },
    "_route": "CAVEATED_ACCEPT",
    "final": {
-    "verdict": "ACCEPT",
+    "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL",
+     "opus": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT",
     "overturned": false,
     "direction": null
    },
@@ -523,6 +534,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"one Divine Essence which is called and which is God\\\" (predicated as \\\"the Maker and Preserver of all things\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Confession speaks in its own voice (\\\"Our Churches, with common consent, do teach ... is true and to be believed without any doubting\\\"); the condemnations that follow are separate and do not govern this clause.\", \"floor\": \"FULL\", \"floor_reason\": \"God is confessed as Maker and Preserver of all things visible and invisible, which asserts that all creaturely existence derives from and is sustained by God.\", \"hazard_flags\": [], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is word-for-word in the chunk, its subject is the one Divine Essence which is God, and the standard asserts it directly; universal scope (\\\"all things, visible and invisible\\\") meets the full floor of derived creaturely existence.\"}",
     "verdict": "ACCEPT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-227-p1-BSR-LU-03-1": {
@@ -548,6 +568,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -585,6 +623,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT",
     "overturned": false,
     "direction": null
    }
@@ -615,6 +671,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -776,12 +850,32 @@
   },
   "english_witness": {},
   "dropped": {
-   "Q-227-p1-BSR-LU-01-3": "candidate cap reached after tier allocation"
+   "Q-227-p1-BSR-LU-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lutheran churches subscribing the book of concord' already holds a slot)"
   },
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-227-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord",
+   "Q-227-p1-BSR-LU-03-1": "lcms",
+   "Q-227-p1-BSR-LU-01-2": "lutheran churches subscribing the book of concord",
+   "Q-227-p1-BSR-LU-01-3": "lutheran churches subscribing the book of concord"
+  },
+  "slot_order": {
+   "Q-227-p1-BSR-LU-01-1": 0,
+   "Q-227-p1-BSR-LU-01-2": 1,
+   "Q-227-p1-BSR-LU-03-1": 0
+  }
  },
  "coder_skipped": {
-  "Q-227-p1-BSR-LU-01-3": "candidate cap reached after tier allocation"
+  "Q-227-p1-BSR-LU-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lutheran churches subscribing the book of concord' already holds a slot)"
  },
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {
+   "Q-227-p1-BSR-LU-01-1": [
+    "ACCEPT",
+    "ACCEPT_WITH_CAVEAT"
+   ]
+  }
+ }
 }

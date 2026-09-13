@@ -2334,6 +2334,26 @@
     "adjudicated_by": "opus",
     "route": "SLICE_ROW",
     "primary_verdict": "ACCEPT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL",
+     "opus": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT",
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "SLICE_ROW",
+    "primary_verdict": "ACCEPT",
     "overturned": false,
     "direction": null
    }
@@ -2387,6 +2407,26 @@
     "reason_code_final": "OK"
    },
    "final": {
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "adjudicated_by": "opus",
+    "route": "SLICE_ROW",
+    "primary_verdict": "REJECT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": true,
+    "lower_floor_applied": true,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "opus",
@@ -2441,6 +2481,26 @@
     "reason_code_final": "OK"
    },
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "SLICE_ROW",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "FULL"
+    },
+    "floor_disagreement": true,
+    "lower_floor_applied": true,
+    "second_rubric": "opus",
+    "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "adjudicator_verdict": "ACCEPT",
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT",
     "reason_code_final": "OK",
     "adjudicated_by": "opus",
@@ -2516,24 +2576,6 @@
    "slot": "GUARANTEED"
   },
   {
-   "candidate_id": "Q-085-p2-BSR-AN-05-2",
-   "pass": 2,
-   "registry_id": "BSR-AN-05",
-   "locator": "To Be a Christian, Q.106 — How does God respond to human sin?",
-   "phrase": "All sin is opposed to the righteousness of God",
-   "rationale": "Asserts God's righteousness as the standard sin transgresses, attributing righteousness to God himself.",
-   "floor_claim": "FULL",
-   "chunk_text": "How does God respond to human sin? All sin is opposed to the righteousness of God and is therefore subject to God’s holy condemnation; yet God in his mercy offers me forgiveness and salvation from sin through his Son, Jesus Christ, the only Savior. (Psalm 130; Isaiah 1:2–4; Micah 7:18–19; John 3:17–21; Romans 1:18–2:4; 3:24–26; 5:6–10)",
-   "chunk_hash": "5bbfad10770a17f4587e938ab74bcd0700f2627bbba374b4db1f4c8dd40d41b5",
-   "division": "question",
-   "fallback_tier": true,
-   "witness": false,
-   "effective_tier": "CATECHETICAL",
-   "locator_rank": 2,
-   "recut_from": null,
-   "slot": "EXTRA"
-  },
-  {
    "candidate_id": "Q-085-p2-BSR-AN-05-3",
    "pass": 2,
    "registry_id": "BSR-AN-05",
@@ -2556,18 +2598,69 @@
  "allocation": {
   "kept": [
    "Q-085-p2-BSR-AN-05-1",
-   "Q-085-p2-BSR-AN-05-2",
    "Q-085-p2-BSR-AN-05-3"
   ],
   "roles": {
    "Q-085-p2-BSR-AN-05-1": "PRIMARY",
-   "Q-085-p2-BSR-AN-05-2": "PRIMARY",
    "Q-085-p2-BSR-AN-05-3": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-085-p2-BSR-AN-05-1": "anglican church in north america",
+   "Q-085-p2-BSR-AN-05-3": "anglican church in north america"
+  },
+  "slot_order": {
+   "Q-085-p2-BSR-AN-05-1": 0,
+   "Q-085-p2-BSR-AN-05-3": 1
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "coverage_final": {
+  "BSR-AN-01": {
+   "coverage": "FULL",
+   "supplied": 39,
+   "of": 39,
+   "pass": "1"
+  },
+  "BSR-AN-02": {
+   "coverage": "FULL",
+   "supplied": 25,
+   "of": 25,
+   "pass": "1"
+  },
+  "BSR-AN-03": {
+   "coverage": "FULL",
+   "supplied": 1,
+   "of": 1,
+   "pass": "1"
+  },
+  "BSR-AN-04": {
+   "coverage": "FULL",
+   "supplied": 124,
+   "of": 124,
+   "pass": "1"
+  },
+  "BSR-AN-05": {
+   "coverage": "RETRIEVED",
+   "supplied": 62,
+   "of": 368,
+   "pass": "2"
+  }
+ },
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {
+   "Q-085-p2-BSR-AN-05-2": [
+    "ACCEPT_WITH_CAVEAT",
+    "REJECT"
+   ],
+   "Q-085-p2-BSR-AN-05-3": [
+    "ACCEPT",
+    "ACCEPT_WITH_CAVEAT"
+   ]
+  }
+ }
 }

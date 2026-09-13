@@ -366,9 +366,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -394,6 +405,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"the eternal, immutable righteousness of God, revealed in the Law\\\" (subject of the passive clause \\\"has been satisfied\\\"); the attribute is predicated of God by genitive possession\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"Asserted in the standard's own voice within the \\\"we believe, teach, and confess\\\" declaration; not a quoted opponent, hypothetical, or bare denial.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The text affirms God's own righteousness as eternal and immutable and as the standard revealed in the Law that must be satisfied, but it does so obliquely in a subordinate soteriological clause rather than as a direct predication that God is just.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim and attributes eternal, immutable righteousness to God in the standard's own assertion; the caveat is that most uses of \\\"righteousness\\\" in this chunk denote Christ's imputed righteousness (justification) rather than the divine attribute, and the divine-attribute claim appears only in this subordinate clause, so the floor is PARTIAL as claimed.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   }
  },
@@ -465,8 +485,18 @@
   },
   "english_witness": {},
   "dropped": {},
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-083-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord"
+  },
+  "slot_order": {
+   "Q-083-p1-BSR-LU-01-1": 0
+  }
  },
  "coder_skipped": {},
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

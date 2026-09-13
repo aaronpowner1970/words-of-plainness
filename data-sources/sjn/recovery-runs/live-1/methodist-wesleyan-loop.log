@@ -1,0 +1,223 @@
+== Methodist / Wesleyan loop started 2026-09-13T10:49:58Z (cap 25.0 USD, max rounds 80)
+-- round 1: run.py 2026-09-13T10:49:58Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Methodist / Wesleyan: 0/37 open cells DONE; pending calls 148
+   spend so far: 0 metered calls, 0.00 USD (0.000/cell vs projection 0.336; projected 12.43; cap 25.0; cost-state 0.00 RUNNING)
+   run.py exit 10
+-- round 1: api_executor 2026-09-13T10:50:00Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE — resuming from this figure
+   cost-state Methodist / Wesleyan: spent $0.00 of cap 25.0 USD, 0 calls, RUNNING — resuming from this figure
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 148 pending job(s): locator/sonnet=148
+   estimated input tokens 1,076,104; budget cap $25.00; 6 workers
+  empty reply 83fd675d78bce03184b4e484: retrying with max_tokens=6000
+  retry 1/6 83fd675d78bce03184b4e484 in 2.6s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=3000))
+  empty reply 99ec96b8b319ca4e7b48e342: retrying with max_tokens=6000
+  retry 1/6 99ec96b8b319ca4e7b48e342 in 3.4s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=3000))
+  empty reply 9f6d4acae7025bdd02b965fa: retrying with max_tokens=6000
+  retry 1/6 9f6d4acae7025bdd02b965fa in 3.1s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=3000))
+== answered 148 call(s) in 3.6 min; tokens in=1,434,251 out=109,173; metered cost $5.94 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Methodist / Wesleyan: spent $5.94 of cap 25.0 USD, 148 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 148
+-- round 2: run.py 2026-09-13T10:53:41Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+
+[stderr]
+Traceback (most recent call last):
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 309, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\run.py", line 128, in main
+    runner.run_cell(c)
+    ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\agents.py", line 771, in run_cell
+    st["passes"]["1"] = self.locate(cell, 1, st)
+                        ~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\agents.py", line 355, in locate
+    e = self.locate_standard(cell, pred, comp, row, pass_no)
+  File "C:\Users\aaron\Documents\words-of-plainness\scripts\sjn_recovery\agents.py", line 276, in locate_standard
+    if parsed.get("result", "").startswith("NOT LOCATED") or not parsed.get("candidates"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'startswith'
+   run.py exit 1
+!! run.py failed (exit 1); loop stopped
+== Methodist / Wesleyan loop started 2026-09-13T11:03:39Z (cap 25.0 USD, max rounds 80)
+-- round 1: run.py 2026-09-13T11:03:39Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Methodist / Wesleyan: 15/37 open cells DONE; pending calls 73
+   spend so far: 197 metered calls, 6.70 USD (0.181/cell vs projection 0.336; projected 12.43; cap 25.0; cost-state 6.70 RUNNING)
+   coder (1c): 0 coded of 29 survivors; 8 skipped by allocation = 0.00 USD at the measured 0.0000/call
+   run.py exit 10
+-- round 1: api_executor 2026-09-13T11:03:41Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE — resuming from this figure
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE — resuming from this figure
+   cost-state Methodist / Wesleyan: spent $6.70 of cap 25.0 USD, 197 calls, RUNNING — resuming from this figure
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 73 pending job(s): coder/sonnet=21, recut/sonnet=3, verifier/sonnet=49
+   estimated input tokens 86,757; budget cap $25.00; 6 workers
+  empty reply ab40720ccf0138e9471520c4: retrying with max_tokens=1200
+  retry 1/6 ab40720ccf0138e9471520c4 in 2.0s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=600))
+  empty reply eac6e3f7740eaa1848d63d07: retrying with max_tokens=2400
+  retry 1/6 eac6e3f7740eaa1848d63d07 in 2.7s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=1200))
+== answered 73 call(s) in 2.1 min; tokens in=127,962 out=53,615; metered cost $1.19 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Methodist / Wesleyan: spent $7.88 of cap 25.0 USD, 270 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 73
+-- round 2: run.py 2026-09-13T11:05:48Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Methodist / Wesleyan: 23/37 open cells DONE; pending calls 30
+   spend so far: 270 metered calls, 7.88 USD (0.213/cell vs projection 0.336; projected 12.43; cap 25.0; cost-state 7.88 RUNNING)
+   coder (1c): 21 coded of 60 survivors; 18 skipped by allocation = 0.16 USD at the measured 0.0090/call
+   caveat second rubrics: 2 candidate(s) (2 by the 2c sample of 18 eligible, share 0.111); 2 calls, 0.00 USD; 0 lower-floor applied, 0 overturned
+   run.py exit 10
+-- round 2: api_executor 2026-09-13T11:05:51Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE — resuming from this figure
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE — resuming from this figure
+   cost-state Methodist / Wesleyan: spent $7.88 of cap 25.0 USD, 270 calls, RUNNING — resuming from this figure
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 30 pending job(s): coder/sonnet=21, recut/sonnet=2, verifier/opus=2, verifier/sonnet=5
+   estimated input tokens 33,185; budget cap $25.00; 6 workers
+== answered 30 call(s) in 0.5 min; tokens in=45,892 out=14,953; metered cost $0.51 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Methodist / Wesleyan: spent $8.40 of cap 25.0 USD, 300 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 30
+-- round 3: run.py 2026-09-13T11:06:25Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Methodist / Wesleyan: 32/37 open cells DONE; pending calls 14
+   spend so far: 300 metered calls, 8.40 USD (0.227/cell vs projection 0.336; projected 12.43; cap 25.0; cost-state 8.40 RUNNING)
+   coder (1c): 42 coded of 72 survivors; 21 skipped by allocation = 0.19 USD at the measured 0.0090/call
+   caveat second rubrics: 2 candidate(s) (2 by the 2c sample of 20 eligible, share 0.1); 2 calls, 0.19 USD; 0 lower-floor applied, 0 overturned
+   run.py exit 10
+-- round 3: api_executor 2026-09-13T11:06:27Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE — resuming from this figure
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE — resuming from this figure
+   cost-state Methodist / Wesleyan: spent $8.40 of cap 25.0 USD, 300 calls, RUNNING — resuming from this figure
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 14 pending job(s): coder/sonnet=9, recut/sonnet=1, verifier/sonnet=4
+   estimated input tokens 15,754; budget cap $25.00; 6 workers
+== answered 14 call(s) in 0.4 min; tokens in=21,979 out=7,207; metered cost $0.17 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Methodist / Wesleyan: spent $8.57 of cap 25.0 USD, 314 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 14
+-- round 4: run.py 2026-09-13T11:06:50Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Methodist / Wesleyan: 35/37 open cells DONE; pending calls 5
+   spend so far: 314 metered calls, 8.57 USD (0.232/cell vs projection 0.336; projected 12.43; cap 25.0; cost-state 8.57 RUNNING)
+   coder (1c): 51 coded of 72 survivors; 21 skipped by allocation = 0.19 USD at the measured 0.0089/call
+   caveat second rubrics: 3 candidate(s) (3 by the 2c sample of 21 eligible, share 0.143); 3 calls, 0.19 USD; 0 lower-floor applied, 0 overturned
+   run.py exit 10
+-- round 4: api_executor 2026-09-13T11:06:51Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE — resuming from this figure
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE — resuming from this figure
+   cost-state Methodist / Wesleyan: spent $8.57 of cap 25.0 USD, 314 calls, RUNNING — resuming from this figure
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 5 pending job(s): verifier/opus=1, verifier/sonnet=4
+   estimated input tokens 6,268; budget cap $25.00; 6 workers
+== answered 5 call(s) in 0.4 min; tokens in=9,636 out=7,304; metered cost $0.20 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Methodist / Wesleyan: spent $8.77 of cap 25.0 USD, 319 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 5
+-- round 5: run.py 2026-09-13T11:07:18Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Methodist / Wesleyan: 35/37 open cells DONE; pending calls 5
+   spend so far: 319 metered calls, 8.77 USD (0.237/cell vs projection 0.336; projected 12.43; cap 25.0; cost-state 8.77 RUNNING)
+   coder (1c): 51 coded of 73 survivors; 21 skipped by allocation = 0.19 USD at the measured 0.0089/call
+   caveat second rubrics: 3 candidate(s) (3 by the 2c sample of 21 eligible, share 0.143); 3 calls, 0.26 USD; 0 lower-floor applied, 0 overturned
+   run.py exit 10
+-- round 5: api_executor 2026-09-13T11:07:19Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE — resuming from this figure
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE — resuming from this figure
+   cost-state Methodist / Wesleyan: spent $8.77 of cap 25.0 USD, 319 calls, RUNNING — resuming from this figure
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 5 pending job(s): coder/sonnet=1, verifier/opus=4
+   estimated input tokens 6,031; budget cap $25.00; 6 workers
+== answered 5 call(s) in 0.3 min; tokens in=9,061 out=4,352; metered cost $0.43 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Methodist / Wesleyan: spent $9.20 of cap 25.0 USD, 324 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 5
+-- round 6: run.py 2026-09-13T11:07:36Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Methodist / Wesleyan: 36/37 open cells DONE; pending calls 2
+   spend so far: 324 metered calls, 9.20 USD (0.249/cell vs projection 0.336; projected 12.43; cap 25.0; cost-state 9.20 RUNNING)
+   coder (1c): 52 coded of 75 survivors; 21 skipped by allocation = 0.19 USD at the measured 0.0088/call
+   caveat second rubrics: 3 candidate(s) (3 by the 2c sample of 21 eligible, share 0.143); 3 calls, 0.26 USD; 0 lower-floor applied, 0 overturned
+   lower-floor rule (2a): 2 floor disagreement(s) between the models; 2 lowered the final floor, 2 candidate(s) refused by it (of which 2 would have been opus rescues)
+   run.py exit 10
+-- round 6: api_executor 2026-09-13T11:07:38Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE — resuming from this figure
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE — resuming from this figure
+   cost-state Methodist / Wesleyan: spent $9.20 of cap 25.0 USD, 324 calls, RUNNING — resuming from this figure
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 2 pending job(s): coder/sonnet=2
+   estimated input tokens 2,138; budget cap $25.00; 6 workers
+== answered 2 call(s) in 0.1 min; tokens in=2,801 out=395; metered cost $0.01 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Baptist: spent $4.41 of cap 25.0 USD, 136 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Mennonite / Anabaptist: spent $10.70 of cap 25.0 USD, 270 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Methodist / Wesleyan: spent $9.22 of cap 25.0 USD, 326 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Reformed / Presbyterian: spent $15.18 of cap 25.0 USD, 301 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 2
+-- round 7: run.py 2026-09-13T11:07:43Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Methodist / Wesleyan: 37/37 open cells DONE; pending calls 0
+   spend so far: 326 metered calls, 9.22 USD (0.249/cell vs projection 0.336; projected 12.43; cap 25.0; cost-state 9.22 RUNNING)
+   coder (1c): 54 coded of 75 survivors; 21 skipped by allocation = 0.18 USD at the measured 0.0088/call
+   caveat second rubrics: 3 candidate(s) (3 by the 2c sample of 21 eligible, share 0.143); 3 calls, 0.26 USD; 0 lower-floor applied, 0 overturned
+   lower-floor rule (2a): 2 floor disagreement(s) between the models; 2 lowered the final floor, 2 candidate(s) refused by it (of which 2 would have been opus rescues)
+   packet C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-packets\methodist-wesleyan.json: 37 cells, 22 with candidates, 15 empty (0 all-rejected; REVIEWED offered on 15, review incomplete on 0), 0 not finished, 74 rejections kept, 0 dropped at build; exhaustion entered on 0 cell(s), changed 0, 0 exhaustion-sourced candidate(s) on 0 card(s); caveat second rubrics 3 (0 lower-floor applied); 2c sample 3 of 21 eligible; 0 candidate(s) on chunks repaired after the run
+   run.py exit 0
+== branch complete (run.py exit 0) 2026-09-13T11:07:44Z
+== Methodist / Wesleyan loop ended 2026-09-13T11:07:44Z

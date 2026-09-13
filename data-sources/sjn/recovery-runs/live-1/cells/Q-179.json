@@ -483,6 +483,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT",
     "overturned": false,
     "direction": null
    }
@@ -514,9 +532,20 @@
    "final": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
-    "adjudicated_by": "opus",
+    "adjudicated_by": "sonnet",
     "route": "CAVEATED_ACCEPT",
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL",
+     "opus": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": "opus",
+    "second_rubric_role": "DISCLOSURE_FLOOR_ONLY",
+    "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    },
@@ -541,6 +570,15 @@
     "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"God (\\\"I believe that God has made me and all creatures... and still takes care of them\\\"; subsequent clauses continue with \\\"He\\\" = God the Father Almighty)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"First-person credal confession asserted in the catechism's own voice (\\\"I believe that God... and still takes care of them\\\"), closing with \\\"This is most certainly true\\\"; not a report of an opponent's view or a petition.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The quoted clause asserts God's ongoing care for the confessor's own body, soul, members and senses (reinforced by \\\"richly and daily provides\\\", \\\"defends\\\", \\\"guards and protects\\\"), a narrower personal-providence proposition lying wholly within the shared sustaining/preserving floor rather than a general statement of conservation of all creatures.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is God, and the standard asserts it confessionally; the floor is met only in the narrower first-person providential sense ('takes care of' = continued preservation/provision), not an explicit universal ontological conservation, so PARTIAL stands.\"}",
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK"
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "opus",
+    "route": "CAVEATED_ACCEPT",
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "overturned": false,
+    "direction": null
    }
   },
   "Q-179-p1-BSR-LU-03-2": {
@@ -568,6 +606,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -602,6 +658,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -753,22 +827,37 @@
  "allocation": {
   "kept": [
    "Q-179-p1-BSR-LU-01-1",
-   "Q-179-p1-BSR-LU-03-1",
-   "Q-179-p1-BSR-LU-03-2"
+   "Q-179-p1-BSR-LU-03-2",
+   "Q-179-p1-BSR-LU-03-1"
   ],
   "roles": {
    "Q-179-p1-BSR-LU-01-1": "PRIMARY",
-   "Q-179-p1-BSR-LU-03-1": "CORROBORATING",
-   "Q-179-p1-BSR-LU-03-2": "CORROBORATING"
+   "Q-179-p1-BSR-LU-03-2": "CORROBORATING",
+   "Q-179-p1-BSR-LU-03-1": "CORROBORATING"
   },
   "english_witness": {},
   "dropped": {
-   "Q-179-p1-BSR-LU-03-3": "candidate cap reached after tier allocation"
+   "Q-179-p1-BSR-LU-03-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)"
   },
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-179-p1-BSR-LU-01-1": "lutheran churches subscribing the book of concord",
+   "Q-179-p1-BSR-LU-03-1": "lcms",
+   "Q-179-p1-BSR-LU-03-2": "lcms",
+   "Q-179-p1-BSR-LU-03-3": "lcms"
+  },
+  "slot_order": {
+   "Q-179-p1-BSR-LU-01-1": 0,
+   "Q-179-p1-BSR-LU-03-2": 0,
+   "Q-179-p1-BSR-LU-03-1": 1
+  }
  },
  "coder_skipped": {
-  "Q-179-p1-BSR-LU-03-3": "candidate cap reached after tier allocation"
+  "Q-179-p1-BSR-LU-03-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'lcms' already holds a slot)"
  },
- "empty": false
+ "empty": false,
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

@@ -1845,6 +1845,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "PARTIAL",
+    "floor_by_model": {
+     "sonnet": "PARTIAL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    }
@@ -1874,6 +1892,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -1913,6 +1949,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    }
@@ -1947,6 +2001,24 @@
     "adjudicated_by": "sonnet",
     "route": null,
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
    }
@@ -1976,6 +2048,24 @@
    },
    "_route": null,
    "final": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "adjudicated_by": "sonnet",
+    "route": null,
+    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict_rule": "LOWER_FLOOR_2026-09-13",
+    "floor_final": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    },
+    "floor_disagreement": false,
+    "lower_floor_applied": false,
+    "second_rubric": null,
+    "second_rubric_role": null,
+    "overturned": false,
+    "direction": null
+   },
+   "final_at_run": {
     "verdict": "ACCEPT_WITH_CAVEAT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
@@ -2126,25 +2216,67 @@
  "fallback_used": false,
  "allocation": {
   "kept": [
-   "Q-301-p1-BSR-AN-01-1",
    "Q-301-p1-BSR-AN-03-1",
+   "Q-301-p1-BSR-AN-03-2",
    "Q-301-p1-BSR-AN-04-1"
   ],
   "roles": {
-   "Q-301-p1-BSR-AN-01-1": "PRIMARY",
    "Q-301-p1-BSR-AN-03-1": "PRIMARY",
+   "Q-301-p1-BSR-AN-03-2": "PRIMARY",
    "Q-301-p1-BSR-AN-04-1": "CORROBORATING"
   },
   "english_witness": {},
   "dropped": {
-   "Q-301-p1-BSR-AN-03-2": "candidate cap reached after tier allocation",
-   "Q-301-p1-BSR-AN-03-3": "candidate cap reached after tier allocation"
+   "Q-301-p1-BSR-AN-03-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'church of england' already holds a slot)",
+   "Q-301-p1-BSR-AN-01-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'church of england' already holds a slot)"
   },
-  "witness_only": []
+  "witness_only": [],
+  "groups": {
+   "Q-301-p1-BSR-AN-01-1": "church of england",
+   "Q-301-p1-BSR-AN-03-1": "church of england",
+   "Q-301-p1-BSR-AN-04-1": "the episcopal church",
+   "Q-301-p1-BSR-AN-03-2": "church of england",
+   "Q-301-p1-BSR-AN-03-3": "church of england"
+  },
+  "slot_order": {
+   "Q-301-p1-BSR-AN-03-1": 0,
+   "Q-301-p1-BSR-AN-03-2": 1,
+   "Q-301-p1-BSR-AN-04-1": 0
+  }
  },
  "coder_skipped": {
-  "Q-301-p1-BSR-AN-03-2": "candidate cap reached after tier allocation",
-  "Q-301-p1-BSR-AN-03-3": "candidate cap reached after tier allocation"
+  "Q-301-p1-BSR-AN-03-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'church of england' already holds a slot)",
+  "Q-301-p1-BSR-AN-01-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'church of england' already holds a slot)"
  },
- "empty": false
+ "empty": false,
+ "coverage_final": {
+  "BSR-AN-01": {
+   "coverage": "FULL",
+   "supplied": 39,
+   "of": 39,
+   "pass": "1"
+  },
+  "BSR-AN-02": {
+   "coverage": "FULL",
+   "supplied": 25,
+   "of": 25,
+   "pass": "1"
+  },
+  "BSR-AN-03": {
+   "coverage": "FULL",
+   "supplied": 1,
+   "of": 1,
+   "pass": "1"
+  },
+  "BSR-AN-04": {
+   "coverage": "FULL",
+   "supplied": 124,
+   "of": 124,
+   "pass": "1"
+  }
+ },
+ "refinalized": {
+  "rule": "LOWER_FLOOR_2026-09-13",
+  "verdicts_changed": {}
+ }
 }

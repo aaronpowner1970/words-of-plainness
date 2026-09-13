@@ -144,6 +144,51 @@ the ratified count (`assert_gate6_scope`; 456 = 291 open + 24 closed + 141 relea
 - **Driver**: `branch_loop.py` runs one branch to completion (run.py ↔ api_executor.py), logging to
   `recovery-runs/<run>/<branch-slug>-loop.log`.
 
+## Live-run session 4 (2026-09-13, workbook unchanged at v2.25r4) — the author's rulings after the Lutheran / Reformed review
+
+Report: `docs/gate6/WoP_SJN_Gate6_Session4_Report_20260913.md`; the review it answers: `docs/gate6/WoP_SJN_LU_RP_Packet_Review_20260913.md`.
+Nothing written to the workbook. Eastern Orthodox did not run.
+
+- **Task 1 — candidate-slot diversity** (`allocation.speaks_for_groups`, `allocate(..., groups=)`; RATIFIED). Within an
+  authority-tier tie the survivors are grouped by the body the row speaks for and NO GROUP TAKES A SECOND SLOT UNTIL EVERY
+  GROUP WITH A SURVIVING CANDIDATE HAS A FIRST. Groups are ranked for their first slot by the existing keys (non-witness before
+  witness, then the locator's floor claim); registry row order is the last resort and orders presentation only. `speaks_for`
+  is resolved per row and the resolution table is in every packet header (`speaks_for_groups`): "as above" → the previous
+  body (BSR-RP-02/03 → "OPC and Westminster churches"), the body before a semicolon ("CRCNA and RCA; Dort …"), a
+  parenthetical after whitespace stripped ("Church of England (appointed in the BCP)"; "PC(USA)" is a name and is kept), and
+  a translation witness speaks for its CONTROLLING row's body (BSR-RC-03 → BSR-RC-02's "Universal Church") so it never takes
+  a slot as a "second body". The four packets were rebuilt under it with no model calls (`run.py --rebuild-packet-only`) and
+  diffed against the committed packets by `rebuild_diff.py` → `recovery-runs/live-1/rebuild-diff-20260913.md`.
+- **Task 2 — the lower floor is final** (`agents.finalize`, `verdict_from_rubric`, `lower_floor`; `config.LOWER_FLOOR_RULE`).
+  2a: where the two models return different floors for one candidate the LOWER floor is final and the verdict is recomputed
+  at that floor by the same rule `verify()` applies — never averaged, never the adjudicator's. 2b: opus stays on the reject-all
+  and slice routes (`ADJUDICATING_ROUTES`) and still adjudicates lines 1–3 (a rescue for subject or speech act stands; a rescue
+  by a higher floor does not). 2c: caveated accepts are no longer routed for adjudication; a deterministic sample of at most
+  20% (`CAVEAT_SAMPLE_SHARE`, hash bucket + a running per-branch quota in `sample_decision`) goes to opus for DISCLOSURE
+  (route `CAVEATED_ACCEPT_SAMPLE`, shown on the card as `caveat_sample`; floor-lowering only). Every stored verdict of the four
+  branches was re-finalised (`CellRunner.refinalize`; the live run's verdict kept as `final_at_run`) and the packet header
+  records the changes (`rebuilt_from.verdict_changes`). Applied on EVERY route because the case that motivated it, Q-403,
+  came through PRIMARY_REJECTED_ALL — which is also why it refuses most of the earlier opus rescues (report, Task 2).
+  `recall_recompute.py` measures what the rule costs in same-standard recall on cal-3's stored rubrics (no model calls).
+- **Task 3 — an oath formula is not a predication** (verifier prompt gate6-v1.2, `HAZARD_IDIOM_OR_FORMULA`). The hazard
+  IDIOM_OR_FORMULA — a fixed idiom, oath, doxology, greeting or liturgical formula whose surface wording names the predicate
+  while the passage's assertion lies elsewhere — with the companion line `asserted_outside_formula`; raising it caps the floor
+  at WORD_ONLY in code unless that line is Y (`floor_model` / `floor_capped_by` keep the record). Applied to verifier calls
+  from this session on; stored verdicts are not re-run; Q-003 is flagged for the author's ruling.
+- **Task 4 — exhaustion marked; a row without text named** (`packets.py`). Every candidate found by the exhaustion pass carries
+  `found_in_exhaustion` and an `exhaustion_note` on the card, and the card lists `exhaustion_sourced_candidates`; the header
+  carries `rows_without_text` / `branch_ran_on` ("2 of 3 ratified rows: BSR-LU-02 had no text (AUTHORITY_URL_ONLY)").
+- **Rebuild on repaired chunks.** A candidate whose row was re-chunked by the extraction repair after its cell ran is kept at
+  build when the phrase is verbatim BOTH in the chunk the verifier judged and in the repaired chunk (`chunk_repaired_after_run`
+  on the entry; 22 Anglican candidates); otherwise it is dropped as before.
+- **Planted re-validation fa-3** (`plant_loop.py`; `calibrate.py plant --both-models`, `plant-summary`): 74 near-misses, both
+  models on every item, verifier gate6-v1.2, the lower-floor rule → `recovery-runs/fa-3/planted-summary.json` (false-accept
+  0.000 / 0.000 / 0.000, Dositheus 0.000, 7.57 USD).
+- **Live run, three branches** (`branch_loop.py`, cap 25 USD each): Baptist 37 cells / 15 filled / 4.41 USD (0.119 per cell;
+  BSR-BA-02 has no corpus — apex→www), Methodist / Wesleyan 37 / 22 / 9.22 USD (0.249; resumed once after a null `result`
+  in a locator reply, fixed in `locate_standard`), Mennonite / Anabaptist 41 / 31 / 10.70 USD (0.261; MA-01 exhausted on all
+  10 empty-track cells, 0 changed). Eastern Orthodox remains; it needs the author's go and the standards-per-cell decision.
+
 ## Backends (`llm.py`)
 
 | backend | how calls run | cost basis |

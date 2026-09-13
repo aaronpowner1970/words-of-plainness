@@ -32,7 +32,7 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
 
-from sjn_recovery.config import RUNS_DIR, CALIBRATION_DIR, BRANCHES, ensure_dirs, MODEL_IDS, FETCH_AUDIT_PATH  # noqa: E402
+from sjn_recovery.config import RUNS_DIR, CALIBRATION_DIR, BRANCHES, ensure_dirs, MODEL_IDS, FETCH_AUDIT_PATH, LOWER_FLOOR_RULE  # noqa: E402
 from sjn_recovery.registry import (Registry, load_predicates, load_comparators, load_queue, released_cells,  # noqa: E402
                                    reviewed_empty_cells, TIER_RANK, bare_tier, tier_rank)
 from sjn_recovery.llm import LLM  # noqa: E402
@@ -267,6 +267,10 @@ def cmd_plant(args):
         if v[runner.primary].get("status") == "PENDING":
             n_pending += 1; continue
         route = runner.needs_adjudication(cand, all_rejected=v[runner.primary].get("verdict") not in ACCEPTS)
+        if not route and runner.adjudicator and getattr(args, "both_models", False):
+            # session 4 (fa-3): both models on EVERY planted item. Where the live routing would not have sent the
+            # item to the adjudicator, its rubric is disclosure only (finalize: primary base, lower floor — 2a/2c).
+            route = "PLANTED_BOTH_MODELS"
         v["_route"] = route
         if route and runner.adjudicator and v.get(runner.adjudicator, {}).get("status") != "DONE":
             v[runner.adjudicator] = runner.verify(cell, cand, runner.adjudicator)
@@ -277,6 +281,78 @@ def cmd_plant(args):
         json.dump(results, fh, ensure_ascii=False, indent=1)
     log(f"== planted near-misses {args.run_id}: {len(fixture['items'])} items; pending verifier calls {n_pending}")
     return 10 if n_pending else 0
+
+
+def cmd_plant_summary(args):
+    """planted-summary.json for a planted run (no model calls): false-accept per model and per slice on the
+    74 near-misses, the routed (final) outcome, and — session 4 — the floor disagreements and what the
+    lower-floor rule did with them. Every final ACCEPT is a false accept; the fixture holds no true positives,
+    so recall is not defined on it (see calibration-report.md for the same-standard recall)."""
+    reg = Registry(args.workbook)
+    run_dir = os.path.join(RUNS_DIR, args.run_id)
+    pp = os.path.join(run_dir, "planted-results.json")
+    planted = json.load(open(pp, encoding="utf-8"))
+    fixture = json.load(open(PLANTED_PATH, encoding="utf-8"))
+    vmodels = args.verifier_models.split(",")
+    primary, adjudicator = vmodels[0], (vmodels[1] if len(vmodels) > 1 else None)
+    models = [primary] + ([adjudicator] if adjudicator else []) + [ROUTED]
+    by_model = {m: {"n": 0, "false_accept": 0, "dositheus_n": 0, "dositheus_false_accept": 0, "items": []} for m in models}
+    by_slice, routes, status = {}, Counter(), Counter(r.get("status") for r in planted.values())
+    dis = {"n": 0, "lowered": 0, "items": []}
+    idiom = {"flagged": 0, "capped": 0, "items": []}
+    for pid, r in planted.items():
+        if r.get("status") != "RUN":
+            continue
+        v = r["verdicts"]
+        routes[v.get("_route")] += 1
+        slice_ = "Dositheus" if r["registry_id"] == "BSR-EO-05" else reg.by_id[r["registry_id"]]["branch"]
+        fin = v.get("final") or {}
+        for m in models:
+            if m == ROUTED:
+                verdict = fin.get("verdict")
+            else:
+                mv = v.get(m) or {}
+                if mv.get("status") != "DONE":
+                    continue
+                verdict = mv.get("verdict")
+            b = by_model[m]; s = by_slice.setdefault(slice_, {}).setdefault(m, {"n": 0, "false_accept": 0, "items": []})
+            b["n"] += 1; s["n"] += 1
+            if slice_ == "Dositheus":
+                b["dositheus_n"] += 1
+            if verdict in ACCEPTS:
+                b["false_accept"] += 1; s["false_accept"] += 1
+                b["items"].append((pid, r["type"], r["registry_id"], r["locator"], verdict)); s["items"].append(pid)
+                if slice_ == "Dositheus":
+                    b["dositheus_false_accept"] += 1
+        if fin.get("floor_disagreement"):
+            dis["n"] += 1; dis["lowered"] += 1 if fin.get("lower_floor_applied") else 0
+            dis["items"].append({"id": pid, "type": r["type"], "floors": fin.get("floor_by_model"), "floor_final": fin.get("floor_final"),
+                                 "final": fin.get("verdict"), "route": fin.get("route")})
+        for m in (primary, adjudicator):
+            mv = v.get(m) or {}
+            if m and "IDIOM_OR_FORMULA" in (mv.get("hazard_flags") or []):
+                idiom["flagged"] += 1
+                idiom["capped"] += 1 if mv.get("floor_capped_by") else 0
+                idiom["items"].append({"id": pid, "model": m, "type": r["type"], "floor_model": mv.get("floor_model", mv.get("floor")),
+                                       "floor": mv.get("floor"), "asserted_outside_formula": mv.get("asserted_outside_formula")})
+    for m, b in by_model.items():
+        b["rate"] = round(b["false_accept"] / b["n"], 3) if b["n"] else None
+        b["dositheus_rate"] = round(b["dositheus_false_accept"] / b["dositheus_n"], 3) if b["dositheus_n"] else None
+    llm = LLM(args.run_id, backend="batch", model=args.locator_model, log=lambda m: None)
+    cost = llm.summary()["this_run"]
+    out = {"run_id": args.run_id, "workbook": os.path.basename(reg.path), "app_master_version": reg.app_master_version,
+           "verifier_prompt_version": prompts.prompt_version("verifier"), "verdict_rule": LOWER_FLOOR_RULE,
+           "items": len(fixture["items"]), "status": dict(status), "routes": dict(routes),
+           "opus_calls": sum(1 for r in planted.values() if (r.get("verdicts") or {}).get(adjudicator, {}).get("status") == "DONE") if adjudicator else 0,
+           "by_model": by_model, "by_slice": by_slice, "floor_disagreements": dis, "idiom_or_formula": idiom,
+           "recall_note": "the fixture is 74 near-misses with no true positives: recall is undefined on it; every final ACCEPT is a false accept",
+           "cost": {"calls": cost["calls"], "cost_usd": round(cost["cost_usd"], 4), "by_role": cost["by_role"]}}
+    with open(os.path.join(run_dir, "planted-summary.json"), "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(out, fh, ensure_ascii=False, indent=1); fh.write("\n")
+    log(f"== planted summary {args.run_id}: " + ", ".join(f"{m} {b['false_accept']}/{b['n']} (Dositheus {b['dositheus_false_accept']}/{b['dositheus_n']})" for m, b in by_model.items())
+        + f"; floor disagreements {dis['n']} ({dis['lowered']} lowered); IDIOM_OR_FORMULA flagged {idiom['flagged']} (capped {idiom['capped']}); "
+        f"{cost['calls']} calls, {cost['cost_usd']:.2f} USD")
+    return 0
 
 
 # ------------------------------------------------------------------ report helpers
@@ -1071,9 +1147,10 @@ def render_md(rep, reg, manifest):
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd")
-    for name in ("run", "plant", "report"):
+    for name in ("run", "plant", "report", "plant-summary"):
         p = sub.add_parser(name)
         p.add_argument("--run-id", required=True)
+        p.add_argument("--both-models", action="store_true", help="plant: send every item to the adjudicator too (disclosure where the routing would not)")
         p.add_argument("--workbook")
         p.add_argument("--backend", default="batch")
         p.add_argument("--locator-model", default="sonnet")
@@ -1084,7 +1161,7 @@ def main():
         p.add_argument("--seed-from", help="reuse answered calls from another run id (identical calls are not re-sent)")
         p.add_argument("--compare", default="cal-2", help="run id to compute the cell-by-cell delta against")
     a = ap.parse_args()
-    return {"run": cmd_run, "plant": cmd_plant, "report": cmd_report}[a.cmd](a)
+    return {"run": cmd_run, "plant": cmd_plant, "report": cmd_report, "plant-summary": cmd_plant_summary}[a.cmd](a)
 
 
 if __name__ == "__main__":
