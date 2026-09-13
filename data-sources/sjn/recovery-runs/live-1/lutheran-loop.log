@@ -1,0 +1,322 @@
+== Lutheran loop started 2026-09-13T09:27:15Z (cap 40.0 USD, max rounds 80)
+-- round 1: run.py 2026-09-13T09:27:15Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 0/39 open cells DONE; pending calls 78
+   spend so far: 0 metered calls, 0.00 USD (0.000/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 0.00 RUNNING)
+   run.py exit 10
+-- round 1: api_executor 2026-09-13T09:27:45Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $0.00 of cap 40.0 USD, 0 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 78 pending job(s): locator/sonnet=78
+   estimated input tokens 836,447; budget cap $40.00; 6 workers
+  empty reply 3fbe2bab195e5dea34640a7d: retrying with max_tokens=6000
+  retry 1/6 3fbe2bab195e5dea34640a7d in 3.2s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=3000))
+  empty reply 56236ed9b50a95e2b486ad6a: retrying with max_tokens=6000
+  retry 1/6 56236ed9b50a95e2b486ad6a in 2.8s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=3000))
+== answered 78 call(s) in 2.3 min; tokens in=1,039,710 out=67,592; metered cost $4.13 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $4.13 of cap 40.0 USD, 78 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 78
+-- round 2: run.py 2026-09-13T09:30:03Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 0/39 open cells DONE; pending calls 111
+   spend so far: 78 metered calls, 4.13 USD (0.106/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 4.13 RUNNING)
+   exhaustion (2c): 9 cell(s) entered, 0 changed from empty to filled; 36 locator calls + 0 verifier calls = 0.00 USD (0.000/entered cell); standards exhausted 0, stopped early 0
+   run.py exit 10
+-- round 2: api_executor 2026-09-13T09:30:40Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $4.13 of cap 40.0 USD, 78 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 111 pending job(s): locator/sonnet=37, verifier/sonnet=74
+   estimated input tokens 849,441; budget cap $40.00; 6 workers
+  empty reply 5ee2210123667735eb37e2c8: retrying with max_tokens=5000
+  retry 1/6 5ee2210123667735eb37e2c8 in 2.9s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=2500))
+  empty reply 67944f9e3390415928d2a938: retrying with max_tokens=5000
+  retry 1/6 67944f9e3390415928d2a938 in 2.7s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=2500))
+== answered 111 call(s) in 2.2 min; tokens in=1,068,882 out=64,075; metered cost $4.17 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $8.30 of cap 40.0 USD, 189 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 111
+-- round 3: run.py 2026-09-13T09:32:55Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 0/39 open cells DONE; pending calls 79
+   spend so far: 189 metered calls, 8.30 USD (0.213/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 8.30 RUNNING)
+   coder (1c): 0 coded of 38 survivors; 0 skipped by allocation = 0.00 USD at the measured 0.0000/call
+   exhaustion (2c): 9 cell(s) entered, 0 changed from empty to filled; 60 locator calls + 5 verifier calls = 2.85 USD (0.316/entered cell); standards exhausted 0, stopped early 0
+   caveat slice (3): 10 caveated accept(s) sent to opus; 10 calls, 0.00 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 3: api_executor 2026-09-13T09:32:59Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $8.30 of cap 40.0 USD, 189 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 79 pending job(s): coder/sonnet=38, locator/sonnet=24, verifier/opus=11, verifier/sonnet=6
+   estimated input tokens 557,668; budget cap $40.00; 6 workers
+  empty reply 6c777d987c8408effef97c4e: retrying with max_tokens=5000
+  retry 1/6 6c777d987c8408effef97c4e in 2.3s (RuntimeError: empty text block (stop_reason=max_tokens, output_tokens=2500))
+== answered 79 call(s) in 1.3 min; tokens in=692,047 out=32,077; metered cost $3.50 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $11.80 of cap 40.0 USD, 268 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 79
+-- round 4: run.py 2026-09-13T09:34:22Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 19/39 open cells DONE; pending calls 54
+   spend so far: 253 metered calls, 10.69 USD (0.274/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 11.80 RUNNING)
+   coder (1c): 38 coded of 62 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0095/call
+   exhaustion (2c): 9 cell(s) entered, 0 changed from empty to filled; 88 locator calls + 9 verifier calls = 4.68 USD (0.520/entered cell); standards exhausted 0, stopped early 0
+   caveat slice (3): 11 caveated accept(s) sent to opus; 11 calls, 0.00 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 4: api_executor 2026-09-13T09:34:23Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $11.80 of cap 40.0 USD, 268 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 54 pending job(s): coder/sonnet=21, locator/sonnet=28, verifier/opus=1, verifier/sonnet=4
+   estimated input tokens 590,941; budget cap $40.00; 6 workers
+== answered 54 call(s) in 0.8 min; tokens in=728,592 out=16,776; metered cost $2.54 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $14.34 of cap 40.0 USD, 322 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 54
+-- round 5: run.py 2026-09-13T09:35:10Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 29/39 open cells DONE; pending calls 28
+   spend so far: 307 metered calls, 13.12 USD (0.337/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 14.34 RUNNING)
+   coder (1c): 59 coded of 64 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 1 changed from empty to filled; 112 locator calls + 11 verifier calls = 6.94 USD (0.771/entered cell); standards exhausted 0, stopped early 1
+   caveat slice (3): 12 caveated accept(s) sent to opus; 12 calls, 0.00 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 5: api_executor 2026-09-13T09:35:12Z
+   executor exit 4294967295 answered 0
+!! executor answered nothing (cap, spend limit or fatal error); running run.py once more to write the partial packet
+-- round 5: run.py 2026-09-13T09:35:15Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 29/39 open cells DONE; pending calls 34
+   spend so far: 307 metered calls, 13.12 USD (0.337/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 14.34 RUNNING)
+   coder (1c): 59 coded of 64 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 1 changed from empty to filled; 120 locator calls + 11 verifier calls = 6.94 USD (0.771/entered cell); standards exhausted 0, stopped early 1
+   caveat slice (3): 12 caveated accept(s) sent to opus; 12 calls, 0.00 USD; 0 overturned (rate 0.00)
+   run.py exit 10; loop stopped
+== Lutheran loop started 2026-09-13T09:36:12Z (cap 40.0 USD, max rounds 80)
+-- round 1: run.py 2026-09-13T09:36:12Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 29/39 open cells DONE; pending calls 34
+   spend so far: 318 metered calls, 14.27 USD (0.366/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 14.34 RUNNING)
+   coder (1c): 59 coded of 64 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 1 changed from empty to filled; 120 locator calls + 11 verifier calls = 6.94 USD (0.771/entered cell); standards exhausted 0, stopped early 1
+   caveat slice (3): 12 caveated accept(s) sent to opus; 12 calls, 1.15 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 1: api_executor 2026-09-13T09:36:13Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $14.34 of cap 40.0 USD, 322 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 37 pending job(s): coder/sonnet=3, locator/sonnet=32, verifier/opus=1, verifier/sonnet=1
+   estimated input tokens 646,041; budget cap $40.00; 6 workers
+== answered 37 call(s) in 0.5 min; tokens in=795,932 out=8,384; metered cost $2.60 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $16.94 of cap 40.0 USD, 359 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 37
+-- round 2: run.py 2026-09-13T09:36:44Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 31/39 open cells DONE; pending calls 20
+   spend so far: 358 metered calls, 16.93 USD (0.434/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 16.94 RUNNING)
+   coder (1c): 61 coded of 65 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 2 changed from empty to filled; 132 locator calls + 18 verifier calls = 9.58 USD (1.064/entered cell); standards exhausted 0, stopped early 2
+   caveat slice (3): 15 caveated accept(s) sent to opus; 15 calls, 1.26 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 2: api_executor 2026-09-13T09:36:46Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $16.94 of cap 40.0 USD, 359 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 20 pending job(s): coder/sonnet=1, locator/sonnet=12, verifier/opus=6, verifier/sonnet=1
+   estimated input tokens 252,579; budget cap $40.00; 6 workers
+== answered 20 call(s) in 0.4 min; tokens in=313,206 out=8,144; metered cost $1.58 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $18.52 of cap 40.0 USD, 379 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 20
+-- round 3: run.py 2026-09-13T09:37:11Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 32/39 open cells DONE; pending calls 28
+   spend so far: 371 metered calls, 17.85 USD (0.458/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 18.52 RUNNING)
+   coder (1c): 62 coded of 65 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 2 changed from empty to filled; 160 locator calls + 18 verifier calls = 10.49 USD (1.165/entered cell); standards exhausted 0, stopped early 2
+   caveat slice (3): 15 caveated accept(s) sent to opus; 15 calls, 1.26 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 3: api_executor 2026-09-13T09:37:13Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $18.52 of cap 40.0 USD, 379 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 28 pending job(s): locator/sonnet=28
+   estimated input tokens 561,121; budget cap $40.00; 6 workers
+== answered 28 call(s) in 0.3 min; tokens in=689,443 out=6,028; metered cost $2.16 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $20.68 of cap 40.0 USD, 407 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 28
+-- round 4: run.py 2026-09-13T09:37:33Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 32/39 open cells DONE; pending calls 14
+   spend so far: 404 metered calls, 20.44 USD (0.524/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 20.68 RUNNING)
+   coder (1c): 62 coded of 66 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 3 changed from empty to filled; 170 locator calls + 21 verifier calls = 13.08 USD (1.454/entered cell); standards exhausted 0, stopped early 3
+   caveat slice (3): 15 caveated accept(s) sent to opus; 15 calls, 1.35 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 4: api_executor 2026-09-13T09:37:35Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $20.68 of cap 40.0 USD, 407 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 14 pending job(s): coder/sonnet=1, locator/sonnet=10, verifier/opus=1, verifier/sonnet=2
+   estimated input tokens 179,765; budget cap $40.00; 6 workers
+== answered 14 call(s) in 0.4 min; tokens in=226,929 out=5,831; metered cost $0.86 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $21.54 of cap 40.0 USD, 421 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 14
+-- round 5: run.py 2026-09-13T09:37:59Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 35/39 open cells DONE; pending calls 12
+   spend so far: 415 metered calls, 21.15 USD (0.542/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 21.54 RUNNING)
+   coder (1c): 63 coded of 66 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 3 changed from empty to filled; 181 locator calls + 22 verifier calls = 13.78 USD (1.532/entered cell); standards exhausted 2, stopped early 3
+   caveat slice (3): 15 caveated accept(s) sent to opus; 15 calls, 1.35 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 5: api_executor 2026-09-13T09:38:00Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $21.54 of cap 40.0 USD, 421 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 12 pending job(s): locator/sonnet=11, verifier/sonnet=1
+   estimated input tokens 208,274; budget cap $40.00; 6 workers
+== answered 12 call(s) in 0.3 min; tokens in=257,465 out=4,614; metered cost $0.84 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $22.38 of cap 40.0 USD, 433 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 12
+-- round 6: run.py 2026-09-13T09:38:21Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 35/39 open cells DONE; pending calls 7
+   spend so far: 429 metered calls, 22.12 USD (0.567/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 22.38 RUNNING)
+   coder (1c): 63 coded of 67 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 4 changed from empty to filled; 185 locator calls + 24 verifier calls = 14.75 USD (1.639/entered cell); standards exhausted 3, stopped early 4
+   caveat slice (3): 16 caveated accept(s) sent to opus; 16 calls, 1.35 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 6: api_executor 2026-09-13T09:38:23Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $22.38 of cap 40.0 USD, 433 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 7 pending job(s): coder/sonnet=1, locator/sonnet=4, verifier/opus=1, verifier/sonnet=1
+   estimated input tokens 86,138; budget cap $40.00; 6 workers
+== answered 7 call(s) in 0.4 min; tokens in=108,646 out=5,126; metered cost $0.49 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $22.88 of cap 40.0 USD, 440 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 7
+-- round 7: run.py 2026-09-13T09:38:51Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 36/39 open cells DONE; pending calls 6
+   spend so far: 436 metered calls, 22.60 USD (0.579/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 22.88 RUNNING)
+   coder (1c): 64 coded of 68 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 5 changed from empty to filled; 189 locator calls + 25 verifier calls = 15.22 USD (1.691/entered cell); standards exhausted 3, stopped early 4
+   caveat slice (3): 16 caveated accept(s) sent to opus; 16 calls, 1.47 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 7: api_executor 2026-09-13T09:38:53Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $22.88 of cap 40.0 USD, 440 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 6 pending job(s): coder/sonnet=1, locator/sonnet=4, verifier/opus=1
+   estimated input tokens 84,128; budget cap $40.00; 6 workers
+== answered 6 call(s) in 0.3 min; tokens in=105,048 out=2,980; metered cost $0.47 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.35 of cap 40.0 USD, 446 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 6
+-- round 8: run.py 2026-09-13T09:39:12Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 37/39 open cells DONE; pending calls 4
+   spend so far: 442 metered calls, 22.97 USD (0.589/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 23.35 RUNNING)
+   coder (1c): 65 coded of 68 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 5 changed from empty to filled; 192 locator calls + 26 verifier calls = 15.58 USD (1.732/entered cell); standards exhausted 3, stopped early 4
+   caveat slice (3): 16 caveated accept(s) sent to opus; 16 calls, 1.47 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 8: api_executor 2026-09-13T09:39:14Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.35 of cap 40.0 USD, 446 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 4 pending job(s): locator/sonnet=3, verifier/sonnet=1
+   estimated input tokens 49,885; budget cap $40.00; 6 workers
+== answered 4 call(s) in 0.3 min; tokens in=63,927 out=1,893; metered cost $0.22 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.57 of cap 40.0 USD, 450 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 4
+-- round 9: run.py 2026-09-13T09:39:31Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 37/39 open cells DONE; pending calls 4
+   spend so far: 446 metered calls, 23.30 USD (0.598/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 23.57 RUNNING)
+   coder (1c): 65 coded of 69 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0091/call
+   exhaustion (2c): 9 cell(s) entered, 6 changed from empty to filled; 195 locator calls + 26 verifier calls = 15.91 USD (1.768/entered cell); standards exhausted 4, stopped early 4
+   caveat slice (3): 16 caveated accept(s) sent to opus; 16 calls, 1.47 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 9: api_executor 2026-09-13T09:39:33Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.57 of cap 40.0 USD, 450 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 4 pending job(s): coder/sonnet=1, locator/sonnet=3
+   estimated input tokens 48,464; budget cap $40.00; 6 workers
+== answered 4 call(s) in 0.1 min; tokens in=61,335 out=662; metered cost $0.19 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.76 of cap 40.0 USD, 454 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 4
+-- round 10: run.py 2026-09-13T09:39:38Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 38/39 open cells DONE; pending calls 1
+   spend so far: 453 metered calls, 23.76 USD (0.609/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 23.76 RUNNING)
+   coder (1c): 66 coded of 69 survivors; 3 skipped by allocation = 0.03 USD at the measured 0.0092/call
+   exhaustion (2c): 9 cell(s) entered, 6 changed from empty to filled; 195 locator calls + 27 verifier calls = 16.36 USD (1.817/entered cell); standards exhausted 5, stopped early 4
+   caveat slice (3): 17 caveated accept(s) sent to opus; 17 calls, 1.70 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 10: api_executor 2026-09-13T09:39:40Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.76 of cap 40.0 USD, 454 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 1 pending job(s): verifier/opus=1
+   estimated input tokens 1,608; budget cap $40.00; 6 workers
+== answered 1 call(s) in 0.3 min; tokens in=2,330 out=1,270; metered cost $0.13 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.89 of cap 40.0 USD, 455 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 1
+-- round 11: run.py 2026-09-13T09:39:58Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 38/39 open cells DONE; pending calls 3
+   spend so far: 454 metered calls, 23.89 USD (0.612/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 23.89 RUNNING)
+   coder (1c): 66 coded of 73 survivors; 4 skipped by allocation = 0.04 USD at the measured 0.0092/call
+   exhaustion (2c): 9 cell(s) entered, 7 changed from empty to filled; 195 locator calls + 27 verifier calls = 16.49 USD (1.832/entered cell); standards exhausted 5, stopped early 4
+   caveat slice (3): 17 caveated accept(s) sent to opus; 17 calls, 1.83 USD; 0 overturned (rate 0.00)
+   run.py exit 10
+-- round 11: api_executor 2026-09-13T09:40:00Z
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE — resuming from this figure
+   cost-state Lutheran: spent $23.89 of cap 40.0 USD, 455 calls, RUNNING — resuming from this figure
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE — resuming from this figure
+== 3 pending job(s): coder/sonnet=3
+   estimated input tokens 4,725; budget cap $40.00; 6 workers
+== answered 3 call(s) in 0.1 min; tokens in=6,119 out=638; metered cost $0.03 this invocation; errors 0; skipped by branch cap 0
+   cost-state Anglican: spent $14.48 of cap 25.0 USD, 440 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Lutheran: spent $23.92 of cap 40.0 USD, 458 calls, RUNNING  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   cost-state Roman Catholic: spent $15.80 of cap 25.0 USD, 582 calls, DONE  -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\live-1\cost-state.json
+   executor exit 0 answered 3
+-- round 12: run.py 2026-09-13T09:40:05Z
+== Gate 6 scope (APP CONFIG): 456 = 291 open + 24 closed + 141 released; ratified open count 291; closed by state {'VECTOR PENDING': 9, 'Historical Witness Retired = TRUE': 3, 'VECTOR COMPLETE': 3, 'PENDING REVIEW': 1, 'OUT OF SCOPE': 8}
+== Lutheran: 39/39 open cells DONE; pending calls 0
+   spend so far: 457 metered calls, 23.91 USD (0.613/cell vs projection 0.336; projected 13.10; cap 40.0; cost-state 23.92 RUNNING)
+   coder (1c): 69 coded of 73 survivors; 4 skipped by allocation = 0.04 USD at the measured 0.0092/call
+   exhaustion (2c): 9 cell(s) entered, 7 changed from empty to filled; 195 locator calls + 27 verifier calls = 16.49 USD (1.832/entered cell); standards exhausted 5, stopped early 4
+   caveat slice (3): 17 caveated accept(s) sent to opus; 17 calls, 1.83 USD; 0 overturned (rate 0.00)
+   packet C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-packets\lutheran.json: 39 cells, 37 with candidates, 2 empty (0 all-rejected; REVIEWED offered on 2, review incomplete on 0), 0 not finished, 25 rejections kept, 0 dropped at build; exhaustion entered on 9 cell(s), changed 7; caveat slice 17 candidate(s), 0 overturned
+   run.py exit 0
+== branch complete (run.py exit 0) 2026-09-13T09:40:07Z
+== Lutheran loop ended 2026-09-13T09:40:07Z

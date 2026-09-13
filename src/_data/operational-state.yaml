@@ -138,19 +138,32 @@ workstreams:
       43 cells, 38 filled, 5 honest empties (1 all-rejected), 80 rejections kept, 437
       audit calls, 14.46 USD (0.336/cell). Packets:
       data-sources/sjn/recovery-packets/{roman-catholic,anglican}.json.
-      Denominator: the harness counts 291 open cells (284 NOT YET RECOVERED + 7 CURRENT
-      STANDARD REVIEWED); the workbook's 456-141 = 315 differs by 24 (8 OUT OF SCOPE,
-      13 atomic-vector rows, 3 retired-witness rows) — a harness assumption awaiting the
-      author's ruling. Six branches remain (Lutheran 39, Reformed/Presbyterian 16,
-      Baptist 37, Methodist/Wesleyan 37, Mennonite/Anabaptist 41, Eastern Orthodox 44)
-      and each WAITS for the author's go; Eastern Orthodox runs alone and last.
+      Session 3 (2026-09-13, workbook v2.25r4 GATE6 SCOPE RATIFIED, canonical in
+      data-sources/sjn/): the open-cell rule is now a workbook fact (APP CONFIG
+      gate6_open_cell_rule / gate6_open_cell_count = 291; 456 = 291 open + 24 closed +
+      141 released) and run.py asserts it at start-up. PDF extraction repaired (soft-hyphen
+      joins, page furniture stripped per page before joining, evidence-only intra-word
+      joins; audit recovery-runs/pdf-audit.md) — BSR-AN-04, BSR-AN-05 and BSR-RP-04 were
+      affected and re-chunked; BSR-MW-03 clean. Empties are auditable (per-standard
+      coverage + silence rationale; REVIEWED offered only when every standard is whole or
+      exhausted; sampled standards exhausted before an empty is declared). The opus slice
+      covers caveated accepts that reach a card. Roman Catholic packet rebuilt (14 cells
+      reordered, 12 Latin/English pairs). Lutheran run: 39 cells, 37 filled, 2 honest
+      empties (Book of Concord exhausted), 23.91 USD (0.613/cell; exhaustion 16.49 USD
+      turned 7 of 9 empty-track cells into filled cells); Reformed/Presbyterian run: 16
+      cells, 16 filled, 15.18 USD (0.949/cell; six standards per cell, no exhaustion).
+      Caveat slice: 34 candidates, 3.33 USD, 0 overturned. Packets:
+      recovery-packets/{lutheran,reformed-presbyterian}.json. Four branches remain
+      (Baptist 37, Methodist/Wesleyan 37, Mennonite/Anabaptist 41, Eastern Orthodox 44)
+      and each WAITS for the author's go; Eastern Orthodox runs alone and last, after the
+      author ratifies the four derived translation pairs individually.
       Blocked corpus rows: BSR-EO-03 (goarch.org, HOST_RETIRED), BSR-BA-02 (apex→www).
       Gate 7 items: Q-434 phrase re-cut, Q-169 now resolvable under BSR-RC-08 (re-check
       R001), the Roman Catholic packet's leading-witness cards to re-read under the new
       ordering, BSR-EO-03 retire or re-host, BSR-BA-02 apex→www redirect, see
       recovery-runs/proposed-app-config-gate7.md. Running the Gate 2 pipeline against
       v2.25 blocks on R001 (Q-034) until Gate 7 re-points that cell.
-    next_action: "Author: review recovery-packets/anglican.json and rule on the 291/315 denominator; then give the go for the next single branch (Eastern Orthodox last, alone). Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
+    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session3_Report_20260913.md, review recovery-packets/{lutheran,reformed-presbyterian}.json (the seven exhaustion-filled Lutheran cells and the opus rescues first), ratify the four derived translation pairs individually, and rule on the Reformed/Presbyterian tie-break (registry row order within one tier); then give the go for the next single branch (Eastern Orthodox last, alone). Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
 
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED

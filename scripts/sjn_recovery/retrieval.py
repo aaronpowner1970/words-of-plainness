@@ -199,6 +199,53 @@ def rank_within_standard(predicate, rid, ch, allowance, top_k=RETRIEVAL_TOP_K_PE
     return picked, coverage
 
 
+def ranked_order(predicate, rid, ch, use_vectors=True):
+    """The full ranked order of one standard's chunks — the same hybrid ranking rank_within_standard
+    applies (BM25 + vector RRF, lexical slice first), without the allowance. Used to order the
+    chunks a locator has NOT yet seen when a standard is exhausted (Task 2c)."""
+    if not ch:
+        return []
+    q = query_text(predicate)
+    bm = BM25([c["text"] for c in ch])
+    scores = bm.score(q)
+    order = sorted(range(len(ch)), key=lambda i: -scores[i])
+    bm_rank = {ch[i]["locator"]: r for r, i in enumerate(order)}
+    vec_rank = _vector_rank(ch, q, rid) if use_vectors else None
+
+    def fused(c):
+        r1 = bm_rank.get(c["locator"], len(ch))
+        r2 = vec_rank.get(c["locator"], len(ch)) if vec_rank else r1
+        return 1 / (60 + r1) + 1 / (60 + r2)
+    ranked = sorted(ch, key=lambda c: -fused(c))
+    terms = discriminating_terms(predicate_terms(predicate), ch)
+    lex = [c for c in ranked if terms and has_term(c["text"], terms)]
+    if lex:
+        lscore = BM25([c["text"] for c in lex]).score(" ".join(terms))
+        lex = round_robin([lex[i] for i in sorted(range(len(lex)), key=lambda i: -lscore[i])])
+        keys = {c["locator"] for c in lex}
+        ranked = lex + [c for c in ranked if c["locator"] not in keys]
+    return ranked
+
+
+def exhaustion_batches(predicate, row, supplied_locators, budget=LOCATOR_CONTEXT_CHARS, use_vectors=True):
+    """Task 2c: the chunks of ONE standard the locator has not been given (their locators not in
+    `supplied_locators`), in ranked order, packed into batches of at most `budget` characters (an
+    oversized chunk gets a batch of its own). Returns (batches, n_remaining_chunks); each batch is a
+    list of chunk dicts. Every chunk of the standard appears in exactly one batch, so running every
+    batch EXHAUSTS the standard."""
+    rid = row["registry_id"]
+    ch = [c for c in store.load_chunks(rid) if c.get("text") and c["locator"] not in supplied_locators]
+    ranked = ranked_order(predicate, rid, ch, use_vectors=use_vectors)
+    batches, cur, used = [], [], 0
+    for c in ranked:
+        if cur and used + len(c["text"]) > budget:
+            batches.append(cur); cur, used = [], 0
+        cur.append(c); used += len(c["text"])
+    if cur:
+        batches.append(cur)
+    return batches, len(ch)
+
+
 def select_for_standard(predicate, row, budget=LOCATOR_CONTEXT_CHARS, top_k=RETRIEVAL_TOP_K_PER_STANDARD, use_vectors=True):
     """Retrieval PER STANDARD (cal-3, Fix 1). One standard, its own full budget: supplied WHOLE when
     it fits, otherwise the hybrid top ranking within that standard. Returns (chunks, coverage) or

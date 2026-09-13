@@ -59,6 +59,23 @@ MODEL_IDS = {
 }
 
 EMPTY_RESULT = "NOT LOCATED — CURRENT STANDARD REVIEWED"
+# The honest rendered state for a cell that stays empty while a standard was only SAMPLED (Task 2b,
+# 2026-09-13): "reviewed" may not be claimed for a standard the locator saw 22% of. Both strings are
+# workbook State Vocabulary entries.
+EMPTY_RESULT_INCOMPLETE = "NOT LOCATED — NOT YET RECOVERED"
+
+# Task 2c (2026-09-13): where a cell would go empty and a standard was only sampled (coverage RETRIEVED),
+# the locator continues over that standard's unretrieved chunks in further calls until the standard is
+# exhausted or a candidate survives verification. Calls are issued in rounds so a survivor stops the
+# spend early; each round issues up to this many batch calls per standard.
+EXHAUST_CALLS_PER_ROUND = 4
+
+# Task 3 (2026-09-13): the opus slice also covers a caveated accept that would reach the author's card —
+# primary verdict ACCEPT_WITH_CAVEAT at a PARTIAL floor, or raising one of these hazards — because that is
+# the shape of a planted near-miss and the thing the author actually sees. Fired only on candidates the
+# allocation keeps (or shows as an English witness); rejections never need it.
+CAVEAT_SLICE_HAZARDS = ("SEMANTIC_FLOOR", "SAME_WORD_DIFFERENT_MEANING")
+ROUTE_CAVEATED_ACCEPT = "CAVEATED_ACCEPT"
 
 # Registry hosts RETIRED by the author (2026-09-12). A retired host is never requested, for any purpose:
 # not by the corpus builder, not by the fetch audit, not by an adapter's crawl. Rows still ratified on a

@@ -102,6 +102,7 @@ def build(args):
                             "notes": [str(e)], "urls": ctx.urls, "fetch_verdict": "see notes"}
             log(f"   FAILED: {e}"); continue
         chunks = store.dedupe_locators(chunks)
+        notes.extend(n for n in ctx.extraction_notes() if n not in notes)
         hyph = sources.dehyphenate_chunks(chunks)
         if hyph["changed"] or hyph["residue"]:
             notes.append(f"de-hyphenation at extraction: {hyph['stats']} in {hyph['changed']} chunk(s); "

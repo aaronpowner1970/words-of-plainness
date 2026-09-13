@@ -26,7 +26,8 @@ from sjn_pipeline.registry import host_matches, normalize_host  # noqa: E402
 
 from .config import ARCHIVE_DIR, RETIRED_HOSTS  # noqa: E402
 from .textutil import (segments, join, clean, strip_footnote_digits, sha, pdf_repair, fix_mojibake,  # noqa: E402
-                       nfc, has_polytonic, strip_foreign_parentheticals, normalize, dehyphenate, hyphenation_residue, contains)
+                       nfc, has_polytonic, strip_foreign_parentheticals, normalize, dehyphenate, hyphenation_residue, contains,
+                       join_soft_hyphens, strip_page_furniture, repair_intraword_splits)
 
 ROMAN = r"(?:[IVXLC]+)"
 ROMAN_MAP = {"I": 1, "II": 2, "III": 3, "IV": 4, "V": 5, "VI": 6, "VII": 7, "VIII": 8, "IX": 9, "X": 10, "XI": 11,
@@ -92,8 +93,16 @@ class Ctx:
         return fr.html
 
     def pdf(self, url):
-        """PDF text with line-break hyphenation joined at extraction (textutil.dehyphenate, whole-document
-        vocabulary as evidence) — before any adapter splits it, so no adapter can carry "na-\nture" into a chunk."""
+        """PDF text, repaired at extraction — before any adapter splits it, so no adapter can carry a
+        defect into a chunk. In order (2026-09-13, after the Anglican packet review):
+          1. soft-hyphen line breaks joined ("cove<U+00AD><newline>nantal" -> "covenantal"; textutil.join_soft_hyphens);
+          2. page furniture stripped: a short line recurring at the top or the bottom of many pages is a
+             running header / footer and is removed from that zone BEFORE the pages are joined
+             (textutil.strip_page_furniture; every removed line is reported in `self.furniture`);
+          3. line-break hyphenation joined with the whole document's vocabulary as evidence (dehyphenate);
+          4. residual intra-word splits repaired only on vocabulary evidence, every join logged
+             (textutil.repair_intraword_splits -> `self.intraword_joins`).
+        The page separators (form feeds) survive, so adapters that split by page still can."""
         self._check_host(url)
         fr = self.fetcher.get(url)
         self._log_fetch(url, "pdf", fr)
@@ -101,9 +110,54 @@ class Ctx:
             raise BlockedError(f"{url}: HTTP 403")
         if not fr.ok or not fr.pdf_bytes:
             raise FetchError(f"{url}: {fr.error or 'no PDF bytes'}")
-        raw = pdf_text(fr.pdf_bytes)
+        return self.repair_pdf_text(pdf_text(fr.pdf_bytes))
+
+    def repair_pdf_text(self, raw):
+        """The extraction repairs above, on already-extracted page text (form-feed separated). Kept
+        separate so the audit (pdf_audit.py) can run the same path over the cached bytes."""
         self.hyphenation = getattr(self, "hyphenation", {})
-        return dehyphenate(raw, stats=self.hyphenation)
+        self.furniture = getattr(self, "furniture", {"top": {}, "bottom": {}, "lines_removed": 0})
+        self.intraword_joins = getattr(self, "intraword_joins", [])
+        text = join_soft_hyphens(raw, stats=self.hyphenation)
+        rep = {}
+        text = strip_page_furniture(text, rep)
+        for z in ("top", "bottom"):
+            for k, n in rep.get(z, {}).items():
+                self.furniture[z][k] = self.furniture[z].get(k, 0) + n
+        self.furniture["lines_removed"] += rep.get("lines_removed", 0)
+        text = dehyphenate(text, stats=self.hyphenation)
+        return repair_intraword_splits(text, joins=self.intraword_joins, corpus_vocab=self.corpus_vocabulary())
+
+    def corpus_vocabulary(self):
+        """Casefolded tokens of every OTHER standard's stored chunks — closed-form evidence for an
+        intra-word join ("cove nant" is "covenant" because the corpus knows the word), never a source
+        of text. Computed once per Ctx."""
+        if getattr(self, "_corpus_vocab", None) is None:
+            from . import store
+            words = set()
+            for c in store.load_all_chunks():
+                if c.get("registry_id") == self.rid:
+                    continue
+                words.update(w.casefold() for w in re.findall(r"[A-Za-z]+", c.get("text", "")))
+            self._corpus_vocab = words
+        return self._corpus_vocab
+
+    def extraction_notes(self):
+        """Manifest notes for what the PDF path repaired (empty for an HTML row)."""
+        out = []
+        if getattr(self, "hyphenation", None):
+            out.append(f"hyphenation at extraction: {self.hyphenation}")
+        f = getattr(self, "furniture", None)
+        if f and f.get("lines_removed"):
+            top = sorted(f["top"].items(), key=lambda kv: -kv[1])
+            bot = sorted(f["bottom"].items(), key=lambda kv: -kv[1])
+            out.append(f"page furniture stripped at extraction: {f['lines_removed']} zone line(s); "
+                       f"top {top[:12]}; bottom {bot[:12]}")
+        j = getattr(self, "intraword_joins", None)
+        if j:
+            out.append(f"intra-word splits repaired on vocabulary evidence: {len(j)} join(s): "
+                       + "; ".join(f"{x['from']!r}->{x['to']!r} [{x['evidence']}{' of ' + x['stem'] if x.get('stem') else ''}]" for x in j[:24]))
+        return out
 
     def archived(self, url, kind="html"):
         """A one-time archived fetch committed under recovery-runs/archived-fetches/<rid>.<ext> with a

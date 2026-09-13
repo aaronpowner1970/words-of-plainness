@@ -81,6 +81,53 @@ def translation_pairs(registry, branch):
     return out
 
 
+def translation_pair_evidence(registry, branch):
+    """The same derivation as translation_pairs(), with the evidence each pair rests on, for the author
+    to ratify pair by pair (2026-09-13): rule NAMED_IN_NOTE (the witness row's own note / author note /
+    draft recommendation names the controlling row) or SHARED_TITLE_TOKEN (the only link is a document
+    name shared by the two standard_titles — the weaker evidence; BSR-EO-13 -> BSR-EO-06 is this kind)."""
+    rows = registry.for_branch(branch, include_fallback=True, citable_only=False)
+    by_id = {r["registry_id"]: r for r in rows}
+    controlling = [r for r in rows if not registry.is_witness(r["registry_id"])]
+    out = []
+    for w in rows:
+        wid = w["registry_id"]
+        if not registry.is_witness(wid):
+            continue
+        rec = {"branch": branch, "witness": wid, "witness_title": w.get("standard_title"), "witness_tier": w.get("authority_tier"),
+               "witness_reception": w.get("reception_scope"), "controlling": None, "rule": None, "evidence": None}
+        blob_fields = [("reception_note", w.get("reception_note")), ("author_note", w.get("author_note")),
+                       ("draft_recommendation", w.get("draft_recommendation")), ("standard_title", w.get("standard_title"))]
+        named = None
+        for field, text in blob_fields:
+            for rid in _RID.findall(str(text or "")):
+                if rid != wid and any(c["registry_id"] == rid for c in controlling):
+                    named = (rid, field, str(text)); break
+            if named:
+                break
+        if named:
+            rid, field, text = named
+            i = text.find(rid)
+            rec.update({"controlling": rid, "controlling_title": by_id[rid].get("standard_title"), "controlling_tier": by_id[rid].get("authority_tier"),
+                        "rule": "NAMED_IN_NOTE", "evidence": f"{field}: …{text[max(0, i - 90):i + 110]}…"})
+            out.append(rec); continue
+        wt = _doc_tokens(w.get("standard_title"))
+        best, best_n, best_tokens = None, 0, set()
+        for c in controlling:
+            shared = wt & _doc_tokens(c.get("standard_title"))
+            if len(shared) > best_n:
+                best, best_n, best_tokens = c["registry_id"], len(shared), shared
+        if best:
+            rec.update({"controlling": best, "controlling_title": by_id[best].get("standard_title"), "controlling_tier": by_id[best].get("authority_tier"),
+                        "rule": "SHARED_TITLE_TOKEN", "shared_tokens": sorted(best_tokens),
+                        "evidence": f"standard_title tokens shared: {sorted(best_tokens)} — witness {w.get('standard_title')!r} / controlling {by_id[best].get('standard_title')!r}",
+                        "weakness": "a shared document name in two titles is the only link; nothing in the row text names the controlling row"})
+        else:
+            rec.update({"rule": "UNPAIRED", "evidence": "no controlling row named and no shared document-name token"})
+        out.append(rec)
+    return out
+
+
 def _division_key(locator):
     m = _ROMAN.search(locator or "")
     return m.group(1).upper() if m else None

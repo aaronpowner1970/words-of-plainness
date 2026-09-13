@@ -6,6 +6,12 @@ the verifier routing SONNET_WITH_OPUS_SLICE (APP CONFIG verifier_routing, Fix 6)
   pass two   run ONLY if pass one produced no surviving (verified) candidate; then, and only then,
              the fallback row is admitted. A fallback citation never renders alongside a non-fallback
              witness for the same cell.
+  pass three EXHAUSTION (Task 2c, 2026-09-13): run ONLY if passes one and two left nothing surviving
+             AND some consulted standard was only SAMPLED (coverage RETRIEVED). The locator continues
+             over that standard's unretrieved chunks in further calls — in rounds of
+             EXHAUST_CALLS_PER_ROUND batches per standard, each batch within the ordinary context
+             budget — until the standard is exhausted or a candidate survives verification. An empty
+             is declared only after that; a standard exhausted this way has coverage EXHAUSTED.
 
 Per-standard locate. The locator is called ONCE PER STANDARD with that standard's own chunks (whole
 when they fit the budget, otherwise the hybrid ranking within that standard). Every standard that
@@ -13,12 +19,17 @@ yields a candidate gets a GUARANTEED verification slot for its best candidate; t
 candidates compete for VERIFY_EXTRA_CANDIDATES further slots, ranked by authority tier and floor
 claim. A phrase the locator cut too long (>15 words) is not repaired by code — the locator is asked to
 re-cut it verbatim (up to three attempts, shortening each time; on the last it chooses among the legal
-≤15-word spans enumerated in code), and the re-cut goes through the same guards.
+≤15-word spans enumerated in code), and the re-cut goes through the same guards. An EMPTY locator
+reply carries a one-sentence silence_rationale per standard (prompt gate6-v1.4, Task 2d).
 
 Routing. The primary verifier judges every slotted candidate. The adjudicator (opus) judges only the
-slice: candidates on the caveated rows, on fallback-only rows, on the guarded Synodikon row, and
-every candidate of a cell where the primary rejected all candidates. Where the adjudicator ran, its
-verdict is FINAL; the primary's verdict is kept beside it so overturns are visible in the report.
+slice: candidates on the caveated rows, on fallback-only rows, on the guarded Synodikon row, every
+candidate of a cell where the primary rejected all candidates, and (Task 3, 2026-09-13) every
+CAVEATED ACCEPT that would reach the author's card — primary verdict ACCEPT_WITH_CAVEAT at a PARTIAL
+floor or raising SEMANTIC_FLOOR / SAME_WORD_DIFFERENT_MEANING — fired only on candidates the
+allocation keeps (rejections never need it), and repeated when an overturn promotes another such
+candidate into the card. Where the adjudicator ran, its verdict is FINAL; the primary's verdict is
+kept beside it so overturns are visible in the report.
 
 Every function is resumable: with the batch backend a call that is not yet answered returns None and
 the cell state records where it stopped; re-running continues from the audit log."""
@@ -27,7 +38,8 @@ import os
 
 import re
 
-from .config import MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES, PHRASE_MAX_WORDS
+from .config import (MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES, PHRASE_MAX_WORDS, EXHAUST_CALLS_PER_ROUND,
+                     CAVEAT_SLICE_HAZARDS, ROUTE_CAVEATED_ACCEPT)
 from .registry import tier_rank
 from .textutil import scrub_urls, phrase_word_count
 from .allocation import allocate, translation_pairs
@@ -57,8 +69,20 @@ def legal_spans(phrase, limit=PHRASE_MAX_WORDS, cap=12):
             seen.add(sp); uniq.append(sp)
     return uniq[:cap]
 
+
 ACCEPTS = ("ACCEPT", "ACCEPT_WITH_CAVEAT")
 FLOOR_ORDER = {"FULL": 0, "PARTIAL": 1, "WORD_ONLY": 2}
+EXHAUST_PASS = "3"
+
+
+def caveat_slice_hit(rubric):
+    """Task 3: does this PRIMARY rubric describe a caveated accept the adjudicator must see if it reaches
+    a card? ACCEPT_WITH_CAVEAT at a PARTIAL floor, or raising a CAVEAT_SLICE_HAZARDS flag."""
+    if not rubric or rubric.get("verdict") != "ACCEPT_WITH_CAVEAT":
+        return False
+    if rubric.get("floor") == "PARTIAL":
+        return True
+    return bool(set(rubric.get("hazard_flags") or []) & set(CAVEAT_SLICE_HAZARDS))
 
 
 def _chunk_views(chunks):
@@ -73,7 +97,7 @@ def _chunk_views(chunks):
 
 class CellRunner:
     def __init__(self, llm, registry, predicates, comparators, state_dir, locator_model, verifier_models, coder_model=None,
-                 log=print, run_coder=True):
+                 log=print, run_coder=True, exhaust=True):
         self.llm = llm
         self.reg = registry
         self.predicates = predicates
@@ -89,6 +113,7 @@ class CellRunner:
         self.coder_model = coder_model or locator_model
         self.log = log
         self.run_coder = run_coder
+        self.exhaust = exhaust
         self._pairs = {}
 
     def pairs(self, branch):
@@ -177,25 +202,35 @@ class CellRunner:
             too_long.append(phrase)
         return "STILL_TOO_LONG", None, " || ".join(raws), too_long
 
-    def locate_standard(self, cell, pred, comp, row, pass_no):
+    def locate_standard(self, cell, pred, comp, row, pass_no, chunks=None, coverage=None, batch=None, n_batches=None):
         """Locator call for ONE standard. Returns the per-standard entry (status PENDING when a call
-        is unanswered — the caller re-runs; answered calls are served from the audit log)."""
+        is unanswered — the caller re-runs; answered calls are served from the audit log).
+        `chunks` / `coverage` / `batch` are set by the exhaustion pass (Task 2c): the chunks are then the
+        batch of not-yet-supplied chunks and the pass label says so; otherwise the ordinary per-standard
+        retrieval (retrieval.select_for_standard) is used."""
         rid = row["registry_id"]
-        include_fallback = pass_no == 2
-        chunks, coverage = retrieval.select_for_standard(pred, row)
+        include_fallback = pass_no >= 2 and self.reg.is_fallback(rid)
+        if chunks is None:
+            chunks, coverage = retrieval.select_for_standard(pred, row)
         if not chunks:
             return {"status": "NO_CORPUS", "candidates": [], "dropped": []}
         views, by_key = _chunk_views(chunks)
         sv = self.reg.public(rid)
         sv["coverage"] = coverage
-        user = prompts.locator_user(cell, pred, comp, views, [sv], f"pass {pass_no}")
+        if batch is None:
+            label = f"pass {pass_no}"
+        else:
+            label = (f"pass {pass_no} (exhaustion of {rid}: batch {batch} of {n_batches} — chunks of this standard "
+                     f"not supplied in an earlier pass; the earlier passes found no surviving candidate)")
+        user = prompts.locator_user(cell, pred, comp, views, [sv], label)
         guards.assert_no_urls({"u": user})
-        out, rec, parsed, attempt = self._call("locator", prompts.LOCATOR_SYSTEM, user, self.locator_model, 3000,
-                                               {"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"],
-                                                "pass": pass_no, "registry_id": rid})
+        meta = {"queue_id": cell["queue_id"], "branch": cell["branch"], "family_id": cell["family_id"], "pass": pass_no, "registry_id": rid}
+        if batch is not None:
+            meta["exhaustion_batch"] = batch
+        out, rec, parsed, attempt = self._call("locator", prompts.LOCATOR_SYSTEM, user, self.locator_model, 3000, meta)
         entry = {"status": "PENDING", "call_id": rec["call_id"], "attempt": attempt, "coverage": coverage,
                  "supplied_chunks": [(rid, c["locator"]) for c in chunks], "supplied_chars": sum(len(c["text"]) for c in chunks),
-                 "candidates": [], "dropped": [], "recuts": []}
+                 "candidates": [], "dropped": [], "recuts": [], "batch": batch}
         if out is None:
             return entry
         entry["raw"] = out[:4000]
@@ -205,8 +240,10 @@ class CellRunner:
         if parsed.get("result", "").startswith("NOT LOCATED") or not parsed.get("candidates"):
             entry["status"] = "EMPTY"
             entry["empty"] = True
+            entry["silence_rationale"] = " ".join(str(parsed.get("silence_rationale") or "").split()[:40]) or None
             return entry
         seen = set()
+        tag = f"p{pass_no}-{rid}" + (f"-b{batch}" if batch is not None else "")
         for cand in parsed.get("candidates", [])[:MAX_CANDIDATES * 2]:
             ok, why, chunk = guards.vet_candidate(cand, by_key, cell["branch"], self.reg, allow_fallback=include_fallback)
             if not ok and why.startswith("phrase exceeds") and chunk is not None:
@@ -232,19 +269,35 @@ class CellRunner:
             seen.add(k)
             n = len(entry["candidates"]) + 1
             entry["candidates"].append({
-                "candidate_id": f"{cell['queue_id']}-p{pass_no}-{rid}-{n}",
+                "candidate_id": f"{cell['queue_id']}-{tag}-{n}",
                 "pass": pass_no, "registry_id": rid, "locator": chunk["locator"],
                 "phrase": cand["phrase"], "rationale": cand.get("rationale", ""), "floor_claim": cand.get("floor_claim"),
                 "chunk_text": scrub_urls(chunk["text"]), "chunk_hash": chunk["text_hash"], "division": chunk["division"],
                 "fallback_tier": self.reg.is_fallback(rid), "witness": self.reg.is_witness(rid),
                 "effective_tier": self.reg.effective_tier(rid, chunk), "locator_rank": n,
-                "recut_from": cand.get("recut_from"),
+                "recut_from": cand.get("recut_from"), "exhaustion_batch": batch,
             })
             if len(entry["candidates"]) >= MAX_CANDIDATES:
                 break
         entry["status"] = "DONE"
         entry["empty"] = not entry["candidates"]
         return entry
+
+    @staticmethod
+    def _slot(entries_in_order):
+        """One guaranteed slot per (standard) entry's best candidate, then the extras by tier, (1a) non-witness
+        before witness within the tier, floor claim and locator rank. Returns (slotted, unslotted)."""
+        slotted, extra = [], []
+        for e in entries_in_order:
+            cands = e.get("candidates") or []
+            if cands:
+                first = dict(cands[0]); first["slot"] = "GUARANTEED"
+                slotted.append(first)
+                extra.extend(dict(c, slot="EXTRA") for c in cands[1:])
+        extra.sort(key=lambda c: (tier_rank(c.get("effective_tier")), 1 if c.get("witness") else 0,
+                                  FLOOR_ORDER.get(c.get("floor_claim"), 9), c.get("locator_rank", 9)))
+        slotted.extend(extra[:VERIFY_EXTRA_CANDIDATES])
+        return slotted, [dict(c, slot="UNSLOTTED") for c in extra[VERIFY_EXTRA_CANDIDATES:]]
 
     def locate(self, cell, pass_no, st):
         pred = self.predicates[cell["family_id"]]
@@ -274,26 +327,148 @@ class CellRunner:
             result["status"] = "NO_CORPUS"
             return result
         # ---- slotting: one guaranteed slot per standard, then the extras by tier and floor
-        slotted, extra = [], []
+        entries = []
         for row in standards:
             e = per[row["registry_id"]]
-            cands = e.get("candidates") or []
             result["dropped"].extend([dict(d, registry_id=row["registry_id"]) for d in e.get("dropped", [])])
             result["coverage"][row["registry_id"]] = e.get("coverage")
             result["supplied_chunks"].extend(e.get("supplied_chunks", []))
-            if cands:
-                first = dict(cands[0]); first["slot"] = "GUARANTEED"
-                slotted.append(first)
-                extra.extend(dict(c, slot="EXTRA") for c in cands[1:])
-        # extra slots: tier, then (1a) non-witness before witness within the tier, then floor claim, then locator rank
-        extra.sort(key=lambda c: (tier_rank(c.get("effective_tier")), 1 if c.get("witness") else 0,
-                                  FLOOR_ORDER.get(c.get("floor_claim"), 9), c.get("locator_rank", 9)))
-        slotted.extend(extra[:VERIFY_EXTRA_CANDIDATES])
-        result["unslotted"] = [dict(c, slot="UNSLOTTED") for c in extra[VERIFY_EXTRA_CANDIDATES:]]
+            entries.append(e)
+        slotted, unslotted = self._slot(entries)
+        result["unslotted"] = unslotted
         result["candidates"] = slotted
         result["empty"] = not slotted
         result["standards_reviewed"] = [r["registry_id"] for r in standards if per[r["registry_id"]].get("status") != "NO_CORPUS"]
+        result["silence_rationale"] = {r["registry_id"]: per[r["registry_id"]].get("silence_rationale") for r in standards
+                                       if per[r["registry_id"]].get("status") == "EMPTY"}
         return result
+
+    # ---------------------------------------------------------------- exhaustion (Task 2c)
+    def sampled_standards(self, st):
+        """Standards consulted in passes 1–2 whose coverage was RETRIEVED (sampled, not reviewed whole)."""
+        out = []
+        for pk in ("1", "2"):
+            p = st["passes"].get(pk) or {}
+            for rid, cov in (p.get("coverage") or {}).items():
+                if cov and cov.get("coverage") == "RETRIEVED" and rid not in out:
+                    out.append(rid)
+        return out
+
+    def _supplied_locators(self, st, rid):
+        locs = set()
+        for p in st["passes"].values():
+            for r, loc in p.get("supplied_chunks", []):
+                if r == rid:
+                    locs.add(loc)
+        return locs
+
+    def locate_exhaust(self, cell, st):
+        """Issue / ingest one ROUND of exhaustion calls. Returns "PENDING" (calls unanswered), "ROUND_DONE"
+        (new candidates slotted into pass 3 — verify them; more batches remain), or "EXHAUSTED" (every
+        sampled standard fully supplied). The batch plan (which chunks in which batch) is fixed on first
+        use and stored, so a resumed run continues the same plan."""
+        pred = self.predicates[cell["family_id"]]
+        comp = self.comparators.get(cell["family_id"], {})
+        p = st["passes"].get(EXHAUST_PASS) or {"status": "RUNNING", "retrieval": "EXHAUSTION", "standards": [], "per_standard": {},
+                                                "batch_plan": {}, "progress": {}, "candidates": [], "unslotted": [], "dropped": [],
+                                                "coverage": {}, "supplied_chunks": [], "rounds": 0}
+        st["passes"][EXHAUST_PASS] = p
+        rids = self.sampled_standards(st)
+        p["standards"] = rids
+        rows = {r["registry_id"]: r for r in self.reg.for_branch(cell["branch"], include_fallback=True, citable_only=True)}
+        for rid in rids:
+            if rid not in p["batch_plan"]:
+                if rid not in rows:
+                    continue
+                batches, n_rem = retrieval.exhaustion_batches(pred, rows[rid], self._supplied_locators(st, rid))
+                p["batch_plan"][rid] = [[c["locator"] for c in b] for b in batches]
+                p["progress"][rid] = {"batches_total": len(batches), "chunks_remaining_at_start": n_rem, "batches_done": 0,
+                                      "exhausted": len(batches) == 0, "stopped_early": False}
+        # issue this round: up to EXHAUST_CALLS_PER_ROUND batches per standard that have no DONE/EMPTY entry yet
+        pending, issued_any = False, False
+        for rid in rids:
+            plan = p["batch_plan"].get(rid) or []
+            prog = p["progress"][rid]
+            if prog["exhausted"] or prog["stopped_early"]:
+                continue
+            issued = 0
+            chunks_all = {c["locator"]: c for c in retrieval.store.load_chunks(rid)}
+            for k, locs in enumerate(plan, 1):
+                key = f"{rid}#{k}"
+                e = p["per_standard"].get(key)
+                if e and e.get("status") in ("DONE", "EMPTY", "NO_CORPUS"):
+                    continue
+                if issued >= EXHAUST_CALLS_PER_ROUND:
+                    break
+                chunks = [chunks_all[l] for l in locs if l in chunks_all]
+                cov = {"coverage": "EXHAUSTION_BATCH", "batch": k, "of_batches": len(plan), "supplied": len(chunks), "of": len(chunks_all)}
+                e = self.locate_standard(cell, pred, comp, rows[rid], int(EXHAUST_PASS), chunks=chunks, coverage=cov, batch=k, n_batches=len(plan))
+                p["per_standard"][key] = e
+                issued += 1; issued_any = True
+                if e["status"] in ("PENDING", "UNPARSEABLE"):
+                    pending = True
+        if pending:
+            p["status"] = "PENDING"
+            return "PENDING"
+        p["rounds"] += 1 if issued_any else 0
+        # ingest: every answered batch entry contributes; slot the round's candidates into the pass-3 list
+        entries = []
+        for rid in rids:
+            plan = p["batch_plan"].get(rid) or []
+            prog = p["progress"][rid]
+            done = 0
+            for k in range(1, len(plan) + 1):
+                e = p["per_standard"].get(f"{rid}#{k}")
+                if e and e.get("status") in ("DONE", "EMPTY"):
+                    done += 1
+                    for d in e.get("dropped", []):
+                        rec = dict(d, registry_id=rid)
+                        if rec not in p["dropped"]:
+                            p["dropped"].append(rec)
+                    for sc in e.get("supplied_chunks", []):
+                        if list(sc) not in [list(x) for x in p["supplied_chunks"]]:
+                            p["supplied_chunks"].append(sc)
+                    entries.append(e)
+            prog["batches_done"] = done
+            prog["exhausted"] = done >= len(plan)
+            supplied = len(self._supplied_locators(st, rid) | {loc for e in entries if e.get("supplied_chunks") for r, loc in e["supplied_chunks"] if r == rid})
+            total = len(retrieval.store.load_chunks(rid))
+            p["coverage"][rid] = {"coverage": "EXHAUSTED" if prog["exhausted"] else "RETRIEVED", "supplied": min(supplied, total), "of": total,
+                                  "batches_done": done, "batches_total": len(plan)}
+        known = {c["candidate_id"] for c in p["candidates"]}
+        slotted, unslotted = self._slot(entries)
+        for c in slotted:
+            if c["candidate_id"] not in known:
+                p["candidates"].append(c); known.add(c["candidate_id"])
+        p["unslotted"] = [c for c in unslotted if c["candidate_id"] not in known]
+        p["silence_rationale"] = {}
+        for key, e in p["per_standard"].items():
+            if e.get("status") == "EMPTY" and e.get("silence_rationale"):
+                p["silence_rationale"].setdefault(key.split("#")[0], []).append(e["silence_rationale"])
+        p["empty"] = not p["candidates"]
+        all_exhausted = all(p["progress"][rid]["exhausted"] for rid in rids) if rids else True
+        p["status"] = "EXHAUSTED" if all_exhausted else "ROUND_DONE"
+        return p["status"]
+
+    def coverage_final(self, st):
+        """Per consulted standard, the coverage the cell ends with: FULL, EXHAUSTED (every chunk supplied
+        across passes), or RETRIEVED supplied-of-total (sampled; with why exhaustion stopped, if it ran)."""
+        out = {}
+        for pk in ("1", "2"):
+            p = st["passes"].get(pk) or {}
+            for rid, cov in (p.get("coverage") or {}).items():
+                if cov:
+                    out[rid] = {"coverage": cov.get("coverage"), "supplied": cov.get("supplied"), "of": cov.get("of"), "pass": pk}
+        p3 = st["passes"].get(EXHAUST_PASS) or {}
+        for rid, cov in (p3.get("coverage") or {}).items():
+            base = out.get(rid, {})
+            prog = (p3.get("progress") or {}).get(rid) or {}
+            out[rid] = {"coverage": cov["coverage"], "supplied": cov["supplied"], "of": cov["of"], "pass": base.get("pass"),
+                        "exhaustion": {"batches_done": cov.get("batches_done"), "batches_total": cov.get("batches_total"),
+                                       "stopped_early": prog.get("stopped_early", False),
+                                       "reason": ("a candidate survived verification; the standard was not read to the end" if prog.get("stopped_early")
+                                                  else ("every chunk supplied" if cov["coverage"] == "EXHAUSTED" else "exhaustion incomplete"))}}
+        return out
 
     # ---------------------------------------------------------------- verifier
     def verify(self, cell, cand, model):
@@ -369,6 +544,9 @@ class CellRunner:
         return fin
 
     def _verify_pass(self, cell, st, pass_key):
+        """Primary on every slotted candidate; the routed slice to the adjudicator; then (Task 3) the caveated
+        accepts that the allocation would put on the card, repeated until the card is stable. Returns True
+        while a call is pending."""
         p = st["passes"].get(pass_key) or {}
         cands = p.get("candidates", [])
         pending = False
@@ -384,7 +562,8 @@ class CellRunner:
         for cand in cands:
             v = st["verifications"][cand["candidate_id"]]
             route = self.needs_adjudication(cand, all_rejected)
-            v["_route"] = route
+            if route or not v.get("_route"):
+                v["_route"] = route if route else v.get("_route")
             if route and (self.adjudicator not in v or v[self.adjudicator].get("status") in ("PENDING", "UNPARSEABLE")):
                 v[self.adjudicator] = self.verify(cell, cand, self.adjudicator)
             if route and v[self.adjudicator].get("status") == "PENDING":
@@ -393,6 +572,33 @@ class CellRunner:
             return True
         for cand in cands:
             self.finalize(st["verifications"][cand["candidate_id"]], self.primary, self.adjudicator)
+        # ---- Task 3: caveated accepts that would reach the card go to the adjudicator; loop until stable
+        if self.adjudicator and self.reg.routing_is_slice():
+            for _ in range(len(cands) + 1):
+                survivors = [c for c in cands if self.final_verdict(st, c["candidate_id"]) in ACCEPTS]
+                alloc = allocate(self.allocation_view(survivors), self.pairs(cell["branch"]))
+                on_card = set(alloc["kept"]) | set(alloc["english_witness"].values())
+                fired = False
+                for cand in cands:
+                    cid = cand["candidate_id"]
+                    v = st["verifications"][cid]
+                    adj = v.get(self.adjudicator)
+                    if cid not in on_card or (adj and adj.get("status") == "DONE"):
+                        continue
+                    # a caveated accept not yet adjudicated, or adjudicated but still PENDING / UNPARSEABLE from an
+                    # earlier round: (re)issue the call — an answered one is served from the audit log at no cost
+                    if caveat_slice_hit(v.get(self.primary)):
+                        v["_route"] = ROUTE_CAVEATED_ACCEPT
+                        v[self.adjudicator] = self.verify(cell, cand, self.adjudicator)
+                        fired = True
+                        if v[self.adjudicator].get("status") == "PENDING":
+                            pending = True
+                if pending:
+                    return True
+                if not fired:
+                    break
+                for cand in cands:
+                    self.finalize(st["verifications"][cand["candidate_id"]], self.primary, self.adjudicator)
         return False
 
     # ---------------------------------------------------------------- coder
@@ -440,8 +646,34 @@ class CellRunner:
                     st["phase"] = "locate-2"; return st
             if self._verify_pass(cell, st, "2"):
                 st["phase"] = "verify-2"; self.save(st); return st
-        st["survivors"] = self.survivors(st, "1") or self.survivors(st, "2")
+        # pass 3 (Task 2c): exhaust every sampled standard before declaring an empty
+        if not (self.survivors(st, "1") or self.survivors(st, "2")) and self.exhaust and self.sampled_standards(st):
+            st.setdefault("exhaustion", {"entered": True, "changed_outcome": False})
+            while True:
+                status = self.locate_exhaust(cell, st)
+                self.save(st)
+                if status == "PENDING":
+                    st["phase"] = "locate-3"; self.save(st); return st
+                if self._verify_pass(cell, st, EXHAUST_PASS):
+                    st["phase"] = "verify-3"; self.save(st); return st
+                if self.survivors(st, EXHAUST_PASS):
+                    p3 = st["passes"][EXHAUST_PASS]
+                    for rid, prog in p3["progress"].items():
+                        if not prog["exhausted"]:
+                            prog["stopped_early"] = True
+                    for rid in p3["coverage"]:
+                        if p3["coverage"][rid]["coverage"] != "EXHAUSTED":
+                            p3["coverage"][rid]["coverage"] = "RETRIEVED"
+                    st["exhaustion"]["changed_outcome"] = True
+                    break
+                if status == "EXHAUSTED":
+                    break
+                # ROUND_DONE with no survivor: the next round is issued by the loop
+            st["exhaustion"]["standards"] = st["passes"][EXHAUST_PASS]["progress"]
+            st["exhaustion"]["rounds"] = st["passes"][EXHAUST_PASS].get("rounds")
+        st["survivors"] = self.survivors(st, "1") or self.survivors(st, "2") or self.survivors(st, EXHAUST_PASS)
         st["fallback_used"] = bool(not self.survivors(st, "1") and self.survivors(st, "2"))
+        st["coverage_final"] = self.coverage_final(st)
         # 1c: allocate the card FIRST (allocation.py, the same allocator the packet builder uses), then code only
         # the candidates that will reach the card. Everything the allocation drops is recorded as coder_skipped.
         alloc = allocate(self.allocation_view(st["survivors"]), self.pairs(cell["branch"]))
@@ -497,4 +729,19 @@ class CellRunner:
         for cand in (st["passes"].get(pass_key) or {}).get("candidates", []):
             if self.final_verdict(st, cand["candidate_id"]) in ACCEPTS:
                 out.append(cand)
+        return out
+
+    # ---------------------------------------------------------------- per-cell statistics for the report
+    def caveat_slice_stats(self, st):
+        """Task 3: candidates routed CAVEATED_ACCEPT in this cell, with the adjudicator's outcome."""
+        out = []
+        for cid, v in (st.get("verifications") or {}).items():
+            if v.get("_route") != ROUTE_CAVEATED_ACCEPT:
+                continue
+            fin = v.get("final") or {}
+            a = v.get(self.adjudicator) or {}
+            out.append({"candidate_id": cid, "call_id": a.get("call_id"), "primary_verdict": (v.get(self.primary) or {}).get("verdict"),
+                        "primary_floor": (v.get(self.primary) or {}).get("floor"), "primary_hazards": (v.get(self.primary) or {}).get("hazard_flags"),
+                        "adjudicator_verdict": a.get("verdict"), "overturned": fin.get("overturned"), "direction": fin.get("direction"),
+                        "reason_code_final": fin.get("reason_code_final")})
         return out

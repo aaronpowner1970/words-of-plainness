@@ -101,6 +101,49 @@ used by `packets.py` AND by `agents.CellRunner.run_cell` before the coder):
 Task 3 re-validation (`fa-2`, both models, no seeding): 74 planted near-misses, false-accept 0.000 on sonnet, opus and
 the routed outcome, Dositheus slice 0.000 (`recovery-runs/fa-2/planted-summary.json`; 6.80 USD).
 
+## Live-run session 3 (2026-09-13, v2.25r4 GATE6 SCOPE RATIFIED) — extraction repairs, auditable empties, caveat slice
+
+Workbook v2.25r4: the open-cell rule is now a WORKBOOK FACT (APP CONFIG `gate6_open_cell_rule`, `gate6_closed_states`,
+`gate6_open_cell_count` = 291, `gate6_closed_ratified`, `gate6_out_of_scope_cells`). `registry.gate6_scope` reads those keys,
+checks that every closed cell carries a ratified closed state, and `run.py` REFUSES TO START unless the computed open set equals
+the ratified count (`assert_gate6_scope`; 456 = 291 open + 24 closed + 141 released).
+
+- **Task 1 — PDF page furniture and intra-word splits** (`textutil`, `sources.Ctx.repair_pdf_text`, `pdf_audit.py`). Three
+  defects, all silent (a phrase spanning them is refused as "not verbatim" with no rejection record): (1) soft-hyphen line
+  breaks (`cove­\nnantal` → "cove nantal"; only the ACNA PDF uses them) are joined at extraction; (2) running headers /
+  footers — a short line recurring at the top or bottom of ≥3 pages with ≥75% of its full-line occurrences in that zone,
+  no terminal punctuation, not opening with a conjunction — are stripped per page BEFORE the pages are joined, with detection
+  repeated on the peeled pages because furniture stacks (the PC(USA) Westminster pages open with six such lines); (3) residual
+  intra-word splits are joined only on evidence — the closed form is a word of the document or of the wider ratified corpus
+  and neither fragment occurs outside such splits (ATTESTED), or the left fragment already has ≥2 attested joins and the right
+  fragment extends that stem by ≤4 letters (STEM: "cove nantal" after six "cove nant"). Every removed line and every join is
+  written to the manifest notes. `pdf_audit.py` chunks each row three ways (LEGACY path, REPAIRED path, the store) and diffs
+  them; report `recovery-runs/pdf-audit.md`. Affected and re-chunked: BSR-AN-04 (even-page footer "846 Catechism" in 7 chunks
+  and 2 locators — not clean, contrary to the review), BSR-AN-05 (55 soft-hyphen splits, 269 header lines, 12 evidence joins),
+  BSR-RP-04 (60 chunks: `[TEXT]` markers and stacked Westminster column headers). Clean: BSR-MW-03 (Article I "of infinite
+  power, wisdom, and good" verified in all three chunkings), BSR-EO-08, BSR-EO-09. BSR-LU-02 has no text by policy;
+  BSR-MA-01 / BSR-MA-02 are HTML-sourced despite the registry's fetch_mode "PDF".
+- **Task 2 — an empty must be auditable** (`packets.empty_result_option`, `agents.locate_exhaust`, locator prompt gate6-v1.4).
+  `standards_reviewed` carries each standard's coverage (REVIEWED WHOLE / EXHAUSTED / SAMPLED supplied-of-total) and a one-line
+  silence rationale per standard (the locator's own `silence_rationale` on an empty reply; verifier reason codes where
+  candidates were found and refused). NOT LOCATED — CURRENT STANDARD REVIEWED is OFFERED only when every consulted standard is
+  FULL or EXHAUSTED; otherwise the card names the sampled standard and the honest state NOT LOCATED — NOT YET RECOVERED. Where a
+  cell would go empty and a standard was sampled, pass 3 EXHAUSTS it: the unretrieved chunks, in the standard's own ranked order,
+  in batches within the ordinary budget, `EXHAUST_CALLS_PER_ROUND` batches per standard per round, until every chunk has been
+  supplied or a candidate survives verification (then the standard is marked stopped-early, not exhausted). `run.py` reports the
+  cost per entered cell and how many empties it changed (`branch_spend.<br>.exhaustion`).
+- **Task 3 — the opus slice covers caveated accepts** (`agents.caveat_slice_hit`, route `CAVEATED_ACCEPT`). After the primary
+  verdicts, the cell is allocated; every candidate that would reach the card (kept, or shown as an English witness) whose primary
+  verdict is ACCEPT_WITH_CAVEAT at a PARTIAL floor or raising SEMANTIC_FLOOR / SAME_WORD_DIFFERENT_MEANING goes to the
+  adjudicator, and the allocation is repeated until the card is stable. Reported per branch as calls, cost and overturn rate
+  (`branch_spend.<br>.caveat_slice`).
+- **Task 4 — Roman Catholic rebuilt** (`run.py --rebuild-packet-only`, no model calls) under the 1a/1b allocator: 14 cells
+  reordered, 12 now pair BSR-RC-02's Latin with BSR-RC-03's English on one card. `translation_pairs_evidence` in every packet
+  header names the rule (NAMED_IN_NOTE / SHARED_TITLE_TOKEN) and the evidence each derived pair rests on, for the author to
+  ratify pair by pair before Eastern Orthodox runs.
+- **Driver**: `branch_loop.py` runs one branch to completion (run.py ↔ api_executor.py), logging to
+  `recovery-runs/<run>/<branch-slug>-loop.log`.
+
 ## Backends (`llm.py`)
 
 | backend | how calls run | cost basis |

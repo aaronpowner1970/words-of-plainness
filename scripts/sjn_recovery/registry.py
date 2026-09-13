@@ -266,8 +266,68 @@ def load_case_targets(wb):
 
 
 def open_cells(queue):
-    """The open cells Gate 6 will eventually run: not released, not out of scope, not lineage-only."""
+    """The cells Gate 6 runs. APP CONFIG `gate6_open_cell_rule` (v2.25r4, author-ratified 2026-09-13):
+    OPEN = Rendered State (app-safe) begins "NOT LOCATED" AND Historical Witness Retired is not TRUE;
+    everything else is closed. gate6_scope() checks this predicate against the workbook's own statement
+    of the rule and against `gate6_open_cell_count`, and run.py refuses to start on a mismatch."""
     return [c for c in queue if c["rendered_state"].startswith("NOT LOCATED") and not c["retired"]]
+
+
+def gate6_scope(registry, queue):
+    """The Gate 6 denominator, READ from APP CONFIG and checked, never re-derived by judgement:
+      gate6_open_cell_rule     the predicate open_cells() implements — the text must name both columns
+      gate6_closed_states      OUT OF SCOPE | VECTOR PENDING | VECTOR COMPLETE | PENDING REVIEW | retired = TRUE
+      gate6_open_cell_count    the ratified count (291); the computed count must equal it
+    Returns a dict with the counts and the checks; `ok` is False on any mismatch, with `problems`."""
+    cfg = registry.config
+    rule = s(cfg.get("gate6_open_cell_rule"))
+    closed_states = [x.strip() for x in s(cfg.get("gate6_closed_states")).split("|") if x.strip()]
+    ratified = cfg.get("gate6_open_cell_count")
+    try:
+        ratified_n = int(float(ratified)) if ratified not in (None, "") else None
+    except (TypeError, ValueError):
+        ratified_n = None
+    opened = open_cells(queue)
+    released = released_cells(queue)
+    open_ids, rel_ids = {c["queue_id"] for c in opened}, {c["queue_id"] for c in released}
+    closed = [c for c in queue if c["queue_id"] not in open_ids and c["queue_id"] not in rel_ids]
+    problems = []
+    if "NOT LOCATED" not in rule or "Historical Witness Retired" not in rule:
+        problems.append("APP CONFIG gate6_open_cell_rule is missing or does not name the two columns the harness reads "
+                        f"(Rendered State begins 'NOT LOCATED'; Historical Witness Retired not TRUE): {rule!r}")
+    if ratified_n is None:
+        problems.append("APP CONFIG gate6_open_cell_count is missing: the open count cannot be asserted")
+    elif len(opened) != ratified_n:
+        problems.append(f"computed open cells {len(opened)} != APP CONFIG gate6_open_cell_count {ratified_n}")
+    if open_ids & rel_ids:
+        problems.append(f"open and released sets overlap: {sorted(open_ids & rel_ids)[:10]}")
+    state_names = [x for x in closed_states if not x.upper().startswith("HISTORICAL WITNESS RETIRED")]
+    unexplained = [c["queue_id"] for c in closed
+                   if not (c["retired"] or any(c["rendered_state"].upper().startswith(x.upper()) for x in state_names))]
+    if unexplained:
+        problems.append(f"{len(unexplained)} closed cell(s) carry a state outside gate6_closed_states: {unexplained[:12]}")
+    by_state = {}
+    for c in closed:
+        k = "Historical Witness Retired = TRUE" if c["retired"] else c["rendered_state"]
+        by_state[k] = by_state.get(k, 0) + 1
+    return {"rule": rule, "closed_states": closed_states, "ratified_open_count": ratified_n, "computed_open": len(opened),
+            "released": len(released), "closed": len(closed), "total": len(queue), "closed_by_state": by_state,
+            "closed_ratified": s(cfg.get("gate6_closed_ratified")), "out_of_scope_cells": s(cfg.get("gate6_out_of_scope_cells")),
+            "identity": f"{len(queue)} = {len(opened)} open + {len(closed)} closed + {len(released)} released",
+            "ok": not problems, "problems": problems}
+
+
+def assert_gate6_scope(registry, queue, log=print):
+    """Fail loudly (SystemExit) when the harness's open set is not the workbook's ratified open set."""
+    sc = gate6_scope(registry, queue)
+    log(f"== Gate 6 scope (APP CONFIG): {sc['identity']}; ratified open count {sc['ratified_open_count']}; "
+        f"closed by state {sc['closed_by_state']}")
+    if not sc["ok"]:
+        for p in sc["problems"]:
+            log(f"!! GATE 6 SCOPE MISMATCH: {p}")
+        raise SystemExit("Gate 6 scope assertion failed — the harness's open-cell set is not the workbook's ratified set; "
+                         "nothing runs until the workbook (APP CONFIG gate6_*) and the harness agree")
+    return sc
 
 
 def released_cells(queue):
@@ -279,5 +339,5 @@ def reviewed_empty_cells(queue):
 
 
 __all__ = ["Registry", "load_predicates", "load_comparators", "load_queue", "load_case_targets", "open_cells",
-           "released_cells", "reviewed_empty_cells", "TIER_RANK", "bare_tier", "tier_rank", "set_tier_rank",
+           "gate6_scope", "assert_gate6_scope", "released_cells", "reviewed_empty_cells", "TIER_RANK", "bare_tier", "tier_rank", "set_tier_rank",
            "refusal_reason", "citation_refusal"]

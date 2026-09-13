@@ -9,8 +9,11 @@ Guards live in code (guards.py); the prompts state the contract so the model can
 nothing here is relied on for enforcement."""
 import json
 
-PROMPT_VERSIONS = {"locator": "gate6-v1.2", "recut": "gate6-v1.3", "verifier": "gate6-v1.1", "coder": "gate6-v1.1"}
-PROMPT_VERSION = "gate6-v1.2 (locator) / gate6-v1.3 (recut) / gate6-v1.1 (verifier, coder)"
+PROMPT_VERSIONS = {"locator": "gate6-v1.4", "recut": "gate6-v1.3", "verifier": "gate6-v1.1", "coder": "gate6-v1.1"}
+PROMPT_VERSION = "gate6-v1.4 (locator) / gate6-v1.3 (recut) / gate6-v1.1 (verifier, coder)"
+# gate6-v1.4 (2026-09-13, Task 2d): an EMPTY locator result carries a one-sentence `silence_rationale` —
+# what in the supplied chunks comes nearest the predicate and why it does not assert it — so an empty
+# cell can be audited per standard. The candidate shape, the retrieval and every rule are unchanged.
 
 
 def prompt_version(role):
@@ -33,13 +36,13 @@ Rules you must keep:
 4. `floor_claim`: FULL if the passage asserts the predicate of the required subject in the defined sense; PARTIAL if it asserts a narrower or adjacent proposition wholly within the floor; WORD_ONLY if the word appears but the passage does not assert the proposition (a mere mention, a different sense, a different subject).
 5. `rationale`: one sentence, at most 40 words, saying why the passage meets (or only partly meets) the floor.
 6. The subject matters. A passage that predicates the term of the Church, of humanity, of Scripture, of Christ's human nature, or of an opponent's view does not count. A denial of a contrary view is not an assertion unless the standard also asserts the predicate positively in the same passage. A proposition the standard names only to condemn it (an anathema, a rejected error) is never evidence.
-7. An EMPTY result is correct when the standard is silent or only mentions the word. Do not stretch. Return the empty result rather than a weak candidate.
+7. An EMPTY result is correct when the standard is silent or only mentions the word. Do not stretch. Return the empty result rather than a weak candidate. With an empty result give `silence_rationale`: ONE sentence of at most 40 words naming what in the supplied chunks comes nearest the predicate (its locator) and why it does not assert the predicate of the required subject — or that nothing in the supplied chunks approaches it.
 8. Rank candidates best first. Prefer the standard's own confessional or conciliar assertion over exposition where both qualify.
 
 Output: a single JSON object and nothing else, in one of these two shapes:
 {"candidates": [{"chunk_key": "...", "registry_id": "...", "locator": "...", "phrase": "...", "rationale": "...", "floor_claim": "FULL|PARTIAL|WORD_ONLY"}, ...]}
 or
-{"result": "NOT LOCATED — CURRENT STANDARD REVIEWED", "standards_reviewed": ["BSR-.."]}
+{"result": "NOT LOCATED — CURRENT STANDARD REVIEWED", "standards_reviewed": ["BSR-.."], "silence_rationale": "..."}
 """
 
 
@@ -57,7 +60,7 @@ def locator_user(cell, predicate, comparator, chunks_view, standards_view, pass_
         "restoration_comparator_for_context_only": {"label": comparator.get("label"), "phrase": comparator.get("phrase")},
         "standard_supplied": standards_view[0] if len(standards_view) == 1 else standards_view,
         "chunks": chunks_view,
-        "output_contract": "JSON only: {candidates:[...≤3, phrase ≤15 words verbatim]} or {result:'NOT LOCATED — CURRENT STANDARD REVIEWED', standards_reviewed:[...]}",
+        "output_contract": "JSON only: {candidates:[...≤3, phrase ≤15 words verbatim]} or {result:'NOT LOCATED — CURRENT STANDARD REVIEWED', standards_reviewed:[...], silence_rationale:'one sentence, ≤40 words'}",
     }, ensure_ascii=False, indent=0)
 
 
