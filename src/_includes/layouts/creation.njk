@@ -9,14 +9,19 @@
 {% endblock %}
 
 {% block content %}
-<!-- Hero -->
+<!-- Hero -->{#
+     On /chat/video-03/ the hero and the site header give way to one slim bar
+     (chat/bar.njk), which carries the chat page's practice line. #}{% if chat %}
+{%- set barLabel = chatBarLabel %}
+{%- set practiceLine = "Listen first. Afterward, trace each underlined line to its witnesses." %}
+{%- set barAboutId = "creationAboutBtn" %}
+{% include "chat/bar.njk" %}{% else %}
 <section class="chapter-hero creation-hero" data-pagefind-ignore>
     <p class="articles-eyebrow">A Words of Plainness Film</p>
     <h1 class="chapter-title">{{ title }}</h1>
-    <p class="articles-subtitle">{{ subtitle }}</p>{% if chat %}
-    <p class="aoid-practice">Listen first. Afterward, trace each underlined line to its witnesses.</p>{% endif %}
+    <p class="articles-subtitle">{{ subtitle }}</p>
     <button class="creation-about-btn" id="creationAboutBtn" type="button">About this film</button>
-</section>
+</section>{% endif %}
 
 <!-- One centred reading container: the sticky film spans its full width at the
      top, and the transcript + citation dock sit as columns beneath it. The film
@@ -26,9 +31,12 @@
      #creationDock is display:contents below 1200px, so the panel inside it
      falls back to the fixed overlay drawer without being hidden.
      .dock-hidden is the default: the panel starts closed, so the transcript
-     holds full width until the stream actually opens. -->
+     holds full width until the stream actually opens. -->{#
+     Chat page: the stage comes first, outside the reading container, so the
+     wings and film can span the viewport (see layouts/aoid-video.njk). #}{% if chat %}
+<div class="chat-scope">{% else %}
 <div class="creation-reading dock-hidden" id="creationReading">
-
+{% endif %}
     <!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->
     <div class="creation-stage-wrap" data-pagefind-ignore>{% if chat %}
         <div class="chat-stage-row">
@@ -75,7 +83,9 @@
         </div>
         {% include "chat/band.njk" %}{% endif %}
     </div>
-
+{% if chat %}
+<div class="creation-reading dock-hidden" id="creationReading">
+{% endif %}
     <div class="creation-columns">
         <!-- Following transcript (auto-scrolls with the film; every claim is a citation span) -->
         <div class="creation-transcript" id="creationTranscript"{% if not chat %} data-pagefind-body{% endif %}>
@@ -88,7 +98,8 @@
 
         <div class="creation-dock" id="creationDock"></div>
     </div>
-</div>
+</div>{% if chat %}
+</div>{% endif %}
 
 <!-- Resume-follow pill -->
 <button class="ct-resume" id="ctResume" type="button" aria-live="polite">&#8635; Resume follow</button>

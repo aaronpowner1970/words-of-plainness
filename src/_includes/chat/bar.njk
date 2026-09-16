@@ -1,0 +1,20 @@
+{#
+  chat/bar.njk — the presentation bar, in place of the site header and the
+  hero on a chat video page.
+
+  Context it reads:
+    barLabel      "Article N · Title"
+    practiceLine  the page's practice line, verbatim (a scored teaching element)
+    barAboutId    the id the page script binds "About this film" to
+
+  Not fixed. It scrolls away with the page, and the sticky stage below it
+  then rises to the top of the viewport, so nothing ever sits under a bar.
+#}
+<div class="chat-bar" data-pagefind-ignore>
+    <p class="chat-bar-label">{{ barLabel }}</p>
+    <p class="chat-bar-practice">{{ practiceLine }}</p>
+    <div class="chat-bar-actions">
+        <button class="chat-bar-link" id="{{ barAboutId }}" type="button">About this film</button>
+        <a class="chat-bar-link" href="/chat/">&#9776; Chat menu</a>
+    </div>
+</div>

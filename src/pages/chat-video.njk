@@ -9,6 +9,10 @@ permalink: "/chat/video-{{ video.nn }}/"
 # otherwise the same file the public reading page uses, so the article, the
 # timing, the dock and the worship gate are not a second copy.
 chat: true
+# Presentation chrome: no site header or hero (chat/bar.njk stands in), and
+# the body class that scopes the full-width stage in chat-session.css.
+hideHeader: true
+bodyClass: chat-present
 # Reached by URL only; nothing on the public site links here. Kept out of
 # search: noindex, no pagefind body (see the layout), data-pagefind-ignore on
 # the body, out of collections so sitemap.njk never sees it, and a canonical

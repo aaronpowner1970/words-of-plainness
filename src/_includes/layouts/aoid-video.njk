@@ -29,14 +29,21 @@
 {% endblock %}
 
 {% block content %}
-<!-- Hero -->
+<!-- Hero -->{#
+     On a chat page the hero and the site header give way to one slim bar
+     (chat/bar.njk). The practice line is a scored teaching element, so it is
+     ONE string here, shown by the hero on the public page and by the bar on
+     the chat page. #}{% set practiceLine = "Listen first. Afterward, trace each underlined claim to its witnesses." %}{% if chat %}
+{%- set barLabel = "Article " + video.n + " · " + video.title %}
+{%- set barAboutId = "aoidAboutBtn" %}
+{% include "chat/bar.njk" %}{% else %}
 <section class="chapter-hero creation-hero aoid-hero" data-pagefind-ignore>
     <p class="articles-eyebrow">Articles of Interfaith Discipleship &middot; Article {{ video.n }}</p>
     <h1 class="chapter-title">{{ video.title }}</h1>
     <p class="articles-subtitle">A Reading</p>
-    <p class="aoid-practice">Listen first. Afterward, trace each underlined claim to its witnesses.</p>
+    <p class="aoid-practice">{{ practiceLine }}</p>
     <button class="creation-about-btn" id="aoidAboutBtn" type="button">About this film</button>
-</section>
+</section>{% endif %}
 
 <!-- One centred reading container: the sticky film spans its full width at the
      top; the article and the citation dock sit as columns beneath it. The film
@@ -44,9 +51,16 @@
      whole reading region.
      #aoidDock is display:contents below 1200px, so the panel inside it falls
      back to the fixed overlay drawer rather than being hidden.
-     .dock-hidden is the default: the dock starts closed, as on /creation/. -->
+     .dock-hidden is the default: the dock starts closed, as on /creation/. -->{#
+     On a chat page the stage is NOT inside the 1200px reading container. It
+     comes first inside a full-width .chat-scope, so the row of wings and film
+     can span the viewport; the reading container follows it in the same
+     scope, so position:sticky still travels the whole reading and the stage
+     leaves the screen with it, as on the public page. The article and the
+     dock keep their container. Emits nothing different on the public page. #}{% if chat %}
+<div class="chat-scope">{% else %}
 <div class="creation-reading aoid-reading dock-hidden" id="aoidReading">
-
+{% endif %}
     <!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->{#
          In chat mode the player becomes the centre column of a three-column row;
          it is flex: 0 0 auto, so the wings take the leftover width and the film
@@ -88,7 +102,9 @@
         </div>
         {% include "chat/band.njk" %}{% endif %}
     </div>
-
+{% if chat %}
+<div class="creation-reading aoid-reading dock-hidden" id="aoidReading">
+{% endif %}
     <div class="creation-columns">
         <!-- The article itself: the shared aoid/aNN.njk include. The spoken
              sentence is highlighted as the film plays (CSS Custom Highlight
@@ -107,7 +123,8 @@
 
         <div class="creation-dock" id="aoidDock"></div>
     </div>
-</div>
+</div>{% if chat %}
+</div>{% endif %}
 
 <!-- Resume-follow pill -->
 <button class="ct-resume" id="ctResume" type="button" aria-live="polite">&#8635; Resume follow</button>

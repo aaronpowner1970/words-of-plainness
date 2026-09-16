@@ -172,8 +172,8 @@
 <body{% if bodyClass %} class="{{ bodyClass }}"{% endif %} data-api-url="{{ site.api.baseUrl }}"{% if pagefindIgnore %} data-pagefind-ignore{% endif %}>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    {% include "partials/header.njk" %}
-    {% include "partials/mobile-menu.njk" %}
+    {% if not hideHeader %}{% include "partials/header.njk" %}{% endif %}
+    {% if not hideHeader %}{% include "partials/mobile-menu.njk" %}{% endif %}
     
     <main id="main-content">
         {% block content %}

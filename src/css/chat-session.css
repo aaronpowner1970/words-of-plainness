@@ -10,77 +10,208 @@
    headings, serif for body. The public pages never load this file.
    ============================================================ */
 
-/* ── The three-column stage (mockup E) ───────────────────────
-   [left wing] [video] [right wing], inside the sticky stage wrap, so the
-   wings travel with the film exactly as the film already travels.
-
-   The video does not shrink: it is flex: 0 0 auto and keeps the
-   width: min(100%, filmHeightCap * 16/9) it has on the public page. The
-   wings take the leftover on flex: 1 1 0 with min-width: 0.
-
-   The gutter is PADDING INSIDE each wing, not a flex `gap`. With a gap,
-   a viewport tall enough for the film to span the whole container would
-   leave the wings at zero width while the gap still claimed its pixels,
-   and the row would overflow into a horizontal scrollbar. Inside the
-   wing, the gutter collapses with the wing. */
-.chat-stage-row {
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
+/* ── The presentation bar ────────────────────────────────────
+   Chat video pages carry no site header and no hero (base.njk hideHeader;
+   chat/bar.njk). One slim bar stands in: the article on the left, the
+   practice line in the centre, the host's two links on the right. It is not
+   fixed — it scrolls away, and the sticky stage then sits at the very top —
+   so nothing on these pages is ever under a header. The practice line is a
+   scored teaching element: it wraps before it is ever cut. */
+.chat-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, max-content) minmax(0, 1fr);
+    align-items: center;
+    column-gap: 1.25rem;
+    box-sizing: border-box;
+    min-height: 48px;
+    padding: 6px 24px;
+    background: var(--brown-rich, #1F1012);
+    border-bottom: 1px solid rgba(196, 148, 58, 0.18);
 }
-.chat-stage-row > .creation-player { flex: 0 0 auto; }
+.chat-bar-label {
+    margin: 0;
+    justify-self: start;
+    font-family: 'Cinzel', var(--font-serif, Georgia, serif);
+    font-size: clamp(0.8rem, 0.55rem + 0.3vw, 1.05rem);
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    color: var(--gold-light, #D4A84A);
+    text-wrap: balance;
+}
+.chat-bar-practice {
+    margin: 0;
+    text-align: center;
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: clamp(0.86rem, 0.6rem + 0.3vw, 1.1rem);
+    line-height: 1.3;
+    color: var(--cream, #E8DCC4);
+    text-wrap: balance;
+}
+.chat-bar-actions {
+    justify-self: end;
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem 1.1rem;
+    white-space: nowrap;
+}
+.chat-bar-link {
+    padding: 0.2em 0;
+    background: none;
+    border: 0;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.8;
+    font-family: var(--font-sans, sans-serif);
+    font-size: clamp(0.74rem, 0.55rem + 0.22vw, 0.92rem);
+    letter-spacing: 0.04em;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(196, 148, 58, 0.4);
+    cursor: pointer;
+}
+.chat-bar-link:hover,
+.chat-bar-link:focus-visible { opacity: 1; color: var(--gold-light, #D4A84A); }
 
+/* ── The stage: sizes (mockup E) ─────────────────────────────
+   On a chat video page the stage sits outside the 1200px reading container,
+   first in a full-width .chat-scope (see the layouts), and <main> is the
+   query container. Everything below is decided by the width <main> actually has,
+   not by a viewport breakpoint, so the same rules hold at any monitor size
+   and any browser zoom.
+
+   TUNABLE
+     --chat-gutter     side gutter of the stage row
+     --chat-row-max    cap on the row, centred beyond it
+     --chat-gap        gap between a wing and the film
+     --chat-wing-min   guaranteed wing width; --chat-wing-max its ceiling
+     --chat-col-min    the single side column of the one-column fallback
+     --chat-video-min  the smallest film the two-wing layout will accept
+     --chat-stage-vh   share of the viewport height the stage may use, so the
+                       top of the transcript stays on screen
+     --chat-pad-y      the strip above and below the film inside the stage
+
+   The film's width is the smaller of the HEIGHT budget (the stage's share of
+   the viewport, as a 16:9 width) and the WIDTH budget (the row less the
+   wings and gaps). Its height follows from 16:9 and the wings stretch to it.
+   These are custom properties on <main>, so 100cqw resolves against <main>
+   wherever they are used — the stage, and the dock below it, agree. */
+.chat-present main {
+    container: chatpage / inline-size;
+    --chat-bar-h: 48px;
+    --chat-gutter: 24px;
+    --chat-row-max: 2200px;
+    --chat-gap: 20px;
+    --chat-wing-min: 260px;
+    --chat-wing-max: 420px;
+    --chat-col-min: 320px;
+    --chat-video-min: 560px;
+    --chat-stage-vh: 64svh;
+    --chat-pad-y: 12px;
+
+    --chat-row-w: min(100cqw - 2 * var(--chat-gutter), var(--chat-row-max));
+    --chat-video-hmax: calc(min(var(--chat-stage-vh), 100svh - var(--chat-bar-h) - 24px) - 2 * var(--chat-pad-y));
+    --chat-video-w: min(
+        var(--chat-video-hmax) * 16 / 9,
+        var(--chat-row-w) - 2 * var(--chat-wing-min) - 2 * var(--chat-gap)
+    );
+}
+
+.chat-present .creation-stage-wrap {
+    top: 0;                    /* no fixed header above it any more */
+    box-sizing: border-box;
+    padding: var(--chat-pad-y) 0;
+}
+
+/* ── Two wings: [left wing] [film] [right wing] ─────────────── */
+.chat-present .chat-stage-row {
+    display: grid;
+    grid-template-columns:
+        minmax(var(--chat-wing-min), var(--chat-wing-max))
+        var(--chat-video-w)
+        minmax(var(--chat-wing-min), var(--chat-wing-max));
+    column-gap: var(--chat-gap);
+    justify-content: center;
+    align-items: stretch;
+    width: var(--chat-row-w);
+    margin-inline: auto;
+}
+.chat-present .chat-stage-row > .creation-player {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    width: var(--chat-video-w);
+    max-width: none;
+    margin: 0;
+}
+/* The reading's ended overlay sizes its type off the film's width through
+   this container. The public page gets it from .aoid-reading, which the stage
+   is no longer inside on a chat page. */
+.chat-present #aoidPlayerWrap { container: aoidfilm / inline-size; }
+
+/* The wings are SIZE containers: the grid gives them their box (a track wide,
+   the film tall) and their content can never push the row taller than the
+   film. Their type is sized off that box, so it scales with the wing rather
+   than with the viewport. */
 .chat-wing {
-    flex: 1 1 0;
     min-width: 0;
-    overflow: hidden;
+    min-height: 0;
     display: flex;
     flex-direction: column;
 }
-.chat-wing--left { padding-right: clamp(10px, 1.4vw, 20px); justify-content: center; }
-.chat-wing--right { padding-left: clamp(10px, 1.4vw, 20px); }
+.chat-wing--left {
+    grid-column: 1;
+    grid-row: 1;
+    container: chatwelcome / size;
+    justify-content: center;
+}
+.chat-wing--right {
+    grid-column: 3;
+    grid-row: 1;
+    container: chatstatus / size;
+    justify-content: space-between;
+}
 
 /* ── Left wing · welcome ─────────────────────────────────────
-   Right-aligned, so the block sits against the film's edge and reads as
-   one column with it rather than as a floating caption. */
+   Right-aligned, so the block sits against the film's edge and reads as one
+   column with it. Lines balance rather than wrap greedily, so a wrapped line
+   never leaves one word alone; the website may break at its dot, never
+   inside a word. */
 .chat-welcome {
+    --wu: clamp(12px, min(5.4cqi, 4.3cqh), 22px);
     text-align: right;
-    padding: clamp(0.6rem, 1.4vh, 1.1rem) 0;
+    padding: 0.4em clamp(10px, 5cqi, 20px) 0.4em 0;
     border-right: 1px solid rgba(196, 148, 58, 0.18);
-    padding-right: clamp(10px, 1.2vw, 18px);
 }
 .chat-welcome-line {
     margin: 0 0 0.3em;
     font-family: var(--font-serif, Georgia, serif);
-    font-size: clamp(0.76rem, 1.15vw, 1.02rem);
-    line-height: 1.45;
+    font-size: var(--wu);
+    line-height: 1.4;
     color: var(--cream, #E8DCC4);
+    text-wrap: balance;
+    overflow-wrap: normal;
+    word-break: normal;
 }
 .chat-welcome-lead {
     font-family: 'Cinzel', var(--font-serif, Georgia, serif);
-    font-size: clamp(0.88rem, 1.35vw, 1.24rem);
-    line-height: 1.35;
+    font-size: calc(var(--wu) * 1.14);
+    line-height: 1.3;
     color: var(--gold-light, #D4A84A);
     margin-bottom: 0.5em;
 }
 .chat-welcome-rule {
-    margin: 0.55em 0;
+    margin: 0.45em 0;
     color: rgba(196, 148, 58, 0.55);
-    font-size: clamp(0.8rem, 1.1vw, 1rem);
-    line-height: 1;
+    font-size: var(--wu);
+    line-height: 1.3;
 }
 
 /* ── Right wing · live status ────────────────────────────────
-   The status grows to fill the wing and the Focus button is pushed to the
-   bottom, out of the reading order — the room reads the badge, the host
-   reaches past it. */
-.chat-wing--right { justify-content: space-between; }
-/* The right wing's inner gutter mirrors the left wing's: the left wing's
-   text stops clamp(10px, 1.2vw, 18px) short of its rule, so this box stops the
-   same distance short of its outer edge. Without it the message and the meter
-   ran flush to the edge of the wing. */
+   The status fills the wing and the host controls sit at its foot, out of
+   the reading order — the room reads the badge, the host reaches past it. */
 .chat-status {
-    padding: clamp(0.6rem, 1.4vh, 1.1rem) clamp(10px, 1.2vw, 18px) 0;
+    --su: clamp(12px, min(5.2cqi, 3.6cqh), 20px);
+    padding: 0.5em clamp(10px, 5cqi, 20px) 0;
     border-left: 1px solid rgba(196, 148, 58, 0.18);
 }
 
@@ -95,11 +226,12 @@
     padding: 0.3em 0.75em;
     border-radius: 20px;
     font-family: var(--font-sans, sans-serif);
-    font-size: clamp(0.66rem, 0.95vw, 0.82rem);
+    font-size: max(12px, calc(var(--su, 14px) * 0.86));
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     line-height: 1.1;
+    white-space: nowrap;
 }
 .chat-mic-dot {
     width: 0.55em;
@@ -127,9 +259,10 @@
 .chat-status-title {
     margin: 0 0 0.5em;
     font-family: 'Cinzel', var(--font-serif, Georgia, serif);
-    font-size: clamp(0.85rem, 1.3vw, 1.18rem);
+    font-size: calc(var(--su) * 1.12);
     line-height: 1.3;
     color: var(--cream-soft, #F5EFE4);
+    text-wrap: balance;
 }
 
 .chat-meter {
@@ -149,15 +282,15 @@
 .chat-timeleft {
     margin: 0 0 0.6em;
     font-family: var(--font-sans, sans-serif);
-    font-size: clamp(0.68rem, 1vw, 0.86rem);
+    font-size: max(12px, calc(var(--su) * 0.9));
     letter-spacing: 0.03em;
     color: var(--gold-light, #D4A84A);
 }
 .chat-message {
     margin: 0;
     font-family: var(--font-serif, Georgia, serif);
-    font-size: clamp(0.72rem, 1.05vw, 0.94rem);
-    line-height: 1.5;
+    font-size: var(--su);
+    line-height: 1.45;
     color: var(--cream-dark, #D4C8B0);
 }
 
@@ -169,7 +302,7 @@
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.25rem 0.9rem;
-    margin: 0.8em clamp(10px, 1.2vw, 18px) clamp(0.5rem, 1.2vh, 1rem);
+    margin: 0.6em clamp(10px, 5cqi, 20px) 0.5em;
 }
 .chat-focus-btn,
 .chat-mode-btn {
@@ -180,13 +313,15 @@
     color: var(--cream-dark, #D4C8B0);
     opacity: 0.6;
     font-family: var(--font-sans, sans-serif);
-    font-size: clamp(0.64rem, 0.9vw, 0.76rem);
+    font-size: 12px;
     letter-spacing: 0.04em;
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-color: rgba(196, 148, 58, 0.4);
     cursor: pointer;
 }
+.chat-wing .chat-focus-btn,
+.chat-wing .chat-mode-btn { font-size: max(12px, calc(var(--su, 14px) * 0.82)); }
 .chat-focus-btn:hover,
 .chat-focus-btn:focus-visible,
 .chat-mode-btn:hover,
@@ -199,18 +334,93 @@
 
 /* ── The band (mockup F) ─────────────────────────────────────
    One row under the video carrying the same facts, for the widths where
-   the wings have no room. Hidden by default; the media queries below turn
-   the two states over. */
+   no side column fits. Hidden until the last fallback below. */
 .chat-band { display: none; }
 
-/* ── Wings out, band in ──────────────────────────────────────
-   Two triggers, one outcome, because "the wings don't fit" has two causes.
-   WIDTH is the obvious one, at about 1100px. HEIGHT is the quiet one: the
-   film is height-capped at 52vh (62vh on /creation/) and 16:9, so past
-   roughly 1150px of viewport height the film alone is as wide as the
-   1200px reading container and the leftover is unreadable. Same answer in
-   both cases — collapse to the band rather than squeeze the wings. */
-@media (max-width: 1100px), (min-height: 1150px) {
+/* ── Fallback 1 · one side column ────────────────────────────
+   Below video-min + 2 × wing-min + gaps (+ gutters) the two wings cannot
+   both have their guaranteed width. If video-min + one 320px column still
+   fits, the film keeps the left and ONE column sits on its right: the welcome
+   above, the status below. The status is sized to its content and always
+   shows whole; the welcome takes what height is left and gives up its last
+   lines first (container height queries below), rather than being cut. */
+@container chatpage (max-width: 1167.98px) {
+    .chat-present .creation-stage-wrap,
+    .chat-present .creation-reading {
+        --chat-video-w: min(
+            var(--chat-video-hmax) * 16 / 9,
+            var(--chat-row-w) - var(--chat-col-min) - var(--chat-gap)
+        );
+    }
+    .chat-present .chat-stage-row {
+        grid-template-columns: var(--chat-video-w) minmax(var(--chat-col-min), var(--chat-wing-max));
+        grid-template-rows: minmax(0, 1fr) auto;
+        height: calc(var(--chat-video-w) * 9 / 16);
+    }
+    .chat-present .chat-stage-row > .creation-player { grid-column: 1; grid-row: 1 / span 2; }
+    .chat-wing--left {
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: flex-start;
+    }
+    .chat-wing--right {
+        grid-column: 2;
+        grid-row: 2;
+        container: chatstatus / inline-size;
+        justify-content: flex-start;
+    }
+    /* One column reads top to bottom, so both blocks align left and share
+       one rule on the film's side. */
+    .chat-welcome {
+        --wu: clamp(12px, min(4.2cqi, 8cqh), 16px);
+        text-align: left;
+        padding: 0 0 0.35em clamp(10px, 4cqi, 16px);
+        border-right: 0;
+        border-left: 1px solid rgba(196, 148, 58, 0.18);
+    }
+    .chat-welcome-line { margin-bottom: 0.15em; line-height: 1.3; }
+    .chat-welcome-lead { margin-bottom: 0.25em; }
+    .chat-welcome-rule { margin: 0.2em 0; }
+    .chat-status {
+        --su: clamp(12px, 4.4cqi, 16px);
+        padding: 0.35em clamp(10px, 4cqi, 16px) 0;
+        border-top: 1px solid rgba(196, 148, 58, 0.18);
+    }
+    .chat-mic { margin-bottom: 0.4em; }
+    .chat-status-title { margin-bottom: 0.3em; }
+    .chat-meter { margin-bottom: 0.35em; }
+    .chat-timeleft { margin-bottom: 0.35em; }
+    .chat-message { line-height: 1.35; }
+    .chat-wing-controls { margin: 0.4em clamp(10px, 4cqi, 16px) 0; }
+}
+/* The welcome gives up its closing lines first, then its middle lines; the
+   lead line and the host stay. */
+@container chatwelcome (max-height: 175px) {
+    .chat-welcome-rule,
+    .chat-welcome-line:nth-last-child(-n+2) { display: none; }
+}
+@container chatwelcome (max-height: 105px) {
+    .chat-welcome-line:nth-child(2),
+    .chat-welcome-line:nth-child(4) { display: none; }
+}
+
+/* ── Fallback 2 · the band ───────────────────────────────────
+   Narrower still, no side column fits: the wings go and the same facts sit
+   in one band under the film. The band's own height comes out of the
+   stage's height budget, so the transcript still shows below it. */
+@container chatpage (max-width: 947.98px) {
+    .chat-present .creation-stage-wrap,
+    .chat-present .creation-reading {
+        --chat-video-w: min(
+            (var(--chat-video-hmax) - 64px) * 16 / 9,
+            var(--chat-row-w)
+        );
+    }
+    .chat-present .chat-stage-row {
+        display: block;
+        height: auto;
+    }
+    .chat-present .chat-stage-row > .creation-player { margin-inline: auto; }
     .chat-wing { display: none; }
     .chat-band {
         display: flex;
@@ -219,12 +429,13 @@
         gap: 0.5rem 1rem;
         margin: 0.55rem auto 0;
         padding: 0.5rem 0.7rem;
-        max-width: 100%;
+        width: var(--chat-row-w);
+        box-sizing: border-box;
         border: 1px solid rgba(196, 148, 58, 0.2);
         border-radius: 8px;
         background: rgba(196, 148, 58, 0.05);
     }
-    .chat-mic--band { margin: 0; }
+    .chat-mic--band { margin: 0; font-size: 12px; }
     .chat-band-title {
         font-family: 'Cinzel', var(--font-serif, Georgia, serif);
         font-size: 0.82rem;
@@ -232,13 +443,13 @@
     }
     .chat-band-time {
         font-family: var(--font-sans, sans-serif);
-        font-size: 0.72rem;
+        font-size: 0.75rem;
         color: var(--gold-light, #D4A84A);
     }
     .chat-band-msg,
     .chat-band-host {
         font-family: var(--font-serif, Georgia, serif);
-        font-size: 0.76rem;
+        font-size: 0.78rem;
         color: var(--cream-dark, #D4C8B0);
     }
     .chat-band-host { opacity: 0.75; }
@@ -248,6 +459,14 @@
     /* With no mode switch on the page, Focus takes the right end itself. */
     .chat-band > .chat-focus-btn--band:not(.chat-mode-btn--band) { margin-left: auto; }
     .chat-mode-btn--band ~ .chat-focus-btn--band { margin-left: 0; }
+}
+
+/* ── The dock under the stage ────────────────────────────────
+   The citation dock is sticky below the stage. The stage now sits at top 0
+   and is the film's height plus its strip, so the dock follows from the same
+   --chat-video-w the stage used (one-column mode included, above). */
+.chat-present .creation-reading {
+    --ct-dock-top: calc(var(--chat-video-w) * 9 / 16 + 2 * var(--chat-pad-y) + 1rem);
 }
 
 /* ── Focus view ──────────────────────────────────────────────
@@ -277,7 +496,15 @@
     padding: 20px clamp(24px, 4vw, 64px) 72px;
     background: var(--brown-rich, #1F1012);
 }
-.chat-focus .chat-stage-row { width: 100%; justify-content: center; }
+/* The stage row is a grid everywhere else; focus view has no wings, so it
+   goes back to one centred item. */
+.chat-focus .chat-stage-row {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    justify-content: center;
+}
 .chat-focus .chat-wing,
 .chat-focus .chat-band { display: none; }
 
