@@ -267,15 +267,12 @@ def test_the_spirit_guard_fires_only_where_the_required_subject_is_the_spirit():
     assert not required_subject_is_the_spirit({"subject_scope": "THE SON (the eternal Son / Logos, as divine)"})
 
 
-def test_only_q274s_family_carries_a_ratified_agency_tag():
-    assert rulings.agency_tags() == {"RNR-H35": "ATTRIBUTE"}
-    assert rulings.agency_blocks_eo() is True
+def test_q274s_family_keeps_its_r6_8_tag_and_r6_14_supersedes_the_proposals():
+    """Session 7 carried only RNR-H35. R6-14 (session 8) ratified all seven and retired the PROPOSED file; H35 is unchanged."""
+    assert rulings.agency_tags()["RNR-H35"] == "ATTRIBUTE"
+    assert rulings.agency_blocks_eo() is False
     path = os.path.join(os.path.dirname(rulings.RULINGS_PATH), "spirit-family-agency-tags-PROPOSED.json")
-    import json
-    d = json.load(open(path, encoding="utf-8"))
-    assert d["status"].startswith("PROPOSED")
-    assert [f for f, v in d["families"].items() if v["ratified"]] == ["RNR-H35"]
-    assert d["families"]["RNR-H35"]["proposed_agency_class"] == "ATTRIBUTE"
+    assert not os.path.exists(path)
 
 
 def test_v14_carries_the_creed_lines_and_the_two_new_lines_and_v13_does_not():
@@ -286,7 +283,7 @@ def test_v14_carries_the_creed_lines_and_the_two_new_lines_and_v13_does_not():
     assert "Do NOT raise IDIOM_OR_FORMULA for a creedal clause" in s14
     assert prompts.CREEDAL_SILENCE_LINE in s14 and prompts.JOINT_PREDICATION_LINE in s14 and prompts.AGENCY_LINE in s14
     assert "A NEIGHBOURING proposition is never PARTIAL" in s14       # everything v1.3 said, it still says
-    assert list(prompts.VERIFIER_SYSTEMS) == ["gate6-v1.2", "gate6-v1.3", "gate6-v1.4"]
+    assert list(prompts.VERIFIER_SYSTEMS)[:3] == ["gate6-v1.2", "gate6-v1.3", "gate6-v1.4"]
 
 
 def test_the_agency_class_reaches_the_verifier_only_when_ratified():

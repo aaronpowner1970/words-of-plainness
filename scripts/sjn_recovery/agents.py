@@ -562,14 +562,19 @@ class CellRunner:
         chunk_view = {"registry_id": cand["registry_id"], "locator": cand["locator"], "text": cand["chunk_text"]}
         user = prompts.verifier_user(pred, cand, chunk_view)
         guards.assert_no_urls({"u": user})
-        out, rec, parsed, attempt = self._call("verifier", prompts.verifier_system(), user, model, 2500,
-                                               {"queue_id": cell["queue_id"], "branch": cell.get("branch"), "candidate_id": cand["candidate_id"], "verifier_model": model},
+        # Session 8 (R6-13): a scoped verifier version sends JOINT PREDICATION and AGENCY only to a Spirit family; the
+        # variant sent is recorded on the call and on the rubric.
+        variant = prompts.verifier_variant(pred)
+        out, rec, parsed, attempt = self._call("verifier", prompts.verifier_system(pred), user, model, 2500,
+                                               {"queue_id": cell["queue_id"], "branch": cell.get("branch"), "candidate_id": cand["candidate_id"],
+                                                "verifier_model": model, "verifier_variant": variant},
                                                required=VERIFIER_REQUIRED)
         if out is None:
-            return {"status": "PENDING", "call_id": rec["call_id"], "model": model}
+            return {"status": "PENDING", "call_id": rec["call_id"], "model": model, "prompt_variant": variant}
         parsed = parsed or {}
         rubric = {
             "model": model, "call_id": rec["call_id"], "attempt": attempt, "prompt_version": prompts.prompt_version("verifier"),
+            "prompt_variant": variant,
             "phrase_verbatim": parsed.get("phrase_verbatim"), "subject_is_required": parsed.get("subject_is_required"),
             "grammatical_subject": parsed.get("grammatical_subject"), "speech_act_is_assertion": parsed.get("speech_act_is_assertion"),
             "speech_act_note": parsed.get("speech_act_note"), "floor": parsed.get("floor"), "floor_reason": parsed.get("floor_reason"),

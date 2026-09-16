@@ -506,13 +506,13 @@ def load_predicates(wb):
         }
         # Session 7 (R6-8): the agency class the verifier's AGENCY line needs. Only a RATIFIED tag is carried —
         # the workbook's 'Agency class' column once it exists, the author's ruling until then. A family with no
-        # ratified tag carries none and the line fails closed. The PROPOSED tags are never read here.
+        # ratified tag carries none and the line fails closed. Session 8 (R6-14): the ratified file is the source.
         wb_agency = s(r.get("Agency class")).upper()
         if wb_agency and pid in agency and wb_agency != agency[pid]:
-            raise SystemExit(f"Inherited 57 'Agency class' for {pid} disagrees with author ruling R6-8: {wb_agency!r} vs {agency[pid]!r}")
+            raise SystemExit(f"Inherited 57 'Agency class' for {pid} disagrees with author ruling R6-14: {wb_agency!r} vs {agency[pid]!r}")
         if wb_agency or pid in agency:
             out[pid]["agency_class"] = wb_agency or agency[pid]
-            out[pid]["agency_class_source"] = "WORKBOOK" if wb_agency else "AUTHOR_RULING_R6-8 (2026-09-16; workbook delta pending)"
+            out[pid]["agency_class_source"] = "WORKBOOK" if wb_agency else "AUTHOR_RULING_R6-14 (spirit-family-agency-tags.json, ratified 2026-09-16; workbook delta pending)"
     return out
 
 

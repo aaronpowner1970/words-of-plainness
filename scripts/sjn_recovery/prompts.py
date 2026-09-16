@@ -24,6 +24,9 @@ PROMPT_VERSION = "gate6-v1.5 (locator) / gate6-v1.3 (recut) / gate6-v1.3 (verifi
 # Q-161 RC-01-3, the 13 non-creedal IDIOM rejections, both Q-277 Athanasian candidates); until then v1.3 stands.
 # The name gate6-v1.4 that had been reserved for the pending "an inferable proposition is neighbouring" LOCATOR
 # line is released: that line becomes gate6-v1.5 and is measured against v1.4.
+# Session 8 (2026-09-16, R6-13): v1.4 failed and was never in force. VERIFIER gate6-v1.5 = v1.4 minus the JOINT PREDICATION
+# doxology sentence, with JOINT PREDICATION and AGENCY sent only to Spirit families (SCOPED_VERIFIER_SYSTEMS). The pending
+# inference-neighbouring line is renamed again, to gate6-v1.6. Whether v1.5 is in force is PROMPT_VERSIONS["verifier"].
 # verifier gate6-v1.2 (2026-09-13, session 4, Task 3): the hazard IDIOM_OR_FORMULA — a fixed idiom, oath,
 # doxology, greeting or liturgical formula whose surface wording names the predicate while the passage's
 # actual assertion lies elsewhere — with the companion line `asserted_outside_formula` (Y/N). Raising the
@@ -226,12 +229,60 @@ VERIFIER_SYSTEM_V14 = (VERIFIER_SYSTEM_V13
                        .replace("\nOutput: a single JSON object", "\n" + _V14_TAIL + "\n\nOutput: a single JSON object"))
 assert _V13_FORMULA_SENTENCE not in VERIFIER_SYSTEM_V14 and CREEDAL_SILENCE_LINE in VERIFIER_SYSTEM_V14
 
-VERIFIER_SYSTEMS = {"gate6-v1.2": VERIFIER_SYSTEM, "gate6-v1.3": VERIFIER_SYSTEM_V13, "gate6-v1.4": VERIFIER_SYSTEM_V14}
+# ------------------------------------------------------------------ verifier gate6-v1.5 (2026-09-16, session 8, R6-13)
+# v1.5 = v1.4 with ONE sentence deleted from JOINT PREDICATION — "A doxology naming the three persons remains a fixed
+# formula under line 4." — which Chat's review found closest to TP-049's v1.4 refusals and redundant with line 4 (line 4
+# still governs doxologies). Nothing else in the text changes.
+#
+# And v1.5 is SCOPED in the harness: a prompt line cannot scope itself (session 7: JOINT PREDICATION, opening "When the
+# required subject is THE HOLY SPIRIT", was still applied to a Son family 3 times of 3). JOINT PREDICATION and AGENCY are
+# sent ONLY to a family whose required_subject is or includes THE HOLY SPIRIT (the seven families of
+# spirit-family-agency-tags.json); every other family gets v1.3 + the creed lines, with neither line. Each verifier call
+# records the variant it was sent ("gate6-v1.5/spirit", "gate6-v1.5/base").
+#
+# v1.4 was measured and never in force, so its name is not reused. The pending "an inferable proposition is
+# neighbouring" line moves to gate6-v1.6.
+_V14_DOXOLOGY_SENTENCE = " A doxology naming the three persons remains a fixed formula under line 4."
+assert JOINT_PREDICATION_LINE.endswith(_V14_DOXOLOGY_SENTENCE)
+JOINT_PREDICATION_LINE_V15 = JOINT_PREDICATION_LINE[: -len(_V14_DOXOLOGY_SENTENCE)]
+VERIFIER_SYSTEM_V15_SPIRIT = VERIFIER_SYSTEM_V14.replace(JOINT_PREDICATION_LINE, JOINT_PREDICATION_LINE_V15)
+VERIFIER_SYSTEM_V15_BASE = VERIFIER_SYSTEM_V14.replace("\n\n" + JOINT_PREDICATION_LINE + "\n\n" + AGENCY_LINE, "")
+assert VERIFIER_SYSTEM_V15_SPIRIT.count(_V14_DOXOLOGY_SENTENCE.strip()) == 0
+assert "JOINT PREDICATION" not in VERIFIER_SYSTEM_V15_BASE and "AGENCY." not in VERIFIER_SYSTEM_V15_BASE
+assert CREEDAL_SILENCE_LINE in VERIFIER_SYSTEM_V15_BASE
+
+VERIFIER_SYSTEMS = {"gate6-v1.2": VERIFIER_SYSTEM, "gate6-v1.3": VERIFIER_SYSTEM_V13, "gate6-v1.4": VERIFIER_SYSTEM_V14,
+                    "gate6-v1.5": VERIFIER_SYSTEM_V15_SPIRIT}
+# versions whose system prompt depends on the family: {version: {variant: text}}. VERIFIER_SYSTEMS carries the fullest
+# variant under the version name so a version is selectable exactly as before.
+SCOPED_VERIFIER_SYSTEMS = {"gate6-v1.5": {"spirit": VERIFIER_SYSTEM_V15_SPIRIT, "base": VERIFIER_SYSTEM_V15_BASE}}
+SPIRIT_SCOPE_TOKENS = ("holy spirit", "holy ghost")
 
 
-def verifier_system():
-    """The verifier system prompt for the verifier version in force (PROMPT_VERSIONS['verifier'])."""
-    return VERIFIER_SYSTEMS[prompt_version("verifier")]
+def subject_includes_the_spirit(pred):
+    """R6-13 scope: the family's required_subject IS or INCLUDES the Holy Spirit (RNR-H34/H35, and R6-1's five families
+    that admit the Spirit as divine). Read from the required_subject the verifier is sent, so the scope and the prompt
+    can never disagree."""
+    import unicodedata
+    t = unicodedata.normalize("NFKC", (pred or {}).get("subject_scope") or "").casefold()
+    return any(tok in t for tok in SPIRIT_SCOPE_TOKENS)
+
+
+def verifier_variant(pred=None):
+    """The label recorded per verifier call: the version, plus '/spirit' or '/base' for a scoped version."""
+    v = prompt_version("verifier")
+    if v not in SCOPED_VERIFIER_SYSTEMS:
+        return v
+    return f"{v}/{'spirit' if subject_includes_the_spirit(pred) else 'base'}"
+
+
+def verifier_system(pred=None):
+    """The verifier system prompt for the verifier version in force (PROMPT_VERSIONS['verifier']). For a scoped version
+    the family decides the variant; a caller that passes no family gets the base variant (fail closed: no Spirit lines)."""
+    v = prompt_version("verifier")
+    if v in SCOPED_VERIFIER_SYSTEMS:
+        return SCOPED_VERIFIER_SYSTEMS[v][verifier_variant(pred).split("/", 1)[1]]
+    return VERIFIER_SYSTEMS[v]
 
 
 def set_verifier_version(version):
@@ -242,9 +293,9 @@ def set_verifier_version(version):
 
 
 def verifier_user(predicate, candidate, chunk_view):
-    # R6-8: the AGENCY line needs a class. Only a RATIFIED tag is supplied (registry.load_predicates reads
-    # rulings.agency_tags); a family with no ratified tag is sent none, and the line then fails closed — an agency
-    # phrase never satisfies it. The proposals in spirit-family-agency-tags-PROPOSED.json are NOT sent.
+    # R6-8 / R6-14: the AGENCY line needs a class. Only a RATIFIED tag is supplied (registry.load_predicates reads
+    # rulings.agency_tags, which reads spirit-family-agency-tags.json); a family with no ratified tag is sent none, and
+    # the line then fails closed — an agency phrase never satisfies it.
     body = {
         "task": "verify",
         "family_id": predicate["family_id"],

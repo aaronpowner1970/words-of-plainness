@@ -284,6 +284,20 @@ Report: `docs/gate6/WoP_SJN_Gate6_Session6_Report_20260913.md`; the rulings: `wo
   that predate it (Anglican; BSR-AN-05 Q.368 trips the URL guard) and samples old caveated accepts. Card-only work:
   `recovery-runs/session6/finish_coder.py` (coder, plus the 2c sample on new verdicts only).
 
+## Sessions 7–8 (2026-09-16, workbook unchanged) — verifier versions, agency tags, creed resolution
+
+Reports: `docs/gate6/WoP_SJN_Gate6_Session7_Report_20260916.md`, `docs/gate6/WoP_SJN_Gate6_Session8_Report_20260916.md`.
+
+- **Measuring a verifier version: follow `docs/gate6/WoP_SJN_Gate6_MeasurementRule.md` (R6-13, standing).** Single runs per
+  version; items that differ get 3 replicates per version; the gate reads the majority. Reference: `recovery-runs/session8/measure_v15.py`.
+- **Scoped verifier versions** (`prompts.SCOPED_VERIFIER_SYSTEMS`): gate6-v1.5 sends JOINT PREDICATION and AGENCY only where
+  `prompts.subject_includes_the_spirit(pred)`; `prompts.verifier_system(pred)` picks the variant, and every call records
+  `verifier_variant` (call meta) and `prompt_variant` (rubric). gate6-v1.4 and gate6-v1.5 are selectable for replays; neither is in force.
+- **Agency tags** (R6-14): `rulings.agency_tags()` reads `recovery-runs/spirit-family-agency-tags.json`; only `ratified: true` entries
+  are carried, each must agree with the rulings file, and an unlisted family gets no class (fail closed).
+- **Creed resolution** (R6-15): `Registry.resolve_registered_phrase` returns the highest-tier hit among every registered creed or
+  definition text the phrase stands in, whatever the list order or the length of any match.
+
 ## Guards enforced in code (`guards.py`, `agents.py`, `packets.py`)
 
 Registry-only chunks (URLs never enter a prompt; `assert_no_urls`) · phrase ≤15 words and verbatim in the

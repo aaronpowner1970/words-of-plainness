@@ -19,7 +19,15 @@ Session 7 (2026-09-16):
   R6-9  unadopted or unverified exposition resolves to OFFICIAL_EXPOSITION, with a display qualifier
   R6-10 phrase-level resolution reaches dogmatic definitions (horoi) registered as texts in the same branch
   R6-11 verifier gate6-v1.4; the pending inference line becomes gate6-v1.5
-  R6-12 Q-290 stays PUBLIC-CERTIFIED, flagged REVIEW_AT_EO_PACKET with its single-source disclosure"""
+  R6-12 Q-290 stays PUBLIC-CERTIFIED, flagged REVIEW_AT_EO_PACKET with its single-source disclosure
+
+Session 8 (2026-09-16, second set):
+
+  R6-13 verifier gate6-v1.5 (v1.4 minus the JOINT PREDICATION doxology sentence), JOINT PREDICATION and AGENCY scoped to
+        Spirit families; the replicate measurement rule; the inference line becomes gate6-v1.6
+  R6-14 all seven Spirit-family agency tags ratified (H27 = ATTRIBUTE); read from spirit-family-agency-tags.json
+  R6-15 highest-tier precedence among matching registered texts; EO-09's eligibility as a creed text awaits the author
+  R6-16 the CATECHETICAL-only fail-closed boundary ratified; adoption proposals verified in Cowork; packet rebuild held"""
 import json
 import os
 
@@ -158,12 +166,41 @@ def adoption_policy(r=None):
 
 
 # ---------------------------------------------------------------- R6-8 agency
-def agency_tags(r=None):
-    """{family_id: ACTION|ATTRIBUTE} the author has RATIFIED (R6-8). Proposals are not in force and are not here."""
-    return dict(_ruling(r, "R6-8_passive_agency").get("ratified_tags") or {})
+AGENCY_TAGS_PATH = os.environ.get("SJN_AGENCY_TAGS_PATH") or os.path.join(RUNS_DIR, "spirit-family-agency-tags.json")
+AGENCY_CLASSES = ("ACTION", "ATTRIBUTE")
+
+
+def agency_tags(r=None, path=None):
+    """{family_id: ACTION|ATTRIBUTE} the author has RATIFIED — read from the ratified tags file (R6-14, session 8).
+
+    Only an entry marked `ratified: true` is carried. A family absent from the file, or not ratified, gets NO class, so
+    the verifier's AGENCY line fails closed for it. Every carried tag must agree with the tags R6-14 records in the
+    rulings file (and R6-8's own RNR-H35); a disagreement, or a ratified family the rulings never named, fails loudly."""
+    r = r or load()
+    p = path or AGENCY_TAGS_PATH
+    if not os.path.exists(p):
+        raise SystemExit(f"ratified agency tags file missing: {p} — R6-14 names it as the source of every agency class")
+    with open(p, encoding="utf-8") as fh:
+        d = json.load(fh)
+    ruled = dict(_ruling(r, "R6-8_passive_agency").get("ratified_tags") or {})
+    ruled.update(_ruling(r, "R6-14_agency_tags_ratified").get("tags") or {})
+    out = {}
+    for fid, e in (d.get("families") or {}).items():
+        if e.get("ratified") is not True:
+            continue
+        cls = str(e.get("agency_class") or "").upper()
+        if cls not in AGENCY_CLASSES:
+            raise SystemExit(f"agency tags file: {fid} carries agency_class {cls!r}, outside {AGENCY_CLASSES}")
+        if ruled.get(fid) != cls:
+            raise SystemExit(f"agency tags file: {fid} = {cls} disagrees with the author's rulings ({ruled.get(fid)!r})")
+        out[fid] = cls
+    return out
 
 
 def agency_blocks_eo(r=None):
+    """R6-8 blocked the EO launch until the tags were ratified; R6-14 discharges it."""
+    if _ruling(r, "R6-14_agency_tags_ratified"):
+        return False
     return _ruling(r, "R6-8_passive_agency").get("blocks") == "EASTERN_ORTHODOX_LAUNCH"
 
 
@@ -190,5 +227,5 @@ def summary(r=None):
             "adoption_rows": {rid: v.get("adoption_status") for rid, v in adoption_rows(r).items()},
             "adoption_scope_rule": adoption_policy(r)["scope_rule"],
             "agency_tags_ratified": agency_tags(r), "cell_flags": sorted(cell_flags(r)),
-            "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4) and 2026-09-16 (R6-5..R6-12); applied in memory; "
+            "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4) and 2026-09-16 (R6-5..R6-16); applied in memory; "
                       "workbook not written (deltas pending ratification)"}

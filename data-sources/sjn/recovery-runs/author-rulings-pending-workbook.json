@@ -1,23 +1,38 @@
 {
  "schema": "sjn-gate6-author-rulings/1",
  "what": "Author rulings the Gate 6 harness applies IN MEMORY until the workbook carries them. Nothing here writes to the workbook. Each ruling names the workbook change that would supersede it; once the workbook holds that change the harness reads the workbook and checks it agrees (scripts/sjn_recovery/rulings.py).",
- "source": "wop-scratch/WoP_SJN_B4_ReviewAddendum_20260913.md §5 and wop-scratch/WoP_SJN_Gate6_Session6_Prompt_20260913.txt (author rulings, 2026-09-13)",
+ "source": "wop-scratch/WoP_SJN_B4_ReviewAddendum_20260913.md §5 and wop-scratch/WoP_SJN_Gate6_Session6_Prompt_20260913.txt (author rulings, 2026-09-13); wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set)",
  "rulings": {
   "R6-1_required_subject": {
    "ruled": "2026-09-13",
    "rule": "A predicate is satisfied when the passage asserts it of the Son or the Holy Spirit AS DIVINE. Christ's human nature stays excluded.",
    "supersede_with": "Inherited 57: a 'Required subject' column (all 57 families; these five retyped). Until then registry.subject_scope() derives the other 52.",
    "families": {
-    "RNR-H06": {"predicate": "Lord", "ruling_example": "\"the Lord, the giver of life\" — Lord, of the Spirit",
-                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"},
-    "RNR-H21": {"predicate": "Life-giving", "ruling_example": "\"the Lord, the giver of life\" — Life-giving, of the Spirit",
-                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"},
-    "RNR-H26": {"predicate": "Judge", "ruling_example": "\"to judge the living and the dead\" — Judge, of the Son",
-                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"},
-    "RNR-H27": {"predicate": "Savior", "ruling_example": "\"for us men and for our salvation\" — Savior, of the Son",
-                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"},
-    "RNR-H38": {"predicate": "Not made", "ruling_example": "\"begotten, not made\" — Not made, of the Son",
-                "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"begotten, not made\" of the Son; not the Church, not humanity, not Christ's human nature as such)"}
+    "RNR-H06": {
+     "predicate": "Lord",
+     "ruling_example": "\"the Lord, the giver of life\" — Lord, of the Spirit",
+     "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
+    },
+    "RNR-H21": {
+     "predicate": "Life-giving",
+     "ruling_example": "\"the Lord, the giver of life\" — Life-giving, of the Spirit",
+     "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"the Lord, the giver of life\" of the Spirit; not the Church, not humanity, not Christ's human nature as such)"
+    },
+    "RNR-H26": {
+     "predicate": "Judge",
+     "ruling_example": "\"to judge the living and the dead\" — Judge, of the Son",
+     "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"to judge the living and the dead\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
+    },
+    "RNR-H27": {
+     "predicate": "Savior",
+     "ruling_example": "\"for us men and for our salvation\" — Savior, of the Son",
+     "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"for us men and for our salvation\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
+    },
+    "RNR-H38": {
+     "predicate": "Not made",
+     "ruling_example": "\"begotten, not made\" — Not made, of the Son",
+     "required_subject": "GOD (the one God: the Father, or the Son or the Holy Spirit where the passage asserts the predicate of that person as divine — e.g. \"begotten, not made\" of the Son; not the Church, not humanity, not Christ's human nature as such)"
+    }
    }
   },
   "R6-2_hedged_partial": {
@@ -25,9 +40,26 @@
    "rule": "If the verifier's own floor_reason states that the passage does not assert the predicate, the floor is WORD_ONLY. PARTIAL is for a passage that asserts the predicate INCOMPLETELY, never for one that asserts a NEIGHBOURING proposition.",
    "refused_cells": {
     "note": "2c: refused either way. Every candidate on these three Baptist cards rests on \"incomprehensible\" read as a neighbouring apophatic claim; their floor is set to WORD_ONLY by this ruling (floor_capped_by AUTHOR_RULING_R6-2).",
-    "Q-382": {"predicate": "Ineffable", "candidates": ["Q-382-p1-BSR-BA-02-1", "Q-382-p1-BSR-BA-02-2"]},
-    "Q-390": {"predicate": "Inscrutable", "candidates": ["Q-390-p1-BSR-BA-02-1", "Q-390-p1-BSR-BA-02-2"]},
-    "Q-454": {"predicate": "Greater dissimilarity than similarity", "candidates": ["Q-454-p1-BSR-BA-02-1"]}
+    "Q-382": {
+     "predicate": "Ineffable",
+     "candidates": [
+      "Q-382-p1-BSR-BA-02-1",
+      "Q-382-p1-BSR-BA-02-2"
+     ]
+    },
+    "Q-390": {
+     "predicate": "Inscrutable",
+     "candidates": [
+      "Q-390-p1-BSR-BA-02-1",
+      "Q-390-p1-BSR-BA-02-2"
+     ]
+    },
+    "Q-454": {
+     "predicate": "Greater dissimilarity than similarity",
+     "candidates": [
+      "Q-454-p1-BSR-BA-02-1"
+     ]
+    }
    }
   },
   "R6-3_retire_BSR-EO-03": {
@@ -44,8 +76,12 @@
    "implemented_in": "scripts/sjn_recovery/allocation.py (same_text_key, allocate)",
    "same_text_rows": {
     "note": "Rows that publish ONE text with DIFFERENT wording, so the textual guard cannot see them. Where both survive on a card the named row takes the slot and the other is recorded as a parallel witness, whatever the wording (Eastern Orthodox launch prompt, Task 2d: 'the higher-tier resolution takes the slot'). PENDING the author's confirmation of each pair.",
-    "BSR-EO-14": {"same_text_as": "BSR-EO-07", "text": "Divine Liturgy of St John Chrysostom", "precedence": "BSR-EO-07 takes the slot (EO consultation ladder Tier A; BSR-EO-14 is Tier B, 'the durable alternate to BSR-EO-07')",
-                  "evidence": "BSR-EO-14 reception_note: 'Registered alongside BSR-EO-07 so the branch does not depend on a single host again … WORDING DIFFERS from BSR-EO-07'; draft_recommendation: 'the durable alternate to BSR-EO-07'"}
+    "BSR-EO-14": {
+     "same_text_as": "BSR-EO-07",
+     "text": "Divine Liturgy of St John Chrysostom",
+     "precedence": "BSR-EO-07 takes the slot (EO consultation ladder Tier A; BSR-EO-14 is Tier B, 'the durable alternate to BSR-EO-07')",
+     "evidence": "BSR-EO-14 reception_note: 'Registered alongside BSR-EO-07 so the branch does not depend on a single host again … WORDING DIFFERS from BSR-EO-07'; draft_recommendation: 'the durable alternate to BSR-EO-07'"
+    }
    }
   },
   "R6-5_bsr_eo_01_retype": {
@@ -62,8 +98,18 @@
     "eo_ladder_tier": "B",
     "creed_resolution": "PHRASE"
    },
-   "independence_group": {"HOPKO-OF-VOL1": ["BSR-EO-01", "BSR-EO-02"]},
-   "chunk_level_creed_resolution_allowed_rows": ["BSR-EO-07", "BSR-EO-14", "BSR-RC-06", "BSR-RC-08"],
+   "independence_group": {
+    "HOPKO-OF-VOL1": [
+     "BSR-EO-01",
+     "BSR-EO-02"
+    ]
+   },
+   "chunk_level_creed_resolution_allowed_rows": [
+    "BSR-EO-07",
+    "BSR-EO-14",
+    "BSR-RC-06",
+    "BSR-RC-08"
+   ],
    "fixture": "TP-060 keeps registry_id BSR-EO-01; the fixture is rebuilt as a new run tp-4 (truepos build). tp-1 is never hand-edited.",
    "report_required": "count of BSR-EO-01's 38 creed-bearing sentences whose creed phrase matches BSR-EO-07 / BSR-EO-14 / BSR-EO-12 verbatim under the Task-2 normalization",
    "conditional_trigger": "if a meaningful share fail for translation differences, STOP and propose registering oca.org/orthodoxy/prayers/symbol-of-faith as a new CONCILIAR creed row (author ratification required; do not fetch, register or change the chunk store)",
@@ -72,64 +118,118 @@
   "R6-6_adoption_field": {
    "ruled": "2026-09-16",
    "rule": "Clause 3: an expository citation asserts at the first catechetical tier only where the text itself was adopted or promulgated by a competent church authority. Four new registry columns record it; UNVERIFIED fails closed; a department imprint is not adoption.",
-   "new_columns": ["adoption_status", "adoption_act", "adoption_body_scope", "adoption_verified"],
-   "adoption_status_values": ["ADOPTED", "ISSUED_UNADOPTED", "NOT_APPLICABLE", "UNVERIFIED"],
-   "adoption_body_scope_values": ["ONE_CHURCH", "MULTILATERAL", "WHOLE_BRANCH"],
+   "new_columns": [
+    "adoption_status",
+    "adoption_act",
+    "adoption_body_scope",
+    "adoption_verified"
+   ],
+   "adoption_status_values": [
+    "ADOPTED",
+    "ISSUED_UNADOPTED",
+    "NOT_APPLICABLE",
+    "UNVERIFIED"
+   ],
+   "adoption_body_scope_values": [
+    "ONE_CHURCH",
+    "MULTILATERAL",
+    "WHOLE_BRANCH"
+   ],
    "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
    "scope_rule_meaning": "one body's act confers the first catechetical tier branch-wide; the card must state the adopting body and its reach",
    "department_imprint_counts_as_adoption": false,
    "department_imprint_exception": "only where a statute delegating catechetical approval to that department is found and cited",
    "unverified_behavior": "FAIL_CLOSED",
    "exposition_resolution": "ADOPTED -> the row's tier (CATECHETICAL); ISSUED_UNADOPTED or UNVERIFIED -> OFFICIAL_EXPOSITION",
-   "migration_order": ["every row gets the four columns",
-                       "NOT_APPLICABLE mechanically where the bare tier is CONCILIAR or CONFESSIONAL and the row is not a catechism by title",
-                       "ADOPTED only for the rows the author named, each with its adoption_act",
-                       "BSR-EO-01 and BSR-EO-02 ISSUED_UNADOPTED",
-                       "everything else UNVERIFIED"],
+   "migration_order": [
+    "every row gets the four columns",
+    "NOT_APPLICABLE mechanically where the bare tier is CONCILIAR or CONFESSIONAL and the row is not a catechism by title",
+    "ADOPTED only for the rows the author named, each with its adoption_act",
+    "BSR-EO-01 and BSR-EO-02 ISSUED_UNADOPTED",
+    "everything else UNVERIFIED"
+   ],
    "rows": {
-    "BSR-EO-01": {"adoption_status": "ISSUED_UNADOPTED", "adoption_act": "", "adoption_body_scope": "",
-                  "adoption_verified": "oca.org series page + OCA 2016 news (one publisher), Internet Archive record, two web searches; OCA Holy Synod minutes NOT searched"},
-    "BSR-EO-02": {"adoption_status": "ISSUED_UNADOPTED", "adoption_act": "", "adoption_body_scope": "",
-                  "adoption_verified": "oca.org series page + OCA 2016 news (one publisher), Internet Archive record, two web searches; OCA Holy Synod minutes NOT searched"},
-    "BSR-EO-04": {"adoption_status": "ADOPTED", "adoption_body_scope": "ONE_CHURCH",
-                  "adoption_act": "Most Holy Governing Synod, 'examined and approved'; registered host title page prints Moscow 1830, registry and Schaff give 1839 - record both",
-                  "adoption_verified": "pravoslavieto.com title page (the registered host) and Schaff, Creeds of Christendom I section ix (ccel.org): two publishers. Schaff's all-Patriarchs claim is a single secondary source, unverified, and is NOT relied on.",
-                  "adopting_body": "Most Holy Governing Synod of the Russian Church"},
-    "BSR-RC-01": {"adoption_status": "ADOPTED", "adoption_body_scope": "WHOLE_BRANCH",
-                  "adoption_act": "Fidei Depositum, 1992", "adoption_verified": "author ruling 2026-09-16", "adopting_body": "the Apostolic See"},
-    "BSR-RP-02": {"adoption_status": "ADOPTED", "adoption_body_scope": "WHOLE_BRANCH",
-                  "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
-                  "adoption_verified": "author ruling 2026-09-16", "adopting_body": "the confessing church"},
-    "BSR-LU-01": {"adoption_status": "ADOPTED", "adoption_body_scope": "WHOLE_BRANCH",
-                  "adoption_act": "the catechism material of the Book of Concord is adopted by the confessional acts that type it CONFESSIONAL",
-                  "adoption_verified": "author ruling 2026-09-16", "adopting_body": "the confessing church"}
+    "BSR-EO-01": {
+     "adoption_status": "ISSUED_UNADOPTED",
+     "adoption_act": "",
+     "adoption_body_scope": "",
+     "adoption_verified": "oca.org series page + OCA 2016 news (one publisher), Internet Archive record, two web searches; OCA Holy Synod minutes NOT searched"
+    },
+    "BSR-EO-02": {
+     "adoption_status": "ISSUED_UNADOPTED",
+     "adoption_act": "",
+     "adoption_body_scope": "",
+     "adoption_verified": "oca.org series page + OCA 2016 news (one publisher), Internet Archive record, two web searches; OCA Holy Synod minutes NOT searched"
+    },
+    "BSR-EO-04": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "ONE_CHURCH",
+     "adoption_act": "Most Holy Governing Synod, 'examined and approved'; registered host title page prints Moscow 1830, registry and Schaff give 1839 - record both",
+     "adoption_verified": "pravoslavieto.com title page (the registered host) and Schaff, Creeds of Christendom I section ix (ccel.org): two publishers. Schaff's all-Patriarchs claim is a single secondary source, unverified, and is NOT relied on.",
+     "adopting_body": "Most Holy Governing Synod of the Russian Church"
+    },
+    "BSR-RC-01": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "WHOLE_BRANCH",
+     "adoption_act": "Fidei Depositum, 1992",
+     "adoption_verified": "author ruling 2026-09-16",
+     "adopting_body": "the Apostolic See"
+    },
+    "BSR-RP-02": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "WHOLE_BRANCH",
+     "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+     "adoption_verified": "author ruling 2026-09-16",
+     "adopting_body": "the confessing church"
+    },
+    "BSR-LU-01": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "WHOLE_BRANCH",
+     "adoption_act": "the catechism material of the Book of Concord is adopted by the confessional acts that type it CONFESSIONAL",
+     "adoption_verified": "author ruling 2026-09-16",
+     "adopting_body": "the confessing church"
+    }
    },
-   "supersede_with": "Branch Source Registry: the four adoption_* columns on every row"
+   "supersede_with": "Branch Source Registry: the four adoption_* columns on every row",
+   "amended_by": "R6-16 (2026-09-16): fail-closed demotion applies only to bare-tier CATECHETICAL rows"
   },
   "R6-7_compound_spirit_predication": {
    "ruled": "2026-09-16",
    "rule": "The enumerated form \"the Father X, the Son X, the Holy Spirit X\" satisfies a family typed THE HOLY SPIRIT only if the cited phrase of at most 15 words ITSELF contains the Spirit's name and the predicate word. The collective form \"one God, Father, Son and Holy Spirit, is X\" does not satisfy it. Doxologies stay WORD_ONLY under verifier line 4.",
    "enforced_in": "verifier gate6-v1.4 JOINT PREDICATION line, plus a code guard: on a family whose required_subject is THE HOLY SPIRIT an accept whose normalized phrase carries no Spirit-name token is refused (WRONG_SUBJECT)",
-   "re_verify": {"Q-277": ["BSR-AN-03", "BSR-AN-04"]},
+   "re_verify": {
+    "Q-277": [
+     "BSR-AN-03",
+     "BSR-AN-04"
+    ]
+   },
    "supersede_with": "the verifier prompt version in the workbook's run record"
   },
   "R6-8_passive_agency": {
    "ruled": "2026-09-16",
    "rule": "A passive agent phrase (\"by the Holy Spirit\") satisfies ACTION families when the predicate is the action named, and NEVER satisfies ATTRIBUTE families. Never infer an attribute from an action.",
-   "agency_classes": ["ACTION", "ATTRIBUTE"],
-   "ratified_tags": {"RNR-H35": "ATTRIBUTE"},
-   "ratified_tags_note": "Q-274 (Eternal power and might, family RNR-H35) is ATTRIBUTE by ruling. Every other Spirit family's tag is PROPOSED only, in data-sources/sjn/recovery-runs/spirit-family-agency-tags-PROPOSED.json, and is NOT in force.",
+   "agency_classes": [
+    "ACTION",
+    "ATTRIBUTE"
+   ],
+   "ratified_tags": {
+    "RNR-H35": "ATTRIBUTE"
+   },
+   "ratified_tags_note": "SUPERSEDED BY R6-14 (2026-09-16): all seven Spirit-family tags are ratified and live in data-sources/sjn/recovery-runs/spirit-family-agency-tags.json, which rulings.agency_tags reads. The PROPOSED file is retired (git history). This key keeps only what R6-8 itself ratified.",
    "fail_closed": "until the author ratifies the tags the verifier receives no agency class for any other family, so the AGENCY line fails closed (an agency phrase never satisfies the family)",
-   "blocks": "EASTERN_ORTHODOX_LAUNCH",
+   "blocks": "DISCHARGED_BY_R6-14",
    "supersede_with": "Inherited 57: an 'Agency class' column (ACTION|ATTRIBUTE) on every family whose required subject is or includes the Holy Spirit"
   },
   "R6-9_second_tier_rank": {
    "ruled": "2026-09-16",
    "rule": "Unadopted or unverified exposition resolves to the existing OFFICIAL_EXPOSITION rank, with a display qualifier. No APP CONFIG change.",
    "assert": "OFFICIAL_EXPOSITION ranks directly below CATECHETICAL in APP CONFIG authority_tier_rank; the harness asserts it and stops if it does not",
-   "card_disclosure": {"UNVERIFIED": "adoption unverified", "ISSUED_UNADOPTED": "not officially adopted",
-                       "catechism_qualifier": "catechism, not synodally adopted",
-                       "adopted_narrow_scope": "the card names the adopting body and its reach, e.g. \"approved by the Russian Holy Synod (one church)\""},
+   "card_disclosure": {
+    "UNVERIFIED": "adoption unverified",
+    "ISSUED_UNADOPTED": "not officially adopted",
+    "catechism_qualifier": "catechism, not synodally adopted",
+    "adopted_narrow_scope": "the card names the adopting body and its reach, e.g. \"approved by the Russian Holy Synod (one church)\""
+   },
    "bare_tier": "bare_tier() must ignore the qualifier",
    "supersede_with": "nothing in APP CONFIG; the workbook's adoption columns (R6-6) carry it"
   },
@@ -142,10 +242,17 @@
   "R6-11_verifier_version": {
    "ruled": "2026-09-16",
    "rule": "gate6-v1.4 = gate6-v1.3 + the creed lines (Creed ruling drafts, Part A) + the R6-7 JOINT PREDICATION and R6-8 AGENCY lines. The pending inference-neighbouring line is renamed gate6-v1.5 and measured against v1.4.",
-   "regression_set": ["tp-4", "Q-161 RC-01-3", "Q-277 AN-03", "Q-277 AN-04", "the 13 non-creedal IDIOM rejections at HEAD"],
+   "regression_set": [
+    "tp-4",
+    "Q-161 RC-01-3",
+    "Q-277 AN-03",
+    "Q-277 AN-04",
+    "the 13 non-creedal IDIOM rejections at HEAD"
+   ],
    "gate": "recall must hold at or above 0.967 with no new false accept on the 13 idiom rejections; otherwise gate6-v1.3 stays in force",
    "eo_prompt_pins": "gate6-v1.4",
-   "supersede_with": "the run record's verifier prompt version"
+   "supersede_with": "the run record's verifier prompt version",
+   "outcome": "session 7: gate6-v1.4 MEASURED and FAILED (tp-4 recall 0.933; Q-160 flip); never in force. Superseded by R6-13 (gate6-v1.5). The inference line is renamed gate6-v1.6."
   },
   "R6-12_q290_unbegotten": {
    "ruled": "2026-09-16",
@@ -159,6 +266,85 @@
    "eo_packet_requirement": "at the EO packet review, list any independent witness for Unbegotten found in Tier A or Tier B, or state that none was found",
    "public_app": "unchanged this session; the disclosure is queued for the next workbook version",
    "supersede_with": "the cell's public disclosure text in the workbook"
+  },
+  "R6-13_verifier_repair": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set)",
+   "rule": "gate6-v1.5 = gate6-v1.4 minus the JOINT PREDICATION sentence \"A doxology naming the three persons remains a fixed formula under line 4.\" JOINT PREDICATION and AGENCY are sent only to families whose required_subject is or includes THE HOLY SPIRIT. The inference line is renamed gate6-v1.6.",
+   "deleted_sentence": "A doxology naming the three persons remains a fixed formula under line 4.",
+   "scope": "prompts.subject_includes_the_spirit — the seven families of spirit-family-agency-tags.json",
+   "variants": {
+    "gate6-v1.5/spirit": "v1.4 text with the sentence deleted",
+    "gate6-v1.5/base": "v1.3 + the creed lines (formula carve-out, flag tail, creedal silence); no JOINT PREDICATION, no AGENCY"
+   },
+   "inference_line_version": "gate6-v1.6",
+   "measurement_rule": {
+    "applies": "from 2026-09-16 on, to every verifier-version measurement",
+    "rule": [
+     "Run each measured set once per version.",
+     "Any item whose verdict (accept vs reject) differs between the baseline and the candidate version gets 3 replicates under EACH version.",
+     "The gate reads the replicate MAJORITY for those items."
+    ],
+    "q160": "Q-160 is replicated 3x under both versions regardless of the single runs",
+    "documented_in": "docs/gate6/WoP_SJN_Gate6_MeasurementRule.md"
+   },
+   "supersede_with": "the run record's verifier prompt version and variant"
+  },
+  "R6-14_agency_tags_ratified": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set)",
+   "tags": {
+    "RNR-H34": "ACTION",
+    "RNR-H35": "ATTRIBUTE",
+    "RNR-H06": "ATTRIBUTE",
+    "RNR-H21": "ACTION",
+    "RNR-H26": "ACTION",
+    "RNR-H27": "ATTRIBUTE",
+    "RNR-H38": "ATTRIBUTE"
+   },
+   "changed_from_proposal": {
+    "RNR-H27": {
+     "proposed": "ACTION",
+     "ratified": "ATTRIBUTE",
+     "why": "Savior is a title; an instrumental \"by the renewing of the Holy Ghost\" does not make the Spirit Savior. The Spirit is agent of renewing, the means; the one who saves is God."
+    }
+   },
+   "file": "data-sources/sjn/recovery-runs/spirit-family-agency-tags.json",
+   "fail_closed": "families not listed get no class",
+   "discharges": "EO launch blocker (a)",
+   "supersede_with": "Inherited 57: an 'Agency class' column (ACTION|ATTRIBUTE) on every family whose required subject is or includes the Holy Spirit"
+  },
+  "R6-15_creed_resolution": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set)",
+   "rule": "Task 1d is re-run against EO-07, EO-14 and EO-12 only. A phrase matching several registered texts in a branch resolves to the HIGHEST tier among them. EO-09's eligibility as a registered creed text awaits the author's ruling after Task 3c.",
+   "precedence": "HIGHEST_TIER_AMONG_MATCHING_REGISTERED_TEXTS (not the longest match)",
+   "task1d_rerun_texts": [
+    "BSR-EO-07",
+    "BSR-EO-14",
+    "BSR-EO-12"
+   ],
+   "eo09_registered_creed_text": "PENDING AUTHOR RULING (EO launch blocker (e)); unchanged in code",
+   "supersede_with": "APP CONFIG: the creed-resolution precedence rule"
+  },
+  "R6-16_adoption": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set)",
+   "rule": "The session 7 boundary is ratified (fail-closed applies only to bare-tier CATECHETICAL rows). The ADOPTED proposals (RC-07, AN-02, AN-04, AN-05, LU-03, RP-03, RP-05) and BA-03 are verified under the Source Verification Standard in Cowork before any row changes. The seven finished packets are rebuilt ONCE, after the author ratifies that verification. Not an EO blocker.",
+   "r6_6_amendment": "unverified_behavior FAIL_CLOSED applies only to rows whose bare tier is CATECHETICAL (registry.exposition_tier)",
+   "verify_in_cowork": [
+    "BSR-RC-07",
+    "BSR-AN-02",
+    "BSR-AN-04",
+    "BSR-AN-05",
+    "BSR-LU-03",
+    "BSR-RP-03",
+    "BSR-RP-05",
+    "BSR-BA-03"
+   ],
+   "packet_rebuild": "HELD until the author ratifies the Cowork adoption verification; then rebuilt ONCE",
+   "blocks_eo": false,
+   "supersede_with": "the workbook's adoption columns"
   }
  }
 }
