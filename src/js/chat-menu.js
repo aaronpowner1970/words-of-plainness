@@ -45,7 +45,12 @@
             label.textContent = v.label || ('Article ' + v.n);
             label.hidden = false;
         }
-        if (time) { time.textContent = mmss(v.duration_s); }
+        if (time) {
+            // Match the card: a film shown in part names the part it will play.
+            time.textContent = (v.parts && v.parts[0] && v.parts[0].end)
+                ? (mmss(v.parts[0].end) + ' · ' + v.parts[0].label + ' (' + mmss(v.duration_s) + ' full)')
+                : mmss(v.duration_s);
+        }
         if (open) {
             open.setAttribute('href', v.href);
             open.textContent = 'Open';

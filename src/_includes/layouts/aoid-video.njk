@@ -138,9 +138,11 @@
              reading gives the film something to land against. It is deliberately
              not a field: nothing is collected, nothing is graded. The reader
              answers in their own head, or aloud to the room. -->{#
-             Public pages only: in a chat the host asks it out loud, and a
-             printed copy of the question on screen would pre-empt him. #}
-        {% if not chat %}<p class="aoid-entry-propose">Before you enter: in a sentence of your own, what would you expect a declaration titled “{{ video.title }}” to affirm? Hold your answer; the film will give you something to compare it with.</p>{% endif %}
+             On the chat pages too: the entry card is what the room is looking
+             at while people are still arriving, which is the moment the
+             question is worth asking. The host reads it out; the screen holds
+             it up. #}
+        <p class="aoid-entry-propose">Before you enter: in a sentence of your own, what would you expect a declaration titled “{{ video.title }}” to affirm? Hold your answer; the film will give you something to compare it with.</p>
         <button id="aoidEnterBtn" type="button">Enter</button>
     </div>
 </div>
@@ -173,6 +175,18 @@ window.WOP_AOID_VIDEO = {
 </script>
 <script src="/js/apparatus-common.js?v={{ site.version }}"></script>
 <script src="/js/aoid-video.js?v={{ site.version }}"></script>{% if chat %}
+<script>
+/* The ONE thing chat-session.js is told about the page it is on; everything
+   else it learns from the player events. */
+window.WOP_CHAT = {
+    kind: "reading",
+    title: {{ video.title | dump | safe }},
+    micNoun: "short video",
+    parts: null,
+    correctionUrl: "",
+    journalUrl: ""
+};
+</script>
 <script src="/js/chat-session.js?v={{ site.version }}"></script>{% endif %}
 <script src="https://www.youtube.com/iframe_api"></script>
 {% endblock %}

@@ -7,12 +7,18 @@
    arrive all evening — so the SCREEN has to answer "why can't I talk?"
    without anyone having to ask it.
 
-   This script owns the wings, the mic state, focus view and the host
-   keys. It owns nothing else. It never reaches inside aoid-video.js or
-   creation.js: those two dispatch 'wop:player' and 'wop:state', and
-   those two events are the whole interface. So the public pages carry
-   none of this, and the follow / dock / worship-gate behaviour the
-   chat pages inherit is the same code, not a second copy.
+   This script owns the wings, the mic state, the part gate, focus view
+   and the host keys. It owns nothing else. It never reaches inside
+   aoid-video.js or creation.js: those two dispatch 'wop:player',
+   'wop:state' and (on the creation layout) 'wop:dock', and those three
+   events are the whole interface. So the public pages carry none of
+   this, and the follow / dock / worship-gate behaviour the chat pages
+   inherit is the same code, not a second copy.
+
+   Everything page-specific arrives in window.WOP_CHAT (see the chat
+   branch of layouts/aoid-video.njk and layouts/creation.njk). The part
+   break in particular is DATA — src/_data/chat_videos.json — never a
+   number in this file.
 
    HOST CONTROLS, deliberately invisible
      M   open the mics early, or close them again; pressing M a third
@@ -27,6 +33,21 @@
     var root = document.documentElement;
     if (!document.querySelector('.chat-stage-row')) { return; }
 
+    var CFG = window.WOP_CHAT || {};
+    var TITLE = CFG.title || '';
+
+    /* ── The part gate ───────────────────────────────────────────
+       "His Work and Glory" is really two films: the Creation account in
+       the words of scripture, then a prayer of gratitude built entirely
+       out of biblical quotation. The host usually shows the first only,
+       so the evening stops at the break and the prayer stays one click
+       away. The boundary is a real ten-second silence in the reading,
+       and it lives in chat_videos.json — this file only reads it. */
+    var PARTS = CFG.parts || null;
+    var PART1_END = (PARTS && PARTS[0] && typeof PARTS[0].end === 'number') ? PARTS[0].end : null;
+    var HAS_PARTS = PART1_END !== null;
+    var PART2_SUFFIX = (PARTS && PARTS[1] && PARTS[1].titleSuffix) || '';
+
     /* ── Wiring ──────────────────────────────────────────────────
        Every live value is written through [data-chat] rather than an id,
        because the badge, the time-left line and the message each exist
@@ -36,12 +57,15 @@
     function all(hook) { return [].slice.call(document.querySelectorAll('[data-chat="' + hook + '"]')); }
     function setText(hook, text) { all(hook).forEach(function (el) { el.textContent = text; }); }
 
-    /* Four messages, not two, because the host's override makes two more states
-       real. The brief's two describe the film running (muted) and the film
-       finished (open) — say either one in the wrong state and the screen tells
-       the room something untrue: "The video has ended" over a film that is
-       still playing is the exact failure this display exists to prevent. */
-    var MSG_MUTED = 'All visitor mics are turned off while this short video plays. Mics will be turned on at the end for Q/A + discussion.';
+    /* Four messages, not two. The brief's two describe the film running
+       (muted) and the film finished (open); the host's override makes two
+       more states real. Say either of the first two in the wrong state and
+       the screen tells the room something untrue — "The video has ended"
+       over a film that is still playing is the exact failure this display
+       exists to prevent. The noun is per page: a ninety-second reading is a
+       "short video", the Creation film is not. */
+    var NOUN = CFG.micNoun || 'short video';
+    var MSG_MUTED = 'All visitor mics are turned off while this ' + NOUN + ' plays. Mics will be turned on at the end for Q/A + discussion.';
     var MSG_OPEN = 'The video has ended. Mics are on for Q/A + discussion.';
     var MSG_OPEN_EARLY = 'Mics are on early, while the film is still playing. Questions and discussion are welcome.';
     var MSG_MUTED_AFTER = 'Visitor mics are off for the moment. They will be back on shortly.';
@@ -51,27 +75,42 @@
     var MSG_OPEN_EARLY_SHORT = 'Mics on — the film is still playing.';
     var MSG_MUTED_AFTER_SHORT = 'Mics are off for the moment.';
 
-    function messageLong(open) {
-        if (open) { return ended ? MSG_OPEN : MSG_OPEN_EARLY; }
-        return ended ? MSG_MUTED_AFTER : MSG_MUTED;
-    }
-    function messageShort(open) {
-        if (open) { return ended ? MSG_OPEN_SHORT : MSG_OPEN_EARLY_SHORT; }
-        return ended ? MSG_MUTED_AFTER_SHORT : MSG_MUTED_SHORT;
-    }
-
     /* ── Session state ───────────────────────────────────────────
        `override` is the host's thumb on the scale: null means follow the
-       film, true/false force open/muted. Keeping it separate from `ended`
-       is what lets a third press of M return to following the film
-       rather than latching on the last thing the host chose. */
+       film, true/false force open/muted. Keeping it separate from the
+       film's own state is what lets a third press of M return to
+       following the film rather than latching on the last choice. */
     var player = null;
     var override = null;
-    var ended = false;
+    var ended = false;          // the real end of the video
+    var partEnded = false;      // stopped at the Part 1 break
     var started = false;
     var pollTimer = null;
+    var gateTimer = null;
 
-    function micIsOpen() { return override === null ? ended : override; }
+    /* Part-gate state. `armed` is what makes seeking past the break by hand
+       harmless: once the gate has fired it stays disarmed until the viewer is
+       back before the break, so the film never stops the room twice.
+       `countingFull` is what "Continue to the prayer" turns on — from there
+       the clock runs to the real end, not to the break. */
+    var mode = 'part1';
+    var armed = true;
+    var countingFull = false;
+
+    var MODE_KEY = 'wop-chat-mode:' + window.location.pathname;
+    var FOCUS_KEY = 'wop-chat-focus:' + window.location.pathname;
+
+    if (HAS_PARTS) {
+        try {
+            var saved = window.sessionStorage.getItem(MODE_KEY);
+            if (saved === 'full' || saved === 'part1') { mode = saved; }
+        } catch (_) {}
+    } else {
+        mode = 'full';
+    }
+
+    function atEnd() { return ended || partEnded; }
+    function micIsOpen() { return override === null ? atEnd() : override; }
 
     function duration() {
         try { return (player && player.getDuration) ? (player.getDuration() || 0) : 0; }
@@ -82,29 +121,51 @@
         catch (_) { return 0; }
     }
 
+    /* The clock the room is being shown. In Part 1 mode it runs to the break,
+       so "About 3 min left" means three minutes until the discussion — not
+       until a prayer the host was never going to play. */
+    function effectiveEnd() {
+        if (HAS_PARTS && mode === 'part1' && !countingFull) { return PART1_END; }
+        return duration();
+    }
+
     function mmss(s) {
         s = Math.max(0, Math.round(s));
         return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
     }
 
-    /* The time-left line is the one piece of text a latecomer reads to decide
-       whether to wait quietly or unmute. It therefore says something true in
-       every state, including before the film has started and after it ends. */
+    /* The time-left line is what a latecomer reads to decide whether to wait
+       quietly or unmute, so it has to say something true in every state —
+       including before the film starts, at the part break, and after the end. */
     function timeLeftText() {
         if (ended) { return 'Film has ended'; }
+        if (partEnded) { return 'Part 1 has ended'; }
         if (!started) { return 'Starting shortly'; }
 
-        var dur = duration();
-        var left = dur > 0 ? Math.max(0, dur - current()) : 0;
+        var end = effectiveEnd();
+        var left = end > 0 ? Math.max(0, end - current()) : 0;
 
         // Mics opened early: the room can hear itself, so the line has to say
         // the film is still running, and exactly how much of it is left.
         if (override === true) {
-            return dur > 0 ? ('Mics opened early · ' + mmss(left) + ' left') : 'Mics opened early';
+            return end > 0 ? ('Mics opened early · ' + mmss(left) + ' left') : 'Mics opened early';
         }
-        if (dur <= 0) { return 'Starting shortly'; }
+        if (end <= 0) { return 'Starting shortly'; }
         if (left < 60) { return 'Under a minute left · ' + Math.ceil(left) + 's'; }
         return 'About ' + Math.max(1, Math.round(left / 60)) + ' min left';
+    }
+
+    function messageLong(open) {
+        if (open) { return atEnd() ? MSG_OPEN : MSG_OPEN_EARLY; }
+        return atEnd() ? MSG_MUTED_AFTER : MSG_MUTED;
+    }
+    function messageShort(open) {
+        if (open) { return atEnd() ? MSG_OPEN_SHORT : MSG_OPEN_EARLY_SHORT; }
+        return atEnd() ? MSG_MUTED_AFTER_SHORT : MSG_MUTED_SHORT;
+    }
+
+    function titleText() {
+        return (countingFull && PART2_SUFFIX) ? (TITLE + ' · ' + PART2_SUFFIX) : TITLE;
     }
 
     function render() {
@@ -115,10 +176,18 @@
         setText('message', messageLong(open));
         setText('message-short', messageShort(open));
         setText('timeleft', timeLeftText());
+        setText('title', titleText());
 
-        var dur = duration();
-        var pct = dur > 0 ? Math.min(100, Math.max(0, (current() / dur) * 100)) : 0;
-        if (ended) { pct = 100; }
+        if (HAS_PARTS) {
+            setText('mode', mode === 'part1' ? '⇄ Part 1 only' : '⇄ Full film');
+            all('mode').forEach(function (el) {
+                el.setAttribute('aria-label', mode === 'part1' ? 'Switch to the full film' : 'Switch to Part 1 only');
+            });
+        }
+
+        var end = effectiveEnd();
+        var pct = end > 0 ? Math.min(100, Math.max(0, (current() / end) * 100)) : 0;
+        if (atEnd()) { pct = 100; }
         all('meter').forEach(function (el) { el.style.width = pct.toFixed(2) + '%'; });
     }
 
@@ -127,16 +196,129 @@
        film is not running, so a paused room is not polling forever. */
     function startPoll() {
         if (!pollTimer) { pollTimer = window.setInterval(render, 250); }
+        startGate();
         render();
     }
     function stopPoll() {
         if (pollTimer) { window.clearInterval(pollTimer); pollTimer = null; }
+        stopGate();
         render();
+    }
+
+    /* The gate runs on its own, faster interval. At 250 ms the pause could
+       land a quarter-second past the break, and the room would hear the first
+       words of the prayer before the screen stopped. */
+    function startGate() {
+        if (!HAS_PARTS || gateTimer) { return; }
+        gateTimer = window.setInterval(checkGate, 50);
+    }
+    function stopGate() {
+        if (gateTimer) { window.clearInterval(gateTimer); gateTimer = null; }
+    }
+
+    function checkGate() {
+        if (!HAS_PARTS || mode !== 'part1') { return; }
+        var t = current();
+
+        // Back before the break — by a hand seek, or by "Watch Part 1 again".
+        // Re-arm, and put the clock back on Part 1.
+        if (t < PART1_END - 0.05) {
+            armed = true;
+            if (countingFull) { countingFull = false; }
+            if (partEnded) { partEnded = false; hidePartEnd(); }
+            return;
+        }
+        if (countingFull || !armed || partEnded) { return; }
+        if (t >= PART1_END) { firePartEnd(); }
+    }
+
+    function firePartEnd() {
+        armed = false;
+        partEnded = true;
+        // Pause first, then land exactly on the break: pauseVideo on its own
+        // leaves the clock wherever the poll happened to catch it.
+        try { player.pauseVideo(); } catch (_) {}
+        try { player.seekTo(PART1_END, true); } catch (_) {}
+        stopGate();
+        showPartEnd();
+        render();
+    }
+
+    /* ── The part-end overlay ────────────────────────────────────── */
+    var partEndEl = document.getElementById('chatPartEnd');
+    function showPartEnd() {
+        if (!partEndEl) { return; }
+        partEndEl.classList.add('creation-ended--show');
+        partEndEl.setAttribute('aria-hidden', 'false');
+    }
+    function hidePartEnd() {
+        if (!partEndEl) { return; }
+        partEndEl.classList.remove('creation-ended--show');
+        partEndEl.setAttribute('aria-hidden', 'true');
+    }
+
+    all('part-again').forEach(function (b) {
+        b.addEventListener('click', function () {
+            hidePartEnd();
+            partEnded = false;
+            armed = true;
+            countingFull = false;
+            override = null;            // a fresh showing is a fresh stretch of quiet
+            try { player.seekTo(0, true); player.playVideo(); } catch (_) {}
+            render();
+        });
+    });
+
+    all('part-continue').forEach(function (b) {
+        b.addEventListener('click', function () {
+            hidePartEnd();
+            partEnded = false;
+            armed = false;              // already past the break; do not stop again
+            countingFull = true;        // the clock runs to the real end now
+            override = null;            // and the room goes quiet again for the prayer
+            try { player.seekTo(PART1_END, true); player.playVideo(); } catch (_) {}
+            render();
+        });
+    });
+
+    /* ── Mode ────────────────────────────────────────────────────── */
+    all('mode').forEach(function (b) {
+        b.addEventListener('click', function () {
+            setMode(mode === 'part1' ? 'full' : 'part1');
+        });
+    });
+
+    function setMode(m) {
+        mode = m;
+        try { window.sessionStorage.setItem(MODE_KEY, m); } catch (_) {}
+        if (m === 'full') {
+            armed = false;
+            if (partEnded) { partEnded = false; hidePartEnd(); }
+        } else {
+            // Switching back mid-prayer must not rewind the room: the gate only
+            // re-arms if the film is actually still inside Part 1.
+            armed = current() < PART1_END;
+            countingFull = !armed;
+        }
+        if (pollTimer) { startGate(); }
+        render();
+    }
+
+    /* ── YouTube captions ────────────────────────────────────────
+       These films carry their words burned into the picture. YouTube's own
+       caption layer prints them a second time, a few frames out of step, over
+       the top — which on a projector reads as a fault. Off here. The public
+       pages are untouched and keep whatever YouTube serves them. */
+    function killCaptions() {
+        if (!player) { return; }
+        try { player.unloadModule('captions'); } catch (_) {}
+        try { player.unloadModule('cc'); } catch (_) {}
     }
 
     /* ── The film ────────────────────────────────────────────────── */
     window.addEventListener('wop:player', function (e) {
         player = (e.detail && e.detail.player) || null;
+        killCaptions();
         render();
     });
 
@@ -150,13 +332,14 @@
             // Replay after the end: the film is running again, so the mics
             // follow it back to muted unless the host is holding them open.
             ended = false;
+            killCaptions();     // the module reloads itself on some transitions
             startPoll();
         } else if (s === YTS.ENDED) {
             ended = true;
+            partEnded = false;
+            hidePartEnd();
             stopPoll();
         } else {
-            // PAUSED / BUFFERING / CUED: keep the numbers current but stop
-            // the clock, since nothing is advancing.
             if (s === YTS.PAUSED) { stopPoll(); } else { render(); }
         }
     });
@@ -168,10 +351,69 @@
         replay.addEventListener('click', function () {
             override = null;
             ended = false;
+            partEnded = false;
+            countingFull = false;
+            armed = HAS_PARTS;
             started = true;
+            hidePartEnd();
             render();
         });
     }
+
+    /* ── A3 · Correction channel on the film page ────────────────
+       The reading pages build this into their own dock renderer. The creation
+       layout cannot: its dock is creation.js, which stays as it is. So
+       creation.js says WHAT it just painted, through 'wop:dock', and the link
+       is appended from out here. Citations only — a pending scaffold span
+       makes no claim about anyone's tradition, so there is nothing there to
+       correct, exactly as the reading pages leave their neutral state alone. */
+    function esc(s) {
+        return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function correctionHtml(spanId, spanText) {
+        var base = (CFG.correctionUrl || '').trim();
+        if (!base) { return ''; }
+
+        var pageUrl = '';
+        try { pageUrl = window.location.origin + window.location.pathname; } catch (_) {}
+
+        var quoted = (spanText || '').replace(/\s+/g, ' ').trim()
+            .replace(/^[“"]/, '').replace(/[”"]$/, '').trim();
+        if (quoted.length > 240) { quoted = quoted.slice(0, 237) + '…'; }
+
+        var subject = TITLE + ' ' + spanId + ' — possible misrepresentation';
+        var message = TITLE + ', span ' + spanId + '\n' +
+            pageUrl + '\n\n' +
+            (quoted ? 'The line: “' + quoted + '”\n\n' : '') +
+            'What it misrepresents, and the tradition it concerns:\n';
+
+        // The fragment has to stay last for the browser to act on it, so the
+        // query is spliced in ahead of whatever hash the config value carries.
+        var hash = '', q = base;
+        var h = base.indexOf('#');
+        if (h >= 0) { hash = base.slice(h); q = base.slice(0, h); }
+        var sep = q.indexOf('?') >= 0 ? '&' : '?';
+        var href = q + sep +
+            'submission_type=suggestion' +
+            '&subject=' + encodeURIComponent(subject) +
+            '&message=' + encodeURIComponent(message) + hash;
+
+        return '<p class="aoid-correction">' +
+            '<a class="aoid-correction-link" href="' + esc(href) + '">' +
+            'Does this misrepresent your tradition? Tell us</a></p>';
+    }
+
+    window.addEventListener('wop:dock', function (e) {
+        var d = e.detail || {};
+        if (d.kind !== 'citation' || !d.el || !d.el.querySelector) { return; }
+        var body = d.el.querySelector('.ap-body');
+        if (!body || body.querySelector('.aoid-correction-link')) { return; }
+        var quoted = body.querySelector('.ap-span-text');
+        var html = correctionHtml(d.spanId, quoted ? quoted.textContent : '');
+        if (html) { body.insertAdjacentHTML('beforeend', html); }
+    });
 
     /* ── Focus view ──────────────────────────────────────────────
        Not browser fullscreen and not YouTube's: a class on <html> and CSS
@@ -183,8 +425,6 @@
        host page's own follow code keeps measuring real rectangles while it
        is invisible. That is why the transcript is already on the current
        sentence when the host comes back, instead of jumping there. */
-    var FOCUS_KEY = 'wop-chat-focus:' + window.location.pathname;
-
     function focusOn() { return root.classList.contains('chat-focus'); }
 
     function setFocus(on) {
@@ -219,7 +459,7 @@
             e.preventDefault();
             // Follow → overridden to the opposite of what the film wants →
             // follow again. Two presses always get back to automatic.
-            override = (override === null) ? !ended : null;
+            override = (override === null) ? !atEnd() : null;
             render();
         } else if (k === 'f') {
             e.preventDefault();

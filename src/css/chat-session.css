@@ -157,11 +157,19 @@
     color: var(--cream-dark, #D4C8B0);
 }
 
-/* Focus control: a text button, not a filled one. It is the host's, and the
-   room should not read it as something it is meant to press. */
-.chat-focus-btn {
-    align-self: flex-start;
+/* Host controls: text buttons, not filled ones. They are the host's, and the
+   room should not read either as something it is meant to press. They sit
+   together at the bottom of the status box, out of the reading order. */
+.chat-wing-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.9rem;
     margin: 0.8em 0 clamp(0.5rem, 1.2vh, 1rem) clamp(10px, 1.2vw, 18px);
+}
+.chat-focus-btn,
+.chat-mode-btn {
+    align-self: flex-start;
     padding: 0.25em 0;
     background: none;
     border: 0;
@@ -176,7 +184,14 @@
     cursor: pointer;
 }
 .chat-focus-btn:hover,
-.chat-focus-btn:focus-visible { opacity: 1; color: var(--gold-light, #D4A84A); }
+.chat-focus-btn:focus-visible,
+.chat-mode-btn:hover,
+.chat-mode-btn:focus-visible { opacity: 1; color: var(--gold-light, #D4A84A); }
+
+/* The mode switch reads as the mode currently RUNNING, with the arrows saying
+   it can be changed. A host glancing at the box wants to know what the room is
+   about to get, not what a click would do to it. */
+.chat-mode-btn { white-space: nowrap; }
 
 /* ── The band (mockup F) ─────────────────────────────────────
    One row under the video carrying the same facts, for the widths where
@@ -223,8 +238,12 @@
         color: var(--cream-dark, #D4C8B0);
     }
     .chat-band-host { opacity: 0.75; }
-    /* Focus sits at the right end of the band. */
-    .chat-focus-btn--band { margin: 0 0 0 auto; align-self: center; }
+    /* Focus sits at the right end of the band, with the mode switch beside it. */
+    .chat-mode-btn--band { margin: 0 0 0 auto; align-self: center; }
+    .chat-focus-btn--band { margin: 0; align-self: center; }
+    /* With no mode switch on the page, Focus takes the right end itself. */
+    .chat-band > .chat-focus-btn--band:not(.chat-mode-btn--band) { margin-left: auto; }
+    .chat-mode-btn--band ~ .chat-focus-btn--band { margin-left: 0; }
 }
 
 /* ── Focus view ──────────────────────────────────────────────
@@ -301,6 +320,25 @@
 
 /* /creation/ in chat mode has no ended-overlay back link of its own. */
 .chat-ended-back { margin-top: 0.7rem; }
+
+/* ── The part-end overlay ────────────────────────────────────
+   Same furniture as the ended overlay it is modelled on — it inherits
+   .creation-ended and .aoid-ended outright — so the room cannot tell that one
+   of these two stops is a break and the other is the end. It should not have
+   to: at both, the film has stopped and the mics are open.
+   "Continue to the prayer" is the one filled control that is genuinely the
+   room's to expect, so it is weighted the same as "Watch Part 1 again". */
+/* Fully opaque, unlike the ended overlay it is modelled on. That overlay
+   covers a FINISHED player, where YouTube shows a dim suggestion grid and 94%
+   is enough. This one covers a PAUSED player, where YouTube puts up its full
+   chrome — video title, channel, scrubber, logo — and at 94% the room reads
+   all of it straight through the discussion question. */
+.chat-part-end {
+    z-index: 4;
+    background: var(--brown-rich, #1F1012);
+}
+.chat-continue { background: var(--gold-light, #D4A84A); }
+.chat-continue:hover { background: var(--gold-primary, #C4943A); }
 
 @media (prefers-reduced-motion: reduce) {
     .chat-mic[data-state="muted"] .chat-mic-dot { animation: none; }

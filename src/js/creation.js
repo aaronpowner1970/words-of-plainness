@@ -312,6 +312,22 @@
     function paint(spanEl) {
         panel.innerHTML = renderCitations(spanEl);
 
+        /* Player hook, second event (additive). /chat/video-03/ hangs its
+           correction link off each rendered citation, and chat-session.js is a
+           separate script that must not reach inside this closure. It needs to
+           know WHICH entry was just painted and whether it actually carries
+           citations — a pending scaffold span makes no claim, so there is
+           nothing there to correct. On a page with no listener this costs one
+           dispatch and changes nothing. */
+        (function () {
+            var cd = CITES[spanEl.dataset.s];
+            emit('wop:dock', {
+                spanId: spanEl.dataset.s,
+                kind: (cd && cd.st && cd.st !== 'pending') ? 'citation' : 'neutral',
+                el: panel
+            });
+        }());
+
         var hideBtn = panel.querySelector('.ct-hide-cites');
         if (hideBtn) hideBtn.addEventListener('click', hideCitations);
 

@@ -460,6 +460,12 @@ module.exports = function(eleventyConfig) {
             .replace(/<section class="discord-section"[\s\S]*?<\/section>/g, '');
     });
 
+    // First entry of a list whose `key` equals `value`. Used so the chat film
+    // page can read its own row out of src/_data/chat_videos.json instead of
+    // restating the part break anywhere else.
+    eleventyConfig.addFilter("findWhere", (list, key, value) =>
+        (Array.isArray(list) ? list : []).find(item => item && item[key] === value) || null);
+
     // Running time as m:ss, for the /chat/ menu cards. Durations come from
     // src/_data/chat_videos.json, measured once with the IFrame API's
     // getDuration() rather than guessed.

@@ -56,7 +56,10 @@ description: "Host menu for a live Words of Plainness chat."
                 <span class="chat-card-article">Article {{ v.n }}</span>
                 <span class="chat-card-title">{{ v.title }}</span>
                 {% if v.label %}<span class="chat-card-label">{{ v.label }}</span>{% endif %}
-                <span class="chat-card-time">{{ v.duration_s | mmss }}</span>
+                {#- A film that is normally shown in part says so on the card, with
+                    the full running time in brackets: the host is choosing how much
+                    of the evening to spend, not just which video to play. -#}
+                <span class="chat-card-time">{% if v.parts %}{{ v.parts[0].end | mmss }} &middot; {{ v.parts[0].label }} ({{ v.duration_s | mmss }} full){% else %}{{ v.duration_s | mmss }}{% endif %}</span>
             </a>
             <button class="chat-card-setnext" type="button" data-chat-setnext="{{ v.nn }}">Set as next</button>
         </li>

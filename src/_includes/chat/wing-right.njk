@@ -20,12 +20,23 @@
             <span class="chat-mic-dot" aria-hidden="true"></span>
             <span class="chat-mic-text" data-chat="mic-text">Visitor mics off</span>
         </p>
-        <p class="chat-status-title">{{ chatTitle }}</p>
+        <p class="chat-status-title" data-chat="title">{{ chatTitle }}</p>
         <div class="chat-meter" role="presentation">
             <div class="chat-meter-fill" data-chat="meter"></div>
         </div>
         <p class="chat-timeleft" data-chat="timeleft">Starting shortly</p>
-        <p class="chat-message" data-chat="message">All visitor mics are turned off while this short video plays. Mics will be turned on at the end for Q/A + discussion.</p>
+        {#- The noun is per page and is set here as well as in chat-session.js,
+            so the box reads correctly in the moment before the script runs —
+            and still reads correctly if it never does. A ninety-second reading
+            is a "short video"; the Creation film is not. -#}
+        <p class="chat-message" data-chat="message">All visitor mics are turned off while this {{ chatMicNoun | default("short video") }} plays. Mics will be turned on at the end for Q/A + discussion.</p>
     </div>
-    <button class="chat-focus-btn" type="button" data-chat="focus">Focus video</button>
+    <div class="chat-wing-controls">
+        {#- A film normally shown in part gets a switch. It sits with Focus at
+            the bottom of the box, at the same quiet weight: both are the
+            host's, and the room should not read either as something it is
+            meant to press. -#}
+        {% if chatParts %}<button class="chat-mode-btn" type="button" data-chat="mode">&#8644; Part 1 only</button>{% endif %}
+        <button class="chat-focus-btn" type="button" data-chat="focus">Focus video</button>
+    </div>
 </aside>

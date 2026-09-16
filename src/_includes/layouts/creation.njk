@@ -13,7 +13,8 @@
 <section class="chapter-hero creation-hero" data-pagefind-ignore>
     <p class="articles-eyebrow">A Words of Plainness Film</p>
     <h1 class="chapter-title">{{ title }}</h1>
-    <p class="articles-subtitle">{{ subtitle }}</p>
+    <p class="articles-subtitle">{{ subtitle }}</p>{% if chat %}
+    <p class="aoid-practice">Listen first. Afterward, trace each underlined line to its witnesses.</p>{% endif %}
     <button class="creation-about-btn" id="creationAboutBtn" type="button">About this film</button>
 </section>
 
@@ -32,6 +33,8 @@
     <div class="creation-stage-wrap" data-pagefind-ignore>{% if chat %}
         <div class="chat-stage-row">
         {%- set chatTitle = chatFilmTitle | default(title) %}
+        {%- set chatParts = (chat_videos | findWhere("nn", "03")).parts %}
+        {%- set chatMicNoun = "film" %}
         {% include "chat/wing-left.njk" %}{% endif %}
         <div class="creation-player" id="creationPlayerWrap">
             <!-- The IFrame API replaces this node with a youtube-nocookie iframe -->
@@ -39,10 +42,34 @@
             <!-- Ended overlay: covers YouTube's end-screen suggestion grid -->
             <div class="creation-ended" id="creationEnded" aria-hidden="true">
                 <p class="creation-ended-line">This film is a form of worship</p>
-                <p class="creation-ended-sub">No endorsements or polemics implied</p>
+                <p class="creation-ended-sub">No endorsements or polemics implied</p>{% if chat %}
+                <p class="aoid-ended-label">To open the discussion</p>
+                <p class="aoid-ended-compare">How did the film compare with what you expected?</p>
+                <p class="aoid-ended-ask">What question does this raise for you?</p>
+                <a class="aoid-rjw-link aoid-ended-journal" href="/articles/#of-creation-and-life">Write your reflection in your Discipleship Journal &rarr;</a>
+                <div class="aoid-ended-actions">{% endif %}
                 <button class="creation-replay" id="creationReplay" type="button">&#8635; Watch again</button>{% if chat %}
-                <a class="aoid-ended-back chat-ended-back" href="/chat/">Back to the chat menu</a>{% endif %}
-            </div>
+                <a class="aoid-ended-back chat-ended-back" href="/chat/">Back to the chat menu</a>
+                </div>{% endif %}
+            </div>{% if chat %}
+            <!-- Part-end overlay. Part 1 is the Creation account; Part 2 is a
+                 prayer of gratitude. The host usually shows Part 1 only, so the
+                 film stops at the break and the room gets the discussion
+                 opener there, with the prayer one click away. Chat pages only;
+                 /creation/ plays straight through as it always has. -->
+            <div class="creation-ended aoid-ended chat-part-end" id="chatPartEnd" aria-hidden="true">
+                <p class="creation-ended-line">This film is a form of worship</p>
+                <p class="creation-ended-sub">No endorsements or polemics implied</p>
+                <p class="aoid-ended-label">To open the discussion</p>
+                <p class="aoid-ended-compare">How did the film compare with what you expected?</p>
+                <p class="aoid-ended-ask">What question does this raise for you?</p>
+                <a class="aoid-rjw-link aoid-ended-journal" href="/articles/#of-creation-and-life">Write your reflection in your Discipleship Journal &rarr;</a>
+                <div class="aoid-ended-actions">
+                    <button class="creation-replay" type="button" data-chat="part-again">&#8635; Watch Part 1 again</button>
+                    <button class="creation-replay chat-continue" type="button" data-chat="part-continue">Continue to the prayer</button>
+                    <a class="aoid-ended-back" href="/chat/">Back to the chat menu</a>
+                </div>
+            </div>{% endif %}
         </div>{% if chat %}
         {% include "chat/wing-right.njk" %}
         </div>
@@ -86,7 +113,11 @@
              src="https://i.ytimg.com/vi/4CpGCkx19m4/maxresdefault.jpg" alt="His Work and Glory">
         <h2 id="creationEntryTitle">This film is a form of worship.</h2>
         <p>It is meant to praise God and share faith in His wonders, using the words of the scriptures in plainness and gratitude. We pray that you receive it in the Spirit it was intended.</p>
-        <p class="creation-entry-nop">No endorsements or polemics implied &mdash; of creeds, theologies, philosophies, traditions, or dogmas.</p>
+        <p class="creation-entry-nop">No endorsements or polemics implied &mdash; of creeds, theologies, philosophies, traditions, or dogmas.</p>{% if chat %}
+        <!-- A1 · Propose before watching, in the film's own terms. Not a field:
+             nothing is collected and nothing is graded. The room reads it while
+             people are still arriving. -->
+        <p class="aoid-entry-propose">Before you enter: in a sentence of your own, what would you expect a film titled “His Work and Glory” to say about the Creation? Hold your answer; the film will give you something to compare it with.</p>{% endif %}
         <button id="creationEnterBtn" type="button">Enter</button>
     </div>
 </div>
@@ -96,6 +127,19 @@
 <script>window.WOP_CREATION_CITES = {{ creation_citations | dump | safe }};</script>
 <script>window.WOP_CREATION_VIDEO_ID = "4CpGCkx19m4";</script>
 <script src="/js/creation.js?v={{ site.version }}"></script>{% if chat %}
+<script>
+/* The ONE thing chat-session.js is told about the page it is on; everything
+   else it learns from the player events. `parts` is read from
+   src/_data/chat_videos.json, never hard-coded in the script. */
+window.WOP_CHAT = {
+    kind: "film",
+    title: {{ (chatFilmTitle | default(title)) | dump | safe }},
+    micNoun: "film",
+    parts: {{ (chat_videos | findWhere("nn", "03")).parts | dump | safe }},
+    correctionUrl: {{ (site.correctionUrl or "") | dump | safe }},
+    journalUrl: "/articles/#of-creation-and-life"
+};
+</script>
 <script src="/js/chat-session.js?v={{ site.version }}"></script>{% endif %}
 <script src="https://www.youtube.com/iframe_api"></script>
 {% endblock %}
