@@ -1,0 +1,15 @@
+---
+layout: layouts/aoid-video.njk
+pagination:
+  data: aoid_videos
+  size: 1
+  alias: video
+permalink: "/articles/video-{{ video.nn }}/"
+# `| safe` is load-bearing: eleventyComputed renders these through Nunjucks
+# first, and base.njk escapes them again on output. Without it, A04's
+# apostrophe ships as "Of God&amp;#39;s Word" in <title> and the meta
+# description — visible as raw entity text in the tab and in search results.
+eleventyComputed:
+  title: "{{ video.title | safe }}: A Reading"
+  description: "{{ video.title | safe }} — the reading of Article {{ video.n }} of the Articles of Interfaith Discipleship. The article follows the film line by line, and every claim opens its biblical and Restoration witnesses beside it."
+---

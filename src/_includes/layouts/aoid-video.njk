@@ -1,0 +1,141 @@
+{#
+  layouts/aoid-video.njk — one Articles of Interfaith Discipleship reading.
+
+  Generalised from layouts/creation.njk. /creation/ and creation.js are
+  untouched: this layout reuses creation.css's structural classes
+  (.creation-reading / .creation-stage-wrap / .creation-columns / .ct-*) the
+  same way creation.css itself reuses articles-panel.css's .ap- classes, and
+  adds only the per-reading deltas in aoid-video.css under .aoid-.
+
+  The left column includes src/_includes/aoid/aNN.njk — the SAME file
+  /articles/ includes. There is exactly one copy of each article's prose.
+  The apparatus, the timing and the practice framing are layered on top of it;
+  nothing about the article text is restated here.
+
+  Article 3 has no reading video: /articles/video-03/ redirects to /creation/
+  in vercel.json, so it is absent from aoid_videos.json and never paginated.
+#}
+{% extends "layouts/base.njk" %}
+
+{% from "macros/banner.njk" import banner with context %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/articles-panel.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/creation.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/aoid-video.css?v={{ site.version }}">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="chapter-hero creation-hero aoid-hero" data-pagefind-ignore>
+    <p class="articles-eyebrow">Articles of Interfaith Discipleship &middot; Article {{ video.n }}</p>
+    <h1 class="chapter-title">{{ video.title }}</h1>
+    <p class="articles-subtitle">A Reading</p>
+    <p class="aoid-practice">Listen first. Afterward, trace each underlined claim to its witnesses.</p>
+    <button class="creation-about-btn" id="aoidAboutBtn" type="button">About this film</button>
+</section>
+
+<!-- One centred reading container: the sticky film spans its full width at the
+     top; the article and the citation dock sit as columns beneath it. The film
+     is a normal-flow child (NOT a grid item) so position:sticky can travel the
+     whole reading region.
+     #aoidDock is display:contents below 1200px, so the panel inside it falls
+     back to the fixed overlay drawer rather than being hidden.
+     .dock-hidden is the default: the dock starts closed, as on /creation/. -->
+<div class="creation-reading aoid-reading dock-hidden" id="aoidReading">
+
+    <!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->
+    <div class="creation-stage-wrap" data-pagefind-ignore>
+        <div class="creation-player" id="aoidPlayerWrap">
+            <!-- The IFrame API replaces this node with a youtube-nocookie iframe -->
+            <div id="aoidVideo"></div>
+            <!-- Ended overlay: covers YouTube's end-screen suggestion grid and
+                 opens the discussion with this article's own reflection question. -->
+            <div class="creation-ended aoid-ended" id="aoidEnded" aria-hidden="true">
+                <p class="creation-ended-line">This film is a form of worship</p>
+                <p class="creation-ended-sub">No endorsements or polemics implied</p>
+                <p class="aoid-ended-label">To open the discussion</p>
+                <p class="aoid-ended-question" id="aoidEndedQuestion"></p>
+                <div class="aoid-ended-actions">
+                    <button class="creation-replay" id="aoidReplay" type="button">&#8635; Watch again</button>
+                    <a class="aoid-ended-back" href="/articles/#{{ video.slug }}">Back to the Articles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="creation-columns">
+        <!-- The article itself: the shared aoid/aNN.njk include. The spoken
+             sentence is highlighted as the film plays (CSS Custom Highlight
+             API — the article DOM is not rewritten) and the column follows. -->
+        <!-- data-pagefind-meta is load-bearing: without it pagefind takes the
+             first heading in the indexed body as the result title, which is the
+             article's own <h2> — so the reading would appear in search under the
+             same name as its entry on /articles/. -->
+        <div class="aoid-article" id="aoidArticle" data-pagefind-body
+             data-pagefind-meta="title:{{ title }}">
+            <p class="ct-lead aoid-lead">The article below is read in the film. Every underlined claim opens its
+                biblical and Restoration witnesses beside it &mdash; tap any line to hold it and study.</p>
+            {% include "aoid/" + video.code | lower + ".njk" %}
+            <p class="ct-closing">This film is a form of worship &middot; No endorsements or polemics implied</p>
+        </div>
+
+        <div class="creation-dock" id="aoidDock"></div>
+    </div>
+</div>
+
+<!-- Resume-follow pill -->
+<button class="ct-resume" id="ctResume" type="button" aria-live="polite">&#8635; Resume follow</button>
+
+<!-- Reopen affordance: shown whenever the citation stream is hidden -->
+<button class="ct-cite-toggle" id="ctCiteToggle" type="button">&#9670; Show citations</button>
+
+<!-- Streaming hint: sits above the resume pill so the two never collide -->
+<div class="ct-hint" id="ctHint" role="note">
+    <span>Tap any line to hold &amp; study its scriptures</span>
+    <button class="ct-hint-x" id="ctHintX" type="button" aria-label="Dismiss hint">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+</div>
+
+<!-- Entry / About worship notice. Same wording as /creation/; the article's
+     own banner stands in for the film thumbnail. -->
+<div class="creation-entry aoid-entry" id="aoidEntry" role="dialog" aria-modal="true" aria-labelledby="aoidEntryTitle">
+    <div class="creation-entry-card">
+        {{ banner(video.banner, eager=true, cls="aoid-entry-banner") }}
+        <p class="aoid-entry-eyebrow">Article {{ video.n }} &middot; {{ video.title }}</p>
+        <h2 id="aoidEntryTitle">This film is a form of worship.</h2>
+        <p>It is meant to praise God and share faith in His wonders, using the words of the scriptures in plainness and gratitude. We pray that you receive it in the Spirit it was intended.</p>
+        <p class="creation-entry-nop">No endorsements or polemics implied &mdash; of creeds, theologies, philosophies, traditions, or dogmas.</p>
+        <button id="aoidEnterBtn" type="button">Enter</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+window.WOP_AOID_VIDEO = {
+    code: {{ video.code | dump | safe }},
+    title: {{ video.title | dump | safe }},
+    slug: {{ video.slug | dump | safe }},
+    youtube: {{ video.youtube | dump | safe }},
+    articleUrl: "/articles/#{{ video.slug }}",
+    timing: {{ (aoid_video_timing[video.code] or {}) | dump | safe }},
+    apparatus: {{ (apparatusData[video.code] or {}) | dump | safe }},
+    books: {{ (scriptures.books or {}) | dump | safe }},
+    el: {
+        reading: "aoidReading", article: "aoidArticle", dock: "aoidDock",
+        stage: ".creation-stage-wrap", video: "aoidVideo",
+        ended: "aoidEnded", endedQuestion: "aoidEndedQuestion", replay: "aoidReplay",
+        entry: "aoidEntry", enter: "aoidEnterBtn", about: "aoidAboutBtn",
+        resume: "ctResume", citeToggle: "ctCiteToggle", hint: "ctHint", hintX: "ctHintX"
+    },
+    prefKey: "wop_aoid_citations",
+    hintKey: "wop_aoid_hint"
+};
+</script>
+<script src="/js/aoid-video.js?v={{ site.version }}"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+{% endblock %}
