@@ -326,7 +326,15 @@ def main():
         "Article text is the authority for wording; the SRT supplies timing only. "
         "Every row below is a place where the reading and the article text differ — "
         "the article wording is what the page displays in every case.\n")
-    report.append(f"Threshold: {MIN_MATCH:.0%} word match per article.\n")
+    report.append(
+        "**The percentage is ARTICLE WORDS MATCHED** — article words carrying a cue "
+        "time from the reading, over article words. The denominator is the article, "
+        "because the article is what the page has to time: a word the reading "
+        "*inserted* (A08's `a`) is not an article word, leaves no article word "
+        "untimed, and so is listed below but does not enter the figure. An article "
+        "word the reading changed or skipped does count against it. That is why an "
+        "article can read 100.00% and still list a difference.\n")
+    report.append(f"Threshold: {MIN_MATCH:.0%} of article words matched, per article.\n")
 
     for code in codes:
         p = srt_path(code)
@@ -337,14 +345,20 @@ def main():
         out[code] = data
         flag = "PASS" if pct >= MIN_MATCH else "**FAIL**"
         if pct < MIN_MATCH:
-            failures.append(f"{code}: match {pct:.2%} below {MIN_MATCH:.0%}")
+            failures.append(
+                f"{code}: article words matched {pct:.2%} below {MIN_MATCH:.0%}")
         if missing:
             failures.append(f"{code}: untimed data-spans {sorted(set(missing))}")
 
-        report.append(f"\n## {code} — {pct:.2%} {flag}\n")
+        ins = sum(1 for it in issues if it["kind"] == "insert")
+        report.append(f"\n## {code} — {pct:.2%} article words matched · {flag}\n")
         report.append(
             f"- article words: {data['tokens']} · reading words: {nsrt} · "
             f"sentences: {len(data['sentences'])} · timed spans: {len(data['spans'])}")
+        report.append(
+            f"- differences: {len(issues)} — {ins} insertion(s) by the reading "
+            f"(not counted in the percentage), "
+            f"{len(issues) - ins} affecting article words (counted)")
         report.append(f"- first word at {data['words'][0]:.2f}s · "
                       f"last sentence ends {data['sentences'][-1]['end']:.2f}s")
         if missing:

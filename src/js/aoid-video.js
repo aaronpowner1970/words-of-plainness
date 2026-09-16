@@ -39,7 +39,6 @@
     var SPAN_TIME = T.spans || {};
     var APP = CFG.apparatus || {};
     var BOOKS = CFG.books || {};
-    var SCRIPTURE_BASE = 'https://www.churchofjesuschrist.org/study/scriptures/';
 
     function byId(k) { return document.getElementById(CFG.el[k]); }
 
@@ -380,27 +379,18 @@
         return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    /* Scripture links follow the existing churchofjesuschrist.org/study
-       convention, built from the same book map .eleventy.js uses. A reference
-       the map cannot parse renders as plain text rather than a broken link. */
-    // "Book C:V", "Book C:V–V", and a bare "Book C". Anything trailing (a verse
-    // list like "Mormon 8:12, 17", or a gloss) is ignored and the link lands on
-    // the first verse named, which is where a reader wants to arrive.
+    /* Scripture links and definition markup are the shared apparatus rules
+       (js/apparatus-common.js), so this dock and the /articles/ panel cannot
+       drift apart. If the helper failed to load, a reference renders as plain
+       text rather than a broken link. */
+    var AP_COMMON = window.WOP_APPARATUS || null;
+
     function scriptureUrl(ref) {
-        var s = (ref || '').trim();
-        var m = /^(.+?)\s+(\d+):(\d+)(?:\s*[–—-]\s*(\d+))?/.exec(s);
-        var chapterOnly = false;
-        if (!m) {
-            m = /^(.+?)\s+(\d+)\s*$/.exec(s);
-            chapterOnly = true;
-        }
-        if (!m) { return null; }
-        var path = BOOKS[m[1].toLowerCase().trim()];
-        if (!path) { return null; }
-        var url = SCRIPTURE_BASE + path + '/' + m[2];
-        if (chapterOnly) { return url + '?lang=eng'; }
-        if (m[4]) { return url + '?lang=eng&id=p' + m[3] + '-p' + m[4] + '#p' + m[3] + '-p' + m[4]; }
-        return url + '?lang=eng&id=p' + m[3] + '#p' + m[3];
+        return AP_COMMON ? AP_COMMON.scriptureUrl(ref, BOOKS) : null;
+    }
+
+    function definitionHtml(text) {
+        return AP_COMMON ? AP_COMMON.definitionHtml(text) : esc(text);
     }
 
     function typeBadgeLabel(type) {
@@ -517,7 +507,7 @@
         var body = '<div class="ap-span-text">“' + esc(d.text || sentText(sentIdx)) + '”</div>';
         if (hasDef) {
             body += '<div class="ap-definition-block"><h4 class="ap-section-title">Definition</h4>' +
-                '<p class="ap-definition">' + esc(d.definition) + '</p></div>';
+                '<p class="ap-definition">' + definitionHtml(d.definition) + '</p></div>';
         }
         if (hasAnchors) {
             body += '<div class="ap-anchor-tabs-block">' +

@@ -501,8 +501,12 @@
 {% block scripts %}
 <!-- Apparatus data (build-time JSON embed) -->
 <script type="application/json" id="apparatusData">{{ (apparatusData if apparatusData else {}) | dump | safe }}</script>
+<!-- The site's own scripture book map, so the panel can link its references
+     through the same rules the reading dock uses (js/apparatus-common.js). -->
+<script type="application/json" id="scriptureBooks">{{ (scriptures.books or {}) | dump | safe }}</script>
 <script src="/js/wop-player.js?v={{ site.version }}" defer></script>
 <script src="/js/read-aloud-articles.js?v={{ site.version }}" defer></script>
+<script src="/js/apparatus-common.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-panel.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-godeeper.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-howwehold.js?v={{ site.version }}" defer></script>

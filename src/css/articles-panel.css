@@ -516,6 +516,15 @@
     color: var(--teal-light, #6A8B8B);
 }
 
+/* A linked reference must not change how the reference LOOKS — it keeps the
+   gold (or teal, for Restoration) of the surrounding label and picks up an
+   underline only on hover. /creation/ and the reading dock already had this
+   rule through creation.css; it belongs here, in the panel stylesheet all
+   three pages load. */
+.ap-anchor-ref a { color: inherit; text-decoration: none; }
+.ap-anchor-ref a:hover,
+.ap-anchor-ref a:focus-visible { text-decoration: underline; }
+
 
 /* ── Cross-reference list ────────────────────────────────────── */
 

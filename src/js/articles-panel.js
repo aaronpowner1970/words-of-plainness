@@ -86,6 +86,23 @@
         console.warn('[articles-panel] Could not parse apparatus JSON:', e);
     }
 
+    /* ── Shared apparatus rules ───────────────────────────────────
+       The scripture-link and definition-markup rules live in
+       js/apparatus-common.js, so this panel and the reading dock on
+       /articles/video-NN/ render an entry the same way by construction rather
+       than by two copies staying in step. The book map is the site's own
+       src/_data/scriptures.json, embedded by layouts/articles.njk. */
+    var AP_COMMON = window.WOP_APPARATUS || null;
+    var BOOKS = {};
+    try {
+        var booksScript = document.getElementById('scriptureBooks');
+        if (booksScript && booksScript.textContent.trim()) {
+            BOOKS = JSON.parse(booksScript.textContent) || {};
+        }
+    } catch (e) {
+        console.warn('[articles-panel] Could not parse scripture book map:', e);
+    }
+
     // ── State ─────────────────────────────────────────────────────
     var activeSpanEl = null;
     var isOpen       = false;
@@ -157,7 +174,20 @@
 
         var ref = document.createElement('div');
         ref.className = 'ap-anchor-ref';
-        ref.textContent = anchor.ref || '';
+        var refText = anchor.ref || '';
+        var url = AP_COMMON ? AP_COMMON.scriptureUrl(refText, BOOKS) : null;
+        if (url) {
+            // A reference the book map cannot parse stays plain text: a
+            // reference that does not resolve is better than a broken link.
+            var a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.textContent = refText;
+            ref.appendChild(a);
+        } else {
+            ref.textContent = refText;
+        }
         li.appendChild(ref);
 
         if (anchor.text) {
@@ -236,7 +266,11 @@
         // Definition
         var hasDef = isNamed && !!(spanData.definition && spanData.definition.trim());
         toggleBlock(elDefinitionBlock, hasDef);
-        if (hasDef) { elDefinition.textContent = spanData.definition; }
+        if (hasDef) {
+            // <em>/<strong> only, escaped first — see apparatus-common.js.
+            if (AP_COMMON) { elDefinition.innerHTML = AP_COMMON.definitionHtml(spanData.definition); }
+            else { elDefinition.textContent = spanData.definition; }
+        }
 
         // Commentary
         var comment    = spanData.panel_comment || '';
