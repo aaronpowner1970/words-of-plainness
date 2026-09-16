@@ -327,7 +327,10 @@
 .chat-wing--right .chat-ways { margin-bottom: auto; }
 .chat-ways {
     --yu: clamp(11px, min(4.7cqi, 3.1cqh), 18px);
-    padding: 1.1em clamp(10px, 5cqi, 20px) 0;
+    /* Generous top space: the section is a different kind of thing from the
+       status message above it, and should read as a new block, not a
+       continuation of that paragraph. */
+    padding: 2.2em clamp(10px, 5cqi, 20px) 0;
     border-left: 1px solid rgba(196, 148, 58, 0.18);
 }
 .chat-ways-title {
