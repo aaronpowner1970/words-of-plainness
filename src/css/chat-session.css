@@ -75,8 +75,12 @@
    bottom, out of the reading order — the room reads the badge, the host
    reaches past it. */
 .chat-wing--right { justify-content: space-between; }
+/* The right wing's inner gutter mirrors the left wing's: the left wing's
+   text stops clamp(10px, 1.2vw, 18px) short of its rule, so this box stops the
+   same distance short of its outer edge. Without it the message and the meter
+   ran flush to the edge of the wing. */
 .chat-status {
-    padding: clamp(0.6rem, 1.4vh, 1.1rem) 0 0 clamp(10px, 1.2vw, 18px);
+    padding: clamp(0.6rem, 1.4vh, 1.1rem) clamp(10px, 1.2vw, 18px) 0;
     border-left: 1px solid rgba(196, 148, 58, 0.18);
 }
 
@@ -165,7 +169,7 @@
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.25rem 0.9rem;
-    margin: 0.8em 0 clamp(0.5rem, 1.2vh, 1rem) clamp(10px, 1.2vw, 18px);
+    margin: 0.8em clamp(10px, 1.2vw, 18px) clamp(0.5rem, 1.2vh, 1rem);
 }
 .chat-focus-btn,
 .chat-mode-btn {
@@ -317,6 +321,67 @@
     color: var(--brown-rich, #1F1012);
 }
 .chat-focus .chat-focus-exit { display: block; }
+
+/* ── The worship entry card, on one screen ───────────────────
+   At the host's real screen (1920x1080 at 150%, a 1280x630 page) the card ran
+   to 620px on a reading and 722px on the film, so Enter sat below the fold
+   and the host had to scroll inside the dialog in front of the room. Here it
+   is sized off the viewport HEIGHT — the image is capped, the type and the
+   gaps come down on short screens — and the wording is untouched. This file
+   loads only on chat pages, so every public entry card keeps its sizes.
+   Measured on all thirteen at 1280x630 and 1024x600. */
+.creation-entry { padding: 2vh 24px; }
+.creation-entry .creation-entry-card { max-width: 640px; }
+
+.creation-entry .creation-entry-card .creation-entry-thumb,
+.creation-entry .creation-entry-card .aoid-entry-banner img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 28vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+.creation-entry .creation-entry-card .creation-entry-thumb { margin-bottom: 1.6vh; }
+.creation-entry .creation-entry-card .aoid-entry-banner { margin: 0 auto 1.6vh; }
+
+.creation-entry .creation-entry-card .aoid-entry-eyebrow {
+    font-size: clamp(0.66rem, 1.9vh, 0.8rem) !important;
+    margin-bottom: 0.6vh !important;
+}
+.creation-entry .creation-entry-card h2 {
+    font-size: clamp(1.05rem, 3vh, 1.45rem);
+    margin-bottom: 1vh;
+}
+.creation-entry .creation-entry-card p {
+    font-size: clamp(0.82rem, 2.3vh, 1.02rem);
+    line-height: 1.5;
+    margin-bottom: 1vh;
+}
+.creation-entry .creation-entry-card .creation-entry-nop {
+    font-size: clamp(0.76rem, 2.05vh, 0.9rem);
+    margin: 0.8vh 0 1.4vh !important;
+}
+.creation-entry .creation-entry-card .aoid-entry-propose {
+    font-size: clamp(0.78rem, 2.15vh, 0.95rem);
+    line-height: 1.45;
+    margin-bottom: 1.6vh;
+}
+/* The film's card is .creation-entry without .aoid-entry, so the quiet-prompt
+   treatment in aoid-video.css (scoped to .aoid-entry) never reached it: the
+   prompt rendered as a plain centred paragraph. Same look as the readings'. */
+.creation-entry:not(.aoid-entry) .creation-entry-card .aoid-entry-propose {
+    max-width: 33rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.95rem;
+    border-left: 2px solid rgba(196, 148, 58, 0.4);
+    text-align: left;
+    font-style: italic;
+    color: var(--cream-dark, #D4C8B0);
+}
+.creation-entry .creation-entry-card button { padding: 1.3vh 28px; }
 
 /* /creation/ in chat mode has no ended-overlay back link of its own. */
 .chat-ended-back { margin-top: 0.7rem; }

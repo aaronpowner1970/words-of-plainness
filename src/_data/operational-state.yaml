@@ -56,15 +56,24 @@ workstreams:
         the pre-A1 pages 8.9/20 against WoP-Teaching-Practices-Standard; the
         Part A changes are what brought them into the deploy band.
       chat_pages: >
-        BUILT, NOT PUSHED as of 2026-09-16 — committed locally, held at the
-        author's gate for a WoP-Teaching-Practices-Standard score before
-        go-live. /chat/ (host menu and between-videos screen) plus
-        /chat/video-01..13/: presentation versions for VR rooms and projectors,
-        with flanking wings (welcome left, live mic status right), a mic badge
-        that follows the film, focus view, and invisible host keys M and F.
+        LIVE 2026-09-16 (3bf0ee9 + 069944d + fix commit, pushed together after
+        the author scored them 14.4/20 against WoP-Teaching-Practices-Standard).
+        /chat/ (host menu and between-videos screen) plus /chat/video-01..13/:
+        presentation versions for VR rooms and projectors — flanking wings
+        (welcome left, live mic status right), a mic badge that follows the film,
+        focus view, invisible host keys M and F, YouTube captions off, and the
+        A1/A2/A3 teaching additions on every chat page. /chat/video-03/ is the
+        full "His Work and Glory" with a Part 1 gate: the break is data
+        (chat_videos.json parts, 620.0s), Part 1 only is the default, and the
+        host can continue to the Part 2 prayer or switch to the full film.
         Reached by URL only — noindex, canonical to the public page, out of
-        pagefind and out of the sitemap, and nothing public links to them.
-        The public pages are byte-identical before and after.
+        pagefind and the sitemap; public pages byte-identical.
+      creation_music_markers: >
+        OPEN, author to decide. "[ ♫ music ♫ ]" is transcript text in
+        creation_transcript.json (3 cues: s9, s11, s14) and is prefixed to the
+        same three citation quotes in creation_citations.json, so the dock
+        quotes it as if it were scripture. Same data on /creation/ and
+        /chat/video-03/.
     frontier:
       group_display_vr: >
         ACTIVE FIELD-TEST. The 2D /articles/ page is displayed inside a
@@ -73,7 +82,7 @@ workstreams:
         above are the first dedicated group-display surface to come out of it;
         they are deliberately separate from the public pages rather than a
         mode toggled on them.
-    next_action: "Author: score /chat/ and /chat/video-NN/ against WoP-Teaching-Practices-Standard, then reply GO to push. Open question in that review: /chat/video-03/ (the creation layout) carries neither the A2 end-screen lines nor the A3 correction link, because /creation/ never had them and adding them needs a change to creation.js beyond the one allowed player hook."
+    next_action: "Author: decide the [ ♫ music ♫ ] content cleanup in the /creation/ transcript and citations (3 spans), and whether to turn YouTube captions off on the public reading pages (A01 serves an automatic ASR track that doubles its burned-in captions; /creation/ serves an uploaded track and has no burned-in text)."
 
   - id: creation-film
     name: "'His Work and Glory' creation film — /creation/"

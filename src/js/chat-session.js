@@ -67,11 +67,15 @@
     var NOUN = CFG.micNoun || 'short video';
     var MSG_MUTED = 'All visitor mics are turned off while this ' + NOUN + ' plays. Mics will be turned on at the end for Q/A + discussion.';
     var MSG_OPEN = 'The video has ended. Mics are on for Q/A + discussion.';
+    // At the Part 1 break the film has NOT ended — four minutes of prayer are
+    // one click away — so the break gets its own open message.
+    var MSG_OPEN_PART = 'Part 1 has ended. Mics are on for Q/A + discussion.';
     var MSG_OPEN_EARLY = 'Mics are on early, while the film is still playing. Questions and discussion are welcome.';
     var MSG_MUTED_AFTER = 'Visitor mics are off for the moment. They will be back on shortly.';
 
     var MSG_MUTED_SHORT = 'Mics open at the end for Q/A.';
     var MSG_OPEN_SHORT = 'Mics are on for Q/A + discussion.';
+    var MSG_OPEN_PART_SHORT = 'Part 1 done. Mics are on for Q/A.';
     var MSG_OPEN_EARLY_SHORT = 'Mics on — the film is still playing.';
     var MSG_MUTED_AFTER_SHORT = 'Mics are off for the moment.';
 
@@ -156,11 +160,17 @@
     }
 
     function messageLong(open) {
-        if (open) { return atEnd() ? MSG_OPEN : MSG_OPEN_EARLY; }
+        if (open) {
+            if (ended) { return MSG_OPEN; }
+            return partEnded ? MSG_OPEN_PART : MSG_OPEN_EARLY;
+        }
         return atEnd() ? MSG_MUTED_AFTER : MSG_MUTED;
     }
     function messageShort(open) {
-        if (open) { return atEnd() ? MSG_OPEN_SHORT : MSG_OPEN_EARLY_SHORT; }
+        if (open) {
+            if (ended) { return MSG_OPEN_SHORT; }
+            return partEnded ? MSG_OPEN_PART_SHORT : MSG_OPEN_EARLY_SHORT;
+        }
         return atEnd() ? MSG_MUTED_AFTER_SHORT : MSG_MUTED_SHORT;
     }
 
