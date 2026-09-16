@@ -1423,6 +1423,24 @@
     display: block;
 }
 
+/* Chat bubble icon for the "Chat Sessions" drawer link (same-tab /chat/) */
+.an-num--chat {
+    align-self: center;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+.an-num--chat svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    display: block;
+}
+/* The inherited gold focus ring vanishes on the gold drawer; draw it dark
+   and inset so the drawer's edge never clips it. */
+.an-chat-link:focus-visible {
+    outline: 2px solid var(--brown-rich, #1F1012);
+    outline-offset: -2px;
+}
+
 .an-music-text {
     display: flex;
     flex-direction: column;
