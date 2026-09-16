@@ -19,6 +19,11 @@ PROMPT_VERSION = "gate6-v1.5 (locator) / gate6-v1.3 (recut) / gate6-v1.3 (verifi
 # gate6-v1.4 (2026-09-13, Task 2d): an EMPTY locator result carries a one-sentence `silence_rationale` —
 # what in the supplied chunks comes nearest the predicate and why it does not assert it — so an empty
 # cell can be audited per standard. The candidate shape, the retrieval and every rule are unchanged.
+# Session 7 (2026-09-16, R6-11): VERIFIER gate6-v1.4 is built below (v1.3 + the creed lines + JOINT PREDICATION +
+# AGENCY). It is made the version in force only once its four regression measurements pass (tp-4 recall >= 0.967,
+# Q-161 RC-01-3, the 13 non-creedal IDIOM rejections, both Q-277 Athanasian candidates); until then v1.3 stands.
+# The name gate6-v1.4 that had been reserved for the pending "an inferable proposition is neighbouring" LOCATOR
+# line is released: that line becomes gate6-v1.5 and is measured against v1.4.
 # verifier gate6-v1.2 (2026-09-13, session 4, Task 3): the hazard IDIOM_OR_FORMULA — a fixed idiom, oath,
 # doxology, greeting or liturgical formula whose surface wording names the predicate while the passage's
 # actual assertion lies elsewhere — with the companion line `asserted_outside_formula` (Y/N). Raising the
@@ -155,7 +160,73 @@ _V13_LINE4 = ("4. floor — FULL | PARTIAL | WORD_ONLY, with one sentence of rea
 assert _V12_LINE4 in VERIFIER_SYSTEM
 VERIFIER_SYSTEM_V13 = (VERIFIER_SYSTEM.replace(_V12_LINE4, _V13_LINE4)
                        .replace('"floor_reason": "...", ', '"floor_reason": "...", "partial_asserts_predicate": "Y|N|NA", '))
-VERIFIER_SYSTEMS = {"gate6-v1.2": VERIFIER_SYSTEM, "gate6-v1.3": VERIFIER_SYSTEM_V13}
+
+# ------------------------------------------------------------------ verifier gate6-v1.4 (2026-09-16, session 7, R6-11)
+# v1.4 = v1.3 + the author's creed ruling of 15 September (clauses 1, 2 and 4, as drafted in
+# wop-scratch/WoP_SJN_CreedRuling_Drafts_20260915.md Part A) + the R6-7 JOINT PREDICATION and R6-8 AGENCY lines.
+#
+# TWO lines carry the creed carve-out, not one. Line 4's own floor rule already floors "a liturgical formula" at
+# WORD_ONLY, so amending line 5's flag definition alone would leave a creed recited in a liturgy capped exactly as
+# Q-161 RC-01-3 was capped. The liturgical-formula clause is therefore removed from line 4 and the carve-out stated
+# there, and line 5 is told not to raise the flag on a creedal clause at all.
+#
+# The reserved name gate6-v1.4 for the pending "an inferable proposition is neighbouring" locator line becomes
+# gate6-v1.5, so the version sequence stays linear and every packet header keeps meaning what it says.
+_V13_FORMULA_SENTENCE = (
+    'A fixed formula is WORD_ONLY: when the predicate\'s word occurs only inside an oath ("as I live, saith the Lord"), '
+    'a doxology ("to whom be glory"), a greeting, an acclamation or a liturgical formula, the passage PRESUPPOSES the '
+    'predicate rather than asserting it, and the floor is WORD_ONLY unless the passage separately asserts the predicate '
+    'outside the formula.')
+_V14_FORMULA_SENTENCE = (
+    'A fixed formula is WORD_ONLY: when the predicate\'s word occurs only inside an oath ("as I live, saith the Lord"), '
+    'a doxology ("to whom be glory"), a greeting or an acclamation, the passage PRESUPPOSES the predicate rather than '
+    'asserting it, and the floor is WORD_ONLY unless the passage separately asserts the predicate outside the formula. '
+    'A CREED IS NOT A FIXED FORMULA IN THIS SENSE. A clause of a creed (the Nicene-Constantinopolitan, Apostles\' or '
+    'Athanasian Creed, or a confession the standard itself identifies as its creed) ASSERTS its propositions wherever '
+    'the standard confesses it, expounds it, or instructs from it: recited in a liturgy, set out in a catechism, or '
+    'explained article by article. Judge a creedal clause\'s floor on its content, exactly as you would a sentence of '
+    'a confession.')
+
+_V13_FLAG_TAIL = 'Answer "NA" when the flag is not raised.'
+_V14_FLAG_TAIL = _V13_FLAG_TAIL + (
+    ' Do NOT raise IDIOM_OR_FORMULA for a creedal clause the standard confesses, expounds or instructs from (line 4). '
+    'DO treat a creedal clause as NOT the standard\'s assertion (item 3 = N) when the standard quotes the creed only to '
+    'DESCRIBE it, COMPARE it with another text, or DISPUTE it, for example "the Western form adds \'and the Son\'", or '
+    '"the Creed says X, but …". There the standard\'s own assertion lies elsewhere. A sentence ABOUT an article of the '
+    'creed is not the article: judge it as the standard\'s own exposition, on its own words.')
+
+CREEDAL_SILENCE_LINE = (
+    "Creeds are not exhaustive. That a creed does not contain a predicate is never evidence that the tradition denies "
+    "it. Never cite a creed's silence as a reason, never propose a divergence from it, and never treat \"not in the "
+    "creed\" as a finding.")
+
+JOINT_PREDICATION_LINE = (
+    "JOINT PREDICATION. When the required subject is THE HOLY SPIRIT, a passage that names the persons in turn and "
+    "predicates the property of each (\"the Father X, the Son X, and the Holy Spirit X\") asserts the property of the "
+    "Holy Spirit; judge it on that conjunct. The quoted phrase must itself contain the Holy Spirit's name and the "
+    "property; if it does not, the citation does not satisfy the family (WRONG_SUBJECT). A qualification that follows, "
+    "such as \"yet they are not three Almighties but one Almighty\", does not withdraw the property from each person "
+    "named. A passage that predicates the property of the one God confessed as Father, Son and Holy Spirit, without "
+    "naming the Holy Spirit with the property, does NOT assert it of the Holy Spirit: mark WRONG_SUBJECT, and never "
+    "reason from the unity of the divine essence to each person. A doxology naming the three persons remains a fixed "
+    "formula under line 4.")
+
+AGENCY_LINE = (
+    "AGENCY. Each family is supplied with an agency class, ACTION or ATTRIBUTE. For an ACTION family, a passive "
+    "construction naming the Holy Spirit as agent (\"renewed by the Holy Spirit\") asserts that the Holy Spirit "
+    "performs the action named, and satisfies the family when that action is the predicate. For an ATTRIBUTE family, "
+    "or when no class is supplied, an agency phrase never satisfies the family; never infer an attribute from an "
+    "action.")
+
+_V14_TAIL = "\n\n".join([CREEDAL_SILENCE_LINE, JOINT_PREDICATION_LINE, AGENCY_LINE])
+assert _V13_FORMULA_SENTENCE in VERIFIER_SYSTEM_V13 and _V13_FLAG_TAIL in VERIFIER_SYSTEM_V13
+VERIFIER_SYSTEM_V14 = (VERIFIER_SYSTEM_V13
+                       .replace(_V13_FORMULA_SENTENCE, _V14_FORMULA_SENTENCE)
+                       .replace(_V13_FLAG_TAIL, _V14_FLAG_TAIL)
+                       .replace("\nOutput: a single JSON object", "\n" + _V14_TAIL + "\n\nOutput: a single JSON object"))
+assert _V13_FORMULA_SENTENCE not in VERIFIER_SYSTEM_V14 and CREEDAL_SILENCE_LINE in VERIFIER_SYSTEM_V14
+
+VERIFIER_SYSTEMS = {"gate6-v1.2": VERIFIER_SYSTEM, "gate6-v1.3": VERIFIER_SYSTEM_V13, "gate6-v1.4": VERIFIER_SYSTEM_V14}
 
 
 def verifier_system():
@@ -171,7 +242,10 @@ def set_verifier_version(version):
 
 
 def verifier_user(predicate, candidate, chunk_view):
-    return json.dumps({
+    # R6-8: the AGENCY line needs a class. Only a RATIFIED tag is supplied (registry.load_predicates reads
+    # rulings.agency_tags); a family with no ratified tag is sent none, and the line then fails closed — an agency
+    # phrase never satisfies it. The proposals in spirit-family-agency-tags-PROPOSED.json are NOT sent.
+    body = {
         "task": "verify",
         "family_id": predicate["family_id"],
         "predicate": predicate["predicate"],
@@ -184,7 +258,11 @@ def verifier_user(predicate, candidate, chunk_view):
         "chunk": chunk_view,
         "output_contract": ("JSON only, the six-line rubric plus asserted_outside_formula (Y|N|NA), reason_code and reason"
                             + (", and partial_asserts_predicate (Y|N|NA)" if prompt_version("verifier") != "gate6-v1.2" else "")),
-    }, ensure_ascii=False, indent=0)
+    }
+    if predicate.get("agency_class"):
+        body["agency_class"] = predicate["agency_class"]
+        body["agency_class_source"] = predicate.get("agency_class_source")
+    return json.dumps(body, ensure_ascii=False, indent=0)
 
 
 # ------------------------------------------------------------------ CODER

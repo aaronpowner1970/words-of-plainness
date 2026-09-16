@@ -126,3 +126,38 @@ def vet_candidate(cand, chunk_by_key, branch, registry, allow_fallback):
 def vet_source_note(note):
     ok, why = check_length(note or "", SOURCE_NOTE_MAX_WORDS, "source_note")
     return ok, why
+
+
+# ---------------------------------------------------------------- clause 4 (2026-09-16): a creed's silence is not a finding
+# "Creeds are not exhaustive. That a creed does not contain a predicate is never evidence that the tradition denies it."
+# The verifier prompt (gate6-v1.4) states the rule; this is the hard stop, so it does not depend on the model reading it.
+# A DIVERGENCE proposal (rendered_state D) is refused when its only support is a creed's silence — either the verifier
+# raised SOURCE_SILENCE_VS_DENIAL on the candidate, or the coder's own state_reason says the creed does not contain the
+# predicate. The proposal is kept on the card with its refusal; the state falls back to the family's own code.
+import re as _re                                                      # noqa: E402
+
+CREEDAL_SILENCE_STOP = "CREEDAL_SILENCE_IS_NOT_DENIAL"
+HAZARD_SOURCE_SILENCE = "SOURCE_SILENCE_VS_DENIAL"
+_CREED_WORD = _re.compile(r"\b(creed|symbol of faith|nicene|niceno|athanasian|apostles'? creed|quicunque)\b", _re.I)
+_SILENCE = _re.compile(r"\b(silent|silence|does not (?:contain|mention|say|include|state|address|speak)|"
+                       r"nowhere (?:mentions|states|says)|no mention|not (?:in|found in|present in|contained in)|omits|"
+                       r"absent from|says nothing|makes no)\b", _re.I)
+
+
+def creedal_silence_stop(proposal, rubric, family_code=None):
+    """None when the proposal stands; otherwise the fields that refuse it (merged into the coder proposal)."""
+    if str(proposal.get("rendered_state") or "").upper() != "D":
+        return None
+    reason = " ".join(str(proposal.get(k) or "") for k in ("state_reason", "source_note"))
+    hazard = HAZARD_SOURCE_SILENCE in ((rubric or {}).get("hazard_flags") or [])
+    creedal = bool(_CREED_WORD.search(reason)) and bool(_SILENCE.search(reason))
+    if not (creedal or (hazard and _CREED_WORD.search(reason))):
+        return None
+    return {"rendered_state": family_code or None, "rendered_state_proposed": proposal.get("rendered_state"),
+            "divergence_refused_by": CREEDAL_SILENCE_STOP,
+            "divergence_refusal_reason": ("clause 4: a creed's silence is never evidence that the tradition denies the "
+                                          "predicate, so it cannot support a divergence. "
+                                          + (f"The verifier raised {HAZARD_SOURCE_SILENCE} on this candidate. " if hazard else "")
+                                          + "The proposal is kept for the author; the state falls back to the family code."),
+            "divergence_refusal_support": {"hazard_raised": hazard, "reason_names_a_creed": bool(_CREED_WORD.search(reason)),
+                                           "reason_asserts_silence": bool(_SILENCE.search(reason))}}

@@ -1,0 +1,537 @@
+{
+ "rule": "a citation resolves to the creed's (or the definition's) tier only when its phrase stands verbatim, under textutil.punct_key, in a REGISTERED creed or definition TEXT of the SAME branch",
+ "creed_text_rule": "the chunk's locator names a creed AND its row is either one of R6-5's chunk_level_creed_resolution_allowed_rows or a row whose bare tier is CONCILIAR or CONFESSIONAL (the creed printed as a text inside a conciliar or confessional standard). A CATECHETICAL row is never a registered creed text — that is what clause 3 forbids.",
+ "definition_text_rule": "the chunk's locator names a definition of faith / horos / confession of faith AND its row's bare tier is CONCILIAR, and the locator names no canon or anathema (R6-10)",
+ "phrase_floor": {
+  "min_words": 3,
+  "min_chars": 12,
+  "why": "'begotten, not made' (3 words, 17 chars) and 'light of light' (3 words, 14) are the shortest clauses the author's own examples turn on"
+ },
+ "by_branch": {
+  "Anglican": {
+   "registered_creed_texts": [
+    {
+     "registry_id": "BSR-AN-03",
+     "locator": "Athanasian Creed (Quicunque Vult), At Morning Prayer, BCP",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 3780
+    }
+   ],
+   "registered_definition_texts": [],
+   "chunk_level_creed_rows_in_this_branch": [],
+   "chunk_level_creed_resolution_now_disabled_on": [
+    "BSR-AN-03",
+    "BSR-AN-04",
+    "BSR-AN-05"
+   ]
+  },
+  "Baptist": {
+   "registered_creed_texts": [],
+   "registered_definition_texts": [],
+   "chunk_level_creed_rows_in_this_branch": [],
+   "chunk_level_creed_resolution_now_disabled_on": []
+  },
+  "Eastern Orthodox": {
+   "registered_creed_texts": [
+    {
+     "registry_id": "BSR-EO-07",
+     "locator": "THE SYMBOL OF FAITH",
+     "resolves_to": "CONCILIAR",
+     "chars": 1136
+    },
+    {
+     "registry_id": "BSR-EO-09",
+     "locator": "Synodikon §2 — The Symbol of Faith",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 1146
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 1 (Symbol of Faith, article 1)",
+     "resolves_to": "CONCILIAR",
+     "chars": 98
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 2 (Symbol of Faith, article 2)",
+     "resolves_to": "CONCILIAR",
+     "chars": 234
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 3 (Symbol of Faith, article 3)",
+     "resolves_to": "CONCILIAR",
+     "chars": 161
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 4 (Symbol of Faith, article 4)",
+     "resolves_to": "CONCILIAR",
+     "chars": 70
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 5 (Symbol of Faith, article 5)",
+     "resolves_to": "CONCILIAR",
+     "chars": 45
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 6 (Symbol of Faith, article 6)",
+     "resolves_to": "CONCILIAR",
+     "chars": 69
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 7 (Symbol of Faith, article 7)",
+     "resolves_to": "CONCILIAR",
+     "chars": 91
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 8 (Symbol of Faith, article 8)",
+     "resolves_to": "CONCILIAR",
+     "chars": 172
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 9 (Symbol of Faith, article 9)",
+     "resolves_to": "CONCILIAR",
+     "chars": 53
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 10 (Symbol of Faith, article 10)",
+     "resolves_to": "CONCILIAR",
+     "chars": 40
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 11 (Symbol of Faith, article 11)",
+     "resolves_to": "CONCILIAR",
+     "chars": 26
+    },
+    {
+     "registry_id": "BSR-EO-12",
+     "locator": "Σύμβολον τῆς Πίστεως, ἄρθρον 12 (Symbol of Faith, article 12)",
+     "resolves_to": "CONCILIAR",
+     "chars": 30
+    },
+    {
+     "registry_id": "BSR-EO-14",
+     "locator": "THE CREED",
+     "resolves_to": "CONCILIAR",
+     "chars": 1135
+    }
+   ],
+   "registered_definition_texts": [
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 1",
+     "resolves_to": "CONCILIAR",
+     "chars": 303
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 2",
+     "resolves_to": "CONCILIAR",
+     "chars": 1984
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 3",
+     "resolves_to": "CONCILIAR",
+     "chars": 60
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 4",
+     "resolves_to": "CONCILIAR",
+     "chars": 27
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 5",
+     "resolves_to": "CONCILIAR",
+     "chars": 95
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 6",
+     "resolves_to": "CONCILIAR",
+     "chars": 27
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 7",
+     "resolves_to": "CONCILIAR",
+     "chars": 3064
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 8",
+     "resolves_to": "CONCILIAR",
+     "chars": 1277
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 9",
+     "resolves_to": "CONCILIAR",
+     "chars": 678
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 10",
+     "resolves_to": "CONCILIAR",
+     "chars": 353
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 1",
+     "resolves_to": "CONCILIAR",
+     "chars": 319
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 2",
+     "resolves_to": "CONCILIAR",
+     "chars": 2027
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 3",
+     "resolves_to": "CONCILIAR",
+     "chars": 41
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 4",
+     "resolves_to": "CONCILIAR",
+     "chars": 16
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 5",
+     "resolves_to": "CONCILIAR",
+     "chars": 79
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 6",
+     "resolves_to": "CONCILIAR",
+     "chars": 5271
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 7",
+     "resolves_to": "CONCILIAR",
+     "chars": 450
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 8",
+     "resolves_to": "CONCILIAR",
+     "chars": 224
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 9",
+     "resolves_to": "CONCILIAR",
+     "chars": 932
+    },
+    {
+     "registry_id": "BSR-EO-06",
+     "locator": "Definition of Faith, Third Council of Constantinople (680–681), paragraph 10",
+     "resolves_to": "CONCILIAR",
+     "chars": 728
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 1",
+     "resolves_to": "CONCILIAR",
+     "chars": 319
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 2",
+     "resolves_to": "CONCILIAR",
+     "chars": 2016
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 3",
+     "resolves_to": "CONCILIAR",
+     "chars": 41
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 4",
+     "resolves_to": "CONCILIAR",
+     "chars": 16
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 5",
+     "resolves_to": "CONCILIAR",
+     "chars": 79
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 6",
+     "resolves_to": "CONCILIAR",
+     "chars": 5252
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 7",
+     "resolves_to": "CONCILIAR",
+     "chars": 448
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 8",
+     "resolves_to": "CONCILIAR",
+     "chars": 224
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 9",
+     "resolves_to": "CONCILIAR",
+     "chars": 931
+    },
+    {
+     "registry_id": "BSR-EO-13",
+     "locator": "Definition of Faith (Session XVIII), paragraph 10",
+     "resolves_to": "CONCILIAR",
+     "chars": 728
+    }
+   ],
+   "chunk_level_creed_rows_in_this_branch": [
+    "BSR-EO-07",
+    "BSR-EO-14"
+   ],
+   "chunk_level_creed_resolution_now_disabled_on": [
+    "BSR-EO-01",
+    "BSR-EO-04",
+    "BSR-EO-09",
+    "BSR-EO-12"
+   ]
+  },
+  "Lutheran": {
+   "registered_creed_texts": [
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Ecumenical Creeds: The Apostles' Creed",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 740
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Ecumenical Creeds: The Nicene Creed",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 1197
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Ecumenical Creeds: The Athanasian Creed",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 3631
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Small Catechism: II. The Creed, ¶1–3",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 30
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶1–9",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2109
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶10–17",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2605
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶18–24",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2597
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶25–30",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2281
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶31–35",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2338
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶36–42",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2411
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶43–48",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2366
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶49–53",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 1958
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶54–59",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2503
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶60–65",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2417
+    },
+    {
+     "registry_id": "BSR-LU-01",
+     "locator": "Large Catechism: The Apostles' Creed, ¶66–70",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 1925
+    }
+   ],
+   "registered_definition_texts": [],
+   "chunk_level_creed_rows_in_this_branch": [],
+   "chunk_level_creed_resolution_now_disabled_on": [
+    "BSR-LU-01",
+    "BSR-LU-03"
+   ]
+  },
+  "Mennonite / Anabaptist": {
+   "registered_creed_texts": [],
+   "registered_definition_texts": [],
+   "chunk_level_creed_rows_in_this_branch": [],
+   "chunk_level_creed_resolution_now_disabled_on": []
+  },
+  "Methodist / Wesleyan": {
+   "registered_creed_texts": [],
+   "registered_definition_texts": [],
+   "chunk_level_creed_rows_in_this_branch": [],
+   "chunk_level_creed_resolution_now_disabled_on": []
+  },
+  "Reformed / Presbyterian": {
+   "registered_creed_texts": [
+    {
+     "registry_id": "BSR-RP-04",
+     "locator": "Book of Confessions 1.1 (Nicene Creed)",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 108
+    },
+    {
+     "registry_id": "BSR-RP-04",
+     "locator": "Book of Confessions 1.2 (Nicene Creed)",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 683
+    },
+    {
+     "registry_id": "BSR-RP-04",
+     "locator": "Book of Confessions 1.3 (Nicene Creed)",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 3112
+    },
+    {
+     "registry_id": "BSR-RP-04",
+     "locator": "Book of Confessions 2.1 (Apostles' Creed)",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 64
+    },
+    {
+     "registry_id": "BSR-RP-04",
+     "locator": "Book of Confessions 2.2 (Apostles' Creed)",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 377
+    },
+    {
+     "registry_id": "BSR-RP-04",
+     "locator": "Book of Confessions 2.3 (Apostles' Creed)",
+     "resolves_to": "CONFESSIONAL",
+     "chars": 2336
+    }
+   ],
+   "registered_definition_texts": [],
+   "chunk_level_creed_rows_in_this_branch": [],
+   "chunk_level_creed_resolution_now_disabled_on": [
+    "BSR-RP-04"
+   ]
+  },
+  "Roman Catholic": {
+   "registered_creed_texts": [
+    {
+     "registry_id": "BSR-RC-06",
+     "locator": "Apostles' Creed",
+     "resolves_to": "CONCILIAR",
+     "chars": 605
+    },
+    {
+     "registry_id": "BSR-RC-06",
+     "locator": "Nicene Creed",
+     "resolves_to": "CONCILIAR",
+     "chars": 1189
+    },
+    {
+     "registry_id": "BSR-RC-08",
+     "locator": "Apostles' Creed",
+     "resolves_to": "CONCILIAR",
+     "chars": 612
+    },
+    {
+     "registry_id": "BSR-RC-08",
+     "locator": "Nicene Creed",
+     "resolves_to": "CONCILIAR",
+     "chars": 1193
+    }
+   ],
+   "registered_definition_texts": [
+    {
+     "registry_id": "BSR-RC-04",
+     "locator": "Constitution 1 (Confession of Faith — Firmiter credimus), paragraph 1",
+     "resolves_to": "CONCILIAR",
+     "chars": 1006
+    },
+    {
+     "registry_id": "BSR-RC-04",
+     "locator": "Constitution 1 (Confession of Faith — Firmiter credimus), paragraph 2",
+     "resolves_to": "CONCILIAR",
+     "chars": 1406
+    },
+    {
+     "registry_id": "BSR-RC-04",
+     "locator": "Constitution 1 (Confession of Faith — Firmiter credimus), paragraph 3",
+     "resolves_to": "CONCILIAR",
+     "chars": 886
+    },
+    {
+     "registry_id": "BSR-RC-04",
+     "locator": "Constitution 1 (Confession of Faith — Firmiter credimus), paragraph 4",
+     "resolves_to": "CONCILIAR",
+     "chars": 276
+    }
+   ],
+   "chunk_level_creed_rows_in_this_branch": [
+    "BSR-RC-06",
+    "BSR-RC-08"
+   ],
+   "chunk_level_creed_resolution_now_disabled_on": []
+  }
+ }
+}

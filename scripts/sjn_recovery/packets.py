@@ -33,7 +33,7 @@ import os
 import time
 
 from .config import (PACKETS_DIR, EMPTY_RESULT, EMPTY_RESULT_INCOMPLETE, MAX_CANDIDATES, ROUTE_CAVEATED_ACCEPT, ROUTE_CAVEAT_SAMPLE,
-                     CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA)
+                     CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA, CONSULTATION_LADDERS)
 from .registry import tier_rank
 from .allocation import allocate, translation_pairs, translation_pair_evidence, speaks_for_groups
 from . import guards, store, rulings
@@ -138,19 +138,52 @@ def silence_rationales(st, runner, coverage_final, manifest_status):
     return out
 
 
-def no_text_rows(st, branch_rows, registry, manifest, card_empty):
+def ladder_tier(registry, rid):
+    """The consultation-ladder tier of a row (R6-5 moved BSR-EO-01 from A to B), or None where the branch runs flat.
+
+    Read from the row's `eo_ladder_tier` field first — the workbook's once it carries it, the author ruling's until then
+    (registry.registry_overrides) — and otherwise from config.CONSULTATION_LADDERS, the ladder the author ruled in the
+    EO launch prompt. A branch with no ladder has None everywhere and the ladder rules below do nothing."""
+    row = (getattr(registry, "by_id", {}) or {}).get(rid) or {}
+    t = str(row.get("eo_ladder_tier") or "").strip().upper()
+    if t:
+        return t
+    return (CONSULTATION_LADDERS.get(row.get("branch")) or {}).get(rid)
+
+
+def no_text_rows(st, branch_rows, registry, manifest, card_empty, ladder_entered=None):
     """Session 5 (2026-09-13, after the Baptist packet review): the ratified rows this CELL ran without. Read from the
     cell's own record, never from today's chunk store — a row whose corpus is built after the cell ran is still a row
     the cell never saw. A row is NO TEXT on a card when it is a citable ratified row of the branch and the cell's
     coverage has no entry for it: either the locator recorded NO_CORPUS for it, or it was not in the branch when the
     cell ran. A fallback-only row is consulted only when pass one leaves the cell empty, so it counts on an empty card
-    (or wherever pass two ran), never on a filled one."""
+    (or wherever pass two ran), never on a filled one.
+
+    Session 7, Task 6 (the EO prompt's defect 1b), returning (no_text, not_consulted): a row the ladder never sent to the
+    locator was never a row that "supplied no text" — it was a row the cell had no occasion to open. Confirmed by a direct
+    call on a synthetic empty EO card: BSR-EO-11 and BSR-EO-13 (Tier C, witness and lineage rows) came back NO TEXT and
+    refused REVIEWED on every EO empty. So:
+      * a row not consulted BECAUSE OF ITS LADDER TIER is recorded "NOT CONSULTED (ladder tier X)", not NO TEXT;
+      * Tier C rows are excluded from the REVIEWED test altogether;
+      * a Tier B row that was DUE — the card is empty after Tier A, so the ladder entered Tier B — and was not consulted
+        still blocks REVIEWED, as NO TEXT. BSR-EO-01 is a Tier B row from R6-5, and is included on that footing.
+    `ladder_entered`: the ladder tiers this card actually entered (e.g. {"A"} on a Tier-A-filled card, {"A","B"} on an
+    empty one). None means the branch runs flat and every row is due, which is every branch before Eastern Orthodox."""
     coverage_final = (st or {}).get("coverage_final") or (_legacy_coverage(st) if st else {})
     passes = (st or {}).get("passes") or {}
-    out = []
+    out, not_consulted = [], []
     for r in branch_rows:
         rid = r["registry_id"]
         if rid in coverage_final:
+            continue
+        tier = ladder_tier(registry, rid)
+        if tier and (tier == "C" or (ladder_entered is not None and tier not in ladder_entered)):
+            not_consulted.append({"registry_id": rid, "ladder_tier": tier,
+                                  "status": f"NOT CONSULTED (ladder tier {tier})",
+                                  "reason": (f"ladder tier {tier}: not consulted on open cells at all" if tier == "C" else
+                                             f"ladder tier {tier}: the card was resolved at tier(s) "
+                                             f"{', '.join(sorted(ladder_entered or []))} and never entered tier {tier}"),
+                                  "blocks_reviewed": False})
             continue
         if registry.is_fallback(rid) and not card_empty and "2" not in passes:
             continue
@@ -163,19 +196,25 @@ def no_text_rows(st, branch_rows, registry, manifest, card_empty):
         else:
             how = "the cell ran before this standard had a corpus in the branch; it was never supplied to the locator"
         note = (m.get("notes") or [""])[0]
-        out.append({"registry_id": rid, "manifest_status": m.get("status") or "NO MANIFEST ENTRY",
+        out.append({"registry_id": rid, "manifest_status": m.get("status") or "NO MANIFEST ENTRY", "ladder_tier": tier,
                     "reason": how + (f"; manifest now: {m.get('status')}" if m.get("status") else "")
                               + (f" — {note[:160]}" if note and not m.get("text_hash") else "")})
-    return out
+    return out, not_consulted
 
 
-def empty_result_option(coverage_final, rationales, exhaustion=None, no_text=None):
+def empty_result_option(coverage_final, rationales, exhaustion=None, no_text=None, not_consulted=None):
     """2a/2b/2d, pure: the empty-result option for a card. The REVIEWED state is offered only when every
     consulted standard is FULL or EXHAUSTED; a sampled standard blocks the claim and the honest state is named.
     Session 5: a ratified row that supplied the cell NO TEXT is carried in standards_reviewed with status NO TEXT
-    and its reason, and blocks the claim exactly as a sampled standard does; a card that consulted nothing offers nothing."""
+    and its reason, and blocks the claim exactly as a sampled standard does; a card that consulted nothing offers nothing.
+    Session 7 (Task 6): a row the ladder never sent to the locator is carried with status NOT CONSULTED (ladder tier X)
+    and its tier, and does NOT block the claim — it is disclosure, not an unread standard."""
     reviewed = []
     incomplete = []
+    for nc in not_consulted or []:
+        reviewed.append({"registry_id": nc["registry_id"], "coverage": None, "supplied": 0, "of": None, "share": None,
+                         "status": nc["status"], "ladder_tier": nc.get("ladder_tier"), "reason": nc.get("reason"),
+                         "silence_rationale": nc.get("reason")})
     for nt in no_text or []:
         reviewed.append({"registry_id": nt["registry_id"], "coverage": None, "supplied": 0, "of": None, "share": None,
                          "status": "NO TEXT", "manifest_status": nt.get("manifest_status"), "reason": nt.get("reason"),
@@ -205,6 +244,7 @@ def empty_result_option(coverage_final, rationales, exhaustion=None, no_text=Non
         "review_incomplete": incomplete,
         "always_available": True,
         "standards_reviewed": reviewed,
+        "not_consulted_by_ladder": [{"registry_id": n["registry_id"], "ladder_tier": n.get("ladder_tier")} for n in not_consulted or []],
         "locator_rationale": rationales,
         "exhaustion": exhaustion,
     }
@@ -297,10 +337,19 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     vers = st["verifications"].get(cand["candidate_id"], {})
                     std = registry.public(cand["registry_id"])
                     final = vers.get("final") or {}
+                    # Session 7 (R6-5 clause 1, R6-10, R6-6/R6-9): the effective tier is RE-RESOLVED at build time from the
+                    # phrase, so a packet always states the tier the rules in force give. The value the cell runner stored
+                    # is kept beside it when the two differ, so the change is visible rather than silent.
+                    res = registry.tier_resolution(cand["registry_id"], chunk, cand["phrase"])
                     entry = {
                         "candidate_id": cand["candidate_id"], "pass": cand["pass"], "registry_id": cand["registry_id"],
                         "standard_title": std["standard_title"], "authority_tier": std["authority_tier"],
-                        "effective_tier": cand.get("effective_tier") or std["authority_tier"], "speaks_for": std["speaks_for"],
+                        "effective_tier": res["effective_tier"], "effective_tier_why": res["why"],
+                        "effective_tier_at_run": cand.get("effective_tier"),
+                        "effective_tier_changed_since_run": bool(cand.get("effective_tier")) and cand.get("effective_tier") != res["effective_tier"],
+                        "registered_phrase_hit": res["registered_phrase_hit"],
+                        "adoption": {k: registry.adoption(cand["registry_id"]).get(k) for k in ("adoption_status", "adoption_body_scope", "adoption_act", "source")},
+                        "adoption_disclosure": res["adoption_disclosure"], "speaks_for": std["speaks_for"],
                         "reception_scope": std["reception_scope"], "reception_note": std["reception_note"],
                         "scope_caveat": std["scope_caveat"], "fallback_tier": cand["fallback_tier"],
                         "witness": bool(cand.get("witness") or std.get("witness_only")), "slot": cand.get("slot"),
@@ -394,8 +443,17 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                 card["status"] = st.get("phase")
         elif partial:
             card["status"] = f"NOT_RUN: branch stopped by {_stopped_by(partial)}"
-        nt = no_text_rows(st, citable_rows, registry, manifest, card_empty=not card["candidates"])
-        card["empty_result_option"] = empty_result_option(coverage_final, rationales, (st or {}).get("exhaustion"), no_text=nt)
+        # Task 6: the ladder tiers this card actually entered. Read from the cell's own record (the ladder writes it),
+        # else derived from the rows the card consulted; None where the branch runs flat and every row is due.
+        entered = (st or {}).get("ladder_entered")
+        if entered is None and any(ladder_tier(registry, r["registry_id"]) for r in citable_rows):
+            entered = sorted({ladder_tier(registry, rid) for rid in coverage_final if ladder_tier(registry, rid)}) or None
+        nt, not_consulted = no_text_rows(st, citable_rows, registry, manifest, card_empty=not card["candidates"],
+                                         ladder_entered=set(entered) if entered else None)
+        card["ladder_entered"] = sorted(entered) if entered else None
+        card["not_consulted_by_ladder"] = not_consulted
+        card["empty_result_option"] = empty_result_option(coverage_final, rationales, (st or {}).get("exhaustion"),
+                                                          no_text=nt, not_consulted=not_consulted)
         for x in nt:
             no_text_on_cards.setdefault(x["registry_id"], {"cards": 0, "empty_cards": 0, "manifest_status": x["manifest_status"]})
             no_text_on_cards[x["registry_id"]]["cards"] += 1

@@ -1,0 +1,139 @@
+{
+ "run_id": "s7-v14",
+ "verifier": "sonnet only, gate6-v1.4",
+ "items": 16,
+ "by_kind": {
+  "IDIOM_NON_CREEDAL_REJECTION": 12,
+  "Q277_ATHANASIAN": 2,
+  "IDIOM_CREEDAL": 1,
+  "IDIOM_ON_CARD": 1
+ },
+ "check_2_Q161_creedal_idiom": [
+  {
+   "candidate_id": "Q-161-p1-BSR-RC-01-3",
+   "before": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY",
+    "prompt_version": [],
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA"
+    ]
+   },
+   "after": {
+    "subject_is_required": "Y",
+    "grammatical_subject": "the Holy Spirit",
+    "speech_act_is_assertion": "Y",
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The passage directly predicates 'giver of life' of the Holy Spirit, which is a full assertion of the life-giving predicate, not a narrower or partial statement.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "reason": "The Holy Spirit is directly and affirmatively named 'giver of life' in the Catechism's own exposition of the creedal confession, satisfying the predicate fully and in the required subject.",
+    "prompt_version": "gate6-v1.4"
+   }
+  }
+ ],
+ "check_3_non_creedal_idiom_rejections": {
+  "n": 12,
+  "still_rejected": 10,
+  "new_false_accepts": [
+   {
+    "candidate_id": "Q-213-p1-BSR-AN-01-1",
+    "queue_id": "Q-213",
+    "branch": "Anglican",
+    "predicate": "Savior",
+    "phrase": "our Lord and Saviour Jesus Christ",
+    "before": "REJECT",
+    "after": "ACCEPT",
+    "reason": "The title 'Saviour' is embedded in a substantive doctrinal assertion that Christ's merit is the sole ground of justification, satisfying the predicate fully and in the standard's own voice."
+   },
+   {
+    "candidate_id": "Q-160-p1-BSR-MA-01-1",
+    "queue_id": "Q-160",
+    "branch": "Mennonite / Anabaptist",
+    "predicate": "Glorious",
+    "phrase": "To the one holy and ever-loving triune God be glory for ever and ever",
+    "before": "REJECT",
+    "after": "ACCEPT_WITH_CAVEAT",
+    "reason": "The cited phrase is itself a doxological formula naming glory of the triune God, which by the rubric presupposes rather than asserts the predicate; however, the same passage independently asserts God's glory as a divine attribute ('God's awesome glory ... are perfect in holy love'), satisfying the outside-formula exception, so the citation is accepted with the formula hazard noted."
+   }
+  ],
+  "ok": false
+ },
+ "check_4_Q277_athanasian": {
+  "candidates": [
+   {
+    "candidate_id": "Q-277-p1-BSR-AN-04-1",
+    "registry_id": "BSR-AN-04",
+    "phrase": "the Father is Almighty, the Son Almighty, and the Holy Ghost Almighty",
+    "before": "ACCEPT_WITH_CAVEAT",
+    "after": "ACCEPT_WITH_CAVEAT",
+    "rubric": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "the Holy Ghost (in the conjunct 'the Holy Ghost Almighty')",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_model": null,
+     "floor_capped_by": null,
+     "floor_reason": "The clause directly predicates 'Almighty' (i.e., full divine power/might) of the Holy Ghost by name, which is the substance of the 'divine power' predicate as defined.",
+     "hazard_flags": [
+      "FAMILY_VARIATION"
+     ],
+     "asserted_outside_formula": "NA",
+     "partial_asserts_predicate": "NA",
+     "spirit_name_in_phrase": "Y",
+     "refused_by": null,
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "reason": "The joint-predication clause names the Holy Ghost together with 'Almighty,' asserting divine power of the Spirit in the creed's own confessed voice, satisfying the predicate at the FULL floor.",
+     "prompt_version": "gate6-v1.4"
+    }
+   },
+   {
+    "candidate_id": "Q-277-p1-BSR-AN-03-1",
+    "registry_id": "BSR-AN-03",
+    "phrase": "the Father is Almighty, the Son Almighty: and the Holy Ghost Almighty",
+    "before": "REJECT",
+    "after": "ACCEPT_WITH_CAVEAT",
+    "rubric": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "the Father...the Son...and the Holy Ghost (joint predication, with 'the Holy Ghost Almighty' as the relevant conjunct)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_model": null,
+     "floor_capped_by": null,
+     "floor_reason": "The clause explicitly predicates 'Almighty' (eternal power and might) of the Holy Ghost by name, satisfying the joint predication rule for the required subject.",
+     "hazard_flags": [
+      "FAMILY_VARIATION"
+     ],
+     "asserted_outside_formula": "NA",
+     "partial_asserts_predicate": "NA",
+     "spirit_name_in_phrase": "Y",
+     "refused_by": null,
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "reason": "The phrase is verbatim, names the Holy Ghost specifically as Almighty (divine power/might), and is asserted by the creed as confessed doctrine within a liturgical exposition, not merely a fixed doxological formula.",
+     "prompt_version": "gate6-v1.4"
+    }
+   }
+  ],
+  "agree": true,
+  "ok": true
+ },
+ "idiom_candidate_already_on_a_card": [
+  {
+   "candidate_id": "Q-297-p1-BSR-RC-01-1",
+   "before": "ACCEPT_WITH_CAVEAT",
+   "after": "ACCEPT"
+  }
+ ],
+ "note": "sonnet only; no stored cell state, packet or workbook was touched",
+ "ok": false
+}

@@ -213,12 +213,47 @@ workstreams:
       verifier reply without a floor was scored ACCEPT (Q-081, Q-099). A run.py re-entry on finished branches was reverted
       before any job ran (it resumed Q-380 exhaustion and crashed Anglican on a BSR-AN-05 URL). Report:
       docs/gate6/WoP_SJN_Gate6_Session6_Report_20260913.md.
+      Session 7 (2026-09-16, the author's rulings R6-5 to R6-12, pre-EO repairs; workbook unchanged; 2.51 of 10 USD;
+      EO did NOT run): R6-5 BSR-EO-01 re-typed IN MEMORY through a new registry-override hook (rulings.registry_overrides,
+      registry.Registry) — it is Hopko, The Orthodox Faith Vol. I "The Symbol of Faith", not the Creed: CATECHETICAL,
+      JURISDICTIONAL, same_work_as BSR-EO-02 (ONE observation), EO ladder Tier A -> B. R6-10/clause 1: creed resolution is
+      now PHRASE-level, not chunk-locator — a citation resolves to a creed's or a dogmatic definition's tier only where its
+      phrase stands verbatim (textutil.punct_key) in a REGISTERED creed or definition text of the same branch; chunk-level
+      resolution survives only on BSR-EO-07 / BSR-EO-14 / BSR-RC-06 / BSR-RC-08 and is disabled on EO-01, EO-04, AN-04,
+      AN-05, LU-01, LU-03, RP-04. Canons and anathemas are excluded, and the Catholic branch registers NO Chalcedonian
+      definition text, so TP-042..045 keep BSR-RC-01's tier. R6-6/R6-9 the adoption field (adoption_status / adoption_act /
+      adoption_body_scope / adoption_verified) applied in memory: 6 rows ruled, 30 NOT_APPLICABLE mechanically, 8 UNVERIFIED;
+      UNVERIFIED fails closed, so a CATECHETICAL row that is ISSUED_UNADOPTED or UNVERIFIED resolves OFFICIAL_EXPOSITION with
+      a display qualifier (7 rows move: AN-02, AN-04, AN-05, EO-01, EO-02, LU-03, RC-07). A CONFESSIONAL row is never
+      demoted — clause 3 reaches catechetical and expository rows — so RP-03 and RP-05 are ADOPTED proposals, not demotions.
+      APP CONFIG unchanged; the harness ASSERTS that OFFICIAL_EXPOSITION ranks directly below CATECHETICAL and stops if not.
+      Re-resolution across the seven finished packets (in memory, nothing released): 66 cards move, 57 tier changes from the
+      adoption field and 10 from a registered creed phrase (AN-04 and LU-03 quoting a creed rise to CONFESSIONAL, RC-01 once
+      to CONCILIAR); 12 cards change order, 28 change a slot role. Task 1d: all 38 of BSR-EO-01's creed-bearing sentences
+      carry a run of 4+ words standing verbatim in BSR-EO-07 or BSR-EO-09, so the conditional trigger DID NOT fire and no
+      OCA Creed-as-prayer row is proposed. Task 6: packets.no_text_rows is ladder-aware — NOT CONSULTED (ladder tier X) is
+      not NO TEXT, Tier C is out of the REVIEWED test, a due Tier B row still blocks; the EO ladder is data
+      (config.EO_CONSULTATION_LADDER, Tier A 5 rows / 85.2k chars, Tier B 6 / 524.4k, Tier C 2). R6-7 Spirit-name code guard
+      (agents.verify) and R6-11's creedal-silence hard stop (guards.creedal_silence_stop) are live. R6-8 agency tags: only
+      RNR-H35 = ATTRIBUTE is ratified; six proposals in recovery-runs/spirit-family-agency-tags-PROPOSED.json, NOT in force,
+      and they BLOCK the EO launch. VERIFIER gate6-v1.4 IS NOT IN FORCE — built (v1.3 + the creed lines + JOINT PREDICATION
+      + AGENCY) and measured, it failed 2 of 4 checks: tp-4 recall 0.933 against the 0.967 floor, and Q-160 flipped to accept
+      under v1.4 but not under a v1.3 control. The cause is diagnosed by replicate (3 per item per version): TP-049 "the
+      Father, the Son, and the Holy Ghost" (family RNR-H05, Son) is accepted 2/3 by v1.3 and 0/3 by v1.4, every refusal
+      reasoning in the JOINT PREDICATION line's words — that line, written for THE HOLY SPIRIT, leaks onto other families.
+      gate6-v1.3 remains in force; the reserved locator name gate6-v1.4 for the inference line is released to gate6-v1.5.
+      Q-161 RC-01-3 (the creedal IDIOM rejection) flips REJECT -> ACCEPT under v1.4 and stays REJECT under the v1.3 control,
+      so the creed carve-out does exactly what it was written to do. Both Q-277 Athanasian candidates now AGREE — but they
+      agree under the v1.3 control too, so the AN-03/AN-04 split was model variance, not the rule gap it was read as.
+      Housekeeping: the four stray "(1)" files removed. Measurements and scripts: recovery-runs/session7/; fixture tp-4
+      (60 items, EO 3, tier-inflation check passes). Report: docs/gate6/WoP_SJN_Gate6_Session7_Report_20260916.md.
+      EO prompt: wop-scratch/WoP_SJN_Gate6_EOPrompt_20260916.txt — marked NOT LAUNCHABLE.
       Gate 7 items: Q-434 phrase re-cut, Q-169 now resolvable under BSR-RC-08 (re-check
       R001), the Roman Catholic packet's leading-witness cards to re-read under the new
       ordering, BSR-EO-03 retire or re-host, BSR-BA-02 apex→www redirect, see
       recovery-runs/proposed-app-config-gate7.md. Running the Gate 2 pipeline against
       v2.25 blocks on R001 (Q-034) until Gate 7 re-points that cell.
-    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session6_Report_20260913.md; ratify (1) the new Inherited 57 'Required subject' column (wop-scratch/WoP_SJN_RequiredSubject_Delta_20260913.csv), (2) the BSR-EO-03 retirement (Draft3r5 CSV), (3) the declared same-text pair BSR-EO-14 -> BSR-EO-07 and the scope of the one-text-one-slot guard beyond two-host cases (28 cards, mostly shared subscription wording); rule (4) verifier gate6-v1.3 as is or a v1.4 that treats an inferable proposition as neighbouring (v1.3 held PR-18, the Q-390 shape), and whether to apply R6-2 to the remaining 110 carded PARTIALs (~3.3 USD; measured leak 0.37-0.57), (5) before EO: the ratified EO Unbegotten citations (TP-059/TP-060) that R6-2 refuses, compound/triadic predication for Spirit-typed families (Eternal power and might), and whether a creed recited in a liturgy can be capped by IDIOM_OR_FORMULA (Q-161 was); still open: the reject-all exemption, the four derived translation pairs, the Draft3r4 URL ratifications. EO session: the ladder must teach packets.no_text_rows that unconsulted rows are NOT CONSULTED (else Tier C EO-11/EO-13 block REVIEWED on every EO empty), and read the 10-cell checkpoint by mode (the first 10 EO cells are all kataphatic); estimate 38-52 USD. Then give the go for Eastern Orthodox alone, launched with launch_branches.py. Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
+    next_action: "Author: read docs/gate6/WoP_SJN_Gate6_Session7_Report_20260916.md. EASTERN ORTHODOX IS BLOCKED on three of the author's decisions. (1) VERIFIER: gate6-v1.4 failed its regression (tp-4 recall 0.933 < 0.967) because the JOINT PREDICATION line leaks off Holy-Spirit families onto others (TP-049, family RNR-H05: v1.3 2/3 accept, v1.4 0/3) — rule whether to rescope that line to families whose required subject is or includes the Holy Spirit, or amend its text; v1.3 stays in force until then, and the EO prompt pins v1.4. (2) AGENCY TAGS: ratify or amend the six proposed ACTION/ATTRIBUTE classes in recovery-runs/spirit-family-agency-tags-PROPOSED.json (R6-8 blocks EO by name). (3) ADOPTION: 8 rows are UNVERIFIED and fail closed; 7 catechetical rows drop to OFFICIAL_EXPOSITION, which moves 66 cards on the seven finished branches (recovery-runs/session7/task2d-card-changes.json) — ratify the demotions or rule the ADOPTED proposals (RC-07 Compendium, AN-02, AN-04, AN-05, LU-03; and RP-03 / RP-05, which change no tier). Also decide whether to REBUILD the seven finished packets on the new tiers (no model calls) or leave them as released. Note two corrections to the record: the AN-03/AN-04 Q-277 split was model variance, not a rule gap, and the non-creedal IDIOM rejections number 12, not 13. Still open from session 6: the Inherited 57 Required-subject column, the BSR-EO-03 retirement in the workbook, the same-text pair EO-14 -> EO-07, the reject-all exemption, the four derived translation pairs, the Draft3r4 URL ratifications. Then give the go for Eastern Orthodox alone, on wop-scratch/WoP_SJN_Gate6_EOPrompt_20260916.txt, launched with launch_branches.py; estimate 38-52 USD. Code: M3 scope slider (Q rows H22, H03, H45, H39, H52), M3a certified case studies (H05/H22/H43 from cells.json case_study_target), M4 Inspect–Describe–Infer–Challenge over the eight available inferences."
 
 # ═══════════════════════════════════════════════════════════════════
 # PAUSED

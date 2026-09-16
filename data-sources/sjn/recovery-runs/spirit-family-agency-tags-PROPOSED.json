@@ -1,0 +1,71 @@
+{
+ "schema": "sjn-gate6-agency-tags/1",
+ "ruling": "R6-8_passive_agency (author, 2026-09-16)",
+ "status": "PROPOSED — NOT IN FORCE. Only RNR-H35 is ratified. Until the author ratifies the rest, the verifier receives NO agency class for any other family, so gate6-v1.4's AGENCY line fails closed: an agency phrase never satisfies the family. The Eastern Orthodox launch is BLOCKED on this ratification.",
+ "rule": "ACTION: the family's predicate is something the Holy Spirit DOES, so a passive construction naming the Spirit as agent ('renewed by the Holy Spirit') asserts it. ATTRIBUTE: the family's predicate is something the Holy Spirit IS, and an agency phrase never asserts it — never infer an attribute from an action.",
+ "scope": "every family whose required_subject IS or INCLUDES the Holy Spirit, per registry.load_predicates at HEAD (7 of 57). The five that merely ADMIT the Spirit are R6-1's re-typed families; the two that ARE the Spirit are RNR-H34 and RNR-H35.",
+ "written_at": "2026-09-16",
+ "families": {
+  "RNR-H34": {
+   "predicate": "Giver of life",
+   "required_subject": "THE HOLY SPIRIT",
+   "definition": "Names the Holy Spirit's vivifying agency.",
+   "proposed_agency_class": "ACTION",
+   "reasoning": "The definition names an AGENCY — vivifying — not a property held: giving life is something the Spirit does, so 'quickened by the Holy Spirit' asserts the predicate of the Spirit.",
+   "ratified": false
+  },
+  "RNR-H35": {
+   "predicate": "Eternal power and might",
+   "required_subject": "THE HOLY SPIRIT",
+   "definition": "Affirms the Holy Spirit's divine power.",
+   "proposed_agency_class": "ATTRIBUTE",
+   "reasoning": "RATIFIED BY THE AUTHOR (R6-8). Eternal power and might is a property the Spirit HAS, not an act performed; a passage saying a thing was done by the Spirit shows power exercised, never eternal power predicated, and the collective 'one God ... is of eternal power' does not reach the Spirit.",
+   "ratified": true
+  },
+  "RNR-H06": {
+   "predicate": "Lord",
+   "required_subject": "GOD (admits the Son or the Holy Spirit as divine — R6-1)",
+   "definition": "Affirms authority and sovereignty.",
+   "proposed_agency_class": "ATTRIBUTE",
+   "reasoning": "Lordship is a title and standing, not an act: 'the Lord, the giver of life' predicates it of the Spirit directly, whereas 'led by the Spirit' shows the Spirit acting and says nothing about the Spirit's sovereignty.",
+   "ratified": false
+  },
+  "RNR-H21": {
+   "predicate": "Life-giving",
+   "required_subject": "GOD (admits the Son or the Holy Spirit as divine — R6-1)",
+   "definition": "Affirms communication of life.",
+   "proposed_agency_class": "ACTION",
+   "reasoning": "The definition is a COMMUNICATION of life — an act with an agent. A passive naming the Spirit as the one by whom life is given asserts exactly the predicate.",
+   "ratified": false
+  },
+  "RNR-H26": {
+   "predicate": "Judge",
+   "required_subject": "GOD (admits the Son or the Holy Spirit as divine — R6-1)",
+   "definition": "Affirms divine judgment.",
+   "proposed_agency_class": "ACTION",
+   "reasoning": "Judging is an act, and 'judged by the Spirit' names the Spirit as its agent. The office-noun 'Judge' and the act of judging are the same predicate under this family's floor ('Shared divine judgment').",
+   "ratified": false
+  },
+  "RNR-H27": {
+   "predicate": "Savior",
+   "required_subject": "GOD (admits the Son or the Holy Spirit as divine — R6-1)",
+   "definition": "Affirms redemptive action.",
+   "proposed_agency_class": "ACTION",
+   "reasoning": "The definition says ACTION in so many words. 'saved ... by the renewing of the Holy Ghost' names the Spirit as the agent of the redemptive act the family controls.",
+   "ratified": false
+  },
+  "RNR-H38": {
+   "predicate": "Not made",
+   "required_subject": "GOD (admits the Son or the Holy Spirit as divine — R6-1)",
+   "definition": "Denies creaturehood.",
+   "proposed_agency_class": "ATTRIBUTE",
+   "reasoning": "A negative delimiter on what the subject IS. No act by the Spirit can assert that the Spirit is uncreated, and an agency phrase ('all things were made by the Spirit') asserts the predicate of other things, not of the Spirit.",
+   "ratified": false
+  }
+ },
+ "author_action_required": [
+  "ratify or amend each proposed_agency_class",
+  "then the harness supplies the class to the verifier and the AGENCY line of gate6-v1.4 is live for that family",
+  "until then the Eastern Orthodox branch does not launch (R6-8 blocks)"
+ ]
+}

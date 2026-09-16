@@ -29,11 +29,15 @@ from sjn_pipeline.registry import (load_registry, ratified, fallback_only_ids, a
                                    citation_refusal, refusal_reason)
 
 from .config import newest_workbook, OPUS_SLICE_ROWS_DEFAULT, ROUTING_SONNET_WITH_OPUS_SLICE  # noqa: E402
+from . import rulings  # noqa: E402
 
 # ---------------------------------------------------------------- authority tier rank
 # The rank is READ from APP CONFIG `authority_tier_rank` (AUTHOR RATIFIED, v2.25). This module-level
 # default is only the fallback for a workbook that predates the key; Registry() replaces it.
 TIER_RANK_DEFAULT = ["CONCILIAR", "CONFESSIONAL", "CATECHETICAL", "OFFICIAL_EXPOSITION", "CURRENT_OFFICIAL_WITNESS"]
+# R6-9 (session 7): the rank an unadopted or unverified exposition resolves to. It is an EXISTING rank, asserted from
+# APP CONFIG to sit directly below CATECHETICAL (Registry.assert_second_tier_rank); APP CONFIG is never changed.
+SECOND_TIER = "OFFICIAL_EXPOSITION"
 TIER_RANK = list(TIER_RANK_DEFAULT)
 
 
@@ -57,12 +61,30 @@ def tier_rank(tier):
 
 _CREED_LOCATOR = re.compile(r"\b(creed|symbol of faith|nicene|niceno|athanasian|apostles'? creed|quicunque)\b", re.I)
 
+# R6-10 (session 7): a DOGMATIC DEFINITION (horos) registered as a text. Canons and anathemas are excluded by the
+# author's ruling, so a locator that names one is never a definition text however conciliar its row.
+_DEFINITION_LOCATOR = re.compile(r"\b(definition of faith|horos|ὅρος|confession of faith)\b", re.I)
+_DEFINITION_EXCLUDE = re.compile(r"\b(canon|anathema|anathematism|damnamus)\b", re.I)
+
+# The floor for a phrase-level creed or definition match. "begotten, not made" (3 words, 17 characters) and
+# "light of light" (3 words, 14) are the shortest clauses the author's own examples turn on, so the floor sits
+# directly below them. Anything shorter is not a creed CLAUSE but a word or two that the Creed happens to contain.
+CREED_PHRASE_MIN_WORDS = 3
+CREED_PHRASE_MIN_CHARS = 12
+
 
 def creed_resolution_tier(tier_text):
     """The tier a creed printed inside this row resolves to, per the row's own tier note
     ("… the Creed within resolves CONCILIAR", "Nicene and Athanasian resolve CONCILIAR"), or None."""
     m = re.search(r"resolves?\s+([A-Z_]+)", tier_text or "")
     return m.group(1).upper() if m else None
+
+
+def _is_catechism_by_title(row):
+    """R6-6 migration step 2: a row typed CONFESSIONAL or CONCILIAR is NOT_APPLICABLE mechanically UNLESS it is a
+    catechism by title — the Westminster Shorter/Larger, the Heidelberg, the catechisms inside the Book of Concord."""
+    t = s(row.get("standard_title")).casefold()
+    return "catechism" in t or "catechisms" in t
 
 
 DELTA_FIELDS = ("canonical_url", "fetch_mode")
@@ -108,7 +130,6 @@ class Registry:
                 by[rid].update(ch)
             self.delta = prov
         # Session 6 (R6-3): a row the author has retired is retired here, in memory, until the workbook says so.
-        from . import rulings
         self.rulings_applied = []
         by = {r["registry_id"]: r for r in self.rows_all}
         for rid, ru in rulings.retirements().items():
@@ -121,6 +142,34 @@ class Registry:
                                          "pending": "applied in memory; workbook not written"}
             by[rid]["status"] = "RETIRED"
             self.rulings_applied.append({"registry_id": rid, "ruling": ru["ruling"], "status": "RETIRED", "reason_code": ru.get("reason_code")})
+        # Session 7 (R6-5): the registry OVERRIDE hook. A row the author has re-typed is re-typed here, in memory,
+        # until the workbook says so — the same pattern as the retirement above. Once the workbook carries the value
+        # it is read from the workbook and a disagreement fails loudly, exactly as R6-1's required-subject column does.
+        self.registry_overrides = {}
+        for rid, ov in rulings.registry_overrides().items():
+            if rid not in by:
+                raise SystemExit(f"author ruling {ov['ruling']} re-types {rid}, which is not a workbook registry row")
+            applied, agreed = {}, {}
+            for field, value in ov["fields"].items():
+                wb_value = s(by[rid].get(field))
+                if wb_value and field in ("same_work_as", "eo_ladder_tier", "creed_resolution"):
+                    # a column the workbook has since grown: it wins, and must agree
+                    if wb_value != value:
+                        raise SystemExit(f"Branch Source Registry {rid} '{field}' disagrees with author ruling {ov['ruling']}: "
+                                         f"{wb_value!r} vs {value!r}")
+                    agreed[field] = wb_value
+                    continue
+                if wb_value == value:
+                    agreed[field] = wb_value                  # the workbook already carries the re-type
+                    continue
+                applied[field] = {"workbook": by[rid].get(field), "ruled": value}
+                by[rid][field] = value
+            by[rid]["_author_ruling_override"] = {"ruling": ov["ruling"], "applied": applied, "already_in_workbook": agreed,
+                                                  "pending": "applied in memory; workbook not written"}
+            self.registry_overrides[rid] = {"ruling": ov["ruling"], "applied": applied, "already_in_workbook": agreed}
+            if applied:
+                self.rulings_applied.append({"registry_id": rid, "ruling": ov["ruling"], "status": "RE-TYPED",
+                                             "fields": sorted(applied)})
         self.rows = ratified(self.rows_all)
         self.fallback_ids = set(fallback_only_ids(self.config))
         self.by_id = {r["registry_id"]: r for r in self.rows}
@@ -138,6 +187,169 @@ class Registry:
         self.encyclical_1848_status = s(self.config.get("encyclical_1848_status")).upper()
         self.vocabulary_violations = [(r["registry_id"], reception_scope(r)) for r in self.rows
                                       if self.reception_vocabulary and reception_scope(r) not in self.reception_vocabulary]
+        # ---- session 7 (R6-5 / R6-6 / R6-9 / R6-10)
+        self.chunk_level_creed_rows = set(rulings.chunk_level_creed_rows())
+        self.same_work_rows = rulings.same_work_rows()
+        self.independence_groups = rulings.independence_groups()
+        self.adoption_policy = rulings.adoption_policy()
+        self.assert_second_tier_rank()
+        self.adoption_map, self.adoption_migration = self._migrate_adoption(rulings.adoption_rows())
+        self._creed_index, self._definition_index = {}, {}
+
+    # ---------------------------------------------------------------- R6-9: the second tier's rank
+    def assert_second_tier_rank(self):
+        """R6-9 asserts, from APP CONFIG, that OFFICIAL_EXPOSITION ranks DIRECTLY below CATECHETICAL. The rank is the
+        ratified key; the harness never changes it, and it stops rather than resolve an unadopted exposition to a rank
+        the workbook does not say is the next one down."""
+        rank = list(self.tier_rank_list)
+        for t in ("CATECHETICAL", SECOND_TIER):
+            if t not in rank:
+                raise SystemExit(f"APP CONFIG authority_tier_rank does not carry {t}: R6-9 cannot resolve an unadopted "
+                                 f"exposition ({rank})")
+        if rank.index(SECOND_TIER) != rank.index("CATECHETICAL") + 1:
+            raise SystemExit(f"APP CONFIG authority_tier_rank does not rank {SECOND_TIER} directly below CATECHETICAL "
+                             f"({rank}): R6-9's second tier is not the rank the author ratified — stopping")
+        return {"rank": rank, "catechetical": rank.index("CATECHETICAL"), "second_tier": rank.index(SECOND_TIER),
+                "ok": True}
+
+    # ---------------------------------------------------------------- R6-6: the adoption field
+    def _migrate_adoption(self, ruled):
+        """The four adoption columns on every ratified row, in the author's migration order. The workbook wins where it
+        already carries a column, and a disagreement with the ruling fails loudly. Returns (map, migration record)."""
+        out, by_step = {}, {"WORKBOOK": [], "AUTHOR_RULING_R6-6": [], "NOT_APPLICABLE (mechanical)": [], "UNVERIFIED (default)": []}
+        for r in self.rows:
+            rid = r["registry_id"]
+            wb = {c: s(r.get(c)) for c in rulings.ADOPTION_COLUMNS}
+            ruled_row = ruled.get(rid)
+            if wb.get("adoption_status"):
+                if ruled_row and wb["adoption_status"] != ruled_row["adoption_status"]:
+                    raise SystemExit(f"Branch Source Registry {rid} 'adoption_status' disagrees with author ruling R6-6: "
+                                     f"{wb['adoption_status']!r} vs {ruled_row['adoption_status']!r}")
+                rec, source = dict(wb), "WORKBOOK"
+            elif ruled_row:
+                rec, source = dict(ruled_row), "AUTHOR_RULING_R6-6"
+            elif bare_tier(r.get("authority_tier")) in ("CONCILIAR", "CONFESSIONAL") and not _is_catechism_by_title(r):
+                rec, source = {"adoption_status": "NOT_APPLICABLE", "adoption_act": "", "adoption_body_scope": "",
+                               "adoption_verified": "mechanical: the bare tier is conciliar or confessional and the row is "
+                                                    "not a catechism by title — clause 3 does not reach it"}, "NOT_APPLICABLE (mechanical)"
+            else:
+                rec, source = {"adoption_status": "UNVERIFIED", "adoption_act": "", "adoption_body_scope": "",
+                               "adoption_verified": "not verified; R6-6 fails closed (resolved as ISSUED_UNADOPTED)"}, "UNVERIFIED (default)"
+            rec["source"] = source
+            rec["bare_tier"] = bare_tier(r.get("authority_tier"))
+            rec["catechism_by_title"] = _is_catechism_by_title(r)
+            out[rid] = rec
+            by_step[source].append(rid)
+        return out, {k: sorted(v) for k, v in by_step.items()}
+
+    def adoption(self, rid):
+        return self.adoption_map.get(rid) or {"adoption_status": "UNVERIFIED", "source": "not a ratified row"}
+
+    def adoption_disclosure(self, rid):
+        """R6-9: what the CARD must say about this row's adoption. None when there is nothing to disclose."""
+        a = self.adoption(rid)
+        d = self.adoption_policy["disclosure"]
+        st, scope = a.get("adoption_status"), (a.get("adoption_body_scope") or "")
+        if st == "ADOPTED":
+            if scope and scope != "WHOLE_BRANCH":
+                body = a.get("adopting_body") or "the adopting body"
+                reach = {"ONE_CHURCH": "one church", "MULTILATERAL": "several churches"}.get(scope, scope.casefold())
+                return {"text": f"approved by {body} ({reach})", "adoption_status": st, "adoption_body_scope": scope,
+                        "adoption_act": a.get("adoption_act"), "scope_rule": self.adoption_policy["scope_rule"]}
+            return None
+        if st == "NOT_APPLICABLE":
+            return None
+        text = d.get(st) or d.get("UNVERIFIED")
+        if a.get("bare_tier") == "CATECHETICAL" or a.get("catechism_by_title"):
+            text = f"{text} ({d.get('catechism_qualifier')})"
+        return {"text": text, "adoption_status": st, "adoption_verified": a.get("adoption_verified"),
+                "fails_closed": st == "UNVERIFIED"}
+
+    def exposition_tier(self, rid, tier=None):
+        """R6-6 clause 3 / R6-9: the tier an EXPOSITION citation (not a verbatim creed or definition phrase) resolves to.
+
+        Clause 3 reaches CATECHETICAL rows — the review's own statement of its scope ("clause 3 reaches only catechetical
+        and expository rows"). A CONFESSIONAL row is not demoted: the confessional act that typed it IS its adoption, and
+        demoting the Westminster Larger Catechism below the Shorter is not what the ruling says. Where such a row is left
+        UNVERIFIED the card still discloses it (adoption_disclosure) and it is reported as an ADOPTED proposal."""
+        row = self.by_id.get(rid)
+        if not row:
+            return ""
+        tier = tier if tier is not None else s(row.get("authority_tier"))
+        if bare_tier(tier) != "CATECHETICAL":
+            return tier
+        st = self.adoption(rid).get("adoption_status")
+        if st in ("ADOPTED", "NOT_APPLICABLE"):
+            return tier
+        qualifier = self.adoption_policy["disclosure"].get("catechism_qualifier") or "not adopted"
+        return f"{SECOND_TIER} ({qualifier})"
+
+    # ---------------------------------------------------------------- R6-5 / R6-10: registered creed and definition texts
+    def registered_creed_texts(self, branch):
+        """The creed TEXTS this branch registers: chunks that ARE a creed, never a catechism's exposition of one.
+
+        A chunk qualifies when its locator names a creed AND its row is a creed-carrying row — either one of R6-5's
+        chunk_level_creed_resolution_allowed_rows (BSR-EO-07, BSR-EO-14, BSR-RC-06, BSR-RC-08), or a row whose bare tier
+        is CONCILIAR or CONFESSIONAL, which is the creed printed as a text inside a conciliar or confessional standard
+        (BSR-EO-12, BSR-EO-09 §2, BSR-AN-03, BSR-LU-01's Ecumenical Creeds, BSR-RP-04's Book of Confessions creeds).
+        A CATECHETICAL row is never a registered creed text: that is exactly what clause 3 forbids."""
+        if branch in self._creed_index:
+            return self._creed_index[branch]
+        from . import store
+        from .textutil import punct_key
+        out = []
+        for r in self.for_branch(branch, citable_only=False):
+            rid, tier = r["registry_id"], s(r.get("authority_tier"))
+            if rid not in self.chunk_level_creed_rows and bare_tier(tier) not in ("CONCILIAR", "CONFESSIONAL"):
+                continue
+            resolved = creed_resolution_tier(tier) or bare_tier(tier)
+            for c in store.load_chunks(rid):
+                loc = (c.get("locator") or "") + " " + (c.get("division") or "")
+                if _CREED_LOCATOR.search(loc):
+                    out.append({"registry_id": rid, "locator": c.get("locator"), "tier": resolved,
+                                "chars": len(c["text"]), "key": punct_key(c["text"]),
+                                "language": c.get("language") or "en"})
+        self._creed_index[branch] = out
+        return out
+
+    def registered_definition_texts(self, branch):
+        """R6-10: the dogmatic DEFINITIONS (horoi) this branch registers as texts. Canons and anathemas are excluded by
+        the ruling, so a locator naming one never qualifies however conciliar its row. No new rows are added."""
+        if branch in self._definition_index:
+            return self._definition_index[branch]
+        from . import store
+        from .textutil import punct_key
+        out = []
+        for r in self.for_branch(branch, citable_only=False):
+            rid, tier = r["registry_id"], s(r.get("authority_tier"))
+            if bare_tier(tier) != "CONCILIAR":
+                continue
+            for c in store.load_chunks(rid):
+                loc = (c.get("locator") or "") + " " + (c.get("division") or "")
+                if _DEFINITION_LOCATOR.search(loc) and not _DEFINITION_EXCLUDE.search(loc):
+                    out.append({"registry_id": rid, "locator": c.get("locator"), "tier": bare_tier(tier),
+                                "chars": len(c["text"]), "key": punct_key(c["text"])})
+        self._definition_index[branch] = out
+        return out
+
+    def resolve_registered_phrase(self, branch, phrase):
+        """R6-5 clause 1 and R6-10: does this phrase stand VERBATIM inside a registered creed or definition text of this
+        branch? Returns the best (highest-ranking) hit — {kind, registry_id, locator, tier} — or None.
+
+        The comparison is textutil.punct_key: NFKC, casefolded, punctuation stripped, whitespace collapsed. The same key
+        R6-4's one-text-one-slot guard uses, so the two rules can never disagree about what "the same words" means."""
+        from .textutil import punct_key
+        key = punct_key(phrase)
+        if len(key.split()) < CREED_PHRASE_MIN_WORDS or len(key) < CREED_PHRASE_MIN_CHARS:
+            return None
+        hits = []
+        for kind, texts in (("CREED", self.registered_creed_texts(branch)), ("DEFINITION", self.registered_definition_texts(branch))):
+            for t in texts:
+                if key and key in t["key"]:
+                    hits.append({"kind": kind, "registry_id": t["registry_id"], "locator": t["locator"], "tier": t["tier"]})
+        if not hits:
+            return None
+        return sorted(hits, key=lambda h: (tier_rank(h["tier"]), h["registry_id"]))[0]
 
     # ---------------------------------------------------------------- row selection
     def for_branch(self, branch, include_fallback=True, citable_only=True):
@@ -186,20 +398,54 @@ class Registry:
         return self.verifier_routing == ROUTING_SONNET_WITH_OPUS_SLICE
 
     # ---------------------------------------------------------------- tiers
-    def effective_tier(self, rid, chunk=None):
-        """The tier a citation resolves to. Under creed_tier_resolution = TIER_PER_CITED_DOCUMENT a
-        creed printed inside a lower-tier row (BSR-RC-06, BSR-EO-07) resolves to the tier the row's
-        note names, when the cited chunk is the creed itself."""
+    def effective_tier(self, rid, chunk=None, phrase=None):
+        """The tier a citation resolves to. Session 7 (R6-5 clause 1, R6-10, R6-6/R6-9), in this order:
+
+          1. PHRASE-level creed and definition resolution. The citation resolves to the creed's (or the definition's)
+             tier only when its phrase stands verbatim in a REGISTERED creed or definition TEXT of the same branch.
+             This replaces chunk-locator creed resolution, which resolved all 159k characters of Hopko's exposition to
+             CONCILIAR because all 19 BSR-EO-01 locators read "The Symbol of Faith — …".
+          2. CHUNK-level creed resolution, kept ONLY for R6-5's chunk_level_creed_resolution_allowed_rows — rows whose
+             creed chunk IS the creed and nothing else (BSR-EO-07, BSR-EO-14, BSR-RC-06, BSR-RC-08). Disabled
+             everywhere else, including BSR-EO-04, BSR-AN-04, BSR-AN-05, BSR-LU-01, BSR-LU-03 and BSR-RP-04.
+          3. Otherwise the HOST tier, as adjusted by the adoption field: an exposition citation from a row that is
+             ISSUED_UNADOPTED or UNVERIFIED resolves to OFFICIAL_EXPOSITION (R6-9), with its display qualifier.
+
+        Resolution never LOWERS a citation below its host row's own tier."""
         row = self.by_id.get(rid)
         if not row:
             return ""
         tier = s(row.get("authority_tier"))
-        if self.creed_tier_resolution == "TIER_PER_CITED_DOCUMENT" and chunk is not None:
+        host = self.exposition_tier(rid, tier)
+        if phrase:
+            hit = self.resolve_registered_phrase(row["branch"], phrase)
+            if hit and tier_rank(hit["tier"]) < tier_rank(host):
+                return hit["tier"]
+        if self.creed_tier_resolution == "TIER_PER_CITED_DOCUMENT" and chunk is not None and rid in self.chunk_level_creed_rows:
             resolved = creed_resolution_tier(tier)
             loc = (chunk.get("locator") or "") + " " + (chunk.get("division") or "")
-            if resolved and _CREED_LOCATOR.search(loc):
+            if resolved and _CREED_LOCATOR.search(loc) and tier_rank(resolved) < tier_rank(host):
                 return resolved
-        return tier
+        return host
+
+    def tier_resolution(self, rid, chunk=None, phrase=None):
+        """effective_tier with its reason, for the card and for the audit."""
+        row = self.by_id.get(rid) or {}
+        tier = s(row.get("authority_tier"))
+        host = self.exposition_tier(rid, tier)
+        eff = self.effective_tier(rid, chunk, phrase)
+        hit = self.resolve_registered_phrase(row.get("branch", ""), phrase) if phrase else None
+        if hit and eff == hit["tier"] and eff != host:
+            why = (f"the phrase stands verbatim in a registered {hit['kind'].casefold()} text of this branch "
+                   f"({hit['registry_id']} {hit['locator']})")
+        elif eff != tier:
+            why = f"the adoption field (R6-6/R6-9): {self.adoption(rid).get('adoption_status')}"
+        elif eff != host:
+            why = "the row's own tier note (chunk-level creed resolution, R6-5 allowed row)"
+        else:
+            why = "the host row's tier"
+        return {"registry_id": rid, "authority_tier": tier, "host_tier": host, "effective_tier": eff, "why": why,
+                "registered_phrase_hit": hit, "adoption_disclosure": self.adoption_disclosure(rid)}
 
     def public(self, rid):
         """Fields an agent may see about a standard: never a URL. Every text field is scrubbed — a
@@ -225,8 +471,8 @@ class Registry:
 def load_predicates(wb):
     """Inherited 57 rows keyed by Predicate ID with the fields the agents receive."""
     _, rows, _ = wb.table("Inherited 57", "Predicate ID")
-    from . import rulings
     ruled = rulings.required_subjects()
+    agency = rulings.agency_tags()
     out = {}
     for r in rows:
         pid = s(r["Predicate ID"])
@@ -258,6 +504,15 @@ def load_predicates(wb):
             # WORD_ONLY is always REJECT (spec §4, Verifier).
             "lexical_floor": False,
         }
+        # Session 7 (R6-8): the agency class the verifier's AGENCY line needs. Only a RATIFIED tag is carried —
+        # the workbook's 'Agency class' column once it exists, the author's ruling until then. A family with no
+        # ratified tag carries none and the line fails closed. The PROPOSED tags are never read here.
+        wb_agency = s(r.get("Agency class")).upper()
+        if wb_agency and pid in agency and wb_agency != agency[pid]:
+            raise SystemExit(f"Inherited 57 'Agency class' for {pid} disagrees with author ruling R6-8: {wb_agency!r} vs {agency[pid]!r}")
+        if wb_agency or pid in agency:
+            out[pid]["agency_class"] = wb_agency or agency[pid]
+            out[pid]["agency_class_source"] = "WORKBOOK" if wb_agency else "AUTHOR_RULING_R6-8 (2026-09-16; workbook delta pending)"
     return out
 
 
@@ -401,6 +656,6 @@ def reviewed_empty_cells(queue):
     return [c for c in queue if c["rendered_state"] == "NOT LOCATED — CURRENT STANDARD REVIEWED"]
 
 
-__all__ = ["Registry", "load_predicates", "load_comparators", "load_queue", "load_case_targets", "open_cells",
+__all__ = ["Registry", "SECOND_TIER", "load_predicates", "load_comparators", "load_queue", "load_case_targets", "open_cells",
            "gate6_scope", "assert_gate6_scope", "released_cells", "reviewed_empty_cells", "TIER_RANK", "bare_tier", "tier_rank", "set_tier_rank",
            "refusal_reason", "citation_refusal"]

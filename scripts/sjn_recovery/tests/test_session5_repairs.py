@@ -32,7 +32,7 @@ FULL = {"coverage": "FULL", "supplied": 21, "of": 21}
 def test_a_row_with_no_text_blocks_reviewed_like_a_sampled_row():
     cov = {"BSR-BA-01": FULL, "BSR-BA-03": {"coverage": "FULL", "supplied": 10, "of": 10}}
     manifest = {"BSR-BA-02": {"status": "HOST_REDIRECTS_CROSS_HOST", "notes": ["301 onto www"]}}
-    nt = no_text_rows(_st(cov, no_corpus=["BSR-BA-02"]), _rows("BSR-BA-01", "BSR-BA-02", "BSR-BA-03"), _Reg(), manifest, card_empty=True)
+    nt, _nc = no_text_rows(_st(cov, no_corpus=["BSR-BA-02"]), _rows("BSR-BA-01", "BSR-BA-02", "BSR-BA-03"), _Reg(), manifest, card_empty=True)
     assert [x["registry_id"] for x in nt] == ["BSR-BA-02"] and "NO_CORPUS" in nt[0]["reason"]
     e = empty_result_option(cov, {}, no_text=nt)
     assert e["offered"] is False and e["rendered_state"] is None and e["honest_state_if_not_offered"] == EMPTY_RESULT_INCOMPLETE
@@ -46,15 +46,15 @@ def test_a_row_with_no_text_blocks_reviewed_like_a_sampled_row():
 def test_a_row_built_after_the_cell_ran_is_still_no_text_on_that_card():
     # the manifest now has a hash (corpus built later), but the cell's coverage never saw the row
     manifest = {"BSR-RC-08": {"status": "BUILT", "text_hash": "abc"}}
-    nt = no_text_rows(_st({"BSR-RC-01": FULL}), _rows("BSR-RC-01", "BSR-RC-08"), _Reg(), manifest, card_empty=False)
+    nt, _nc = no_text_rows(_st({"BSR-RC-01": FULL}), _rows("BSR-RC-01", "BSR-RC-08"), _Reg(), manifest, card_empty=False)
     assert [x["registry_id"] for x in nt] == ["BSR-RC-08"] and "never supplied" in nt[0]["reason"]
 
 
 def test_a_fallback_row_counts_only_on_an_empty_card_or_where_pass_two_ran():
     rows, reg = _rows("BSR-AN-01", "BSR-AN-05"), _Reg(fallback=["BSR-AN-05"])
     st = _st({"BSR-AN-01": FULL})
-    assert no_text_rows(st, rows, reg, {}, card_empty=False) == []
-    assert [x["registry_id"] for x in no_text_rows(st, rows, reg, {}, card_empty=True)] == ["BSR-AN-05"]
+    assert no_text_rows(st, rows, reg, {}, card_empty=False) == ([], [])
+    assert [x["registry_id"] for x in no_text_rows(st, rows, reg, {}, card_empty=True)[0]] == ["BSR-AN-05"]
 
 
 def test_a_card_that_consulted_nothing_offers_nothing():

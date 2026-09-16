@@ -31,11 +31,11 @@ sys.path.insert(0, os.path.dirname(HERE))
 
 from sjn_pipeline.workbook import s  # noqa: E402
 from sjn_recovery.config import RUNS_DIR, HAZARD_IDIOM_OR_FORMULA  # noqa: E402
-from sjn_recovery.registry import Registry, load_predicates  # noqa: E402
+from sjn_recovery.registry import Registry, load_predicates, tier_rank  # noqa: E402
 from sjn_recovery.llm import LLM  # noqa: E402
 from sjn_recovery.agents import CellRunner  # noqa: E402
 from sjn_recovery.calibrate import equivalent_registry_ids  # noqa: E402
-from sjn_recovery import store, guards, prompts  # noqa: E402
+from sjn_recovery import store, guards, prompts, rulings  # noqa: E402
 
 ACCEPTS = ("ACCEPT", "ACCEPT_WITH_CAVEAT")
 RECALL_STOP = 0.90
@@ -72,6 +72,29 @@ def ratified_phrases(reg):
     return out
 
 
+def tier_inflation_check(reg, items):
+    """Session 7, Task 5 — the TP-060 class, as a fixture check that fails rather than a finding a reviewer must notice.
+
+    TP-060 carried CONCILIAR because BSR-EO-01 was typed as the Creed while its document is Hopko's exposition of the
+    Creed. The invariant that would have caught it: an item may resolve ABOVE its host row's own tier only with a
+    WARRANT — its phrase stands verbatim in a registered creed or definition text of the branch (R6-5 clause 1, R6-10),
+    or its row is one of R6-5's chunk_level_creed_resolution_allowed_rows, whose creed chunk IS the creed. Anything else
+    is a row that over-states its document, and the build FAILS."""
+    bad = []
+    for i in items:
+        if tier_rank(i["effective_tier"]) >= tier_rank(i["host_tier"]):
+            continue
+        if i.get("registered_phrase_hit") or i["registry_id"] in reg.chunk_level_creed_rows:
+            continue
+        bad.append({"id": i["id"], "registry_id": i["registry_id"], "document": i.get("document"),
+                    "host_tier": i["host_tier"], "effective_tier": i["effective_tier"], "phrase": i["phrase"],
+                    "why": "resolves above its host row with no registered creed or definition phrase behind it"})
+    return {"rule": "an item may resolve above its host row's tier only on a registered creed or definition phrase "
+                    "(R6-5 clause 1 / R6-10) or from a chunk-level creed row (R6-5)",
+            "items_resolving_above_host": [i["id"] for i in items if tier_rank(i["effective_tier"]) < tier_rank(i["host_tier"])],
+            "unwarranted": bad, "ok": not bad}
+
+
 def cmd_build(a):
     reg = Registry()
     preds = load_predicates(reg.wb)
@@ -99,8 +122,15 @@ def cmd_build(a):
             excluded.append(dict(x, rows_searched=rids, reason="the ratified phrase is not verbatim in any stored chunk of the mapped row(s)")); continue
         rid, c = hit
         row = reg.by_id[rid]
+        # Session 7: the tier the item RESOLVES to under the rules in force (phrase-level creed and definition
+        # resolution, R6-5/R6-10; the adoption field, R6-6/R6-9), with its reason, beside the row's raw tier.
+        res = reg.tier_resolution(rid, c, x["phrase"])
         items.append({"id": f"TP-{len(items) + 1:03d}", **x, "registry_id": rid, "registry_branch": row["branch"],
-                      "authority_tier": row["authority_tier"], "locator": c["locator"], "chunk_hash": c["text_hash"],
+                      "authority_tier": row["authority_tier"], "host_tier": res["host_tier"],
+                      "effective_tier": res["effective_tier"], "effective_tier_why": res["why"],
+                      "registered_phrase_hit": res["registered_phrase_hit"],
+                      "adoption_status": reg.adoption(rid).get("adoption_status"),
+                      "locator": c["locator"], "chunk_hash": c["text_hash"],
                       "predicate": preds[x["family_id"]]["predicate"]})
     # cap (the instruction is 40–60 items): trim only the most represented branch, round-robin across its registry rows
     # from the end of each row's list, so every row it holds keeps as many items as it can
@@ -113,16 +143,29 @@ def cmd_build(a):
         excluded.append(dict(victim, reason=f"trimmed to the {a.max_items}-item cap ({top} the most represented branch, {rid} its most represented row)"))
     for n, i in enumerate(items, 1):
         i["id"] = f"TP-{n:03d}"
+    tier_check = tier_inflation_check(reg, items)
     fixture = {"run_id": a.run_id, "built_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "workbook": os.path.basename(reg.path),
                "kind": "TRUE_POSITIVES (author-ratified phrases, verbatim in the stored chunk of their mapped row)",
                "items": items, "excluded": excluded,
                "by_branch": dict(Counter(i["registry_branch"] for i in items)), "by_tier": dict(Counter(i["authority_tier"].split(" (")[0] for i in items)),
-               "by_sheet": dict(Counter(i["source_sheet"] for i in items))}
+               "by_effective_tier": dict(Counter(i["effective_tier"].split(" (")[0] for i in items)),
+               "by_sheet": dict(Counter(i["source_sheet"] for i in items)),
+               "tier_inflation_check": tier_check,
+               "author_rulings_applied": rulings.summary()}
     with open(os.path.join(_dir(a.run_id), "fixture.json"), "w", encoding="utf-8", newline="\n") as fh:
         json.dump(fixture, fh, ensure_ascii=False, indent=1)
-    print(f"== tp fixture {a.run_id}: {len(items)} items, {len(excluded)} excluded; by branch {fixture['by_branch']}; by tier {fixture['by_tier']}; by sheet {fixture['by_sheet']}")
+    print(f"== tp fixture {a.run_id}: {len(items)} items, {len(excluded)} excluded; by branch {fixture['by_branch']}; by tier {fixture['by_tier']}; "
+          f"by effective tier {fixture['by_effective_tier']}; by sheet {fixture['by_sheet']}")
     for e in excluded:
         print(f"   excluded {e['source_sheet']} row {e['ratified_row']} {e['family_id']} {e['branch']}: {e['reason'][:110]}")
+    for i in items:
+        if i["effective_tier"] != i["authority_tier"]:
+            print(f"   tier resolved {i['id']} {i['registry_id']}: {i['authority_tier']} -> {i['effective_tier']} ({i['effective_tier_why']})")
+    if not tier_check["ok"]:
+        for b in tier_check["unwarranted"]:
+            print(f"!! TIER INFLATION {b['id']} {b['registry_id']}: {b['host_tier']} -> {b['effective_tier']} — {b['why']}")
+        raise SystemExit("true-positive fixture: an item resolves above its host row with no registered creed or definition "
+                         "phrase behind it (the TP-060 class) — the fixture is not built")
     return 0
 
 

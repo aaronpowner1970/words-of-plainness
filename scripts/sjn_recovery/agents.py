@@ -47,6 +47,33 @@ from .config import (MAX_CANDIDATES, EMPTY_RESULT, VERIFY_EXTRA_CANDIDATES, PHRA
 VERIFIER_REQUIRED = ("phrase_verbatim", "subject_is_required", "speech_act_is_assertion", "floor", "verdict")
 CAP_NEIGHBOURING_PROPOSITION = "NEIGHBOURING_PROPOSITION"      # session 6, R6-2 (verifier gate6-v1.3)
 NEIGHBOURING_FLOOR_CAP = "WORD_ONLY"
+
+# ---------------------------------------------------------------- R6-7 (session 7): the Spirit-name code guard
+# The author's rule: the enumerated form "the Father X, the Son X, the Holy Spirit X" satisfies a family typed THE HOLY
+# SPIRIT only if the CITED PHRASE ITSELF carries the Spirit's name and the predicate; the collective form "one God,
+# Father, Son and Holy Spirit, is X" does not. gate6-v1.4's JOINT PREDICATION line says so; this is the code half, so
+# the rule does not depend on the model reading it. It fires ONLY where the required subject IS the Holy Spirit — never
+# on R6-1's five families, whose required subject is the one God and may be asserted of the Father.
+SPIRIT_NAME_TOKENS = ("holy spirit", "holy ghost", "spirit", "pneuma", "πνευμα")
+SPIRIT_SUBJECT_GUARD = "R6-7_SPIRIT_NAME_NOT_IN_PHRASE"
+
+
+def strip_accents(text):
+    """NFKC-casefold, then drop combining marks, so πνεῦμα / πνεύματος fold to the πνευμα stem the guard matches."""
+    import unicodedata
+    t = unicodedata.normalize("NFD", unicodedata.normalize("NFKC", text or "").casefold())
+    return unicodedata.normalize("NFC", "".join(c for c in t if not unicodedata.combining(c)))
+
+
+def required_subject_is_the_spirit(pred):
+    """True only where the family's required subject IS the Holy Spirit (RNR-H34, RNR-H35), not where it merely
+    ADMITS the Spirit as one person of the one God (R6-1's five)."""
+    return strip_accents(pred.get("subject_scope") or "").strip().startswith("the holy spirit")
+
+
+def phrase_names_the_spirit(phrase):
+    t = strip_accents(phrase)
+    return any(tok in t for tok in SPIRIT_NAME_TOKENS)
 from .registry import tier_rank
 from .textutil import scrub_urls, phrase_word_count
 from .allocation import allocate, translation_pairs, speaks_for_groups
@@ -323,7 +350,7 @@ class CellRunner:
                 "phrase": cand["phrase"], "rationale": cand.get("rationale", ""), "floor_claim": cand.get("floor_claim"),
                 "chunk_text": scrub_urls(chunk["text"]), "chunk_hash": chunk["text_hash"], "division": chunk["division"],
                 "fallback_tier": self.reg.is_fallback(rid), "witness": self.reg.is_witness(rid),
-                "effective_tier": self.reg.effective_tier(rid, chunk), "locator_rank": n,
+                "effective_tier": self.reg.effective_tier(rid, chunk, cand["phrase"]), "locator_rank": n,
                 "recut_from": cand.get("recut_from"), "exhaustion_batch": batch,
             })
             if len(entry["candidates"]) >= MAX_CANDIDATES:
@@ -570,6 +597,18 @@ class CellRunner:
         ok_phrase, _ = guards.check_phrase(cand["phrase"], cand["chunk_text"])
         rubric["phrase_verbatim_code"] = "Y" if ok_phrase else "N"
         verdict, code = verdict_from_rubric(rubric, rubric["floor"], bool(pred.get("lexical_floor")))
+        # Session 7 (R6-7): on a family whose required subject IS the Holy Spirit, an accept whose phrase does not name
+        # the Spirit is refused in code. This is the collective form ("one God, Father, Son and Holy Spirit, is X" cut
+        # so the Spirit's name falls outside the quoted ≤15 words) and the inference from the unity of the essence to
+        # each person. Refused, not capped: the phrase does not assert the predicate OF THE SPIRIT at any floor.
+        if required_subject_is_the_spirit(pred) and not phrase_names_the_spirit(cand["phrase"]):
+            rubric["spirit_name_in_phrase"] = "N"
+            if verdict in ACCEPTS:
+                rubric["verdict_before_spirit_guard"] = verdict
+                rubric["refused_by"] = SPIRIT_SUBJECT_GUARD
+                verdict, code = "REJECT", "WRONG_SUBJECT"
+        elif required_subject_is_the_spirit(pred):
+            rubric["spirit_name_in_phrase"] = "Y"
         rubric["verdict"] = verdict
         rubric["reason_code_final"] = code
         return rubric
@@ -796,10 +835,18 @@ class CellRunner:
         parsed = prompts.parse_json(out) or {}
         note = parsed.get("source_note", "")
         ok, why = guards.vet_source_note(note)
-        return {"status": "DONE", "call_id": rec["call_id"], "rendered_state": parsed.get("rendered_state"),
-                "diverges_from_family_code": parsed.get("diverges_from_family_code"), "state_reason": parsed.get("state_reason"),
-                "source_note": note if ok else " ".join(note.split()[:40]), "source_note_guard": why,
-                "scope_caveat": std["scope_caveat"], "raw": out[:1500]}
+        proposal = {"status": "DONE", "call_id": rec["call_id"], "rendered_state": parsed.get("rendered_state"),
+                    "diverges_from_family_code": parsed.get("diverges_from_family_code"), "state_reason": parsed.get("state_reason"),
+                    "source_note": note if ok else " ".join(note.split()[:40]), "source_note_guard": why,
+                    "scope_caveat": std["scope_caveat"], "raw": out[:1500]}
+        # Session 7, clause 4 (R6-11): a creed's silence is never a finding. A DIVERGENCE proposal whose only support
+        # is that a creed does not contain the predicate is refused HERE, in code — the prompt's creedal-silence line
+        # states the rule, this makes it a hard stop that does not depend on the model reading it. The proposal is kept
+        # on the card with its refusal; the state falls back to the family's own code.
+        stop = guards.creedal_silence_stop(proposal, rubric, self.predicates[cell["family_id"]].get("family_code"))
+        if stop:
+            proposal.update(stop)
+        return proposal
 
     # ---------------------------------------------------------------- orchestration
     def run_cell(self, cell):

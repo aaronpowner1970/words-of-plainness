@@ -100,6 +100,23 @@ CAVEAT_SAMPLE_SHARE = 0.20
 HAZARD_IDIOM_OR_FORMULA = "IDIOM_OR_FORMULA"
 FORMULA_FLOOR_CAP = "WORD_ONLY"
 
+# Eastern Orthodox CONSULTATION LADDER (author-ruled, EO launch prompt Task 1, 2026-09-13; amended by R6-5,
+# 2026-09-16: BSR-EO-01 moves from Tier A to Tier B, because it is Hopko's exposition, not the Creed).
+#
+#   A  consulted on every cell
+#   B  entered only when Tier A leaves the cell empty, or leaves fewer than two distinct speaks_for groups
+#   C  not consulted on open cells at all (witness and lineage rows, each mapping to one released cell)
+#
+# The harness reads a row's ladder tier from the registry FIRST (the workbook's `eo_ladder_tier` column once it exists,
+# the author ruling's override until then — registry.registry_overrides); this is the fallback for the rows no ruling
+# names. packets.ladder_tier is the single reader. A branch absent here runs flat, and every row is due.
+EO_CONSULTATION_LADDER = {
+    "BSR-EO-06": "A", "BSR-EO-12": "A", "BSR-EO-07": "A", "BSR-EO-08": "A", "BSR-EO-09": "A",
+    "BSR-EO-14": "B", "BSR-EO-02": "B", "BSR-EO-04": "B", "BSR-EO-10": "B", "BSR-EO-05": "B", "BSR-EO-01": "B",
+    "BSR-EO-11": "C", "BSR-EO-13": "C",
+}
+CONSULTATION_LADDERS = {"Eastern Orthodox": EO_CONSULTATION_LADDER}
+
 # Registry hosts RETIRED by the author (2026-09-12). A retired host is never requested, for any purpose:
 # not by the corpus builder, not by the fetch audit, not by an adapter's crawl. Rows still ratified on a
 # retired host (BSR-EO-03 in v2.25r2) build as HOST_RETIRED with no corpus, and any cached chunks are dropped.

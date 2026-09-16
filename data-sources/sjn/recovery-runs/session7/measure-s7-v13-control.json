@@ -1,0 +1,131 @@
+{
+ "run_id": "s7-v13-control",
+ "verifier": "sonnet only, gate6-v1.3",
+ "items": 16,
+ "by_kind": {
+  "IDIOM_NON_CREEDAL_REJECTION": 12,
+  "Q277_ATHANASIAN": 2,
+  "IDIOM_CREEDAL": 1,
+  "IDIOM_ON_CARD": 1
+ },
+ "check_2_Q161_creedal_idiom": [
+  {
+   "candidate_id": "Q-161-p1-BSR-RC-01-3",
+   "before": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY",
+    "prompt_version": [],
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA"
+    ]
+   },
+   "after": {
+    "subject_is_required": "N",
+    "grammatical_subject": "believing (gerund phrase, object: the Holy Spirit as \"Lord and giver of life\")",
+    "speech_act_is_assertion": "N",
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The phrase names the predicate only within a fixed creedal title used to argue for divine unity, not to assert the Spirit's life-giving action in its own voice.",
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA"
+    ],
+    "asserted_outside_formula": "N",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "reason": "The quoted phrase is a creedal title cited to defend the unity of the Trinity, not an independent assertion that God (the Spirit) gives life; the predicate is presupposed by the formula, not asserted outside it.",
+    "prompt_version": "gate6-v1.3"
+   }
+  }
+ ],
+ "check_3_non_creedal_idiom_rejections": {
+  "n": 12,
+  "still_rejected": 11,
+  "new_false_accepts": [
+   {
+    "candidate_id": "Q-213-p1-BSR-AN-01-1",
+    "queue_id": "Q-213",
+    "branch": "Anglican",
+    "predicate": "Savior",
+    "phrase": "our Lord and Saviour Jesus Christ",
+    "before": "REJECT",
+    "after": "ACCEPT",
+    "reason": "The phrase is verbatim, the subject is Christ as divine Son, and the passage asserts his redemptive action ('merit') as Savior in its own doctrinal voice, satisfying the full predicate."
+   }
+  ],
+  "ok": false
+ },
+ "check_4_Q277_athanasian": {
+  "candidates": [
+   {
+    "candidate_id": "Q-277-p1-BSR-AN-04-1",
+    "registry_id": "BSR-AN-04",
+    "phrase": "the Father is Almighty, the Son Almighty, and the Holy Ghost Almighty",
+    "before": "ACCEPT_WITH_CAVEAT",
+    "after": "ACCEPT_WITH_CAVEAT",
+    "rubric": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "the Holy Ghost (within 'the Father is Almighty, the Son Almighty, and the Holy Ghost Almighty')",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_model": null,
+     "floor_capped_by": null,
+     "floor_reason": "The text directly asserts 'the Holy Ghost Almighty,' affirming the Spirit's divine omnipotence/power, which satisfies the predicate as defined ('Affirms the Holy Spirit's divine power').",
+     "hazard_flags": [
+      "FAMILY_VARIATION"
+     ],
+     "asserted_outside_formula": "NA",
+     "partial_asserts_predicate": "NA",
+     "spirit_name_in_phrase": "Y",
+     "refused_by": null,
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "reason": "The phrase is verbatim, the Holy Ghost is the explicit subject of the predication 'Almighty,' and the creedal statement asserts this directly as part of the confession's own historical-document text, fully matching the predicate of divine power.",
+     "prompt_version": "gate6-v1.3"
+    }
+   },
+   {
+    "candidate_id": "Q-277-p1-BSR-AN-03-1",
+    "registry_id": "BSR-AN-03",
+    "phrase": "the Father is Almighty, the Son Almighty: and the Holy Ghost Almighty",
+    "before": "REJECT",
+    "after": "ACCEPT_WITH_CAVEAT",
+    "rubric": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "the Holy Ghost (in 'and the Holy Ghost Almighty')",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_model": null,
+     "floor_capped_by": null,
+     "floor_reason": "The passage directly asserts that the Holy Ghost is Almighty, which is a direct affirmation of the Spirit's divine power, even though the same is predicated of Father and Son.",
+     "hazard_flags": [
+      "FAMILY_VARIATION"
+     ],
+     "asserted_outside_formula": "NA",
+     "partial_asserts_predicate": "NA",
+     "spirit_name_in_phrase": "Y",
+     "refused_by": null,
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "reason": "The phrase is verbatim, the Holy Ghost is grammatically the subject of the clause asserting Almightiness, and this is a direct creedal assertion of the Spirit's divine power, satisfying the predicate at the FULL floor.",
+     "prompt_version": "gate6-v1.3"
+    }
+   }
+  ],
+  "agree": true,
+  "ok": true
+ },
+ "idiom_candidate_already_on_a_card": [
+  {
+   "candidate_id": "Q-297-p1-BSR-RC-01-1",
+   "before": "ACCEPT_WITH_CAVEAT",
+   "after": "ACCEPT"
+  }
+ ],
+ "note": "sonnet only; no stored cell state, packet or workbook was touched",
+ "ok": false
+}

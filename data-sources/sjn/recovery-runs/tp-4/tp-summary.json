@@ -1,0 +1,155 @@
+{
+ "run_id": "tp-4",
+ "at": "2026-09-16T02:19:04Z",
+ "verifier": "sonnet only",
+ "prompt_version": "gate6-v1.4",
+ "items": 60,
+ "accepted": 56,
+ "recall": 0.933,
+ "verdicts": {
+  "ACCEPT": 56,
+  "REJECT": 4
+ },
+ "floors": {
+  "FULL": 56,
+  "WORD_ONLY": 4
+ },
+ "idiom_or_formula_raised": 1,
+ "idiom_or_formula_accepted": 0,
+ "recall_on_idiom_cells": 0.0,
+ "idiom_items": [
+  {
+   "id": "TP-049",
+   "predicate": "Son",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict": "REJECT",
+   "asserted_outside_formula": "N",
+   "floor_capped_by": null
+  }
+ ],
+ "by_branch": {
+  "Anglican": {
+   "items": 9,
+   "accepted": 9
+  },
+  "Reformed / Presbyterian": {
+   "items": 13,
+   "accepted": 13
+  },
+  "Baptist": {
+   "items": 7,
+   "accepted": 7
+  },
+  "Mennonite / Anabaptist": {
+   "items": 4,
+   "accepted": 3
+  },
+  "Methodist / Wesleyan": {
+   "items": 8,
+   "accepted": 7
+  },
+  "Roman Catholic": {
+   "items": 13,
+   "accepted": 13
+  },
+  "Eastern Orthodox": {
+   "items": 3,
+   "accepted": 1
+  },
+  "Lutheran": {
+   "items": 3,
+   "accepted": 3
+  }
+ },
+ "ratified_accepts_now_refused": [
+  {
+   "id": "TP-049",
+   "branch": "Methodist / Wesleyan",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA",
+    "SAME_WORD_DIFFERENT_MEANING"
+   ],
+   "asserted_outside_formula": "N",
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "WRONG_SUBJECT",
+   "reason": "The quoted phrase is a bare enumeration of the three Trinitarian persons within a statement about divine unity and consubstantiality; it names 'the Son' but does not assert the specific predicate of the eternal filial relation of the Logos, so the floor is WORD_ONLY."
+  },
+  {
+   "id": "TP-050",
+   "branch": "Mennonite / Anabaptist",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "registry_id": "BSR-MA-01",
+   "locator": "Article 1. God",
+   "phrase": "the only Son, the Word who became flesh",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "SEMANTIC_FLOOR"
+   ],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "WRONG_SUBJECT",
+   "reason": "The phrase names the Son as the object of God's speaking rather than making the Son the grammatical subject of a predication of eternal Sonship, so the required-subject test fails and the citation cannot be accepted."
+  },
+  {
+   "id": "TP-059",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "registry_id": "BSR-EO-02",
+   "locator": "The Holy Trinity — \"One God, One Father\"",
+   "phrase": "There is only one God because there is only one Father",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "SEMANTIC_FLOOR"
+   ],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "BELOW_FLOOR",
+   "reason": "The chunk affirms the Father's monarchic source-role but does not assert or imply that the Father is unbegotten/ungenerated, so the specific predicate is not stated, only a neighboring claim about divine unity via the Father."
+  },
+  {
+   "id": "TP-060",
+   "branch": "Eastern Orthodox",
+   "family_id": "RNR-H37",
+   "predicate": "Unbegotten",
+   "registry_id": "BSR-EO-01",
+   "locator": "The Symbol of Faith — \"Son of God\"",
+   "phrase": "God is an eternal Father by nature",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "SAME_WORD_DIFFERENT_MEANING"
+   ],
+   "asserted_outside_formula": "NA",
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "reason_code": "BELOW_FLOOR",
+   "reason": "The quoted phrase affirms God's eternal fatherhood (that He begets the Son) rather than asserting that the Father Himself is unbegotten/derives from no other, so it does not assert the required predicate."
+  }
+ ],
+ "required_subject_sources": {
+  "HARNESS_DERIVED": 55,
+  "AUTHOR_RULING_R6-1": 5
+ },
+ "seeded_from": null,
+ "calls_served_from_seed": 0,
+ "stop_rule": "recall below 0.9 stops the session before Task 8",
+ "stop": false
+}

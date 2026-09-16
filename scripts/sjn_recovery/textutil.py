@@ -13,7 +13,7 @@ from sjn_pipeline.scope import html_segments as _segments  # noqa: E402
 from sjn_pipeline.textnorm import normalize, pdf_repair, phrase_word_count, contains  # noqa: E402
 
 __all__ = ["segments", "fix_mojibake", "strip_footnote_digits", "clean", "sha", "normalize",
-           "pdf_repair", "phrase_word_count", "contains", "join", "words", "has_greek", "has_polytonic",
+           "pdf_repair", "phrase_word_count", "contains", "join", "words", "has_greek", "has_polytonic", "punct_key",
            "nfc", "strip_foreign_parentheticals", "scrub_urls", "dehyphenate", "hyphenation_residue",
            "join_soft_hyphens", "strip_page_furniture", "page_furniture_lines", "repair_intraword_splits",
            "intraword_split_candidates"]
@@ -80,6 +80,19 @@ def scrub_urls(text):
     scrubbed here. The stored chunk text and its hash are untouched; a phrase can never legitimately
     span a link, so the verbatim check is unaffected."""
     return _URL_TOKEN.sub("[link removed]", text or "")
+
+
+# ---------------------------------------------------------------- punctuation-stripped comparison key
+def punct_key(text):
+    """NFKC, casefolded, every punctuation and symbol character (any quote or dash style) removed, whitespace
+    collapsed. Nothing else: a different word, a different word order or a spelling variant is a different text.
+
+    Two rules compare on this key and must compare alike: R6-4's one-text-one-slot guard (allocation.same_text_key)
+    and R6-5/R6-10's phrase-level creed and definition resolution (registry.Registry.resolve_registered_phrase)."""
+    import unicodedata
+    t = unicodedata.normalize("NFKC", text or "").casefold()
+    t = "".join(" " if unicodedata.category(ch)[0] in "PS" else ch for ch in t)
+    return re.sub(r"\s+", " ", t).strip()
 
 
 # ---------------------------------------------------------------- scripts / languages

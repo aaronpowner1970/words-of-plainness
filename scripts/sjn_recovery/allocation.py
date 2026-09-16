@@ -223,10 +223,12 @@ def _division_key(locator):
 def same_text_key(phrase):
     """R6-4: the phrase as compared by the one-text-one-slot guard — NFKC, casefolded, every punctuation and symbol
     character (any quote or dash style) removed, whitespace collapsed. Nothing else: a different word, a different word
-    order or a spelling variant is a different text."""
-    t = unicodedata.normalize("NFKC", phrase or "").casefold()
-    t = "".join(" " if unicodedata.category(ch)[0] in "PS" else ch for ch in t)
-    return re.sub(r"\s+", " ", t).strip()
+    order or a spelling variant is a different text.
+
+    Session 7: the implementation moved to textutil.punct_key, so R6-4's guard and R6-5/R6-10's phrase-level creed and
+    definition resolution compare on ONE key. The behaviour is unchanged."""
+    from .textutil import punct_key
+    return punct_key(phrase)
 
 
 def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None, same_text_rows=None):

@@ -1,4 +1,4 @@
-"""Author rulings the harness applies in memory until the workbook carries them (Gate 6 session 6, 2026-09-13).
+"""Author rulings the harness applies in memory until the workbook carries them (Gate 6 sessions 6 and 7).
 
 The rulings live in data-sources/sjn/recovery-runs/author-rulings-pending-workbook.json — committed, so every run.py /
 reverify.py / truepos.py start reads the same rulings and the Eastern Orthodox launch cannot run without them. Nothing
@@ -8,7 +8,18 @@ change it is read from the workbook and checked against the ruling (a disagreeme
   R6-1  required_subject for Lord / Life-giving / Judge / Savior / Not made admits the Son or the Spirit AS DIVINE
   R6-2  the hedged-PARTIAL floor rule; the three refused Baptist cells
   R6-3  BSR-EO-03 RETIRED (HOST_RETIRED)
-  R6-4  one text, one slot: the textual guard lives in allocation.py; declared same-text rows (different wording) here"""
+  R6-4  one text, one slot: the textual guard lives in allocation.py; declared same-text rows (different wording) here
+
+Session 7 (2026-09-16):
+
+  R6-5  BSR-EO-01 re-typed as the Hopko row it is (registry_overrides); EO-01 and EO-02 are one work, one observation
+  R6-6  the adoption field (adoption_status / adoption_act / adoption_body_scope / adoption_verified), UNVERIFIED fails closed
+  R6-7  compound Spirit predication: the cited phrase must itself carry the Spirit's name and the predicate
+  R6-8  passive agency: an ACTION/ATTRIBUTE class per Spirit family; only RNR-H35 (ATTRIBUTE) is ratified, the rest fail closed
+  R6-9  unadopted or unverified exposition resolves to OFFICIAL_EXPOSITION, with a display qualifier
+  R6-10 phrase-level resolution reaches dogmatic definitions (horoi) registered as texts in the same branch
+  R6-11 verifier gate6-v1.4; the pending inference line becomes gate6-v1.5
+  R6-12 Q-290 stays PUBLIC-CERTIFIED, flagged REVIEW_AT_EO_PACKET with its single-source disclosure"""
 import json
 import os
 
@@ -16,6 +27,11 @@ from .config import RUNS_DIR, ROOT
 
 RULINGS_PATH = os.environ.get("SJN_RULINGS_PATH") or os.path.join(RUNS_DIR, "author-rulings-pending-workbook.json")
 AUTHOR_RULING_FLOOR_CAP = "AUTHOR_RULING_R6-2"
+
+# R6-6 vocabularies, and the two rows the author named as published-but-unadopted.
+ADOPTION_STATUSES = ("ADOPTED", "ISSUED_UNADOPTED", "NOT_APPLICABLE", "UNVERIFIED")
+ADOPTION_SCOPES = ("ONE_CHURCH", "MULTILATERAL", "WHOLE_BRANCH")
+ADOPTION_COLUMNS = ("adoption_status", "adoption_act", "adoption_body_scope", "adoption_verified")
 
 
 def load(path=None):
@@ -27,6 +43,10 @@ def load(path=None):
         d = json.load(fh)
     d["_path"] = os.path.relpath(p, ROOT).replace("\\", "/")
     return d
+
+
+def _ruling(r, key):
+    return ((r or load()).get("rulings") or {}).get(key) or {}
 
 
 def required_subjects(r=None):
@@ -61,10 +81,114 @@ def same_text_rows(r=None):
     return {rid: v["same_text_as"] for rid, v in rows.items() if isinstance(v, dict) and v.get("same_text_as")}
 
 
+# ---------------------------------------------------------------- R6-5 registry overrides
+# The registry override hook. A ruling that carries `registry_id` and an `overrides` block re-types that
+# row IN MEMORY, exactly as `retirements()` retires one: Registry() applies it, records the workbook value
+# beside the ruled value, and — once the workbook carries the change — reads the workbook and fails loudly
+# on any disagreement. Only these fields may be overridden; anything else in the block is a hard error.
+OVERRIDABLE = ("standard_title", "authority_tier", "speaks_for", "reception_scope", "scope_caveat",
+               "same_work_as", "eo_ladder_tier", "creed_resolution")
+
+
+def registry_overrides(r=None):
+    """{registry_id: {"ruling": key, "fields": {...}}} for rows the author re-typed before the workbook records it."""
+    r = r or load()
+    out = {}
+    for key, ru in (r.get("rulings") or {}).items():
+        rid, fields = ru.get("registry_id"), ru.get("overrides")
+        if not rid or not isinstance(fields, dict):
+            continue
+        bad = [f for f in fields if f not in OVERRIDABLE]
+        if bad:
+            raise SystemExit(f"author ruling {key} overrides fields outside {OVERRIDABLE}: {bad}")
+        out[rid] = {"ruling": key, "fields": dict(fields)}
+    return out
+
+
+def same_work_rows(r=None):
+    """{registry_id: registry_id} — rows that are ONE work and count as one observation (R6-5, HOPKO-OF-VOL1).
+
+    Distinct from same_text_rows (R6-4), which is about one TEXT competing for one card slot. This is about
+    independence: two rows of one work are one observation whatever they quote."""
+    out = {}
+    for rid, ov in registry_overrides(r).items():
+        if ov["fields"].get("same_work_as"):
+            out[rid] = ov["fields"]["same_work_as"]
+    return out
+
+
+def independence_groups(r=None):
+    """{group_name: [registry_id, ...]} as the author declared them (R6-5)."""
+    r = r or load()
+    out = {}
+    for ru in (r.get("rulings") or {}).values():
+        for name, ids in (ru.get("independence_group") or {}).items():
+            out[name] = list(ids)
+    return out
+
+
+def chunk_level_creed_rows(r=None):
+    """The ONLY rows where a creed still resolves by chunk locator (R6-5). Everywhere else it resolves by phrase."""
+    return list(_ruling(r, "R6-5_bsr_eo_01_retype").get("chunk_level_creed_resolution_allowed_rows") or [])
+
+
+# ---------------------------------------------------------------- R6-6 / R6-9 adoption
+def adoption_rows(r=None):
+    """{registry_id: {adoption_status, adoption_act, adoption_body_scope, adoption_verified, adopting_body}} (R6-6)."""
+    rows = _ruling(r, "R6-6_adoption_field").get("rows") or {}
+    for rid, v in rows.items():
+        st = v.get("adoption_status")
+        if st not in ADOPTION_STATUSES:
+            raise SystemExit(f"author ruling R6-6: {rid} carries adoption_status {st!r}, outside {ADOPTION_STATUSES}")
+        sc = v.get("adoption_body_scope") or ""
+        if sc and sc not in ADOPTION_SCOPES:
+            raise SystemExit(f"author ruling R6-6: {rid} carries adoption_body_scope {sc!r}, outside {ADOPTION_SCOPES}")
+    return {rid: dict(v) for rid, v in rows.items()}
+
+
+def adoption_policy(r=None):
+    """The R6-6 scope and fail-closed policy, and the R6-9 card disclosure strings."""
+    a, n = _ruling(r, "R6-6_adoption_field"), _ruling(r, "R6-9_second_tier_rank")
+    return {"scope_rule": a.get("scope_rule"), "scope_rule_meaning": a.get("scope_rule_meaning"),
+            "department_imprint_counts_as_adoption": bool(a.get("department_imprint_counts_as_adoption")),
+            "department_imprint_exception": a.get("department_imprint_exception"),
+            "unverified_behavior": a.get("unverified_behavior"), "exposition_resolution": a.get("exposition_resolution"),
+            "migration_order": a.get("migration_order") or [],
+            "second_tier": "OFFICIAL_EXPOSITION", "assert": n.get("assert"), "disclosure": n.get("card_disclosure") or {}}
+
+
+# ---------------------------------------------------------------- R6-8 agency
+def agency_tags(r=None):
+    """{family_id: ACTION|ATTRIBUTE} the author has RATIFIED (R6-8). Proposals are not in force and are not here."""
+    return dict(_ruling(r, "R6-8_passive_agency").get("ratified_tags") or {})
+
+
+def agency_blocks_eo(r=None):
+    return _ruling(r, "R6-8_passive_agency").get("blocks") == "EASTERN_ORTHODOX_LAUNCH"
+
+
+# ---------------------------------------------------------------- R6-12 cell flags
+def cell_flags(r=None):
+    """{queue_id: {flag, card_disclosure, ...}} for cells the author flagged (R6-12)."""
+    r = r or load()
+    out = {}
+    for key, ru in (r.get("rulings") or {}).items():
+        if ru.get("queue_id") and ru.get("flag"):
+            out[ru["queue_id"]] = dict(ru, ruling=key)
+    return out
+
+
 def summary(r=None):
     """What the harness applied, for run logs and packet headers."""
     r = r or load()
     return {"file": r.get("_path"), "required_subject_retyped": sorted(required_subjects(r)),
             "registry_retired": sorted(retirements(r)), "refused_candidates": sorted(refused_candidates(r)),
             "same_text_rows": same_text_rows(r),
-            "status": "AUTHOR RULED 2026-09-13; applied in memory; workbook not written (deltas pending ratification)"}
+            "registry_overrides": {rid: ov["fields"] for rid, ov in registry_overrides(r).items()},
+            "same_work_rows": same_work_rows(r), "independence_groups": independence_groups(r),
+            "chunk_level_creed_rows": chunk_level_creed_rows(r),
+            "adoption_rows": {rid: v.get("adoption_status") for rid, v in adoption_rows(r).items()},
+            "adoption_scope_rule": adoption_policy(r)["scope_rule"],
+            "agency_tags_ratified": agency_tags(r), "cell_flags": sorted(cell_flags(r)),
+            "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4) and 2026-09-16 (R6-5..R6-12); applied in memory; "
+                      "workbook not written (deltas pending ratification)"}
