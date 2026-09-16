@@ -162,7 +162,9 @@
     grid-column: 1;
     grid-row: 1;
     container: chatwelcome / size;
-    justify-content: center;
+    /* Top-aligned, level with the status badge opposite, so the film sits in
+       a frame whose two sides start on the same line. */
+    justify-content: flex-start;
 }
 .chat-wing--right {
     grid-column: 3;
@@ -172,14 +174,17 @@
 }
 
 /* ── Left wing · welcome ─────────────────────────────────────
-   Right-aligned, so the block sits against the film's edge and reads as one
-   column with it. Lines balance rather than wrap greedily, so a wrapped line
-   never leaves one word alone; the website may break at its dot, never
+   Left-aligned, with the rule on the film's side so the block still reads as
+   one column with it. The lead is two parts of one sentence: "Welcome to" as
+   a quiet italic lead-in, the chat's name under it with the weight of a title,
+   and a short gold hairline closing the pair off from the facts below. Gold
+   picks out what a newcomer looks for. Lines wrap "pretty", so a wrapped
+   line never leaves one word alone; the website may break at its dot, never
    inside a word. */
 .chat-welcome {
     --wu: clamp(12px, min(5.4cqi, 4.3cqh), 22px);
-    text-align: right;
-    padding: 0.4em clamp(10px, 5cqi, 20px) 0.4em 0;
+    text-align: left;
+    padding: 0.4em clamp(10px, 5cqi, 20px) 0.4em clamp(12px, 8cqi, 36px);
     border-right: 1px solid rgba(196, 148, 58, 0.18);
 }
 .chat-welcome-line {
@@ -188,23 +193,44 @@
     font-size: var(--wu);
     line-height: 1.4;
     color: var(--cream, #E8DCC4);
-    text-wrap: balance;
+    /* pretty, not balance: balance halves a line that nearly fits, which
+       split "Christ-Centered / Ministry and Fellowship" on wide wings;
+       pretty only steps in to keep a last word from standing alone. */
+    text-wrap: pretty;
     overflow-wrap: normal;
     word-break: normal;
 }
 .chat-welcome-lead {
+    margin: 0 0 0.75em;
+    line-height: 1.15;
+    text-wrap: balance;
+}
+.chat-welcome-greet {
+    display: block;
+    margin-bottom: 0.2em;
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: var(--wu);
+    letter-spacing: 0.02em;
+    color: var(--gold-light, #D4A84A);
+}
+.chat-welcome-name {
+    display: block;
     font-family: 'Cinzel', var(--font-serif, Georgia, serif);
     font-size: calc(var(--wu) * 1.14);
-    line-height: 1.3;
-    color: var(--gold-light, #D4A84A);
-    margin-bottom: 0.5em;
+    letter-spacing: 0.02em;
+    color: var(--cream-soft, #F5EFE4);
 }
-.chat-welcome-rule {
-    margin: 0.45em 0;
-    color: rgba(196, 148, 58, 0.55);
-    font-size: var(--wu);
-    line-height: 1.3;
+.chat-welcome-lead::after {
+    content: '';
+    display: block;
+    width: 2.4em;
+    height: 1px;
+    margin-top: 0.6em;
+    background: rgba(196, 148, 58, 0.6);
 }
+.chat-welcome-gold { color: var(--gold-light, #D4A84A); }
+.chat-welcome-gap { margin-top: 0.85em; }
 
 /* ── Right wing · live status ────────────────────────────────
    The status fills the wing and the host controls sit at its foot, out of
@@ -294,6 +320,58 @@
     color: var(--cream-dark, #D4C8B0);
 }
 
+/* ── Right wing · Ways to Take Part ──────────────────────────
+   Directly under the status, carrying its rule on down so the two read as
+   one box; the host controls keep the foot of the wing. Ways, not levels:
+   the names are the same gold and the same size, and nothing is numbered. */
+.chat-wing--right .chat-ways { margin-bottom: auto; }
+.chat-ways {
+    --yu: clamp(11px, min(4.7cqi, 3.1cqh), 18px);
+    padding: 1.1em clamp(10px, 5cqi, 20px) 0;
+    border-left: 1px solid rgba(196, 148, 58, 0.18);
+}
+.chat-ways-title {
+    margin: 0 0 0.55em;
+    font-family: 'Cinzel', var(--font-serif, Georgia, serif);
+    font-weight: 400;
+    font-size: calc(var(--yu) * 1.18);
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    color: var(--cream-soft, #F5EFE4);
+}
+.chat-ways-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.chat-ways-list li {
+    margin: 0 0 0.6em;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: var(--yu);
+    line-height: 1.35;
+    color: var(--cream-dark, #D4C8B0);
+    text-wrap: pretty;
+}
+.chat-ways-list li:last-child { margin-bottom: 0; }
+.chat-ways-name { color: var(--gold-light, #D4A84A); }
+
+/* A short wing gives up the explanations first and keeps the four names;
+   shorter still, the section goes and the status keeps the whole box.
+   Thresholds measured, not guessed: status + full ways + controls needs about
+   460-540px depending on wing width; status + names + controls about 300-330px.
+   So a 1280x630 VR window (369px wing) shows the names, and 1920x1080 (667px)
+   shows everything. */
+@container chatstatus (max-height: 520px) {
+    /* Names alone take a fraction of the room, so they take the status box's
+       type size rather than shrinking with the wing's height. */
+    .chat-ways { --yu: clamp(12px, min(5.2cqi, 3.6cqh), 20px); }
+    .chat-ways-text { display: none; }
+    .chat-ways-list li { margin-bottom: 0.3em; }
+}
+@container chatstatus (max-height: 330px) {
+    .chat-ways { display: none; }
+}
+
 /* Host controls: text buttons, not filled ones. They are the host's, and the
    room should not read either as something it is meant to press. They sit
    together at the bottom of the status box, out of the reading order. */
@@ -379,8 +457,12 @@
         border-left: 1px solid rgba(196, 148, 58, 0.18);
     }
     .chat-welcome-line { margin-bottom: 0.15em; line-height: 1.3; }
-    .chat-welcome-lead { margin-bottom: 0.25em; }
-    .chat-welcome-rule { margin: 0.2em 0; }
+    .chat-welcome-lead { margin-bottom: 0.4em; }
+    .chat-welcome-lead::after { margin-top: 0.35em; }
+    .chat-welcome-gap { margin-top: 0.4em; }
+    /* The one column stacks welcome over status; the status is sized to its
+       content and there is no height left for the ways. */
+    .chat-ways { display: none; }
     .chat-status {
         --su: clamp(12px, 4.4cqi, 16px);
         padding: 0.35em clamp(10px, 4cqi, 16px) 0;
@@ -395,13 +477,12 @@
 }
 /* The welcome gives up its closing lines first, then its middle lines; the
    lead line and the host stay. */
-@container chatwelcome (max-height: 175px) {
-    .chat-welcome-rule,
-    .chat-welcome-line:nth-last-child(-n+2) { display: none; }
+@container chatwelcome (max-height: 200px) {
+    .chat-welcome-line--close { display: none; }
 }
-@container chatwelcome (max-height: 105px) {
-    .chat-welcome-line:nth-child(2),
-    .chat-welcome-line:nth-child(4) { display: none; }
+@container chatwelcome (max-height: 125px) {
+    .chat-welcome-line--mid { display: none; }
+    .chat-welcome-lead::after { display: none; }
 }
 
 /* ── Fallback 2 · the band ───────────────────────────────────

@@ -9,6 +9,13 @@
   at the bottom, away from the reading order — it is the host's, and the room
   should not read it as something it is meant to press.
 
+  Between the two sits "Ways to Take Part": read while the room is muted, so
+  people reach the discussion already knowing how they can join it. The four
+  are ways, not levels — listening is a whole way to take part, and nothing
+  here ranks one person above another. On a short wing the explanations give
+  way first and the four names stay; shorter still, the section goes and the
+  status keeps the box (chatstatus container queries in chat-session.css).
+
   Live values are written by js/chat-session.js through [data-chat] hooks,
   never by id, because the badge, the time-left line and the message each
   appear TWICE — once here, once in the narrow-screen band — and only one of
@@ -31,6 +38,15 @@
             is a "short video"; the Creation film is not. -#}
         <p class="chat-message" data-chat="message">All visitor mics are turned off while this {{ chatMicNoun | default("short video") }} plays. Mics will be turned on at the end for Q/A + discussion.</p>
     </div>
+    <section class="chat-ways" aria-labelledby="chatWaysTitle">
+        <h2 class="chat-ways-title" id="chatWaysTitle">Ways to Take Part</h2>
+        <ul class="chat-ways-list">
+            <li><span class="chat-ways-name">Listen &middot; Ask</span> <span class="chat-ways-text">an honest question before responding in turn.</span></li>
+            <li><span class="chat-ways-name">Participate &middot; Share</span> <span class="chat-ways-text">your understanding. Explore relevant scripture, teachings, experience, or reasoning.</span></li>
+            <li><span class="chat-ways-name">Relate &middot; Connect</span> <span class="chat-ways-text">your understanding to the perspectives of others. Identify where understandings agree or differ.</span></li>
+            <li><span class="chat-ways-name">Integrate &middot; Deepen</span> <span class="chat-ways-text">your own perspectives. Summarize what you have learned. Consider what it means to live your faith within your communities.</span></li>
+        </ul>
+    </section>
     <div class="chat-wing-controls">
         {#- A film normally shown in part gets a switch. It sits with Focus at
             the bottom of the box, at the same quiet weight: both are the

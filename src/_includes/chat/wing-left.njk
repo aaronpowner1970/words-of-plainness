@@ -5,21 +5,25 @@
   sides of the video: one include emitting both would put them side by side
   and leave the film pushed off to one end of the row.
 
-  The author's wording, verbatim. This is what a newcomer arriving
-  mid-evening reads first, so it says who is hosting and where they are
-  before it says anything about the film. Right-aligned, so the block sits
-  against the film's edge and reads as one column with it.
+  The author's wording. This is what a newcomer arriving mid-evening reads
+  first, so it greets them and says who is hosting and where they are before
+  it says anything about the film. "Welcome to" sits above the chat's name as
+  a quiet italic lead-in, so the two read as one sentence while the name keeps
+  the weight of a title. The gold picks out what a newcomer would look for.
+
+  Lines that give way on a short wing carry a class saying so (see the
+  chatwelcome container queries in chat-session.css) rather than being picked
+  by position, so reordering a line cannot hide the wrong one.
   The <wbr> lets the website break at its dot on a narrow wing, never
   inside the word.
 #}
 <aside class="chat-wing chat-wing--left" aria-label="Welcome">
     <div class="chat-welcome">
-        <p class="chat-welcome-line chat-welcome-lead">Welcome to a Words of Plainness chat.</p>
-        <p class="chat-welcome-line">Christ-Centered Ministry and Fellowship.</p>
-        <p class="chat-welcome-line">Host: Brother Aaron</p>
-        <p class="chat-welcome-line">Website: wordsofplainness.<wbr>org</p>
-        <p class="chat-welcome-rule" aria-hidden="true">&mdash;</p>
-        <p class="chat-welcome-line">I appreciate constructive feedback.</p>
-        <p class="chat-welcome-line">May God bless us with His Spirit.</p>
+        <p class="chat-welcome-lead"><span class="chat-welcome-greet">Welcome to</span> <span class="chat-welcome-name">Words of Plainness Chat</span></p>
+        <p class="chat-welcome-line chat-welcome-line--mid"><span class="chat-welcome-gold">Christ-Centered</span> Ministry and Fellowship</p>
+        <p class="chat-welcome-line">Host: <span class="chat-welcome-gold">Brother Aaron</span></p>
+        <p class="chat-welcome-line chat-welcome-line--mid">Website: <span class="chat-welcome-gold">wordsofplainness.<wbr>org</span></p>
+        <p class="chat-welcome-line chat-welcome-line--close chat-welcome-gap">I appreciate constructive feedback.</p>
+        <p class="chat-welcome-line chat-welcome-line--close">May God bless us with His Spirit.</p>
     </div>
 </aside>
