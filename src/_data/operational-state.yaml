@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: September 9, 2026
+# Last updated: September 16, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -41,14 +41,39 @@ workstreams:
       assets: "LIVE: PDF, Visual Summary/infographic, Articles Podcast (3 episodes), per-article Slides viewer (A01–A13), Personal Reflection → Discipleship Journal, article banner art (A00 opener + A01–A13). Facilitator-notes layer seeded; delivery method undecided."
       banners: "LIVE 2026-07-25 (commit 8dfa761). 53 WebP variants (3:1, q80, tiers 480/768/1536 + 2048 where native allows) on R2 under web/banners/, served from media.wordsofplainness.org with immutable cache headers. Wired via src/_data/banners.json + src/_includes/macros/banner.njk — import WITH CONTEXT. A00 eager/fetchpriority=high (page LCP); A01–A13 lazy, above each article title. Uploader: tools/wop_r2_upload_banners.py (boto3 + S3 endpoint; bare wrangler 403s)."
       fixes: "2026-07-25 (commit f38c191): paragraphSync in .eleventy.js now masks <script>/<style> blocks before injecting sync-para/data-paragraph. It had been rewriting the <p> tags inside dumped-JSON scripts, breaking the JSON string literals — WOP_HOLD never defined and the 'How we hold this' disclosures on A06/A08 were dead on the live site. WOP_GODEEPER and apparatusData were exposed to the same break and are now covered."
+      reading_pages: >
+        LIVE 2026-09-16 (commits 1edc772 + 1ddd7f1 + a01f37e, pushed as one).
+        /articles/video-NN/ for all thirteen articles; video-03 is a 307 to
+        /creation/ in vercel.json. Built on the /creation/ architecture: one
+        copy of each article in src/_includes/aoid/aNN.njk, included by BOTH
+        /articles/ and its reading page. Teaching-practice pass applied —
+        A1 propose-before-watching on the entry card, A2 compare-then-ask in
+        the ended overlay, A3 a correction channel under every apparatus entry
+        routed to /connect/#contact through site.json correctionUrl (empty
+        hides the link). Scripture references now link on /articles/ too:
+        1,022 of 1,022 there, 943 of 943 across the twelve reading pages,
+        through the ONE shared rule in js/apparatus-common.js. Author scored
+        the pre-A1 pages 8.9/20 against WoP-Teaching-Practices-Standard; the
+        Part A changes are what brought them into the deploy band.
+      chat_pages: >
+        BUILT, NOT PUSHED as of 2026-09-16 — committed locally, held at the
+        author's gate for a WoP-Teaching-Practices-Standard score before
+        go-live. /chat/ (host menu and between-videos screen) plus
+        /chat/video-01..13/: presentation versions for VR rooms and projectors,
+        with flanking wings (welcome left, live mic status right), a mic badge
+        that follows the film, focus view, and invisible host keys M and F.
+        Reached by URL only — noindex, canonical to the public page, out of
+        pagefind and out of the sitemap, and nothing public links to them.
+        The public pages are byte-identical before and after.
     frontier:
       group_display_vr: >
         ACTIVE FIELD-TEST. The 2D /articles/ page is displayed inside a
         Bigscreen VR-integrated desktop browser during live group discussions;
-        effectiveness notes and feedback are being gathered. A dedicated
-        group-display mode was deliberately deferred to be informed by this
-        VR use before it lands as a site feature.
-    next_action: "VR field-test findings → group-display mode design (separate session; findings being organized by Aaron)."
+        effectiveness notes and feedback are being gathered. The /chat/ pages
+        above are the first dedicated group-display surface to come out of it;
+        they are deliberately separate from the public pages rather than a
+        mode toggled on them.
+    next_action: "Author: score /chat/ and /chat/video-NN/ against WoP-Teaching-Practices-Standard, then reply GO to push. Open question in that review: /chat/video-03/ (the creation layout) carries neither the A2 end-screen lines nor the A3 correction link, because /creation/ never had them and adding them needs a change to creation.js beyond the one allowed player hook."
 
   - id: creation-film
     name: "'His Work and Glory' creation film — /creation/"

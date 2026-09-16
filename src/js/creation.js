@@ -43,6 +43,18 @@
     var follow = true, litEl = null, lastIdx = 0, programmatic = false, pollTimer = null;
     var endedEl = document.getElementById('creationEnded');
 
+    /* ── Player hook (additive) ───────────────────────────────────
+       The chat pages at /chat/video-NN/ need the player and its state, and
+       they are a separate script (js/chat-session.js) that must not reach
+       inside this closure. Two window events are the whole interface. On a
+       page with no listener this costs one dispatch; nothing else here
+       changes, and the wrapping try/catch means a listener that throws can
+       never break a player callback. */
+    function emit(name, detail) {
+        try { window.dispatchEvent(new CustomEvent(name, { detail: detail })); }
+        catch (_) {}
+    }
+
     /* ---- YouTube IFrame Player API ---- */
     window.onYouTubeIframeAPIReady = function () {
         player = new YT.Player('creationVideo', {
@@ -54,7 +66,11 @@
                 origin: window.location.origin
             },
             events: {
-                onReady: function () { playerReady = true; startPoll(); },
+                onReady: function () {
+                    playerReady = true;
+                    startPoll();
+                    emit('wop:player', { player: player });
+                },
                 onStateChange: onState
             }
         });
@@ -63,6 +79,7 @@
     function onState(e) {
         if (e.data === YT.PlayerState.ENDED) { showEnded(); }
         else if (e.data === YT.PlayerState.PLAYING) { hideEnded(); }
+        emit('wop:state', { state: e.data });
     }
 
     function currentTime() {

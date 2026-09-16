@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ description | default(site.description) }}">
 
-    {% if draft %}<meta name="robots" content="noindex,nofollow">{% endif %}
+    {% if draft %}<meta name="robots" content="noindex,nofollow">{% elif noindex %}<meta name="robots" content="noindex">{% endif %}
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.wordsofplainness.org{{ page.url }}">
+    <!-- Canonical URL -->{# `canonical` overrides it: the /chat/ presentation
+        pages are noindex duplicates of a public page and point at that page
+        instead. This note is a NUNJUCKS comment opened on the line above and
+        closed here: an HTML comment would render into every page on the site,
+        and a comment on its own lines would add or drop a blank line. Either
+        one shows up as a diff on the public pages, which must stay
+        byte-identical. #}
+    <link rel="canonical" href="https://www.wordsofplainness.org{{ canonical | default(page.url) }}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="{% if layout == 'layouts/chapter.njk' %}article{% else %}website{% endif %}">
@@ -163,7 +169,7 @@
 
     {% block styles %}{% endblock %}
 </head>
-<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %} data-api-url="{{ site.api.baseUrl }}">
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %} data-api-url="{{ site.api.baseUrl }}"{% if pagefindIgnore %} data-pagefind-ignore{% endif %}>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
     {% include "partials/header.njk" %}

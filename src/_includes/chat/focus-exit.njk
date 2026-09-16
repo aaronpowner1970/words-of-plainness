@@ -1,0 +1,11 @@
+{#
+  chat/focus-exit.njk — the way out of focus view.
+
+  It lives at page level, not inside the stage, and it is fixed to the bottom
+  margin that focus view reserves. That margin is why it exists: the video
+  stops short of the viewport bottom so this button and YouTube's own control
+  bar are both reachable, neither covering the other.
+
+  Hidden unless <html> carries .chat-focus.
+#}
+<button class="chat-focus-exit" type="button" data-chat="focus-exit">Show status &amp; transcript</button>

@@ -460,6 +460,14 @@ module.exports = function(eleventyConfig) {
             .replace(/<section class="discord-section"[\s\S]*?<\/section>/g, '');
     });
 
+    // Running time as m:ss, for the /chat/ menu cards. Durations come from
+    // src/_data/chat_videos.json, measured once with the IFrame API's
+    // getDuration() rather than guessed.
+    eleventyConfig.addFilter("mmss", seconds => {
+        const s = Math.max(0, Math.round(Number(seconds) || 0));
+        return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+    });
+
     // Format reading time
     eleventyConfig.addFilter("readingTime", minutes => {
         if (minutes < 1) return "< 1 min read";

@@ -1,0 +1,31 @@
+{#
+  chat/wing-right.njk — the live-status wing, included AFTER the player.
+
+  Context it reads:
+    chatTitle   the film's title
+
+  The screen has to answer "why can't I talk?" without anyone asking. The
+  badge, the time left and the message say it together. The Focus button sits
+  at the bottom, away from the reading order — it is the host's, and the room
+  should not read it as something it is meant to press.
+
+  Live values are written by js/chat-session.js through [data-chat] hooks,
+  never by id, because the badge, the time-left line and the message each
+  appear TWICE — once here, once in the narrow-screen band — and only one of
+  the two is displayed at a given width. One selector updates both.
+#}
+<aside class="chat-wing chat-wing--right" aria-label="Session status">
+    <div class="chat-status">
+        <p class="chat-mic" data-chat="mic" data-state="muted" role="status">
+            <span class="chat-mic-dot" aria-hidden="true"></span>
+            <span class="chat-mic-text" data-chat="mic-text">Visitor mics off</span>
+        </p>
+        <p class="chat-status-title">{{ chatTitle }}</p>
+        <div class="chat-meter" role="presentation">
+            <div class="chat-meter-fill" data-chat="meter"></div>
+        </div>
+        <p class="chat-timeleft" data-chat="timeleft">Starting shortly</p>
+        <p class="chat-message" data-chat="message">All visitor mics are turned off while this short video plays. Mics will be turned on at the end for Q/A + discussion.</p>
+    </div>
+    <button class="chat-focus-btn" type="button" data-chat="focus">Focus video</button>
+</aside>

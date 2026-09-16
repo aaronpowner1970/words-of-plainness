@@ -10,7 +10,11 @@ eleventyExcludeFromCollections: true
     <priority>1.0</priority>
   </url>
   {%- for page in collections.all %}
-  {%- if page.url and page.url != "/" and not page.url.startsWith("/admin") %}
+  {#- /chat/* is already out of collections.all (eleventyExcludeFromCollections),
+      so this is a second lock on the same door: the presentation pages are
+      noindex duplicates of public pages and must never be advertised, even if
+      that front-matter flag is ever dropped. -#}
+  {%- if page.url and page.url != "/" and not page.url.startsWith("/admin") and not page.url.startsWith("/chat") %}
   <url>
     <loc>https://www.wordsofplainness.org{{ page.url }}</loc>
     <lastmod>{{ page.date | isoDate }}</lastmod>

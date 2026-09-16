@@ -1,0 +1,23 @@
+{#
+  chat/wing-left.njk — the welcome wing, included BEFORE the player.
+
+  Left and right are separate files precisely because they go on opposite
+  sides of the video: one include emitting both would put them side by side
+  and leave the film pushed off to one end of the row.
+
+  The author's wording, verbatim. This is what a newcomer arriving
+  mid-evening reads first, so it says who is hosting and where they are
+  before it says anything about the film. Right-aligned, so the block sits
+  against the film's edge and reads as one column with it.
+#}
+<aside class="chat-wing chat-wing--left" aria-label="Welcome">
+    <div class="chat-welcome">
+        <p class="chat-welcome-line chat-welcome-lead">Welcome to a Words of Plainness chat.</p>
+        <p class="chat-welcome-line">Christ-Centered Ministry and Fellowship.</p>
+        <p class="chat-welcome-line">Host: Brother Aaron</p>
+        <p class="chat-welcome-line">Website: wordsofplainness.org</p>
+        <p class="chat-welcome-rule" aria-hidden="true">&mdash;</p>
+        <p class="chat-welcome-line">I appreciate constructive feedback.</p>
+        <p class="chat-welcome-line">May God bless us with His Spirit.</p>
+    </div>
+</aside>

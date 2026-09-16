@@ -1,0 +1,25 @@
+{#
+  layouts/chat-menu.njk — the /chat/ host menu and between-videos screen.
+
+  Thin: it exists only so the menu can put its stylesheet in <head> and its
+  data and script in the scripts block, the way every other layout does.
+  It deliberately does NOT load chapter.css / articles-panel.css / creation.css
+  — the menu is not a reading page, and chat-session.css styles it end to end,
+  including a reset for the banner macro's <figure>, which would otherwise
+  carry the browser's default margin without those sheets present.
+#}
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/chat-session.css?v={{ site.version }}">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+{{ content | safe }}
+{% endblock %}
+
+{% block scripts %}
+<script>window.WOP_CHAT_VIDEOS = {{ chat_videos | dump | safe }};</script>
+<script src="/js/chat-menu.js?v={{ site.version }}"></script>
+{% endblock %}

@@ -1,0 +1,65 @@
+---
+title: "Words of Plainness Chat"
+layout: layouts/chat-menu.njk
+permalink: /chat/
+noindex: true
+pagefindIgnore: true
+eleventyExcludeFromCollections: true
+canonical: /articles/
+description: "Host menu for a live Words of Plainness chat."
+---
+{% from "macros/banner.njk" import banner with context %}
+
+{#
+  /chat/ — the host's menu, and the screen the room looks at between videos.
+
+  It has two jobs at once, which is why it is laid out this way. To the host it
+  is a launcher: thirteen cards, a "Next up" slot, one click to open. To
+  everyone else it is the between-videos screen, so the welcome block is the
+  biggest thing on it and the standing line says mics are open — which, in this
+  evening's shape, is the one stretch when they are.
+#}
+<div class="chat-menu" data-pagefind-ignore>
+
+    <section class="chat-menu-welcome" aria-label="Welcome">
+        <p class="chat-menu-lead">Welcome to a Words of Plainness chat.</p>
+        <p class="chat-menu-line">Christ-Centered Ministry and Fellowship.</p>
+        <p class="chat-menu-line">Host: Brother Aaron</p>
+        <p class="chat-menu-line">Website: wordsofplainness.org</p>
+        <p class="chat-menu-rule" aria-hidden="true">&mdash;</p>
+        <p class="chat-menu-line">I appreciate constructive feedback.</p>
+        <p class="chat-menu-line">May God bless us with His Spirit.</p>
+        <p class="chat-menu-mics">Mics are open between videos.</p>
+    </section>
+
+    <!-- Next up. The host sets it from any card; the choice is remembered in
+         this browser only (localStorage), because only the host's browser
+         matters. With nothing set it shows the first video. -->
+    <section class="chat-next" aria-label="Next up">
+        <p class="chat-next-eyebrow">Next up</p>
+        <div class="chat-next-body">
+            <div class="chat-next-banner" data-chat-next="banner"></div>
+            <div class="chat-next-meta">
+                <p class="chat-next-title" data-chat-next="title"></p>
+                <p class="chat-next-label" data-chat-next="label"></p>
+                <p class="chat-next-time" data-chat-next="time"></p>
+                <a class="chat-next-open" data-chat-next="open" href="/chat/video-01/">Open</a>
+            </div>
+        </div>
+    </section>
+
+    <ol class="chat-cards">
+        {% for v in chat_videos %}
+        <li class="chat-card" data-chat-card="{{ v.nn }}">
+            <a class="chat-card-link" href="{{ v.href }}">
+                {{ banner(v.banner, cls="chat-card-banner") }}
+                <span class="chat-card-article">Article {{ v.n }}</span>
+                <span class="chat-card-title">{{ v.title }}</span>
+                {% if v.label %}<span class="chat-card-label">{{ v.label }}</span>{% endif %}
+                <span class="chat-card-time">{{ v.duration_s | mmss }}</span>
+            </a>
+            <button class="chat-card-setnext" type="button" data-chat-setnext="{{ v.nn }}">Set as next</button>
+        </li>
+        {% endfor %}
+    </ol>
+</div>

@@ -1,0 +1,26 @@
+---
+layout: layouts/aoid-video.njk
+pagination:
+  data: aoid_videos
+  size: 1
+  alias: video
+permalink: "/chat/video-{{ video.nn }}/"
+# chat mode: the flanking wings, the mic badge and focus view. The layout is
+# otherwise the same file the public reading page uses, so the article, the
+# timing, the dock and the worship gate are not a second copy.
+chat: true
+# Reached by URL only; nothing on the public site links here. Kept out of
+# search: noindex, no pagefind body (see the layout), data-pagefind-ignore on
+# the body, out of collections so sitemap.njk never sees it, and a canonical
+# pointing at the public page this one duplicates.
+noindex: true
+pagefindIgnore: true
+eleventyExcludeFromCollections: true
+# `| safe` is load-bearing here for the same reason as on the public template:
+# eleventyComputed renders through Nunjucks first and base.njk escapes again,
+# so A04's apostrophe would otherwise ship as "Of God&amp;#39;s Word".
+eleventyComputed:
+  title: "{{ video.title | safe }}: Chat"
+  description: "Presentation view of the Article {{ video.n }} reading, for a live Words of Plainness chat."
+  canonical: "/articles/video-{{ video.nn }}/"
+---

@@ -3,7 +3,8 @@
 {% block styles %}
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/articles-panel.css?v={{ site.version }}">
-<link rel="stylesheet" href="/css/creation.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/creation.css?v={{ site.version }}">{% if chat %}
+<link rel="stylesheet" href="/css/chat-session.css?v={{ site.version }}">{% endif %}
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
 {% endblock %}
 
@@ -28,7 +29,10 @@
 <div class="creation-reading dock-hidden" id="creationReading">
 
     <!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->
-    <div class="creation-stage-wrap" data-pagefind-ignore>
+    <div class="creation-stage-wrap" data-pagefind-ignore>{% if chat %}
+        <div class="chat-stage-row">
+        {%- set chatTitle = chatFilmTitle | default(title) %}
+        {% include "chat/wing-left.njk" %}{% endif %}
         <div class="creation-player" id="creationPlayerWrap">
             <!-- The IFrame API replaces this node with a youtube-nocookie iframe -->
             <div id="creationVideo"></div>
@@ -36,14 +40,18 @@
             <div class="creation-ended" id="creationEnded" aria-hidden="true">
                 <p class="creation-ended-line">This film is a form of worship</p>
                 <p class="creation-ended-sub">No endorsements or polemics implied</p>
-                <button class="creation-replay" id="creationReplay" type="button">&#8635; Watch again</button>
+                <button class="creation-replay" id="creationReplay" type="button">&#8635; Watch again</button>{% if chat %}
+                <a class="aoid-ended-back chat-ended-back" href="/chat/">Back to the chat menu</a>{% endif %}
             </div>
+        </div>{% if chat %}
+        {% include "chat/wing-right.njk" %}
         </div>
+        {% include "chat/band.njk" %}{% endif %}
     </div>
 
     <div class="creation-columns">
         <!-- Following transcript (auto-scrolls with the film; every claim is a citation span) -->
-        <div class="creation-transcript" id="creationTranscript" data-pagefind-body>
+        <div class="creation-transcript" id="creationTranscript"{% if not chat %} data-pagefind-body{% endif %}>
             <p class="ct-lead">Scroll along with the film. The scriptures behind each underlined passage stream beside it &mdash; biblical witnesses first, Restoration witnesses beside them.</p>
             {% for para in creation_transcript %}
             <p class="ct-p">{% for span in para %}<span class="ct-span" data-s="{{ span.id }}" data-start="{{ span.start }}">{% for c in span.cues %}<span class="ct-cue" data-i="{{ c.i }}" data-cs="{{ c.s }}" data-ce="{{ c.e }}">{{ c.t }} </span>{% endfor %}</span> {% endfor %}</p>
@@ -68,7 +76,9 @@
         <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
 </div>
-
+{% if chat %}
+{% include "chat/focus-exit.njk" %}
+{% endif %}
 <!-- Entry / About worship notice -->
 <div class="creation-entry" id="creationEntry" role="dialog" aria-modal="true" aria-labelledby="creationEntryTitle">
     <div class="creation-entry-card">
@@ -85,6 +95,7 @@
 {% block scripts %}
 <script>window.WOP_CREATION_CITES = {{ creation_citations | dump | safe }};</script>
 <script>window.WOP_CREATION_VIDEO_ID = "4CpGCkx19m4";</script>
-<script src="/js/creation.js?v={{ site.version }}"></script>
+<script src="/js/creation.js?v={{ site.version }}"></script>{% if chat %}
+<script src="/js/chat-session.js?v={{ site.version }}"></script>{% endif %}
 <script src="https://www.youtube.com/iframe_api"></script>
 {% endblock %}

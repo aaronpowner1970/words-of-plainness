@@ -1,0 +1,511 @@
+/* ============================================================
+   CHAT PAGES  (chat-session.css)
+   /chat/ and /chat/video-NN/ — the presentation layer.
+
+   Loaded ONLY in chat mode, after creation.css and aoid-video.css, so it
+   adds the wings, the band, focus view and the host menu and changes
+   nothing about the reading composition underneath. Every colour, face
+   and border comes from the tokens those two files already use: gold
+   #C4943A / #D4A84A, brown #1F1012, cream #E8DCC4 / #F5EFE4, Cinzel for
+   headings, serif for body. The public pages never load this file.
+   ============================================================ */
+
+/* ── The three-column stage (mockup E) ───────────────────────
+   [left wing] [video] [right wing], inside the sticky stage wrap, so the
+   wings travel with the film exactly as the film already travels.
+
+   The video does not shrink: it is flex: 0 0 auto and keeps the
+   width: min(100%, filmHeightCap * 16/9) it has on the public page. The
+   wings take the leftover on flex: 1 1 0 with min-width: 0.
+
+   The gutter is PADDING INSIDE each wing, not a flex `gap`. With a gap,
+   a viewport tall enough for the film to span the whole container would
+   leave the wings at zero width while the gap still claimed its pixels,
+   and the row would overflow into a horizontal scrollbar. Inside the
+   wing, the gutter collapses with the wing. */
+.chat-stage-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+.chat-stage-row > .creation-player { flex: 0 0 auto; }
+
+.chat-wing {
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.chat-wing--left { padding-right: clamp(10px, 1.4vw, 20px); justify-content: center; }
+.chat-wing--right { padding-left: clamp(10px, 1.4vw, 20px); }
+
+/* ── Left wing · welcome ─────────────────────────────────────
+   Right-aligned, so the block sits against the film's edge and reads as
+   one column with it rather than as a floating caption. */
+.chat-welcome {
+    text-align: right;
+    padding: clamp(0.6rem, 1.4vh, 1.1rem) 0;
+    border-right: 1px solid rgba(196, 148, 58, 0.18);
+    padding-right: clamp(10px, 1.2vw, 18px);
+}
+.chat-welcome-line {
+    margin: 0 0 0.3em;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(0.76rem, 1.15vw, 1.02rem);
+    line-height: 1.45;
+    color: var(--cream, #E8DCC4);
+}
+.chat-welcome-lead {
+    font-family: 'Cinzel', var(--font-serif, Georgia, serif);
+    font-size: clamp(0.88rem, 1.35vw, 1.24rem);
+    line-height: 1.35;
+    color: var(--gold-light, #D4A84A);
+    margin-bottom: 0.5em;
+}
+.chat-welcome-rule {
+    margin: 0.55em 0;
+    color: rgba(196, 148, 58, 0.55);
+    font-size: clamp(0.8rem, 1.1vw, 1rem);
+    line-height: 1;
+}
+
+/* ── Right wing · live status ────────────────────────────────
+   The status grows to fill the wing and the Focus button is pushed to the
+   bottom, out of the reading order — the room reads the badge, the host
+   reaches past it. */
+.chat-wing--right { justify-content: space-between; }
+.chat-status {
+    padding: clamp(0.6rem, 1.4vh, 1.1rem) 0 0 clamp(10px, 1.2vw, 18px);
+    border-left: 1px solid rgba(196, 148, 58, 0.18);
+}
+
+/* Mic badge. Muted is the state the room is in for most of the film, so it
+   is the one that has to read at a distance: a red that is muted rather
+   than alarming, and a slow pulse that says live, not error. */
+.chat-mic {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    margin: 0 0 0.6em;
+    padding: 0.3em 0.75em;
+    border-radius: 20px;
+    font-family: var(--font-sans, sans-serif);
+    font-size: clamp(0.66rem, 0.95vw, 0.82rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+.chat-mic-dot {
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: currentColor;
+}
+.chat-mic[data-state="muted"] {
+    color: #E8A0A0;
+    background: rgba(140, 45, 45, 0.28);
+    border: 1px solid rgba(196, 90, 90, 0.5);
+}
+.chat-mic[data-state="muted"] .chat-mic-dot { animation: chatMicPulse 2.4s ease-in-out infinite; }
+.chat-mic[data-state="open"] {
+    color: #9FD9A6;
+    background: rgba(45, 110, 60, 0.26);
+    border: 1px solid rgba(110, 190, 125, 0.5);
+}
+@keyframes chatMicPulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.28; }
+}
+
+.chat-status-title {
+    margin: 0 0 0.5em;
+    font-family: 'Cinzel', var(--font-serif, Georgia, serif);
+    font-size: clamp(0.85rem, 1.3vw, 1.18rem);
+    line-height: 1.3;
+    color: var(--cream-soft, #F5EFE4);
+}
+
+.chat-meter {
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(196, 148, 58, 0.18);
+    overflow: hidden;
+    margin-bottom: 0.55em;
+}
+.chat-meter-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gold-primary, #C4943A);
+    transition: width 0.25s linear;
+}
+
+.chat-timeleft {
+    margin: 0 0 0.6em;
+    font-family: var(--font-sans, sans-serif);
+    font-size: clamp(0.68rem, 1vw, 0.86rem);
+    letter-spacing: 0.03em;
+    color: var(--gold-light, #D4A84A);
+}
+.chat-message {
+    margin: 0;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(0.72rem, 1.05vw, 0.94rem);
+    line-height: 1.5;
+    color: var(--cream-dark, #D4C8B0);
+}
+
+/* Focus control: a text button, not a filled one. It is the host's, and the
+   room should not read it as something it is meant to press. */
+.chat-focus-btn {
+    align-self: flex-start;
+    margin: 0.8em 0 clamp(0.5rem, 1.2vh, 1rem) clamp(10px, 1.2vw, 18px);
+    padding: 0.25em 0;
+    background: none;
+    border: 0;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.6;
+    font-family: var(--font-sans, sans-serif);
+    font-size: clamp(0.64rem, 0.9vw, 0.76rem);
+    letter-spacing: 0.04em;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(196, 148, 58, 0.4);
+    cursor: pointer;
+}
+.chat-focus-btn:hover,
+.chat-focus-btn:focus-visible { opacity: 1; color: var(--gold-light, #D4A84A); }
+
+/* ── The band (mockup F) ─────────────────────────────────────
+   One row under the video carrying the same facts, for the widths where
+   the wings have no room. Hidden by default; the media queries below turn
+   the two states over. */
+.chat-band { display: none; }
+
+/* ── Wings out, band in ──────────────────────────────────────
+   Two triggers, one outcome, because "the wings don't fit" has two causes.
+   WIDTH is the obvious one, at about 1100px. HEIGHT is the quiet one: the
+   film is height-capped at 52vh (62vh on /creation/) and 16:9, so past
+   roughly 1150px of viewport height the film alone is as wide as the
+   1200px reading container and the leftover is unreadable. Same answer in
+   both cases — collapse to the band rather than squeeze the wings. */
+@media (max-width: 1100px), (min-height: 1150px) {
+    .chat-wing { display: none; }
+    .chat-band {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 1rem;
+        margin: 0.55rem auto 0;
+        padding: 0.5rem 0.7rem;
+        max-width: 100%;
+        border: 1px solid rgba(196, 148, 58, 0.2);
+        border-radius: 8px;
+        background: rgba(196, 148, 58, 0.05);
+    }
+    .chat-mic--band { margin: 0; }
+    .chat-band-title {
+        font-family: 'Cinzel', var(--font-serif, Georgia, serif);
+        font-size: 0.82rem;
+        color: var(--cream-soft, #F5EFE4);
+    }
+    .chat-band-time {
+        font-family: var(--font-sans, sans-serif);
+        font-size: 0.72rem;
+        color: var(--gold-light, #D4A84A);
+    }
+    .chat-band-msg,
+    .chat-band-host {
+        font-family: var(--font-serif, Georgia, serif);
+        font-size: 0.76rem;
+        color: var(--cream-dark, #D4C8B0);
+    }
+    .chat-band-host { opacity: 0.75; }
+    /* Focus sits at the right end of the band. */
+    .chat-focus-btn--band { margin: 0 0 0 auto; align-self: center; }
+}
+
+/* ── Focus view ──────────────────────────────────────────────
+   Not browser fullscreen, not YouTube's. The stage wrap goes fixed and
+   fills the viewport; the player inside it is resized by CSS only. The
+   iframe is never re-parented, because moving an iframe in the DOM
+   reloads it — which in a room means the film restarts in front of
+   everyone.
+
+   The reserved bottom margin is the whole point of the geometry: the
+   video stops short of the viewport bottom so the exit button sits in
+   clear space and YouTube's own control bar, at the bottom INSIDE the
+   player, is still reachable. Neither covers the other. */
+:root.chat-focus,
+:root.chat-focus body { overflow: hidden; }
+
+.chat-focus .creation-stage-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 1900;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 72px at the bottom — comfortably past the 56px floor the exit button
+       needs — and real room at the sides. */
+    padding: 20px clamp(24px, 4vw, 64px) 72px;
+    background: var(--brown-rich, #1F1012);
+}
+.chat-focus .chat-stage-row { width: 100%; justify-content: center; }
+.chat-focus .chat-wing,
+.chat-focus .chat-band { display: none; }
+
+.chat-focus .chat-stage-row > .creation-player {
+    width: min(100%, calc((100vh - 92px) * 16 / 9));
+    max-width: none;
+}
+
+/* The transcript and dock keep their place in the layout and lose only
+   their visibility. That is deliberate: the host page's follow code goes
+   on measuring real rectangles while they are invisible, so the transcript
+   is already on the current sentence when the host comes back instead of
+   jumping to it a moment later. */
+.chat-focus .creation-columns { visibility: hidden; }
+.chat-focus .ap-panel,
+.chat-focus .ap-backdrop { visibility: hidden; }
+.chat-focus .ct-resume,
+.chat-focus .ct-cite-toggle,
+.chat-focus .ct-hint { display: none; }
+
+.chat-focus-exit {
+    display: none;
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 1901;
+    padding: 0.42em 1.1em;
+    background: rgba(196, 148, 58, 0.14);
+    border: 1px solid rgba(196, 148, 58, 0.45);
+    border-radius: 20px;
+    color: var(--gold-light, #D4A84A);
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+}
+.chat-focus-exit:hover,
+.chat-focus-exit:focus-visible {
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+}
+.chat-focus .chat-focus-exit { display: block; }
+
+/* /creation/ in chat mode has no ended-overlay back link of its own. */
+.chat-ended-back { margin-top: 0.7rem; }
+
+@media (prefers-reduced-motion: reduce) {
+    .chat-mic[data-state="muted"] .chat-mic-dot { animation: none; }
+    .chat-meter-fill { transition: none; }
+}
+
+/* ============================================================
+   /chat/ — the host menu and between-videos screen
+   ============================================================ */
+
+/* The site header is FIXED (109px at desktop, 86px under 960px), and this page
+   has no hero to sit under it, so the welcome block has to be pushed clear of
+   it by hand — otherwise the first and largest line on the between-videos
+   screen renders behind the header bar. Measured, not guessed. */
+.chat-menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: calc(109px + clamp(0.5rem, 1.4vh, 1rem)) clamp(1rem, 3vw, 2rem) 4rem;
+}
+@media (max-width: 959.98px) {
+    .chat-menu { padding-top: calc(86px + 0.9rem); }
+}
+
+/* The draggable Articles seal is site chrome that lands on top of the card
+   grid here, and on the transcript on a chat video page. These pages are shown
+   to a room on a projector or a VR screen: nothing floats over the content
+   that the room did not come to read. Chat pages only; every public page keeps
+   it. */
+#articlesSealWidget { display: none; }
+
+/* The welcome block is the biggest thing on this screen on purpose: between
+   videos it IS the screen, and it has to read from across a VR room. */
+.chat-menu-welcome {
+    text-align: center;
+    margin-bottom: clamp(0.7rem, 1.6vh, 1.2rem);
+}
+.chat-menu-lead {
+    margin: 0 0 0.4em;
+    font-family: 'Cinzel', var(--font-serif, Georgia, serif);
+    font-size: clamp(1.15rem, 2.3vw, 1.75rem);
+    line-height: 1.2;
+    color: var(--gold-light, #D4A84A);
+}
+.chat-menu-line {
+    margin: 0 0 0.16em;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(0.92rem, 1.5vw, 1.2rem);
+    line-height: 1.5;
+    color: var(--cream, #E8DCC4);
+}
+.chat-menu-rule {
+    margin: 0.5em 0;
+    color: rgba(196, 148, 58, 0.55);
+    line-height: 1;
+}
+.chat-menu-mics {
+    margin: 0.7em 0 0;
+    font-family: var(--font-sans, sans-serif);
+    font-size: clamp(0.72rem, 1.1vw, 0.88rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9FD9A6;
+}
+
+/* Next up */
+.chat-next {
+    margin: 0 auto clamp(0.7rem, 1.8vh, 1.2rem);
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(196, 148, 58, 0.35);
+    border-radius: 10px;
+    background: rgba(196, 148, 58, 0.06);
+}
+.chat-next-eyebrow {
+    margin: 0 0 0.6em;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(212, 168, 74, 0.8);
+}
+.chat-next-body {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.chat-next-banner { flex: 0 0 clamp(150px, 17vw, 210px); }
+.chat-next-meta { flex: 1 1 240px; min-width: 0; }
+.chat-next-title {
+    margin: 0 0 0.15em;
+    font-family: 'Cinzel', var(--font-serif, Georgia, serif);
+    font-size: clamp(1rem, 1.7vw, 1.35rem);
+    color: var(--cream-soft, #F5EFE4);
+}
+.chat-next-label {
+    margin: 0 0 0.3em;
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--cream-dark, #D4C8B0);
+}
+.chat-next-time {
+    margin: 0 0 0.7em;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.78rem;
+    color: var(--gold-light, #D4A84A);
+}
+.chat-next-open {
+    display: inline-block;
+    padding: 0.45em 1.4em;
+    background: var(--gold-primary, #C4943A);
+    color: var(--brown-rich, #1F1012);
+    border-radius: 8px;
+    font-family: var(--font-sans, sans-serif);
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+}
+.chat-next-open:hover { background: var(--gold-light, #D4A84A); }
+
+/* The thirteen cards */
+.chat-cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 0.9rem;
+}
+.chat-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(196, 148, 58, 0.22);
+    border-radius: 10px;
+    background: rgba(42, 29, 20, 0.4);
+    overflow: hidden;
+}
+.chat-card--next { border-color: rgba(196, 148, 58, 0.75); }
+.chat-card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0 0 0.5rem;
+    text-decoration: none;
+    flex: 1 1 auto;
+}
+/* This page does not load chapter.css or articles-panel.css, so the banner
+   macro's <figure> would otherwise carry the browser's default margin. */
+.chat-card-banner,
+.chat-next-figure { margin: 0; }
+.chat-card-banner img,
+.chat-next-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 9px 9px 0 0;
+}
+.chat-next-figure img { border-radius: 8px; }
+.chat-card-article {
+    margin: 0.5rem 0.7rem 0;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(212, 168, 74, 0.8);
+}
+.chat-card-title {
+    margin: 0 0.7rem;
+    font-family: 'Cinzel', var(--font-serif, Georgia, serif);
+    font-size: 0.92rem;
+    line-height: 1.3;
+    color: var(--cream-soft, #F5EFE4);
+}
+.chat-card-label {
+    margin: 0.1rem 0.7rem 0;
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: 0.72rem;
+    color: var(--cream-dark, #D4C8B0);
+}
+.chat-card-time {
+    margin: 0.25rem 0.7rem 0;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.74rem;
+    color: var(--gold-light, #D4A84A);
+}
+.chat-card-setnext {
+    margin: 0;
+    padding: 0.45em 0.7rem;
+    background: none;
+    border: 0;
+    border-top: 1px solid rgba(196, 148, 58, 0.16);
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.72;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-align: left;
+    cursor: pointer;
+}
+.chat-card-setnext:hover,
+.chat-card-setnext:focus-visible {
+    opacity: 1;
+    color: var(--gold-light, #D4A84A);
+    background: rgba(196, 148, 58, 0.08);
+}

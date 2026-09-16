@@ -23,7 +23,8 @@
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/articles-panel.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/creation.css?v={{ site.version }}">
-<link rel="stylesheet" href="/css/aoid-video.css?v={{ site.version }}">
+<link rel="stylesheet" href="/css/aoid-video.css?v={{ site.version }}">{% if chat %}
+<link rel="stylesheet" href="/css/chat-session.css?v={{ site.version }}">{% endif %}
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
 {% endblock %}
 
@@ -46,8 +47,19 @@
      .dock-hidden is the default: the dock starts closed, as on /creation/. -->
 <div class="creation-reading aoid-reading dock-hidden" id="aoidReading">
 
-    <!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->
-    <div class="creation-stage-wrap" data-pagefind-ignore>
+    <!-- Sticky YouTube (nocookie) player, driven by the IFrame Player API -->{#
+         In chat mode the player becomes the centre column of a three-column row;
+         it is flex: 0 0 auto, so the wings take the leftover width and the film
+         keeps exactly the size it has on the public page.
+
+         Every chat conditional in this file opens at the END of the preceding
+         line and closes before the following newline. That is not style: it is
+         what makes the block emit NOTHING when chat is false, so the public
+         page's HTML stays byte-identical rather than gaining a blank line. #}
+    <div class="creation-stage-wrap" data-pagefind-ignore>{% if chat %}
+        <div class="chat-stage-row">
+        {%- set chatTitle = video.title %}
+        {% include "chat/wing-left.njk" %}{% endif %}
         <div class="creation-player" id="aoidPlayerWrap">
             <!-- The IFrame API replaces this node with a youtube-nocookie iframe -->
             <div id="aoidVideo"></div>
@@ -67,10 +79,14 @@
                 <a class="aoid-rjw-link aoid-ended-journal" href="/articles/#{{ video.slug }}">Write your reflection in your Discipleship Journal &rarr;</a>
                 <div class="aoid-ended-actions">
                     <button class="creation-replay" id="aoidReplay" type="button">&#8635; Watch again</button>
-                    <a class="aoid-ended-back" href="/articles/#{{ video.slug }}">Back to the Articles</a>
+                    {% if chat %}<a class="aoid-ended-back" href="/chat/">Back to the chat menu</a>
+                    {% else %}<a class="aoid-ended-back" href="/articles/#{{ video.slug }}">Back to the Articles</a>{% endif %}
                 </div>
             </div>
+        </div>{% if chat %}
+        {% include "chat/wing-right.njk" %}
         </div>
+        {% include "chat/band.njk" %}{% endif %}
     </div>
 
     <div class="creation-columns">
@@ -81,8 +97,8 @@
              first heading in the indexed body as the result title, which is the
              article's own <h2> — so the reading would appear in search under the
              same name as its entry on /articles/. -->
-        <div class="aoid-article" id="aoidArticle" data-pagefind-body
-             data-pagefind-meta="title:{{ title }}">
+        <div class="aoid-article" id="aoidArticle"{% if not chat %} data-pagefind-body
+             data-pagefind-meta="title:{{ title }}"{% endif %}>
             <p class="ct-lead aoid-lead">The article below is read in the film. Every underlined claim opens its
                 biblical and Restoration witnesses beside it &mdash; tap any line to hold it and study.</p>
             {% include "aoid/" + video.code | lower + ".njk" %}
@@ -106,7 +122,9 @@
         <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
 </div>
-
+{% if chat %}
+{% include "chat/focus-exit.njk" %}
+{% endif %}
 <!-- Entry / About worship notice. Same wording as /creation/; the article's
      own banner stands in for the film thumbnail. -->
 <div class="creation-entry aoid-entry" id="aoidEntry" role="dialog" aria-modal="true" aria-labelledby="aoidEntryTitle">
@@ -119,8 +137,10 @@
         <!-- A1 · Propose before watching. A prediction held in mind before the
              reading gives the film something to land against. It is deliberately
              not a field: nothing is collected, nothing is graded. The reader
-             answers in their own head, or aloud to the room. -->
-        <p class="aoid-entry-propose">Before you enter: in a sentence of your own, what would you expect a declaration titled “{{ video.title }}” to affirm? Hold your answer; the film will give you something to compare it with.</p>
+             answers in their own head, or aloud to the room. -->{#
+             Public pages only: in a chat the host asks it out loud, and a
+             printed copy of the question on screen would pre-empt him. #}
+        {% if not chat %}<p class="aoid-entry-propose">Before you enter: in a sentence of your own, what would you expect a declaration titled “{{ video.title }}” to affirm? Hold your answer; the film will give you something to compare it with.</p>{% endif %}
         <button id="aoidEnterBtn" type="button">Enter</button>
     </div>
 </div>
@@ -152,6 +172,7 @@ window.WOP_AOID_VIDEO = {
 };
 </script>
 <script src="/js/apparatus-common.js?v={{ site.version }}"></script>
-<script src="/js/aoid-video.js?v={{ site.version }}"></script>
+<script src="/js/aoid-video.js?v={{ site.version }}"></script>{% if chat %}
+<script src="/js/chat-session.js?v={{ site.version }}"></script>{% endif %}
 <script src="https://www.youtube.com/iframe_api"></script>
 {% endblock %}
