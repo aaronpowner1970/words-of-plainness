@@ -1,0 +1,1780 @@
+{
+ "rule": "R6-28: before any model calls, audit the finished branches for BSR-MW-01 citations on RNR-H05; stop if any is accepted on a card",
+ "search_space": {
+  "S1_recovery_packets": {
+   "packets": 7,
+   "cards_read": 247,
+   "card_citations_read": 1176,
+   "h05_cards": []
+  },
+  "S1_h05_citations": [],
+  "S2_live1": {
+   "cells_read": 247,
+   "h05_cells": [],
+   "calls_read": 2861,
+   "calls_with_h05_meta": 0,
+   "calls_with_h05_and_mw01_meta": 0
+  },
+  "S3_workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
+  "S4_cells_json_app_master_version": "v2.23 REGISTRY CORRECTIONS",
+  "S4_h05_cells": [
+   "Q-033",
+   "Q-034",
+   "Q-035",
+   "Q-036",
+   "Q-037",
+   "Q-038",
+   "Q-039",
+   "Q-040"
+  ],
+  "S5_h05_distinct_calls_read": 157,
+  "S5_dedup_rule": "one model call is one observation: records re-served from a cache or seed (same call_id) and replicates reused from an earlier session's file are counted once",
+  "S6_live_site": {
+   "origin": "https://www.wordsofplainness.org (words-of-plainness.vercel.app redirects there; commandments.brotheraaron.org/seeking-jesus/ returns 404)",
+   "pages": [
+    "/seeking-jesus/",
+    "/seeking-jesus/map/",
+    "/seeking-jesus/code-it/",
+    "/seeking-jesus/conversation/",
+    "/seeking-jesus/self-check/"
+   ],
+   "all_status": 200,
+   "Q-039_string_on_any_page": 0,
+   "q039_phrase_rendered_as_a_citation": false,
+   "note_on_phrase_hits": "the index page contains 'the Father, the Son, and the Holy Ghost' twice, both in the Latter-day Saint Godhead diagram text (aria-label and caption), not as a Methodist citation",
+   "RNR-H05_rendered_historical_citation": {
+    "branch": "Baptist",
+    "document": "Baptist Faith and Message 2000",
+    "locator": "II.B. God the Son",
+    "phrase": "Christ is the eternal Son of God"
+   },
+   "cells_json_served": "404 at /_data/sjn/cells.json, /sjn/cells.json, /seeking-jesus/cells.json",
+   "only_articles_of_religion_citation_rendered": "RNR-H42 'without body or parts' (Article I)"
+  },
+  "why_the_packets_hold_no_h05": "Gate 6 runs only OPEN cells (registry.open_cells: Rendered State begins 'NOT LOCATED'). All eight RNR-H05 cells (Q-033..Q-040) were already rendered A and PUBLIC-CERTIFIED before Gate 6, so none entered live-1 or a packet."
+ },
+ "workbook_h05_cells": [
+  {
+   "queue_id": "Q-033",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "family_code": "A",
+   "branch": "Roman Catholic",
+   "collapse_rule": "SINGLE",
+   "recovery_state": "SESSION 9 SOURCE ROW RECOVERED",
+   "disposition": "PUBLIC-CERTIFIED",
+   "institution": "Roman Catholic Church",
+   "document": "Fourth Lateran Council",
+   "locator": "Constitution 1, Firmiter credimus",
+   "authority_url": "https://www.vatican.va/content/catechism/en/part_one/section_one/chapter_one/iv_how_can_we_speak_about_god.html",
+   "text_url": "https://sourcebooks.web.fordham.edu/basis/lateran4.asp",
+   "confidence": "HIGH",
+   "scope_control": "Official Latin controls; repository English is a text witness.",
+   "source_note": "",
+   "reviewer_status": "CERTIFIED",
+   "reviewer_notes": "",
+   "rendered_state": "A",
+   "metric_class": "A",
+   "retired": false,
+   "display_role": "CURRENT EVIDENCE / STATUS",
+   "case_study_targets": [
+    {
+     "document": "Fourth Lateran Council",
+     "locator": "Constitution 1, Firmiter credimus",
+     "url": "https://sourcebooks.web.fordham.edu/basis/lateran4.asp",
+     "phrase": "the only begotten Son of God made flesh",
+     "status": "ASSERT"
+    }
+   ]
+  },
+  {
+   "queue_id": "Q-034",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "family_code": "A",
+   "branch": "Eastern Orthodox",
+   "collapse_rule": "SINGLE",
+   "recovery_state": "SESSION 9 SOURCE ROW RECOVERED",
+   "disposition": "PUBLIC-CERTIFIED",
+   "institution": "Orthodox Church in America",
+   "document": "Third Council of Constantinople",
+   "locator": "Sixth Ecumenical Council",
+   "authority_url": "https://www.oca.org/orthodoxy/the-orthodox-faith/church-history/seventh-century/the-sixth-ecumenical-council",
+   "text_url": "https://www.newadvent.org/fathers/3813.htm",
+   "confidence": "HIGH",
+   "scope_control": "OCA scope.",
+   "source_note": "v2.12 assertion witness: full Third Council of Constantinople definition supplied as server-rendered text; OCA authority/reception path retained.",
+   "reviewer_status": "CERTIFIED",
+   "reviewer_notes": "",
+   "rendered_state": "A",
+   "metric_class": "A",
+   "retired": false,
+   "display_role": "CURRENT EVIDENCE / STATUS",
+   "case_study_targets": [
+    {
+     "document": "Third Council of Constantinople",
+     "locator": "Definition of Faith",
+     "url": "https://www.newadvent.org/fathers/3813.htm",
+     "phrase": "one and the same only-begotten Son of God",
+     "status": "ASSERT"
+    }
+   ]
+  },
+  {
+   "queue_id": "Q-035",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "family_code": "A",
+   "branch": "Lutheran",
+   "collapse_rule": "SINGLE",
+   "recovery_state": "SESSION 9 SOURCE ROW RECOVERED",
+   "disposition": "PUBLIC-CERTIFIED",
+   "institution": "Lutheran Church—Missouri Synod",
+   "document": "Nicene / Niceno-Constantinopolitan Creed",
+   "locator": "Nicene Creed",
+   "authority_url": "https://www.lcms.org/about/beliefs/lutheran-confessions",
+   "text_url": "https://bookofconcord.org/ecumenical-creeds/nicene-creed/",
+   "confidence": "HIGH",
+   "scope_control": "LCMS confessional subscription; not all Lutherans.",
+   "source_note": "Son.",
+   "reviewer_status": "CERTIFIED",
+   "reviewer_notes": "",
+   "rendered_state": "A",
+   "metric_class": "A",
+   "retired": false,
+   "display_role": "CURRENT EVIDENCE / STATUS",
+   "case_study_targets": [
+    {
+     "document": "Nicene Creed",
+     "locator": "Son clause",
+     "url": "https://bookofconcord.org/ecumenical-creeds/nicene-creed/",
+     "phrase": "the only-begotten Son of God",
+     "status": "ASSERT"
+    }
+   ]
+  },
+  {
+   "queue_id": "Q-036",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "family_code": "A",
+   "branch": "Reformed / Presbyterian",
+   "collapse_rule": "SINGLE",
+   "recovery_state": "SESSION 9 SOURCE ROW RECOVERED",
+   "disposition": "PUBLIC-CERTIFIED",
+   "institution": "Christian Reformed Church in North America",
+   "document": "Belgic Confession",
+   "locator": "Articles 1–2 and 8",
+   "authority_url": "https://www.crcna.org/welcome/beliefs/confessions/belgic-confession",
+   "text_url": "https://www.crcna.org/welcome/beliefs/confessions/belgic-confession",
+   "confidence": "HIGH",
+   "scope_control": "CRCNA only; branch label aggregates a wider family.",
+   "source_note": "",
+   "reviewer_status": "CERTIFIED",
+   "reviewer_notes": "",
+   "rendered_state": "A",
+   "metric_class": "A",
+   "retired": false,
+   "display_role": "CURRENT EVIDENCE / STATUS",
+   "case_study_targets": [
+    {
+     "document": "Belgic Confession",
+     "locator": "Article 10: The Deity of Christ",
+     "url": "https://www.crcna.org/welcome/beliefs/confessions/belgic-confession",
+     "phrase": "the only Son of God",
+     "status": "ASSERT"
+    }
+   ]
+  },
+  {
+   "queue_id": "Q-037",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "family_code": "A",
+   "branch": "Anglican",
+   "collapse_rule": "SINGLE",
+   "recovery_state": "SESSION 9 SOURCE ROW RECOVERED",
+   "disposition": "PUBLIC-CERTIFIED",
+   "institution": "Church of England",
+   "document": "Thirty-Nine Articles",
+   "locator": "Articles I–II",
+   "authority_url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/articles-religion",
+   "text_url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/articles-religion",
+   "confidence": "HIGH",
+   "scope_control": "Church of England only; not Anglican Communion-wide.",
+   "source_note": "Son.",
+   "reviewer_status": "CERTIFIED",
+   "reviewer_notes": "",
+   "rendered_state": "A",
+   "metric_class": "A",
+   "retired": false,
+   "display_role": "CURRENT EVIDENCE / STATUS",
+   "case_study_targets": [
+    {
+     "document": "Thirty-Nine Articles",
+     "locator": "Article II",
+     "url": "https://www.churchofengland.org/prayer-and-worship/worship-texts-and-resources/book-common-prayer/articles-religion",
+     "phrase": "The Son, which is the Word of the Father",
+     "status": "ASSERT"
+    }
+   ]
+  },
+  {
+   "queue_id": "Q-038",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "family_code": "A",
+   "branch": "Baptist",
+   "collapse_rule": "SINGLE",
+   "recovery_state": "CURRENT OFFICIAL SOURCE RECOVERED — WEB VERIFIED",
+   "disposition": "PUBLIC-CERTIFIED",
+   "institution": "Southern Baptist Convention",
+   "document": "Baptist Faith and Message 2000",
+   "locator": "II.B. God the Son",
+   "authority_url": "https://bfm.sbc.net/bfm2000/",
+   "text_url": "https://bfm.sbc.net/bfm2000/",
+   "confidence": "HIGH",
+   "scope_control": "Southern Baptist Convention cooperative identity under BF&M 2000; not all Baptist churches or Baptist traditions.",
+   "source_note": "Current SBC source explicitly identifies the eternal Son of God.",
+   "reviewer_status": "CERTIFIED",
+   "reviewer_notes": "",
+   "rendered_state": "A",
+   "metric_class": "A",
+   "retired": false,
+   "display_role": "CURRENT EVIDENCE / STATUS",
+   "case_study_targets": [
+    {
+     "document": "Baptist Faith and Message 2000",
+     "locator": "II.B. God the Son",
+     "url": "https://bfm.sbc.net/bfm2000/",
+     "phrase": "Christ is the eternal Son of God",
+     "status": "ASSERT"
+    }
+   ]
+  },
+  {
+   "queue_id": "Q-039",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "family_code": "A",
+   "branch": "Methodist / Wesleyan",
+   "collapse_rule": "SINGLE",
+   "recovery_state": "SESSION 9 SOURCE ROW RECOVERED",
+   "disposition": "PUBLIC-CERTIFIED",
+   "institution": "The United Methodist Church",
+   "document": "Articles of Religion of the Methodist Church",
+   "locator": "Article I",
+   "authority_url": "https://www.umc.org/en/content/articles-of-religion",
+   "text_url": "https://www.umc.org/en/content/articles-of-religion",
+   "confidence": "HIGH",
+   "scope_control": "UMC institutional scope.",
+   "source_note": "Son.",
+   "reviewer_status": "CERTIFIED",
+   "reviewer_notes": "",
+   "rendered_state": "A",
+   "metric_class": "A",
+   "retired": false,
+   "display_role": "CURRENT EVIDENCE / STATUS",
+   "case_study_targets": [
+    {
+     "document": "Articles of Religion",
+     "locator": "Article I",
+     "url": "https://www.umc.org/en/content/articles-of-religion",
+     "phrase": "the Father, the Son, and the Holy Ghost",
+     "status": "ASSERT"
+    }
+   ]
+  },
+  {
+   "queue_id": "Q-040",
+   "family_id": "RNR-H05",
+   "predicate": "Son",
+   "family_code": "A",
+   "branch": "Mennonite / Anabaptist",
+   "collapse_rule": "SINGLE",
+   "recovery_state": "CURRENT OFFICIAL SOURCE RECOVERED — WEB VERIFIED",
+   "disposition": "PUBLIC-CERTIFIED",
+   "institution": "Mennonite Church USA",
+   "document": "Confession of Faith in a Mennonite Perspective (1995), Article 1: God",
+   "locator": "Article 1 — Father, Son, and Holy Spirit; only Son / Word",
+   "authority_url": "https://www.mennoniteusa.org/who-are-mennonites/what-we-believe/confession-of-faith/god/",
+   "text_url": "https://www.mennoniteusa.org/who-are-mennonites/what-we-believe/confession-of-faith/god/",
+   "confidence": "HIGH",
+   "scope_control": "Mennonite Church USA / adopting-body scope for the 1995 Confession; not all Mennonite or Anabaptist bodies.",
+   "source_note": "Current Mennonite source explicitly names Son.",
+   "reviewer_status": "CERTIFIED",
+   "reviewer_notes": "",
+   "rendered_state": "A",
+   "metric_class": "A",
+   "retired": false,
+   "display_role": "CURRENT EVIDENCE / STATUS",
+   "case_study_targets": [
+    {
+     "document": "Confession of Faith in a Mennonite Perspective",
+     "locator": "Article 1: God",
+     "url": "https://www.mennoniteusa.org/who-are-mennonites/what-we-believe/confession-of-faith/god/",
+     "phrase": "the only Son, the Word who became flesh",
+     "status": "ASSERT"
+    }
+   ]
+  }
+ ],
+ "inherited_public_citation_h05": [
+  {
+   "Predicate ID": "RNR-H05",
+   "Predicate family": "Son",
+   "Current master code": "A",
+   "Accepted scope note": "Shared filial identity/relationship controls A; thick Nicene metaphysical entailments are not imported automatically.",
+   "Historical citation status": "QUEUE-DERIVED — BEST LOCATOR",
+   "Historical teaching branch": "Baptist",
+   "Historical institution / scope": "Southern Baptist Convention",
+   "Historical document": "Baptist Faith and Message 2000",
+   "Historical locator": "II.B. God the Son",
+   "Historical authority URL": "https://bfm.sbc.net/bfm2000/",
+   "Historical text URL": "https://bfm.sbc.net/bfm2000/",
+   "Restoration comparator label": "D&C 20:21; Articles of Faith 1:1",
+   "Restoration source": "Doctrine and Covenants; Articles of Faith",
+   "Restoration locator": "D&C 20:21; AoF 1:1",
+   "Restoration primary URL": "https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/20?lang=eng&id=p21#p21",
+   "Public citation readiness": "READY",
+   "Historical quoted phrase (≤15 words)": "Christ is the eternal Son of God",
+   "Citation selection basis": "Released English A cell; exact Son phrase.",
+   "Citation QA status": "PHRASE-READY",
+   "Historical witness retired?": "FALSE",
+   "Restoration quoted phrase (primary, ≤15 words)": "the Almighty God gave his Only Begotten Son",
+   "Restoration primary phrase word count": 8,
+   "Restoration fetch mode": "PLAYWRIGHT RENDERED OR CHURCH CONTENT API",
+   "Restoration locator-scope rule": "Extract cited verse/range or named document section before assertion; fail if scoped extraction is expected but unavailable.",
+   "Restoration phrase QA": "PRIMARY PHRASE TARGET READY",
+   "Restoration supplemental phrase QA": "NO SUPPLEMENTAL URL/TARGET",
+   "__row": 6
+  }
+ ],
+ "citation_phrase_targets_h05": [
+  {
+   "Predicate ID": "RNR-H05",
+   "Historical text URL": "https://bfm.sbc.net/bfm2000/",
+   "Quoted phrase": "Christ is the eternal Son of God",
+   "Phrase word count": "=IF(C6=\"\",0,LEN(TRIM(C6))-LEN(SUBSTITUTE(TRIM(C6),\" \",\"\"))+1)",
+   "Citation readiness": "READY",
+   "Normalization": "HTML→visible text; Unicode NFKC; casefold; normalize whitespace; normalize curly quotes/apostrophes/dashes.",
+   "Current review state": "SOURCE REVIEWED — PIPELINE RECHECK REQUIRED",
+   "Build assertion": "Normalized fetched text MUST contain normalized quoted phrase",
+   "Failure behavior": "FAIL BUILD",
+   "Notes": "Quoted phrase is a content assertion, not merely display copy.",
+   "Historical locator": "II.B. God the Son",
+   "Source extraction type": "HTML",
+   "Locator-scoped validation rule": "Locate the cited article/section/creed clause first; assert phrase inside that scoped block. If the source structure supports locator extraction and it fails, FAIL BUILD.",
+   "__row": 6
+  }
+ ],
+ "q1_mw01_h05_citations": [
+  {
+   "space": "S3 workbook (queue + Case Study Phrase Targets)",
+   "branch": "Methodist / Wesleyan",
+   "cell": "Q-039",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "locator": "Articles of Religion of the Methodist Church, Article I (target locator: Article I)",
+   "registry_row": "BSR-MW-01 (by URL)",
+   "verdict": "author-ratified target status ASSERT; reviewer status CERTIFIED",
+   "rendered_state": "A",
+   "on_a_card": "workbook cell card (case study), not a Gate 6 recovery packet card",
+   "public_certified": true,
+   "disposition": "PUBLIC-CERTIFIED",
+   "would_lose_last_citation": true,
+   "other_citations_on_cell": []
+  },
+  {
+   "space": "S4 src/_data/sjn/cells.json (v2.23 REGISTRY CORRECTIONS)",
+   "branch": "Methodist / Wesleyan",
+   "cell": "Q-039",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "locator": "Articles of Religion of the Methodist Church, Article I",
+   "verdict": "case_study_target status ASSERT; validation PASS; reviewer_status CERTIFIED",
+   "rendered_state": "A",
+   "public_certified": true,
+   "disposition": "PUBLIC-CERTIFIED",
+   "would_lose_last_citation": true
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "cal-1/cells/Q-039.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "Q-039-p1-1",
+   "model": "sonnet",
+   "locator": "Article II — Of the Word, or Son of God, Who Was Made Very Man",
+   "phrase": "The Son, who is the Word of the Father, the very and eternal God",
+   "verdict_read": "ACCEPT",
+   "floor": "FULL",
+   "prompt_version": null,
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "cal-1/cells/Q-039.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "Q-039-p1-1",
+   "model": "opus",
+   "locator": "Article II — Of the Word, or Son of God, Who Was Made Very Man",
+   "phrase": "The Son, who is the Word of the Father, the very and eternal God",
+   "verdict_read": "ACCEPT",
+   "floor": "FULL",
+   "prompt_version": null,
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "cal-3/cells/Q-039.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "Q-039-p1-BSR-MW-01-2",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "three persons, of one substance, power, and eternity—the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "FULL",
+   "prompt_version": null,
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "tp-1/tp-results.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT",
+   "floor": "FULL",
+   "prompt_version": "gate6-v1.2",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "tp-3/tp-results.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "FULL",
+   "prompt_version": "gate6-v1.3",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "tp-4-v1.5/tp-results.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.5",
+   "prompt_variant": "gate6-v1.5/base",
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "tp-4-v1.6/tp-results.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "prompt_version": "gate6-v1.6",
+   "prompt_variant": "gate6-v1.6/base",
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "tp-4/tp-results.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.3|1",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "prompt_version": "gate6-v1.3",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.3|2",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.3",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.3|3",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT",
+   "floor": "FULL",
+   "prompt_version": "gate6-v1.3",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|1",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|2",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|3",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session8/replicates.json#TP-049|gate6-v1.5|1",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.5",
+   "prompt_variant": "gate6-v1.5/base",
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session8/replicates.json#TP-049|gate6-v1.5|2",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.5",
+   "prompt_variant": "gate6-v1.5/base",
+   "on_a_card": false,
+   "public_certified": null
+  },
+  {
+   "space": "S5 measurement/calibration rubric",
+   "source": "session8/replicates.json#TP-049|gate6-v1.5|3",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "prompt_version": "gate6-v1.5",
+   "prompt_variant": "gate6-v1.5/base",
+   "on_a_card": false,
+   "public_certified": null
+  }
+ ],
+ "q2_h05_rubrics_flagged": [
+  {
+   "source": "cal-1/cells/Q-034.json",
+   "queue_id": "Q-034",
+   "branch": "Eastern Orthodox",
+   "candidate_id": "Q-034-p1-3",
+   "model": "opus",
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.129 (On the Second Article)",
+   "phrase": "the name of the second Person of the Holy Trinity in respect of his Godhead",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "floor_reason": "It asserts the filial name belongs to the second Person precisely as God (not as incarnate man), which is a narrower proposition wholly within the floor, though 'eternal' is not stated in these words.",
+   "reason": "Verbatim phrase, catechetical assertion in the standard's own voice, predicating the filial name of the second Person in respect of his Godhead; eternity is implied by the Godhead qualifier rather than expressly asserted, hence PARTIAL.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": false,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "partial",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-1/cells/Q-035.json",
+   "queue_id": "Q-035",
+   "branch": "Lutheran",
+   "candidate_id": "Q-035-p1-2",
+   "model": "sonnet",
+   "registry_id": "BSR-LU-01",
+   "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+   "phrase": "who also are coeternal, the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "floor_reason": "The passage asserts the Son's coeternality and distinct personhood within the Trinity, which entails the filial relation but frames it primarily through coequal/coeternal Trinitarian language rather than explicitly naming the filial relation of the Logos.",
+   "reason": "The Son is named as a coeternal divine Person alongside the Father, affirming his eternal identity as Son, though the passage's main thrust is Trinitarian unity/coequality rather than a focused statement on the filial relation itself.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": false,
+    "reason_patterns": [
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-1/cells/Q-038.json",
+   "queue_id": "Q-038",
+   "branch": "Baptist",
+   "candidate_id": "Q-038-p1-3",
+   "model": "sonnet",
+   "registry_id": "BSR-BA-01",
+   "locator": "II. God",
+   "phrase": "The eternal triune God reveals Himself to us as Father, Son, and Holy Spirit",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "The word 'Son' appears only as one label within a triadic naming formula ('as Father, Son, and Holy Spirit'); the passage does not assert the Son's eternal filial relation to the Father, only that God reveals himself under three names.",
+   "reason": "The grammatical subject of the sentence is 'the eternal triune God,' not the Son specifically; 'Son' occurs merely as one name in an enumerated formula rather than as an assertion about the Son's own filial identity, so the required subject (the Son) is not met.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-1/cells/Q-038.json",
+   "queue_id": "Q-038",
+   "branch": "Baptist",
+   "candidate_id": "Q-038-p1-3",
+   "model": "opus",
+   "registry_id": "BSR-BA-01",
+   "locator": "II. God",
+   "phrase": "The eternal triune God reveals Himself to us as Father, Son, and Holy Spirit",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "floor_reason": null,
+   "reason": null,
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": false,
+    "reason_patterns": [],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-1/cells/Q-040.json",
+   "queue_id": "Q-040",
+   "branch": "Mennonite / Anabaptist",
+   "candidate_id": "Q-040-p1-1",
+   "model": "sonnet",
+   "registry_id": "BSR-MA-01",
+   "locator": "Article 1. God",
+   "phrase": "God who is Father, Son, and Holy Spirit eternally",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "\"Son\" occurs only as one term in a triadic name applied to the single subject \"God\"; no clause takes the Son himself as grammatical subject, so the Son's eternal filial relation as such is not asserted here.",
+   "reason": "The predicate is scoped to require the Son as grammatical subject, but the sentence's subject is \"God\" (worshipped as Father, Son, and Holy Spirit); \"Son\" is merely one name in the list, not the subject of an assertion about the Son's own eternal generation.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "list",
+     "generation",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-2/cells/Q-037.json",
+   "queue_id": "Q-037",
+   "branch": "Anglican",
+   "candidate_id": "Q-037-p1-3",
+   "model": "sonnet",
+   "registry_id": "BSR-AN-01",
+   "locator": "Article I (1) — Of Faith In The Holy Trinity",
+   "phrase": "of one substance, power, and eternity; the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "PARTIAL",
+   "floor_reason": "The passage affirms the Son's shared substance/eternity as one of three Persons, which supports filial relation only indirectly via enumeration, not as a direct predication of the Son alone.",
+   "reason": "The phrase is verbatim and asserted in the Church's own voice, affirming the Son as one of the co-equal Persons, but the subject is the Trinity collectively rather than the Son specifically, so it partially but not fully meets the required subject condition.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "partial",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-2/cells/Q-040.json",
+   "queue_id": "Q-040",
+   "branch": "Mennonite / Anabaptist",
+   "candidate_id": "Q-040-p1-2",
+   "model": "sonnet",
+   "registry_id": "BSR-MA-02",
+   "locator": "Article I. Of God and the Creation of all Things",
+   "phrase": "in one eternal, almighty, and incomprehensible God, the Father, Son, and Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "The word 'Son' is present as part of a triadic naming formula, but no proposition about the Son's eternal filial relation to the Father is asserted—only that God is one and is named Father, Son, and Holy Ghost.",
+   "reason": "The passage names the Son within a confession of the unity and identity of God but does not assert or characterize the Son's eternal filial relation to the Father, so it falls below the required floor for this predicate.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-033.json",
+   "queue_id": "Q-033",
+   "branch": "Roman Catholic",
+   "candidate_id": "Q-033-p1-BSR-RC-07-1",
+   "model": "sonnet",
+   "registry_id": "BSR-RC-07",
+   "locator": "Compendium Q.46",
+   "phrase": "he eternally generated in his bosom the Son who is his Word",
+   "verdict_read": "REJECT",
+   "floor": "PARTIAL",
+   "floor_reason": "The clause asserts the Son's eternal generation and identity as the Word, which entails the filial relation, but the grammatical subject of the sentence is the Father, not the Son.",
+   "reason": "The predicate 'Son' is clearly attributed via the object 'the Son who is his Word', asserting the eternal filial relation, but strictly the required subject (the Son) is not the grammatical subject of the sentence, so this is a partial rather than full match to the rubric's subject test.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "partial",
+     "generation",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-033.json",
+   "queue_id": "Q-033",
+   "branch": "Roman Catholic",
+   "candidate_id": "Q-033-p1-BSR-RC-02-2",
+   "model": "sonnet",
+   "registry_id": "BSR-RC-02",
+   "locator": "Caput III — De Fide",
+   "phrase": "Deus per Filium suum unigenitum Ecclesiam instituit",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "The term 'Filium' appears only as an instrumental reference within a sentence whose subject and main assertion concern God's founding of the Church, not a predication about the Son's own eternal filial identity.",
+   "reason": "The grammatical subject of the sentence is God (Deus), who acts through the Son to institute the Church; the Son is not the subject of the assertion, so the required 'Son' predicate is not satisfied even though the phrase is verbatim.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-033.json",
+   "queue_id": "Q-033",
+   "branch": "Roman Catholic",
+   "candidate_id": "Q-033-p1-BSR-RC-04-2",
+   "model": "sonnet",
+   "registry_id": "BSR-RC-04",
+   "locator": "Constitution 1 (Confession of Faith — Firmiter credimus), paragraph 2",
+   "phrase": "the only-begotten Son of God, Jesus Christ",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "floor_reason": "The passage identifies Jesus Christ as the only-begotten Son of God, asserting filial identity, though the surrounding clauses focus on incarnation and economy rather than eternal generation per se.",
+   "reason": "The phrase verbatim names the Son as the required subject and asserts his filial identity, satisfying the shared filial-relationship floor even though the passage's main emphasis is on the incarnate economy.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": false,
+    "reason_patterns": [
+     "generation",
+     "filial",
+     "begotten"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-034.json",
+   "queue_id": "Q-034",
+   "branch": "Eastern Orthodox",
+   "candidate_id": "Q-034-p1-BSR-EO-08-1",
+   "model": "sonnet",
+   "registry_id": "BSR-EO-08",
+   "locator": "The Prayer of Praise and Thanksgiving [Anaphora], part 2",
+   "phrase": "You spoke to us through Your Son Himself, by Whom You also made the ages",
+   "verdict_read": "REJECT",
+   "floor": "PARTIAL",
+   "floor_reason": "The passage does affirm 'Your Son' as agent 'by Whom You also made the ages' and later attributes divine glory-images to Him, which supports the Son's eternal filial relation, but the immediate clause's subject is the Father speaking through the Son, not the Son as subject.",
+   "reason": "The phrase is verbatim and asserted by the Father in praise, affirming the Son's role in creation and identity as 'Your Son,' but strictly the grammatical subject is the Father, making the Son's filial identity implied rather than the direct subject of the clause.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-036.json",
+   "queue_id": "Q-036",
+   "branch": "Reformed / Presbyterian",
+   "candidate_id": "Q-036-p1-BSR-RP-02-1",
+   "model": "sonnet",
+   "registry_id": "BSR-RP-02",
+   "locator": "Shorter Catechism Q.6",
+   "phrase": "the Father, the Son, and the Holy Ghost; and these three are one God",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "floor_reason": "The passage asserts the Son's divine personhood within the Godhead but does not explicitly articulate the filial relation (eternal generation/sonship relative to the Father) beyond naming 'the Son'.",
+   "reason": "The phrase is verbatim, the Son is named as a divine person in the required subject role, and the assertion is affirmative doctrine, but the passage only implies the filial relation via the title 'Son' rather than explicating it, so it meets a narrower floor than full explicit assertion of eternal filiation.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": false,
+    "reason_patterns": [
+     "does not",
+     "generation",
+     "filial",
+     "sonship"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-037.json",
+   "queue_id": "Q-037",
+   "branch": "Anglican",
+   "candidate_id": "Q-037-p1-BSR-AN-01-2",
+   "model": "sonnet",
+   "registry_id": "BSR-AN-01",
+   "locator": "Article I (1) — Of Faith In The Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "The word 'Son' appears in a list of Trinitarian Persons without asserting the specific filial relation of the Logos to the Father.",
+   "reason": "The chunk names the Son only as part of a formulaic Trinitarian list; it does not assert the eternal filial relation as such, so the predicate is not established beyond mere mention.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "list",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-037.json",
+   "queue_id": "Q-037",
+   "branch": "Anglican",
+   "candidate_id": "Q-037-p1-BSR-AN-01-3",
+   "model": "sonnet",
+   "registry_id": "BSR-AN-01",
+   "locator": "Article V (5) — Of The Holy Ghost",
+   "phrase": "proceeding from the Father and the Son",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "The word 'Son' appears only as a term from which the Spirit proceeds, not as an assertion about the Son's own filial identity.",
+   "reason": "The passage's grammatical subject is the Holy Ghost, not the Son; 'Son' is mentioned only relationally, not asserted as the required subject's own predicate.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-038.json",
+   "queue_id": "Q-038",
+   "branch": "Baptist",
+   "candidate_id": "Q-038-p1-BSR-BA-01-2",
+   "model": "sonnet",
+   "registry_id": "BSR-BA-01",
+   "locator": "II. God",
+   "phrase": "reveals Himself to us as Father, Son, and Holy Spirit",
+   "verdict_read": "REJECT",
+   "floor": "PARTIAL",
+   "floor_reason": "The text names 'Son' as one of the three persons through whom God reveals Himself, implying the filial relation, but does not make the Son the subject of assertion nor elaborate the eternal filial relation itself.",
+   "reason": "The required subject is the Son himself, but the sentence's subject is 'the eternal triune God,' with 'Son' appearing only as one of three names in a triadic formula rather than as the grammatical subject bearing the predicate.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "does not",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-039.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "Q-039-p1-BSR-MW-02-2",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-02",
+   "locator": "Article I — God",
+   "phrase": "Father, Son and Holy Spirit, distinct but inseparable, eternally one in essence and power",
+   "verdict_read": "REJECT",
+   "floor": "PARTIAL",
+   "floor_reason": "The Son is named as a distinct person eternally one in essence with the Father, implying filial relation, but the sentence's assertion is about God's triune self-revelation rather than a direct predication of Sonship to the Logos as subject.",
+   "reason": "The phrase is verbatim and asserted in the confession's own voice, but the Son's filial identity is conveyed through membership in the Trinity formula rather than a direct subject-predicate assertion about the Son alone, warranting a caveat.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "filial",
+     "sonship"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-039.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "Q-039-p1-BSR-MW-04-2",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-04",
+   "locator": "Article 1. Faith in the Holy Trinity, ¶210",
+   "phrase": "three persons of one essential nature, power and eternity — the Father, the Son",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "floor_reason": "The passage asserts the Son as one of the three co-equal, co-eternal persons, which entails the eternal filial relation but frames it primarily through shared essence/nature language rather than explicitly naming the filial relation itself.",
+   "reason": "The Son is asserted as the required subject within a genuine Trinitarian confession, but the phrase emphasizes shared essence/eternity rather than explicitly the filial relation, so it is a narrower proposition wholly within the floor.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": false,
+    "reason_patterns": [
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "cal-3/cells/Q-040.json",
+   "queue_id": "Q-040",
+   "branch": "Mennonite / Anabaptist",
+   "candidate_id": "Q-040-p1-BSR-MA-01-1",
+   "model": "sonnet",
+   "registry_id": "BSR-MA-01",
+   "locator": "Article 1. God",
+   "phrase": "God who is Father, Son, and Holy Spirit eternally.",
+   "verdict_read": "REJECT",
+   "floor": "PARTIAL",
+   "floor_reason": "The text affirms the Son as one eternal identity within the Godhead but does not make the Son himself the grammatical subject of a filial-relation predicate; it asserts triune identity rather than the Son's eternal filial relation to the Father specifically.",
+   "reason": "The required subject is the Son/Logos itself, but the sentence's subject is 'God' (the one triune God), so the predicate 'Son' names an eternal distinction within God rather than asserting the Son's own filial relation as its grammatical subject.",
+   "partial_asserts_predicate": null,
+   "prompt_version": null,
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "does not",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "tp-4-v1.5/tp-results.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "The passage merely lists 'the Son' as one of three coequal persons of the Godhead without asserting anything about the Son's eternal filial relation as Logos; it is a name within a formulaic Trinitarian enumeration, not a predication about sonship.",
+   "reason": "The clause names the Son within a fixed Trinitarian formula listing the three persons but does not assert the eternal filial relation of the Logos; the grammatical subject is the Godhead/three persons, not the Son specifically, so the predicate is only word-present, not asserted.",
+   "partial_asserts_predicate": "NA",
+   "prompt_version": "gate6-v1.5",
+   "prompt_variant": "gate6-v1.5/base",
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "list",
+     "filial",
+     "sonship"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "tp-4-v1.6/tp-results.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "floor_reason": "The passage asserts the Son as a co-eternal, consubstantial person of the Godhead, which instantiates the eternal filial identity of the Logos, but does not explicitly state the relational/generative aspect (e.g., 'begotten of the Father'), so it is an incomplete statement of the same proposition.",
+   "reason": "The clause names the Son within a Trinitarian enumeration asserting co-eternity and consubstantiality, which partially but not fully instantiates the defined predicate of eternal filial relation.",
+   "partial_asserts_predicate": "Y",
+   "prompt_version": "gate6-v1.6",
+   "prompt_variant": "gate6-v1.6/base",
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": false,
+    "reason_patterns": [
+     "does not",
+     "partial",
+     "filial",
+     "begotten"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "tp-4/tp-results.json",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "The phrase merely lists 'the Son' as one of three co-equal, co-eternal, consubstantial persons of the Godhead; it does not articulate or assert the eternal filial (begotten) relation of the Logos to the Father, only uses the title as a name within an enumeration.",
+   "reason": "The quoted phrase is a bare enumeration of the three Trinitarian persons within a statement about divine unity and consubstantiality; it names 'the Son' but does not assert the specific predicate of the eternal filial relation of the Logos, so the floor is WORD_ONLY.",
+   "partial_asserts_predicate": "NA",
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "list",
+     "filial",
+     "begotten"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "tp-4/tp-results.json",
+   "queue_id": "Q-040",
+   "branch": "Mennonite / Anabaptist",
+   "candidate_id": "TP-050",
+   "model": "sonnet",
+   "registry_id": "BSR-MA-01",
+   "locator": "Article 1. God",
+   "phrase": "the only Son, the Word who became flesh",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": "The word 'Son' appears as an identifying appositive for the object of God's speaking, not as the subject of a clause predicating eternal filial relation on the Logos itself.",
+   "reason": "The phrase names the Son as the object of God's speaking rather than making the Son the grammatical subject of a predication of eternal Sonship, so the required-subject test fails and the citation cannot be accepted.",
+   "partial_asserts_predicate": "NA",
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "filial",
+     "sonship"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.3|1",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "ACCEPT_WITH_CAVEAT",
+   "floor": "PARTIAL",
+   "floor_reason": null,
+   "reason": "The naming of 'the Son' within the Trinity formula affirms shared divine identity but stops short of the full eternal filial relation entailed by the predicate, so it is PARTIAL rather than FULL.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.3",
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": false,
+    "reason_patterns": [
+     "partial",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.3|2",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": null,
+   "reason": "The phrase names the Son only as part of a triadic enumeration of divine persons; the sentence's grammatical subject and assertion concern the shared substance and eternity of all three persons, not the Son's distinct eternal filial relation to the Father, so the required subject and predicate are not properly asserted.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.3",
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|1",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": null,
+   "reason": "The phrase is a fixed Trinitarian naming formula that mentions 'the Son' without asserting the specific predicate of eternal filial relation; the surrounding text asserts consubstantiality and unity of Godhead, not sonship as such.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "filial",
+     "sonship"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|2",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": null,
+   "reason": "The phrase names the Son as a person of the Trinity but does not assert the specific predicate of the eternal filial relation of the Logos; it is a bare enumeration, not an assertion of sonship as such.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "filial",
+     "sonship"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|3",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": null,
+   "reason": "The phrase names the Son within a fixed Trinitarian enumeration of persons but does not assert the eternal filial relation itself, so the citation falls below the required floor.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session7/replicate-tp049-tp050.json#TP-050|gate6-v1.4|1",
+   "queue_id": "Q-040",
+   "branch": "Mennonite / Anabaptist",
+   "candidate_id": "TP-050",
+   "model": "sonnet",
+   "registry_id": "BSR-MA-01",
+   "locator": "Article 1. God",
+   "phrase": "the only Son, the Word who became flesh",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": null,
+   "reason": "The grammatical subject of the clause is God ('God has spoken...in the only Son'), not the Son himself; the title 'Son' is used as an object of the sentence rather than as the subject of an assertion about the eternal filial relation, so the required subject condition fails.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.4",
+   "prompt_variant": null,
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session8/replicates.json#TP-049|gate6-v1.5|1",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": null,
+   "reason": "The grammatical subject is the plural 'three persons,' not 'the Son' specifically, and the triadic naming formula does not itself assert the Son's filial relation—only mentions the title within a standard Trinitarian formula.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.5",
+   "prompt_variant": "gate6-v1.5/base",
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "only (?:names|lists|mentions)",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session8/replicates.json#TP-049|gate6-v1.5|2",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": null,
+   "reason": "The phrase merely enumerates 'the Son' as a Trinitarian person alongside the Father and Holy Ghost; it does not assert the eternal filial relation of the Logos as required by the predicate.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.5",
+   "prompt_variant": "gate6-v1.5/base",
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "does not",
+     "filial"
+    ],
+    "flag": true
+   }
+  },
+  {
+   "source": "session8/replicates.json#TP-049|gate6-v1.5|3",
+   "queue_id": "Q-039",
+   "branch": "Methodist / Wesleyan",
+   "candidate_id": "TP-049",
+   "model": "sonnet",
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "verdict_read": "REJECT",
+   "floor": "WORD_ONLY",
+   "floor_reason": null,
+   "reason": "The word 'Son' occurs as part of a Trinitarian formula naming the three persons, but the predicate—the eternal filial relation of the Logos—is not asserted or explained here; this is mere mention within a doctrinal list.",
+   "partial_asserts_predicate": null,
+   "prompt_version": "gate6-v1.5",
+   "prompt_variant": "gate6-v1.5/base",
+   "why_flagged": {
+    "non_full_floor": true,
+    "rejected": true,
+    "reason_patterns": [
+     "not (?:itself )?(?:assert|state|address|name|establish|predicate)",
+     "list",
+     "filial"
+    ],
+    "flag": true
+   }
+  }
+ ],
+ "q2_by_citation": [
+  {
+   "registry_id": "BSR-MA-01",
+   "locator": "Article 1. God",
+   "phrase": "the only Son, the Word who became flesh",
+   "rubrics": 11,
+   "accepts": 9,
+   "non_full_or_reject": 2,
+   "sources": [
+    "tp-1/tp-results.json:TP-050:sonnet:ACCEPT/FULL",
+    "tp-3/tp-results.json:TP-050:sonnet:ACCEPT/FULL",
+    "tp-4-v1.5/tp-results.json:TP-050:sonnet:ACCEPT/FULL",
+    "tp-4-v1.6/tp-results.json:TP-050:sonnet:ACCEPT/FULL",
+    "tp-4/tp-results.json:TP-050:sonnet:REJECT/WORD_ONLY",
+    "session7/replicate-tp049-tp050.json#TP-050|gate6-v1.3|1:TP-050:sonnet:ACCEPT/FULL",
+    "session7/replicate-tp049-tp050.json#TP-050|gate6-v1.3|2:TP-050:sonnet:ACCEPT/FULL",
+    "session7/replicate-tp049-tp050.json#TP-050|gate6-v1.3|3:TP-050:sonnet:ACCEPT/FULL",
+    "session7/replicate-tp049-tp050.json#TP-050|gate6-v1.4|2:TP-050:sonnet:ACCEPT/FULL",
+    "session7/replicate-tp049-tp050.json#TP-050|gate6-v1.4|3:TP-050:sonnet:ACCEPT/FULL",
+    "session7/replicate-tp049-tp050.json#TP-050|gate6-v1.4|1:TP-050:sonnet:REJECT/WORD_ONLY"
+   ],
+   "public_cell": "Q-040"
+  },
+  {
+   "registry_id": "BSR-MW-01",
+   "locator": "Article I — Of Faith in the Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "rubrics": 14,
+   "accepts": 5,
+   "non_full_or_reject": 11,
+   "sources": [
+    "tp-1/tp-results.json:TP-049:sonnet:ACCEPT/FULL",
+    "tp-3/tp-results.json:TP-049:sonnet:ACCEPT_WITH_CAVEAT/FULL",
+    "tp-4-v1.5/tp-results.json:TP-049:sonnet:REJECT/WORD_ONLY",
+    "tp-4-v1.6/tp-results.json:TP-049:sonnet:ACCEPT_WITH_CAVEAT/PARTIAL",
+    "tp-4/tp-results.json:TP-049:sonnet:REJECT/WORD_ONLY",
+    "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.3|1:TP-049:sonnet:ACCEPT_WITH_CAVEAT/PARTIAL",
+    "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.3|2:TP-049:sonnet:REJECT/WORD_ONLY",
+    "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.3|3:TP-049:sonnet:ACCEPT/FULL",
+    "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|1:TP-049:sonnet:REJECT/WORD_ONLY",
+    "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|2:TP-049:sonnet:REJECT/WORD_ONLY",
+    "session7/replicate-tp049-tp050.json#TP-049|gate6-v1.4|3:TP-049:sonnet:REJECT/WORD_ONLY",
+    "session8/replicates.json#TP-049|gate6-v1.5|1:TP-049:sonnet:REJECT/WORD_ONLY",
+    "session8/replicates.json#TP-049|gate6-v1.5|2:TP-049:sonnet:REJECT/WORD_ONLY",
+    "session8/replicates.json#TP-049|gate6-v1.5|3:TP-049:sonnet:REJECT/WORD_ONLY"
+   ],
+   "public_cell": "Q-039"
+  },
+  {
+   "registry_id": "BSR-AN-01",
+   "locator": "Article I (1) — Of Faith In The Holy Trinity",
+   "phrase": "of one substance, power, and eternity; the Father, the Son, and the Holy Ghost",
+   "rubrics": 2,
+   "accepts": 1,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-2/cells/Q-037.json:Q-037-p1-3:sonnet:REJECT/PARTIAL",
+    "cal-2/cells/Q-037.json:Q-037-p1-3:opus:ACCEPT_WITH_CAVEAT/FULL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-AN-01",
+   "locator": "Article I (1) — Of Faith In The Holy Trinity",
+   "phrase": "the Father, the Son, and the Holy Ghost",
+   "rubrics": 1,
+   "accepts": 0,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-037.json:Q-037-p1-BSR-AN-01-2:sonnet:REJECT/WORD_ONLY"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-AN-01",
+   "locator": "Article V (5) — Of The Holy Ghost",
+   "phrase": "proceeding from the Father and the Son",
+   "rubrics": 1,
+   "accepts": 0,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-037.json:Q-037-p1-BSR-AN-01-3:sonnet:REJECT/WORD_ONLY"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-BA-01",
+   "locator": "II. God",
+   "phrase": "The eternal triune God reveals Himself to us as Father, Son, and Holy Spirit",
+   "rubrics": 2,
+   "accepts": 1,
+   "non_full_or_reject": 2,
+   "sources": [
+    "cal-1/cells/Q-038.json:Q-038-p1-3:sonnet:REJECT/WORD_ONLY",
+    "cal-1/cells/Q-038.json:Q-038-p1-3:opus:ACCEPT_WITH_CAVEAT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-BA-01",
+   "locator": "II. God",
+   "phrase": "reveals Himself to us as Father, Son, and Holy Spirit",
+   "rubrics": 1,
+   "accepts": 0,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-038.json:Q-038-p1-BSR-BA-01-2:sonnet:REJECT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-EO-04",
+   "locator": "Q.129 (On the Second Article)",
+   "phrase": "the name of the second Person of the Holy Trinity in respect of his Godhead",
+   "rubrics": 2,
+   "accepts": 2,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-1/cells/Q-034.json:Q-034-p1-3:sonnet:ACCEPT_WITH_CAVEAT/FULL",
+    "cal-1/cells/Q-034.json:Q-034-p1-3:opus:ACCEPT_WITH_CAVEAT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-EO-08",
+   "locator": "The Prayer of Praise and Thanksgiving [Anaphora], part 2",
+   "phrase": "You spoke to us through Your Son Himself, by Whom You also made the ages",
+   "rubrics": 1,
+   "accepts": 0,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-034.json:Q-034-p1-BSR-EO-08-1:sonnet:REJECT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-LU-01",
+   "locator": "Augsburg Confession: Article I. Of God, ¶1–6",
+   "phrase": "who also are coeternal, the Father, the Son, and the Holy Ghost",
+   "rubrics": 2,
+   "accepts": 2,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-1/cells/Q-035.json:Q-035-p1-2:sonnet:ACCEPT_WITH_CAVEAT/PARTIAL",
+    "cal-1/cells/Q-035.json:Q-035-p1-2:opus:ACCEPT/FULL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-MA-01",
+   "locator": "Article 1. God",
+   "phrase": "God who is Father, Son, and Holy Spirit eternally",
+   "rubrics": 2,
+   "accepts": 1,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-1/cells/Q-040.json:Q-040-p1-1:sonnet:REJECT/WORD_ONLY",
+    "cal-1/cells/Q-040.json:Q-040-p1-1:opus:ACCEPT/FULL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-MA-01",
+   "locator": "Article 1. God",
+   "phrase": "God who is Father, Son, and Holy Spirit eternally.",
+   "rubrics": 1,
+   "accepts": 0,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-040.json:Q-040-p1-BSR-MA-01-1:sonnet:REJECT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-MA-02",
+   "locator": "Article I. Of God and the Creation of all Things",
+   "phrase": "in one eternal, almighty, and incomprehensible God, the Father, Son, and Holy Ghost",
+   "rubrics": 2,
+   "accepts": 1,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-2/cells/Q-040.json:Q-040-p1-2:sonnet:REJECT/WORD_ONLY",
+    "cal-2/cells/Q-040.json:Q-040-p1-2:opus:ACCEPT_WITH_CAVEAT/FULL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-MW-02",
+   "locator": "Article I — God",
+   "phrase": "Father, Son and Holy Spirit, distinct but inseparable, eternally one in essence and power",
+   "rubrics": 1,
+   "accepts": 0,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-039.json:Q-039-p1-BSR-MW-02-2:sonnet:REJECT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-MW-04",
+   "locator": "Article 1. Faith in the Holy Trinity, ¶210",
+   "phrase": "three persons of one essential nature, power and eternity — the Father, the Son",
+   "rubrics": 1,
+   "accepts": 1,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-039.json:Q-039-p1-BSR-MW-04-2:sonnet:ACCEPT_WITH_CAVEAT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-RC-02",
+   "locator": "Caput III — De Fide",
+   "phrase": "Deus per Filium suum unigenitum Ecclesiam instituit",
+   "rubrics": 1,
+   "accepts": 0,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-033.json:Q-033-p1-BSR-RC-02-2:sonnet:REJECT/WORD_ONLY"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-RC-04",
+   "locator": "Constitution 1 (Confession of Faith — Firmiter credimus), paragraph 2",
+   "phrase": "the only-begotten Son of God, Jesus Christ",
+   "rubrics": 1,
+   "accepts": 1,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-033.json:Q-033-p1-BSR-RC-04-2:sonnet:ACCEPT_WITH_CAVEAT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-RC-07",
+   "locator": "Compendium Q.46",
+   "phrase": "he eternally generated in his bosom the Son who is his Word",
+   "rubrics": 1,
+   "accepts": 0,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-033.json:Q-033-p1-BSR-RC-07-1:sonnet:REJECT/PARTIAL"
+   ],
+   "public_cell": null
+  },
+  {
+   "registry_id": "BSR-RP-02",
+   "locator": "Shorter Catechism Q.6",
+   "phrase": "the Father, the Son, and the Holy Ghost; and these three are one God",
+   "rubrics": 1,
+   "accepts": 1,
+   "non_full_or_reject": 1,
+   "sources": [
+    "cal-3/cells/Q-036.json:Q-036-p1-BSR-RP-02-1:sonnet:ACCEPT_WITH_CAVEAT/PARTIAL"
+   ],
+   "public_cell": null
+  }
+ ],
+ "q2_public_cells_with_no_stored_rubric_on_their_phrase": [
+  "Q-033",
+  "Q-036"
+ ],
+ "counts": {
+  "S1_packet_cards_h05": 0,
+  "S1_packet_mw01_h05_citations": 0,
+  "S2_live1_h05_cells": 0,
+  "S3_workbook_mw01_h05_cells_public_certified": 1,
+  "S5_mw01_h05_rubrics": 17,
+  "S5_mw01_h05_rubric_accepts": 8,
+  "q2_rubrics_flagged": 31,
+  "q2_citations_flagged": 19,
+  "q2_public_citations_flagged": 2
+ },
+ "stop_letter": {
+  "any_mw01_h05_accept_on_a_finished_branch_recovery_packet_card": false
+ },
+ "stop_purpose": {
+  "a_finished_methodist_cell_certifies_mw01_article_I_or_II_for_h05": true,
+  "cells": [
+   "Q-039"
+  ]
+ }
+}
