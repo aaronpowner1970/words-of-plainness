@@ -69,6 +69,8 @@ _DEFINITION_EXCLUDE = re.compile(r"\b(canon|anathema|anathematism|damnamus)\b", 
 # The floor for a phrase-level creed or definition match. "begotten, not made" (3 words, 17 characters) and
 # "light of light" (3 words, 14) are the shortest clauses the author's own examples turn on, so the floor sits
 # directly below them. Anything shorter is not a creed CLAUSE but a word or two that the Creed happens to contain.
+# RATIFIED R6-21 (2026-09-16): this floor, exactly as implemented here and in resolve_registered_phrase's comparison,
+# applies to all creed and definition phrase matching. It does not decide the Q-290 fallback (EO packet review).
 CREED_PHRASE_MIN_WORDS = 3
 CREED_PHRASE_MIN_CHARS = 12
 
@@ -292,7 +294,8 @@ class Registry:
         chunk_level_creed_resolution_allowed_rows (BSR-EO-07, BSR-EO-14, BSR-RC-06, BSR-RC-08), or a row whose bare tier
         is CONCILIAR or CONFESSIONAL, which is the creed printed as a text inside a conciliar or confessional standard
         (BSR-EO-12, BSR-EO-09 §2, BSR-AN-03, BSR-LU-01's Ecumenical Creeds, BSR-RP-04's Book of Confessions creeds).
-        A CATECHETICAL row is never a registered creed text: that is exactly what clause 3 forbids."""
+        A CATECHETICAL row is never a registered creed text: that is exactly what clause 3 forbids. RATIFIED R6-22
+        (2026-09-16): catechetical works are exposition, not confession."""
         if branch in self._creed_index:
             return self._creed_index[branch]
         from . import store

@@ -1,0 +1,1082 @@
+{
+ "rule": "standing replicate rule as amended by R6-20 (docs/gate6/WoP_SJN_Gate6_MeasurementRule.md)",
+ "baseline": {
+  "version": "gate6-v1.3",
+  "tp": "tp-3",
+  "candidates": "s7-v13-control",
+  "replicates_reused": "session7 (TP-049, TP-050) and session8 (Q-160, Q-161, Q-213) v1.3 replicates"
+ },
+ "candidate": {
+  "version": "gate6-v1.6",
+  "tp": "tp-4-v1.6",
+  "candidates": "s9-v16"
+ },
+ "differs_means": "accept (ACCEPT or ACCEPT_WITH_CAVEAT) versus REJECT",
+ "replicated_items": {
+  "Q-160-p1-BSR-MA-01-1": 5,
+  "Q-161-p1-BSR-RC-01-3": 3,
+  "Q-213-p1-BSR-AN-01-1": 3,
+  "TP-045": 3
+ },
+ "replicate_table": {
+  "TP-045": {
+   "v1.3": {
+    "accepts": 3,
+    "of": 3,
+    "accept_majority": true,
+    "verdicts": [
+     "ACCEPT",
+     "ACCEPT",
+     "ACCEPT"
+    ],
+    "complete": true
+   },
+   "v1.6": {
+    "accepts": 3,
+    "of": 3,
+    "accept_majority": true,
+    "verdicts": [
+     "ACCEPT",
+     "ACCEPT",
+     "ACCEPT"
+    ],
+    "complete": true
+   }
+  },
+  "Q-161-p1-BSR-RC-01-3": {
+   "v1.3": {
+    "accepts": 0,
+    "of": 3,
+    "accept_majority": false,
+    "verdicts": [
+     "REJECT",
+     "REJECT",
+     "REJECT"
+    ],
+    "complete": true
+   },
+   "v1.6": {
+    "accepts": 2,
+    "of": 3,
+    "accept_majority": true,
+    "verdicts": [
+     "ACCEPT",
+     "ACCEPT",
+     "REJECT"
+    ],
+    "complete": true
+   }
+  },
+  "Q-213-p1-BSR-AN-01-1": {
+   "v1.3": {
+    "accepts": 0,
+    "of": 3,
+    "accept_majority": false,
+    "verdicts": [
+     "REJECT",
+     "REJECT",
+     "REJECT"
+    ],
+    "complete": true
+   },
+   "v1.6": {
+    "accepts": 0,
+    "of": 3,
+    "accept_majority": false,
+    "verdicts": [
+     "REJECT",
+     "REJECT",
+     "REJECT"
+    ],
+    "complete": true
+   }
+  },
+  "Q-160-p1-BSR-MA-01-1": {
+   "v1.3": {
+    "accepts": 1,
+    "of": 3,
+    "accept_majority": false,
+    "verdicts": [
+     "REJECT",
+     "REJECT",
+     "ACCEPT_WITH_CAVEAT"
+    ],
+    "complete": true
+   },
+   "v1.6": {
+    "accepts": 0,
+    "of": 5,
+    "accept_majority": false,
+    "verdicts": [
+     "REJECT",
+     "REJECT",
+     "REJECT",
+     "REJECT",
+     "REJECT"
+    ],
+    "complete": true
+   }
+  }
+ },
+ "checks": {
+  "1_recall": {
+   "fixture_ruled": "tp-5",
+   "fixture_measured": "tp-4 (tp-5 not built: R6-17's condition did not hold)",
+   "single_run_accepted": 57,
+   "items": 60,
+   "baseline_tp3_accepted": 58,
+   "differing_items": [
+    "TP-045"
+   ],
+   "majority_read_accepted": 58,
+   "majority_read_recall": 0.967,
+   "refused_majority_read": [
+    "TP-059",
+    "TP-060"
+   ],
+   "without_TP049": {
+    "accepted": 57,
+    "items": 59
+   },
+   "meets_58_of_60_on_tp4": true,
+   "ok": null,
+   "evaluable": false,
+   "why_not_evaluable": "check (1) is ruled on tp-5, which R6-17 builds only from a verbatim asserting phrase in TP-049's chunk; none exists"
+  },
+  "2_Q161": {
+   "single_v16": "ACCEPT",
+   "single_v13_control": "REJECT",
+   "replicated": true,
+   "accept_majority_v16": true,
+   "ok": true
+  },
+  "3_non_creedal_idiom": {
+   "n": 12,
+   "accept_under_v16_read": [],
+   "accept_under_v13_read": [],
+   "ok": true
+  },
+  "4_Q277": {
+   "accept_read_v16": {
+    "Q-277-p1-BSR-AN-03-1": true,
+    "Q-277-p1-BSR-AN-04-1": true
+   },
+   "verdicts_single_v16": {
+    "Q-277-p1-BSR-AN-03-1": "ACCEPT",
+    "Q-277-p1-BSR-AN-04-1": "ACCEPT_WITH_CAVEAT"
+   },
+   "ok": true
+  },
+  "5_Q160": {
+   "v16_5_replicates": {
+    "accepts": 0,
+    "of": 5,
+    "accept_majority": false,
+    "verdicts": [
+     "REJECT",
+     "REJECT",
+     "REJECT",
+     "REJECT",
+     "REJECT"
+    ],
+    "complete": true
+   },
+   "v13": {
+    "accepts": 1,
+    "of": 3,
+    "accept_majority": false,
+    "verdicts": [
+     "REJECT",
+     "REJECT",
+     "ACCEPT_WITH_CAVEAT"
+    ],
+    "complete": true
+   },
+   "v13_topped_up_to_5": false,
+   "stop": false,
+   "ok": true
+  },
+  "6_N-TP-049": {
+   "single_v16": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "refused_by": null,
+    "variant": "gate6-v1.6/base",
+    "floor": "PARTIAL",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "asserted_outside_formula": "NA",
+    "reason": "The clause names the Son within a Trinitarian enumeration asserting co-eternity and consubstantiality, which partially but not fully instantiates the defined predicate of eternal filial relation."
+   },
+   "expected": "REJECT",
+   "as_expected": false,
+   "replicates_v16_if_differing": null
+  },
+  "7_task2_card_rescues": {
+   "Q-297-p1-BSR-RC-01-1": {
+    "before": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "adjudicated_by": "sonnet",
+     "asserted_outside_formula": "Y",
+     "prompt_version": "gate6-v1.2"
+    },
+    "after_v16": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "the only-begotten Son of God",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_model": null,
+     "floor_capped_by": null,
+     "floor_reason": "The clause directly denies creaturehood of the Son ('begotten not made') while asserting his consubstantiality with the Father, fully within the predicate's sense.",
+     "hazard_flags": [],
+     "asserted_outside_formula": "NA",
+     "partial_asserts_predicate": "NA",
+     "spirit_name_in_phrase": null,
+     "refused_by": null,
+     "verdict_before_outside_formula_guard": null,
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "reason": "The CCC expounds this Nicene-Constantinopolitan creedal clause as its own confession, and the phrase verbatim asserts 'not made' of the Son, the required divine subject.",
+     "prompt_version": "gate6-v1.6",
+     "prompt_variant": "gate6-v1.6/spirit"
+    },
+    "now_refused": false
+   }
+  }
+ },
+ "decision": "CHECKS (2)-(5) PASS; CHECK (1) NOT EVALUABLE (no tp-5) — v1.6 is NOT put in force; v1.3 stays in force pending the author's ruling on TP-049",
+ "tp_variants_sent": {
+  "gate6-v1.6/base": 53,
+  "gate6-v1.6/spirit": 7
+ },
+ "tp_refused_by_R6_18": [
+  "TP-045"
+ ],
+ "q290_v16": {
+  "TP-059": {
+   "verdict": "REJECT",
+   "reason_code": "BELOW_FLOOR",
+   "refused_by": null,
+   "variant": "gate6-v1.6/base",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "RELATIONAL_VS_METAPHYSICAL",
+    "SEMANTIC_FLOOR"
+   ],
+   "asserted_outside_formula": "NA",
+   "reason": "The quoted phrase asserts monotheistic unity grounded in the Father's singularity, a neighbouring claim about divine unity/monarchy, not the predicate that the Father is unbegotten or unoriginate from another; the negation of generation is never stated."
+  },
+  "TP-060": {
+   "verdict": "REJECT",
+   "reason_code": "BELOW_FLOOR",
+   "refused_by": null,
+   "variant": "gate6-v1.6/base",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "RELATIONAL_VS_METAPHYSICAL"
+   ],
+   "asserted_outside_formula": "NA",
+   "reason": "The quoted phrase concerns God's eternal fatherhood and generation of the Son, not the denial of the Father's own generation from another; the predicate 'Unbegotten' is not asserted by this text."
+  }
+ },
+ "tp049_in_chunk_candidates_info": {
+  "TP-049-C1": {
+   "phrase": "three persons, of one substance, power, and eternity—the Father, the Son, and the Holy Ghost",
+   "v13": {
+    "subject_is_required": "N",
+    "grammatical_subject": "there [three persons] — i.e., the Godhead's persons collectively, not the Son specifically",
+    "speech_act_is_assertion": "Y",
+    "floor": "PARTIAL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The passage asserts the Son as one of the divine persons sharing one substance/eternity with the Father, which entails but does not directly state the Son's eternal filial relation as Logos; it is a narrower/adjacent statement (Trinitarian consubstantiality) rather than a direct assertion of filial relation.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "Y",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict_before_outside_formula_guard": null,
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "reason": "The Son is named as a co-equal, co-eternal person within the Trinity, which implies but does not explicitly assert the eternal filial relation of the Logos; this is a partial, metaphysically-framed assertion rather than a full statement of the relational predicate.",
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3"
+   },
+   "v16": {
+    "subject_is_required": "N",
+    "grammatical_subject": "there are three persons (of the Godhead)",
+    "speech_act_is_assertion": "Y",
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The passage asserts unity of substance among three persons and names the Son as one of them, but it does not assert anything about the Son's eternal filial relation as such — the word 'Son' is present only as a list-item label, not as the bearer of a predication about sonship/filiation.",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict_before_outside_formula_guard": null,
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "reason": "The clause names the Son within a Trinitarian enumeration but does not itself assert the Son's eternal filial relation/identity as Logos; the predicate's specific content (filiation) is not stated here, only the bare name, so the citation falls below the floor.",
+    "prompt_version": "gate6-v1.6",
+    "prompt_variant": "gate6-v1.6/base"
+   }
+  },
+  "TP-049-C2": {
+   "phrase": "of one substance, power, and eternity—the Father, the Son",
+   "v13": {
+    "subject_is_required": "Y",
+    "grammatical_subject": "the Father, the Son, and the Holy Ghost (three persons of one substance, power, and eternity)",
+    "speech_act_is_assertion": "Y",
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The passage names 'the Son' as one of the three coequal, coeternal divine persons sharing one substance with the Father, which directly asserts the eternal filial identity/relation required by the predicate.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict_before_outside_formula_guard": null,
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "reason": "The Son is explicitly named as a coequal, coeternal divine person alongside the Father in the confession's own assertive voice, satisfying the predicate at the FULL floor.",
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3"
+   },
+   "v16": {
+    "subject_is_required": "Y",
+    "grammatical_subject": "three persons (the Father, the Son, and the Holy Ghost)",
+    "speech_act_is_assertion": "Y",
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The clause explicitly names 'the Son' as one of the three divine persons who are of one substance, power, and eternity, directly asserting the eternal, fully divine identity of the Son within the Godhead.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict_before_outside_formula_guard": null,
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "reason": "The phrase verbatim occurs in a confessional assertion naming the Son as co-eternal and consubstantial with the Father, satisfying the predicate's floor of naming the eternal Son.",
+    "prompt_version": "gate6-v1.6",
+    "prompt_variant": "gate6-v1.6/base"
+   }
+  },
+  "TP-049-C3": {
+   "phrase": "And in unity of this Godhead there are three persons",
+   "v13": {
+    "subject_is_required": "N",
+    "grammatical_subject": "three persons (existential 'there are')",
+    "speech_act_is_assertion": "Y",
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The quoted phrase asserts that the Godhead subsists in three persons; it does not itself name or assert anything about the Son's eternal filial relation as Logos—the word 'Son' appears only later in an appositional list outside the quoted phrase.",
+    "hazard_flags": [
+     "SLOGAN_COMPRESSION"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict_before_outside_formula_guard": null,
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "reason": "The cited phrase's grammatical subject is 'three persons' in general, not the Son as such, so it does not assert the required predicate of the required subject; the Son's name occurs elsewhere in the sentence, not within the quoted phrase.",
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3"
+   },
+   "v16": {
+    "subject_is_required": "N",
+    "grammatical_subject": "there are three persons (of the Godhead)",
+    "speech_act_is_assertion": "Y",
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The quoted phrase asserts the Trinity's tripersonal unity of substance, not the Son's eternal filial relation; 'Son' appears only in the following clause outside the quoted phrase.",
+    "hazard_flags": [
+     "SLOGAN_COMPRESSION"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict_before_outside_formula_guard": null,
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "reason": "The quoted phrase's grammatical subject is 'three persons' in general, not the Son; it asserts Trinitarian unity/plurality, a neighbouring proposition, not the Son's eternal filial identity.",
+    "prompt_version": "gate6-v1.6",
+    "prompt_variant": "gate6-v1.6/base"
+   }
+  }
+ },
+ "tp_single_diff_detail": {
+  "TP-045": {
+   "tp3": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "refused_by": null,
+    "variant": null,
+    "floor": "FULL",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "reason": "Verbatim phrase, correct subject (Christ's two natures), asserted in the Church's own confessional voice as doctrine, fully matching the predicate."
+   },
+   "v16": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "refused_by": "R6-18",
+    "variant": "gate6-v1.6/base",
+    "floor": "FULL",
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA"
+    ],
+    "asserted_outside_formula": "Y",
+    "reason": "The Chalcedonian formula is quoted and confessed by CCC as authoritative Church teaching, and the quoted phrase itself carries the full assertion of the predicate regarding Christ's two natures."
+   }
+  }
+ },
+ "candidate_single_diff_detail": {
+  "Q-161-p1-BSR-RC-01-3": {
+   "v13": {
+    "subject_is_required": "N",
+    "grammatical_subject": "believing (gerund phrase, object: the Holy Spirit as \"Lord and giver of life\")",
+    "speech_act_is_assertion": "N",
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The phrase names the predicate only within a fixed creedal title used to argue for divine unity, not to assert the Spirit's life-giving action in its own voice.",
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA"
+    ],
+    "asserted_outside_formula": "N",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "reason": "The quoted phrase is a creedal title cited to defend the unity of the Trinity, not an independent assertion that God (the Spirit) gives life; the predicate is presupposed by the formula, not asserted outside it.",
+    "prompt_version": "gate6-v1.3"
+   },
+   "v16": {
+    "subject_is_required": "Y",
+    "grammatical_subject": "the Holy Spirit (as characterized by the creedal title \"Lord and giver of life\")",
+    "speech_act_is_assertion": "Y",
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The quoted phrase itself predicates life-giving directly of the Holy Spirit ('giver of life'), which is the full sense of the predicate, not a narrower or partial version of it.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict_before_outside_formula_guard": null,
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "reason": "The phrase is verbatim, the Holy Spirit is the required subject, the Catechism asserts (rather than merely reports) this creedal title as true, and the phrase fully predicates life-giving of the Holy Spirit as divine, satisfying the ACTION agency class.",
+    "prompt_version": "gate6-v1.6",
+    "prompt_variant": "gate6-v1.6/spirit"
+   }
+  },
+  "Q-213-p1-BSR-AN-01-1": {
+   "v13": {
+    "subject_is_required": "Y",
+    "grammatical_subject": "our Lord and Saviour Jesus Christ (Christ, the Son)",
+    "speech_act_is_assertion": "Y",
+    "floor": "FULL",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The clause ties the title 'Saviour' directly to Christ's redemptive merit as the ground of justification, asserting his saving action of the required subject.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "reason": "The phrase is verbatim, the subject is Christ as divine Son, and the passage asserts his redemptive action ('merit') as Savior in its own doctrinal voice, satisfying the full predicate.",
+    "prompt_version": "gate6-v1.3"
+   },
+   "v16": {
+    "subject_is_required": "Y",
+    "grammatical_subject": "our Lord and Saviour Jesus Christ",
+    "speech_act_is_assertion": "Y",
+    "floor": "WORD_ONLY",
+    "floor_model": null,
+    "floor_capped_by": null,
+    "floor_reason": "The quoted phrase is a title/epithet ('our Lord and Saviour Jesus Christ') naming Christ, not itself an assertion of redemptive action; the redemptive claim is carried by the surrounding clause about 'the merit of' Christ, not by the quoted words.",
+    "hazard_flags": [
+     "IDIOM_OR_FORMULA"
+    ],
+    "asserted_outside_formula": "Y",
+    "partial_asserts_predicate": "NA",
+    "spirit_name_in_phrase": null,
+    "refused_by": null,
+    "verdict_before_outside_formula_guard": null,
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "reason": "The cited phrase is merely a conventional title for Christ; the actual assertion of redemptive/saving action lies in the adjoining clause ('for the merit of ... by Faith'), which is not the quoted text, so the citation falls below the floor.",
+    "prompt_version": "gate6-v1.6",
+    "prompt_variant": "gate6-v1.6/spirit"
+   }
+  }
+ },
+ "replicate_rubrics": {
+  "Q-161-p1-BSR-RC-01-3|gate6-v1.3|1": {
+   "status": "DONE",
+   "item": "Q-161-p1-BSR-RC-01-3",
+   "version": "gate6-v1.3",
+   "replicate": 1,
+   "source": "s8-rep-v1.3-1",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "N",
+   "asserted_outside_formula": "N",
+   "refused_by": null,
+   "reason": "The grammatical subject is the gerund clause 'believing in the Holy Spirit as Lord and giver of life,' not God or the Spirit directly, and the sentence's assertion is about non-division of the One God rather than a fresh assertion of the Spirit's life-giving action; the title is a quoted creedal formula, so the predicate is only nominally present.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "Q-161-p1-BSR-RC-01-3|gate6-v1.3|2": {
+   "status": "DONE",
+   "item": "Q-161-p1-BSR-RC-01-3",
+   "version": "gate6-v1.3",
+   "replicate": 2,
+   "source": "s8-rep-v1.3-2",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "N",
+   "asserted_outside_formula": "N",
+   "refused_by": null,
+   "reason": "The phrase is verbatim but functions as a quoted creedal title within a clause whose actual claim is about the unity of God, not a direct assertion that the Spirit gives life; the predicate is presupposed, not asserted, and no outside-formula assertion of the predicate appears.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "Q-161-p1-BSR-RC-01-3|gate6-v1.3|3": {
+   "status": "DONE",
+   "item": "Q-161-p1-BSR-RC-01-3",
+   "version": "gate6-v1.3",
+   "replicate": 3,
+   "source": "s8-rep-v1.3-3",
+   "verdict": "REJECT",
+   "reason_code_final": "NOT_ASSERTION",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "N",
+   "asserted_outside_formula": "N",
+   "refused_by": null,
+   "reason": "The life-giving predicate appears only as part of a quoted creedal formula about the Spirit, and the surrounding text asserts a different proposition (unity of the Godhead), so the floor is WORD_ONLY and the citation fails.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "Q-213-p1-BSR-AN-01-1|gate6-v1.3|1": {
+   "status": "DONE",
+   "item": "Q-213-p1-BSR-AN-01-1",
+   "version": "gate6-v1.3",
+   "replicate": 1,
+   "source": "s8-rep-v1.3-1",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "N",
+   "refused_by": null,
+   "reason": "The grammatical subject of the sentence is 'We', with 'our Lord and Saviour Jesus Christ' functioning as a fixed honorific title rather than the subject of an asserted redemptive act, so the predicate's required subject condition fails and the floor is WORD_ONLY.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "Q-213-p1-BSR-AN-01-1|gate6-v1.3|2": {
+   "status": "DONE",
+   "item": "Q-213-p1-BSR-AN-01-1",
+   "version": "gate6-v1.3",
+   "replicate": 2,
+   "source": "s8-rep-v1.3-2",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "N",
+   "refused_by": null,
+   "reason": "The clause's grammatical subject is 'we' (those justified), with 'our Lord and Saviour Jesus Christ' appearing only as a genitive modifier naming the source of merit; the passage does not grammatically or assertively make Christ the subject performing a redemptive act, so the required-subject condition fails and the title functions as a formulaic epithet rather than an assertion of the predicate.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "Q-213-p1-BSR-AN-01-1|gate6-v1.3|3": {
+   "status": "DONE",
+   "item": "Q-213-p1-BSR-AN-01-1",
+   "version": "gate6-v1.3",
+   "replicate": 3,
+   "source": "s8-rep-v1.3-3",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "N",
+   "refused_by": null,
+   "reason": "The grammatical subject of the passage is 'we' (believers being justified), while 'our Lord and Saviour Jesus Christ' is a titular epithet naming Christ, not an assertion in which Christ himself is the subject performing redemptive action.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "Q-160-p1-BSR-MA-01-1|gate6-v1.3|1": {
+   "status": "DONE",
+   "item": "Q-160-p1-BSR-MA-01-1",
+   "version": "gate6-v1.3",
+   "replicate": 1,
+   "source": "s8-rep-v1.3-1",
+   "verdict": "REJECT",
+   "reason_code_final": "NOT_ASSERTION",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "N",
+   "asserted_outside_formula": "N",
+   "refused_by": null,
+   "reason": "The phrase is a doxology ('be glory for ever and ever') which presupposes rather than asserts divine glory, and no other part of the passage independently asserts glory as belonging to God's nature.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "Q-160-p1-BSR-MA-01-1|gate6-v1.3|2": {
+   "status": "DONE",
+   "item": "Q-160-p1-BSR-MA-01-1",
+   "version": "gate6-v1.3",
+   "replicate": 2,
+   "source": "s8-rep-v1.3-2",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "Y",
+   "refused_by": null,
+   "reason": "The candidate phrase is a doxological formula whose grammatical subject is 'glory,' not God, and it presupposes rather than directly asserts God's glory; though the surrounding passage does assert divine glory outside this formula, the cited phrase itself fails both the subject and floor tests.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "Q-160-p1-BSR-MA-01-1|gate6-v1.3|3": {
+   "status": "DONE",
+   "item": "Q-160-p1-BSR-MA-01-1",
+   "version": "gate6-v1.3",
+   "replicate": 3,
+   "source": "s8-rep-v1.3-3",
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "Y",
+   "refused_by": null,
+   "reason": "The candidate phrase is verbatim and names God as the recipient of glory, but it occurs within a closing doxology; the caveat is warranted because the doxological form alone would be WORD_ONLY, yet the same passage independently asserts God's glory in a non-formulaic sentence, supporting a FULL floor with a formula-related caveat.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "TP-045|gate6-v1.3|1": {
+   "status": "DONE",
+   "item": "TP-045",
+   "version": "gate6-v1.3",
+   "replicate": 1,
+   "source": "s9-rep-v1.3-1",
+   "verdict": "ACCEPT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The phrase is verbatim, the subject is Christ (two natures), and the council asserts the predicate directly and fully in its own confessional voice.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "TP-045|gate6-v1.3|2": {
+   "status": "DONE",
+   "item": "TP-045",
+   "version": "gate6-v1.3",
+   "replicate": 2,
+   "source": "s9-rep-v1.3-2",
+   "verdict": "ACCEPT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The phrase is verbatim, the subject is Christ's two natures, and the confession asserts the predicate in full as defined.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "TP-045|gate6-v1.3|3": {
+   "status": "DONE",
+   "item": "TP-045",
+   "version": "gate6-v1.3",
+   "replicate": 3,
+   "source": "s9-rep-v1.3-3",
+   "verdict": "ACCEPT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The quoted Chalcedonian formula is verbatim, asserted in the text's own voice about Christ's two natures, and fully matches the predicate's definition of denying disjunction of the natures.",
+   "prompt_variant": "gate6-v1.3"
+  },
+  "TP-045|gate6-v1.6|1": {
+   "status": "DONE",
+   "item": "TP-045",
+   "version": "gate6-v1.6",
+   "replicate": 1,
+   "source": "s9-rep-v1.6-1",
+   "verdict": "ACCEPT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The Chalcedonian clause, expounded within CCC's catechetical text, verbatim asserts the predicate of Christ as the required subject in a full, unqualified sense.",
+   "prompt_variant": "gate6-v1.6/base"
+  },
+  "TP-045|gate6-v1.6|2": {
+   "status": "DONE",
+   "item": "TP-045",
+   "version": "gate6-v1.6",
+   "replicate": 2,
+   "source": "s9-rep-v1.6-2",
+   "verdict": "ACCEPT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The phrase is verbatim, the subject is Christ (the required subject), and the Catechism asserts this Chalcedonian formula as its own confessed teaching rather than merely reporting or disputing it, fully satisfying the predicate of 'without separation' between Christ's natures.",
+   "prompt_variant": "gate6-v1.6/base"
+  },
+  "TP-045|gate6-v1.6|3": {
+   "status": "DONE",
+   "item": "TP-045",
+   "version": "gate6-v1.6",
+   "replicate": 3,
+   "source": "s9-rep-v1.6-3",
+   "verdict": "ACCEPT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The phrase is verbatim, the subject is Christ (the incarnate Son) as required, and the CCC expounds this Chalcedonian clause as its own catechetical teaching, fully asserting the predicate of no separation between the natures.",
+   "prompt_variant": "gate6-v1.6/base"
+  },
+  "Q-161-p1-BSR-RC-01-3|gate6-v1.6|1": {
+   "status": "DONE",
+   "item": "Q-161-p1-BSR-RC-01-3",
+   "version": "gate6-v1.6",
+   "replicate": 1,
+   "source": "s9-rep-v1.6-1",
+   "verdict": "ACCEPT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "CCC 202 expounds the Nicene Creed's title for the Holy Spirit as 'Lord and giver of life,' asserting the life-giving predicate of the Spirit as divine person, consistent with the creedal-exposition rule.",
+   "prompt_variant": "gate6-v1.6/spirit"
+  },
+  "Q-161-p1-BSR-RC-01-3|gate6-v1.6|2": {
+   "status": "DONE",
+   "item": "Q-161-p1-BSR-RC-01-3",
+   "version": "gate6-v1.6",
+   "replicate": 2,
+   "source": "s9-rep-v1.6-2",
+   "verdict": "ACCEPT",
+   "reason_code_final": "OK",
+   "floor": "FULL",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": null,
+   "prompt_variant": "gate6-v1.6/spirit"
+  },
+  "Q-161-p1-BSR-RC-01-3|gate6-v1.6|3": {
+   "status": "DONE",
+   "item": "Q-161-p1-BSR-RC-01-3",
+   "version": "gate6-v1.6",
+   "replicate": 3,
+   "source": "s9-rep-v1.6-3",
+   "verdict": "REJECT",
+   "reason_code_final": "BELOW_FLOOR",
+   "floor": "WORD_ONLY",
+   "floor_model": "FULL",
+   "floor_capped_by": "IDIOM_OR_FORMULA",
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "N",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The phrase is verbatim and names the Holy Spirit as 'giver of life' within a creedal title the Catechism expounds while making a further point about unity; though embedded in a fixed creedal formula, per the creedal-clause rule this counts as the standard's own assertion, warranting ACCEPT with a caveat for the formulaic wording.",
+   "prompt_variant": "gate6-v1.6/spirit"
+  },
+  "Q-213-p1-BSR-AN-01-1|gate6-v1.6|1": {
+   "status": "DONE",
+   "item": "Q-213-p1-BSR-AN-01-1",
+   "version": "gate6-v1.6",
+   "replicate": 1,
+   "source": "s9-rep-v1.6-1",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "N",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The quoted phrase is a titular reference embedded in a sentence whose grammatical subject is 'we', so it does not itself assert redemptive action of Christ as the required divine subject.",
+   "prompt_variant": "gate6-v1.6/spirit"
+  },
+  "Q-213-p1-BSR-AN-01-1|gate6-v1.6|2": {
+   "status": "DONE",
+   "item": "Q-213-p1-BSR-AN-01-1",
+   "version": "gate6-v1.6",
+   "replicate": 2,
+   "source": "s9-rep-v1.6-2",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "SLOGAN_COMPRESSION"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "NA",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The grammatical subject of the passage is 'We' (those justified), and the quoted phrase is merely a title for Christ embedded in that sentence rather than an assertion that Christ/God performs redemptive action.",
+   "prompt_variant": "gate6-v1.6/spirit"
+  },
+  "Q-213-p1-BSR-AN-01-1|gate6-v1.6|3": {
+   "status": "DONE",
+   "item": "Q-213-p1-BSR-AN-01-1",
+   "version": "gate6-v1.6",
+   "replicate": 3,
+   "source": "s9-rep-v1.6-3",
+   "verdict": "REJECT",
+   "reason_code_final": "BELOW_FLOOR",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "Y",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The quoted phrase is a title used in passing; the actual assertion of redemptive action ('accounted righteous... for the merit of') lies outside the quoted words, so the citation falls below the floor.",
+   "prompt_variant": "gate6-v1.6/spirit"
+  },
+  "Q-160-p1-BSR-MA-01-1|gate6-v1.6|2": {
+   "status": "DONE",
+   "item": "Q-160-p1-BSR-MA-01-1",
+   "version": "gate6-v1.6",
+   "replicate": 2,
+   "source": "s9-rep-v1.6-2",
+   "verdict": "REJECT",
+   "reason_code_final": "BELOW_FLOOR",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "Y",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The cited phrase is a fixed doxological formula that presupposes rather than asserts God's glory; the same passage elsewhere ('God's awesome glory ... are perfect in holy love') does assert the predicate outside the formula, but that is not the phrase cited here.",
+   "prompt_variant": "gate6-v1.6/base"
+  },
+  "Q-160-p1-BSR-MA-01-1|gate6-v1.6|3": {
+   "status": "DONE",
+   "item": "Q-160-p1-BSR-MA-01-1",
+   "version": "gate6-v1.6",
+   "replicate": 3,
+   "source": "s9-rep-v1.6-3",
+   "verdict": "REJECT",
+   "reason_code_final": "WRONG_SUBJECT",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "N",
+   "speech_act_is_assertion": "N",
+   "asserted_outside_formula": "Y",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The cited phrase is a doxological formula whose grammatical subject is 'glory,' not God, so it does not itself assert that God is glorious; the same chunk does assert divine glory outside the formula ('God's awesome glory... are perfect in holy love'), but that is not the phrase cited.",
+   "prompt_variant": "gate6-v1.6/base"
+  },
+  "Q-160-p1-BSR-MA-01-1|gate6-v1.6|4": {
+   "status": "DONE",
+   "item": "Q-160-p1-BSR-MA-01-1",
+   "version": "gate6-v1.6",
+   "replicate": 4,
+   "source": "s9-rep-v1.6-4",
+   "verdict": "REJECT",
+   "reason_code_final": "NOT_ASSERTION",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "N",
+   "asserted_outside_formula": "Y",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "While the cited phrase itself is a doxological formula (WORD_ONLY per rubric), the same passage elsewhere asserts in its own voice that 'God's awesome glory... are perfect in holy love,' which does assert glory as a divine attribute outside the formula, justifying an accept-with-caveat rather than outright rejection despite the specific phrase cited being formulaic.",
+   "prompt_variant": "gate6-v1.6/base"
+  },
+  "Q-160-p1-BSR-MA-01-1|gate6-v1.6|5": {
+   "status": "DONE",
+   "item": "Q-160-p1-BSR-MA-01-1",
+   "version": "gate6-v1.6",
+   "replicate": 5,
+   "source": "s9-rep-v1.6-5",
+   "verdict": "REJECT",
+   "reason_code_final": "NOT_ASSERTION",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "N",
+   "asserted_outside_formula": "Y",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The quoted phrase is a doxology ('be glory for ever and ever'), which presupposes rather than asserts divine glory; the standard does assert glory of God elsewhere in the same passage ('God's awesome glory... are perfect in holy love'), but that sentence, not the cited doxology, would carry the assertion.",
+   "prompt_variant": "gate6-v1.6/base"
+  },
+  "Q-160-p1-BSR-MA-01-1|gate6-v1.6|1": {
+   "status": "DONE",
+   "item": "Q-160-p1-BSR-MA-01-1",
+   "version": "gate6-v1.6",
+   "replicate": 1,
+   "source": "s9-rep-v1.6-1",
+   "verdict": "REJECT",
+   "reason_code_final": "BELOW_FLOOR",
+   "floor": "WORD_ONLY",
+   "floor_model": null,
+   "floor_capped_by": null,
+   "hazard_flags": [
+    "IDIOM_OR_FORMULA"
+   ],
+   "subject_is_required": "Y",
+   "speech_act_is_assertion": "Y",
+   "asserted_outside_formula": "Y",
+   "spirit_name_in_phrase": null,
+   "refused_by": null,
+   "verdict_before_outside_formula_guard": null,
+   "reason": "The cited phrase is a fixed doxological formula that presupposes rather than asserts divine glory; the actual assertion of God's glory appears elsewhere in the same article ('God's awesome glory and enduring compassion are perfect in holy love'), which is the passage that should have been cited.",
+   "prompt_variant": "gate6-v1.6/base"
+  }
+ }
+}

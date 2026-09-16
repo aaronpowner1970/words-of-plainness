@@ -27,7 +27,18 @@ Session 8 (2026-09-16, second set):
         Spirit families; the replicate measurement rule; the inference line becomes gate6-v1.6
   R6-14 all seven Spirit-family agency tags ratified (H27 = ATTRIBUTE); read from spirit-family-agency-tags.json
   R6-15 highest-tier precedence among matching registered texts; EO-09's eligibility as a creed text awaits the author
-  R6-16 the CATECHETICAL-only fail-closed boundary ratified; adoption proposals verified in Cowork; packet rebuild held"""
+  R6-16 the CATECHETICAL-only fail-closed boundary ratified; adoption proposals verified in Cowork; packet rebuild held
+
+Session 9 (2026-09-16, third and fourth sets):
+
+  R6-17 TP-049's fixture phrase replaced, IF an asserting sentence stands verbatim in its chunk — condition NOT met; no tp-5
+  R6-18 THE PHRASE CARRIES THE ASSERTION: verifier gate6-v1.6 + the code guard on asserted_outside_formula = Y (refused_by
+        R6-18); the inference line becomes gate6-v1.7
+  R6-19 BSR-EO-09 is a registered creed text at its own CONFESSIONAL tier (EO blocker (e) discharged)
+  R6-20 an item triggering a stop condition gets 5 replicates per version before the stop holds
+  R6-21 RATIFIED: the session 7 phrase floor (registry.CREED_PHRASE_MIN_WORDS = 3 / CREED_PHRASE_MIN_CHARS = 12)
+  R6-22 RATIFIED: a CATECHETICAL row is never a registered creed text (registry.registered_creed_texts)
+  R6-23 RATIFIED: the EO consultation ladder stays in config.EO_CONSULTATION_LADDER"""
 import json
 import os
 
@@ -227,5 +238,5 @@ def summary(r=None):
             "adoption_rows": {rid: v.get("adoption_status") for rid, v in adoption_rows(r).items()},
             "adoption_scope_rule": adoption_policy(r)["scope_rule"],
             "agency_tags_ratified": agency_tags(r), "cell_flags": sorted(cell_flags(r)),
-            "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4) and 2026-09-16 (R6-5..R6-16); applied in memory; "
+            "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4) and 2026-09-16 (R6-5..R6-23); applied in memory; "
                       "workbook not written (deltas pending ratification)"}

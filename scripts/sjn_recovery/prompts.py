@@ -27,6 +27,9 @@ PROMPT_VERSION = "gate6-v1.5 (locator) / gate6-v1.3 (recut) / gate6-v1.3 (verifi
 # Session 8 (2026-09-16, R6-13): v1.4 failed and was never in force. VERIFIER gate6-v1.5 = v1.4 minus the JOINT PREDICATION
 # doxology sentence, with JOINT PREDICATION and AGENCY sent only to Spirit families (SCOPED_VERIFIER_SYSTEMS). The pending
 # inference-neighbouring line is renamed again, to gate6-v1.6. Whether v1.5 is in force is PROMPT_VERSIONS["verifier"].
+# Session 9 (2026-09-16, R6-18): VERIFIER gate6-v1.6 = v1.5 with the outside-formula permission replaced by THE PHRASE
+# CARRIES THE ASSERTION, plus a code guard refusing an asserted_outside_formula = Y accept. The inference-neighbouring
+# line moves to gate6-v1.7.
 # verifier gate6-v1.2 (2026-09-13, session 4, Task 3): the hazard IDIOM_OR_FORMULA — a fixed idiom, oath,
 # doxology, greeting or liturgical formula whose surface wording names the predicate while the passage's
 # actual assertion lies elsewhere — with the companion line `asserted_outside_formula` (Y/N). Raising the
@@ -241,7 +244,7 @@ assert _V13_FORMULA_SENTENCE not in VERIFIER_SYSTEM_V14 and CREEDAL_SILENCE_LINE
 # records the variant it was sent ("gate6-v1.5/spirit", "gate6-v1.5/base").
 #
 # v1.4 was measured and never in force, so its name is not reused. The pending "an inferable proposition is
-# neighbouring" line moves to gate6-v1.6.
+# neighbouring" line moves to gate6-v1.6 (session 9, R6-18: and then to gate6-v1.7).
 _V14_DOXOLOGY_SENTENCE = " A doxology naming the three persons remains a fixed formula under line 4."
 assert JOINT_PREDICATION_LINE.endswith(_V14_DOXOLOGY_SENTENCE)
 JOINT_PREDICATION_LINE_V15 = JOINT_PREDICATION_LINE[: -len(_V14_DOXOLOGY_SENTENCE)]
@@ -251,11 +254,37 @@ assert VERIFIER_SYSTEM_V15_SPIRIT.count(_V14_DOXOLOGY_SENTENCE.strip()) == 0
 assert "JOINT PREDICATION" not in VERIFIER_SYSTEM_V15_BASE and "AGENCY." not in VERIFIER_SYSTEM_V15_BASE
 assert CREEDAL_SILENCE_LINE in VERIFIER_SYSTEM_V15_BASE
 
+# ------------------------------------------------------------------ verifier gate6-v1.6 (2026-09-16, session 9, R6-18)
+# v1.6 = v1.5 with the outside-formula PERMISSION replaced. In v1.5 the permission is one clause, in line 4's fixed-formula
+# sentence: "... and the floor is WORD_ONLY unless the passage separately asserts the predicate outside the formula." The
+# clause is removed (the sentence now ends "the floor is WORD_ONLY.") and the author's text follows it verbatim. The rest
+# of that sentence — a doxology, oath, greeting or acclamation presupposes rather than asserts — is the fixed-formula rule
+# itself, not the permission, and stays. Line 5's asserted_outside_formula question stays too: the R6-18 code guard
+# (agents.verdict_from_rubric) reads it and refuses a Y accept. Nothing else changes; both variants (R6-13) carry the text.
+#
+# The pending "an inferable proposition is neighbouring" line moves to gate6-v1.7.
+_V15_OUTSIDE_FORMULA_PERMISSION = " unless the passage separately asserts the predicate outside the formula."
+PHRASE_CARRIES_THE_ASSERTION = (
+    "THE PHRASE CARRIES THE ASSERTION. The quoted phrase must itself assert the property of the required subject. "
+    "Surrounding text may establish who the subject is or what the quoted words mean, but it may not supply an assertion "
+    "the quoted words do not make. If the passage asserts the property only in a different sentence, the citation does not "
+    "satisfy the family (BELOW_FLOOR); that other sentence is the one to cite.")
+assert VERIFIER_SYSTEM_V15_SPIRIT.count(_V15_OUTSIDE_FORMULA_PERMISSION) == 1
+assert VERIFIER_SYSTEM_V15_BASE.count(_V15_OUTSIDE_FORMULA_PERMISSION) == 1
+_V16_REPLACEMENT = ". " + PHRASE_CARRIES_THE_ASSERTION
+VERIFIER_SYSTEM_V16_SPIRIT = VERIFIER_SYSTEM_V15_SPIRIT.replace(_V15_OUTSIDE_FORMULA_PERMISSION, _V16_REPLACEMENT)
+VERIFIER_SYSTEM_V16_BASE = VERIFIER_SYSTEM_V15_BASE.replace(_V15_OUTSIDE_FORMULA_PERMISSION, _V16_REPLACEMENT)
+assert "unless the passage separately asserts" not in VERIFIER_SYSTEM_V16_SPIRIT + VERIFIER_SYSTEM_V16_BASE
+
 VERIFIER_SYSTEMS = {"gate6-v1.2": VERIFIER_SYSTEM, "gate6-v1.3": VERIFIER_SYSTEM_V13, "gate6-v1.4": VERIFIER_SYSTEM_V14,
-                    "gate6-v1.5": VERIFIER_SYSTEM_V15_SPIRIT}
+                    "gate6-v1.5": VERIFIER_SYSTEM_V15_SPIRIT, "gate6-v1.6": VERIFIER_SYSTEM_V16_SPIRIT}
 # versions whose system prompt depends on the family: {version: {variant: text}}. VERIFIER_SYSTEMS carries the fullest
 # variant under the version name so a version is selectable exactly as before.
-SCOPED_VERIFIER_SYSTEMS = {"gate6-v1.5": {"spirit": VERIFIER_SYSTEM_V15_SPIRIT, "base": VERIFIER_SYSTEM_V15_BASE}}
+SCOPED_VERIFIER_SYSTEMS = {"gate6-v1.5": {"spirit": VERIFIER_SYSTEM_V15_SPIRIT, "base": VERIFIER_SYSTEM_V15_BASE},
+                           "gate6-v1.6": {"spirit": VERIFIER_SYSTEM_V16_SPIRIT, "base": VERIFIER_SYSTEM_V16_BASE}}
+# R6-18: the verifier versions whose rubrics the code guard reads (agents.verdict_from_rubric). A rubric from an earlier
+# version is judged as that version was measured, so a v1.3 baseline or replay is never altered by a later ruling.
+OUTSIDE_FORMULA_GUARDED_VERSIONS = ("gate6-v1.6",)
 SPIRIT_SCOPE_TOKENS = ("holy spirit", "holy ghost")
 
 

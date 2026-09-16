@@ -1,7 +1,7 @@
 {
  "schema": "sjn-gate6-author-rulings/1",
  "what": "Author rulings the Gate 6 harness applies IN MEMORY until the workbook carries them. Nothing here writes to the workbook. Each ruling names the workbook change that would supersede it; once the workbook holds that change the harness reads the workbook and checks it agrees (scripts/sjn_recovery/rulings.py).",
- "source": "wop-scratch/WoP_SJN_B4_ReviewAddendum_20260913.md §5 and wop-scratch/WoP_SJN_Gate6_Session6_Prompt_20260913.txt (author rulings, 2026-09-13); wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set)",
+ "source": "wop-scratch/WoP_SJN_B4_ReviewAddendum_20260913.md §5 and wop-scratch/WoP_SJN_Gate6_Session6_Prompt_20260913.txt (author rulings, 2026-09-13); wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set); wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
  "rulings": {
   "R6-1_required_subject": {
    "ruled": "2026-09-13",
@@ -286,9 +286,11 @@
      "The gate reads the replicate MAJORITY for those items."
     ],
     "q160": "Q-160 is replicated 3x under both versions regardless of the single runs",
-    "documented_in": "docs/gate6/WoP_SJN_Gate6_MeasurementRule.md"
+    "documented_in": "docs/gate6/WoP_SJN_Gate6_MeasurementRule.md",
+    "amended_by": "R6-20 (stop-condition items: 5 replicates per version)"
    },
-   "supersede_with": "the run record's verifier prompt version and variant"
+   "supersede_with": "the run record's verifier prompt version and variant",
+   "inference_line_version_amended": "gate6-v1.7 (R6-18, session 9)"
   },
   "R6-14_agency_tags_ratified": {
    "ruled": "2026-09-16",
@@ -324,7 +326,7 @@
     "BSR-EO-14",
     "BSR-EO-12"
    ],
-   "eo09_registered_creed_text": "PENDING AUTHOR RULING (EO launch blocker (e)); unchanged in code",
+   "eo09_registered_creed_text": "RULED R6-19: a registered creed text at its own CONFESSIONAL tier; highest-tier precedence applies (blocker (e) DISCHARGED)",
    "supersede_with": "APP CONFIG: the creed-resolution precedence rule"
   },
   "R6-16_adoption": {
@@ -345,6 +347,98 @@
    "packet_rebuild": "HELD until the author ratifies the Cowork adoption verification; then rebuilt ONCE",
    "blocks_eo": false,
    "supersede_with": "the workbook's adoption columns"
+  },
+  "R6-17_tp049_fixture": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
+   "rule": "Replace TP-049's phrase with the verbatim sentence in the same chunk that asserts the Son's eternal filial relation (candidate \"the Son is eternally begotten of the Father\", only if verbatim). The fixture becomes tp-5. The old phrase becomes regression negative N-TP-049 (expected REJECT). Measure the new item under v1.3 and v1.6. The recall floor stays 0.967 on 60.",
+   "outcome": "CONDITION NOT MET (session 9). TP-049's chunk is BSR-MW-01 Article I (Methodist Articles of Religion, \"Of Faith in the Holy Trinity\"), not Westminster 2.3. \"the Son is eternally begotten of the Father\" is not in it (it stands in BSR-RP-01 Chapter 2.3, BSR-RP-04 6.013 and BSR-BA-02 2.3). No sentence of the chunk asserts the eternal filial relation. tp-5 was NOT built; the fixture is unchanged; N-TP-049 was NOT added. Three ranked in-chunk candidates are reported for the author (session 9 report, Task 1; measured for information in session9/measure-v16.json).",
+   "tp5_built": false,
+   "n_tp049_added": false,
+   "recall_floor": "0.967 on 60 (unchanged)",
+   "supersede_with": "the tp fixture header"
+  },
+  "R6-18_phrase_carries_assertion": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
+   "rule": "The quoted phrase must itself carry the assertion; context may clarify subject or sense but may not supply the assertion. Step A counts existing outside-formula rescues with no model calls, and stops for the author if more than 10 card accepts rely on them or any public-certified cell would lose its last citation. Step B: gate6-v1.6 replaces the outside-formula permission with the verbatim text, plus a code guard refusing asserted_outside_formula = Y accepts. The inference line moves to gate6-v1.7.",
+   "verbatim_text": "THE PHRASE CARRIES THE ASSERTION. The quoted phrase must itself assert the property of the required subject. Surrounding text may establish who the subject is or what the quoted words mean, but it may not supply an assertion the quoted words do not make. If the passage asserts the property only in a different sentence, the citation does not satisfy the family (BELOW_FLOOR); that other sentence is the one to cite.",
+   "removed_from_v15": " unless the passage separately asserts the predicate outside the formula.",
+   "step_a": {
+    "artifact": "session9/task2-rescues.json",
+    "finished_branch_card_accepts_relying_on_rescue": [
+     "Q-297-p1-BSR-RC-01-1"
+    ],
+    "public_certified_cells_losing_last_citation": [],
+    "stop": false
+   },
+   "code_guard": {
+    "where": "agents.verdict_from_rubric (so verify and finalize both apply it)",
+    "refused_by": "R6-18",
+    "reason_code_final": "BELOW_FLOOR",
+    "applies_to_versions": [
+     "gate6-v1.6"
+    ],
+    "scope_note": "rubrics from gate6-v1.5 and earlier are judged as measured; a stored finished-branch rubric is not rewritten"
+   },
+   "version_in_force_after_session_9": "gate6-v1.3 (v1.6 checks 2-5 passed; check 1 not evaluable without tp-5)",
+   "inference_line_version": "gate6-v1.7",
+   "supersede_with": "the run record's verifier prompt version and variant"
+  },
+  "R6-19_eo09_creed_text": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
+   "rule": "EO-09 is eligible as a registered creed text at its own CONFESSIONAL tier. Highest-tier precedence still applies. EO blocker (e) is discharged.",
+   "code": "no change: Registry.registered_creed_texts already registers BSR-EO-09 Synodikon §2 at CONFESSIONAL; resolve_registered_phrase takes the highest tier",
+   "tests": [
+    "test_session9_rulings.test_hopkos_spirit_clause_is_only_in_eo09_and_resolves_confessional",
+    "test_session9_rulings.test_a_phrase_in_both_eo09_and_eo07_resolves_conciliar",
+    "test_session9_rulings.test_eo09_is_a_registered_creed_text_on_its_symbol_of_faith_only"
+   ],
+   "eo_blocker_e": "DISCHARGED",
+   "supersede_with": "the registry's creed-text column"
+  },
+  "R6-20_stop_rule_sample_size": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
+   "rule": "An item that triggers a stop condition gets 5 replicates per version before the stop holds, and the stop reads the majority. Verdict-differ items stay at 3.",
+   "amends": "R6-13 measurement_rule",
+   "documented_in": "docs/gate6/WoP_SJN_Gate6_MeasurementRule.md",
+   "supersede_with": "the measurement rule document"
+  },
+  "R6-21_phrase_floor": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
+   "status": "RATIFIED",
+   "rule": "The session 7 phrase floor is ratified as implemented and applies to all creed and definition phrase matching; a shorter phrase is refused BELOW_FLOOR. This does not decide the Q-290 (Unbegotten) fallback, which stays with the EO packet review.",
+   "as_implemented": {
+    "file": "scripts/sjn_recovery/registry.py",
+    "constants": "CREED_PHRASE_MIN_WORDS = 3\nCREED_PHRASE_MIN_CHARS = 12",
+    "comparison": "key = punct_key(phrase)\nif len(key.split()) < CREED_PHRASE_MIN_WORDS or len(key) < CREED_PHRASE_MIN_CHARS:\n    return None",
+    "reading": "measured on textutil.punct_key(phrase) (NFKC, casefolded, punctuation stripped, whitespace collapsed): fewer than 3 words OR fewer than 12 characters of that key and the phrase resolves to no registered creed or definition text"
+   },
+   "matches_session7_report": true,
+   "note": "In code the floor returns None from resolve_registered_phrase: the phrase does not resolve to a registered text, and the citation keeps its host row's (exposition) tier. The ruling's word BELOW_FLOOR names that outcome for creed/definition resolution; it is not a verifier reason code.",
+   "test": "test_session9_rulings.test_the_phrase_floor_is_three_words_and_twelve_characters",
+   "supersede_with": "APP CONFIG: the creed-resolution phrase floor"
+  },
+  "R6-22_catechetical_rows": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
+   "status": "RATIFIED",
+   "rule": "A CATECHETICAL row is never a registered creed text. Consistent with R6-5, R6-6 and R6-9: catechetical works are exposition, not confession.",
+   "as_implemented": "Registry.registered_creed_texts: a row qualifies only if it is one of R6-5's chunk_level_creed_resolution_allowed_rows or its bare tier is CONCILIAR or CONFESSIONAL",
+   "test": "test_session9_rulings.test_a_catechetical_row_is_never_a_registered_creed_text (added session 9; no earlier test existed)",
+   "supersede_with": "the registry's creed-text column"
+  },
+  "R6-23_eo_ladder_config": {
+   "ruled": "2026-09-16",
+   "source": "wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
+   "status": "RATIFIED",
+   "rule": "The EO consultation ladder stays in config.EO_CONSULTATION_LADDER, so a branch run can change it without a code change.",
+   "as_implemented": "scripts/sjn_recovery/config.py EO_CONSULTATION_LADDER, read by packets.ladder_tier (a row's own eo_ladder_tier wins)",
+   "test": "test_session9_rulings.test_the_eo_ladder_is_read_from_config",
+   "supersede_with": "the registry's eo_ladder_tier column"
   }
  }
 }

@@ -130,10 +130,31 @@ def lower_floor(*floors):
     return max(known, key=lambda f: FLOOR_ORDER[f]) if known else None
 
 
+OUTSIDE_FORMULA_GUARD = "R6-18"
+
+
+def outside_formula_guard_applies(rubric):
+    """R6-18 (session 9): THE PHRASE CARRIES THE ASSERTION. A rubric from a guarded verifier version (gate6-v1.6 on) that
+    answers asserted_outside_formula = Y says the passage asserts the predicate only OUTSIDE the quoted words, so the
+    quoted phrase does not carry it. The rubric field is kept so this can be read."""
+    return (str((rubric or {}).get("asserted_outside_formula")).upper() == "Y"
+            and (rubric or {}).get("prompt_version") in prompts.OUTSIDE_FORMULA_GUARDED_VERSIONS)
+
+
 def verdict_from_rubric(rubric, floor, lexical_floor=False):
     """The verdict recomputed in code from a DONE rubric's lines 1–3 and model verdict at the given floor —
     the one function both verify() and finalize() use, so a merged floor is judged by the same rule as a
-    model's own floor. Returns (verdict, reason_code)."""
+    model's own floor. Returns (verdict, reason_code).
+
+    R6-18: an accept whose rubric carries asserted_outside_formula = Y (guarded versions) is refused here, BELOW_FLOOR —
+    in the one function, so a refinalisation can never re-admit it."""
+    verdict, code = _verdict_from_rubric_lines(rubric, floor, lexical_floor)
+    if verdict in ACCEPTS and outside_formula_guard_applies(rubric):
+        return "REJECT", "BELOW_FLOOR"
+    return verdict, code
+
+
+def _verdict_from_rubric_lines(rubric, floor, lexical_floor=False):
     if not rubric or rubric.get("status") != "DONE":
         return "REJECT", "UNPARSEABLE"
     if str(rubric.get("phrase_verbatim")).upper() != "Y" or rubric.get("phrase_verbatim_code") == "N" \
@@ -602,6 +623,11 @@ class CellRunner:
         ok_phrase, _ = guards.check_phrase(cand["phrase"], cand["chunk_text"])
         rubric["phrase_verbatim_code"] = "Y" if ok_phrase else "N"
         verdict, code = verdict_from_rubric(rubric, rubric["floor"], bool(pred.get("lexical_floor")))
+        # Session 9 (R6-18): record the refusal where the outside-formula guard is what turned an accept into REJECT
+        before_guard = _verdict_from_rubric_lines(rubric, rubric["floor"], bool(pred.get("lexical_floor")))[0]
+        if before_guard in ACCEPTS and verdict == "REJECT" and outside_formula_guard_applies(rubric):
+            rubric["verdict_before_outside_formula_guard"] = before_guard
+            rubric["refused_by"] = OUTSIDE_FORMULA_GUARD
         # Session 7 (R6-7): on a family whose required subject IS the Holy Spirit, an accept whose phrase does not name
         # the Spirit is refused in code. This is the collective form ("one God, Father, Son and Holy Spirit, is X" cut
         # so the Spirit's name falls outside the quoted ≤15 words) and the inference from the unity of the essence to
@@ -675,6 +701,8 @@ class CellRunner:
             fin["floor_rulings_applied"] = [c.get("by") for c in caps]
             fin["floor_before_rulings"] = floor_before_rulings
             fin["floor_capped_by_ruling"] = floor != floor_before_rulings
+        if verdict == "REJECT" and outside_formula_guard_applies(base) and _verdict_from_rubric_lines(base, floor)[0] in ACCEPTS:
+            fin["refused_by"] = OUTSIDE_FORMULA_GUARD
         if a_done:
             fin["adjudicator_verdict"] = a.get("verdict")
         # an overturn is the second model's doing; a floor ruling's refusal is recorded separately (floor_capped_by_ruling)

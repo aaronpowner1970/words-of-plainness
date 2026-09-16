@@ -96,12 +96,12 @@ words") — stands verbatim in a **registered** text of the **same branch**.
 A chunk is a **registered creed text** when its locator names a creed AND its row is either one of
 R6-5's allowed rows or a row whose bare tier is CONCILIAR or CONFESSIONAL — the creed printed as a
 text inside a conciliar or confessional standard. **A CATECHETICAL row is never a registered creed
-text.** That is clause 3, made mechanical.
+text.** *[RATIFIED R6-22, 16 Sep — recorded session 9.]* That is clause 3, made mechanical.
 
 A chunk is a **registered definition text** when its locator names a definition of faith / horos /
 confession of faith, its row's bare tier is CONCILIAR, and the locator names no canon or anathema.
 
-**Phrase floor: 3 words and 12 characters.** "begotten, not made" (3 words, 17 chars) and "light of
+**Phrase floor: 3 words and 12 characters.** *[RATIFIED R6-21, 16 Sep — recorded session 9.]* "begotten, not made" (3 words, 17 chars) and "light of
 light" (3 words, 14) are the shortest clauses the author's examples turn on, so the floor sits directly
 below them. This is a judgement call and I am flagging it: "the Holy Spirit" (3 words, 15 chars) also
 clears it, though no such phrase would ever be an accept.
@@ -486,8 +486,10 @@ Against the 10 USD cap and the 6 USD report threshold. The 2–3 USD expectation
 6. **The EO consultation ladder had no machine-readable home.** Task 6's rule cannot work without one.
    I put it in `config.EO_CONSULTATION_LADDER`, sourced from the EO launch prompt. It belongs in the
    registry as an `eo_ladder_tier` column; the reader already prefers the row's own value.
+   *[RATIFIED R6-23, 16 Sep — the ladder stays in config; recorded session 9.]*
 7. **The Anglican branch registers the Athanasian Creed as a text but not the Apostles' or Nicene.**
    So an Apostles'-Creed phrase quoted from AN-04 or AN-05 cannot resolve CONCILIAR there. A registry
    gap surfaced by the new rule, not caused by it.
 8. **The phrase floor (3 words / 12 characters) is mine.** The author's examples set the lower bound;
    nothing in the rulings sets it. It is stated in the code and in §3 above so it can be overruled.
+   *[RATIFIED R6-21, 16 Sep — recorded session 9.]*

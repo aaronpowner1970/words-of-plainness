@@ -1,0 +1,185 @@
+--- C:/Users/aaron/AppData/Local/Temp/claude/C--Users-aaron-Documents-words-of-plainness/737f5194-8462-44a0-8aff-eac75794bef0/scratchpad/EOPrompt_before_s9.txt	2026-09-16 17:37:16.020335200 -0400
++++ /c/Users/aaron/Documents/wop-scratch/WoP_SJN_Gate6_EOPrompt_20260916.txt	2026-09-16 17:38:44.186305300 -0400
+@@ -1,22 +1,23 @@
+ SJN GATE 6 -- EASTERN ORTHODOX. THE LAST BRANCH. IT RUNS ALONE.
+ 
+-!! NOT LAUNCHABLE AS IT STANDS (16 September 2026, after session 8). TWO preconditions remain
+-!! open: (d) THE VERIFIER and (e) THE AUTHOR'S RULING ON BSR-EO-09. (a), (b) and (c) are discharged.
+-!! Each is stated in LAUNCH BLOCKERS below.
++!! NOT LAUNCHABLE AS IT STANDS (16 September 2026, after session 9). ONE precondition remains
++!! open: (d) THE VERIFIER, and it now waits on ONE author ruling -- TP-049's fixture phrase.
++!! (a), (b), (c) and [S9] (e) are discharged. Each is stated in LAUNCH BLOCKERS below.
+ !!
+-!! [S8] THE VERIFIER IN FORCE IS gate6-v1.3. gate6-v1.4 failed in session 7 and was never in force.
+-!! gate6-v1.5 (R6-13: v1.4 minus the JOINT PREDICATION doxology sentence, with JOINT PREDICATION and
+-!! AGENCY sent only to Spirit families) failed in session 8 under the replicate rule, and the gate
+-!! STOPPED on its Q-160 condition: the doxology Q-160 is accepted 3 of 3 under v1.5 and 1 of 3 under
+-!! v1.3, which implicates the creed carve-out. tp-4 recall under v1.5 is 57/60 = 0.950 against the
+-!! 0.967 floor: TP-049 is refused 3 of 3 under v1.5's BASE prompt, which carries neither JOINT
+-!! PREDICATION nor the deleted sentence, so session 7's diagnosis of TP-049 does not hold. The creed
+-!! lines are the author's to rule on; session 8 did not edit them.
+-!! (session8/measure-v15.json; docs/gate6/WoP_SJN_Gate6_MeasurementRule.md)
++!! [S9] THE VERIFIER IN FORCE IS STILL gate6-v1.3. gate6-v1.6 (R6-18: v1.5 with the outside-formula
++!! permission replaced by THE PHRASE CARRIES THE ASSERTION, plus a code guard refusing an
++!! asserted_outside_formula = Y accept) was measured in session 9 and PASSED checks (2) to (5):
++!! Q-160 is refused 5 of 5 under v1.6. It is NOT in force because check (1) is ruled on fixture tp-5,
++!! and tp-5 could not be built: R6-17 replaces TP-049's phrase only with a verbatim asserting sentence
++!! from TP-049's own chunk, and that chunk (BSR-MW-01 Article I, Methodist) contains none.
++!! (session9/measure-v16.json; docs/gate6/WoP_SJN_Gate6_MeasurementRule.md)
++!!
++!! [S8, superseded by S9] gate6-v1.4 failed in session 7; gate6-v1.5 failed in session 8 on its Q-160
++!! STOP. Neither was ever in force.
+ 
+-This supersedes wop-scratch/WoP_SJN_Gate6_EOPrompt_20260913.txt. The changes are marked [S7] and [S8].
++This supersedes wop-scratch/WoP_SJN_Gate6_EOPrompt_20260913.txt. The changes are marked [S7], [S8] and [S9].
+ 
+-DO NOT LAUNCH THIS UNTIL SESSIONS 5, 6, 7 AND 8 HAVE ALL REPORTED AND THEIR WORK IS ON MAIN.
++DO NOT LAUNCH THIS UNTIL SESSIONS 5, 6, 7, 8 AND 9 HAVE ALL REPORTED AND THEIR WORK IS ON MAIN.
+ From session 5, EO depends on the artifact URL rule and the 47-row audit, the NO TEXT fix to
+ the REVIEWED claim, and the launcher hard-fail. From session 6 it depends on all four of the
+ author's rulings: the required_subject rule admitting the Son and the Spirit as divine, the
+@@ -25,12 +26,18 @@
+ definition resolution, the adoption field, the Spirit-name guard, the agency tags, and the
+ ladder-aware coverage record.
+ [S8] From session 8 it depends on R6-13 to R6-16: the scoped verifier and the replicate measurement
+-rule, the ratified agency tags, highest-tier creed precedence, and the adoption boundary. If any of
+-those did not land, say so and stop.
++rule, the ratified agency tags, highest-tier creed precedence, and the adoption boundary.
++[S9] From session 9 it depends on R6-17 to R6-23: the TP-049 fixture ruling (condition not met; see
++(d)), THE PHRASE CARRIES THE ASSERTION and its code guard, EO-09 as a registered creed text at its own
++tier, the 5-replicate stop rule, and the three ratified session 7 choices (R6-21 phrase floor, R6-22
++catechetical rows, R6-23 ladder in config). If any of those did not land, say so and stop.
+ 
+ [S8] NOT A BLOCKER: the seven finished packets are rebuilt ONCE, after the author ratifies the Cowork
+ adoption verification (R6-16: RC-07, AN-02, AN-04, AN-05, LU-03, RP-03, RP-05 and BA-03 under the
+ Source Verification Standard). That rebuild waits on the verification. It does not block EO.
++[S9] R6-18 step A for that rebuild: one finished-branch card accept rests on an asserted_outside_formula
++= Y rubric (Q-297 RC-01-1, "begotten not made, consubstantial with the Father"; not its cell's last
++citation; NO PUBLIC TILE). Under v1.6 it is ACCEPT with no formula flag, so it is not refused.
+ 
+ Revision, 13 September, after session 5: BSR-EO-03 is retired, so this branch runs on
+ THIRTEEN rows, not fourteen.
+@@ -68,26 +75,30 @@
+ (c) THE STRAY FILES ARE GONE. Discharged in session 7: ".cache/sjn-recovery/chunks/BSR-AN-03 (1).json"
+     and the three "Q-NNN (1).json" duplicates under recovery-runs/cal-2/cells/ were removed.
+ 
+-(d) THE VERIFIER -- OPEN. [S8] gate6-v1.5 was measured under the R6-13 replicate rule against
+-    gate6-v1.3 and FAILED; v1.3 stays in force (session8/measure-v15.json):
+-      (1) tp-4 recall, majority-read: 57/60 = 0.950 < 0.967 -- FAIL (TP-049 v1.3 2/3, v1.5 0/3)
+-      (2) Q-161 RC-01-3 accepts by majority under v1.5: 3/3 -- PASS
+-      (3) the 12 non-creedal IDIOM rejections: Q-160 flips (v1.5 3/3 accept, v1.3 1/3) -- FAIL
+-      (4) both Q-277 candidates agree under v1.5 (both accept) -- PASS
+-      (5) Q-160: accept-majority under v1.5, reject-majority under v1.3 -- the creed carve-out is
+-          implicated; the gate STOPPED here and the creed lines were not edited.
+-    This branch does not launch until the author rules on the creed lines and a version that carries
+-    them passes all five checks. It may not launch on gate6-v1.3, which carries no creed carve-out.
+-
+-(e) [S8] THE AUTHOR'S RULING ON BSR-EO-09 -- OPEN. Whether EO-09's Synodikon §2 "The Symbol of Faith"
+-    counts as a REGISTERED CREED TEXT (resolving CONFESSIONAL) is the author's call (R6-15). Session 8
+-    found (report §3c): cal-3's Fix 0 excluded EO-09 from the cal-3 corpus ONLY IF its anathema guard
+-    failed; the guard was built and tested, so EO-09 was never excluded, and §2 was named the safe,
+-    citable region. Nothing in Fix 0 or the rulings file bars §2 as a creed text. What turns on the
+-    ruling: with highest-tier precedence (R6-15), EO-09 decides a citation's tier only for a phrase in
+-    EO-09's wording and in neither EO-07 nor EO-14 -- in practice Hopko's "the Holy Spirit, the Lord,
+-    the Giver of Life", which resolves CONFESSIONAL if EO-09 stays and OFFICIAL_EXPOSITION if it goes.
+-    The code is unchanged until the author rules.
++(d) THE VERIFIER -- OPEN. [S9] gate6-v1.6 was measured against gate6-v1.3 under the replicate rule
++    as amended by R6-20 (session9/measure-v16.json). v1.3 stays in force:
++      (1) recall >= 0.967 on tp-5 -- NOT EVALUABLE. tp-5 was not built (R6-17's condition failed:
++          no sentence of TP-049's chunk asserts the eternal filial relation). Measured instead on tp-4:
++          single run 57/60; TP-045 differed (refused once by the R6-18 guard) and its 3 replicates
++          accept 3/3, so the majority read is 58/60 = 0.967 -- but that count includes TP-049's OLD
++          phrase, which R6-17 calls the defect and which v1.6 accepted once (PARTIAL).
++      (2) Q-161 RC-01-3 accepts by majority under v1.6: 2 of 3 -- PASS
++      (3) the 12 non-creedal IDIOM rejections: none accepts by majority under v1.6 -- PASS
++      (4) both Q-277 candidates agree under v1.6 (both accept) -- PASS
++      (5) Q-160: 0 of 5 accept under v1.6 (R6-20) -- PASS; the outside-formula rescue is closed.
++      (6) N-TP-049, the old phrase, once under v1.6: ACCEPT_WITH_CAVEAT (PARTIAL) -- not the expected
++          REJECT; reported, not a stop.
++      (7) Q-297 RC-01-1 (the one card rescue): ACCEPT under v1.6, no formula flag -- not refused.
++    WHAT REMAINS: the author's ruling on TP-049's fixture phrase (three in-chunk candidates are in the
++    session 9 report). Once tp-5 exists, check (1) is read on it; checks (2) to (5) stand. This branch
++    may not launch on gate6-v1.3, which carries no creed carve-out and permits the outside-formula
++    rescue.
++
++(e) [S9] BSR-EO-09 -- DISCHARGED BY R6-19. EO-09's Synodikon §2 "The Symbol of Faith" is a
++    registered creed text at its own CONFESSIONAL tier, and highest-tier precedence (R6-15) still
++    applies. No resolver change was needed; session 9 tests confirm Hopko's "the Holy Spirit, the Lord,
++    the Giver of Life" (in EO-09 only) resolves CONFESSIONAL, and a phrase in both EO-09 and EO-07
++    ("who proceeds from the Father") resolves CONCILIAR.
+ 
+ ================================================================================
+ WHY THIS BRANCH IS DIFFERENT
+@@ -122,6 +133,7 @@
+ [S7] The ladder is now DATA the harness reads, not prose: scripts/sjn_recovery/config.py,
+ EO_CONSULTATION_LADDER, read through packets.ladder_tier (a row's own `eo_ladder_tier` wins where
+ the workbook or a ruling carries it). Confirm the two agree before the first cell.
++[S9, R6-23] RATIFIED: the ladder stays in config, so this run can change it without a code change.
+ 
+ TIER A -- consulted on every cell. FIVE rows [S7: BSR-EO-01 removed], covering four distinct
+ speaks_for groups, still above the card cap. 85,186 characters of locator text.
+@@ -214,13 +226,20 @@
+ TASK 3 -- everything else runs exactly as the last three branches did
+ ================================================================================
+ 
+-  - [S8] verifier: gate6-v1.3 IS THE VERSION IN FORCE after session 8. It is named here because it is
+-    in force, not because this branch may run on it: see blocker (d). gate6-v1.4 and gate6-v1.5 both
+-    failed. Whatever version the author's creed ruling produces must pass the five checks under the
+-    replicate rule (docs/gate6/WoP_SJN_Gate6_MeasurementRule.md) before this line is changed. That
+-    version is expected to carry the creed lines (a creed is not a fixed formula; a creed quoted only to
+-    describe, compare or dispute it is not the standard's assertion; a creed's silence is never a
+-    finding) and, for Spirit families only, the JOINT PREDICATION and AGENCY lines (R6-13 scoping).
++  - [S9] verifier: gate6-v1.3 IS THE VERSION IN FORCE after session 9. It is named here because it is
++    in force, not because this branch may run on it: see blocker (d). gate6-v1.4 and gate6-v1.5
++    failed; gate6-v1.6 passed checks (2) to (5) and waits on check (1), which needs tp-5. Change this
++    line only when a version passes every check under the replicate rule
++    (docs/gate6/WoP_SJN_Gate6_MeasurementRule.md). The expected version is gate6-v1.6: the creed lines
++    (a creed is not a fixed formula; a creed quoted only to describe, compare or dispute it is not the
++    standard's assertion; a creed's silence is never a finding), for Spirit families only the JOINT
++    PREDICATION and AGENCY lines (R6-13 scoping), and THE PHRASE CARRIES THE ASSERTION (R6-18).
++  - [S9, R6-18] THE PHRASE CARRIES THE ASSERTION. The quoted phrase must itself assert the property of
++    the required subject. A doxology or epithet whose chunk asserts the predicate in ANOTHER sentence
++    does not satisfy the family: cite the other sentence. Under v1.6 an accept whose rubric answers
++    asserted_outside_formula = Y is refused in code (refused_by R6-18, BELOW_FLOOR). Report every
++    candidate it refuses, and read each one: in session 9 the guard refused one ratified true positive
++    (TP-045, Chalcedon) on a Y the verifier's own reasoning did not support; its 3 replicates accept.
+     Every verifier call records the variant it was sent. IDIOM_OR_FORMULA will still raise often -- Byzantine liturgical Greek is dense
+     with doxologies, epithets and fixed formulas -- but it must no longer raise on a creedal clause
+     the standard confesses, expounds or instructs from.
+@@ -239,8 +258,13 @@
+   - [S7, R6-5 / R6-6 / R6-9 / R6-10] THE TIER A CITATION RESOLVES TO IS NOT ITS ROW'S TIER.
+       * a phrase that stands verbatim in a REGISTERED creed or definition text of this branch
+         (BSR-EO-07 "THE SYMBOL OF FAITH", BSR-EO-14 "THE CREED", BSR-EO-12 in Greek, BSR-EO-09 §2
+-        [S8: pending blocker (e)], BSR-EO-06's and BSR-EO-13's Definitions of Faith) resolves to that
+-        text's tier -- so Hopko's and Philaret's verbatim Creed quotations still resolve CONCILIAR;
++        [S9, R6-19: registered, CONFESSIONAL], BSR-EO-06's and BSR-EO-13's Definitions of Faith) resolves
++        to that text's tier -- so Hopko's and Philaret's verbatim Creed quotations still resolve CONCILIAR;
++      * [S9, R6-21] the phrase floor for that resolution: a phrase under 3 words or 12 characters
++        (registry.CREED_PHRASE_MIN_WORDS / CREED_PHRASE_MIN_CHARS, measured on the punctuation-free key)
++        resolves to no registered text;
++      * [S9, R6-22] a CATECHETICAL row (BSR-EO-01, BSR-EO-02, BSR-EO-04) is never a registered creed
++        text, whatever its locator says;
+       * [S8, R6-15] a phrase standing in SEVERAL registered texts resolves to the HIGHEST tier among
+         them, never to the text with the longest match: "begotten, not made" in EO-01 resolves
+         CONCILIAR (EO-07), though it also stands in EO-09 (CONFESSIONAL);
+@@ -265,7 +289,7 @@
+     short of "and in the Holy Spirit", is refused. The clause must be cut so the Spirit's name is
+     inside the quoted fifteen words. Report every candidate the guard refuses.
+     [S8] In EO-01, that Spirit-named cut ("in the Holy Spirit, the Lord, the Giver of Life") is in
+-    EO-09's wording, not EO-07's or EO-14's -- its tier depends on blocker (e).
++    EO-09's wording, not EO-07's or EO-14's. [S9, R6-19] It resolves CONFESSIONAL via EO-09 §2.
+   - [S8, R6-14] the seven Spirit families carry their ratified agency class (blocker (a)); H27 Savior
+     is ATTRIBUTE, so "saved ... by the renewing of the Holy Ghost" does not satisfy it.
+   - [S7, R6-8] Q-274 (Eternal power and might, RNR-H35) is ATTRIBUTE. An agency phrase never
+@@ -304,8 +328,9 @@
+ 
+ Q-290 (Unbegotten) is PUBLIC-CERTIFIED and flagged REVIEW_AT_EO_PACKET. Both its ratified citations
+ are Hopko -- BSR-EO-01 and BSR-EO-02 -- which R6-5 makes ONE observation. [S8] Both citations are
+-still refused by the current measurements: under gate6-v1.5 TP-059 (EO-02) and TP-060 (EO-01) are
+-REJECT / BELOW_FLOOR, as they were under v1.3 and v1.4. Its card disclosure is now,
++still refused by the current measurements: under gate6-v1.6 [S9] TP-059 (EO-02) and TP-060 (EO-01) are
++REJECT / BELOW_FLOOR, as they were under v1.3, v1.4 and v1.5. [S9, R6-21] The phrase-floor ruling does
++not decide Q-290's fallback; that stays with this packet review. Its card disclosure is now,
+ exactly: "single source: Hopko, OCA Department of Religious Education; not synodally adopted."
+ 
+ At the EO packet review, LIST ANY INDEPENDENT WITNESS FOR UNBEGOTTEN found in Tier A or Tier B, or

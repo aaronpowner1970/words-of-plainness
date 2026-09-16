@@ -110,6 +110,8 @@ FORMULA_FLOOR_CAP = "WORD_ONLY"
 # The harness reads a row's ladder tier from the registry FIRST (the workbook's `eo_ladder_tier` column once it exists,
 # the author ruling's override until then — registry.registry_overrides); this is the fallback for the rows no ruling
 # names. packets.ladder_tier is the single reader. A branch absent here runs flat, and every row is due.
+# RATIFIED R6-23 (2026-09-16): the EO consultation ladder stays HERE, in config, so a branch run can change it without a
+# code change (session 7's choice, confirmed; no behaviour changed).
 EO_CONSULTATION_LADDER = {
     "BSR-EO-06": "A", "BSR-EO-12": "A", "BSR-EO-07": "A", "BSR-EO-08": "A", "BSR-EO-09": "A",
     "BSR-EO-14": "B", "BSR-EO-02": "B", "BSR-EO-04": "B", "BSR-EO-10": "B", "BSR-EO-05": "B", "BSR-EO-01": "B",

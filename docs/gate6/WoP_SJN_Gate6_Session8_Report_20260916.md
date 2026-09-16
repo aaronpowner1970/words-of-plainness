@@ -332,9 +332,9 @@ session 7's narrowing, and R6-16 ratifies it. The code (`registry.exposition_tie
 Later measurement prompts will find it in both places.
 
 **Pending: session 7 choices NOT yet ratified**, left exactly as they are:
-1. the **3-word / 12-character phrase floor** (`CREED_PHRASE_MIN_WORDS` / `CREED_PHRASE_MIN_CHARS`)
-2. **"a CATECHETICAL row is never a registered creed text"** (`Registry.registered_creed_texts`)
-3. the **EO ladder** in `config.EO_CONSULTATION_LADDER`
+1. the **3-word / 12-character phrase floor** (`CREED_PHRASE_MIN_WORDS` / `CREED_PHRASE_MIN_CHARS`) — **RATIFIED R6-21** (16 Sep; recorded session 9)
+2. **"a CATECHETICAL row is never a registered creed text"** (`Registry.registered_creed_texts`) — **RATIFIED R6-22** (16 Sep; recorded session 9)
+3. the **EO ladder** in `config.EO_CONSULTATION_LADDER` — **RATIFIED R6-23** (16 Sep; recorded session 9)
 
 ---
 

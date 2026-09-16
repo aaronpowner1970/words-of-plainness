@@ -71,7 +71,8 @@ def test_v15_base_variant_is_v13_plus_the_creed_lines_and_neither_spirit_line():
 
 
 def test_versions_stay_linear():
-    assert list(prompts.VERIFIER_SYSTEMS) == ["gate6-v1.2", "gate6-v1.3", "gate6-v1.4", "gate6-v1.5"]
+    # session 9 (R6-18) appends gate6-v1.6; test_session9_rulings pins the full list
+    assert list(prompts.VERIFIER_SYSTEMS)[:4] == ["gate6-v1.2", "gate6-v1.3", "gate6-v1.4", "gate6-v1.5"]
 
 
 def test_a_son_family_prompt_carries_neither_spirit_line(preds, v15):
