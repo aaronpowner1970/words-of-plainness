@@ -407,6 +407,52 @@
         return { direct: 'Direct', concept: 'Concept', paraphrase: 'Paraphrase', xref: 'Cross-ref' }[type] || type || '';
     }
 
+    /* ── A3 · Correction channel ──────────────────────────────────
+       An apparatus entry makes a claim about how a tradition reads a text, and
+       the people best placed to catch a misreading are the ones inside that
+       tradition. So every entry carries the way to say so, prefilled with what
+       the ministry would otherwise have to ask for: which article, which span,
+       and which page it was read on.
+
+       ONE config value governs the route (site.json correctionUrl). While it is
+       empty the link does not render at all — a channel that cannot receive a
+       message is worse than none, because it looks like an invitation.
+       Only the span's OWN identifiers travel in the URL; nothing about the
+       reader does. The neutral state carries no link: there is no claim there
+       to correct. */
+    function correctionHtml(spanId, spanText) {
+        var base = (CFG.correctionUrl || '').trim();
+        if (!base) { return ''; }
+
+        var code = CFG.code || '';
+        var pageUrl = '';
+        try { pageUrl = window.location.origin + window.location.pathname; } catch (_) {}
+
+        var quoted = (spanText || '').replace(/\s+/g, ' ').trim();
+        if (quoted.length > 240) { quoted = quoted.slice(0, 237) + '…'; }
+
+        var subject = code + ' ' + spanId + ' — possible misrepresentation';
+        var message = 'Article ' + code + ', span ' + spanId + '\n' +
+            pageUrl + '\n\n' +
+            (quoted ? 'The line: “' + quoted + '”\n\n' : '') +
+            'What it misrepresents, and the tradition it concerns:\n';
+
+        // The fragment has to stay last for the browser to act on it, so the
+        // query is spliced in ahead of whatever hash the config value carries.
+        var hash = '', q = base;
+        var h = base.indexOf('#');
+        if (h >= 0) { hash = base.slice(h); q = base.slice(0, h); }
+        var sep = q.indexOf('?') >= 0 ? '&' : '?';
+        var href = q + sep +
+            'submission_type=suggestion' +
+            '&subject=' + encodeURIComponent(subject) +
+            '&message=' + encodeURIComponent(message) + hash;
+
+        return '<p class="aoid-correction">' +
+            '<a class="aoid-correction-link" href="' + esc(href) + '">' +
+            'Does this misrepresent your tradition? Tell us</a></p>';
+    }
+
     function anchorList(list, isRestoration, emptyText) {
         if (!list || !list.length) {
             return '<p class="ap-anchor-pane-empty">' + esc(emptyText) + '</p>';
@@ -496,6 +542,7 @@
         if (!hasDef && !hasAnchors && !hasComment && !crossref.length) {
             body += '<p class="ap-empty-note">Commentary for this span is not yet available.</p>';
         }
+        body += correctionHtml(spanId, d.text || sentText(sentIdx));
         return headerHtml(badges) + '<div class="ap-body">' + body + '</div>';
     }
 

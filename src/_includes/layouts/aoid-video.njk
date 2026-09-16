@@ -57,7 +57,14 @@
                 <p class="creation-ended-line">This film is a form of worship</p>
                 <p class="creation-ended-sub">No endorsements or polemics implied</p>
                 <p class="aoid-ended-label">To open the discussion</p>
+                <!-- A2 · The prediction made on the entry card is cashed in here
+                     first, before the article's own reflection question. -->
+                <p class="aoid-ended-compare">How did the article compare with what you expected?</p>
                 <p class="aoid-ended-question" id="aoidEndedQuestion"></p>
+                <!-- A2 · A question raised has somewhere to go: the same journal
+                     link the reading column uses in place of its textarea. -->
+                <p class="aoid-ended-ask">What question does this raise for you?</p>
+                <a class="aoid-rjw-link aoid-ended-journal" href="/articles/#{{ video.slug }}">Write your reflection in your Discipleship Journal &rarr;</a>
                 <div class="aoid-ended-actions">
                     <button class="creation-replay" id="aoidReplay" type="button">&#8635; Watch again</button>
                     <a class="aoid-ended-back" href="/articles/#{{ video.slug }}">Back to the Articles</a>
@@ -109,6 +116,11 @@
         <h2 id="aoidEntryTitle">This film is a form of worship.</h2>
         <p>It is meant to praise God and share faith in His wonders, using the words of the scriptures in plainness and gratitude. We pray that you receive it in the Spirit it was intended.</p>
         <p class="creation-entry-nop">No endorsements or polemics implied &mdash; of creeds, theologies, philosophies, traditions, or dogmas.</p>
+        <!-- A1 · Propose before watching. A prediction held in mind before the
+             reading gives the film something to land against. It is deliberately
+             not a field: nothing is collected, nothing is graded. The reader
+             answers in their own head, or aloud to the room. -->
+        <p class="aoid-entry-propose">Before you enter: in a sentence of your own, what would you expect a declaration titled “{{ video.title }}” to affirm? Hold your answer; the film will give you something to compare it with.</p>
         <button id="aoidEnterBtn" type="button">Enter</button>
     </div>
 </div>
@@ -125,6 +137,9 @@ window.WOP_AOID_VIDEO = {
     timing: {{ (aoid_video_timing[video.code] or {}) | dump | safe }},
     apparatus: {{ (apparatusData[video.code] or {}) | dump | safe }},
     books: {{ (scriptures.books or {}) | dump | safe }},
+    /* A3 · Correction channel. ONE config value governs the route
+       (src/_data/site.json correctionUrl); empty hides the link entirely. */
+    correctionUrl: {{ (site.correctionUrl or "") | dump | safe }},
     el: {
         reading: "aoidReading", article: "aoidArticle", dock: "aoidDock",
         stage: ".creation-stage-wrap", video: "aoidVideo",

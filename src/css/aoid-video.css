@@ -279,6 +279,117 @@
     .aoid-ended-question { font-size: 1rem; }
 }
 
+/* ── A2 · Compare, then ask ───────────────────────────────────
+   The overlay now carries four things the room reads in order: compare with
+   what you expected, the article's own question, what question it raises, and
+   somewhere to write that question down. Everything is sized off the FILM, not
+   the viewport, because that is the box this overlay has to live inside. */
+.aoid-ended-compare {
+    max-width: 38rem;
+    margin: 0.15rem auto 0;
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: clamp(0.9rem, 1.9vw, 1.12rem);
+    line-height: 1.45;
+    color: var(--gold-light, #D4A84A);
+}
+.aoid-ended-ask {
+    max-width: 38rem;
+    margin: 0.7rem auto 0;
+    font-family: var(--font-serif, Georgia, serif);
+    font-size: clamp(0.88rem, 1.8vw, 1.05rem);
+    line-height: 1.45;
+    color: var(--cream, #E8DCC4);
+}
+.aoid-ended-journal { margin-top: 0.25rem; }
+
+/* The overlay is clipped by .creation-player's overflow:hidden, so on a small
+   film the type comes down rather than the content coming out. Keyed to the
+   film's own width through a container query — the same rules then hold at
+   1024px, at 390px, and inside element fullscreen, where a viewport media
+   query would read the wrong box. overflow-y is the backstop for an unusually
+   long reflection question (and for engines without container queries):
+   nothing is ever unreachable. */
+.aoid-reading .creation-player {
+    container-type: inline-size;
+    container-name: aoidfilm;
+}
+.aoid-ended { overflow-y: auto; overscroll-behavior: contain; }
+
+/* Three bands, keyed to the FILM's width and mutually exclusive, because the
+   film is 16:9 — its width fixes the height of the box this overlay has to fit
+   inside. Sizes are cqw (a share of that width) so each band scales smoothly
+   rather than stepping. Measured at 1440x900, 1280x630, 1024x768 and 390x844;
+   overflow-y above is the backstop for an unusually long reflection question. */
+
+/* Comfortable: the film is 760px or wider. */
+@container aoidfilm (min-width: 760px) {
+    .aoid-ended .creation-ended-line { font-size: clamp(1rem, 2.4cqw, 1.45rem); }
+    .aoid-ended .creation-ended-sub  { font-size: clamp(0.78rem, 1.5cqw, 0.95rem); }
+    .aoid-ended-compare  { font-size: clamp(0.84rem, 1.7cqw, 1.05rem); }
+    .aoid-ended-question { font-size: clamp(0.92rem, 2.5cqw, 1.5rem); line-height: 1.32; }
+    .aoid-ended-ask      { font-size: clamp(0.8rem, 1.6cqw, 1rem); }
+}
+
+/* Medium: the 1280-wide reference screen (film 583px), tablets, 1024px. The
+   box is only ~330px tall here, so the floors come right down. */
+@container aoidfilm (min-width: 421px) and (max-width: 759.98px) {
+    .aoid-ended { gap: 0.14rem; padding: 0.6rem; }
+    .aoid-ended .creation-ended-line { font-size: clamp(0.72rem, 2.6cqw, 1.05rem); }
+    .aoid-ended .creation-ended-sub  { font-size: clamp(0.58rem, 2cqw, 0.8rem); }
+    .aoid-ended-label { margin-top: 0.3rem; font-size: 0.5rem; letter-spacing: 0.1em; }
+    .aoid-ended-compare  { margin-top: 0.1rem; font-size: clamp(0.62rem, 2.15cqw, 0.88rem); line-height: 1.3; }
+    .aoid-ended-question { margin-top: 0.1rem; font-size: clamp(0.68rem, 2.4cqw, 1rem); line-height: 1.28; }
+    .aoid-ended-ask      { margin-top: 0.22rem; font-size: clamp(0.6rem, 2.1cqw, 0.85rem); line-height: 1.3; }
+    .aoid-ended-journal  { margin-top: 0.06rem; font-size: clamp(0.56rem, 1.9cqw, 0.75rem); }
+    .aoid-ended-actions  { gap: 0.35rem; margin-top: 0.4rem; }
+    .aoid-ended-actions .creation-replay { padding: 0.26rem 0.62rem; font-size: 0.66rem; }
+    .aoid-ended-back { font-size: 0.64rem; }
+}
+
+/* Small: a phone-width film, ~200px tall. The label goes — "To open the
+   discussion" only announces what is already visibly a question — and
+   everything else stays, smaller. Self-contained: it inherits nothing from
+   the band above it. */
+@container aoidfilm (max-width: 420px) {
+    .aoid-ended { gap: 0.08rem; padding: 0.35rem; }
+    .aoid-ended .creation-ended-line { font-size: clamp(0.6rem, 3.1cqw, 0.72rem); }
+    .aoid-ended .creation-ended-sub  { font-size: clamp(0.5rem, 2.5cqw, 0.58rem); }
+    .aoid-ended-label { display: none; }
+    .aoid-ended-compare  { margin-top: 0.05rem; font-size: clamp(0.52rem, 2.6cqw, 0.6rem); line-height: 1.26; }
+    .aoid-ended-question { margin-top: 0.05rem; font-size: clamp(0.58rem, 2.95cqw, 0.68rem); line-height: 1.24; }
+    .aoid-ended-ask      { margin-top: 0.14rem; font-size: clamp(0.52rem, 2.6cqw, 0.6rem); line-height: 1.26; }
+    .aoid-ended-journal  { margin-top: 0.04rem; font-size: clamp(0.48rem, 2.4cqw, 0.56rem); }
+    .aoid-ended-actions  { gap: 0.28rem; margin-top: 0.22rem; }
+    .aoid-ended-actions .creation-replay { padding: 0.18rem 0.5rem; font-size: 0.54rem; }
+    .aoid-ended-back { font-size: 0.52rem; }
+}
+
+/* ── A3 · Correction channel ──────────────────────────────────
+   Sits under the apparatus entry it belongs to, at the quietest weight on the
+   card. It is an invitation, not a control: a reader who never doubts the
+   entry should be able to read straight past it. */
+.aoid-correction {
+    margin: 0.9rem 0 0;
+    padding-top: 0.7rem;
+    border-top: 1px solid rgba(196, 148, 58, 0.14);
+}
+.aoid-correction-link {
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.66;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(196, 148, 58, 0.4);
+}
+.aoid-correction-link:hover,
+.aoid-correction-link:focus-visible {
+    opacity: 1;
+    color: var(--gold-light, #D4A84A);
+}
+
 /* ── Entry notice: the article's banner stands in for a thumbnail ── */
 .aoid-entry-banner {
     margin: 0 auto 18px;
@@ -299,6 +410,32 @@
     text-transform: uppercase;
     color: var(--gold-light, #D4A84A) !important;
     margin-bottom: 10px !important;
+}
+
+/* ── A1 · Propose before watching ─────────────────────────────
+   A quiet prompt, deliberately not a form: no box, no field, no button of its
+   own, nothing collected and nothing graded. Left-aligned inside the centred
+   card and set against a single rule, so it reads as an aside the host can
+   also ask aloud rather than as something the page wants filled in.
+   Two classes, so it outranks .creation-entry p without !important. */
+.aoid-entry .aoid-entry-propose {
+    max-width: 33rem;
+    margin: 0 auto 24px;
+    padding-left: 0.95rem;
+    border-left: 2px solid rgba(196, 148, 58, 0.4);
+    text-align: left;
+    font-family: var(--font-serif, Georgia, serif);
+    font-style: italic;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--cream-dark, #D4C8B0);
+}
+@media (max-width: 480px) {
+    .aoid-entry .aoid-entry-propose {
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+        line-height: 1.55;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -20,6 +20,7 @@ const ContactForm = {
         if (!this.form) return;
 
         this.prefillFromAuth();
+        this.prefillFromQuery();
         this.setupSubmit();
         this.setupSendAnother();
         this.setupInputClear();
@@ -39,6 +40,43 @@ const ContactForm = {
         if (emailInput && !emailInput.value && window.API.user.email) {
             emailInput.value = window.API.user.email;
         }
+    },
+
+    /**
+     * Context prefill from the URL.
+     *
+     * The correction links on the AoID reading pages (/articles/video-NN/) carry
+     * the article code, span id and page URL, so a reader reporting a
+     * misrepresentation does not have to describe where they saw it. Any page
+     * can hand this form the same three params.
+     *
+     * Deliberately narrow: ONLY submission_type, subject and message. Name and
+     * email are never taken from the URL — a crafted link must not be able to
+     * put someone else's identity on a message, and those two fields stay the
+     * sender's own to type. Nothing is submitted automatically either; the
+     * reader still reads what is there and presses Send.
+     * Anything already filled (by auth, or by the reader) wins over the URL.
+     */
+    prefillFromQuery() {
+        let params;
+        try { params = new URLSearchParams(window.location.search); } catch (e) { return; }
+        if (![...params.keys()].length) return;
+
+        const MAX = { subject: 300, message: 4000, submission_type: 40 };
+        const setIfEmpty = (id, value) => {
+            const el = document.getElementById(id);
+            if (el && !el.value && value) { el.value = value; }
+        };
+
+        const type = (params.get('submission_type') || '').slice(0, MAX.submission_type);
+        if (type) {
+            const sel = document.getElementById('contact-type');
+            // Only a value the select actually offers; an unknown topic is ignored.
+            if (sel && [...sel.options].some(o => o.value === type)) { sel.value = type; }
+        }
+
+        setIfEmpty('contact-subject', (params.get('subject') || '').slice(0, MAX.subject));
+        setIfEmpty('contact-message', (params.get('message') || '').slice(0, MAX.message));
     },
 
     setupSubmit() {
