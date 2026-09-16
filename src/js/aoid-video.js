@@ -227,6 +227,7 @@
                     if (deepTime != null) {
                         try { player.cueVideoById({ videoId: CFG.youtube, startSeconds: deepTime }); } catch (_) {}
                     }
+                    killCaptions();
                     startPoll();
                     emit('wop:player', { player: player });
                 },
@@ -235,9 +236,20 @@
         });
     };
 
+    /* YouTube captions off. These films carry their words burned into the
+       picture, and YouTube serves an automatic caption track on top of them
+       that prints the same words a second time, out of step. One path for the
+       public reading pages and the reading chat pages. The module reloads
+       itself on some transitions, so it is unloaded again on every PLAYING. */
+    function killCaptions() {
+        if (!player) { return; }
+        try { player.unloadModule('captions'); } catch (_) {}
+        try { player.unloadModule('cc'); } catch (_) {}
+    }
+
     function onState(e) {
         if (e.data === YT.PlayerState.ENDED) { showEnded(); }
-        else if (e.data === YT.PlayerState.PLAYING) { hideEnded(); }
+        else if (e.data === YT.PlayerState.PLAYING) { hideEnded(); killCaptions(); }
         emit('wop:state', { state: e.data });
     }
 

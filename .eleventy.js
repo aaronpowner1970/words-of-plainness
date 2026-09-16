@@ -466,6 +466,22 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addFilter("findWhere", (list, key, value) =>
         (Array.isArray(list) ? list : []).find(item => item && item[key] === value) || null);
 
+    // Splits a /creation/ transcript span's cues around its music markers. A
+    // cue whose whole text is "[ ♫ music ♫ ]" is timing, not narration: it is
+    // rendered as a quiet note OUTSIDE the citation span when it leads or
+    // trails the words, so the span's underline, highlight and tap cover only
+    // what is spoken. A marker between words (none today) stays in `words`
+    // flagged `music` and is rendered as the same inert note.
+    const MUSIC_MARKER = /^\[\s*[♪♫]+\s*music\s*[♪♫]+\s*\]$/i;
+    eleventyConfig.addFilter("ctCueRuns", cues => {
+        const list = (Array.isArray(cues) ? cues : [])
+            .map(c => Object.assign({}, c, { music: MUSIC_MARKER.test(String(c.t || "").trim()) }));
+        let a = 0, b = list.length;
+        while (a < b && list[a].music) a++;
+        while (b > a && list[b - 1].music) b--;
+        return { lead: list.slice(0, a), words: list.slice(a, b), tail: list.slice(b) };
+    });
+
     // Running time as m:ss, for the /chat/ menu cards. Durations come from
     // src/_data/chat_videos.json, measured once with the IFrame API's
     // getDuration() rather than guessed.

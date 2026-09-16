@@ -214,6 +214,20 @@ html, body { overflow-x: clip; overflow-y: visible; }
     outline-offset: 1px;
 }
 
+/* Music marker: a transcript cue that is only "[ ♫ music ♫ ]". Timing, not
+   narration, so it is a small dimmed note — never underlined, never lit, never
+   a tap target. inline-block keeps any ancestor underline off it; it is not a
+   .ct-cue, so creation.js never lights it or streams on it. */
+.ct-music {
+    display: inline-block;
+    font-size: 0.78em;
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.45;
+    text-decoration: none;
+    cursor: default;
+    user-select: none;
+}
+
 /* active-cue highlight (karaoke follow) */
 .ct-cue {
     color: var(--cream-dark, #D4C8B0);

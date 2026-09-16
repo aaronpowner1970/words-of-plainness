@@ -411,7 +411,10 @@
 
     spans.forEach(function (sp) {
         if (!sp.hasAttribute('data-has-cite')) return;   // inert bridge / pending stub
-        sp.addEventListener('click', function () { pinSpan(sp); });
+        sp.addEventListener('click', function (e) {
+            if (e.target.closest && e.target.closest('.ct-music')) return;   // the music note is inert
+            pinSpan(sp);
+        });
         sp.setAttribute('tabindex', '0');
         sp.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pinSpan(sp); }

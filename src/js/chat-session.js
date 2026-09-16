@@ -317,8 +317,10 @@
     /* ── YouTube captions ────────────────────────────────────────
        These films carry their words burned into the picture. YouTube's own
        caption layer prints them a second time, a few frames out of step, over
-       the top — which on a projector reads as a fault. Off here. The public
-       pages are untouched and keep whatever YouTube serves them. */
+       the top — which on a projector reads as a fault. Off here. The reading
+       pages (js/aoid-video.js) now do this themselves; it stays here because
+       /chat/video-03/ runs on js/creation.js, which keeps its uploaded track on
+       the public /creation/ page. Unloading twice is harmless. */
     function killCaptions() {
         if (!player) { return; }
         try { player.unloadModule('captions'); } catch (_) {}

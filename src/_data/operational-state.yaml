@@ -69,11 +69,20 @@ workstreams:
         Reached by URL only — noindex, canonical to the public page, out of
         pagefind and the sitemap; public pages byte-identical.
       creation_music_markers: >
-        OPEN, author to decide. "[ ♫ music ♫ ]" is transcript text in
-        creation_transcript.json (3 cues: s9, s11, s14) and is prefixed to the
-        same three citation quotes in creation_citations.json, so the dock
-        quotes it as if it were scripture. Same data on /creation/ and
+        RESOLVED 2026-09-16 (author decision). The "[ ♫ music ♫ ]" prefix is
+        removed from the s9, s11 and s14 citation quotes in
+        creation_citations.json, so the dock quotes only scripture words. The
+        three marker cues stay in creation_transcript.json (their timing is
+        part of the sync) and render as a small dimmed, inert ♫ outside the
+        citation span (ctCueRuns filter in .eleventy.js + layouts/creation.njk),
+        never lit, underlined or tappable. One change serves /creation/ and
         /chat/video-03/.
+      reading_page_captions: >
+        RESOLVED 2026-09-16 (author decision). YouTube captions are unloaded on
+        player ready and on every PLAYING in js/aoid-video.js, so the public
+        reading pages and the reading chat pages share one path; the ASR track
+        no longer doubles the burned-in text. /creation/ keeps its uploaded
+        caption track.
     frontier:
       group_display_vr: >
         ACTIVE FIELD-TEST. The 2D /articles/ page is displayed inside a
@@ -82,7 +91,7 @@ workstreams:
         above are the first dedicated group-display surface to come out of it;
         they are deliberately separate from the public pages rather than a
         mode toggled on them.
-    next_action: "Author: decide the [ ♫ music ♫ ] content cleanup in the /creation/ transcript and citations (3 spans), and whether to turn YouTube captions off on the public reading pages (A01 serves an automatic ASR track that doubles its burned-in captions; /creation/ serves an uploaded track and has no burned-in text)."
+    next_action: "Chat presentation layout rebuild for /chat/video-NN/ (slim bar, full-width stage row, container-query wing fallback) so the wings hold at any screen size and zoom. The music-marker and reading-page caption decisions are resolved."
 
   - id: creation-film
     name: "'His Work and Glory' creation film — /creation/"
