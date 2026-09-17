@@ -818,9 +818,14 @@
     "R6-37 apparatus guard"
    ],
    "report_required": "every registry row whose document is a catechism, across all branches, with its tier and whether a confessional subscription or adopting act on record names it as a doctrinal standard; no other row is moved",
-   "as_implemented": "pending: session 13 phase 3",
-   "test": "pending: session 13 phase 3",
-   "supersede_with": "Branch Source Registry, BSR-LU-03: authority_tier CONFESSIONAL"
+   "as_implemented": "rulings.registry_overrides: the R6-44 override block above re-types BSR-LU-03 authority_tier in memory; the hook now COMBINES several rulings on one row (R6-37 draft_recommendation + R6-44 authority_tier), each field naming its ruling (field_rulings), and fails loudly when two rulings set one field to different values. The R6-37 translation_disclosure and apparatus guard are unchanged. Catechism-row enumeration: recovery-runs/session13/catechism-rows.md",
+   "test": "test_session13_rulings: test_lu03_is_confessional_with_the_workbook_value_recorded_and_keeps_disclosure_and_guard, test_several_rulings_on_one_row_combine_and_a_conflict_fails_loudly",
+   "supersede_with": "Branch Source Registry, BSR-LU-03: authority_tier CONFESSIONAL",
+   "registry_id": "BSR-LU-03",
+   "overrides": {
+    "authority_tier": "CONFESSIONAL"
+   },
+   "overrides_why": "R6-44 / Codex B1(b): LCMS Constitution Art. II, the confessional subscription, names the Small Catechism of Luther among the symbolical books it accepts without reservation (on record: R6-6 rows BSR-LU-03 adoption_act, LCMS Handbook 2023 Update Edition, one publisher); the CPH translation carries the status under B2(d). The workbook value CATECHETICAL is recorded beside the ruled value by Registry (_author_ruling_override.applied)"
   },
   "R6-45_an04_historical_documents_scope": {
    "ruled": "2026-09-17",

@@ -28,6 +28,23 @@ def phase2(R):
         "Definition (10). Recorded per entry in registered-sections.json (section_spans_chunks)")
 
 
+def phase3(R):
+    r = R["R6-44_confessed_catechisms"]
+    r["registry_id"] = "BSR-LU-03"
+    r["overrides"] = {"authority_tier": "CONFESSIONAL"}
+    r["overrides_why"] = ("R6-44 / Codex B1(b): LCMS Constitution Art. II, the confessional subscription, names the Small Catechism of Luther "
+                          "among the symbolical books it accepts without reservation (on record: R6-6 rows BSR-LU-03 adoption_act, LCMS "
+                          "Handbook 2023 Update Edition, one publisher); the CPH translation carries the status under B2(d). The workbook "
+                          "value CATECHETICAL is recorded beside the ruled value by Registry (_author_ruling_override.applied)")
+    r["as_implemented"] = ("rulings.registry_overrides: the R6-44 override block above re-types BSR-LU-03 authority_tier in memory; the hook now "
+                           "COMBINES several rulings on one row (R6-37 draft_recommendation + R6-44 authority_tier), each field naming its "
+                           "ruling (field_rulings), and fails loudly when two rulings set one field to different values. The R6-37 "
+                           "translation_disclosure and apparatus guard are unchanged. Catechism-row enumeration: "
+                           "recovery-runs/session13/catechism-rows.md")
+    r["test"] = ("test_session13_rulings: test_lu03_is_confessional_with_the_workbook_value_recorded_and_keeps_disclosure_and_guard, "
+                 "test_several_rulings_on_one_row_combine_and_a_conflict_fails_loudly")
+
+
 def main():
     phase = sys.argv[1]
     raw = open(PATH, encoding="utf-8").read()

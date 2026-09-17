@@ -128,7 +128,12 @@ OVERRIDABLE = ("standard_title", "authority_tier", "speaks_for", "reception_scop
 
 
 def registry_overrides(r=None):
-    """{registry_id: {"ruling": key, "fields": {...}}} for rows the author re-typed before the workbook records it."""
+    """{registry_id: {"ruling": "key[; key]", "rulings": [key, ...], "fields": {...}, "field_rulings": {field: key}}} for rows the
+    author re-typed before the workbook records it.
+
+    Session 13 (R6-44): several rulings on ONE row COMBINE. Before, the dict was keyed by registry_id and the last ruling read
+    silently replaced every earlier one (BSR-LU-03 carries R6-37's draft_recommendation and R6-44's authority_tier). Each field
+    keeps the ruling that set it; two rulings that set the same field to different values fail loudly — never last-one-wins."""
     r = r or load()
     out = {}
     for key, ru in (r.get("rulings") or {}).items():
@@ -138,7 +143,15 @@ def registry_overrides(r=None):
         bad = [f for f in fields if f not in OVERRIDABLE]
         if bad:
             raise SystemExit(f"author ruling {key} overrides fields outside {OVERRIDABLE}: {bad}")
-        out[rid] = {"ruling": key, "fields": dict(fields)}
+        ov = out.setdefault(rid, {"rulings": [], "fields": {}, "field_rulings": {}})
+        for f, v in fields.items():
+            if f in ov["fields"] and ov["fields"][f] != v:
+                raise SystemExit(f"author rulings {ov['field_rulings'][f]} and {key} override {rid} '{f}' with different values: "
+                                 f"{ov['fields'][f]!r} vs {v!r}")
+            ov["fields"][f] = v
+            ov["field_rulings"][f] = ov["field_rulings"].get(f) or key
+        ov["rulings"].append(key)
+        ov["ruling"] = "; ".join(ov["rulings"])
     return out
 
 

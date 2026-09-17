@@ -110,3 +110,41 @@ def test_every_listed_section_is_stored_and_the_list_is_the_only_registration_pa
 def test_sections_spanning_several_chunks_are_reported():
     spans = {e["section_spans_chunks"] for e in rulings.registered_sections() if e.get("section_spans_chunks")}
     assert "Book of Confessions 1.1-1.3 (3 chunks)" in spans and "Constitution 1, paragraphs 1-4 (4 chunks)" in spans
+
+
+# ---------------------------------------------------------------- phase 3: R6-44, confessed catechisms
+def test_lu03_is_confessional_with_the_workbook_value_recorded_and_keeps_disclosure_and_guard(reg):
+    from sjn_recovery.registry import SECOND_TIER
+    row = reg.by_id["BSR-LU-03"]
+    assert row["authority_tier"] == "CONFESSIONAL"
+    ov = row["_author_ruling_override"]
+    assert ov["applied"]["authority_tier"] == {"workbook": "CATECHETICAL", "ruled": "CONFESSIONAL"}
+    assert ov["field_rulings"] == {"draft_recommendation": "R6-37_lu03_adoption", "authority_tier": "R6-44_confessed_catechisms"}
+    assert "(c) 2019" in row["draft_recommendation"]                               # R6-37's override survives R6-44's
+    assert reg.adoption("BSR-LU-03")["adoption_status"] == "ADOPTED"
+    d = reg.adoption_disclosure("BSR-LU-03")["text"]
+    assert d == "approved by The Lutheran Church-Missouri Synod (one church); English translation: Concordia Publishing House (c) 2019"
+    c = store.load_chunks("BSR-LU-03")[0]
+    assert reg.apparatus_guard("BSR-LU-03", c) is None and reg.effective_tier("BSR-LU-03", c) == "CONFESSIONAL"
+    probe = dict(c, text="The Central Thought " + c["text"])
+    assert reg.apparatus_guard("BSR-LU-03", probe) and bare_tier(reg.effective_tier("BSR-LU-03", probe)) == SECOND_TIER
+    # no other row moved: every other override on authority_tier is an earlier ruling's
+    moved = {rid for rid, o in reg.registry_overrides.items() if "authority_tier" in o["applied"]}
+    assert {rid for rid in moved if reg.registry_overrides[rid]["field_rulings"]["authority_tier"] == "R6-44_confessed_catechisms"} == {"BSR-LU-03"}
+
+
+def test_several_rulings_on_one_row_combine_and_a_conflict_fails_loudly():
+    doc = {"rulings": {
+        "R6-A": {"registry_id": "BSR-X-01", "overrides": {"draft_recommendation": "INCLUDE"}},
+        "R6-B": {"registry_id": "BSR-X-01", "overrides": {"authority_tier": "CONFESSIONAL"}},
+        "R6-C": {"registry_id": "BSR-X-02", "overrides": {"scope_caveat": "c"}}}}
+    ov = rulings.registry_overrides(doc)
+    assert ov["BSR-X-01"]["fields"] == {"draft_recommendation": "INCLUDE", "authority_tier": "CONFESSIONAL"}   # neither replaces the other
+    assert ov["BSR-X-01"]["rulings"] == ["R6-A", "R6-B"] and ov["BSR-X-01"]["ruling"] == "R6-A; R6-B"
+    assert ov["BSR-X-01"]["field_rulings"] == {"draft_recommendation": "R6-A", "authority_tier": "R6-B"}
+    assert ov["BSR-X-02"]["fields"] == {"scope_caveat": "c"}
+    doc["rulings"]["R6-D"] = {"registry_id": "BSR-X-01", "overrides": {"authority_tier": "CATECHETICAL"}}
+    with pytest.raises(SystemExit):
+        rulings.registry_overrides(doc)
+    doc["rulings"]["R6-D"]["overrides"]["authority_tier"] = "CONFESSIONAL"                                     # agreeing rulings combine
+    assert rulings.registry_overrides(doc)["BSR-X-01"]["field_rulings"]["authority_tier"] == "R6-B"

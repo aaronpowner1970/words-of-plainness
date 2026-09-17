@@ -166,9 +166,12 @@ class Registry:
                     continue
                 applied[field] = {"workbook": by[rid].get(field), "ruled": value}
                 by[rid][field] = value
+            # session 13 (R6-44): several rulings on one row combine; each field names the ruling that set it
             by[rid]["_author_ruling_override"] = {"ruling": ov["ruling"], "applied": applied, "already_in_workbook": agreed,
+                                                  "field_rulings": dict(ov["field_rulings"]),
                                                   "pending": "applied in memory; workbook not written"}
-            self.registry_overrides[rid] = {"ruling": ov["ruling"], "applied": applied, "already_in_workbook": agreed}
+            self.registry_overrides[rid] = {"ruling": ov["ruling"], "applied": applied, "already_in_workbook": agreed,
+                                            "field_rulings": dict(ov["field_rulings"])}
             if applied:
                 self.rulings_applied.append({"registry_id": rid, "ruling": ov["ruling"], "status": "RE-TYPED",
                                              "fields": sorted(applied)})

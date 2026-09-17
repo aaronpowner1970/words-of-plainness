@@ -18,7 +18,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 from sjn_recovery.registry import Registry, bare_tier, tier_rank, SECOND_TIER  # noqa: E402
 from sjn_recovery import rulings, sources, store  # noqa: E402
 
-ADOPTED_CATECHETICAL = ("BSR-RC-07", "BSR-AN-02", "BSR-AN-04", "BSR-AN-05", "BSR-LU-03")
+# session 13 (R6-44, Codex B1(b)): BSR-LU-03 moved to CONFESSIONAL; it keeps its adoption, disclosure and guard (tested in session 13)
+ADOPTED_CATECHETICAL = ("BSR-RC-07", "BSR-AN-02", "BSR-AN-04", "BSR-AN-05")
 NAMED_REACH = ("BSR-AN-02", "BSR-AN-04", "BSR-AN-05", "BSR-LU-03", "BSR-RP-02", "BSR-RP-03", "BSR-RP-05", "BSR-LU-01")
 
 
@@ -106,7 +107,7 @@ def test_ba03_uses_its_disclosure_wording_exactly(reg):
 def test_the_stored_lu03_chunk_is_luthers_text_and_is_not_guarded(reg):
     c = _lu03_chunk()
     assert reg.apparatus_guard("BSR-LU-03", c) is None
-    assert reg.exposition_tier("BSR-LU-03", None, c) == "CATECHETICAL"
+    assert reg.exposition_tier("BSR-LU-03", None, c) == "CONFESSIONAL"          # session 13: R6-44 (was CATECHETICAL)
 
 
 @pytest.mark.parametrize("extra", [
