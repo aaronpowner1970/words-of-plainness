@@ -1,10 +1,10 @@
 {
  "branch": "Mennonite / Anabaptist",
  "run_id": "live-1",
- "built_at": "2026-09-13T22:31:53Z",
+ "built_at": "2026-09-17T07:39:41Z",
  "app_master_version": "v2.25r4 GATE6 SCOPE RATIFIED",
  "rebuilt_from": {
-  "at": "2026-09-13T22:31:53Z",
+  "at": "2026-09-17T07:39:41Z",
   "from": "stored cell states (candidates, rubrics, coder proposals)",
   "model_calls": 0,
   "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -25,7 +25,7 @@
     ]
    }
   },
-  "note": "session 6 final (no model calls in the rebuild): R6-4 one-text-one-slot guard; R6-1 required_subject — 49 WRONG_SUBJECT rejections re-verified (plus 3 truncated replies), stored in the cells; R6-2 — refusal of Q-382 / Q-390 / Q-454 as floor rulings (sample leak rate 0.467 < 0.5, applied to nothing else); packet builder passes floor_claim to the allocator (defect fix); coder proposals for 42 card entries"
+  "note": "session 11 (2026-09-17), the ONE rebuild R6-16 held for (no model calls): adoption ratified — R6-35 BSR-AN-02, R6-36 BSR-AN-05, R6-37 BSR-LU-03 (translator disclosed; publisher-apparatus guard), R6-38 scope = verified reach (BSR-RP-03 added; BSR-RP-02 and BSR-LU-01 amended to ONE_CHURCH), R6-39 BSR-BA-03 ISSUED_UNADOPTED with its own wording, R6-40 BSR-RC-07 / BSR-AN-04 / BSR-RP-05; the first build since session 6, so the session 7-9 resolution rules (R6-5/R6-10 phrase-level creed resolution, R6-6/R6-9 adoption field, Task 6 ladder fields) are reflected here for the first time"
  },
  "partial": false,
  "cap_state": null,
@@ -91,13 +91,118 @@
   "same_text_rows": {
    "BSR-EO-14": "BSR-EO-07"
   },
-  "status": "AUTHOR RULED 2026-09-13; applied in memory; workbook not written (deltas pending ratification)",
+  "registry_overrides": {
+   "BSR-EO-01": {
+    "standard_title": "*The Orthodox Faith*, Vol. I (Hopko) — The Symbol of Faith",
+    "authority_tier": "CATECHETICAL",
+    "speaks_for": "OCA (catechetical series by one author, published by the OCA)",
+    "reception_scope": "JURISDICTIONAL",
+    "same_work_as": "BSR-EO-02",
+    "eo_ladder_tier": "B",
+    "creed_resolution": "PHRASE"
+   },
+   "BSR-LU-03": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT (Luther's Small Catechism text in the Concordia Publishing House translation (c) 2019, not the 2017 Explanation; adopted by the LCMS through Constitution Art. II, R6-37)"
+   },
+   "BSR-BA-03": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT as OFFICIAL_EXPOSITION; ISSUED_UNADOPTED (R6-39): a descriptive denominational statement, and American Baptist Churches USA does not adopt binding creeds"
+   },
+   "BSR-RC-07": {
+    "canonical_url": "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html"
+   }
+  },
+  "same_work_rows": {
+   "BSR-EO-01": "BSR-EO-02"
+  },
+  "independence_groups": {
+   "HOPKO-OF-VOL1": [
+    "BSR-EO-01",
+    "BSR-EO-02"
+   ]
+  },
+  "chunk_level_creed_rows": [
+   "BSR-EO-07",
+   "BSR-EO-14",
+   "BSR-RC-06",
+   "BSR-RC-08"
+  ],
+  "adoption_rows": {
+   "BSR-EO-01": "ISSUED_UNADOPTED",
+   "BSR-EO-02": "ISSUED_UNADOPTED",
+   "BSR-EO-04": "ADOPTED",
+   "BSR-RC-01": "ADOPTED",
+   "BSR-RP-02": "ADOPTED",
+   "BSR-LU-01": "ADOPTED",
+   "BSR-RC-07": "ADOPTED",
+   "BSR-AN-02": "ADOPTED",
+   "BSR-AN-04": "ADOPTED",
+   "BSR-AN-05": "ADOPTED",
+   "BSR-LU-03": "ADOPTED",
+   "BSR-RP-03": "ADOPTED",
+   "BSR-RP-05": "ADOPTED",
+   "BSR-BA-03": "ISSUED_UNADOPTED"
+  },
+  "adoption_guards": [
+   "BSR-LU-03"
+  ],
+  "adoption_scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+  "agency_tags_ratified": {
+   "RNR-H34": "ACTION",
+   "RNR-H35": "ATTRIBUTE",
+   "RNR-H06": "ATTRIBUTE",
+   "RNR-H21": "ACTION",
+   "RNR-H26": "ACTION",
+   "RNR-H27": "ATTRIBUTE",
+   "RNR-H38": "ATTRIBUTE"
+  },
+  "cell_flags": [
+   "Q-290"
+  ],
+  "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4), 2026-09-16 (R6-5..R6-23) and 2026-09-17 (R6-35..R6-40); applied in memory; workbook not written (deltas pending ratification)",
   "registry_rows_retired_in_memory": [
    {
     "registry_id": "BSR-EO-03",
     "ruling": "R6-3_retire_BSR-EO-03",
     "status": "RETIRED",
     "reason_code": "HOST_RETIRED"
+   },
+   {
+    "registry_id": "BSR-EO-01",
+    "ruling": "R6-5_bsr_eo_01_retype",
+    "status": "RE-TYPED",
+    "fields": [
+     "authority_tier",
+     "creed_resolution",
+     "eo_ladder_tier",
+     "reception_scope",
+     "same_work_as",
+     "speaks_for",
+     "standard_title"
+    ]
+   },
+   {
+    "registry_id": "BSR-LU-03",
+    "ruling": "R6-37_lu03_adoption",
+    "status": "RE-TYPED",
+    "fields": [
+     "draft_recommendation"
+    ]
+   },
+   {
+    "registry_id": "BSR-BA-03",
+    "ruling": "R6-39_ba03_issued_unadopted",
+    "status": "RE-TYPED",
+    "fields": [
+     "draft_recommendation"
+    ]
+   },
+   {
+    "registry_id": "BSR-RC-07",
+    "ruling": "R6-40_rc07_an04_rp05_adoption",
+    "status": "RE-TYPED",
+    "fields": [
+     "canonical_url"
+    ]
    }
   ],
   "required_subject_by_family": {
@@ -215,6 +320,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -305,6 +423,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -422,6 +553,7 @@
       "silence_rationale": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 24 speaks of Christ judging 'the living and the dead' (c2) and Article 18 speaks of 'life in the Spirit' (c8), but neither asserts that God intrinsically possesses life as a divine attribute of the Father. | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: Article 1 (c3) extensively describes God's attributes (glory, mercy, justice, love) but never uses 'living' or asserts God possesses life intrinsically; no other supplied chunk applies the term to God.",
      "BSR-MA-02": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT"
@@ -506,7 +638,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-016",
@@ -535,6 +669,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -621,6 +768,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -693,6 +853,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -787,6 +960,7 @@
       "silence_rationale": "pass 1 locator: Chunks use 'living God' of the church (Art. VIII) and 'faithful' of Christ as Shepherd (Art. IX), but no supplied passage predicates truthfulness, faithfulness, or ultimate reality directly of God the Father/one God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT/OK, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "pass 1 locator: Chunks use 'living God' of the church (Art. VIII) and 'faithful' of Christ as Shepherd (Art. IX), but no supplied passage predicates truthfulness, faithfulness, or ultimate reality directly of God the Father/one God."
@@ -830,7 +1004,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-024",
@@ -887,6 +1063,7 @@
       "silence_rationale": "pass 1 locator: Article I (c1) names 'Father, Son, and Holy Ghost' and c8 speaks of a 'habitation of God in the Spirit,' but neither passage asserts that God as such is Spirit or a spiritual being."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 3 (c1) and Article 1 (c8) speak extensively of the Holy Spirit as a divine person and of the Spirit of God as active power, but nowhere assert that God (the one God or the Father) is Himself a | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: The supplied chunks (Articles 2, 7, 8, 10, 12, 13, 14, 17, 19, 20, 23, 24) speak often of the Holy Spirit as the third person active in believers but never assert that God or the Father is himself a",
      "BSR-MA-02": "pass 1 locator: Article I (c1) names 'Father, Son, and Holy Ghost' and c8 speaks of a 'habitation of God in the Spirit,' but neither passage asserts that God as such is Spirit or a spiritual being."
@@ -971,7 +1148,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-064",
@@ -1000,6 +1179,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -1088,6 +1280,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1160,6 +1365,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1232,6 +1450,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1327,6 +1558,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
@@ -1380,7 +1612,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-080",
@@ -1409,6 +1643,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1491,6 +1738,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -1579,6 +1839,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1652,6 +1925,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1746,6 +2032,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
@@ -1799,7 +2086,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-088",
@@ -1828,6 +2117,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1912,6 +2214,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1994,6 +2309,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2103,6 +2431,7 @@
       "silence_rationale": "pass 1 locator: Article II mentions 'the wrath of God' and 'condemnation' (c2) and Article XVIII refers to 'judgment seat of Christ' (c18), but neither passage asserts God or the Father to be just/righteous as a divine attribute."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "pass 1 locator: Article II mentions 'the wrath of God' and 'condemnation' (c2) and Article XVIII refers to 'judgment seat of Christ' (c18), but neither passage asserts God or the Father to be just/righteous as a divine attribute."
@@ -2156,7 +2485,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-104",
@@ -2185,6 +2516,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2267,6 +2611,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2351,6 +2708,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2460,6 +2830,7 @@
       "silence_rationale": "pass 1 locator: Article IX (c9) calls Christ 'the faithful, great, chief Shepherd and Bishop of our souls' regarding His saving office, but this describes His redemptive ministry rather than asserting God's essential truthfulness or trustworthiness; no chunk affirms that predicate of God/the"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "pass 1 locator: Article IX (c9) calls Christ 'the faithful, great, chief Shepherd and Bishop of our souls' regarding His saving office, but this describes His redemptive ministry rather than asserting God's essential truthfulness or trustworthiness; no chunk affirms that predicate of God/the"
@@ -2513,7 +2884,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-120",
@@ -2542,6 +2915,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2624,6 +3010,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -2708,6 +3107,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2793,6 +3205,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2886,6 +3311,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, ACCEPT/OK",
      "BSR-MA-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
@@ -2941,7 +3367,9 @@
    "coder_skipped": {
     "Q-120-p1-BSR-MA-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'mennonite church usa and mennonite church canada' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-128",
@@ -2970,6 +3398,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -3052,6 +3493,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3134,6 +3588,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3232,6 +3699,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3305,6 +3785,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -3399,6 +3892,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/NOT_ASSERTION"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/NOT_ASSERTION"
@@ -3452,7 +3946,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-136",
@@ -3481,6 +3977,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3563,6 +4072,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3645,6 +4167,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3752,6 +4287,7 @@
       "silence_rationale": "pass 1 locator: Article II (c2) speaks of God's compassion, love, and mercy in providing redemption, but never uses forbearance/longsuffering/patience language of God; no chunk asserts divine patience."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, ACCEPT/OK",
      "BSR-MA-02": "pass 1 locator: Article II (c2) speaks of God's compassion, love, and mercy in providing redemption, but never uses forbearance/longsuffering/patience language of God; no chunk asserts divine patience."
@@ -3795,7 +4331,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-144",
@@ -3824,6 +4362,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3912,6 +4463,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -3984,6 +4548,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4056,6 +4633,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4150,6 +4740,7 @@
       "silence_rationale": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT"
@@ -4203,7 +4794,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-152",
@@ -4235,6 +4828,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4353,6 +4959,7 @@
       "silence_rationale": "pass 1 locator: Article I ascribes 'praise and honor forever and ever' to God (locator: Article I) but never uses 'blessed' of God; Article XVIII applies 'the blessed' only to the redeemed, not to God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: The nearest phrase, 'thanks be to God' (Article 7, Sin), is a doxological exclamation, not an assertion that God is blessed, and no supplied chunk applies 'blessed' to God as a divine attribute.",
      "BSR-MA-02": "pass 1 locator: Article I ascribes 'praise and honor forever and ever' to God (locator: Article I) but never uses 'blessed' of God; Article XVIII applies 'the blessed' only to the redeemed, not to God."
@@ -4437,7 +5044,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-160",
@@ -4466,6 +5075,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4552,6 +5174,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4646,6 +5281,7 @@
       "silence_rationale": "pass 1 locator: Only occurrences of 'glorious' describe Adam's created gifts (Art. I) and the prelapsarian state of Adam and Eve (Art. II), not God; no passage predicates glory of God Himself."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "2 candidate(s) located and verified: REJECT/NOT_ASSERTION, ACCEPT/OK",
      "BSR-MA-02": "pass 1 locator: Only occurrences of 'glorious' describe Adam's created gifts (Art. I) and the prelapsarian state of Adam and Eve (Art. II), not God; no passage predicates glory of God Himself."
@@ -4689,7 +5325,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-168",
@@ -4718,6 +5356,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4800,6 +5451,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -4884,6 +5548,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4980,6 +5657,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -5117,6 +5807,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5278,6 +5981,7 @@
       "silence_rationale": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT_WITH_CAVEAT/OK"
@@ -5323,7 +6027,9 @@
    "coder_skipped": {
     "Q-168-p1-BSR-MA-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'mennonite church usa and mennonite church canada' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-192",
@@ -5352,6 +6058,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5434,6 +6153,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -5516,6 +6248,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5602,6 +6347,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -5673,6 +6431,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5766,6 +6537,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, ACCEPT/OK",
      "BSR-MA-02": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT"
@@ -5811,7 +6583,9 @@
    "coder_skipped": {
     "Q-192-p1-BSR-MA-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'mennonite church usa and mennonite church canada' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-200",
@@ -5840,6 +6614,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5924,6 +6711,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -6006,6 +6806,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6093,6 +6906,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -6165,6 +6991,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6260,6 +7099,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK"
@@ -6316,7 +7156,9 @@
     "Q-200-p1-BSR-MA-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'historic' already holds a slot)",
     "Q-200-p1-BSR-MA-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'mennonite church usa and mennonite church canada' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-208",
@@ -6345,6 +7187,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6427,6 +7282,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -6576,6 +7444,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6664,6 +7545,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -6803,6 +7697,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6963,6 +7870,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT"
@@ -7016,7 +7924,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-232",
@@ -7045,6 +7955,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -7127,6 +8050,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7209,6 +8145,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -7305,6 +8254,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7376,6 +8338,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7469,6 +8444,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT/OK, ACCEPT/OK",
      "BSR-MA-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK"
@@ -7514,7 +8490,9 @@
    "coder_skipped": {
     "Q-232-p1-BSR-MA-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'mennonite church usa and mennonite church canada' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-248",
@@ -7571,6 +8549,7 @@
       "silence_rationale": "pass 1 locator: Article I speaks of God upholding creation 'through His wisdom, might, and the word of His power' (c1), but this attributes wisdom as a divine attribute of God generally, not a title naming the Son as Wisdom; no chunk applies"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 2 calls Jesus 'teacher of divine wisdom' (a role dispensing wisdom) rather than confessionally titling the Son himself as Wisdom in the kataphatic sense required. | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: None of the supplied chunks (Articles 5-7, 9-10, 13-14, 16, 19-20, 22-23) name the Son as Wisdom; nothing approaches this christological title in the batch.",
      "BSR-MA-02": "pass 1 locator: Article I speaks of God upholding creation 'through His wisdom, might, and the word of His power' (c1), but this attributes wisdom as a divine attribute of God generally, not a title naming the Son as Wisdom; no chunk applies"
@@ -7655,7 +8634,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-256",
@@ -7712,6 +8693,7 @@
       "silence_rationale": "pass 1 locator: Article IX applies 'light' to church elders as an example to others, not to the Son; no chunk applies 'Light' or 'Light from Light' to the eternal Son/Logos."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 10 calls the church 'a light to the nations' and Article 3 commentary notes people 'coming to the light,' but no supplied passage predicates 'Light' of the Son himself in the Nicene sense. | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: None of the supplied chunks (Articles 5-6, 9, 13-14, 16, 18, 20, 22-24) use 'Light' as a christological title for the Son; nothing approaches the 'Light from Light' predicate.",
      "BSR-MA-02": "pass 1 locator: Article IX applies 'light' to church elders as an example to others, not to the Son; no chunk applies 'Light' or 'Light from Light' to the eternal Son/Logos."
@@ -7796,7 +8778,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-264",
@@ -7825,6 +8809,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7907,6 +8904,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7993,6 +9003,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8088,6 +9111,7 @@
       "silence_rationale": "pass 1 locator: Article IV (c4) cites Colossians 1:15 only for 'first-born of every creature'; no chunk states the Son is the image or manifestation of the Father, only that believers 'partake of His mind, nature, and image' (c6)."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "pass 1 locator: Article IV (c4) cites Colossians 1:15 only for 'first-born of every creature'; no chunk states the Son is the image or manifestation of the Father, only that believers 'partake of His mind, nature, and image' (c6)."
@@ -8131,7 +9155,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-272",
@@ -8160,6 +9186,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8242,6 +9281,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8328,6 +9380,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8422,6 +9487,7 @@
       "silence_rationale": "pass 1 locator: Article VII (c7) mentions the Holy Ghost only regarding regeneration and renewing of believers, not a vivifying/life-giving agency predicated of the Spirit itself, and no other chunk approaches the predicate."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "pass 1 locator: Article VII (c7) mentions the Holy Ghost only regarding regeneration and renewing of believers, not a vivifying/life-giving agency predicated of the Spirit itself, and no other chunk approaches the predicate."
@@ -8465,7 +9531,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-280",
@@ -8494,6 +9562,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8576,6 +9657,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8664,6 +9758,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8736,6 +9843,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -8830,6 +9950,7 @@
       "silence_rationale": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT"
@@ -8883,7 +10004,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-288",
@@ -8912,6 +10035,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -8994,6 +10130,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9093,6 +10242,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -9191,6 +10353,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9262,6 +10437,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9358,6 +10546,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK"
@@ -9445,7 +10634,9 @@
    "coder_skipped": {
     "Q-288-p1-BSR-MA-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'mennonite church usa and mennonite church canada' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-296",
@@ -9474,6 +10665,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -9584,6 +10788,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 1 (c10) describes God's eternal Trinitarian nature and perfections but never asserts that the Father or God is unbegotten or without source/origin from another.",
      "BSR-MA-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
@@ -9637,7 +10842,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-304",
@@ -9666,6 +10873,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -9748,6 +10968,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9836,6 +11069,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9996,6 +11242,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "1 candidate(s) located and verified: ACCEPT/OK"
@@ -10049,7 +11296,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-320",
@@ -10106,6 +11355,7 @@
       "silence_rationale": "pass 1 locator: Article I calls God 'incomprehensible' (c1), but this denotes God's ineffable nature generally, not spatial immensity or non-circumscription; no chunk asserts God filling or transcending space."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 1 states God 'far surpasses human comprehension and understanding' and speaks of God's 'infinite freedom' and 'unlimited justice,' but these describe epistemic and moral transcendence, not spatial/metaphysical uncircumscription of God's presence, so no supplied passage asserts divine immensity in | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: Chunks reference God as Creator, ruler, and owner of all things (Art. 21, 24) but none asserts God's spatial immensity or freedom from metaphysical circumscription.",
      "BSR-MA-02": "pass 1 locator: Article I calls God 'incomprehensible' (c1), but this denotes God's ineffable nature generally, not spatial immensity or non-circumscription; no chunk asserts God filling or transcending space."
@@ -10190,7 +11440,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-328",
@@ -10219,6 +11471,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10307,6 +11572,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10401,6 +11679,7 @@
       "silence_rationale": "pass 1 locator: Article I (c1) calls God 'the Creator of all things visible and invisible,' predicating invisibility of created things, not asserting God Himself is invisible to bodily sight."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "pass 1 locator: Article I (c1) calls God 'the Creator of all things visible and invisible,' predicating invisibility of created things, not asserting God Himself is invisible to bodily sight."
@@ -10454,7 +11733,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-336",
@@ -10486,6 +11767,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10603,6 +11897,7 @@
       "silence_rationale": "pass 1 locator: Article I calls God 'incomprehensible' (c1) but this concerns unfathomability, not bodilessness; no chunk asserts God is without body or immaterial."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR | pass 1 locator: The nearest approach is Article 2's quotation 'He is the image of the invisible God' (c1), which predicates invisibility of God only incidentally within a Christological statement, not as a confessional assertion that the Father is without body. | exhaustion: 1 of 1 further batch(es) read — standard exhausted",
      "BSR-MA-02": "pass 1 locator: Article I calls God 'incomprehensible' (c1) but this concerns unfathomability, not bodilessness; no chunk asserts God is without body or immaterial."
@@ -10687,7 +11982,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-352",
@@ -10744,6 +12041,7 @@
       "silence_rationale": "pass 1 locator: No chunk addresses divine passibility or impassibility; Article I calls God 'incomprehensible' but this term concerns unsearchability, not susceptibility to affective change."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: The supplied chunks (Articles 2, 4, 5, 7, 8, 10, 14, 17, 18, 20, 22) discuss God's love, grace, and providence but never address divine passibility or impassibility, so no passage asserts or denies passionlessness of God. | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: Article 1 lists divine attributes including 'suffering love' and 'wrath against sinfulness,' the nearest material, but nowhere does the Confession assert that God is without passions or impassible.",
      "BSR-MA-02": "pass 1 locator: No chunk addresses divine passibility or impassibility; Article I calls God 'incomprehensible' but this term concerns unsearchability, not susceptibility to affective change."
@@ -10828,7 +12126,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-360",
@@ -10857,6 +12157,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10959,6 +12272,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11068,6 +12394,7 @@
       "silence_rationale": "pass 1 locator: Article I (God and Creation) calls God 'eternal, almighty, and incomprehensible' and Article IV describes Christ's goings forth 'from everlasting,' but neither passage asserts unchangeableness or constancy of God's character/purpose."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "pass 1 locator: Article I (God and Creation) calls God 'eternal, almighty, and incomprehensible' and Article IV describes Christ's goings forth 'from everlasting,' but neither passage asserts unchangeableness or constancy of God's character/purpose."
@@ -11156,7 +12483,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-368",
@@ -11185,6 +12514,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -11267,6 +12609,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11351,6 +12706,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -11447,6 +12815,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11519,6 +12900,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11613,6 +13007,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "3 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT",
      "BSR-MA-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK"
@@ -11666,7 +13061,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-384",
@@ -11695,6 +13092,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -11805,6 +13215,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 4 notes that how God inspired Scripture 'is not explained in the Bible,' but this addresses the mechanism of inspiration, not God's own ineffability; no supplied chunk asserts that God as such exceeds exhaustive linguistic expression.",
      "BSR-MA-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
@@ -11858,7 +13269,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-392",
@@ -11887,6 +13300,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -11976,6 +13402,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12046,6 +13485,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -12140,6 +13592,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "1 candidate(s) located and verified: REJECT/NOT_VERBATIM",
      "BSR-MA-02": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT"
@@ -12193,7 +13646,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-408",
@@ -12222,6 +13677,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12331,6 +13799,7 @@
       "silence_rationale": "pass 1 locator: Article I calls God 'incomprehensible' (c1) and Article XVIII cites God's 'incomprehensible power' (c18), but neither asserts an absence of adequate likeness or comparison between Creator and creature."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "pass 1 locator: Article I calls God 'incomprehensible' (c1) and Article XVIII cites God's 'incomprehensible power' (c18), but neither asserts an absence of adequate likeness or comparison between Creator and creature."
@@ -12384,7 +13853,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-416",
@@ -12413,6 +13884,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12503,6 +13987,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12598,6 +14095,7 @@
       "silence_rationale": "pass 1 locator: Article IV narrates the Word becoming flesh but explicitly declines to specify 'how and in what manner' the natures relate, never asserting a without-confusion delimiter on Christ's two natures."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "pass 1 locator: Article IV narrates the Word becoming flesh but explicitly declines to specify 'how and in what manner' the natures relate, never asserting a without-confusion delimiter on Christ's two natures."
@@ -12651,7 +14149,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-424",
@@ -12708,6 +14208,7 @@
       "silence_rationale": "pass 1 locator: Article IV affirms the Word became flesh but explicitly declines to specify the manner of union, never asserting the natures remain unconverted or unchanged in combination."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 2 (c7) discusses Christ's two natures but explicitly declines Chalcedonian 'natures' language and never asserts that the natures are united without conversion or change of one into another. | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: Article 1 speaks of 'the only Son, the Word who became flesh' but asserts no delimiter on the union of natures, and no supplied chunk discusses conversion or change of natures in Christ.",
      "BSR-MA-02": "pass 1 locator: Article IV affirms the Word became flesh but explicitly declines to specify the manner of union, never asserting the natures remain unconverted or unchanged in combination."
@@ -12792,7 +14293,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-432",
@@ -12821,6 +14324,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -12910,6 +14426,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -12983,6 +14512,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -13078,6 +14620,7 @@
       "silence_rationale": "3 candidate(s) located and verified: REJECT/BELOW_FLOOR, ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: The nearest mention is c2's reference to 'denying that Jesus Christ has come in the flesh' as grounds for discipline, which condemns a denial but does not assert a without-division delimiter on Christ's two natures.",
      "BSR-MA-02": "3 candidate(s) located and verified: REJECT/BELOW_FLOOR, ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT"
@@ -13131,7 +14674,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-440",
@@ -13163,6 +14708,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13254,6 +14812,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13371,6 +14942,7 @@
       "silence_rationale": "pass 1 locator: Article IV (Advent of Christ) affirms the Word became flesh but explicitly declines to speculate on how the natures relate, offering no delimiter against disjunction of Christ's natures."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, REJECT/BELOW_FLOOR | exhaustion: 1 of 1 further batch(es) read — standard exhausted; last silence: Article 4 and Article 1 affirm the Word became flesh, and Article 14 cites denial of Christ come in the flesh as grounds for discipline, but none asserts non-separation of Christ's two natures in their union.",
      "BSR-MA-02": "pass 1 locator: Article IV (Advent of Christ) affirms the Word became flesh but explicitly declines to speculate on how the natures relate, offering no delimiter against disjunction of Christ's natures."
@@ -13455,7 +15027,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-448",
@@ -13484,6 +15058,19 @@
      "standard_title": "Dordrecht Confession (1632)",
      "authority_tier": "CONFESSIONAL (historic; received by conservative bodies)",
      "effective_tier": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (historic; received by conservative bodies)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Historic; no current binding statement",
      "reception_scope": "HISTORIC_NO_CURRENT_BODY",
      "reception_note": "",
@@ -13594,6 +15181,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "pass 1 locator: Article 5 commentary (c2) affirms creation as work of 'the one and triune God, Father, Son, and Holy Spirit' and warns against assigning creation, redemption, sustaining to separate persons alone, but this addresses undivided economic action, not a formal delimiter",
      "BSR-MA-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
@@ -13647,7 +15235,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-456",
@@ -13676,6 +15266,19 @@
      "standard_title": "Confession of Faith in a Mennonite Perspective (1995), Article 1 and following",
      "authority_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
      "effective_tier": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (adopted 1995; \"guidelines,\" not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Mennonite Church USA and Mennonite Church Canada",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13786,6 +15389,7 @@
       "silence_rationale": "pass 1 locator: Article I calls God 'incomprehensible' but immediately affirms man is 'created in His own image and likeness,' asserting kinship rather than denying creaturely likeness to God's mode of being; no chunk asserts greater dissimilarity than similarity of God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MA-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-MA-02": "pass 1 locator: Article I calls God 'incomprehensible' but immediately affirms man is 'created in His own image and likeness,' asserting kinship rather than denying creaturely likeness to God's mode of being; no chunk asserts greater dissimilarity than similarity of God."
@@ -13839,7 +15443,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   }
  ]
 }

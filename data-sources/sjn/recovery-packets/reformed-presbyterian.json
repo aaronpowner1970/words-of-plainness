@@ -1,10 +1,10 @@
 {
  "branch": "Reformed / Presbyterian",
  "run_id": "live-1",
- "built_at": "2026-09-13T22:31:49Z",
+ "built_at": "2026-09-17T07:39:37Z",
  "app_master_version": "v2.25r4 GATE6 SCOPE RATIFIED",
  "rebuilt_from": {
-  "at": "2026-09-13T22:31:49Z",
+  "at": "2026-09-17T07:39:37Z",
   "from": "stored cell states (candidates, rubrics, coder proposals)",
   "model_calls": 0,
   "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -99,7 +99,7 @@
     ]
    }
   },
-  "note": "session 6 final (no model calls in the rebuild): R6-4 one-text-one-slot guard; R6-1 required_subject — 49 WRONG_SUBJECT rejections re-verified (plus 3 truncated replies), stored in the cells; R6-2 — refusal of Q-382 / Q-390 / Q-454 as floor rulings (sample leak rate 0.467 < 0.5, applied to nothing else); packet builder passes floor_claim to the allocator (defect fix); coder proposals for 42 card entries"
+  "note": "session 11 (2026-09-17), the ONE rebuild R6-16 held for (no model calls): adoption ratified — R6-35 BSR-AN-02, R6-36 BSR-AN-05, R6-37 BSR-LU-03 (translator disclosed; publisher-apparatus guard), R6-38 scope = verified reach (BSR-RP-03 added; BSR-RP-02 and BSR-LU-01 amended to ONE_CHURCH), R6-39 BSR-BA-03 ISSUED_UNADOPTED with its own wording, R6-40 BSR-RC-07 / BSR-AN-04 / BSR-RP-05; the first build since session 6, so the session 7-9 resolution rules (R6-5/R6-10 phrase-level creed resolution, R6-6/R6-9 adoption field, Task 6 ladder fields) are reflected here for the first time"
  },
  "partial": false,
  "cap_state": null,
@@ -221,13 +221,118 @@
   "same_text_rows": {
    "BSR-EO-14": "BSR-EO-07"
   },
-  "status": "AUTHOR RULED 2026-09-13; applied in memory; workbook not written (deltas pending ratification)",
+  "registry_overrides": {
+   "BSR-EO-01": {
+    "standard_title": "*The Orthodox Faith*, Vol. I (Hopko) — The Symbol of Faith",
+    "authority_tier": "CATECHETICAL",
+    "speaks_for": "OCA (catechetical series by one author, published by the OCA)",
+    "reception_scope": "JURISDICTIONAL",
+    "same_work_as": "BSR-EO-02",
+    "eo_ladder_tier": "B",
+    "creed_resolution": "PHRASE"
+   },
+   "BSR-LU-03": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT (Luther's Small Catechism text in the Concordia Publishing House translation (c) 2019, not the 2017 Explanation; adopted by the LCMS through Constitution Art. II, R6-37)"
+   },
+   "BSR-BA-03": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT as OFFICIAL_EXPOSITION; ISSUED_UNADOPTED (R6-39): a descriptive denominational statement, and American Baptist Churches USA does not adopt binding creeds"
+   },
+   "BSR-RC-07": {
+    "canonical_url": "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html"
+   }
+  },
+  "same_work_rows": {
+   "BSR-EO-01": "BSR-EO-02"
+  },
+  "independence_groups": {
+   "HOPKO-OF-VOL1": [
+    "BSR-EO-01",
+    "BSR-EO-02"
+   ]
+  },
+  "chunk_level_creed_rows": [
+   "BSR-EO-07",
+   "BSR-EO-14",
+   "BSR-RC-06",
+   "BSR-RC-08"
+  ],
+  "adoption_rows": {
+   "BSR-EO-01": "ISSUED_UNADOPTED",
+   "BSR-EO-02": "ISSUED_UNADOPTED",
+   "BSR-EO-04": "ADOPTED",
+   "BSR-RC-01": "ADOPTED",
+   "BSR-RP-02": "ADOPTED",
+   "BSR-LU-01": "ADOPTED",
+   "BSR-RC-07": "ADOPTED",
+   "BSR-AN-02": "ADOPTED",
+   "BSR-AN-04": "ADOPTED",
+   "BSR-AN-05": "ADOPTED",
+   "BSR-LU-03": "ADOPTED",
+   "BSR-RP-03": "ADOPTED",
+   "BSR-RP-05": "ADOPTED",
+   "BSR-BA-03": "ISSUED_UNADOPTED"
+  },
+  "adoption_guards": [
+   "BSR-LU-03"
+  ],
+  "adoption_scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+  "agency_tags_ratified": {
+   "RNR-H34": "ACTION",
+   "RNR-H35": "ATTRIBUTE",
+   "RNR-H06": "ATTRIBUTE",
+   "RNR-H21": "ACTION",
+   "RNR-H26": "ACTION",
+   "RNR-H27": "ATTRIBUTE",
+   "RNR-H38": "ATTRIBUTE"
+  },
+  "cell_flags": [
+   "Q-290"
+  ],
+  "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4), 2026-09-16 (R6-5..R6-23) and 2026-09-17 (R6-35..R6-40); applied in memory; workbook not written (deltas pending ratification)",
   "registry_rows_retired_in_memory": [
    {
     "registry_id": "BSR-EO-03",
     "ruling": "R6-3_retire_BSR-EO-03",
     "status": "RETIRED",
     "reason_code": "HOST_RETIRED"
+   },
+   {
+    "registry_id": "BSR-EO-01",
+    "ruling": "R6-5_bsr_eo_01_retype",
+    "status": "RE-TYPED",
+    "fields": [
+     "authority_tier",
+     "creed_resolution",
+     "eo_ladder_tier",
+     "reception_scope",
+     "same_work_as",
+     "speaks_for",
+     "standard_title"
+    ]
+   },
+   {
+    "registry_id": "BSR-LU-03",
+    "ruling": "R6-37_lu03_adoption",
+    "status": "RE-TYPED",
+    "fields": [
+     "draft_recommendation"
+    ]
+   },
+   {
+    "registry_id": "BSR-BA-03",
+    "ruling": "R6-39_ba03_issued_unadopted",
+    "status": "RE-TYPED",
+    "fields": [
+     "draft_recommendation"
+    ]
+   },
+   {
+    "registry_id": "BSR-RC-07",
+    "ruling": "R6-40_rc07_an04_rp05_adoption",
+    "status": "RE-TYPED",
+    "fields": [
+     "canonical_url"
+    ]
    }
   ],
   "required_subject_by_family": {
@@ -481,6 +586,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -597,6 +715,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -747,6 +885,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -854,6 +1005,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -985,6 +1149,7 @@
       "silence_rationale": "pass 1 locator: Article 14 calls God 'their true life' in the context of humanity's separation from God through sin, but this speaks of God as source of human life rather than confessionally asserting that God intrinsically possesses life; Article 1's attribute list"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -1085,7 +1250,9 @@
     "Q-004-p1-BSR-RP-04-3": "SAME_TEXT parallel witness of Q-004-p1-BSR-RP-02-1: its phrase is textually identical to the seated phrase; takes no slot",
     "Q-004-p1-BSR-RP-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-012",
@@ -1114,6 +1281,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1196,6 +1376,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1346,6 +1539,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1508,6 +1721,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1580,6 +1806,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1652,6 +1891,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1722,6 +1981,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1855,6 +2134,7 @@
       "silence_rationale": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-RP-02": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT/OK",
@@ -1956,7 +2236,9 @@
     "Q-012-p1-BSR-RP-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-012-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-020",
@@ -1985,6 +2267,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2086,6 +2381,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2168,6 +2476,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2255,6 +2576,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2344,6 +2685,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2416,6 +2770,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2564,6 +2938,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -2734,7 +3109,9 @@
     "Q-020-p1-BSR-RP-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)",
     "Q-020-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-204",
@@ -2763,6 +3140,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2847,6 +3237,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2965,6 +3368,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3110,6 +3533,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3180,6 +3623,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3252,6 +3708,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3376,6 +3845,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3446,6 +3935,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3579,6 +4088,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -3681,7 +4191,9 @@
     "Q-204-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-204-p1-BSR-RP-05-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-212",
@@ -3710,6 +4222,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3849,6 +4374,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3933,6 +4471,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4165,6 +4723,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4235,6 +4813,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4359,6 +4950,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4429,6 +5040,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4554,6 +5185,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4626,6 +5277,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4812,6 +5476,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-RP-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
@@ -4914,7 +5579,9 @@
     "Q-212-p1-BSR-RP-02-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-212-p1-BSR-RP-06-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-268",
@@ -4943,6 +5610,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5025,6 +5705,24 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": {
+      "kind": "CREED",
+      "registry_id": "BSR-RP-04",
+      "locator": "Book of Confessions 1.3 (Nicene Creed)",
+      "tier": "CONFESSIONAL"
+     },
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5107,6 +5805,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5225,6 +5936,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5297,6 +6021,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5370,6 +6114,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5442,6 +6206,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5575,6 +6352,7 @@
       "silence_rationale": "pass 1 locator: Article 24 attributes regeneration and new life to faith 'produced ... by the work of the Holy Spirit,' but the grammatical subject is faith, not the Spirit itself, so no chunk directly predicates life-giving/vivifying agency of the Holy Spirit as"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT",
      "BSR-RP-02": "pass 1 locator: Q.29-31 describe the Spirit applying redemption, working faith, and effectual calling, but none of the supplied chunks assert the Spirit as vivifying life-giver in the required sense.",
@@ -5670,7 +6448,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-284",
@@ -5699,6 +6479,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5815,6 +6608,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5899,6 +6705,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6048,6 +6874,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6118,6 +6964,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6190,6 +7049,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6260,6 +7132,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6349,6 +7241,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6482,6 +7394,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -6609,7 +7522,9 @@
     "Q-284-p1-BSR-RP-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-284-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-300",
@@ -6638,6 +7553,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6740,6 +7668,24 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": {
+      "kind": "CREED",
+      "registry_id": "BSR-RP-04",
+      "locator": "Book of Confessions 1.2 (Nicene Creed)",
+      "tier": "CONFESSIONAL"
+     },
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6877,6 +7823,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7045,6 +8004,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7117,6 +8096,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7189,6 +8188,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7278,6 +8297,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7405,6 +8444,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7529,6 +8581,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7717,6 +8789,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR",
@@ -7867,7 +8940,9 @@
     "Q-300-p1-BSR-RP-06-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)",
     "Q-300-p1-BSR-RP-05-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-316",
@@ -7896,6 +8971,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7980,6 +9068,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8062,6 +9163,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8212,6 +9326,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8284,6 +9418,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8354,6 +9508,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8426,6 +9593,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8498,6 +9678,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8629,6 +9822,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/BELOW_FLOOR",
      "BSR-RP-02": "pass 1 locator: Q.4 calls God 'infinite... in his being' but this general attribute statement does not specifically assert spatial immeasurability or denial of circumscription as required by the floor.",
@@ -8729,7 +9923,9 @@
     "Q-316-p1-BSR-RP-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-316-p1-BSR-RP-04-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'pc(usa)' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-380",
@@ -8785,6 +9981,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8876,6 +10085,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8967,6 +10189,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9058,6 +10293,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9149,6 +10397,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9240,6 +10501,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9391,6 +10665,7 @@
       "silence_rationale": "3 candidate(s) located and verified: REJECT/BELOW_FLOOR, REJECT/BELOW_FLOOR, REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR",
      "BSR-RP-02": "pass 1 locator: Q.4 offers a positive cataphatic definition of God's attributes with no language denying exhaustive expressibility or asserting incomprehensibility/ineffability of God.",
@@ -9486,7 +10761,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-404",
@@ -9515,6 +10792,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9618,6 +10908,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9721,6 +11024,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9893,6 +11209,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9966,6 +11295,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10039,6 +11381,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10172,6 +11527,7 @@
       "silence_rationale": "2 candidate(s) located and verified: REJECT/BELOW_FLOOR, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/BELOW_FLOOR",
      "BSR-RP-02": "pass 1 locator: Q.49's ban on making 'any graven image, or any likeness' concerns worship practice, not an epistemic denial of adequate Creator-creature correspondence; no chunk asserts God's incomparability.",
@@ -10345,7 +11701,9 @@
    ],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-412",
@@ -10374,6 +11732,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10490,6 +11861,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10574,6 +11965,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10701,6 +12112,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10773,6 +12197,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10845,6 +12282,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10934,6 +12391,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11006,6 +12476,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11139,6 +12629,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -11266,7 +12757,9 @@
     "Q-412-p1-BSR-RP-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-412-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-420",
@@ -11295,6 +12788,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11411,6 +12917,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11495,6 +13014,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11641,6 +13180,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11713,6 +13265,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11785,6 +13350,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11858,6 +13443,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11949,6 +13554,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12083,6 +13708,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "1 candidate(s) located and verified: ACCEPT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/BELOW_FLOOR",
@@ -12236,7 +13862,9 @@
     "Q-420-p1-BSR-RP-03-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-420-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-428",
@@ -12265,6 +13893,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12398,6 +14039,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12482,6 +14143,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12639,6 +14320,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12712,6 +14406,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12784,6 +14491,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12856,6 +14583,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12928,6 +14668,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13061,6 +14821,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -13186,7 +14947,9 @@
     "Q-428-p1-BSR-RP-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-428-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-436",
@@ -13215,6 +14978,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13333,6 +15109,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13417,6 +15213,26 @@
      "standard_title": "Westminster Shorter Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13584,6 +15400,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13654,6 +15483,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13742,6 +15591,26 @@
      "standard_title": "Heidelberg Catechism (CRC/RCA 2011 joint translation)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America (several churches); English translation: CRC/RCA joint translation, 2011",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011"
+     },
      "speaks_for": "CRCNA and RCA",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13812,6 +15681,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13885,6 +15774,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14018,6 +15920,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-RP-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -14169,7 +16072,9 @@
     "Q-436-p1-BSR-RP-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'opc and westminster churches' already holds a slot)",
     "Q-436-p1-BSR-RP-06-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'crcna and rca' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-452",
@@ -14198,6 +16103,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14301,6 +16219,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14461,6 +16392,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14534,6 +16485,19 @@
      "standard_title": "PC(USA) Book of Confessions 2016 (Nicene, Apostles', Scots, Heidelberg, Second Helvetic, Westminster edited recension, Barmen, C67, Belhar, Brief Statement)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "PC(USA); \"subordinate standards\" affirmed at ordination",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14607,6 +16571,19 @@
      "standard_title": "Belgic Confession (CRC/RCA 2011)",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "CRCNA and RCA; Dort required subscription",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14680,6 +16657,19 @@
      "standard_title": "Westminster Confession (1647 with 1788 American revisions) — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "OPC and Westminster churches",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14754,6 +16744,26 @@
      "standard_title": "Westminster Larger Catechism — OPC",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "approved by General Assembly of the Orthodox Presbyterian Church (one church)",
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+      "translation_disclosure": null
+     },
      "speaks_for": "as above",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14887,6 +16897,7 @@
       "silence_rationale": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-RP-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/BELOW_FLOOR, REJECT/WRONG_SUBJECT",
      "BSR-RP-02": "pass 1 locator: Q.4 attributes God's infinite, eternal, unchangeable being but does not assert or compare degrees of similarity/dissimilarity between God and creaturely likeness; no chunk addresses the apophatic disanalogy claim.",
@@ -15034,7 +17045,9 @@
    ],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   }
  ]
 }

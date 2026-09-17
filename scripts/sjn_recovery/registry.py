@@ -196,6 +196,10 @@ class Registry:
         self.adoption_policy = rulings.adoption_policy()
         self.assert_second_tier_rank()
         self.adoption_map, self.adoption_migration = self._migrate_adoption(rulings.adoption_rows())
+        self._adoption_guards = rulings.adoption_guards()               # session 11, R6-37
+        for rid in self._adoption_guards:
+            if rid not in self.by_id:
+                raise SystemExit(f"author ruling {self._adoption_guards[rid]['ruling']} guards {rid}, which is not a ratified registry row")
         self._creed_index, self._definition_index = {}, {}
 
     # ---------------------------------------------------------------- R6-9: the second tier's rank
@@ -247,37 +251,81 @@ class Registry:
     def adoption(self, rid):
         return self.adoption_map.get(rid) or {"adoption_status": "UNVERIFIED", "source": "not a ratified row"}
 
-    def adoption_disclosure(self, rid):
-        """R6-9: what the CARD must say about this row's adoption. None when there is nothing to disclose."""
+    def adoption_disclosure(self, rid, chunk=None):
+        """R6-9: what the CARD must say about this row's adoption. None when there is nothing to disclose.
+
+        Session 11 (R6-37..R6-40): an ADOPTED ONE_CHURCH / MULTILATERAL row names its body and reach; a row that carries a
+        `translation_disclosure` shows it (B2(d)); a row with its own `disclosure_wording` (BSR-BA-03, R6-39) uses exactly that;
+        a chunk the row's apparatus guard marks as publisher matter says it does not inherit the adoption (B2(b))."""
         a = self.adoption(rid)
         d = self.adoption_policy["disclosure"]
         st, scope = a.get("adoption_status"), (a.get("adoption_body_scope") or "")
+        guard = self.apparatus_guard(rid, chunk) if chunk is not None else None
+        if guard:
+            return {"text": "publisher-added matter: it does not inherit the adoption of the text it accompanies",
+                    "adoption_status": st, "apparatus_guard": guard, "resolves_to": SECOND_TIER}
         if st == "ADOPTED":
+            translation = a.get("translation_disclosure") or ""
             if scope and scope != "WHOLE_BRANCH":
                 body = a.get("adopting_body") or "the adopting body"
                 reach = {"ONE_CHURCH": "one church", "MULTILATERAL": "several churches"}.get(scope, scope.casefold())
-                return {"text": f"approved by {body} ({reach})", "adoption_status": st, "adoption_body_scope": scope,
-                        "adoption_act": a.get("adoption_act"), "scope_rule": self.adoption_policy["scope_rule"]}
+                text = f"approved by {body} ({reach})" + (f"; {translation}" if translation else "")
+                return {"text": text, "adoption_status": st, "adoption_body_scope": scope,
+                        "adoption_act": a.get("adoption_act"), "scope_rule": self.adoption_policy["scope_rule"],
+                        "translation_disclosure": translation or None}
+            if translation:
+                return {"text": translation, "adoption_status": st, "adoption_body_scope": scope, "translation_disclosure": translation}
             return None
         if st == "NOT_APPLICABLE":
             return None
+        if a.get("disclosure_wording"):
+            return {"text": a["disclosure_wording"], "adoption_status": st, "adoption_verified": a.get("adoption_verified"),
+                    "fails_closed": st == "UNVERIFIED"}
         text = d.get(st) or d.get("UNVERIFIED")
         if a.get("bare_tier") == "CATECHETICAL" or a.get("catechism_by_title"):
             text = f"{text} ({d.get('catechism_qualifier')})"
         return {"text": text, "adoption_status": st, "adoption_verified": a.get("adoption_verified"),
                 "fails_closed": st == "UNVERIFIED"}
 
-    def exposition_tier(self, rid, tier=None):
+    # ---------------------------------------------------------------- R6-37: publisher apparatus never inherits adoption
+    def apparatus_guard(self, rid, chunk):
+        """Codex B2(b)/B2(d), ruled R6-37: is this stored chunk (wholly or partly) matter a publisher or editor added to the
+        row's adopted text? Returns {ruling, reason} or None. Generic over rows: a row is guarded only when a ruling carries a
+        guard for it (rulings.adoption_guards). Two tests, either sufficient, evaluated on the whitespace-normalised chunk text:
+          - apparatus_markers: a marker (case-insensitive) in the text, locator or division — e.g. "The Central Thought";
+          - integral_text_pattern: the text is NOT wholly the integral text (fullmatch). This is the fail-closed test for
+            "any text that is not the catechism's own text", since no marker list can name every heading a publisher uses."""
+        if chunk is None:
+            return None
+        g = self._adoption_guards.get(rid)
+        if not g:
+            return None
+        text = " ".join((chunk.get("text") or "").split())
+        where = " ".join([text, chunk.get("locator") or "", chunk.get("division") or ""]).casefold()
+        for m in g.get("apparatus_markers") or []:
+            if m.casefold() in where:
+                return {"ruling": g["ruling"], "reason": f"apparatus marker {m!r}"}
+        pat = g.get("integral_text_pattern")
+        if pat and not re.fullmatch(pat, text, re.S):
+            return {"ruling": g["ruling"], "reason": "the chunk is not wholly the row's integral text (integral_text_pattern)"}
+        return None
+
+    def exposition_tier(self, rid, tier=None, chunk=None):
         """R6-6 clause 3 / R6-9: the tier an EXPOSITION citation (not a verbatim creed or definition phrase) resolves to.
 
         Clause 3 reaches CATECHETICAL rows — the review's own statement of its scope ("clause 3 reaches only catechetical
         and expository rows"). A CONFESSIONAL row is not demoted: the confessional act that typed it IS its adoption, and
         demoting the Westminster Larger Catechism below the Shorter is not what the ruling says. Where such a row is left
-        UNVERIFIED the card still discloses it (adoption_disclosure) and it is reported as an ADOPTED proposal."""
+        UNVERIFIED the card still discloses it (adoption_disclosure) and it is reported as an ADOPTED proposal.
+
+        Session 11 (R6-37): a chunk the row's apparatus guard marks as publisher matter resolves to OFFICIAL_EXPOSITION
+        whatever the row's adoption — the adoption belongs to the text, not to what a publisher added. It never raises a tier."""
         row = self.by_id.get(rid)
         if not row:
             return ""
         tier = tier if tier is not None else s(row.get("authority_tier"))
+        if chunk is not None and tier_rank(tier) < tier_rank(SECOND_TIER) and self.apparatus_guard(rid, chunk):
+            return f"{SECOND_TIER} (publisher matter, not the adopted text)"
         if bare_tier(tier) != "CATECHETICAL":
             return tier
         st = self.adoption(rid).get("adoption_status")
@@ -412,14 +460,15 @@ class Registry:
              creed chunk IS the creed and nothing else (BSR-EO-07, BSR-EO-14, BSR-RC-06, BSR-RC-08). Disabled
              everywhere else, including BSR-EO-04, BSR-AN-04, BSR-AN-05, BSR-LU-01, BSR-LU-03 and BSR-RP-04.
           3. Otherwise the HOST tier, as adjusted by the adoption field: an exposition citation from a row that is
-             ISSUED_UNADOPTED or UNVERIFIED resolves to OFFICIAL_EXPOSITION (R6-9), with its display qualifier.
+             ISSUED_UNADOPTED or UNVERIFIED resolves to OFFICIAL_EXPOSITION (R6-9), with its display qualifier; and a chunk
+             the row's apparatus guard marks as publisher matter resolves to OFFICIAL_EXPOSITION (R6-37).
 
         Resolution never LOWERS a citation below its host row's own tier."""
         row = self.by_id.get(rid)
         if not row:
             return ""
         tier = s(row.get("authority_tier"))
-        host = self.exposition_tier(rid, tier)
+        host = self.exposition_tier(rid, tier, chunk)
         if phrase:
             hit = self.resolve_registered_phrase(row["branch"], phrase)
             if hit and tier_rank(hit["tier"]) < tier_rank(host):
@@ -435,12 +484,15 @@ class Registry:
         """effective_tier with its reason, for the card and for the audit."""
         row = self.by_id.get(rid) or {}
         tier = s(row.get("authority_tier"))
-        host = self.exposition_tier(rid, tier)
+        host = self.exposition_tier(rid, tier, chunk)
         eff = self.effective_tier(rid, chunk, phrase)
         hit = self.resolve_registered_phrase(row.get("branch", ""), phrase) if phrase else None
+        guard = self.apparatus_guard(rid, chunk) if row else None
         if hit and eff == hit["tier"] and eff != host:
             why = (f"the phrase stands verbatim in a registered {hit['kind'].casefold()} text of this branch "
                    f"({hit['registry_id']} {hit['locator']})")
+        elif guard and eff == host and eff != tier:
+            why = f"the apparatus guard ({guard['ruling']}): {guard['reason']}"
         elif eff != tier:
             why = f"the adoption field (R6-6/R6-9): {self.adoption(rid).get('adoption_status')}"
         elif eff != host:
@@ -448,7 +500,7 @@ class Registry:
         else:
             why = "the host row's tier"
         return {"registry_id": rid, "authority_tier": tier, "host_tier": host, "effective_tier": eff, "why": why,
-                "registered_phrase_hit": hit, "adoption_disclosure": self.adoption_disclosure(rid)}
+                "registered_phrase_hit": hit, "apparatus_guard": guard, "adoption_disclosure": self.adoption_disclosure(rid, chunk)}
 
     def public(self, rid):
         """Fields an agent may see about a standard: never a URL. Every text field is scrubbed — a

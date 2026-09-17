@@ -38,7 +38,16 @@ Session 9 (2026-09-16, third and fourth sets):
   R6-20 an item triggering a stop condition gets 5 replicates per version before the stop holds
   R6-21 RATIFIED: the session 7 phrase floor (registry.CREED_PHRASE_MIN_WORDS = 3 / CREED_PHRASE_MIN_CHARS = 12)
   R6-22 RATIFIED: a CATECHETICAL row is never a registered creed text (registry.registered_creed_texts)
-  R6-23 RATIFIED: the EO consultation ladder stays in config.EO_CONSULTATION_LADDER"""
+  R6-23 RATIFIED: the EO consultation ladder stays in config.EO_CONSULTATION_LADDER
+
+Session 11 (2026-09-17, adoption ratification; Comparison Principles Codex B2(a)-(e)):
+
+  R6-35 BSR-AN-02 ADOPTED (Convocations; a civil statute is context only; a book's adoption covers its integral texts)
+  R6-36 BSR-AN-05 ADOPTED (ACNA College of Bishops, 2018); the 2017-18 canons stay on the QA track
+  R6-37 BSR-LU-03 ADOPTED with its translator disclosed; publisher apparatus never inherits it (adoption_guards)
+  R6-38 scope is the verified reach of the named body: BSR-RP-03 added, BSR-RP-02 and BSR-LU-01 amended
+  R6-39 BSR-BA-03 ISSUED_UNADOPTED with its own disclosure wording
+  R6-40 BSR-RC-07, BSR-AN-04, BSR-RP-05 ADOPTED as proposed"""
 import json
 import os
 
@@ -106,7 +115,9 @@ def same_text_rows(r=None):
 # beside the ruled value, and — once the workbook carries the change — reads the workbook and fails loudly
 # on any disagreement. Only these fields may be overridden; anything else in the block is a hard error.
 OVERRIDABLE = ("standard_title", "authority_tier", "speaks_for", "reception_scope", "scope_caveat",
-               "same_work_as", "eo_ladder_tier", "creed_resolution")
+               "same_work_as", "eo_ladder_tier", "creed_resolution",
+               # session 11 (goal 3a/3e/3f): registry-note and host-note corrections the author asked for, pending the workbook
+               "canonical_url", "draft_recommendation")
 
 
 def registry_overrides(r=None):
@@ -163,6 +174,30 @@ def adoption_rows(r=None):
         if sc and sc not in ADOPTION_SCOPES:
             raise SystemExit(f"author ruling R6-6: {rid} carries adoption_body_scope {sc!r}, outside {ADOPTION_SCOPES}")
     return {rid: dict(v) for rid, v in rows.items()}
+
+
+APPARATUS_GUARD_KINDS = ("PUBLISHER_APPARATUS",)
+
+
+def adoption_guards(r=None):
+    """{registry_id: guard} — R6-37 / Codex B2(b), B2(d): matter a publisher or editor added to an adopted text never inherits
+    the text's adoption. A guard lives on the ruling that ratified the row (a `guard` object carrying `registry_id`), so any row
+    with a translation or publisher apparatus can carry one; only the rows a ruling names are guarded."""
+    r = r or load()
+    out = {}
+    for key, ru in (r.get("rulings") or {}).items():
+        g = ru.get("guard")
+        if not isinstance(g, dict):
+            continue
+        rid = g.get("registry_id")
+        if not rid or g.get("kind") not in APPARATUS_GUARD_KINDS:
+            raise SystemExit(f"author ruling {key}: guard needs registry_id and kind in {APPARATUS_GUARD_KINDS}")
+        if not g.get("apparatus_markers") and not g.get("integral_text_pattern"):
+            raise SystemExit(f"author ruling {key}: guard for {rid} names neither apparatus_markers nor integral_text_pattern")
+        if g.get("resolves_to") != "OFFICIAL_EXPOSITION":
+            raise SystemExit(f"author ruling {key}: guard for {rid} must resolve to OFFICIAL_EXPOSITION, not {g.get('resolves_to')!r}")
+        out[rid] = dict(g, ruling=key)
+    return out
 
 
 def adoption_policy(r=None):
@@ -236,7 +271,8 @@ def summary(r=None):
             "same_work_rows": same_work_rows(r), "independence_groups": independence_groups(r),
             "chunk_level_creed_rows": chunk_level_creed_rows(r),
             "adoption_rows": {rid: v.get("adoption_status") for rid, v in adoption_rows(r).items()},
+            "adoption_guards": sorted(adoption_guards(r)),
             "adoption_scope_rule": adoption_policy(r)["scope_rule"],
             "agency_tags_ratified": agency_tags(r), "cell_flags": sorted(cell_flags(r)),
-            "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4) and 2026-09-16 (R6-5..R6-23); applied in memory; "
+            "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4), 2026-09-16 (R6-5..R6-23) and 2026-09-17 (R6-35..R6-40); applied in memory; "
                       "workbook not written (deltas pending ratification)"}

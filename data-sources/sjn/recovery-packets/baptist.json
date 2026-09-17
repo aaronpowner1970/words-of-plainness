@@ -1,10 +1,10 @@
 {
  "branch": "Baptist",
  "run_id": "live-1",
- "built_at": "2026-09-13T22:32:16Z",
+ "built_at": "2026-09-17T07:39:38Z",
  "app_master_version": "v2.25r4 GATE6 SCOPE RATIFIED",
  "rebuilt_from": {
-  "at": "2026-09-13T22:32:16Z",
+  "at": "2026-09-17T07:39:37Z",
   "from": "stored cell states (candidates, rubrics, coder proposals)",
   "model_calls": 0,
   "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -39,7 +39,7 @@
     ]
    }
   },
-  "note": "session 6 final (no model calls in the rebuild): R6-4 one-text-one-slot guard; R6-1 required_subject — 49 WRONG_SUBJECT rejections re-verified (plus 3 truncated replies), stored in the cells; R6-2 — refusal of Q-382 / Q-390 / Q-454 as floor rulings (sample leak rate 0.467 < 0.5, applied to nothing else); packet builder passes floor_claim to the allocator (defect fix); coder proposals for 42 card entries"
+  "note": "session 11 (2026-09-17), the ONE rebuild R6-16 held for (no model calls): adoption ratified — R6-35 BSR-AN-02, R6-36 BSR-AN-05, R6-37 BSR-LU-03 (translator disclosed; publisher-apparatus guard), R6-38 scope = verified reach (BSR-RP-03 added; BSR-RP-02 and BSR-LU-01 amended to ONE_CHURCH), R6-39 BSR-BA-03 ISSUED_UNADOPTED with its own wording, R6-40 BSR-RC-07 / BSR-AN-04 / BSR-RP-05; the first build since session 6, so the session 7-9 resolution rules (R6-5/R6-10 phrase-level creed resolution, R6-6/R6-9 adoption field, Task 6 ladder fields) are reflected here for the first time"
  },
  "partial": false,
  "cap_state": null,
@@ -119,13 +119,118 @@
   "same_text_rows": {
    "BSR-EO-14": "BSR-EO-07"
   },
-  "status": "AUTHOR RULED 2026-09-13; applied in memory; workbook not written (deltas pending ratification)",
+  "registry_overrides": {
+   "BSR-EO-01": {
+    "standard_title": "*The Orthodox Faith*, Vol. I (Hopko) — The Symbol of Faith",
+    "authority_tier": "CATECHETICAL",
+    "speaks_for": "OCA (catechetical series by one author, published by the OCA)",
+    "reception_scope": "JURISDICTIONAL",
+    "same_work_as": "BSR-EO-02",
+    "eo_ladder_tier": "B",
+    "creed_resolution": "PHRASE"
+   },
+   "BSR-LU-03": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT (Luther's Small Catechism text in the Concordia Publishing House translation (c) 2019, not the 2017 Explanation; adopted by the LCMS through Constitution Art. II, R6-37)"
+   },
+   "BSR-BA-03": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT as OFFICIAL_EXPOSITION; ISSUED_UNADOPTED (R6-39): a descriptive denominational statement, and American Baptist Churches USA does not adopt binding creeds"
+   },
+   "BSR-RC-07": {
+    "canonical_url": "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html"
+   }
+  },
+  "same_work_rows": {
+   "BSR-EO-01": "BSR-EO-02"
+  },
+  "independence_groups": {
+   "HOPKO-OF-VOL1": [
+    "BSR-EO-01",
+    "BSR-EO-02"
+   ]
+  },
+  "chunk_level_creed_rows": [
+   "BSR-EO-07",
+   "BSR-EO-14",
+   "BSR-RC-06",
+   "BSR-RC-08"
+  ],
+  "adoption_rows": {
+   "BSR-EO-01": "ISSUED_UNADOPTED",
+   "BSR-EO-02": "ISSUED_UNADOPTED",
+   "BSR-EO-04": "ADOPTED",
+   "BSR-RC-01": "ADOPTED",
+   "BSR-RP-02": "ADOPTED",
+   "BSR-LU-01": "ADOPTED",
+   "BSR-RC-07": "ADOPTED",
+   "BSR-AN-02": "ADOPTED",
+   "BSR-AN-04": "ADOPTED",
+   "BSR-AN-05": "ADOPTED",
+   "BSR-LU-03": "ADOPTED",
+   "BSR-RP-03": "ADOPTED",
+   "BSR-RP-05": "ADOPTED",
+   "BSR-BA-03": "ISSUED_UNADOPTED"
+  },
+  "adoption_guards": [
+   "BSR-LU-03"
+  ],
+  "adoption_scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+  "agency_tags_ratified": {
+   "RNR-H34": "ACTION",
+   "RNR-H35": "ATTRIBUTE",
+   "RNR-H06": "ATTRIBUTE",
+   "RNR-H21": "ACTION",
+   "RNR-H26": "ACTION",
+   "RNR-H27": "ATTRIBUTE",
+   "RNR-H38": "ATTRIBUTE"
+  },
+  "cell_flags": [
+   "Q-290"
+  ],
+  "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4), 2026-09-16 (R6-5..R6-23) and 2026-09-17 (R6-35..R6-40); applied in memory; workbook not written (deltas pending ratification)",
   "registry_rows_retired_in_memory": [
    {
     "registry_id": "BSR-EO-03",
     "ruling": "R6-3_retire_BSR-EO-03",
     "status": "RETIRED",
     "reason_code": "HOST_RETIRED"
+   },
+   {
+    "registry_id": "BSR-EO-01",
+    "ruling": "R6-5_bsr_eo_01_retype",
+    "status": "RE-TYPED",
+    "fields": [
+     "authority_tier",
+     "creed_resolution",
+     "eo_ladder_tier",
+     "reception_scope",
+     "same_work_as",
+     "speaks_for",
+     "standard_title"
+    ]
+   },
+   {
+    "registry_id": "BSR-LU-03",
+    "ruling": "R6-37_lu03_adoption",
+    "status": "RE-TYPED",
+    "fields": [
+     "draft_recommendation"
+    ]
+   },
+   {
+    "registry_id": "BSR-BA-03",
+    "ruling": "R6-39_ba03_issued_unadopted",
+    "status": "RE-TYPED",
+    "fields": [
+     "draft_recommendation"
+    ]
+   },
+   {
+    "registry_id": "BSR-RC-07",
+    "ruling": "R6-40_rc07_an04_rp05_adoption",
+    "status": "RE-TYPED",
+    "fields": [
+     "canonical_url"
+    ]
    }
   ],
   "required_subject_by_family": {
@@ -245,6 +350,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -327,6 +445,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -441,6 +572,7 @@
       "silence_rationale": "pass 1 locator: Chunk c4 mentions 'Holy Spirit' only regarding believers' interpretive guidance; no chunk asserts God or the Father is Spirit as a positive divine attribute."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: ACCEPT/OK",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -494,7 +626,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-070",
@@ -523,6 +657,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -605,6 +752,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -687,6 +847,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -801,6 +974,7 @@
       "silence_rationale": "pass 1 locator: Chunk 1 calls God 'loving' but no supplied chunk asserts God as 'good' or affirms divine goodness of God/the Father."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: ACCEPT/OK",
      "BSR-BA-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK",
@@ -854,7 +1028,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-078",
@@ -883,6 +1059,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -965,6 +1154,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1053,6 +1255,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1125,6 +1340,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1227,6 +1455,7 @@
       "silence_rationale": "pass 1 locator: None of the ten chunks assert that creaturely goodness derives from God; closest is Fact 1's naming God as 'Creator' and Fact 3's mention of 'Gods great love,' neither asserting God as source of all good."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT",
      "BSR-BA-02": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/BELOW_FLOOR",
@@ -1290,7 +1519,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-086",
@@ -1319,6 +1550,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1401,6 +1645,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1487,6 +1744,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1576,6 +1846,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1694,6 +1977,7 @@
       "silence_rationale": "pass 1 locator: Fact 8 mentions 'justice' as a social cause American Baptists pursue, not as an attribute predicated of God; no chunk asserts God's own justice or righteousness."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT",
      "BSR-BA-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK",
@@ -1747,7 +2031,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-102",
@@ -1776,6 +2062,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1860,6 +2159,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1946,6 +2258,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2036,6 +2361,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2155,6 +2493,7 @@
       "silence_rationale": "pass 1 locator: Fact 1 calls Scripture 'trustworthy' but this predicates trustworthiness of the Bible, not of God directly; no chunk asserts God's own truthfulness or faithfulness."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "2 candidate(s) located and verified: REJECT/BELOW_FLOOR, REJECT/BELOW_FLOOR",
      "BSR-BA-02": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK",
@@ -2218,7 +2557,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-118",
@@ -2247,6 +2588,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2361,6 +2715,7 @@
       "silence_rationale": "pass 1 locator: Chunk c3 mentions 'Gods great love for us' and c1 speaks of 'a loving God,' but no chunk asserts mercy as a divine attribute of God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: No supplied chunk uses 'merciful' or 'mercy' of God; II.A God the Father lists 'all powerful, all knowing, all loving, and all wise' but omits mercy, and other chunks speak only of grace or justification.",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -2414,7 +2769,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-126",
@@ -2443,6 +2800,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2525,6 +2895,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2609,6 +2992,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2694,6 +3090,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2794,6 +3203,7 @@
       "silence_rationale": "pass 1 locator: Chunks speak of God's love (c1 'loving God', c3 'Gods great love for us') but never assert 'grace' or 'gracious' action of God toward creatures."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -2859,7 +3269,9 @@
    "coder_skipped": {
     "Q-126-p1-BSR-BA-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'southern baptist convention' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-134",
@@ -2888,6 +3300,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3002,6 +3427,7 @@
       "silence_rationale": "pass 1 locator: None of the ten chunks mention long-suffering, patience, or forbearance in connection with God; the closest is 'Gods great love for us' in Fact 3, which does not assert patience or forbearance."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II and II.A list divine attributes (holiness, power, knowledge, love, wisdom) but never mention long-suffering, patience, or forbearance of God anywhere in the supplied chunks.",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -3055,7 +3481,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-142",
@@ -3084,6 +3512,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3166,6 +3607,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3283,6 +3737,7 @@
       "silence_rationale": "pass 1 locator: Fact 1 mentions Christ bearing sin and triumphing over sin and death, but nowhere does the text assert that God forgives or remits sin."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -3346,7 +3801,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-150",
@@ -3375,6 +3832,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3489,6 +3959,7 @@
       "silence_rationale": "pass 1 locator: None of the ten belief facts predicate 'blessed' or beatitude of God; nearest mentions (e.g., c1's 'loving God', c3's 'Gods great love') describe love, not beatitude."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: The nearest occurrence, 'final blessed and abiding state of the redeemed' (IV. Salvation), predicates blessedness of glorified believers, not of God, so it does not satisfy the required subject.",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -3542,7 +4013,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-158",
@@ -3571,6 +4044,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3653,6 +4139,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3735,6 +4234,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3851,6 +4363,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact statements mention glory at all; the chunks discuss Scripture, ordinances, mission, and diversity without ascribing glory to God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Nearest occurrences are 'glorious display of God's sovereign goodness' (V, predicated of election) and Christ's return 'in glory' (X, IV), neither asserting God/the Father Himself as glorious.",
      "BSR-BA-02": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, ACCEPT_WITH_CAVEAT/BELOW_FLOOR",
@@ -3914,7 +4427,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-166",
@@ -3943,6 +4458,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4050,6 +4578,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4236,6 +4777,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4449,6 +5003,7 @@
       "silence_rationale": "pass 1 locator: Fact 3 mentions baptism symbolizing 'resurrection to new life in Christ,' but this describes believers' symbolic act, not God's own life-giving action, so no chunk asserts the predicate of God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "3 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT",
      "BSR-BA-02": "pass 1 locator: Chapter 2, paragraph 2 states God has 'all life... in and of Himself' and is 'fountain of all being,' but this asserts self-existent life and origin of being, not God's communicating or giving life to another.",
@@ -4502,7 +5057,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-198",
@@ -4531,6 +5088,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4613,6 +5183,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4695,6 +5278,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4780,6 +5376,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4882,6 +5491,7 @@
       "silence_rationale": "pass 1 locator: None of the ten chunks assert God's supreme dominion; closest is Fact 1's reference to God as 'Creator, Savior and Advocate,' which names roles but does not affirm sovereignty or dominion."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -4947,7 +5557,9 @@
    "coder_skipped": {
     "Q-198-p1-BSR-BA-01-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'southern baptist convention' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-230",
@@ -4976,6 +5588,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5058,6 +5683,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5140,6 +5778,24 @@
      "standard_title": "American Baptist Churches USA belief pages",
      "authority_tier": "OFFICIAL_EXPOSITION",
      "effective_tier": "OFFICIAL_EXPOSITION",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "OFFICIAL_EXPOSITION",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "ISSUED_UNADOPTED",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": "",
+      "source": "AUTHOR_RULING_R6-6"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": {
+      "text": "Descriptive denominational statement; American Baptist Churches USA does not adopt binding creeds",
+      "adoption_status": "ISSUED_UNADOPTED",
+      "adoption_verified": "abc-usa.org/10facts and its print-ready PDF (WebFetch): no attribution, date or adoption statement; two web searches. NOT searched: ABCUSA General Board minutes; the Standing Rules on abc-usa.org. A different ABCUSA text, the 1998 Identity Statement, carries an adopting act (seen only on a congregation's site)",
+      "fails_closed": false
+     },
      "speaks_for": "ABC-USA (descriptive, non-binding)",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5242,6 +5898,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5315,6 +5984,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5388,6 +6070,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5490,6 +6185,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "3 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT, REJECT/BELOW_FLOOR",
      "BSR-BA-02": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/BELOW_FLOOR",
@@ -5553,7 +6249,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-238",
@@ -5582,6 +6280,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5696,6 +6407,7 @@
       "silence_rationale": "pass 1 locator: None of the ten chunks mention 'Word' or 'Logos' as a title of the Son; nearest content is generic references to Jesus Christ as Lord/Savior without the Word/Logos predicate."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Section II.B (God the Son) cites John 1:1-18 only as a supporting reference list; the confession's own prose never applies the title 'Word/Logos' to Christ.",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -5749,7 +6461,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-246",
@@ -5778,6 +6492,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5911,6 +6638,7 @@
       "silence_rationale": "pass 1 locator: None of the ten facts mention Wisdom as a title of the Son; the closest is Fact 1's naming of Christ as Lord and Savior, which does not assert the predicate."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-BA-02": "pass 1 locator: Paragraph 1 calls God 'most wise' but predicates this of the one divine essence generally, not the Son as Wisdom, and paragraph 3's Trinitarian statement gives the Son no such title.",
@@ -5964,7 +6692,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-254",
@@ -6024,6 +6754,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact statements use 'Light' or any Nicene 'Light from Light' language about the Son; the chunks contain no relevant wording to approach this predicate."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II.B (God the Son) confesses Christ's deity and eternal sonship but never uses 'light' or 'Light from Light' language of the Son; no chunk approaches this predicate.",
      "BSR-BA-02": "pass 1 locator: Chunk c1 speaks of God 'dwelling in the light which no man can approach unto' but predicates this of the one divine essence, not distinctly of the Son as 'Light from Light'; no chunk applies light language to the Son's",
@@ -6077,7 +6808,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-262",
@@ -6137,6 +6870,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact statements address the Son's relation to the Father as image or manifestation; Fact 1 mentions Christ as Lord and Savior but asserts no image/manifestation predicate."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Section II.B (God the Son) describes the Son's deity, incarnation, and mediatorial work but never uses image/manifestation language of the Father; Colossians 1:15 appears only as a proof-text citation, not asserted in the standard's own prose.",
      "BSR-BA-02": "pass 1 locator: Chapter 2 para 3 affirms the Son is eternally begotten of the Father but contains no image/manifestation language applied to the Son; nothing else in the supplied chunks approaches this predicate.",
@@ -6190,7 +6924,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-270",
@@ -6219,6 +6955,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6307,6 +7056,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6408,6 +7170,7 @@
       "silence_rationale": "pass 1 locator: Chunk c4 mentions the Holy Spirit only as guide for interpreting Scripture; no chunk attributes vivifying or life-giving agency to the Holy Spirit."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT",
      "BSR-BA-02": "pass 1 locator: Chapter 2 par.3 mentions the Holy Spirit's procession and Trinitarian relations, but none of the supplied chunks assert the Spirit's vivifying, life-giving agency.",
@@ -6471,7 +7234,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-278",
@@ -6500,6 +7265,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6588,6 +7366,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6661,6 +7452,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6762,6 +7566,7 @@
       "silence_rationale": "pass 1 locator: Fact 4 mentions 'the guidance of the Holy Spirit' but only regarding scriptural interpretation, not asserting the Spirit's eternal power or might."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT",
      "BSR-BA-02": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT",
@@ -6825,7 +7630,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-286",
@@ -6854,6 +7661,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6938,6 +7758,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7020,6 +7853,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7134,6 +7980,7 @@
       "silence_rationale": "pass 1 locator: The chunks describe God only as Creator, Savior, and Advocate (Fact 1) without any statement addressing God's own beginninglessness or non-dependence on a creator."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II (c2) calls God 'the Creator' of the universe but never states that God Himself is uncreated, beginningless, or independent of an originating act.",
      "BSR-BA-02": "3 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT/OK, ACCEPT/OK",
@@ -7187,7 +8034,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-294",
@@ -7216,6 +8065,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7298,6 +8160,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7382,6 +8257,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7498,6 +8386,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact statements address God's mode of being or origin; nothing approaches an assertion of unbegottenness or absolute source-status for God or the Father."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II calls God 'one and only one living and true God' and II.B calls Christ 'the eternal Son,' but no chunk denies generation or asserts the Father is unbegotten/from none.",
      "BSR-BA-02": "3 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/BELOW_FLOOR",
@@ -7570,7 +8459,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-302",
@@ -7599,6 +8490,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7684,6 +8588,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7783,6 +8700,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7871,6 +8801,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7989,6 +8932,7 @@
       "silence_rationale": "pass 1 locator: The chunks mention God as 'Creator' (Fact 1) but nowhere assert or deny that God is 'not made' or uncreated; no passage addresses creaturehood of God at all."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR",
      "BSR-BA-02": "3 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK",
@@ -8093,7 +9037,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-318",
@@ -8122,6 +9068,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8236,6 +9195,7 @@
       "silence_rationale": "pass 1 locator: None of the ten belief chunks discuss divine immensity or spatial/metaphysical limitation; closest is Fact 1's mention of God as Creator, which does not address circumscription."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Closest is II. God (c2), 'God is infinite in holiness and all other perfections,' a general perfection claim that never asserts spatial immensity or non-circumscription of God.",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -8289,7 +9249,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-326",
@@ -8318,6 +9280,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8432,6 +9407,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact statements mention invisibility or perceptibility by sight at all; God is described only via titles like Creator, Savior, Advocate with no comment on visibility."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: None of the supplied articles (II, II.A) use 'invisible' or assert non-perceptibility by sight of God; II.A calls God 'Spirit' and 'Father' but never addresses visibility.",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -8485,7 +9461,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-334",
@@ -8514,6 +9492,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8596,6 +9587,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8712,6 +9716,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact statements mention God's incorporeality or bodily nature at all; the chunks address ordinances, missions, diversity, and polity, not divine embodiment."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -8775,7 +9780,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-350",
@@ -8804,6 +9811,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8918,6 +9938,7 @@
       "silence_rationale": "pass 1 locator: None of the ten chunks mention divine impassibility or passions at all; nothing addresses God's susceptibility to alteration, so no passage approaches the predicate."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II (c2-c3) affirms God's perfections, power, and knowledge but nowhere asserts impassibility or freedom from passions; the nearest term, 'unchangeable' in c8, describes God's purpose of grace/election, not divine impassibility to alteration.",
      "BSR-BA-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -8971,7 +9992,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-358",
@@ -9000,6 +10023,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9082,6 +10118,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9196,6 +10245,7 @@
       "silence_rationale": "pass 1 locator: None of the 10 chunks mention immutability or unchangeableness of God; closest is Fact 1's description of God as Creator, Savior, Advocate, which does not assert constancy or unchangeableness."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: In V. God's Purpose of Grace (c8), 'unchangeable' modifies Election as a divine purpose/display of goodness, not God Himself, so no supplied chunk asserts God's own immutability.",
      "BSR-BA-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK",
@@ -9249,7 +10299,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-374",
@@ -9278,6 +10330,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9360,6 +10425,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9474,6 +10552,7 @@
       "silence_rationale": "pass 1 locator: None of the 10 supplied Facts mention God's incomprehensibility or exhaustive intellectual limits; they cover Scripture, ordinances, missions, freedom, and diversity without addressing God's nature in this way."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II describes God as infinite in holiness and all-knowing (c2) but never denies exhaustive human comprehension of God; no chunk uses incomprehensible or equivalent apophatic language of God.",
      "BSR-BA-02": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK",
@@ -9527,7 +10606,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-382",
@@ -9559,6 +10640,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9636,6 +10730,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9743,6 +10850,7 @@
       "silence_rationale": "pass 1 locator: None of the ten belief facts address God's ineffability or limits of language; nearest is Fact 1's mention of God as 'revealed' by Scripture, which asserts knowability rather than denying exhaustive expression."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II names God 'infinite in holiness and all other perfections' (II. God) but nowhere denies exhaustive linguistic expressibility of God, so no passage asserts ineffability.",
      "BSR-BA-02": "2 candidate(s) located and verified: REJECT/BELOW_FLOOR, REJECT/BELOW_FLOOR",
@@ -9815,7 +10923,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-390",
@@ -9847,6 +10957,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9925,6 +11048,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10048,6 +11184,7 @@
       "silence_rationale": "pass 1 locator: None of the ten supplied Fact statements address divine incomprehensibility or unsearchable judgments; they cover ordinances, polity, missions, and diversity, not God's inscrutability."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II describes God as 'all powerful and all knowing' (c2), affirming comprehensive divine knowledge rather than asserting any limit on rational penetration of His counsel; no chunk states God's judgments or ways are unsearchable.",
      "BSR-BA-02": "2 candidate(s) located and verified: REJECT/BELOW_FLOOR, REJECT/BELOW_FLOOR",
@@ -10145,7 +11282,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-406",
@@ -10205,6 +11344,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact statements address divine incomprehensibility or Creator-creature likeness; the closest is Fact 1's mention of God as 'Creator, Savior and Advocate,' which asserts divine roles, not an apophatic denial of adequate likeness."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II (God) affirms God's infinite perfections and omniscience but nowhere denies adequate creaturely likeness or comparison to God; no apophatic clause appears in any supplied chunk.",
      "BSR-BA-02": "pass 1 locator: Ch.2 §1 calls God's essence incomprehensible and His being infinite/immense, but this asserts transcendent incomprehensibility, not an explicit denial of adequate likeness or comparison between Creator and creature.",
@@ -10258,7 +11398,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-414",
@@ -10287,6 +11429,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10404,6 +11559,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact-chunks address the two-natures union of Christ at all; Fact 1 mentions Christ's death and resurrection but makes no assertion about distinct natures without confusion."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-BA-02": "pass 1 locator: Chapter 2 addresses the Trinity's unity and distinction of persons (para. 3) but none of the supplied chunks address the two natures of the incarnate Christ or their union without confusion.",
@@ -10467,7 +11623,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-422",
@@ -10527,6 +11685,7 @@
       "silence_rationale": "pass 1 locator: None of the ten belief facts address the two natures of Christ or any delimiter on their union; Fact 1's mention of Christ as Lord and Savior is the nearest reference but asserts no such proposition."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II.B (c4) affirms Christ 'fully God, fully man' united in one Person but never states the union is without conversion or change of either nature.",
      "BSR-BA-02": "pass 1 locator: Chapter 2 treats the Trinity and divine attributes (paragraphs 1-3); none discusses Christ's incarnate two natures or denies conversion of one nature into another.",
@@ -10580,7 +11739,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-430",
@@ -10609,6 +11770,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10744,6 +11918,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact chunks address the metaphysical union of Christ's two natures; nearest content is Fact 1's mention of Christ's death and resurrection, with no delimiter on division of natures."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-BA-02": "pass 1 locator: Chunks c1-c3 (ch.2, paras.1-3) address the undivided divine essence and Trinity of subsistences, not the union of Christ's two natures in the incarnate Son.",
@@ -10834,7 +12009,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-438",
@@ -10863,6 +12040,19 @@
      "standard_title": "Baptist Faith and Message 2000",
      "authority_tier": "CONFESSIONAL (statement of faith, not a creed)",
      "effective_tier": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (statement of faith, not a creed)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Southern Baptist Convention",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10979,6 +12169,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact statements address Christ's two natures or their union; Fact 1 mentions Christ's death and resurrection but never delimits a natures-union predicate."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-BA-02": "pass 1 locator: Chapter 2 paragraph 3 (c3) treats the Trinity's undivided essence among Father, Son, and Spirit, not the union of Christ's two natures in the incarnation, so no supplied chunk addresses the Christological delimiter.",
@@ -11042,7 +12233,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-454",
@@ -11086,6 +12279,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11163,6 +12369,19 @@
      "standard_title": "Second London Confession 1689, ch. 2",
      "authority_tier": "CONFESSIONAL (voluntary church-level subscription)",
      "effective_tier": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (voluntary church-level subscription)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Reformed Baptist churches and associations",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11265,6 +12484,7 @@
       "silence_rationale": "pass 1 locator: None of the ten fact-statements address the mode of God's being or creaturely likeness to God; closest is c4's mention of approaching God directly, which asserts relational access, not ontological dissimilarity."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-BA-01": "pass 1 locator: Article II (chunk c2) affirms God's nature and perfections positively but nowhere denies creaturely likeness or asserts greater dissimilarity than similarity between God and creatures.",
      "BSR-BA-02": "2 candidate(s) located and verified: REJECT/BELOW_FLOOR, REJECT/BELOW_FLOOR",
@@ -11328,7 +12548,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   }
  ]
 }

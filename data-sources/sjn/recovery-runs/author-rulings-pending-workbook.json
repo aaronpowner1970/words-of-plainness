@@ -1,7 +1,7 @@
 {
  "schema": "sjn-gate6-author-rulings/1",
  "what": "Author rulings the Gate 6 harness applies IN MEMORY until the workbook carries them. Nothing here writes to the workbook. Each ruling names the workbook change that would supersede it; once the workbook holds that change the harness reads the workbook and checks it agrees (scripts/sjn_recovery/rulings.py).",
- "source": "wop-scratch/WoP_SJN_B4_ReviewAddendum_20260913.md §5 and wop-scratch/WoP_SJN_Gate6_Session6_Prompt_20260913.txt (author rulings, 2026-09-13); wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set); wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets)",
+ "source": "wop-scratch/WoP_SJN_B4_ReviewAddendum_20260913.md §5 and wop-scratch/WoP_SJN_Gate6_Session6_Prompt_20260913.txt (author rulings, 2026-09-13); wop-scratch/WoP_SJN_Gate6_Session8_Prompt_20260916.txt (author rulings, 2026-09-16, second set); wop-scratch/WoP_SJN_Gate6_Session9_Prompt_20260916.txt (author rulings, 2026-09-16, third and fourth sets); Code session 11 prompt, 'SJN GATE 6 -- ADOPTION RATIFICATION: WRITE, GUARD, REBUILD ONCE' (author rulings R6-35 to R6-40, ratified 2026-09-17 in Chat); the ratified block is kept verbatim at data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
  "rulings": {
   "R6-1_required_subject": {
    "ruled": "2026-09-13",
@@ -177,21 +177,174 @@
     },
     "BSR-RP-02": {
      "adoption_status": "ADOPTED",
-     "adoption_body_scope": "WHOLE_BRANCH",
+     "adoption_body_scope": "ONE_CHURCH",
      "adoption_act": "adopted by the confessional act that types the Westminster Shorter Catechism CONFESSIONAL (OPC)",
      "adoption_verified": "author ruling 2026-09-16",
-     "adopting_body": "the confessing church"
+     "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+     "amended": {
+      "ruling": "R6-38",
+      "ratified_date": "2026-09-17",
+      "status": "RATIFIED (amended)",
+      "was": {
+       "adoption_body_scope": "WHOLE_BRANCH",
+       "adopting_body": "the confessing church"
+      },
+      "note": "Amended from WHOLE_BRANCH / 'the confessing church' under B2(e); the entry's own act string names the OPC. Code confirms against the registry before writing. No tier effect (CONFESSIONAL)",
+      "registry_check": "confirmed 2026-09-17 against workbook v2.25r4 Branch Source Registry row 24: standard_title 'Westminster Shorter Catechism — OPC', publisher_domain opc.org, canonical_url https://opc.org/sc.html; the entry's act string names the OPC"
+     }
     },
     "BSR-LU-01": {
      "adoption_status": "ADOPTED",
-     "adoption_body_scope": "WHOLE_BRANCH",
+     "adoption_body_scope": "ONE_CHURCH",
      "adoption_act": "the catechism material of the Book of Concord is adopted by the confessional acts that type it CONFESSIONAL",
      "adoption_verified": "author ruling 2026-09-16",
-     "adopting_body": "the confessing church"
+     "adopting_body": "The Lutheran Church-Missouri Synod",
+     "amended": {
+      "ruling": "R6-38",
+      "ratified_date": "2026-09-17",
+      "status": "RATIFIED (amended, completion by verification)",
+      "was": {
+       "adoption_body_scope": "WHOLE_BRANCH",
+       "adopting_body": "the confessing church"
+      },
+      "ratified_values": {
+       "adoption_body_scope": "PENDING_VERIFICATION",
+       "adopting_body": "PENDING_VERIFICATION"
+      },
+      "note": "WHOLE_BRANCH and 'the confessing church' fail B2(e). Code reports the stored text's host and church and any named adopting act on record. If one is on record, record that body and its verified reach in this rebuild; if not, keep adoption_status ADOPTED, set the disclosure to name no body wider than verified, and place LU-01 on the QA track. No tier effect (CONFESSIONAL)",
+      "completed_by_verification": {
+       "stored_text_host": "bookofconcord.org (a private site, publisher_domain bookofconcord.org; 132 page URLs, 738 chunks), hosting the public-domain 1921 Concordia Triglotta translation (registry draft_recommendation); the host is not a church",
+       "church_on_record": "Lutheran Church—Missouri Synod: every Evidence-First Cell Queue row whose Text URL is on bookofconcord.org names the institution 'Lutheran Church—Missouri Synod' (12 rows), with Authority / adoption URL https://www.lcms.org/about/beliefs/lutheran-confessions on 8 of them and the note 'LCMS confessional subscription; not all Lutherans'",
+       "named_adopting_act_on_record": "LCMS Constitution Art. II, which accepts without reservation the symbolical books of the Book of Concord (recorded and verified for BSR-LU-03 under R6-37: LCMS Handbook 2023 Update Edition, WebFetch, district-hosted copy, one publisher). The Book of Concord is BSR-LU-01's own text; the translation carries the adoption under B2(d)",
+       "written": {
+        "adoption_body_scope": "ONE_CHURCH",
+        "adopting_body": "The Lutheran Church-Missouri Synod"
+       },
+       "not_used": [
+        "the retired row BSR-LU-04 (ELCA teaching pages, 'adoption witness only'): no act named, never verified",
+        "the registry's speaks_for 'Lutheran churches subscribing the Book of Concord': a description, not a named body"
+       ],
+       "weakness": "one publisher for Art. II (a district-hosted copy); the lcms.org adoption URL in the workbook was not opened in this session; the reach is the LCMS only, narrower than the row's speaks_for",
+       "verified_at": "2026-09-17, Code session 11 (workbook v2.25r4 read; no fetch)"
+      }
+     }
+    },
+    "BSR-RC-07": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "WHOLE_BRANCH",
+     "adoption_act": "Benedict XVI, motu proprio approving and promulgating the Compendium of the Catechism of the Catholic Church, 28 June 2005",
+     "adopting_body": "the Apostolic See",
+     "adoption_verified": "vatican.va motu proprio page (WebFetch + Claude Browser) and ewtn.com (WebFetch): two instruments, two publishers; the stored page carries the same approval sentence in its front matter. Stored text is the English edition (B2(d)). Store lacks Part Four (Q.534-598): coverage, not adoption",
+     "status": "RATIFIED",
+     "ratified_date": "2026-09-17",
+     "ruling": "R6-40"
+    },
+    "BSR-AN-02": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "ONE_CHURCH",
+     "adoption_act": "Reviewed and approved by the Convocations of Canterbury and York (as recited in the Act of Uniformity 1662); doctrine affirmed by Canons A3 and A5. The Act of Uniformity 1662 is recorded as civil annexation only (B2(a)); the Catechism is covered as an integral text of the Book of Common Prayer (B2(b))",
+     "adopting_body": "Convocations of Canterbury and York (Church of England)",
+     "adoption_verified": "Convocation review evidenced by the recital in the enacted text of the Act of Uniformity 1662 (legislation.gov.uk, WebFetch); Canons A3 and A5 text read (churchofengland.org, WebFetch: one instrument, one publisher); same doctrinal statement in Worship and Doctrine Measure 1974 s.5(1) (legislation.gov.uk, WebFetch). NOT verified: the 20 Dec 1661 subscription date (bookseller listing only, not opened), the Convocation acts themselves, the Canons' promulgation dates",
+     "status": "RATIFIED",
+     "ratified_date": "2026-09-17",
+     "ruling": "R6-35"
+    },
+    "BSR-AN-04": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "ONE_CHURCH",
+     "adoption_act": "General Convention 1979 (Denver), Resolution 1979-A133, second reading: the Book of Common Prayer adopted and declared the Book of Common Prayer of this Church under Constitution Art. X (Journal 1979, p. C-8). 'An Outline of the Faith' is covered as an integral text of the adopted book (B2(b))",
+     "adopting_body": "General Convention of The Episcopal Church",
+     "adoption_verified": "episcopalarchives.org Acts of Convention 1979-A133 (WebFetch + Claude Browser) and 1979-A121 (WebFetch); stored PDF carries the Standard Book certificate (Jan 2007). Both publishers are arms of TEC: independence is by instrument. 1976 first reading not opened; the book's own rubric on the Outline not verified",
+     "status": "RATIFIED",
+     "ratified_date": "2026-09-17",
+     "ruling": "R6-40"
+    },
+    "BSR-AN-05": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "ONE_CHURCH",
+     "adoption_act": "ACNA College of Bishops, Melbourne FL, 8-12 January 2018: unanimous vote approving the revised edition of To Be a Christian (Approved Edition). Registry '2020' is the printing date",
+     "adopting_body": "College of Bishops of the Anglican Church in North America",
+     "adoption_verified": "anglican.ink communique (WebFetch + Claude Browser) and the registered PDF front matter, 'approved 2018', signed on behalf of the College (WebFetch): two publishers. Competence under B2(c): only the Constitution and Canons ratified 2026-06-25 were checked, by WebFetch summary. OPEN on the QA track: read the canons in force in 2017-18 for any provision assigning catechism or authorized-text approval; if found, revert to UNVERIFIED and hold affected cards",
+     "status": "RATIFIED",
+     "ratified_date": "2026-09-17",
+     "ruling": "R6-36"
+    },
+    "BSR-LU-03": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "ONE_CHURCH",
+     "adoption_act": "Small Catechism of Luther, a symbolical book of the Book of Concord (1580), accepted without reservation by LCMS Constitution Art. II. Stored text is Luther's own text in the Concordia Publishing House translation (c) 2019 (B2(d), translator disclosed); it is not the 2017 Explanation",
+     "adopting_body": "The Lutheran Church-Missouri Synod",
+     "adoption_verified": "LCMS Handbook 2023 Update Edition, Const. Art. II (WebFetch, district-hosted copy, one publisher); page contents WebFetch + Claude Browser; stored chunk read directly. No act adopting the CPH translation found (not required under B2(d)); LCMS convention resolutions not searched",
+     "translation_disclosure": "English translation: Concordia Publishing House (c) 2019",
+     "guard": "Chunks carrying CPH 2017 Explanation or other publisher matter (e.g. 'The Central Thought') do not inherit this adoption and resolve to OFFICIAL_EXPOSITION (B2(b), B2(d))",
+     "status": "RATIFIED",
+     "ratified_date": "2026-09-17",
+     "ruling": "R6-37"
+    },
+    "BSR-RP-03": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "ONE_CHURCH",
+     "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+     "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+     "adoption_verified": "opc.org preface (WebFetch + Claude Browser) and opc.org BCO preface (WebFetch): one publisher; GA minutes not opened",
+     "tier_effect": "none (CONFESSIONAL; R6-16)",
+     "status": "RATIFIED",
+     "ratified_date": "2026-09-17",
+     "ruling": "R6-38"
+    },
+    "BSR-RP-05": {
+     "adoption_status": "ADOPTED",
+     "adoption_body_scope": "MULTILATERAL",
+     "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+     "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+     "adoption_verified": "crcna.org confessions page and rca.org Heidelberg history page (WebFetch): two publishers for the standard. 2011 translation vote from theaquilareport.com only (WebFetch, one publisher; recorded, not load-bearing under B2(d)); RCA 2011 action not found",
+     "translation_disclosure": "English translation: CRC/RCA joint translation, 2011",
+     "tier_effect": "none (CONFESSIONAL; R6-16)",
+     "status": "RATIFIED",
+     "ratified_date": "2026-09-17",
+     "ruling": "R6-40"
+    },
+    "BSR-BA-03": {
+     "adoption_status": "ISSUED_UNADOPTED",
+     "adoption_body_scope": "",
+     "adoption_act": "",
+     "adopting_body": "",
+     "adoption_verified": "abc-usa.org/10facts and its print-ready PDF (WebFetch): no attribution, date or adoption statement; two web searches. NOT searched: ABCUSA General Board minutes; the Standing Rules on abc-usa.org. A different ABCUSA text, the 1998 Identity Statement, carries an adopting act (seen only on a congregation's site)",
+     "disclosure_wording": "Descriptive denominational statement; American Baptist Churches USA does not adopt binding creeds",
+     "tier_effect": "none (bare tier already OFFICIAL_EXPOSITION; tier unchanged under B1)",
+     "follow_up": "Propose a NEW registry row for the 1998 Identity Statement after Cowork verifies it on abc-usa.org under the Source Verification Standard; it enters a later run, not this rebuild. Do not re-point BA-03",
+     "status": "RATIFIED",
+     "ratified_date": "2026-09-17",
+     "ruling": "R6-39"
     }
    },
    "supersede_with": "Branch Source Registry: the four adoption_* columns on every row",
-   "amended_by": "R6-16 (2026-09-16): fail-closed demotion applies only to bare-tier CATECHETICAL rows"
+   "amended_by": "R6-16 (2026-09-16): fail-closed demotion applies only to bare-tier CATECHETICAL rows",
+   "ratified_2026_09_17": {
+    "source": "Code session 11 prompt, 'SJN GATE 6 -- ADOPTION RATIFICATION: WRITE, GUARD, REBUILD ONCE' (author rulings R6-35 to R6-40, ratified 2026-09-17 in Chat); the ratified block is kept verbatim at data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
+    "block": "data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
+    "rows_added": [
+     "BSR-AN-02",
+     "BSR-AN-04",
+     "BSR-AN-05",
+     "BSR-BA-03",
+     "BSR-LU-03",
+     "BSR-RC-07",
+     "BSR-RP-03",
+     "BSR-RP-05"
+    ],
+    "rows_amended": [
+     "BSR-RP-02",
+     "BSR-LU-01"
+    ],
+    "unchanged": [
+     "BSR-EO-01",
+     "BSR-EO-02",
+     "BSR-EO-04",
+     "BSR-RC-01"
+    ],
+    "refinements": "Comparison Principles Codex B2(a)-(e), ratified 2026-09-17"
+   }
   },
   "R6-7_compound_spirit_predication": {
    "ruled": "2026-09-16",
@@ -346,7 +499,8 @@
    ],
    "packet_rebuild": "HELD until the author ratifies the Cowork adoption verification; then rebuilt ONCE",
    "blocks_eo": false,
-   "supersede_with": "the workbook's adoption columns"
+   "supersede_with": "the workbook's adoption columns",
+   "discharged": "2026-09-17: the Cowork verification ratified (R6-35 to R6-40); the seven finished packets rebuilt ONCE in Code session 11"
   },
   "R6-17_tp049_fixture": {
    "ruled": "2026-09-16",
@@ -439,6 +593,118 @@
    "as_implemented": "scripts/sjn_recovery/config.py EO_CONSULTATION_LADDER, read by packets.ladder_tier (a row's own eo_ladder_tier wins)",
    "test": "test_session9_rulings.test_the_eo_ladder_is_read_from_config",
    "supersede_with": "the registry's eo_ladder_tier column"
+  },
+  "R6-35_an02_adoption": {
+   "ruled": "2026-09-17",
+   "source": "Code session 11 prompt, 'SJN GATE 6 -- ADOPTION RATIFICATION: WRITE, GUARD, REBUILD ONCE' (author rulings R6-35 to R6-40, ratified 2026-09-17 in Chat); the ratified block is kept verbatim at data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
+   "status": "RATIFIED",
+   "rule": "Ruling A: AN-02 ADOPTED on the church's own acts; B2(a) civil statute is context only; B2(b) adoption of a book covers its integral texts, never added apparatus",
+   "rows": [
+    "BSR-AN-02"
+   ],
+   "codex": "B2(a) an adopting act is a church body's act; a civil statute that enacts or annexes a church text is recorded as context but does not count by itself. B2(b) adoption of a book extends to its integral texts, never to introductions, explanations or other matter a publisher or editor adds.",
+   "as_implemented": "R6-6_adoption_field.rows BSR-AN-02 (ADOPTED, ONE_CHURCH); Registry.exposition_tier keeps CATECHETICAL; the card says 'approved by Convocations of Canterbury and York (Church of England) (one church)'",
+   "test": "test_session11_rulings.test_the_ratified_rows_resolve_and_disclose_as_ruled",
+   "supersede_with": "Branch Source Registry, BSR-AN-02: the four adoption_* columns"
+  },
+  "R6-36_an05_adoption": {
+   "ruled": "2026-09-17",
+   "source": "Code session 11 prompt, 'SJN GATE 6 -- ADOPTION RATIFICATION: WRITE, GUARD, REBUILD ONCE' (author rulings R6-35 to R6-40, ratified 2026-09-17 in Chat); the ratified block is kept verbatim at data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
+   "status": "RATIFIED",
+   "rule": "Ruling B: AN-05 ADOPTED on the College of Bishops' vote; B2(c) collective episcopate counts unless canons in force at the time assign the act elsewhere; QA-track check of the 2017-18 ACNA canons",
+   "rows": [
+    "BSR-AN-05"
+   ],
+   "codex": "B2(c) a church's constitutional episcopal body counts unless the canons in force at the time of the act assign that act elsewhere.",
+   "qa_track": "read the ACNA canons in force in 2017-18 for any provision assigning catechism or authorized-text approval; if found, revert BSR-AN-05 to UNVERIFIED and hold affected cards",
+   "as_implemented": "R6-6_adoption_field.rows BSR-AN-05 (ADOPTED, ONE_CHURCH)",
+   "test": "test_session11_rulings.test_the_ratified_rows_resolve_and_disclose_as_ruled",
+   "supersede_with": "Branch Source Registry, BSR-AN-05: the four adoption_* columns"
+  },
+  "R6-37_lu03_adoption": {
+   "ruled": "2026-09-17",
+   "source": "Code session 11 prompt, 'SJN GATE 6 -- ADOPTION RATIFICATION: WRITE, GUARD, REBUILD ONCE' (author rulings R6-35 to R6-40, ratified 2026-09-17 in Chat); the ratified block is kept verbatim at data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
+   "status": "RATIFIED",
+   "rule": "Ruling C: LU-03 ADOPTED with translator disclosed; B2(d) adoption attaches to a text, not a language edition; publisher Explanation matter never inherits it (guard)",
+   "rows": [
+    "BSR-LU-03"
+   ],
+   "codex": "B2(d) adoption attaches to a text, not a language edition; a translation carries it, with the translator disclosed; never to publisher-added matter.",
+   "registry_id": "BSR-LU-03",
+   "overrides": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT (Luther's Small Catechism text in the Concordia Publishing House translation (c) 2019, not the 2017 Explanation; adopted by the LCMS through Constitution Art. II, R6-37)"
+   },
+   "overrides_why": "session 11 prompt, goal 3e: the workbook note said '2017 explanation edition; official status implied by lcms.org link'; the one stored chunk is Luther's catechism text (the Creed's First Article and Luther's explanation, ending 'This is most certainly true.'), carrying no CPH Explanation matter",
+   "guard": {
+    "registry_id": "BSR-LU-03",
+    "kind": "PUBLISHER_APPARATUS",
+    "apparatus_markers": [
+     "The Central Thought"
+    ],
+    "integral_text_pattern": "^I believe in [^?]*?\\. What does this mean\\? .*?This is most certainly true\\.$",
+    "resolves_to": "OFFICIAL_EXPOSITION",
+    "why": "Chunks carrying CPH 2017 Explanation or other publisher matter (e.g. 'The Central Thought') do not inherit this adoption and resolve to OFFICIAL_EXPOSITION (B2(b), B2(d))",
+    "reading": "a chunk of the row that contains any apparatus marker, or whose whitespace-normalised text is not wholly the integral text (Luther's article, 'What does this mean?', Luther's answer ending 'This is most certainly true.'), is publisher matter: it does not inherit the row's adoption and resolves to OFFICIAL_EXPOSITION. Evaluated per chunk; fails closed"
+   },
+   "as_implemented": "R6-6_adoption_field.rows BSR-LU-03 (ADOPTED, ONE_CHURCH, translation_disclosure); rulings.adoption_guards() reads the guard above; Registry.apparatus_guard / exposition_tier(rid, tier, chunk) apply it to any row that carries one (only BSR-LU-03 in this session)",
+   "test": "test_session11_rulings.test_an_lu03_apparatus_chunk_never_resolves_catechetical",
+   "supersede_with": "Branch Source Registry, BSR-LU-03: the four adoption_* columns and draft_recommendation; the guard: an apparatus column or rule in APP CONFIG"
+  },
+  "R6-38_adoption_scope_reach": {
+   "ruled": "2026-09-17",
+   "source": "Code session 11 prompt, 'SJN GATE 6 -- ADOPTION RATIFICATION: WRITE, GUARD, REBUILD ONCE' (author rulings R6-35 to R6-40, ratified 2026-09-17 in Chat); the ratified block is kept verbatim at data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
+   "status": "RATIFIED",
+   "rule": "Ruling D: scope records the verified reach of the named adopting body; B2(e); RP-02 and LU-01 amended",
+   "rows": [
+    "BSR-RP-03",
+    "BSR-RP-02",
+    "BSR-LU-01"
+   ],
+   "codex": "B2(e) the scope field records the verified reach of the named adopting body, never the branch-wide effect; WHOLE_BRANCH only where the body's authority covers the whole branch.",
+   "amendments": {
+    "BSR-RP-02": "ONE_CHURCH / General Assembly of the Orthodox Presbyterian Church (registry confirmed: the row names the OPC)",
+    "BSR-LU-01": "ratified PENDING_VERIFICATION; completed by verification as ONE_CHURCH / The Lutheran Church-Missouri Synod on the act on record (LCMS Constitution Art. II; see R6-6 rows BSR-LU-01.amended.completed_by_verification)"
+   },
+   "as_implemented": "R6-6_adoption_field.rows BSR-RP-03 added; BSR-RP-02 and BSR-LU-01 amended in place (the prior values kept under 'amended.was')",
+   "test": "test_session11_rulings.test_the_amended_rows_name_a_body_no_wider_than_verified",
+   "supersede_with": "Branch Source Registry: the four adoption_* columns on BSR-RP-02, BSR-RP-03 and BSR-LU-01"
+  },
+  "R6-39_ba03_issued_unadopted": {
+   "ruled": "2026-09-17",
+   "source": "Code session 11 prompt, 'SJN GATE 6 -- ADOPTION RATIFICATION: WRITE, GUARD, REBUILD ONCE' (author rulings R6-35 to R6-40, ratified 2026-09-17 in Chat); the ratified block is kept verbatim at data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
+   "status": "RATIFIED",
+   "rule": "Ruling E: BA-03 ISSUED_UNADOPTED on the R6-6 (Hopko) precedent; neutral non-creedal disclosure; 1998 Identity Statement proposed as a NEW row after Cowork verification",
+   "rows": [
+    "BSR-BA-03"
+   ],
+   "registry_id": "BSR-BA-03",
+   "overrides": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT as OFFICIAL_EXPOSITION; ISSUED_UNADOPTED (R6-39): a descriptive denominational statement, and American Baptist Churches USA does not adopt binding creeds"
+   },
+   "overrides_why": "session 11 prompt, goal 3f: the workbook note recommended CURRENT_OFFICIAL_WITNESS, a defined rank (APP CONFIG authority_tier_rank, fifth) that no row carries; the ratified tier is OFFICIAL_EXPOSITION and is not changed",
+   "follow_up": "Propose a NEW registry row for the 1998 Identity Statement after Cowork verifies it on abc-usa.org under the Source Verification Standard; it enters a later run, not this rebuild. Do not re-point BA-03",
+   "as_implemented": "R6-6_adoption_field.rows BSR-BA-03 (ISSUED_UNADOPTED, disclosure_wording used verbatim on the card)",
+   "test": "test_session11_rulings.test_ba03_uses_its_disclosure_wording_exactly",
+   "supersede_with": "Branch Source Registry, BSR-BA-03: the four adoption_* columns and draft_recommendation"
+  },
+  "R6-40_rc07_an04_rp05_adoption": {
+   "ruled": "2026-09-17",
+   "source": "Code session 11 prompt, 'SJN GATE 6 -- ADOPTION RATIFICATION: WRITE, GUARD, REBUILD ONCE' (author rulings R6-35 to R6-40, ratified 2026-09-17 in Chat); the ratified block is kept verbatim at data-sources/sjn/recovery-runs/session11/ratified-block-20260917.json",
+   "status": "RATIFIED",
+   "rule": "RC-07, AN-04, RP-05 ratified as proposed, by explicit author confirmation, under B2, B2(b), B2(d)",
+   "rows": [
+    "BSR-RC-07",
+    "BSR-AN-04",
+    "BSR-RP-05"
+   ],
+   "registry_id": "BSR-RC-07",
+   "overrides": {
+    "canonical_url": "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html"
+   },
+   "overrides_why": "session 11 prompt, goal 3a: the workbook canonical_url is the host note 'vatican.va (as cited, 1 released cell)'; all 533 stored chunks share this one source_url (the URL sources.compendium fetches). The override touches BSR-RC-07 only; R6-40's other rows need none",
+   "as_implemented": "R6-6_adoption_field.rows BSR-RC-07 (WHOLE_BRANCH), BSR-AN-04 (ONE_CHURCH), BSR-RP-05 (MULTILATERAL, translation_disclosure)",
+   "test": "test_session11_rulings.test_the_ratified_rows_resolve_and_disclose_as_ruled",
+   "supersede_with": "Branch Source Registry: the four adoption_* columns on BSR-RC-07, BSR-AN-04 and BSR-RP-05; BSR-RC-07 canonical_url"
   }
  }
 }

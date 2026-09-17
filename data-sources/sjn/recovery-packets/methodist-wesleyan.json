@@ -1,10 +1,10 @@
 {
  "branch": "Methodist / Wesleyan",
  "run_id": "live-1",
- "built_at": "2026-09-13T22:31:52Z",
+ "built_at": "2026-09-17T07:39:39Z",
  "app_master_version": "v2.25r4 GATE6 SCOPE RATIFIED",
  "rebuilt_from": {
-  "at": "2026-09-13T22:31:52Z",
+  "at": "2026-09-17T07:39:39Z",
   "from": "stored cell states (candidates, rubrics, coder proposals)",
   "model_calls": 0,
   "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -23,7 +23,7 @@
     ]
    }
   },
-  "note": "session 6 final (no model calls in the rebuild): R6-4 one-text-one-slot guard; R6-1 required_subject — 49 WRONG_SUBJECT rejections re-verified (plus 3 truncated replies), stored in the cells; R6-2 — refusal of Q-382 / Q-390 / Q-454 as floor rulings (sample leak rate 0.467 < 0.5, applied to nothing else); packet builder passes floor_claim to the allocator (defect fix); coder proposals for 42 card entries"
+  "note": "session 11 (2026-09-17), the ONE rebuild R6-16 held for (no model calls): adoption ratified — R6-35 BSR-AN-02, R6-36 BSR-AN-05, R6-37 BSR-LU-03 (translator disclosed; publisher-apparatus guard), R6-38 scope = verified reach (BSR-RP-03 added; BSR-RP-02 and BSR-LU-01 amended to ONE_CHURCH), R6-39 BSR-BA-03 ISSUED_UNADOPTED with its own wording, R6-40 BSR-RC-07 / BSR-AN-04 / BSR-RP-05; the first build since session 6, so the session 7-9 resolution rules (R6-5/R6-10 phrase-level creed resolution, R6-6/R6-9 adoption field, Task 6 ladder fields) are reflected here for the first time"
  },
  "partial": false,
  "cap_state": null,
@@ -117,13 +117,118 @@
   "same_text_rows": {
    "BSR-EO-14": "BSR-EO-07"
   },
-  "status": "AUTHOR RULED 2026-09-13; applied in memory; workbook not written (deltas pending ratification)",
+  "registry_overrides": {
+   "BSR-EO-01": {
+    "standard_title": "*The Orthodox Faith*, Vol. I (Hopko) — The Symbol of Faith",
+    "authority_tier": "CATECHETICAL",
+    "speaks_for": "OCA (catechetical series by one author, published by the OCA)",
+    "reception_scope": "JURISDICTIONAL",
+    "same_work_as": "BSR-EO-02",
+    "eo_ladder_tier": "B",
+    "creed_resolution": "PHRASE"
+   },
+   "BSR-LU-03": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT (Luther's Small Catechism text in the Concordia Publishing House translation (c) 2019, not the 2017 Explanation; adopted by the LCMS through Constitution Art. II, R6-37)"
+   },
+   "BSR-BA-03": {
+    "draft_recommendation": "INCLUDE WITH CAVEAT as OFFICIAL_EXPOSITION; ISSUED_UNADOPTED (R6-39): a descriptive denominational statement, and American Baptist Churches USA does not adopt binding creeds"
+   },
+   "BSR-RC-07": {
+    "canonical_url": "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html"
+   }
+  },
+  "same_work_rows": {
+   "BSR-EO-01": "BSR-EO-02"
+  },
+  "independence_groups": {
+   "HOPKO-OF-VOL1": [
+    "BSR-EO-01",
+    "BSR-EO-02"
+   ]
+  },
+  "chunk_level_creed_rows": [
+   "BSR-EO-07",
+   "BSR-EO-14",
+   "BSR-RC-06",
+   "BSR-RC-08"
+  ],
+  "adoption_rows": {
+   "BSR-EO-01": "ISSUED_UNADOPTED",
+   "BSR-EO-02": "ISSUED_UNADOPTED",
+   "BSR-EO-04": "ADOPTED",
+   "BSR-RC-01": "ADOPTED",
+   "BSR-RP-02": "ADOPTED",
+   "BSR-LU-01": "ADOPTED",
+   "BSR-RC-07": "ADOPTED",
+   "BSR-AN-02": "ADOPTED",
+   "BSR-AN-04": "ADOPTED",
+   "BSR-AN-05": "ADOPTED",
+   "BSR-LU-03": "ADOPTED",
+   "BSR-RP-03": "ADOPTED",
+   "BSR-RP-05": "ADOPTED",
+   "BSR-BA-03": "ISSUED_UNADOPTED"
+  },
+  "adoption_guards": [
+   "BSR-LU-03"
+  ],
+  "adoption_scope_rule": "BRANCH_WIDE_WITH_DISCLOSURE",
+  "agency_tags_ratified": {
+   "RNR-H34": "ACTION",
+   "RNR-H35": "ATTRIBUTE",
+   "RNR-H06": "ATTRIBUTE",
+   "RNR-H21": "ACTION",
+   "RNR-H26": "ACTION",
+   "RNR-H27": "ATTRIBUTE",
+   "RNR-H38": "ATTRIBUTE"
+  },
+  "cell_flags": [
+   "Q-290"
+  ],
+  "status": "AUTHOR RULED 2026-09-13 (R6-1..R6-4), 2026-09-16 (R6-5..R6-23) and 2026-09-17 (R6-35..R6-40); applied in memory; workbook not written (deltas pending ratification)",
   "registry_rows_retired_in_memory": [
    {
     "registry_id": "BSR-EO-03",
     "ruling": "R6-3_retire_BSR-EO-03",
     "status": "RETIRED",
     "reason_code": "HOST_RETIRED"
+   },
+   {
+    "registry_id": "BSR-EO-01",
+    "ruling": "R6-5_bsr_eo_01_retype",
+    "status": "RE-TYPED",
+    "fields": [
+     "authority_tier",
+     "creed_resolution",
+     "eo_ladder_tier",
+     "reception_scope",
+     "same_work_as",
+     "speaks_for",
+     "standard_title"
+    ]
+   },
+   {
+    "registry_id": "BSR-LU-03",
+    "ruling": "R6-37_lu03_adoption",
+    "status": "RE-TYPED",
+    "fields": [
+     "draft_recommendation"
+    ]
+   },
+   {
+    "registry_id": "BSR-BA-03",
+    "ruling": "R6-39_ba03_issued_unadopted",
+    "status": "RE-TYPED",
+    "fields": [
+     "draft_recommendation"
+    ]
+   },
+   {
+    "registry_id": "BSR-RC-07",
+    "ruling": "R6-40_rc07_an04_rp05_adoption",
+    "status": "RE-TYPED",
+    "fields": [
+     "canonical_url"
+    ]
    }
   ],
   "required_subject_by_family": {
@@ -405,6 +510,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -562,6 +680,7 @@
       "silence_rationale": "pass 1 locator: Article 4 (¶216) calls the Holy Spirit, a distinct Trinitarian person, 'truly and eternally God,' but no chunk asserts that God or the Father is himself spiritual being in the kataphatic sense."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (c1) states God is 'without body or parts,' an apophatic denial of corporeality, not a kataphatic assertion naming God positively as 'Spirit' or spiritual being.",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -629,7 +748,9 @@
    "coder_skipped": {
     "Q-023-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-023-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-031",
@@ -658,6 +779,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -774,6 +908,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -890,6 +1037,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1026,6 +1186,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1097,6 +1270,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1208,6 +1394,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "2 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -1277,7 +1464,9 @@
     "Q-031-p1-BSR-MW-03-2": "SAME_TEXT parallel witness of Q-031-p1-BSR-MW-01-1: its phrase is textually identical to the seated phrase; takes no slot",
     "Q-031-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-047",
@@ -1306,6 +1495,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1422,6 +1624,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1538,6 +1753,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1678,6 +1906,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1816,6 +2057,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -1992,6 +2246,7 @@
       "silence_rationale": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Every occurrence of 'Lord' (Articles IX, XVI, XVIII, XIX, XXI, XXV) names Jesus Christ in soteriological or sacramental titles ('our Lord and Saviour Jesus Christ', 'the Lord's Supper'), never asserting sovereign authority of the one God or the Father as",
      "BSR-MW-02": "3 candidate(s) located and verified: ACCEPT/OK, REJECT/WRONG_SUBJECT, REJECT/WRONG_SUBJECT",
@@ -2059,7 +2314,9 @@
    "coder_skipped": {
     "Q-047-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-047-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-079",
@@ -2088,6 +2345,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -2189,6 +2459,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2319,6 +2602,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2409,6 +2705,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -2537,6 +2846,7 @@
       "silence_rationale": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "2 candidate(s) located and verified: REJECT/BELOW_FLOOR, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MW-02": "pass 1 locator: Article I (God) attributes goodness to God's own nature and Article XV calls God 'owner of all things,' but neither asserts that creaturely goodness derives from God.",
@@ -2602,7 +2912,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-103",
@@ -2671,6 +2983,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) lists God's attributes as holy, loving, eternal, unlimited in power, wisdom and goodness, but never predicates truthfulness or faithfulness of God; no other supplied article asserts this."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (God's attributes: power, wisdom, goodness) and Article XXV (human oaths 'in justice, judgment, and truth') come closest, but neither asserts God's own truthfulness or faithfulness.",
      "BSR-MW-02": "pass 1 locator: Article III (c3) says the Spirit 'guides them into all truth,' but this describes the Spirit's guiding activity toward believers, not an assertion that God is truthful or faithful.",
@@ -2736,7 +3049,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-119",
@@ -2805,6 +3120,7 @@
       "silence_rationale": "pass 1 locator: Article 2 (¶212) says the Father 'in love... seeks and receives penitent sinners,' the nearest passage, but never uses 'merciful' or asserts mercy as a divine attribute of God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: None of the 25 Articles predicate mercy of God; the closest is Article I's list of divine attributes (power, wisdom, goodness), which omits mercy entirely.",
      "BSR-MW-02": "pass 1 locator: Article I (God) lists power, wisdom, justice, goodness and love but never uses 'merciful' or 'mercy' of God; no supplied chunk asserts mercy as a divine attribute.",
@@ -2870,7 +3186,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-135",
@@ -2939,6 +3257,7 @@
       "silence_rationale": "pass 1 locator: The closest material is Article 2 (¶212) describing the Father's goodwill and seeking of penitent sinners, but it never asserts forbearance, patience, or long-suffering as a divine attribute."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I lists God's attributes as power, wisdom, and goodness (c1) but never mentions long-suffering, patience, or forbearance anywhere in the supplied chunks.",
      "BSR-MW-02": "pass 1 locator: Article I lists God's attributes as power, wisdom, justice, goodness and love and gracious regard for men, but never affirms long-suffering, patience, or forbearance of God.",
@@ -3004,7 +3323,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-143",
@@ -3033,6 +3354,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3171,6 +3505,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article XII (c12) mentions denial of 'the place of forgiveness to such as truly repent' but this condemns a rival view about repentance, not an assertion that GOD forgives; no chunk states God as forgiving subject.",
      "BSR-MW-02": "pass 1 locator: Article VIII (God was in Christ reconciling the world to himself) and Article IX (reconciled to God) speak of reconciliation but never use forgiveness language or assert God's remission of sin as such.",
@@ -3236,7 +3571,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-151",
@@ -3305,6 +3642,7 @@
       "silence_rationale": "pass 1 locator: Article 22 (¶250) mentions 'the blessedness of Christ's presence' as heaven's quality for the redeemed, not an assertion of beatitude in God or the Father themselves."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: The only occurrence of 'blessed' (Article II, 'blessed Virgin') describes Mary, not God; no chunk predicates beatitude of God or the Father.",
      "BSR-MW-02": "pass 1 locator: Article I describes God as infinite in power, wisdom, justice, goodness and love but nowhere uses 'blessed' or asserts beatitude of God; no chunk predicates blessedness of God himself.",
@@ -3370,7 +3708,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-159",
@@ -3399,6 +3739,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3483,6 +3836,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -3571,6 +3937,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3643,6 +4022,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -3716,6 +4108,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -3826,6 +4231,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OTHER"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT",
      "BSR-MW-02": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR",
@@ -3910,7 +4316,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-167",
@@ -3939,6 +4347,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4057,6 +4478,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4142,6 +4576,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -4251,6 +4698,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4390,6 +4850,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4568,6 +5041,7 @@
       "silence_rationale": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article XVI's phrase 'doth not only quicken' (Of the Sacraments) is the nearest wording, but the quickening is of the sacraments' effect on faith, not an assertion that God/the Father communicates life.",
      "BSR-MW-02": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/WRONG_SUBJECT",
@@ -4654,7 +5128,9 @@
    "coder_skipped": {
     "Q-167-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-167-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-207",
@@ -4683,6 +5159,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4765,6 +5254,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -4913,6 +5415,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -5112,6 +5627,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5250,6 +5778,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5388,6 +5929,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -5525,6 +6079,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5636,6 +6203,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: REJECT/WRONG_SUBJECT",
      "BSR-MW-02": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT/OK",
@@ -5743,7 +6311,9 @@
    "coder_skipped": {
     "Q-207-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-223",
@@ -5772,6 +6342,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -5854,6 +6437,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -5977,6 +6573,7 @@
       "silence_rationale": "pass 1 locator: Nearest wording is Article 21's 'the Scriptures reveal God as the Judge of all' (¶248), but there Scripture is the revealer and God the object, not God asserted as the self-communicating agent; other 'revealed' occurrences (Articles 6, 15) modify law/will"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article V (locator c5) discusses Scripture's sufficiency but never asserts that God himself reveals or self-communicates; no chunk predicates revelation of God or the Father directly.",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -6042,7 +6639,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-231",
@@ -6071,6 +6670,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6187,6 +6799,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6269,6 +6894,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6399,6 +7037,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -6470,6 +7121,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6579,6 +7243,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT/OK, ACCEPT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: ACCEPT/OK",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -6648,7 +7313,9 @@
     "Q-231-p1-BSR-MW-03-2": "SAME_TEXT parallel witness of Q-231-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot",
     "Q-231-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-239",
@@ -6677,6 +7344,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6793,6 +7473,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -6875,6 +7568,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -6998,6 +7704,7 @@
       "silence_rationale": "pass 1 locator: The nearest use of 'Word' is Article 17's 'preach the pure Word of God' (¶240), which denotes Scripture, not a title identifying the Son as Logos."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: ACCEPT/OK",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -7065,7 +7772,9 @@
    "coder_skipped": {
     "Q-239-p1-BSR-MW-03-1": "SAME_TEXT parallel witness of Q-239-p1-BSR-MW-01-1: its phrase is textually identical to the seated phrase; takes no slot"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-247",
@@ -7134,6 +7843,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) attributes 'wisdom' only to the one God's unified essence, not as a title of the Son specifically; no chunk names the Son as divine Wisdom."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (c1) attributes 'wisdom' to the one God as a shared divine attribute, not as a title naming the Son specifically as Wisdom; Article II (c2) calls the Son 'Word' but never 'Wisdom.'",
      "BSR-MW-02": "pass 1 locator: Article I (c1) predicates 'wisdom' of the one God/Trinity generally, not distinctly of the Son; Article II (c2) describes the Son's titles and work but never applies 'wisdom' to him.",
@@ -7199,7 +7909,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-255",
@@ -7268,6 +7980,7 @@
       "silence_rationale": "pass 1 locator: Article 3 (¶214) confesses the Son as 'only begotten Son of God, truly God and truly man' but never uses 'Light' or 'Light from Light' language of the Son."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article II (c2) asserts the Son as 'the very and eternal God, of one substance with the Father' but never employs 'Light' or 'Light from Light' imagery of the Son.",
      "BSR-MW-02": "pass 1 locator: Article II (c2) describes the Son as 'eternal Word made flesh' and 'only begotten Son' but never uses light imagery or the 'Light from Light' formula for the Son.",
@@ -7333,7 +8046,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-263",
@@ -7402,6 +8117,7 @@
       "silence_rationale": "pass 1 locator: Article 3 (¶214) describes the Son's person and work without image/manifestation language, and image references in Articles 2, 6-8 predicate 'image of God' of humanity, not the Son as image of the Father."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article II (c2) calls the Son 'the Word of the Father... of one substance with the Father' but never uses image/manifestation language of the Son.",
      "BSR-MW-02": "pass 1 locator: Article II (c2) calls the Son 'the eternal Word made flesh, the only begotten Son of the Father' but never uses image or manifestation language to describe the Son's relation to the Father.",
@@ -7467,7 +8183,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-271",
@@ -7496,6 +8214,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7613,6 +8344,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -7685,6 +8429,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -7757,6 +8514,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -7867,6 +8637,7 @@
       "silence_rationale": "2 candidate(s) located and verified: REJECT/WRONG_SUBJECT, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article IV (Of the Holy Ghost) affirms the Spirit's consubstantial deity but nowhere ascribes vivifying or life-giving agency to the Holy Spirit; the nearest term 'quicken' in Article XVI is predicated of the sacraments' effect on faith, not the Spirit's",
      "BSR-MW-02": "pass 1 locator: every candidate failed a code guard (see rejections)",
@@ -7967,7 +8738,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-279",
@@ -7996,6 +8769,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8080,6 +8866,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -8164,6 +8963,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8263,6 +9075,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8336,6 +9161,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -8408,6 +9246,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8480,6 +9331,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -8592,6 +9456,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OTHER"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -8662,7 +9527,9 @@
     "Q-279-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)",
     "Q-279-p1-BSR-MW-03-3": "candidate cap reached after tier allocation (speaks_for group rule: its group 'global methodist church' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-287",
@@ -8691,6 +9558,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -8811,6 +9691,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -8895,6 +9788,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9013,6 +9919,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9086,6 +10005,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -9158,6 +10090,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9268,6 +10213,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/BELOW_FLOOR"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "2 candidate(s) located and verified: REJECT/BELOW_FLOOR, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -9388,7 +10334,9 @@
    "coder_skipped": {
     "Q-287-p1-BSR-MW-02-1": "SAME_TEXT parallel witness of Q-287-p1-BSR-MW-03-1: its phrase is textually identical to the seated phrase; takes no slot"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-295",
@@ -9457,6 +10405,7 @@
       "silence_rationale": "pass 1 locator: Closest is ¶212 calling the Father 'the Source of all that exists' regarding creation, but no chunk denies the Father's own generation or calls Him unbegotten/without source."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I calls God 'everlasting' and 'without body or parts' but never denies generation from another or calls the Father 'unbegotten'; no chunk asserts this predicate of God.",
      "BSR-MW-02": "pass 1 locator: Article I (c1) calls God 'Eternal Spirit' and 'one true, holy and living God' but never denies generation from another or asserts unbegottenness of the Father or God as such.",
@@ -9522,7 +10471,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-303",
@@ -9551,6 +10502,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9635,6 +10599,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -9719,6 +10696,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9829,6 +10819,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -9901,6 +10904,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -9974,6 +10990,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10085,6 +11114,7 @@
       "silence_rationale": "2 candidate(s) located and verified: REJECT/BELOW_FLOOR, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: every candidate failed a code guard (see rejections)",
      "BSR-MW-02": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, REJECT/BELOW_FLOOR",
@@ -10178,7 +11208,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-319",
@@ -10207,6 +11239,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -10289,6 +11334,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10390,6 +11448,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -10515,6 +11586,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) calls God 'unlimited in power, wisdom and goodness' but this addresses attributes, not spatial/metaphysical circumscription, so no chunk asserts God's immensity in the required apophatic sense."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-MW-02": "pass 1 locator: Article I (c1) calls God 'infinite in power, wisdom, justice, goodness and love,' but this addresses moral/relational infinitude, not spatial immensity or freedom from metaphysical circumscription.",
@@ -10624,7 +11696,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-327",
@@ -10653,6 +11727,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -10779,6 +11866,7 @@
       "silence_rationale": "pass 1 locator: No supplied chunk uses 'invisible' or asserts imperceptibility to bodily sight of God or the Father; Article 1 (¶210) and Article 2 (¶212) describe divine attributes but never address visibility."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-MW-02": "pass 1 locator: Article I (c1) calls God creator 'of all things visible and invisible,' predicating invisibility of creation, not of God's own being; no chunk asserts God himself is invisible.",
@@ -10854,7 +11942,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-351",
@@ -10923,6 +12013,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) describes God as 'holy and loving, eternal, unlimited in power, wisdom and goodness' but omits the classical 'without passions' clause entirely, asserting no impassibility of God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I asserts God is 'without body or parts' (c1) but omits any 'passions' clause, so impassibility in the classical sense is nowhere asserted of God in the supplied text.",
      "BSR-MW-02": "pass 1 locator: Article I (God) lists infinite power, wisdom, justice, goodness and love but never states God is 'without passions' or impassible, nor addresses susceptibility to alteration.",
@@ -10988,7 +12079,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-359",
@@ -11057,6 +12150,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) affirms God as 'eternal, unlimited in power, wisdom and goodness' but never asserts changelessness or unchangeable character, and no other chunk mentions immutability of God."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (c1) lists God's attributes—everlasting, without body or parts, infinite power, wisdom, goodness—but never asserts immutability, unchangeableness, or constancy of God anywhere in the supplied chunks.",
      "BSR-MW-02": "pass 1 locator: Article I (c1) describes God as infinite in power, wisdom, justice, goodness and love but nowhere asserts immutability, constancy, or unchangeableness of God; no other chunk approaches this predicate.",
@@ -11122,7 +12216,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-375",
@@ -11191,6 +12287,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) calls God 'unlimited in power, wisdom and goodness' and Article 21 (¶248) cites God's omniscience, but neither asserts that God exceeds exhaustive intellectual comprehension."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (c1) describes God as 'without body or parts, of infinite power, wisdom, and goodness' but never denies exhaustive intellectual comprehension of God; no chunk asserts incomprehensibility of God.",
      "BSR-MW-02": "pass 1 locator: Article I (c1) describes God as infinite in power, wisdom, justice, goodness and love but never asserts that God exceeds or escapes intellectual comprehension.",
@@ -11256,7 +12353,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-383",
@@ -11325,6 +12424,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) affirms God's unity and attributes cataphatically but nowhere denies exhaustive linguistic expression of God; no apophatic or ineffability language appears in any supplied chunk."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (c1) affirms God's infinite power, wisdom, and goodness but nowhere denies exhaustive linguistic expression of God; no chunk asserts ineffability of God.",
      "BSR-MW-02": "pass 1 locator: Article I (c1) describes God as infinite in power, wisdom, justice, goodness and love but nowhere denies exhaustive linguistic expressibility of God; no chunk asserts ineffability of God.",
@@ -11390,7 +12490,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-391",
@@ -11459,6 +12561,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) attributes unlimited wisdom to God and Article 16 (¶238) mentions the Spirit's 'wise counsel,' but neither asserts that God's counsel or judgments exceed exhaustive rational penetration."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (c1) affirms God's infinite power, wisdom, and goodness but nowhere denies exhaustive rational penetration of divine counsel; no chunk asserts inscrutability of God.",
      "BSR-MW-02": "pass 1 locator: Article I (c1) affirms God's infinite wisdom and power but nowhere denies exhaustive rational penetration of divine counsel or calls God's ways unsearchable.",
@@ -11524,7 +12627,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-407",
@@ -11593,6 +12698,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) affirms God as 'unlimited in power, wisdom and goodness' cataphatically but nowhere denies adequate creaturely likeness or comparison to God; no apophatic restraint language appears in any supplied chunk."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (c1) affirms God's attributes positively ('without body or parts, of infinite power, wisdom, and goodness') but nowhere denies or restrains adequate Creator-creature likeness or comparison regarding God.",
      "BSR-MW-02": "pass 1 locator: Article I (God, infinite in power, wisdom, justice, goodness and love) comes nearest but asserts God's attributes positively without any denial of adequate Creator-creature likeness or comparison.",
@@ -11658,7 +12764,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-415",
@@ -11687,6 +12795,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11771,6 +12892,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -11853,6 +12987,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -11940,6 +13087,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12013,6 +13173,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -12125,6 +13298,7 @@
       "silence_rationale": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -12212,7 +13386,9 @@
     "Q-415-p1-BSR-MW-02-1": "candidate cap reached after tier allocation (speaks_for group rule: its group 'united methodist church' already holds a slot)",
     "Q-415-p1-BSR-MW-03-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'global methodist church' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-423",
@@ -12241,6 +13417,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -12325,6 +13514,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -12413,6 +13615,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12486,6 +13701,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12597,6 +13825,7 @@
       "silence_rationale": "pass 1 locator: Article 3 (¶214) affirms Christ as 'truly God and truly man' but never addresses the manner of union or denies conversion of one nature into another."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR",
      "BSR-MW-02": "1 candidate(s) located and verified: REJECT/BELOW_FLOOR",
@@ -12681,7 +13910,9 @@
     }
    ],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-431",
@@ -12710,6 +13941,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -12792,6 +14036,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -12874,6 +14131,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13034,6 +14304,7 @@
       "silence_rationale": "pass 1 locator: Article 3 (¶214) affirms Christ as 'truly God and truly man' but never states the union is without division or addresses partition into distinct subjects."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: ACCEPT/OK",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK",
@@ -13111,7 +14382,9 @@
    "coder_skipped": {
     "Q-431-p1-BSR-MW-03-2": "SAME_TEXT parallel witness of Q-431-p1-BSR-MW-02-1: its phrase is textually identical to the seated phrase; takes no slot"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-439",
@@ -13140,6 +14413,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13256,6 +14542,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -13338,6 +14637,19 @@
      "standard_title": "Confession of Faith of the Evangelical United Brethren Church",
      "authority_tier": "CONFESSIONAL (Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13461,6 +14773,7 @@
       "silence_rationale": "pass 1 locator: Article 3 (¶214) affirms Christ was 'truly God and truly man' but never addresses the union or non-separation of the two natures, only their simple co-affirmation."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "1 candidate(s) located and verified: ACCEPT/OK",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -13528,7 +14841,9 @@
    "coder_skipped": {
     "Q-439-p1-BSR-MW-03-2": "SAME_TEXT parallel witness of Q-439-p1-BSR-MW-01-1: its phrase is textually identical to the seated phrase; takes no slot"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-447",
@@ -13557,6 +14872,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13676,6 +15004,19 @@
      "standard_title": "Global Methodist Church, 2024 Book of Doctrines and Discipline",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "Global Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "LINKED FROM: [link removed] - the church's official page, from which this file is the linked English edition. Admitted under the controlled-storage ruling of 12 Sep 2026: irp.cdn-website.com/1876eae9/ is the Global Methodist Church's own storage account with its website vendor, not a third-party republication. The 2024 edition supersedes the 2022 Transitional Discipline. Sample phrase corrected: the text reads 'wisdom, and good', NOT 'goodness' - the earlier registry wording would have failed verbatim assertion. Verified against the author's own copy of the 2024 edition.",
@@ -13794,6 +15135,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13891,6 +15245,19 @@
      "standard_title": "The Wesleyan Church Articles of Religion",
      "authority_tier": "CONFESSIONAL",
      "effective_tier": "CONFESSIONAL",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "The Wesleyan Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -13963,6 +15330,19 @@
      "standard_title": "Articles of Religion of The Methodist Church (Book of Discipline)",
      "authority_tier": "CONFESSIONAL (protected by Restrictive Rules)",
      "effective_tier": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_why": "the host row's tier",
+     "effective_tier_at_run": "CONFESSIONAL (protected by Restrictive Rules)",
+     "effective_tier_changed_since_run": false,
+     "registered_phrase_hit": null,
+     "adoption": {
+      "adoption_status": "NOT_APPLICABLE",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": null,
+      "source": "NOT_APPLICABLE (mechanical)"
+     },
+     "apparatus_guard": null,
+     "adoption_disclosure": null,
      "speaks_for": "United Methodist Church",
      "reception_scope": "JURISDICTIONAL",
      "reception_note": "",
@@ -14074,6 +15454,7 @@
       "silence_rationale": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK"
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "2 candidate(s) located and verified: ACCEPT_WITH_CAVEAT/OK, ACCEPT_WITH_CAVEAT/OK",
      "BSR-MW-02": "1 candidate(s) located and verified: ACCEPT/OK",
@@ -14154,7 +15535,9 @@
     "Q-447-p1-BSR-MW-04-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'the wesleyan church' already holds a slot)",
     "Q-447-p1-BSR-MW-01-2": "candidate cap reached after tier allocation (speaks_for group rule: its group 'united methodist church' already holds a slot)"
    },
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   },
   {
    "queue_id": "Q-455",
@@ -14223,6 +15606,7 @@
       "silence_rationale": "pass 1 locator: Article 1 (¶210) affirms God's unity, holiness, and attributes cataphatically, and Articles 6–8 affirm humanity's creation in God's image, but no chunk denies creaturely likeness or asserts God's ontological dissimilarity from creatures."
      }
     ],
+    "not_consulted_by_ladder": [],
     "locator_rationale": {
      "BSR-MW-01": "pass 1 locator: Article I (c1) affirms God's oneness, infinite attributes, and being maker of all things, but nowhere denies creaturely likeness or asserts greater dissimilarity than similarity between God and creatures.",
      "BSR-MW-02": "pass 1 locator: Article I (c1) affirms God's positive attributes (infinite power, wisdom, justice, goodness, love) and Trinitarian unity, but no chunk denies creaturely likeness or asserts divine incomprehensibility/dissimilarity to God.",
@@ -14288,7 +15672,9 @@
    "caveat_slice": [],
    "caveat_sample": [],
    "coder_skipped": {},
-   "exhaustion_sourced_candidates": []
+   "exhaustion_sourced_candidates": [],
+   "ladder_entered": null,
+   "not_consulted_by_ladder": []
   }
  ]
 }

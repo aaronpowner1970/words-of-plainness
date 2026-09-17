@@ -1,0 +1,120 @@
+{
+  "_target": "data-sources/sjn/recovery-runs/author-rulings-pending-workbook.json -> R6-6_adoption_field.rows (merge; keep existing EO-01, EO-02, EO-04, RC-01 entries unchanged)",
+  "_ratified": "2026-09-17, author, Chat (adoption ratification, R6-16 follow-through)",
+  "_rulings": {
+    "R6-35": "Ruling A: AN-02 ADOPTED on the church's own acts; B2(a) civil statute is context only; B2(b) adoption of a book covers its integral texts, never added apparatus",
+    "R6-36": "Ruling B: AN-05 ADOPTED on the College of Bishops' vote; B2(c) collective episcopate counts unless canons in force at the time assign the act elsewhere; QA-track check of the 2017-18 ACNA canons",
+    "R6-37": "Ruling C: LU-03 ADOPTED with translator disclosed; B2(d) adoption attaches to a text, not a language edition; publisher Explanation matter never inherits it (guard)",
+    "R6-38": "Ruling D: scope records the verified reach of the named adopting body; B2(e); RP-02 and LU-01 amended",
+    "R6-39": "Ruling E: BA-03 ISSUED_UNADOPTED on the R6-6 (Hopko) precedent; neutral non-creedal disclosure; 1998 Identity Statement proposed as a NEW row after Cowork verification",
+    "R6-40": "RC-07, AN-04, RP-05 ratified as proposed, by explicit author confirmation, under B2, B2(b), B2(d)"
+  },
+  "rows": {
+    "BSR-RC-07": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "WHOLE_BRANCH",
+      "adoption_act": "Benedict XVI, motu proprio approving and promulgating the Compendium of the Catechism of the Catholic Church, 28 June 2005",
+      "adopting_body": "the Apostolic See",
+      "adoption_verified": "vatican.va motu proprio page (WebFetch + Claude Browser) and ewtn.com (WebFetch): two instruments, two publishers; the stored page carries the same approval sentence in its front matter. Stored text is the English edition (B2(d)). Store lacks Part Four (Q.534-598): coverage, not adoption",
+      "status": "RATIFIED",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-40"
+    },
+    "BSR-AN-02": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "Reviewed and approved by the Convocations of Canterbury and York (as recited in the Act of Uniformity 1662); doctrine affirmed by Canons A3 and A5. The Act of Uniformity 1662 is recorded as civil annexation only (B2(a)); the Catechism is covered as an integral text of the Book of Common Prayer (B2(b))",
+      "adopting_body": "Convocations of Canterbury and York (Church of England)",
+      "adoption_verified": "Convocation review evidenced by the recital in the enacted text of the Act of Uniformity 1662 (legislation.gov.uk, WebFetch); Canons A3 and A5 text read (churchofengland.org, WebFetch: one instrument, one publisher); same doctrinal statement in Worship and Doctrine Measure 1974 s.5(1) (legislation.gov.uk, WebFetch). NOT verified: the 20 Dec 1661 subscription date (bookseller listing only, not opened), the Convocation acts themselves, the Canons' promulgation dates",
+      "status": "RATIFIED",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-35"
+    },
+    "BSR-AN-04": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "General Convention 1979 (Denver), Resolution 1979-A133, second reading: the Book of Common Prayer adopted and declared the Book of Common Prayer of this Church under Constitution Art. X (Journal 1979, p. C-8). 'An Outline of the Faith' is covered as an integral text of the adopted book (B2(b))",
+      "adopting_body": "General Convention of The Episcopal Church",
+      "adoption_verified": "episcopalarchives.org Acts of Convention 1979-A133 (WebFetch + Claude Browser) and 1979-A121 (WebFetch); stored PDF carries the Standard Book certificate (Jan 2007). Both publishers are arms of TEC: independence is by instrument. 1976 first reading not opened; the book's own rubric on the Outline not verified",
+      "status": "RATIFIED",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-40"
+    },
+    "BSR-AN-05": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "ACNA College of Bishops, Melbourne FL, 8-12 January 2018: unanimous vote approving the revised edition of To Be a Christian (Approved Edition). Registry '2020' is the printing date",
+      "adopting_body": "College of Bishops of the Anglican Church in North America",
+      "adoption_verified": "anglican.ink communique (WebFetch + Claude Browser) and the registered PDF front matter, 'approved 2018', signed on behalf of the College (WebFetch): two publishers. Competence under B2(c): only the Constitution and Canons ratified 2026-06-25 were checked, by WebFetch summary. OPEN on the QA track: read the canons in force in 2017-18 for any provision assigning catechism or authorized-text approval; if found, revert to UNVERIFIED and hold affected cards",
+      "status": "RATIFIED",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-36"
+    },
+    "BSR-LU-03": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "Small Catechism of Luther, a symbolical book of the Book of Concord (1580), accepted without reservation by LCMS Constitution Art. II. Stored text is Luther's own text in the Concordia Publishing House translation (c) 2019 (B2(d), translator disclosed); it is not the 2017 Explanation",
+      "adopting_body": "The Lutheran Church-Missouri Synod",
+      "adoption_verified": "LCMS Handbook 2023 Update Edition, Const. Art. II (WebFetch, district-hosted copy, one publisher); page contents WebFetch + Claude Browser; stored chunk read directly. No act adopting the CPH translation found (not required under B2(d)); LCMS convention resolutions not searched",
+      "translation_disclosure": "English translation: Concordia Publishing House (c) 2019",
+      "guard": "Chunks carrying CPH 2017 Explanation or other publisher matter (e.g. 'The Central Thought') do not inherit this adoption and resolve to OFFICIAL_EXPOSITION (B2(b), B2(d))",
+      "status": "RATIFIED",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-37"
+    },
+    "BSR-RP-03": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "ONE_CHURCH",
+      "adoption_act": "OPC Second General Assembly (Nov 1936) adopted the Westminster Confession and Catechisms as the confession of the church; Book of Church Order: the Confession and Larger and Shorter Catechisms are its secondary standards",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "adoption_verified": "opc.org preface (WebFetch + Claude Browser) and opc.org BCO preface (WebFetch): one publisher; GA minutes not opened",
+      "tier_effect": "none (CONFESSIONAL; R6-16)",
+      "status": "RATIFIED",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-38"
+    },
+    "BSR-RP-05": {
+      "adoption_status": "ADOPTED",
+      "adoption_body_scope": "MULTILATERAL",
+      "adoption_act": "Heidelberg Catechism: one of three confessions of the CRCNA and one of four Standards of Unity of the RCA. The 2011 CRC/RCA joint translation carries that adoption under B2(d); CRC Synod 2011 is reported to have adopted the translation (104-78)",
+      "adopting_body": "Synod of the Christian Reformed Church in North America; General Synod of the Reformed Church in America",
+      "adoption_verified": "crcna.org confessions page and rca.org Heidelberg history page (WebFetch): two publishers for the standard. 2011 translation vote from theaquilareport.com only (WebFetch, one publisher; recorded, not load-bearing under B2(d)); RCA 2011 action not found",
+      "translation_disclosure": "English translation: CRC/RCA joint translation, 2011",
+      "tier_effect": "none (CONFESSIONAL; R6-16)",
+      "status": "RATIFIED",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-40"
+    },
+    "BSR-BA-03": {
+      "adoption_status": "ISSUED_UNADOPTED",
+      "adoption_body_scope": "",
+      "adoption_act": "",
+      "adopting_body": "",
+      "adoption_verified": "abc-usa.org/10facts and its print-ready PDF (WebFetch): no attribution, date or adoption statement; two web searches. NOT searched: ABCUSA General Board minutes; the Standing Rules on abc-usa.org. A different ABCUSA text, the 1998 Identity Statement, carries an adopting act (seen only on a congregation's site)",
+      "disclosure_wording": "Descriptive denominational statement; American Baptist Churches USA does not adopt binding creeds",
+      "tier_effect": "none (bare tier already OFFICIAL_EXPOSITION; tier unchanged under B1)",
+      "follow_up": "Propose a NEW registry row for the 1998 Identity Statement after Cowork verifies it on abc-usa.org under the Source Verification Standard; it enters a later run, not this rebuild. Do not re-point BA-03",
+      "status": "RATIFIED",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-39"
+    }
+  },
+  "amendments": {
+    "BSR-RP-02": {
+      "adoption_body_scope": "ONE_CHURCH",
+      "adopting_body": "General Assembly of the Orthodox Presbyterian Church",
+      "note": "Amended from WHOLE_BRANCH / 'the confessing church' under B2(e); the entry's own act string names the OPC. Code confirms against the registry before writing. No tier effect (CONFESSIONAL)",
+      "status": "RATIFIED (amended)",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-38"
+    },
+    "BSR-LU-01": {
+      "adoption_body_scope": "PENDING_VERIFICATION",
+      "adopting_body": "PENDING_VERIFICATION",
+      "note": "WHOLE_BRANCH and 'the confessing church' fail B2(e). Code reports the stored text's host and church and any named adopting act on record. If one is on record, record that body and its verified reach in this rebuild; if not, keep adoption_status ADOPTED, set the disclosure to name no body wider than verified, and place LU-01 on the QA track. No tier effect (CONFESSIONAL)",
+      "status": "RATIFIED (amended, completion by verification)",
+      "ratified_date": "2026-09-17",
+      "ruling": "R6-38"
+    }
+  }
+}

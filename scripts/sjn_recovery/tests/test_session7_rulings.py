@@ -153,25 +153,50 @@ def test_eo04_exposition_stays_catechetical_with_the_one_church_disclosure(reg):
     assert reg.adoption_policy["scope_rule"] == "BRANCH_WIDE_WITH_DISCLOSURE"
 
 
+def _as_unverified(reg, rid):
+    """Session 11: R6-35..R6-40 left no UNVERIFIED row in the registry, so the fail-closed default is exercised on a real row
+    given the migration's own UNVERIFIED record. Returns the record it replaced, for restore."""
+    saved = reg.adoption_map[rid]
+    a = reg.adoption_map[rid] = dict(saved)
+    for k in ("adopting_body", "translation_disclosure", "disclosure_wording", "guard"):
+        a.pop(k, None)
+    a.update({"adoption_status": "UNVERIFIED", "adoption_act": "", "adoption_body_scope": "", "source": "UNVERIFIED (default)",
+              "adoption_verified": "not verified; R6-6 fails closed (resolved as ISSUED_UNADOPTED)"})
+    return saved
+
+
 def test_an_unverified_catechetical_row_fails_closed_and_says_adoption_unverified(reg):
-    unverified = [rid for rid, a in reg.adoption_map.items()
-                  if a["adoption_status"] == "UNVERIFIED" and a["bare_tier"] == "CATECHETICAL"]
-    assert unverified, "no UNVERIFIED catechetical row to test"
-    for rid in unverified:
-        assert bare_tier(reg.exposition_tier(rid)) == SECOND_TIER
-        assert reg.adoption_disclosure(rid)["text"].startswith("adoption unverified")
-        assert reg.adoption_disclosure(rid)["fails_closed"] is True
+    real = [rid for rid, a in reg.adoption_map.items()
+            if a["adoption_status"] == "UNVERIFIED" and a["bare_tier"] == "CATECHETICAL"]
+    rows = real or [rid for rid, a in reg.adoption_map.items() if a["bare_tier"] == "CATECHETICAL"][:3]
+    assert rows, "no catechetical row to test"
+    for rid in rows:
+        saved = None if rid in real else _as_unverified(reg, rid)
+        try:
+            assert bare_tier(reg.exposition_tier(rid)) == SECOND_TIER
+            assert reg.adoption_disclosure(rid)["text"].startswith("adoption unverified")
+            assert reg.adoption_disclosure(rid)["fails_closed"] is True
+        finally:
+            if saved is not None:
+                reg.adoption_map[rid] = saved
 
 
 def test_a_confessional_row_is_never_demoted_by_an_unverified_adoption(reg):
     """Clause 3 reaches catechetical and expository rows. The Westminster Larger Catechism and the Heidelberg are
-    CONFESSIONAL and left UNVERIFIED; their tier does not move, and the card still discloses it."""
+    CONFESSIONAL; left UNVERIFIED their tier does not move, and the card still discloses it. (Both were ruled ADOPTED on
+    2026-09-17, R6-38 / R6-40, so the UNVERIFIED case is exercised on their migration record.)"""
     for rid in ("BSR-RP-03", "BSR-RP-05"):
         if rid not in reg.by_id:
             continue
-        assert reg.adoption(rid)["adoption_status"] == "UNVERIFIED"
-        assert reg.exposition_tier(rid) == reg.by_id[rid]["authority_tier"]
-        assert bare_tier(reg.exposition_tier(rid)) == "CONFESSIONAL"
+        saved = _as_unverified(reg, rid)
+        try:
+            assert reg.adoption(rid)["adoption_status"] == "UNVERIFIED"
+            assert reg.exposition_tier(rid) == reg.by_id[rid]["authority_tier"]
+            assert bare_tier(reg.exposition_tier(rid)) == "CONFESSIONAL"
+            assert reg.adoption_disclosure(rid)["text"].startswith("adoption unverified")
+        finally:
+            reg.adoption_map[rid] = saved
+        assert bare_tier(reg.exposition_tier(rid)) == "CONFESSIONAL"          # and ADOPTED, as ruled, it does not move either
 
 
 def test_bare_tier_ignores_the_display_qualifier(reg):

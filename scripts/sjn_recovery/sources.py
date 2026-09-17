@@ -1265,7 +1265,9 @@ def heidelberg_crcna(ctx):
         t = clean(text)
         if tag == "h4" and t.startswith("Lord"):
             lords_day = t; continue
-        m = re.match(r"^Q & A (\d{1,3})$", t)
+        # session 11: crcna.org heads one entry "Q & A 80*" (the asterisk points to its edition footnote); an exact-number match
+        # dropped the heading, so Q&A 80's text ran on inside the Q&A 79 chunk
+        m = re.match(r"^Q & A (\d{1,3})\*{0,2}$", t)
         if tag == "div" and m:
             if cur:
                 _emit(ctx, out, cur, buf, "question", url)
