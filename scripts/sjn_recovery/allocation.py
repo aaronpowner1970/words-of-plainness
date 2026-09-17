@@ -33,6 +33,14 @@ Order of operations on a cell's surviving (verifier-accepted) candidates:
                          publish the same text in DIFFERENT wording (rulings.same_text_rows:
                          BSR-EO-14 -> BSR-EO-07) is a parallel witness of the declared row's seated
                          candidate whatever its wording, and yields the slot to it whatever the order
+     5a. the original holds the seat (session 12, R6-41, Codex B3(a); applied to the tier sequences before the cap)
+                         a candidate RAISED by phrase-level resolution (R6-5/R6-10) because its phrase is verbatim
+                         in a registered text that is itself a candidate of the cell (same registry_id and locator,
+                         same tier) yields: the original takes the quoting candidate's place (the seat and the lead)
+                         where that is earlier than its own, and the quoting candidate takes no slot and is recorded on
+                         the original as a parallel witness (rule ORIGINAL_HOLDS_SEAT). Where no candidate of the cell
+                         sits in the registered text the quoting candidate keeps its seat at the raised tier. The
+                         candidate carries the texts that raised it as `raised_by_registered_text` (Registry.raised_by)
   6. cap                 MAX_CANDIDATES kept; lower-tier survivors marked corroborating
 
 The function is pure: it returns which candidate ids are kept, paired, suppressed or cut, with
@@ -314,6 +322,44 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None, same_text_rows=
                 break
             depth += 1
         tier_sequences.append(seq)
+    # 5a. the original holds the seat (session 12, R6-41, Codex B3(a)). A candidate RAISED by phrase-level resolution
+    # (`raised_by_registered_text`: the registered texts, {registry_id, locator}, whose tier it resolved to) yields to a live
+    # candidate located IN one of those texts at the same tier: the original takes the quoting candidate's place in the
+    # tier sequence if that is earlier than its own (the seat and the lead), and the quoting candidate takes no slot and is
+    # recorded on the original as a parallel witness. Where no candidate of the cell sits in the registered text, nothing
+    # changes: the quoting candidate keeps its seat at the raised tier.
+    original_of = {}
+    loc_index = {}
+    for i in live:
+        loc_index.setdefault((by_id[i]["registry_id"], by_id[i].get("locator")), []).append(i)
+    for seq in tier_sequences:
+        for i in list(seq):
+            if i not in seq:
+                continue
+            hits = [h for h in by_id[i].get("raised_by_registered_text") or [] if tier_rank(h.get("tier")) == rank(i)]
+            found = []                                    # (original candidate, the registered text it sits in)
+            for h in hits:
+                for j in loc_index.get((h.get("registry_id"), h.get("locator")), []):
+                    while j in original_of:               # that candidate itself yielded to an earlier original
+                        j = original_of[j]["original"]
+                    if j != i and j in seq and rank(j) == rank(i):
+                        found.append((j, h))
+            if not found:
+                continue
+            qk = same_text_key(by_id[i].get("phrase"))
+
+            def overlap(j):                               # prefer the original whose own phrase is (or contains, or is in) the quoted words
+                jk = same_text_key(by_id[j].get("phrase"))
+                return 0 if qk and jk and (qk in jk or jk in qk) else 1
+            j, h = min(found, key=lambda x: (overlap(x[0]), seq.index(x[0])))
+            pi, pj = seq.index(i), seq.index(j)
+            if pj > pi:
+                seq[pi] = j
+                del seq[pj]
+            else:
+                del seq[pi]
+            original_of[i] = {"original": j, "registered_text": {"registry_id": h.get("registry_id"), "locator": h.get("locator"),
+                                                                 "tier": h.get("tier")}}
     queues = [list(q) for q in tier_sequences]
     by_tier = []
     while queues:
@@ -354,8 +400,25 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None, same_text_rows=
             break
         parallel.setdefault(ctrl, []).append({"candidate_id": i, "registry_id": by_id[i]["registry_id"], "rule": "SAME_TEXT_ROW",
                                               "same_text_as": declared[by_id[i]["registry_id"]]})
+    # 5a, continued: each quoting candidate is recorded on the seat its original holds — the original's own, or, where the
+    # original is itself a same-text parallel witness (R6-4), the entry it is recorded on.
+    cut_quoting = {}
+    for i, rec in original_of.items():
+        j = rec["original"]
+        holder = j if j in seated else next((k for k, ws in parallel.items() if any(w["candidate_id"] == j for w in ws)), None)
+        if holder is None:
+            cut_quoting[i] = j
+            continue
+        parallel.setdefault(holder, []).append({"candidate_id": i, "registry_id": by_id[i]["registry_id"], "rule": "ORIGINAL_HOLDS_SEAT",
+                                                "original": j, "registered_text": rec["registered_text"]})
     for ctrl, ws in parallel.items():
         for w in ws:
+            if w["rule"] == "ORIGINAL_HOLDS_SEAT":
+                rt = w["registered_text"]
+                dropped[w["candidate_id"]] = (f"ORIGINAL_HOLDS_SEAT parallel witness of {ctrl}: its phrase is verbatim in the registered text "
+                                              f"{rt['registry_id']} {rt['locator']}, which is itself a candidate for this cell ({w['original']}); "
+                                              f"the original takes the seat and the lead, the quotation takes no slot (Codex B3(a), R6-41)")
+                continue
             dropped[w["candidate_id"]] = (f"SAME_TEXT parallel witness of {ctrl}: its phrase is textually identical to the seated phrase; takes no slot"
                                           if w["rule"] == "SAME_TEXT" else
                                           f"SAME_TEXT_ROW parallel witness of {ctrl}: {w['registry_id']} publishes the same text as "
@@ -366,6 +429,9 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None, same_text_rows=
         dropped[i] = ("candidate cap reached after tier allocation" +
                       (f" (speaks_for group rule: its group {group_of(i)!r} already holds a slot" if group_of(i) in holders else
                        f" (speaks_for group rule: the cap was filled by groups {holders}") + ")")
+    for i, j in cut_quoting.items():
+        dropped[i] = (f"candidate cap reached after tier allocation (ORIGINAL_HOLDS_SEAT: its phrase is verbatim in the registered text of "
+                      f"{j}, which took its place and was then cut by the cap; R6-41)")
     top = rank(kept[0]) if kept else None
     corr = {i: bool(top is not None and rank(i) > top) for i in kept}
     roles = {}

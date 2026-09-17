@@ -54,7 +54,7 @@ VERDICT_RULE = {"rule": LOWER_FLOOR_RULE,
 WITNESS_FIELDS = ("candidate_id", "registry_id", "standard_title", "authority_tier", "effective_tier", "reception_scope",
                   "reception_note", "locator", "phrase", "locator_rationale", "locator_floor_claim", "chunk_context",
                   "recut_from", "source_url", "verifier_rubrics", "final_verdict", "build_reassertion")
-PARALLEL_FIELDS = ("candidate_id", "registry_id", "standard_title", "speaks_for", "speaks_for_group", "authority_tier", "locator", "phrase",
+PARALLEL_FIELDS = ("candidate_id", "registry_id", "standard_title", "speaks_for", "speaks_for_group", "authority_tier", "effective_tier", "locator", "phrase",
                    "source_url", "final_verdict")
 COMPLETE_COVERAGE = ("FULL", "EXHAUSTED")
 
@@ -77,7 +77,7 @@ def _stage_for(reason):
         return "witness-only guard"
     if reason.startswith("paired"):
         return "translation pairing"
-    if reason.startswith("SAME_TEXT"):
+    if reason.startswith(("SAME_TEXT", "ORIGINAL_HOLDS_SEAT")):
         return "same-text guard"
     return "tier allocation"
 
@@ -348,6 +348,8 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                         "effective_tier_at_run": cand.get("effective_tier"),
                         "effective_tier_changed_since_run": bool(cand.get("effective_tier")) and cand.get("effective_tier") != res["effective_tier"],
                         "registered_phrase_hit": res["registered_phrase_hit"],
+                        # session 12 (R6-41): the registered texts that raised this citation, for the original-holds-the-seat rule
+                        "raised_by_registered_text": res.get("raised_by") or [],
                         "adoption": {k: registry.adoption(cand["registry_id"]).get(k) for k in ("adoption_status", "adoption_body_scope", "adoption_act", "adopting_body", "source")},
                         "apparatus_guard": res.get("apparatus_guard"),
                         "adoption_disclosure": res["adoption_disclosure"], "speaks_for": std["speaks_for"],
@@ -423,8 +425,12 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                 if pws:
                     e["same_text_parallel_witnesses"] = [
                         dict({k: by_id[w["candidate_id"]].get(k) for k in PARALLEL_FIELDS}, rule=w["rule"], same_text_as=w.get("same_text_as"),
+                             **({"original": w["original"], "registered_text": w["registered_text"]} if w["rule"] == "ORIGINAL_HOLDS_SEAT" else {}),
                              note=(f"{w['registry_id']} ({by_id[w['candidate_id']].get('speaks_for')}) publishes this same sentence; one text takes one slot (R6-4)"
                                    if w["rule"] == "SAME_TEXT" else
+                                   f"{w['registry_id']} quotes or reprints the registered text {w['registered_text']['registry_id']} "
+                                   f"{w['registered_text']['locator']}, which is a candidate for this cell; the original holds the seat (Codex B3(a), R6-41)"
+                                   if w["rule"] == "ORIGINAL_HOLDS_SEAT" else
                                    f"{w['registry_id']} publishes the same text as {w.get('same_text_as')} in different wording; it takes no slot beside it (R6-4, declared row)"))
                         for w in pws]
                     same_text_cards.append({"queue_id": cell["queue_id"], "seated": cid, "seated_registry_id": e["registry_id"],

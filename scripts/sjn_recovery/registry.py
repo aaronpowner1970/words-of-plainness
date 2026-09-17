@@ -389,18 +389,38 @@ class Registry:
 
         The comparison is textutil.punct_key: NFKC, casefolded, punctuation stripped, whitespace collapsed. The same key
         R6-4's one-text-one-slot guard uses, so the two rules can never disagree about what "the same words" means."""
+        hits = self.registered_phrase_hits(branch, phrase)
+        return hits[0] if hits else None
+
+    def registered_phrase_hits(self, branch, phrase):
+        """Every registered creed or definition text of this branch the phrase stands in verbatim, best first (the list
+        resolve_registered_phrase takes the head of). Session 12 (R6-41) needs all of them: the original that holds the seat
+        may be any registered text carrying the phrase at the tier it raised the candidate to."""
         from .textutil import punct_key
         key = punct_key(phrase)
         if len(key.split()) < CREED_PHRASE_MIN_WORDS or len(key) < CREED_PHRASE_MIN_CHARS:
-            return None
+            return []
         hits = []
         for kind, texts in (("CREED", self.registered_creed_texts(branch)), ("DEFINITION", self.registered_definition_texts(branch))):
             for t in texts:
                 if key and key in t["key"]:
                     hits.append({"kind": kind, "registry_id": t["registry_id"], "locator": t["locator"], "tier": t["tier"]})
-        if not hits:
-            return None
-        return sorted(hits, key=lambda h: (tier_rank(h["tier"]), h["registry_id"]))[0]
+        return sorted(hits, key=lambda h: (tier_rank(h["tier"]), h["registry_id"]))
+
+    def raised_by(self, rid, chunk=None, phrase=None):
+        """R6-41 (Codex B3(a)): the registered texts that RAISED this citation's tier by phrase-level resolution — every hit at
+        the tier the citation resolves to, when that tier is above the host tier — excluding the citation's own chunk (a
+        registered text resolves at its own tier; it does not quote itself). [] when phrase-level resolution raised nothing."""
+        row = self.by_id.get(rid)
+        if not row or not phrase:
+            return []
+        host = self.exposition_tier(rid, s(row.get("authority_tier")), chunk)
+        eff = self.effective_tier(rid, chunk, phrase)
+        if tier_rank(eff) >= tier_rank(host):
+            return []
+        own = (rid, (chunk or {}).get("locator"))
+        return [h for h in self.registered_phrase_hits(row["branch"], phrase)
+                if tier_rank(h["tier"]) == tier_rank(eff) and (h["registry_id"], h["locator"]) != own]
 
     # ---------------------------------------------------------------- row selection
     def for_branch(self, branch, include_fallback=True, citable_only=True):
@@ -500,7 +520,8 @@ class Registry:
         else:
             why = "the host row's tier"
         return {"registry_id": rid, "authority_tier": tier, "host_tier": host, "effective_tier": eff, "why": why,
-                "registered_phrase_hit": hit, "apparatus_guard": guard, "adoption_disclosure": self.adoption_disclosure(rid, chunk)}
+                "registered_phrase_hit": hit, "raised_by": self.raised_by(rid, chunk, phrase) if row else [],
+                "apparatus_guard": guard, "adoption_disclosure": self.adoption_disclosure(rid, chunk)}
 
     def public(self, rid):
         """Fields an agent may see about a standard: never a URL. Every text field is scrubbed — a

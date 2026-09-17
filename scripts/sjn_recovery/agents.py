@@ -77,7 +77,7 @@ def phrase_names_the_spirit(phrase):
 from .registry import tier_rank
 from .textutil import scrub_urls, phrase_word_count
 from .allocation import allocate, translation_pairs, speaks_for_groups
-from . import guards, prompts, retrieval
+from . import guards, prompts, retrieval, store
 
 
 def legal_spans(phrase, limit=PHRASE_MAX_WORDS, cap=12):
@@ -964,9 +964,18 @@ class CellRunner:
                 std = self.reg.public(c["registry_id"])
             except Exception:
                 std = {}
+            # session 12 (R6-41): the registered texts that raised the candidate, so the cell runner seats as the packet does
+            try:
+                cache = self.__dict__.setdefault("_chunk_cache", {})
+                if c["registry_id"] not in cache:
+                    cache[c["registry_id"]] = {x.get("locator"): x for x in store.load_chunks(c["registry_id"])}
+                chunk = cache[c["registry_id"]].get(c.get("locator"))
+                raised = self.reg.raised_by(c["registry_id"], chunk, c.get("phrase"))
+            except Exception:
+                raised = []
             out.append(dict(c, authority_tier=std.get("authority_tier") or c.get("effective_tier"),
                             reception_scope=std.get("reception_scope"), witness=bool(c.get("witness") or std.get("witness_only")),
-                            speaks_for=std.get("speaks_for")))
+                            speaks_for=std.get("speaks_for"), raised_by_registered_text=raised))
         return out
 
     def primary_rubric(self, st, cid):

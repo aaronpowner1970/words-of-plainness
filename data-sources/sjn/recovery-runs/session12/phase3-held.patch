@@ -1,0 +1,792 @@
+diff --git a/data-sources/sjn/recovery-runs/author-rulings-pending-workbook.json b/data-sources/sjn/recovery-runs/author-rulings-pending-workbook.json
+index 79f7bd6..eb2fda5 100644
+--- a/data-sources/sjn/recovery-runs/author-rulings-pending-workbook.json
++++ b/data-sources/sjn/recovery-runs/author-rulings-pending-workbook.json
+@@ -634,6 +634,18 @@
+     "qa_track_discharged": true,
+     "as_implemented": "R6-6_adoption_field.rows BSR-AN-05.adoption_verified (appended); adoption_status / scope / body / disclosure unchanged",
+     "test": "test_session12.test_an05_completion_appended_and_disclosure_unchanged"
++   },
++   "guard": {
++    "registry_id": "BSR-AN-05",
++    "kind": "PUBLISHER_APPARATUS",
++    "apparatus_markers": [
++     "front matter (publisher/editor apparatus)"
++    ],
++    "resolves_to": "OFFICIAL_EXPOSITION",
++    "why": "The drafting guidelines, the Committee for Catechesis sign-off, the note on Scripture references, the collect and the introductory matter before Q.1 are publisher/editor apparatus (B2(b)): they do not inherit the College of Bishops' adoption and resolve to OFFICIAL_EXPOSITION",
++    "reading": "a chunk of the row whose division (or text or locator) carries the marker is apparatus. The chunker (sources.acna_to_be_a_christian) gives that division to the text the store held before the first question, and to nothing else; there is no fail-closed integral-text pattern on this row, so no question chunk can be demoted",
++    "added": "2026-09-17, session 12 (phase 3c)",
++    "source": "Code session 12 prompt (17 Sep 2026), phase 3c / 3d: 'Under B2(b) the front matter is publisher/editor apparatus: apply the session 11 apparatus guard to it' / 'the CRC editorial footnotes ... are publisher matter; separate them ... and apply the apparatus guard to them'"
+    }
+   },
+   "R6-37_lu03_adoption": {
+@@ -727,7 +739,19 @@
+    "overrides_why": "session 11 prompt, goal 3a: the workbook canonical_url is the host note 'vatican.va (as cited, 1 released cell)'; all 533 stored chunks share this one source_url (the URL sources.compendium fetches). The override touches BSR-RC-07 only; R6-40's other rows need none",
+    "as_implemented": "R6-6_adoption_field.rows BSR-RC-07 (WHOLE_BRANCH), BSR-AN-04 (ONE_CHURCH), BSR-RP-05 (MULTILATERAL, translation_disclosure)",
+    "test": "test_session11_rulings.test_the_ratified_rows_resolve_and_disclose_as_ruled",
+-   "supersede_with": "Branch Source Registry: the four adoption_* columns on BSR-RC-07, BSR-AN-04 and BSR-RP-05; BSR-RC-07 canonical_url"
++   "supersede_with": "Branch Source Registry: the four adoption_* columns on BSR-RC-07, BSR-AN-04 and BSR-RP-05; BSR-RC-07 canonical_url",
++   "guard": {
++    "registry_id": "BSR-RP-05",
++    "kind": "PUBLISHER_APPARATUS",
++    "apparatus_markers": [
++     "publisher apparatus (CRC editorial note)"
++    ],
++    "resolves_to": "OFFICIAL_EXPOSITION",
++    "why": "The CRC's editorial footnotes (Q&A 80's edition note and the Synod 2004/2006 bracket note; the notes on Q&A 77 and Q&A 119) are publisher matter (B2(b)): they do not inherit the Synods' adoption of the catechism and resolve to OFFICIAL_EXPOSITION",
++    "reading": "a chunk of the row whose division (or text or locator) carries the marker is apparatus. The chunker (sources.heidelberg_crcna) gives that division to the paragraphs opening '*' / '**' and what follows them before the next Q&A, and to nothing else; there is no fail-closed integral-text pattern on this row",
++    "added": "2026-09-17, session 12 (phase 3d)",
++    "source": "Code session 12 prompt (17 Sep 2026), phase 3c / 3d: 'Under B2(b) the front matter is publisher/editor apparatus: apply the session 11 apparatus guard to it' / 'the CRC editorial footnotes ... are publisher matter; separate them ... and apply the apparatus guard to them'"
++   }
+   },
+   "R6-41_original_holds_the_seat": {
+    "ruled": "2026-09-17",
+diff --git a/scripts/sjn_recovery/config.py b/scripts/sjn_recovery/config.py
+index 5ab57ce..710bee4 100644
+--- a/scripts/sjn_recovery/config.py
++++ b/scripts/sjn_recovery/config.py
+@@ -119,6 +119,10 @@ EO_CONSULTATION_LADDER = {
+ }
+ CONSULTATION_LADDERS = {"Eastern Orthodox": EO_CONSULTATION_LADDER}
+ 
++# Session 12 (Codex F.10): chunk-id mappings written when a row is re-chunked. A stored candidate whose (registry_id, locator) chunk no
++# longer carries its phrase is followed to the mapped new chunk that does (packets.relocations); nothing else reads them.
++CHUNK_ID_MAPPINGS = [os.path.join(RUNS_DIR, "session12", "chunk-id-mapping.json")]
++
+ # Registry hosts RETIRED by the author (2026-09-12). A retired host is never requested, for any purpose:
+ # not by the corpus builder, not by the fetch audit, not by an adapter's crawl. Rows still ratified on a
+ # retired host (BSR-EO-03 in v2.25r2) build as HOST_RETIRED with no corpus, and any cached chunks are dropped.
+diff --git a/scripts/sjn_recovery/packets.py b/scripts/sjn_recovery/packets.py
+index 6d14f8a..88e478e 100644
+--- a/scripts/sjn_recovery/packets.py
++++ b/scripts/sjn_recovery/packets.py
+@@ -33,7 +33,7 @@ import os
+ import time
+ 
+ from .config import (PACKETS_DIR, EMPTY_RESULT, EMPTY_RESULT_INCOMPLETE, MAX_CANDIDATES, ROUTE_CAVEATED_ACCEPT, ROUTE_CAVEAT_SAMPLE,
+-                     CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA, CONSULTATION_LADDERS)
++                     CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA, CONSULTATION_LADDERS, CHUNK_ID_MAPPINGS)
+ from .registry import tier_rank
+ from .allocation import allocate, translation_pairs, translation_pair_evidence, speaks_for_groups
+ from . import guards, store, rulings
+@@ -100,6 +100,41 @@ def _entry_status(per_standard, rid):
+     return e.get("status"), e.get("silence_rationale"), len(e.get("candidates") or [])
+ 
+ 
++def relocations(paths=None):
++    """Session 12 (Codex F.10): {(registry_id, old_locator): {"new_locators": [...], "rule", "mapping_file"}} from the chunk-id mapping
++    files a re-chunk wrote (config.CHUNK_ID_MAPPINGS). SAME ids are not listed; a missing file contributes nothing."""
++    out = {}
++    for path in (CHUNK_ID_MAPPINGS if paths is None else paths):
++        if not os.path.exists(path):
++            continue
++        with open(path, encoding="utf-8") as fh:
++            d = json.load(fh)
++        rel = os.path.relpath(path, os.path.dirname(os.path.dirname(os.path.dirname(path)))).replace("\\", "/")
++        for rid, r in (d.get("rows") or {}).items():
++            for old_id, m in (r.get("mapping") or {}).items():
++                old_loc = old_id.split("::", 1)[1]
++                out[(rid, old_loc)] = {"new_locators": [x.split("::", 1)[1] for x in m.get("new") or []], "rule": m.get("rule"),
++                                       "mapping_file": rel}
++    return out
++
++
++def relocate(cand, chunk_index, moves):
++    """The chunk a stored candidate is re-asserted against. Its own (registry_id, locator) chunk when that chunk carries the phrase
++    verbatim; otherwise, where a re-chunk mapped that id, the first mapped new chunk that carries it. Returns (chunk, relocation or None)."""
++    key = (cand["registry_id"], cand["locator"])
++    chunk = chunk_index.get(key)
++    if key not in moves or (chunk and guards.check_phrase(cand["phrase"], chunk["text"])[0]):
++        return chunk, None
++    m = moves[key]
++    for loc in m["new_locators"]:
++        c = chunk_index.get((cand["registry_id"], loc))
++        if c and loc != cand["locator"] and guards.check_phrase(cand["phrase"], c["text"])[0]:
++            return c, {"locator_at_run": cand["locator"], "locator_now": loc, "rule": m["rule"], "mapping_file": m["mapping_file"],
++                       "note": "the row was re-chunked after this cell ran (Codex F.10 corpus repair); the chunk this candidate was located "
++                               "in no longer carries its phrase, and the mapped chunk that now does is cited instead"}
++    return chunk, None
++
++
+ def silence_rationales(st, runner, coverage_final, manifest_status):
+     """2d: one line per consulted standard saying why the cell has nothing from it."""
+     out = {}
+@@ -259,7 +294,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
+     manifest = store.load_manifest().get("standards", {})
+     manifest_status = {rid: (r.get("status") or "") for rid, r in manifest.items()}
+     cards, dropped_at_build, n_rej, repaired_chunks = [], [], 0, []
+-    chunk_index = {}
++    chunk_index, moves, relocated_chunks = {}, relocations(), []
+     rows_without_text = []
+     for r in registry.for_branch(branch, citable_only=False):
+         chunks = store.load_chunks(r["registry_id"])
+@@ -313,7 +348,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
+                     card["rejections"].append({"stage": f"not slotted for verification (pass {pk})", "candidate": {k: cand.get(k) for k in ("registry_id", "locator", "phrase", "floor_claim")},
+                                                "reason": "beyond the guaranteed per-standard slot and the extra slots; kept for the author, never verified"})
+                 for cand in p.get("candidates", []):
+-                    chunk = chunk_index.get((cand["registry_id"], cand["locator"]))
++                    chunk, relocated = relocate(cand, chunk_index, moves)
+                     ok, why = guards.check_phrase(cand["phrase"], chunk["text"] if chunk else "")
+                     if ok and chunk:
+                         ok, why = guards.check_noncitable(cand["phrase"], chunk)
+@@ -384,6 +419,12 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
+                                                     f"did not supply; passes 1–2 found nothing surviving in this cell")
+                     if repaired:
+                         entry.update(repaired); repaired_chunks.append((cell["queue_id"], cand["candidate_id"]))
++                    if relocated and ok:
++                        entry["locator"] = relocated["locator_now"]
++                        entry["chunk_relocated"] = relocated
++                        if repaired:
++                            entry["note"] = relocated["note"]
++                        relocated_chunks.append((cell["queue_id"], cand["candidate_id"], relocated["locator_at_run"], relocated["locator_now"]))
+                     if not ok:
+                         entry["dropped_reason"] = f"packet build re-assertion failed: {why}"
+                         dropped_at_build.append((cell["queue_id"], cand["candidate_id"], why))
+@@ -528,6 +569,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
+                           "share_actual": (round(sum(1 for x in caveat_sample if x.get("sampled")) / len(caveat_sample), 3) if caveat_sample else None)},
+         "candidates_lower_floor_applied": sum(1 for c in cards for e in c["candidates"] if (e.get("final_verdict") or {}).get("lower_floor_applied")),
+         "chunk_repaired_after_run": repaired_chunks,
++        "chunk_relocated_after_run": relocated_chunks,
+         "rejections_kept": sum(len(c["rejections"]) for c in cards),
+         "dropped_at_build": dropped_at_build, "no_ranking": "counts are workbench totals for the author; never learner-facing",
+         "cards": cards,
+diff --git a/scripts/sjn_recovery/sources.py b/scripts/sjn_recovery/sources.py
+index 5fe63b7..1ce634e 100644
+--- a/scripts/sjn_recovery/sources.py
++++ b/scripts/sjn_recovery/sources.py
+@@ -459,17 +459,42 @@ def vaticannews_creeds(ctx):
+ 
+ 
+ def compendium(ctx):
++    """Session 12 (Codex F.10): two defects fixed. (1) From Part Four the page sets the number and the question in SEPARATE bold tags
++    (`<b>534.</b>&nbsp;<b>What is prayer?</b>`); the one-tag match recognised no heading after 533, so Q.534-598 ran on inside
++    "Compendium Q.533". A bare "<n>." bold tag now opens question n and the next bold tag supplies its question text. (2) The
++    Appendix is an anchor (`<a name="APPENDIX">`), never the bold tag the old stop looked for, so its prayers and formulas ran on too.
++    It is part of the promulgated book (B2(b)), so it is chunked, not dropped: A) Common Prayers one chunk per prayer and column
++    (English; the Latin column as its own chunk, language "la"), B) Formulas of Catholic Doctrine one chunk per formula.
++    Q.1-532 are chunked exactly as before."""
+     url = "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html"
+-    segs = segments(ctx.html(url))
+-    out, cur, buf, expect = [], None, [], 1
+-    for tag, text in segs:
++    html = ctx.html(url)
++    segs = segments(html)
++    out, cur, buf, expect, pending = [], None, [], 1, None
++    appendix_at = None
++    for n_seg, (tag, text) in enumerate(segs):
+         t = clean(text)
++        if tag == "a" and t == "APPENDIX" and cur:           # the table of contents links "APPENDIX" too, before Q.1
++            appendix_at = n_seg
++            break
++        if pending is not None:                          # a bare "<n>." bold tag: the next bold tag is its question
++            if not re.sub(r"[\s.]", "", t):              # Q.568 is set "<b>568</b>." — the stray full stop is skipped
++                continue
++            if tag == "b" and t:
++                if cur:
++                    _emit(ctx, out, f"Compendium Q.{cur}", buf, "question", url)
++                cur, buf, expect, pending = pending, [f"{pending}. {t}"], pending + 1, None
++                continue
++            pending = None
+         m = re.match(r"^(\d{1,3})\.\s+(.+)$", t)
+         if tag == "b" and m and int(m.group(1)) == expect:
+             if cur:
+                 _emit(ctx, out, f"Compendium Q.{cur}", buf, "question", url)
+             cur, buf, expect = int(m.group(1)), [t], expect + 1
+             continue
++        mb = re.fullmatch(r"(\d{1,3})\.?", t)
++        if tag == "b" and mb and int(mb.group(1)) == expect:
++            pending = int(mb.group(1))
++            continue
+         if cur and tag in ("p", "i", "em"):
+             if re.fullmatch(r"[\d\-–, ]+", t):
+                 continue
+@@ -478,7 +503,62 @@ def compendium(ctx):
+             break
+     if cur:
+         _emit(ctx, out, f"Compendium Q.{cur}", buf, "question", url)
+-    return out, [f"registry canonical_url is a host note; text fetched from the cited compendium page; {len(out)} questions"]
++    n_questions = len(out)
++    notes = [f"registry canonical_url is a host note; text fetched from the cited compendium page; {n_questions} questions"]
++    if appendix_at is None:
++        return out, notes
++    # ---- Appendix A: the Common Prayers table, one row per prayer, English | Latin
++    from bs4 import BeautifulSoup
++    soup = BeautifulSoup(fix_mojibake(html), "lxml")
++    anchor = soup.find("a", attrs={"name": "APPENDIX"})
++    table = anchor.find_parent("table") if anchor else None
++    n_a = 0
++    if table is not None:
++        body = table.find("tbody") or table
++        for tr in body.find_all("tr", recursive=False):
++            for col, td in enumerate(tr.find_all("td", recursive=False)):
++                parts = [(tg, clean(x)) for tg, x in segments(str(td)) if clean(x)]
++                if not parts or parts[0][0] != "b" or parts[0][1] == "APPENDIX":
++                    continue
++                titles = [parts[0][1]]                   # the prayer's title; later bold lines (the Rosary's mysteries) are its text
++                lines = [x for tg, x in parts[1:] if tg in ("p", "i", "em", "b", "font")]
++                if not lines:
++                    continue
++                latin = col == 1
++                loc = f"Compendium Appendix A (Common Prayers) — {titles[0]}" + (" (Latin)" if latin else "")
++                c = ctx.chunk(loc, join([titles[0]] + lines), "appendix prayer", url, "la" if latin else "en")
++                if c:
++                    out.append(c); n_a += 1
++    # ---- Appendix B: Formulas of Catholic Doctrine, one chunk per formula
++    n_b, in_b, title, items = 0, False, [], []
++
++    def flush_b():
++        nonlocal n_b
++        if title and items:
++            head = clean(" ".join(title)).replace("( ", "(").replace(" )", ")")
++            c = ctx.chunk(f"Compendium Appendix B (Formulas of Catholic Doctrine) — {head.rstrip(':')}", join([head] + items),
++                          "appendix formula", url)
++            if c:
++                out.append(c); n_b += 1
++
++    for tag, text in segs[appendix_at:]:
++        t = clean(text)
++        if tag == "a" and t.startswith("B) FORMULAS"):
++            in_b = True
++            continue
++        if not in_b or not t:
++            continue
++        if tag in ("b", "i") and (not items or tag == "b"):
++            if items:
++                flush_b(); title, items = [], []
++            title.append(t)
++            continue
++        if tag == "p":
++            items.append(t)
++    flush_b()
++    notes.append(f"Appendix chunked (session 12; integral to the promulgated book, B2(b)): A) Common Prayers {n_a} chunk(s) "
++                 f"(English and Latin columns separately), B) Formulas of Catholic Doctrine {n_b} chunk(s)")
++    return out, notes
+ 
+ 
+ # =============================================================== Eastern Orthodox
+@@ -1031,24 +1111,31 @@ def book_of_concord(ctx):
+         if len(parts) >= 2 and parts[0] in BOC_DOCS and h not in paths:
+             paths.append(h)
+     out, notes = [], []
++    n_forcespan_pages = [0]
+     for h in paths:
+         url = urljoin(BOC + "/", h)
+         doc = BOC_DOCS[[p for p in h.split("/") if p][0]]
+         try:
+-            segs = segments(ctx.html(url))
++            page_html = ctx.html(url)
++            segs = segments(page_html)
+         except FetchError as e:
+             notes.append(str(e)); ctx.log(f"   ! {e}"); continue
+         title = next((clean(x) for t, x in segs if t in ("h2", "h1") and "Original Home" not in x and "BookOfConcord" not in x), "")
+         if not title:
+             continue
+-        # numbered paragraphs: <span>n</span><p>...</p>; unnumbered pages (creeds): plain p's
+-        paras, num = [], None
+-        for tag, text in segs:
+-            t = clean(text)
+-            if tag == "span" and re.fullmatch(r"\d{1,3}", t):
+-                num = int(t); continue
+-            if tag == "p" and t and not t.startswith("<<") and not t.startswith(">>"):
+-                paras.append((num, t)); num = None
++        if BOC_FORCESPAN in page_html:
++            # session 12 (Codex F.10): the Small Catechism pages set their text inside <span class="forcespan"> within <h4>/<p>
++            paras = _boc_forcespan_paras(page_html)
++            n_forcespan_pages[0] += 1
++        else:
++            # numbered paragraphs: <span>n</span><p>...</p>; unnumbered pages (creeds): plain p's
++            paras, num = [], None
++            for tag, text in segs:
++                t = clean(text)
++                if tag == "span" and re.fullmatch(r"\d{1,3}", t):
++                    num = int(t); continue
++                if tag == "p" and t and not t.startswith("<<") and not t.startswith(">>"):
++                    paras.append((num, t)); num = None
+         if not paras:
+             continue
+         loc_base = f"{doc}: {title.rstrip('.')}"
+@@ -1069,9 +1156,50 @@ def book_of_concord(ctx):
+         if group:
+             _emit(ctx, out, f"{loc_base}, ¶{a}" + (f"–{b}" if b != a else ""), group, "paragraph-range", url)
+     notes.insert(0, f"{len(paths)} document pages crawled from the site index; numbered-paragraph ranges (≤{BOC_GROUP_CHARS} chars) inside each article")
++    if n_forcespan_pages[0]:
++        notes.append(f"session 12: {n_forcespan_pages[0]} page(s) set in <span class=\"forcespan\"> (the Small Catechism) read by element, "
++                     f"<h4> and <p>, whole text (sources._boc_forcespan_paras)")
+     return out, notes
+ 
+ 
++BOC_FORCESPAN = 'class="forcespan"'
++
++
++def _boc_forcespan_paras(html):
++    """Session 12 (Codex F.10, BSR-LU-01): the Small Catechism pages on bookofconcord.org set the catechism's text inside
++    <span class="forcespan"> within <h4> (the commandment, article or petition) and <p> ("What does this mean?" in <em>, "-Answer:"
++    then the answer in a forcespan). The segment reader keeps only an element's DIRECT text, so every question and answer was lost and
++    only the "-Answer:" markers were stored ("II. The Creed, ¶1-3" was 30 characters). Here each <h4> and <p> that is a direct child of
++    <main> is read whole, in order; a bare-number anchor ("1") starts paragraph 1, a lettered one ("1b", "11c") continues it, and the
++    anchors themselves are removed from the text. Unnumbered elements before the first number (Luther's rubric, the first
++    commandment's heading) belong to the first paragraph rather than being dropped. The page title (<h2>) and the navigation boxes are
++    not paragraphs. Returns [(number or None, text)] for the grouping the other pages use."""
++    from bs4 import BeautifulSoup
++    soup = BeautifulSoup(fix_mojibake(html), "lxml")
++    main = soup.find("main") or soup
++    paras, leading = [], []
++    for el in main.find_all(["h4", "p"], recursive=False):
++        anchors = el.find_all("span", class_="bocanchor-content")
++        m = re.fullmatch(r"\s*(\d{1,3})\s*", anchors[0].get_text()) if anchors else None   # "1b" / "11c" continue paragraph 1 / 11
++        for sp in el.find_all("span", class_="bocanchor"):
++            sp.decompose()
++        t = clean(el.get_text(""))
++        if not t or t.startswith(("<<", ">>")):
++            continue
++        n = int(m.group(1)) if m else None
++        if n is None and not paras:
++            leading.append(t); continue
++        if n is not None and not paras and leading:
++            paras.extend((n, x) for x in leading)
++            leading = []
++            paras.append((None, t))
++            continue
++        paras.append((n, t))
++    if leading and not paras:
++        paras = [(None, x) for x in leading]
++    return paras
++
++
+ AC_LCMS_HEADING = re.compile(r"^(Preface to the Emperor Charles V\.|Article [IVXL]+: .+|Articles In Which Are Reviewed|Conclusion\.)$")
+ AC_LCMS_PARA = re.compile(r"(?:(?<=\s)|^)(\d{1,3})\]\s*")
+ AC_LCMS_FOOTER = "©The Lutheran Church"
+@@ -1257,10 +1385,28 @@ def pcusa_book_of_confessions(ctx):
+     return out, [f"PDF normalized; {len(out)} confessional numbers across {len(PCUSA_SECTIONS)} constituent documents"]
+ 
+ 
++CRC_EDITORIAL_NOTE = "publisher apparatus (CRC editorial note)"
++
++
+ def heidelberg_crcna(ctx):
++    """Session 12 (Codex F.10, B2(b)): the CRC's editorial footnotes — paragraphs opening "*" or "**" (on the editions of Q&A 80 and the
++    Synod 2004/2006 brackets; on "broken" in Q&A 77; on the NRSV Lord's Prayer in Q&A 119) — are publisher matter, not the catechism's
++    text. Each Q&A's notes are held out of its chunk and emitted after it as "<Q&A locator> — CRC editorial note(s)", division
++    CRC_EDITORIAL_NOTE, which the R6-40 apparatus guard reads. The note markers inside the Q&A text ("80*", "]**") are the page's own."""
+     url = ctx.row["canonical_url"]
+     segs = segments(ctx.html(url))
+-    out, cur, buf, lords_day = [], None, [], ""
++    out, cur, buf, notes_buf, lords_day = [], None, [], [], ""
++    n_notes = 0
++
++    def flush():
++        nonlocal n_notes
++        if cur:
++            _emit(ctx, out, cur, buf, "question", url)
++            if notes_buf:
++                c = ctx.chunk(f"{cur} — CRC editorial note(s)", join(notes_buf), CRC_EDITORIAL_NOTE, url)
++                if c:
++                    out.append(c); n_notes += 1
++
+     for tag, text in segs:
+         t = clean(text)
+         if tag == "h4" and t.startswith("Lord"):
+@@ -1269,19 +1415,20 @@ def heidelberg_crcna(ctx):
+         # dropped the heading, so Q&A 80's text ran on inside the Q&A 79 chunk
+         m = re.match(r"^Q & A (\d{1,3})\*{0,2}$", t)
+         if tag == "div" and m:
+-            if cur:
+-                _emit(ctx, out, cur, buf, "question", url)
+-            cur, buf = f"Q&A {m.group(1)} ({lords_day})", []
++            flush()
++            cur, buf, notes_buf = f"Q&A {m.group(1)} ({lords_day})", [], []
+             continue
+         if cur and tag in ("p", "em", "i"):
+             if re.match(r"^\d{1,2}\s", t) or re.fullmatch(r"[\d\s,;:.\-–]+", t):
+                 continue   # footnote scripture lists
++            if t.startswith("*") or notes_buf:            # a note runs to the next Q&A (Q&A 80's ** note has a second paragraph)
++                notes_buf.append(t); continue
+             buf.append(strip_footnote_digits(t))
+         if cur and tag in ("h2", "h3") and t.startswith(("Part", "God", "Introduction")):
+             pass
+-    if cur:
+-        _emit(ctx, out, cur, buf, "question", url)
+-    return out, [f"{len(out)} Q&A (CRC/RCA 2011 translation)"]
++    flush()
++    return out, [f"{len(out) - n_notes} Q&A (CRC/RCA 2011 translation)",
++                 f"session 12: {n_notes} CRC editorial-note chunk(s) held out of the Q&A text (division {CRC_EDITORIAL_NOTE!r}; apparatus guard R6-40)"]
+ 
+ 
+ def belgic_crcna(ctx):
+@@ -1413,15 +1560,50 @@ def athanasian_creed_ccel(ctx):
+     return out, [f"ccel.org (publisher_domain) — {len(verses)} numbered verses in one division; the churchofengland.org text is the Gate 7 migration target, not fetched"]
+ 
+ 
++_HISTORICAL_DOCS_TITLE = re.compile(r"^\s*Historical\s+Documents\s+of\s+the\s+Church\s*$", re.I)
++
++
++def _historical_heading_blocks(lines):
++    """Split one page of the BCP's Historical Documents into (heading, body lines) blocks. A heading is a run of short lines
++    (<= 45 characters) with no terminal punctuation that starts the page or follows a line ending a sentence — on BCP p. 864
++    "Definition of the Union of the Divine / and Human Natures in the Person of Christ / Council of Chalcedon, 451 A.D., Act V"
++    and "Quicunque Vult / commonly called / The Creed of Saint Athanasius". Body lines are the rest."""
++    blocks, head, body, prev_end = [], [], [], True
++    for l in lines:
++        short = len(l) <= 45 and not re.search(r"[.;:,?!]$", l)
++        if short and (prev_end or (head and not body)):
++            if body:
++                blocks.append((head, body)); head, body = [], []
++            head.append(l)
++            prev_end = False
++            continue
++        body.append(l)
++        prev_end = bool(re.search(r"[.;:?!]$", l))
++    if head or body:
++        blocks.append((head, body))
++    return blocks
++
++
+ def tec_outline_of_faith(ctx):
++    """Session 12 (Codex F.10): the Outline ends where the Outline ends. The printed title page "Historical Documents of the Church"
++    (BCP p. 863) sets its title over three lines, so the old stop (a line starting "Historical Documents") never fired and the last
++    question's chunk ("What, then, is our assurance as Christians?", p. 862) ran on through p. 864: the Chalcedonian Definition and the
++    p. 864 part of the Quicunque Vult. The Outline now stops at that title page. The pages that follow INSIDE THE SAME 20-page window —
++    the text the row's store already held, no more and no less — are chunked as what they are, one chunk per document and page,
++    locator "Historical Documents of the Church (BCP p. N) — <the document's printed heading>". The row's registry scope and tier are
++    not changed here."""
+     url = ctx.row["canonical_url"]
+     pages = ctx.pdf(url).split("\f")
+     start = next((i for i, p in enumerate(pages) if "An Outline of the Faith" in p and "commonly called the Catechism" in p), -1)
+     if start < 0:
+         raise FetchError("Outline of the Faith not found in PDF")
+     out, section, q, a, state = [], "", None, [], None
++    historical_at = None
+     for pi in range(start, min(len(pages), start + 20)):
+         page_no = pi + 1
++        if pi > start and _HISTORICAL_DOCS_TITLE.match(" ".join(pdf_repair(pages[pi]).split())):
++            historical_at = pi
++            break
+         if pi > start and "Concerning the Catechism" in pages[pi] and "Outline" not in pages[pi]:
+             pass
+         for raw in pdf_repair(pages[pi]).split("\n"):
+@@ -1453,17 +1635,58 @@ def tec_outline_of_faith(ctx):
+             break
+     if q is not None:
+         _emit(ctx, out, f"Outline of the Faith (BCP p. {q_page}) — {q_section}: Q. {clean(' '.join(q))[:80]}", q + a, "question", url)
+-    return out, [f"PDF pages {start + 1}–{start + 20} region; {len(out)} Q/A pairs"]
++    notes = [f"PDF pages {start + 1}–{start + 20} region; {len(out)} Q/A pairs"]
++    if historical_at is not None:
++        n_hist, last_page = 0, min(len(pages), start + 20)
++        for pi in range(historical_at + 1, last_page):
++            lines = [l.strip() for l in pdf_repair(pages[pi]).split("\n") if l.strip() and not re.fullmatch(r"\d{3}", l.strip())]
++            for head, body in _historical_heading_blocks(lines):
++                if not head or not body:
++                    continue
++                heading = clean(" ".join(head))
++                c = ctx.chunk(f"Historical Documents of the Church (BCP p. {pi + 1}) — {heading}", join(body), "historical document", url)
++                if c:
++                    out.append(c); n_hist += 1
++        notes.append(f"session 12: the Outline ends at BCP p. {historical_at} (the 'Historical Documents of the Church' title page is p. "
++                     f"{historical_at + 1}); {n_hist} Historical Documents chunk(s) from BCP pp. {historical_at + 2}–{last_page}, the pages inside "
++                     f"the adapter's existing 20-page window only (a document that continues past p. {last_page} is held only as far as p. {last_page})")
++    return out, notes
++
++
++ACNA_FRONT_MATTER = "front matter (publisher/editor apparatus)"
++
++
++def _acna_question_follows(lines, i, first):
++    """True when the numbered line lines[i] opens a question: its own text, or one of the next four non-empty lines before another
++    numbered line, carries a question mark. The drafting guidelines in the front matter ("1. Everything taught should be ...") do not."""
++    seen = [first] if first else []
++    for l in lines[i + 1:i + 12]:
++        if not l:
++            continue
++        if re.match(r"^\d{1,3}\.(\s|$)", l):
++            break
++        seen.append(l)
++        if len(seen) >= 5:
++            break
++    return any("?" in x for x in seen)
+ 
+ 
+ def acna_to_be_a_christian(ctx):
++    """Session 12 (Codex F.10): the front matter no longer takes question numbers. The drafting guidelines are numbered "1."-"3.", so
++    the counter spent Q.1-Q.3 on them: "Q.1" and "Q.2" were guidelines and "Q.3" held the third guideline, the Committee's sign-off,
++    the note on Scripture references, the collect, Part I's introductory matter and then the real Q.1-3. Before the first question, a
++    numbered line opens a question only when a question follows it (_acna_question_follows). The text the store held before the first
++    question is kept, as front matter, in two chunks split at "part i": the introduction (guidelines, sign-off, Scripture references,
++    collect) and Part I's introductory matter before Q.1. Both carry division ACNA_FRONT_MATTER, which the R6-36 apparatus guard reads
++    (B2(b): publisher/editor matter does not inherit the adoption). From the first real question on, nothing changes."""
+     url = ctx.row["canonical_url"]
+     txt = pdf_repair(ctx.pdf(url).replace("\f", "\n"))
+     lines = [l.strip() for l in txt.split("\n")]
+     out, cur, buf, expect, qtext, in_q = [], None, [], 1, [], False
+-    for l in lines:
++    front, front_started = [[]], False
++    for i, l in enumerate(lines):
+         m = re.match(r"^(\d{1,3})\.\s*(.*)$", l)
+-        if m and int(m.group(1)) == expect:
++        if m and int(m.group(1)) == expect and (cur is not None or _acna_question_follows(lines, i, m.group(2))):
+             if cur:
+                 _emit(ctx, out, f"To Be a Christian, Q.{cur} — {clean(' '.join(qtext))[:70]}", qtext + buf, "question", url)
+             cur, expect, qtext, buf, in_q = int(m.group(1)), expect + 1, [m.group(2)] if m.group(2) else [], [], True
+@@ -1471,6 +1694,15 @@ def acna_to_be_a_christian(ctx):
+                 in_q = False
+             continue
+         if cur is None:
++            if m and int(m.group(1)) == 1:
++                front_started = True                     # the store's text began at the first "1." line, as before
++            if not front_started:
++                continue
++            if not l or re.fullmatch(r"\d{1,3}", l) or re.fullmatch(r"[A-Z ]{6,}", l):
++                continue
++            if l.casefold() == "part i" and front[-1]:
++                front.append([])
++            front[-1].append(l)
+             continue
+         if not l or re.fullmatch(r"\d{1,3}", l) or re.fullmatch(r"[A-Z ]{6,}", l):
+             continue
+@@ -1482,7 +1714,15 @@ def acna_to_be_a_christian(ctx):
+             buf.append(l)
+     if cur:
+         _emit(ctx, out, f"To Be a Christian, Q.{cur} — {clean(' '.join(qtext))[:70]}", qtext + buf, "question", url)
+-    return out, [f"{len(out)} numbered questions (fallback tier: registry_fallback_only_rows)"]
++    fm = []
++    labels = ["To Be a Christian, front matter — introduction: drafting guidelines, the Committee's sign-off, Scripture references, collect",
++              "To Be a Christian, front matter — Part I, Beginning with Christ: introductory matter before Q.1"]
++    for n, part in enumerate(x for x in front if x):
++        c = ctx.chunk(labels[min(n, len(labels) - 1)] + (f" [{n + 1}]" if n >= len(labels) else ""), join(part), ACNA_FRONT_MATTER, url)
++        if c:
++            fm.append(c)
++    return fm + out, [f"{len(out)} numbered questions (fallback tier: registry_fallback_only_rows)",
++                      f"session 12: {len(fm)} front-matter chunk(s) before Q.1 (division {ACNA_FRONT_MATTER!r}; apparatus guard R6-36)"]
+ 
+ 
+ # =============================================================== Baptist
+diff --git a/scripts/sjn_recovery/tests/test_session11_rulings.py b/scripts/sjn_recovery/tests/test_session11_rulings.py
+index 8afc9ba..b29564f 100644
+--- a/scripts/sjn_recovery/tests/test_session11_rulings.py
++++ b/scripts/sjn_recovery/tests/test_session11_rulings.py
+@@ -130,15 +130,18 @@ def test_an_lu03_apparatus_chunk_never_resolves_catechetical(reg, extra):
+ 
+ def test_the_guard_is_generic_and_applies_only_where_a_ruling_carries_one(reg):
+     guards = rulings.adoption_guards()
+-    assert sorted(guards) == ["BSR-LU-03"]                                  # not applied to any other row in session 11
+-    c = store.load_chunks("BSR-AN-05")[:1] or [{"text": "The Central Thought x", "locator": "x", "division": "x"}]
++    # session 11 guarded BSR-LU-03 only; session 12 (phase 3c/3d) added BSR-AN-05's front matter and BSR-RP-05's CRC notes
++    assert sorted(guards) == ["BSR-AN-05", "BSR-LU-03", "BSR-RP-05"]
++    c = store.load_chunks("BSR-RC-07")[:1] or [{"text": "The Central Thought x", "locator": "x", "division": "x"}]
+     probe = dict(c[0], text="The Central Thought " + c[0]["text"])
+-    assert reg.apparatus_guard("BSR-AN-05", probe) is None                  # unguarded row: no effect
++    assert reg.apparatus_guard("BSR-RC-07", probe) is None                  # unguarded row: no effect
+     saved = dict(reg._adoption_guards)
+     try:
++        reg._adoption_guards["BSR-RC-07"] = dict(guards["BSR-LU-03"], registry_id="BSR-RC-07", integral_text_pattern=None)
++        assert reg.apparatus_guard("BSR-RC-07", probe)
++        assert bare_tier(reg.exposition_tier("BSR-RC-07", None, probe)) == SECOND_TIER
++        probe = dict(probe, text="The Central Thought " + probe["text"])
+         reg._adoption_guards["BSR-AN-05"] = dict(guards["BSR-LU-03"], registry_id="BSR-AN-05", integral_text_pattern=None)
+-        assert reg.apparatus_guard("BSR-AN-05", probe)
+-        assert bare_tier(reg.exposition_tier("BSR-AN-05", None, probe)) == SECOND_TIER
+         reg._adoption_guards["BSR-BA-03"] = dict(guards["BSR-LU-03"], registry_id="BSR-BA-03", integral_text_pattern=None)
+         low = {"text": "The Central Thought", "locator": "x", "division": "x"}
+         assert reg.exposition_tier("BSR-BA-03", None, low) == "OFFICIAL_EXPOSITION"   # never raises, never below its own rank
+diff --git a/scripts/sjn_recovery/tests/test_session12_corpus_repair.py b/scripts/sjn_recovery/tests/test_session12_corpus_repair.py
+new file mode 100644
+index 0000000..d1309b2
+--- /dev/null
++++ b/scripts/sjn_recovery/tests/test_session12_corpus_repair.py
+@@ -0,0 +1,196 @@
++"""Session 12, phase 3 (Codex F.10): the chunker repairs and the relocation of stored candidates onto re-chunked text.
++
++  3a BSR-RC-07  Part Four's split bold number/question and the Appendix
++  3b BSR-AN-04  the Outline ends at the "Historical Documents of the Church" title page; what follows is chunked as what it is
++  3c BSR-AN-05  the drafting guidelines never take question numbers; front matter is its own chunk and is guarded
++  3d BSR-RP-05  the CRC editorial notes are held out of the Q&A text and guarded
++  3e BSR-LU-01  the Small Catechism pages' forcespan text is read whole
++  packets.relocate  a candidate follows the chunk-id mapping to the chunk that now carries its phrase
++
++Synthetic inputs throughout; the registry tests skip without the workbook."""
++import os
++import sys
++
++import pytest
++
++sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
++
++from sjn_recovery import sources, rulings, packets  # noqa: E402
++from sjn_recovery.registry import Registry, bare_tier, SECOND_TIER  # noqa: E402
++
++
++class _Fetcher:
++    def __init__(self, pages):
++        self.pages = pages
++
++    def get(self, url):
++        html = self.pages.get(url, "")
++
++        class FR:
++            ok = bool(html); status = 200 if html else 404; error = "" if html else "missing"; final_url = url
++            redirects = []; cross_host_redirect = ""; content_type = "text/html"
++        FR.html = html
++        return FR()
++
++
++def _ctx(row, pages=None, pdf_text=None):
++    ctx = sources.Ctx(dict({"branch": "X", "standard_title": "T", "authority_tier": "CATECHETICAL", "scope_caveat": "",
++                            "reception_scope": "JURISDICTIONAL", "canonical_url": "https://example.org/doc"}, **row),
++                      _Fetcher(pages or {}), log=lambda m: None, admitted_hosts=None)
++    if pdf_text is not None:
++        ctx.pdf = lambda url: pdf_text
++    return ctx
++
++
++@pytest.fixture(scope="module")
++def reg():
++    try:
++        return Registry()
++    except Exception as e:
++        pytest.skip(f"registry unavailable: {e}")
++
++
++# ---------------------------------------------------------------- 3a
++COMPENDIUM = "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html"
++
++
++def test_compendium_reads_split_bold_questions_and_chunks_the_appendix():
++    html = ("<html><body><a href='#APPENDIX'>APPENDIX</a>"
++            "<p><b>1. What is the first question?</b></p><p>12-13</p><p>First answer.</p>"
++            "<p><b>Part Four</b></p><p><b>2.</b>&nbsp;<b>What is prayer?</b></p><p>2558</p><p>Prayer is the raising of the mind.</p>"
++            "<p><b>3</b>.<b>What are the expressions?</b></p><p>Three forms.</p>"
++            "<table><tbody><tr><td colspan='2'><p><b><a name='APPENDIX'>APPENDIX</a></b></p><p><b><a name='A'>A) COMMON PRAYERS</a></b></p></td></tr>"
++            "<tr><td width='50%'><b>The Sign of the Cross</b><p>In the name of the Father</p></td>"
++            "<td width='50%'><b>Signum Crucis</b><p>In nomine Patris</p></td></tr></tbody></table>"
++            "<p><b><a name='B'>B) FORMULAS OF CATHOLIC DOCTRINE</a></b></p><p><b>The Golden Rule (</b><i>Matthew</i><b>7:12):</b></p>"
++            "<p>Do to others as you would have them do to you.</p><p><b>The four last things:</b></p><p>1. Death<br/>2. Judgment</p>"
++            "</body></html>")
++    out, notes = sources.compendium(_ctx({"registry_id": "BSR-RC-07"}, {COMPENDIUM: html}))
++    by = {c["locator"]: c for c in out}
++    assert by["Compendium Q.1"]["text"] == "1. What is the first question? First answer."            # Part One-Three shape unchanged
++    assert by["Compendium Q.2"]["text"] == "2. What is prayer? Prayer is the raising of the mind."    # "<b>2.</b> <b>Q</b>"
++    assert by["Compendium Q.3"]["text"] == "3. What are the expressions? Three forms."               # "<b>3</b>.<b>Q</b>"
++    assert "Sign of the Cross" not in by["Compendium Q.3"]["text"]                                     # the Appendix no longer runs on
++    assert by["Compendium Appendix A (Common Prayers) — The Sign of the Cross"]["language"] == "en"
++    assert by["Compendium Appendix A (Common Prayers) — Signum Crucis (Latin)"]["language"] == "la"
++    assert by["Compendium Appendix B (Formulas of Catholic Doctrine) — The Golden Rule (Matthew 7:12)"]["text"] == \
++        "The Golden Rule (Matthew 7:12): Do to others as you would have them do to you."
++    assert "Compendium Appendix B (Formulas of Catholic Doctrine) — The four last things" in by
++
++
++# ---------------------------------------------------------------- 3b
++def test_the_outline_ends_at_the_historical_documents_title_page():
++    ff = "\f"
++    pages = ["x"] * 3
++    pages.append("An Outline of the Faith\ncommonly called the Catechism\nHuman Nature\nQ.\nWhat are we by nature?\nA.\nWe are part of God's creation.\n")
++    pages.append("Q.\nWhat, then, is our assurance as Christians?\nA.\nOur assurance as Christians is that nothing shall separate us. Amen.\n")
++    pages.append("Historical\nDocuments\nof the Church\n")
++    pages.append("Definition of the Union of the Divine\nand Human Natures in the Person of Christ\nCouncil of Chalcedon, 451 A.D., Act V\n"
++                 "Therefore, following the holy fathers, we all with one accord teach men to acknowledge one\nand the same Son.\n"
++                 "Quicunque Vult\ncommonly called\nThe Creed of Saint Athanasius\n"
++                 "Whosoever will be saved, before all things it is necessary that he hold the Catholic Faith.\n"
++                 "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost\nincomprehensible.\n")
++    pages.append("Preface\nThe First Book of Common Prayer (1549)\nThere was never any thing.\n")
++    out, notes = sources.tec_outline_of_faith(_ctx({"registry_id": "BSR-AN-04"}, pdf_text=ff.join(pages)))
++    locs = [c["locator"] for c in out]
++    last_q = next(c for c in out if "assurance as Christians" in c["locator"])
++    assert last_q["locator"].startswith("Outline of the Faith (BCP p. 5)")
++    assert last_q["text"].endswith("Amen.") and "Chalcedon" not in last_q["text"] and "Whosoever" not in last_q["text"]
++    assert "Historical Documents of the Church (BCP p. 7) — Definition of the Union of the Divine and Human Natures in the Person of Christ " \
++           "Council of Chalcedon, 451 A.D., Act V" in locs
++    creed = next(c for c in out if c["locator"].startswith("Historical Documents of the Church (BCP p. 7) — Quicunque Vult"))
++    assert "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible." in creed["text"]
++    assert not any("First Book of Common Prayer" in c["text"] for c in out)                          # nothing past the stored window
++
++
++# ---------------------------------------------------------------- 3c
++def test_acna_guidelines_are_front_matter_and_the_questions_keep_their_numbers():
++    lines = ["Our guidelines in drafting have been as follows:", "1. Everything taught should be compatible with all schools,",
++             "so that all may use it.", "2. Everything taught should be brief.", "introduction", "3. All the answers should be easy",
++             "to remember.", "The Reverend Canon J. I. Packer", "part i", "b e g i n n i n g", "This catechism is designed to teach you.",
++             "s a l va t i o n", "1.", "What is the human condition?", "Humanity has been cut off from God.", "2.", "What is the Gospel?",
++             "The Gospel is the good news.", "3. How does sin affect you?", "Sin alienates me from God.", "4.", "What is the way of death?",
++             "A life without God's love."]
++    out, notes = sources.acna_to_be_a_christian(_ctx({"registry_id": "BSR-AN-05"}, pdf_text="\n".join(lines)))
++    locs = [c["locator"] for c in out]
++    assert locs[2:] == ["To Be a Christian, Q.1 — What is the human condition?", "To Be a Christian, Q.2 — What is the Gospel?",
++                        "To Be a Christian, Q.3 — How does sin affect you?", "To Be a Christian, Q.4 — What is the way of death?"]
++    front = out[:2]
++    assert all(c["division"] == sources.ACNA_FRONT_MATTER for c in front)
++    assert front[0]["text"].startswith("1. Everything taught") and "Packer" in front[0]["text"]
++    assert front[1]["text"].startswith("part i") and "Humanity" not in front[1]["text"]
++
++
++def test_the_an05_guard_takes_front_matter_to_official_exposition_and_never_a_question(reg):
++    assert rulings.adoption_guards()["BSR-AN-05"]["ruling"] == "R6-36_an05_adoption"
++    front = {"text": "1. Everything taught should be compatible with all schools.", "locator": "To Be a Christian, front matter — introduction",
++             "division": sources.ACNA_FRONT_MATTER}
++    q = {"text": "What is the human condition? Humanity has been cut off from God.", "locator": "To Be a Christian, Q.1 — What is the human condition?",
++         "division": "question"}
++    assert reg.apparatus_guard("BSR-AN-05", front)
++    assert bare_tier(reg.effective_tier("BSR-AN-05", front, "Everything taught should be compatible")) == SECOND_TIER
++    assert reg.apparatus_guard("BSR-AN-05", q) is None
++    assert reg.effective_tier("BSR-AN-05", q, "Humanity has been cut off from God") == "CATECHETICAL"
++    from sjn_recovery import store
++    for c in store.load_chunks("BSR-AN-05"):
++        assert bool(reg.apparatus_guard("BSR-AN-05", c)) == (c["division"] == sources.ACNA_FRONT_MATTER), c["locator"]
++
++
++# ---------------------------------------------------------------- 3d
++def test_heidelberg_editorial_notes_are_their_own_guarded_chunks(reg):
++    html = ("<html><body><h4>Lord’s Day 29</h4><div>Q &amp; A 79</div><p>Q. Why then does Christ call the bread his body?</p>"
++            "<p>A. Christ has good reason for these words.</p><h4>Lord’s Day 30</h4><div>Q &amp; A 80*</div>"
++            "<p>Q. How does the Lord’s Supper differ from the Mass?</p><p>A. The Lord’s Supper declares to us.</p><p>[But the Mass teaches.]**</p>"
++            "<p>*Q&amp;A 80 was altogether absent from the first edition.</p><p>**In response to a mandate from Synod 1998, a study.</p>"
++            "<p>The Reformed Church in America retains the original full text.</p>"
++            "<div>Q &amp; A 81</div><p>Q. Who should come to the Lord’s table?</p></body></html>")
++    url = "https://www.crcna.org/welcome/beliefs/confessions/heidelberg-catechism"
++    out, _ = sources.heidelberg_crcna(_ctx({"registry_id": "BSR-RP-05", "canonical_url": url}, {url: html}))
++    by = {c["locator"]: c for c in out}
++    assert list(by) == ["Q&A 79 (Lord’s Day 29)", "Q&A 80 (Lord’s Day 30)", "Q&A 80 (Lord’s Day 30) — CRC editorial note(s)", "Q&A 81 (Lord’s Day 30)"]
++    assert by["Q&A 80 (Lord’s Day 30)"]["text"].endswith("[But the Mass teaches.]**")
++    note = by["Q&A 80 (Lord’s Day 30) — CRC editorial note(s)"]
++    assert note["division"] == sources.CRC_EDITORIAL_NOTE and "Reformed Church in America retains" in note["text"]
++    assert reg.apparatus_guard("BSR-RP-05", note)
++    assert bare_tier(reg.effective_tier("BSR-RP-05", note, "altogether absent from the first edition")) == SECOND_TIER
++    assert reg.apparatus_guard("BSR-RP-05", by["Q&A 80 (Lord’s Day 30)"]) is None
++    assert bare_tier(reg.effective_tier("BSR-RP-05", by["Q&A 80 (Lord’s Day 30)"], "The Lord’s Supper declares to us")) == "CONFESSIONAL"
++
++
++# ---------------------------------------------------------------- 3e
++def test_book_of_concord_forcespan_pages_keep_the_catechism_text():
++    html = ("<html><body><div id='main-content'><main><div class='next-previous-box'><a>&lt;&lt; I. Ten Commandments</a></div>"
++            "<h2>II. The Creed</h2><h4>As the head of the family should teach it in a simple way to his household.</h4>"
++            "<h4><strong><span class='bocanchor'><span class='bocanchor-content'>1</span></span><span class='forcespan'>The First Article.</span></strong></h4>"
++            "<p><em>Of Creation</em>.</p>"
++            "<h4><span class='bocanchor'><span class='bocanchor-content'>1b</span></span><span class='forcespan'>I believe in God the Father Almighty, Maker of heaven and earth.</span></h4>"
++            "<p><em>What does this mean?</em></p>"
++            "<p>&ndash;Answer: <span class='bocanchor'><span class='bocanchor-content'>1c</span></span><span class='forcespan'>I believe that\nGod has made me and all creatures.</span></p>"
++            "<h4><strong><span class='bocanchor'><span class='bocanchor-content'>2</span></span><span class='forcespan'>The Second Article.</span></strong></h4>"
++            "<p>&ndash;Answer: <span class='bocanchor'><span class='bocanchor-content'>2c</span></span><span class='forcespan'>I believe that Jesus Christ is my Lord.</span></p>"
++            "<div class='next-previous-box'><a>III. The Lord's Prayer &gt;&gt;</a></div></main></div></body></html>")
++    paras = sources._boc_forcespan_paras(html)
++    assert paras[0] == (1, "As the head of the family should teach it in a simple way to his household.")   # the rubric is kept
++    assert (None, "I believe in God the Father Almighty, Maker of heaven and earth.") in paras                # "1b" continues ¶1
++    assert (None, "–Answer: I believe that God has made me and all creatures.") in paras
++    assert (2, "The Second Article.") in paras
++    assert not any("<<" in t or ">>" in t or t == "II. The Creed" for _, t in paras)
++
++
++# ---------------------------------------------------------------- relocation
++def test_a_candidate_follows_the_mapping_only_to_a_chunk_that_carries_its_phrase():
++    old_loc, new_loc = "Outline (p. 862) — Q. assurance", "Historical Documents (p. 864) — Quicunque Vult"
++    idx = {("BSR-AN-04", old_loc): {"text": "Our assurance is that nothing shall separate us. Amen.", "locator": old_loc},
++           ("BSR-AN-04", new_loc): {"text": "The Father incomprehensible, the Son incomprehensible.", "locator": new_loc}}
++    moves = {("BSR-AN-04", old_loc): {"new_locators": [old_loc, new_loc], "rule": "TEXT_CHANGED", "mapping_file": "m.json"}}
++    cand = {"registry_id": "BSR-AN-04", "locator": old_loc, "phrase": "The Father incomprehensible, the Son incomprehensible"}
++    chunk, rel = packets.relocate(cand, idx, moves)
++    assert chunk["locator"] == new_loc and rel["locator_at_run"] == old_loc and rel["locator_now"] == new_loc
++    stays = dict(cand, phrase="nothing shall separate us")
++    chunk, rel = packets.relocate(stays, idx, moves)
++    assert chunk["locator"] == old_loc and rel is None
++    lost = dict(cand, phrase="a phrase in neither chunk")
++    chunk, rel = packets.relocate(lost, idx, moves)
++    assert chunk["locator"] == old_loc and rel is None                     # never repaired: the build re-assertion then drops it
++    unmapped = dict(cand, registry_id="BSR-AN-03")
++    assert packets.relocate(unmapped, idx, moves) == (None, None)
