@@ -258,6 +258,27 @@ def registered_sections(path=None):
     return out
 
 
+# ---------------------------------------------------------------- R6-45 scope markers
+SCOPE_MARKERS = ("AWAITING_SCOPE_RULING",)
+
+
+def scope_markers(r=None):
+    """{registry_id: [marker]} — R6-45 (session 13): chunks of a row that a ruling marks as awaiting a scope ruling. A marker lives on
+    the ruling as `scope_marker` {registry_id, locator_prefix, marker, text}; a chunk whose locator starts with locator_prefix carries
+    it. Marked chunks keep their locators and tiers, the packets show the marker on every entry located in them, and they are never
+    registered creed or definition texts (Registry._registered_sections refuses a listed section that carries one)."""
+    r = r or load()
+    out = {}
+    for key, ru in (r.get("rulings") or {}).items():
+        m = ru.get("scope_marker")
+        if not isinstance(m, dict):
+            continue
+        if not m.get("registry_id") or not m.get("locator_prefix") or m.get("marker") not in SCOPE_MARKERS or not m.get("text"):
+            raise SystemExit(f"author ruling {key}: scope_marker needs registry_id, locator_prefix, text and marker in {SCOPE_MARKERS}")
+        out.setdefault(m["registry_id"], []).append(dict(m, ruling=key))
+    return out
+
+
 # ---------------------------------------------------------------- R6-8 agency
 AGENCY_TAGS_PATH = os.environ.get("SJN_AGENCY_TAGS_PATH") or os.path.join(RUNS_DIR, "spirit-family-agency-tags.json")
 AGENCY_CLASSES = ("ACTION", "ATTRIBUTE")

@@ -1,0 +1,19 @@
+== SJN Gate 6 corpus build — workbook Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx (v2.25r4 GATE6 SCOPE RATIFIED); 44 AUTHOR_RATIFIED rows; fetch cache REUSED; gate metric SAME_STANDARD; routing SONNET_WITH_OPUS_SLICE; lateran scope EXTEND_TO_CONSTITUTION_2
+-- BSR-RC-07 Roman Catholic — Compendium of the CCC  [admitted hosts: vatican.va]
+   REBUILT (drift accepted): 655 chunks, 269,142 chars, 1 fetch(es), 6.0s; registry canonical_url is a host note; text fetched from the cited compendium page; 598 questions
+-- BSR-LU-01 Lutheran — Book of Concord (Augsburg Confession, Apology, Smalcald, Catechisms, F  [admitted hosts: bookofconcord.org]
+   REBUILT (drift accepted): 741 chunks, 1,623,071 chars, 134 fetch(es), 41.8s; 133 document pages crawled from the site index; numbered-paragraph ranges (≤2600 chars) inside each article
+-- BSR-RP-05 Reformed / Presbyterian — Heidelberg Catechism (CRC/RCA 2011 joint translation)  [admitted hosts: crcna.org]
+   REBUILT (drift accepted): 132 chunks, 47,212 chars, 1 fetch(es), 0.3s; 129 Q&A (CRC/RCA 2011 translation)
+-- BSR-AN-04 Anglican — The Episcopal Church BCP 1979, "An Outline of the Faith"  [admitted hosts: episcopalchurch.org]
+   REBUILT (drift accepted): 126 chunks, 23,763 chars, 1 fetch(es), 1.3s; PDF pages 845–864 region; 124 Q/A pairs
+-- BSR-AN-05 Anglican — ACNA "To Be a Christian" (2020 approved edition)  [admitted hosts: anglicanchurch.net]
+   REBUILT (drift accepted): 370 chunks, 220,617 chars, 1 fetch(es), 2.4s; 368 numbered questions (fallback tier: registry_fallback_only_rows)
+   --only: kept the manifest entries of rows the registry no longer yields: ['BSR-EO-03']
+   chroma: BSR-RC-07 655 chunks embedded in 6.3s
+   chroma: BSR-LU-01 741 chunks embedded in 7.0s
+   chroma: BSR-RP-05 132 chunks embedded in 1.0s
+   chroma: BSR-AN-04 126 chunks embedded in 0.8s
+   chroma: BSR-AN-05 370 chunks embedded in 2.4s
+== corpus: 2024 chunks across 43 standards; manifest -> C:\Users\aaron\Documents\words-of-plainness\data-sources\sjn\recovery-runs\corpus-manifest.json
+   statuses: {'UNCHANGED': 32, 'LINEAGE': 1, 'REBUILT (drift accepted)': 8, 'BUILT': 3, 'HOST_RETIRED': 1}

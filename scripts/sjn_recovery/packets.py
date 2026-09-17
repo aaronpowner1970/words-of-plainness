@@ -33,7 +33,7 @@ import os
 import time
 
 from .config import (PACKETS_DIR, EMPTY_RESULT, EMPTY_RESULT_INCOMPLETE, MAX_CANDIDATES, ROUTE_CAVEATED_ACCEPT, ROUTE_CAVEAT_SAMPLE,
-                     CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA, CONSULTATION_LADDERS)
+                     CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA, CONSULTATION_LADDERS, CHUNK_ID_MAPPINGS)
 from .registry import tier_rank
 from .allocation import allocate, translation_pairs, translation_pair_evidence, speaks_for_groups
 from . import guards, store, rulings
@@ -55,7 +55,7 @@ WITNESS_FIELDS = ("candidate_id", "registry_id", "standard_title", "authority_ti
                   "reception_note", "locator", "phrase", "locator_rationale", "locator_floor_claim", "chunk_context",
                   "recut_from", "source_url", "verifier_rubrics", "final_verdict", "build_reassertion")
 PARALLEL_FIELDS = ("candidate_id", "registry_id", "standard_title", "speaks_for", "speaks_for_group", "authority_tier", "effective_tier", "locator", "phrase",
-                   "source_url", "final_verdict")
+                   "source_url", "final_verdict", "awaits_scope_ruling")                 # session 13 (R6-45): the marker travels with a witness
 COMPLETE_COVERAGE = ("FULL", "EXHAUSTED")
 
 
@@ -98,6 +98,41 @@ def _entry_status(per_standard, rid):
     if not e:
         return None, None, 0
     return e.get("status"), e.get("silence_rationale"), len(e.get("candidates") or [])
+
+
+def relocations(paths=None):
+    """Session 12 (Codex F.10): {(registry_id, old_locator): {"new_locators": [...], "rule", "mapping_file"}} from the chunk-id mapping
+    files a re-chunk wrote (config.CHUNK_ID_MAPPINGS). SAME ids are not listed; a missing file contributes nothing."""
+    out = {}
+    for path in (CHUNK_ID_MAPPINGS if paths is None else paths):
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as fh:
+            d = json.load(fh)
+        rel = os.path.relpath(path, os.path.dirname(os.path.dirname(os.path.dirname(path)))).replace("\\", "/")
+        for rid, r in (d.get("rows") or {}).items():
+            for old_id, m in (r.get("mapping") or {}).items():
+                old_loc = old_id.split("::", 1)[1]
+                out[(rid, old_loc)] = {"new_locators": [x.split("::", 1)[1] for x in m.get("new") or []], "rule": m.get("rule"),
+                                       "mapping_file": rel}
+    return out
+
+
+def relocate(cand, chunk_index, moves):
+    """The chunk a stored candidate is re-asserted against. Its own (registry_id, locator) chunk when that chunk carries the phrase
+    verbatim; otherwise, where a re-chunk mapped that id, the first mapped new chunk that carries it. Returns (chunk, relocation or None)."""
+    key = (cand["registry_id"], cand["locator"])
+    chunk = chunk_index.get(key)
+    if key not in moves or (chunk and guards.check_phrase(cand["phrase"], chunk["text"])[0]):
+        return chunk, None
+    m = moves[key]
+    for loc in m["new_locators"]:
+        c = chunk_index.get((cand["registry_id"], loc))
+        if c and loc != cand["locator"] and guards.check_phrase(cand["phrase"], c["text"])[0]:
+            return c, {"locator_at_run": cand["locator"], "locator_now": loc, "rule": m["rule"], "mapping_file": m["mapping_file"],
+                       "note": "the row was re-chunked after this cell ran (Codex F.10 corpus repair); the chunk this candidate was located "
+                               "in no longer carries its phrase, and the mapped chunk that now does is cited instead"}
+    return chunk, None
 
 
 def silence_rationales(st, runner, coverage_final, manifest_status):
@@ -259,7 +294,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
     manifest = store.load_manifest().get("standards", {})
     manifest_status = {rid: (r.get("status") or "") for rid, r in manifest.items()}
     cards, dropped_at_build, n_rej, repaired_chunks = [], [], 0, []
-    chunk_index = {}
+    chunk_index, moves, relocated_chunks = {}, relocations(), []
     rows_without_text = []
     for r in registry.for_branch(branch, citable_only=False):
         chunks = store.load_chunks(r["registry_id"])
@@ -313,7 +348,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     card["rejections"].append({"stage": f"not slotted for verification (pass {pk})", "candidate": {k: cand.get(k) for k in ("registry_id", "locator", "phrase", "floor_claim")},
                                                "reason": "beyond the guaranteed per-standard slot and the extra slots; kept for the author, never verified"})
                 for cand in p.get("candidates", []):
-                    chunk = chunk_index.get((cand["registry_id"], cand["locator"]))
+                    chunk, relocated = relocate(cand, chunk_index, moves)
                     ok, why = guards.check_phrase(cand["phrase"], chunk["text"] if chunk else "")
                     if ok and chunk:
                         ok, why = guards.check_noncitable(cand["phrase"], chunk)
@@ -352,6 +387,8 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                         "raised_by_registered_text": res.get("raised_by") or [],
                         "adoption": {k: registry.adoption(cand["registry_id"]).get(k) for k in ("adoption_status", "adoption_body_scope", "adoption_act", "adopting_body", "source")},
                         "apparatus_guard": res.get("apparatus_guard"),
+                        # session 13 (R6-45): a chunk that awaits a scope ruling says so on every entry located in it
+                        "awaits_scope_ruling": res.get("awaits_scope_ruling"),
                         "adoption_disclosure": res["adoption_disclosure"], "speaks_for": std["speaks_for"],
                         "reception_scope": std["reception_scope"], "reception_note": std["reception_note"],
                         "scope_caveat": std["scope_caveat"], "fallback_tier": cand["fallback_tier"],
@@ -384,6 +421,12 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                                                     f"did not supply; passes 1–2 found nothing surviving in this cell")
                     if repaired:
                         entry.update(repaired); repaired_chunks.append((cell["queue_id"], cand["candidate_id"]))
+                    if relocated and ok:
+                        entry["locator"] = relocated["locator_now"]
+                        entry["chunk_relocated"] = relocated
+                        if repaired:
+                            entry["note"] = relocated["note"]
+                        relocated_chunks.append((cell["queue_id"], cand["candidate_id"], relocated["locator_at_run"], relocated["locator_now"]))
                     if not ok:
                         entry["dropped_reason"] = f"packet build re-assertion failed: {why}"
                         dropped_at_build.append((cell["queue_id"], cand["candidate_id"], why))
@@ -528,6 +571,11 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                           "share_actual": (round(sum(1 for x in caveat_sample if x.get("sampled")) / len(caveat_sample), 3) if caveat_sample else None)},
         "candidates_lower_floor_applied": sum(1 for c in cards for e in c["candidates"] if (e.get("final_verdict") or {}).get("lower_floor_applied")),
         "chunk_repaired_after_run": repaired_chunks,
+        "chunk_relocated_after_run": relocated_chunks,
+        "awaiting_scope_ruling": [(c["queue_id"], x["candidate_id"], x["locator"], (x.get("awaits_scope_ruling") or {}).get("ruling"))
+                                  for c in cards for lst in ("candidates", "rejections", "witness_only_candidates")
+                                  for e in c.get(lst) or [] for x in [e] + list(e.get("same_text_parallel_witnesses") or [])
+                                  if x.get("awaits_scope_ruling")],
         "rejections_kept": sum(len(c["rejections"]) for c in cards),
         "dropped_at_build": dropped_at_build, "no_ranking": "counts are workbench totals for the author; never learner-facing",
         "cards": cards,

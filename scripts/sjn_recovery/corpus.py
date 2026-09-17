@@ -28,6 +28,19 @@ def log(msg):
     print(msg, flush=True)
 
 
+def keep_unyielded_entries(results, prev, only):
+    """Session 13: on a --only build, copy into `results` (unchanged) every previous manifest entry whose row the registry did not
+    yield this time — e.g. BSR-EO-03, which R6-3 retires in memory. Returns the ids kept. A full build (only is None) keeps none."""
+    if not only:
+        return []
+    kept = [rid for rid in prev if rid not in results]
+    merged = {rid: (results[rid] if rid in results else prev[rid]) for rid in prev}      # the manifest keeps its order
+    merged.update({rid: r for rid, r in results.items() if rid not in merged})
+    results.clear()
+    results.update(merged)
+    return kept
+
+
 def build(args):
     ensure_dirs()
     reg = Registry(args.workbook, registry_delta=args.registry_delta)
@@ -155,6 +168,12 @@ def build(args):
             if pv["verdict"] != "PASS":
                 halted = True
     fetcher.close()
+    # session 13 (Codex F.10; session 12 report section 4.7): a --only build rewrites the manifest from the rows the registry
+    # yields, so a row the registry now filters out (BSR-EO-03, retired in memory by R6-3) silently lost its entry. Such rows keep
+    # their previous manifest entry, unchanged; a full build still writes only the rows the registry yields.
+    kept_from_manifest = keep_unyielded_entries(results, prev, only)
+    if kept_from_manifest:
+        log(f"   --only: kept the manifest entries of rows the registry no longer yields: {sorted(kept_from_manifest)}")
 
     if drift and not args.accept_drift:
         log("!! TEXT DRIFT — run halted, nothing written (re-run with --accept-drift after review):")

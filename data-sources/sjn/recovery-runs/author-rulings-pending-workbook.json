@@ -634,6 +634,19 @@
     "qa_track_discharged": true,
     "as_implemented": "R6-6_adoption_field.rows BSR-AN-05.adoption_verified (appended); adoption_status / scope / body / disclosure unchanged",
     "test": "test_session12.test_an05_completion_appended_and_disclosure_unchanged"
+   },
+   "guard": {
+    "registry_id": "BSR-AN-05",
+    "kind": "PUBLISHER_APPARATUS",
+    "apparatus_markers": [
+     "front matter (publisher/editor apparatus)"
+    ],
+    "resolves_to": "OFFICIAL_EXPOSITION",
+    "why": "The drafting guidelines, the Committee for Catechesis sign-off, the note on Scripture references and the collect, the front matter before 'Part I', are publisher/editor apparatus (B2(b)): they do not inherit the College of Bishops' adoption and resolve to OFFICIAL_EXPOSITION. Part I's introductory matter is integral text and is not guarded (R6-46.1)",
+    "reading": "a chunk of the row whose division (or text or locator) carries the marker is apparatus. The chunker (sources.acna_to_be_a_christian) gives that division ONLY to the text before 'Part I'; Part I's introductory chunk carries division 'Part I introductory matter (integral text)' (sources.ACNA_PART_I_INTRO). There is no fail-closed integral-text pattern on this row, so no question chunk can be demoted",
+    "added": "2026-09-17, session 12 (phase 3c)",
+    "source": "Code session 12 prompt (17 Sep 2026), phase 3c / 3d: 'Under B2(b) the front matter is publisher/editor apparatus: apply the session 11 apparatus guard to it' / 'the CRC editorial footnotes ... are publisher matter; separate them ... and apply the apparatus guard to them'",
+    "narrowed": "2026-09-17, session 13 phase 4, by R6-46.1 (session 12 had guarded Part I's introduction too)"
    }
   },
   "R6-37_lu03_adoption": {
@@ -727,7 +740,20 @@
    "overrides_why": "session 11 prompt, goal 3a: the workbook canonical_url is the host note 'vatican.va (as cited, 1 released cell)'; all 533 stored chunks share this one source_url (the URL sources.compendium fetches). The override touches BSR-RC-07 only; R6-40's other rows need none",
    "as_implemented": "R6-6_adoption_field.rows BSR-RC-07 (WHOLE_BRANCH), BSR-AN-04 (ONE_CHURCH), BSR-RP-05 (MULTILATERAL, translation_disclosure)",
    "test": "test_session11_rulings.test_the_ratified_rows_resolve_and_disclose_as_ruled",
-   "supersede_with": "Branch Source Registry: the four adoption_* columns on BSR-RC-07, BSR-AN-04 and BSR-RP-05; BSR-RC-07 canonical_url"
+   "supersede_with": "Branch Source Registry: the four adoption_* columns on BSR-RC-07, BSR-AN-04 and BSR-RP-05; BSR-RC-07 canonical_url",
+   "guard": {
+    "registry_id": "BSR-RP-05",
+    "kind": "PUBLISHER_APPARATUS",
+    "apparatus_markers": [
+     "publisher apparatus (CRC editorial note)"
+    ],
+    "resolves_to": "OFFICIAL_EXPOSITION",
+    "why": "The CRC's editorial footnotes (Q&A 80's edition note and the Synod 2004/2006 bracket note; the notes on Q&A 77 and Q&A 119) are publisher matter (B2(b)): they do not inherit the Synods' adoption of the catechism and resolve to OFFICIAL_EXPOSITION",
+    "reading": "a chunk of the row whose division (or text or locator) carries the marker is apparatus. The chunker (sources.heidelberg_crcna) gives that division to the paragraphs opening '*' / '**' and what follows them before the next Q&A, and to nothing else; there is no fail-closed integral-text pattern on this row",
+    "added": "2026-09-17, session 12 (phase 3d)",
+    "source": "Code session 12 prompt (17 Sep 2026), phase 3c / 3d: 'Under B2(b) the front matter is publisher/editor apparatus: apply the session 11 apparatus guard to it' / 'the CRC editorial footnotes ... are publisher matter; separate them ... and apply the apparatus guard to them'",
+    "confirmed": "2026-09-17, R6-46.2: the CRC editorial notes on Q&A 77, 80 and 119"
+   }
   },
   "R6-41_original_holds_the_seat": {
    "ruled": "2026-09-17",
@@ -835,9 +861,15 @@
    "codex": "B1, B2(b) (Comparison Principles Codex v0.6)",
    "registry_id": "BSR-AN-04",
    "awaits": "Cowork verification, then a ratified registry row for the BCP Historical Documents",
-   "as_implemented": "pending: session 13 phase 4",
-   "test": "pending: session 13 phase 4",
-   "supersede_with": "a new Branch Source Registry row for the BCP Historical Documents (not yet proposed)"
+   "as_implemented": "sources.tec_outline_of_faith (session 12 fix, applied in session 13) chunks the text after the Outline title page as 'Historical Documents of the Church (BCP p. N) — <heading>'; rulings.scope_markers reads the scope_marker above; Registry.scope_marker marks every such chunk and tier_resolution / packets carry it on each entry as awaits_scope_ruling (packet header: awaiting_scope_ruling); Registry._registered_sections refuses to register a marked section, and none is listed in registered-sections.json. Tiers and locators otherwise unchanged",
+   "test": "test_session13_rulings: test_an04_historical_documents_chunks_carry_the_scope_marker_and_are_never_registered",
+   "supersede_with": "a new Branch Source Registry row for the BCP Historical Documents (not yet proposed)",
+   "scope_marker": {
+    "registry_id": "BSR-AN-04",
+    "locator_prefix": "Historical Documents of the Church",
+    "marker": "AWAITING_SCOPE_RULING",
+    "text": "BCP 1979 Historical Documents (p. 863 onward), held in the Outline of the Faith row: awaits a scope ruling (R6-45); to become its own registry row after Cowork verification; not a registered creed or definition text"
+   }
   },
   "R6-46_session12_confirmations": {
    "ruled": "2026-09-17",
@@ -858,13 +890,13 @@
     "rp05_scope": "session 12 report section 4.4 (Q&A 77, 80, 119)"
    },
    "as_implemented": {
-    "1_an05_guard": "pending: session 13 phase 4",
-    "2_rp05_notes": "pending: session 13 phase 4",
+    "1_an05_guard": "sources.acna_to_be_a_christian: division ACNA_FRONT_MATTER only on the chunk before 'Part I'; Part I's introductory chunk has division ACNA_PART_I_INTRO and locator 'To Be a Christian, Part I, Beginning with Christ — introductory matter before Q.1'; the R6-36 guard (marker unchanged) therefore guards exactly the front-matter chunk",
+    "2_rp05_notes": "sources.heidelberg_crcna (session 12 fix, applied in session 13): the CRC notes on Q&A 77, 80 and 119 are their own chunks, division 'publisher apparatus (CRC editorial note)', guarded by the R6-40 guard",
     "3_r6_41_interpretations": "allocation.py step 5a (session 12), unchanged. Sections found to span more than one chunk (reported, R6-46.3): BSR-RC-04 Constitution 1 (4 chunks); BSR-RP-04 Nicene Creed 1.1-1.3 and Apostles' Creed 2.1-2.3 (3 chunks each); BSR-EO-12 Symbol of Faith (12 chunks); BSR-EO-06 Chalcedon Definition (9) and Constantinople III Definition (10); BSR-EO-13 Constantinople III Definition (10). Recorded per entry in registered-sections.json (section_spans_chunks)",
     "4_phase2_seat_effects": "accepted; no code change",
-    "5_in_scope": "corpus builder: pending: session 13 phase 4; row-added-by-ruling path: pending: session 13 phase 5"
+    "5_in_scope": "corpus builder: corpus.keep_unyielded_entries keeps, on a --only build, the manifest entries of rows the registry no longer yields (BSR-EO-03), in manifest order; row-added-by-ruling path: pending: session 13 phase 5"
    },
-   "test": "pending: session 13 phase 4-5",
+   "test": "test_session12_corpus_repair (AN-05 tests updated for R6-46.1; every stored chunk is guarded exactly when it is the front matter before Part I); test_session13_rulings.test_an05_guard_covers_only_the_front_matter_before_part_i, test_a_only_build_keeps_the_manifest_entries_of_rows_the_registry_filters_out; phase 5: pending",
    "supersede_with": "none"
   }
  }

@@ -148,3 +148,57 @@ def test_several_rulings_on_one_row_combine_and_a_conflict_fails_loudly():
         rulings.registry_overrides(doc)
     doc["rulings"]["R6-D"]["overrides"]["authority_tier"] = "CONFESSIONAL"                                     # agreeing rulings combine
     assert rulings.registry_overrides(doc)["BSR-X-01"]["field_rulings"]["authority_tier"] == "R6-B"
+
+
+# ---------------------------------------------------------------- phase 4: R6-45, R6-46.1, the corpus builder
+def test_an04_historical_documents_chunks_carry_the_scope_marker_and_are_never_registered(reg, tmp_path, monkeypatch):
+    import json
+    assert set(rulings.scope_markers()) == {"BSR-AN-04"}
+    hist = [c for c in store.load_chunks("BSR-AN-04") if c["locator"].startswith("Historical Documents of the Church")]
+    outline = [c for c in store.load_chunks("BSR-AN-04") if c["locator"].startswith("Outline of the Faith")]
+    assert outline and all(reg.scope_marker("BSR-AN-04", c) is None for c in outline)
+    for c in hist:
+        m = reg.scope_marker("BSR-AN-04", c)
+        assert m["marker"] == "AWAITING_SCOPE_RULING" and m["ruling"] == "R6-45_an04_historical_documents_scope"
+        res = reg.tier_resolution("BSR-AN-04", c, " ".join(c["text"].split()[:8]))
+        assert res["awaits_scope_ruling"] == m
+        assert not reg.is_registered_section("BSR-AN-04", c["locator"])
+    registered = {(t["registry_id"], t["locator"]) for t in reg.registered_creed_texts("Anglican") + reg.registered_definition_texts("Anglican")}
+    assert not any(rid == "BSR-AN-04" for rid, _ in registered)
+    assert not any(reg.scope_marker(rid, {"locator": loc}) for rid, loc in registered)
+    # listing a marked section fails loudly, even if a row gate would otherwise let it through
+    probe = {"registry_id": "BSR-AN-04", "locator": "Historical Documents of the Church (BCP p. 864) — Quicunque Vult", "kind": "CREED", "what": "x"}
+    f = tmp_path / "s.json"
+    f.write_text(json.dumps({"sections": [probe]}), encoding="utf-8")
+    monkeypatch.setattr(rulings, "REGISTERED_SECTIONS_PATH", str(f))
+    with pytest.raises(SystemExit):
+        Registry().registered_creed_texts("Anglican")
+
+
+def test_an05_guard_covers_only_the_front_matter_before_part_i(reg):
+    from sjn_recovery import sources
+    chunks = store.load_chunks("BSR-AN-05")
+    guarded = [c["locator"] for c in chunks if reg.apparatus_guard("BSR-AN-05", c)]
+    part_i = [c for c in chunks if c["division"] == sources.ACNA_PART_I_INTRO]
+    if not part_i:
+        pytest.skip("BSR-AN-05 not yet re-chunked in this checkout")
+    assert guarded == ["To Be a Christian, front matter — introduction: drafting guidelines, the Committee's sign-off, Scripture references, collect"]
+    assert len(part_i) == 1 and reg.apparatus_guard("BSR-AN-05", part_i[0]) is None
+    assert reg.effective_tier("BSR-AN-05", part_i[0]) == "CATECHETICAL"
+    first_q = next(i for i, c in enumerate(chunks) if c["division"] == "question")
+    assert [c["division"] for c in chunks[:first_q]] == [sources.ACNA_FRONT_MATTER, sources.ACNA_PART_I_INTRO]
+
+
+def test_a_only_build_keeps_the_manifest_entries_of_rows_the_registry_filters_out():
+    from sjn_recovery import corpus
+    prev = {"BSR-EO-02": {"status": "UNCHANGED"}, "BSR-EO-03": {"status": "HOST_RETIRED", "n_chunks": 0}, "BSR-EO-04": {"status": "UNCHANGED"}}
+    results = {"BSR-EO-02": {"status": "UNCHANGED"}, "BSR-EO-04": {"status": "REBUILT (drift accepted)"}}
+    kept = corpus.keep_unyielded_entries(results, prev, {"BSR-EO-04"})
+    assert kept == ["BSR-EO-03"]
+    assert list(results) == ["BSR-EO-02", "BSR-EO-03", "BSR-EO-04"]                 # manifest order kept
+    assert results["BSR-EO-03"] == {"status": "HOST_RETIRED", "n_chunks": 0} and results["BSR-EO-04"]["status"] == "REBUILT (drift accepted)"
+    full = {"BSR-EO-02": {"status": "UNCHANGED"}}
+    assert corpus.keep_unyielded_entries(full, prev, None) == [] and list(full) == ["BSR-EO-02"]   # a full build keeps none
+    # the committed manifest carries BSR-EO-03, which the registry filters out
+    m = store.load_manifest()["standards"]
+    assert m["BSR-EO-03"]["status"] == "HOST_RETIRED"

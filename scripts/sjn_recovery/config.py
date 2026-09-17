@@ -119,6 +119,11 @@ EO_CONSULTATION_LADDER = {
 }
 CONSULTATION_LADDERS = {"Eastern Orthodox": EO_CONSULTATION_LADDER}
 
+# Session 12 (Codex F.10): chunk-id mappings written when a row is re-chunked. A stored candidate whose (registry_id, locator) chunk no
+# longer carries its phrase is followed to the mapped new chunk that does (packets.relocations); nothing else reads them.
+# Session 13: the re-chunk was re-run in session 13 phase 4 (session 12's was rolled back), so its mapping is the one in force.
+CHUNK_ID_MAPPINGS = [os.path.join(RUNS_DIR, "session13", "chunk-id-mapping.json")]
+
 # Registry hosts RETIRED by the author (2026-09-12). A retired host is never requested, for any purpose:
 # not by the corpus builder, not by the fetch audit, not by an adapter's crawl. Rows still ratified on a
 # retired host (BSR-EO-03 in v2.25r2) build as HOST_RETIRED with no corpus, and any cached chunks are dropped.

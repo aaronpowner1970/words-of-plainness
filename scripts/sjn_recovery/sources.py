@@ -459,16 +459,41 @@ def vaticannews_creeds(ctx):
 
 
 def compendium(ctx):
+    """Session 12 (Codex F.10): two defects fixed. (1) From Part Four the page sets the number and the question in SEPARATE bold tags
+    (`<b>534.</b>&nbsp;<b>What is prayer?</b>`); the one-tag match recognised no heading after 533, so Q.534-598 ran on inside
+    "Compendium Q.533". A bare "<n>." bold tag now opens question n and the next bold tag supplies its question text. (2) The
+    Appendix is an anchor (`<a name="APPENDIX">`), never the bold tag the old stop looked for, so its prayers and formulas ran on too.
+    It is part of the promulgated book (B2(b)), so it is chunked, not dropped: A) Common Prayers one chunk per prayer and column
+    (English; the Latin column as its own chunk, language "la"), B) Formulas of Catholic Doctrine one chunk per formula.
+    Q.1-532 are chunked exactly as before."""
     url = "https://www.vatican.va/archive/compendium_ccc/documents/archive_2005_compendium-ccc_en.html"
-    segs = segments(ctx.html(url))
-    out, cur, buf, expect = [], None, [], 1
-    for tag, text in segs:
+    html = ctx.html(url)
+    segs = segments(html)
+    out, cur, buf, expect, pending = [], None, [], 1, None
+    appendix_at = None
+    for n_seg, (tag, text) in enumerate(segs):
         t = clean(text)
+        if tag == "a" and t == "APPENDIX" and cur:           # the table of contents links "APPENDIX" too, before Q.1
+            appendix_at = n_seg
+            break
+        if pending is not None:                          # a bare "<n>." bold tag: the next bold tag is its question
+            if not re.sub(r"[\s.]", "", t):              # Q.568 is set "<b>568</b>." — the stray full stop is skipped
+                continue
+            if tag == "b" and t:
+                if cur:
+                    _emit(ctx, out, f"Compendium Q.{cur}", buf, "question", url)
+                cur, buf, expect, pending = pending, [f"{pending}. {t}"], pending + 1, None
+                continue
+            pending = None
         m = re.match(r"^(\d{1,3})\.\s+(.+)$", t)
         if tag == "b" and m and int(m.group(1)) == expect:
             if cur:
                 _emit(ctx, out, f"Compendium Q.{cur}", buf, "question", url)
             cur, buf, expect = int(m.group(1)), [t], expect + 1
+            continue
+        mb = re.fullmatch(r"(\d{1,3})\.?", t)
+        if tag == "b" and mb and int(mb.group(1)) == expect:
+            pending = int(mb.group(1))
             continue
         if cur and tag in ("p", "i", "em"):
             if re.fullmatch(r"[\d\-–, ]+", t):
@@ -478,7 +503,62 @@ def compendium(ctx):
             break
     if cur:
         _emit(ctx, out, f"Compendium Q.{cur}", buf, "question", url)
-    return out, [f"registry canonical_url is a host note; text fetched from the cited compendium page; {len(out)} questions"]
+    n_questions = len(out)
+    notes = [f"registry canonical_url is a host note; text fetched from the cited compendium page; {n_questions} questions"]
+    if appendix_at is None:
+        return out, notes
+    # ---- Appendix A: the Common Prayers table, one row per prayer, English | Latin
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(fix_mojibake(html), "lxml")
+    anchor = soup.find("a", attrs={"name": "APPENDIX"})
+    table = anchor.find_parent("table") if anchor else None
+    n_a = 0
+    if table is not None:
+        body = table.find("tbody") or table
+        for tr in body.find_all("tr", recursive=False):
+            for col, td in enumerate(tr.find_all("td", recursive=False)):
+                parts = [(tg, clean(x)) for tg, x in segments(str(td)) if clean(x)]
+                if not parts or parts[0][0] != "b" or parts[0][1] == "APPENDIX":
+                    continue
+                titles = [parts[0][1]]                   # the prayer's title; later bold lines (the Rosary's mysteries) are its text
+                lines = [x for tg, x in parts[1:] if tg in ("p", "i", "em", "b", "font")]
+                if not lines:
+                    continue
+                latin = col == 1
+                loc = f"Compendium Appendix A (Common Prayers) — {titles[0]}" + (" (Latin)" if latin else "")
+                c = ctx.chunk(loc, join([titles[0]] + lines), "appendix prayer", url, "la" if latin else "en")
+                if c:
+                    out.append(c); n_a += 1
+    # ---- Appendix B: Formulas of Catholic Doctrine, one chunk per formula
+    n_b, in_b, title, items = 0, False, [], []
+
+    def flush_b():
+        nonlocal n_b
+        if title and items:
+            head = clean(" ".join(title)).replace("( ", "(").replace(" )", ")")
+            c = ctx.chunk(f"Compendium Appendix B (Formulas of Catholic Doctrine) — {head.rstrip(':')}", join([head] + items),
+                          "appendix formula", url)
+            if c:
+                out.append(c); n_b += 1
+
+    for tag, text in segs[appendix_at:]:
+        t = clean(text)
+        if tag == "a" and t.startswith("B) FORMULAS"):
+            in_b = True
+            continue
+        if not in_b or not t:
+            continue
+        if tag in ("b", "i") and (not items or tag == "b"):
+            if items:
+                flush_b(); title, items = [], []
+            title.append(t)
+            continue
+        if tag == "p":
+            items.append(t)
+    flush_b()
+    notes.append(f"Appendix chunked (session 12; integral to the promulgated book, B2(b)): A) Common Prayers {n_a} chunk(s) "
+                 f"(English and Latin columns separately), B) Formulas of Catholic Doctrine {n_b} chunk(s)")
+    return out, notes
 
 
 # =============================================================== Eastern Orthodox
@@ -1031,24 +1111,31 @@ def book_of_concord(ctx):
         if len(parts) >= 2 and parts[0] in BOC_DOCS and h not in paths:
             paths.append(h)
     out, notes = [], []
+    n_forcespan_pages = [0]
     for h in paths:
         url = urljoin(BOC + "/", h)
         doc = BOC_DOCS[[p for p in h.split("/") if p][0]]
         try:
-            segs = segments(ctx.html(url))
+            page_html = ctx.html(url)
+            segs = segments(page_html)
         except FetchError as e:
             notes.append(str(e)); ctx.log(f"   ! {e}"); continue
         title = next((clean(x) for t, x in segs if t in ("h2", "h1") and "Original Home" not in x and "BookOfConcord" not in x), "")
         if not title:
             continue
-        # numbered paragraphs: <span>n</span><p>...</p>; unnumbered pages (creeds): plain p's
-        paras, num = [], None
-        for tag, text in segs:
-            t = clean(text)
-            if tag == "span" and re.fullmatch(r"\d{1,3}", t):
-                num = int(t); continue
-            if tag == "p" and t and not t.startswith("<<") and not t.startswith(">>"):
-                paras.append((num, t)); num = None
+        if BOC_FORCESPAN in page_html:
+            # session 12 (Codex F.10): the Small Catechism pages set their text inside <span class="forcespan"> within <h4>/<p>
+            paras = _boc_forcespan_paras(page_html)
+            n_forcespan_pages[0] += 1
+        else:
+            # numbered paragraphs: <span>n</span><p>...</p>; unnumbered pages (creeds): plain p's
+            paras, num = [], None
+            for tag, text in segs:
+                t = clean(text)
+                if tag == "span" and re.fullmatch(r"\d{1,3}", t):
+                    num = int(t); continue
+                if tag == "p" and t and not t.startswith("<<") and not t.startswith(">>"):
+                    paras.append((num, t)); num = None
         if not paras:
             continue
         loc_base = f"{doc}: {title.rstrip('.')}"
@@ -1069,7 +1156,48 @@ def book_of_concord(ctx):
         if group:
             _emit(ctx, out, f"{loc_base}, ¶{a}" + (f"–{b}" if b != a else ""), group, "paragraph-range", url)
     notes.insert(0, f"{len(paths)} document pages crawled from the site index; numbered-paragraph ranges (≤{BOC_GROUP_CHARS} chars) inside each article")
+    if n_forcespan_pages[0]:
+        notes.append(f"session 12: {n_forcespan_pages[0]} page(s) set in <span class=\"forcespan\"> (the Small Catechism) read by element, "
+                     f"<h4> and <p>, whole text (sources._boc_forcespan_paras)")
     return out, notes
+
+
+BOC_FORCESPAN = 'class="forcespan"'
+
+
+def _boc_forcespan_paras(html):
+    """Session 12 (Codex F.10, BSR-LU-01): the Small Catechism pages on bookofconcord.org set the catechism's text inside
+    <span class="forcespan"> within <h4> (the commandment, article or petition) and <p> ("What does this mean?" in <em>, "-Answer:"
+    then the answer in a forcespan). The segment reader keeps only an element's DIRECT text, so every question and answer was lost and
+    only the "-Answer:" markers were stored ("II. The Creed, ¶1-3" was 30 characters). Here each <h4> and <p> that is a direct child of
+    <main> is read whole, in order; a bare-number anchor ("1") starts paragraph 1, a lettered one ("1b", "11c") continues it, and the
+    anchors themselves are removed from the text. Unnumbered elements before the first number (Luther's rubric, the first
+    commandment's heading) belong to the first paragraph rather than being dropped. The page title (<h2>) and the navigation boxes are
+    not paragraphs. Returns [(number or None, text)] for the grouping the other pages use."""
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(fix_mojibake(html), "lxml")
+    main = soup.find("main") or soup
+    paras, leading = [], []
+    for el in main.find_all(["h4", "p"], recursive=False):
+        anchors = el.find_all("span", class_="bocanchor-content")
+        m = re.fullmatch(r"\s*(\d{1,3})\s*", anchors[0].get_text()) if anchors else None   # "1b" / "11c" continue paragraph 1 / 11
+        for sp in el.find_all("span", class_="bocanchor"):
+            sp.decompose()
+        t = clean(el.get_text(""))
+        if not t or t.startswith(("<<", ">>")):
+            continue
+        n = int(m.group(1)) if m else None
+        if n is None and not paras:
+            leading.append(t); continue
+        if n is not None and not paras and leading:
+            paras.extend((n, x) for x in leading)
+            leading = []
+            paras.append((None, t))
+            continue
+        paras.append((n, t))
+    if leading and not paras:
+        paras = [(None, x) for x in leading]
+    return paras
 
 
 AC_LCMS_HEADING = re.compile(r"^(Preface to the Emperor Charles V\.|Article [IVXL]+: .+|Articles In Which Are Reviewed|Conclusion\.)$")
@@ -1257,10 +1385,28 @@ def pcusa_book_of_confessions(ctx):
     return out, [f"PDF normalized; {len(out)} confessional numbers across {len(PCUSA_SECTIONS)} constituent documents"]
 
 
+CRC_EDITORIAL_NOTE = "publisher apparatus (CRC editorial note)"
+
+
 def heidelberg_crcna(ctx):
+    """Session 12 (Codex F.10, B2(b)): the CRC's editorial footnotes — paragraphs opening "*" or "**" (on the editions of Q&A 80 and the
+    Synod 2004/2006 brackets; on "broken" in Q&A 77; on the NRSV Lord's Prayer in Q&A 119) — are publisher matter, not the catechism's
+    text. Each Q&A's notes are held out of its chunk and emitted after it as "<Q&A locator> — CRC editorial note(s)", division
+    CRC_EDITORIAL_NOTE, which the R6-40 apparatus guard reads. The note markers inside the Q&A text ("80*", "]**") are the page's own."""
     url = ctx.row["canonical_url"]
     segs = segments(ctx.html(url))
-    out, cur, buf, lords_day = [], None, [], ""
+    out, cur, buf, notes_buf, lords_day = [], None, [], [], ""
+    n_notes = 0
+
+    def flush():
+        nonlocal n_notes
+        if cur:
+            _emit(ctx, out, cur, buf, "question", url)
+            if notes_buf:
+                c = ctx.chunk(f"{cur} — CRC editorial note(s)", join(notes_buf), CRC_EDITORIAL_NOTE, url)
+                if c:
+                    out.append(c); n_notes += 1
+
     for tag, text in segs:
         t = clean(text)
         if tag == "h4" and t.startswith("Lord"):
@@ -1269,19 +1415,20 @@ def heidelberg_crcna(ctx):
         # dropped the heading, so Q&A 80's text ran on inside the Q&A 79 chunk
         m = re.match(r"^Q & A (\d{1,3})\*{0,2}$", t)
         if tag == "div" and m:
-            if cur:
-                _emit(ctx, out, cur, buf, "question", url)
-            cur, buf = f"Q&A {m.group(1)} ({lords_day})", []
+            flush()
+            cur, buf, notes_buf = f"Q&A {m.group(1)} ({lords_day})", [], []
             continue
         if cur and tag in ("p", "em", "i"):
             if re.match(r"^\d{1,2}\s", t) or re.fullmatch(r"[\d\s,;:.\-–]+", t):
                 continue   # footnote scripture lists
+            if t.startswith("*") or notes_buf:            # a note runs to the next Q&A (Q&A 80's ** note has a second paragraph)
+                notes_buf.append(t); continue
             buf.append(strip_footnote_digits(t))
         if cur and tag in ("h2", "h3") and t.startswith(("Part", "God", "Introduction")):
             pass
-    if cur:
-        _emit(ctx, out, cur, buf, "question", url)
-    return out, [f"{len(out)} Q&A (CRC/RCA 2011 translation)"]
+    flush()
+    return out, [f"{len(out) - n_notes} Q&A (CRC/RCA 2011 translation)",
+                 f"session 12: {n_notes} CRC editorial-note chunk(s) held out of the Q&A text (division {CRC_EDITORIAL_NOTE!r}; apparatus guard R6-40)"]
 
 
 def belgic_crcna(ctx):
@@ -1413,15 +1560,50 @@ def athanasian_creed_ccel(ctx):
     return out, [f"ccel.org (publisher_domain) — {len(verses)} numbered verses in one division; the churchofengland.org text is the Gate 7 migration target, not fetched"]
 
 
+_HISTORICAL_DOCS_TITLE = re.compile(r"^\s*Historical\s+Documents\s+of\s+the\s+Church\s*$", re.I)
+
+
+def _historical_heading_blocks(lines):
+    """Split one page of the BCP's Historical Documents into (heading, body lines) blocks. A heading is a run of short lines
+    (<= 45 characters) with no terminal punctuation that starts the page or follows a line ending a sentence — on BCP p. 864
+    "Definition of the Union of the Divine / and Human Natures in the Person of Christ / Council of Chalcedon, 451 A.D., Act V"
+    and "Quicunque Vult / commonly called / The Creed of Saint Athanasius". Body lines are the rest."""
+    blocks, head, body, prev_end = [], [], [], True
+    for l in lines:
+        short = len(l) <= 45 and not re.search(r"[.;:,?!]$", l)
+        if short and (prev_end or (head and not body)):
+            if body:
+                blocks.append((head, body)); head, body = [], []
+            head.append(l)
+            prev_end = False
+            continue
+        body.append(l)
+        prev_end = bool(re.search(r"[.;:?!]$", l))
+    if head or body:
+        blocks.append((head, body))
+    return blocks
+
+
 def tec_outline_of_faith(ctx):
+    """Session 12 (Codex F.10): the Outline ends where the Outline ends. The printed title page "Historical Documents of the Church"
+    (BCP p. 863) sets its title over three lines, so the old stop (a line starting "Historical Documents") never fired and the last
+    question's chunk ("What, then, is our assurance as Christians?", p. 862) ran on through p. 864: the Chalcedonian Definition and the
+    p. 864 part of the Quicunque Vult. The Outline now stops at that title page. The pages that follow INSIDE THE SAME 20-page window —
+    the text the row's store already held, no more and no less — are chunked as what they are, one chunk per document and page,
+    locator "Historical Documents of the Church (BCP p. N) — <the document's printed heading>". The row's registry scope and tier are
+    not changed here."""
     url = ctx.row["canonical_url"]
     pages = ctx.pdf(url).split("\f")
     start = next((i for i, p in enumerate(pages) if "An Outline of the Faith" in p and "commonly called the Catechism" in p), -1)
     if start < 0:
         raise FetchError("Outline of the Faith not found in PDF")
     out, section, q, a, state = [], "", None, [], None
+    historical_at = None
     for pi in range(start, min(len(pages), start + 20)):
         page_no = pi + 1
+        if pi > start and _HISTORICAL_DOCS_TITLE.match(" ".join(pdf_repair(pages[pi]).split())):
+            historical_at = pi
+            break
         if pi > start and "Concerning the Catechism" in pages[pi] and "Outline" not in pages[pi]:
             pass
         for raw in pdf_repair(pages[pi]).split("\n"):
@@ -1453,17 +1635,61 @@ def tec_outline_of_faith(ctx):
             break
     if q is not None:
         _emit(ctx, out, f"Outline of the Faith (BCP p. {q_page}) — {q_section}: Q. {clean(' '.join(q))[:80]}", q + a, "question", url)
-    return out, [f"PDF pages {start + 1}–{start + 20} region; {len(out)} Q/A pairs"]
+    notes = [f"PDF pages {start + 1}–{start + 20} region; {len(out)} Q/A pairs"]
+    if historical_at is not None:
+        n_hist, last_page = 0, min(len(pages), start + 20)
+        for pi in range(historical_at + 1, last_page):
+            lines = [l.strip() for l in pdf_repair(pages[pi]).split("\n") if l.strip() and not re.fullmatch(r"\d{3}", l.strip())]
+            for head, body in _historical_heading_blocks(lines):
+                if not head or not body:
+                    continue
+                heading = clean(" ".join(head))
+                c = ctx.chunk(f"Historical Documents of the Church (BCP p. {pi + 1}) — {heading}", join(body), "historical document", url)
+                if c:
+                    out.append(c); n_hist += 1
+        notes.append(f"session 12: the Outline ends at BCP p. {historical_at} (the 'Historical Documents of the Church' title page is p. "
+                     f"{historical_at + 1}); {n_hist} Historical Documents chunk(s) from BCP pp. {historical_at + 2}–{last_page}, the pages inside "
+                     f"the adapter's existing 20-page window only (a document that continues past p. {last_page} is held only as far as p. {last_page})")
+    return out, notes
+
+
+ACNA_FRONT_MATTER = "front matter (publisher/editor apparatus)"
+# session 13 (R6-46.1): Part I's introductory matter before Q.1 is integral text, not front matter; its own division, never guarded
+ACNA_PART_I_INTRO = "Part I introductory matter (integral text)"
+
+
+def _acna_question_follows(lines, i, first):
+    """True when the numbered line lines[i] opens a question: its own text, or one of the next four non-empty lines before another
+    numbered line, carries a question mark. The drafting guidelines in the front matter ("1. Everything taught should be ...") do not."""
+    seen = [first] if first else []
+    for l in lines[i + 1:i + 12]:
+        if not l:
+            continue
+        if re.match(r"^\d{1,3}\.(\s|$)", l):
+            break
+        seen.append(l)
+        if len(seen) >= 5:
+            break
+    return any("?" in x for x in seen)
 
 
 def acna_to_be_a_christian(ctx):
+    """Session 12 (Codex F.10): the front matter no longer takes question numbers. The drafting guidelines are numbered "1."-"3.", so
+    the counter spent Q.1-Q.3 on them: "Q.1" and "Q.2" were guidelines and "Q.3" held the third guideline, the Committee's sign-off,
+    the note on Scripture references, the collect, Part I's introductory matter and then the real Q.1-3. Before the first question, a
+    numbered line opens a question only when a question follows it (_acna_question_follows). The text the store held before the first
+    question is kept in two chunks split at "part i": the front matter (guidelines, sign-off, Scripture references, collect), division
+    ACNA_FRONT_MATTER, which the R6-36 apparatus guard reads (B2(b): publisher/editor matter does not inherit the adoption); and Part I's
+    introductory matter before Q.1. Session 13 (R6-46.1): that Part I chunk is integral text, carries division ACNA_PART_I_INTRO and is
+    never guarded. From the first real question on, nothing changes."""
     url = ctx.row["canonical_url"]
     txt = pdf_repair(ctx.pdf(url).replace("\f", "\n"))
     lines = [l.strip() for l in txt.split("\n")]
     out, cur, buf, expect, qtext, in_q = [], None, [], 1, [], False
-    for l in lines:
+    front, front_started = [[]], False
+    for i, l in enumerate(lines):
         m = re.match(r"^(\d{1,3})\.\s*(.*)$", l)
-        if m and int(m.group(1)) == expect:
+        if m and int(m.group(1)) == expect and (cur is not None or _acna_question_follows(lines, i, m.group(2))):
             if cur:
                 _emit(ctx, out, f"To Be a Christian, Q.{cur} — {clean(' '.join(qtext))[:70]}", qtext + buf, "question", url)
             cur, expect, qtext, buf, in_q = int(m.group(1)), expect + 1, [m.group(2)] if m.group(2) else [], [], True
@@ -1471,6 +1697,15 @@ def acna_to_be_a_christian(ctx):
                 in_q = False
             continue
         if cur is None:
+            if m and int(m.group(1)) == 1:
+                front_started = True                     # the store's text began at the first "1." line, as before
+            if not front_started:
+                continue
+            if not l or re.fullmatch(r"\d{1,3}", l) or re.fullmatch(r"[A-Z ]{6,}", l):
+                continue
+            if l.casefold() == "part i" and front[-1]:
+                front.append([])
+            front[-1].append(l)
             continue
         if not l or re.fullmatch(r"\d{1,3}", l) or re.fullmatch(r"[A-Z ]{6,}", l):
             continue
@@ -1482,7 +1717,18 @@ def acna_to_be_a_christian(ctx):
             buf.append(l)
     if cur:
         _emit(ctx, out, f"To Be a Christian, Q.{cur} — {clean(' '.join(qtext))[:70]}", qtext + buf, "question", url)
-    return out, [f"{len(out)} numbered questions (fallback tier: registry_fallback_only_rows)"]
+    fm = []
+    labels = ["To Be a Christian, front matter — introduction: drafting guidelines, the Committee's sign-off, Scripture references, collect",
+              "To Be a Christian, Part I, Beginning with Christ — introductory matter before Q.1"]
+    for n, part in enumerate(x for x in front if x):
+        division = ACNA_FRONT_MATTER if n == 0 else ACNA_PART_I_INTRO          # session 13, R6-46.1: only the chunk before "Part I"
+        c = ctx.chunk(labels[min(n, len(labels) - 1)] + (f" [{n + 1}]" if n >= len(labels) else ""), join(part), division, url)
+        if c:
+            fm.append(c)
+    n_front = sum(1 for c in fm if c["division"] == ACNA_FRONT_MATTER)
+    return fm + out, [f"{len(out)} numbered questions (fallback tier: registry_fallback_only_rows)",
+                      f"session 13: {n_front} front-matter chunk before Part I (division {ACNA_FRONT_MATTER!r}; apparatus guard R6-36, "
+                      f"narrowed by R6-46.1) and {len(fm) - n_front} Part I introductory chunk (division {ACNA_PART_I_INTRO!r}; integral, not guarded)"]
 
 
 # =============================================================== Baptist

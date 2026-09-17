@@ -205,6 +205,10 @@ class Registry:
                 raise SystemExit(f"author ruling {self._adoption_guards[rid]['ruling']} guards {rid}, which is not a ratified registry row")
         self._creed_index, self._definition_index = {}, {}
         self._sections = rulings.registered_sections()                  # session 13, R6-43
+        self._scope_markers = rulings.scope_markers()                   # session 13, R6-45
+        for rid, ms in self._scope_markers.items():
+            if rid not in self.by_id:
+                raise SystemExit(f"author ruling {ms[0]['ruling']} marks chunks of {rid}, which is not a ratified registry row")
         self._section_keys = {(e["registry_id"], e["locator"]) for e in self._sections}
 
     # ---------------------------------------------------------------- R6-9: the second tier's rank
@@ -367,6 +371,8 @@ class Registry:
                 resolved = bare_tier(tier)
             if _DEFINITION_EXCLUDE.search(e["locator"]):
                 raise SystemExit(f"{where}: a canon or anathema is never a registered text (R6-10)")
+            if self.scope_marker(rid, {"locator": e["locator"]}):
+                raise SystemExit(f"{where}: the section awaits a scope ruling (R6-45) and is not a registered text")
             chunks = store.load_chunks(rid)
             chunk = next((c for c in chunks if c.get("locator") == e["locator"]), None)
             if chunk is None:
@@ -386,6 +392,14 @@ class Registry:
                 entry["language"] = chunk.get("language") or "en"
             out.append(entry)
         return out
+
+    def scope_marker(self, rid, chunk):
+        """R6-45: the marker a ruling puts on this chunk (it awaits a scope ruling), or None. Read from the chunk's locator."""
+        loc = (chunk or {}).get("locator") or ""
+        for m in self._scope_markers.get(rid) or []:
+            if loc.startswith(m["locator_prefix"]):
+                return {"marker": m["marker"], "ruling": m["ruling"], "text": m["text"]}
+        return None
 
     def is_registered_section(self, rid, locator):
         """R6-43: is (registry_id, locator) a listed registered creed or definition section?"""
@@ -549,7 +563,8 @@ class Registry:
             why = "the host row's tier"
         return {"registry_id": rid, "authority_tier": tier, "host_tier": host, "effective_tier": eff, "why": why,
                 "registered_phrase_hit": hit, "raised_by": self.raised_by(rid, chunk, phrase) if row else [],
-                "apparatus_guard": guard, "adoption_disclosure": self.adoption_disclosure(rid, chunk)}
+                "apparatus_guard": guard, "adoption_disclosure": self.adoption_disclosure(rid, chunk),
+                "awaits_scope_ruling": self.scope_marker(rid, chunk) if row else None}
 
     def public(self, rid):
         """Fields an agent may see about a standard: never a URL. Every text field is scrubbed — a

@@ -131,15 +131,18 @@ def test_an_lu03_apparatus_chunk_never_resolves_catechetical(reg, extra):
 
 def test_the_guard_is_generic_and_applies_only_where_a_ruling_carries_one(reg):
     guards = rulings.adoption_guards()
-    assert sorted(guards) == ["BSR-LU-03"]                                  # not applied to any other row in session 11
-    c = store.load_chunks("BSR-AN-05")[:1] or [{"text": "The Central Thought x", "locator": "x", "division": "x"}]
+    # session 11 guarded BSR-LU-03 only; session 12 (phase 3c/3d) added BSR-AN-05's front matter and BSR-RP-05's CRC notes
+    assert sorted(guards) == ["BSR-AN-05", "BSR-LU-03", "BSR-RP-05"]
+    c = store.load_chunks("BSR-RC-07")[:1] or [{"text": "The Central Thought x", "locator": "x", "division": "x"}]
     probe = dict(c[0], text="The Central Thought " + c[0]["text"])
-    assert reg.apparatus_guard("BSR-AN-05", probe) is None                  # unguarded row: no effect
+    assert reg.apparatus_guard("BSR-RC-07", probe) is None                  # unguarded row: no effect
     saved = dict(reg._adoption_guards)
     try:
+        reg._adoption_guards["BSR-RC-07"] = dict(guards["BSR-LU-03"], registry_id="BSR-RC-07", integral_text_pattern=None)
+        assert reg.apparatus_guard("BSR-RC-07", probe)
+        assert bare_tier(reg.exposition_tier("BSR-RC-07", None, probe)) == SECOND_TIER
+        probe = dict(probe, text="The Central Thought " + probe["text"])
         reg._adoption_guards["BSR-AN-05"] = dict(guards["BSR-LU-03"], registry_id="BSR-AN-05", integral_text_pattern=None)
-        assert reg.apparatus_guard("BSR-AN-05", probe)
-        assert bare_tier(reg.exposition_tier("BSR-AN-05", None, probe)) == SECOND_TIER
         reg._adoption_guards["BSR-BA-03"] = dict(guards["BSR-LU-03"], registry_id="BSR-BA-03", integral_text_pattern=None)
         low = {"text": "The Central Thought", "locator": "x", "division": "x"}
         assert reg.exposition_tier("BSR-BA-03", None, low) == "OFFICIAL_EXPOSITION"   # never raises, never below its own rank
