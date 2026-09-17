@@ -799,9 +799,10 @@
      ]
     }
    },
-   "as_implemented": "pending: session 13 phase 2",
-   "test": "pending: session 13 phase 2",
-   "supersede_with": "none (a registration rule; the list is a reviewable harness record, not a workbook value)"
+   "as_implemented": "rulings.registered_sections() reads recovery-runs/registered-sections.json (62 sections: 29 creed, 33 definition; 13 row-level registrations left out, each with its reason); Registry._registered_sections builds registered_creed_texts / registered_definition_texts from it only, keeps the row gates as loud checks (creed-carrying tier, CONCILIAR for definitions, never CATECHETICAL, never a canon or anathema), and ends a section's key after `text_through` where a stored chunk carries more than the creed (RP-04 1.3 and 2.3, LU-01 Apostles' Creed, AN-03); chunk-level creed resolution (R6-5 allowed rows) also requires a listed section. Before/after: recovery-runs/session13/registration-before-after.md",
+   "test": "test_session13_rulings: test_r6_27_extends_to_sections_no_registered_section_is_a_catechism_or_commentary_section, test_lu01_small_and_large_catechism_creed_sections_are_not_registered, test_lu01_ecumenical_creeds_sections_are_registered, test_every_listed_section_is_stored_and_the_list_is_the_only_registration_path, test_sections_spanning_several_chunks_are_reported",
+   "supersede_with": "none (a registration rule; the list is a reviewable harness record, not a workbook value)",
+   "registered_sections_file": "data-sources/sjn/recovery-runs/registered-sections.json"
   },
   "R6-44_confessed_catechisms": {
    "ruled": "2026-09-17",
@@ -854,7 +855,7 @@
    "as_implemented": {
     "1_an05_guard": "pending: session 13 phase 4",
     "2_rp05_notes": "pending: session 13 phase 4",
-    "3_r6_41_interpretations": "allocation.py step 5a (session 12), unchanged; span report: pending: session 13 phase 2",
+    "3_r6_41_interpretations": "allocation.py step 5a (session 12), unchanged. Sections found to span more than one chunk (reported, R6-46.3): BSR-RC-04 Constitution 1 (4 chunks); BSR-RP-04 Nicene Creed 1.1-1.3 and Apostles' Creed 2.1-2.3 (3 chunks each); BSR-EO-12 Symbol of Faith (12 chunks); BSR-EO-06 Chalcedon Definition (9) and Constantinople III Definition (10); BSR-EO-13 Constantinople III Definition (10). Recorded per entry in registered-sections.json (section_spans_chunks)",
     "4_phase2_seat_effects": "accepted; no code change",
     "5_in_scope": "corpus builder: pending: session 13 phase 4; row-added-by-ruling path: pending: session 13 phase 5"
    },

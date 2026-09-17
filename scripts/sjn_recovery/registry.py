@@ -201,6 +201,8 @@ class Registry:
             if rid not in self.by_id:
                 raise SystemExit(f"author ruling {self._adoption_guards[rid]['ruling']} guards {rid}, which is not a ratified registry row")
         self._creed_index, self._definition_index = {}, {}
+        self._sections = rulings.registered_sections()                  # session 13, R6-43
+        self._section_keys = {(e["registry_id"], e["locator"]) for e in self._sections}
 
     # ---------------------------------------------------------------- R6-9: the second tier's rank
     def assert_second_tier_rank(self):
@@ -335,53 +337,74 @@ class Registry:
         return f"{SECOND_TIER} ({qualifier})"
 
     # ---------------------------------------------------------------- R6-5 / R6-10: registered creed and definition texts
-    def registered_creed_texts(self, branch):
-        """The creed TEXTS this branch registers: chunks that ARE a creed, never a catechism's exposition of one.
-
-        A chunk qualifies when its locator names a creed AND its row is a creed-carrying row — either one of R6-5's
-        chunk_level_creed_resolution_allowed_rows (BSR-EO-07, BSR-EO-14, BSR-RC-06, BSR-RC-08), or a row whose bare tier
-        is CONCILIAR or CONFESSIONAL, which is the creed printed as a text inside a conciliar or confessional standard
-        (BSR-EO-12, BSR-EO-09 §2, BSR-AN-03, BSR-LU-01's Ecumenical Creeds, BSR-RP-04's Book of Confessions creeds).
-        A CATECHETICAL row is never a registered creed text: that is exactly what clause 3 forbids. RATIFIED R6-22
-        (2026-09-16): catechetical works are exposition, not confession."""
-        if branch in self._creed_index:
-            return self._creed_index[branch]
+    def _registered_sections(self, branch, kind):
+        """R6-43 (Codex B1(a), session 13): the registered SECTIONS of one kind in this branch, from the explicit list
+        (rulings.registered_sections). Registration is by section, never by a locator pattern or a row's tier: a catechism's,
+        confession's or commentary's treatment of a creed is not listed, whatever its row. The row-level gates stay as checks on
+        the list and fail loudly, never silently: a listed creed must sit in a creed-carrying row (R6-5's allowed rows, or bare
+        tier CONCILIAR / CONFESSIONAL; never CATECHETICAL, R6-22/R6-27), a listed definition in a CONCILIAR row, and neither may
+        name a canon or an anathema (R6-10). A listed section must exist in the store (unless the row has no stored text at
+        all), and its `text_through` marker, where given, must occur in the chunk: the registered key ends after it."""
         from . import store
         from .textutil import punct_key
+        rows = {r["registry_id"]: r for r in self.for_branch(branch, citable_only=False)}
         out = []
-        for r in self.for_branch(branch, citable_only=False):
-            rid, tier = r["registry_id"], s(r.get("authority_tier"))
-            if rid not in self.chunk_level_creed_rows and bare_tier(tier) not in ("CONCILIAR", "CONFESSIONAL"):
+        for e in self._sections:
+            if e["kind"] != kind or e["registry_id"] not in rows:
                 continue
-            resolved = creed_resolution_tier(tier) or bare_tier(tier)
-            for c in store.load_chunks(rid):
-                loc = (c.get("locator") or "") + " " + (c.get("division") or "")
-                if _CREED_LOCATOR.search(loc):
-                    out.append({"registry_id": rid, "locator": c.get("locator"), "tier": resolved,
-                                "chars": len(c["text"]), "key": punct_key(c["text"]),
-                                "language": c.get("language") or "en"})
-        self._creed_index[branch] = out
+            rid, tier = e["registry_id"], s(rows[e["registry_id"]].get("authority_tier"))
+            where = f"registered section {rid} {e['locator']!r} (R6-43)"
+            if kind == "CREED":
+                if rid not in self.chunk_level_creed_rows and bare_tier(tier) not in ("CONCILIAR", "CONFESSIONAL"):
+                    raise SystemExit(f"{where}: row tier {tier!r} is not a creed-carrying tier (R6-22/R6-27)")
+                resolved = creed_resolution_tier(tier) or bare_tier(tier)
+            else:
+                if bare_tier(tier) != "CONCILIAR":
+                    raise SystemExit(f"{where}: a definition text must sit in a CONCILIAR row, not {tier!r} (R6-10)")
+                resolved = bare_tier(tier)
+            if _DEFINITION_EXCLUDE.search(e["locator"]):
+                raise SystemExit(f"{where}: a canon or anathema is never a registered text (R6-10)")
+            chunks = store.load_chunks(rid)
+            chunk = next((c for c in chunks if c.get("locator") == e["locator"]), None)
+            if chunk is None:
+                if chunks:
+                    raise SystemExit(f"{where}: no stored chunk carries this locator — the list and the store disagree")
+                continue                                  # the row has no stored text (e.g. never built): nothing to register
+            text = chunk["text"]
+            through = e.get("text_through")
+            if through:
+                i = text.find(through)
+                if i < 0:
+                    raise SystemExit(f"{where}: text_through {through!r} does not occur in the stored chunk")
+                text = text[: i + len(through)]
+            entry = {"registry_id": rid, "locator": e["locator"], "tier": resolved, "chars": len(text), "key": punct_key(text),
+                     "section": e}
+            if kind == "CREED":
+                entry["language"] = chunk.get("language") or "en"
+            out.append(entry)
         return out
+
+    def is_registered_section(self, rid, locator):
+        """R6-43: is (registry_id, locator) a listed registered creed or definition section?"""
+        return (rid, locator) in self._section_keys
+
+    def registered_creed_texts(self, branch):
+        """The creed TEXTS this branch registers: sections that ARE a creed, never a catechism's exposition of one.
+
+        Session 13 (R6-43, Codex B1(a)): the list in registered-sections.json decides, section by section (_registered_sections).
+        Before session 13 a chunk qualified when its locator named a creed and its row was creed-carrying; that registered
+        BSR-LU-01's Small and Large Catechism "Creed" sections, which R6-43 names as not registered texts.
+        A CATECHETICAL row is never a registered creed text: RATIFIED R6-22 (2026-09-16), enforced by R6-27 and checked here."""
+        if branch not in self._creed_index:
+            self._creed_index[branch] = self._registered_sections(branch, "CREED")
+        return self._creed_index[branch]
 
     def registered_definition_texts(self, branch):
-        """R6-10: the dogmatic DEFINITIONS (horoi) this branch registers as texts. Canons and anathemas are excluded by
-        the ruling, so a locator naming one never qualifies however conciliar its row. No new rows are added."""
-        if branch in self._definition_index:
-            return self._definition_index[branch]
-        from . import store
-        from .textutil import punct_key
-        out = []
-        for r in self.for_branch(branch, citable_only=False):
-            rid, tier = r["registry_id"], s(r.get("authority_tier"))
-            if bare_tier(tier) != "CONCILIAR":
-                continue
-            for c in store.load_chunks(rid):
-                loc = (c.get("locator") or "") + " " + (c.get("division") or "")
-                if _DEFINITION_LOCATOR.search(loc) and not _DEFINITION_EXCLUDE.search(loc):
-                    out.append({"registry_id": rid, "locator": c.get("locator"), "tier": bare_tier(tier),
-                                "chars": len(c["text"]), "key": punct_key(c["text"])})
-        self._definition_index[branch] = out
-        return out
+        """R6-10: the dogmatic DEFINITIONS (horoi) this branch registers as texts; canons and anathemas never qualify.
+        Session 13 (R6-43): read from the registered-sections list, section by section."""
+        if branch not in self._definition_index:
+            self._definition_index[branch] = self._registered_sections(branch, "DEFINITION")
+        return self._definition_index[branch]
 
     def resolve_registered_phrase(self, branch, phrase):
         """R6-5 clause 1 and R6-10: does this phrase stand VERBATIM inside a registered creed or definition text of this
@@ -496,7 +519,9 @@ class Registry:
         if self.creed_tier_resolution == "TIER_PER_CITED_DOCUMENT" and chunk is not None and rid in self.chunk_level_creed_rows:
             resolved = creed_resolution_tier(tier)
             loc = (chunk.get("locator") or "") + " " + (chunk.get("division") or "")
-            if resolved and _CREED_LOCATOR.search(loc) and tier_rank(resolved) < tier_rank(host):
+            # session 13 (R6-43): the chunk must also be a registered section, so there is one registration decision
+            if (resolved and _CREED_LOCATOR.search(loc) and self.is_registered_section(rid, chunk.get("locator"))
+                    and tier_rank(resolved) < tier_rank(host)):
                 return resolved
         return host
 

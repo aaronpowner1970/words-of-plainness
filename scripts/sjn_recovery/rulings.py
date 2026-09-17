@@ -47,7 +47,14 @@ Session 11 (2026-09-17, adoption ratification; Comparison Principles Codex B2(a)
   R6-37 BSR-LU-03 ADOPTED with its translator disclosed; publisher apparatus never inherits it (adoption_guards)
   R6-38 scope is the verified reach of the named body: BSR-RP-03 added, BSR-RP-02 and BSR-LU-01 amended
   R6-39 BSR-BA-03 ISSUED_UNADOPTED with its own disclosure wording
-  R6-40 BSR-RC-07, BSR-AN-04, BSR-RP-05 ADOPTED as proposed"""
+  R6-40 BSR-RC-07, BSR-AN-04, BSR-RP-05 ADOPTED as proposed
+
+Session 13 (2026-09-17, Codex v0.6):
+
+  R6-43 registration is by section: registered-sections.json is the only list of registered creed and definition texts
+  R6-44 confessed catechisms: BSR-LU-03 CONFESSIONAL (registry_overrides; several rulings on one row combine)
+  R6-45 the AN-04 Historical Documents chunks await a scope ruling and are not registered texts
+  R6-46 session 12 confirmations (the AN-05 guard narrowed to the front matter before Part I; RP-05 notes guarded)"""
 import json
 import os
 
@@ -209,6 +216,33 @@ def adoption_policy(r=None):
             "unverified_behavior": a.get("unverified_behavior"), "exposition_resolution": a.get("exposition_resolution"),
             "migration_order": a.get("migration_order") or [],
             "second_tier": "OFFICIAL_EXPOSITION", "assert": n.get("assert"), "disclosure": n.get("card_disclosure") or {}}
+
+
+# ---------------------------------------------------------------- R6-43 registered sections
+REGISTERED_SECTIONS_PATH = os.environ.get("SJN_REGISTERED_SECTIONS_PATH") or os.path.join(RUNS_DIR, "registered-sections.json")
+SECTION_KINDS = ("CREED", "DEFINITION")
+
+
+def registered_sections(path=None):
+    """[{registry_id, locator, kind, what, text_through?, ...}] — Codex B1(a), ruled R6-43 (session 13): the explicit list of
+    registered creed and definition SECTIONS. A chunk is a registered text only if its (registry_id, locator) is listed; nothing
+    is registered by a locator pattern or a row tier any more. A missing file is a hard stop, never an empty registration."""
+    p = path or REGISTERED_SECTIONS_PATH
+    if not os.path.exists(p):
+        raise SystemExit(f"registered sections file missing: {p} — R6-43 names it as the only source of registered creed and "
+                         f"definition texts")
+    with open(p, encoding="utf-8") as fh:
+        d = json.load(fh)
+    out, seen = [], set()
+    for e in d.get("sections") or []:
+        if not e.get("registry_id") or not e.get("locator") or e.get("kind") not in SECTION_KINDS:
+            raise SystemExit(f"registered sections file: an entry needs registry_id, locator and kind in {SECTION_KINDS}: {e}")
+        key = (e["registry_id"], e["locator"])
+        if key in seen:
+            raise SystemExit(f"registered sections file lists {key} twice")
+        seen.add(key)
+        out.append(dict(e))
+    return out
 
 
 # ---------------------------------------------------------------- R6-8 agency
