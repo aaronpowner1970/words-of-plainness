@@ -155,6 +155,41 @@ def registry_overrides(r=None):
     return out
 
 
+# ---------------------------------------------------------------- R6-42 rows added by ruling (session 13)
+# A path SEPARATE from the override hook: registry_overrides only re-types a row the workbook already has (and stops on an
+# unknown id); a ruling that ADDS a row carries `add_row: true` and a `new_row` block. Registry() appends it to the rows it read
+# from the workbook, in memory, records that it came from the ruling, and - once the workbook carries a row with that id - reads
+# the workbook row instead and fails loudly on any disagreement with the ruled values.
+ADDED_ROW_REQUIRED = ("registry_id", "branch", "standard_title", "authority_tier", "speaks_for", "reception_scope",
+                      "publisher_domain", "canonical_url", "fetch_mode", "scope_caveat")
+ADDED_ROW_OPTIONAL = ("reception_note", "author_note", "draft_recommendation", "released_cells")
+
+
+def added_rows(r=None):
+    """{registry_id: {"ruling": key, "row": {...}, "adoption": {...} | None, "ruled": date}} for rows a ruling adds (R6-42)."""
+    import re
+    r = r or load()
+    out = {}
+    for key, ru in (r.get("rulings") or {}).items():
+        if ru.get("add_row") is not True:
+            continue
+        row = ru.get("new_row")
+        if not isinstance(row, dict):
+            raise SystemExit(f"author ruling {key}: add_row needs a new_row block")
+        missing = [f for f in ADDED_ROW_REQUIRED if not str(row.get(f) or "").strip()]
+        if missing:
+            raise SystemExit(f"author ruling {key}: new_row lacks {missing}")
+        rid = row["registry_id"]
+        if not re.fullmatch(r"BSR-[A-Z]{2}-\d{2}", rid):
+            raise SystemExit(f"author ruling {key}: new_row registry_id {rid!r} is not a confirmed registry id")
+        if rid in out:
+            raise SystemExit(f"author rulings {out[rid]['ruling']} and {key} both add {rid}")
+        out[rid] = {"ruling": key, "ruled": ru.get("ruled"), "adoption": ru.get("adoption"),
+                    "row": {f: row[f] for f in ADDED_ROW_REQUIRED + ADDED_ROW_OPTIONAL if f in row},
+                    "authority_tier_note": row.get("authority_tier_note"), "chunking_guards": ru.get("chunking_guards")}
+    return out
+
+
 def same_work_rows(r=None):
     """{registry_id: registry_id} — rows that are ONE work and count as one observation (R6-5, HOPKO-OF-VOL1).
 
@@ -184,8 +219,14 @@ def chunk_level_creed_rows(r=None):
 
 # ---------------------------------------------------------------- R6-6 / R6-9 adoption
 def adoption_rows(r=None):
-    """{registry_id: {adoption_status, adoption_act, adoption_body_scope, adoption_verified, adopting_body}} (R6-6)."""
-    rows = _ruling(r, "R6-6_adoption_field").get("rows") or {}
+    """{registry_id: {adoption_status, adoption_act, adoption_body_scope, adoption_verified, adopting_body}} (R6-6).
+    Session 13: a row added by ruling (added_rows) brings its own `adoption` block, recorded with the ruling that carries it."""
+    rows = dict(_ruling(r, "R6-6_adoption_field").get("rows") or {})
+    for rid, ar in added_rows(r).items():
+        if ar.get("adoption"):
+            if rid in rows:
+                raise SystemExit(f"author ruling {ar['ruling']}: {rid} already has an R6-6 adoption row")
+            rows[rid] = dict(ar["adoption"], ruling=ar["ruling"])
     for rid, v in rows.items():
         st = v.get("adoption_status")
         if st not in ADOPTION_STATUSES:
@@ -336,6 +377,7 @@ def summary(r=None):
             "registry_retired": sorted(retirements(r)), "refused_candidates": sorted(refused_candidates(r)),
             "same_text_rows": same_text_rows(r),
             "registry_overrides": {rid: ov["fields"] for rid, ov in registry_overrides(r).items()},
+            "registry_rows_added": {rid: ar["ruling"] for rid, ar in added_rows(r).items()},
             "same_work_rows": same_work_rows(r), "independence_groups": independence_groups(r),
             "chunk_level_creed_rows": chunk_level_creed_rows(r),
             "adoption_rows": {rid: v.get("adoption_status") for rid, v in adoption_rows(r).items()},

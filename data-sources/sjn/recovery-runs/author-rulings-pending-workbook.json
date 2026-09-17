@@ -778,8 +778,8 @@
    "rule": "A new Baptist registry row for 'We Are American Baptists' (the ABCUSA Identity Statement): OFFICIAL_EXPOSITION (interim, pending Codex F.8); ADOPTED, ONE_CHURCH, by the Board of General Ministries through Standing Rules Addendum #1 and Rule 5.1.1 (a governing-rules incorporation is a church body's act). 'The covenanting partners' is a class, not a named body. Short card disclosure; full text in scope_caveat. Verified under its own cost cap",
    "codex": "B1, B2(a), B2(e); F.8 interim",
    "new_row": {
-    "registry_id": "BSR-BA-04 (confirmed as the next free Baptist id in phase 4)",
-    "branch": "(the workbook's exact Baptist branch spelling, confirmed in phase 4)",
+    "registry_id": "BSR-BA-04",
+    "branch": "Baptist",
     "standard_title": "\"We Are American Baptists\" (ABCUSA Identity Statement, revised 19 June 1998; Standing Rules Addendum #1)",
     "authority_tier": "OFFICIAL_EXPOSITION",
     "authority_tier_note": "interim, pending Codex F.8",
@@ -805,9 +805,20 @@
     "keep": "the 'A Redeemed People / A Biblical People ...' lists (integral, B2(b))"
    },
    "awaits": "a workbook Branch Source Registry row (the workbook is not written from Code); applied in memory until then",
-   "as_implemented": "NOT YET IMPLEMENTED: session 12 stopped at phase 3 (a stop condition held; see recovery-runs/session12/WoP_SJN_Gate6_Session12_Report_20260917.md); the row is recorded here only",
-   "test": "none yet",
-   "supersede_with": "Branch Source Registry: a new BSR-BA-04 row carrying these values and the four adoption_* columns"
+   "as_implemented": "rulings.added_rows / Registry._add_ruled_rows: a row-added-by-ruling path separate from the override hook; the row is appended in memory as AUTHOR_RATIFIED with `_author_ruling_added`, and a workbook row with the same id, once it exists, is read instead and must agree. rulings.adoption_rows carries the adoption block above; Registry.adoption_disclosure shows `disclosure_wording` exactly for an ADOPTED row that has one. sources.abc_usa_we_are_american_baptists chunks the statement under the chunking guards (first and last sentence asserted, head note excluded; the page is re-decoded as UTF-8 because it is fetched as ISO-8859-1). Chunks and fetch: recovery-runs/session13/ba04-chunks.json",
+   "test": "test_session13_rulings: test_a_row_added_by_ruling_is_a_separate_path_and_the_workbook_wins_once_it_agrees, test_ba04_row_resolves_and_discloses_as_ruled, test_ba04_adapter_keeps_the_statement_and_excludes_the_head_note",
+   "supersede_with": "Branch Source Registry: a new BSR-BA-04 row carrying these values and the four adoption_* columns",
+   "as_ratified_placeholders": {
+    "registry_id": "BSR-BA-04 (confirmed as the next free Baptist id in phase 4)",
+    "branch": "(the workbook's exact Baptist branch spelling, confirmed in phase 4)"
+   },
+   "confirmation": {
+    "date": "2026-09-17",
+    "session": "Code session 13, phase 5",
+    "registry_id": "BSR-BA-04 is the next free Baptist id: every sheet of workbook v2.25r4 was searched for 'BSR-BA-NN' and only BSR-BA-01..03 occur (Branch Source Registry, all statuses); the other BSR-BA-04 mentions in data-sources/sjn are this rulings file and session reports proposing it",
+    "branch": "'Baptist': the exact branch value of BSR-BA-01, BA-02 and BA-03 in the workbook's Branch Source Registry"
+   },
+   "add_row": true
   },
   "R6-43_registration_by_section": {
    "ruled": "2026-09-17",
@@ -894,9 +905,9 @@
     "2_rp05_notes": "sources.heidelberg_crcna (session 12 fix, applied in session 13): the CRC notes on Q&A 77, 80 and 119 are their own chunks, division 'publisher apparatus (CRC editorial note)', guarded by the R6-40 guard",
     "3_r6_41_interpretations": "allocation.py step 5a (session 12), unchanged. Sections found to span more than one chunk (reported, R6-46.3): BSR-RC-04 Constitution 1 (4 chunks); BSR-RP-04 Nicene Creed 1.1-1.3 and Apostles' Creed 2.1-2.3 (3 chunks each); BSR-EO-12 Symbol of Faith (12 chunks); BSR-EO-06 Chalcedon Definition (9) and Constantinople III Definition (10); BSR-EO-13 Constantinople III Definition (10). Recorded per entry in registered-sections.json (section_spans_chunks)",
     "4_phase2_seat_effects": "accepted; no code change",
-    "5_in_scope": "corpus builder: corpus.keep_unyielded_entries keeps, on a --only build, the manifest entries of rows the registry no longer yields (BSR-EO-03), in manifest order; row-added-by-ruling path: pending: session 13 phase 5"
+    "5_in_scope": "corpus builder: corpus.keep_unyielded_entries keeps, on a --only build, the manifest entries of rows the registry no longer yields (BSR-EO-03), in manifest order; row-added-by-ruling path: rulings.added_rows / Registry._add_ruled_rows (R6-42 BSR-BA-04), separate from registry_overrides, which now combines rulings"
    },
-   "test": "test_session12_corpus_repair (AN-05 tests updated for R6-46.1; every stored chunk is guarded exactly when it is the front matter before Part I); test_session13_rulings.test_an05_guard_covers_only_the_front_matter_before_part_i, test_a_only_build_keeps_the_manifest_entries_of_rows_the_registry_filters_out; phase 5: pending",
+   "test": "test_session12_corpus_repair (AN-05 tests updated for R6-46.1; every stored chunk is guarded exactly when it is the front matter before Part I); test_session13_rulings.test_an05_guard_covers_only_the_front_matter_before_part_i, test_a_only_build_keeps_the_manifest_entries_of_rows_the_registry_filters_out; phase 5: test_a_row_added_by_ruling_is_a_separate_path_and_the_workbook_wins_once_it_agrees, test_several_rulings_on_one_row_combine_and_a_conflict_fails_loudly",
    "supersede_with": "none"
   }
  }

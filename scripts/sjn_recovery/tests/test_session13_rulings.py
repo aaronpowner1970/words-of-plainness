@@ -202,3 +202,117 @@ def test_a_only_build_keeps_the_manifest_entries_of_rows_the_registry_filters_ou
     # the committed manifest carries BSR-EO-03, which the registry filters out
     m = store.load_manifest()["standards"]
     assert m["BSR-EO-03"]["status"] == "HOST_RETIRED"
+
+
+# ---------------------------------------------------------------- phase 5: rows added by ruling, BSR-BA-04 (R6-42)
+def _rulings_copy(tmp_path, monkeypatch, mutate):
+    import json
+    d = json.load(open(rulings.RULINGS_PATH, encoding="utf-8"))
+    mutate(d["rulings"])
+    f = tmp_path / "rulings.json"
+    f.write_text(json.dumps(d, ensure_ascii=False), encoding="utf-8")
+    monkeypatch.setattr(rulings, "RULINGS_PATH", str(f))
+    return d
+
+
+def test_a_row_added_by_ruling_is_a_separate_path_and_the_workbook_wins_once_it_agrees(reg, tmp_path, monkeypatch):
+    base = {"registry_id": "BSR-XX-01", "branch": "Baptist", "standard_title": "T", "authority_tier": "OFFICIAL_EXPOSITION",
+            "speaks_for": "S", "reception_scope": "JURISDICTIONAL", "publisher_domain": "example.org",
+            "canonical_url": "https://example.org/x", "fetch_mode": "HTML", "scope_caveat": "C"}
+    doc = {"rulings": {"R6-A": {"add_row": True, "new_row": dict(base), "ruled": "2026-09-17"},
+                       "R6-B": {"new_row": dict(base, registry_id="BSR-XX-02")}}}              # no add_row: records a proposal only
+    assert set(rulings.added_rows(doc)) == {"BSR-XX-01"}
+    assert rulings.registry_overrides(doc) == {}                                                 # the override hook never sees it
+    for bad in ({"registry_id": "BSR-BA-04 (confirmed as the next free Baptist id in phase 4)"}, {"scope_caveat": ""}):
+        with pytest.raises(SystemExit):
+            rulings.added_rows({"rulings": {"R6-A": {"add_row": True, "new_row": dict(base, **bad)}}})
+    # the live registry: BSR-BA-04 is added, recorded as coming from the ruling
+    row = reg.by_id["BSR-BA-04"]
+    assert row["_author_ruling_added"]["ruling"] == "R6-42_ba04_identity_statement" and row["__row"] is None
+    assert {"registry_id": "BSR-BA-04", "ruling": "R6-42_ba04_identity_statement", "status": "ADDED"} in reg.rulings_applied
+    # an unknown branch spelling fails loudly
+    _rulings_copy(tmp_path, monkeypatch, lambda R: R["R6-42_ba04_identity_statement"]["new_row"].update(branch="Baptists"))
+    with pytest.raises(SystemExit):
+        Registry()
+    # once the workbook carries the id: agreeing values -> read from the workbook; a disagreement fails loudly
+    wb3 = {k: reg.by_id["BSR-BA-03"][k] for k in rulings.ADDED_ROW_REQUIRED}
+
+    def as_ba03(R, **change):
+        R["R6-42_ba04_identity_statement"]["add_row"] = False
+        R["R6-X"] = {"add_row": True, "new_row": dict(wb3, **change), "ruled": "2026-09-17"}
+    _rulings_copy(tmp_path, monkeypatch, lambda R: as_ba03(R))
+    r2 = Registry()
+    assert r2.by_id["BSR-BA-03"]["_author_ruling_added"]["source"].startswith("WORKBOOK") and "BSR-BA-04" not in r2.by_id
+    _rulings_copy(tmp_path, monkeypatch, lambda R: as_ba03(R, authority_tier="CONFESSIONAL"))
+    with pytest.raises(SystemExit):
+        Registry()
+
+
+def test_ba04_row_resolves_and_discloses_as_ruled(reg):
+    R = rulings.load()["rulings"]["R6-42_ba04_identity_statement"]
+    row = reg.by_id["BSR-BA-04"]
+    for f in rulings.ADDED_ROW_REQUIRED:
+        assert row[f] == R["new_row"][f], f
+    assert row["registry_id"] == "BSR-BA-04" and row["branch"] == "Baptist" and row["status"] == "AUTHOR_RATIFIED"
+    assert "BSR-BA-04" in [r["registry_id"] for r in reg.for_branch("Baptist")] and not reg.is_fallback("BSR-BA-04")
+    assert reg.domains("BSR-BA-04") == ["abc-usa.org"] and reg.citation_refusal("BSR-BA-04") is None
+    a = reg.adoption("BSR-BA-04")
+    assert (a["adoption_status"], a["adoption_body_scope"]) == ("ADOPTED", "ONE_CHURCH")
+    assert reg.adoption_disclosure("BSR-BA-04")["text"] == (
+        "American Baptist Churches USA holds no binding creed. Its cooperating churches affirm this statement as descriptive "
+        "of American Baptist faith and practice.")
+    chunks = store.load_chunks("BSR-BA-04")
+    if not chunks:
+        pytest.skip("BSR-BA-04 has no corpus in this checkout")
+    assert all(reg.effective_tier("BSR-BA-04", c) == "OFFICIAL_EXPOSITION" for c in chunks)
+    assert chunks[0]["text"].startswith("American Baptists worship the triune God")
+    assert chunks[-1]["text"].endswith("That Jesus shall reign for ever and ever.")
+    assert not any("covenanting partners" in c["text"] or "Standing Rules" in c["text"] for c in chunks)
+    assert any("God’s reconciling grace" in c["text"] for c in chunks)                     # the apostrophe survives decoding
+    assert [c["locator"] for c in chunks if "People" in c["locator"]][:2] == ["We Are American Baptists — A Redeemed People",
+                                                                              "We Are American Baptists — A Biblical People"]
+    # and BSR-BA-03's own disclosure wording is untouched
+    assert reg.adoption_disclosure("BSR-BA-03")["text"] == "Descriptive denominational statement; American Baptist Churches USA does not adopt binding creeds"
+
+
+def test_ba04_adapter_keeps_the_statement_and_excludes_the_head_note():
+    from sjn_recovery import sources
+    url = "https://www.abc-usa.org/we-are-american-baptists"
+    page = ("<html><head><meta charset='UTF-8'></head><body><nav>Who We Are</nav><div class='content-section'>"
+            "<h3><strong>“We Are American Baptists”</strong></h3>"
+            "<p><em>“We Are American Baptists” is an expression adopted by the covenanting partners of American Baptist Churches, 6/19/98. "
+            "It can be found in the Standing Rules, under Addendum #1.</em></p>"
+            "<p>American Baptists worship the triune God of the Bible.</p><p class='content-img'><img src='x.jpg'/></p>"
+            "<p>We are called to proclaim God’s reconciling grace.</p>"
+            "<p>THEREFORE…With Baptist brothers and sisters around the world, we believe:</p><ul><li>That the Bible is the final authority;</li></ul>"
+            "<p>Within the larger Baptist family, American Baptists emphasize convictions.</p><p>We affirm that God through Jesus Christ calls us to be:</p>"
+            "<p><strong>A Redeemed People</strong></p><ul><li>who claim a personal relationship to God;</li><li>who live as visible saints.</li></ul>"
+            "<p><strong>We further believe</strong></p><ul><li>That we live with a realizable hope; and</li><li>That Jesus shall reign for ever and ever.</li></ul>"
+            "<p>&nbsp;</p><p><a href='x.pdf'>View a Print Ready version here</a>.</p></div><footer>f</footer></body></html>")
+    as_fetched = page.encode("utf-8").decode("latin-1")                                            # the fetcher's ISO-8859-1 reading
+
+    class _F:
+        def get(self, u):
+            class FR:
+                ok, status, error, final_url, redirects, cross_host_redirect, content_type = True, 200, "", u, [], "", "text/html"
+            FR.html = self.pages[u]
+            return FR()
+    f = _F()
+    row = {"registry_id": "BSR-BA-04", "branch": "Baptist", "standard_title": "T", "authority_tier": "OFFICIAL_EXPOSITION",
+           "scope_caveat": "", "reception_scope": "JURISDICTIONAL", "canonical_url": url}
+    f.pages = {url: as_fetched}
+    out, notes = sources.abc_usa_we_are_american_baptists(sources.Ctx(row, f, log=lambda m: None, admitted_hosts=None))
+    locs = [c["locator"] for c in out]
+    assert locs == ["We Are American Baptists, ¶1", "We Are American Baptists, ¶2",
+                    "We Are American Baptists — Therefore, with Baptists around the world, we believe",
+                    "We Are American Baptists — American Baptist convictions (introduction to the lists)",
+                    "We Are American Baptists — A Redeemed People", "We Are American Baptists — We further believe"]
+    assert out[1]["text"] == "We are called to proclaim God’s reconciling grace."
+    assert out[4]["text"] == "A Redeemed People who claim a personal relationship to God; who live as visible saints."
+    assert not any("covenanting" in c["text"] or "Print Ready" in c["text"] or "Who We Are" in c["text"] for c in out)
+    assert "re-decoded as UTF-8" in notes[0]
+    for broken in (as_fetched.replace("That Jesus shall reign for ever and ever.", "That Jesus reigns."),
+                   as_fetched.replace("covenanting partners", "partners")):
+        f.pages = {url: broken}
+        with pytest.raises(sources.FetchError):
+            sources.abc_usa_we_are_american_baptists(sources.Ctx(row, f, log=lambda m: None, admitted_hosts=None))

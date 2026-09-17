@@ -133,6 +133,9 @@ class Registry:
             self.delta = prov
         # Session 6 (R6-3): a row the author has retired is retired here, in memory, until the workbook says so.
         self.rulings_applied = []
+        # Session 13 (R6-42): rows ADDED by ruling - a separate path from the override hook below, which only re-types rows the
+        # workbook has. Once the workbook carries the id, its row is read and must agree with the ruled values.
+        self.rows_added = self._add_ruled_rows()
         by = {r["registry_id"]: r for r in self.rows_all}
         for rid, ru in rulings.retirements().items():
             if rid not in by:
@@ -211,6 +214,43 @@ class Registry:
                 raise SystemExit(f"author ruling {ms[0]['ruling']} marks chunks of {rid}, which is not a ratified registry row")
         self._section_keys = {(e["registry_id"], e["locator"]) for e in self._sections}
 
+    # ---------------------------------------------------------------- R6-42: rows added by ruling
+    def _add_ruled_rows(self):
+        """Append to rows_all, in memory, every row a ruling adds (rulings.added_rows). The branch must be a branch the workbook
+        already uses (exact spelling). Returns {registry_id: record}."""
+        columns = [k for k in (self.rows_all[0] if self.rows_all else {}) if k != "__row"]
+        branches = {r["branch"] for r in self.rows_all}
+        by = {r["registry_id"]: r for r in self.rows_all}
+        out = {}
+        for rid, ar in rulings.added_rows().items():
+            ruled = ar["row"]
+            if ruled["branch"] not in branches:
+                raise SystemExit(f"author ruling {ar['ruling']} adds {rid} to branch {ruled['branch']!r}, which is not a workbook branch "
+                                 f"spelling ({sorted(branches)})")
+            if rid in by:
+                wb_row = by[rid]
+                bad = {f: (wb_row.get(f), v) for f, v in ruled.items() if s(wb_row.get(f)) and s(wb_row.get(f)) != s(v)}
+                if bad:
+                    raise SystemExit(f"Branch Source Registry {rid} disagrees with author ruling {ar['ruling']} (row added by ruling): {bad}")
+                rec = {"ruling": ar["ruling"], "source": "WORKBOOK (the workbook now carries the row; it agrees with the ruling)"}
+                wb_row["_author_ruling_added"] = rec
+                out[rid] = rec
+                continue
+            row = {c: "" for c in columns}
+            row.update({f: s(v) for f, v in ruled.items()})
+            row.update({"registry_id": rid, "status": "AUTHOR_RATIFIED", "author_decision": "APPROVE (author ruling)",
+                        "decision_date": s(ar.get("ruled")), "text_hash": "", "__row": None})
+            if ar.get("authority_tier_note") and not row.get("author_note"):
+                row["author_note"] = f"authority_tier {ruled['authority_tier']}: {ar['authority_tier_note']} ({ar['ruling']})"
+            rec = {"ruling": ar["ruling"], "source": "AUTHOR_RULING (row added by ruling; applied in memory; workbook not written)",
+                   "fields": sorted(ruled), "chunking_guards": ar.get("chunking_guards")}
+            row["_author_ruling_added"] = rec
+            self.rows_all.append(row)
+            by[rid] = row
+            out[rid] = rec
+            self.rulings_applied.append({"registry_id": rid, "ruling": ar["ruling"], "status": "ADDED"})
+        return out
+
     # ---------------------------------------------------------------- R6-9: the second tier's rank
     def assert_second_tier_rank(self):
         """R6-9 asserts, from APP CONFIG, that OFFICIAL_EXPOSITION ranks DIRECTLY below CATECHETICAL. The rank is the
@@ -273,6 +313,10 @@ class Registry:
         if guard:
             return {"text": "publisher-added matter: it does not inherit the adoption of the text it accompanies",
                     "adoption_status": st, "apparatus_guard": guard, "resolves_to": SECOND_TIER}
+        if st == "ADOPTED" and a.get("disclosure_wording"):
+            # session 13 (R6-42): an adopted row whose ruling fixes its own card wording shows exactly that wording
+            return {"text": a["disclosure_wording"], "adoption_status": st, "adoption_body_scope": scope,
+                    "adoption_act": a.get("adoption_act"), "adopting_body": a.get("adopting_body")}
         if st == "ADOPTED":
             translation = a.get("translation_disclosure") or ""
             if scope and scope != "WHOLE_BRANCH":

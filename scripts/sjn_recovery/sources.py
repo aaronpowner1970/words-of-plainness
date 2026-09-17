@@ -1800,6 +1800,97 @@ def abc_usa_10facts(ctx):
     return out, [f"{len(out)} numbered facts (descriptive, non-binding)"]
 
 
+BA04_FIRST = "American Baptists worship the triune God"
+BA04_LAST = "That Jesus shall reign for ever and ever."
+BA04_HEAD_NOTE = "adopted by the covenanting partners"
+
+
+def _utf8_read_as_latin1(html):
+    """The page declares UTF-8 but the fetcher decoded it as ISO-8859-1 (no charset header): "God\u2019s" arrives as "Godâ\x80\x99s".
+    textutil.fix_mojibake repairs cp1252 mojibake and, here, DROPS the C1 bytes (\x80, \x99), so apostrophes and quotation marks
+    would be lost ("Gods"). Re-decode strictly: latin-1 is byte-transparent, so this recovers the page's own UTF-8 text or fails."""
+    if not re.search(r"[\xc2-\xf4][\x80-\xbf]", html):
+        return html, False
+    try:
+        return html.encode("latin-1").decode("utf-8"), True
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return html, False
+
+
+def abc_usa_we_are_american_baptists(ctx):
+    """BSR-BA-04, added by author ruling R6-42 (session 13): "We Are American Baptists" (ABCUSA Identity Statement, Standing Rules
+    Addendum #1). The statement is read from the page's content section, from its first sentence ("American Baptists worship the
+    triune God ...") to its last ("That Jesus shall reign for ever and ever."). EXCLUDED (R6-42 chunking guards): the title heading,
+    the italic head note ("... adopted by the covenanting partners ... Standing Rules, under Addendum #1"), images, links and everything
+    after the last sentence (print-ready and brochure links), and all site chrome. KEPT: the "A Redeemed People / A Biblical People ..."
+    lists, integral to the statement (B2(b)). Chunks: each opening paragraph; the "THEREFORE ... we believe" list; the two lead-in
+    paragraphs; one chunk per "... People" list; the "We further believe" list. Fails closed (FetchError) when the first or last
+    sentence is missing, when the head note cannot be identified and excluded, or when any chunk would carry it."""
+    from bs4 import BeautifulSoup
+    url = ctx.row["canonical_url"]
+    raw = ctx.html(url)
+    html, redecoded = _utf8_read_as_latin1(raw)
+    soup = BeautifulSoup(html, "lxml")
+    body = soup.select_one("div.content-section")
+    if body is None:
+        raise FetchError(f"{url}: no div.content-section")
+    text_of = lambda el: clean(el.get_text(" "))
+    children = [el for el in body.children if getattr(el, "name", None)]
+    head_notes = [el for el in children if el.name == "p" and el.find("em") and BA04_HEAD_NOTE in text_of(el)]
+    if len(head_notes) != 1:
+        raise FetchError(f"{url}: the head note ('{BA04_HEAD_NOTE} ...') was found {len(head_notes)} times, not once; it cannot be excluded")
+    start = next((i for i, el in enumerate(children) if el.name == "p" and text_of(el).startswith(BA04_FIRST)), None)
+    end = next((i for i, el in enumerate(children) if el.name == "ul" and text_of(el).endswith(BA04_LAST)), None)
+    if start is None or end is None or end < start:
+        raise FetchError(f"{url}: the statement's first sentence ({BA04_FIRST!r}) or last ({BA04_LAST!r}) is not on the page")
+    if children.index(head_notes[0]) > start:
+        raise FetchError(f"{url}: the head note is not before the statement")
+    out, para_n, heading, pending = [], 0, None, []
+    li_text = lambda ul: " ".join(clean(li.get_text(" ")) for li in ul.find_all("li", recursive=False))
+    seq = children[start:end + 1]
+    i = 0
+    while i < len(seq):
+        el = seq[i]
+        t = text_of(el)
+        if el.name == "p" and ("content-img" in (el.get("class") or []) or not t):
+            i += 1; continue
+        strong = el.find("strong") if el.name == "p" else None
+        if el.name == "p" and strong and clean(strong.get_text(" ")) == t and i + 1 < len(seq) and seq[i + 1].name == "ul":
+            c = ctx.chunk(f"We Are American Baptists — {t}", join([t, li_text(seq[i + 1])]), "statement list", url)
+            if c:
+                out.append(c)
+            i += 2; continue
+        if el.name == "p" and t.startswith("THEREFORE") and i + 1 < len(seq) and seq[i + 1].name == "ul":
+            c = ctx.chunk("We Are American Baptists — Therefore, with Baptists around the world, we believe", join([t, li_text(seq[i + 1])]),
+                          "statement list", url)
+            if c:
+                out.append(c)
+            i += 2; continue
+        if el.name == "p" and (t.startswith("Within the larger Baptist family") or t.startswith("We affirm that God through Jesus Christ calls us")):
+            pending.append(t)
+            if t.startswith("We affirm that God through Jesus Christ calls us"):
+                c = ctx.chunk("We Are American Baptists — American Baptist convictions (introduction to the lists)", join(pending), "statement", url)
+                if c:
+                    out.append(c)
+                pending = []
+            i += 1; continue
+        if el.name == "p":
+            para_n += 1
+            c = ctx.chunk(f"We Are American Baptists, ¶{para_n}", t, "statement paragraph", url)
+            if c:
+                out.append(c)
+            i += 1; continue
+        raise FetchError(f"{url}: unexpected <{el.name}> inside the statement: {t[:80]!r}")
+    if pending:
+        raise FetchError(f"{url}: the lead-in paragraphs were not followed by the lists")
+    if not out or not out[0]["text"].startswith(BA04_FIRST) or not out[-1]["text"].endswith(BA04_LAST):
+        raise FetchError(f"{url}: the chunks do not run from the first sentence to the last")
+    if any(BA04_HEAD_NOTE in c["text"] or "Standing Rules" in c["text"] for c in out):
+        raise FetchError(f"{url}: the head note reached a chunk")
+    return out, [f"{len(out)} chunks: statement from {BA04_FIRST!r} to {BA04_LAST!r}; head note, title, images and links excluded "
+                 f"(R6-42 chunking guards); page text {'re-decoded as UTF-8 (fetched as ISO-8859-1)' if redecoded else 'as fetched'}"]
+
+
 # =============================================================== Methodist / Wesleyan
 def _umc(ctx):
     url = ctx.row["canonical_url"]
@@ -2139,6 +2230,7 @@ ADAPTERS = {
     "BSR-AN-01": thirty_nine_articles, "BSR-AN-02": bcp_catechism_1662, "BSR-AN-03": athanasian_creed_cofe,
     "BSR-AN-04": tec_outline_of_faith, "BSR-AN-05": acna_to_be_a_christian,
     "BSR-BA-01": bfm2000, "BSR-BA-02": london_1689_ch2, "BSR-BA-03": abc_usa_10facts,
+    "BSR-BA-04": abc_usa_we_are_american_baptists,           # session 13: a row added by author ruling R6-42
     "BSR-MW-01": umc_articles, "BSR-MW-02": umc_eub_confession, "BSR-MW-03": gmc_bdd_2024, "BSR-MW-04": wesleyan_articles,
     "BSR-MA-01": mennonite_1995, "BSR-MA-02": dordrecht,
 }

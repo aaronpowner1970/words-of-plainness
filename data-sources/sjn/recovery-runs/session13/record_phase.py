@@ -80,6 +80,38 @@ def phase4(R):
                                                   "test_a_only_build_keeps_the_manifest_entries_of_rows_the_registry_filters_out; phase 5: pending")
 
 
+def phase5(R):
+    r = R["R6-42_ba04_identity_statement"]
+    nr = r["new_row"]
+    if "as_ratified_placeholders" not in r:
+        r["as_ratified_placeholders"] = {"registry_id": nr["registry_id"], "branch": nr["branch"]}
+    nr["registry_id"] = "BSR-BA-04"
+    nr["branch"] = "Baptist"
+    r["confirmation"] = {
+        "date": "2026-09-17", "session": "Code session 13, phase 5",
+        "registry_id": ("BSR-BA-04 is the next free Baptist id: every sheet of workbook v2.25r4 was searched for 'BSR-BA-NN' and only "
+                        "BSR-BA-01..03 occur (Branch Source Registry, all statuses); the other BSR-BA-04 mentions in data-sources/sjn are "
+                        "this rulings file and session reports proposing it"),
+        "branch": "'Baptist': the exact branch value of BSR-BA-01, BA-02 and BA-03 in the workbook's Branch Source Registry"}
+    r["add_row"] = True
+    r["as_implemented"] = ("rulings.added_rows / Registry._add_ruled_rows: a row-added-by-ruling path separate from the override hook; the row is "
+                           "appended in memory as AUTHOR_RATIFIED with `_author_ruling_added`, and a workbook row with the same id, once it "
+                           "exists, is read instead and must agree. rulings.adoption_rows carries the adoption block above; "
+                           "Registry.adoption_disclosure shows `disclosure_wording` exactly for an ADOPTED row that has one. "
+                           "sources.abc_usa_we_are_american_baptists chunks the statement under the chunking guards (first and last sentence "
+                           "asserted, head note excluded; the page is re-decoded as UTF-8 because it is fetched as ISO-8859-1). "
+                           "Chunks and fetch: recovery-runs/session13/ba04-chunks.json")
+    r["test"] = ("test_session13_rulings: test_a_row_added_by_ruling_is_a_separate_path_and_the_workbook_wins_once_it_agrees, "
+                 "test_ba04_row_resolves_and_discloses_as_ruled, test_ba04_adapter_keeps_the_statement_and_excludes_the_head_note")
+    ai = R["R6-46_session12_confirmations"]["as_implemented"]
+    ai["5_in_scope"] = ("corpus builder: corpus.keep_unyielded_entries keeps, on a --only build, the manifest entries of rows the registry no "
+                        "longer yields (BSR-EO-03), in manifest order; row-added-by-ruling path: rulings.added_rows / "
+                        "Registry._add_ruled_rows (R6-42 BSR-BA-04), separate from registry_overrides, which now combines rulings")
+    R["R6-46_session12_confirmations"]["test"] = R["R6-46_session12_confirmations"]["test"].replace(
+        "phase 5: pending", "phase 5: test_a_row_added_by_ruling_is_a_separate_path_and_the_workbook_wins_once_it_agrees, "
+                            "test_several_rulings_on_one_row_combine_and_a_conflict_fails_loudly")
+
+
 def main():
     phase = sys.argv[1]
     raw = open(PATH, encoding="utf-8").read()
