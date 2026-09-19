@@ -18,5 +18,6 @@
     <span class="chat-band-msg" data-chat="message-short">Mics open at the end for Q/A.</span>
     <span class="chat-band-host">Host: Brother Aaron</span>
     {% if chatParts %}<button class="chat-mode-btn chat-mode-btn--band" type="button" data-chat="mode">&#8644; Part 1 only</button>{% endif %}
-    <button class="chat-focus-btn chat-focus-btn--band" type="button" data-chat="focus">Focus video</button>
+    {%- set bandClass = "--band" %}
+    {% include "chat/view-pair.njk" %}
 </div>

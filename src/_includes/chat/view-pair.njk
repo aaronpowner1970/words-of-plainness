@@ -1,0 +1,13 @@
+{#
+  chat/view-pair.njk — the two view modes, as one pair of quiet host links.
+
+  Three modes, one at a time: Standard (neither pressed), Focus video, Focus
+  transcript. Pressing the active one goes back to Standard. The same pair
+  sits in the right wing and in the narrow-screen band; js/chat-session.js
+  finds both copies through [data-chat] and keeps their aria-pressed in step.
+
+  Context: bandClass  "--band" in the band, empty in the wing
+#}
+<span class="chat-view-pair{% if bandClass %} chat-view-pair{{ bandClass }}{% endif %}" role="group" aria-label="View">
+    <button class="chat-focus-btn{% if bandClass %} chat-focus-btn{{ bandClass }}{% endif %}" type="button" data-chat="focus" aria-pressed="false">Focus video</button><span class="chat-view-sep" aria-hidden="true">&middot;</span><button class="chat-focus-btn chat-view-btn" type="button" data-chat="view-transcript" aria-pressed="false">Focus transcript</button>
+</span>

@@ -97,12 +97,23 @@ workstreams:
         rendered quote, [Definition], scripture tabs, Commentary, See Also, and
         are unchanged.
       focus_transcript_mode: >
-        HELD 2026-09-18 (Task E, not committed; git stash "Task E Focus
-        transcript - HELD"). A third view mode that drops the stage to 50svh
-        for discussion. It passes everywhere except 1280x630 and 1366x680, where
-        the right wing (337x291, 358x316) cannot hold the four Ways names at
-        13px or more (they need 321px), though Standard shows them there.
-        Stopped there by instruction, awaiting the author's ruling.
+        LIVE 2026-09-18. Three view modes on chat video pages, one at a time:
+        Standard, Focus video (F), Focus transcript (T), from the pair
+        "Focus video · Focus transcript" at the foot of the right wing (and in
+        the band); pressing the active one returns to Standard. Focus
+        transcript drops the stage to --chat-stage-transcript-h (50svh), with a
+        fit-based FLOOR (author ruling E1): chat-session.js measures, once on
+        entry and once per settled resize, the smallest stage at which the right
+        wing holds the four Ways names at 13px or more with the longest text it
+        can show, and sets --chat-stage-transcript-floor. Where that reaches
+        Standard's height (video-03 at 1280x630 and 1024x600, because of the
+        Part 2 title) the page renders as Standard (.chat-transcript-std) with
+        the toggle still pressed. Mode is remembered for the session across chat
+        video pages (sessionStorage wop-chat-view; Standard if storage fails).
+        Standard fixes (ruling E2): full Ways list held to 3.1/2.75 cqh (fixes
+        the 1920x950 overflow); one-column shows the four names under the status
+        and wraps the message "pretty" (fixes 1024x600). Every other matrix size
+        is pixel-identical to 474512c except the added "· Focus transcript" link.
       creation_music_markers: >
         RESOLVED 2026-09-16 (author decision). The "[ ♫ music ♫ ]" prefix is
         removed from the s9, s11 and s14 citation quotes in
@@ -126,7 +137,7 @@ workstreams:
         above are the first dedicated group-display surface to come out of it;
         they are deliberately separate from the public pages rather than a
         mode toggled on them.
-    next_action: "Author: rule on the held Focus transcript mode (Task E): at 1280x630 and 1366x680 the right wing cannot hold the Ways names at 13px or more in that mode. Also: at 1920x950 the Standard right wing's full Ways list overflows its box by 42-71px (pre-existing). Then: check the chat presentation layout on the real monitor at the zooms used in sessions. At 4K and 100% zoom the 2200px row cap leaves the wings at their 260px minimum; raise --chat-row-max in chat-session.css if that reads too small in the room."
+    next_action: "Author: try Focus transcript (T) in a live session at 2000x1125 and in the 1280x630 VR window. Then: check the chat presentation layout on the real monitor at the zooms used in sessions. At 4K and 100% zoom the 2200px row cap leaves the wings at their 260px minimum; raise --chat-row-max in chat-session.css if that reads too small in the room."
 
   - id: creation-film
     name: "'His Work and Glory' creation film — /creation/"

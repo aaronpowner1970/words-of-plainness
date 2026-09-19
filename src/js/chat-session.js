@@ -24,6 +24,7 @@
      M   open the mics early, or close them again; pressing M a third
          time hands control back to the film
      F   focus view on/off (the "Focus video" button does the same)
+     T   Focus transcript on/off (the "Focus transcript" button does the same)
    Nothing on screen advertises either one. A screen-share should show
    the room what it needs and nothing about how it is driven.
    ============================================================ */
@@ -437,15 +438,153 @@
        host page's own follow code keeps measuring real rectangles while it
        is invisible. That is why the transcript is already on the current
        sentence when the host comes back, instead of jumping there. */
-    function focusOn() { return root.classList.contains('chat-focus'); }
+    /* ── View modes ──────────────────────────────────────────────
+       Three, one at a time:
+         standard     the default stage (no class)
+         video        focus view (.chat-focus, above)
+         transcript   a shorter stage, so the discussion gets the transcript
+                      and the dock (.chat-view-transcript; the height budget
+                      is --chat-stage-transcript-h in chat-session.css)
+       Pressing the active mode goes back to Standard. Like focus view, the
+       transcript mode is a class and CSS only: the film is resized, never
+       moved, so it does not pause, restart or reload.
 
-    function setFocus(on) {
-        root.classList.toggle('chat-focus', !!on);
-        try { window.sessionStorage.setItem(FOCUS_KEY, on ? '1' : '0'); } catch (_) {}
+       Focus video keeps its own per-page memory, as it always has. The
+       transcript mode is remembered once for the whole session, so it
+       carries from one chat video page to the next. With storage blocked,
+       both reads fail and the page opens in Standard. */
+    var VIEW_KEY = 'wop-chat-view';
+
+    function focusOn() { return root.classList.contains('chat-focus'); }
+    function transcriptOn() { return root.classList.contains('chat-view-transcript'); }
+
+    function syncViewButtons() {
+        all('focus').forEach(function (b) { b.setAttribute('aria-pressed', focusOn() ? 'true' : 'false'); });
+        all('view-transcript').forEach(function (b) { b.setAttribute('aria-pressed', transcriptOn() ? 'true' : 'false'); });
     }
 
+    function setView(v) {
+        root.classList.toggle('chat-focus', v === 'video');
+        root.classList.toggle('chat-view-transcript', v === 'transcript');
+        try { window.sessionStorage.setItem(FOCUS_KEY, v === 'video' ? '1' : '0'); } catch (_) {}
+        try { window.sessionStorage.setItem(VIEW_KEY, v === 'transcript' ? 'transcript' : 'standard'); } catch (_) {}
+        syncViewButtons();
+        fitTranscriptStage();
+    }
+
+    /* ── The Focus transcript floor ──────────────────────────────
+       In Focus transcript the stage is 50svh — unless that leaves the right
+       wing too short to hold the four Ways names at 13px. Then the stage is
+       the smallest height at which it does hold them. That height cannot be
+       written as a constant: the wing's needs depend on its width, its width
+       on the film's width, and the film's width on the height being chosen.
+       So it is measured, here, and handed to the CSS as
+       --chat-stage-transcript-floor.
+
+       It runs when the mode comes on, when the fonts arrive, and once after a
+       resize settles — never on the play clock. Every trial below happens in
+       one synchronous pass: the browser lays out each trial but paints only
+       the last, and the film is resized (never moved), so nothing in the room
+       flickers and playback is untouched.
+
+       The wing is tested with the LONGEST text it can show this evening — the
+       Part 2 title where there is one, the longest message, the longest time
+       line — so a change of mic state later can never push it past its box.
+       render() puts the real text straight back.
+
+       If even a Standard-height stage would not hold them, the page takes
+       .chat-transcript-std and renders exactly as Standard; the toggle stays
+       pressed, and the mode is remembered as chosen. */
+    var mainEl = document.querySelector('main');
+    var stageEl = document.querySelector('.creation-stage-wrap');
+    var rowEl = document.querySelector('.chat-stage-row');
+    var FLOOR_PROP = '--chat-stage-transcript-floor';
+    var LONG_TITLE = (HAS_PARTS && PART2_SUFFIX) ? (TITLE + ' · ' + PART2_SUFFIX) : TITLE;
+    var LONG_TIME = 'Mics opened early · 10:00 left';
+
+    function shown(el) { return !!el && el.getClientRects().length > 0; }
+
+    function wingsFit() {
+        var wings = [].slice.call(document.querySelectorAll('.chat-wing')).filter(shown);
+        if (!wings.length) { return true; }         // the band: nothing to fit
+        var rr = rowEl.getBoundingClientRect();
+        for (var i = 0; i < wings.length; i++) {
+            var wr = wings[i].getBoundingClientRect();
+            if (wr.bottom > rr.bottom + 0.5) { return false; }
+            var kids = wings[i].querySelectorAll('*');
+            for (var k = 0; k < kids.length; k++) {
+                var er = kids[k].getBoundingClientRect();
+                if (er.width && (er.bottom > wr.bottom + 0.5 || er.right > wr.right + 0.5)) { return false; }
+            }
+        }
+        return shown(document.querySelector('.chat-wing--right .chat-ways-name'));
+    }
+
+    function withLongestText(fn) {
+        document.querySelectorAll('.chat-wing [data-chat="title"]').forEach(function (el) { el.textContent = LONG_TITLE; });
+        document.querySelectorAll('.chat-wing [data-chat="message"]').forEach(function (el) { el.textContent = MSG_MUTED; });
+        document.querySelectorAll('.chat-wing [data-chat="timeleft"]').forEach(function (el) { el.textContent = LONG_TIME; });
+        try { return fn(); } finally { render(); }
+    }
+
+    function fitTranscriptStage() {
+        if (!mainEl || !stageEl || !rowEl) { return; }
+        root.classList.remove('chat-transcript-std');
+        mainEl.style.removeProperty(FLOOR_PROP);
+        if (!transcriptOn() || focusOn()) { return; }
+
+        withLongestText(function () {
+            if (wingsFit()) { return; }                          // 50svh is enough
+
+            // Standard's stage height is the ceiling: measure it with the
+            // transcript rules switched off.
+            root.classList.add('chat-transcript-std');
+            var hi = Math.ceil(stageEl.getBoundingClientRect().height);
+            root.classList.remove('chat-transcript-std');
+            var lo = Math.floor(stageEl.getBoundingClientRect().height);
+
+            mainEl.style.setProperty(FLOOR_PROP, hi + 'px');
+            if (!wingsFit()) {
+                mainEl.style.removeProperty(FLOOR_PROP);
+                root.classList.add('chat-transcript-std');
+                return;
+            }
+            // Smallest height that fits, to the pixel.
+            while (hi - lo > 1) {
+                var mid = Math.floor((lo + hi) / 2);
+                mainEl.style.setProperty(FLOOR_PROP, mid + 'px');
+                if (wingsFit()) { hi = mid; } else { lo = mid; }
+            }
+            mainEl.style.setProperty(FLOOR_PROP, hi + 'px');
+            if (hi >= Math.ceil(stageStandardHeight())) { root.classList.add('chat-transcript-std'); }
+        });
+    }
+
+    function stageStandardHeight() {
+        var had = root.classList.contains('chat-transcript-std');
+        root.classList.add('chat-transcript-std');
+        var h = stageEl.getBoundingClientRect().height;
+        if (!had) { root.classList.remove('chat-transcript-std'); }
+        return h;
+    }
+
+    var fitTimer = null;
+    window.addEventListener('resize', function () {
+        if (!transcriptOn()) { return; }
+        window.clearTimeout(fitTimer);
+        fitTimer = window.setTimeout(fitTranscriptStage, 200);
+    });
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { fitTranscriptStage(); });
+    }
+
+    function setFocus(on) { setView(on ? 'video' : 'standard'); }
+
     all('focus').forEach(function (b) {
-        b.addEventListener('click', function () { setFocus(true); });
+        b.addEventListener('click', function () { setFocus(!focusOn()); });
+    });
+    all('view-transcript').forEach(function (b) {
+        b.addEventListener('click', function () { setView(transcriptOn() ? 'standard' : 'transcript'); });
     });
     all('focus-exit').forEach(function (b) {
         b.addEventListener('click', function () { setFocus(false); });
@@ -454,6 +593,13 @@
     try {
         if (window.sessionStorage.getItem(FOCUS_KEY) === '1') { root.classList.add('chat-focus'); }
     } catch (_) {}
+    if (!focusOn()) {
+        try {
+            if (window.sessionStorage.getItem(VIEW_KEY) === 'transcript') { root.classList.add('chat-view-transcript'); }
+        } catch (_) {}
+    }
+    syncViewButtons();
+    fitTranscriptStage();
 
     /* ── Host keys ───────────────────────────────────────────────── */
     function typing(el) {
@@ -476,6 +622,9 @@
         } else if (k === 'f') {
             e.preventDefault();
             setFocus(!focusOn());
+        } else if (k === 't') {
+            e.preventDefault();
+            setView(transcriptOn() ? 'standard' : 'transcript');
         }
     });
 

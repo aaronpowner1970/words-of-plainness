@@ -15,6 +15,9 @@
   here ranks one person above another. On a short wing the explanations give
   way first and the four names stay; shorter still, the section goes and the
   status keeps the box (chatstatus container queries in chat-session.css).
+  In the one-column fallback the four names sit under the status, and in
+  Focus transcript the stage never gets too short to hold them (the floor in
+  chat-session.js).
 
   Live values are written by js/chat-session.js through [data-chat] hooks,
   never by id, because the badge, the time-left line and the message each
@@ -51,8 +54,8 @@
         {#- A film normally shown in part gets a switch. It sits with Focus at
             the bottom of the box, at the same quiet weight: both are the
             host's, and the room should not read either as something it is
-            meant to press. -#}
+            meant to press. The view pair is chat/view-pair.njk. -#}
         {% if chatParts %}<button class="chat-mode-btn" type="button" data-chat="mode">&#8644; Part 1 only</button>{% endif %}
-        <button class="chat-focus-btn" type="button" data-chat="focus">Focus video</button>
+        {% include "chat/view-pair.njk" %}
     </div>
 </aside>

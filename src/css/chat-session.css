@@ -88,6 +88,9 @@
      --chat-video-min  the smallest film the two-wing layout will accept
      --chat-stage-vh   share of the viewport height the stage may use, so the
                        top of the transcript stays on screen
+     --chat-stage-transcript-h
+                       the same budget in Focus transcript mode (the view the
+                       room uses for discussion; see that section below)
      --chat-pad-y      the strip above and below the film inside the stage
 
    The film's width is the smaller of the HEIGHT budget (the stage's share of
@@ -106,6 +109,7 @@
     --chat-col-min: 320px;
     --chat-video-min: 560px;
     --chat-stage-vh: 64svh;
+    --chat-stage-transcript-h: 50svh;
     --chat-pad-y: 12px;
 
     --chat-row-w: min(100cqw - 2 * var(--chat-gutter), var(--chat-row-max));
@@ -374,6 +378,17 @@
 @container chatstatus (max-height: 330px) {
     .chat-ways { display: none; }
 }
+/* With the full list showing, the height terms are held to what the wing can
+   carry. At 1920x950 (a 397x584 wing) the Standard 3.6 / 3.1 put the list
+   42-101px past the wing, over the dock, and pushed the host links out of
+   sight. Measured across all thirteen pages with the longest title, message
+   and time line: 3.1 / 2.75 fits there, and at every other size in the matrix
+   the width term or the cap still decides the type, so nothing else moves. */
+@container chatstatus (height > 520px) {
+    .chat-status { --su: clamp(12px, min(5.2cqi, 3.1cqh), 20px); }
+    .chat-ways { --yu: clamp(11px, min(4.7cqi, 2.75cqh), 18px); }
+    .chat-message { text-wrap: pretty; }
+}
 
 /* Host controls: text buttons, not filled ones. They are the host's, and the
    room should not read either as something it is meant to press. They sit
@@ -412,6 +427,34 @@
    it can be changed. A host glancing at the box wants to know what the room is
    about to get, not what a click would do to it. */
 .chat-mode-btn { white-space: nowrap; }
+
+/* The view pair: "Focus video · Focus transcript". Two of the same quiet
+   links, kept together on one line with a dot between them. The one that is
+   on reads at full strength in gold; with neither on, the page is in
+   Standard. A keyboard focus ring, because the host may be driving by Tab. */
+.chat-view-pair {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0 0.45em;
+    white-space: nowrap;
+}
+.chat-view-sep {
+    color: var(--cream-dark, #D4C8B0);
+    opacity: 0.45;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12px;
+}
+.chat-wing .chat-view-sep { font-size: max(12px, calc(var(--su, 14px) * 0.82)); }
+.chat-view-pair .chat-focus-btn[aria-pressed="true"] {
+    opacity: 1;
+    color: var(--gold-light, #D4A84A);
+    text-decoration-color: currentColor;
+}
+.chat-view-pair .chat-focus-btn:focus-visible {
+    outline: 2px solid var(--gold-light, #D4A84A);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
 
 /* ── The band (mockup F) ─────────────────────────────────────
    One row under the video carrying the same facts, for the widths where
@@ -453,7 +496,7 @@
     /* One column reads top to bottom, so both blocks align left and share
        one rule on the film's side. */
     .chat-welcome {
-        --wu: clamp(12px, min(4.2cqi, 8cqh), 16px);
+        --wu: clamp(13px, min(4.2cqi, 8cqh), 16px);
         text-align: left;
         padding: 0 0 0.35em clamp(10px, 4cqi, 16px);
         border-right: 0;
@@ -463,19 +506,27 @@
     .chat-welcome-lead { margin-bottom: 0.4em; }
     .chat-welcome-lead::after { margin-top: 0.35em; }
     .chat-welcome-gap { margin-top: 0.4em; }
-    /* The one column stacks welcome over status; the status is sized to its
-       content and there is no height left for the ways. */
-    .chat-ways { display: none; }
+    /* The one column stacks welcome over status. Under the status go the
+       four names of Ways to Take Part, without their explanations: the
+       status and the names are sized to their content, and the welcome
+       gives up its lines to make the room (the chatwelcome queries below). */
+    .chat-ways {
+        --yu: clamp(13px, 4.4cqi, 16px);
+        padding: 0.4em clamp(10px, 4cqi, 16px) 0;
+    }
+    .chat-ways-title { margin-bottom: 0.15em; }
+    .chat-ways-text { display: none; }
+    .chat-ways-list li { margin-bottom: 0; }
     .chat-status {
-        --su: clamp(12px, 4.4cqi, 16px);
+        --su: clamp(13px, 4.4cqi, 16px);
         padding: 0.35em clamp(10px, 4cqi, 16px) 0;
         border-top: 1px solid rgba(196, 148, 58, 0.18);
     }
     .chat-mic { margin-bottom: 0.4em; }
     .chat-status-title { margin-bottom: 0.3em; }
     .chat-meter { margin-bottom: 0.35em; }
-    .chat-timeleft { margin-bottom: 0.35em; }
-    .chat-message { line-height: 1.35; }
+    .chat-timeleft { margin-bottom: 0.35em; font-size: max(13px, calc(var(--su) * 0.9)); }
+    .chat-message { line-height: 1.35; text-wrap: pretty; }
     .chat-wing-controls { margin: 0.4em clamp(10px, 4cqi, 16px) 0; }
 }
 /* The welcome gives up its closing lines first, then its middle lines; the
@@ -537,12 +588,79 @@
         color: var(--cream-dark, #D4C8B0);
     }
     .chat-band-host { opacity: 0.75; }
-    /* Focus sits at the right end of the band, with the mode switch beside it. */
+    /* The view pair sits at the right end of the band, with the mode switch
+       beside it. */
     .chat-mode-btn--band { margin: 0 0 0 auto; align-self: center; }
     .chat-focus-btn--band { margin: 0; align-self: center; }
-    /* With no mode switch on the page, Focus takes the right end itself. */
-    .chat-band > .chat-focus-btn--band:not(.chat-mode-btn--band) { margin-left: auto; }
-    .chat-mode-btn--band ~ .chat-focus-btn--band { margin-left: 0; }
+    /* With no mode switch on the page, the pair takes the right end itself. */
+    .chat-band > .chat-view-pair--band { margin-left: auto; align-self: center; }
+    .chat-mode-btn--band ~ .chat-view-pair--band { margin-left: 0; }
+}
+
+/* ── Focus transcript ────────────────────────────────────────
+   The discussion view. The stage's height budget drops from --chat-stage-vh
+   to --chat-stage-transcript-h; the film's width follows from 16:9, the
+   wings take the width it gives back, and every pixel of height it gives
+   back goes to the transcript and the dock (--ct-dock-top below is computed
+   from the same --chat-video-w, so the dock grows by exactly what the stage
+   loses). Chat pages only, set by js/chat-session.js; with the class off,
+   nothing in this section applies and the stage is the Standard one.
+
+   THE FLOOR. The budget is the LARGER of --chat-stage-transcript-h and
+   --chat-stage-transcript-floor: the smallest stage at which the right wing
+   still holds the four Ways names at 13px or more. That height depends on
+   the wing's width, which depends on the film's width, which depends on the
+   height, so it is measured rather than written down: js/chat-session.js
+   finds it once when the mode comes on and once after each resize, never
+   while the film simply plays. Where the wing would need a stage as tall as
+   Standard's, the script adds .chat-transcript-std and the page renders as
+   Standard, with the toggle still pressed. */
+:root.chat-view-transcript:not(.chat-transcript-std) .chat-present main {
+    --chat-video-hmax: calc(min(max(var(--chat-stage-transcript-h), var(--chat-stage-transcript-floor, 0px)), 100svh - var(--chat-bar-h) - 24px) - 2 * var(--chat-pad-y));
+}
+
+/* In the band the band's own 64px is not taken out of the budget again: the
+   film is the Standard band film, capped at the transcript height. */
+@container chatpage (max-width: 947.98px) {
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-present .creation-stage-wrap,
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-present .creation-reading {
+        --chat-video-w: min(
+            (min(var(--chat-stage-vh), 100svh - var(--chat-bar-h) - 24px) - 2 * var(--chat-pad-y) - 64px) * 16 / 9,
+            var(--chat-stage-transcript-h) * 16 / 9,
+            var(--chat-row-w)
+        );
+    }
+}
+
+/* Two wings: the shorter film leaves the wings wider, so their lines wrap
+   less. Their type scales with the wing's height as well as its width (the
+   cqh term), so a short wing takes smaller type before it gives up any
+   words — and never below 13px. The cqh coefficients are measured, not
+   guessed: 3.1 / 2.67 is the largest pair at which the whole right wing fits
+   at every height from 403px up.
+   The four names always show here; the floor above is what guarantees them
+   the room. The explanations join them only where they fit. */
+@container chatpage (min-width: 1168px) {
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-welcome { --wu: clamp(13px, min(5.4cqi, 4.3cqh), 22px); }
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-status { --su: clamp(13px, min(5.2cqi, 3.1cqh), 20px); }
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-timeleft { font-size: max(13px, calc(var(--su) * 0.9)); }
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-message { text-wrap: pretty; }
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-ways {
+        display: block;
+        --yu: clamp(13px, min(5.2cqi, 3.1cqh), 20px);
+    }
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-ways-text { display: none; }
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-ways-list li:not(:last-child) { margin-bottom: 0.3em; }
+}
+
+/* The explanations, where they fit at this type. Measured at the 13px floor:
+   the full list needs 403px of wing height at 337px wide and up, 557px on a
+   300px wing. Height queries never match in the one-column fallback, where
+   the wing is an inline-size container, so nothing here reaches it. */
+@container chatstatus ((min-width: 337px) and (min-height: 410px)) or (min-height: 560px) {
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-ways { --yu: clamp(13px, min(4.7cqi, 2.67cqh), 18px); }
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-ways-text { display: inline; }
+    :root.chat-view-transcript:not(.chat-transcript-std) .chat-ways-list li:not(:last-child) { margin-bottom: 0.6em; }
 }
 
 /* ── The dock under the stage ────────────────────────────────
