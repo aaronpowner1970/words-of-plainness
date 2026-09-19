@@ -1754,6 +1754,50 @@ p {
     border-color: var(--gold-primary);
 }
 
+/* --- About page feature figure (Many Selves, Same Clothes) --- */
+.about-figure {
+    clear: both;
+    margin: var(--space-lg) 0 0;
+}
+
+.about-figure picture {
+    display: block;
+}
+
+.about-figure__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(196, 148, 58, 0.4);
+    box-shadow: var(--shadow-medium);
+    cursor: pointer;
+    transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.about-figure__image:hover {
+    box-shadow: var(--shadow-gold);
+    border-color: var(--gold-primary);
+}
+
+.about-figure figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--cream-dark);
+}
+
+/* Clear the fixed site header when /about/#how-this-is-made is targeted */
+#how-this-is-made {
+    scroll-margin-top: 120px;
+}
+
+.about-signature {
+    margin-top: var(--space-lg);
+    color: var(--cream-dark);
+}
+
 /* --- Image Lightbox --- */
 .image-lightbox {
     position: fixed;

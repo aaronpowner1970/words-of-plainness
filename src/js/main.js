@@ -115,12 +115,19 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const collageImage = document.getElementById('aboutCollageImage');
     const lightbox = document.getElementById('imageLightbox');
+    const lightboxImage = lightbox?.querySelector('.image-lightbox__image');
+    const triggers = [collageImage, ...document.querySelectorAll('.js-lightbox-trigger')].filter(Boolean);
     const lightboxClose = document.getElementById('imageLightboxClose');
     const lightboxBackdrop = document.getElementById('imageLightboxBackdrop');
 
-    if (!collageImage || !lightbox) return;
+    if (!triggers.length || !lightbox) return;
 
-    function openLightbox() {
+    function openLightbox(e) {
+        // Show the clicked image (its full-size src, not a mobile <picture> crop)
+        if (lightboxImage && e?.currentTarget) {
+            lightboxImage.src = e.currentTarget.getAttribute('src');
+            lightboxImage.alt = e.currentTarget.alt;
+        }
         lightbox.classList.add('is-open');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -132,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     }
 
-    collageImage.addEventListener('click', openLightbox);
+    triggers.forEach(img => img.addEventListener('click', openLightbox));
     lightboxClose?.addEventListener('click', closeLightbox);
     lightboxBackdrop?.addEventListener('click', closeLightbox);
 
