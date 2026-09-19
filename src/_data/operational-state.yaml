@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: September 16, 2026
+# Last updated: September 18, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -88,6 +88,21 @@ workstreams:
         chosen by container query on <main>: two wings from 1168px, one right
         column (welcome over status) from 948px, the band below. Verified at
         1024×600 through 3840×1950 on video-02, -11 and -03.
+      dock_order: >
+        2026-09-18: scripture before commentary in the citation dock. The film
+        dock (js/creation.js, serving /creation/ and /chat/video-03/) now
+        renders quote, then the Biblical / Restoration columns, then the
+        commentary, in the markup (not CSS order). The reading pages
+        (js/aoid-video.js, /articles/video-NN/ and /chat/video-NN/) already
+        rendered quote, [Definition], scripture tabs, Commentary, See Also, and
+        are unchanged.
+      focus_transcript_mode: >
+        HELD 2026-09-18 (Task E, not committed; git stash "Task E Focus
+        transcript - HELD"). A third view mode that drops the stage to 50svh
+        for discussion. It passes everywhere except 1280x630 and 1366x680, where
+        the right wing (337x291, 358x316) cannot hold the four Ways names at
+        13px or more (they need 321px), though Standard shows them there.
+        Stopped there by instruction, awaiting the author's ruling.
       creation_music_markers: >
         RESOLVED 2026-09-16 (author decision). The "[ ♫ music ♫ ]" prefix is
         removed from the s9, s11 and s14 citation quotes in
@@ -111,7 +126,7 @@ workstreams:
         above are the first dedicated group-display surface to come out of it;
         they are deliberately separate from the public pages rather than a
         mode toggled on them.
-    next_action: "Author: check the chat presentation layout on the real monitor at the zooms used in sessions. At 4K and 100% zoom the 2200px row cap leaves the wings at their 260px minimum; raise --chat-row-max in chat-session.css if that reads too small in the room."
+    next_action: "Author: rule on the held Focus transcript mode (Task E): at 1280x630 and 1366x680 the right wing cannot hold the Ways names at 13px or more in that mode. Also: at 1920x950 the Standard right wing's full Ways list overflows its box by 42-71px (pre-existing). Then: check the chat presentation layout on the real monitor at the zooms used in sessions. At 4K and 100% zoom the 2200px row cap leaves the wings at their 260px minimum; raise --chat-row-max in chat-session.css if that reads too small in the room."
 
   - id: creation-film
     name: "'His Work and Glory' creation film — /creation/"

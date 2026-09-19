@@ -481,6 +481,10 @@ html, body { overflow-x: clip; overflow-y: visible; }
 @media (max-width: 620px) {
     .ap-cols { grid-template-columns: 1fr; gap: 0.5rem; }
 }
+/* The commentary now follows the scripture columns instead of leading into
+   them, so the 1.25rem that used to sit under it moves above it: the same
+   gap, on the side where the two now meet. */
+.ap-panel--creation .ap-cols + .ap-comment-block { margin: 1.25rem 0 0; }
 .ap-col-empty {
     font-style: italic;
     font-size: 0.82rem;

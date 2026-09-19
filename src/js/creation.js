@@ -245,12 +245,15 @@
                 'commentary are sourced from the A3 Creation Scriptural Compilation and the Ch&#8202;42 / Ch&#8202;39 ' +
                 'manuscript commentary.</div>';
         } else {
+            /* Scripture before commentary, in the markup and so in reading and
+               focus order: the room sees that the script's words ARE scripture
+               before it reads anything said about them. */
             body =
-                (d.pc ? '<div class="ap-comment-block"><p class="ap-comment">' + esc(d.pc) + '</p></div>' : '') +
                 '<div class="ap-cols">' +
                     '<div class="ap-col"><p class="ap-section-title ap-section-title--biblical">Biblical</p>' + anchorItems(d.b, false) + '</div>' +
                     '<div class="ap-col ap-restoration-ref"><p class="ap-section-title ap-section-title--restoration">Restoration witness</p>' + anchorItems(d.r, true) + '</div>' +
-                '</div>';
+                '</div>' +
+                (d.pc ? '<div class="ap-comment-block"><p class="ap-comment">' + esc(d.pc) + '</p></div>' : '');
         }
 
         return '<div class="ap-header"><div class="ap-header-left">' +
