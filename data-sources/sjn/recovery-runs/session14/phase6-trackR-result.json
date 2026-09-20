@@ -1,0 +1,868 @@
+{
+ "done": [
+  {
+   "queue_id": "Q-085",
+   "candidate_id": "Q-085-p2-BSR-AN-05-1",
+   "models": [
+    "sonnet",
+    "opus"
+   ],
+   "route": "SLICE_ROW",
+   "before": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL",
+     "opus": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "he (referring to God)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage asserts that God 'is holy and just', directly predicating perfect justice of God himself.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "49d24cd5896391252d120a2a"
+    },
+    "opus": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "\"he\" — God, whose Name is revealed to Moses",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The standard predicates justice directly of God himself as part of his revealed nature and character, which is the shared divine-justice floor.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "0d42451bc60bb145a47270a6"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-101",
+   "candidate_id": "Q-101-p2-BSR-AN-05-1",
+   "models": [
+    "sonnet",
+    "opus"
+   ],
+   "route": "SLICE_ROW",
+   "before": {
+    "verdict": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "floor": "WORD_ONLY"
+   },
+   "after": {
+    "verdict": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "floor": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY",
+     "opus": "WORD_ONLY"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "N",
+     "grammatical_subject": "Marriage",
+     "speech_act_is_assertion": "Y",
+     "floor": "WORD_ONLY",
+     "floor_reason": "The passage names 'faithful love' involving God only as the object of a relational description within a statement about marriage, not as an assertion that God himself is truthful/faithful.",
+     "hazard_flags": [
+      "RELATIONAL_VS_METAPHYSICAL"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "call_id": "b6b30a78f6fe4aba5b28f34b"
+    },
+    "opus": {
+     "subject_is_required": "N",
+     "grammatical_subject": "\"Marriage\" (\"Marriage is the exclusive, lifelong, covenantal union of love... and a reflection of the faithful love that unites God and his people\")",
+     "speech_act_is_assertion": "N",
+     "floor": "WORD_ONLY",
+     "floor_reason": "The word \"faithful\" occurs, but the asserted proposition is about marriage being a reflection of that love, a neighbouring claim; the passage does not itself assert that God is truthful and trustworthy.",
+     "hazard_flags": [
+      "SEMANTIC_FLOOR",
+      "ECCLESIAL_VS_SOTERIOLOGICAL"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "call_id": "db1be0c96dfb2da1921f1456"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-157",
+   "candidate_id": "Q-157-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "the Godhead of the Father, of the Son, and of the Holy Ghost",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly asserts that the Glory of the one Godhead (Father, Son, Holy Ghost) is equal, affirming glory as properly divine and shared, which is the predicate in its defined sense.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "fc47230b70d98083107f9d67"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-237",
+   "candidate_id": "Q-237-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "one and the same Son and Only-begotten God the Word (in apposition to Christ, Son, Lord, Only-begotten — subject of 'we all with one accord teach men to acknowledge')",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly identifies the Son as 'God the Word' in a positive doctrinal confession of the Son's identity.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "76568c1142efe1dd591babcd"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-277",
+   "candidate_id": "Q-277-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "the Father...the Son...and the Holy Ghost (compound subject with Holy Ghost explicitly named)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly predicates 'Almighty' (i.e., omnipotent, divine power) of the Holy Ghost, matching the predicate's core sense of affirming the Spirit's divine power.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "d657300a8143861cb0f69fc1"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-277",
+   "candidate_id": "Q-277-p1-BSR-AN-04-2",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY"
+   },
+   "after": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father...the Son...and the Holy Ghost (compound subject including the Holy Ghost)",
+     "speech_act_is_assertion": "Y",
+     "floor": "WORD_ONLY",
+     "floor_reason": "The quoted phrase asserts only the Holy Ghost's eternity, not His 'power and might'; the predicate requires an affirmation of divine power, which is a neighbouring proposition found elsewhere in the creed ('the Holy Ghost Almighty') but not in the cited phrase itself.",
+     "hazard_flags": [
+      "SAME_WORD_DIFFERENT_MEANING"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "call_id": "a83f3df592d8d54c387ece34"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-285",
+   "candidate_id": "Q-285-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father (also the Son and the Holy Ghost in parallel clauses)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly predicates 'uncreate' of the Father (and Son and Holy Ghost), affirming beginningless divine reality without qualification, matching the predicate's sense.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "1de96d2fed7b3606005364a2"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-301",
+   "candidate_id": "Q-301-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father...the Son...the Holy Ghost",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly asserts that the Father, Son, and Holy Ghost are each 'uncreate', denying creaturehood of God as required by the predicate.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "6a504d17f73f7c0d401284a9"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-313",
+   "candidate_id": "Q-313-p1-BSR-RC-07-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "God",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage explicitly denies spatial circumscription ('does not indicate a place') and asserts metaphysical transcendence ('God transcends everything'), matching the predicate directly.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "4acbaf2018632861625e4dab"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-317",
+   "candidate_id": "Q-317-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OTHER",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father, the Son, and the Holy Ghost (Father explicitly named as one of three coordinate subjects)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly predicates 'incomprehensible' (the traditional English rendering of Latin 'immensus', i.e. boundless/unlimited) of the Father—together with the Son and Holy Ghost—and further unifies this in 'one incomprehensible', asserting that the divine being is not circumscribed, which is the predicate itself rather than a narrower or neighbouring claim.",
+     "hazard_flags": [
+      "SAME_WORD_DIFFERENT_MEANING",
+      "FAMILY_VARIATION"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OTHER",
+     "call_id": "306058b173e96a35a413addc"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-365",
+   "candidate_id": "Q-365-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father (also the Son, and the Holy Ghost)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly predicates 'eternal' of the Father (among the three Persons), asserting beginningless/endless divine existence in the creed's own voice, matching the required subject and predicate.",
+     "hazard_flags": [
+      "FAMILY_VARIATION"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "call_id": "968be497f793dd406ce71d0f"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-373",
+   "candidate_id": "Q-373-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father ... the Son ... the Holy Ghost",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly asserts that the Father (God) is incomprehensible, matching the predicate for the required subject.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "853b49a3b108b28bdd636ae3"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-373",
+   "candidate_id": "Q-373-p1-BSR-AN-04-2",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "implied 'they' (the Father, Son, and Holy Ghost) as one God/Godhead — i.e. 'one uncreated, and one incomprehensible' refers to the one God",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly asserts that the one God (in three co-equal Persons) is incomprehensible, matching the predicate's definition of denying exhaustive intellectual comprehension of God.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "98908b24a36572381c813ae6"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-381",
+   "candidate_id": "Q-381-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY"
+   },
+   "after": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father, the Son, and the Holy Ghost (with resulting unity 'one incomprehensible')",
+     "speech_act_is_assertion": "Y",
+     "floor": "WORD_ONLY",
+     "floor_reason": "The passage asserts incomprehensibility (a cognitive/epistemic attribute concerning the limits of understanding), which is a neighbouring attribute to ineffability (the denial of exhaustive linguistic expression); the text never addresses whether God can be exhaustively expressed in language, only that God cannot be fully comprehended by the intellect.",
+     "hazard_flags": [
+      "SAME_WORD_DIFFERENT_MEANING",
+      "SEMANTIC_FLOOR"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "call_id": "6244eb0a42b11e178f69cac2"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-389",
+   "candidate_id": "Q-389-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY"
+   },
+   "after": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father, the Son, and the Holy Ghost (Father named explicitly among the three)",
+     "speech_act_is_assertion": "Y",
+     "floor": "WORD_ONLY",
+     "floor_reason": "In this creedal series ('uncreate', 'incomprehensible', 'eternal', 'Almighty'), 'incomprehensible' denotes the traditional sense of immeasurable/infinite (unbounded by creaturely limits), a metaphysical attribute of magnitude, not the specific epistemic claim that God's counsel cannot be exhaustively rationally penetrated; this is a neighbouring proposition, not the predicate itself.",
+     "hazard_flags": [
+      "SAME_WORD_DIFFERENT_MEANING"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "call_id": "847c53141927540d8ac352c9"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-405",
+   "candidate_id": "Q-405-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet",
+    "opus"
+   ],
+   "route": "PRIMARY_REJECTED_ALL",
+   "before": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY"
+   },
+   "after": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY",
+     "opus": "WORD_ONLY"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father, the Son, and the Holy Ghost (distributed appositional list, including 'the Father')",
+     "speech_act_is_assertion": "Y",
+     "floor": "WORD_ONLY",
+     "floor_reason": "The passage asserts that each divine Person is incomprehensible relative to the others within the Godhead's unity/equality, not that God is beyond adequate likeness or comparison to creatures; it never addresses Creator-creature correspondence at all.",
+     "hazard_flags": [
+      "SAME_WORD_DIFFERENT_MEANING"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "call_id": "82184f3603c33e4c93647113"
+    },
+    "opus": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "\"The Father ... the Son ... the Holy Ghost\" (the divine Persons / the one Godhead)",
+     "speech_act_is_assertion": "Y",
+     "floor": "WORD_ONLY",
+     "floor_reason": "The passage asserts divine incomprehensibility/immensity (in the Latin sense of immensus, uncircumscribed), a neighbouring attribute; it nowhere addresses or denies adequate likeness or comparison between Creator and creature, and the predicate's own terms (likeness, comparison) do not occur.",
+     "hazard_flags": [
+      "SAME_WORD_DIFFERENT_MEANING",
+      "SEMANTIC_FLOOR"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "call_id": "b5502f6ff2bfd84f44597680"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-405",
+   "candidate_id": "Q-405-p2-BSR-AN-05-1",
+   "models": [
+    "sonnet",
+    "opus"
+   ],
+   "route": "SLICE_ROW",
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "PARTIAL"
+   },
+   "after": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY",
+     "opus": "PARTIAL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "he (God)",
+     "speech_act_is_assertion": "Y",
+     "floor": "WORD_ONLY",
+     "floor_reason": "The passage asserts an epistemic limitation on defining God through creaturely concepts, which is a neighbouring claim about incomprehensibility, not an assertion that there is no adequate likeness or comparison between Creator and creature.",
+     "hazard_flags": [
+      "RELATIONAL_VS_METAPHYSICAL",
+      "SAME_WORD_DIFFERENT_MEANING"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "call_id": "20281f7a2c1acd2b38d69c22"
+    },
+    "opus": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "\"he\" (God, referent of \"This Name\"/\"God's Name\")",
+     "speech_act_is_assertion": "Y",
+     "floor": "PARTIAL",
+     "floor_reason": "The denial that God can be \"defined by his creatures\" asserts the predicate in a narrower, conceptual register — creaturely terms cannot adequately capture God — but stops short of an explicit denial of adequate likeness or comparison.",
+     "hazard_flags": [
+      "SEMANTIC_FLOOR"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "call_id": "4bd08984583886b320b8ab6b"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-413",
+   "candidate_id": "Q-413-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "one and the same Christ, Son, Lord, Only-begotten (Jesus Christ)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage explicitly asserts of Christ that the two natures are united without confusion, directly stating the predicate of the required subject.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "0acace29df202a4632351f8d"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-421",
+   "candidate_id": "Q-421-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "one and the same Christ, Son, Lord, Only-begotten [Christ, referring back to 'our Lord Jesus Christ']",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly asserts that Christ's two natures are united without change (among other qualifiers), matching the predicate's denial of conversion of one nature into another.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "3cdd18eb089fa4c4212a3fa0"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-429",
+   "candidate_id": "Q-429-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "one and the same Christ, Son, Lord, Only-begotten (i.e., the two natures recognized in him)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly asserts that Christ is recognized in two natures 'without division', denying partition into distinct subjects, which is exactly the defined predicate applied to the required subject.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "161a42dca21c116f1c6c1db4"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-437",
+   "candidate_id": "Q-437-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "one and the same Christ, Son, Lord, Only-begotten (i.e., the Son, recognized in two natures)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage explicitly asserts that Christ is recognized in two natures without separation, directly stating the predicate of the required subject.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "d2721088c659010f2e70a7c7"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-445",
+   "candidate_id": "Q-445-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL"
+   },
+   "after": {
+    "verdict": "ACCEPT",
+    "reason_code": "OK",
+    "floor": "FULL",
+    "floor_by_model": {
+     "sonnet": "FULL"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "we (worship one God in Trinity, and Trinity in Unity)",
+     "speech_act_is_assertion": "Y",
+     "floor": "FULL",
+     "floor_reason": "The passage directly states the Trinity is worshipped 'neither confounding the Persons, nor dividing the Substance,' which is precisely the predicate applied to God as Trinity.",
+     "hazard_flags": [],
+     "verdict": "ACCEPT",
+     "reason_code_final": "OK",
+     "call_id": "0c36b66a8d9735717afc541a"
+    }
+   }
+  },
+  {
+   "queue_id": "Q-453",
+   "candidate_id": "Q-453-p1-BSR-AN-04-1",
+   "models": [
+    "sonnet"
+   ],
+   "route": null,
+   "before": {
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "floor": "PARTIAL"
+   },
+   "after": {
+    "verdict": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "floor": "WORD_ONLY",
+    "floor_by_model": {
+     "sonnet": "WORD_ONLY"
+    }
+   },
+   "rubrics": {
+    "sonnet": {
+     "subject_is_required": "Y",
+     "grammatical_subject": "The Father (as part of the coordinated triad 'The Father...the Son...the Holy Ghost')",
+     "speech_act_is_assertion": "Y",
+     "floor": "WORD_ONLY",
+     "floor_reason": "The passage asserts that each divine Person is 'incomprehensible' as a Trinitarian attribute (unity/equality of the three Persons), not that God's mode of being exceeds any creaturely likeness; the word matches but the proposition addressed is a different one (intra-Trinitarian incomprehensibility, not creature-Creator dissimilarity).",
+     "hazard_flags": [
+      "SAME_WORD_DIFFERENT_MEANING"
+     ],
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "call_id": "a8076ef69557d9b7d0963e19"
+    }
+   }
+  }
+ ],
+ "refused": []
+}

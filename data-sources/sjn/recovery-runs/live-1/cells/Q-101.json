@@ -2220,6 +2220,39 @@
     "lower_floor_applied": false,
     "second_rubric": "opus",
     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "instrument": {
+     "sonnet": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "opus": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": null,
+     "call_count": 1,
+     "voting": "SINGLE_CALL",
+     "vote_split": null,
+     "majority_class": null,
+     "dissent": null,
+     "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+    },
+    "v13_majority": false,
+    "public_certification_eligible": false,
+    "public_certification_bar": "R6-54 (Codex C1(a)): no seated verdict reaches public certification on anything but a gate6-v1.3 MAJORITY verdict. This verdict's instrument is sonnet: None x1 (SINGLE_CALL); opus: None x1 (SINGLE_CALL)",
+    "review_queue_reasons": [],
     "adjudicator_verdict": "REJECT",
     "overturned": false,
     "direction": null
@@ -2235,53 +2268,7 @@
    }
   },
   "Q-101-p2-BSR-AN-05-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "2031f761cac6684302ece6bb",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "marriage (a reflection of the faithful love that unites God and his people)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The passage asserts marriage is a reflection of God's faithful love toward his people, not a direct assertion about God's own truthfulness/faithfulness as a standalone attribute claim.",
-    "floor": "PARTIAL",
-    "floor_reason": "God's faithfulness is mentioned as part of a relational analogy (marriage reflects it) rather than as a direct predication of truthfulness/trustworthiness to God as subject.",
-    "hazard_flags": [
-     "RELATIONAL_VS_METAPHYSICAL",
-     "SLOGAN_COMPRESSION"
-    ],
-    "verdict_model": "ACCEPT_WITH_CAVEAT",
-    "reason_code": "OTHER",
-    "reason": "The phrase is verbatim and does attribute faithful love to God relationally, but the grammatical subject of the sentence is marriage, not God, making this an indirect/derivative assertion rather than a full direct predication of God's truthfulness.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"marriage (a reflection of the faithful love that unites God and his people)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts marriage is a reflection of God's faithful love toward his people, not a direct assertion about God's own truthfulness/faithfulness as a standalone attribute claim.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"God's faithfulness is mentioned as part of a relational analogy (marriage reflects it) rather than as a direct predication of truthfulness/trustworthiness to God as subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SLOGAN_COMPRESSION\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OTHER\", \"reason\": \"The phrase is verbatim and does attribute faithful love to God relationally, but the grammatical subject of the sentence is marriage, not God, making this an indirect/derivative assertion rather than a full direct predication of God's truthfulness.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "_route": "SLICE_ROW",
-   "opus": {
-    "model": "opus",
-    "call_id": "0c69950ebd1c14af8cc89942",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "N",
-    "grammatical_subject": "\"Marriage\" (the predicate nominative clause describes marriage as \"a reflection of the faithful love that unites God and his people\")",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The catechism asserts in its own voice a definition of marriage; but the assertion is about marriage, with God appearing only obliquely in a relative clause.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The word \"faithful\" qualifies a love said to unite God and his people, within a definition whose subject and predicate concern marriage; God's own truthfulness/faithfulness is not itself predicated.",
-    "hazard_flags": [
-     "SEMANTIC_FLOOR",
-     "RELATIONAL_VS_METAPHYSICAL"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "WRONG_SUBJECT",
-    "reason": "The grammatical subject is marriage, not God; \"faithful love\" is attributed to the union rather than asserted of God as a divine attribute.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Marriage\\\" (the predicate nominative clause describes marriage as \\\"a reflection of the faithful love that unites God and his people\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice a definition of marriage; but the assertion is about marriage, with God appearing only obliquely in a relative clause.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word \\\"faithful\\\" qualifies a love said to unite God and his people, within a definition whose subject and predicate concern marriage; God's own truthfulness/faithfulness is not itself predicated.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is marriage, not God; \\\"faithful love\\\" is attributed to the union rather than asserted of God as a divine attribute.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "WRONG_SUBJECT"
-   },
    "final": {
     "verdict": "REJECT",
     "reason_code_final": "WRONG_SUBJECT",
@@ -2291,13 +2278,99 @@
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
     "floor_final": "WORD_ONLY",
     "floor_by_model": {
-     "sonnet": "PARTIAL",
+     "sonnet": "WORD_ONLY",
      "opus": "WORD_ONLY"
     },
-    "floor_disagreement": true,
+    "floor_disagreement": false,
     "lower_floor_applied": false,
     "second_rubric": "opus",
     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "instrument": {
+     "sonnet": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "REJECT": 3
+      },
+      "majority_class": "REJECT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "WORD_ONLY",
+       "WORD_ONLY",
+       "WORD_ONLY"
+      ],
+      "floor_merged": "WORD_ONLY",
+      "representative_call_id": "b6b30a78f6fe4aba5b28f34b",
+      "replicate_call_ids": [
+       "b6b30a78f6fe4aba5b28f34b",
+       "03df7879985969b6aa407e7f",
+       "d95c34387b56a2f691d17264"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     },
+     "opus": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "REJECT": 3
+      },
+      "majority_class": "REJECT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "WORD_ONLY",
+       "WORD_ONLY",
+       "WORD_ONLY"
+      ],
+      "floor_merged": "WORD_ONLY",
+      "representative_call_id": "db1be0c96dfb2da1921f1456",
+      "replicate_call_ids": [
+       "db1be0c96dfb2da1921f1456",
+       "ba4884a3e55ed0b9bb8df1da",
+       "b7d757f0d39f04e802001e4d"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "db1be0c96dfb2da1921f1456",
+     "replicate_call_ids": [
+      "db1be0c96dfb2da1921f1456",
+      "ba4884a3e55ed0b9bb8df1da",
+      "b7d757f0d39f04e802001e4d"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "v13_majority": true,
+    "public_certification_eligible": true,
+    "review_queue_reasons": [],
     "adjudicator_verdict": "REJECT",
     "overturned": false,
     "direction": null
@@ -2310,6 +2383,410 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-20T06:11:31Z",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "2031f761cac6684302ece6bb",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "marriage (a reflection of the faithful love that unites God and his people)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The passage asserts marriage is a reflection of God's faithful love toward his people, not a direct assertion about God's own truthfulness/faithfulness as a standalone attribute claim.",
+      "floor": "PARTIAL",
+      "floor_reason": "God's faithfulness is mentioned as part of a relational analogy (marriage reflects it) rather than as a direct predication of truthfulness/trustworthiness to God as subject.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SLOGAN_COMPRESSION"
+      ],
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "OTHER",
+      "reason": "The phrase is verbatim and does attribute faithful love to God relationally, but the grammatical subject of the sentence is marriage, not God, making this an indirect/derivative assertion rather than a full direct predication of God's truthfulness.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"marriage (a reflection of the faithful love that unites God and his people)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts marriage is a reflection of God's faithful love toward his people, not a direct assertion about God's own truthfulness/faithfulness as a standalone attribute claim.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"God's faithfulness is mentioned as part of a relational analogy (marriage reflects it) rather than as a direct predication of truthfulness/trustworthiness to God as subject.\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SLOGAN_COMPRESSION\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OTHER\", \"reason\": \"The phrase is verbatim and does attribute faithful love to God relationally, but the grammatical subject of the sentence is marriage, not God, making this an indirect/derivative assertion rather than a full direct predication of God's truthfulness.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     },
+     "opus": {
+      "model": "opus",
+      "call_id": "0c69950ebd1c14af8cc89942",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "\"Marriage\" (the predicate nominative clause describes marriage as \"a reflection of the faithful love that unites God and his people\")",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism asserts in its own voice a definition of marriage; but the assertion is about marriage, with God appearing only obliquely in a relative clause.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The word \"faithful\" qualifies a love said to unite God and his people, within a definition whose subject and predicate concern marriage; God's own truthfulness/faithfulness is not itself predicated.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR",
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject is marriage, not God; \"faithful love\" is attributed to the union rather than asserted of God as a divine attribute.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Marriage\\\" (the predicate nominative clause describes marriage as \\\"a reflection of the faithful love that unites God and his people\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice a definition of marriage; but the assertion is about marriage, with God appearing only obliquely in a relative clause.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word \\\"faithful\\\" qualifies a love said to unite God and his people, within a definition whose subject and predicate concern marriage; God's own truthfulness/faithfulness is not itself predicated.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"RELATIONAL_VS_METAPHYSICAL\"], \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is marriage, not God; \\\"faithful love\\\" is attributed to the union rather than asserted of God as a divine attribute.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "opus",
+     "route": "SLICE_ROW",
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "PARTIAL",
+      "opus": "WORD_ONLY"
+     },
+     "floor_disagreement": true,
+     "lower_floor_applied": false,
+     "second_rubric": "opus",
+     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+     "adjudicator_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "WRONG_SUBJECT",
+     "adjudicated_by": "opus",
+     "route": "SLICE_ROW",
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "repointed": {
+    "registry_id_at_run": "BSR-AN-05",
+    "registry_id_now": "BSR-AN-05",
+    "locator_at_run": "To Be a Christian, Q.322 — What is marriage?",
+    "locator_now": "To Be a Christian, Q.322 — What is marriage?",
+    "chunk_hash_at_run": "465d965cbd8ab1b6f9e2debc3ef91540649ed18760d35545d8d3133b6679c9e6",
+    "chunk_hash_now": "6d379ea4d825949b7f9ba83b242901afb0a14943d75006e8a207650280219d89",
+    "chars_at_run": 368,
+    "chars_now": 346,
+    "cross_row": false,
+    "mapping_file": null,
+    "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "b6b30a78f6fe4aba5b28f34b",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "Marriage",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The sentence asserts that marriage reflects a faithful love that unites God and his people; the assertion is about marriage, not directly about God as subject.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage names 'faithful love' involving God only as the object of a relational description within a statement about marriage, not as an assertion that God himself is truthful/faithful.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The grammatical subject is 'Marriage,' and God appears only as an object in a relational clause, so the required subject (God) is not asserted to be faithful/truthful in the passage.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Marriage\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The sentence asserts that marriage reflects a faithful love that unites God and his people; the assertion is about marriage, not directly about God as subject.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage names 'faithful love' involving God only as the object of a relational description within a statement about marriage, not as an assertion that God himself is truthful/faithful.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is 'Marriage,' and God appears only as an object in a relational clause, so the required subject (God) is not asserted to be faithful/truthful in the passage.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "b6b30a78f6fe4aba5b28f34b",
+     "replicate_call_ids": [
+      "b6b30a78f6fe4aba5b28f34b",
+      "03df7879985969b6aa407e7f",
+      "d95c34387b56a2f691d17264"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "sonnet",
+      "call_id": "b6b30a78f6fe4aba5b28f34b",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "Marriage",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The sentence asserts that marriage reflects a faithful love that unites God and his people; the assertion is about marriage, not directly about God as subject.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage names 'faithful love' involving God only as the object of a relational description within a statement about marriage, not as an assertion that God himself is truthful/faithful.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject is 'Marriage,' and God appears only as an object in a relational clause, so the required subject (God) is not asserted to be faithful/truthful in the passage.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"Marriage\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The sentence asserts that marriage reflects a faithful love that unites God and his people; the assertion is about marriage, not directly about God as subject.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage names 'faithful love' involving God only as the object of a relational description within a statement about marriage, not as an assertion that God himself is truthful/faithful.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is 'Marriage,' and God appears only as an object in a relational clause, so the required subject (God) is not asserted to be faithful/truthful in the passage.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "03df7879985969b6aa407e7f",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the faithful love (modifying 'love', within 'Marriage ... is a reflection of the faithful love that unites God and his people')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The text does assert something in its own voice, but what it asserts is that marriage reflects a faithful love uniting God and people, not that God himself is truthful/faithful.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts a neighbouring relational claim — that a 'faithful love' unites God and his people, used as an analogy for marriage — rather than asserting God's own truthfulness/trustworthiness as a divine attribute.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical and logical subject of the quoted phrase is 'love' (faithful love uniting God and people), not God himself; the sentence's actual subject is 'Marriage,' and the passage uses the God-people relationship as an analogical ground for marital fidelity rather than asserting God's own truthfulness or trustworthiness.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the faithful love (modifying 'love', within 'Marriage ... is a reflection of the faithful love that unites God and his people')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text does assert something in its own voice, but what it asserts is that marriage reflects a faithful love uniting God and people, not that God himself is truthful/faithful.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts a neighbouring relational claim — that a 'faithful love' unites God and his people, used as an analogy for marriage — rather than asserting God's own truthfulness/trustworthiness as a divine attribute.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical and logical subject of the quoted phrase is 'love' (faithful love uniting God and people), not God himself; the sentence's actual subject is 'Marriage,' and the passage uses the God-people relationship as an analogical ground for marital fidelity rather than asserting God's own truthfulness or trustworthiness.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "d95c34387b56a2f691d17264",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "the faithful love (that unites God and his people)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The passage asserts a description of marriage as reflecting 'the faithful love' between God and his people; it does not directly predicate faithfulness of God as a divine attribute.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The predicate 'faithful' modifies 'love', a relational bond, not God himself; the passage describes a mutual love relationship rather than asserting God's own truthfulness or trustworthiness.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical and semantic subject of 'faithful' is the love uniting God and his people, not God as such, so the passage does not assert God's own truthfulness/trustworthiness as required by the predicate.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"the faithful love (that unites God and his people)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The passage asserts a description of marriage as reflecting 'the faithful love' between God and his people; it does not directly predicate faithfulness of God as a divine attribute.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The predicate 'faithful' modifies 'love', a relational bond, not God himself; the passage describes a mutual love relationship rather than asserting God's own truthfulness or trustworthiness.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical and semantic subject of 'faithful' is the love uniting God and his people, not God as such, so the passage does not assert God's own truthfulness/trustworthiness as required by the predicate.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    ]
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "db1be0c96dfb2da1921f1456",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "N",
+    "grammatical_subject": "\"Marriage\" (\"Marriage is the exclusive, lifelong, covenantal union of love... and a reflection of the faithful love that unites God and his people\")",
+    "speech_act_is_assertion": "N",
+    "speech_act_note": "The catechism asserts what marriage is; God's faithful love appears only inside a subordinate descriptive noun phrase used to characterize marriage, and is presupposed rather than predicated of God in its own voice.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The word \"faithful\" occurs, but the asserted proposition is about marriage being a reflection of that love, a neighbouring claim; the passage does not itself assert that God is truthful and trustworthy.",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR",
+     "ECCLESIAL_VS_SOTERIOLOGICAL"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "REJECT",
+    "reason_code": "WRONG_SUBJECT",
+    "reason": "The grammatical subject is marriage, not God; God's faithfulness is only presupposed in a descriptive comparison, so the predicate is not asserted of the required subject.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Marriage\\\" (\\\"Marriage is the exclusive, lifelong, covenantal union of love... and a reflection of the faithful love that unites God and his people\\\")\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The catechism asserts what marriage is; God's faithful love appears only inside a subordinate descriptive noun phrase used to characterize marriage, and is presupposed rather than predicated of God in its own voice.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word \\\"faithful\\\" occurs, but the asserted proposition is about marriage being a reflection of that love, a neighbouring claim; the passage does not itself assert that God is truthful and trustworthy.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"ECCLESIAL_VS_SOTERIOLOGICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is marriage, not God; God's faithfulness is only presupposed in a descriptive comparison, so the predicate is not asserted of the required subject.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "WRONG_SUBJECT",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "db1be0c96dfb2da1921f1456",
+     "replicate_call_ids": [
+      "db1be0c96dfb2da1921f1456",
+      "ba4884a3e55ed0b9bb8df1da",
+      "b7d757f0d39f04e802001e4d"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "opus",
+      "call_id": "db1be0c96dfb2da1921f1456",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "\"Marriage\" (\"Marriage is the exclusive, lifelong, covenantal union of love... and a reflection of the faithful love that unites God and his people\")",
+      "speech_act_is_assertion": "N",
+      "speech_act_note": "The catechism asserts what marriage is; God's faithful love appears only inside a subordinate descriptive noun phrase used to characterize marriage, and is presupposed rather than predicated of God in its own voice.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The word \"faithful\" occurs, but the asserted proposition is about marriage being a reflection of that love, a neighbouring claim; the passage does not itself assert that God is truthful and trustworthy.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR",
+       "ECCLESIAL_VS_SOTERIOLOGICAL"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject is marriage, not God; God's faithfulness is only presupposed in a descriptive comparison, so the predicate is not asserted of the required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Marriage\\\" (\\\"Marriage is the exclusive, lifelong, covenantal union of love... and a reflection of the faithful love that unites God and his people\\\")\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The catechism asserts what marriage is; God's faithful love appears only inside a subordinate descriptive noun phrase used to characterize marriage, and is presupposed rather than predicated of God in its own voice.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word \\\"faithful\\\" occurs, but the asserted proposition is about marriage being a reflection of that love, a neighbouring claim; the passage does not itself assert that God is truthful and trustworthy.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"ECCLESIAL_VS_SOTERIOLOGICAL\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is marriage, not God; God's faithfulness is only presupposed in a descriptive comparison, so the predicate is not asserted of the required subject.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     },
+     {
+      "model": "opus",
+      "call_id": "ba4884a3e55ed0b9bb8df1da",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "\"Marriage\" (\"Marriage is the exclusive, lifelong, covenantal union ... and a reflection of the faithful love that unites God and his people\")",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism asserts in its own voice a definition of marriage; the reference to faithful love is a descriptive appositive within that definition, not a predication about God.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The proposition asserted is about marriage (its nature and holiness); God's faithfulness is presupposed inside a subordinate comparison rather than asserted of God as subject.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The grammatical subject is marriage, not God; the phrase 'faithful love that unites God and his people' functions as a simile for marriage and does not assert God's truthfulness/faithfulness as a predicate of God.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Marriage\\\" (\\\"Marriage is the exclusive, lifelong, covenantal union ... and a reflection of the faithful love that unites God and his people\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice a definition of marriage; the reference to faithful love is a descriptive appositive within that definition, not a predication about God.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The proposition asserted is about marriage (its nature and holiness); God's faithfulness is presupposed inside a subordinate comparison rather than asserted of God as subject.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The grammatical subject is marriage, not God; the phrase 'faithful love that unites God and his people' functions as a simile for marriage and does not assert God's truthfulness/faithfulness as a predicate of God.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     },
+     {
+      "model": "opus",
+      "call_id": "b7d757f0d39f04e802001e4d",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "N",
+      "grammatical_subject": "\"Marriage\" (\"Marriage is the exclusive, lifelong, covenantal union... and a reflection of the faithful love...\"); within the embedded phrase the subject is \"love,\" not God",
+      "speech_act_is_assertion": "N",
+      "speech_act_note": "The standard asserts a definition of marriage; God's faithful love appears only as a presupposed descriptive comparandum in a subordinate noun phrase, not as an assertion about God in the standard's own voice.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The word \"faithful\" occurs, but the proposition asserted is about the nature of marriage; God's faithfulness is assumed as the term of comparison rather than predicated of God.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "WRONG_SUBJECT",
+      "reason": "The subject of the passage is marriage, not God; the phrase names God's faithful love only as a presupposed analogue within a definition of marriage, so the predicate is not asserted of the required subject.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"N\", \"grammatical_subject\": \"\\\"Marriage\\\" (\\\"Marriage is the exclusive, lifelong, covenantal union... and a reflection of the faithful love...\\\"); within the embedded phrase the subject is \\\"love,\\\" not God\", \"speech_act_is_assertion\": \"N\", \"speech_act_note\": \"The standard asserts a definition of marriage; God's faithful love appears only as a presupposed descriptive comparandum in a subordinate noun phrase, not as an assertion about God in the standard's own voice.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The word \\\"faithful\\\" occurs, but the proposition asserted is about the nature of marriage; God's faithfulness is assumed as the term of comparison rather than predicated of God.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"WRONG_SUBJECT\", \"reason\": \"The subject of the passage is marriage, not God; the phrase names God's faithful love only as a presupposed analogue within a definition of marriage, so the predicate is not asserted of the required subject.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "WRONG_SUBJECT"
+     }
+    ]
+   },
+   "reverified": {
+    "at": "2026-09-20T06:16:49Z",
+    "prompt_version": "gate6-v1.3",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "route_kept": "SLICE_ROW",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "votes_per_candidate": 3,
+    "repointed": {
+     "registry_id_at_run": "BSR-AN-05",
+     "registry_id_now": "BSR-AN-05",
+     "locator_at_run": "To Be a Christian, Q.322 — What is marriage?",
+     "locator_now": "To Be a Christian, Q.322 — What is marriage?",
+     "chunk_hash_at_run": "465d965cbd8ab1b6f9e2debc3ef91540649ed18760d35545d8d3133b6679c9e6",
+     "chunk_hash_now": "6d379ea4d825949b7f9ba83b242901afb0a14943d75006e8a207650280219d89",
+     "chars_at_run": 368,
+     "chars_now": 346,
+     "cross_row": false,
+     "mapping_file": null,
+     "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+    },
+    "required_subject": "GOD (the one God, or the Father; not the Church, not humanity, not Christ's human nature)"
    }
   }
  },

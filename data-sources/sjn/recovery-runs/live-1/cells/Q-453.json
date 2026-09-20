@@ -1785,6 +1785,32 @@
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": null,
+     "call_count": 1,
+     "voting": "SINGLE_CALL",
+     "vote_split": null,
+     "majority_class": null,
+     "dissent": null,
+     "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+    },
+    "v13_majority": false,
+    "public_certification_eligible": false,
+    "public_certification_bar": "R6-54 (Codex C1(a)): no seated verdict reaches public certification on anything but a gate6-v1.3 MAJORITY verdict. This verdict's instrument is sonnet: None x1 (SINGLE_CALL)",
+    "review_queue_reasons": [
+     "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+    ],
     "overturned": false,
     "direction": null
    },
@@ -1838,6 +1864,30 @@
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": null,
+     "call_count": 1,
+     "voting": "SINGLE_CALL",
+     "vote_split": null,
+     "majority_class": null,
+     "dissent": null,
+     "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+    },
+    "v13_majority": false,
+    "public_certification_eligible": false,
+    "public_certification_bar": "R6-54 (Codex C1(a)): no seated verdict reaches public certification on anything but a gate6-v1.3 MAJORITY verdict. This verdict's instrument is sonnet: None x1 (SINGLE_CALL)",
+    "review_queue_reasons": [],
     "overturned": false,
     "direction": null
    },
@@ -1852,45 +1902,81 @@
    }
   },
   "Q-453-p1-BSR-AN-04-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "390e9437ba5c11b9c103c4c7",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "Y",
-    "grammatical_subject": "The Father ... the Son ... the Holy Ghost",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The Athanasian Creed positively asserts the incomprehensibility of each divine Person as an attribute of the one Godhead.",
-    "floor": "PARTIAL",
-    "floor_reason": "Incomprehensibility asserts God's transcendence beyond creaturely understanding, but does not itself state a dissimilarity-exceeds-similarity principle about creaturely likeness to God's mode of being; it is a narrower, related claim.",
-    "hazard_flags": [
-     "SLOGAN_COMPRESSION",
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "verdict_model": "ACCEPT_WITH_CAVEAT",
-    "reason_code": "OK",
-    "reason": "The passage asserts divine incomprehensibility of Father, Son, and Spirit, which falls within but does not fully articulate the greater-dissimilarity predicate, warranting a partial/caveated acceptance.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Athanasian Creed positively asserts the incomprehensibility of each divine Person as an attribute of the one Godhead.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Incomprehensibility asserts God's transcendence beyond creaturely understanding, but does not itself state a dissimilarity-exceeds-similarity principle about creaturely likeness to God's mode of being; it is a narrower, related claim.\", \"hazard_flags\": [\"SLOGAN_COMPRESSION\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"The passage asserts divine incomprehensibility of Father, Son, and Spirit, which falls within but does not fully articulate the greater-dissimilarity predicate, warranting a partial/caveated acceptance.\"}",
-    "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK"
-   },
    "_route": null,
    "final": {
-    "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "primary_verdict": "REJECT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "WORD_ONLY",
     "floor_by_model": {
-     "sonnet": "PARTIAL"
+     "sonnet": "WORD_ONLY"
     },
     "floor_disagreement": false,
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "REJECT": 3
+      },
+      "majority_class": "REJECT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "WORD_ONLY",
+       "WORD_ONLY",
+       "WORD_ONLY"
+      ],
+      "floor_merged": "WORD_ONLY",
+      "representative_call_id": "a8076ef69557d9b7d0963e19",
+      "replicate_call_ids": [
+       "a8076ef69557d9b7d0963e19",
+       "1e15f03153881d17667f7f46",
+       "1327b635850aa918e8e2bc4f"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "a8076ef69557d9b7d0963e19",
+     "replicate_call_ids": [
+      "a8076ef69557d9b7d0963e19",
+      "1e15f03153881d17667f7f46",
+      "1327b635850aa918e8e2bc4f"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "v13_majority": true,
+    "public_certification_eligible": true,
+    "review_queue_reasons": [],
     "overturned": false,
     "direction": null
    },
@@ -1902,6 +1988,241 @@
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-20T06:11:31Z",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "390e9437ba5c11b9c103c4c7",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father ... the Son ... the Holy Ghost",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Athanasian Creed positively asserts the incomprehensibility of each divine Person as an attribute of the one Godhead.",
+      "floor": "PARTIAL",
+      "floor_reason": "Incomprehensibility asserts God's transcendence beyond creaturely understanding, but does not itself state a dissimilarity-exceeds-similarity principle about creaturely likeness to God's mode of being; it is a narrower, related claim.",
+      "hazard_flags": [
+       "SLOGAN_COMPRESSION",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "OK",
+      "reason": "The passage asserts divine incomprehensibility of Father, Son, and Spirit, which falls within but does not fully articulate the greater-dissimilarity predicate, warranting a partial/caveated acceptance.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Athanasian Creed positively asserts the incomprehensibility of each divine Person as an attribute of the one Godhead.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"Incomprehensibility asserts God's transcendence beyond creaturely understanding, but does not itself state a dissimilarity-exceeds-similarity principle about creaturely likeness to God's mode of being; it is a narrower, related claim.\", \"hazard_flags\": [\"SLOGAN_COMPRESSION\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"The passage asserts divine incomprehensibility of Father, Son, and Spirit, which falls within but does not fully articulate the greater-dissimilarity predicate, warranting a partial/caveated acceptance.\"}",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "OK"
+     }
+    },
+    "final": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "repointed": {
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+    "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+    "chars_at_run": 2720,
+    "chars_now": 3633,
+    "cross_row": true,
+    "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+    "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "a8076ef69557d9b7d0963e19",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "The Father (as part of the coordinated triad 'The Father...the Son...the Holy Ghost')",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed asserts this in its own voice as a positive statement of Trinitarian doctrine, not quoting an opponent.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage asserts that each divine Person is 'incomprehensible' as a Trinitarian attribute (unity/equality of the three Persons), not that God's mode of being exceeds any creaturely likeness; the word matches but the proposition addressed is a different one (intra-Trinitarian incomprehensibility, not creature-Creator dissimilarity).",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "reason": "The phrase 'incomprehensible' occurs verbatim and the Father is a legitimate subject, but the passage's actual assertion concerns the co-equal incomprehensibility of the three divine Persons within the Trinity, not the ontological gap between creatures and God's mode of being required by the predicate; the predicate itself is not addressed, only the word appears in an unrelated theological context.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father (as part of the coordinated triad 'The Father...the Son...the Holy Ghost')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this in its own voice as a positive statement of Trinitarian doctrine, not quoting an opponent.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts that each divine Person is 'incomprehensible' as a Trinitarian attribute (unity/equality of the three Persons), not that God's mode of being exceeds any creaturely likeness; the word matches but the proposition addressed is a different one (intra-Trinitarian incomprehensibility, not creature-Creator dissimilarity).\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The phrase 'incomprehensible' occurs verbatim and the Father is a legitimate subject, but the passage's actual assertion concerns the co-equal incomprehensibility of the three divine Persons within the Trinity, not the ontological gap between creatures and God's mode of being required by the predicate; the predicate itself is not addressed, only the word appears in an unrelated theological context.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "a8076ef69557d9b7d0963e19",
+     "replicate_call_ids": [
+      "a8076ef69557d9b7d0963e19",
+      "1e15f03153881d17667f7f46",
+      "1327b635850aa918e8e2bc4f"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "sonnet",
+      "call_id": "a8076ef69557d9b7d0963e19",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father (as part of the coordinated triad 'The Father...the Son...the Holy Ghost')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this in its own voice as a positive statement of Trinitarian doctrine, not quoting an opponent.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts that each divine Person is 'incomprehensible' as a Trinitarian attribute (unity/equality of the three Persons), not that God's mode of being exceeds any creaturely likeness; the word matches but the proposition addressed is a different one (intra-Trinitarian incomprehensibility, not creature-Creator dissimilarity).",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The phrase 'incomprehensible' occurs verbatim and the Father is a legitimate subject, but the passage's actual assertion concerns the co-equal incomprehensibility of the three divine Persons within the Trinity, not the ontological gap between creatures and God's mode of being required by the predicate; the predicate itself is not addressed, only the word appears in an unrelated theological context.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father (as part of the coordinated triad 'The Father...the Son...the Holy Ghost')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this in its own voice as a positive statement of Trinitarian doctrine, not quoting an opponent.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts that each divine Person is 'incomprehensible' as a Trinitarian attribute (unity/equality of the three Persons), not that God's mode of being exceeds any creaturely likeness; the word matches but the proposition addressed is a different one (intra-Trinitarian incomprehensibility, not creature-Creator dissimilarity).\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The phrase 'incomprehensible' occurs verbatim and the Father is a legitimate subject, but the passage's actual assertion concerns the co-equal incomprehensibility of the three divine Persons within the Trinity, not the ontological gap between creatures and God's mode of being required by the predicate; the predicate itself is not addressed, only the word appears in an unrelated theological context.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "1e15f03153881d17667f7f46",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father, the Son, and the Holy Ghost (each named as subject in a coordinate series)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this in its own voice as a positive doctrinal statement, not quoting or reporting an opponent.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts that Father, Son, and Holy Ghost are each equally 'incomprehensible' as part of a Trinitarian coequality argument; it says nothing about the adequacy or inadequacy of creaturely likeness to God's mode of being, so the predicate itself (dissimilarity of creature to Creator) is not addressed.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The term 'incomprehensible' here functions within a Trinitarian coequality formula (each Person equally incomprehensible/uncreated/eternal) and does not assert or address the doctrine that creaturely likeness to God is inadequate; the shared word masks a different theological point, so the passage fails to meet even a partial floor for this predicate.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (each named as subject in a coordinate series)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this in its own voice as a positive doctrinal statement, not quoting or reporting an opponent.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts that Father, Son, and Holy Ghost are each equally 'incomprehensible' as part of a Trinitarian coequality argument; it says nothing about the adequacy or inadequacy of creaturely likeness to God's mode of being, so the predicate itself (dissimilarity of creature to Creator) is not addressed.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The term 'incomprehensible' here functions within a Trinitarian coequality formula (each Person equally incomprehensible/uncreated/eternal) and does not assert or address the doctrine that creaturely likeness to God is inadequate; the shared word masks a different theological point, so the passage fails to meet even a partial floor for this predicate.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "1327b635850aa918e8e2bc4f",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father, the Son, and the Holy Ghost",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts in its own voice that each Person is incomprehensible, as part of its trinitarian confession.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts divine incomprehensibility, not the distinct claim of greater creaturely dissimilarity than similarity to God's mode of being; it never addresses creature-God likeness at all.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The quoted phrase concerns the incomprehensibility of each divine Person within Trinitarian doctrine, a neighbouring proposition, not the predicate about the inadequacy of creaturely likeness to God's mode of being.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts in its own voice that each Person is incomprehensible, as part of its trinitarian confession.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts divine incomprehensibility, not the distinct claim of greater creaturely dissimilarity than similarity to God's mode of being; it never addresses creature-God likeness at all.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The quoted phrase concerns the incomprehensibility of each divine Person within Trinitarian doctrine, a neighbouring proposition, not the predicate about the inadequacy of creaturely likeness to God's mode of being.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     }
+    ]
+   },
+   "reverified": {
+    "at": "2026-09-20T06:16:49Z",
+    "prompt_version": "gate6-v1.3",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "votes_per_candidate": 3,
+    "repointed": {
+     "registry_id_at_run": "BSR-AN-04",
+     "registry_id_now": "BSR-AN-06",
+     "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+     "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+     "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+     "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+     "chars_at_run": 2720,
+     "chars_now": 3633,
+     "cross_row": true,
+     "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+     "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+    },
+    "required_subject": "GOD (the one God, or the Father; not the Church, not humanity, not Christ's human nature)"
    }
   }
  },
@@ -1957,46 +2278,24 @@
    "locator_rank": 1,
    "recut_from": null,
    "slot": "GUARANTEED"
-  },
-  {
-   "candidate_id": "Q-453-p1-BSR-AN-04-1",
-   "pass": 1,
-   "registry_id": "BSR-AN-04",
-   "locator": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
-   "phrase": "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible",
-   "rationale": "Asserts God's incomprehensibility, implying creaturely minds cannot adequately grasp the divine mode of being, a narrower adjacent claim within the apophatic floor.",
-   "floor_claim": "PARTIAL",
-   "chunk_text": "What, then, is our assurance as Christians? Our assurance as Christians is that nothing, not even death, shall separate us from the love of God which is in Christ Jesus our Lord. Amen. 862 Catechism of the Church and Human Natures in the Person of Christ Council of Chalcedon, 451 A.D., Act V Therefore, following the holy fathers, we all with one accord teach men to acknowledge one and the same Son, our Lord Jesus Christ, at once complete in Godhead and complete in manhood, truly God and truly man, consisting also of a reasonable soul and body, of one substance (homoousios) with the Father as regards his Godhead, and at the same time of one substance with us as regards his manhood; like us in all respects, apart from sin; as regards his Godhead, begotten of the Father before the ages, but yet as regards his manhood begotten, for us men and for our salvation, of Mary the Virgin, the God-bearer (Theotokos); one and the same Christ, Son, Lord, Only-begotten, recognized in two natures, without confusion, without change, without division, without separation; the distinction of natures being in no way annulled by the union, but rather the characteristics of each nature being preserved and coming together to form one person and subsistence, not as parted or separated into two persons, but one and the same Son and Only-begotten God the Word, Lord Jesus Christ; even as the prophets from earliest times spoke of him, and our Lord Jesus Christ himself taught us, and the creed of the Fathers has handed down to us. commonly called Whosoever will be saved, before all things it is necessary that he hold the Catholic Faith. Which Faith except everyone do keep whole and undefiled, without doubt he shall perish everlastingly. And the Catholic Faith is this: That we worship one God in Trinity, and Trinity in Unity, neither confounding the Persons, nor dividing the Substance. For there is one Person of the Father, another of the Son, and another of the Holy Ghost. But the Godhead of the Father, of the Son, and of the Holy Ghost, is all one, the Glory equal, the Majesty co-eternal. Such as the Father is, such is the Son, and such is the Holy Ghost. The Father uncreate, the Son uncreate, and the Holy Ghost uncreate. The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible. The Father eternal, the Son eternal, and the Holy Ghost eternal. And yet they are not three eternals, but one eternal. As also there are not three incomprehensibles, nor three uncreated, but one uncreated, and one incomprehensible. So likewise the Father is Almighty, the Son Almighty, and the Holy Ghost Almighty. And yet they are not three Almighties, but one Almighty. 864 Historical Documents",
-   "chunk_hash": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
-   "division": "question",
-   "fallback_tier": false,
-   "witness": false,
-   "effective_tier": "CATECHETICAL",
-   "locator_rank": 1,
-   "recut_from": null,
-   "slot": "GUARANTEED"
   }
  ],
  "fallback_used": false,
  "allocation": {
   "kept": [
-   "Q-453-p1-BSR-AN-01-1",
-   "Q-453-p1-BSR-AN-04-1"
+   "Q-453-p1-BSR-AN-01-1"
   ],
   "roles": {
-   "Q-453-p1-BSR-AN-01-1": "PRIMARY",
-   "Q-453-p1-BSR-AN-04-1": "CORROBORATING"
+   "Q-453-p1-BSR-AN-01-1": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {},
   "witness_only": [],
   "groups": {
-   "Q-453-p1-BSR-AN-01-1": "church of england",
-   "Q-453-p1-BSR-AN-04-1": "the episcopal church"
+   "Q-453-p1-BSR-AN-01-1": "church of england"
   },
   "slot_order": {
-   "Q-453-p1-BSR-AN-01-1": 0,
-   "Q-453-p1-BSR-AN-04-1": 0
+   "Q-453-p1-BSR-AN-01-1": 0
   },
   "parallel_witnesses": {}
  },
@@ -2030,6 +2329,11 @@
  },
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-453-p1-BSR-AN-04-1": [
+    "ACCEPT_WITH_CAVEAT",
+    "REJECT"
+   ]
+  }
  }
 }

@@ -1,21 +1,99 @@
 {
- "schema": "sjn-gate6-author-review-queue/1",
- "what": "The author review queue (Comparison Principles Codex C3, shaped by C3(a) / R6-54). A verifier ACCEPT that carries doubt — any dissenting vote among its replicates, or ACCEPT_WITH_CAVEAT at a PARTIAL floor — is recorded here instead of being refused by code. A queued item is HELD: the packet builder gives it no seat and the emit step refuses to publish it, until the author records an author_ruling of ADMIT or REFUSE.",
- "ruling": "R6-54_production_voting_and_review_queue",
- "doubt": {
-  "DISSENTING_VOTE": "any replicate whose verdict class differs from the majority's",
-  "ACCEPT_WITH_CAVEAT_AT_PARTIAL": "the final verdict is ACCEPT_WITH_CAVEAT and the final floor is PARTIAL"
- },
- "author_ruling_shape": {
-  "decision": [
-   "ADMIT",
-   "REFUSE"
+ "scope": [
+  [
+   "Q-085",
+   "Q-085-p2-BSR-AN-05-1"
   ],
-  "ruled": "YYYY-MM-DD",
-  "why": "the author's reason",
-  "recorded_by": "the session that recorded it"
- },
- "items": [
+  [
+   "Q-101",
+   "Q-101-p2-BSR-AN-05-1"
+  ],
+  [
+   "Q-157",
+   "Q-157-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-237",
+   "Q-237-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-277",
+   "Q-277-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-277",
+   "Q-277-p1-BSR-AN-04-2"
+  ],
+  [
+   "Q-285",
+   "Q-285-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-301",
+   "Q-301-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-313",
+   "Q-313-p1-BSR-RC-07-1"
+  ],
+  [
+   "Q-317",
+   "Q-317-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-365",
+   "Q-365-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-373",
+   "Q-373-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-373",
+   "Q-373-p1-BSR-AN-04-2"
+  ],
+  [
+   "Q-381",
+   "Q-381-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-389",
+   "Q-389-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-405",
+   "Q-405-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-405",
+   "Q-405-p2-BSR-AN-05-1"
+  ],
+  [
+   "Q-413",
+   "Q-413-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-421",
+   "Q-421-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-429",
+   "Q-429-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-437",
+   "Q-437-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-445",
+   "Q-445-p1-BSR-AN-04-1"
+  ],
+  [
+   "Q-453",
+   "Q-453-p1-BSR-AN-04-1"
+  ]
+ ],
+ "entries": [
   {
    "queue_id": "Q-277",
    "candidate_id": "Q-277-p1-BSR-AN-04-1",
@@ -241,5 +319,97 @@
    "entered": "2026-09-20T06:18:37Z",
    "author_ruling": null
   }
+ ],
+ "no_queue_reason": [
+  [
+   "Q-085",
+   "Q-085-p2-BSR-AN-05-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-101",
+   "Q-101-p2-BSR-AN-05-1",
+   "REJECT"
+  ],
+  [
+   "Q-157",
+   "Q-157-p1-BSR-AN-04-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-237",
+   "Q-237-p1-BSR-AN-04-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-277",
+   "Q-277-p1-BSR-AN-04-2",
+   "REJECT"
+  ],
+  [
+   "Q-313",
+   "Q-313-p1-BSR-RC-07-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-317",
+   "Q-317-p1-BSR-AN-04-1",
+   "ACCEPT_WITH_CAVEAT"
+  ],
+  [
+   "Q-373",
+   "Q-373-p1-BSR-AN-04-2",
+   "ACCEPT"
+  ],
+  [
+   "Q-381",
+   "Q-381-p1-BSR-AN-04-1",
+   "REJECT"
+  ],
+  [
+   "Q-389",
+   "Q-389-p1-BSR-AN-04-1",
+   "REJECT"
+  ],
+  [
+   "Q-405",
+   "Q-405-p1-BSR-AN-04-1",
+   "REJECT"
+  ],
+  [
+   "Q-405",
+   "Q-405-p2-BSR-AN-05-1",
+   "REJECT"
+  ],
+  [
+   "Q-413",
+   "Q-413-p1-BSR-AN-04-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-421",
+   "Q-421-p1-BSR-AN-04-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-429",
+   "Q-429-p1-BSR-AN-04-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-437",
+   "Q-437-p1-BSR-AN-04-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-445",
+   "Q-445-p1-BSR-AN-04-1",
+   "ACCEPT"
+  ],
+  [
+   "Q-453",
+   "Q-453-p1-BSR-AN-04-1",
+   "REJECT"
+  ]
  ]
 }

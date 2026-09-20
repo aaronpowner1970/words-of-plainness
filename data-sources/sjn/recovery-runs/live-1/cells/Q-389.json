@@ -1746,6 +1746,30 @@
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": null,
+     "call_count": 1,
+     "voting": "SINGLE_CALL",
+     "vote_split": null,
+     "majority_class": null,
+     "dissent": null,
+     "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+    },
+    "v13_majority": false,
+    "public_certification_eligible": false,
+    "public_certification_bar": "R6-54 (Codex C1(a)): no seated verdict reaches public certification on anything but a gate6-v1.3 MAJORITY verdict. This verdict's instrument is sonnet: None x1 (SINGLE_CALL)",
+    "review_queue_reasons": [],
     "overturned": false,
     "direction": null
    },
@@ -1760,29 +1784,6 @@
    }
   },
   "Q-389-p1-BSR-AN-04-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "504e56ab0124991dfa1ac339",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "Y",
-    "grammatical_subject": "The Father ... the Son ... the Holy Ghost (each named as subject of 'incomprehensible')",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The Athanasian Creed asserts this doctrine in its own voice as part of its confession of the Trinity.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "‘Incomprehensible’ here is a technical Trinitarian term meaning immeasurable/unbounded in substance (parallel to ‘uncreate,’ ‘eternal,’ ‘almighty’), asserting divine infinity, not the epistemic claim that God's counsel/plans cannot be rationally penetrated.",
-    "hazard_flags": [
-     "SAME_WORD_DIFFERENT_MEANING",
-     "SEMANTIC_FLOOR"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "BELOW_FLOOR",
-    "reason": "The word 'incomprehensible' appears verbatim and is asserted of the Father (among others), but in this creedal context it denotes metaphysical immeasurability of the divine substance, not the epistemic inscrutability of God's counsel required by the predicate, so the proposition is not actually asserted.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost (each named as subject of 'incomprehensible')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Athanasian Creed asserts this doctrine in its own voice as part of its confession of the Trinity.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"‘Incomprehensible’ here is a technical Trinitarian term meaning immeasurable/unbounded in substance (parallel to ‘uncreate,’ ‘eternal,’ ‘almighty’), asserting divine infinity, not the epistemic claim that God's counsel/plans cannot be rationally penetrated.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The word 'incomprehensible' appears verbatim and is asserted of the Father (among others), but in this creedal context it denotes metaphysical immeasurability of the divine substance, not the epistemic inscrutability of God's counsel required by the predicate, so the proposition is not actually asserted.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "BELOW_FLOOR"
-   },
    "_route": null,
    "final": {
     "verdict": "REJECT",
@@ -1799,6 +1800,65 @@
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "REJECT": 3
+      },
+      "majority_class": "REJECT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "WORD_ONLY",
+       "WORD_ONLY",
+       "WORD_ONLY"
+      ],
+      "floor_merged": "WORD_ONLY",
+      "representative_call_id": "847c53141927540d8ac352c9",
+      "replicate_call_ids": [
+       "847c53141927540d8ac352c9",
+       "22140a868ffae40631ce1590",
+       "18bc7535431b0eda646b594d"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "847c53141927540d8ac352c9",
+     "replicate_call_ids": [
+      "847c53141927540d8ac352c9",
+      "22140a868ffae40631ce1590",
+      "18bc7535431b0eda646b594d"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "v13_majority": true,
+    "public_certification_eligible": true,
+    "review_queue_reasons": [],
     "overturned": false,
     "direction": null
    },
@@ -1810,6 +1870,240 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-20T06:11:31Z",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "504e56ab0124991dfa1ac339",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father ... the Son ... the Holy Ghost (each named as subject of 'incomprehensible')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Athanasian Creed asserts this doctrine in its own voice as part of its confession of the Trinity.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "‘Incomprehensible’ here is a technical Trinitarian term meaning immeasurable/unbounded in substance (parallel to ‘uncreate,’ ‘eternal,’ ‘almighty’), asserting divine infinity, not the epistemic claim that God's counsel/plans cannot be rationally penetrated.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "SEMANTIC_FLOOR"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The word 'incomprehensible' appears verbatim and is asserted of the Father (among others), but in this creedal context it denotes metaphysical immeasurability of the divine substance, not the epistemic inscrutability of God's counsel required by the predicate, so the proposition is not actually asserted.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost (each named as subject of 'incomprehensible')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Athanasian Creed asserts this doctrine in its own voice as part of its confession of the Trinity.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"‘Incomprehensible’ here is a technical Trinitarian term meaning immeasurable/unbounded in substance (parallel to ‘uncreate,’ ‘eternal,’ ‘almighty’), asserting divine infinity, not the epistemic claim that God's counsel/plans cannot be rationally penetrated.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The word 'incomprehensible' appears verbatim and is asserted of the Father (among others), but in this creedal context it denotes metaphysical immeasurability of the divine substance, not the epistemic inscrutability of God's counsel required by the predicate, so the proposition is not actually asserted.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "repointed": {
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+    "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+    "chars_at_run": 2720,
+    "chars_now": 3633,
+    "cross_row": true,
+    "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+    "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "847c53141927540d8ac352c9",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "The Father, the Son, and the Holy Ghost (Father named explicitly among the three)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The Creed asserts in its own voice a series of co-equal attributes of the Trinity, including 'incomprehensible', as part of its confessional statement of faith.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "In this creedal series ('uncreate', 'incomprehensible', 'eternal', 'Almighty'), 'incomprehensible' denotes the traditional sense of immeasurable/infinite (unbounded by creaturely limits), a metaphysical attribute of magnitude, not the specific epistemic claim that God's counsel cannot be exhaustively rationally penetrated; this is a neighbouring proposition, not the predicate itself.",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "reason": "The phrase is verbatim and the subject includes the Father, and the Creed asserts it in its own voice, but 'incomprehensible' here means immeasurable/infinite in magnitude (paired with 'uncreate', 'eternal', 'Almighty') rather than an assertion that God's counsel resists exhaustive rational penetration, so the predicate as defined is not actually asserted—only a neighbouring attribute sharing the same word.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (Father named explicitly among the three)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Creed asserts in its own voice a series of co-equal attributes of the Trinity, including 'incomprehensible', as part of its confessional statement of faith.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"In this creedal series ('uncreate', 'incomprehensible', 'eternal', 'Almighty'), 'incomprehensible' denotes the traditional sense of immeasurable/infinite (unbounded by creaturely limits), a metaphysical attribute of magnitude, not the specific epistemic claim that God's counsel cannot be exhaustively rationally penetrated; this is a neighbouring proposition, not the predicate itself.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The phrase is verbatim and the subject includes the Father, and the Creed asserts it in its own voice, but 'incomprehensible' here means immeasurable/infinite in magnitude (paired with 'uncreate', 'eternal', 'Almighty') rather than an assertion that God's counsel resists exhaustive rational penetration, so the predicate as defined is not actually asserted—only a neighbouring attribute sharing the same word.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "847c53141927540d8ac352c9",
+     "replicate_call_ids": [
+      "847c53141927540d8ac352c9",
+      "22140a868ffae40631ce1590",
+      "18bc7535431b0eda646b594d"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "sonnet",
+      "call_id": "847c53141927540d8ac352c9",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father, the Son, and the Holy Ghost (Father named explicitly among the three)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Creed asserts in its own voice a series of co-equal attributes of the Trinity, including 'incomprehensible', as part of its confessional statement of faith.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "In this creedal series ('uncreate', 'incomprehensible', 'eternal', 'Almighty'), 'incomprehensible' denotes the traditional sense of immeasurable/infinite (unbounded by creaturely limits), a metaphysical attribute of magnitude, not the specific epistemic claim that God's counsel cannot be exhaustively rationally penetrated; this is a neighbouring proposition, not the predicate itself.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The phrase is verbatim and the subject includes the Father, and the Creed asserts it in its own voice, but 'incomprehensible' here means immeasurable/infinite in magnitude (paired with 'uncreate', 'eternal', 'Almighty') rather than an assertion that God's counsel resists exhaustive rational penetration, so the predicate as defined is not actually asserted—only a neighbouring attribute sharing the same word.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (Father named explicitly among the three)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Creed asserts in its own voice a series of co-equal attributes of the Trinity, including 'incomprehensible', as part of its confessional statement of faith.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"In this creedal series ('uncreate', 'incomprehensible', 'eternal', 'Almighty'), 'incomprehensible' denotes the traditional sense of immeasurable/infinite (unbounded by creaturely limits), a metaphysical attribute of magnitude, not the specific epistemic claim that God's counsel cannot be exhaustively rationally penetrated; this is a neighbouring proposition, not the predicate itself.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The phrase is verbatim and the subject includes the Father, and the Creed asserts it in its own voice, but 'incomprehensible' here means immeasurable/infinite in magnitude (paired with 'uncreate', 'eternal', 'Almighty') rather than an assertion that God's counsel resists exhaustive rational penetration, so the predicate as defined is not actually asserted—only a neighbouring attribute sharing the same word.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "22140a868ffae40631ce1590",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father, the Son, and the Holy Ghost",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this positively in its own voice as part of the Catholic Faith.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The creed's use of 'incomprehensible' here means unbounded/immeasurable in substance (paired with 'uncreate' and 'eternal' to describe divine infinitude), not the epistemic claim that divine counsel resists exhaustive rational penetration; the passage does not address God's counsel, plans, or reasoning at all.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The word 'incomprehensible' is present verbatim and predicated of the divine Persons, but in this creedal context it asserts metaphysical immensity/infinitude of substance, not the inscrutability of divine counsel defined by the predicate, so the actual proposition asserted is a neighbouring one rather than the predicate itself.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this positively in its own voice as part of the Catholic Faith.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The creed's use of 'incomprehensible' here means unbounded/immeasurable in substance (paired with 'uncreate' and 'eternal' to describe divine infinitude), not the epistemic claim that divine counsel resists exhaustive rational penetration; the passage does not address God's counsel, plans, or reasoning at all.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The word 'incomprehensible' is present verbatim and predicated of the divine Persons, but in this creedal context it asserts metaphysical immensity/infinitude of substance, not the inscrutability of divine counsel defined by the predicate, so the actual proposition asserted is a neighbouring one rather than the predicate itself.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "18bc7535431b0eda646b594d",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father, the Son, and the Holy Ghost (each ascribed 'incomprehensible')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Creed asserts this doctrinal formula in its own voice as part of the Catholic Faith.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The Creed's 'incomprehensible' here is a technical term for divine infinitude/unboundedness (paired with 'uncreate' and 'eternal' in a triadic metaphysical formula, later unified as 'one incomprehensible' meaning one infinite substance), not an assertion about the unsearchability or inscrutability of God's counsel or plans; the passage does not address rational penetration of divine purposes at all.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The word 'incomprehensible' is present verbatim and asserted of divine Persons, but it denotes metaphysical immensity/unboundedness in this Trinitarian formula, not the epistemic inscrutability of divine counsel required by the predicate, so the proposition asserted is a neighbouring attribute rather than the predicate itself.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (each ascribed 'incomprehensible')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Creed asserts this doctrinal formula in its own voice as part of the Catholic Faith.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The Creed's 'incomprehensible' here is a technical term for divine infinitude/unboundedness (paired with 'uncreate' and 'eternal' in a triadic metaphysical formula, later unified as 'one incomprehensible' meaning one infinite substance), not an assertion about the unsearchability or inscrutability of God's counsel or plans; the passage does not address rational penetration of divine purposes at all.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The word 'incomprehensible' is present verbatim and asserted of divine Persons, but it denotes metaphysical immensity/unboundedness in this Trinitarian formula, not the epistemic inscrutability of divine counsel required by the predicate, so the proposition asserted is a neighbouring attribute rather than the predicate itself.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     }
+    ]
+   },
+   "reverified": {
+    "at": "2026-09-20T06:16:49Z",
+    "prompt_version": "gate6-v1.3",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "votes_per_candidate": 3,
+    "repointed": {
+     "registry_id_at_run": "BSR-AN-04",
+     "registry_id_now": "BSR-AN-06",
+     "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+     "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+     "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+     "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+     "chars_at_run": 2720,
+     "chars_now": 3633,
+     "cross_row": true,
+     "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+     "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+    },
+    "required_subject": "GOD (the one God, or the Father; not the Church, not humanity, not Christ's human nature)"
    }
   }
  },

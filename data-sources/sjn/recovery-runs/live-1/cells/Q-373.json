@@ -1818,6 +1818,30 @@
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": null,
+     "call_count": 1,
+     "voting": "SINGLE_CALL",
+     "vote_split": null,
+     "majority_class": null,
+     "dissent": null,
+     "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+    },
+    "v13_majority": false,
+    "public_certification_eligible": false,
+    "public_certification_bar": "R6-54 (Codex C1(a)): no seated verdict reaches public certification on anything but a gate6-v1.3 MAJORITY verdict. This verdict's instrument is sonnet: None x1 (SINGLE_CALL)",
+    "review_queue_reasons": [],
     "overturned": false,
     "direction": null
    },
@@ -1832,35 +1856,13 @@
    }
   },
   "Q-373-p1-BSR-AN-04-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "c51fd4b6a4f44d6dc671c262",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "Y",
-    "grammatical_subject": "The Father ... the Son ... the Holy Ghost",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The Athanasian Creed asserts in its own voice that each Person, and God as one, is incomprehensible.",
-    "floor": "FULL",
-    "floor_reason": "The passage directly predicates incomprehensibility of the Father (and unites this in 'one incomprehensible'), asserting denial of exhaustive comprehension of God.",
-    "hazard_flags": [
-     "FAMILY_VARIATION"
-    ],
-    "verdict_model": "ACCEPT",
-    "reason_code": "OK",
-    "reason": "Verbatim phrase present, subject is the Father/Trinity (God), and the creed asserts incomprehensibility as doctrine, matching the predicate's floor.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Athanasian Creed asserts in its own voice that each Person, and God as one, is incomprehensible.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly predicates incomprehensibility of the Father (and unites this in 'one incomprehensible'), asserting denial of exhaustive comprehension of God.\", \"hazard_flags\": [\"FAMILY_VARIATION\"], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase present, subject is the Father/Trinity (God), and the creed asserts incomprehensibility as doctrine, matching the predicate's floor.\"}",
-    "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK"
-   },
    "_route": null,
    "final": {
-    "verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict": "ACCEPT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
     "floor_final": "FULL",
     "floor_by_model": {
@@ -1870,6 +1872,69 @@
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "ACCEPT": 2,
+       "ACCEPT_WITH_CAVEAT": 1
+      },
+      "majority_class": "ACCEPT",
+      "majority_share": "2/3",
+      "dissent": true,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "FULL",
+       "FULL",
+       "FULL"
+      ],
+      "floor_merged": "FULL",
+      "representative_call_id": "853b49a3b108b28bdd636ae3",
+      "replicate_call_ids": [
+       "853b49a3b108b28bdd636ae3",
+       "fc566d10eda744d75e37bf6f",
+       "4d51c3a7b36197431423c46f"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "ACCEPT": 2,
+      "ACCEPT_WITH_CAVEAT": 1
+     },
+     "majority_class": "ACCEPT",
+     "majority_share": "2/3",
+     "dissent": true,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "FULL",
+      "FULL",
+      "FULL"
+     ],
+     "floor_merged": "FULL",
+     "representative_call_id": "853b49a3b108b28bdd636ae3",
+     "replicate_call_ids": [
+      "853b49a3b108b28bdd636ae3",
+      "fc566d10eda744d75e37bf6f",
+      "4d51c3a7b36197431423c46f"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "v13_majority": true,
+    "public_certification_eligible": true,
+    "review_queue_reasons": [
+     "DISSENTING_VOTE"
+    ],
     "overturned": false,
     "direction": null
    },
@@ -1881,6 +1946,234 @@
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-20T06:11:31Z",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "c51fd4b6a4f44d6dc671c262",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father ... the Son ... the Holy Ghost",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Athanasian Creed asserts in its own voice that each Person, and God as one, is incomprehensible.",
+      "floor": "FULL",
+      "floor_reason": "The passage directly predicates incomprehensibility of the Father (and unites this in 'one incomprehensible'), asserting denial of exhaustive comprehension of God.",
+      "hazard_flags": [
+       "FAMILY_VARIATION"
+      ],
+      "verdict_model": "ACCEPT",
+      "reason_code": "OK",
+      "reason": "Verbatim phrase present, subject is the Father/Trinity (God), and the creed asserts incomprehensibility as doctrine, matching the predicate's floor.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Athanasian Creed asserts in its own voice that each Person, and God as one, is incomprehensible.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly predicates incomprehensibility of the Father (and unites this in 'one incomprehensible'), asserting denial of exhaustive comprehension of God.\", \"hazard_flags\": [\"FAMILY_VARIATION\"], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase present, subject is the Father/Trinity (God), and the creed asserts incomprehensibility as doctrine, matching the predicate's floor.\"}",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "OK"
+     }
+    },
+    "final": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "FULL",
+     "floor_by_model": {
+      "sonnet": "FULL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "repointed": {
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+    "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+    "chars_at_run": 2720,
+    "chars_now": 3633,
+    "cross_row": true,
+    "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+    "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "853b49a3b108b28bdd636ae3",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "The Father ... the Son ... the Holy Ghost",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed positively asserts the Trinity's attributes in its own doctrinal voice, not as a report of another's view.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that the Father (God) is incomprehensible, matching the predicate for the required subject.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The quoted phrase is verbatim, the subject is God (Father/Son/Spirit), and the creed asserts incomprehensibility directly and affirmatively.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed positively asserts the Trinity's attributes in its own doctrinal voice, not as a report of another's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the Father (God) is incomprehensible, matching the predicate for the required subject.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The quoted phrase is verbatim, the subject is God (Father/Son/Spirit), and the creed asserts incomprehensibility directly and affirmatively.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "ACCEPT": 2,
+      "ACCEPT_WITH_CAVEAT": 1
+     },
+     "majority_class": "ACCEPT",
+     "majority_share": "2/3",
+     "dissent": true,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "FULL",
+      "FULL",
+      "FULL"
+     ],
+     "floor_merged": "FULL",
+     "representative_call_id": "853b49a3b108b28bdd636ae3",
+     "replicate_call_ids": [
+      "853b49a3b108b28bdd636ae3",
+      "fc566d10eda744d75e37bf6f",
+      "4d51c3a7b36197431423c46f"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "sonnet",
+      "call_id": "853b49a3b108b28bdd636ae3",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father ... the Son ... the Holy Ghost",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed positively asserts the Trinity's attributes in its own doctrinal voice, not as a report of another's view.",
+      "floor": "FULL",
+      "floor_reason": "The passage directly asserts that the Father (God) is incomprehensible, matching the predicate for the required subject.",
+      "hazard_flags": [],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "ACCEPT",
+      "reason_code": "OK",
+      "reason": "The quoted phrase is verbatim, the subject is God (Father/Son/Spirit), and the creed asserts incomprehensibility directly and affirmatively.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed positively asserts the Trinity's attributes in its own doctrinal voice, not as a report of another's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the Father (God) is incomprehensible, matching the predicate for the required subject.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The quoted phrase is verbatim, the subject is God (Father/Son/Spirit), and the creed asserts incomprehensibility directly and affirmatively.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT",
+      "reason_code_final": "OK"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "fc566d10eda744d75e37bf6f",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father (also the Son, and the Holy Ghost)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this in its own voice as part of the Catholic Faith to be held, not as a report of another's view.",
+      "floor": "FULL",
+      "floor_reason": "The passage directly predicates 'incomprehensible' of the Father (a required subject) as a positive doctrinal assertion, matching the predicate's sense of denying exhaustive comprehension.",
+      "hazard_flags": [],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "ACCEPT",
+      "reason_code": "OK",
+      "reason": "Verbatim phrase, correct subject (the Father), asserted as doctrine in the creed's own voice, fully matching the predicate definition.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father (also the Son, and the Holy Ghost)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this in its own voice as part of the Catholic Faith to be held, not as a report of another's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly predicates 'incomprehensible' of the Father (a required subject) as a positive doctrinal assertion, matching the predicate's sense of denying exhaustive comprehension.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase, correct subject (the Father), asserted as doctrine in the creed's own voice, fully matching the predicate definition.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT",
+      "reason_code_final": "OK"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "4d51c3a7b36197431423c46f",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father ... the Son ... and the Holy Ghost",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed positively asserts each Person's incomprehensibility as part of its confessional statement of the Catholic Faith.",
+      "floor": "FULL",
+      "floor_reason": "The passage asserts that the Father is incomprehensible, and clarifies this is not three incomprehensibles but 'one incomprehensible,' directly affirming the predicate of the one God.",
+      "hazard_flags": [
+       "FAMILY_VARIATION"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "ACCEPT",
+      "reason_code": "OK",
+      "reason": "The phrase is verbatim, the subject includes the Father (and by unity, one God), and the assertion is made in the creed's own declarative voice as part of the Catholic Faith, satisfying the predicate fully.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... and the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed positively asserts each Person's incomprehensibility as part of its confessional statement of the Catholic Faith.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage asserts that the Father is incomprehensible, and clarifies this is not three incomprehensibles but 'one incomprehensible,' directly affirming the predicate of the one God.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"FAMILY_VARIATION\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject includes the Father (and by unity, one God), and the assertion is made in the creed's own declarative voice as part of the Catholic Faith, satisfying the predicate fully.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "OK"
+     }
+    ]
+   },
+   "reverified": {
+    "at": "2026-09-20T06:16:49Z",
+    "prompt_version": "gate6-v1.3",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "votes_per_candidate": 3,
+    "repointed": {
+     "registry_id_at_run": "BSR-AN-04",
+     "registry_id_now": "BSR-AN-06",
+     "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+     "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+     "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+     "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+     "chars_at_run": 2720,
+     "chars_now": 3633,
+     "cross_row": true,
+     "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+     "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+    },
+    "required_subject": "GOD (the one God, or the Father; not the Church, not humanity, not Christ's human nature)"
    }
   },
   "Q-373-p1-BSR-AN-03-2": {
@@ -1922,6 +2215,30 @@
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": null,
+     "call_count": 1,
+     "voting": "SINGLE_CALL",
+     "vote_split": null,
+     "majority_class": null,
+     "dissent": null,
+     "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+    },
+    "v13_majority": false,
+    "public_certification_eligible": false,
+    "public_certification_bar": "R6-54 (Codex C1(a)): no seated verdict reaches public certification on anything but a gate6-v1.3 MAJORITY verdict. This verdict's instrument is sonnet: None x1 (SINGLE_CALL)",
+    "review_queue_reasons": [],
     "overturned": false,
     "direction": null
    },
@@ -1936,35 +2253,13 @@
    }
   },
   "Q-373-p1-BSR-AN-04-2": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "6f8f875fa5268455acdddc5b",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "Y",
-    "grammatical_subject": "they (the Godhead of Father, Son, and Holy Ghost, i.e., the one God)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The creed asserts this doctrinal formula in its own voice as a positive statement of faith, not as a report of an opponent's view.",
-    "floor": "FULL",
-    "floor_reason": "The passage directly denies that the divine substance is comprehensible, asserting 'one incomprehensible' of the one God, matching the predicate's definition of denying exhaustive intellectual comprehension.",
-    "hazard_flags": [
-     "SEMANTIC_FLOOR"
-    ],
-    "verdict_model": "ACCEPT",
-    "reason_code": "OK",
-    "reason": "The phrase is verbatim, the subject is the one God (via the Trinitarian formula), and the Athanasian Creed asserts incomprehensibility of the divine substance in its own voice, fully matching the predicate.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"they (the Godhead of Father, Son, and Holy Ghost, i.e., the one God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this doctrinal formula in its own voice as a positive statement of faith, not as a report of an opponent's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly denies that the divine substance is comprehensible, asserting 'one incomprehensible' of the one God, matching the predicate's definition of denying exhaustive intellectual comprehension.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the one God (via the Trinitarian formula), and the Athanasian Creed asserts incomprehensibility of the divine substance in its own voice, fully matching the predicate.\"}",
-    "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK"
-   },
    "_route": null,
    "final": {
-    "verdict": "ACCEPT_WITH_CAVEAT",
+    "verdict": "ACCEPT",
     "reason_code_final": "OK",
     "adjudicated_by": "sonnet",
     "route": null,
-    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "primary_verdict": "ACCEPT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
     "floor_final": "FULL",
     "floor_by_model": {
@@ -1974,6 +2269,65 @@
     "lower_floor_applied": false,
     "second_rubric": null,
     "second_rubric_role": null,
+    "instrument": {
+     "sonnet": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "ACCEPT": 3
+      },
+      "majority_class": "ACCEPT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "FULL",
+       "FULL",
+       "FULL"
+      ],
+      "floor_merged": "FULL",
+      "representative_call_id": "98908b24a36572381c813ae6",
+      "replicate_call_ids": [
+       "98908b24a36572381c813ae6",
+       "71dfadb4253d1138f78ac340",
+       "53893ad64e382d126e640d98"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "ACCEPT": 3
+     },
+     "majority_class": "ACCEPT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "FULL",
+      "FULL",
+      "FULL"
+     ],
+     "floor_merged": "FULL",
+     "representative_call_id": "98908b24a36572381c813ae6",
+     "replicate_call_ids": [
+      "98908b24a36572381c813ae6",
+      "71dfadb4253d1138f78ac340",
+      "53893ad64e382d126e640d98"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "v13_majority": true,
+    "public_certification_eligible": true,
+    "review_queue_reasons": [],
     "overturned": false,
     "direction": null
    },
@@ -1985,6 +2339,231 @@
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-20T06:11:31Z",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "6f8f875fa5268455acdddc5b",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "they (the Godhead of Father, Son, and Holy Ghost, i.e., the one God)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this doctrinal formula in its own voice as a positive statement of faith, not as a report of an opponent's view.",
+      "floor": "FULL",
+      "floor_reason": "The passage directly denies that the divine substance is comprehensible, asserting 'one incomprehensible' of the one God, matching the predicate's definition of denying exhaustive intellectual comprehension.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "verdict_model": "ACCEPT",
+      "reason_code": "OK",
+      "reason": "The phrase is verbatim, the subject is the one God (via the Trinitarian formula), and the Athanasian Creed asserts incomprehensibility of the divine substance in its own voice, fully matching the predicate.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"they (the Godhead of Father, Son, and Holy Ghost, i.e., the one God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this doctrinal formula in its own voice as a positive statement of faith, not as a report of an opponent's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly denies that the divine substance is comprehensible, asserting 'one incomprehensible' of the one God, matching the predicate's definition of denying exhaustive intellectual comprehension.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the one God (via the Trinitarian formula), and the Athanasian Creed asserts incomprehensibility of the divine substance in its own voice, fully matching the predicate.\"}",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "OK"
+     }
+    },
+    "final": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "FULL",
+     "floor_by_model": {
+      "sonnet": "FULL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": null,
+     "second_rubric_role": null,
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "adjudicated_by": "sonnet",
+     "route": null,
+     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "repointed": {
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+    "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+    "chars_at_run": 2720,
+    "chars_now": 3633,
+    "cross_row": true,
+    "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+    "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "98908b24a36572381c813ae6",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "implied 'they' (the Father, Son, and Holy Ghost) as one God/Godhead — i.e. 'one uncreated, and one incomprehensible' refers to the one God",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed asserts this directly as part of its own doctrinal statement, not quoting or refuting an opponent.",
+    "floor": "FULL",
+    "floor_reason": "The passage directly asserts that the one God (in three co-equal Persons) is incomprehensible, matching the predicate's definition of denying exhaustive intellectual comprehension of God.",
+    "hazard_flags": [],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "ACCEPT",
+    "reason_code": "OK",
+    "reason": "The phrase is verbatim, the subject is the one God (Trinity), and the assertion is made in the creed's own voice, fully matching the predicate of divine incomprehensibility.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"implied 'they' (the Father, Son, and Holy Ghost) as one God/Godhead — i.e. 'one uncreated, and one incomprehensible' refers to the one God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this directly as part of its own doctrinal statement, not quoting or refuting an opponent.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the one God (in three co-equal Persons) is incomprehensible, matching the predicate's definition of denying exhaustive intellectual comprehension of God.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the one God (Trinity), and the assertion is made in the creed's own voice, fully matching the predicate of divine incomprehensibility.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT",
+    "reason_code_final": "OK",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "ACCEPT": 3
+     },
+     "majority_class": "ACCEPT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "FULL",
+      "FULL",
+      "FULL"
+     ],
+     "floor_merged": "FULL",
+     "representative_call_id": "98908b24a36572381c813ae6",
+     "replicate_call_ids": [
+      "98908b24a36572381c813ae6",
+      "71dfadb4253d1138f78ac340",
+      "53893ad64e382d126e640d98"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "sonnet",
+      "call_id": "98908b24a36572381c813ae6",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "implied 'they' (the Father, Son, and Holy Ghost) as one God/Godhead — i.e. 'one uncreated, and one incomprehensible' refers to the one God",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this directly as part of its own doctrinal statement, not quoting or refuting an opponent.",
+      "floor": "FULL",
+      "floor_reason": "The passage directly asserts that the one God (in three co-equal Persons) is incomprehensible, matching the predicate's definition of denying exhaustive intellectual comprehension of God.",
+      "hazard_flags": [],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "ACCEPT",
+      "reason_code": "OK",
+      "reason": "The phrase is verbatim, the subject is the one God (Trinity), and the assertion is made in the creed's own voice, fully matching the predicate of divine incomprehensibility.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"implied 'they' (the Father, Son, and Holy Ghost) as one God/Godhead — i.e. 'one uncreated, and one incomprehensible' refers to the one God\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this directly as part of its own doctrinal statement, not quoting or refuting an opponent.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the one God (in three co-equal Persons) is incomprehensible, matching the predicate's definition of denying exhaustive intellectual comprehension of God.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The phrase is verbatim, the subject is the one God (Trinity), and the assertion is made in the creed's own voice, fully matching the predicate of divine incomprehensibility.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT",
+      "reason_code_final": "OK"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "71dfadb4253d1138f78ac340",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "they [the Father, Son, and Holy Ghost, i.e., the one God/Godhead]",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this doctrinal statement in its own voice, not reporting or refuting an opponent's view.",
+      "floor": "FULL",
+      "floor_reason": "The passage directly asserts that the one God (Trinity) is incomprehensible, denying that comprehension is exhaustive or threefold, matching the predicate in full.",
+      "hazard_flags": [],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "ACCEPT",
+      "reason_code": "OK",
+      "reason": "The verbatim phrase occurs within a direct doctrinal assertion that God (the Trinity as one) is incomprehensible, satisfying subject, assertion, and floor requirements without reliance on a formula.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"they [the Father, Son, and Holy Ghost, i.e., the one God/Godhead]\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this doctrinal statement in its own voice, not reporting or refuting an opponent's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage directly asserts that the one God (Trinity) is incomprehensible, denying that comprehension is exhaustive or threefold, matching the predicate in full.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The verbatim phrase occurs within a direct doctrinal assertion that God (the Trinity as one) is incomprehensible, satisfying subject, assertion, and floor requirements without reliance on a formula.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT",
+      "reason_code_final": "OK"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "53893ad64e382d126e640d98",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "they (the three Persons, collectively the one God/Godhead) — 'but one uncreated, and one incomprehensible'",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed directly asserts this as Catholic doctrine, not reporting or denying an opponent's view.",
+      "floor": "FULL",
+      "floor_reason": "The passage explicitly predicates 'incomprehensible' of the one God (unified Godhead of Father, Son, Holy Ghost), directly asserting the denial of exhaustive comprehension.",
+      "hazard_flags": [],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "ACCEPT",
+      "reason_code": "OK",
+      "reason": "The quoted phrase is verbatim, the subject is the one God (via the Trinity formula), and the creed asserts incomprehensibility as a positive doctrinal claim in its own voice.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"they (the three Persons, collectively the one God/Godhead) — 'but one uncreated, and one incomprehensible'\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed directly asserts this as Catholic doctrine, not reporting or denying an opponent's view.\", \"floor\": \"FULL\", \"floor_reason\": \"The passage explicitly predicates 'incomprehensible' of the one God (unified Godhead of Father, Son, Holy Ghost), directly asserting the denial of exhaustive comprehension.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT\", \"reason_code\": \"OK\", \"reason\": \"The quoted phrase is verbatim, the subject is the one God (via the Trinity formula), and the creed asserts incomprehensibility as a positive doctrinal claim in its own voice.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT",
+      "reason_code_final": "OK"
+     }
+    ]
+   },
+   "reverified": {
+    "at": "2026-09-20T06:16:49Z",
+    "prompt_version": "gate6-v1.3",
+    "models": [
+     "sonnet"
+    ],
+    "route_kept": null,
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "votes_per_candidate": 3,
+    "repointed": {
+     "registry_id_at_run": "BSR-AN-04",
+     "registry_id_now": "BSR-AN-06",
+     "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+     "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+     "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+     "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+     "chars_at_run": 2720,
+     "chars_now": 3633,
+     "cross_row": true,
+     "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+     "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+    },
+    "required_subject": "GOD (the one God, or the Father; not the Church, not humanity, not Christ's human nature)"
    }
   }
  },
@@ -2188,6 +2767,15 @@
  },
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-373-p1-BSR-AN-04-1": [
+    "ACCEPT_WITH_CAVEAT",
+    "ACCEPT"
+   ],
+   "Q-373-p1-BSR-AN-04-2": [
+    "ACCEPT_WITH_CAVEAT",
+    "ACCEPT"
+   ]
+  }
  }
 }

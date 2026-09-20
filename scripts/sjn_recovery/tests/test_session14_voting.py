@@ -16,8 +16,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspa
 
 from sjn_recovery import review_queue, prompts  # noqa: E402
 from sjn_recovery.config import RUNS_DIR  # noqa: E402
-from sjn_recovery.agents import (CellRunner, VOTES_PER_CANDIDATE, VOTING_MAJORITY, VOTING_SINGLE_CALL,  # noqa: E402
-                                 instrument, is_voted_v13, vote)
+from sjn_recovery.agents import (CellRunner, PUBLIC_CERTIFICATION_VERSION, VOTES_PER_CANDIDATE,  # noqa: E402
+                                 VOTING_MAJORITY, VOTING_SINGLE_CALL, instrument, is_voted_v13, vote)
 
 
 def _reply(floor, verdict="ACCEPT", subj="Y", act="Y", code="OK", **extra):
@@ -203,17 +203,29 @@ def test_no_seated_verdict_reaches_public_certification_on_anything_but_a_v13_ma
     # a majority at another version is not eligible either
     voted = vote([_draw("ACCEPT", "FULL", "gate6-v1.2")] * 3)
     assert is_voted_v13(voted) is False
-    # and every verdict the seven finished branches actually carry is a SINGLE call: not one is eligible
-    seen = 0
+    # and over the REAL store: every stored rubric is EITHER a pre-session-14 single call (never eligible,
+    # whatever its version) OR a gate6-v1.3 majority this harness wrote. Until session 14 phase 6 the store held
+    # nothing but the first kind; the second kind arrives only by a voted run, and eligibility must track the
+    # INSTRUMENT, never the age of the record. Both limbs are asserted, so a single call can never be relabelled
+    # a majority and a majority can never be demoted to a single call.
+    seen = single = major = 0
     for f in sorted(glob.glob(os.path.join(RUNS_DIR, "live-1", "cells", "*.json")))[:40]:
         state = json.load(open(f, encoding="utf-8"))
         for cid, ver in (state.get("verifications") or {}).items():
             for m, rub in ver.items():
                 if isinstance(rub, dict) and m not in ("final", "_route", "final_at_run", "superseded_rubrics", "reverified"):
                     seen += 1
-                    assert instrument(rub)["voting"] == VOTING_SINGLE_CALL, (f, cid, m)
-                    assert is_voted_v13(rub) is False, (f, cid, m)
+                    inst = instrument(rub)
+                    if inst["voting"] == VOTING_SINGLE_CALL:
+                        single += 1
+                        assert is_voted_v13(rub) is False, (f, cid, m)
+                    else:
+                        major += 1
+                        assert inst["voting"].startswith("MAJORITY_OF_"), (f, cid, m)
+                        assert inst["prompt_version"] == PUBLIC_CERTIFICATION_VERSION, (f, cid, m)
+                        assert is_voted_v13(rub) is True, (f, cid, m)
     assert seen > 100, "the test binds only if it read real stored rubrics"
+    assert single > 100, "the pre-session-14 single-call rubrics must still be labelled as what they are"
 
 
 # ---------------------------------------------------------------- C3(a): doubt, and the queue

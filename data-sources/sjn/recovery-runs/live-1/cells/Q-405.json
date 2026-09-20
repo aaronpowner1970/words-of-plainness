@@ -2833,54 +2833,7 @@
  },
  "verifications": {
   "Q-405-p1-BSR-AN-04-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "30bce4e1da5cd77283b22c5c",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "Y",
-    "grammatical_subject": "The Father, the Son, and the Holy Ghost (Trinity)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The Athanasian Creed positively asserts the incomprehensibility of each divine Person.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The passage asserts intra-Trinitarian equality (each Person equally incomprehensible, not more or less than another) — a statement about co-equality within the Godhead, not a denial of Creator-creature likeness or comparison.",
-    "hazard_flags": [
-     "SAME_WORD_DIFFERENT_MEANING",
-     "SEMANTIC_FLOOR"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "BELOW_FLOOR",
-    "reason": "The term 'incomprehensible' here functions within Trinitarian coequality logic (no Person is more incomprehensible than another), not as a claim about the inadequacy of Creator-creature analogy; the predicate concerns a different relation entirely.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (Trinity)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Athanasian Creed positively asserts the incomprehensibility of each divine Person.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts intra-Trinitarian equality (each Person equally incomprehensible, not more or less than another) — a statement about co-equality within the Godhead, not a denial of Creator-creature likeness or comparison.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The term 'incomprehensible' here functions within Trinitarian coequality logic (no Person is more incomprehensible than another), not as a claim about the inadequacy of Creator-creature analogy; the predicate concerns a different relation entirely.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "BELOW_FLOOR"
-   },
    "_route": "PRIMARY_REJECTED_ALL",
-   "opus": {
-    "model": "opus",
-    "call_id": "ae5b2e0ac9d695872eebb392",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "Y",
-    "grammatical_subject": "The Father ... the Son ... the Holy Ghost (the triune God)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The creedal text (Quicunque Vult, printed after the Catechism in this chunk) asserts this in its own voice as part of 'the Catholic Faith'.",
-    "floor": "WORD_ONLY",
-    "floor_reason": "The passage predicates incomprehensibility (in the creed's Latin sense, immensus/immeasurable) of each Person, which is an assertion of divine immensity or epistemic limit, not an assertion that no likeness or comparison between Creator and creature is adequate; the required proposition about analogical rather than univocal correspondence is nowhere stated.",
-    "hazard_flags": [
-     "SAME_WORD_DIFFERENT_MEANING",
-     "SEMANTIC_FLOOR",
-     "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE"
-    ],
-    "verdict_model": "REJECT",
-    "reason_code": "BELOW_FLOOR",
-    "reason": "Phrase, subject and speech act all check out, but the floor note expressly distinguishes shared epistemic restraint from the denial of adequate Creator-creature likeness; 'incomprehensible' here renders immensus and asserts immeasurability, not the absence of univocal correspondence. The locator also names a Catechism question while the quoted words come from the appended Athanasian Creed.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost (the triune God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creedal text (Quicunque Vult, printed after the Catechism in this chunk) asserts this in its own voice as part of 'the Catholic Faith'.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage predicates incomprehensibility (in the creed's Latin sense, immensus/immeasurable) of each Person, which is an assertion of divine immensity or epistemic limit, not an assertion that no likeness or comparison between Creator and creature is adequate; the required proposition about analogical rather than univocal correspondence is nowhere stated.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\", \"HISTORICAL_ANTECEDENT_VS_EQUIVALENCE\"], \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"Phrase, subject and speech act all check out, but the floor note expressly distinguishes shared epistemic restraint from the denial of adequate Creator-creature likeness; 'incomprehensible' here renders immensus and asserts immeasurability, not the absence of univocal correspondence. The locator also names a Catechism question while the quoted words come from the appended Athanasian Creed.\"}",
-    "verdict": "REJECT",
-    "reason_code_final": "BELOW_FLOOR"
-   },
    "final": {
     "verdict": "REJECT",
     "reason_code_final": "BELOW_FLOOR",
@@ -2897,6 +2850,92 @@
     "lower_floor_applied": false,
     "second_rubric": "opus",
     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "instrument": {
+     "sonnet": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "REJECT": 3
+      },
+      "majority_class": "REJECT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "WORD_ONLY",
+       "WORD_ONLY",
+       "WORD_ONLY"
+      ],
+      "floor_merged": "WORD_ONLY",
+      "representative_call_id": "82184f3603c33e4c93647113",
+      "replicate_call_ids": [
+       "82184f3603c33e4c93647113",
+       "84875f78b6b8e7692af9498a",
+       "17888d2d4a755e13de3a0245"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     },
+     "opus": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "REJECT": 3
+      },
+      "majority_class": "REJECT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "WORD_ONLY",
+       "WORD_ONLY",
+       "WORD_ONLY"
+      ],
+      "floor_merged": "WORD_ONLY",
+      "representative_call_id": "b5502f6ff2bfd84f44597680",
+      "replicate_call_ids": [
+       "b5502f6ff2bfd84f44597680",
+       "4897ea1e98b479840e45d0a7",
+       "40ce7718760d89aa60f4ab9d"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "b5502f6ff2bfd84f44597680",
+     "replicate_call_ids": [
+      "b5502f6ff2bfd84f44597680",
+      "4897ea1e98b479840e45d0a7",
+      "40ce7718760d89aa60f4ab9d"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "v13_majority": true,
+    "public_certification_eligible": true,
+    "review_queue_reasons": [],
     "adjudicator_verdict": "REJECT",
     "overturned": false,
     "direction": null
@@ -2909,71 +2948,518 @@
     "primary_verdict": "REJECT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-20T06:11:31Z",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "30bce4e1da5cd77283b22c5c",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father, the Son, and the Holy Ghost (Trinity)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Athanasian Creed positively asserts the incomprehensibility of each divine Person.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts intra-Trinitarian equality (each Person equally incomprehensible, not more or less than another) — a statement about co-equality within the Godhead, not a denial of Creator-creature likeness or comparison.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "SEMANTIC_FLOOR"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The term 'incomprehensible' here functions within Trinitarian coequality logic (no Person is more incomprehensible than another), not as a claim about the inadequacy of Creator-creature analogy; the predicate concerns a different relation entirely.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (Trinity)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Athanasian Creed positively asserts the incomprehensibility of each divine Person.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts intra-Trinitarian equality (each Person equally incomprehensible, not more or less than another) — a statement about co-equality within the Godhead, not a denial of Creator-creature likeness or comparison.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The term 'incomprehensible' here functions within Trinitarian coequality logic (no Person is more incomprehensible than another), not as a claim about the inadequacy of Creator-creature analogy; the predicate concerns a different relation entirely.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     "opus": {
+      "model": "opus",
+      "call_id": "ae5b2e0ac9d695872eebb392",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father ... the Son ... the Holy Ghost (the triune God)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creedal text (Quicunque Vult, printed after the Catechism in this chunk) asserts this in its own voice as part of 'the Catholic Faith'.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage predicates incomprehensibility (in the creed's Latin sense, immensus/immeasurable) of each Person, which is an assertion of divine immensity or epistemic limit, not an assertion that no likeness or comparison between Creator and creature is adequate; the required proposition about analogical rather than univocal correspondence is nowhere stated.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "SEMANTIC_FLOOR",
+       "HISTORICAL_ANTECEDENT_VS_EQUIVALENCE"
+      ],
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "Phrase, subject and speech act all check out, but the floor note expressly distinguishes shared epistemic restraint from the denial of adequate Creator-creature likeness; 'incomprehensible' here renders immensus and asserts immeasurability, not the absence of univocal correspondence. The locator also names a Catechism question while the quoted words come from the appended Athanasian Creed.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost (the triune God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creedal text (Quicunque Vult, printed after the Catechism in this chunk) asserts this in its own voice as part of 'the Catholic Faith'.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage predicates incomprehensibility (in the creed's Latin sense, immensus/immeasurable) of each Person, which is an assertion of divine immensity or epistemic limit, not an assertion that no likeness or comparison between Creator and creature is adequate; the required proposition about analogical rather than univocal correspondence is nowhere stated.\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\", \"HISTORICAL_ANTECEDENT_VS_EQUIVALENCE\"], \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"Phrase, subject and speech act all check out, but the floor note expressly distinguishes shared epistemic restraint from the denial of adequate Creator-creature likeness; 'incomprehensible' here renders immensus and asserts immeasurability, not the absence of univocal correspondence. The locator also names a Catechism question while the quoted words come from the appended Athanasian Creed.\"}",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     }
+    },
+    "final": {
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "adjudicated_by": "opus",
+     "route": "PRIMARY_REJECTED_ALL",
+     "primary_verdict": "REJECT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "WORD_ONLY",
+     "floor_by_model": {
+      "sonnet": "WORD_ONLY",
+      "opus": "WORD_ONLY"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": "opus",
+     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+     "adjudicator_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "REJECT",
+     "reason_code_final": "BELOW_FLOOR",
+     "adjudicated_by": "opus",
+     "route": "PRIMARY_REJECTED_ALL",
+     "primary_verdict": "REJECT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "repointed": {
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+    "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+    "chars_at_run": 2720,
+    "chars_now": 3633,
+    "cross_row": true,
+    "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+    "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "82184f3603c33e4c93647113",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "The Father, the Son, and the Holy Ghost (distributed appositional list, including 'the Father')",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed asserts incomprehensibility of each divine Person in its own voice as part of the Trinitarian confession.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage asserts that each divine Person is incomprehensible relative to the others within the Godhead's unity/equality, not that God is beyond adequate likeness or comparison to creatures; it never addresses Creator-creature correspondence at all.",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "reason": "The cited line concerns the equal incomprehensibility of the three Persons among themselves (an intra-Trinitarian attribute claim), a neighbouring proposition to the required predicate about denying adequate Creator-creature likeness, so the predicate itself is not asserted.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (distributed appositional list, including 'the Father')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts incomprehensibility of each divine Person in its own voice as part of the Trinitarian confession.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts that each divine Person is incomprehensible relative to the others within the Godhead's unity/equality, not that God is beyond adequate likeness or comparison to creatures; it never addresses Creator-creature correspondence at all.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The cited line concerns the equal incomprehensibility of the three Persons among themselves (an intra-Trinitarian attribute claim), a neighbouring proposition to the required predicate about denying adequate Creator-creature likeness, so the predicate itself is not asserted.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "82184f3603c33e4c93647113",
+     "replicate_call_ids": [
+      "82184f3603c33e4c93647113",
+      "84875f78b6b8e7692af9498a",
+      "17888d2d4a755e13de3a0245"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "sonnet",
+      "call_id": "82184f3603c33e4c93647113",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father, the Son, and the Holy Ghost (distributed appositional list, including 'the Father')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts incomprehensibility of each divine Person in its own voice as part of the Trinitarian confession.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts that each divine Person is incomprehensible relative to the others within the Godhead's unity/equality, not that God is beyond adequate likeness or comparison to creatures; it never addresses Creator-creature correspondence at all.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The cited line concerns the equal incomprehensibility of the three Persons among themselves (an intra-Trinitarian attribute claim), a neighbouring proposition to the required predicate about denying adequate Creator-creature likeness, so the predicate itself is not asserted.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (distributed appositional list, including 'the Father')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts incomprehensibility of each divine Person in its own voice as part of the Trinitarian confession.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts that each divine Person is incomprehensible relative to the others within the Godhead's unity/equality, not that God is beyond adequate likeness or comparison to creatures; it never addresses Creator-creature correspondence at all.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The cited line concerns the equal incomprehensibility of the three Persons among themselves (an intra-Trinitarian attribute claim), a neighbouring proposition to the required predicate about denying adequate Creator-creature likeness, so the predicate itself is not asserted.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "84875f78b6b8e7692af9498a",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father ... the Son ... and the Holy Ghost",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this in its own voice as part of its Trinitarian confession, not quoting or reporting an opponent's view.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts that the three divine Persons are equally incomprehensible to affirm their co-equality and unity within the Godhead, not that God is incomparable or unlike creation; 'incomprehensible' here functions as a shared divine attribute among Father, Son, and Spirit rather than a statement about Creator-creature analogy.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The word 'incomprehensible' appears verbatim and is predicated of the divine Persons, but its sense concerns intra-Trinitarian equality and unity, not the Creator-creature comparison the predicate requires, so the passage only meets the word-only floor.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... and the Holy Ghost\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this in its own voice as part of its Trinitarian confession, not quoting or reporting an opponent's view.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts that the three divine Persons are equally incomprehensible to affirm their co-equality and unity within the Godhead, not that God is incomparable or unlike creation; 'incomprehensible' here functions as a shared divine attribute among Father, Son, and Spirit rather than a statement about Creator-creature analogy.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The word 'incomprehensible' appears verbatim and is predicated of the divine Persons, but its sense concerns intra-Trinitarian equality and unity, not the Creator-creature comparison the predicate requires, so the passage only meets the word-only floor.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "17888d2d4a755e13de3a0245",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father, the Son, and the Holy Ghost (i.e., the divine Persons of the one God)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts in its own voice that each divine Person is incomprehensible.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts God's incomprehensibility (unable to be fully grasped by finite minds), which is a neighbouring claim about divine transcendence, not an assertion that there is 'no adequate likeness or comparison' between Creator and creature; the predicate itself is not stated.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": null,
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father, the Son, and the Holy Ghost (i.e., the divine Persons of the one God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts in its own voice that each divine Person is incomprehensible.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts God's incomprehensibility (unable to be fully grasped by finite minds), which is a neighbouring claim about divine transcendence, not an assertion that there is 'no adequate likeness or comparison' between Creator and creature; the predicate itself is not stated.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"Incomprehensibility of the Trinity is a distinct theological claim from the denial of adequate Creator-creature likeness/comparison; the passage does not address analogical corresp",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     }
+    ]
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "b5502f6ff2bfd84f44597680",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"The Father ... the Son ... the Holy Ghost\" (the divine Persons / the one Godhead)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The creed asserts this in its own voice as part of the Catholic Faith it sets out; it is not a report of an opponent's view.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage asserts divine incomprehensibility/immensity (in the Latin sense of immensus, uncircumscribed), a neighbouring attribute; it nowhere addresses or denies adequate likeness or comparison between Creator and creature, and the predicate's own terms (likeness, comparison) do not occur.",
+    "hazard_flags": [
+     "SAME_WORD_DIFFERENT_MEANING",
+     "SEMANTIC_FLOOR"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "reason": "Verbatim and correctly subjected, but 'incomprehensible' here states immensity/incomprehensibility of the divine Persons, a proposition adjacent to rather than identical with the denial of adequate Creator-creature likeness or comparison.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"The Father ... the Son ... the Holy Ghost\\\" (the divine Persons / the one Godhead)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this in its own voice as part of the Catholic Faith it sets out; it is not a report of an opponent's view.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts divine incomprehensibility/immensity (in the Latin sense of immensus, uncircumscribed), a neighbouring attribute; it nowhere addresses or denies adequate likeness or comparison between Creator and creature, and the predicate's own terms (likeness, comparison) do not occur.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"Verbatim and correctly subjected, but 'incomprehensible' here states immensity/incomprehensibility of the divine Persons, a proposition adjacent to rather than identical with the denial of adequate Creator-creature likeness or comparison.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "b5502f6ff2bfd84f44597680",
+     "replicate_call_ids": [
+      "b5502f6ff2bfd84f44597680",
+      "4897ea1e98b479840e45d0a7",
+      "40ce7718760d89aa60f4ab9d"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "opus",
+      "call_id": "b5502f6ff2bfd84f44597680",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "\"The Father ... the Son ... the Holy Ghost\" (the divine Persons / the one Godhead)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this in its own voice as part of the Catholic Faith it sets out; it is not a report of an opponent's view.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts divine incomprehensibility/immensity (in the Latin sense of immensus, uncircumscribed), a neighbouring attribute; it nowhere addresses or denies adequate likeness or comparison between Creator and creature, and the predicate's own terms (likeness, comparison) do not occur.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "Verbatim and correctly subjected, but 'incomprehensible' here states immensity/incomprehensibility of the divine Persons, a proposition adjacent to rather than identical with the denial of adequate Creator-creature likeness or comparison.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"The Father ... the Son ... the Holy Ghost\\\" (the divine Persons / the one Godhead)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this in its own voice as part of the Catholic Faith it sets out; it is not a report of an opponent's view.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts divine incomprehensibility/immensity (in the Latin sense of immensus, uncircumscribed), a neighbouring attribute; it nowhere addresses or denies adequate likeness or comparison between Creator and creature, and the predicate's own terms (likeness, comparison) do not occur.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"Verbatim and correctly subjected, but 'incomprehensible' here states immensity/incomprehensibility of the divine Persons, a proposition adjacent to rather than identical with the denial of adequate Creator-creature likeness or comparison.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "opus",
+      "call_id": "4897ea1e98b479840e45d0a7",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "\"The Father ... the Son ... the Holy Ghost\" (the triune God)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The Creed asserts this in its own voice as part of the Catholic Faith it confesses.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage predicates incomprehensibility (Latin immensus, unmeasurable/unlimited) of each divine Person, but it nowhere addresses or asserts the denial of adequate creature-to-Creator likeness or comparison; divine incomprehensibility is a neighbouring attribute that might ground such a denial rather than the predicate itself.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "Verbatim and rightly subjected, but the text asserts divine incomprehensibility/immensity, not the denial of any adequate likeness or comparison between God and creatures; the sense of 'incomprehensible' here is also the credal 'immensus', compounding the semantic gap.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"The Father ... the Son ... the Holy Ghost\\\" (the triune God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The Creed asserts this in its own voice as part of the Catholic Faith it confesses.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage predicates incomprehensibility (Latin immensus, unmeasurable/unlimited) of each divine Person, but it nowhere addresses or asserts the denial of adequate creature-to-Creator likeness or comparison; divine incomprehensibility is a neighbouring attribute that might ground such a denial rather than the predicate itself.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"Verbatim and rightly subjected, but the text asserts divine incomprehensibility/immensity, not the denial of any adequate likeness or comparison between God and creatures; the sense of 'incomprehensible' here is also the credal 'immensus', compounding the semantic gap.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "opus",
+      "call_id": "40ce7718760d89aa60f4ab9d",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "The Father ... the Son ... the Holy Ghost (the triune God)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The creed asserts this in its own voice as part of the Catholic Faith it confesses.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts divine incomprehensibility/immensity (Latin 'immensus'), a neighbouring attribute-claim about God's boundlessness or unknowability; it does not address or assert the denial of adequate Creator-creature likeness or comparison.",
+      "hazard_flags": [
+       "SAME_WORD_DIFFERENT_MEANING",
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "Verbatim and rightly subjected, but the asserted proposition is the incomprehensibility/immensity of each Person, not a denial of univocal or adequate likeness between Creator and creature; the term also carries the sense 'immeasurable' here, compounding the gap.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"The Father ... the Son ... the Holy Ghost (the triune God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The creed asserts this in its own voice as part of the Catholic Faith it confesses.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts divine incomprehensibility/immensity (Latin 'immensus'), a neighbouring attribute-claim about God's boundlessness or unknowability; it does not address or assert the denial of adequate Creator-creature likeness or comparison.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SAME_WORD_DIFFERENT_MEANING\", \"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"Verbatim and rightly subjected, but the asserted proposition is the incomprehensibility/immensity of each Person, not a denial of univocal or adequate likeness between Creator and creature; the term also carries the sense 'immeasurable' here, compounding the gap.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     }
+    ]
+   },
+   "reverified": {
+    "at": "2026-09-20T06:16:49Z",
+    "prompt_version": "gate6-v1.3",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "route_kept": "PRIMARY_REJECTED_ALL",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "votes_per_candidate": 3,
+    "repointed": {
+     "registry_id_at_run": "BSR-AN-04",
+     "registry_id_now": "BSR-AN-06",
+     "locator_at_run": "Outline of the Faith (BCP p. 862) — The Christian Hope: Q. What, then, is our assurance as Christians?",
+     "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+     "chunk_hash_at_run": "56df94b8abf934d69c0e61d6a1f0e19a113e9b1108f92f2adcfeb1ddc838da43",
+     "chunk_hash_now": "ad317a64cebe409f6175df7641922a4f22b59815697e1773f5b59b4aec53171a",
+     "chars_at_run": 2720,
+     "chars_now": 3633,
+     "cross_row": true,
+     "mapping_file": "recovery-runs/session13/chunk-id-mapping.json",
+     "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+    },
+    "required_subject": "GOD (the one God, or the Father; not the Church, not humanity, not Christ's human nature)"
    }
   },
   "Q-405-p2-BSR-AN-05-1": {
-   "sonnet": {
-    "model": "sonnet",
-    "call_id": "bb746bcb14abf29677f31760",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "Y",
-    "grammatical_subject": "he (God, referring to 'the LORD' / 'I am who I am')",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The text directly asserts as doctrine that God cannot be defined by his creatures, in its own voice.",
-    "floor": "PARTIAL",
-    "floor_reason": "The passage asserts God cannot be 'defined' by creatures, an epistemic incomprehensibility claim, but does not explicitly deny adequate likeness/comparison in the fuller Creator-creature correspondence sense required by the predicate.",
-    "hazard_flags": [
-     "SEMANTIC_FLOOR",
-     "SAME_WORD_DIFFERENT_MEANING"
-    ],
-    "verdict_model": "ACCEPT_WITH_CAVEAT",
-    "reason_code": "BELOW_FLOOR",
-    "reason": "The claim that God 'cannot be defined by his creatures' supports epistemic restraint but is narrower than a full denial of adequate likeness/comparison, so it only partially fills the predicate's floor.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (God, referring to 'the LORD' / 'I am who I am')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text directly asserts as doctrine that God cannot be defined by his creatures, in its own voice.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts God cannot be 'defined' by creatures, an epistemic incomprehensibility claim, but does not explicitly deny adequate likeness/comparison in the fuller Creator-creature correspondence sense required by the predicate.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The claim that God 'cannot be defined by his creatures' supports epistemic restraint but is narrower than a full denial of adequate likeness/comparison, so it only partially fills the predicate's floor.\"}",
-    "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "BELOW_FLOOR"
-   },
    "_route": "SLICE_ROW",
-   "opus": {
-    "model": "opus",
-    "call_id": "2279843af8514f5e14d80a1b",
-    "attempt": 0,
-    "phrase_verbatim": "Y",
-    "subject_is_required": "Y",
-    "grammatical_subject": "\"he\" (God, the LORD who reveals his Name to Moses)",
-    "speech_act_is_assertion": "Y",
-    "speech_act_note": "The catechism asserts in its own voice, as part of the answer explaining what the divine Name means.",
-    "floor": "PARTIAL",
-    "floor_reason": "The denial that God \"can be defined by his creatures\" asserts the inadequacy of creaturely categories to capture God, a narrower proposition lying wholly within the floor, though it speaks of definition rather than explicitly of likeness or comparison.",
-    "hazard_flags": [
-     "SEMANTIC_FLOOR"
-    ],
-    "verdict_model": "ACCEPT_WITH_CAVEAT",
-    "reason_code": "OK",
-    "reason": "Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; the claim that creatures cannot define God entails denial of fully adequate Creator-creature correspondence, but the vocabulary of likeness/comparison is not itself used, so the support is partial rather than fully explicit.",
-    "status": "DONE",
-    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"he\\\" (God, the LORD who reveals his Name to Moses)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice, as part of the answer explaining what the divine Name means.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The denial that God \\\"can be defined by his creatures\\\" asserts the inadequacy of creaturely categories to capture God, a narrower proposition lying wholly within the floor, though it speaks of definition rather than explicitly of likeness or comparison.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; the claim that creatures cannot define God entails denial of fully adequate Creator-creature correspondence, but the vocabulary of likeness/comparison is not itself used, so the support is partial rather than fully explicit.\"}",
-    "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK"
-   },
    "final": {
-    "verdict": "ACCEPT_WITH_CAVEAT",
-    "reason_code_final": "OK",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
     "adjudicated_by": "opus",
     "route": "SLICE_ROW",
-    "primary_verdict": "ACCEPT_WITH_CAVEAT",
+    "primary_verdict": "REJECT",
     "verdict_rule": "LOWER_FLOOR_2026-09-13",
-    "floor_final": "PARTIAL",
+    "floor_final": "WORD_ONLY",
     "floor_by_model": {
-     "sonnet": "PARTIAL",
+     "sonnet": "WORD_ONLY",
      "opus": "PARTIAL"
     },
-    "floor_disagreement": false,
-    "lower_floor_applied": false,
+    "floor_disagreement": true,
+    "lower_floor_applied": true,
     "second_rubric": "opus",
     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "instrument": {
+     "sonnet": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "REJECT": 3
+      },
+      "majority_class": "REJECT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "WORD_ONLY",
+       "WORD_ONLY",
+       "WORD_ONLY"
+      ],
+      "floor_merged": "WORD_ONLY",
+      "representative_call_id": "20281f7a2c1acd2b38d69c22",
+      "replicate_call_ids": [
+       "20281f7a2c1acd2b38d69c22",
+       "25878d5994393836c96c8474",
+       "5712428ac97e3341000436f5"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     },
+     "opus": {
+      "prompt_version": "gate6-v1.3",
+      "call_count": 3,
+      "calls_attempted": 3,
+      "voting": "MAJORITY_OF_3",
+      "vote_split": {
+       "ACCEPT_WITH_CAVEAT": 3
+      },
+      "majority_class": "ACCEPT_WITH_CAVEAT",
+      "majority_share": "3/3",
+      "dissent": false,
+      "no_majority": false,
+      "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+      "floor_by_replicate": [
+       "PARTIAL",
+       "PARTIAL",
+       "PARTIAL"
+      ],
+      "floor_merged": "PARTIAL",
+      "representative_call_id": "4bd08984583886b320b8ab6b",
+      "replicate_call_ids": [
+       "4bd08984583886b320b8ab6b",
+       "0ded592d11acd42b7b74dde2",
+       "539d9c2c0a994ca5a5c249e1"
+      ],
+      "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "ACCEPT_WITH_CAVEAT": 3
+     },
+     "majority_class": "ACCEPT_WITH_CAVEAT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "PARTIAL",
+      "PARTIAL",
+      "PARTIAL"
+     ],
+     "floor_merged": "PARTIAL",
+     "representative_call_id": "4bd08984583886b320b8ab6b",
+     "replicate_call_ids": [
+      "4bd08984583886b320b8ab6b",
+      "0ded592d11acd42b7b74dde2",
+      "539d9c2c0a994ca5a5c249e1"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "v13_majority": true,
+    "public_certification_eligible": true,
+    "review_queue_reasons": [],
     "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
@@ -2986,6 +3472,408 @@
     "primary_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
+   },
+   "superseded_rubrics": {
+    "moved_at": "2026-09-20T06:11:31Z",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "rubrics": {
+     "sonnet": {
+      "model": "sonnet",
+      "call_id": "bb746bcb14abf29677f31760",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "he (God, referring to 'the LORD' / 'I am who I am')",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The text directly asserts as doctrine that God cannot be defined by his creatures, in its own voice.",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage asserts God cannot be 'defined' by creatures, an epistemic incomprehensibility claim, but does not explicitly deny adequate likeness/comparison in the fuller Creator-creature correspondence sense required by the predicate.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The claim that God 'cannot be defined by his creatures' supports epistemic restraint but is narrower than a full denial of adequate likeness/comparison, so it only partially fills the predicate's floor.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (God, referring to 'the LORD' / 'I am who I am')\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The text directly asserts as doctrine that God cannot be defined by his creatures, in its own voice.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts God cannot be 'defined' by creatures, an epistemic incomprehensibility claim, but does not explicitly deny adequate likeness/comparison in the fuller Creator-creature correspondence sense required by the predicate.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\", \"SAME_WORD_DIFFERENT_MEANING\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The claim that God 'cannot be defined by his creatures' supports epistemic restraint but is narrower than a full denial of adequate likeness/comparison, so it only partially fills the predicate's floor.\"}",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     "opus": {
+      "model": "opus",
+      "call_id": "2279843af8514f5e14d80a1b",
+      "attempt": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "\"he\" (God, the LORD who reveals his Name to Moses)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism asserts in its own voice, as part of the answer explaining what the divine Name means.",
+      "floor": "PARTIAL",
+      "floor_reason": "The denial that God \"can be defined by his creatures\" asserts the inadequacy of creaturely categories to capture God, a narrower proposition lying wholly within the floor, though it speaks of definition rather than explicitly of likeness or comparison.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "OK",
+      "reason": "Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; the claim that creatures cannot define God entails denial of fully adequate Creator-creature correspondence, but the vocabulary of likeness/comparison is not itself used, so the support is partial rather than fully explicit.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"he\\\" (God, the LORD who reveals his Name to Moses)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice, as part of the answer explaining what the divine Name means.\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The denial that God \\\"can be defined by his creatures\\\" asserts the inadequacy of creaturely categories to capture God, a narrower proposition lying wholly within the floor, though it speaks of definition rather than explicitly of likeness or comparison.\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; the claim that creatures cannot define God entails denial of fully adequate Creator-creature correspondence, but the vocabulary of likeness/comparison is not itself used, so the support is partial rather than fully explicit.\"}",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "OK"
+     }
+    },
+    "final": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "adjudicated_by": "opus",
+     "route": "SLICE_ROW",
+     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+     "verdict_rule": "LOWER_FLOOR_2026-09-13",
+     "floor_final": "PARTIAL",
+     "floor_by_model": {
+      "sonnet": "PARTIAL",
+      "opus": "PARTIAL"
+     },
+     "floor_disagreement": false,
+     "lower_floor_applied": false,
+     "second_rubric": "opus",
+     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+     "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
+     "overturned": false,
+     "direction": null
+    },
+    "final_at_run": {
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "reason_code_final": "OK",
+     "adjudicated_by": "opus",
+     "route": "SLICE_ROW",
+     "primary_verdict": "ACCEPT_WITH_CAVEAT",
+     "overturned": false,
+     "direction": null
+    }
+   },
+   "repointed": {
+    "registry_id_at_run": "BSR-AN-05",
+    "registry_id_now": "BSR-AN-05",
+    "locator_at_run": "To Be a Christian, Q.173 — What is God’s Name?",
+    "locator_now": "To Be a Christian, Q.173 — What is God’s Name?",
+    "chunk_hash_at_run": "2785782da8dbd8c0502694eebc306350e44684cf36b11ab304ab884059050bb6",
+    "chunk_hash_now": "d5330de4ae428e70b0999eab5199369d94813c2b1c1853c733dd817ba7ed2bc7",
+    "chars_at_run": 435,
+    "chars_now": 417,
+    "cross_row": false,
+    "mapping_file": null,
+    "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+   },
+   "sonnet": {
+    "model": "sonnet",
+    "call_id": "20281f7a2c1acd2b38d69c22",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "he (God)",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The catechism asserts this positively about God's nature in its own voice.",
+    "floor": "WORD_ONLY",
+    "floor_reason": "The passage asserts an epistemic limitation on defining God through creaturely concepts, which is a neighbouring claim about incomprehensibility, not an assertion that there is no adequate likeness or comparison between Creator and creature.",
+    "hazard_flags": [
+     "RELATIONAL_VS_METAPHYSICAL",
+     "SAME_WORD_DIFFERENT_MEANING"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "NA",
+    "verdict_model": "REJECT",
+    "reason_code": "BELOW_FLOOR",
+    "reason": "The phrase concerns God's indefinability by creatures (an epistemic/definitional claim), which is a neighbouring proposition to the predicate's denial of adequate likeness or comparison; the passage does not assert the specific claim about Creator-creature correspondence required by the predicate.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts this positively about God's nature in its own voice.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts an epistemic limitation on defining God through creaturely concepts, which is a neighbouring claim about incomprehensibility, not an assertion that there is no adequate likeness or comparison between Creator and creature.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The phrase concerns God's indefinability by creatures (an epistemic/definitional claim), which is a neighbouring proposition to the predicate's denial of adequate likeness or comparison; the passage does not assert the specific claim about Creator-creature correspondence required by the predicate.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "REJECT",
+    "reason_code_final": "BELOW_FLOOR",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "REJECT": 3
+     },
+     "majority_class": "REJECT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "WORD_ONLY",
+      "WORD_ONLY",
+      "WORD_ONLY"
+     ],
+     "floor_merged": "WORD_ONLY",
+     "representative_call_id": "20281f7a2c1acd2b38d69c22",
+     "replicate_call_ids": [
+      "20281f7a2c1acd2b38d69c22",
+      "25878d5994393836c96c8474",
+      "5712428ac97e3341000436f5"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "sonnet",
+      "call_id": "20281f7a2c1acd2b38d69c22",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "he (God)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism asserts this positively about God's nature in its own voice.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts an epistemic limitation on defining God through creaturely concepts, which is a neighbouring claim about incomprehensibility, not an assertion that there is no adequate likeness or comparison between Creator and creature.",
+      "hazard_flags": [
+       "RELATIONAL_VS_METAPHYSICAL",
+       "SAME_WORD_DIFFERENT_MEANING"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The phrase concerns God's indefinability by creatures (an epistemic/definitional claim), which is a neighbouring proposition to the predicate's denial of adequate likeness or comparison; the passage does not assert the specific claim about Creator-creature correspondence required by the predicate.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts this positively about God's nature in its own voice.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts an epistemic limitation on defining God through creaturely concepts, which is a neighbouring claim about incomprehensibility, not an assertion that there is no adequate likeness or comparison between Creator and creature.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"RELATIONAL_VS_METAPHYSICAL\", \"SAME_WORD_DIFFERENT_MEANING\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The phrase concerns God's indefinability by creatures (an epistemic/definitional claim), which is a neighbouring proposition to the predicate's denial of adequate likeness or comparison; the passage does not assert the specific claim about Creator-creature correspondence required by the predicate.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "25878d5994393836c96c8474",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "he (referring to God)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism asserts this directly as part of its explanation of God's Name.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts that God cannot be defined by his creatures (an epistemic/definitional claim), which is a neighbouring proposition about conceptual limitation, not an assertion that no adequate likeness or comparison exists between Creator and creature.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The phrase concerns God's indefinability by creatures, a related but distinct claim from denying adequate likeness or comparison, so it does not meet the predicate's floor.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (referring to God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts this directly as part of its explanation of God's Name.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts that God cannot be defined by his creatures (an epistemic/definitional claim), which is a neighbouring proposition about conceptual limitation, not an assertion that no adequate likeness or comparison exists between Creator and creature.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The phrase concerns God's indefinability by creatures, a related but distinct claim from denying adequate likeness or comparison, so it does not meet the predicate's floor.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     },
+     {
+      "model": "sonnet",
+      "call_id": "5712428ac97e3341000436f5",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "he (God)",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism asserts directly, in its own voice, a positive claim about God's nature.",
+      "floor": "WORD_ONLY",
+      "floor_reason": "The passage asserts that God 'cannot be defined by his creatures'—a claim about incomprehensibility/indefinability—rather than the specific predicate that no adequate likeness or comparison exists between Creator and creature; these are related but distinct epistemic claims, so the predicate itself is not asserted.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "NA",
+      "verdict_model": "REJECT",
+      "reason_code": "BELOW_FLOOR",
+      "reason": "The phrase is verbatim and the subject is correct and the assertion is affirmative, but the content concerns God's indefinability by creatures, not the inadequacy of likeness or comparison between Creator and creature, so it falls short of the required floor.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"he (God)\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts directly, in its own voice, a positive claim about God's nature.\", \"floor\": \"WORD_ONLY\", \"floor_reason\": \"The passage asserts that God 'cannot be defined by his creatures'—a claim about incomprehensibility/indefinability—rather than the specific predicate that no adequate likeness or comparison exists between Creator and creature; these are related but distinct epistemic claims, so the predicate itself is not asserted.\", \"partial_asserts_predicate\": \"NA\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"REJECT\", \"reason_code\": \"BELOW_FLOOR\", \"reason\": \"The phrase is verbatim and the subject is correct and the assertion is affirmative, but the content concerns God's indefinability by creatures, not the inadequacy of likeness or comparison between Creator and creature, so it falls short of the required floor.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "REJECT",
+      "reason_code_final": "BELOW_FLOOR"
+     }
+    ]
+   },
+   "opus": {
+    "model": "opus",
+    "call_id": "4bd08984583886b320b8ab6b",
+    "attempt": 0,
+    "prompt_version": "gate6-v1.3",
+    "prompt_variant": "gate6-v1.3",
+    "replicate": 0,
+    "phrase_verbatim": "Y",
+    "subject_is_required": "Y",
+    "grammatical_subject": "\"he\" (God, referent of \"This Name\"/\"God's Name\")",
+    "speech_act_is_assertion": "Y",
+    "speech_act_note": "The catechism asserts in its own voice what the divine Name \"I am\" means: \"he alone is truly God... and he cannot be defined by his creatures.\"",
+    "floor": "PARTIAL",
+    "floor_reason": "The denial that God can be \"defined by his creatures\" asserts the predicate in a narrower, conceptual register — creaturely terms cannot adequately capture God — but stops short of an explicit denial of adequate likeness or comparison.",
+    "hazard_flags": [
+     "SEMANTIC_FLOOR"
+    ],
+    "asserted_outside_formula": "NA",
+    "partial_asserts_predicate": "Y",
+    "verdict_model": "ACCEPT_WITH_CAVEAT",
+    "reason_code": "OK",
+    "reason": "Phrase is verbatim, subject is God, and the standard asserts it directly; it states the predicate in the narrower idiom of definability rather than likeness/comparison, so PARTIAL with a semantic-floor caveat.",
+    "status": "DONE",
+    "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"he\\\" (God, referent of \\\"This Name\\\"/\\\"God's Name\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice what the divine Name \\\"I am\\\" means: \\\"he alone is truly God... and he cannot be defined by his creatures.\\\"\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The denial that God can be \\\"defined by his creatures\\\" asserts the predicate in a narrower, conceptual register — creaturely terms cannot adequately capture God — but stops short of an explicit denial of adequate likeness or comparison.\", \"partial_asserts_predicate\": \"Y\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is God, and the standard asserts it directly; it states the predicate in the narrower idiom of definability rather than likeness/comparison, so PARTIAL with a semantic-floor caveat.\"}",
+    "phrase_verbatim_code": "Y",
+    "verdict": "ACCEPT_WITH_CAVEAT",
+    "reason_code_final": "OK",
+    "instrument": {
+     "prompt_version": "gate6-v1.3",
+     "call_count": 3,
+     "calls_attempted": 3,
+     "voting": "MAJORITY_OF_3",
+     "vote_split": {
+      "ACCEPT_WITH_CAVEAT": 3
+     },
+     "majority_class": "ACCEPT_WITH_CAVEAT",
+     "majority_share": "3/3",
+     "dissent": false,
+     "no_majority": false,
+     "floor_rule": "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)",
+     "floor_by_replicate": [
+      "PARTIAL",
+      "PARTIAL",
+      "PARTIAL"
+     ],
+     "floor_merged": "PARTIAL",
+     "representative_call_id": "4bd08984583886b320b8ab6b",
+     "replicate_call_ids": [
+      "4bd08984583886b320b8ab6b",
+      "0ded592d11acd42b7b74dde2",
+      "539d9c2c0a994ca5a5c249e1"
+     ],
+     "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))"
+    },
+    "replicates": [
+     {
+      "model": "opus",
+      "call_id": "4bd08984583886b320b8ab6b",
+      "attempt": 0,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 0,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "\"he\" (God, referent of \"This Name\"/\"God's Name\")",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism asserts in its own voice what the divine Name \"I am\" means: \"he alone is truly God... and he cannot be defined by his creatures.\"",
+      "floor": "PARTIAL",
+      "floor_reason": "The denial that God can be \"defined by his creatures\" asserts the predicate in a narrower, conceptual register — creaturely terms cannot adequately capture God — but stops short of an explicit denial of adequate likeness or comparison.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "Y",
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "OK",
+      "reason": "Phrase is verbatim, subject is God, and the standard asserts it directly; it states the predicate in the narrower idiom of definability rather than likeness/comparison, so PARTIAL with a semantic-floor caveat.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"he\\\" (God, referent of \\\"This Name\\\"/\\\"God's Name\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice what the divine Name \\\"I am\\\" means: \\\"he alone is truly God... and he cannot be defined by his creatures.\\\"\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The denial that God can be \\\"defined by his creatures\\\" asserts the predicate in a narrower, conceptual register — creaturely terms cannot adequately capture God — but stops short of an explicit denial of adequate likeness or comparison.\", \"partial_asserts_predicate\": \"Y\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Phrase is verbatim, subject is God, and the standard asserts it directly; it states the predicate in the narrower idiom of definability rather than likeness/comparison, so PARTIAL with a semantic-floor caveat.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "OK"
+     },
+     {
+      "model": "opus",
+      "call_id": "0ded592d11acd42b7b74dde2",
+      "attempt": 100,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 1,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "\"he\" (God, whose Name is \"I am\")",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism asserts in its own voice what the divine Name means: \"he alone is truly God... and he cannot be defined by his creatures.\"",
+      "floor": "PARTIAL",
+      "floor_reason": "The passage asserts the predicate itself in a narrower mode — it denies that creaturely definition can adequately capture God — but it does not extend the denial explicitly to likeness or comparison generally.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "Y",
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "OK",
+      "reason": "Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; the denial of creaturely definability is a narrower but genuine statement of the denial of adequate Creator-creature correspondence, hence PARTIAL rather than FULL.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"he\\\" (God, whose Name is \\\"I am\\\")\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism asserts in its own voice what the divine Name means: \\\"he alone is truly God... and he cannot be defined by his creatures.\\\"\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The passage asserts the predicate itself in a narrower mode — it denies that creaturely definition can adequately capture God — but it does not extend the denial explicitly to likeness or comparison generally.\", \"partial_asserts_predicate\": \"Y\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; the denial of creaturely definability is a narrower but genuine statement of the denial of adequate Creator-creature correspondence, hence PARTIAL rather than FULL.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "OK"
+     },
+     {
+      "model": "opus",
+      "call_id": "539d9c2c0a994ca5a5c249e1",
+      "attempt": 200,
+      "prompt_version": "gate6-v1.3",
+      "prompt_variant": "gate6-v1.3",
+      "replicate": 2,
+      "phrase_verbatim": "Y",
+      "subject_is_required": "Y",
+      "grammatical_subject": "\"he\" — God, referent of the divine Name \"I am who I am\"",
+      "speech_act_is_assertion": "Y",
+      "speech_act_note": "The catechism states in its own voice what the Name means: \"he alone is truly God... and he cannot be defined by his creatures.\"",
+      "floor": "PARTIAL",
+      "floor_reason": "The clause asserts that creaturely definition cannot adequately capture God, which is the predicate's denial of adequate Creator-creature correspondence stated in the narrower register of definition rather than of likeness or comparison generally.",
+      "hazard_flags": [
+       "SEMANTIC_FLOOR"
+      ],
+      "asserted_outside_formula": "NA",
+      "partial_asserts_predicate": "Y",
+      "verdict_model": "ACCEPT_WITH_CAVEAT",
+      "reason_code": "OK",
+      "reason": "Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; it denies creaturely adequacy in defining God, a narrower but genuine statement of the predicate, hence PARTIAL rather than FULL.",
+      "status": "DONE",
+      "raw": "{\"phrase_verbatim\": \"Y\", \"subject_is_required\": \"Y\", \"grammatical_subject\": \"\\\"he\\\" — God, referent of the divine Name \\\"I am who I am\\\"\", \"speech_act_is_assertion\": \"Y\", \"speech_act_note\": \"The catechism states in its own voice what the Name means: \\\"he alone is truly God... and he cannot be defined by his creatures.\\\"\", \"floor\": \"PARTIAL\", \"floor_reason\": \"The clause asserts that creaturely definition cannot adequately capture God, which is the predicate's denial of adequate Creator-creature correspondence stated in the narrower register of definition rather than of likeness or comparison generally.\", \"partial_asserts_predicate\": \"Y\", \"hazard_flags\": [\"SEMANTIC_FLOOR\"], \"asserted_outside_formula\": \"NA\", \"verdict\": \"ACCEPT_WITH_CAVEAT\", \"reason_code\": \"OK\", \"reason\": \"Verbatim phrase with God as grammatical subject, asserted in the standard's own voice; it denies creaturely adequacy in defining God, a narrower but genuine statement of the predicate, hence PARTIAL rather than FULL.\"}",
+      "phrase_verbatim_code": "Y",
+      "verdict": "ACCEPT_WITH_CAVEAT",
+      "reason_code_final": "OK"
+     }
+    ]
+   },
+   "reverified": {
+    "at": "2026-09-20T06:16:49Z",
+    "prompt_version": "gate6-v1.3",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "route_kept": "SLICE_ROW",
+    "reason": "session 14 phase 6 (R6-48, Codex F.10): the AN-04 / AN-06 corpus repair and session 13 page-furniture repair changed the text this verdict was given on; re-verified against the chunk the store holds now, voted at three gate6-v1.3 draws per model (R6-54)",
+    "votes_per_candidate": 3,
+    "repointed": {
+     "registry_id_at_run": "BSR-AN-05",
+     "registry_id_now": "BSR-AN-05",
+     "locator_at_run": "To Be a Christian, Q.173 — What is God’s Name?",
+     "locator_now": "To Be a Christian, Q.173 — What is God’s Name?",
+     "chunk_hash_at_run": "2785782da8dbd8c0502694eebc306350e44684cf36b11ab304ab884059050bb6",
+     "chunk_hash_now": "d5330de4ae428e70b0999eab5199369d94813c2b1c1853c733dd817ba7ed2bc7",
+     "chars_at_run": 435,
+     "chars_now": 417,
+     "cross_row": false,
+     "mapping_file": null,
+     "why": "Codex F.10 corpus repair: the verifier judges the text the store holds now, in the row that holds it now, never the text the repair replaced (R6-48)"
+    },
+    "required_subject": "GOD (the one God, or the Father; not the Church, not humanity, not Christ's human nature)"
    }
   },
   "Q-405-p2-BSR-AN-05-2": {
@@ -3052,6 +3940,41 @@
     "lower_floor_applied": false,
     "second_rubric": "opus",
     "second_rubric_role": "ADJUDICATES_LINES_1_3",
+    "instrument": {
+     "sonnet": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "opus": {
+      "prompt_version": null,
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     }
+    },
+    "instrument_of_record": {
+     "prompt_version": null,
+     "call_count": 1,
+     "voting": "SINGLE_CALL",
+     "vote_split": null,
+     "majority_class": null,
+     "dissent": null,
+     "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+    },
+    "v13_majority": false,
+    "public_certification_eligible": false,
+    "public_certification_bar": "R6-54 (Codex C1(a)): no seated verdict reaches public certification on anything but a gate6-v1.3 MAJORITY verdict. This verdict's instrument is sonnet: None x1 (SINGLE_CALL); opus: None x1 (SINGLE_CALL)",
+    "review_queue_reasons": [
+     "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+    ],
     "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
     "overturned": false,
     "direction": null
@@ -3103,24 +4026,6 @@
  ],
  "survivors": [
   {
-   "candidate_id": "Q-405-p2-BSR-AN-05-1",
-   "pass": 2,
-   "registry_id": "BSR-AN-05",
-   "locator": "To Be a Christian, Q.173 — What is God’s Name?",
-   "phrase": "he cannot be defined by his creatures",
-   "rationale": "Asserts that God, as the self-existent 'I am,' transcends creaturely definition, denying full Creator-creature correspondence.",
-   "floor_claim": "FULL",
-   "chunk_text": "What is God’s Name? God’s Name reveals who he is—his nature, his character, his power, and his purposes. The Name God reveals to Moses is “I am who I am” or simply “I am” (Exodus 3:6, 14). This Name means that he the lord’s prayer alone is truly God, he is the source of his own Being, he is holy and just, and he cannot be defined by his creatures. (Exodus 3:6, 14; 15:11; Psalm 99; Isaiah 5:16; 42:8; 47:4; John 8:58; Revelation 1:8)",
-   "chunk_hash": "2785782da8dbd8c0502694eebc306350e44684cf36b11ab304ab884059050bb6",
-   "division": "question",
-   "fallback_tier": true,
-   "witness": false,
-   "effective_tier": "CATECHETICAL",
-   "locator_rank": 1,
-   "recut_from": null,
-   "slot": "GUARANTEED"
-  },
-  {
    "candidate_id": "Q-405-p2-BSR-AN-05-2",
    "pass": 2,
    "registry_id": "BSR-AN-05",
@@ -3142,23 +4047,19 @@
  "fallback_used": true,
  "allocation": {
   "kept": [
-   "Q-405-p2-BSR-AN-05-1",
    "Q-405-p2-BSR-AN-05-2"
   ],
   "roles": {
-   "Q-405-p2-BSR-AN-05-1": "PRIMARY",
    "Q-405-p2-BSR-AN-05-2": "PRIMARY"
   },
   "english_witness": {},
   "dropped": {},
   "witness_only": [],
   "groups": {
-   "Q-405-p2-BSR-AN-05-1": "anglican church in north america",
    "Q-405-p2-BSR-AN-05-2": "anglican church in north america"
   },
   "slot_order": {
-   "Q-405-p2-BSR-AN-05-1": 0,
-   "Q-405-p2-BSR-AN-05-2": 1
+   "Q-405-p2-BSR-AN-05-2": 0
   },
   "parallel_witnesses": {}
  },
@@ -3198,6 +4099,11 @@
  },
  "refinalized": {
   "rule": "LOWER_FLOOR_2026-09-13",
-  "verdicts_changed": {}
+  "verdicts_changed": {
+   "Q-405-p2-BSR-AN-05-1": [
+    "ACCEPT_WITH_CAVEAT",
+    "REJECT"
+   ]
+  }
  }
 }
