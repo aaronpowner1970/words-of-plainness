@@ -22,11 +22,11 @@
  ],
  "coder_model": "sonnet",
  "backend": "batch",
- "prompt_version": "gate6-v1.4 (locator) / gate6-v1.3 (recut) / gate6-v1.2 (verifier) / gate6-v1.1 (coder)",
+ "prompt_version": "gate6-v1.5 (locator) / gate6-v1.3 (recut) / gate6-v1.3 (verifier) / gate6-v1.1 (coder)",
  "prompt_versions": {
-  "locator": "gate6-v1.4",
+  "locator": "gate6-v1.5",
   "recut": "gate6-v1.3",
-  "verifier": "gate6-v1.2",
+  "verifier": "gate6-v1.3",
   "coder": "gate6-v1.1"
  },
  "branches": [
@@ -52,7 +52,7 @@
  "caveat_sample_share": 0.2,
  "verdict_rule": "LOWER_FLOOR_2026-09-13",
  "projection_per_cell_usd": 0.336,
- "branch_cost_cap_usd": 34.0,
+ "branch_cost_cap_usd": 36.49,
  "cost_state_file": "sjn/recovery-runs/live-1/cost-state.json",
  "branch_spend": {
   "Roman Catholic": {
@@ -1241,31 +1241,31 @@
   },
   "Baptist": {
    "cells": 37,
-   "calls": 266,
-   "cost_usd": 6.2201,
-   "calls_per_cell": 7.19,
-   "cost_per_cell_usd": 0.1681,
+   "calls": 332,
+   "cost_usd": 8.147,
+   "calls_per_cell": 8.97,
+   "cost_per_cell_usd": 0.2202,
    "projection_per_cell_usd": 0.336,
    "projected_usd": 12.43,
-   "cap_usd": 9.5,
+   "cap_usd": 36.49,
    "over_cap": false,
    "estimated": false,
    "by_role": {
     "locator/sonnet": {
-     "calls": 111,
-     "cost_usd": 3.2320320000000007
+     "calls": 148,
+     "cost_usd": 4.137399000000001
     },
     "verifier/sonnet": {
-     "calls": 77,
-     "cost_usd": 1.2037769999999999
+     "calls": 100,
+     "cost_usd": 1.6357019999999995
     },
     "coder/sonnet": {
-     "calls": 61,
-     "cost_usd": 0.5311020000000001
+     "calls": 62,
+     "cost_usd": 0.5369550000000001
     },
     "verifier/opus": {
-     "calls": 12,
-     "cost_usd": 1.226025
+     "calls": 17,
+     "cost_usd": 1.8098400000000001
     },
     "recut/sonnet": {
      "calls": 5,
@@ -1273,18 +1273,18 @@
     }
    },
    "cap_state": {
-    "cap_usd": 9.5,
-    "spent_usd": 6.220131,
-    "calls": 266,
+    "cap_usd": 36.49,
+    "spent_usd": 8.147091,
+    "calls": 332,
     "status": "DONE",
     "cap_hit_at": null
    },
    "coder": {
-    "survivors": 61,
-    "coded": 61,
-    "skipped_by_allocation": 2,
-    "mean_coder_call_usd": 0.00871,
-    "usd_avoided_measured": 0.0174,
+    "survivors": 57,
+    "coded": 62,
+    "skipped_by_allocation": 3,
+    "mean_coder_call_usd": 0.00866,
+    "usd_avoided_measured": 0.026,
     "basis": "skipped = survivors the allocator dropped before coding (measured); USD = skipped x this branch's mean metered coder call"
    },
    "exhaustion": {
@@ -1305,7 +1305,7 @@
     "cost_usd": 0.2753,
     "overturned": 0,
     "overturn_rate": 0.0,
-    "lower_floor_applied": 0,
+    "lower_floor_applied": 1,
     "eligible": 23,
     "sampled": 3,
     "share_cap": 0.2,
@@ -1351,12 +1351,12 @@
        "SEMANTIC_FLOOR"
       ],
       "adjudicator_verdict": "ACCEPT_WITH_CAVEAT",
-      "floor_final": "PARTIAL",
-      "lower_floor_applied": false,
-      "final_verdict": "ACCEPT_WITH_CAVEAT",
+      "floor_final": "WORD_ONLY",
+      "lower_floor_applied": true,
+      "final_verdict": "REJECT",
       "overturned": false,
       "direction": null,
-      "reason_code_final": "OK",
+      "reason_code_final": "BELOW_FLOOR",
       "disclosure_only": true,
       "queue_id": "Q-390",
       "cost_usd": 0.0842
@@ -1392,7 +1392,7 @@
     ]
    },
    "lower_floor": {
-    "disagreements": 4,
+    "disagreements": 3,
     "applied": 3,
     "refused": 1,
     "rescues_refused": 1,
@@ -1422,18 +1422,6 @@
       "refused_by_lower_floor": false
      },
      {
-      "queue_id": "Q-166",
-      "candidate_id": "Q-166-p1-BSR-BA-01-3",
-      "route": "PRIMARY_REJECTED_ALL",
-      "floors": {
-       "sonnet": "PARTIAL",
-       "opus": "WORD_ONLY"
-      },
-      "floor_final": "WORD_ONLY",
-      "verdict": "REJECT",
-      "refused_by_lower_floor": false
-     },
-     {
       "queue_id": "Q-302",
       "candidate_id": "Q-302-p1-BSR-BA-01-1",
       "route": "PRIMARY_REJECTED_ALL",
@@ -1446,7 +1434,477 @@
       "refused_by_lower_floor": true
      }
     ]
-   }
+   },
+   "review_queue": [
+    {
+     "queue_id": "Q-078",
+     "candidate_id": "Q-078-p1-BSR-BA-02-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-02",
+     "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 2",
+     "phrase": "He is the alone fountain of all being",
+     "predicate": "Source of all good",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-102",
+     "candidate_id": "Q-102-p1-BSR-BA-02-2",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-02",
+     "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "phrase": "one only living and true God",
+     "predicate": "Truthful / faithful",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-126",
+     "candidate_id": "Q-126-p1-BSR-BA-01-3",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "II.A. God the Father",
+     "phrase": "according to the purposes of His grace",
+     "predicate": "Gracious",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-142",
+     "candidate_id": "Q-142-p1-BSR-BA-01-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "IV. Salvation",
+     "phrase": "Justification is God's gracious and full acquittal upon principles of His righteousness of all sinners",
+     "predicate": "Forgiving",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-158",
+     "candidate_id": "Q-158-p1-BSR-BA-02-3",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-02",
+     "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "phrase": "for His own glory",
+     "predicate": "Glorious",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-166",
+     "candidate_id": "Q-166-p1-BSR-BA-01-2",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "II.C. God the Holy Spirit",
+     "phrase": "He calls men to the Saviour, and effects regeneration",
+     "predicate": "Life-giving",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-198",
+     "candidate_id": "Q-198-p1-BSR-BA-01-3",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "II.A. God the Father",
+     "phrase": "reigns with providential care over His universe",
+     "predicate": "Sovereign",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-230",
+     "candidate_id": "Q-230-p1-BSR-BA-03-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-03",
+     "locator": "Fact 1",
+     "phrase": "the God who is revealed as Creator, Savior and Advocate",
+     "predicate": "Fountain of being",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-246",
+     "candidate_id": "Q-246-p1-BSR-BA-01-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "XII. Education",
+     "phrase": "In Jesus Christ abide all the treasures of wisdom and knowledge",
+     "predicate": "Wisdom",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-270",
+     "candidate_id": "Q-270-p1-BSR-BA-01-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "II.C. God the Holy Spirit",
+     "phrase": "He calls men to the Saviour, and effects regeneration",
+     "predicate": "Giver of life",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-278",
+     "candidate_id": "Q-278-p1-BSR-BA-01-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "II.C. God the Holy Spirit",
+     "phrase": "The Holy Spirit is the Spirit of God, fully divine",
+     "predicate": "Eternal power and might",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-294",
+     "candidate_id": "Q-294-p1-BSR-BA-02-2",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-02",
+     "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 1",
+     "phrase": "whose subsistence is in and of Himself",
+     "predicate": "Unbegotten",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-294",
+     "candidate_id": "Q-294-p1-BSR-BA-02-3",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-02",
+     "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 2",
+     "phrase": "He is the alone fountain of all being",
+     "predicate": "Unbegotten",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-302",
+     "candidate_id": "Q-302-p1-BSR-BA-02-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-02",
+     "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 3",
+     "phrase": "the Father is of none, neither begotten nor proceeding",
+     "predicate": "Not made",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-302",
+     "candidate_id": "Q-302-p1-BSR-BA-02-3",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-02",
+     "locator": "Chapter 2 (Of God and the Holy Trinity), paragraph 2",
+     "phrase": "He is the alone fountain of all being",
+     "predicate": "Not made",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-334",
+     "candidate_id": "Q-334-p1-BSR-BA-01-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "II. God",
+     "phrase": "He is an intelligent, spiritual, and personal Being",
+     "predicate": "Incorporeal / without body",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-414",
+     "candidate_id": "Q-414-p1-BSR-BA-01-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "II.B. God the Son",
+     "phrase": "He is the One Mediator, fully God, fully man",
+     "predicate": "Without confusion",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    },
+    {
+     "queue_id": "Q-430",
+     "candidate_id": "Q-430-p1-BSR-BA-01-1",
+     "branch": "Baptist",
+     "registry_id": "BSR-BA-01",
+     "locator": "II.B. God the Son",
+     "phrase": "the One Mediator, fully God, fully man, in whose Person",
+     "predicate": "Without division",
+     "reasons": [
+      "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+     ],
+     "verdict": "ACCEPT_WITH_CAVEAT",
+     "floor_final": "PARTIAL",
+     "instrument": {
+      "prompt_version": "gate6-v1.2",
+      "call_count": 1,
+      "voting": "SINGLE_CALL",
+      "vote_split": null,
+      "majority_class": null,
+      "dissent": null,
+      "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a majority verdict (R6-54)"
+     },
+     "detail": "ACCEPT_WITH_CAVEAT_AT_PARTIAL",
+     "entered": "2026-09-20T06:28:54Z",
+     "author_ruling": null
+    }
+   ]
   },
   "Methodist / Wesleyan": {
    "cells": 37,
@@ -2291,7 +2749,7 @@
    "note": "session 11 (2026-09-17), the ONE rebuild R6-16 held for (no model calls): adoption ratified \u2014 R6-35 BSR-AN-02, R6-36 BSR-AN-05, R6-37 BSR-LU-03 (translator disclosed; publisher-apparatus guard), R6-38 scope = verified reach (BSR-RP-03 added; BSR-RP-02 and BSR-LU-01 amended to ONE_CHURCH), R6-39 BSR-BA-03 ISSUED_UNADOPTED with its own wording, R6-40 BSR-RC-07 / BSR-AN-04 / BSR-RP-05; the first build since session 6, so the session 7-9 resolution rules (R6-5/R6-10 phrase-level creed resolution, R6-6/R6-9 adoption field, Task 6 ladder fields) are reflected here for the first time"
   },
   "Baptist": {
-   "at": "2026-09-17T07:39:37Z",
+   "at": "2026-09-20T06:30:10Z",
    "from": "stored cell states (candidates, rubrics, coder proposals)",
    "model_calls": 0,
    "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
@@ -2326,7 +2784,7 @@
      ]
     }
    },
-   "note": "session 11 (2026-09-17), the ONE rebuild R6-16 held for (no model calls): adoption ratified \u2014 R6-35 BSR-AN-02, R6-36 BSR-AN-05, R6-37 BSR-LU-03 (translator disclosed; publisher-apparatus guard), R6-38 scope = verified reach (BSR-RP-03 added; BSR-RP-02 and BSR-LU-01 amended to ONE_CHURCH), R6-39 BSR-BA-03 ISSUED_UNADOPTED with its own wording, R6-40 BSR-RC-07 / BSR-AN-04 / BSR-RP-05; the first build since session 6, so the session 7-9 resolution rules (R6-5/R6-10 phrase-level creed resolution, R6-6/R6-9 adoption field, Task 6 ladder fields) are reflected here for the first time"
+   "note": "session 14 phase 6 (CODE-SJN-19), Track B: after the BSR-BA-04 supplementary pass, and after pruning run.py's branch-wide review-queue sweep back to this run's own readings (the 18 pre-existing Baptist accepts are NOT queued; the author has not ruled on them)"
   },
   "Methodist / Wesleyan": {
    "at": "2026-09-17T07:39:39Z",
@@ -2380,5 +2838,5 @@
   "Seeking_Jesus_Teaching_Predicate_Source_v2.25r3_AN03_MIGRATION_VATICANNEWS_20260912.xlsx",
   "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx"
  ],
- "updated_at": "2026-09-20T06:22:20Z"
+ "updated_at": "2026-09-20T06:30:11Z"
 }
