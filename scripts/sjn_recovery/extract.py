@@ -90,6 +90,12 @@ def build_extract(packet):
                                                      "of": s.get("of"), "share": s.get("share")} for s in e.get("standards_reviewed") or []]},
             "candidates": cands,
             "rejections": [_rejection(r) for r in c.get("rejections") or []],
+            # session 14 (R6-54 / Codex C3(a)): accepts the author review queue holds. Listed by id and reason only,
+            # never as a citation — the extract is a review aid and a held item is not yet reviewable as evidence.
+            "review_queue_held": [{"candidate_id": x.get("candidate_id"), "registry_id": x.get("registry_id"),
+                                   "state": (x.get("review_queue") or {}).get("state"),
+                                   "reasons": (x.get("review_queue") or {}).get("reasons")}
+                                  for x in c.get("review_queue_held") or []],
         })
     header = {k: packet.get(k) for k in HEADER_KEYS if k in packet}
     header["rows_without_text"] = [{"registry_id": x.get("registry_id"), "manifest_status": x.get("manifest_status")} for x in packet.get("rows_without_text") or []]
@@ -104,6 +110,8 @@ def build_extract(packet):
     header["failure_record_only"] = packet.get("failure_record_only")
     stg = packet.get("same_text_guard") or {}
     header["same_text_guard"] = {k: stg.get(k) for k in ("cards", "parallel_witnesses", "declared_same_text_rows")}
+    header["author_review_queue"] = {k: (packet.get("author_review_queue") or {}).get(k)
+                                     for k in ("file", "items", "held", "admitted", "refused", "held_on_this_branch")}
     header["author_rulings_applied"] = {k: (packet.get("author_rulings_applied") or {}).get(k) for k in ("file", "required_subject_retyped", "registry_retired", "refused_candidates")}
     return {"schema": "sjn-gate6-extract/1", "source_packet": f"recovery-packets/{_slug(packet.get('branch') or '')}.json", "totals": header, "cells": cells}
 

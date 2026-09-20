@@ -35,6 +35,12 @@ LIST_PRICES = {
 }
 
 
+# Session 14 (R6-54 / Codex C1(a)): replicate r of a voted call takes attempt base REPLICATE_STRIDE * r, the session-8
+# `attempt + 100` convention (partial_rule._ReplicateLLM). Replicate 0 keeps attempts 0 / 1, so every call identity
+# written before session 14 is unchanged.
+REPLICATE_STRIDE = 100
+
+
 def _sha(s):
     return hashlib.sha256(s.encode("utf-8")).hexdigest()
 
@@ -65,12 +71,21 @@ class LLM:
         self.calls_made = 0
 
     # ---------------------------------------------------------------- identity / audit
+    REPLICATE_STRIDE = REPLICATE_STRIDE
+
     def call_id(self, role, system, user, model=None, attempt=0):
         """Identity = sha256(role | model | the ROLE's prompt version | system | user [| attempt]).
         Versioning per role means a locator prompt revision never invalidates answered verifier calls.
         `attempt` > 0 is the retry of a reply that hit its token ceiling before the JSON was complete:
         the same call re-sent with a larger ceiling under its own identity, so the truncated answer
-        stays in the audit log and is never mistaken for the final one."""
+        stays in the audit log and is never mistaken for the final one.
+
+        Session 14 (R6-54 / Codex C1(a)): a voted call sends the SAME prompt three times, and each
+        replicate takes attempt base REPLICATE_STRIDE * r (the session-8 `attempt + 100` convention,
+        partial_rule._ReplicateLLM), so each draw has its own identity and the audit log's duplicate
+        suppression does not serve one answer back as three. Replicate 0 keeps attempt 0 / 1: every
+        call identity written before session 14 is unchanged, so a stored verdict's answered call is
+        still served from the log and only the two further draws are paid for."""
         parts = [role, model or self.model_id, prompt_version(role), system, user]
         if attempt:
             parts.append(f"attempt={attempt}")

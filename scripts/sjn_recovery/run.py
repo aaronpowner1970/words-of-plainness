@@ -25,7 +25,7 @@ from sjn_recovery.registry import Registry, load_predicates, load_comparators, l
 from sjn_recovery.llm import LLM  # noqa: E402
 from sjn_recovery.agents import CellRunner, EXHAUST_PASS  # noqa: E402
 from sjn_recovery.packets import build_branch_packet  # noqa: E402
-from sjn_recovery import prompts, coststate  # noqa: E402
+from sjn_recovery import prompts, coststate, review_queue  # noqa: E402
 
 
 def log(msg):
@@ -183,11 +183,13 @@ def main():
                 f"{lf['refused']} candidate(s) refused by it (of which {lf['rescues_refused']} would have been opus rescues)")
         if done == len(bc):
             b["status"] = "DONE"
+            spend["review_queue"] = record_review_queue(br, bc, runner)     # R6-54: before the packet reads the queue
             build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log)
         elif cap_hit:
             b["status"] = "CAP_HIT"
             log(f"!! {br}: STOPPED by the cost cap ({b['spent_usd']:.2f} of {b['cap_usd']} USD) with {len(bc) - done} cell(s) unfinished — "
                 f"writing the PARTIAL packet")
+            spend["review_queue"] = record_review_queue(br, bc, runner)     # a capped branch's doubt is recorded too
             build_branch_packet(br, bc, runner, reg, preds, comps, a.run_id, log, partial=spend["cap_state"])
         coststate.save(state)
         branch_cost[br] = spend
@@ -246,6 +248,39 @@ def write_failed_partial(br, bc, runner, reg, preds, comps, a, state, exit_code,
             json.dump(stub, fh, ensure_ascii=False, indent=1)
             fh.write("\n")
         log(f"!! {br}: packet builder failed too ({cap_state['packet_builder_error'][:160]}); wrote a minimal FAILURE record to {path}")
+
+
+def record_review_queue(br, cells, runner, log=log):
+    """R6-54 / Codex C3(a): record this branch's DOUBTFUL ACCEPTS in the committed author review queue.
+
+    Doubt is any dissenting vote, or ACCEPT_WITH_CAVEAT at PARTIAL — finalize() computes it and puts it on the final
+    verdict as `review_queue_reasons`. Nothing is refused here: the item keeps the verdict the verifier gave, and the
+    packet builder and the emit step hold it until the author rules (Codex C3: doubtful accepts go to people, not to
+    code refusals). Idempotent: an item already queued keeps its author_ruling."""
+    entries = []
+    for c in cells:
+        st = runner.load(c["queue_id"])
+        if not st:
+            continue
+        for pk, p in (st.get("passes") or {}).items():
+            for cand in p.get("candidates", []):
+                cid = cand["candidate_id"]
+                fin = ((st.get("verifications") or {}).get(cid) or {}).get("final") or {}
+                reasons = fin.get("review_queue_reasons") or []
+                if not reasons:
+                    continue
+                entries.append({"queue_id": c["queue_id"], "candidate_id": cid, "branch": br,
+                                "registry_id": cand.get("registry_id"), "locator": cand.get("locator"),
+                                "phrase": cand.get("phrase"), "predicate": c.get("predicate"),
+                                "reasons": reasons, "verdict": fin.get("verdict"), "floor_final": fin.get("floor_final"),
+                                "instrument": fin.get("instrument_of_record"),
+                                "detail": "; ".join(reasons),
+                                "entered": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                                "author_ruling": None})
+    if entries:
+        added, updated = review_queue.add(entries, log=log)
+        log(f"   author review queue (R6-54): {br} put {len(entries)} doubtful accept(s) forward — {added} new, {updated} refreshed")
+    return entries
 
 
 def _call_cost(llm, call_id):

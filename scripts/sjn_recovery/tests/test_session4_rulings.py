@@ -15,7 +15,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(os.path.dirname(HERE)))
 
 from sjn_recovery.allocation import allocate, speaks_for_groups, normalize_body  # noqa: E402
-from sjn_recovery.agents import CellRunner, lower_floor, verdict_from_rubric, sample_bucket, FLOOR_ORDER  # noqa: E402
+from sjn_recovery.agents import (CellRunner, lower_floor, verdict_from_rubric, sample_bucket, FLOOR_ORDER,  # noqa: E402
+                                 VOTES_PER_CANDIDATE)
 from sjn_recovery.config import ROUTE_CAVEAT_SAMPLE, CAVEAT_SAMPLE_SHARE  # noqa: E402
 
 
@@ -213,7 +214,9 @@ def test_caveat_sample_is_disclosure_only_and_bounded_at_twenty_percent(tmp_path
                                  "floor": "WORD_ONLY", "floor_reason": "mention", "hazard_flags": [], "verdict": "REJECT", "reason_code": "BELOW_FLOOR", "reason": "r"})
     # ten one-candidate cells on one branch: every candidate is a caveated accept on its card, so every one is ELIGIBLE;
     # the running share must never exceed 20%, however the hash buckets fall
-    llm = _Llm({"sonnet": [sonnet_partial] * 10, "opus": [opus_word_only] * 10})
+    # session 14 (R6-54): _verify_pass now takes VOTES_PER_CANDIDATE draws per candidate per model, so ten cells need
+    # ten x 3 replies per model. The 2c sample's subject — the 20% bound and disclosure-only role — is unchanged.
+    llm = _Llm({"sonnet": [sonnet_partial] * 30, "opus": [opus_word_only] * 30})
     r = CellRunner(llm, _SliceReg(rows), preds, {}, str(tmp_path), "sonnet", ["sonnet", "opus"], log=lambda m: None, run_coder=False)
     sampled = 0
     for i in range(10):
@@ -235,7 +238,7 @@ def test_caveat_sample_is_disclosure_only_and_bounded_at_twenty_percent(tmp_path
             assert "opus" not in v and v["final"]["verdict"] == "ACCEPT_WITH_CAVEAT"
         eligible, taken = r.sample_quota("Lutheran")
         assert taken <= CAVEAT_SAMPLE_SHARE * eligible + 1e-9, (eligible, taken)
-    assert sampled == sum(1 for role, m, meta in llm.calls if m == "opus")
+    assert sampled * VOTES_PER_CANDIDATE == sum(1 for role, m, meta in llm.calls if m == "opus")
     assert sampled <= 2                                   # at most 20% of 10
     assert all(0 <= sample_bucket(f"Q-{i:03d}-p1-BSR-LU-01-1") < 100 for i in range(10))
 

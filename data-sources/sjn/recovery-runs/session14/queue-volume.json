@@ -1,0 +1,5289 @@
+{
+ "what": "Codex C3(a) / R6-54: how many EXISTING accepts would enter the author review queue, by branch",
+ "instrument": "live-1 cell states (stored verdicts) + the committed recovery-packets cards (what is seated); no model call, no network",
+ "readings": {
+  "A": "literal C3(a): ACCEPT_WITH_CAVEAT at a PARTIAL final floor. The DISSENTING_VOTE limb cannot fire on a stored verdict: every one was a single call per model, so there is no vote to dissent from",
+  "B": "A, plus accepts whose two stored models returned different verdict classes",
+  "C": "B, plus accepts whose two stored models returned different floors"
+ },
+ "by_branch": {
+  "Anglican": {
+   "accepts": 113,
+   "accepts_seated": 84,
+   "A": 35,
+   "A_seated": 21,
+   "B": 36,
+   "B_seated": 22,
+   "C": 36,
+   "C_seated": 22,
+   "stored_rubrics": 126
+  },
+  "Baptist": {
+   "accepts": 56,
+   "accepts_seated": 54,
+   "stored_rubrics": 60,
+   "A": 18,
+   "A_seated": 16,
+   "B": 19,
+   "B_seated": 17,
+   "C": 19,
+   "C_seated": 17
+  },
+  "Lutheran": {
+   "accepts": 96,
+   "accepts_seated": 75,
+   "B": 28,
+   "B_seated": 23,
+   "C": 28,
+   "C_seated": 23,
+   "stored_rubrics": 113,
+   "A": 26,
+   "A_seated": 21
+  },
+  "Mennonite / Anabaptist": {
+   "accepts": 68,
+   "accepts_seated": 61,
+   "stored_rubrics": 70,
+   "A": 28,
+   "A_seated": 25,
+   "B": 28,
+   "B_seated": 25,
+   "C": 28,
+   "C_seated": 25
+  },
+  "Methodist / Wesleyan": {
+   "accepts": 77,
+   "accepts_seated": 53,
+   "stored_rubrics": 83,
+   "A": 33,
+   "A_seated": 22,
+   "B": 33,
+   "B_seated": 22,
+   "C": 33,
+   "C_seated": 22
+  },
+  "Reformed / Presbyterian": {
+   "accepts": 105,
+   "accepts_seated": 44,
+   "stored_rubrics": 122,
+   "A": 27,
+   "A_seated": 11,
+   "B": 29,
+   "B_seated": 12,
+   "C": 29,
+   "C_seated": 12
+  },
+  "Roman Catholic": {
+   "accepts": 161,
+   "accepts_seated": 96,
+   "stored_rubrics": 161,
+   "A": 37,
+   "A_seated": 17,
+   "B": 37,
+   "B_seated": 17,
+   "C": 37,
+   "C_seated": 17
+  }
+ },
+ "totals": {
+  "accepts": 676,
+  "accepts_seated": 467,
+  "A": 204,
+  "A_seated": 133,
+  "B": 210,
+  "B_seated": 138,
+  "C": 210,
+  "C_seated": 138,
+  "stored_rubrics": 735,
+  "stored_rubrics_with_instrument": 0
+ },
+ "items": [
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-029",
+   "candidate_id": "Q-029-p1-BSR-AN-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-045",
+   "candidate_id": "Q-045-p1-BSR-AN-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-077",
+   "candidate_id": "Q-077-p1-BSR-AN-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-085",
+   "candidate_id": "Q-085-p2-BSR-AN-05-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "SLICE_ROW",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-133",
+   "candidate_id": "Q-133-p2-BSR-AN-05-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "SLICE_ROW",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-165",
+   "candidate_id": "Q-165-p1-BSR-AN-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-189",
+   "candidate_id": "Q-189-p1-BSR-AN-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-197",
+   "candidate_id": "Q-197-p1-BSR-AN-01-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-197",
+   "candidate_id": "Q-197-p1-BSR-AN-03-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-205",
+   "candidate_id": "Q-205-p1-BSR-AN-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-205",
+   "candidate_id": "Q-205-p1-BSR-AN-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-205",
+   "candidate_id": "Q-205-p1-BSR-AN-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-213",
+   "candidate_id": "Q-213-p1-BSR-AN-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "FULL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "FULL"
+   },
+   "reading_A": false,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": []
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-213",
+   "candidate_id": "Q-213-p1-BSR-AN-01-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-213",
+   "candidate_id": "Q-213-p1-BSR-AN-02-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-213",
+   "candidate_id": "Q-213-p1-BSR-AN-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-221",
+   "candidate_id": "Q-221-p1-BSR-AN-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-221",
+   "candidate_id": "Q-221-p1-BSR-AN-04-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-277",
+   "candidate_id": "Q-277-p1-BSR-AN-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-285",
+   "candidate_id": "Q-285-p1-BSR-AN-01-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-285",
+   "candidate_id": "Q-285-p1-BSR-AN-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-301",
+   "candidate_id": "Q-301-p1-BSR-AN-01-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-317",
+   "candidate_id": "Q-317-p1-BSR-AN-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-325",
+   "candidate_id": "Q-325-p1-BSR-AN-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-357",
+   "candidate_id": "Q-357-p1-BSR-AN-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-365",
+   "candidate_id": "Q-365-p1-BSR-AN-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-365",
+   "candidate_id": "Q-365-p1-BSR-AN-03-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-381",
+   "candidate_id": "Q-381-p1-BSR-AN-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-405",
+   "candidate_id": "Q-405-p2-BSR-AN-05-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "SLICE_ROW",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-405",
+   "candidate_id": "Q-405-p2-BSR-AN-05-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "SLICE_ROW",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-413",
+   "candidate_id": "Q-413-p1-BSR-AN-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-421",
+   "candidate_id": "Q-421-p1-BSR-AN-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-421",
+   "candidate_id": "Q-421-p1-BSR-AN-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-437",
+   "candidate_id": "Q-437-p1-BSR-AN-03-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-453",
+   "candidate_id": "Q-453-p1-BSR-AN-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Anglican",
+   "queue_id": "Q-453",
+   "candidate_id": "Q-453-p1-BSR-AN-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-078",
+   "candidate_id": "Q-078-p1-BSR-BA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-102",
+   "candidate_id": "Q-102-p1-BSR-BA-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-126",
+   "candidate_id": "Q-126-p1-BSR-BA-01-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-142",
+   "candidate_id": "Q-142-p1-BSR-BA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-158",
+   "candidate_id": "Q-158-p1-BSR-BA-02-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-166",
+   "candidate_id": "Q-166-p1-BSR-BA-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-198",
+   "candidate_id": "Q-198-p1-BSR-BA-01-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-230",
+   "candidate_id": "Q-230-p1-BSR-BA-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-246",
+   "candidate_id": "Q-246-p1-BSR-BA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-270",
+   "candidate_id": "Q-270-p1-BSR-BA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-278",
+   "candidate_id": "Q-278-p1-BSR-BA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-294",
+   "candidate_id": "Q-294-p1-BSR-BA-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-294",
+   "candidate_id": "Q-294-p1-BSR-BA-02-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-302",
+   "candidate_id": "Q-302-p1-BSR-BA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-302",
+   "candidate_id": "Q-302-p1-BSR-BA-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "FULL",
+   "route": "CAVEATED_ACCEPT_SAMPLE",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "FULL"
+   },
+   "reading_A": false,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": []
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-302",
+   "candidate_id": "Q-302-p1-BSR-BA-02-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-334",
+   "candidate_id": "Q-334-p1-BSR-BA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-414",
+   "candidate_id": "Q-414-p1-BSR-BA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Baptist",
+   "queue_id": "Q-430",
+   "candidate_id": "Q-430-p1-BSR-BA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT_SAMPLE",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-019",
+   "candidate_id": "Q-019-p3-BSR-LU-01-b6-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "FULL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "FULL"
+   },
+   "reading_A": false,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": []
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-083",
+   "candidate_id": "Q-083-p1-BSR-LU-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-091",
+   "candidate_id": "Q-091-p3-BSR-LU-01-b1-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-099",
+   "candidate_id": "Q-099-p1-BSR-LU-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-179",
+   "candidate_id": "Q-179-p1-BSR-LU-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-187",
+   "candidate_id": "Q-187-p1-BSR-LU-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-187",
+   "candidate_id": "Q-187-p1-BSR-LU-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-195",
+   "candidate_id": "Q-195-p1-BSR-LU-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-195",
+   "candidate_id": "Q-195-p1-BSR-LU-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-195",
+   "candidate_id": "Q-195-p1-BSR-LU-03-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-211",
+   "candidate_id": "Q-211-p1-BSR-LU-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-227",
+   "candidate_id": "Q-227-p1-BSR-LU-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "FULL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "FULL"
+   },
+   "reading_A": false,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": []
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-227",
+   "candidate_id": "Q-227-p1-BSR-LU-01-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-243",
+   "candidate_id": "Q-243-p1-BSR-LU-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-275",
+   "candidate_id": "Q-275-p1-BSR-LU-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-283",
+   "candidate_id": "Q-283-p1-BSR-LU-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-283",
+   "candidate_id": "Q-283-p1-BSR-LU-02-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-299",
+   "candidate_id": "Q-299-p1-BSR-LU-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-299",
+   "candidate_id": "Q-299-p1-BSR-LU-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-315",
+   "candidate_id": "Q-315-p1-BSR-LU-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-315",
+   "candidate_id": "Q-315-p1-BSR-LU-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-347",
+   "candidate_id": "Q-347-p3-BSR-LU-01-b13-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-379",
+   "candidate_id": "Q-379-p3-BSR-LU-01-b1-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-379",
+   "candidate_id": "Q-379-p3-BSR-LU-01-b16-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-379",
+   "candidate_id": "Q-379-p3-BSR-LU-01-b22-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-379",
+   "candidate_id": "Q-379-p3-BSR-LU-01-b5-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-387",
+   "candidate_id": "Q-387-p1-BSR-LU-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Lutheran",
+   "queue_id": "Q-419",
+   "candidate_id": "Q-419-p1-BSR-LU-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-064",
+   "candidate_id": "Q-064-p1-BSR-MA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-080",
+   "candidate_id": "Q-080-p1-BSR-MA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-088",
+   "candidate_id": "Q-088-p1-BSR-MA-01-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-104",
+   "candidate_id": "Q-104-p1-BSR-MA-01-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-120",
+   "candidate_id": "Q-120-p1-BSR-MA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-128",
+   "candidate_id": "Q-128-p1-BSR-MA-01-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-144",
+   "candidate_id": "Q-144-p1-BSR-MA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-200",
+   "candidate_id": "Q-200-p1-BSR-MA-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-200",
+   "candidate_id": "Q-200-p1-BSR-MA-01-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-200",
+   "candidate_id": "Q-200-p1-BSR-MA-02-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-208",
+   "candidate_id": "Q-208-p1-BSR-MA-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-280",
+   "candidate_id": "Q-280-p1-BSR-MA-01-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-288",
+   "candidate_id": "Q-288-p1-BSR-MA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT_SAMPLE",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-288",
+   "candidate_id": "Q-288-p1-BSR-MA-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-288",
+   "candidate_id": "Q-288-p1-BSR-MA-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-296",
+   "candidate_id": "Q-296-p1-BSR-MA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-304",
+   "candidate_id": "Q-304-p1-BSR-MA-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-328",
+   "candidate_id": "Q-328-p1-BSR-MA-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-360",
+   "candidate_id": "Q-360-p1-BSR-MA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT_SAMPLE",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-360",
+   "candidate_id": "Q-360-p1-BSR-MA-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-368",
+   "candidate_id": "Q-368-p1-BSR-MA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-384",
+   "candidate_id": "Q-384-p1-BSR-MA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-392",
+   "candidate_id": "Q-392-p1-BSR-MA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-408",
+   "candidate_id": "Q-408-p1-BSR-MA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-416",
+   "candidate_id": "Q-416-p1-BSR-MA-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-432",
+   "candidate_id": "Q-432-p1-BSR-MA-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-448",
+   "candidate_id": "Q-448-p1-BSR-MA-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Mennonite / Anabaptist",
+   "queue_id": "Q-456",
+   "candidate_id": "Q-456-p1-BSR-MA-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-079",
+   "candidate_id": "Q-079-p1-BSR-MW-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-079",
+   "candidate_id": "Q-079-p1-BSR-MW-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "PRIMARY_REJECTED_ALL",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "REJECT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-159",
+   "candidate_id": "Q-159-p1-BSR-MW-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-159",
+   "candidate_id": "Q-159-p1-BSR-MW-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-167",
+   "candidate_id": "Q-167-p1-BSR-MW-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-167",
+   "candidate_id": "Q-167-p1-BSR-MW-03-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-167",
+   "candidate_id": "Q-167-p1-BSR-MW-04-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-207",
+   "candidate_id": "Q-207-p1-BSR-MW-03-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT_SAMPLE",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-207",
+   "candidate_id": "Q-207-p1-BSR-MW-04-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-271",
+   "candidate_id": "Q-271-p1-BSR-MW-04-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT_SAMPLE",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-279",
+   "candidate_id": "Q-279-p1-BSR-MW-02-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-279",
+   "candidate_id": "Q-279-p1-BSR-MW-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-279",
+   "candidate_id": "Q-279-p1-BSR-MW-03-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-279",
+   "candidate_id": "Q-279-p1-BSR-MW-04-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-287",
+   "candidate_id": "Q-287-p1-BSR-MW-01-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-287",
+   "candidate_id": "Q-287-p1-BSR-MW-02-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT_SAMPLE",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-287",
+   "candidate_id": "Q-287-p1-BSR-MW-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-287",
+   "candidate_id": "Q-287-p1-BSR-MW-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-303",
+   "candidate_id": "Q-303-p1-BSR-MW-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-303",
+   "candidate_id": "Q-303-p1-BSR-MW-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-303",
+   "candidate_id": "Q-303-p1-BSR-MW-04-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-319",
+   "candidate_id": "Q-319-p1-BSR-MW-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT_SAMPLE",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-319",
+   "candidate_id": "Q-319-p1-BSR-MW-03-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-327",
+   "candidate_id": "Q-327-p1-BSR-MW-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-415",
+   "candidate_id": "Q-415-p1-BSR-MW-02-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-415",
+   "candidate_id": "Q-415-p1-BSR-MW-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-415",
+   "candidate_id": "Q-415-p1-BSR-MW-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-423",
+   "candidate_id": "Q-423-p1-BSR-MW-03-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-423",
+   "candidate_id": "Q-423-p1-BSR-MW-03-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-431",
+   "candidate_id": "Q-431-p1-BSR-MW-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-447",
+   "candidate_id": "Q-447-p1-BSR-MW-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-447",
+   "candidate_id": "Q-447-p1-BSR-MW-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Methodist / Wesleyan",
+   "queue_id": "Q-447",
+   "candidate_id": "Q-447-p1-BSR-MW-04-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-012",
+   "candidate_id": "Q-012-p1-BSR-RP-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-020",
+   "candidate_id": "Q-020-p1-BSR-RP-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "FULL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "FULL"
+   },
+   "reading_A": false,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": []
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-204",
+   "candidate_id": "Q-204-p1-BSR-RP-05-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-284",
+   "candidate_id": "Q-284-p1-BSR-RP-02-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-284",
+   "candidate_id": "Q-284-p1-BSR-RP-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-284",
+   "candidate_id": "Q-284-p1-BSR-RP-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-284",
+   "candidate_id": "Q-284-p1-BSR-RP-04-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-284",
+   "candidate_id": "Q-284-p1-BSR-RP-05-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-300",
+   "candidate_id": "Q-300-p1-BSR-RP-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-300",
+   "candidate_id": "Q-300-p1-BSR-RP-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-300",
+   "candidate_id": "Q-300-p1-BSR-RP-05-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-316",
+   "candidate_id": "Q-316-p1-BSR-RP-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-316",
+   "candidate_id": "Q-316-p1-BSR-RP-06-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-404",
+   "candidate_id": "Q-404-p1-BSR-RP-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-404",
+   "candidate_id": "Q-404-p1-BSR-RP-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-404",
+   "candidate_id": "Q-404-p1-BSR-RP-06-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-412",
+   "candidate_id": "Q-412-p1-BSR-RP-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-412",
+   "candidate_id": "Q-412-p1-BSR-RP-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-420",
+   "candidate_id": "Q-420-p1-BSR-RP-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-420",
+   "candidate_id": "Q-420-p1-BSR-RP-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-420",
+   "candidate_id": "Q-420-p1-BSR-RP-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-420",
+   "candidate_id": "Q-420-p1-BSR-RP-05-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-428",
+   "candidate_id": "Q-428-p1-BSR-RP-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "FULL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "FULL",
+    "opus": "FULL"
+   },
+   "reading_A": false,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": []
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-428",
+   "candidate_id": "Q-428-p1-BSR-RP-04-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-436",
+   "candidate_id": "Q-436-p1-BSR-RP-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-436",
+   "candidate_id": "Q-436-p1-BSR-RP-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "FULL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-436",
+   "candidate_id": "Q-436-p1-BSR-RP-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-452",
+   "candidate_id": "Q-452-p1-BSR-RP-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Reformed / Presbyterian",
+   "queue_id": "Q-452",
+   "candidate_id": "Q-452-p1-BSR-RP-04-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": "CAVEATED_ACCEPT",
+   "models": [
+    "opus",
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT",
+    "opus": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL",
+    "opus": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-057",
+   "candidate_id": "Q-057-p1-BSR-RC-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-057",
+   "candidate_id": "Q-057-p1-BSR-RC-07-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-057",
+   "candidate_id": "Q-057-p1-BSR-RC-07-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-073",
+   "candidate_id": "Q-073-p1-BSR-RC-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-089",
+   "candidate_id": "Q-089-p1-BSR-RC-07-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-097",
+   "candidate_id": "Q-097-p1-BSR-RC-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-105",
+   "candidate_id": "Q-105-p1-BSR-RC-07-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-121",
+   "candidate_id": "Q-121-p1-BSR-RC-02-3",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-193",
+   "candidate_id": "Q-193-p1-BSR-RC-04-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-257",
+   "candidate_id": "Q-257-p1-BSR-RC-06-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-273",
+   "candidate_id": "Q-273-p1-BSR-RC-07-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-281",
+   "candidate_id": "Q-281-p1-BSR-RC-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-297",
+   "candidate_id": "Q-297-p1-BSR-RC-02-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-297",
+   "candidate_id": "Q-297-p1-BSR-RC-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-297",
+   "candidate_id": "Q-297-p1-BSR-RC-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-297",
+   "candidate_id": "Q-297-p1-BSR-RC-04-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-313",
+   "candidate_id": "Q-313-p1-BSR-RC-02-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-313",
+   "candidate_id": "Q-313-p1-BSR-RC-07-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-321",
+   "candidate_id": "Q-321-p1-BSR-RC-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-329",
+   "candidate_id": "Q-329-p1-BSR-RC-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-345",
+   "candidate_id": "Q-345-p1-BSR-RC-01-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-345",
+   "candidate_id": "Q-345-p1-BSR-RC-02-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-345",
+   "candidate_id": "Q-345-p1-BSR-RC-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-345",
+   "candidate_id": "Q-345-p1-BSR-RC-03-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-345",
+   "candidate_id": "Q-345-p1-BSR-RC-04-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-361",
+   "candidate_id": "Q-361-p1-BSR-RC-04-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-385",
+   "candidate_id": "Q-385-p1-BSR-RC-02-3",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-385",
+   "candidate_id": "Q-385-p1-BSR-RC-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-385",
+   "candidate_id": "Q-385-p1-BSR-RC-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-401",
+   "candidate_id": "Q-401-p1-BSR-RC-01-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-401",
+   "candidate_id": "Q-401-p1-BSR-RC-02-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-401",
+   "candidate_id": "Q-401-p1-BSR-RC-03-1",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-401",
+   "candidate_id": "Q-401-p1-BSR-RC-04-1",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-409",
+   "candidate_id": "Q-409-p1-BSR-RC-04-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-409",
+   "candidate_id": "Q-409-p1-BSR-RC-07-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-425",
+   "candidate_id": "Q-425-p1-BSR-RC-04-2",
+   "seated": true,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  },
+  {
+   "branch": "Roman Catholic",
+   "queue_id": "Q-441",
+   "candidate_id": "Q-441-p1-BSR-RC-07-2",
+   "seated": false,
+   "verdict": "ACCEPT_WITH_CAVEAT",
+   "floor_final": "PARTIAL",
+   "route": null,
+   "models": [
+    "sonnet"
+   ],
+   "verdict_by_model": {
+    "sonnet": "ACCEPT_WITH_CAVEAT"
+   },
+   "floor_by_model": {
+    "sonnet": "PARTIAL"
+   },
+   "reading_A": true,
+   "reading_B": true,
+   "reading_C": true,
+   "reasons_literal": [
+    "ACCEPT_WITH_CAVEAT_AT_PARTIAL"
+   ]
+  }
+ ]
+}

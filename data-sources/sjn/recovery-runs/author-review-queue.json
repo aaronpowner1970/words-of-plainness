@@ -1,0 +1,19 @@
+{
+ "schema": "sjn-gate6-author-review-queue/1",
+ "what": "The author review queue (Comparison Principles Codex C3, shaped by C3(a) / R6-54). A verifier ACCEPT that carries doubt — any dissenting vote among its replicates, or ACCEPT_WITH_CAVEAT at a PARTIAL floor — is recorded here instead of being refused by code. A queued item is HELD: the packet builder gives it no seat and the emit step refuses to publish it, until the author records an author_ruling of ADMIT or REFUSE.",
+ "ruling": "R6-54_production_voting_and_review_queue",
+ "doubt": {
+  "DISSENTING_VOTE": "any replicate whose verdict class differs from the majority's",
+  "ACCEPT_WITH_CAVEAT_AT_PARTIAL": "the final verdict is ACCEPT_WITH_CAVEAT and the final floor is PARTIAL"
+ },
+ "author_ruling_shape": {
+  "decision": [
+   "ADMIT",
+   "REFUSE"
+  ],
+  "ruled": "YYYY-MM-DD",
+  "why": "the author's reason",
+  "recorded_by": "the session that recorded it"
+ },
+ "items": []
+}

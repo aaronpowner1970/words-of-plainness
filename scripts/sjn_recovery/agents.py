@@ -77,7 +77,8 @@ def phrase_names_the_spirit(phrase):
 from .registry import tier_rank
 from .textutil import scrub_urls, phrase_word_count
 from .allocation import allocate, translation_pairs, speaks_for_groups
-from . import guards, prompts, retrieval, store
+from .llm import REPLICATE_STRIDE
+from . import guards, prompts, retrieval, store, review_queue
 
 
 def legal_spans(phrase, limit=PHRASE_MAX_WORDS, cap=12):
@@ -128,6 +129,102 @@ def lower_floor(*floors):
     """2a: the LOWER of the floors returned (FULL > PARTIAL > WORD_ONLY); None-safe."""
     known = [f for f in floors if f in FLOOR_ORDER]
     return max(known, key=lambda f: FLOOR_ORDER[f]) if known else None
+
+
+# ---------------------------------------------------------------- production voting (R6-54 / Codex C1(a), session 14)
+# "A branch run makes three gate6-v1.3 calls per candidate and takes the majority over verdict class. The floor is the
+# lowest floor among the majority, so rule 2a stands. Opus routes are voted the same way. Every verdict records its
+# instrument: prompt version, call count and vote split. No seated verdict reaches public certification on anything but
+# a v1.3 majority verdict." (Comparison Principles Codex v0.8, C1(a); ruled R6-54.)
+#
+# Why the harness needed this: C1 says a gate that reads one call measures noise, and a gate that votes while production
+# does not certifies a different instrument from the one that runs. Until session 14 the branch runs read ONE call per
+# candidate while the version gate read three or five. Session 13 stopped before its phase 7 for exactly this.
+VOTES_PER_CANDIDATE = 3
+VOTING_MAJORITY = "MAJORITY_OF_3"
+VOTING_SINGLE_CALL = "SINGLE_CALL"
+VOTED_FLOOR_RULE = "LOWEST_FLOOR_AMONG_THE_MAJORITY (R6-54; rule 2a stands)"
+PUBLIC_CERTIFICATION_VERSION = "gate6-v1.3"
+# Verdict classes, most conservative first. A vote with no majority (1/1/1 over three classes) fails CLOSED to the most
+# conservative class present — never to a plurality of one. B1(c) and B2 read the same way: absent the marks, fail closed.
+VERDICT_CLASSES = ("REJECT", "ACCEPT_WITH_CAVEAT", "ACCEPT")
+
+
+def instrument(rubric):
+    """R6-54 / Codex C1(a): the instrument behind one rubric — prompt version, call count and vote split.
+
+    A rubric a voted run wrote carries its own `instrument`. A rubric written before session 14 carries none: it is
+    labelled with WHAT IT ACTUALLY WAS — its own prompt version, ONE call, no vote split — and is never relabelled as
+    a majority verdict. That is the whole point of recording the instrument: the Anglican cards carry gate6-v1.1 and
+    v1.2 single-call verdicts beside any v1.3 majority verdict, and the packet must say so."""
+    if not isinstance(rubric, dict):
+        return None
+    inst = rubric.get("instrument")
+    if isinstance(inst, dict):
+        return dict(inst)
+    return {"prompt_version": rubric.get("prompt_version"), "call_count": 1, "voting": VOTING_SINGLE_CALL,
+            "vote_split": None, "majority_class": None, "dissent": None,
+            "note": "stored before session 14's voting: labelled with the instrument it actually was, one call, not a "
+                    "majority verdict (R6-54)"}
+
+
+def is_voted_v13(rubric):
+    """Is this rubric a gate6-v1.3 MAJORITY verdict — the only instrument R6-54 lets carry a seated citation to public
+    certification? A single call is not, whatever its version; a majority at another version is not either."""
+    inst = instrument(rubric) or {}
+    return inst.get("voting") == VOTING_MAJORITY and inst.get("prompt_version") == PUBLIC_CERTIFICATION_VERSION
+
+
+def vote(replicates, lexical_floor=False):
+    """R6-54: the voted rubric from N replicate rubrics of one candidate by one model.
+
+    The majority is taken over VERDICT CLASS (the code-recomputed verdict, not the model's own `verdict` line). The
+    floor is the LOWEST floor among the majority's rubrics, and the verdict is then recomputed at that floor by the
+    same verdict_from_rubric() every other path uses — so a majority of ACCEPT_WITH_CAVEAT whose lowest majority floor
+    is WORD_ONLY refuses BELOW_FLOOR, exactly as rule 2a does across two models.
+
+    The representative rubric is the first majority rubric AT the merged floor (else the first majority rubric), so the
+    stored lines and the recorded floor are one draw's, never a blend of two. Every replicate is kept on the voted
+    rubric under `replicates`, so the vote can be re-read.
+
+    Returns None when no replicate is DONE (all PENDING / UNPARSEABLE); the caller keeps waiting."""
+    done = [r for r in replicates if isinstance(r, dict) and r.get("status") == "DONE"]
+    if not done:
+        return None
+    classes = [r.get("verdict") for r in done]
+    counts = {c: classes.count(c) for c in set(classes)}
+    top = max(counts.values())
+    tied = [c for c, n in counts.items() if n == top]
+    no_majority = top * 2 <= len(done)                 # not more than half of the DONE draws
+    if no_majority or len(tied) > 1:
+        # fail closed: the most conservative class among those tied at the top
+        cls = min(tied, key=lambda c: VERDICT_CLASSES.index(c) if c in VERDICT_CLASSES else -1)
+    else:
+        cls = tied[0]
+    majority = [r for r in done if r.get("verdict") == cls]
+    floor = lower_floor(*[r.get("floor") for r in majority])
+    base = next((r for r in majority if r.get("floor") == floor), majority[0])
+    voted = dict(base)
+    voted["floor"] = floor
+    verdict, code = verdict_from_rubric(base, floor, lexical_floor)
+    voted["verdict"], voted["reason_code_final"] = verdict, code
+    versions = sorted({r.get("prompt_version") for r in done})
+    voted["instrument"] = {
+        "prompt_version": versions[0] if len(versions) == 1 else "; ".join(str(v) for v in versions),
+        "call_count": len(done), "calls_attempted": len(replicates), "voting": f"MAJORITY_OF_{len(done)}",
+        "vote_split": {c: counts[c] for c in sorted(counts, key=lambda c: (-counts[c], str(c)))},
+        "majority_class": cls, "majority_share": f"{top}/{len(done)}",
+        "dissent": top < len(done), "no_majority": bool(no_majority or len(tied) > 1),
+        "floor_rule": VOTED_FLOOR_RULE, "floor_by_replicate": [r.get("floor") for r in done],
+        "floor_merged": floor, "representative_call_id": base.get("call_id"),
+        "replicate_call_ids": [r.get("call_id") for r in done],
+        "ruling": "R6-54 (Comparison Principles Codex v0.8, C1(a))",
+    }
+    if voted["instrument"]["no_majority"]:
+        voted["instrument"]["no_majority_rule"] = ("no class held more than half the draws: the vote fails closed to the "
+                                                   "most conservative class present, never to a plurality of one")
+    voted["replicates"] = [dict(r) for r in done]
+    return voted
 
 
 OUTSIDE_FORMULA_GUARD = "R6-18"
@@ -187,7 +284,7 @@ def _chunk_views(chunks):
 
 class CellRunner:
     def __init__(self, llm, registry, predicates, comparators, state_dir, locator_model, verifier_models, coder_model=None,
-                 log=print, run_coder=True, exhaust=True):
+                 log=print, run_coder=True, exhaust=True, votes_per_candidate=VOTES_PER_CANDIDATE):
         self.llm = llm
         self.reg = registry
         self.predicates = predicates
@@ -204,6 +301,10 @@ class CellRunner:
         self.log = log
         self.run_coder = run_coder
         self.exhaust = exhaust
+        # R6-54 / Codex C1(a): a branch run makes three gate6-v1.3 calls per candidate and takes the majority. Settable
+        # only so a test can drive one draw or five; a production run never changes it (a run that voted differently from
+        # the gate would certify a different instrument from the one measured — the C1 failure).
+        self.votes_per_candidate = int(votes_per_candidate)
         self._pairs = {}
 
     def pairs(self, branch):
@@ -233,28 +334,32 @@ class CellRunner:
     # ---------------------------------------------------------------- calls with a ceiling retry
     RETRY_CEILING = 8000
 
-    def _call(self, role, system, user, model, max_tokens, meta, required=()):
+    def _call(self, role, system, user, model, max_tokens, meta, required=(), replicate=0):
         """One call, parsed. A reply that came back unparseable (the JSON cut off at the token ceiling,
         as happens when the ceiling is spent before the text block) is re-sent ONCE with a larger
         ceiling under a distinct call identity (attempt=1). Returns (out, rec, parsed, attempt);
         out is None while a call is pending.
         Session 6: `required` keys — a truncated reply that parse_json SALVAGES (it closes the object after the last complete
         pair) but that lacks one of them is incomplete, not answered: it takes the same retry. (A verifier reply cut off before
-        its `floor` line was salvaged and scored ACCEPT on two carded live-1 candidates, Q-081 and Q-099.)"""
-        out, rec = self.llm.complete(role, system, user, model=model, max_tokens=max_tokens, meta=meta)
+        its `floor` line was salvaged and scored ACCEPT on two carded live-1 candidates, Q-081 and Q-099.)
+        Session 14 (R6-54): `replicate` is the draw number of a voted call. It shifts the attempt base by
+        LLM.REPLICATE_STRIDE so each draw has its own identity; replicate 0 keeps attempts 0 / 1, so every call identity
+        written before session 14 is unchanged and an answered call is still served from the audit log."""
+        base = getattr(self.llm, "REPLICATE_STRIDE", REPLICATE_STRIDE) * int(replicate or 0)
+        out, rec = self.llm.complete(role, system, user, model=model, max_tokens=max_tokens, meta=meta, attempt=base)
         if out is None:
-            return None, rec, None, 0
+            return None, rec, None, base
         parsed = prompts.parse_json(out)
         if parsed is not None and all(parsed.get(k) not in (None, "") for k in required):
-            return out, rec, parsed, 0
+            return out, rec, parsed, base
         out2, rec2 = self.llm.complete(role, system, user, model=model, max_tokens=max(self.RETRY_CEILING, max_tokens * 2),
-                                       meta=meta, attempt=1)
+                                       meta=meta, attempt=base + 1)
         if out2 is None:
-            return None, rec2, None, 1
+            return None, rec2, None, base + 1
         parsed2 = prompts.parse_json(out2)
         if parsed2 is not None and not all(parsed2.get(k) not in (None, "") for k in required):
             parsed2 = None                                  # still incomplete after the retry: UNPARSEABLE, never a verdict
-        return out2, rec2, parsed2, 1
+        return out2, rec2, parsed2, base + 1
 
     # ---------------------------------------------------------------- locator (per standard)
     def standards_for_pass(self, branch, pass_no):
@@ -578,7 +683,10 @@ class CellRunner:
         return out
 
     # ---------------------------------------------------------------- verifier
-    def verify(self, cell, cand, model):
+    def verify(self, cell, cand, model, replicate=0):
+        """One verifier draw. `replicate` (R6-54) is the draw number within a voted read; verify_voted() below makes
+        VOTES_PER_CANDIDATE of them and takes the majority. A single verify() call is still one draw and is labelled
+        as such by instrument()."""
         pred = self.predicates[cell["family_id"]]
         chunk_view = {"registry_id": cand["registry_id"], "locator": cand["locator"], "text": cand["chunk_text"]}
         user = prompts.verifier_user(pred, cand, chunk_view)
@@ -588,14 +696,15 @@ class CellRunner:
         variant = prompts.verifier_variant(pred)
         out, rec, parsed, attempt = self._call("verifier", prompts.verifier_system(pred), user, model, 2500,
                                                {"queue_id": cell["queue_id"], "branch": cell.get("branch"), "candidate_id": cand["candidate_id"],
-                                                "verifier_model": model, "verifier_variant": variant},
-                                               required=VERIFIER_REQUIRED)
+                                                "verifier_model": model, "verifier_variant": variant, "replicate": replicate},
+                                               required=VERIFIER_REQUIRED, replicate=replicate)
         if out is None:
-            return {"status": "PENDING", "call_id": rec["call_id"], "model": model, "prompt_variant": variant}
+            return {"status": "PENDING", "call_id": rec["call_id"], "model": model, "prompt_variant": variant,
+                    "replicate": replicate}
         parsed = parsed or {}
         rubric = {
             "model": model, "call_id": rec["call_id"], "attempt": attempt, "prompt_version": prompts.prompt_version("verifier"),
-            "prompt_variant": variant,
+            "prompt_variant": variant, "replicate": replicate,
             "phrase_verbatim": parsed.get("phrase_verbatim"), "subject_is_required": parsed.get("subject_is_required"),
             "grammatical_subject": parsed.get("grammatical_subject"), "speech_act_is_assertion": parsed.get("speech_act_is_assertion"),
             "speech_act_note": parsed.get("speech_act_note"), "floor": parsed.get("floor"), "floor_reason": parsed.get("floor_reason"),
@@ -643,6 +752,30 @@ class CellRunner:
         rubric["verdict"] = verdict
         rubric["reason_code_final"] = code
         return rubric
+
+    def verify_voted(self, cell, cand, model, votes=None):
+        """R6-54 / Codex C1(a): VOTES_PER_CANDIDATE gate6-v1.3 draws of the same call, and the majority over verdict
+        class. Opus routes come through here too, so both models are voted the same way.
+
+        Returns the voted rubric, or a PENDING record while any draw is unanswered (the batch backend answers a whole
+        round at a time, so all three draws are issued before anything is decided — a pending draw never silently
+        becomes a two-call majority). The replicates are kept on the voted rubric."""
+        n = int(votes or self.votes_per_candidate)
+        pred = self.predicates[cell["family_id"]]
+        draws = [self.verify(cell, cand, model, replicate=i) for i in range(n)]
+        pending = [d for d in draws if d.get("status") == "PENDING"]
+        if pending:
+            return {"status": "PENDING", "model": model, "call_id": pending[0].get("call_id"),
+                    "prompt_variant": pending[0].get("prompt_variant"),
+                    "voting": {"votes": n, "answered": n - len(pending), "pending": len(pending),
+                               "call_ids": [d.get("call_id") for d in draws],
+                               "note": "R6-54: all three draws are issued before the vote is taken; a pending draw "
+                                       "never becomes a two-call majority"}}
+        voted = vote(draws, bool(pred.get("lexical_floor")))
+        if voted is None:                        # every draw came back UNPARSEABLE: the first draw stands as the record
+            return dict(draws[0], instrument=dict(instrument(draws[0]) or {}, call_count=n,
+                                                  note="every replicate was UNPARSEABLE; no majority was taken (R6-54)"))
+        return voted
 
     def needs_adjudication(self, cand, all_rejected):
         if not self.adjudicator:
@@ -697,6 +830,28 @@ class CellRunner:
                "lower_floor_applied": bool(a_done and floor != base.get("floor") and floor in FLOOR_ORDER),
                "second_rubric": (adjudicator if a_done else None),
                "second_rubric_role": ("ADJUDICATES_LINES_1_3" if adjudicating else ("DISCLOSURE_FLOOR_ONLY" if a_done else None))}
+        # ---- R6-54 / Codex C1(a): every verdict records its instrument, and says whether it may carry a seated
+        # citation to public certification. A stored single-call verdict is labelled as one, never as a majority.
+        insts = {m: instrument(r) for m, r in ((primary, p), (adjudicator, a if a_done else None)) if m and r}
+        fin["instrument"] = insts
+        fin["instrument_of_record"] = insts.get(base_model)
+        deciding = [r for r in (p, a if a_done else None) if isinstance(r, dict) and r.get("status") == "DONE"]
+        fin["v13_majority"] = bool(deciding) and all(is_voted_v13(r) for r in deciding)
+        fin["public_certification_eligible"] = fin["v13_majority"]
+        if not fin["v13_majority"]:
+            fin["public_certification_bar"] = (
+                "R6-54 (Codex C1(a)): no seated verdict reaches public certification on anything but a gate6-v1.3 "
+                "MAJORITY verdict. This verdict's instrument is " +
+                "; ".join(f"{m}: {i.get('prompt_version')} x{i.get('call_count')} ({i.get('voting')})" for m, i in insts.items()))
+        # ---- Codex C3(a): doubt is any dissenting vote, or ACCEPT_WITH_CAVEAT at PARTIAL. Doubt QUEUES, never refuses:
+        # C3 exists because a code guard on a model self-report refuses real citations when the model misreports.
+        reasons = []
+        if verdict in ACCEPTS:
+            if any((i or {}).get("dissent") for i in insts.values()):
+                reasons.append(review_queue.REASON_DISSENT)
+            if verdict == "ACCEPT_WITH_CAVEAT" and floor == "PARTIAL":
+                reasons.append(review_queue.REASON_CAVEAT_AT_PARTIAL)
+        fin["review_queue_reasons"] = reasons
         if caps:
             fin["floor_rulings_applied"] = [c.get("by") for c in caps]
             fin["floor_before_rulings"] = floor_before_rulings
@@ -722,7 +877,7 @@ class CellRunner:
         for cand in cands:
             v = st["verifications"].setdefault(cand["candidate_id"], {})
             if self.primary not in v or v[self.primary].get("status") in ("PENDING", "UNPARSEABLE"):
-                v[self.primary] = self.verify(cell, cand, self.primary)
+                v[self.primary] = self.verify_voted(cell, cand, self.primary)          # R6-54: three v1.3 draws, majority
             if v[self.primary].get("status") == "PENDING":
                 pending = True
         if pending:
@@ -734,7 +889,7 @@ class CellRunner:
             if route or not v.get("_route"):
                 v["_route"] = route if route else v.get("_route")
             if route and (self.adjudicator not in v or v[self.adjudicator].get("status") in ("PENDING", "UNPARSEABLE")):
-                v[self.adjudicator] = self.verify(cell, cand, self.adjudicator)
+                v[self.adjudicator] = self.verify_voted(cell, cand, self.adjudicator)   # R6-54: opus routes vote the same way
             if route and v[self.adjudicator].get("status") == "PENDING":
                 pending = True
         if pending:
@@ -764,7 +919,7 @@ class CellRunner:
                     if not rec["sampled"]:
                         continue
                     v["_route"] = ROUTE_CAVEAT_SAMPLE
-                    v[self.adjudicator] = self.verify(cell, cand, self.adjudicator)
+                    v[self.adjudicator] = self.verify_voted(cell, cand, self.adjudicator)   # R6-54: the 2c sample votes too
                     fired = True
                     if v[self.adjudicator].get("status") == "PENDING":
                         pending = True

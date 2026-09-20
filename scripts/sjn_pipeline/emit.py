@@ -1,10 +1,15 @@
 """Build the emitted JSON objects from the Context + assertion results."""
+import os
 import re
+import sys
 from collections import Counter, OrderedDict
 
 from .model import BRANCHES, ratification_decision
 from .workbook import s, b
 from .textnorm import style_flags
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from sjn_recovery import review_queue  # noqa: E402
 
 H_KEY = "Historical quoted phrase (≤15 words)"
 R_KEY = "Restoration quoted phrase (primary, ≤15 words)"
@@ -207,6 +212,23 @@ def _card(rec):
         c3 = f"{a['locator']} ({a['authority_role']})."
         c4 = rec["caution"]
     return {"clauses": [c1, c2, c3, c4], "text": " ".join(x for x in (c1, c2, c3, c4) if x)}
+
+
+# ------------------------------------------------------------------ the author review queue's publication bar
+# Codex C3 / C3(a), ruled R6-54 (session 14): "a queued item cannot be published until the author rules on it", and
+# "both the packet builder and the emit step refuse to pass a queued item". packets.build_branch_packet is the first
+# half; this is the second. It runs over the WHOLE payload about to be written to src/_data/sjn, so a held candidate
+# cannot reach app data through a field this module does not know about.
+def assert_review_queue_clear(files, log=None):
+    """Hard-stop the emit step if anything the author review queue holds would be written. Returns the queue summary."""
+    q = review_queue.load()
+    for name, obj in (files or {}).items():
+        review_queue.assert_nothing_held_publishes(obj, f"src/_data/sjn/{name}", q)
+    summary = review_queue.summary(q)
+    if log:
+        log(f"   author review queue: {summary['items']} item(s), {summary['held']} held, "
+            f"{summary['admitted']} admitted, {summary['refused']} refused ({summary['file']}) — nothing held publishes")
+    return summary
 
 
 # ------------------------------------------------------------------ cells

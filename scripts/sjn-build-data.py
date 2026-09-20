@@ -319,6 +319,9 @@ def main():
         "ranges.json": {"app_master_version": version, "canonical_hash": h1, **ranges},
         "branches.json": {"app_master_version": version, "canonical_hash": h1, **branches_reg},
     }
+    # Codex C3(a) / R6-54: the emit step's half of the publication bar. Nothing the author review queue holds reaches
+    # src/_data/sjn. This runs BEFORE the first file is written, so a hold stops the whole emit, not half of it.
+    meta["author_review_queue"] = emit.assert_review_queue_clear(files, log)
     for name, obj in files.items():
         dump(os.path.join(args.out, name), obj)
     meta["files"] = {name: {"sha256": sha256_file(os.path.join(args.out, name)), "bytes": os.path.getsize(os.path.join(args.out, name))}

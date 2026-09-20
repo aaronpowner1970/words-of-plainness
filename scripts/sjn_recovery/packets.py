@@ -27,7 +27,14 @@ An empty must be auditable (2026-09-13, after the Anglican packet review):
       sampled and names the honest state (NOT LOCATED — NOT YET RECOVERED);
   2c  the cell runner exhausts a sampled standard before an empty is declared; the card carries the
       exhaustion record (batches, whether a candidate turned up);
-  2d  every empty carries a one-line locator rationale per standard for the silence."""
+  2d  every empty carries a one-line locator rationale per standard for the silence.
+
+Session 14 (R6-54 / Codex C3(a)) — the packet builder's half of the publication bar: a candidate the author review queue
+holds (a doubtful accept the author has not yet ruled on, or one the author REFUSED) takes NO SEAT. It never reaches
+`accepted`, so the allocator cannot give it a slot, a lead, or a parallel-witness record; it is kept on the card under
+`review_queue_held` with the reason it is there, and it withdraws the card's NOT LOCATED - CURRENT STANDARD REVIEWED
+offer, because a card with an unruled item has not finished being reviewed. The bar is a HOLD, never a code refusal on a
+model self-report (Codex C3): the verdict the verifier gave is kept on the entry exactly as given."""
 import json
 import os
 import time
@@ -36,7 +43,7 @@ from .config import (PACKETS_DIR, EMPTY_RESULT, EMPTY_RESULT_INCOMPLETE, MAX_CAN
                      CAVEAT_SAMPLE_SHARE, LOWER_FLOOR_RULE, HAZARD_IDIOM_OR_FORMULA, CONSULTATION_LADDERS, CHUNK_ID_MAPPINGS)
 from .registry import tier_rank
 from .allocation import allocate, translation_pairs, translation_pair_evidence, speaks_for_groups
-from . import guards, store, rulings
+from . import guards, store, rulings, review_queue
 
 ACCEPTS = ("ACCEPT", "ACCEPT_WITH_CAVEAT")
 ORDERING = ("authority tier descending on the effective tier (creed_tier_resolution); the cap filled tier by tier; lower-tier "
@@ -237,13 +244,15 @@ def no_text_rows(st, branch_rows, registry, manifest, card_empty, ladder_entered
     return out, not_consulted
 
 
-def empty_result_option(coverage_final, rationales, exhaustion=None, no_text=None, not_consulted=None):
+def empty_result_option(coverage_final, rationales, exhaustion=None, no_text=None, not_consulted=None, review_queue_held=None):
     """2a/2b/2d, pure: the empty-result option for a card. The REVIEWED state is offered only when every
     consulted standard is FULL or EXHAUSTED; a sampled standard blocks the claim and the honest state is named.
     Session 5: a ratified row that supplied the cell NO TEXT is carried in standards_reviewed with status NO TEXT
     and its reason, and blocks the claim exactly as a sampled standard does; a card that consulted nothing offers nothing.
     Session 7 (Task 6): a row the ladder never sent to the locator is carried with status NOT CONSULTED (ladder tier X)
-    and its tier, and does NOT block the claim — it is disclosure, not an unread standard."""
+    and its tier, and does NOT block the claim — it is disclosure, not an unread standard.
+    Session 14 (R6-54 / Codex C3(a)): a candidate the author review queue holds blocks the claim too. The card has an
+    accept the author has not ruled on, so its review is not finished and 'REVIEWED' may not be claimed for it."""
     reviewed = []
     incomplete = []
     for nc in not_consulted or []:
@@ -266,9 +275,11 @@ def empty_result_option(coverage_final, rationales, exhaustion=None, no_text=Non
         if rec["status"] == "SAMPLED":
             incomplete.append(rid)
         reviewed.append(rec)
-    complete = not incomplete and bool(coverage_final)
+    held = list(review_queue_held or [])
+    complete = not incomplete and not held and bool(coverage_final)
     reasons = ([f"{r['registry_id']} supplied no text ({r['manifest_status']}): {r['reason']}" for r in reviewed if r["status"] == "NO TEXT"]
-               + [f"{r['registry_id']} was sampled ({r['supplied']} of {r['of']} chunks, {int((r['share'] or 0) * 100)}%)" for r in reviewed if r["status"] == "SAMPLED"])
+               + [f"{r['registry_id']} was sampled ({r['supplied']} of {r['of']} chunks, {int((r['share'] or 0) * 100)}%)" for r in reviewed if r["status"] == "SAMPLED"]
+               + [f"{h['candidate_id']} is in the author review queue ({', '.join(h['reasons'])}): {h['state']}" for h in held])
     if not coverage_final and not reasons:
         reasons = ["no standard was consulted for this cell"]
     return {
@@ -277,6 +288,7 @@ def empty_result_option(coverage_final, rationales, exhaustion=None, no_text=Non
         "honest_state_if_not_offered": None if complete else EMPTY_RESULT_INCOMPLETE,
         "why_not_offered": None if complete else ("'REVIEWED' may not be claimed: " + "; ".join(reasons)),
         "review_incomplete": incomplete,
+        "review_queue_held": [h["candidate_id"] for h in held],
         "always_available": True,
         "standards_reviewed": reviewed,
         "not_consulted_by_ladder": [{"registry_id": n["registry_id"], "ladder_tier": n.get("ladder_tier")} for n in not_consulted or []],
@@ -294,6 +306,8 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
     manifest = store.load_manifest().get("standards", {})
     manifest_status = {rid: (r.get("status") or "") for rid, r in manifest.items()}
     cards, dropped_at_build, n_rej, repaired_chunks = [], [], 0, []
+    queue = review_queue.load()                    # session 14 (R6-54): read once per packet, so one build is one queue
+    queue_held_entries = []
     chunk_index, moves, relocated_chunks = {}, relocations(), []
     rows_without_text = []
     for r in registry.for_branch(branch, citable_only=False):
@@ -334,6 +348,8 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
             "caveat_sample": runner.caveat_sample_stats(st) if st else [],
             "coder_skipped": (st or {}).get("coder_skipped") or {},
             "exhaustion_sourced_candidates": [],
+            # session 14 (R6-54 / Codex C3(a)): accepts the author review queue holds. They are NOT seats and NOT rejections.
+            "review_queue_held": [],
         }
         if st and st.get("exhaustion"):
             exhaustion_cells.append(cell["queue_id"])
@@ -432,7 +448,15 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                         dropped_at_build.append((cell["queue_id"], cand["candidate_id"], why))
                         card["rejections"].append({"stage": "packet re-assertion", **entry})
                     elif runner.final_verdict(st, cand["candidate_id"]) in ACCEPTS:
-                        accepted.append(entry)
+                        # ---- the publication bar's first half (R6-54 / Codex C3(a)). A held item never reaches
+                        # `accepted`, so the allocator cannot seat it, lead with it, or record it as a parallel witness.
+                        qhold = review_queue.hold(cand["candidate_id"], queue)
+                        if qhold:
+                            entry["review_queue"] = qhold
+                            card["review_queue_held"].append(entry)
+                            queue_held_entries.append((cell["queue_id"], cand["candidate_id"], qhold["state"], qhold["reasons"]))
+                        else:
+                            accepted.append(entry)
                     else:
                         n_rej += 1
                         card["rejections"].append({"stage": "verifier", "reason_code": final.get("reason_code_final"), **entry})
@@ -503,7 +527,8 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
         card["ladder_entered"] = sorted(entered) if entered else None
         card["not_consulted_by_ladder"] = not_consulted
         card["empty_result_option"] = empty_result_option(coverage_final, rationales, (st or {}).get("exhaustion"),
-                                                          no_text=nt, not_consulted=not_consulted)
+                                                          no_text=nt, not_consulted=not_consulted,
+                                                          review_queue_held=[e["review_queue"] for e in card["review_queue_held"]])
         for x in nt:
             no_text_on_cards.setdefault(x["registry_id"], {"cards": 0, "empty_cards": 0, "manifest_status": x["manifest_status"]})
             no_text_on_cards[x["registry_id"]]["cards"] += 1
@@ -576,6 +601,11 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                                   for c in cards for lst in ("candidates", "rejections", "witness_only_candidates")
                                   for e in c.get(lst) or [] for x in [e] + list(e.get("same_text_parallel_witnesses") or [])
                                   if x.get("awaits_scope_ruling")],
+        # session 14 (R6-54 / Codex C3(a)): the author review queue as this build read it, and what it held
+        "author_review_queue": dict(review_queue.summary(queue),
+                                    held_on_this_branch=[{"queue_id": q, "candidate_id": cid, "state": st_, "reasons": rs}
+                                                         for q, cid, st_, rs in queue_held_entries],
+                                    bar="a held item takes no seat here and is refused by the emit step (Codex C3, C3(a); R6-54)"),
         "rejections_kept": sum(len(c["rejections"]) for c in cards),
         "dropped_at_build": dropped_at_build, "no_ranking": "counts are workbench totals for the author; never learner-facing",
         "cards": cards,
@@ -595,6 +625,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
         f"{packet['exhaustion_sourced_candidates_on_cards']} exhaustion-sourced candidate(s) on {packet['cards_with_exhaustion_sourced_candidates']} card(s); "
         f"caveat second rubrics {packet['caveat_slice']['candidates']} ({packet['caveat_slice']['lower_floor_applied']} lower-floor applied); "
         f"2c sample {packet['caveat_sample']['sampled']} of {packet['caveat_sample']['eligible']} eligible; "
+        f"review queue held {len(queue_held_entries)}; "
         f"{len(repaired_chunks)} candidate(s) on chunks repaired after the run"
         + (f"; ROWS WITHOUT TEXT: {[x['registry_id'] for x in rows_without_text]}" if rows_without_text else "")
         + f"; extract {extract_path}")
