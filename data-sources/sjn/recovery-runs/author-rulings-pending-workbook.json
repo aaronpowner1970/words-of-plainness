@@ -1075,8 +1075,8 @@
      "Q-195-p1-BSR-LU-01-2"
     ]
    },
-   "as_implemented": "pending: session 14 phase 3",
-   "test": "pending: session 14 phase 3",
+   "as_implemented": "No code change: the allocator is unchanged and Q-195's third Lutheran seat holds at Q-195-p1-BSR-LU-01-2, as the session 13 report describes it. Locked by test so no later session moves it without ruling on F.11",
+   "test": "test_session14_extents: test_q195_third_lutheran_seat_holds_at_lu01_2_and_the_lcms_slot_at_lu02_1",
    "supersede_with": "none until Codex F.11 is settled (it re-orders seats on every card with more than one group and is run on its own)"
   },
   "R6-56_evidence_bar_for_a_tier_move": {
@@ -1089,8 +1089,8 @@
     "BSR-AN-02": "CATECHETICAL (workbook value); awaiting Canon A5 through a second instrument and a second publisher",
     "BSR-RC-01": "CATECHETICAL (workbook value); awaiting the text of Fidei Depositum itself"
    },
-   "as_implemented": "pending: session 14 phase 3",
-   "test": "pending: session 14 phase 3",
+   "as_implemented": "No tier moves in this session. BSR-AN-02 and BSR-RC-01 carry no authority_tier override in the rulings file and resolve at their workbook tier; the hold is locked by test",
+   "test": "test_session14_rulings: test_r6_56_holds_an02_and_rc01_at_their_present_tier; test_session14_extents: test_no_row_moved_tier_in_this_session",
    "supersede_with": "none until the Cowork verification reports"
   },
   "R6-57_registered_section_extents": {
@@ -1104,8 +1104,8 @@
     "2_gloria_patri_left_out": "BSR-AN-03's registered extent ends at 'he cannot be saved.'; the Gloria Patri the BCP appoints after the creed at Morning Prayer is liturgical matter and is outside it",
     "3_eo06_chalcedon_para_10_left_out": "BSR-EO-06 'Definition of Faith, Council of Chalcedon (451), paragraph 10' is the acts' record of the bishops' acclamation after the reading, not the definition; it stays in registered-sections.json `not_registered`"
    },
-   "as_implemented": "pending: session 14 phase 3",
-   "test": "pending: session 14 phase 3",
+   "as_implemented": "Already implemented by session 13 phase 2 and verified here against the artifact, not against its description: registered-sections.json carries `text_through` on the four mixed blocks (BSR-RP-04 1.3 and 2.3, BSR-LU-01 Ecumenical Creeds: The Apostles' Creed, BSR-AN-03), Registry._registered_sections ends the registered key after that string and fails loudly if it does not occur in the stored chunk, and BSR-EO-06 'Definition of Faith, Council of Chalcedon (451), paragraph 10' stands in the file's `not_registered` list with its reason. The three judgments the author ratified are now LOCKED BY TEST; nothing was re-implemented",
+   "test": "test_session14_extents: the AN-03 extent ends at 'he cannot be saved.' and the registered key carries no Gloria Patri while the stored chunk does; EO-06 Chalcedon paragraph 10 is in not_registered and in no branch's registered definitions; every mixed block registers only its creed portion and records its extent; a text_through that does not occur in the chunk fails loudly. Mutation-checked: removing AN-03's text_through, and listing EO-06 paragraph 10, each make the tests fail",
    "supersede_with": "none (a registration rule; the extents are a reviewable harness record, not a workbook value)"
   }
  }
