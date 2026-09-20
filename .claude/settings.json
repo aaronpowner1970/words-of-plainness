@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\aaron\\Documents\\wop-conductor\\.venv\\Scripts\\python.exe\" \"C:\\Users\\aaron\\Documents\\wop-conductor\\conductor_cli.py\" owed SJN",
+            "timeout": 20,
+            "statusMessage": "Asking the conductor what is owed"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\aaron\\Documents\\wop-conductor\\.venv\\Scripts\\python.exe\" \"C:\\Users\\aaron\\Documents\\wop-conductor\\conductor_cli.py\" code-session-ended",
+            "timeout": 10,
+            "statusMessage": "Recording that this Code session ended"
+          }
+        ]
+      }
+    ]
+  }
+}
