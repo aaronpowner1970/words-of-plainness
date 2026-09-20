@@ -1,8 +1,8 @@
 {
- "built_at": "2026-09-17T09:27:19Z",
+ "built_at": "2026-09-20T04:10:30Z",
  "workbook": "Seeking_Jesus_Teaching_Predicate_Source_v2.25r4_GATE6_SCOPE_RATIFIED_20260913.xlsx",
  "app_master_version": "v2.25r4 GATE6 SCOPE RATIFIED",
- "registry_ratified": 45,
+ "registry_ratified": 46,
  "fallback_only_rows": [
   "BSR-AN-05"
  ],
@@ -3974,10 +3974,10 @@
    "citation_refusal": null,
    "fetch_mode": "PDF",
    "fallback_only": false,
-   "n_chunks": 126,
-   "chars": 23763,
-   "text_hash": "44e8a00c337b3c265331fe8e39cc7454f890185d562612706430b1b92f257831",
-   "fetched_at": "2026-09-17T09:21:45Z",
+   "n_chunks": 125,
+   "chars": 22067,
+   "text_hash": "e7cc6179b460373dbe65680bb9d2094f04a1186f186245ffb62e279723caee95",
+   "fetched_at": "2026-09-20T04:10:24Z",
    "urls": [
     {
      "url": "https://www.episcopalchurch.org/wp-content/uploads/2023/06/book_of_common_prayer.pdf",
@@ -3994,8 +3994,8 @@
     }
    ],
    "notes": [
-    "PDF pages 845–864 region; 124 Q/A pairs",
-    "session 12: the Outline ends at BCP p. 862 (the 'Historical Documents of the Church' title page is p. 863); 2 Historical Documents chunk(s) from BCP pp. 864–864, the pages inside the adapter's existing 20-page window only (a document that continues past p. 864 is held only as far as p. 864)",
+    "PDF pages 844–864 region; 124 Q/A pairs; 1 rubric chunk (BCP p. 844, R6-51)",
+    "R6-51: this row is BCP pp. 844–862 — the rubric 'Concerning the Catechism' (p. 844), then the Outline itself, stopping at the 'Historical Documents of the Church' title page (p. 863). The Historical Documents are BSR-AN-06 (R6-48), not this row; session 13 held them here under R6-45's marker",
     "hyphenation at extraction: {'soft_hyphen_breaks_joined': 0, 'soft_hyphens_removed_midline': 0, 'joined_closed': 8, 'joined_compound': 3, 'joined_default': 2}",
     "page furniture stripped at extraction: 1013 zone line(s); top [('lessons', 42), ('concerning the service', 13), ('new testament', 13), ('lessons and psalms', 12), ('additional directions', 6), ('morning prayer', 6), ('evening prayer', 6), ('epiphany', 5), ('after the', 4), ('rite one', 3), ('a collect for sundays', 3), ('the people stand or kneel', 3)]; bottom [('# psalm #', 98), ('psalm # #', 95), ('# daily office year one', 30), ('daily office year two #', 30), ('# collects: traditional', 27), ('collects: traditional #', 26), ('collects: contemporary #', 25), ('# collects: contemporary', 25), ('# morning prayer ii', 15), ('morning prayer ii #', 14), ('# holy eucharist i', 14), ('holy eucharist i #', 14)]"
    ],
@@ -5031,7 +5031,52 @@
     "en"
    ],
    "polytonic_chunks": 0
+  },
+  "BSR-AN-06": {
+   "status": "BUILT",
+   "branch": "Anglican",
+   "standard_title": "The Episcopal Church BCP 1979, \"Historical Documents of the Church\" (the Chalcedonian Definition; the Quicunque Vult)",
+   "canonical_url": "https://www.episcopalchurch.org/wp-content/uploads/2023/06/book_of_common_prayer.pdf",
+   "authority_tier": "OFFICIAL_EXPOSITION (witness; adopted historical document, not confessed)",
+   "reception_scope": "JURISDICTIONAL",
+   "witness_only": true,
+   "citation_refusal": null,
+   "fetch_mode": "PDF",
+   "fallback_only": false,
+   "n_chunks": 3,
+   "chars": 4899,
+   "text_hash": "4f8ff6f90301bcb9f40399214e1b7ca10769f288e9a547bda25031f79ea571d9",
+   "fetched_at": "2026-09-20T04:10:25Z",
+   "urls": [
+    {
+     "url": "https://www.episcopalchurch.org/wp-content/uploads/2023/06/book_of_common_prayer.pdf",
+     "mode": "pdf",
+     "status": 200,
+     "ok": true,
+     "error": "",
+     "final_url": "https://www.episcopalchurch.org/wp-content/uploads/2023/06/book_of_common_prayer.pdf",
+     "redirects": [],
+     "cross_host_redirect": "",
+     "www_label_redirects": [],
+     "content_type": "application/pdf",
+     "bytes": 4911934
+    }
+   ],
+   "notes": [
+    "R6-48: BCP pp. 863–865; 3 chunk(s) — the title page, then Definition of the Union of the Divine and Human Natures in the Person of Christ Council of Chalcedon, 451 A.D., Act V (p. 864); Quicunque Vult commonly called The Creed of Saint Athanasius (pp. 864–865)",
+    "the Quicunque Vult is JOINED across the BCP p. 864/865 page break and ends at its last sentence ('This is the Catholic Faith, which except a man believe faithfully, he cannot be saved.'); the session 12/13 store held it cut at 'one Almighty.'",
+    "stopped at BCP p. 866 ('Preface The First Book of Common Prayer (1549)'): R6-48 does not fetch the 1549 Preface, and R6-49 holds the Articles of Religion for the Codex F.9 adoption QA",
+    "R6-47 / Codex B1(c): adopted within the Prayer Book but not confessed — these are witness sections and none is a registered creed or definition text",
+    "hyphenation at extraction: {'soft_hyphen_breaks_joined': 0, 'soft_hyphens_removed_midline': 0, 'joined_closed': 8, 'joined_compound': 3, 'joined_default': 2}",
+    "page furniture stripped at extraction: 1013 zone line(s); top [('lessons', 42), ('concerning the service', 13), ('new testament', 13), ('lessons and psalms', 12), ('additional directions', 6), ('morning prayer', 6), ('evening prayer', 6), ('epiphany', 5), ('after the', 4), ('rite one', 3), ('a collect for sundays', 3), ('the people stand or kneel', 3)]; bottom [('# psalm #', 98), ('psalm # #', 95), ('# daily office year one', 30), ('daily office year two #', 30), ('# collects: traditional', 27), ('collects: traditional #', 26), ('collects: contemporary #', 25), ('# collects: contemporary', 25), ('# morning prayer ii', 15), ('morning prayer ii #', 14), ('# holy eucharist i', 14), ('holy eucharist i #', 14)]"
+   ],
+   "fetch_verdict": "OK",
+   "noncitable_spans": 0,
+   "languages": [
+    "en"
+   ],
+   "polytonic_chunks": 0
   }
  },
- "total_chunks": 5297
+ "total_chunks": 5299
 }

@@ -880,7 +880,9 @@
     "locator_prefix": "Historical Documents of the Church",
     "marker": "AWAITING_SCOPE_RULING",
     "text": "BCP 1979 Historical Documents (p. 863 onward), held in the Outline of the Faith row: awaits a scope ruling (R6-45); to become its own registry row after Cowork verification; not a registered creed or definition text"
-   }
+   },
+   "superseded_by": "R6-48 (session 14): the Historical Documents became their own row, BSR-AN-06, so BSR-AN-04 holds no chunk the R6-45 marker matches. The marker is left in force and inert: it would fire again if any Historical Documents chunk were ever rebuilt on BSR-AN-04",
+   "discharged": "2026-09-19, session 14 phase 4"
   },
   "R6-46_session12_confirmations": {
    "ruled": "2026-09-17",
@@ -920,8 +922,8 @@
    "registry_ids": [
     "BSR-AN-06"
    ],
-   "as_implemented": "pending: session 14 phase 4",
-   "test": "pending: session 14 phase 4",
+   "as_implemented": "BSR-AN-06 carries the witness treatment in its OWN authority_tier, 'OFFICIAL_EXPOSITION (witness; adopted historical document, not confessed)', so registry.is_witness_row reads it and no later edit can drop a flag and quietly promote the row. Fail closed under B1(c): below the genre's tier, below every confessed Anglican row, and allocation's witness-only guard means it cannot seat a cell alone. Its sections are in registered-sections.json's `not_registered` list with R6-47's reason, so no AN-06 chunk is a registered creed or definition text. The TIER VALUE is Code's reading of B1(c), not an author ruling: three ranked readings with their weaknesses are in session14/write_an06.py, and the report measures the difference (the chosen reading changes no lead; the genre-tier reading would move five)",
+   "test": "test_session14_an06: test_an06_is_a_witness_row_and_cannot_seat_a_cell_alone, test_an06_has_no_registered_sections_and_the_r6_27_test_covers_it, test_listing_an06_as_a_registered_section_fails_loudly (mutation check)",
    "supersede_with": "none (a tier and registration principle; the row it governs is BSR-AN-06, added by R6-48)"
   },
   "R6-48_an06_historical_documents_row": {
@@ -944,10 +946,48 @@
      "the Chicago-Lambeth Quadrilateral"
     ]
    },
-   "registered_sections": "none",
-   "as_implemented": "pending: session 14 phase 4",
-   "test": "pending: session 14 phase 4",
-   "supersede_with": "Branch Source Registry: a new BSR-AN-06 row carrying these values and the four adoption_* columns"
+   "registered_sections": "none (R6-47: witness sections)",
+   "as_implemented": "sources.tec_historical_documents chunks BCP pp. 863-865 from the fetch cache: the p. 863 title page, the Chalcedonian Definition (p. 864) and the Quicunque Vult JOINED across the p. 864/865 break. A document is accumulated across pages until the next printed heading, and the walk stops at the first stop heading (Preface / Articles of Religion / Chicago-Lambeth). The adapter REFUSES rather than stores if the Quicunque Vult does not end at its last sentence, if there is not exactly one of them, or if a chunk runs past the row's extent. The row itself comes through the R6-42 row-added-by-ruling path (rulings.added_rows / Registry._add_ruled_rows), with its adoption block and card disclosure. Corpus: 3 chunks, 4,899 chars, text_hash 4f8ff6f90301bcb9..., embedded; no network (fetch cache reused, 0 new files)",
+   "test": "test_session14_an06: test_no_an06_quicunque_vult_chunk_ends_at_one_almighty, test_no_an06_chunk_runs_past_bcp_p_865, test_the_historical_documents_are_their_own_row, test_the_adapter_refuses_a_quicunque_vult_that_is_cut_at_the_page_break, test_a_candidate_whose_text_moved_to_another_row_follows_the_text",
+   "supersede_with": "Branch Source Registry: a new BSR-AN-06 row carrying these values and the four adoption_* columns",
+   "add_row": true,
+   "new_row": {
+    "registry_id": "BSR-AN-06",
+    "branch": "Anglican",
+    "standard_title": "The Episcopal Church BCP 1979, \"Historical Documents of the Church\" (the Chalcedonian Definition; the Quicunque Vult)",
+    "authority_tier": "OFFICIAL_EXPOSITION (witness; adopted historical document, not confessed)",
+    "authority_tier_note": "R6-47 / Codex B1(c): adopted within the Book of Common Prayer (1979-A133) but not confessed by The Episcopal Church — no liturgical appointment, and the BCP's own Catechism (p. 852) calls the Athanasian Creed 'an ancient document'. Fail closed: a witness, below its genre's tier. Positive evidence of confession reopens it. The tier VALUE is Code's reading of B1(c), not an author ruling; see session14/write_an06.py for the three ranked readings",
+    "speaks_for": "The Episcopal Church (certified Standard Book; printed as a historical document, not confessed)",
+    "reception_scope": "JURISDICTIONAL",
+    "publisher_domain": "episcopalchurch.org",
+    "canonical_url": "https://www.episcopalchurch.org/wp-content/uploads/2023/06/book_of_common_prayer.pdf",
+    "fetch_mode": "PDF",
+    "scope_caveat": "The Episcopal Church adopted the Book of Common Prayer 1979, which prints the Chalcedonian Definition and the Quicunque Vult among its Historical Documents of the Church. The Church neither appoints them in its liturgy nor names them in a confessional subscription, and its own Catechism calls the Athanasian Creed an ancient document. They are cited here as texts the Church adopted within its Prayer Book and preserves as historical documents, never as creeds the Church confesses.",
+    "reception_note": "Historical Documents of the Church, BCP 1979 pp. 863-865",
+    "draft_recommendation": "INCLUDE AS WITNESS (cite the PDF; never as a confessed creed of this Church)"
+   },
+   "adoption": {
+    "adoption_status": "ADOPTED",
+    "adoption_body_scope": "ONE_CHURCH",
+    "adopting_body": "General Convention of The Episcopal Church",
+    "adoption_act": "General Convention 1979 (Denver), Resolution 1979-A133, second reading: the Book of Common Prayer adopted and declared the Book of Common Prayer of this Church under Constitution Art. X (Journal 1979, p. C-8 per the Archives; the 1985 note's C-9 is UNRECONCILED, R6-52). The Historical Documents are covered as integral texts of the adopted book (B2(b)). Adoption is not confession (R6-47 / B1(c))",
+    "adoption_verified": "Carried from BSR-AN-04's R6-40 record, the same adopting act for the same book: episcopalarchives.org Acts of Convention 1979-A133 (WebFetch + Claude Browser) and 1979-A121 (WebFetch); the stored PDF carries the Standard Book certificate (Jan 2007). Both publishers are arms of TEC: independence is by instrument, not by publisher. NOT confessed: no liturgical appointment found, and BCP p. 852 calls the Athanasian Creed 'an ancient document' (R6-47). Article VIII of the 1801 Articles of Religion corroborates only. The TEC glossary and Brief Dictionary are context only (R6-53)",
+    "disclosure_wording": "The Episcopal Church adopted the Book of Common Prayer that prints this text among its Historical Documents. It is not appointed in the Church's liturgy and not named in a confessional subscription: it is shown as a witness, never as a creed this Church confesses."
+   },
+   "chunking_guards": {
+    "extent": "BCP pp. 863-865 only",
+    "title_page": "BCP p. 863, stored with its own locator as the title page of the section",
+    "documents": {
+     "Chalcedonian Definition": "BCP p. 864",
+     "Quicunque Vult": "BCP pp. 864-865, JOINED — the creed runs across the page break and must not be stored cut at 'one Almighty.' (the session 12/13 defect)"
+    },
+    "never_fetched": [
+     "the Preface, The First Book of Common Prayer (1549), BCP p. 866 on",
+     "the Articles of Religion (1801), BCP p. 867 on (R6-49)",
+     "the Chicago-Lambeth Quadrilateral"
+    ],
+    "last_sentence": "This is the Catholic Faith, which except a man believe faithfully, he cannot be saved."
+   }
   },
   "R6-49_tec_articles_of_religion_held": {
    "ruled": "2026-09-17",
@@ -956,8 +996,8 @@
    "rule": "The TEC Articles of Religion (1801) are HELD for the adoption QA track (Codex F.9). They are not fetched and not added as a registry row in this session or in any session before that QA reports. Open items: the 1801 Convention act; when Art. X dropped 'Articles of Religion'; when Canon II.3.1 dropped 'Historical Documents of the Church'; the effect of the failed reaffirmations (1994-D089, 2003-B001); the overlap with BSR-AN-01 under R6-4.",
    "codex": "B2; F.9 (Comparison Principles Codex v0.8)",
    "held": "TEC Articles of Religion (1801), BCP 1979 pp. 867-876",
-   "as_implemented": "pending: session 14 phase 4",
-   "test": "pending: session 14 phase 4",
+   "as_implemented": "sources.TEC_HISTORICAL_STOP_HEADINGS stops the BSR-AN-06 walk at 'Articles of Religion' (and at the 1549 Preface and the Chicago-Lambeth Quadrilateral). No row was added and no page past BCP p. 865 was chunked",
+   "test": "test_session14_an06: test_the_tec_articles_of_religion_are_not_fetched_and_not_added",
    "supersede_with": "none until the F.9 adoption QA reports"
   },
   "R6-50_an06_an03_same_text_pair": {
@@ -970,11 +1010,13 @@
     "BSR-AN-06": {
      "same_text_as": "BSR-AN-03",
      "what": "the Quicunque Vult / Creed of Saint Athanasius, one text in two printings (TEC BCP 1979 Historical Documents; Church of England BCP)",
-     "recorded_not_pursued": "the two printings differ at 'to acknowledge every Person by himself to be both God and Lord'; the source question is recorded and not pursued (R6-50)"
+     "recorded_not_pursued": "the two printings differ at 'to acknowledge every Person by himself to be both God and Lord'; the source question is recorded and not pursued (R6-50)",
+     "locator_contains": "Quicunque Vult",
+     "scope": "R6-50 names the pair for the QUICUNQUE VULT SECTION of BSR-AN-06, not for the whole row: the row also holds the Chalcedonian Definition, which is a different text from BSR-AN-03's Athanasian Creed and competes for its own slot"
     }
    },
-   "as_implemented": "pending: session 14 phase 4",
-   "test": "pending: session 14 phase 4",
+   "as_implemented": "rulings.same_text_declarations reads the pair from the ruling that declared it, WITH ITS SCOPE: R6-50 names the Quicunque Vult SECTION, not the whole row, so the declaration carries locator_contains 'Quicunque Vult'. allocation.allocate applies a scoped declaration only to candidates located in that section: the Quicunque Vult takes no slot beside BSR-AN-03 and is recorded as a parallel witness, while the Chalcedonian Definition competes for its own slot. Without the scope the Chalcedonian Definition would have been recorded as a parallel witness of the Athanasian Creed on four cards (measured before the scope was added). BSR-AN-06 is also excluded from rule 1b's English-translation pairing (allocation.declared_same_text_alternate): one row, one relationship",
+   "test": "test_session14_an06: test_the_same_text_pair_is_scoped_to_the_quicunque_vult_section; test_session6_rulings: test_rulings_file_declares_the_eo_pair_and_the_refusals",
    "supersede_with": "Branch Source Registry: a same-text / same-work note on BSR-AN-06 naming BSR-AN-03"
   },
   "R6-51_an04_extent_and_p844_rubric": {
@@ -993,9 +1035,19 @@
      "recorded_as": "CATECHETICAL support"
     }
    },
-   "as_implemented": "pending: session 14 phase 4",
-   "test": "pending: session 14 phase 4",
-   "supersede_with": "none (an extent ruling; BSR-AN-04's workbook row is unchanged)"
+   "as_implemented": "sources.tec_outline_of_faith now stores the BCP p. 844 rubric 'Concerning the Catechism' as its first chunk, with division 'rubric (integral text)', and REFUSES if that page does not open with the rubric. It stops at the Historical Documents title page as session 12 made it, and no longer chunks the pages after it. The rubric is not a registered section (it is a rubric about the catechism, not a creed or definition). Corpus: 126 -> 125 chunks (1 rubric + 124 Q/A), 23,763 -> 22,067 chars, text_hash 44e8a00c... -> e7cc6179...; no network. R6-45's scope marker is discharged: no AN-04 chunk awaits a scope ruling any more",
+   "test": "test_session14_an06: test_an04_is_bcp_pp_844_to_862_with_the_rubric_stored_and_unregistered; test_session12_corpus_repair: test_the_outline_ends_at_the_historical_documents_title_page (updated)",
+   "supersede_with": "none (an extent ruling; BSR-AN-04's workbook row is unchanged)",
+   "chunking_guards": {
+    "extent": "BCP pp. 844-862 only; the Outline stops at the 'Historical Documents of the Church' title page (p. 863)",
+    "p844_rubric": {
+     "locator": "Outline of the Faith (BCP p. 844) — Concerning the Catechism (rubric)",
+     "division": "rubric (integral text)",
+     "registered": false,
+     "why": "integral text of the adopted book (B2(b)); it is a rubric about the catechism, not the catechism, and it is not a creed or definition, so it is not a registered section"
+    },
+    "moved_out": "the Historical Documents chunks (BCP pp. 863 on) move to BSR-AN-06 under R6-48"
+   }
   },
   "R6-52_1979_a133_citation": {
    "ruled": "2026-09-17",
@@ -1003,8 +1055,8 @@
    "status": "RATIFIED",
    "rule": "General Convention resolution 1979-A133 is cited at Journal p. C-8, per the Archives of the Episcopal Church. The 1985 note's citation to p. C-9 is recorded as UNRECONCILED; it is not silently corrected and it is not treated as a second instrument.",
    "codex": "D1 (Comparison Principles Codex v0.8)",
-   "as_implemented": "pending: session 14 phase 4",
-   "test": "pending: session 14 phase 4",
+   "as_implemented": "BSR-AN-06's adoption_act cites Journal 1979 p. C-8 per the Archives and records the 1985 note's C-9 as UNRECONCILED, in the same words; it is not silently corrected and it is not counted as a second instrument",
+   "test": "test_session14_an06: test_the_historical_documents_are_their_own_row",
    "supersede_with": "none (a citation record; it travels with BSR-AN-06's adoption_verified)"
   },
   "R6-53_tec_glossary_context_only": {
@@ -1013,8 +1065,8 @@
    "status": "RATIFIED",
    "rule": "The Episcopal Church glossary (a Church Publishing adaptation) and the Brief Dictionary (a 2011 press page) are CONTEXT ONLY. Neither is evidence of adoption or of confession, and neither is a publisher independent of the church's own adopted text (B2(b): a publisher's or editor's matter never inherits the adoption).",
    "codex": "B2, B2(b) (Comparison Principles Codex v0.8)",
-   "as_implemented": "pending: session 14 phase 4",
-   "test": "pending: session 14 phase 4",
+   "as_implemented": "Neither the TEC glossary nor the Brief Dictionary is a registry row, a fetched host or a source in any adoption_verified field except as named context: BSR-AN-06's adoption_verified records them as context only. No code path reads them",
+   "test": "no code to test: recorded on BSR-AN-06's adoption_verified. The negative is enumerable — the registry has no row on a Church Publishing host, and the fetch audit records no request to one",
    "supersede_with": "none"
   },
   "R6-54_production_voting_and_review_queue": {

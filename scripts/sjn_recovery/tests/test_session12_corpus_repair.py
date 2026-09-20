@@ -78,10 +78,12 @@ def test_compendium_reads_split_bold_questions_and_chunks_the_appendix():
     assert "Compendium Appendix B (Formulas of Catholic Doctrine) — The four last things" in by
 
 
-# ---------------------------------------------------------------- 3b
-def test_the_outline_ends_at_the_historical_documents_title_page():
-    ff = "\f"
-    pages = ["x"] * 3
+def _bcp_pages():
+    """A synthetic BCP of the shape the real one has around pp. 844–866: the rubric page, the Outline's first and last
+    pages, the Historical Documents title page, the Chalcedonian Definition and the start of the Quicunque Vult, the
+    rest of the Quicunque Vult on the NEXT page, then the 1549 Preface."""
+    pages = ["x"] * 2
+    pages.append("Concerning the Catechism\nThis catechism is primarily intended for use by parish priests.\n")
     pages.append("An Outline of the Faith\ncommonly called the Catechism\nHuman Nature\nQ.\nWhat are we by nature?\nA.\nWe are part of God's creation.\n")
     pages.append("Q.\nWhat, then, is our assurance as Christians?\nA.\nOur assurance as Christians is that nothing shall separate us. Amen.\n")
     pages.append("Historical\nDocuments\nof the Church\n")
@@ -89,18 +91,35 @@ def test_the_outline_ends_at_the_historical_documents_title_page():
                  "Therefore, following the holy fathers, we all with one accord teach men to acknowledge one\nand the same Son.\n"
                  "Quicunque Vult\ncommonly called\nThe Creed of Saint Athanasius\n"
                  "Whosoever will be saved, before all things it is necessary that he hold the Catholic Faith.\n"
-                 "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost\nincomprehensible.\n")
+                 "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost\nincomprehensible.\n"
+                 "And yet they are not three Almighties, but one Almighty.\n")
+    pages.append("So the Father is God, the Son is God, and the Holy Ghost is God.\n"
+                 "This is the Catholic Faith, which except a man believe faithfully, he cannot be saved.\n")
     pages.append("Preface\nThe First Book of Common Prayer (1549)\nThere was never any thing.\n")
-    out, notes = sources.tec_outline_of_faith(_ctx({"registry_id": "BSR-AN-04"}, pdf_text=ff.join(pages)))
+    return "\f".join(pages)
+
+
+# ---------------------------------------------------------------- 3b
+def test_the_outline_ends_at_the_historical_documents_title_page():
+    """Session 12's subject, kept: the Outline ends where the Outline ends, not three pages later.
+
+    Session 14 (R6-48, R6-51) changed what happens on the other side of that line. The Historical Documents chunks are
+    no longer built on this row at all — they are BSR-AN-06, and the test for them is
+    test_session14_an06.test_the_historical_documents_are_their_own_row. What this row now holds is the p. 844 rubric
+    and the Outline: BCP pp. 844–862."""
+    out, notes = sources.tec_outline_of_faith(_ctx({"registry_id": "BSR-AN-04"}, pdf_text=_bcp_pages()))
     locs = [c["locator"] for c in out]
     last_q = next(c for c in out if "assurance as Christians" in c["locator"])
     assert last_q["locator"].startswith("Outline of the Faith (BCP p. 5)")
     assert last_q["text"].endswith("Amen.") and "Chalcedon" not in last_q["text"] and "Whosoever" not in last_q["text"]
-    assert "Historical Documents of the Church (BCP p. 7) — Definition of the Union of the Divine and Human Natures in the Person of Christ " \
-           "Council of Chalcedon, 451 A.D., Act V" in locs
-    creed = next(c for c in out if c["locator"].startswith("Historical Documents of the Church (BCP p. 7) — Quicunque Vult"))
-    assert "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible." in creed["text"]
-    assert not any("First Book of Common Prayer" in c["text"] for c in out)                          # nothing past the stored window
+    # R6-51: the p. 844 rubric is this row's first chunk, stored with its locator and its own division
+    assert locs[0] == "Outline of the Faith (BCP p. 3) — Concerning the Catechism (rubric)"
+    assert out[0]["division"] == sources.TEC_P844_RUBRIC_DIVISION
+    assert out[0]["text"].startswith("This catechism is primarily intended")
+    # R6-48: nothing from the Historical Documents, and nothing past them, is on this row any more
+    assert not any("Historical Documents" in l for l in locs)
+    assert not any("Chalcedon" in c["text"] or "Whosoever" in c["text"] for c in out)
+    assert not any("First Book of Common Prayer" in c["text"] for c in out)
 
 
 # ---------------------------------------------------------------- 3c

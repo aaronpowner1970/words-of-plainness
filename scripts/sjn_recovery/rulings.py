@@ -110,10 +110,36 @@ def refused_candidates(r=None):
 
 
 def same_text_rows(r=None):
-    """{alternate_registry_id: controlling_registry_id} declared by R6-4 (one text, different wording)."""
+    """{alternate_registry_id: controlling_registry_id} — declared same-text pairs under the R6-4 guard (one text, two
+    printings or two wordings): the alternate takes no slot beside the controlling row and is a parallel witness.
+
+    Session 14 (R6-50): a pair lives on the ruling that DECLARED it, so any ruling carrying a `same_text_rows` block
+    contributes — R6-4's own block for the session-6 pairs, R6-50's for BSR-AN-06 -> BSR-AN-03. Two rulings naming one
+    alternate with different controlling rows fail loudly; agreeing declarations combine."""
+    return {rid: d["same_text_as"] for rid, d in same_text_declarations(r).items()}
+
+
+def same_text_declarations(r=None):
+    """{alternate_registry_id: {"same_text_as", "locator_contains" | None, "what", "ruling"}} — the full declarations.
+
+    Session 14 (R6-50): a declaration may be SCOPED TO A SECTION. R6-50 names the pair "BSR-AN-06 (Quicunque Vult
+    section) -> BSR-AN-03", not the whole row: BSR-AN-06 also holds the Chalcedonian Definition, which is a different
+    text from BSR-AN-03's Athanasian Creed and must compete for its own slot. `locator_contains`, where given, is the
+    substring a candidate's locator must carry for the declaration to apply; without it the declaration covers the row,
+    as the session-6 BSR-EO-14 -> BSR-EO-07 pair does."""
     r = r or load()
-    rows = ((r.get("rulings") or {}).get("R6-4_one_text_one_slot") or {}).get("same_text_rows") or {}
-    return {rid: v["same_text_as"] for rid, v in rows.items() if isinstance(v, dict) and v.get("same_text_as")}
+    out, by = {}, {}
+    for key, ru in (r.get("rulings") or {}).items():
+        for rid, v in (ru.get("same_text_rows") or {}).items():
+            if not isinstance(v, dict) or not v.get("same_text_as"):
+                continue
+            if rid in out and out[rid]["same_text_as"] != v["same_text_as"]:
+                raise SystemExit(f"author rulings {by[rid]} and {key} declare {rid} the same text as different rows: "
+                                 f"{out[rid]['same_text_as']!r} vs {v['same_text_as']!r}")
+            out[rid] = {"same_text_as": v["same_text_as"], "locator_contains": v.get("locator_contains"),
+                        "what": v.get("what"), "ruling": key}
+            by[rid] = by.get(rid) or key
+    return out
 
 
 # ---------------------------------------------------------------- R6-5 registry overrides

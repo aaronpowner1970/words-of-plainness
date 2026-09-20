@@ -85,7 +85,87 @@ def phase3(R):
         "test_session14_extents: test_no_row_moved_tier_in_this_session")
 
 
-PHASES = {"2": phase2, "3": phase3}
+def phase4(R):
+    R["R6-47_adoption_is_not_confession"]["as_implemented"] = (
+        "BSR-AN-06 carries the witness treatment in its OWN authority_tier, "
+        "'OFFICIAL_EXPOSITION (witness; adopted historical document, not confessed)', so registry.is_witness_row reads "
+        "it and no later edit can drop a flag and quietly promote the row. Fail closed under B1(c): below the genre's "
+        "tier, below every confessed Anglican row, and allocation's witness-only guard means it cannot seat a cell "
+        "alone. Its sections are in registered-sections.json's `not_registered` list with R6-47's reason, so no AN-06 "
+        "chunk is a registered creed or definition text. The TIER VALUE is Code's reading of B1(c), not an author "
+        "ruling: three ranked readings with their weaknesses are in session14/write_an06.py, and the report measures "
+        "the difference (the chosen reading changes no lead; the genre-tier reading would move five)")
+    R["R6-47_adoption_is_not_confession"]["test"] = (
+        "test_session14_an06: test_an06_is_a_witness_row_and_cannot_seat_a_cell_alone, "
+        "test_an06_has_no_registered_sections_and_the_r6_27_test_covers_it, "
+        "test_listing_an06_as_a_registered_section_fails_loudly (mutation check)")
+
+    R["R6-48_an06_historical_documents_row"]["as_implemented"] = (
+        "sources.tec_historical_documents chunks BCP pp. 863-865 from the fetch cache: the p. 863 title page, the "
+        "Chalcedonian Definition (p. 864) and the Quicunque Vult JOINED across the p. 864/865 break. A document is "
+        "accumulated across pages until the next printed heading, and the walk stops at the first stop heading "
+        "(Preface / Articles of Religion / Chicago-Lambeth). The adapter REFUSES rather than stores if the Quicunque "
+        "Vult does not end at its last sentence, if there is not exactly one of them, or if a chunk runs past the "
+        "row's extent. The row itself comes through the R6-42 row-added-by-ruling path (rulings.added_rows / "
+        "Registry._add_ruled_rows), with its adoption block and card disclosure. Corpus: 3 chunks, 4,899 chars, "
+        "text_hash 4f8ff6f90301bcb9..., embedded; no network (fetch cache reused, 0 new files)")
+    R["R6-48_an06_historical_documents_row"]["test"] = (
+        "test_session14_an06: test_no_an06_quicunque_vult_chunk_ends_at_one_almighty, "
+        "test_no_an06_chunk_runs_past_bcp_p_865, test_the_historical_documents_are_their_own_row, "
+        "test_the_adapter_refuses_a_quicunque_vult_that_is_cut_at_the_page_break, "
+        "test_a_candidate_whose_text_moved_to_another_row_follows_the_text")
+
+    R["R6-49_tec_articles_of_religion_held"]["as_implemented"] = (
+        "sources.TEC_HISTORICAL_STOP_HEADINGS stops the BSR-AN-06 walk at 'Articles of Religion' (and at the 1549 "
+        "Preface and the Chicago-Lambeth Quadrilateral). No row was added and no page past BCP p. 865 was chunked")
+    R["R6-49_tec_articles_of_religion_held"]["test"] = (
+        "test_session14_an06: test_the_tec_articles_of_religion_are_not_fetched_and_not_added")
+
+    R["R6-50_an06_an03_same_text_pair"]["as_implemented"] = (
+        "rulings.same_text_declarations reads the pair from the ruling that declared it, WITH ITS SCOPE: R6-50 names "
+        "the Quicunque Vult SECTION, not the whole row, so the declaration carries locator_contains 'Quicunque Vult'. "
+        "allocation.allocate applies a scoped declaration only to candidates located in that section: the Quicunque "
+        "Vult takes no slot beside BSR-AN-03 and is recorded as a parallel witness, while the Chalcedonian Definition "
+        "competes for its own slot. Without the scope the Chalcedonian Definition would have been recorded as a "
+        "parallel witness of the Athanasian Creed on four cards (measured before the scope was added). BSR-AN-06 is "
+        "also excluded from rule 1b's English-translation pairing (allocation.declared_same_text_alternate): one row, "
+        "one relationship")
+    R["R6-50_an06_an03_same_text_pair"]["test"] = (
+        "test_session14_an06: test_the_same_text_pair_is_scoped_to_the_quicunque_vult_section; "
+        "test_session6_rulings: test_rulings_file_declares_the_eo_pair_and_the_refusals")
+
+    R["R6-51_an04_extent_and_p844_rubric"]["as_implemented"] = (
+        "sources.tec_outline_of_faith now stores the BCP p. 844 rubric 'Concerning the Catechism' as its first chunk, "
+        "with division 'rubric (integral text)', and REFUSES if that page does not open with the rubric. It stops at "
+        "the Historical Documents title page as session 12 made it, and no longer chunks the pages after it. The "
+        "rubric is not a registered section (it is a rubric about the catechism, not a creed or definition). Corpus: "
+        "126 -> 125 chunks (1 rubric + 124 Q/A), 23,763 -> 22,067 chars, text_hash 44e8a00c... -> e7cc6179...; no "
+        "network. R6-45's scope marker is discharged: no AN-04 chunk awaits a scope ruling any more")
+    R["R6-51_an04_extent_and_p844_rubric"]["test"] = (
+        "test_session14_an06: test_an04_is_bcp_pp_844_to_862_with_the_rubric_stored_and_unregistered; "
+        "test_session12_corpus_repair: test_the_outline_ends_at_the_historical_documents_title_page (updated)")
+
+    R["R6-52_1979_a133_citation"]["as_implemented"] = (
+        "BSR-AN-06's adoption_act cites Journal 1979 p. C-8 per the Archives and records the 1985 note's C-9 as "
+        "UNRECONCILED, in the same words; it is not silently corrected and it is not counted as a second instrument")
+    R["R6-52_1979_a133_citation"]["test"] = "test_session14_an06: test_the_historical_documents_are_their_own_row"
+
+    R["R6-53_tec_glossary_context_only"]["as_implemented"] = (
+        "Neither the TEC glossary nor the Brief Dictionary is a registry row, a fetched host or a source in any "
+        "adoption_verified field except as named context: BSR-AN-06's adoption_verified records them as context only. "
+        "No code path reads them")
+    R["R6-53_tec_glossary_context_only"]["test"] = (
+        "no code to test: recorded on BSR-AN-06's adoption_verified. The negative is enumerable — the registry has no "
+        "row on a Church Publishing host, and the fetch audit records no request to one")
+
+    r45 = R["R6-45_an04_historical_documents_scope"]
+    r45["superseded_by"] = ("R6-48 (session 14): the Historical Documents became their own row, BSR-AN-06, so BSR-AN-04 "
+                            "holds no chunk the R6-45 marker matches. The marker is left in force and inert: it would "
+                            "fire again if any Historical Documents chunk were ever rebuilt on BSR-AN-04")
+    r45["discharged"] = "2026-09-19, session 14 phase 4"
+
+
+PHASES = {"2": phase2, "3": phase3, "4": phase4}
 
 
 def main():

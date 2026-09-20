@@ -73,7 +73,9 @@ def test_declared_alternate_competes_normally_when_the_declared_row_has_nothing(
 
 def test_rulings_file_declares_the_eo_pair_and_the_refusals():
     r = rulings.load()
-    assert rulings.same_text_rows(r) == {"BSR-EO-14": "BSR-EO-07"}
+    # session 14 (R6-50): a declared same-text pair lives on the ruling that declared it, so BSR-AN-06 -> BSR-AN-03
+    # (the Quicunque Vult in two printings) joins the session-6 EO pair
+    assert rulings.same_text_rows(r) == {"BSR-EO-14": "BSR-EO-07", "BSR-AN-06": "BSR-AN-03"}
     assert set(rulings.refused_candidates(r)) == {"Q-382-p1-BSR-BA-02-1", "Q-382-p1-BSR-BA-02-2", "Q-390-p1-BSR-BA-02-1",
                                                    "Q-390-p1-BSR-BA-02-2", "Q-454-p1-BSR-BA-02-1"}
     assert set(rulings.retirements(r)) == {"BSR-EO-03"} and rulings.retirements(r)["BSR-EO-03"]["reason_code"] == "HOST_RETIRED"

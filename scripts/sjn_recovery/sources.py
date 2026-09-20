@@ -1584,14 +1584,26 @@ def _historical_heading_blocks(lines):
     return blocks
 
 
+TEC_P844_RUBRIC_DIVISION = "rubric (integral text)"          # R6-51: stored with its locator, never registered
+
+
 def tec_outline_of_faith(ctx):
-    """Session 12 (Codex F.10): the Outline ends where the Outline ends. The printed title page "Historical Documents of the Church"
-    (BCP p. 863) sets its title over three lines, so the old stop (a line starting "Historical Documents") never fired and the last
-    question's chunk ("What, then, is our assurance as Christians?", p. 862) ran on through p. 864: the Chalcedonian Definition and the
-    p. 864 part of the Quicunque Vult. The Outline now stops at that title page. The pages that follow INSIDE THE SAME 20-page window —
-    the text the row's store already held, no more and no less — are chunked as what they are, one chunk per document and page,
-    locator "Historical Documents of the Church (BCP p. N) — <the document's printed heading>". The row's registry scope and tier are
-    not changed here."""
+    """BSR-AN-04 — the Outline of the Faith as the BCP 1979 prints it: BCP pp. 844–862 (R6-51).
+
+    Session 12 (Codex F.10) found the Outline running on past its own end: the printed title page "Historical Documents of the
+    Church" (BCP p. 863) sets its title over three lines, so the old stop (a line starting "Historical Documents") never fired and
+    the last question's chunk ("What, then, is our assurance as Christians?", p. 862) ran on through p. 864. Session 12 stopped the
+    Outline at that title page and chunked the pages after it ON THIS ROW, marked as awaiting a scope ruling (R6-45).
+
+    Session 14 (R6-48, R6-51) finishes the split. This row now holds BCP pp. 844–862 and nothing after p. 862: the Historical
+    Documents are BSR-AN-06 (tec_historical_documents below). Holding them here had left the Quicunque Vult stored CUT at "one
+    Almighty.", because the creed runs across the page break into p. 865 and p. 865 lay outside this adapter's 20-page window.
+    Two changes:
+
+      * the p. 844 rubric "Concerning the Catechism" is stored, with its own locator and division. It is integral text of the
+        adopted book (B2(b)) and it is NOT a registered section: it is a rubric ABOUT the catechism, not the catechism, and not a
+        creed or definition (R6-51);
+      * the Historical Documents pages are no longer chunked here."""
     url = ctx.row["canonical_url"]
     pages = ctx.pdf(url).split("\f")
     start = next((i for i, p in enumerate(pages) if "An Outline of the Faith" in p and "commonly called the Catechism" in p), -1)
@@ -1599,6 +1611,15 @@ def tec_outline_of_faith(ctx):
         raise FetchError("Outline of the Faith not found in PDF")
     out, section, q, a, state = [], "", None, [], None
     historical_at = None
+    # R6-51: the p. 844 rubric, the page before the Outline's own first page, stored as integral text with its locator.
+    rubric_lines = [l.strip() for l in pdf_repair(pages[start - 1]).split("\n")
+                    if l.strip() and not re.fullmatch(r"\d{3}", l.strip())] if start > 0 else []
+    if rubric_lines[:1] == ["Concerning the Catechism"]:
+        _emit(ctx, out, f"Outline of the Faith (BCP p. {start}) — Concerning the Catechism (rubric)",
+              rubric_lines[1:], TEC_P844_RUBRIC_DIVISION, url)
+    else:
+        raise FetchError(f"BSR-AN-04: BCP p. {start} does not open with the rubric 'Concerning the Catechism', which R6-51 names "
+                         f"as this row's first page; got {rubric_lines[:1]}")
     for pi in range(start, min(len(pages), start + 20)):
         page_no = pi + 1
         if pi > start and _HISTORICAL_DOCS_TITLE.match(" ".join(pdf_repair(pages[pi]).split())):
@@ -1635,21 +1656,107 @@ def tec_outline_of_faith(ctx):
             break
     if q is not None:
         _emit(ctx, out, f"Outline of the Faith (BCP p. {q_page}) — {q_section}: Q. {clean(' '.join(q))[:80]}", q + a, "question", url)
-    notes = [f"PDF pages {start + 1}–{start + 20} region; {len(out)} Q/A pairs"]
-    if historical_at is not None:
-        n_hist, last_page = 0, min(len(pages), start + 20)
-        for pi in range(historical_at + 1, last_page):
-            lines = [l.strip() for l in pdf_repair(pages[pi]).split("\n") if l.strip() and not re.fullmatch(r"\d{3}", l.strip())]
-            for head, body in _historical_heading_blocks(lines):
-                if not head or not body:
-                    continue
+    n_qa = sum(1 for c in out if c.get("division") == "question")
+    notes = [f"PDF pages {start}–{start + 20} region; {n_qa} Q/A pairs; 1 rubric chunk (BCP p. {start}, R6-51)"]
+    if historical_at is None:
+        raise FetchError("BSR-AN-04: the 'Historical Documents of the Church' title page was not found, so the Outline's end "
+                         "(R6-51, BCP p. 862) cannot be located; refusing to chunk rather than run on again (Codex F.10)")
+    notes.append(f"R6-51: this row is BCP pp. {start}–{historical_at} — the rubric 'Concerning the Catechism' (p. {start}), then "
+                 f"the Outline itself, stopping at the 'Historical Documents of the Church' title page (p. {historical_at + 1}). "
+                 f"The Historical Documents are BSR-AN-06 (R6-48), not this row; session 13 held them here under R6-45's marker")
+    return out, notes
+
+
+TEC_HISTORICAL_LAST_SENTENCE = "This is the Catholic Faith, which except a man believe faithfully, he cannot be saved."
+TEC_HISTORICAL_STOP_HEADINGS = ("Preface", "Articles of Religion", "Chicago-Lambeth")   # R6-48 / R6-49: never fetched
+
+
+def tec_historical_documents(ctx):
+    """BSR-AN-06 — the TEC BCP 1979 "Historical Documents of the Church", BCP pp. 863–865 (R6-48).
+
+    The row R6-48 created out of BSR-AN-04. Codex F.10's repair: split at p. 862/863. What this row holds, and only this:
+
+      p. 863        the printed title page "Historical Documents of the Church", stored with its own locator so the
+                    section's extent is visible in the store, as R6-51 stores AN-04's p. 844 rubric;
+      p. 864        the Chalcedonian Definition ("Definition of the Union of the Divine and Human Natures in the
+                    Person of Christ, Council of Chalcedon, 451 A.D., Act V");
+      pp. 864–865    the Quicunque Vult, commonly called The Creed of Saint Athanasius, JOINED ACROSS THE PAGE BREAK.
+
+    The join is the defect being fixed. The creed begins on p. 864 and ends on p. 865; the old AN-04 adapter's 20-page
+    window ended at p. 864, so the stored chunk broke off at "And yet they are not three Almighties, but one Almighty."
+    — a third of the way in, mid-argument, before a word of the Incarnation half. Nothing was wrong with the text: the
+    window was. A document here is therefore accumulated ACROSS pages until the next printed heading, and the adapter
+    refuses to return a Quicunque Vult that does not end at its last sentence.
+
+    R6-48 also names what is NOT fetched for SJN: the 1549 Preface (p. 866 on), the Articles of Religion (p. 867 on,
+    held by R6-49 for the F.9 adoption QA) and the Chicago-Lambeth Quadrilateral. The walk stops at the first of them.
+
+    R6-47 governs what these chunks ARE: adopted within the Prayer Book (1979-A133) but not confessed, so they are
+    witness sections and none of them is a registered creed or definition text. That is the row's tier and the
+    registered-sections list, not this adapter."""
+    url = ctx.row["canonical_url"]
+    pages = ctx.pdf(url).split("\f")
+    title_at = next((i for i, pg in enumerate(pages) if _HISTORICAL_DOCS_TITLE.match(" ".join(pdf_repair(pg).split()))), -1)
+    if title_at < 0:
+        raise FetchError("BSR-AN-06: the 'Historical Documents of the Church' title page was not found in the PDF")
+    out = [ctx.chunk(f"Historical Documents of the Church (BCP p. {title_at + 1}) — title page",
+                     " ".join(pdf_repair(pages[title_at]).split()), "title page", url)]
+    docs, stopped_at = [], None
+    for pi in range(title_at + 1, len(pages)):
+        lines = [l.strip() for l in pdf_repair(pages[pi]).split("\n") if l.strip() and not re.fullmatch(r"\d{3}", l.strip())]
+        if not lines:
+            continue
+        blocks = _historical_heading_blocks(lines)
+        first_heading = clean(" ".join(blocks[0][0])) if blocks and blocks[0][0] else ""
+        if first_heading.startswith(TEC_HISTORICAL_STOP_HEADINGS):
+            stopped_at = (pi + 1, first_heading)
+            break
+        for head, body in blocks:
+            if head:
                 heading = clean(" ".join(head))
-                c = ctx.chunk(f"Historical Documents of the Church (BCP p. {pi + 1}) — {heading}", join(body), "historical document", url)
-                if c:
-                    out.append(c); n_hist += 1
-        notes.append(f"session 12: the Outline ends at BCP p. {historical_at} (the 'Historical Documents of the Church' title page is p. "
-                     f"{historical_at + 1}); {n_hist} Historical Documents chunk(s) from BCP pp. {historical_at + 2}–{last_page}, the pages inside "
-                     f"the adapter's existing 20-page window only (a document that continues past p. {last_page} is held only as far as p. {last_page})")
+                if heading.startswith(TEC_HISTORICAL_STOP_HEADINGS):
+                    stopped_at = (pi + 1, heading)
+                    break
+                docs.append({"heading": heading, "pages": [pi + 1], "lines": list(body)})
+            elif docs:                                  # no heading: this page continues the document above it
+                docs[-1]["lines"].extend(body)
+                if pi + 1 not in docs[-1]["pages"]:
+                    docs[-1]["pages"].append(pi + 1)
+            elif body:
+                raise FetchError(f"BSR-AN-06: BCP p. {pi + 1} carries text under no heading and follows no document")
+        if stopped_at:
+            break
+    if not stopped_at:
+        raise FetchError("BSR-AN-06: no stop heading was reached, so the row's extent (R6-48, BCP pp. 863\u2013865) is not "
+                         "bounded by the text; refusing to chunk")
+    for d in docs:
+        pp = d["pages"]
+        where = f"p. {pp[0]}" if len(pp) == 1 else f"pp. {pp[0]}–{pp[-1]}"
+        c = ctx.chunk(f"Historical Documents of the Church (BCP {where}) — {d['heading']}", join(d["lines"]),
+                      "historical document", url)
+        if c:
+            out.append(c)
+    out = [c for c in out if c]
+    quicunque = [c for c in out if "Quicunque Vult" in c["locator"]]
+    if len(quicunque) != 1:
+        raise FetchError(f"BSR-AN-06: expected exactly one Quicunque Vult chunk, got {len(quicunque)} "
+                         f"({[c['locator'] for c in quicunque]})")
+    if not quicunque[0]["text"].rstrip().endswith(TEC_HISTORICAL_LAST_SENTENCE):
+        raise FetchError("BSR-AN-06: the Quicunque Vult chunk does not end at its last sentence "
+                         f"({TEC_HISTORICAL_LAST_SENTENCE!r}); it ends {quicunque[0]['text'][-60:]!r}. This is the "
+                         "session 12/13 defect (the creed cut at 'one Almighty.') and the chunk is refused, not stored")
+    last_page = max(pp for c in out for pp in [int(re.search(r"pp?\. (?:\d+–)?(\d+)", c["locator"]).group(1))])
+    if last_page > title_at + 3:
+        raise FetchError(f"BSR-AN-06: a chunk runs to BCP p. {last_page}, past the row's extent (R6-48: pp. "
+                         f"{title_at + 1}–{title_at + 3})")
+    notes = [f"R6-48: BCP pp. {title_at + 1}–{last_page}; {len(out)} chunk(s) — the title page, then "
+             + "; ".join(f"{c['locator'].split(' — ', 1)[1]} ({c['locator'].split('(BCP ', 1)[1].split(')', 1)[0]})" for c in out[1:]),
+             f"the Quicunque Vult is JOINED across the BCP p. 864/865 page break and ends at its last sentence "
+             f"({TEC_HISTORICAL_LAST_SENTENCE!r}); the session 12/13 store held it cut at 'one Almighty.'",
+             f"stopped at BCP p. {stopped_at[0]} ({stopped_at[1]!r}): R6-48 does not fetch the 1549 Preface, and R6-49 "
+             f"holds the Articles of Religion for the Codex F.9 adoption QA",
+             "R6-47 / Codex B1(c): adopted within the Prayer Book but not confessed — these are witness sections and "
+             "none is a registered creed or definition text"]
     return out, notes
 
 
@@ -2229,6 +2336,7 @@ ADAPTERS = {
     "BSR-RP-05": heidelberg_crcna, "BSR-RP-06": belgic_crcna,
     "BSR-AN-01": thirty_nine_articles, "BSR-AN-02": bcp_catechism_1662, "BSR-AN-03": athanasian_creed_cofe,
     "BSR-AN-04": tec_outline_of_faith, "BSR-AN-05": acna_to_be_a_christian,
+    "BSR-AN-06": tec_historical_documents,                  # session 14: a row added by author ruling R6-48
     "BSR-BA-01": bfm2000, "BSR-BA-02": london_1689_ch2, "BSR-BA-03": abc_usa_10facts,
     "BSR-BA-04": abc_usa_we_are_american_baptists,           # session 13: a row added by author ruling R6-42
     "BSR-MW-01": umc_articles, "BSR-MW-02": umc_eub_confession, "BSR-MW-03": gmc_bdd_2024, "BSR-MW-04": wesleyan_articles,

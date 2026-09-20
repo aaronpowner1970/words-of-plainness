@@ -144,6 +144,23 @@ def group_map(groups):
     return {rid: (g["group"] if isinstance(g, dict) else g) for rid, g in groups.items()}
 
 
+def declared_same_text_alternate(rid):
+    """Session 14 (R6-50): is this row DECLARED the same text as another (rulings.same_text_rows)?
+
+    One row, one relationship. A declared same-text alternate relates to its controlling row under the R6-4 guard —
+    one text, one slot, the alternate recorded as a parallel witness — and must not ALSO be pulled into rule 1b's
+    English-translation pairing, which would make it someone's "English witness" and pair it with a different row
+    again. BSR-AN-06 is the first row where the two rules would have collided: R6-50 declares it one text with
+    BSR-AN-03, while its title shares "The Episcopal Church BCP 1979" with BSR-AN-04, the row it was split out of."""
+    from . import rulings
+    try:
+        return rid in rulings.same_text_rows()
+    except SystemExit:
+        raise
+    except Exception:
+        return False
+
+
 def translation_pairs(registry, branch):
     """{witness_rid: controlling_rid} for one branch, DERIVED from the registry (never hard-coded):
       (1) a witness row whose reception_note / author_note / draft_recommendation names one non-witness
@@ -152,13 +169,16 @@ def translation_pairs(registry, branch):
       (2) else the non-witness row of the same branch whose standard_title shares a document-name token
           with the witness row's title (BSR-RC-03 "*Dei Filius* English (EWTN)" -> BSR-RC-02 "Vatican I,
           *Dei Filius* (Latin, official)"; BSR-RC-05 "Fourth Lateran (Fordham)" -> BSR-RC-04).
-    A witness row with no such controlling row is left unpaired and keeps the plain witness rules."""
+    A witness row with no such controlling row is left unpaired and keeps the plain witness rules.
+    Session 14 (R6-50): a witness row DECLARED the same text as another is never paired here (see
+    declared_same_text_alternate above); BSR-AN-06 relates to BSR-AN-03 as one TEXT under the R6-4 same-text guard,
+    not as a translation of BSR-AN-04, whose title it shares three words with."""
     rows = registry.for_branch(branch, include_fallback=True, citable_only=False)
     controlling = [r for r in rows if not registry.is_witness(r["registry_id"])]
     out = {}
     for w in rows:
         wid = w["registry_id"]
-        if not registry.is_witness(wid):
+        if not registry.is_witness(wid) or declared_same_text_alternate(wid):
             continue
         blob = " ".join(str(w.get(k) or "") for k in ("reception_note", "author_note", "draft_recommendation", "standard_title"))
         named = [rid for rid in _RID.findall(blob) if rid != wid and any(c["registry_id"] == rid for c in controlling)]
@@ -188,6 +208,15 @@ def translation_pair_evidence(registry, branch):
     for w in rows:
         wid = w["registry_id"]
         if not registry.is_witness(wid):
+            continue
+        if declared_same_text_alternate(wid):
+            out.append({"branch": branch, "witness": wid, "witness_title": w.get("standard_title"),
+                        "witness_tier": w.get("authority_tier"), "witness_reception": w.get("reception_scope"),
+                        "controlling": None, "rule": "DECLARED_SAME_TEXT_ALTERNATE",
+                        "evidence": "an author ruling declares this row the same TEXT as another (R6-4's guard, declared by "
+                                    "R6-50 for BSR-AN-06 -> BSR-AN-03). One row, one relationship: it takes no slot beside "
+                                    "its controlling row and is recorded as a parallel witness, so rule 1b's "
+                                    "English-translation pairing does not also claim it"})
             continue
         rec = {"branch": branch, "witness": wid, "witness_title": w.get("standard_title"), "witness_tier": w.get("authority_tier"),
                "witness_reception": w.get("reception_scope"), "controlling": None, "rule": None, "evidence": None}
@@ -249,8 +278,11 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None, same_text_rows=
              "corroborating_lower_tier": {id: bool}, "groups": {id: group}, "slot_order": {id: n},
              "parallel_witnesses": {seated_id: [{"candidate_id", "registry_id", "rule"}]}}"""
     if same_text_rows is None:
-        from .rulings import same_text_rows as _declared
-        same_text_rows = _declared()
+        from .rulings import same_text_declarations
+        declarations = same_text_declarations()
+        same_text_rows = {rid: d["same_text_as"] for rid, d in declarations.items()}
+    else:
+        declarations = {alt: {"same_text_as": ctrl} for alt, ctrl in same_text_rows.items()}
     pairs = pairs or {}
     gmap = group_map(groups)
     by_id = {c["candidate_id"]: c for c in cands}
@@ -389,8 +421,20 @@ def allocate(cands, pairs=None, cap=MAX_CANDIDATES, groups=None, same_text_rows=
                 cut.append(i)
         return seated, parallel, cut
 
-    declared = {alt: ctrl for alt, ctrl in (same_text_rows or {}).items()}
-    held = [i for i in by_tier if by_id[i]["registry_id"] in declared
+    # R6-4 as extended by R6-50: a DECLARED same-text alternate takes no slot beside its controlling row. A declaration
+    # scoped to a section (`locator_contains`) applies only to candidates located in it: BSR-AN-06's Quicunque Vult is
+    # one text with BSR-AN-03's, but its Chalcedonian Definition is not, and competes for its own slot.
+    declared = {alt: d["same_text_as"] for alt, d in (declarations or {}).items()}
+    scope = {alt: d.get("locator_contains") for alt, d in (declarations or {}).items()}
+
+    def _declared(i):
+        rid = by_id[i]["registry_id"]
+        if rid not in declared:
+            return False
+        want = scope.get(rid)
+        return not want or want in str(by_id[i].get("locator") or "")
+
+    held = [i for i in by_tier if _declared(i)
             and any(by_id[j]["registry_id"] == declared[by_id[i]["registry_id"]] for j in by_tier)]
     seated, parallel, cut = seat([i for i in by_tier if i not in held])
     for i in held:

@@ -108,8 +108,12 @@ def _entry_status(per_standard, rid):
 
 
 def relocations(paths=None):
-    """Session 12 (Codex F.10): {(registry_id, old_locator): {"new_locators": [...], "rule", "mapping_file"}} from the chunk-id mapping
-    files a re-chunk wrote (config.CHUNK_ID_MAPPINGS). SAME ids are not listed; a missing file contributes nothing."""
+    """Session 12 (Codex F.10): {(registry_id, old_locator): {"new_ids": [(registry_id, locator), ...], "rule", "mapping_file"}}
+    from the chunk-id mapping files a re-chunk wrote (config.CHUNK_ID_MAPPINGS). SAME ids are not listed; a missing file
+    contributes nothing.
+
+    Session 14 (R6-48): a mapped new id carries its OWN registry_id, because the AN-04 / AN-06 split moves text BETWEEN ROWS.
+    Until now every move was within one row and the mapping's rid was assumed on both sides."""
     out = {}
     for path in (CHUNK_ID_MAPPINGS if paths is None else paths):
         if not os.path.exists(path):
@@ -117,28 +121,65 @@ def relocations(paths=None):
         with open(path, encoding="utf-8") as fh:
             d = json.load(fh)
         rel = os.path.relpath(path, os.path.dirname(os.path.dirname(os.path.dirname(path)))).replace("\\", "/")
+        this = {}
         for rid, r in (d.get("rows") or {}).items():
             for old_id, m in (r.get("mapping") or {}).items():
                 old_loc = old_id.split("::", 1)[1]
-                out[(rid, old_loc)] = {"new_locators": [x.split("::", 1)[1] for x in m.get("new") or []], "rule": m.get("rule"),
-                                       "mapping_file": rel}
+                new_ids = [tuple(x.split("::", 1)) for x in m.get("new") or []]
+                this[(rid, old_loc)] = {"new_ids": new_ids, "rule": m.get("rule"), "mapping_file": rel}
+        # Session 14: successive re-chunks COMPOSE. CHUNK_ID_MAPPINGS is in chronological order, and a later re-chunk
+        # remaps ids an earlier one produced: session 13 mapped AN-04's run-on p. 862 chunk onto two AN-04 Historical
+        # Documents chunks, and session 14 moved those same two into BSR-AN-06. A candidate stored under the ORIGINAL
+        # locator has to be followed through both hops or it is dropped at build as a vanished chunk, which would lose
+        # 19 Anglican citations whose text never changed a word.
+        for key, rec in out.items():
+            followed, composed = [], []
+            for nid in rec["new_ids"]:
+                if nid in this and nid != key:
+                    composed.append(nid)
+                    for hop in this[nid]["new_ids"]:
+                        if hop not in followed:
+                            followed.append(hop)
+                elif nid not in followed:
+                    followed.append(nid)
+            if composed:
+                rec["new_ids"] = followed
+                rec["composed_through"] = rec.get("composed_through", []) + [
+                    {"via": [f"{r}::{l}" for r, l in composed], "rule": this[composed[0]]["rule"], "mapping_file": rel}]
+        out.update(this)
+    for rec in out.values():
+        rec["new_locators"] = [loc for _, loc in rec["new_ids"]]
     return out
 
 
 def relocate(cand, chunk_index, moves):
     """The chunk a stored candidate is re-asserted against. Its own (registry_id, locator) chunk when that chunk carries the phrase
-    verbatim; otherwise, where a re-chunk mapped that id, the first mapped new chunk that carries it. Returns (chunk, relocation or None)."""
+    verbatim; otherwise, where a re-chunk mapped that id, the first mapped new chunk that carries it. Returns (chunk, relocation or None).
+
+    Session 14 (R6-48): the mapped chunk may sit in ANOTHER ROW. The AN-04 / AN-06 split moves the Chalcedonian Definition and
+    the Quicunque Vult out of BSR-AN-04 into BSR-AN-06, and a candidate located in them must follow the text rather than be
+    dropped as a vanished chunk: the evidence is unchanged, the row that holds it is not. A cross-row relocation records
+    `registry_id_at_run` and `registry_id_now`, and the packet builder re-reads tier, adoption, speaks_for, witness status and
+    refusal from the row the chunk is in NOW — which is how R6-47's witness treatment reaches these candidates at all."""
     key = (cand["registry_id"], cand["locator"])
     chunk = chunk_index.get(key)
     if key not in moves or (chunk and guards.check_phrase(cand["phrase"], chunk["text"])[0]):
         return chunk, None
     m = moves[key]
-    for loc in m["new_locators"]:
-        c = chunk_index.get((cand["registry_id"], loc))
-        if c and loc != cand["locator"] and guards.check_phrase(cand["phrase"], c["text"])[0]:
-            return c, {"locator_at_run": cand["locator"], "locator_now": loc, "rule": m["rule"], "mapping_file": m["mapping_file"],
-                       "note": "the row was re-chunked after this cell ran (Codex F.10 corpus repair); the chunk this candidate was located "
-                               "in no longer carries its phrase, and the mapped chunk that now does is cited instead"}
+    # a mapping written before session 14 (or a hand-built one) carries locators only: they are this row's own
+    new_ids = m.get("new_ids") or [(cand["registry_id"], loc) for loc in m.get("new_locators") or []]
+    for rid, loc in new_ids:
+        c = chunk_index.get((rid, loc))
+        if c and (rid, loc) != key and guards.check_phrase(cand["phrase"], c["text"])[0]:
+            rec = {"locator_at_run": cand["locator"], "locator_now": loc, "rule": m["rule"], "mapping_file": m["mapping_file"],
+                   "note": "the row was re-chunked after this cell ran (Codex F.10 corpus repair); the chunk this candidate was located "
+                           "in no longer carries its phrase, and the mapped chunk that now does is cited instead"}
+            if rid != cand["registry_id"]:
+                rec.update({"registry_id_at_run": cand["registry_id"], "registry_id_now": rid, "cross_row": True,
+                            "note": f"the text this candidate cites moved from {cand['registry_id']} to {rid} in the Codex F.10 corpus "
+                                    f"repair (R6-48). The phrase is verbatim in the chunk {rid} now holds; the citation follows the "
+                                    f"text, and its tier, adoption, speaks_for and witness status are re-read from {rid}"})
+            return c, rec
     return chunk, None
 
 
@@ -308,6 +349,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
     cards, dropped_at_build, n_rej, repaired_chunks = [], [], 0, []
     queue = review_queue.load()                    # session 14 (R6-54): read once per packet, so one build is one queue
     queue_held_entries = []
+    cross_row_moves = []                           # session 14 (R6-48): candidates whose text moved to another registry row
     chunk_index, moves, relocated_chunks = {}, relocations(), []
     rows_without_text = []
     for r in registry.for_branch(branch, citable_only=False):
@@ -382,18 +424,22 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                             why = "verbatim (chunk repaired after the run; phrase verbatim in both texts)"
                         else:
                             ok, why = False, "chunk text changed since the locator ran (hash mismatch) and the phrase is not verbatim in both texts"
-                    refusal = registry.citation_refusal(cand["registry_id"])
+                    # Session 14 (R6-48): where the corpus repair moved this candidate's text into ANOTHER ROW, every
+                    # row-derived field is read from the row that holds the text NOW. The citation follows the text: that
+                    # is how R6-47's witness treatment, and R6-50's same-text pair, reach these candidates at all.
+                    rid_now = (relocated or {}).get("registry_id_now") or cand["registry_id"]
+                    refusal = registry.citation_refusal(rid_now)
                     if refusal:
                         ok, why = False, refusal
                     vers = st["verifications"].get(cand["candidate_id"], {})
-                    std = registry.public(cand["registry_id"])
+                    std = registry.public(rid_now)
                     final = vers.get("final") or {}
                     # Session 7 (R6-5 clause 1, R6-10, R6-6/R6-9): the effective tier is RE-RESOLVED at build time from the
                     # phrase, so a packet always states the tier the rules in force give. The value the cell runner stored
                     # is kept beside it when the two differ, so the change is visible rather than silent.
-                    res = registry.tier_resolution(cand["registry_id"], chunk, cand["phrase"])
+                    res = registry.tier_resolution(rid_now, chunk, cand["phrase"])
                     entry = {
-                        "candidate_id": cand["candidate_id"], "pass": cand["pass"], "registry_id": cand["registry_id"],
+                        "candidate_id": cand["candidate_id"], "pass": cand["pass"], "registry_id": rid_now,
                         "standard_title": std["standard_title"], "authority_tier": std["authority_tier"],
                         "effective_tier": res["effective_tier"], "effective_tier_why": res["why"],
                         "effective_tier_at_run": cand.get("effective_tier"),
@@ -401,7 +447,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                         "registered_phrase_hit": res["registered_phrase_hit"],
                         # session 12 (R6-41): the registered texts that raised this citation, for the original-holds-the-seat rule
                         "raised_by_registered_text": res.get("raised_by") or [],
-                        "adoption": {k: registry.adoption(cand["registry_id"]).get(k) for k in ("adoption_status", "adoption_body_scope", "adoption_act", "adopting_body", "source")},
+                        "adoption": {k: registry.adoption(rid_now).get(k) for k in ("adoption_status", "adoption_body_scope", "adoption_act", "adopting_body", "source")},
                         "apparatus_guard": res.get("apparatus_guard"),
                         # session 13 (R6-45): a chunk that awaits a scope ruling says so on every entry located in it
                         "awaits_scope_ruling": res.get("awaits_scope_ruling"),
@@ -409,7 +455,7 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                         "reception_scope": std["reception_scope"], "reception_note": std["reception_note"],
                         "scope_caveat": std["scope_caveat"], "fallback_tier": cand["fallback_tier"],
                         "witness": bool(cand.get("witness") or std.get("witness_only")), "slot": cand.get("slot"),
-                        "speaks_for_group": (groups.get(cand["registry_id"]) or {}).get("group"),
+                        "speaks_for_group": (groups.get(rid_now) or {}).get("group"),
                         "exhaustion_batch": cand.get("exhaustion_batch"),
                         "found_in_exhaustion": bool(cand.get("exhaustion_batch") is not None or str(cand.get("pass")) == "3"),
                         "locator": cand["locator"], "phrase": cand["phrase"], "locator_rationale": cand["rationale"],
@@ -440,6 +486,10 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
                     if relocated and ok:
                         entry["locator"] = relocated["locator_now"]
                         entry["chunk_relocated"] = relocated
+                        if relocated.get("cross_row"):
+                            entry["registry_id_at_run"] = relocated["registry_id_at_run"]
+                            cross_row_moves.append((cell["queue_id"], cand["candidate_id"], relocated["registry_id_at_run"],
+                                                    relocated["registry_id_now"], relocated["locator_now"]))
                         if repaired:
                             entry["note"] = relocated["note"]
                         relocated_chunks.append((cell["queue_id"], cand["candidate_id"], relocated["locator_at_run"], relocated["locator_now"]))
@@ -597,6 +647,9 @@ def build_branch_packet(branch, cells, runner, registry, predicates, comparators
         "candidates_lower_floor_applied": sum(1 for c in cards for e in c["candidates"] if (e.get("final_verdict") or {}).get("lower_floor_applied")),
         "chunk_repaired_after_run": repaired_chunks,
         "chunk_relocated_after_run": relocated_chunks,
+        # session 14 (R6-48): the AN-04 / AN-06 split. A citation whose text moved to another row follows the text, and its
+        # tier, adoption, speaks_for and witness status are re-read from the row that holds it now.
+        "chunk_moved_to_another_row": cross_row_moves,
         "awaiting_scope_ruling": [(c["queue_id"], x["candidate_id"], x["locator"], (x.get("awaits_scope_ruling") or {}).get("ruling"))
                                   for c in cards for lst in ("candidates", "rejections", "witness_only_candidates")
                                   for e in c.get(lst) or [] for x in [e] + list(e.get("same_text_parallel_witnesses") or [])

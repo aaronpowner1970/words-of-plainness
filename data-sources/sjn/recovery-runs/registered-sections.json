@@ -1,7 +1,7 @@
 {
  "schema": "sjn-registered-sections/1",
  "what": "The explicit, reviewable list of registered creed and definition SECTIONS (Codex B1(a), ruling R6-43). A chunk is a registered creed or definition text only if (registry_id, locator) is listed here. Where a stored chunk carries more than the creed or definition itself, `text_through` ends the registered extent after the first occurrence of that string; the rest of the chunk is not registered. `section_spans_chunks` reports a section the store holds in more than one chunk (R6-46.3). The harness never edits this file; a change is an author-reviewed commit.",
- "ruling": "R6-43_registration_by_section",
+ "ruling": "R6-43_registration_by_section; R6-47 / R6-48 (session 14): BSR-AN-06 has no registered sections",
  "written": "2026-09-17, Code session 13 phase 2, from the row-level registrations enumerated in session13/registered-before.json",
  "sections": [
   {
@@ -516,6 +516,18 @@
    "locator": "Definition of Faith, Council of Chalcedon (451), paragraph 10",
    "registered_before": true,
    "why": "the acts' record of the bishops' acclamation after the definition was read ('After the reading of the definition, all the most religious Bishops cried out ...'): a narrative of the council's reception, not the definition itself. Eastern Orthodox is read only in this session; no packet is built from it"
+  },
+  {
+   "registry_id": "BSR-AN-06",
+   "locator": "Historical Documents of the Church (BCP p. 864) — Definition of the Union of the Divine and Human Natures in the Person of Christ Council of Chalcedon, 451 A.D., Act V",
+   "registered_before": false,
+   "why": "R6-47 / Codex B1(c): adopted within the BCP 1979 (1979-A133) but NOT confessed by The Episcopal Church - no liturgical appointment, and the BCP's own Catechism (p. 852) calls the Athanasian Creed 'an ancient document'. Adoption is not confession: a witness section, which cannot seat a cell alone and is never a registered creed or definition text. Article VIII of the 1801 Articles of Religion corroborates only. Positive evidence of confession reopens it (fail closed)"
+  },
+  {
+   "registry_id": "BSR-AN-06",
+   "locator": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+   "registered_before": false,
+   "why": "R6-47 / Codex B1(c): adopted within the BCP 1979 (1979-A133) but NOT confessed by The Episcopal Church - no liturgical appointment, and the BCP's own Catechism (p. 852) calls the Athanasian Creed 'an ancient document'. Adoption is not confession: a witness section, which cannot seat a cell alone and is never a registered creed or definition text. Article VIII of the 1801 Articles of Religion corroborates only. Positive evidence of confession reopens it (fail closed). The same text IS registered for BSR-AN-03, which the Church of England appoints at Morning Prayer; R6-50 names the two as one text and AN-03 holds the slot"
   }
  ]
 }

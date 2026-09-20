@@ -122,7 +122,12 @@ CONSULTATION_LADDERS = {"Eastern Orthodox": EO_CONSULTATION_LADDER}
 # Session 12 (Codex F.10): chunk-id mappings written when a row is re-chunked. A stored candidate whose (registry_id, locator) chunk no
 # longer carries its phrase is followed to the mapped new chunk that does (packets.relocations); nothing else reads them.
 # Session 13: the re-chunk was re-run in session 13 phase 4 (session 12's was rolled back), so its mapping is the one in force.
-CHUNK_ID_MAPPINGS = [os.path.join(RUNS_DIR, "session13", "chunk-id-mapping.json")]
+# Session 14 (R6-48): a second mapping, for the AN-04 / AN-06 split. The list is CHRONOLOGICAL and successive re-chunks
+# COMPOSE (packets.relocations): session 13 mapped AN-04's run-on p. 862 chunk onto two AN-04 Historical Documents
+# chunks, and this one moves those two into BSR-AN-06, so a candidate stored under the original locator is followed
+# through both hops. A later mapping's entry for the same id supersedes an earlier one.
+CHUNK_ID_MAPPINGS = [os.path.join(RUNS_DIR, "session13", "chunk-id-mapping.json"),
+                     os.path.join(RUNS_DIR, "session14", "chunk-id-mapping.json")]
 
 # Registry hosts RETIRED by the author (2026-09-12). A retired host is never requested, for any purpose:
 # not by the corpus builder, not by the fetch audit, not by an adapter's crawl. Rows still ratified on a
