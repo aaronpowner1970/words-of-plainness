@@ -227,6 +227,10 @@ citations:
         ref: "Ecclesiastes 12:7"
         type: "ot"
         note: "\"The spirit shall return unto God who gave it\" — the spirit's origin and destiny."
+      - id: "ce-matt1028"
+        ref: "Matthew 10:28"
+        type: "nt"
+        note: "\"Fear not them which kill the body, but are not able to kill the soul\"—the spirit outlives the body."
       - id: "ce-heb129"
         ref: "Hebrews 12:9"
         type: "nt"
@@ -235,14 +239,34 @@ citations:
         ref: "Acts 17:29"
         type: "nt"
         note: "\"We are the offspring of God\" — Paul on Mars Hill, establishing divine parentage."
+      - id: "ce-deut3019"
+        ref: "Deuteronomy 30:19"
+        type: "ot"
+        note: "\"I have set before you life and death ... therefore choose life\"—agency given by God."
+      - id: "ce-josh2415-a"
+        ref: "Joshua 24:15"
+        type: "ot"
+        note: "\"Choose you this day whom ye will serve\"—the power to choose."
       - id: "ce-dc9330"
         ref: "D&C 93:30"
         type: "dc"
         note: "All truth is independent in that sphere in which God has placed it — agency as eternal inheritance."
+      - id: "ce-zech121"
+        ref: "Zechariah 12:1"
+        type: "ot"
+        note: "The LORD \"formeth the spirit of man within him.\""
+      - id: "ce-ps13913"
+        ref: "Psalm 139:13"
+        type: "ot"
+        note: "\"Thou hast covered me in my mother's womb\"—God forming each person."
       - id: "ce-job328"
         ref: "Job 32:8"
         type: "ot"
         note: "\"There is a spirit in man: and the inspiration of the Almighty giveth them understanding.\""
+      - id: "ce-heb927"
+        ref: "Hebrews 9:27"
+        type: "nt"
+        note: "\"It is appointed unto men once to die\"—one mortal life."
       - id: "ce-gen27-a"
         ref: "Genesis 2:7"
         type: "ot"
@@ -266,7 +290,7 @@ citations:
       - id: "ce-jude16"
         ref: "Jude 1:6"
         type: "nt"
-        note: "Angels who kept not their first estate — the pre-mortal rebellion."
+        note: "Angels who kept not their first estate—the rebellion in heaven."
       - id: "ce-rev129"
         ref: "Revelation 12:9"
         type: "nt"
@@ -274,7 +298,11 @@ citations:
       - id: "ce-1cor1312"
         ref: "1 Corinthians 13:12"
         type: "nt"
-        note: "\"For now we see through a glass, darkly\" — the veil of mortality limiting our pre-mortal knowledge."
+        note: "\"For now we see through a glass, darkly\"—mortal sight limited until we see face to face."
+      - id: "ce-2cor57"
+        ref: "2 Corinthians 5:7"
+        type: "nt"
+        note: "\"For we walk by faith, not by sight.\""
 
   - section: "Three Gifts of the Spirit"
     entries:
@@ -373,7 +401,7 @@ citations:
         ref: "2 Nephi 10:23"
         type: "bom"
         note: "\"Ye are free to act for yourselves\" — agency as a gift and a calling."
-      - id: "ce-josh2415"
+      - id: "ce-josh2415-b"
         ref: "Joshua 24:15"
         type: "ot"
         note: "\"Choose you this day whom ye will serve\" — Joshua's challenge to active, decisive commitment."
@@ -444,25 +472,25 @@ citations:
 
 <h3 id="the-soul-spirit-and-body-united">The Soul: Spirit and Body United</h3>
 
-{% sentence 35 %}Latter-day Saints believe that these intangible yet vital and vibrant portions of the human "self"—our minds and emotions—arise from the human spirit within the flesh.{% endsentence %} {% sentence 36 %}Along with many other groups, we also believe that the individual spirits of all humans existed prior to birth into this life and that they will continue to exist after physical death.{% endsentence %} {% sentence 37 %}With regards to spirituality, many speak of the importance of a person's character, which is the only thing that endures beyond the grave.{% endsentence %} {% sentence 38 %}Personal character is the manifestation of the true nature of one's immortal spirit.{% endsentence %}
+{% sentence 35 %}Latter-day Saints believe that these intangible yet vital and vibrant portions of the human "self"—our minds and emotions—arise from the human spirit within the flesh.{% endsentence %} {% sentence 36 %}With Christians across every tradition, we also believe that the spirit of each person will continue to exist after physical death{% cite "ce-eccl127" %}{% cite "ce-matt1028" %}.{% endsentence %} {% sentence 37 %}With regards to spirituality, many speak of the importance of a person's character, which is the only thing that endures beyond the grave.{% endsentence %} {% sentence 38 %}Personal character is the manifestation of the true nature of one's immortal spirit.{% endsentence %}
 
-{% sentence 39 %}The Holy Bible identifies God as the "Father of spirits" {% cite "ce-num1622" %}{% cite "ce-eccl127" %}{% cite "ce-heb129" %}{% cite "ce-acts1729-a" %}.{% endsentence %} {% sentence 40 %}We believe that long before the physical formation of this world, as an act of procreation, God the Father created our spirits.{% endsentence %} {% sentence 41 %}Each spirit is the offspring of God, possessing parts, senses, intelligence, emotion, and an individual identity.{% endsentence %} {% sentence 42 %}As part of our inheritance as spiritual offspring of God, we were promised eternal freedom of choice—personal agency{% cite "ce-dc9330" %}.{% endsentence %}
+{% sentence 39 %}The Holy Bible identifies God as the "Father of spirits" {% cite "ce-num1622" %}{% cite "ce-eccl127" %}{% cite "ce-heb129" %}{% cite "ce-acts1729-a" %}.{% endsentence %} {% sentence 41 %}Each spirit that resides in the flesh of mortals is the offspring of God, possessing mind, senses, intelligence, emotion, and an individual identity.{% endsentence %} {% sentence 42 %}As part of our inheritance as spiritual offspring of God, we have been given freedom of choice—personal agency{% cite "ce-deut3019" %}{% cite "ce-josh2415-a" %}{% cite "ce-dc9330" %}.{% endsentence %} {% sentence 271 %}Latter-day Saints hold these beliefs in common with Christians of many traditions.{% endsentence %} {% sentence 272 %}We also treasure revelations that give further light and understanding about the origin of our individual spirits, which we set out in full, with their biblical and Restoration witnesses, in Volume 2.{% endsentence %}
 
-{% sentence 43 %}Sometime between the moment of physical conception and physical birth into this mortal life, God places an individual spirit inside the growing body of flesh and bone{% cite "ce-job328" %}.{% endsentence %} {% sentence 44 %}The physical body becomes an extension of one's spirit, adding new layers of abilities and senses, bringing the individual to a new level of existence.{% endsentence %} {% sentence 45 %}When a spirit child of God is born into a mortal body of flesh, he or she is no longer what he or she was as an individual spirit.{% endsentence %} {% sentence 46 %}The character of an individual evolves and expands with each stage of existence.{% endsentence %}
+{% sentence 43 %}God forms the spirit of each person within them and knits body and spirit together in the womb{% cite "ce-zech121" %}{% cite "ce-ps13913" %}{% cite "ce-job328" %}.{% endsentence %} {% sentence 44 %}The physical body becomes an extension of one's spirit, adding new layers of abilities and senses.{% endsentence %} {% sentence 46 %}The character of an individual evolves and expands with each stage of existence.{% endsentence %}
 
-{% sentence 47 %}Latter-day Saints do not believe in reincarnation.{% endsentence %} {% sentence 48 %}We believe in eternal progression—a forward journey through distinct stages of existence, each adding a purposeful layer to our existence and progression as children of God.{% endsentence %} {% sentence 49 %}Within our theology, the individual spirits of all humans that were created by God lived in His presence before birth.{% endsentence %} {% sentence 50 %}These spirits now inhabit bodies of flesh and will not return to repeat mortality.{% endsentence %} {% sentence 51 %}This life is the one season appointed for this mortal learning environment, which is what gives our life choices their lasting weight and consequence to the course of our eternal development.{% endsentence %}
+{% sentence 47 %}Latter-day Saints do not believe in reincarnation.{% endsentence %} {% sentence 48 %}We believe in a forward journey through distinct stages of existence—mortal life, death, and resurrection—each adding a purposeful layer to our existence and progression as children of God.{% endsentence %} {% sentence 50 %}Each of us lives one mortal life and will not return to repeat it{% cite "ce-heb927" %}.{% endsentence %} {% sentence 51 %}This life is the one season appointed for this mortal learning environment, which is what gives our life choices their lasting weight and consequence to the course of our eternal development.{% endsentence %}
 
 {% sentence 52 %}Spirituality has to do with the individual spirit that resides within one's physical body (John A. Widtsoe, *Program of The Church of Jesus Christ of Latter-day Saints*, 63).{% endsentence %} {% sentence 53 %}Our spiritual nature involves individual freedom of mind, limitless potential for greatness, reasoning, learning, emotion, a connection to the flesh, and—most importantly—interaction with other spirits.{% endsentence %} {% sentence 54 %}In mortality our spiritual and physical natures are tied together, but imperfectly and temporarily.{% endsentence %} {% sentence 55 %}Latter-day Saints identify this union of spirit and flesh as the soul{% cite "ce-gen27-a" %}.{% endsentence %}
 
-{% sentence 56 %}A note of clarification may serve seekers from other Christian traditions.{% endsentence %} {% sentence 57 %}Many Christians use the word *soul* to describe what Latter-day Saints would call the *spirit*—the whole immaterial self.{% endsentence %} {% sentence 58 %}In our understanding, however, the terms are distinct.{% endsentence %} {% sentence 59 %}The *spirit* is the individual, intelligent personality—a literal offspring of God who existed before birth and will persist after death.{% endsentence %} {% sentence 60 %}The *soul* is what comes into being when that spirit is joined to a body of flesh: two natures, two creations of God, united into one being for a mortal season{% cite "ce-gen27-b" %}.{% endsentence %} {% sentence 61 %}It is the spirit within the flesh that possesses the faculty of revelation—the fifth faculty—through which God communes with His children.{% endsentence %} {% sentence 62 %}This distinction matters because it is not the body alone, nor some vague inner self, but the literal spirit offspring of God within you that can perceive His voice.{% endsentence %}
+{% sentence 56 %}A note of clarification may serve seekers from other Christian traditions.{% endsentence %} {% sentence 57 %}Many Christians use the word *soul* to describe what Latter-day Saints would call the *spirit*—the whole immaterial self.{% endsentence %} {% sentence 58 %}In our understanding, however, the terms are distinct.{% endsentence %} {% sentence 59 %}The *spirit* is the individual, intelligent personality—the offspring of God, which will persist after death.{% endsentence %} {% sentence 60 %}The *soul* is what comes into being when that spirit is joined to a body of flesh: two natures, two creations of God, united into one being for a mortal season{% cite "ce-gen27-b" %}.{% endsentence %} {% sentence 61 %}It is the spirit within the flesh that possesses the faculty of revelation—the fifth faculty—through which God communes with His children.{% endsentence %} {% sentence 62 %}This distinction matters because it is not the body alone, nor some vague inner self, but the spirit within you, the offspring of God, that can perceive His voice.{% endsentence %}
 
 {% sentence 63 %}These two halves of our personal nature, the spirit and the flesh, compete for dominance of our character{% cite "ce-gal517" %}.{% endsentence %} {% sentence 64 %}Finding and maintaining a wise and righteous balance between the spirit and the flesh takes a lifetime and more of effort and experience.{% endsentence %} {% sentence 65 %}Latter-day Saints believe in the resurrection from the dead that was promised by Jesus Himself{% cite "ce-john5" %}.{% endsentence %} {% sentence 66 %}Following resurrection we will have the capacity to master the perfect balance of our souls through all eternity, but we are expected to begin this process now.{% endsentence %} {% sentence 67 %}We will never become truly whole (holy) unless we learn to bring our spirit and flesh into a righteous and lively state of mutual reverence.{% endsentence %}
 
-{% sentence 68 %}Latter-day Saints not only believe that God is a real and living entity, but we believe that Satan is also a real and living entity.{% endsentence %} {% sentence 69 %}Scriptures state that one of God's spirit offspring became His eternal adversary, leading many angels of heaven in open rebellion against God{% cite "ce-1pet58" %}{% cite "ce-jude16" %}{% cite "ce-rev129" %}.{% endsentence %} {% sentence 70 %}This adversary is known as Satan or the Devil.{% endsentence %} {% sentence 71 %}As part of our pre-mortal existence, our spirits were under the influence of God and this adversary for unknown spans of eternity.{% endsentence %}
+{% sentence 68 %}Latter-day Saints not only believe that God is a real and living entity, but we believe that Satan is also a real and living entity.{% endsentence %} {% sentence 69 %}Scriptures state that an angel of God rebelled and became His eternal adversary, leading many angels of heaven in open rebellion against God{% cite "ce-1pet58" %}{% cite "ce-jude16" %}{% cite "ce-rev129" %}.{% endsentence %} {% sentence 70 %}This adversary is known as Satan or the Devil.{% endsentence %} {% sentence 71 %}He remains active in this world, "seeking whom he may devour"{% cite "ce-1pet58" %}.{% endsentence %}
 
-{% sentence 72 %}We further believe that when we are born in the flesh, God places a kind of veil of forgetfulness over our minds to test us during our stay in mortality{% cite "ce-1cor1312" %}.{% endsentence %} {% sentence 73 %}This veil suppresses much of the strength of our pre-mortal knowledge, creating a testing condition in which we make our choices in this life as a product of spiritual and physical desires.{% endsentence %} {% sentence 74 %}In the absence of perfect knowledge, we reveal the true character of our souls.{% endsentence %}
+{% sentence 72 %}We further believe that in mortality we see "through a glass, darkly"—God allows our sight to be limited, so that we walk by faith and not by sight{% cite "ce-1cor1312" %}{% cite "ce-2cor57" %}.{% endsentence %} {% sentence 73 %}This limited sight creates a testing condition in which we make our choices in this life as a product of spiritual and physical desires.{% endsentence %} {% sentence 74 %}In the absence of perfect knowledge, we reveal the true character of our souls.{% endsentence %}
 
-{% sentence 75 %}Our spirits are still actively influenced by both the Spirit of God and the spirit of Satan—good and evil influences respectively.{% endsentence %} {% sentence 76 %}Their spirits communicate directly with our own.{% endsentence %} {% sentence 77 %}Though we are free to choose our path, they influence our thoughts and feelings.{% endsentence %} {% sentence 78 %}As in pre-mortality, we continue to learn in mortality by making choices, experiencing consequences, and gathering wisdom in the process.{% endsentence %} {% sentence 79 %}The hopeful result is that we will grow and progress as children of God, but we are free to choose the direction of our growth.{% endsentence %}
+{% sentence 75 %}Our spirits are actively influenced by both the Spirit of God and the spirit of Satan—good and evil influences respectively.{% endsentence %} {% sentence 76 %}Their spirits communicate directly with our own.{% endsentence %} {% sentence 77 %}Though we are free to choose our path, they influence our thoughts and feelings.{% endsentence %} {% sentence 78 %}In mortality we learn by making choices, experiencing consequences, and gathering wisdom in the process.{% endsentence %} {% sentence 79 %}The hopeful result is that we will grow and progress as children of God, but we are free to choose the direction of our growth.{% endsentence %}
 
 <h2 id="three-gifts-of-the-spirit">Three Gifts of the Spirit</h2>
 
@@ -549,7 +577,7 @@ citations:
 
 <h2 id="promises-to-the-seeker">Promises to the Seeker</h2>
 
-{% sentence 198 %}As immortal beings, we have the right to choose our own destiny.{% endsentence %} {% sentence 199 %}God is intimately familiar with each of His children and knows beforehand what choices we will make, but He protects and preserves our freedom to make choices.{% endsentence %} {% sentence 200 %}The prophet Nephi declared, "Cheer up your hearts, and remember that ye are free to act for yourselves"{% cite "ce-2ne1023" %}.{% endsentence %} {% sentence 201 %}The prophet Joshua challenged us to use our freedom and make a lasting decision without delay.{% endsentence %} {% sentence 202 %}He commanded, "Choose you this day whom ye will serve"{% cite "ce-josh2415" %}.{% endsentence %}
+{% sentence 198 %}As immortal beings, we have the right to choose our own destiny.{% endsentence %} {% sentence 199 %}God is intimately familiar with each of His children and knows beforehand what choices we will make, but He protects and preserves our freedom to make choices.{% endsentence %} {% sentence 200 %}The prophet Nephi declared, "Cheer up your hearts, and remember that ye are free to act for yourselves"{% cite "ce-2ne1023" %}.{% endsentence %} {% sentence 201 %}The prophet Joshua challenged us to use our freedom and make a lasting decision without delay.{% endsentence %} {% sentence 202 %}He commanded, "Choose you this day whom ye will serve"{% cite "ce-josh2415-b" %}.{% endsentence %}
 
 {% sentence 203 %}As the New Testament of the Bible says, "We are the offspring of God"{% cite "ce-acts1729-b" %}.{% endsentence %} {% sentence 204 %}We are His children.{% endsentence %} {% sentence 205 %}As part of this royal birthright, we stand to gain a glorious inheritance in the eternities, if we are willing to receive it.{% endsentence %} {% sentence 206 %}Consider what the nature of such an inheritance might be.{% endsentence %}
 
