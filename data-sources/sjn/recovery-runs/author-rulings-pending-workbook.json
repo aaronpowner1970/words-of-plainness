@@ -1111,7 +1111,9 @@
     "reading_A_literal": "204 of 676 stored accepts (133 of 467 seated) are ACCEPT_WITH_CAVEAT at a PARTIAL final floor",
     "dissent_limb": "cannot fire on any stored verdict: all 735 stored rubrics are SINGLE calls (0 carry an instrument), so there is no vote to dissent from",
     "note": "the queue is forward-looking: it is populated by voted runs. No stored verdict was enqueued by this session"
-   }
+   },
+   "reverification_repointing": "Found and fixed in phase 5, before any call: reverify.reverify_one verified the candidate AS STORED, and agents.verify builds its chunk view from `cand[\"chunk_text\"]`, so Track R would have re-read the very text the corpus repair replaced -- on this split, the Quicunque Vult cut at 'one Almighty.'. reverify.repoint now follows the same composed chunk-id mapping the packet builder follows and hands the verifier the row, locator and text the store holds NOW, failing closed where no current chunk carries the phrase. A re-verification also votes (verify_voted), because it is a production read",
+   "phase5_estimate": "data-sources/sjn/recovery-runs/session14/phase5-estimate.json"
   },
   "R6-55_allocation_across_speaks_for_groups": {
    "ruled": "2026-09-17",

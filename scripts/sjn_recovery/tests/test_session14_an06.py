@@ -257,3 +257,39 @@ def test_a_candidate_whose_text_moved_to_another_row_follows_the_text():
     # a phrase that is in NO mapped chunk is not relocated anywhere
     chunk, rel = packets.relocate(dict(cand, phrase="this phrase is in no chunk of the Book of Common Prayer"), idx, moves)
     assert rel is None
+
+
+# ---------------------------------------------------------------- Track R re-points at the repaired text
+def test_a_reverification_after_the_repair_judges_the_text_the_store_holds_now():
+    """Codex F.10 / R6-48. verify() builds its chunk view from the candidate AS STORED, so a re-verification of a
+    repaired citation would have sent the verifier the very text the repair replaced — on this split, the Quicunque
+    Vult cut at "one Almighty.". reverify.repoint hands it the row, locator and text the store holds now, and fails
+    closed where no current chunk carries the phrase."""
+    import importlib.util
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    spec = importlib.util.spec_from_file_location("reverify_mod", os.path.join(root, "sjn_recovery", "reverify.py"))
+    rv = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rv)
+    cells_dir = os.path.join(config.RUNS_DIR, "live-1", "cells")
+    if not os.path.exists(os.path.join(cells_dir, "Q-453.json")):
+        pytest.skip("live-1 cell states not present")
+    index, moves = rv.chunk_index(), packets.relocations()
+
+    def cand_of(qid, cid):
+        st = json.load(open(os.path.join(cells_dir, f"{qid}.json"), encoding="utf-8"))
+        return next(c for p in st["passes"].values() for c in p.get("candidates", []) if c["candidate_id"] == cid)
+
+    # the Quicunque Vult citation: the chunk the verifier judged at run was the run-on Outline chunk; now it is the
+    # whole creed, in BSR-AN-06, ending at its last sentence
+    cand = cand_of("Q-453", "Q-453-p1-BSR-AN-04-1")
+    now, rep, problem = rv.repoint(cand, index, moves)
+    assert problem is None and rep["cross_row"] is True
+    assert rep["registry_id_at_run"] == "BSR-AN-04" and rep["registry_id_now"] == "BSR-AN-06"
+    assert now["registry_id"] == "BSR-AN-06" and QUICUNQUE in now["locator"]
+    assert now["chunk_text"].rstrip().endswith(LAST_SENTENCE)
+    assert not now["chunk_text"].rstrip().endswith(CUT_AT)
+    assert cand["phrase"] in now["chunk_text"]
+    # fail closed: a phrase in no current chunk is REFUSED, never judged against stale text
+    now, rep, problem = rv.repoint(dict(cand, phrase="a phrase that is in no chunk of the Book of Common Prayer"),
+                                   index, moves)
+    assert now is None and problem and "not verbatim" in problem

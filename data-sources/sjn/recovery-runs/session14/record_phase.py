@@ -165,7 +165,19 @@ def phase4(R):
     r45["discharged"] = "2026-09-19, session 14 phase 4"
 
 
-PHASES = {"2": phase2, "3": phase3, "4": phase4}
+def phase5(R):
+    r = R["R6-54_production_voting_and_review_queue"]
+    r["reverification_repointing"] = (
+        "Found and fixed in phase 5, before any call: reverify.reverify_one verified the candidate AS STORED, and "
+        "agents.verify builds its chunk view from `cand[\"chunk_text\"]`, so Track R would have re-read the very text "
+        "the corpus repair replaced -- on this split, the Quicunque Vult cut at 'one Almighty.'. reverify.repoint now "
+        "follows the same composed chunk-id mapping the packet builder follows and hands the verifier the row, locator "
+        "and text the store holds NOW, failing closed where no current chunk carries the phrase. A re-verification also "
+        "votes (verify_voted), because it is a production read")
+    r["phase5_estimate"] = "data-sources/sjn/recovery-runs/session14/phase5-estimate.json"
+
+
+PHASES = {"2": phase2, "3": phase3, "4": phase4, "5": phase5}
 
 
 def main():

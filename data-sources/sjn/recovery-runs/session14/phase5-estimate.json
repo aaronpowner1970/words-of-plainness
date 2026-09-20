@@ -1,0 +1,726 @@
+{
+ "what": "Session 14, phase 5: the phase 7 cost estimate after the AN-04 / AN-06 repair, at THREE gate6-v1.3 calls per\ncandidate (R6-54 / Codex C1(a)). No model calls, no network.",
+ "votes_per_candidate": 3,
+ "caps_usd": {
+  "R": 30.0,
+  "B": 30.0
+ },
+ "verifier_version": "gate6-v1.3",
+ "unit_costs": {
+  "sonnet_verifier_v1.3": {
+   "n": 130,
+   "mean": 0.0215,
+   "p90": 0.0411,
+   "max": 0.0635
+  },
+  "opus_verifier_all_versions": {
+   "n": 1353,
+   "mean": 0.0724,
+   "p90": 0.1134,
+   "max": 0.231
+  },
+  "baptist_locator": {
+   "n": 201,
+   "mean": 0.0327,
+   "p90": 0.061,
+   "max": 0.0821
+  },
+  "coder": {
+   "n": 593,
+   "mean": 0.0093,
+   "p90": 0.0136,
+   "max": 0.0621
+  },
+  "verifier_output_tokens": {
+   "n": 130,
+   "mean": 913,
+   "p90": 2235
+  }
+ },
+ "track_R": {
+  "cells": [
+   "Q-085",
+   "Q-101",
+   "Q-157",
+   "Q-237",
+   "Q-277",
+   "Q-285",
+   "Q-301",
+   "Q-313",
+   "Q-317",
+   "Q-365",
+   "Q-373",
+   "Q-381",
+   "Q-389",
+   "Q-405",
+   "Q-413",
+   "Q-421",
+   "Q-429",
+   "Q-437",
+   "Q-445",
+   "Q-453"
+  ],
+  "n_candidates": 23,
+  "refused": [],
+  "recomputed_from": "the composed chunk-id mapping (session 13 + session 14) against the live-1 cell states",
+  "candidates": [
+   {
+    "queue_id": "Q-085",
+    "candidate_id": "Q-085-p2-BSR-AN-05-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H11",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "phrase": "he is holy and just",
+    "stored_verdict": "ACCEPT",
+    "stored_route": "SLICE_ROW",
+    "stored_instrument": {
+     "sonnet": null,
+     "opus": null
+    },
+    "registry_id_at_run": "BSR-AN-05",
+    "registry_id_now": "BSR-AN-05",
+    "locator_now": "To Be a Christian, Q.173 — What is God’s Name?",
+    "cross_row": false,
+    "chunk_chars_at_run": 435,
+    "chunk_chars_now": 417,
+    "payload_tokens": 1471
+   },
+   {
+    "queue_id": "Q-101",
+    "candidate_id": "Q-101-p2-BSR-AN-05-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H13",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "phrase": "the faithful love that unites God and his people",
+    "stored_verdict": "REJECT",
+    "stored_route": "SLICE_ROW",
+    "stored_instrument": {
+     "sonnet": null,
+     "opus": null
+    },
+    "registry_id_at_run": "BSR-AN-05",
+    "registry_id_now": "BSR-AN-05",
+    "locator_now": "To Be a Christian, Q.322 — What is marriage?",
+    "cross_row": false,
+    "chunk_chars_at_run": 368,
+    "chunk_chars_now": 346,
+    "payload_tokens": 1465
+   },
+   {
+    "queue_id": "Q-157",
+    "candidate_id": "Q-157-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H20",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "the Glory equal, the Majesty co-eternal",
+    "stored_verdict": "ACCEPT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2405
+   },
+   {
+    "queue_id": "Q-237",
+    "candidate_id": "Q-237-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H30",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "one and the same Son and Only-begotten God the Word",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP p. 864) — Definition of the Union of the Divine and Human Natures in the Person of Christ Council of Chalcedon, 451 A.D., Act V",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 1232,
+    "payload_tokens": 1763
+   },
+   {
+    "queue_id": "Q-277",
+    "candidate_id": "Q-277-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H35",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "the Father is Almighty, the Son Almighty, and the Holy Ghost Almighty",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2445
+   },
+   {
+    "queue_id": "Q-277",
+    "candidate_id": "Q-277-p1-BSR-AN-04-2",
+    "branch": "Anglican",
+    "family_id": "RNR-H35",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father eternal, the Son eternal, and the Holy Ghost eternal",
+    "stored_verdict": "REJECT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2444
+   },
+   {
+    "queue_id": "Q-285",
+    "candidate_id": "Q-285-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H36",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father uncreate, the Son uncreate, and the Holy Ghost uncreate",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2440
+   },
+   {
+    "queue_id": "Q-301",
+    "candidate_id": "Q-301-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H38",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father uncreate, the Son uncreate, and the Holy Ghost uncreate",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2512
+   },
+   {
+    "queue_id": "Q-313",
+    "candidate_id": "Q-313-p1-BSR-RC-07-1",
+    "branch": "Roman Catholic",
+    "family_id": "RNR-H40",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "God transcends everything",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-RC-07",
+    "registry_id_now": "BSR-RC-07",
+    "locator_now": "Compendium Q.586",
+    "cross_row": false,
+    "chunk_chars_at_run": 49667,
+    "chunk_chars_now": 466,
+    "payload_tokens": 1499
+   },
+   {
+    "queue_id": "Q-317",
+    "candidate_id": "Q-317-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H40",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2452
+   },
+   {
+    "queue_id": "Q-365",
+    "candidate_id": "Q-365-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H46",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father eternal, the Son eternal, and the Holy Ghost eternal.",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2456
+   },
+   {
+    "queue_id": "Q-373",
+    "candidate_id": "Q-373-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H47",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2432
+   },
+   {
+    "queue_id": "Q-373",
+    "candidate_id": "Q-373-p1-BSR-AN-04-2",
+    "branch": "Anglican",
+    "family_id": "RNR-H47",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "but one uncreated, and one incomprehensible",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2419
+   },
+   {
+    "queue_id": "Q-381",
+    "candidate_id": "Q-381-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H48",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible",
+    "stored_verdict": "REJECT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2429
+   },
+   {
+    "queue_id": "Q-389",
+    "candidate_id": "Q-389-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H49",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible",
+    "stored_verdict": "REJECT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2435
+   },
+   {
+    "queue_id": "Q-405",
+    "candidate_id": "Q-405-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H51",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "phrase": "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible",
+    "stored_verdict": "REJECT",
+    "stored_route": "PRIMARY_REJECTED_ALL",
+    "stored_instrument": {
+     "sonnet": null,
+     "opus": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2458
+   },
+   {
+    "queue_id": "Q-405",
+    "candidate_id": "Q-405-p2-BSR-AN-05-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H51",
+    "models": [
+     "sonnet",
+     "opus"
+    ],
+    "phrase": "he cannot be defined by his creatures",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": "SLICE_ROW",
+    "stored_instrument": {
+     "sonnet": null,
+     "opus": null
+    },
+    "registry_id_at_run": "BSR-AN-05",
+    "registry_id_now": "BSR-AN-05",
+    "locator_now": "To Be a Christian, Q.173 — What is God’s Name?",
+    "cross_row": false,
+    "chunk_chars_at_run": 435,
+    "chunk_chars_now": 417,
+    "payload_tokens": 1512
+   },
+   {
+    "queue_id": "Q-413",
+    "candidate_id": "Q-413-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H52",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "recognized in two natures, without confusion, without change, without division, without separation",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP p. 864) — Definition of the Union of the Divine and Human Natures in the Person of Christ Council of Chalcedon, 451 A.D., Act V",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 1232,
+    "payload_tokens": 1807
+   },
+   {
+    "queue_id": "Q-421",
+    "candidate_id": "Q-421-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H53",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "recognized in two natures, without confusion, without change, without division, without separation",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP p. 864) — Definition of the Union of the Divine and Human Natures in the Person of Christ Council of Chalcedon, 451 A.D., Act V",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 1232,
+    "payload_tokens": 1810
+   },
+   {
+    "queue_id": "Q-429",
+    "candidate_id": "Q-429-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H54",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "recognized in two natures, without confusion, without change, without division, without separation",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP p. 864) — Definition of the Union of the Divine and Human Natures in the Person of Christ Council of Chalcedon, 451 A.D., Act V",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 1232,
+    "payload_tokens": 1809
+   },
+   {
+    "queue_id": "Q-437",
+    "candidate_id": "Q-437-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H55",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "recognized in two natures, without confusion, without change, without division, without separation",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP p. 864) — Definition of the Union of the Divine and Human Natures in the Person of Christ Council of Chalcedon, 451 A.D., Act V",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 1232,
+    "payload_tokens": 1809
+   },
+   {
+    "queue_id": "Q-445",
+    "candidate_id": "Q-445-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H56",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "neither confounding the Persons, nor dividing the Substance",
+    "stored_verdict": "ACCEPT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2439
+   },
+   {
+    "queue_id": "Q-453",
+    "candidate_id": "Q-453-p1-BSR-AN-04-1",
+    "branch": "Anglican",
+    "family_id": "RNR-H57",
+    "models": [
+     "sonnet"
+    ],
+    "phrase": "The Father incomprehensible, the Son incomprehensible, and the Holy Ghost incomprehensible",
+    "stored_verdict": "ACCEPT_WITH_CAVEAT",
+    "stored_route": null,
+    "stored_instrument": {
+     "sonnet": null
+    },
+    "registry_id_at_run": "BSR-AN-04",
+    "registry_id_now": "BSR-AN-06",
+    "locator_now": "Historical Documents of the Church (BCP pp. 864–865) — Quicunque Vult commonly called The Creed of Saint Athanasius",
+    "cross_row": true,
+    "chunk_chars_at_run": 2720,
+    "chunk_chars_now": 3633,
+    "payload_tokens": 2462
+   }
+  ],
+  "coder_calls": {
+   "n": 1,
+   "why": "Q-179 LU-02-2 was newly seated by R6-44 and has no coder proposal (session 13 report section 4.3)",
+   "usd": 0.0093
+  },
+  "calls_expected": {
+   "sonnet": 69,
+   "opus": 12,
+   "coder": 1
+  },
+  "calls_bound": {
+   "sonnet": 69,
+   "opus": 69,
+   "coder": 1
+  },
+  "instrument_1_measured_call_means": {
+   "usd_expected": 2.35,
+   "usd_bound": 10.66
+  },
+  "instrument_2_actual_payloads": {
+   "input_tokens_per_draw": 49173,
+   "usd_expected": 2.52,
+   "usd_bound": 16.53
+  },
+  "usd_expected": 2.53,
+  "usd_bound": 16.54,
+  "verifier_only_expected": 2.52,
+  "verifier_only_bound": 16.53
+ },
+ "track_B": {
+  "cells": [
+   "Q-022",
+   "Q-070",
+   "Q-078",
+   "Q-086",
+   "Q-102",
+   "Q-118",
+   "Q-126",
+   "Q-134",
+   "Q-142",
+   "Q-150",
+   "Q-158",
+   "Q-166",
+   "Q-198",
+   "Q-230",
+   "Q-238",
+   "Q-246",
+   "Q-254",
+   "Q-262",
+   "Q-270",
+   "Q-278",
+   "Q-286",
+   "Q-294",
+   "Q-302",
+   "Q-318",
+   "Q-326",
+   "Q-334",
+   "Q-350",
+   "Q-358",
+   "Q-374",
+   "Q-382",
+   "Q-390",
+   "Q-406",
+   "Q-414",
+   "Q-422",
+   "Q-430",
+   "Q-438",
+   "Q-454"
+  ],
+  "empty_cards_now": [
+   "Q-254",
+   "Q-262",
+   "Q-382",
+   "Q-390",
+   "Q-406",
+   "Q-422",
+   "Q-454"
+  ],
+  "ba04_chunks": 19,
+  "ba04_chars": 5703,
+  "assumption": "about 0.5 candidates per cell (BSR-BA-03's similar page yielded 1 in 37); the bound is the locator cap, 3 candidates per cell",
+  "calls_expected": {
+   "locator": 37,
+   "sonnet_verifier": 60,
+   "opus_verifier": 9,
+   "coder": 20
+  },
+  "calls_bound": {
+   "locator": 37,
+   "sonnet_verifier": 333,
+   "opus_verifier": 63,
+   "coder": 111
+  },
+  "verifier_only_expected": 1.94,
+  "verifier_only_bound": 20.83,
+  "all_in_expected": 2.7,
+  "all_in_bound": 24.6
+ },
+ "gate": {
+  "R": {
+   "verifier_only_expected": {
+    "usd": 2.52,
+    "share_of_cap": 0.084,
+    "at_or_under_80pct": true
+   },
+   "verifier_only_bound": {
+    "usd": 16.53,
+    "share_of_cap": 0.551,
+    "at_or_under_80pct": true
+   },
+   "usd_expected": {
+    "usd": 2.53,
+    "share_of_cap": 0.084,
+    "at_or_under_80pct": true
+   },
+   "usd_bound": {
+    "usd": 16.54,
+    "share_of_cap": 0.551,
+    "at_or_under_80pct": true
+   }
+  },
+  "B": {
+   "verifier_only_expected": {
+    "usd": 1.94,
+    "share_of_cap": 0.065,
+    "at_or_under_80pct": true
+   },
+   "verifier_only_bound": {
+    "usd": 20.83,
+    "share_of_cap": 0.694,
+    "at_or_under_80pct": true
+   },
+   "all_in_expected": {
+    "usd": 2.7,
+    "share_of_cap": 0.09,
+    "at_or_under_80pct": true
+   },
+   "all_in_bound": {
+    "usd": 24.6,
+    "share_of_cap": 0.82,
+    "at_or_under_80pct": false
+   }
+  }
+ }
+}
