@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: September 18, 2026
+# Last updated: September 26, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -174,6 +174,20 @@ workstreams:
       ElevenLabs solo baritone + Audacity assembly) is next. Yehoshua the Man
       Sacred Reading Suite in catalogue. Calling the Straying Stranger Home
       paused (Suno three-generation strategy).
+    site_player: >
+      LIVE 2026-09-26 (commit 2e1890a, author-verified in browser).
+      Musical-testimony player on every chapter page: a slow golden glow on
+      the play control while the player is open and idle; it fades when
+      playback starts and never returns on pause (static under reduced
+      motion). Deep links: /chapters/<chapter>/#listen=<song-slug> open the
+      player with the primary arrangement loaded and lyrics showing. Nothing
+      plays until the reader taps. Slug = song title in lowercase kebab-case,
+      apostrophes dropped, or audio.testimony.slug when set; the slug table
+      for Ch 1–16 lives in the Gate H console. Ch 1–11 use the footer player
+      (Learning Tools click still plays immediately; author may change);
+      Ch 12–16 use the card pop-up. Known issue: 21 lyric VTTs have cues
+      sharing a start time, so some lines show out of order (queued as its
+      own task).
 
   - id: studio
     name: "Mobile studio (RV)"

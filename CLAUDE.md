@@ -6,10 +6,11 @@ anything about the *current state* of the project, read
 `src/_data/operational-state.yaml` — that is the single source of truth.
 
 ## Identity
-Words of Plainness ministry website (commandments.brotheraaron.org). Aaron Powner
-is author, project lead, and final authority on every theological, editorial, and
-architectural decision. Claude operates as SCRIBE: proposes, drafts, executes —
-Aaron decides.
+Words of Plainness ministry website (www.wordsofplainness.org; the Keep My
+Commandments app is hosted separately at commandments.brotheraaron.org). Aaron
+Powner is author, project lead, and final authority on every theological,
+editorial, and architectural decision. Claude operates as SCRIBE: proposes,
+drafts, executes — Aaron decides.
 
 ## Start of session (in this order)
 1. Read `src/_data/operational-state.yaml` for current phase, active workstreams,
