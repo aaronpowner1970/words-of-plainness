@@ -256,6 +256,7 @@
 {# ============================================================
    LEARNING TOOLS — Bottom dropup (mirrors floating action bar)
    ============================================================ #}
+{% include "components/listen-anchor.njk" %}
 <section class="bottom-learning-tools" id="bottomLearningTools" data-pagefind-ignore>
     <div class="dropdown-container">
         <button class="action-pill primary" id="btnLearningToolsBottom">
@@ -323,10 +324,12 @@
     <div class="cc-modal-body">
         <p>An original song by Aaron Powner, inspired by the themes of this chapter.</p>
         <p><strong style="color: var(--gold-primary);">{{ audio.testimony.title }}</strong><br>{{ audio.testimony.description }}</p>
+        <div class="cc-testimony-audio">
         <audio controls preload="metadata" id="ccTestimonyAudio">
             <source src="https://media.wordsofplainness.org/web/{{ audio.testimony.file }}" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
+        </div>
         {% if lyrics %}
         <details class="cc-lyrics-toggle">
             <summary>View Lyrics</summary>

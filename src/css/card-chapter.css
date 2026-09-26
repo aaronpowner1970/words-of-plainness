@@ -740,6 +740,46 @@
     border-radius: 8px;
 }
 
+/* Glow — slow golden breath around the testimony player while the modal is
+   open and idle. card-chapter.js adds .cc-glow on open and removes it on the
+   first 'playing' event; a pause never brings it back. A native <audio> takes
+   no pseudo-elements, so the glow lives on the wrapper's ::after, sized to the
+   control (flex blockifies the audio so the wrapper hugs it exactly). The
+   pulse animates box-shadow, the fade transitions opacity. Decorative only. */
+.cc-testimony-audio {
+    position: relative;
+    display: flex;
+    margin-top: 8px;
+    border-radius: 999px;
+}
+.cc-testimony-audio audio { margin-top: 0; }
+.cc-testimony-audio::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    animation: cc-glow-breathe 2.8s ease-in-out infinite;
+    animation-play-state: paused;
+}
+.cc-modal.cc-glow .cc-testimony-audio::after {
+    opacity: 1;
+    animation-play-state: running;
+}
+@keyframes cc-glow-breathe {
+    0%, 100% { box-shadow: 0 0 4px 1px rgba(212, 168, 74, 0.30), 0 0 9px 2px rgba(196, 148, 58, 0.14); }
+    50%      { box-shadow: 0 0 7px 2px rgba(212, 168, 74, 0.70), 0 0 14px 4px rgba(196, 148, 58, 0.40); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .cc-testimony-audio::after {
+        animation: none;
+        transition: none;
+        box-shadow: 0 0 6px 2px rgba(212, 168, 74, 0.55), 0 0 12px 3px rgba(196, 148, 58, 0.28);
+    }
+}
+
 /* Lyrics Toggle */
 .cc-lyrics-toggle {
     margin-top: 16px;

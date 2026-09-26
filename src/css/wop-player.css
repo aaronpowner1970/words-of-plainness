@@ -50,6 +50,7 @@ body.wp-visible {
 .wp-btn:focus-visible { outline: 2px solid var(--gold-primary, #C4943A); outline-offset: 2px; }
 
 .wp-play {
+    position: relative; /* anchors the ::after glow */
     width: 42px;
     height: 42px;
     padding: 0;
@@ -61,20 +62,39 @@ body.wp-visible {
 .wp-play:hover { background: var(--gold-light, #D4A84A); border-color: var(--gold-light, #D4A84A); }
 .wp-play.wp-loading { opacity: 0.65; cursor: progress; }
 
-/* Armed state — added by wop-player.js when a ?play= deep-link's play()
-   promise is rejected by browser autoplay policy (Safari, iOS, Firefox).
-   The bar stays visible with the track loaded; the play button pulses so
-   the reader knows one click is all it takes. Cleared on the first
-   successful 'play' event. */
-.wp.wp-armed .wp-play {
-    animation: wp-armed-pulse 1.6s ease-in-out infinite;
+/* Glow — a slow golden breath around the play button while the player is
+   open and idle (wop-player.js adds .wp-glow whenever a track is loaded —
+   a Learning Tools click, a #listen= deep link, or a ?play= link whose
+   autoplay the browser blocked). The first 'playing' event removes the
+   class and the glow fades out; a pause never brings it back. Decorative
+   only: a box-shadow on a pseudo-element, so no layout shift and no ARIA.
+   The pulse animates box-shadow; the fade transitions opacity, so the two
+   never fight. Nothing up the ancestor chain clips overflow. */
+.wp-play::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+    animation: wp-glow-breathe 2.8s ease-in-out infinite;
+    animation-play-state: paused;
 }
-@keyframes wp-armed-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(196, 148, 58, 0.55); }
-    50%      { box-shadow: 0 0 0 8px rgba(196, 148, 58, 0);   }
+.wp.wp-glow .wp-play::after {
+    opacity: 1;
+    animation-play-state: running;
+}
+@keyframes wp-glow-breathe {
+    0%, 100% { box-shadow: 0 0 4px 1px rgba(212, 168, 74, 0.30), 0 0 9px 2px rgba(196, 148, 58, 0.14); }
+    50%      { box-shadow: 0 0 7px 2px rgba(212, 168, 74, 0.70), 0 0 14px 4px rgba(196, 148, 58, 0.40); }
 }
 @media (prefers-reduced-motion: reduce) {
-    .wp.wp-armed .wp-play { animation: none; }
+    .wp-play::after {
+        animation: none;
+        transition: none;
+        box-shadow: 0 0 6px 2px rgba(212, 168, 74, 0.55), 0 0 12px 3px rgba(196, 148, 58, 0.28);
+    }
 }
 
 /* Transport buttons (shuffle / prev / next / repeat) — hidden until a page

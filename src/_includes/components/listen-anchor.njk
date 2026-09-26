@@ -1,0 +1,14 @@
+{# Musical-testimony deep-link anchor — the song's stable handle on the page.
+   #listen=<slug> is read by the player script the layout already loads
+   (wop-player.js on layouts/chapter.njk, card-chapter.js on
+   layouts/card-chapter.njk); neither script names a chapter or a song.
+   The slug is audio.testimony.slug when set, else the kebab-cased title with
+   apostrophes dropped ("The Soul's Sincere Desire" → the-souls-sincere-desire).
+   data-listen-file is always the primary arrangement.
+   The id is namespaced (listen-<slug>): song titles often match a chapter
+   heading, and markdown already gives those headings the bare slug as id
+   (Ch 5's "The Soul's Sincere Desire" does). #}
+{% if audio and audio.testimony and audio.testimony.file %}
+{% set listenSlug = audio.testimony.slug or (audio.testimony.title | replace("'", "") | replace("’", "") | slugify) %}
+<span class="listen-anchor" id="listen-{{ listenSlug }}" data-listen-slug="{{ listenSlug }}" data-listen-file="{{ audio.testimony.file }}" aria-hidden="true"></span>
+{% endif %}

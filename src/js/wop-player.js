@@ -17,6 +17,10 @@
  *                      (skipped when prefers-reduced-motion).
  *   • lyricsUrl null → renders lyricsHtml statically.
  *
+ * Listen deep link: #listen=<song-slug> cues (never plays) the song
+ * named by a [data-listen-slug] anchor on the page, opens the lyrics
+ * drawer, and leaves the play button glowing for the reader's tap.
+ *
  * Playlist mode (OPT-IN, /music/ only):
  *   Call WopPlayer.setQueue([...files]) to activate — reveals shuffle,
  *   prev/next, and repeat (off / all / one) transport buttons, enables
@@ -60,8 +64,46 @@
                 return;
             }
 
-            this.loadToken++;
+            this.load(desc);
             var thisToken = this.loadToken;
+            this.els.btnPlay.classList.add('wp-loading');
+
+            var self = this;
+            this.audio.play().catch(function (err) {
+                if (thisToken !== self.loadToken) return;         // superseded
+                // Always clear the loading spinner — AbortError (superseded
+                // load) and NotAllowedError (autoplay blocked) used to return
+                // early leaving wp-loading stuck on the play button forever.
+                self.els.btnPlay.classList.remove('wp-loading');
+                if (err && err.name === 'AbortError') return;
+                if (err && err.name === 'NotAllowedError') {
+                    // Autoplay blocked (Safari/iOS/Firefox on deep-link entry
+                    // and gesture-less plays). The bar stays visible with the
+                    // track loaded and the play button keeps glowing (load()
+                    // set .wp-glow; only a real 'playing' event clears it).
+                    return;
+                }
+                console.warn('WopPlayer: play failed —', err && err.message);
+            });
+        },
+
+        // Public API — open the bar with a track loaded but NOT playing.
+        // Used by #listen= deep links: no play() without a user gesture.
+        cue: function (arg) {
+            if (!this.initialized) this.init();
+            var desc = this.resolve(arg);
+            if (!desc || !desc.audioUrl) return false;
+            if (this.currentFile !== desc.file || !this.audio.src) {
+                this.audio.preload = 'metadata';   // show the duration
+                this.load(desc);
+            }
+            return true;
+        },
+
+        // Shared by play() and cue(): swap in a new track, show the bar,
+        // and light the play-button glow until playback actually starts.
+        load: function (desc) {
+            this.loadToken++;
 
             this.currentFile = desc.file;
             this.currentDesc = desc;
@@ -78,26 +120,7 @@
             this.attachLyrics(desc);
             this.showBar();
             this.setPlayIcon(false);
-            this.els.btnPlay.classList.add('wp-loading');
-
-            var self = this;
-            this.audio.play().catch(function (err) {
-                if (thisToken !== self.loadToken) return;         // superseded
-                // Always clear the loading spinner — AbortError (superseded
-                // load) and NotAllowedError (autoplay blocked) used to return
-                // early leaving wp-loading stuck on the play button forever.
-                self.els.btnPlay.classList.remove('wp-loading');
-                if (err && err.name === 'AbortError') return;
-                if (err && err.name === 'NotAllowedError') {
-                    // Autoplay blocked (Safari/iOS/Firefox on deep-link entry
-                    // and gesture-less plays). Leave the bar visible with the
-                    // track loaded, arm the play button, and clear the arm on
-                    // the first successful play (bound once in bindEvents).
-                    self.root.classList.add('wp-armed');
-                    return;
-                }
-                console.warn('WopPlayer: play failed —', err && err.message);
-            });
+            this.root.classList.add('wp-glow');
         },
 
         // ── Playlist mode API (opt-in — /music/ activates; other pages don't) ──
@@ -326,7 +349,10 @@
         bindEvents: function () {
             var self = this, a = this.audio;
 
-            a.addEventListener('play',           function () { self.setPlayIcon(true); self.els.btnPlay.classList.remove('wp-loading'); self.root.classList.remove('wp-armed'); });
+            a.addEventListener('play',           function () { self.setPlayIcon(true); self.els.btnPlay.classList.remove('wp-loading'); });
+            // The glow's job is done once sound starts; it never returns on
+            // pause. ('playing', not 'play', so it holds through buffering.)
+            a.addEventListener('playing',        function () { self.root.classList.remove('wp-glow'); });
             a.addEventListener('pause',          function () { self.setPlayIcon(false); });
             a.addEventListener('loadedmetadata', function () { self.els.timeTot.textContent = fmt(a.duration); });
             a.addEventListener('timeupdate',     function () { self.onTimeUpdate(); });
@@ -476,6 +502,7 @@
             this.currentFile = null;
             this.currentDesc = null;
             this.root.setAttribute('hidden', '');
+            this.root.classList.remove('wp-glow');
             document.body.classList.remove('wp-visible');
             this.setPlayIcon(false);
         },
@@ -635,10 +662,9 @@
     // Runs after init so P.play() has a built DOM and event bindings. Reads
     // ?play=, decodes it, requires the file to exist in WOP_MUSIC_CATALOG,
     // then calls P.play(). If autoplay policy blocks the play() promise, the
-    // NotAllowedError handler in P.play() adds .wp-armed to the root so the
-    // play button pulses; the .wp-armed class is cleared on the first
-    // successful 'play' event (see bindEvents). The ?play= parameter is
-    // stripped with history.replaceState so a refresh doesn't re-fire.
+    // bar stays open and the play button keeps its .wp-glow until the first
+    // real 'playing' event (see load() and bindEvents). The ?play= parameter
+    // is stripped with history.replaceState so a refresh doesn't re-fire.
     //
     // On /music/, also scroll the matching playlist row into view and mark
     // it as the current row so the reader sees where the track lives.
@@ -690,14 +716,47 @@
         return String(s).replace(/["\\]/g, '\\$&');
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () {
-            P.init();
-            processDeepLink();
-        });
-    } else {
+    // Listen deep link — #listen=<song-slug> on any page whose markup
+    // carries a matching [data-listen-slug][data-listen-file] anchor
+    // (components/listen-anchor.njk). Opens the bar with the song's primary
+    // arrangement cued, opens the lyrics drawer, and moves focus to the
+    // glowing play button. It never calls play(): the reader starts the
+    // music. Unknown or malformed slugs fall through silently. The hash is
+    // left in place so the address bar stays shareable.
+    function processListenFragment() {
+        var m = /^#listen=([^&#]+)$/.exec(window.location.hash || '');
+        if (!m) return;
+        var slug;
+        try { slug = decodeURIComponent(m[1]).toLowerCase(); } catch (_) { return; }
+
+        var anchors = document.querySelectorAll('[data-listen-slug][data-listen-file]');
+        var file = null;
+        for (var i = 0; i < anchors.length; i++) {
+            if (anchors[i].getAttribute('data-listen-slug') === slug) {
+                file = anchors[i].getAttribute('data-listen-file');
+                break;
+            }
+        }
+        if (!file || !P.cue(file)) return;
+
+        P.openDrawer();
+        // The bar is position:fixed, so it is already in view; focus
+        // without letting the browser scroll the page underneath it.
+        try { P.els.btnPlay.focus({ preventScroll: true }); }
+        catch (_) { P.els.btnPlay.focus(); }
+    }
+
+    function start() {
         P.init();
         processDeepLink();
+        processListenFragment();
+        window.addEventListener('hashchange', processListenFragment);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start);
+    } else {
+        start();
     }
 
     window.WopPlayer = P;

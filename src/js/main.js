@@ -182,7 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle deep linking - open card if URL has matching hash
     function openCardFromHash() {
         const hash = window.location.hash;
-        if (hash) {
+        // Only plain id fragments can name a card; others (e.g. #listen=slug)
+        // would make querySelector throw.
+        if (hash && /^#[\w-]+$/.test(hash)) {
             const targetCard = document.querySelector(`.walkthrough-card${hash}`);
             if (targetCard) {
                 // Open the card

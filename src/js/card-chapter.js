@@ -371,9 +371,51 @@ function openCcModal(id) {
     var modal = document.getElementById(id);
     var backdrop = document.getElementById('ccModalBackdrop');
     if (modal) modal.classList.add('open');
+    // A player modal opens idle, so its play control glows (card-chapter.css)
+    // until the first 'playing' event below.
+    if (modal && modal.querySelector('.cc-testimony-audio')) modal.classList.add('cc-glow');
     if (backdrop) backdrop.classList.add('visible');
     document.body.style.overflow = 'hidden';
 }
+
+// Musical-testimony glow + #listen=<song-slug> deep link.
+// The glow fades once sound starts and never returns on pause. The deep link
+// matches the slug against the page's [data-listen-slug] anchor
+// (components/listen-anchor.njk), then opens the testimony modal, opens its
+// lyrics, and focuses the player. It never calls play(): the reader starts
+// the music. Unknown or malformed slugs fall through silently.
+(function () {
+    var modal = document.getElementById('ccTestimonyModal');
+    var audio = document.getElementById('ccTestimonyAudio');
+    if (!modal || !audio) return;
+
+    audio.addEventListener('playing', function () {
+        modal.classList.remove('cc-glow');
+    });
+
+    function processListenFragment() {
+        var m = /^#listen=([^&#]+)$/.exec(window.location.hash || '');
+        if (!m) return;
+        var slug;
+        try { slug = decodeURIComponent(m[1]).toLowerCase(); } catch (_) { return; }
+
+        var anchors = document.querySelectorAll('[data-listen-slug]');
+        var found = false;
+        for (var i = 0; i < anchors.length; i++) {
+            if (anchors[i].getAttribute('data-listen-slug') === slug) { found = true; break; }
+        }
+        if (!found) return;
+
+        openCcModal('ccTestimonyModal');
+        var lyrics = modal.querySelector('details');
+        if (lyrics) lyrics.open = true;
+        // The modal is position:fixed and centered, so it is already in view.
+        try { audio.focus({ preventScroll: true }); } catch (_) { audio.focus(); }
+    }
+
+    processListenFragment();
+    window.addEventListener('hashchange', processListenFragment);
+})();
 
 function closeCcModals() {
     document.querySelectorAll('.cc-modal').forEach(function (m) {
