@@ -1,0 +1,61 @@
+# AoID floor ledger
+#
+# What A4(d) requires: for every item scored against a ratified floor, the
+# document holding that floor is named in the scoring record. This file is that
+# record. The floor-transfer check reads it.
+#
+# Written 30 Sep 2026 in COWORK-AOID2-03a, from the conductor's rulings ledger
+# and the two scoring reports in wop-scratch. Floors live under
+# data-sources/aoid/floors/ (codex A4(d) as amended by AOID2-FLOOR-DOCS-LOCATION).
+#
+# An entry is added when an item is scored, not when its floor is ratified.
+# floor_sha256 is left empty until the check computes it and records the
+# normalisation it used; do not fill it by hand.
+
+scored:
+  - item: 29a
+    title: Sexual relations belong within marriage
+    floor_document: data-sources/aoid/floors/WoP_AOID2_ScopeNotes_29a_29b_Draft_20260922.md
+    floor_heading: "29a: Sexual relations belong within marriage"
+    floor_ratified: 2026-09-22
+    span: null
+    span_note: No span exists yet; placement is unruled. PENDING under A4(d).
+    scored_on: 2026-09-22
+    scoring_records:
+      - WoP_AOID2_29ab_Scoring_Report_20260922.md
+      - WoP_AOID2_29a_Settlement_Report_20260922.md
+    result: 9 of 13 families; fails C4
+    floor_sha256: ""
+
+  - item: 29b
+    title: Marriage is between a man and a woman
+    floor_document: data-sources/aoid/floors/WoP_AOID2_ScopeNotes_29a_29b_Draft_20260922.md
+    floor_heading: "29b: Marriage is between a man and a woman"
+    floor_ratified: 2026-09-22
+    span: null
+    span_note: No span exists yet; placement is unruled. PENDING under A4(d).
+    scored_on: 2026-09-22
+    scoring_records:
+      - WoP_AOID2_29ab_Scoring_Report_20260922.md
+    result: 8 of 13 families; fails C4
+    floor_sha256: ""
+
+# Ratified but not yet scored. No item here has been measured against any
+# family, so the check has nothing to test on them. They are listed so that a
+# future session can find the floor a span must be transcribed from, and so
+# that nothing is scored without its floor being named here first.
+pending_floors:
+  - document: data-sources/aoid/floors/WoP_AOID2_ScopeNotes_Article9_Spirit_Draft_20260922.md
+    items: R1-R6
+    subject: The Spirit's roles, Article 9
+    ratified: 2026-09-22
+
+  - document: data-sources/aoid/floors/WoP_AOID2_ScopeNotes_A14_Love_Draft_20260922.md
+    items: L1-L10
+    subject: The new Article 1, love of God and neighbour; L9 and L10 placed in Article 11
+    ratified: 2026-09-22
+
+  - document: data-sources/aoid/floors/WoP_AOID2_ScopeNotes_A04_A05_Draft_20260922.md
+    items: G1-G14
+    subject: Articles 4, 5, 8, 9, 11, 12 and 13
+    ratified: 2026-09-22
