@@ -91,7 +91,10 @@
   var BASE = 'https://media.wordsofplainness.org/web/aoid-slides/', COUNT = 18, STORE = 'wop-aoid-pres-slide';
   var ANCHORS = ['of-plainness','of-god','of-creation-and-life','of-gods-word','of-jesus-christ','of-salvation','of-the-kingdom-at-hand','of-fellow-believers','of-finding-our-way','of-living-by-grace','of-covenants-and-commitments','of-immortality-and-eternal-life','of-our-confidence'];
   var FIRST_ARTICLE_SLIDE = 4;  // slide 4 = Article 1, one slide per article
-  function url(n){ return BASE + 'slide-' + String(n).padStart(2,'0') + '.webp'; }
+  /* Versioned keys: R2 objects are served immutable-cached for a year, so a revised slide
+     goes up under a new key and is listed here rather than overwritten in place. */
+  var SLIDE_FILE = { 2:'slide-02-v2.webp' };
+  function url(n){ return BASE + (SLIDE_FILE[n] || 'slide-' + String(n).padStart(2,'0') + '.webp'); }
   function articleFor(s){ var i = s - FIRST_ARTICLE_SLIDE; return (i >= 0 && i < ANCHORS.length) ? { num: i + 1, anchor: ANCHORS[i] } : null; }
   var poster=document.getElementById('pwPresentation'), backdrop=document.getElementById('psBackdrop'), modal=document.getElementById('psModal');
   if(!poster||!modal||!backdrop) return;
@@ -115,7 +118,7 @@
      published beside the tiles as the manifest of record; keep these numbers in
      step with it. */
   var ZOOMABLE = {
-    2: { dzi:'https://media.wordsofplainness.org/web/aoid-slides/tree-of-christ/tree.dzi',
+    2: { dzi:'https://media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/tree.dzi',
          width:7680, height:4320, tileSize:254, overlap:1, format:'webp' }
   };
   function tileSourceFor(z){
