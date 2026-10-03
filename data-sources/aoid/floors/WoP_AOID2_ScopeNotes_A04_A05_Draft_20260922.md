@@ -87,6 +87,10 @@ Where it goes: A11 s13 quotes only the first half of Acts 2:38: "Repent and be b
 Why this completion matters: it ties Article 11 to Article 9's Spirit roles (R2, the Comforter promised to disciples). Without it, Article 11 describes entering covenant and never says what God gives in return.
 Restoration column (ratified): Articles of Faith 1:4 (the gift of the Holy Ghost by the laying on of hands); Acts 8:14-17 is biblical and stays in the biblical column as the laying-on-of-hands witness.
 
+**Amended by Aaron 2 Oct 2026 (COWORK-AOID2-06a):** the exclusions add "or how baptism is related to the remission of sins", for Baptist and evangelical readers of "for the remission of sins". G8 as amended:
+
+> The Article confesses only what Acts 2:38 confesses: those who repent and are baptized in the name of Jesus Christ for the remission of sins shall receive the gift of the Holy Ghost. This is the floor. It does not settle how or when the gift is given (at baptism, by the laying on of hands, or at conversion), who may administer it, whether baptism is necessary to salvation, or how baptism is related to the remission of sins; each tradition fills those in its own house.
+
 ## G9. Fasting (Article 11, item 24, optional, unscored): RATIFIED by Aaron 22 Sep 2026, with the Restoration anchors
 
 > The Article confesses only what Matthew 6:16-18 and Acts 13:2-3 confess: Christ taught His disciples how to fast ("when ye fast"), not as a show before others but in secret before the Father, and the early Church fasted and prayed as it sought the Lord's direction. This is the floor. It does not settle how often, when or how disciples fast, whether fasting is required or a free devotion, or what is given with it; each tradition fills those in its own house.
