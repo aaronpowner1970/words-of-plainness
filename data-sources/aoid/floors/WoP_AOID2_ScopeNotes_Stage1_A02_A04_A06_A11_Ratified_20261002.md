@@ -1,6 +1,8 @@
 # AoIDv2: Stage 1 scope notes for Articles 2, 4, 6 and 11 (ratified)
 
-Status: 2 Oct 2026, COWORK-AOID2-06a. AOID2 step 34\. All 27 new floors RATIFIED by Aaron on 2 Oct 2026 (A2-F2 to F5; A4-F1, F2 and F4 to F7; A6-F1 to F9; A11-F1 to F5, F7 and F8), with A2-F1 carried over as it stands and A4-F3 ruled Form A (AOID2-A4S6-FLOOR). Every confirmation below was given in his written author notes of 2 Oct. Nothing is scored. Governed by: codex v0.15. That means A4 and A4(a) to (d), with the scope note being the span's `panel_comment`; A4(c), each body tested on its own terms; A5, every passage weighed by what it says; and C4, more than 80 per cent of the sixteen families, which is at least 13, where a family whose member churches officially disagree does not count. It also means AOID2-F2-GENRES and AOID2-REMEASURE-SCOPE option 1 (Stage 1 \= Articles 2, 4, 6 and 11; Article 8 is declared as the ministry's conviction; Article 3 s2 stays as ruled by AOID2-ART3-HOLDS). Read for this draft: the live text of a02, a04, a06 and a11.njk, and every span's panel comment and anchors in `src/_data/apparatusData.json`, read 2 Oct 2026\. Also read: the ratified floors in `data-sources/aoid/floors/`, of which G1, G6, G7 and G8 touch these Articles; Aaron's 1 Oct ruling note; and the June 2026 Common-Ground findings. Those findings said that A4, A6, A8 and A11 are where both footing and felt welcome crack, and that the A4 residual is the question of guidance against authoritative revelation.
+Status: 2 Oct 2026, COWORK-AOID2-06a. AOID2 step 34. All 27 new floors RATIFIED by Aaron on 2 Oct 2026 (A2-F2 to F5; A4-F1, F2 and F4 to F7; A6-F1 to F9; A11-F1 to F5, F7 and F8), with A2-F1 carried over as it stands and A4-F3 ruled Form A (AOID2-A4S6-FLOOR). Every confirmation below was given in his written author notes of 2 Oct. Nothing is scored.
+Governed by: codex v0.15. That means A4 and A4(a) to (d), with the scope note being the span's `panel_comment`; A4(c), each body tested on its own terms; A5, every passage weighed by what it says; and C4, more than 80 per cent of the sixteen families, which is at least 13, where a family whose member churches officially disagree does not count. It also means AOID2-F2-GENRES and AOID2-REMEASURE-SCOPE option 1 (Stage 1 = Articles 2, 4, 6 and 11; Article 8 is declared as the ministry's conviction; Article 3 s2 stays as ruled by AOID2-ART3-HOLDS).
+Read for this draft: the live text of a02, a04, a06 and a11.njk, and every span's panel comment and anchors in `src/_data/apparatusData.json`, read 2 Oct 2026. Also read: the ratified floors in `data-sources/aoid/floors/`, of which G1, G6, G7 and G8 touch these Articles; Aaron's 1 Oct ruling note; and the June 2026 Common-Ground findings. Those findings said that A4, A6, A8 and A11 are where both footing and felt welcome crack, and that the A4 residual is the question of guidance against authoritative revelation.
 
 Form: each floor follows the 22 Sep pattern. "The Article confesses only what ... confess: ... This is the floor. It does not settle ...; each tradition fills those in its own house." Each floor names the spans it serves. When a floor is ratified, it becomes the opening paragraph of each of those spans' `panel_comment`. The existing anchor notes stay after it, so nothing already written is lost. Spans that now have no comment at all are marked *(empty)*.
 
@@ -14,11 +16,16 @@ Every remark below about what a family teaches is UNVERIFIED until the scoring r
 
 A2 s1's panel comment is already written as a floor ("The Article confesses only what Hebrews 12:9 confesses ..."), and it was the model for the 22 Sep floors. It is proposed for ratification as it stands, with s11 ("believe in God") joined to it. No new wording.
 
-### A2-F2. God is good, and His love for His children has no limit (s12, s2 *(empty)*)
+### A2-F2. God is good, His purposes are good, and His love for His children has no limit (s12, s2 *(empty)*): AMENDED AND RATIFIED by Aaron 3 Oct 2026
 
+> The Article confesses only what Psalm 145:9, Romans 8:28 and Romans 8:38-39 confess: the LORD is good to all, and His tender mercies are over all His works; all things work together for good to them that love God; and nothing shall be able to separate His children from the love of God which is in Christ Jesus. This is the floor: God is good, His purposes toward His children are good, and nothing can separate them from His love. It does not settle the extent of the atonement, whether all will finally be saved, how God's love is related to His judgment, how His purposes bear on human freedom and suffering, or who is meant by "His children" (see A11-F1); each tradition fills those in its own house.
+
+Why it was amended (3 Oct 2026): s12 reads "whose purposes are good". The 2 Oct floor tested Psalm 145:9, James 1:17 and Romans 8:38-39, and never stated the Article's claim that God's purposes are good. Romans 8:28 replaces James 1:17 in the floor, and James 1:17 returns to the anchors. The floor asks no more than the Article says.
+
+Scoring risk (carried): Reformed bodies confess God's goodness to all and a particular, saving love for the elect. "Without limit" is read as nothing can separate His children from it, not as everyone is saved.
+
+Superseded wording (ratified 2 Oct 2026, kept on record):
 > The Article confesses only what Psalm 145:9, James 1:17 and Romans 8:38-39 confess: the LORD is good to all, every good and perfect gift comes down from the Father of lights, and nothing in all creation shall be able to separate His children from the love of God which is in Christ Jesus. This is the floor. It does not settle the extent of the atonement, whether all will finally be saved, how God's love is related to His judgment, or who is meant by "His children" (see A11-F1); each tradition fills those in its own house.
-
-Scoring risk: Reformed bodies confess God's goodness to all and a particular, saving love for the elect. The floor is written at Romans 8:38-39 so that it does not ask them to confess universal saving love. "Without limit" is read as nothing can separate His children from it, not as everyone is saved.
 
 ### A2-F3. Providence: He sustains, He knows, He cares (s3, s4, s5, all *(empty)*)
 
@@ -28,9 +35,13 @@ Scoring risk: Reformed bodies confess God's goodness to all and a particular, sa
 
 > The Article confesses only what Luke 2:14 confesses: glory to God in the highest. God is the Most High, above all. This is the floor. It does not settle the relation of the Father, the Son and the Holy Spirit, or any account of God's being beyond His supremacy; each tradition fills those in its own house.
 
-### A2-F5. What no mortal knows, and what He reveals (s8 *(empty)*, s9, s10 *(empty)*)
+### A2-F5. What no mortal knows, and what He reveals (s8 *(empty)*, s9, s10 *(empty)*): AMENDED AND RATIFIED by Aaron 3 Oct 2026
 
-> The Article confesses only what Isaiah 55:8-9, Romans 11:33 and Deuteronomy 29:29 confess: God's ways and thoughts are higher than ours, His judgments unsearchable and His ways past finding out; the secret things belong unto the LORD, and those things which are revealed belong unto us. This is the floor. It does not settle how far God may be known by nature or by grace, whether His self-revelation is complete, or the place of negative and positive speech about God; each tradition fills those in its own house.
+> The Article confesses only what Isaiah 55:8-9, Romans 11:33, Deuteronomy 29:29 and 1 Corinthians 13:9, 12 confess: God's ways and thoughts are higher than ours, His judgments unsearchable; the secret things belong unto the LORD, and those things which are revealed belong unto us; and now we know in part and see through a glass, darkly. This is the floor: no one in mortality knows the full nature of God, and we know Him as far as He reveals Himself. It does not settle whether God will remain beyond the full knowledge of every creature forever, or whether His children will come to know Him fully in the life to come; nor how far God may be known by nature or by grace; each tradition fills those in its own house.
+
+Why it was amended (Aaron, 3 Oct 2026): s8 reads "no mortal human can claim to know the full nature of God." The 2 Oct floor tested only God's ways and judgments, not the Article's claim about His nature. Aaron distinguished the two readings: "God's being is incomprehensible" (classical) is a permanent division between Creator and created, while "we don't know His full nature" is temporary, holding out hope that knowing Him is a process longer than a mortal life, continuing into the eternities. The floor holds the shared part, which is that no one in mortality knows His full nature. The permanent-or-temporary question goes in the exclusions. Aaron's fuller hope is amplifying witness (1 Corinthians 13:12; 1 John 3:2; John 17:3) and is stated plainly in Volume 2. It is not scored here.
+
+Superseded wording (ratified 2 Oct 2026, kept on record): "The Article confesses only what Isaiah 55:8-9, Romans 11:33 and Deuteronomy 29:29 confess: God's ways and thoughts are higher than ours, His judgments unsearchable and His ways past finding out; the secret things belong unto the LORD, and those things which are revealed belong unto us. This is the floor. It does not settle how far God may be known by nature or by grace, whether His self-revelation is complete, or the place of negative and positive speech about God; each tradition fills those in its own house."
 
 ### A2 s7: a posture, not a teaching. Proposed: not scored
 
@@ -52,24 +63,21 @@ The apostolic witness that pairs with this floor is G1 (ratified 22 Sep). The tw
 
 Why the exclusions are there: the Catholic and Eastern Orthodox churches distinguish veneration (*dulia*) from worship (*latria*). A floor that left veneration open would score them against a line they teach themselves. The second exclusion keeps the floor clear of the Trinitarian and Jehovah's Witness division over worship of the Son.
 
-### A4-F3. God spoke, speaks, and will yet speak (s6): FORM A RULED (AOID2-A4S6-FLOOR, option 1, topic-only, 2 Oct 2026\)
+### A4-F3. God spoke, speaks, and will yet speak (s6): FORM A RULED (AOID2-A4S6-FLOOR, option 1, topic-only, 2 Oct 2026)
 
-Ruled: Form A is the floor. Form B is kept below only as the record of what was weighed. Aaron's note: Form A suits Volume 1's interfaith purpose, and the fuller Restoration claim (JS-H 1:19; God as His own interpreter, above scripture and councils) is stated plainly in Volume 2\.
+Ruled: Form A is the floor. Form B is kept below only as the record of what was weighed. Aaron's note: Form A suits Volume 1's interfaith purpose, and the fuller Restoration claim (JS-H 1:19; God as His own interpreter, above scripture and councils) is stated plainly in Volume 2.
 
 Step 34 requires this floor to say whether it claims that God speaks today by His Spirit or that prophecy continues. Westminster Confession 1.1 tests the difference: the "former ways of God's revealing his will unto his people" are "now ceased", while 1.6 acknowledges "the inward illumination of the Spirit of God" as "necessary for the saving understanding" of the Word.
 
 **Form A: God speaks today by His Spirit.**
-
 > The Article confesses only what Hebrews 1:1-2, John 16:13 and Acts 2:17-18 confess: God, who spoke in time past by the prophets, hath in these last days spoken by His Son; the Spirit of truth guides disciples into all truth; and God has poured out His Spirit upon all flesh. This is the floor: God speaks to His people today by His Spirit. It does not settle whether that speaking includes new prophecy or revelation carrying doctrinal authority, whether the canon is open, or how what the Spirit speaks is related to Scripture; each tradition fills those in its own house.
 
 **Form B: prophecy continues.**
-
 > The Article confesses only what Acts 2:17-18, Amos 3:7 and Revelation 11:3 confess: in the last days God pours out His Spirit and sons and daughters prophesy, the Lord GOD will do nothing but He revealeth His secret unto His servants the prophets, and His witnesses shall prophesy. This is the floor: the gift of prophecy has not ceased. It does not settle who holds it, what authority it carries, or whether the canon is open; each tradition fills those in its own house.
 
 What each form costs (UNVERIFIED):
-
-- Form A is the floor on which the Reformed family can count. Westminster 1.1 rules out new revelation, but 1.6 and 1.10 confess the Spirit speaking in and through the Word. Pentecostal and Latter-day Saint readers fill it more fully. This is the container strategy, and it is the June firewall exactly: continuing revelation shared, open canon kept for Volume 2\.  
-- Form B is almost certain to fail C4. Westminster 1.1 makes the Reformed family differ. The 1689 Baptist Confession keeps the same clause in substance, which makes the Baptist family differ too. That is two families at least, and the threshold allows three to fall short.  
+- Form A is the floor on which the Reformed family can count. Westminster 1.1 rules out new revelation, but 1.6 and 1.10 confess the Spirit speaking in and through the Word. Pentecostal and Latter-day Saint readers fill it more fully. This is the container strategy, and it is the June firewall exactly: continuing revelation shared, open canon kept for Volume 2.
+- Form B is almost certain to fail C4. Westminster 1.1 makes the Reformed family differ. The 1689 Baptist Confession keeps the same clause in substance, which makes the Baptist family differ too. That is two families at least, and the threshold allows three to fall short.
 - Either way, A5 governs the anchors. Revelation 11:3-6, Revelation 14:6-7 and Malachi 4:5-6 stay in the biblical column whichever form is ratified. Under Form A they support "will yet speak" (the future clause) rather than "speaks today".
 
 Decided 2 Oct 2026: Form A.
@@ -207,17 +215,17 @@ The amendment is entered in G8's own document, under G8, with the date and Aaron
 ## Summary for ratification
 
 | Floor | Spans | New or carried | Status, 2 Oct 2026 |
-| :---- | :---- | :---- | :---- |
-| A2-F1 | s1, s11 | carried (A2 s1 comment) | \- |
-| A2-F2 to F5 | s2-s6, s8-s10, s12 | ratified | \- |
+|---|---|---|---|
+| A2-F1 | s1, s11 | carried (A2 s1 comment) | - |
+| A2-F2 to F5 | s2-s6, s8-s10, s12 | ratified | - |
 | A2 s7 | s7 | not scored | confirmed: posture, not scored |
-| A4-F1, F2, F4 to F7 | s1-s5, s7-s10, s13, s14, s16, s17 | ratified | \- |
-| A4-F3 | s6 | ratified, Form A | \- |
+| A4-F1, F2, F4 to F7 | s1-s5, s7-s10, s13, s14, s16, s17 | ratified | - |
+| A4-F3 | s6 | ratified, Form A | - |
 | A4 s12, s15 | s12, s15 | not scored | confirmed: not scored |
-| A4 s6 apparatus | \- | correction | approved: move Hebrews 13:8 to the biblical column |
-| A6-F1 to F7, F9 | s1-s13, s15-s18 | ratified | \- |
+| A4 s6 apparatus | - | correction | approved: move Hebrews 13:8 to the biblical column |
+| A6-F1 to F7, F9 | s1-s13, s15-s18 | ratified | - |
 | A6-F8 | s14 | ratified, narrower than the sentence | confirmed |
-| A11-F1 to F5, F7, F8 | s1-s10, s14-s18 | ratified | \- |
+| A11-F1 to F5, F7, F8 | s1-s10, s14-s18 | ratified | - |
 | A11-F6 | s11-s13 | G8, already ratified | G8 amended (remission of sins) |
 
 ## Article text edits, for Aaron's approval of the wording (not floors)
@@ -228,16 +236,16 @@ Both edits change the Articles' live text. Under AOID2-EDITION, any narration or
 
 Current: "We heed Paul's counsel to work out our own salvation with fear and trembling before the Lord."
 
-- **Proposed (recommended):** "We heed Paul's counsel to work out our own salvation with fear and trembling before the Lord, as He works in us both to will and to do."  
+- **Proposed (recommended):** "We heed Paul's counsel to work out our own salvation with fear and trembling before the Lord, as He works in us both to will and to do."
 - Alternative: "..., for it is God who works in us both to will and to do of His good pleasure."
 
 Why "as" rather than "for": "for" is the KJV's own word, but it reads as cause, and a monergist reader can take it as God working instead of us. "As" holds the two workings together in time, the disciple working out and God working in. That is the willing partnership Aaron named, and it does not deny the verse's own claim that God is at work. The span type stays "paraphrase", and the s18 panel comment already anchors 2:12-13 and Psalm 2:11. One line is added after the floor: "Verse 13 is read as God's working with the disciple's willing labor, not as a decree that overrides it; the Article does not teach predestination (compare s6 on Romans 8:29)."
 
 ### A11 s5: Article 10's patience in the cost-of-discipleship paragraph
 
-Current s5 ends: "... Not merely profess it. Not merely believe it. Live it \- in the body, in the home, in the world, every day of the week, as reality."
+Current s5 ends: "... Not merely profess it. Not merely believe it. Live it - in the body, in the home, in the world, every day of the week, as reality."
 
-- **Proposed (recommended):** add a short sentence after the span's last word: "No soul finishes in a day, and He is patient with our becoming."  
+- **Proposed (recommended):** add a short sentence after the span's last word: "No soul finishes in a day, and He is patient with our becoming."
 - Alternative: place it after s8 ("... we repent sincerely and strive to sin no more."), so that it closes the paragraph.
 
 Why after s5: the cooling found in June happens at "as reality", and the patience has to come there, before the reader turns away. The phrase "No soul finishes in a day" is Article 10 s8's own words, repeated on purpose as a cross-reference between the Articles, and "our becoming" echoes Article 10 s5 ("a walk, a maturing, a becoming"). The triple refusal ("Not merely profess it ...") is left untouched, so the paragraph keeps its spine. The sexual-holiness dagger stays at "in the body, in the home". The new sentence takes a span of its own (A11 s19, type concept, crossref A10 s5 and s8), and its floor falls under A11-F4.
