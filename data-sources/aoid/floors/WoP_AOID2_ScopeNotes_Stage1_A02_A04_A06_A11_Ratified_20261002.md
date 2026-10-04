@@ -82,9 +82,13 @@ What each form costs (UNVERIFIED):
 
 Decided 2 Oct 2026: Form A.
 
-### A4-F4. Broken vessels (s7)
+### A4-F4. Broken vessels (s7): AMENDED AND RATIFIED by Aaron 4 Oct 2026
 
-> The Article confesses only what 2 Corinthians 4:7 and 1 Corinthians 1:27-29 confess: we have this treasure in earthen vessels, that the excellency of the power may be of God and not of us; God hath chosen the weak things of the world, that no flesh should glory in His presence. This is the floor. It does not settle which servants God has chosen, or what authority they bear; each tradition fills those in its own house.
+> The Article confesses only what 2 Corinthians 4:7, 1 Corinthians 1:27-29 and Romans 3:23 confess: we have this treasure in earthen vessels, that the excellency of the power may be of God, and not of us; God hath chosen the weak things of the world, that no flesh should glory in His presence; and all have sinned, and come short of the glory of God. This is the floor: the servants through whom God works are frail and fallible, and the power of His work is His, not theirs. It does not settle which servants God has chosen, what authority they bear, whether any servant besides Christ was kept from sin, whether God preserves any servant from error in what He gives them to teach, or how a servant's unworthiness bears on the ordinances; each tradition fills those in its own house.
+
+Why it was amended (AOID2-A4F4-FLOOR, Aaron, 4 Oct 2026): the 2 Oct floor scored taught 6, contradicted 0, no position 6, queue 4 (CODE-AOID2-09); no tradition differed, but few confessions speak of God's servants as a class. Under C4(a)(ii) the floor returned to the author and was re-centred on the half of the Article's thought that the traditions do confess, the half its companion essay is named for ("Universal Fallibility and the Reach of Grace"): all have sinned, and the power is God's. The exclusions keep Catholic teaching on Mary and on infallible definitions, and the question of an unworthy minister and the ordinances, out of the scoring. The 1 Corinthians clause joins verses 27 and 29 as the 2 Oct floor did, and claims no more than the verses. KJV wording verified on churchofjesuschrist.org, 4 Oct 2026. Rescored as Task 0 of the Article 6 run.
+
+Superseded wording (ratified 2 Oct 2026, kept on record): "The Article confesses only what 2 Corinthians 4:7 and 1 Corinthians 1:27-29 confess: we have this treasure in earthen vessels, that the excellency of the power may be of God and not of us; God hath chosen the weak things of the world, that no flesh should glory in His presence. This is the floor. It does not settle which servants God has chosen, or what authority they bear; each tradition fills those in its own house."
 
 ### A4-F5. Study, the Spirit, and the Scriptures as the measure (s8, s14, s16, s17)
 
@@ -92,9 +96,13 @@ Decided 2 Oct 2026: Form A.
 
 Scoring note: the floor says weighed against the Scriptures, not against the Scriptures alone. Catholic and Orthodox churches confess Scripture as a norm (with Tradition), and sola scriptura churches confess it as the only norm. Both meet the floor.
 
-### A4-F6. Preserved, plainly (s10)
+### A4-F6. Preserved, plainly (s10): AMENDED AND RATIFIED by Aaron 4 Oct 2026
 
-> The Article confesses only what Isaiah 40:8 and Matthew 24:35 confess: the word of our God shall stand for ever, and Christ's words shall not pass away. This is the floor. It does not settle inerrancy, the history of the text, whether anything once written has been lost, or how God restores what is lost; each tradition fills those in its own house.
+> The Article confesses only what Isaiah 40:8, Matthew 24:35 and Romans 15:4 confess: the word of our God shall stand for ever, and Christ's words shall not pass away; and whatsoever things were written aforetime were written for our learning, that we through patience and comfort of the scriptures might have hope. This is the floor: God's word stands, and the Scriptures were given for our learning and hope. It does not settle inerrancy, the history of the text, whether anything once written has been lost, how God restores what is lost, or which books make up the canon; each tradition fills those in its own house.
+
+Why it was amended (AOID2-A4F6-FLOOR, Aaron, 4 Oct 2026): the 2 Oct floor scored taught 11, contradicted 0, no position 4, queue 1 (CODE-AOID2-09); no tradition differed, but few adopted texts confess the two verses as a doctrine of Scripture. Under C4(a)(ii) it returned to the author and gained the Article's own half, "preserved for us", in Paul's words (Romans 15:4, KJV verified on churchofjesuschrist.org, 4 Oct 2026). The Anglican Book of Common Prayer collect for the Second Sunday in Advent ("written for our learning") is to be confirmed under B2(f) in the rescore. The Latter-day Saint cell (D&C 1:38; Joseph Smith-Matthew 1:35, with 1 Nephi 13 and Articles of Faith 1:8 inside the exclusions) is unchanged. Rescored with A4-F4 as Task 0 of the Article 6 run.
+
+Superseded wording (ratified 2 Oct 2026, kept on record): "The Article confesses only what Isaiah 40:8 and Matthew 24:35 confess: the word of our God shall stand for ever, and Christ's words shall not pass away. This is the floor. It does not settle inerrancy, the history of the text, whether anything once written has been lost, or how God restores what is lost; each tradition fills those in its own house."
 
 **Scoring risk, home tradition:** the Article's own words ("what God has spoken plainly ... has been preserved for us") sit uneasily beside 1 Nephi 13:26-29 (plain and precious things taken away) and Articles of Faith 1:8 ("as far as it is translated correctly"). The floor is held at Isaiah 40:8 so that The Church of Jesus Christ of Latter-day Saints counts on its own terms (A4(c)), since it confesses that God's word endures and is restored. **Aaron, 2 Oct 2026: the sentence stays unchanged.** His reason: "preserved, but not perfectly" is the view of more than the Latter-day Saints alone. The floor's exclusions (inerrancy, the history of the text, whether anything was lost) leave room for that view in every family.
 
