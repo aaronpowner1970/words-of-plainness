@@ -187,8 +187,9 @@ def rank(r):
             r["direct_pct"], -len(r["unsheeted"]))
 
 
-def write_reports(results, skipped_medium, date):
-    jpath = REPORT_DIR / f"lyric_audit_{date}.json"
+def write_reports(results, skipped_medium, date, suffix=""):
+    # --only runs get a suffix so they never overwrite the full-catalog report
+    jpath = REPORT_DIR / f"lyric_audit_{date}{suffix}.json"
     jpath.write_text(json.dumps({"date": date, "skipped_medium": skipped_medium,
                                  "arrangements": results}, indent=1, ensure_ascii=False) + "\n",
                      encoding="utf-8")
@@ -208,7 +209,7 @@ def write_reports(results, skipped_medium, date):
         real = sum(1 for s in r["substitutions"] if not s["noise"])
         md.append(f"| {r['proposed_status']} | {r['direct_pct']} | {len(r['unsheeted'])} | {len(r['unsung'])} | "
                   f"{real} | {r['vtt']['short']} / {r['vtt']['overlaps']} | {r['model']} | `{r['stem']}` |")
-    (REPORT_DIR / f"lyric_audit_{date}.md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    (REPORT_DIR / f"lyric_audit_{date}{suffix}.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     return jpath
 
 
@@ -266,7 +267,8 @@ def main():
         r["proposed_status"] = propose(r)
         out.append(r)
     out.sort(key=rank)
-    p = write_reports(out, skipped, date)
+    suffix = ("_only-" + re.sub(r"[^A-Za-z0-9_]+", "_", args.only)[:40]) if args.only else ""
+    p = write_reports(out, skipped, date, suffix)
     print(f"wrote {p}")
     print({k: sum(1 for r in out if r['proposed_status'] == k) for k in ("hold-candidate", "review", "clean")})
     if skipped:
