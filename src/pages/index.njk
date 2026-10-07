@@ -85,73 +85,75 @@ permalink: /
                 </a>
             </div>
 
-            <div class="anthem-lyrics-body" id="anthemLyricsBody">
+            {%- set anthemVtt = "" -%}
+            {%- for t in ministryMusic.collection -%}{%- if t.file == "AN_01_The_Marks_of_Your_Worth_Sacred_Americana.mp3" -%}{%- set anthemVtt = t.lyricsUrl -%}{%- endif -%}{%- endfor %}
+            <div class="anthem-lyrics-body" id="anthemLyricsBody"{% if anthemVtt %} data-vtt-url="{{ anthemVtt }}"{% endif %}>
                 <div class="anthem-lyrics-scroll">
 
                     <div class="lyrics-label">[Verse 1]</div>
                     <div class="lyrics-verse">
-                        Come, O Source of endless mercy,<br>
-                        Loose my tongue to sing Thy grace.<br>
-                        Streams of goodness, ever flowing,<br>
-                        Fill the hollows in this soul of mine.<br>
-                        I have tasted bitter waters,<br>
-                        Trying to satisfy the thirst.<br>
-                        But the Shepherd's voice spoke clearly—<br>
-                        Called this wandering stranger home.
+                        <span class="anthem-line">Come, O Source of endless mercy,</span>
+                        <span class="anthem-line">Loose my tongue to sing Thy grace.</span>
+                        <span class="anthem-line">Streams of goodness, ever flowing,</span>
+                        <span class="anthem-line">Fill the hollows in this soul of mine.</span>
+                        <span class="anthem-line">I have tasted bitter waters,</span>
+                        <span class="anthem-line">Trying to satisfy the thirst.</span>
+                        <span class="anthem-line">But the Shepherd's voice spoke clearly—</span>
+                        <span class="anthem-line">Called this wandering stranger home.</span>
                     </div>
 
                     <div class="lyrics-label">[Chorus 1 — The Savior's Voice]</div>
                     <div class="lyrics-chorus">
-                        Come to Me, all worn and weary.<br>
-                        Look to Me, and live.<br>
-                        Learn of Me — My grace sustains you.<br>
-                        Can you hear Me… calling your name?
+                        <span class="anthem-line">Come to Me, all worn and weary.</span>
+                        <span class="anthem-line">Look to Me, and live.</span>
+                        <span class="anthem-line">Learn of Me — My grace sustains you.</span>
+                        <span class="anthem-line">Can you hear Me… calling your name?</span>
                     </div>
 
                     <div class="lyrics-label">[Verse 2]</div>
                     <div class="lyrics-verse">
-                        Now I speak in words of plainness:<br>
-                        With Thy help this far I've come.<br>
-                        I hope by Thy tender mercy<br>
-                        Safely to return back home.<br>
-                        Far from Thee and full of questions,<br>
-                        I knelt down and poured out my soul.<br>
-                        He healed every empty place in me,<br>
-                        Made my broken vessel whole.
+                        <span class="anthem-line">Now I speak in words of plainness:</span>
+                        <span class="anthem-line">With Thy help this far I've come.</span>
+                        <span class="anthem-line">I hope by Thy tender mercy</span>
+                        <span class="anthem-line">Safely to return back home.</span>
+                        <span class="anthem-line">Far from Thee and full of questions,</span>
+                        <span class="anthem-line">I knelt down and poured out my soul.</span>
+                        <span class="anthem-line">He healed every empty place in me,</span>
+                        <span class="anthem-line">Made my broken vessel whole.</span>
                     </div>
 
                     <div class="lyrics-label">[Chorus 2 — The Savior Draws Near]</div>
                     <div class="lyrics-chorus">
-                        My arms are open.<br>
-                        My wounded heart still beats for you.<br>
-                        My hands will bless you.<br>
-                        The marks of your worth remain on Me.
+                        <span class="anthem-line">My arms are open.</span>
+                        <span class="anthem-line">My wounded heart still beats for you.</span>
+                        <span class="anthem-line">My hands will bless you.</span>
+                        <span class="anthem-line">The marks of your worth remain on Me.</span>
                     </div>
 
                     <div class="lyrics-label">[Verse 3]</div>
                     <div class="lyrics-verse">
-                        By Thy goodness, I was found.<br>
-                        Now I bear a joyful debt to carry!<br>
-                        To Thy grace I am now bound.<br>
-                        Turn now my wandering heart to Thee:<br>
-                        Prone to wander, Lord, I feel it,<br>
-                        Prone to leave the path You've shown;<br>
-                        Here's my soul — O take and seal it,<br>
-                        Bring me to my heavenly home.
+                        <span class="anthem-line">By Thy goodness, I was found.</span>
+                        <span class="anthem-line">Now I bear a joyful debt to carry!</span>
+                        <span class="anthem-line">To Thy grace I am now bound.</span>
+                        <span class="anthem-line">Turn now my wandering heart to Thee:</span>
+                        <span class="anthem-line">Prone to wander, Lord, I feel it,</span>
+                        <span class="anthem-line">Prone to leave the path You've shown;</span>
+                        <span class="anthem-line">Here's my soul — O take and seal it,</span>
+                        <span class="anthem-line">Bring me to my heavenly home.</span>
                     </div>
 
                     <div class="lyrics-label">[Chorus 3 — The Savior Claims]</div>
                     <div class="lyrics-chorus">
-                        Take My name upon you.<br>
-                        The marks of your worth remain on Me.<br>
-                        You are no stranger now—<br>
-                        I call you by name.
+                        <span class="anthem-line">Take My name upon you.</span>
+                        <span class="anthem-line">The marks of your worth remain on Me.</span>
+                        <span class="anthem-line">You are no stranger now—</span>
+                        <span class="anthem-line">I call you by name.</span>
                     </div>
 
                     <div class="lyrics-label">[Finale]</div>
                     <div class="lyrics-chorus">
-                        Bring my heavenly home to me,<br>
-                        And bring me to my heavenly home.
+                        <span class="anthem-line">Bring my heavenly home to me,</span>
+                        <span class="anthem-line">And bring me to my heavenly home.</span>
                     </div>
 
                 </div>

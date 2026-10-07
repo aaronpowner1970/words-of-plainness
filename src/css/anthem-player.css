@@ -347,6 +347,22 @@
     border-left: 2px solid rgba(196, 148, 58, 0.25);
 }
 
+/* ── Synced line highlight ────────────────── */
+.anthem-lyrics-scroll .anthem-line {
+    display: block;
+    transition: color 0.3s ease, opacity 0.3s ease, text-shadow 0.3s ease;
+}
+
+.anthem-lyrics-scroll.is-syncing .anthem-line {
+    opacity: 0.72;
+}
+
+.anthem-lyrics-scroll .anthem-line.is-active {
+    opacity: 1;
+    color: var(--cream-soft);
+    text-shadow: 0 0 14px rgba(212, 168, 74, 0.6), 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
 /* ── Welcome Rule (below anthem, above hero-text) ─ */
 .anthem-welcome-rule {
     width: 80px;
@@ -398,6 +414,10 @@
     }
 
     .anthem-lyrics-chevron {
+        transition: none !important;
+    }
+
+    .anthem-lyrics-scroll .anthem-line {
         transition: none !important;
     }
 }
