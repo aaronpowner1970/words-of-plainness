@@ -25,10 +25,12 @@ audio:
     description: "An Americana folk testimony that reason and revelation are two halves of a whole."
     alternates:
       - file: "03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3"
+        lyricsSameAs: 03_02_Two_Halves_of_a_Whole_Americana_Folk
         lyricsUrl: /assets/lyrics/03_01_Two_Halves_of_a_Whole_Celtic_Ballad.vtt
         label: "Celtic Ballad"
         duration: "5:53"
       - file: "03_03_Two_Halves_of_a_Whole_Classical_Crossover.mp3"
+        lyricsSameAs: 03_02_Two_Halves_of_a_Whole_Americana_Folk
         lyricsUrl: /assets/lyrics/03_03_Two_Halves_of_a_Whole_Classical_Crossover.vtt
         label: "Classical Crossover"
         duration: "5:51"

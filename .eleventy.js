@@ -295,30 +295,98 @@ module.exports = function(eleventyConfig) {
     // Each entry:
     //   { file, audioUrl, title, style, duration, lyricsUrl, lyricsHtml,
     //     chapter, chapterUrl, isMinistry, isAlternate, primaryFile }
-    // lyricsUrl is OPTIONAL — Phase 2 backfills .vtt paths per song.
-    // lyricsHtml is the existing inline formatted lyrics fallback for
-    // songs without a VTT (drawer renders static text in that case).
+    // lyricsUrl is OPTIONAL; nulled at build time when the VTT fails G4
+    // (tools/wop_validate_lyrics.py).
+    // lyricsHtml is this ARRANGEMENT's own sheet (its own `lyrics`, or the
+    // one named by `lyricsSameAs`); the drawer renders it statically when
+    // there is no VTT. lyricsOwn = an alternate that sings its own words.
     // =========================================
+    var musicCatalogReported = false;
     eleventyConfig.addFilter("musicCatalog", function(chapters) {
         var catalog = {};
+        var stemOf = function(f) { return String(f || '').replace(/\.mp3$/i, ''); };
+
+        // Per-arrangement lyrics (Lyric-Sync Standard section 2). An
+        // arrangement carries its own `lyrics` HTML, or `lyricsSameAs:
+        // <mp3 stem>` pointing at the arrangement whose sheet it sings.
+        // Nothing is inherited implicitly: an alternate with neither
+        // gets no lyrics HTML (and a build warning).
+        var sheets = {};   // stem -> { own, sameAs }
+        function addSheet(file, own, sameAs) {
+            sheets[stemOf(file)] = { own: own || '', sameAs: sameAs || '' };
+        }
+        function resolveLyrics(file, seen) {
+            seen = seen || [];
+            var sh = sheets[stemOf(file)];
+            if (!sh || seen.indexOf(stemOf(file)) !== -1) return '';
+            if (sh.own) return sh.own;
+            if (sh.sameAs) return resolveLyrics(sh.sameAs, seen.concat(stemOf(file)));
+            return '';
+        }
+
+        // Build-time validation (tools/wop_validate_lyrics.py ->
+        // src/_data/lyricsValidation.json). A VTT that fails the cue-count
+        // or text-match check is not attached: that arrangement shows its
+        // lyrics statically, with no highlight. Warn-only otherwise.
+        var validation = {};
+        try {
+            validation = JSON.parse(fs.readFileSync(
+                path.join(__dirname, 'src', '_data', 'lyricsValidation.json'), 'utf8')).arrangements || {};
+        } catch (e) {
+            console.warn('[lyrics] lyricsValidation.json missing/unreadable - run python tools/wop_validate_lyrics.py');
+        }
+        var droppedVtt = [];
+        function vttFor(file, url) {
+            if (!url) return null;
+            var v = validation[file];
+            if (v) {
+                try {
+                    var sha = require('crypto').createHash('sha1')
+                        .update(fs.readFileSync(path.join(__dirname, 'src', url.replace(/^\//, '')))).digest('hex');
+                    if (v.vtt_sha1 && v.vtt_sha1 !== sha) {
+                        console.warn('[lyrics] STALE validation for ' + file + ' (VTT changed) - rerun tools/wop_validate_lyrics.py');
+                    }
+                } catch (e) { /* VTT unreadable: the validator reports it */ }
+                if (v.status === 'fail') { droppedVtt.push(file); return null; }
+            }
+            return url;
+        }
 
         function put(entry) {
             if (!entry.file) return;
             entry.audioUrl = MEDIA_BASE + entry.file;
+            entry.lyricsHtml = resolveLyrics(entry.file);
+            entry.lyricsUrl = vttFor(entry.file, entry.lyricsUrl);
             catalog[entry.file] = entry;
         }
 
-        // Ministry collection (anthems + alternates)
+        // Pass 1: register every arrangement's own sheet.
         (ministryMusic.collection || []).forEach(function(item) {
-            var primaryLyrics = item.lyrics
-                || (item.hasLyrics ? (ministryMusic.anthemLyrics || '') : '');
+            addSheet(item.file, item.lyrics || (item.hasLyrics ? (ministryMusic.anthemLyrics || '') : ''), '');
+            (item.alternates || []).forEach(function(alt) { addSheet(alt.file, alt.lyrics, alt.lyricsSameAs); });
+        });
+        (chapters || []).forEach(function(ch) {
+            var t = ch.data && ch.data.audio && ch.data.audio.testimony;
+            if (!t || !t.file) return;
+            addSheet(t.file, ch.data.lyrics || '', '');
+            (t.alternates || []).forEach(function(alt) {
+                addSheet(alt.file, alt.lyrics, alt.lyricsSameAs);
+                if (!alt.lyrics && !alt.lyricsSameAs) {
+                    console.warn('[lyrics] ' + alt.file + ' has neither lyrics nor lyricsSameAs');
+                }
+            });
+        });
+
+        // Pass 2: catalog entries. lyricsOwn marks an alternate that sings
+        // its own words, so the drawer can say so.
+        (ministryMusic.collection || []).forEach(function(item) {
             put({
                 file: item.file,
                 title: item.title,
                 style: item.label || '',
                 duration: item.duration || '',
                 lyricsUrl: item.lyricsUrl || null,
-                lyricsHtml: primaryLyrics,
+                lyricsOwn: false,
                 chapter: null,
                 chapterUrl: null,
                 isMinistry: true,
@@ -332,7 +400,7 @@ module.exports = function(eleventyConfig) {
                     style: alt.label || '',
                     duration: alt.duration || '',
                     lyricsUrl: alt.lyricsUrl || null,
-                    lyricsHtml: primaryLyrics,
+                    lyricsOwn: !!alt.lyrics,
                     chapter: null,
                     chapterUrl: null,
                     isMinistry: true,
@@ -342,18 +410,16 @@ module.exports = function(eleventyConfig) {
             });
         });
 
-        // Chapter testimonies (primaries + alternates)
         (chapters || []).forEach(function(ch) {
             var t = ch.data && ch.data.audio && ch.data.audio.testimony;
             if (!t || !t.file) return;
-            var chLyrics = ch.data.lyrics || '';
             put({
                 file: t.file,
                 title: t.title || '',
                 style: t.label || '',
                 duration: t.duration || '',
                 lyricsUrl: t.lyricsUrl || null,
-                lyricsHtml: chLyrics,
+                lyricsOwn: false,
                 chapter: ch.data.chapter,
                 chapterUrl: ch.url,
                 isMinistry: false,
@@ -367,7 +433,7 @@ module.exports = function(eleventyConfig) {
                     style: alt.label || '',
                     duration: alt.duration || '',
                     lyricsUrl: alt.lyricsUrl || null,
-                    lyricsHtml: chLyrics,
+                    lyricsOwn: !!alt.lyrics,
                     chapter: ch.data.chapter,
                     chapterUrl: ch.url,
                     isMinistry: false,
@@ -377,6 +443,13 @@ module.exports = function(eleventyConfig) {
             });
         });
 
+        if (droppedVtt.length && !musicCatalogReported) {
+            musicCatalogReported = true;
+            console.warn('[lyrics] ' + droppedVtt.length + ' arrangement(s) fail G4; VTT not attached (static lyrics): ' + droppedVtt.join(', '));
+            if (process.env.LYRICS_STRICT === '1') {
+                throw new Error('LYRICS_STRICT=1: ' + droppedVtt.length + ' arrangement(s) fail lyric validation');
+            }
+        }
         return JSON.stringify(catalog);
     });
 

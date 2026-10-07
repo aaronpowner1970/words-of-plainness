@@ -30,10 +30,12 @@ audio:
     description: "A gentle invitation to approach faith with an open heart"
     alternates:
       - file: "01_02_Introduction_to_Plainness_Cinematic_Inspirational.mp3"
+        lyricsSameAs: 01_01_Introduction_to_Plainness_Sacred_Americana
         lyricsUrl: /assets/lyrics/01_02_Introduction_to_Plainness_Cinematic_Inspirational.vtt
         label: "Cinematic Inspirational — Piano-Led with Dramatic Orchestral Build"
         duration: "4:19"
       - file: "01_03_Introduction_to_Plainness_Americana_Folk.mp3"
+        lyricsSameAs: 01_01_Introduction_to_Plainness_Sacred_Americana
         lyricsUrl: /assets/lyrics/01_03_Introduction_to_Plainness_Americana_Folk.vtt
         label: "Americana Folk — Confident Female Mezzo-Soprano"
         duration: "4:24"

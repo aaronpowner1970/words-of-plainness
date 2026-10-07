@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "eleventy --serve",
-    "prebuild": "node scripts/sjn-verify-data.js",
+    "prebuild": "node scripts/sjn-verify-data.js && node scripts/lyrics-validate-prebuild.js",
     "build": "eleventy",
     "postbuild": "npx pagefind --site _site",
     "debug": "DEBUG=Eleventy* eleventy",

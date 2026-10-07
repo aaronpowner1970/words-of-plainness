@@ -11,11 +11,44 @@
  * duration, lyricsUrl (optional WebVTT), lyricsHtml (formatted static
  * fallback). Passing just a file string looks it up in the catalog.
  *
+ * PER-ARRANGEMENT LYRICS (Lyric-Sync Standard, sections 2-3)
+ * ----------------------------------------------------------
+ * Lyrics belong to the ARRANGEMENT (one mp3), not the song. Every arrangement
+ * entry (a chapter's audio.testimony and each audio.testimony.alternates[]
+ * item in chapter frontmatter; each collection[] item and its alternates[] in
+ * src/_data/ministryMusic.json) may carry:
+ *   lyrics          HTML in the section/verse/chorus/bridge format: this
+ *                   arrangement's OWN sung words (a primary's are the page's
+ *                   `lyrics:` block).
+ *   lyricsSameAs    <mp3 stem> of the arrangement whose sheet this one sings,
+ *                   recorded explicitly, never assumed. Every existing
+ *                   alternate points at its primary.
+ *   lyricsUrl       WebVTT timing file for this arrangement.
+ *   lyricsVerified  YYYY-MM-DD, set when the author has listened through (G5).
+ *                   Optional; not required for highlighting.
+ *   lyricsSource    generation | transcribed. Recorded only; never displayed.
+ * The musicCatalog filter (.eleventy.js) resolves lyricsSameAs and hands this
+ * file a flat descriptor: lyricsHtml (the resolved sheet), lyricsUrl (nulled
+ * at build time when the VTT fails the cue-count or text-match check), and
+ * lyricsOwn (an alternate that sings its own words).
+ *
  * Lyrics drawer is a progressive enhancement:
- *   • lyricsUrl set  → <track kind="metadata"> + cuechange highlights
- *                      and auto-scrolls the active line to center
- *                      (skipped when prefers-reduced-motion).
- *   • lyricsUrl null → renders lyricsHtml statically.
+ *   • lyricsUrl set  → <track kind="metadata"> + cuechange highlights; the
+ *                      active line is kept about 1/3 down the drawer by
+ *                      scrollTop arithmetic on the drawer only (the page and
+ *                      the sticky bar never move). Instant under
+ *                      prefers-reduced-motion.
+ *   • lyricsUrl null → renders lyricsHtml statically (no highlight).
+ *   • lyricsOwn      → one quiet header line, "Lyrics as sung in this
+ *                      arrangement".
+ *
+ * Auto-open: starting a track by a visitor gesture (title click, play
+ * button, space bar, prev/next) opens the drawer when the arrangement has
+ * lyrics. Closing the drawer by hand sets an in-memory page flag
+ * (listenOnly, a closure variable: never localStorage, sessionStorage or
+ * cookies) that suppresses every auto-open until the visitor reopens the
+ * drawer by hand; a reload clears it. Scrolling the drawer by hand pauses
+ * auto-follow for ~4s; highlighting continues.
  *
  * Listen deep link: #listen=<song-slug> cues (never plays) the song
  * named by a [data-listen-slug] anchor on the page, opens the lyrics
@@ -32,6 +65,10 @@
     'use strict';
 
     var VOLUME_KEY = 'wop-music-volume';
+    var FOLLOW_PAUSE_MS = 4000;   // auto-follow rests this long after a manual scroll
+
+    // Listen-only flag: in memory ONLY (a reload resets it by design).
+    var listenOnly = false;
 
     var P = {
         audio: null,
@@ -42,6 +79,9 @@
         vttTrackEl: null,
         vttLines: [],       // array of {el, cue}
         activeLineEl: null,
+        followResumeAt: 0,      // epoch ms; auto-follow is paused until then
+        followTimer: null,
+        advancing: false,       // true while an auto-advance (no gesture) starts a track
         loadToken: 0,
         prefersReducedMotion: false,
         initialized: false,
@@ -65,6 +105,7 @@
             }
 
             this.load(desc);
+            if (!this.advancing) this.autoOpenDrawer();
             var thisToken = this.loadToken;
             this.els.btnPlay.classList.add('wp-loading');
 
@@ -146,6 +187,13 @@
         playIndex: function (i) {
             if (i < 0 || i >= this.queue.length) return;
             this.play(this.queue[i]);
+        },
+
+        // Auto-advance / skip-on-error: no visitor gesture, so no auto-open
+        // (an already-open drawer simply carries on to the next track).
+        playAdvance: function (i) {
+            this.advancing = true;
+            try { this.playIndex(i); } finally { this.advancing = false; }
         },
 
         prev: function () {
@@ -312,6 +360,7 @@
                 '</div>',
                 '<div class="wp-drawer" id="wopDrawer" hidden>',
                     '<div class="wp-drawer-inner">',
+                        '<p class="wp-drawer-note" hidden>Lyrics as sung in this arrangement</p>',
                         '<div class="wp-drawer-body" aria-live="off"></div>',
                     '</div>',
                 '</div>'
@@ -342,6 +391,7 @@
                 btnLyrics:    root.querySelector('.wp-lyrics-toggle'),
                 btnClose:     root.querySelector('.wp-close'),
                 drawer:       root.querySelector('.wp-drawer'),
+                drawerNote:   root.querySelector('.wp-drawer-note'),
                 drawerBody:   root.querySelector('.wp-drawer-body')
             };
         },
@@ -364,13 +414,19 @@
                 // single missing file doesn't stall the whole queue.
                 if (self.playlistMode()) {
                     var nxt = self.getNextAutoAdvance();
-                    if (nxt !== -1) setTimeout(function () { self.playIndex(nxt); }, 400);
+                    if (nxt !== -1) setTimeout(function () { self.playAdvance(nxt); }, 400);
                 }
             });
 
             this.els.btnPlay.addEventListener('click',    function () { self.togglePlay(); });
             this.els.btnClose.addEventListener('click',   function () { self.stopAndHide(); });
-            this.els.btnLyrics.addEventListener('click',  function () { self.toggleDrawer(); });
+            // A visitor's click on the Lyrics button is a hand toggle: closing
+            // sets the listen-only flag, opening clears it.
+            this.els.btnLyrics.addEventListener('click',  function () { self.toggleDrawer(true); });
+            // Manual browse of the drawer pauses auto-follow (highlighting continues).
+            ['wheel', 'touchstart', 'touchmove', 'pointerdown', 'keydown'].forEach(function (ev) {
+                self.els.drawer.addEventListener(ev, function () { self.pauseFollow(); }, { passive: true });
+            });
             this.els.btnPrev.addEventListener('click',    function () { self.prev(); });
             this.els.btnNext.addEventListener('click',    function () { self.next(); });
             this.els.btnShuffle.addEventListener('click', function () { self.toggleShuffle(); });
@@ -410,6 +466,7 @@
         togglePlay: function () {
             if (!this.audio.src) return;
             if (this.audio.paused) {
+                this.autoOpenDrawer();
                 this.audio.play().catch(function () {});
             } else {
                 this.audio.pause();
@@ -442,13 +499,13 @@
 
             var nxt = this.getNextAutoAdvance();
             if (nxt !== -1) {
-                this.playIndex(nxt);
+                this.playAdvance(nxt);
                 return;
             }
             if (this.repeat === 'all') {
                 // End of pass with repeat-all: reshuffle (if shuffling) and restart from top.
                 if (this.shuffle) this.generateShuffleOrder();
-                this.playIndex(this.shuffle ? this.shuffleOrder[0] : 0);
+                this.playAdvance(this.shuffle ? this.shuffleOrder[0] : 0);
             }
             // Else: end of list, no repeat — leave the bar showing but idle.
         },
@@ -498,6 +555,7 @@
             this.detachVttTrack();
             this.clearActiveLine();
             this.els.drawerBody.innerHTML = '';
+            this.els.drawerNote.hidden = true;
             this.closeDrawer();
             this.currentFile = null;
             this.currentDesc = null;
@@ -509,17 +567,37 @@
 
         // ── Lyrics ──────────────────────────────────────────────
 
-        toggleDrawer: function () {
+        // byVisitor: true only for the Lyrics button. Hand-closing sets the
+        // listen-only flag; hand-opening clears it.
+        toggleDrawer: function (byVisitor) {
+            if (this.els.drawer.hasAttribute('hidden')) {
+                if (byVisitor === true) listenOnly = false;
+                this.openDrawer();
+            } else {
+                if (byVisitor === true) listenOnly = true;
+                this.closeDrawer();
+            }
+        },
+
+        hasLyrics: function () {
+            var d = this.currentDesc;
+            return !!(d && (d.lyricsUrl || d.lyricsHtml));
+        },
+
+        // Default experience: playback started by a visitor opens the drawer,
+        // unless they have chosen listen-only for this page session.
+        autoOpenDrawer: function () {
+            if (listenOnly || !this.hasLyrics()) return;
             if (this.els.drawer.hasAttribute('hidden')) this.openDrawer();
-            else this.closeDrawer();
         },
 
         openDrawer: function () {
             this.els.drawer.removeAttribute('hidden');
             this.els.btnLyrics.setAttribute('aria-expanded', 'true');
             this.root.classList.add('wp-drawer-open');
-            // Scroll the currently-active line into center on open.
-            if (this.activeLineEl) this.scrollLineIntoView(this.activeLineEl);
+            // Put the currently-active line in place on open.
+            this.followResumeAt = 0;
+            if (this.activeLineEl) this.scrollLineIntoView(this.activeLineEl, true);
         },
 
         closeDrawer: function () {
@@ -528,10 +606,27 @@
             this.root.classList.remove('wp-drawer-open');
         },
 
+        // A manual scroll/touch/key in the drawer rests auto-follow for ~4s,
+        // then snaps back to the sung line without waiting for the next cue.
+        pauseFollow: function () {
+            var self = this;
+            this.followResumeAt = Date.now() + FOLLOW_PAUSE_MS;
+            if (this.followTimer) clearTimeout(this.followTimer);
+            this.followTimer = setTimeout(function () {
+                self.followTimer = null;
+                self.followResumeAt = 0;
+                if (self.activeLineEl && !self.els.drawer.hasAttribute('hidden')) {
+                    self.scrollLineIntoView(self.activeLineEl, true);
+                }
+            }, FOLLOW_PAUSE_MS + 30);
+        },
+
         attachLyrics: function (desc) {
             this.els.drawerBody.innerHTML = '';
             this.vttLines = [];
             this.activeLineEl = null;
+            // Quiet header line only for an alternate that sings its own words.
+            this.els.drawerNote.hidden = !(desc.isAlternate && desc.lyricsOwn);
 
             if (desc.lyricsUrl) {
                 this.attachVttTrack(desc.lyricsUrl);
@@ -612,14 +707,21 @@
             if (!this.els.drawer.hasAttribute('hidden')) this.scrollLineIntoView(el);
         },
 
-        scrollLineIntoView: function (el) {
+        // Moves ONLY the drawer's own scroll container (scrollTop arithmetic,
+        // never scrollIntoView, which can drag the page and the sticky bar
+        // with it). The active line sits about 1/3 down the drawer. `force`
+        // overrides the post-manual-scroll rest.
+        scrollLineIntoView: function (el, force) {
+            if (!force && Date.now() < this.followResumeAt) return;
+            var d = this.els.drawer;
+            if (d.hasAttribute('hidden') || !d.clientHeight) return;
+            var delta = el.getBoundingClientRect().top - d.getBoundingClientRect().top;
+            var top = Math.max(0, d.scrollTop + delta - d.clientHeight / 3);
+            var reduce = this.prefersReducedMotion;
             try {
-                el.scrollIntoView({
-                    behavior: this.prefersReducedMotion ? 'auto' : 'smooth',
-                    block: 'center'
-                });
+                d.scrollTo({ top: top, behavior: (reduce || force) ? 'auto' : 'smooth' });
             } catch (_) {
-                el.scrollIntoView();
+                d.scrollTop = top;
             }
         },
 

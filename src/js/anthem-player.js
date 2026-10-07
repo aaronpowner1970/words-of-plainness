@@ -69,6 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Listen-only flag: set when the visitor hides the panel by hand, cleared
+    // when they open it by hand, honored by togglePlay(). In memory only (never
+    // localStorage/sessionStorage/cookies), so a reload restores auto-open.
+    let listenOnly = false;
+
     // ── Lyrics panel open / close ────────────
     function setLyricsOpen(open) {
         if (!lyricsToggle || !lyricsBody) return;
@@ -194,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Play / Pause toggle ──────────────────
     function togglePlay() {
         if (audio.paused) {
-            setLyricsOpen(true);
+            if (!listenOnly) setLyricsOpen(true);
             autoScrollResumeAt = 0;
             audio.play().then(() => {
                 syncToTime();
@@ -242,7 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lyricsToggle && lyricsBody) {
         lyricsToggle.addEventListener('click', (e) => {
             e.stopPropagation(); // prevent play area click
-            setLyricsOpen(!lyricsToggle.classList.contains('is-open'));
+            const willOpen = !lyricsToggle.classList.contains('is-open');
+            listenOnly = !willOpen;
+            setLyricsOpen(willOpen);
             if (lyricsBody.classList.contains('is-open') && activeIdx >= 0) {
                 autoScrollResumeAt = 0;
                 scrollToLine(lineEls[activeIdx]);

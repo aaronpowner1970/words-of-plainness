@@ -31,10 +31,12 @@ audio:
     description: "The universal longing for meaning and connection"
     alternates:
       - file: "02_02_Our_Search_Cinematic_Inspirational.mp3"
+        lyricsSameAs: 02_01_Our_Search_Sacred_Americana
         lyricsUrl: /assets/lyrics/02_02_Our_Search_Cinematic_Inspirational.vtt
         label: "Cinematic Inspirational"
         duration: "3:59"
       - file: "02_03_Our_Search_Celtic_Worship.mp3"
+        lyricsSameAs: 02_01_Our_Search_Sacred_Americana
         lyricsUrl: /assets/lyrics/02_03_Our_Search_Celtic_Worship.vtt
         label: "Celtic Worship"
         duration: "5:59"

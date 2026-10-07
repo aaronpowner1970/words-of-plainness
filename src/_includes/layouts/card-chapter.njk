@@ -334,6 +334,7 @@
         <details class="cc-lyrics-toggle">
             <summary>View Lyrics</summary>
             <div class="cc-lyrics-content">
+                {% if audio.testimony.label %}<p class="lyrics-arrangement-label"><em>Lyrics as sung in the {{ audio.testimony.label }} arrangement</em></p>{% endif %}
                 {{ lyrics | safe }}
             </div>
         </details>
