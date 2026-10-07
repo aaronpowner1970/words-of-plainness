@@ -21,11 +21,15 @@ Threshold: 97% of article words matched, per article.
 
 ## A02 — 100.00% article words matched · PASS
 
-- article words: 119 · reading words: 119 · sentences: 8 · timed spans: 12
-- differences: 0 — 0 insertion(s) by the reading (not counted in the percentage), 0 affecting article words (counted)
-- first word at 14.92s · last sentence ends 62.11s
+- article words: 119 · reading words: 120 · sentences: 8 · timed spans: 12
+- differences: 1 — 1 insertion(s) by the reading (not counted in the percentage), 0 affecting article words (counted)
+- first word at 16.28s · last sentence ends 68.17s
 
-No differences — the reading matches the article word for word.
+1 difference(s):
+
+| # | kind | article text | reading said | context (article) |
+|---|------|--------------|--------------|-------------------|
+| 1 | insert | `(nothing)` | `Music` | …We believe in God the… |
 
 ## A04 — 100.00% article words matched · PASS
 
