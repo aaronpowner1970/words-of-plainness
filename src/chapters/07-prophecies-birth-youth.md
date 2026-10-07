@@ -29,8 +29,63 @@ audio:
     lyricsUrl: /assets/lyrics/07_01_Promises_Kept_Folk_Hymn.vtt
     alternates:
       - file: "07_02_Promises_Kept_Contemporary_Christian.mp3"
-        lyricsSameAs: 07_01_Promises_Kept_Folk_Hymn
         lyricsUrl: /assets/lyrics/07_02_Promises_Kept_Contemporary_Christian.vtt
+        lyrics: |
+          <p class="verse">Before the world had learned to wake,<br>
+          God spoke a name across the dark —<br>
+          A promise running like a river<br>
+          Through every broken and believing heart.<br>
+          From Adam's altar to Isaiah,<br>
+          From Simeon's long years at the temple door,<br>
+          They all kept something they could barely carry<br>
+          And passed it to the ones who came before.<br>
+          And maybe you know something of that waiting —<br>
+          The years that no one sees but you and Him.<br>
+          He came for the hidden years.<br>
+          He came for the ordinary days.<br>
+          He lived the weight of what you're carrying —<br>
+          Tired hands and grief and unpraised faithfulness.<br>
+          He came. He came.<br>
+          Not to the ready and the great —<br>
+          To Mary's arms and Joseph's hands<br>
+          And every heart that dared to wait.<br>
+          Mary said yes before she understood.<br>
+          Joseph carried shame to shield the one he loved.<br>
+          A refugee child in Egypt, brown-skinned and dependent —<br>
+          God learned what it is to need.<br>
+          For eighteen years, the record holds its silence —<br>
+          Stone and wood and prayer from dawn until night.<br>
+          The parables He told were not invented;<br>
+          They were things He'd seen with His own eyes.<br>
+          So when He says, "I know your sorrows,"<br>
+          He knows them from the inside, not above.<br>
+          He came for the hidden years.<br>
+          He came for the ordinary days.<br>
+          He lived the weight of what you're carrying —<br>
+          Tired hands and grief and unpraised faithfulness.<br>
+          He came. He came.<br>
+          Not to the ready and the great —<br>
+          To Mary's arms and Joseph's hands<br>
+          And every heart that dared to wait.<br>
+          Your hidden years are not a gap,<br>
+          The ground for what is building yet.<br>
+          The preparation was the point —<br>
+          He never once forgot.<br>
+          What promise have you been carrying<br>
+          Through the seasons no one sees?<br>
+          He named the answer long before you asked,<br>
+          And He is faithful. He is faithful.<br>
+          He came for the hidden years.<br>
+          He came for the ordinary days.<br>
+          He came for you and all your unseen seasons,<br>
+          And every hidden year. He understands.<br>
+          He came. He came.<br>
+          And He is coming still<br>
+          To every heart that dares to wait.<br>
+          He always will.<br>
+          Wait on the Lord.<br>
+          He knows your name.<br>
+          He kept His word.</p>
         label: "Contemporary Christian"
         duration: "6:14"
 

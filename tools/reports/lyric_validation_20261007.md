@@ -1,6 +1,6 @@
 # Lyric validation - 2026-10-07
 
-Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements: 58 - ok 21, warn 31, fail 4, no-vtt 2.
+Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements: 58 - ok 23, warn 29, fail 4, no-vtt 2.
 
 `fail` (cue count or text) = the VTT is not attached; the arrangement shows static lyrics. `warn` = highlighted, but a timing check needs attention.
 
@@ -39,10 +39,10 @@ Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements:
 | warn | 27 | 27 | `06_08_I_Have_Tasted_the_Light_Classical_Duet_Female_Vocal.mp3` | 1 cue(s) < 1.0s (e.g. #25); 1 overlap(s) (e.g. cue #25 -> #26) |
 | ok | 27 | 27 | `06_09_I_Have_Tasted_the_Light_Indie_Folk.mp3` |  |
 | ok | 69 | 69 | `07_01_Promises_Kept_Folk_Hymn.mp3` |  |
-| warn | 69 | 69 | `07_02_Promises_Kept_Contemporary_Christian.mp3` | 41 cue(s) < 1.0s (e.g. #4); 37 overlap(s) (e.g. cue #5 -> #6); 2 gap(s) > 20s |
+| ok | 55 | 55 | `07_02_Promises_Kept_Contemporary_Christian.mp3` |  |
 | ok | 38 | 38 | `08_01_Prepared_in_All_Things_Desert_Troubadour.mp3` |  |
 | ok | 56 | 56 | `09_01_Established_in_Him_Sacred_Americana.mp3` |  |
-| warn | 56 | 56 | `09_02_Established_in_Him_Contemporary_Christian.mp3` | 33 cue(s) < 1.0s (e.g. #2); 32 overlap(s) (e.g. cue #2 -> #3); 1 gap(s) > 20s |
+| ok | 34 | 34 | `09_02_Established_in_Him_Contemporary_Christian.mp3` |  |
 | warn | 56 | 56 | `10_01_He_Always_Knew_Me_Cinematic_Worship.mp3` | 3 overlap(s) (e.g. cue #2 -> #3) |
 | ok | 56 | 56 | `10_02_He_Always_Knew_Me_Contemporary_Christian.mp3` |  |
 | ok | 56 | 56 | `10_03_He_Always_Knew_Me_Gospel_Soul.mp3` |  |
@@ -131,13 +131,6 @@ Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements:
 
 ### `06_03_I_Have_Tasted_the_Light_Classical_Duet.mp3`
 - gap 24.72s after cue 6 (1:43.240 - 2:07.960)
-
-### `07_02_Promises_Kept_Contemporary_Christian.mp3`
-- gap 49.3s after cue 1 (0:15.300 - 1:04.600)
-- gap 37.96s after cue 24 (3:06.360 - 3:44.320)
-
-### `09_02_Established_in_Him_Contemporary_Christian.mp3`
-- gap 73.5s after cue 55 (3:28.660 - 4:42.160)
 
 ### `13_02_Understood_the_Assignment_Cinematic_Orchestral.mp3`
 - gap 63.7s after cue 14 (1:23.960 - 2:27.660)

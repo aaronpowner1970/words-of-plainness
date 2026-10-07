@@ -27,8 +27,42 @@ audio:
     lyricsUrl: /assets/lyrics/09_01_Established_in_Him_Sacred_Americana.vtt
     alternates:
       - file: "09_02_Established_in_Him_Contemporary_Christian.mp3"
-        lyricsSameAs: 09_01_Established_in_Him_Sacred_Americana
         lyricsUrl: /assets/lyrics/09_02_Established_in_Him_Contemporary_Christian.vtt
+        lyrics: |
+          <p class="verse">You call me forward into who You always knew I was.<br>
+          My wandering heart finally found the name it was searching for.<br>
+          I had tried every lesser thing,<br>
+          Every hollow promise, every pride.<br>
+          Then Your voice cut through the noise,<br>
+          And something in me finally came alive.<br>
+          This is not a feeling. This is not a fading song.<br>
+          You have laid a foundation, and on it I belong.<br>
+          Like the joy of a bride on her wedding day,<br>
+          Received by her Lord at the altar —<br>
+          Every heart overflowing, every voice raised high,<br>
+          We behold You, Yehoshua — established we are.<br>
+          At the table You prepared, we eat, we drink —<br>
+          Your grace has made us more than we could ever be.<br>
+          We are established in You.<br>
+          Entering Your mansions, every homecoming promise fulfilled,<br>
+          A new life everlasting begins here and now with You.<br>
+          So I set my hands to what is mine,<br>
+          The humble road now holy ground.<br>
+          Each ordinary morning, a preparation,<br>
+          Builds on faithfulness and love.<br>
+          Make me faithful in the ordinary days,<br>
+          Joyful in the dust and duty,<br>
+          Worthy of the name I now carry.<br>
+          Like the joy of a bride on her wedding day,<br>
+          Received by her Lord at the altar —<br>
+          Every heart overflowing, every voice raised high,<br>
+          We behold You, Yehoshua — established we are.<br>
+          At the table You prepared, we eat, we drink —<br>
+          Your grace has made us more than we could ever be.<br>
+          We are established in You.<br>
+          Father, thank You for the heart of Your Son.<br>
+          In His holy name, Yehoshua ben El Shaddai,<br>
+          Amen and Shalom.</p>
         label: "Contemporary Christian"
   sections:
     - id: "pause-humility"
