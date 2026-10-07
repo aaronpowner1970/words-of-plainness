@@ -25,13 +25,139 @@ audio:
     description: "An Americana folk testimony that reason and revelation are two halves of a whole."
     alternates:
       - file: "03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3"
-        lyricsSameAs: 03_02_Two_Halves_of_a_Whole_Americana_Folk
         lyricsUrl: /assets/lyrics/03_01_Two_Halves_of_a_Whole_Celtic_Ballad.vtt
+        lyrics: |
+          <p class="section"><strong>[Verse 1]</strong></p>
+          <p class="verse">I've walked the avenues of life,<br>
+          I've tasted rain and summer's heat.<br>
+          I've gathered pearls of wisdom, simply beautiful,<br>
+          And laid them down here at the Teacher's feet.<br>
+          The world is organized in such complexity,<br>
+          The Architect is found in every stone.<br>
+          But even when survival needs are met,<br>
+          A hunger stays for something still unknown.</p>
+
+          <p class="section"><strong>[Chorus]</strong></p>
+          <p class="chorus">For truth is knowledge as things really are,<br>
+          A light that shines on what is yet to come.<br>
+          Science isn't blind and faith isn't lame<br>
+          When we see them both as one.<br>
+          It's a fuller way of walking on the road<br>
+          Where every path to truth is joined together.<br>
+          We're chasing down the meaning of our days,<br>
+          By the love of God directed, now and ever.</p>
+
+          <p class="section"><strong>[Verse 2]</strong></p>
+          <p class="verse">I've built my intellectual altars to the mind<br>
+          Through philosophy and arts and the sciences.<br>
+          I've analyzed the patterns and the laws<br>
+          And let my thinking be my sole reliance.<br>
+          But academic means can only go so far,<br>
+          They're limited by things we can't perceive.<br>
+          We're ever learning, never coming to the truth<br>
+          Without the courage to truly believe.</p>
+
+          <p class="section"><strong>[Bridge]</strong></p>
+          <p class="bridge">Now I'm standing at the ceiling of the framework,<br>
+          Looking through the window at the rain.<br>
+          Reason is a shadow in the moonlight<br>
+          If it cannot take away the pain.</p>
+
+          <p class="section"><strong>[Build]</strong></p>
+          <p class="verse">Why is there something rather than nothing at all?<br>
+          Does who I am persist beyond the grave?<br>
+          I'm reaching for the eyes that have been hidden,<br>
+          For the spirit that the Savior came to save.</p>
+
+          <p class="section"><strong>[Climax]</strong></p>
+          <p class="chorus"><strong>I choose to experiment upon the word.<br>
+          I choose the foresight of the prophecy.<br>
+          The spirit speaks what senses never heard—<br>
+          It's the power of God that sets the seeker free!</strong></p>
+
+          <p class="section"><strong>[Outro]</strong></p>
+          <p class="verse">So I'll walk in wondering humility,<br>
+          Recognizing that I know so very little.<br>
+          The world may shift like shadows on the wall,<br>
+          But a simple truth is resting in the middle.</p>
+
+          <p class="verse">Great ignorance might lead a man to fear,<br>
+          And knowledge brings a measure of our sorrow.<br>
+          But wisdom brings a peace that's resting here<br>
+          And a hope for every bright tomorrow.</p>
+
+          <p class="verse"><em>Life has grand purpose.<br>
+          A beautiful and simple way.<br>
+          In the name of Jesus Christ,<br>
+          Amen.</em></p>
         label: "Celtic Ballad"
         duration: "5:53"
       - file: "03_03_Two_Halves_of_a_Whole_Classical_Crossover.mp3"
-        lyricsSameAs: 03_02_Two_Halves_of_a_Whole_Americana_Folk
         lyricsUrl: /assets/lyrics/03_03_Two_Halves_of_a_Whole_Classical_Crossover.vtt
+        lyrics: |
+          <p class="section"><strong>[Verse 1]</strong></p>
+          <p class="verse">I've walked the avenues of life,<br>
+          I've tasted rain and summer's heat.<br>
+          I've gathered pearls of wisdom, simply beautiful,<br>
+          And laid them down here at the Teacher's feet.<br>
+          The world is organized in such complexity,<br>
+          The Architect is found in every stone.<br>
+          But even when survival needs are met,<br>
+          A hunger stays for something still unknown.</p>
+
+          <p class="section"><strong>[Chorus]</strong></p>
+          <p class="chorus">For truth is knowledge as things really are,<br>
+          A light that shines on what is yet to come.<br>
+          Science isn't blind and faith isn't lame<br>
+          When we see them both as one.<br>
+          It's a fuller way of walking on the road<br>
+          Where every path to truth is joined together.<br>
+          We're chasing down the meaning of our days,<br>
+          By the love of God directed, now and ever.</p>
+
+          <p class="section"><strong>[Verse 2]</strong></p>
+          <p class="verse">I've built my intellectual altars to the mind<br>
+          Through philosophy and arts and the sciences.<br>
+          I've analyzed the patterns and the laws<br>
+          And let my thinking be my sole reliance.<br>
+          But academic means can only go so far,<br>
+          They're limited by things we can't perceive.<br>
+          We're ever learning, never coming to the truth<br>
+          Without the courage to truly believe.</p>
+
+          <p class="section"><strong>[Bridge]</strong></p>
+          <p class="bridge">Now I'm standing at the ceiling of the framework,<br>
+          Looking through the window at the rain.<br>
+          Reason is a shadow in the moonlight<br>
+          If it cannot take away the pain.</p>
+
+          <p class="section"><strong>[Build]</strong></p>
+          <p class="verse">Why is there something rather than nothing at all?<br>
+          Does who I am persist beyond the grave?<br>
+          I'm reaching for the eyes that have been hidden,<br>
+          For the spirit that the Savior came to save.</p>
+
+          <p class="section"><strong>[Climax]</strong></p>
+          <p class="chorus"><strong>I choose to experiment upon the word.<br>
+          I choose the foresight of the prophecy.<br>
+          The spirit speaks what senses never heard—<br>
+          It's the power of God that sets the seeker free!</strong></p>
+
+          <p class="section"><strong>[Outro]</strong></p>
+          <p class="verse">So I'll walk in wondering humility,<br>
+          Recognizing that I know so very little.<br>
+          The world may shift like shadows on the wall,<br>
+          But a simple truth is resting in the middle.</p>
+
+          <p class="verse">Great ignorance might lead a man to fear,<br>
+          And knowledge brings a measure of our sorrow.<br>
+          But wisdom brings a peace that's resting here<br>
+          And a hope for every bright tomorrow.</p>
+
+          <p class="verse"><em>Life has grand purpose.<br>
+          A beautiful and simple way.<br>
+          In the name of Jesus Christ,<br>
+          Amen.</em></p>
         label: "Classical Crossover"
         duration: "5:51"
 pdf: WoP_Ch03_Academic_Knowledge.pdf
@@ -175,6 +301,8 @@ lyrics: |
   I choose the foresight of the prophecy.<br>
   The spirit speaks what senses never heard—<br>
   It's the power of God that sets the seeker free!</strong></p>
+
+  <p class="verse">I'm reaching for the eyes that have been hidden,</p>
 
   <p class="section"><strong>[Outro]</strong></p>
   <p class="verse">So I'll walk in wondering humility,<br>

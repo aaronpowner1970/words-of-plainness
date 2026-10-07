@@ -31,13 +31,129 @@ audio:
     description: "The universal longing for meaning and connection"
     alternates:
       - file: "02_02_Our_Search_Cinematic_Inspirational.mp3"
-        lyricsSameAs: 02_01_Our_Search_Sacred_Americana
         lyricsUrl: /assets/lyrics/02_02_Our_Search_Cinematic_Inspirational.vtt
+        lyrics: |
+          <p class="section"><strong>[Verse 1]</strong></p>
+          <p class="verse">There's a hunger deep inside I cannot name<br>
+          Feelin' homesick for a place I've never known<br>
+          Filled it up with pride and empty pleasure<br>
+          Oh, but bitter waters never satisfy</p>
+
+          <p class="section"><strong>[Verse 2]</strong></p>
+          <p class="verse">I've walked roads of despair and rebellion<br>
+          Let go of who I was to fit a mold<br>
+          Made excuses out of worldly wisdom<br>
+          But clever words can't warm a weary soul</p>
+
+          <p class="section"><strong>[Chorus]</strong></p>
+          <p class="chorus">Seek and you will find<br>
+          Knock and the door swings open wide<br>
+          There's a humble road between the shadows<br>
+          Where the hungry come to find the light<br>
+          The search is worth the risking<br>
+          Every question, every climb<br>
+          Seek and you will find</p>
+
+          <p class="section"><strong>[Verse 3]</strong></p>
+          <p class="verse">I see it now through a glass so darkly<br>
+          But even shadows cannot hide what's true<br>
+          There's meaning waiting just past my understanding<br>
+          A living water, crystal, still, and free<br>
+          <em>Reflecting back the face of God in me</em></p>
+
+          <p class="section"><strong>[Chorus]</strong></p>
+          <p class="chorus">Seek and you will find<br>
+          Knock and the door swings open wide<br>
+          There's a humble road between the shadows<br>
+          Where the hungry come to find the light<br>
+          The search is worth the risking<br>
+          Every question, every climb<br>
+          Seek and you will find</p>
+
+          <p class="section"><strong>[Bridge]</strong></p>
+          <p class="bridge">Between the pride and the despair<br>
+          Between the running and standing still<br>
+          There's a narrow way for honest seekers<br>
+          Where the deepest thirst is finally filled</p>
+
+          <p class="section"><strong>[Final Chorus]</strong></p>
+          <p class="chorus">Seek and you will find<br>
+          Knock and the door swings open wide<br>
+          There's a humble road between the shadows<br>
+          Where the hungry come to find the light<br>
+          The search is worth the risking<br>
+          Worth any sacrifice<br>
+          Seek and you will find<br>
+          Seek and you will find</p>
+
+          <p class="section"><strong>[Outro]</strong></p>
+          <p class="verse"><em>The hunger was no curse<br>
+          God planted it on purpose<br>
+          A holy homesickness<br>
+          To lead me home</em></p>
         label: "Cinematic Inspirational"
         duration: "3:59"
       - file: "02_03_Our_Search_Celtic_Worship.mp3"
-        lyricsSameAs: 02_01_Our_Search_Sacred_Americana
         lyricsUrl: /assets/lyrics/02_03_Our_Search_Celtic_Worship.vtt
+        lyrics: |
+          <p class="section"><strong>[Verse 1]</strong></p>
+          <p class="verse">There's a hunger deep inside I cannot name<br>
+          Feelin' homesick for a place I've never known<br>
+          Filled it up with pride and empty pleasure<br>
+          Oh, but bitter waters never satisfy</p>
+
+          <p class="section"><strong>[Verse 2]</strong></p>
+          <p class="verse">I've walked roads of despair and rebellion<br>
+          Let go of who I was to fit a mold<br>
+          Made excuses out of worldly wisdom<br>
+          But clever words can't warm a weary soul</p>
+
+          <p class="section"><strong>[Chorus]</strong></p>
+          <p class="chorus">Seek and you will find<br>
+          Knock and the door swings open wide<br>
+          There's a humble road between the shadows<br>
+          Where the hungry come to find the light<br>
+          The search is worth the risking<br>
+          Every question, every climb<br>
+          Seek and you will find</p>
+
+          <p class="section"><strong>[Verse 3]</strong></p>
+          <p class="verse">I see it now through a glass so darkly<br>
+          But even shadows cannot hide what's true<br>
+          There's meaning waiting just past my understanding<br>
+          A living water, crystal, still, and free<br>
+          <em>Reflecting back the face of God in me</em></p>
+
+          <p class="section"><strong>[Chorus]</strong></p>
+          <p class="chorus">Seek and you will find<br>
+          Knock and the door swings open wide<br>
+          There's a humble road between the shadows<br>
+          Where the hungry come to find the light<br>
+          The search is worth the risking<br>
+          Every question, every climb<br>
+          Seek and you will find</p>
+
+          <p class="section"><strong>[Bridge]</strong></p>
+          <p class="bridge">Between the pride and the despair<br>
+          Between the running and standing still<br>
+          There's a narrow way for honest seekers<br>
+          Where the deepest thirst is finally filled</p>
+
+          <p class="section"><strong>[Final Chorus]</strong></p>
+          <p class="chorus">Seek and you will find<br>
+          Knock and the door swings open wide<br>
+          There's a humble road between the shadows<br>
+          Where the hungry come to find the light<br>
+          The search is worth the risking<br>
+          Worth any sacrifice<br>
+          Seek and you will find<br>
+          Seek and you will find</p>
+
+          <p class="section"><strong>[Outro]</strong></p>
+          <p class="verse"><em>The hunger was no curse<br>
+          God planted it on purpose<br>
+          A holy homesickness<br>
+          To lead me home</em></p>
         label: "Celtic Worship"
         duration: "5:59"
 
@@ -107,6 +223,7 @@ lyrics: |
   Where the hungry come to find the light<br>
   The search is worth the risking<br>
   Worth any sacrifice<br>
+  Seek and you will find<br>
   Seek and you will find<br>
   Seek and you will find</p>
 

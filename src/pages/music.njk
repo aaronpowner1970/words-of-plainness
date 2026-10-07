@@ -53,6 +53,13 @@ permalink: /music/
                     role="radio" aria-checked="false">Full Collection</button>
         </div>
 
+        <!-- Continuous play: when one arrangement ends the next starts (on by default,
+             remembered per browser as 'wop-music-continuous' = 'off' when switched off). -->
+        <div class="queue-scope" id="continuousScope">
+            <button type="button" class="queue-scope-btn" id="continuousToggle"
+                    role="switch" aria-checked="true">Continuous play: On</button>
+        </div>
+
         <!-- Section 0: Ministry Collection -->
         <div class="playlist-section-header">
             <h2 class="section-title">Ministry Anthems</h2>
@@ -236,6 +243,24 @@ permalink: /music/
                 var file = row.getAttribute('data-play-file');
                 if (file && window.WopPlayer) window.WopPlayer.play(file);
             });
+        });
+
+        // Continuous play switch (default on; only 'off' is stored).
+        var contBtn = document.getElementById('continuousToggle');
+        function setCont(on) {
+            if (window.WopPlayer) window.WopPlayer.setContinuous(on);
+            if (contBtn) {
+                contBtn.setAttribute('aria-checked', on ? 'true' : 'false');
+                contBtn.textContent = 'Continuous play: ' + (on ? 'On' : 'Off');
+            }
+        }
+        var contOn = true;
+        try { contOn = localStorage.getItem('wop-music-continuous') !== 'off'; } catch (_) {}
+        setCont(contOn);
+        if (contBtn) contBtn.addEventListener('click', function () {
+            contOn = !contOn;
+            try { localStorage.setItem('wop-music-continuous', contOn ? 'on' : 'off'); } catch (_) {}
+            setCont(contOn);
         });
 
         // Scope toggle: buttons, persistence, initial state.

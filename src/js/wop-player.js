@@ -54,6 +54,11 @@
  * named by a [data-listen-slug] anchor on the page, opens the lyrics
  * drawer, and leaves the play button glowing for the reader's tap.
  *
+ * Continuous play (/music/): when a track ends the next arrangement in the queue (catalog
+ * order) starts, its lyrics panel follows it (opens for lyrics, closes for an instrumental,
+ * never overriding a visitor's listen-only choice) and the last track stops. setContinuous()
+ * is driven by the page's "Continuous play" switch, remembered in localStorage.
+ *
  * Playlist mode (OPT-IN, /music/ only):
  *   Call WopPlayer.setQueue([...files]) to activate — reveals shuffle,
  *   prev/next, and repeat (off / all / one) transport buttons, enables
@@ -82,6 +87,7 @@
         followResumeAt: 0,      // epoch ms; auto-follow is paused until then
         followTimer: null,
         advancing: false,       // true while an auto-advance (no gesture) starts a track
+        continuous: true,       // playlist mode: start the next arrangement when one ends (/music/ toggle)
         loadToken: 0,
         prefersReducedMotion: false,
         initialized: false,
@@ -105,7 +111,9 @@
             }
 
             this.load(desc);
-            if (!this.advancing) this.autoOpenDrawer();
+            // Lyrics panel follows the track: opens for an arrangement with lyrics (unless the
+            // visitor chose listen-only), closes for an instrumental (no panel, flag untouched).
+            if (this.hasLyrics()) this.autoOpenDrawer(); else this.closeDrawer();
             var thisToken = this.loadToken;
             this.els.btnPlay.classList.add('wp-loading');
 
@@ -184,13 +192,19 @@
             return this.queue.length > 0;
         },
 
+        // Continuous play on/off (the /music/ page persists the choice). Off: a track
+        // that ends simply stops; repeat-one still loops.
+        setContinuous: function (on) {
+            this.continuous = !!on;
+        },
+
         playIndex: function (i) {
             if (i < 0 || i >= this.queue.length) return;
             this.play(this.queue[i]);
         },
 
-        // Auto-advance / skip-on-error: no visitor gesture, so no auto-open
-        // (an already-open drawer simply carries on to the next track).
+        // Auto-advance / skip-on-error (continuous play). The drawer still follows the
+        // track, and a visitor's listen-only choice still holds.
         playAdvance: function (i) {
             this.advancing = true;
             try { this.playIndex(i); } finally { this.advancing = false; }
@@ -496,6 +510,8 @@
                 this.audio.play().catch(function () {});
                 return;
             }
+
+            if (!this.continuous) return;
 
             var nxt = this.getNextAutoAdvance();
             if (nxt !== -1) {

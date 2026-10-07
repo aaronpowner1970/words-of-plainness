@@ -1,6 +1,6 @@
 # Lyric validation - 2026-10-07
 
-Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements: 58 - ok 23, warn 29, fail 4, no-vtt 2.
+Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements: 58 - ok 24, warn 29, fail 3, no-vtt 2.
 
 `fail` (cue count or text) = the VTT is not attached; the arrangement shows static lyrics. `warn` = highlighted, but a timing check needs attention.
 
@@ -13,10 +13,10 @@ Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements:
 | ok | 32 | 32 | `01_01_Introduction_to_Plainness_Sacred_Americana.mp3` |  |
 | fail | 29 | 32 | `01_02_Introduction_to_Plainness_Cinematic_Inspirational.mp3` | cue count 29 != sheet lines 32; 3 cue(s) differ from the sheet text; 7 cue(s) < 1.0s (e.g. #2); 3 overlap(s) (e.g. cue #21 -> #22) |
 | ok | 32 | 32 | `01_03_Introduction_to_Plainness_Americana_Folk.mp3` |  |
-| fail | 39 | 43 | `02_01_Our_Search_Sacred_Americana.mp3` | cue count 39 != sheet lines 43; 4 cue(s) differ from the sheet text; 5 cue(s) < 1.0s (e.g. #35); 4 overlap(s) (e.g. cue #35 -> #36); 1 gap(s) > 20s |
+| ok | 44 | 44 | `02_01_Our_Search_Sacred_Americana.mp3` |  |
 | ok | 43 | 43 | `02_02_Our_Search_Cinematic_Inspirational.mp3` |  |
 | fail | 39 | 43 | `02_03_Our_Search_Celtic_Worship.mp3` | cue count 39 != sheet lines 43; 4 cue(s) differ from the sheet text; 1 gap(s) > 20s |
-| warn | 48 | 48 | `03_02_Two_Halves_of_a_Whole_Americana_Folk.mp3` | 1 gap(s) > 20s |
+| ok | 49 | 49 | `03_02_Two_Halves_of_a_Whole_Americana_Folk.mp3` |  |
 | fail | 44 | 48 | `03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3` | cue count 44 != sheet lines 48; 4 cue(s) differ from the sheet text; 2 gap(s) > 20s |
 | warn | 48 | 48 | `03_03_Two_Halves_of_a_Whole_Classical_Crossover.mp3` | 1 gap(s) > 20s |
 | warn | 66 | 66 | `04_01_When_God_Becomes_Real_Sacred_Americana.mp3` | 1 cue(s) < 1.0s (e.g. #66) |
@@ -48,12 +48,12 @@ Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements:
 | ok | 56 | 56 | `10_03_He_Always_Knew_Me_Gospel_Soul.mp3` |  |
 | warn | 37 | 37 | `11_01_Panteles_Sacred_Ballad.mp3` | 1 cue(s) < 1.0s (e.g. #37) |
 | ok | 44 | 44 | `12_01_What_You_Were_Made_to_Be.mp3` |  |
-| warn | 58 | 58 | `13_01_Understood_the_Assignment_Contemporary_Christian.mp3` | 1 cue(s) < 1.0s (e.g. #34) |
+| warn | 59 | 59 | `13_01_Understood_the_Assignment_Contemporary_Christian.mp3` | 2 cue(s) < 1.0s (e.g. #34) |
 | warn | 58 | 58 | `13_02_Understood_the_Assignment_Cinematic_Orchestral.mp3` | 26 cue(s) < 1.0s (e.g. #33); 25 overlap(s) (e.g. cue #33 -> #34); 1 gap(s) > 20s |
 | warn | 58 | 58 | `13_03_Understood_the_Assignment_Bluegrass_Fireside.mp3` | 2 cue(s) < 1.0s (e.g. #34) |
-| warn | 58 | 58 | `13_04_Understood_the_Assignment_Blues.mp3` | 3 cue(s) < 1.0s (e.g. #34) |
-| warn | 58 | 58 | `13_05_Understood_the_Assignment_Country.mp3` | 1 cue(s) < 1.0s (e.g. #34) |
-| ok | 58 | 58 | `13_06_Understood_the_Assignment_A_Cappella.mp3` |  |
+| warn | 59 | 59 | `13_04_Understood_the_Assignment_Blues.mp3` | 3 cue(s) < 1.0s (e.g. #34) |
+| warn | 59 | 59 | `13_05_Understood_the_Assignment_Country.mp3` | 1 cue(s) < 1.0s (e.g. #34) |
+| warn | 60 | 60 | `13_06_Understood_the_Assignment_A_Cappella.mp3` | 1 cue(s) < 1.0s (e.g. #60) |
 | ok | 31 | 31 | `14_01_The_First_One_I_Turn_To_Contemporary_Christian.mp3` |  |
 | ok | 31 | 31 | `14_02_The_First_One_I_Turn_To_A_Cappella.mp3` |  |
 | ok | 31 | 31 | `14_03_The_First_One_I_Turn_To_Piano_Ballad.mp3` |  |
@@ -78,22 +78,12 @@ Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements:
 - cue 19: VTT "(no cue)" / sheet "For the ones who'll walk this wide and weary place."
 - cue 20: VTT "(no cue)" / sheet "Because He first came looking, we will never walk alone—"
 
-### `02_01_Our_Search_Sacred_Americana.mp3`
-- cue 28: VTT "(no cue)" / sheet "Between the pride and the despair"
-- cue 29: VTT "(no cue)" / sheet "Between the running and standing still"
-- cue 30: VTT "(no cue)" / sheet "There's a narrow way for honest seekers"
-- cue 31: VTT "(no cue)" / sheet "Where the deepest thirst is finally filled"
-- gap 44.3s after cue 34 (3:14.320 - 3:58.620)
-
 ### `02_03_Our_Search_Celtic_Worship.mp3`
 - cue 28: VTT "(no cue)" / sheet "Between the pride and the despair"
 - cue 29: VTT "(no cue)" / sheet "Between the running and standing still"
 - cue 30: VTT "(no cue)" / sheet "There's a narrow way for honest seekers"
 - cue 31: VTT "(no cue)" / sheet "Where the deepest thirst is finally filled"
 - gap 29.9s after cue 20 (2:38.220 - 3:08.120)
-
-### `03_02_Two_Halves_of_a_Whole_Americana_Folk.mp3`
-- gap 36.04s after cue 36 (3:13.080 - 3:49.120)
 
 ### `03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3`
 - cue 25: VTT "(no cue)" / sheet "Now I'm standing at the ceiling of the framework,"

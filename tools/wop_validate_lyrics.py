@@ -158,6 +158,7 @@ def collect_arrangements():
         label = f'Ch {fm.get("chapter", "?")} - {t.get("title", path.stem)}'
         out.append(dict(file=t["file"], stem=pstem, source=label, primary_stem=pstem,
                         title=t.get("title"), label=t.get("label"),
+                        chapter_path=str(path),
                         is_alt=False, lyrics_url=t.get("lyricsUrl"),
                         own_html=fm.get("lyrics") or None, same_as=None,
                         lyrics_source=t.get("lyricsSource"),
@@ -166,6 +167,7 @@ def collect_arrangements():
             out.append(dict(file=alt["file"], stem=Path(alt["file"]).stem,
                             source=f"{label} (alt)", primary_stem=pstem, is_alt=True,
                             title=t.get("title"), label=alt.get("label"),
+                            chapter_path=str(path),
                             lyrics_url=alt.get("lyricsUrl"), own_html=alt.get("lyrics"),
                             same_as=alt.get("lyricsSameAs"),
                             lyrics_source=alt.get("lyricsSource"),
