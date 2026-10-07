@@ -165,8 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
         lyricsScroll.scrollTo({ top: target, behavior: reducedMotion ? 'auto' : 'smooth' });
     }
 
+    let resumeTimer = null;
     function noteUserScroll() {
         autoScrollResumeAt = Date.now() + USER_SCROLL_PAUSE_MS;
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+            if (!audio.paused && activeIdx >= 0) scrollToLine(lineEls[activeIdx]);
+        }, USER_SCROLL_PAUSE_MS + 50);
     }
 
     if (lyricsScroll) {
