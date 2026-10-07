@@ -129,6 +129,7 @@ def collect_arrangements():
         page_html = item.get("lyrics") or (anthem_fallback if item.get("hasLyrics") else "")
         pstem = Path(item["file"]).stem
         out.append(dict(file=item["file"], stem=pstem, source=f'Ministry - {item.get("title")}',
+                        title=item.get("title"), label=item.get("label"),
                         primary_stem=pstem, is_alt=False,
                         lyrics_url=item.get("lyricsUrl"), own_html=page_html or None,
                         same_as=None, lyrics_source=item.get("lyricsSource"),
@@ -136,6 +137,7 @@ def collect_arrangements():
         for alt in item.get("alternates", []) or []:
             out.append(dict(file=alt["file"], stem=Path(alt["file"]).stem,
                             source=f'Ministry - {item.get("title")} (alt)',
+                            title=item.get("title"), label=alt.get("label"),
                             primary_stem=pstem, is_alt=True,
                             lyrics_url=alt.get("lyricsUrl"), own_html=alt.get("lyrics"),
                             same_as=alt.get("lyricsSameAs"),
@@ -155,6 +157,7 @@ def collect_arrangements():
         pstem = Path(t["file"]).stem
         label = f'Ch {fm.get("chapter", "?")} - {t.get("title", path.stem)}'
         out.append(dict(file=t["file"], stem=pstem, source=label, primary_stem=pstem,
+                        title=t.get("title"), label=t.get("label"),
                         is_alt=False, lyrics_url=t.get("lyricsUrl"),
                         own_html=fm.get("lyrics") or None, same_as=None,
                         lyrics_source=t.get("lyricsSource"),
@@ -162,6 +165,7 @@ def collect_arrangements():
         for alt in t.get("alternates", []) or []:
             out.append(dict(file=alt["file"], stem=Path(alt["file"]).stem,
                             source=f"{label} (alt)", primary_stem=pstem, is_alt=True,
+                            title=t.get("title"), label=alt.get("label"),
                             lyrics_url=alt.get("lyricsUrl"), own_html=alt.get("lyrics"),
                             same_as=alt.get("lyricsSameAs"),
                             lyrics_source=alt.get("lyricsSource"),

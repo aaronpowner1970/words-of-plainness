@@ -335,9 +335,17 @@ module.exports = function(eleventyConfig) {
         } catch (e) {
             console.warn('[lyrics] lyricsValidation.json missing/unreadable - run python tools/wop_validate_lyrics.py');
         }
+        // Author hold list (src/_data/lyricsHold.json): static even if G4 passes.
+        var holds = {};
+        try {
+            (JSON.parse(fs.readFileSync(path.join(__dirname, 'src', '_data', 'lyricsHold.json'), 'utf8')).holds || [])
+                .forEach(function(h) { holds[h.stem] = h; });
+        } catch (e) { console.warn('[lyrics] lyricsHold.json missing/unreadable'); }
         var droppedVtt = [];
+        var heldVtt = [];
         function vttFor(file, url) {
             if (!url) return null;
+            if (holds[stemOf(file)]) { heldVtt.push(file + ' (' + holds[stemOf(file)].date + ')'); return null; }
             var v = validation[file];
             if (v) {
                 try {
@@ -443,8 +451,9 @@ module.exports = function(eleventyConfig) {
             });
         });
 
-        if (droppedVtt.length && !musicCatalogReported) {
+        if ((heldVtt.length || droppedVtt.length) && !musicCatalogReported) {
             musicCatalogReported = true;
+            if (heldVtt.length) console.warn('[lyrics] ' + heldVtt.length + ' arrangement(s) on the author hold list (static lyrics): ' + heldVtt.join(', '));
             console.warn('[lyrics] ' + droppedVtt.length + ' arrangement(s) fail G4; VTT not attached (static lyrics): ' + droppedVtt.join(', '));
             if (process.env.LYRICS_STRICT === '1') {
                 throw new Error('LYRICS_STRICT=1: ' + droppedVtt.length + ' arrangement(s) fail lyric validation');

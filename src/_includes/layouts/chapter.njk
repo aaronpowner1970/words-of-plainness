@@ -174,7 +174,8 @@
 </div>
 
 <!-- Modals (Overview, Testimony, Infographic, Slides) -->
-{% set lyricsHtml = chapter | lyricsContent %}
+{# partial (ch6-11) wins; otherwise the page's lyrics frontmatter (primary arrangement) #}
+{% set lyricsHtml = (chapter | lyricsContent) or lyrics %}
 {% include "components/modals.njk" %}
 
 <!-- Citation Panel (left slide-out) -->

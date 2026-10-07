@@ -52,11 +52,8 @@ DEFAULT_LYRICS_DIR = REPO_ROOT / "tools" / "lyrics_txt"
 DEFAULT_VTT_DIR = REPO_ROOT / "src" / "assets" / "lyrics"
 CDN_BASE = "https://media.wordsofplainness.org/web/"
 
-# Scratch cache — mp3s are large-ish (~5 MB each) and not needed in the repo.
-CACHE_ROOT = Path(os.environ.get(
-    "WOP_MP3_CACHE",
-    r"C:\Users\aaron\AppData\Local\Temp\claude\C--Users-aaron-Documents-meridian-invest\6c4d3322-2f64-4a65-a53c-75cf5fdba9f4\scratchpad\wop_mp3_cache",
-))
+# Audio cache — mp3s are large-ish (~5 MB each); tools/.mp3_cache/ is git-ignored.
+CACHE_ROOT = Path(os.environ.get("WOP_MP3_CACHE") or (REPO_ROOT / "tools" / ".mp3_cache"))
 
 
 WORD_TOKEN_RE = re.compile(r"[a-z0-9']+", re.IGNORECASE)

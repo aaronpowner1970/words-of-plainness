@@ -1,6 +1,6 @@
 # Lyric validation - 2026-10-07
 
-Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements: 58 - ok 17, warn 31, fail 5, no-vtt 5.
+Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements: 58 - ok 21, warn 31, fail 4, no-vtt 2.
 
 `fail` (cue count or text) = the VTT is not attached; the arrangement shows static lyrics. `warn` = highlighted, but a timing check needs attention.
 
@@ -14,7 +14,7 @@ Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements:
 | fail | 29 | 32 | `01_02_Introduction_to_Plainness_Cinematic_Inspirational.mp3` | cue count 29 != sheet lines 32; 3 cue(s) differ from the sheet text; 7 cue(s) < 1.0s (e.g. #2); 3 overlap(s) (e.g. cue #21 -> #22) |
 | ok | 32 | 32 | `01_03_Introduction_to_Plainness_Americana_Folk.mp3` |  |
 | fail | 39 | 43 | `02_01_Our_Search_Sacred_Americana.mp3` | cue count 39 != sheet lines 43; 4 cue(s) differ from the sheet text; 5 cue(s) < 1.0s (e.g. #35); 4 overlap(s) (e.g. cue #35 -> #36); 1 gap(s) > 20s |
-| fail | 39 | 43 | `02_02_Our_Search_Cinematic_Inspirational.mp3` | cue count 39 != sheet lines 43; 4 cue(s) differ from the sheet text |
+| ok | 43 | 43 | `02_02_Our_Search_Cinematic_Inspirational.mp3` |  |
 | fail | 39 | 43 | `02_03_Our_Search_Celtic_Worship.mp3` | cue count 39 != sheet lines 43; 4 cue(s) differ from the sheet text; 1 gap(s) > 20s |
 | warn | 48 | 48 | `03_02_Two_Halves_of_a_Whole_Americana_Folk.mp3` | 1 gap(s) > 20s |
 | fail | 44 | 48 | `03_01_Two_Halves_of_a_Whole_Celtic_Ballad.mp3` | cue count 44 != sheet lines 48; 4 cue(s) differ from the sheet text; 2 gap(s) > 20s |
@@ -59,10 +59,10 @@ Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements:
 | ok | 31 | 31 | `14_03_The_First_One_I_Turn_To_Piano_Ballad.mp3` |  |
 | ok | 31 | 31 | `14_04_The_First_One_I_Turn_To_Roots_Gospel.mp3` |  |
 | ok | 31 | 31 | `14_05_The_First_One_I_Turn_To_Theatrical_Ballad.mp3` |  |
-| no-vtt | 0 | 64 | `15_01_Keep_Me_Turning_To_You_Piano_Ballad.mp3` |  |
-| no-vtt | 0 | 64 | `15_02_Keep_Me_Turning_To_You_A_Capella.mp3` |  |
+| ok | 64 | 64 | `15_01_Keep_Me_Turning_To_You_Piano_Ballad.mp3` |  |
+| ok | 64 | 64 | `15_02_Keep_Me_Turning_To_You_A_Capella.mp3` |  |
 | no-vtt | 0 | 64 | `15_03_Keep_Me_Turning_To_You_Cinematic_Orchestra.mp3` |  |
-| no-vtt | 0 | 64 | `15_04_Keep_Me_Turning_To_You_Folk_Hymn_Duet.mp3` |  |
+| ok | 64 | 64 | `15_04_Keep_Me_Turning_To_You_Folk_Hymn_Duet.mp3` |  |
 | warn | 46 | 46 | `16_01_One_Day_in_Seven_Acoustic_Worship.mp3` | 5 cue(s) < 1.0s (e.g. #27); 5 overlap(s) (e.g. cue #27 -> #28) |
 
 ## Detail
@@ -84,12 +84,6 @@ Standard: WoP Musical Testimony Lyric-Sync Standard, section 4 G4. Arrangements:
 - cue 30: VTT "(no cue)" / sheet "There's a narrow way for honest seekers"
 - cue 31: VTT "(no cue)" / sheet "Where the deepest thirst is finally filled"
 - gap 44.3s after cue 34 (3:14.320 - 3:58.620)
-
-### `02_02_Our_Search_Cinematic_Inspirational.mp3`
-- cue 28: VTT "(no cue)" / sheet "Between the pride and the despair"
-- cue 29: VTT "(no cue)" / sheet "Between the running and standing still"
-- cue 30: VTT "(no cue)" / sheet "There's a narrow way for honest seekers"
-- cue 31: VTT "(no cue)" / sheet "Where the deepest thirst is finally filled"
 
 ### `02_03_Our_Search_Celtic_Worship.mp3`
 - cue 28: VTT "(no cue)" / sheet "Between the pride and the despair"
