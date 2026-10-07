@@ -52,7 +52,7 @@ audio:
           Mary said yes before she understood.<br>
           Joseph carried shame to shield the one he loved.<br>
           A refugee child in Egypt, brown-skinned and dependent —<br>
-          God learned what it is to need.<br>
+          The Son of God learned what it is to need.<br>
           For eighteen years, the record holds its silence —<br>
           Stone and wood and prayer from dawn until night.<br>
           The parables He told were not invented;<br>
