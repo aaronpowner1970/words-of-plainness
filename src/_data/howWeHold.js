@@ -73,6 +73,8 @@ module.exports = {
 
       '<p>When we say the walls were not built by Him, and that we refuse to defend them, we are not dismissing your doctrine or your tradition. We ask only that we stop building walls out of them. We may hold our doctrine as firmly as ever and still refuse to let differences over orthodoxy, reformation, restoration, or the interpretation of scripture decide who belongs to Christ or who may sit at His table. <em>The conviction stays; the gatekeeping goes.</em></p>',
 
+      '<p>The specific refusal to defend the walls of division is this ministry’s own conviction. It is not offered as a teaching every tradition shares, and it was not measured against the sixteen traditions as the shared teachings of these Articles were. The Words of Plainness ministry exists outside all ecclesiastical authority — not in defiance, but as a safe place for the entrenched, the marginalized and the Christian-curious.</p>',
+
       '<p>Each church rightly governs its own membership, its own ordinances, its own table. We make no claim on how any tradition orders its house. We say only this: none of us has the right to stand between the sheep and the Good Shepherd.</p>'
     ].join('')
   }
