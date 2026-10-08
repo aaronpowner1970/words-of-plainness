@@ -6,15 +6,20 @@
  * apparatus `panel_comment`; where a floor was ratified before its span existed, the floor is held in
  * its ratified document (data-sources/aoid/floors/) and the panel_comment is transcribed from it
  * verbatim. This script reads data-sources/aoid/floor_ledger.yaml and, for every item under `scored:`,
- * puts each item in exactly one state:
+ * puts each span of the item in exactly one state:
  *
- *   TRANSFERRED  the ledger names a span, the span exists in src/_data/apparatusData.json, and its
+ *   TRANSFERRED  the ledger names the span, the span exists in src/_data/apparatusData.json, and its
  *                panel_comment equals the ratified floor text (after whitespace normalisation).
  *   PENDING      the ledger names no span (span: null). Lawful under A4(d). Does not fail the run.
  *   FAILED       anything else: span absent, no panel_comment, panel_comment differs from the floor,
- *                floor document or heading not found (or ambiguous), floor text changed since its
- *                recorded hash (a floor changed without a ruling), hash not yet recorded, or a
+ *                floor document, heading or anchor not found (or ambiguous), floor text changed since
+ *                its recorded hash (a floor changed without a ruling), hash not yet recorded, or a
  *                malformed ledger entry. Exits non-zero.
+ *
+ * `span` may be null, one span string, or a list of span strings; each span is checked on its own and
+ * reported on its own. `floor_heading` may be a heading at level 2, 3 or 4 of the floor document.
+ * The optional `floor_anchor` selects the floor inside a section that holds more than one blockquote
+ * (see extractFloor). The rules are set out in data-sources/aoid/FLOOR_CHECK.md.
  *
  * Usage:
  *   node scripts/aoid-verify-floors.js                  run the check
@@ -58,34 +63,69 @@ function describeDiff(floor, comment) {
 }
 
 /**
- * The floor is the blockquote after the line beginning "**Panel comment (the floor)" inside the
- * section whose "## " heading line is exactly `## <heading>`. Returns {text} or {error}.
+ * The section is the one whose heading line (level 2, 3 or 4) has exactly the text `heading`; it ends
+ * at the next heading of the same or higher level.
+ *   Without `anchor`: the floor is the blockquote after the one line beginning
+ *     "**Panel comment (the floor)" in the section (a second blockquote after it is an error).
+ *   With `anchor`: the anchor text must occur in exactly one line of the section (the heading line
+ *     counts as part of the section), and the floor is
+ *     the first blockquote after that line; the label line is not required.
+ * Returns {text} or {error}.
  */
-function extractFloor(docPath, heading) {
+function extractFloor(docPath, heading, anchor) {
   if (!fs.existsSync(docPath)) return { error: `floor document not found: ${docPath}` };
   const lines = fs.readFileSync(docPath, "utf8").split(/\r?\n/);
-  const starts = lines.reduce((a, l, i) => (l.trimEnd() === `## ${heading}` ? a.concat(i) : a), []);
-  if (starts.length === 0) return { error: `floor heading not found: "## ${heading}"` };
-  if (starts.length > 1) return { error: `floor heading is ambiguous (${starts.length} matches): "## ${heading}"` };
+  const headingOf = (l) => { const m = /^(#{1,6}) (.*)$/.exec(l.trimEnd()); return m ? { level: m[1].length, text: m[2] } : null; };
+  const starts = [];
+  lines.forEach((l, i) => {
+    const h = headingOf(l);
+    if (h && h.level >= 2 && h.level <= 4 && h.text === heading) starts.push({ i, level: h.level });
+  });
+  if (starts.length === 0) return { error: `floor heading not found at level 2, 3 or 4: "${heading}"` };
+  if (starts.length > 1) return { error: `floor heading is ambiguous (${starts.length} matches): "${heading}"` };
+  const start = starts[0].i;
   let end = lines.length;
-  for (let i = starts[0] + 1; i < lines.length; i++) if (/^## /.test(lines[i])) { end = i; break; }
-  const labels = [];
-  for (let i = starts[0] + 1; i < end; i++) if (lines[i].startsWith("**Panel comment (the floor)")) labels.push(i);
-  if (labels.length !== 1) return { error: `expected exactly one "**Panel comment (the floor)" line under "## ${heading}", found ${labels.length}` };
-  let i = labels[0] + 1;
-  while (i < end && lines[i].trim() === "") i++;
-  const quote = [];
-  while (i < end && lines[i].startsWith(">")) quote.push(lines[i++].replace(/^>\s?/, ""));
-  if (quote.length === 0) return { error: `no blockquote follows the "**Panel comment (the floor)" line under "## ${heading}"` };
-  // A blank line inside the floor would end the blockquote in markdown; a second quote block is ambiguous.
-  while (i < end && lines[i].trim() === "") i++;
-  if (i < end && lines[i].startsWith(">")) return { error: `a second blockquote follows the floor under "## ${heading}"; floor cannot be located unambiguously` };
+  for (let i = start + 1; i < lines.length; i++) {
+    const h = headingOf(lines[i]);
+    if (h && h.level <= starts[0].level) { end = i; break; }
+  }
+  const takeQuote = (from) => {
+    const quote = [];
+    let i = from;
+    while (i < end && lines[i].startsWith(">")) quote.push(lines[i++].replace(/^>\s?/, ""));
+    return { quote, next: i };
+  };
+
+  let quote;
+  if (anchor !== undefined) {
+    const hits = [];
+    for (let i = start; i < end; i++) if (lines[i].includes(anchor)) hits.push(i);
+    if (hits.length === 0) return { error: `floor_anchor not found in the section "${heading}": ${JSON.stringify(anchor)}` };
+    if (hits.length > 1) return { error: `floor_anchor found on ${hits.length} lines of the section "${heading}" (must be exactly one): ${JSON.stringify(anchor)}` };
+    let i = hits[0] + 1;
+    while (i < end && !lines[i].startsWith(">")) i++;
+    quote = takeQuote(i).quote;
+    if (quote.length === 0) return { error: `no blockquote follows floor_anchor ${JSON.stringify(anchor)} in the section "${heading}"` };
+  } else {
+    const labels = [];
+    for (let i = start + 1; i < end; i++) if (lines[i].startsWith("**Panel comment (the floor)")) labels.push(i);
+    if (labels.length !== 1) return { error: `expected exactly one "**Panel comment (the floor)" line under "${heading}", found ${labels.length}` };
+    let i = labels[0] + 1;
+    while (i < end && lines[i].trim() === "") i++;
+    const t = takeQuote(i);
+    quote = t.quote;
+    if (quote.length === 0) return { error: `no blockquote follows the "**Panel comment (the floor)" line under "${heading}"` };
+    // A blank line inside the floor would end the blockquote in markdown; a second quote block is ambiguous.
+    i = t.next;
+    while (i < end && lines[i].trim() === "") i++;
+    if (i < end && lines[i].startsWith(">")) return { error: `a second blockquote follows the floor under "${heading}"; floor cannot be located unambiguously` };
+  }
   const text = norm(quote.join(" "));
-  if (!text) return { error: `floor blockquote under "## ${heading}" is empty` };
+  if (!text) return { error: `floor blockquote under "${heading}" is empty` };
   return { text };
 }
 
-const results = [];
+const results = []; // one per ledger item: {item, doc, units: [{span, state, detail}]}
 const loud = []; // ledger-level problems, reported separately
 const fatal = (m) => { console.error(`LEDGER PROBLEM: ${m}`); process.exit(2); };
 
@@ -104,42 +144,57 @@ const toRecord = []; // {item, hash}
 
 for (const [n, e] of ledger.scored.entries()) {
   const label = e && e.item !== undefined ? String(e.item) : `scored[${n}]`;
-  const r = { item: label, state: "FAILED", span: null, doc: e && e.floor_document, detail: "" };
+  const r = { item: label, doc: e && e.floor_document, units: [] };
   results.push(r);
+  // An item-level problem applies to every span of the item.
+  const failAll = (detail, spans) => {
+    const list = spans && spans.length ? spans : [null];
+    r.units = list.map((span) => ({ span, state: "FAILED", detail }));
+  };
+  const malformed = (detail) => { failAll(detail); loud.push({ item: label, detail }); };
 
   const missing = ["item", "floor_document", "floor_heading", "span", "floor_sha256"].filter((k) => !e || !(k in e));
-  if (missing.length) { r.malformed = true; r.detail = `malformed ledger entry: missing ${missing.join(", ")}`; loud.push(r); continue; }
-  if (seen.has(label)) { r.malformed = true; r.detail = "malformed ledger entry: duplicate item"; loud.push(r); continue; }
+  if (missing.length) { malformed(`malformed ledger entry: missing ${missing.join(", ")}`); continue; }
+  if (seen.has(label)) { malformed("malformed ledger entry: duplicate item"); continue; }
   seen.add(label);
-  if (e.span !== null && !(typeof e.span === "string" && SPAN_RE.test(e.span))) {
-    r.malformed = true; r.detail = `malformed ledger entry: span must be null or like "A03.s2", got ${JSON.stringify(e.span)}`; loud.push(r); continue;
-  }
-  if (typeof e.floor_sha256 !== "string" || (e.floor_sha256 !== "" && !HASH_RE.test(e.floor_sha256))) {
-    r.malformed = true; r.detail = "malformed ledger entry: floor_sha256 must be empty or 64 lowercase hex characters"; loud.push(r); continue;
-  }
-  r.span = e.span;
 
-  const floor = extractFloor(path.join(ROOT, e.floor_document), e.floor_heading);
-  if (floor.error) { r.floorMissing = true; r.detail = floor.error; loud.push(r); continue; }
+  const spans = e.span === null ? [null] : Array.isArray(e.span) ? e.span : [e.span];
+  const spanOk = (s) => typeof s === "string" && SPAN_RE.test(s);
+  if (e.span !== null && (spans.length === 0 || !spans.every(spanOk))) {
+    malformed(`malformed ledger entry: span must be null, a span like "A03.s2", or a non-empty list of such spans, got ${JSON.stringify(e.span)}`); continue;
+  }
+  if (new Set(spans).size !== spans.length) { malformed("malformed ledger entry: a span is listed twice"); continue; }
+  if (typeof e.floor_sha256 !== "string" || (e.floor_sha256 !== "" && !HASH_RE.test(e.floor_sha256))) {
+    malformed("malformed ledger entry: floor_sha256 must be empty or 64 lowercase hex characters"); continue;
+  }
+  if ("floor_anchor" in e && (typeof e.floor_anchor !== "string" || !e.floor_anchor.trim())) {
+    malformed("malformed ledger entry: floor_anchor, when given, must be a non-empty string"); continue;
+  }
+
+  const floor = extractFloor(path.join(ROOT, e.floor_document), e.floor_heading, "floor_anchor" in e ? e.floor_anchor : undefined);
+  if (floor.error) { failAll(floor.error, spans); loud.push({ item: label, detail: floor.error }); continue; }
   const hash = sha(floor.text);
 
   if (e.floor_sha256 === "") {
     if (RECORD) toRecord.push({ item: label, hash });
-    else { r.detail = "floor_sha256 not recorded in the ledger; run with --record-hashes once, after the floor is confirmed"; continue; }
+    else { failAll("floor_sha256 not recorded in the ledger; run with --record-hashes once, after the floor is confirmed", spans); continue; }
   } else if (e.floor_sha256 !== hash) {
-    r.detail = `floor changed without a ruling: hash now ${hash}, ledger records ${e.floor_sha256}`;
+    failAll(`floor changed without a ruling: hash now ${hash}, ledger records ${e.floor_sha256}`, spans);
     continue;
   }
 
-  if (e.span === null) { r.state = "PENDING"; r.detail = "no span yet (lawful under A4(d))"; continue; }
-
-  const [art, sp] = e.span.split(".");
-  const node = apparatus && apparatus[art] && apparatus[art][sp];
-  if (!node) { r.detail = `span ${e.span} does not exist in apparatusData.json`; continue; }
-  const pc = typeof node.panel_comment === "string" ? node.panel_comment : "";
-  if (!norm(pc)) { r.detail = `span ${e.span} has no panel_comment`; continue; }
-  if (norm(pc) !== floor.text) { r.detail = `panel_comment does not match the ratified floor: ${describeDiff(floor.text, norm(pc))}`; continue; }
-  r.state = "TRANSFERRED"; r.detail = "panel_comment matches the ratified floor";
+  for (const span of spans) {
+    const u = { span, state: "FAILED", detail: "" };
+    r.units.push(u);
+    if (span === null) { u.state = "PENDING"; u.detail = "no span yet (lawful under A4(d))"; continue; }
+    const [art, sp] = span.split(".");
+    const node = apparatus && apparatus[art] && apparatus[art][sp];
+    if (!node) { u.detail = `span ${span} does not exist in apparatusData.json`; continue; }
+    const pc = typeof node.panel_comment === "string" ? node.panel_comment : "";
+    if (!norm(pc)) { u.detail = `span ${span} has no panel_comment`; continue; }
+    if (norm(pc) !== floor.text) { u.detail = `panel_comment does not match the ratified floor: ${describeDiff(floor.text, norm(pc))}`; continue; }
+    u.state = "TRANSFERRED"; u.detail = "panel_comment matches the ratified floor";
+  }
 }
 
 if (RECORD) {
@@ -157,10 +212,17 @@ if (RECORD) {
 console.log("AoID floor-transfer check (codex A4(a), A4(d))");
 console.log("States: TRANSFERRED = panel_comment matches floor | PENDING = no span yet, lawful | FAILED = does not meet A4(d)\n");
 for (const r of results) {
-  console.log(`  ${r.item}: ${r.state}`);
-  console.log(`      span:           ${r.span === null ? "none" : r.span || "(unreadable)"}`);
-  console.log(`      floor document: ${r.doc || "(unreadable)"}`);
-  console.log(`      ${r.detail}`);
+  if (r.units.length === 1) {
+    const u = r.units[0];
+    console.log(`  ${r.item}: ${u.state}`);
+    console.log(`      span:           ${u.span === null ? "none" : u.span}`);
+    console.log(`      floor document: ${r.doc || "(unreadable)"}`);
+    console.log(`      ${u.detail}`);
+  } else {
+    console.log(`  ${r.item}: ${r.units.length} spans`);
+    console.log(`      floor document: ${r.doc || "(unreadable)"}`);
+    for (const u of r.units) console.log(`      ${u.span === null ? "none" : u.span}: ${u.state}  ${u.detail}`);
+  }
 }
 
 const pend = Array.isArray(ledger.pending_floors) ? ledger.pending_floors : [];
@@ -172,13 +234,14 @@ for (const p of pend) {
   if (!ok) pendProblems.push(p && p.document);
 }
 
-const failed = results.filter((r) => r.state === "FAILED");
-const t = results.filter((r) => r.state === "TRANSFERRED").length;
-const pd = results.filter((r) => r.state === "PENDING").length;
+const units = results.flatMap((r) => r.units);
+const failed = units.filter((u) => u.state === "FAILED").length;
+const t = units.filter((u) => u.state === "TRANSFERRED").length;
+const pd = units.filter((u) => u.state === "PENDING").length;
 if (loud.length || pendProblems.length) {
   console.error("\n*** LEDGER / FLOOR PROBLEMS (an entry cannot be checked at all) ***");
-  for (const r of loud) console.error(`  ${r.item}: ${r.detail}`);
+  for (const l of loud) console.error(`  ${l.item}: ${l.detail}`);
   for (const d of pendProblems) console.error(`  pending floor document not found: ${d}`);
 }
-console.log(`\n${t} transferred, ${pd} pending, ${failed.length} failed.`);
-process.exit(failed.length || pendProblems.length ? 1 : 0);
+console.log(`\n${t} transferred, ${pd} pending, ${failed} failed (counted by span).`);
+process.exit(failed || pendProblems.length ? 1 : 0);
