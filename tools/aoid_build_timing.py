@@ -46,7 +46,7 @@ MIN_MATCH = 0.97
 # A03 has no reading video — its page is the full film at /creation/.
 YOUTUBE = {
     "A01": "v3ZJY3CT0Rc", "A02": "vapwjdfYqEA", "A04": "ZSo_cd5cgw8",
-    "A05": "_HWBD4A2Hyk", "A06": "MKLA4kTXnJI", "A07": "30_eLVjsDD4",
+    "A05": "_HWBD4A2Hyk", "A06": "4Bp1-gPunxc", "A07": "30_eLVjsDD4",
     "A08": "jsv2f8j8Suw", "A09": "s6Xz4Hg2aSQ", "A10": "InIH8qFgFOA",
     "A11": "PNZ8vCzZJGg", "A12": "MbyLnbVlaIw", "A13": "Wv9hBC9MjaY",
 }

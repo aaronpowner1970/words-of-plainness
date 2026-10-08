@@ -47,13 +47,17 @@ No differences — the reading matches the article word for word.
 
 No differences — the reading matches the article word for word.
 
-## A06 — 100.00% article words matched · PASS
+## A06 — 99.44% article words matched · PASS
 
-- article words: 345 · reading words: 345 · sentences: 9 · timed spans: 18
-- differences: 0 — 0 insertion(s) by the reading (not counted in the percentage), 0 affecting article words (counted)
-- first word at 16.88s · last sentence ends 154.99s
+- article words: 356 · reading words: 355 · sentences: 9 · timed spans: 18
+- differences: 1 — 0 insertion(s) by the reading (not counted in the percentage), 1 affecting article words (counted)
+- first word at 16.62s · last sentence ends 153.38s
 
-No differences — the reading matches the article word for word.
+1 difference(s):
+
+| # | kind | article text | reading said | context (article) |
+|---|------|--------------|--------------|-------------------|
+| 1 | replace | `co heirs` | `coheirs` | …and glorified together as co heirs with Christ of the… |
 
 ## A07 — 100.00% article words matched · PASS
 
