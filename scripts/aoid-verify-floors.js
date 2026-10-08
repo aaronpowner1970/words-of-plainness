@@ -8,8 +8,10 @@
  * verbatim. This script reads data-sources/aoid/floor_ledger.yaml and, for every item under `scored:`,
  * puts each span of the item in exactly one state:
  *
- *   TRANSFERRED  the ledger names the span, the span exists in src/_data/apparatusData.json, and its
- *                panel_comment equals the ratified floor text (after whitespace normalisation).
+ *   TRANSFERRED  the ledger names the span, the span exists in src/_data/apparatusData.json, and the
+ *                OPENING PARAGRAPH of its panel_comment (text up to the first blank line) equals the
+ *                ratified floor text (after whitespace normalisation); approved notes may follow it
+ *                after a paragraph break (AOID2-FLOOR-OPENING-PARAGRAPH).
  *   PENDING      the ledger names no span (span: null). Lawful under A4(d). Does not fail the run.
  *   FAILED       anything else: span absent, no panel_comment, panel_comment differs from the floor,
  *                floor document, heading or anchor not found (or ambiguous), floor text changed since
@@ -53,6 +55,14 @@ const SPAN_RE = /^A\d{2}\.s\d+$/;
 const HASH_RE = /^[0-9a-f]{64}$/;
 const norm = (s) => s.replace(/\s+/g, " ").trim();
 const sha = (s) => crypto.createHash("sha256").update(s, "utf8").digest("hex");
+
+/**
+ * The opening paragraph of a panel_comment: its text up to the first paragraph break (a blank line,
+ * "\n\n" allowing whitespace around it), or all of it if there is none (AOID2-FLOOR-OPENING-PARAGRAPH).
+ */
+function openingParagraph(pc) {
+  return pc.trim().split(/[ \t]*\r?\n[ \t]*\r?\n/)[0];
+}
 
 /** First difference between two strings, with a little context, for a failure message. */
 function describeDiff(floor, comment) {
@@ -192,8 +202,14 @@ for (const [n, e] of ledger.scored.entries()) {
     if (!node) { u.detail = `span ${span} does not exist in apparatusData.json`; continue; }
     const pc = typeof node.panel_comment === "string" ? node.panel_comment : "";
     if (!norm(pc)) { u.detail = `span ${span} has no panel_comment`; continue; }
-    if (norm(pc) !== floor.text) { u.detail = `panel_comment does not match the ratified floor: ${describeDiff(floor.text, norm(pc))}`; continue; }
-    u.state = "TRANSFERRED"; u.detail = "panel_comment matches the ratified floor";
+    const open = norm(openingParagraph(pc));
+    if (open !== floor.text) {
+      u.detail = open.startsWith(floor.text)
+        ? "floor is followed by further text in the same paragraph; a paragraph break is needed after the floor"
+        : `opening paragraph differs from floor: ${describeDiff(floor.text, open)}`;
+      continue;
+    }
+    u.state = "TRANSFERRED"; u.detail = "opening paragraph of panel_comment matches the ratified floor";
   }
 }
 

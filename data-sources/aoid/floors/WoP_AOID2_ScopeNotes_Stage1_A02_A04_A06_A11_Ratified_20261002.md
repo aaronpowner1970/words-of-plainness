@@ -16,6 +16,10 @@ Every remark below about what a family teaches is UNVERIFIED until the scoring r
 
 A2 s1's panel comment is already written as a floor ("The Article confesses only what Hebrews 12:9 confesses ..."), and it was the model for the 22 Sep floors. It is proposed for ratification as it stands, with s11 ("believe in God") joined to it. No new wording.
 
+**Floor text recorded 8 Oct 2026 (AOID2-A2F1-FLOOR-TEXT, ruled by Aaron): the ratified A2-F1 floor, verbatim from the opening of the A02 s1 panel comment as ratified on 2 Oct 2026. No other wording in this document changes.**
+
+> The Article confesses only what Hebrews 12:9 confesses—God as the “Father of spirits,” set against the “fathers of our flesh”—the origin of the human spirit. This is the biblical floor, received across historic Christian exegesis (Calvin and the catechisms read Hebrews 12:9 as the soul’s origin); it is not uniquely Latter-day Saint language. Each tradition works out the manner of that fatherhood in its own house, and the container holds the range without forcing any single account. The maximal reading—literal premortal spirit-birth—is Volume 2 witness-only and is not read onto the Article; the Restoration anchors (D&C 93:29–30, D&C 76:24) stand as amplifying witness, not as the Article’s claim.
+
 ### A2-F2. God is good, His purposes are good, and His love for His children has no limit (s12, s2 *(empty)*): AMENDED AND RATIFIED by Aaron 3 Oct 2026
 
 > The Article confesses only what Psalm 145:9, Romans 8:28 and Romans 8:38-39 confess: the LORD is good to all, and His tender mercies are over all His works; all things work together for good to them that love God; and nothing shall be able to separate His children from the love of God which is in Christ Jesus. This is the floor: God is good, His purposes toward His children are good, and nothing can separate them from His love. It does not settle the extent of the atonement, whether all will finally be saved, how God's love is related to His judgment, how His purposes bear on human freedom and suffering, or who is meant by "His children" (see A11-F1); each tradition fills those in its own house.

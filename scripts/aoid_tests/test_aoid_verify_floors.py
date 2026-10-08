@@ -92,7 +92,7 @@ def test_control_matching_comment_transfers(tmp_path):
 
 def test_control_messy_wrapping_still_transfers(tmp_path):
     wrapped = "## Z1. Test floor\n\n**Panel comment (the floor), ratified:**\n\n> The Article confesses only what\n>   Psalm 1 confesses:   the one who delights\n> in the law is blessed.\n> This is the floor.\n"
-    messy = "The Article  confesses only what Psalm 1\tconfesses: the one who delights in the law\n\n is blessed.   This is the floor.  "
+    messy = "The Article  confesses only what Psalm 1\tconfesses: the one who delights in the law\n is blessed.   This is the floor.  "
     code, out, _ = run(tmp_path, entry(sha256=sha(FLOOR)), {"A01": {"s1": {"panel_comment": messy}}}, {"floor.md": wrapped})
     assert single(out, "Z1") == "TRANSFERRED" and code == 0
 
@@ -104,7 +104,7 @@ def test_route1_span_named_but_absent(tmp_path):
 
 def test_route2_panel_comment_one_word_changed(tmp_path):
     code, out, _ = run(tmp_path, entry(sha256=sha(FLOOR)), {"A01": {"s1": {"panel_comment": FLOOR.replace("blessed", "happy")}}}, {"floor.md": SECTION})
-    assert single(out, "Z1") == "FAILED" and "does not match" in out and code == 1
+    assert single(out, "Z1") == "FAILED" and "opening paragraph differs from floor" in out and code == 1
 
 
 def test_route3_recorded_hash_altered(tmp_path):
@@ -283,3 +283,53 @@ def test_real_ledger_29a_29b_pending_with_unchanged_hashes():
     ledger = (REPO / "data-sources/aoid/floor_ledger.yaml").read_text(encoding="utf-8")
     assert "e7565fa2d367a2ad7a3bf9df823581860e024846d6a80b9a926dd459c31b5c3e" in ledger
     assert "bc7ffe63e994aca78e3ba533192efd43787dcee3df5eb3072c568289de04a35c" in ledger
+
+
+# ---------------------------------------------------------------- opening-paragraph rule (AOID2-FLOOR-OPENING-PARAGRAPH)
+
+BREAK_MSG = "floor is followed by further text in the same paragraph; a paragraph break is needed after the floor"
+
+
+def opening(tmp_path, comment):
+    app = {"A01": {"s1": {"panel_comment": comment}}}
+    code, out, _ = run(tmp_path, entry(sha256=sha(FLOOR)), app, {"floor.md": SECTION})
+    return single(out, "Z1"), out, code
+
+
+def test_opening_floor_then_break_then_notes_passes(tmp_path):
+    state, _, code = opening(tmp_path, FLOOR + "\n\nApproved note one.\n\nApproved note two.")
+    assert state == "TRANSFERRED" and code == 0
+
+
+def test_opening_floor_with_whitespace_around_break_passes(tmp_path):
+    state, _, _ = opening(tmp_path, FLOOR + "  \n \r\n\t\nNotes.")
+    assert state == "TRANSFERRED"
+
+
+def test_opening_floor_followed_by_text_in_same_paragraph_fails(tmp_path):
+    for tail in (" Further notes.", "\nNext line, no blank line."):
+        state, out, code = opening(tmp_path, FLOOR + tail)
+        assert state == "FAILED" and BREAK_MSG in out and code == 1
+
+
+def test_opening_floor_alone_passes(tmp_path):
+    state, _, code = opening(tmp_path, FLOOR)
+    assert state == "TRANSFERRED" and code == 0
+
+
+def test_opening_notes_before_floor_fail(tmp_path):
+    state, out, code = opening(tmp_path, "A note first.\n\n" + FLOOR)
+    assert state == "FAILED" and "opening paragraph differs from floor" in out and code == 1
+
+
+def test_opening_truncated_floor_fails(tmp_path):
+    state, out, code = opening(tmp_path, FLOOR[:-20] + "\n\nNotes.")
+    assert state == "FAILED" and "opening paragraph differs from floor" in out and BREAK_MSG not in out and code == 1
+
+
+def test_real_ledger_a4s6_a6s18_a11s19_transferred():
+    p = subprocess.run(["node", str(SCRIPT)], capture_output=True, text=True, encoding="utf-8", cwd=REPO)
+    st = states(p.stdout)
+    assert st[("A4-F3", None)] == "TRANSFERRED"
+    assert st[("A6-F9", "A06.s18")] == "TRANSFERRED"
+    assert st[("A11-F4", "A11.s19")] == "TRANSFERRED"
