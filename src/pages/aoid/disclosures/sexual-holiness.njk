@@ -1,0 +1,84 @@
+---js
+{
+  layout: "layouts/study.njk",
+  title: "Of Sexual Holiness: A Disclosure of Division",
+  pageTitle: "Of Sexual Holiness",
+  pageSubtitle: "A Disclosure of Division",
+  permalink: "/aoid/disclosures/sexual-holiness/",
+  description: "Why two teachings in Article 11 are set down as biblically anchored witness rather than as common ground: how sixteen Christian traditions stand on them, by their own adopted texts.",
+  eleventyExcludeFromCollections: true,
+  // Non-rendered record. Scored by Chat (CHAT-AOID2-18a), 9 Oct 2026, against WoP-Teaching-Practices-Standard.md.
+  teachingPracticesScore: {
+    score: "about 16/20 with the correction line (E5); 11/20 as built",
+    notApplicable: [2, 7],
+    gaps: [1, 5, 9],
+    gates: "met (G3 read as not applying to the adherent estimates codex B4 requires)",
+    scoredBy: "Chat (CHAT-AOID2-18a)",
+    scoredOn: "2026-10-09"
+  },
+  // Rendered from the disclosure source at build time, so later source edits flow through.
+  disclosure: (() => {
+    const fs = require("fs");
+    const path = require("path");
+    const md = require("markdown-it")({ html: false, linkify: false, typographer: false });
+    const defaultTable = md.renderer.rules.table_open || ((t, i, o, e, s) => s.renderToken(t, i, o));
+    md.renderer.rules.table_open = (t, i, o, e, s) => '<div class="disc-table-wrap">' + defaultTable(t, i, o, e, s);
+    md.renderer.rules.table_close = (t, i, o, e, s) => s.renderToken(t, i, o) + "</div>";
+    const src = fs.readFileSync(path.join(process.cwd(), "data-sources/aoid/disclosures/WoP_AOID2_SexualHoliness_Disclosure_Final_20261002.md"), "utf8").replace(/\r\n/g, "\n");
+    const lines = src.split("\n");
+    const at = (re, from) => { for (let i = from || 0; i < lines.length; i++) if (re.test(lines[i])) return i; throw new Error("disclosure anchor not found: " + re); };
+    const h = at(/^### Of Sexual Holiness: A Disclosure of Division$/);
+    const p3 = at(/^## Part 3\. /);
+    const gaps = at(/^## Gaps to fill/);
+    // Part 2 body: after the heading (carried by the page title) and the "Address" line, up to the rule before Part 3.
+    let body = lines.slice(h + 1, p3);
+    body = body.filter((l) => !/^\*Address: /.test(l));
+    while (body.length && /^(---)?\s*$/.test(body[body.length - 1])) body.pop();
+    // Part 3 record: drop the builder's instruction paragraph, stop before the rule preceding "Gaps to fill".
+    let rec = lines.slice(p3 + 1, gaps);
+    const instr = rec.findIndex((l) => /^Families are named here, in the apparatus/.test(l));
+    if (instr < 0) throw new Error("Part 3 instruction paragraph not found");
+    rec.splice(instr, 1);
+    while (rec.length && /^(---)?\s*$/.test(rec[rec.length - 1])) rec.pop();
+    return { body: md.render(body.join("\n")), record: md.render(rec.join("\n")) };
+  })()
+}
+---
+
+<style>
+.disc { max-width: 760px; margin: 0 auto; padding: 0 1.25rem; font-family: 'Crimson Pro', Georgia, serif; font-size: 1.1rem; line-height: 1.75; color: var(--cream); }
+.disc p, .disc li { opacity: .94; }
+.disc p { margin: 0 0 1rem; }
+.disc ul, .disc ol { margin: 0 0 1.1rem; padding-left: 1.5rem; }
+.disc li { margin-bottom: .5rem; }
+.disc strong { color: var(--gold-primary); font-weight: 600; }
+.disc a { color: var(--gold-primary); text-decoration: none; border-bottom: 1px dotted rgba(196,148,58,0.5); }
+.disc a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+.disc-record { margin: 2rem 0 1.5rem; }
+.disc-record > summary { cursor: pointer; list-style: none; font-size: 1.05rem; font-weight: 600; color: var(--gold-primary); padding: .5rem 0; }
+.disc-record > summary::-webkit-details-marker { display: none; }
+.disc-record > summary::before { content: '\25B8'; display: inline-block; margin-right: .5rem; transition: transform .2s; }
+.disc-record[open] > summary::before { transform: rotate(90deg); }
+.disc-record-body { font-size: .98rem; line-height: 1.65; padding-top: .5rem; }
+.disc-table-wrap { overflow-x: auto; margin: 0 0 1.25rem; }
+.disc table { border-collapse: collapse; width: 100%; font-size: .9rem; line-height: 1.5; }
+.disc th, .disc td { border: 1px solid rgba(196,148,58,0.2); padding: .45rem .6rem; text-align: left; vertical-align: top; }
+.disc th { color: var(--gold-primary); background: rgba(196,148,58,0.06); }
+.disc-correction { margin: 2.25rem 0 1rem; padding: .9rem 1.2rem; border-left: 3px solid rgba(196,148,58,0.55); background: rgba(196,148,58,0.06); border-radius: 0 4px 4px 0; font-size: 1rem; }
+.disc-correction p { margin: 0; }
+</style>
+
+<div class="disc">
+{{ disclosure.body | safe }}
+
+<details class="disc-record">
+<summary>The record behind the counts</summary>
+<div class="disc-record-body">
+{{ disclosure.record | safe }}
+</div>
+</details>
+
+<div class="disc-correction">
+<p>If you belong to one of these traditions and believe we have misread its teaching, please <a href="/connect/#contact">tell us</a>, and name the adopted text we should read.</p>
+</div>
+</div>
