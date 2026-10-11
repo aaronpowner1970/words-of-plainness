@@ -38,8 +38,8 @@
       var a=document.createElement('a');
       a.className='article-video-btn';
       a.href='/articles/video-'+m[1].slice(1)+'/';
-      a.setAttribute('aria-label','Watch the video reading of '+titleText);
-      a.innerHTML=icon()+'<span class="avb-label">Video</span>';
+      a.setAttribute('aria-label','Watch the video reading of '+titleText{% if aoidSecondEdition.on %}+' (First Edition)'{% endif %});
+      a.innerHTML=icon()+'<span class="avb-label">Video{% if aoidSecondEdition.on %} · First Edition{% endif %}</span>';
       var slidesBtn=section.querySelector('.article-slides-btn');
       var listenBtn=section.querySelector('.article-read-aloud-btn');
       if(slidesBtn){ slidesBtn.insertAdjacentElement('afterend', a); }

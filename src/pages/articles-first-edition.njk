@@ -1,0 +1,89 @@
+---js
+{
+  layout: "layouts/page.njk",
+  title: "Articles of Interfaith Discipleship: First Edition",
+  pageTitle: "Articles of Interfaith Discipleship",
+  pageSubtitle: "First Edition",
+  // Built only when the Second Edition switch is ON (src/_data/aoidSecondEdition.js);
+  // with the switch OFF there is no page at this address.
+  permalink: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "/articles/first-edition/" : false),
+  description: "The thirteen Articles of Interfaith Discipleship as first given, preserved unchanged as the First Edition.",
+  eleventyExcludeFromCollections: true,
+  // Record, not rendered. The text below is the Articles as they stood at commit
+  // c8999d1 (src/_includes/aoid/a01-a13.njk, copied byte for byte into
+  // src/_includes/aoid-first-edition/). Do not edit it: this page is the First Edition.
+  firstEditionSource: "c8999d1"
+}
+---
+
+<style>
+.fe { max-width: 760px; margin: 0 auto; padding: 0 1.25rem; font-family: 'Crimson Pro', Georgia, serif; font-size: 1.1rem; line-height: 1.75; color: var(--cream); }
+.fe-notice { margin: 0 0 2.25rem; padding: .9rem 1.2rem; border-left: 3px solid rgba(196,148,58,0.55); background: rgba(196,148,58,0.06); border-radius: 0 4px 4px 0; font-size: 1rem; }
+.fe-notice p { margin: 0; }
+.fe a { color: var(--gold-primary); text-decoration: none; border-bottom: 1px dotted rgba(196,148,58,0.5); }
+.fe a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+.fe-article { margin: 0 0 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(196,148,58,0.2); }
+.fe .article-title { font-size: 1.5rem; color: var(--gold-primary); margin: 0 0 .9rem; }
+.fe p { margin: 0 0 1rem; }
+.fe .article-footnote { font-size: .92rem; opacity: .85; }
+.fe .article-rjw { display: none; }
+</style>
+
+<div class="fe">
+<div class="fe-notice">
+<p><strong>First Edition.</strong> These are the thirteen Articles as first given, preserved here unchanged and read-only. The current <a href="/articles/">Second Edition (2026)</a> is on the Articles page.</p>
+</div>
+
+<section class="fe-article" id="first-edition-of-plainness">
+{% include "aoid-first-edition/a01.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-god">
+{% include "aoid-first-edition/a02.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-creation-and-life">
+{% include "aoid-first-edition/a03.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-gods-word">
+{% include "aoid-first-edition/a04.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-jesus-christ">
+{% include "aoid-first-edition/a05.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-salvation">
+{% include "aoid-first-edition/a06.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-the-kingdom-at-hand">
+{% include "aoid-first-edition/a07.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-fellow-believers">
+{% include "aoid-first-edition/a08.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-finding-our-way">
+{% include "aoid-first-edition/a09.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-living-by-grace">
+{% include "aoid-first-edition/a10.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-covenants-and-commitments">
+{% include "aoid-first-edition/a11.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-immortality-and-eternal-life">
+{% include "aoid-first-edition/a12.njk" %}
+</section>
+
+<section class="fe-article" id="first-edition-of-our-confidence">
+{% include "aoid-first-edition/a13.njk" %}
+</section>
+
+</div>

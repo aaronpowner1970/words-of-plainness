@@ -82,7 +82,17 @@ discordChannelId: ""
             allowfullscreen></iframe>
     </div>
     <p>We confess Christ openly and with joy, and ask no one to leave the tradition they love. It is in the spirit of "unity of faith" that we offer this olive branch — to all who would sit together and partake of His grace, and no less to any who come without that faith, curious or questioning: you are welcome here as a respected guest among friends, and we will not press our creeds upon you.</p>
-</div>
+</div>{% if aoidSecondEdition.on %}
+
+<!-- Second Edition (switch ON): Of Plainness is the Prologue, joined to the front matter, ahead of the counted Articles -->
+<style>
+.prologue-edition-note { font-style: italic; color: #C4943A; margin: 0 0 1.1rem; }
+.an-edition-tag { display: inline-block; margin-left: .45rem; font-size: .68em; letter-spacing: .05em; text-transform: uppercase; opacity: .8; }
+</style>
+<section class="article-section" id="of-plainness" data-audio="AP_A01_Plainness.mp3">
+    {{ banner("a01") }}
+{% set aoidPrologue = true %}{% include "aoid/a01.njk" %}
+</section>{% endif %}
 
 <!-- Pathways band — ways to begin (wires to existing podcast modal, contents drawer, and span apparatus) -->
 <h2 class="pw-heading">Learning Pathways</h2>
@@ -151,12 +161,13 @@ discordChannelId: ""
 <h2 class="pw-heading">The Articles</h2>
 <div class="articles-divider" aria-hidden="true"></div>
 
-<section class="article-section" id="of-plainness" data-audio="AP_A01_Plainness.mp3">
+{% if not aoidSecondEdition.on %}<section class="article-section" id="of-plainness" data-audio="AP_A01_Plainness.mp3">
     {{ banner("a01") }}
 {% include "aoid/a01.njk" %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
+{%- endif %}
 
 <section class="article-section" id="of-god" data-audio="AP_A02_God.mp3">
     {{ banner("a02") }}
@@ -365,12 +376,12 @@ discordChannelId: ""
         var a = document.createElement('a');
         a.className = 'article-film-btn';
         a.href = '/creation/';
-        a.setAttribute('aria-label', 'Watch the film: His Work and Glory');
+        a.setAttribute('aria-label', 'Watch the film: His Work and Glory{% if aoidSecondEdition.on %} (First Edition){% endif %}');
         a.innerHTML =
             '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" ' +
             'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
             '<path d="m22 8-6 4 6 4V8Z"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>' +
-            '<span>Watch the Film</span>';
+            '<span>Watch the Film{% if aoidSecondEdition.on %} · First Edition{% endif %}</span>';
         if (body) { section.insertBefore(a, body); } else { section.appendChild(a); }
     }
     if (document.readyState === 'loading') {

@@ -53,12 +53,12 @@
 </style>
 
 <button class="ps-poster" type="button" id="pwPresentation" aria-haspopup="dialog" aria-controls="psModal"
-        aria-label="Open the presentation — The Common Ground We Share, a visual walkthrough of the thirteen Articles">
+        aria-label="Open the presentation — The Common Ground We Share, a visual walkthrough of the thirteen Articles{% if aoidSecondEdition.on %} (First Edition){% endif %}">
   <img class="ps-poster-img" src="https://media.wordsofplainness.org/web/aoid-slides/slide-01.webp"
        alt="The Common Ground We Share — Presentation: Articles of Interfaith Discipleship" loading="lazy" decoding="async">
   <span class="ps-poster-badge" aria-hidden="true">
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
-    Open the presentation · 18 slides
+    Open the presentation · 18 slides{% if aoidSecondEdition.on %} · First Edition{% endif %}
   </span>
 </button>
 
@@ -274,9 +274,9 @@
       var b = document.createElement('button');
       b.className = 'article-slides-btn';
       b.type = 'button';
-      b.setAttribute('aria-label', 'Open presentation slide for ' + titleText);
+      b.setAttribute('aria-label', 'Open presentation slide for ' + titleText{% if aoidSecondEdition.on %} + ' (First Edition)'{% endif %});
       b.dataset.slide = slide;
-      b.innerHTML = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg><span class="asb-label">Slides</span>';
+      b.innerHTML = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg><span class="asb-label">Slides{% if aoidSecondEdition.on %} · First Edition{% endif %}</span>';
       var listenBtn = section.querySelector('.article-read-aloud-btn');
       if(listenBtn){ listenBtn.insertAdjacentElement('afterend', b); }
       else if(titleEl){ var next = titleEl.nextElementSibling; if(next){ section.insertBefore(b, next); } else { section.appendChild(b); } }
