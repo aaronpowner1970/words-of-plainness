@@ -21,7 +21,8 @@
  * `span` may be null, one span string, or a list of span strings; each span is checked on its own and
  * reported on its own. `floor_heading` may be a heading at level 2, 3 or 4 of the floor document.
  * The optional `floor_anchor` selects the floor inside a section that holds more than one blockquote
- * (see extractFloor). The rules are set out in data-sources/aoid/FLOOR_CHECK.md.
+ * (see extractFloor). The optional `floor_paragraph` (default 1) names which paragraph of a span's panel_comment
+ * holds the floor, for a span that carries two floors. The rules are set out in data-sources/aoid/FLOOR_CHECK.md.
  *
  * Usage:
  *   node scripts/aoid-verify-floors.js                  run the check
@@ -61,7 +62,17 @@ const sha = (s) => crypto.createHash("sha256").update(s, "utf8").digest("hex");
  * "\n\n" allowing whitespace around it), or all of it if there is none (AOID2-FLOOR-OPENING-PARAGRAPH).
  */
 function openingParagraph(pc) {
-  return pc.trim().split(/[ \t]*\r?\n[ \t]*\r?\n/)[0];
+  return paragraphAt(pc, 1);
+}
+
+/**
+ * The nth paragraph (1-based) of a panel_comment, paragraphs being separated as above. A span that carries
+ * two floors (A11 s21: 29a, then 29b) gives each floor its own paragraph; the ledger names the second by
+ * `floor_paragraph: 2`. Absent, the floor is the opening paragraph (n = 1), as ruled. Returns "" past the end.
+ */
+function paragraphAt(pc, n) {
+  const parts = pc.trim().split(/[ \t]*\r?\n[ \t]*\r?\n/);
+  return parts[n - 1] === undefined ? "" : parts[n - 1];
 }
 
 /** First difference between two strings, with a little context, for a failure message. */
@@ -180,6 +191,10 @@ for (const [n, e] of ledger.scored.entries()) {
   if ("floor_anchor" in e && (typeof e.floor_anchor !== "string" || !e.floor_anchor.trim())) {
     malformed("malformed ledger entry: floor_anchor, when given, must be a non-empty string"); continue;
   }
+  if ("floor_paragraph" in e && (!Number.isInteger(e.floor_paragraph) || e.floor_paragraph < 1)) {
+    malformed("malformed ledger entry: floor_paragraph, when given, must be a whole number of 1 or more"); continue;
+  }
+  const floorParagraph = "floor_paragraph" in e ? e.floor_paragraph : 1;
 
   const floor = extractFloor(path.join(ROOT, e.floor_document), e.floor_heading, "floor_anchor" in e ? e.floor_anchor : undefined);
   if (floor.error) { failAll(floor.error, spans); loud.push({ item: label, detail: floor.error }); continue; }
@@ -202,14 +217,16 @@ for (const [n, e] of ledger.scored.entries()) {
     if (!node) { u.detail = `span ${span} does not exist in apparatusData.json`; continue; }
     const pc = typeof node.panel_comment === "string" ? node.panel_comment : "";
     if (!norm(pc)) { u.detail = `span ${span} has no panel_comment`; continue; }
-    const open = norm(openingParagraph(pc));
+    const open = norm(floorParagraph === 1 ? openingParagraph(pc) : paragraphAt(pc, floorParagraph));
+    if (!open) { u.detail = `span ${span} has no paragraph ${floorParagraph} in its panel_comment`; continue; }
     if (open !== floor.text) {
       u.detail = open.startsWith(floor.text)
         ? "floor is followed by further text in the same paragraph; a paragraph break is needed after the floor"
         : `opening paragraph differs from floor: ${describeDiff(floor.text, open)}`;
       continue;
     }
-    u.state = "TRANSFERRED"; u.detail = "opening paragraph of panel_comment matches the ratified floor";
+    u.state = "TRANSFERRED";
+    u.detail = floorParagraph === 1 ? "opening paragraph of panel_comment matches the ratified floor" : `paragraph ${floorParagraph} of panel_comment matches the ratified floor`;
   }
 }
 

@@ -25,13 +25,17 @@
    time and never retyped: data-sources/aoid/second-edition/ holds a
    byte-identical copy of
    wop-scratch/WoP_AOID2_Step75_Prologue_ApprovedWording_20261011.md.
+   The three-principles sentence at the end of the edition note comes from
+   section 0 of the byte-identical copy of
+   wop-scratch/WoP_AOID2_Step79_Article11_ApprovedWording_20261012.md (step 79).
    ============================================================ */
 
 const fs = require('fs');
 const path = require('path');
 
 const WORDING = 'data-sources/aoid/second-edition/WoP_AOID2_Step75_Prologue_ApprovedWording_20261011.md';
-const FIRST_EDITION_URL = '/articles/first-edition/';
+const WORDING_79 = 'data-sources/aoid/second-edition/WoP_AOID2_Step79_Article11_ApprovedWording_20261012.md';
+const FIRST_EDITION_URL ='/articles/first-edition/';
 const SCRIPTURE = 'https://www.churchofjesuschrist.org/study/scriptures/nt/';
 
 const on = process.env.WOP_AOID2_SECOND_EDITION === '1';
@@ -71,9 +75,26 @@ else {
     .replace('1 Corinthians 12:3', '<a href="' + SCRIPTURE + '1-cor/12?lang=eng&amp;id=p3#p3" target="_blank" rel="noopener">1 Corinthians 12:3</a>')
     .replace('1 John 4:2', '<a href="' + SCRIPTURE + '1-jn/4?lang=eng&amp;id=p2#p2" target="_blank" rel="noopener">1 John 4:2</a>');
 
-  // Edition note: "First Edition" links to the preserved first-edition page.
-  mustHave(edition, 'First Edition');
-  const editionHtml = esc(edition).replace('First Edition', '<a href="' + FIRST_EDITION_URL + '">First Edition</a>');
+  // Edition note: the step 75 note, plus the three-principles sentence added at step 79
+  // (AOID2-THREE-PRINCIPLES-PLACEMENT). Step 79 section 0 gives the whole note with the new
+  // sentence after a ▶ marker; the part before the marker must equal the step 75 note exactly.
+  const added = (() => {
+    const src79 = fs.readFileSync(path.join(process.cwd(), WORDING_79), 'utf8').replace(/\r\n/g, '\n').split('\n');
+    const i = src79.findIndex((l) => /^## 0\. Prologue addition/.test(l));
+    if (i < 0) throw new Error('approved wording (step 79): section 0 not found');
+    let j = i + 1;
+    while (j < src79.length && !/^## /.test(src79[j])) j++;
+    const q = only(src79.slice(i + 1, j).filter((l) => l.startsWith('> ')), 'Prologue addition note').slice(2);
+    const parts = q.split(' ▶ ');
+    if (parts.length !== 2) throw new Error('approved wording (step 79): expected exactly one ▶ marker in the Prologue note');
+    if (parts[0] !== edition) throw new Error('approved wording (step 79): the note before ▶ differs from the step 75 note');
+    return parts[1];
+  })();
+  const editionFull = edition + ' ' + added;
+
+  // "First Edition" links to the preserved first-edition page.
+  mustHave(editionFull, 'First Edition');
+  const editionHtml = esc(editionFull).replace('First Edition', '<a href="' + FIRST_EDITION_URL + '">First Edition</a>');
 
   module.exports = {
     on: true,
@@ -82,7 +103,7 @@ else {
     heroLine: hero,
     boundary,
     boundaryHtml,
-    edition,
+    edition: editionFull,
     editionHtml,
   };
 }

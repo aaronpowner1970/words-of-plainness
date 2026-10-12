@@ -174,7 +174,7 @@ window.WOP_AOID_VIDEO = {
     youtube: {{ video.youtube | dump | safe }},
     articleUrl: "/articles/#{{ video.slug }}",
     timing: {{ (aoid_video_timing[video.code] or {}) | dump | safe }},
-    apparatus: {{ (apparatusData[video.code] or {}) | dump | safe }},
+    apparatus: {{ (apparatusShown[video.code] or {}) | dump | safe }},
     books: {{ (scriptures.books or {}) | dump | safe }},
     /* A3 · Correction channel. ONE config value governs the route
        (src/_data/site.json correctionUrl); empty hides the link entirely. */

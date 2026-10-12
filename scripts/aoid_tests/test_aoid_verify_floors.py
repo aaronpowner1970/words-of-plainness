@@ -276,10 +276,11 @@ def test_a2_f5_selects_amended_wording(tmp_path):
 
 # ---------------------------------------------------------------- the real ledger
 
-def test_real_ledger_29a_29b_pending_with_unchanged_hashes():
+def test_real_ledger_29a_29b_transferred_at_a11_s21_with_unchanged_hashes():
+    # Pending until step 79 (CODE-AOID2-29), when both floors were transcribed into A11 s21 (paragraphs 1 and 2).
     p = subprocess.run(["node", str(SCRIPT)], capture_output=True, text=True, encoding="utf-8", cwd=REPO)
     st = states(p.stdout)
-    assert st[("29a", None)] == "PENDING" and st[("29b", None)] == "PENDING"
+    assert st[("29a", None)] == "TRANSFERRED" and st[("29b", None)] == "TRANSFERRED"
     ledger = (REPO / "data-sources/aoid/floor_ledger.yaml").read_text(encoding="utf-8")
     assert "e7565fa2d367a2ad7a3bf9df823581860e024846d6a80b9a926dd459c31b5c3e" in ledger
     assert "bc7ffe63e994aca78e3ba533192efd43787dcee3df5eb3072c568289de04a35c" in ledger
@@ -333,3 +334,42 @@ def test_real_ledger_a4s6_a6s18_a11s19_transferred():
     assert st[("A4-F3", None)] == "TRANSFERRED"
     assert st[("A6-F9", "A06.s18")] == "TRANSFERRED"
     assert st[("A11-F4", "A11.s19")] == "TRANSFERRED"
+
+
+# ---------------------------------------------------------------- floor_paragraph (CODE-AOID2-29: a span that carries two floors)
+
+OTHER = "The Article confesses only what Psalm 2 confesses: the nations rage in vain. This is the floor."
+SECTION_2 = "## Z2. Second floor\n\n**Panel comment (the floor), ratified:**\n\n> " + OTHER + "\n\nWhy.\n"
+
+
+def two_floors(tmp_path, comment, second_extra="    floor_paragraph: 2\n"):
+    first = entry(item="Z1", sha256=sha(FLOOR))
+    second = entry(item="Z2", heading="Z2. Second floor", sha256=sha(OTHER)).replace("    span:", second_extra + "    span:")
+    app = {"A01": {"s1": {"panel_comment": comment}}}
+    return run(tmp_path, first + second, app, {"floor.md": SECTION + "\n" + SECTION_2})
+
+
+def test_floor_paragraph_two_floors_on_one_span_both_transfer(tmp_path):
+    code, out, _ = two_floors(tmp_path, FLOOR + "\n\n" + OTHER + "\n\nA note.")
+    assert single(out, "Z1") == "TRANSFERRED" and single(out, "Z2") == "TRANSFERRED" and code == 0
+
+
+def test_floor_paragraph_absent_reads_the_opening_paragraph_as_before(tmp_path):
+    code, out, _ = two_floors(tmp_path, FLOOR + "\n\n" + OTHER, second_extra="")
+    assert single(out, "Z1") == "TRANSFERRED" and single(out, "Z2") == "FAILED" and code == 1
+
+
+def test_floor_paragraph_wrong_paragraph_fails(tmp_path):
+    code, out, _ = two_floors(tmp_path, FLOOR + "\n\nA note.\n\n" + OTHER)
+    assert single(out, "Z2") == "FAILED" and "opening paragraph differs from floor" in out and code == 1
+
+
+def test_floor_paragraph_past_the_end_fails(tmp_path):
+    code, out, _ = two_floors(tmp_path, FLOOR, second_extra="    floor_paragraph: 3\n")
+    assert single(out, "Z2") == "FAILED" and "has no paragraph 3" in out and code == 1
+
+
+def test_floor_paragraph_malformed_values_fail(tmp_path):
+    for bad in ("0", "-1", "two", "1.5"):
+        code, out, _ = two_floors(tmp_path, FLOOR + "\n\n" + OTHER, second_extra=f"    floor_paragraph: {bad}\n")
+        assert single(out, "Z2") == "FAILED" and "floor_paragraph" in out and code == 1

@@ -16,7 +16,9 @@ Bracketed items are gaps to fill from the record before this leaves draft. They 
 
 One line, marked † at the close of the clause that carries A2-F1, "the Eternal Father of our spirits" (s1), so that the mark falls after "spirits" and before "whose purposes are good". It is not on "We believe in God" (s11), which every tradition confesses, nor on the sentence as a whole, whose other clauses (s12, s2) carry A2-F2 and reach the standard:
 
-> † This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions measured, seven teach in their own adopted texts that God is the Father of our spirits; none teaches otherwise; five hold no common position, and four are still being confirmed. That falls short of the more-than-four-in-five standard these Articles keep. See [*Of the Father of Spirits: A Disclosure of Witness*](/aoid/disclosures/father-of-spirits).
+> † This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions, measured by their own adopted texts, seven teach that God is the Father of our spirits; none teaches otherwise; five hold no common position, and four are still being confirmed. That falls short of the more-than-four-in-five standard these Articles keep. See [*Of the Father of Spirits: A Disclosure of Witness*](/aoid/disclosures/father-of-spirits).
+
+**Amended 12 Oct 2026 (AOID2-MEASURED-WORDING, option 3):** "Of sixteen Christian traditions measured, seven teach in their own adopted texts that God is" becomes "Of sixteen Christian traditions, measured by their own adopted texts, seven teach that God is". No other word changes.
 
 **Why it differs from the Sexual Holiness footnote in one place.** That footnote reports traditions *divided within themselves*. None is divided here, and codex C4(a)(ii) forbids calling silence disagreement, so this footnote says "none teaches otherwise" and reports the silent traditions as holding no common position. Every other word follows the earlier footnote's pattern.
 

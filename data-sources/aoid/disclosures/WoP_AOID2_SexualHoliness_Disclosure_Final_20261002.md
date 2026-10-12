@@ -17,9 +17,11 @@ Bracketed items are gaps to fill from the record before this leaves draft. They 
 
 One line, marked † on the clause that carries 29a and 29b (not on the G7 "marriage held in honor" words, which stand on their own footing):
 
-> † This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions measured, eleven teach in their own adopted texts that sexual relations belong within marriage, and ten that marriage is between a man and a woman; four are divided within themselves on the first and five on the second, and one holds no common position. That falls short of the more-than-four-in-five standard these Articles keep. See [*Of Sexual Holiness: A Disclosure of Division*](/aoid/disclosures/sexual-holiness).
+> † This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions, measured by their own adopted texts, eleven teach that sexual relations belong within marriage, and ten that marriage is between a man and a woman; four are divided within themselves on the first and five on the second, and one holds no common position. That falls short of the more-than-four-in-five standard these Articles keep. See [*Of Sexual Holiness: A Disclosure of Division*](/aoid/disclosures/sexual-holiness).
 
 **Accepted by Aaron on sixteen, 1 Oct 2026 ("yes").** Wording first accepted 1 Oct 2026 ("Use this footnote") on fifteen traditions at ten and nine. Under AOID2-HOLINESS-FAMILY the Holiness churches are now measured as family 16 and teach both (CODE-AOID2-05, reviewed 1 Oct 2026), so the figures become sixteen, eleven and ten; the divided counts (four and five) and the one family with no common position are unchanged, because Methodist stays divided without the Holiness churches. No other word changes. It makes no comparison with the other Articles until they are measured (AOID2-REMEASURE-SCOPE). It returns to Aaron again only if an open cell moves a figure.
+
+**Amended 12 Oct 2026 (AOID2-MEASURED-WORDING, option 3):** "Of sixteen Christian traditions measured, eleven teach in their own adopted texts" becomes "Of sixteen Christian traditions, measured by their own adopted texts, eleven teach". No other word changes.
 
 ---
 
