@@ -1,6 +1,9 @@
 ---js
 {
-  layout: "layouts/page.njk",
+  // With the switch OFF the page takes no part in the build: no layout, so header.njk is never reached.
+  eleventyComputed: {
+    layout: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "layouts/page.njk" : false),
+  },
   title: "Articles of Interfaith Discipleship: First Edition",
   pageTitle: "Articles of Interfaith Discipleship",
   pageSubtitle: "First Edition",
