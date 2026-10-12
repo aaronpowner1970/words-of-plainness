@@ -84,6 +84,14 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/css");
     eleventyConfig.addPassthroughCopy("src/js");
     eleventyConfig.addPassthroughCopy({"src/robots.txt": "robots.txt"});
+    // Article tabs (CODE-AOID2-26): these two files exist in the site only when the
+    // Second Edition switch is ON (src/_data/aoidSecondEdition.js), so an OFF build is unchanged.
+    if (process.env.WOP_AOID2_SECOND_EDITION === "1") {
+        eleventyConfig.addPassthroughCopy({
+            "src/aoid-second-edition/articles-tabs.css": "css/articles-tabs.css",
+            "src/aoid-second-edition/articles-tabs.js": "js/articles-tabs.js"
+        });
+    }
 
     // =========================================
     // BUILD ENVIRONMENT

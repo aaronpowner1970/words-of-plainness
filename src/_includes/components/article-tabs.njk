@@ -1,0 +1,48 @@
+{#- AOID2 Article tabs (CODE-AOID2-26). Switch ON only: articles.njk includes this in place of the
+    plain Article include. Set `tabCode` ("a02") before including. Data: src/_data/aoidArticleTabs.js.
+    The Article include is rendered unchanged and split into its title and its body, so the Declaration
+    is byte-for-byte what the plain page shows. The title stays a direct child of the section, as the
+    Listen / Slides / Video scripts expect; src/js/articles-tabs.js moves those buttons into the
+    Declaration tab. -#}
+{%- set t = aoidArticleTabs.articles[tabCode] -%}
+{%- set declSource -%}{% include "aoid/" + tabCode + ".njk" %}{%- endset -%}
+{%- set decl = aoidArticleTabs.split(declSource) -%}
+    {{ decl.title | safe }}
+    <div class="an-tabs" role="tablist" aria-label="Article {{ t.n }} views">
+        <button type="button" role="tab" id="{{ t.id }}-tab-declaration" aria-controls="{{ t.id }}-declaration" aria-selected="true" tabindex="0">Declaration</button>
+        <button type="button" role="tab" id="{{ t.id }}-tab-disclosure" aria-controls="{{ t.id }}-disclosure" aria-selected="false" tabindex="-1">Disclosure</button>
+        <button type="button" role="tab" id="{{ t.id }}-tab-record" aria-controls="{{ t.id }}-record" aria-selected="false" tabindex="-1">Record</button>
+    </div>
+    <div role="tabpanel" class="an-panel an-declaration" id="{{ t.id }}-declaration" aria-labelledby="{{ t.id }}-tab-declaration">
+        <div class="an-media" role="group" aria-label="Listen, slides and video"></div>
+    {{ decl.body | safe }}
+    </div>
+    <div role="tabpanel" class="an-panel an-prose" id="{{ t.id }}-disclosure" aria-labelledby="{{ t.id }}-tab-disclosure" hidden{% if t.source %} data-address="{{ t.source.address }}"{% endif %}>
+{%- if t.source %}
+        <h3 class="an-lead-title">{{ t.source.title }}</h3>
+        <p class="an-lead-sub">{{ t.source.subtitle }}</p>
+        <p class="an-permalink">Also at its own address: <a href="{{ t.source.address }}">{{ t.source.address }}</a></p>
+        {{ t.source.tab.body | safe }}
+        <p class="an-correction">{{ aoidDisclosures.correctionHtml | safe }}</p>
+{%- endif %}
+{%- if t.noteKey %}
+        <div class="an-note-slot" data-hold="{{ t.noteKey }}"></div>
+{%- endif %}
+{%- if t.disclosureLine %}
+        <p class="an-generated">{{ t.disclosureLine }}</p>
+{%- endif %}
+{%- if aoidArticleTabs.methodHtml %}
+        <section class="an-method">{{ aoidArticleTabs.methodHtml | safe }}</section>
+{%- endif %}
+    </div>
+    <div role="tabpanel" class="an-panel an-prose" id="{{ t.id }}-record" aria-labelledby="{{ t.id }}-tab-record" hidden>
+{%- if t.source %}
+        <h3 class="an-lead-title">The record behind the counts</h3>
+        <p class="an-lead-sub">Article {{ t.n }} · {{ t.source.title }}</p>
+        {{ t.source.tab.strips | safe }}
+        {{ t.source.tab.record | safe }}
+        <p class="an-correction">{{ aoidDisclosures.correctionHtml | safe }}</p>
+{%- else %}
+        <p class="an-generated">{{ t.recordLine }}</p>
+{%- endif %}
+    </div>

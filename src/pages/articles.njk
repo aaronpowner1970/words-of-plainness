@@ -171,84 +171,84 @@ discordChannelId: ""
 
 <section class="article-section" id="of-god" data-audio="AP_A02_God.mp3">
     {{ banner("a02") }}
-{% include "aoid/a02.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a02" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a02.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-creation-and-life" data-audio="AP_A03_CreationAndLife.mp3">
     {{ banner("a03") }}
-{% include "aoid/a03.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a03" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a03.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-gods-word" data-audio="AP_A04_GodsWord.mp3">
     {{ banner("a04") }}
-{% include "aoid/a04.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a04" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a04.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-jesus-christ" data-audio="AP_A05_JesusChrist.mp3">
     {{ banner("a05") }}
-{% include "aoid/a05.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a05" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a05.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-salvation" data-audio="AP_A06_Salvation.mp3">
     {{ banner("a06") }}
-{% include "aoid/a06.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a06" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a06.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-the-kingdom-at-hand" data-audio="AP_A07_KingdomAtHand.mp3">
     {{ banner("a07") }}
-{% include "aoid/a07.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a07" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a07.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-fellow-believers" data-audio="AP_A08_FellowBelievers.mp3">
     {{ banner("a08") }}
-{% include "aoid/a08.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a08" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a08.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-finding-our-way" data-audio="AP_A09_FindingOurWay.mp3">
     {{ banner("a09") }}
-{% include "aoid/a09.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a09" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a09.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-living-by-grace" data-audio="AP_A10_LivingByGrace.mp3">
     {{ banner("a10") }}
-{% include "aoid/a10.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a10" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a10.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-covenants-and-commitments" data-audio="AP_A11_CovenantsAndCommitments.mp3">
     {{ banner("a11") }}
-{% include "aoid/a11.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a11" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a11.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-immortality-and-eternal-life" data-audio="AP_A12_ImmortalityAndEternalLife.mp3">
     {{ banner("a12") }}
-{% include "aoid/a12.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a12" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a12.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider" aria-hidden="true"></div>
 
 <section class="article-section" id="of-our-confidence" data-audio="AP_A13_OurConfidence.mp3">
     {{ banner("a13") }}
-{% include "aoid/a13.njk" %}
+{% if aoidSecondEdition.on %}{% set tabCode = "a13" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a13.njk" %}{% endif %}
 </section>
 
 <div class="articles-divider articles-divider-closing" aria-hidden="true"></div>
@@ -382,7 +382,7 @@ discordChannelId: ""
             'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
             '<path d="m22 8-6 4 6 4V8Z"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>' +
             '<span>Watch the Film{% if aoidSecondEdition.on %} · First Edition{% endif %}</span>';
-        if (body) { section.insertBefore(a, body); } else { section.appendChild(a); }
+        if (body) { {% if aoidSecondEdition.on %}body.parentNode{% else %}section{% endif %}.insertBefore(a, body); } else { section.appendChild(a); }
     }
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', inject);

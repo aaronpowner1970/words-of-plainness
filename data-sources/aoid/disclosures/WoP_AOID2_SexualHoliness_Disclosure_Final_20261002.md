@@ -50,7 +50,7 @@ Each tradition measured is counted as a family: a church, or a group of churches
 15. Church of the East
 16. Holiness
 
-The Living Tree shows more branches than these sixteen. Which branches were measured, and which were not, is set out under "What the sixteen cover" at the end of this study.
+The Living Tree shows more branches than these sixteen. Which branches were measured, and which were not, is set out under "[What the sixteen cover](#what-the-sixteen-cover)".
 
 The list reaches beyond the historic creeds on purpose, because the Articles are offered to everyone who confesses Jesus' name. It includes:
 

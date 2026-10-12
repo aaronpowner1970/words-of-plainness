@@ -6,7 +6,8 @@
 <link rel="stylesheet" href="/css/read-aloud-study.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/articles-slides.css?v={{ site.version }}">
 <link rel="stylesheet" href="/css/wop-player.css?v={{ site.version }}">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap" rel="stylesheet">{% if aoidSecondEdition.on %}
+<link rel="stylesheet" href="/css/articles-tabs.css?v={{ site.version }}">{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -517,7 +518,8 @@
 <script src="/js/articles-panel.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-godeeper.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-howwehold.js?v={{ site.version }}" defer></script>
-<script src="/js/articles-progress.js?v={{ site.version }}" defer></script>
+<script src="/js/articles-progress.js?v={{ site.version }}" defer></script>{% if aoidSecondEdition.on %}
+<script src="/js/articles-tabs.js?v={{ site.version }}" defer></script>{% endif %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const progressFill = document.getElementById('readingProgressFill');
