@@ -34,7 +34,7 @@ var ARTICLE_TITLES = {
     'A07': 'Of the Kingdom at Hand', 'A08': 'Of Fellow Believers',
     'A09': 'Of Finding Our Way', 'A10': 'Of Living by Grace',
     'A11': 'Of Covenants and Commitments', 'A12': 'Of Immortality and Eternal Life',
-    'A13': 'Of Our Confidence'
+    'A13': 'Of Our Confidence', 'A14': 'Of Love for God and Neighbor'
 };
 
 function djArticleLabel(slug, pauseId) {

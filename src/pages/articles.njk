@@ -169,7 +169,15 @@ discordChannelId: ""
 <div class="articles-divider" aria-hidden="true"></div>
 {%- endif %}
 
-<section class="article-section" id="of-god" data-audio="AP_A02_God.mp3">
+{% if aoidSecondEdition.on %}<!-- Second Edition (switch ON): the new Article 1, Of Love for God and Neighbor (key A14), ahead of Of God. No audio, slides or film yet, so no data-audio. -->
+<section class="article-section" id="of-love-for-god-and-neighbor">
+    {{ banner("a14") }}
+{% set tabCode = "a14" %}{% include "components/article-tabs.njk" %}
+</section>
+
+<div class="articles-divider" aria-hidden="true"></div>
+
+{% endif %}<section class="article-section" id="of-god" data-audio="AP_A02_God.mp3">
     {{ banner("a02") }}
 {% if aoidSecondEdition.on %}{% set tabCode = "a02" %}{% include "components/article-tabs.njk" %}{% else %}{% include "aoid/a02.njk" %}{% endif %}
 </section>
@@ -255,7 +263,7 @@ discordChannelId: ""
 
 
 
-<script type="application/json" id="apparatusData">{{ apparatusData | dump | safe }}</script>
+<script type="application/json" id="apparatusData">{{ apparatusShown | dump | safe }}</script>
 
 <div class="articles-closing">
     <p class="articles-closing-intro"><em>These Articles are framed to gather us in one, as Jesus prayed to the Father (excerpt and arrangement):</em></p>

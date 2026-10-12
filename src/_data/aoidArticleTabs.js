@@ -49,7 +49,10 @@ const MarkdownIt = require('markdown-it');
 const disclosures = require('./aoidDisclosures.js');
 const howWeHold = require('./howWeHold.js');
 
-const TABBED = ['A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'A11', 'A12', 'A13'];
+const TABBED = ['A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'A11', 'A12', 'A13', 'A14'];
+
+// Displayed Article number where it differs from the key: the new Article 1 is keyed A14.
+const DISPLAYED_N = { A14: 1 };
 
 const METHOD_FILE = 'data-sources/aoid/method-account/method-account.md';
 
@@ -87,7 +90,7 @@ TABBED.forEach((code) => {
   articles[id] = {
     code,
     id,
-    n: Number(code.slice(1)),
+    n: DISPLAYED_N[code] || Number(code.slice(1)),
     source,                       // disclosure source: Part 2 -> Disclosure tab, Part 3 -> Record tab
     noteKey,                      // howWeHold key: its note is moved into the Disclosure tab
     disclosureLine: !source && !noteKey

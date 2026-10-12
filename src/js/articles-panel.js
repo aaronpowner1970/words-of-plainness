@@ -39,7 +39,11 @@
         A11: 'Of Covenants and Commitments',
         A12: 'Of Immortality and Eternal Life',
         A13: 'Of Our Confidence',
+        A14: 'Of Love for God and Neighbor',
     };
+
+    // Displayed Article number where it differs from the key (the new Article 1 is keyed A14)
+    var DISPLAYED_NUMBER = { A14: 1 };
 
     // ── Element references ────────────────────────────────────────
     var panel    = document.getElementById('apPanel');
@@ -257,7 +261,7 @@
 
         // Article label
         var artTitle = ARTICLE_TITLES[articleId] || articleId || '';
-        var artNum   = articleId ? parseInt(articleId.replace('A', ''), 10) : null;
+        var artNum   = articleId ? (DISPLAYED_NUMBER[articleId] || parseInt(articleId.replace('A', ''), 10)) : null;
         elArticleLabel.textContent = artNum ? ('Article ' + artNum + ': ' + artTitle) : artTitle;
 
         // Span data

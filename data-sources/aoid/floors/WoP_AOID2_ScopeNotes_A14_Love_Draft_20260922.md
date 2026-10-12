@@ -22,7 +22,7 @@ Items 15, 3, 4, 14 and 2 carry Declarations scores (92-99%). Items 9, 8 and 10 a
 > The Article confesses only what Matthew 22:36-40 confesses, quoting Deuteronomy 6:5 and Leviticus 19:18: the first and great commandment is to love the Lord our God with all our heart, soul and mind, the second is like unto it, to love our neighbor as ourselves, and on these two hang all the law and the prophets. This is the floor. The neighbor is not limited to those who share our faith (Luke 10:29-37). It does not settle how the two commandments order the rest of the law, or how love of God is expressed in worship; each tradition fills that in its own house.
 
 Cross-reference: the Prologue's span (now A01 s19) uses the same passage as the key to reading "what Christ taught." There, Matthew 22:40 is the hermeneutic. Here it is the commandment itself. The apparatus marks the pairing so the repetition reads as intended.
-Restoration column (ratified): D&C 59:5-6 (the two commandments restated in modern revelation); Moroni 7:45-48.
+Restoration column (ratified): D&C 59:5-6 (the two commandments restated in modern revelation); Moroni 7:45-48; D&C 18:10 (added by Aaron 12 Oct 2026).
 
 ## L2. The Golden Rule (item 3): RATIFIED by Aaron 22 Sep 2026, with 3 Nephi 14:12
 
@@ -62,11 +62,11 @@ Restoration column (ratified, Aaron's choice): Alma 8:19-21, with Alma 10:7-9 (A
 
 Restoration column (ratified): Articles of Faith 1:13 ("We believe in being honest, true…").
 
-## L8. Pray for the sick (item 10, unscored): RATIFIED by Aaron 22 Sep 2026, James quoted directly, with D&C 42:43-44
+## L8. Pray for the sick (item 10, unscored): RATIFIED by Aaron 22 Sep 2026, James quoted directly, with D&C 42:43-44; AMENDED AND RATIFIED by Aaron 12 Oct 2026
 
-> The Article confesses only what James 5:14-16 confesses: the disciple prays for the sick, and "the prayer of faith shall save the sick, and the Lord shall raise him up." This is the floor. It does not settle whether anointing the sick is a sacrament or ordinance, who may administer it, or which gifts of healing continue today; each tradition fills those in its own house.
+> The Article confesses only what James 5:14-16 confesses: the disciple prays for the sick, and "the prayer of faith shall save the sick, and the Lord shall raise him up"; and he prays as Christ prayed, "Thy will be done" (Matthew 6:10; 26:39, 42). This is the floor. It does not settle whether anointing the sick is a sacrament or ordinance, who may administer it, which gifts of healing continue today, or why some who are prayed for in faith are not healed; each tradition fills those in its own house.
 
-Why the exclusion matters: Catholic, Orthodox and Latter-day Saint readers hold anointing as a sacrament or priesthood ordinance; many others do not. The ordinance stays in the Restoration column (ratified: D&C 42:43-44). R6's continuation question does not re-enter here.
+Why the exclusion matters: Catholic, Orthodox and Latter-day Saint readers hold anointing as a sacrament or priesthood ordinance; many others do not. The ordinance stays in the Restoration column (ratified: D&C 42:43-44; D&C 42:46-48 added by Aaron 12 Oct 2026). R6's continuation question does not re-enter here.
 
 ---
 
@@ -84,3 +84,12 @@ Restoration column (ratified): Articles of Faith 1:12 ("We believe in being subj
 
 Why the last exclusion matters: the floor must not read as a judgment on the sick, the aged or the disabled. Ephesians 4:28 turns the teaching outward, toward giving, which ties it to L5.
 Restoration column (ratified): D&C 42:42 ("Thou shalt not be idle"); D&C 75:28-29.
+
+---
+
+## L11. A new commandment (RATIFIED by Aaron 12 Oct 2026; unscored)
+
+> The Article confesses only what John 13:34-35 confesses: Christ gave His disciples a new commandment, that they love one another as He has loved them, and by this all men shall know that they are His disciples. This is the floor. It does not settle who counts as "one another," the bounds of the Church, or what visible unity among Christians requires; each tradition fills those in its own house.
+
+Why the exclusion matters: ecclesiology is where traditions that understand themselves as the Church part ways (the Article 8 persona finding).
+Restoration column (ratified): D&C 88:123; 4 Nephi 1:15-17; Mosiah 18:8-9.

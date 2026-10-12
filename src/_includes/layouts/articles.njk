@@ -131,7 +131,8 @@
     <nav class="an-drawer-nav" aria-label="Jump to article">
         <ol class="an-drawer-list">
             <li><a href="#of-plainness"              class="an-link"><span class="an-num">1</span>Of Plainness</a></li>
-            <li><a href="#of-god"                    class="an-link"><span class="an-num">2</span>Of God</a></li>
+            {% if aoidSecondEdition.on %}<li><a href="#of-love-for-god-and-neighbor" class="an-link"><span class="an-num">1</span>Of Love for God and Neighbor</a></li>
+            {% endif %}<li><a href="#of-god"                    class="an-link"><span class="an-num">2</span>Of God</a></li>
             <li><a href="#of-creation-and-life"      class="an-link"><span class="an-num">3</span>Of Creation and Life</a></li>
             <li><a href="#of-gods-word"              class="an-link"><span class="an-num">4</span>Of God’s Word</a></li>
             <li><a href="#of-jesus-christ"           class="an-link"><span class="an-num">5</span>Of Jesus Christ</a></li>
@@ -508,7 +509,7 @@
 
 {% block scripts %}
 <!-- Apparatus data (build-time JSON embed) -->
-<script type="application/json" id="apparatusData">{{ (apparatusData if apparatusData else {}) | dump | safe }}</script>
+<script type="application/json" id="apparatusData">{{ (apparatusShown if apparatusShown else {}) | dump | safe }}</script>
 <!-- The site's own scripture book map, so the panel can link its references
      through the same rules the reading dock uses (js/apparatus-common.js). -->
 <script type="application/json" id="scriptureBooks">{{ (scriptures.books or {}) | dump | safe }}</script>
