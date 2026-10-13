@@ -5,7 +5,7 @@
  * because the floor check (scripts/aoid-verify-floors.js) reads that file. The Second Edition
  * switch (src/_data/aoidSecondEdition.js) keeps A14 off the public page: with the switch OFF
  * the embedded data is the thirteen First Edition Articles exactly as before; with it ON it is
- * the whole file. The same holds for the Article 11 spans s20-s25 (CODE-AOID2-29), the Article 9 additions (CODE-AOID2-32), the Article 13 span s12 (CODE-AOID2-34) and the Article 4 span s19 (CODE-AOID2-35).
+ * the whole file. The same holds for the Article 11 spans s20-s25 (CODE-AOID2-29), the Article 9 additions (CODE-AOID2-32), the Article 13 span s12 (CODE-AOID2-34) the Article 4 span s19 (CODE-AOID2-35) and the Article 5 spans s17-s18 (CODE-AOID2-36).
  */
 const all = require('./apparatusData.json');
 const { on } = require('./aoidSecondEdition.js');
@@ -26,6 +26,9 @@ const A13_SECOND_EDITION = ['s12'];
 
 /* Article 4 (CODE-AOID2-35, step 79): span s19 is new (the apostolic witness, G1), so it is dropped with the switch OFF. */
 const A04_SECOND_EDITION = ['s19'];
+
+/* Article 5 (CODE-AOID2-36, step 79): spans s17 (G13) and s18 (G2) are new, so they are dropped with the switch OFF. */
+const A05_SECOND_EDITION = ['s17', 's18'];
 
 const firstEditionAnchor = (a) => {
   const { second_edition, comment_first_edition, ...rest } = a;
@@ -62,6 +65,7 @@ module.exports = on
           if (key === 'A11') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A11_SECOND_EDITION.includes(id)))];
           if (key === 'A09') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A09_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A04') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A04_SECOND_EDITION.includes(id)))];
+          if (key === 'A05') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A05_SECOND_EDITION.includes(id)))];
           if (key === 'A13') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A13_SECOND_EDITION.includes(id)))];
           return [key, spans];
         })
