@@ -14,6 +14,34 @@ permalink: /music/
      /js/wop-player.js (shared with /articles/ and chapter pages). -->
 <div class="music-layout">
 
+{#- Row actions: Listen (always) + Watch (only when a youtubeId exists). The Watch
+    slot is always emitted so the two columns stay aligned down the table. -#}
+{%- macro rowActions(title, style, youtubeId) -%}
+{%- set full = title + (' (' + style + ')' if style else '') -%}
+<td class="col-actions">
+    <div class="row-actions">
+        <span class="row-action-slot">
+            <button type="button" class="row-action-btn" data-action="listen"
+                    aria-label="Listen to {{ full }}">
+                <svg class="row-action-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>
+                <span class="row-action-label">Listen</span>
+            </button>
+        </span>
+        <span class="row-action-slot{% if not youtubeId %} row-action-slot--empty{% endif %}">
+            {%- if youtubeId %}
+            <button type="button" class="row-action-btn" data-action="watch"
+                    data-youtube-id="{{ youtubeId }}" data-video-title="{{ full }}"
+                    aria-label="Watch the video of {{ full }}"
+                    aria-haspopup="dialog">
+                <svg class="row-action-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15.033 9.44a.647.647 0 0 1 0 1.12l-4.065 2.352a.645.645 0 0 1-.968-.56V7.648a.645.645 0 0 1 .968-.56z"/><path d="M12 17v4"/><path d="M8 21h8"/><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
+                <span class="row-action-label">Watch</span>
+            </button>
+            {%- endif %}
+        </span>
+    </div>
+</td>
+{%- endmacro -%}
+
 <!-- ==========================================
      Page Content
      ========================================== -->
@@ -72,6 +100,7 @@ permalink: /music/
                     <th class="col-num">#</th>
                     <th class="col-title">Title</th>
                     <th class="col-chapter">Chapter</th>
+                    <th class="col-actions"><span class="visually-hidden">Listen or watch</span></th>
                     <th class="col-duration">Duration</th>
                 </tr>
             </thead>
@@ -88,6 +117,7 @@ permalink: /music/
                         </div>
                     </td>
                     <td class="col-chapter"></td>
+                    {{ rowActions(item.title, item.label, item.youtubeId) }}
                     <td class="col-duration" data-duration>{{ item.duration if item.duration else '&mdash;' | safe }}</td>
                 </tr>
                 {%- set trackNum = trackNum + 1 -%}
@@ -95,7 +125,7 @@ permalink: /music/
 
                 <!-- Section 1: The Core Journey (Primaries) -->
                 <tr class="playlist-section-divider">
-                    <td colspan="4">
+                    <td colspan="5">
                         <div class="playlist-section-header playlist-section-header--inline">
                             <h2 class="section-title">Core Discipleship Journey</h2>
                             <p class="section-subtitle">The core musical testimony, chapter by chapter</p>
@@ -118,6 +148,7 @@ permalink: /music/
                     <td class="col-chapter">
                         <a href="{{ chapter.url }}" class="chapter-link">Ch. {{ chapter.data.chapter }}</a>
                     </td>
+                    {{ rowActions(chapter.data.audio.testimony.title, chapter.data.audio.testimony.label, chapter.data.audio.testimony.youtubeId) }}
                     <td class="col-duration" data-duration>{{ chapter.data.audio.testimony.duration if chapter.data.audio.testimony.duration else '&mdash;' | safe }}</td>
                 </tr>
                 {%- set trackNum = trackNum + 1 -%}
@@ -126,7 +157,7 @@ permalink: /music/
 
                 <!-- Section 2: More Arrangements (Alternates) -->
                 <tr class="playlist-section-divider" id="altSectionDivider">
-                    <td colspan="4">
+                    <td colspan="5">
                         <div class="playlist-section-header playlist-section-header--inline">
                             <h2 class="section-title">Alternate Arrangements</h2>
                             <p class="section-subtitle">The same truths in different musical languages</p>
@@ -148,6 +179,7 @@ permalink: /music/
                         </div>
                     </td>
                     <td class="col-chapter"></td>
+                    {{ rowActions(item.title, alt.label, alt.youtubeId) }}
                     <td class="col-duration" data-duration>{{ alt.duration if alt.duration else '&mdash;' | safe }}</td>
                 </tr>
                 {%- set trackNum = trackNum + 1 -%}
@@ -171,6 +203,7 @@ permalink: /music/
                     <td class="col-chapter">
                         <a href="{{ chapter.url }}" class="chapter-link">Ch. {{ chapter.data.chapter }}</a>
                     </td>
+                    {{ rowActions(chapter.data.audio.testimony.title, alt.label, alt.youtubeId) }}
                     <td class="col-duration" data-duration>{{ alt.duration if alt.duration else '&mdash;' | safe }}</td>
                 </tr>
                 {%- set trackNum = trackNum + 1 -%}
@@ -188,6 +221,21 @@ permalink: /music/
 </div>
 
 </div><!-- /.music-layout -->
+
+<!-- Video modal: the iframe is created on open and removed on close. -->
+<div class="video-modal" id="videoModal" hidden>
+    <div class="video-modal-backdrop" data-close></div>
+    <div class="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+        <div class="video-modal-head">
+            <h2 class="video-modal-title" id="videoModalTitle"></h2>
+            <button type="button" class="video-modal-close" id="videoModalClose" aria-label="Close video">&times;</button>
+        </div>
+        <div class="video-modal-frame" id="videoModalFrame"></div>
+        <div class="video-modal-foot">
+            <a id="videoModalYt" href="#" target="_blank" rel="noopener">Open on YouTube</a>
+        </div>
+    </div>
+</div>
 
 {% block scripts %}
 <script>window.WOP_MUSIC_CATALOG = {{ collections.chapters | musicCatalog | safe }};</script>
@@ -240,10 +288,82 @@ permalink: /music/
         document.querySelectorAll('.playlist-row[data-play-file]').forEach(function (row) {
             row.addEventListener('click', function (e) {
                 if (e.target.closest('a')) return;   // let chapter-link anchors navigate
+                if (e.target.closest('[data-action="watch"]')) return;   // Watch opens the video modal, not the player
                 var file = row.getAttribute('data-play-file');
                 if (file && window.WopPlayer) window.WopPlayer.play(file);
             });
         });
+
+        // ---- Video modal ----
+        var modal = document.getElementById('videoModal');
+        var frameBox = document.getElementById('videoModalFrame');
+        var modalTitle = document.getElementById('videoModalTitle');
+        var ytLink = document.getElementById('videoModalYt');
+        var closeBtn = document.getElementById('videoModalClose');
+        var opener = null;
+
+        function focusables() {
+            return Array.prototype.slice.call(modal.querySelectorAll('button, a[href], iframe'));
+        }
+
+        function openVideo(btn) {
+            var id = btn.getAttribute('data-youtube-id');
+            if (!id || !/^[\w-]{11}$/.test(id)) return;
+            opener = btn;
+            // Pause the built-in player; its queue and position are left alone.
+            try { if (window.WopPlayer && window.WopPlayer.audio) window.WopPlayer.audio.pause(); } catch (_) {}
+            var title = btn.getAttribute('data-video-title') || '';
+            modalTitle.textContent = title;
+            var ifr = document.createElement('iframe');
+            ifr.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+            ifr.title = 'Video: ' + title;
+            ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
+            ifr.setAttribute('allowfullscreen', '');
+            ifr.referrerPolicy = 'strict-origin-when-cross-origin';
+            frameBox.appendChild(ifr);
+            ytLink.href = 'https://youtu.be/' + id;
+            ytLink.setAttribute('aria-label', 'Open ' + title + ' on YouTube (new tab)');
+            var sbw = window.innerWidth - document.documentElement.clientWidth;
+            document.body.style.overflow = 'hidden';
+            if (sbw > 0) document.body.style.paddingRight = sbw + 'px';
+            modal.hidden = false;
+            closeBtn.focus();
+            document.addEventListener('keydown', onKey, true);
+            document.addEventListener('focusin', onFocusIn, true);
+        }
+
+        function closeVideo() {
+            if (modal.hidden) return;
+            document.removeEventListener('keydown', onKey, true);
+            document.removeEventListener('focusin', onFocusIn, true);
+            frameBox.textContent = '';   // removing the iframe stops playback
+            modal.hidden = true;
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '';
+            if (opener) { try { opener.focus(); } catch (_) {} }
+            opener = null;
+        }
+
+        function onKey(e) {
+            if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeVideo(); return; }
+            if (e.key !== 'Tab') return;
+            var f = focusables();
+            if (!f.length) return;
+            var first = f[0], last = f[f.length - 1];
+            if (!modal.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+            else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+
+        function onFocusIn(e) {
+            if (!modal.hidden && !modal.contains(e.target)) closeBtn.focus();
+        }
+
+        document.querySelectorAll('.row-action-btn[data-action="watch"]').forEach(function (btn) {
+            btn.addEventListener('click', function (e) { e.stopPropagation(); openVideo(btn); });
+        });
+        modal.addEventListener('click', function (e) { if (e.target.hasAttribute('data-close')) closeVideo(); });
+        closeBtn.addEventListener('click', closeVideo);
 
         // Continuous play switch (default on; only 'off' is stored).
         var contBtn = document.getElementById('continuousToggle');

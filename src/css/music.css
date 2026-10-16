@@ -861,3 +861,205 @@
     outline: 2px solid var(--gold-primary, #C4943A);
     outline-offset: 2px;
 }
+
+/* =========================================
+   Row actions — Listen / Watch
+   ========================================= */
+
+.playlist-table th.col-actions {
+    width: 14.5rem;
+}
+
+.playlist-row td.col-actions {
+    white-space: nowrap;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.row-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+/* Fixed-width slots keep Listen and Watch in the same column on every row,
+   whether or not the row has a video. */
+.row-action-slot {
+    display: block;
+    width: 6.75rem;
+    min-height: 44px;
+}
+
+.row-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 0.75rem;
+    background: transparent;
+    color: var(--gold-primary, #C4943A);
+    border: 1px solid var(--gold-primary, #C4943A);
+    border-radius: var(--radius-md, 8px);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.row-action-btn:hover {
+    background: var(--gold-primary, #C4943A);
+    color: #000;
+}
+
+.row-action-btn:focus-visible {
+    outline: 2px solid var(--gold-light, #D4A84A);
+    outline-offset: 2px;
+}
+
+.row-action-icon {
+    flex-shrink: 0;
+}
+
+/* =========================================
+   Video modal
+   ========================================= */
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.video-modal[hidden] {
+    display: none;
+}
+
+.video-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.82);
+}
+
+.video-modal-dialog {
+    position: relative;
+    width: min(960px, 100%);
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #0d0d0d;
+    border: 1px solid rgba(196, 148, 58, 0.35);
+    border-radius: var(--radius-lg, 12px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+.video-modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.25rem 0.5rem 0.25rem 1rem;
+}
+
+.video-modal-title {
+    margin: 0;
+    font-family: var(--font-serif, 'Crimson Pro', serif);
+    font-size: 1.1rem;
+    color: var(--cream, #E8DCC4);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.video-modal-close {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    color: var(--cream, #E8DCC4);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.video-modal-close:hover {
+    color: var(--gold-primary, #C4943A);
+}
+
+.video-modal-close:focus-visible,
+.video-modal-foot a:focus-visible {
+    outline: 2px solid var(--gold-light, #D4A84A);
+    outline-offset: 2px;
+}
+
+.video-modal-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.video-modal-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.video-modal-foot {
+    padding: 0 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.video-modal-foot a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--gold-primary, #C4943A);
+    font-size: 0.9rem;
+}
+
+/* Phone: stack the two buttons so labels stay visible and the title keeps room.
+   An absent Watch slot collapses here (nothing to align against). */
+@media (max-width: 600px) {
+    .playlist-table th.col-actions {
+        width: 7rem;
+    }
+
+    .row-actions {
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: flex-end;
+    }
+
+    .row-action-slot {
+        width: 6.25rem;
+    }
+
+    .row-action-slot--empty {
+        display: none;
+    }
+
+    .row-action-btn {
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .video-modal-title {
+        white-space: normal;
+        font-size: 1rem;
+        line-height: 1.25;
+    }
+}

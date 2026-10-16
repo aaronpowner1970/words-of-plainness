@@ -23,6 +23,7 @@ audio:
     file: "10_01_He_Always_Knew_Me_Cinematic_Worship.mp3"
     title: "He Always Knew Me"
     label: "Cinematic Worship"
+    youtubeId: "n-obHcaDkfU"
     description: "A sacred cinematic testimony of the cross, the tomb, and the morning He spoke your name."
     lyricsUrl: /assets/lyrics/10_01_He_Always_Knew_Me_Cinematic_Worship.vtt
     alternates:
@@ -30,6 +31,7 @@ audio:
         lyricsSameAs: 10_01_He_Always_Knew_Me_Cinematic_Worship
         lyricsUrl: /assets/lyrics/10_02_He_Always_Knew_Me_Contemporary_Christian.vtt
         label: "Contemporary Christian"
+        youtubeId: "7v9KIWfz3dU"
       - file: "10_03_He_Always_Knew_Me_Gospel_Soul.mp3"
         lyricsSameAs: 10_01_He_Always_Knew_Me_Cinematic_Worship
         lyricsUrl: /assets/lyrics/10_03_He_Always_Knew_Me_Gospel_Soul.vtt
