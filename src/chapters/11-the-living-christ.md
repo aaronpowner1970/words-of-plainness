@@ -22,6 +22,7 @@ audio:
   overviewLabel: "Podcast Discussion"
   testimony:
     file: "11_01_Panteles_Sacred_Ballad.mp3"
+    duration: "4:40"
     title: "Panteles"
     label: "Sacred Ballad"
     description: "A sacred ballad on the reach of Christ — completely, for all time, for anyone."

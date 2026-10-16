@@ -21,6 +21,7 @@ audio:
   overviewDuration: "8:31"
   testimony:
     file: "10_01_He_Always_Knew_Me_Cinematic_Worship.mp3"
+    duration: "5:49"
     title: "He Always Knew Me"
     label: "Cinematic Worship"
     youtubeId: "n-obHcaDkfU"
@@ -28,11 +29,13 @@ audio:
     lyricsUrl: /assets/lyrics/10_01_He_Always_Knew_Me_Cinematic_Worship.vtt
     alternates:
       - file: "10_02_He_Always_Knew_Me_Contemporary_Christian.mp3"
+        duration: "4:36"
         lyricsSameAs: 10_01_He_Always_Knew_Me_Cinematic_Worship
         lyricsUrl: /assets/lyrics/10_02_He_Always_Knew_Me_Contemporary_Christian.vtt
         label: "Contemporary Christian"
         youtubeId: "7v9KIWfz3dU"
       - file: "10_03_He_Always_Knew_Me_Gospel_Soul.mp3"
+        duration: "7:20"
         lyricsSameAs: 10_01_He_Always_Knew_Me_Cinematic_Worship
         lyricsUrl: /assets/lyrics/10_03_He_Always_Knew_Me_Gospel_Soul.vtt
         label: "Gospel Soul"

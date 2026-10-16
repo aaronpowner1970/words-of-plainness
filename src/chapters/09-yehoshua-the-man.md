@@ -27,6 +27,7 @@ audio:
     lyricsUrl: /assets/lyrics/09_01_Established_in_Him_Sacred_Americana.vtt
     alternates:
       - file: "09_02_Established_in_Him_Contemporary_Christian.mp3"
+        duration: "5:01"
         lyricsUrl: /assets/lyrics/09_02_Established_in_Him_Contemporary_Christian.vtt
         lyrics: |
           <p class="verse">You call me forward into who You always knew I was.<br>
