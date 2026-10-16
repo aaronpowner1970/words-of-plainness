@@ -70,22 +70,23 @@ permalink: /music/
          ========================================== -->
     <div class="playlist-container">
 
-        <!-- Queue-scope toggle — governs which rows are in the auto-advance,
-             shuffle, and repeat queue. Individual rows stay clickable in
-             both modes; the toggle only bounds the queue. Persisted in
-             localStorage as 'wop-music-queue-scope' ('core' | 'full'). -->
-        <div class="queue-scope" id="queueScope" role="radiogroup" aria-label="Queue scope">
-            <button type="button" class="queue-scope-btn" data-scope="core"
-                    role="radio" aria-checked="true">Core Journey</button>
-            <button type="button" class="queue-scope-btn" data-scope="full"
-                    role="radio" aria-checked="false">Full Collection</button>
-        </div>
-
-        <!-- Continuous play: when one arrangement ends the next starts (on by default,
-             remembered per browser as 'wop-music-continuous' = 'off' when switched off). -->
-        <div class="queue-scope" id="continuousScope">
-            <button type="button" class="queue-scope-btn" id="continuousToggle"
-                    role="switch" aria-checked="true">Continuous play: On</button>
+        <!-- Options row: label, Continuous play (aria-pressed), then the collection-scope
+             segmented toggle (radiogroup). Scope governs which rows are in the auto-advance,
+             shuffle, and repeat queue; individual rows stay clickable in both modes.
+             Scope is persisted in localStorage as 'wop-music-queue-scope' ('core' | 'full');
+             continuous play as 'wop-music-continuous' = 'off' when switched off. -->
+        <div class="options-row" role="group" aria-labelledby="optionsLabel">
+            <span class="options-label" id="optionsLabel">Options:</span>
+            <div class="queue-scope" id="continuousScope">
+                <button type="button" class="queue-scope-btn" id="continuousToggle"
+                        aria-pressed="true">Continuous play: On</button>
+            </div>
+            <div class="queue-scope" id="queueScope" role="radiogroup" aria-label="Collection">
+                <button type="button" class="queue-scope-btn" data-scope="core"
+                        role="radio" aria-checked="true">Core Collection</button>
+                <button type="button" class="queue-scope-btn" data-scope="full"
+                        role="radio" aria-checked="false">Full Collection</button>
+            </div>
         </div>
 
         <!-- Section 0: Ministry Collection -->
@@ -370,7 +371,7 @@ permalink: /music/
         function setCont(on) {
             if (window.WopPlayer) window.WopPlayer.setContinuous(on);
             if (contBtn) {
-                contBtn.setAttribute('aria-checked', on ? 'true' : 'false');
+                contBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
                 contBtn.textContent = 'Continuous play: ' + (on ? 'On' : 'Off');
             }
         }

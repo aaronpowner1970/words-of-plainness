@@ -829,16 +829,29 @@
 .queue-scope {
     display: inline-flex;
     gap: 0;
-    margin: 0 auto 1.25rem;
+    margin: 0;
     padding: 3px;
+    box-sizing: border-box;
     background: rgba(196, 148, 58, 0.10);
     border: 1px solid rgba(196, 148, 58, 0.35);
     border-radius: 999px;
-    align-self: center;
 }
-.playlist-container > .queue-scope {
+
+/* Options row: label + Continuous play + collection toggle, left-aligned
+   with the section headings (1rem inset). */
+.options-row {
     display: flex;
-    width: fit-content;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    padding: 1rem 1rem 0;
+}
+.options-label {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.85rem;
+    line-height: 1;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.7;
 }
 .queue-scope-btn {
     background: transparent;
@@ -848,11 +861,14 @@
     border-radius: 999px;
     font-family: 'Crimson Pro', Georgia, serif;
     font-size: 0.85rem;
+    line-height: 1.25;
+    min-height: 32px;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
 }
 .queue-scope-btn:hover { color: var(--gold-light, #D4A84A); }
-.queue-scope-btn[aria-checked="true"] {
+.queue-scope-btn[aria-checked="true"],
+.queue-scope-btn[aria-pressed="true"] {
     background: var(--gold-primary, #C4943A);
     color: #1F1012;
     font-weight: 600;
@@ -1061,5 +1077,18 @@
         white-space: normal;
         font-size: 1rem;
         line-height: 1.25;
+    }
+}
+
+/* Narrow: "Options:" + Continuous play on line 1, collection toggle full-width on line 2. */
+@media (max-width: 480px) {
+    .options-row {
+        padding: 1rem 0.75rem 0;
+    }
+    #queueScope {
+        flex: 1 1 100%;
+    }
+    #queueScope .queue-scope-btn {
+        flex: 1 1 0;
     }
 }
