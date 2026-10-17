@@ -36,7 +36,7 @@ export const CATEGORY_RULES = [
   { category: 'Appendices', test: (p) => p.startsWith('/appendices/') || p.startsWith('/appendix/') },
   { category: 'Music', test: (p) => p === '/music/' || p.startsWith('/concert/') },
   { category: 'Narrations and Podcasts', test: (p) => p === '/narrations/' },
-  { category: 'Discipleship Apps', test: (p) => p === '/discipleship/' || p.startsWith('/seeking-jesus/') || p === '/my-reflections/' },
+  { category: 'Discipleship Apps', test: (p) => p === '/discipleship/' || p.startsWith('/seeking-jesus/') },
 ];
 export function categorize(p) {
   const r = CATEGORY_RULES.find((x) => x.test(p));
