@@ -20,6 +20,11 @@
  *   X_ACCESS_SECRET — OAuth access token secret
  *   FACEBOOK_PAGE_ID — Facebook Page ID
  *   FACEBOOK_PAGE_TOKEN — permanent Page Access Token
+ *
+ * Optional pause switch:
+ *   NOTIFY_PAUSED — set to 1 to make this endpoint do nothing (no feed fetch, no marker
+ *   read or write, no Discord/X/Facebook post). Unset or any other value: normal behavior.
+ *   Used while the Lantern Post owns social posting (Phase 3).
  */
 
 const crypto = require('crypto');
@@ -38,6 +43,11 @@ module.exports = async (req, res) => {
 
   if (!authToken || authToken !== process.env.NOTIFY_SECRET) {
     return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  // Pause switch: checked after auth so only the owner can learn the state.
+  if (process.env.NOTIFY_PAUSED === '1') {
+    return res.status(200).json({ action: 'paused', reason: 'NOTIFY_PAUSED=1' });
   }
 
   const djangoBase = process.env.DJANGO_API_URL || 'https://apowner.pythonanywhere.com';
