@@ -36,6 +36,16 @@ Where it goes: Article 8 speaks of fellowship ("We will sit at the table with ev
 Why the first exclusion matters: the Adventist family keeps the seventh-day Sabbath and most others keep the Lord's Day. Naming either fails the other. Sabbath observance stays in Volume 2 (Deferred Items Register, section 6).
 Restoration column (ratified): Moroni 6:4-6 ("they did meet together oft... to pray... and to speak one with another concerning the welfare of their souls"); D&C 59:9-12.
 
+### G3, version 2 (Article 8, unscored): APPROVED verbatim by Aaron 16 Oct 2026
+
+The 22 Sep 2026 floor above stays as the version 1 record (C2). This is version 2, the floor the Second Edition span s21 carries.
+
+**Floor, version 2:**
+
+> The Article confesses only what Hebrews 10:24-25, Acts 2:42, Colossians 3:16 and Matthew 18:20 confess: disciples do not forsake assembling together, but gather to pray, to hear and read the scriptures, to sing psalms and hymns and spiritual songs, and to exhort and strengthen one another; and Christ promised that where two or three are gathered together in His name, He is there in the midst of them. This is the floor. It does not settle the day of gathering, the form of worship, who presides, the sacraments or ordinances kept there, the manner of His presence, whether by His Spirit, in the gathered body, or in the sacrament, or what gathering in His name requires; each tradition fills those in its own house.
+
+Restoration column (ratified 22 Sep 2026; D&C 6:32 added in version 2, 16 Oct 2026): Moroni 6:4-6 ("they did meet together oft... to pray... and to speak one with another concerning the welfare of their souls"); D&C 59:9-12; D&C 6:32.
+
 ## G4. "Our Father" (Article 8, item 17, scored; moved here from Article 11 by the architecture map): RATIFIED by Aaron 22 Sep 2026, with 3 Nephi 13:9-13
 
 > The Article confesses only what Matthew 6:9-13 and Luke 11:1-4 confess: Christ taught His disciples to pray to God as "Our Father," hallowing His name and seeking His kingdom and His will. This is the floor. It does not settle whether the prayer is said as written or taken as a pattern, which ending or doxology is used, or its place in liturgy; each tradition fills those in its own house.
@@ -146,3 +156,13 @@ Where it goes: A05 s10 already says Christ "forgave the broken." The Plan rates 
 > The Article confesses only what Mark 2:5-11 confesses: the Son of Man has power on earth to forgive sins, and He forgave them. This is the floor. It does not settle how that forgiveness is ministered through the Church (absolution, ordinances, priesthood keys, or none), or how it is grounded in His atonement; each tradition fills those in its own house.
 
 Restoration column (ratified): D&C 58:42 ("he who has repented of his sins, the same is forgiven, and I, the Lord, remember them no more"); Enos 1:5-8.
+
+---
+
+## G15. "Your Father" (Article 8, unscored): RATIFIED by Aaron 16 Oct 2026 (AOID2-A08-G4-FATHER option 1; wording AOID2-A08-G15-ANCHORS)
+
+Where it goes: Article 8, the second Father span (s19), beside the "Our Father" span (G4).
+
+> The Article confesses only what John 20:17 and Matthew 5:16 confess: Christ called God His disciples' Father as well as His own, 'my Father, and your Father,' and taught that their good works should glorify their Father which is in heaven. This is the floor. It does not settle whether Christ's sonship and ours are of one kind or two, how disciples become children of God, whether by creation, adoption, new birth or spirit birth, or what 'my God, and your God' says of the Son; each tradition fills those in its own house.
+
+Restoration column (ratified): 3 Nephi 12:16; 3 Nephi 12:45. D&C 93:21-23 is held as Volume 2 witness (G11 precedent) and is NOT anchored in the Articles.
