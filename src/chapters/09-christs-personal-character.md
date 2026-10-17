@@ -2,6 +2,7 @@
 layout: layouts/chapter.njk
 title: "Christ's Personal Character"
 chapter: 9
+eleventyExcludeFromCollections: true
 slug: "09-christs-personal-character"
 chapterId: "chapter-09-christs-personal-character"
 

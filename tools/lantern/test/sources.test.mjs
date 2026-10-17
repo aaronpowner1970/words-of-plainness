@@ -33,8 +33,8 @@ test('every manifest URL is in the sitemap and no stub or redirect is published'
   for (const p of mf.pages) assert.ok(sitemap.has(p.path), p.path);
   for (const p of mf.pages) assert.ok(!p.path.startsWith('/volume-2/chapters/'), 'Volume 2 stub published: ' + p.path);
   assert.ok(!mf.pages.some((p) => p.path === '/chapters/09-christs-personal-character/'));
-  assert.ok(mf.excluded.some((e) => e.url.endsWith('/chapters/09-christs-personal-character/') && /redirected/.test(e.reason)));
-  assert.ok(mf.excluded.filter((e) => e.reason === 'Coming Soon stub').length >= 23);
+  // Since 17 Oct 2026 the sitemap itself omits these (eleventyExcludeFromCollections); the filters are a backstop.
+  assert.deepEqual(mf.excluded, [], 'unexpected stub or redirect in the sitemap: ' + JSON.stringify(mf.excluded));
   assert.ok(mf.pages.some((p) => p.path === '/concert/'), 'a real page that merely mentions Coming Soon stays published');
 });
 
@@ -50,11 +50,12 @@ test('a Coming Soon stub is absent from the sitemap and a draft linking it is re
   assert.match(r.stderr, /searching-the-scriptures/);
 });
 
-test('stub and redirect URLs in the sitemap are refused with a reason', () => {
+test('stub and redirect URLs are refused', () => {
   const bad = checkText('/volume-2/chapters/v2-01-review-of-restoration/ and /chapters/09-christs-personal-character/', mf);
   assert.equal(bad.length, 2);
-  assert.match(bad[0].reason + bad[1].reason, /Coming Soon stub/);
-  assert.match(bad[0].reason + bad[1].reason, /vercel\.json/);
+  // the backstop still names the reason when a URL is in the sitemap but excluded
+  const withReasons = { pages: mf.pages, excluded: [{ url: 'https://www.wordsofplainness.org/x-stub/', reason: 'Coming Soon stub' }] };
+  assert.equal(checkText('/x-stub/', withReasons)[0].reason, 'Coming Soon stub');
 });
 
 test('a draft linking a real published chapter passes', () => {
