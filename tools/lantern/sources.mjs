@@ -33,7 +33,9 @@ export const CATEGORY_RULES = [
   { category: 'Articles of Interfaith Discipleship', test: (p) => p === '/articles/' },
   { category: 'Volume 1', test: (p) => p === '/volume-1/' || p.startsWith('/chapters/') },
   { category: 'Volume 2', test: (p) => p.startsWith('/volume-2/') },
-  { category: 'Appendices', test: (p) => p.startsWith('/appendices/') || p.startsWith('/appendix/') },
+  // /writings/ lists the appendices: every /studies/ page, plus the Seeking Jesus hub
+  // (its tool pages stay under Discipleship Apps).
+  { category: 'Appendices', test: (p) => p.startsWith('/studies/') || p === '/seeking-jesus/' },
   { category: 'Music', test: (p) => p === '/music/' || p.startsWith('/concert/') },
   { category: 'Narrations and Podcasts', test: (p) => p === '/narrations/' },
   { category: 'Discipleship Apps', test: (p) => p === '/discipleship/' || p.startsWith('/seeking-jesus/') },

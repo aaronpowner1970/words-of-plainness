@@ -101,5 +101,18 @@ test('stub detection and category rules', () => {
   assert.equal(categorize('/volume-2/'), 'Volume 2');
   assert.equal(categorize('/seeking-jesus/map/'), 'Discipleship Apps');
   assert.equal(categorize('/articles/'), 'Articles of Interfaith Discipleship');
-  assert.equal(categorize('/studies/broken-vessels/'), 'Other pages');
+  assert.equal(categorize('/studies/broken-vessels/'), 'Appendices');
+  assert.equal(categorize('/seeking-jesus/'), 'Appendices');
+});
+
+test('every appendix entry listed on /writings/ is categorized Appendices', () => {
+  const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
+  const src = fs.readFileSync(path.join(root, 'src', 'pages', 'writings.njk'), 'utf8');
+  const entries = [...src.matchAll(/<a\s+href="([^"]+)"\s+class="appendix-entry"/g)].map((m) => m[1]);
+  assert.ok(entries.length > 0, 'found appendix entries on /writings/');
+  const published = new Map(mf.pages.map((p) => [p.path, p.category]));
+  for (const e of entries) {
+    assert.ok(published.has(e), 'appendix entry is a published page: ' + e);
+    assert.equal(published.get(e), 'Appendices', e);
+  }
 });
