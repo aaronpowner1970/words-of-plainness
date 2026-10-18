@@ -5,7 +5,7 @@
  * because the floor check (scripts/aoid-verify-floors.js) reads that file. The Second Edition
  * switch (src/_data/aoidSecondEdition.js) keeps A14 off the public page: with the switch OFF
  * the embedded data is the thirteen First Edition Articles exactly as before; with it ON it is
- * the whole file. The same holds for the Article 11 spans s20-s25 (CODE-AOID2-29), the Article 9 additions (CODE-AOID2-32), the Article 13 span s12 (CODE-AOID2-34) the Article 4 span s19 (CODE-AOID2-35) the Article 5 spans s17-s18 (CODE-AOID2-36) and the Article 8 additions (CODE-AOID2-40).
+ * the whole file. The same holds for the Article 11 spans s20-s25 (CODE-AOID2-29), the Article 9 additions (CODE-AOID2-32), the Article 13 span s12 (CODE-AOID2-34) the Article 4 span s19 (CODE-AOID2-35) the Article 5 spans s17-s18 (CODE-AOID2-36) the Article 8 additions (CODE-AOID2-40) and the Article 12 additions (CODE-AOID2-41).
  */
 const all = require('./apparatusData.json');
 const { on } = require('./aoidSecondEdition.js');
@@ -34,6 +34,13 @@ const A05_SECOND_EDITION = ['s17', 's18'];
    Article 9 (`text_first_edition`). With the switch OFF the new spans are dropped and the First Edition text restored. */
 const A08_SECOND_EDITION = ['s18', 's19', 's20', 's21'];
 
+/* Article 12 (CODE-AOID2-41, step 82): spans s11 (G10) and s12 (G11) are new. s5 and s6 carry revised `text`
+   (`text_first_edition`, as Article 9). s1-s10 carry a revised `panel_comment`, with the First Edition comment in
+   `panel_comment_first_edition`: the first span-level marker for a changed panel comment. Anchors added to s4-s6 are
+   marked `second_edition: true`. With the switch OFF the First Edition values are restored and the additions dropped;
+   with it ON the marker fields are stripped, so none is ever embedded. */
+const A12_SECOND_EDITION = ['s11', 's12'];
+
 const firstEditionAnchor = (a) => {
   const { second_edition, comment_first_edition, ...rest } = a;
   return comment_first_edition === undefined ? rest : { ...rest, comment: comment_first_edition };
@@ -41,8 +48,9 @@ const firstEditionAnchor = (a) => {
 const firstEditionSpan = (s) => {
   const out = {};
   for (const [k, v] of Object.entries(s)) {
-    if (k === 'text_first_edition') continue;
+    if (k === 'text_first_edition' || k === 'panel_comment_first_edition') continue;
     if (k === 'text' && s.text_first_edition !== undefined) out.text = s.text_first_edition;
+    else if (k === 'panel_comment' && s.panel_comment_first_edition !== undefined) out.panel_comment = s.panel_comment_first_edition;
     else if (k === 'biblical' || k === 'restoration') out[k] = v.filter((a) => !a.second_edition).map(firstEditionAnchor);
     else out[k] = v;
   }
@@ -53,7 +61,7 @@ const secondEditionAnchor = (a) => {
   return rest;
 };
 const secondEditionSpan = (s) => {
-  const { text_first_edition, ...rest } = s;
+  const { text_first_edition, panel_comment_first_edition, ...rest } = s;
   const out = { ...rest };
   for (const k of ['biblical', 'restoration']) if (Array.isArray(rest[k])) out[k] = rest[k].map(secondEditionAnchor);
   return out;
@@ -61,13 +69,14 @@ const secondEditionSpan = (s) => {
 const mapSpans = (spans, f) => Object.fromEntries(Object.entries(spans).map(([id, s]) => [id, f(s)]));
 
 module.exports = on
-  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A08', 'A09'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
+  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A08', 'A09', 'A12'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
   : Object.fromEntries(
       Object.entries(all)
         .filter(([key]) => key !== 'A14')
         .map(([key, spans]) => {
           if (key === 'A11') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A11_SECOND_EDITION.includes(id)))];
           if (key === 'A08') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A08_SECOND_EDITION.includes(id))), firstEditionSpan)];
+          if (key === 'A12') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A12_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A09') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A09_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A04') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A04_SECOND_EDITION.includes(id)))];
           if (key === 'A05') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A05_SECOND_EDITION.includes(id)))];
