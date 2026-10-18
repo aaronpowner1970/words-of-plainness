@@ -108,6 +108,10 @@ def test_article_9_s6_to_s9_switch_on_opens_each_comment_with_its_floor_and_adds
         first, second = a09[sid]["panel_comment"].split(chr(10) * 2)
         assert first.startswith("The Article confesses only what") and second, sid
     assert [a["ref"] for a in a09["s7"]["biblical"]].count("2 John 1:9") == 1
+    assert next(a for a in a09["s7"]["biblical"] if a["ref"] == "2 John 1:9")["comment"] == (
+        "Named in the s7 floor as its qualifier: precedence is not dismissal. John binds abiding in the doctrine of Christ "
+        "to having God; the span ranks doctrine beneath the relationship without setting the two against each other."
+    )
     assert next(a for a in a09["s28"]["restoration"] if a["ref"] == "Moroni 10:8–18")["comment"] == (
         "Read with Moroni 10:4–5, cited above with the Spirit as Teacher."
     )
