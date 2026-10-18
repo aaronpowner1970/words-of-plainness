@@ -80,3 +80,36 @@ def test_every_article_12_span_with_a_revised_comment_keeps_its_first_edition_co
 def test_article_12_second_edition_comments_use_closed_em_dashes():
     for sid, s in shown(True)["A12"].items():
         assert " - " not in s["panel_comment"] and " — " not in s["panel_comment"], sid
+
+
+# Article 9 s6-s9 (CODE-AOID2-44): revised panel comments, six revised anchor comments and one added anchor,
+# all behind the switch. The anchor-comment marker `comment_first_edition` and the added-anchor marker
+# `second_edition` are the CODE-AOID2-32/33 ones; the panel-comment marker is the CODE-AOID2-41 one.
+A09_REVISED = ("s6", "s7", "s8", "s9")
+
+
+def test_article_9_s6_to_s9_switch_off_keeps_first_edition_comments_and_anchors():
+    a09 = shown(False)["A09"]
+    for sid in A09_REVISED:
+        src = DATA["A09"][sid]
+        assert a09[sid]["panel_comment"] == src["panel_comment_first_edition"], sid
+        assert not a09[sid]["panel_comment"].startswith("The Article confesses only"), sid
+        for col in ("biblical", "restoration"):
+            assert [a["ref"] for a in a09[sid][col]] == [a["ref"] for a in src[col] if not a.get("second_edition")], (sid, col)
+            for a in a09[sid][col]:
+                srca = next(x for x in src[col] if x["ref"] == a["ref"])
+                assert a["comment"] == srca.get("comment_first_edition", srca["comment"]), (sid, a["ref"])
+    assert "2 John 1:9" not in [a["ref"] for a in a09["s7"]["biblical"]]
+
+
+def test_article_9_s6_to_s9_switch_on_opens_each_comment_with_its_floor_and_adds_2_john_1_9():
+    a09 = shown(True)["A09"]
+    for sid in A09_REVISED:
+        first, second = a09[sid]["panel_comment"].split(chr(10) * 2)
+        assert first.startswith("The Article confesses only what") and second, sid
+    assert [a["ref"] for a in a09["s7"]["biblical"]].count("2 John 1:9") == 1
+    assert next(a for a in a09["s28"]["restoration"] if a["ref"] == "Moroni 10:8–18")["comment"] == (
+        "Read with Moroni 10:4–5, cited above with the Spirit as Teacher."
+    )
+    assert sum("comment_first_edition" in a for sid in A09_REVISED for col in ("biblical", "restoration") for a in DATA["A09"][sid][col]) >= 6
+
