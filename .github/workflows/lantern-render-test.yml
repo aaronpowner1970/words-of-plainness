@@ -1,0 +1,48 @@
+name: Lantern Render Test
+
+# Runs the Lantern render script's own tests (generated tone and a solid-colour image only, no real
+# media) on ubuntu-latest. It renders nothing that gets posted and commits nothing.
+on:
+  push:
+    paths:
+      - 'tools/lantern/render/**'
+      - '.github/workflows/lantern-render-test.yml'
+  pull_request:
+    paths:
+      - 'tools/lantern/render/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Make sure ffmpeg (with libass and libx264) is available
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffmpeg -hide_banner -version | head -1
+          ffmpeg -hide_banner -filters | grep -E ' (ass|loudnorm|silencedetect|xfade|zoompan) '
+          ffmpeg -hide_banner -buildconf | grep -o -E 'enable-lib(ass|x264)' | sort -u
+
+      - name: Install
+        run: pip install -r tools/lantern/render/requirements-dev.txt
+
+      - name: Forced-alignment fallback can start
+        run: python -c "from pocketsphinx import Decoder; Decoder(samprate=16000, bestpath=False); print('pocketsphinx ok')"
+
+      - name: Tests
+        run: python -m pytest tools/lantern/render/tests -q
