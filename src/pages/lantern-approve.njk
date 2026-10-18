@@ -1,0 +1,45 @@
+---
+layout: layouts/page.njk
+title: Lantern Approve
+pageTitle: Lantern Approve
+pageSubtitle: "Private. Send the narration for a Sunday post."
+permalink: /admin/lantern-approve/
+description: "Private working page for the Lantern Post narration."
+noindex: true
+pagefindIgnore: true
+eleventyExcludeFromCollections: true
+---
+{#- Private page. Kept out of the sitemap (the sitemap skips /admin and this page is
+    out of every collection), out of search (pagefindIgnore), out of the nav (no link
+    anywhere) and out of the post notifier (it only reads src/posts). -#}
+<link rel="stylesheet" href="/css/lantern-approve.css">
+<section class="content-section" id="lantern-approve">
+  <div class="content-wrapper lantern-approve" data-pagefind-ignore>
+
+    <label class="la-label" for="la-date">Post date (Sunday)</label>
+    <input class="la-field" type="date" id="la-date" autocomplete="off">
+
+    <p class="la-onfile" id="la-onfile" aria-live="polite">Checking what is on file&hellip;</p>
+
+    <div class="la-row">
+      <button type="button" class="la-btn" id="la-record">Record</button>
+      <label class="la-btn la-btn-alt" for="la-file">Choose a file</label>
+      <input type="file" id="la-file" accept="audio/*,.m4a,.mp4,.mp3,.aac,.webm,.ogg" hidden>
+    </div>
+
+    <p class="la-picked" id="la-picked" aria-live="polite"></p>
+    <audio id="la-player" controls hidden></audio>
+
+    <label class="la-label" for="la-pw">Password</label>
+    <input class="la-field" type="password" id="la-pw" autocomplete="current-password">
+    <p class="la-small">Remembered on this phone only.</p>
+
+    <button type="button" class="la-btn la-send" id="la-send" disabled>Send</button>
+
+    <p class="la-receipt" id="la-receipt" role="status" aria-live="polite"></p>
+    <p class="la-error" id="la-error" role="alert"></p>
+
+    <button type="button" class="la-btn la-approve" id="la-approve" disabled>Approve (comes in the next build)</button>
+  </div>
+</section>
+<script src="/js/lantern-approve.js"></script>

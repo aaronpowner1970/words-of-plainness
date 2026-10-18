@@ -1,0 +1,113 @@
+name: Lantern Narration Check
+
+# Proves the Action can see a narration that landed in lantern/inbox/: the file
+# exists, how long it is (ffprobe), and that the OPENAI_API_KEY secret is present.
+# It reads only. It never commits, so it cannot trigger itself.
+on:
+  push:
+    paths:
+      - 'lantern/inbox/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Make sure ffprobe is available
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          ffprobe -version | head -1
+
+      - name: Find the new or changed narrations
+        id: find
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          : > "$RUNNER_TEMP/narrations.txt"
+          if [ "$EVENT" = "push" ] && [ -n "$BEFORE" ] && ! echo "$BEFORE" | grep -qE '^0+$'; then
+            git diff --name-only --diff-filter=AM "$BEFORE" "$AFTER" -- 'lantern/inbox/' \
+              | grep -E '^lantern/inbox/[0-9]{4}-[0-9]{2}-[0-9]{2}/narration\.[A-Za-z0-9]+$' > "$RUNNER_TEMP/narrations.txt" || true
+          else
+            # Manual run, or a push with no usable "before": check everything on file.
+            git ls-files 'lantern/inbox/' \
+              | grep -E '^lantern/inbox/[0-9]{4}-[0-9]{2}-[0-9]{2}/narration\.[A-Za-z0-9]+$' > "$RUNNER_TEMP/narrations.txt" || true
+          fi
+          echo "count=$(wc -l < "$RUNNER_TEMP/narrations.txt" | tr -d ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Confirm each narration, measure it, check the secret
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          set -uo pipefail
+          FAIL=0
+          {
+            echo "## Lantern narration check"
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          # The secret: report only whether it is non-empty. Never print it or any part of it.
+          if [ -n "${OPENAI_API_KEY:-}" ]; then
+            SECRET_LINE="OPENAI_API_KEY: present"
+          else
+            SECRET_LINE="OPENAI_API_KEY: MISSING (the GitHub secret is empty or not set)"
+            echo "::error::OPENAI_API_KEY is missing. Add it under the repository's Settings, Secrets and variables, Actions."
+            FAIL=1
+          fi
+
+          COUNT=$(wc -l < "$RUNNER_TEMP/narrations.txt" | tr -d ' ')
+          if [ "$COUNT" = "0" ]; then
+            echo "No new or changed narration in this push (a deleted or replaced-away file is not an error)." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          while IFS= read -r F; do
+            [ -z "$F" ] && continue
+            if [ ! -f "$F" ]; then
+              echo "::error::Expected $F but the file is not in the checkout."
+              echo "- MISSING: $F" >> "$GITHUB_STEP_SUMMARY"
+              FAIL=1
+              continue
+            fi
+            BYTES=$(wc -c < "$F" | tr -d ' ')
+            DUR=$(ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "$F" 2>/dev/null || true)
+            if ! echo "$DUR" | grep -qE '^[0-9]+(\.[0-9]+)?$'; then
+              # Browser WebM has no stored duration; count the audio packets instead.
+              DUR=$(ffprobe -v error -select_streams a:0 -show_entries packet=pts_time,duration_time -of csv=p=0 "$F" 2>/dev/null \
+                | awk -F, 'NF>=1 && $1!="N/A" {t=$1+(($2=="N/A"||$2=="")?0:$2); if (t>m) m=t} END {if (m>0) printf "%.3f", m}')
+            fi
+            if [ -z "$DUR" ]; then
+              echo "::error::ffprobe could not measure the length of $F."
+              echo "- UNREADABLE: $F ($BYTES bytes, ffprobe could not measure it)" >> "$GITHUB_STEP_SUMMARY"
+              FAIL=1
+              continue
+            fi
+            SECS=$(awk -v d="$DUR" 'BEGIN {printf "%.1f", d}')
+            echo "- Saw $F: $BYTES bytes, $SECS seconds" >> "$GITHUB_STEP_SUMMARY"
+            echo "Saw $F: $BYTES bytes, $SECS seconds"
+          done < "$RUNNER_TEMP/narrations.txt"
+
+          {
+            echo
+            echo "- $SECRET_LINE"
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "$SECRET_LINE"
+
+          if [ "$FAIL" != "0" ]; then
+            echo "- RESULT: FAILED" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "- RESULT: OK" >> "$GITHUB_STEP_SUMMARY"

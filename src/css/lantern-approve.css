@@ -1,0 +1,16 @@
+/* Lantern Approve page (private). Uses the site's own colour and type variables. */
+.lantern-approve { max-width: 34rem; margin: 0 auto; font-family: var(--font-serif); color: var(--cream-soft); }
+.la-label { display: block; margin: 1.25rem 0 .35rem; font-size: 1.15rem; color: var(--gold-light); }
+.la-field { width: 100%; box-sizing: border-box; padding: .8rem; font: inherit; font-size: 1.2rem; color: var(--cream-soft); background: var(--black-warm); border: 1px solid var(--gold-dark); border-radius: var(--radius-md); }
+.la-row { display: flex; gap: .75rem; margin: 1.25rem 0 .5rem; flex-wrap: wrap; }
+.la-btn { flex: 1 1 8rem; display: inline-block; box-sizing: border-box; text-align: center; padding: .95rem 1rem; font: inherit; font-size: 1.2rem; font-weight: 600; color: var(--black-warm); background: var(--gold-primary); border: 0; border-radius: var(--radius-md); cursor: pointer; }
+.la-btn-alt { background: transparent; color: var(--gold-light); border: 1px solid var(--gold-primary); }
+.la-btn.recording { background: var(--burgundy); color: var(--cream-soft); }
+.la-btn:disabled { opacity: .45; cursor: not-allowed; }
+.la-send { width: 100%; margin-top: 1.25rem; }
+.la-approve { width: 100%; margin-top: 2rem; background: transparent; color: var(--cream-dark); border: 1px dashed var(--gold-dark); }
+.la-onfile, .la-picked { margin: .75rem 0; font-size: 1.1rem; }
+.la-small { margin: .3rem 0 0; font-size: .95rem; opacity: .75; }
+#la-player { width: 100%; margin: .5rem 0; }
+.la-receipt { margin: 1.5rem 0 0; font-size: 1.6rem; line-height: 1.35; color: var(--gold-light); }
+.la-error { margin: 1rem 0 0; font-size: 1.3rem; line-height: 1.4; color: #f0b7a8; }
