@@ -1,0 +1,423 @@
+---
+layout: layouts/page.njk
+title: Under the Hood
+pageTitle: Under the Hood
+pageSubtitle: "How the Website Is Built"
+permalink: /about/under-the-hood/
+description: "How wordsofplainness.org is built: a static Eleventy site on Vercel with media on Cloudflare R2, a small Django API for accounts, and build-time validation gates. For IT and developer visitors."
+---
+
+<div class="uth" data-pagefind-body>
+
+<section class="content-section" id="at-a-glance">
+    <div class="content-wrapper">
+        <h2>At a glance</h2>
+
+        <p>wordsofplainness.org is a <strong>static-first site with a thin dynamic edge</strong>. Every page is pre-rendered by Eleventy (Nunjucks templates over Markdown and structured data) and served as plain HTML from Vercel's CDN. Heavy media lives separately on Cloudflare R2 behind its own subdomain. The few things that must be dynamic—sign-in, a personal discipleship journal, newsletter and contact forms—talk to a small Django REST API on PythonAnywhere, and a handful of Vercel serverless functions handle automation such as social notifications. There is no front-end framework, no database behind the pages themselves, and no tracking scripts: a visitor's browser loads the site's own HTML, CSS and vanilla JavaScript, one Google Fonts stylesheet, and audio from the media CDN.</p>
+
+        <p>The interesting engineering is less in the stack than in what the build does with it: build-time cross-referencing between book chapters and the Articles of Interfaith Discipleship, narration audio that highlights the text as it is read, song lyrics synced line-by-line to the music, a citation apparatus with over a thousand scripture links, all generated from the site's own book map, and validation gates that refuse to ship data that fails its checks.</p>
+    </div>
+</section>
+
+<section class="content-section alt" id="system-map">
+    <div class="content-wrapper">
+        <h2>System map</h2>
+
+        <figure class="uth-diagram">
+            <svg class="uth-svg uth-svg-wide" viewBox="0 0 876 450" role="img" aria-labelledby="uth-d1w-title uth-d1w-desc">
+                <title id="uth-d1w-title">How a page and its media reach a visitor</title>
+                <desc id="uth-d1w-desc">Top row, left to right: the author and Claude Code (Markdown, YAML, JSON) push to the GitHub main branch (a push is a deploy), which starts the Vercel build (validate, Eleventy, Pagefind), which publishes to the Vercel edge CDN (static pages and API functions). The edge CDN sends HTML, CSS and JS down to the visitor's browser (vanilla JS, no framework). Along the bottom, three sources feed the browser: the Cloudflare R2 media CDN (narration, music, banner images) sends audio and images; the Django REST API on PythonAnywhere (accounts, journal) exchanges JSON with token sign-in in both directions; and YouTube and Google Fonts supply embedded films and typefaces. A dashed line shows the author uploading media directly to Cloudflare R2.</desc>
+                <defs>
+                    <marker id="uth-d1w-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="d-head" d="M0 0 L10 5 L0 10 z"/></marker>
+                </defs>
+                <rect class="d-box" x="8" y="20" width="188" height="70" rx="8"/>
+                <text class="d-title" x="102" y="49" text-anchor="middle">Author + Claude Code</text>
+                <text class="d-sub" x="102" y="70" text-anchor="middle">Markdown, YAML, JSON</text>
+                <rect class="d-box" x="232" y="20" width="188" height="70" rx="8"/>
+                <text class="d-title" x="326" y="49" text-anchor="middle">GitHub, main branch</text>
+                <text class="d-sub" x="326" y="70" text-anchor="middle">a push is a deploy</text>
+                <rect class="d-box" x="456" y="20" width="188" height="70" rx="8"/>
+                <text class="d-title" x="550" y="49" text-anchor="middle">Vercel build</text>
+                <text class="d-sub" x="550" y="70" text-anchor="middle">validate, Eleventy, Pagefind</text>
+                <rect class="d-accent" x="680" y="20" width="188" height="70" rx="8"/>
+                <text class="d-title" x="774" y="49" text-anchor="middle">Vercel edge CDN</text>
+                <text class="d-sub" x="774" y="70" text-anchor="middle">static pages + /api functions</text>
+                <path class="d-line" d="M196 55 H230" marker-end="url(#uth-d1w-h)"/>
+                <path class="d-line" d="M420 55 H454" marker-end="url(#uth-d1w-h)"/>
+                <path class="d-line" d="M644 55 H678" marker-end="url(#uth-d1w-h)"/>
+
+                <path class="d-line" d="M774 90 V188" marker-end="url(#uth-d1w-h)"/>
+                <text class="d-label" x="786" y="145">HTML, CSS, JS</text>
+                <rect class="d-accent" x="232" y="190" width="636" height="70" rx="8"/>
+                <text class="d-title" x="550" y="219" text-anchor="middle">Visitor's browser</text>
+                <text class="d-sub" x="550" y="240" text-anchor="middle">vanilla JS, no framework</text>
+
+                <rect class="d-box" x="240" y="360" width="190" height="70" rx="8"/>
+                <text class="d-title" x="335" y="389" text-anchor="middle">Cloudflare R2 media CDN</text>
+                <text class="d-sub" x="335" y="410" text-anchor="middle">narration, music, banner images</text>
+                <rect class="d-box" x="450" y="360" width="200" height="70" rx="8"/>
+                <text class="d-title" x="550" y="389" text-anchor="middle">Django REST API</text>
+                <text class="d-sub" x="550" y="410" text-anchor="middle">PythonAnywhere: accounts, journal</text>
+                <rect class="d-box" x="670" y="360" width="198" height="70" rx="8"/>
+                <text class="d-title" x="769" y="389" text-anchor="middle">YouTube, Google Fonts</text>
+                <text class="d-sub" x="769" y="410" text-anchor="middle">embedded films, typefaces</text>
+                <path class="d-line" d="M335 360 V262" marker-end="url(#uth-d1w-h)"/>
+                <text class="d-label" x="346" y="318">audio, images</text>
+                <path class="d-line" d="M550 360 V262" marker-start="url(#uth-d1w-h)" marker-end="url(#uth-d1w-h)"/>
+                <text class="d-label" x="561" y="318">JSON, token sign-in</text>
+                <path class="d-line" d="M769 360 V262" marker-end="url(#uth-d1w-h)"/>
+
+                <path class="d-dash" d="M102 90 V395 H238" marker-end="url(#uth-d1w-h)"/>
+                <text class="d-label" x="112" y="240">uploaded directly</text>
+            </svg>
+
+            <svg class="uth-svg uth-svg-narrow" viewBox="0 0 360 800" role="img" aria-labelledby="uth-d1n-title uth-d1n-desc">
+                <title id="uth-d1n-title">How a page and its media reach a visitor</title>
+                <desc id="uth-d1n-desc">A vertical flow. The author and Claude Code (Markdown, YAML, JSON) push to the GitHub main branch (a push is a deploy), which starts the Vercel build (validate, Eleventy, Pagefind), which publishes to the Vercel edge CDN (static pages and API functions). The edge CDN sends HTML, CSS and JS to the visitor's browser (vanilla JS, no framework). Three sources also feed the browser: the Cloudflare R2 media CDN (narration, music, banner images; audio and images), the Django REST API on PythonAnywhere (accounts, journal; JSON with token sign-in in both directions) and YouTube and Google Fonts (embedded films, typefaces). A dashed line shows the author uploading media directly to Cloudflare R2.</desc>
+                <defs>
+                    <marker id="uth-d1n-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="d-head" d="M0 0 L10 5 L0 10 z"/></marker>
+                </defs>
+                <rect class="d-box" x="44" y="10" width="272" height="64" rx="8"/>
+                <text class="d-title" x="180" y="38" text-anchor="middle">Author + Claude Code</text>
+                <text class="d-sub" x="180" y="58" text-anchor="middle">Markdown, YAML, JSON</text>
+                <rect class="d-box" x="44" y="100" width="272" height="64" rx="8"/>
+                <text class="d-title" x="180" y="128" text-anchor="middle">GitHub, main branch</text>
+                <text class="d-sub" x="180" y="148" text-anchor="middle">a push is a deploy</text>
+                <rect class="d-box" x="44" y="190" width="272" height="64" rx="8"/>
+                <text class="d-title" x="180" y="218" text-anchor="middle">Vercel build</text>
+                <text class="d-sub" x="180" y="238" text-anchor="middle">validate, Eleventy, Pagefind</text>
+                <rect class="d-accent" x="44" y="280" width="272" height="64" rx="8"/>
+                <text class="d-title" x="180" y="308" text-anchor="middle">Vercel edge CDN</text>
+                <text class="d-sub" x="180" y="328" text-anchor="middle">static pages + /api functions</text>
+                <path class="d-line" d="M180 74 V98" marker-end="url(#uth-d1n-h)"/>
+                <path class="d-line" d="M180 164 V188" marker-end="url(#uth-d1n-h)"/>
+                <path class="d-line" d="M180 254 V278" marker-end="url(#uth-d1n-h)"/>
+
+                <path class="d-line" d="M180 344 V398" marker-end="url(#uth-d1n-h)"/>
+                <text class="d-label" x="192" y="376">HTML, CSS, JS</text>
+                <rect class="d-accent" x="44" y="400" width="272" height="64" rx="8"/>
+                <text class="d-title" x="180" y="428" text-anchor="middle">Visitor's browser</text>
+                <text class="d-sub" x="180" y="448" text-anchor="middle">vanilla JS, no framework</text>
+
+                <rect class="d-box" x="44" y="520" width="272" height="80" rx="8"/>
+                <text class="d-title" x="180" y="545" text-anchor="middle">Cloudflare R2 media CDN</text>
+                <text class="d-sub" x="180" y="565" text-anchor="middle">narration, music, banner images</text>
+                <text class="d-label" x="180" y="586" text-anchor="middle">audio, images</text>
+                <rect class="d-box" x="44" y="620" width="272" height="80" rx="8"/>
+                <text class="d-title" x="180" y="645" text-anchor="middle">Django REST API</text>
+                <text class="d-sub" x="180" y="665" text-anchor="middle">PythonAnywhere: accounts, journal</text>
+                <text class="d-label" x="180" y="686" text-anchor="middle">JSON, token sign-in</text>
+                <rect class="d-box" x="44" y="720" width="272" height="64" rx="8"/>
+                <text class="d-title" x="180" y="748" text-anchor="middle">YouTube, Google Fonts</text>
+                <text class="d-sub" x="180" y="768" text-anchor="middle">embedded films, typefaces</text>
+                <path class="d-line" d="M44 752 H22 V432 H42" marker-end="url(#uth-d1n-h)"/>
+                <path class="d-line" d="M44 560 H22"/>
+                <path class="d-line" d="M44 660 H22" marker-start="url(#uth-d1n-h)" marker-end="url(#uth-d1n-h)"/>
+
+                <path class="d-dash" d="M316 42 H338 V560 H318" marker-end="url(#uth-d1n-h)"/>
+                <text class="d-label" x="328" y="300" text-anchor="middle" transform="rotate(-90 328 300)">uploaded directly</text>
+            </svg>
+        </figure>
+
+        <p>The top row is the publishing path: source files in a Git repository, built and validated by Vercel on every push to <code>main</code>, served from Vercel's edge. The bottom row is what a browser pulls in at runtime besides the pages themselves. Media never passes through Git or the build—it is uploaded straight to R2 and referenced by filename, so a site rebuild never has to move a gigabyte of audio.</p>
+    </div>
+</section>
+
+<section class="content-section" id="hosting">
+    <div class="content-wrapper">
+        <h2>Hosting, domains and delivery</h2>
+
+        <table class="uth-table">
+            <thead><tr><th scope="col">Concern</th><th scope="col">How it is handled</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">Page hosting</th><td>Vercel, configured as a plain static output (<code>framework: null</code>, output folder <code>_site</code>). Pages are served from Vercel's edge cache.</td></tr>
+                <tr><th scope="row">Canonical address</th><td><code>https://www.wordsofplainness.org</code>. The bare domain, <code>brotheraaron.org</code> (with and without <code>www</code>) and the default <code>*.vercel.app</code> address all answer with a permanent 301 to the canonical host, so search engines see one site.</td></tr>
+                <tr><th scope="row">Media</th><td>A separate subdomain, <code>media.wordsofplainness.org</code>, fronts a Cloudflare R2 bucket. Audio and banner images are fetched from there directly by the browser; banner images carry long-lived immutable cache headers.</td></tr>
+                <tr><th scope="row">Transport</th><td>HTTPS only, with HSTS (two-year max-age) and Brotli compression on HTML.</td></tr>
+                <tr><th scope="row">Caching</th><td>HTML is sent <code>max-age=0, must-revalidate</code> but held at the edge, so a deploy is visible immediately while repeat visits are still served from cache.</td></tr>
+                <tr><th scope="row">Retired URLs</th><td>A short list of redirects in <code>vercel.json</code> keeps old chapter slugs and moved pages working.</td></tr>
+                <tr><th scope="row">Companion app</th><td><em>Keep My Commandments</em> lives at <code>commandments.brotheraaron.org</code>, a separately hosted Django application rather than part of this static build.</td></tr>
+            </tbody>
+        </table>
+
+        <p>There is no service worker and no offline mode; the site is meant to be read online, and keeping it a set of ordinary documents is what lets it work in unusual browsers such as the desktop browsers used inside VR headsets.</p>
+    </div>
+</section>
+
+<section class="content-section alt" id="build-pipeline">
+    <div class="content-wrapper">
+        <h2>Build pipeline</h2>
+
+        <figure class="uth-diagram">
+            <svg class="uth-svg uth-svg-wide" viewBox="0 0 876 240" role="img" aria-labelledby="uth-d2w-title uth-d2w-desc">
+                <title id="uth-d2w-title">npm run build: check, render, index</title>
+                <desc id="uth-d2w-desc">Four steps left to right. A push to main makes Vercel clone the repository and run npm install. The prebuild gates run next: a study-app data check and a lyric-file check. Then the Eleventy render turns templates, filters and transforms into the _site folder. Last, the postbuild step runs Pagefind to make a static search index, and the site deploys to the edge. From the prebuild gates, a warning arrow leads to a note: a failed check stops the build, and the live site stays as it was.</desc>
+                <defs>
+                    <marker id="uth-d2w-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="d-head" d="M0 0 L10 5 L0 10 z"/></marker>
+                    <marker id="uth-d2w-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="d-head-warn" d="M0 0 L10 5 L0 10 z"/></marker>
+                </defs>
+                <rect class="d-box" x="8" y="20" width="188" height="76" rx="8"/>
+                <text class="d-title" x="102" y="50" text-anchor="middle">Push to main</text>
+                <text class="d-sub" x="102" y="72" text-anchor="middle">Vercel clones and npm installs</text>
+                <rect class="d-box" x="232" y="20" width="188" height="76" rx="8"/>
+                <text class="d-title" x="326" y="50" text-anchor="middle">prebuild gates</text>
+                <text class="d-sub" x="326" y="72" text-anchor="middle">study-app data check;</text>
+                <text class="d-sub" x="326" y="87" text-anchor="middle">lyric-file check</text>
+                <rect class="d-accent" x="456" y="20" width="188" height="76" rx="8"/>
+                <text class="d-title" x="550" y="50" text-anchor="middle">Eleventy render</text>
+                <text class="d-sub" x="550" y="72" text-anchor="middle">templates, filters,</text>
+                <text class="d-sub" x="550" y="87" text-anchor="middle">transforms into _site</text>
+                <rect class="d-box" x="680" y="20" width="188" height="76" rx="8"/>
+                <text class="d-title" x="774" y="50" text-anchor="middle">postbuild: Pagefind</text>
+                <text class="d-sub" x="774" y="72" text-anchor="middle">static search index,</text>
+                <text class="d-sub" x="774" y="87" text-anchor="middle">then edge deploy</text>
+                <path class="d-line" d="M196 58 H230" marker-end="url(#uth-d2w-h)"/>
+                <path class="d-line" d="M420 58 H454" marker-end="url(#uth-d2w-h)"/>
+                <path class="d-line" d="M644 58 H678" marker-end="url(#uth-d2w-h)"/>
+                <path class="d-warn" d="M326 96 V158" marker-end="url(#uth-d2w-w)"/>
+                <rect class="d-note" x="96" y="160" width="460" height="44" rx="8"/>
+                <text class="d-title" x="326" y="187" text-anchor="middle" style="font-size:13px">a failed check stops the build; the live site stays as it was</text>
+            </svg>
+
+            <svg class="uth-svg uth-svg-narrow" viewBox="0 0 360 470" role="img" aria-labelledby="uth-d2n-title uth-d2n-desc">
+                <title id="uth-d2n-title">npm run build: check, render, index</title>
+                <desc id="uth-d2n-desc">Four steps from top to bottom. A push to main makes Vercel clone the repository and run npm install. The prebuild gates run next: a study-app data check and a lyric-file check. Then the Eleventy render turns templates, filters and transforms into the _site folder. Last, the postbuild step runs Pagefind to make a static search index, and the site deploys to the edge. From the prebuild gates, a warning line leads to a note at the bottom: a failed check stops the build, and the live site stays as it was.</desc>
+                <defs>
+                    <marker id="uth-d2n-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="d-head" d="M0 0 L10 5 L0 10 z"/></marker>
+                    <marker id="uth-d2n-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="d-head-warn" d="M0 0 L10 5 L0 10 z"/></marker>
+                </defs>
+                <rect class="d-box" x="30" y="10" width="270" height="64" rx="8"/>
+                <text class="d-title" x="165" y="38" text-anchor="middle">Push to main</text>
+                <text class="d-sub" x="165" y="58" text-anchor="middle">Vercel clones and npm installs</text>
+                <rect class="d-box" x="30" y="100" width="270" height="64" rx="8"/>
+                <text class="d-title" x="165" y="125" text-anchor="middle">prebuild gates</text>
+                <text class="d-sub" x="165" y="143" text-anchor="middle">study-app data check;</text>
+                <text class="d-sub" x="165" y="157" text-anchor="middle">lyric-file check</text>
+                <rect class="d-accent" x="30" y="190" width="270" height="64" rx="8"/>
+                <text class="d-title" x="165" y="215" text-anchor="middle">Eleventy render</text>
+                <text class="d-sub" x="165" y="233" text-anchor="middle">templates, filters,</text>
+                <text class="d-sub" x="165" y="247" text-anchor="middle">transforms into _site</text>
+                <rect class="d-box" x="30" y="280" width="270" height="64" rx="8"/>
+                <text class="d-title" x="165" y="305" text-anchor="middle">postbuild: Pagefind</text>
+                <text class="d-sub" x="165" y="323" text-anchor="middle">static search index,</text>
+                <text class="d-sub" x="165" y="337" text-anchor="middle">then edge deploy</text>
+                <path class="d-line" d="M165 74 V98" marker-end="url(#uth-d2n-h)"/>
+                <path class="d-line" d="M165 164 V188" marker-end="url(#uth-d2n-h)"/>
+                <path class="d-line" d="M165 254 V278" marker-end="url(#uth-d2n-h)"/>
+                <path class="d-warn" d="M300 132 H334 V402 H302" marker-end="url(#uth-d2n-w)"/>
+                <rect class="d-note" x="30" y="374" width="270" height="60" rx="8"/>
+                <text class="d-title" x="165" y="399" text-anchor="middle" style="font-size:13px">a failed check stops the build;</text>
+                <text class="d-title" x="165" y="419" text-anchor="middle" style="font-size:13px">the live site stays as it was</text>
+            </svg>
+        </figure>
+
+        <p>The whole site is one Node project on <strong>Eleventy 2</strong> with Nunjucks templates. Its runtime dependency list is almost empty: Eleventy, <code>js-yaml</code> and Pagefind as build tools, plus one audio-metadata library. A few behaviors are worth knowing:</p>
+
+        <ul>
+            <li><strong>Gates before rendering.</strong> <code>prebuild</code> runs a verifier over the Seeking Jesus of Nazareth study data and a validator over the synced-lyrics files. If either fails, Vercel never reaches the render step and production keeps the last good deploy.</li>
+            <li><strong>Environment-aware output.</strong> Vercel's <code>VERCEL_ENV</code> is exposed to templates, so copy still under the author's review carries a draft ribbon on preview deployments and never on production. Larger features ship behind build-time switches (an environment variable decides whether a page variant is built at all).</li>
+            <li><strong>Build-time computation, not client-side.</strong> Custom filters compute things once per build: which chapters relate to which Article, a single catalog of every song arrangement, chapter counts by status. A transform walks every chapter and numbers each narrated paragraph so audio can highlight it.</li>
+            <li><strong>Static search.</strong> Pagefind indexes the finished HTML after the build and ships the index as static files, so search needs no server.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="content-section" id="content-model">
+    <div class="content-wrapper">
+        <h2>Content model and data layer</h2>
+
+        <p>Content and data are kept apart, and most of what looks dynamic on the site is really data joined at build time.</p>
+
+        <table class="uth-table">
+            <thead><tr><th scope="col">Layer</th><th scope="col">Lives in</th><th scope="col">Holds</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">Prose</th><td data-label="Lives in"><code>src/chapters/</code>, <code>src/volume-2/</code>, <code>src/posts/</code>, <code>src/pages/</code></td><td data-label="Holds">Chapters as Markdown or Nunjucks with frontmatter (number, slug, themes, scripture, the chapter's song); blog posts; standalone pages and studies</td></tr>
+                <tr><th scope="row">Registry</th><td data-label="Lives in"><code>chapter-status.yaml</code></td><td data-label="Holds">Every chapter of both volumes with its status and URL. Volume pages and counts are derived from it, so they cannot drift from reality</td></tr>
+                <tr><th scope="row">Reference data</th><td data-label="Lives in"><code>scriptures.json</code>, <code>articleThemes.json</code>, <code>chapterThemes.json</code>, <code>ministryMusic.json</code>, <code>banners.json</code>, <code>navigation.json</code>, <code>site.json</code></td><td data-label="Holds">Scripture book paths, theme tags, the music catalog, image variants, menus, site constants</td></tr>
+                <tr><th scope="row">Apparatus</th><td data-label="Lives in"><code>apparatusData</code> and per-page citation JSON</td><td data-label="Holds">The citation apparatus behind the Articles of Interfaith Discipleship and the films: each cited span, its scripture and commentary</td></tr>
+                <tr><th scope="row">Timing</th><td data-label="Lives in"><code>src/_data/timestamps/</code>, VTT files under <code>src/assets/lyrics/</code></td><td data-label="Holds">Narration timing per paragraph or sentence; lyric cues per song arrangement</td></tr>
+                <tr><th scope="row">Study apps</th><td data-label="Lives in"><code>src/_data/sjn/</code> and related files</td><td data-label="Holds">Generated data for the Seeking Jesus of Nazareth study, built from a separately maintained research workbook</td></tr>
+            </tbody>
+        </table>
+
+        <p>Templates are organized as <strong>layouts</strong> (one per page family: base, page, chapter, card-chapter, interactive chapter, articles, study, post, film, chat presentation, study app), <strong>components</strong> (audio player, table of contents, reflection prompts, chapter navigation, world clocks) and <strong>macros</strong> (banner images, study-app widgets). A standing rule is <em>one copy of any text</em>: each Article's wording lives in a single include that both the main Articles page and its video reading page pull in, so a correction lands everywhere at once.</p>
+
+        <p>Two page shapes carry the book. <strong>Prose chapters</strong> are continuous reading with narration and pause points. <strong>Card chapters</strong> break a chapter into practice cards that a reader can commit to and revisit.</p>
+    </div>
+</section>
+
+<section class="content-section alt" id="front-end">
+    <div class="content-wrapper">
+        <h2>Front end</h2>
+
+        <p>The browser side is deliberately plain: hand-written HTML from the templates, about two dozen CSS files and about three dozen small vanilla JavaScript modules, with no framework, bundler or transpile step. Each page loads a small core (text-size control, navigation, the API client, sign-in, forms, the site anthem player) and then only the modules its layout needs—a chapter page adds the audio-sync and reflection scripts, the Articles page adds its citation panel and “go deeper” links, the study apps add their own.</p>
+
+        <ul>
+            <li><strong>Data handoff.</strong> Where a page needs structured data, the build writes it inline as a JSON object on <code>window</code> (the music catalog, the Articles-to-chapters map, citation apparatus). There are no client-side data fetches for content.</li>
+            <li><strong>Styling.</strong> A single base stylesheet sets the palette (warm gold, cream and deep browns) and type (Crimson Pro for reading, Source Sans Pro for interface), with per-feature sheets layered on. Stylesheets are cache-busted with the site version number.</li>
+            <li><strong>Layout.</strong> Responsive CSS throughout; the presentation pages for live group sessions use container queries so the same page fits a phone, a laptop, a projector and a 1280×630 window inside a VR headset.</li>
+            <li><strong>Accessibility.</strong> Skip link, labelled controls, an on-page text-size control, keyboard shortcuts on the presentation pages, and animation that respects the reduced-motion setting.</li>
+            <li><strong>Browser storage.</strong> Small conveniences (where a floating badge was dragged, which view mode is on) use session storage. Reflections fall back to local storage when a reader is not signed in, so nothing a reader writes is lost.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="content-section" id="media">
+    <div class="content-wrapper">
+        <h2>Media: narration, music and synced text</h2>
+
+        <p>Media is where most of the custom engineering sits, because three different things have to stay in time with text on the page.</p>
+
+        <p><strong>Chapter narration.</strong> Chapters are narrated in the author's own voice through a voice-synthesis service whose API returns character-level timing alongside the audio. A script folds that timing into paragraph- or sentence-level timestamps keyed to the numbers the build stamps on each narrated block, so the page highlights what is being read and a reader can follow along. Audio is loudness-normalized with a two-pass ffmpeg process (−16 LUFS integrated); the second pass matters because a single-pass encode drops the MP3 seek table and breaks scrubbing in browsers. Chapter frontmatter stores only a filename; templates prepend the media CDN address.</p>
+
+        <p><strong>Music.</strong> Each chapter has an original song, and many songs have alternate arrangements—some of which sing slightly different words. Every arrangement carries its own lyric sheet (or points to the one it shares) and an optional WebVTT cue file. At build time a validator compares each cue file with its lyric sheet; an arrangement that fails is shipped with static lyrics and no highlighting rather than with lines that drift out of order, and the author can hold any arrangement back regardless. Songs are deep-linkable (<code>/chapters/&lt;chapter&gt;/#listen=&lt;song&gt;</code>), and nothing plays until the reader taps.</p>
+
+        <p><strong>Films.</strong> Video is embedded from YouTube. Pages built around a film carry a synced transcript and a citation dock: as each cited line is spoken, its scripture and commentary appear beside the video. Automatic YouTube captions are switched off on those pages because the text is already burned into the film.</p>
+
+        <p>Also on the media side: podcast-style chapter summaries, a narrated read-aloud mode for shorter pages, and a local dev-server shim that answers HTTP range requests so audio seeking works during development the same way it does on the CDN.</p>
+    </div>
+</section>
+
+<section class="content-section alt" id="accounts-api">
+    <div class="content-wrapper">
+        <h2>Accounts and the API backend</h2>
+
+        <p>Everything personal sits behind one small service: a Django REST API on PythonAnywhere backed by MySQL. The static pages carry the API's base address in a <code>data-</code> attribute on <code>&lt;body&gt;</code>, and a single client module talks to it.</p>
+
+        <table class="uth-table">
+            <thead><tr><th scope="col">Function</th><th scope="col">What it does</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">Sign-in and registration</th><td>Username or email plus password. The API issues short-lived access tokens and longer-lived refresh tokens (JWT); the client refreshes automatically when a request comes back 401</td></tr>
+                <tr><th scope="row">My Discipleship Journal</th><td>Saves the reader's responses at a chapter's pause points (Reflect, Journal, Witness) and the practice cards they commit to, so they follow the reader across devices</td></tr>
+                <tr><th scope="row">Contact and newsletter</th><td>Form submissions and newsletter sign-up. Registration can opt the reader into the newsletter, and a newsletter failure never blocks registration</td></tr>
+                <tr><th scope="row">Notification marker</th><td>Remembers which blog post was last announced, so the social notifier never posts twice</td></tr>
+            </tbody>
+        </table>
+
+        <p>The design rule is <strong>graceful degradation</strong>: if the API is unreachable, every page still reads normally and reflections are kept in the browser instead. The database is backed up nightly to object storage.</p>
+    </div>
+</section>
+
+<section class="content-section" id="serverless">
+    <div class="content-wrapper">
+        <h2>Serverless functions and automation</h2>
+
+        <p>A handful of Node functions in the repository's <code>api/</code> folder deploy alongside the static site as Vercel serverless functions, and four GitHub Actions workflows run around them.</p>
+
+        <ul>
+            <li><strong>New-post announcements.</strong> When a blog post lands on <code>main</code>, a workflow waits for the deploy to finish, then calls a protected function that posts the announcement to Discord, X and Facebook. The site's Atom feed (<code>/posts/feed.xml</code>) separately drives the email newsletter. A manual script is kept as a fallback.</li>
+            <li><strong>The Lantern Post.</strong> A daily devotional-post pipeline. On every push, a workflow builds a manifest of what is actually published (pages and media) and writes it to a separate branch that Vercel is told never to deploy. An unattended drafting task reads that manifest rather than running repository code, so it can only cite what is really live. Every draft then waits for the author's approval on a private page before it goes anywhere.</li>
+            <li><strong>Narration upload with read-back.</strong> A password-protected function accepts a recorded narration file, commits it to the repository through GitHub's API, reads the committed copy back, and issues a receipt only if the byte length and SHA-256 hash match what was sent.</li>
+            <li><strong>Checks.</strong> Further workflows test the Lantern renderer and check narration files on each change.</li>
+        </ul>
+
+        <p>Secrets for these functions live in Vercel and GitHub environment settings, never in the repository.</p>
+    </div>
+</section>
+
+<section class="content-section alt" id="search-seo">
+    <div class="content-wrapper">
+        <h2>Search, SEO and discoverability</h2>
+
+        <ul>
+            <li><strong>Site search</strong> is Pagefind: a static index generated after each build and queried entirely in the browser.</li>
+            <li><strong>Structured data.</strong> Every page carries schema.org JSON-LD for the organization and website; chapters and studies add <code>Article</code>, blog posts <code>BlogPosting</code>, and the two volume pages <code>Book</code>.</li>
+            <li><strong>Sharing cards.</strong> Open Graph and Twitter Card tags on every page, with per-page titles and images where set.</li>
+            <li><strong>Indexing control.</strong> A generated <code>sitemap.xml</code> and <code>robots.txt</code>; a canonical link on every page. Draft pages are <code>noindex, nofollow</code>. The live-session presentation pages are <code>noindex</code>, point their canonical link at the public page they mirror, and are left out of search and the sitemap, so search engines never see duplicates.</li>
+            <li><strong>Feeds.</strong> An Atom feed for blog posts.</li>
+            <li><strong>No tracking.</strong> The page template loads no analytics, advertising or tracking script.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="content-section" id="study-tools">
+    <div class="content-wrapper">
+        <h2>Interactive study tools</h2>
+
+        <p>Several sections behave more like small applications than pages. All of them are still static output; their interactivity is client-side JavaScript over data the build supplied.</p>
+
+        <table class="uth-table">
+            <thead><tr><th scope="col">Tool</th><th scope="col">Address</th><th scope="col">What is technically interesting</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">Articles of Interfaith Discipleship</th><td data-label="Address"><code>/articles/</code></td><td data-label="What is technically interesting">A citation apparatus of over a thousand scripture links, all generated from the site's own book map, plus a build-time engine that links each Article to the chapters sharing its themes (and to their songs) with nothing maintained by hand</td></tr>
+                <tr><th scope="row">Article reading pages</th><td data-label="Address"><code>/articles/video-NN/</code></td><td data-label="What is technically interesting">A film per Article with a synced transcript and citation dock, built from the same single copy of each Article's text</td></tr>
+                <tr><th scope="row">Live-session presentation pages</th><td data-label="Address"><code>/chat/</code></td><td data-label="What is technically interesting">Layouts for projectors and VR headsets: the film flanked by welcome and status panels, three view modes on hidden host keys, sized by container queries; kept out of search</td></tr>
+                <tr><th scope="row">Seeking Jesus of Nazareth</th><td data-label="Address"><code>/seeking-jesus/</code></td><td data-label="What is technically interesting">A comparative study of how Christian traditions describe Jesus. Its data is generated by a Python pipeline from a research workbook and checked by a Node verifier on every build; modules include a map, a “code it yourself” exercise, a conversation builder and a self-check that writes goals to the reader's journal</td></tr>
+                <tr><th scope="row">Approaches to Belief and other studies</th><td data-label="Address"><code>/studies/</code></td><td data-label="What is technically interesting">Long-form studies with read-aloud audio and the same reflection tools as chapters</td></tr>
+                <tr><th scope="row">His Work and Glory</th><td data-label="Address"><code>/creation/</code></td><td data-label="What is technically interesting">A film with a 135-span citation apparatus synced to its transcript</td></tr>
+            </tbody>
+        </table>
+
+        <p>A Christlike Practices app for Volume 1 is in development. Its data model is append-only by design: a practice can be taken up again and again, and no schema has a “completed forever” state.</p>
+    </div>
+</section>
+
+<section class="content-section alt" id="authoring">
+    <div class="content-wrapper">
+        <h2>How the site is authored and shipped</h2>
+
+        <p>This is a one-person ministry site, and the workflow is shaped by that.</p>
+
+        <ol>
+            <li><strong>The author writes the words.</strong> All canonical prose, theology and lyrics are Brother Aaron's. AI assistance (Anthropic's Claude) drafts code, builds tooling and proposes edits; the site's AI Disclosure section says so plainly.</li>
+            <li><strong>Propose, authorize, execute.</strong> No file is written, committed or deployed without the author's explicit approval in the session. Changes to data-heavy features carry their own validation scripts, and learner-facing pages are scored against a written teaching-practices standard before they ship.</li>
+            <li><strong>Direct to <code>main</code>.</strong> A single developer means no pull-request queue: a change is built and checked locally, pushed to <code>main</code>, and Vercel deploys it.</li>
+            <li><strong>Verify the live page, not the report.</strong> After a deploy the change is checked in a real browser on the production site before it counts as done.</li>
+            <li><strong>State in the repository.</strong> An operational-state file in the repo records what is live, what is in progress and what is blocked, and instruction files at three levels of the tree tell AI coding sessions the house rules (including traps such as a template-syntax collision that once broke the build).</li>
+        </ol>
+
+        <p>Behind the scenes, a private retrieval index over the ministry's manuscripts and session notes gives drafting sessions the author's own prior writing as context. It runs on the author's computer and is not part of the public site.</p>
+    </div>
+</section>
+
+<section class="content-section" id="trade-offs">
+    <div class="content-wrapper">
+        <h2>Design choices and trade-offs</h2>
+
+        <h3>Why it is built this way</h3>
+
+        <ul>
+            <li><strong>Static first.</strong> Pre-rendered pages are fast, cheap to host, hard to break and easy to cache. Reading the book never depends on a server being up.</li>
+            <li><strong>Media outside Git.</strong> Hundreds of audio files would bloat the repository and slow every build. Keeping them on R2 and referencing them by name keeps deploys small.</li>
+            <li><strong>Compute once, at build.</strong> Cross-references and catalogs are worked out when the site is built, not in each visitor's browser, so pages arrive complete and identical for everyone.</li>
+            <li><strong>No framework.</strong> Plain HTML and small scripts will still run in ten years without an upgrade treadmill, and they behave in the stripped-down browsers used inside VR headsets and on projectors.</li>
+            <li><strong>Fail closed.</strong> When data does not pass its checks, the build stops or the feature falls back to a safe static version (static lyrics instead of mistimed ones) rather than shipping something wrong.</li>
+        </ul>
+
+        <h3>What those choices cost</h3>
+
+        <ul>
+            <li>Some study pages carry a large inline data payload (on the order of 200 KB) because the data is embedded at build time; trimming it per module is planned.</li>
+            <li>Inline scripts and browser-stored sign-in tokens mean the site does not yet send a strict Content-Security-Policy header. HTTPS with HSTS is enforced.</li>
+            <li>Personal features depend on a single small API host. If it is down, reading continues but journal syncing waits.</li>
+            <li>Site search is basic; filtering and result weighting are a planned improvement.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="content-section alt" id="quick-answers">
+    <div class="content-wrapper">
+        <h2>Quick answers to common questions</h2>
+
+        <table class="uth-table">
+            <thead><tr><th scope="col">Question</th><th scope="col">Short answer</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">What is it built with?</th><td>Eleventy 2 with Nunjucks templates, Markdown, YAML and JSON data, vanilla JavaScript and CSS</td></tr>
+                <tr><th scope="row">Where is it hosted?</th><td>Pages on Vercel; media on Cloudflare R2 at <code>media.wordsofplainness.org</code>; accounts on a Django API at PythonAnywhere</td></tr>
+                <tr><th scope="row">Is there a database?</th><td>Not behind the pages. Only the personal features (accounts, journal) use one, through the API</td></tr>
+                <tr><th scope="row">React? Next.js? A CMS?</th><td>None. Content is files in Git; the build is the CMS</td></tr>
+                <tr><th scope="row">How does a change go live?</th><td>Push to <code>main</code>; Vercel runs validators, the Eleventy build and Pagefind, then deploys to the edge</td></tr>
+                <tr><th scope="row">How does the read-along highlighting work?</th><td>Narration comes with character-level timing; a script turns it into per-paragraph or per-sentence timestamps matched to numbers the build stamps on each block</td></tr>
+                <tr><th scope="row">How do synced lyrics work?</th><td>WebVTT cue files per song arrangement, validated against the lyric sheet at build time; a file that fails ships as static lyrics</td></tr>
+                <tr><th scope="row">How does search work without a server?</th><td>Pagefind builds a static index after each build; the browser queries it directly</td></tr>
+                <tr><th scope="row">Are scripture links typed by hand?</th><td>No. One book map, which the build writes into the pages that use it, turns a reference like <code>John 3:16</code> into a churchofjesuschrist.org study link; on chapter pages and in the Articles' citation panel that happens in the reader's browser</td></tr>
+                <tr><th scope="row">Do you track visitors?</th><td>The page template loads no analytics, advertising or tracking script</td></tr>
+                <tr><th scope="row">Is the source code open?</th><td>It is not released under an open-source license</td></tr>
+                <tr><th scope="row">Did AI write this site?</th><td>AI assistance writes and maintains much of the code under the author's direction and approval; the author writes the content. See the <a href="/about/#ai-disclosure" class="text-gold">AI Disclosure on the About page</a></td></tr>
+                <tr><th scope="row">Can I report a mistake?</th><td>Yes, through the contact form on the <a href="/connect/#contact" class="text-gold">Connect page</a>. The Articles' citation entries link there directly</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+</div>

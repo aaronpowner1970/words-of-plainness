@@ -2851,3 +2851,121 @@ body:has(.bottom-toolbar) .wop-font-widget {
         width: 46px;
     }
 }
+
+/* ============================================
+   UNDER THE HOOD (/about/under-the-hood/)
+   Palette and type come from the custom properties above.
+   ============================================ */
+.uth h3 {
+    color: var(--gold-light);
+    margin: var(--space-md) 0 var(--space-xs);
+}
+
+.uth ul,
+.uth ol {
+    margin: 0 0 var(--space-md) 1.4rem;
+}
+
+.uth li {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: var(--space-xs);
+}
+
+.uth code {
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--cream-soft);
+    background: var(--overlay-medium);
+    padding: 0.05em 0.35em;
+    border-radius: var(--radius-sm);
+    overflow-wrap: anywhere;
+}
+
+.uth-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 var(--space-md);
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.uth-table th,
+.uth-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--overlay-light);
+}
+
+.uth-table th {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-primary);
+    border-bottom: 2px solid var(--gold-dark);
+}
+
+.uth-table tbody th {
+    font-size: 1rem;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--gold-light);
+    border-bottom: 1px solid var(--overlay-light);
+    min-width: 9rem;
+}
+
+.uth-diagram {
+    margin: var(--space-md) 0;
+}
+
+.uth-diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.uth-diagram .uth-svg-narrow { display: none; }
+
+.uth-svg text { font-family: var(--font-sans); }
+.uth-svg .d-box { fill: var(--overlay-medium); stroke: var(--gold-dark); stroke-width: 1.5; }
+.uth-svg .d-accent { fill: var(--brown-medium); stroke: var(--gold-light); stroke-width: 2; }
+.uth-svg .d-note { fill: var(--burgundy); stroke: var(--cream-dark); stroke-width: 1.5; }
+.uth-svg .d-title { fill: var(--cream-soft); font-size: 15px; font-weight: 600; }
+.uth-svg .d-sub { fill: var(--cream-dark); font-size: 12px; }
+.uth-svg .d-label { fill: var(--gold-light); font-size: 12px; font-style: italic; }
+.uth-svg .d-line { fill: none; stroke: var(--gold-primary); stroke-width: 2; }
+.uth-svg .d-dash { fill: none; stroke: var(--gold-primary); stroke-width: 2; stroke-dasharray: 6 5; }
+.uth-svg .d-warn { fill: none; stroke: var(--cream); stroke-width: 2.5; }
+.uth-svg .d-head { fill: var(--gold-primary); }
+.uth-svg .d-head-warn { fill: var(--cream); }
+
+@media (max-width: 600px) {
+    .uth-diagram .uth-svg-wide { display: none; }
+    .uth-diagram .uth-svg-narrow { display: block; max-width: 400px; }
+
+    .uth-table,
+    .uth-table tbody,
+    .uth-table tr,
+    .uth-table th,
+    .uth-table td { display: block; width: 100%; }
+    .uth-table thead { position: absolute; left: -9999px; }
+    .uth-table tr {
+        padding: 0.6rem 0;
+        border-bottom: 1px solid var(--overlay-light);
+    }
+    .uth-table th,
+    .uth-table td,
+    .uth-table tbody th { border-bottom: 0; padding: 0.2rem 0; min-width: 0; }
+    .uth-table td[data-label]::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gold-primary);
+    }
+}
