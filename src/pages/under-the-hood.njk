@@ -393,7 +393,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
             <li><strong>Data handoff.</strong> Where a page needs structured data, the build writes it inline as a JSON object on <code>window</code> (the music catalog, the Articles-to-chapters map, citation apparatus). There are no client-side data fetches for content.</li>
             <li><strong>Styling.</strong> A single base stylesheet sets the palette (warm gold, cream and deep browns) and type (Crimson Pro for reading, Source Sans Pro for interface), with per-feature sheets layered on. Stylesheets are cache-busted with the site version number.</li>
             <li><strong>Layout.</strong> Responsive CSS throughout; the presentation pages for live group sessions use container queries so the same page fits a phone, a laptop, a projector and a 1280×630 window inside a VR headset.</li>
-            <li><strong>Accessibility.</strong> Skip link, labelled controls, an on-page text-size control, keyboard shortcuts on the presentation pages, and animation that respects the reduced-motion setting.</li>
+            <li><strong>Accessibility.</strong> Skip link, labeled controls, an on-page text-size control, keyboard shortcuts on the presentation pages, and animation that respects the reduced-motion setting.</li>
             <li><strong>Browser storage.</strong> Small conveniences (where a floating badge was dragged, which view mode is on) use session storage. Reflections fall back to local storage when a reader is not signed in, so nothing a reader writes is lost.</li>
         </ul>
     </div>
@@ -506,7 +506,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
         <h3>What those choices cost</h3>
 
         <ul>
-            <li>Some study pages carry a large inline data payload (on the order of 200 KB) because the data is embedded at build time; trimming it per module is planned.</li>
+            <li>Some pages carry a large inline data payload because the data is embedded at build time: about 200 KB on the Seeking Jesus app, about 300 KB on the Creation study, and about 2.4 MB on the Articles page, which is the heaviest. Trimming these is planned.</li>
             <li>Inline scripts and browser-stored sign-in tokens mean the site does not yet send a strict Content-Security-Policy header. HTTPS with HSTS is enforced.</li>
             <li>Personal features depend on a single small API host. If it is down, reading continues but journal syncing waits.</li>
             <li>Site search is basic; filtering and result weighting are a planned improvement.</li>
