@@ -1,0 +1,200 @@
+---js
+{
+  // With the switch OFF the page takes no part in the build: no layout and no permalink.
+  eleventyComputed: {
+    layout: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "layouts/page.njk" : false),
+    title: (data) => (data.aoidCorrections && data.aoidCorrections.on ? data.aoidCorrections.title : "AoID corrections"),
+    pageTitle: (data) => (data.aoidCorrections && data.aoidCorrections.on ? data.aoidCorrections.title : "")
+  },
+  // Built only when the Second Edition switch is ON (src/_data/aoidSecondEdition.js);
+  // with the switch OFF there is no page at this address.
+  permalink: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "/aoid/corrections/" : false),
+  description: "Tell us if we have misread your church's adopted text, or missed one it has adopted.",
+  eleventyExcludeFromCollections: true,
+  pagefindIgnore: true
+  // Every word below comes from src/_data/aoidCorrections.js (the approved wording, step 88). Submissions go
+  // privately to the Django contact endpoint through src/js/api.js; nothing is stored in this repository.
+}
+---
+
+<style>
+.cf { max-width: 640px; margin: 0 auto; padding: 0 1.25rem; font-family: 'Crimson Pro', Georgia, serif; font-size: 1.1rem; line-height: 1.75; color: var(--cream); }
+.cf p { margin: 0 0 1rem; opacity: .94; }
+.cf h2 { font-size: 1.05rem; font-weight: 600; color: var(--gold-primary); margin: 1.5rem 0 .4rem; }
+.cf-form { margin-top: 2rem; }
+.cf-field { margin-bottom: 1.25rem; }
+.cf-field label { display: block; font-size: .95rem; font-weight: 600; color: var(--cream, #E8DCC4); margin-bottom: .4rem; }
+.cf-mark { font-weight: 400; opacity: .75; }
+.cf-hint { display: block; font-size: .82rem; color: rgba(232, 220, 196, .7); font-style: italic; margin-bottom: .4rem; }
+.cf-field select, .cf-field input, .cf-field textarea { width: 100%; box-sizing: border-box; padding: .65rem .85rem; background: rgba(0, 0, 0, .25); border: 1px solid rgba(196, 148, 58, .25); border-radius: 6px; color: var(--cream, #E8DCC4); font-family: var(--font-body, 'Crimson Pro', Georgia, serif); font-size: 1rem; line-height: 1.6; transition: border-color .2s; }
+.cf-field select:focus, .cf-field input:focus, .cf-field textarea:focus { outline: 2px solid var(--gold-primary, #C4943A); outline-offset: 1px; border-color: var(--gold-primary, #C4943A); }
+.cf-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C4943A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .85rem center; padding-right: 2.25rem; cursor: pointer; }
+.cf-field select option { background: #2A1D14; color: #E8DCC4; }
+.cf-field textarea { min-height: 140px; resize: vertical; }
+.cf-privacy { margin: 1.5rem 0 1rem; font-size: 1rem; }
+.cf-btn { display: inline-block; padding: .7rem 1.75rem; background: var(--gold-primary, #C4943A); color: var(--brown-deep, #1E1208); font-family: var(--font-heading, 'Cinzel', serif); font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border: none; border-radius: 6px; cursor: pointer; transition: background .2s; }
+.cf-btn:hover { background: var(--gold-light, #D4A84A); }
+.cf-btn:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+.cf-btn:disabled { opacity: .6; cursor: not-allowed; }
+.cf-failure { padding: .75rem 1rem; background: rgba(212, 105, 74, .15); border: 1px solid rgba(212, 105, 74, .3); border-radius: 6px; color: #F0A58C; font-size: 1rem; margin-bottom: 1rem; }
+.cf-success { padding: 1.5rem; background: rgba(196, 148, 58, .08); border: 1px solid rgba(196, 148, 58, .25); border-radius: 12px; margin-top: 2rem; }
+.cf-success p { margin: 0; }
+.cf-hp { position: absolute; left: -5000px; opacity: 0; height: 0; overflow: hidden; }
+.cf .hidden { display: none !important; }
+@media (max-width: 480px) { .cf { padding: 0 1rem; font-size: 1.05rem; } .cf-btn { width: 100%; } }
+</style>
+
+<div class="cf">
+<p>{{ aoidCorrections.intro }}</p>
+{% for s in aoidCorrections.sections %}
+<h2>{{ s.heading }}</h2>
+<p>{{ s.text }}</p>
+{% endfor %}
+
+<div class="cf-success hidden" id="cfSuccess" role="status" tabindex="-1">
+<p>{{ aoidCorrections.success }}</p>
+</div>
+
+<form class="cf-form" id="cfForm">
+<input type="text" name="website" class="cf-hp" autocomplete="off" tabindex="-1" aria-hidden="true">
+<input type="hidden" name="loaded_at" value="">
+{% set f = aoidCorrections.fields %}
+
+<div class="cf-field">
+<label for="cf-tradition">{{ f[0].label }} <span class="cf-mark">({{ "required" if f[0].required else "optional" }})</span></label>
+<span class="cf-hint" id="cf-tradition-hint">{{ f[0].helper }}</span>
+<select id="cf-tradition" name="tradition" required aria-describedby="cf-tradition-hint">
+<option value="" selected></option>
+{% for t in aoidCorrections.traditions %}<option value="{{ t }}">{{ t }}</option>
+{% endfor %}<option value="{{ aoidCorrections.otherTradition }}">{{ aoidCorrections.otherTradition }}</option>
+</select>
+</div>
+
+<div class="cf-field">
+<label for="cf-church">{{ f[1].label }} <span class="cf-mark">({{ "required" if f[1].required else "optional" }})</span></label>
+<span class="cf-hint" id="cf-church-hint">{{ f[1].helper }}</span>
+<input type="text" id="cf-church" name="church" maxlength="200" autocomplete="off" aria-describedby="cf-church-hint">
+</div>
+
+<div class="cf-field">
+<label for="cf-teaching">{{ f[2].label }} <span class="cf-mark">({{ "required" if f[2].required else "optional" }})</span></label>
+<span class="cf-hint" id="cf-teaching-hint">{{ f[2].helper }}</span>
+<input type="text" id="cf-teaching" name="teaching" maxlength="300" autocomplete="off" aria-describedby="cf-teaching-hint">
+</div>
+
+<div class="cf-field">
+<label for="cf-citation">{{ f[3].label }} <span class="cf-mark">({{ "required" if f[3].required else "optional" }})</span></label>
+<span class="cf-hint" id="cf-citation-hint">{{ f[3].helper }}</span>
+<input type="text" id="cf-citation" name="citation" required maxlength="500" autocomplete="off" aria-describedby="cf-citation-hint">
+</div>
+
+<div class="cf-field">
+<label for="cf-link">{{ f[4].label }} <span class="cf-mark">({{ "required" if f[4].required else "optional" }})</span></label>
+<input type="url" id="cf-link" name="link" maxlength="500" pattern="https?://.+" autocomplete="off">
+</div>
+
+<div class="cf-field">
+<label for="cf-note">{{ f[5].label }} <span class="cf-mark">({{ "required" if f[5].required else "optional" }})</span></label>
+<span class="cf-hint" id="cf-note-hint">{{ f[5].helper }}</span>
+<textarea id="cf-note" name="note" required maxlength="5000" aria-describedby="cf-note-hint"></textarea>
+</div>
+
+<div class="cf-field">
+<label for="cf-name">{{ f[6].label }} <span class="cf-mark">({{ "required" if f[6].required else "optional" }})</span></label>
+<input type="text" id="cf-name" name="name" maxlength="100" autocomplete="name">
+</div>
+
+<div class="cf-field">
+<label for="cf-email">{{ f[7].label }} <span class="cf-mark">({{ "required" if f[7].required else "optional" }})</span></label>
+<span class="cf-hint" id="cf-email-hint">{{ f[7].helper }}</span>
+<input type="email" id="cf-email" name="email" maxlength="254" autocomplete="email" aria-describedby="cf-email-hint">
+</div>
+
+<div class="cf-failure hidden" id="cfFailure" role="alert">{{ aoidCorrections.failure }}</div>
+
+<p class="cf-privacy">{{ aoidCorrections.privacy }}</p>
+<button type="submit" class="cf-btn" id="cfSubmit">{{ aoidCorrections.button }}</button>
+</form>
+</div>
+
+<script>
+/**
+ * AoID corrections form (CODE-AOID2-47, step 88).
+ * Posts through the site's API client (window.API.submitContact, src/js/api.js) to the Django /contact/
+ * endpoint with submission_type "general" (the API accepts no other type for this: its choices are general,
+ * suggestion, technical, prayer, other). The subject prefix "AoID correction:" marks the message.
+ * No relative fallback: if the API client is unavailable, the failure message shows.
+ * Stores nothing in localStorage or anywhere else on the reader's device.
+ */
+(function () {
+  var form = document.getElementById('cfForm');
+  if (!form) return;
+  var submitBtn = document.getElementById('cfSubmit');
+  var failure = document.getElementById('cfFailure');
+  var success = document.getElementById('cfSuccess');
+  var loadedAt = form.querySelector('[name="loaded_at"]');
+  var MIN_MS = 3000; // the same minimum time as the safety form
+  var FLOORS = {{ aoidCorrections.floorsByArticle | dump | replace("<", "\\u003c") | safe }};
+
+  loadedAt.value = Date.now().toString();
+
+  // Pre-fill field 3 from ?article=N[&floor=ID,ID]; only an Article and floor ids this site holds are used.
+  (function prefill() {
+    var params;
+    try { params = new URLSearchParams(window.location.search); } catch (e) { return; }
+    var n = params.get('article');
+    if (!n || !/^\d{1,2}$/.test(n) || !Object.prototype.hasOwnProperty.call(FLOORS, n)) return;
+    var held = FLOORS[n];
+    var ids = (params.get('floor') || '').split(',').filter(function (id) { return Object.prototype.hasOwnProperty.call(held, id); });
+    var text = 'Article ' + n + (ids.length ? ': ' + ids.map(function (id) { return held[id] + ' (' + id + ')'; }).join('; ') : '');
+    var field = document.getElementById('cf-teaching');
+    if (field && !field.value) field.value = text;
+  })();
+
+  function val(id) { return document.getElementById(id).value.trim(); }
+  function line(label, value) { return label + ': ' + (value || '(not given)'); }
+  function showFailure() { failure.classList.remove('hidden'); }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    failure.classList.add('hidden');
+
+    var hp = form.querySelector('[name="website"]');
+    if (hp && hp.value) return; // bot filled the honeypot
+    var ts = parseInt(loadedAt.value, 10);
+    if (ts && (Date.now() - ts) < MIN_MS) return; // submitted too fast
+
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    var tradition = val('cf-tradition');
+    // The API requires a name and an email; both are optional here, so a stand-in is sent when they are left empty.
+    var data = {
+      name: val('cf-name') || 'Anonymous',
+      email: val('cf-email') || 'no-email-given@aoid.invalid',
+      submission_type: 'general',
+      subject: 'AoID correction: ' + tradition,
+      message: [
+        line('Tradition', tradition),
+        line('Church', val('cf-church')),
+        line('Teaching', val('cf-teaching')),
+        line('Citation', val('cf-citation')),
+        line('Link', val('cf-link')),
+        line('Note', val('cf-note'))
+      ].join('\n')
+    };
+
+    if (!(window.API && typeof window.API.submitContact === 'function')) { showFailure(); return; }
+
+    submitBtn.disabled = true;
+    Promise.resolve()
+      .then(function () { return window.API.submitContact(data); })
+      .then(function () {
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+        success.focus();
+      })
+      .catch(showFailure)
+      .then(function () { submitBtn.disabled = false; });
+  });
+})();
+</script>

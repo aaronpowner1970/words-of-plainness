@@ -34,6 +34,7 @@
 {%- if aoidArticleTabs.methodHtml %}
         <section class="an-method">{{ aoidArticleTabs.methodHtml | safe }}</section>
 {%- endif %}
+        <p class="an-correction-link">{{ aoidCorrections.linkHtml(t.n) | safe }}</p>
     </div>
     <div role="tabpanel" class="an-panel an-prose" id="{{ t.id }}-record" aria-labelledby="{{ t.id }}-tab-record" hidden>
 {%- if t.source %}
@@ -45,4 +46,5 @@
 {%- else %}
         <p class="an-generated">{{ t.recordLine }}</p>
 {%- endif %}
+        <p class="an-correction-link">{{ aoidCorrections.linkHtml(t.n, aoidCorrections.floorIds(t.n)) | safe }}</p>
     </div>

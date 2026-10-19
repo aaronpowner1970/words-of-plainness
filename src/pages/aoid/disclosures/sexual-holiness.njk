@@ -56,7 +56,10 @@
 
 <div class="disc-correction">
 <p>{{ aoidDisclosures.correctionHtml | safe }}</p>
-</div>
+</div>{% if aoidSecondEdition.on %}
+<div class="disc-correction">
+<p>{{ aoidCorrections.linkHtml(11) | safe }}</p>
+</div>{% endif %}
 </div>
 
 <script>
