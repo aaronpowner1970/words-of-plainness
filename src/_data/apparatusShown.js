@@ -41,8 +41,10 @@ const A08_SECOND_EDITION = ['s18', 's19', 's20', 's21'];
    with it ON the marker fields are stripped, so none is ever embedded. */
 const A12_SECOND_EDITION = ['s11', 's12'];
 
+/* Article 9 (CODE-AOID2-46): an anchor with `first_edition_only: true` is the mirror of `second_edition: true`. It stays
+   with the switch OFF and is dropped with the switch ON (A09 s4, D&C 35:17-18). The marker is never embedded. */
 const firstEditionAnchor = (a) => {
-  const { second_edition, comment_first_edition, ...rest } = a;
+  const { second_edition, first_edition_only, comment_first_edition, ...rest } = a;
   return comment_first_edition === undefined ? rest : { ...rest, comment: comment_first_edition };
 };
 const firstEditionSpan = (s) => {
@@ -57,13 +59,13 @@ const firstEditionSpan = (s) => {
   return out;
 };
 const secondEditionAnchor = (a) => {
-  const { second_edition, comment_first_edition, ...rest } = a;
+  const { second_edition, first_edition_only, comment_first_edition, ...rest } = a;
   return rest;
 };
 const secondEditionSpan = (s) => {
   const { text_first_edition, panel_comment_first_edition, ...rest } = s;
   const out = { ...rest };
-  for (const k of ['biblical', 'restoration']) if (Array.isArray(rest[k])) out[k] = rest[k].map(secondEditionAnchor);
+  for (const k of ['biblical', 'restoration']) if (Array.isArray(rest[k])) out[k] = rest[k].filter((a) => !a.first_edition_only).map(secondEditionAnchor);
   return out;
 };
 const mapSpans = (spans, f) => Object.fromEntries(Object.entries(spans).map(([id, s]) => [id, f(s)]));

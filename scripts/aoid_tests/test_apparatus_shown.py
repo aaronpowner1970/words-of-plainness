@@ -15,7 +15,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 DATA = json.loads((REPO / "src" / "_data" / "apparatusData.json").read_text(encoding="utf-8"))
-MARKERS = ("text_first_edition", "panel_comment_first_edition", "comment_first_edition", "second_edition")
+MARKERS = ("text_first_edition", "panel_comment_first_edition", "comment_first_edition", "second_edition", "first_edition_only")
 NEW_SPANS = ("s11", "s12")
 
 
@@ -116,4 +116,39 @@ def test_article_9_s6_to_s9_switch_on_opens_each_comment_with_its_floor_and_adds
         "Read with Moroni 10:4–5, cited above with the Spirit as Teacher."
     )
     assert sum("comment_first_edition" in a for sid in A09_REVISED for col in ("biblical", "restoration") for a in DATA["A09"][sid][col]) >= 6
+
+# Article 9 commentary corrections (CODE-AOID2-46): revised panel comments on s1-s22 (s8's was built in CODE-AOID2-44),
+# revised anchor notes, one added anchor (2 Nephi 9:25-26 at s17), one removed anchor (D&C 35:17-18 at s4, marked
+# `first_edition_only`), the s26 floor sentence, all behind the switch.
+A09_CORRECTED = tuple(f"s{i}" for i in range(1, 23))
+
+
+def test_article_9_corrections_switch_off_keeps_head_comments_and_anchors():
+    a09 = shown(False)["A09"]
+    for sid in A09_CORRECTED:
+        src = DATA["A09"][sid]
+        assert src["panel_comment_first_edition"], sid
+        assert a09[sid]["panel_comment"] == src["panel_comment_first_edition"], sid
+        for col in ("biblical", "restoration"):
+            for a in a09[sid][col]:
+                srca = next(x for x in src[col] if x["ref"] == a["ref"])
+                assert a["comment"] == srca.get("comment_first_edition", srca["comment"]), (sid, a["ref"])
+    assert "D&C 35:17–18" in [a["ref"] for a in a09["s4"]["restoration"]]
+    assert "2 Nephi 9:25–26" not in [a["ref"] for a in a09["s17"]["restoration"]]
+    assert "s26" not in a09 and "s29" not in a09
+
+
+def test_article_9_corrections_switch_on_shows_approved_changes():
+    a09 = shown(True)["A09"]
+    for sid in A09_CORRECTED:
+        assert a09[sid]["panel_comment"] == DATA["A09"][sid]["panel_comment"], sid
+        assert a09[sid]["panel_comment"] != DATA["A09"][sid].get("panel_comment_first_edition"), sid
+    assert "D&C 35:17–18" not in [a["ref"] for a in a09["s4"]["restoration"]]
+    assert len(a09["s4"]["restoration"]) == len(DATA["A09"]["s4"]["restoration"]) - 1
+    assert [a["ref"] for a in a09["s17"]["restoration"]].count("2 Nephi 9:25–26") == 1
+    assert a09["s26"]["panel_comment"].split(chr(10) * 2)[0].endswith(
+        "It connects to the one boundary the Prologue names. It does not settle how that witness is received or recognised."
+    )
+    assert "AOID2-BOUNDARY" not in a09["s26"]["panel_comment"]
+    assert a09["s29"]["panel_comment"].count(chr(10) * 2) == 2 - 1
 

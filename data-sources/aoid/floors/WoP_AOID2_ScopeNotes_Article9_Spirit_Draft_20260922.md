@@ -48,7 +48,7 @@ Apparatus instruction (Aaron, 22 Sep 2026): the Restoration column carries Moron
 
 ## R4. Witness of Christ (also covers item 19, by Aaron's ruling of 22 Sep 2026: no separate span): RATIFIED by Aaron 22 Sep 2026 (with 3 Nephi 11:32, 36 in the Restoration column)
 
-> The Article confesses only what John 15:26 and 1 Corinthians 12:3 confess: the Spirit testifies of Christ, and no one can say that Jesus is Lord but by the Holy Spirit. This is the floor. It connects to the one boundary the Prologue names (AOID2-BOUNDARY). It does not settle how that witness is received or recognised.
+> The Article confesses only what John 15:26 and 1 Corinthians 12:3 confess: the Spirit testifies of Christ, and no one can say that Jesus is Lord but by the Holy Spirit. This is the floor. It connects to the one boundary the Prologue names. It does not settle how that witness is received or recognised.
 
 Apparatus instruction (Aaron, 22 Sep 2026): the Restoration column carries 3 Nephi 11:32, 36, where Christ says the Holy Ghost bears record of the Father and of Him (pairs with John 15:26). The apparatus marks the cross-reference to the Prologue's boundary (1 Corinthians 12:3, AOID2-BOUNDARY) so the repetition reads as intended.
 
