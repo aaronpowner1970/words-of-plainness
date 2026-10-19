@@ -1,0 +1,73 @@
+{#
+  layouts/under-the-hood.njk — /about/under-the-hood/
+
+  The page layout plus a slide-out contents tray. The tray reuses the Articles
+  drawer's markup and classes (an-tab / an-drawer / an-link, styled by
+  articles-panel.css) so the two look and open the same way. The Articles
+  drawer script is inline in layouts/articles.njk and /articles/ is untouched,
+  so this page carries its own small script (js/uth-toc.js) for open/close,
+  focus and the scroll-spy. The list is built at build time from the page's
+  `toc` front matter, as the Articles list is written at build time.
+#}
+{% extends "layouts/page.njk" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/css/articles-panel.css?v={{ site.version }}">
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div data-pagefind-ignore>
+<button class="an-tab uth-tab" id="anTab"
+        aria-label="Open page contents"
+        aria-expanded="false"
+        aria-controls="anDrawer"
+        type="button">
+    <span class="an-tab-label">Contents</span>
+    <svg class="an-tab-chevron" viewBox="0 0 24 24" width="11" height="11"
+         fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true">
+        <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+</button>
+
+<aside class="an-drawer" id="anDrawer"
+       role="navigation"
+       aria-label="Page contents"
+       aria-hidden="true"
+       inert>
+    <div class="an-drawer-header">
+        <span class="an-drawer-title">On this page</span>
+        <button class="an-drawer-close" id="anClose"
+                aria-label="Close contents" type="button">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
+
+    <nav class="an-drawer-nav" aria-label="Jump to section">
+        <ul class="an-drawer-list">
+            {%- for s in toc %}
+            <li><a href="#{{ s.id }}" class="an-link uth-toc-link">{{ s.title }}</a>
+                {%- if s.children %}
+                <ul class="an-drawer-list uth-toc-sub">
+                    {%- for c in s.children %}
+                    <li><a href="#{{ c.id }}" class="an-link uth-toc-link uth-toc-link--sub">{{ c.title }}</a></li>
+                    {%- endfor %}
+                </ul>
+                {%- endif %}
+            </li>
+            {%- endfor %}
+        </ul>
+    </nav>
+</aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/js/uth-toc.js?v={{ site.version }}" defer></script>
+{% endblock %}

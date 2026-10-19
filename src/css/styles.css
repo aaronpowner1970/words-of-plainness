@@ -1798,6 +1798,31 @@ p {
     color: var(--cream-dark);
 }
 
+/* Under the Hood hook at the end of "How This Work Is Made" */
+.about-uth-callout {
+    box-sizing: border-box;
+    width: 100%;
+    margin: var(--space-lg) 0;
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(196, 148, 58, 0.08);
+    border: 1px solid var(--gold-primary);
+    border-radius: 10px;
+}
+
+.about-uth-callout p {
+    margin: 0;
+}
+
+.about-prayer {
+    margin-top: var(--space-lg);
+}
+
+@media (max-width: 600px) {
+    .about-uth-callout {
+        padding: var(--space-md) var(--space-sm);
+    }
+}
+
 /* --- Image Lightbox --- */
 .image-lightbox {
     position: fixed;
@@ -2967,5 +2992,97 @@ body:has(.bottom-toolbar) .wop-font-widget {
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--gold-primary);
+    }
+}
+
+/* Under the Hood: sections and subsections clear the fixed header when jumped to */
+.uth section[id],
+.uth h3[id] {
+    scroll-margin-top: 130px;
+}
+
+.uth section[tabindex]:focus,
+.uth h3[tabindex]:focus {
+    outline: none;
+}
+
+.uth .uth-table--roles tbody th,
+.uth .uth-table--tools tbody th {
+    min-width: 11rem;
+}
+
+/* Contents tray: nested H3 entries (the tray itself is styled by articles-panel.css) */
+.uth-toc-sub {
+    margin: 0;
+}
+
+.an-link.uth-toc-link {
+    font-size: 0.9rem;
+}
+
+.an-link.uth-toc-link--sub {
+    padding-left: 1.9rem;
+    font-size: 0.82rem;
+}
+
+/* The SCRIBE speaks in its own voice on this page: both treatments set it apart
+   from the author's prose, the aside loudly and the "From the SCRIBE:" note quietly. */
+.uth .uth-scribe-note {
+    margin: var(--space-md) 0;
+    padding: 0.2rem 0 0.2rem var(--space-sm);
+    border-left: 2px solid var(--gold-dark);
+    color: var(--cream-dark);
+    font-size: 1rem;
+}
+
+.uth .uth-scribe-note > em:first-child {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    color: var(--gold-light);
+}
+
+.uth .uth-scribe-aside {
+    margin: var(--space-lg) 0 0;
+    padding: var(--space-md) clamp(1rem, 4vw, 2rem);
+    background: var(--overlay-medium);
+    border: 1px solid var(--burgundy-light);
+    border-left: 5px solid var(--burgundy);
+    border-radius: var(--radius-sm);
+}
+
+.uth .uth-scribe-aside h3 {
+    margin-top: 0;
+}
+
+.uth .uth-scribe-aside p {
+    color: var(--cream-dark);
+}
+
+.uth .uth-scribe-aside .uth-scribe-attribution {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--gold-light);
+    padding-bottom: var(--space-xs);
+    border-bottom: 1px solid var(--overlay-light);
+}
+
+.uth .uth-scribe-aside > p:last-child {
+    margin-bottom: 0;
+}
+
+/* Phones: a slimmer contents tab, with the page text kept clear of it */
+@media (max-width: 600px) {
+    .an-tab.uth-tab {
+        padding: 0.9rem 0.3rem;
+    }
+
+    .an-tab.uth-tab .an-tab-label {
+        font-size: 0.7rem;
+    }
+
+    .uth .content-wrapper {
+        padding-left: 0.9rem;
     }
 }
