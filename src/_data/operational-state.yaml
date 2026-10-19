@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: September 26, 2026
+# Last updated: October 19, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -388,6 +388,23 @@ workstreams:
       (beta accounts dropped; KMC keeps Studying/Practicing/Integrated vocabulary);
       KMC catalog.json fixture at working-folder/ch18-christlike-practices/kmc/.
     next_action: "Phase 1 — corpus canonicalization, domain batch 1 (Attentive Presence, 9 practices), Cowork session."
+
+  - id: under-the-hood-page
+    name: "Under the Hood — public build explainer"
+    status: live
+    priority: low
+    state: >
+      LIVE 2026-10-19 (commit 49740aa). /about/under-the-hood/ explains how the
+      site is built for IT and developer visitors. Source:
+      src/pages/under-the-hood.njk (layout page.njk; styles appended to
+      css/styles.css under .uth). Two inline SVG diagrams, each drawn twice
+      (wide and narrow) and swapped at 600px. Linked from the end of About's
+      #ai-disclosure section; in sitemap.xml and Pagefind (wrapped in
+      data-pagefind-body, which the site requires for indexing). Scripture-link
+      wording says links are made in the browser from one book map the build
+      writes into the page (chapter pages and the Articles citation panel).
+      Facts in the copy (counts, headers, workflows) are a 2026-10-19 snapshot;
+      re-check them if the stack changes.
 
 # ═══════════════════════════════════════════════════════════════════
 # OPEN / BLOCKED
