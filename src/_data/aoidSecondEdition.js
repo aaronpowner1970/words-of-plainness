@@ -36,6 +36,7 @@ const path = require('path');
 const WORDING = 'data-sources/aoid/second-edition/WoP_AOID2_Step75_Prologue_ApprovedWording_20261011.md';
 const WORDING_79 = 'data-sources/aoid/second-edition/WoP_AOID2_Step79_Article11_ApprovedWording_20261012.md';
 const FIRST_EDITION_URL ='/articles/first-edition/';
+const CHANGE_LOG_URL = '/aoid/second-edition/';
 const SCRIPTURE = 'https://www.churchofjesuschrist.org/study/scriptures/nt/';
 
 const on = process.env.WOP_AOID2_SECOND_EDITION === '1';
@@ -94,11 +95,16 @@ else {
 
   // "First Edition" links to the preserved first-edition page.
   mustHave(editionFull, 'First Edition');
-  const editionHtml = esc(editionFull).replace('First Edition', '<a href="' + FIRST_EDITION_URL + '">First Edition</a>');
+  // "Second Edition" links to the change log (AOID2-CHANGELOG-PLACEMENT, step 89): markup only, wording unchanged.
+  mustHave(editionFull, 'Second Edition');
+  const editionHtml = esc(editionFull)
+    .replace('First Edition', '<a href="' + FIRST_EDITION_URL + '">First Edition</a>')
+    .replace('Second Edition', '<a href="' + CHANGE_LOG_URL + '">Second Edition</a>');
 
   module.exports = {
     on: true,
     firstEditionUrl: FIRST_EDITION_URL,
+    changeLogUrl: CHANGE_LOG_URL,
     prologueHeading: heading,
     heroLine: hero,
     boundary,

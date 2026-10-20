@@ -48,6 +48,8 @@ const path = require('path');
 const MarkdownIt = require('markdown-it');
 const disclosures = require('./aoidDisclosures.js');
 const howWeHold = require('./howWeHold.js');
+const step89 = require('./aoidStep89.js');   // { on: false } with the switch OFF
+const counts = require('./aoidCounts.js');   // { on: false } with the switch OFF
 
 const TABBED = ['A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'A11', 'A12', 'A13', 'A14'];
 
@@ -70,7 +72,9 @@ function readMethod() {
   if (!src.trim()) return '';
   return MarkdownIt({ html: false, linkify: false, typographer: false }).render(src);
 }
-const methodHtml = readMethod();
+// Phase C6 (CODE-AOID2-48): the method account is built from the approved wording (aoidStep89.js); the file above
+// stays the fallback so that, with the switch OFF, this module still reads exactly what it read before.
+const methodHtml = step89.on ? step89.methodHtml : readMethod();
 
 // Disclosure sources by Article code.
 const sources = {};
@@ -93,10 +97,12 @@ TABBED.forEach((code) => {
     n: DISPLAYED_N[code] || Number(code.slice(1)),
     source,                       // disclosure source: Part 2 -> Disclosure tab, Part 3 -> Record tab
     noteKey,                      // howWeHold key: its note is moved into the Disclosure tab
-    disclosureLine: !source && !noteKey
+    stage1: step89.on ? (step89.stage1[code] || '') : '',    // "What the measurement found" (Stage 1 disclosures)
+    summary: counts.on ? (counts.tables[code] || '') : '',   // the Record tab's summary table
+    disclosureLine: !source && !noteKey && !(step89.on && step89.stage1[code])
       ? GENERATED.noDisclosure + (methodHtml ? ' ' + GENERATED.method : '')
       : '',
-    recordLine: source ? '' : GENERATED.noRecord,
+    recordLine: source || (counts.on && counts.tables[code]) ? '' : GENERATED.noRecord,
   };
 });
 

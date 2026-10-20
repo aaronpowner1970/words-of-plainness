@@ -520,6 +520,7 @@
 <script src="/js/articles-godeeper.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-howwehold.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-progress.js?v={{ site.version }}" defer></script>{% if aoidSecondEdition.on %}
+<script type="application/json" id="aoidCountData">{{ aoidCounts.spans | dump | safe }}</script>
 <script src="/js/articles-tabs.js?v={{ site.version }}" defer></script>{% endif %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {

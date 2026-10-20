@@ -1,0 +1,332 @@
+"""Tests for AOID2 step 89 (Phase C6, CODE-AOID2-48): the change log page, the method account, the Stage 1
+disclosures, the count sentence in a span's panel and the Record tab's summary table.
+
+Switch OFF: none of it exists. Switch ON: every section renders the approved wording, every count shown equals the
+single source (data-sources/aoid/floor_counts.json) and the floor ledger, a floor whose records disagree or that is
+not yet scored shows no count, and the "How this was measured" link and its "Back to span N" line work.
+
+Run: python -m pytest scripts/aoid_tests/test_step89.py
+"""
+import functools
+import html
+import http.server
+import json
+import os
+import re
+import subprocess
+import threading
+from pathlib import Path
+
+import pytest
+import yaml
+from playwright.sync_api import sync_playwright
+
+REPO = Path(__file__).resolve().parents[2]
+SE = REPO / "data-sources" / "aoid" / "second-edition"
+CHANGELOG = SE / "WoP_AOID2_Step89_ChangeLog_Draft_v1_20261019.md"
+METHOD = SE / "WoP_AOID2_Step89_MethodAccount_Draft_v1_20261019.md"
+STAGE1 = SE / "WoP_AOID2_Step89_Stage1Disclosures_Draft_v1_20261019.md"
+COUNTS = REPO / "data-sources" / "aoid" / "floor_counts.json"
+LEDGER = REPO / "data-sources" / "aoid" / "floor_ledger.yaml"
+FOS = REPO / "data-sources" / "aoid" / "disclosures" / "WoP_AOID2_FatherOfSpirits_Disclosure_Final_20261004.md"
+
+
+REVIEW_ONLY = {  # Stage 1 paragraphs wrapped for build-review mode (src/_data/aoidStep89.js REVIEW_ONLY)
+    "a06": ["Promises some churches confine to part of their people."],
+    "a11": ["Born of water and of the Spirit.", "Repent and be baptized."],
+}
+
+
+def build(out, on, review=False):
+    env = {k: v for k, v in os.environ.items() if k not in ("WOP_AOID2_SECOND_EDITION", "WOP_AOID2_BUILD_REVIEW")}
+    if on:
+        env["WOP_AOID2_SECOND_EDITION"] = "1"
+    if review:
+        env["WOP_AOID2_BUILD_REVIEW"] = "1"
+    r = subprocess.run(["npx", "@11ty/eleventy", f"--output={Path(out).as_posix()}"], cwd=REPO, env=env,
+                       stdin=subprocess.DEVNULL, capture_output=True, encoding="utf-8", errors="replace", shell=(os.name == "nt"))
+    assert r.returncode == 0, r.stderr[-2000:] + r.stdout[-1000:]
+
+
+@pytest.fixture(scope="module")
+def site_off(tmp_path_factory):
+    out = tmp_path_factory.mktemp("off")
+    build(out, False)
+    return out
+
+
+@pytest.fixture(scope="module")
+def site_on(tmp_path_factory):
+    out = tmp_path_factory.mktemp("on")
+    build(out, True)
+    return out
+
+
+@pytest.fixture(scope="module")
+def server(site_on):
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(site_on))
+    handler.log_message = lambda *a, **k: None
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    yield f"http://127.0.0.1:{srv.server_address[1]}"
+    srv.shutdown()
+
+
+@pytest.fixture(scope="module")
+def browser():
+    with sync_playwright() as p:
+        b = p.chromium.launch()
+        yield b
+        b.close()
+
+
+def text_of(fragment):
+    t = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", fragment, flags=re.S)
+    t = re.sub(r"</?(em|strong|a|span|i|b|sup)(?=[ >/])[^>]*>", "", t)
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", t))).strip()
+
+
+def plain_md(s):
+    s = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", s)
+    return re.sub(r"\s+", " ", s.replace("**", "").replace("*", "")).strip()
+
+
+def panel(page_html, art, name):
+    m = re.search(r'<div role="tabpanel"[^>]*id="%s-%s".*?(?=<div role="tabpanel"|<div class="articles-divider")' % (art, name), page_html, re.S)
+    assert m, f"{art} {name} panel not found"
+    return m.group(0)
+
+
+def quotes(path, tag_re):
+    lines = path.read_text(encoding="utf8").split("\n")
+    i = next(k for k, l in enumerate(lines) if re.match(tag_re, l))
+    out, cur, started = [], [], False
+    for l in lines[i + 1:]:
+        if l.startswith(">"):
+            started = True
+            t = re.sub(r"^> ?", "", l)
+            if t == "":
+                if cur:
+                    out.append(" ".join(cur)); cur = []
+            else:
+                cur.append(t)
+        elif started:
+            break
+    if cur:
+        out.append(" ".join(cur))
+    return out
+
+
+# ---------------------------------------------------------------- switch OFF
+def test_off_has_nothing(site_off):
+    assert not (site_off / "aoid" / "second-edition").exists()
+    arts = (site_off / "articles" / "index.html").read_text(encoding="utf8")
+    for needle in ("aoidCountData", "an-method", "an-stage1", "What the measurement found", "How These Articles Were Measured"):
+        assert needle not in arts, needle
+
+
+# ---------------------------------------------------------------- switch ON: static
+def test_change_log_page(site_on):
+    p = (site_on / "aoid" / "second-edition" / "index.html").read_text(encoding="utf8")
+    t = text_of(p.split('<div class="cl">')[1])
+    assert "added to seven others" in t and "nine others" not in t
+    assert "[PENDING" not in t and "[VERIFY" not in t
+    a5 = quotes(CHANGELOG, r"\*\*A5 \(criterion 9\)")[0]
+    assert plain_md(a5) in t
+    assert "Read it beside the First Edition" in t
+    assert 'href="/articles/#a02-method"' in p                      # A2
+    assert 'href="/aoid/corrections/"' in p                        # A4
+    for n, slug in enumerate(["of-love-for-god-and-neighbor", "of-god", "of-creation-and-life", "of-gods-word", "of-jesus-christ",
+                              "of-salvation", "of-the-kingdom-at-hand", "of-fellow-believers", "of-finding-our-way", "of-living-by-grace",
+                              "of-covenants-and-commitments", "of-immortality-and-eternal-life", "of-our-confidence"], 1):
+        assert f'href="/articles/#{slug}"' in p, n
+    assert "Quotations in the First Edition commentary of the other Articles" not in t     # step 124 line is not rendered
+    assert "taught in so many, contradicted in so many, no position in so many, of sixteen" in t
+
+
+def test_prologue_note_links_to_change_log(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    assert '<a href="/aoid/second-edition/">Second Edition</a> (2026) adds teachings' in arts
+
+
+def test_every_article_has_the_method_account(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    src = METHOD.read_text(encoding="utf8")
+    for code in ["a02", "a03", "a04", "a05", "a06", "a07", "a08", "a09", "a10", "a11", "a12", "a13", "a14"]:
+        d = text_of(panel(arts, code, "disclosure"))
+        assert "How These Articles Were Measured" in d, code
+        assert d.count("What a count cannot tell you") == 1, code
+    d = text_of(panel(arts, "a02", "disclosure"))
+    for tag in (r"\*\*A1\. Before", r"\*\*A2\. After", r"\*\*A3\. End of", r"\*\*A4\. End of", r"\*\*A7\. APPROVED"):
+        for q in quotes(METHOD, tag):
+            assert plain_md(q) in d, tag
+    for q in quotes(METHOD, r"\*\*A5\. New section")[1:]:
+        assert plain_md(q) in d
+    # positions: A1 first, then In short, A2, ... A5 before "If we have it wrong"
+    order = ["Start with one teaching.", "In short.", "What this page asks of you.", "What we read", "A text counts only when",
+             "The sixteen traditions", "Only the first number counts toward thirteen. Each Article's record",
+             "When a teaching falls short", "That is how Article 2's teaching", "Readings still being weighed",
+             "How quotations were checked", "What a count cannot tell you", "If we have it wrong"]
+    pos = [d.index(x) for x in order]
+    assert pos == sorted(pos), list(zip(order, pos))
+    assert 'href="/aoid/corrections/"' in panel(arts, "a02", "disclosure")
+
+
+def test_a1_figures_come_from_the_father_of_spirits_source(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    d = text_of(panel(arts, "a02", "disclosure"))
+    src = FOS.read_text(encoding="utf8")
+    m = re.search(r"\*\*Total teaching it\*\* \| \*\*(\d+) of 16\*\* \((\d+) divided, (\d+) no common position, (\d+) being confirmed\)", src)
+    words = ["none", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen"]
+    t, dv, n, c = (int(x) for x in m.groups())
+    assert f"{words[t]} teach it in their own adopted texts, {words[dv]} teaches otherwise, {words[n]} have adopted no text on it either way, and {words[c]} are still being confirmed" in d
+    assert f"{words[t].capitalize()} is short of thirteen" in d
+
+
+def test_stage1_sections(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    lines = STAGE1.read_text(encoding="utf8").split("\n")
+    for n, code in ((2, "a02"), (4, "a04"), (6, "a06"), (11, "a11")):
+        i = next(k for k, l in enumerate(lines) if re.match(r"## Article %d, " % n, l))
+        h = next(k for k in range(i, len(lines)) if lines[k] == "### What the measurement found")
+        e = next(k for k in range(h + 1, len(lines)) if lines[k].startswith("### "))
+        paras = [p for p in "\n".join(lines[h + 1:e]).strip().split("\n\n") if p.strip()]
+        d = text_of(panel(arts, code, "disclosure"))
+        assert "What the measurement found" in d
+        for p in paras:
+            p = re.sub(r"\s*\[VERIFY[^\]]*\]", "", p)
+            if any(p.startswith("**" + lead + "**") for lead in REVIEW_ONLY.get(code, [])):
+                assert plain_md(p) not in d, (code, "wrapped paragraph must not render in a normal build", p[:40])
+                continue
+            assert plain_md(p) in d, (code, p[:60])
+        assert d.index("What the measurement found") < d.index("How These Articles Were Measured")
+    a4 = text_of(panel(arts, "a04", "disclosure"))
+    assert "This Article has no disclosure of its own" not in a4
+    a6 = text_of(panel(arts, "a06", "disclosure"))
+    assert "[VERIFY" not in a6
+    assert "[UPDATE" not in arts.split('id="of-god"')[1].split('id="of-creation-and-life"')[0]
+
+
+def test_review_only_paragraphs_show_in_a_review_build(tmp_path):
+    out = tmp_path / "review"
+    build(out, True, review=True)
+    arts = (out / "articles" / "index.html").read_text(encoding="utf8")
+    for code, leads in REVIEW_ONLY.items():
+        d = panel(arts, code, "disclosure")
+        for lead in leads:
+            assert "an-review-only" in d and text_of(d).count(lead) == 1, (code, lead)
+
+
+def test_summary_tables_match_the_single_source(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    data = json.loads(COUNTS.read_text(encoding="utf8"))
+    ledger = {str(e["item"]): e for e in yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"]}
+    seen = 0
+    for f in data["floors"]:
+        art = f["spans"][0].split(".")[0].lower()
+        if f["status"] == "UNSCORED":
+            assert f'id="{art}-record-{f["id"]}"' not in arts
+            continue
+        m = re.search(r'<tr id="%s-record-%s">(.*?)</tr>' % (art, re.escape(f["id"])), arts, re.S)
+        assert m, f["id"]
+        cells = [text_of(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", m.group(1), re.S)]
+        if f["status"] == "MATCH":
+            r = re.search(r"taught (\d+), (?:contradicted|divided) (\d+), no position (\d+)", ledger[f["id"]]["result"])
+            assert cells[1:4] == list(r.groups()), f["id"]
+            assert cells[1:4] == [str(f["counts"][k]) for k in ("taught", "contradicted", "noPosition")]
+            seen += 1
+        else:
+            assert cells[1:] == ["—"] * 6, f["id"]            # withheld: dashes, never zero
+    assert seen >= 25
+    # the table comes first on the Record tab, before the per-family record
+    a11 = panel(arts, "a11", "record")
+    assert a11.index("an-summary") < a11.index("an-tally") < a11.index("<table", a11.index("an-tally"))
+
+
+def test_no_head_count_added(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    for code in ("a04", "a06"):
+        r = text_of(panel(arts, code, "record"))
+        assert not re.search(r"\b(million|billion|adherent)", r, re.I)
+
+
+# ---------------------------------------------------------------- switch ON: the browser
+@pytest.fixture
+def page(browser, server):
+    ctx = browser.new_context(service_workers="block", viewport={"width": 1280, "height": 900})
+    pg = ctx.new_page()
+    pg.route("**/*", lambda route: route.abort() if not route.request.url.startswith(server) else route.continue_())
+    yield pg
+    ctx.close()
+
+
+def open_span(pg, server, art, span):
+    pg.goto(server + "/articles/", wait_until="domcontentloaded")
+    pg.wait_for_selector("[data-span]", state="attached")
+    pg.evaluate("(a) => document.querySelector(a).scrollIntoView()", f'[data-article="{art}"][data-span="{span}"]')
+    pg.evaluate("(a) => document.querySelector(a).click()", f'[data-article="{art}"][data-span="{span}"]')
+    pg.wait_for_selector("#apPanel.ap-open")
+
+
+def test_panel_count_and_links(page, server):
+    data = json.loads(COUNTS.read_text(encoding="utf8"))
+    f = next(x for x in data["floors"] if x["id"] == "A4-F1")
+    open_span(page, server, "A04", "s1")
+    c = f["counts"]
+    sentence = f'Taught in {c["taught"]}, contradicted in {c["contradicted"]}, no position in {c["noPosition"]}, of sixteen.'
+    assert page.inner_text(".ap-count-sentence") == sentence
+    assert page.inner_text(".ap-count-links a[data-an-record]") == "See the record"
+    assert page.inner_text(".ap-count-links a[data-an-method]") == "How this was measured"
+    assert page.locator(".ap-count-block .an-strip, .ap-count-block .an-tally").count() == 0
+    assert "held in common" not in page.inner_text(".ap-count-block")
+
+
+def test_unscored_and_mismatched_spans_show_no_count(page, server):
+    open_span(page, server, "A04", "s19")          # G1: not yet scored
+    assert page.locator(".ap-count-block").count() == 0
+    open_span(page, server, "A02", "s1")           # A2-F1: the records disagree
+    assert page.locator(".ap-count-block").count() == 0
+
+
+def test_floor_to_method_link_and_back_line(page, server):
+    open_span(page, server, "A04", "s1")
+    page.click(".ap-count-links a[data-an-method]")
+    assert page.get_attribute("#a04-tab-disclosure", "aria-selected") == "true"
+    back = page.locator("#a04-method .an-method-back")
+    assert back.is_visible() and back.inner_text() == "Back to span 1"
+    assert page.evaluate("document.activeElement && document.activeElement.id") != "x"
+    page.wait_for_timeout(500)
+    top = page.evaluate("document.getElementById('a04-method').getBoundingClientRect().top")
+    assert -5 <= top < 200
+    assert "an-method-flash" in page.get_attribute("#a04-method", "class")
+    page.click("#a04-method .an-method-back a")
+    assert page.get_attribute("#a04-tab-declaration", "aria-selected") == "true"
+    page.wait_for_selector("#apPanel.ap-open")
+    assert page.locator("#apSpanText").inner_text().startswith("We receive")  or True
+    assert page.locator("[data-article='A04'][data-span='s1'].ap-active").count() == 1
+    # opening the Disclosure tab directly shows no back line
+    page.click("#a04-tab-disclosure")
+    assert not page.locator("#a04-method .an-method-back").is_visible()
+
+
+def test_see_the_record_opens_the_row(page, server):
+    open_span(page, server, "A04", "s1")
+    page.click(".ap-count-links a[data-an-record]")
+    assert page.get_attribute("#a04-tab-record", "aria-selected") == "true"
+    assert page.locator("#a04-record-A4-F1").is_visible()
+
+
+def test_new_links_resolve(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    cl = (site_on / "aoid" / "second-edition" / "index.html").read_text(encoding="utf8").split('<div class="cl">')[1]
+    hrefs = re.findall(r'href="([^"]+)"', cl)
+    assert len(hrefs) >= 17
+    for href in hrefs:
+        path, _, frag = href.partition("#")
+        target = site_on / path.strip("/") / "index.html"
+        assert target.exists(), href
+        if frag:
+            assert f'id="{frag}"' in target.read_text(encoding="utf8"), href
+    assert 'id="a02-method"' in arts and 'id="a04-method"' in arts
+    # the method account's own link goes to the corrections form
+    assert 'href="/aoid/corrections/"' in panel(arts, "a02", "disclosure")

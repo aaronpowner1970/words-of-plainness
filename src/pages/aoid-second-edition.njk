@@ -1,0 +1,35 @@
+---js
+{
+  // With the switch OFF the page takes no part in the build: no layout and no permalink.
+  eleventyComputed: {
+    layout: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "layouts/page.njk" : false),
+    title: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.changeLog.title : "Second Edition change log"),
+    pageTitle: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.changeLog.title : "")
+  },
+  // Built only when the Second Edition switch is ON (src/_data/aoidSecondEdition.js);
+  // with the switch OFF there is no page at this address (AOID2-CHANGELOG-PLACEMENT option 1).
+  permalink: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "/aoid/second-edition/" : false),
+  description: "What changed in the Second Edition of the Articles of Interfaith Discipleship, Article by Article.",
+  eleventyExcludeFromCollections: true,
+  pagefindIgnore: true
+  // Every word below comes from src/_data/aoidStep89.js (the approved change log, step 89, with amendments A1-A5).
+}
+---
+{#- The line marked [PENDING, step 124] in the approved change log is not rendered. It is held here for step 124,
+    which adds it to "How the Articles are now shown" when it applies rule 8 (src/_data/aoidStep89.js carries the approved text as changeLog.step124). -#}
+
+<style>
+.cl { max-width: 760px; margin: 0 auto; padding: 0 1.25rem; font-family: 'Crimson Pro', Georgia, serif; font-size: 1.1rem; line-height: 1.75; color: var(--cream); }
+.cl p, .cl li { opacity: .94; }
+.cl p { margin: 0 0 1rem; }
+.cl h3 { font-size: 1.15rem; font-weight: 600; color: var(--gold-primary); margin: 2rem 0 .6rem; }
+.cl ul { margin: 0 0 1.1rem; padding-left: 1.5rem; }
+.cl li { margin-bottom: .6rem; }
+.cl strong { color: var(--gold-primary); font-weight: 600; }
+.cl a { color: var(--gold-primary); text-decoration: none; border-bottom: 1px dotted rgba(196,148,58,0.5); }
+.cl a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+</style>
+
+<div class="cl">
+{{ aoidStep89.changeLog.html | safe }}
+</div>

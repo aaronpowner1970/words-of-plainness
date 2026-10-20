@@ -31,8 +31,13 @@
 {%- if t.disclosureLine %}
         <p class="an-generated">{{ t.disclosureLine }}</p>
 {%- endif %}
+{%- if t.stage1 %}
+        <section class="an-stage1" id="{{ t.id }}-measurement-found">{{ t.stage1 | safe }}</section>
+{%- endif %}
 {%- if aoidArticleTabs.methodHtml %}
-        <section class="an-method">{{ aoidArticleTabs.methodHtml | safe }}</section>
+        <section class="an-method" id="{{ t.id }}-method">
+        <p class="an-method-back" hidden><a href="#{{ t.id }}-declaration" data-an-back></a></p>
+        {{ aoidArticleTabs.methodHtml | safe }}</section>
 {%- endif %}
         <p class="an-correction-link">{{ aoidCorrections.linkHtml(t.n) | safe }}</p>
     </div>
@@ -40,9 +45,14 @@
 {%- if t.source %}
         <h3 class="an-lead-title">The record behind the counts</h3>
         <p class="an-lead-sub">Article {{ t.n }} · {{ t.source.title }}</p>
+        {{ t.summary | safe }}
         {{ t.source.tab.strips | safe }}
         {{ t.source.tab.record | safe }}
         <p class="an-correction">{{ aoidDisclosures.correctionHtml | safe }}</p>
+{%- elif t.summary %}
+        <h3 class="an-lead-title">The record behind the counts</h3>
+        <p class="an-lead-sub">Article {{ t.n }}</p>
+        {{ t.summary | safe }}
 {%- else %}
         <p class="an-generated">{{ t.recordLine }}</p>
 {%- endif %}

@@ -137,3 +137,24 @@
     :is(.an-tabbed, .article-section:has(> .an-tabs)) > .an-tabs { flex: 0 0 100%; }
     .an-tabs [role="tab"] { font-size: .86rem; padding: .4rem .7rem; letter-spacing: .05em; }
 }
+
+/* ---- Step 89 (CODE-AOID2-48): Stage 1 disclosures, method account, summary table, counts in the span panel ---- */
+.an-stage1 { margin: 2rem 0 0; }
+.an-method { margin: 2.5rem 0 0; padding-top: 1.5rem; border-top: 1px solid rgba(196,148,58,0.25); scroll-margin-top: 5rem; }
+.an-method-back { margin: 0 0 1rem; font-size: .95rem; }
+.an-method-back[hidden] { display: none; }
+.an-method-flash { animation: an-method-flash 1.8s ease-out; }
+@keyframes an-method-flash { 0%, 35% { background: rgba(196,148,58,0.22); } 100% { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .an-method-flash { animation: none; outline: 2px solid rgba(196,148,58,0.55); } }
+.an-summary { margin: 1rem 0 1.75rem; }
+.an-summary table { width: 100%; }
+.an-summary caption { caption-side: top; text-align: left; font-size: .9rem; opacity: .85; padding-bottom: .4rem; }
+.an-summary tbody th { font-weight: 500; }
+.an-summary tr.an-row-flash th, .an-summary tr.an-row-flash td { animation: an-method-flash 1.8s ease-out; }
+.an-review-only { margin: 1rem 0; padding: .6rem .9rem; border: 2px dashed rgba(200,80,60,0.7); }
+.an-review-only-tag { font-size: .85rem; font-weight: 600; }
+
+.ap-count-block { margin: 1rem 0 0; padding-top: .8rem; border-top: 1px solid rgba(196,148,58,0.25); }
+.ap-count-block p { margin: 0 0 .35rem; }
+.ap-count-links { font-size: .9rem; }
+.ap-count-links a { margin-right: 1rem; }
