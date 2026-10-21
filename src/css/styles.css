@@ -1780,6 +1780,9 @@ p {
     border-color: var(--gold-primary);
 }
 
+/* Transparent collage: no frame, radius or shadow around the cut-out */
+#throwback-collage .about-figure__image { border: 0; border-radius: 0; box-shadow: none; }
+
 .about-figure figcaption {
     margin-top: 0.75rem;
     font-size: 0.95rem;
@@ -1868,6 +1871,8 @@ p {
     border-radius: var(--radius-lg);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
+
+.image-lightbox__image[src*="throwback-collage"] { border-radius: 0; box-shadow: none; }
 
 .image-lightbox__close {
     position: absolute;
