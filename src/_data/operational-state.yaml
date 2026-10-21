@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: October 19, 2026
+# Last updated: October 21, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -415,6 +415,31 @@ workstreams:
       Under the Hood callout box, prayer line above the signature, "Last
       reviewed: October 2026". When a section or H3 is added to the page, add
       it to the toc front matter too.
+
+  - id: about-narration
+    name: "/about/ narrated-video player"
+    status: live
+    priority: low
+    state: >
+      LIVE 2026-10-21 (CODE-SITE-10, commits 3d85d6a, ff522bf, 5636c33). Opt-in
+      player on /about/ (nothing plays by default): Aaron reads the page, the
+      active sentence is highlighted with comfort-band auto-scroll, click-to-seek,
+      "Return to narration" pill, floating desktop player, docked mobile player,
+      audio-only mode, resume position in localStorage. 72 targets wrapped in
+      about.njk with {% narr "id" %}; page prose unchanged. TIMING: the single
+      source of truth is src/_data/about_narration_timing.json (ElevenLabs
+      Forced Alignment of the final video's audio; no Whisper, no interpolation).
+      /about/narration.vtt is generated from it (_data/aboutNarrationVtt.js);
+      scripts/check-narration-ids.js runs in prebuild and fails the build if the
+      page's narr IDs and the JSON drift. If the page text or the video changes:
+      re-run scripts/about-narration/ (alignment text, align, map_targets), then
+      the Playwright check scripts/about-narration/verify_page.js. MEDIA on R2
+      web/about/ (480x270 and 320x180 uncropped 16:9 mp4, m4a, two posters).
+      Shared engine js/sync-core.js (modes video and audio-lyrics); wop-player.js,
+      anthem-player.js, creation.js and audio-sync.js still have their own sync
+      (not migrated). No analytics on the site, so no narration events.
+      Not tested: phone rotation to landscape; the prefers-color-scheme: light
+      highlight variant (the site is dark-only).
 
 # ═══════════════════════════════════════════════════════════════════
 # OPEN / BLOCKED
