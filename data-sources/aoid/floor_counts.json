@@ -85,21 +85,25 @@
         "A02.s11"
       ],
       "measured": "2026-10-03",
-      "counts": null,
-      "status": "MISMATCH",
-      "queue": null,
+      "counts": {
+        "taught": 7,
+        "contradicted": 0,
+        "noPosition": 5
+      },
+      "status": "MATCH",
+      "queue": 4,
       "queuedFamilies": null,
       "borderline": null,
       "borderlineFamilies": null,
-      "ledger": "taught 9, contradicted 0, no position 4, being confirmed 3 of 16; fails C4 (declared witness, dagger at s1)",
+      "ledger": "taught 7, contradicted 0, no position 5, being confirmed 4 of 16; fails C4 (declared witness, dagger at s1)",
       "observations": [
         {
           "record": "ledger",
           "locator": "data-sources/aoid/floor_ledger.yaml item A2-F1",
-          "taught": 9,
+          "taught": 7,
           "contradicted": 0,
-          "noPosition": 4,
-          "queue": 3
+          "noPosition": 5,
+          "queue": 4
         },
         {
           "record": "report",
@@ -113,7 +117,8 @@
             "Anabaptist",
             "Oriental Orthodox",
             "Church of the East"
-          ]
+          ],
+          "superseded": true
         },
         {
           "record": "conductor",
@@ -121,7 +126,8 @@
           "taught": 9,
           "contradicted": 0,
           "noPosition": 4,
-          "queue": 3
+          "queue": 3,
+          "superseded": true
         },
         {
           "record": "disclosure",
@@ -131,9 +137,6 @@
           "noPosition": 5,
           "queue": 4
         }
-      ],
-      "disagreeing": [
-        "disclosure"
       ]
     },
     {
@@ -1304,19 +1307,12 @@
         "A11.s10"
       ],
       "measured": "2026-10-05",
-      "counts": {
-        "taught": 16,
-        "contradicted": 0,
-        "noPosition": 0
-      },
-      "status": "MATCH",
-      "queue": 0,
-      "queuedFamilies": [],
-      "borderline": 2,
-      "borderlineFamilies": [
-        "Baptist",
-        "Stone-Campbell"
-      ],
+      "counts": null,
+      "status": "WITHHELD",
+      "queue": null,
+      "queuedFamilies": null,
+      "borderline": null,
+      "borderlineFamilies": null,
       "ledger": "taught 16, contradicted 0, no position 0 of 16",
       "observations": [
         {
@@ -1326,25 +1322,9 @@
           "contradicted": 0,
           "noPosition": 0,
           "queue": 0
-        },
-        {
-          "record": "report",
-          "locator": "WoP_AOID2_Stage1_A11_Scoring_Report_20261004.md:20",
-          "taught": 16,
-          "contradicted": 0,
-          "noPosition": 0,
-          "queue": 0
-        },
-        {
-          "record": "notes",
-          "locator": "WoP_AOID2_CODE-AOID2-11_Review_Notes_20261005.md:26",
-          "taught": 16,
-          "contradicted": 0,
-          "noPosition": 0,
-          "queue": 0
         }
       ],
-      "tableLocator": "WoP_AOID2_Stage1_A11_Scoring_Report_20261004.md:245"
+      "withheld": "Withheld 20 Oct 2026 (AOID2-A11-S9-S26-FLOORS): the 2 Oct result above was scored against the 2 Oct wording, not kept as a score of the amended floor. It is withheld, not deleted, and shows no count until the amended floor is scored (Stage 2, step 49; the Matthew 28:19 clause reuses A11-F2 cells where the same text decides)."
     },
     {
       "id": "A11-F7",
@@ -1450,6 +1430,22 @@
         }
       ],
       "tableLocator": "WoP_AOID2_Stage1_A11_Scoring_Report_20261004.md:303"
+    },
+    {
+      "id": "A11-F9",
+      "title": "The first disciples' baptism",
+      "spans": [
+        "A11.s26"
+      ],
+      "measured": null,
+      "counts": null,
+      "status": "UNSCORED",
+      "queue": null,
+      "queuedFamilies": null,
+      "borderline": null,
+      "borderlineFamilies": null,
+      "ledger": "NOT SCORED. Ratified floor, transcribed into its span at step 89 follow-up (CODE-AOID2-49); Stage 2 scores it. Pending under A4(d).",
+      "observations": []
     },
     {
       "id": "G8",

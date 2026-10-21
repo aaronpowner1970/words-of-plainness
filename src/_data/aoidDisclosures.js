@@ -37,6 +37,14 @@
 const fs = require('fs');
 const path = require('path');
 const MarkdownIt = require('markdown-it');
+const { on } = require('./aoidSecondEdition.js');
+
+// Ruling AOID2-NO-POSITION-VOCAB (20 Oct 2026): the third number is called "no position" everywhere. The change is the
+// Second Edition's only: with the switch OFF the sources are read as they are (the two standalone pages are live), with
+// it ON the term is changed as the sources are read, in the prose, the sixteen-family tables and the Record-tab strips.
+const NO_POS = on ? 'no position' : 'no common position';
+const NO_POS_CAP = on ? 'No position' : 'No common position';
+const termFor = (s) => (on ? s.replace(/\bno common position\b/g, 'no position').replace(/\bNo common position\b/g, 'No position') : s);
 
 const DIR = 'data-sources/aoid/disclosures';
 const SOURCES = {
@@ -68,9 +76,9 @@ const CATEGORY = [
   [/^Teaches it/, 'teach'],
   [/^Divided/, 'divided'],
   [/^Being confirmed/, 'confirm'],
-  [/^No common position/, 'none'],
+  [/^No (?:common )?position/, 'none'],
 ];
-const TOTAL_WORDS = { divided: 'divided', 'no common position': 'none', 'being confirmed': 'confirm' };
+const TOTAL_WORDS = { divided: 'divided', 'no common position': 'none', 'no position': 'none', 'being confirmed': 'confirm' };
 
 function cells(line) {
   return line.split('|').slice(1, -1).map((c) => c.trim());
@@ -111,7 +119,7 @@ function readTeachings(rec, who) {
     if (Number(teach) !== n.teach) fail(floors[k] + ': total row says ' + teach + ' teach it, the cells count ' + n.teach);
     const said = { divided: 0, confirm: 0, none: 0 };
     let m;
-    const re = /(\d+) (divided|no common position|being confirmed)/g;
+    const re = /(\d+) (divided|no common position|no position|being confirmed)/g;
     while ((m = re.exec(t))) said[TOTAL_WORDS[m[2]]] = Number(m[1]);
     ['divided', 'confirm', 'none'].forEach((key) => {
       if (said[key] !== n[key]) fail(floors[k] + ': total row says ' + said[key] + ' ' + key + ', the cells count ' + n[key]);
@@ -128,13 +136,13 @@ function stripHtml(t) {
   const parts = [];
   if (n.divided) parts.push(n.divided + ' divided');
   else parts.push('0 divided');
-  parts.push(n.none + ' no common position');
+  parts.push(n.none + ' ' + NO_POS);
   if (n.confirm) parts.push(n.confirm + ' being confirmed');
   parts.push(t.need + ' needed');
   const said = n.teach + ' of 16 teach it; ' + parts.join('; ');
   const cell = (cls, k) => Array(k).fill('<i class="an-cell an-cell-' + cls + '"></i>').join('');
   const key = [
-    ['teach', 'Teaches it'], ['divided', 'Divided'], ['confirm', 'Being confirmed'], ['none', 'No common position'],
+    ['teach', 'Teaches it'], ['divided', 'Divided'], ['confirm', 'Being confirmed'], ['none', NO_POS_CAP],
   ].filter(([k]) => n[k] > 0).map(([k, w]) => '<span><i class="an-key-' + k + '"></i>' + w + '</span>').join('')
     + '<span><i class="an-key-th"></i>' + t.need + ' needed</span>';
   return '<div class="an-tally" role="group" aria-label="' + esc(t.label + ': ' + said) + '">'
@@ -148,7 +156,7 @@ function stripHtml(t) {
 }
 
 function build(name, spec) {
-  const src = fs.readFileSync(path.join(process.cwd(), DIR, spec.file), 'utf8').replace(/\r\n/g, '\n');
+  const src = termFor(fs.readFileSync(path.join(process.cwd(), DIR, spec.file), 'utf8').replace(/\r\n/g, '\n'));
   const lines = src.split('\n');
   const at = (re, from) => {
     for (let i = from || 0; i < lines.length; i++) if (re.test(lines[i])) return i;

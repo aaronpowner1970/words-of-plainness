@@ -46,17 +46,17 @@ Recognizing that the discipline required to be a "disciple" is not automatic, an
 
 > *Reflection:* What covenant or commitment do you most readily profess — and find hardest to actually live?
 
-▶ † This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions, measured by their own adopted texts, eleven teach that sexual relations belong within marriage, and ten that marriage is between a man and a woman; four are divided within themselves on the first and five on the second, and one holds no common position. That falls short of the more-than-four-in-five standard these Articles keep. See [*Of Sexual Holiness: A Disclosure of Division*](/aoid/disclosures/sexual-holiness).
+▶ † This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions, measured by their own adopted texts, eleven teach that sexual relations belong within marriage, and ten that marriage is between a man and a woman; four are divided within themselves on the first and five on the second, and one holds no position. That falls short of the more-than-four-in-five standard these Articles keep. See [*Of Sexual Holiness: A Disclosure of Division*](/aoid/disclosures/sexual-holiness).
 
 *(Footnote: accepted by Aaron on sixteen traditions, 1 Oct 2026 (disclosure Part 1), and amended 12 Oct 2026 under AOID2-MEASURED-WORDING, option 3: "Of sixteen Christian traditions measured, eleven teach in their own adopted texts" becomes "Of sixteen Christian traditions, measured by their own adopted texts, eleven teach". The disclosure file's Part 1 must be updated to match.)*
 
 ### Article 2 footnote — same amendment (AOID2-MEASURED-WORDING)
 
 Live (`a02.njk`):
-> + This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions measured, seven teach in their own adopted texts that God is the Father of our spirits; none teaches otherwise; five hold no common position, and four are still being confirmed. …
+> + This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions measured, seven teach in their own adopted texts that God is the Father of our spirits; none teaches otherwise; five hold no position, and four are still being confirmed. …
 
 Amended:
-> + This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions, measured by their own adopted texts, seven teach that God is the Father of our spirits; none teaches otherwise; five hold no common position, and four are still being confirmed. …
+> + This teaching is set down as biblically anchored witness rather than as common ground. Of sixteen Christian traditions, measured by their own adopted texts, seven teach that God is the Father of our spirits; none teaches otherwise; five hold no position, and four are still being confirmed. …
 
 The rest of the footnote is unchanged. The Father of Spirits disclosure's footnote text must be updated to match.
 

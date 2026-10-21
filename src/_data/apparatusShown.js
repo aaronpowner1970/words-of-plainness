@@ -10,9 +10,11 @@
 const all = require('./apparatusData.json');
 const { on } = require('./aoidSecondEdition.js');
 
-/* Article 11 spans added for the Second Edition (CODE-AOID2-29, step 79): s20-s25. With the switch OFF
-   they have no text on the page, so their apparatus is not embedded either. */
-const A11_SECOND_EDITION = ['s20', 's21', 's22', 's23', 's24', 's25'];
+/* Article 11 spans added for the Second Edition (CODE-AOID2-29, step 79): s20-s25; and s26, the first disciples' baptism
+   (CODE-AOID2-49). With the switch OFF they have no text on the page, so their apparatus is not embedded either.
+   s9, s10 and s14 carry Second Edition text or comments (CODE-AOID2-49), marked as for Article 9: `text_first_edition`,
+   `panel_comment_first_edition`, and an anchor's `second_edition: true`. */
+const A11_SECOND_EDITION = ['s20', 's21', 's22', 's23', 's24', 's25', 's26'];
 
 /* Article 9 (CODE-AOID2-32, step 79): spans s23-s29 are new, and s6-s9 carry Second Edition additions. The
    data marks them: an anchor with `second_edition: true`; a revised `text` with the First Edition wording in
@@ -71,12 +73,12 @@ const secondEditionSpan = (s) => {
 const mapSpans = (spans, f) => Object.fromEntries(Object.entries(spans).map(([id, s]) => [id, f(s)]));
 
 module.exports = on
-  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A08', 'A09', 'A12'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
+  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A08', 'A09', 'A11', 'A12'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
   : Object.fromEntries(
       Object.entries(all)
         .filter(([key]) => key !== 'A14')
         .map(([key, spans]) => {
-          if (key === 'A11') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A11_SECOND_EDITION.includes(id)))];
+          if (key === 'A11') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A11_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A08') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A08_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A12') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A12_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A09') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A09_SECOND_EDITION.includes(id))), firstEditionSpan)];

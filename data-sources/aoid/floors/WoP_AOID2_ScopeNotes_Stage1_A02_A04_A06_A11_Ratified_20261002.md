@@ -204,6 +204,10 @@ Note for Aaron, outside the floor: the June study found that distanced readers c
 
 The Supper itself is carried by G6 (ratified 22 Sep).
 
+**Amended by Aaron 20 Oct 2026 (AOID2-A11-S9-S26-FLOORS, option 1, topic-only): the A11-F5 floor adds Matthew 28:19 and the exclusion on how or to whom baptism is given. The 2 Oct wording above is kept on record. A11-F5 as amended reads:**
+
+> The Article confesses only what Matthew 3:15, Matthew 28:19, Luke 22:19 and Acts 10:34-35 with Galatians 3:28 confess: Christ was baptized, for thus it became Him to fulfil all righteousness; He commanded His apostles to teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost; He gave the bread saying, this do in remembrance of me; God is no respecter of persons, but in every nation he that feareth Him is accepted with Him; and in Christ there is neither Jew nor Greek, bond nor free, male nor female. This is the floor. It does not settle which ordinances or sacraments Christ instituted, their number, how or to whom baptism is given, or whose administration of them is valid; each tradition fills those in its own house.
+
 ### A11-F6. Acts 2:38 (s11, s12, s13): ALREADY RATIFIED as G8, 22 Sep. No new floor
 
 Step 34 asks for a separate floor for the Acts 2:38 line. That floor already exists: G8 in `WoP_AOID2_ScopeNotes_A04_A05_Draft_20260922.md`, ratified 22 Sep, which completes the quotation with "and ye shall receive the gift of the Holy Ghost". **CONFIRMED by Aaron 2 Oct 2026:** G8 is the s13 floor, transcribed under A4(d), and is not drafted again.
@@ -221,6 +225,12 @@ The amendment is entered in G8's own document, under G8, with the date and Aaron
 ### A11-F8. The way, prayer, endurance, the Kingdom at hand (s15, s16, s17, s18)
 
 > The Article confesses only what John 14:6, Luke 18:1, Matthew 24:13 with 1 Thessalonians 5:23, and Mark 1:15 confess: Christ is the way, the truth and the life; men ought always to pray and not to faint; he that shall endure unto the end shall be saved, and the God of peace sanctifies His people wholly; the kingdom of God is at hand. This is the floor. It does not settle whether a true believer can finally fall away, or how the Kingdom present is related to the Kingdom to come; each tradition fills those in its own house.
+
+### A11-F9. The first disciples' baptism (s26)
+
+**Ratified by Aaron 20 Oct 2026 (AOID2-A11-S9-S26-FLOORS, option 1, topic-only). New floor for the Second Edition span s26 (Acts 2:41). Not yet scored.**
+
+> The Article confesses only what Acts 2:41 confesses: they that gladly received the apostles' word were baptized. This is the floor. It does not settle the manner of that baptism, how it is related to the gift of the Holy Ghost, or whether it is necessary to salvation; each tradition fills those in its own house.
 
 ---
 

@@ -59,7 +59,10 @@ scored:
       - WoP_AOID2_Stage1_A02_Scoring_Report_20261002.md
       - WoP_AOID2_Stage1_A02_Settlement_Report_20261003.md
       - WoP_AOID2_Stage1_A02_Closeout_Report_20261003.md
-    result: "taught 9, contradicted 0, no position 4, being confirmed 3 of 16; fails C4 (declared witness, dagger at s1)"
+    result: "taught 7, contradicted 0, no position 5, being confirmed 4 of 16; fails C4 (declared witness, dagger at s1)"
+    result_note: "Corrected 20 Oct 2026 (AOID2-A2F1-COUNT-RECONCILE, ruled 20 Oct 2026, option 1): the 3 Oct closeout line (taught 9, contradicted 0, no position 4, being confirmed 3) is stale; the Father of Spirits disclosure stands. Two cells moved since 3 Oct, and each has a dated ruling behind it. Eastern Orthodox, taught to being confirmed: AOID2-FOS-EO-MOGILA-CURRENCY (ruled 10 Oct 2026, 23:13 UTC, 11 Oct local time; Mogila's Confession is not a current standard of a named Orthodox church). Jehovah's Witnesses, taught to no position: AOID2-SOUL-SPIRIT-REFERENT (ruled 11 Oct 2026; the referent, not the word, is measured, and the Witnesses' texts speak of the spirit as a life-force) as applied to this cell by AOID2-FOS-NCP-PARAGRAPH (ruled 11 Oct 2026: keep the Witnesses at no position). No other cell moved. Floor text and floor hash are unchanged."
+    superseded_records: [report, conductor]
+    superseded_note: "The A04 report line and the conductor step 36 note carry the 3 Oct count (9/0/4, queue 3) and are superseded for this floor by the later dated rulings above; they are listed in floor_counts.json but not compared. The disclosure table is the second record."
     floor_sha256: "fbf9620ca840027cb6486e6f52e5f09449cf88d056b27eb0fb2efd0686f84796"
 
   - item: A2-F2
@@ -413,15 +416,18 @@ scored:
     title: "Christ's baptism and the ordinances, and the welcome of God"
     floor_document: data-sources/aoid/floors/WoP_AOID2_ScopeNotes_Stage1_A02_A04_A06_A11_Ratified_20261002.md
     floor_heading: "A11-F5. Christ's baptism and the ordinances, and the welcome of God (s9, s10)"
-    floor_anchor: "A11-F5. "
+    floor_anchor: "**Amended by Aaron 20 Oct 2026"
     floor_ratified: 2026-10-02
+    floor_amended: 2026-10-20
     span: [A11.s9, A11.s10]
+    span_note: "AMENDED 20 Oct 2026 (AOID2-A11-S9-S26-FLOORS, option 1, topic-only): the floor adds Matthew 28:19 and the exclusion on how or to whom baptism is given. The 2 Oct wording stays on record in the floor document above the amendment (its sha256 was a3da3ceb069a3a3fd2a331b7d0aea0712779c2eefde66ae12de09ef3dd9f8152). The amended floor is transcribed into the Second Edition panel comments of A11.s9 and A11.s10 as their opening paragraph, behind the Second Edition switch; the First Edition panel comments keep the 2 Oct wording."
     scored_on: 2026-10-05
     scoring_records:
       - WoP_AOID2_Stage1_A11_Scoring_Report_20261004.md
       - WoP_AOID2_CODE-AOID2-11_Review_Notes_20261005.md
     result: taught 16, contradicted 0, no position 0 of 16
-    floor_sha256: "a3da3ceb069a3a3fd2a331b7d0aea0712779c2eefde66ae12de09ef3dd9f8152"
+    withheld: "Withheld 20 Oct 2026 (AOID2-A11-S9-S26-FLOORS): the 2 Oct result above was scored against the 2 Oct wording, not kept as a score of the amended floor. It is withheld, not deleted, and shows no count until the amended floor is scored (Stage 2, step 49; the Matthew 28:19 clause reuses A11-F2 cells where the same text decides)."
+    floor_sha256: "0c363a461bb40d34bd1f4cc02381330794b23c3a868f9cb9efd53decb55f7ba9"
 
   - item: A11-F7
     title: "Born of water and of the Spirit"
@@ -450,6 +456,19 @@ scored:
       - WoP_AOID2_CODE-AOID2-11_Review_Notes_20261005.md
     result: taught 15, contradicted 0, no position 1 of 16
     floor_sha256: "d7a9bdcbb4efe120d5911237692d1bc3e983c37b4ef572342bba32ac2627a600"
+
+  - item: A11-F9
+    title: "The first disciples' baptism"
+    floor_document: data-sources/aoid/floors/WoP_AOID2_ScopeNotes_Stage1_A02_A04_A06_A11_Ratified_20261002.md
+    floor_heading: "A11-F9. The first disciples' baptism (s26)"
+    floor_anchor: "A11-F9. "
+    floor_ratified: 2026-10-20
+    span: A11.s26
+    span_note: "New floor ratified 20 Oct 2026 (AOID2-A11-S9-S26-FLOORS, option 1, topic-only), for the new Second Edition span A11.s26 (Acts 2:41). Entered in the Stage 1 floor document for Article 11 and transcribed into the s26 panel comment as its opening paragraph, behind the Second Edition switch."
+    scored_on: null
+    scoring_records: []
+    result: "NOT SCORED. Ratified floor, transcribed into its span at step 89 follow-up (CODE-AOID2-49); Stage 2 scores it. Pending under A4(d)."
+    floor_sha256: "1faee0de4e1a0aaabc2652d3f635daaa076b95b061249283986bc43a8389bad0"
 
   - item: G8
     title: "Completing Acts 2:38"

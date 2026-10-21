@@ -32,9 +32,9 @@ FOS = REPO / "data-sources" / "aoid" / "disclosures" / "WoP_AOID2_FatherOfSpirit
 
 
 REVIEW_ONLY = {  # Stage 1 paragraphs wrapped for build-review mode (src/_data/aoidStep89.js REVIEW_ONLY)
-    "a06": ["Promises some churches confine to part of their people."],
-    "a11": ["Born of water and of the Spirit.", "Repent and be baptized."],
+    "a11": ["Born of water and of the Spirit.", "Love proven by obedience.", "Repent and be baptized."],
 }
+APPROVED_A11 = SE / "WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md"
 
 
 def build(out, on, review=False):
@@ -176,7 +176,7 @@ def test_a1_figures_come_from_the_father_of_spirits_source(site_on):
     arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
     d = text_of(panel(arts, "a02", "disclosure"))
     src = FOS.read_text(encoding="utf8")
-    m = re.search(r"\*\*Total teaching it\*\* \| \*\*(\d+) of 16\*\* \((\d+) divided, (\d+) no common position, (\d+) being confirmed\)", src)
+    m = re.search(r"\*\*Total teaching it\*\* \| \*\*(\d+) of 16\*\* \((\d+) divided, (\d+) (?:no common position|no position), (\d+) being confirmed\)", src)
     words = ["none", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen"]
     t, dv, n, c = (int(x) for x in m.groups())
     assert f"{words[t]} teach it in their own adopted texts, {words[dv]} teaches otherwise, {words[n]} have adopted no text on it either way, and {words[c]} are still being confirmed" in d
@@ -284,8 +284,15 @@ def test_panel_count_and_links(page, server):
 def test_unscored_and_mismatched_spans_show_no_count(page, server):
     open_span(page, server, "A04", "s19")          # G1: not yet scored
     assert page.locator(".ap-count-block").count() == 0
-    open_span(page, server, "A02", "s1")           # A2-F1: the records disagree
-    assert page.locator(".ap-count-block").count() == 0
+    for art, sp in (("A11", "s9"), ("A11", "s10"), ("A11", "s25"), ("A11", "s26")):   # A11-F5 withheld, G6 and A11-F9 unscored
+        open_span(page, server, art, sp)
+        assert page.locator(".ap-count-block").count() == 0, (art, sp)
+
+
+def test_a2f1_count_shown_after_reconciliation(page, server):
+    for sp in ("s1", "s11"):
+        open_span(page, server, "A02", sp)
+        assert page.inner_text(".ap-count-sentence") == "Taught in 7, contradicted in 0, no position in 5, of sixteen."
 
 
 def test_floor_to_method_link_and_back_line(page, server):
@@ -330,3 +337,105 @@ def test_new_links_resolve(site_on):
     assert 'id="a02-method"' in arts and 'id="a04-method"' in arts
     # the method account's own link goes to the corrections form
     assert 'href="/aoid/corrections/"' in panel(arts, "a02", "disclosure")
+
+
+# ---------------------------------------------------------------- CODE-AOID2-49
+def approved_block(lead):
+    src = APPROVED_A11.read_text(encoding="utf8").replace("\r\n", "\n")
+    hit = [b.strip() for b in src.split("\n\n") if b.strip().startswith("**" + lead + "**") and not b.startswith("**Governing")]
+    assert len(hit) == 1, lead
+    return hit[0]
+
+
+def test_article_6_edits(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    d = text_of(panel(arts, "a06", "disclosure"))
+    assert "The Latter-day Saint teaching on being heirs with Christ" not in d
+    assert "Promises some churches confine to part of their people." in d          # the wrap is gone
+    assert "on the recommendation of its General Board, which gave as the first of its reasons the church's rejection of creedal statements as tests of faith." in d
+    assert "giving as its reason" not in d
+    assert d.index("(Resolution 8728) to its Commission") < d.index("Their silence there is that conviction")
+
+
+def test_article_11_baptism_text_second_edition_only(site_on, site_off):
+    on = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    off = (site_off / "articles" / "index.html").read_text(encoding="utf8")
+    src = APPROVED_A11.read_text(encoding="utf8").replace("\r\n", "\n")
+    s9 = re.search(r"### s9 \(replaces the current s9\)\n\*\*We accept\*\* (.*)", src).group(1)
+    s14 = re.search(r"### s14 .*?\n(We will not explain away.*)", src).group(1)
+    s26 = re.search(r'\ns26 \(new, type direct, Acts 2:41 KJV\):\n"(.*)"', src).group(1)
+    ont = text_of(on)
+    for s in (s9, s14, s26):
+        assert s in ont, s[:50]
+        assert s not in text_of(off), s[:50]
+    assert 'data-span="s26" data-article="A11"' in on and 'data-span="s26" data-article="A11"' not in off
+    assert "born of the water and the Spirit" in off and "born of the water and the Spirit" not in on
+    sp = lambda s: on.index('data-span="%s" data-article="A11"' % s)
+    assert sp("s13") < sp("s26") < sp("s14")
+
+
+def test_article_11_panels_carry_the_ratified_floors(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    d = json.loads(re.search(r'<script type="application/json" id="apparatusData">(.*?)</script>', arts, re.S).group(1))["A11"]
+    ledger = yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"]
+    f5 = d["s9"]["panel_comment"].split("\n\n")[0]
+    f9 = d["s26"]["panel_comment"].split("\n\n")[0]
+    assert d["s10"]["panel_comment"].split("\n\n")[0] == f5
+    assert "Matthew 28:19" in f5 and "how or to whom baptism is given" in f5
+    assert f9.startswith("The Article confesses only what Acts 2:41 confesses")
+    ids = {str(e["item"]): e for e in ledger}
+    assert ids["A11-F5"]["withheld"] and ids["A11-F9"]["scored_on"] is None
+    assert ids["A11-F5"]["floor_sha256"] != "a3da3ceb069a3a3fd2a331b7d0aea0712779c2eefde66ae12de09ef3dd9f8152"
+    blob = json.dumps(d)
+    assert "second_edition" not in blob and "_first_edition" not in blob
+
+
+def test_held_paragraphs_do_not_render_outside_a_review_build(site_on):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    d = text_of(panel(arts, "a11", "disclosure"))
+    for lead in REVIEW_ONLY["a11"]:
+        assert lead not in d, lead
+    assert plain_md(approved_block("God's offspring.").replace(" (replaces the whole paragraph)", "")) in d
+    assert plain_md(approved_block("The Salvation Army.")) in d
+    assert "the Adventist through a voted proof text, the Catholic in sense, the Lutheran in Jeremiah's form, and the Methodist through Wesley's Notes." in d
+
+
+def test_born_of_water_lists_are_filled(tmp_path):
+    out = tmp_path / "born_review"
+    build(out, True, review=True)
+    arts = (out / "articles" / "index.html").read_text(encoding="utf8")
+    d = text_of(panel(arts, "a11", "disclosure"))
+    assert "[Families named from the record]" not in d and "[those named from the record]" not in d
+    assert "Anglican, Reformed, Lutheran, Anabaptist, Pentecostal and Holiness traditions confess in their own adopted texts that Christ ordained baptism with water" in d
+
+
+def test_change_log_b1_to_b5(site_on):
+    p = (site_on / "aoid" / "second-edition" / "index.html").read_text(encoding="utf8")
+    t = text_of(p.split('<div class="cl">')[1])
+    assert "five quotations" not in t and "The commentary is revised throughout." in t
+    assert "Christ's command to His apostles to teach all nations, baptizing them, now stands beside His own baptism" in t
+    assert 'John 3:5 is now quoted in the King James words, "born of water and of the Spirit."' in t
+    assert "the reflection question is reworded" in t and "the reflection question is new" not in t
+    assert "labelled Second Edition." in t and "the films for Articles 2 and 6 are new" not in t
+    assert 'the Articles now say "no position."' in t
+    assert t.index('the Articles now say "no position."') > t.index("labelled Second Edition.")
+    assert t.index('the Articles now say "no position."') < t.index("Later corrections")
+
+
+def test_film_buttons_second_edition_for_articles_2_and_6(site_on, site_off):
+    on = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    assert "SE_FILMS = ['A02','A06']" in on and "' · Second Edition'" in on and "' · First Edition'" in on
+    off = (site_off / "articles" / "index.html").read_text(encoding="utf8")
+    assert "SE_FILMS" not in off and "Second Edition'" not in off
+
+
+def test_no_position_vocabulary(site_on, site_off):
+    off_hits = 0
+    for rel in ("articles/index.html", "aoid/disclosures/father-of-spirits/index.html", "aoid/disclosures/sexual-holiness/index.html"):
+        on = (site_on / rel).read_text(encoding="utf8")
+        off = (site_off / rel).read_text(encoding="utf8")
+        assert not re.search(r"no common position", on, re.I), rel
+        off_hits += len(re.findall(r"no common position", off, re.I))
+    assert off_hits >= 12                       # the live pages are untouched until launch
+    cl = (site_on / "aoid" / "second-edition" / "index.html").read_text(encoding="utf8")
+    assert cl.count("no common position") == 1  # the change log names the old term once, in the B5 line

@@ -67,7 +67,7 @@ function readLedger() {
   const d = yaml.load(fs.readFileSync(path.join(ROOT, LEDGER), 'utf8'));
   return d.scored.map((e) => {
     const spans = [].concat(e.span || []);
-    const out = { id: String(e.item), title: e.title, spans, scored_on: e.scored_on ? new Date(e.scored_on).toISOString().slice(0, 10) : null, result: e.result };
+    const out = { id: String(e.item), title: e.title, spans, scored_on: e.scored_on ? new Date(e.scored_on).toISOString().slice(0, 10) : null, result: e.result, superseded: e.superseded_records || [], withheld: e.withheld || null };
     const m = /taught (\d+), (?:contradicted|divided) (\d+), no position (\d+)(?:, being confirmed (\d+))? of 16/.exec(e.result || '');
     if (m && out.scored_on) {
       out.t = num(m[1]); out.c = num(m[2]); out.n = num(m[3]);
@@ -206,10 +206,16 @@ function build() {
     const f = { id: e.id, title: e.title, spans: e.spans, measured: e.scored_on, counts: null, status: null, queue: null, queuedFamilies: null, borderline: null, borderlineFamilies: null, ledger: e.result, observations: [] };
     if (e.t === undefined) { f.status = 'UNSCORED'; return f; }
     f.observations.push({ record: 'ledger', locator: LEDGER + ' item ' + e.id, taught: e.t, contradicted: e.c, noPosition: e.n, queue: e.q });
-    const others = (obs[e.id] || []);
+    if (e.withheld) { f.status = 'WITHHELD'; f.withheld = e.withheld; return f; }
+    // A record named in the ledger's `superseded_records` is kept for provenance but not compared: a later dated
+    // ruling replaced the score it states (AOID2-A2F1-COUNT-RECONCILE).
+    const all = (obs[e.id] || []);
+    const others = all.filter((o) => !e.superseded.includes(o.record));
     const disagree = [];
-    others.forEach((o) => {
-      f.observations.push({ record: o.record, locator: o.locator, taught: o.t, contradicted: o.c, noPosition: o.n, queue: o.q, queuedFamilies: o.qNames && o.qNames.length ? o.qNames : undefined });
+    all.forEach((o) => {
+      const sup = e.superseded.includes(o.record);
+      f.observations.push({ record: o.record, locator: o.locator, taught: o.t, contradicted: o.c, noPosition: o.n, queue: o.q, queuedFamilies: o.qNames && o.qNames.length ? o.qNames : undefined, superseded: sup ? true : undefined });
+      if (sup) return;
       const same = o.t === e.t && o.c === e.c && o.n === e.n && (o.q === null || o.q === undefined || o.q === e.q);
       if (!same) disagree.push(o.record);
     });

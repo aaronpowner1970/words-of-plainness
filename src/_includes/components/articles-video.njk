@@ -24,7 +24,9 @@
 <script>
 (function(){
   /* Article code → its reading page. A03 rides the redirect to /creation/. */
-  var VIDEOS = ['A01','A02','A03','A04','A05','A06','A07','A08','A09','A10','A11','A12','A13'];
+  var VIDEOS = ['A01','A02','A03','A04','A05','A06','A07','A08','A09','A10','A11','A12','A13'];{% if aoidSecondEdition.on %}
+  /* The films for Articles 2 and 6 (made 7 Oct 2026) read the Second Edition text of those Articles (CODE-AOID2-49, change log B4). */
+  var SE_FILMS = ['A02','A06'];{% endif %}
 
   function icon(){ return '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>'; }
 
@@ -38,8 +40,8 @@
       var a=document.createElement('a');
       a.className='article-video-btn';
       a.href='/articles/video-'+m[1].slice(1)+'/';
-      a.setAttribute('aria-label','Watch the video reading of '+titleText{% if aoidSecondEdition.on %}+' (First Edition)'{% endif %});
-      a.innerHTML=icon()+'<span class="avb-label">Video{% if aoidSecondEdition.on %} · First Edition{% endif %}</span>';
+      a.setAttribute('aria-label','Watch the video reading of '+titleText{% if aoidSecondEdition.on %}+(SE_FILMS.indexOf(m[1])===-1?' (First Edition)':' (Second Edition)'){% endif %});
+      a.innerHTML=icon()+'<span class="avb-label">Video{% if aoidSecondEdition.on %}'+(SE_FILMS.indexOf(m[1])===-1?' · First Edition':' · Second Edition')+'{% endif %}</span>';
       var slidesBtn=section.querySelector('.article-slides-btn');
       var listenBtn=section.querySelector('.article-read-aloud-btn');
       if(slidesBtn){ slidesBtn.insertAdjacentElement('afterend', a); }

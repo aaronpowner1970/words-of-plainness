@@ -11,7 +11,7 @@
      wop-scratch/WoP_AOID2_Step89_MethodAccount_Draft_v1_20261019.md
      wop-scratch/WoP_AOID2_Step89_Stage1Disclosures_Draft_v1_20261019.md
 
-   changeLog   "What Changed in the Second Edition" with AMENDMENTS v2 A1-A5 applied.
+   changeLog   "What Changed in the Second Edition" with AMENDMENTS v2 A1-A5 and AMENDMENTS v3 B1-B5 applied (CODE-AOID2-49).
    method      "How These Articles Were Measured" with AMENDMENTS A1-A5 and A7 applied in the
                positions given (A6, the Living Tree link, has no page to link to; see METHOD_LINKS).
                The figures in A1 and A4 are read from the Father of Spirits disclosure source
@@ -41,10 +41,16 @@ const ARTICLES_TEMPLATE = 'src/pages/articles.njk';
 
 // Paragraphs shown only in a build-review build (WOP_AOID2_BUILD_REVIEW=1). Key: Article code + bold lead-in.
 const REVIEW_ONLY = {
-  'A06 Promises some churches confine to part of their people.': '[VERIFY] mismatch: no Latter-day Saint A6 cell rests on D&C 76:50-70 (A6-F4 rests on Moses 2:27 and Moroni 7:48; the report says D&C 76 was not used); the verses do not use the word "heirs"',
-  'A11 Born of water and of the Spirit.': '[VERIFY] mismatch: Holiness texts read in the A11-F7 run do speak of water (Wesleyan para. 242; Free Methodist proof texts and baptism Ritual); only the Salvation Army ch. 7 deciding text is silent on water',
-  'A11 Repent and be baptized.': '[VERIFY] mismatch: no Baptist text read says baptism "does not itself bring" remission (1689 29.1 "a sign ... of remission of sins"; BF&M VII "symbolizing"); the G8 Baptist cell is borderline for want of an Acts 2:38 text',
+  'A11 Born of water and of the Spirit.': 'Held for Aaron (CODE-AOID2-49): the two family lists are filled from adopted texts in the record and need his approval; the first sentence ("Christ\'s baptism and His command to baptize are both held in common") rests on A11-F5, whose count is withheld until the amended floor is scored, and on A11-F2',
+  'A11 Love proven by obedience.': 'Held (CODE-AOID2-49) on a mismatch: the CODE-AOID2-11 review note says "in so many words" for the Adventist, Latter-day Saint, Eastern Orthodox and Methodist, but the A11 report table has the Eastern Orthodox cell on John 14:21, 23 and the Latter-day Saint cell on D&C 42:29 in the Church\'s own words, not on the words of John 14:15',
+  'A11 Repent and be baptized.': 'Held (CODE-AOID2-49) on a mismatch: 1689 Confession 29.1 calls baptism "a sign ... of remission of sins" and 29.2 confines it to those who profess repentance and faith, but BF&M 2000 VII speaks of death to sin and newness of life and does not mention remission, so "the Baptist churches ... signifies the remission of sins" is borne out for the 1689 bodies only',
 };
+
+// B4 (AMENDMENTS v3): the films line states what the build run found. The films for Articles 2 and 6 (made 7 Oct 2026,
+// A02v2 vapwjdfYqEA and A06v2 4Bp1-gPunxc) read the Second Edition text of their Articles: the builder's aligner matches
+// the reading to the Article text at 100.00% (Article 2, 119 words) and 99.44% (Article 6, 356 words, the one difference
+// being "co heirs" against "coheirs"), and the Article 2 and Article 6 text of the Second Edition is the text it aligned to.
+const FILMS_LINE = "The First Edition's films, PDFs and slides are labelled First Edition. The films for Articles 2 and 6, made on 7 October 2026, read the Second Edition text of those Articles and are labelled Second Edition.";
 
 // Links the approved amendments ask for, where a target exists on the site.
 const METHOD_LINKS = {
@@ -114,6 +120,47 @@ else {
     once(text, '- [VERIFY] The First Edition');
     text = text.replace('- [VERIFY] The First Edition', '- The First Edition');
 
+    // AMENDMENTS v3 B1-B5 (approved 20 Oct 2026). The wording is read from the amendment lines, never retyped.
+    const amendLine = (tag) => {
+      const hit = src.split('\n').filter((l) => l.startsWith('**' + tag + '.'));
+      if (hit.length !== 1) fail('amendment ' + tag + ' expected exactly once, found ' + hit.length);
+      return hit[0];
+    };
+    const unq = (s) => s.split('\\"').join('"');
+    const swapLine = (text0, startsWith, withText, what) => {
+      const ls = text0.split('\n');
+      const k = ls.map((l, i) => (l.startsWith(startsWith) ? i : -1)).filter((i) => i >= 0);
+      if (k.length !== 1) fail(what + ': line expected exactly once, found ' + k.length);
+      ls[k[0]] = withText;
+      return ls.join('\n');
+    };
+    const b1 = amendLine('B1');
+    const b1a = /The line becomes: "(.*?)" The held step-124 line becomes \(.*?\): "(.*)"$/.exec(b1);
+    if (!b1a) fail('B1: wording not found');
+    text = swapLine(text, '- **Article 9, Of Finding Our Way.**', '- ' + unq(b1a[1]), 'B1');
+    const step124B = unq(b1a[2]);
+    const b2 = amendLine('B2');
+    const b2a = /The line becomes: "(.*)" \(The witness mark is the dagger/.exec(b2);
+    if (!b2a) fail('B2: wording not found');
+    text = swapLine(text, '- **Article 11, Of Covenants and Commitments.**', '- ' + unq(b2a[1]), 'B2');
+    const b3 = amendLine('B3');
+    const b3a = /^\*\*B3\. Article 12\.\*\* "(.*?)" becomes "(.*?)"/.exec(b3);
+    if (!b3a) fail('B3: wording not found');
+    text = replaceOnce(text, b3a[1], b3a[2]);
+    // B4: the films line states what was found (FILMS_LINE, above). The check below keeps the finding honest.
+    const films = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/_data/aoid_videos.json'), 'utf8'));
+    const filmIds = { A02: 'vapwjdfYqEA', A06: '4Bp1-gPunxc' };
+    Object.keys(filmIds).forEach((k) => {
+      const entry = films.find((e) => e.code === k);
+      if (!entry || entry.youtube !== filmIds[k]) fail('B4: the film for ' + k + ' is no longer ' + filmIds[k] + '; re-check which edition it reads');
+    });
+    text = swapLine(text, '- The First Edition', '- ' + FILMS_LINE, 'B4');
+    const b5 = amendLine('B5');
+    const b5a = /^\*\*B5\..*?:\*\* "(.*)" \(Ruling /.exec(b5);
+    if (!b5a) fail('B5: wording not found');
+    // B5 is the last line under "How the Articles are now shown", after the films line.
+    text = replaceOnce(text, '- ' + FILMS_LINE, '- ' + FILMS_LINE + '\n- ' + unq(b5a[1]));
+
     // AMENDMENTS v2 A1-A5 (the approved file gives the wording and the positions).
     text = replaceOnce(text, 'were added to nine others', 'were added to seven others');                       // A1
     const a5 = quoted(src, /^\*\*A5 \(criterion 9\)/, 'A5')[0];                                                  // A5
@@ -141,7 +188,7 @@ else {
     }).join('\n');
     if (linked !== 13) fail('expected 13 Article lines in "What each Article gained", linked ' + linked);
 
-    return { title, text, step124: step124[0], articleIds: ids };
+    return { title, text, step124: step124B, articleIds: ids };
   })();
 
   // ---------------------------------------------------------------- method account
@@ -160,7 +207,7 @@ else {
     if (!am) fail('A1: the sentence with the four figures was not found in the approved wording');
     const want = [NUM[k.teach], NUM[k.divided], NUM[k.none], NUM[k.confirm]];
     if (want.join('|') !== am.slice(1).join('|')) {
-      fail('A1 DISAGREES with the Father of Spirits disclosure source: the approved wording says ' + am.slice(1).join('/') + ', the source gives ' + want.join('/') + ' (' + k.teach + ' teach, ' + k.divided + ' divided, ' + k.none + ' no common position, ' + k.confirm + ' being confirmed). Stop and report.');
+      fail('A1 DISAGREES with the Father of Spirits disclosure source: the approved wording says ' + am.slice(1).join('/') + ', the source gives ' + want.join('/') + ' (' + k.teach + ' teach, ' + k.divided + ' divided, ' + k.none + ' no position, ' + k.confirm + ' being confirmed). Stop and report.');
     }
     const a4 = quoted(src, /^\*\*A4\. End of "When a teaching falls short"/, 'A4')[0];
     const cap = NUM[k.teach][0].toUpperCase() + NUM[k.teach].slice(1);

@@ -94,3 +94,18 @@ Scorer: Claude (Chat), CHAT-AOID2-48a. Date: 19 Oct 2026, 19:10 ET. Scored: the 
 > Read it beside the [First Edition](/articles/first-edition/) to see how the Articles grew, and what was kept as first given.
 
 **Projected score with A1-A5:** G1 met; 3:1, 4:1, 5:2, 6:2, 9:2, 10:2 = 10 of 12, prorated 17 of 20. **Deploy with gaps named:** criteria 3 and 4 stay partial because a change log records the method rather than running it; the method account carries that work.
+
+
+---
+
+## AMENDMENTS v3, B1-B5 (APPROVED by Aaron 20 Oct 2026, 09:29 ET: "I approve B1 through B5.") Session CHAT-AOID2-48b, after the CODE-AOID2-48 review.
+
+**B1. Article 9.** The line becomes: "**Article 9, Of Finding Our Way.** Its second paragraph is rewritten. New: a paragraph on the Holy Spirit, the promised Comforter, by whom God is present with His people, who teaches, testifies of Christ, sanctifies, and gives gifts for the good of all; and a sentence on submitting to God and resisting the devil. The commentary is revised throughout." The held step-124 line becomes (still not rendered until step 124 is built): "Quotations in the First Edition commentary that did not match their source are corrected, each with a dated note."
+
+**B2. Article 11.** The line becomes: "**Article 11, Of Covenants and Commitments.** A sentence on Christ's patience with our becoming. New: sexual holiness (sexual union as a holy gift whose rightful place is marriage, and chastity outside it), introduced with the plain acknowledgment that Christ's disciples are not all of one mind on it, and marked as witness (†); marriage held in honor; rendering to Caesar and to God; honest work; and the Lord's Supper. Christ's command to His apostles to teach all nations, baptizing them, now stands beside His own baptism, and the first disciples' answer follows: they that gladly received the word were baptized. Peter's answer is quoted in full, with the promise of the gift of the Holy Ghost. New: a pledge that we will not explain away or set aside anything Christ did as our example, plainly taught, or implied in His parables. John 3:5 is now quoted in the King James words, \"born of water and of the Spirit.\"" (The witness mark is the dagger †.)
+
+**B3. Article 12.** "the reflection question is new" becomes "the reflection question is reworded".
+
+**B4. The two new films (Articles 2 and 6, made 7 Oct 2026).** The build run checks whether each new film reads the Second Edition text of its Article. If it does, its button reads "Second Edition"; if not, it keeps "First Edition". The change log's films line states what was found, replacing the [VERIFY] line.
+
+**B5. New line under "How the Articles are now shown":** "Where the earlier disclosures said a family held \"no common position,\" the Articles now say \"no position.\" The meaning is unchanged: no church in the family has adopted a text either way." (Ruling AOID2-NO-POSITION-VOCAB.)
