@@ -3,8 +3,9 @@
 //   NARR_BASE = 'https://www.wordsofplainness.org'   NARR_SHOTS = '<folder for screenshots>'
 // Verifies against src/_data/about_narration_timing.json (read from disk) at 1440 and 390 widths.
 async (page) => {
-    const BASE = globalThis.NARR_BASE || 'http://localhost:8085';
-    const SHOTS = globalThis.NARR_SHOTS;
+    // globalThis does not persist between MCP calls: edit these two lines to retarget (e.g. http://localhost:8085).
+    const BASE = 'https://www.wordsofplainness.org';
+    const SHOTS = 'C:/Users/aaron/AppData/Local/Temp/claude/C--Users-aaron--claude-spares-spare-ghUcN9/f1f0090a-4b88-49be-b0c6-860d157959a8/scratchpad';
     const jp = await page.context().newPage();   // read the repo's timing JSON straight from disk (no require here)
     await jp.goto('file:///C:/Users/aaron/Documents/words-of-plainness/src/_data/about_narration_timing.json');
     const timing = JSON.parse(await jp.evaluate(() => document.body.innerText)).targets;
