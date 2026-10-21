@@ -164,6 +164,10 @@
     <link rel="stylesheet" href="/css/volume-testimony.css?v={{ site.version }}">
     {% endif %}
 
+    {% if page.url == "/about/" %}
+    <link rel="stylesheet" href="/css/about-narration.css?v={{ site.version }}">
+    {% endif %}
+
     <!-- World Clocks overlay styles (site-wide) -->
     {% include "components/world-clocks-styles.njk" %}
 
@@ -260,6 +264,10 @@
     <script src="/js/newsletter.js"></script>
     <script src="/js/anthem-player.js"></script>
     {% block scripts %}{% endblock %}
+    {% if page.url == "/about/" %}
+    <script src="/js/sync-core.js?v={{ site.version }}" defer></script>
+    <script src="/js/about-narration.js?v={{ site.version }}" defer></script>
+    {% endif %}
     {% if page.url == "/volume-1/" or page.url == "/volume-2/" %}
     <script>window.WOP_MUSIC_CATALOG = {{ collections.chapters | musicCatalog | safe }};</script>
     <script src="/js/wop-player.js?v={{ site.version }}" defer></script>

@@ -16,6 +16,22 @@ description: "Meet Aaron and Jim Powner — an ordained Elder and his brother sh
             <strong class="text-gold">Brother Aaron Powner</strong> &mdash; Ministering Elder &middot; Chief Author, <em>Words of Plainness</em>
         </p>
 
+        <div class="narr-entry" hidden>
+            <button type="button" class="narr-entry__btn" id="narrEntry"
+                data-video-desktop="{{ about_narration_timing.meta.media.video_desktop }}"
+                data-video-mobile="{{ about_narration_timing.meta.media.video_mobile }}"
+                data-audio="{{ about_narration_timing.meta.media.audio }}"
+                data-poster="{{ about_narration_timing.meta.media.poster }}"
+                data-vtt="/about/narration.vtt"
+                data-duration="{{ about_narration_timing.meta.duration }}">
+                <img class="narr-entry__face" src="{{ about_narration_timing.meta.media.poster }}" alt="" width="60" height="60" loading="lazy" decoding="async">
+                <span class="narr-entry__text">
+                    <span class="narr-entry__label">Hear it from me</span>
+                    <span class="narr-entry__sub">Brother Aaron reads this page &middot; about 8 minutes</span>
+                </span>
+            </button>
+        </div>
+
         <img
             src="/assets/images/aaron-collage.png"
             alt="Collage of Brother Aaron - teaching, traveling, and ministry moments"
@@ -24,39 +40,50 @@ description: "Meet Aaron and Jim Powner — an ordained Elder and his brother sh
         >
 
         <p>
-            Welcome, welcome! I'm Brother Aaron, and I'm the Ministering Elder and Chief Author of
-            Words of Plainness. Before entering full-time ministry, I spent twenty-six years in the
+            {% narr "bio-p1-s1" %}Welcome, welcome!{% endnarr %}
+            {% narr "bio-p1-s2" %}I'm Brother Aaron, and I'm the Ministering Elder and Chief Author of
+            Words of Plainness.{% endnarr %}
+            {% narr "bio-p1-s3" %}Before entering full-time ministry, I spent twenty-six years in the
             classroom teaching science to young people&mdash;helping them
-            understand the natural world and discover the joy of asking good questions. Now,
+            understand the natural world and discover the joy of asking good questions.{% endnarr %}
+            {% narr "bio-p1-s4" %}Now,
             in what some might call retirement, I've found that the questions I most want to
-            explore are the ones science alone can't answer.
+            explore are the ones science alone can't answer.{% endnarr %}
         </p>
 
         <p>
-            I'm an ordained Elder in the Melchizedek Priesthood of The Church of Jesus Christ
-            of Latter-day Saints. My faith was shaped by years of study, service, and a mission
-            to Argentina that changed how I see the world. But this ministry isn't about
+            {% narr "bio-p2-s1" %}I'm an ordained Elder in the Melchizedek Priesthood of The Church of Jesus Christ
+            of Latter-day Saints.{% endnarr %}
+            {% narr "bio-p2-s2" %}My faith was shaped by years of study, service, and a mission
+            to Argentina that changed how I see the world.{% endnarr %}
+            {% narr "bio-p2-s3" %}But this ministry isn't about
             promoting one denomination over another&mdash;it's about Jesus Christ and the common
-            ground shared by all who seek Him.
+            ground shared by all who seek Him.{% endnarr %}
         </p>
 
         <p>
-            Within this ministry I carry the title of Ministering Elder. I hold it not as a
+            {% narr "bio-p3-s1" %}Within this ministry I carry the title of Ministering Elder.{% endnarr %}
+            {% narr "bio-p3-s2" %}I hold it not as a
             rank but as a description of the work itself&mdash;to minister, in the plain and
-            ongoing sense of that word, to whoever God sets in my path. When it comes to the
-            writings gathered here, I answer to a second title: Chief Author. My brother Jim
+            ongoing sense of that word, to whoever God sets in my path.{% endnarr %}
+            {% narr "bio-p3-s3" %}When it comes to the
+            writings gathered here, I answer to a second title: Chief Author.{% endnarr %}
+            {% narr "bio-p3-s4" %}My brother Jim
             labors beside me, and the heart of this work is shared between us; but the governing
-            pen, and the accountability that comes with holding it, rests with me. For more
+            pen, and the accountability that comes with holding it, rests with me.{% endnarr %}
+            {% narr "bio-p3-s5" %}For more
             information, feel free to read the
-            <a href="/chapters/01-introduction/" class="text-gold">first chapter of my writings</a>.
+            <a href="/chapters/01-introduction/" class="text-gold">first chapter of my writings</a>.{% endnarr %}
         </p>
 
         <p>
-            Today, my wife and I travel in our RV, meeting people wherever we go. I host
+            {% narr "bio-p4-s1" %}Today, my wife and I travel in our RV, meeting people wherever we go.{% endnarr %}
+            {% narr "bio-p4-s2" %}I host
             interfaith discussions in VR Chat, create music as part of the Powner Method,
-            and write with the goal of making deep truths accessible. If you ever cross paths
+            and write with the goal of making deep truths accessible.{% endnarr %}
+            {% narr "bio-p4-s3" %}If you ever cross paths
             with a bald, bearded fellow talking about faith in a coffee shop or campground,
-            it might be me.
+            it might be me.{% endnarr %}
         </p>
 
         <figure class="about-figure" id="throwback-collage">
@@ -71,7 +98,7 @@ description: "Meet Aaron and Jim Powner — an ordained Elder and his brother sh
                 >
             </picture>
             <figcaption>
-                Every face here is a real photograph of me, from my earliest years to today. Three of those ages sing together in the joyful Indie Folk arrangement of “<a href="/music/#watch=one-voice-one-mind" target="_blank" rel="noopener">One Voice, One Mind</a>.”
+                {% narr "collage-cap" %}Every face here is a real photograph of me, from my earliest years to today. Three of those ages sing together in the joyful Indie Folk arrangement of “<a href="/music/#watch=one-voice-one-mind" target="_blank" rel="noopener">One Voice, One Mind</a>.”{% endnarr %}
             </figcaption>
         </figure>
     </div>
@@ -80,35 +107,38 @@ description: "Meet Aaron and Jim Powner — an ordained Elder and his brother sh
 <!-- Ministry Philosophy -->
 <section class="content-section alt" id="philosophy" data-pagefind-body>
     <div class="content-wrapper">
-        <h2>Ministry Philosophy</h2>
+        <h2>{% narr "phil-h" %}Ministry Philosophy{% endnarr %}</h2>
 
         <p>
-            <strong class="text-gold">Christ-Centered, Not Tribal.</strong>
-            I use the phrase "Christ-centered" rather than "Christian" deliberately.
-            The word "Christian" has become, for many, a tribal marker&mdash;a way of asking
-            "are you one of us?" I want to point to the person of Jesus Christ rather
-            than to any institution's claim on Him.
+            <strong class="text-gold">{% narr "phil-p1-t" %}Christ-Centered, Not Tribal.{% endnarr %}</strong>
+            {% narr "phil-p1-s1" %}I use the phrase "Christ-centered" rather than "Christian" deliberately.{% endnarr %}
+            {% narr "phil-p1-s2" %}The word "Christian" has become, for many, a tribal marker&mdash;a way of asking
+            "are you one of us?"{% endnarr %}
+            {% narr "phil-p1-s3" %}I want to point to the person of Jesus Christ rather
+            than to any institution's claim on Him.{% endnarr %}
         </p>
 
         <p>
-            <strong class="text-gold">Plainness Over Complexity.</strong>
-            The name "Words of Plainness" comes from {% scripture "2 Nephi 31:3" %}&mdash;the idea that God speaks
-            to His children in language they can understand. I believe truth is best served
-            by clarity, not obscured by unnecessary complexity.
+            <strong class="text-gold">{% narr "phil-p2-t" %}Plainness Over Complexity.{% endnarr %}</strong>
+            {% narr "phil-p2-s1" %}The name "Words of Plainness" comes from {% scripture "2 Nephi 31:3" %}&mdash;the idea that God speaks
+            to His children in language they can understand.{% endnarr %}
+            {% narr "phil-p2-s2" %}I believe truth is best served
+            by clarity, not obscured by unnecessary complexity.{% endnarr %}
         </p>
 
         <p>
-            <strong class="text-gold">Faith Expressed in Living.</strong>
-            I believe discipleship flows naturally from love&mdash;not as a transaction to earn
-            salvation, but as the heart's natural response to grace. "If ye love me, keep
-            my commandments" frames obedience as love's expression, not a checkbox requirement.
+            <strong class="text-gold">{% narr "phil-p3-t" %}Faith Expressed in Living.{% endnarr %}</strong>
+            {% narr "phil-p3-s1" %}I believe discipleship flows naturally from love&mdash;not as a transaction to earn
+            salvation, but as the heart's natural response to grace.{% endnarr %}
+            {% narr "phil-p3-s2" %}"If ye love me, keep
+            my commandments" frames obedience as love's expression, not a checkbox requirement.{% endnarr %}
         </p>
 
         <p>
-            <strong class="text-gold">Bridges, Not Walls.</strong>
-            Believers across traditions have more in common than the things that separate us.
-            This ministry exists to explore that common ground without pretending our
-            differences don't exist.
+            <strong class="text-gold">{% narr "phil-p4-t" %}Bridges, Not Walls.{% endnarr %}</strong>
+            {% narr "phil-p4-s1" %}Believers across traditions have more in common than the things that separate us.{% endnarr %}
+            {% narr "phil-p4-s2" %}This ministry exists to explore that common ground without pretending our
+            differences don't exist.{% endnarr %}
         </p>
     </div>
 </section>
@@ -116,52 +146,67 @@ description: "Meet Aaron and Jim Powner — an ordained Elder and his brother sh
 <!-- How This Work Is Made (formerly AI Disclosure; #ai-disclosure kept for footer links) -->
 <section class="content-section" id="ai-disclosure" data-pagefind-body>
     <div class="content-wrapper">
-        <h2 id="how-this-is-made">How This Work Is Made</h2>
+        <h2 id="how-this-is-made">{% narr "how-h" %}How This Work Is Made{% endnarr %}</h2>
 
         <p>
-            If you have wondered whether a human being stands behind these words, I honor the
-            question. You should ask it. We live in a day when a machine can produce fluent
+            {% narr "how-p1-s1" %}If you have wondered whether a human being stands behind these words, I honor the
+            question.{% endnarr %}
+            {% narr "how-p1-s2" %}You should ask it.{% endnarr %}
+            {% narr "how-p1-s3" %}We live in a day when a machine can produce fluent
             paragraphs about God without knowing Him, and a reader who demands to know who is
             speaking — and whether the speaker believes what he says — is exercising exactly the
             discernment the scriptures require of us: "Prove all things; hold fast that which is
-            good" ({% scripture "1 Thessalonians 5:21" %}). So let me answer plainly.
+            good" ({% scripture "1 Thessalonians 5:21" %}).{% endnarr %}
+            {% narr "how-p1-s4" %}So let me answer plainly.{% endnarr %}
         </p>
 
         <p>
-            <strong class="text-gold">The witness is mine.</strong>
-            I spent twenty-six years teaching science before giving myself to this ministry full
-            time. I served the Lord as a missionary in Argentina as a young man, and I serve now as
+            <strong class="text-gold">{% narr "how-p2-t" %}The witness is mine.{% endnarr %}</strong>
+            {% narr "how-p2-s1" %}I spent twenty-six years teaching science before giving myself to this ministry full
+            time.{% endnarr %}
+            {% narr "how-p2-s2" %}I served the Lord as a missionary in Argentina as a young man, and I serve now as
             an ordained Elder in the Melchizedek Priesthood of The Church of Jesus Christ of
-            Latter-day Saints. The theology in these pages, the convictions, the questions, the
-            personal reflections, and the testimony that anchors them — these are my own. I learned
+            Latter-day Saints.{% endnarr %}
+            {% narr "how-p2-s3" %}The theology in these pages, the convictions, the questions, the
+            personal reflections, and the testimony that anchors them — these are my own.{% endnarr %}
+            {% narr "how-p2-s4" %}I learned
             for myself, on my knees, that God lives and that Jesus is my living Savior and Redeemer,
-            and everything published here flows from that witness. No machine wrote it, because no
-            machine has it.
+            and everything published here flows from that witness.{% endnarr %}
+            {% narr "how-p2-s5" %}No machine wrote it, because no
+            machine has it.{% endnarr %}
         </p>
 
         <p>
-            <strong class="text-gold">Scribes and servants.</strong>
-            The Lord's word has always passed through helping hands. Paul dictated his epistle to
+            <strong class="text-gold">{% narr "how-p3-t" %}Scribes and servants.{% endnarr %}</strong>
+            {% narr "how-p3-s1" %}The Lord's word has always passed through helping hands.{% endnarr %}
+            {% narr "how-p3-s2" %}Paul dictated his epistle to
             the Romans through a scribe named Tertius ({% scripture "Romans 16:22" %}), yet no one
-            doubts whose testimony the epistle carries. Prophets and apostles have worked through
-            scribes, translators, and editors in every age. The question that matters is not whose
-            hand held the pen but whose witness the words bear — and who answers to God for them.
-            Here, that is me. I hold the governing pen, and I hold the accountability.
+            doubts whose testimony the epistle carries.{% endnarr %}
+            {% narr "how-p3-s3" %}Prophets and apostles have worked through
+            scribes, translators, and editors in every age.{% endnarr %}
+            {% narr "how-p3-s4" %}The question that matters is not whose
+            hand held the pen but whose witness the words bear — and who answers to God for them.{% endnarr %}
+            {% narr "how-p3-s5" %}Here, that is me.{% endnarr %}
+            {% narr "how-p3-s6" %}I hold the governing pen, and I hold the accountability.{% endnarr %}
         </p>
 
         <p>
-            <strong class="text-gold">The tools I use.</strong>
-            Everything in these Words of Plainness is genuinely human: the gospel principles, the
+            <strong class="text-gold">{% narr "how-p4-t" %}The tools I use.{% endnarr %}</strong>
+            {% narr "how-p4-s1" %}Everything in these Words of Plainness is genuinely human: the gospel principles, the
             witness, and the inspiration come from a lifetime of my own prayer, study, and spiritual
-            experience, and the final word on every line is mine. I openly use modern AI tools to
+            experience, and the final word on every line is mine.{% endnarr %}
+            {% narr "how-p4-s2" %}I openly use modern AI tools to
             fill gaps in my skills and to check my work: Claude, Gemini, ChatGPT and others for
             editing, research, refining, and website code; ElevenLabs, Suno and others in my music
-            and narration workflow; OpenArt and related tools for imagery. Some voices, music and
+            and narration workflow; OpenArt and related tools for imagery.{% endnarr %}
+            {% narr "how-p4-s3" %}Some voices, music and
             images you encounter here are generated by those tools under my direction.
             <a href="/about/under-the-hood/" class="text-gold"><em>Under the Hood</em></a> lists every
-            tool and what it does. These tools serve me the way a level serves a mason — the wall is still the
-            mason's work. I have also built my writing process so that these tools learn to follow
-            <em>my</em> voice, drawn from decades of my own writing, and not the other way around.
+            tool and what it does.{% endnarr %}
+            {% narr "how-p4-s4" %}These tools serve me the way a level serves a mason — the wall is still the
+            mason's work.{% endnarr %}
+            {% narr "how-p4-s5" %}I have also built my writing process so that these tools learn to follow
+            <em>my</em> voice, drawn from decades of my own writing, and not the other way around.{% endnarr %}
         </p>
 
         <figure class="about-figure" id="rv-workspace">
@@ -176,46 +221,55 @@ description: "Meet Aaron and Jim Powner — an ordained Elder and his brother sh
                 >
             </picture>
             <figcaption>
-                My workspace in our RV, from a real photograph tidied up with AI and Photoshop.
+                {% narr "workspace-cap" %}My workspace in our RV, from a real photograph tidied up with AI and Photoshop.{% endnarr %}
             </figcaption>
         </figure>
 
         <p>
-            <strong class="text-gold">What these tools never do.</strong>
-            They do not originate doctrine. They do not write my testimony. They do not publish
-            anything. Every AI-assisted draft is painstakingly mediated — and sometimes remediated —
-            and verified against authoritative sources before I approve it. If a page carries my
-            name, I have read every word of it and I answer for every word of it.
+            <strong class="text-gold">{% narr "how-p5-t" %}What these tools never do.{% endnarr %}</strong>
+            {% narr "how-p5-s1" %}They do not originate doctrine.{% endnarr %}
+            {% narr "how-p5-s2" %}They do not write my testimony.{% endnarr %}
+            {% narr "how-p5-s3" %}They do not publish
+            anything.{% endnarr %}
+            {% narr "how-p5-s4" %}Every AI-assisted draft is painstakingly mediated — and sometimes remediated —
+            and verified against authoritative sources before I approve it.{% endnarr %}
+            {% narr "how-p5-s5" %}If a page carries my
+            name, I have read every word of it and I answer for every word of it.{% endnarr %}
         </p>
 
         <p>
-            The discipleship web apps and the main website are designed to support your own
-            studies, not replace your personal engagement with the text.
+            {% narr "how-p6-s1" %}The discipleship web apps and the main website are designed to support your own
+            studies, not replace your personal engagement with the text.{% endnarr %}
         </p>
 
         <p>
-            <strong class="text-gold">Prove all things.</strong>
-            If anything I have published reads untrue to you,
-            <a href="/connect/#contact" class="text-gold">write to me</a> and show me where. I will
+            <strong class="text-gold">{% narr "how-p7-t" %}Prove all things.{% endnarr %}</strong>
+            {% narr "how-p7-s1" %}If anything I have published reads untrue to you,
+            <a href="/connect/#contact" class="text-gold">write to me</a> and show me where.{% endnarr %}
+            {% narr "how-p7-s2" %}I will
             answer for it — that is a promise I make as the author, not a policy written by a
-            committee. And when you have proven the words, I invite you to do what Philip invited
-            Nathanael to do: "Come and see" ({% scripture "John 1:46" %}). The words are only the
-            lantern. What they point to is Christ.
+            committee.{% endnarr %}
+            {% narr "how-p7-s3" %}And when you have proven the words, I invite you to do what Philip invited
+            Nathanael to do: "Come and see" ({% scripture "John 1:46" %}).{% endnarr %}
+            {% narr "how-p7-s4" %}The words are only the
+            lantern.{% endnarr %}
+            {% narr "how-p7-s5" %}What they point to is Christ.{% endnarr %}
         </p>
 
         <aside class="about-uth-callout">
             <p>
-                Curious to read a more detailed account of how the content is developed and how the website architecture itself was built? Read
-                <a href="/about/under-the-hood/" class="text-gold">Under the Hood</a>, a plain account of the people, tools, hosting and checks behind these pages.
+                {% narr "how-p8-s1" %}Curious to read a more detailed account of how the content is developed and how the website architecture itself was built?{% endnarr %}
+                {% narr "how-p8-s2" %}Read
+                <a href="/about/under-the-hood/" class="text-gold">Under the Hood</a>, a plain account of the people, tools, hosting and checks behind these pages.{% endnarr %}
             </p>
         </aside>
 
         <p class="about-prayer">
-            My prayer is that what you find here will authentically draw you closer to God and bless your life.
+            {% narr "how-p9-s1" %}My prayer is that what you find here will authentically draw you closer to God and bless your life.{% endnarr %}
         </p>
 
         <p class="about-signature">
-            — Brother Aaron Powner<br>
+            {% narr "sig" %}— Brother Aaron Powner{% endnarr %}<br>
             <em>Kaysville, Utah · somewhere on the road</em><br>
             <em>Last reviewed: October 2026</em>
         </p>

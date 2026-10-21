@@ -603,6 +603,14 @@ module.exports = function(eleventyConfig) {
         return `<span class="sentence" data-index="${index}">${content.trim()}</span>`;
     });
 
+    // Narration target for the /about/ narrated-video sync (js/sync-core.js).
+    // Usage: {% narr "bio-p1-s1" %}Content here{% endnarr %}
+    // IDs key src/_data/about_narration_timing.json; scripts/check-narration-ids.js
+    // fails the build if the markup and the timing file drift apart.
+    eleventyConfig.addPairedShortcode("narr", function(content, id) {
+        return `<span class="narr" data-narr="${id}">${content.trim()}</span>`;
+    });
+
     // Paragraph wrapper for audio sync highlighting
     // Usage: {% para 0 %}...paragraph content...{% endpara %}
     // Wraps content in a <p> with data-paragraph attribute.
