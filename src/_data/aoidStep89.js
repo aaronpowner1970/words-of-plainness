@@ -40,10 +40,7 @@ const STAGE1 = DIR + 'WoP_AOID2_Step89_Stage1Disclosures_Draft_v1_20261019.md';
 const ARTICLES_TEMPLATE = 'src/pages/articles.njk';
 
 // Paragraphs shown only in a build-review build (WOP_AOID2_BUILD_REVIEW=1). Key: Article code + bold lead-in.
-const REVIEW_ONLY = {
-  'A11 Born of water and of the Spirit.': 'Held for Aaron (CODE-AOID2-50): the two family lists are filled under the one-adopted-document standard (AOID2-A11-WATER-FAMILY-LISTS, AOID2-SCRIPTURE-AS-DOCUMENT) and need his last approval; the first sentence is the ruled wording (AOID2-A11-BAPTISM-HELD-IN-COMMON)',
-  'A11 Love proven by obedience.': 'Held (CODE-AOID2-50) on a mismatch: the ruled John 14:15 sentence checks out against the record, but the unchanged Galatians 5:6 sentence puts the Anabaptist and Jehovah\'s Witness traditions "in their own words" where the record has the Anabaptist cell in sense (Mennonite Confession Art. 17, "active in love") and the Jehovah\'s Witness cell in neighbouring words (Study Edition notes on Galatians 5:22 and James 2:18; the note on Galatians 5:6 has references only)',
-};
+const REVIEW_ONLY = {};  // empty since CODE-AOID2-51: both held paragraphs checked out and are shown
 
 // B4 (AMENDMENTS v3): the films line states what the build run found. The films for Articles 2 and 6 (made 7 Oct 2026,
 // A02v2 vapwjdfYqEA and A06v2 4Bp1-gPunxc) read the Second Edition text of their Articles: the builder's aligner matches

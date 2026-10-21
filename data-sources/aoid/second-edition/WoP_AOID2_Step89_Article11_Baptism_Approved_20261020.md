@@ -83,3 +83,33 @@ Build notes (not build text):
 **Love proven by obedience.** (replaces the last two sentences only) That faith works by love (Galatians 5:6) is confessed in their own words by the Catholic, Eastern Orthodox, Lutheran, Reformed, Anabaptist and Jehovah's Witness traditions, and in sense by the Anglican, Baptist and Holiness. Christ's words "If ye love me, keep my commandments" (John 14:15) are confessed in so many words by the Adventist, Latter-day Saint, Eastern Orthodox and Methodist traditions, and in sense by the Catholic, Anglican and Anabaptist.
 
 Build note: [VERIFY] every named tradition and qualifier against the A11 report tables and CODE-AOID2-11 review notes; stop the paragraph on any mismatch and report.
+
+
+---
+
+## 6. After the CODE-AOID2-49 review (CHAT-AOID2-49a, 21 Oct 2026)
+
+Rulings filed: AOID2-A11-BAPTISM-HELD-IN-COMMON (option 1), AOID2-A11-WATER-FAMILY-LISTS (option 1), AOID2-A11-TWO-HELD-PARAS (option 1). Their author_notes in the conductor's state carry the exact wording.
+
+Approved by Aaron 21 Oct 2026, 03:14 ET ("Approve C1-C6"):
+- C1. Change log films line, as Code composed it: "The First Edition's films, PDFs and slides are labelled First Edition. The films for Articles 2 and 6, made on 7 October 2026, read the Second Edition text of those Articles and are labelled Second Edition."
+- C2. Codex v0.21 change-log entry (lines 280-283), as Code composed it: approved as written.
+- C3. s25 is governed by G6, not A11-F5; A11-F5 governs s9 and s10, A11-F9 governs s26. Leave s25 unchanged.
+- C4. A2-F1 "Date measured" on the Record tab reads "3 October 2026, revised 11 October 2026".
+- C5. s26 is printed in quotation marks: "Then they that gladly received his word were baptized."
+- C6. The Salvation Army paragraph stays shown as the record counted it; the Appendix 5 (2008, by authority of the General) "make disciples" cell is added to the Stage 2 (step 49) checks; if the appendix does not qualify as adopted text, the clause changes then.
+
+
+---
+
+## 7. After the CODE-AOID2-50 review (CHAT-AOID2-49a, 21 Oct 2026)
+
+Rulings filed: AOID2-A11-SIGN-VS-JOIN (option 1), AOID2-A11-GAL56-ATTRIBUTION (option 1).
+
+"Born of water and of the Spirit." APPROVED as a whole by Aaron, 21 Oct 2026, 04:45 ET ("Approve with the shorter form."). Final text:
+
+**Born of water and of the Spirit.** Christ was baptized "to fulfil all righteousness" (Matthew 3:15). He commanded His apostles to teach all nations, baptizing them (Matthew 28:19), and those who gladly received the word were baptized (Acts 2:41). His command to baptize is held in common by the standard these Articles keep. That He Himself was baptized is confessed in the adopted texts of most traditions, in their own words or in sense, and is being measured again. Every tradition but three confesses in its own adopted texts that Christ ordained baptism with water; it was not found in the Oriental Orthodox, Church of the East and Stone-Campbell texts read. Of them, the Anglican, Catholic, Eastern Orthodox, Lutheran, Pentecostal and Latter-day Saint join it to the new birth He spoke of: "Except a man be born of water and of the Spirit, he cannot enter into the kingdom of God" (John 3:5). Others, the Reformed, Methodist and Holiness, confess the new birth as the Spirit's work and baptism as its sign; the texts that decide the Reformed, Baptist and Holiness counts on John 3:5 speak of the Spirit's work, and the Reformed and Baptist readings are marked borderline. The measurement counts what the churches confess. It does not settle what "water" signifies, or how baptism is related to the new birth. That is not leave to set either aside. Christ's example and His command stand, and every church and every believer is asked to search their own doctrine, pray for wisdom, and follow the Spirit of God in them. The Article's companion verse, that we should seek the Lord and feel after Him (Acts 17:27), was found in the adopted texts of the Catholic and Eastern Orthodox churches; not every family's texts were searched for it.
+
+Build notes: [VERIFY] the three "Others" names against WCF 28.1 / WLC 165, UMC Article XVII and the Wesleyan ritual; the thirteen-family (a) result and six-family (b) result as in the CODE-AOID2-50 report. If all check out, show the paragraph (remove its review-only wrap); on any mismatch keep it held and report.
+
+Church of the East 2006 Catechism (Diocese Eastern USA): adoption question added to the Stage 2 (step 49) checks; not pursued now.

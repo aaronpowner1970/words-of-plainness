@@ -46,6 +46,7 @@
         <h3 class="an-lead-title">The record behind the counts</h3>
         <p class="an-lead-sub">Article {{ t.n }} · {{ t.source.title }}</p>
         {{ t.summary | safe }}
+        {{ t.baptism | safe }}
         {{ t.source.tab.strips | safe }}
         {{ t.source.tab.record | safe }}
         <p class="an-correction">{{ aoidDisclosures.correctionHtml | safe }}</p>

@@ -31,9 +31,11 @@ LEDGER = REPO / "data-sources" / "aoid" / "floor_ledger.yaml"
 FOS = REPO / "data-sources" / "aoid" / "disclosures" / "WoP_AOID2_FatherOfSpirits_Disclosure_Final_20261004.md"
 
 
-REVIEW_ONLY = {  # Stage 1 paragraphs wrapped for build-review mode (src/_data/aoidStep89.js REVIEW_ONLY)
-    "a11": ["Born of water and of the Spirit.", "Love proven by obedience."],
-}
+REVIEW_ONLY = {}  # Stage 1 paragraphs wrapped for build-review mode (src/_data/aoidStep89.js REVIEW_ONLY); empty since CODE-AOID2-51
+BAPTISM_FAMILIES = REPO / "data-sources" / "aoid" / "second-edition" / "a11_baptism_families.json"
+# AOID2-A11-GAL56-ATTRIBUTION option 1, the ruled Galatians 5:6 sentence (author_note, verbatim).
+GAL_RULED = ("That faith works by love (Galatians 5:6) is confessed in their own words by the Catholic, Eastern Orthodox, Lutheran and Reformed "
+             "traditions, and in sense by the Anglican, Baptist, Holiness, Anabaptist and Jehovah's Witness.")
 APPROVED_A11 = SE / "WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md"
 # AOID2-A11-TWO-HELD-PARAS option 1, the ruled John 14:15 sentence (author_note, verbatim).
 LOVE_RULED = ("Christ's words \"If ye love me, keep my commandments\" (John 14:15) are confessed in so many words by the Adventist and Methodist "
@@ -272,6 +274,20 @@ def open_span(pg, server, art, span):
     pg.wait_for_selector("#apPanel.ap-open")
 
 
+@pytest.mark.parametrize("width", [1280, 390])
+def test_baptism_table_shows_without_page_scroll(browser, server, width):
+    """CODE-AOID2-51: the table is on Article 11's Record tab and does not force horizontal page scroll (390 wide)."""
+    ctx = browser.new_context(service_workers="block", viewport={"width": width, "height": 900})
+    pg = ctx.new_page()
+    pg.route("**/*", lambda route: route.abort() if not route.request.url.startswith(server) else route.continue_())
+    pg.goto(server + "/articles/", wait_until="domcontentloaded")
+    pg.evaluate("() => document.getElementById('a11-tab-record').click()")
+    pg.wait_for_selector("#a11-record:not([hidden]) #a11-baptism-families", state="visible")
+    assert pg.locator("#a11-baptism-families tbody tr").count() == 16
+    assert pg.evaluate("() => document.documentElement.scrollWidth <= window.innerWidth")
+    ctx.close()
+
+
 def test_panel_count_and_links(page, server):
     data = json.loads(COUNTS.read_text(encoding="utf8"))
     f = next(x for x in data["floors"] if x["id"] == "A4-F1")
@@ -394,49 +410,75 @@ def test_article_11_panels_carry_the_ratified_floors(site_on):
     assert "second_edition" not in blob and "_first_edition" not in blob
 
 
-def test_held_paragraphs_do_not_render_outside_a_review_build(site_on):
+def test_no_review_only_paragraph_remains(site_on):
+    """CODE-AOID2-51: the two held Article 11 paragraphs checked out against the record and are shown."""
     arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    assert "an-review-only" not in arts and REVIEW_ONLY == {}
     d = text_of(panel(arts, "a11", "disclosure"))
-    for lead in REVIEW_ONLY["a11"]:
-        assert lead not in d, lead
+    for lead in ("Born of water and of the Spirit.", "Love proven by obedience."):
+        assert lead in d, lead
     assert plain_md(approved_block("God's offspring.").replace(" (replaces the whole paragraph)", "")) in d
     assert plain_md(approved_block("The Salvation Army.")) in d
     assert "the Adventist through a voted proof text, the Catholic in sense, the Lutheran in Jeremiah's form, and the Methodist through Wesley's Notes." in d
 
 
-def test_born_of_water_lists_are_filled(tmp_path):
-    out = tmp_path / "born_review"
-    build(out, True, review=True)
-    arts = (out / "articles" / "index.html").read_text(encoding="utf8")
-    d = text_of(panel(arts, "a11", "disclosure"))
-    assert "[Families named from the record]" not in d and "[those named from the record]" not in d
-    # CODE-AOID2-50: the first sentence is the ruled wording (AOID2-A11-BAPTISM-HELD-IN-COMMON, option 1) ...
-    assert ("His command to baptize is held in common by the standard these Articles keep. That He Himself was baptized is confessed "
-            "in the adopted texts of most traditions, in their own words or in sense, and is being measured again.") in d
-    assert "Christ's baptism and His command to baptize are both held in common" not in d
-    # ... and the lists follow the one-adopted-document standard (AOID2-A11-WATER-FAMILY-LISTS, AOID2-SCRIPTURE-AS-DOCUMENT).
-    assert ("The Anglican, Baptist, Catholic, Eastern Orthodox, Reformed, Lutheran, Methodist, Anabaptist, Pentecostal, Holiness, Adventist, "
-            "Latter-day Saint and Jehovah's Witness traditions confess in their own adopted texts that Christ ordained baptism with water, "
-            "and the Anglican, Catholic, Eastern Orthodox, Lutheran, Pentecostal and Latter-day Saint join it to the new birth He spoke of") in d
-    assert LOVE_RULED in d                         # the held paragraph carries the ruled John 14:15 sentence in the review build
-    # The three families with no document that states both claims are not named in either list.
-    lists = d.split("The Anglican, Baptist")[1].split("John 3:5")[0]
-    for fam in ("Oriental Orthodox", "Church of the East", "Stone-Campbell"):
-        assert fam not in lists, fam
+def section7_born_of_water():
+    src = APPROVED_A11.read_text(encoding="utf8").replace("\r\n", "\n")
+    hit = [l for l in src.split("\n") if l.startswith("**Born of water and of the Spirit.** Christ was baptized") and "Every tradition but three" in l]
+    assert len(hit) == 1
+    return hit[0]
+
+
+def test_born_of_water_is_section_7_verbatim_and_shown(site_on, site_off):
+    """CODE-AOID2-51: the approved final paragraph (section 7), shown with no review-only wrap."""
+    on = text_of(panel((site_on / "articles" / "index.html").read_text(encoding="utf8"), "a11", "disclosure"))
+    assert plain_md(section7_born_of_water()) in on
+    assert "[Families named from the record]" not in on and "[those named from the record]" not in on
+    assert "Others, the Reformed, Methodist and Holiness, confess the new birth as the Spirit's work and baptism as its sign;" in on
+    assert ("Every tradition but three confesses in its own adopted texts that Christ ordained baptism with water; it was not found in the "
+            "Oriental Orthodox, Church of the East and Stone-Campbell texts read.") in on
+    assert "Of them, the Anglican, Catholic, Eastern Orthodox, Lutheran, Pentecostal and Latter-day Saint join it to the new birth He spoke of" in on
+    assert "Born of water and of the Spirit." not in text_of((site_off / "articles" / "index.html").read_text(encoding="utf8"))
+
+
+def test_baptism_table_is_built_from_the_data_file(site_on, site_off):
+    """CODE-AOID2-51: the sixteen-family table on Article 11's Record tab, from one data file, Second Edition only."""
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    rec = panel(arts, "a11", "record")
+    data = json.loads(BAPTISM_FAMILIES.read_text(encoding="utf8"))
+    t = rec[rec.index('<section class="an-baptism-table" id="a11-baptism-families"'):]
+    t = t[:t.index("</section>")]
+    assert text_of(t).startswith("Baptism with water and the new birth: the sixteen families "
+                                 "The evidence behind the two lists in \"Born of water and of the Spirit.\" on the Disclosure tab. "
+                                 "Family Document Christ ordained baptism with water Joined to the new birth")
+    assert re.findall(r"<th scope=\"col\">(.*?)</th>", t) == ["Family", "Document", "Christ ordained baptism with water", "Joined to the new birth"]
+    rows = [[text_of(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", r)] for r in re.findall(r"<tr><th scope=\"row\">.*?</tr>", t)]
+    assert rows == [[r["family"], r["document"], r["ordained"], r["joined"]] for r in data["rows"]] and len(rows) == 16
+    assert sum(r[2] == "Yes" for r in rows) == 13 and all(r[2] in ("Yes", "Not found") for r in rows)
+    base = lambda v: v.replace(" (borderline)", "")
+    assert all(base(r[3]) in ("Joined", "Sign", "Not found") for r in rows)
+    short = lambda f: {"Pentecostal (with independent charismatic churches)": "Pentecostal", "The Church of Jesus Christ of Latter-day Saints": "Latter-day Saint"}.get(f, f)
+    assert sorted(short(r[0]) for r in rows if base(r[3]) == "Joined") == sorted(["Anglican", "Catholic", "Eastern Orthodox", "Lutheran", "Pentecostal", "Latter-day Saint"])
+    assert sorted(r[0] for r in rows if r[3] == "Sign") == sorted(["Reformed", "Methodist", "Holiness"])
+    assert sorted(r[0] for r in rows if r[2] == "Not found") == sorted(["Oriental Orthodox", "Church of the East", "Stone-Campbell"])
+    assert [r[3] for r in rows if "(borderline)" in r[3]] == ["Joined (borderline)"]
+    # after the summary table, before the count strips and per-family tables that follow it on this tab
+    assert rec.index('class="disc-table-wrap an-summary"') < rec.index("a11-baptism-families") < rec.index('class="an-tally"')
+    assert 'id="a11-baptism-families"' not in (site_off / "articles" / "index.html").read_text(encoding="utf8")
+    assert arts.count('id="a11-baptism-families"') == 1
 
 
 def test_love_and_repent_paragraphs_carry_the_ruled_wording(site_on, site_off):
-    """AOID2-A11-TWO-HELD-PARAS option 1. Repent and be baptized checked out and is shown; Love proven by obedience is held
-    on the Galatians 5:6 sentence (Anabaptist and Jehovah's Witness 'in their own words' against the record), so it is not rendered."""
+    """AOID2-A11-TWO-HELD-PARAS and AOID2-A11-GAL56-ATTRIBUTION option 1: both ruled sentences checked against the record; both paragraphs shown."""
     on = text_of(panel((site_on / "articles" / "index.html").read_text(encoding="utf8"), "a11", "disclosure"))
     off = text_of((site_off / "articles" / "index.html").read_text(encoding="utf8"))
     assert "Repent and be baptized." in on
     assert ("The Baptist churches confess repentance, faith and the baptism of believers, and hold that baptism follows faith: the Second London "
             "Confession calls it a sign of the remission of sins, and the Baptist Faith and Message an act of obedience symbolizing the believer's faith.") in on
     assert "signifies the remission of sins" not in on
-    assert "Love proven by obedience." not in on
-    src = STAGE1.read_text(encoding="utf8")
-    assert LOVE_RULED in src and LOVE_RULED not in on
+    assert "Love proven by obedience." in on
+    assert GAL_RULED in on and LOVE_RULED in on
+    assert "Anabaptist and Jehovah's Witness traditions, and in sense" not in on
     assert "What the measurement found" not in off and "Second London Confession" not in off
 
 

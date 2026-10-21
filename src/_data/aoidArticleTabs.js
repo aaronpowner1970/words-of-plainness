@@ -50,6 +50,7 @@ const disclosures = require('./aoidDisclosures.js');
 const howWeHold = require('./howWeHold.js');
 const step89 = require('./aoidStep89.js');   // { on: false } with the switch OFF
 const counts = require('./aoidCounts.js');   // { on: false } with the switch OFF
+const baptism = require('./aoidBaptismTable.js');   // { on: false } with the switch OFF
 
 const TABBED = ['A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'A11', 'A12', 'A13', 'A14'];
 
@@ -99,6 +100,7 @@ TABBED.forEach((code) => {
     noteKey,                      // howWeHold key: its note is moved into the Disclosure tab
     stage1: step89.on ? (step89.stage1[code] || '') : '',    // "What the measurement found" (Stage 1 disclosures)
     summary: counts.on ? (counts.tables[code] || '') : '',   // the Record tab's summary table
+    baptism: baptism.on ? (baptism.byArticle[code] || '') : '',   // Article 11: the sixteen-family baptism table, after the summary table
     disclosureLine: !source && !noteKey && !(step89.on && step89.stage1[code])
       ? GENERATED.noDisclosure + (methodHtml ? ' ' + GENERATED.method : '')
       : '',
