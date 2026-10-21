@@ -81,7 +81,7 @@ else {
       const q = !ok || f.queue === null ? DASH : (f.queue + (f.queuedFamilies && f.queuedFamilies.length ? ' (' + f.queuedFamilies.map(esc).join(', ') + ')' : ''));
       return '<tr id="' + id + '-record-' + esc(f.id) + '"><th scope="row">' + esc(f.title) + '</th>'
         + '<td>' + (ok ? f.counts.taught : DASH) + '</td><td>' + (ok ? f.counts.contradicted : DASH) + '</td><td>' + (ok ? f.counts.noPosition : DASH) + '</td>'
-        + '<td>' + (ok && f.measured ? esc(dateText(f.measured)) : DASH) + '</td>'
+        + '<td>' + (ok && f.measured ? esc(dateText(f.measured) + (f.revised ? ', revised ' + dateText(f.revised) : '')) : DASH) + '</td>'
         + '<td>' + (ok && f.borderline !== null ? f.borderline : DASH) + '</td>'
         + '<td>' + q + '</td></tr>';
     }).join('');

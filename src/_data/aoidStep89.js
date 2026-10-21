@@ -41,9 +41,8 @@ const ARTICLES_TEMPLATE = 'src/pages/articles.njk';
 
 // Paragraphs shown only in a build-review build (WOP_AOID2_BUILD_REVIEW=1). Key: Article code + bold lead-in.
 const REVIEW_ONLY = {
-  'A11 Born of water and of the Spirit.': 'Held for Aaron (CODE-AOID2-49): the two family lists are filled from adopted texts in the record and need his approval; the first sentence ("Christ\'s baptism and His command to baptize are both held in common") rests on A11-F5, whose count is withheld until the amended floor is scored, and on A11-F2',
-  'A11 Love proven by obedience.': 'Held (CODE-AOID2-49) on a mismatch: the CODE-AOID2-11 review note says "in so many words" for the Adventist, Latter-day Saint, Eastern Orthodox and Methodist, but the A11 report table has the Eastern Orthodox cell on John 14:21, 23 and the Latter-day Saint cell on D&C 42:29 in the Church\'s own words, not on the words of John 14:15',
-  'A11 Repent and be baptized.': 'Held (CODE-AOID2-49) on a mismatch: 1689 Confession 29.1 calls baptism "a sign ... of remission of sins" and 29.2 confines it to those who profess repentance and faith, but BF&M 2000 VII speaks of death to sin and newness of life and does not mention remission, so "the Baptist churches ... signifies the remission of sins" is borne out for the 1689 bodies only',
+  'A11 Born of water and of the Spirit.': 'Held for Aaron (CODE-AOID2-50): the two family lists are filled under the one-adopted-document standard (AOID2-A11-WATER-FAMILY-LISTS, AOID2-SCRIPTURE-AS-DOCUMENT) and need his last approval; the first sentence is the ruled wording (AOID2-A11-BAPTISM-HELD-IN-COMMON)',
+  'A11 Love proven by obedience.': 'Held (CODE-AOID2-50) on a mismatch: the ruled John 14:15 sentence checks out against the record, but the unchanged Galatians 5:6 sentence puts the Anabaptist and Jehovah\'s Witness traditions "in their own words" where the record has the Anabaptist cell in sense (Mennonite Confession Art. 17, "active in love") and the Jehovah\'s Witness cell in neighbouring words (Study Edition notes on Galatians 5:22 and James 2:18; the note on Galatians 5:6 has references only)',
 };
 
 // B4 (AMENDMENTS v3): the films line states what the build run found. The films for Articles 2 and 6 (made 7 Oct 2026,

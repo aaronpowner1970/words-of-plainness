@@ -32,9 +32,13 @@ FOS = REPO / "data-sources" / "aoid" / "disclosures" / "WoP_AOID2_FatherOfSpirit
 
 
 REVIEW_ONLY = {  # Stage 1 paragraphs wrapped for build-review mode (src/_data/aoidStep89.js REVIEW_ONLY)
-    "a11": ["Born of water and of the Spirit.", "Love proven by obedience.", "Repent and be baptized."],
+    "a11": ["Born of water and of the Spirit.", "Love proven by obedience."],
 }
 APPROVED_A11 = SE / "WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md"
+# AOID2-A11-TWO-HELD-PARAS option 1, the ruled John 14:15 sentence (author_note, verbatim).
+LOVE_RULED = ("Christ's words \"If ye love me, keep my commandments\" (John 14:15) are confessed in so many words by the Adventist and Methodist "
+              "traditions; the Eastern Orthodox confess the same in His words of John 14:21 and 23, and the Latter-day Saints in the Lord's words "
+              "to the Church (D&C 42:29); the Catholic, Anglican and Anabaptist confess it in sense.")
 
 
 def build(out, on, review=False):
@@ -406,7 +410,50 @@ def test_born_of_water_lists_are_filled(tmp_path):
     arts = (out / "articles" / "index.html").read_text(encoding="utf8")
     d = text_of(panel(arts, "a11", "disclosure"))
     assert "[Families named from the record]" not in d and "[those named from the record]" not in d
-    assert "Anglican, Reformed, Lutheran, Anabaptist, Pentecostal and Holiness traditions confess in their own adopted texts that Christ ordained baptism with water" in d
+    # CODE-AOID2-50: the first sentence is the ruled wording (AOID2-A11-BAPTISM-HELD-IN-COMMON, option 1) ...
+    assert ("His command to baptize is held in common by the standard these Articles keep. That He Himself was baptized is confessed "
+            "in the adopted texts of most traditions, in their own words or in sense, and is being measured again.") in d
+    assert "Christ's baptism and His command to baptize are both held in common" not in d
+    # ... and the lists follow the one-adopted-document standard (AOID2-A11-WATER-FAMILY-LISTS, AOID2-SCRIPTURE-AS-DOCUMENT).
+    assert ("The Anglican, Baptist, Catholic, Eastern Orthodox, Reformed, Lutheran, Methodist, Anabaptist, Pentecostal, Holiness, Adventist, "
+            "Latter-day Saint and Jehovah's Witness traditions confess in their own adopted texts that Christ ordained baptism with water, "
+            "and the Anglican, Catholic, Eastern Orthodox, Lutheran, Pentecostal and Latter-day Saint join it to the new birth He spoke of") in d
+    assert LOVE_RULED in d                         # the held paragraph carries the ruled John 14:15 sentence in the review build
+    # The three families with no document that states both claims are not named in either list.
+    lists = d.split("The Anglican, Baptist")[1].split("John 3:5")[0]
+    for fam in ("Oriental Orthodox", "Church of the East", "Stone-Campbell"):
+        assert fam not in lists, fam
+
+
+def test_love_and_repent_paragraphs_carry_the_ruled_wording(site_on, site_off):
+    """AOID2-A11-TWO-HELD-PARAS option 1. Repent and be baptized checked out and is shown; Love proven by obedience is held
+    on the Galatians 5:6 sentence (Anabaptist and Jehovah's Witness 'in their own words' against the record), so it is not rendered."""
+    on = text_of(panel((site_on / "articles" / "index.html").read_text(encoding="utf8"), "a11", "disclosure"))
+    off = text_of((site_off / "articles" / "index.html").read_text(encoding="utf8"))
+    assert "Repent and be baptized." in on
+    assert ("The Baptist churches confess repentance, faith and the baptism of believers, and hold that baptism follows faith: the Second London "
+            "Confession calls it a sign of the remission of sins, and the Baptist Faith and Message an act of obedience symbolizing the believer's faith.") in on
+    assert "signifies the remission of sins" not in on
+    assert "Love proven by obedience." not in on
+    src = STAGE1.read_text(encoding="utf8")
+    assert LOVE_RULED in src and LOVE_RULED not in on
+    assert "What the measurement found" not in off and "Second London Confession" not in off
+
+
+def test_a2f1_date_measured_and_s26_quotation_marks(site_on, site_off):
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    rec = panel(arts, "a02", "record")
+    row = re.search(r'<tr id="a02-record-A2-F1">(.*?)</tr>', rec, re.S).group(1)
+    assert "3 October 2026, revised 11 October 2026" in text_of(row)
+    others = [r for r in re.findall(r'<tr id="a\d+-record-[^"]+">(.*?)</tr>', arts, re.S) if "revised" in text_of(r)]
+    assert len(others) == 1                        # only A2-F1 carries a revised date
+    ledger = {str(e["item"]): e for e in yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"]}
+    assert str(ledger["A2-F1"]["revised_on"]) == "2026-10-11" and str(ledger["A2-F1"]["scored_on"]) == "2026-10-03"
+    fc = {f["id"]: f for f in json.loads(COUNTS.read_text(encoding="utf8"))["floors"]}
+    assert fc["A2-F1"]["revised"] == "2026-10-11"
+    assert 'data-span="s26" data-article="A11" data-type="direct" data-named="false">"Then they that gladly received his word were baptized."</span>' in arts
+    assert 'data-span="s13" data-article="A11" data-type="direct" data-named="false">The answer was as plain then as it is now: "Repent and be baptized' in arts
+    assert "revised 11 October" not in (site_off / "articles" / "index.html").read_text(encoding="utf8")
 
 
 def test_change_log_b1_to_b5(site_on):

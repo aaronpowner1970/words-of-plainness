@@ -67,7 +67,7 @@ function readLedger() {
   const d = yaml.load(fs.readFileSync(path.join(ROOT, LEDGER), 'utf8'));
   return d.scored.map((e) => {
     const spans = [].concat(e.span || []);
-    const out = { id: String(e.item), title: e.title, spans, scored_on: e.scored_on ? new Date(e.scored_on).toISOString().slice(0, 10) : null, result: e.result, superseded: e.superseded_records || [], withheld: e.withheld || null };
+    const out = { id: String(e.item), title: e.title, spans, scored_on: e.scored_on ? new Date(e.scored_on).toISOString().slice(0, 10) : null, revised_on: e.revised_on ? new Date(e.revised_on).toISOString().slice(0, 10) : null, result: e.result, superseded: e.superseded_records || [], withheld: e.withheld || null };
     const m = /taught (\d+), (?:contradicted|divided) (\d+), no position (\d+)(?:, being confirmed (\d+))? of 16/.exec(e.result || '');
     if (m && out.scored_on) {
       out.t = num(m[1]); out.c = num(m[2]); out.n = num(m[3]);
@@ -203,7 +203,7 @@ function build() {
   const tables = familyTables();
 
   const floors = ledger.map((e) => {
-    const f = { id: e.id, title: e.title, spans: e.spans, measured: e.scored_on, counts: null, status: null, queue: null, queuedFamilies: null, borderline: null, borderlineFamilies: null, ledger: e.result, observations: [] };
+    const f = { id: e.id, title: e.title, spans: e.spans, measured: e.scored_on, ...(e.revised_on ? { revised: e.revised_on } : {}), counts: null, status: null, queue: null, queuedFamilies: null, borderline: null, borderlineFamilies: null, ledger: e.result, observations: [] };
     if (e.t === undefined) { f.status = 'UNSCORED'; return f; }
     f.observations.push({ record: 'ledger', locator: LEDGER + ' item ' + e.id, taught: e.t, contradicted: e.c, noPosition: e.n, queue: e.q });
     if (e.withheld) { f.status = 'WITHHELD'; f.withheld = e.withheld; return f; }
