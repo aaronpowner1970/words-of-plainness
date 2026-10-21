@@ -113,6 +113,8 @@ permalink: /music/
                     data-play-file="{{ item.file }}">
                     <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
+                        {%- set audio = { testimony: { title: item.title, file: item.file } } -%}
+                        {% include "components/listen-anchor.njk" %}
                         <div class="track-title-group">
                             <span class="song-title">{{ item.title }}</span>
                             <span class="song-label">&mdash; {{ item.label }}</span>
@@ -141,6 +143,8 @@ permalink: /music/
                     data-play-file="{{ chapter.data.audio.testimony.file }}">
                     <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
+                        {%- set audio = chapter.data.audio -%}
+                        {% include "components/listen-anchor.njk" %}
                         <div class="track-title-group">
                             <span class="song-title">{{ chapter.data.audio.testimony.title }}</span>
                             {% if chapter.data.audio.testimony.label %}<span class="song-label">&mdash; {{ chapter.data.audio.testimony.label }}</span>{% endif %}

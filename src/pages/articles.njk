@@ -12,6 +12,14 @@ discordChannelId: ""
 <script>window.WOP_GODEEPER = {{ collections.chapters | goDeeperData | safe }};</script>
 <script>window.WOP_HOLD = {{ howWeHold | dump | safe }};</script>
 <script>window.WOP_MUSIC_CATALOG = {{ collections.chapters | musicCatalog | safe }};</script>
+{#- Shareable song links (#listen=<slug>): one cue-only anchor per Go Deeper testimony,
+    the same component the chapter layouts use. -#}
+{%- for chapter in collections.chapters -%}
+{%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.file and ((chapter.data.themes and chapter.data.themes.length) or chapterThemes[chapter.data.slug or chapter.fileSlug]) -%}
+{%- set audio = chapter.data.audio -%}
+{% include "components/listen-anchor.njk" %}
+{%- endif -%}
+{%- endfor %}
 
 <style>
 .articles-prologue-video {
