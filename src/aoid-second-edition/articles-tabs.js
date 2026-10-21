@@ -273,6 +273,21 @@
         }
     }, true);
 
+    // T4 (CODE-AOID2-52): the learner's own question, one box per Article, kept in this browser's local storage only.
+    // Nothing is sent anywhere. Every read and write is in try/catch, so the box (and the page) works with storage
+    // unavailable, blocked or full; the typed text then simply stays on the page until it is closed.
+    all('.an-learner').forEach(function (wrap) {
+        var box = wrap.querySelector('.an-learner-box');
+        if (!box) { return; }
+        var key = 'wop-aoid2-learner-' + wrap.getAttribute('data-an-learner');
+        try { box.value = window.localStorage.getItem(key) || ''; } catch (e) { /* storage unavailable: start empty */ }
+        box.addEventListener('input', function () {
+            try {
+                if (box.value) { window.localStorage.setItem(key, box.value); } else { window.localStorage.removeItem(key); }
+            } catch (e) { /* storage unavailable or full: keep working without it */ }
+        });
+    });
+
     window.addEventListener('hashchange', fromHash);
     document.addEventListener('DOMContentLoaded', function () { sections.forEach(tidy); });
     window.addEventListener('load', function () { sections.forEach(tidy); fromHash(); });

@@ -7,6 +7,7 @@
 {%- set t = aoidArticleTabs.articles[tabCode] -%}
 {%- set declSource -%}{% include "aoid/" + tabCode + ".njk" %}{%- endset -%}
 {%- set decl = aoidArticleTabs.split(declSource) -%}
+{%- set teach = aoidArticleTabs.teaching -%}
     {{ decl.title | safe }}
     <div class="an-tabs" role="tablist" aria-label="Article {{ t.n }} views">
         <button type="button" role="tab" id="{{ t.id }}-tab-declaration" aria-controls="{{ t.id }}-declaration" aria-selected="true" tabindex="0">Declaration</button>
@@ -14,10 +15,15 @@
         <button type="button" role="tab" id="{{ t.id }}-tab-record" aria-controls="{{ t.id }}-record" aria-selected="false" tabindex="-1">Record</button>
     </div>
     <div role="tabpanel" class="an-panel an-declaration" id="{{ t.id }}-declaration" aria-labelledby="{{ t.id }}-tab-declaration">
+        {{ teach.practiceHtml.declaration | safe }}
         <div class="an-media" role="group" aria-label="Listen, slides and video"></div>
-    {{ decl.body | safe }}
+        {{ teach.asReadHtml | safe }}
+    {{ aoidArticleTabs.withQuestion(decl.body, t.id) | safe }}
+        {{ teach.correctionHtml | safe }}
     </div>
     <div role="tabpanel" class="an-panel an-prose" id="{{ t.id }}-disclosure" aria-labelledby="{{ t.id }}-tab-disclosure" hidden{% if t.source %} data-address="{{ t.source.address }}"{% endif %}>
+        {{ teach.beforeHtml | safe }}
+        {{ teach.practiceHtml.disclosure | safe }}
 {%- if t.source %}
         <h3 class="an-lead-title">{{ t.source.title }}</h3>
         <p class="an-lead-sub">{{ t.source.subtitle }}</p>
@@ -42,6 +48,7 @@
         <p class="an-correction-link">{{ aoidCorrections.linkHtml(t.n) | safe }}</p>
     </div>
     <div role="tabpanel" class="an-panel an-prose" id="{{ t.id }}-record" aria-labelledby="{{ t.id }}-tab-record" hidden>
+        {{ teach.practiceHtml.record | safe }}
 {%- if t.source %}
         <h3 class="an-lead-title">The record behind the counts</h3>
         <p class="an-lead-sub">Article {{ t.n }} · {{ t.source.title }}</p>

@@ -113,3 +113,12 @@ Rulings filed: AOID2-A11-SIGN-VS-JOIN (option 1), AOID2-A11-GAL56-ATTRIBUTION (o
 Build notes: [VERIFY] the three "Others" names against WCF 28.1 / WLC 165, UMC Article XVII and the Wesleyan ritual; the thirteen-family (a) result and six-family (b) result as in the CODE-AOID2-50 report. If all check out, show the paragraph (remove its review-only wrap); on any mismatch keep it held and report.
 
 Church of the East 2006 Catechism (Diocese Eastern USA): adoption question added to the Stage 2 (step 49) checks; not pursued now.
+
+
+---
+
+## 8. After the CODE-AOID2-51 review (CHAT-AOID2-49a, 21 Oct 2026). Approved by Aaron 12:22 ET ("Approve D1-D3").
+
+- D1. Baptism table, Methodist row: the next run checks "Articles VI and XVII" against the United Methodist Articles of Religion text; Article VI is "Of the Old Testament", so VI is likely a slip for XVI ("Of the Sacraments", sacraments ordained of Christ). Correct the row to what the text shows. Also verify every document name Code expanded (Pentecostal, Stone-Campbell, Adventist, Church of the East rows) against the record; correct names to the record, never invent.
+- D2. "Love proven by obedience.", Galatians 5:6 sentence, final form: "That faith works by love (Galatians 5:6) is confessed in their own words by the Catholic, Eastern Orthodox, Lutheran and Reformed traditions, and in sense by the Anglican, Holiness, Anabaptist and Jehovah's Witness, and on a borderline reading by the Baptist."
+- D3. Baptism table borderline marks stay as built (only the Pentecostal "Joined (borderline)"); the Reformed and Baptist A11-F7 borderline marks concern the "of the Spirit" half of John 3:5 and are already stated in the paragraph.

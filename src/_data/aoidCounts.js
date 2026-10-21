@@ -73,6 +73,9 @@ else {
   });
 
   const DASH = '—';
+  // T6 (CODE-AOID2-52): in "Borderline readings" a null means no per-family table matching the ledger was found, so the
+  // number was never recorded (scripts/aoid-build-floor-counts.js, step 3). A recorded none is 0. No key is needed.
+  const NOT_RECORDED = 'Not recorded';
   const tables = {};
   Object.keys(rowsBy).forEach((art) => {
     const id = art.toLowerCase();
@@ -82,7 +85,7 @@ else {
       return '<tr id="' + id + '-record-' + esc(f.id) + '"><th scope="row">' + esc(f.title) + '</th>'
         + '<td>' + (ok ? f.counts.taught : DASH) + '</td><td>' + (ok ? f.counts.contradicted : DASH) + '</td><td>' + (ok ? f.counts.noPosition : DASH) + '</td>'
         + '<td>' + (ok && f.measured ? esc(dateText(f.measured) + (f.revised ? ', revised ' + dateText(f.revised) : '')) : DASH) + '</td>'
-        + '<td>' + (ok && f.borderline !== null ? f.borderline : DASH) + '</td>'
+        + '<td>' + (ok && f.borderline !== null ? f.borderline : NOT_RECORDED) + '</td>'
         + '<td>' + q + '</td></tr>';
     }).join('');
     tables[art] = '<div class="disc-table-wrap an-summary"><table><caption>Taught, contradicted and no position are each counted of sixteen.</caption><thead><tr><th scope="col">Teaching</th><th scope="col">Taught</th><th scope="col">Contradicted</th><th scope="col">No position</th>'

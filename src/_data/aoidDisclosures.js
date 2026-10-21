@@ -125,7 +125,8 @@ function readTeachings(rec, who) {
       if (said[key] !== n[key]) fail(floors[k] + ': total row says ' + said[key] + ' ' + key + ', the cells count ' + n[key]);
     });
     const [id, ...rest] = f.split(': ');
-    return { id: id.trim(), label: rest.join(': ').trim(), counts: n, need: Number(need) };
+    const confirmFamilies = rows.filter((r) => CATEGORY.find(([re]) => re.test(r[2 + k]))[1] === 'confirm').map((r) => r[1]);
+    return { id: id.trim(), label: rest.join(': ').trim(), counts: n, need: Number(need), confirmFamilies };
   });
 }
 

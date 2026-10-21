@@ -51,6 +51,7 @@ const howWeHold = require('./howWeHold.js');
 const step89 = require('./aoidStep89.js');   // { on: false } with the switch OFF
 const counts = require('./aoidCounts.js');   // { on: false } with the switch OFF
 const baptism = require('./aoidBaptismTable.js');   // { on: false } with the switch OFF
+const teaching = require('./aoidTeaching.js');   // T1-T6 teaching additions; { on: false } with the switch OFF
 
 const TABBED = ['A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'A11', 'A12', 'A13', 'A14'];
 
@@ -115,4 +116,14 @@ function split(html) {
   return { title: m[1], body: m[2] };
 }
 
-module.exports = { articles, methodHtml, generated: GENERATED, split };
+// T4 (CODE-AOID2-52): the learner's own-question box goes straight after the Article's reflection block
+// (.article-rjw), inside the Article body. The Article includes are not touched: the box is added here, once,
+// for every Article. Each include must hold exactly one reflection block.
+function withQuestion(body, id) {
+  const re = /<div class="article-rjw">[^]*?<\/div>/g;
+  const n = (body.match(re) || []).length;
+  if (n !== 1) throw new Error('article tabs: ' + id + ' expected exactly one reflection block, found ' + n);
+  return body.replace(re, (m) => m + '\n        ' + teaching.questionHtml(id));
+}
+
+module.exports = { articles, methodHtml, generated: GENERATED, split, teaching, withQuestion };

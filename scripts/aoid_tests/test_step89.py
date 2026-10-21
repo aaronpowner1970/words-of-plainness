@@ -33,9 +33,9 @@ FOS = REPO / "data-sources" / "aoid" / "disclosures" / "WoP_AOID2_FatherOfSpirit
 
 REVIEW_ONLY = {}  # Stage 1 paragraphs wrapped for build-review mode (src/_data/aoidStep89.js REVIEW_ONLY); empty since CODE-AOID2-51
 BAPTISM_FAMILIES = REPO / "data-sources" / "aoid" / "second-edition" / "a11_baptism_families.json"
-# AOID2-A11-GAL56-ATTRIBUTION option 1, the ruled Galatians 5:6 sentence (author_note, verbatim).
+# Galatians 5:6 sentence, final form of D2 (approved 21 Oct 2026, 12:22 ET; section 8 of the approved Article 11 file), verbatim.
 GAL_RULED = ("That faith works by love (Galatians 5:6) is confessed in their own words by the Catholic, Eastern Orthodox, Lutheran and Reformed "
-             "traditions, and in sense by the Anglican, Baptist, Holiness, Anabaptist and Jehovah's Witness.")
+             "traditions, and in sense by the Anglican, Holiness, Anabaptist and Jehovah's Witness, and on a borderline reading by the Baptist.")
 APPROVED_A11 = SE / "WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md"
 # AOID2-A11-TWO-HELD-PARAS option 1, the ruled John 14:15 sentence (author_note, verbatim).
 LOVE_RULED = ("Christ's words \"If ye love me, keep my commandments\" (John 14:15) are confessed in so many words by the Adventist and Methodist "
@@ -242,7 +242,7 @@ def test_summary_tables_match_the_single_source(site_on):
             assert cells[1:4] == [str(f["counts"][k]) for k in ("taught", "contradicted", "noPosition")]
             seen += 1
         else:
-            assert cells[1:] == ["—"] * 6, f["id"]            # withheld: dashes, never zero
+            assert cells[1:] == ["—"] * 4 + ["Not recorded", "—"], f["id"]    # withheld: dashes, never zero; borderline "Not recorded" (T6)
     assert seen >= 25
     # the table comes first on the Record tab, before the per-family record
     a11 = panel(arts, "a11", "record")

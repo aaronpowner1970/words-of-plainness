@@ -157,7 +157,7 @@ function fromConductor(obs) {
 function fromDisclosures(obs) {
   const d = require(path.join(ROOT, 'src/_data/aoidDisclosures.js'));
   const add = (src, file) => src.teachings.forEach((t) => {
-    (obs[t.id] = obs[t.id] || []).push({ record: 'disclosure', locator: 'data-sources/aoid/disclosures/' + file + ' (sixteen-family table, ' + t.id + ' column)', t: t.counts.teach, c: t.counts.divided, n: t.counts.none, q: t.counts.confirm, qNames: [] });
+    (obs[t.id] = obs[t.id] || []).push({ record: 'disclosure', locator: 'data-sources/aoid/disclosures/' + file + ' (sixteen-family table, ' + t.id + ' column)', t: t.counts.teach, c: t.counts.divided, n: t.counts.none, q: t.counts.confirm, qNames: t.confirmFamilies || [] });
   });
   add(d.fatherOfSpirits, 'WoP_AOID2_FatherOfSpirits_Disclosure_Final_20261004.md');
   add(d.sexualHoliness, 'WoP_AOID2_SexualHoliness_Disclosure_Final_20261002.md');
