@@ -37,7 +37,7 @@ async (page) => {
         await page.waitForFunction(() => { const v = document.querySelector('.narr-player video'); return !v.paused && v.currentTime > 0.5; }, null, { timeout: 30000 });
         const src = await page.evaluate(() => document.querySelector('.narr-player video').getAttribute('src'));
         ok('button starts narration', true);
-        ok('rendition by width', src.endsWith(w <= 768 ? '280.mp4' : '560.mp4'), src);
+        ok('rendition by width', src.endsWith(w <= 768 ? '320x180.mp4' : '480x270.mp4'), src);
         if (SHOTS) await page.screenshot({ path: `${SHOTS}/${label}-start.png` });
 
         // 3. five sampled times, incl. one in each aside

@@ -181,7 +181,7 @@
             dockBtn.setAttribute('aria-label', st.dock === 'top' ? 'Move player to the bottom of the screen' : 'Move player to the top of the screen');
         } else {
             delete player.dataset.dock;
-            var w = clamp(st.w || 224, 160, Math.min(420, window.innerWidth - 16));
+            var w = clamp(st.w || 288, 200, Math.min(560, window.innerWidth - 16));
             player.style.width = w + 'px';
             if (typeof st.x !== 'number' || typeof st.y !== 'number') {
                 st.x = Math.max(12, Math.round((window.innerWidth - 800) / 2 - w - 24));
@@ -196,7 +196,7 @@
     function clampToViewport() {
         if (mqDock.matches || player.hidden) return;
         var r = player.getBoundingClientRect();
-        if (r.width > window.innerWidth) { player.style.width = Math.max(160, window.innerWidth - 16) + 'px'; r = player.getBoundingClientRect(); }
+        if (r.width > window.innerWidth) { player.style.width = Math.max(200, window.innerWidth - 16) + 'px'; r = player.getBoundingClientRect(); }
         var x = clamp(r.left, 0, Math.max(0, window.innerWidth - r.width));
         var y = clamp(r.top, 0, Math.max(0, window.innerHeight - r.height));
         player.style.left = x + 'px';
@@ -245,7 +245,7 @@
             player.style.left = drag.x + dx + 'px';
             player.style.top = drag.y + dy + 'px';
         } else {
-            var w = clamp(drag.w + Math.max(dx, dy), 160, Math.min(480, window.innerWidth - drag.x));
+            var w = clamp(drag.w + Math.max(dx, dy), 200, Math.min(560, window.innerWidth - drag.x));
             player.style.width = w + 'px';
             st.w = Math.round(w);
         }
@@ -350,6 +350,9 @@
         onEnd: function () {
             st.finished = true; st.t = 0;
             pause();
+            // Drop the source so the collapsed circle shows the poster (his face), not the film's last frame.
+            video.removeAttribute('src'); video.load();
+            syncUi();
             pill.hidden = true;
             st.min = true; applyMin();
             saveState();
