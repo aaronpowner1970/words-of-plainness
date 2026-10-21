@@ -31,6 +31,7 @@ permalink: /music/
             {%- if youtubeId %}
             <button type="button" class="row-action-btn" data-action="watch"
                     data-youtube-id="{{ youtubeId }}" data-video-title="{{ full }}"
+                    data-watch-slug="{{ title | replace("'", "") | replace("’", "") | slugify }}"
                     aria-label="Watch the video of {{ full }}"
                     aria-haspopup="dialog">
                 <svg class="row-action-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15.033 9.44a.647.647 0 0 1 0 1.12l-4.065 2.352a.645.645 0 0 1-.968-.56V7.648a.645.645 0 0 1 .968-.56z"/><path d="M12 17v4"/><path d="M8 21h8"/><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
@@ -307,7 +308,7 @@ permalink: /music/
             return Array.prototype.slice.call(modal.querySelectorAll('button, a[href], iframe'));
         }
 
-        function openVideo(btn) {
+        function openVideo(btn, cueOnly) {
             var id = btn.getAttribute('data-youtube-id');
             if (!id || !/^[\w-]{11}$/.test(id)) return;
             opener = btn;
@@ -316,7 +317,7 @@ permalink: /music/
             var title = btn.getAttribute('data-video-title') || '';
             modalTitle.textContent = title;
             var ifr = document.createElement('iframe');
-            ifr.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+            ifr.src = 'https://www.youtube-nocookie.com/embed/' + id + '?' + (cueOnly ? '' : 'autoplay=1&') + 'rel=0';
             ifr.title = 'Video: ' + title;
             ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
             ifr.setAttribute('allowfullscreen', '');
@@ -363,6 +364,26 @@ permalink: /music/
         document.querySelectorAll('.row-action-btn[data-action="watch"]').forEach(function (btn) {
             btn.addEventListener('click', function (e) { e.stopPropagation(); openVideo(btn); });
         });
+        // Watch deep link — #watch=<song-slug>, same slug scheme as #listen=.
+        // Scrolls to the song's first row that has a video and opens the modal
+        // with the video cued, never autoplaying: the reader taps play. Unknown
+        // slugs and songs without a video fall through silently.
+        function processWatchFragment() {
+            var m = /^#watch=([^&#]+)$/.exec(window.location.hash || '');
+            if (!m) return;
+            var slug;
+            try { slug = decodeURIComponent(m[1]).toLowerCase(); } catch (_) { return; }
+            var btns = document.querySelectorAll('.row-action-btn[data-action="watch"][data-watch-slug]');
+            for (var i = 0; i < btns.length; i++) {
+                if (btns[i].getAttribute('data-watch-slug') !== slug) continue;
+                var row = btns[i].closest('.playlist-row');
+                if (row) row.scrollIntoView({ block: 'center' });
+                openVideo(btns[i], true);
+                return;
+            }
+        }
+        processWatchFragment();
+        window.addEventListener('hashchange', processWatchFragment);
         modal.addEventListener('click', function (e) { if (e.target.hasAttribute('data-close')) closeVideo(); });
         closeBtn.addEventListener('click', closeVideo);
 
