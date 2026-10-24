@@ -72,6 +72,12 @@
 .chat-bar-link:hover,
 .chat-bar-link:focus-visible { opacity: 1; color: var(--gold-light, #D4A84A); }
 
+/* Phones: the third link (How This Work Is Made) would wrap the bar to two rows.
+   The chat-menu page keeps its own copy of the link at every width. */
+@media (max-width: 600px) {
+    .chat-bar-link--how { display: none; }
+}
+
 /* ── The stage: sizes (mockup E) ─────────────────────────────
    On a chat video page the stage sits outside the 1200px reading container,
    first in a full-width .chat-scope (see the layouts), and <main> is the
