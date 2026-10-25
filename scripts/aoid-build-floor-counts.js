@@ -67,7 +67,7 @@ function readLedger() {
   const d = yaml.load(fs.readFileSync(path.join(ROOT, LEDGER), 'utf8'));
   return d.scored.map((e) => {
     const spans = [].concat(e.span || []);
-    const out = { id: String(e.item), title: e.title, spans, scored_on: e.scored_on ? new Date(e.scored_on).toISOString().slice(0, 10) : null, revised_on: e.revised_on ? new Date(e.revised_on).toISOString().slice(0, 10) : null, result: e.result, superseded: e.superseded_records || [], withheld: e.withheld || null };
+    const out = { id: String(e.item), title: e.title, spans, scored_on: e.scored_on ? new Date(e.scored_on).toISOString().slice(0, 10) : null, revised_on: e.revised_on ? new Date(e.revised_on).toISOString().slice(0, 10) : null, result: e.result, superseded: e.superseded_records || [], withheld: e.withheld || null, rulingId: e.ruling_record || null, familyChanges: e.family_changes || [] };
     const m = /taught (\d+), (?:contradicted|divided) (\d+), no position (\d+)(?:, being confirmed (\d+))? of 16/.exec(e.result || '');
     if (m && out.scored_on) {
       out.t = num(m[1]); out.c = num(m[2]); out.n = num(m[3]);
@@ -154,6 +154,22 @@ function fromConductor(obs) {
   });
 }
 
+// A ledger entry may name a conductor ruling (`ruling_record`) that moved a cell after the scoring reports were written. The
+// ruling's own words must say "<floor> goes to 16 of 16"; sixteen of sixteen teaching leaves nothing contradicted, undecided
+// or queued, so the record is read as 16/0/0, queue 0. Any other figure is not read: the script stops.
+function fromRulings(obs, ledger) {
+  const want = ledger.filter((e) => e.rulingId);
+  if (!want.length || !fs.existsSync(STATE)) return;
+  const st = JSON.parse(fs.readFileSync(STATE, 'utf8'));
+  want.forEach((e) => {
+    const r = (st.rulings || []).filter((x) => x.decision_id === e.rulingId);
+    if (r.length !== 1) throw new Error('ruling ' + e.rulingId + ': expected exactly one ruling in the conductor state, found ' + r.length);
+    const m = new RegExp('\\b' + e.id + ' goes to (\\d+) of 16').exec(r[0].author_note || '');
+    if (!m || num(m[1]) !== 16) throw new Error('ruling ' + e.rulingId + ': its words do not say "' + e.id + ' goes to 16 of 16"');
+    (obs[e.id] = obs[e.id] || []).push({ record: 'ruling', locator: path.basename(STATE) + ' ruling ' + e.rulingId, t: 16, c: 0, n: 0, q: 0, qNames: [] });
+  });
+}
+
 function fromDisclosures(obs) {
   const d = require(path.join(ROOT, 'src/_data/aoidDisclosures.js'));
   const add = (src, file) => src.teachings.forEach((t) => {
@@ -199,7 +215,7 @@ function tally(rows) {
 function build() {
   const ledger = readLedger();
   const obs = {};
-  fromReports(obs); fromNotes(obs); fromConductor(obs); fromDisclosures(obs);
+  fromReports(obs); fromNotes(obs); fromConductor(obs); fromRulings(obs, ledger); fromDisclosures(obs);
   const tables = familyTables();
 
   const floors = ledger.map((e) => {
@@ -227,12 +243,14 @@ function build() {
     const named = others.find((o) => o.qNames && o.qNames.length === e.q && e.q > 0);
     if (e.q === 0) f.queuedFamilies = [];
     else if (named) f.queuedFamilies = named.qNames;
-    const cands = (tables[e.id] || []).map((t) => ({ t, y: tally(t.rows) }))
+    // A ruling that moved a cell after the report was written (ledger `family_changes`) is applied to the report's family table first.
+    const moved = (rows) => rows.map((r) => { const c = e.familyChanges.find((x) => x.family === r.family && new RegExp('^' + x.from, 'i').test(r.result)); return c ? { family: r.family, result: c.to } : r; });
+    const cands = (tables[e.id] || []).map((t) => ({ t, y: tally(moved(t.rows)) }))
       .filter(({ y }) => y.t === e.t && y.c === e.c && y.n === e.n && y.q === e.q)
       .filter(({ t }) => {
         // A family table counts only if no later record re-scored the floor: it comes from the report that
         // supplied the report-record, or that report's row calls the floor unchanged (and not "strengthened").
-        const rep = others.find((o) => o.record === 'report');
+        const rep = (e.familyChanges.length ? all : others).find((o) => o.record === 'report');
         if (!rep) return false;
         if (path.basename(rep.file || '') === t.locator.split(':')[0]) return true;
         return /^unchanged/i.test(rep.status || '') && !/strengthen|moved|rescored|queue closed/i.test(rep.status || '');

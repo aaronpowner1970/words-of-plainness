@@ -36,6 +36,7 @@ BAPTISM_FAMILIES = REPO / "data-sources" / "aoid" / "second-edition" / "a11_bapt
 # Galatians 5:6 sentence, final form of D2 (approved 21 Oct 2026, 12:22 ET; section 8 of the approved Article 11 file), verbatim.
 GAL_RULED = ("That faith works by love (Galatians 5:6) is confessed in their own words by the Catholic, Eastern Orthodox, Lutheran and Reformed "
              "traditions, and in sense by the Anglican, Holiness, Anabaptist and Jehovah's Witness, and on a borderline reading by the Baptist.")
+R_WORDING = SE / "WoP_AOID2_Step89_53Review_ApprovedWording_20261025.md"
 APPROVED_A11 = SE / "WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md"
 # AOID2-A11-TWO-HELD-PARAS option 1, the ruled John 14:15 sentence (author_note, verbatim).
 LOVE_RULED = ("Christ's words \"If ye love me, keep my commandments\" (John 14:15) are confessed in so many words by the Adventist and Methodist "
@@ -429,15 +430,27 @@ def section7_born_of_water():
     return hit[0]
 
 
+def amended_born_of_water():
+    """Section 7 with the 25 Oct 2026 amendment (AOID2-A11-WATER-OO) applied: the two sentences beginning "Every tradition but three" replaced."""
+    src = APPROVED_A11.read_text(encoding="utf8").replace("\r\n", "\n")
+    amend = [l for l in src.split("\n") if l.startswith("> Every tradition but two")]
+    assert len(amend) == 1
+    p = section7_born_of_water()
+    a, end = p.index("Every tradition but three"), "(John 3:5)."
+    b = p.index(end, a) + len(end)
+    return p[:a] + amend[0][2:] + p[b:]
+
+
 def test_born_of_water_is_section_7_verbatim_and_shown(site_on, site_off):
     """CODE-AOID2-51: the approved final paragraph (section 7), shown with no review-only wrap."""
     on = text_of(panel((site_on / "articles" / "index.html").read_text(encoding="utf8"), "a11", "disclosure"))
-    assert plain_md(section7_born_of_water()) in on
+    assert plain_md(amended_born_of_water()) in on
     assert "[Families named from the record]" not in on and "[those named from the record]" not in on
     assert "Others, the Reformed, Methodist and Holiness, confess the new birth as the Spirit's work and baptism as its sign;" in on
-    assert ("Every tradition but three confesses in its own adopted texts that Christ ordained baptism with water; it was not found in the "
-            "Oriental Orthodox, Church of the East and Stone-Campbell texts read.") in on
-    assert "Of them, the Anglican, Catholic, Eastern Orthodox, Lutheran, Pentecostal and Latter-day Saint join it to the new birth He spoke of" in on
+    assert ("Every tradition but two confesses in its own adopted texts that Christ ordained baptism with water; it was not found in the "
+            "Church of the East and Stone-Campbell texts read.") in on
+    assert "Every tradition but three" not in on
+    assert "Of them, the Anglican, Catholic, Eastern Orthodox, Oriental Orthodox, Lutheran, Pentecostal and Latter-day Saint join it to the new birth He spoke of" in on
     assert "Born of water and of the Spirit." not in text_of((site_off / "articles" / "index.html").read_text(encoding="utf8"))
 
 
@@ -453,14 +466,21 @@ def test_baptism_table_is_built_from_the_data_file(site_on, site_off):
                                  "Family Document Christ ordained baptism with water Joined to the new birth")
     assert re.findall(r"<th scope=\"col\">(.*?)</th>", t) == ["Family", "Document", "Christ ordained baptism with water", "Joined to the new birth"]
     rows = [[text_of(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", r)] for r in re.findall(r"<tr><th scope=\"row\">.*?</tr>", t)]
-    assert rows == [[r["family"], r["document"], r["ordained"], r["joined"]] for r in data["rows"]] and len(rows) == 16
-    assert sum(r[2] == "Yes" for r in rows) == 13 and all(r[2] in ("Yes", "Not found") for r in rows)
+    # R1 (approved 25 Oct 2026) is appended to the one cell that cites the Book of Common Prayer (1662); every other cell is the data file's.
+    r1 = next(l for l in R_WORDING.read_text(encoding="utf8").replace("\r\n", "\n").split("\n") if l.startswith("Book of Common Prayer (1662):"))
+    want = [[r["family"], r["document"] + (". " + r1 if r["family"] == "Anglican" else ""), r["ordained"], r["joined"]] for r in data["rows"]]
+    assert rows == want and len(rows) == 16
+    oo = next(r for r in data["rows"] if r["family"] == "Oriental Orthodox")
+    assert oo["ordained"] == "Yes" and oo["joined"] == "Joined"
+    assert oo["document"].startswith("Coptic Orthodox Church, Rites of the Holy Baptism (Nadian, St. Bishoy Coptic Orthodox Church, Canada), prayer over the baptismal water; Denzinger, Ritus Orientalium (W")
+    assert oo["document"].endswith("rzburg, 1863), p. 204")
+    assert sum(r[2] == "Yes" for r in rows) == 14 and all(r[2] in ("Yes", "Not found") for r in rows)
     base = lambda v: v.replace(" (borderline)", "")
     assert all(base(r[3]) in ("Joined", "Sign", "Not found") for r in rows)
     short = lambda f: {"Pentecostal (with independent charismatic churches)": "Pentecostal", "The Church of Jesus Christ of Latter-day Saints": "Latter-day Saint"}.get(f, f)
-    assert sorted(short(r[0]) for r in rows if base(r[3]) == "Joined") == sorted(["Anglican", "Catholic", "Eastern Orthodox", "Lutheran", "Pentecostal", "Latter-day Saint"])
+    assert sorted(short(r[0]) for r in rows if base(r[3]) == "Joined") == sorted(["Anglican", "Catholic", "Eastern Orthodox", "Oriental Orthodox", "Lutheran", "Pentecostal", "Latter-day Saint"])
     assert sorted(r[0] for r in rows if r[3] == "Sign") == sorted(["Reformed", "Methodist", "Holiness"])
-    assert sorted(r[0] for r in rows if r[2] == "Not found") == sorted(["Oriental Orthodox", "Church of the East", "Stone-Campbell"])
+    assert sorted(r[0] for r in rows if r[2] == "Not found") == sorted(["Church of the East", "Stone-Campbell"])
     assert [r[3] for r in rows if "(borderline)" in r[3]] == ["Joined (borderline)"]
     # after the summary table, before the count strips and per-family tables that follow it on this tab
     assert rec.index('class="disc-table-wrap an-summary"') < rec.index("a11-baptism-families") < rec.index('class="an-tally"')
@@ -488,7 +508,7 @@ def test_a2f1_date_measured_and_s26_quotation_marks(site_on, site_off):
     row = re.search(r'<tr id="a02-record-A2-F1">(.*?)</tr>', rec, re.S).group(1)
     assert "3 October 2026, revised 11 October 2026" in text_of(row)
     others = [r for r in re.findall(r'<tr id="a\d+-record-[^"]+">(.*?)</tr>', arts, re.S) if "revised" in text_of(r)]
-    assert len(others) == 1                        # only A2-F1 carries a revised date
+    assert len(others) == 2                        # A2-F1 and, since 25 Oct 2026 (AOID2-A11F2-OO-COPTIC), A11-F2 carry a revised date
     ledger = {str(e["item"]): e for e in yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"]}
     assert str(ledger["A2-F1"]["revised_on"]) == "2026-10-11" and str(ledger["A2-F1"]["scored_on"]) == "2026-10-03"
     fc = {f["id"]: f for f in json.loads(COUNTS.read_text(encoding="utf8"))["floors"]}
@@ -528,3 +548,73 @@ def test_no_position_vocabulary(site_on, site_off):
     assert off_hits >= 12                       # the live pages are untouched until launch
     cl = (site_on / "aoid" / "second-edition" / "index.html").read_text(encoding="utf8")
     assert cl.count("no common position") == 1  # the change log names the old term once, in the B5 line
+
+
+# ---------------------------------------------------------------- CODE-AOID2-55: change log C1/C2, /living-tree/, A11-F2, R1, the A11 amendment
+
+def test_c1_c2_change_log(site_on, site_off):
+    """C1: the "Helps for the reader." bullet follows "A way to correct us"; C2: the two disclosure titles link to pages that exist."""
+    cl = (site_on / "aoid" / "second-edition" / "index.html").read_text(encoding="utf8")
+    bullets = [text_of(b) for b in re.findall(r"<li>(.*?)</li>", cl, re.S)]
+    i = next(k for k, b in enumerate(bullets) if b.startswith("A way to correct us."))
+    c1 = next(l for l in CHANGELOG.read_text(encoding="utf8").replace("\r\n", "\n").split("\n") if l.startswith("- **Helps for the reader.**"))
+    assert bullets[i + 1] == plain_md(c1[2:])
+    assert '<a href="/aoid/disclosures/father-of-spirits/">Of the Father of Spirits</a>' in cl
+    assert '<a href="/aoid/disclosures/sexual-holiness/">Sexual Holiness</a>' in cl
+    for u in ("father-of-spirits", "sexual-holiness"):
+        assert (site_on / "aoid" / "disclosures" / u / "index.html").exists()
+    assert not (site_off / "aoid" / "second-edition").exists()
+
+
+def test_c1_clauses_are_borne_out_by_the_switch_on_build(site_on):
+    """Each clause of C1 against the built page: T5 (13), T1 (13 x 3), T2 (13), T4 (13 boxes with the local-storage note)."""
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    assert len(re.findall(r'<p class="[^"]*\ban-as-read\b', arts)) == 13
+    assert len(re.findall(r'<p class="[^"]*\ban-practice\b', arts)) == 39
+    assert len(re.findall(r'<div class="an-before"', arts)) == 13
+    assert len(re.findall(r'class="an-learner-box"', arts)) == 13
+    assert arts.count("Kept only in this browser. Nothing is sent.") == 13
+
+
+def test_living_tree_page(site_on, site_off):
+    """A6a: the page exists only with the switch ON, from the approved wording, with the note read from its source."""
+    assert not (site_off / "living-tree").exists()
+    h = (site_on / "living-tree" / "index.html").read_text(encoding="utf8")
+    t = text_of(h)
+    src = METHOD.read_text(encoding="utf8").replace("\r\n", "\n")
+    alt = re.search(r'^\*\*Alt text:\*\* "(.+)"$', src, re.M).group(1)
+    assert f'alt="{alt}"' in h
+    assert "The Living Tree of Christ-Believing Traditions Many Branches, Rooted in Jesus of Nazareth" in t
+    assert "The Tree shows twenty-five branches. These Articles measure sixteen of them as families; How These Articles Were Measured explains which, and why the others stay outside the count." in t
+    assert '<a href="/articles/#a02-method">How These Articles Were Measured</a>' in h
+    assert "What the sixteen cover. The Living Tree of Christ-Believing Traditions is a devotional map, not an institutional genealogy." in t
+    assert h.index("What the sixteen cover.") < h.index("The Tree shows twenty-five branches.") < h.index("View the map at full size")
+    assert 'href="https://media.wordsofplainness.org/web/aoid-slides/slide-02-v2.webp">View the map at full size</a>' in h
+    assert "tree-of-christ-v2/tree.dzi" in h and "width:7680" in h.replace(" ", "")
+    # the Tree's name is linked in the method account and in the Article 11 record note
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    assert arts.count('<a href="/living-tree/">The Living Tree of Christ-Believing Traditions</a>') >= 2
+    rec = panel(arts, "a11", "record")
+    assert '<strong>What the sixteen cover.</strong> <em><a href="/living-tree/">The Living Tree of Christ-Believing Traditions</a></em>' in rec
+
+
+def test_a11_f2_reads_sixteen_and_its_row_agrees(site_on):
+    """AOID2-A11F2-OO-COPTIC: A11-F2 taught 16, contradicted 0, no position 0, no family queued; its ledger and counts agree."""
+    d = json.loads(COUNTS.read_text(encoding="utf8"))
+    f = next(x for x in d["floors"] if x["id"] == "A11-F2")
+    assert f["status"] == "MATCH" and f["counts"] == {"taught": 16, "contradicted": 0, "noPosition": 0}
+    assert f["queue"] == 0 and f["queuedFamilies"] == [] and f["revised"] == "2026-10-25"
+    led = next(e for e in yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"] if str(e["item"]) == "A11-F2")
+    assert led["result"] == "taught 16, contradicted 0, no position 0 of 16"
+    assert led["floor_sha256"] == "d7e9ca997f2d7ceb712f435ef07cfc66fc05e3a8c4b5fb35f3b893de7bfd2ad3"
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    row = re.search(r'<tr id="a11-record-A11-F2">(.*?)</tr>', panel(arts, "a11", "record"), re.S).group(1)
+    cells = [text_of(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", row)]
+    assert cells[1:4] == ["16", "0", "0"] and cells[-1] == "0"
+
+
+def test_r1_verbatim_on_the_anglican_row_only(site_on, site_off):
+    r1 = next(l for l in R_WORDING.read_text(encoding="utf8").replace("\r\n", "\n").split("\n") if l.startswith("Book of Common Prayer (1662):"))
+    on = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    assert text_of(on).count(html.unescape(r1)) == 1
+    assert "Annexed Book" not in (site_off / "articles" / "index.html").read_text(encoding="utf8")

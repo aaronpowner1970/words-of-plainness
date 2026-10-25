@@ -1,0 +1,120 @@
+---js
+{
+  // With the Second Edition switch OFF the page takes no part in the build: no layout and no permalink.
+  eleventyComputed: {
+    layout: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "layouts/page.njk" : false),
+    title: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.livingTree.title : "The Living Tree of Christ-Believing Traditions"),
+    pageTitle: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.livingTree.title : ""),
+    pageSubtitle: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.livingTree.subtitle : "")
+  },
+  // Built only when the Second Edition switch is ON (src/_data/aoidSecondEdition.js); with it OFF there is no page at this address.
+  // First form (AOID2-LIVING-TREE-A6A-SCOPE option 1). Steps 134-136 add the branch sections and overlays to this same page.
+  permalink: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "/living-tree/" : false),
+  description: "The Living Tree of Christ-Believing Traditions: many branches, rooted in Jesus of Nazareth, and which of them these Articles measure.",
+  eleventyExcludeFromCollections: true,
+  pagefindIgnore: true
+  // Every word below comes from the approved A6a wording (src/_data/aoidStep89.js livingTree) and from the Article 11 record note
+  // "What the sixteen cover." (src/_data/aoidDisclosures.js, sexualHoliness.coverHtml). Nothing here is typed by hand.
+}
+---
+{%- set MAP = "https://media.wordsofplainness.org/web/aoid-slides/slide-02-v2.webp" -%}
+<style>
+.lt { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; font-family: 'Crimson Pro', Georgia, serif; font-size: 1.1rem; line-height: 1.75; color: var(--cream); }
+.lt p { margin: 0 0 1rem; opacity: .94; }
+.lt .lt-text { max-width: 760px; margin-left: auto; margin-right: auto; }
+.lt-map { margin: 0 0 1.5rem; }
+.lt-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #140a0c; border: 1px solid rgba(196,148,58,.4); border-radius: 6px; overflow: hidden; }
+.lt-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.lt-osd { position: absolute; inset: 0; background: #000; touch-action: none; }
+.lt-osd[hidden], .lt-close[hidden] { display: none; }
+.lt-osd-mount { width: 100%; height: 100%; }
+.lt-osd-msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0 1.5rem; text-align: center; color: #c8b3a3; pointer-events: none; }
+.lt-close { position: absolute; top: 10px; right: 10px; z-index: 3; padding: 6px 12px; font: inherit; font-size: .9rem; color: #f3e9e0; background: rgba(20,10,12,.82); border: 1px solid rgba(212,175,105,.6); border-radius: 999px; cursor: pointer; }
+.lt strong { color: var(--gold-primary); font-weight: 600; }
+.lt a { color: var(--gold-primary); text-decoration: none; border-bottom: 1px dotted rgba(196,148,58,.5); }
+.lt a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
+.lt ul { margin: 0 0 1.1rem; padding-left: 1.5rem; }
+.lt li { margin-bottom: .5rem; opacity: .94; }
+.lt .disc-table-wrap { overflow-x: auto; margin: 0 0 1.1rem; }
+.lt table { border-collapse: collapse; width: 100%; font-size: .95rem; line-height: 1.5; }
+.lt th, .lt td { text-align: left; vertical-align: top; padding: .45rem .6rem; border: 1px solid rgba(196,148,58,.28); }
+.lt th { color: var(--gold-primary); font-weight: 600; }
+.lt-full a { font-weight: 600; }
+</style>
+
+<div class="lt">
+  <figure class="lt-map">
+    <div class="lt-frame" id="ltFrame">
+      <img id="ltImg" src="{{ MAP }}" width="3840" height="2160" alt="{{ aoidStep89.livingTree.alt }}" decoding="async">
+      <div class="lt-osd" id="ltOsd" hidden><div class="lt-osd-mount" id="ltOsdMount"></div><span class="lt-osd-msg" id="ltOsdMsg" hidden></span></div>
+      <button type="button" class="lt-close" id="ltClose" hidden>Back to the picture</button>
+    </div>
+  </figure>
+
+  <div class="lt-text">
+    {{ aoidDisclosures.sexualHoliness.coverHtml | safe }}
+    <p>{{ aoidStep89.livingTree.sentenceHtml | safe }}</p>
+    <p class="lt-full"><a id="ltFull" href="{{ MAP }}">View the map at full size</a></p>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* The same Deep Zoom values as ZOOMABLE[2] in src/_includes/components/articles-presentation.njk (tiles live on R2; no
+     image is uploaded for this page). Without this script the picture and the "View the map at full size" link still work:
+     the link goes to the 3840x2160 image. With it, the link opens the deep-zoom view in place. */
+  var Z = { dzi:'https://media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/tree.dzi', width:7680, height:4320, tileSize:254, overlap:1, format:'webp' };
+  var OSD_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/openseadragon.min.js';
+  var OSD_SRI = 'sha512-LbaoUnRCul2C+I4cdS/EMnMbynmZMU58AApBnZkhMzp/r8rOS7htjTsox7g6rf5ZXkSx56F5dDYmhLwqV1Zt4A==';
+  var link = document.getElementById('ltFull'), img = document.getElementById('ltImg'), box = document.getElementById('ltOsd');
+  var mount = document.getElementById('ltOsdMount'), msg = document.getElementById('ltOsdMsg'), closeBtn = document.getElementById('ltClose');
+  if (!link || !box) return;
+  var viewer = null, open = false, osdPromise = null;
+  function loadOSD() {
+    if (window.OpenSeadragon) return Promise.resolve(window.OpenSeadragon);
+    if (osdPromise) return osdPromise;
+    osdPromise = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = OSD_SRC; s.integrity = OSD_SRI; s.crossOrigin = 'anonymous'; s.async = true;
+      s.onload = function () { window.OpenSeadragon ? resolve(window.OpenSeadragon) : reject(new Error('absent')); };
+      s.onerror = function () { osdPromise = null; reject(new Error('failed')); };
+      document.head.appendChild(s);
+    });
+    return osdPromise;
+  }
+  function close() {
+    if (viewer) { try { viewer.destroy(); } catch (e) {} viewer = null; }
+    mount.innerHTML = ''; mount.removeAttribute('style');
+    msg.hidden = true; box.hidden = true; closeBtn.hidden = true; open = false;
+    link.focus();
+  }
+  function show(e) {
+    if (e) e.preventDefault();
+    if (open) return;
+    open = true; box.hidden = false; closeBtn.hidden = false;
+    msg.textContent = 'Loading the full-size view…'; msg.hidden = false;
+    loadOSD().then(function (OSD) {
+      if (!open) return;
+      msg.hidden = true;
+      viewer = OSD({
+        element: mount, prefixUrl: '',
+        tileSources: { Image: { xmlns: 'http://schemas.microsoft.com/deepzoom/2008', Url: Z.dzi.replace(/\.dzi$/, '_files/'), Format: Z.format, Overlap: String(Z.overlap), TileSize: String(Z.tileSize), Size: { Width: String(Z.width), Height: String(Z.height) } } },
+        showNavigationControl: false, showNavigator: false, showSequenceControl: false,
+        visibilityRatio: 1, constrainDuringPan: true, minZoomImageRatio: 0.9, maxZoomPixelRatio: 2,
+        animationTime: 0.6, springStiffness: 7, blendTime: 0, imageLoaderLimit: 6,
+        gestureSettingsMouse: { scrollToZoom: true, clickToZoom: false, dblClickToZoom: true, dragToPan: true },
+        gestureSettingsTouch: { pinchToZoom: true, dragToPan: true, flickEnabled: true, dblClickToZoom: true }
+      });
+      viewer.addHandler('open', function () {
+        try { viewer.viewport.resize(new OSD.Point(mount.clientWidth, mount.clientHeight), false); viewer.viewport.goHome(true); viewer.forceRedraw(); viewer.canvas.focus(); } catch (err) {}
+      });
+    }).catch(function () {
+      if (!open) return;
+      msg.textContent = 'The full-size view could not load. Use "Back to the picture".'; msg.hidden = false;
+    });
+  }
+  link.addEventListener('click', show);
+  closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) close(); });
+})();
+</script>

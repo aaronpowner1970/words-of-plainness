@@ -20,6 +20,7 @@ const { on } = require('./aoidSecondEdition.js');
 
 const DATA = 'data-sources/aoid/second-edition/a11_baptism_families.json';
 const APPROVED = 'data-sources/aoid/second-edition/WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md';
+const RECORD_WORDING = 'data-sources/aoid/second-edition/WoP_AOID2_Step89_53Review_ApprovedWording_20261025.md';
 
 if (!on) module.exports = { on: false };
 else {
@@ -33,15 +34,32 @@ else {
   const short = (f) => (/^Pentecostal/.test(f) ? 'Pentecostal' : /Latter-day Saints$/.test(f) ? 'Latter-day Saint' : f === "Jehovah's Witnesses" ? "Jehovah's Witness" : f);
   const names = (s) => s.split(/, | and /).map((x) => x.trim().replace(/^the /, '')).filter(Boolean);
 
-  const para = read(APPROVED).split('\n').filter((l) => l.startsWith('**Born of water and of the Spirit.** Christ was baptized') && l.includes('Every tradition but three'));
+  const approved = read(APPROVED).split('\n');
+  const para = approved.filter((l) => l.startsWith('**Born of water and of the Spirit.** Christ was baptized') && l.includes('Every tradition but three'));
   if (para.length !== 1) fail('the approved "Born of water and of the Spirit." paragraph (section 7) was not found exactly once');
-  const p = para[0];
+  // AMENDMENT 25 Oct 2026 (AOID2-A11-WATER-OO): the two sentences beginning "Every tradition but three" become the quoted
+  // amendment text; everything else in the paragraph stays. The table is checked against the amended paragraph.
+  const amend = approved.filter((l) => l.startsWith('> Every tradition but two'));
+  if (amend.length !== 1) fail('the 25 Oct 2026 amendment of the paragraph was not found exactly once');
+  const from = para[0].indexOf('Every tradition but three');
+  const endMark = '(John 3:5).';
+  const to = para[0].indexOf(endMark, from);
+  if (from < 0 || to < 0) fail('the two sentences beginning "Every tradition but three" were not found in the approved paragraph');
+  const p = para[0].slice(0, from) + amend[0].slice(2) + para[0].slice(to + endMark.length);
   const grab = (re, what) => { const m = re.exec(p); if (!m) fail('approved paragraph: ' + what + ' not found'); return names(m[1]); };
   const notFoundA = grab(/it was not found in the (.+?) texts read\./, 'the families without the water-baptism claim');
   const listB = grab(/Of them, the (.+?) join it to the new birth/, 'list (b)');
   const others = grab(/Others, the (.+?), confess the new birth as the Spirit's work and baptism as its sign/, 'the sign families');
 
-  const rows = data.rows;
+  // R1 (approved 25 Oct 2026, AOID2-1662-PRINTED-EDITION): the 1662 sources line goes where an Anglican cell cites the Book of
+  // Common Prayer 1662. On this page that is the Anglican row below. The line is read from the approved file, never retyped.
+  const wording = read(RECORD_WORDING).split('\n');
+  const r1At = wording.findIndex((l) => l.startsWith('## R1. '));
+  if (r1At < 0) fail('R1 not found in the approved Record wording');
+  const r1 = wording.slice(r1At + 1).filter((l) => l.trim() !== '')[0];
+  if (!r1 || !r1.startsWith('Book of Common Prayer (1662):')) fail('R1: the 1662 sources line was not found under its heading');
+  const rows = data.rows.map((r) => (/^Book of Common Prayer \(1662\)/.test(r.document) ? Object.assign({}, r, { document: r.document + '. ' + r1 }) : r));
+  if (rows.filter((r) => r.document.includes(r1)).length !== 1) fail('R1: expected exactly one row citing the Book of Common Prayer (1662)');
   if (rows.length !== 16) fail('expected sixteen rows, found ' + rows.length);
   const sorted = (a) => a.slice().sort().join('|');
   const set = (f) => sorted(rows.filter(f).map((r) => short(r.family)));
@@ -49,7 +67,7 @@ else {
     if (!['Yes', 'Not found'].includes(base(r.ordained))) fail(r.family + ': column 3 must be Yes or Not found');
     if (!['Joined', 'Sign', 'Not found'].includes(base(r.joined))) fail(r.family + ': column 4 must be Joined, Sign or Not found');
   });
-  if (rows.filter((r) => r.ordained === 'Yes').length !== 13) fail('column 3 must have thirteen Yes');
+  if (rows.filter((r) => r.ordained === 'Yes').length !== 14) fail('column 3 must have fourteen Yes');
   if (set((r) => r.ordained === 'Not found') !== sorted(notFoundA)) fail('the families without the water-baptism claim disagree with the approved paragraph');
   if (set((r) => base(r.joined) === 'Joined') !== sorted(listB)) fail('the Joined rows disagree with list (b) of the approved paragraph');
   if (set((r) => base(r.joined) === 'Sign') !== sorted(others)) fail('the Sign rows disagree with the "Others" of the approved paragraph');

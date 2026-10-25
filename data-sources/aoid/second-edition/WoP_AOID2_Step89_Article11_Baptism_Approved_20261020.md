@@ -122,3 +122,18 @@ Church of the East 2006 Catechism (Diocese Eastern USA): adoption question added
 - D1. Baptism table, Methodist row: the next run checks "Articles VI and XVII" against the United Methodist Articles of Religion text; Article VI is "Of the Old Testament", so VI is likely a slip for XVI ("Of the Sacraments", sacraments ordained of Christ). Correct the row to what the text shows. Also verify every document name Code expanded (Pentecostal, Stone-Campbell, Adventist, Church of the East rows) against the record; correct names to the record, never invent.
 - D2. "Love proven by obedience.", Galatians 5:6 sentence, final form: "That faith works by love (Galatians 5:6) is confessed in their own words by the Catholic, Eastern Orthodox, Lutheran and Reformed traditions, and in sense by the Anglican, Holiness, Anabaptist and Jehovah's Witness, and on a borderline reading by the Baptist."
 - D3. Baptism table borderline marks stay as built (only the Pentecostal "Joined (borderline)"); the Reformed and Baptist A11-F7 borderline marks concern the "of the Spirit" half of John 3:5 and are already stated in the paragraph.
+
+
+---
+
+## AMENDMENT 25 Oct 2026 (AOID2-A11-WATER-OO option 1, ruled by Aaron 16:29 ET, CHAT-AOID2-55a). BUILD TEXT, CONDITIONAL.
+
+In "Born of water and of the Spirit", the two sentences beginning "Every tradition but three" become:
+
+> Every tradition but two confesses in its own adopted texts that Christ ordained baptism with water; it was not found in the Church of the East and Stone-Campbell texts read. Of them, the Anglican, Catholic, Eastern Orthodox, Oriental Orthodox, Lutheran, Pentecostal and Latter-day Saint join it to the new birth He spoke of: "Except a man be born of water and of the Spirit, he cannot enter into the kingdom of God" (John 3:5).
+
+Everything else in the paragraph is unchanged. a11_baptism_families.json, Oriental Orthodox row: ordained "Yes", joined "Yes", document "Coptic Orthodox Church, Rites of the Holy Baptism (Nadian, St. Bishoy Coptic Orthodox Church, Canada), prayer over the baptismal water; Denzinger, Ritus Orientalium (Würzburg, 1863), p. 204".
+
+CONDITION: the build run first reads the prayer over the baptismal water in the Nadian PDF (https://saintbishoy.ca/wp-content/uploads/Rites_Baptism.pdf, PDF p. 118 per CODE-AOID2-53) and Denzinger p. 204 (archive.org RitusOrientalium, leaf 221), and confirms both John 3:5 and the Matthew 28:19 command are in that prayer. If either is not borne out, it does not apply this amendment and reports.
+
+Related rulings the same session: AOID2-A11F2-OO-COPTIC (A11-F2 Oriental Orthodox TEACHES, 16 of 16); AOID2-OO-FORMULA-ONLY; AOID2-G8-OO-CELL.

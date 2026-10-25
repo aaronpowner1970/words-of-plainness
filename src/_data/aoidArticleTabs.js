@@ -89,8 +89,20 @@ const notes = {};
 Object.keys(howWeHold).forEach((key) => { notes[howWeHold[key].targetArticle] = key; });
 
 const articles = {};
+// A6a (approved 25 Oct 2026): in Article 11's record note "What the sixteen cover." the Tree's name links to its page.
+// Done on a copy, so the disclosure source and the standalone pages are untouched.
+const TREE_NAME = '<strong>What the sixteen cover.</strong> <em>The Living Tree of Christ-Believing Traditions</em>';
+function withTreeLink(source) {
+  const url = step89.on && step89.methodLinks.livingTree;
+  if (!url || !source || source.code !== 'A11') return source;
+  const rec = source.tab.record;
+  if (rec.split(TREE_NAME).length !== 2) throw new Error('article tabs: the Article 11 "What the sixteen cover." note, with the Tree name, expected exactly once');
+  const linked = TREE_NAME.replace('<em>The Living Tree of Christ-Believing Traditions</em>', '<em><a href="' + url + '">The Living Tree of Christ-Believing Traditions</a></em>');
+  return Object.assign({}, source, { tab: Object.assign({}, source.tab, { record: rec.replace(TREE_NAME, linked) }) });
+}
+
 TABBED.forEach((code) => {
-  const source = sources[code] || null;
+  const source = withTreeLink(sources[code] || null);
   const noteKey = notes[code] || null;
   const id = code.toLowerCase();
   articles[id] = {

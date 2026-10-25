@@ -109,3 +109,23 @@ Scorer: Claude (Chat), CHAT-AOID2-48a. Date: 19 Oct 2026, 19:10 ET. Scored: the 
 **B4. The two new films (Articles 2 and 6, made 7 Oct 2026).** The build run checks whether each new film reads the Second Edition text of its Article. If it does, its button reads "Second Edition"; if not, it keeps "First Edition". The change log's films line states what was found, replacing the [VERIFY] line.
 
 **B5. New line under "How the Articles are now shown":** "Where the earlier disclosures said a family held \"no common position,\" the Articles now say \"no position.\" The meaning is unchanged: no church in the family has adopted a text either way." (Ruling AOID2-NO-POSITION-VOCAB.)
+
+
+---
+
+## AMENDMENTS v4, C1 (APPROVED by Aaron 25 Oct 2026, 15:48 ET: "Approve C1"). Session CHAT-AOID2-55a. BUILD TEXT.
+
+Reason: the teaching additions T1-T5 (approved 21 Oct 2026, built CODE-AOID2-52) changed what a reader sees on every Article and the change log did not record them.
+
+**C1. New bullet under "How the Articles are now shown", placed immediately after the "A way to correct us" bullet:**
+
+- **Helps for the reader.** Each Article opens with an invitation to mark the line you already live and the line you most need to. Each tab opens with a line on what to do there. Before the Disclosure, a question asks which teachings you think the churches share, so you can hold your answer against the record. Under each reflection question is a place to keep a question of your own, kept only in your browser.
+
+Build note (not page text): the build run checks each clause against the switch-ON build (T5 line above each Article; T1 line under each tab heading; T2 boxed prompt at the top of the Disclosure tab; T4 box under each reflection question with its local-storage note) and reports any clause not borne out rather than rendering it.
+
+Open at the text freeze (not amended here): the "count beside each teaching" line renders today with its [PENDING, step 89] marker stripped; it stays or comes out once part three of step 89 confirms every measured teaching carries the three numbers.
+
+
+**C2 (APPROVED by Aaron 25 Oct 2026, 15:51 ET: "Approve C2"). Session CHAT-AOID2-55a. BUILD TEXT, markup only, wording unchanged.** Reason: Teaching Practices G1 (CHAT-AOID2-55a score, 25 Oct 2026): the two disclosure titles were named without locators. In the "Two disclosures in full" bullet, *Of the Father of Spirits* links to /aoid/disclosures/father-of-spirits/ and *Sexual Holiness* links to /aoid/disclosures/sexual-holiness/. Build run confirms both pages resolve on the switch-ON build.
+
+Batching: C1 and C2 are built in the same Code run as parts two and three of step 89, not launched alone.

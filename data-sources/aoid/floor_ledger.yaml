@@ -379,10 +379,17 @@ scored:
     floor_ratified: 2026-10-02
     span: A11.s2
     scored_on: 2026-10-05
+    revised_on: 2026-10-25
     scoring_records:
       - WoP_AOID2_Stage1_A11_Scoring_Report_20261004.md
       - WoP_AOID2_CODE-AOID2-11_Review_Notes_20261005.md
-    result: taught 15, contradicted 0, no position 0 of 16; review queue 1
+    result: taught 16, contradicted 0, no position 0 of 16
+    result_note: "Revised 25 Oct 2026 (AOID2-A11F2-OO-COPTIC, ruled 25 Oct 2026, 16:24 ET, option 1): the Oriental Orthodox cell moved from review queue to TEACHES, decided by the Coptic Orthodox Church (C4(a)(iv)), on the prayer over the baptismal water in two editions meeting B2(f): Nadian, Rites of the Holy Baptism (St. Bishoy Coptic Orthodox Church, Canada; PDF pp. 117-118) and Denzinger, Ritus Orientalium (Stahel, Wuerzburg 1863, p. 204), both re-read by CODE-AOID2-55 on 25 Oct 2026. No other cell moved. Floor text and floor hash are unchanged."
+    superseded_records: [report, notes]
+    superseded_note: "The A11 scoring report line and the CODE-AOID2-11 review note carry the 5 Oct count (15/0/0, queue 1) and are superseded for this floor by the ruling above; they are listed in floor_counts.json but not compared. The conductor's ruling is the second record (scripts/aoid-build-floor-counts.js reads it from the ruling's own words, 'A11-F2 goes to 16 of 16')."
+    ruling_record: AOID2-A11F2-OO-COPTIC
+    family_changes:
+      - { family: Oriental Orthodox, from: REVIEW QUEUE, to: TEACHES }
     floor_sha256: "d7e9ca997f2d7ceb712f435ef07cfc66fc05e3a8c4b5fb35f3b893de7bfd2ad3"
 
   - item: A11-F3

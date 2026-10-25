@@ -50,7 +50,7 @@ const FILMS_LINE = "The First Edition's films, PDFs and slides are labelled Firs
 
 // Links the approved amendments ask for, where a target exists on the site.
 const METHOD_LINKS = {
-  livingTree: null, // A6: no page for "The Living Tree of Christ-Believing Traditions" exists on the site.
+  livingTree: '/living-tree/', // A6, A6a (approved 25 Oct 2026): the first form of the page, src/pages/living-tree.njk.
 };
 
 if (!on) module.exports = { on: false };
@@ -168,6 +168,29 @@ else {
     text = replaceOnce(text, 'measured against sixteen traditions', '[measured against sixteen traditions](METHOD_URL)'); // A2 (url set below)
     text = replaceOnce(text, '**A way to correct us.**', '**[A way to correct us](/aoid/corrections/).**');          // A4
 
+    // AMENDMENTS v4 C1 and C2 (approved 25 Oct 2026). The wording is read from the amendment, never retyped.
+    // C1: the bullet that follows the line "**C1. New bullet under ...**" goes immediately after the "A way to correct us" bullet.
+    const c1Head = src.split('\n').map((l, i) => (l.startsWith('**C1. New bullet under "How the Articles are now shown"') ? i : -1)).filter((i) => i >= 0);
+    if (c1Head.length !== 1) fail('C1: amendment line expected exactly once, found ' + c1Head.length);
+    const c1Bullet = src.split('\n').slice(c1Head[0] + 1).filter((l) => l.trim() !== '')[0];
+    if (!c1Bullet || !c1Bullet.startsWith('- **Helps for the reader.**')) fail('C1: the bullet "Helps for the reader." was not found after the C1 line');
+    const afterCorrect = text.split('\n').findIndex((l) => l.startsWith('- **[A way to correct us]'));
+    if (afterCorrect < 0) fail('C1: the "A way to correct us" bullet was not found');
+    const cl = text.split('\n');
+    cl.splice(afterCorrect + 1, 0, c1Bullet);
+    text = cl.join('\n');
+    // C2: markup only. Each disclosure title in the "Two disclosures in full" bullet links to its page; both must exist.
+    const c2 = src.split('\n').filter((l) => l.startsWith('**C2 (APPROVED'));
+    if (c2.length !== 1) fail('C2: amendment line expected exactly once, found ' + c2.length);
+    const c2a = /\*Of the Father of Spirits\* links to (\/aoid\/disclosures\/[a-z-]+\/) and \*Sexual Holiness\* links to (\/aoid\/disclosures\/[a-z-]+\/)/.exec(c2[0]);
+    if (!c2a) fail('C2: the two links were not found in the amendment');
+    [c2a[1], c2a[2]].forEach((u) => {
+      const pages = ['father-of-spirits', 'sexual-holiness'].map((n) => read('src/pages/aoid/disclosures/' + n + '.njk'));
+      if (!pages.some((p) => p.includes('permalink: "' + u + '"'))) fail('C2: no page has the permalink ' + u);
+    });
+    text = replaceOnce(text, '*Of the Father of Spirits*', '*[Of the Father of Spirits](' + c2a[1] + ')*');
+    text = replaceOnce(text, '*Sexual Holiness*', '*[Sexual Holiness](' + c2a[2] + ')*');
+
     // A3: each Article name links to its Article. Section ids are read from the Articles page.
     const tpl = read(ARTICLES_TEMPLATE);
     const ids = [];
@@ -234,7 +257,9 @@ else {
     const iShort = at(/^\*\*In short\.\*\*/, '"In short"');
     out.splice(iShort + 1, 0, a2);                                                          // A2: after "In short"
     out.splice(1, 0, a1);                                                                   // A1: before "In short" (after the heading)
-    const text = out.join('\n\n');
+    let text = out.join('\n\n');
+    // A6 / A6a: the words "The Living Tree of Christ-Believing Traditions" link to the page.
+    if (METHOD_LINKS.livingTree) text = replaceOnce(text, '*The Living Tree of Christ-Believing Traditions*', '*[The Living Tree of Christ-Believing Traditions](' + METHOD_LINKS.livingTree + ')*');
     return { text, figures: { taught: k.teach, divided: k.divided, none: k.none, confirm: k.confirm } };
   })();
 
@@ -242,6 +267,27 @@ else {
   const METHOD_URL = '/articles/#a02-method';
   const changeLogHtml = md().render(changeLog.text.replace('METHOD_URL', METHOD_URL));
   const methodHtml = md().render(method.text);
+
+  // ---------------------------------------------------------------- Living Tree page (A6a, "A6a RELEASED")
+  // Title, subtitle, the one sentence linking the method account, and the alt text are read from the approved A6a section.
+  const livingTree = (() => {
+    const src = read(METHOD);
+    const lines = src.split('\n');
+    const i = lines.findIndex((l) => l.startsWith('## A6a, the Living Tree page'));
+    if (i < 0) fail('A6a section not found');
+    const sec = lines.slice(i);
+    const one = (re, what) => {
+      const hit = sec.filter((l) => re.test(l));
+      if (hit.length !== 1) fail('A6a: ' + what + ' expected once, found ' + hit.length);
+      return hit[0];
+    };
+    const title = one(/^> # /, 'title').replace(/^> # /, '');
+    const subtitle = /^> \*(.+)\*$/.exec(one(/^> \*[^*]+\*$/, 'subtitle'))[1];
+    const sentence = one(/^> The Tree shows twenty-five branches\./, 'method sentence').replace(/^> /, '');
+    const alt = /^\*\*Alt text:\*\* "(.+)"$/.exec(one(/^\*\*Alt text:\*\* "/, 'alt text'))[1];
+    if (!/\[How These Articles Were Measured\]\(method account anchor\)/.test(sentence)) fail('A6a: the method-account link in the sentence was not found');
+    return { title, subtitle, sentenceHtml: md().renderInline(sentence.replace('(method account anchor)', '(' + METHOD_URL + ')')), alt };
+  })();
 
   // ---------------------------------------------------------------- Stage 1 disclosures
   const stage1 = (() => {
@@ -288,6 +334,7 @@ else {
     methodFigures: method.figures,
     methodUrl: METHOD_URL,
     methodLinks: METHOD_LINKS,
+    livingTree,
     stage1: stage1.html,
     stage1VerifyMarks: stage1.verifyMarks,
   };

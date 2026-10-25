@@ -126,3 +126,33 @@ Scorer: Claude (Chat), CHAT-AOID2-48a. Date: 19 Oct 2026, 19:10 ET. Scored: the 
 (Wording adjusted 19 Oct 2026, 19:24 ET, from "Each teaching's disclosure" to "Each Article's record", to match AOID2-COUNT-PLACEMENT option 3, where the head-count sits on the Record tab.)
 
 **Projected score with A1-A6:** 1:2, 3:2, 4:2, 5:2, 6:2, 7:2, 8:2, 9:2, 10:2 = 18 of 18 applicable, prorated 20; scored conservatively at 18 of 20 until re-scored on the built page. The counts in A1 must be read at build time from the Article 2 disclosure source, never retyped.
+
+
+---
+
+## A6a, the Living Tree page (APPROVED by Aaron 25 Oct 2026, 16:05 ET: "Approve A6a"). Session CHAT-AOID2-55a. Ruling AOID2-LIVING-TREE-LINK option 1 (25 Oct 2026, 15:55 ET, topic-only). BUILD TEXT. Supersedes A6's open state (METHOD_LINKS.livingTree: null).
+
+**Artifact.** wop-scratch\Tree_of_Christ-Believing_Traditions\ (saved 1 Oct 2026): Tree_of_Christ-Believing_Traditions_1920x1080.png, _3840x2160.png, _7680x4320.png. Chat opened the 1920 file 25 Oct 2026 (filesystem read_media_file): title "The Living Tree of Christ-Believing Traditions", subtitle "Many Branches, Rooted in Jesus of Nazareth"; 25 panels in five groups (4, 6, 5, 5, 5), matching the method account's twenty-five branches, sixteen families, two movements and six excluded branches by name. An older 8K copy (working-folder\articles-images, 19 Jun 2026, 50,152,757 bytes vs 50,147,432) is not used.
+
+**Page (own page; Second Edition switch only; permalink chosen by the build and reported):**
+
+> # The Living Tree of Christ-Believing Traditions
+> *Many Branches, Rooted in Jesus of Nazareth*
+>
+> [the map]
+>
+> [the approved Article 11 record note "What the sixteen cover", read from its source at build time, never retyped]
+>
+> The Tree shows twenty-five branches. These Articles measure sixteen of them as families; [How These Articles Were Measured](method account anchor) explains which, and why the others stay outside the count.
+>
+> [View the map at full size] (links the 3840x2160 file)
+
+**Alt text:** "A painted tree rising from Jesus of Nazareth, seated and teaching at its root. Its branches carry twenty-five panels in five groups (Old-World; Western and Reformation; Revival and Renewal; Restorationist and Adventist; Global and Independent), reaching up to Christ enthroned in the Kingdom of Heaven."
+
+**Links to the page:** the words "The Living Tree of Christ-Believing Traditions" in the method account (A6), and the Tree's name in the Article 11 record note.
+
+**Build notes (not page text):** a web-weight derivative of the 1920 or 3840 image for the page (format and weight chosen and reported by the build); the 7680 file is not served. Teaching Practices score owed on the built page before deploy.
+
+**A6a CORRECTION AND HOLD (Chat's error, owned; CHAT-AOID2-55a, 25 Oct 2026, ~16:15 ET).** The decision AOID2-LIVING-TREE-LINK said the Tree had no presence on the site. That was wrong. My search space (words-of-plainness\src, *.njk *.md *.html *.js *.json for "Living Tree"/"living-tree", filenames containing "tree") missed two things: (1) the Tree is already on the site as slide 2 of the Articles presentation carousel, deep-zoomable from a 7680x4320 Deep Zoom pyramid on R2 (media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/tree.dzi; src\_includes\components\articles-presentation.njk, ZOOMABLE); (2) steps 134-136 (added 20 Oct 2026) already plan a full /living-tree/ page: verified branch resources (134), 25 branch descriptions approved by Aaron (135), and a build with the existing Deep Zoom tree, clickable overlays, an accessible list of the 25 branches, then METHOD_LINKS.livingTree set to /living-tree/ (136). The ruling (option 1, publish and link) stands in direction. A6a is HELD, not built, until Aaron rules how it relates to steps 134-136 (decision AOID2-LIVING-TREE-A6A-SCOPE).
+
+**A6a RELEASED (AOID2-LIVING-TREE-A6A-SCOPE option 1, ruled 25 Oct 2026, 16:15 ET, topic-only).** A6a is built in the step 89 run as the first form of /living-tree/, at that permalink, showing the existing Deep Zoom tree from R2 (media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/, same values as articles-presentation.njk ZOOMABLE[2]) in place of a new image derivative; the "View the map at full size" line becomes the zoom control or a link to the same pyramid, as the build judges and reports. The wop-scratch PNGs are not uploaded. METHOD_LINKS.livingTree is set to /living-tree/. Steps 134-136 later add the branch sections and overlays to this same page; re-score it then.

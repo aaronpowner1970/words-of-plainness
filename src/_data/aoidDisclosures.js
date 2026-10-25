@@ -186,6 +186,16 @@ function build(name, spec) {
 
   const teachings = readTeachings(rec, name);
 
+  // The "What the sixteen cover." note on its own (read for the Living Tree page, /living-tree/): the list item and
+  // everything indented under it, taken from the same Part 3 lines the Record tab renders, so there is one wording.
+  const cs = rec.findIndex((l) => /^- \*\*What the sixteen cover\.\*\*/.test(l));
+  if (cs < 0) throw new Error('disclosure ' + name + ': "What the sixteen cover." item not found');
+  let ce = cs + 1;
+  while (ce < rec.length && (rec[ce].trim() === '' || /^ {2}/.test(rec[ce]))) ce++;
+  const coverLines = rec.slice(cs, ce).map((l, i) => (i === 0 ? l.replace(/^- /, '') : l.replace(/^ {2}/, '')));
+  while (coverLines.length && coverLines[coverLines.length - 1].trim() === '') coverLines.pop();
+  const coverHtml = renderer('').render(coverLines.join('\n'));
+
   const view = (prefix) => {
     const md = renderer(prefix);
     const bodyHtml = md.render(body.join('\n'));
@@ -209,6 +219,7 @@ function build(name, spec) {
     title: heading.slice(0, cut),
     subtitle: heading.slice(cut + 2),
     teachings,
+    coverHtml,
     standalone: view(''),
     tab: Object.assign(view(prefix), { strips: teachings.map(stripHtml).join('') }),
   };
