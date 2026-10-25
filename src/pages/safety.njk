@@ -93,135 +93,14 @@ description: "Crisis resources, abuse reporting, and safety support for the Word
     border-color: var(--gold-light, #D4A84A);
 }
 
-/* ── Safety Form ── */
-.safety-form-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-}
-.safety-field {
-    margin-bottom: 1.25rem;
-}
-.safety-field label {
-    display: block;
-    font-size: 0.95rem;
+/* ── Report a Concern ── */
+.safety-email-line {
+    font-size: 1.15rem;
     font-weight: 600;
-    color: var(--cream, #E8DCC4);
-    margin-bottom: 0.4rem;
 }
-.safety-field .safety-field-hint {
-    display: block;
-    font-size: 0.82rem;
-    color: rgba(232, 220, 196, 0.55);
-    font-style: italic;
-    margin-bottom: 0.4rem;
-}
-.safety-field select,
-.safety-field input,
-.safety-field textarea {
-    width: 100%;
-    padding: 0.65rem 0.85rem;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(196, 148, 58, 0.25);
-    border-radius: 6px;
-    color: var(--cream, #E8DCC4);
-    font-family: var(--font-body, 'Crimson Pro', Georgia, serif);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    transition: border-color 0.2s;
-}
-.safety-field select:focus,
-.safety-field input:focus,
-.safety-field textarea:focus {
-    outline: none;
-    border-color: var(--gold-primary, #C4943A);
-}
-.safety-field select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C4943A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.85rem center;
-    padding-right: 2.25rem;
-    cursor: pointer;
-}
-.safety-field select option {
-    background: #2A1D14;
-    color: #E8DCC4;
-}
-.safety-field textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-.safety-field-error {
-    font-size: 0.82rem;
-    color: #D4694A;
-    margin-top: 0.3rem;
-}
-.safety-form-error {
-    padding: 0.75rem 1rem;
-    background: rgba(212, 105, 74, 0.15);
-    border: 1px solid rgba(212, 105, 74, 0.3);
-    border-radius: 6px;
-    color: #D4694A;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-.safety-submit-btn {
-    display: inline-block;
-    padding: 0.7rem 1.75rem;
-    background: var(--gold-primary, #C4943A);
-    color: var(--brown-deep, #1E1208);
-    font-family: var(--font-heading, 'Cinzel', serif);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.safety-submit-btn:hover {
-    background: var(--gold-light, #D4A84A);
-}
-.safety-submit-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-.safety-success {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: rgba(196, 148, 58, 0.08);
-    border: 1px solid rgba(196, 148, 58, 0.2);
-    border-radius: var(--radius-lg, 12px);
-}
-.safety-success h3 {
+.safety-email-line a {
     color: var(--gold-primary, #C4943A);
-    margin-bottom: 0.75rem;
-}
-.safety-whathappens {
-    margin-top: 1.5rem;
-    padding: 1.25rem 1.5rem;
-    background: rgba(42, 29, 20, 0.35);
-    border-left: 3px solid var(--gold-primary, #C4943A);
-    border-radius: 0 6px 6px 0;
-    font-size: 0.92rem;
-    line-height: 1.7;
-}
-.safety-whathappens p {
-    margin-bottom: 0.5rem;
-}
-.safety-whathappens p:last-child {
-    margin-bottom: 0;
-}
-.hidden { display: none !important; }
-
-/* ── Honeypot (anti-bot) ── */
-.safety-hp {
-    position: absolute;
-    left: -5000px;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
+    border-bottom: 1px solid rgba(196, 148, 58, 0.4);
 }
 </style>
 
@@ -294,81 +173,36 @@ description: "Crisis resources, abuse reporting, and safety support for the Word
         <h2>Report a Concern</h2>
 
         <p>
-            Use this form to report a safety concern, harmful content, or anything
-            that worries you about this community. Your report goes directly to
-            Brother Aaron and is treated with the seriousness it deserves.
+            If something worries you, whether about your own safety, someone else&rsquo;s, or
+            content in this community, write to Brother Aaron directly. Your message goes
+            straight to him and no one else, and it is treated with the seriousness it deserves.
         </p>
 
-        <div class="safety-whathappens">
-            <p><strong>What happens when you submit this form:</strong></p>
-            <p>Your report will be sent directly to Brother Aaron. You will receive a personal
-            response. If you are in immediate danger, please call 911.</p>
-        </div>
+        <p class="safety-email-line">
+            Email: <a href="mailto:host@brotheraaron.org?subject=Safety%20concern">host@brotheraaron.org</a>
+        </p>
 
-        <div class="safety-form-wrapper" style="margin-top: 1.5rem;">
+        <p>
+            Use &ldquo;Safety concern&rdquo; as your subject line so your message is seen first.
+        </p>
 
-            <!-- SUCCESS STATE (hidden until submission) -->
-            <div class="safety-success hidden" id="safetySuccess">
-                <h3>Your Report Has Been Received</h3>
-                <p>
-                    Thank you for reaching out. Brother Aaron has received your report
-                    and will follow up with you personally. If your concern involves
-                    immediate safety, please also call 911 or the 988 Suicide &amp; Crisis
-                    Lifeline.
-                </p>
-                <p style="margin-top: 1rem;">
-                    <a href="#" id="safetySendAnother" class="text-gold">Submit another report</a>
-                </p>
-            </div>
+        <p>It helps to include:</p>
+        <ul>
+            <li>whether this is about you, someone else, or something you saw here;</li>
+            <li>what is happening, sharing as much or as little as you feel comfortable;</li>
+            <li>a phone number, if you would rather be called.</li>
+        </ul>
 
-            <!-- FORM -->
-            <form id="safetyForm">
-                <!-- Honeypot -->
-                <input type="text" name="website" class="safety-hp" autocomplete="off" tabindex="-1" aria-hidden="true">
-                <input type="hidden" name="loaded_at" value="">
+        <p>
+            <strong>Prefer <a href="https://discord.gg/tNwADDjTRV" target="_blank" rel="noopener noreferrer" class="text-gold">Discord</a>?</strong>
+            Post in <strong>#report-a-concern</strong>, or send Brother Aaron a direct message.
+        </p>
 
-                <div class="safety-field">
-                    <label for="safety-category">What brings you here?</label>
-                    <select id="safety-category" name="category" required>
-                        <option value="" disabled selected>Select one&hellip;</option>
-                        <option value="own_safety">I'm worried about my own safety.</option>
-                        <option value="someone_else">I'm worried about someone else's safety.</option>
-                        <option value="report_content">I want to report content that concerns me.</option>
-                        <option value="other">Something else.</option>
-                    </select>
-                    <small class="safety-field-error hidden" data-safety-error="category"></small>
-                </div>
-
-                <div class="safety-field">
-                    <label for="safety-description">Tell us what's happening</label>
-                    <span class="safety-field-hint">Share as much or as little as you feel comfortable sharing. We will follow up with you personally.</span>
-                    <textarea id="safety-description" name="description" placeholder=""></textarea>
-                    <small class="safety-field-error hidden" data-safety-error="description"></small>
-                </div>
-
-                <div class="safety-field">
-                    <label for="safety-email">Your email address</label>
-                    <span class="safety-field-hint">Required so Brother Aaron can respond to you.</span>
-                    <input type="email" id="safety-email" name="email" required>
-                    <small class="safety-field-error hidden" data-safety-error="email"></small>
-                </div>
-
-                <div class="safety-field">
-                    <label for="safety-name">Your name <span style="opacity: 0.5; font-weight: 400;">(optional)</span></label>
-                    <input type="text" id="safety-name" name="name">
-                </div>
-
-                <div class="safety-field">
-                    <label for="safety-phone">Phone number <span style="opacity: 0.5; font-weight: 400;">(optional)</span></label>
-                    <span class="safety-field-hint">If you prefer a phone call, include your number and we will call you.</span>
-                    <input type="tel" id="safety-phone" name="phone">
-                </div>
-
-                <div class="safety-form-error hidden" id="safetyFormError"></div>
-
-                <button type="submit" class="safety-submit-btn" id="safetySubmit">Submit Report</button>
-            </form>
-        </div>
+        <p>
+            Brother Aaron reads these personally and will respond to you himself. He is not a crisis
+            service and may not see your message right away. <strong>If you or someone else is in
+            danger right now, call <a href="tel:911">911</a>, or call or text <a href="tel:988">988</a>.</strong>
+        </p>
     </div>
 </section>
 
@@ -391,7 +225,7 @@ description: "Crisis resources, abuse reporting, and safety support for the Word
             reported.</strong> This is a hard policy with no exceptions. No community member
             shall face negative consequences for filing a report in good faith. If a report
             leads to the removal of another member's content, the reporter is not identified.
-            If a report is found to be without merit, the reporter's account is not penalized.
+            If a report is found to be without merit, the reporter&rsquo;s standing in the community is not penalized.
         </p>
 
         <p>
@@ -423,11 +257,11 @@ description: "Crisis resources, abuse reporting, and safety support for the Word
             <div class="feature-card">
                 <h3>Direct Contact</h3>
                 <p>
-                    You can always reach Brother Aaron directly through the Contact form
+                    You can always write to Brother Aaron directly at host@brotheraaron.org
                     for any concern you would prefer to raise privately.
                 </p>
-                <a href="/connect/#contact" class="text-gold" style="font-size: 0.95rem;">
-                    Contact Brother Aaron &rarr;
+                <a href="mailto:host@brotheraaron.org" class="text-gold" style="font-size: 0.95rem;">
+                    Email Brother Aaron &rarr;
                 </a>
             </div>
         </div>
@@ -444,153 +278,3 @@ description: "Crisis resources, abuse reporting, and safety support for the Word
         </p>
     </div>
 </section>
-
-<script>
-/**
- * Safety Report Form Handler
- * Posts to the existing Django contact endpoint with submission_type "safety_report".
- * The category and phone fields are embedded into the subject/message for Aaron's review.
- */
-(function() {
-    const form = document.getElementById('safetyForm');
-    const submitBtn = document.getElementById('safetySubmit');
-    if (!form) return;
-
-    // Set honeypot timestamp
-    const loadedAt = form.querySelector('[name="loaded_at"]');
-    if (loadedAt) loadedAt.value = Date.now().toString();
-
-    // Pre-fill from auth if available
-    if (window.API && window.API.isAuthenticated && window.API.isAuthenticated() && window.API.user) {
-        const emailInput = document.getElementById('safety-email');
-        const nameInput = document.getElementById('safety-name');
-        if (emailInput && !emailInput.value && window.API.user.email) emailInput.value = window.API.user.email;
-        if (nameInput && !nameInput.value && window.API.user.name) nameInput.value = window.API.user.name;
-    }
-
-    // Clear field errors on input
-    form.querySelectorAll('input, textarea, select').forEach(function(el) {
-        el.addEventListener('input', function() {
-            var errEl = document.querySelector('[data-safety-error="' + el.name + '"]');
-            if (errEl) { errEl.textContent = ''; errEl.classList.add('hidden'); }
-        });
-    });
-
-    // Send another
-    document.getElementById('safetySendAnother').addEventListener('click', function(e) {
-        e.preventDefault();
-        form.reset();
-        clearErrors();
-        document.getElementById('safetySuccess').classList.add('hidden');
-        form.classList.remove('hidden');
-        if (loadedAt) loadedAt.value = Date.now().toString();
-    });
-
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        clearErrors();
-
-        // Honeypot check
-        var hp = form.querySelector('[name="website"]');
-        if (hp && hp.value) return; // bot filled honeypot
-
-        var ts = loadedAt ? parseInt(loadedAt.value, 10) : 0;
-        if (ts && (Date.now() - ts) < 3000) return; // submitted too fast
-
-        // Validate
-        var category = document.getElementById('safety-category').value;
-        var description = document.getElementById('safety-description').value.trim();
-        var email = document.getElementById('safety-email').value.trim();
-        var valid = true;
-
-        if (!category) {
-            showFieldError('category', 'Please select a category.');
-            valid = false;
-        }
-        if (!description || description.length < 10) {
-            showFieldError('description', 'Please share what is happening (at least 10 characters).');
-            valid = false;
-        }
-        if (!email || !email.includes('@')) {
-            showFieldError('email', 'Please enter a valid email address.');
-            valid = false;
-        }
-        if (!valid) return;
-
-        // Build the data for the contact endpoint
-        var categoryLabels = {
-            'own_safety': "I'm worried about my own safety",
-            'someone_else': "I'm worried about someone else's safety",
-            'report_content': "I want to report content that concerns me",
-            'other': "Something else"
-        };
-        var categoryLabel = categoryLabels[category] || category;
-        var name = document.getElementById('safety-name').value.trim() || 'Anonymous';
-        var phone = document.getElementById('safety-phone').value.trim();
-
-        var subject = '⚠️ Safety Report: ' + categoryLabel;
-        var message = 'SAFETY REPORT\n'
-            + '━━━━━━━━━━━━━\n'
-            + 'Category: ' + categoryLabel + '\n'
-            + (phone ? 'Phone: ' + phone + '\n' : '')
-            + '━━━━━━━━━━━━━\n\n'
-            + description;
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitting...';
-
-        try {
-            if (window.API && window.API.submitContact) {
-                await window.API.submitContact({
-                    name: name,
-                    email: email,
-                    submission_type: 'general',
-                    subject: subject,
-                    message: message
-                });
-            } else {
-                // Fallback: direct POST if API not available
-                var resp = await fetch('/api/v1/contact/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        submission_type: 'general',
-                        subject: subject,
-                        message: message
-                    })
-                });
-                if (!resp.ok) throw new Error('Server error');
-            }
-
-            form.classList.add('hidden');
-            document.getElementById('safetySuccess').classList.remove('hidden');
-
-        } catch (err) {
-            showFormError(
-                'Unable to send your report right now. Please try again, or contact Brother Aaron directly at the Contact page.'
-            );
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Report';
-        }
-    });
-
-    function showFieldError(field, msg) {
-        var el = document.querySelector('[data-safety-error="' + field + '"]');
-        if (el) { el.textContent = msg; el.classList.remove('hidden'); }
-    }
-    function showFormError(msg) {
-        var el = document.getElementById('safetyFormError');
-        if (el) { el.textContent = msg; el.classList.remove('hidden'); }
-    }
-    function clearErrors() {
-        document.querySelectorAll('[data-safety-error]').forEach(function(el) {
-            el.textContent = ''; el.classList.add('hidden');
-        });
-        var fe = document.getElementById('safetyFormError');
-        if (fe) { fe.textContent = ''; fe.classList.add('hidden'); }
-    }
-})();
-</script>
