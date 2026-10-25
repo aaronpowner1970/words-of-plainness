@@ -309,6 +309,18 @@ module.exports = function(eleventyConfig) {
     // one named by `lyricsSameAs`); the drawer renders it statically when
     // there is no VTT. lyricsOwn = an alternate that sings its own words.
     // =========================================
+    // Watch-slug owner for the /music/ page. A song's bare slug (#watch=<song>)
+    // opens the first button that carries it, so an alternate keeps the bare
+    // slug as a legacy handle only when the primary has no video and it is the
+    // first alternate with one. Every alternate also has <song>--<alt-slug>.
+    // Returns the owning alternate's file, or '' when nobody needs it.
+    eleventyConfig.addFilter("legacyWatchOwner", function(primaryYoutubeId, alternates) {
+        if (primaryYoutubeId) return '';
+        var alts = alternates || [];
+        for (var i = 0; i < alts.length; i++) if (alts[i].youtubeId) return alts[i].file;
+        return '';
+    });
+
     var musicCatalogReported = false;
     eleventyConfig.addFilter("musicCatalog", function(chapters) {
         var catalog = {};

@@ -15,9 +15,15 @@ permalink: /music/
 <div class="music-layout">
 
 {#- Row actions: Listen (always) + Watch (only when a youtubeId exists). The Watch
-    slot is always emitted so the two columns stay aligned down the table. -#}
-{%- macro rowActions(title, style, youtubeId) -%}
+    slot is always emitted so the two columns stay aligned down the table.
+    altSlug is set for an alternate arrangement: its watch handle is
+    <song>--<altSlug> (the same rule as #listen=). legacy marks the one alternate
+    that still owns the bare <song> slug (primary has no video; see the
+    legacyWatchOwner filter). data-watch-slug may hold several space-separated slugs. -#}
+{%- macro rowActions(title, style, youtubeId, altSlug, legacy) -%}
 {%- set full = title + (' (' + style + ')' if style else '') -%}
+{%- set bareSlug = title | replace("'", "") | replace("’", "") | slugify -%}
+{%- set watchSlugs = (bareSlug + '--' + altSlug + (' ' + bareSlug if legacy else '')) if altSlug else bareSlug -%}
 <td class="col-actions">
     <div class="row-actions">
         <span class="row-action-slot">
@@ -31,7 +37,7 @@ permalink: /music/
             {%- if youtubeId %}
             <button type="button" class="row-action-btn" data-action="watch"
                     data-youtube-id="{{ youtubeId }}" data-video-title="{{ full }}"
-                    data-watch-slug="{{ title | replace("'", "") | replace("’", "") | slugify }}"
+                    data-watch-slug="{{ watchSlugs }}"
                     aria-label="Watch the video of {{ full }}"
                     aria-haspopup="dialog">
                 <svg class="row-action-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15.033 9.44a.647.647 0 0 1 0 1.12l-4.065 2.352a.645.645 0 0 1-.968-.56V7.648a.645.645 0 0 1 .968-.56z"/><path d="M12 17v4"/><path d="M8 21h8"/><rect x="2" y="3" width="20" height="14" rx="2"/></svg>
@@ -41,6 +47,35 @@ permalink: /music/
         </span>
     </div>
 </td>
+{%- endmacro -%}
+
+{#- Score download: shown under the title only when the arrangement carries a
+    `scoreFile` (a PDF under media.wordsofplainness.org/docs/). One data field per
+    arrangement; the usage line always travels with the control. -#}
+{%- macro scoreControl(scoreFile, title, style) -%}
+{%- if scoreFile -%}
+<div class="row-score">
+    <a class="row-score-btn" href="https://media.wordsofplainness.org/docs/{{ scoreFile }}" download
+       aria-label="Download the score (PDF) of {{ title }} ({{ style }})">
+        <svg class="row-action-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        <span class="row-action-label">Score (PDF)</span>
+    </a>
+    <span class="row-score-terms">Free to copy and perform for worship and non-commercial use. All other rights reserved.</span>
+</div>
+{%- endif -%}
+{%- endmacro -%}
+
+{#- Column header shared by every collection card. -#}
+{%- macro tableHead() -%}
+<thead>
+    <tr>
+        <th class="col-num">#</th>
+        <th class="col-title">Title</th>
+        <th class="col-chapter">Chapter</th>
+        <th class="col-actions"><span class="visually-hidden">Listen or watch</span></th>
+        <th class="col-duration">Duration</th>
+    </tr>
+</thead>
 {%- endmacro -%}
 
 <!-- ==========================================
@@ -66,54 +101,48 @@ permalink: /music/
         <span class="chc-arrow" aria-hidden="true">&rarr;</span>
     </a>
 
-    <!-- ==========================================
-         Track List
-         ========================================== -->
-    <div class="playlist-container">
-
-        <!-- Options row: label, Continuous play (aria-pressed), then the collection-scope
-             segmented toggle (radiogroup). Scope governs which rows are in the auto-advance,
-             shuffle, and repeat queue; individual rows stay clickable in both modes.
-             Scope is persisted in localStorage as 'wop-music-queue-scope' ('core' | 'full');
-             continuous play as 'wop-music-continuous' = 'off' when switched off. -->
-        <div class="options-row" role="group" aria-labelledby="optionsLabel">
-            <span class="options-label" id="optionsLabel">Options:</span>
-            <div class="queue-scope" id="continuousScope">
-                <button type="button" class="queue-scope-btn" id="continuousToggle"
-                        aria-pressed="true">Continuous play: On</button>
-            </div>
-            <div class="queue-scope" id="queueScope" role="radiogroup" aria-label="Collection">
-                <button type="button" class="queue-scope-btn" data-scope="core"
-                        role="radio" aria-checked="true">Core Collection</button>
-                <button type="button" class="queue-scope-btn" data-scope="full"
-                        role="radio" aria-checked="false">Full Collection</button>
-            </div>
+    <!-- Options row: label, Continuous play (aria-pressed), then the collection-scope
+         segmented toggle (radiogroup). Scope governs which rows are in the auto-advance,
+         shuffle, and repeat queue (and whether the full-only cards show); individual rows
+         stay clickable in both modes. Scope is persisted in localStorage as
+         'wop-music-queue-scope' ('core' | 'full'); continuous play as
+         'wop-music-continuous' = 'off' when switched off. -->
+    <div class="options-row" role="group" aria-labelledby="optionsLabel">
+        <span class="options-label" id="optionsLabel">Options:</span>
+        <div class="queue-scope" id="continuousScope">
+            <button type="button" class="queue-scope-btn" id="continuousToggle"
+                    aria-pressed="true">Continuous play: On</button>
         </div>
+        <div class="queue-scope" id="queueScope" role="radiogroup" aria-label="Collection">
+            <button type="button" class="queue-scope-btn" data-scope="core"
+                    role="radio" aria-checked="true">Core Collection</button>
+            <button type="button" class="queue-scope-btn" data-scope="full"
+                    role="radio" aria-checked="false">Full Collection</button>
+        </div>
+    </div>
 
-        <!-- Section 0: Ministry Collection -->
+    {#- Collection cards. Each collection is its own card (.playlist-container) with
+        the page background showing between cards. DOM order is queue order, so
+        continuous play runs from the last row of one card into the first of the next.
+        Track numbers run on across cards, as they did in the single table. -#}
+    {%- set trackNum = 1 -%}
+
+    <!-- Card 1: Ministry Anthems -->
+    <section class="playlist-container" aria-labelledby="coll-anthems">
         <div class="playlist-section-header">
-            <h2 class="section-title">Ministry Anthems</h2>
+            <h2 class="section-title" id="coll-anthems">Ministry Anthems</h2>
             <p class="section-subtitle">Sacred music at the heart of this ministry</p>
         </div>
-
         <table class="playlist-table" id="playlistTable">
-            <thead>
-                <tr>
-                    <th class="col-num">#</th>
-                    <th class="col-title">Title</th>
-                    <th class="col-chapter">Chapter</th>
-                    <th class="col-actions"><span class="visually-hidden">Listen or watch</span></th>
-                    <th class="col-duration">Duration</th>
-                </tr>
-            </thead>
+            {{ tableHead() }}
             <tbody>
-                {%- set trackNum = 1 -%}
                 {%- for item in ministryMusic.collection -%}
+                {%- if not item.group -%}
                 <tr class="playlist-row"
                     data-play-file="{{ item.file }}">
                     <td class="col-num">{{ trackNum }}</td>
                     <td class="col-title">
-                        {%- set audio = { testimony: { title: item.title, file: item.file } } -%}
+                        {%- set audio = { testimony: { title: item.title, file: item.file, alternates: item.alternates } } -%}
                         {% include "components/listen-anchor.njk" %}
                         <div class="track-title-group">
                             <span class="song-title">{{ item.title }}</span>
@@ -125,18 +154,79 @@ permalink: /music/
                     <td class="col-duration" data-duration>{{ item.duration if item.duration else '&mdash;' | safe }}</td>
                 </tr>
                 {%- set trackNum = trackNum + 1 -%}
+                {%- endif -%}
                 {%- endfor -%}
+            </tbody>
+        </table>
+    </section>
 
-                <!-- Section 1: The Core Journey (Primaries) -->
-                <tr class="playlist-section-divider">
-                    <td colspan="5">
-                        <div class="playlist-section-header playlist-section-header--inline">
-                            <h2 class="section-title">Core Discipleship Journey</h2>
-                            <p class="section-subtitle">The core musical testimony, chapter by chapter</p>
+    <!-- Card 2: Psalms of Brother Aaron (Full Collection view only). Each song's
+         arrangements sit together here, the alternate directly under its primary.
+         Not part of the running track count, so the Core numbering is unchanged. -->
+    <section class="playlist-container" id="psalmsCard"
+             aria-labelledby="coll-psalms" data-scope-only="full" hidden>
+        <div class="playlist-section-header">
+            <h2 class="section-title" id="coll-psalms">{{ ministryMusic.psalmsCollection.title }}</h2>
+            <p class="section-subtitle">{{ ministryMusic.psalmsCollection.subtitle }}</p>
+        </div>
+        <table class="playlist-table">
+            {{ tableHead() }}
+            <tbody>
+                {%- set psalmNum = 0 -%}
+                {%- for item in ministryMusic.collection -%}
+                {%- if item.group == 'psalms' -%}
+                {%- set psalmNum = psalmNum + 1 -%}
+                {%- set legacyOwner = item.youtubeId | legacyWatchOwner(item.alternates) -%}
+                <tr class="playlist-row playlist-row--full-only"
+                    data-play-file="{{ item.file }}">
+                    <td class="col-num">&mdash;</td>
+                    <td class="col-title">
+                        {%- set audio = { testimony: { title: item.title, file: item.file, alternates: item.alternates } } -%}
+                        {% include "components/listen-anchor.njk" %}
+                        <div class="track-title-group">
+                            <span class="song-title">{{ item.title }}</span>
+                            <span class="song-label">&mdash; {{ item.label }}</span>
+                            <span class="track-chapter-mobile">Psalm {{ psalmNum }}</span>
                         </div>
+                        {{ scoreControl(item.scoreFile, item.title, item.label) }}
                     </td>
+                    <td class="col-chapter"><span class="chapter-label">Psalm {{ psalmNum }}</span></td>
+                    {{ rowActions(item.title, item.label, item.youtubeId) }}
+                    <td class="col-duration" data-duration>{{ item.duration if item.duration else '&mdash;' | safe }}</td>
                 </tr>
+                {%- for alt in item.alternates -%}
+                {%- set altSlug = alt.slug or (alt.label | replace("'", "") | replace("’", "") | slugify) -%}
+                <tr class="playlist-row playlist-row--alt playlist-row--full-only"
+                    data-play-file="{{ alt.file }}">
+                    <td class="col-num">&mdash;</td>
+                    <td class="col-title">
+                        <div class="track-title-group">
+                            <span class="song-title">{{ item.title }}</span>
+                            <span class="song-label">&mdash; {{ alt.label }}</span>
+                            <span class="track-chapter-mobile">Psalm {{ psalmNum }}</span>
+                        </div>
+                        {{ scoreControl(alt.scoreFile, item.title, alt.label) }}
+                    </td>
+                    <td class="col-chapter"><span class="chapter-label">Psalm {{ psalmNum }}</span></td>
+                    {{ rowActions(item.title, alt.label, alt.youtubeId, altSlug, alt.file == legacyOwner) }}
+                    <td class="col-duration" data-duration>{{ alt.duration if alt.duration else '&mdash;' | safe }}</td>
+                </tr>
+                {%- endfor -%}
+                {%- endif -%}
+                {%- endfor -%}
+            </tbody>
+        </table>
+    </section>
 
+    <!-- Card 3: The Core Journey (Primaries) -->
+    <section class="playlist-container" aria-labelledby="coll-core">
+        <div class="playlist-section-header">
+            <h2 class="section-title" id="coll-core">Core Discipleship Journey</h2>
+            <p class="section-subtitle">The core musical testimony, chapter by chapter</p>
+        </div>
+        <table class="playlist-table">
+            {{ tableHead() }}
+            <tbody>
                 {%- for chapter in collections.chapters -%}
                 {%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.file -%}
                 <tr class="playlist-row"
@@ -160,21 +250,25 @@ permalink: /music/
                 {%- set trackNum = trackNum + 1 -%}
                 {%- endif -%}
                 {%- endfor -%}
+            </tbody>
+        </table>
+    </section>
 
-                <!-- Section 2: More Arrangements (Alternates) -->
-                <tr class="playlist-section-divider" id="altSectionDivider">
-                    <td colspan="5">
-                        <div class="playlist-section-header playlist-section-header--inline">
-                            <h2 class="section-title">Alternate Arrangements</h2>
-                            <p class="section-subtitle">The same truths in different musical languages</p>
-                        </div>
-                    </td>
-                </tr>
-
+    <!-- Card 4: More Arrangements (Alternates) -->
+    <section class="playlist-container" id="altSectionCard" aria-labelledby="coll-alts">
+        <div class="playlist-section-header">
+            <h2 class="section-title" id="coll-alts">Alternate Arrangements</h2>
+            <p class="section-subtitle">The same truths in different musical languages</p>
+        </div>
+        <table class="playlist-table">
+            {{ tableHead() }}
+            <tbody>
                 {#- Ministry anthem alternates -#}
                 {%- for item in ministryMusic.collection -%}
-                {%- if item.alternates and item.alternates.length > 0 -%}
+                {%- if not item.group and item.alternates and item.alternates.length > 0 -%}
+                {%- set legacyOwner = item.youtubeId | legacyWatchOwner(item.alternates) -%}
                 {%- for alt in item.alternates -%}
+                {%- set altSlug = alt.slug or (alt.label | replace("'", "") | replace("’", "") | slugify) -%}
                 <tr class="playlist-row playlist-row--alt"
                     data-play-file="{{ alt.file }}">
                     <td class="col-num">{{ trackNum }}</td>
@@ -185,7 +279,7 @@ permalink: /music/
                         </div>
                     </td>
                     <td class="col-chapter"></td>
-                    {{ rowActions(item.title, alt.label, alt.youtubeId) }}
+                    {{ rowActions(item.title, alt.label, alt.youtubeId, altSlug, alt.file == legacyOwner) }}
                     <td class="col-duration" data-duration>{{ alt.duration if alt.duration else '&mdash;' | safe }}</td>
                 </tr>
                 {%- set trackNum = trackNum + 1 -%}
@@ -195,7 +289,9 @@ permalink: /music/
 
                 {%- for chapter in collections.chapters -%}
                 {%- if chapter.data.audio and chapter.data.audio.testimony and chapter.data.audio.testimony.alternates and chapter.data.audio.testimony.alternates.length > 0 -%}
+                {%- set legacyOwner = chapter.data.audio.testimony.youtubeId | legacyWatchOwner(chapter.data.audio.testimony.alternates) -%}
                 {%- for alt in chapter.data.audio.testimony.alternates -%}
+                {%- set altSlug = alt.slug or (alt.label | replace("'", "") | replace("’", "") | slugify) -%}
                 <tr class="playlist-row playlist-row--alt"
                     data-play-file="{{ alt.file }}">
                     <td class="col-num">{{ trackNum }}</td>
@@ -209,7 +305,7 @@ permalink: /music/
                     <td class="col-chapter">
                         <a href="{{ chapter.url }}" class="chapter-link">Ch. {{ chapter.data.chapter }}</a>
                     </td>
-                    {{ rowActions(chapter.data.audio.testimony.title, alt.label, alt.youtubeId) }}
+                    {{ rowActions(chapter.data.audio.testimony.title, alt.label, alt.youtubeId, altSlug, alt.file == legacyOwner) }}
                     <td class="col-duration" data-duration>{{ alt.duration if alt.duration else '&mdash;' | safe }}</td>
                 </tr>
                 {%- set trackNum = trackNum + 1 -%}
@@ -218,7 +314,7 @@ permalink: /music/
                 {%- endfor -%}
             </tbody>
         </table>
-    </div>
+    </section>
 
     <div class="music-footer">
         <p>Each chapter of <a href="/writings/">Words of Plainness</a> includes a musical testimony — an original song inspired by the themes explored in that chapter.</p>
@@ -266,7 +362,7 @@ permalink: /music/
     function collectQueue(scope) {
         var sel = scope === 'full'
             ? '.playlist-row[data-play-file]'
-            : '.playlist-row:not(.playlist-row--alt)[data-play-file]';
+            : '.playlist-row:not(.playlist-row--alt):not(.playlist-row--full-only)[data-play-file]';
         return Array.prototype.map.call(
             document.querySelectorAll(sel),
             function (row) { return row.getAttribute('data-play-file'); }
@@ -281,6 +377,11 @@ permalink: /music/
         // fallback in getNextAutoAdvance drops the reader into the new set
         // when this song ends.
         if (window.WopPlayer) window.WopPlayer.setQueue(collectQueue(scope));
+
+        // Full-only cards (Psalms of Brother Aaron) show in Full Collection view only.
+        document.querySelectorAll('[data-scope-only]').forEach(function (card) {
+            card.hidden = card.getAttribute('data-scope-only') !== scope;
+        });
 
         document.querySelectorAll('#queueScope .queue-scope-btn').forEach(function (b) {
             var on = b.dataset.scope === scope;
@@ -379,7 +480,8 @@ permalink: /music/
             try { slug = decodeURIComponent(m[1]).toLowerCase(); } catch (_) { return; }
             var btns = document.querySelectorAll('.row-action-btn[data-action="watch"][data-watch-slug]');
             for (var i = 0; i < btns.length; i++) {
-                if (btns[i].getAttribute('data-watch-slug') !== slug) continue;
+                // data-watch-slug holds one or more space-separated slugs.
+                if (btns[i].getAttribute('data-watch-slug').split(' ').indexOf(slug) === -1) continue;
                 var row = btns[i].closest('.playlist-row');
                 if (row) row.scrollIntoView({ block: 'center' });
                 openVideo(btns[i], true);

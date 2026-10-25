@@ -521,6 +521,13 @@
     border: 1px solid rgba(196, 148, 58, 0.15);
     border-radius: var(--radius-lg, 12px);
     overflow: hidden;
+    /* One card per collection; the page background shows between cards,
+       at the same 2rem the Concert Hall card keeps above them. */
+    margin: 0 0 2rem;
+}
+
+.playlist-container[hidden] {
+    display: none;
 }
 
 .playlist-table {
@@ -844,7 +851,9 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem 0.75rem;
-    padding: 1rem 1rem 0;
+    /* Sits on the page background above all the collection cards. */
+    padding: 0;
+    margin: 0 0 1rem;
 }
 .options-label {
     font-family: 'Crimson Pro', Georgia, serif;
@@ -1082,13 +1091,84 @@
 
 /* Narrow: "Options:" + Continuous play on line 1, collection toggle full-width on line 2. */
 @media (max-width: 480px) {
-    .options-row {
-        padding: 1rem 0.75rem 0;
-    }
     #queueScope {
         flex: 1 1 100%;
     }
     #queueScope .queue-scope-btn {
         flex: 1 1 0;
+    }
+}
+
+/* Psalm label in the Chapter column (not a link: Psalms are not tied to a chapter). */
+.chapter-label {
+    color: var(--cream, #E8DCC4);
+    font-size: 0.8rem;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+/* Score download, under the title of an arrangement that carries a `scoreFile`.
+   The usage line sits beside the control and wraps under it on a phone. */
+.row-score {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.row-score-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0 0.9rem;
+    color: var(--gold-primary, #C4943A);
+    border: 1px solid var(--gold-primary, #C4943A);
+    border-radius: var(--radius-md, 8px);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+}
+
+.row-score-btn:hover {
+    background: var(--gold-primary, #C4943A);
+    color: #000;
+}
+
+.row-score-btn:focus-visible {
+    outline: 2px solid var(--gold-light, #D4A84A);
+    outline-offset: 2px;
+}
+
+.row-score-terms {
+    flex: 1 1 14rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--cream, #E8DCC4);
+    opacity: 0.6;
+    font-style: italic;
+}
+
+/* Phone: the score control shares a narrow title column with the Listen/Watch
+   buttons, so it drops its icon and may wrap to two lines instead of widening the table. */
+@media (max-width: 600px) {
+    .row-score-btn {
+        width: 100%;
+        padding: 0 0.5rem;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .row-score-btn .row-action-icon {
+        display: none;
+    }
+
+    .row-score-terms {
+        flex-basis: 100%;
     }
 }

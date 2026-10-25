@@ -5,10 +5,20 @@
    The slug is audio.testimony.slug when set, else the kebab-cased title with
    apostrophes dropped ("The Soul's Sincere Desire" → the-souls-sincere-desire).
    data-listen-file is always the primary arrangement.
+   Every alternate arrangement gets its own anchor, emitted beside the primary's:
+   #listen=<song-slug>--<alt-slug> cues that arrangement. <alt-slug> is the
+   alternate's `slug` when set, else its kebab-cased label. A slug never
+   renames an existing one; it only adds the alternate's own handle.
    The id is namespaced (listen-<slug>): song titles often match a chapter
    heading, and markdown already gives those headings the bare slug as id
    (Ch 5's "The Soul's Sincere Desire" does). #}
 {% if audio and audio.testimony and audio.testimony.file %}
 {% set listenSlug = audio.testimony.slug or (audio.testimony.title | replace("'", "") | replace("’", "") | slugify) %}
 <span class="listen-anchor" id="listen-{{ listenSlug }}" data-listen-slug="{{ listenSlug }}" data-listen-file="{{ audio.testimony.file }}" aria-hidden="true"></span>
+{% for alt in audio.testimony.alternates %}
+{%- set altSlug = alt.slug or (alt.label | replace("'", "") | replace("’", "") | slugify) -%}
+{%- if alt.file and altSlug %}
+<span class="listen-anchor" id="listen-{{ listenSlug }}--{{ altSlug }}" data-listen-slug="{{ listenSlug }}--{{ altSlug }}" data-listen-file="{{ alt.file }}" aria-hidden="true"></span>
+{%- endif -%}
+{% endfor %}
 {% endif %}
