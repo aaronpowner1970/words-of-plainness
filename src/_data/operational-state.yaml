@@ -88,6 +88,13 @@ workstreams:
         chosen by container query on <main>: two wings from 1168px, one right
         column (welcome over status) from 948px, the band below. Verified at
         1024×600 through 3840×1950 on video-02, -11 and -03.
+      chat_bar_phone: >
+        2026-10-24 (CODE-SITE-12, 13): at max-width 600px the bar hides the "How This Work
+        Is Made" link (0ff8c5c) and restacks (CODE-SITE-13): label and links on row 1,
+        the practice line on row 2. The bar sits outside <main>, so this is a
+        viewport media query, not a container query. Correction: 0ff8c5c's message
+        said the bar no longer wraps at 375; that was not true (61px before and after).
+        Desktop and tablet unchanged.
       dock_order: >
         2026-09-18: scripture before commentary in the citation dock. The film
         dock (js/creation.js, serving /creation/ and /chat/video-03/) now

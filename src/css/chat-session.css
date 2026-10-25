@@ -78,6 +78,21 @@
     .chat-bar-link--how { display: none; }
 }
 
+/* Phones, restacked. The bar sits outside <main> (the stage's query container),
+   so this uses the same viewport breakpoint as the rule above. Row 1: the
+   article label and the links. Row 2: the practice line at full width, so it
+   never runs under the links and the label is not squeezed to a sliver. */
+@media (max-width: 600px) {
+    .chat-bar {
+        grid-template-columns: minmax(0, 1fr) max-content;
+        row-gap: 2px;
+    }
+    .chat-bar-label { grid-column: 1; grid-row: 1; }
+    .chat-bar-actions { grid-column: 2; grid-row: 1; }
+    .chat-bar-practice { grid-column: 1 / -1; grid-row: 2; }
+    .chat-bar-link { min-height: 24px; box-sizing: border-box; }
+}
+
 /* ── The stage: sizes (mockup E) ─────────────────────────────
    On a chat video page the stage sits outside the 1200px reading container,
    first in a full-width .chat-scope (see the layouts), and <main> is the
