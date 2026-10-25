@@ -103,8 +103,9 @@ permalink: /music/
 
     <!-- Options row: label, Continuous play (aria-pressed), then the collection-scope
          segmented toggle (radiogroup). Scope governs which rows are in the auto-advance,
-         shuffle, and repeat queue (and whether the full-only cards show); individual rows
-         stay clickable in both modes. Scope is persisted in localStorage as
+         shuffle, and repeat queue and which cards show (Psalms and Alternate Arrangements
+         are Full-only); individual rows stay clickable. A #listen=/#watch= link to a
+         Full-only song shows Full for that visit without saving it. Scope is persisted in localStorage as
          'wop-music-queue-scope' ('core' | 'full'); continuous play as
          'wop-music-continuous' = 'off' when switched off. -->
     <div class="options-row" role="group" aria-labelledby="optionsLabel">
@@ -254,8 +255,9 @@ permalink: /music/
         </table>
     </section>
 
-    <!-- Card 4: More Arrangements (Alternates) -->
-    <section class="playlist-container" id="altSectionCard" aria-labelledby="coll-alts">
+    <!-- Card 4: More Arrangements (Alternates). Full Collection view only. -->
+    <section class="playlist-container" id="altSectionCard" aria-labelledby="coll-alts"
+             data-scope-only="full" hidden>
         <div class="playlist-section-header">
             <h2 class="section-title" id="coll-alts">Alternate Arrangements</h2>
             <p class="section-subtitle">The same truths in different musical languages</p>
@@ -378,7 +380,7 @@ permalink: /music/
         // when this song ends.
         if (window.WopPlayer) window.WopPlayer.setQueue(collectQueue(scope));
 
-        // Full-only cards (Psalms of Brother Aaron) show in Full Collection view only.
+        // Full-only cards (Psalms of Brother Aaron, Alternate Arrangements) show in Full Collection view only.
         document.querySelectorAll('[data-scope-only]').forEach(function (card) {
             card.hidden = card.getAttribute('data-scope-only') !== scope;
         });
@@ -391,7 +393,7 @@ permalink: /music/
 
     document.addEventListener('DOMContentLoaded', function () {
         // Row clicks always play the clicked file — even if it isn't in the
-        // current scope's queue (spec: alternates stay clickable in Core mode).
+        // current scope's queue (rows on hidden Full-only cards are simply not on screen in Core).
         document.querySelectorAll('.playlist-row[data-play-file]').forEach(function (row) {
             row.addEventListener('click', function (e) {
                 if (e.target.closest('a')) return;   // let chapter-link anchors navigate
@@ -474,6 +476,7 @@ permalink: /music/
         // with the video cued, never autoplaying: the reader taps play. Unknown
         // slugs and songs without a video fall through silently.
         function processWatchFragment() {
+            revealFullOnlyLink();
             var m = /^#watch=([^&#]+)$/.exec(window.location.hash || '');
             if (!m) return;
             var slug;
@@ -488,7 +491,6 @@ permalink: /music/
                 return;
             }
         }
-        processWatchFragment();
         window.addEventListener('hashchange', processWatchFragment);
         modal.addEventListener('click', function (e) { if (e.target.hasAttribute('data-close')) closeVideo(); });
         closeBtn.addEventListener('click', closeVideo);
@@ -511,14 +513,51 @@ permalink: /music/
             setCont(contOn);
         });
 
-        // Scope toggle: buttons, persistence, initial state.
-        var currentScope = loadScope();
-        applyScope(currentScope);
+        // Scope toggle: buttons, persistence, initial state. shownScope is the view
+        // on screen; it differs from the saved choice only while a link has switched
+        // the page to Full for this visit (linkedFull), which is never written.
+        var shownScope = loadScope();
+        var linkedFull = false;
+        applyScope(shownScope);
+
+        // A #listen= / #watch= link to a song on a Full-only card shows Full for this
+        // visit only. Never calls saveScope().
+        function revealFullOnlyLink() {
+            if (shownScope === 'full') return;
+            var m = /^#(listen|watch)=([^&#]+)$/.exec(window.location.hash || '');
+            if (!m) return;
+            var slug;
+            try { slug = decodeURIComponent(m[2]).toLowerCase(); } catch (_) { return; }
+            var row = null, i;
+            if (m[1] === 'listen') {
+                var as = document.querySelectorAll('[data-listen-slug][data-listen-file]');
+                for (i = 0; i < as.length && !row; i++) {
+                    if (as[i].getAttribute('data-listen-slug') !== slug) continue;
+                    var f = as[i].getAttribute('data-listen-file');
+                    document.querySelectorAll('.playlist-row[data-play-file]').forEach(function (r) {
+                        if (!row && r.getAttribute('data-play-file') === f) row = r;
+                    });
+                }
+            } else {
+                var bs = document.querySelectorAll('.row-action-btn[data-action="watch"][data-watch-slug]');
+                for (i = 0; i < bs.length && !row; i++) {
+                    if (bs[i].getAttribute('data-watch-slug').split(' ').indexOf(slug) !== -1) row = bs[i].closest('.playlist-row');
+                }
+            }
+            if (!row || !row.closest('[data-scope-only="full"]')) return;
+            shownScope = 'full';
+            linkedFull = true;
+            applyScope('full');
+        }
+        revealFullOnlyLink();
+        processWatchFragment();
+        window.addEventListener('hashchange', revealFullOnlyLink);
         document.querySelectorAll('#queueScope .queue-scope-btn').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var s = btn.dataset.scope;
-                if (s === currentScope) return;
-                currentScope = s;
+                if (s === shownScope && !linkedFull) return;
+                shownScope = s;
+                linkedFull = false;
                 saveScope(s);
                 applyScope(s);
             });
