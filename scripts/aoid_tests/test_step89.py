@@ -630,26 +630,29 @@ def test_r1_r2_render_as_notes_under_the_baptism_table_only(site_on, site_off):
     notes = sec[sec.index('<div class="an-notes"'):]
     assert re.findall(r"<h5[^>]*>(.*?)</h5>", notes) == ["Notes"]
     items = re.findall(r"<li[^>]*>(.*?)</li>", notes, re.S)
-    assert [text_of(i) for i in items] == ["Anglican " + html.unescape(_approved("R1")), "Anglican " + html.unescape(_approved("R2"))]
-    assert all(i.startswith('<strong class="an-notes-family">Anglican</strong> ') for i in items)
+    plain = lambda r: html.unescape(_approved(r)).replace("*", "")   # R5 carries two italic titles
+    assert [text_of(i) for i in items] == ["Anglican " + plain("R1"), "Anglican " + plain("R2"), "Oriental Orthodox " + plain("R5")]
+    assert [i[:i.index("</strong>")] for i in items] == ['<strong class="an-notes-family">Anglican'] * 2 + ['<strong class="an-notes-family">Oriental Orthodox']
+    assert "<em>Rites of the Holy Baptism</em>" in items[2] and "<em>Ritus Orientalium</em>" in items[2] and "*" not in items[2]
     # the Anglican Document cell reads as before CODE-AOID2-55
     row = re.search(r'<tr><th scope="row">Anglican</th>(.*?)</tr>', sec, re.S).group(1)
     assert [text_of(c) for c in re.findall(r"<td>(.*?)</td>", row)] == ["Book of Common Prayer (1662), Public Baptism of Infants", "Yes", "Joined"]
     assert "Annexed Book" not in text_of(sec[:table_end])
     # each approved note appears exactly once on the page; no Notes list exists anywhere else
-    assert text_of(arts).count(html.unescape(_approved("R1"))) == 1 and text_of(arts).count(html.unescape(_approved("R2"))) == 1
+    assert all(text_of(arts).count(plain(r)) == 1 for r in ("R1", "R2", "R5"))
     assert arts.count('class="an-notes"') == 1
     off = (site_off / "articles" / "index.html").read_text(encoding="utf8")
     assert "Annexed Book" not in off and "an-notes" not in off and "Bill and Barker" not in off
 
 
 def test_held_notes_are_not_invented(site_on):
-    """R3, R4, R5 and R2 for A6-F6 have no per-family table on the page; they are held in the data, not rendered."""
+    """R3, R4 and R2 for A6-F6 have no per-family table on the page; they are held in the data, not rendered."""
     d = json.loads((SE / "record_notes.json").read_text(encoding="utf8"))
-    assert [(n["id"], n["teaching"]) for n in d["notes"]] == [("R1", "A11-F7"), ("R2", "A11-F7")]
-    assert [(n["id"], n["teaching"]) for n in d["held"]] == [("R2", "A6-F6"), ("R3", "A2-F4"), ("R4", "G8"), ("R5", "A11-F2")]
+    assert [(n["id"], n["teaching"]) for n in d["notes"]] == [("R1", "A11-F7"), ("R2", "A11-F7"), ("R5", "A11-F2")]
+    assert [n["table"] for n in d["notes"] if n["id"] == "R5"] == ["A11-F7"]
+    assert [(n["id"], n["teaching"]) for n in d["held"]] == [("R2", "A6-F6"), ("R3", "A2-F4"), ("R4", "G8")]
     arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
-    for rid in ("R3", "R4", "R5"):
+    for rid in ("R3", "R4"):
         assert _approved(rid) not in arts and html.escape(_approved(rid)) not in arts
     assert "Syriac Orthodox order of baptism" not in arts
 

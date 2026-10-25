@@ -7,7 +7,7 @@
 
    One shared component: a short "Notes" list directly under a teaching's per-family table on a Record tab,
    shown only where an approved note exists, each note led by the family's name in bold. The notes are data:
-     data-sources/aoid/second-edition/record_notes.json   { notes: [{id, article, teaching, family, text}], held: [...] }
+     data-sources/aoid/second-edition/record_notes.json   { notes: [{id, article, teaching, [table], family, text}]  (table: the teaching whose table the note sits under, where it differs), held: [...] }
    Each text is checked at build time, word for word, against the approved wording file (R1-R5); a difference
    stops the build. "held" lists approved notes that have no per-family table to sit under; they are not rendered.
 
@@ -25,6 +25,8 @@ if (!on) module.exports = { on: false };
 else {
   const fail = (m) => { throw new Error('record notes: ' + m); };
   const read = (f) => fs.readFileSync(path.join(process.cwd(), f), 'utf8').replace(/\r\n/g, '\n');
+  const MarkdownIt = require('markdown-it');
+  const inline = (s) => MarkdownIt({ html: false, linkify: false, typographer: false }).renderInline(s);
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const data = JSON.parse(read(DATA));
 
@@ -41,11 +43,11 @@ else {
 
   const used = new Set();
   const notesHtml = (article, teaching) => {
-    const mine = data.notes.filter((n) => n.article === article && n.teaching === teaching);
+    const mine = data.notes.filter((n) => n.article === article && (n.table || n.teaching) === teaching);
     if (!mine.length) return '';
     mine.forEach((n) => used.add(n.id + '|' + n.teaching));
     return '<div class="an-notes" data-notes-for="' + esc(teaching) + '"><h5 class="an-notes-title">Notes</h5><ul>'
-      + mine.map((n) => '<li data-note="' + esc(n.id) + '"><strong class="an-notes-family">' + esc(n.family) + '</strong> ' + esc(n.text) + '</li>').join('')
+      + mine.map((n) => '<li data-note="' + esc(n.id) + '"><strong class="an-notes-family">' + esc(n.family) + '</strong> ' + inline(n.text) + '</li>').join('')
       + '</ul></div>';
   };
 
