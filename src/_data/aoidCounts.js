@@ -35,6 +35,7 @@ else {
   const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), COUNTS), 'utf8'));
   const ledger = yaml.load(fs.readFileSync(path.join(process.cwd(), LEDGER), 'utf8')).scored;
   const disclosures = require('./aoidDisclosures.js');
+  const notes = require('./aoidRecordNotes.js');
   const disclosed = {};
   [disclosures.fatherOfSpirits, disclosures.sexualHoliness].forEach((d) => d.teachings.forEach((t) => { disclosed[t.id] = t.counts; }));
 
@@ -89,7 +90,7 @@ else {
         + '<td>' + q + '</td></tr>';
     }).join('');
     tables[art] = '<div class="disc-table-wrap an-summary"><table><caption>Taught, contradicted and no position are each counted of sixteen.</caption><thead><tr><th scope="col">Teaching</th><th scope="col">Taught</th><th scope="col">Contradicted</th><th scope="col">No position</th>'
-      + '<th scope="col">Date measured</th><th scope="col">Borderline readings</th><th scope="col">Families still being confirmed</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+      + '<th scope="col">Date measured</th><th scope="col">Borderline readings</th><th scope="col">Families still being confirmed</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + notes.notesHtml(art, 'summary');
   });
 
   module.exports = { on: true, source: COUNTS, spans, tables, status: data.floors.map((f) => ({ id: f.id, status: f.status })) };

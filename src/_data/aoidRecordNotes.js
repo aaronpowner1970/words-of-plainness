@@ -6,12 +6,14 @@
    with it OFF this module is { on: false } and nothing here reaches a page.
 
    One shared component: a short "Notes" list directly under a teaching's per-family table on a Record tab,
-   shown only where an approved note exists, each note led by the family's name in bold. The notes are data:
+   shown only where an approved note exists, each note led by the family's name and a period, in bold. The notes are data:
      data-sources/aoid/second-edition/record_notes.json   { notes: [{id, article, teaching, [table], family, text}]  (table: the teaching whose table the note sits under, where it differs), held: [...] }
    Each text is checked at build time, word for word, against the approved wording file (R1-R5); a difference
    stops the build. "held" lists approved notes that have no per-family table to sit under; they are not rendered.
 
-   Use:  notesHtml('A11', 'A11-F7')  ->  the list, or '' when no note is held for that teaching.
+   A note whose "table" is "summary" sits under the Article's Record-tab summary table (src/_data/aoidCounts.js).
+   Use:  notesHtml('A11', 'A11-F7')  ->  the list, or '' when no note is held for that teaching;
+         notesHtml('A06', 'summary')  ->  the notes under that Article's summary table.
    ============================================================ */
 
 const fs = require('fs');
@@ -47,7 +49,7 @@ else {
     if (!mine.length) return '';
     mine.forEach((n) => used.add(n.id + '|' + n.teaching));
     return '<div class="an-notes" data-notes-for="' + esc(teaching) + '"><h5 class="an-notes-title">Notes</h5><ul>'
-      + mine.map((n) => '<li data-note="' + esc(n.id) + '"><strong class="an-notes-family">' + esc(n.family) + '</strong> ' + inline(n.text) + '</li>').join('')
+      + mine.map((n) => '<li data-note="' + esc(n.id) + '"><strong class="an-notes-family">' + esc(n.family) + '.</strong> ' + inline(n.text) + '</li>').join('')
       + '</ul></div>';
   };
 
