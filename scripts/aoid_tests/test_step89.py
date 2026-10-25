@@ -654,7 +654,10 @@ def test_summary_table_notes_and_r3_held(site_on, site_off):
     assert [(n["id"], n["teaching"]) for n in d["held"]] == [("R3", "A2-F4")]
     arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
     plain = lambda r: html.unescape(_approved(r))
-    for art, rid, fam in (("a06", "R2", "Anglican"), ("a11", "R4", "Oriental Orthodox")):
+    # CODE-AOID2-58: the lead-in names the teaching, its title read from the same floor_counts.json the summary table uses
+    floors = {f["id"]: f["title"] for f in json.loads((REPO / "data-sources" / "aoid" / "floor_counts.json").read_text(encoding="utf8"))["floors"]}
+    for art, rid, fam, tid in (("a06", "R2", "Anglican", "A6-F6"), ("a11", "R4", "Oriental Orthodox", "G8")):
+        lead = fam + ", on " + floors[tid] + "."
         rec = panel(arts, art, "record")
         tbl = rec[rec.index('<div class="disc-table-wrap an-summary">'):]
         end = tbl.index("</table></div>") + len("</table></div>")
@@ -662,8 +665,9 @@ def test_summary_table_notes_and_r3_held(site_on, site_off):
         box = tbl[end:tbl.index("</div>", end + 10) + 6]
         assert re.findall(r"<h5[^>]*>(.*?)</h5>", box) == ["Notes"]
         items = re.findall(r"<li[^>]*>(.*?)</li>", box, re.S)
-        assert [text_of(i) for i in items] == [fam + ". " + plain(rid)]
-        assert items[0].startswith('<strong class="an-notes-family">' + fam + '.</strong> ')
+        assert [text_of(i) for i in items] == [lead + " " + plain(rid)]
+        assert items[0].startswith('<strong class="an-notes-family">' + lead + '</strong> ')
+        assert ('<th scope="row">' + floors[tid] + '</th>') in rec
     assert _approved("R3") not in arts and html.escape(_approved("R3")) not in arts
     assert "Confirmation prayer: Supporting line" not in arts
     off = (site_off / "articles" / "index.html").read_text(encoding="utf8")

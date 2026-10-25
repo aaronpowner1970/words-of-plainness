@@ -90,7 +90,7 @@ else {
         + '<td>' + q + '</td></tr>';
     }).join('');
     tables[art] = '<div class="disc-table-wrap an-summary"><table><caption>Taught, contradicted and no position are each counted of sixteen.</caption><thead><tr><th scope="col">Teaching</th><th scope="col">Taught</th><th scope="col">Contradicted</th><th scope="col">No position</th>'
-      + '<th scope="col">Date measured</th><th scope="col">Borderline readings</th><th scope="col">Families still being confirmed</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + notes.notesHtml(art, 'summary');
+      + '<th scope="col">Date measured</th><th scope="col">Borderline readings</th><th scope="col">Families still being confirmed</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + notes.notesHtml(art, 'summary', (id) => { const r = rowsBy[art].find(({ f }) => f.id === id); return r && r.f.title; });
   });
 
   module.exports = { on: true, source: COUNTS, spans, tables, status: data.floors.map((f) => ({ id: f.id, status: f.status })) };

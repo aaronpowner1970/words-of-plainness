@@ -44,12 +44,20 @@ else {
   });
 
   const used = new Set();
-  const notesHtml = (article, teaching) => {
+  // titleOf(teachingId) gives the title the summary table shows for that teaching (aoidCounts.js passes it); a note under the
+  // summary table is led "<Family>, on <title>." and one with no row in that table stops the build.
+  const notesHtml = (article, teaching, titleOf) => {
     const mine = data.notes.filter((n) => n.article === article && (n.table || n.teaching) === teaching);
     if (!mine.length) return '';
     mine.forEach((n) => used.add(n.id + '|' + n.teaching));
+    const lead = (n) => {
+      if (teaching !== 'summary') return esc(n.family) + '.';
+      const title = titleOf && titleOf(n.teaching);
+      if (!title) fail(n.id + ' (' + n.teaching + '): the summary table has no row for this teaching');
+      return esc(n.family) + ', on ' + esc(title) + '.';
+    };
     return '<div class="an-notes" data-notes-for="' + esc(teaching) + '"><h5 class="an-notes-title">Notes</h5><ul>'
-      + mine.map((n) => '<li data-note="' + esc(n.id) + '"><strong class="an-notes-family">' + esc(n.family) + '.</strong> ' + inline(n.text) + '</li>').join('')
+      + mine.map((n) => '<li data-note="' + esc(n.id) + '"><strong class="an-notes-family">' + lead(n) + '</strong> ' + inline(n.text) + '</li>').join('')
       + '</ul></div>';
   };
 
