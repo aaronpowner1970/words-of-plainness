@@ -42,7 +42,9 @@
 .lt-full a { font-weight: 600; }
 </style>
 
+<link rel="stylesheet" href="/css/articles-tabs.css?v={{ site.version }}">
 <div class="lt">
+  <div class="lt-text">{{ aoidStep89.livingTree.lines.l1Html | safe }}</div>
   <figure class="lt-map">
     <div class="lt-frame" id="ltFrame">
       <img id="ltImg" src="{{ MAP }}" width="3840" height="2160" alt="{{ aoidStep89.livingTree.alt }}" decoding="async">
@@ -52,9 +54,12 @@
   </figure>
 
   <div class="lt-text">
-    {{ aoidDisclosures.sexualHoliness.coverHtml | safe }}
+    {{ aoidStep89.livingTree.coverAbove | safe }}
+    {{ aoidStep89.livingTree.lines.l2Html | safe }}
+    {{ aoidStep89.livingTree.coverFrom | safe }}
     <p>{{ aoidStep89.livingTree.sentenceHtml | safe }}</p>
     <p class="lt-full"><a id="ltFull" href="{{ MAP }}">View the map at full size</a></p>
+    {{ aoidStep89.livingTree.lines.l3Html | safe }}
   </div>
 </div>
 

@@ -286,7 +286,27 @@ else {
     const sentence = one(/^> The Tree shows twenty-five branches\./, 'method sentence').replace(/^> /, '');
     const alt = /^\*\*Alt text:\*\* "(.+)"$/.exec(one(/^\*\*Alt text:\*\* "/, 'alt text'))[1];
     if (!/\[How These Articles Were Measured\]\(method account anchor\)/.test(sentence)) fail('A6a: the method-account link in the sentence was not found');
-    return { title, subtitle, sentenceHtml: md().renderInline(sentence.replace('(method account anchor)', '(' + METHOD_URL + ')')), alt };
+    // L1-L3 (approved 25 Oct 2026, "A6a TEACHING LINES L1-L3"): each is the quoted line after its tag line, built by the same
+    // components as the Articles' T1 (practice line), T2 (boxed prompt) and T3 (correction line), in aoidTeaching.js.
+    const after = (tag) => {
+      const k = sec.findIndex((l) => l.startsWith(tag));
+      if (k < 0) fail('A6a: ' + tag + ' not found');
+      const q = sec.slice(k + 1).find((l) => l.trim() !== '');
+      if (!q || !q.startsWith('> ')) fail('A6a: no quoted line after ' + tag);
+      return q.slice(2);
+    };
+    const teaching = require('./aoidTeaching.js');
+    const l1 = after('L1 (');
+    const l2 = after('L2 (');
+    const l3 = after('L3 (');
+    const l2m = /^\*\*Before you read on:\*\* (.+)$/.exec(l2);
+    if (!l2m) fail('A6a: L2 does not open with "**Before you read on:**"');
+    const teachLines = { l1Html: teaching.practiceLine(l1), l2Html: teaching.beforeBox('Before you read on: ' + l2m[1]), l3Html: teaching.correctionLine(l3), l1, l2: 'Before you read on: ' + l2m[1], l3 };
+    // The cover note (Article 11 record note) with the table; L2 goes directly above the table.
+    const cover = require('./aoidDisclosures.js').sexualHoliness.coverHtml;
+    const t = cover.indexOf('<div class="disc-table-wrap">');
+    if (t < 0 || cover.split('<div class="disc-table-wrap">').length !== 2) fail('A6a: the cover note must hold exactly one table');
+    return { title, subtitle, sentenceHtml: md().renderInline(sentence.replace('(method account anchor)', '(' + METHOD_URL + ')')), alt, lines: teachLines, coverAbove: cover.slice(0, t), coverFrom: cover.slice(t) };
   })();
 
   // ---------------------------------------------------------------- Stage 1 disclosures

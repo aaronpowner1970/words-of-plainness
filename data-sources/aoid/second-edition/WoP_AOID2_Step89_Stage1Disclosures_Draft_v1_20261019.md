@@ -13,6 +13,7 @@ Session CHAT-AOID2-48a, 19 Oct 2026. Ledger row 1A.14. Order of drafting: Articl
 - **Edits of 21 Oct 2026 (CODE-AOID2-50).** Rulings AOID2-A11-BAPTISM-HELD-IN-COMMON (option 1), AOID2-A11-WATER-FAMILY-LISTS (option 1), AOID2-SCRIPTURE-AS-DOCUMENT (option 1) and AOID2-A11-TWO-HELD-PARAS (option 1) applied with the ruled wording. "Born of water and of the Spirit.": first sentence replaced; both lists refilled under the one-adopted-document standard for all sixteen families; the paragraph stays review-only for Aaron's last approval. "Love proven by obedience.": the John 14:15 sentence replaced; the paragraph stays held (see REVIEW_ONLY in aoidStep89.js). "Repent and be baptized.": the Baptist clause replaced; checked against the record and shown.
 - **Edits of 21 Oct 2026 (CODE-AOID2-51).** Rulings AOID2-A11-SIGN-VS-JOIN (option 1) and AOID2-A11-GAL56-ATTRIBUTION (option 1) and Aaron's approval of "Born of water and of the Spirit." (section 7 of WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md) applied verbatim. Both paragraphs checked against the record and shown; the review-only wrap is removed for both (REVIEW_ONLY in aoidStep89.js is now empty).
 - **Edit of 25 Oct 2026 (CODE-AOID2-55).** AOID2-A11-WATER-OO (option 1; condition met by a re-reading of the Coptic prayer over the baptismal water in the Nadian edition and in Denzinger p. 204): in "Born of water and of the Spirit." the two sentences beginning "Every tradition but three" are replaced by the wording of the "AMENDMENT 25 Oct 2026" section of WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md. Nothing else in the paragraph changes.
+- **Edit of 25 Oct 2026 (CODE-AOID2-56).** The AMENDMENT 25 Oct 2026 in the wop-scratch draft (approved by Aaron 17:15 ET, "Approve the sentence"): in Article 11's "Still being confirmed." paragraph the sentence "Two Oriental Orthodox readings ..." becomes "One Oriental Orthodox reading waits for a second edition, or the original language, of the rite it rests on, and is named beside that count." Applied here by sentence replacement, not by copying the scratch file over this one, because this copy carries the CODE-AOID2-49, 50, 51 and 55 edits that the scratch draft does not.
 
 ---
 
@@ -72,7 +73,7 @@ Besides sexual holiness, which has its own disclosure above, eight teachings of 
 
 **Wesley's Notes.** Several Methodist readings rest on John Wesley's *Explanatory Notes upon the New Testament*. The Global Methodist Church names them as a doctrinal standard, and The United Methodist Church includes them among its standards by long understanding and the rulings of its Judicial Council. Each such reading says so in the record.
 
-**Still being confirmed.** Two Oriental Orthodox readings wait for a second edition, or the original language, of the rite they rest on, and are named beside those counts.
+**Still being confirmed.** One Oriental Orthodox reading waits for a second edition, or the original language, of the rite it rests on, and is named beside that count.
 
 ### Build notes for Article 11 (not build text)
 

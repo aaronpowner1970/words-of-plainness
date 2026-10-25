@@ -466,9 +466,8 @@ def test_baptism_table_is_built_from_the_data_file(site_on, site_off):
                                  "Family Document Christ ordained baptism with water Joined to the new birth")
     assert re.findall(r"<th scope=\"col\">(.*?)</th>", t) == ["Family", "Document", "Christ ordained baptism with water", "Joined to the new birth"]
     rows = [[text_of(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", r)] for r in re.findall(r"<tr><th scope=\"row\">.*?</tr>", t)]
-    # R1 (approved 25 Oct 2026) is appended to the one cell that cites the Book of Common Prayer (1662); every other cell is the data file's.
-    r1 = next(l for l in R_WORDING.read_text(encoding="utf8").replace("\r\n", "\n").split("\n") if l.startswith("Book of Common Prayer (1662):"))
-    want = [[r["family"], r["document"] + (". " + r1 if r["family"] == "Anglican" else ""), r["ordained"], r["joined"]] for r in data["rows"]]
+    # CODE-AOID2-56: R1 no longer sits in the Anglican Document cell; every cell is the data file's, as before CODE-AOID2-55.
+    want = [[r["family"], r["document"], r["ordained"], r["joined"]] for r in data["rows"]]
     assert rows == want and len(rows) == 16
     oo = next(r for r in data["rows"] if r["family"] == "Oriental Orthodox")
     assert oo["ordained"] == "Yes" and oo["joined"] == "Joined"
@@ -613,8 +612,77 @@ def test_a11_f2_reads_sixteen_and_its_row_agrees(site_on):
     assert cells[1:4] == ["16", "0", "0"] and cells[-1] == "0"
 
 
-def test_r1_verbatim_on_the_anglican_row_only(site_on, site_off):
-    r1 = next(l for l in R_WORDING.read_text(encoding="utf8").replace("\r\n", "\n").split("\n") if l.startswith("Book of Common Prayer (1662):"))
-    on = (site_on / "articles" / "index.html").read_text(encoding="utf8")
-    assert text_of(on).count(html.unescape(r1)) == 1
-    assert "Annexed Book" not in (site_off / "articles" / "index.html").read_text(encoding="utf8")
+def _approved(rid):
+    w = R_WORDING.read_text(encoding="utf8").replace("\r\n", "\n").split("\n")
+    i = next(k for k, l in enumerate(w) if l.startswith("## " + rid + ". "))
+    return next(l for l in w[i + 1:] if l.strip())
+
+
+def test_r1_r2_render_as_notes_under_the_baptism_table_only(site_on, site_off):
+    """CODE-AOID2-56 (AOID2-RECORD-NOTES-PLACE option 1): R1 and R2 are in a Notes list under the A11-F7 table, led by Anglican;
+    R1 is no longer in the Anglican Document cell; nothing of it reaches the switch-OFF build."""
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    rec = panel(arts, "a11", "record")
+    sec = rec[rec.index('<section class="an-baptism-table"'):]
+    sec = sec[:sec.index("</section>")]
+    table_end = sec.index("</table>")
+    assert sec.index('<div class="an-notes"') > table_end
+    notes = sec[sec.index('<div class="an-notes"'):]
+    assert re.findall(r"<h5[^>]*>(.*?)</h5>", notes) == ["Notes"]
+    items = re.findall(r"<li[^>]*>(.*?)</li>", notes, re.S)
+    assert [text_of(i) for i in items] == ["Anglican " + html.unescape(_approved("R1")), "Anglican " + html.unescape(_approved("R2"))]
+    assert all(i.startswith('<strong class="an-notes-family">Anglican</strong> ') for i in items)
+    # the Anglican Document cell reads as before CODE-AOID2-55
+    row = re.search(r'<tr><th scope="row">Anglican</th>(.*?)</tr>', sec, re.S).group(1)
+    assert [text_of(c) for c in re.findall(r"<td>(.*?)</td>", row)] == ["Book of Common Prayer (1662), Public Baptism of Infants", "Yes", "Joined"]
+    assert "Annexed Book" not in text_of(sec[:table_end])
+    # each approved note appears exactly once on the page; no Notes list exists anywhere else
+    assert text_of(arts).count(html.unescape(_approved("R1"))) == 1 and text_of(arts).count(html.unescape(_approved("R2"))) == 1
+    assert arts.count('class="an-notes"') == 1
+    off = (site_off / "articles" / "index.html").read_text(encoding="utf8")
+    assert "Annexed Book" not in off and "an-notes" not in off and "Bill and Barker" not in off
+
+
+def test_held_notes_are_not_invented(site_on):
+    """R3, R4, R5 and R2 for A6-F6 have no per-family table on the page; they are held in the data, not rendered."""
+    d = json.loads((SE / "record_notes.json").read_text(encoding="utf8"))
+    assert [(n["id"], n["teaching"]) for n in d["notes"]] == [("R1", "A11-F7"), ("R2", "A11-F7")]
+    assert [(n["id"], n["teaching"]) for n in d["held"]] == [("R2", "A6-F6"), ("R3", "A2-F4"), ("R4", "G8"), ("R5", "A11-F2")]
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    for rid in ("R3", "R4", "R5"):
+        assert _approved(rid) not in arts and html.escape(_approved(rid)) not in arts
+    assert "Syriac Orthodox order of baptism" not in arts
+
+
+def test_oriental_orthodox_still_being_confirmed_sentence(site_on):
+    """The 25 Oct 2026 amendment: one reading, not two. The old sentence is nowhere on the switch-ON build."""
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    new = "One Oriental Orthodox reading waits for a second edition, or the original language, of the rite it rests on, and is named beside that count."
+    assert text_of(arts).count(new) == 1
+    assert "Two Oriental Orthodox readings" not in arts and "rite they rest on" not in arts
+    assert "<strong>Still being confirmed.</strong> " + new in arts
+    src = STAGE1.read_text(encoding="utf8").replace("\r\n", "\n")
+    assert "**Still being confirmed.** " + new in src and "**Still being confirmed.** Two Oriental" not in src
+
+
+def test_living_tree_teaching_lines(site_on, site_off):
+    """L1-L3 (approved 25 Oct 2026), from the A6a section, by the same components as T1-T3, in the approved places."""
+    h = (site_on / "living-tree" / "index.html").read_text(encoding="utf8")
+    src = METHOD.read_text(encoding="utf8").replace("\r\n", "\n").split("\n")
+    q = lambda tag: next(l for l in src[next(k for k, l in enumerate(src) if l.startswith(tag)) + 1:] if l.strip())[2:]
+    l1, l2, l3 = q("L1 ("), q("L2 ("), q("L3 (")
+    lead = "**Before you read on:** "
+    assert l2.startswith(lead)
+    p1 = '<p class="an-practice">' + html.escape(l1) + "</p>"
+    p2 = '<div class="an-before" role="note"><p><strong>Before you read on:</strong> ' + html.escape(l2[len(lead):]) + "</p></div>"
+    p3 = '<p class="an-correction-line"><a href="/aoid/corrections/">' + html.escape(l3) + "</a></p>"
+    for p in (p1, p2, p3):
+        assert h.count(p) == 1
+    # L1 directly under the subtitle (before the picture); L2 directly above the table; L3 after the full-size link, the last line
+    assert h.index("Many Branches, Rooted in Jesus of Nazareth") < h.index(p1) < h.index("<figure")
+    assert h.index("What the sixteen cover.") < h.index(p2) < h.index('<div class="disc-table-wrap">')
+    assert re.search(re.escape(p2) + r'\s*<div class="disc-table-wrap">', h)
+    assert h.index("View the map at full size") < h.index(p3)
+    assert "<input" not in p2 and "<textarea" not in p2
+    assert "/css/articles-tabs.css" in h
+    assert not (site_off / "living-tree").exists()

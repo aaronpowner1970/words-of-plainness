@@ -20,7 +20,6 @@ const { on } = require('./aoidSecondEdition.js');
 
 const DATA = 'data-sources/aoid/second-edition/a11_baptism_families.json';
 const APPROVED = 'data-sources/aoid/second-edition/WoP_AOID2_Step89_Article11_Baptism_Approved_20261020.md';
-const RECORD_WORDING = 'data-sources/aoid/second-edition/WoP_AOID2_Step89_53Review_ApprovedWording_20261025.md';
 
 if (!on) module.exports = { on: false };
 else {
@@ -51,15 +50,10 @@ else {
   const listB = grab(/Of them, the (.+?) join it to the new birth/, 'list (b)');
   const others = grab(/Others, the (.+?), confess the new birth as the Spirit's work and baptism as its sign/, 'the sign families');
 
-  // R1 (approved 25 Oct 2026, AOID2-1662-PRINTED-EDITION): the 1662 sources line goes where an Anglican cell cites the Book of
-  // Common Prayer 1662. On this page that is the Anglican row below. The line is read from the approved file, never retyped.
-  const wording = read(RECORD_WORDING).split('\n');
-  const r1At = wording.findIndex((l) => l.startsWith('## R1. '));
-  if (r1At < 0) fail('R1 not found in the approved Record wording');
-  const r1 = wording.slice(r1At + 1).filter((l) => l.trim() !== '')[0];
-  if (!r1 || !r1.startsWith('Book of Common Prayer (1662):')) fail('R1: the 1662 sources line was not found under its heading');
-  const rows = data.rows.map((r) => (/^Book of Common Prayer \(1662\)/.test(r.document) ? Object.assign({}, r, { document: r.document + '. ' + r1 }) : r));
-  if (rows.filter((r) => r.document.includes(r1)).length !== 1) fail('R1: expected exactly one row citing the Book of Common Prayer (1662)');
+  // R1 and R2 (approved 25 Oct 2026) are not in the cells: they stand in the Notes list under this table, led by "Anglican"
+  // (src/_data/aoidRecordNotes.js, data-sources/aoid/second-edition/record_notes.json). The Anglican Document cell is the data file's.
+  const rows = data.rows;
+  const notes = require('./aoidRecordNotes.js');
   if (rows.length !== 16) fail('expected sixteen rows, found ' + rows.length);
   const sorted = (a) => a.slice().sort().join('|');
   const set = (f) => sorted(rows.filter(f).map((r) => short(r.family)));
@@ -75,7 +69,7 @@ else {
   const html = '<section class="an-baptism-table" id="a11-baptism-families"><h4>' + esc(data.heading) + '</h4><p>' + esc(data.line) + '</p>'
     + '<div class="disc-table-wrap an-summary"><table><thead><tr>' + data.columns.map((c) => '<th scope="col">' + esc(c) + '</th>').join('') + '</tr></thead><tbody>'
     + rows.map((r) => '<tr><th scope="row">' + esc(r.family) + '</th><td>' + esc(r.document) + '</td><td>' + esc(r.ordained) + '</td><td>' + esc(r.joined) + '</td></tr>').join('')
-    + '</tbody></table></div></section>';
+    + '</tbody></table></div>' + notes.notesHtml('A11', 'A11-F7') + '</section>';
 
   module.exports = { on: true, source: DATA, rows, html, byArticle: { A11: html } };
 }

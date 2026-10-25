@@ -57,14 +57,23 @@ else {
   const note = one(/^Note \(italic, under the box\): "(.+)"$/, 'T4 note');
   if (!beforeFull.startsWith(beforeLead + ' ')) fail('T2 prompt does not open with "' + beforeLead + '"');
 
+  const practiceLine = (t) => '<p class="an-practice">' + esc(t) + '</p>';
+  const beforeBox = (full) => {
+    if (!full.startsWith(beforeLead + ' ')) fail('a "Before you read on:" prompt must open with "' + beforeLead + '"');
+    return '<div class="an-before" role="note"><p><strong>' + esc(beforeLead) + '</strong>' + esc(full.slice(beforeLead.length)) + '</p></div>';
+  };
+  const correctionLine = (t) => '<p class="an-correction-line"><a href="' + CORRECTIONS_URL + '">' + esc(t) + '</a></p>';
+
   module.exports = {
     on: true,
     source: FILE,
     correctionsUrl: CORRECTIONS_URL,
     text: { practice, before: beforeFull, correction, asRead, label, note },
-    practiceHtml: Object.fromEntries(Object.keys(practice).map((k) => [k, '<p class="an-practice">' + esc(practice[k]) + '</p>'])),
-    beforeHtml: '<div class="an-before" role="note"><p><strong>' + esc(beforeLead) + '</strong>' + esc(beforeFull.slice(beforeLead.length)) + '</p></div>',
-    correctionHtml: '<p class="an-correction-line"><a href="' + CORRECTIONS_URL + '">' + esc(correction) + '</a></p>',
+    practiceHtml: Object.fromEntries(Object.keys(practice).map((k) => [k, practiceLine(practice[k])])),
+    beforeHtml: beforeBox(beforeFull),
+    correctionHtml: correctionLine(correction),
+    // The same three components for other pages (CODE-AOID2-56: /living-tree/ L1, L2, L3), so they cannot drift from T1-T3.
+    practiceLine, beforeBox, correctionLine,
     asReadHtml: '<p class="an-as-read">' + esc(asRead) + '</p>',
     // T4: the box for one Article. `id` is the Article's tab id ("a11"). Stored by the tabs script, in this browser only.
     questionHtml: (id) => '<div class="an-learner" data-an-learner="' + id + '">'

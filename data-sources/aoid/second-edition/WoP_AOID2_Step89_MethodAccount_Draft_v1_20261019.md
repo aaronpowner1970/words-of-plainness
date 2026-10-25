@@ -156,3 +156,15 @@ Scorer: Claude (Chat), CHAT-AOID2-48a. Date: 19 Oct 2026, 19:10 ET. Scored: the 
 **A6a CORRECTION AND HOLD (Chat's error, owned; CHAT-AOID2-55a, 25 Oct 2026, ~16:15 ET).** The decision AOID2-LIVING-TREE-LINK said the Tree had no presence on the site. That was wrong. My search space (words-of-plainness\src, *.njk *.md *.html *.js *.json for "Living Tree"/"living-tree", filenames containing "tree") missed two things: (1) the Tree is already on the site as slide 2 of the Articles presentation carousel, deep-zoomable from a 7680x4320 Deep Zoom pyramid on R2 (media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/tree.dzi; src\_includes\components\articles-presentation.njk, ZOOMABLE); (2) steps 134-136 (added 20 Oct 2026) already plan a full /living-tree/ page: verified branch resources (134), 25 branch descriptions approved by Aaron (135), and a build with the existing Deep Zoom tree, clickable overlays, an accessible list of the 25 branches, then METHOD_LINKS.livingTree set to /living-tree/ (136). The ruling (option 1, publish and link) stands in direction. A6a is HELD, not built, until Aaron rules how it relates to steps 134-136 (decision AOID2-LIVING-TREE-A6A-SCOPE).
 
 **A6a RELEASED (AOID2-LIVING-TREE-A6A-SCOPE option 1, ruled 25 Oct 2026, 16:15 ET, topic-only).** A6a is built in the step 89 run as the first form of /living-tree/, at that permalink, showing the existing Deep Zoom tree from R2 (media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/, same values as articles-presentation.njk ZOOMABLE[2]) in place of a new image derivative; the "View the map at full size" line becomes the zoom control or a link to the same pyramid, as the build judges and reports. The wop-scratch PNGs are not uploaded. METHOD_LINKS.livingTree is set to /living-tree/. Steps 134-136 later add the branch sections and overlays to this same page; re-score it then.
+
+
+**A6a TEACHING LINES L1-L3 (APPROVED by Aaron 25 Oct 2026, 17:32 ET, "Approve L1-L3"; CHAT-AOID2-55a). BUILD TEXT for /living-tree/, Second Edition only.** Reason: Teaching Practices score of the built page, 11 of 20 (criteria 7, 9, 10 at 0); pattern of T1-T3.
+
+L1 (practice named; small type directly under the subtitle):
+> Here you see which branches of the Tree these Articles measure, and why the others stay outside the count.
+
+L2 (explanation invited first; boxed, directly above the measured / not-measured table; "Before you read on:" in bold; unscored, no input):
+> **Before you read on:** Which of these branches do you think have adopted texts a count could read? Hold your answer, then see the table.
+
+L3 (correction channel; one line at the foot of the page, linked to /aoid/corrections/):
+> If you believe we have placed your church on the wrong branch, or left out a text it has adopted, tell us. We will look again.
