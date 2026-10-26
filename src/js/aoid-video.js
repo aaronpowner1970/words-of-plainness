@@ -34,6 +34,7 @@
     if (!CFG || !CFG.timing || !CFG.timing.sentences) { return; }
 
     var T = CFG.timing;
+    var NOFOLLOW = false;   // true when page and timing disagree: play, but do not follow
     var SENTS = T.sentences || [];
     var WTIME = T.words || [];
     var SPAN_TIME = T.spans || {};
@@ -77,11 +78,15 @@
     var TOK = buildTokens();
     if (TOK.length !== T.tokens) {
         // The page and the timing data disagree about the article's words.
-        // Say so loudly rather than following the film against stale timing.
-        console.error('[aoid-video] token mismatch for ' + CFG.code +
+        // Following the film against stale timing would highlight the wrong
+        // lines, so the film still plays but nothing follows it: no sentence
+        // highlight, no auto-scroll, no citation stream, no tap-to-hold. The
+        // visitor sees no error; the console names the article and both counts.
+        console.warn('[aoid-video] token mismatch for ' + CFG.code +
             ': page has ' + TOK.length + ', timing was built for ' + T.tokens +
-            '. Re-run tools/aoid_build_timing.py.');
-        return;
+            '. Playing without follow. Re-run tools/aoid_build_timing.py.');
+        NOFOLLOW = true;
+        SENTS = []; WTIME = []; SPAN_TIME = {}; TOK = [];
     }
 
     // Resolve every word's owning [data-span] up front — before any fallback
@@ -108,7 +113,9 @@
     var HL_OK = (typeof window.Highlight === 'function' && window.CSS && window.CSS.highlights);
     var hlLit = null, hlHeld = null, WRAPS = null;
 
-    if (HL_OK) {
+    if (NOFOLLOW) {
+        // Nothing to paint: no highlight registration, no sentence wrapping.
+    } else if (HL_OK) {
         hlLit = new window.Highlight();
         hlHeld = new window.Highlight();
         window.CSS.highlights.set('aoid-lit', hlLit);
@@ -199,6 +206,7 @@
         var m = /[?&]t=([0-9.]+)/.exec(window.location.search);
         if (m) { deepTime = Math.max(0, parseFloat(m[1]) || 0); }
     })();
+    if (NOFOLLOW) { deepSpan = null; deepTime = null; }
 
     /* ── Player hook (additive) ───────────────────────────────────
        The chat pages at /chat/video-NN/ need the player and its state, and
@@ -258,7 +266,7 @@
         catch (_) { return 0; }
     }
 
-    function startPoll() { if (!pollTimer) { pollTimer = window.setInterval(tick, 120); tick(); } }
+    function startPoll() { if (!NOFOLLOW && !pollTimer) { pollTimer = window.setInterval(tick, 120); tick(); } }
 
     /* Centre the spoken line in the reading band BELOW the sticky player, not
        in the whole viewport: on desktop the pinned film covers the top of the
@@ -358,7 +366,7 @@
     /* ── Resume-follow handoff on manual scroll ──────────────────── */
     var resume = byId('resume');
     window.addEventListener('scroll', function () {
-        if (programmatic) { return; }
+        if (NOFOLLOW || programmatic) { return; }
         if (follow) { follow = false; if (resume) { resume.classList.add('ct-show'); } }
     }, { passive: true });
     if (resume) {
@@ -723,7 +731,7 @@
         return -1;
     }
 
-    article.addEventListener('click', function (e) {
+    if (!NOFOLLOW) article.addEventListener('click', function (e) {
         if (e.target.closest('a') || e.target.closest('textarea') || e.target.closest('button')) { return; }
 
         var sentIdx = -1, spanId = null;
@@ -754,7 +762,7 @@
     });
 
     // Keyboard parity: the underlined claims stay reachable by Tab/Enter.
-    [].forEach.call(article.querySelectorAll('[data-span]'), function (sp) {
+    if (!NOFOLLOW) [].forEach.call(article.querySelectorAll('[data-span]'), function (sp) {
         if (!sp.hasAttribute('tabindex')) {
             sp.setAttribute('tabindex', '0');
             sp.setAttribute('role', 'button');
@@ -812,8 +820,7 @@
 
     function enterPage() {
         if (entry) { entry.classList.add('creation-hide'); }
-        openStream();
-        showHint();
+        if (!NOFOLLOW) { openStream(); showHint(); }
         if (deepTime != null) {
             var i = 0;
             if (deepSpan) {
