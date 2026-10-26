@@ -378,6 +378,23 @@ def test_article_6_edits(site_on):
     assert d.index("(Resolution 8728) to its Commission") < d.index("Their silence there is that conviction")
 
 
+def test_article_6_nine_or_ten_replaced_and_article_4_locator(site_on, site_off):
+    """CODE-AOID2-59: AOID2-A6-NINE-OR-TEN option 1 (Article 6) and the Article 4 Westminster/1689 locator, 25 Oct 2026."""
+    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
+    a6 = text_of(panel(arts, "a06", "disclosure"))
+    a4 = text_of(panel(arts, "a04", "disclosure"))
+    assert ("The rest, being conformed to Christ and glorified with Him, is confessed in their own words by a number of the "
+            "sixteen traditions, though not all; it was not counted on its own.") in a6
+    assert "nine or ten" not in a6
+    assert ("The Westminster Confession and the Baptist Confession of 1689 hold that God's former ways of revealing His will have now "
+            "ceased, which closes new revelation of that kind (Westminster Confession 1.1; Second London Baptist Confession 1.1).") in a4
+    for page in site_on.rglob("*.html"):
+        assert "nine or ten" not in page.read_text(encoding="utf8"), page
+    off = (site_off / "articles" / "index.html").read_text(encoding="utf8")
+    assert "though not all; it was not counted on its own" not in off
+    assert "Second London Baptist Confession 1.1" not in off
+
+
 def test_article_11_baptism_text_second_edition_only(site_on, site_off):
     on = (site_on / "articles" / "index.html").read_text(encoding="utf8")
     off = (site_off / "articles" / "index.html").read_text(encoding="utf8")
