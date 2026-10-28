@@ -12,10 +12,11 @@
   The apparatus, the timing and the practice framing are layered on top of it;
   nothing about the article text is restated here.
 
-  STOPGAP (AOID2-CHAT-A11-A13-STOPGAP): Articles 11 and 13 include
-  aoid-asfilmed/a11.njk and a13.njk instead — the text as it was filmed, so the
-  films still match their timing. Remove at Gate 2 (AOID2 step 43), when the
-  films are re-recorded: put the include back to "aoid/" for every article.
+  STOPGAP (AOID2-CHAT-A11-A13-STOPGAP; extended by AOID2-STEP102-FILMS):
+  Articles 1 (the Prologue), 5, 11 and 13 include aoid-asfilmed/a01.njk, a05.njk,
+  a11.njk and a13.njk instead — the text as it was filmed, so the films still
+  match their timing. Remove at Gate 2 (AOID2 step 43), when the films are
+  re-recorded: put the include back to "aoid/" for every article.
 
   Article 3 has no reading video: /articles/video-03/ redirects to /creation/
   in vercel.json, so it is absent from aoid_videos.json and never paginated.
@@ -122,7 +123,7 @@
              data-pagefind-meta="title:{{ title }}"{% endif %}>
             <p class="ct-lead aoid-lead">The article below is read in the film. Every underlined claim opens its
                 biblical and Restoration witnesses beside it &mdash; tap any line to hold it and study.</p>
-            {% include ("aoid-asfilmed/" if (video.code == "A11" or video.code == "A13") else "aoid/") + video.code | lower + ".njk" %}
+            {% include ("aoid-asfilmed/" if (video.code == "A01" or video.code == "A05" or video.code == "A11" or video.code == "A13") else "aoid/") + video.code | lower + ".njk" %}
             <p class="ct-closing">This film is a form of worship &middot; No endorsements or polemics implied</p>
         </div>
 

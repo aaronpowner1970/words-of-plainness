@@ -29,7 +29,8 @@ const A13_SECOND_EDITION = ['s12'];
 /* Article 4 (CODE-AOID2-35, step 79): span s19 is new (the apostolic witness, G1), so it is dropped with the switch OFF. */
 const A04_SECOND_EDITION = ['s19'];
 
-/* Article 5 (CODE-AOID2-36, step 79): spans s17 (G13) and s18 (G2) are new, so they are dropped with the switch OFF. */
+/* Article 5 (CODE-AOID2-36, step 79): spans s17 (G13) and s18 (G2) are new, so they are dropped with the switch OFF.
+   Spans s9 and s14 carry revised `text` (CODE-AOID2-64, step 102), marked as for Article 9 (`text_first_edition`). */
 const A05_SECOND_EDITION = ['s17', 's18'];
 
 /* Article 8 (CODE-AOID2-40, step 82): spans s18-s21 are new, and s1, s9 and s11 carry revised text, marked as for
@@ -73,7 +74,7 @@ const secondEditionSpan = (s) => {
 const mapSpans = (spans, f) => Object.fromEntries(Object.entries(spans).map(([id, s]) => [id, f(s)]));
 
 module.exports = on
-  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A08', 'A09', 'A11', 'A12'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
+  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A05', 'A08', 'A09', 'A11', 'A12'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
   : Object.fromEntries(
       Object.entries(all)
         .filter(([key]) => key !== 'A14')
@@ -83,7 +84,7 @@ module.exports = on
           if (key === 'A12') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A12_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A09') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A09_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A04') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A04_SECOND_EDITION.includes(id)))];
-          if (key === 'A05') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A05_SECOND_EDITION.includes(id)))];
+          if (key === 'A05') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A05_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A13') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A13_SECOND_EDITION.includes(id)))];
           return [key, spans];
         })
