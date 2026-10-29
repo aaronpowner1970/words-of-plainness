@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: October 21, 2026
+# Last updated: October 29, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -224,12 +224,21 @@ workstreams:
       journal bridge writes commitments under chapterId seeking-jesus. Hazard
       vocabulary codes hidden on M0 (names only); GOD-01–04 prose canonical in the
       workbook Godhead Context sheet.
+      ARTWORK (live 2026-10-29, main e6153b8): thirteen author-approved paintings
+      (SJ-01–03, SJ-05–12, SJ-14, SJ-15) placed via the sjArt()/sjArtGroup() macros
+      (_includes/macros/sjn-art.njk) from the register _data/sjnArtwork.json. Only
+      APPROVED_DEPLOY items render; SJ-05–08 are one indivisible 3:2 group under the
+      categories table. scripts/sjn-verify-artwork.js (prebuild + _data/sjnArtworkCheck.js)
+      fails the build on missing or mis-sized approved files, unregistered or handoff
+      images under src/assets, or a partly approved indivisible group. Assets in
+      src/assets/images/seeking-jesus/ (WebP + JPEG, never upscaled). Placement plan:
+      project doc claude/WoP_SJN_Artwork_PlacementPlan_20261029.md.
     open_items: >
       (1) Workbook APP CONFIG app_master_version still reads "v2.18 CODE RECONCILED"
       inside the v2.19 file, so the site colophon shows v2.18; Cowork to bump it on
       the next workbook pass. (2) Inline client payload is ~200 KB per page; trim per
       module in a later pass. (3) H43 stays PENDING; M7 branch map disabled; Gate 4
-      beta feedback form and M8 human-story pathway remain backlog.
+      beta feedback form and M8 human-story pathway remain backlog. (4) Artwork SJ-04, SJ-13 and SJ-16 are out of scope until a suitable section exists (Aaron, 2026-10-29); a new piece needs only its files, an APPROVED_DEPLOY register entry and an sjArt() call.
     gate6_state: >
       Gate 6 (Evidence Recovery Agent Team, scripts/sjn_recovery/) calibrated three
       times against the 141 released cells; cal-3 (2026-09-11) ran on workbook v2.25
