@@ -208,6 +208,16 @@
   .sj-art img{border-radius:0; border-left:0; border-right:0}
   .sj-art figcaption{padding:0 1.25rem}
 }
+/* Indivisible four-panel collection (sjArtGroup): 2 × 2 from 600px, one column below; never cropped. */
+.sj-artgrid{display:grid; gap:1rem; grid-template-columns:1fr; margin:1.4rem 0 1.5rem}
+@media (min-width:600px){ .sj-artgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.sj-artgrid .sj-art{margin:0}
+.sj-artgrid .sj-art figcaption{text-align:left; display:flex; flex-wrap:wrap; align-items:center; gap:.4rem; letter-spacing:.04em}
+@media (max-width:640px){
+  .sj-artgrid .sj-art{margin:0}
+  .sj-artgrid .sj-art img{border-radius:12px; border:1px solid var(--sj-edge)}
+  .sj-artgrid .sj-art figcaption{padding:0}
+}
 
 /* ================= conversation ================= */
 .sj-lensrow{display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin:.5rem 0 1rem; font-family:var(--sj-sans)}

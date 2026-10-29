@@ -16,7 +16,15 @@
  *      candidate dropped there is caught before passthrough copy publishes it);
  *   4. any file anywhere under src/assets looks like handoff artwork outside
  *      srcDir (SJ-## candidates, storyboards, internal reference sheets);
- *   5. a template calls sjArt("…") with an id the register does not contain.
+ *   5. a template calls sjArt("…") with an id the register does not contain;
+ *   6. a group is malformed: a member is missing, a member does not point back to
+ *      its group, or an item names a group that does not list it;
+ *   7. an INDIVISIBLE group is only partly approved (Aaron, 2026-10-29: SJ-05 to
+ *      SJ-08 appear together or not at all), or a template calls sjArt() on one of
+ *      its members instead of sjArtGroup();
+ *   8. an approved item with a targetRatio (its own or its group's) has native
+ *      dimensions off that ratio by more than 1%;
+ *   9. a template calls sjArtGroup("…") with a group the register does not contain.
  *
  * Pending, not-yet-generated and rejected items are allowed in the register.
  * The macro renders nothing for them.
@@ -121,6 +129,38 @@ function verifyArtwork() {
     }
   }
 
+  // 6–8. groups: well-formed, indivisible groups all-or-nothing, ratios honored
+  const groups = reg.groups || {};
+  const ratioOf = (r) => { const m = /^(\d+(?:\.\d+)?):(\d+(?:\.\d+)?)$/.exec(r || ""); return m ? Number(m[1]) / Number(m[2]) : null; };
+  const indivisibleMembers = new Set();
+  for (const [gid, g] of Object.entries(groups)) {
+    const members = Array.isArray(g && g.members) ? g.members : [];
+    if (!members.length) { fail(`group ${gid}: no members`); continue; }
+    if (g.targetRatio !== undefined && ratioOf(g.targetRatio) === null) fail(`group ${gid}: targetRatio "${g.targetRatio}" must look like 3:2`);
+    for (const id of members) {
+      if (!items[id]) fail(`group ${gid}: member ${id} is not in items`);
+      else if (items[id].group !== gid) fail(`group ${gid}: member ${id} has group "${items[id].group}"`);
+      if (g.indivisible) indivisibleMembers.add(id);
+    }
+    if (g.indivisible) {
+      const approvedMembers = members.filter((id) => items[id] && items[id].status === "APPROVED_DEPLOY");
+      if (approvedMembers.length && approvedMembers.length !== members.length) {
+        fail(`group ${gid} is indivisible but only partly approved (${approvedMembers.join(", ")} of ${members.join(", ")}); approve all members together or none`);
+      }
+    }
+  }
+  for (const [key, a] of Object.entries(items)) {
+    if (!a) continue;
+    if (a.group && !(groups[a.group] && (groups[a.group].members || []).includes(key))) fail(`${key}: group "${a.group}" does not list it`);
+    if (a.status !== "APPROVED_DEPLOY") continue;
+    const want = a.targetRatio || (a.group && groups[a.group] && groups[a.group].targetRatio);
+    if (want) {
+      const r = ratioOf(want);
+      if (r === null) fail(`${key}: targetRatio "${want}" must look like 3:2`);
+      else if (Math.abs(a.nativeWidth / a.nativeHeight - r) / r > 0.01) fail(`${key}: native ${a.nativeWidth}x${a.nativeHeight} is not ${want}`);
+    }
+  }
+
   // 3. nothing unapproved in the artwork folder
   for (const p of walk(srcDir)) {
     const name = path.relative(srcDir, p).replace(/\\/g, "/");
@@ -137,8 +177,13 @@ function verifyArtwork() {
   const tpl = walk(path.join(ROOT, "src")).filter((p) => /\.(njk|md|html)$/.test(p) && !p.endsWith(`macros${path.sep}sjn-art.njk`));
   for (const p of tpl) {
     const src = fs.readFileSync(p, "utf8");
+    const rel = path.relative(ROOT, p).replace(/\\/g, "/");
     for (const m of src.matchAll(/sjArt\(\s*["']([^"']+)["']\s*\)/g)) {
-      if (!items[m[1]]) fail(`${path.relative(ROOT, p).replace(/\\/g, "/")}: sjArt("${m[1]}") is not in sjnArtwork.json`);
+      if (!items[m[1]]) fail(`${rel}: sjArt("${m[1]}") is not in sjnArtwork.json`);
+      else if (indivisibleMembers.has(m[1])) fail(`${rel}: sjArt("${m[1]}") renders one member of an indivisible group; use sjArtGroup("${items[m[1]].group}")`);
+    }
+    for (const m of src.matchAll(/sjArtGroup\(\s*["']([^"']+)["']\s*\)/g)) {
+      if (!groups[m[1]]) fail(`${rel}: sjArtGroup("${m[1]}") is not in sjnArtwork.json groups`);
     }
   }
   return { problems, approved };

@@ -1,34 +1,41 @@
 {#
   src/_includes/macros/sjn-art.njk
 
-  Renders one Seeking Jesus of Nazareth artwork from src/_data/sjnArtwork.json.
+  Renders Seeking Jesus of Nazareth artwork from src/_data/sjnArtwork.json.
 
-  Import WITH CONTEXT. The macro reads the `sjnArtwork` global, and Nunjucks
-  macros do not inherit the template context otherwise:
+  Import WITH CONTEXT. The macros read the `sjnArtwork` and `sjnClient` globals,
+  and Nunjucks macros do not inherit the template context otherwise:
 
-      {% from "macros/sjn-art.njk" import sjArt with context %}
+      {% from "macros/sjn-art.njk" import sjArt, sjArtGroup with context %}
       {{ sjArt("SJ-11") }}
+      {{ sjArtGroup("categories-panel") }}
 
   Approval gate: only an item whose status is APPROVED_DEPLOY renders. A pending,
   rejected, not-yet-generated or unknown id renders nothing at all. A call can sit
   in a template before approval, and it stays invisible until the status changes.
+
+  Indivisible groups (ruled by Aaron 2026-10-29 for SJ-05 to SJ-08): sjArt() never
+  renders a member of an indivisible group on its own. sjArtGroup(groupId) renders
+  the whole group only when EVERY member is APPROVED_DEPLOY, and otherwise renders
+  nothing. The build also refuses a group that is only partly approved.
+
   scripts/sjn-verify-artwork.js runs at build and refuses the build if an
-  approved item's files are missing or mis-sized, or if any unapproved image
-  sits under src/assets.
+  approved item's files are missing or mis-sized, if any unapproved image sits
+  under src/assets, or if the group rules above are broken.
 
   Markup: <picture> with a WebP srcset and a JPEG fallback srcset, width/height
   from the native size (no layout shift). priority "high" loads eagerly with
   fetchpriority=high, for above-the-fold art. Anything else lazy-loads.
-  The image is shown whole; .sj-art never crops (see css/seeking-jesus.css).
+  Images are shown whole; .sj-art and .sj-artgrid never crop
+  (see css/seeking-jesus.css).
 
   Do NOT write a nested Nunjucks comment marker inside this block. The inner
   closer ends the comment early and the build fails.
 #}
-{% macro sjArt(id) %}
-{%- set a = sjnArtwork.items[id] if sjnArtwork and sjnArtwork.items else null -%}
-{%- if a and a.status == "APPROVED_DEPLOY" -%}
+{% from "macros/sjn.njk" import chip %}
+
+{% macro _sjPicture(a) %}
 {%- set base = sjnArtwork.basePath + a.slug + "-" -%}
-<figure class="sj-art{% if a.variant %} sj-art--{{ a.variant }}{% endif %}"{% if a.anchor %} id="{{ a.anchor }}"{% endif %} data-art="{{ a.id }}">
   <picture>
     {%- for fmt in a.formats %}{% if fmt != "jpg" %}
     <source type="image/{{ fmt }}" sizes="{{ a.sizes }}" srcset="{% for w in a.widths %}{{ base }}{{ w }}.{{ fmt }} {{ w }}w{% if not loop.last %}, {% endif %}{% endfor %}">
@@ -41,9 +48,35 @@
       {% if a.priority == "high" %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"
       alt="{{ a.alt }}">
   </picture>
+{%- endmacro %}
+
+{% macro sjArt(id) %}
+{%- set a = sjnArtwork.items[id] if sjnArtwork and sjnArtwork.items else null -%}
+{%- set g = sjnArtwork.groups[a.group] if a and a.group and sjnArtwork.groups else null -%}
+{%- if a and a.status == "APPROVED_DEPLOY" and not (g and g.indivisible) -%}
+<figure class="sj-art{% if a.variant %} sj-art--{{ a.variant }}{% endif %}"{% if a.anchor %} id="{{ a.anchor }}"{% endif %} data-art="{{ a.id }}">
+{{ _sjPicture(a) }}
   {%- if a.caption %}
   <figcaption>{{ a.caption }}</figcaption>
   {%- endif %}
+</figure>
+{%- endif -%}
+{% endmacro %}
+
+{% macro sjArtGroup(groupId) %}
+{%- set g = sjnArtwork.groups[groupId] if sjnArtwork and sjnArtwork.groups else null -%}
+{#- Nunjucks loop scope cannot carry a flag out of a for loop, so capture each member's status as text instead. -#}
+{%- set memberStates -%}{%- if g and g.members -%}{%- for id in g.members -%}{{ sjnArtwork.items[id].status if sjnArtwork.items[id] else "MISSING" }}|{%- endfor -%}{%- endif -%}{%- endset -%}
+{%- set ready = g and g.members and (g.members | length) > 0 and (memberStates | replace("APPROVED_DEPLOY|", "") | trim) == "" -%}
+{%- if ready -%}
+<figure class="sj-artgrid" role="group" aria-label="{{ g.ariaLabel or g.title }}" data-art-group="{{ groupId }}">
+  {%- for id in g.members %}
+  {%- set a = sjnArtwork.items[id] %}
+  <figure class="sj-art sj-art--panel" data-art="{{ a.id }}">
+{{ _sjPicture(a) }}
+    <figcaption>{% if a.categoryCode and sjnClient %}{{ chip(a.categoryCode, sjnClient.code_labels) }} {% endif %}{{ a.caption or a.title }}</figcaption>
+  </figure>
+  {%- endfor %}
 </figure>
 {%- endif -%}
 {% endmacro %}
