@@ -8,6 +8,7 @@ sjnDraft: false
 bodyClass: "sj-page"
 ---
 {% from "macros/sjn.njk" import stat, chip, stackedBar, twoBars %}
+{% from "macros/sjn-art.njk" import sjArt, sjArtGroup with context %}
 {#
   M0 — Orientation. Learner copy transcribed from WoP_SJN_Orientation_Copy_M0_v2_20260909.md
   (AUTHOR_RATIFIED by AJP, 2026-09-09). Chicago em-dashes applied per site style law. Every number
@@ -32,6 +33,7 @@ bodyClass: "sj-page"
 
 <section class="sj-section sj-hero" id="welcome" data-pagefind-body>
   <div class="sj-wrap">
+    {{ sjArt("SJ-01") }}
     <span class="sj-eyebrow">Orientation</span>
     <h1>Seeking Jesus of Nazareth</h1>
     <p class="sj-lede"><em>Common faith, real differences, and the Restoration—a map you can inspect.</em></p>
@@ -44,6 +46,7 @@ bodyClass: "sj-page"
   <div class="sj-wrap">
     <h2>Five commitments</h2>
     <p>Before you begin, this study makes five promises, and it asks you to make them too.</p>
+    {{ sjArt("SJ-03") }}
     <ol class="sj-commitments">
       <li><b>We will not mock other Christians.</b> Every tradition on this map is described in its own words, from its own official sources.</li>
       <li><b>We will not hide real differences.</b> Where two traditions disagree, the map says so plainly and shows the texts.</li>
@@ -56,6 +59,7 @@ bodyClass: "sj-page"
 
 <section class="sj-section" id="lens" data-pagefind-body>
   <div class="sj-wrap">
+    {{ sjArt("SJ-02") }}
     <h2>Choose your starting point</h2>
     <p>Everyone sees the same map, the same sources, and the same numbers. Your starting point only changes which conversations are practiced first and which side of the table you are asked to imagine.</p>
     <div class="sj-lensgrid" role="group" aria-label="Starting point">
@@ -88,6 +92,7 @@ bodyClass: "sj-page"
         <tr><td>{{ chip("ADDITION", C.code_labels, "lg") }}</td><td>A teaching the creeds and confessions studied do not contain as a positive doctrine.</td><td><em>{{ C.four_clause.ADDITION }}</em></td></tr>
       </tbody>
     </table>
+    {{ sjArtGroup("categories-panel") }}
     <p>Those four sentences are the whole method. Every card on the map resolves to one of them, and every conversation you practice here ends with you able to say which.</p>
     {{ stackedBar(C.counts) }}
     <p class="sj-mute"><span class="sj-nl-swatch"></span> Where a source has not been located for a tradition, the map shows a hatched gap, never a colored tile. A gap is not a denial.</p>
@@ -121,6 +126,7 @@ bodyClass: "sj-page"
 
 <section class="sj-section" id="godhead" data-pagefind-body>
   <div class="sj-wrap">
+    {{ sjArt("SJ-15") }}
     <h2>The Godhead and the Trinity</h2>
     <p class="sj-note">This panel is explanatory context. It is <b>not counted</b> in the {{ C.counts.inherited }} descriptions and never changes a denominator.</p>
     <p>The {{ C.counts.inherited }} descriptions are about God’s attributes. They do not, by themselves, settle the question most people ask first: is God one being in three persons, or three persons one in purpose? That question belongs to the structure of the Godhead, and this panel addresses it directly, outside the count.</p>
@@ -196,6 +202,7 @@ bodyClass: "sj-page"
 
 <section class="sj-section" id="modules" data-pagefind-body>
   <div class="sj-wrap">
+    {{ sjArt("SJ-14") }}
     <h2>Begin</h2>
     <div class="sj-modcards">
       <a class="sj-modcard" href="/seeking-jesus/map/"><b>1 &middot; The Map</b><span>All {{ C.predicates | length }} descriptions, with sources, filters, and the sentence each one resolves to.</span></a>

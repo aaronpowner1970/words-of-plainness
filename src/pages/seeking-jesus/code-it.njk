@@ -8,6 +8,7 @@ sjnDraft: false
 bodyClass: "sj-page"
 ---
 {% from "macros/sjn.njk" import chip, witness %}
+{% from "macros/sjn-art.njk" import sjArt with context %}
 {% set C = sjnClient %}
 {# M2 — twelve curated inherited rows spanning A, Q, and D (five A, five Q, two D). #}
 {% set curated = ["RNR-H01", "RNR-H05", "RNR-H14", "RNR-H26", "RNR-H46", "RNR-H03", "RNR-H22", "RNR-H37", "RNR-H45", "RNR-H52", "RNR-H42", "RNR-H57"] %}
@@ -16,6 +17,7 @@ bodyClass: "sj-page"
     <span class="sj-eyebrow">Module 2</span>
     <h1>Code It Yourself</h1>
     <p class="sj-lede">Twelve descriptions of God. For each one you see the description at its stated semantic floor and the two texts that were compared. You decide the category first. Then the project’s code and its reasoning appear, and you can record where you would code differently.</p>
+    {{ sjArt("SJ-10") }}
     <p class="sj-note">Your codings stay in this browser. Disagreeing with the project is allowed and useful; the “I’d code this differently” notes are the kind of feedback that improves the map.</p>
     <p class="sj-progress" id="sj-codeit-progress">0 of {{ curated | length }} coded</p>
   </div>

@@ -8,6 +8,7 @@ sjnDraft: false
 bodyClass: "sj-page"
 ---
 {% from "macros/sjn.njk" import chip, witness %}
+{% from "macros/sjn-art.njk" import sjArt with context %}
 {% set C = sjnClient %}
 {#
   M1 — The Map. All 83 cards are rendered at build from sjnClient.predicates (so the page reads
@@ -20,6 +21,7 @@ bodyClass: "sj-page"
     <h1>The Map</h1>
     <p class="sj-lede">{{ C.counts.inherited }} historic descriptions of God and {{ C.counts.additions }} Restoration additions. Every card shows its category, what it means in plain words, the caution that keeps it honest, and the two sources it rests on.</p>
 
+    {{ sjArt("SJ-09") }}
     <div class="sj-filters" role="group" aria-label="Filter the map">
       <label>Corpus
         <select id="sj-f-corpus">

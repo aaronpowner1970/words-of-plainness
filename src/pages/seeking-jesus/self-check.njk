@@ -7,6 +7,7 @@ sjnModule: self-check
 sjnDraft: false
 bodyClass: "sj-page"
 ---
+{% from "macros/sjn-art.njk" import sjArt with context %}
 {% set C = sjnClient %}
 {% set questions = [
   { q: "agree", label: "I can name where my tradition and another Christian tradition genuinely agree about God." },
@@ -26,6 +27,7 @@ bodyClass: "sj-page"
     <span class="sj-eyebrow">Module 4</span>
     <h1>Self-check and goals</h1>
     <p class="sj-lede">Two short check-ins and a place for goals. Nothing here is scored or ranked; the point is to see your own confidence change, and to decide what you will do with it.</p>
+    {{ sjArt("SJ-12") }}
   </div>
 </section>
 
