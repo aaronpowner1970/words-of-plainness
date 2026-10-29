@@ -198,6 +198,17 @@
 .sj-verdict.is-match{color:var(--sj-gold-l)} .sj-verdict.is-diff{color:#F0D3A0}
 .sj-progress{font-family:var(--sj-sans); font-size:.9rem; color:var(--sj-dim)}
 
+/* ================= artwork (approved pieces only; see SJN artwork manifest) ================= */
+.sj-art{margin:1.4rem 0 1.5rem}
+.sj-art picture,.sj-art img{display:block; width:100%; height:auto}
+.sj-art img{border-radius:12px; border:1px solid var(--sj-edge); background:var(--sj-panel); box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.sj-art figcaption{font-family:var(--sj-sans); font-size:.78rem; letter-spacing:.08em; color:var(--sj-mute); margin-top:.45rem; text-align:right}
+@media (max-width:640px){
+  .sj-art{margin-left:-1.25rem; margin-right:-1.25rem}
+  .sj-art img{border-radius:0; border-left:0; border-right:0}
+  .sj-art figcaption{padding:0 1.25rem}
+}
+
 /* ================= conversation ================= */
 .sj-lensrow{display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin:.5rem 0 1rem; font-family:var(--sj-sans)}
 .sj-scn{scroll-margin-top:7rem}

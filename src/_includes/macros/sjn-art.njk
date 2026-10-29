@@ -1,0 +1,49 @@
+{#
+  src/_includes/macros/sjn-art.njk
+
+  Renders one Seeking Jesus of Nazareth artwork from src/_data/sjnArtwork.json.
+
+  Import WITH CONTEXT. The macro reads the `sjnArtwork` global, and Nunjucks
+  macros do not inherit the template context otherwise:
+
+      {% from "macros/sjn-art.njk" import sjArt with context %}
+      {{ sjArt("SJ-11") }}
+
+  Approval gate: only an item whose status is APPROVED_DEPLOY renders. A pending,
+  rejected, not-yet-generated or unknown id renders nothing at all. A call can sit
+  in a template before approval, and it stays invisible until the status changes.
+  scripts/sjn-verify-artwork.js runs at build and refuses the build if an
+  approved item's files are missing or mis-sized, or if any unapproved image
+  sits under src/assets.
+
+  Markup: <picture> with a WebP srcset and a JPEG fallback srcset, width/height
+  from the native size (no layout shift). priority "high" loads eagerly with
+  fetchpriority=high, for above-the-fold art. Anything else lazy-loads.
+  The image is shown whole; .sj-art never crops (see css/seeking-jesus.css).
+
+  Do NOT write a nested Nunjucks comment marker inside this block. The inner
+  closer ends the comment early and the build fails.
+#}
+{% macro sjArt(id) %}
+{%- set a = sjnArtwork.items[id] if sjnArtwork and sjnArtwork.items else null -%}
+{%- if a and a.status == "APPROVED_DEPLOY" -%}
+{%- set base = sjnArtwork.basePath + a.slug + "-" -%}
+<figure class="sj-art{% if a.variant %} sj-art--{{ a.variant }}{% endif %}"{% if a.anchor %} id="{{ a.anchor }}"{% endif %} data-art="{{ a.id }}">
+  <picture>
+    {%- for fmt in a.formats %}{% if fmt != "jpg" %}
+    <source type="image/{{ fmt }}" sizes="{{ a.sizes }}" srcset="{% for w in a.widths %}{{ base }}{{ w }}.{{ fmt }} {{ w }}w{% if not loop.last %}, {% endif %}{% endfor %}">
+    {%- endif %}{% endfor %}
+    <img
+      src="{{ base }}{{ a.fallbackWidth }}.jpg"
+      srcset="{% for w in a.widths %}{{ base }}{{ w }}.jpg {{ w }}w{% if not loop.last %}, {% endif %}{% endfor %}"
+      sizes="{{ a.sizes }}"
+      width="{{ a.nativeWidth }}" height="{{ a.nativeHeight }}"
+      {% if a.priority == "high" %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async"
+      alt="{{ a.alt }}">
+  </picture>
+  {%- if a.caption %}
+  <figcaption>{{ a.caption }}</figcaption>
+  {%- endif %}
+</figure>
+{%- endif -%}
+{% endmacro %}

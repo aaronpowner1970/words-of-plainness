@@ -7,13 +7,14 @@
   "private": true,
   "scripts": {
     "start": "eleventy --serve",
-    "prebuild": "node scripts/sjn-verify-data.js && node scripts/lyrics-validate-prebuild.js && node scripts/check-narration-ids.js",
+    "prebuild": "node scripts/sjn-verify-data.js && node scripts/sjn-verify-artwork.js && node scripts/lyrics-validate-prebuild.js && node scripts/check-narration-ids.js",
     "build": "eleventy",
     "postbuild": "npx pagefind --site _site",
     "debug": "DEBUG=Eleventy* eleventy",
     "clean": "rm -rf _site",
     "sjn:pipeline": "python scripts/sjn-build-data.py",
     "sjn:verify": "node scripts/sjn-verify-data.js",
+    "sjn:artwork": "node scripts/sjn-verify-artwork.js",
     "aoid:floors": "node scripts/aoid-verify-floors.js",
     "aoid:counts": "node scripts/aoid-build-floor-counts.js --check"
   },

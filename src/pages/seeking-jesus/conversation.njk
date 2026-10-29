@@ -8,6 +8,7 @@ sjnDraft: false
 bodyClass: "sj-page"
 ---
 {% from "macros/sjn.njk" import chip %}
+{% from "macros/sjn-art.njk" import sjArt with context %}
 {% set C = sjnClient %}
 {% set S = sjnScenarios %}
 {#
@@ -20,6 +21,7 @@ bodyClass: "sj-page"
     <span class="sj-eyebrow">Module 3</span>
     <h1>Conversation Builder</h1>
     <p class="sj-lede">Ten things people actually say, five from each side of the table. Each card names what is really being asked, points to the descriptions on the map that answer it, and resolves to the four sentences.</p>
+    {{ sjArt("SJ-11") }}
     <div class="sj-lensrow" role="group" aria-label="Which side of the table">
       <span class="sj-mute">Practice as:</span>
       <button type="button" class="sj-codebtn sj-convo-lens" data-lens="latter_day_saint">Latter-day Saint learner</button>
