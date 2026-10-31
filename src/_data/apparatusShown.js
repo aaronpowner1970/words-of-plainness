@@ -49,7 +49,9 @@ const A12_SECOND_EDITION = ['s11', 's12'];
 /* AOID2 step 104 (CODE-AOID2-65): the commentary corrections reach anchors and cross-references too. An anchor may carry
    `ref_first_edition`, `text_first_edition` and `comment_first_edition`, and a cross-reference `title_first_edition`: the
    First Edition value, held beside the corrected one on the `panel_comment_first_edition` pattern. With the switch OFF the
-   First Edition value replaces the field (key order kept); with it ON the marker is stripped. No marker is ever embedded. */
+   First Edition value replaces the field (key order kept); with it ON the marker is stripped. No marker is ever embedded.
+   AOID2 step 172 (CODE-AOID2-68): a cross-reference may also carry `second_edition: true`, the mirror of an anchor's: it is
+   dropped with the switch OFF and its marker stripped with the switch ON (A09 s8, links to s13 and s30). */
 const ANCHOR_FIELDS = ['ref', 'text', 'comment'];
 const isAnchorMarker = (k) => k === 'second_edition' || k === 'first_edition_only' || ANCHOR_FIELDS.some((f) => k === f + '_first_edition');
 const firstEditionAnchor = (a) => {
@@ -63,7 +65,7 @@ const firstEditionAnchor = (a) => {
 const firstEditionCrossref = (c) => {
   const out = {};
   for (const [k, v] of Object.entries(c)) {
-    if (k === 'title_first_edition') continue;
+    if (k === 'title_first_edition' || k === 'second_edition') continue;
     out[k] = k === 'title' && c.title_first_edition !== undefined ? c.title_first_edition : v;
   }
   return out;
@@ -75,7 +77,7 @@ const firstEditionSpan = (s) => {
     if (k === 'text' && s.text_first_edition !== undefined) out.text = s.text_first_edition;
     else if (k === 'panel_comment' && s.panel_comment_first_edition !== undefined) out.panel_comment = s.panel_comment_first_edition;
     else if (k === 'biblical' || k === 'restoration') out[k] = v.filter((a) => !a.second_edition).map(firstEditionAnchor);
-    else if (k === 'crossref' && Array.isArray(v)) out[k] = v.map(firstEditionCrossref);
+    else if (k === 'crossref' && Array.isArray(v)) out[k] = v.filter((c) => !c.second_edition).map(firstEditionCrossref);
     else out[k] = v;
   }
   return out;
@@ -86,7 +88,7 @@ const secondEditionAnchor = (a) => {
   return out;
 };
 const secondEditionCrossref = (c) => {
-  const { title_first_edition, ...rest } = c;
+  const { title_first_edition, second_edition, ...rest } = c;
   return rest;
 };
 const secondEditionSpan = (s) => {

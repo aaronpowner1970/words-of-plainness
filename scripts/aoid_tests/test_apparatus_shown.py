@@ -180,7 +180,7 @@ def test_article_9_rally_point_span_and_anchors_appear_only_with_the_switch_on()
     assert s["panel_comment"] == S30_FLOOR and chr(10) not in s["panel_comment"]
     for col, refs in S30_ANCHORS.items():
         assert [a["ref"] for a in s[col]] == refs
-        assert all(a["comment"] == "" for a in s[col])
+        assert all(a["comment"] == S30_NOTES[a["ref"]] for a in s[col])  # filled by CODE-AOID2-68 (step 172)
     assert list(on)[-1] == "s30" and list(on)[-2] == "s29"
     assert not keys_anywhere(s) & set(MARKERS)
 
@@ -231,7 +231,7 @@ def test_article_9_s7_s8_floor_verses_are_anchors_with_the_switch_on_and_the_fir
         assert len(anchor(on["s7"], "biblical", ref)) == 1
     for ref in ("1 Samuel 15:22", "Luke 9:23", "James 1:22", "John 10:27"):
         assert len(anchor(on["s8"], "biblical", ref)) == 1
-    assert anchor(on["s8"], "biblical", "1 Samuel 15:22")[0]["comment"] == ""
+    assert anchor(on["s8"], "biblical", "1 Samuel 15:22")[0]["comment"].startswith("To obey is better than sacrifice")  # note added by CODE-AOID2-68 (step 172)
     assert "to obey is better than sacrifice" in anchor(on["s8"], "biblical", "1 Samuel 15:22")[0]["text"]
     assert "none other God but one" in anchor(on["s7"], "biblical", "1 Corinthians 8:1–4")[0]["text"]
     # switch off: the First Edition anchors, the 8:1-3 range and no Second Edition additions
@@ -251,3 +251,71 @@ def test_article_9_a9_f2_and_a9_f3_ledger_reads_the_recentred_floors_and_keeps_t
         assert "> " + new in doc
     assert any(l.startswith("> The Article confesses only what 1 Corinthians 8:1-3 and") for l in doc)
     assert any(l.startswith("> The Article confesses only what Luke 9:23, James 1:22") for l in doc)
+
+
+# AOID2 step 172 (CODE-AOID2-68): Article 9 s8 and s30 approved commentary, Second Edition only. Expected text is copied from
+# WoP_AOID2_Step110_A09_s8_s30_Commentary_20261031.md (APPROVED by Aaron 31 Oct 2026).
+S8_NOTES = {'biblical': {'John 14:15': 'If ye love me, keep my commandments. In one sentence Christ joins the two spans: the love that s7 ranks first, and the keeping that s8 calls following. He does not set them against each other, and He does not let the one stand without the other.', '1 Samuel 15:22': 'To obey is better than sacrifice, and to hearken than the fat of rams. Saul spared the best of the flocks to offer them to the Lord (1 Samuel 15:15, 21): an offering correct in its form, made in place of the obedience asked of him. Samuel does not abolish sacrifice; he ranks it, as s8 ranks correct tenets beneath the following they serve. Read with James 1:22: the word is to be done, not only heard.', 'Luke 9:23': 'If any man will come after me, let him deny himself, and take up his cross daily, and follow me. This is Christ\'s own measure for the "following" of s8: not assent to a set of tenets, but a daily walk behind Him, with self set aside and the cross taken up.', 'James 1:22': 'But be ye doers of the word, and not hearers only, deceiving your own selves. To hear the word rightly and hold it soundly is desirable; James warns that hearing alone deceives the hearer. The "faithfully following" of s8 is the doing he asks for.', 'John 10:27': "My sheep hear my voice, and I know them, and they follow me. The Shepherd's own picture of s7 and s8 together: His sheep hear Him, He knows them, and they follow. Following is how His sheep are recognized, and it begins with hearing His voice.", 'Philippians 3:8': "I count all things but loss for the excellency of the knowledge of Christ Jesus my Lord. Paul, a Pharisee blameless as touching the law (Philippians 3:5-6), ranked all he had gained beneath knowing Christ. His word is stronger than s8's, which keeps correct tenets as desirable; but it shows where the gentler ranking points: the knowledge most worth having is of a Person."}, 'restoration': {'2 Nephi 31:10': 'And he said unto the children of men: Follow thou me. The invitation is given to every soul, and it names Christ, not a system, as the One to be followed. Nephi\'s next words join following to keeping: "can we follow Jesus save we shall be willing to keep the commandments of the Father?" The same joining John 14:15 makes.', '2 Nephi 25:26': "And we talk of Christ, we rejoice in Christ, we preach of Christ … that our children may know to what source they may look for a remission of their sins. Nephi's people kept the law of Moses (2 Nephi 25:24-25), yet they set Christ at the center of all their speech and teaching. The tenets kept, and Christ first: the order s8 names."}}
+S8_NEW_ANCHORS = {'Matthew 7:16–20': ('biblical', "Ye shall know them by their fruits … Wherefore by their fruits ye shall know them. Spoken of false prophets (Matthew 7:15, cited at s13), the rule is applied here, as an illustrative reading, to doctrines: a doctrine's worth shows in its fruit, in whether it brings the disciple's heart into the likeness of Christ's, and whether it gathers His people into oneness or scatters them in schism. The test is applied evenly to every doctrine, beginning with our own."), 'John 16:12': ('biblical', 'I have yet many things to say unto you, but ye cannot bear them now. Christ Himself held back truths His disciples could not yet bear, weighing what a truth would do to those who heard it before He gave it. The worth of souls outranks the worth of doctrines: what a truth will do governs its timing and its use, never whether it is true.'), '1 Corinthians 3:1–2': ('biblical', 'I have fed you with milk, and not with meat: for hitherto ye were not able to bear it. Paul fed the Corinthians according to what they could bear, not according to all that he knew. With John 16:12, this is why correct tenets serve the following of Christ rather than rule it: a truth is given and used for the good of the soul who receives it.'), 'Titus 2:1, 7–8, 10': ('biblical', 'Speak thou the things which become sound doctrine … that they may adorn the doctrine of God our Saviour in all things. Paul does not hold doctrine cheap: he asks that it be sound, taught with integrity, and adorned by the life of the one who holds it. s8 keeps correct tenets as desirable for this reason, and Paul shows how they are honored: by a life that makes them beautiful. In verse 10 Paul writes to bondservants; his charge to adorn the doctrine is read here as the pattern it sets for every believer.'), 'D&C 18:10': ('restoration', 'Remember the worth of souls is great in the sight of God. This is the measure behind John 16:12 and 1 Corinthians 3:1-2: a truth is weighed by what it will do for the soul who receives it. The worth of souls outranks the worth of doctrines; it governs how a truth is given and used, never whether it is true.'), 'D&C 19:22': ('restoration', "For they cannot bear meat now, but milk they must receive. The Lord, instructing Martin Harris in what to preach, withheld some things lest the hearers perish. The same order as 1 Corinthians 3:1-2, given in the Lord's own voice.")}
+S30_NOTES = {'Philippians 1:15–18': 'What then? notwithstanding, every way, whether in pretence, or in truth, Christ is preached; and I therein do rejoice. Paul did not commend the envy of those who preached against him, but he rejoiced that Christ was preached. s30 opens with the same joy: whatever first turned a soul toward Christ, the turning is cause for rejoicing.', 'Mark 9:38–40': "Forbid him not … For he that is not against us is on our part. The man followed not with the disciples, yet Christ would not let them stop him. Differences over who walks with whom are no warrant for forbidding one another. Christ's next words warn whoever causes one of His little ones to stumble (Mark 9:42).", 'John 17:20–23': 'That they all may be one; as thou, Father, art in me, and I in thee, that they also may be one in us. Christ prayed for all who would believe on Him through the apostles\' word, that the world may believe. s30 is offered as a place to gather toward that prayer. The oneness He asks is "in us"; how, or whether, the traditions should be joined is not settled here.', '1 Corinthians 1:10–13': 'Every one of you saith, I am of Paul; and I of Apollos; and I of Cephas; and I of Christ. Is Christ divided? Paul pleads for one mind; s30 does not claim it has been reached ("we may differ"). What it takes from him is his question. No messenger, and no instrument we carry, may stand where Christ stands.', 'Matthew 11:28': 'Come unto me, all ye that labour and are heavy laden, and I will give you rest. The invitation is to a Person. s30\'s "come unto Jesus of Nazareth" repeats it; every instrument, this Article included, serves that invitation and cannot take its place.', 'Matthew 7:7': 'Ask, and it shall be given you; seek, and ye shall find. The promise belongs to the seeker. s30 rejoices that you seek Him, and trusts His promise, not any instrument, to bring the seeker to Him.', '2 Nephi 26:33': 'He inviteth them all to come unto him … and he denieth none that come unto him. If the Lord denies none who come, no disciple may deny another who is coming. "Whatever first turned you toward Christ" rests here.', '3 Nephi 11:29': 'He that hath the spirit of contention is not of me, but is of the devil. The risen Christ spoke this just after forbidding disputations "concerning the points of my doctrine" (3 Nephi 11:28). Contention over doctrine, and the contempt it breeds, is the sign that an instrument has turned us from Him: the lost bearing s30 names.', 'Moroni 10:32': "Yea, come unto Christ, and be perfected in him. Moroni's last invitation is s30's: come unto Christ. The perfecting is in Him, by His grace; no instrument we carry can stand in for Him."}
+S8_XREF_ADDED = [('Span 13: When the inward whisper points us away from what Christ taught and what Christ was, we know the compass has been disturbed, and we return our sighting to Him', '#s13'), ('Span 30: Whatever first turned you toward Christ, we rejoice that you seek Him', '#s30')]
+S30_XREF = [('Span 13: When the inward whisper points us away from what Christ taught and what Christ was, we know the compass has been disturbed, and we return our sighting to Him', '#s13'), ("Span 19: the disciple's walk does not require the approval of any person, tradition, or institution beyond the approval of Christ Himself, who is the only righteous and eternal Judge of human souls", '#s19'), ('Span 8: Correct tenets and sound understanding are desirable, but faithfully following Christ is better', '#s8')]
+S8_INS1 = ' Samuel set the same order before Saul: "to obey is better than sacrifice" (1 Samuel 15:22).'
+S8_INS2 = 'Doctrine is not idle in this ranking: it is to be adorned by the life (Titus 2:10), known by its fruit (Matthew 7:16-20), and given as souls can bear it (John 16:12; 1 Corinthians 3:2). '
+S6_S7_SECOND = ("Span 6: Trusting Him as our Guide is more important than understanding Him", "Span 7: Personal relationship with the Divine takes precedence over accuracy of doctrine")
+S6_S7_FIRST = ("Span 6: Trusting Him is more important than understanding Him", "Span 7: One's relationship with the Divine takes precedence over the accuracy of their doctrine")
+
+
+def test_article_9_s8_notes_and_new_anchors_appear_only_with_the_switch_on():
+    on, off = shown(True)["A09"]["s8"], shown(False)["A09"]["s8"]
+    for col, notes in S8_NOTES.items():
+        for ref, note in notes.items():
+            assert anchor(on, col, ref)[0]["comment"] == note, ref
+    for ref, (col, note) in S8_NEW_ANCHORS.items():
+        assert [a["comment"] for a in anchor(on, col, ref)] == [note], ref
+        assert not anchor(off, col, ref), ref
+    assert "Sound speech" in anchor(on, "biblical", "Titus 2:1, 7–8, 10")[0]["text"]
+    # switch off: the existing anchors that exist in the First Edition keep their comments, no note is present
+    off_text = json.dumps(off, ensure_ascii=False)
+    for col, notes in S8_NOTES.items():
+        for note in notes.values():
+            assert note not in off_text
+    for _, (_, note) in S8_NEW_ANCHORS.items():
+        assert note not in off_text
+    assert not keys_anywhere(on) & set(MARKERS) and not keys_anywhere(off) & set(MARKERS)
+
+
+def test_article_9_s8_panel_comment_insertions_are_in_paragraph_two_second_edition_only():
+    on, off = shown(True)["A09"]["s8"], shown(False)["A09"]["s8"]
+    p_on, p_off = on["panel_comment"].split(chr(10) * 2), off["panel_comment"].split(chr(10) * 2)
+    assert p_on[0] == A9F3_NEW and len(p_on) == 2
+    assert p_on[1].count(S8_INS1) == 1 and p_on[1].count(S8_INS2) == 1
+    assert '(Luke 9:23).' + S8_INS1 + ' His sheep' in p_on[1]
+    assert S8_INS2 + '"Faithfully" keeps faith inside the following' in p_on[1]
+    # taking both insertions out gives the paragraph as it stood
+    assert p_on[1].replace(S8_INS1, "").replace(S8_INS2, "") == DATA["A09"]["s8"]["panel_comment"].split(chr(10) * 2)[1].replace(S8_INS1, "").replace(S8_INS2, "")
+    assert off["panel_comment"] == DATA["A09"]["s8"]["panel_comment_first_edition"]
+    assert S8_INS1 not in off["panel_comment"] and S8_INS2 not in off["panel_comment"]
+
+
+def test_article_9_s8_cross_references_switch_on_and_off():
+    on, off = shown(True)["A09"]["s8"]["crossref"], shown(False)["A09"]["s8"]["crossref"]
+    assert [c["title"] for c in on[:2]] == list(S6_S7_SECOND) and [c["href"] for c in on[:2]] == ["#s6", "#s7"]
+    assert [(c["title"], c["href"]) for c in on[2:]] == S8_XREF_ADDED
+    assert [c["title"] for c in off] == list(S6_S7_FIRST) and [c["href"] for c in off] == ["#s6", "#s7"]
+    assert "#s13" not in [c["href"] for c in off] and "#s30" not in [c["href"] for c in off]
+    for c in on + off:
+        assert set(c) == {"label", "title", "href"}, c
+
+
+def test_article_9_s30_notes_cross_references_and_clean_text_fields():
+    on, off = shown(True)["A09"], shown(False)["A09"]
+    assert "s30" not in off
+    s = on["s30"]
+    assert [(c["title"], c["href"]) for c in s["crossref"]] == S30_XREF
+    assert all(set(c) == {"label", "title", "href"} for c in s["crossref"])
+    for col in ("biblical", "restoration"):
+        for a in s[col]:
+            assert a["comment"] == S30_NOTES[a["ref"]], a["ref"]
+            assert not a["text"].startswith("¶") and "¶" not in a["text"], a["ref"]
+    assert s["panel_comment"] == S30_FLOOR
