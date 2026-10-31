@@ -155,3 +155,15 @@ Kind of witness: direct for disciples; "every other witness" (prophets and apost
 | s9 panel comment | | correct the Alma 7:10 / Luke 1:27 claim |
 
 If any text change is approved, the floor that serves the span is redrafted to follow it before ratification, as P-F2 was.
+
+## Addendum, 31 Oct 2026 (Aaron's direction in the step 177 review, "fix now"; CODE-AOID2-71, AOID2 step 178): A5-F4a and A5-F4b restated without their labels
+
+Entered by CODE-AOID2-71 (pathway step 178), in the codex A4(e) addendum method. In the section above, each floor's bold label ("A5-F4a.", "A5-F4b.") sits inside its blockquote, so the floor check read the label as part of the floor text, and A5-F4b was reached only through the A5-F4a line. Each section below carries one ratified floor, copied word for word from the blockquote above with the bold label removed and nothing else changed. No floor's words change. Nothing above this addendum changes.
+
+### A5-F4a, restated. The prophets in part and in earthen vessels; the Son in whole (s6, first of two floors under A4(f))
+
+> The Article confesses only what 1 Corinthians 13:9-12, 1 Peter 1:10-11, Hebrews 1:1-2 and John 5:39-40 confess: we know in part and prophesy in part, and see through a glass, darkly; the prophets enquired and searched diligently what the Spirit of Christ in them did signify; God, who spake by the prophets at sundry times and in divers manners, hath in these last days spoken unto us by His Son; and the scriptures testify of Christ, yet life is found in coming to Him. This is the floor: the prophets saw and spoke in part; in Christ the fulness is embodied, and life is in Him, to whom the Scriptures testify. It does not settle whether God continues to reveal, or how Scripture and the Church's teaching are related; each tradition fills those in its own house.
+
+### A5-F4b, restated. The prophets in part and in earthen vessels; the Son in whole (s6, second of two floors under A4(f))
+
+> The Article confesses only what 1 Corinthians 13:9-10 and 2 Corinthians 4:7 confess: we prophesy in part, and that which is in part stands against that which is perfect; and we have this treasure in earthen vessels, that the excellency of the power may be of God, and not of us. This is the floor: the prophets spoke truly, yet as imperfect men in limited human words; "imperfectly" names the vessel, not the truth it carries, and the power by which their witness brings souls to God is His, not theirs. Only Christ is the perfect Word. It does not settle how the prophets' words were kept, gathered into a canon, translated or rightly interpreted; each tradition fills those in its own house.
