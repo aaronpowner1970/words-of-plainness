@@ -66,3 +66,19 @@ Entered by CODE-AOID2-44 (pathway step 84), following the A2-F1 precedent (AOID2
 ### A9-F4. s9: Our hope is that, as we submit to Him, God will make our paths straight (Article 9, unscored): RATIFIED by Aaron 17 Oct 2026
 
 > The Article confesses only what Proverbs 3:5-6, James 4:7-8 and Psalm 32:8 confess: in all our ways we acknowledge Him, and He shall direct our paths; we submit ourselves to God and draw nigh to Him, and He will draw nigh to us; and He will instruct us and teach us in the way which we shall go. This is the floor: God guides those who submit to Him, and our hope rests on His promise. It does not settle the manner of God's guidance (by Scripture, conscience, the Church or inward prompting), how His guidance bears on human freedom, or whether the straight path is assured in this life; each tradition fills those in its own house.
+
+## Addendum, 31 Oct 2026 (AOID2-A9F3-FIDELITY and AOID2-A9F2-FIDELITY): A9-F3 and A9-F2 re-centred and ratified
+
+Entered by CODE-AOID2-67 (pathway step 109), from the step 108 rulings (CHAT-AOID2-66a, `WoP_AOID2_Step108_A09_FloorRulings_20261031.md`). Each floor below was re-centred and RATIFIED by Aaron on 31 Oct 2026 (A9-F3 at 16:34 ET, A9-F2 at 16:42 ET; both "Ratified"), following the A11-F5 precedent for an amended floor (the superseded wording stays on record above; the floor check reads the first blockquote after the ledger's anchor line, codex A4(e)). The 17 Oct floors for A9-F2 and A9-F3 in the addendum above are SUPERSEDED and are kept as the record. A9-F2's qualifier and exclusions are unchanged word for word. A9-F1 and A9-F4 are unchanged.
+
+### A9-F3, re-centred. s8: Correct tenets and sound understanding are desirable, but faithfully following Christ is better (Article 9, unscored): RE-CENTRED AND RATIFIED by Aaron 31 Oct 2026
+
+**Re-centred and ratified by Aaron 31 Oct 2026, 16:34 ET (AOID2-A9F3-FIDELITY, option 1, with 1 Samuel 15:22 added as a floor verse, topic-only). A9-F3 as re-centred reads:**
+
+> The Article confesses only what 1 Samuel 15:22, Luke 9:23, James 1:22 and John 10:27 confess: to obey is better than sacrifice, and to hearken than the fat of rams; if any man will come after Christ, let him deny himself, take up his cross daily, and follow Him; we are doers of the word, and not hearers only; and Christ's sheep hear His voice and follow Him. This is the floor: correct tenets and sound understanding are desirable, but faithfully following Christ is better. It does not settle how faith, grace and works are related in salvation, whether following Christ is the fruit or the condition of salvation, or which doctrines are necessary; each tradition fills those in its own house.
+
+### A9-F2, re-centred. s7: Personal relationship with the Divine takes precedence over accuracy of doctrine (Article 9, unscored): RE-CENTRED AND RATIFIED by Aaron 31 Oct 2026
+
+**Re-centred and ratified by Aaron 31 Oct 2026, 16:42 ET (AOID2-A9F2-FIDELITY, option 1, topic-only). A9-F2 as re-centred reads:**
+
+> The Article confesses only what 1 Corinthians 8:1-4 and Matthew 7:21-23 confess: knowledge puffeth up, but charity edifieth, and if any man love God, the same is known of him; and this though the knowledge was true, that an idol is nothing in the world and there is none other God but one; and not every one that saith unto Christ, Lord, Lord, shall enter the kingdom, for to some who spoke in His name He will say, I never knew you. This is the floor: to love God and be known of Him takes precedence over accuracy of doctrine. Precedence is not dismissal: doctrine is ranked, not discarded, and abiding in the doctrine of Christ (2 John 1:9) is not set against abiding in Him. It does not settle which doctrines are necessary to salvation, how much right belief God requires of each soul, or by what authority doctrine is defined; each tradition fills those in its own house.

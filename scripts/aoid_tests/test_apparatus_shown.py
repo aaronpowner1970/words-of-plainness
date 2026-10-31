@@ -95,9 +95,9 @@ def test_article_9_s6_to_s9_switch_off_keeps_first_edition_comments_and_anchors(
         assert a09[sid]["panel_comment"] == src["panel_comment_first_edition"], sid
         assert not a09[sid]["panel_comment"].startswith("The Article confesses only"), sid
         for col in ("biblical", "restoration"):
-            assert [a["ref"] for a in a09[sid][col]] == [a["ref"] for a in src[col] if not a.get("second_edition")], (sid, col)
+            assert [a["ref"] for a in a09[sid][col]] == [a.get("ref_first_edition", a["ref"]) for a in src[col] if not a.get("second_edition")], (sid, col)
             for a in a09[sid][col]:
-                srca = next(x for x in src[col] if x["ref"] == a["ref"])
+                srca = next(x for x in src[col] if x.get("ref_first_edition", x["ref"]) == a["ref"])
                 assert a["comment"] == srca.get("comment_first_edition", srca["comment"]), (sid, a["ref"])
     assert "2 John 1:9" not in [a["ref"] for a in a09["s7"]["biblical"]]
 
@@ -131,7 +131,7 @@ def test_article_9_corrections_switch_off_keeps_head_comments_and_anchors():
         assert a09[sid]["panel_comment"] == src["panel_comment_first_edition"], sid
         for col in ("biblical", "restoration"):
             for a in a09[sid][col]:
-                srca = next(x for x in src[col] if x["ref"] == a["ref"])
+                srca = next(x for x in src[col] if x.get("ref_first_edition", x["ref"]) == a["ref"])
                 assert a["comment"] == srca.get("comment_first_edition", srca["comment"]), (sid, a["ref"])
     assert "D&C 35:17–18" in [a["ref"] for a in a09["s4"]["restoration"]]
     assert "2 Nephi 9:25–26" not in [a["ref"] for a in a09["s17"]["restoration"]]
@@ -204,3 +204,50 @@ def test_article_9_rally_point_floor_a9_f14_is_in_the_ledger_and_the_floor_docum
     assert "scored_on: null" in block and "scoring_records: []" in block
     doc = (REPO / "data-sources" / "aoid" / "floors" / "WoP_AOID2_A09_s30_RallyPoint_Floor_Ratified_20261031.md").read_text(encoding="utf-8")
     assert "> " + S30_FLOOR in doc.split(chr(10))
+
+# --- AOID2 step 109 (CODE-AOID2-67): A9-F2 (s7) and A9-F3 (s8) re-centred 31 Oct 2026 ---
+A9F2_NEW = 'The Article confesses only what 1 Corinthians 8:1-4 and Matthew 7:21-23 confess: knowledge puffeth up, but charity edifieth, and if any man love God, the same is known of him; and this though the knowledge was true, that an idol is nothing in the world and there is none other God but one; and not every one that saith unto Christ, Lord, Lord, shall enter the kingdom, for to some who spoke in His name He will say, I never knew you. This is the floor: to love God and be known of Him takes precedence over accuracy of doctrine. Precedence is not dismissal: doctrine is ranked, not discarded, and abiding in the doctrine of Christ (2 John 1:9) is not set against abiding in Him. It does not settle which doctrines are necessary to salvation, how much right belief God requires of each soul, or by what authority doctrine is defined; each tradition fills those in its own house.'
+A9F3_NEW = "The Article confesses only what 1 Samuel 15:22, Luke 9:23, James 1:22 and John 10:27 confess: to obey is better than sacrifice, and to hearken than the fat of rams; if any man will come after Christ, let him deny himself, take up his cross daily, and follow Him; we are doers of the word, and not hearers only; and Christ's sheep hear His voice and follow Him. This is the floor: correct tenets and sound understanding are desirable, but faithfully following Christ is better. It does not settle how faith, grace and works are related in salvation, whether following Christ is the fruit or the condition of salvation, or which doctrines are necessary; each tradition fills those in its own house."
+
+
+def anchor(span, col, ref):
+    return [a for a in span[col] if a["ref"] == ref]
+
+
+def test_article_9_s7_s8_recentred_floors_are_paragraph_one_only_with_the_switch_on():
+    on, off = shown(True)["A09"], shown(False)["A09"]
+    assert on["s7"]["panel_comment"].split(chr(10) * 2)[0] == A9F2_NEW
+    assert on["s8"]["panel_comment"].split(chr(10) * 2)[0] == A9F3_NEW
+    for sid in ("s7", "s8"):
+        assert off[sid]["panel_comment"] == DATA["A09"][sid]["panel_comment_first_edition"]
+        assert A9F2_NEW not in off[sid]["panel_comment"] and A9F3_NEW not in off[sid]["panel_comment"]
+        # commentary paragraph 2 is kept with the switch on
+        assert on[sid]["panel_comment"].split(chr(10) * 2)[1:] == DATA["A09"][sid]["panel_comment"].split(chr(10) * 2)[1:]
+
+
+def test_article_9_s7_s8_floor_verses_are_anchors_with_the_switch_on_and_the_first_edition_set_is_unchanged():
+    on, off = shown(True)["A09"], shown(False)["A09"]
+    for ref in ("1 Corinthians 8:1–4", "Matthew 7:21–23"):
+        assert len(anchor(on["s7"], "biblical", ref)) == 1
+    for ref in ("1 Samuel 15:22", "Luke 9:23", "James 1:22", "John 10:27"):
+        assert len(anchor(on["s8"], "biblical", ref)) == 1
+    assert anchor(on["s8"], "biblical", "1 Samuel 15:22")[0]["comment"] == ""
+    assert "to obey is better than sacrifice" in anchor(on["s8"], "biblical", "1 Samuel 15:22")[0]["text"]
+    assert "none other God but one" in anchor(on["s7"], "biblical", "1 Corinthians 8:1–4")[0]["text"]
+    # switch off: the First Edition anchors, the 8:1-3 range and no Second Edition additions
+    assert anchor(off["s7"], "biblical", "1 Corinthians 8:1–3") and not anchor(off["s7"], "biblical", "1 Corinthians 8:1–4")
+    assert "none other God but one" not in anchor(off["s7"], "biblical", "1 Corinthians 8:1–3")[0]["text"]
+    assert not anchor(off["s8"], "biblical", "1 Samuel 15:22")
+    assert not keys_anywhere(on["s7"]) & {"ref_first_edition"} and not keys_anywhere(off["s7"]) & {"ref_first_edition"}
+    assert not keys_anywhere(on["s8"]) & set(MARKERS) and not keys_anywhere(off["s8"]) & set(MARKERS)
+
+
+def test_article_9_a9_f2_and_a9_f3_ledger_reads_the_recentred_floors_and_keeps_the_superseded_record():
+    ledger = (REPO / "data-sources" / "aoid" / "floor_ledger.yaml").read_text(encoding="utf-8")
+    doc = (REPO / "data-sources" / "aoid" / "floors" / "WoP_AOID2_A09_s6-s9_Floors_Draft_v1_20261017.md").read_text(encoding="utf-8").split(chr(10))
+    for item, new in (("A9-F2", A9F2_NEW), ("A9-F3", A9F3_NEW)):
+        block = ledger.split("- item: " + item + chr(10), 1)[1].split(chr(10) + "  - item:", 1)[0]
+        assert "floor_amended: 2026-10-31" in block and "scored_on: null" in block
+        assert "> " + new in doc
+    assert any(l.startswith("> The Article confesses only what 1 Corinthians 8:1-3 and") for l in doc)
+    assert any(l.startswith("> The Article confesses only what Luke 9:23, James 1:22") for l in doc)
