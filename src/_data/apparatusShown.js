@@ -5,7 +5,7 @@
  * because the floor check (scripts/aoid-verify-floors.js) reads that file. The Second Edition
  * switch (src/_data/aoidSecondEdition.js) keeps A14 off the public page: with the switch OFF
  * the embedded data is the thirteen First Edition Articles exactly as before; with it ON it is
- * the whole file. The same holds for the Article 11 spans s20-s25 (CODE-AOID2-29), the Article 9 additions (CODE-AOID2-32), the Article 13 span s12 (CODE-AOID2-34) the Article 4 span s19 (CODE-AOID2-35) the Article 5 spans s17-s18 (CODE-AOID2-36) the Article 8 additions (CODE-AOID2-40) and the Article 12 additions (CODE-AOID2-41).
+ * the whole file. The same holds for the Article 11 spans s20-s25 (CODE-AOID2-29), the Article 9 additions (CODE-AOID2-32), the Article 13 span s12 (CODE-AOID2-34) the Article 4 span s19 (CODE-AOID2-35) the Article 5 spans s17-s18 (CODE-AOID2-36) the Article 8 additions (CODE-AOID2-40) and the Article 12 additions (CODE-AOID2-41). AOID2 step 104 (CODE-AOID2-65) extends the same markers to Articles 3, 7, 10 and 13 and to anchor refs, texts and cross-reference titles.
  */
 const all = require('./apparatusData.json');
 const { on } = require('./aoidSecondEdition.js');
@@ -46,9 +46,27 @@ const A12_SECOND_EDITION = ['s11', 's12'];
 
 /* Article 9 (CODE-AOID2-46): an anchor with `first_edition_only: true` is the mirror of `second_edition: true`. It stays
    with the switch OFF and is dropped with the switch ON (A09 s4, D&C 35:17-18). The marker is never embedded. */
+/* AOID2 step 104 (CODE-AOID2-65): the commentary corrections reach anchors and cross-references too. An anchor may carry
+   `ref_first_edition`, `text_first_edition` and `comment_first_edition`, and a cross-reference `title_first_edition`: the
+   First Edition value, held beside the corrected one on the `panel_comment_first_edition` pattern. With the switch OFF the
+   First Edition value replaces the field (key order kept); with it ON the marker is stripped. No marker is ever embedded. */
+const ANCHOR_FIELDS = ['ref', 'text', 'comment'];
+const isAnchorMarker = (k) => k === 'second_edition' || k === 'first_edition_only' || ANCHOR_FIELDS.some((f) => k === f + '_first_edition');
 const firstEditionAnchor = (a) => {
-  const { second_edition, first_edition_only, comment_first_edition, ...rest } = a;
-  return comment_first_edition === undefined ? rest : { ...rest, comment: comment_first_edition };
+  const out = {};
+  for (const [k, v] of Object.entries(a)) {
+    if (isAnchorMarker(k)) continue;
+    out[k] = ANCHOR_FIELDS.includes(k) && a[k + '_first_edition'] !== undefined ? a[k + '_first_edition'] : v;
+  }
+  return out;
+};
+const firstEditionCrossref = (c) => {
+  const out = {};
+  for (const [k, v] of Object.entries(c)) {
+    if (k === 'title_first_edition') continue;
+    out[k] = k === 'title' && c.title_first_edition !== undefined ? c.title_first_edition : v;
+  }
+  return out;
 };
 const firstEditionSpan = (s) => {
   const out = {};
@@ -57,24 +75,31 @@ const firstEditionSpan = (s) => {
     if (k === 'text' && s.text_first_edition !== undefined) out.text = s.text_first_edition;
     else if (k === 'panel_comment' && s.panel_comment_first_edition !== undefined) out.panel_comment = s.panel_comment_first_edition;
     else if (k === 'biblical' || k === 'restoration') out[k] = v.filter((a) => !a.second_edition).map(firstEditionAnchor);
+    else if (k === 'crossref' && Array.isArray(v)) out[k] = v.map(firstEditionCrossref);
     else out[k] = v;
   }
   return out;
 };
 const secondEditionAnchor = (a) => {
-  const { second_edition, first_edition_only, comment_first_edition, ...rest } = a;
+  const out = {};
+  for (const [k, v] of Object.entries(a)) if (!isAnchorMarker(k)) out[k] = v;
+  return out;
+};
+const secondEditionCrossref = (c) => {
+  const { title_first_edition, ...rest } = c;
   return rest;
 };
 const secondEditionSpan = (s) => {
   const { text_first_edition, panel_comment_first_edition, ...rest } = s;
   const out = { ...rest };
   for (const k of ['biblical', 'restoration']) if (Array.isArray(rest[k])) out[k] = rest[k].filter((a) => !a.first_edition_only).map(secondEditionAnchor);
+  if (Array.isArray(rest.crossref)) out.crossref = rest.crossref.map(secondEditionCrossref);
   return out;
 };
 const mapSpans = (spans, f) => Object.fromEntries(Object.entries(spans).map(([id, s]) => [id, f(s)]));
 
 module.exports = on
-  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A05', 'A08', 'A09', 'A11', 'A12'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
+  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A03', 'A05', 'A07', 'A08', 'A09', 'A10', 'A11', 'A12', 'A13'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
   : Object.fromEntries(
       Object.entries(all)
         .filter(([key]) => key !== 'A14')
@@ -85,7 +110,8 @@ module.exports = on
           if (key === 'A09') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A09_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A04') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A04_SECOND_EDITION.includes(id)))];
           if (key === 'A05') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A05_SECOND_EDITION.includes(id))), firstEditionSpan)];
-          if (key === 'A13') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A13_SECOND_EDITION.includes(id)))];
+          if (key === 'A13') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A13_SECOND_EDITION.includes(id))), firstEditionSpan)];
+          if (key === 'A03' || key === 'A07' || key === 'A10') return [key, mapSpans(spans, firstEditionSpan)];
           return [key, spans];
         })
     );
