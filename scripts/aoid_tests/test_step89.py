@@ -230,6 +230,8 @@ def test_summary_tables_match_the_single_source(site_on):
     ledger = {str(e["item"]): e for e in yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"]}
     seen = 0
     for f in data["floors"]:
+        if f["status"] == "UNSCORED" and not f["spans"]:
+            continue    # ratified floor not yet transcribed into a span (span: null): no table row exists to check
         art = f["spans"][0].split(".")[0].lower()
         if f["status"] == "UNSCORED":
             assert f'id="{art}-record-{f["id"]}"' not in arts
