@@ -152,3 +152,55 @@ def test_article_9_corrections_switch_on_shows_approved_changes():
     assert "AOID2-BOUNDARY" not in a09["s26"]["panel_comment"]
     assert a09["s29"]["panel_comment"].count(chr(10) * 2) == 2 - 1
 
+
+
+# --- AOID2 step 107 (CODE-AOID2-66): Article 9 rally point (span s30, author's note, floor A9-F14) ---
+S30_TEXT = 'Whatever first turned you toward Christ, we rejoice that you seek Him. We may differ on how the map is rightly read, and on which way leads most surely to Him, but let none of us fail to come unto Jesus of Nazareth. Should any instrument we carry, even this one, turn us from Christ or teach us contempt for a fellow traveler, we have surely lost our bearing, and must take our sighting of Him anew.'
+S30_NOTE = 'This Article proposes a rallying point for disciples of every Christian tradition. Its picture is not new: Christ the North Star, His Spirit the compass, the scriptures the map. Each part is drawn from scripture that Christians of every tradition receive, and the arrangement adds nothing to the gospel of Jesus Christ. I offer it not as a creed, nor as a correction to any church, but as a place where we may gather and look together toward the One who prayed that all who believe in Him might be one (John 17:20-23). Its only test is the one it sets for itself: does it bring us, together, to Him?'
+S30_FLOOR = 'The Article confesses only what Philippians 1:15-18, Mark 9:38-40 and John 17:20-23 confess: wherever Christ is preached, His disciples rejoice; Christ forbade His disciples to stop one who worked in His name though he followed not with them; and Christ prayed that all who believe on Him might be one. This is the floor: the disciple rejoices in every turning toward Christ, differences over the way to Him are no warrant for forbidding one another, and whatever turns disciples from Christ or toward contempt for one another has lost its bearing. It does not settle which way leads most surely to Him, how the scriptures are rightly read or by what authority, what a church may require of its own members, or whether and how the traditions should be united; each tradition fills those in its own house.'
+S30_ANCHORS = {
+    "biblical": ["Philippians 1:15–18", "Mark 9:38–40", "John 17:20–23", "1 Corinthians 1:10–13", "Matthew 11:28", "Matthew 7:7"],
+    "restoration": ["2 Nephi 26:33", "3 Nephi 11:29", "Moroni 10:32"],
+}
+
+
+def render_a09(on):
+    script = (
+        "const n=require('nunjucks');const e=new n.Environment(new n.FileSystemLoader('src/_includes'),{autoescape:false});"
+        "process.stdout.write(e.render('aoid/a09.njk',{aoidSecondEdition:{on:%s}}))" % ("true" if on else "false")
+    )
+    return subprocess.run(["node", "-e", script], cwd=REPO, capture_output=True, encoding="utf-8", check=True).stdout
+
+
+def test_article_9_rally_point_span_and_anchors_appear_only_with_the_switch_on():
+    on, off = shown(True)["A09"], shown(False)["A09"]
+    assert "s30" not in off
+    s = on["s30"]
+    assert (s["text"], s["type"], s["named_concept"]) == (S30_TEXT, "concept", False)
+    assert s["panel_comment"] == S30_FLOOR and chr(10) not in s["panel_comment"]
+    for col, refs in S30_ANCHORS.items():
+        assert [a["ref"] for a in s[col]] == refs
+        assert all(a["comment"] == "" for a in s[col])
+    assert list(on)[-1] == "s30" and list(on)[-2] == "s29"
+    assert not keys_anywhere(s) & set(MARKERS)
+
+
+def test_article_9_rally_point_span_and_note_render_only_with_the_switch_on():
+    on, off = render_a09(True), render_a09(False)
+    assert 'data-span="s30"' not in off and "article-author-note" not in off
+    assert S30_NOTE not in off and S30_TEXT not in off
+    assert on.count('data-span="s30"') == 1 and on.count(S30_TEXT) == 1 and on.count(S30_NOTE) == 1
+    assert "(John 17:20-23)" in S30_NOTE
+    # note first in the body, span after s22 and immediately before the reflection prompt
+    assert on.index('<div class="article-body">') < on.index("article-author-note") < on.index('data-span="s1"')
+    assert on.index('data-span="s22"') < on.index('data-span="s30"') < on.index('<div class="article-rjw">')
+    assert on.count("article-author-note") == 1
+
+
+def test_article_9_rally_point_floor_a9_f14_is_in_the_ledger_and_the_floor_document():
+    ledger = (REPO / "data-sources" / "aoid" / "floor_ledger.yaml").read_text(encoding="utf-8")
+    block = ledger.split("- item: A9-F14", 1)[1].split(chr(10) + "  - item:", 1)[0].split(chr(10) + "# ", 1)[0]
+    assert "span: A09.s30" in block and "floor_ratified: 2026-10-31" in block
+    assert "scored_on: null" in block and "scoring_records: []" in block
+    doc = (REPO / "data-sources" / "aoid" / "floors" / "WoP_AOID2_A09_s30_RallyPoint_Floor_Ratified_20261031.md").read_text(encoding="utf-8")
+    assert "> " + S30_FLOOR in doc.split(chr(10))

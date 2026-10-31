@@ -16,12 +16,12 @@ const { on } = require('./aoidSecondEdition.js');
    `panel_comment_first_edition`, and an anchor's `second_edition: true`. */
 const A11_SECOND_EDITION = ['s20', 's21', 's22', 's23', 's24', 's25', 's26'];
 
-/* Article 9 (CODE-AOID2-32, step 79): spans s23-s29 are new, and s6-s9 carry Second Edition additions. The
+/* Article 9 (CODE-AOID2-32, step 79): spans s23-s30 are new (s30, the rally-point closing span, CODE-AOID2-66), and s6-s9 carry Second Edition additions. The
    data marks them: an anchor with `second_edition: true`; a revised `text` with the First Edition wording in
    `text_first_edition`; a changed anchor `comment` with the First Edition one in `comment_first_edition`.
    With the switch OFF the First Edition values are restored and the additions dropped; the marker fields are
    never embedded. */
-const A09_SECOND_EDITION = ['s23', 's24', 's25', 's26', 's27', 's28', 's29'];
+const A09_SECOND_EDITION = ['s23', 's24', 's25', 's26', 's27', 's28', 's29', 's30'];
 
 /* Article 13 (CODE-AOID2-34, step 79): span s12 is new (the Great Commission, G12), so it is dropped with the switch OFF. */
 const A13_SECOND_EDITION = ['s12'];
