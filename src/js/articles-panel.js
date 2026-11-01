@@ -45,10 +45,13 @@
     // the Second Edition build adds its entries (and the extra titles) through
     // window.WOP_AOID2_SECOND_EDITION, set by an inline script in layouts/articles.njk.
     var DISPLAYED_NUMBER = {};
+    // Unnumbered front matter (the Prologue, A01 in the Second Edition): the heading reads "<word>: <title>" with no Article number.
+    var UNNUMBERED = {};
     var SECOND_EDITION = window.WOP_AOID2_SECOND_EDITION;
     if (SECOND_EDITION) {
         Object.keys(SECOND_EDITION.articleTitles || {}).forEach(function (k) { ARTICLE_TITLES[k] = SECOND_EDITION.articleTitles[k]; });
         Object.keys(SECOND_EDITION.displayedNumber || {}).forEach(function (k) { DISPLAYED_NUMBER[k] = SECOND_EDITION.displayedNumber[k]; });
+        Object.keys(SECOND_EDITION.unnumbered || {}).forEach(function (k) { UNNUMBERED[k] = SECOND_EDITION.unnumbered[k]; });
     }
 
     // ── Element references ────────────────────────────────────────
@@ -268,7 +271,7 @@
         // Article label
         var artTitle = ARTICLE_TITLES[articleId] || articleId || '';
         var artNum   = articleId ? (DISPLAYED_NUMBER[articleId] || parseInt(articleId.replace('A', ''), 10)) : null;
-        elArticleLabel.textContent = artNum ? ('Article ' + artNum + ': ' + artTitle) : artTitle;
+        elArticleLabel.textContent = UNNUMBERED[articleId] ? (UNNUMBERED[articleId] + ': ' + artTitle) : artNum ? ('Article ' + artNum + ': ' + artTitle) : artTitle;
 
         // Span data
         var spanData = (apparatus[articleId] || {})[spanId] || {};

@@ -53,7 +53,9 @@ def test_entry_matches_pattern():
 
 
 def test_other_entries_untouched():
-    assert ITEMS["a01"]["alt"] == "Article 1 — Of Plainness"
+    # AOID2 step 132 (CODE-AOID2-78): a01 reads "Prologue" in the Second Edition; the First Edition alt is held beside it
+    assert ITEMS["a01"]["alt"] == "Prologue — Of Plainness"
+    assert ITEMS["a01"]["alt_first_edition"] == "Article 1 — Of Plainness"
     assert sorted(ITEMS) == [f"a{n:02d}" for n in range(15)]
 
 

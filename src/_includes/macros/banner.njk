@@ -27,7 +27,7 @@
     srcset="{% for w in b.widths %}{{ b.urls[w|string] }} {{ w }}w{% if not loop.last %}, {% endif %}{% endfor %}"
     sizes="(max-width: 960px) 100vw, 860px"
     width="{{ b.nativeWidth }}" height="{{ b.nativeHeight }}"
-    alt="{{ b.alt }}"
+    alt="{% if b.alt_first_edition and not aoidSecondEdition.on %}{{ b.alt_first_edition }}{% else %}{{ b.alt }}{% endif %}"
     {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
 </figure>
 {%- endif -%}

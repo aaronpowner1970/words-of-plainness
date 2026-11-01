@@ -51,7 +51,10 @@ const A12_SECOND_EDITION = ['s11', 's12'];
    First Edition value, held beside the corrected one on the `panel_comment_first_edition` pattern. With the switch OFF the
    First Edition value replaces the field (key order kept); with it ON the marker is stripped. No marker is ever embedded.
    AOID2 step 172 (CODE-AOID2-68): a cross-reference may also carry `second_edition: true`, the mirror of an anchor's: it is
-   dropped with the switch OFF and its marker stripped with the switch ON (A09 s8, links to s13 and s30). */
+   dropped with the switch OFF and its marker stripped with the switch ON (A09 s8, links to s13 and s30).
+   AOID2 step 132 (CODE-AOID2-78): a cross-reference may also carry `label_first_edition`, handled exactly as `title_first_edition`
+   (the "See Article 1" labels that become "See the Prologue" in the Second Edition). Articles 2, 4 and 6 now go through the same
+   First Edition restore as the others, so their panel comments, anchors and cross-references can carry the markers too. */
 const ANCHOR_FIELDS = ['ref', 'text', 'comment'];
 const isAnchorMarker = (k) => k === 'second_edition' || k === 'first_edition_only' || ANCHOR_FIELDS.some((f) => k === f + '_first_edition');
 const firstEditionAnchor = (a) => {
@@ -65,8 +68,10 @@ const firstEditionAnchor = (a) => {
 const firstEditionCrossref = (c) => {
   const out = {};
   for (const [k, v] of Object.entries(c)) {
-    if (k === 'title_first_edition' || k === 'second_edition') continue;
-    out[k] = k === 'title' && c.title_first_edition !== undefined ? c.title_first_edition : v;
+    if (k === 'title_first_edition' || k === 'label_first_edition' || k === 'second_edition') continue;
+    if (k === 'title' && c.title_first_edition !== undefined) out[k] = c.title_first_edition;
+    else if (k === 'label' && c.label_first_edition !== undefined) out[k] = c.label_first_edition;
+    else out[k] = v;
   }
   return out;
 };
@@ -88,7 +93,7 @@ const secondEditionAnchor = (a) => {
   return out;
 };
 const secondEditionCrossref = (c) => {
-  const { title_first_edition, second_edition, ...rest } = c;
+  const { title_first_edition, label_first_edition, second_edition, ...rest } = c;
   return rest;
 };
 const secondEditionSpan = (s) => {
@@ -101,7 +106,7 @@ const secondEditionSpan = (s) => {
 const mapSpans = (spans, f) => Object.fromEntries(Object.entries(spans).map(([id, s]) => [id, f(s)]));
 
 module.exports = on
-  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A03', 'A05', 'A07', 'A08', 'A09', 'A10', 'A11', 'A12', 'A13'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
+  ? Object.fromEntries(Object.entries(all).map(([key, spans]) => [key, ['A02', 'A03', 'A04', 'A05', 'A06', 'A07', 'A08', 'A09', 'A10', 'A11', 'A12', 'A13'].includes(key) ? mapSpans(spans, secondEditionSpan) : spans]))
   : Object.fromEntries(
       Object.entries(all)
         .filter(([key]) => key !== 'A14')
@@ -110,10 +115,10 @@ module.exports = on
           if (key === 'A08') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A08_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A12') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A12_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A09') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A09_SECOND_EDITION.includes(id))), firstEditionSpan)];
-          if (key === 'A04') return [key, Object.fromEntries(Object.entries(spans).filter(([id]) => !A04_SECOND_EDITION.includes(id)))];
+          if (key === 'A04') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A04_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A05') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A05_SECOND_EDITION.includes(id))), firstEditionSpan)];
           if (key === 'A13') return [key, mapSpans(Object.fromEntries(Object.entries(spans).filter(([id]) => !A13_SECOND_EDITION.includes(id))), firstEditionSpan)];
-          if (key === 'A03' || key === 'A07' || key === 'A10') return [key, mapSpans(spans, firstEditionSpan)];
+          if (key === 'A02' || key === 'A03' || key === 'A06' || key === 'A07' || key === 'A10') return [key, mapSpans(spans, firstEditionSpan)];
           return [key, spans];
         })
     );
