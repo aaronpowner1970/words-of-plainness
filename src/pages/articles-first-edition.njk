@@ -12,6 +12,8 @@
   permalink: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "/articles/first-edition/" : false),
   description: "The thirteen Articles of Interfaith Discipleship as first given, preserved unchanged as the First Edition.",
   eleventyExcludeFromCollections: true,
+  // Search engines are told to skip this preserved page (ruling (b), step 115); it exists only with the switch ON.
+  noindex: true,
   // Record, not rendered. The text below is the Articles as they stood at commit
   // c8999d1 (src/_includes/aoid/a01-a13.njk, copied byte for byte into
   // src/_includes/aoid-first-edition/). Do not edit it: this page is the First Edition.
@@ -21,6 +23,7 @@
 
 <style>
 .fe { max-width: 760px; margin: 0 auto; padding: 0 1.25rem; font-family: 'Crimson Pro', Georgia, serif; font-size: 1.1rem; line-height: 1.75; color: var(--cream); }
+.fe-lead { margin: 0 0 1.25rem; font-size: 1rem; }
 .fe-notice { margin: 0 0 2.25rem; padding: .9rem 1.2rem; border-left: 3px solid rgba(196,148,58,0.55); background: rgba(196,148,58,0.06); border-radius: 0 4px 4px 0; font-size: 1rem; }
 .fe-notice p { margin: 0; }
 .fe a { color: var(--gold-primary); text-decoration: none; border-bottom: 1px dotted rgba(196,148,58,0.5); }
@@ -33,6 +36,7 @@
 </style>
 
 <div class="fe">
+<p class="fe-lead">This is the First Edition of the Articles of Interfaith Discipleship, kept here as first given. <a href="/articles/">Read the current Second Edition.</a></p>
 <div class="fe-notice">
 <p><strong>First Edition.</strong> These are the thirteen Articles as first given, preserved here unchanged and read-only. The current <a href="/articles/">Second Edition (2026)</a> is on the Articles page.</p>
 </div>

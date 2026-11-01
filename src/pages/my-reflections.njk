@@ -253,4 +253,5 @@ description: "Your personal discipleship journal — reflections, commitments, a
 </div>
 
 <script src="/js/wop-reflections.js"></script>
-<script src="/js/my-reflections.js?v={{ site.version }}"></script>
+{% if aoidSecondEdition.on %}<script>window.WOP_AOID2_SECOND_EDITION = { articleTitles: { A14: "Of Love for God and Neighbor" } };</script>
+{% endif %}<script src="/js/my-reflections.js?v={{ site.version }}"></script>

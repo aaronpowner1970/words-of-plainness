@@ -99,7 +99,7 @@ discordChannelId: ""
 .article-author-note strong { font-style: normal; color: var(--gold-primary, #C4943A); }
 .an-edition-tag { display: inline-block; margin-left: .45rem; font-size: .68em; letter-spacing: .05em; text-transform: uppercase; opacity: .8; }
 </style>
-<section class="article-section" id="of-plainness" data-audio="AP_A01_Plainness.mp3">
+<section class="article-section" id="of-plainness" data-prologue="true" data-audio="AP_A01_Plainness.mp3">
     {{ banner("a01") }}
 {% set aoidPrologue = true %}{% include "aoid/a01.njk" %}
 </section>{% endif %}
@@ -118,7 +118,7 @@ discordChannelId: ""
             <button class="pw-card" type="button" id="pwReadAll">
                 <span class="pw-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10.5 5 7.5 4.5 4 5v13c3.5-.5 6.5 0 8 1.5"/><path d="M12 6.5C13.5 5 16.5 4.5 20 5v13c-3.5-.5-6.5 0-8 1.5"/><line x1="12" y1="6.5" x2="12" y2="19.5"/></svg></span>
                 <span class="pw-card-title">Read straight through</span>
-                <span class="pw-card-desc">Begin at the first article and read all thirteen declarations in order, start to finish.</span>
+                <span class="pw-card-desc">{% if aoidSecondEdition.on %}Begin with the Prologue and read on through all thirteen Articles in order, start to finish.{% else %}Begin at the first article and read all thirteen declarations in order, start to finish.{% endif %}</span>
             </button>
         </div>
     </div>

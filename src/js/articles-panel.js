@@ -38,12 +38,18 @@
         A10: 'Of Living by Grace',
         A11: 'Of Covenants and Commitments',
         A12: 'Of Immortality and Eternal Life',
-        A13: 'Of Our Confidence',
-        A14: 'Of Love for God and Neighbor',
+        A13: 'Of Our Confidence'
     };
 
-    // Displayed Article number where it differs from the key (the new Article 1 is keyed A14)
-    var DISPLAYED_NUMBER = { A14: 1 };
+    // Displayed Article number where it differs from the key. Empty on the site as it stands;
+    // the Second Edition build adds its entries (and the extra titles) through
+    // window.WOP_AOID2_SECOND_EDITION, set by an inline script in layouts/articles.njk.
+    var DISPLAYED_NUMBER = {};
+    var SECOND_EDITION = window.WOP_AOID2_SECOND_EDITION;
+    if (SECOND_EDITION) {
+        Object.keys(SECOND_EDITION.articleTitles || {}).forEach(function (k) { ARTICLE_TITLES[k] = SECOND_EDITION.articleTitles[k]; });
+        Object.keys(SECOND_EDITION.displayedNumber || {}).forEach(function (k) { DISPLAYED_NUMBER[k] = SECOND_EDITION.displayedNumber[k]; });
+    }
 
     // ── Element references ────────────────────────────────────────
     var panel    = document.getElementById('apPanel');

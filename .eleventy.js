@@ -89,7 +89,9 @@ module.exports = function(eleventyConfig) {
     if (process.env.WOP_AOID2_SECOND_EDITION === "1") {
         eleventyConfig.addPassthroughCopy({
             "src/aoid-second-edition/articles-tabs.css": "css/articles-tabs.css",
-            "src/aoid-second-edition/articles-tabs.js": "js/articles-tabs.js"
+            "src/aoid-second-edition/articles-tabs.js": "js/articles-tabs.js",
+            // Progress counter that leaves the Prologue out of the count (step 115); the OFF site keeps js/articles-progress.js as it is.
+            "src/aoid-second-edition/articles-progress.js": "js/articles-progress-second-edition.js"
         });
     }
 

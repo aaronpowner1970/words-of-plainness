@@ -130,7 +130,7 @@
 
     <nav class="an-drawer-nav" aria-label="Jump to article">
         <ol class="an-drawer-list">
-            <li><a href="#of-plainness"              class="an-link"><span class="an-num">1</span>Of Plainness</a></li>
+            <li><a href="#of-plainness"              class="an-link">{% if aoidSecondEdition.on %}<span class="an-num" aria-hidden="true"></span>{{ aoidSecondEdition.prologueHeading }}{% else %}<span class="an-num">1</span>Of Plainness{% endif %}</a></li>
             {% if aoidSecondEdition.on %}<li><a href="#of-love-for-god-and-neighbor" class="an-link"><span class="an-num">1</span>Of Love for God and Neighbor</a></li>
             {% endif %}<li><a href="#of-god"                    class="an-link"><span class="an-num">2</span>Of God</a></li>
             <li><a href="#of-creation-and-life"      class="an-link"><span class="an-num">3</span>Of Creation and Life</a></li>
@@ -516,10 +516,11 @@
 <script src="/js/wop-player.js?v={{ site.version }}" defer></script>
 <script src="/js/read-aloud-articles.js?v={{ site.version }}" defer></script>
 <script src="/js/apparatus-common.js?v={{ site.version }}" defer></script>
-<script src="/js/articles-panel.js?v={{ site.version }}" defer></script>
+{% if aoidSecondEdition.on %}<script>window.WOP_AOID2_SECOND_EDITION = { articleTitles: { A14: "Of Love for God and Neighbor" }, displayedNumber: { A14: 1 } };</script>
+{% endif %}<script src="/js/articles-panel.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-godeeper.js?v={{ site.version }}" defer></script>
 <script src="/js/articles-howwehold.js?v={{ site.version }}" defer></script>
-<script src="/js/articles-progress.js?v={{ site.version }}" defer></script>{% if aoidSecondEdition.on %}
+<script src="/js/articles-progress{% if aoidSecondEdition.on %}-second-edition{% endif %}.js?v={{ site.version }}" defer></script>{% if aoidSecondEdition.on %}
 <script type="application/json" id="aoidCountData">{{ aoidCounts.spans | dump | safe }}</script>
 <script src="/js/articles-tabs.js?v={{ site.version }}" defer></script>{% endif %}
 <script>

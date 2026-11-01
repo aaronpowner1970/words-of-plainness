@@ -34,8 +34,14 @@ var ARTICLE_TITLES = {
     'A07': 'Of the Kingdom at Hand', 'A08': 'Of Fellow Believers',
     'A09': 'Of Finding Our Way', 'A10': 'Of Living by Grace',
     'A11': 'Of Covenants and Commitments', 'A12': 'Of Immortality and Eternal Life',
-    'A13': 'Of Our Confidence', 'A14': 'Of Love for God and Neighbor'
+    'A13': 'Of Our Confidence'
 };
+// The Second Edition build adds its extra titles through window.WOP_AOID2_SECOND_EDITION
+// (an inline script in pages/my-reflections.njk); the site as it stands does not set it.
+if (window.WOP_AOID2_SECOND_EDITION) {
+    var SECOND_EDITION_TITLES = window.WOP_AOID2_SECOND_EDITION.articleTitles || {};
+    Object.keys(SECOND_EDITION_TITLES).forEach(function (k) { ARTICLE_TITLES[k] = SECOND_EDITION_TITLES[k]; });
+}
 
 function djArticleLabel(slug, pauseId) {
     if (slug !== 'articles-of-interfaith-discipleship') return '';
