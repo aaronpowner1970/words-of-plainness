@@ -1,7 +1,7 @@
 The author-and-SCRIBE record of every correction to reader-facing text on the site, newest first.
 Not shown to readers and not published: Eleventy's input is src/, so docs/ reaches no build output (AOID2-READER-NO-CHANGELOG, AOID2-CHANGELOG-REPO).
 
-## 1 November 2026 - Article 9, First Edition and Second Edition (COMMIT-PENDING, CODE-AOID2-81)
+## 1 November 2026 - Article 9, First Edition and Second Edition (da1bb8b, CODE-AOID2-81)
 - What changed (src/_data/apparatusData.json, A09, unless noted):
   - s4, `panel_comment_first_edition` (First Edition): clause "; and D&C 35:17-18 names the continuity of His mission and message in the latter-day commission - 'these signs shall follow them that believe' - the same signs, the same gospel, the same Christ" removed; "and" added after the semicolon before "D&C 6:21". The sentence now ends "... what He still is in the present age."
   - s7, anchor "Alma 32:27-28", `comment` (Second Edition only): "let that desire work in you" -> "let this desire work in you". `comment_first_edition` untouched.
