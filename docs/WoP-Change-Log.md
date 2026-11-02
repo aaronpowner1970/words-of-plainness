@@ -1,6 +1,13 @@
 The author-and-SCRIBE record of every correction to reader-facing text on the site, newest first.
 Not shown to readers and not published: Eleventy's input is src/, so docs/ reaches no build output (AOID2-READER-NO-CHANGELOG, AOID2-CHANGELOG-REPO).
 
+## 2 November 2026 - Article 9 s7 and s8 Second Edition panel comments, one sentence each (CODE-AOID2-93)
+- What changed (Second Edition only; not yet live, because production builds with the Second Edition switch OFF):
+  - src/_data/apparatusData.json, A09, `panel_comment` (paragraph 2 only; the floor paragraph and every `panel_comment_first_edition` are untouched):
+    - s7: "What the span refuses is to make the accuracy of a disciple's doctrine the measure of the disciple." -> "What the span refuses is to let the accuracy of what we say about God take precedence over loving Him and being known of Him."
+    - s8: "Christ's own call is the measure:" -> "Christ's own call shows what that following is:" (the Luke 9:23 quotation after the colon is unchanged).
+- Why: both sentences echoed the superseded 17 Oct floor theses ("the measure of the disciple"; "by which the disciple's life is measured"), and the s7 sentence came close to answering a question the A9-F2 floor leaves open ("how much right belief God requires of each soul"), which codex A4(g) forbids in commentary. Approved by Aaron, 31 Oct 2026 (source: wop-scratch/WoP_AOID2_Step171_A09_s7_s8_Para2_20261031.md; CODE-AOID2-67 report, open item 1).
+
 ## 1 November 2026 - Last verification date and the Corrections form's dated-record promise removed (fef4580, CODE-AOID2-83)
 - What changed:
   - Father of Spirits disclosure translation note, /aoid/disclosures/father-of-spirits/ (both editions) and the Second Edition Article 2 tab. Source: data-sources/aoid/disclosures/WoP_AOID2_FatherOfSpirits_Disclosure_Final_20261004.md. Date removed: "4 Oct 2026". "Every quotation above was verified on 4 Oct 2026 by two instruments (WebFetch, and a browser read of the page text)" -> "Every quotation above was verified by two instruments (WebFetch, and a browser read of the page text)".
