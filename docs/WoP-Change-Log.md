@@ -1,7 +1,7 @@
 The author-and-SCRIBE record of every correction to reader-facing text on the site, newest first.
 Not shown to readers and not published: Eleventy's input is src/, so docs/ reaches no build output (AOID2-READER-NO-CHANGELOG, AOID2-CHANGELOG-REPO).
 
-## 1 November 2026 - Article 9 quotations, change dates and change-record promises removed (COMMIT_PLACEHOLDER, CODE-AOID2-82)
+## 1 November 2026 - Article 9 quotations, change dates and change-record promises removed (dc84a27, CODE-AOID2-82)
 - What changed:
   - src/_data/apparatusData.json, A09 (First Edition only; the Second Edition comments are untouched):
     - s20, `panel_comment_first_edition`, inside the 2 Corinthians 3:17-18 quotation: "are changed into the same image, from glory to glory" -> "are changed into the same image from glory to glory".
