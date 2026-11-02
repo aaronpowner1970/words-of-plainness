@@ -1,6 +1,12 @@
 The author-and-SCRIBE record of every correction to reader-facing text on the site, newest first.
 Not shown to readers and not published: Eleventy's input is src/, so docs/ reaches no build output (AOID2-READER-NO-CHANGELOG, AOID2-CHANGELOG-REPO).
 
+## 1 November 2026 - Last verification date and the Corrections form's dated-record promise removed (CODE-AOID2-83)
+- What changed:
+  - Father of Spirits disclosure translation note, /aoid/disclosures/father-of-spirits/ (both editions) and the Second Edition Article 2 tab. Source: data-sources/aoid/disclosures/WoP_AOID2_FatherOfSpirits_Disclosure_Final_20261004.md. Date removed: "4 Oct 2026". "Every quotation above was verified on 4 Oct 2026 by two instruments (WebFetch, and a browser read of the page text)" -> "Every quotation above was verified by two instruments (WebFetch, and a browser read of the page text)".
+  - Corrections form text, /aoid/corrections/ (Second Edition only). Source: data-sources/aoid/second-edition/WoP_AOID2_Step88_CorrectionsForm_Spec_Draft_v1_20261019.md, line 13, read by src/_data/aoidCorrections.js. Promise removed: "and recorded with its date and reason". "...any change to a count is decided openly and recorded with its date and reason." -> "...any change to a count is decided openly."
+- Why: AOID2-READER-NO-CHANGELOG, AOID2-LIVE-DISCLOSURE-DATES, AOID2-SE-CHANGELOG-PAGE (review of CODE-AOID2-82, items 1a and 1b, approved by Aaron 1 Nov 2026).
+
 ## 1 November 2026 - Article 9 quotations, change dates and change-record promises removed (dc84a27, CODE-AOID2-82)
 - What changed:
   - src/_data/apparatusData.json, A09 (First Edition only; the Second Edition comments are untouched):

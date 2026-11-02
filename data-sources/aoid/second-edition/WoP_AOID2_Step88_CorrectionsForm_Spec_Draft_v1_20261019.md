@@ -10,7 +10,7 @@ Intro:
 These Articles measure what Christ-believing traditions confess by reading each church's own adopted texts: its creeds, confessions, catechisms, rites and official statements. If we have misread your church's text, or missed one it has adopted, please tell us. We would rather be corrected than be wrong.
 
 What happens next:
-Every submission is read. No submission changes a count by itself. If it points to an adopted text we have not weighed, that text is read and verified, and any change to a count is decided openly and recorded with its date and reason.
+Every submission is read. No submission changes a count by itself. If it points to an adopted text we have not weighed, that text is read and verified, and any change to a count is decided openly.
 
 What we can weigh:
 We can count only texts a church has officially adopted. Sermons, personal writings and unofficial statements are welcome as background, but they cannot change a count.

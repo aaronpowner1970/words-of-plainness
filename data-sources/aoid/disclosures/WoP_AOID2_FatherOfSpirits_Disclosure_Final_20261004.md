@@ -165,7 +165,7 @@ Sources for the table: WoP_AOID2_Stage1_A02_Scoring_Report_20261002.md (CODE-AOI
   - **Eastern Orthodox is scored on its own adopted texts,** which speak for the Eastern churches only. The Oriental Orthodox churches and the Church of the East, separate since the fifth century, are not represented by them; they are measured as families of their own (AOID2-DENOMINATOR-EAST).
 
   Ruled: the Oriental Orthodox churches and the Church of the East are added as families 14 and 15 (AOID2-DENOMINATOR-EAST), and the Holiness churches as family 16 (AOID2-HOLINESS-FAMILY). The other unmeasured branches stay outside, disclosed here, because they have no adopted texts the method can read.
-- **Translation:** KJV throughout. Every quotation above was verified on 4 Oct 2026 by two instruments (WebFetch, and a browser read of the page text) on two publishers (churchofjesuschrist.org and ebible.org), and all readings were identical. D&C, Moses and Alma were checked on the canonizing publisher only, by both instruments, as accepted for the Sexual Holiness disclosure. 1 Corinthians 12:3 and 1 John 4:2 are cited, not quoted, and were verified for the Sexual Holiness disclosure.
+- **Translation:** KJV throughout. Every quotation above was verified by two instruments (WebFetch, and a browser read of the page text) on two publishers (churchofjesuschrist.org and ebible.org), and all readings were identical. D&C, Moses and Alma were checked on the canonizing publisher only, by both instruments, as accepted for the Sexual Holiness disclosure. 1 Corinthians 12:3 and 1 John 4:2 are cited, not quoted, and were verified for the Sexual Holiness disclosure.
 
 ---
 
