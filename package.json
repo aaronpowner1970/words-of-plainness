@@ -8,7 +8,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "prebuild": "node scripts/sjn-verify-data.js && node scripts/sjn-verify-artwork.js && node scripts/lyrics-validate-prebuild.js && node scripts/check-narration-ids.js",
-    "build": "eleventy",
+    "build": "eleventy && node scripts/aoid-verify-film-timing.js",
     "postbuild": "npx pagefind --site _site",
     "debug": "DEBUG=Eleventy* eleventy",
     "clean": "rm -rf _site",
@@ -16,10 +16,12 @@
     "sjn:verify": "node scripts/sjn-verify-data.js",
     "sjn:artwork": "node scripts/sjn-verify-artwork.js",
     "aoid:floors": "node scripts/aoid-verify-floors.js",
-    "aoid:counts": "node scripts/aoid-build-floor-counts.js --check"
+    "aoid:counts": "node scripts/aoid-build-floor-counts.js --check",
+    "aoid:films": "node scripts/aoid-verify-film-timing.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
+    "htmlparser2": "^7.2.0",
     "js-yaml": "^4.1.0",
     "pagefind": "^1.4.0"
   },
