@@ -1,7 +1,7 @@
 The author-and-SCRIBE record of every correction to reader-facing text on the site, newest first.
 Not shown to readers and not published: Eleventy's input is src/, so docs/ reaches no build output (AOID2-READER-NO-CHANGELOG, AOID2-CHANGELOG-REPO).
 
-## 2 November 2026 - Article 9 s7 and s8 Second Edition panel comments, one sentence each (CODE-AOID2-93)
+## 2 November 2026 - Article 9 s7 and s8 Second Edition panel comments, one sentence each (ad51eca, CODE-AOID2-93)
 - What changed (Second Edition only; not yet live, because production builds with the Second Edition switch OFF):
   - src/_data/apparatusData.json, A09, `panel_comment` (paragraph 2 only; the floor paragraph and every `panel_comment_first_edition` are untouched):
     - s7: "What the span refuses is to make the accuracy of a disciple's doctrine the measure of the disciple." -> "What the span refuses is to let the accuracy of what we say about God take precedence over loving Him and being known of Him."
