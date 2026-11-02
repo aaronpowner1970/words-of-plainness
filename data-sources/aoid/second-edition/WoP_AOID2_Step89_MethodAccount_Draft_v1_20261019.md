@@ -55,7 +55,7 @@ Every quotation from a church's text, and every passage of scripture quoted in t
 
 ### If we have it wrong
 
-If your church has adopted a text we have misread or missed, please [tell us](/aoid/corrections/). Every correction is read, and any change to a count is decided openly and recorded with its date and reason.
+If your church has adopted a text we have misread or missed, please [tell us](/aoid/corrections/). Every correction is read, and any change to a count is decided openly.
 
 
 ---

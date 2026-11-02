@@ -1,6 +1,71 @@
 The author-and-SCRIBE record of every correction to reader-facing text on the site, newest first.
 Not shown to readers and not published: Eleventy's input is src/, so docs/ reaches no build output (AOID2-READER-NO-CHANGELOG, AOID2-CHANGELOG-REPO).
 
+## 1 November 2026 - Article 9 quotations, change dates and change-record promises removed (COMMIT_PLACEHOLDER, CODE-AOID2-82)
+- What changed:
+  - src/_data/apparatusData.json, A09 (First Edition only; the Second Edition comments are untouched):
+    - s20, `panel_comment_first_edition`, inside the 2 Corinthians 3:17-18 quotation: "are changed into the same image, from glory to glory" -> "are changed into the same image from glory to glory".
+    - s22, `panel_comment_first_edition`, inside the 3 Nephi 27:33 quotation: "narrow is the way that leadeth unto life" -> "narrow is the way that leads to life".
+  - Change dates removed from /aoid/disclosures/father-of-spirits/ and /aoid/disclosures/sexual-holiness/, in both editions, and from the same text in the Second Edition Disclosure and Record tabs of Article 2 (Father of Spirits) and Article 11 (Sexual Holiness). Source: data-sources/aoid/disclosures/*_Disclosure_Final_*.md, read by src/_data/aoidDisclosures.js. Each line below gives the file line, the date text removed, and the sentence it stood in. Dates that belong to the content (church documents and statements) and the verification date in the Father of Spirits translation note were kept.
+    - Father of Spirits, source line 134: removed "AOID2-FOS-EO-MOGILA-CURRENCY, 11 Oct 2026)" in: "...by its synod or an official teaching statement, on God as the source of the human spirit; AOID2-FOS-EO-MOGILA-CURRENCY, 11 Oct 2026); Anabaptist (Q-A2-F1-AN: the ..."
+    - Father of Spirits, source line 136: removed "rulings of 2 and 3 Oct 2026 (" in: "...d (CODE-AOID2-08, section 5.1, the final table), all in wop-scratch. The rows reflect the rulings of 2 and 3 Oct 2026 (AOID2-FLOOR-SUBSTANCE as amend..."
+    - Father of Spirits, source line 143: removed "AOID2-SOUL-SPIRIT-REFERENT, 11 Oct 2026)" in: "..., the text is read in that meaning and is not counted on the strength of the shared word (AOID2-SOUL-SPIRIT-REFERENT, 11 Oct 2026)...."
+    - Father of Spirits, source line 147: removed "AOID2-SOUL-SPIRIT-REFERENT, 11 Oct 2026)" in: "... the spirit their publications say returns to God is the life-force, not a personal self (AOID2-SOUL-SPIRIT-REFERENT, 11 Oct 2026)...."
+    - Father of Spirits, source line 163: removed "AOID2-HOLINESS-FAMILY, 1 Oct 2026)" in: "...  - **Holiness is measured as a family of its own (AOID2-HOLINESS-FAMILY, 1 Oct 2026).** The Holiness churches desc..."
+    - Father of Spirits, source line 165: removed "AOID2-DENOMINATOR-EAST, 1 Oct 2026)" in: "...e fifth century, are not represented by them; they are measured as families of their own (AOID2-DENOMINATOR-EAST, 1 Oct 2026)...."
+    - Father of Spirits, source line 167: removed "Ruled 1 Oct 2026:" in: "...  Ruled 1 Oct 2026: the Oriental Orthodox churche..."
+    - Sexual Holiness, source line 151: removed "AOID2-29A-BAPTIST-ALLIANCE, 1 Oct 2026)" in: "...ments in its own name, as the UCC's General Synod and the Southern Baptist Convention do (AOID2-29A-BAPTIST-ALLIANCE, 1 Oct 2026). The family is divided; the S..."
+    - Sexual Holiness, source line 152: removed "AOID2-29B-BAPTIST-ALLIANCE, 1 Oct 2026)" in: "...regational life, read as a church-side act on the precedent of the UCC's 2005 resolution (AOID2-29B-BAPTIST-ALLIANCE, 1 Oct 2026)...."
+    - Sexual Holiness, source line 153: removed "Accepted by Aaron, 1 Oct 2026." in: "...text rests on a single publisher (B4). Several smaller Holiness bodies could not be read. Accepted by Aaron, 1 Oct 2026...."
+    - Sexual Holiness, source line 154: removed "Accepted by Aaron, 1 Oct 2026." in: "...amed, because their texts were read only as others reported them or could not be reached. Accepted by Aaron, 1 Oct 2026...."
+    - Sexual Holiness, source line 155: removed "AOID2-MCEC-29B, 8 Oct 2026)" in: "...- **Anabaptist, 29b (AOID2-MCEC-29B, 8 Oct 2026):** a 2019 statement by the Le..."
+    - Sexual Holiness, source line 156: removed "AOID2-SH-ANABAPTIST-29B-FORBEARANCE, 11 Oct 2026)" in: "...- **Anabaptist, 29b (AOID2-SH-ANABAPTIST-29B-FORBEARANCE, 11 Oct 2026):** Mennonite Church Canada (2..."
+    - Sexual Holiness, source line 159: removed ", corrected 1 Oct 2026)" in: "...ote 10), WoP_AOID2_29ab_EastFamilies_Report_20261001.md (CODE-AOID2-03, families 14 and 15, corrected 1 Oct 2026), WoP_AOID2_29ab_Verification_..."
+    - Sexual Holiness, source line 182: removed "AOID2-MCC-PLACEMENT, 8 Oct 2026)" in: "...  - **The Metropolitan Community Churches are not counted with any family (AOID2-MCC-PLACEMENT, 8 Oct 2026).** They govern themselves thr..."
+    - Sexual Holiness, source line 183: removed "AOID2-HOLINESS-FAMILY, 1 Oct 2026)" in: "...  - **Holiness is measured as a family of its own (AOID2-HOLINESS-FAMILY, 1 Oct 2026).** The Holiness churches desc..."
+    - Sexual Holiness, source line 185: removed "AOID2-DENOMINATOR-EAST, 1 Oct 2026)" in: "...the fifth century, are not represented by it; they are measured as families of their own (AOID2-DENOMINATOR-EAST, 1 Oct 2026)...."
+    - Sexual Holiness, source line 187: removed "Ruled 1 Oct 2026:" in: "...  Ruled 1 Oct 2026: the Oriental Orthodox churche..."
+    - Sexual Holiness, source line 159 (the "Sources for the table" paragraph): removed "of 22 Sep to 1 Oct" from "The 29a rows reflect the final rulings of 22 Sep to 1 Oct (AOID2-29A-METHODIST, ...)", and "of 1 Oct" twice, from "the 29b ruling of 1 Oct (AOID2-29B-BAPTIST-ALLIANCE) and the family ruling of 1 Oct (AOID2-HOLINESS-FAMILY)" (found by check d, no year given).
+  - Second Edition "What Changed in the Second Edition" page (/aoid/second-edition/, switch ON only). Source: data-sources/aoid/second-edition/WoP_AOID2_Step89_ChangeLog_Draft_v1_20261019.md, with the films line in src/_data/aoidStep89.js:
+    - Section "Later corrections" removed, heading and its paragraph: "None yet. Any change to a count, or any correction made after publication, will be recorded here with its date and its reason."
+    - ", each with a dated note" removed from the Article 9 line (source line only; the built line comes from amendment B1 and never carried it), and from the step 124 line (held, not rendered) in both places it is written: the [PENDING, step 124] line and the held line inside amendment B1.
+    - Films line: "The films for Articles 2 and 6, made on 7 October 2026, read ..." -> "The films for Articles 2 and 6 read ..." (date removed: 7 October 2026). "(2026)" in the opening kept.
+  - Method account, "If we have it wrong" (the Disclosure tab of every Article, switch ON; source WoP_AOID2_Step89_MethodAccount_Draft_v1_20261019.md): "Every correction is read, and any change to a count is decided openly and recorded with its date and reason." -> "Every correction is read, and any change to a count is decided openly." (promise of a dated record removed; no date).
+  - Record tab, "Date measured" column removed, header and cells (src/_data/aoidCounts.js; switch ON, Articles 2, 4, 6 and 11). Date in each row before removal (row id: teaching: date):
+    - A2-F1: The Father of our spirits: 3 October 2026, revised 11 October 2026
+    - A2-F2: God is good, His purposes are good, and His love for His children has no limit: 3 October 2026
+    - A2-F3: Providence: He sustains, He knows, He cares: 3 October 2026
+    - A2-F4: God in the Highest: 3 October 2026
+    - A2-F5: What no mortal knows, and what He reveals: 3 October 2026
+    - A4-F1: Prophets, men and women, whose word was of God: 3 October 2026
+    - A4-F2: Worship belongs to God alone: 3 October 2026
+    - A4-F3: God spoke, speaks, and will yet speak: 3 October 2026
+    - A4-F4: Broken vessels: 4 October 2026
+    - A4-F5: Study, the Spirit, and the Scriptures as the measure: 3 October 2026
+    - A4-F7: Received, and leading to Christ: 3 October 2026
+    - A4-F6: Preserved, plainly: 4 October 2026
+    - A6-F1: Entrance to the Kingdom through Christ alone: 5 October 2026
+    - A6-F2: What we are saved from and for, known in part: 5 October 2026
+    - A6-F3: Grace and the Atonement of the Son of God as the ground: 5 October 2026
+    - A6-F4: The arc: created in His image, conformed to His, glorified with Him: 5 October 2026
+    - A6-F5: Known in part, and never reduced: 5 October 2026
+    - A6-F6: The gospel's parts: faith, repentance, new birth, the Spirit's fruit and sealing: 5 October 2026
+    - A6-F7: Works as fruit, not price: 5 October 2026
+    - A6-F8: Judgment belongs to Christ: 5 October 2026
+    - A6-F9: The charge, the Spirit and the Word, and the disciple's labor: 5 October 2026
+    - A11-F1: Children of God by birth: 5 October 2026
+    - A11-F2: Disciples by covenant: 5 October 2026, revised 25 October 2026
+    - A11-F3: Love proven by obedience, and not salvation's price: 5 October 2026
+    - A11-F4: The cost, the cross, the return: 5 October 2026
+    - A11-F5: Christ's baptism and the ordinances, and the welcome of God: (no date; the cell showed an em dash)
+    - G8: Completing Acts 2:38: 5 October 2026
+    - A11-F7: Born of water and of the Spirit: 5 October 2026
+    - A11-F8: The way, prayer, endurance, the Kingdom at hand: 5 October 2026
+    - 29a: Sexual relations belong within marriage: 1 October 2026
+    - 29b: Marriage is between a man and a woman: 1 October 2026
+- Why: AOID2-READER-NO-CHANGELOG and AOID2-CHANGELOG-REPO (readers are shown no date of a change and no change log; this log is the record); AOID2-LIVE-DISCLOSURE-DATES (1 Nov 2026, a freeze on a live edition never bars removing change dates); AOID2-SE-CHANGELOG-PAGE (the Second Edition "What Changed" page stays as a topic-only edition explainer); AOID2-A09-FE-MISQUOTES and codex A5(b) for the two quotations. Codex v0.27.
+- Approved wording: C:\Users\aaron\Documents\wop-scratch\WoP_AOID2_Step206_Review_CODE-AOID2-81_v1_20261101.md (points 1, 2, 3 and 5)
+
 ## 1 November 2026 - Article 9, First Edition and Second Edition (da1bb8b, CODE-AOID2-81)
 - What changed (src/_data/apparatusData.json, A09, unless noted):
   - s4, `panel_comment_first_edition` (First Edition): clause "; and D&C 35:17-18 names the continuity of His mission and message in the latter-day commission - 'these signs shall follow them that believe' - the same signs, the same gospel, the same Christ" removed; "and" added after the semicolon before "D&C 6:21". The sentence now ends "... what He still is in the present age."

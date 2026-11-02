@@ -98,7 +98,7 @@ def test_summary_table_borderline_and_confirming_cells(site_on):
         m = re.search(r'<tr id="%s-record-%s">(.*?)</tr>' % (art, re.escape(f["id"])), arts, re.S)
         cells = [html_text(c) for c in re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", m.group(1), re.S)]
         want = str(f["borderline"]) if f["status"] == "MATCH" and f["borderline"] is not None else "Not recorded"
-        assert cells[5] == want, f["id"]
+        assert cells[4] == want, f["id"]    # column 4 since the Date measured column was removed (step 207)
         n += 1
     assert n >= 30
     a2f1 = re.search(r'<tr id="a02-record-A2-F1">(.*?)</tr>', arts, re.S).group(1)

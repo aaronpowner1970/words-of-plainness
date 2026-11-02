@@ -37,7 +37,7 @@ Session CHAT-AOID2-48a, 19 Oct 2026. Ledger row 1A.9 (Gate 1 criterion 5, AOID2-
 - **Article 6, Of Salvation.** Paul's counsel to work out our own salvation with fear and trembling now carries its second half: God works in us both to will and to do.
 - **Article 7, Of the Kingdom at Hand.** Unchanged.
 - **Article 8, Of Fellow Believers.** It now begins with the Father: Christ taught His disciples to pray "Our Father," called God "my Father, and your Father," and set the standard by which all would know His disciples, their love one to another. New: the disciples' gathering together to pray, to read the scriptures, to sing and to strengthen one another, with Christ's promise to be in the midst of them. Several sentences are reworded [VERIFY which, against the First Edition text]. A link now leads to the Fellowship Agreement that governs our gatherings, and the Article's refusal to defend the walls of division is disclosed as this ministry's own conviction, not a teaching measured across the traditions.
-- **Article 9, Of Finding Our Way.** Its second paragraph is rewritten. New: a paragraph on the Holy Spirit, the promised Comforter, by whom God is present with His people, who teaches, testifies of Christ, sanctifies, and gives gifts for the good of all; and a sentence on submitting to God and resisting the devil. The commentary is revised throughout, and five quotations of Latter-day Saint scripture in the First Edition commentary that did not match their source are corrected, each with a dated note.
+- **Article 9, Of Finding Our Way.** Its second paragraph is rewritten. New: a paragraph on the Holy Spirit, the promised Comforter, by whom God is present with His people, who teaches, testifies of Christ, sanctifies, and gives gifts for the good of all; and a sentence on submitting to God and resisting the devil. The commentary is revised throughout, and five quotations of Latter-day Saint scripture in the First Edition commentary that did not match their source are corrected.
 - **Article 10, Of Living by Grace.** Unchanged.
 - **Article 11, Of Covenants and Commitments.** A sentence on Christ's patience with our becoming. New: sexual holiness (sexual union as a holy gift whose rightful place is marriage, and chastity outside it), introduced with the plain acknowledgment that Christ's disciples are not all of one mind on it, and marked as witness (†); marriage held in honor; rendering to Caesar and to God; honest work; and the Lord's Supper.
 - **Article 12, Of Immortality and Eternal Life.** Christ's return in glory, and the promised new heavens and new earth. The sentences on the final accounting are reworded, and the reflection question is new.
@@ -51,12 +51,8 @@ Session CHAT-AOID2-48a, 19 Oct 2026. Ledger row 1A.9 (Gate 1 criterion 5, AOID2-
 - [PENDING, step 89] **The count beside each teaching:** taught in so many, contradicted in so many, no position in so many, of sixteen.
 - **Two disclosures in full,** for the two teachings kept as witness: *Of the Father of Spirits* and *Sexual Holiness*.
 - **A way to correct us.** Readers can tell us of a church text we have misread or missed.
-- [PENDING, step 124] Quotations in the First Edition commentary of the other Articles that did not match their source are corrected, each with a dated note.
+- [PENDING, step 124] Quotations in the First Edition commentary of the other Articles that did not match their source are corrected.
 - [VERIFY] The First Edition's films, PDFs and slides are labelled First Edition; the films for Articles 2 and 6 are new.
-
-### Later corrections
-
-None yet. Any change to a count, or any correction made after publication, will be recorded here with its date and its reason.
 
 ---
 
@@ -100,7 +96,7 @@ Scorer: Claude (Chat), CHAT-AOID2-48a. Date: 19 Oct 2026, 19:10 ET. Scored: the 
 
 ## AMENDMENTS v3, B1-B5 (APPROVED by Aaron 20 Oct 2026, 09:29 ET: "I approve B1 through B5.") Session CHAT-AOID2-48b, after the CODE-AOID2-48 review.
 
-**B1. Article 9.** The line becomes: "**Article 9, Of Finding Our Way.** Its second paragraph is rewritten. New: a paragraph on the Holy Spirit, the promised Comforter, by whom God is present with His people, who teaches, testifies of Christ, sanctifies, and gives gifts for the good of all; and a sentence on submitting to God and resisting the devil. The commentary is revised throughout." The held step-124 line becomes (still not rendered until step 124 is built): "Quotations in the First Edition commentary that did not match their source are corrected, each with a dated note."
+**B1. Article 9.** The line becomes: "**Article 9, Of Finding Our Way.** Its second paragraph is rewritten. New: a paragraph on the Holy Spirit, the promised Comforter, by whom God is present with His people, who teaches, testifies of Christ, sanctifies, and gives gifts for the good of all; and a sentence on submitting to God and resisting the devil. The commentary is revised throughout." The held step-124 line becomes (still not rendered until step 124 is built): "Quotations in the First Edition commentary that did not match their source are corrected."
 
 **B2. Article 11.** The line becomes: "**Article 11, Of Covenants and Commitments.** A sentence on Christ's patience with our becoming. New: sexual holiness (sexual union as a holy gift whose rightful place is marriage, and chastity outside it), introduced with the plain acknowledgment that Christ's disciples are not all of one mind on it, and marked as witness (†); marriage held in honor; rendering to Caesar and to God; honest work; and the Lord's Supper. Christ's command to His apostles to teach all nations, baptizing them, now stands beside His own baptism, and the first disciples' answer follows: they that gladly received the word were baptized. Peter's answer is quoted in full, with the promise of the gift of the Holy Ghost. New: a pledge that we will not explain away or set aside anything Christ did as our example, plainly taught, or implied in His parables. John 3:5 is now quoted in the King James words, \"born of water and of the Spirit.\"" (The witness mark is the dagger †.)
 

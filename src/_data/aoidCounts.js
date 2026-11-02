@@ -41,8 +41,6 @@ else {
 
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const spanNo = (s) => Number(s.split('.s')[1]);
-  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const dateText = (iso) => { const [y, m, d] = iso.split('-').map(Number); return d + ' ' + MONTHS[m - 1] + ' ' + y; };
 
   // Re-read each shown count against the ledger (and the disclosure table, where one exists).
   data.floors.filter((f) => f.status === 'MATCH').forEach((f) => {
@@ -85,12 +83,11 @@ else {
       const q = !ok || f.queue === null ? DASH : (f.queue + (f.queuedFamilies && f.queuedFamilies.length ? ' (' + f.queuedFamilies.map(esc).join(', ') + ')' : ''));
       return '<tr id="' + id + '-record-' + esc(f.id) + '"><th scope="row">' + esc(f.title) + '</th>'
         + '<td>' + (ok ? f.counts.taught : DASH) + '</td><td>' + (ok ? f.counts.contradicted : DASH) + '</td><td>' + (ok ? f.counts.noPosition : DASH) + '</td>'
-        + '<td>' + (ok && f.measured ? esc(dateText(f.measured) + (f.revised ? ', revised ' + dateText(f.revised) : '')) : DASH) + '</td>'
         + '<td>' + (ok && f.borderline !== null ? f.borderline : NOT_RECORDED) + '</td>'
         + '<td>' + q + '</td></tr>';
     }).join('');
     tables[art] = '<div class="disc-table-wrap an-summary"><table><caption>Taught, contradicted and no position are each counted of sixteen.</caption><thead><tr><th scope="col">Teaching</th><th scope="col">Taught</th><th scope="col">Contradicted</th><th scope="col">No position</th>'
-      + '<th scope="col">Date measured</th><th scope="col">Borderline readings</th><th scope="col">Families still being confirmed</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + notes.notesHtml(art, 'summary', (id) => { const r = rowsBy[art].find(({ f }) => f.id === id); return r && r.f.title; });
+      + '<th scope="col">Borderline readings</th><th scope="col">Families still being confirmed</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + notes.notesHtml(art, 'summary', (id) => { const r = rowsBy[art].find(({ f }) => f.id === id); return r && r.f.title; });
   });
 
   module.exports = { on: true, source: COUNTS, spans, tables, status: data.floors.map((f) => ({ id: f.id, status: f.status })) };

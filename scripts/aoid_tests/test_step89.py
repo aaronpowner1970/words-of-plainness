@@ -245,7 +245,7 @@ def test_summary_tables_match_the_single_source(site_on):
             assert cells[1:4] == [str(f["counts"][k]) for k in ("taught", "contradicted", "noPosition")]
             seen += 1
         else:
-            assert cells[1:] == ["—"] * 4 + ["Not recorded", "—"], f["id"]    # withheld: dashes, never zero; borderline "Not recorded" (T6)
+            assert cells[1:] == ["—"] * 3 + ["Not recorded", "—"], f["id"]    # withheld: dashes, never zero; borderline "Not recorded" (T6); no date column since step 207
     assert seen >= 25
     # the table comes first on the Record tab, before the per-family record
     a11 = panel(arts, "a11", "record")
@@ -520,13 +520,13 @@ def test_love_and_repent_paragraphs_carry_the_ruled_wording(site_on, site_off):
     assert "What the measurement found" not in off and "Second London Confession" not in off
 
 
-def test_a2f1_date_measured_and_s26_quotation_marks(site_on, site_off):
+def test_a2f1_no_date_column_and_s26_quotation_marks(site_on, site_off):
     arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
     rec = panel(arts, "a02", "record")
-    row = re.search(r'<tr id="a02-record-A2-F1">(.*?)</tr>', rec, re.S).group(1)
-    assert "3 October 2026, revised 11 October 2026" in text_of(row)
-    others = [r for r in re.findall(r'<tr id="a\d+-record-[^"]+">(.*?)</tr>', arts, re.S) if "revised" in text_of(r)]
-    assert len(others) == 2                        # A2-F1 and, since 25 Oct 2026 (AOID2-A11F2-OO-COPTIC), A11-F2 carry a revised date
+    assert re.search(r'<tr id="a02-record-A2-F1">', rec)
+    assert "Date measured" not in arts             # AOID2-SE-CHANGELOG-PAGE: the Record tab shows no date of a measurement or a revision
+    rows = re.findall(r'<tr id="a\d+-record-[^"]+">(.*?)</tr>', arts, re.S)
+    assert rows and not [r for r in rows if "revised" in text_of(r) or re.search(r"20\d\d", text_of(r))]
     ledger = {str(e["item"]): e for e in yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"]}
     assert str(ledger["A2-F1"]["revised_on"]) == "2026-10-11" and str(ledger["A2-F1"]["scored_on"]) == "2026-10-03"
     fc = {f["id"]: f for f in json.loads(COUNTS.read_text(encoding="utf8"))["floors"]}
@@ -546,7 +546,8 @@ def test_change_log_b1_to_b5(site_on):
     assert "labelled Second Edition." in t and "the films for Articles 2 and 6 are new" not in t
     assert 'the Articles now say "no position."' in t
     assert t.index('the Articles now say "no position."') > t.index("labelled Second Edition.")
-    assert t.index('the Articles now say "no position."') < t.index("Later corrections")
+    assert "Later corrections" not in t and "dated note" not in t and "made on 7 October 2026" not in t   # AOID2-SE-CHANGELOG-PAGE
+    assert "The Second Edition (2026) keeps the witness" in t
 
 
 def test_film_buttons_second_edition_for_articles_2_and_6(site_on, site_off):

@@ -46,7 +46,7 @@ const REVIEW_ONLY = {};  // empty since CODE-AOID2-51: both held paragraphs chec
 // A02v2 vapwjdfYqEA and A06v2 4Bp1-gPunxc) read the Second Edition text of their Articles: the builder's aligner matches
 // the reading to the Article text at 100.00% (Article 2, 119 words) and 99.44% (Article 6, 356 words, the one difference
 // being "co heirs" against "coheirs"), and the Article 2 and Article 6 text of the Second Edition is the text it aligned to.
-const FILMS_LINE = "The First Edition's films, PDFs and slides are labelled First Edition. The films for Articles 2 and 6, made on 7 October 2026, read the Second Edition text of those Articles and are labelled Second Edition.";
+const FILMS_LINE = "The First Edition's films, PDFs and slides are labelled First Edition. The films for Articles 2 and 6 read the Second Edition text of those Articles and are labelled Second Edition.";
 
 // Links the approved amendments ask for, where a target exists on the site.
 const METHOD_LINKS = {
