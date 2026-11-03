@@ -13,6 +13,8 @@
  *                ratified floor text (after whitespace normalisation); approved notes may follow it
  *                after a paragraph break (AOID2-FLOOR-OPENING-PARAGRAPH).
  *   PENDING      the ledger names no span (span: null). Lawful under A4(d). Does not fail the run.
+ *   SUPERSEDED   the ledger marks the item `superseded_by` its sub-floors (codex C4(a)(v)); the floor text and
+ *                hash are still tested, the span is not, and the sub-floors named must be in the ledger.
  *   FAILED       anything else: span absent, no panel_comment, panel_comment differs from the floor,
  *                floor document, heading or anchor not found (or ambiguous), floor text changed since
  *                its recorded hash (a floor changed without a ruling), hash not yet recorded, or a
@@ -22,7 +24,12 @@
  * reported on its own. `floor_heading` may be a heading at level 2, 3 or 4 of the floor document.
  * The optional `floor_anchor` selects the floor inside a section that holds more than one blockquote
  * (see extractFloor). The optional `floor_paragraph` (default 1) names which paragraph of a span's panel_comment
- * holds the floor, for a span that carries two floors. The rules are set out in data-sources/aoid/FLOOR_CHECK.md.
+ * holds the floor, for a span that carries two or more floors: a whole number for every span of the item, or a
+ * map from each of the item's spans to a whole number (AOID2-LIST-FLOORS). The optional `superseded_by` (a
+ * non-empty list of ledger items) marks a floor restated as sub-floors: its floor text and hash are still
+ * tested, its span is not tested against a panel comment, and it is reported as SUPERSEDED (never as
+ * TRANSFERRED or PENDING); every item it names must be in the ledger. The rules are set out in
+ * data-sources/aoid/FLOOR_CHECK.md.
  *
  * Usage:
  *   node scripts/aoid-verify-floors.js                  run the check
@@ -191,10 +198,34 @@ for (const [n, e] of ledger.scored.entries()) {
   if ("floor_anchor" in e && (typeof e.floor_anchor !== "string" || !e.floor_anchor.trim())) {
     malformed("malformed ledger entry: floor_anchor, when given, must be a non-empty string"); continue;
   }
-  if ("floor_paragraph" in e && (!Number.isInteger(e.floor_paragraph) || e.floor_paragraph < 1)) {
-    malformed("malformed ledger entry: floor_paragraph, when given, must be a whole number of 1 or more"); continue;
+  const wholeNumber = (v) => Number.isInteger(v) && v >= 1;
+  if ("floor_paragraph" in e) {
+    const fp = e.floor_paragraph;
+    const isMap = fp !== null && typeof fp === "object" && !Array.isArray(fp);
+    if (isMap) {
+      const keys = Object.keys(fp);
+      if (e.span === null || keys.length !== spans.length || !spans.every((sp) => sp in fp) || !keys.every((k) => wholeNumber(fp[k]))) {
+        malformed("malformed ledger entry: floor_paragraph, given as a map, must name every span of the item (and only those) with a whole number of 1 or more"); continue;
+      }
+    } else if (!wholeNumber(fp)) {
+      malformed("malformed ledger entry: floor_paragraph, when given, must be a whole number of 1 or more, or a map from span to such a number"); continue;
+    }
   }
-  const floorParagraph = "floor_paragraph" in e ? e.floor_paragraph : 1;
+  const paragraphFor = (span) => {
+    if (!("floor_paragraph" in e)) return 1;
+    return typeof e.floor_paragraph === "object" ? e.floor_paragraph[span] : e.floor_paragraph;
+  };
+  if ("superseded_by" in e) {
+    const sb = e.superseded_by;
+    if (!Array.isArray(sb) || sb.length === 0 || !sb.every((x) => (typeof x === "string" || typeof x === "number") && String(x).trim())) {
+      malformed("malformed ledger entry: superseded_by, when given, must be a non-empty list of ledger items"); continue;
+    }
+    const inLedger = new Set(ledger.scored.map((x) => (x && x.item !== undefined ? String(x.item) : null)));
+    const absent = sb.map(String).filter((x) => !inLedger.has(x));
+    if (absent.length) {
+      malformed(`superseded floor names sub-floor(s) missing from the ledger: ${absent.join(", ")}`); continue;
+    }
+  }
 
   const floor = extractFloor(path.join(ROOT, e.floor_document), e.floor_heading, "floor_anchor" in e ? e.floor_anchor : undefined);
   if (floor.error) { failAll(floor.error, spans); loud.push({ item: label, detail: floor.error }); continue; }
@@ -211,12 +242,18 @@ for (const [n, e] of ledger.scored.entries()) {
   for (const span of spans) {
     const u = { span, state: "FAILED", detail: "" };
     r.units.push(u);
+    if ("superseded_by" in e) {
+      u.state = "SUPERSEDED";
+      u.detail = `restated as ${e.superseded_by.join(", ")}; the floor stays on record and is no longer scored (C4(a)(v))`;
+      continue;
+    }
     if (span === null) { u.state = "PENDING"; u.detail = "no span yet (lawful under A4(d))"; continue; }
     const [art, sp] = span.split(".");
     const node = apparatus && apparatus[art] && apparatus[art][sp];
     if (!node) { u.detail = `span ${span} does not exist in apparatusData.json`; continue; }
     const pc = typeof node.panel_comment === "string" ? node.panel_comment : "";
     if (!norm(pc)) { u.detail = `span ${span} has no panel_comment`; continue; }
+    const floorParagraph = paragraphFor(span);
     const open = norm(floorParagraph === 1 ? openingParagraph(pc) : paragraphAt(pc, floorParagraph));
     if (!open) { u.detail = `span ${span} has no paragraph ${floorParagraph} in its panel_comment`; continue; }
     if (open !== floor.text) {
@@ -243,7 +280,7 @@ if (RECORD) {
 }
 
 console.log("AoID floor-transfer check (codex A4(a), A4(d))");
-console.log("States: TRANSFERRED = panel_comment matches floor | PENDING = no span yet, lawful | FAILED = does not meet A4(d)\n");
+console.log("States: TRANSFERRED = panel_comment matches floor | PENDING = no span yet, lawful | SUPERSEDED = restated as sub-floors, on record, not scored | FAILED = does not meet A4(d)\n");
 for (const r of results) {
   if (r.units.length === 1) {
     const u = r.units[0];
@@ -271,10 +308,12 @@ const units = results.flatMap((r) => r.units);
 const failed = units.filter((u) => u.state === "FAILED").length;
 const t = units.filter((u) => u.state === "TRANSFERRED").length;
 const pd = units.filter((u) => u.state === "PENDING").length;
+const sup = units.filter((u) => u.state === "SUPERSEDED").length;
 if (loud.length || pendProblems.length) {
   console.error("\n*** LEDGER / FLOOR PROBLEMS (an entry cannot be checked at all) ***");
   for (const l of loud) console.error(`  ${l.item}: ${l.detail}`);
   for (const d of pendProblems) console.error(`  pending floor document not found: ${d}`);
 }
-console.log(`\n${t} transferred, ${pd} pending, ${failed} failed (counted by span).`);
+console.log(`
+${t} transferred, ${pd} pending, ${failed} failed${sup ? `, ${sup} superseded` : ""} (counted by span).`);
 process.exit(failed || pendProblems.length ? 1 : 0);

@@ -167,3 +167,15 @@ Entered by CODE-AOID2-71 (pathway step 178), in the codex A4(e) addendum method.
 ### A5-F4b, restated. The prophets in part and in earthen vessels; the Son in whole (s6, second of two floors under A4(f))
 
 > The Article confesses only what 1 Corinthians 13:9-10 and 2 Corinthians 4:7 confess: we prophesy in part, and that which is in part stands against that which is perfect; and we have this treasure in earthen vessels, that the excellency of the power may be of God, and not of us. This is the floor: the prophets spoke truly, yet as imperfect men in limited human words; "imperfectly" names the vessel, not the truth it carries, and the power by which their witness brings souls to God is His, not theirs. Only Christ is the perfect Word. It does not settle how the prophets' words were kept, gathered into a canon, translated or rightly interpreted; each tradition fills those in its own house.
+
+## Addendum, 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE; CODE-AOID2-98, AOID2 step 246): sub-floors
+
+Each section below carries one sub-floor, approved by Aaron on 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE). The parent floors above stay on record and are no longer scored (codex C4(a)(v)). Nothing above this addendum changes.
+
+### A5-F6a. Born of the virgin Mary, without sin (s9)
+
+> The Article confesses only what Matthew 1:18, 23 and Luke 1:34-35 confess: before Joseph and Mary came together, she was found with child of the Holy Ghost; behold, a virgin shall be with child, and shall bring forth a son; Mary said, How shall this be, seeing I know not a man? and the angel answered, The Holy Ghost shall come upon thee, therefore that holy thing which shall be born of thee shall be called the Son of God. This is the floor: Jesus was born of the virgin Mary. It does not settle Mary's place and honors (Mother of God, her own sinlessness, perpetual virginity), or the manner of the conception beyond what Matthew and Luke state; each tradition fills those in its own house.
+
+### A5-F6b. Born of the virgin Mary, without sin (s9)
+
+> The Article confesses only what Hebrews 4:15 and 1 Peter 2:22 confess: Christ was in all points tempted like as we are, yet without sin; who did no sin, neither was guile found in His mouth. This is the floor: He lived without sin. It does not settle how His sinlessness is related to His divine nature; each tradition fills that in its own house.

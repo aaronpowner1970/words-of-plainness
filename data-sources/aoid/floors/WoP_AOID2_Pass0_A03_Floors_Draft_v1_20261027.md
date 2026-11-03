@@ -133,3 +133,19 @@ The existing panel comments on s8, s10 and s14 rank houses: s8 calls itself "the
 | A3-F9 | s13 | ratify |
 | Posture | s6 | confirm not scored |
 | A4(g) commentary pass | s8, s10, s14 | add as a pathway step |
+
+## Addendum, 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE; CODE-AOID2-98, AOID2 step 246): sub-floors
+
+Each section below carries one sub-floor, approved by Aaron on 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE). The parent floors above stay on record and are no longer scored (codex C4(a)(v)). Nothing above this addendum changes.
+
+### A3-F6a. Choose, fall, rise, be made new (s9)
+
+> The Article confesses only what Romans 3:23 confesses: all have sinned and come short of the glory of God. This is the floor: all fall short.
+
+### A3-F6b. Choose, fall, rise, be made new (s9)
+
+> The Article confesses only what Galatians 6:1 confesses: if a man be overtaken in a fault, ye which are spiritual, restore such an one. This is the floor: the fallen may be restored. It does not settle whether God's saving grace is extended to every soul or made effectual in the elect, how grace and the human will work together (see A3-F2), or how a believer who falls is restored (repentance, confession, the sacraments or ordinances); each tradition fills those in its own house.
+
+### A3-F6c. Choose, fall, rise, be made new (s9)
+
+> The Article confesses only what 2 Corinthians 5:17 confesses: if any man be in Christ, he is a new creature: old things are passed away, behold, all things are become new. This is the floor: those who are in Christ are made new by His grace. It does not settle whether God's saving grace is extended to every soul or made effectual in the elect, or how grace and the human will work together (see A3-F2); each tradition fills those in its own house.

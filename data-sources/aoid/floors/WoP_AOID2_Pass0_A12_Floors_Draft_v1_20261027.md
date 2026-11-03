@@ -116,3 +116,23 @@ Candidates, ranked:
 The A12 panel comments were not read in this sitting. Step 103 should read them for A4(g), as it will for Articles 8, 9 and 10.
 
 No Article text change is proposed.
+
+## Addendum, 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE; CODE-AOID2-98, AOID2 step 246): sub-floors
+
+Each section below carries one sub-floor, approved by Aaron on 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE). The parent floors above stay on record and are no longer scored (codex C4(a)(v)). Nothing above this addendum changes.
+
+### A12-F4a. Every soul raised to give account; nothing forgotten (s5)
+
+> The Article confesses only what John 5:28-29 confesses: all that are in the graves shall hear his voice, and shall come forth. This is the floor: every soul will be raised. It does not settle the order and timing of the resurrections, what follows it for each soul, whether any punishment is everlasting, or degrees of glory; each tradition fills those in its own house.
+
+### A12-F4b. Every soul raised to give account; nothing forgotten (s5)
+
+> The Article confesses only what 2 Corinthians 5:10 and Romans 14:12 confess: we must all appear before the judgment seat of Christ; every one of us shall give account of himself to God. This is the floor: every soul will stand before God, and each will give an honest account of his own life. It does not settle the form the judgment takes, what follows it for each soul, whether any punishment is everlasting, or degrees of glory; each tradition fills those in its own house.
+
+### A12-F4c. Every soul raised to give account; nothing forgotten (s5)
+
+> The Article confesses only what 1 Corinthians 13:12 confesses: then shall I know even as also I am known. This is the floor: each will know as he is known. It does not settle the form the judgment takes; each tradition fills that in its own house.
+
+### A12-F4d. Every soul raised to give account; nothing forgotten (s6)
+
+> The Article confesses only what Psalm 56:8 with Malachi 3:16 confess: put thou my tears into thy bottle: are they not in thy book?; and a book of remembrance was written before him for them that feared the LORD. This is the floor: nothing of our tears or our joys is forgotten by Him. It does not settle the form the judgment takes; each tradition fills that in its own house.

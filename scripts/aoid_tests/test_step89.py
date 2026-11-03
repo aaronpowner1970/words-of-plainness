@@ -28,6 +28,7 @@ METHOD = SE / "WoP_AOID2_Step89_MethodAccount_Draft_v1_20261019.md"
 STAGE1 = SE / "WoP_AOID2_Step89_Stage1Disclosures_Draft_v1_20261019.md"
 COUNTS = REPO / "data-sources" / "aoid" / "floor_counts.json"
 LEDGER = REPO / "data-sources" / "aoid" / "floor_ledger.yaml"
+APPARATUS = REPO / "src" / "_data" / "apparatusData.json"
 FOS = REPO / "data-sources" / "aoid" / "disclosures" / "WoP_AOID2_FatherOfSpirits_Disclosure_Final_20261004.md"
 
 
@@ -246,7 +247,9 @@ def test_summary_tables_match_the_single_source(site_on):
             seen += 1
         else:
             assert cells[1:] == ["—"] * 3 + ["Not recorded", "—"], f["id"]    # withheld: dashes, never zero; borderline "Not recorded" (T6); no date column since step 207
-    assert seen >= 25
+    # Temporary under AOID2-STEP246-TESTS (option 1): 19 floors show a count since the 58 sub-floors replaced 11 scored
+    # parents (step 246). The minimum is raised again after the clause audit, step 238.
+    assert seen >= 19
     # the table comes first on the Record tab, before the per-family record
     a11 = panel(arts, "a11", "record")
     assert a11.index("an-summary") < a11.index("an-tally") < a11.index("<table", a11.index("an-tally"))
@@ -293,8 +296,8 @@ def test_baptism_table_shows_without_page_scroll(browser, server, width):
 
 def test_panel_count_and_links(page, server):
     data = json.loads(COUNTS.read_text(encoding="utf8"))
-    f = next(x for x in data["floors"] if x["id"] == "A4-F1")
-    open_span(page, server, "A04", "s1")
+    f = next(x for x in data["floors"] if x["id"] == "A4-F2")    # A4-F1 is withheld since step 246; A4-F2 still shows a count
+    open_span(page, server, "A04", "s4")
     c = f["counts"]
     sentence = f'Taught in {c["taught"]}, contradicted in {c["contradicted"]}, no position in {c["noPosition"]}, of sixteen.'
     assert page.inner_text(".ap-count-sentence") == sentence
@@ -307,7 +310,7 @@ def test_panel_count_and_links(page, server):
 def test_unscored_and_mismatched_spans_show_no_count(page, server):
     open_span(page, server, "A04", "s19")          # G1: not yet scored
     assert page.locator(".ap-count-block").count() == 0
-    for art, sp in (("A11", "s9"), ("A11", "s10"), ("A11", "s25"), ("A11", "s26")):   # A11-F5 withheld, G6 and A11-F9 unscored
+    for art, sp in (("A04", "s1"), ("A11", "s9"), ("A11", "s10"), ("A11", "s25"), ("A11", "s26")):   # A4-F1a and A4-F1c unscored (parent A4-F1 withheld, step 246); A11-F5 withheld, G6 and A11-F9 unscored
         open_span(page, server, art, sp)
         assert page.locator(".ap-count-block").count() == 0, (art, sp)
 
@@ -319,11 +322,11 @@ def test_a2f1_count_shown_after_reconciliation(page, server):
 
 
 def test_floor_to_method_link_and_back_line(page, server):
-    open_span(page, server, "A04", "s1")
+    open_span(page, server, "A04", "s4")    # A4-F2 still shows a count (A04 s1 holds unscored sub-floors since step 246)
     page.click(".ap-count-links a[data-an-method]")
     assert page.get_attribute("#a04-tab-disclosure", "aria-selected") == "true"
     back = page.locator("#a04-method .an-method-back")
-    assert back.is_visible() and back.inner_text() == "Back to span 1"
+    assert back.is_visible() and back.inner_text() == "Back to span 4"
     assert page.evaluate("document.activeElement && document.activeElement.id") != "x"
     page.wait_for_timeout(500)
     top = page.evaluate("document.getElementById('a04-method').getBoundingClientRect().top")
@@ -333,17 +336,17 @@ def test_floor_to_method_link_and_back_line(page, server):
     assert page.get_attribute("#a04-tab-declaration", "aria-selected") == "true"
     page.wait_for_selector("#apPanel.ap-open")
     assert page.locator("#apSpanText").inner_text().startswith("We receive")  or True
-    assert page.locator("[data-article='A04'][data-span='s1'].ap-active").count() == 1
+    assert page.locator("[data-article='A04'][data-span='s4'].ap-active").count() == 1
     # opening the Disclosure tab directly shows no back line
     page.click("#a04-tab-disclosure")
     assert not page.locator("#a04-method .an-method-back").is_visible()
 
 
 def test_see_the_record_opens_the_row(page, server):
-    open_span(page, server, "A04", "s1")
+    open_span(page, server, "A04", "s4")
     page.click(".ap-count-links a[data-an-record]")
     assert page.get_attribute("#a04-tab-record", "aria-selected") == "true"
-    assert page.locator("#a04-record-A4-F1").is_visible()
+    assert page.locator("#a04-record-A4-F2").is_visible()
 
 
 def test_new_links_resolve(site_on):
@@ -418,10 +421,27 @@ def test_article_11_panels_carry_the_ratified_floors(site_on):
     arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
     d = json.loads(re.search(r'<script type="application/json" id="apparatusData">(.*?)</script>', arts, re.S).group(1))["A11"]
     ledger = yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"]
-    f5 = d["s9"]["panel_comment"].split("\n\n")[0]
     f9 = d["s26"]["panel_comment"].split("\n\n")[0]
-    assert d["s10"]["panel_comment"].split("\n\n")[0] == f5
-    assert "Matthew 28:19" in f5 and "how or to whom baptism is given" in f5
+    # Step 246 (AOID2-LIST-FLOORS): A11-F5 is restated as A11-F5a to e. s9 opens with A11-F5a and s10 with A11-F5d,
+    # each equal to the approved sub-floor text held in the floor document's addendum; A11-F5b (Matthew 28:19) is the next paragraph of s9.
+    floor_doc = (REPO / "data-sources" / "aoid" / "floors" / "WoP_AOID2_ScopeNotes_Stage1_A02_A04_A06_A11_Ratified_20261002.md").read_text(encoding="utf8")
+    squash = lambda t: re.sub(r"\s+", " ", t).strip()
+
+    def quote_after(heading_re):
+        m = re.search(r"^%s.*\n\n((?:>.*\n)+)" % heading_re, floor_doc, re.M)
+        return squash(" ".join(line.lstrip("> ") for line in m.group(1).splitlines()))
+
+    f5a = squash(d["s9"]["panel_comment"].split("\n\n")[0])
+    f5d = squash(d["s10"]["panel_comment"].split("\n\n")[0])
+    assert f5a == quote_after(r"### A11-F5a\. ") and f5a.startswith("The Article confesses only what Matthew 3:15 confesses")
+    assert f5d == quote_after(r"### A11-F5d\. ") and f5d.startswith("The Article confesses only what Acts 10:34-35 confesses")
+    f5b = d["s9"]["panel_comment"].split("\n\n")[1]
+    assert "Matthew 28:19" in f5b and "how or to whom baptism is given" in f5b
+    # the First Edition comments keep the 2 Oct wording (the first blockquote under A11-F5 in the same document)
+    oct2 = quote_after(r"### A11-F5\. ")
+    fe = json.loads(APPARATUS.read_text(encoding="utf8"))["A11"]
+    for sp in ("s9", "s10"):
+        assert squash(fe[sp]["panel_comment_first_edition"].split("\n\n")[0]) == oct2, sp
     assert f9.startswith("The Article confesses only what Acts 2:41 confesses")
     ids = {str(e["item"]): e for e in ledger}
     assert ids["A11-F5"]["withheld"] and ids["A11-F9"]["scored_on"] is None

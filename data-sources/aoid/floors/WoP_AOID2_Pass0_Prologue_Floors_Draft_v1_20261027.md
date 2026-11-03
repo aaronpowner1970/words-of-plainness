@@ -186,3 +186,19 @@ Alternatives for the s19/s15 sentence ("Interfaith fellowship is governed by ...
 | Classification test | all | accept, then file against A4 |
 
 Scoring of these floors waits for the Stage 2 pilot review (step 102). On ratification, the floors move to a floor document under `data-sources/aoid/floors/` by a Code session under A4(d), and the ledger gains entries only when items are scored.
+
+## Addendum, 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE; CODE-AOID2-98, AOID2 step 246): sub-floors
+
+Each section below carries one sub-floor, approved by Aaron on 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE). The parent floors above stay on record and are no longer scored (codex C4(a)(v)). Nothing above this addendum changes.
+
+### P-F1a. What we know now, and what God keeps (s5)
+
+> The Article confesses only what Deuteronomy 29:29 confesses: the secret things belong unto the LORD our God, but those things which are revealed belong unto us and to our children for ever, that we may do all the words of His law. This is the floor: what God has not revealed is His, and what He has revealed is given to us to do. It does not settle which things God has revealed and which He keeps, or how far He is known by nature, by Scripture, by the Church's teaching or by continuing revelation; each tradition fills those in its own house.
+
+### P-F1b. What we know now, and what God keeps (s1, s3, s9)
+
+> The Article confesses only what 1 Corinthians 13:9, 12 confess: now we know in part and prophesy in part, and see through a glass, darkly. This is the floor: in this life our knowledge is partial. It does not settle what "that which is perfect" is or when it comes, or how far He is known by nature, by Scripture, by the Church's teaching or by continuing revelation; each tradition fills those in its own house.
+
+### P-F1c. What we know now, and what God keeps (s10)
+
+> The Article confesses only what 1 Corinthians 13:12 confesses: then face to face, and then shall we know even as also we are known. This is the floor: fuller knowledge waits for the day when we shall know as we are known. It does not settle what "that which is perfect" is or when it comes, or whether any creature will come to know God fully (see A2-F5); each tradition fills those in its own house.

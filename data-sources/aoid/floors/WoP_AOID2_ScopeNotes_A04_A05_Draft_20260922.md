@@ -166,3 +166,25 @@ Where it goes: Article 8, the second Father span (s19), beside the "Our Father" 
 > The Article confesses only what John 20:17 and Matthew 5:16 confess: Christ called God His disciples' Father as well as His own, 'my Father, and your Father,' and taught that their good works should glorify their Father which is in heaven. This is the floor. It does not settle whether Christ's sonship and ours are of one kind or two, how disciples become children of God, whether by creation, adoption, new birth or spirit birth, or what 'my God, and your God' says of the Son; each tradition fills those in its own house.
 
 Restoration column (ratified): 3 Nephi 12:16; 3 Nephi 12:45. D&C 93:21-23 is held as Volume 2 witness (G11 precedent) and is NOT anchored in the Articles.
+
+## Addendum, 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE; CODE-AOID2-98, AOID2 step 246): sub-floors
+
+Each section below carries one sub-floor, approved by Aaron on 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE). The parent floors above stay on record and are no longer scored (codex C4(a)(v)). Nothing above this addendum changes.
+
+### G2a. Ascension, the right hand, intercession (s18)
+
+> The Article confesses only what Acts 1:9-11 and Mark 16:19 confess: the risen Christ ascended into heaven, and is seated at the right hand of God. This is the floor. It does not settle the manner of Christ's presence in the Lord's Supper, or whether "the right hand" is a place or a figure of authority; each tradition fills those in its own house.
+
+### G2b. Ascension, the right hand, intercession (s18)
+
+> The Article confesses only what Hebrews 7:25 confesses, with Romans 8:34 and 1 John 2:1: Christ ever lives to make intercession for us as our advocate with the Father. This is the floor. It does not settle how His intercession works; each tradition fills that in its own house.
+
+### G3a. Gathering: prayer, scripture, song, strengthening one another (version 2) (s21)
+
+> The Article confesses only what Hebrews 10:24-25, Acts 2:42 and Colossians 3:16 confess: disciples do not forsake assembling together, but gather to pray, to hear and read the scriptures, to sing psalms and hymns and spiritual songs, and to exhort and strengthen one another. This is the floor. It does not settle the day of gathering, the form of worship, who presides, or the sacraments or ordinances kept there; each tradition fills those in its own house.
+
+G3a is word for word the 22 Sep 2026 G3 floor (version 1).
+
+### G3b. Gathering: prayer, scripture, song, strengthening one another (version 2) (s21)
+
+> The Article confesses only what Matthew 18:20 confesses: Christ promised that where two or three are gathered together in His name, He is there in the midst of them. This is the floor. It does not settle the manner of His presence, whether by His Spirit, in the gathered body, or in the sacrament, or what gathering in His name requires; each tradition fills those in its own house.

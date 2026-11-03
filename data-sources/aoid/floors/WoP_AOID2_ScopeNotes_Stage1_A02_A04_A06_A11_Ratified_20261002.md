@@ -275,3 +275,177 @@ Why after s5: the cooling found in June happens at "as reality", and the patienc
 ---
 
 When ratified: the floors are copied to `data-sources/aoid/floors/` and listed under `pending_floors` in `floor_ledger.yaml`. They are transcribed into the panel comments only when each span is next edited, under A4(d). Scoring against the sixteen families is the next step after that.
+
+## Addendum, 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE; CODE-AOID2-98, AOID2 step 246): sub-floors
+
+Each section below carries one sub-floor, approved by Aaron on 2 Nov 2026 (AOID2-LIST-FLOORS; AOID2-SUBFLOOR-FIVE). The parent floors above stay on record and are no longer scored (codex C4(a)(v)). Nothing above this addendum changes.
+
+### A4-F1a. Prophets, men and women, whose word was of God (s1)
+
+> The Article confesses only what Hebrews 1:1 confesses: God spoke in time past by the prophets. This is the floor. It does not settle the manner of inspiration, or inerrancy; each tradition fills those in its own house.
+
+### A4-F1b. Prophets, men and women, whose word was of God (s2, s3)
+
+> The Article confesses only what 2 Peter 1:20-21 confesses: holy men of God spake as they were moved by the Holy Ghost, so that prophecy came not by the will of man. This is the floor. It does not settle the manner of inspiration, or inerrancy; each tradition fills those in its own house.
+
+### A4-F1c. Prophets, men and women, whose word was of God (s1)
+
+> The Article confesses only what Joel 2:28 confesses: God promised that sons and daughters would prophesy, as Deborah, Huldah and the daughters of Philip did. This is the floor. It does not settle whether women may hold prophetic or ordained office today; each tradition fills that in its own house.
+
+### A4-F5a. Study, the Spirit, and the Scriptures as the measure (s8)
+
+> The Article confesses only what Proverbs 3:5 and Acts 17:11 confess: disciples search the scriptures daily without leaning unto their own understanding. This is the floor. It does not settle whether Scripture is the only infallible rule, the authority of tradition or a teaching office, or which books make up the canon; each tradition fills those in its own house.
+
+### A4-F5b. Study, the Spirit, and the Scriptures as the measure (s14)
+
+> The Article confesses only what 1 Corinthians 2:12-14 confesses: the things of God are known by the Spirit of God. This is the floor. It does not settle whether Scripture is the only infallible rule, or the authority of tradition or a teaching office; each tradition fills those in its own house.
+
+### A4-F5c. Study, the Spirit, and the Scriptures as the measure (s16)
+
+> The Article confesses only what 1 Corinthians 14:33 confesses: God is not the author of confusion. This is the floor.
+
+### A4-F5d. Study, the Spirit, and the Scriptures as the measure (s17)
+
+> The Article confesses only what Isaiah 8:20 confesses: every word is weighed against the law and the testimony He has given. This is the floor. It does not settle whether Scripture is the only infallible rule, the authority of tradition or a teaching office, or which books make up the canon; each tradition fills those in its own house.
+
+Scoring note carried from A4-F5: the floor says weighed against the Scriptures, not against the Scriptures alone.
+
+### A4-F7a. Received, and leading to Christ (s9)
+
+> The Article confesses only what James 1:21 confesses: disciples receive with meekness the engrafted word. This is the floor. It does not settle the relation of the written word to Christ the Word; each tradition fills that in its own house.
+
+### A4-F7b. Received, and leading to Christ (s9)
+
+> The Article confesses only what 2 Timothy 3:16 confesses: all scripture is given by inspiration of God. This is the floor. It does not settle the canon, or the place of tradition; each tradition fills those in its own house.
+
+### A4-F7c. Received, and leading to Christ (s13)
+
+> The Article confesses only what John 5:39 confesses: the scriptures are they which testify of Christ. This is the floor. It does not settle the canon, the relation of the written word to Christ the Word, or the place of tradition; each tradition fills those in its own house.
+
+### A6-F1a. Entrance to the Kingdom through Christ alone (s1)
+
+> The Article confesses only what Mark 1:15 confesses: Christ preached the gospel of the kingdom of God. This is the floor.
+
+### A6-F1b. Entrance to the Kingdom through Christ alone (s1)
+
+> The Article confesses only what John 10:9, John 14:6 and Acts 4:12 confess: Christ is the door, and by Him if any man enter in he shall be saved; no man cometh unto the Father but by Him; and there is salvation in no other name. This is the floor. It does not settle the state of those who never heard the gospel in this life, whether the gospel is preached to the dead, or the place of the Church in salvation; each tradition fills those in its own house.
+
+### A6-F3a. Grace and the Atonement of the Son of God as the ground (s4)
+
+> The Article confesses only what Ephesians 2:8-9 confesses: by grace are ye saved through faith, and that not of yourselves, it is the gift of God. This is the floor. It does not settle whether righteousness is imputed or imparted; each tradition fills that in its own house.
+
+### A6-F3b. Grace and the Atonement of the Son of God as the ground (s4)
+
+> The Article confesses only what Acts 4:12 confesses: salvation from sin and death is in Christ alone. This is the floor. It does not settle any one account of how the Atonement saves, or the extent of the atonement; each tradition fills those in its own house.
+
+### A6-F4a. The arc: created in His image, conformed to His, glorified with Him (s6)
+
+> The Article confesses only what Genesis 1:27 confesses: God created man in His own image. This is the floor.
+
+### A6-F4b. The arc: created in His image, conformed to His, glorified with Him (s5, s6)
+
+> The Article confesses only what 2 Corinthians 3:18 confesses: beholding the glory of the Lord we are changed into the same image from glory to glory. This is the floor. It does not settle the nature of the glorified state, deification or exaltation; each tradition fills those in its own house.
+
+### A6-F4c. The arc: created in His image, conformed to His, glorified with Him (s6, s7)
+
+> The Article confesses only what 1 John 3:2 confesses: when He shall appear we shall be like Him. This is the floor. It does not settle the nature of the glorified state, deification or exaltation, or degrees of glory; each tradition fills those in its own house.
+
+### A6-F4d. The arc: created in His image, conformed to His, glorified with Him (s7)
+
+> The Article confesses only what Romans 8:17 confesses: the children of God are joint-heirs with Christ, that we may be also glorified together. This is the floor. It does not settle the nature of the glorified state, deification or exaltation, degrees of glory, or where the redeemed dwell; each tradition fills those in its own house.
+
+### A6-F6a. The gospel's parts: faith, repentance, new birth, the Spirit's fruit and sealing (s10)
+
+> The Article confesses only what Mark 1:15 confesses: repent and believe the gospel. This is the floor.
+
+### A6-F6b. The gospel's parts: faith, repentance, new birth, the Spirit's fruit and sealing (s11)
+
+> The Article confesses only what John 3:3-5 confesses: except a man be born again he cannot see the kingdom of God. This is the floor. It does not settle when the new birth takes place; each tradition fills that in its own house.
+
+### A6-F6c. The gospel's parts: faith, repentance, new birth, the Spirit's fruit and sealing (s11)
+
+> The Article confesses only what Galatians 5:22-23 confesses: the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness and temperance. This is the floor.
+
+### A6-F6d. The gospel's parts: faith, repentance, new birth, the Spirit's fruit and sealing (s13)
+
+> The Article confesses only what Ephesians 1:13-14 confesses: believers are sealed with that Holy Spirit of promise. This is the floor. It does not settle how the sealing is given; each tradition fills that in its own house.
+
+### A6-F6e. The gospel's parts: faith, repentance, new birth, the Spirit's fruit and sealing (s13)
+
+> The Article confesses only what John 11:25 confesses: He that believeth in Christ shall live. This is the floor.
+
+### A6-F9a. The charge, the Spirit and the Word, and the disciple's labor (s15)
+
+> The Article confesses only what Matthew 22:37-40 confesses: thou shalt love the Lord thy God and thy neighbour as thyself. This is the floor.
+
+### A6-F9b. The charge, the Spirit and the Word, and the disciple's labor (s16)
+
+> The Article confesses only what John 5:39 with John 16:13 confess: the scriptures testify of Christ and the Spirit guides into truth. This is the floor.
+
+### A6-F9c. The charge, the Spirit and the Word, and the disciple's labor (s17)
+
+> The Article confesses only what Proverbs 3:5-6 confesses: trust in the LORD and lean not unto thine own understanding. This is the floor.
+
+### A6-F9d. The charge, the Spirit and the Word, and the disciple's labor (s18)
+
+> The Article confesses only what Philippians 2:12-13 confesses: work out your own salvation with fear and trembling, for it is God which worketh in you both to will and to do of His good pleasure. This is the floor. It does not settle how the disciple's working and God's working are related; each tradition fills that in its own house.
+
+### A11-F4a. The cost, the cross, the return (s6)
+
+> The Article confesses only what Luke 9:23 confesses: if any man will come after Christ, let him deny himself, take up his cross daily and follow Him. This is the floor.
+
+### A11-F4b. The cost, the cross, the return (s5)
+
+> The Article confesses only what Luke 14:27-28 confesses: whosoever doth not bear his cross cannot be His disciple, and the builder counts the cost. This is the floor.
+
+### A11-F4c. The cost, the cross, the return (s5, s7)
+
+> The Article confesses only what Romans 12:1 confesses: disciples present their bodies a living sacrifice. This is the floor.
+
+### A11-F4d. The cost, the cross, the return (s8, s19)
+
+> The Article confesses only what Romans 3:23 with 1 John 1:9 confess: all have sinned, and if we confess our sins He is faithful to forgive. This is the floor. It does not settle how sin after conversion is forgiven (by confession to God, a sacrament of penance or reconciliation, or otherwise), or whether grace once received can be lost; each tradition fills those in its own house.
+
+### A11-F5a. Christ's baptism and the ordinances, and the welcome of God (s9)
+
+> The Article confesses only what Matthew 3:15 confesses: Christ was baptized, for thus it became Him to fulfil all righteousness. This is the floor.
+
+### A11-F5b. Christ's baptism and the ordinances, and the welcome of God (s9)
+
+> The Article confesses only what Matthew 28:19 confesses: Christ commanded His apostles to teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost. This is the floor. It does not settle which ordinances or sacraments Christ instituted, their number, how or to whom baptism is given, or whose administration of them is valid; each tradition fills those in its own house.
+
+### A11-F5c. Christ's baptism and the ordinances, and the welcome of God (s9)
+
+> The Article confesses only what Luke 22:19 confesses: Christ gave the bread saying, this do in remembrance of me. This is the floor. It does not settle which ordinances or sacraments Christ instituted, their number, or whose administration of them is valid; each tradition fills those in its own house.
+
+### A11-F5d. Christ's baptism and the ordinances, and the welcome of God (s10)
+
+> The Article confesses only what Acts 10:34-35 confesses: God is no respecter of persons, but in every nation he that feareth Him is accepted with Him. This is the floor.
+
+### A11-F5e. Christ's baptism and the ordinances, and the welcome of God (s10)
+
+> The Article confesses only what Galatians 3:28 confesses: in Christ there is neither Jew nor Greek, bond nor free, male nor female. This is the floor.
+
+### A11-F7a. Born of water and of the Spirit (s14)
+
+> The Article confesses only what John 3:5 confesses: except a man be born of water and of the Spirit, he cannot enter into the kingdom of God. This is the floor. It does not settle what "water" signifies, when the new birth takes place, or how covenants with Christ are entered; each tradition fills those in its own house.
+
+### A11-F7b. Born of water and of the Spirit (s14)
+
+> The Article confesses only what Acts 17:27 confesses: men should seek the Lord, if haply they might feel after Him and find Him. This is the floor.
+
+### A11-F8a. The way, prayer, endurance, the Kingdom at hand (s15)
+
+> The Article confesses only what John 14:6 confesses: Christ is the way, the truth and the life. This is the floor.
+
+### A11-F8b. The way, prayer, endurance, the Kingdom at hand (s16)
+
+> The Article confesses only what Luke 18:1 confesses: men ought always to pray and not to faint. This is the floor.
+
+### A11-F8c. The way, prayer, endurance, the Kingdom at hand (s17)
+
+> The Article confesses only what Matthew 24:13 with 1 Thessalonians 5:23 confess: he that shall endure unto the end shall be saved, and the God of peace sanctifies His people wholly. This is the floor. It does not settle whether a true believer can finally fall away; each tradition fills that in its own house.
+
+### A11-F8d. The way, prayer, endurance, the Kingdom at hand (s18)
+
+> The Article confesses only what Mark 1:15 confesses: the kingdom of God is at hand. This is the floor. It does not settle how the Kingdom present is related to the Kingdom to come; each tradition fills that in its own house.

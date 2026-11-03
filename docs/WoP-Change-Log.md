@@ -1,6 +1,16 @@
 The author-and-SCRIBE record of every correction to reader-facing text on the site, newest first.
 Not shown to readers and not published: Eleventy's input is src/, so docs/ reaches no build output (AOID2-READER-NO-CHANGELOG, AOID2-CHANGELOG-REPO).
 
+## 2 November 2026 - 58 sub-floors replace 18 list floors in the Second Edition panel comments (CODE-AOID2-98, CODE-AOID2-99, AOID2 step 246)
+- What changed (Second Edition only; not yet live, because production builds with the Second Edition switch OFF; the First Edition output is byte-identical):
+  - src/_data/apparatusData.json: on 35 spans of Articles 4, 6 and 11, the parent floor paragraph is replaced by its sub-floors, one paragraph each; `panel_comment_first_edition` is added where it was absent and holds the old comment.
+  - data-sources/aoid/floor_ledger.yaml: 58 sub-floor entries; the 18 parents carry `superseded_by` and keep their text and hash; the scored parents carry a `withheld` note and keep their result line.
+  - data-sources/aoid/floors/: a dated addendum in each of the six floor documents, carrying the sub-floor text as approved by Aaron on 2 Nov 2026.
+  - data-sources/aoid/floor_counts.json: the 11 scored parents that were split no longer show a count (status WITHHELD); the sub-floors are UNSCORED. Floors showing a count: 30 -> 19.
+  - scripts/aoid-verify-floors.js and data-sources/aoid/FLOOR_CHECK.md: `floor_paragraph` may be a map from span to paragraph; `superseded_by` marks a parent as SUPERSEDED, and a named sub-floor missing from the ledger fails the parent.
+  - scripts/aoid_tests: six tests updated as ruled in AOID2-STEP246-TESTS (option 1), and eleven tests added for the new floor-check routes. The Step 89 minimum of floors with counts is 19, temporary until the clause audit, step 238.
+- Why: AOID2-LIST-FLOORS and AOID2-SUBFLOOR-FIVE (codex v0.31, C4(a)(v) amended and A4(f) widened), approved by Aaron 2 Nov 2026. No floor was scored in this change.
+
 ## 2 November 2026 - Article 9 s7 and s8 Second Edition panel comments, one sentence each (ad51eca, CODE-AOID2-93)
 - What changed (Second Edition only; not yet live, because production builds with the Second Edition switch OFF):
   - src/_data/apparatusData.json, A09, `panel_comment` (paragraph 2 only; the floor paragraph and every `panel_comment_first_edition` are untouched):

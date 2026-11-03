@@ -61,7 +61,7 @@ def states(out):
     """{(item, span): state} read from the report."""
     found, item = {}, None
     for line in out.splitlines():
-        m = re.match(r"^  (\S+): (TRANSFERRED|FAILED|PENDING)$", line)
+        m = re.match(r"^  (\S+): (TRANSFERRED|FAILED|PENDING|SUPERSEDED)$", line)
         if m:
             item, state = m.groups()
             found[(item, None)] = state
@@ -70,7 +70,7 @@ def states(out):
         if m:
             item = m.group(1)
             continue
-        m = re.match(r"^      (A\d\d\.s\d+|none): (TRANSFERRED|FAILED|PENDING)\b", line)
+        m = re.match(r"^      (A\d\d\.s\d+|none): (TRANSFERRED|FAILED|PENDING|SUPERSEDED)\b", line)
         if m and item:
             found[(item, m.group(1))] = m.group(2)
     return found
@@ -332,8 +332,12 @@ def test_real_ledger_a4s6_a6s18_a11s19_transferred():
     p = subprocess.run(["node", str(SCRIPT)], capture_output=True, text=True, encoding="utf-8", cwd=REPO)
     st = states(p.stdout)
     assert st[("A4-F3", None)] == "TRANSFERRED"
-    assert st[("A6-F9", "A06.s18")] == "TRANSFERRED"
-    assert st[("A11-F4", "A11.s19")] == "TRANSFERRED"
+    # Step 246 (AOID2-LIST-FLOORS): A6-F9 and A11-F4 are restated as sub-floors, so the transfer onto
+    # A06.s18 and A11.s19 is now tested on A6-F9d and A11-F4d, and the withheld parents report SUPERSEDED.
+    assert st[("A6-F9d", None)] == "TRANSFERRED"  # A6-F9d has the one span, A06.s18, so the report keys it by item alone
+    assert st[("A11-F4d", "A11.s19")] == "TRANSFERRED"
+    assert st[("A6-F9", "A06.s18")] == "SUPERSEDED"
+    assert st[("A11-F4", "A11.s19")] == "SUPERSEDED"
 
 
 # ---------------------------------------------------------------- floor_paragraph (CODE-AOID2-29: a span that carries two floors)
@@ -373,3 +377,98 @@ def test_floor_paragraph_malformed_values_fail(tmp_path):
     for bad in ("0", "-1", "two", "1.5"):
         code, out, _ = two_floors(tmp_path, FLOOR + "\n\n" + OTHER, second_extra=f"    floor_paragraph: {bad}\n")
         assert single(out, "Z2") == "FAILED" and "floor_paragraph" in out and code == 1
+
+
+# ---------------------------------------------------------------- superseded parents and floor_paragraph maps (CODE-AOID2-99, AOID2 step 246)
+
+SUB = "The Article confesses only what Psalm 3 confesses: salvation belongs to the Lord. This is the floor."
+SUB_SECTION = "## Z1a. Sub-floor\n\n**Panel comment (the floor), ratified:**\n\n> " + SUB + "\n\nWhy.\n"
+
+
+def parent_and_sub(superseded_by="    superseded_by: [Z1a]\n", with_sub=True, parent_extra="", span="A01.s1", sub_span="A01.s1"):
+    """A parent floor Z1 marked superseded, and (optionally) its sub-floor Z1a, both ratified in floor.md."""
+    parent = entry(item="Z1", sha256=sha(FLOOR), span=span).replace("    span:", superseded_by + parent_extra + "    span:")
+    sub_entry = entry(item="Z1a", heading="Z1a. Sub-floor", sha256=sha(SUB), span=sub_span) if with_sub else ""
+    return parent + sub_entry
+
+
+def test_superseded_parent_with_sub_floor_present_is_superseded_and_passes(tmp_path):
+    code, out, _ = run(tmp_path, parent_and_sub(), {"A01": {"s1": {"panel_comment": SUB}}}, {"floor.md": SECTION + "\n" + SUB_SECTION})
+    assert single(out, "Z1") == "SUPERSEDED" and single(out, "Z1a") == "TRANSFERRED" and code == 0
+    assert "1 transferred, 0 pending, 0 failed, 1 superseded" in out
+
+
+def test_superseded_parent_is_not_read_against_the_panel_comment(tmp_path):
+    # the panel comment now holds the sub-floor, not the parent's text; the parent must not fail on that
+    code, out, _ = run(tmp_path, parent_and_sub(), {"A01": {"s1": {"panel_comment": SUB}}}, {"floor.md": SECTION + "\n" + SUB_SECTION})
+    assert "differs from floor" not in out and code == 0
+
+
+def test_superseded_parent_with_missing_sub_floor_fails(tmp_path):
+    code, out, err = run(tmp_path, parent_and_sub(with_sub=False), {"A01": {"s1": {"panel_comment": SUB}}}, {"floor.md": SECTION + "\n" + SUB_SECTION})
+    assert single(out, "Z1") == "FAILED" and code == 1
+    assert "missing from the ledger: Z1a" in out and "missing from the ledger: Z1a" in err
+
+
+def test_superseded_by_malformed_is_malformed(tmp_path):
+    for bad in ("    superseded_by: Z1a\n", "    superseded_by: []\n", "    superseded_by: [Z1a, \"\"]\n", "    superseded_by: {a: b}\n"):
+        code, out, err = run(tmp_path, parent_and_sub(superseded_by=bad), {"A01": {"s1": {"panel_comment": SUB}}}, {"floor.md": SECTION + "\n" + SUB_SECTION})
+        assert single(out, "Z1") == "FAILED" and code == 1, bad
+        assert "superseded_by, when given, must be a non-empty list of ledger items" in out, bad
+
+
+def two_span_floor(tmp_path, fp, comments=None):
+    """Z1 sits on A01.s1 and A01.s2, with floor_paragraph `fp` (a line of ledger text)."""
+    e = entry(item="Z1", sha256=sha(FLOOR)).replace("    span: A01.s1", fp + "    span: [A01.s1, A01.s2]")
+    app = comments or {"A01": {"s1": {"panel_comment": FLOOR}, "s2": {"panel_comment": "Lead.\n\n" + FLOOR}}}
+    return run(tmp_path, e, app, {"floor.md": SECTION})
+
+
+def test_floor_paragraph_map_omitting_a_span_is_malformed(tmp_path):
+    code, out, _ = two_span_floor(tmp_path, "    floor_paragraph: {A01.s2: 2}\n")
+    assert code == 1 and "must name every span of the item (and only those)" in out
+    assert single(out, "Z1") == "FAILED"    # a malformed entry fails as one item, not span by span
+
+
+def test_floor_paragraph_map_naming_an_extra_span_is_malformed(tmp_path):
+    code, out, _ = two_span_floor(tmp_path, "    floor_paragraph: {A01.s1: 1, A01.s2: 2, A01.s3: 1}\n")
+    assert code == 1 and "must name every span of the item (and only those)" in out
+
+
+def test_floor_paragraph_map_with_a_bad_value_is_malformed(tmp_path):
+    for bad in ("0", "-1", "1.5", "\"two\"", "null"):
+        code, out, _ = two_span_floor(tmp_path, "    floor_paragraph: {A01.s1: 1, A01.s2: %s}\n" % bad)
+        assert code == 1 and "must name every span of the item (and only those)" in out, bad
+
+
+def test_floor_paragraph_map_with_the_floor_at_different_paragraphs_passes(tmp_path):
+    code, out, _ = two_span_floor(tmp_path, "    floor_paragraph: {A01.s1: 1, A01.s2: 2}\n")
+    st = states(out)
+    assert st[("Z1", "A01.s1")] == "TRANSFERRED" and st[("Z1", "A01.s2")] == "TRANSFERRED" and code == 0
+    assert "paragraph 2 of panel_comment matches" in out
+
+
+def test_floor_paragraph_map_checks_each_span_at_its_own_paragraph(tmp_path):
+    # the map says s2 holds the floor at paragraph 2; here it is at paragraph 1 of s2, so s2 fails and s1 passes
+    code, out, _ = two_span_floor(tmp_path, "    floor_paragraph: {A01.s1: 1, A01.s2: 2}\n",
+                                  {"A01": {"s1": {"panel_comment": FLOOR}, "s2": {"panel_comment": FLOOR}}})
+    st = states(out)
+    assert st[("Z1", "A01.s1")] == "TRANSFERRED" and st[("Z1", "A01.s2")] == "FAILED" and code == 1
+
+
+def test_superseded_parent_changed_floor_text_still_fails_on_its_hash(tmp_path):
+    changed = SECTION.replace("blessed", "happy")
+    code, out, _ = run(tmp_path, parent_and_sub(), {"A01": {"s1": {"panel_comment": SUB}}}, {"floor.md": changed + "\n" + SUB_SECTION})
+    assert single(out, "Z1") == "FAILED" and "changed without a ruling" in out and code == 1
+    assert single(out, "Z1a") == "TRANSFERRED"
+
+
+def test_superseded_parent_is_never_printed_as_transferred_or_pending(tmp_path):
+    # one parent on a span, one with span null: both are SUPERSEDED and neither reads TRANSFERRED or PENDING
+    parent_null = entry(item="Y1", sha256=sha(FLOOR), span="null").replace("    span:", "    superseded_by: [Z1a]\n    span:")
+    code, out, _ = run(tmp_path, parent_and_sub() + parent_null, {"A01": {"s1": {"panel_comment": SUB}}}, {"floor.md": SECTION + "\n" + SUB_SECTION})
+    assert code == 0
+    st = states(out)
+    assert st[("Z1", None)] == "SUPERSEDED" and st[("Y1", None)] == "SUPERSEDED"
+    assert "Z1: TRANSFERRED" not in out and "Z1: PENDING" not in out and "Y1: TRANSFERRED" not in out and "Y1: PENDING" not in out
+    assert "1 transferred, 0 pending, 0 failed, 2 superseded" in out
