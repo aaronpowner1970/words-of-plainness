@@ -403,9 +403,11 @@
         <summary>Lyrics</summary>
         <div class="mt-lyrics-body">
             {%- for item in ministryMusic.collection -%}
-            {%- if item.file == "AN_01_One_Voice_One_Mind_Cinematic_Inspirational.mp3" -%}
-            {{ item.lyrics | safe }}
+            {%- for alt in item.alternates -%}
+            {%- if alt.file == "AN_01_One_Voice_One_Mind_Cinematic_Inspirational.mp3" -%}
+            {{ alt.lyrics | safe }}
             {%- endif -%}
+            {%- endfor -%}
             {%- endfor -%}
         </div>
     </details>
