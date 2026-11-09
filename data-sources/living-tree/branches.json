@@ -1,0 +1,335 @@
+{
+ "_note": "Structure of The Living Tree of Christ-Believing Traditions for /living-tree/. Branch labels and the family/movement/outside split follow Comparison Principles Codex C4(d); tools/build_living_tree.py checks every label against the codex and stops if one is missing. Row labels and branch order are read from the tree picture itself (media.wordsofplainness.org/web/aoid-slides/slide-02-v2.webp, the /articles/ slide 2 image). 'box' is the branch panel on that picture as fractions of its width and height [left, top, width, height]. 'prefix' is the source-library id prefix of the family's texts.",
+ "image": {
+  "src": "https://media.wordsofplainness.org/web/aoid-slides/slide-02-v2.webp",
+  "width": 3840,
+  "height": 2160
+ },
+ "rows": [
+  {
+   "label": "Old-World Christian Traditions",
+   "branches": [
+    {
+     "slug": "church-of-the-east",
+     "label": "Church of the East",
+     "kind": "family",
+     "prefix": "COE",
+     "box": [
+      0.0925,
+      0.12,
+      0.1225,
+      0.1422
+     ]
+    },
+    {
+     "slug": "oriental-orthodox",
+     "label": "Oriental Orthodox",
+     "kind": "family",
+     "prefix": "OO",
+     "box": [
+      0.2175,
+      0.12,
+      0.1225,
+      0.1422
+     ]
+    },
+    {
+     "slug": "eastern-orthodox",
+     "label": "Eastern Orthodox",
+     "kind": "family",
+     "prefix": "EO",
+     "box": [
+      0.0925,
+      0.2844,
+      0.1275,
+      0.1351
+     ]
+    },
+    {
+     "slug": "catholicism",
+     "label": "Catholicism",
+     "kind": "family",
+     "prefix": "CATH",
+     "box": [
+      0.224,
+      0.2844,
+      0.126,
+      0.1467
+     ]
+    }
+   ]
+  },
+  {
+   "label": "Western & Reformation Traditions",
+   "branches": [
+    {
+     "slug": "lutheran",
+     "label": "Lutheran",
+     "kind": "family",
+     "prefix": "LUTH",
+     "box": [
+      0.6625,
+      0.12,
+      0.09,
+      0.1422
+     ]
+    },
+    {
+     "slug": "reformed",
+     "label": "Reformed",
+     "kind": "family",
+     "prefix": "REF",
+     "box": [
+      0.7575,
+      0.12,
+      0.0875,
+      0.1422
+     ]
+    },
+    {
+     "slug": "anglican",
+     "label": "Anglican",
+     "kind": "family",
+     "prefix": "ANGL",
+     "box": [
+      0.85,
+      0.12,
+      0.09,
+      0.1422
+     ]
+    },
+    {
+     "slug": "anabaptist",
+     "label": "Anabaptist",
+     "kind": "family",
+     "prefix": "ANAB",
+     "box": [
+      0.64,
+      0.2844,
+      0.0975,
+      0.1333
+     ]
+    },
+    {
+     "slug": "baptist",
+     "label": "Baptist",
+     "kind": "family",
+     "prefix": "BAPT",
+     "box": [
+      0.745,
+      0.2844,
+      0.1,
+      0.1333
+     ]
+    },
+    {
+     "slug": "methodist",
+     "label": "Methodist",
+     "kind": "family",
+     "prefix": "METH",
+     "box": [
+      0.8525,
+      0.2844,
+      0.09,
+      0.1333
+     ]
+    }
+   ]
+  },
+  {
+   "label": "Revival & Renewal Traditions",
+   "branches": [
+    {
+     "slug": "evangelical",
+     "label": "Evangelical",
+     "kind": "movement",
+     "prefix": null,
+     "box": [
+      0.595,
+      0.464,
+      0.07,
+      0.1093
+     ]
+    },
+    {
+     "slug": "holiness",
+     "label": "Holiness",
+     "kind": "family",
+     "prefix": "HOLI",
+     "box": [
+      0.669,
+      0.464,
+      0.071,
+      0.1093
+     ]
+    },
+    {
+     "slug": "pentecostal",
+     "label": "Pentecostal",
+     "kind": "family",
+     "prefix": "PENT",
+     "box": [
+      0.744,
+      0.464,
+      0.071,
+      0.1093
+     ]
+    },
+    {
+     "slug": "charismatic",
+     "label": "Charismatic",
+     "kind": "within",
+     "prefix": "PENT",
+     "box": [
+      0.82,
+      0.464,
+      0.0725,
+      0.1093
+     ]
+    },
+    {
+     "slug": "non-denominational",
+     "label": "Non-denominational",
+     "kind": "outside",
+     "prefix": null,
+     "box": [
+      0.904,
+      0.464,
+      0.071,
+      0.1093
+     ]
+    }
+   ]
+  },
+  {
+   "label": "Restorationist & Adventist Traditions",
+   "branches": [
+    {
+     "slug": "stone-campbell",
+     "label": "Stone-Campbell",
+     "kind": "family",
+     "prefix": "SC",
+     "box": [
+      0.5975,
+      0.624,
+      0.0675,
+      0.1093
+     ]
+    },
+    {
+     "slug": "latter-day-saints",
+     "label": "The Church of Jesus Christ of Latter-day Saints",
+     "kind": "family",
+     "prefix": "LDS",
+     "box": [
+      0.669,
+      0.624,
+      0.071,
+      0.1093
+     ]
+    },
+    {
+     "slug": "adventist",
+     "label": "Adventist",
+     "kind": "family",
+     "prefix": "ADV",
+     "box": [
+      0.744,
+      0.624,
+      0.072,
+      0.1093
+     ]
+    },
+    {
+     "slug": "jehovahs-witnesses",
+     "label": "Jehovah's Witnesses",
+     "kind": "family",
+     "prefix": "JW",
+     "box": [
+      0.821,
+      0.624,
+      0.0765,
+      0.1093
+     ]
+    },
+    {
+     "slug": "dispensationalism",
+     "label": "Dispensationalism",
+     "kind": "movement",
+     "prefix": null,
+     "box": [
+      0.9,
+      0.624,
+      0.076,
+      0.1093
+     ]
+    }
+   ]
+  },
+  {
+   "label": "Global & Independent Expressions",
+   "branches": [
+    {
+     "slug": "messianic-jews",
+     "label": "Messianic Jews",
+     "kind": "outside",
+     "prefix": null,
+     "box": [
+      0.5925,
+      0.7867,
+      0.0725,
+      0.1111
+     ]
+    },
+    {
+     "slug": "african-initiated-churches",
+     "label": "African Initiated Churches",
+     "kind": "outside",
+     "prefix": null,
+     "box": [
+      0.669,
+      0.7867,
+      0.071,
+      0.1111
+     ]
+    },
+    {
+     "slug": "chinese-house-churches",
+     "label": "Chinese House Churches",
+     "kind": "outside",
+     "prefix": null,
+     "box": [
+      0.744,
+      0.7867,
+      0.072,
+      0.1111
+     ]
+    },
+    {
+     "slug": "independent-new-religious-movements",
+     "label": "Independent New Religious Movements",
+     "kind": "outside",
+     "prefix": null,
+     "box": [
+      0.82,
+      0.7867,
+      0.0725,
+      0.1111
+     ]
+    },
+    {
+     "slug": "local-and-regional-expressions",
+     "label": "Local & Regional Expressions",
+     "kind": "outside",
+     "prefix": null,
+     "box": [
+      0.8975,
+      0.7867,
+      0.0775,
+      0.1111
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,185 @@
+---js
+{
+  // HIDDEN PAGE (CODE-AOID2-110). Built to main, published nowhere until Aaron rules:
+  //   not in navigation (no link anywhere), out of every collection (so out of the sitemap),
+  //   out of site search (pagefindIgnore), and noindex.
+  // Address: /living-tree/, but only while the AOID2 Second Edition switch is OFF. When the switch is
+  // ON, src/pages/living-tree.njk (the A6a first form) owns /living-tree/ and this page builds nowhere,
+  // so the two never collide. Joining them is a ruling for Aaron (see the CODE-AOID2-110 report).
+  // Every link, title and edition comes from src/_data/livingTree.json, written by
+  // tools/build_living_tree.py from the AOID2 source library. Nothing below is typed by hand except
+  // the page's own headings and help lines.
+  // With the switch ON this page takes no part in the build: no layout and no permalink.
+  eleventyComputed: {
+    layout: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? false : "layouts/page.njk")
+  },
+  title: "The Living Tree of Christ-Believing Traditions",
+  pageTitle: "The Living Tree of Christ-Believing Traditions",
+  pageSubtitle: "Each branch, with links to the churches’ own published copies of the texts that govern them",
+  description: "The Living Tree of Christ-Believing Traditions, with links to each church’s own published governing texts.",
+  permalink: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? false : "/living-tree/"),
+  noindex: true,
+  pagefindIgnore: true,
+  eleventyExcludeFromCollections: true
+}
+---
+{%- set LT = livingTree -%}
+<link rel="stylesheet" href="/css/living-tree.css?v={{ site.version }}">
+<div class="ltl" data-pagefind-ignore>
+
+  <figure class="ltl-map" id="ltl-tree">
+    <div class="ltl-frame" id="ltlFrame">
+      <img id="ltlImg" src="{{ LT.image.src }}" width="{{ LT.image.width }}" height="{{ LT.image.height }}" decoding="async"
+           alt="The Living Tree of Christ-Believing Traditions: a painted tree rooted in Jesus of Nazareth, its branches in five rows of labelled panels, twenty-five in all. Every branch is named in the list below the picture.">
+      {%- for b in LT.branches %}
+      <a class="ltl-spot" href="#b-{{ b.slug }}" style="left:{{ (b.box[0]*100) | round(2) }}%;top:{{ (b.box[1]*100) | round(2) }}%;width:{{ (b.box[2]*100) | round(2) }}%;height:{{ (b.box[3]*100) | round(2) }}%" aria-label="{{ b.label }}: go to this branch"></a>
+      {%- endfor %}
+      <div class="ltl-osd" id="ltlOsd" hidden><div class="ltl-osd-mount" id="ltlOsdMount"></div><span class="ltl-osd-msg" id="ltlOsdMsg" hidden></span></div>
+      <button type="button" class="ltl-zoom" id="ltlZoom" hidden>Zoom into the picture</button>
+      <button type="button" class="ltl-close" id="ltlClose" hidden>Back to the picture</button>
+    </div>
+    <figcaption class="ltl-help">Select a branch on the picture, or in the list below, to go to its texts.</figcaption>
+  </figure>
+
+  <nav class="ltl-index" aria-labelledby="ltl-index-h">
+    <h2 id="ltl-index-h">Branches</h2>
+    {%- for row in LT.rows %}
+    <h3>{{ row.label }}</h3>
+    <ul>
+      {%- for b in LT.branches %}{% if b.row == row.label %}
+      <li><a href="#b-{{ b.slug }}">{{ b.label }}</a></li>
+      {%- endif %}{% endfor %}
+    </ul>
+    {%- endfor %}
+  </nav>
+
+  {%- for row in LT.rows %}
+  <section class="ltl-row" aria-labelledby="row-{{ loop.index }}">
+    <h2 id="row-{{ loop.index }}">{{ row.label }}</h2>
+    {%- for b in LT.branches %}{% if b.row == row.label %}
+    <article class="ltl-branch" id="b-{{ b.slug }}" aria-labelledby="h-{{ b.slug }}">
+      <h3 id="h-{{ b.slug }}">{{ b.label }}</h3>
+      <p class="ltl-status">{{ b.statusLine }}</p>
+      {%- if b.kind == "within" %}
+      <p>Its churches’ texts are listed under <a href="#b-pentecostal">Pentecostal</a>.</p>
+      {%- elif b.kind == "movement" %}
+      <p>Its churches’ texts are listed under the families those churches belong to.</p>
+      {%- endif %}
+      {%- if b.churches.length %}
+      <p class="ltl-churches"><strong>Member churches:</strong> {{ b.churches | join("; ") }}</p>
+      {%- endif %}
+      {%- if b.texts.length %}
+      <ul class="ltl-texts">
+        {%- for t in b.texts %}
+        <li>
+          <strong>{{ t.title }}</strong>{% if t.moreToCome %}<span class="ltl-tag">more to come</span>{% endif %}
+          {%- if t.noChurchCopy %}
+          <div class="ltl-none">No copy online from the church itself</div>
+          {%- endif %}
+          {%- if t.copies.length %}
+          <ul class="ltl-copies">
+            {%- for c in t.copies %}
+            <li>
+              {%- if c.url %}<a href="{{ c.url }}" rel="noopener">{{ c.label }}</a>{% else %}{{ c.label }}<span class="ltl-tag">link under review</span>{% endif %}
+              {%- if c.edition %}<span class="ltl-ed">{{ c.edition }}</span>{% endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+          {%- elif not t.noChurchCopy %}
+          <div class="ltl-none">Not yet listed.</div>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      <p class="ltl-back"><a href="#ltl-tree">Back to the tree</a></p>
+    </article>
+    {%- endif %}{% endfor %}
+  </section>
+  {%- endfor %}
+
+  {%- if LT.linksCheckedOn %}
+  <p class="ltl-text ltl-small">Links checked {{ LT.linksCheckedOn }}.</p>
+  {%- endif %}
+</div>
+
+<script>
+(function () {
+  /* The deep zoom of /articles/ slide 2, reused: the same Deep Zoom tiles on R2 and the same OpenSeadragon
+     build and settings as ZOOMABLE[2] in src/_includes/components/articles-presentation.njk. Without this
+     script the picture, its branch spots and the list all work as plain links. */
+  var Z = { dzi: 'https://media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/tree.dzi', width: 7680, height: 4320, tileSize: 254, overlap: 1, format: 'webp' };
+  var OSD_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/openseadragon.min.js';
+  var OSD_SRI = 'sha512-LbaoUnRCul2C+I4cdS/EMnMbynmZMU58AApBnZkhMzp/r8rOS7htjTsox7g6rf5ZXkSx56F5dDYmhLwqV1Zt4A==';
+  var BRANCHES = [{% for b in LT.branches %}{ slug: {{ b.slug | dump | safe }}, label: {{ b.label | dump | safe }}, box: {{ b.box | dump | safe }} }{% if not loop.last %},{% endif %}{% endfor %}];
+  var zoomBtn = document.getElementById('ltlZoom'), closeBtn = document.getElementById('ltlClose');
+  var box = document.getElementById('ltlOsd'), mount = document.getElementById('ltlOsdMount'), msg = document.getElementById('ltlOsdMsg');
+  if (!zoomBtn || !box) return;
+  zoomBtn.hidden = false;
+  var viewer = null, open = false, osdPromise = null;
+  function loadOSD() {
+    if (window.OpenSeadragon) return Promise.resolve(window.OpenSeadragon);
+    if (osdPromise) return osdPromise;
+    osdPromise = new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = OSD_SRC; s.integrity = OSD_SRI; s.crossOrigin = 'anonymous'; s.async = true;
+      s.onload = function () { window.OpenSeadragon ? resolve(window.OpenSeadragon) : reject(new Error('absent')); };
+      s.onerror = function () { osdPromise = null; reject(new Error('failed')); };
+      document.head.appendChild(s);
+    });
+    return osdPromise;
+  }
+  function close(focusZoom) {
+    if (viewer) { try { viewer.destroy(); } catch (e) {} viewer = null; }
+    mount.innerHTML = ''; mount.removeAttribute('style');
+    msg.hidden = true; box.hidden = true; closeBtn.hidden = true; zoomBtn.hidden = false; open = false;
+    if (focusZoom) zoomBtn.focus();
+  }
+  function go(slug) {
+    close(false);
+    var el = document.getElementById('b-' + slug);
+    if (el) { location.hash = 'b-' + slug; el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true }); }
+  }
+  function addSpots(OSD) {
+    var ratio = Z.height / Z.width;
+    BRANCHES.forEach(function (b) {
+      var a = document.createElement('a');
+      a.className = 'ltl-ospot'; a.href = '#b-' + b.slug; a.setAttribute('aria-label', b.label + ': go to this branch');
+      a.addEventListener('click', function (e) { e.preventDefault(); go(b.slug); });
+      a.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); go(b.slug); } });
+      viewer.addOverlay({ element: a, location: new OSD.Rect(b.box[0], b.box[1] * ratio, b.box[2], b.box[3] * ratio) });
+      /* OpenSeadragon takes pointer events for panning; a quick tap or click on a spot still follows it. */
+      new OSD.MouseTracker({ element: a, clickHandler: function (ev) { if (ev.quick) go(b.slug); } });
+    });
+  }
+  function show() {
+    if (open) return;
+    open = true; box.hidden = false; closeBtn.hidden = false; zoomBtn.hidden = true;
+    msg.textContent = 'Loading the deep-zoom view…'; msg.hidden = false;
+    loadOSD().then(function (OSD) {
+      if (!open) return;
+      msg.hidden = true;
+      viewer = OSD({
+        element: mount, prefixUrl: '',
+        tileSources: { Image: { xmlns: 'http://schemas.microsoft.com/deepzoom/2008', Url: Z.dzi.replace(/\.dzi$/, '_files/'), Format: Z.format, Overlap: String(Z.overlap), TileSize: String(Z.tileSize), Size: { Width: String(Z.width), Height: String(Z.height) } } },
+        showNavigationControl: false, showNavigator: false, showSequenceControl: false,
+        visibilityRatio: 1, constrainDuringPan: true, minZoomImageRatio: 0.9, maxZoomPixelRatio: 2,
+        animationTime: 0.6, springStiffness: 7, blendTime: 0, imageLoaderLimit: 6,
+        gestureSettingsMouse: { scrollToZoom: true, clickToZoom: false, dblClickToZoom: true, dragToPan: true },
+        gestureSettingsTouch: { pinchToZoom: true, dragToPan: true, flickEnabled: true, dblClickToZoom: true }
+      });
+      viewer.addHandler('open', function () {
+        try { viewer.viewport.resize(new OSD.Point(mount.clientWidth, mount.clientHeight), false); viewer.viewport.goHome(true); viewer.forceRedraw(); } catch (err) {}
+        addSpots(OSD);
+        closeBtn.focus();
+      });
+    }).catch(function () {
+      if (!open) return;
+      msg.textContent = 'The deep-zoom view could not load. Use "Back to the picture".'; msg.hidden = false;
+    });
+  }
+  zoomBtn.addEventListener('click', show);
+  closeBtn.addEventListener('click', function () { close(true); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) close(true); });
+})();
+</script>
