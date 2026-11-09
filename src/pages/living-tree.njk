@@ -1,80 +1,186 @@
 ---js
 {
-  // With the Second Edition switch OFF the page takes no part in the build: no layout and no permalink.
+  // /living-tree/ (AOID2 step 163, CODE-AOID2-112): one page at one address, with the Second Edition switch ON or OFF.
+  // It joins the A6a first form of this page (step 89) and the CODE-AOID2-110 links page (src/pages/living-tree-links.njk,
+  // retired here), and adds the approved Living Tree wording of 9 Nov 2026.
+  //   Every reader-facing sentence of the page comes from approved wording read at build time, never typed here:
+  //     src/_data/livingTreeText.js   the introduction, teaching lines 2.1-2.7, and the 25 branch descriptions with sources
+  //     src/_data/aoidStep89.js        the A6a title, subtitle, L1-L3, alt text and method-account sentence (switch ON only)
+  //     src/_data/aoidDisclosures.js   the Article 11 record note "What the sixteen cover." (switch ON only, through aoidStep89)
+  //   Branches, overlays, member churches, adopted-text links and inquirer resources come from src/_data/livingTree.json,
+  //   written by tools/build_living_tree.py. The headings and help lines of the CODE-AOID2-110 page are kept as they were.
+  // Switch ON: the A6a text and the per-branch correction links (to /aoid/corrections/, which exists only then) appear.
+  // Switch OFF: neither appears, and the page stays as hidden as the CODE-AOID2-110 page was (noindex, out of every
+  //   collection, out of site search, linked from nowhere).
+  layout: "layouts/page.njk",
+  permalink: "/living-tree/",
   eleventyComputed: {
-    layout: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "layouts/page.njk" : false),
     title: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.livingTree.title : "The Living Tree of Christ-Believing Traditions"),
-    pageTitle: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.livingTree.title : ""),
-    pageSubtitle: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.livingTree.subtitle : "")
+    pageTitle: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.livingTree.title : "The Living Tree of Christ-Believing Traditions"),
+    pageSubtitle: (data) => (data.aoidStep89 && data.aoidStep89.on ? data.aoidStep89.livingTree.subtitle : ""),
+    description: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on
+      ? "The Living Tree of Christ-Believing Traditions: many branches, rooted in Jesus of Nazareth, and which of them these Articles measure."
+      : "The Living Tree of Christ-Believing Traditions, with links to each church’s own published governing texts."),
+    noindex: (data) => !(data.aoidSecondEdition && data.aoidSecondEdition.on)
   },
-  // Built only when the Second Edition switch is ON (src/_data/aoidSecondEdition.js); with it OFF there is no page at this address.
-  // First form (AOID2-LIVING-TREE-A6A-SCOPE option 1). Steps 134-136 add the branch sections and overlays to this same page.
-  permalink: (data) => (data.aoidSecondEdition && data.aoidSecondEdition.on ? "/living-tree/" : false),
-  description: "The Living Tree of Christ-Believing Traditions: many branches, rooted in Jesus of Nazareth, and which of them these Articles measure.",
   eleventyExcludeFromCollections: true,
   pagefindIgnore: true
-  // Every word below comes from the approved A6a wording (src/_data/aoidStep89.js livingTree) and from the Article 11 record note
-  // "What the sixteen cover." (src/_data/aoidDisclosures.js, sexualHoliness.coverHtml). Nothing here is typed by hand.
 }
 ---
-{%- set MAP = "https://media.wordsofplainness.org/web/aoid-slides/slide-02-v2.webp" -%}
-<style>
-.lt { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; font-family: 'Crimson Pro', Georgia, serif; font-size: 1.1rem; line-height: 1.75; color: var(--cream); }
-.lt p { margin: 0 0 1rem; opacity: .94; }
-.lt .lt-text { max-width: 760px; margin-left: auto; margin-right: auto; }
-.lt-map { margin: 0 0 1.5rem; }
-.lt-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #140a0c; border: 1px solid rgba(196,148,58,.4); border-radius: 6px; overflow: hidden; }
-.lt-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.lt-osd { position: absolute; inset: 0; background: #000; touch-action: none; }
-.lt-osd[hidden], .lt-close[hidden] { display: none; }
-.lt-osd-mount { width: 100%; height: 100%; }
-.lt-osd-msg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0 1.5rem; text-align: center; color: #c8b3a3; pointer-events: none; }
-.lt-close { position: absolute; top: 10px; right: 10px; z-index: 3; padding: 6px 12px; font: inherit; font-size: .9rem; color: #f3e9e0; background: rgba(20,10,12,.82); border: 1px solid rgba(212,175,105,.6); border-radius: 999px; cursor: pointer; }
-.lt strong { color: var(--gold-primary); font-weight: 600; }
-.lt a { color: var(--gold-primary); text-decoration: none; border-bottom: 1px dotted rgba(196,148,58,.5); }
-.lt a:hover { color: var(--gold-light); border-bottom-color: var(--gold-light); }
-.lt ul { margin: 0 0 1.1rem; padding-left: 1.5rem; }
-.lt li { margin-bottom: .5rem; opacity: .94; }
-.lt .disc-table-wrap { overflow-x: auto; margin: 0 0 1.1rem; }
-.lt table { border-collapse: collapse; width: 100%; font-size: .95rem; line-height: 1.5; }
-.lt th, .lt td { text-align: left; vertical-align: top; padding: .45rem .6rem; border: 1px solid rgba(196,148,58,.28); }
-.lt th { color: var(--gold-primary); font-weight: 600; }
-.lt-full a { font-weight: 600; }
-</style>
-
+{%- set LT = livingTree -%}
+{%- set TX = livingTreeText -%}
+{%- set A6A = aoidStep89.livingTree if (aoidStep89 and aoidStep89.on) else false -%}
+{%- macro para(parts) -%}
+{%- for s in parts %}{% if s.ref %}<a href="{{ s.ref | scriptureUrl }}" class="scripture-link" target="_blank" rel="noopener">{{ s.ref }}</a>{% else %}{{ s.html | safe }}{% endif %}{% endfor -%}
+{%- endmacro -%}
+<link rel="stylesheet" href="/css/living-tree.css?v={{ site.version }}">
+{%- if A6A %}
 <link rel="stylesheet" href="/css/articles-tabs.css?v={{ site.version }}">
-<div class="lt">
-  <div class="lt-text">{{ aoidStep89.livingTree.lines.l1Html | safe }}</div>
-  <figure class="lt-map">
-    <div class="lt-frame" id="ltFrame">
-      <img id="ltImg" src="{{ MAP }}" width="3840" height="2160" alt="{{ aoidStep89.livingTree.alt }}" decoding="async">
-      <div class="lt-osd" id="ltOsd" hidden><div class="lt-osd-mount" id="ltOsdMount"></div><span class="lt-osd-msg" id="ltOsdMsg" hidden></span></div>
-      <button type="button" class="lt-close" id="ltClose" hidden>Back to the picture</button>
-    </div>
-  </figure>
+{%- endif %}
+<div class="ltl" data-pagefind-ignore>
 
-  <div class="lt-text">
-    {{ aoidStep89.livingTree.coverAbove | safe }}
-    {{ aoidStep89.livingTree.lines.l2Html | safe }}
-    {{ aoidStep89.livingTree.coverFrom | safe }}
-    <p>{{ aoidStep89.livingTree.sentenceHtml | safe }}</p>
-    <p class="lt-full"><a id="ltFull" href="{{ MAP }}">View the map at full size</a></p>
-    {{ aoidStep89.livingTree.lines.l3Html | safe }}
+  <div class="ltl-text ltl-opening">
+    {%- if A6A %}
+    {{ A6A.lines.l1Html | safe }}
+    {%- endif %}
+    <p class="ltl-intro">{{ para(TX.intro.parts) }}</p>
+    <p class="ltl-practice">{{ para(TX.practice.parts) }}</p>
+    <p class="ltl-fair">{{ para(TX.howToRead.parts) }}</p>
   </div>
+
+  <figure class="ltl-map" id="ltl-tree">
+    <div class="ltl-frame" id="ltlFrame">
+      <img id="ltlImg" src="{{ LT.image.src }}" width="{{ LT.image.width }}" height="{{ LT.image.height }}" decoding="async"
+           alt="{% if A6A %}{{ A6A.alt }}{% else %}The Living Tree of Christ-Believing Traditions: a painted tree rooted in Jesus of Nazareth, its branches in five rows of labelled panels, twenty-five in all. Every branch is named in the list below the picture.{% endif %}">
+      {%- for b in LT.branches %}
+      <a class="ltl-spot" href="#b-{{ b.slug }}" style="left:{{ (b.box[0]*100) | round(2) }}%;top:{{ (b.box[1]*100) | round(2) }}%;width:{{ (b.box[2]*100) | round(2) }}%;height:{{ (b.box[3]*100) | round(2) }}%" aria-label="{{ b.label }}: go to this branch"></a>
+      {%- endfor %}
+      <div class="ltl-osd" id="ltlOsd" hidden><div class="ltl-osd-mount" id="ltlOsdMount"></div><span class="ltl-osd-msg" id="ltlOsdMsg" hidden></span></div>
+      <button type="button" class="ltl-zoom" id="ltlZoom" hidden>Zoom into the picture</button>
+      <button type="button" class="ltl-close" id="ltlClose" hidden>Back to the picture</button>
+    </div>
+    <figcaption class="ltl-help">Select a branch on the picture, or in the list below, to go to its texts.</figcaption>
+  </figure>
+  {%- if A6A %}
+
+  <div class="ltl-text ltl-a6a">
+    {{ A6A.coverAbove | safe }}
+    {{ A6A.lines.l2Html | safe }}
+    {{ A6A.coverFrom | safe }}
+    <p>{{ A6A.sentenceHtml | safe }}</p>
+    <p class="ltl-full"><a id="ltlFull" href="{{ LT.image.src }}">View the map at full size</a></p>
+  </div>
+  {%- endif %}
+
+  <div class="ltl-text"><p class="ltl-key">{{ para(TX.key.parts) }}</p></div>
+
+  <nav class="ltl-index" aria-labelledby="ltl-index-h">
+    <h2 id="ltl-index-h">Branches</h2>
+    {%- for row in LT.rows %}
+    <h3>{{ row.label }}</h3>
+    <ul>
+      {%- for b in LT.branches %}{% if b.row == row.label %}
+      <li><a href="#b-{{ b.slug }}">{{ b.label }}</a></li>
+      {%- endif %}{% endfor %}
+    </ul>
+    {%- endfor %}
+  </nav>
+
+  {%- for row in LT.rows %}
+  <section class="ltl-row" aria-labelledby="row-{{ loop.index }}">
+    <h2 id="row-{{ loop.index }}">{{ row.label }}</h2>
+    {%- for b in LT.branches %}{% if b.row == row.label %}
+    {%- set d = TX.branches[b.slug] %}
+    <article class="ltl-branch" id="b-{{ b.slug }}" aria-labelledby="h-{{ b.slug }}">
+      <h3 id="h-{{ b.slug }}">{{ b.label }}</h3>
+      <p class="ltl-status"><span class="ltl-label">{{ TX.placement }}</span> {{ b.statusLine }}</p>
+      <p class="ltl-desc">{{ para(d.description) }}</p>
+      {%- if d.sources.length == 1 %}
+      <p class="ltl-sources"><span class="ltl-label">{{ d.sourceLabel }}</span> <a href="{{ d.sources[0].url }}" rel="noopener">{{ d.sources[0].label }}</a></p>
+      {%- elif d.sources.length %}
+      <div class="ltl-sources"><span class="ltl-label">{{ d.sourceLabel }}</span>
+        <ul>
+          {%- for s in d.sources %}
+          <li><a href="{{ s.url }}" rel="noopener">{{ s.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+      {%- if b.kind == "within" %}
+      <p>Its churches’ texts are listed under <a href="#b-pentecostal">Pentecostal</a>.</p>
+      {%- elif b.kind == "movement" %}
+      <p>Its churches’ texts are listed under the families those churches belong to.</p>
+      {%- endif %}
+      {%- if b.churches.length %}
+      <p class="ltl-churches"><strong>Member churches:</strong> {{ b.churches | join("; ") }}</p>
+      {%- endif %}
+      {%- if b.texts.length %}
+      <ul class="ltl-texts">
+        {%- for t in b.texts %}
+        <li>
+          <strong>{{ t.title }}</strong>{% if t.moreToCome %}<span class="ltl-tag">more to come</span>{% endif %}
+          {%- if t.noChurchCopy %}
+          <div class="ltl-none">No copy online from the church itself</div>
+          {%- endif %}
+          {%- if t.copies.length %}
+          <ul class="ltl-copies">
+            {%- for c in t.copies %}
+            <li>
+              {%- if c.url %}<a href="{{ c.url }}" rel="noopener">{{ c.label }}</a>{% else %}{{ c.label }}<span class="ltl-tag">link under review</span>{% endif %}
+              {%- if c.edition %}<span class="ltl-ed">{{ c.edition }}</span>{% endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+          {%- elif not t.noChurchCopy %}
+          <div class="ltl-none">Not yet listed.</div>
+          {%- endif %}
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      {%- if b.resources.length %}
+      <div class="ltl-learn"><span class="ltl-label">{{ TX.learnMore }}</span>
+        <ul>
+          {%- for r in b.resources %}
+          <li><a href="{{ r.url }}" rel="noopener">{{ r.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+      <p class="ltl-question">{{ TX.question }}</p>
+      {%- if TX.correction %}
+      <p class="ltl-correction"><a href="{{ TX.correction.href }}">{{ TX.correction.text }}</a></p>
+      {%- endif %}
+      <p class="ltl-back"><a href="#ltl-tree">Back to the tree</a></p>
+    </article>
+    {%- endif %}{% endfor %}
+  </section>
+  {%- endfor %}
+
+  {%- if LT.linksCheckedOn %}
+  <p class="ltl-text ltl-small">Links checked {{ LT.linksCheckedOn }}.</p>
+  {%- endif %}
+  {%- if A6A %}
+  <div class="ltl-text">{{ A6A.lines.l3Html | safe }}</div>
+  {%- endif %}
 </div>
 
 <script>
 (function () {
-  /* The same Deep Zoom values as ZOOMABLE[2] in src/_includes/components/articles-presentation.njk (tiles live on R2; no
-     image is uploaded for this page). Without this script the picture and the "View the map at full size" link still work:
-     the link goes to the 3840x2160 image. With it, the link opens the deep-zoom view in place. */
-  var Z = { dzi:'https://media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/tree.dzi', width:7680, height:4320, tileSize:254, overlap:1, format:'webp' };
+  /* The deep zoom of /articles/ slide 2, reused: the same Deep Zoom tiles on R2 and the same OpenSeadragon
+     build and settings as ZOOMABLE[2] in src/_includes/components/articles-presentation.njk. Without this
+     script the picture, its branch spots and the list all work as plain links, and "View the map at full
+     size" (switch ON) goes to the 3840x2160 picture. With it, the zoom button and that link open the deep
+     zoom in place, with the same twenty-five branch spots. */
+  var Z = { dzi: 'https://media.wordsofplainness.org/web/aoid-slides/tree-of-christ-v2/tree.dzi', width: 7680, height: 4320, tileSize: 254, overlap: 1, format: 'webp' };
   var OSD_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.1/openseadragon.min.js';
   var OSD_SRI = 'sha512-LbaoUnRCul2C+I4cdS/EMnMbynmZMU58AApBnZkhMzp/r8rOS7htjTsox7g6rf5ZXkSx56F5dDYmhLwqV1Zt4A==';
-  var link = document.getElementById('ltFull'), img = document.getElementById('ltImg'), box = document.getElementById('ltOsd');
-  var mount = document.getElementById('ltOsdMount'), msg = document.getElementById('ltOsdMsg'), closeBtn = document.getElementById('ltClose');
-  if (!link || !box) return;
-  var viewer = null, open = false, osdPromise = null;
+  var BRANCHES = [{% for b in LT.branches %}{ slug: {{ b.slug | dump | safe }}, label: {{ b.label | dump | safe }}, box: {{ b.box | dump | safe }} }{% if not loop.last %},{% endif %}{% endfor %}];
+  var zoomBtn = document.getElementById('ltlZoom'), closeBtn = document.getElementById('ltlClose'), fullLink = document.getElementById('ltlFull');
+  var box = document.getElementById('ltlOsd'), mount = document.getElementById('ltlOsdMount'), msg = document.getElementById('ltlOsdMsg');
+  if (!zoomBtn || !box) return;
+  zoomBtn.hidden = false;
+  var viewer = null, open = false, osdPromise = null, opener = zoomBtn;
   function loadOSD() {
     if (window.OpenSeadragon) return Promise.resolve(window.OpenSeadragon);
     if (osdPromise) return osdPromise;
@@ -87,17 +193,36 @@
     });
     return osdPromise;
   }
-  function close() {
+  function close(focusOpener) {
     if (viewer) { try { viewer.destroy(); } catch (e) {} viewer = null; }
     mount.innerHTML = ''; mount.removeAttribute('style');
-    msg.hidden = true; box.hidden = true; closeBtn.hidden = true; open = false;
-    link.focus();
+    msg.hidden = true; box.hidden = true; closeBtn.hidden = true; zoomBtn.hidden = false; open = false;
+    if (focusOpener) opener.focus();
+  }
+  function go(slug) {
+    close(false);
+    var el = document.getElementById('b-' + slug);
+    if (el) { location.hash = 'b-' + slug; el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true }); }
+  }
+  function addSpots(OSD) {
+    var ratio = Z.height / Z.width;
+    BRANCHES.forEach(function (b) {
+      var a = document.createElement('a');
+      a.className = 'ltl-ospot'; a.href = '#b-' + b.slug; a.setAttribute('aria-label', b.label + ': go to this branch');
+      a.addEventListener('click', function (e) { e.preventDefault(); go(b.slug); });
+      a.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); go(b.slug); } });
+      viewer.addOverlay({ element: a, location: new OSD.Rect(b.box[0], b.box[1] * ratio, b.box[2], b.box[3] * ratio) });
+      /* OpenSeadragon takes pointer events for panning; a quick tap or click on a spot still follows it. */
+      new OSD.MouseTracker({ element: a, clickHandler: function (ev) { if (ev.quick) go(b.slug); } });
+    });
   }
   function show(e) {
     if (e) e.preventDefault();
     if (open) return;
-    open = true; box.hidden = false; closeBtn.hidden = false;
-    msg.textContent = 'Loading the full-size view…'; msg.hidden = false;
+    opener = (e && e.currentTarget) || zoomBtn;
+    open = true; box.hidden = false; closeBtn.hidden = false; zoomBtn.hidden = true;
+    msg.textContent = 'Loading the deep-zoom view…'; msg.hidden = false;
+    if (fullLink && opener === fullLink) document.getElementById('ltlFrame').scrollIntoView({ block: 'nearest' });
     loadOSD().then(function (OSD) {
       if (!open) return;
       msg.hidden = true;
@@ -111,15 +236,18 @@
         gestureSettingsTouch: { pinchToZoom: true, dragToPan: true, flickEnabled: true, dblClickToZoom: true }
       });
       viewer.addHandler('open', function () {
-        try { viewer.viewport.resize(new OSD.Point(mount.clientWidth, mount.clientHeight), false); viewer.viewport.goHome(true); viewer.forceRedraw(); viewer.canvas.focus(); } catch (err) {}
+        try { viewer.viewport.resize(new OSD.Point(mount.clientWidth, mount.clientHeight), false); viewer.viewport.goHome(true); viewer.forceRedraw(); } catch (err) {}
+        addSpots(OSD);
+        closeBtn.focus();
       });
     }).catch(function () {
       if (!open) return;
-      msg.textContent = 'The full-size view could not load. Use "Back to the picture".'; msg.hidden = false;
+      msg.textContent = 'The deep-zoom view could not load. Use "Back to the picture".'; msg.hidden = false;
     });
   }
-  link.addEventListener('click', show);
-  closeBtn.addEventListener('click', close);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) close(); });
+  zoomBtn.addEventListener('click', show);
+  if (fullLink) fullLink.addEventListener('click', show);
+  closeBtn.addEventListener('click', function () { close(true); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) close(true); });
 })();
 </script>

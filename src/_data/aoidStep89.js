@@ -50,7 +50,7 @@ const FILMS_LINE = "The First Edition's films, PDFs and slides are labelled Firs
 
 // Links the approved amendments ask for, where a target exists on the site.
 const METHOD_LINKS = {
-  livingTree: '/living-tree/', // A6, A6a (approved 25 Oct 2026): the first form of the page, src/pages/living-tree.njk.
+  livingTree: '/living-tree/', // A6, A6a (approved 25 Oct 2026); since step 163 (CODE-AOID2-112) the one Living Tree page, src/pages/living-tree.njk.
 };
 
 if (!on) module.exports = { on: false };

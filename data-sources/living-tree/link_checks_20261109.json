@@ -1,0 +1,1074 @@
+{
+ "_note": "Two-instrument link checks, CODE-AOID2-112, 9 Nov 2026, for every source link in the approved Living Tree wording and every inquirer resource in the CODE-AOID2-88 JSON. webfetch: the WebFetch tool, one fetch per URL (through five web-fetch agents), no retries and no workarounds; OK = content returned, PARTIAL = only a title or almost no text returned, FAIL = error. shell: curl 8.22.0 (Windows) libcurl/8.22.0 Schannel zlib/1.3.2 WinIDN WinLDAP (plain GET, default headers, redirects followed); code is the final HTTP status after redirects (0 = no response). tools/build_living_tree.py reads this file for the inquirer resources.",
+ "checkedOn": "2026-11-09",
+ "links": {
+  "https://www.assyrianchurch.org/": {
+   "webfetch": {
+    "result": "PARTIAL",
+    "detail": "-",
+    "page": "Holy Apostolic Catholic Assyrian Church of the East; self-described official site; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.assyrianchurch.org/about-us/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About us – Holy Apostolic Catholic Assyrian Church of the East; copyright footer: same church"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://armenianchurch.us/?p=11309": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Oriental Orthodox Leaders Welcome Primate Fr. Parsamyan; publisher: Eastern Diocese (Armenian Church of America)"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://armenianchurch.us/oriental-orthodox-leaders-welcome-primate-fr-parsamyan/",
+    "error": null
+   }
+  },
+  "https://copticorthodox.church/en/coptic-church/coptic-history/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "truncated: first 39,929 of 103,575 chars verbatim",
+    "page": "Coptic History - Coptic Orthodox Church"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.oca.org/orthodoxy/the-orthodox-faith/doctrine-scripture/the-symbol-of-faith/church": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "The Orthodox Faith, Vol. I, 'Church' page; copyright footer: Orthodox Church in America"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.vatican.va/archive/ENG0015/__P29.HTM": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Catechism of the Catholic Church - IntraText; copyright Libreria Editrice Vaticana"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.lcms.org/about/beliefs": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Beliefs (Lutheran Church - Missouri Synod); footer: © 2026 The Lutheran Church—Missouri Synod"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://www.lcms.org/what-we-believe/beliefs",
+    "error": null
+   }
+  },
+  "https://www.elca.org/about/what-we-believe/elca-faith-tradition": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "content is the 'Who we are' page, not faith-tradition text",
+    "page": "Explore Who We Are at the ELCA; footer: Evangelical Lutheran Church in America"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://www.elca.org/about-the-elca/who-we-are",
+    "error": null
+   }
+  },
+  "https://wcrc.eu/about/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About - WCRC; copyright footer: World Communion of Reformed Churches; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.rca.org/about/theology/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Reformed Theology – Reformed Church in America; footer: © Reformed Church Press"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://pcanet.org/beliefs/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Beliefs - pcanet.org; copyright footer: Presbyterian Church in America"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.crcna.org/welcome/beliefs/reformed-accent": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 403 Forbidden.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.churchofengland.org/node/9707/printable/print": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 404 Not Found.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 404,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.anglicancommunion.org/structures/what-is-the-anglican-communion.aspx": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 403 Forbidden.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 403,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://mwc-cmm.org/en/shared-convictions": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Shared Convictions - Mennonite World Conference; copyright 2026 Mennonite World Conference; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://mwc-cmm.org/en/shared-convictions/",
+    "error": null
+   }
+  },
+  "https://www.brethren.org/about/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About us; footer: © 2026 Church of the Brethren, Inc."
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://bfm.sbc.net/preamble/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Report of BF&M Study Committee (2000) on bfm.sbc.net; footer: © 2026 Southern Baptist Convention"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://baptistworld.org/beliefs/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Beliefs Statement – Baptist World Alliance; BWA logo and footer branding; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://worldmethodistcouncil.org/about/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About Us - World Methodist Council; World Methodist Council (site footer copyright)"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://worldmethodistcouncil.org/about-us/",
+    "error": null
+   }
+  },
+  "https://www.umc.org/content/distinctive-wesleyan-emphases": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Distinctive Wesleyan Emphases (UMC.org); United Methodist Communications"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.nae.org/what-is-an-evangelical/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "What is an Evangelical?; National Association of Evangelicals (footer © 2026); own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://worldea.org/who-we-are/statement-of-faith/": {
+   "webfetch": {
+    "result": "PARTIAL",
+    "detail": "-",
+    "page": "Title 'Statement of Faith' only; no publisher text on page; own page: unclear"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://nazarene.org/who-we-are": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "NMI - Who We Are - Church of the Nazarene; Church of the Nazarene Inc."
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://nazarene.org/nmi/who-we-are/",
+    "error": null
+   }
+  },
+  "https://www.wesleyan.org/about": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About; footer © 2026 The Wesleyan Church"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://nazarene.org/what-we-believe": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "What We Believe - Church of the Nazarene; Church of the Nazarene Inc."
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://nazarene.org/what-we-believe/",
+    "error": null
+   }
+  },
+  "https://salvationist.ca/articles/2009/10/we-believe-e2-80-a6/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "We Believe … (Salvationist.ca article, 2009); The Salvation Army Canada, © 2026"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://ag.org/Beliefs/Statement-of-Fundamental-Truths": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 403 Forbidden.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 403,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://churchofgod.org/beliefs/declaration-of-faith/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "DECLARATION OF FAITH - Church Of God; Church of God, Cleveland TN (site footer)"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://iphc.org/beliefs/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Beliefs – IPHC; International Pentecostal Holiness Church (footer © 2026); own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.upci.org/about/our-beliefs": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Our Beliefs - upci.org; UPCI (branding, World Headquarters address, footer © 2026)"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://upci.org/our-beliefs/",
+    "error": null
+   }
+  },
+  "https://www.cogic.org/wp-content/uploads/2014/12/What-We-Believe.pdf": {
+   "webfetch": {
+    "result": "PARTIAL",
+    "detail": "-",
+    "page": "PDF; no readable title or publisher; truncated"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.foursquare.org/about/beliefs/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Beliefs - The Foursquare Church; The Foursquare Church (footer © 2026)"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://formation.charis.international/pages/who-we-are": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Who we are (Formation CHARIS International); Catholic Charismatic Renewal International Service (footer © 2026)"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.laityfamilylife.va/content/laityfamilylife/en/associazioni-e-movimenti/repertorio/charis.html": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Charis; Dicastery for Laity, Family and Life (Vatican) footer copyright"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://vineyardusa.org/about/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Core Values & Beliefs - Vineyard USA; Vineyard USA (footer © 2026)"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://vineyardusa.org/about/core-values-beliefs/",
+    "error": null
+   }
+  },
+  "https://hirr.hartfordinternational.edu/wp-content/uploads/2024/10/Report-on-the-2020-Faith-Communities-Today-Survey-of-Nondenominational-and-Independent-Churches.pdf": {
+   "webfetch": {
+    "result": "PARTIAL",
+    "detail": "-",
+    "page": "PDF; no readable title or publisher; truncated"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.discipleshistory.org/node/9": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 404 Not Found.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 404,
+    "final": "https://discipleshistory.org/node/9",
+    "error": null
+   }
+  },
+  "https://disciples.org/our-identity/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Our Identity - Christian Church (Disciples of Christ)"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.churchofjesuschrist.org/study/scriptures/the-restoration-of-the-fulness-of-the-gospel-of-jesus-christ/a-bicentennial-proclamation-to-the-world?lang=eng": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Restoration Proclamation; The Church of Jesus Christ of Latter-day Saints"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.churchofjesuschrist.org/study/scriptures/nt/eph/2?lang=eng&id=p20#p20": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Ephesians 2 (scripture chapter page)"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.adventist.org/beliefs/": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 429 Too Many Requests.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 429,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.jw.org/en/jehovahs-witnesses/faq/are-jehovahs-witnesses-a-cult/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Are Jehovah's Witnesses a Cult?; JW.ORG; copyright Watch Tower Bible and Tract Society of Pennsylvania"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.dts.edu/about/doctrinal-statement/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Doctrinal Statement - Dallas Theological Seminary; copyright Dallas Theological Seminary"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://www.dts.edu/why-dts/doctrinal-statement",
+    "error": null
+   }
+  },
+  "https://www.umjc.org/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Union of Messianic Jewish Congregations; site logo and header branding"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.mjaa.org/about/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About Us - Messianic Jewish Alliance of America; MJAA footer copyright and branding"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://mjaa.org/about-us/",
+    "error": null
+   }
+  },
+  "https://www.oikoumene.org/church-families/african-instituted-churches": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "African Instituted churches - World Council of Churches; footer copyright WCC 2026"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://oaic.org/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Organisation of African Instituted Churches (OAIC) home page"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://oaic.org/newsite/",
+    "error": null
+   }
+  },
+  "https://legacy.pewresearch.org/religion/wp-content/uploads/sites/7/2023/08/PF_2023.08.30_religion-china_A-A.pdf": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "Hostname/IP does not match certificate's altnames: Host: legacy.pewresearch.org. is not in the cert's altnames: DNS:*.go-vip.co, DNS:go-vip.co",
+    "page": "-"
+   },
+   "shell": {
+    "code": 0,
+    "final": null,
+    "error": "curl: (60) schannel: SNI or certificate check failed: SEC_E_WRONG_PRINCIPAL (0x80090322) - The target principal name is incorrect."
+   }
+  },
+  "https://www.ecoi.net/en/document/2124878.html": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "truncated at 39,946 of 61,209 chars",
+    "page": "China house-church query response; IRB Canada author; ecoi.net host"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.oca.org/orthodoxy/the-orthodox-faith": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "The Orthodox Faith - Orthodox Church in America; OCA copyright; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.oca.org/parishes": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Parishes - Orthodox Church in America; OCA copyright; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.usccb.org/beliefs-and-teachings/what-we-believe": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "What We Believe - The Nicene Creed; ©2026 USCCB; own page: yes"
+   },
+   "shell": {
+    "code": 403,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.usccb.org/beliefs-and-teachings/who-we-teach/christian-initiation-of-adults": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 403 Forbidden.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 403,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://copticorthodox.church/en/coptic-church/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Coptic Church - Coptic Orthodox Church; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://copticorthodox.church/en/abroad-diocese/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Dioceses Abroad - Coptic Orthodox Church; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://lutheranworld.org/who-we-are/our-lutheran-identity": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Our Lutheran Identity / The Lutheran World Federation; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.elca.org/about-the-elca/who-we-are/beliefs": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "What Lutherans Believe; ELCA; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.lcms.org/what-we-believe/beliefs": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Beliefs / Lutheran Church - Missouri Synod; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://wcrc.eu/about/members/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Members - WCRC; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.anglicancommunion.org/about-us/": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 403 Forbidden.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 403,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.churchofengland.org/faith-life/what-we-believe": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "What we believe / The Church of England; footer copyright The Archbishops' Council; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://www.churchofengland.org/faith/what-we-believe",
+    "error": null
+   }
+  },
+  "https://www.episcopalchurch.org/who-we-are/what-we-believe/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "What We Believe – The Episcopal Church; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://anglicanchurch.net/about/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "ABOUT / The Anglican Church in North America; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://mwc-cmm.org/en/about-mwc/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About MWC - Mennonite World Conference; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.mennoniteusa.org/who-are-mennonites/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Who Are The Mennonites / Mennonite Church USA; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://baptistworld.org/members/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "truncated after 39,958 of 95,612 chars",
+    "page": "Members / Baptist World Alliance; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://worldmethodistcouncil.org/about-us/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About Us - World Methodist Council; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://worldmethodistcouncil.org/member-churches/country/USA/": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 500 Internal Server Error.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 500,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.globalmethodist.org/find-a-church": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Find a Church; footer © 2026 Global Methodist Church; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.pwfellowship.org/about-us": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About Us; Pentecostal World Fellowship; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.cogic.org/about-us/what-we-believe/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "What We Believe - Church Of God In Christ; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://upci.org/our-beliefs/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Our Beliefs - upci.org; UPCI; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://fmcusa.org/webelieve": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "We Believe - Free Methodist Church USA; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://fmcusa.org/find-a-church": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Find a Church - Free Methodist Church USA; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.salvationist.org.uk/faith/our-beliefs": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Our beliefs (Salvationist); copyright 2026 The Salvation Army; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://nazarene.org/resources/articles-of-faith/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Articles of Faith - Church of the Nazarene; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.nae.org/statement-of-faith/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Statement of Faith (National Association of Evangelicals); own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://disciples.org/our-identity/our-mission-vision-and-confession/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Our Mission, Vision and Confession - Christian Church (Disciples of Christ); own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://disciples.org/find-congregation/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Find a Congregation - Christian Church (Disciples of Christ); own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.churchofjesuschrist.org/welcome/what-do-latter-day-saints-believe?lang=eng": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About Us - The Church of Jesus Christ of Latter-day Saints; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.churchofjesuschrist.org/welcome/find-a-church?lang=eng": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Find a Church (The Church of Jesus Christ of Latter-day Saints); own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.adventist.org/": {
+   "webfetch": {
+    "result": "FAIL",
+    "detail": "The server returned HTTP 429 Too Many Requests.",
+    "page": "-"
+   },
+   "shell": {
+    "code": 429,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.jw.org/en/jehovahs-witnesses/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Who Are Jehovah's Witnesses?; JW.ORG; Watch Tower Bible and Tract Society of Pennsylvania; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.jw.org/en/jehovahs-witnesses/meetings/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Meetings of Jehovah's Witnesses (JW.ORG); own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.dts.edu/why-dts/doctrinal-statement": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Doctrinal Statement (Dallas Theological Seminary); own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://www.umjc.org/statement-of-faith": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Statement of Faith — Union of Messianic Jewish Congregations; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://umjc.org/defining-messianic-judaism": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Defining Messianic Judaism — Union of Messianic Jewish Congregations; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": "https://www.umjc.org/defining-messianic-judaism",
+    "error": null
+   }
+  },
+  "https://mjaa.org/statement-of-faith-2/": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "Statement of Faith - Messianic Jewish Alliance of America; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  },
+  "https://oaic.org/newsite/?page_id=51": {
+   "webfetch": {
+    "result": "OK",
+    "detail": "-",
+    "page": "About Us – Organisation of African Instituted Churches; own page: yes"
+   },
+   "shell": {
+    "code": 200,
+    "final": null,
+    "error": null
+   }
+  }
+ }
+}

@@ -1,4 +1,4 @@
-"""Build src/_data/livingTree.json for the hidden /living-tree/ page (CODE-AOID2-110).
+"""Build src/_data/livingTree.json for the /living-tree/ page (CODE-AOID2-110; inquirer resources added for step 163, CODE-AOID2-112).
 
 Re-run this whenever the AOID2 source library grows. Nothing in the output is typed by hand:
 every title, edition, rights class and link comes from the files below, and every link's status
@@ -37,9 +37,25 @@ Link rule (ruled by Aaron, CODE-AOID2-110):
     refusal is recorded as "needs a browser check" and never worked around. A dead link is never
     replaced by a guess.
 
+Inquirer resources (AOID2 step 163, CODE-AOID2-112; approved wording 2.8):
+  --sources88   the CODE-AOID2-88 JSON (default C:/Users/aaron/Documents/wop-scratch/
+                WoP_AOID2_CODE-AOID2-88_LivingTree_Sources_20261101.json); each branch's
+                "inquirer_resources" entries, copied field for field (publisher, title, url)
+  data-sources/living-tree/link_checks_<date>.json   the newest two-instrument check record: one
+                WebFetch and one separate shell request per link (WebFetch cannot be run from here,
+                so this script reads the record and never checks resource links itself)
+  A resource is shown only if (a) the CODE-AOID2-88 verification field ("claim_verified") does not
+  record it as unverified (UNVERIFIED_RE below), and (b) both instruments loaded it on the record
+  (WebFetch OK or PARTIAL, shell 2xx). Anything else is withheld, never worked around, and listed
+  with its reasons in review.json "resources.withheld". Chinese House Churches: none, by design.
+  The page shows each as a link labelled "<publisher>, <title>", both as the JSON gives them.
+
 Usage:
   python tools/build_living_tree.py --checklist <file> [--no-check]   (--no-check reuses the
   statuses already in src/_data/livingTree.json and review.json, for offline rebuilds)
+  python tools/build_living_tree.py --resources-only   (re-applies the inquirer-resource rule to the
+  livingTree.json and review.json already on disk and changes nothing else in them; used when the
+  library inbox has moved on since the last full run and the adopted-text lists must stay as they are)
 """
 
 import argparse
@@ -64,6 +80,15 @@ STRUCT = os.path.join(REPO, "data-sources", "living-tree", "branches.json")
 HOSTS = os.path.join(REPO, "data-sources", "living-tree", "institutions.csv")
 OUT = os.path.join(REPO, "src", "_data", "livingTree.json")
 REVIEW = os.path.join(REPO, "data-sources", "living-tree", "review.json")
+DEF_SOURCES88 = r"C:/Users/aaron/Documents/wop-scratch/WoP_AOID2_CODE-AOID2-88_LivingTree_Sources_20261101.json"
+CHECKS_GLOB = os.path.join(REPO, "data-sources", "living-tree", "link_checks_*.json")
+
+# CODE-AOID2-88 branch names that differ from the branch labels in branches.json.
+BRANCH_88 = {"Catholic (including the Eastern Catholic churches)": "catholicism"}
+# The CODE-AOID2-88 verification field records a page it could not confirm in these words.
+UNVERIFIED_RE = re.compile(r"unverified|not verified|failed both instruments|content not read|content unread|shell 200 only", re.I)
+# Branches that show no inquirer resource by design (approved wording 2.8).
+NO_RESOURCES_BY_DESIGN = {"chinese-house-churches"}
 
 # Family headings of the checklist (both forms) -> id prefix.
 FAMILY_PREFIX = {
@@ -368,6 +393,74 @@ STATUS_WORDS = {"ok": "answers", "browser": "needs a browser check", "dead": "de
 
 
 # ---------------------------------------------------------------------------------------------
+# Inquirer resources (step 163)
+# ---------------------------------------------------------------------------------------------
+
+def build_resources(struct, sources88, checks_path):
+    """Per-branch inquirer resources to show, and the review record of every resource (shown or withheld)."""
+    src = json.load(open(sources88, encoding="utf-8"))
+    checks = json.load(open(checks_path, encoding="utf-8"))
+    links = checks["links"]
+    slug_of = {b["label"]: b["slug"] for r in struct["rows"] for b in r["branches"]}
+    slug_of.update(BRANCH_88)
+    shown = {slug: [] for slug in slug_of.values()}
+    record = {"from": os.path.basename(sources88), "checks": os.path.basename(checks_path),
+              "checkedOn": checks.get("checkedOn"), "rule": "show only if (a) the CODE-AOID2-88 verification field "
+              "does not record the page as unverified and (b) WebFetch (OK or PARTIAL) and the shell request (2xx) "
+              "both loaded it", "shown": [], "withheld": [], "withheld_by_design": []}
+    seen = set()
+    for b in src["branches"]:
+        slug = slug_of.get(b["branch"])
+        if not slug:
+            sys.exit("STOP: CODE-AOID2-88 branch not on the Tree: %s" % b["branch"])
+        seen.add(slug)
+        if slug in NO_RESOURCES_BY_DESIGN:
+            if b["inquirer_resources"]:
+                sys.exit("STOP: %s has inquirer resources, but shows none by design" % slug)
+            record["withheld_by_design"].append({"slug": slug, "withheld_links": b.get("withheld_links", [])})
+            continue
+        for r in b["inquirer_resources"]:
+            url = r["url"]
+            chk = links.get(url)
+            reasons = []
+            if UNVERIFIED_RE.search(r.get("claim_verified", "")):
+                reasons.append("(a) the CODE-AOID2-88 verification field does not confirm the page: " + r["claim_verified"])
+            if chk is None:
+                reasons.append("(b) not in the check record")
+            else:
+                wf, sh = chk["webfetch"], chk["shell"]
+                if wf["result"] not in ("OK", "PARTIAL"):
+                    reasons.append("(b) WebFetch: " + wf["detail"])
+                if not (sh["code"] and 200 <= sh["code"] < 300):
+                    reasons.append("(b) shell: " + ("HTTP %s" % sh["code"] if sh["code"] else (sh.get("error") or "no response")))
+            entry = {"slug": slug, "publisher": r["publisher"], "title": r["title"], "url": url,
+                     "claim_verified": r.get("claim_verified", ""), "check": chk}
+            if reasons:
+                entry["reasons"] = reasons
+                record["withheld"].append(entry)
+            else:
+                record["shown"].append(entry)
+                shown[slug].append({"label": r["publisher"] + ", " + r["title"], "url": url})
+    missing = set(slug_of.values()) - seen
+    if missing:
+        sys.exit("STOP: branches missing from the CODE-AOID2-88 JSON: %s" % sorted(missing))
+    return shown, record
+
+
+def apply_resources(page_branches, review, shown, record):
+    for b in page_branches:
+        b["resources"] = shown[b["slug"]]
+    review["resources"] = record
+
+
+def latest_checks():
+    files = sorted(glob.glob(CHECKS_GLOB))
+    if not files:
+        sys.exit("STOP: no data-sources/living-tree/link_checks_<date>.json")
+    return files[-1]
+
+
+# ---------------------------------------------------------------------------------------------
 # Build
 # ---------------------------------------------------------------------------------------------
 
@@ -377,7 +470,24 @@ def main():
     ap.add_argument("--checklist")
     ap.add_argument("--codex", default=DEF_CODEX)
     ap.add_argument("--no-check", action="store_true")
+    ap.add_argument("--sources88", default=DEF_SOURCES88)
+    ap.add_argument("--resources-only", action="store_true")
     a = ap.parse_args()
+
+    if a.resources_only:
+        # Re-apply the resource rule to the files on disk; every other key stays exactly as it is.
+        struct = json.load(open(STRUCT, encoding="utf-8"))
+        out = json.load(open(OUT, encoding="utf-8"))
+        review = json.load(open(REVIEW, encoding="utf-8"))
+        shown, record = build_resources(struct, a.sources88, latest_checks())
+        apply_resources(out["branches"], review, shown, record)
+        with open(OUT, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(out, f, ensure_ascii=False, indent=1)
+        with open(REVIEW, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(review, f, ensure_ascii=False, indent=1)
+        print("resources shown:", len(record["shown"]), "| withheld:", len(record["withheld"]),
+              "| none by design:", [w["slug"] for w in record["withheld_by_design"]])
+        return
 
     # Codex: labels and status wording must stand in C4(d).
     codex = open(a.codex, encoding="utf-8").read()
@@ -651,6 +761,8 @@ def main():
         "branches": page_branches,
         "counts": counts,
     }
+    shown_res, res_record = build_resources(struct, a.sources88, latest_checks())
+    apply_resources(out["branches"], review, shown_res, res_record)
     review["linkChecks"] = results
     review["counts"] = counts
     review["checkedOn"] = out["linksCheckedOn"]
