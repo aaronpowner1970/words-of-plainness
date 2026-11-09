@@ -14,6 +14,15 @@
   The opener is the page LCP image, so it loads eager with fetchpriority=high;
   every other banner lazy-loads.
 
+  Replacing artwork (Aaron's ruling, 9 Nov 2026, CHAT-AOID2-114a; AOID2
+  step 297): banner WebPs are served with
+  "Cache-Control: public, max-age=31536000, immutable", so replaced artwork
+  must never reuse an existing file name or URL. A replacement banner gets a
+  new slug suffix (for example -v2, so a00-pure-religion becomes
+  a00-pure-religion-v2 and its files a00-pure-religion-v2-<width>.webp), its
+  banners.json URLs are updated to match, and the old objects are left in
+  place on R2. See tools/wop_r2_upload_banners.py.
+
   Do NOT write a nested Nunjucks comment marker inside this block — the inner
   closer ends the comment early and the build fails with "unexpected end of
   comment".

@@ -1,6 +1,14 @@
 The author-and-SCRIBE record of every correction to reader-facing text on the site, newest first.
 Not shown to readers and not published: Eleventy's input is src/, so docs/ reaches no build output (AOID2-READER-NO-CHANGELOG, AOID2-CHANGELOG-REPO).
 
+## 9 November 2026 - Broken Vessels, "The Doctrine and the Ministry": article titles and numbers corrected to the approved wording (CODE-AOID2-116, AOID2 step 209)
+- What changed (both editions; not gated by the Second Edition switch, because Articles 2-13 carry the same numbers in the First and Second Editions):
+  - src/pages/studies/broken-vessels.njk, section "The Doctrine and the Ministry" (id doctrine-and-ministry), paragraph 1: "Article 10, Living by Grace" -> "Article 10, Of Living by Grace". Nothing else in the paragraph changed.
+  - Same section, paragraph 2, replaced whole with the approved text: Article 8 is named "Of Fellow Believers" (was "Of Our Fellow Believers"); the sentence on "Article 12, Of the Restoration", an article that does not exist (Article 12 is "Of Immortality and Eternal Life" in both editions), is replaced by a sentence on Article 9, "Of Finding Our Way"; "Of Covenants and Commitments" is numbered Article 11 (was 13).
+  - The file was edited in place and keeps its creation time, so the page's datePublished and sitemap lastmod (2026-08-01) are unchanged.
+- Why: AOID2 pathway step 209, applying the wording Aaron approved 9 Nov 2026 (CHAT-AOID2-114a, option 1; AOID2 step 208): wop-scratch/WoP_AOID2_Step208_BrokenVessels_ApprovedWording_20261109.md.
+- Also in this commit, not reader-facing (AOID2 step 297): Aaron's ruling of 9 Nov 2026 (CHAT-AOID2-114a) that banner WebPs, served "public, max-age=31536000, immutable", never reuse a file name or URL (a replacement takes a new slug suffix such as -v2, banners.json is updated to match, the old R2 objects stay) is written into the header comment of src/_includes/macros/banner.njk and the docstring of tools/wop_r2_upload_banners.py. No build output changes.
+
 ## 9 November 2026 - /living-tree/ follow-up: approved wording version 2, the 2.9 ACNA note, inquirer resources under Aaron's signed labels, and the phone-width "Back to the picture" bar (9942d76, CODE-AOID2-113, AOID2 step 287)
 - What changed (live at /living-tree/, which production builds with the Second Edition switch OFF; the page stays noindex, out of site search and linked from nowhere in that state, as it was):
   - The page reads version 2 of the approved wording: data-sources/living-tree/WoP_AOID2_LivingTree_ApprovedWording_v2_20261109.md, a byte-identical copy of the wop-scratch file approved by Aaron 9 Nov 2026 (CHAT-AOID2-111b), under the same SHA-256 guard in src/_data/livingTreeText.js. The version 1 copy is retired, so one approved file governs the page.

@@ -16,6 +16,16 @@ Usage:
 The source folder is the extracted `web/banners` directory from
 wop-articles-banners-webp.zip. Keys are written as web/banners/<filename>,
 matching the URLs baked into src/_data/banners.json.
+
+Replacing artwork (Aaron's ruling, 9 Nov 2026, CHAT-AOID2-114a; AOID2 step
+297): every object is uploaded with CACHE_CONTROL below, "public,
+max-age=31536000, immutable", so replaced artwork must never reuse an existing
+file name or URL. A replacement banner gets a new slug suffix (for example
+-v2, so a00-pure-religion becomes a00-pure-religion-v2 and its files
+a00-pure-religion-v2-<width>.webp), its URLs in src/_data/banners.json are
+updated to match, and the old objects are left in place on R2. put_object
+overwrites an existing key without warning, so never run this script on a
+folder holding a replacement under an old file name.
 """
 
 import argparse
