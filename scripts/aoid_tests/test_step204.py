@@ -1,8 +1,9 @@
-"""Tests for AOID2 step 204 (CODE-AOID2-114): the fixes Aaron ruled on 9 Nov 2026 (CHAT-AOID2-114a) in his review
-of the CODE-AOID2-73 report.
+"""Tests for AOID2 step 204 (CODE-AOID2-114, CODE-AOID2-115): the fixes Aaron ruled on 9 Nov 2026 (CHAT-AOID2-114a)
+in his review of the CODE-AOID2-73 report.
 
-Ruling 3a: the two A14 s12 Alma anchor comments end at "prepared by an angel."; the scope note's
-"; the pairing with Hebrews 13:2" is a note to the apparatus, not a gloss. D&C 124:22-24 is unchanged.
+Ruling 3a (as revised, CODE-AOID2-115): the two A14 s12 Alma anchor comments read exactly
+"Amulek receives the hungry stranger into his house." Neither carries "prepared by an angel" or the scope note's
+"; the pairing with Hebrews 13:2". D&C 124:22-24 is unchanged.
 Ruling 3b: the A14 s9 Articles of Faith 1:13 comment ends with an ellipsis inside its quotation marks.
 Ruling 6: with the Second Edition switch ON, the two lines that describe the podcasts (the Learning Pathways card
 description and the podcast modal label) carry the same "First Edition" tag as the Plainness Edition PDF link;
@@ -17,6 +18,7 @@ import functools
 import http.server
 import json
 import os
+import re
 import subprocess
 import threading
 from pathlib import Path
@@ -27,7 +29,9 @@ from playwright.sync_api import sync_playwright
 REPO = Path(__file__).resolve().parents[2]
 DATA = json.loads((REPO / "src" / "_data" / "apparatusData.json").read_text(encoding="utf-8"))
 
-ALMA = "Amulek receives the hungry stranger into his house, prepared by an angel."
+ALMA = "Amulek receives the hungry stranger into his house."
+ALMA_REFS = ("Alma 8:19–21", "Alma 10:7–9")
+ALMA_DROPPED = "prepared by an angel"
 ALMA_OLD_CLAUSE = "; the pairing with Hebrews 13:2"
 NAUVOO = 'the Nauvoo House, "that strangers may come from afar to lodge therein"'
 AOF_1_13 = '"We believe in being honest, true…"'
@@ -80,20 +84,34 @@ def embedded_comment(text):
     return '"comment": ' + json.dumps(text, ensure_ascii=False)
 
 
+def embedded_glosses(page, ref):
+    """The comment field of every embedded copy of one anchor (ref, text, comment, in that order), decoded."""
+    string = r'"(?:[^"\\]|\\.)*"'
+    pat = re.compile(r'"ref": ' + re.escape(json.dumps(ref, ensure_ascii=False)) +
+                     r',\s*"text": ' + string + r',\s*"comment": (' + string + ')')
+    return [json.loads(m.group(1)) for m in pat.finditer(page)]
+
+
 # ---------------------------------------------------------------- ruling 3a: the Alma comments
 def test_alma_comments_trimmed_in_the_data():
-    assert restoration_anchor("s12", "Alma 8:19–21")["comment"] == ALMA
-    assert restoration_anchor("s12", "Alma 10:7–9")["comment"] == ALMA
+    for ref in ALMA_REFS:
+        assert restoration_anchor("s12", ref)["comment"] == ALMA
     assert restoration_anchor("s12", "D&C 124:22–24")["comment"] == NAUVOO  # unchanged, lowercase "the" kept
     for sid, s in DATA["A14"].items():
         for col in ("biblical", "restoration"):
             for a in s[col]:
                 assert ALMA_OLD_CLAUSE not in a["comment"], (sid, a["ref"])
+                assert ALMA_DROPPED not in a["comment"], (sid, a["ref"])
 
 
 def test_alma_comments_trimmed_in_the_on_build(site_on):
     page = read(site_on, "articles/index.html")
     assert page.count(embedded_comment(ALMA)) >= 2  # both Alma anchors
+    for ref in ALMA_REFS:
+        glosses = embedded_glosses(page, ref)
+        assert glosses, ref
+        assert all(g == ALMA for g in glosses), (ref, glosses)
+        assert not any(ALMA_DROPPED in g for g in glosses), (ref, glosses)
     assert ALMA_OLD_CLAUSE not in page
     assert embedded_comment(NAUVOO) in page
 

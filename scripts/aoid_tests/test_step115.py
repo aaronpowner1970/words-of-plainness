@@ -204,6 +204,13 @@ def test_a14_l1_notes_are_spread_one_per_span():
     assert paras("s4") == [floor] and paras("s5") == [floor]
 
 
+# Ruling 3a and the ruling on this test (CHAT-AOID2-114a, 9 Nov 2026; step 204, CODE-AOID2-115): the two A14 s12
+# Alma comments read "Amulek receives the hungry stranger into his house.", a shortened excerpt closed with a
+# period. Each must end with that period, and the comment minus it must appear word for word in the scope note
+# (whole words, so a clipped word cannot pass). Every other comment must still appear whole and word for word.
+SHORTENED_EXCERPTS = {("s12", "Alma 8:19–21"), ("s12", "Alma 10:7–9")}
+
+
 def test_a14_anchor_comments_come_from_the_scope_note():
     doc = SCOPE_A14.read_text(encoding="utf8")
     filled = []
@@ -212,7 +219,12 @@ def test_a14_anchor_comments_come_from_the_scope_note():
             for a in s[col]:
                 if a["comment"]:
                     filled.append((sid, a["ref"]))
-                    assert a["comment"] in doc, (sid, a["ref"])
+                    if (sid, a["ref"]) in SHORTENED_EXCERPTS:
+                        stem = a["comment"][:-1]
+                        assert a["comment"].endswith(".") and re.search(
+                            r"(?<!\w)" + re.escape(stem) + r"(?!\w)", doc), (sid, a["ref"])
+                    else:
+                        assert a["comment"] in doc, (sid, a["ref"])
     for want in (("s12", "D&C 124:22–24"), ("s12", "Alma 8:19–21"), ("s12", "Alma 10:7–9"), ("s8", "D&C 64:9–10"), ("s1", "D&C 59:5–6")):
         assert want in filled, want
     assert len(filled) == 10
