@@ -3205,21 +3205,26 @@
  "checkedOn": "2026-11-08",
  "resources": {
   "from": "WoP_AOID2_CODE-AOID2-88_LivingTree_Sources_20261101.json",
-  "checks": "link_checks_20261109.json",
+  "labels": "WoP_AOID2_LivingTree_ResourceLabels_Signed_20261109.md",
+  "labelsSha256": "fda46b536accffe94f98efbd5148a00b48878549360e805d35e5a8472d92f9a2",
+  "checks": "link_checks_20261109_CODE-AOID2-113.json",
   "checkedOn": "2026-11-09",
-  "rule": "show only if (a) the CODE-AOID2-88 verification field does not record the page as unverified and (b) WebFetch (OK or PARTIAL) and the shell request (2xx) both loaded it",
+  "rule": "show only a signed resource, under its signed label and address, and only if (a) the CODE-AOID2-88 verification field does not record the page as unverified, unless Aaron has cleared it (AOID2-LT-RES-UNVERIFIED option 2; AOID2-LT-ACNA option 2), and (b) WebFetch (OK, or PARTIAL on the publisher's own page) and the shell request (2xx) both loaded it",
   "shown": [
    {
     "slug": "eastern-orthodox",
-    "publisher": "Orthodox Church in America",
-    "title": "The Orthodox Faith (Hopko series)",
+    "label": "Orthodox Church in America, The Orthodox Faith",
     "url": "https://www.oca.org/orthodoxy/the-orthodox-faith",
+    "label88": "Orthodox Church in America, The Orthodox Faith (Hopko series)",
+    "url88": "https://www.oca.org/orthodoxy/the-orthodox-faith",
     "claim_verified": "Publisher is OCA; overview for learners.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "The Orthodox Faith - Orthodox Church in America; OCA copyright; own page: yes"
+      "page": "The Orthodox Faith - Orthodox Church in America; OCA copyright",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3230,15 +3235,18 @@
    },
    {
     "slug": "eastern-orthodox",
-    "publisher": "Orthodox Church in America",
-    "title": "Find a parish (OCA parish directory)",
+    "label": "Orthodox Church in America, Find a Parish",
     "url": "https://www.oca.org/parishes",
+    "label88": "Orthodox Church in America, Find a parish (OCA parish directory)",
+    "url88": "https://www.oca.org/parishes",
     "claim_verified": "Covers OCA parishes only, not all Orthodox churches.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Parishes - Orthodox Church in America; OCA copyright; own page: yes"
+      "page": "Parishes - Orthodox Church in America; OCA copyright",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3249,15 +3257,18 @@
    },
    {
     "slug": "oriental-orthodox",
-    "publisher": "Coptic Orthodox Church",
-    "title": "Coptic Church overview",
+    "label": "Coptic Orthodox Church, The Coptic Church",
     "url": "https://copticorthodox.church/en/coptic-church/",
+    "label88": "Coptic Orthodox Church, Coptic Church overview",
+    "url88": "https://copticorthodox.church/en/coptic-church/",
     "claim_verified": "Overview hub only; doctrine requires sub-pages.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Coptic Church - Coptic Orthodox Church; own page: yes"
+      "page": "Coptic Church - Coptic Orthodox Church",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3268,15 +3279,18 @@
    },
    {
     "slug": "oriental-orthodox",
-    "publisher": "Coptic Orthodox Church",
-    "title": "Dioceses Abroad (locate a church)",
+    "label": "Coptic Orthodox Church, Dioceses Abroad",
     "url": "https://copticorthodox.church/en/abroad-diocese/",
+    "label88": "Coptic Orthodox Church, Dioceses Abroad (locate a church)",
+    "url88": "https://copticorthodox.church/en/abroad-diocese/",
     "claim_verified": "Finds a diocese, not a specific church.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Dioceses Abroad - Coptic Orthodox Church; own page: yes"
+      "page": "Dioceses Abroad - Coptic Orthodox Church",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3286,16 +3300,47 @@
     }
    },
    {
+    "slug": "church-of-the-east",
+    "label": "Assyrian Church of the East, Home",
+    "url": "https://www.assyrianchurch.org/",
+    "label88": "Assyrian Church of the East, Church home page",
+    "url88": "https://www.assyrianchurch.org/",
+    "claim_verified": "UNVERIFIED by WebFetch; shell returned 200 and redirected to the www host. Not confirmed to offer beliefs or a church finder.",
+    "ruleA_cleared_by": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "check": {
+     "webfetch": {
+      "result": "PARTIAL",
+      "detail": "almost no text returned (740 characters; a landing page of site-name and news-link blocks)",
+      "page": "Holy Apostolic Catholic Assyrian Church of the East – Official site of the Assyrian Church of the East; self-described official site",
+      "own": true
+     },
+     "shell": {
+      "code": 200,
+      "final": null,
+      "error": null
+     },
+     "browser": {
+      "status": 200,
+      "final": null,
+      "title": "Holy Apostolic Catholic Assyrian Church of the East – Official site of the Assyrian Church of the East",
+      "error": null
+     }
+    }
+   },
+   {
     "slug": "lutheran",
-    "publisher": "Lutheran World Federation",
-    "title": "Our Lutheran Identity",
+    "label": "Lutheran World Federation, Our Lutheran Identity",
     "url": "https://lutheranworld.org/who-we-are/our-lutheran-identity",
+    "label88": "Lutheran World Federation, Our Lutheran Identity",
+    "url88": "https://lutheranworld.org/who-we-are/our-lutheran-identity",
     "claim_verified": "Verified: LWF's own page. It describes identity; it is not a congregation finder. No LWF 'what we believe' or member-church directory page was found at guessed paths (404). LWF home https://lutheranworld.org/ returns 200.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Our Lutheran Identity / The Lutheran World Federation; own page: yes"
+      "page": "Our Lutheran Identity | The Lutheran World Federation; footer LWF",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3306,15 +3351,18 @@
    },
    {
     "slug": "lutheran",
-    "publisher": "Evangelical Lutheran Church in America",
-    "title": "What Lutherans Believe (Beliefs)",
+    "label": "Evangelical Lutheran Church in America, Beliefs",
     "url": "https://www.elca.org/about-the-elca/who-we-are/beliefs",
+    "label88": "Evangelical Lutheran Church in America, What Lutherans Believe (Beliefs)",
+    "url88": "https://www.elca.org/about-the-elca/who-we-are/beliefs",
     "claim_verified": "ELCA's page, not the world body's.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "What Lutherans Believe; ELCA; own page: yes"
+      "page": "What Lutherans Believe / Lutheran Beliefs; footer Evangelical Lutheran Church in America",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3325,15 +3373,18 @@
    },
    {
     "slug": "lutheran",
-    "publisher": "The Lutheran Church-Missouri Synod",
-    "title": "Beliefs",
+    "label": "Lutheran Church—Missouri Synod, Beliefs",
     "url": "https://www.lcms.org/what-we-believe/beliefs",
+    "label88": "The Lutheran Church-Missouri Synod, Beliefs",
+    "url88": "https://www.lcms.org/what-we-believe/beliefs",
     "claim_verified": "LCMS's page, not the world body's. Three given because no single world body covers both ELCA and LCMS; keep one or two.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Beliefs / Lutheran Church - Missouri Synod; own page: yes"
+      "page": "Beliefs | Lutheran Church - Missouri Synod; footer The Lutheran Church—Missouri Synod",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3344,15 +3395,18 @@
    },
    {
     "slug": "reformed",
-    "publisher": "World Communion of Reformed Churches",
-    "title": "About",
+    "label": "World Communion of Reformed Churches, About",
     "url": "https://wcrc.eu/about/",
+    "label88": "World Communion of Reformed Churches, About",
+    "url88": "https://wcrc.eu/about/",
     "claim_verified": "Verified: WCRC's own About page.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "About - WCRC; copyright footer: World Communion of Reformed Churches; own page: yes"
+      "page": "About - WCRC / ABOUT US; footer World Communion of Reformed Churches",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3363,15 +3417,18 @@
    },
    {
     "slug": "reformed",
-    "publisher": "World Communion of Reformed Churches",
-    "title": "Member churches (by region and country)",
+    "label": "World Communion of Reformed Churches, Member Churches",
     "url": "https://wcrc.eu/about/members/",
+    "label88": "World Communion of Reformed Churches, Member churches (by region and country)",
+    "url88": "https://wcrc.eu/about/members/",
     "claim_verified": "Verified. Not a congregation finder; points to member churches.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Members - WCRC; own page: yes"
+      "page": "Members - WCRC; footer World Communion of Reformed Churches",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3382,15 +3439,18 @@
    },
    {
     "slug": "anglican",
-    "publisher": "The Church of England",
-    "title": "What we believe",
+    "label": "Church of England, What We Believe",
     "url": "https://www.churchofengland.org/faith-life/what-we-believe",
+    "label88": "The Church of England, What we believe",
+    "url88": "https://www.churchofengland.org/faith-life/what-we-believe",
     "claim_verified": "Verified. Its finder, A Church Near You, https://www.achurchnearyou.com/ (operator The Archbishops' Council; WebFetch OK; shell 200), is a second option.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "What we believe / The Church of England; footer copyright The Archbishops' Council; own page: yes"
+      "page": "What we believe | The Church of England; footer The Archbishops' Council of the Church of England",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3401,15 +3461,18 @@
    },
    {
     "slug": "anglican",
-    "publisher": "The Episcopal Church",
-    "title": "What we believe",
+    "label": "The Episcopal Church, What We Believe",
     "url": "https://www.episcopalchurch.org/who-we-are/what-we-believe/",
+    "label88": "The Episcopal Church, What we believe",
+    "url88": "https://www.episcopalchurch.org/who-we-are/what-we-believe/",
     "claim_verified": "Verified. Find-a-church page https://www.episcopalchurch.org/find-a-church/ also verified (WebFetch OK; shell 200).",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "What We Believe – The Episcopal Church; own page: yes"
+      "page": "What We Believe – The Episcopal Church; footer The Domestic and Foreign Missionary Society",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3419,16 +3482,42 @@
     }
    },
    {
+    "slug": "anglican",
+    "label": "Anglican Church in North America, About",
+    "url": "https://anglicanchurch.net/about/",
+    "label88": "Anglican Church in North America, About",
+    "url88": "https://anglicanchurch.net/about/",
+    "claim_verified": "Shell 200 only; content not read by WebFetch. Find-a-church https://anglicanchurch.net/find-a-church/ (shell 200; WebFetch same certificate failure).",
+    "ruleA_cleared_by": "AOID2-LT-ACNA, option 2",
+    "check": {
+     "webfetch": {
+      "result": "OK",
+      "detail": "-",
+      "page": "ABOUT | The Anglican Church in North America / ABOUT THE ACNA; footer Anglican Church in North America",
+      "own": true
+     },
+     "shell": {
+      "code": 200,
+      "final": null,
+      "error": null
+     }
+    },
+    "note": "2.9"
+   },
+   {
     "slug": "anabaptist",
-    "publisher": "Mennonite World Conference",
-    "title": "About MWC",
+    "label": "Mennonite World Conference, About MWC",
     "url": "https://mwc-cmm.org/en/about-mwc/",
+    "label88": "Mennonite World Conference, About MWC",
+    "url88": "https://mwc-cmm.org/en/about-mwc/",
     "claim_verified": "Page is MWC's own; says who MWC is and which churches belong; says little about specific beliefs.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "About MWC - Mennonite World Conference; own page: yes"
+      "page": "About MWC - Mennonite World Conference",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3439,15 +3528,18 @@
    },
    {
     "slug": "anabaptist",
-    "publisher": "Mennonite World Conference",
-    "title": "Shared Convictions",
+    "label": "Mennonite World Conference, Shared Convictions",
     "url": "https://mwc-cmm.org/en/shared-convictions",
+    "label88": "Mennonite World Conference, Shared Convictions",
+    "url88": "https://mwc-cmm.org/en/shared-convictions",
     "claim_verified": "Seven convictions adopted by the MWC General Council, 15 March 2006.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Shared Convictions - Mennonite World Conference; copyright 2026 Mennonite World Conference; own page: yes"
+      "page": "Shared Convictions - Mennonite World Conference; footer Mennonite World Conference",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3457,16 +3549,49 @@
     }
    },
    {
+    "slug": "anabaptist",
+    "label": "Mennonite Church USA, Who Are the Mennonites?",
+    "url": "https://www.mennoniteusa.org/who-are-mennonites/",
+    "label88": "Mennonite Church USA, Who Are The Mennonites",
+    "url88": "https://www.mennoniteusa.org/who-are-mennonites/",
+    "claim_verified": "NOT verified by WebFetch. Use only if the lead accepts a shell-only check; otherwise drop.",
+    "ruleA_cleared_by": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "check": {
+     "webfetch": {
+      "result": "OK",
+      "detail": "second WebFetch call; the first, earlier the same day, failed: timeout of 60000ms exceeded",
+      "page": "Who Are The Mennonites | Mennonite Church USA; footer Mennonite Church USA",
+      "own": true,
+      "first_attempt": "FAIL: timeout of 60000ms exceeded"
+     },
+     "shell": {
+      "code": 200,
+      "final": null,
+      "error": null,
+      "first_attempt": "curl: (28) Operation timed out after 45002 milliseconds with 0 bytes received (this run's --max-time 45 cap); repeat at 2026-11-09T18:08:15Z with curl's defaults: HTTP 200, first byte after 19.3 s"
+     },
+     "browser": {
+      "status": 200,
+      "final": null,
+      "title": "Who Are The Mennonites | Mennonite Church USA",
+      "error": null
+     }
+    }
+   },
+   {
     "slug": "baptist",
-    "publisher": "Baptist World Alliance",
-    "title": "Beliefs Statement",
+    "label": "Baptist World Alliance, Beliefs",
     "url": "https://baptistworld.org/beliefs/",
+    "label88": "Baptist World Alliance, Beliefs Statement",
+    "url88": "https://baptistworld.org/beliefs/",
     "claim_verified": "Page is BWA's own and states beliefs. It is not a binding creed for any member body; Baptist congregations are autonomous.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Beliefs Statement – Baptist World Alliance; BWA logo and footer branding; own page: yes"
+      "page": "Beliefs Statement | Baptist World Alliance; footer Baptist World Alliance",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3477,15 +3602,18 @@
    },
    {
     "slug": "baptist",
-    "publisher": "Baptist World Alliance",
-    "title": "Members (conventions and unions by country, with contact details)",
+    "label": "Baptist World Alliance, Members",
     "url": "https://baptistworld.org/members/",
+    "label88": "Baptist World Alliance, Members (conventions and unions by country, with contact details)",
+    "url88": "https://baptistworld.org/members/",
     "claim_verified": "Directory of national member bodies, not of local churches.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
-      "detail": "truncated after 39,958 of 95,612 chars",
-      "page": "Members / Baptist World Alliance; own page: yes"
+      "detail": "truncated at 39,958 of 95,612 characters",
+      "page": "Members | Baptist World Alliance",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3496,15 +3624,18 @@
    },
    {
     "slug": "methodist",
-    "publisher": "World Methodist Council",
-    "title": "About Us",
+    "label": "World Methodist Council, About Us",
     "url": "https://worldmethodistcouncil.org/about-us/",
+    "label88": "World Methodist Council, About Us",
+    "url88": "https://worldmethodistcouncil.org/about-us/",
     "claim_verified": "Page is the WMC's own and gives the what-Methodists-believe summary. It is not a congregation finder.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "About Us - World Methodist Council; own page: yes"
+      "page": "About Us - World Methodist Council; footer The World Methodist Council 2019",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3515,15 +3646,18 @@
    },
    {
     "slug": "methodist",
-    "publisher": "Global Methodist Church",
-    "title": "Find a Church",
+    "label": "Global Methodist Church, Find a Church",
     "url": "https://www.globalmethodist.org/find-a-church",
+    "label88": "Global Methodist Church, Find a Church",
+    "url88": "https://www.globalmethodist.org/find-a-church",
     "claim_verified": "A single church's finder; do not present as the Methodist family's page. UMC and MCGB equivalents were not searched.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Find a Church; footer © 2026 Global Methodist Church; own page: yes"
+      "page": "Find a Church / Find a church; footer Global Methodist Church",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3534,15 +3668,18 @@
    },
    {
     "slug": "pentecostal",
-    "publisher": "Pentecostal World Fellowship",
-    "title": "About Us (purpose and nine-point Statement of Faith)",
+    "label": "Pentecostal World Fellowship, About Us",
     "url": "https://www.pwfellowship.org/about-us",
+    "label88": "Pentecostal World Fellowship, About Us (purpose and nine-point Statement of Faith)",
+    "url88": "https://www.pwfellowship.org/about-us",
     "claim_verified": "Confirmed by direct curl: nine 'We believe' points (Bible; one God in three persons; deity of Christ; regeneration; baptism in the Holy Spirit with tongues; indwelling; resurrection; church and unity; practical Christian life). PWF is a fellowship, not a church finder; it speaks for itself.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "About Us; Pentecostal World Fellowship; own page: yes"
+      "page": "About Us / ABOUT US; footer Pentecostal World Fellowship",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3553,15 +3690,18 @@
    },
    {
     "slug": "pentecostal",
-    "publisher": "Church of God in Christ",
-    "title": "What We Believe",
+    "label": "Church of God in Christ, What We Believe",
     "url": "https://www.cogic.org/about-us/what-we-believe/",
+    "label88": "Church of God in Christ, What We Believe",
+    "url88": "https://www.cogic.org/about-us/what-we-believe/",
     "claim_verified": "Says what the listing claims. A member church, not the world body.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "What We Believe - Church Of God In Christ; own page: yes"
+      "page": "What We Believe - Church Of God In Christ; footer Church Of God In Christ, Inc.",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3572,15 +3712,18 @@
    },
    {
     "slug": "pentecostal",
-    "publisher": "International Pentecostal Holiness Church",
-    "title": "Beliefs",
+    "label": "International Pentecostal Holiness Church, Beliefs",
     "url": "https://iphc.org/beliefs/",
+    "label88": "International Pentecostal Holiness Church, Beliefs",
+    "url88": "https://iphc.org/beliefs/",
     "claim_verified": "Apostles' Creed and 14 Articles of Faith on the church's own site.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Beliefs – IPHC; International Pentecostal Holiness Church (footer © 2026); own page: yes"
+      "page": "Beliefs – IPHC; footer IPHC",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3591,15 +3734,18 @@
    },
    {
     "slug": "pentecostal",
-    "publisher": "United Pentecostal Church International",
-    "title": "Our Beliefs",
+    "label": "United Pentecostal Church International, Our Beliefs",
     "url": "https://upci.org/our-beliefs/",
+    "label88": "United Pentecostal Church International, Our Beliefs",
+    "url88": "https://upci.org/our-beliefs/",
     "claim_verified": "Own-page overview. The guessed find-a-church address upci.org/find-a-church/ returned 404, so no finder link is offered.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Our Beliefs - upci.org; UPCI; own page: yes"
+      "page": "Our Beliefs - upci.org",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3610,15 +3756,18 @@
    },
    {
     "slug": "holiness",
-    "publisher": "Free Methodist Church USA",
-    "title": "We Believe: FMC Statements of Belief",
+    "label": "Free Methodist Church USA, We Believe",
     "url": "https://fmcusa.org/webelieve",
+    "label88": "Free Methodist Church USA, We Believe: FMC Statements of Belief",
+    "url88": "https://fmcusa.org/webelieve",
     "claim_verified": "Says what it claims.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "We Believe - Free Methodist Church USA; own page: yes"
+      "page": "We Believe - Free Methodist Church USA; footer Free Methodist Church USA",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3629,15 +3778,18 @@
    },
    {
     "slug": "holiness",
-    "publisher": "Free Methodist Church USA",
-    "title": "Find a Church",
+    "label": "Free Methodist Church USA, Find a Church",
     "url": "https://fmcusa.org/find-a-church",
+    "label88": "Free Methodist Church USA, Find a Church",
+    "url88": "https://fmcusa.org/find-a-church",
     "claim_verified": "Visit route.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
-      "detail": "-",
-      "page": "Find a Church - Free Methodist Church USA; own page: yes"
+      "detail": "truncated",
+      "page": "Find a Church - Free Methodist Church USA / FMCUSA Church Finder – OnLINE or OnLOCATION",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3648,15 +3800,18 @@
    },
    {
     "slug": "holiness",
-    "publisher": "The Salvation Army UK and Ireland",
-    "title": "Our beliefs (eleven doctrines)",
+    "label": "The Salvation Army UK and Ireland, Our Beliefs",
     "url": "https://www.salvationist.org.uk/faith/our-beliefs",
+    "label88": "The Salvation Army UK and Ireland, Our beliefs (eleven doctrines)",
+    "url88": "https://www.salvationist.org.uk/faith/our-beliefs",
     "claim_verified": "Eleven doctrines confirmed.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Our beliefs (Salvationist); copyright 2026 The Salvation Army; own page: yes"
+      "page": "Our beliefs | Salvationist; footer The Salvation Army (Territorial Headquarters, London)",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3667,15 +3822,18 @@
    },
    {
     "slug": "holiness",
-    "publisher": "Church of the Nazarene",
-    "title": "Articles of Faith",
+    "label": "Church of the Nazarene, Articles of Faith",
     "url": "https://nazarene.org/resources/articles-of-faith/",
+    "label88": "Church of the Nazarene, Articles of Faith",
+    "url88": "https://nazarene.org/resources/articles-of-faith/",
     "claim_verified": "Own page. The guessed address nazarene.org/who-we-are/what-we-believe resolved to an image file and is not offered; no Nazarene visit page was verified.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Articles of Faith - Church of the Nazarene; own page: yes"
+      "page": "Articles of Faith - Church of the Nazarene",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3686,15 +3844,18 @@
    },
    {
     "slug": "evangelical",
-    "publisher": "National Association of Evangelicals",
-    "title": "Statement of Faith",
+    "label": "National Association of Evangelicals, Statement of Faith",
     "url": "https://www.nae.org/statement-of-faith/",
+    "label88": "National Association of Evangelicals, Statement of Faith",
+    "url88": "https://www.nae.org/statement-of-faith/",
     "claim_verified": "Confirmed. This is the NAE's own statement, not an adopted text of the movement.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Statement of Faith (National Association of Evangelicals); own page: yes"
+      "page": "Statement of Faith | National Association of Evangelicals",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3705,15 +3866,18 @@
    },
    {
     "slug": "evangelical",
-    "publisher": "National Association of Evangelicals",
-    "title": "What is an Evangelical?",
+    "label": "National Association of Evangelicals, What Is an Evangelical?",
     "url": "https://www.nae.org/what-is-an-evangelical/",
+    "label88": "National Association of Evangelicals, What is an Evangelical?",
+    "url88": "https://www.nae.org/what-is-an-evangelical/",
     "claim_verified": "Says what it claims.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "What is an Evangelical?; National Association of Evangelicals (footer © 2026); own page: yes"
+      "page": "What is an Evangelical? | National Association of Evangelicals; footer NAE",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3724,34 +3888,46 @@
    },
    {
     "slug": "evangelical",
-    "publisher": "World Evangelical Alliance",
-    "title": "Statement of Faith",
+    "label": "World Evangelical Alliance, Statement of Faith",
     "url": "https://worldea.org/who-we-are/statement-of-faith/",
+    "label88": "World Evangelical Alliance, Statement of Faith",
+    "url88": "https://worldea.org/who-we-are/statement-of-faith/",
     "claim_verified": "Confirmed by curl, not by WebFetch. www.worldea.org redirects to worldea.org (shell 200).",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "PARTIAL",
-      "detail": "-",
-      "page": "Title 'Statement of Faith' only; no publisher text on page; own page: unclear"
+      "detail": "only the heading and metadata returned (128 characters); no statement text. The page is the publisher's own on the shell instrument's copy: worldea.org, footer \"© 2026 World Evangelical Alliance · All Rights Reserved\"",
+      "page": "Statement of Faith - worldea.org; WebFetch showed no publisher; the shell copy's footer names the World Evangelical Alliance",
+      "own": true
      },
      "shell": {
       "code": 200,
       "final": null,
+      "error": null
+     },
+     "browser": {
+      "status": 200,
+      "final": null,
+      "title": "Statement of Faith - worldea.org",
       "error": null
      }
     }
    },
    {
     "slug": "stone-campbell",
-    "publisher": "Christian Church (Disciples of Christ)",
-    "title": "Our Mission, Vision and Confession",
+    "label": "Christian Church (Disciples of Christ), Our Mission, Vision and Confession",
     "url": "https://disciples.org/our-identity/our-mission-vision-and-confession/",
+    "label88": "Christian Church (Disciples of Christ), Our Mission, Vision and Confession",
+    "url88": "https://disciples.org/our-identity/our-mission-vision-and-confession/",
     "claim_verified": "Publisher is the Disciples; states the confession 'Jesus is the Christ, the Son of the living God' and an open invitation to the Lord's table.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Our Mission, Vision and Confession - Christian Church (Disciples of Christ); own page: yes"
+      "page": "Our Mission, Vision and Confession - Christian Church (Disciples of Christ)",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3762,15 +3938,18 @@
    },
    {
     "slug": "stone-campbell",
-    "publisher": "Christian Church (Disciples of Christ)",
-    "title": "Find a Congregation",
+    "label": "Christian Church (Disciples of Christ), Find a Congregation",
     "url": "https://disciples.org/find-congregation/",
+    "label88": "Christian Church (Disciples of Christ), Find a Congregation",
+    "url88": "https://disciples.org/find-congregation/",
     "claim_verified": "Church's own page for finding a congregation. The finder it points to is an external tool and was not followed.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
-      "detail": "-",
-      "page": "Find a Congregation - Christian Church (Disciples of Christ); own page: yes"
+      "detail": "links out to an external finder",
+      "page": "Find a Congregation - Christian Church (Disciples of Christ)",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3781,15 +3960,18 @@
    },
    {
     "slug": "latter-day-saints",
-    "publisher": "The Church of Jesus Christ of Latter-day Saints",
-    "title": "What Do Latter-day Saints Believe?",
+    "label": "The Church of Jesus Christ of Latter-day Saints, What Do Latter-day Saints Believe?",
     "url": "https://www.churchofjesuschrist.org/welcome/what-do-latter-day-saints-believe?lang=eng",
+    "label88": "The Church of Jesus Christ of Latter-day Saints, What Do Latter-day Saints Believe?",
+    "url88": "https://www.churchofjesuschrist.org/welcome/what-do-latter-day-saints-believe?lang=eng",
     "claim_verified": "Church's own welcome page summarising beliefs (Jesus Christ central, Bible and Book of Mormon, prophets, temples).",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "About Us - The Church of Jesus Christ of Latter-day Saints; own page: yes"
+      "page": "About Us - The Church of Jesus Christ of Latter-day Saints / What Latter-day Saints Believe",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3800,15 +3982,18 @@
    },
    {
     "slug": "latter-day-saints",
-    "publisher": "The Church of Jesus Christ of Latter-day Saints",
-    "title": "Find a Church",
+    "label": "The Church of Jesus Christ of Latter-day Saints, Find a Church",
     "url": "https://www.churchofjesuschrist.org/welcome/find-a-church?lang=eng",
+    "label88": "The Church of Jesus Christ of Latter-day Saints, Find a Church",
+    "url88": "https://www.churchofjesuschrist.org/welcome/find-a-church?lang=eng",
     "claim_verified": "Church's own meetinghouse finder and visitor guidance; links to What to Expect at Church (https://www.churchofjesuschrist.org/welcome/what-to-expect?lang=eng, shell 200, not WebFetched).",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Find a Church (The Church of Jesus Christ of Latter-day Saints); own page: yes"
+      "page": "Find a Church | The Church of Jesus Christ of Latter-day Saints",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3819,15 +4004,18 @@
    },
    {
     "slug": "jehovahs-witnesses",
-    "publisher": "Jehovah's Witnesses (jw.org; Watch Tower Bible and Tract Society of Pennsylvania)",
-    "title": "Jehovah's Witnesses (who they are, beliefs, FAQs, request a visit)",
+    "label": "Jehovah's Witnesses (jw.org), Jehovah's Witnesses",
     "url": "https://www.jw.org/en/jehovahs-witnesses/",
+    "label88": "Jehovah's Witnesses (jw.org; Watch Tower Bible and Tract Society of Pennsylvania), Jehovah's Witnesses (who they are, beliefs, FAQs, request a visit)",
+    "url88": "https://www.jw.org/en/jehovahs-witnesses/",
     "claim_verified": "Overview of who they are and core beliefs, FAQs, free Bible course, meetings, and contact options.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Who Are Jehovah's Witnesses?; JW.ORG; Watch Tower Bible and Tract Society of Pennsylvania; own page: yes"
+      "page": "Who Are Jehovah's Witnesses? / Jehovah's Witnesses; footer Watch Tower Bible and Tract Society of Pennsylvania",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3838,15 +4026,18 @@
    },
    {
     "slug": "jehovahs-witnesses",
-    "publisher": "Jehovah's Witnesses (jw.org)",
-    "title": "Meetings",
+    "label": "Jehovah's Witnesses (jw.org), Meetings",
     "url": "https://www.jw.org/en/jehovahs-witnesses/meetings/",
+    "label88": "Jehovah's Witnesses (jw.org), Meetings",
+    "url88": "https://www.jw.org/en/jehovahs-witnesses/meetings/",
     "claim_verified": "Invites the public to attend; free, no collections; 'Find a Location Near You' link; meetings twice weekly.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Meetings of Jehovah's Witnesses (JW.ORG); own page: yes"
+      "page": "Meetings of Jehovah's Witnesses | Kingdom Hall Locations & Phone Numbers | JW.ORG / Congregation Meetings of Jehovah's Witnesses",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3857,15 +4048,18 @@
    },
    {
     "slug": "dispensationalism",
-    "publisher": "Dallas Theological Seminary",
-    "title": "Doctrinal Statement",
+    "label": "Dallas Theological Seminary, Doctrinal Statement",
     "url": "https://www.dts.edu/why-dts/doctrinal-statement",
+    "label88": "Dallas Theological Seminary, Doctrinal Statement",
+    "url88": "https://www.dts.edu/why-dts/doctrinal-statement",
     "claim_verified": "Statement is DTS's own, affirmed annually by faculty and board. It describes dispensational and premillennial elements but does not use the phrase 'dispensational premillennialism'.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Doctrinal Statement (Dallas Theological Seminary); own page: yes"
+      "page": "Doctrinal Statement | Dallas Theological Seminary",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3876,15 +4070,122 @@
    },
    {
     "slug": "messianic-jews",
-    "publisher": "Messianic Jewish Alliance of America (MJAA)",
-    "title": "Statement of Faith of the Messianic Jewish Alliance of America",
-    "url": "https://mjaa.org/statement-of-faith-2/",
-    "claim_verified": "Yes, statement of faith on MJAA's own page.",
+    "label": "Union of Messianic Jewish Congregations, Statement of Faith",
+    "url": "https://www.umjc.org/statement-of-faith",
+    "label88": "Union of Messianic Jewish Congregations (UMJC), UMJC Statement of Faith",
+    "url88": "https://www.umjc.org/statement-of-faith",
+    "claim_verified": "Shell 200 on umjc.org. Content not read by WebFetch. Search result snippet (not a verification) says delegates adopted it 19 July 2012; contents unverified by me.",
+    "ruleA_cleared_by": "AOID2-LT-RES-UNVERIFIED, option 2",
     "check": {
      "webfetch": {
       "result": "OK",
       "detail": "-",
-      "page": "Statement of Faith - Messianic Jewish Alliance of America; own page: yes"
+      "page": "Statement of Faith — Union of Messianic Jewish Congregations / UMJC Statement of Faith",
+      "own": true
+     },
+     "shell": {
+      "code": 200,
+      "final": null,
+      "error": null
+     }
+    }
+   },
+   {
+    "slug": "messianic-jews",
+    "label": "Union of Messianic Jewish Congregations, Defining Messianic Judaism",
+    "url": "https://www.umjc.org/defining-messianic-judaism",
+    "label88": "Union of Messianic Jewish Congregations (UMJC), Defining Messianic Judaism",
+    "url88": "https://umjc.org/defining-messianic-judaism",
+    "claim_verified": "Shell 200, redirected to www host. Content unread by WebFetch.",
+    "ruleA_cleared_by": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "check": {
+     "webfetch": {
+      "result": "OK",
+      "detail": "-",
+      "page": "Defining Messianic Judaism — Union of Messianic Jewish Congregations",
+      "own": true
+     },
+     "shell": {
+      "code": 200,
+      "final": null,
+      "error": null
+     }
+    }
+   },
+   {
+    "slug": "messianic-jews",
+    "label": "Messianic Jewish Alliance of America, Statement of Faith",
+    "url": "https://mjaa.org/statement-of-faith-2/",
+    "label88": "Messianic Jewish Alliance of America (MJAA), Statement of Faith of the Messianic Jewish Alliance of America",
+    "url88": "https://mjaa.org/statement-of-faith-2/",
+    "claim_verified": "Yes, statement of faith on MJAA's own page.",
+    "ruleA_cleared_by": null,
+    "check": {
+     "webfetch": {
+      "result": "OK",
+      "detail": "-",
+      "page": "Statement of Faith - Messianic Jewish Alliance of America / STATEMENT OF FAITH",
+      "own": true
+     },
+     "shell": {
+      "code": 200,
+      "final": null,
+      "error": null
+     }
+    }
+   },
+   {
+    "slug": "african-initiated-churches",
+    "label": "Organization of African Instituted Churches, About",
+    "url": "https://oaic.org/newsite/?page_id=51",
+    "label88": "Organization of African Instituted Churches (OAIC), OAIC home / About",
+    "url88": "https://oaic.org/newsite/?page_id=51",
+    "claim_verified": "Shell 200. Content unread by WebFetch. Search snippet (not verification) says founded 1978 Cairo, HQ Nairobi. Note oaic.org/ redirected (shell 200) to https://oaic.org/newsite/ .",
+    "ruleA_cleared_by": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "check": {
+     "webfetch": {
+      "result": "OK",
+      "detail": "-",
+      "page": "About Us – Organisation of African Instituted Churches",
+      "own": true
+     },
+     "shell": {
+      "code": 200,
+      "final": null,
+      "error": null
+     }
+    }
+   },
+   {
+    "slug": "catholicism",
+    "label": "Holy See, Catechism of the Catholic Church",
+    "url": "https://www.vatican.va/archive/ENG0015/_INDEX.HTM",
+    "replacement": true,
+    "check": {
+     "webfetch": {
+      "result": "OK",
+      "detail": "-",
+      "page": "Catechism of the Catholic Church; Holy See (vatican.va), Libreria Editrice Vaticana",
+      "own": true
+     },
+     "shell": {
+      "code": 200,
+      "final": null,
+      "error": null
+     }
+    }
+   },
+   {
+    "slug": "adventist",
+    "label": "North American Division of Seventh-day Adventists, Beliefs",
+    "url": "https://www.nadadventist.org/beliefs/",
+    "replacement": true,
+    "check": {
+     "webfetch": {
+      "result": "OK",
+      "detail": "-",
+      "page": "Beliefs – North American Division of Seventh-day Adventists; footer North American Division Corporation of Seventh-day Adventists",
+      "own": true
      },
      "shell": {
       "code": 200,
@@ -3897,277 +4198,111 @@
   "withheld": [
    {
     "slug": "catholicism",
-    "publisher": "United States Conference of Catholic Bishops",
-    "title": "What We Believe",
+    "label": null,
     "url": "https://www.usccb.org/beliefs-and-teachings/what-we-believe",
+    "label88": "United States Conference of Catholic Bishops, What We Believe",
+    "url88": "https://www.usccb.org/beliefs-and-teachings/what-we-believe",
     "claim_verified": "UNVERIFIED: shell returned 200 but content was not read by WebFetch.",
-    "check": {
-     "webfetch": {
-      "result": "OK",
-      "detail": "-",
-      "page": "What We Believe - The Nicene Creed; ©2026 USCCB; own page: yes"
-     },
-     "shell": {
-      "code": 403,
-      "final": null,
-      "error": null
-     }
-    },
+    "ruleA_cleared_by": null,
+    "check": null,
     "reasons": [
+     "not signed: no row for it in the signed resource-labels file (gate G4)",
      "(a) the CODE-AOID2-88 verification field does not confirm the page: UNVERIFIED: shell returned 200 but content was not read by WebFetch.",
-     "(b) shell: HTTP 403"
+     "(b) not in the check record"
     ]
    },
    {
     "slug": "catholicism",
-    "publisher": "United States Conference of Catholic Bishops",
-    "title": "Christian Initiation of Adults (inquirer process)",
+    "label": null,
     "url": "https://www.usccb.org/beliefs-and-teachings/who-we-teach/christian-initiation-of-adults",
+    "label88": "United States Conference of Catholic Bishops, Christian Initiation of Adults (inquirer process)",
+    "url88": "https://www.usccb.org/beliefs-and-teachings/who-we-teach/christian-initiation-of-adults",
     "claim_verified": "Failed both instruments. A WebSearch snippet describes the inquirer process; the page itself was not read.",
-    "check": {
-     "webfetch": {
-      "result": "FAIL",
-      "detail": "The server returned HTTP 403 Forbidden.",
-      "page": "-"
-     },
-     "shell": {
-      "code": 403,
-      "final": null,
-      "error": null
-     }
-    },
+    "ruleA_cleared_by": null,
+    "check": null,
     "reasons": [
+     "not signed: no row for it in the signed resource-labels file (gate G4)",
      "(a) the CODE-AOID2-88 verification field does not confirm the page: Failed both instruments. A WebSearch snippet describes the inquirer process; the page itself was not read.",
-     "(b) WebFetch: The server returned HTTP 403 Forbidden.",
-     "(b) shell: HTTP 403"
-    ]
-   },
-   {
-    "slug": "church-of-the-east",
-    "publisher": "Assyrian Church of the East",
-    "title": "Church home page",
-    "url": "https://www.assyrianchurch.org/",
-    "claim_verified": "UNVERIFIED by WebFetch; shell returned 200 and redirected to the www host. Not confirmed to offer beliefs or a church finder.",
-    "check": {
-     "webfetch": {
-      "result": "PARTIAL",
-      "detail": "-",
-      "page": "Holy Apostolic Catholic Assyrian Church of the East; self-described official site; own page: yes"
-     },
-     "shell": {
-      "code": 200,
-      "final": null,
-      "error": null
-     }
-    },
-    "reasons": [
-     "(a) the CODE-AOID2-88 verification field does not confirm the page: UNVERIFIED by WebFetch; shell returned 200 and redirected to the www host. Not confirmed to offer beliefs or a church finder."
+     "(b) not in the check record"
     ]
    },
    {
     "slug": "anglican",
-    "publisher": "Anglican Communion Office",
-    "title": "About us",
+    "label": null,
     "url": "https://www.anglicancommunion.org/about-us/",
+    "label88": "Anglican Communion Office, About us",
+    "url88": "https://www.anglicancommunion.org/about-us/",
     "claim_verified": "NOT verified: both instruments failed (HTTP 403 on shell and WebFetch; also 403 for the site root and /theology.aspx). A WebSearch snippet describes it as the ACO's official About page, which is secondhand. Listed with the failure; the 403 was not worked around.",
-    "check": {
-     "webfetch": {
-      "result": "FAIL",
-      "detail": "The server returned HTTP 403 Forbidden.",
-      "page": "-"
-     },
-     "shell": {
-      "code": 403,
-      "final": null,
-      "error": null
-     }
-    },
+    "ruleA_cleared_by": null,
+    "check": null,
     "reasons": [
+     "not signed: no row for it in the signed resource-labels file (gate G4)",
      "(a) the CODE-AOID2-88 verification field does not confirm the page: NOT verified: both instruments failed (HTTP 403 on shell and WebFetch; also 403 for the site root and /theology.aspx). A WebSearch snippet describes it as the ACO's official About page, which is secondhand. Listed with the failure; the 403 was not worked around.",
-     "(b) WebFetch: The server returned HTTP 403 Forbidden.",
-     "(b) shell: HTTP 403"
-    ]
-   },
-   {
-    "slug": "anglican",
-    "publisher": "Anglican Church in North America",
-    "title": "About",
-    "url": "https://anglicanchurch.net/about/",
-    "claim_verified": "Shell 200 only; content not read by WebFetch. Find-a-church https://anglicanchurch.net/find-a-church/ (shell 200; WebFetch same certificate failure).",
-    "check": {
-     "webfetch": {
-      "result": "OK",
-      "detail": "-",
-      "page": "ABOUT / The Anglican Church in North America; own page: yes"
-     },
-     "shell": {
-      "code": 200,
-      "final": null,
-      "error": null
-     }
-    },
-    "reasons": [
-     "(a) the CODE-AOID2-88 verification field does not confirm the page: Shell 200 only; content not read by WebFetch. Find-a-church https://anglicanchurch.net/find-a-church/ (shell 200; WebFetch same certificate failure)."
-    ]
-   },
-   {
-    "slug": "anabaptist",
-    "publisher": "Mennonite Church USA",
-    "title": "Who Are The Mennonites",
-    "url": "https://www.mennoniteusa.org/who-are-mennonites/",
-    "claim_verified": "NOT verified by WebFetch. Use only if the lead accepts a shell-only check; otherwise drop.",
-    "check": {
-     "webfetch": {
-      "result": "OK",
-      "detail": "-",
-      "page": "Who Are The Mennonites / Mennonite Church USA; own page: yes"
-     },
-     "shell": {
-      "code": 200,
-      "final": null,
-      "error": null
-     }
-    },
-    "reasons": [
-     "(a) the CODE-AOID2-88 verification field does not confirm the page: NOT verified by WebFetch. Use only if the lead accepts a shell-only check; otherwise drop."
+     "(b) not in the check record"
     ]
    },
    {
     "slug": "methodist",
-    "publisher": "World Methodist Council",
-    "title": "Member Churches (USA page; the directory is organised by country)",
+    "label": null,
     "url": "https://worldmethodistcouncil.org/member-churches/country/USA/",
+    "label88": "World Methodist Council, Member Churches (USA page; the directory is organised by country)",
+    "url88": "https://worldmethodistcouncil.org/member-churches/country/USA/",
     "claim_verified": "NOT verified. Listed WITH the failure; its existence is known only from a WebSearch summary. A country-neutral directory root was not checked.",
-    "check": {
-     "webfetch": {
-      "result": "FAIL",
-      "detail": "The server returned HTTP 500 Internal Server Error.",
-      "page": "-"
-     },
-     "shell": {
-      "code": 500,
-      "final": null,
-      "error": null
-     }
-    },
+    "ruleA_cleared_by": null,
+    "check": null,
     "reasons": [
+     "not signed: no row for it in the signed resource-labels file (gate G4)",
      "(a) the CODE-AOID2-88 verification field does not confirm the page: NOT verified. Listed WITH the failure; its existence is known only from a WebSearch summary. A country-neutral directory root was not checked.",
-     "(b) WebFetch: The server returned HTTP 500 Internal Server Error.",
-     "(b) shell: HTTP 500"
+     "(b) not in the check record"
     ]
    },
    {
     "slug": "adventist",
-    "publisher": "Seventh-day Adventist Church (General Conference)",
-    "title": "Beliefs",
+    "label": null,
     "url": "https://www.adventist.org/beliefs/",
+    "label88": "Seventh-day Adventist Church (General Conference), Beliefs",
+    "url88": "https://www.adventist.org/beliefs/",
     "claim_verified": "Not verified: the page could not be read on either instrument (429 on shell and WebFetch, retried; other adventist.org paths also 429). Listed with the failure per brief; needs a retry.",
+    "ruleA_cleared_by": null,
     "check": {
      "webfetch": {
       "result": "FAIL",
       "detail": "The server returned HTTP 429 Too Many Requests.",
-      "page": "-"
+      "page": "-",
+      "own": null
      },
      "shell": {
       "code": 429,
       "final": null,
       "error": null
+     },
+     "browser": {
+      "status": 200,
+      "final": "https://adventist.org/beliefs",
+      "title": "What We Believe | Adventist.org",
+      "error": null
      }
     },
     "reasons": [
+     "not signed: no row for it in the signed resource-labels file (gate G4)",
      "(a) the CODE-AOID2-88 verification field does not confirm the page: Not verified: the page could not be read on either instrument (429 on shell and WebFetch, retried; other adventist.org paths also 429). Listed with the failure per brief; needs a retry.",
-     "(b) WebFetch: The server returned HTTP 429 Too Many Requests.",
+     "(b) WebFetch: FAIL: The server returned HTTP 429 Too Many Requests.",
      "(b) shell: HTTP 429"
     ]
    },
    {
     "slug": "adventist",
-    "publisher": "Seventh-day Adventist Church (General Conference)",
-    "title": "Home (to locate the church finder)",
+    "label": null,
     "url": "https://www.adventist.org/",
+    "label88": "Seventh-day Adventist Church (General Conference), Home (to locate the church finder)",
+    "url88": "https://www.adventist.org/",
     "claim_verified": "Not verified. A specific find-a-church URL was not confirmed (guessed paths /find-a-church/ and /church-locator/ both 429); retry later.",
-    "check": {
-     "webfetch": {
-      "result": "FAIL",
-      "detail": "The server returned HTTP 429 Too Many Requests.",
-      "page": "-"
-     },
-     "shell": {
-      "code": 429,
-      "final": null,
-      "error": null
-     }
-    },
+    "ruleA_cleared_by": null,
+    "check": null,
     "reasons": [
+     "not signed: no row for it in the signed resource-labels file (gate G4)",
      "(a) the CODE-AOID2-88 verification field does not confirm the page: Not verified. A specific find-a-church URL was not confirmed (guessed paths /find-a-church/ and /church-locator/ both 429); retry later.",
-     "(b) WebFetch: The server returned HTTP 429 Too Many Requests.",
-     "(b) shell: HTTP 429"
-    ]
-   },
-   {
-    "slug": "messianic-jews",
-    "publisher": "Union of Messianic Jewish Congregations (UMJC)",
-    "title": "UMJC Statement of Faith",
-    "url": "https://www.umjc.org/statement-of-faith",
-    "claim_verified": "Shell 200 on umjc.org. Content not read by WebFetch. Search result snippet (not a verification) says delegates adopted it 19 July 2012; contents unverified by me.",
-    "check": {
-     "webfetch": {
-      "result": "OK",
-      "detail": "-",
-      "page": "Statement of Faith — Union of Messianic Jewish Congregations; own page: yes"
-     },
-     "shell": {
-      "code": 200,
-      "final": null,
-      "error": null
-     }
-    },
-    "reasons": [
-     "(a) the CODE-AOID2-88 verification field does not confirm the page: Shell 200 on umjc.org. Content not read by WebFetch. Search result snippet (not a verification) says delegates adopted it 19 July 2012; contents unverified by me."
-    ]
-   },
-   {
-    "slug": "messianic-jews",
-    "publisher": "Union of Messianic Jewish Congregations (UMJC)",
-    "title": "Defining Messianic Judaism",
-    "url": "https://umjc.org/defining-messianic-judaism",
-    "claim_verified": "Shell 200, redirected to www host. Content unread by WebFetch.",
-    "check": {
-     "webfetch": {
-      "result": "OK",
-      "detail": "-",
-      "page": "Defining Messianic Judaism — Union of Messianic Jewish Congregations; own page: yes"
-     },
-     "shell": {
-      "code": 200,
-      "final": "https://www.umjc.org/defining-messianic-judaism",
-      "error": null
-     }
-    },
-    "reasons": [
-     "(a) the CODE-AOID2-88 verification field does not confirm the page: Shell 200, redirected to www host. Content unread by WebFetch."
-    ]
-   },
-   {
-    "slug": "african-initiated-churches",
-    "publisher": "Organization of African Instituted Churches (OAIC)",
-    "title": "OAIC home / About",
-    "url": "https://oaic.org/newsite/?page_id=51",
-    "claim_verified": "Shell 200. Content unread by WebFetch. Search snippet (not verification) says founded 1978 Cairo, HQ Nairobi. Note oaic.org/ redirected (shell 200) to https://oaic.org/newsite/ .",
-    "check": {
-     "webfetch": {
-      "result": "OK",
-      "detail": "-",
-      "page": "About Us – Organisation of African Instituted Churches; own page: yes"
-     },
-     "shell": {
-      "code": 200,
-      "final": null,
-      "error": null
-     }
-    },
-    "reasons": [
-     "(a) the CODE-AOID2-88 verification field does not confirm the page: Shell 200. Content unread by WebFetch. Search snippet (not verification) says founded 1978 Cairo, HQ Nairobi. Note oaic.org/ redirected (shell 200) to https://oaic.org/newsite/ ."
+     "(b) not in the check record"
     ]
    }
   ],

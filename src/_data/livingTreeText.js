@@ -1,14 +1,16 @@
 /* ============================================================
-   LIVING TREE PAGE WORDING  (AOID2 step 163, CODE-AOID2-112)
+   LIVING TREE PAGE WORDING  (AOID2 step 163, CODE-AOID2-112; version 2 for step 287, CODE-AOID2-113)
 
    Template name:  livingTreeText
    Feeds src/pages/living-tree.njk (/living-tree/) with the switch ON or OFF.
 
    Every reader-facing word comes from the approved wording, read at build time and
    never retyped: data-sources/living-tree/ holds a byte-identical copy of
-   wop-scratch/WoP_AOID2_LivingTree_ApprovedWording_20261109.md (approved by Aaron,
-   9 Nov 2026, CHAT-AOID2-111b). If the copy's text changes, its SHA-256 (line endings
-   normalised to LF) no longer matches SHA below and the build stops.
+   wop-scratch/WoP_AOID2_LivingTree_ApprovedWording_v2_20261109.md (version 2, approved by
+   Aaron 9 Nov 2026 in the review of CODE-AOID2-112, CHAT-AOID2-111b). It supersedes the
+   version 1 copy, which is retired; this one file governs the page. If the copy's text
+   changes, its SHA-256 (line endings normalised to LF) no longer matches SHA below and the
+   build stops.
 
      intro       Part 1, the page introduction
      practice    2.1, the practice line
@@ -22,6 +24,11 @@
      sourceLabel 2.7, "Source:" / "Sources:"
      learnMore   2.8, the heading over each branch's inquirer resources (the resources themselves are
                  in src/_data/livingTree.json, written by tools/build_living_tree.py)
+     notes       2.9 (and any later "Resource note" section), keyed by section number: a note shown in
+                 small type directly under one inquirer resource, with its own sources. The generator
+                 marks the resource (its "note" field, from the signed resource-labels file); the build
+                 checks that the marked resource is the one the section's heading names, on the branch
+                 it names, and that no resource of that name goes without its note.
      branches    Part 3, keyed by branch slug: the description and its sources
 
    Markup rules of the approved file: "*...*" is italic; a scripture reference such as
@@ -34,8 +41,8 @@ const path = require('path');
 const crypto = require('crypto');
 const { on } = require('./aoidSecondEdition.js');
 
-const FILE = 'data-sources/living-tree/WoP_AOID2_LivingTree_ApprovedWording_20261109.md';
-const SHA = '73daa0e115010fdd7a513ee80909b8f7945079e8743b1777ab1c65c2dd4666ea';
+const FILE = 'data-sources/living-tree/WoP_AOID2_LivingTree_ApprovedWording_v2_20261109.md';
+const SHA = 'd4f6e5230164fa1e28563253e1adff79db4704db97316dc6b16f0bec281907bb';
 
 const fail = (m) => { throw new Error('living tree wording: ' + m); };
 const text = fs.readFileSync(path.join(process.cwd(), FILE), 'utf8').replace(/\r\n/g, '\n');
@@ -124,6 +131,27 @@ if (on) {
   correction = { text: correctionSrc, href: corr.page };
 }
 
+// ---- Resource notes (2.9): a "> " paragraph, then "Source:" / "Sources:" right after it, then the sources ----
+const SRC_LINE = /^- (.+) \| (https?:\/\/\S+)$/;
+const notes = {};
+lines.forEach((l, i) => {
+  const h = /^### (2\.\d+) Resource note: (.+?) \(.* on the (.+?) branch[;)]/.exec(l);
+  if (!h) return;
+  const id = h[1];
+  let j = i + 1;
+  while (j < lines.length && !/^##/.test(lines[j])) j++;
+  const block = lines.slice(i + 1, j);
+  const src = quote(block, id + ' resource note');
+  const sources = block.map((x) => SRC_LINE.exec(x)).filter(Boolean).map((m) => ({ label: m[1], url: m[2] }));
+  const label = block.find((x) => x === srcLabels[1] || x === srcLabels[2]);
+  if (!label) fail(id + ': no "' + srcLabels[1] + '" / "' + srcLabels[2] + '" line');
+  if (!sources.length) fail(id + ': no sources listed');
+  if ((label === srcLabels[1]) !== (sources.length === 1)) fail(id + ': "' + label + '" with ' + sources.length + ' source(s)');
+  if (block[block.findIndex((x) => x.startsWith('> ')) + 1] !== label) fail(id + ': the source line does not follow the note');
+  const ps = parts(src, id);
+  notes[id] = { id, resource: h[2], branch: h[3], parts: ps, text: plain(ps), sourceLabel: label, sources };
+});
+
 // ---- Part 3 ---------------------------------------------------------------------------------
 const part3 = section(/^## Part 3: /, /^## /, 'Part 3');
 const branches = {};
@@ -165,6 +193,19 @@ const tree = require('./livingTree.json');
 const treeSlugs = tree.branches.map((b) => b.slug);
 if (treeSlugs.join(' ') !== order.join(' ')) fail('Part 3 slugs or order differ from src/_data/livingTree.json');
 
+// Each resource note stands under the resource its heading names, on the branch it names, and under no other.
+const noted = {};
+tree.branches.forEach((b) => (b.resources || []).forEach((r) => {
+  const named = Object.values(notes).find((n) => n.branch === b.label && r.label.startsWith(n.resource + ', '));
+  if (r.note) {
+    const n = notes[r.note];
+    if (!n) fail(b.slug + ': resource "' + r.label + '" carries note ' + r.note + ', which the approved file does not have');
+    if (n !== named) fail(r.note + ': it names ' + n.resource + ' on the ' + n.branch + ' branch, not "' + r.label + '" on ' + b.label);
+    if (noted[r.note]) fail(r.note + ': attached to more than one resource');
+    noted[r.note] = r.label;
+  } else if (named) fail(b.slug + ': resource "' + r.label + '" is shown without its approved note ' + named.id);
+}));
+
 const para = (src, what) => { const ps = parts(src, what); return { parts: ps, text: plain(ps) }; };
 
 module.exports = {
@@ -178,6 +219,7 @@ module.exports = {
   correction,
   sourceLabels: { one: srcLabels[1], many: srcLabels[2] },
   learnMore,
+  notes,
   branches,
   order,
 };

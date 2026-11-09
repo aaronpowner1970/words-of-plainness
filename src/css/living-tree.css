@@ -25,6 +25,16 @@
 .ltl-close { top: 10px; right: 10px; }
 .ltl-zoom:hover, .ltl-close:hover { background: rgba(20, 10, 12, .95); border-color: var(--gold-light); }
 .ltl-help { margin: .5rem 0 0; font-size: .95rem; opacity: .8; text-align: center; }
+/* Step 287 (CODE-AOID2-113): at 800 px and below, while the deep zoom is open (the script puts "ltl-zoomed" on the frame),
+   "Back to the picture" sits in a bar above the viewer, not over the picture, so it covers no branch spot however the
+   picture is panned or zoomed. The viewer keeps the picture's 16:9 shape; the frame grows by the bar. Above 800 px
+   nothing here applies. The overlay boxes are untouched. */
+@media (max-width: 800px) {
+  .ltl-frame.ltl-zoomed { display: flex; flex-direction: column; aspect-ratio: auto; }
+  .ltl-frame.ltl-zoomed > img, .ltl .ltl-frame.ltl-zoomed > a.ltl-spot { display: none; }
+  .ltl-frame.ltl-zoomed > .ltl-osd { position: relative; inset: auto; order: 2; width: 100%; aspect-ratio: 16 / 9; }
+  .ltl-frame.ltl-zoomed > .ltl-close { position: static; order: 1; width: 100%; padding: 8px 14px; border: 0; border-bottom: 1px solid rgba(212, 175, 105, .6); border-radius: 0; background: rgba(20, 10, 12, .95); text-align: center; }
+}
 
 /* The plain list of branches */
 .ltl-index { margin: var(--space-lg) auto; max-width: 800px; }
@@ -58,9 +68,14 @@
 .ltl-key { font-size: 1rem; }
 .ltl-label { font-style: normal; font-weight: 600; color: var(--gold-light); }
 .ltl-desc { font-size: 1.05rem; }
-.ltl-sources, .ltl-learn { font-size: 1rem; margin: 0 0 1rem; }
-.ltl-sources ul, .ltl-learn ul { list-style: none; margin: .2rem 0 0; padding: 0 0 0 1rem; }
-.ltl-sources li, .ltl-learn li { margin: 0 0 .25rem; }
+.ltl-sources, .ltl-learn, .ltl-note-sources { font-size: 1rem; margin: 0 0 1rem; }
+.ltl-sources ul, .ltl-learn ul, .ltl-note-sources ul { list-style: none; margin: .2rem 0 0; padding: 0 0 0 1rem; }
+.ltl-sources li, .ltl-learn li, .ltl-note-sources li { margin: 0 0 .25rem; }
+/* Step 287 (CODE-AOID2-113): a resource note (approved 2.9) in small type directly under its resource; the italic is the
+   approved file's own; its sources take the same style as the branch source lines. */
+.ltl-note { margin: .2rem 0 .5rem 1rem; }
+.ltl .ltl-note-text { margin: 0 0 .25rem; font-size: .88rem; line-height: 1.5; color: var(--cream-dark); }
+.ltl .ltl-note-sources { margin: 0 0 .25rem; }
 .ltl-question { font-style: italic; color: var(--cream-dark); }
 .ltl-correction { font-size: .95rem; font-style: italic; }
 

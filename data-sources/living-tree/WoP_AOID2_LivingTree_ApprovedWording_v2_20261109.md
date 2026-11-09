@@ -1,5 +1,6 @@
 # Living Tree page: approved wording (AOID2 step 162)
 Approved by Aaron Powner, 9 November 2026, session CHAT-AOID2-111b. Every reader-facing word below is approved. Read it at build time; never retype it. Rulings: AOID2-LT-NOVOICE, AOID2-LT-INRM-SCOPE, AOID2-LT-LRE-SCOPE (all option 1, topic-only).
+Version 2, approved 9 November 2026 in the review of CODE-AOID2-112 (CHAT-AOID2-111b): five source lines replaced (Anglican x2, Lutheran ELCA, Stone-Campbell, Chinese House Churches), key 2.3 first sentence aligned with A6a (AOID2-LT-ROWS-ACCOUNT, option 1), and 2.9 added (AOID2-LT-ACNA, option 2). Supersedes WoP_AOID2_LivingTree_ApprovedWording_20261109.md.
 
 Markup in this file: a line beginning "> " is one paragraph of page text. Text between single asterisks (*In our words:*) is italic on the page. Scripture references in the form "Ephesians 2:20" are linked by the site's existing scripture link generator.
 
@@ -16,7 +17,7 @@ Markup in this file: a line beginning "> " is one paragraph of page text. Text b
 > How to read a tradition fairly: listen to its own words; see what its churches have adopted; ask who speaks for it; and notice where no one does.
 
 ### 2.3 Key to the rows and the placement lines (shown once, before the branch list)
-> The five rows group the branches by where they arose in Christian history. Each branch also carries a placement line: one of the sixteen families counted in the Articles, a movement counted within the families its churches belong to, a branch counted within another family, or outside the count because no member churches with adopted texts can be read for it.
+> The five rows group the branches by historical setting, theological affinity, cultural relationship, revival influence or restorationist self-understanding, as the panels on the picture show. Each branch also carries a placement line: one of the sixteen families counted in the Articles, a movement counted within the families its churches belong to, a branch counted within another family, or outside the count because no member churches with adopted texts can be read for it.
 
 ### 2.4 Placement label
 Each branch's existing status line is shown with the label "Placement:" before it. The status-line wording itself is unchanged.
@@ -36,6 +37,12 @@ Shown as "Source:" or "Sources:" followed by each source below as a link (label 
 
 ### 2.8 Resources for inquirers
 Each branch shows "Learn more from the tradition itself:" followed by that tradition's own inquirer resources, taken from the CODE-AOID2-88 report and JSON (wop-scratch). Only a church's or body's own page. Chinese House Churches: none, by design (members' safety). Branches with none show nothing under that heading (not an empty heading).
+
+### 2.9 Resource note: Anglican Church in North America (small type, directly under that resource on the Anglican branch; AOID2-LT-ACNA, option 2)
+> *Not among the Anglican Communion's member churches; Gafcon counts it as one of its provinces.*
+Sources:
+- Anglican Communion Office, Member Churches | https://www.anglicancommunion.org/member-churches/
+- Gafcon, About | https://gafcon.org/about/
 
 ## Part 3: Branch descriptions (one per branch, in Tree order)
 
@@ -65,7 +72,7 @@ Source:
 > Lutheran churches confess that forgiveness, won by Christ, is "a free gift to all who desire it," and they receive the Lutheran Confessions gathered in the Book of Concord as their witness to biblical doctrine. In their own words, they "gather around the word and sacraments, trusting God's grace, shaped by Jesus Christ."
 Sources:
 - Lutheran Church—Missouri Synod, Beliefs | https://www.lcms.org/about/beliefs
-- Evangelical Lutheran Church in America, Faith Tradition | https://www.elca.org/about/what-we-believe/elca-faith-tradition
+- Evangelical Lutheran Church in America, Who We Are | https://www.elca.org/about-the-elca/who-we-are
 
 ### reformed | Reformed
 > Reformed churches trace their roots to the sixteenth-century Reformation, "particularly in the theology of John Calvin," and sometimes say they are "Reformed and always reforming." They confess their faith in historic standards such as the Westminster Confession of Faith with its Larger and Shorter Catechisms, the Heidelberg Catechism, the Belgic Confession and the Canons of Dort, and speak of a "Reformed accent" in which sovereignty, covenant, and kingdom "figure prominently."
@@ -78,8 +85,8 @@ Sources:
 ### anglican | Anglican
 > The Church of England describes itself as "part of the One, Holy, Catholic and Apostolic Church," professing "the faith uniquely revealed in the Holy Scriptures and set forth in the catholic creeds," to which its historic formularies (the Thirty-nine Articles, The Book of Common Prayer and the Ordinal) bear witness. Anglicans describe their churches around the world as "a global family of churches united in a common mission."
 Sources:
-- Church of England, Declaration of Assent, Canon C 15, Preface | https://www.churchofengland.org/node/9707/printable/print
-- Anglican Communion, What is the Anglican Communion? | https://www.anglicancommunion.org/structures/what-is-the-anglican-communion.aspx
+- Church of England, Declaration of Assent, Canon C 15, Preface | https://www.churchofengland.org/resources/legal/canons-church-england/section-c
+- Anglican Communion Office, What Anglicans Believe | https://www.anglicancommunion.org/what-anglicans-believe/
 
 ### anabaptist | Anabaptist
 > The Mennonite and Brethren in Christ churches of Mennonite World Conference confess together, "By the grace of God, we seek to live and proclaim the good news of reconciliation in Jesus Christ," practising "baptism upon confession of faith" and calling believers to be "peacemakers who renounce violence, love our enemies, seek justice." The Church of the Brethren, which subscribes "to no formal 'creed' or set of rules," puts it plainly: "We simply try to do what Jesus did."
@@ -138,7 +145,7 @@ Source:
 ### stone-campbell | Stone-Campbell
 > The Stone-Campbell churches trace their roots to Barton W. Stone, who "called for a return to simple New Testament Christianity," and to the Campbells, who championed "one Church of Christ upon earth"; today they are found mainly in three streams: the Churches of Christ, the Christian Churches/Churches of Christ, and the Christian Church (Disciples of Christ). The Disciples, who "honor our heritage as a movement for Christian unity," say, "As part of the one Body of Christ, we welcome all to the Lord's Table as God has welcomed us."
 Sources:
-- Disciples of Christ Historical Society, Disciples History | https://www.discipleshistory.org/node/9
+- Disciples of Christ Historical Society, A Brief History of the Stone-Campbell Tradition | https://discipleshistory.org/history/
 - Christian Church (Disciples of Christ), Our Identity | https://disciples.org/our-identity/
 
 ### latter-day-saints | The Church of Jesus Christ of Latter-day Saints
@@ -177,7 +184,7 @@ Sources:
 ### chinese-house-churches | Chinese House Churches
 > No church or network is named here, by design, for the safety of their members. *In our words:* these are Chinese Protestant congregations, from household gatherings to large regional networks, that worship outside the state-registered Protestant system; in the Pew Research Center's words, a house church "typically refers to an unregistered Protestant church or a Protestant church whose leader refuses to affiliate with the state-run Christian agency."
 Sources:
-- Pew Research Center, Measuring Religion in China (2023), glossary | https://legacy.pewresearch.org/religion/wp-content/uploads/sites/7/2023/08/PF_2023.08.30_religion-china_A-A.pdf
+- Pew Research Center, Measuring Religion in China (2023), glossary | https://www.pewresearch.org/religion/wp-content/uploads/sites/7/2023/08/PF_2023.08.30_religion-china_A-A.pdf
 - Immigration and Refugee Board of Canada, Responses to Information Requests (2025) | https://www.ecoi.net/en/document/2124878.html
 
 ### independent-new-religious-movements | Independent New Religious Movements

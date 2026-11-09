@@ -44,11 +44,20 @@ Inquirer resources (AOID2 step 163, CODE-AOID2-112; approved wording 2.8):
   data-sources/living-tree/link_checks_<date>.json   the newest two-instrument check record: one
                 WebFetch and one separate shell request per link (WebFetch cannot be run from here,
                 so this script reads the record and never checks resource links itself)
-  A resource is shown only if (a) the CODE-AOID2-88 verification field ("claim_verified") does not
-  record it as unverified (UNVERIFIED_RE below), and (b) both instruments loaded it on the record
-  (WebFetch OK or PARTIAL, shell 2xx). Anything else is withheld, never worked around, and listed
-  with its reasons in review.json "resources.withheld". Chinese House Churches: none, by design.
-  The page shows each as a link labelled "<publisher>, <title>", both as the JSON gives them.
+  --labels      the resource labels Aaron signed (default DEF_LABELS, a byte-identical copy in
+                data-sources/living-tree/). Since step 287 (CODE-AOID2-113) it governs: every resource
+                shown must have a signed row (main table, "Approved replacements" or the ACNA table),
+                and the page shows the signed label and the signed address, never the CODE-AOID2-88
+                publisher/title. A CODE-AOID2-88 resource with no signed row is withheld. A signed row
+                that matches no CODE-AOID2-88 resource stops the build unless it is an approved
+                replacement. A row whose table heading names an approved-file section ("wording in
+                approved file 2.9") carries that note; the page prints the note under the resource.
+  A resource is shown only if it is signed, and (a) the CODE-AOID2-88 verification field
+  ("claim_verified") does not record it as unverified (UNVERIFIED_RE below), unless Aaron has cleared
+  it (RULE_A_CLEARED; replacements have no such field), and (b) both instruments loaded it on the
+  record: WebFetch OK, or PARTIAL where the record says the page is the publisher's own ("own": true),
+  and the shell request 2xx. Anything else is withheld, never worked around, and listed with its
+  reasons in review.json "resources.withheld". Chinese House Churches: none, by design.
 
 Usage:
   python tools/build_living_tree.py --checklist <file> [--no-check]   (--no-check reuses the
@@ -63,6 +72,7 @@ import concurrent.futures as cf
 import csv
 import datetime as dt
 import glob
+import hashlib
 import json
 import os
 import re
@@ -82,6 +92,19 @@ OUT = os.path.join(REPO, "src", "_data", "livingTree.json")
 REVIEW = os.path.join(REPO, "data-sources", "living-tree", "review.json")
 DEF_SOURCES88 = r"C:/Users/aaron/Documents/wop-scratch/WoP_AOID2_CODE-AOID2-88_LivingTree_Sources_20261101.json"
 CHECKS_GLOB = os.path.join(REPO, "data-sources", "living-tree", "link_checks_*.json")
+# The inquirer-resource labels Aaron signed (gate G4, 9 Nov 2026, CHAT-AOID2-111b): a byte-identical copy of
+# wop-scratch/WoP_AOID2_LivingTree_ResourceLabels_Signed_20261109.md (step 287, CODE-AOID2-113).
+DEF_LABELS = os.path.join(REPO, "data-sources", "living-tree", "WoP_AOID2_LivingTree_ResourceLabels_Signed_20261109.md")
+# Rule (a) no longer withholds these: Aaron cleared them on 9 Nov 2026 (CHAT-AOID2-111b). The addresses are the
+# CODE-AOID2-88 JSON's own; they are matched through url_key(), so "www." and a trailing slash do not matter.
+RULE_A_CLEARED = {
+    "https://www.assyrianchurch.org/": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "https://www.mennoniteusa.org/who-are-mennonites/": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "https://www.umjc.org/statement-of-faith": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "https://umjc.org/defining-messianic-judaism": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "https://oaic.org/newsite/?page_id=51": "AOID2-LT-RES-UNVERIFIED, option 2",
+    "https://anglicanchurch.net/about/": "AOID2-LT-ACNA, option 2",
+}
 
 # CODE-AOID2-88 branch names that differ from the branch labels in branches.json.
 BRANCH_88 = {"Catholic (including the Eastern Catholic churches)": "catholicism"}
@@ -396,18 +419,84 @@ STATUS_WORDS = {"ok": "answers", "browser": "needs a browser check", "dead": "de
 # Inquirer resources (step 163)
 # ---------------------------------------------------------------------------------------------
 
-def build_resources(struct, sources88, checks_path):
+def url_key(u):
+    """An address for matching only: no scheme, no "www.", no trailing slash on the path (the query is kept)."""
+    p = urllib.parse.urlsplit(u.strip())
+    host = p.netloc.lower()
+    host = host[4:] if host.startswith("www.") else host
+    path = p.path.rstrip("/") or "/"
+    return host + path + ("?" + p.query if p.query else "")
+
+
+ROW_RE = re.compile(r"^\| ([a-z0-9-]+) \| (https?://\S+) \| (.+?) \|$")
+
+
+def read_labels(path):
+    """The signed rows, in file order: {slug, url, label, table ("signed" | "replacement" | "acna"), note}."""
+    raw = open(path, "rb").read()
+    text = raw.decode("utf-8").replace("\r\n", "\n")
+    rows, table, note = [], "signed", None
+    for line in text.split("\n"):
+        if line.startswith("Approved replacements"):
+            table, note = "replacement", None
+        elif line.startswith("ACNA ("):
+            table = "acna"
+            m = re.search(r"wording in approved file (2\.\d+)", line)
+            note = m.group(1) if m else None
+            if not note:
+                sys.exit("STOP: the ACNA table heading names no approved-file section for its note")
+        m = ROW_RE.match(line)
+        if m:
+            rows.append({"slug": m.group(1), "url": m.group(2), "label": m.group(3), "table": table, "note": note})
+    if not rows:
+        sys.exit("STOP: no signed rows in %s" % path)
+    return rows, hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def loaded(chk):
+    """Rule (b): the reasons a check-record entry fails it (empty if both instruments loaded the page)."""
+    if chk is None:
+        return ["(b) not in the check record"]
+    reasons = []
+    wf, sh = chk["webfetch"], chk["shell"]
+    if not (wf["result"] == "OK" or (wf["result"] == "PARTIAL" and wf.get("own") is True)):
+        reasons.append("(b) WebFetch: " + wf["result"] + ("" if wf["result"] != "PARTIAL" else " and not shown to be the publisher's own page")
+                       + ("" if wf.get("detail") in (None, "-") else ": " + wf["detail"]))
+    if not (sh["code"] and 200 <= sh["code"] < 300):
+        reasons.append("(b) shell: " + ("HTTP %s" % sh["code"] if sh["code"] else (sh.get("error") or "no response")))
+    return reasons
+
+
+def build_resources(struct, sources88, checks_path, labels_path=DEF_LABELS):
     """Per-branch inquirer resources to show, and the review record of every resource (shown or withheld)."""
     src = json.load(open(sources88, encoding="utf-8"))
     checks = json.load(open(checks_path, encoding="utf-8"))
     links = checks["links"]
+    signed_rows, labels_sha = read_labels(labels_path)
     slug_of = {b["label"]: b["slug"] for r in struct["rows"] for b in r["branches"]}
     slug_of.update(BRANCH_88)
+    for s in signed_rows:
+        if s["slug"] not in slug_of.values():
+            sys.exit("STOP: signed row for a branch not on the Tree: %s" % s["slug"])
+        if s["slug"] in NO_RESOURCES_BY_DESIGN:
+            sys.exit("STOP: signed row for %s, which shows none by design" % s["slug"])
+    signed = {}
+    for s in signed_rows:
+        if s["table"] == "replacement":
+            continue
+        k = (s["slug"], url_key(s["url"]))
+        if k in signed:
+            sys.exit("STOP: signed twice: %s %s" % k)
+        signed[k] = s
+    used = set()
     shown = {slug: [] for slug in slug_of.values()}
-    record = {"from": os.path.basename(sources88), "checks": os.path.basename(checks_path),
-              "checkedOn": checks.get("checkedOn"), "rule": "show only if (a) the CODE-AOID2-88 verification field "
-              "does not record the page as unverified and (b) WebFetch (OK or PARTIAL) and the shell request (2xx) "
-              "both loaded it", "shown": [], "withheld": [], "withheld_by_design": []}
+    record = {"from": os.path.basename(sources88), "labels": os.path.basename(labels_path), "labelsSha256": labels_sha,
+              "checks": os.path.basename(checks_path), "checkedOn": checks.get("checkedOn"),
+              "rule": "show only a signed resource, under its signed label and address, and only if (a) the CODE-AOID2-88 "
+                      "verification field does not record the page as unverified, unless Aaron has cleared it (AOID2-LT-RES-UNVERIFIED "
+                      "option 2; AOID2-LT-ACNA option 2), and (b) WebFetch (OK, or PARTIAL on the publisher's own page) and the "
+                      "shell request (2xx) both loaded it",
+              "shown": [], "withheld": [], "withheld_by_design": []}
     seen = set()
     for b in src["branches"]:
         slug = slug_of.get(b["branch"])
@@ -420,27 +509,52 @@ def build_resources(struct, sources88, checks_path):
             record["withheld_by_design"].append({"slug": slug, "withheld_links": b.get("withheld_links", [])})
             continue
         for r in b["inquirer_resources"]:
-            url = r["url"]
+            key = url_key(r["url"])
+            sig = signed.get((slug, key))
+            url = sig["url"] if sig else r["url"]
             chk = links.get(url)
             reasons = []
-            if UNVERIFIED_RE.search(r.get("claim_verified", "")):
-                reasons.append("(a) the CODE-AOID2-88 verification field does not confirm the page: " + r["claim_verified"])
-            if chk is None:
-                reasons.append("(b) not in the check record")
-            else:
-                wf, sh = chk["webfetch"], chk["shell"]
-                if wf["result"] not in ("OK", "PARTIAL"):
-                    reasons.append("(b) WebFetch: " + wf["detail"])
-                if not (sh["code"] and 200 <= sh["code"] < 300):
-                    reasons.append("(b) shell: " + ("HTTP %s" % sh["code"] if sh["code"] else (sh.get("error") or "no response")))
-            entry = {"slug": slug, "publisher": r["publisher"], "title": r["title"], "url": url,
-                     "claim_verified": r.get("claim_verified", ""), "check": chk}
+            if not sig:
+                reasons.append("not signed: no row for it in the signed resource-labels file (gate G4)")
+            claim = r.get("claim_verified", "")
+            cleared = {url_key(u): why for u, why in RULE_A_CLEARED.items()}.get(key)
+            if UNVERIFIED_RE.search(claim) and not cleared:
+                reasons.append("(a) the CODE-AOID2-88 verification field does not confirm the page: " + claim)
+            reasons += loaded(chk)
+            entry = {"slug": slug, "label": sig["label"] if sig else None, "url": url,
+                     "label88": r["publisher"] + ", " + r["title"], "url88": r["url"],
+                     "claim_verified": claim, "ruleA_cleared_by": cleared, "check": chk}
+            if sig:
+                used.add((slug, key))
+                if sig.get("note"):
+                    entry["note"] = sig["note"]
             if reasons:
                 entry["reasons"] = reasons
                 record["withheld"].append(entry)
             else:
                 record["shown"].append(entry)
-                shown[slug].append({"label": r["publisher"] + ", " + r["title"], "url": url})
+                item = {"label": sig["label"], "url": url}
+                if sig.get("note"):
+                    item["note"] = sig["note"]
+                shown[slug].append(item)
+    stray = [u for u in RULE_A_CLEARED if url_key(u) not in {url_key(r["url"]) for b in src["branches"] for r in b["inquirer_resources"]}]
+    if stray:
+        sys.exit("STOP: RULE_A_CLEARED names addresses that are not in the CODE-AOID2-88 JSON: %s" % stray)
+    unused = [k for k in signed if k not in used]
+    if unused:
+        sys.exit("STOP: signed rows that match no CODE-AOID2-88 resource: %s" % unused)
+    for s in signed_rows:
+        if s["table"] != "replacement":
+            continue
+        chk = links.get(s["url"])
+        reasons = loaded(chk)
+        entry = {"slug": s["slug"], "label": s["label"], "url": s["url"], "replacement": True, "check": chk}
+        if reasons:
+            entry["reasons"] = reasons
+            record["withheld"].append(entry)
+        else:
+            record["shown"].append(entry)
+            shown[s["slug"]].append({"label": s["label"], "url": s["url"]})
     missing = set(slug_of.values()) - seen
     if missing:
         sys.exit("STOP: branches missing from the CODE-AOID2-88 JSON: %s" % sorted(missing))
@@ -472,6 +586,7 @@ def main():
     ap.add_argument("--no-check", action="store_true")
     ap.add_argument("--sources88", default=DEF_SOURCES88)
     ap.add_argument("--resources-only", action="store_true")
+    ap.add_argument("--labels", default=DEF_LABELS)
     a = ap.parse_args()
 
     if a.resources_only:
@@ -479,7 +594,7 @@ def main():
         struct = json.load(open(STRUCT, encoding="utf-8"))
         out = json.load(open(OUT, encoding="utf-8"))
         review = json.load(open(REVIEW, encoding="utf-8"))
-        shown, record = build_resources(struct, a.sources88, latest_checks())
+        shown, record = build_resources(struct, a.sources88, latest_checks(), a.labels)
         apply_resources(out["branches"], review, shown, record)
         with open(OUT, "w", encoding="utf-8", newline="\n") as f:
             json.dump(out, f, ensure_ascii=False, indent=1)
@@ -761,7 +876,7 @@ def main():
         "branches": page_branches,
         "counts": counts,
     }
-    shown_res, res_record = build_resources(struct, a.sources88, latest_checks())
+    shown_res, res_record = build_resources(struct, a.sources88, latest_checks(), a.labels)
     apply_resources(out["branches"], review, shown_res, res_record)
     review["linkChecks"] = results
     review["counts"] = counts

@@ -4,7 +4,8 @@
   // It joins the A6a first form of this page (step 89) and the CODE-AOID2-110 links page (src/pages/living-tree-links.njk,
   // retired here), and adds the approved Living Tree wording of 9 Nov 2026.
   //   Every reader-facing sentence of the page comes from approved wording read at build time, never typed here:
-  //     src/_data/livingTreeText.js   the introduction, teaching lines 2.1-2.7, and the 25 branch descriptions with sources
+  //     src/_data/livingTreeText.js   the introduction, teaching lines 2.1-2.8, the 25 branch descriptions with sources, and
+  //                                   the resource note 2.9 (under the resource the generator marks with it; step 287, CODE-AOID2-113)
   //     src/_data/aoidStep89.js        the A6a title, subtitle, L1-L3, alt text and method-account sentence (switch ON only)
   //     src/_data/aoidDisclosures.js   the Article 11 record note "What the sixteen cover." (switch ON only, through aoidStep89)
   //   Branches, overlays, member churches, adopted-text links and inquirer resources come from src/_data/livingTree.json,
@@ -142,7 +143,20 @@
       <div class="ltl-learn"><span class="ltl-label">{{ TX.learnMore }}</span>
         <ul>
           {%- for r in b.resources %}
-          <li><a href="{{ r.url }}" rel="noopener">{{ r.label }}</a></li>
+          <li><a href="{{ r.url }}" rel="noopener">{{ r.label }}</a>
+            {%- if r.note %}{% set n = TX.notes[r.note] %}
+            <div class="ltl-note">
+              <p class="ltl-note-text">{{ para(n.parts) }}</p>
+              <div class="ltl-note-sources"><span class="ltl-label">{{ n.sourceLabel }}</span>
+                <ul>
+                  {%- for s in n.sources %}
+                  <li><a href="{{ s.url }}" rel="noopener">{{ s.label }}</a></li>
+                  {%- endfor %}
+                </ul>
+              </div>
+            </div>
+            {%- endif %}
+          </li>
           {%- endfor %}
         </ul>
       </div>
@@ -177,6 +191,9 @@
   var OSD_SRI = 'sha512-LbaoUnRCul2C+I4cdS/EMnMbynmZMU58AApBnZkhMzp/r8rOS7htjTsox7g6rf5ZXkSx56F5dDYmhLwqV1Zt4A==';
   var BRANCHES = [{% for b in LT.branches %}{ slug: {{ b.slug | dump | safe }}, label: {{ b.label | dump | safe }}, box: {{ b.box | dump | safe }} }{% if not loop.last %},{% endif %}{% endfor %}];
   var zoomBtn = document.getElementById('ltlZoom'), closeBtn = document.getElementById('ltlClose'), fullLink = document.getElementById('ltlFull');
+  /* "ltl-zoomed" on the frame while the viewer is open: at 800 px and below the CSS then puts "Back to the picture"
+     in a bar above the viewer instead of over the picture (step 287, CODE-AOID2-113). Above 800 px it changes nothing. */
+  var frame = document.getElementById('ltlFrame');
   var box = document.getElementById('ltlOsd'), mount = document.getElementById('ltlOsdMount'), msg = document.getElementById('ltlOsdMsg');
   if (!zoomBtn || !box) return;
   zoomBtn.hidden = false;
@@ -197,6 +214,7 @@
     if (viewer) { try { viewer.destroy(); } catch (e) {} viewer = null; }
     mount.innerHTML = ''; mount.removeAttribute('style');
     msg.hidden = true; box.hidden = true; closeBtn.hidden = true; zoomBtn.hidden = false; open = false;
+    frame.classList.remove('ltl-zoomed');
     if (focusOpener) opener.focus();
   }
   function go(slug) {
@@ -221,8 +239,9 @@
     if (open) return;
     opener = (e && e.currentTarget) || zoomBtn;
     open = true; box.hidden = false; closeBtn.hidden = false; zoomBtn.hidden = true;
+    frame.classList.add('ltl-zoomed');
     msg.textContent = 'Loading the deep-zoom view…'; msg.hidden = false;
-    if (fullLink && opener === fullLink) document.getElementById('ltlFrame').scrollIntoView({ block: 'nearest' });
+    if (fullLink && opener === fullLink) frame.scrollIntoView({ block: 'nearest' });
     loadOSD().then(function (OSD) {
       if (!open) return;
       msg.hidden = true;
