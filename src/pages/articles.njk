@@ -161,6 +161,47 @@ discordChannelId: ""
     if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', wire); } else { wire(); }
 })();
 </script>
+<script>
+/* Article links such as /articles/#of-salvation (CODE-AOID2-117; Aaron's ruling of 9 Nov 2026, Fault C).
+   The page scrolls smoothly (html { scroll-behavior: smooth } in styles.css), and the browser fixes where
+   a smooth scroll will stop at the moment it starts. The poster's space is now reserved
+   (components/articles-presentation.njk). The web fonts' space cannot be: when they arrive after the
+   scroll has started, the text above the Article re-wraps into fewer lines and the Article lands too far
+   down the page (measured up to about 950 px at 1400 px wide). So, once per page load, after the load
+   event and document.fonts.ready, and once the scroll has come to rest, an Article named in the address
+   is put back in place once, without smooth scrolling, and only if it is more than 20 px off.
+   Left alone: a reload or back/forward visit (the browser restores the reader's own place), a reader
+   who has scrolled, tapped, clicked or pressed a key first, and every later same-page link. */
+(function () {
+    var hash = location.hash, id;
+    try { id = decodeURIComponent(hash.slice(1)); } catch (e) { return; }
+    if (!id) { return; }
+    try {
+        var nav = performance.getEntriesByType('navigation')[0];
+        if (nav && nav.type !== 'navigate') { return; }
+    } catch (e) { /* no navigation timing: carry on */ }
+    var touched = false;
+    var mark = function () { touched = true; };
+    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (n) { window.addEventListener(n, mark, { once: true, passive: true }); });
+    function correct() {
+        var lastY = -1, still = 0, frames = 0;
+        (function tick() {
+            var y = window.scrollY;
+            still = (y === lastY) ? still + 1 : 0;
+            lastY = y;
+            if (still < 10 && ++frames < 180) { requestAnimationFrame(tick); return; }   // at rest for 10 frames, or about 3 s
+            if (touched || location.hash !== hash) { return; }
+            var el = document.getElementById(id);
+            if (!el || !el.classList.contains('article-section')) { return; }
+            var want = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+            if (Math.abs(el.getBoundingClientRect().top - want) > 20) { el.scrollIntoView({ block: 'start', behavior: 'instant' }); }
+        })();
+    }
+    window.addEventListener('load', function () {
+        (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(correct);
+    }, { once: true });
+})();
+</script>
 
 <br>
 <h2 class="pw-heading">Group Discussions</h2>

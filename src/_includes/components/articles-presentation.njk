@@ -1,6 +1,10 @@
 {# Articles Presentation — slide-01 poster opens an 18-slide WebP carousel.
    Slides on R2: media.wordsofplainness.org/web/aoid-slides/slide-NN.webp
-   Trigger: #pwPresentation (placed in the Learning Pathways band on /articles/). #}
+   Trigger: #pwPresentation (placed in the Learning Pathways band on /articles/).
+   The poster img carries slide-01.webp's own size (3840x2160), so its 16:9 box is reserved before the
+   lazy image arrives. Without it the poster grew from 0 to about 358 px after a link such as
+   /articles/#of-salvation had started scrolling, and the Article landed that far down (CODE-AOID2-117).
+   If the poster image is ever replaced, update width and height to the new file. #}
 <style>
 .ps-poster{display:block;width:100%;margin:1.75rem 0 .5rem;padding:0;border:1px solid rgba(212,175,105,.4);border-radius:14px;overflow:hidden;background:#2a1618;cursor:pointer;position:relative;line-height:0;transition:transform .2s,box-shadow .2s,border-color .2s;}
 .ps-poster:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.45);border-color:rgba(212,175,105,.7);}
@@ -54,7 +58,7 @@
 
 <button class="ps-poster" type="button" id="pwPresentation" aria-haspopup="dialog" aria-controls="psModal"
         aria-label="Open the presentation — The Common Ground We Share, a visual walkthrough of the thirteen Articles{% if aoidSecondEdition.on %} (First Edition){% endif %}">
-  <img class="ps-poster-img" src="https://media.wordsofplainness.org/web/aoid-slides/slide-01.webp"
+  <img class="ps-poster-img" src="https://media.wordsofplainness.org/web/aoid-slides/slide-01.webp" width="3840" height="2160"
        alt="The Common Ground We Share — Presentation: Articles of Interfaith Discipleship" loading="lazy" decoding="async">
   <span class="ps-poster-badge" aria-hidden="true">
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
