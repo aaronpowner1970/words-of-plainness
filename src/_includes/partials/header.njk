@@ -10,7 +10,14 @@
                 <span class="logo-subtitle">{{ site.tagline }}</span>
             </span>
         </a>
-        
+
+        {# Header search link (CODE-SITE-15). One element for every width: it sits
+           just before the desktop menu, and beside the menu button wherever the
+           menu button is shown. Styles: .header-search in css/styles.css. #}
+        <a href="/search/" class="header-search" aria-label="Search" title="Search"{% if page.url == "/search/" %} aria-current="page"{% endif %}>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="15.5" y1="15.5" x2="20.5" y2="20.5"></line></svg>
+        </a>
+
         <nav class="nav-desktop">
             <ul class="nav-links">
                 {% for item in navigation.main %}
@@ -84,7 +91,7 @@
 </header>
 
 <script>
-// Listen nav dropdown — dual activation: click + hover (250ms delay)
+// Media nav dropdown — dual activation: click + hover (250ms delay)
 (function() {
   const container = document.querySelector('.nav-has-dropdown');
   if (!container) return;
@@ -136,7 +143,7 @@
   });
 })();
 
-// Mobile menu: Listen children expand/collapse
+// Mobile menu: Media children expand/collapse
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.mobile-menu-parent').forEach(function(btn) {
     btn.addEventListener('click', function(e) {

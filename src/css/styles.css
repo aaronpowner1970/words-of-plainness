@@ -338,7 +338,7 @@ p {
     width: 100%;
 }
 
-/* ── Listen Dropdown (Desktop) ──────────────────── */
+/* ── Media Dropdown (Desktop) ───────────────────── */
 .nav-has-dropdown {
     position: relative;
 }
@@ -453,7 +453,7 @@ p {
     line-height: 1.4;
 }
 
-/* ── Listen Dropdown (Mobile) ───────────────────── */
+/* ── Media Dropdown (Mobile) ────────────────────── */
 .mobile-menu-parent {
     appearance: none;
     -webkit-appearance: none;
@@ -533,6 +533,46 @@ p {
 .btn-new-here:hover {
     background: var(--gold-light);
     transform: translateY(-2px);
+}
+
+/* Header search link (CODE-SITE-15) — gold magnifying glass, links to /search/.
+   It takes the free space just before the menu: before "Home" on desktop, and
+   beside the menu button wherever that button is shown. The auto left margin
+   keeps .nav-desktop flush right, so the existing menu items do not move. */
+.header-search {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: 12px;
+    border-radius: var(--radius-sm);
+    color: var(--gold-primary);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.header-search svg {
+    display: block;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.header-search:hover,
+.header-search:focus-visible {
+    color: var(--gold-light);
+}
+
+/* Wherever the menu button is shown (same breakpoint as the hamburger switch
+   below): a 44 x 44 tap target in the header bar, beside the button. */
+@media (max-width: 1399px) {
+    .header-search {
+        width: 44px;
+        height: 44px;
+        margin-right: 4px;
+    }
 }
 
 /* Mobile Navigation Toggle (Hamburger Icon) */
