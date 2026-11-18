@@ -33,7 +33,7 @@ toc:
   - id: media
     title: "Media: narration, music and synced text"
   - id: accounts-api
-    title: Accounts and the API backend
+    title: Forms and the API backend
   - id: serverless
     title: Serverless functions and automation
   - id: search-seo
@@ -48,7 +48,7 @@ title: Under the Hood
 pageTitle: Under the Hood
 pageSubtitle: "How the Website Is Built"
 permalink: /about/under-the-hood/
-description: "How wordsofplainness.org is built: a static Eleventy site on Vercel with media on Cloudflare R2, a small Django API for accounts, and build-time validation gates. For IT and developer visitors."
+description: "How wordsofplainness.org is built: a static Eleventy site on Vercel with media on Cloudflare R2, a small Django API for the site's forms, and build-time validation gates. For IT and developer visitors."
 ---
 
 <div class="uth" data-pagefind-body>
@@ -57,7 +57,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
     <div class="content-wrapper">
         <h2>At a glance</h2>
 
-        <p>wordsofplainness.org is a <strong>static-first site with a thin dynamic edge</strong>. Every page is pre-rendered by Eleventy (Nunjucks templates over Markdown and structured data) and served as plain HTML from Vercel's CDN. Heavy media lives separately on Cloudflare R2 behind its own subdomain. The few things that must be dynamic—sign-in, a personal discipleship journal, newsletter and contact forms—talk to a small Django REST API on PythonAnywhere, and a handful of Vercel serverless functions handle automation such as social notifications. There is no front-end framework, no database behind the pages themselves, and no tracking scripts: a visitor's browser loads the site's own HTML, CSS and vanilla JavaScript, one Google Fonts stylesheet, and audio from the media CDN.</p>
+        <p>wordsofplainness.org is a <strong>static-first site with a thin dynamic edge</strong>. Every page is pre-rendered by Eleventy (Nunjucks templates over Markdown and structured data) and served as plain HTML from Vercel's CDN. Heavy media lives separately on Cloudflare R2 behind its own subdomain. The few things that must be dynamic—the contact, corrections and newsletter forms—talk to a small Django REST API on PythonAnywhere, and a handful of Vercel serverless functions handle automation such as social notifications. There is no front-end framework, no database behind the pages themselves, and no tracking scripts: a visitor's browser loads the site's own HTML, CSS and vanilla JavaScript, one Google Fonts stylesheet, and audio from the media CDN.</p>
 
         <p>The interesting engineering is less in the stack than in what the build does with it: build-time cross-referencing between book chapters and the Articles of Interfaith Discipleship, narration audio that highlights the text as it is read, song lyrics synced line-by-line to the music, a citation apparatus with over a thousand scripture links, all generated from the site's own book map, and validation gates that refuse to ship data that fails its checks.</p>
     </div>
@@ -163,7 +163,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
         <figure class="uth-diagram">
             <svg class="uth-svg uth-svg-wide" viewBox="0 0 876 450" role="img" aria-labelledby="uth-d1w-title uth-d1w-desc">
                 <title id="uth-d1w-title">How a page and its media reach a visitor</title>
-                <desc id="uth-d1w-desc">Top row, left to right: the author and Claude Code (Markdown, YAML, JSON) push to the GitHub main branch (a push is a deploy), which starts the Vercel build (validate, Eleventy, Pagefind), which publishes to the Vercel edge CDN (static pages and API functions). The edge CDN sends HTML, CSS and JS down to the visitor's browser (vanilla JS, no framework). Along the bottom, three sources feed the browser: the Cloudflare R2 media CDN (narration, music, banner images) sends audio and images; the Django REST API on PythonAnywhere (accounts, journal) exchanges JSON with token sign-in in both directions; and YouTube and Google Fonts supply embedded films and typefaces. A dashed line shows the author uploading media directly to Cloudflare R2.</desc>
+                <desc id="uth-d1w-desc">Top row, left to right: the author and Claude Code (Markdown, YAML, JSON) push to the GitHub main branch (a push is a deploy), which starts the Vercel build (validate, Eleventy, Pagefind), which publishes to the Vercel edge CDN (static pages and API functions). The edge CDN sends HTML, CSS and JS down to the visitor's browser (vanilla JS, no framework). Along the bottom, three sources feed the browser: the Cloudflare R2 media CDN (narration, music, banner images) sends audio and images; the Django REST API on PythonAnywhere (forms, newsletter) receives form submissions as JSON and answers each one; and YouTube and Google Fonts supply embedded films and typefaces. A dashed line shows the author uploading media directly to Cloudflare R2.</desc>
                 <defs>
                     <marker id="uth-d1w-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="d-head" d="M0 0 L10 5 L0 10 z"/></marker>
                 </defs>
@@ -194,14 +194,14 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
                 <text class="d-sub" x="335" y="410" text-anchor="middle">narration, music, banner images</text>
                 <rect class="d-box" x="450" y="360" width="200" height="70" rx="8"/>
                 <text class="d-title" x="550" y="389" text-anchor="middle">Django REST API</text>
-                <text class="d-sub" x="550" y="410" text-anchor="middle">PythonAnywhere: accounts, journal</text>
+                <text class="d-sub" x="550" y="410" text-anchor="middle">PythonAnywhere: forms, newsletter</text>
                 <rect class="d-box" x="670" y="360" width="198" height="70" rx="8"/>
                 <text class="d-title" x="769" y="389" text-anchor="middle">YouTube, Google Fonts</text>
                 <text class="d-sub" x="769" y="410" text-anchor="middle">embedded films, typefaces</text>
                 <path class="d-line" d="M335 360 V262" marker-end="url(#uth-d1w-h)"/>
                 <text class="d-label" x="346" y="318">audio, images</text>
                 <path class="d-line" d="M550 360 V262" marker-start="url(#uth-d1w-h)" marker-end="url(#uth-d1w-h)"/>
-                <text class="d-label" x="561" y="318">JSON, token sign-in</text>
+                <text class="d-label" x="561" y="318">JSON form submissions</text>
                 <path class="d-line" d="M769 360 V262" marker-end="url(#uth-d1w-h)"/>
 
                 <path class="d-dash" d="M102 90 V395 H238" marker-end="url(#uth-d1w-h)"/>
@@ -210,7 +210,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
 
             <svg class="uth-svg uth-svg-narrow" viewBox="0 0 360 800" role="img" aria-labelledby="uth-d1n-title uth-d1n-desc">
                 <title id="uth-d1n-title">How a page and its media reach a visitor</title>
-                <desc id="uth-d1n-desc">A vertical flow. The author and Claude Code (Markdown, YAML, JSON) push to the GitHub main branch (a push is a deploy), which starts the Vercel build (validate, Eleventy, Pagefind), which publishes to the Vercel edge CDN (static pages and API functions). The edge CDN sends HTML, CSS and JS to the visitor's browser (vanilla JS, no framework). Three sources also feed the browser: the Cloudflare R2 media CDN (narration, music, banner images; audio and images), the Django REST API on PythonAnywhere (accounts, journal; JSON with token sign-in in both directions) and YouTube and Google Fonts (embedded films, typefaces). A dashed line shows the author uploading media directly to Cloudflare R2.</desc>
+                <desc id="uth-d1n-desc">A vertical flow. The author and Claude Code (Markdown, YAML, JSON) push to the GitHub main branch (a push is a deploy), which starts the Vercel build (validate, Eleventy, Pagefind), which publishes to the Vercel edge CDN (static pages and API functions). The edge CDN sends HTML, CSS and JS to the visitor's browser (vanilla JS, no framework). Three sources also feed the browser: the Cloudflare R2 media CDN (narration, music, banner images; audio and images), the Django REST API on PythonAnywhere (forms, newsletter; form submissions as JSON, each one answered) and YouTube and Google Fonts (embedded films, typefaces). A dashed line shows the author uploading media directly to Cloudflare R2.</desc>
                 <defs>
                     <marker id="uth-d1n-h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path class="d-head" d="M0 0 L10 5 L0 10 z"/></marker>
                 </defs>
@@ -242,8 +242,8 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
                 <text class="d-label" x="180" y="586" text-anchor="middle">audio, images</text>
                 <rect class="d-box" x="44" y="620" width="272" height="80" rx="8"/>
                 <text class="d-title" x="180" y="645" text-anchor="middle">Django REST API</text>
-                <text class="d-sub" x="180" y="665" text-anchor="middle">PythonAnywhere: accounts, journal</text>
-                <text class="d-label" x="180" y="686" text-anchor="middle">JSON, token sign-in</text>
+                <text class="d-sub" x="180" y="665" text-anchor="middle">PythonAnywhere: forms, newsletter</text>
+                <text class="d-label" x="180" y="686" text-anchor="middle">JSON form submissions</text>
                 <rect class="d-box" x="44" y="720" width="272" height="64" rx="8"/>
                 <text class="d-title" x="180" y="748" text-anchor="middle">YouTube, Google Fonts</text>
                 <text class="d-sub" x="180" y="768" text-anchor="middle">embedded films, typefaces</text>
@@ -394,7 +394,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
             <li><strong>Styling.</strong> A single base stylesheet sets the palette (warm gold, cream and deep browns) and type (Crimson Pro for reading, Source Sans Pro for interface), with per-feature sheets layered on. Stylesheets are cache-busted with the site version number.</li>
             <li><strong>Layout.</strong> Responsive CSS throughout; the presentation pages for live group sessions use container queries so the same page fits a phone, a laptop, a projector and a 1280×630 window inside a VR headset.</li>
             <li><strong>Accessibility.</strong> Skip link, labeled controls, an on-page text-size control, keyboard shortcuts on the presentation pages, and animation that respects the reduced-motion setting.</li>
-            <li><strong>Browser storage.</strong> Small conveniences (where a floating badge was dragged, which view mode is on) use session storage. Reflections fall back to local storage when a reader is not signed in, so nothing a reader writes is lost.</li>
+            <li><strong>Browser storage.</strong> Small conveniences (where a floating badge was dragged, which view mode is on) use session storage. Reflections, reading progress and narration position are kept only in your browser. The site has no user accounts, and nothing you write in a reflection is sent to a server.</li>
         </ul>
     </div>
 </section>
@@ -417,21 +417,19 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
 
 <section class="content-section" id="accounts-api">
     <div class="content-wrapper">
-        <h2>Accounts and the API backend</h2>
+        <h2>Forms and the API backend</h2>
 
-        <p>Everything personal sits behind one small service: a Django REST API on PythonAnywhere backed by MySQL. The static pages carry the API's base address in a <code>data-</code> attribute on <code>&lt;body&gt;</code>, and a single client module talks to it.</p>
+        <p>The site's forms are handled by one small service: a Django REST API on PythonAnywhere backed by MySQL. The static pages carry the API's base address in a <code>data-</code> attribute on <code>&lt;body&gt;</code>, and a single client module talks to it.</p>
 
         <table class="uth-table">
             <thead><tr><th scope="col">Function</th><th scope="col">What it does</th></tr></thead>
             <tbody>
-                <tr><th scope="row">Sign-in and registration</th><td>Username or email plus password. The API issues short-lived access tokens and longer-lived refresh tokens (JWT); the client refreshes automatically when a request comes back 401</td></tr>
-                <tr><th scope="row">My Discipleship Journal</th><td>Saves the reader's responses at a chapter's pause points (Reflect, Journal, Witness) and the practice cards they commit to, so they follow the reader across devices</td></tr>
-                <tr><th scope="row">Contact and newsletter</th><td>Form submissions and newsletter sign-up. Registration can opt the reader into the newsletter, and a newsletter failure never blocks registration</td></tr>
+                <tr><th scope="row">Contact and newsletter</th><td>Contact messages, Articles corrections and newsletter sign-up</td></tr>
                 <tr><th scope="row">Notification marker</th><td>Remembers which blog post was last announced, so the social notifier never posts twice</td></tr>
             </tbody>
         </table>
 
-        <p>The design rule is <strong>graceful degradation</strong>: if the API is unreachable, every page still reads normally and reflections are kept in the browser instead. The database is backed up nightly to object storage.</p>
+        <p>The design rule is <strong>graceful degradation</strong>: if the API is unreachable, every page still reads normally and only form submissions are affected. The database is backed up nightly to object storage.</p>
     </div>
 </section>
 
@@ -507,8 +505,8 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
 
         <ul>
             <li>Some pages carry a large inline data payload because the data is embedded at build time: about 200 KB on the Seeking Jesus app, about 300 KB on the Creation study, and about 2.4 MB on the Articles page, which is the heaviest. Trimming these is planned.</li>
-            <li>Inline scripts and browser-stored sign-in tokens mean the site does not yet send a strict Content-Security-Policy header. HTTPS with HSTS is enforced.</li>
-            <li>Personal features depend on a single small API host. If it is down, reading continues but journal syncing waits.</li>
+            <li>Inline scripts mean the site does not yet send a strict Content-Security-Policy header. HTTPS with HSTS is enforced.</li>
+            <li>The forms depend on a single small API host. If it is down, reading continues but form submissions fail until it returns.</li>
             <li>Site search is basic; filtering and result weighting are a planned improvement.</li>
         </ul>
     </div>
@@ -522,8 +520,8 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
             <thead><tr><th scope="col">Question</th><th scope="col">Short answer</th></tr></thead>
             <tbody>
                 <tr><th scope="row">What is it built with?</th><td>Eleventy 2 with Nunjucks templates, Markdown, YAML and JSON data, vanilla JavaScript and CSS</td></tr>
-                <tr><th scope="row">Where is it hosted?</th><td>Pages on Vercel; media on Cloudflare R2 at <code>media.wordsofplainness.org</code>; accounts on a Django API at PythonAnywhere</td></tr>
-                <tr><th scope="row">Is there a database?</th><td>Not behind the pages. Only the personal features (accounts, journal) use one, through the API</td></tr>
+                <tr><th scope="row">Where is it hosted?</th><td>Pages on Vercel; media on Cloudflare R2 at <code>media.wordsofplainness.org</code>; form handling on a Django API at PythonAnywhere</td></tr>
+                <tr><th scope="row">Is there a database?</th><td>Not behind the pages. Only the forms use one, through the API</td></tr>
                 <tr><th scope="row">React? Next.js? A CMS?</th><td>None. Content is files in Git; the build is the CMS</td></tr>
                 <tr><th scope="row">How does a change go live?</th><td>Push to <code>main</code>; Vercel runs validators, the Eleventy build and Pagefind, then deploys to the edge</td></tr>
                 <tr><th scope="row">How does the read-along highlighting work?</th><td>Narration comes with character-level timing; a script turns it into per-paragraph or per-sentence timestamps matched to numbers the build stamps on each block</td></tr>

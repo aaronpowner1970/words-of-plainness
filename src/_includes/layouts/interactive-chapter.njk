@@ -101,13 +101,13 @@
                 <p>What will you do? What is one thing you feel prompted to do as a result of this reading?</p>
             </div>
             <div class="prompt-block reflect" id="reflect-prompt-chapter" style="display:none;"></div>
-            <textarea class="response-area" id="reflect-ta" placeholder="Your thoughts are private by default. Sign in to keep them across sessions."></textarea>
+            <textarea class="response-area" id="reflect-ta" placeholder="Your thoughts are private by default. Your answers stay on this device. Open Your reflections to download them."></textarea>
             <div class="action-row">
                 <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('reflect')">Save Response</button>
                 <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('reflect')">Clear</button>
                 <span class="save-indicator" id="save-reflect">Saved</span>
             </div>
-            <p class="rjw-auth-notice">Responses are saved to your browser. <a href="#" data-auth-trigger>Sign in</a> to keep them in your account.</p>
+            <p class="rjw-auth-notice">Responses are saved to your browser. Your answers stay on this device. Open <strong>Your reflections</strong> to download them.</p>
         </div>
         <!-- JOURNAL TAB -->
         <div class="tab-pane" id="tab-journal">
@@ -118,7 +118,7 @@
                 <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('journal')">Clear</button>
                 <span class="save-indicator" id="save-journal">Saved</span>
             </div>
-            <p class="rjw-auth-notice">Journal entries are automatically included in your portable document. <a href="#" data-auth-trigger>Sign in</a> to save across sessions.</p>
+            <p class="rjw-auth-notice">Journal entries are automatically included in your portable document. Your answers stay on this device. Open <strong>Your reflections</strong> to download them.</p>
         </div>
         <!-- WITNESS TAB -->
         <div class="tab-pane" id="tab-witness">
@@ -130,21 +130,14 @@
                         <input type="checkbox" id="cb-document" class="witness-cb">
                         <span class="witness-cb-text">Include this witness in my portable discipleship document</span>
                     </label>
-                    <label class="witness-checkbox-label">
-                        <input type="checkbox" id="cb-community" class="witness-cb">
-                        <span class="witness-cb-text">Share this witness with the Words of Plainness community</span>
-                    </label>
                 </div>
-                <p class="witness-moderation-notice">
-                    Community submissions pass through a moderation review before becoming visible on the site. Your witness will not appear publicly until it has been approved.
-                </p>
                 <div class="action-row" style="margin-top:14px;">
                     <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('witness')">Save Witness</button>
                     <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('witness')">Clear</button>
                     <span class="save-indicator" id="save-witness">Saved</span>
                 </div>
             </div>
-            <p class="rjw-auth-notice" style="margin-top:8px;">A free account is required to include your witness in your portable document or share it with the community. <a href="#" data-auth-trigger>Sign in or register.</a></p>
+            <p class="rjw-auth-notice" style="margin-top:8px;">Your answers stay on this device. Open <strong>Your reflections</strong> to download them.</p>
             <div class="community-label" style="margin-top:28px;">From the Community</div>
             <div id="witness-cards"></div>
         </div>
@@ -316,7 +309,6 @@
     window.WOP_PAUSES = {{ pauses | dump | safe }};
 </script>
 {% endif %}
-<script src="/js/wop-reflections.js"></script>
 <script src="/js/chapter.js"></script>
 <script src="/js/interactive-chapter.js"></script>
 {% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
@@ -329,4 +321,8 @@
 </script>
 <script src="/js/ambient-player.js"></script>
 {% endif %}
+{# The Reflections panel (CODE-SITE-18). Chapter 6's pathway reflections are kept
+   under "06-embrace-the-savior", its R·J·W answers under its chapterId. #}
+{% set reflectionIds = [chapterId, "06-embrace-the-savior"] if chapterId == "chapter-06-embrace-the-savior" else [chapterId] %}{% set reflectionTitle = "Chapter " + chapter + ": " + title %}{% set reflectionFile = slug %}
+{% include "components/reflections-panel.njk" %}
 {% endblock %}

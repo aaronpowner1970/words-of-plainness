@@ -4,7 +4,6 @@
  *
  * Handles the "Contact Brother Aaron" form on the Connect page.
  * - Posts to Django API /contact/ endpoint
- * - Pre-fills name/email for logged-in users
  * - Client-side validation with inline errors
  * - Success/error states
  */
@@ -19,27 +18,12 @@ const ContactForm = {
 
         if (!this.form) return;
 
-        this.prefillFromAuth();
         this.prefillFromQuery();
         this.setupSubmit();
         this.setupSendAnother();
         this.setupInputClear();
 
         console.log('[ContactForm] Initialized');
-    },
-
-    prefillFromAuth() {
-        if (!window.API?.isAuthenticated() || !window.API.user) return;
-
-        const nameInput = document.getElementById('contact-name');
-        const emailInput = document.getElementById('contact-email');
-
-        if (nameInput && !nameInput.value && window.API.user.name) {
-            nameInput.value = window.API.user.name;
-        }
-        if (emailInput && !emailInput.value && window.API.user.email) {
-            emailInput.value = window.API.user.email;
-        }
     },
 
     /**
@@ -55,7 +39,7 @@ const ContactForm = {
      * put someone else's identity on a message, and those two fields stay the
      * sender's own to type. Nothing is submitted automatically either; the
      * reader still reads what is there and presses Send.
-     * Anything already filled (by auth, or by the reader) wins over the URL.
+     * Anything the reader has already filled wins over the URL.
      */
     prefillFromQuery() {
         let params;
@@ -93,8 +77,7 @@ const ContactForm = {
             this.clearAllErrors();
             document.getElementById('contactSuccess')?.classList.add('hidden');
             this.form.classList.remove('hidden');
-            this.prefillFromAuth();
-        });
+            });
     },
 
     setupInputClear() {

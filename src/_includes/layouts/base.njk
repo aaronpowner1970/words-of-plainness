@@ -155,9 +155,14 @@
     <!-- RSS Feed -->
     <link rel="alternate" href="/posts/feed.xml" title="Words of Plainness — Posts" type="application/atom+xml">
     
+    <!-- Reflections: kept only in this browser (CODE-SITE-18). The store runs on
+         every page so that answers written before the device-only journal are
+         carried over, and old account tokens removed, on the first page a reader opens. -->
+    <script src="/js/wop-reflection-sources.js?v={{ site.version }}"></script>
+    <script src="/js/wop-reflections.js?v={{ site.version }}"></script>
+
     <!-- Styles -->
     <link rel="stylesheet" href="/css/styles.css?v={{ site.version }}">
-    <link rel="stylesheet" href="/css/auth-modal.css">
     <link rel="stylesheet" href="/css/anthem-player.css">
     {% if page.url == "/volume-1/" or page.url == "/volume-2/" %}
     <link rel="stylesheet" href="/css/wop-player.css?v={{ site.version }}">
@@ -187,61 +192,6 @@
     
     {% if not hideFooter %}{% include "partials/footer.njk" %}{% endif %}
 
-    <!-- Auth Modal -->
-    <div id="authModal" role="dialog" aria-labelledby="authTitle" aria-modal="true" style="display:none">
-        <div class="auth-modal-content">
-            <div class="auth-modal-header">
-                <h2 id="authTitle">Sign In</h2>
-                <button class="auth-close" data-auth-close aria-label="Close">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
-            <div class="auth-error hidden" id="authError"></div>
-            <form class="auth-form" id="authForm">
-                <div class="auth-field hidden" id="authNameField">
-                    <label for="authName">Display Name</label>
-                    <input type="text" id="authName" name="display_name" placeholder="How should we address you?">
-                    <small class="auth-hint">How you'll appear to others (optional)</small>
-                    <small class="auth-field-error hidden" data-field-error="display_name"></small>
-                </div>
-                <div class="auth-field hidden" id="authUsernameField">
-                    <label for="authUsername">Username</label>
-                    <input type="text" id="authUsername" name="username" placeholder="Choose a username">
-                    <small class="auth-hint">Letters, numbers, and underscores only</small>
-                    <small class="auth-field-error hidden" data-field-error="username"></small>
-                </div>
-                <div class="auth-field">
-                    <label for="authEmail" id="authEmailLabel">Username or Email</label>
-                    <input type="text" id="authEmail" name="email" required placeholder="Enter username or email">
-                    <small class="auth-field-error hidden" data-field-error="email"></small>
-                </div>
-                <div class="auth-field">
-                    <label for="authPassword">Password</label>
-                    <input type="password" id="authPassword" name="password" required placeholder="Your password">
-                    <small class="auth-field-error hidden" data-field-error="password"></small>
-                </div>
-                <div class="auth-field hidden" id="authPasswordConfirmField">
-                    <label for="authPasswordConfirm">Confirm Password</label>
-                    <input type="password" id="authPasswordConfirm" name="password_confirm" placeholder="Re-enter your password">
-                    <small class="auth-field-error hidden" data-field-error="password_confirm"></small>
-                </div>
-                <div class="auth-field hidden" id="authNewsletterField">
-                    <label class="auth-checkbox-label">
-                        <input type="checkbox" id="authNewsletter" name="subscribe_newsletter" checked>
-                        <span>Subscribe to our newsletter for ministry updates</span>
-                    </label>
-                </div>
-                <button type="submit" class="auth-submit" id="authSubmit">Sign In</button>
-            </form>
-            <p class="auth-switch" id="authSwitchText">
-                Don't have an account? <a href="#" id="switchToSignup">Sign up</a>
-            </p>
-        </div>
-    </div>
-
     <!-- Anthem Audio (hidden — controlled by anthem-player.js) -->
     <audio id="anthemAudio" preload="metadata">
         <source src="https://media.wordsofplainness.org/web/AN_01_The_Marks_of_Your_Worth_Sacred_Americana.mp3" type="audio/mpeg">
@@ -258,8 +208,6 @@
     <script src="/js/font-size.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/api.js"></script>
-    <script src="/js/engagement.js"></script>
-    <script src="/js/auth-modal.js"></script>
     <script src="/js/contact-form.js"></script>
     <script src="/js/newsletter.js"></script>
     <script src="/js/anthem-player.js"></script>

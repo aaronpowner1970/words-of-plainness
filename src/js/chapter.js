@@ -119,7 +119,6 @@ const ChapterManager = {
         document.getElementById('playIcon').style.display = 'none';
         document.getElementById('pauseIcon').style.display = 'block';
         document.dispatchEvent(new Event('wop:audio-play'));
-        if (window.Engagement) window.Engagement.track('audio_play', { section_id: window.AudioSync?.currentSectionId || null });
     },
 
     pause() {
@@ -182,7 +181,6 @@ const ChapterManager = {
         this.isPlaying = false;
         document.getElementById('playIcon').style.display = 'block';
         document.getElementById('pauseIcon').style.display = 'none';
-        if (window.Engagement) window.Engagement.track('audio_complete', { section_id: window.AudioSync?.currentSectionId || null, duration_seconds: Math.round(this.audioPlayer?.duration || 0) });
     },
 
     // Reading Progress
@@ -236,7 +234,6 @@ const ChapterManager = {
         } catch (e) { /* silent */ }
 
         const nowBookmarked = !isBookmarked;
-        if (nowBookmarked && window.Engagement) window.Engagement.track('bookmark', {});
 
         if (nowBookmarked) {
             // Save scroll position (used by resume prompt)
@@ -291,7 +288,6 @@ const ChapterManager = {
         } catch (e) { /* silent */ }
 
         const nowComplete = !isComplete;
-        if (nowComplete && window.Engagement) window.Engagement.track('complete', {});
 
         try {
             localStorage.setItem(`wop-complete-${chapterId}`, nowComplete ? 'true' : 'false');
@@ -507,7 +503,6 @@ const ChapterManager = {
         document.getElementById(modalId)?.classList.add('open');
         document.getElementById('modalBackdrop')?.classList.add('visible');
         document.body.style.overflow = 'hidden';
-        if (window.Engagement) window.Engagement.track('modal_open', { modal_type: modalId.replace('Modal', '') });
     },
     
     closeAllModals() {
@@ -720,10 +715,8 @@ const ChapterManager = {
         }
     },
 
-    // Resume Prompt (localStorage-based, for anonymous users only)
+    // Resume Prompt (localStorage-based; this site has no accounts)
     initResumePrompt() {
-        if (window.API?.isAuthenticated()) return;
-
         const bookmark = this.getBookmark();
 
         if (bookmark && bookmark.position > 500) {
@@ -888,47 +881,79 @@ const RJW = (function() {
     let activeTabKey  = null;
     let reflectMode   = 'chapter';     // 'universal' | 'chapter'
 
-    /* ── LOCAL STORAGE PERSISTENCE ────────────────────── */
-    const STORAGE_PREFIX = 'wop-rjw-';
+    /* ── DEVICE-ONLY PERSISTENCE (CODE-SITE-18) ────────── */
+    // Every answer is kept in this browser through window.wopReflections
+    // (js/wop-reflections.js), in the chapter's own bucket, keyed by pause and
+    // tab, so the same pause id in two chapters keeps two answers. Nothing is
+    // sent off the device.
+    const SAVE_DELAY_MS = 600;
+    let inputTimer = null;
 
-    function storageKey(pauseId, tabKey) {
-        return STORAGE_PREFIX + pauseId + '::' + tabKey;
+    // Chapter 6 (layouts/interactive-chapter.njk) sets no CHAPTER_CONFIG; its id and
+    // title come from the Reflections panel's page configuration instead.
+    function getChapterSlug() {
+        return (typeof CHAPTER_CONFIG !== 'undefined' && CHAPTER_CONFIG.id)
+            || (window.WOP_REFLECTION_PAGE && window.WOP_REFLECTION_PAGE.ids && window.WOP_REFLECTION_PAGE.ids[0])
+            || '';
+    }
+
+    function getChapterTitle() {
+        return (typeof CHAPTER_CONFIG !== 'undefined' && CHAPTER_CONFIG.title)
+            || (window.WOP_REFLECTION_PAGE && window.WOP_REFLECTION_PAGE.title)
+            || '';
+    }
+
+    function entryKey(pauseId, tabKey) {
+        return 'rjw:' + pauseId + ':' + tabKey;
+    }
+
+    function storedEntry(pauseId, tabKey) {
+        if (!window.wopReflections || !getChapterSlug()) return null;
+        try {
+            return window.wopReflections.find(getChapterSlug(), { type: tabKey, meta: { key: entryKey(pauseId, tabKey) } });
+        } catch (e) {
+            return null;
+        }
     }
 
     function loadStored(pauseId, tabKey) {
-        try {
-            return localStorage.getItem(storageKey(pauseId, tabKey)) || '';
-        } catch (e) {
-            return '';
+        var e = storedEntry(pauseId, tabKey);
+        return e ? (e.content || '') : '';
+    }
+
+    function promptText(pauseId, tabKey) {
+        var data = PAUSES[pauseId] || {};
+        var strip = window.wopReflections ? window.wopReflections.stripTags : function (h) { return h || ''; };
+        if (tabKey === 'reflect' && reflectMode === 'universal') {
+            var u = document.getElementById('reflect-prompt-universal');
+            if (u) return Array.prototype.map.call(u.querySelectorAll('p'), function (p) { return p.textContent.trim(); }).join('\n');
         }
+        var tab = data[tabKey] || {};
+        return strip(tab.prompt || '');
     }
 
     function saveStored(pauseId, tabKey, value) {
+        if (!window.wopReflections || !getChapterSlug()) return;
+        var data = PAUSES[pauseId] || {};
+        var meta = { key: entryKey(pauseId, tabKey), pauseId: pauseId, section: data.title || '' };
+        if (tabKey === 'witness') {
+            var cbDoc = document.getElementById('cb-document');
+            var prior = storedEntry(pauseId, 'witness');
+            meta.includeInDocument = cbDoc && activePauseId === pauseId ? !!cbDoc.checked
+                : !!(prior && prior.meta && prior.meta.includeInDocument);
+        }
         try {
-            localStorage.setItem(storageKey(pauseId, tabKey), value);
+            window.wopReflections.put({
+                chapterId: getChapterSlug(),
+                chapterTitle: window.wopReflections.titleFor(getChapterSlug(), getChapterTitle()),
+                type: tabKey,
+                promptLabel: promptText(pauseId, tabKey),
+                content: value,
+                meta: meta
+            });
         } catch (e) {
             // localStorage full or unavailable — silent fail
         }
-    }
-
-    function loadStoredBool(pauseId, key) {
-        try {
-            return localStorage.getItem(storageKey(pauseId, key)) === 'true';
-        } catch (e) {
-            return false;
-        }
-    }
-
-    function saveStoredBool(pauseId, key, value) {
-        try {
-            localStorage.setItem(storageKey(pauseId, key), value ? 'true' : 'false');
-        } catch (e) {
-            // silent
-        }
-    }
-
-    function getChapterSlug() {
-        return (typeof CHAPTER_CONFIG !== 'undefined' && CHAPTER_CONFIG.id) || '';
     }
 
     /* ── RENDER MODAL CONTENT ─────────────────────────── */
@@ -978,12 +1003,11 @@ const RJW = (function() {
         var ta = document.getElementById(tabKey + '-ta');
         if (ta) ta.value = loadStored(pauseId, tabKey);
 
-        // Restore checkbox states for witness
+        // Restore the witness "include in my portable discipleship document" choice
         if (tabKey === 'witness') {
             var cbDoc  = document.getElementById('cb-document');
-            var cbComm = document.getElementById('cb-community');
-            if (cbDoc)  cbDoc.checked  = loadStoredBool(pauseId, 'witness-include-document');
-            if (cbComm) cbComm.checked = loadStoredBool(pauseId, 'witness-submit-community');
+            var w = storedEntry(pauseId, 'witness');
+            if (cbDoc) cbDoc.checked = !!(w && w.meta && w.meta.includeInDocument);
         }
     }
 
@@ -1016,7 +1040,6 @@ const RJW = (function() {
         document.getElementById('rjwOverlay').classList.add('open');
         document.getElementById('rjwPanel').classList.add('open');
         document.body.style.overflow = 'hidden';
-        if (window.Engagement) window.Engagement.track('rjw_open', { pause_id: pauseId, tab: tabKey });
     }
 
     /* ── CLOSE — saves current text, NEVER clears it ──── */
@@ -1045,42 +1068,54 @@ const RJW = (function() {
     /* ── PERSIST ───────────────────────────────────────── */
     function persistCurrent() {
         if (!activePauseId || !activeTabKey) return;
+        clearTimeout(inputTimer);
         var ta = document.getElementById(activeTabKey + '-ta');
         if (ta) saveStored(activePauseId, activeTabKey, ta.value);
     }
+
+    /* ── WRITE AS THE READER TYPES (debounced) ─────────── */
+    function wireInputs() {
+        ['reflect', 'journal', 'witness'].forEach(function (k) {
+            var ta = document.getElementById(k + '-ta');
+            if (!ta || ta.dataset.wopWired) return;
+            ta.dataset.wopWired = '1';
+            ta.addEventListener('input', function () {
+                if (!activePauseId || activeTabKey !== k) return;
+                clearTimeout(inputTimer);
+                inputTimer = setTimeout(function () { saveStored(activePauseId, k, ta.value); }, SAVE_DELAY_MS);
+            });
+        });
+        var cbDoc = document.getElementById('cb-document');
+        if (cbDoc && !cbDoc.dataset.wopWired) {
+            cbDoc.dataset.wopWired = '1';
+            cbDoc.addEventListener('change', function () {
+                if (!activePauseId) return;
+                var ta = document.getElementById('witness-ta');
+                if (ta) saveStored(activePauseId, 'witness', ta.value);
+            });
+        }
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wireInputs);
+    else wireInputs();
+
+    // "Clear my answers from this browser" in the Reflections panel
+    window.addEventListener('wop:reflections-cleared', function () {
+        clearTimeout(inputTimer);
+        ['reflect', 'journal', 'witness'].forEach(function (k) {
+            var ta = document.getElementById(k + '-ta');
+            if (ta) ta.value = '';
+        });
+        var cbDoc = document.getElementById('cb-document');
+        if (cbDoc) cbDoc.checked = false;
+    });
 
     /* ── SAVE BUTTON ───────────────────────────────────── */
     function saveResponse(tabKey) {
         var ta = document.getElementById(tabKey + '-ta');
         if (ta && activePauseId) {
+            clearTimeout(inputTimer);
             saveStored(activePauseId, tabKey, ta.value);
-
-            if (tabKey === 'witness') {
-                var cbDoc  = document.getElementById('cb-document');
-                var cbComm = document.getElementById('cb-community');
-                saveStoredBool(activePauseId, 'witness-include-document',  cbDoc  ? cbDoc.checked  : false);
-                saveStoredBool(activePauseId, 'witness-submit-community', cbComm ? cbComm.checked : false);
-            }
-
-            // Sync to backend if authenticated
-            if (window.API && API.isAuthenticated() && ta.value.trim()) {
-                var payload = {
-                    pause_id: activePauseId,
-                    chapter_slug: getChapterSlug(),
-                    tab_type: tabKey,
-                    response_text: ta.value,
-                    include_in_document: false
-                };
-                if (tabKey === 'witness') {
-                    var cbDocSync = document.getElementById('cb-document');
-                    payload.include_in_document = cbDocSync ? cbDocSync.checked : false;
-                }
-                API.savePauseResponse(payload).catch(function(err) {
-                    console.warn('[RJW] Backend save failed (will retry on next login):', err.message);
-                });
-            }
         }
-        if (window.Engagement) window.Engagement.track('rjw_save', { pause_id: activePauseId, tab: tabKey });
         var ind = document.getElementById('save-' + tabKey);
         if (ind) {
             ind.classList.add('visible');
@@ -1088,64 +1123,11 @@ const RJW = (function() {
         }
     }
 
-    function flushQueue() {
-        var slug = getChapterSlug();
-        if (!slug) return;
-        if (!window.API || !API.isAuthenticated()) return;
-
-        var prefix = STORAGE_PREFIX;
-        var queue = [];
-        for (var i = 0; i < localStorage.length; i++) {
-            var k = localStorage.key(i);
-            if (k && k.indexOf(prefix) === 0) queue.push(k);
-        }
-
-        function processNext() {
-            if (queue.length === 0) return;
-            var key = queue.shift();
-            var val = '';
-            try { val = localStorage.getItem(key) || ''; } catch(e) { processNext(); return; }
-            if (!val.trim() || val === 'true' || val === 'false') { processNext(); return; }
-
-            var remainder = key.substring(prefix.length);
-            var parts = remainder.split('::');
-            if (parts.length !== 2) { processNext(); return; }
-            var pauseId = parts[0];
-            var tabKey = parts[1];
-            if (['reflect','journal','witness'].indexOf(tabKey) === -1) { processNext(); return; }
-            // Articles reflections (aoid-*) are synced by the /articles/ page with
-            // their own chapter_slug; never flush them under a chapter slug.
-            if (pauseId.indexOf('aoid-') === 0) { processNext(); return; }
-
-            var payload = {
-                pause_id: pauseId,
-                chapter_slug: slug,
-                tab_type: tabKey,
-                response_text: val,
-                include_in_document: false
-            };
-
-            if (tabKey === 'witness') {
-                try {
-                    payload.include_in_document = localStorage.getItem(prefix + pauseId + '::witness-include-document') === 'true';
-                } catch(e) { /* silent */ }
-            }
-
-            API.savePauseResponse(payload).then(function() {
-                processNext();
-            }).catch(function(err) {
-                console.warn('[RJW] Flush failed for', pauseId, tabKey, err.message);
-                processNext();
-            });
-        }
-
-        processNext();
-    }
-
     /* ── CLEAR BUTTON ──────────────────────────────────── */
     function clearTA(tabKey) {
         var ta = document.getElementById(tabKey + '-ta');
         if (ta) ta.value = '';
+        clearTimeout(inputTimer);
         if (activePauseId) saveStored(activePauseId, tabKey, '');
     }
 
@@ -1161,8 +1143,7 @@ const RJW = (function() {
         switchTab: switchTab,
         switchReflectMode: switchReflectMode,
         saveResponse: saveResponse,
-        clearTA: clearTA,
-        flushQueue: flushQueue
+        clearTA: clearTA
     };
 
 })();

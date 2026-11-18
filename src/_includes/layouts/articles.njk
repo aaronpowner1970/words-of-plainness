@@ -705,96 +705,84 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('fontIncrease')?.addEventListener('click', () => window.WopFontSize?.increase());
 
     // ── R·J·W reflection persistence (Articles) ──────────────────────
-    // localStorage key  wop-rjw-{pauseId}::reflect  + POST /progress/pause-responses/
-    // for signed-in readers (chapter_slug "articles-of-interfaith-discipleship").
-    // The "aoid-" pauseId namespace buckets these under the Articles card in the
-    // journal and is skipped by the chapter R·J·W flush. A status line confirms
-    // saves and, for guests, invites sign-in (device-local until then).
+    // Kept only in this browser, through window.wopReflections
+    // (js/wop-reflections.js), in the "articles-of-interfaith-discipleship"
+    // bucket, one entry per Article (key "aoid:A01"), written as the reader
+    // types. Nothing is sent off the device (CODE-SITE-18). Answers saved
+    // under the old wop-rjw-aoid-* keys are carried over by the store itself.
     (function () {
         var ARTICLES_SLUG = 'articles-of-interfaith-discipleship';
+        var ARTICLES_TITLE = 'Articles of Interfaith Discipleship';
+        var R = window.wopReflections;
+        if (!R) return;
 
-        function pauseIdFor(ta) {
-            var articleId = (ta.dataset.rjwKey || '').replace(/^rjw-/, '');
-            return articleId ? 'aoid-' + articleId : null;
+        function articleIdFor(ta) {
+            return (ta.dataset.rjwKey || '').replace(/^rjw-/, '') || null;
         }
-        function storageKey(pauseId) { return 'wop-rjw-' + pauseId + '::reflect'; }
-
-        function syncToApi(pauseId, value) {
-            if (!window.API || !API.isAuthenticated()) return Promise.resolve('local');
-            if (!value || !value.trim()) return Promise.resolve('empty');
-            return API.savePauseResponse({
-                pause_id: pauseId, chapter_slug: ARTICLES_SLUG,
-                tab_type: 'reflect', response_text: value, include_in_document: false
-            }).then(function () { return 'synced'; });
+        function probe(articleId) { return { type: 'reflect', meta: { key: 'aoid:' + articleId } }; }
+        function promptFor(ta) {
+            var box = ta.closest('.article-rjw');
+            var p = box && box.querySelector('.rjw-prompt');
+            return p ? p.textContent.trim() : '';
+        }
+        function titleFor(ta) {
+            var label = ta.getAttribute('aria-label') || '';
+            return label.replace(/^Reflect on /, '');
+        }
+        function write(ta, articleId) {
+            try {
+                return R.put({
+                    chapterId: ARTICLES_SLUG,
+                    chapterTitle: ARTICLES_TITLE,
+                    type: 'reflect',
+                    promptLabel: promptFor(ta),
+                    content: ta.value,
+                    meta: { key: 'aoid:' + articleId, pauseId: 'aoid-' + articleId, article: articleId, section: titleFor(ta) }
+                });
+            } catch (e) { return null; }
         }
 
         function setStatus(el, state) {
             if (!el) return;
             el.className = 'rjw-status rjw-status--' + state;
-            if (state === 'saving')      el.innerHTML = 'Saving…';
-            else if (state === 'synced') el.innerHTML = 'Saved to your journal ✓';
-            else if (state === 'local')  el.innerHTML = 'Saved on this device — <button type="button" class="rjw-signin-link">sign in</button> to keep it in your journal';
-            else if (state === 'error')  el.innerHTML = 'Saved on this device · will sync to your journal when reconnected';
-            else                         el.innerHTML = '';
+            if (state === 'local') el.innerHTML = 'Saved on this device';
+            else                   el.innerHTML = '';
         }
 
         var textareas = document.querySelectorAll('.rjw-textarea');
 
         textareas.forEach(function (ta) {
-            var pauseId = pauseIdFor(ta);
-            if (!pauseId) return;
-            var key = storageKey(pauseId);
+            var articleId = articleIdFor(ta);
+            if (!articleId) return;
 
             var statusEl = document.createElement('p');
             statusEl.className = 'rjw-status';
             statusEl.setAttribute('aria-live', 'polite');
             ta.insertAdjacentElement('afterend', statusEl);
-            statusEl.addEventListener('click', function (e) {
-                if (!e.target.closest('.rjw-signin-link')) return;
-                var modal = document.getElementById('authModal');
-                if (modal) modal.style.display = 'flex';
-            });
 
-            // One-time migration from the pre-fix scheme (wop-rjw-A01, no ::reflect)
-            try {
-                if (!localStorage.getItem(key)) {
-                    var legacyKey = 'wop-rjw-' + (ta.dataset.rjwKey || '').replace(/^rjw-/, '');
-                    var legacyVal = localStorage.getItem(legacyKey);
-                    if (legacyVal && legacyVal.trim()) {
-                        localStorage.setItem(key, legacyVal);
-                        localStorage.removeItem(legacyKey);
-                    }
-                }
-            } catch (e) {}
-
-            try { ta.value = localStorage.getItem(key) || ''; } catch (e) {}
+            var saved = R.find(ARTICLES_SLUG, probe(articleId));
+            if (saved) {
+                ta.value = saved.content || '';
+                // Label an answer carried over from the old storage with its prompt.
+                if (!saved.promptLabel || !(saved.meta && saved.meta.section)) write(ta, articleId);
+            }
 
             var timer;
             ta.addEventListener('input', function () {
                 clearTimeout(timer);
-                if (window.API && API.isAuthenticated()) setStatus(statusEl, 'saving');
                 timer = setTimeout(function () {
-                    try { localStorage.setItem(key, ta.value); } catch (e) {}
-                    if (!ta.value.trim()) { setStatus(statusEl, ''); return; }
-                    syncToApi(pauseId, ta.value)
-                        .then(function (r) { setStatus(statusEl, r === 'synced' ? 'synced' : 'local'); })
-                        .catch(function () { setStatus(statusEl, 'error'); });
+                    var entry = write(ta, articleId);
+                    setStatus(statusEl, entry ? 'local' : '');
                 }, 600);
             });
         });
 
-        // Guest signs in while on this page → push entries up and confirm.
-        document.addEventListener('wop:auth-login', function () {
+        // "Clear my answers from this browser" in the Reflections panel
+        window.addEventListener('wop:reflections-cleared', function () {
             textareas.forEach(function (ta) {
-                var pauseId = pauseIdFor(ta);
-                if (!pauseId) return;
+                ta.value = '';
                 var statusEl = ta.nextElementSibling;
-                var val = '';
-                try { val = localStorage.getItem(storageKey(pauseId)) || ''; } catch (e) {}
-                if (!val.trim()) return;
-                syncToApi(pauseId, val).then(function () {
-                    if (statusEl && statusEl.classList.contains('rjw-status')) setStatus(statusEl, 'synced');
-                });
+                if (statusEl && statusEl.classList.contains('rjw-status')) setStatus(statusEl, '');
             });
         });
     })();
@@ -960,4 +948,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+{# The Reflections panel (CODE-SITE-18) #}
+{% set reflectionIds = ["articles-of-interfaith-discipleship"] %}{% set reflectionTitle = "Articles of Interfaith Discipleship" %}{% set reflectionFile = "articles" %}
+{% include "components/reflections-panel.njk" %}
 {% endblock %}

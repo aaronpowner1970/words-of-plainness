@@ -3,9 +3,9 @@
  * ---------------------------------------------------------------------------
  * Data: window.SJN (build-time derivation of src/_data/sjn/*.json; never hand-copied).
  * State: every key is namespaced sjn: — lens, map, codeit, convo, selfcheck-pre,
- *        selfcheck-post, goals, journal-queue. localStorage-first; when a WoP account is
- *        signed in, journal entries also sync through API.saveCardCommitment and the
- *        queue flushes on wop:auth-login (same pattern as card-chapter commitments).
+ *        selfcheck-post, goals. All of it stays in this browser. Journal entries are kept
+ *        only through window.wopReflections (js/wop-reflections.js) and are never sent off
+ *        the device (CODE-SITE-18; the old sjn:journal-queue is carried over there).
  * Numbers: the sjn-stat component is rendered at build (macros/sjn.njk); this script never
  *        computes a percentage.
  */
@@ -74,36 +74,9 @@
         promptLabel: opts.promptLabel, content: opts.content,
         meta: { cardId: opts.cardId, tier: 'seeking-jesus', confidence: opts.confidence || 0, module: MODULE } };
       if (window.wopReflections) window.wopReflections.save(entry);
-      var payload = { chapter_slug: CHAPTER_ID, card_id: opts.cardId, card_title: opts.promptLabel, tier: 'seeking-jesus',
-        commitment_text: opts.content, reflection_text: opts.reflection || '', confidence: opts.confidence || 0 };
-      if (window.API && API.isAuthenticated && API.isAuthenticated()) {
-        API.saveCardCommitment(payload).catch(function (err) {
-          console.warn('[SJN] journal sync failed; queued for next login:', err && err.message);
-          journal.enqueue(payload);
-        });
-      } else {
-        journal.enqueue(payload);
-      }
       return entry;
-    },
-    enqueue: function (payload) {
-      var q = get('journal-queue', []).filter(function (p) { return p.card_id !== payload.card_id; });
-      q.push(payload); set('journal-queue', q.slice(-50));
-    },
-    flush: function () {
-      if (!(window.API && API.isAuthenticated && API.isAuthenticated())) return;
-      var q = get('journal-queue', []);
-      if (!q.length) return;
-      var next = function () {
-        var p = q.shift();
-        if (!p) { set('journal-queue', []); return; }
-        API.saveCardCommitment(p).then(next).catch(function () { q.unshift(p); set('journal-queue', q); });
-      };
-      next();
     }
   };
-  document.addEventListener('wop:auth-login', journal.flush);
-  setTimeout(journal.flush, 1500);
 
   function copyText(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {

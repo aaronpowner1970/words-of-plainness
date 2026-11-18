@@ -4,7 +4,8 @@
  * Two-track-per-chapter player for the Narrations page.
  * Each chapter has a podcast track and a full narration track.
  * Auto-advance stays in the same lane (podcast->podcast, narration->narration).
- * Progress sync: authenticated users save to Django API; guests use localStorage.
+ * Progress: narration position and completions are kept only in this browser
+ * (localStorage). Nothing is sent off the device (CODE-SITE-18, spec 3.7).
  */
 
 var CDN_BASE = 'https://media.wordsofplainness.org/web/';
@@ -526,10 +527,6 @@ var NarrationPlayer = {
     // Progress Sync
     // =========================================
 
-    _isAuthenticated: function() {
-        return window.API && API.isAuthenticated();
-    },
-
     startProgressInterval: function() {
         this.stopProgressInterval();
         var self = this;
@@ -565,25 +562,6 @@ var NarrationPlayer = {
             localStorage.setItem(this.STORAGE_KEY_POSITION, position);
             localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
         }
-
-        // If authenticated, save to API (skip episodes — not chapter-backed)
-        if (!ch.isEpisode && this._isAuthenticated() && !this._saveInFlight) {
-            this._saveInFlight = true;
-            var self = this;
-            API.request('/progress/narration-progress/', {
-                method: 'POST',
-                body: JSON.stringify({
-                    chapter_slug: ch.slug,
-                    track_type: trackType,
-                    position_seconds: position,
-                    completed: !!completed
-                })
-            }).catch(function(err) {
-                console.warn('Progress save failed:', err.message);
-            }).finally(function() {
-                self._saveInFlight = false;
-            });
-        }
     },
 
     // =========================================
@@ -614,23 +592,7 @@ var NarrationPlayer = {
     },
 
     loadCheckmarks: function() {
-        var self = this;
-
-        if (this._isAuthenticated()) {
-            API.request('/progress/narration-completions/').then(function(data) {
-                if (data && data.completed_tracks) {
-                    data.completed_tracks.forEach(function(entry) {
-                        self.markTrackCompleted(entry.chapter_slug, entry.track_type);
-                    });
-                }
-            }).catch(function(err) {
-                console.warn('Failed to load completions:', err.message);
-                // Fall back to localStorage
-                self._loadLocalCheckmarks();
-            });
-        } else {
-            this._loadLocalCheckmarks();
-        }
+        this._loadLocalCheckmarks();
     },
 
     _loadLocalCheckmarks: function() {
@@ -656,72 +618,10 @@ var NarrationPlayer = {
     // =========================================
 
     loadResumePrompt: function() {
-        if (!this._isAuthenticated()) return;
-
-        var self = this;
-        API.request('/progress/narration-progress/').then(function(data) {
-            if (!data || !data.progress) return;
-            var p = data.progress;
-            if (p.completed || p.position_seconds <= 0) return;
-
-            // Find the chapter
-            var ch = null;
-            var chIndex = -1;
-            for (var i = 0; i < self.chapters.length; i++) {
-                if (self.chapters[i].slug === p.chapter_slug) {
-                    ch = self.chapters[i];
-                    chIndex = i;
-                    break;
-                }
-            }
-            if (!ch) return;
-
-            // Build the track label
-            var trackLabel;
-            if (p.track_type === 'narration') {
-                trackLabel = 'Full Narration';
-            } else {
-                var podcastLabelEl = ch.podcastRow.querySelector('.narration-track-label');
-                trackLabel = podcastLabelEl ? podcastLabelEl.textContent : 'Podcast Overview';
-            }
-
-            var timeStr = self.formatTime(p.position_seconds);
-
-            // Create resume element
-            var resume = document.createElement('div');
-            resume.className = 'narration-resume-prompt';
-            resume.id = 'narrationResumePrompt';
-            resume.innerHTML = '<span class="resume-text">Resume <strong>' + trackLabel +
-                '</strong> at ' + timeStr + '</span>' +
-                '<button class="resume-btn" type="button">Resume</button>' +
-                '<button class="resume-dismiss" type="button" aria-label="Dismiss">&times;</button>';
-
-            // Insert after the chapter header
-            var header = ch.group.querySelector('.narration-chapter-header');
-            if (header) {
-                header.parentNode.insertBefore(resume, header.nextSibling);
-            }
-
-            // Bind events
-            resume.querySelector('.resume-btn').addEventListener('click', function() {
-                self.dismissResume();
-                self.loadTrack(chIndex, p.track_type);
-                // Seek to saved position after metadata loads
-                var seekTo = p.position_seconds;
-                self.audio.addEventListener('loadedmetadata', function onMeta() {
-                    self.audio.removeEventListener('loadedmetadata', onMeta);
-                    if (seekTo < self.audio.duration) {
-                        self.audio.currentTime = seekTo;
-                    }
-                });
-                self.play();
-            });
-            resume.querySelector('.resume-dismiss').addEventListener('click', function() {
-                self.dismissResume();
-            });
-        }).catch(function(err) {
-            console.warn('Failed to load resume state:', err.message);
-        });
+        // The resume prompt read a signed-in reader's position from the server.
+        // This site has no accounts; the position kept in this browser is
+        // restored by the position persistence below, as it was for every
+        // reader without an account.
     },
 
     dismissResume: function() {

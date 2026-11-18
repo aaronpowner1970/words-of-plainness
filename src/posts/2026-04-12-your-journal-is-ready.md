@@ -10,6 +10,8 @@ layout: layouts/post.njk
 discordChannelId: "1488676127995334818"
 ---
 
+*Update, November 2026: This site no longer offers accounts. Your reflections now stay on your own device, where you can download them. See the [Privacy page](/privacy/).*
+
 Free account registration is now available on the Words of Plainness website. When you create an account, every response you write in the reflection, journal, and witness prompts throughout the site is saved to a secure personal journal tied to your account. You can print your journal entries anytime for personal scripture study, devotional use, or to keep as a record of your discipleship journey.
 
 No cost, no spam, no information shared—just a simple way to keep what the Spirit teaches you as you study.

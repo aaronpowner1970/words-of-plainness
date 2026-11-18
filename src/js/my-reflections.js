@@ -1,11 +1,12 @@
 /**
- * WORDS OF PLAINNESS — My Discipleship Journal
- * ==============================================
+ * WORDS OF PLAINNESS — My Discipleship Journal (/my-reflections/)
+ * ================================================================
  *
- * Unified dashboard for all reader engagement data:
- * - R·J·W pause-point responses (from Django API)
- * - Card-chapter commitments (from Django API)
- * - localStorage fallback for unauthenticated users
+ * The device-only journal page (CODE-SITE-18, SITE step 27, spec 3.6): every
+ * entry kept in this browser by window.wopReflections (js/wop-reflections.js),
+ * grouped by chapter or page. No sign-in, no sync, no server call. The
+ * Download and Clear actions are the Reflections panel's own
+ * (js/wop-reflections-panel.js, inline mode, placed in #djActions).
  */
 
 var CHAPTER_INFO = {
@@ -48,16 +49,6 @@ function djArticleLabel(slug, pauseId) {
     return ARTICLE_TITLES[(pauseId || '').replace(/^aoid-/, '')] || '';
 }
 
-function djGetChapterInfo(slug) {
-    if (CHAPTER_INFO[slug]) return CHAPTER_INFO[slug];
-    var parts = slug.replace(/^chapter-/, '').split('-');
-    var num = parseInt(parts[0]);
-    var title = parts.slice(1).map(function(w) {
-        return w.charAt(0).toUpperCase() + w.slice(1);
-    }).join(' ');
-    return { number: num || 0, title: title || slug };
-}
-
 function djEsc(str) {
     var div = document.createElement('div');
     div.textContent = str || '';
@@ -74,119 +65,61 @@ function djFormatDate(dateStr) {
 function djStarsHtml(n) {
     var s = '';
     for (var i = 1; i <= 5; i++) {
-        s += (i <= n) ? '\u2605' : '\u2606';
+        s += (i <= n) ? '★' : '☆';
     }
     return '<span class="dj-stars">' + s + '</span>';
 }
 
+var TYPE_LABELS = {
+    reflect: 'Reflect', journal: 'Journal', witness: 'Witness', question: 'My question',
+    reflection: 'Reflection', commitment: 'Commitment', 'pathway-choice': 'Pathway choice'
+};
+var NOT_YET_DOWNLOADED = 'Not yet downloaded';   // spec 6.4, word for word
+
+function djSection(e) {
+    var m = e.meta || {};
+    if (e.type === 'question') return '';
+    if (m.section) return m.section;
+    if (e.chapterId === 'articles-of-interfaith-discipleship' && m.pauseId) return djArticleLabel(e.chapterId, m.pauseId);
+    if (e.type === 'commitment' || (e.type === 'reflection' && m.cardId)) return (e.promptLabel || '').replace(/ \(Reflection\)$/, '');
+    return '';
+}
+
+function djPrompt(e) {
+    var m = e.meta || {};
+    if (e.type === 'question' || e.type === 'commitment' || (e.type === 'reflection' && m.cardId)) return '';
+    return e.promptLabel || '';
+}
+
 var Journal = {
-    rjwEntries: [],
-    commitments: [],
+    entries: [],
 
     init: function() {
-        var hasAPI = window.API && typeof API.isAuthenticated === 'function';
-        var isAuthed = hasAPI && API.isAuthenticated();
-
-        var signInBtn = document.getElementById('djSignIn');
-        if (signInBtn) {
-            signInBtn.addEventListener('click', function() {
-                var modal = document.getElementById('authModal');
-                if (modal) modal.style.display = 'flex';
-            });
-        }
-
-        if (isAuthed) {
-            document.getElementById('djAuthGate').style.display = 'none';
-            document.getElementById('djContent').style.display = 'block';
-            this.loadFromAPI();
-        } else {
-            this.loadFromLocalStorage();
-        }
-
-        if (hasAPI) {
-            var self = this;
-            this._authCheck = setInterval(function() {
-                if (API.isAuthenticated() && document.getElementById('djContent').style.display === 'none') {
-                    clearInterval(self._authCheck);
-                    document.getElementById('djAuthGate').style.display = 'none';
-                    document.getElementById('djContent').style.display = 'block';
-                    self.loadFromAPI();
-                }
-            }, 500);
-        }
-    },
-
-    loadFromAPI: function() {
         var self = this;
-        Promise.all([
-            API.getAllPauseResponses().catch(function() { return []; }),
-            API.getAllCardCommitments().catch(function() { return []; })
-        ]).then(function(results) {
-            var rjwRaw = results[0];
-            var ccRaw = results[1];
-            self.rjwEntries = Array.isArray(rjwRaw) ? rjwRaw : (rjwRaw && rjwRaw.results ? rjwRaw.results : []);
-            self.commitments = Array.isArray(ccRaw) ? ccRaw : (ccRaw && ccRaw.results ? ccRaw.results : []);
-            document.getElementById('djLoading').style.display = 'none';
-            self.render();
-        }).catch(function(err) {
-            console.error('[Journal] Load failed:', err);
-            document.getElementById('djLoading').textContent = 'Failed to load. Please refresh.';
+        this.load();
+        window.addEventListener('wop:reflections-changed', function () { self.load(); });
+        window.addEventListener('storage', function (e) {
+            if (!e.key || e.key.indexOf('wop-reflection-') === 0) self.load();
         });
     },
 
-    loadFromLocalStorage: function() {
-        var rjw = [];
-        for (var i = 0; i < localStorage.length; i++) {
-            var k = localStorage.key(i);
-            if (k && k.indexOf('wop-rjw-') === 0) {
-                var val = localStorage.getItem(k);
-                if (!val || !val.trim() || val === 'true' || val === 'false') continue;
-                var remainder = k.substring(8);
-                var parts = remainder.split('::');
-                if (parts.length !== 2) continue;
-                var tabKey = parts[1];
-                if (['reflect','journal','witness'].indexOf(tabKey) === -1) continue;
-                var pauseId = parts[0];
-                rjw.push({
-                    pause_id: pauseId,
-                    chapter_slug: pauseId.indexOf('aoid-') === 0 ? 'articles-of-interfaith-discipleship' : 'unknown',
-                    tab_type: tabKey,
-                    response_text: val,
-                    include_in_document: localStorage.getItem('wop-rjw-' + pauseId + '::witness-include-document') === 'true',
-                    updated_at: null
-                });
-            }
-        }
-        this.rjwEntries = rjw;
-
-        this.commitments = [];
-        if (window.wopReflections) {
-            var all = wopReflections.loadAll();
-            var self = this;
-            all.forEach(function(e) {
-                if (e.type === 'commitment') {
-                    self.commitments.push({
-                        chapter_slug: e.chapterId || '',
-                        card_id: (e.meta && e.meta.cardId) || '',
-                        card_title: e.promptLabel || '',
-                        tier: (e.meta && e.meta.tier) || '',
-                        commitment_text: e.content || '',
-                        reflection_text: '',
-                        confidence: (e.meta && e.meta.confidence) || 0,
-                        updated_at: e.timestamp || null
-                    });
-                }
-            });
-        }
-
-        if (this.rjwEntries.length === 0 && this.commitments.length === 0) {
-            return;
-        }
-
-        document.getElementById('djAuthGate').style.display = 'none';
-        document.getElementById('djContent').style.display = 'block';
-        document.getElementById('djLoading').style.display = 'none';
+    load: function() {
+        this.entries = window.wopReflections ? window.wopReflections.loadAll() : [];
         this.render();
+    },
+
+    groups: function() {
+        var R = window.wopReflections;
+        var byId = {};
+        this.entries.forEach(function (e) {
+            var gid = R.groupIdFor(e.chapterId);
+            if (!byId[gid]) byId[gid] = { id: gid, title: R.titleFor(gid, e.chapterTitle), entries: [] };
+            byId[gid].entries.push(e);
+        });
+        return Object.keys(byId).sort(function (a, b) {
+            var d = R.orderFor(a) - R.orderFor(b);
+            return d !== 0 ? d : byId[a].title.localeCompare(byId[b].title);
+        }).map(function (k) { return byId[k]; });
     },
 
     render: function() {
@@ -196,111 +129,66 @@ var Journal = {
     },
 
     renderStats: function() {
-        var totalRjw = this.rjwEntries.filter(function(r) {
-            return r.response_text && r.response_text.trim();
-        }).length;
-        var totalCC = this.commitments.length;
-        var total = totalRjw + totalCC;
-
+        var R = window.wopReflections;
         var slugs = {};
-        this.rjwEntries.forEach(function(r) { if (r.chapter_slug) slugs[r.chapter_slug] = true; });
-        this.commitments.forEach(function(c) { if (c.chapter_slug) slugs[c.chapter_slug] = true; });
-        var chapterCount = Object.keys(slugs).filter(function(s) { return !(CHAPTER_INFO[s] && CHAPTER_INFO[s].standalone); }).length;
+        this.entries.forEach(function (e) {
+            var gid = R.groupIdFor(e.chapterId);
+            if (CHAPTER_INFO[gid] && !CHAPTER_INFO[gid].standalone) slugs[gid] = true;
+        });
+        var chapterCount = Object.keys(slugs).length;
+        var newest = this.entries.length ? this.entries[0].timestamp : null;
 
-        var allDates = [];
-        this.rjwEntries.forEach(function(r) { if (r.updated_at) allDates.push(r.updated_at); });
-        this.commitments.forEach(function(c) { if (c.updated_at) allDates.push(c.updated_at); });
-        allDates.sort().reverse();
-        var recent = allDates.length > 0 ? djFormatDate(allDates[0]) : '\u2014';
-
-        document.getElementById('statTotal').textContent = total;
+        document.getElementById('statTotal').textContent = this.entries.length;
         document.getElementById('statChapters').textContent = chapterCount + ' of ' + Object.keys(CHAPTER_INFO).filter(function(k) { return !CHAPTER_INFO[k].standalone; }).length;
-        document.getElementById('statRecent').textContent = recent;
+        document.getElementById('statRecent').textContent = newest ? djFormatDate(newest) : '—';
     },
 
     renderChapters: function() {
+        var R = window.wopReflections;
         var accordion = document.getElementById('chapterAccordion');
         var emptyMsg = document.getElementById('djEmpty');
+        var groups = this.groups();
 
-        var byChapter = {};
-        this.rjwEntries.forEach(function(r) {
-            var s = r.chapter_slug || 'unknown';
-            if (!byChapter[s]) byChapter[s] = { rjw: [], commitments: [] };
-            if (r.response_text && r.response_text.trim()) {
-                byChapter[s].rjw.push(r);
-            }
-        });
-        this.commitments.forEach(function(c) {
-            var s = c.chapter_slug || 'unknown';
-            if (!byChapter[s]) byChapter[s] = { rjw: [], commitments: [] };
-            byChapter[s].commitments.push(c);
-        });
-
-        var slugs = Object.keys(byChapter).sort(function(a, b) {
-            return (djGetChapterInfo(a).number || 0) - (djGetChapterInfo(b).number || 0);
-        });
-
-        if (slugs.length === 0) {
+        if (groups.length === 0) {
             emptyMsg.style.display = 'block';
             accordion.innerHTML = '';
             accordion.appendChild(emptyMsg);
             return;
         }
-
         emptyMsg.style.display = 'none';
 
-        var html = slugs.map(function(slug) {
-            var info = djGetChapterInfo(slug);
-            var data = byChapter[slug];
-            var entryCount = data.rjw.length + data.commitments.length;
+        var openIds = {};
+        Array.prototype.forEach.call(accordion.querySelectorAll('.dj-chapter-card.open'), function (c) {
+            openIds[c.getAttribute('data-chapter')] = true;
+        });
 
-            var entriesHtml = '';
+        var html = groups.map(function (g) {
+            var n = g.entries.length;
+            var entriesHtml = g.entries.map(function (e) {
+                var type = TYPE_LABELS[e.type] ? e.type : 'reflection';
+                var cls = { reflect: 'reflect', journal: 'journal', witness: 'witness', commitment: 'commitment', question: 'question' }[type] || 'reflect';
+                var label = TYPE_LABELS[type];
+                var sec = djSection(e);
+                if (sec) label += ' · ' + sec;
+                var out = '<div class="dj-entry dj-entry-' + cls + '">';
+                out += '<div class="dj-entry-label ' + cls + '">' + djEsc(label) + '</div>';
+                var pr = djPrompt(e);
+                if (pr) out += '<div class="dj-entry-prompt">' + djEsc(pr) + '</div>';
+                out += '<div class="dj-entry-text">' + djEsc(e.content) + '</div>';
+                if (e.type === 'commitment' && e.meta && e.meta.confidence > 0) {
+                    out += '<div class="dj-commitment-meta">Confidence: ' + djStarsHtml(e.meta.confidence) + '</div>';
+                }
+                out += '<div class="dj-entry-date">' + djEsc(djFormatDate(e.timestamp));
+                if (R.isPending(e)) out += ' <span class="dj-entry-marker">' + NOT_YET_DOWNLOADED + '</span>';
+                out += '</div></div>';
+                return out;
+            }).join('');
 
-            if (data.rjw.length > 0) {
-                var byPause = {};
-                data.rjw.forEach(function(r) {
-                    var pid = r.pause_id || 'default';
-                    if (!byPause[pid]) byPause[pid] = [];
-                    byPause[pid].push(r);
-                });
-                Object.keys(byPause).forEach(function(pid) {
-                    entriesHtml += '<div class="dj-entry-group">';
-                    var artLabel = djArticleLabel(slug, pid);
-                    entriesHtml += '<div class="dj-entry-group-label">' + (artLabel ? djEsc(artLabel) : 'Reflect \u00b7 Journal \u00b7 Witness') + '</div>';
-                    byPause[pid].forEach(function(r) {
-                        var cls = 'dj-entry dj-entry-' + r.tab_type;
-                        entriesHtml += '<div class="' + cls + '">';
-                        entriesHtml += '<div class="dj-entry-label ' + r.tab_type + '">' + r.tab_type + '</div>';
-                        entriesHtml += '<div class="dj-entry-text">' + djEsc(r.response_text) + '</div>';
-                        entriesHtml += '</div>';
-                    });
-                    entriesHtml += '</div>';
-                });
-            }
-
-            if (data.commitments.length > 0) {
-                entriesHtml += '<div class="dj-entry-group">';
-                entriesHtml += '<div class="dj-entry-group-label">Discipleship Commitments</div>';
-                data.commitments.forEach(function(c) {
-                    entriesHtml += '<div class="dj-entry dj-entry-commitment">';
-                    entriesHtml += '<div class="dj-entry-label commitment">' + djEsc(c.card_title || c.card_id) + '</div>';
-                    entriesHtml += '<div class="dj-entry-text">' + djEsc(c.commitment_text) + '</div>';
-                    if (c.reflection_text && c.reflection_text.trim()) {
-                        entriesHtml += '<div class="dj-entry-text" style="margin-top:6px;opacity:0.8;font-style:italic;">' + djEsc(c.reflection_text) + '</div>';
-                    }
-                    if (c.confidence > 0) {
-                        entriesHtml += '<div class="dj-commitment-meta">Confidence: ' + djStarsHtml(c.confidence) + '</div>';
-                    }
-                    entriesHtml += '</div>';
-                });
-                entriesHtml += '</div>';
-            }
-
-            return '<div class="dj-chapter-card" data-chapter="' + djEsc(slug) + '">' +
+            return '<div class="dj-chapter-card' + (openIds[g.id] ? ' open' : '') + '" data-chapter="' + djEsc(g.id) + '">' +
                 '<div class="dj-chapter-header" onclick="Journal.toggleChapter(this)">' +
                     '<div>' +
-                        '<div class="dj-chapter-title">' + (info.standalone ? '' : 'Chapter ' + info.number + ': ') + djEsc(info.title) + '</div>' +
-                        '<div class="dj-chapter-meta">' + entryCount + ' entr' + (entryCount === 1 ? 'y' : 'ies') + '</div>' +
+                        '<div class="dj-chapter-title">' + djEsc(g.title) + '</div>' +
+                        '<div class="dj-chapter-meta">' + n + ' entr' + (n === 1 ? 'y' : 'ies') + '</div>' +
                     '</div>' +
                     '<svg class="dj-chapter-toggle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>' +
                 '</div>' +
@@ -311,31 +199,15 @@ var Journal = {
         accordion.innerHTML = html;
     },
 
+    // The printable "My Discipleship Document" (Print / Save as PDF), as before:
+    // Reflect and Journal for each pause, the Witness only when the reader ticked
+    // "Include this witness in my portable discipleship document".
     renderDocument: function() {
         var container = document.getElementById('printDocContent');
         if (!container) return;
+        var groups = this.groups();
 
-        var chapters = {};
-
-        this.rjwEntries.forEach(function(r) {
-            if (!r.response_text || !r.response_text.trim()) return;
-            var s = r.chapter_slug || 'unknown';
-            if (!chapters[s]) chapters[s] = { rjw: {}, commitments: [] };
-            if (!chapters[s].rjw[r.pause_id]) chapters[s].rjw[r.pause_id] = {};
-            chapters[s].rjw[r.pause_id][r.tab_type] = r;
-        });
-
-        this.commitments.forEach(function(c) {
-            var s = c.chapter_slug || 'unknown';
-            if (!chapters[s]) chapters[s] = { rjw: {}, commitments: [] };
-            chapters[s].commitments.push(c);
-        });
-
-        var slugs = Object.keys(chapters).sort(function(a, b) {
-            return (djGetChapterInfo(a).number || 0) - (djGetChapterInfo(b).number || 0);
-        });
-
-        if (slugs.length === 0) {
+        if (groups.length === 0) {
             container.innerHTML = '<p class="dj-empty">No entries recorded yet.</p>';
             return;
         }
@@ -343,58 +215,69 @@ var Journal = {
         var html = '';
         html += '<div class="pd-doc-header">';
         html += '<h3 class="pd-doc-title">My Discipleship Document</h3>';
-        html += '<p class="pd-doc-subtitle">Words of Plainness \u00b7 Personal Study Record</p>';
+        html += '<p class="pd-doc-subtitle">Words of Plainness · Personal Study Record</p>';
         html += '</div>';
 
-        slugs.forEach(function(slug) {
-            var info = djGetChapterInfo(slug);
-            var data = chapters[slug];
+        groups.forEach(function (g) {
+            var info = CHAPTER_INFO[g.id] || {};
             html += '<div class="pd-chapter">';
-            html += '<h4 class="pd-chapter-title">' + (info.standalone ? '' : 'Chapter ' + info.number + ' \u00b7 ') + djEsc(info.title) + '</h4>';
+            html += '<h4 class="pd-chapter-title">' + djEsc(g.title) + '</h4>';
 
-            var pauseIds = Object.keys(data.rjw).sort();
-            pauseIds.forEach(function(pid) {
-                var tabs = data.rjw[pid];
-                var artLabel = djArticleLabel(slug, pid);
-                if (artLabel) {
-                    html += '<div class="pd-pause-label">' + djEsc(artLabel) + '</div>';
-                } else if (pauseIds.length > 1) {
-                    var label = pid.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
-                    html += '<div class="pd-pause-label">' + djEsc(label) + '</div>';
+            var pauses = {}, pauseOrder = [], others = [], questions = [];
+            g.entries.slice().reverse().forEach(function (e) {
+                if (['reflect', 'journal', 'witness'].indexOf(e.type) !== -1) {
+                    var pid = (e.meta && (e.meta.pauseId || e.meta.key)) || 'default';
+                    if (!pauses[pid]) { pauses[pid] = { section: djSection(e) }; pauseOrder.push(pid); }
+                    pauses[pid][e.type] = e;
+                } else if (e.type === 'question') {
+                    questions.push(e);
+                } else {
+                    others.push(e);
                 }
-                // Reflect
-                if (tabs.reflect && tabs.reflect.response_text && tabs.reflect.response_text.trim()) {
+            });
+
+            pauseOrder.forEach(function (pid) {
+                var tabs = pauses[pid];
+                if (tabs.section) html += '<div class="pd-pause-label">' + djEsc(tabs.section) + '</div>';
+                if (tabs.reflect && tabs.reflect.content.trim()) {
                     html += '<div class="pd-entry pd-journal"><div class="pd-entry-label">Reflect</div>';
-                    html += '<div class="pd-entry-text">' + djEsc(tabs.reflect.response_text) + '</div></div>';
+                    html += '<div class="pd-entry-text">' + djEsc(tabs.reflect.content) + '</div></div>';
                 }
-                if (tabs.journal && tabs.journal.response_text && tabs.journal.response_text.trim()) {
+                if (tabs.journal && tabs.journal.content.trim()) {
                     html += '<div class="pd-entry pd-journal"><div class="pd-entry-label">Journal</div>';
-                    html += '<div class="pd-entry-text">' + djEsc(tabs.journal.response_text) + '</div></div>';
+                    html += '<div class="pd-entry-text">' + djEsc(tabs.journal.content) + '</div></div>';
                 } else if (!info.standalone) {
                     html += '<div class="pd-entry pd-journal pd-empty"><div class="pd-entry-label">Journal</div>';
                     html += '<div class="pd-entry-text">No journal entry for this section.</div></div>';
                 }
-                if (tabs.witness && tabs.witness.include_in_document && tabs.witness.response_text && tabs.witness.response_text.trim()) {
+                if (tabs.witness && tabs.witness.meta && tabs.witness.meta.includeInDocument && tabs.witness.content.trim()) {
                     html += '<div class="pd-entry pd-witness"><div class="pd-entry-label">Witness</div>';
-                    html += '<div class="pd-entry-text">' + djEsc(tabs.witness.response_text) + '</div></div>';
+                    html += '<div class="pd-entry-text">' + djEsc(tabs.witness.content) + '</div></div>';
                 } else if (!info.standalone) {
                     html += '<div class="pd-entry pd-witness pd-empty"><div class="pd-entry-label">Witness</div>';
                     html += '<div class="pd-entry-text">No witness entry for this section.</div></div>';
                 }
             });
 
-            if (data.commitments.length > 0) {
+            if (others.length > 0) {
                 html += '<div class="pd-pause-label">Discipleship Commitments</div>';
-                data.commitments.forEach(function(c) {
-                    html += '<div class="pd-entry pd-commitment"><div class="pd-entry-label">' + djEsc(c.card_title || c.card_id) + '</div>';
-                    html += '<div class="pd-entry-text">' + djEsc(c.commitment_text) + '</div></div>';
+                others.forEach(function (c) {
+                    var label = djSection(c) || TYPE_LABELS[c.type] || '';
+                    if (c.type === 'reflection' && c.meta && c.meta.cardId) label += ' · ' + TYPE_LABELS.reflection;
+                    html += '<div class="pd-entry pd-commitment"><div class="pd-entry-label">' + djEsc(label) + '</div>';
+                    html += '<div class="pd-entry-text">' + djEsc(c.content) + '</div></div>';
+                });
+            }
+
+            if (questions.length > 0) {
+                html += '<div class="pd-pause-label">My questions</div>';
+                questions.forEach(function (q) {
+                    html += '<div class="pd-entry pd-journal"><div class="pd-entry-text">' + djEsc(q.content) + '</div></div>';
                 });
             }
 
             html += '</div>';
         });
-
-
 
         container.innerHTML = html;
     },
@@ -407,5 +290,5 @@ var Journal = {
 window.Journal = Journal;
 
 document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() { Journal.init(); }, 150);
+    Journal.init();
 });

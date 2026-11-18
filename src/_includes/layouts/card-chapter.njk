@@ -426,7 +426,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="/js/wop-reflections.js"></script>
 <script src="/js/card-chapter.js"></script>
 <script src="/js/read-aloud.js"></script>
 {% if ministryMusic.ambient and ministryMusic.ambient.length > 0 %}
@@ -442,4 +441,7 @@
 <script>
     document.body.dataset.chapter = '{{ chapterId }}';
 </script>
+{# The Reflections panel (CODE-SITE-18) #}
+{% set reflectionIds = [chapterId] %}{% set reflectionTitle = "Chapter " + chapter + ": " + title %}{% set reflectionFile = slug %}
+{% include "components/reflections-panel.njk" %}
 {% endblock %}

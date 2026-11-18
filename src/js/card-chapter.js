@@ -148,25 +148,6 @@
                     }
                 }
 
-                // Sync commitment to backend API
-                if (window.API && API.isAuthenticated()) {
-                    var commitPayload = {
-                        chapter_slug: chapterId,
-                        card_id: 'card-' + card,
-                        card_title: cardTitle,
-                        tier: selected.value,
-                        commitment_text: labelText,
-                        reflection_text: '',
-                        confidence: confidence
-                    };
-                    var reflArea = document.querySelector('#card-' + card + ' .reflection-area');
-                    if (reflArea && reflArea.value.trim()) {
-                        commitPayload.reflection_text = reflArea.value.trim();
-                    }
-                    API.saveCardCommitment(commitPayload).catch(function(err) {
-                        console.warn('[CardChapter] Backend save failed:', err.message);
-                    });
-                }
             } catch (e) {
                 // storage unavailable — fail silently
             }
@@ -203,24 +184,6 @@
                         localStorage.setItem('wop-reflection-' + chapterId, JSON.stringify(entries));
                     }
 
-                    // Sync confidence to backend
-                    if (window.API && API.isAuthenticated()) {
-                        entries.forEach(function(e) {
-                            if (e.type === 'commitment' && e.meta && e.meta.cardId) {
-                                API.saveCardCommitment({
-                                    chapter_slug: chapterId,
-                                    card_id: e.meta.cardId,
-                                    card_title: e.promptLabel || '',
-                                    tier: e.meta.tier || '',
-                                    commitment_text: e.content || '',
-                                    reflection_text: '',
-                                    confidence: rating
-                                }).catch(function(err) {
-                                    console.warn('[CardChapter] Confidence sync failed:', err.message);
-                                });
-                            }
-                        });
-                    }
                 } catch (e) {
                     // fail silently
                 }
@@ -311,6 +274,37 @@
     }
 
     document.addEventListener('DOMContentLoaded', restoreSavedState);
+
+    // ---- Card reflections are written to the device as the reader types ----
+    // (debounced; through the one store, js/wop-reflections.js; CODE-SITE-18)
+    document.querySelectorAll('.reflection-area').forEach(function (area) {
+        var timer;
+        area.addEventListener('input', function () {
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                if (!window.wopReflections) return;
+                var cardEl = area.closest('[id^="card-"]');
+                var m = cardEl && cardEl.id.match(/^card-(\d+)$/);
+                if (!m) return;
+                var h3 = cardEl.querySelector('.card-header-text h3');
+                var cardTitle = h3 ? h3.textContent : '';
+                try {
+                    window.wopReflections.put({
+                        chapterId: document.body.dataset.chapter || 'unknown',
+                        type: 'reflection',
+                        promptLabel: cardTitle + ' (Reflection)',
+                        content: area.value.trim(),
+                        meta: { cardId: 'card-' + m[1] }
+                    });
+                } catch (e) { /* storage unavailable */ }
+            }, 600);
+        });
+    });
+
+    // "Clear my answers from this browser" in the Reflections panel
+    window.addEventListener('wop:reflections-cleared', function () {
+        document.querySelectorAll('.reflection-area').forEach(function (a) { a.value = ''; });
+    });
 
     // ---- Learning Tools Dropdowns (top + bottom) ----
     var dropdownBtn = document.getElementById('btnLearningTools');
@@ -542,31 +536,3 @@ function ccZoom(dir) {
         }, { passive: false });
     }
 }());
-
-// ---- Flush card commitments to API on login ----
-function flushCardCommitments() {
-    if (!window.API || !API.isAuthenticated() || !window.wopReflections) return;
-    var all = window.wopReflections.loadAll();
-    var commitments = all.filter(function(e) { return e.type === 'commitment'; });
-    if (commitments.length === 0) return;
-
-    var queue = commitments.slice();
-    function processNext() {
-        if (queue.length === 0) return;
-        var e = queue.shift();
-        API.saveCardCommitment({
-            chapter_slug: e.chapterId || '',
-            card_id: (e.meta && e.meta.cardId) || '',
-            card_title: e.promptLabel || '',
-            tier: (e.meta && e.meta.tier) || '',
-            commitment_text: e.content || '',
-            reflection_text: '',
-            confidence: (e.meta && e.meta.confidence) || 0
-        }).then(processNext).catch(function(err) {
-            console.warn('[CardChapter] Flush failed:', e.meta && e.meta.cardId, err.message);
-            processNext();
-        });
-    }
-    processNext();
-}
-window.flushCardCommitments = flushCardCommitments;

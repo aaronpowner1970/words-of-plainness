@@ -2,105 +2,35 @@
  * WORDS OF PLAINNESS - API Client
  * ================================
  *
- * Handles communication with the Django API on PythonAnywhere.
- * - Authentication (login, logout, register) with JWT access/refresh tokens
- * - Automatic token refresh on 401
- * - Reflection storage and retrieval
- * - User profile management
+ * Sends the site's forms to the Django API on PythonAnywhere, and nothing else:
+ * - submitContact: the contact form (/connect/) and the AoID corrections form
+ * - subscribeNewsletter: the newsletter forms
+ *
+ * This site has no accounts. No sign-in token is sent with any form, and no
+ * reflection, journal entry, progress or engagement data is sent anywhere
+ * (CODE-SITE-18, SITE step 27; rulings SITE-JOURNAL-DEVICE-ONLY,
+ * SITE-ACCOUNTS-RETIRE, SITE-JOURNAL-FORM-TOKEN).
  */
 
 const API = {
     baseUrl: '',
-    accessToken: null,
-    refreshToken: null,
-    user: null,
-    _refreshing: null, // mutex for token refresh
 
     init(baseUrl) {
         this.baseUrl = baseUrl || '';
-
-        // Load tokens — support both new JWT keys and legacy single-token key
-        this.accessToken = localStorage.getItem('wop_access_token')
-            || localStorage.getItem('wop-auth-token')
-            || null;
-        this.refreshToken = localStorage.getItem('wop_refresh_token') || null;
-        this.user = JSON.parse(localStorage.getItem('wop-user') || 'null');
-
-        // Migrate legacy key if present
-        if (localStorage.getItem('wop-auth-token') && !localStorage.getItem('wop_access_token')) {
-            localStorage.setItem('wop_access_token', this.accessToken);
-            localStorage.removeItem('wop-auth-token');
-        }
-
-        this.updateUIForAuth();
-        this.setupUserMenu();
-
-        console.log('API client initialized', this.baseUrl ? `→ ${this.baseUrl}` : '(no API URL)');
-    },
-
-    setupUserMenu() {
-        const toggle = document.getElementById('userMenuToggle');
-        const dropdown = document.getElementById('userDropdown');
-
-        if (toggle && dropdown) {
-            toggle.addEventListener('click', () => {
-                dropdown.classList.toggle('open');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
-                    dropdown.classList.remove('open');
-                }
-            });
-        }
-
-        document.getElementById('logoutBtn')?.addEventListener('click', () => {
-            this.logout();
-        });
-    },
-
-    isAuthenticated() {
-        return !!this.accessToken;
-    },
-
-    getHeaders() {
-        const headers = { 'Content-Type': 'application/json' };
-
-        if (this.accessToken) {
-            // Support both JWT ("Bearer") and DRF TokenAuth ("Token") formats.
-            // JWT tokens contain dots; legacy DRF tokens do not.
-            const prefix = this.accessToken.includes('.') ? 'Bearer' : 'Token';
-            headers['Authorization'] = `${prefix} ${this.accessToken}`;
-        }
-
-        return headers;
     },
 
     /**
-     * Core request method with automatic 401 retry via token refresh.
+     * POST a form's data to the API and return the parsed reply.
      */
-    async request(endpoint, options = {}, _retried = false) {
+    async request(endpoint, options = {}) {
         if (!this.baseUrl) {
             throw new Error('API not configured');
         }
 
-        const url = `${this.baseUrl}${endpoint}`;
-
-        const response = await fetch(url, {
+        const response = await fetch(`${this.baseUrl}${endpoint}`, {
             ...options,
-            headers: this.getHeaders()
+            headers: { 'Content-Type': 'application/json' }
         });
-
-        // On 401, try refreshing the token once
-        if (response.status === 401 && !_retried && this.refreshToken) {
-            const refreshed = await this.tryRefreshToken();
-            if (refreshed) {
-                return this.request(endpoint, options, true);
-            }
-            // Refresh failed — force logout
-            this.logout();
-            throw new Error('Session expired. Please sign in again.');
-        }
 
         if (!response.ok) {
             const body = await response.json().catch(() => ({}));
@@ -144,155 +74,6 @@ const API = {
         }
     },
 
-    /**
-     * Attempt to refresh the access token using the refresh token.
-     */
-    async tryRefreshToken() {
-        // Prevent concurrent refresh attempts
-        if (this._refreshing) return this._refreshing;
-
-        this._refreshing = (async () => {
-            try {
-                const response = await fetch(`${this.baseUrl}/token/refresh/`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ refresh: this.refreshToken })
-                });
-
-                if (!response.ok) return false;
-
-                const data = await response.json();
-                this.accessToken = data.access;
-                localStorage.setItem('wop_access_token', data.access);
-
-                // Some backends rotate the refresh token too
-                if (data.refresh) {
-                    this.refreshToken = data.refresh;
-                    localStorage.setItem('wop_refresh_token', data.refresh);
-                }
-
-                return true;
-            } catch {
-                return false;
-            } finally {
-                this._refreshing = null;
-            }
-        })();
-
-        return this._refreshing;
-    },
-
-    // =========================================
-    // Authentication
-    // =========================================
-
-    async login(email, password) {
-        const data = await this.request('/accounts/login/', {
-            method: 'POST',
-            body: JSON.stringify({ username: email, password })
-        });
-
-        this.setAuth(data);
-        return data;
-    },
-
-    async register({ username, email, password, password_confirm, display_name }) {
-        const data = await this.request('/accounts/register/', {
-            method: 'POST',
-            body: JSON.stringify({ username, email, password, password_confirm, display_name })
-        });
-
-        this.setAuth(data);
-        return data;
-    },
-
-    logout() {
-        this.accessToken = null;
-        this.refreshToken = null;
-        this.user = null;
-        localStorage.removeItem('wop_access_token');
-        localStorage.removeItem('wop_refresh_token');
-        localStorage.removeItem('wop-auth-token'); // legacy cleanup
-        localStorage.removeItem('wop-user');
-        this.updateUIForAuth();
-    },
-
-    /**
-     * Save auth data from login/register response.
-     * Supports both JWT format ({ access, refresh, user })
-     * and DRF TokenAuth format ({ token, user }).
-     */
-    setAuth(data) {
-        if (data.access) {
-            // JWT format
-            this.accessToken = data.access;
-            this.refreshToken = data.refresh || null;
-            localStorage.setItem('wop_access_token', data.access);
-            if (data.refresh) localStorage.setItem('wop_refresh_token', data.refresh);
-        } else if (data.token) {
-            // Legacy DRF TokenAuth format
-            this.accessToken = data.token;
-            localStorage.setItem('wop_access_token', data.token);
-        }
-
-        if (data.user) {
-            this.user = data.user;
-            localStorage.setItem('wop-user', JSON.stringify(data.user));
-        }
-
-        this.updateUIForAuth();
-
-        if (window.Engagement) window.Engagement.flushQueue();
-        if (window.RJW && typeof RJW.flushQueue === 'function') RJW.flushQueue();
-        if (typeof window.flushCardCommitments === 'function') window.flushCardCommitments();
-        document.dispatchEvent(new CustomEvent('wop:auth-login', { detail: { user: this.user } }));
-    },
-
-    // =========================================
-    // UI Updates
-    // =========================================
-
-    updateUIForAuth() {
-        const authButtons = document.getElementById('navAuthButtons');
-        const userMenu = document.getElementById('userMenu');
-
-        // Mobile menu auth elements
-        const mobileLoggedOut = document.getElementById('mobileAuthLoggedOut');
-        const mobileLoggedIn = document.getElementById('mobileAuthLoggedIn');
-        const mobileUsername = document.getElementById('mobileUsername');
-        const mobileAvatar = document.getElementById('mobileUserAvatar');
-
-        if (this.isAuthenticated() && this.user) {
-            authButtons?.classList.add('hidden');
-            userMenu?.classList.remove('hidden');
-
-            const displayName = this.user.name || this.user.email || 'User';
-            const email = this.user.email || '';
-            const initial = displayName.charAt(0).toUpperCase();
-
-            const userName = document.getElementById('userName');
-            const userAvatar = document.getElementById('userAvatar');
-            const userDropdownName = document.getElementById('userDropdownName');
-            const userDropdownEmail = document.getElementById('userDropdownEmail');
-
-            if (userName) userName.textContent = displayName;
-            if (userAvatar) userAvatar.textContent = initial;
-            if (userDropdownName) userDropdownName.textContent = displayName;
-            if (userDropdownEmail) userDropdownEmail.textContent = email;
-
-            mobileLoggedOut?.classList.add('hidden');
-            mobileLoggedIn?.classList.remove('hidden');
-            if (mobileUsername) mobileUsername.textContent = displayName;
-            if (mobileAvatar) mobileAvatar.textContent = initial;
-        } else {
-            authButtons?.classList.remove('hidden');
-            userMenu?.classList.add('hidden');
-
-            mobileLoggedOut?.classList.remove('hidden');
-            mobileLoggedIn?.classList.add('hidden');
-        }
-    },
-
     // =========================================
     // Contact API
     // =========================================
@@ -313,59 +94,6 @@ const API = {
             method: 'POST',
             body: JSON.stringify(data)
         });
-    },
-
-    // =========================================
-    // Reading Progress API
-    // =========================================
-
-    async getProgress(chapterSlug) {
-        return this.request(`/progress/${encodeURIComponent(chapterSlug)}/`);
-    },
-
-    async updateProgress(chapterSlug, data) {
-        return this.request(`/progress/${encodeURIComponent(chapterSlug)}/`, {
-            method: 'PATCH',
-            body: JSON.stringify(data)
-        });
-    },
-
-    async getAllProgress() {
-        return this.request('/progress/');
-    },
-
-    // =========================================
-    // R·J·W Pause-Point Responses API
-    // =========================================
-
-    async savePauseResponse(data) {
-        return this.request('/progress/pause-responses/', {
-            method: 'POST',
-            body: JSON.stringify(data)
-        });
-    },
-
-    async getPauseResponses(chapterSlug) {
-        return this.request(`/progress/pause-responses/?chapter_slug=${encodeURIComponent(chapterSlug)}`);
-    },
-
-    async getAllPauseResponses() {
-        return this.request('/progress/pause-responses/');
-    },
-
-    // =========================================
-    // Card Commitments API
-    // =========================================
-
-    async saveCardCommitment(data) {
-        return this.request('/progress/card-commitments/', {
-            method: 'POST',
-            body: JSON.stringify(data)
-        });
-    },
-
-    async getAllCardCommitments() {
-        return this.request('/progress/card-commitments/');
     }
 };
 

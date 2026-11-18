@@ -4,7 +4,6 @@
  *
  * Handles newsletter subscribe forms (footer + connect page).
  * - Posts to Django API /newsletter/subscribe/
- * - Pre-fills from auth state
  * - Handles success, already-subscribed, and error states
  */
 
@@ -26,16 +25,6 @@ const Newsletter = {
         const nameInput = form.querySelector('input[name="name"]');
         const emailInput = form.querySelector('input[name="email"]');
         const submitBtn = form.querySelector('button[type="submit"]');
-
-        // Pre-fill from auth
-        if (window.API?.isAuthenticated() && window.API.user) {
-            if (nameInput && !nameInput.value && window.API.user.name) {
-                nameInput.value = window.API.user.name;
-            }
-            if (emailInput && !emailInput.value && window.API.user.email) {
-                emailInput.value = window.API.user.email;
-            }
-        }
 
         // Clear field errors on input
         form.querySelectorAll('input').forEach(input => {

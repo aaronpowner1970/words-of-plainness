@@ -1,0 +1,29 @@
+---
+permalink: /js/wop-reflection-sources.js
+eleventyExcludeFromCollections: true
+sitemap: false
+---
+/* WORDS OF PLAINNESS — reflection sources (generated at build; do not edit _site copy)
+   Source: src/pages/wop-reflection-sources.njk (CODE-SITE-18, SITE step 27).
+   Read by /js/wop-reflections.js and the Reflections panel, entirely in the
+   browser: chapter titles, which chapter each R·J·W pause belongs to, and the
+   prompts, so that answers can be labelled in downloads. No data leaves the
+   device. */
+window.WOP_REFLECTION_SOURCES = {
+  "chapters": {
+{%- for item in collections.chapters %}{% if item.data.chapterId and item.url %}
+    {{ item.data.chapterId | dump | safe }}: { "number": {{ (item.data.chapter or 0) | dump | safe }}, "title": {{ (item.data.title or "") | dump | safe }}, "url": {{ item.url | dump | safe }} },
+{%- endif %}{% endfor %}
+    "articles-of-interfaith-discipleship": { "number": 0, "title": "Articles of Interfaith Discipleship", "url": "/articles/", "standalone": true },
+    "seeking-jesus": { "number": 0, "title": "Seeking Jesus of Nazareth", "url": "/seeking-jesus/", "standalone": true }
+  },
+  "pauses": [
+{%- for item in collections.chapters %}{% if item.data.chapterId and item.url and item.data.pauses %}{% for p in item.data.pauses %}
+    { "chapterId": {{ item.data.chapterId | dump | safe }}, "id": {{ p.id | dump | safe }}, "title": {{ (p.title or "") | dump | safe }},
+      "reflect": {{ ((p.reflect.prompt if p.reflect else "") or "") | dump | safe }},
+      "journal": {{ ((p.journal.prompt if p.journal else "") or "") | dump | safe }},
+      "witness": {{ ((p.witness.prompt if p.witness else "") or "") | dump | safe }} },
+{%- endfor %}{% endif %}{% endfor %}
+  ],
+  "articles": {{ reflectionSources.articles | dump | safe }}
+};
