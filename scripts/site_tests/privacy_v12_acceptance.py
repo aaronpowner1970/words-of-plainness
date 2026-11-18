@@ -12,6 +12,11 @@ Checks, each runnable against a locally served build or production:
   analytics  page views go to /_vercel/insights/view on the site's own origin; the page
              address and referrer carry no query string or fragment (loaded with ?test=1#x
              and a referrer carrying ?q=...#...); no custom events; no cookies.
+  referer    (CODE-SITE-23) the Referer header on every /_vercel/insights/view request is
+             the site's origin alone ("https://<site>/"), never a page path, query string or
+             fragment: fresh loads of /search/?q=grace#x, /about/?test=1#x and
+             /privacy/?chk=1#x, under the shared layout's <meta name="referrer"
+             content="strict-origin">. The analytics check applies the same rule.
   quiet      typing and saving in the R·J·W journal modal, the Reflections panel and a
              card-chapter reflection cause no request of any kind (analytics included).
   forms      contact and newsletter: same fields, endpoint, content type and confirmation
@@ -20,13 +25,14 @@ Checks, each runnable against a locally served build or production:
 Usage:
   python scripts/site_tests/privacy_v12_acceptance.py --site <build dir> | --prod https://www.wordsofplainness.org
       --baseline <baseline build dir> --approved <approved wording .md> --out <evidence dir>
-      [--insights-script <copy of /_vercel/insights/script.js, for local runs>] [--checks wording,banner,...]
+      [--insights-script <copy of /_vercel/insights/script.js, for local runs>] [--checks wording,banner,behaviour,analytics,referer,quiet,forms]
 """
 import argparse
 import html as htmlmod
 import json
 import re
 import sys
+import urllib.parse
 import urllib.request
 from datetime import datetime
 from pathlib import Path
@@ -504,13 +510,70 @@ def check_analytics(pw, base, out, label, insights_script=None):
         "insights_responses": responses,
     }
     c["allow_list_all_ok"] = all(v[0] for v in c["allow_list_verdicts"])
+    c["view_referer_headers"] = [v["headers"].get("referer") for v in views]
+    c["view_referer_problems"] = [p for v in views for p in referer_header_problems(v["headers"].get("referer"), site)]
     ok = c["script_from_own_origin"] and c["page_views_to_own_origin"] and c["page_addresses_as_expected"] and \
         c["referrer_cut_to_origin"] and c["no_query_or_fragment_anywhere"] and c["allow_list_all_ok"] and \
-        not c["other_insights_endpoints"] and not doc_cookie and not cookies and not c["set_cookie_on_insights_responses"]
+        not c["other_insights_endpoints"] and not doc_cookie and not cookies and not c["set_cookie_on_insights_responses"] and \
+        not c["view_referer_problems"]
     name = write(out, f"analytics_{label}.json", {"checks": c, "requests": seen, "payloads": payloads})
     record(f"analytics-{label}", ok, f"views={len(views)} o={c['page_addresses']} r={c['referrers']} cookies={len(cookies)}", [name])
     ctx.close()
     browser.close()
+
+
+# ------------------------------------------------------------------ referer header (CODE-SITE-23)
+REFERER_LOADS = ["/search/?q=grace#x", "/about/?test=1#x", "/privacy/?chk=1#x"]
+
+
+def referer_header_problems(referer, site):
+    """Problems with the Referer header of an insights request. It may be absent or empty;
+    if present it must be the site's own origin with no path, query string or fragment."""
+    if not referer:
+        return []
+    u = urllib.parse.urlsplit(referer)
+    probs = []
+    if f"{u.scheme}://{u.netloc}" != site.rstrip("/"):
+        probs.append(f"Referer is not the site's origin: {referer}")
+    if u.path not in ("", "/"):
+        probs.append(f"Referer carries a path: {referer}")
+    if u.query or "?" in referer:
+        probs.append(f"Referer carries a query string: {referer}")
+    if u.fragment or "#" in referer:
+        probs.append(f"Referer carries a fragment: {referer}")
+    return probs
+
+
+def check_referer(pw, base, out, label, insights_script=None):
+    browser = pw.chromium.launch()
+    site = base.rstrip("/")
+    rows, ok = [], True
+    for path in REFERER_LOADS:
+        ctx = browser.new_context(user_agent=REAL_UA, viewport={"width": 1440, "height": 900})
+        ctx.add_init_script(NOT_AUTOMATED)
+        serve_insights(ctx, insights_script)
+        views = []
+
+        def on_req(r, views=views):
+            if r.url.endswith("/_vercel/insights/view"):
+                views.append({"url": r.url, "referer": r.all_headers().get("referer"), "body": r.post_data})
+        ctx.on("request", on_req)
+        page = ctx.new_page()
+        page.goto(base + path, wait_until="load", timeout=90000)
+        page.wait_for_timeout(3500)
+        meta = page.evaluate("(() => { const m = document.querySelector('meta[name=\"referrer\"]'); return m ? m.content : null; })()")
+        ctx.close()
+        probs = [p for v in views for p in referer_header_problems(v["referer"], site)]
+        probs += [p for v in views for p in analytics_payload_problems(v["body"])]
+        row = {"loaded": path, "meta_referrer": meta, "views": views,
+               "referer_headers": [v["referer"] for v in views], "problems": probs,
+               "pass": len(views) == 1 and views[0]["referer"] == site + "/" and not probs}
+        ok = ok and row["pass"]
+        rows.append(row)
+    browser.close()
+    name = write(out, f"referer_{label}.json", rows)
+    record(f"referer-{label}", ok, f"{sum(r['pass'] for r in rows)}/{len(rows)} loads: insights/view Referer "
+           f"{[r['referer_headers'] for r in rows]}", [name])
 
 
 # ------------------------------------------------------------------ quiet: no request while writing
@@ -590,7 +653,7 @@ def main():
     ap.add_argument("--approved", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--insights-script")
-    ap.add_argument("--checks", default="wording,banner,behaviour,analytics,quiet,forms")
+    ap.add_argument("--checks", default="wording,banner,behaviour,analytics,referer,quiet,forms")
     a = ap.parse_args()
     Path(a.out).mkdir(parents=True, exist_ok=True)
     checks = set(a.checks.split(","))
@@ -609,6 +672,8 @@ def main():
             check_banner_behaviour(pw, base, baseline_base, a.out, label, insights)
         if "analytics" in checks:
             check_analytics(pw, base, a.out, label, insights)
+        if "referer" in checks:
+            check_referer(pw, base, a.out, label, insights)
         if "quiet" in checks:
             check_quiet(pw, base, a.out, label, insights)
         if "forms" in checks:
