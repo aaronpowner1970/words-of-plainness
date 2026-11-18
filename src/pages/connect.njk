@@ -96,6 +96,17 @@ description: "Blog posts, Discord community, newsletter, discipleship apps, and 
     gap: 0.75rem;
     flex-wrap: wrap;
 }
+
+/* ── Prayer requests by email (same treatment as the Safety page's email line) ── */
+.prayer-email-line {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+.prayer-email-line a {
+    color: var(--gold-primary, #C4943A);
+    border-bottom: 1px solid rgba(196, 148, 58, 0.4);
+}
 </style>
 
 <!-- ═══════════ TABLE OF CONTENTS ═══════════ -->
@@ -293,30 +304,14 @@ description: "Blog posts, Discord community, newsletter, discipleship apps, and 
         <h2>Prayer &amp; Reflection Requests</h2>
 
         <p>
-            If you'd like me to hold you in prayer or simply want someone to know what you're
-            carrying, you can share here. These are read personally and held in confidence.
+            If you’d like me to hold you in prayer or simply want someone to know what you’re
+            carrying, you can write to me. These are read personally and held in confidence.
         </p>
 
-        <form class="prayer-form" style="margin-top: 1.5rem; max-width: 600px;">
-            <div class="form-group">
-                <label for="prayer-name">Your Name (optional)</label>
-                <input type="text" id="prayer-name" name="name" placeholder="Or how you'd like to be addressed">
-            </div>
-
-            <div class="form-group">
-                <label for="prayer-email">Email (optional, if you'd like a response)</label>
-                <input type="email" id="prayer-email" name="email" placeholder="your@email.com">
-            </div>
-
-            <div class="form-group">
-                <label for="prayer-request">Your Request or What's on Your Heart</label>
-                <textarea id="prayer-request" name="request" placeholder="Share what you'd like prayer for, or simply what you're carrying..."></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-                Submit Request
-            </button>
-        </form>
+        <p class="prayer-email-line">
+            Send your request by email to <a href="mailto:host@brotheraaron.org?subject=Prayer%20request">host@brotheraaron.org</a>,
+            with the subject “Prayer request.” Your name is optional. I read every message myself.
+        </p>
 
         <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
             <strong>Note:</strong> While I'm not a counselor or therapist, I do care. If you're in crisis,

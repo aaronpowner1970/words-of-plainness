@@ -43,7 +43,7 @@
         invite: 'What question is this raising for you? Write it down; it is yours to keep.',
         marker: 'Not yet downloaded',
         clear: 'Clear my answers from this browser',
-        confirm: function (n) { return 'Remove all ' + n + ' answers from this browser? This cannot be undone.'; },
+        confirm: function (n) { return n === 1 ? 'Remove 1 answer from this browser? This cannot be undone.' : 'Remove all ' + n + ' answers from this browser? This cannot be undone.'; },
         suggest: 'If you share this computer with others, use “Clear my answers from this browser” when you are finished.',
         scopePage: 'This page',
         scopeAll: 'Everything on this device',

@@ -983,13 +983,6 @@ const RJW = (function() {
         }
         if (tabKey === 'witness') {
             document.getElementById('witness-prompt').innerHTML = tabData.prompt || '';
-            var cardsEl = document.getElementById('witness-cards');
-            cardsEl.innerHTML = '';
-            if (tabData.cards && tabData.cards.length) {
-                tabData.cards.forEach(function(c) {
-                    cardsEl.innerHTML += '<div class="witness-card"><p>' + c.text + '</p><span class="witness-meta">— ' + c.meta + '</span></div>';
-                });
-            }
         }
 
         // Show correct pane
