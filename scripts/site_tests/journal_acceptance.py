@@ -203,7 +203,11 @@ def check1(pw, base, out, label="local"):
                 frame_url = r.frame.url if r.frame else ""
             except Exception:
                 frame_url = ""
-            reqs.append({"phase": phase["v"], "url": r.url, "frame": frame_url,
+            try:
+                post = r.post_data
+            except Exception:
+                post = None
+            reqs.append({"phase": phase["v"], "url": r.url, "frame": frame_url, "post": post,
                          "main": bool(r.frame and r.frame.parent_frame is None) if r.frame else True})
         ctx.on("request", on_req)
         page = ctx.new_page()
@@ -239,7 +243,7 @@ def check1(pw, base, out, label="local"):
                 (load_bad if r["phase"] == "load" else action_bad).append(r["url"])
                 continue
             if r["phase"] == "load":
-                ok, why = classify_page_load(r["url"], base, r["frame"], embeds_yt, uses_osd)
+                ok, why = classify_page_load(r["url"], base, r["frame"], embeds_yt, uses_osd, r.get("post"))
                 if not ok:
                     load_bad.append(f"{r['url']} ({why})")
             elif r["phase"] == "action":

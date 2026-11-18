@@ -57,7 +57,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
     <div class="content-wrapper">
         <h2>At a glance</h2>
 
-        <p>wordsofplainness.org is a <strong>static-first site with a thin dynamic edge</strong>. Every page is pre-rendered by Eleventy (Nunjucks templates over Markdown and structured data) and served as plain HTML from Vercel's CDN. Heavy media lives separately on Cloudflare R2 behind its own subdomain. The few things that must be dynamic—the contact, corrections and newsletter forms—talk to a small Django REST API on PythonAnywhere, and a handful of Vercel serverless functions handle automation such as social notifications. There is no front-end framework, no database behind the pages themselves, and no tracking scripts: a visitor's browser loads the site's own HTML, CSS and vanilla JavaScript, one Google Fonts stylesheet, and audio from the media CDN.</p>
+        <p>wordsofplainness.org is a <strong>static-first site with a thin dynamic edge</strong>. Every page is pre-rendered by Eleventy (Nunjucks templates over Markdown and structured data) and served as plain HTML from Vercel's CDN. Heavy media lives separately on Cloudflare R2 behind its own subdomain. The few things that must be dynamic—the contact and newsletter forms—talk to a small Django REST API on PythonAnywhere, and a handful of Vercel serverless functions handle automation such as social notifications. There is no front-end framework, no database behind the pages themselves, and no cookies or cross-site tracking: a visitor's browser loads the site's own HTML, CSS and vanilla JavaScript, Vercel Web Analytics' cookie-free page-view script from the site's own domain, one Google Fonts stylesheet, and audio and images from the media CDN.</p>
 
         <p>The interesting engineering is less in the stack than in what the build does with it: build-time cross-referencing between book chapters and the Articles of Interfaith Discipleship, narration audio that highlights the text as it is read, song lyrics synced line-by-line to the music, a citation apparatus with over a thousand scripture links, all generated from the site's own book map, and validation gates that refuse to ship data that fails its checks.</p>
     </div>
@@ -460,7 +460,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
             <li><strong>Sharing cards.</strong> Open Graph and Twitter Card tags on every page, with per-page titles and images where set.</li>
             <li><strong>Indexing control.</strong> A generated <code>sitemap.xml</code> and <code>robots.txt</code>; a canonical link on every page. Draft pages are <code>noindex, nofollow</code>. The live-session presentation pages are <code>noindex</code>, point their canonical link at the public page they mirror, and are left out of search and the sitemap, so search engines never see duplicates.</li>
             <li><strong>Feeds.</strong> An Atom feed for blog posts.</li>
-            <li><strong>No tracking.</strong> The page template loads no analytics, advertising or tracking script.</li>
+            <li><strong>No cross-site tracking.</strong> The page template loads no advertising or tracking script. Its only measurement is Vercel Web Analytics, served from the site's own domain, which sets no cookies, records no query strings and never sees what a reader writes.</li>
         </ul>
     </div>
 </section>
@@ -528,7 +528,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
                 <tr><th scope="row">How do synced lyrics work?</th><td>WebVTT cue files per song arrangement, validated against the lyric sheet at build time; a file that fails ships as static lyrics</td></tr>
                 <tr><th scope="row">How does search work without a server?</th><td>Pagefind builds a static index after each build; the browser queries it directly</td></tr>
                 <tr><th scope="row">Are scripture links typed by hand?</th><td>No. One book map, which the build writes into the pages that use it, turns a reference like <code>John 3:16</code> into a churchofjesuschrist.org study link; on chapter pages and in the Articles' citation panel that happens in the reader's browser</td></tr>
-                <tr><th scope="row">Do you track visitors?</th><td>The page template loads no analytics, advertising or tracking script</td></tr>
+                <tr><th scope="row">Do you track visitors?</th><td>Only in aggregate. Vercel Web Analytics counts page views without cookies, using an anonymous code that resets daily. There is no advertising or cross-site tracking script.</td></tr>
                 <tr><th scope="row">Is the source code open?</th><td>It is not released under an open-source license</td></tr>
                 <tr><th scope="row">Did AI write this site?</th><td>AI assistance writes and maintains much of the code under the author's direction and approval; the author is the source and final word on the content. See the <a href="/about/#ai-disclosure" class="text-gold">How This Work Is Made</a> section on the About page</td></tr>
                 <tr><th scope="row">Can I report a mistake?</th><td>Yes, through the contact form on the <a href="/connect/#contact" class="text-gold">Connect page</a>. The Articles' citation entries link there directly</td></tr>

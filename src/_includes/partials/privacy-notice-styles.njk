@@ -1,0 +1,79 @@
+{# Privacy Policy v1.2 notice styles (N2 banner and the N1 "What changed" box;
+   CODE-SITE-22, SITE step 33). The banner sits in the page flow above the fixed
+   header, so it covers nothing. While it is on screen, partials/privacy-notice.njk
+   sets --wop-notice-h to the part of it still visible, and the fixed header and the
+   fixed bars that sit just below the header move down by that much. With no banner
+   the variable is unset and everything is where it was. #}
+<style>
+    .wop-privacy-notice {
+        position: relative;
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem 1rem;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        background: var(--brown-rich, #1F1012);
+        border-bottom: 1px solid var(--gold-primary, #C4943A);
+        color: var(--cream, #E8DCC4);
+        font-family: var(--font-sans, sans-serif);
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    .wop-privacy-notice[hidden] { display: none; }
+    .wop-privacy-notice-text { margin: 0; flex: 0 1 auto; }
+    .wop-privacy-notice-text a {
+        color: var(--gold-light, #D4A84A);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        white-space: nowrap;
+    }
+    .wop-privacy-notice-dismiss {
+        flex: 0 0 auto;
+        min-height: 32px;
+        padding: 0.25rem 0.75rem;
+        background: transparent;
+        border: 1px solid var(--gold-primary, #C4943A);
+        border-radius: var(--radius-sm, 4px);
+        color: var(--cream, #E8DCC4);
+        font: inherit;
+        cursor: pointer;
+    }
+    .wop-privacy-notice-dismiss:hover { background: rgba(196, 148, 58, 0.15); }
+    .wop-privacy-notice a:focus-visible,
+    .wop-privacy-notice-dismiss:focus-visible {
+        outline: 2px solid var(--gold-light, #D4A84A);
+        outline-offset: 2px;
+    }
+    @media (max-width: 600px) {
+        .wop-privacy-notice { font-size: 0.82rem; padding: 0.4rem 0.75rem; gap: 0.5rem; }
+    }
+    /* Move the fixed header, and the fixed bars placed just below it, down by the
+       visible height of the banner. */
+    body .header { top: var(--wop-notice-h, 0px); }
+    body .music-player-sticky,
+    body .narration-player-sticky,
+    body .study-player-bar,
+    body .bookmark-banner,
+    body .resume-prompt,
+    body .wop-rp { margin-top: var(--wop-notice-h, 0px); }
+
+    /* N1 "What changed" box at the top of /privacy/ */
+    .wop-what-changed {
+        box-sizing: border-box;
+        margin: 0 0 var(--space-lg, 2rem);
+        padding: var(--space-md, 1.5rem) var(--space-lg, 2rem);
+        background: rgba(196, 148, 58, 0.08);
+        border: 1px solid var(--gold-primary, #C4943A);
+        border-radius: 10px;
+        scroll-margin-top: 120px;
+    }
+    .wop-what-changed h2 { margin-top: 0; }
+    .wop-what-changed ul { margin-bottom: 0; }
+    .wop-what-changed li + li { margin-top: 0.75rem; }
+    @media (max-width: 600px) {
+        .wop-what-changed { padding: var(--space-md, 1.5rem) var(--space-sm, 1rem); }
+    }
+</style>

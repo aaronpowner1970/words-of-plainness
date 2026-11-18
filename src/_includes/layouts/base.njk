@@ -176,10 +176,17 @@
     <!-- World Clocks overlay styles (site-wide) -->
     {% include "components/world-clocks-styles.njk" %}
 
+    <!-- Privacy Policy v1.2 notice styles (CODE-SITE-22) -->
+    {% include "partials/privacy-notice-styles.njk" %}
+
+    <!-- Vercel Web Analytics: page views only, no cookies, no query strings (CODE-SITE-22) -->
+    {% include "partials/web-analytics.njk" %}
+
     {% block styles %}{% endblock %}
 </head>
 <body{% if bodyClass %} class="{{ bodyClass }}"{% endif %} data-api-url="{{ site.api.baseUrl }}"{% if pagefindIgnore %} data-pagefind-ignore{% endif %}>
     <a href="#main-content" class="skip-link">Skip to main content</a>
+    {% include "partials/privacy-notice.njk" %}
     
     {% if not hideHeader %}{% include "partials/header.njk" %}{% endif %}
     {% if not hideHeader %}{% include "partials/mobile-menu.njk" %}{% endif %}

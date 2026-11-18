@@ -1,0 +1,42 @@
+{# Vercel Web Analytics (ruling SITE-PRIVACY-ANALYTICS-2, option 1; CODE-SITE-22, SITE step 33).
+   Vercel's documented method for a plain HTML site (vercel.com/docs/analytics/quickstart,
+   "HTML"; beforeSend from vercel.com/docs/analytics/redacting-sensitive-data), loaded from
+   the site's own origin at /_vercel/insights/.
+   Rules, all enforced here:
+   - Page views only. No custom events anywhere: beforeSend drops anything that is not a
+     page view, so a stray va('event', ...) call is never sent.
+   - Every URL sent is cut to origin + path: no query string, no fragment.
+   - The referring site, if any, is cut to its origin before the script can read it.
+     (The script reads document.referrer directly, so beforeSend cannot reach it.)
+   - No cookies: nothing here calls the script's cookie option.
+   Reader actions (typing, saving, downloading) never call this script; the device-only
+   allow-list check (scripts/site_tests/network_allowlist.py) fails any request to
+   /_vercel/insights caused by a reader action. #}
+<script>
+(function () {
+    try {
+        var ref = document.referrer;
+        if (ref) {
+            var origin = new URL(ref).origin;
+            var cut = (origin && origin !== 'null') ? origin + '/' : '';
+            if (cut !== ref) {
+                Object.defineProperty(document, 'referrer', { configurable: true, get: function () { return cut; } });
+            }
+        }
+    } catch (e) { /* leave the referrer to the browser's own policy */ }
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    window.va('beforeSend', function (event) {
+        if (!event || event.type !== 'pageview') return null;
+        try {
+            var u = new URL(event.url, location.href);
+            var out = {};
+            for (var k in event) { if (Object.prototype.hasOwnProperty.call(event, k)) out[k] = event[k]; }
+            out.url = u.origin + u.pathname;
+            return out;
+        } catch (e) {
+            return null;
+        }
+    });
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>

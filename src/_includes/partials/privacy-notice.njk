@@ -1,0 +1,56 @@
+{# Privacy Policy v1.2 site-wide notice (N2, ruling SITE-PRIVACY-ANNOUNCE; CODE-SITE-22,
+   SITE step 33). Wording approved word for word; do not edit it here.
+   It shows from privacyPolicy.noticeFrom for 30 days and stops by itself on
+   privacyPolicy.noticeUntil (reader's local date), with no further deploy. Dismissal
+   is remembered in localStorage; every storage read and write is inside try/catch,
+   so blocked storage raises no error and the notice simply shows. It is rendered
+   hidden and shown by the script, so without JavaScript it does not appear.
+   Remove this include, and partials/privacy-notice-styles.njk, after it has expired. #}
+<div class="wop-privacy-notice" id="wopPrivacyNotice" role="region" aria-labelledby="wopPrivacyNoticeText" data-from="{{ privacyPolicy.noticeFrom }}" data-until="{{ privacyPolicy.noticeUntil }}" data-key="wop-privacy-notice-v{{ privacyPolicy.version }}-dismissed" data-pagefind-ignore hidden>
+    <p class="wop-privacy-notice-text" id="wopPrivacyNoticeText">Our Privacy Policy changed on {{ privacyPolicy.date }}: your journal stays on your device, and we now count page views without cookies. <a href="/privacy/#{{ privacyPolicy.noticeAnchor }}">See what changed <span aria-hidden="true">→</span></a></p>
+    <button type="button" class="wop-privacy-notice-dismiss" id="wopPrivacyNoticeDismiss">Dismiss</button>
+</div>
+<script>
+(function () {
+    var el = document.getElementById('wopPrivacyNotice');
+    if (!el) return;
+    function day(s) { var p = String(s).split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+    function drop() { if (el.parentNode) el.parentNode.removeChild(el); }
+    var now = new Date();
+    if (now < day(el.getAttribute('data-from')) || now >= day(el.getAttribute('data-until'))) { drop(); return; }
+    var key = el.getAttribute('data-key');
+    var dismissed = false;
+    try { dismissed = window.localStorage.getItem(key) === '1'; } catch (e) { dismissed = false; }
+    if (dismissed) { drop(); return; }
+
+    var root = document.documentElement;
+    var queued = false;
+    function place() {
+        queued = false;
+        var h = el.isConnected ? Math.max(0, Math.round(el.getBoundingClientRect().bottom)) : 0;
+        root.style.setProperty('--wop-notice-h', h + 'px');
+    }
+    function queue() { if (!queued) { queued = true; window.requestAnimationFrame(place); } }
+    el.hidden = false;
+    place();
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    window.addEventListener('load', queue);
+
+    var btn = document.getElementById('wopPrivacyNoticeDismiss');
+    btn.addEventListener('click', function () {
+        var hadFocus = document.activeElement === btn;
+        try { window.localStorage.setItem(key, '1'); } catch (e) { /* storage blocked: dismissed for this page only */ }
+        window.removeEventListener('scroll', queue);
+        window.removeEventListener('resize', queue);
+        window.removeEventListener('load', queue);
+        drop();
+        root.style.removeProperty('--wop-notice-h');
+        if (hadFocus) {
+            // Keep keyboard focus in the page: the next thing after the notice.
+            var next = document.querySelector('.header a, .chat-bar a, .chat-bar button, #main-content a, #main-content button');
+            if (next) { try { next.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+        }
+    });
+})();
+</script>
