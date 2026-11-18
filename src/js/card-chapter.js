@@ -40,6 +40,38 @@
         });
     });
 
+    // ---- Save feedback: "✓ Saved" on the button; the summary line only when a choice was saved ----
+    function showSaved(btn, choiceSaved) {
+        if (btn.classList.contains('saved')) return;   // still showing from the last click
+        var originalHTML = btn.innerHTML;
+        btn.classList.add('saved');
+        btn.innerHTML = '✓ Saved';
+        var feedback = choiceSaved ? document.querySelector('.save-feedback[data-card="' + btn.dataset.card + '"]') : null;
+        if (feedback) feedback.classList.add('show');
+        setTimeout(function () {
+            btn.classList.remove('saved');
+            btn.innerHTML = originalHTML;
+            if (feedback) feedback.classList.remove('show');
+        }, 2500);
+    }
+
+    // ---- Keep a card's reflection now (the same entry the reader's typing writes) ----
+    // Only words are written: an empty box changes nothing on Save.
+    function keepReflection(card) {
+        var area = document.querySelector('#card-' + card + ' .reflection-area');
+        if (!area || !area.value.trim() || !window.wopReflections) return;
+        var h3 = document.querySelector('#card-' + card + ' .card-header-text h3');
+        try {
+            window.wopReflections.put({
+                chapterId: document.body.dataset.chapter || 'unknown',
+                type: 'reflection',
+                promptLabel: (h3 ? h3.textContent : '') + ' (Reflection)',
+                content: area.value.trim(),
+                meta: { cardId: 'card-' + card }
+            });
+        } catch (e) { /* storage unavailable */ }
+    }
+
     // ---- Save Button Handler ----
     document.querySelectorAll('.card-save-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -47,9 +79,11 @@
             var selected = document.querySelector('input[name="commit-' + card + '"]:checked');
 
             if (!selected) {
-                this.style.animation = 'cardShake 0.3s ease';
-                var self = this;
-                setTimeout(function () { self.style.animation = ''; }, 300);
+                // G5 (Teaching Practices v1.1; CODE-SITE-20): choosing a practice is
+                // invited, never required. With no choice, Save keeps whatever the
+                // reader wrote, with no shake, no warning and no "incomplete" state.
+                keepReflection(card);
+                showSaved(this, false);
                 return;
             }
 
@@ -103,18 +137,7 @@
             }
 
             // Visual feedback on button
-            var originalHTML = this.innerHTML;
-            this.classList.add('saved');
-            this.innerHTML = '✓ Saved';
-            var feedback = document.querySelector('.save-feedback[data-card="' + card + '"]');
-            if (feedback) feedback.classList.add('show');
-
-            var self = this;
-            setTimeout(function () {
-                self.classList.remove('saved');
-                self.innerHTML = originalHTML;
-                if (feedback) feedback.classList.remove('show');
-            }, 2500);
+            showSaved(this, true);
 
             // Store via unified reflection system
             try {

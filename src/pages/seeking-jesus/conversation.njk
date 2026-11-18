@@ -9,6 +9,7 @@ bodyClass: "sj-page"
 ---
 {% from "macros/sjn.njk" import chip %}
 {% from "macros/sjn-art.njk" import sjArt with context %}
+{% from "macros/g5.njk" import g5line with context %}
 {% set C = sjnClient %}
 {% set S = sjnScenarios %}
 {#
@@ -78,8 +79,9 @@ bodyClass: "sj-page"
   <div class="sj-wrap">
     <h2>Build your own</h2>
     <p>Pick the descriptions that belong to your conversation. The builder sorts them into the four sentences for you; the wording of each sentence never changes, only which descriptions sit under it.</p>
+    {{ g5line("g5-build", true, "continue") }}
     <label for="sj-build-pick">Add a description</label>
-    <select id="sj-build-pick">
+    <select id="sj-build-pick" aria-describedby="g5-build">
       <option value="">Choose…</option>
       {% for code in ["A", "Q", "D", "ADDITION"] %}
       <optgroup label="{{ C.code_labels[code].long }}">

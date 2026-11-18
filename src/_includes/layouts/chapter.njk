@@ -1,4 +1,5 @@
 {% extends "layouts/base.njk" %}
+{% from "macros/g5.njk" import g5line with context %}
 
 {% block styles %}
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
@@ -123,7 +124,8 @@
                 <p>What will you do? What is one thing you feel prompted to do as a result of this reading?</p>
             </div>
             <div class="prompt-block reflect" id="reflect-prompt-chapter" style="display:none;"></div>
-            <textarea class="response-area" id="reflect-ta" placeholder="Your thoughts are private by default. Your answers stay on this device. Open Your reflections to download them."></textarea>
+            {{ g5line("g5-reflect", true, "read") }}
+            <textarea class="response-area" id="reflect-ta" aria-describedby="g5-reflect" placeholder="Your thoughts are private by default. Your answers stay on this device. Open Your reflections to download them."></textarea>
             <div class="action-row">
                 <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('reflect')">Save Response</button>
                 <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('reflect')">Clear</button>
@@ -134,7 +136,8 @@
         <!-- JOURNAL TAB -->
         <div class="tab-pane" id="tab-journal">
             <div class="prompt-block journal" id="journal-prompt"></div>
-            <textarea class="response-area" id="journal-ta" placeholder="Write freely. No one reads this unless you choose to share it."></textarea>
+            {{ g5line("g5-journal", true, "read") }}
+            <textarea class="response-area" id="journal-ta" aria-describedby="g5-journal" placeholder="Write freely. No one reads this unless you choose to share it."></textarea>
             <div class="action-row">
                 <button class="rjw-btn rjw-btn-primary" onclick="RJW.saveResponse('journal')">Save to Journal</button>
                 <button class="rjw-btn rjw-btn-ghost" onclick="RJW.clearTA('journal')">Clear</button>
@@ -145,7 +148,8 @@
         <!-- WITNESS TAB -->
         <div class="tab-pane" id="tab-witness">
             <div class="prompt-block witness" id="witness-prompt"></div>
-            <textarea class="response-area" id="witness-ta" placeholder="Write your witness here."></textarea>
+            {{ g5line("g5-witness", true, "read") }}
+            <textarea class="response-area" id="witness-ta" aria-describedby="g5-witness" placeholder="Write your witness here."></textarea>
             <div class="witness-submit-form">
                 <div class="witness-checkbox-group">
                     <label class="witness-checkbox-label">

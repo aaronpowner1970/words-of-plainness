@@ -149,19 +149,18 @@
   function initCodeIt() {
     var state = get('codeit', {});
     var exercises = $$('.sj-exercise');
-    function paintProgress() {
-      var done = exercises.filter(function (e) { return state[e.getAttribute('data-id')] && state[e.getAttribute('data-id')].pick; }).length;
-      var el = $('#sj-codeit-progress');
-      if (el) el.textContent = done + ' of ' + exercises.length + ' coded';
-    }
+    // G5 (Teaching Practices v1.1; CODE-SITE-20): no count of what is left uncoded, and the
+    // project's code and reasoning never wait on a choice ("Show the project's code and reasoning").
     exercises.forEach(function (ex) {
       var id = ex.getAttribute('data-id'), code = ex.getAttribute('data-code');
       var rec = state[id] || {};
       var verdict = $('.sj-verdict', ex), note = $('textarea', ex), saveBtn = $('.sj-save-note', ex), jBtn = $('.sj-to-journal', ex);
+      var showBtn = $('.sj-show-code', ex);
       function reveal(pick) {
         ex.classList.add('is-revealed');
         $$('.sj-choice', ex).forEach(function (c) { c.classList.toggle('is-picked', c.getAttribute('data-code') === pick); });
-        if (verdict) {
+        if (verdict && !pick) { verdict.className = 'sj-verdict'; verdict.textContent = ''; }
+        else if (verdict) {
           var same = pick === code;
           verdict.className = 'sj-verdict ' + (same ? 'is-match' : 'is-diff');
           verdict.textContent = same
@@ -172,27 +171,30 @@
       $$('.sj-choice', ex).forEach(function (c) {
         c.addEventListener('click', function () {
           rec.pick = c.getAttribute('data-code'); rec.at = new Date().toISOString();
-          state[id] = rec; set('codeit', state); reveal(rec.pick); paintProgress();
+          state[id] = rec; set('codeit', state); reveal(rec.pick);
         });
+      });
+      if (showBtn) showBtn.addEventListener('click', function () {
+        rec.shown = true; state[id] = rec; set('codeit', state); reveal(rec.pick || null);
       });
       if (note) { note.value = rec.note || ''; note.addEventListener('input', function () { rec.note = note.value; state[id] = rec; set('codeit', state); }); }
       if (saveBtn) saveBtn.addEventListener('click', function () { rec.note = note ? note.value : ''; state[id] = rec; set('codeit', state); toast('Saved in this browser'); });
       if (jBtn) jBtn.addEventListener('click', function () {
         var p = byId[id];
-        var content = 'I coded ' + (p ? p.predicate : id) + ' as ' + (rec.pick || '—') + '; the project coded it ' + code + '.'
+        var content = (rec.pick ? 'I coded ' + (p ? p.predicate : id) + ' as ' + rec.pick + '; the project coded it ' + code + '.'
+          : (p ? p.predicate : id) + ': the project coded it ' + code + '.')
           + (rec.note ? ' My reasoning: ' + rec.note : '');
         journal.save({ promptLabel: 'Code It Yourself — ' + (p ? p.predicate : id), content: content, cardId: 'sjn-codeit-' + id });
         toast('Saved to My Discipleship Journal');
       });
       if (rec.pick) reveal(rec.pick);
+      else if (rec.shown) reveal(null);
     });
-    paintProgress();
     var clr = $('#sj-codeit-clear');
     if (clr) clr.addEventListener('click', function () {
       if (!confirm('Clear your codings in this browser?')) return;
       state = {}; set('codeit', state);
       exercises.forEach(function (ex) { ex.classList.remove('is-revealed'); $$('.sj-choice', ex).forEach(function (c) { c.classList.remove('is-picked'); }); var t = $('textarea', ex); if (t) t.value = ''; });
-      paintProgress();
     });
   }
 
@@ -252,6 +254,8 @@
         }).join('; ') + '.');
       });
       out.textContent = lines.length ? lines.join('\n') : 'Pick descriptions above to assemble the sentence.';
+      // G5 (CODE-SITE-20): with nothing picked the Save button simply rests; no warning.
+      var bjBtn = $('#sj-build-journal'); if (bjBtn) bjBtn.disabled = !state.script.length;
       set('convo', state);
       $$('[data-rm]', list).forEach(function (b) { b.addEventListener('click', function () {
         state.script = state.script.filter(function (x) { return x !== b.getAttribute('data-rm'); }); render();
@@ -264,7 +268,7 @@
     });
     var bc = $('#sj-build-copy'); if (bc) bc.addEventListener('click', function () { if (out) copyText(out.textContent); });
     var bj = $('#sj-build-journal'); if (bj) bj.addEventListener('click', function () {
-      if (!state.script.length) { toast('Nothing to save yet'); return; }
+      if (!state.script.length) return;
       journal.save({ promptLabel: 'Conversation Builder — my four-clause sentence', content: out.textContent, cardId: 'sjn-build-' + Date.now() });
       toast('Saved to My Discipleship Journal');
     });
@@ -313,7 +317,9 @@
     var list = $('#sj-goals'), form = $('#sj-goalform');
     function renderGoals() {
       if (!list) return;
-      if (!goals.length) { list.innerHTML = '<li class="sj-mute">No goals yet.</li>'; return; }
+      // G5 (CODE-SITE-20): no goals is not unfinished; the list is simply empty and the Save button rests.
+      var gjBtn = $('#sj-goals-journal'); if (gjBtn) gjBtn.disabled = !goals.length;
+      if (!goals.length) { list.innerHTML = ''; return; }
       list.innerHTML = goals.map(function (g, i) {
         return '<li class="sj-goal' + (g.done ? ' is-done' : '') + '">'
           + '<input type="checkbox" aria-label="Done" data-i="' + i + '"' + (g.done ? ' checked' : '') + '>'
@@ -333,7 +339,7 @@
       $('#sj-goal-text').value = ''; $('#sj-goal-when').value = ''; renderGoals();
     });
     var gj = $('#sj-goals-journal'); if (gj) gj.addEventListener('click', function () {
-      if (!goals.length) { toast('No goals yet'); return; }
+      if (!goals.length) return;
       var content = goals.map(function (g) { return (g.done ? '[done] ' : '[ ] ') + g.text + (g.when ? ' (' + g.when + ')' : ''); }).join('\n');
       journal.save({ promptLabel: 'Seeking Jesus of Nazareth — my goals', content: content, cardId: 'sjn-goals' });
       toast('Saved to My Discipleship Journal');
@@ -345,8 +351,8 @@
       $$('.sj-compare tr[data-q]').forEach(function (tr) { var q = tr.getAttribute('data-q'); lines.push('  ' + $('.c-label', tr).textContent.trim() + ': ' + (pre[q] || '—') + ' / ' + (post[q] || '—')); });
       lines.push('', 'Goals:'); goals.forEach(function (g) { lines.push('  ' + (g.done ? '[done] ' : '[ ] ') + g.text + (g.when ? ' (' + g.when + ')' : '')); });
       var codeit = get('codeit', {});
-      var ids = Object.keys(codeit).filter(function (k) { return codeit[k].pick; });
-      if (ids.length) { lines.push('', 'Code It Yourself:'); ids.forEach(function (id) { var p = byId[id]; lines.push('  ' + (p ? p.predicate : id) + ': mine ' + codeit[id].pick + ', project ' + (p ? p.code : '?') + (codeit[id].note ? ' — ' + codeit[id].note : '')); }); }
+      var ids = Object.keys(codeit).filter(function (k) { return codeit[k].pick || codeit[k].note; });
+      if (ids.length) { lines.push('', 'Code It Yourself:'); ids.forEach(function (id) { var p = byId[id]; lines.push('  ' + (p ? p.predicate : id) + ': ' + (codeit[id].pick ? 'mine ' + codeit[id].pick + ', ' : '') + 'project ' + (p ? p.code : '?') + (codeit[id].note ? ' — ' + codeit[id].note : '')); }); }
       copyText(lines.join('\n'));
     });
     var wipe = $('#sj-wipe'); if (wipe) wipe.addEventListener('click', function () {

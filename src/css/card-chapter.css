@@ -460,12 +460,6 @@
 }
 .save-feedback.show { opacity: 1; }
 
-@keyframes cardShake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
-}
-
 /* ============================================================
    CUMULATIVE SUMMARY
    ============================================================ */
@@ -522,13 +516,10 @@
     color: var(--gold-primary);
     line-height: 1.5;
 }
+/* G5 (CODE-SITE-20): a card with no saved choice is simply not listed, so
+   nothing marks it as unfinished. It appears once a choice is saved. */
 .summary-item.empty {
-    opacity: 1;
-    border-left-color: rgba(196, 148, 58, 0.2);
-}
-.summary-item.empty .item-text {
-    font-style: italic;
-    color: rgba(196, 148, 58, 0.5);
+    display: none;
 }
 
 /* Milestone / Confidence */

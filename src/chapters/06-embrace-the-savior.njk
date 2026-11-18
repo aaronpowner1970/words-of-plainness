@@ -402,6 +402,7 @@ pauses:
     witness:
       prompt: "<p>Latter-day Saints gather on the first Sunday of each month for a Fast and Testimony meeting. After a day of fasting and prayer, any member may stand and share what they have witnessed of God's work in their lives. This is that practice, opened to all.</p><p>If there is a moment in your covenant journey when the grace of Christ became personal to you — not a doctrine you believed but a reality you experienced — we invite you to share it here. Your witness may be the thing that helps another disciple get up one more time.</p>"
 ---
+{% from "macros/g5.njk" import g5line with context -%}
 <style>
 .star-icon {
   font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Apple Symbols', sans-serif;
@@ -1147,19 +1148,22 @@ pauses:
         <div class="reflection-step">
             <h3>1. Assess: Where Am I Now?</h3>
             <p class="reflection-prompt">What is the hunger I recognize in myself? When I set aside the noise of daily life and sit with the deepest questions&mdash;about meaning, about purpose, about what happens after death&mdash;what do I actually feel? Have I been avoiding these questions, or have I been searching honestly?</p>
-            <textarea class="reflection-textarea" data-path="skeptic" data-step="assess" placeholder="Write your honest assessment here..." rows="5"></textarea>
+            {{ g5line("g5-skeptic-assess", true, "read") }}
+            <textarea class="reflection-textarea" data-path="skeptic" data-step="assess" aria-describedby="g5-skeptic-assess" placeholder="Write your honest assessment here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-step">
             <h3>2. Align: What Stirred in Me?</h3>
             <p class="reflection-prompt">As I read about faith as the &ldquo;moving cause of all action,&rdquo; about the seed that swells within, about the thief who had nothing but honesty&mdash;did anything resonate? Was there a moment when something felt true before my mind could explain why? What was it, and what might it mean?</p>
-            <textarea class="reflection-textarea" data-path="skeptic" data-step="align" placeholder="Write your thoughts here..." rows="5"></textarea>
+            {{ g5line("g5-skeptic-align", false, "read") }}
+            <textarea class="reflection-textarea" data-path="skeptic" data-step="align" aria-describedby="g5-skeptic-align" placeholder="Write your thoughts here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-step">
             <h3>3. Act: What Am I Willing to Try?</h3>
             <p class="reflection-prompt">If I were to take one step this week toward testing the claims made in this chapter&mdash;not accepting them, but testing them&mdash;what would that step be? A prayer? A conversation with someone of faith? Reading a chapter of scripture with genuine openness? What would an honest experiment look like for me?</p>
-            <textarea class="reflection-textarea" data-path="skeptic" data-step="act" placeholder="Write your commitment here..." rows="5"></textarea>
+            {{ g5line("g5-skeptic-act", false, "read") }}
+            <textarea class="reflection-textarea" data-path="skeptic" data-step="act" aria-describedby="g5-skeptic-act" placeholder="Write your commitment here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-save">
@@ -1487,19 +1491,22 @@ This is vital to get right! He said, "knowledge of God's character"... NOT theol
         <div class="reflection-step">
             <h3>1. Assess: Where Am I Now?</h3>
             <p class="reflection-prompt">What drew me to read this path? Was it curiosity about Latter-day Saint beliefs, a desire to deepen my own faith through dialogue, or a sense that there may be more light to receive? What questions remain in my heart, and which ones feel most pressing?</p>
-            <textarea class="reflection-textarea" data-path="seeker" data-step="assess" placeholder="Write your honest assessment here..." rows="5"></textarea>
+            {{ g5line("g5-seeker-assess", true, "read") }}
+            <textarea class="reflection-textarea" data-path="seeker" data-step="assess" aria-describedby="g5-seeker-assess" placeholder="Write your honest assessment here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-step">
             <h3>2. Align: What Resonates Across Traditions?</h3>
             <p class="reflection-prompt">Where did I recognize my own faith experience in these pages&mdash;the hunger for God, the testimony of grace, the call to discipleship? Where did I encounter something unfamiliar that nevertheless carried the ring of truth? How does the Latter-day Saint witness of Christ compare with my own, and what can I learn from the differences without abandoning what I already know?</p>
-            <textarea class="reflection-textarea" data-path="seeker" data-step="align" placeholder="Write your thoughts here..." rows="5"></textarea>
+            {{ g5line("g5-seeker-align", false, "read") }}
+            <textarea class="reflection-textarea" data-path="seeker" data-step="align" aria-describedby="g5-seeker-align" placeholder="Write your thoughts here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-step">
             <h3>3. Act: What Will I Do with What I Have Felt?</h3>
             <p class="reflection-prompt">If the Spirit confirmed any truth to me as I read, what is my responsibility to that truth? Will I pray about the Book of Mormon as Moroni invites (Moroni 10:4&ndash;5)? Will I visit ChurchofJesusChrist.org or attend a service? Or will I simply return to my own worship with renewed intention, carrying whatever light was added here? What is the honest next step?</p>
-            <textarea class="reflection-textarea" data-path="seeker" data-step="act" placeholder="Write your commitment here..." rows="5"></textarea>
+            {{ g5line("g5-seeker-act", false, "read") }}
+            <textarea class="reflection-textarea" data-path="seeker" data-step="act" aria-describedby="g5-seeker-act" placeholder="Write your commitment here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-save">
@@ -1811,19 +1818,22 @@ This is vital to get right! He said, "knowledge of God's character"... NOT theol
         <div class="reflection-step">
             <h3>1. Assess: Where Am I Now?</h3>
             <p class="reflection-prompt">Alma asked, &ldquo;If ye have felt to sing the song of redeeming love, I would ask, can ye feel so now?&rdquo; (Alma 5:26). Can I? When was the last time the Spirit burned within me&mdash;not as a memory of something I once felt, but as a present reality? Where has my discipleship become routine, and where is it still alive?</p>
-            <textarea class="reflection-textarea" data-path="disciple" data-step="assess" placeholder="Write your honest assessment here..." rows="5"></textarea>
+            {{ g5line("g5-disciple-assess", true, "read") }}
+            <textarea class="reflection-textarea" data-path="disciple" data-step="assess" aria-describedby="g5-disciple-assess" placeholder="Write your honest assessment here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-step">
             <h3>2. Align: What Has the Lord Been Asking of Me?</h3>
             <p class="reflection-prompt">Is there a commandment I have been neglecting&mdash;not in open rebellion, but in quiet avoidance? Is there a person I have failed to forgive, a service I have failed to render, a covenant I have allowed to gather dust? What would the Lord say to me if I asked Him directly, &ldquo;What lack I yet?&rdquo; (Matthew 19:20). Am I willing to hear the answer?</p>
-            <textarea class="reflection-textarea" data-path="disciple" data-step="align" placeholder="Write your thoughts here..." rows="5"></textarea>
+            {{ g5line("g5-disciple-align", false, "read") }}
+            <textarea class="reflection-textarea" data-path="disciple" data-step="align" aria-describedby="g5-disciple-align" placeholder="Write your thoughts here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-step">
             <h3>3. Act: What Will I Consecrate?</h3>
             <p class="reflection-prompt">Christ said, &ldquo;Take up your cross daily&rdquo; (Luke 9:23). What does my cross look like this week&mdash;not in the abstract, but in the specific and uncomfortable? What will I give up, give away, or give over to the Lord that I have been holding back? What one act of consecration will I commit to before this day ends?</p>
-            <textarea class="reflection-textarea" data-path="disciple" data-step="act" placeholder="Write your commitment here..." rows="5"></textarea>
+            {{ g5line("g5-disciple-act", false, "read") }}
+            <textarea class="reflection-textarea" data-path="disciple" data-step="act" aria-describedby="g5-disciple-act" placeholder="Write your commitment here..." rows="5"></textarea>
         </div>
         
         <div class="reflection-save">

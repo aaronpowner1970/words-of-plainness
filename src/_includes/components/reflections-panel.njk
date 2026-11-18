@@ -3,7 +3,10 @@
       reflectionIds    the wopReflections bucket ids this page writes to
       reflectionTitle  the page's readable title
       reflectionFile   the <page> part of a download's file name
+      reflectionMode   optional: "continue" where the reader is working through an interactive
+                       module (Seeking Jesus); otherwise "read". Picks the G5 line for My questions
+                       (Teaching Practices v1.1, gate G5; wording in src/_data/g5.js).
     The store (js/wop-reflections.js) is loaded on every page by layouts/base.njk. -#}
 <link rel="stylesheet" href="/css/wop-reflections-panel.css?v={{ site.version }}">
-<script>window.WOP_REFLECTION_PAGE = { ids: {{ reflectionIds | dump | safe }}, title: {{ reflectionTitle | dump | safe }}, fileSlug: {{ reflectionFile | dump | safe }}, css: "/css/wop-reflections-panel.css?v={{ site.version }}" };</script>
+<script>window.WOP_REFLECTION_PAGE = { ids: {{ reflectionIds | dump | safe }}, title: {{ reflectionTitle | dump | safe }}, fileSlug: {{ reflectionFile | dump | safe }}, g5: {{ g5.first[reflectionMode or "read"] | dump | safe }}, css: "/css/wop-reflections-panel.css?v={{ site.version }}" };</script>
 <script src="/js/wop-reflections-panel.js?v={{ site.version }}" defer></script>

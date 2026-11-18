@@ -32,6 +32,7 @@
 {% extends "layouts/base.njk" %}
 
 {% from "macros/banner.njk" import banner with context %}
+{% from "macros/g5.njk" import g5line with context %}
 
 {% block styles %}
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
@@ -104,7 +105,8 @@
                 <!-- A2 · A question raised has somewhere to go: the same journal
                      link the reading column uses in place of its textarea. -->
                 <p class="aoid-ended-ask">What question does this raise for you?</p>
-                <a class="aoid-rjw-link aoid-ended-journal" href="/articles/#{{ video.slug }}">Write your reflection in your Discipleship Journal &rarr;</a>
+                {{ g5line("g5-ended", true, "continue") }}
+                <a class="aoid-rjw-link aoid-ended-journal" aria-describedby="g5-ended" href="/articles/#{{ video.slug }}">Write your reflection in your Discipleship Journal &rarr;</a>
                 <div class="aoid-ended-actions">
                     <button class="creation-replay" id="aoidReplay" type="button">&#8635; Watch again</button>
                     {% if chat %}<a class="aoid-ended-back" href="/chat/">Back to the chat menu</a>

@@ -62,6 +62,6 @@
 <script>window.SJN = {{ sjnClient.json_html | safe }};</script>
 <script src="/js/seeking-jesus.js?v={{ site.version }}"></script>
 {# The Reflections panel (CODE-SITE-18) #}
-{% set reflectionIds = ["seeking-jesus"] %}{% set reflectionTitle = "Seeking Jesus of Nazareth" %}{% set reflectionFile = "seeking-jesus" %}
+{% set reflectionIds = ["seeking-jesus"] %}{% set reflectionTitle = "Seeking Jesus of Nazareth" %}{% set reflectionFile = "seeking-jesus" %}{% set reflectionMode = "continue" %}
 {% include "components/reflections-panel.njk" %}
 {% endblock %}

@@ -139,7 +139,9 @@ var Journal = {
         var newest = this.entries.length ? this.entries[0].timestamp : null;
 
         document.getElementById('statTotal').textContent = this.entries.length;
-        document.getElementById('statChapters').textContent = chapterCount + ' of ' + Object.keys(CHAPTER_INFO).filter(function(k) { return !CHAPTER_INFO[k].standalone; }).length;
+        // G5 (CODE-SITE-20): the count of chapters the reader has written in, with no 'of n'
+        // total that would mark the others as unfinished.
+        document.getElementById('statChapters').textContent = chapterCount;
         document.getElementById('statRecent').textContent = newest ? djFormatDate(newest) : '—';
     },
 
@@ -243,19 +245,15 @@ var Journal = {
                     html += '<div class="pd-entry pd-journal"><div class="pd-entry-label">Reflect</div>';
                     html += '<div class="pd-entry-text">' + djEsc(tabs.reflect.content) + '</div></div>';
                 }
+                // G5 (Teaching Practices v1.1; CODE-SITE-20): a tab left blank is simply not
+                // listed; nothing marks it as missing.
                 if (tabs.journal && tabs.journal.content.trim()) {
                     html += '<div class="pd-entry pd-journal"><div class="pd-entry-label">Journal</div>';
                     html += '<div class="pd-entry-text">' + djEsc(tabs.journal.content) + '</div></div>';
-                } else if (!info.standalone) {
-                    html += '<div class="pd-entry pd-journal pd-empty"><div class="pd-entry-label">Journal</div>';
-                    html += '<div class="pd-entry-text">No journal entry for this section.</div></div>';
                 }
                 if (tabs.witness && tabs.witness.meta && tabs.witness.meta.includeInDocument && tabs.witness.content.trim()) {
                     html += '<div class="pd-entry pd-witness"><div class="pd-entry-label">Witness</div>';
                     html += '<div class="pd-entry-text">' + djEsc(tabs.witness.content) + '</div></div>';
-                } else if (!info.standalone) {
-                    html += '<div class="pd-entry pd-witness pd-empty"><div class="pd-entry-label">Witness</div>';
-                    html += '<div class="pd-entry-text">No witness entry for this section.</div></div>';
                 }
             });
 

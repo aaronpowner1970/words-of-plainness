@@ -7,6 +7,7 @@
         {%- endif %}
         <div class="article-rjw">
             <p class="rjw-prompt">{% if aoidSecondEdition.on %}What do you most fear about giving an account of your life before God? What do you most hope to understand?{% else %}What do you most fear about standing before God in naked honesty? What do you most hope for?{% endif %}</p>
-            <textarea class="rjw-textarea" data-rjw-key="rjw-A12" placeholder="Your reflection (optional)" rows="3" aria-label="Reflect on Of Immortality and Eternal Life"></textarea>
+            <span class="g5-line" id="g5-rjw-A12" data-pagefind-ignore>{{ g5.first.continue if video else g5.later.read }}</span>
+            <textarea class="rjw-textarea" data-rjw-key="rjw-A12" aria-describedby="g5-rjw-A12" placeholder="Your reflection (optional)" rows="3" aria-label="Reflect on Of Immortality and Eternal Life"></textarea>
         </div>
     </div>

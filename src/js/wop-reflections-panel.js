@@ -13,8 +13,9 @@
  *   - Where Document Picture-in-Picture exists, "Pop out" moves the panel into a
  *     small always-on-top window; closing that window brings it back.
  *   - Downloads are made in the browser. The DOCX writer (/js/wop-docx.js, this
- *     site) and the PDF library (pdfmake, cdnjs) are loaded only when the reader
- *     asks for that format. Nothing the reader wrote is sent anywhere.
+ *     site), the PDF library (pdfmake, cdnjs) and the PDF font (Noto Sans, this
+ *     site, /assets/fonts/pdf/) are loaded only when the reader asks for that
+ *     format. Nothing the reader wrote is sent anywhere.
  *
  * Page configuration: window.WOP_REFLECTION_PAGE = { ids: [...], title, fileSlug }
  * (components/reflections-panel.njk). Store: window.wopReflections.
@@ -41,6 +42,10 @@
         sub: 'Kept only on this device. Download to keep them.',
         questions: 'My questions',
         invite: 'What question is this raising for you? Write it down; it is yours to keep.',
+        // Teaching Practices v1.1, gate G5, word for word (src/_data/g5.js). The panel is its own
+        // panel, so My questions carries the first-prompt line; the page passes "read on" or
+        // "continue" (components/reflections-panel.njk).
+        g5: CFG.g5 || 'You are invited to pause and write a personal reflection here, or simply to read on.',
         marker: 'Not yet downloaded',
         clear: 'Clear my answers from this browser',
         confirm: function (n) { return n === 1 ? 'Remove 1 answer from this browser? This cannot be undone.' : 'Remove all ' + n + ' answers from this browser? This cannot be undone.'; },
@@ -72,6 +77,19 @@
                integrity: 'sha512-3UPyJyVWGE3fxbMXeKW+XANfpCDOZPZUYKnkjr3oMnNR12pM21HQW6qkDzFfx/F5RjT6GC9Y4sdhlqiN95Q6Bw==' },
         fonts: { src: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.20/vfs_fonts.min.js',
                  integrity: 'sha512-Y7muj1VaXLhN0OxEZ99vVxM4/o9aaYF7Plz22TiuABHFvrqWp9W9hYankFs1q2E2Kqj2ppcIyGXgnMAIK0JjJQ==' }
+    };
+    // The PDF font (CODE-SITE-20, ruling SITE-JOURNAL-PDF-GREEK): pdfmake's bundled Roboto has
+    // no polytonic Greek, so a word such as "Ἰησοῦς" lost letters in the PDF. Noto Sans (SIL OFL
+    // 1.1; Latin, Greek with all of Greek Extended, Cyrillic) is served by this site and fetched
+    // only when a reader asks for a PDF. If it cannot be fetched, the PDF is still made, in Roboto.
+    var PDF_FONT = {
+        family: 'NotoSans',
+        files: {
+            normal: '/assets/fonts/pdf/NotoSans-Regular.ttf',
+            bold: '/assets/fonts/pdf/NotoSans-Bold.ttf',
+            italics: '/assets/fonts/pdf/NotoSans-Italic.ttf',
+            bolditalics: '/assets/fonts/pdf/NotoSans-BoldItalic.ttf'
+        }
     };
     var DOCX_SRC = '/js/wop-docx.js';
     var SAVE_DELAY_MS = 600;
@@ -171,11 +189,12 @@
         listEl = el(doc, 'ol', { className: 'wop-rp-list', 'aria-label': T.heading });
 
         // My questions
-        qArea = el(doc, 'textarea', { id: 'wopRpQuestion', className: 'wop-rp-qarea', rows: '3', 'aria-describedby': 'wopRpInvite' });
+        qArea = el(doc, 'textarea', { id: 'wopRpQuestion', className: 'wop-rp-qarea', rows: '3', 'aria-describedby': 'wopRpInvite wopRpG5' });
         qBtn = el(doc, 'button', { type: 'button', className: 'wop-rp-btn', text: T.saveQuestion });
         var qSec = el(doc, 'div', { className: 'wop-rp-questions' }, [
             el(doc, 'h3', { className: 'wop-rp-h3' }, [el(doc, 'label', { 'for': 'wopRpQuestion', text: T.questions })]),
             el(doc, 'p', { id: 'wopRpInvite', className: 'wop-rp-invite' }, [el(doc, 'em', { text: T.invite })]),
+            el(doc, 'p', { id: 'wopRpG5', className: 'wop-rp-g5' }, [el(doc, 'em', { text: T.g5 })]),
             qArea,
             el(doc, 'div', { className: 'wop-rp-row' }, [qBtn])
         ]);
@@ -583,6 +602,46 @@
         return loading[src];
     }
 
+    function toBase64(buffer) {
+        var bytes = new Uint8Array(buffer), parts = [], CHUNK = 0x8000;
+        for (var i = 0; i < bytes.length; i += CHUNK) {
+            parts.push(String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK)));
+        }
+        return btoa(parts.join(''));
+    }
+
+    // Fetch the four Noto Sans files (same origin) into pdfmake's virtual file system, once.
+    // Resolves true when the font is ready, false when it could not be fetched.
+    var pdfFontReady = null;
+    function loadPdfFont() {
+        if (pdfFontReady) return pdfFontReady;
+        var styles = Object.keys(PDF_FONT.files);
+        pdfFontReady = Promise.all(styles.map(function (style) {
+            var url = PDF_FONT.files[style];
+            return fetch(url, { credentials: 'same-origin' }).then(function (r) {
+                if (!r.ok) throw new Error('Could not load ' + url);
+                return r.arrayBuffer();
+            });
+        })).then(function (buffers) {
+            var pm = window.pdfMake;
+            var vfs = {}, family = {};
+            styles.forEach(function (style, i) {
+                var file = PDF_FONT.files[style].split('/').pop();
+                vfs[file] = toBase64(buffers[i]);
+                family[style] = file;
+            });
+            pm.vfs = Object.assign({}, pm.vfs || {}, vfs);
+            var fonts = {};
+            fonts[PDF_FONT.family] = family;
+            pm.fonts = Object.assign({}, pm.fonts || {}, fonts);
+            return true;
+        }).catch(function () {
+            pdfFontReady = null;   // try again next time
+            return false;
+        });
+        return pdfFontReady;
+    }
+
     function saveBlob(blob, name) {
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
@@ -629,10 +688,16 @@
         } else if (format === 'pdf') {
             statusEl.textContent = '…';
             p = loadScript(PDFMAKE.lib.src, PDFMAKE.lib.integrity)
-                .then(function () { return loadScript(PDFMAKE.fonts.src, PDFMAKE.fonts.integrity); })
-                .then(function () {
+                .then(loadPdfFont)
+                .then(function (noto) {
+                    // Without the site's font, fall back to the library's Roboto.
+                    return noto ? true : loadScript(PDFMAKE.fonts.src, PDFMAKE.fonts.integrity).then(function () { return false; });
+                })
+                .then(function (noto) {
+                    var def = toPdfDefinition(m);
+                    if (noto) def.defaultStyle.font = PDF_FONT.family;
                     return new Promise(function (resolve) {
-                        window.pdfMake.createPdf(toPdfDefinition(m)).getBlob(function (blob) {
+                        window.pdfMake.createPdf(def).getBlob(function (blob) {
                             saveBlob(blob, name);
                             resolve();
                         });

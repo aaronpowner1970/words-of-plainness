@@ -1,0 +1,10 @@
+{#- G5 line (Teaching Practices Standard v1.1, gate G5; wording in src/_data/g5.js).
+    Import WITH CONTEXT:  {% from "macros/g5.njk" import g5line with context %}
+      id     the element id; the field names it in aria-describedby
+      first  true for the first prompt on the page or panel
+      mode   "read" (reading) or "continue" (film or interactive module)
+    A <div>, not a <p>: inside <article class="chapter-content"> every <p> is
+    a narration paragraph (paragraphSync in .eleventy.js), and this line is not. -#}
+{%- macro g5line(id, first=false, mode="read") -%}
+<div class="g5-line" id="{{ id }}" data-pagefind-ignore>{{ (g5.first if first else g5.later)[mode] }}</div>
+{%- endmacro -%}

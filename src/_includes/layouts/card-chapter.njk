@@ -1,4 +1,5 @@
 {% extends "layouts/base.njk" %}
+{% from "macros/g5.njk" import g5line with context %}
 
 {% block styles %}
 <link rel="stylesheet" href="/css/chapter.css?v={{ site.version }}">
@@ -182,8 +183,10 @@
         {# Tab 3: How Will You Practice? #}
         <div class="card-panel" data-card="{{ loop.index }}" data-panel="personalize" role="tabpanel">
             <div class="commitment-group">
-                <label>Choose a practice that fits where you are right now:</label>
-                <div class="commitment-options">
+                <label id="commit-label-{{ loop.index }}">Choose a practice that fits where you are right now:</label>
+                {# G5: card 1's choice is the page's first prompt; every later prompt gets the short line. #}
+                {{ g5line("g5-commit-" + loop.index, loop.first, "read") }}
+                <div class="commitment-options" role="group" aria-labelledby="commit-label-{{ loop.index }}" aria-describedby="g5-commit-{{ loop.index }}">
                     {% set cardIndex = loop.index %}
                     {% for opt in card.commitments %}
                     <label class="commitment-option">
@@ -197,7 +200,7 @@
                     {# Custom input #}
                     <div class="custom-input-row">
                         <input type="radio" name="commit-{{ loop.index }}" value="custom">
-                        <input type="text" placeholder="Or propose your own practice…">
+                        <input type="text" placeholder="Or propose your own practice…" aria-describedby="g5-commit-{{ loop.index }}">
                     </div>
 
                     {# N/A option #}
@@ -211,7 +214,8 @@
             {% if card.reflection %}
             <h5 class="writing-prompt-heading">Writing Prompt</h5>
             <p class="reflection-prompt">{{ card.reflection }}</p>
-            <textarea class="reflection-area" placeholder="Write your thoughts here…" rows="4"></textarea>
+            {{ g5line("g5-reflection-" + loop.index, false, "read") }}
+            <textarea class="reflection-area" placeholder="Write your thoughts here…" rows="4" aria-describedby="g5-reflection-{{ loop.index }}"></textarea>
             {% endif %}
 
             <button class="card-save-btn" data-card="{{ loop.index }}">
@@ -234,15 +238,16 @@
             {% for card in cards %}
             <div class="summary-item empty" data-summary="{{ loop.index }}">
                 <span class="item-number">{{ loop.index }}.</span>
-                <span class="item-text">{{ card.title }} — not yet saved</span>
+                <span class="item-text">{{ card.title }}</span>
             </div>
             {% endfor %}
         </div>
 
         <div class="milestone-section">
-            <h3>How confident are you in these commitments?</h3>
+            <h3 id="confidence-heading">How confident are you in these commitments?</h3>
             <p class="milestone-prompt">Rate your readiness to follow through this week</p>
-            <div class="star-rating">
+            {{ g5line("g5-confidence", false, "read") }}
+            <div class="star-rating" role="group" aria-labelledby="confidence-heading" aria-describedby="g5-confidence">
                 <button class="star-btn" data-star="1" aria-label="1 star">★</button>
                 <button class="star-btn" data-star="2" aria-label="2 stars">★</button>
                 <button class="star-btn" data-star="3" aria-label="3 stars">★</button>

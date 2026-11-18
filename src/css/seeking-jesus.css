@@ -194,6 +194,9 @@
 .sj-reveal{display:none; border-top:1px solid var(--sj-edge); margin-top:.8rem; padding-top:.8rem}
 .sj-exercise.is-revealed .sj-reveal{display:block}
 .sj-exercise.is-revealed .sj-choices{opacity:.75}
+/* G5 (CODE-SITE-20): the project's code and reasoning never wait on a choice; once shown, the button goes. */
+.sj-exercise .sj-show-code{margin:0 0 .4rem}
+.sj-exercise.is-revealed .sj-show-code{display:none}
 .sj-verdict{font-family:var(--sj-sans); font-weight:600; margin:0 0 .6rem}
 .sj-verdict.is-match{color:var(--sj-gold-l)} .sj-verdict.is-diff{color:#F0D3A0}
 .sj-progress{font-family:var(--sj-sans); font-size:.9rem; color:var(--sj-dim)}

@@ -810,6 +810,10 @@
         a.className = 'aoid-rjw-link';
         a.href = CFG.articleUrl;
         a.textContent = 'Write your reflection in your Discipleship Journal →';
+        // G5 (CODE-SITE-20): the invitation line above the box describes the link that
+        // stands in for it, so a screen reader announces it with the link.
+        var described = ta.getAttribute('aria-describedby');
+        if (described) { a.setAttribute('aria-describedby', described); }
         ta.parentNode.replaceChild(a, ta);
     })();
 

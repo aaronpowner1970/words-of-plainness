@@ -116,6 +116,9 @@ body.ab-present #ab-stage{padding-top:2rem}
   background:var(--inset);border-left:4px solid var(--inkGold);color:var(--ink2)}
 .ab-fb.ab-on{display:block;animation:ab-in .3s}
 .ab-fb b{color:var(--inkGoldD)}
+/* G5 (CODE-SITE-20): "Show the answer" opens the feedback without choosing; it goes once shown. */
+.ab-showfb{margin-top:.2rem}
+.ab-showfb[hidden]{display:none}
 .ab-btn{font-family:var(--serif);font-size:.94rem;background:transparent;color:var(--inkGoldD);
   border:1.5px solid var(--inkGold);border-radius:7px;padding:.5rem 1.2rem;cursor:pointer;margin:.6rem .5rem 0 0;
   display:inline-block;text-decoration:none}

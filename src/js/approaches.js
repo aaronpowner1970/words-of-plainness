@@ -119,10 +119,14 @@ bS.onclick=function(){setMode(false)}; bP.onclick=function(){setMode(true)};
   el.addEventListener('input',function(){ store[k]=el.value; save(); });
 });
 
-/* ---------- quizzes ---------- */
+/* ---------- quizzes ----------
+   G5 (Teaching Practices v1.1; CODE-SITE-20): answering is invited, never required.
+   "Show the answer" opens the same feedback without choosing; nothing is marked
+   against the reader. */
 [].slice.call(app.querySelectorAll('[data-quiz]')).forEach(function(box){
   var id=box.dataset.quiz, ans=box.dataset.answer;
   var fb=app.querySelector('[data-fb="'+id+'"]');
+  var show=app.querySelector('.ab-showfb[data-show="'+id+'"]');
   box.addEventListener('click',function(e){
     var o=e.target.closest('.ab-opt'); if(!o) return;
     [].slice.call(box.querySelectorAll('.ab-opt')).forEach(function(x){
@@ -131,12 +135,21 @@ bS.onclick=function(){setMode(false)}; bP.onclick=function(){setMode(true)};
     });
     if(o.dataset.k!==ans) o.classList.add('ab-wrong');
     fb.classList.add('ab-on');
+    if(show) show.hidden=true;
     store['quiz-'+id]=o.dataset.k; save();
+  });
+  if(show) show.addEventListener('click',function(){
+    [].slice.call(box.querySelectorAll('.ab-opt')).forEach(function(x){
+      if(x.dataset.k===ans) x.classList.add('ab-right');
+    });
+    fb.classList.add('ab-on');
+    show.hidden=true;
+    store['quizshown-'+id]=1; save();
   });
   if(store['quiz-'+id]){
     var pre=box.querySelector('.ab-opt[data-k="'+store['quiz-'+id]+'"]');
     if(pre) pre.click();
-  }
+  } else if(store['quizshown-'+id] && show){ show.click(); }
 });
 
 /* ---------- grids ---------- */
@@ -259,6 +272,7 @@ function resetAnswersUI(){
   [].slice.call(app.querySelectorAll('[data-fb]')).forEach(function(f){
     f.classList.remove('ab-on');
   });
+  [].slice.call(app.querySelectorAll('.ab-showfb')).forEach(function(b){ b.hidden=false; });
   [].slice.call(app.querySelectorAll('.ab-forkcard')).forEach(function(c){
     c.classList.remove('ab-sel');
   });

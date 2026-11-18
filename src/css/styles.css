@@ -3155,3 +3155,20 @@ body:has(.bottom-toolbar) .wop-font-widget {
 .hidden {
     display: none !important;
 }
+
+/* =========================================
+   G5 line: "reflection invited, never required" (Teaching Practices
+   Standard v1.1, gate G5; CODE-SITE-20). It sits between a prompt and its
+   response field and is tied to the field with aria-describedby. Colour is
+   inherited, so it reads on the dark chapter panels and the light study pages
+   alike. A <span> inside the Articles' reflection block (see
+   src/_includes/aoid/a01.njk), hence display: block. Wording: src/_data/g5.js.
+   ========================================= */
+.g5-line {
+    display: block;
+    font-style: italic;
+    font-size: 0.92em;
+    line-height: 1.5;
+    opacity: 0.88;
+    margin: 0.35rem 0 0.6rem;
+}

@@ -8,6 +8,7 @@ sjnDraft: false
 bodyClass: "sj-page"
 ---
 {% from "macros/sjn-art.njk" import sjArt with context %}
+{% from "macros/g5.njk" import g5line with context %}
 {% set C = sjnClient %}
 {% set questions = [
   { q: "agree", label: "I can name where my tradition and another Christian tradition genuinely agree about God." },
@@ -35,10 +36,11 @@ bodyClass: "sj-page"
   <div class="sj-wrap">
     <h2>Before you begin</h2>
     <p class="sj-mute">1 = not at all confident &middot; 5 = very confident</p>
+    {{ g5line("g5-selfcheck-pre", true, "continue") }}
     {% for item in questions %}
     <div class="sj-scale" data-phase="pre" data-q="{{ item.q }}">
       <span>{{ item.label }}</span>
-      <span class="sj-scale-opts" role="radiogroup" aria-label="{{ item.label }} (before)">
+      <span class="sj-scale-opts" role="radiogroup" aria-label="{{ item.label }} (before)" aria-describedby="g5-selfcheck-pre">
         {% for n in [1, 2, 3, 4, 5] %}<label><input type="radio" name="pre-{{ item.q }}" value="{{ n }}"><span>{{ n }}</span></label>{% endfor %}
       </span>
     </div>
@@ -50,10 +52,11 @@ bodyClass: "sj-page"
   <div class="sj-wrap">
     <h2>After the study</h2>
     <p class="sj-mute">Come back to this after the map, the coding exercise, and a conversation or two.</p>
+    {{ g5line("g5-selfcheck-post", false, "continue") }}
     {% for item in questions %}
     <div class="sj-scale" data-phase="post" data-q="{{ item.q }}">
       <span>{{ item.label }}</span>
-      <span class="sj-scale-opts" role="radiogroup" aria-label="{{ item.label }} (after)">
+      <span class="sj-scale-opts" role="radiogroup" aria-label="{{ item.label }} (after)" aria-describedby="g5-selfcheck-post">
         {% for n in [1, 2, 3, 4, 5] %}<label><input type="radio" name="post-{{ item.q }}" value="{{ n }}"><span>{{ n }}</span></label>{% endfor %}
       </span>
     </div>
@@ -82,11 +85,12 @@ bodyClass: "sj-page"
   <div class="sj-wrap">
     <h2>Goals</h2>
     <p>One or two is enough. A good goal names a person, a question, and a sentence you want to be able to say.</p>
+    {{ g5line("g5-goals", false, "continue") }}
     <form class="sj-goalform" id="sj-goalform">
       <label for="sj-goal-text">Goal</label>
-      <textarea id="sj-goal-text" placeholder="e.g. Ask my neighbor what ‘saved’ means to her, and say where we agree before I say where we differ."></textarea>
+      <textarea id="sj-goal-text" aria-describedby="g5-goals" placeholder="e.g. Ask my neighbor what ‘saved’ means to her, and say where we agree before I say where we differ."></textarea>
       <label for="sj-goal-when">By when, or with whom (optional)</label>
-      <input type="text" id="sj-goal-when" placeholder="e.g. before Thanksgiving">
+      <input type="text" id="sj-goal-when" aria-describedby="g5-goals" placeholder="e.g. before Thanksgiving">
       <div class="sj-btnrow"><button type="submit" class="sj-btn sj-btn--primary sj-btn--sm">Add goal</button></div>
     </form>
     <ul class="sj-goals" id="sj-goals"></ul>
