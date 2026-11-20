@@ -4,6 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin">
+    {# Safe browser storage (CODE-SITE-26, SITE step 43). First script on every page, so
+       every later script can use it. When a browser blocks storage, reading
+       window.localStorage or window.sessionStorage itself throws a SecurityError; these
+       calls never throw. get returns null, set and remove return false, keys returns [],
+       available returns false. When storage works they pass keys and values straight
+       through to the browser, so what is stored is exactly what was stored before.
+       kind: 'session' for sessionStorage, anything else for localStorage. #}
+    <script>
+    window.wopStorage = (function () {
+        'use strict';
+        function area(kind) {
+            try { return (kind === 'session' ? window.sessionStorage : window.localStorage) || null; } catch (e) { return null; }
+        }
+        return {
+            available: function (kind) { var s = area(kind); if (!s) return false; try { void s.length; return true; } catch (e) { return false; } },
+            get: function (key, kind) { var s = area(kind); if (!s) return null; try { return s.getItem(key); } catch (e) { return null; } },
+            set: function (key, value, kind) { var s = area(kind); if (!s) return false; try { s.setItem(key, value); return true; } catch (e) { return false; } },
+            remove: function (key, kind) { var s = area(kind); if (!s) return false; try { s.removeItem(key); return true; } catch (e) { return false; } },
+            keys: function (prefix, kind) {
+                var s = area(kind), out = [];
+                if (!s) return out;
+                try { for (var i = 0; i < s.length; i++) { var k = s.key(i); if (k !== null && (!prefix || k.indexOf(prefix) === 0)) out.push(k); } } catch (e) { /* unreadable */ }
+                return out;
+            }
+        };
+    })();
+    </script>
     <meta name="description" content="{{ description | default(site.description) }}">
 
     {% if draft %}<meta name="robots" content="noindex,nofollow">{% elif noindex %}<meta name="robots" content="noindex">{% endif %}
@@ -264,8 +291,8 @@
             }
 
             function minimize() {
-                sessionStorage.setItem(POS, JSON.stringify({ left: widget.style.left, top: widget.style.top }));
-                sessionStorage.setItem(MIN, '1');
+                wopStorage.set(POS, JSON.stringify({ left: widget.style.left, top: widget.style.top }), 'session');
+                wopStorage.set(MIN, '1', 'session');
                 widget.classList.add('minimized');
                 widget.classList.add('articles-seal-widget--visible');
                 widget.style.transform = '';
@@ -277,9 +304,9 @@
             function restore() {
                 widget.classList.remove('minimized');
                 widget.removeAttribute('title');
-                sessionStorage.removeItem(MIN);
-                var saved = sessionStorage.getItem(POS);
-                sessionStorage.removeItem(POS);
+                wopStorage.remove(MIN, 'session');
+                var saved = wopStorage.get(POS, 'session');
+                wopStorage.remove(POS, 'session');
                 if (saved) {
                     try {
                         var p = JSON.parse(saved);
@@ -309,7 +336,7 @@
                 if (isMin(widget)) { e.stopImmediatePropagation(); e.preventDefault(); restore(); }
             }, true);
 
-            if (sessionStorage.getItem(MIN) === '1') {
+            if (wopStorage.get(MIN, 'session') === '1') {
                 widget.classList.add('minimized');
                 widget.classList.add('articles-seal-widget--visible');
                 widget.style.pointerEvents = 'all';
@@ -369,7 +396,7 @@
 
         if (minCtl.minimizedOnLoad) { /* came up docked — skip default placement & fade */ } else {
         // Restore position saved earlier in this session
-        var savedPos = sessionStorage.getItem('wop-seal-pos');
+        var savedPos = wopStorage.get('wop-seal-pos', 'session');
         if (savedPos) {
             try {
                 var pos = JSON.parse(savedPos);
@@ -469,10 +496,10 @@
             document.removeEventListener('mouseup',   stopDrag);
             if (hasMoved) snapToGrid();
             // Save position for this session
-            sessionStorage.setItem('wop-seal-pos', JSON.stringify({
+            wopStorage.set('wop-seal-pos', JSON.stringify({
                 left: widget.style.left,
                 top:  widget.style.top
-            }));
+            }), 'session');
         }
 
         function snapToGrid() {
@@ -587,7 +614,7 @@
 
             // Lift the Articles seal above the badge unless the reader dragged it
             // or it has been tucked to a thumbnail.
-            if (!sessionStorage.getItem('wop-seal-pos') && !WopSeal.isMin(articles)) {
+            if (!wopStorage.get('wop-seal-pos', 'session') && !WopSeal.isMin(articles)) {
                 articles.style.left = clamp(centerX - aW / 2, 12, window.innerWidth - aW - 12) + 'px';
                 articles.style.top  = clamp(aTop, 12, window.innerHeight - aH - 12) + 'px';
                 articles.style.right = 'auto';
@@ -596,7 +623,7 @@
         }
 
         if (minCtl.minimizedOnLoad) { /* came up docked — skip default placement */ } else {
-        var savedPos = sessionStorage.getItem('wop-gathering-pos');
+        var savedPos = wopStorage.get('wop-gathering-pos', 'session');
         if (savedPos) {
             try {
                 var pos = JSON.parse(savedPos);
@@ -657,7 +684,7 @@
             document.removeEventListener('mousemove', onDrag);
             document.removeEventListener('mouseup', stopDrag);
             if (hasMoved) snapToGrid();
-            sessionStorage.setItem('wop-gathering-pos', JSON.stringify({ left: widget.style.left, top: widget.style.top }));
+            wopStorage.set('wop-gathering-pos', JSON.stringify({ left: widget.style.left, top: widget.style.top }), 'session');
         }
 
         function snapToGrid() {
@@ -740,7 +767,7 @@
         }
 
         if (minCtl.minimizedOnLoad) { /* came up docked — skip default placement */ } else {
-        var savedPos = sessionStorage.getItem('wop-aoid-gathering-pos');
+        var savedPos = wopStorage.get('wop-aoid-gathering-pos', 'session');
         if (savedPos) {
             try {
                 var pos = JSON.parse(savedPos);
@@ -800,7 +827,7 @@
             document.removeEventListener('mousemove', onDrag);
             document.removeEventListener('mouseup', stopDrag);
             if (hasMoved) snapToGrid();
-            sessionStorage.setItem('wop-aoid-gathering-pos', JSON.stringify({ left: widget.style.left, top: widget.style.top }));
+            wopStorage.set('wop-aoid-gathering-pos', JSON.stringify({ left: widget.style.left, top: widget.style.top }), 'session');
         }
 
         function snapToGrid() {

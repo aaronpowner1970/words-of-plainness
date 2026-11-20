@@ -57,9 +57,11 @@
 
     // ---- Keep a card's reflection now (the same entry the reader's typing writes) ----
     // Only words are written: an empty box changes nothing on Save.
+    // Returns whether this browser can keep the reader's words, so "✓ Saved" never
+    // shows when storage is blocked (CODE-SITE-26).
     function keepReflection(card) {
         var area = document.querySelector('#card-' + card + ' .reflection-area');
-        if (!area || !area.value.trim() || !window.wopReflections) return;
+        if (!area || !area.value.trim() || !window.wopReflections) return window.wopStorage.available();
         var h3 = document.querySelector('#card-' + card + ' .card-header-text h3');
         try {
             window.wopReflections.put({
@@ -69,7 +71,8 @@
                 content: area.value.trim(),
                 meta: { cardId: 'card-' + card }
             });
-        } catch (e) { /* storage unavailable */ }
+            return true;
+        } catch (e) { /* storage unavailable */ return false; }
     }
 
     // ---- Save Button Handler ----
@@ -82,8 +85,7 @@
                 // G5 (Teaching Practices v1.1; CODE-SITE-20): choosing a practice is
                 // invited, never required. With no choice, Save keeps whatever the
                 // reader wrote, with no shake, no warning and no "incomplete" state.
-                keepReflection(card);
-                showSaved(this, false);
+                if (keepReflection(card)) showSaved(this, false);
                 return;
             }
 
@@ -136,10 +138,9 @@
                 }
             }
 
-            // Visual feedback on button
-            showSaved(this, true);
-
-            // Store via unified reflection system
+            // Store via unified reflection system. The "✓ Saved" feedback follows the
+            // store, and shows only when the choice was kept (CODE-SITE-26).
+            var kept = window.wopStorage.available();
             try {
                 var chapterId = document.body.dataset.chapter || 'unknown';
 
@@ -173,7 +174,11 @@
 
             } catch (e) {
                 // storage unavailable — fail silently
+                kept = false;
             }
+
+            // Visual feedback on button
+            if (kept) showSaved(this, true);
         });
     });
 

@@ -299,7 +299,8 @@ const ChapterManager = {
     
     getBookmark() {
         const chapterId = this.config.id;
-        const data = localStorage.getItem(`wop-bookmark-${chapterId}`);
+        // window.wopStorage (layouts/base.njk) never throws when storage is blocked (CODE-SITE-26)
+        const data = window.wopStorage.get(`wop-bookmark-${chapterId}`);
         return data ? JSON.parse(data) : null;
     },
 

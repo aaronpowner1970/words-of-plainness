@@ -45,7 +45,7 @@
         mobileControl = document.getElementById('ambientControlMobile');
 
         // Restore volume from localStorage
-        var savedVol = localStorage.getItem('wop_ambient_volume');
+        var savedVol = wopStorage.get('wop_ambient_volume');
         if (savedVol !== null) {
             volume = parseFloat(savedVol);
         }
@@ -55,7 +55,7 @@
         bindEvents();
 
         // Auto-activate if was playing in a previous chapter/session
-        if (localStorage.getItem('wop_ambient_playing') === 'true') {
+        if (wopStorage.get('wop_ambient_playing') === 'true') {
             activate();
         }
     }
@@ -221,7 +221,7 @@
         currentIndex = 0;
         playCurrentTrack();
         updateUI();
-        localStorage.setItem('wop_ambient_playing', 'true');
+        wopStorage.set('wop_ambient_playing', 'true');
     }
 
     function deactivate() {
@@ -229,7 +229,7 @@
         autoPaused = false;
         audio.pause();
         updateUI();
-        localStorage.setItem('wop_ambient_playing', 'false');
+        wopStorage.set('wop_ambient_playing', 'false');
     }
 
     function toggle() {

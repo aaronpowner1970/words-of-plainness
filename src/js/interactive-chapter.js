@@ -216,20 +216,24 @@
     var textareas = document.querySelectorAll(
       '.reflection-textarea[data-path="' + pathKey + '"]'
     );
+    // With storage blocked a save throws; "Saved" shows only when the words were kept (CODE-SITE-26).
+    var kept = window.wopStorage.available();
     textareas.forEach(function (ta) {
       if (!ta.value.trim()) return;
-      window.wopReflections.save({
-        chapterId: '06-embrace-the-savior',
-        chapterTitle: 'Embrace the Savior',
-        type: 'reflection',
-        promptLabel: STEP_LABELS[ta.dataset.step] || ta.dataset.step,
-        content: ta.value,
-        meta: { pathway: pathKey, step: ta.dataset.step }
-      });
+      try {
+        window.wopReflections.save({
+          chapterId: '06-embrace-the-savior',
+          chapterTitle: 'Embrace the Savior',
+          type: 'reflection',
+          promptLabel: STEP_LABELS[ta.dataset.step] || ta.dataset.step,
+          content: ta.value,
+          meta: { pathway: pathKey, step: ta.dataset.step }
+        });
+      } catch (e) { kept = false; }
     });
 
     var status = document.getElementById('save-status-' + pathKey);
-    if (status) {
+    if (status && kept) {
       status.textContent = 'Saved \u2713';
       setTimeout(function () { status.textContent = ''; }, 2500);
     }
@@ -244,14 +248,16 @@
       if (_autoSaveTimers[timerKey]) clearTimeout(_autoSaveTimers[timerKey]);
       _autoSaveTimers[timerKey] = setTimeout(function () {
         if (!ta.value.trim()) return;
-        window.wopReflections.save({
-          chapterId: '06-embrace-the-savior',
-          chapterTitle: 'Embrace the Savior',
-          type: 'reflection',
-          promptLabel: STEP_LABELS[ta.dataset.step] || ta.dataset.step,
-          content: ta.value,
-          meta: { pathway: ta.dataset.path, step: ta.dataset.step }
-        });
+        try {
+          window.wopReflections.save({
+            chapterId: '06-embrace-the-savior',
+            chapterTitle: 'Embrace the Savior',
+            type: 'reflection',
+            promptLabel: STEP_LABELS[ta.dataset.step] || ta.dataset.step,
+            content: ta.value,
+            meta: { pathway: ta.dataset.path, step: ta.dataset.step }
+          });
+        } catch (e) { /* storage unavailable: the words stay in the box only */ }
       }, 2000);
     }
   });

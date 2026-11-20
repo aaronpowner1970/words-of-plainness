@@ -141,7 +141,7 @@ var NarrationPlayer = {
     },
 
     loadVolume: function() {
-        var saved = localStorage.getItem(this.STORAGE_KEY_VOLUME);
+        var saved = wopStorage.get(this.STORAGE_KEY_VOLUME);
         var vol = saved !== null ? parseInt(saved, 10) : 80;
         this.audio.volume = vol / 100;
         this.els.volumeInput.value = vol;
@@ -184,7 +184,7 @@ var NarrationPlayer = {
             var vol = parseInt(e.target.value, 10);
             self.audio.volume = vol / 100;
             self.audio.muted = false;
-            localStorage.setItem(self.STORAGE_KEY_VOLUME, vol);
+            wopStorage.set(self.STORAGE_KEY_VOLUME, vol);
             self.updateVolumeIcon();
         });
 
@@ -305,8 +305,8 @@ var NarrationPlayer = {
 
         // Save to localStorage (chapter restore keys don't apply to episodes)
         if (!ch.isEpisode) {
-            localStorage.setItem(this.STORAGE_KEY_CHAPTER, ch.chapter);
-            localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
+            wopStorage.set(this.STORAGE_KEY_CHAPTER, ch.chapter);
+            wopStorage.set(this.STORAGE_KEY_TRACK_TYPE, trackType);
         }
 
         // Reset progress display
@@ -550,7 +550,7 @@ var NarrationPlayer = {
 
         // Always save to localStorage
         var lsKey = 'wop-narration-progress::' + ch.slug + '::' + trackType;
-        localStorage.setItem(lsKey, JSON.stringify({
+        wopStorage.set(lsKey, JSON.stringify({
             position_seconds: position,
             completed: !!completed,
             updated_at: new Date().toISOString()
@@ -558,9 +558,9 @@ var NarrationPlayer = {
 
         // Also save the simple restore keys (chapters only — episodes don't restore by number)
         if (!ch.isEpisode) {
-            localStorage.setItem(this.STORAGE_KEY_CHAPTER, ch.chapter);
-            localStorage.setItem(this.STORAGE_KEY_POSITION, position);
-            localStorage.setItem(this.STORAGE_KEY_TRACK_TYPE, trackType);
+            wopStorage.set(this.STORAGE_KEY_CHAPTER, ch.chapter);
+            wopStorage.set(this.STORAGE_KEY_POSITION, position);
+            wopStorage.set(this.STORAGE_KEY_TRACK_TYPE, trackType);
         }
     },
 
@@ -600,7 +600,7 @@ var NarrationPlayer = {
         this.chapters.forEach(function(ch) {
             ['podcast', 'narration'].forEach(function(trackType) {
                 var key = 'wop-narration-progress::' + ch.slug + '::' + trackType;
-                var raw = localStorage.getItem(key);
+                var raw = wopStorage.get(key);
                 if (raw) {
                     try {
                         var data = JSON.parse(raw);
@@ -638,11 +638,11 @@ var NarrationPlayer = {
         var isOpen = wrapper.classList.toggle('open');
         this.els.viewTextToggle.setAttribute('aria-expanded', isOpen);
         this.els.viewTextArrow.innerHTML = isOpen ? '&#9650;' : '&#9660;';
-        localStorage.setItem('wop-narration-viewtext', isOpen ? '1' : '0');
+        wopStorage.set('wop-narration-viewtext', isOpen ? '1' : '0');
     },
 
     restoreViewTextState: function() {
-        var saved = localStorage.getItem('wop-narration-viewtext');
+        var saved = wopStorage.get('wop-narration-viewtext');
         if (saved === '1') {
             this.els.viewTextWrapper.classList.add('open');
             this.els.viewTextToggle.setAttribute('aria-expanded', 'true');
@@ -690,9 +690,9 @@ var NarrationPlayer = {
     // =========================================
 
     restorePosition: function() {
-        var savedChapter = localStorage.getItem(this.STORAGE_KEY_CHAPTER);
-        var savedPosition = localStorage.getItem(this.STORAGE_KEY_POSITION);
-        var savedTrackType = localStorage.getItem(this.STORAGE_KEY_TRACK_TYPE);
+        var savedChapter = wopStorage.get(this.STORAGE_KEY_CHAPTER);
+        var savedPosition = wopStorage.get(this.STORAGE_KEY_POSITION);
+        var savedTrackType = wopStorage.get(this.STORAGE_KEY_TRACK_TYPE);
 
         if (savedChapter === null) return;
 
@@ -734,7 +734,7 @@ var NarrationPlayer = {
         this.audio.volume = next / 100;
         this.audio.muted = false;
         this.els.volumeInput.value = next;
-        localStorage.setItem(this.STORAGE_KEY_VOLUME, next);
+        wopStorage.set(this.STORAGE_KEY_VOLUME, next);
         this.updateVolumeIcon();
     },
 

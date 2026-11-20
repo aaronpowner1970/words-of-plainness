@@ -28,8 +28,9 @@
     try { var v = localStorage.getItem('sjn:' + key); return v == null ? fallback : JSON.parse(v); }
     catch (e) { return fallback; }
   }
+  // Returns whether the value was kept, so nothing says "saved" when storage is blocked (CODE-SITE-26).
   function set(key, val) {
-    try { localStorage.setItem('sjn:' + key, JSON.stringify(val)); } catch (e) { /* private mode */ }
+    try { localStorage.setItem('sjn:' + key, JSON.stringify(val)); return true; } catch (e) { /* private mode */ return false; }
   }
   function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
   function $(sel, root) { return (root || document).querySelector(sel); }
@@ -47,9 +48,11 @@
   // ------------------------------------------------------------ lens
   function lens() { return get('lens', null); }
   function setLens(v) {
-    if (v === null) { try { localStorage.removeItem('sjn:lens'); } catch (e) {} } else { set('lens', v); }
+    var kept = false;
+    if (v === null) { try { localStorage.removeItem('sjn:lens'); } catch (e) {} } else { kept = set('lens', v); }
     paintLens();
     document.dispatchEvent(new CustomEvent('sjn:lens', { detail: { lens: v } }));
+    return kept;
   }
   function paintLens() {
     var v = lens();
@@ -63,7 +66,7 @@
     else { window.location.href = '/seeking-jesus/#lens'; }
   });
   $$('.sj-lensbtn').forEach(function (b) {
-    b.addEventListener('click', function () { setLens(b.getAttribute('data-lens')); toast('Starting point saved'); });
+    b.addEventListener('click', function () { if (setLens(b.getAttribute('data-lens'))) toast('Starting point saved'); });
   });
   paintLens();
 
@@ -73,7 +76,9 @@
       var entry = { chapterId: CHAPTER_ID, chapterTitle: CHAPTER_TITLE, type: 'commitment',
         promptLabel: opts.promptLabel, content: opts.content,
         meta: { cardId: opts.cardId, tier: 'seeking-jesus', confidence: opts.confidence || 0, module: MODULE } };
-      if (window.wopReflections) window.wopReflections.save(entry);
+      // Returns null when the entry could not be kept (storage blocked), so no "Saved" toast shows (CODE-SITE-26).
+      if (!window.wopReflections) return null;
+      try { window.wopReflections.save(entry); } catch (e) { return null; }
       return entry;
     }
   };
@@ -178,14 +183,13 @@
         rec.shown = true; state[id] = rec; set('codeit', state); reveal(rec.pick || null);
       });
       if (note) { note.value = rec.note || ''; note.addEventListener('input', function () { rec.note = note.value; state[id] = rec; set('codeit', state); }); }
-      if (saveBtn) saveBtn.addEventListener('click', function () { rec.note = note ? note.value : ''; state[id] = rec; set('codeit', state); toast('Saved in this browser'); });
+      if (saveBtn) saveBtn.addEventListener('click', function () { rec.note = note ? note.value : ''; state[id] = rec; if (set('codeit', state)) toast('Saved in this browser'); });
       if (jBtn) jBtn.addEventListener('click', function () {
         var p = byId[id];
         var content = (rec.pick ? 'I coded ' + (p ? p.predicate : id) + ' as ' + rec.pick + '; the project coded it ' + code + '.'
           : (p ? p.predicate : id) + ': the project coded it ' + code + '.')
           + (rec.note ? ' My reasoning: ' + rec.note : '');
-        journal.save({ promptLabel: 'Code It Yourself — ' + (p ? p.predicate : id), content: content, cardId: 'sjn-codeit-' + id });
-        toast('Saved to My Discipleship Journal');
+        if (journal.save({ promptLabel: 'Code It Yourself — ' + (p ? p.predicate : id), content: content, cardId: 'sjn-codeit-' + id })) toast('Saved to My Discipleship Journal');
       });
       if (rec.pick) reveal(rec.pick);
       else if (rec.shown) reveal(null);
@@ -229,8 +233,7 @@
       };
       var cp = $('.sj-scn-copy', card); if (cp) cp.addEventListener('click', function () { copyText(textOf()); });
       var jb = $('.sj-scn-journal', card); if (jb) jb.addEventListener('click', function () {
-        journal.save({ promptLabel: 'Conversation Builder — ' + card.getAttribute('data-title'), content: textOf(), cardId: 'sjn-scn-' + id });
-        toast('Saved to My Discipleship Journal');
+        if (journal.save({ promptLabel: 'Conversation Builder — ' + card.getAttribute('data-title'), content: textOf(), cardId: 'sjn-scn-' + id })) toast('Saved to My Discipleship Journal');
       });
     });
 
@@ -269,8 +272,7 @@
     var bc = $('#sj-build-copy'); if (bc) bc.addEventListener('click', function () { if (out) copyText(out.textContent); });
     var bj = $('#sj-build-journal'); if (bj) bj.addEventListener('click', function () {
       if (!state.script.length) return;
-      journal.save({ promptLabel: 'Conversation Builder — my four-clause sentence', content: out.textContent, cardId: 'sjn-build-' + Date.now() });
-      toast('Saved to My Discipleship Journal');
+      if (journal.save({ promptLabel: 'Conversation Builder — my four-clause sentence', content: out.textContent, cardId: 'sjn-build-' + Date.now() })) toast('Saved to My Discipleship Journal');
     });
     var bx = $('#sj-build-clear'); if (bx) bx.addEventListener('click', function () { state.script = []; render(); });
     render();
@@ -309,8 +311,7 @@
         var q = tr.getAttribute('data-q');
         return $('.c-label', tr).textContent.trim() + ': before ' + (pre[q] || '—') + ', after ' + (post[q] || '—');
       });
-      journal.save({ promptLabel: 'Seeking Jesus of Nazareth — self-check', content: lines.join('\n'), cardId: 'sjn-selfcheck' });
-      toast('Saved to My Discipleship Journal');
+      if (journal.save({ promptLabel: 'Seeking Jesus of Nazareth — self-check', content: lines.join('\n'), cardId: 'sjn-selfcheck' })) toast('Saved to My Discipleship Journal');
     });
 
     var goals = get('goals', []);
@@ -341,8 +342,7 @@
     var gj = $('#sj-goals-journal'); if (gj) gj.addEventListener('click', function () {
       if (!goals.length) return;
       var content = goals.map(function (g) { return (g.done ? '[done] ' : '[ ] ') + g.text + (g.when ? ' (' + g.when + ')' : ''); }).join('\n');
-      journal.save({ promptLabel: 'Seeking Jesus of Nazareth — my goals', content: content, cardId: 'sjn-goals' });
-      toast('Saved to My Discipleship Journal');
+      if (journal.save({ promptLabel: 'Seeking Jesus of Nazareth — my goals', content: content, cardId: 'sjn-goals' })) toast('Saved to My Discipleship Journal');
     });
     var ex = $('#sj-export'); if (ex) ex.addEventListener('click', function () {
       var pre = get('selfcheck-pre', {}), post = get('selfcheck-post', {});
@@ -357,8 +357,7 @@
     });
     var wipe = $('#sj-wipe'); if (wipe) wipe.addEventListener('click', function () {
       if (!confirm('Erase everything this study has stored in this browser (starting point, codings, goals, self-check)?')) return;
-      var keys = []; for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf('sjn:') === 0) keys.push(k); }
-      keys.forEach(function (k) { localStorage.removeItem(k); });
+      window.wopStorage.keys('sjn:').forEach(function (k) { window.wopStorage.remove(k); });
       location.reload();
     });
     renderGoals();
