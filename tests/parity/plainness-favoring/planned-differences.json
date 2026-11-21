@@ -1,0 +1,191 @@
+{
+  "source": "WoP_SITE_PlainnessFavoring_RebuildSpec_APPROVED_20261118.md, Section 2 (D1-D18)",
+  "how_it_is_used": [
+    "Every excuse is applied to BOTH sides before comparison, so an excuse can only remove a difference, never create one.",
+    "A difference that disappears after the excuses are applied is reported as explained, with the D-items that removed it. Anything left is unexplained and fails.",
+    "kind 'replace': text replaced wherever it occurs. kind 'remove': text removed wherever it occurs. kind 'remove-line': whole lines matching the regex removed from multi-line text.",
+    "kind 'key': the named observation keys (glob, * = any run of characters) are excused outright. kind 'value': on matching keys, the listed value is mapped to another.",
+    "kind 'selector': elements excused from the visual-structure checks. kind 'network': requests to the host are excused from the network check.",
+    "kind 'placeholder': the selector or text cannot be known until the rebuild exists. With a real candidate (not the reference itself), every placeholder must be filled in AND match something in the candidate, or the D-map check fails loudly.",
+    "kind 'require': with a real candidate, the candidate must show the planned difference (text present or absent). Skipped in self-parity."
+  ],
+  "items": [
+    {
+      "id": "D1",
+      "summary": "Site header and footer replace the Lab's own title bar and lantern logo; sticky tabs and panels sit below the site's fixed header; one <main>.",
+      "excuses": [
+        { "kind": "key", "keys": ["inventory.labHeader"], "note": "The Lab's own title bar (h1, prototype line, three pills) goes." },
+        { "kind": "selector", "side": "reference", "selector": "#tool-root > header.tl-site", "note": "Lab title bar and lantern logo" },
+        { "kind": "selector", "side": "candidate", "selector": "header.header", "role": "siteHeader", "note": "The site's fixed header (src/_includes/partials/header.njk). Sticky Lab tabs must sit below its bottom edge." },
+        { "kind": "selector", "side": "candidate", "selector": "footer.footer, body > footer", "note": "The site footer" },
+        { "kind": "selector", "side": "candidate", "selector": "#mobile-menu, .mobile-menu", "note": "The site's mobile menu" },
+        { "kind": "require", "check": "mainCount", "equals": 1, "note": "Exactly one <main> on the candidate page." }
+      ]
+    },
+    {
+      "id": "D2",
+      "summary": "Prototype labels removed.",
+      "excuses": [
+        { "kind": "key", "keys": ["inventory.version"], "note": "\"Proof of concept · Version 1.88 / Designed for exploratory interpretation\" goes." },
+        { "kind": "replace", "find": "This prototype implements all", "with": "The Lab implements all" },
+        { "kind": "remove", "find": " · Single-file offline prototype; no server, account, or external libraries required." },
+        { "kind": "remove-line", "regex": "^Poem v3\\.2 · Prototype 1\\.88$", "note": "The line goes from the exported and printed pathway notes." },
+        { "kind": "require", "absent": ["Prototype v1.88", "Proof of concept · Version 1.88", "This prototype implements all", "Single-file offline prototype", "Poem v3.2 · Prototype 1.88"] }
+      ]
+    },
+    {
+      "id": "D3",
+      "summary": "Media served from R2, not embedded: full reading, ten line clips, 50-second cube film; byte-identical to v1.88 (SHA-256). The embedded logo is dropped.",
+      "excuses": [
+        { "kind": "key", "keys": ["artifact:media.*.src", "artifact:media.logo.*"], "note": "Addresses change (data: URI to R2); hashes are NOT excused and must match." },
+        { "kind": "network", "host": "media.wordsofplainness.org", "resourceTypes": ["media", "other", "fetch"], "phases": ["load", "action"], "note": "Media requests to the R2 host, at load (preload=metadata) and when a reader plays the reading, a line clip or the film. Interpretation for Aaron to confirm: Section 4.4's zero-request rule for 'playing' cannot hold for media served from R2." },
+        { "kind": "placeholder", "name": "D3.mediaAddresses", "selector": null, "note": "Exact R2 URLs of the reading, the ten clips and the film. Fill in run B; each must be the src the candidate actually uses." }
+      ]
+    },
+    {
+      "id": "D4",
+      "summary": "Poem, scene, thesis, line questions and node notes rendered as real HTML from the data file (visible without JavaScript).",
+      "excuses": [
+        { "kind": "placeholder", "name": "D4.noScriptMarkup", "selector": null, "note": "Selector(s) of the server-rendered poem, scene, thesis, line questions and notes on the candidate, checked with JavaScript disabled. Unknown until the rebuild's markup exists." }
+      ]
+    },
+    {
+      "id": "D5",
+      "summary": "Framing text: \"Setting the Scene\" and \"What the poem answered for me\" with Aaron's 15 Nov wording, in Read, the lesson, the journal export and printout. The two questions keep their bold italics.",
+      "excuses": [
+        { "kind": "replace", "find": "Setting the scene", "with": "Setting the Scene" },
+        { "kind": "replace", "find": "What did the poem answer for me?", "with": "What the poem answered for me" },
+        { "kind": "placeholder", "name": "D5.approvedWording", "text": null, "note": "If the approved 15 Nov wording of either paragraph differs from v1.88's, put the approved text here (scene, thesis) in run B; the harness maps it onto v1.88's text on both sides. Not in the repo at run A." }
+      ]
+    },
+    {
+      "id": "D6",
+      "summary": "\"‘round\" becomes \"’round\" (U+2019) everywhere.",
+      "excuses": [
+        { "kind": "replace", "find": "‘round", "with": "’round" },
+        { "kind": "require", "absent": ["‘round"] }
+      ]
+    },
+    {
+      "id": "D7",
+      "summary": "Four parenthetical citations added to Aaron's notes (nodes 5, 7, 9, 14).",
+      "excuses": [
+        { "kind": "remove", "find": " (1 Thessalonians 5:21)" },
+        { "kind": "remove", "find": " (1 Corinthians 13:9)" },
+        { "kind": "remove", "find": " (Ezekiel 36:26)" },
+        { "kind": "remove", "find": " (Psalm 30:5)" },
+        { "kind": "require", "present": ["to hold fast to what is good (1 Thessalonians 5:21).", "we know only in part (1 Corinthians 13:9) helps", "give a heart of flesh (Ezekiel 36:26).", "joy comes in the morning (Psalm 30:5)."], "where": "lesson notes" }
+      ]
+    },
+    {
+      "id": "D8",
+      "summary": "Every scripture reference in the notes links to churchofjesuschrist.org/study. Wording unchanged.",
+      "excuses": [
+        { "kind": "remove-line", "regex": "^.* → https://www\\.churchofjesuschrist\\.org/study.*$", "note": "Added links drop out of the link inventory; their text is unchanged." },
+        { "kind": "selector", "side": "candidate", "selector": "a[href^='https://www.churchofjesuschrist.org/study']" }
+      ]
+    },
+    {
+      "id": "D9",
+      "summary": "Credits: Lab footer and the outer Poetry commentary panel's title as approved 18 Nov; the old bottom-of-panel credit line goes.",
+      "excuses": [
+        { "kind": "key", "keys": ["inventory.footer"], "note": "Lab footer text changes to the approved credit (Section 3.3)." },
+        { "kind": "remove", "find": "Plainness Favoring · The Lattice Lab · Author-led experimental poetry study" },
+        { "kind": "remove", "find": "Plainness Favoring and the author’s line-by-line commentary are the original work of Aaron John Powner. The Lattice Lab, including its guided prompts, was designed with ChatGPT and rebuilt for this site with Claude. Poetry commentary by ChatGPT. Narration produced with a voice tool under Brother Aaron’s direction. How this work is made →" },
+        { "kind": "replace", "regex": "Poetry commentary(?: by ChatGPT)?\\s*·?\\s*A critical reading of the poem and the Lab", "with": "Poetry commentary · A critical reading of the poem and the Lab" },
+        { "kind": "remove", "find": " Commentary by ChatGPT on Aaron John Powner’s poem." },
+        { "kind": "placeholder", "name": "D9.labFooter", "selector": null, "note": "Selector of the candidate's Lab footer credit, so its approved text can be checked word for word." }
+      ]
+    },
+    {
+      "id": "D10",
+      "summary": "A control to clear what the reader wrote in the lesson journal, with in-panel confirmation (W1).",
+      "excuses": [
+        { "kind": "remove", "find": "Clear my answers from this browser" },
+        { "kind": "remove-line", "regex": "^Remove (\\d+|1) answers? from this browser\\? This cannot be undone\\.$" },
+        { "kind": "key", "keys": ["inventory.lessonControls", "inventory.ids"], "note": "The lesson's control row and the id list gain the clear control." },
+        { "kind": "placeholder", "name": "D10.clearControl", "selector": null, "note": "Selector of the 'Clear my answers from this browser' button and its confirmation panel." }
+      ]
+    },
+    {
+      "id": "D11",
+      "summary": "G5: W2 wording on every reflection field; After discussion opens at any time; Save reflection stays; Skip for now removed; no skipped marks; blank parts export with no response line.",
+      "excuses": [
+        { "kind": "remove", "find": "Skip for now" },
+        { "kind": "remove-line", "regex": "^Reflection skipped\\.$" },
+        { "kind": "remove-line", "regex": "^\\((Skipped|No response recorded)\\)$" },
+        { "kind": "remove", "find": "Save a reflection or choose Skip to open the author’s perspective." },
+        { "kind": "replace", "find": " · – Skipped", "with": "" },
+        { "kind": "replace", "regex": "–\\|Skipped", "with": "·|No saved reflection" },
+        { "kind": "replace", "regex": "–⚑\\|Skipped", "with": "⚑|No saved reflection" },
+        { "kind": "remove", "find": "You are invited to pause and write a personal reflection here, or simply to read on." },
+        { "kind": "remove", "find": "Pause to reflect, or simply read on." },
+        { "kind": "remove", "find": "You are invited to pause and write a personal reflection here, or simply to continue." },
+        { "kind": "remove", "find": "Pause to reflect, or simply continue." },
+        { "kind": "value", "keys": ["*.choice"], "map": { "skipped": "" }, "note": "Stored lesson entries: 'skipped' no longer exists." },
+        { "kind": "key", "keys": ["*.lesson.disclosureDisabled"], "note": "After discussion is never disabled in the rebuild." },
+        { "kind": "key", "keys": ["inventory.fields"], "note": "Each reflection field gains its W2 line." }
+      ]
+    },
+    {
+      "id": "D12",
+      "summary": "Font: the site's Source Sans Pro (400/600) and Crimson Pro replace the Lab's Google Fonts load of Source Sans 3; 700-weight text renders at 600.",
+      "excuses": [
+        { "kind": "network", "host": "fonts.googleapis.com", "phases": ["load"], "note": "The reference's page-load font stylesheet request goes." },
+        { "kind": "network", "host": "fonts.gstatic.com", "phases": ["load"] },
+        { "kind": "visual", "note": "Glyph shapes and widths change. Image pairs are reported, never failed." }
+      ]
+    },
+    {
+      "id": "D13",
+      "summary": "Sizes in rem, not px, so the site's text-size control works. At the default size nothing should move.",
+      "excuses": [
+        { "kind": "visual", "note": "Sub-pixel shifts only; image pairs reported, never failed. Structure checks still apply in full." }
+      ]
+    },
+    {
+      "id": "D14",
+      "summary": "The two storage keys keep their names and shapes, so they are compared directly.",
+      "excuses": [],
+      "constraint": "No normalisation is applied to storage key names; only D11's 'skipped' value map touches stored values."
+    },
+    {
+      "id": "D15",
+      "summary": "Page <title>: \"Plainness Favoring · The Lattice Lab · Words of Plainness\".",
+      "excuses": [
+        { "kind": "key", "keys": ["*.title", "inventory.title"] },
+        { "kind": "require", "check": "title", "equals": "Plainness Favoring · The Lattice Lab · Words of Plainness" }
+      ]
+    },
+    {
+      "id": "D16",
+      "summary": "Privacy page wording for the Lab's storage (ships in run C).",
+      "excuses": [],
+      "scope": "The Privacy page, not the Lab page. Not exercised by this harness; run C checks it."
+    },
+    {
+      "id": "D17",
+      "summary": "\"Write to the author\" link beside \"What would you like to ask the author?\" (W8): mailto host@brotheraaron.org plus the address as copyable text; the page sends nothing.",
+      "excuses": [
+        { "kind": "remove", "find": "If you’d like to ask me, write to me at host@brotheraaron.org →" },
+        { "kind": "remove-line", "regex": "^.* → mailto:host@brotheraaron\\.org.*$" },
+        { "kind": "selector", "side": "candidate", "selector": "a[href^='mailto:host@brotheraaron.org']" },
+        { "kind": "require", "selectorPresent": "a[href^='mailto:host@brotheraaron.org']", "where": "lesson, Looking back" }
+      ]
+    },
+    {
+      "id": "D18",
+      "summary": "The Oulipo link in \"The poem\" becomes \"Princeton CDH on Queneau's combinatorial sonnets\".",
+      "excuses": [
+        { "kind": "replace", "find": "Oulipo on Queneau’s combinatorial form", "with": "Princeton CDH on Queneau’s combinatorial sonnets" },
+        { "kind": "replace", "find": "https://www.oulipo.net/fr/contraintes/cmmp", "with": "https://cdh.princeton.edu/blog/2015/11/16/algorithmic-literature-oulipo" },
+        { "kind": "require", "selectorPresent": "a[href='https://cdh.princeton.edu/blog/2015/11/16/algorithmic-literature-oulipo']" }
+      ]
+    }
+  ],
+  "network_allow_list": {
+    "note": "Page-load hosts each side may reach. Reader actions may reach none, except what D3 excuses.",
+    "reference": ["fonts.googleapis.com", "fonts.gstatic.com"],
+    "candidate": ["<candidate origin>", "media.wordsofplainness.org"]
+  }
+}

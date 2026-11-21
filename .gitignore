@@ -75,3 +75,19 @@ tools/.mp3_cache/
 # Lantern render script (Python)
 tools/lantern/render/**/__pycache__/
 tools/lantern/render/.pytest_cache/
+
+# Parity harness (tests/parity): every output is written to wop-scratch\Plainness_Favoring\parity,
+# outside git (the harness refuses an output folder inside the repo). These rules catch anything
+# that lands here by accident: Playwright's default folders, images, PDFs, media, and any copy of
+# the frozen Lattice Lab reference.
+test-results/
+playwright-report/
+tests/parity/**/runs/
+tests/parity/**/media/
+tests/parity/**/*.png
+tests/parity/**/*.pdf
+tests/parity/**/*.mp3
+tests/parity/**/*.mp4
+tests/parity/**/*.txt
+tests/parity/**/*.html
+plainness-lattice*.html

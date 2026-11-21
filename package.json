@@ -17,13 +17,18 @@
     "sjn:artwork": "node scripts/sjn-verify-artwork.js",
     "aoid:floors": "node scripts/aoid-verify-floors.js",
     "aoid:counts": "node scripts/aoid-build-floor-counts.js --check",
-    "aoid:films": "node scripts/aoid-verify-film-timing.js"
+    "aoid:films": "node scripts/aoid-verify-film-timing.js",
+    "parity:lattice": "playwright test -c tests/parity/plainness-favoring/playwright.config.mjs",
+    "parity:lattice:compare": "node tests/parity/plainness-favoring/tools/compare-runs.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1",
+    "@playwright/test": "1.60.0",
     "htmlparser2": "^7.2.0",
     "js-yaml": "^4.1.0",
-    "pagefind": "^1.4.0"
+    "pagefind": "^1.4.0",
+    "pixelmatch": "5.3.0",
+    "pngjs": "7.0.0"
   },
   "keywords": [
     "eleventy",
