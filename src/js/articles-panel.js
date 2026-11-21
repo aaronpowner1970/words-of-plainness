@@ -12,7 +12,8 @@
  *     - Escape key              → close
  *
  * DATA SOURCE
- *   <script type="application/json" id="apparatusData">…</script>
+ *   /articles/apparatus.json (named by data-apparatus-src on #apPanel),
+ *   fetched once the page has loaded; built by src/pages/articles-apparatus.njk.
  *   Structure: apparatus[articleId][spanId] = { text, type, named_concept,
  *     definition, panel_comment, biblical[], restoration[], crossref[] }
  *
@@ -89,15 +90,40 @@
     if (!panel) { return; }
 
     // ── Load apparatus data ───────────────────────────────────────
+    // CODE-SITE-30 (SITE step 68). The apparatus is its own file, named on the
+    // panel (data-apparatus-src). It is fetched once the page has finished
+    // loading, so it never competes with the text; a reader who taps a span
+    // sooner starts the fetch at once and the panel fills when it arrives.
+    // If the file cannot be reached, the next tap tries again.
+    // An inline #apparatusData block, if a page still has one, wins.
     var apparatus = {};
-    try {
+    var apparatusLoaded = false;
+    var apparatusPending = null;
+    function loadApparatus() {
+        if (apparatusLoaded) { return Promise.resolve(apparatus); }
+        if (apparatusPending) { return apparatusPending; }
         var dataScript = document.getElementById('apparatusData');
         if (dataScript && dataScript.textContent.trim()) {
-            apparatus = JSON.parse(dataScript.textContent) || {};
+            try { apparatus = JSON.parse(dataScript.textContent) || {}; }
+            catch (e) { console.warn('[articles-panel] Could not parse apparatus JSON:', e); }
+            apparatusLoaded = true;
+            return Promise.resolve(apparatus);
         }
-    } catch (e) {
-        console.warn('[articles-panel] Could not parse apparatus JSON:', e);
+        var src = panel.getAttribute('data-apparatus-src');
+        if (!src || typeof fetch !== 'function') { apparatusLoaded = true; return Promise.resolve(apparatus); }
+        apparatusPending = fetch(src, { credentials: 'same-origin' })
+            .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+            .then(function (d) { apparatus = d || {}; apparatusLoaded = true; apparatusPending = null; return apparatus; })
+            .catch(function (e) {
+                console.warn('[articles-panel] Could not load the apparatus:', e);
+                apparatusPending = null;          // the next tap tries again
+                throw e;
+            });
+        return apparatusPending;
     }
+    function startApparatusLoad() { loadApparatus().catch(function () {}); }
+    if (document.readyState === 'complete') { setTimeout(startApparatusLoad, 0); }
+    else { window.addEventListener('load', startApparatusLoad); }
 
     /* ── Shared apparatus rules ───────────────────────────────────
        The scripture-link and definition-markup rules live in
@@ -338,8 +364,35 @@
 
     function activateSpan(spanEl) {
         setActiveSpan(spanEl);
+        if (apparatusLoaded) {
+            setPanelNote(null);   // a note left from a panel closed while loading
+            populatePanel(spanEl);
+            openPanel();
+            return;
+        }
+        // Not here yet: open the panel at once with a short note, then fill it.
         populatePanel(spanEl);
+        setPanelNote('Gathering the commentary for this passage…');
         openPanel();
+        loadApparatus().then(function () {
+            if (activeSpanEl === spanEl) { setPanelNote(null); populatePanel(spanEl); }
+        }, function () {
+            if (activeSpanEl === spanEl) { setPanelNote('The commentary isn’t reachable just now. Please check your connection, then tap the passage again.'); }
+        });
+    }
+
+    function setPanelNote(text) {
+        var note = panelBody.querySelector('.ap-load-note');
+        var empty = panelBody.querySelector('.ap-empty-note');
+        if (!text) { if (note) { note.remove(); } return; }
+        if (empty) { empty.style.display = 'none'; }
+        if (!note) {
+            note = document.createElement('p');
+            note.className = 'ap-empty-note ap-load-note';
+            note.setAttribute('role', 'status');
+            panelBody.appendChild(note);
+        }
+        note.textContent = text;
     }
 
     // ── Event: click / tap ────────────────────────────────────────

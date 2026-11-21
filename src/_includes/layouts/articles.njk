@@ -198,7 +198,7 @@
 
 <!-- Annotation Panel -->
 <div class="ap-backdrop" id="apBackdrop" aria-hidden="true"></div>
-<aside class="ap-panel" id="apPanel" role="complementary" aria-label="Span annotation" aria-hidden="true">
+<aside class="ap-panel" id="apPanel" data-apparatus-src="/articles/apparatus.json" role="complementary" aria-label="Span annotation" aria-hidden="true">
     <header class="ap-header">
         <div class="ap-header-left">
             <span class="ap-type-badge" id="apTypeBadge"></span>
@@ -510,8 +510,7 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- Apparatus data (build-time JSON embed) -->
-<script type="application/json" id="apparatusData">{{ (apparatusShown if apparatusShown else {}) | dump | safe }}</script>
+<!-- Apparatus data: built to /articles/apparatus.json (src/pages/articles-apparatus.njk) and fetched by articles-panel.js once the page has loaded. -->
 <!-- The site's own scripture book map, so the panel can link its references
      through the same rules the reading dock uses (js/apparatus-common.js). -->
 <script type="application/json" id="scriptureBooks">{{ (scriptures.books or {}) | dump | safe }}</script>

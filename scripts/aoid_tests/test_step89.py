@@ -418,8 +418,8 @@ def test_article_11_baptism_text_second_edition_only(site_on, site_off):
 
 
 def test_article_11_panels_carry_the_ratified_floors(site_on):
-    arts = (site_on / "articles" / "index.html").read_text(encoding="utf8")
-    d = json.loads(re.search(r'<script type="application/json" id="apparatusData">(.*?)</script>', arts, re.S).group(1))["A11"]
+    # CODE-SITE-30 (SITE step 68): the apparatus is built to /articles/apparatus.json, no longer embedded in the page.
+    d = json.loads((site_on / "articles" / "apparatus.json").read_text(encoding="utf8"))["A11"]
     ledger = yaml.safe_load(LEDGER.read_text(encoding="utf8"))["scored"]
     f9 = d["s26"]["panel_comment"].split("\n\n")[0]
     # Step 246 (AOID2-LIST-FLOORS): A11-F5 is restated as A11-F5a to e. s9 opens with A11-F5a and s10 with A11-F5d,

@@ -79,6 +79,13 @@ def restoration_anchor(span, ref):
     return hits[0]
 
 
+def read_with_apparatus(site):
+    """The /articles/ page plus its citation apparatus. Since CODE-SITE-30 (SITE step 68) the apparatus is built to
+    /articles/apparatus.json rather than embedded in the page; it is re-indented here to the form the embed had."""
+    data = json.loads(read(site, "articles/apparatus.json"))
+    return read(site, "articles/index.html") + "\n" + json.dumps(data, indent=2, ensure_ascii=False)
+
+
 def embedded_comment(text):
     """The apparatus is embedded in the page as indented JSON; this is how one comment field reads there."""
     return '"comment": ' + json.dumps(text, ensure_ascii=False)
@@ -105,7 +112,7 @@ def test_alma_comments_trimmed_in_the_data():
 
 
 def test_alma_comments_trimmed_in_the_on_build(site_on):
-    page = read(site_on, "articles/index.html")
+    page = read_with_apparatus(site_on)
     assert page.count(embedded_comment(ALMA)) >= 2  # both Alma anchors
     for ref in ALMA_REFS:
         glosses = embedded_glosses(page, ref)
@@ -123,13 +130,13 @@ def test_articles_of_faith_comment_ends_with_an_ellipsis_in_the_data():
 
 
 def test_articles_of_faith_comment_in_the_on_build(site_on):
-    page = read(site_on, "articles/index.html")
+    page = read_with_apparatus(site_on)
     assert embedded_comment(AOF_1_13) in page
     assert embedded_comment('"We believe in being honest, true."') not in page
 
 
 def test_off_build_carries_no_a14_comment(site_off):
-    page = read(site_off, "articles/index.html")
+    page = read_with_apparatus(site_off)
     assert "Amulek receives" not in page and embedded_comment(AOF_1_13) not in page
 
 

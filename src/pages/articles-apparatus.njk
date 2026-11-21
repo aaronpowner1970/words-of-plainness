@@ -1,0 +1,6 @@
+---
+permalink: /articles/apparatus.json
+eleventyExcludeFromCollections: true
+---
+{#- The Articles citation apparatus as its own file (CODE-SITE-30, SITE step 68), built from the same apparatusShown data the page used to embed, so it follows the Second Edition switch exactly as the embed did. articles-panel.js fetches it once the page has loaded. -#}
+{{ (apparatusShown if apparatusShown else {}) | json | safe }}
