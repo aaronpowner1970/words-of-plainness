@@ -692,7 +692,7 @@ def check6(pw, base, out):
 def run_forms(pw, base, include_corrections, signed_in=False):
     out = {}
     b = pw.chromium.launch()
-    for form in (["contact", "newsletter-connect", "newsletter-footer"] + (["corrections"] if include_corrections else [])):
+    for form in (["newsletter-connect", "newsletter-footer"] + (["corrections"] if include_corrections else [])):
         ctx = b.new_context()
         sent = []
 
@@ -717,22 +717,8 @@ def run_forms(pw, base, include_corrections, signed_in=False):
             page.goto(base + "/about/")
             page.evaluate("""() => { localStorage.setItem('wop_access_token','aaa.bbb.ccc'); localStorage.setItem('wop_refresh_token','r.r.r');
                 localStorage.setItem('wop-user', JSON.stringify({name:'Former Member', email:'former@example.org'})); }""")
-        if form == "contact":
-            page.goto(base + "/connect/")
-            page.wait_for_timeout(500)
-            prefill = page.evaluate("[document.getElementById('contact-name').value, document.getElementById('contact-email').value]")
-            page.fill("#contact-name", "Test Reader")
-            page.fill("#contact-email", "reader@example.org")
-            if page.locator("#contact-type").count():
-                page.select_option("#contact-type", index=1)
-            page.fill("#contact-subject", "A question — “about” the site")
-            page.fill("#contact-message", "This is a stubbed test message. Nothing is sent.")
-            page.click("#contactSubmit")
-            page.wait_for_selector("#contactSuccess:not(.hidden)", timeout=10000)
-            confirmation = page.inner_text("#contactSuccess")
-            form_hidden = page.evaluate("document.getElementById('contactForm').classList.contains('hidden')")
-            out[form] = {"prefill_before_typing": prefill, "confirmation": confirmation, "form_hidden_after": form_hidden}
-        elif form.startswith("newsletter"):
+        # The contact form was retired for email (SITE step 61, CODE-SITE-28); its branch is gone.
+        if form.startswith("newsletter"):
             page.goto(base + "/connect/")
             page.wait_for_timeout(1200)
             fid, mid = ("#footerNewsletterForm", "#footerNlMessage") if form == "newsletter-footer" else ("#connectNewsletterForm", "#connectNlMessage")
@@ -786,8 +772,7 @@ def check7(pw, base, base_on, baseline, baseline_on, out):
     signed = run_forms(pw, base, False, signed_in=True)
     comparisons = {}
     ok = True
-    for form, a, b_ in [("contact", old.get("contact"), new.get("contact")),
-                        ("newsletter-connect", old.get("newsletter-connect"), new.get("newsletter-connect")),
+    for form, a, b_ in [("newsletter-connect", old.get("newsletter-connect"), new.get("newsletter-connect")),
                         ("newsletter-footer", old.get("newsletter-footer"), new.get("newsletter-footer")),
                         ("corrections", old_on.get("corrections"), new_on.get("corrections"))]:
         if a is None or b_ is None:
@@ -808,7 +793,7 @@ def check7(pw, base, base_on, baseline, baseline_on, out):
         ok = ok and c["pass"]
     # A reader who was signed in before: same fields, endpoint and confirmation, no token (ruling SITE-JOURNAL-FORM-TOKEN)
     s = {}
-    for form in ["contact", "newsletter-connect"]:
+    for form in ["newsletter-connect"]:
         rb = [r for r in signed[form]["requests"] if r["method"] != "OPTIONS"]
         s[form] = {"authorization_header": [r["headers"].get("authorization") for r in rb],
                    "same_fields_as_guest": [normalise_body(r["body"]) for r in rb] == [normalise_body(r["body"]) for r in new[form]["requests"] if r["method"] != "OPTIONS"],
@@ -818,7 +803,7 @@ def check7(pw, base, base_on, baseline, baseline_on, out):
         ok = ok and s[form]["pass"]
     comparisons["formerly_signed_in_reader"] = s
     name = write(out, "check7_forms.json", {"comparisons": comparisons, "baseline": old, "baseline_on": old_on, "new": new, "new_on": new_on, "signed_in_new": signed})
-    record("7", ok, "contact, corrections and newsletter: same fields, endpoint and confirmation as the baseline build; no token", [name])
+    record("7", ok, "corrections and newsletter (contact form retired, SITE step 61): same fields, endpoint and confirmation as the baseline build; no token", [name])
     return comparisons
 
 

@@ -19,8 +19,14 @@ Checks, each runnable against a locally served build or production:
              content="strict-origin">. The analytics check applies the same rule.
   quiet      typing and saving in the R·J·W journal modal, the Reflections panel and a
              card-chapter reflection cause no request of any kind (analytics included).
-  forms      contact and newsletter: same fields, endpoint, content type and confirmation
-             as the baseline build, with the API stubbed so nothing is sent.
+  forms      newsletter (Connect and footer): same fields, endpoint, content type and
+             confirmation as the baseline build, with the API stubbed so nothing is sent.
+             (The contact form was retired for email in v1.3, SITE step 61; its comparison is gone.)
+
+The wording check is the v1.2 record and fails on the v1.3 text by design; v1.3 wording,
+the absence of the contact form and the Connect email link are checked by
+privacy_v13_acceptance.py, which reuses the banner, behaviour, analytics, referer, quiet and
+forms checks here through NOTICE_KEY and DATE_WINDOW.
 
 Usage:
   python scripts/site_tests/privacy_v12_acceptance.py --site <build dir> | --prod https://www.wordsofplainness.org
@@ -44,6 +50,11 @@ from network_allowlist import classify_page_load, classify_action, is_analytics,
 from playwright.sync_api import sync_playwright  # noqa: E402
 
 GO_LIVE = "18 November 2026"
+# The notice's dismissal key and its date window (reader's local date). privacy_v13_acceptance.py
+# sets these for v1.3; the defaults are v1.2's.
+NOTICE_KEY = "wop-privacy-notice-v1.2-dismissed"
+DATE_WINDOW = (("2026-11-17T23:59:00", False), ("2026-11-18T00:00:30", True), ("2026-12-01T12:00:00", True),
+               ("2026-12-17T23:59:00", True), ("2026-12-18T00:00:30", False), ("2027-03-01T12:00:00", False))
 WIDTHS = [375, 768, 1440]
 BANNER_PAGES = ["/", "/privacy/", "/about/under-the-hood/", "/connect/", "/chapters/11-the-living-christ/",
                 "/chapters/12-beatitudes/", "/articles/", "/seeking-jesus/", "/my-reflections/", "/music/",
@@ -343,7 +354,7 @@ def check_banner_behaviour(pw, base, baseline_base, out, label, insights_script=
     page.wait_for_timeout(300)
     a["dismissed_by_keyboard"] = page.locator("#wopPrivacyNotice").count() == 0
     a["focus_after_dismiss"] = page.evaluate("(() => { const e = document.activeElement; return e.tagName + ' ' + (e.className || ''); })()")
-    a["stored_flag"] = page.evaluate("localStorage.getItem('wop-privacy-notice-v1.2-dismissed')")
+    a["stored_flag"] = page.evaluate(f"localStorage.getItem('{NOTICE_KEY}')")
     a["header_top_after_dismiss"] = page.evaluate("document.querySelector('.header').getBoundingClientRect().top")
     page.reload(wait_until="load")
     page.wait_for_timeout(800)
@@ -428,10 +439,9 @@ def check_banner_behaviour(pw, base, baseline_base, out, label, insights_script=
     ev["storage_blocked"] = s
     ok = ok and s["pass"]
 
-    # Date window (reader's local date): shows 18 Nov - 17 Dec 2026, gone from 18 Dec 2026.
+    # Date window (reader's local date): v1.2 shows 18 Nov - 17 Dec 2026, gone from 18 Dec 2026 (DATE_WINDOW).
     d = {}
-    for when, expect in (("2026-11-17T23:59:00", False), ("2026-11-18T00:00:30", True), ("2026-12-01T12:00:00", True),
-                         ("2026-12-17T23:59:00", True), ("2026-12-18T00:00:30", False), ("2027-03-01T12:00:00", False)):
+    for when, expect in DATE_WINDOW:
         ctx = browser.new_context()
         page = ctx.new_page()
         page.clock.set_fixed_time(datetime.fromisoformat(when))
@@ -628,7 +638,7 @@ def check_forms(pw, base, baseline_base, out, label):
     new = ja.run_forms(pw, base, False)
     old = ja.run_forms(pw, baseline_base, False)
     comp, ok = {}, True
-    for form in ("contact", "newsletter-connect", "newsletter-footer"):
+    for form in ("newsletter-connect", "newsletter-footer"):
         a, b = old[form], new[form]
         ra = [r for r in a["requests"] if r["method"] != "OPTIONS"]
         rb = [r for r in b["requests"] if r["method"] != "OPTIONS"]
@@ -642,7 +652,7 @@ def check_forms(pw, base, baseline_base, out, label):
         comp[form] = c
         ok = ok and c["pass"]
     name = write(out, f"forms_{label}.json", {"comparisons": comp, "baseline": old, "new": new})
-    record(f"forms-{label}", ok, "contact and newsletter (Connect and footer) unchanged against the baseline build; API stubbed", [name])
+    record(f"forms-{label}", ok, "newsletter (Connect and footer) unchanged against the baseline build; API stubbed", [name])
 
 
 def main():

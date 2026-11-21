@@ -11,24 +11,33 @@ description: "How Words of Plainness Ministry collects, uses, protects, and shar
 <section class="content-section" id="privacy-opening">
     <div class="content-wrapper">
         {# "What changed" box, v1.2 (N1, ruling SITE-PRIVACY-ANNOUNCE as amended by
-           SITE-PRIVACY-CORRECTIONS-FORM; CODE-SITE-22). The site-wide notice
+           SITE-PRIVACY-CORRECTIONS-FORM; CODE-SITE-22). v1.3 (ruling
+           SITE-CONTACT-NO-EMAIL option 1; CODE-SITE-28) replaces the contact item with
+           "The contact form is retired.", the only item under the v1.3 heading; the
+           three v1.2 items follow under the italic lead-in "Earlier, on 18 November
+           2026 (version 1.2):" (G3, Aaron's choice B; CODE-SITE-29). The v1.2 part may
+           be removed once the v1.3 notice period ends (a later step). The site-wide notice
            (partials/privacy-notice.njk) links to this anchor; keep the id stable.
            Date and version come from src/_data/privacyPolicy.json. #}
         <div class="wop-what-changed" id="{{ privacyPolicy.noticeAnchor }}">
             <h2>What changed on {{ privacyPolicy.date }} (version {{ privacyPolicy.version }})</h2>
             <ul>
                 <li>
+                    <strong>The contact form is retired.</strong> The Connect page now invites
+                    you to write to Brother Aaron by email. Your message goes only to his
+                    inbox; nothing is saved on the ministry&rsquo;s application server.
+                    Version 1.2 of this page said contact messages were emailed to him and
+                    also saved on that server. In fact they were only saved there, where he
+                    read them. The few messages saved that way are being deleted.
+                </li>
+            </ul>
+            <p style="font-style: italic; margin: var(--space-md, 1.5rem) 0 var(--space-sm, 1rem);">Earlier, on 18 November 2026 (version 1.2):</p>
+            <ul>
+                <li>
                     <strong>Your journal stays with you.</strong> Reflections, journal entries
                     and questions you write on this site are now kept only in your own
                     browser. Nothing you write there is sent to us, and you can download it
                     at any time.
-                </li>
-                <li>
-                    <strong>Contact form messages.</strong> These are emailed to Brother
-                    Aaron, and a copy is also saved on the ministry&rsquo;s application
-                    server. Earlier versions of this page said they were not stored. That
-                    was wrong, and it is now corrected. You may ask for any message to be
-                    deleted.
                 </li>
                 <li>
                     <strong>Page-view counts.</strong> The site now uses Vercel Web Analytics
@@ -148,7 +157,7 @@ description: "How Words of Plainness Ministry collects, uses, protects, and shar
     <div class="content-wrapper">
         <h2>Information We Collect from Forms</h2>
         <p>
-            Two forms on this site accept information:
+            One form on this site accepts information:
         </p>
         <p>
             <strong>The newsletter signup form</strong>, which appears in the site footer
@@ -157,11 +166,10 @@ description: "How Words of Plainness Ministry collects, uses, protects, and shar
             preventing spam and abuse of the form.
         </p>
         <p>
-            <strong>The contact form</strong>, which appears on the Connect page, collects
-            your name, email address, and whatever message you write. Each message is
-            sent to Brother Aaron by email, and a copy is also saved on the ministry&rsquo;s
-            application server described below, where only Brother Aaron, as the
-            site&rsquo;s administrator, can read it.
+            <strong>Messages you send by email.</strong> The Connect page invites you to
+            write to Brother Aaron at host@brotheraaron.org. Your message, your email
+            address and anything else you include reach his inbox and nowhere else; the
+            site itself receives nothing.
         </p>
     </div>
 </section>
@@ -184,8 +192,7 @@ description: "How Words of Plainness Ministry collects, uses, protects, and shar
                 and to honor your choice if you later unsubscribe.
             </li>
             <li>
-                <strong>To respond to messages</strong> you send us through the contact
-                form.
+                <strong>To respond to messages</strong> you send Brother Aaron by email.
             </li>
             <li>
                 <strong>To protect the integrity of the site</strong> &mdash; preventing
@@ -209,7 +216,7 @@ description: "How Words of Plainness Ministry collects, uses, protects, and shar
     <div class="content-wrapper">
         <h2>How We Store and Secure Your Information</h2>
         <p>
-            Submissions from the contact and newsletter forms pass through a
+            Submissions from the newsletter form pass through a
             small application server operated by the ministry and hosted on a private,
             password-protected server at PythonAnywhere. Connections to our servers are
             encrypted in transit using HTTPS. Your reflections are not stored there; they
@@ -253,7 +260,7 @@ description: "How Words of Plainness Ministry collects, uses, protects, and shar
         </p>
         <p>
             <strong>PythonAnywhere</strong> &mdash; hosts the application server that
-            receives submissions from the contact and newsletter forms.
+            receives submissions from the newsletter form.
             PythonAnywhere sees this information only because it operates the
             infrastructure on which the server runs.
         </p>
@@ -413,11 +420,9 @@ description: "How Words of Plainness Ministry collects, uses, protects, and shar
                 other purpose.
             </li>
             <li>
-                <strong>Contact form messages</strong> are kept in Brother Aaron&rsquo;s
-                email as part of normal correspondence, and a copy of each is kept on the
-                ministry&rsquo;s application server, until he deletes them. Neither copy is
-                systematically purged. You may ask him to delete any message you have
-                sent, and he will remove both copies.
+                <strong>Email you send to Brother Aaron</strong> is kept in his inbox as
+                part of normal correspondence until he deletes it. It is not systematically
+                purged. You may ask him to delete any message you have sent, and he will.
             </li>
             <li>
                 <strong>Anonymous analytics data</strong> is kept by Vercel for the limited
@@ -464,8 +469,8 @@ description: "How Words of Plainness Ministry collects, uses, protects, and shar
         <p>
             Questions about this policy, requests to exercise the rights described above,
             and any other privacy-related correspondence should be sent to Brother Aaron
-            using the <a href="/connect/#contact" class="text-gold">contact form</a> on
-            our Connect page. We respond personally; there is no automated privacy
+            by email at <a href="mailto:host@brotheraaron.org?subject=Privacy" class="text-gold">host@brotheraaron.org</a>,
+            with the subject &ldquo;Privacy.&rdquo; We respond personally; there is no automated privacy
             queue and no call center. Your question reaches a person.
         </p>
     </div>

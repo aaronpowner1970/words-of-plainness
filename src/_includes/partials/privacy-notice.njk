@@ -1,5 +1,9 @@
-{# Privacy Policy v1.2 site-wide notice (N2, ruling SITE-PRIVACY-ANNOUNCE; CODE-SITE-22,
-   SITE step 33). Wording approved word for word; do not edit it here.
+{# Privacy Policy site-wide notice (v1.2: N2, ruling SITE-PRIVACY-ANNOUNCE; CODE-SITE-22,
+   SITE step 33. v1.3 replaces it through the same element: SITE step 61, CODE-SITE-28;
+   version, date and window come from src/_data/privacyPolicy.json, and the dismissal
+   key carries the version, so a reader who dismissed v1.2 sees v1.3).
+   Wording approved word for word (v1.3 sentence: G1, approved 21 Nov 2026, CODE-SITE-29);
+   do not edit it here.
    It shows from privacyPolicy.noticeFrom for 30 days and stops by itself on
    privacyPolicy.noticeUntil (reader's local date), with no further deploy. Dismissal
    is remembered in localStorage; every storage read and write is inside try/catch,
@@ -7,7 +11,7 @@
    hidden and shown by the script, so without JavaScript it does not appear.
    Remove this include, and partials/privacy-notice-styles.njk, after it has expired. #}
 <div class="wop-privacy-notice" id="wopPrivacyNotice" role="region" aria-labelledby="wopPrivacyNoticeText" data-from="{{ privacyPolicy.noticeFrom }}" data-until="{{ privacyPolicy.noticeUntil }}" data-key="wop-privacy-notice-v{{ privacyPolicy.version }}-dismissed" data-pagefind-ignore hidden>
-    <p class="wop-privacy-notice-text" id="wopPrivacyNoticeText">Our Privacy Policy changed on {{ privacyPolicy.date }}: your journal stays on your device, and we now count page views without cookies. <a href="/privacy/#{{ privacyPolicy.noticeAnchor }}">See what changed <span aria-hidden="true">→</span></a></p>
+    <p class="wop-privacy-notice-text" id="wopPrivacyNoticeText">Our Privacy Policy changed on {{ privacyPolicy.date }}: the contact form is retired, and messages now reach Brother Aaron by email only. <a href="/privacy/#{{ privacyPolicy.noticeAnchor }}">See what changed <span aria-hidden="true">→</span></a></p>
     <button type="button" class="wop-privacy-notice-dismiss" id="wopPrivacyNoticeDismiss">Dismiss</button>
 </div>
 <script>

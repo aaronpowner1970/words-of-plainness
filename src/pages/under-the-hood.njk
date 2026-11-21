@@ -57,7 +57,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
     <div class="content-wrapper">
         <h2>At a glance</h2>
 
-        <p>wordsofplainness.org is a <strong>static-first site with a thin dynamic edge</strong>. Every page is pre-rendered by Eleventy (Nunjucks templates over Markdown and structured data) and served as plain HTML from Vercel's CDN. Heavy media lives separately on Cloudflare R2 behind its own subdomain. The few things that must be dynamic—the contact and newsletter forms—talk to a small Django REST API on PythonAnywhere, and a handful of Vercel serverless functions handle automation such as social notifications. There is no front-end framework, no database behind the pages themselves, and no cookies or cross-site tracking: a visitor's browser loads the site's own HTML, CSS and vanilla JavaScript, Vercel Web Analytics' cookie-free page-view script from the site's own domain, one Google Fonts stylesheet, and audio and images from the media CDN.</p>
+        <p>wordsofplainness.org is a <strong>static-first site with a thin dynamic edge</strong>. Every page is pre-rendered by Eleventy (Nunjucks templates over Markdown and structured data) and served as plain HTML from Vercel's CDN. Heavy media lives separately on Cloudflare R2 behind its own subdomain. The one thing that must be dynamic—the newsletter form—talks to a small Django REST API on PythonAnywhere, and a handful of Vercel serverless functions handle automation such as social notifications. There is no front-end framework, no database behind the pages themselves, and no cookies or cross-site tracking: a visitor's browser loads the site's own HTML, CSS and vanilla JavaScript, Vercel Web Analytics' cookie-free page-view script from the site's own domain, one Google Fonts stylesheet, and audio and images from the media CDN.</p>
 
         <p>The interesting engineering is less in the stack than in what the build does with it: build-time cross-referencing between book chapters and the Articles of Interfaith Discipleship, narration audio that highlights the text as it is read, song lyrics synced line-by-line to the music, a citation apparatus with over a thousand scripture links, all generated from the site's own book map, and validation gates that refuse to ship data that fails its checks.</p>
     </div>
@@ -106,7 +106,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
             <li><strong>Edit under written standards.</strong> The SCRIBE works as a theological editor, not a co-author. It may clarify; it may not soften doctrine, add disclaimers, trade covenant language for therapeutic language, or compress an argument that builds its weight. When in doubt, fidelity wins over elegance.</li>
             <li><strong>Verify.</strong> Scripture quotations are checked against authoritative text, sources are checked at the source rather than from a description of them, and learner-facing pages are scored against a written teaching standard before they ship.</li>
             <li><strong>Authorize, then build.</strong> New songs, videos and read-aloud prose pass Michelle’s ears and eyes along the way, and nothing is written to the site, committed or deployed without his explicit approval. Automated gates then check the data, and the live page is opened in a browser before the work counts as done.</li>
-            <li><strong>Answer for it.</strong> Every page carries his name and his accountability. Readers can report an error through the contact form, and corrections go through the same loop.</li>
+            <li><strong>Answer for it.</strong> Every page carries his name and his accountability. Readers can report an error by email, and corrections go through the same loop.</li>
         </ol>
 
         <h3 id="tools-and-roles">The tools and their roles</h3>
@@ -419,12 +419,12 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
     <div class="content-wrapper">
         <h2>Forms and the API backend</h2>
 
-        <p>The site's forms are handled by one small service: a Django REST API on PythonAnywhere backed by MySQL. The static pages carry the API's base address in a <code>data-</code> attribute on <code>&lt;body&gt;</code>, and a single client module talks to it.</p>
+        <p>The newsletter form is handled by one small service: a Django REST API on PythonAnywhere backed by MySQL. The static pages carry the API's base address in a <code>data-</code> attribute on <code>&lt;body&gt;</code>, and a single client module talks to it.</p>
 
         <table class="uth-table">
             <thead><tr><th scope="col">Function</th><th scope="col">What it does</th></tr></thead>
             <tbody>
-                <tr><th scope="row">Contact and newsletter</th><td>Contact messages, Articles corrections and newsletter sign-up</td></tr>
+                <tr><th scope="row">Newsletter</th><td>Newsletter sign-up</td></tr>
                 <tr><th scope="row">Notification marker</th><td>Remembers which blog post was last announced, so the social notifier never posts twice</td></tr>
             </tbody>
         </table>
@@ -531,7 +531,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
                 <tr><th scope="row">Do you track visitors?</th><td>Only in aggregate. Vercel Web Analytics counts page views without cookies, using an anonymous code that resets daily. There is no advertising or cross-site tracking script.</td></tr>
                 <tr><th scope="row">Is the source code open?</th><td>It is not released under an open-source license</td></tr>
                 <tr><th scope="row">Did AI write this site?</th><td>AI assistance writes and maintains much of the code under the author's direction and approval; the author is the source and final word on the content. See the <a href="/about/#ai-disclosure" class="text-gold">How This Work Is Made</a> section on the About page</td></tr>
-                <tr><th scope="row">Can I report a mistake?</th><td>Yes, through the contact form on the <a href="/connect/#contact" class="text-gold">Connect page</a>. The Articles' citation entries link there directly</td></tr>
+                <tr><th scope="row">Can I report a mistake?</th><td>Yes, by email from the <a href="/connect/#contact" class="text-gold">Connect page</a>. The Articles' citation entries link there directly</td></tr>
             </tbody>
         </table>
     </div>
