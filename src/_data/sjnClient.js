@@ -134,10 +134,22 @@ module.exports = function () {
         scripture_books: scriptures.books
     };
     client.byId = byId;
-    // Pre-serialized, script-safe JSON for inline <script> embedding.
+    // Pre-serialized, script-safe JSON of the full object. Since SITE step 69 no page inlines it
+    // (layouts/sjn.njk writes json_html_client, below); the templates still read the full object.
     const { byId: _omit, ...serializable } = client;
     let json = JSON.stringify(serializable);
     for (const [ch, esc] of SCRIPT_UNSAFE) json = json.split(ch).join(esc);
     client.json_html = json;
+    // What the browser gets as window.SJN (ruling SITE-PAYLOAD-SJN-CREATION option 1, SITE step 69):
+    // only what js/seeking-jesus.js reads, which is six fields of each description, the four-clause
+    // sentences and the scripture book map. A script that needs another field must add it here.
+    const CLIENT_FIELDS = ["id", "code", "corpus", "predicate", "sentence", "summary"];
+    let slim = JSON.stringify({
+        predicates: predicates.map((p) => Object.fromEntries(CLIENT_FIELDS.map((k) => [k, p[k]]))),
+        four_clause: fourClause,
+        scripture_books: scriptures.books
+    });
+    for (const [ch, esc] of SCRIPT_UNSAFE) slim = slim.split(ch).join(esc);
+    client.json_html_client = slim;
     return client;
 };

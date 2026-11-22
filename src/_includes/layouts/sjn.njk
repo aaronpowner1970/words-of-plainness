@@ -59,7 +59,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script>window.SJN = {{ sjnClient.json_html | safe }};</script>
+<script>window.SJN = {{ sjnClient.json_html_client | safe }};</script>
 <script src="/js/seeking-jesus.js?v={{ site.version }}"></script>
 {# The Reflections panel (CODE-SITE-18) #}
 {% set reflectionIds = ["seeking-jesus"] %}{% set reflectionTitle = "Seeking Jesus of Nazareth" %}{% set reflectionFile = "seeking-jesus" %}{% set reflectionMode = "continue" %}
