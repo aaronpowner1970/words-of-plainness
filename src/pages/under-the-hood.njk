@@ -504,7 +504,7 @@ description: "How wordsofplainness.org is built: a static Eleventy site on Verce
         <h3>What those choices cost</h3>
 
         <ul>
-            <li>Some pages carry a large inline data payload because the data is embedded at build time: about 200 KB on the Seeking Jesus app and about 300 KB on the Creation study, before compression. Trimming these is planned. The Articles citation apparatus now loads as its own file just after the page.</li>
+            <li>Some pages carry a large inline data payload because the data is embedded at build time: about 300 KB on the Creation study, before compression. Trimming it is planned. The Seeking Jesus app now carries only the few fields its script uses, and the Articles citation apparatus loads as its own file just after the page.</li>
             <li>Inline scripts mean the site does not yet send a strict Content-Security-Policy header. HTTPS with HSTS is enforced.</li>
             <li>The forms depend on a single small API host. If it is down, reading continues but form submissions fail until it returns.</li>
             <li>Site search is basic; filtering and result weighting are a planned improvement.</li>
