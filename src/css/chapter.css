@@ -4154,6 +4154,12 @@ h2[id], h3[id], [id^="section-"] {
     margin-top: 0.5rem;
 }
 
+/* /articles/ subtitle only (First Edition and AOID2 share this page) */
+.articles-subtitle--aoid {
+    font-size: clamp(1.1rem, 2.6vw, 1.4rem);
+    max-width: 40rem;
+}
+
 /* --- Articles Layout (no TOC sidebar) --- */
 .articles-layout {
     max-width: 780px;

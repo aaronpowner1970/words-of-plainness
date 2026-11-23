@@ -23,7 +23,7 @@
 <section class="chapter-hero articles-hero" data-pagefind-ignore>
     <p class="articles-eyebrow">{% if aoidSecondEdition.on %}{{ aoidSecondEdition.heroLine }}{% else %}A Words of Plainness Declaration{% endif %}</p>
     <h1 class="chapter-title">{{ title }}</h1>
-    <p class="articles-subtitle">{{ subtitle }}</p>
+    {% if aoidSecondEdition.on %}<p class="articles-subtitle articles-subtitle--aoid">{{ subtitle_second_edition or subtitle }}</p>{% else %}<p class="articles-subtitle">{{ subtitle }}</p>{% endif %}
 </section>
 
 <!-- Main Content -->
