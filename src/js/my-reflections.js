@@ -151,13 +151,21 @@ var Journal = {
         var emptyMsg = document.getElementById('djEmpty');
         var groups = this.groups();
 
+        // #djEmpty lives inside the accordion, so the first render with entries
+        // removes it; check it exists before touching it (CODE-SITE-39).
         if (groups.length === 0) {
-            emptyMsg.style.display = 'block';
+            if (emptyMsg) {
+                emptyMsg.style.display = 'block';
+            }
             accordion.innerHTML = '';
-            accordion.appendChild(emptyMsg);
+            if (emptyMsg) {
+                accordion.appendChild(emptyMsg);
+            }
             return;
         }
-        emptyMsg.style.display = 'none';
+        if (emptyMsg) {
+            emptyMsg.style.display = 'none';
+        }
 
         var openIds = {};
         Array.prototype.forEach.call(accordion.querySelectorAll('.dj-chapter-card.open'), function (c) {
