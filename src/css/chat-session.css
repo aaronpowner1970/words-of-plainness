@@ -93,6 +93,21 @@
     .chat-bar-link { min-height: 24px; box-sizing: border-box; }
 }
 
+/* Tablets, restacked the same way (CODE-SITE-39). In one row the practice
+   line takes a max-content centre column while the links overflow their 1fr
+   column to the left, and between 601 and 959px the two visibly ran through
+   each other. Row 1: the label and the links. Row 2: the practice line. The
+   phone bar above and the desktop bar (960px and up) are unchanged. */
+@media (min-width: 600.02px) and (max-width: 959.98px) {
+    .chat-bar {
+        grid-template-columns: minmax(0, 1fr) max-content;
+        row-gap: 2px;
+    }
+    .chat-bar-label { grid-column: 1; grid-row: 1; }
+    .chat-bar-actions { grid-column: 2; grid-row: 1; }
+    .chat-bar-practice { grid-column: 1 / -1; grid-row: 2; }
+}
+
 /* ── The stage: sizes (mockup E) ─────────────────────────────
    On a chat video page the stage sits outside the 1200px reading container,
    first in a full-width .chat-scope (see the layouts), and <main> is the
