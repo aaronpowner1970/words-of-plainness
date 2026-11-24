@@ -93,6 +93,9 @@ $('ab-next').addEventListener('click',function(){go(i+1)});
 document.addEventListener('keydown',function(e){
   var t=e.target.tagName;
   if(t==='TEXTAREA'||t==='INPUT'||t==='SELECT'||e.target.isContentEditable) return;
+  /* CODE-SITE-37: Space on a focused quiz option or fork card chooses it (the button's own
+     behaviour) instead of turning the slide. Every other key and target is as before. */
+  if(e.key===' '&&e.target.closest&&e.target.closest('.ab-opt,.ab-forkcard')) return;
   if(e.ctrlKey||e.metaKey||e.altKey) return;
   if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();closeToc();go(i+1);}
   if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();closeToc();go(i-1);}
@@ -122,7 +125,9 @@ bS.onclick=function(){setMode(false)}; bP.onclick=function(){setMode(true)};
 /* ---------- quizzes ----------
    G5 (Teaching Practices v1.1; CODE-SITE-20): answering is invited, never required.
    "Show the answer" opens the same feedback without choosing; nothing is marked
-   against the reader. */
+   against the reader. CODE-SITE-37: the options are buttons (aria-pressed shows the
+   reader's choice), and a choice wears the same neutral ab-sel look whether it is
+   right or wrong; there is no "wrong" state. */
 [].slice.call(app.querySelectorAll('[data-quiz]')).forEach(function(box){
   var id=box.dataset.quiz, ans=box.dataset.answer;
   var fb=app.querySelector('[data-fb="'+id+'"]');
@@ -130,10 +135,11 @@ bS.onclick=function(){setMode(false)}; bP.onclick=function(){setMode(true)};
   box.addEventListener('click',function(e){
     var o=e.target.closest('.ab-opt'); if(!o) return;
     [].slice.call(box.querySelectorAll('.ab-opt')).forEach(function(x){
-      x.classList.remove('ab-sel','ab-right','ab-wrong');
+      x.classList.remove('ab-sel','ab-right');
+      x.setAttribute('aria-pressed','false');
       if(x.dataset.k===ans) x.classList.add('ab-right');
     });
-    if(o.dataset.k!==ans) o.classList.add('ab-wrong');
+    o.classList.add('ab-sel'); o.setAttribute('aria-pressed','true');
     fb.classList.add('ab-on');
     if(show) show.hidden=true;
     store['quiz-'+id]=o.dataset.k; save();
@@ -267,7 +273,8 @@ function resetGridUI(){
    it clears placements only and leaves answers and reflections alone. */
 function resetAnswersUI(){
   [].slice.call(app.querySelectorAll('.ab-opt')).forEach(function(o){
-    o.classList.remove('ab-sel','ab-right','ab-wrong');
+    o.classList.remove('ab-sel','ab-right');
+    o.setAttribute('aria-pressed','false');
   });
   [].slice.call(app.querySelectorAll('[data-fb]')).forEach(function(f){
     f.classList.remove('ab-on');
@@ -275,6 +282,7 @@ function resetAnswersUI(){
   [].slice.call(app.querySelectorAll('.ab-showfb')).forEach(function(b){ b.hidden=false; });
   [].slice.call(app.querySelectorAll('.ab-forkcard')).forEach(function(c){
     c.classList.remove('ab-sel');
+    c.setAttribute('aria-pressed','false');
   });
   $('ab-forkExperiment').style.display='none';
   $('ab-forkLong').style.display='none';
@@ -293,8 +301,10 @@ if(store.postX!=null){ restoreB(store.postX,store.postY); }
 /* ---------- fork ---------- */
 [].slice.call(app.querySelectorAll('.ab-forkcard')).forEach(function(c){
   c.onclick=function(){
-    [].slice.call(app.querySelectorAll('.ab-forkcard')).forEach(function(x){x.classList.remove('ab-sel')});
-    c.classList.add('ab-sel');
+    [].slice.call(app.querySelectorAll('.ab-forkcard')).forEach(function(x){
+      x.classList.remove('ab-sel'); x.setAttribute('aria-pressed','false');
+    });
+    c.classList.add('ab-sel'); c.setAttribute('aria-pressed','true');
     var f=c.dataset.fork;
     $('ab-forkExperiment').style.display=(f==='experiment')?'':'none';
     $('ab-forkLong').style.display=(f==='long')?'':'none';

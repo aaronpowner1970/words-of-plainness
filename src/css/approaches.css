@@ -17,7 +17,6 @@
   --ink:#2A1E12; --ink2:#4A3826; --inkMute:#6E6152;
   --inkGold:#7A5514; --inkGoldD:#5E400C; --rule:rgba(122,85,20,.22);
   --teal:#2F6070; --tealBg:#E3EDF0; --green:#2F6B34; --greenBg:#E2EFE3;
-  --rose:#9A342B; --roseBg:#F6E4E1;
   --serif:'Crimson Pro',Georgia,'Times New Roman',serif;
 
   background:var(--ground);color:var(--shellText);font-family:var(--serif);
@@ -104,14 +103,25 @@ body.ab-present #ab-stage{padding-top:2rem}
 .ab-app textarea::placeholder,.ab-app input::placeholder{color:#9A8C79}
 .ab-app textarea:focus,.ab-app input:focus{outline:0;border-color:var(--inkGold);box-shadow:0 0 0 3px rgba(122,85,20,.13)}
 .ab-opts{display:grid;gap:.5rem;margin:.6rem 0}
-.ab-opt{display:flex;gap:.7rem;align-items:flex-start;border:1px solid var(--rule);border-radius:8px;
+/* Quiz options are <button>s (CODE-SITE-37, keyboard and screen reader). The first
+   line undoes what a browser gives a button, so they look exactly as the <div>s did. */
+.ab-opt{font:inherit;letter-spacing:inherit;word-spacing:inherit;text-transform:inherit;text-indent:inherit;
+  text-shadow:inherit;text-rendering:inherit;text-align:inherit;margin:0;width:100%;
+  display:flex;gap:.7rem;align-items:flex-start;border:1px solid var(--rule);border-radius:8px;
   padding:.65rem .85rem;cursor:pointer;background:var(--field);font-size:.96rem;transition:.18s;color:var(--ink2)}
 .ab-opt:hover{border-color:var(--inkGold);background:#FFFCF4}
+/* Keyboard focus on quiz options and fork cards: the page's ink-gold (about 6:1 on the
+   cream card; the site's lighter gold ring is about 2.5:1 there). */
+.ab-opt:focus-visible,.ab-forkcard:focus-visible{outline:2px solid var(--inkGold);outline-offset:2px;
+  transition-property:border-color,background-color,color,box-shadow}   /* the outline appears at once */
 .ab-opt .ab-k{color:var(--inkGold);font-weight:700;min-width:1.1em}
+/* The reader's choice, right or wrong, wears the page's neutral chosen look (the fork
+   card's). Nothing marks a choice wrong (CODE-SITE-37; criterion 7, nothing is graded).
+   Once the feedback is open the right option is green, as after "Show the answer"; on a
+   right choice the green sits inside the same chosen ring. */
+.ab-opt.ab-sel{border-color:var(--inkGold);background:#FAF2E1;box-shadow:0 0 0 3px rgba(122,85,20,.13)}
 .ab-opt.ab-right{border-color:var(--green);background:var(--greenBg);color:var(--ink)}
 .ab-opt.ab-right .ab-k{color:var(--green)}
-.ab-opt.ab-wrong{border-color:var(--rose);background:var(--roseBg)}
-.ab-opt.ab-wrong .ab-k{color:var(--rose)}
 .ab-fb{display:none;margin-top:.85rem;padding:.85rem 1rem;border-radius:8px;font-size:.94rem;
   background:var(--inset);border-left:4px solid var(--inkGold);color:var(--ink2)}
 .ab-fb.ab-on{display:block;animation:ab-in .3s}
@@ -270,7 +280,10 @@ body.ab-present .ab-ico.ab-left{margin:.2rem 2rem 1rem 0}
 .ab-verse b{display:block;font-size:1.1rem;font-style:italic;margin-bottom:.4rem;color:var(--ink)}
 .ab-verse small{margin-top:.2rem}
 .ab-fork{display:grid;gap:1rem;margin:1.7rem 0}
-.ab-forkcard{position:relative;border:2px solid var(--rule);border-radius:10px;background:var(--inset);
+/* Fork cards are <button>s too (CODE-SITE-37); the first line undoes the browser's button look. */
+.ab-forkcard{font:inherit;color:inherit;letter-spacing:inherit;word-spacing:inherit;text-transform:inherit;
+  text-indent:inherit;text-shadow:inherit;text-rendering:inherit;text-align:inherit;margin:0;display:block;width:100%;
+  position:relative;border:2px solid var(--rule);border-radius:10px;background:var(--inset);
   padding:1.15rem 1.3rem 1.15rem 1.3rem;cursor:pointer;transition:.2s}
 .ab-forkcard:hover{border-color:var(--inkGold);background:#F6EBD4}
 .ab-forkcard.ab-sel{border-color:var(--inkGold);background:#FAF2E1;box-shadow:0 0 0 3px rgba(122,85,20,.13)}
