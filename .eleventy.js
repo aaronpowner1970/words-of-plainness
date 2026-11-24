@@ -601,9 +601,30 @@ module.exports = function(eleventyConfig) {
     });
 
     // Scripture URL construction (build-time filter for citation panel)
-    // Wraps existing generateScriptureUrl helper, normalizing en-dashes
+    // Wraps existing generateScriptureUrl helper, normalizing en-dashes.
+    // Two forms the helper cannot parse are handled here first: a whole
+    // chapter ("Luke 11") opens at the chapter, as js/apparatus-common.js
+    // already does in the Articles panel, and a verse list ("Alma 5:14, 26",
+    // "John 14:16-17, 26") opens at its first verse. The first verse alone,
+    // not a range: the Church site highlights an id=p16-p17 range but does
+    // not scroll to it, and it does scroll to id=p16. Anything else, JST
+    // references included, goes to the helper unchanged. (The Church site's
+    // JST Matthew 6 page holds verses 14, 22, 25-27 and 38 only, so it has no
+    // address for JST Matthew 6:9 or 6:9-15; CODE-SITE-39.)
     eleventyConfig.addFilter("scriptureUrl", function(ref) {
-        return generateScriptureUrl(ref.replace(/\u2013/g, '-'));
+        const r = ref.replace(/\u2013/g, '-');
+        const chapterOnly = r.match(/^(.+?)\s+(\d+)$/);
+        if (chapterOnly) {
+            const bookPath = scriptureData.books[chapterOnly[1].toLowerCase().trim()];
+            if (bookPath) {
+                return `https://www.churchofjesuschrist.org/study/scriptures/${bookPath}/${chapterOnly[2]}?lang=eng`;
+            }
+        }
+        const list = r.match(/^(.+?\s+\d+:\d+)(?:-\d+)?\s*,/);
+        if (list) {
+            return generateScriptureUrl(list[1]);
+        }
+        return generateScriptureUrl(r);
     });
     
     // =========================================
