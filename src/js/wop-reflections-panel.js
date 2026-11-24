@@ -41,7 +41,7 @@
         heading: 'Your reflections',
         sub: 'Kept only on this device. Download to keep them.',
         questions: 'My questions',
-        invite: 'What question is this raising for you? Write it down; it is yours to keep.',
+        invite: 'What question is this raising for you? How might it apply to your life? Write your thoughts down here; they are yours to keep.',
         // Teaching Practices v1.1, gate G5, word for word (src/_data/g5.js). The panel is its own
         // panel, so My questions carries the first-prompt line; the page passes "read on" or
         // "continue" (components/reflections-panel.njk).
@@ -57,7 +57,7 @@
         download: 'Download',
         popout: 'Pop out',
         close: 'Close',
-        saveQuestion: 'Save question',
+        saveQuestion: 'Save',
         remove: 'Remove',
         cancel: 'Cancel',
         journal: 'My Discipleship Journal',
