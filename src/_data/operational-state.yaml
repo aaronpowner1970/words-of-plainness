@@ -7,7 +7,7 @@
 # session_summaries — NOT here. Update this file in the same session
 # whenever phase, deployment status, or blockers change.
 #
-# Last updated: October 29, 2026
+# Last updated: November 24, 2026
 # ═══════════════════════════════════════════════════════════════════
 
 current_phase:
@@ -456,6 +456,47 @@ workstreams:
       (not migrated). No analytics on the site, so no narration events.
       Not tested: phone rotation to landscape; the prefers-color-scheme: light
       highlight variant (the site is dark-only).
+
+  - id: site-fixes
+    name: "Site chrome and small fixes (SITE pathway)"
+    status: live
+    priority: low
+    state: >
+      HEADER: LIVE 2026-11-16 (commit 9900b69; built by CODE-SITE-15, verified
+      on production by CODE-SITE-16). A gold Search icon links to /search/ on
+      every page with the shared header, and the "Listen" menu is renamed
+      "Media". The icon spacing at 1400px stays as it is (author, 2026-11-19:
+      "Leave it").
+      SMALL FIXES BATCH, SITE step 17 (CODE-SITE-39, 2026-11-24): (a) Under the
+      Hood quick answer "Are scripture links typed by hand?" opens "Mostly not."
+      and says the card chapters' citations are entered by hand in their source.
+      (b) The chapter citation panel's scriptureUrl filter (.eleventy.js) sends a
+      whole chapter ("Luke 11") to the chapter and a verse list ("Alma 5:14, 26")
+      to its first verse: 13 links that fell back to the bare /study/scriptures
+      address now open their passage; the other 435 citation-panel links are
+      unchanged. The two JST Matthew 6 links on Ch 5 stay on the fallback,
+      because the Church site's JST Matthew 6 page holds only verses 14, 22,
+      25–27 and 38. (c) Chat video pages, 601–959px: the bar restacks (label and
+      links on row 1, practice line on row 2), so the practice line no longer
+      runs through "About this film" and "Chat menu"; the phone and desktop bars
+      are unchanged. (f) Code It Yourself lede: "Decide the category first if you
+      can; the project’s code and reasoning are there when you want them."
+      (h) /my-reflections/ no longer throws after a download (null check in
+      js/my-reflections.js), so its "Not yet downloaded" markers now clear after
+      a download. (i) Reflections panel, My questions: the invitation reads "What
+      question is this raising for you? How might it apply to your life? Write
+      your thoughts down here; they are yours to keep." and the button reads
+      "Save". Not changed: (d) the chat stage's 48px --chat-bar-h (at 375x667 and
+      390x844 the stage fits the viewport; the 64svh term governs); (g) the four
+      stale .git/worktrees records, which git worktree prune cannot delete
+      (Permission denied).
+    open_items: >
+      (1) Chat bar at 960–1040px (desktop, outside step 17's ruling): the
+      practice line still runs into the links. (2) The stale .git/worktrees
+      records (baseline_wt, wt-site28-base, wt29base, wt29new) carry the Windows
+      read-only attribute; clearing it would let git worktree prune remove them.
+      (3) scripts/site_tests/journal_acceptance.py still clicks the panel button
+      by its old label "Save question".
 
 # ═══════════════════════════════════════════════════════════════════
 # OPEN / BLOCKED
