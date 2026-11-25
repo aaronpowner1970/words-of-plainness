@@ -93,3 +93,12 @@ Restoration column (ratified): D&C 42:42 ("Thou shalt not be idle"); D&C 75:28-2
 
 Why the exclusion matters: ecclesiology is where traditions that understand themselves as the Church part ways (the Article 8 persona finding).
 Restoration column (ratified): D&C 88:123; 4 Nephi 1:15-17; Mosiah 18:8-9.
+
+## L11 addendum, 25 Nov 2026: anchor comments for s14 (AOID2-A14S14-SOURCE-OF-RECORD)
+
+Approved by Aaron on 25 Nov 2026 (CHAT-AOID2-125a): the four anchor comments for Article 1 (A14) s14. Each is given below by reference, word for word as approved, and is the source of record for the `comment` field of that anchor in src/_data/apparatusData.json (AOID2 step 220, CODE-AOID2-127; AOID2-A14S14-SOURCE-OF-RECORD option 1). The L11 floor above is unchanged.
+
+1. **John 13:34–35** (biblical): Direct witness. These are the words the span quotes: Christ gives "a new commandment," that His disciples "love one another; as I have loved you," so that the love they are to have is patterned on His own.
+2. **D&C 88:123** (restoration; partial): Direct witness, in the Restoration's own words, of the command the span quotes: "See that ye love one another." It does not say "as I have loved you," and it adds the call "to impart one to another as the gospel requires."
+3. **4 Nephi 1:15–17** (restoration; partial): Illustrative application, in the Restoration's own words. Where "the love of God which did dwell in the hearts of the people" ruled, there were "no envyings, nor strifes," and they were "in one, the children of Christ": a picture of disciples living the new commandment together. The passage does not give the commandment itself.
+4. **Mosiah 18:8–9** (restoration; partial): Theological inference, in the Restoration's own words. Those who desire "to be called his people" covenant to "bear one another’s burdens," to "mourn with those that mourn" and to "comfort those that stand in need of comfort": love for one another given the same concrete shape as the works this Article names. The passage does not quote the new commandment.

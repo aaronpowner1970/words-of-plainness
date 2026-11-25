@@ -225,6 +225,7 @@ def test_a14_anchor_comments_come_from_the_scope_note():
                             r"(?<!\w)" + re.escape(stem) + r"(?!\w)", doc), (sid, a["ref"])
                     else:
                         assert a["comment"] in doc, (sid, a["ref"])
-    for want in (("s12", "D&C 124:22–24"), ("s12", "Alma 8:19–21"), ("s12", "Alma 10:7–9"), ("s8", "D&C 64:9–10"), ("s1", "D&C 59:5–6")):
+    for want in (("s12", "D&C 124:22–24"), ("s12", "Alma 8:19–21"), ("s12", "Alma 10:7–9"), ("s8", "D&C 64:9–10"), ("s1", "D&C 59:5–6"),
+                 ("s14", "John 13:34–35"), ("s14", "D&C 88:123"), ("s14", "4 Nephi 1:15–17"), ("s14", "Mosiah 18:8–9")):
         assert want in filled, want
-    assert len(filled) == 10
+    assert len(filled) == 14
