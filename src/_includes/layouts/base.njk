@@ -358,10 +358,18 @@
          ===================================================== -->
     <div id="articlesSealWidget" class="articles-seal-widget" role="complementary" aria-label="Articles of Interfaith Discipleship">
         <a href="/articles/" class="articles-seal-widget-link" title="Articles of Interfaith Discipleship — Christ-Centered Declarations of Shared Beliefs" draggable="false">
-            <img src="/assets/images/articles_banner_shadow.png"
-                 alt="Articles of Interfaith Discipleship"
-                 class="articles-seal-widget-img"
-                 draggable="false">
+            {# Seal image: AVIF (39 KB) where the browser takes it, a 256-colour PNG (102 KB) otherwise.
+               Both are half-size copies of articles_banner_shadow.png (1189×1033), which stays in place
+               unchanged. display:contents gives <picture> no box, and aspect-ratio keeps the original's
+               exact proportions, so the <img> lays out exactly as before. #}
+            <picture style="display: contents">
+                <source srcset="/assets/images/articles-seal-595.avif" type="image/avif">
+                <img src="/assets/images/articles-seal-595.png"
+                     alt="Articles of Interfaith Discipleship"
+                     class="articles-seal-widget-img"
+                     style="aspect-ratio: 1189 / 1033"
+                     draggable="false">
+            </picture>
         </a>
         <button class="articles-seal-widget-close" id="articlesSealWidgetClose" aria-label="Minimize Articles seal">
             <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
