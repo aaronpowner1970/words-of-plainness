@@ -431,6 +431,9 @@
     function finishQuestion() {
         commitQuestionNow();
         if (!qArea.value.trim()) { qArea.focus(); return; }
+        // Storage blocked (SITE step 81): nothing was kept, so the words stay in the box
+        // rather than vanish; they can be copied or downloaded from there.
+        if (window.wopStorage && !window.wopStorage.available()) { qArea.focus(); return; }
         currentQuestion = null;
         qArea.value = '';
         render();
@@ -460,8 +463,8 @@
     }
 
     // ------------------------------------------------------------ export model
-    function exportModel(scopeAllOn) {
-        var entries = scopeAllOn ? R.loadAll() : pageEntries();
+    function exportModel(scopeAllOn, given) {
+        var entries = given || (scopeAllOn ? R.loadAll() : pageEntries());
         var groups = {};
         entries.forEach(function (e) {
             var gid = R.groupIdFor(e.chapterId);
@@ -707,6 +710,44 @@
         p.then(done, fail).then(render);
     }
 
+    // ------------------------------------------------------------ blocked storage (SITE step 81)
+    // When a browser blocks storage, js/wop-storage-blocked.js hands in the reader's answers as
+    // they stand on the page; this makes the same files, in the same four formats, from those
+    // answers instead of from storage. Nothing is marked as downloaded (nothing is stored).
+    function makeFile(m, format, name) {
+        if (format === 'md') {
+            saveBlob(new Blob([toMarkdown(m)], { type: 'text/markdown;charset=utf-8' }), name);
+            return Promise.resolve();
+        }
+        if (format === 'txt') {
+            saveBlob(new Blob(['﻿' + toText(m)], { type: 'text/plain;charset=utf-8' }), name);
+            return Promise.resolve();
+        }
+        if (format === 'docx') {
+            return loadScript(DOCX_SRC).then(function () { saveBlob(window.WopDocx.build(m), name); });
+        }
+        if (format === 'pdf') {
+            return loadScript(PDFMAKE.lib.src, PDFMAKE.lib.integrity)
+                .then(loadPdfFont)
+                .then(function (noto) {
+                    return noto ? true : loadScript(PDFMAKE.fonts.src, PDFMAKE.fonts.integrity).then(function () { return false; });
+                })
+                .then(function (noto) {
+                    var def = toPdfDefinition(m);
+                    if (noto) def.defaultStyle.font = PDF_FONT.family;
+                    return new Promise(function (resolve) {
+                        window.pdfMake.createPdf(def).getBlob(function (blob) { saveBlob(blob, name); resolve(); });
+                    });
+                });
+        }
+        return Promise.reject(new Error('unknown format'));
+    }
+
+    function downloadEntries(entries, format) {
+        if (!entries || !entries.length) return Promise.resolve();
+        return makeFile(exportModel(false, entries), format, fileName(format, false));
+    }
+
     // ------------------------------------------------------------ pop-out (Document Picture-in-Picture)
     function popOut() {
         if (!('documentPictureInPicture' in window) || pipWindow) return;
@@ -716,6 +757,13 @@
             link.rel = 'stylesheet';
             link.href = new URL(CFG.css || '/css/wop-reflections-panel.css', location.href).href;
             pip.document.head.appendChild(link);
+            // Blocked storage (SITE step 81): its stylesheet goes with the panel. Absent while storage works.
+            Array.prototype.forEach.call(document.querySelectorAll('link[data-wop-sb]'), function (l) {
+                var c = pip.document.createElement('link');
+                c.rel = 'stylesheet';
+                c.href = new URL(l.getAttribute('href'), location.href).href;
+                pip.document.head.appendChild(c);
+            });
             pip.document.title = T.heading;
             pip.document.body.className = 'wop-rp-pipbody';
             pip.document.body.appendChild(panel);
@@ -801,6 +849,18 @@
         exportModel: exportModel,
         toMarkdown: toMarkdown,
         toText: toText,
-        toPdfDefinition: toPdfDefinition
+        toPdfDefinition: toPdfDefinition,
+        // Blocked storage (SITE step 81): the download tool fed from the page.
+        formats: T.formats,
+        textFor: function (entries) { return toText(exportModel(false, entries)); },
+        downloadEntries: downloadEntries,
+        questionEntries: function () {
+            if (!qArea || !qArea.value.trim() || !CFG.ids) return [];
+            return [{
+                type: 'question', chapterId: CFG.ids[0], chapterTitle: CFG.title || R.titleFor(CFG.ids[0]),
+                promptLabel: '', content: qArea.value, timestamp: new Date().toISOString(),
+                meta: { pageUrl: location.pathname }
+            }];
+        }
     };
 })();

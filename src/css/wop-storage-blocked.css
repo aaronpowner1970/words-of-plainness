@@ -1,0 +1,90 @@
+/* WORDS OF PLAINNESS — when a browser blocks storage (SITE step 81, CODE-SITE-41)
+   Loaded ONLY when window.wopStorage.available() is false (layouts/base.njk writes it into
+   <head>, so these rules apply before the page is first drawn). With storage working this
+   file is never requested and html never carries the wop-storage-blocked class.
+
+   1. Lines that say the reader's words are kept are not shown.
+   2. Lines that mix such a sentence with others stay hidden only until js/wop-storage-blocked.js
+      has taken that sentence out (it then adds .wop-sb-done).
+   3. The block: W1, Copy and Download, the help. Colours follow the place it sits in. */
+
+/* 1 */
+html.wop-storage-blocked .rjw-auth-notice,
+html.wop-storage-blocked .save-indicator,
+html.wop-storage-blocked .wop-rp-sub,
+html.wop-storage-blocked .summary-subtitle,
+html.wop-storage-blocked .save-account-prompt,
+html.wop-storage-blocked #djEmpty,
+html.wop-storage-blocked [data-module="self-check"] #goals .sj-note { display: none !important; }
+
+/* 2 */
+html.wop-storage-blocked [data-module="code-it"] .sj-note:not(.wop-sb-done),
+html.wop-storage-blocked [data-module="orientation"] #lens .sj-mute:not(.wop-sb-done),
+html.wop-storage-blocked .an-learner-note:not(.wop-sb-done),
+html.wop-storage-blocked .ab-personal:has(#ab-dl) > p:not(.wop-sb-done) { visibility: hidden; }
+
+/* 3 */
+.wop-sb {
+    display: block;
+    margin: 0.9rem 0;
+    padding: 0.75rem 0.9rem;
+    border-left: 3px solid #C4943A;
+    border-radius: 4px;
+    background: rgba(196, 148, 58, 0.10);
+    color: inherit;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: left;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+}
+.wop-sb-msg { margin: 0 0 0.6rem; }
+.wop-sb-actions, .wop-sb-formats { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 0.6rem; }
+.wop-sb-formats[hidden], .wop-sb-fallback[hidden] { display: none; }
+.wop-sb-btn {
+    font: inherit;
+    font-size: 0.9rem;
+    color: inherit;
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    padding: 0.35rem 0.75rem;
+    min-height: 44px;
+    cursor: pointer;
+}
+.wop-sb-btn:hover { background: rgba(196, 148, 58, 0.18); }
+.wop-sb-btn:focus-visible, .wop-sb-help summary:focus-visible, .wop-sb a:focus-visible, .wop-sb-fallback-text:focus-visible {
+    outline: 2px solid #C4943A;
+    outline-offset: 2px;
+}
+.wop-sb-fallback { margin: 0 0 0.6rem; }
+.wop-sb-fallback-head { display: block; margin: 0 0 0.3rem; font-weight: 600; }
+.wop-sb-fallback-text {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    font-size: 0.85rem;
+    color: #1a1a1a;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 4px;
+    padding: 0.4rem;
+}
+.wop-sb-help summary { cursor: pointer; font-weight: 600; padding: 0.25rem 0; min-height: 24px; }
+.wop-sb-help-body { padding: 0.4rem 0 0; }
+.wop-sb-para { margin: 0 0 0.5rem; }
+.wop-sb-lines { margin: 0 0 0.5rem; padding-left: 1.2rem; }
+.wop-sb-lines li { margin: 0 0 0.4rem; }
+.wop-sb-links { display: block; }
+.wop-sb-links a + a { margin-left: 1rem; }
+.wop-sb a { color: inherit; text-decoration: underline; }
+.wop-sb-sr {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+/* In the Reflect · Journal · Witness window and the Reflections panel */
+.wop-sb--rjw { margin: 0.6rem 1.2rem 1.2rem; }
+.wop-sb--panel { margin: 0 0 0.9rem; }
+.wop-sb--journal { margin: 1rem auto; max-width: 42rem; }

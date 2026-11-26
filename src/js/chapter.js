@@ -908,13 +908,25 @@ const RJW = (function() {
         return 'rjw:' + pauseId + ':' + tabKey;
     }
 
+    // Storage blocked (SITE step 81, CODE-SITE-41): nothing can be kept in the browser, so
+    // what the reader types is held in this page's memory only (never written anywhere, never
+    // sent), and comes back when the window is closed and opened again or another tab is
+    // chosen, for as long as the page stays open. Unused while storage works.
+    const pageMemory = {};
+    function storageBlocked() {
+        return !!(window.wopStorage && !window.wopStorage.available());
+    }
+
     function storedEntry(pauseId, tabKey) {
         if (!window.wopReflections || !getChapterSlug()) return null;
+        var found = null;
         try {
-            return window.wopReflections.find(getChapterSlug(), { type: tabKey, meta: { key: entryKey(pauseId, tabKey) } });
+            found = window.wopReflections.find(getChapterSlug(), { type: tabKey, meta: { key: entryKey(pauseId, tabKey) } });
         } catch (e) {
-            return null;
+            found = null;
         }
+        if (!found && storageBlocked()) found = pageMemory[entryKey(pauseId, tabKey)] || null;
+        return found;
     }
 
     function loadStored(pauseId, tabKey) {
@@ -955,6 +967,30 @@ const RJW = (function() {
         } catch (e) {
             // localStorage full or unavailable — silent fail
         }
+        if (storageBlocked()) {
+            var k = entryKey(pauseId, tabKey);
+            if (String(value == null ? '' : value).trim()) {
+                var prior = pageMemory[k];
+                pageMemory[k] = {
+                    chapterId: getChapterSlug(),
+                    chapterTitle: window.wopReflections.titleFor(getChapterSlug(), getChapterTitle()),
+                    type: tabKey,
+                    promptLabel: promptText(pauseId, tabKey),
+                    content: String(value),
+                    timestamp: (prior && prior.content === String(value)) ? prior.timestamp : new Date().toISOString(),
+                    meta: meta
+                };
+            } else {
+                delete pageMemory[k];
+            }
+        }
+    }
+
+    // The answers written in this window on this page, as journal entries, for the
+    // blocked-storage Copy and Download (js/wop-storage-blocked.js). Storage blocked only.
+    function pageAnswers() {
+        persistCurrent();
+        return Object.keys(pageMemory).map(function (k) { return pageMemory[k]; });
     }
 
     /* ── RENDER MODAL CONTENT ─────────────────────────── */
@@ -1137,7 +1173,8 @@ const RJW = (function() {
         switchTab: switchTab,
         switchReflectMode: switchReflectMode,
         saveResponse: saveResponse,
-        clearTA: clearTA
+        clearTA: clearTA,
+        pageAnswers: pageAnswers
     };
 
 })();

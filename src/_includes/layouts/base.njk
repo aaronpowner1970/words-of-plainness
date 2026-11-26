@@ -30,7 +30,7 @@
             }
         };
     })();
-    </script>
+    </script>{# Blocked storage (SITE step 81, CODE-SITE-41; src/_data/storageBlocked.js): on the pages where a reader writes, and only when storage is blocked, write in the stylesheet that hides the lines saying words are kept (before the page is drawn) and the script that puts the approved sentence in their place. With storage working this does nothing. Joined to the line above so no other page changes. #}{% if layout in storageBlocked.layouts or page.url in storageBlocked.urls %}<script>if(!window.wopStorage.available()){document.documentElement.classList.add('wop-storage-blocked');document.write('<link rel="stylesheet" href="/css/wop-storage-blocked.css?v={{ site.version }}" data-wop-sb><script src="/js/wop-storage-blocked-words.js?v={{ site.version }}" defer><\/script><script src="/js/wop-storage-blocked.js?v={{ site.version }}" defer><\/script>');}</script>{% endif %}
     <meta name="description" content="{{ description | default(site.description) }}">
 
     {% if draft %}<meta name="robots" content="noindex,nofollow">{% elif noindex %}<meta name="robots" content="noindex">{% endif %}

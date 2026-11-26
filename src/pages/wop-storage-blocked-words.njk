@@ -1,0 +1,10 @@
+---
+permalink: /js/wop-storage-blocked-words.js
+eleventyExcludeFromCollections: true
+sitemap: false
+---
+/* WORDS OF PLAINNESS — blocked-storage wording (generated at build; do not edit the _site copy)
+   Source: src/pages/wop-storage-blocked-words.njk, from src/_data/storageBlocked.js, which reads
+   the approved wording file (SITE step 81, CODE-SITE-41; rulings SITE-STORAGE-BLOCKED-MESSAGE
+   and SITE-BLOCKED-MSG-APPROACHES). Loaded only when a reader's browser blocks storage. */
+window.WOP_STORAGE_BLOCKED = {{ storageBlocked.words | dump | safe }};

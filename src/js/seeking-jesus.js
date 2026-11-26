@@ -24,13 +24,32 @@
   };
 
   // ------------------------------------------------------------ storage
+  // Storage blocked (SITE step 81, CODE-SITE-41): what the reader chooses or writes is held in this
+  // page's memory only, never written anywhere and never sent, so the starting point, codings,
+  // self-check and goals stay on the page for as long as it is open. Unused while storage works.
+  var pageMemory = {};
+  function blocked() { return !!(window.wopStorage && !window.wopStorage.available()); }
   function get(key, fallback) {
     try { var v = localStorage.getItem('sjn:' + key); return v == null ? fallback : JSON.parse(v); }
-    catch (e) { return fallback; }
+    catch (e) {
+      if (blocked() && Object.prototype.hasOwnProperty.call(pageMemory, key)) return JSON.parse(pageMemory[key]);
+      return fallback;
+    }
   }
   // Returns whether the value was kept, so nothing says "saved" when storage is blocked (CODE-SITE-26).
   function set(key, val) {
-    try { localStorage.setItem('sjn:' + key, JSON.stringify(val)); return true; } catch (e) { /* private mode */ return false; }
+    try { localStorage.setItem('sjn:' + key, JSON.stringify(val)); return true; } catch (e) {
+      /* private mode */
+      if (blocked()) pageMemory[key] = JSON.stringify(val);
+      return false;
+    }
+  }
+  // The reader's answers on this page, as journal entries, for the blocked-storage Copy and
+  // Download (js/wop-storage-blocked.js). Each module adds what its own journal Save would keep.
+  var collectors = [];
+  function entry(promptLabel, content, cardId) {
+    return { chapterId: CHAPTER_ID, chapterTitle: CHAPTER_TITLE, type: 'commitment', promptLabel: promptLabel, content: content,
+      timestamp: new Date().toISOString(), meta: { cardId: cardId, tier: 'seeking-jesus', confidence: 0, module: MODULE } };
   }
   function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
   function $(sel, root) { return (root || document).querySelector(sel); }
@@ -49,7 +68,7 @@
   function lens() { return get('lens', null); }
   function setLens(v) {
     var kept = false;
-    if (v === null) { try { localStorage.removeItem('sjn:lens'); } catch (e) {} } else { kept = set('lens', v); }
+    if (v === null) { try { localStorage.removeItem('sjn:lens'); } catch (e) { delete pageMemory.lens; } } else { kept = set('lens', v); }
     paintLens();
     document.dispatchEvent(new CustomEvent('sjn:lens', { detail: { lens: v } }));
     return kept;
@@ -69,6 +88,10 @@
     b.addEventListener('click', function () { if (setLens(b.getAttribute('data-lens'))) toast('Starting point saved'); });
   });
   paintLens();
+  if (MODULE === 'orientation') collectors.push(function () {
+    var v = lens();
+    return v && LENSES[v] ? [entry('Starting point', LENSES[v], 'sjn-lens')] : [];
+  });
 
   // ------------------------------------------------------------ journal bridge
   var journal = {
@@ -184,12 +207,21 @@
       });
       if (note) { note.value = rec.note || ''; note.addEventListener('input', function () { rec.note = note.value; state[id] = rec; set('codeit', state); }); }
       if (saveBtn) saveBtn.addEventListener('click', function () { rec.note = note ? note.value : ''; state[id] = rec; if (set('codeit', state)) toast('Saved in this browser'); });
-      if (jBtn) jBtn.addEventListener('click', function () {
+      function journalContent() {
         var p = byId[id];
-        var content = (rec.pick ? 'I coded ' + (p ? p.predicate : id) + ' as ' + rec.pick + '; the project coded it ' + code + '.'
+        return (rec.pick ? 'I coded ' + (p ? p.predicate : id) + ' as ' + rec.pick + '; the project coded it ' + code + '.'
           : (p ? p.predicate : id) + ': the project coded it ' + code + '.')
           + (rec.note ? ' My reasoning: ' + rec.note : '');
-        if (journal.save({ promptLabel: 'Code It Yourself — ' + (p ? p.predicate : id), content: content, cardId: 'sjn-codeit-' + id })) toast('Saved to My Discipleship Journal');
+      }
+      if (jBtn) jBtn.addEventListener('click', function () {
+        var p = byId[id];
+        if (journal.save({ promptLabel: 'Code It Yourself — ' + (p ? p.predicate : id), content: journalContent(), cardId: 'sjn-codeit-' + id })) toast('Saved to My Discipleship Journal');
+      });
+      collectors.push(function () {
+        if (note) rec.note = note.value;
+        if (!rec.pick && !(rec.note && rec.note.trim())) return [];
+        var p = byId[id];
+        return [entry('Code It Yourself — ' + (p ? p.predicate : id), journalContent(), 'sjn-codeit-' + id)];
       });
       if (rec.pick) reveal(rec.pick);
       else if (rec.shown) reveal(null);
@@ -232,8 +264,13 @@
         return t.join('\n\n');
       };
       var cp = $('.sj-scn-copy', card); if (cp) cp.addEventListener('click', function () { copyText(textOf()); });
+      var chosen = false;   // the reader asked to keep this card (used only when storage is blocked)
       var jb = $('.sj-scn-journal', card); if (jb) jb.addEventListener('click', function () {
+        chosen = true;
         if (journal.save({ promptLabel: 'Conversation Builder — ' + card.getAttribute('data-title'), content: textOf(), cardId: 'sjn-scn-' + id })) toast('Saved to My Discipleship Journal');
+      });
+      collectors.push(function () {
+        return chosen ? [entry('Conversation Builder — ' + card.getAttribute('data-title'), textOf(), 'sjn-scn-' + id)] : [];
       });
     });
 
@@ -275,6 +312,9 @@
       if (journal.save({ promptLabel: 'Conversation Builder — my four-clause sentence', content: out.textContent, cardId: 'sjn-build-' + Date.now() })) toast('Saved to My Discipleship Journal');
     });
     var bx = $('#sj-build-clear'); if (bx) bx.addEventListener('click', function () { state.script = []; render(); });
+    collectors.push(function () {
+      return (state.script.length && out) ? [entry('Conversation Builder — my four-clause sentence', out.textContent, 'sjn-build')] : [];
+    });
     render();
     if (location.hash && byId[location.hash.slice(1)]) {
       if (state.script.indexOf(location.hash.slice(1)) === -1) { state.script.push(location.hash.slice(1)); render(); }
@@ -305,13 +345,20 @@
       });
     }
     paintCompare();
-    var sc = $('#sj-selfcheck-journal'); if (sc) sc.addEventListener('click', function () {
+    function selfCheckLines() {
       var pre = get('selfcheck-pre', {}), post = get('selfcheck-post', {});
-      var lines = $$('.sj-compare tr[data-q]').map(function (tr) {
+      return $$('.sj-compare tr[data-q]').map(function (tr) {
         var q = tr.getAttribute('data-q');
         return $('.c-label', tr).textContent.trim() + ': before ' + (pre[q] || '—') + ', after ' + (post[q] || '—');
       });
-      if (journal.save({ promptLabel: 'Seeking Jesus of Nazareth — self-check', content: lines.join('\n'), cardId: 'sjn-selfcheck' })) toast('Saved to My Discipleship Journal');
+    }
+    var sc = $('#sj-selfcheck-journal'); if (sc) sc.addEventListener('click', function () {
+      if (journal.save({ promptLabel: 'Seeking Jesus of Nazareth — self-check', content: selfCheckLines().join('\n'), cardId: 'sjn-selfcheck' })) toast('Saved to My Discipleship Journal');
+    });
+    collectors.push(function () {
+      var pre = get('selfcheck-pre', {}), post = get('selfcheck-post', {});
+      var any = Object.keys(pre).concat(Object.keys(post)).some(function (k) { return k !== '_at'; });
+      return any ? [entry('Seeking Jesus of Nazareth — self-check', selfCheckLines().join('\n'), 'sjn-selfcheck')] : [];
     });
 
     var goals = get('goals', []);
@@ -339,10 +386,19 @@
       goals.push({ text: text, when: when, done: false, at: new Date().toISOString() }); set('goals', goals);
       $('#sj-goal-text').value = ''; $('#sj-goal-when').value = ''; renderGoals();
     });
+    function goalLine(g) { return (g.done ? '[done] ' : '[ ] ') + g.text + (g.when ? ' (' + g.when + ')' : ''); }
     var gj = $('#sj-goals-journal'); if (gj) gj.addEventListener('click', function () {
       if (!goals.length) return;
-      var content = goals.map(function (g) { return (g.done ? '[done] ' : '[ ] ') + g.text + (g.when ? ' (' + g.when + ')' : ''); }).join('\n');
+      var content = goals.map(goalLine).join('\n');
       if (journal.save({ promptLabel: 'Seeking Jesus of Nazareth — my goals', content: content, cardId: 'sjn-goals' })) toast('Saved to My Discipleship Journal');
+    });
+    collectors.push(function () {
+      // Goals added, and a goal still being written in the form.
+      var lines = goals.map(goalLine);
+      var t = $('#sj-goal-text'), w = $('#sj-goal-when');
+      var text = t ? t.value.trim() : '', when = w ? w.value.trim() : '';
+      if (text) lines.push(goalLine({ text: text, when: when, done: false }));
+      return lines.length ? [entry('Seeking Jesus of Nazareth — my goals', lines.join('\n'), 'sjn-goals')] : [];
     });
     var ex = $('#sj-export'); if (ex) ex.addEventListener('click', function () {
       var pre = get('selfcheck-pre', {}), post = get('selfcheck-post', {});
@@ -368,5 +424,6 @@
   else if (MODULE === 'code-it') initCodeIt();
   else if (MODULE === 'conversation') initConversation();
   else if (MODULE === 'self-check') initSelfCheck();
-  window.SJNApp = { lens: lens, setLens: setLens, journal: journal, scriptureUrl: scriptureUrl };
+  window.SJNApp = { lens: lens, setLens: setLens, journal: journal, scriptureUrl: scriptureUrl,
+    pageAnswers: function () { return collectors.reduce(function (all, c) { return all.concat(c()); }, []); } };
 })();
