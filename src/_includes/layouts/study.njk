@@ -1,11 +1,11 @@
 {% extends "layouts/page.njk" %}
 
 {% block styles %}
-<link rel="stylesheet" href="/css/read-aloud-study.css?v={{ site.version }}">
-{% endblock %}
+{% if narration %}<link rel="stylesheet" href="/css/read-aloud-study.css?v={{ site.version }}">
+{% endif %}{% endblock %}
 
 {% block scripts %}
-<script>
+{% if narration %}<script>
 window.STUDY_AUDIO_CONFIG = {
     {% if narration %}
     narrationUrl: 'https://media.wordsofplainness.org/web/{{ narration }}',
@@ -14,4 +14,4 @@ window.STUDY_AUDIO_CONFIG = {
 };
 </script>
 <script src="/js/read-aloud-study.js"></script>
-{% endblock %}
+{% endif %}{% endblock %}
